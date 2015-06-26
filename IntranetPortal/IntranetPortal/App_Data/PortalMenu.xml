@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfPortalNavItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <PortalNavItem Name="MyTaskMain" Text="Task" NavigationUrl="/Task/MyTask.aspx" ShowAmount="false" ItemType="" Expanded="false">
+  <PortalNavItem Name="MyTaskMain" Text="Tasks &lt;span class='notification' style='display:none' id='SpanAmount_TotalTask'&gt;&lt;/span&gt;" NavigationUrl="/Task/MyTask.aspx" ShowAmount="false" ItemType="" Expanded="false">
     <level>1</level>
     <FontClass>
       <![CDATA[

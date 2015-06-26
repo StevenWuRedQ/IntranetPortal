@@ -33,9 +33,10 @@ function RefreshLeadsCount() {
 
                                     if (item.Name == "SpanAmount_MyTask") {
                                         var count = parseInt(document.getElementById(item.Name).innerText);
-                                        if (item.count > count) {
+                                        if (item.Count > count) {
                                             NewTask();
                                         }
+                                        document.getElementById("SpanAmount_TotalTask").innerText = item.Count;
                                     }
 
                                     document.getElementById(item.Name).innerText = item.Count;

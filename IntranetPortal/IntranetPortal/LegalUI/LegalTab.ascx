@@ -185,7 +185,7 @@
                     </div>
                     <div class="tab-pane " id="Foreclosure_Review">
 
-                        <uc1:LegalForeclosureReviewTab runat="server" ID="LegalForeclosureReviewTab"  Visible="false"/>
+                        <uc1:LegalForeclosureReviewTab runat="server" ID="LegalForeclosureReviewTab" />
 
                     </div>
                     <div class="tab-pane" id="Secondary_Actions">

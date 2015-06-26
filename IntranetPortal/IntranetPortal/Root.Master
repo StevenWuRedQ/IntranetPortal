@@ -24,7 +24,12 @@
         html, body, #form1 {
             width: 100% !important;
         }
+
+        .NewTaskAnimation{
+
+        }
     </style>
+
     <script type="text/javascript" src="/scripts/PortalMessager.js"></script>
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
 </head>
@@ -105,12 +110,30 @@
                 }
             }
 
+            var inAnimate = false;
             function NewTask() {
-                $('a[href="/Task/MyTask.aspx"]').animate({
-                    backgroundColor: "red"
-                }, 1000).animate({ backgroundColor: "yellow" }, 1000).animate(
-                { backgroundColor: "transparent" }, 1000);
+                //$("#SpanAmount_TotalTask").css("background-color", "#e63000");
+                if(!inAnimate)
+                    animate();                
             }
+
+            function animate() {
+                if (!$('#SpanAmount_TotalTask').is(':visible'))
+                {
+                    $('#SpanAmount_TotalTask').css("background-color", "#1a3847");
+                    inAnimate = false;
+                    return;
+                }
+
+                $('#SpanAmount_TotalTask').animate({ backgroundColor: '#ffcc00' }, 500, function () {
+                    $('#SpanAmount_TotalTask').animate({ backgroundColor: '#eeeeee' }, 500, function () {
+                        $('#SpanAmount_TotalTask').animate({ backgroundColor: '#e63000' }, 500, function () {
+                            animate();
+                        });
+                    });
+                });
+            }
+
         </script>
         <dx:ASPxSplitter ID="MainSplitter" runat="server" Height="100%" Width="100%" FullscreenMode="True" ShowCollapseBackwardButton="true">
             <Styles>
@@ -145,7 +168,7 @@
                                             </p>
                                             <p>&copy; 2014 My Ideal Property</p>
                                             <div id="errorMsg" style="color: transparent"></div>
-                                            <%--                                            <input type="button" class="NewTask" onclick="NewTask()" value="NewTask" />--%>
+<%--                                                                                        <input type="button" class="NewTask" onclick="NewTask()" value="NewTask" />--%>
                                         </footer>
                                     </div>
                                 </dx:SplitterContentControl>
@@ -411,6 +434,7 @@
                 background-color: red;
                 animation-name: example;
                 animation-duration: 10s;
+                animation:infinite;
             }
         </style>
 

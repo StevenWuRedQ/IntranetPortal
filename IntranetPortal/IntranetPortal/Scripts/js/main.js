@@ -19,7 +19,7 @@ function mip() {
             }
         });
     }
-    
+
     submenu_height_reset();
 
     $(window).on('debouncedresize', function (event) {
@@ -39,14 +39,38 @@ function mip() {
             $(this).addClass('current');
             if ($('#main-nav .mip-nav .nav-level-2-container').is(':visible')) {
                 $('#main-nav .mip-nav .nav-level-2-container:visible').slideUp('slow', 'easeOutCirc', function () {
-                    current_category.next('.nav-level-2-container').slideDown('slow', 'easeOutCirc');
+                    if ($(this).parent().has("#SpanAmount_TotalTask").length) {
+                        //Show total task amount
+                        $(this).parent().find("#SpanAmount_TotalTask").show();
+                    }
+
+                    current_category.next('.nav-level-2-container').slideDown('slow', 'easeOutCirc', function () {
+                        if ($(this).parent().has("#SpanAmount_TotalTask").length) {
+                            //hide total task amount
+                            $(this).parent().find("#SpanAmount_TotalTask").hide();
+                        }
+                    });
                 });
             } else {
-                current_category.next('.nav-level-2-container').slideDown('slow', 'easeOutCirc');
+                current_category.next('.nav-level-2-container').slideDown('slow', 'easeOutCirc', function () {
+                    if ($(this).parent().has("#SpanAmount_TotalTask").length) {
+                        //hide total task amount
+                        $(this).parent().find("#SpanAmount_TotalTask").hide();
+                    }
+                });
             }
         } else {
-            current_category.next('.nav-level-2-container').slideToggle('slow', 'easeOutCirc');
+            current_category.next('.nav-level-2-container').slideToggle('slow', 'easeOutCirc', function () {
+                if ($(this).parent().has("#SpanAmount_TotalTask").length) {
+                    if ($(this).is(':visible')) {
+                        $(this).parent().find("#SpanAmount_TotalTask").hide();
+                    } else {
+                        $(this).parent().find("#SpanAmount_TotalTask").show();
+                    }
+                }
+            });
         }
+
         return false;
     });
 
@@ -57,13 +81,13 @@ function mip() {
             if (target_menu.is(':visible')) current_menu_item.find('.fa-caret-right').removeClass('fa-caret-right').addClass('fa-caret-down');
             else current_menu_item.find('.fa-caret-down').removeClass('fa-caret-down').addClass('fa-caret-right');
         });
-        
+
         var href = current_menu_item.attr("href");
 
         if (href == "#")
             return false;
         else
-            return true;        
+            return true;
     });
 
     $('#main-nav .mip-nav .nav-level-2 .nav-level-3 .has-level-4-menu').click(function () {
@@ -75,7 +99,7 @@ function mip() {
         });
         return true;
     });
-    
+
     $('#main-nav .mip-nav .nav-level-2-container:not(#main-nav .mip-nav .current + .nav-level-2-container), #main-nav .mip-nav .nav-level-3 .nav-level-4').hide();
 
 
@@ -89,10 +113,9 @@ function mip() {
         success: afterloginsubmission
     }
 
-    if ($('#portal-sign-in-form').ajaxForm)
-    {
+    if ($('#portal-sign-in-form').ajaxForm) {
         $('#portal-sign-in-form').ajaxForm(form_options);
-    }      
+    }
 }
 
 function afterloginsubmission() {
@@ -105,17 +128,17 @@ $(document).ready(
     function () { setTimeout(function () { mip(); }, 1) });
 //$(function () { mip(); });
 $(window).load(function () {
-        $('#landing-loader').fadeOut('slow', function () {
-            setTimeout(function () {
-                $('.landing').show();
-                $('#username').focus();
-                $('.landing-bg').backstretch([
-					  '/images/img/landing_bg/1.jpg'
-					, '/images/img/landing_bg/2.jpg'
-					, '/images/img/landing_bg/3.jpg'
-					, '/images/img/landing_bg/4.jpg'
-					, '/images/img/landing_bg/5.jpg'
-                ], { duration: 2000, fade: 4000 });
-            }, 0);
-        });
+    $('#landing-loader').fadeOut('slow', function () {
+        setTimeout(function () {
+            $('.landing').show();
+            $('#username').focus();
+            $('.landing-bg').backstretch([
+                  '/images/img/landing_bg/1.jpg'
+                , '/images/img/landing_bg/2.jpg'
+                , '/images/img/landing_bg/3.jpg'
+                , '/images/img/landing_bg/4.jpg'
+                , '/images/img/landing_bg/5.jpg'
+            ], { duration: 2000, fade: 4000 });
+        }, 0);
     });
+});
