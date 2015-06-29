@@ -94,7 +94,7 @@
             <FontClass>
               <![CDATA[<i class="fa fa-university"></i>]]>
             </FontClass>
-          </PortalNavItem>
+          </PortalNavItem>       
         </Items>
       </PortalNavItem>
       <PortalNavItem Name="AgentDeadLead" Text="Dead Lead" NavigationUrl="/LeadAgent.aspx?c=Dead Lead" ShowAmount="true">

@@ -466,6 +466,19 @@ Partial Public Class ShortSaleCase
         End Using
     End Sub
 
+    Public Sub UpdateMortgageStatus(mortgageIndex As Integer, category As String, status As String)
+        If Mortgages.Count > mortgageIndex Then
+            Dim obj = Mortgages(mortgageIndex)
+            If obj IsNot Nothing Then
+                obj.Status = status
+                obj.Category = category
+                obj.Save()
+
+                RefreshStatus()
+            End If
+        End If
+    End Sub
+
     Public Sub RefreshStatus()
         If Me.Mortgages.Where(Function(mt) mt.Status <> "").Count > 0 Then
             If Mortgages.Where(Function(mt) mt.Status = "Closed").Count = Mortgages.Count Then
