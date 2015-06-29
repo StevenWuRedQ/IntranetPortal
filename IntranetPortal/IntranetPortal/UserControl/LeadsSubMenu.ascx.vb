@@ -243,7 +243,7 @@ Public Class LeadsSubMenu
             BindEvictionUsers()
 
             'Bind third part
-            cbThirdParty.DataSource = Core.CommonData.GetData("InProcessThirdParty")
+            cbThirdParty.DataSource = Core.CommonData.GetData("InProcessThirdParty").Select(Function(tp) tp.Name).ToArray
             cbThirdParty.DataBind()
         End If
 
