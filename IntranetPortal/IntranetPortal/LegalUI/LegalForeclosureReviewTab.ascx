@@ -120,7 +120,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Estate</label>
-                <input class="ss_form_input" ss-money="" ng-model="LegalCase.ForeclosureInfo.Estate">
+                <input class="ss_form_input" mask-money="" ng-model="LegalCase.ForeclosureInfo.Estate">
             </li>
 
 
@@ -191,7 +191,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Title Issues </label>
-                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.QuestionableCRFN">
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TitleIssuees">
             </li>
             <li class="ss_form_item ss_form_item_line">
                 <label class="ss_form_input_title">note</label>
@@ -219,12 +219,12 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">1st Loan Amount</label>
-                <input class="ss_form_input" ss-money="" ng-model="LegalCase.ForeclosureInfo.Loan1Amount">
+                <input class="ss_form_input" mask-money="" ng-model="LegalCase.ForeclosureInfo.Loan1Amount">
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">2nd Loan Amount</label>
-                <input class="ss_form_input" ss-money="" ng-model="LegalCase.ForeclosureInfo.Loan2Amount">
+                <input class="ss_form_input" mask-money="" ng-model="LegalCase.ForeclosureInfo.Loan2Amount">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Type of Loan</label>
@@ -240,11 +240,11 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">First Mortgage Payment</label>
-                <input class="ss_form_input currency_input" ng-model="LegalCase.ForeclosureInfo.LoanType">
+                <input class="ss_form_input " mask-money="" ng-model="LegalCase.ForeclosureInfo.Loan1MortagePayment">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Maturity</label>
-                <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.LoanType">
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.LoanMaturity">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">signed</label>
@@ -257,8 +257,9 @@
                 <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.LastPaymentDate" />
             </li>
             <li class="ss_form_item">
-                <span class="ss_form_input_title">Eviction status</span>
-                <select class="ss_form_input">
+                <span class="ss_form_input_title">Eviction Status</span>
+                <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EvictionStatus"> 
+                     <option value=""></option>
                     <option value="occupied">occupied</option>
                     <option value="vacate">vacate</option>
                     <option value="tenant">tenant</option>
@@ -284,7 +285,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Count Of Borrowers signed</label>
-                <input class="ss_form_input" input-mask="0000" ng-model="LegalCase.ForeclosureInfo.HAMP">
+                <input class="ss_form_input" input-mask="0000" ng-model="LegalCase.ForeclosureInfo.SignedBorrowersCount">
             </li>
             <li class="ss_form_item">
                 <span class="ss_form_input_title">note endorsed</span>
@@ -521,15 +522,15 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Judgment Date</label>
-                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtJudgmentDate">
+                <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.CourtJudgmentDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Judgment Sign off Date</label>
-                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtJudgmentDate">
+                <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.CourtJudgmentSignOffDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Judge</label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.CourtJudgmentDate')">
+                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.CourtJudgeId')">
                 </div>
             </li>
 
@@ -565,7 +566,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">HAMP submitted Date</label>
-                <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.HAMPSubmitted">
+                <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.HAMPSubmittedDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">HAMP submitted TYPE</label>
@@ -669,27 +670,27 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Signed Patry located</label>
-                        <div class="ss_form_input">{{LegalCase.ForeclosureInfo.AssigSignedPlace=='NY'}}</div>
-                        <%--<input type="checkbox" id="checy_8193" name="1" value="true" class="ss_form_input" ng-value="LegalCase.ForeclosureInfo.AssigSignedPlace=='NY'">
-                        <label for="checy_8193" class="input_with_check ">
+                       <%-- <div class="ss_form_input">{{LegalCase.ForeclosureInfo.AssigSignedPlace=='NY'}}</div>--%>
+                       <input type="checkbox" id="check_199" name="check_1990" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedSignedPatryocated">
+                        <label for="check_199" class="input_with_check ">
                             <span class="box_text">Yes </span>
 
-                        </label>--%>
+                        </label>
 
-                        <%--  <input type="radio" id="checy_8194" name="1" value="false" class="ss_form_input">
-                        <label for="checy_8194" class="input_with_check">
+                        <input type="radio" id="check_1991" name="check_1990" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedSignedPatryocated">
+                        <label for="check_1991" class="input_with_check">
                             <span class="box_text">No</span>
-                        </label>--%>
+                        </label>
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Third party address Matched</label>
-                        <input type="radio" id="checy_8194" name="105" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedSignedKnownRS">
+                        <input type="radio" id="checy_8194" name="105" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.Assigned3PartyAdrressMatch">
                         <label for="checy_8194" class="input_with_check ">
                             <span class="box_text">Yes </span>
 
                         </label>
 
-                        <input type="radio" id="checy_8195" name="105" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedSignedKnownRS">
+                        <input type="radio" id="checy_8195" name="105" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.Assigned3PartyAdrressMatch">
                         <label for="checy_8195" class="input_with_check">
                             <span class="box_text">No</span>
                         </label>
@@ -729,7 +730,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Depositor Name</label>
-                        <input class="ss_form_input " dx-select-box="InitContact('LegalCase.ForeclosureInfo.DepositorId')">
+                        <div class="ss_form_input " dx-select-box="InitContact('LegalCase.ForeclosureInfo.DepositorId')"></div>
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Trustee</label>
@@ -743,7 +744,6 @@
                         <input type="checkbox" id="check_90" name="106" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TrustDocLocated">
                         <label for="check_90" class="input_with_check ">
                             <span class="box_text">Yes </span>
-
                         </label>
                     </li>
 
@@ -790,7 +790,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">PriorDate</label>
-                <input class="ss_form_input" ss-date="" data-field="LegalCase.ForeclosureInfo.BankruptcyPriorDate">
+                <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.BankruptcyPriorDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">chapter</label>
@@ -839,7 +839,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Prior Attorney</label>
-                        <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PriorPlaintiffId')">
+                        <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PriorAttorneyId')">
                         </div>
                     </li>
 
@@ -930,11 +930,11 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">prior action</label>
 
-                    <input class="ss_form_input" data-field="PropertyInfo.Number">
+                    <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstatePriorAction">
                 </li>
                 <li class="ss_form_item ss_form_item_line">
                     <label class="ss_form_input_title">note</label>
-                    <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.EstateNotes"></textarea>
+                    <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.EstateNote"></textarea>
                 </li>
             </ul>
         </div>

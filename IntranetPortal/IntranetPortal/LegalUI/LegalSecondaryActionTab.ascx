@@ -52,7 +52,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Index #</label>
-                        <input class="ss_form_input" type="number" ng-model="LegalCase.SecondaryInfo.IndexNumber">
+                        <input class="ss_form_input"  ng-model="LegalCase.SecondaryInfo.IndexNumber">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Relief requested</label>

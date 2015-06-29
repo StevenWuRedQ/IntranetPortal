@@ -168,8 +168,8 @@
                             <md-content class="md-padding autocomplete" layout="column">
                                 <md-contact-chips ng-model="contacts" md-contacts="querySearch($query)" md-contact-name="Name" md-contact-image="image" md-contact-email="Email" md-require-match="" filter-selected="filterSelected" placeholder="Contacts">
                                 </md-contact-chips>
-                            </md-content>
-
+                            </md-content>--%>
+                            <%--
                              <md-content layout-padding>
                                   <md-input-container style="width:80%">
                                     <label>Company (Disabled)</label>
@@ -844,7 +844,7 @@
                 var data = { bble: leadsInfoBBLE, caseData: json };
                 $http.post('LegalUI.aspx/SaveCaseData', data).
                     success(function () {
-                        alert("Save Success!");
+                        alert("Save Successed !");
                     }).
                     error(function (data, status) {
                         alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));

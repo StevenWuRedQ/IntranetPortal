@@ -86,19 +86,28 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Owner</label>
-                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.Owner">
+                <div class="contact_box" dx-select-box="InitContact('LegalCase.SecondaryInfo.OwnerId')"></div>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Parties</label>
+                <label class="ss_form_input_title">Parties 1</label>
                 <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PartitionPartiesId')">
+                </div>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Parties 2</label>
+                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PartitionPartie2Id')">
+                </div>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Parties 3</label>
+                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PartitionPartie3Id')">
                 </div>
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Relationship Of Parties</label>
                 <select class="ss_form_input" ng-model="LegalCase.SecondaryInfo.RelationshipOfParties" ng-options='o as o for o  in [ "Married","Divorced","Seperated","Family members","Other"]'>
-                    <option value="Action1">Action1 </option>
-                    <option value="Action1">Action2 </option>
+                   
                 </select>
             </li>
             <li class="ss_form_item">
@@ -159,7 +168,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Money damages amount</label>
-                <input class="ss_form_input" ss-money="" ng-model="LegalCase.SecondaryInfo.BreachOfContractBreachMoneyDamagesAmount" />
+                <input class="ss_form_input" mask-money="" ng-model="LegalCase.SecondaryInfo.BreachOfContractBreachMoneyDamagesAmount" />
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">money damages for</label>
@@ -283,7 +292,7 @@
             <li class="ss_form_item">
                 <%--Do we know who owns the Note--%>
                 <label class="ss_form_input_title">Mortage Owner</label>
-                <input class="ss_form_input " ng-model="LegalCase.SecondaryInfo.QuietTitleMortageOwner" />
+                <div class="ss_form_input " dx-select-box="InitContact('LegalCase.SecondaryInfo.QuietTitleMortageOwnerId')"> </div>
             </li>
             <li class="ss_form_item">
                 <%--Do we have the Deed--%>
