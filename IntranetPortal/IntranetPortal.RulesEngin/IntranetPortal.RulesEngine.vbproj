@@ -181,6 +181,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DLL\log4net.dll" />
     <Content Include="DLL\MyIdealProp.Workflow.Client.dll" />
     <Content Include="DLL\MyIdealProp.Workflow.DBPersistence.dll" />
     <None Include="Service References\PortalService\CommonService1.disco" />
