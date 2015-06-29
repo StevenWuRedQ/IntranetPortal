@@ -231,6 +231,22 @@ Public Class LeadsList
         End Using
     End Sub
 
+    Sub BindThirdParty()
+        Dim names = {Page.User.Identity.Name}
+
+        If LeadsListView = ControlView.ManagerView Then
+            names = Employee.GetManagedEmployees(Page.User.Identity.Name)
+        End If
+
+        gridLeads.DataSource = Lead.Get3rdPartyLeads(names)
+        gridLeads.DataBind()
+
+        gridLeads.GroupBy(gridLeads.Columns("ThirdPartyCategory"))
+        If LeadsListView = ControlView.ManagerView Then
+            gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
+        End If
+    End Sub
+
     Sub BindLeadsList(CategoryName As String)
 
         If CategoryName = "Call Back" Then
@@ -250,6 +266,11 @@ Public Class LeadsList
 
         If CategoryName = "Shared" Then
             BindSharedList()
+            Return
+        End If
+
+        If CategoryName = "3rd Party" Then
+            BindThirdParty()
             Return
         End If
 

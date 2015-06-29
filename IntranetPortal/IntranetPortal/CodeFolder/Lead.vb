@@ -102,6 +102,8 @@ Partial Public Class Lead
         End Get
     End Property
 
+    Public Property ThirdPartyCategory As String
+
     Friend Function IsViewable(name As String) As Boolean
         If Status = LeadStatus.DeadEnd Or EmployeeName = "Dead Leads" Then
             Return True
@@ -197,8 +199,20 @@ Partial Public Class Lead
 
             ctx.SaveChanges()
         End Using
-
     End Sub
+
+    Public Shared Function Get3rdPartyLeads(names As String()) As List(Of Lead)
+        Using ctx As New Entities
+            Dim result = (From ld In ctx.Leads.Where(Function(l) names.Contains(l.EmployeeName) AndAlso l.Status = LeadStatus.InProcess)
+                         Join tp In ctx.LeadsInThirdParties On ld.BBLE Equals tp.BBLE
+                         Select ld, tp.Category).ToList.Select(Function(item)
+                                                                   item.ld.ThirdPartyCategory = item.Category
+                                                                   Return item.ld
+                                                               End Function).ToList
+
+            Return result
+        End Using
+    End Function
 
     Public Shared Sub Publishing(bble As String)
         Using ctx As New Entities

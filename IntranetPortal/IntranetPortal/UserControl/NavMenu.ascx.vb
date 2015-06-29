@@ -194,12 +194,20 @@ Public Class RefreshLeadsCountHandler
 
     Public Function GetLeadsCount(name As String, itemText As String, userName As String, context As HttpContext) As Integer
         If name.StartsWith("Agent") Then
-            Return Utility.GetLeadsCount(Utility.GetLeadStatus(itemText), userName)
+            If itemText = "3rd Party" Then
+                Return Lead.Get3rdPartyLeads({userName}).Count
+            Else
+                Return Utility.GetLeadsCount(Utility.GetLeadStatus(itemText), userName)
+            End If
         End If
 
         If name.StartsWith("Mgr") Then
             Dim emps = Employee.GetManagedEmployees(userName)
-            Return Utility.GetMgrLeadsCount(Utility.GetLeadStatus(itemText), emps)
+            If itemText = "3rd Party" Then
+                Return Lead.Get3rdPartyLeads(emps).Count
+            Else
+                Return Utility.GetMgrLeadsCount(Utility.GetLeadStatus(itemText), emps)
+            End If
         End If
 
         If name.StartsWith("Task") Then

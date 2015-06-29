@@ -94,7 +94,12 @@
             <FontClass>
               <![CDATA[<i class="fa fa-university"></i>]]>
             </FontClass>
-          </PortalNavItem>       
+          </PortalNavItem>
+          <PortalNavItem Name="AgentThirdParty" Text="3rd Party" NavigationUrl="/LeadAgent.aspx?c=3rd Party" ShowAmount="true">
+            <FontClass>
+              <![CDATA[<i class="fa fa-university"></i>]]>
+            </FontClass>
+          </PortalNavItem>
         </Items>
       </PortalNavItem>
       <PortalNavItem Name="AgentDeadLead" Text="Dead Lead" NavigationUrl="/LeadAgent.aspx?c=Dead Lead" ShowAmount="true">
@@ -186,6 +191,11 @@
                   <![CDATA[<i class="fa fa-university"></i>]]>
                 </FontClass>
               </PortalNavItem>
+              <PortalNavItem Name="AgentThirdParty" Text="3rd Party" NavigationUrl="/LeadAgent.aspx?c=3rd Party" ShowAmount="true">
+                <FontClass>
+                  <![CDATA[<i class="fa fa-university"></i>]]>
+                </FontClass>
+              </PortalNavItem>
             </Items>
           </PortalNavItem>
           <PortalNavItem Name="AgentDeadLead" Text="Dead Lead" NavigationUrl="/LeadAgent.aspx?c=Dead Lead" ShowAmount="true">
@@ -251,6 +261,11 @@
             </FontClass>
           </PortalNavItem>
           <PortalNavItem Name="Litigation" Text="Litigation" NavigationUrl="/MgrViewLeads.aspx?c=In Process" ShowAmount="true">
+            <FontClass>
+              <![CDATA[<i class="fa fa-university"></i>]]>
+            </FontClass>
+          </PortalNavItem>
+          <PortalNavItem Name="MgrThirdParty" Text="3rd Party" NavigationUrl="/MgrViewLeads.aspx?c=3rd Party" ShowAmount="true">
             <FontClass>
               <![CDATA[<i class="fa fa-university"></i>]]>
             </FontClass>
