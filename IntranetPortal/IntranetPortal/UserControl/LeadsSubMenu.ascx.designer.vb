@@ -158,6 +158,15 @@ Partial Public Class LeadsSubMenu
     Protected WithEvents cbEvictionUsers As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
 
     '''<summary>
+    '''cbThirdParty control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbThirdParty As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+
+    '''<summary>
     '''ASPLegalPopup control.
     '''</summary>
     '''<remarks>

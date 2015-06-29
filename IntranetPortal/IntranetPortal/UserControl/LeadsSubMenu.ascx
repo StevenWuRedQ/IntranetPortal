@@ -193,20 +193,29 @@
 
             <dx:ASPxCheckBoxList ID="lbSelectionMode" runat="server" ClientInstanceName="lbSelectionModeClient" AutoPostBack="false" Border-BorderStyle="None">
                 <Items>
-                    <dx:ListEditItem Text="Short Sale" Value="0" />
+                    <dx:ListEditItem Text="Inhouse SS" Value="0" />
                     <dx:ListEditItem Text="Eviction" Value="1" />
                     <dx:ListEditItem Text="Legal" Value="3" />
-                    <dx:ListEditItem Text="Construction" Value="2" />
+                    <dx:ListEditItem Text="Construction" Value="2" />                    
                     <%--<dx:ListEditItem Text="Open Market Sale" Value="4" />--%>
+                    <dx:ListEditItem Text="3rd Party" Value="5" />
                 </Items>
                 <ClientSideEvents SelectedIndexChanged="function(s,e){
                         if(s.GetSelectedValues().indexOf('1')!=-1)
                         {
                              document.getElementById('divEvictionUsers').style.display = 'block';
-                             s.SelectValues(['0'])     
+                             s.SelectValues(['0']);     
                         }else{
                             document.getElementById('divEvictionUsers').style.display = 'none';
                     }
+
+                        if(s.GetSelectedValues().indexOf('5')!=-1)
+                        {
+                             document.getElementById('divThirdParty').style.display = 'block';                             
+                        }else{
+                            document.getElementById('divThirdParty').style.display = 'none';
+                    }
+
                     }" />
             </dx:ASPxCheckBoxList>
             <div id="divEvictionUsers" style="display: none; width: 300px;">
@@ -214,7 +223,11 @@
                 <dx:ASPxComboBox ID="cbEvictionUsers" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">
                 </dx:ASPxComboBox>
             </div>
-
+            <div id="divThirdParty" style="display:none; width:300px">
+                Select Third Parties:
+                <dx:ASPxComboBox ID="cbThirdParty" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">
+                </dx:ASPxComboBox>
+            </div>
         </dx:PopupControlContentControl>
     </ContentCollection>
     <FooterContentTemplate>

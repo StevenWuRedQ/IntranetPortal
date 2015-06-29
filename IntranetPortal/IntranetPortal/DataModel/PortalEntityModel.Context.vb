@@ -73,6 +73,7 @@ Partial Public Class Entities
     Public Overridable Property TeamLeadsInZips() As DbSet(Of TeamLeadsInZip)
     Public Overridable Property PendingAssignLeads() As DbSet(Of PendingAssignLead)
     Public Overridable Property Leads_with_last_log() As DbSet(Of Leads_with_last_log)
+    Public Overridable Property LeadsInThirdParties() As DbSet(Of LeadsInThirdParty)
 
     Public Overridable Function UpdateEmployeeName(oldName As String, newName As String) As Integer
         Dim oldNameParameter As ObjectParameter = If(oldName IsNot Nothing, New ObjectParameter("OldName", oldName), New ObjectParameter("OldName", GetType(String)))

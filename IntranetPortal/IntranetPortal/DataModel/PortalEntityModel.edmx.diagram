@@ -59,6 +59,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.TeamLeadsInZip" Width="1.5" PointX="21.375" PointY="8.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PendingAssignLead" Width="1.5" PointX="21.375" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.Leads_with_last_log" Width="1.5" PointX="21.375" PointY="11.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LeadsInThirdParty" Width="1.5" PointX="3.25" PointY="21" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

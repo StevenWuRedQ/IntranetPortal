@@ -179,6 +179,27 @@ Partial Public Class Lead
         Return result.ToList
     End Function
 
+    Public Shared Sub InThirdParty(bble As String, category As String, thirdParty As String, createby As String)
+        Using ctx As New Entities
+
+            Dim ldt = ctx.LeadsInThirdParties.Find(bble, category)
+
+            If ldt Is Nothing Then
+                ldt = New LeadsInThirdParty
+                ldt.CreateBy = createby
+                ldt.CreateDate = DateTime.Now
+                ctx.LeadsInThirdParties.Add(ldt)
+            End If
+
+            ldt.BBLE = bble
+            ldt.Category = category
+            ldt.ThirdParty = thirdParty
+
+            ctx.SaveChanges()
+        End Using
+
+    End Sub
+
     Public Shared Sub Publishing(bble As String)
         Using ctx As New Entities
             Dim ld = ctx.Leads.Find(bble)

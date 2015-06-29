@@ -326,6 +326,17 @@
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="LeadsInThirdParty">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="Category" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ThirdParty" Type="nvarchar" MaxLength="256" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="LeadsMortgageData">
           <Key>
             <PropertyRef Name="BBLE" />
@@ -872,6 +883,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="LeadsActivityLog" EntityType="Self.LeadsActivityLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsComments" EntityType="Self.LeadsComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsInfo" EntityType="Self.LeadsInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeadsInThirdParty" EntityType="Self.LeadsInThirdParty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsMortgageData" EntityType="Self.LeadsMortgageData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsSearchTask" EntityType="Self.LeadsSearchTask" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsStatusLogs" EntityType="Self.LeadsStatusLogs" Schema="dbo" store:Type="Tables" />
@@ -1152,6 +1164,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="TeamLeadsInZips" EntityType="IntranetPortalModel.TeamLeadsInZip" />
           <EntitySet Name="PendingAssignLeads" EntityType="IntranetPortalModel.PendingAssignLead" />
           <EntitySet Name="Leads_with_last_log" EntityType="IntranetPortalModel.Leads_with_last_log" />
+          <EntitySet Name="LeadsInThirdParties" EntityType="IntranetPortalModel.LeadsInThirdParty" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -2055,6 +2068,17 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="LeadsInThirdParty">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="Category" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ThirdParty" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2933,6 +2957,17 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
                 <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
                 <ScalarProperty Name="PropertyClass" ColumnName="PropertyClass" />
                 <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeadsInThirdParties">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LeadsInThirdParty">
+              <MappingFragment StoreEntitySet="LeadsInThirdParty">
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ThirdParty" ColumnName="ThirdParty" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>

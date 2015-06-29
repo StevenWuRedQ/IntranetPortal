@@ -241,6 +241,10 @@ Public Class LeadsSubMenu
             Dim bble = e.Parameter.Split("|")(1)
             hfInProcessBBLE.Value = bble
             BindEvictionUsers()
+
+            'Bind third part
+            cbThirdParty.DataSource = Core.CommonData.GetData("InProcessThirdParty")
+            cbThirdParty.DataBind()
         End If
 
         If e.Parameter.StartsWith("Save") Then
@@ -267,6 +271,15 @@ Public Class LeadsSubMenu
 
                 If lbSelectionMode.SelectedValues.Contains("4") Then
                     Lead.Publishing(bble)
+                End If
+
+                If lbSelectionMode.SelectedValues.Contains("5") Then
+                    Dim category = cbThirdParty.Value
+                    If String.IsNullOrEmpty(category) Then
+                        Throw New Exception("Please Select Third Parties")
+                    End If
+
+                    Lead.InThirdParty(bble, category, "", Page.User.Identity.Name)
                 End If
             End If
         End If
