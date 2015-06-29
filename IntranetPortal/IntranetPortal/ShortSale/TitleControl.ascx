@@ -458,7 +458,6 @@
                                  </dx:ASPxTextBox>
                                 </div>
                             </td>
-
                             <td class="clearence_table_td"></td>
                         </tr>
                     </table>
@@ -487,7 +486,7 @@
                     </td>
                     <td style="text-align: right">
                         <div>
-                            <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1">
+                            <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" UseSubmitBehavior="false" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1">
                                 <ClientSideEvents Click="function(s,e){aspxAddNotes.PerformCallback(tmpClearenceId);}" />
                             </dx:ASPxButton>
                         </div>

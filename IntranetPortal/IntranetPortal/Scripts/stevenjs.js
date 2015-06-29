@@ -220,7 +220,7 @@ function ShortSaleDataBand(data_stauts) {
     });
 
     /*band short sale arrary item*/
-    
+
 
     //d_log_assert(is_save, "the short sale after save " + JSON.stringify(ShortSaleCaseData));
     /*use for ui*/
@@ -234,7 +234,7 @@ function format_input() {
 
     });
     $(".currency_input").formatCurrency();
-    $(".currency_input").on("blur", function() { $(this).formatCurrency() });
+    $(".currency_input").on("blur", function () { $(this).formatCurrency() });
     //var is_pass = true;
 
 
@@ -244,8 +244,8 @@ function format_input() {
     $(".ss_phone").on("keyup", function () {
         return format_phone(this);
     });
-    
-    
+
+
 
     $(".ss_zip").on("keyup", function () {
         return format_zip(this);
@@ -280,10 +280,9 @@ function pass_format_test(e_msg) {
             return;
         }
         var is_not_pass = $(this).hasClass("ss_input_error");
-        if (is_not_pass)
-        {
+        if (is_not_pass) {
             e_msg.msg = e_msg.msg || ""
-           
+
             e_msg.msg += "\n" + $(this).attr("data-error");
         }
         if (is_pass && is_not_pass) {
@@ -377,11 +376,11 @@ function ss_field_data(elem, value) {
             }
 
             if (elem.hasClass("ss_date")) {
-              
+
                 if (value != '') {
 
                     var t_date = new Date(value);
-                   
+
                     if (t_date != null) {
                         value = fromatDateString(t_date);
                     }
@@ -390,7 +389,7 @@ function ss_field_data(elem, value) {
             if (elem.hasClass("ss_ssn")) {
                 value = fromatSSN(value);
             }
-           
+
 
             elem.val(value);
         }
@@ -414,13 +413,12 @@ function fromatSSN(value) {
     if (reslut.length == 0) {
         return ssn;
     }
-    
+
     return reslut;
 }
 function fromatDateString(date) {
     var dateString = (date.getUTCMonth() + 1) + '/' + (date.getUTCDate()) + '/' + date.getUTCFullYear();
-    if (dateString.indexOf("NaN")>=0)
-    {
+    if (dateString.indexOf("NaN") >= 0) {
         return "";
     }
     return dateString;
@@ -526,9 +524,8 @@ function ShorSaleArrayDataBand(data_stauts) {
         elem.find("[data-item-type=1]").each(function (ind) {
 
             var item_field = $(this).attr("data-item");
-            var main_field = $(this).attr("data-field") ;
-            if(main_field)
-            {
+            var main_field = $(this).attr("data-field");
+            if (main_field) {
                 item_field = main_field;
             }
             if (is_save) {
@@ -764,7 +761,7 @@ function switch_edit_model(s, objCase) {
         var message = {}
         if (!pass_format_test(message)) {
             debugger;
-            alert("Some field you entered is incorrect please check bellow.\n" + message.msg?message.msg:"");
+            alert("Some field you entered is incorrect please check bellow.\n" + message.msg ? message.msg : "");
             return;
         }
         getShortSaleInstanceComplete(null, null);
@@ -897,7 +894,7 @@ $(document).ready(function () {
 
         $("[data-visiable='" + filed + "']").css("display", checked ? '' : "none");
     });
-    
+
 });
 function phone_InitAndKeyUp(s, e) {
     //d_alert("$(s.GetMainElement()) " + $(s.GetMainElement()).attr("id"));
@@ -972,10 +969,8 @@ jQuery.fn.fitToParent = function (options) {
 
 function LoadMoreFrame(e) {
     var url = e.dataset.url;
-    if (url.indexOf("BBLE") > 0)
-    {
-        if(leadsInfoBBLE)
-        {
+    if (url.indexOf("BBLE") > 0) {
+        if (leadsInfoBBLE) {
             url = url.replace("BBLE", leadsInfoBBLE);
         }
     }
@@ -1001,25 +996,38 @@ $(document).on("click", ".tab_button_a", function (e) {
 
 });
 
-function OnStatusCategoryChange(selCategory) {
+function OnStatusCategoryChange(selCategory, statusData) {
     var cat = selCategory.value;
     var selStatusUpdate = $(selCategory).parent().children(".selStatusUpdate");
-    if (selStatusUpdate.length == 0)
-    {
+    if (selStatusUpdate.length == 0) {
         selStatusUpdate = $(selCategory).parent().parent().find(".selStatusUpdate");
     }
     selStatusUpdate = $(selStatusUpdate[0]);
     selStatusUpdate.val("");
-    var options = selStatusUpdate.children("option");
-    options.each(function () {
-        var val = $(this).val();
 
-        if (val.substring(0, cat.length) === cat || $(this).prop("data-cat") == cat || $(this).attr("data-cat")==cat) {
-            $(this).show();
-        }
-        else {
-            $(this).hide();
-        }
-    });
+    if (statusData != null) {
+        selStatusUpdate.empty();
+        $.each(statusData, function (index, value) {
+            if (cat == value.Category) {
+                selStatusUpdate.append($("<option></option>").attr("value", value.Name).text(value.Name));
+            }
+        });
+    }
+    else {
+        var options = selStatusUpdate.children("option");
+        options.each(function () {
+            var val = $(this).val();
+
+            if (val.substring(0, cat.length) === cat || $(this).prop("data-cat") == cat || $(this).attr("data-cat") == cat) {
+                $(this).show();
+            }
+            else {
+                $(this).hide();
+            }
+        });
+    }
+
+
+
 }
 

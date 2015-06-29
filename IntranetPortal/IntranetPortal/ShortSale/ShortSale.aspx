@@ -175,15 +175,15 @@
                                                                             <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                                             <li style="margin-right: 30px; color: #7396a9; float: right">
                                                                                 <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);" style="display: none"></i>                                                                                
-                                                                                <i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active" onclick="LogClick('Active')" style="display: none"></i>
+                                                                                <i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active" onclick="LogClick('Active')"></i>
+                                                                                <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Archived" onclick="LogClick('Archived')"></i>
                                                                                 <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" style="display: none" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>
                                                                                 <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')" style="display: none"></i>
                                                                                 <i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Closed" onclick="LogClick('Closed')" style="display: none"></i>
                                                                                 <%--                                                                                <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>--%>
                                                                             </li>
                                                                         </ul>
-                                                                        <div class="tab-content">
-                                                                            
+                                                                        <div class="tab-content">                                                                            
                                                                             <div class="tab-pane active" id="activity_log">
                                                                                 <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="ShortSale" />
                                                                             </div>
@@ -229,14 +229,14 @@
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                                                                                <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                                                                                <dx:ASPxButton ID="ASPxButton1" runat="server" UseSubmitBehavior="false" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
                                                                                                     <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSelectDateControl.Hide();                                                                                                                       
                                                                                                                         LogClick('FollowUp', ScheduleDateClientFllowUp!=null?ScheduleDateClientFllowUp.GetDate().toLocaleString():callbackCalendar.GetSelectedDate().toLocaleString());
                                                                                                                         }"></ClientSideEvents>
                                                                                                 </dx:ASPxButton>
                                                                                                 &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" UseSubmitBehavior="false" CssClass="rand-button rand-button-gray">
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSelectDateControl.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>

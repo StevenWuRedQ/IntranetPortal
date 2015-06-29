@@ -107,7 +107,7 @@
                             <i class="fa fa-user"></i>
                             <span style="margin-left: 19px;">
                                 <% If (Not String.IsNullOrEmpty(shortSaleCaseData.CaseName)) Then%>
-                               
+
                                 <%= Regex.Replace( shortSaleCaseData.CaseName,"-(?!.*-).*$","")%>
                                 <% End If%>
                                 &nbsp;
@@ -164,13 +164,15 @@
                                         </td>
                                         <td style="text-align: right">
                                             <div>
-                                                <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1">
+                                                <input type="button" value="Add" onclick="SaveLeadsComments()" class="rand-button" style="background-color: #3993c1" />
+                                                <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1" Visible="false">
                                                     <ClientSideEvents Click="SaveLeadsComments" />
                                                 </dx:ASPxButton>
                                                 &nbsp;
-                                    <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false" CssClass="rand-button" BackColor="#77787b">
+                                    <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false" CssClass="rand-button" BackColor="#77787b" Visible="false">
                                         <ClientSideEvents Click="function(s,e){aspxAddLeadsComments.Hide();}" />
                                     </dx:ASPxButton>
+                                                <input type="button" value="Close" onclick="aspxAddLeadsComments.Hide()" class="rand-button" style="background-color: #3993c1" />
                                             </div>
                                         </td>
                                     </tr>
@@ -280,9 +282,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <script>
-
-
+                                    <script type="text/javascript">
 
                                         function DocumentChanged(e) {
                                             var checked = e.checked // $(e).porp("checked")

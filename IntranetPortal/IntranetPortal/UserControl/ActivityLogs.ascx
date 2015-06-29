@@ -391,47 +391,7 @@
 
     var refreshLogs = false;
    
-    function ShortSaleUpdateTypeChange(s) {
-        var type = s.value;
-
-        var liens = ["1st Lien", "2nd Lien"];
-        var categorys = ["Assign", "Closed", "Dead", "Evictions", "Held", "Intake", "Litigation"];
-        var updates = ["Referral Update", "Seller Update", "Title", "Pipeline"];
-
-        if ($.inArray(type, categorys) > -1) {
-            $("#selCategory").val(type);
-            OnStatusCategoryChange(document.getElementById("selCategory"));
-            $("#selCategory").attr("disabled", true);
-
-            $("#selStatusUpdate").attr("data-required", true);
-            return;
-        } else {
-            $("#selCategory").val("");
-            $("#selCategory").attr("disabled", false);
-        }
-
-        if ($.inArray(type, updates) > -1) {
-            $("#selCategory").attr("disabled", true);
-            $("#selStatusUpdate").attr("disabled", true);
-
-            $("#selStatusUpdate").attr("data-required", false);
-            $("#selCategory").attr("data-required", false);
-
-            return;
-        } else {
-            $("#selCategory").attr("disabled", false);
-            $("#selStatusUpdate").attr("disabled", false);
-
-            $("#selStatusUpdate").attr("data-required", true);
-            $("#selCategory").attr("data-required", true);
-        }
-
-        //if (type == "BPO/Appraisal") {
-        //    refreshLogs = false;
-        //    popupBpo.PerformCallback();
-        //    popupBpo.Show();
-        //}
-    }
+    
     // ]]>
 </script>
 
@@ -477,15 +437,63 @@
 
                     <% If DisplayMode = ActivityLogMode.ShortSale Then%>
 
+                    <script type="text/javascript">
+
+                        var ShortSale = {
+                            StatusData: <%= IntranetPortal.JsonExtension.ToJsonString(IntranetPortal.ShortSale.PropertyMortgage.StatusData)%>,
+                            UpdateTypeChange: function(s)
+                            {
+                                var type = s.value;
+
+                                var liens = ["1st Lien", "2nd Lien"];
+                                var categorys = ["Assign", "Closed", "Dead", "Evictions", "Held", "Intake", "Litigation"];
+                                var updates = ["Referral Update", "Seller Update", "Title", "Pipeline"];
+
+                                if ($.inArray(type, categorys) > -1) {
+                                    $("#selCategory").val(type);
+                                    OnStatusCategoryChange(document.getElementById("selCategory"), this.StatusData);
+                                    $("#selCategory").attr("disabled", true);
+
+                                    $("#selStatusUpdate").attr("data-required", true);
+                                    return;
+                                } else {
+                                    $("#selCategory").val("");
+                                    $("#selCategory").attr("disabled", false);
+
+                                    $("#selStatusUpdate").val("");
+                                    $("#selStatusUpdate").attr("disabled", false);
+                                }
+
+                                if ($.inArray(type, updates) > -1) {
+                                    $("#selCategory").attr("disabled", true);
+                                    $("#selStatusUpdate").attr("disabled", true);
+
+                                    $("#selStatusUpdate").attr("data-required", false);
+                                    $("#selCategory").attr("data-required", false);
+
+                                    return;
+                                } else {
+                                    $("#selCategory").attr("disabled", false);
+                                    $("#selStatusUpdate").attr("disabled", false);
+
+                                    $("#selStatusUpdate").attr("data-required", true);
+                                    $("#selCategory").attr("data-required", true);
+                                }
+                            }
+                        }
+                        
+                    </script>
+
+
                     <div>
                         <div class="color_gray upcase_text">Type of update</div>
-                        <select class="select_bootstrap select_margin" id="selType1" onchange="ShortSaleUpdateTypeChange(this)">
+                        <select class="select_bootstrap select_margin" id="selType1" onchange="ShortSale.UpdateTypeChange(this)">
                             <% For Each type In IntranetPortal.Core.CommonData.GetData("UpdateType")%>
                             <option value="<%= type.Name%>"><%= type.Name%></option>
                             <% Next%>
                         </select>
                         <div class="color_gray upcase_text">Category</div>
-                        <select class="select_bootstrap select_margin " id="selCategory" onchange="OnStatusCategoryChange(this)" data-required="true">
+                        <select class="select_bootstrap select_margin " id="selCategory" onchange="OnStatusCategoryChange(this, ShortSale.StatusData)" data-required="true">
                             <option value=""></option>
                             <% For Each category In IntranetPortal.ShortSale.PropertyMortgage.StatusCategory%>
                             <option value="<%= category%>"><%= category%></option>

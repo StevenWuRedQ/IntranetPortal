@@ -57,7 +57,7 @@ Public Class ShortSaleOverVew
     End Sub
 
     Protected Sub leadsCommentsCallbackPanel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
-        If shortSaleCaseData.CaseId = 0 AndAlso hfCaseId.Value IsNot Nothing Then
+        If shortSaleCaseData.CaseId = 0 AndAlso Not String.IsNullOrEmpty(hfCaseId.Value) Then
             shortSaleCaseData = ShortSaleCase.GetCase(CInt(hfCaseId.Value))
         End If
 
