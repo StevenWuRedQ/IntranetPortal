@@ -957,6 +957,13 @@
       <DependentUpon>AddressToBBLE.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Management\CombineContact.aspx.designer.vb">
+      <DependentUpon>CombineContact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\CombineContact.aspx.vb">
+      <DependentUpon>CombineContact.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Management\ImportAgentData.aspx.designer.vb">
       <DependentUpon>ImportAgentData.aspx</DependentUpon>
     </Compile>
@@ -2146,6 +2153,7 @@
     <Content Include="ManagementUI\Management1.aspx" />
     <Content Include="ManagementUI\Management.aspx" />
     <Content Include="Management\AddressToBBLE.aspx" />
+    <Content Include="Management\CombineContact.aspx" />
     <Content Include="Management\ImportAgentData.aspx" />
     <Content Include="Management\Default.aspx" />
     <Content Include="Management\LeadsDataManage.aspx" />

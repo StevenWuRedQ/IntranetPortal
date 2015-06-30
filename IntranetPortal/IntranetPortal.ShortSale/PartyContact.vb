@@ -91,7 +91,11 @@ Partial Public Class PartyContact
             Return context.PartyContacts.Find(contactId)
         End Using
     End Function
-
+    Public Shared Function GetContactListByName(name As String) As List(Of PartyContact)
+        Using ctx As New ShortSaleEntities
+            Return ctx.PartyContacts.Where(Function(p) p.Name = name).ToList
+        End Using
+    End Function
     Public Shared Function GetContactByName(name As String) As PartyContact
         Using ctx As New ShortSaleEntities
             Return ctx.PartyContacts.Where(Function(pc) pc.Name = name).FirstOrDefault
