@@ -50,6 +50,7 @@ Partial Class Troubleshooting
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Button11 = New System.Windows.Forms.Button()
         Me.tabEmail = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -77,7 +78,11 @@ Partial Class Troubleshooting
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button11 = New System.Windows.Forms.Button()
+        Me.txtSSBBLE = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.btnRemove = New System.Windows.Forms.Button()
+        Me.btnMove = New System.Windows.Forms.Button()
+        Me.btnMoveStraight = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -366,6 +371,15 @@ Partial Class Troubleshooting
         Me.TabPage2.Text = "Leads and Tasks"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'Button11
+        '
+        Me.Button11.Location = New System.Drawing.Point(222, 72)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(153, 23)
+        Me.Button11.TabIndex = 9
+        Me.Button11.Text = "Pending Assign Rules"
+        Me.Button11.UseVisualStyleBackColor = True
+        '
         'tabEmail
         '
         Me.tabEmail.Controls.Add(Me.TableLayoutPanel1)
@@ -605,6 +619,11 @@ Partial Class Troubleshooting
         '
         'TabPage5
         '
+        Me.TabPage5.Controls.Add(Me.btnMoveStraight)
+        Me.TabPage5.Controls.Add(Me.btnMove)
+        Me.TabPage5.Controls.Add(Me.btnRemove)
+        Me.TabPage5.Controls.Add(Me.Label11)
+        Me.TabPage5.Controls.Add(Me.txtSSBBLE)
         Me.TabPage5.Controls.Add(Me.Button10)
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
@@ -623,14 +642,48 @@ Partial Class Troubleshooting
         Me.Button10.Text = "Set ShortSale Referral"
         Me.Button10.UseVisualStyleBackColor = True
         '
-        'Button11
+        'txtSSBBLE
         '
-        Me.Button11.Location = New System.Drawing.Point(222, 72)
-        Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(153, 23)
-        Me.Button11.TabIndex = 9
-        Me.Button11.Text = "Pending Assign Rules"
-        Me.Button11.UseVisualStyleBackColor = True
+        Me.txtSSBBLE.Location = New System.Drawing.Point(67, 66)
+        Me.txtSSBBLE.Name = "txtSSBBLE"
+        Me.txtSSBBLE.Size = New System.Drawing.Size(100, 20)
+        Me.txtSSBBLE.TabIndex = 1
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(24, 69)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(37, 13)
+        Me.Label11.TabIndex = 2
+        Me.Label11.Text = "BBLE:"
+        '
+        'btnRemove
+        '
+        Me.btnRemove.Location = New System.Drawing.Point(27, 101)
+        Me.btnRemove.Name = "btnRemove"
+        Me.btnRemove.Size = New System.Drawing.Size(75, 23)
+        Me.btnRemove.TabIndex = 3
+        Me.btnRemove.Text = "Remove"
+        Me.btnRemove.UseVisualStyleBackColor = True
+        '
+        'btnMove
+        '
+        Me.btnMove.Location = New System.Drawing.Point(108, 101)
+        Me.btnMove.Name = "btnMove"
+        Me.btnMove.Size = New System.Drawing.Size(96, 23)
+        Me.btnMove.TabIndex = 4
+        Me.btnMove.Text = "Move to Outside"
+        Me.btnMove.UseVisualStyleBackColor = True
+        '
+        'btnMoveStraight
+        '
+        Me.btnMoveStraight.Location = New System.Drawing.Point(210, 101)
+        Me.btnMoveStraight.Name = "btnMoveStraight"
+        Me.btnMoveStraight.Size = New System.Drawing.Size(111, 23)
+        Me.btnMoveStraight.TabIndex = 5
+        Me.btnMoveStraight.Text = "Move to Straight SS"
+        Me.btnMoveStraight.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -662,6 +715,7 @@ Partial Class Troubleshooting
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
         Me.TabPage5.ResumeLayout(False)
+        Me.TabPage5.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -721,4 +775,9 @@ Partial Class Troubleshooting
     Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
     Friend WithEvents Button10 As System.Windows.Forms.Button
     Friend WithEvents Button11 As System.Windows.Forms.Button
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents txtSSBBLE As System.Windows.Forms.TextBox
+    Friend WithEvents btnMove As System.Windows.Forms.Button
+    Friend WithEvents btnRemove As System.Windows.Forms.Button
+    Friend WithEvents btnMoveStraight As System.Windows.Forms.Button
 End Class

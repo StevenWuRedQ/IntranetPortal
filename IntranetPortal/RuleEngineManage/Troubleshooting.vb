@@ -514,4 +514,35 @@ Public Class Troubleshooting
         Dim rule As New IntranetPortal.RulesEngine.PendingAssignRule
         rule.Execute()
     End Sub
+
+    Private Sub btnRemove_Click(sender As Object, e As EventArgs) Handles btnRemove.Click
+        Try
+            ShortSaleCase.Remove(txtSSBBLE.Text)
+            MessageBox.Show("Done")
+            'Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnMove_Click(sender As Object, e As EventArgs) Handles btnMove.Click
+
+        Try
+
+            ShortSaleCase.Remove(txtSSBBLE.Text)
+            Lead.InThirdParty(txtSSBBLE.Text, "Outside SS", "", "Chris Yan")
+            MessageBox.Show("Done")
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnMoveStraight_Click(sender As Object, e As EventArgs) Handles btnMoveStraight.Click
+        Try
+            ShortSaleCase.Remove(txtSSBBLE.Text)
+            Lead.InThirdParty(txtSSBBLE.Text, "Straight Sale", "", "Chris Yan")
+            MessageBox.Show("Done")
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message)
+        End Try
+    End Sub
 End Class

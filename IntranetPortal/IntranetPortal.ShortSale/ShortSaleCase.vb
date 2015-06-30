@@ -725,8 +725,6 @@ Partial Public Class ShortSaleCase
         End Using
     End Function
 
-
-
     Private Shared Function ShortsaleCaseWithEvictionOwner(ss As ShortSaleCase, owner As String) As ShortSaleCase
         ss.EvictionOwner = owner
         Return ss
@@ -735,6 +733,21 @@ Partial Public Class ShortSaleCase
     Public Shared Function InShortSale(bble As String) As Boolean
         Return GetCaseByBBLE(bble) IsNot Nothing
     End Function
+
+    Public Shared Sub Remove(bble As String)
+        Using ctx As New ShortSaleEntities
+            Dim ssCase = ctx.ShortSaleCases.Where(Function(ss) ss.BBLE = bble).FirstOrDefault
+            'If ssCase IsNot Nothing Then
+            '    Dim mortgages = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = ssCase.CaseId)
+            '    ctx.PropertyMortgages.RemoveRange(mortgages)
+
+            '    Dim propBaseInfo = ctx.PropertyBaseInfoes.Where(Function(pb) pb.BBLE = bble)
+            '    ctx.ShortSaleCases.Remove(ssCase)
+            'End If
+            ctx.ShortSaleCases.Remove(ssCase)
+            ctx.SaveChanges()
+        End Using
+    End Sub
 
 #End Region
 
