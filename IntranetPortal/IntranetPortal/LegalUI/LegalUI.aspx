@@ -934,6 +934,16 @@
                 return $scope.LegalCase.SecondaryInfo.SelectedType == filed;
 
             }
+            $scope.ShowContorl = function(m)
+            {
+                var t = typeof m;
+
+                if(t=="string")
+                {
+                    return m=='true'
+                }
+                return m;
+            }
             //$.getJSON('/LegalUI/ContactService.svc/GetAllContacts', function (data) {
 
             //    $scope.selectBoxData = data;

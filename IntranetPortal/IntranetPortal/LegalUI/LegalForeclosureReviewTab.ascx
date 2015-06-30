@@ -19,23 +19,23 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Street Number</label>
-                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.Number">
+                <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.Number">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Street Name</label>
-                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.StreetName">
+                <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.StreetName">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">City</label>
-                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.NeighName">
+                <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.NeighName">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">State</label>
-                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.State">
+                <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.State">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Zip</label>
-                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.ZipCode">
+                <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.ZipCode">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
@@ -43,11 +43,11 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">BLOCK</label>
-                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.Block">
+                <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.Block">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Lot</label>
-                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.Lot">
+                <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.Lot">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Building type</label>
@@ -258,8 +258,8 @@
             </li>
             <li class="ss_form_item">
                 <span class="ss_form_input_title">Eviction Status</span>
-                <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EvictionStatus"> 
-                     <option value=""></option>
+                <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EvictionStatus">
+                    <option value=""></option>
                     <option value="occupied">occupied</option>
                     <option value="vacate">vacate</option>
                     <option value="tenant">tenant</option>
@@ -584,6 +584,26 @@
             </li>
         </ul>
     </div>
+    <div class="ss_form">
+        <h4 class="ss_form_title">Affidavit of Service <i class="fa fa-question-circle tooltip-examples icon-btn" title="If there is alreaedy a judgement of foreclosure and sale submitted to the court, signed, or entereed, we need to first come up with a reson as to why there was not a n answer put in earlie"></i></h4>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item" ng-class="!LegalCase.ForeclosureInfo.ClientPersonallyServed?'ss_highlight':''">
+                <label class="ss_form_input_title">Client Personally Served</label>
+                 <input type="checkbox" id="PersonallyServed"  class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ClientPersonallyServed">
+                <label for="PersonallyServed" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+
+                </label>
+            </li>
+            <li class="ss_form_item" ng-class="LegalCase.ForeclosureInfo.NailAndMail?'ss_highlight':''">
+                <label class="ss_form_input_title">Nail and Mail</label>
+                <input type="checkbox" id="NailAndMail"  class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NailAndMail">
+                <label for="NailAndMail" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+            </li>
+        </ul>
+    </div>
     <div class="ss_array">
 
         <h4 class="ss_form_title title_with_line  title_after_notes ">
@@ -670,8 +690,8 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Signed Patry located</label>
-                       <%-- <div class="ss_form_input">{{LegalCase.ForeclosureInfo.AssigSignedPlace=='NY'}}</div>--%>
-                       <input type="checkbox" id="check_199" name="check_1990" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedSignedPatryocated">
+                        <%-- <div class="ss_form_input">{{LegalCase.ForeclosureInfo.AssigSignedPlace=='NY'}}</div>--%>
+                        <input type="checkbox" id="check_199" name="check_1990" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedSignedPatryocated">
                         <label for="check_199" class="input_with_check ">
                             <span class="box_text">Yes </span>
 
@@ -814,7 +834,7 @@
 
         <h4 class="ss_form_title title_with_line  title_after_notes ">
             <span class="title_index title_span">Statute of Limitation</span>&nbsp;
-                                                        <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
+            <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
             &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="" data-original-title="Add"></i>
             <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="" data-original-title="Delete"></i>
         </h4>
@@ -973,5 +993,33 @@
 
             </ul>
         </div>
+    </div>
+
+    <div class="ss_form">
+        <h4 class="ss_form_title">Answer</h4>
+
+
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item" ng-class="LegalCase.ForeclosureInfo.ClientAnswered?'ss_highlight':''">
+                <span class="ss_form_input_title">Client answered</span>
+
+                <input type="checkbox" id="ansercheck_yes" name="ansercheck" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ClientAnswered">
+                <label for="ansercheck_yes" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+
+                </label>
+
+                <%--<input type="radio" id="ansercheck_no" name="ansercheck" value="0" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ClientAnswered">
+                <label for="ansercheck_no" class="input_with_check">
+                    <span class="box_text">No</span>
+                </label>--%>
+
+            </li>
+            <li class="ss_form_item ss_form_text" ng-show="LegalCase.ForeclosureInfo.ClientAnswered">
+                <label class="ss_form_input_title">Answered information </label>
+                <input class="ss_form_input " ng-model="LegalCase.ForeclosureInfo.AnsweredInfo">
+            </li>
+
+        </ul>
     </div>
 </div>
