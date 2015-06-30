@@ -674,6 +674,10 @@ Public Class ActivityLogs
                                 ltTaskResult.Text = "Complete"
                             Case UserTask.TaskStatus.Resend
                                 ltTaskResult.Text = "Resend"
+                            Case UserTask.TaskStatus.Approved
+                                ltTaskResult.Text = "Approved"
+                            Case UserTask.TaskStatus.Declined
+                                ltTaskResult.Text = "Declined"
                         End Select
                     End If
                 End If

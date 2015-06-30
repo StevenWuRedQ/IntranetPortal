@@ -281,6 +281,10 @@ Public Class LeadsSubMenu
 
                     Lead.InThirdParty(bble, category, "", Page.User.Identity.Name)
                 End If
+
+                If lbSelectionMode.SelectedValues.Contains(6) Then
+                    Lead.InThirdParty(bble, "Straight Sale", "", Page.User.Identity.Name)
+                End If
             End If
         End If
 

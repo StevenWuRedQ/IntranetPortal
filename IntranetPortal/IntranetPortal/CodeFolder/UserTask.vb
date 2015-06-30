@@ -156,5 +156,7 @@
         Active
         Complete
         Resend
+        Approved
+        Declined
     End Enum
 End Class

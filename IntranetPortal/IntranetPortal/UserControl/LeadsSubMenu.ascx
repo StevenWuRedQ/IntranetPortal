@@ -193,12 +193,13 @@
 
             <dx:ASPxCheckBoxList ID="lbSelectionMode" runat="server" ClientInstanceName="lbSelectionModeClient" AutoPostBack="false" Border-BorderStyle="None">
                 <Items>
-                    <dx:ListEditItem Text="Inhouse SS" Value="0" />
+                    <dx:ListEditItem Text="In House SS" Value="0" />
                     <dx:ListEditItem Text="Eviction" Value="1" />
                     <dx:ListEditItem Text="Legal" Value="3" />
                     <dx:ListEditItem Text="Construction" Value="2" />                    
                     <%--<dx:ListEditItem Text="Open Market Sale" Value="4" />--%>
-                    <dx:ListEditItem Text="3rd Party" Value="5" />
+                    <dx:ListEditItem Text="Straight Sale" Value="6" />
+                    <dx:ListEditItem Text="3rd Party" Value="5" />                    
                 </Items>
                 <ClientSideEvents SelectedIndexChanged="function(s,e){
                         if(s.GetSelectedValues().indexOf('1')!=-1)
