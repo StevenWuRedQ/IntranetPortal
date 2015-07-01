@@ -213,6 +213,9 @@
   <ItemGroup>
     <None Include="Service References\PortalService\CommonService1.disco" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="DLL\log4net.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
