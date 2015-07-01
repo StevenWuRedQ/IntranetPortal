@@ -20,9 +20,9 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
     <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
     <%--<script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>--%>
-    
+
     <script src="/Scripts/dx.webappjs.js"></script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
     <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>
@@ -106,8 +106,8 @@
         <script>
             leadsInfoBBLE = "123456789";
         </script>
-       <%-- {{LegalCase.PropertyInfo.AgentId}} {{LegalCase.PropertyInfo.Agent3Id}}--%>
-       <%-- <div>
+        <%-- {{LegalCase.PropertyInfo.AgentId}} {{LegalCase.PropertyInfo.Agent3Id}}--%>
+        <%-- <div>
             <md-autocomplete
                 md-search-text="searchText1"
                 md-items="item in querySearch(searchText1)"
@@ -143,7 +143,7 @@
         <input class="ss_form_input" ng-model="GetContactById(LegalCase.PropertyInfo.AgentId).OfficeNO">
     </div>
     <div id="PortalCtrl" ng-controller="PortalCtrl">
-     
+
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
                 <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
@@ -746,9 +746,8 @@
                 load: function (loadOptions) {
 
                     if (AllContact) {
-                        if (loadOptions.searchValue)
-                        {
-                            return AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(loadOptions.searchValue.toLowerCase()) >=0 } return false });
+                        if (loadOptions.searchValue) {
+                            return AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(loadOptions.searchValue.toLowerCase()) >= 0 } return false });
                         }
                         return [];
                     }
@@ -758,7 +757,7 @@
                             d.resolve(data);
                         });
                     } else {
-                        
+
                         $.getJSON('/LegalUI/ContactService.svc/LoadContacts').done(function (data) {
                             d.resolve(data);
                             AllContact = data;
@@ -827,7 +826,7 @@
                     displayExpr: 'Name',
                     searchEnabled: true,
                     minSearchLength: 2,
-                    noDataText:"Please input to search",
+                    noDataText: "Please input to search",
                     bindingOptions: { value: id }
                 };
             }
@@ -934,16 +933,49 @@
                 return $scope.LegalCase.SecondaryInfo.SelectedType == filed;
 
             }
-            $scope.ShowContorl = function(m)
-            {
+            $scope.ShowContorl = function (m) {
                 var t = typeof m;
 
-                if(t=="string")
-                {
-                    return m=='true'
+                if (t == "string") {
+                    return m == 'true'
                 }
                 return m;
+               
             }
+            var hSummery = [{ "Name": "ClientPersonallyServed", "Value": "false", "Description": "Client Personally Served" },
+                                    { "Name": "NailAndMail", "Value": "true", "Description": "Nail and Mail" },
+                                    { "Name": "LiveInService", "Value": "false", "Description": "Borrower live in service Address" },
+                                    { "Name": "LiveInServiceBefore", "Value": "false", "Description": "Borrower  live in service address before" },
+                                    { "Name": "ProcessServerList", "Value": "true", "Description": "Is the process server one of these servers" },
+                                    { "Name": "ClientAnswered", "Value": "false", "Description": "Has the client ever filed an answer before" },
+                                    { "Name": "falsete", "Value": "false", "Description": "Do we possess a copy of the falsete" },
+                                    { "Name": "DefaultLetters", "Value": "false", "Description": "Do we have the acceleration letter to review" }];
+            $scope.HightSummery = function () {
+                var highLight = hSummery
+                //hSummery.splice();
+                var foreclosureInfo = $scope.LegalCase.ForeclosureInfo;
+                for (i = 0; i < highLight.length; i++) {
+                    var h = highLight[i];
+                    if (h.Value == 'true' || h.Value == 'false')
+                    {
+                        h.Value = h.Value=='true';
+                    }
+                   
+                    if (foreclosureInfo[h.Name] == h.Value) {
+                        //hSummery.push(h);
+                        h.Visable = true;
+                    }else
+                    {
+                        h.Visable = false;
+                    }
+
+                    if(foreclosureInfo[h.Name]==null && h.Value==false)
+                    {
+                        h.Visable = true;
+                    }
+                }
+                return hSummery;
+            };
             //$.getJSON('/LegalUI/ContactService.svc/GetAllContacts', function (data) {
 
             //    $scope.selectBoxData = data;

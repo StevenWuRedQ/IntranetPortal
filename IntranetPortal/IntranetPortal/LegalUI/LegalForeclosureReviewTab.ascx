@@ -596,7 +596,8 @@
                 </label>
             </li>
             <li class="ss_form_item" ng-class="LegalCase.ForeclosureInfo.NailAndMail?'ss_highlight':''">
-                <label class="ss_form_input_title">Nail and Mail</label>
+                <label class="ss_form_input_title">Nail and Mail <i class="fa fa-question-circle tooltip-examples icon-btn" title="Nial and Mail is when the S&C is literally taped to the front door of the address for service. 
+The courts no longer consider this proper service. "></i></label>
                 <input type="checkbox" id="NailAndMail"  class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NailAndMail">
                 <label for="NailAndMail" class="input_with_check ">
                     <span class="box_text">Yes </span>

@@ -145,10 +145,10 @@
 
                 <div class="note_item" style="background: white">
 
-                    <table style="width: 100%">
+                    <table style="width: 100%" class="table-striped">
                         <tbody>
                             <tr ng-show="LegalCase.Description!=null">
-                                <td style="width: 30px">
+                                <td style="width: 20px">
                                     <i class="fa fa-exclamation-circle note_img"></i>
                                 </td>
                                 <td>
@@ -156,6 +156,16 @@
                                 </td>
 
                             </tr>
+                             <tr ng-repeat="n in HightSummery() | filter:{Visable:true}">
+                                <td style="width: 30px">
+                                    <i class="fa fa-exclamation-circle note_img"></i>
+                                </td>
+                                <td>
+                                    <div class="note_text"> {{n.Description}}</div>
+                                </td>
+
+                            </tr>
+                            
                         </tbody>
                     </table>
 
