@@ -207,8 +207,9 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
         error(function (data, status, headers, config) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
-            debugger;
-            alert("geting addContactFunc error" + status + "error:" + data);
+            var message = data&& data.Message ?data.Message :JSON.stringify(data)
+
+            alert("Add contact error " + message);
         });
     }
 
