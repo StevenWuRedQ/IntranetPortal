@@ -1,4 +1,5 @@
 ﻿Imports IntranetPortal.ShortSale
+Imports Newtonsoft.Json.Linq
 
 Public Class ShortSaleManage
 
@@ -47,6 +48,45 @@ Public Class ShortSaleManage
             End If
         End If
     End Sub
+
+    Public Shared Function UpdateCaseStatus(caseId As Integer, status As ShortSale.CaseStatus, createBy As String, objData As String) As Boolean
+        Dim ssCase = ShortSaleCase.GetCase(caseId)
+
+        Select Case status
+            Case CaseStatus.FollowUp
+                Dim dt As DateTime
+                'Dim objData = e.Parameter.Split("|")(2)
+                Select Case objData
+                    Case "Tomorrow"
+                        dt = DateTime.Now.AddDays(1)
+                    Case "NextWeek"
+                        dt = DateTime.Now.AddDays(7)
+                    Case "ThirtyDays"
+                        dt = DateTime.Now.AddDays(30)
+                    Case "SixtyDays"
+                        dt = DateTime.Now.AddDays(60)
+                    Case Else
+                        If Not DateTime.TryParse(objData, dt) Then
+                            dt = DateTime.Now.AddDays(7)
+                        End If
+                End Select
+                ssCase.SaveFollowUp(dt)
+
+                Return True
+            Case CaseStatus.Archived
+                If Not Roles.IsUserInRole(createBy, "ShortSale-Manager") Then
+                    Dim comments = String.Format("{0} want to archive this case. Please approval.", createBy)
+                    ArchivedProcess.ProcessStart(ssCase.BBLE, ssCase.BBLE, createBy, comments)
+                    Return False
+                Else
+                    ssCase.SaveStatus(status)
+                    Return True
+                End If
+            Case Else
+                ssCase.SaveStatus(status)
+                Return True
+        End Select
+    End Function
 
     'Public Shared Sub NewCaseApprovalAction(task As UserTask)
     '    Select Case task.Status
@@ -203,6 +243,36 @@ Public Class ShortSaleManage
                                                                                                   AssignCase(task.BBLE, task.TaskData, task.CreateBy)
                                                                                               End Sub, Nothing)
 
+    Public Shared Property AssignProcess As ShortSaleProcess = ShortSaleProcess.NewInstance("Assign Case Approval", "TestRole", Nothing, Nothing,
+                                                                                            Sub(task As UserTask)
+                                                                                                Dim objData = JObject.Parse(task.TaskData)
+                                                                                                Dim typeofUpdate = objData("TypeofUpdate").ToString
+                                                                                                Dim category = objData("Category").ToString
+                                                                                                Dim statusofUpdate = objData("StatusUpdate").ToString
+
+                                                                                                Dim ssPage As New ShortSalePage
+                                                                                                ssPage.MortgageStatusUpdate(typeofUpdate, statusofUpdate, category, task.BBLE)
+
+                                                                                                'Dim comments = String.Format("Mortgage Status Update: <br />Type of Update: {0}", typeofUpdate)
+                                                                                                'If Not String.IsNullOrEmpty(category) AndAlso Not String.IsNullOrEmpty(statusofUpdate) Then
+                                                                                                '    comments = comments & String.Format("<br />Status Update: {0} - {1}", category, statusofUpdate)
+                                                                                                'End If
+
+                                                                                                'LeadsActivityLog.AddActivityLog(DateTime.Now, comments, task.BBLE, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
+                                                                                                ShortSale.ShortSaleActivityLog.AddLog(task.BBLE, task.CreateBy, typeofUpdate, category & " - " & statusofUpdate, "")
+
+                                                                                                Dim users = Roles.GetUsersInRole("ShortSale-AssignReviewer")
+                                                                                                If users IsNot Nothing AndAlso users.Count > 0 Then
+                                                                                                    ShortSaleCase.ReassignOwner(task.BBLE, users(0))
+                                                                                                End If
+                                                                                            End Sub,
+                                                                                            Nothing)
+
+    Public Shared Property ArchivedProcess As ShortSaleProcess = ShortSaleProcess.NewInstance("Case Archive Approval", "TestRole", Nothing, Nothing,
+                                                                                              Sub(task As UserTask)
+                                                                                                  Dim ssCase = ShortSaleCase.GetCaseByBBLE(task.TaskData)
+                                                                                                  ssCase.SaveStatus(CaseStatus.Archived)
+                                                                                              End Sub, Nothing)
 End Class
 
 Public Class ShortSaleProcess
@@ -254,10 +324,18 @@ Public Class ShortSaleProcess
                 If Me.ApprovedAction IsNot Nothing Then
                     Me.ApprovedAction(task)
                 End If
+
+                Dim ld = LeadsInfo.GetInstance(task.BBLE)
+                Dim msg = String.Format("Your {0}-{1} is approved by {2}.", task.Action, ld.StreetNameWithNo, task.CompleteBy)
+                UserMessage.AddNewMessage(task.CreateBy, "Approved", msg, task.BBLE, DateTime.Now, "Portal")
             Case UserTask.TaskStatus.Declined
                 If DeclinedAction IsNot Nothing Then
                     DeclinedAction(task)
                 End If
+
+                Dim ld = LeadsInfo.GetInstance(task.BBLE)
+                Dim msg = String.Format("Your {0}-{1} is declined by {2}. Comments: {3}", task.Action, ld.StreetNameWithNo, task.CompleteBy, task.Comments)
+                UserMessage.AddNewMessage(task.CreateBy, "Declined", msg, task.BBLE, DateTime.Now, "Portal")
         End Select
     End Sub
 

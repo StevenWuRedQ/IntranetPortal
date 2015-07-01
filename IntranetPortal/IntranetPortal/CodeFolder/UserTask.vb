@@ -185,6 +185,7 @@
         Using ctx As New Entities
             Dim t = ctx.UserTasks.Find(TaskID)
             t.Status = Status
+            t.Comments = Comments
             t.CompleteBy = CompleteBy
             t.CompleteDate = DateTime.Now
             ctx.SaveChanges()

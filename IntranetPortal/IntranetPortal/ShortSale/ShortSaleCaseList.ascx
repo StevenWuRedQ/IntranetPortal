@@ -23,8 +23,7 @@
             }
         }
     }
-
-
+    
     function expandAllClick(s) {
         if (gridCase.IsGroupRowExpanded(0)) {
             gridCase.CollapseAll();

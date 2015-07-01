@@ -144,7 +144,13 @@ Public Class ActivityLogs
             Dim result = e.Parameters.Split("|")(2)
             Dim task = UserTask.GetTaskByLogID(logId)
 
-            LeadsActivityLog.AddActivityLog(DateTime.Now, task.Action & " is " & result & " by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
+            Dim comments = task.Action & " is " & result & " by " & Page.User.Identity.Name
+
+            If Not String.IsNullOrEmpty(EmailBody2.Html) Then
+                comments = comments + "<br /> Comments: " & EmailBody2.Html
+            End If
+
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
 
             If result = "Approved" Then
                 task.Status = UserTask.TaskStatus.Approved
@@ -152,6 +158,7 @@ Public Class ActivityLogs
                 task.Status = UserTask.TaskStatus.Declined
             End If
             task.CompleteBy = Page.User.Identity.Name
+            task.Comments = EmailBody2.Html
             task.ExecuteAction()
             CompleteWorklistItem(task.TaskID)
         End If
@@ -880,47 +887,39 @@ Public Class ActivityLogs
 
                 If Not String.IsNullOrEmpty(typeOfUpdate) Then
 
-                    'If Not String.IsNullOrEmpty(category) AndAlso String.IsNullOrEmpty(statusOfUpdate) Then
-                    '    Throw New Exception("Please select Status Update")
-                    'End If
-
-                    If Not String.IsNullOrEmpty(statusOfUpdate) Then
-                        RaiseEvent MortgageStatusUpdateEvent(typeOfUpdate, statusOfUpdate, category, hfBBLE.Value)
-                    End If
-
-                    Dim comments = String.Format("Type of Update: {0}", typeOfUpdate)
-
-                    If Not String.IsNullOrEmpty(category) AndAlso Not String.IsNullOrEmpty(statusOfUpdate) Then
-                        comments = comments & String.Format("<br />Status Update: {0} - {1}", category, statusOfUpdate)
-                    End If
-
-                    If Not String.IsNullOrEmpty(txtComments) Then
-                        comments = comments & "<br />" & txtComments
-                    End If
-
                     If category = "Assign" Then
-                        Dim users = Roles.GetUsersInRole("ShortSale-AssignReviewer")
-                        If users IsNot Nothing AndAlso users.Count > 0 Then
+                        Dim taskData = New With {
+                            .TypeofUpdate = typeOfUpdate,
+                            .Category = category,
+                            .StatusUpdate = statusOfUpdate}
 
-                            ShortSaleCase.ReassignOwner(hfBBLE.Value, users(0))
+                        Dim assignComments = String.Format("{0} want to change {1} status to {2} - {3}. Please Approval. <br /> Comments: {4}", Page.User.Identity.Name, typeOfUpdate, category, statusOfUpdate, txtComments)
 
-                            'Dim ssCase = ShortSaleCase.GetCaseByBBLE(hfBBLE.Value)
-                            'ssCase.Owner = users(0)
-                            'Dim party = PartyContact.GetContactByName(users(0))
+                        'Start AssignUpdate process
+                        ShortSaleManage.AssignProcess.ProcessStart(hfBBLE.Value, taskData.ToJsonString, Page.User.Identity.Name, assignComments)
 
-                            'If party IsNot Nothing Then
-                            '    ssCase.Processor = party.ContactId
-                            'End If
-
-                            'ssCase.UpdateDate = DateTime.Now
-                            'ssCase.UpdateBy = Page.User.Identity.Name
-                            'ssCase.Save()
+                        'Dim users = Roles.GetUsersInRole("ShortSale-AssignReviewer")
+                        'If users IsNot Nothing AndAlso users.Count > 0 Then
+                        '    ShortSaleCase.ReassignOwner(hfBBLE.Value, users(0))
+                        'End If
+                    Else
+                        If Not String.IsNullOrEmpty(statusOfUpdate) Then
+                            RaiseEvent MortgageStatusUpdateEvent(typeOfUpdate, statusOfUpdate, category, hfBBLE.Value)
                         End If
+
+                        Dim comments = String.Format("Type of Update: {0}", typeOfUpdate)
+
+                        If Not String.IsNullOrEmpty(category) AndAlso Not String.IsNullOrEmpty(statusOfUpdate) Then
+                            comments = comments & String.Format("<br />Status Update: {0} - {1}", category, statusOfUpdate)
+                        End If
+
+                        If Not String.IsNullOrEmpty(txtComments) Then
+                            comments = comments & "<br />" & txtComments
+                        End If
+
+                        LeadsActivityLog.AddActivityLog(aspxdate, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
+                        ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category & " - " & statusOfUpdate, txtComments)
                     End If
-
-                    LeadsActivityLog.AddActivityLog(aspxdate, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
-                    ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category & " - " & statusOfUpdate, txtComments)
-
                 Else
                     LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
                     ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, "Comments", "Comments", txtComments)

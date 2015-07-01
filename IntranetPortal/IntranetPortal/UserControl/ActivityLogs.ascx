@@ -175,7 +175,18 @@
 
     function ApprovalTask(logId, result)
     {
+        if(result == "Declined")
+        {
+            var commentHtml = EmailBody.GetHtml();         
+
+            if (commentHtml == "") {
+                alert("The comments is required when you decline the task. Please input comments.")
+                return;
+            }
+        }
+
         NeedToRefreshList = true;
+        gridTrackingClient.EndCallback.AddHandler(function(s, e) { EmailBody.SetHtml(""); });
         gridTrackingClient.PerformCallback("ApprovalTask|" + logId + "|" + result);
     }
 
@@ -346,7 +357,6 @@
         }
 
         addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate option:selected").text() + "|" + $("#selCategory").val());
-        EmailBody.SetHtml("");
     }
 
     function OnCommentsKeyDown(e) {
@@ -530,7 +540,7 @@
         </div>
     </div>
     <dx:ASPxCallback runat="server" ID="addCommentsCallback" ClientInstanceName="addCommentsCallbackClient" OnCallback="addCommentsCallback_Callback">
-        <ClientSideEvents EndCallback="function(s,e){gridTrackingClient.Refresh(); document.getElementById('txtComments').value='';}" />
+        <ClientSideEvents EndCallback="function(s,e){gridTrackingClient.Refresh();EmailBody.SetHtml(''); document.getElementById('txtComments').value='';}" />
     </dx:ASPxCallback>
     <%-------end-----%>
     <%-- log tables--%>

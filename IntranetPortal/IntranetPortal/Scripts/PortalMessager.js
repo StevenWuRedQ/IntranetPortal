@@ -166,7 +166,6 @@ function ReadMsg() {
 
 function PopupViewLead() {
     if (popupBBLE != null) {
-
         var iframe = document.getElementById("contentUrlPane");
         if (iframe && iframe != null) {
             var frmDocument = (iframe.contentWindow || iframe.contentDocument);

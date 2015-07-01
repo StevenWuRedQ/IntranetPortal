@@ -186,45 +186,10 @@ Public Class ShortSalePage
         Select Case mortageType
             Case "2nd Lien"
                 ssCase.UpdateMortgageStatus(1, category, status)
-                'If ssCase.Mortgages.Count > 1 Then
-                '    Dim obj = ssCase.Mortgages(1)
-                '    If obj IsNot Nothing Then
-                '        obj.Status = status
-                '        obj.Category = category
-                '        obj.Save()
-
-                '        ssCase.RefreshStatus()
-                '    End If
-                'End If
             Case "3rd Lien"
                 ssCase.UpdateMortgageStatus(2, category, status)
-                'If ssCase.Mortgages.Count > 2 Then
-                '    Dim obj = ssCase.Mortgages(2)
-                '    If obj IsNot Nothing Then
-                '        obj.Status = status
-                '        obj.Category = category
-                '        obj.Save()
-
-                '        ssCase.RefreshStatus()
-                '    End If
-                'End If
             Case Else
                 ssCase.UpdateMortgageStatus(0, category, status)
-                'If ssCase.Mortgages.Count > 0 Then
-                '    Dim obj = ssCase.Mortgages(0)
-                '    If obj IsNot Nothing Then
-                '        obj.Status = status
-                '        obj.Category = category
-                '        obj.Save()
-
-                '        ssCase.RefreshStatus()
-                '        'If status = "Closed" Then
-                '        '    ssCase.Status = CaseStatus.Closed
-                '        'Else
-                '        '    ssCase.Status = CaseStatus.Active
-                '        'End If
-                '    End If
-                'End If
         End Select
     End Sub
 
@@ -242,7 +207,6 @@ Public Class ShortSalePage
         ActivityLogs.BindData(ShortSaleCaseData.BBLE)
 
         ShortSaleFileOverview.BindData(ShortSaleCaseData.BBLE)
-
 
         'DocumentsUI.BindFileList(ShortSaleCaseData.BBLE)
         DocumentsUI.LeadsName = ShortSaleCaseData.CaseName
