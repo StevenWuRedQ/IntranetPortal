@@ -265,6 +265,7 @@
                     <option value="tenant">tenant</option>
                 </select>
             </li>
+
             <li class="ss_form_item">
                 <span class="ss_form_input_title">HAMP eligible</span>
 
@@ -587,24 +588,80 @@
     <div class="ss_form">
         <h4 class="ss_form_title">Affidavit of Service <i class="fa fa-question-circle tooltip-examples icon-btn" title="If there is alreaedy a judgement of foreclosure and sale submitted to the court, signed, or entereed, we need to first come up with a reson as to why there was not a n answer put in earlie"></i></h4>
         <ul class="ss_form_box clearfix">
-            <li class="ss_form_item" ng-class="!LegalCase.ForeclosureInfo.ClientPersonallyServed?'ss_highlight':''">
-                <label class="ss_form_input_title">Client Personally Served</label>
-                 <input type="checkbox" id="PersonallyServed"  class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ClientPersonallyServed">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.ClientPersonallyServed?'ss_warning':''">Client Personally Served</label>
+                <input type="checkbox" id="PersonallyServed" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ClientPersonallyServed">
                 <label for="PersonallyServed" class="input_with_check ">
                     <span class="box_text">Yes </span>
-
                 </label>
             </li>
             <li class="ss_form_item" ng-class="LegalCase.ForeclosureInfo.NailAndMail?'ss_highlight':''">
-                <label class="ss_form_input_title">Nail and Mail <i class="fa fa-question-circle tooltip-examples icon-btn" title="Nial and Mail is when the S&C is literally taped to the front door of the address for service. 
-The courts no longer consider this proper service. "></i></label>
+                <label class="ss_form_input_title">Nail and Mail</label>
                 <input type="checkbox" id="NailAndMail"  class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NailAndMail">
                 <label for="NailAndMail" class="input_with_check ">
                     <span class="box_text">Yes </span>
                 </label>
             </li>
+            <li class="ss_form_item" ng-show="!LegalCase.ForeclosureInfo.LiveInServiceBefore">
+                <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.LiveInService?'ss_warning':''">Live in Service Address Now</label>
+                <input type="checkbox" id="LiveInService" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.LiveInService">
+                <label for="LiveInService" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+            </li>
+            <li class="ss_form_item" ng-show="!LegalCase.ForeclosureInfo.LiveInService">
+                <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.LiveInServiceBefore?'ss_warning':''">Live in Service Address Before</label>
+                <input type="checkbox" id="LiveInServiceBefore" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.LiveInServiceBefore">
+                <label for="LiveInServiceBefore" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+            </li>
+
+            <li class="ss_form_item">
+                <span class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.ProcessOnServerList?'ss_warning':''">Process On Server</span>
+                <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ProcessOnServerList">
+                    <option value=""></option>
+                    <option value="alan">Alan Feldman</option>
+                    <option value="ron">Ron B</option>
+                </select>
+            </li>
+
+            <li class="ss_form_item" ng-show="LegalCase.ForeclosureInfo.ProcessOnServerList">
+                <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.NegativeInformation?'ss_warning':''">Negative Server Information</label>
+                <input type="checkbox" id="NegativeInformation" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NegativeInformation">
+                <label for="NegativeInformation" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+            </li>
+            <li class="ss_form_item ss_form_text" ng-show="LegalCase.ForeclosureInfo.NegativeInformation">
+                <label class="ss_form_input_title">Negative Information Detail </label>
+                <input class="ss_form_input " ng-model="LegalCase.ForeclosureInfo.NegativeInformationDetail">
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.AffidavitWithin20Days?'ss_warning':''">Affidavit Within 20 days</label>
+                <input type="checkbox" id="AffidavitWithin20Days" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AffidavitWithin20Days">
+                <label for="AffidavitWithin20Days" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.NegativeAfterInvestigation?'ss_warning':''">Negative After Investigation</label>
+                <input type="checkbox" id="NegativeAfterInvestigation" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NegativeAfterInvestigation">
+                <label for="NegativeAfterInvestigation" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+            </li>
+            <li class="ss_form_item ss_form_text" ng-show="LegalCase.ForeclosureInfo.NegativeAfterInvestigation">
+                <label class="ss_form_input_title">Negative Investigation Detail </label>
+                <input class="ss_form_input " ng-model="LegalCase.ForeclosureInfo.NegativeInvestigationDetail">
+            </li>
+
+
         </ul>
     </div>
+
     <div class="ss_array">
 
         <h4 class="ss_form_title title_with_line  title_after_notes ">
@@ -716,10 +773,32 @@ The courts no longer consider this proper service. "></i></label>
                             <span class="box_text">No</span>
                         </label>
                     </li>
+                    <li class="ss_form_item">
+                        <span class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.IsMortgage?'ss_warning':''">IsMortgage</span>
+                        <input type="checkbox" id="IsMortgage" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.IsMortgage">
+                        <label for="IsMortgage" class="input_with_check ">
+                            <span class="box_text">Yes </span>
+                        </label>
+                    </li>
+
+                    <li class="ss_form_item">
+                        <span class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.DOCXLLCDocument?'ss_warning':''">DOCX LLC Document</span>
+                        <input type="checkbox" checked id="DOCXLLCDocument" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.DOCXLLCDocument">
+                        <label for="DOCXLLCDocument" class="input_with_check ">
+                            <span class="box_text">Yes </span>
+                        </label>
+                    </li>
+
+
                     <li class="ss_form_item ss_form_item_line">
                         <label class="ss_form_input_title">note</label>
                         <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.AssignmentsNotes"></textarea>
                     </li>
+
+
+
+                    </li>
+
                 </ul>
 
             </div>
@@ -999,15 +1078,12 @@ The courts no longer consider this proper service. "></i></label>
     <div class="ss_form">
         <h4 class="ss_form_title">Answer</h4>
 
-
         <ul class="ss_form_box clearfix">
-            <li class="ss_form_item" ng-class="LegalCase.ForeclosureInfo.ClientAnswered?'ss_highlight':''">
-                <span class="ss_form_input_title">Client answered</span>
-
+            <li class="ss_form_item">
+                <span class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.ClientAnswered?'ss_warning':''">Client answered</span>
                 <input type="checkbox" id="ansercheck_yes" name="ansercheck" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ClientAnswered">
                 <label for="ansercheck_yes" class="input_with_check ">
                     <span class="box_text">Yes </span>
-
                 </label>
 
                 <%--<input type="radio" id="ansercheck_no" name="ansercheck" value="0" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ClientAnswered">
@@ -1023,4 +1099,96 @@ The courts no longer consider this proper service. "></i></label>
 
         </ul>
     </div>
+
+    <div class="ss_form">
+        <h4 class="ss_form_title">Standing Issues</h4>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <span class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.PossessNote?'ss_warning':''">Possess Note</span>
+                <input type="checkbox" id="PossessNote" name="PossessNote" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PossessNote">
+                <label for="PossessNote" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+            </li>
+            <li class="ss_form_item">
+                <span class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.OriginalLender?'ss_warning':''">Plantiff is Original Lender</span>
+                <input type="checkbox" id="OriginalLender" name="OriginalLender" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.OriginalLender">
+                <label for="OriginalLender" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+            </li>
+            <li class="ss_form_item">
+                <span class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.IsEndorsement?'ss_warning':''">Endorsements or Allonges</span>
+                <input type="checkbox" id="IsEndorsement" name="IsEndorsement" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.IsEndorsement">
+                <label for="IsEndorsement" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+            </li>
+
+            <li class="ss_form_item">
+                <span class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.RoboOnEndorsement?'ss_warning':''">Robo Signors On Endorsement</span>
+                <input type="checkbox" checked id="RoboOnEndorsement" name="RoboOnEndorsement" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.RoboOnEndorsement">
+                <label for="RoboOnEndorsement" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+
+
+            </li>
+            <li class="ss_form_item ss_form_text" ng-show="LegalCase.ForeclosureInfo.RoboOnEndorsement">
+                <label class="ss_form_input_title">Robo Signors </label>
+                <input class="ss_form_input " ng-model="LegalCase.ForeclosureInfo.RoboOnEndorsementDetail">
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="ss_form">
+        <h4 class="ss_form_title">Default Letters</h4>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <span class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.AccelerationLetter?'ss_warning':''">Acceleration Letter</span>
+                <input type="checkbox" id="AccelerationLetter" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AccelerationLetter">
+                <label for="AccelerationLetter" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+            </li>
+            <li class="ss_form_item">
+                <span class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.LetterMailedInTime?'ss_warning':''">Letter Mailed In Time</span>
+                <input type="checkbox" id="LetterMailedInTime" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.LetterMailedInTime">
+                <label for="LetterMailedInTime" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+
+            </li>
+
+            <li class="ss_form_item">
+                <span class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.ALRegisteredIn3Days?'ss_warning':''">AL Registered In 3 Days</span>
+                <input type="checkbox" id="ALRegisteredIn3Days" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ALRegisteredIn3Days">
+                <label for="ALRegisteredIn3Days" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+
+            </li>
+            <li class="ss_form_item ss_form_text" ng-show="LegalCase.ForeclosureInfo.ALRegisteredIn3Days">
+                <label class="ss_form_input_title">Acceleration Letter Detail </label>
+                <input class="ss_form_input " ng-model="LegalCase.ForeclosureInfo.ALRegisteredIn3DaysDetail">
+            </li>
+
+            <li class="ss_form_item">
+                <span class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.LPRegisteredIn5Days?'ss_warning':''">LP Registered In 5 Days</span>
+                <input type="checkbox" id="LPRegisteredIn5Days" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.LPRegisteredIn5Days">
+                <label for="LPRegisteredIn5Days" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+
+            </li>
+            <li class="ss_form_item ss_form_text" ng-show="LegalCase.ForeclosureInfo.LPRegisteredIn5Days">
+                <label class="ss_form_input_title">LP registered Detail </label>
+                <input class="ss_form_input " ng-model="LegalCase.ForeclosureInfo.LPRegisteredIn5DaysDetail">
+            </li>
+        </ul>
+
+    </div>
+
 </div>
+

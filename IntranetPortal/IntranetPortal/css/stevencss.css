@@ -2401,3 +2401,7 @@ li.mag_tabv.active {
 {
     background:yellow;
 }
+
+.ss_warning {
+    color: red;
+}
