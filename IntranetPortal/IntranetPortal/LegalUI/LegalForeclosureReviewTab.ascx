@@ -596,7 +596,7 @@
                 </label>
             </li>
             <li class="ss_form_item" >
-                <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.NailAndMail?'ss_warning':''">Nail and Mail</label>
+                <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.NailAndMail?'ss_warning':''">Nail and Mail <i class="fa fa-question-circle tooltip-examples icon-btn" title="Nial and Mail is when the S&C is literally taped to the front door of the address for service. The courts no longer consider this proper service. "></i></label>
                 <input type="checkbox" id="NailAndMail"  class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NailAndMail">
                 <label for="NailAndMail" class="input_with_check ">
                     <span class="box_text">Yes </span>
@@ -694,7 +694,7 @@
                         </label>
 
                         <input type="radio" id="check_8912" name="102" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignorDocumentPrepared">
-                        <label for="check_891" class="input_with_check">
+                        <label for="check_8912" class="input_with_check">
                             <span class="box_text">No</span>
                         </label>
                     </li>
