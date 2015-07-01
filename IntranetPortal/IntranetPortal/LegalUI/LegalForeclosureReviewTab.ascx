@@ -595,14 +595,14 @@
                     <span class="box_text">Yes </span>
                 </label>
             </li>
-            <li class="ss_form_item" ng-class="LegalCase.ForeclosureInfo.NailAndMail?'ss_highlight':''">
-                <label class="ss_form_input_title">Nail and Mail</label>
+            <li class="ss_form_item" >
+                <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.NailAndMail?'ss_warning':''">Nail and Mail</label>
                 <input type="checkbox" id="NailAndMail"  class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NailAndMail">
                 <label for="NailAndMail" class="input_with_check ">
                     <span class="box_text">Yes </span>
                 </label>
             </li>
-            <li class="ss_form_item" ng-show="!LegalCase.ForeclosureInfo.LiveInServiceBefore">
+            <li class="ss_form_item" ng-show="!LegalCase.ForeclosureInfo.LiveInService">
                 <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.LiveInService?'ss_warning':''">Live in Service Address Now</label>
                 <input type="checkbox" id="LiveInService" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.LiveInService">
                 <label for="LiveInService" class="input_with_check ">
@@ -1080,7 +1080,7 @@
 
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
-                <span class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.ClientAnswered?'ss_warning':''">Client answered</span>
+                <span class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.ClientAnswered?'ss_warning':''">Client answered</span>
                 <input type="checkbox" id="ansercheck_yes" name="ansercheck" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ClientAnswered">
                 <label for="ansercheck_yes" class="input_with_check ">
                     <span class="box_text">Yes </span>

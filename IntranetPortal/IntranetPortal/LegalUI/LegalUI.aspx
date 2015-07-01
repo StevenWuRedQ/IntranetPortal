@@ -942,14 +942,23 @@
                 return m;
                
             }
-            var hSummery = [{ "Name": "ClientPersonallyServed", "Value": "false", "Description": "Client Personally Served" },
-                                    { "Name": "NailAndMail", "Value": "true", "Description": "Nail and Mail" },
-                                    { "Name": "LiveInService", "Value": "false", "Description": "Borrower live in service Address" },
-                                    { "Name": "LiveInServiceBefore", "Value": "false", "Description": "Borrower  live in service address before" },
-                                    { "Name": "ProcessServerList", "Value": "true", "Description": "Is the process server one of these servers" },
-                                    { "Name": "ClientAnswered", "Value": "false", "Description": "Has the client ever filed an answer before" },
-                                    { "Name": "falsete", "Value": "false", "Description": "Do we possess a copy of the falsete" },
-                                    { "Name": "DefaultLetters", "Value": "false", "Description": "Do we have the acceleration letter to review" }];
+            var hSummery = [{ "Value": "false", "Description": "Client Personally doesn't  Served", "Name": "ClientPersonallyServed" },
+                            { "Value": "true", "Description": "Nail and Mail", "Name": "NailAndMail" },
+                            { "Value": "false", "Description": "Borrower doesn\'t live in service Address", "Name": "LiveInService" },
+                            { "Value": "false", "Description": "Borrower didn\'t ever live in service address", "Name": "LiveInServiceBefore" },
+                            { "Value": "true", "Description": "The process server one of these servers", "Name": "ProcessOnServerList" },
+                            { "Value": "true", "Description": "Web search provide any negative information", "Name": "NegativeInformation" },
+                            { "Value": "false", "Description": "Pursuant to CPLR § 3408(a), the affidavit of service wasn\'t  fill within 20 days of service", "Name": "AffidavitWithin20Days" },
+                            { "Value": "false", "Description": "Web search didn\'t provide any negative information on the process service company", "Name": "NegativeAfterInvestigation" },
+                            { "Value": "false", "Description": "The client hasn't ever filed an answer before", "Name": "ClientAnswered" },
+                            { "Value": "false", "Description": "The current Plaintiff isn\'t the same as the original lender", "Name": "OriginalLender" },
+                            { "Value": "false", "Description": "There aren\'t any endorsements or allonges", "Name": "IsEndorsement" },
+                            { "Value": "true", "Description": "There are robo signors on the endorsements or allonges", "Name": "RoboOnEndorsement" },
+                            { "Value": "true", "Description": "There are documents drafted by DOCX LLC", "Name": "DOCXLLCDocument" },
+                            { "Value": "false", "Description": "We don\'t have the acceleration letter to review", "Name": "AccelerationLetter" },
+                            { "Value": "false", "Description": "The acceleration wasn't letter mailed to the defendant in the proper amount of time (relevant to the default date)", "Name": "LetterMailedInTime" },
+                            { "Value": "false", "Description": "We aren\'t able to see if the acceleration letter was “registered” within 3 business days of date on letter", "Name": "ALRegisteredIn3Days" },
+                            { "Value": "false", "Description": "We aren\'t able to see if the LP was “registered” within 5 business days of filing (RPAPL 1304(1))", "Name": "LPRegisteredIn5Days" }];
             $scope.HightSummery = function () {
                 var highLight = hSummery
                 //hSummery.splice();
