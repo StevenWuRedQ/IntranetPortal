@@ -173,6 +173,12 @@
         });
     }
 
+    function ApprovalTask(logId, result)
+    {
+        NeedToRefreshList = true;
+        gridTrackingClient.PerformCallback("ApprovalTask|" + logId + "|" + result);
+    }
+
     var NeedToRefreshList = false;
     function RefreshList() {
         debugger;
@@ -621,6 +627,8 @@
                                                         <asp:Literal runat="server" ID="ltTaskResult"></asp:Literal></span>
                                                     <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" onclick='<%# String.Format("CompleteTask(""{0}"")", Eval("LogID"))%>' title="Completed" runat="server" id="btnTaskComplete" visible="false"></i>
                                                     <i class="fa fa-history log_item_hl_buttons tooltip-examples" title="Resend" runat="server" id="btnResend" onclick='<%# String.Format("ResendTask(""{0}"")", Eval("LogID"))%>' visible="false"></i>
+                                                    <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" title="Approve" runat="server" id="btnTaskApprove" onclick='<%# String.Format("ApprovalTask(""{0}"", ""Approved"")", Eval("LogID"))%>' visible="false"></i>
+                                                    <i class="fa fa-times-circle-o log_item_hl_buttons tooltip-examples" title="Decline" runat="server" id="btnTaskDecline" onclick='<%# String.Format("ApprovalTask(""{0}"",""Declined"")", Eval("LogID"))%>' visible="false"></i>
                                                 </div>
                                             </td>
                                         </tr>

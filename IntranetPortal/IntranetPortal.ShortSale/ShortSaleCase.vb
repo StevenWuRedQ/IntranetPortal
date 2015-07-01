@@ -622,8 +622,9 @@ Partial Public Class ShortSaleCase
 
     Public Shared Function GetCaseByCategory(category As String, Optional owner As String = Nothing) As List(Of ShortSaleCase)
         Using ctx As New ShortSaleEntities
+            Dim nonActiveStatus = {CaseStatus.Archived, CaseStatus.NewFile}
             If category = "All" Then
-                Dim allCases = (From ss In ctx.ShortSaleCases Where ss.Status <> CaseStatus.Archived AndAlso (ss.Owner = owner Or owner = Nothing)
+                Dim allCases = (From ss In ctx.ShortSaleCases Where Not nonActiveStatus.Contains(ss.Status) AndAlso (ss.Owner = owner Or owner = Nothing)
                                 From mort In ctx.PropertyMortgages.Where(Function(m) m.CaseId = ss.CaseId).Take(1).DefaultIfEmpty
                                 Select ss, mort).Distinct.ToList.Select(Function(s)
                                                                             If s.mort IsNot Nothing Then
@@ -638,7 +639,7 @@ Partial Public Class ShortSaleCase
             End If
 
             If category = "Upcoming" Then
-                Dim allcases = (From ss In ctx.ShortSaleCases Where ss.Status <> CaseStatus.Archived And ss.SaleDate IsNot Nothing AndAlso (ss.Owner = owner Or owner = Nothing)
+                Dim allcases = (From ss In ctx.ShortSaleCases Where Not nonActiveStatus.Contains(ss.Status) And ss.SaleDate IsNot Nothing AndAlso (ss.Owner = owner Or owner = Nothing)
                                 From mort In ctx.PropertyMortgages.Where(Function(m) m.CaseId = ss.CaseId).Take(1).DefaultIfEmpty
                                 Select ss, mort).Distinct.ToList.Select(Function(s)
                                                                             If s.mort IsNot Nothing Then
@@ -653,7 +654,7 @@ Partial Public Class ShortSaleCase
 
             Dim result = (From ss In ctx.ShortSaleCases
                              Join mort In ctx.PropertyMortgages On ss.CaseId Equals mort.CaseId
-                            Where mort.Category = category And (ss.Owner = owner Or owner = Nothing) And ss.Status <> CaseStatus.Archived
+                            Where mort.Category = category And (ss.Owner = owner Or owner = Nothing) And Not nonActiveStatus.Contains(ss.Status)
                              Select ss, mort.Status).Distinct.ToList
 
             Dim ssCases = result.Select(Function(s)
@@ -662,10 +663,10 @@ Partial Public Class ShortSaleCase
                                         End Function).ToList
 
             If category = "Assign" Then
-                ssCases.AddRange(GetCaseByStatus(CaseStatus.NewFile, owner).Select(Function(s)
-                                                                                       s.MortgageStatus = "Others"
-                                                                                       Return s
-                                                                                   End Function).ToList)
+                'ssCases.AddRange(GetCaseByStatus(CaseStatus.NewFile, owner).Select(Function(s)
+                '                                                                       s.MortgageStatus = "Others"
+                '                                                                       Return s
+                '                                                                   End Function).ToList)
 
                 ssCases = ssCases.GroupBy(Function(ss) ss.BBLE).Select(Function(ss) ss.First).ToList
             End If

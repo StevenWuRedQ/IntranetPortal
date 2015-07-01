@@ -668,7 +668,12 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="EndDate" Type="datetime" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="NotifyDate" Type="datetime" />
+          <Property Name="TaskMode" Type="int" />
+          <Property Name="TaskData" Type="nvarchar" MaxLength="256" />
           <Property Name="Status" Type="int" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="CompleteBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompleteDate" Type="datetime" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar(max)" />
           <Property Name="LogID" Type="int" />
@@ -1423,6 +1428,11 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Location" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
           <Property Name="NotifyDate" Type="DateTime" Precision="3" />
+          <Property Name="TaskMode" Type="Int32" />
+          <Property Name="TaskData" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CompleteBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompleteDate" Type="DateTime" Precision="3" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserAppointment">
           <Key>
@@ -2259,6 +2269,11 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="UserTasks">
             <EntityTypeMapping TypeName="IntranetPortalModel.UserTask">
               <MappingFragment StoreEntitySet="UserTasks">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="CompleteDate" ColumnName="CompleteDate" />
+                <ScalarProperty Name="CompleteBy" ColumnName="CompleteBy" />
+                <ScalarProperty Name="TaskData" ColumnName="TaskData" />
+                <ScalarProperty Name="TaskMode" ColumnName="TaskMode" />
                 <ScalarProperty Name="NotifyDate" ColumnName="NotifyDate" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />

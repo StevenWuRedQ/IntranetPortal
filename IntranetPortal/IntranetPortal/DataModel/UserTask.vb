@@ -25,5 +25,10 @@ Partial Public Class UserTask
     Public Property EndDate As Nullable(Of Date)
     Public Property Location As String
     Public Property NotifyDate As Nullable(Of Date)
+    Public Property TaskMode As Nullable(Of Integer)
+    Public Property TaskData As String
+    Public Property CompleteBy As String
+    Public Property CompleteDate As Nullable(Of Date)
+    Public Property Comments As String
 
 End Class

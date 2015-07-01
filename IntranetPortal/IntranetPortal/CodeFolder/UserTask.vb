@@ -60,6 +60,32 @@
         End Using
     End Function
 
+    Public Shared Function AddUserTask(bble As String, name As String, action As String, Important As String, location As String, schedule As DateTime, description As String, logId As Integer, createUser As String, mode As UserTaskMode, taskData As String) As UserTask
+        Using context As New Entities
+            Dim task As New UserTask
+            task.BBLE = bble
+            task.EmployeeName = name
+            task.Action = action
+            task.Important = Important
+            task.Location = location
+            task.Schedule = schedule
+            task.EndDate = schedule.AddHours(2)
+            task.Description = description
+            task.Status = UserTask.TaskStatus.Active
+            task.CreateDate = DateTime.Now
+            task.CreateBy = createUser
+            task.LogID = logId
+
+            task.TaskMode = mode
+            task.TaskData = taskData
+
+            context.UserTasks.Add(task)
+            context.SaveChanges()
+
+            Return task
+        End Using
+    End Function
+
     Public Shared Sub AddUserTask(bble As String, name As String, description As String, logId As Integer)
         AddUserTask(bble, name, "", Nothing, "In Office", Nothing, description, logId)
         Return
@@ -145,11 +171,30 @@
         End Using
     End Function
 
+    Public Sub ExecuteAction()
+        'execute shortsale task action
+        ShortSaleProcess.ExecuteAction(Me)
+
+        'Select Case Action
+        '    Case "Reassign Case Approval"
+        '        ShortSaleManage.ReassignApproval(Me)
+        '    Case ""
+
+        'End Select
+
+        Using ctx As New Entities
+            Dim t = ctx.UserTasks.Find(TaskID)
+            t.Status = Status
+            t.CompleteBy = CompleteBy
+            t.CompleteDate = DateTime.Now
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
     Public Shared Function GetTaskByLogID(logId As Integer) As UserTask
         Using context As New Entities
             Return context.UserTasks.Where(Function(t) t.LogID = logId).SingleOrDefault
         End Using
-
     End Function
 
     Public Enum TaskStatus
@@ -158,5 +203,10 @@
         Resend
         Approved
         Declined
+    End Enum
+
+    Public Enum UserTaskMode
+        Complete
+        Approval
     End Enum
 End Class

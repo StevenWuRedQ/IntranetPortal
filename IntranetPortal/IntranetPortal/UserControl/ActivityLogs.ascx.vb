@@ -138,6 +138,24 @@ Public Class ActivityLogs
             BindData(hfBBLE.Value)
         End If
 
+        'Approve User Task
+        If e.Parameters.StartsWith("ApprovalTask") Then
+            Dim logId = CInt(e.Parameters.Split("|")(1))
+            Dim result = e.Parameters.Split("|")(2)
+            Dim task = UserTask.GetTaskByLogID(logId)
+
+            LeadsActivityLog.AddActivityLog(DateTime.Now, task.Action & " is " & result & " by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
+
+            If result = "Approved" Then
+                task.Status = UserTask.TaskStatus.Approved
+            Else
+                task.Status = UserTask.TaskStatus.Declined
+            End If
+            task.CompleteBy = Page.User.Identity.Name
+            task.ExecuteAction()
+            CompleteWorklistItem(task.TaskID)
+        End If
+
         'Approve New Lead
         If (e.Parameters.StartsWith("ApproveNewLead")) Then
             Dim logId = CInt(e.Parameters.Split("|")(1))
@@ -586,8 +604,11 @@ Public Class ActivityLogs
 
                 Dim task = UserTask.GetTaskByLogID(logId)
                 Dim pnlTask = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "pnlTask"), Panel)
+
                 Dim btnTaskComplete = TryCast(pnlTask.FindControl("btnTaskComplete"), HtmlControl)
                 Dim btnResend = TryCast(pnlTask.FindControl("btnResend"), HtmlControl)
+                Dim btnTaskApprove = TryCast(pnlTask.FindControl("btnTaskApprove"), HtmlControl)
+                Dim btnTaskDecline = TryCast(pnlTask.FindControl("btnTaskDecline"), HtmlControl)
 
                 Dim ltTaskResult = TryCast(pnlTask.FindControl("ltTaskResult"), Literal)
 
@@ -623,12 +644,17 @@ Public Class ActivityLogs
                         If wli IsNot Nothing Then
                             If wli.ProcessName.ToString = "TaskProcess" OrElse wli.ProcessName = "ShortSaleTask" OrElse wli.ProcessName = "ReminderProcess" Then
                                 If CInt(wli.ProcessInstance.DataFields("TaskId")) = task.TaskID Then
-                                    If btnTaskComplete IsNot Nothing Then
-                                        btnTaskComplete.Visible = True
-                                    End If
+                                    If task.TaskMode = UserTask.UserTaskMode.Approval Then
+                                        btnTaskApprove.Visible = True
+                                        btnTaskDecline.Visible = True
+                                    Else
+                                        If btnTaskComplete IsNot Nothing Then
+                                            btnTaskComplete.Visible = True
+                                        End If
 
-                                    If btnResend IsNot Nothing Then
-                                        btnResend.Visible = True
+                                        If btnResend IsNot Nothing Then
+                                            btnResend.Visible = True
+                                        End If
                                     End If
 
                                     approvalView = True
@@ -637,20 +663,21 @@ Public Class ActivityLogs
                         End If
                     Else
                         If task.CreateDate < DateTime.Parse("2014-12-31 12:59") OrElse task.EmployeeName.ToLower.Contains(Page.User.Identity.Name.ToLower) Then
-                            If btnTaskComplete IsNot Nothing Then
-                                btnTaskComplete.Visible = True
-                            End If
+                            If task.TaskMode = UserTask.UserTaskMode.Approval Then
+                                btnTaskApprove.Visible = True
+                                btnTaskDecline.Visible = True
+                            Else
+                                If btnTaskComplete IsNot Nothing Then
+                                    btnTaskComplete.Visible = True
+                                End If
 
-                            If btnResend IsNot Nothing Then
-                                btnResend.Visible = True
+                                If btnResend IsNot Nothing Then
+                                    btnResend.Visible = True
+                                End If
                             End If
 
                             approvalView = True
                         End If
-
-                        'If task.EmployeeName.Contains(Page.User.Identity.Name) Then
-
-                        'End If
                     End If
 
                     If Not approvalView Then
@@ -1041,5 +1068,25 @@ Public Class ActivityLogs
 
     Protected Sub cmbStatus_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
 
+    End Sub
+
+    Private Sub CompleteWorklistItem(taskId As Integer)
+        Dim sn = ""
+        If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+            sn = Request.QueryString("sn").ToString
+        Else
+            Dim wliItem = WorkflowService.GetUserTaskWorklist(taskId, Page.User.Identity.Name)
+            If wliItem IsNot Nothing Then
+                sn = String.Format("{0}_{1}", wliItem.ProcInstId, wliItem.ActInstId)
+            End If
+        End If
+
+        If Not String.IsNullOrEmpty(sn) Then
+            Dim wli = WorkflowService.LoadTaskProcess(sn)
+            If wli IsNot Nothing Then
+                wli.ProcessInstance.DataFields("Result") = "Completed"
+                wli.Finish()
+            End If
+        End If
     End Sub
 End Class
