@@ -519,7 +519,7 @@ Public Class Troubleshooting
         Try
             ShortSaleCase.Remove(txtSSBBLE.Text)
             MessageBox.Show("Done")
-            'Catch ex As Exception
+        Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message)
         End Try
     End Sub
