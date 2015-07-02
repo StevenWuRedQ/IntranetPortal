@@ -14,7 +14,7 @@
     </div>
 
     <!-- Estate Pending -->
-    <div class="ss_form">
+    <div>
 
         <h4 class="ss_form_title">Estate Pending</h4>
         <ul class="ss_form_box clearfix">
@@ -125,6 +125,205 @@
                 <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.BankruptcyDischargedDate">
             </li>
         </ul>
+    </div>
+
+    <!-- Affidavit of Service  -->
+
+    <div class="ss_array">
+
+        <h4 class="ss_form_title title_with_line  title_after_notes ">
+            <span class="title_index title_span">Affidavit of Services </span>
+            <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
+            &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="AddArrayItem(LegalCase.ForeclosureInfo.AffidavitOfServices)" title="" data-original-title="Add"></i>
+            &nbsp;<span style="text-transform: none"><i class="fa fa-question-circle tooltip-examples icon-btn color_blue" title="If there is alreaedy a judgement of foreclosure and sale submitted to the court, signed, or entereed, we need to first come up with a reson as to why there was not a n answer put in earlie"></i></span>
+            <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="" data-original-title="Delete"></i>
+        </h4>
+
+        <div class="collapse_div">
+            <div ng-repeat="service in LegalCase.ForeclosureInfo.AffidavitOfServices">
+                <div class="ss_form">
+                    <h4 class="ss_form_title">Affidavit of Service {{$index + 1}} <i class="fa fa-times-circle icon_btn tooltip-examples" title="Delete" ng-click="DeleteItem(LegalCase.ForeclosureInfo.AffidavitOfServices,$index)"></i> </h4>
+                    <ul class="ss_form_box clearfix">
+
+                        <li class="ss_form_item">
+                            <label class="ss_form_input_title" ng-class="!service.ClientPersonallyServed?'ss_warning':''">Client Personally Served</label>
+                            <input type="radio" id="NailAndMailY{{$index}}" class="ss_form_input" ng-model="service.NailAndMail" ng-value="true" radio-init="true">
+                            <label for="NailAndMailY{{$index}}" class="input_with_check ">
+                                <span class="box_text">Yes </span>
+                            </label>
+                            <input type="radio" id="NailAndMailN{{$index}}" class="ss_form_input" ng-model="service.NailAndMail" ng-value="false">
+                            <label for="NailAndMailN{{$index}}" class="input_with_check ">
+                                <span class="box_text">No </span>
+                            </label>
+                        </li>
+                        <li class="ss_form_item">
+                            <label class="ss_form_input_title" ng-class="service.NailAndMail?'ss_warning':''">
+                                Nail and Mail <span style="text-transform: none"><i class="fa fa-question-circle tooltip-examples icon-btn" title="Nial and Mail is when the S&C is literally taped to the front door of the address for service. 
+The courts no longer consider this proper service. "></i></span>
+                            </label>
+                            <input type="radio" id="ClientPersonallyServedY{{$index}}" class="ss_form_input" ng-model="service.NailAndMail" ng-value="true" radio-init="true">
+                            <label for="ClientPersonallyServedY{{$index}}" class="input_with_check ">
+                                <span class="box_text">Yes </span>
+                            </label>
+                            <input type="radio" id="ClientPersonallyServedN{{$index}}" class="ss_form_input" ng-model="service.NailAndMail" ng-value="false">
+                            <label for="ClientPersonallyServedN{{$index}}" class="input_with_check ">
+                                <span class="box_text">No </span>
+                            </label>
+                        </li>
+
+                        <li class="ss_form_item">
+                            <label class="ss_form_input_title" ng-class="!service.BorrowerLiveInAddrAtTimeServ?'ss_warning':''">Did Borrower live in service Address at time of Serv</label>
+                            <input type="radio" id="BorrowerLiveInAddrAtTimeServY{{$index}}" class="ss_form_input" ng-model="service.BorrowerLiveInAddrAtTimeServ" ng-value="true" radio-init="true">
+                            <label for="BorrowerLiveInAddrAtTimeServY{{$index}}" class="input_with_check ">
+                                <span class="box_text">Yes </span>
+                            </label>
+                            <input type="radio" id="BorrowerLiveInAddrAtTimeServN{{$index}}" class="ss_form_input" ng-model="service.BorrowerLiveInAddrAtTimeServ" ng-value="false">
+                            <label for="BorrowerLiveInAddrAtTimeServN{{$index}}" class="input_with_check ">
+                                <span class="box_text">No </span>
+                            </label>
+                        </li>
+                        <li class="ss_form_item" ng-show="!service.BorrowerLiveInAddrAtTimeServ">
+                            <label class="ss_form_input_title" ng-class="!service.BorrowerEverLiveHere?'ss_warning':''">If No, did borrower ever live in service address</label>
+                            <input type="radio" id="BorrowerEverLiveHereY{{$index}}" class="ss_form_input" ng-model="service.BorrowerEverLiveHere" ng-value="true" radio-init="true">
+                            <label for="BorrowerEverLiveHereY{{$index}}" class="input_with_check ">
+                                <span class="box_text">Yes </span>
+                            </label>
+                            <input type="radio" id="BorrowerEverLiveHereN{{$index}}" class="ss_form_input" ng-model="service.BorrowerEverLiveHere" ng-value="false">
+                            <label for="BorrowerEverLiveHereN{{$index}}" class="input_with_check ">
+                                <span class="box_text">No </span>
+                            </label>
+                        </li>
+
+                        <li class="ss_form_item">
+                            <label class="ss_form_input_title" ng-class="service.ServerInSererList?'ss_warning':''">Is the process server one of these servers</label>
+                            <select class="ss_form_input" ng-model="service.ServerInSererList" ng-options="o as o for o in ['Alan Feldman','John Medina','Robert Winckelmann']"></select>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div ng-class="service.IsServerHasNegativeInfo?'edit_text_area ss_show_from':''">
+                    <ul class="ss_form_box clearfix">
+                        <li class="ss_form_item">
+                            <label class="ss_form_input_title" ng-class="service.IsServerHasNegativeInfo?'ss_warning':''">If not on list, did web search provide any negative information on process server</label>
+                            <input type="radio" id="IsServerHasNegativeInfoY{{$index}}" class="ss_form_input" ng-model="service.IsServerHasNegativeInfo" ng-value="true" radio-init="true">
+                            <label for="IsServerHasNegativeInfoY{{$index}}" class="input_with_check">
+                                <span class="box_text">Yes </span>
+                            </label>
+                            <input type="radio" id="IsServerHasNegativeInfoN{{$index}}" class="ss_form_input" ng-model="service.IsServerHasNegativeInfo" ng-value="false">
+                            <label for="IsServerHasNegativeInfoN{{$index}}" class="input_with_check ">
+                                <span class="box_text">No </span>
+                            </label>
+                        </li>
+
+                        <li class="ss_form_item ss_form_item_line" ng-show="service.isServerHasNegativeInfo">
+                            <label class="ss_form_input_title">Negative information on process server</label>
+                            <textarea class="edit_text_area text_area_ss_form" ng-model="service.ServerHasNegativeInfo"></textarea>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="ss_form_box clearfix">
+                        <li class="ss_form_item">
+                            <label class="ss_form_input_title" ng-class="service.AffidavitServiceFiledIn20Day?'ss_warning':''">Affidavit of service filed within 20 days of service <i class="f"></i></label>
+                            <input type="radio" id="AffidavitServiceFiledIn20DayY{{$index}}" class="ss_form_input" ng-model="service.AffidavitServiceFiledIn20Day" ng-value="true" radio-init="true">
+                            <label for="AffidavitServiceFiledIn20DayY{{$index}}" class="input_with_check">
+                                <span class="box_text">Yes </span>
+                            </label>
+                            <input type="radio" id="AffidavitServiceFiledIn20DayN{{$index}}" class="ss_form_input" ng-model="service.AffidavitServiceFiledIn20Day" ng-value="false">
+                            <label for="AffidavitServiceFiledIn20DayN{{$index}}" class="input_with_check ">
+                                <span class="box_text">No </span>
+                            </label>
+                        </li>
+                        <li class="ss_form_item ss_form_item_line">
+                            <label class="ss_form_input_title">Additional Affidavit Comments</label>
+                            <textarea class="edit_text_area text_area_ss_form" ng-model="service.AdditionalAffidavitComments"></textarea>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <%--Assignments--%>
+    <div class="ss_array">
+
+        <h4 class="ss_form_title title_with_line  title_after_notes ">
+            <span class="title_index title_span">Assignments </span>
+            <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
+            &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="AddArrayItem(LegalCase.ForeclosureInfo.Assignments)" title="" data-original-title="Add"></i>
+           
+            <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="" data-original-title="Delete"></i>
+        </h4>
+
+        <div class="collapse_div">
+            <div ng-repeat="assignment in LegalCase.ForeclosureInfo.Assignments">
+                <div class="ss_form" ng-class="assignment.IsMortageHasAssignment?'edit_text_area ss_show_from':''">
+                    <h4 class="ss_form_title">Assignment {{$index + 1}} <i class="fa fa-times-circle icon_btn tooltip-examples" title="Delete" ng-click="DeleteItem(LegalCase.ForeclosureInfo.Assignments,$index)"></i></h4>
+
+                    <ul class="ss_form_box clearfix">
+                        <li class="ss_form_item">
+                            <label class="ss_form_input_title">Are there any assignments of mortgage?</label>
+                            <input type="radio" id="IsMortageHasAssignmentY{{$index}}" class="ss_form_input" ng-model="assignment.IsMortageHasAssignment" ng-value="true" radio-init="true">
+                            <label for="IsMortageHasAssignmentY{{$index}}" class="input_with_check ">
+                                <span class="box_text">Yes </span>
+                            </label>
+                            <input type="radio" id="IsMortageHasAssignmentN{{$index}}" class="ss_form_input" ng-model="assignment.IsMortageHasAssignment" ng-value="false">
+                            <label for="IsMortageHasAssignmentN{{$index}}" class="input_with_check ">
+                                <span class="box_text">No </span>
+                            </label>
+                        </li>
+                        <li class="ss_form_item" ng-show="assignment.IsMortageHasAssignment">
+                            <label class="ss_form_input_title">AssigneeName</label>
+                            <input class="ss_form_input " ng-model="assignment.AssigneeName" />
+                        </li>
+                        <li class="ss_form_item" ng-show="assignment.IsMortageHasAssignment">
+                            <label class="ss_form_input_title">Assignor Name</label>
+                            <input class="ss_form_input" ng-model="assignment.AssignorName" />
+                        </li>
+                        <li class="ss_form_item" ng-show="assignment.IsMortageHasAssignment">
+                            <label class="ss_form_input_title">Notary name</label>
+                            <select class="ss_form_input" ng-model="assignment.NotaryName" ng-options="o as o for o in ['Alan Feldman','John Medina','Robert Winckelmann']"></select>
+                        </li>
+                        <li class="ss_form_item" ng-show="assignment.IsMortageHasAssignment">
+                            <label class="ss_form_input_title">Who Executed Document</label>
+                            <select class="ss_form_input" ng-model="assignment.ExecutedDocPerson" ng-options="o as o for o in ['Alan Feldman','John Medina','Robert Winckelmann']"></select>
+                        </li>
+
+                        <li class="ss_form_item" ng-show="assignment.IsMortageHasAssignment">
+                            <label class="ss_form_input_title">Date</label>
+                            <input class="ss_form_input" ss-date="" ng-model="assignment.AssignmentDate" />
+                        </li>
+                        <li class="ss_form_item" ng-show="assignment.IsMortageHasAssignment">
+                            <label class="ss_form_input_title">CRFN number</label>
+                            <input class="ss_form_input" ng-model="CRFNNum" />
+                        </li>
+        </ul>
+                    <div>
+                        <ul class="ss_form_box clearfix">
+                            <li class="ss_form_item">
+                                <label class="ss_form_input_title">Are there any documents drafted by DOCX LLC ?</label>
+                                <input type="radio" id="HasDocDraftedByDOCXLLCY{{$index}}" class="ss_form_input" ng-model="assignment.HasDocDraftedByDOCXLLC" ng-value="true" radio-init="true">
+                                <label for="HasDocDraftedByDOCXLLCY{{$index}}" class="input_with_check ">
+                                    <span class="box_text">Yes </span>
+                                </label>
+                                <input type="radio" id="HasDocDraftedByDOCXLLCN{{$index}}" class="ss_form_input" ng-model="assignment.HasDocDraftedByDOCXLLC" ng-value="false">
+                                <label for="HasDocDraftedByDOCXLLCN{{$index}}" class="input_with_check ">
+                                    <span class="box_text">No </span>
+                                </label>
+                            </li>
+                            <li class="ss_form_item ss_form_item_line">
+                                <label class="ss_form_input_title">Additional Assignment Comments</label>
+                                <textarea class="edit_text_area text_area_ss_form" ng-model="service.AdditionalAssignmentComments"></textarea>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 
     <!--Answer -->
@@ -242,7 +441,7 @@
                 <label for="AccelerationLetterReviewN" class="input_with_check ">
                     <span class="box_text">No </span>
                 </label>
-            </li>
+                </li>
         </ul>
 
         <div ng-show="LegalCase.ForeclosureInfo.AccelerationLetterReview">

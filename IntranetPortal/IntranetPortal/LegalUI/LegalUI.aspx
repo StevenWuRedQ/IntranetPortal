@@ -879,7 +879,6 @@
                         alert("Fail to save data.");
                     });
 
-
             }
 
             $scope.AttorneyComplete = function () {
@@ -906,10 +905,29 @@
                 $http.post('LegalUI.aspx/GetCaseData', data).
                     success(function (data, status, headers, config) {
                         $scope.LegalCase = $.parseJSON(data.d);
+                        var arrays = ["AffidavitOfServices","Assignments"];
+                        for (a in arrays)
+                        {
+                            var porp = arrays[a]
+                            var array = $scope.LegalCase.ForeclosureInfo[porp];
+                            if (!array || array.length == 0)
+                            {
+                                $scope.LegalCase.ForeclosureInfo[porp] = [];
+                                $scope.LegalCase.ForeclosureInfo[porp].push({});
+                            }
+                            
+                        }
+
+                        
                     }).
                     error(function () {
-                        alert("Fail to load data.");
+                        alert("Fail to load data : " + BBLE);
                     });
+            }
+            /*return true it hight light check date  */
+            $scope.HighLightDate = function(date,comapteFunc)
+            {
+
             }
             $scope.AddSecondaryArray = function () {
 
@@ -952,7 +970,7 @@
                     return m == 'true'
                 }
                 return m;
-
+               
             }
             var hSummery = [{ "Value": "false", "Description": "Client Personally doesn't  Served", "Name": "ClientPersonallyServed" },
                             { "Value": "true", "Description": "Nail and Mail", "Name": "NailAndMail" },
@@ -980,7 +998,7 @@
                     if (h.Value == 'true' || h.Value == 'false') {
                         h.Value = h.Value == 'true';
                     }
-
+                   
                     if (foreclosureInfo[h.Name] == h.Value) {
                         //hSummery.push(h);
                         h.Visable = true;
@@ -994,8 +1012,10 @@
                 }
                 return hSummery;
             };
-            var CaseInfo = { Name: '', Address: '' }
-            $scope.GetCaseInfo = function () {
+           
+            var CaseInfo = {Name:'',Address:''}
+            $scope.GetCaseInfo = function()
+            {
                 var caseName = $scope.LegalCase.CaseName
                 if (caseName) {
                     CaseInfo.Address = caseName.replace(/-(?!.*-).*$/, '');
@@ -1003,6 +1023,15 @@
                     CaseInfo.Name = matched[0].replace('-', '')
                 }
                 return CaseInfo;
+            }
+            $scope.AddArrayItem = function(model)
+            {
+                model = model || [];
+                model.push({});
+            }
+            $scope.DeleteItem = function(model,index) 
+            {
+                model.splice(index, 1);
             }
             //$.getJSON('/LegalUI/ContactService.svc/GetAllContacts', function (data) {
 
