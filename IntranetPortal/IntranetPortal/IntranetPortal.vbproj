@@ -1846,6 +1846,7 @@
     <Content Include="EmailTemplate\TaskSummary.ascx" />
     <Content Include="EmailTemplate\ShortSaleActivityReport.aspx" />
     <Content Include="EmailTemplate\TeamActivityReport.aspx" />
+    <Content Include="favicon.ico" />
     <Content Include="images\1_down_picto.png" />
     <Content Include="images\accounting_icon.jpg" />
     <Content Include="images\add-button-hi.png" />
