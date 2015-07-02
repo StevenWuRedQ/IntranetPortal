@@ -24,7 +24,7 @@
                 <label for="WasEstateFormedY" class="input_with_check ">
                     <span class="box_text">Yes </span>
                 </label>
-                <input type="radio" id="WasEstateFormedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.WasEstateFormed" ng-value="false">
+                <input type="radio" id="WasEstateFormedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.WasEstateFormed" ng-value="false" radio-init defaultvalue="false">
                 <label for="WasEstateFormedN" class="input_with_check ">
                     <span class="box_text">No </span>
                 </label>
@@ -62,7 +62,7 @@
                     <label for="EveryOneInY" class="input_with_check ">
                         <span class="box_text">Yes </span>
                     </label>
-                    <input type="radio" id="EveryOneInN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EveryOneIn" ng-value="false">
+                    <input type="radio" id="EveryOneInN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EveryOneIn" ng-value="false" radio-init defaultvalue="false">
                     <label for="EveryOneInN" class="input_with_check ">
                         <span class="box_text">No </span>
                     </label>
@@ -115,7 +115,7 @@
                 <label for="BankruptcyDischargedY" class="input_with_check ">
                     <span class="box_text">Yes </span>
                 </label>
-                <input type="radio" id="BankruptcyDischargedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.BankruptcyDischarged" ng-value="false">
+                <input type="radio" id="BankruptcyDischargedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.BankruptcyDischarged" ng-value="false" radio-init defaultvalue="false">
                 <label for="BankruptcyDischargedN" class="input_with_check ">
                     <span class="box_text">No </span>
                 </label>
@@ -147,12 +147,12 @@
 
                         <li class="ss_form_item">
                             <label class="ss_form_input_title" ng-class="!service.ClientPersonallyServed?'ss_warning':''">Client Personally Served</label>
-                            <input type="radio" id="NailAndMailY{{$index}}" class="ss_form_input" ng-model="service.NailAndMail" ng-value="true" radio-init="true">
-                            <label for="NailAndMailY{{$index}}" class="input_with_check ">
+                            <input type="radio" id="ClientPersonallyServedY{{$index}}" class="ss_form_input" ng-model="service.ClientPersonallyServed" ng-value="true" defaultValue="true">
+                            <label for="ClientPersonallyServedY{{$index}}" class="input_with_check ">
                                 <span class="box_text">Yes </span>
                             </label>
-                            <input type="radio" id="NailAndMailN{{$index}}" class="ss_form_input" ng-model="service.NailAndMail" ng-value="false">
-                            <label for="NailAndMailN{{$index}}" class="input_with_check ">
+                            <input type="radio" id="ClientPersonallyServedN{{$index}}" class="ss_form_input" ng-model="service.ClientPersonallyServed" ng-value="false" radio-init defaultvalue="false">
+                            <label for="ClientPersonallyServedN{{$index}}" class="input_with_check ">
                                 <span class="box_text">No </span>
                             </label>
                         </li>
@@ -161,34 +161,34 @@
                                 Nail and Mail <span style="text-transform: none"><i class="fa fa-question-circle tooltip-examples icon-btn" title="Nial and Mail is when the S&C is literally taped to the front door of the address for service. 
 The courts no longer consider this proper service. "></i></span>
                             </label>
-                            <input type="radio" id="ClientPersonallyServedY{{$index}}" class="ss_form_input" ng-model="service.NailAndMail" ng-value="true" radio-init="true">
-                            <label for="ClientPersonallyServedY{{$index}}" class="input_with_check ">
+                            <input type="radio" id="NailAndMailY{{$index}}" class="ss_form_input" ng-model="service.NailAndMail" ng-value="true" defaultValue="true" defaultValue="true">
+                            <label for="NailAndMaiY{{$index}}" class="input_with_check ">
                                 <span class="box_text">Yes </span>
                             </label>
-                            <input type="radio" id="ClientPersonallyServedN{{$index}}" class="ss_form_input" ng-model="service.NailAndMail" ng-value="false">
-                            <label for="ClientPersonallyServedN{{$index}}" class="input_with_check ">
+                            <input type="radio" id="NailAndMaiN{{$index}}" class="ss_form_input" ng-model="service.NailAndMail" ng-value="false" radio-init defaultvalue="false">
+                            <label for="NailAndMaiN{{$index}}" class="input_with_check ">
                                 <span class="box_text">No </span>
                             </label>
                         </li>
 
                         <li class="ss_form_item">
                             <label class="ss_form_input_title" ng-class="!service.BorrowerLiveInAddrAtTimeServ?'ss_warning':''">Did Borrower live in service Address at time of Serv</label>
-                            <input type="radio" id="BorrowerLiveInAddrAtTimeServY{{$index}}" class="ss_form_input" ng-model="service.BorrowerLiveInAddrAtTimeServ" ng-value="true" radio-init="true">
+                            <input type="radio" id="BorrowerLiveInAddrAtTimeServY{{$index}}" class="ss_form_input" ng-model="service.BorrowerLiveInAddrAtTimeServ" ng-value="true" defaultValue="true">
                             <label for="BorrowerLiveInAddrAtTimeServY{{$index}}" class="input_with_check ">
                                 <span class="box_text">Yes </span>
                             </label>
-                            <input type="radio" id="BorrowerLiveInAddrAtTimeServN{{$index}}" class="ss_form_input" ng-model="service.BorrowerLiveInAddrAtTimeServ" ng-value="false">
+                            <input type="radio" id="BorrowerLiveInAddrAtTimeServN{{$index}}" class="ss_form_input" ng-model="service.BorrowerLiveInAddrAtTimeServ" ng-value="false" radio-init defaultvalue="false">
                             <label for="BorrowerLiveInAddrAtTimeServN{{$index}}" class="input_with_check ">
                                 <span class="box_text">No </span>
                             </label>
                         </li>
                         <li class="ss_form_item" ng-show="!service.BorrowerLiveInAddrAtTimeServ">
                             <label class="ss_form_input_title" ng-class="!service.BorrowerEverLiveHere?'ss_warning':''">If No, did borrower ever live in service address</label>
-                            <input type="radio" id="BorrowerEverLiveHereY{{$index}}" class="ss_form_input" ng-model="service.BorrowerEverLiveHere" ng-value="true" radio-init="true">
+                            <input type="radio" id="BorrowerEverLiveHereY{{$index}}" class="ss_form_input" ng-model="service.BorrowerEverLiveHere" ng-value="true" defaultValue="true">
                             <label for="BorrowerEverLiveHereY{{$index}}" class="input_with_check ">
                                 <span class="box_text">Yes </span>
                             </label>
-                            <input type="radio" id="BorrowerEverLiveHereN{{$index}}" class="ss_form_input" ng-model="service.BorrowerEverLiveHere" ng-value="false">
+                            <input type="radio" id="BorrowerEverLiveHereN{{$index}}" class="ss_form_input" ng-model="service.BorrowerEverLiveHere" ng-value="false" radio-init defaultvalue="false">
                             <label for="BorrowerEverLiveHereN{{$index}}" class="input_with_check ">
                                 <span class="box_text">No </span>
                             </label>
@@ -206,11 +206,11 @@ The courts no longer consider this proper service. "></i></span>
                     <ul class="ss_form_box clearfix">
                         <li class="ss_form_item">
                             <label class="ss_form_input_title" ng-class="service.IsServerHasNegativeInfo?'ss_warning':''">If not on list, did web search provide any negative information on process server</label>
-                            <input type="radio" id="IsServerHasNegativeInfoY{{$index}}" class="ss_form_input" ng-model="service.IsServerHasNegativeInfo" ng-value="true" radio-init="true">
+                            <input type="radio" id="IsServerHasNegativeInfoY{{$index}}" class="ss_form_input" ng-model="service.IsServerHasNegativeInfo" ng-value="true" defaultValue="true">
                             <label for="IsServerHasNegativeInfoY{{$index}}" class="input_with_check">
                                 <span class="box_text">Yes </span>
                             </label>
-                            <input type="radio" id="IsServerHasNegativeInfoN{{$index}}" class="ss_form_input" ng-model="service.IsServerHasNegativeInfo" ng-value="false">
+                            <input type="radio" id="IsServerHasNegativeInfoN{{$index}}" class="ss_form_input" ng-model="service.IsServerHasNegativeInfo" ng-value="false" radio-init defaultvalue="false">
                             <label for="IsServerHasNegativeInfoN{{$index}}" class="input_with_check ">
                                 <span class="box_text">No </span>
                             </label>
@@ -226,11 +226,11 @@ The courts no longer consider this proper service. "></i></span>
                     <ul class="ss_form_box clearfix">
                         <li class="ss_form_item">
                             <label class="ss_form_input_title" ng-class="service.AffidavitServiceFiledIn20Day?'ss_warning':''">Affidavit of service filed within 20 days of service <i class="f"></i></label>
-                            <input type="radio" id="AffidavitServiceFiledIn20DayY{{$index}}" class="ss_form_input" ng-model="service.AffidavitServiceFiledIn20Day" ng-value="true" radio-init="true">
+                            <input type="radio" id="AffidavitServiceFiledIn20DayY{{$index}}" class="ss_form_input" ng-model="service.AffidavitServiceFiledIn20Day" ng-value="true" defaultValue="true">
                             <label for="AffidavitServiceFiledIn20DayY{{$index}}" class="input_with_check">
                                 <span class="box_text">Yes </span>
                             </label>
-                            <input type="radio" id="AffidavitServiceFiledIn20DayN{{$index}}" class="ss_form_input" ng-model="service.AffidavitServiceFiledIn20Day" ng-value="false">
+                            <input type="radio" id="AffidavitServiceFiledIn20DayN{{$index}}" class="ss_form_input" ng-model="service.AffidavitServiceFiledIn20Day" ng-value="false" radio-init defaultvalue="false">
                             <label for="AffidavitServiceFiledIn20DayN{{$index}}" class="input_with_check ">
                                 <span class="box_text">No </span>
                             </label>
@@ -265,11 +265,11 @@ The courts no longer consider this proper service. "></i></span>
                     <ul class="ss_form_box clearfix">
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">Are there any assignments of mortgage?</label>
-                            <input type="radio" id="IsMortageHasAssignmentY{{$index}}" class="ss_form_input" ng-model="assignment.IsMortageHasAssignment" ng-value="true" radio-init="true">
+                            <input type="radio" id="IsMortageHasAssignmentY{{$index}}" class="ss_form_input" ng-model="assignment.IsMortageHasAssignment" ng-value="true" defaultValue="true">
                             <label for="IsMortageHasAssignmentY{{$index}}" class="input_with_check ">
                                 <span class="box_text">Yes </span>
                             </label>
-                            <input type="radio" id="IsMortageHasAssignmentN{{$index}}" class="ss_form_input" ng-model="assignment.IsMortageHasAssignment" ng-value="false">
+                            <input type="radio" id="IsMortageHasAssignmentN{{$index}}" class="ss_form_input" ng-model="assignment.IsMortageHasAssignment" ng-value="false" radio-init defaultvalue="false">
                             <label for="IsMortageHasAssignmentN{{$index}}" class="input_with_check ">
                                 <span class="box_text">No </span>
                             </label>
@@ -304,11 +304,11 @@ The courts no longer consider this proper service. "></i></span>
                         <ul class="ss_form_box clearfix">
                             <li class="ss_form_item">
                                 <label class="ss_form_input_title">Are there any documents drafted by DOCX LLC ?</label>
-                                <input type="radio" id="HasDocDraftedByDOCXLLCY{{$index}}" class="ss_form_input" ng-model="assignment.HasDocDraftedByDOCXLLC" ng-value="true" radio-init="true">
+                                <input type="radio" id="HasDocDraftedByDOCXLLCY{{$index}}" class="ss_form_input" ng-model="assignment.HasDocDraftedByDOCXLLC" ng-value="true" defaultValue="true">
                                 <label for="HasDocDraftedByDOCXLLCY{{$index}}" class="input_with_check ">
                                     <span class="box_text">Yes </span>
                                 </label>
-                                <input type="radio" id="HasDocDraftedByDOCXLLCN{{$index}}" class="ss_form_input" ng-model="assignment.HasDocDraftedByDOCXLLC" ng-value="false">
+                                <input type="radio" id="HasDocDraftedByDOCXLLCN{{$index}}" class="ss_form_input" ng-model="assignment.HasDocDraftedByDOCXLLC" ng-value="false" radio-init defaultvalue="false">
                                 <label for="HasDocDraftedByDOCXLLCN{{$index}}" class="input_with_check ">
                                     <span class="box_text">No </span>
                                 </label>
@@ -337,7 +337,7 @@ The courts no longer consider this proper service. "></i></span>
                 <label for="AnswerClientFiledBeforeY" class="input_with_check ">
                     <span class="box_text">Yes </span>
                 </label>
-                <input type="radio" id="AnswerClientFiledBeforeN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AnswerClientFiledBefore" ng-value="false">
+                <input type="radio" id="AnswerClientFiledBeforeN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AnswerClientFiledBefore" ng-value="false" radio-init defaultvalue="false">
                 <label for="AnswerClientFiledBeforeN" class="input_with_check ">
                     <span class="box_text">No </span>
                 </label>
@@ -366,7 +366,7 @@ The courts no longer consider this proper service. "></i></span>
                 <label for="NoteIsPossessY" class="input_with_check ">
                     <span class="box_text">Yes </span>
                 </label>
-                <input type="radio" id="NoteIsPossessN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteIsPossess" ng-value="false">
+                <input type="radio" id="NoteIsPossessN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteIsPossess" ng-value="false" radio-init defaultvalue="false">
                 <label for="NoteIsPossessN" class="input_with_check ">
                     <span class="box_text">No </span>
                 </label>
@@ -392,7 +392,7 @@ The courts no longer consider this proper service. "></i></span>
                     <label for="PlainTiffSameAsOriginalY" class="input_with_check ">
                         <span class="box_text">Yes </span>
                     </label>
-                    <input type="radio" id="PlainTiffSameAsOriginalN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlainTiffSameAsOriginal" ng-value="false">
+                    <input type="radio" id="PlainTiffSameAsOriginalN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlainTiffSameAsOriginal" ng-value="false" radio-init defaultvalue="false">
                     <label for="PlainTiffSameAsOriginalN" class="input_with_check ">
                         <span class="box_text">No </span>
                     </label>
@@ -403,7 +403,7 @@ The courts no longer consider this proper service. "></i></span>
                     <label for="NoteEndoresedY" class="input_with_check ">
                         <span class="box_text">Yes </span>
                     </label>
-                    <input type="radio" id="NoteEndoresedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteEndoresed" ng-value="false">
+                    <input type="radio" id="NoteEndoresedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteEndoresed" ng-value="false" radio-init defaultvalue="false">
                     <label for="NoteEndoresedN" class="input_with_check ">
                         <span class="box_text">No </span>
                     </label>
@@ -450,7 +450,7 @@ The courts no longer consider this proper service. "></i></span>
                 <label for="AccelerationLetterReviewY" class="input_with_check ">
                     <span class="box_text">Yes </span>
                 </label>
-                <input type="radio" id="AccelerationLetterReviewN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterReview" ng-value="false">
+                <input type="radio" id="AccelerationLetterReviewN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterReview" ng-value="false" radio-init defaultvalue="false">
                 <label for="AccelerationLetterReviewN" class="input_with_check ">
                     <span class="box_text">No </span>
                 </label>
@@ -494,7 +494,7 @@ The courts no longer consider this proper service. "></i></span>
                 <label for="StevenJAttnyY" class="input_with_check ">
                     <span class="box_text">Yes </span>
                 </label>
-                <input type="radio" id="StevenJAttnyN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.StevenJAttny" ng-value="false">
+                <input type="radio" id="StevenJAttnyN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.StevenJAttny" ng-value="false" radio-init defaultvalue="false">
                 <label for="StevenJAttnyN" class="input_with_check ">
                     <span class="box_text">No </span>
                 </label>
@@ -505,7 +505,7 @@ The courts no longer consider this proper service. "></i></span>
                 <label for="PlaintiffHaveAtCommencementY" class="input_with_check ">
                     <span class="box_text">Yes </span>
                 </label>
-                <input type="radio" id="PlaintiffHaveAtCommencementN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlaintiffHaveAtCommencement" ng-value="false">
+                <input type="radio" id="PlaintiffHaveAtCommencementN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlaintiffHaveAtCommencement" ng-value="false" radio-init defaultvalue="false">
                 <label for="PlaintiffHaveAtCommencementN" class="input_with_check ">
                     <span class="box_text">No </span>
                 </label>
@@ -524,7 +524,7 @@ The courts no longer consider this proper service. "></i></span>
                 <label for="ItemsRedactedY" class="input_with_check ">
                     <span class="box_text">Yes </span>
                 </label>
-                <input type="radio" id="ItemsRedactedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ItemsRedacted" ng-value="false">
+                <input type="radio" id="ItemsRedactedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ItemsRedacted" ng-value="false" radio-init defaultvalue="false">
                 <label for="ItemsRedactedN" class="input_with_check ">
                     <span class="box_text">No </span>
                 </label>
@@ -556,7 +556,7 @@ The courts no longer consider this proper service. "></i></span>
                 <label for="HAMPSubmittedY" class="input_with_check ">
                     <span class="box_text">Yes </span>
                 </label>
-                <input type="radio" id="HAMPSubmittedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.HAMPSubmitted" ng-value="false">
+                <input type="radio" id="HAMPSubmittedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.HAMPSubmitted" ng-value="false" radio-init defaultvalue="false">
                 <label for="HAMPSubmittedN" class="input_with_check ">
                     <span class="box_text">No </span>
                 </label>
