@@ -30,11 +30,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
     <script src="/Scripts/stevenjs.js"></script>
+    <script src="/Scripts/moment.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
-
+    <script src=""></script>
     <style type="text/css">
         .chipsdemoContactChips md-content.autocomplete {
             min-height: 250px;
@@ -558,6 +559,7 @@
             $(document).ready(function () { angular.element(document.getElementById('PortalCtrl')).scope().LoadLeadsCase(BBLE) })
         }
 
+
         var AllContact = <%= GetAllContact()%>
             function t() {
 
@@ -596,10 +598,7 @@
             return {
                 restrict: 'A',
                 link: function (scope, el, attrs) {
-
-                    console.log(attrs.ngModel);
-                    console.log(el.val);
-                    scope[attrs.ngModel] = scope[attrs.ngModel] == null ? el.val() : scope[attrs.ngModel];
+                    scope.$eval(attrs.ngModel + "=" + attrs.ngModel + "==null?"+ attrs.defaultvalue + ":" + attrs.ngModel);
                 }
             }
         });
@@ -970,7 +969,7 @@
                     return m == 'true'
                 }
                 return m;
-               
+
             }
             var hSummery = [{ "Value": "false", "Description": "Client Personally doesn't  Served", "Name": "ClientPersonallyServed" },
                             { "Value": "true", "Description": "Nail and Mail", "Name": "NailAndMail" },
@@ -998,7 +997,7 @@
                     if (h.Value == 'true' || h.Value == 'false') {
                         h.Value = h.Value == 'true';
                     }
-                   
+
                     if (foreclosureInfo[h.Name] == h.Value) {
                         //hSummery.push(h);
                         h.Visable = true;
@@ -1024,6 +1023,22 @@
                 }
                 return CaseInfo;
             }
+
+            $scope.isPassByDays = function (start, end, count) {
+                
+                return moment(end).subtract(count, 'days') > moment(start);
+            }
+            $scope.isPassOrEqualByDays = function (start, end, count) {
+                console.log(moment(end).subtract(count, 'days') > moment(start));
+                return moment(end).subtract(count, 'days') >= moment(start);
+            }
+            $scope.isPassByMonths = function(start, end, count) {
+                return moment(end).subtract(count, 'months') > moment(start);
+            }
+            $scope.isPassOrEqualByMonths = function(start, end, count) {
+                return moment(end).subtract(count, 'months') >= moment(start);
+            }
+
             $scope.AddArrayItem = function(model)
             {
                 model = model || [];
@@ -1037,6 +1052,7 @@
 
             //    $scope.selectBoxData = data;
             //});
+        
         });
 
     </script>
