@@ -44,8 +44,7 @@
         for (var win in fileWindows) {
             if (fileWindows.hasOwnProperty(win) && win == CaseId) {
                 var caseWin = fileWindows[win];
-                if (!caseWin.closed)
-                {
+                if (!caseWin.closed) {
                     caseWin.focus();
                     return;
                 }
@@ -519,16 +518,16 @@
                                                             <div style="cursor: pointer; width: 600px" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
                                                         </DataItemTemplate>
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="OwnerLastName" Caption="Name">
+                                                    <dx:GridViewDataTextColumn FieldName="OwnerFullName" Caption="Name">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="StatuStr" Caption="Status">
                                                     </dx:GridViewDataTextColumn>
-                                                   <dx:GridViewDataTextColumn FieldName="MortgageCategory" Caption="Category">
+                                                    <dx:GridViewDataTextColumn FieldName="MortgageCategory" Caption="Category">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
-                                                    </dx:GridViewDataTextColumn>                                                    
-                                                    <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1st Mort Prog">                                                        
-                                                    </dx:GridViewDataTextColumn>                                                   
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1st Mort Prog">
+                                                    </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="FristMortageLender" Caption="1st Mort Ser ">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="SencondMortageProgress" Caption="2nd Mort Prog">
@@ -560,6 +559,7 @@
                                                 <SettingsPager>
                                                     <PageSizeItemSettings Visible="true"></PageSizeItemSettings>
                                                 </SettingsPager>
+                                                <SettingsBehavior ColumnResizeMode="NextColumn" />
                                                 <SettingsPopup>
                                                     <HeaderFilter Height="200" />
                                                 </SettingsPopup>
@@ -575,9 +575,11 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="PropertyOwner.LastName" Caption="Last Name">
                                                     </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="StatuStr" Caption="Status">
+                                                    </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
                                                     </dx:GridViewDataTextColumn>
-                                                     <dx:GridViewDataTextColumn FieldName="MortgageCategory" Caption="Category">
+                                                    <dx:GridViewDataTextColumn FieldName="MortgageCategory" Caption="Category">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="File Progress">
                                                     </dx:GridViewDataTextColumn>
@@ -657,7 +659,7 @@
 
                                         <dx:ListEditItem Value="PropertyInfo.PropertyAddress" Text="Street address" Selected="True" />
 
-                                        <dx:ListEditItem Value="OwnerLastName" Text="Name" Selected="True" />
+                                        <dx:ListEditItem Value="OwnerFullName" Text="Name" Selected="True" />
                                         <dx:ListEditItem Value="StatuStr" Text="Status" Selected="True" />
                                         <dx:ListEditItem Value="MortgageCategory" Text="MortgageCategory" Selected="True" />
                                         <dx:ListEditItem Value="OccupiedBy" Text="Occupancy" />

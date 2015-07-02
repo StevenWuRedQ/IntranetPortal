@@ -35,7 +35,7 @@ Public Class ShortSalePage
                 Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
                 Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
                 BindCaseData2(bble)
-                ASPxSplitter1.Panes("listPanel").Collapsed = True
+                ASPxSplitter1.Panes("listPanel").Visible = False
                 contentSplitter.ClientVisible = True
 
                 If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
@@ -54,7 +54,7 @@ Public Class ShortSalePage
                     Dim bble = procInst.GetDataFieldValue("BBLE")
                     If Not String.IsNullOrEmpty(bble) Then
                         BindCaseData2(bble)
-                        ASPxSplitter1.Panes("listPanel").Collapsed = True
+                        ASPxSplitter1.Panes("listPanel").Visible = False
                         contentSplitter.ClientVisible = True
 
                         If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
@@ -72,7 +72,7 @@ Public Class ShortSalePage
                 hfBBLE.Value = bble
                 BindCaseData2(bble)
 
-                ASPxSplitter1.Panes("listPanel").Collapsed = True
+                ASPxSplitter1.Panes("listPanel").Visible = False
                 contentSplitter.ClientVisible = True
 
                 If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
@@ -90,7 +90,7 @@ Public Class ShortSalePage
                 End If
                 BindCaseData(caseId)
 
-                ASPxSplitter1.Panes("listPanel").Collapsed = True
+                ASPxSplitter1.Panes("listPanel").Visible = False
                 contentSplitter.ClientVisible = True
 
                 If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then

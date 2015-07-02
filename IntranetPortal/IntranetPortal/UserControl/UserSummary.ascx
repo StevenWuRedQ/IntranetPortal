@@ -582,6 +582,7 @@
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
                                             </GroupSummary>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
+                                            <SettingsPager NumericButtonCount="3" ></SettingsPager>
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
                                                 <RowHotTrack BackColor="#ff400d" ForeColor="White"></RowHotTrack>

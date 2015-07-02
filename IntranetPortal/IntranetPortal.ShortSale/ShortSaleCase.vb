@@ -243,6 +243,17 @@ Partial Public Class ShortSaleCase
         End Get
     End Property
 
+    Public ReadOnly Property OwnerFullName As String
+        Get
+            If PropertyInfo IsNot Nothing AndAlso PropertyInfo.Owners IsNot Nothing AndAlso PropertyInfo.Owners.Count > 0 Then
+                Dim owner = PropertyInfo.Owners(0)
+                Return owner.FirstName & " " & owner.LastName
+            End If
+
+            Return ""
+        End Get
+    End Property
+
     Public Property EvictionOwner As String
 
     Function GetMortageStauts(ByVal index As Integer) As String

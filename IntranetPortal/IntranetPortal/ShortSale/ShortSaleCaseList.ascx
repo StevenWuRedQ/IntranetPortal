@@ -61,7 +61,8 @@
         }
 
         if (e.item.index == 1) {
-            gridCase.GroupBy("MortgageStatus", 0);
+            gridCase.GroupBy("MortgageCategory", 0);
+            //gridCase.GroupBy("MortgageStatus", 1);
         }
 
         if (e.item.index == 2) {

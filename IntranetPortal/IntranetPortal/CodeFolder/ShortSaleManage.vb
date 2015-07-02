@@ -47,6 +47,28 @@ Public Class ShortSaleManage
                 mort.Save()
             End If
         End If
+
+        'Send user email 
+        Try
+            Dim intaker = Employee.GetInstance(ssCase.Owner)
+            If intaker IsNot Nothing Then
+                Dim ref = Employee.GetInstance(ssCase.ReferralContact.Name)
+                Dim ccEmail = ""
+                If ref IsNot Nothing Then
+                    ccEmail = ref.Email
+                End If
+
+                Dim maildata As New Dictionary(Of String, String)
+                maildata.Add("CaseName", ssCase.CaseName)
+                maildata.Add("UserName", intaker.Name)
+                maildata.Add("Referral", ref.Name)
+                maildata.Add("ItemLink", HttpContext.Current.Request.Url.Authority & "/ShortSale/ShortSale.aspx?CaseId=" & ssCase.CaseId)
+
+                Core.EmailService.SendMail(Employee.GetInstance(ssCase.Owner).Email, ccEmail, "ShortSaleNewCaseNotification", maildata)
+            End If
+        Catch ex As Exception
+            Core.SystemLog.LogError("New SS Case email notification", ex, HttpContext.Current.User.Identity.Name, bble)
+        End Try
     End Sub
 
     Public Shared Function UpdateCaseStatus(caseId As Integer, status As ShortSale.CaseStatus, createBy As String, objData As String) As Boolean
@@ -134,7 +156,7 @@ Public Class ShortSaleManage
         Using ctx As New Entities
             Dim bbles = ctx.Leads.Where(Function(l) l.Status = LeadStatus.InProcess AndAlso users.Contains(l.EmployeeName)).Select(Function(l) l.BBLE).ToList
             If Utility.IsAny(bbles) Then
-                Return ShortSale.ShortSaleCase.GetCaseByBBLEs(bbles)
+                Return ShortSale.ShortSaleCase.GetCaseByBBLEs(bbles).Where(Function(ss) ss.Status <> ShortSale.CaseStatus.NewFile).ToList
             End If
         End Using
 
@@ -197,7 +219,6 @@ Public Class ShortSaleManage
         Dim ld = LeadsInfo.GetInstance(bble)
         WorkflowService.StartTaskProcess("ShortSaleTask", "New Case - " & ld.StreetNameWithNo, task.TaskID, bble, names, "Normal")
     End Sub
-
 
     Public Shared Sub AssignCaseWithWF(bble As String, userName As String, createBy As String)
         If Not Roles.IsUserInRole(createBy, "ShortSale-Manager") Then
