@@ -102,7 +102,7 @@ Public Class ShortSalePage
 
 
             If Not String.IsNullOrEmpty(Request.QueryString("ShowList")) Then
-                ASPxSplitter1.Panes("listPanel").Collapsed = False
+                ASPxSplitter1.Panes("listPanel").Visible = True
 
                 If ShortSaleCaseData IsNot Nothing Then
                     ShortSaleCaseList.BindCaseList(ShortSaleCaseData.Status)

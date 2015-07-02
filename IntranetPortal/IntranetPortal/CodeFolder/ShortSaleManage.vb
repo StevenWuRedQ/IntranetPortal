@@ -67,7 +67,7 @@ Public Class ShortSaleManage
                 Core.EmailService.SendMail(Employee.GetInstance(ssCase.Owner).Email, ccEmail, "ShortSaleNewCaseNotification", maildata)
             End If
         Catch ex As Exception
-            Core.SystemLog.LogError("New SS Case email notification", ex, HttpContext.Current.User.Identity.Name, bble)
+            Core.SystemLog.LogError("New SS Case email notification", ex, Nothing, HttpContext.Current.User.Identity.Name, bble)
         End Try
     End Sub
 
@@ -252,19 +252,19 @@ Public Class ShortSaleManage
         End Select
     End Sub
 
-    Public Shared Property NewCaseProcess As ShortSaleProcess = ShortSaleProcess.NewInstance("New Case", "TestRole", Nothing,
+    Public Shared Property NewCaseProcess As ShortSaleProcess = ShortSaleProcess.NewInstance("New Case", "ShortSale-Manager", Nothing,
                                                       Nothing,
                                                       Sub(task)
                                                           NewCaseApproved(task.TaskData)
                                                       End Sub,
                                                       Nothing)
 
-    Public Shared Property ReassignProcess As ShortSaleProcess = ShortSaleProcess.NewInstance("Reassign Case Approval", "TestRole", Nothing, Nothing,
+    Public Shared Property ReassignProcess As ShortSaleProcess = ShortSaleProcess.NewInstance("Reassign Case Approval", "ShortSale-Manager", Nothing, Nothing,
                                                                                               Sub(task)
                                                                                                   AssignCase(task.BBLE, task.TaskData, task.CreateBy)
                                                                                               End Sub, Nothing)
 
-    Public Shared Property AssignProcess As ShortSaleProcess = ShortSaleProcess.NewInstance("Assign Case Approval", "TestRole", Nothing, Nothing,
+    Public Shared Property AssignProcess As ShortSaleProcess = ShortSaleProcess.NewInstance("Assign Case Approval", "ShortSale-Manager", Nothing, Nothing,
                                                                                             Sub(task As UserTask)
                                                                                                 Dim objData = JObject.Parse(task.TaskData)
                                                                                                 Dim typeofUpdate = objData("TypeofUpdate").ToString
@@ -289,7 +289,7 @@ Public Class ShortSaleManage
                                                                                             End Sub,
                                                                                             Nothing)
 
-    Public Shared Property ArchivedProcess As ShortSaleProcess = ShortSaleProcess.NewInstance("Case Archive Approval", "TestRole", Nothing, Nothing,
+    Public Shared Property ArchivedProcess As ShortSaleProcess = ShortSaleProcess.NewInstance("Case Archive Approval", "ShortSale-Manager", Nothing, Nothing,
                                                                                               Sub(task As UserTask)
                                                                                                   Dim ssCase = ShortSaleCase.GetCaseByBBLE(task.TaskData)
                                                                                                   ssCase.SaveStatus(CaseStatus.Archived)

@@ -52,17 +52,17 @@
             }
         }
     }
-       
+
     function OnSortMenuClick(s, e) {
         var icon = document.getElementById("btnSortIcon");
         if (e.item.index == 0) {
             gridCase.GroupBy("Owner", 0);
-
         }
 
         if (e.item.index == 1) {
-            gridCase.GroupBy("MortgageCategory", 0);
-            //gridCase.GroupBy("MortgageStatus", 1);
+
+            gridCase.GroupBy("Owner", 2);
+            //gridCase.GroupBy("MortgageCategory", 0);
         }
 
         if (e.item.index == 2) {
