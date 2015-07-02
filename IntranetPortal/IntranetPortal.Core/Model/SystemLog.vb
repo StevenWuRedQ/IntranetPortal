@@ -17,12 +17,12 @@ Partial Public Class SystemLog
         End Using
     End Sub
 
-    Public Shared Sub LogError(title As String, ex As Exception, createby As String, bble As String)
+    Public Shared Sub LogError(title As String, ex As Exception, url As String, createby As String, bble As String)
 
         If TypeOf ex Is ThreadAbortException Then
             Return
         End If
 
-        Log(title, String.Format("Error in Portal Application. Message:{0}, Stack: {1}", ex.Message, ex.StackTrace), "Error", bble, createby)
+        Log(title, String.Format("Error in Portal Application. Message:{0}, Request URL: {2}. Stack: {1}", ex.Message, ex.StackTrace, url), "Error", bble, createby)
     End Sub
 End Class

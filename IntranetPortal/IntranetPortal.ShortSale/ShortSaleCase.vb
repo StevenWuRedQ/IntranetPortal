@@ -663,8 +663,13 @@ Partial Public Class ShortSaleCase
                 Return allcases
             End If
 
+            'Dim result = (From ss In ctx.ShortSaleCases
+            '                 Join mort In ctx.PropertyMortgages On ss.CaseId Equals mort.CaseId
+            '                Where mort.Category = category And (ss.Owner = owner Or owner = Nothing) And Not nonActiveStatus.Contains(ss.Status)
+            '                 Select ss, mort.Status).Distinct.ToList
+
             Dim result = (From ss In ctx.ShortSaleCases
-                             Join mort In ctx.PropertyMortgages On ss.CaseId Equals mort.CaseId
+                          From mort In ctx.PropertyMortgages.Where(Function(m) m.CaseId = ss.CaseId).Take(1).DefaultIfEmpty
                             Where mort.Category = category And (ss.Owner = owner Or owner = Nothing) And Not nonActiveStatus.Contains(ss.Status)
                              Select ss, mort.Status).Distinct.ToList
 
