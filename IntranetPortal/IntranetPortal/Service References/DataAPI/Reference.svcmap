@@ -19,18 +19,18 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://office:8002/" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://server:8002/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item7.xsd" MetadataType="Schema" ID="1a415af7-d855-4b9a-a1e7-02a6862521ce" SourceId="1" SourceUrl="http://office:8002/?xsd=xsd3" />
-    <MetadataFile FileName="item71.xsd" MetadataType="Schema" ID="8f492c07-a7a1-42e2-915a-85a50b9d0661" SourceId="1" SourceUrl="http://office:8002/?xsd=xsd4" />
-    <MetadataFile FileName="item1.disco" MetadataType="Disco" ID="896513f8-e38c-4f9e-9d8b-a6217579f777" SourceId="1" SourceUrl="http://office:8002/?disco" />
-    <MetadataFile FileName="item72.xsd" MetadataType="Schema" ID="58cfe93f-6025-477e-ba12-d128dd04165d" SourceId="1" SourceUrl="http://office:8002/?xsd=xsd6" />
-    <MetadataFile FileName="item73.xsd" MetadataType="Schema" ID="315ade8f-583c-4d3a-a059-4395a5d882f4" SourceId="1" SourceUrl="http://office:8002/?xsd=xsd0" />
-    <MetadataFile FileName="item74.xsd" MetadataType="Schema" ID="eff7ec73-484c-4f43-8c7f-2a8df97eae0b" SourceId="1" SourceUrl="http://office:8002/?xsd=xsd5" />
-    <MetadataFile FileName="item75.xsd" MetadataType="Schema" ID="cfce1ce6-1036-4b5a-9a2d-42638238ec7a" SourceId="1" SourceUrl="http://office:8002/?xsd=xsd2" />
-    <MetadataFile FileName="item76.xsd" MetadataType="Schema" ID="a67c34f6-d1a5-41e1-bb8f-d80143d63416" SourceId="1" SourceUrl="http://office:8002/?xsd=xsd1" />
-    <MetadataFile FileName="WCFMacros1.wsdl" MetadataType="Wsdl" ID="83dce038-3c76-40c5-bb90-4ac9e7a26200" SourceId="1" SourceUrl="http://office:8002/?wsdl" />
+    <MetadataFile FileName="item7.xsd" MetadataType="Schema" ID="ad139257-61d9-48b2-9fc7-a8108e21f3d1" SourceId="1" SourceUrl="http://server:8002/?xsd=xsd2" />
+    <MetadataFile FileName="item8.xsd" MetadataType="Schema" ID="9b142213-f5d8-4f83-854f-203c65d511c5" SourceId="1" SourceUrl="http://server:8002/?xsd=xsd4" />
+    <MetadataFile FileName="item9.xsd" MetadataType="Schema" ID="0ef4cdca-f89a-4990-96b5-25ba21e19d67" SourceId="1" SourceUrl="http://server:8002/?xsd=xsd6" />
+    <MetadataFile FileName="item10.xsd" MetadataType="Schema" ID="289fdf66-9a6e-4080-86a3-03352e504dc4" SourceId="1" SourceUrl="http://server:8002/?xsd=xsd1" />
+    <MetadataFile FileName="item11.xsd" MetadataType="Schema" ID="5ec611f4-8ebd-4cdd-9372-9779806da687" SourceId="1" SourceUrl="http://server:8002/?xsd=xsd0" />
+    <MetadataFile FileName="item12.xsd" MetadataType="Schema" ID="7d058eb4-d718-4d03-882b-f9d25894e09a" SourceId="1" SourceUrl="http://server:8002/?xsd=xsd3" />
+    <MetadataFile FileName="item13.xsd" MetadataType="Schema" ID="cce5a936-23b7-404d-acbb-609cb4a547a7" SourceId="1" SourceUrl="http://server:8002/?xsd=xsd5" />
+    <MetadataFile FileName="item1.disco" MetadataType="Disco" ID="7726db09-ee2b-4fc1-92bf-2e15cd4c9926" SourceId="1" SourceUrl="http://server:8002/?disco" />
+    <MetadataFile FileName="WCFMacros1.wsdl" MetadataType="Wsdl" ID="e9aba879-9dcb-4a4a-9de9-4c6be658f90f" SourceId="1" SourceUrl="http://server:8002/?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

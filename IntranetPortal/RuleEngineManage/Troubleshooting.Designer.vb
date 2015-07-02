@@ -77,12 +77,17 @@ Partial Class Troubleshooting
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.txtSSBBLE = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.btnRemove = New System.Windows.Forms.Button()
-        Me.btnMove = New System.Windows.Forms.Button()
         Me.btnMoveStraight = New System.Windows.Forms.Button()
+        Me.btnMove = New System.Windows.Forms.Button()
+        Me.btnRemove = New System.Windows.Forms.Button()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.txtSSBBLE = New System.Windows.Forms.TextBox()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtGeoAddress = New System.Windows.Forms.TextBox()
+        Me.btnGeoBBLE = New System.Windows.Forms.Button()
+        Me.txtGeoBBLE = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -99,6 +104,8 @@ Partial Class Troubleshooting
         Me.Panel2.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.TabPage5.SuspendLayout()
+        Me.TabPage6.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -323,6 +330,7 @@ Partial Class Troubleshooting
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Controls.Add(Me.TabPage5)
+        Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 46)
         Me.TabControl1.Name = "TabControl1"
@@ -633,39 +641,14 @@ Partial Class Troubleshooting
         Me.TabPage5.Text = "ShortSale"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
-        'Button10
+        'btnMoveStraight
         '
-        Me.Button10.Location = New System.Drawing.Point(24, 15)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(138, 23)
-        Me.Button10.TabIndex = 0
-        Me.Button10.Text = "Set ShortSale Referral"
-        Me.Button10.UseVisualStyleBackColor = True
-        '
-        'txtSSBBLE
-        '
-        Me.txtSSBBLE.Location = New System.Drawing.Point(67, 66)
-        Me.txtSSBBLE.Name = "txtSSBBLE"
-        Me.txtSSBBLE.Size = New System.Drawing.Size(100, 20)
-        Me.txtSSBBLE.TabIndex = 1
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(24, 69)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(37, 13)
-        Me.Label11.TabIndex = 2
-        Me.Label11.Text = "BBLE:"
-        '
-        'btnRemove
-        '
-        Me.btnRemove.Location = New System.Drawing.Point(27, 101)
-        Me.btnRemove.Name = "btnRemove"
-        Me.btnRemove.Size = New System.Drawing.Size(75, 23)
-        Me.btnRemove.TabIndex = 3
-        Me.btnRemove.Text = "Remove"
-        Me.btnRemove.UseVisualStyleBackColor = True
+        Me.btnMoveStraight.Location = New System.Drawing.Point(210, 101)
+        Me.btnMoveStraight.Name = "btnMoveStraight"
+        Me.btnMoveStraight.Size = New System.Drawing.Size(111, 23)
+        Me.btnMoveStraight.TabIndex = 5
+        Me.btnMoveStraight.Text = "Move to Straight SS"
+        Me.btnMoveStraight.UseVisualStyleBackColor = True
         '
         'btnMove
         '
@@ -676,14 +659,85 @@ Partial Class Troubleshooting
         Me.btnMove.Text = "Move to Outside"
         Me.btnMove.UseVisualStyleBackColor = True
         '
-        'btnMoveStraight
+        'btnRemove
         '
-        Me.btnMoveStraight.Location = New System.Drawing.Point(210, 101)
-        Me.btnMoveStraight.Name = "btnMoveStraight"
-        Me.btnMoveStraight.Size = New System.Drawing.Size(111, 23)
-        Me.btnMoveStraight.TabIndex = 5
-        Me.btnMoveStraight.Text = "Move to Straight SS"
-        Me.btnMoveStraight.UseVisualStyleBackColor = True
+        Me.btnRemove.Location = New System.Drawing.Point(27, 101)
+        Me.btnRemove.Name = "btnRemove"
+        Me.btnRemove.Size = New System.Drawing.Size(75, 23)
+        Me.btnRemove.TabIndex = 3
+        Me.btnRemove.Text = "Remove"
+        Me.btnRemove.UseVisualStyleBackColor = True
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(24, 69)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(37, 13)
+        Me.Label11.TabIndex = 2
+        Me.Label11.Text = "BBLE:"
+        '
+        'txtSSBBLE
+        '
+        Me.txtSSBBLE.Location = New System.Drawing.Point(67, 66)
+        Me.txtSSBBLE.Name = "txtSSBBLE"
+        Me.txtSSBBLE.Size = New System.Drawing.Size(100, 20)
+        Me.txtSSBBLE.TabIndex = 1
+        '
+        'Button10
+        '
+        Me.Button10.Location = New System.Drawing.Point(24, 15)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(138, 23)
+        Me.Button10.TabIndex = 0
+        Me.Button10.Text = "Set ShortSale Referral"
+        Me.Button10.UseVisualStyleBackColor = True
+        '
+        'TabPage6
+        '
+        Me.TabPage6.Controls.Add(Me.GroupBox2)
+        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage6.Name = "TabPage6"
+        Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage6.Size = New System.Drawing.Size(558, 329)
+        Me.TabPage6.TabIndex = 6
+        Me.TabPage6.Text = "Data Service"
+        Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.txtGeoBBLE)
+        Me.GroupBox2.Controls.Add(Me.btnGeoBBLE)
+        Me.GroupBox2.Controls.Add(Me.txtGeoAddress)
+        Me.GroupBox2.Location = New System.Drawing.Point(8, 6)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(212, 111)
+        Me.GroupBox2.TabIndex = 0
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "GEO Address"
+        '
+        'txtGeoAddress
+        '
+        Me.txtGeoAddress.Location = New System.Drawing.Point(6, 19)
+        Me.txtGeoAddress.Name = "txtGeoAddress"
+        Me.txtGeoAddress.Size = New System.Drawing.Size(199, 20)
+        Me.txtGeoAddress.TabIndex = 0
+        '
+        'btnGeoBBLE
+        '
+        Me.btnGeoBBLE.Location = New System.Drawing.Point(57, 45)
+        Me.btnGeoBBLE.Name = "btnGeoBBLE"
+        Me.btnGeoBBLE.Size = New System.Drawing.Size(75, 23)
+        Me.btnGeoBBLE.TabIndex = 1
+        Me.btnGeoBBLE.Text = "Get BBLE"
+        Me.btnGeoBBLE.UseVisualStyleBackColor = True
+        '
+        'txtGeoBBLE
+        '
+        Me.txtGeoBBLE.Location = New System.Drawing.Point(6, 74)
+        Me.txtGeoBBLE.Name = "txtGeoBBLE"
+        Me.txtGeoBBLE.Size = New System.Drawing.Size(199, 20)
+        Me.txtGeoBBLE.TabIndex = 2
         '
         'Troubleshooting
         '
@@ -716,6 +770,9 @@ Partial Class Troubleshooting
         Me.TabPage4.PerformLayout()
         Me.TabPage5.ResumeLayout(False)
         Me.TabPage5.PerformLayout()
+        Me.TabPage6.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -780,4 +837,9 @@ Partial Class Troubleshooting
     Friend WithEvents btnMove As System.Windows.Forms.Button
     Friend WithEvents btnRemove As System.Windows.Forms.Button
     Friend WithEvents btnMoveStraight As System.Windows.Forms.Button
+    Friend WithEvents TabPage6 As System.Windows.Forms.TabPage
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtGeoAddress As System.Windows.Forms.TextBox
+    Friend WithEvents btnGeoBBLE As System.Windows.Forms.Button
+    Friend WithEvents txtGeoBBLE As System.Windows.Forms.TextBox
 End Class

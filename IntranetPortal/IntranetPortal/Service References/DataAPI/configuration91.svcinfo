@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="vOh+48qFI1Axq+JUSJU5cz2zMWc=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="ufk48a+Pc4C8JQVwCQ1/3paZOO0=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="WCFMacros_Http1">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="WCFMacros_Http" contract="DataAPI.IWCFMacros" bindingType="basicHttpBinding" address="http://office:8002/" bindingConfiguration="WCFMacros_Http1">
+    <endpoint name="WCFMacros_Http" contract="DataAPI.IWCFMacros" bindingType="basicHttpBinding" address="http://server:8002/" bindingConfiguration="WCFMacros_Http1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://office:8002/</serializedValue>
+          <serializedValue>http://server:8002/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

@@ -545,4 +545,8 @@ Public Class Troubleshooting
             MessageBox.Show("Error: " & ex.Message)
         End Try
     End Sub
+
+    Private Sub btnGeoBBLE_Click(sender As Object, e As EventArgs) Handles btnGeoBBLE.Click
+        txtGeoBBLE.Text = DataWCFService.GeoCode(txtGeoAddress.Text)
+    End Sub
 End Class

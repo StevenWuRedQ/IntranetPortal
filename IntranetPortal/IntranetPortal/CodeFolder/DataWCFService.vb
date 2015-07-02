@@ -1206,6 +1206,14 @@ Public Class DataWCFService
         End Using
     End Sub
 
+    Public Shared Function GeoCode(address As String) As String
+        Using client As New DataAPI.WCFMacrosClient
+
+            Dim result = client.DCPGeododerBySingleLine(address)
+            Return result
+        End Using
+    End Function
+
     Private Shared Function GetServiceClient()
         Return New DataAPI.WCFMacrosClient()
     End Function

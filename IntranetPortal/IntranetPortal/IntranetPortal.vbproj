@@ -237,10 +237,12 @@
     <Reference Include="Microsoft.AspNet.EntityDataSource">
       <HintPath>..\packages\Microsoft.AspNet.EntityDataSource.6.0.0\lib\net40\Microsoft.AspNet.EntityDataSource.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Core">
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.OData.Core">
@@ -252,13 +254,16 @@
     <Reference Include="Microsoft.Online.SharePoint.Client.Tenant">
       <HintPath>..\..\..\..\..\Documents\ProvisionO365PersonalSites-iSharePoint\Microsoft.Online.SharePoint.Client.Tenant.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security">
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Restier.Conventions">
@@ -299,7 +304,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Owin">
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="PortalTheme2">
@@ -3173,7 +3179,13 @@
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Patriot1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.SP_Is_TrigOn_BY_BBLE_Result1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.SP_NYC_Zoning_BY_BBLE_Result1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TaxLien_Info1.datasource">
@@ -3191,33 +3203,37 @@
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TranscriptAdjunction1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TriggerManager1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.UCC1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Service References\DataAPI\item10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item13.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\DataAPI\item7.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataAPI\item71.xsd">
+    <None Include="Service References\DataAPI\item8.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataAPI\item72.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataAPI\item73.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataAPI\item74.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataAPI\item75.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataAPI\item76.xsd">
+    <None Include="Service References\DataAPI\item9.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\DataAPI\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Service References\DataAPI\item1.disco" />
     <Content Include="ShortSale\SelectPartyUC.ascx" />

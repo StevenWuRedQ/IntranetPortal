@@ -47177,6 +47177,809 @@ Namespace DataAPI
         End Property
     End Class
     
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TriggerManager", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TriggerManager
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ActiveSubsField As System.Nullable(Of Boolean)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DidAcrisHadNewTranField As System.Nullable(Of Boolean)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ExecSQLField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LastAcrisTranCheckDateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LastUpdatedField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private NotifyEmailAddrField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private NotifyTypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private PersonNameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private PersonOrBbleField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ResponseObjField() As Byte
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ResponseObjTypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ResponseSequenceField As System.Nullable(Of Integer)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TrigThresholdDateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TriggerTypeField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ActiveSubs() As System.Nullable(Of Boolean)
+            Get
+                Return Me.ActiveSubsField
+            End Get
+            Set
+                Me.ActiveSubsField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DidAcrisHadNewTran() As System.Nullable(Of Boolean)
+            Get
+                Return Me.DidAcrisHadNewTranField
+            End Get
+            Set
+                Me.DidAcrisHadNewTranField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ExecSQL() As String
+            Get
+                Return Me.ExecSQLField
+            End Get
+            Set
+                Me.ExecSQLField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LastAcrisTranCheckDate() As System.Nullable(Of Date)
+            Get
+                Return Me.LastAcrisTranCheckDateField
+            End Get
+            Set
+                Me.LastAcrisTranCheckDateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LastUpdated() As System.Nullable(Of Date)
+            Get
+                Return Me.LastUpdatedField
+            End Get
+            Set
+                Me.LastUpdatedField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property NotifyEmailAddr() As String
+            Get
+                Return Me.NotifyEmailAddrField
+            End Get
+            Set
+                Me.NotifyEmailAddrField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property NotifyType() As String
+            Get
+                Return Me.NotifyTypeField
+            End Get
+            Set
+                Me.NotifyTypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property PersonName() As String
+            Get
+                Return Me.PersonNameField
+            End Get
+            Set
+                Me.PersonNameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property PersonOrBble() As String
+            Get
+                Return Me.PersonOrBbleField
+            End Get
+            Set
+                Me.PersonOrBbleField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ResponseObj() As Byte()
+            Get
+                Return Me.ResponseObjField
+            End Get
+            Set
+                Me.ResponseObjField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ResponseObjType() As String
+            Get
+                Return Me.ResponseObjTypeField
+            End Get
+            Set
+                Me.ResponseObjTypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ResponseSequence() As System.Nullable(Of Integer)
+            Get
+                Return Me.ResponseSequenceField
+            End Get
+            Set
+                Me.ResponseSequenceField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TrigThresholdDate() As System.Nullable(Of Date)
+            Get
+                Return Me.TrigThresholdDateField
+            End Get
+            Set
+                Me.TrigThresholdDateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TriggerType() As String
+            Get
+                Return Me.TriggerTypeField
+            End Get
+            Set
+                Me.TriggerTypeField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="SP_Is_TrigOn_BY_BBLE_Result", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class SP_Is_TrigOn_BY_BBLE_Result
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Check_dateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LatestTransField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private StatIDField As Decimal
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TrigOnField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Check_date() As System.Nullable(Of Date)
+            Get
+                Return Me.Check_dateField
+            End Get
+            Set
+                Me.Check_dateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LatestTrans() As System.Nullable(Of Date)
+            Get
+                Return Me.LatestTransField
+            End Get
+            Set
+                Me.LatestTransField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property StatID() As Decimal
+            Get
+                Return Me.StatIDField
+            End Get
+            Set
+                Me.StatIDField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TrigOn() As String
+            Get
+                Return Me.TrigOnField
+            End Get
+            Set
+                Me.TrigOnField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="SP_NYC_Zoning_BY_BBLE_Result", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class SP_NYC_Zoning_BY_BBLE_Result
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BLOCKField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BOROUGHField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Cf_Far_district_1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Cf_Far_district_2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Comm_Far_district_1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Comm_Far_district_2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Commercial_overlay_1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Commercial_overlay_2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Density_district_1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Density_district_2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Description_district_1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Description_district_2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LOTField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LastUpdatedField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Limited_height_districtField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Man_Far_district_1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Man_Far_district_2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Res_Far_Attic_district_1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Res_Far_Attic_district_2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Res_Far_district_1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Res_Far_district_2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Special_district_1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Special_district_2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Zoning_district_1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Zoning_district_2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Zoning_district_3Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Zoning_district_4Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Zoning_map_codeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Zoning_map_numberField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BLOCK() As String
+            Get
+                Return Me.BLOCKField
+            End Get
+            Set
+                Me.BLOCKField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BOROUGH() As String
+            Get
+                Return Me.BOROUGHField
+            End Get
+            Set
+                Me.BOROUGHField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Cf_Far_district_1() As String
+            Get
+                Return Me.Cf_Far_district_1Field
+            End Get
+            Set
+                Me.Cf_Far_district_1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Cf_Far_district_2() As String
+            Get
+                Return Me.Cf_Far_district_2Field
+            End Get
+            Set
+                Me.Cf_Far_district_2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Comm_Far_district_1() As String
+            Get
+                Return Me.Comm_Far_district_1Field
+            End Get
+            Set
+                Me.Comm_Far_district_1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Comm_Far_district_2() As String
+            Get
+                Return Me.Comm_Far_district_2Field
+            End Get
+            Set
+                Me.Comm_Far_district_2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Commercial_overlay_1() As String
+            Get
+                Return Me.Commercial_overlay_1Field
+            End Get
+            Set
+                Me.Commercial_overlay_1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Commercial_overlay_2() As String
+            Get
+                Return Me.Commercial_overlay_2Field
+            End Get
+            Set
+                Me.Commercial_overlay_2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Density_district_1() As String
+            Get
+                Return Me.Density_district_1Field
+            End Get
+            Set
+                Me.Density_district_1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Density_district_2() As String
+            Get
+                Return Me.Density_district_2Field
+            End Get
+            Set
+                Me.Density_district_2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Description_district_1() As String
+            Get
+                Return Me.Description_district_1Field
+            End Get
+            Set
+                Me.Description_district_1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Description_district_2() As String
+            Get
+                Return Me.Description_district_2Field
+            End Get
+            Set
+                Me.Description_district_2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LOT() As String
+            Get
+                Return Me.LOTField
+            End Get
+            Set
+                Me.LOTField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LastUpdated() As System.Nullable(Of Date)
+            Get
+                Return Me.LastUpdatedField
+            End Get
+            Set
+                Me.LastUpdatedField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Limited_height_district() As String
+            Get
+                Return Me.Limited_height_districtField
+            End Get
+            Set
+                Me.Limited_height_districtField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Man_Far_district_1() As String
+            Get
+                Return Me.Man_Far_district_1Field
+            End Get
+            Set
+                Me.Man_Far_district_1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Man_Far_district_2() As String
+            Get
+                Return Me.Man_Far_district_2Field
+            End Get
+            Set
+                Me.Man_Far_district_2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Res_Far_Attic_district_1() As String
+            Get
+                Return Me.Res_Far_Attic_district_1Field
+            End Get
+            Set
+                Me.Res_Far_Attic_district_1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Res_Far_Attic_district_2() As String
+            Get
+                Return Me.Res_Far_Attic_district_2Field
+            End Get
+            Set
+                Me.Res_Far_Attic_district_2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Res_Far_district_1() As String
+            Get
+                Return Me.Res_Far_district_1Field
+            End Get
+            Set
+                Me.Res_Far_district_1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Res_Far_district_2() As String
+            Get
+                Return Me.Res_Far_district_2Field
+            End Get
+            Set
+                Me.Res_Far_district_2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Special_district_1() As String
+            Get
+                Return Me.Special_district_1Field
+            End Get
+            Set
+                Me.Special_district_1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Special_district_2() As String
+            Get
+                Return Me.Special_district_2Field
+            End Get
+            Set
+                Me.Special_district_2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Zoning_district_1() As String
+            Get
+                Return Me.Zoning_district_1Field
+            End Get
+            Set
+                Me.Zoning_district_1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Zoning_district_2() As String
+            Get
+                Return Me.Zoning_district_2Field
+            End Get
+            Set
+                Me.Zoning_district_2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Zoning_district_3() As String
+            Get
+                Return Me.Zoning_district_3Field
+            End Get
+            Set
+                Me.Zoning_district_3Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Zoning_district_4() As String
+            Get
+                Return Me.Zoning_district_4Field
+            End Get
+            Set
+                Me.Zoning_district_4Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Zoning_map_code() As String
+            Get
+                Return Me.Zoning_map_codeField
+            End Get
+            Set
+                Me.Zoning_map_codeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Zoning_map_number() As String
+            Get
+                Return Me.Zoning_map_numberField
+            End Get
+            Set
+                Me.Zoning_map_numberField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="GeoAddress", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class GeoAddress
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BOROUGHField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private HOUSE_NUMBField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private STATEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ST_NAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ZIPField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BOROUGH() As String
+            Get
+                Return Me.BOROUGHField
+            End Get
+            Set
+                Me.BOROUGHField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property HOUSE_NUMB() As String
+            Get
+                Return Me.HOUSE_NUMBField
+            End Get
+            Set
+                Me.HOUSE_NUMBField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property STATE() As String
+            Get
+                Return Me.STATEField
+            End Get
+            Set
+                Me.STATEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ST_NAME() As String
+            Get
+                Return Me.ST_NAMEField
+            End Get
+            Set
+                Me.ST_NAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ZIP() As String
+            Get
+                Return Me.ZIPField
+            End Get
+            Set
+                Me.ZIPField = value
+            End Set
+        End Property
+    End Class
+    
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
      System.ServiceModel.ServiceContractAttribute(ConfigurationName:="DataAPI.IWCFMacros")>  _
     Public Interface IWCFMacros
@@ -47390,6 +48193,54 @@ Namespace DataAPI
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_NYC_TaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/Get_NYC_TaxLienResponse")>  _
         Function Get_NYC_TaxLienAsync(ByVal BBLE As String, ByVal YEAR As String) As System.Threading.Tasks.Task(Of DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result())
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Create_Subscription", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Create_SubscriptionResponse")>  _
+        Function Trig_Create_Subscription(ByVal BBLE As String, ByVal PersonName As String, ByVal PersonOrBBLE As String, ByVal SubscriptionActive As Boolean, ByVal SubscriptionFor As String, ByVal TrigThresholdDate As String, ByVal NotificationType As String, ByVal NotificationEmail As String) As Integer
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Create_Subscription", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Create_SubscriptionResponse")>  _
+        Function Trig_Create_SubscriptionAsync(ByVal BBLE As String, ByVal PersonName As String, ByVal PersonOrBBLE As String, ByVal SubscriptionActive As Boolean, ByVal SubscriptionFor As String, ByVal TrigThresholdDate As String, ByVal NotificationType As String, ByVal NotificationEmail As String) As System.Threading.Tasks.Task(Of Integer)
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Delete_Subscription", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Delete_SubscriptionResponse")>  _
+        Function Trig_Delete_Subscription(ByVal BBLE As String, ByVal SubscriptionFor As String) As Integer
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Delete_Subscription", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Delete_SubscriptionResponse")>  _
+        Function Trig_Delete_SubscriptionAsync(ByVal BBLE As String, ByVal SubscriptionFor As String) As System.Threading.Tasks.Task(Of Integer)
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Activate_Deactivate_Subscription", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Activate_Deactivate_SubscriptionResponse")>  _
+        Function Trig_Activate_Deactivate_Subscription(ByVal BBLE As String, ByVal ActiveDeactive As Boolean, ByVal SubscriptionFor As String) As Integer
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Activate_Deactivate_Subscription", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Activate_Deactivate_SubscriptionResponse")>  _
+        Function Trig_Activate_Deactivate_SubscriptionAsync(ByVal BBLE As String, ByVal ActiveDeactive As Boolean, ByVal SubscriptionFor As String) As System.Threading.Tasks.Task(Of Integer)
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Get_Subscriptions_List", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Get_Subscriptions_ListResponse")>  _
+        Function Trig_Get_Subscriptions_List() As DataAPI.TriggerManager()
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Get_Subscriptions_List", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Get_Subscriptions_ListResponse")>  _
+        Function Trig_Get_Subscriptions_ListAsync() As System.Threading.Tasks.Task(Of DataAPI.TriggerManager())
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Is_TrigOn_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Is_TrigOn_By_BBLEResponse")>  _
+        Function Trig_Is_TrigOn_By_BBLE(ByVal BBLE As String) As DataAPI.SP_Is_TrigOn_BY_BBLE_Result()
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Is_TrigOn_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Is_TrigOn_By_BBLEResponse")>  _
+        Function Trig_Is_TrigOn_By_BBLEAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.SP_Is_TrigOn_BY_BBLE_Result())
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Zoning_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Zoning_By_BBLEResponse")>  _
+        Function NYC_Zoning_By_BBLE(ByVal BBLE As String) As DataAPI.SP_NYC_Zoning_BY_BBLE_Result()
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Zoning_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Zoning_By_BBLEResponse")>  _
+        Function NYC_Zoning_By_BBLEAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.SP_NYC_Zoning_BY_BBLE_Result())
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DCPGeododerBySingleLine", ReplyAction:="http://tempuri.org/IWCFMacros/DCPGeododerBySingleLineResponse")>  _
+        Function DCPGeododerBySingleLine(ByVal Address As String) As String
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DCPGeododerBySingleLine", ReplyAction:="http://tempuri.org/IWCFMacros/DCPGeododerBySingleLineResponse")>  _
+        Function DCPGeododerBySingleLineAsync(ByVal Address As String) As System.Threading.Tasks.Task(Of String)
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DCPGeododerByAddress", ReplyAction:="http://tempuri.org/IWCFMacros/DCPGeododerByAddressResponse")>  _
+        Function DCPGeododerByAddress(ByVal Address As DataAPI.GeoAddress) As String
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DCPGeododerByAddress", ReplyAction:="http://tempuri.org/IWCFMacros/DCPGeododerByAddressResponse")>  _
+        Function DCPGeododerByAddressAsync(ByVal Address As DataAPI.GeoAddress) As System.Threading.Tasks.Task(Of String)
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -47701,6 +48552,70 @@ Namespace DataAPI
         
         Public Function Get_NYC_TaxLienAsync(ByVal BBLE As String, ByVal YEAR As String) As System.Threading.Tasks.Task(Of DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result()) Implements DataAPI.IWCFMacros.Get_NYC_TaxLienAsync
             Return MyBase.Channel.Get_NYC_TaxLienAsync(BBLE, YEAR)
+        End Function
+        
+        Public Function Trig_Create_Subscription(ByVal BBLE As String, ByVal PersonName As String, ByVal PersonOrBBLE As String, ByVal SubscriptionActive As Boolean, ByVal SubscriptionFor As String, ByVal TrigThresholdDate As String, ByVal NotificationType As String, ByVal NotificationEmail As String) As Integer Implements DataAPI.IWCFMacros.Trig_Create_Subscription
+            Return MyBase.Channel.Trig_Create_Subscription(BBLE, PersonName, PersonOrBBLE, SubscriptionActive, SubscriptionFor, TrigThresholdDate, NotificationType, NotificationEmail)
+        End Function
+        
+        Public Function Trig_Create_SubscriptionAsync(ByVal BBLE As String, ByVal PersonName As String, ByVal PersonOrBBLE As String, ByVal SubscriptionActive As Boolean, ByVal SubscriptionFor As String, ByVal TrigThresholdDate As String, ByVal NotificationType As String, ByVal NotificationEmail As String) As System.Threading.Tasks.Task(Of Integer) Implements DataAPI.IWCFMacros.Trig_Create_SubscriptionAsync
+            Return MyBase.Channel.Trig_Create_SubscriptionAsync(BBLE, PersonName, PersonOrBBLE, SubscriptionActive, SubscriptionFor, TrigThresholdDate, NotificationType, NotificationEmail)
+        End Function
+        
+        Public Function Trig_Delete_Subscription(ByVal BBLE As String, ByVal SubscriptionFor As String) As Integer Implements DataAPI.IWCFMacros.Trig_Delete_Subscription
+            Return MyBase.Channel.Trig_Delete_Subscription(BBLE, SubscriptionFor)
+        End Function
+        
+        Public Function Trig_Delete_SubscriptionAsync(ByVal BBLE As String, ByVal SubscriptionFor As String) As System.Threading.Tasks.Task(Of Integer) Implements DataAPI.IWCFMacros.Trig_Delete_SubscriptionAsync
+            Return MyBase.Channel.Trig_Delete_SubscriptionAsync(BBLE, SubscriptionFor)
+        End Function
+        
+        Public Function Trig_Activate_Deactivate_Subscription(ByVal BBLE As String, ByVal ActiveDeactive As Boolean, ByVal SubscriptionFor As String) As Integer Implements DataAPI.IWCFMacros.Trig_Activate_Deactivate_Subscription
+            Return MyBase.Channel.Trig_Activate_Deactivate_Subscription(BBLE, ActiveDeactive, SubscriptionFor)
+        End Function
+        
+        Public Function Trig_Activate_Deactivate_SubscriptionAsync(ByVal BBLE As String, ByVal ActiveDeactive As Boolean, ByVal SubscriptionFor As String) As System.Threading.Tasks.Task(Of Integer) Implements DataAPI.IWCFMacros.Trig_Activate_Deactivate_SubscriptionAsync
+            Return MyBase.Channel.Trig_Activate_Deactivate_SubscriptionAsync(BBLE, ActiveDeactive, SubscriptionFor)
+        End Function
+        
+        Public Function Trig_Get_Subscriptions_List() As DataAPI.TriggerManager() Implements DataAPI.IWCFMacros.Trig_Get_Subscriptions_List
+            Return MyBase.Channel.Trig_Get_Subscriptions_List
+        End Function
+        
+        Public Function Trig_Get_Subscriptions_ListAsync() As System.Threading.Tasks.Task(Of DataAPI.TriggerManager()) Implements DataAPI.IWCFMacros.Trig_Get_Subscriptions_ListAsync
+            Return MyBase.Channel.Trig_Get_Subscriptions_ListAsync
+        End Function
+        
+        Public Function Trig_Is_TrigOn_By_BBLE(ByVal BBLE As String) As DataAPI.SP_Is_TrigOn_BY_BBLE_Result() Implements DataAPI.IWCFMacros.Trig_Is_TrigOn_By_BBLE
+            Return MyBase.Channel.Trig_Is_TrigOn_By_BBLE(BBLE)
+        End Function
+        
+        Public Function Trig_Is_TrigOn_By_BBLEAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.SP_Is_TrigOn_BY_BBLE_Result()) Implements DataAPI.IWCFMacros.Trig_Is_TrigOn_By_BBLEAsync
+            Return MyBase.Channel.Trig_Is_TrigOn_By_BBLEAsync(BBLE)
+        End Function
+        
+        Public Function NYC_Zoning_By_BBLE(ByVal BBLE As String) As DataAPI.SP_NYC_Zoning_BY_BBLE_Result() Implements DataAPI.IWCFMacros.NYC_Zoning_By_BBLE
+            Return MyBase.Channel.NYC_Zoning_By_BBLE(BBLE)
+        End Function
+        
+        Public Function NYC_Zoning_By_BBLEAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.SP_NYC_Zoning_BY_BBLE_Result()) Implements DataAPI.IWCFMacros.NYC_Zoning_By_BBLEAsync
+            Return MyBase.Channel.NYC_Zoning_By_BBLEAsync(BBLE)
+        End Function
+        
+        Public Function DCPGeododerBySingleLine(ByVal Address As String) As String Implements DataAPI.IWCFMacros.DCPGeododerBySingleLine
+            Return MyBase.Channel.DCPGeododerBySingleLine(Address)
+        End Function
+        
+        Public Function DCPGeododerBySingleLineAsync(ByVal Address As String) As System.Threading.Tasks.Task(Of String) Implements DataAPI.IWCFMacros.DCPGeododerBySingleLineAsync
+            Return MyBase.Channel.DCPGeododerBySingleLineAsync(Address)
+        End Function
+        
+        Public Function DCPGeododerByAddress(ByVal Address As DataAPI.GeoAddress) As String Implements DataAPI.IWCFMacros.DCPGeododerByAddress
+            Return MyBase.Channel.DCPGeododerByAddress(Address)
+        End Function
+        
+        Public Function DCPGeododerByAddressAsync(ByVal Address As DataAPI.GeoAddress) As System.Threading.Tasks.Task(Of String) Implements DataAPI.IWCFMacros.DCPGeododerByAddressAsync
+            Return MyBase.Channel.DCPGeododerByAddressAsync(Address)
         End Function
     End Class
 End Namespace
