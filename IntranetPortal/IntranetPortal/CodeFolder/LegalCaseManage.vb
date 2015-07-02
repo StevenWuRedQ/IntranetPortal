@@ -21,7 +21,7 @@ Public Class LegalCaseManage
         data.Add("CreateBy", createBy)
         data.Add("UpdateDate", DateTime.Now)
         data.Add("UpdateBy", createBy)
-
+        data.Add("CaseName", lc.CaseName)
         'data.PropertyInfo.Lot = li.Lot
         lc.CaseData = data.ToString
         lc.Status = Legal.LegalCaseStatus.ManagerPreview

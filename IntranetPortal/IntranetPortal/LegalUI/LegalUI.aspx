@@ -985,6 +985,18 @@
                 }
                 return hSummery;
             };
+            var CaseInfo = {Name:'',Address:''}
+            $scope.GetCaseInfo = function()
+            {
+                var caseName = $scope.LegalCase.CaseName
+                if (caseName)
+                {
+                    CaseInfo.Address = caseName.replace(/-(?!.*-).*$/, '');
+                    var matched = caseName.match(/-(?!.*-).*$/);
+                    CaseInfo.Name = matched[0].replace('-','')
+                }
+                return CaseInfo;
+            }
             //$.getJSON('/LegalUI/ContactService.svc/GetAllContacts', function (data) {
 
             //    $scope.selectBoxData = data;

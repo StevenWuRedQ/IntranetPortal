@@ -127,8 +127,9 @@
             <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
                 <div style="font-size: 30px">
                     <span>
-                        <i class="fa fa-refresh"></i>
-                        <span style="margin-left: 19px;">{{LegalCase.UpdateDate|date:'medium'}}</span>
+                        <i class="fa fa-home"></i>
+                           
+                        <span style="margin-left: 19px;">{{GetCaseInfo().Address}}&nbsp;</span>
                     </span>
                     <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
                     <span class="time_buttons" onclick="ShowDOBWindow(GetLegalData().PropertyInfo.Borough,GetLegalData().PropertyInfo.Block, GetLegalData().PropertyInfo.Lot)">DOB</span>
@@ -138,7 +139,7 @@
                     <span class="time_buttons" onclick="" runat="server" visible="false" id="btnAssignAttorney">Assign Attorney</span>
                     <span class="time_buttons" onclick="$('#RequestModal').modal()" style="display: none">Request Document</span>
                 </div>
-                <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; visibility: visible">Started on {{LegalCase.CreateDate|date:'medium'}}</span>
+                <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; visibility: visible">{{GetCaseInfo().Name}}</span>
             </div>
 
             <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
