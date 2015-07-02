@@ -592,6 +592,18 @@
             };
         });
 
+        portalApp.directive('radioInit', function () {
+            return {
+                restrict: 'A',
+                link: function (scope, el, attrs) {
+
+                    console.log(attrs.ngModel);
+                    console.log(el.val);
+                    scope[attrs.ngModel] = scope[attrs.ngModel] == null ? el.val() : scope[attrs.ngModel];
+                }
+            }
+        });
+
         portalApp.directive('maskMoney', function () {
             return {
                 restrict: 'A',
@@ -940,7 +952,7 @@
                     return m == 'true'
                 }
                 return m;
-               
+
             }
             var hSummery = [{ "Value": "false", "Description": "Client Personally doesn't  Served", "Name": "ClientPersonallyServed" },
                             { "Value": "true", "Description": "Nail and Mail", "Name": "NailAndMail" },
@@ -965,35 +977,30 @@
                 var foreclosureInfo = $scope.LegalCase.ForeclosureInfo;
                 for (i = 0; i < highLight.length; i++) {
                     var h = highLight[i];
-                    if (h.Value == 'true' || h.Value == 'false')
-                    {
-                        h.Value = h.Value=='true';
+                    if (h.Value == 'true' || h.Value == 'false') {
+                        h.Value = h.Value == 'true';
                     }
-                   
+
                     if (foreclosureInfo[h.Name] == h.Value) {
                         //hSummery.push(h);
                         h.Visable = true;
-                    }else
-                    {
+                    } else {
                         h.Visable = false;
                     }
 
-                    if(foreclosureInfo[h.Name]==null && h.Value==false)
-                    {
+                    if (foreclosureInfo[h.Name] == null && h.Value == false) {
                         h.Visable = true;
                     }
                 }
                 return hSummery;
             };
-            var CaseInfo = {Name:'',Address:''}
-            $scope.GetCaseInfo = function()
-            {
+            var CaseInfo = { Name: '', Address: '' }
+            $scope.GetCaseInfo = function () {
                 var caseName = $scope.LegalCase.CaseName
-                if (caseName)
-                {
+                if (caseName) {
                     CaseInfo.Address = caseName.replace(/-(?!.*-).*$/, '');
                     var matched = caseName.match(/-(?!.*-).*$/);
-                    CaseInfo.Name = matched[0].replace('-','')
+                    CaseInfo.Name = matched[0].replace('-', '')
                 }
                 return CaseInfo;
             }
