@@ -42,7 +42,7 @@
         ShortSaleCaseData = $.parseJSON(e.result);
         clearArray(ShortSaleCaseData.Mortgages);
         clearArray(ShortSaleCaseData.PropertyInfo.Owners);
-        
+
         ShortSaleDataBand(2);
     }
 
@@ -145,29 +145,32 @@
 
                 <div class="note_item" style="background: white">
 
-                    <table style="width: 100%" class="table-striped">
-                        <tbody>
-                            <tr ng-show="LegalCase.Description!=null">
-                                <td style="width: 20px">
-                                    <i class="fa fa-exclamation-circle note_img"></i>
-                                </td>
-                                <td>
-                                    <div class="note_text">Agent description : {{LegalCase.Description}}</div>
-                                </td>
+                    <div style="overflow: auto; height: 100px">
+                        <table style="width: 100%;" class="table-striped">
+                            <tbody>
+                                <tr ng-show="LegalCase.Description!=null">
+                                    <td style="width: 20px">
+                                        <i class="fa fa-exclamation-circle note_img"></i>
+                                    </td>
+                                    <td>
+                                        <div class="note_text">Agent description : {{LegalCase.Description}}</div>
+                                    </td>
 
-                            </tr>
-                             <tr ng-repeat="n in HightSummery() | filter:{Visable:true}">
-                                <td style="width: 30px">
-                                    <i class="fa fa-exclamation-circle note_img"></i>
-                                </td>
-                                <td>
-                                    <div class="note_text"> {{n.Description}}</div>
-                                </td>
+                                </tr>
+                                <tr ng-repeat="n in HightSummery() | filter:{Visable:true}">
+                                    <td style="width: 30px">
+                                        <i class="fa fa-exclamation-circle note_img"></i>
+                                    </td>
+                                    <td>
+                                        <div class="note_text">{{n.Description}}</div>
+                                    </td>
 
-                            </tr>
-                            
-                        </tbody>
-                    </table>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
 
                     <i class="fa fa-plus-circle note_img tooltip-examples" title="" style="color: #3993c1; display: none; cursor: pointer" onclick="aspxAddLeadsComments.ShowAtElement(this)" data-original-title="Add Notes"></i>
                 </div>
@@ -193,7 +196,7 @@
                     <div class="tab-pane active" id="Summary">
                         <uc1:LegalSummaryTab runat="server" ID="LegalSummaryTab" />
                     </div>
-                    <div class="tab-pane " id="Foreclosure_Review">
+                    <div class="tab-pane " id="Foreclosure_Review" style="height: 580px; overflow: auto">
 
                         <uc1:LegalForeclosureReviewTab runat="server" ID="LegalForeclosureReviewTab" />
 
