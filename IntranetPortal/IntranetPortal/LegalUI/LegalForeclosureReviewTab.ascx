@@ -13,137 +13,206 @@
         </div>
     </div>
 
+
     <div>
-        <h4 class="ss_form_title">Property</h4>
-
-        <ul class="ss_form_box clearfix">
+        <!-- Estate Pending -->
+        <h4 class="ss_form_title">Estate Pending</h4>
+        <ul>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Street Number</label>
-                <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.Number">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Street Name</label>
-                <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.StreetName">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">City</label>
-                <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.NeighName">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">State</label>
-                <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.State">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Zip</label>
-                <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.ZipCode">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">&nbsp;</label>
-                <input class="ss_form_input ss_form_hidden">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">BLOCK</label>
-                <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.Block">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Lot</label>
-                <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.Lot">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Building type</label>
-                <select class="ss_form_input" ng-model="LegalCase.PropertyInfo.BuildingType">
-                    <option value="House">House</option>
-                    <option value="Apartment">Apartment</option>
-                    <option value="Condo">Condo</option>
-                    <option value="Cottage/cabin">Cottage/cabin</option>
-                    <option value="Duplex">Duplex</option>
-                    <option value="Flat">Flat</option>
-                    <option value="In-Law">In-Law</option>
-                    <option value="Loft">Loft</option>
-                    <option value="Townhouse">Townhouse</option>
-                    <option value="Manufactured">Manufactured</option>
-                    <option value="Assisted living">Assisted living</option>
-                    <option value="Land">Land</option>
-                </select>
-
-            </li>
-
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Borrower</label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.BorrowerId')">
-                </div>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Co-Borrower</label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.CoBorrowerId')">
-                </div>
-            </li>
-
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">&nbsp;</label>
-                <input class="ss_form_input ss_form_hidden" value=" ">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Language</label>
-                <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.Language">
-
-                    <option value="English">English</option>
-                    <option value="Spanish">Spanish</option>
-                    <option value="Chinese">Chinese</option>
-                </select>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Mental Capacity </label>
-                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.MentalCapacity">
-            </li>
-
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">&nbsp;</label>
-                <input class="ss_form_input ss_form_hidden" value=" ">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Divorce</label>
-                <input type="checkbox" class="ss_form_input" data-field="PropertyInfo.CO" data-radio="Y" id="DivorceCheck" ng-model="LegalCase.ForeclosureInfo.Divorce">
-                <label for="DivorceCheck" class="input_with_check">
-                    <span class="box_text">Yes</span>
+                <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.WasEstateFormed?'ss_warning':''">Was Estate formed? </label>
+                <input type="radio" id="WasEstateFormedY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.WasEstateFormed" ng-value="true">
+                <label for="WasEstateFormedY" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+                <input type="radio" id="WasEstateFormedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.WasEstateFormed" ng-value="false">
+                <label for="WasEstateFormedN" class="input_with_check ">
+                    <span class="box_text">No </span>
                 </label>
             </li>
+        </ul>
+        <ul ng-show="LegalCase.ForeclosureInfo.WasEstateFormed">
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Borrowers Relationship </label>
-                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.BorrowersRelationship">
+                <label class="ss_form_input_title">Estate Index #</label>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstateIndexNum">
             </li>
-
             <li class="ss_form_item">
-                <label class="ss_form_input_title">&nbsp;</label>
-                <input class="ss_form_input ss_form_hidden" value=" ">
-            </li>
-
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Estate</label>
-                <input class="ss_form_input" mask-money="" ng-model="LegalCase.ForeclosureInfo.Estate">
-            </li>
-
-
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Plaintif</label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PlaintiffId')">
+                <label class="ss_form_input_title">Attorney who Filed </label>
+                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PendingAttorney')">
                 </div>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Servicer</label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PlaintiffId')">
-                </div>
+                <label class="ss_form_input_title">Active/Dissolved Date </label>
+                <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.PendingDateFiled">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Defendant</label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.DefendantId')">
-                </div>
+                <label class="ss_form_input_title">Members of Estate</label>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.MembersofEstate">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Attorney of record </label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.DefendantId')">
-                </div>
+                <label class="ss_form_input_title">Administrator Name</label>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AdministratorName">
             </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.EveryOneIn?'ss_warning':''">Was everyone who is a part of the estate served</label>
+                <input type="radio" id="EveryOneInY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EveryOneIn" ng-value="true">
+                <label for="EveryOneInY" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+                <input type="radio" id="EveryOneInN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EveryOneIn" ng-value="false">
+                <label for="EveryOneInN" class="input_with_check ">
+                    <span class="box_text">No </span>
+                </label>
+            </li>
+            <li class="ss_form_item ss_form_text" ng-show="LegalCase.ForeclosureInfo.EveryOneIn">
+                <label class="ss_form_input_title">Who was not served </label>
+                <input class="ss_form_input " ng-model="LegalCase.ForeclosureInfo.EveryOneInDetail">
+            </li>
+
+
+
+
+
+        </ul>
+    </div>
+
+
+
+    <%-- old 
+
+    </div>
+    <div>
+        <h4 class="ss_form_title">Property</h4>
+        <div class="contianer">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Street Number</label>
+                    <input disabled="disabled" ng-model="LegalCase.PropertyInfo.Number">
+                </div>
+                <div class="col-md-4">
+                    <label>Street Name</label>
+                    <input disabled="disabled" ng-model="LegalCase.PropertyInfo.StreetName">
+                </div>
+                <div class="col-md-4">
+                    <label>City</label>
+                    <input disabled="disabled" ng-model="LegalCase.PropertyInfo.NeighName">
+                </div>
+            </div>
+        </div>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">State</label>
+            <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.State">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Zip</label>
+            <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.ZipCode">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">&nbsp;</label>
+            <input class="ss_form_input ss_form_hidden">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">BLOCK</label>
+            <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.Block">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Lot</label>
+            <input class="ss_form_input color_blue_edit" disabled="disabled" ng-model="LegalCase.PropertyInfo.Lot">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Building type</label>
+            <select class="ss_form_input" ng-model="LegalCase.PropertyInfo.BuildingType">
+                <option value="House">House</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Condo">Condo</option>
+                <option value="Cottage/cabin">Cottage/cabin</option>
+                <option value="Duplex">Duplex</option>
+                <option value="Flat">Flat</option>
+                <option value="In-Law">In-Law</option>
+                <option value="Loft">Loft</option>
+                <option value="Townhouse">Townhouse</option>
+                <option value="Manufactured">Manufactured</option>
+                <option value="Assisted living">Assisted living</option>
+                <option value="Land">Land</option>
+            </select>
+
+        </li>
+
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Borrower</label>
+            <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.BorrowerId')">
+            </div>
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Co-Borrower</label>
+            <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.CoBorrowerId')">
+            </div>
+        </li>
+
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">&nbsp;</label>
+            <input class="ss_form_input ss_form_hidden" value=" ">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Language</label>
+            <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.Language">
+
+                <option value="English">English</option>
+                <option value="Spanish">Spanish</option>
+                <option value="Chinese">Chinese</option>
+            </select>
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Mental Capacity </label>
+            <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.MentalCapacity">
+        </li>
+
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">&nbsp;</label>
+            <input class="ss_form_input ss_form_hidden" value=" ">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Divorce</label>
+            <input type="checkbox" class="ss_form_input" data-field="PropertyInfo.CO" data-radio="Y" id="DivorceCheck" ng-model="LegalCase.ForeclosureInfo.Divorce">
+            <label for="DivorceCheck" class="input_with_check">
+                <span class="box_text">Yes</span>
+            </label>
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Borrowers Relationship </label>
+            <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.BorrowersRelationship">
+        </li>
+
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">&nbsp;</label>
+            <input class="ss_form_input ss_form_hidden" value=" ">
+        </li>
+
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Estate</label>
+            <input class="ss_form_input" mask-money="" ng-model="LegalCase.ForeclosureInfo.Estate">
+        </li>
+
+
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Plaintif</label>
+            <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PlaintiffId')">
+            </div>
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Servicer</label>
+            <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PlaintiffId')">
+            </div>
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Defendant</label>
+            <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.DefendantId')">
+            </div>
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Attorney of record </label>
+            <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.DefendantId')">
+            </div>
+        </li>
 
         </ul>
     </div>
@@ -585,24 +654,57 @@
             </li>
         </ul>
     </div>
+
+
     <div class="ss_form">
         <h4 class="ss_form_title">Affidavit of Service <i class="fa fa-question-circle tooltip-examples icon-btn" title="If there is alreaedy a judgement of foreclosure and sale submitted to the court, signed, or entereed, we need to first come up with a reson as to why there was not a n answer put in earlie"></i></h4>
         <ul class="ss_form_box clearfix">
+
             <li class="ss_form_item">
-                <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.ClientPersonallyServed?'ss_warning':''">Client Personally Served</label>
-                <input type="checkbox" id="PersonallyServed" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ClientPersonallyServed">
-                <label for="PersonallyServed" class="input_with_check ">
+                <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.ClientPersonallyServed?'ss_warning':''">Client Personally Served</label>
+                <input type="radio" id="ClientPersonallyServedY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ClientPersonallyServed" ng-value="true">
+                <label for="ClientPersonallyServedY" class="input_with_check ">
                     <span class="box_text">Yes </span>
                 </label>
+                <input type="radio" id="ClientPersonallyServedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ClientPersonallyServed" ng-value="false">
+                <label for="ClientPersonallyServedN" class="input_with_check ">
+                    <span class="box_text">No </span>
+                </label>
             </li>
-            <li class="ss_form_item" >
-                <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.NailAndMail?'ss_warning':''">Nail and Mail <i class="fa fa-question-circle tooltip-examples icon-btn" title="Nial and Mail is when the S&C is literally taped to the front door of the address for service. The courts no longer consider this proper service. "></i></label>
-                <input type="checkbox" id="NailAndMail"  class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NailAndMail">
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.FakeTest?'ss_warning':''">FakeTest2</label>
+                <input type="radio" id="FakeTestY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FakeTest" ng-value="true">
+                <label for="FakeTestY" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+                <input type="radio" id="FakeTestN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FakeTest" ng-value="false">
+                <label for="FakeTestN" class="input_with_check ">
+                    <span class="box_text">No </span>
+                </label>
+            </li>
+
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.FakeTest3?'ss_warning':''">FakeTest3</label>
+                <input type="radio" id="FakeTest3Y" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FakeTest3" ng-value="true">
+                <label for="FakeTest3Y" class="input_with_check ">
+                    <span class="box_text">Yes </span>
+                </label>
+                <input type="radio" id="FakeTest3N" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FakeTest3" ng-value="false">
+                <label for="FakeTest3N" class="input_with_check ">
+                    <span class="box_text">No </span>
+                </label>
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.NailAndMail?'ss_warning':''">Nail and Mail</label>
+                <input type="checkbox" id="NailAndMail" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NailAndMail">
                 <label for="NailAndMail" class="input_with_check ">
                     <span class="box_text">Yes </span>
                 </label>
             </li>
-            <li class="ss_form_item" ng-show="!LegalCase.ForeclosureInfo.LiveInService">
+            <li class="ss_form_item" ng-show="!LegalCase.ForeclosureInfo.LiveInServiceBefore">
                 <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.LiveInService?'ss_warning':''">Live in Service Address Now</label>
                 <input type="checkbox" id="LiveInService" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.LiveInService">
                 <label for="LiveInService" class="input_with_check ">
@@ -694,7 +796,7 @@
                         </label>
 
                         <input type="radio" id="check_8912" name="102" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignorDocumentPrepared">
-                        <label for="check_8912" class="input_with_check">
+                        <label for="check_891" class="input_with_check">
                             <span class="box_text">No</span>
                         </label>
                     </li>
@@ -1080,7 +1182,7 @@
 
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
-                <span class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.ClientAnswered?'ss_warning':''">Client answered</span>
+                <span class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.ClientAnswered?'ss_warning':''">Client answered</span>
                 <input type="checkbox" id="ansercheck_yes" name="ansercheck" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ClientAnswered">
                 <label for="ansercheck_yes" class="input_with_check ">
                     <span class="box_text">Yes </span>
@@ -1189,6 +1291,6 @@
         </ul>
 
     </div>
-
+    -->
 </div>
 
