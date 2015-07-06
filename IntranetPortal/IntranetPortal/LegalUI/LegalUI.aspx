@@ -1024,19 +1024,53 @@
                 return CaseInfo;
             }
 
-            $scope.isPassByDays = function (start, end, count) {
-                
-                return moment(end).subtract(count, 'days') > moment(start);
+            $scope.isPassByDays = function (start, end, count) {                
+                var start_date = new Date(start);
+                var end_date = new Date(end);
+
+                // Do the math.
+                var millisecondsPerDay = 1000 * 60 * 60 * 24;
+                var millisBetween = end_date.getTime() - start_date.getTime();
+                var days = millisBetween / millisecondsPerDay;
+
+                console.log("start: " + start_date);
+                console.log("end: " + end_date);
+                console.log(days);
+
+                if (days > count) {
+                    return "ss_warning";
+                }
+
+                return "";
             }
             $scope.isPassOrEqualByDays = function (start, end, count) {
-                console.log(moment(end).subtract(count, 'days') > moment(start));
-                return moment(end).subtract(count, 'days') >= moment(start);
+                var start_date = new Date(start);
+                var end_date = new Date(end);
+
+                // Do the math.
+                var millisecondsPerDay = 1000 * 60 * 60 * 24;
+                var millisBetween = end_date.getTime() - start_date.getTime();
+                var days = millisBetween / millisecondsPerDay;
+
+                console.log("start: " + start_date);
+                console.log("end: " + end_date);
+                console.log(days);
+  
+                if (days>=count){
+                    return "ss_warning";
+                }
+
+                return "";
             }
             $scope.isPassByMonths = function(start, end, count) {
-                return moment(end).subtract(count, 'months') > moment(start);
+                var start_date = new Date(start);
+                var end_date = new Date(end);
+
+
             }
             $scope.isPassOrEqualByMonths = function(start, end, count) {
-                return moment(end).subtract(count, 'months') >= moment(start);
+                var start_date = new Date(start);
+                var end_date = new Date(end);
             }
 
             $scope.AddArrayItem = function(model)
