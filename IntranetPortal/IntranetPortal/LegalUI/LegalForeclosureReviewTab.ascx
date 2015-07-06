@@ -226,7 +226,7 @@ The courts no longer consider this proper service. "></i></span>
                 <div>
                     <ul class="ss_form_box clearfix">
                         <li class="ss_form_item">
-                            <label class="ss_form_input_title" ng-class="service.AffidavitServiceFiledIn20Day?'ss_warning':''">Affidavit of service filed within 20 days of service <i class="f"></i></label>
+                            <label class="ss_form_input_title" ng-class="!service.AffidavitServiceFiledIn20Day?'ss_warning':''">Affidavit of service filed within 20 days of service <i class="f"></i></label>
                             <input type="radio" id="AffidavitServiceFiledIn20DayY{{$index}}" class="ss_form_input" ng-model="service.AffidavitServiceFiledIn20Day" ng-value="true" defaultvalue="true">
                             <label for="AffidavitServiceFiledIn20DayY{{$index}}" class="input_with_check">
                                 <span class="box_text">Yes </span>
