@@ -465,7 +465,7 @@ The courts no longer consider this proper service. "></i></span>
 		<div ng-show="LegalCase.ForeclosureInfo.AccelerationLetterReview">
 			<ul class="ss_form_box clearfix">
 				<li class="ss_form_item">
-					<label class="ss_form_input_title">When was Acceleration letter mailed to borrower?  </label>
+					<label class="ss_form_input_title {{isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )}}">When was Acceleration letter mailed to borrower?  </label>
 					<span style='text-transform: none'><i class='fa fa-question-circle tooltip-examples icon-btn color_blue' title='If Lender did not inform borrower within 12 months of original default, this is an issue'></i></span>
 					<input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterMailedDate">
 				</li>

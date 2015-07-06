@@ -1052,10 +1052,6 @@
                 var millisBetween = end_date.getTime() - start_date.getTime();
                 var days = millisBetween / millisecondsPerDay;
 
-                console.log("start: " + start_date);
-                console.log("end: " + end_date);
-                console.log(days);
-  
                 if (days>=count){
                     return "ss_warning";
                 }
@@ -1065,12 +1061,28 @@
             $scope.isPassByMonths = function(start, end, count) {
                 var start_date = new Date(start);
                 var end_date = new Date(end);
+                var months;
+                months = (end_date.getFullYear() - start_date.getFullYear()) * 12;
+                months -= start_date.getMonth();
+                months += end_date.getMonth();
+
+                if (months > count) return "ss_warning";
+                else return "";
+
+
 
 
             }
             $scope.isPassOrEqualByMonths = function(start, end, count) {
                 var start_date = new Date(start);
                 var end_date = new Date(end);
+                var months;
+                months = (end_date.getFullYear() - start_date.getFullYear()) * 12;
+                months -= start_date.getMonth();
+                months += end_date.getMonth();
+                console.log(months);
+                if (months >= count) return "ss_warning";
+                else return "";
             }
 
             $scope.AddArrayItem = function(model)
