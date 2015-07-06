@@ -1038,10 +1038,10 @@
                 console.log(days);
 
                 if (days > count) {
-                    return "ss_warning";
+                    return true;
                 }
 
-                return "";
+                return false;
             }
             $scope.isPassOrEqualByDays = function (start, end, count) {
                 var start_date = new Date(start);
@@ -1053,21 +1053,33 @@
                 var days = millisBetween / millisecondsPerDay;
 
                 if (days>=count){
-                    return "ss_warning";
+                    return true;
                 }
 
-                return "";
+                return false;
+            }
+            $scope.isLessOrEqualByDays = function (start, end, count) {
+                var start_date = new Date(start);
+                var end_date = new Date(end);
+
+                // Do the math.
+                var millisecondsPerDay = 1000 * 60 * 60 * 24;
+                var millisBetween = end_date.getTime() - start_date.getTime();
+                var days = millisBetween / millisecondsPerDay;
+
+                if (days >=0 && days <= count) {
+                    return true;
+                }
+
+                return false;
             }
             $scope.isPassByMonths = function(start, end, count) {
                 var start_date = new Date(start);
                 var end_date = new Date(end);
-                var months;
-                months = (end_date.getFullYear() - start_date.getFullYear()) * 12;
-                months -= start_date.getMonth();
-                months += end_date.getMonth();
+                var months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + end_date.getMonth() - start_date.getMonth();
 
-                if (months > count) return "ss_warning";
-                else return "";
+                if (months > count) return true;
+                else return false;
 
 
 
@@ -1075,14 +1087,12 @@
             }
             $scope.isPassOrEqualByMonths = function(start, end, count) {
                 var start_date = new Date(start);
-                var end_date = new Date(end);
-                var months;
-                months = (end_date.getFullYear() - start_date.getFullYear()) * 12;
-                months -= start_date.getMonth();
-                months += end_date.getMonth();
+                var end_date = new Date(end);                
+                var months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + end_date.getMonth() - start_date.getMonth();
+
                 console.log(months);
-                if (months >= count) return "ss_warning";
-                else return "";
+                if (months >= count) return true;
+                else return false;
             }
 
             $scope.AddArrayItem = function(model)
@@ -1098,6 +1108,30 @@
 
             //    $scope.selectBoxData = data;
             //});
+
+            $scope.isLess08292013 = false;
+            $scope.isBigger08302013 = false;
+            $scope.isBigger03012015 = false;
+            $scope.showSAndCFormFlag = false;
+            
+            $scope.showSAndCFrom = function () {
+                var date = new Date($scope.LegalCase.ForeclosureInfo.SAndCFiledDate);
+                if (date - new Date("08/29/2013") > 0) {
+                    $scope.isLess08292013 = false;
+                } else {
+                    $scope.isLess08292013 = true;
+                }
+                if ($scope.isLess08292013) {
+                    $scope.isBigger08302013 = false;
+                } else {
+                    $scope.isBigger08302013 = true;
+                } if (date - new Date("03/01/2015") > 0) {
+                    $scope.isBigger03012015 = true;
+                } else {
+                    $scope.isBigger03012015 = false;
+                }
+                $scope.showSAndCFormFlag = $scope.isLess08292013 | $scope.isBigger08302013 | $scope.isBigger03012015;
+            };
         
         });
 
