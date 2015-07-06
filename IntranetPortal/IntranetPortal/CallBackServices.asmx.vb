@@ -46,6 +46,10 @@ Public Class CallBackServices
         Return contact
     End Function
     <WebMethod()> _
+    Public Function GetBroughName(bro As Integer) As String
+        Return Utility.Borough2BoroughName(bro)
+    End Function
+    <WebMethod()> _
     Public Function GetLenderList() As List(Of String)
         Dim l = PartyContact.GetContactByType(PartyContact.ContactType.Lender).Where(Function(c) c.CorpName IsNot Nothing).Select(Function(c) c.CorpName).Distinct().ToList()
         Return l

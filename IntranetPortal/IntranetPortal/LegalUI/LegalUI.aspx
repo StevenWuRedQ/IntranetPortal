@@ -1128,6 +1128,7 @@
 
 
             }
+           
             $scope.isPassOrEqualByMonths = function (start, end, count) {
                 var start_date = new Date(start);
                 var end_date = new Date(end);
@@ -1173,6 +1174,18 @@
                 }
                 $scope.showSAndCFormFlag = $scope.isLess08292013 | $scope.isBigger08302013 | $scope.isBigger03012015;
             };
+
+            $scope.ShowECourts = function (borough) {
+                $http.post('/CallBackServices.asmx/GetBroughName', { bro: $scope.LegalCase.PropertyInfo.Borough }).success(function (data)
+                {
+                    var urls = ['http://bronxcountyclerkinfo.com/law/UI/User/lne.aspx', ' http://iapps.courts.state.ny.us/kcco/', ' https://iapps.courts.state.ny.us/qcco/'];
+                    var url = urls[borough - 2];
+                    var title = $scope.LegalCase.CaseName;
+                    var subTitle = ' (' + 'Brough: ' + data.d + ' Block: ' + $scope.LegalCase.PropertyInfo.Block + ' Lot: ' + $scope.LegalCase.PropertyInfo.Lot + ')';
+                    ShowPopupMap(url, title, subTitle);
+                })
+                
+            }
         
         });
 

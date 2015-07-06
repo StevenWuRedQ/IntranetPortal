@@ -48,6 +48,7 @@
 
     function ShowAcrisMap(propBBLE) {
         //var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + propBBLE;
+
         ShowPopupMap("https://a836-acris.nyc.gov/DS/DocumentSearch/BBL", "Acris");
     }
 
@@ -62,13 +63,16 @@
         $("#addition_info").html(' ');
     }
 
-    function ShowPopupMap(url, header) {
+    function ShowPopupMap(url, header,subHeader) {
         aspxAcrisControl.SetContentHtml("Loading...");
         aspxAcrisControl.SetContentUrl(url);
 
         aspxAcrisControl.SetHeaderText(header);
         //header = header + "(Borough:" + ShortSaleCaseData.PropertyInfo.Borough + "Lot:" + ShortSaleCaseData.PropertyInfo.Lot + ")";
         $('#pop_up_header_text').html(header);
+       
+        $('#addition_info').html(subHeader ? subHeader : '');
+       
         aspxAcrisControl.Show();
     }
 
@@ -82,7 +86,7 @@
     function DeleteComments(commentId) {
         leadsCommentsCallbackPanel.PerformCallback("Delete|" + commentId);
     }
-
+    
 </script>
 
 <div class="modal fade" id="RequestModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -131,7 +135,7 @@
                            
                         <span style="margin-left: 19px;">{{GetCaseInfo().Address}}&nbsp;</span>
                     </span>
-                    <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
+                    <span class="time_buttons" style="margin-right: 30px" ng-click="ShowECourts(LegalCase.PropertyInfo.Borough, 'eCourts')" ng-show="LegalCase.PropertyInfo.Borough!=1">eCourts</span>
                     <span class="time_buttons" onclick="ShowDOBWindow(GetLegalData().PropertyInfo.Borough,GetLegalData().PropertyInfo.Block, GetLegalData().PropertyInfo.Lot)">DOB</span>
                     <span class="time_buttons" onclick="ShowAcrisMap(leadsInfoBBLE)">Acris</span>
                     <span class="time_buttons" onclick="ShowPropertyMap(leadsInfoBBLE)">Maps</span>
@@ -222,10 +226,13 @@
                 <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
                 <span class="pop_up_header_text" id="pop_up_header_text">Acris</span> <span class="pop_up_header_text"></span>
             </div>
+            
             <div class="pop_up_buttons_div">
                 <i class="fa fa-times icon_btn" onclick="aspxAcrisControl.Hide()"></i>
             </div>
+           
         </div>
+        <div style="text-align: center" id="addition_info"></div>
     </HeaderTemplate>
     <ContentCollection>
         <dx:PopupControlContentControl runat="server">
