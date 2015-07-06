@@ -30,6 +30,16 @@ Public Class CommonService
         'Dim emp = Employee.GetInstance(userName)
 
         If toAdds IsNot Nothing AndAlso toAdds.Count > 0 Then
+            Dim taskId = 0
+            If emailData.ContainsKey("TaskComments") AndAlso Integer.TryParse(emailData("TaskComments"), taskId) Then
+                If taskId > 0 Then
+                    Dim task = UserTask.GetTaskById(taskId)
+                    If task IsNot Nothing Then
+                        emailData("TaskComments") = task.Description
+                    End If
+                End If
+            End If
+
             IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", templateName, emailData)
         End If
     End Sub

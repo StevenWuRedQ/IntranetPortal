@@ -407,6 +407,10 @@ Partial Public Class Employee
             Return True
         End If
 
+        If rs.Contains("Legal-Manager") Then
+            Return True
+        End If
+
         If rs.Where(Function(r) r = "ShortSale-Manager").Count > 0 Then
             Return True
         End If

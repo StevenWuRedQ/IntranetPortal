@@ -70,9 +70,7 @@
                         formData = null;
                         ClearFilesTable();
                         LoadingPanel.Hide();
-                    }
-                    else
-                    {
+                    } else {
                         LoadingPanel.Hide();
                         alert("Error in upload file. Please try later.");
                     }
@@ -403,7 +401,7 @@
                         <tr>
                             <td>
                                 <dx:ASPxUploadControl ID="uplImage" AdvancedModeSettings-EnableMultiSelect="true" runat="server" ClientInstanceName="uploader" CssClass="email_input input_files" NullText="Click here to browse files..." Size="35" Width="10%">
-                                    <ValidationSettings MaxFileSize="6194304">
+                                    <ValidationSettings MaxFileSize="102194304">
                                     </ValidationSettings>
                                     <ClientSideEvents TextChanged="function(s,e){if(s.GetText()!=''){OnAddFileButtonClick();}}" />
                                 </dx:ASPxUploadControl>
@@ -441,7 +439,6 @@
                         <dx:ASPxLabel ID="ASPxLabel2" runat="server" Text="Maximum file size: 6Mb">
                         </dx:ASPxLabel>
                     </div>
-
                 </td>
             </tr>
             <tr style="height: 40px;">
