@@ -30,7 +30,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
     <script src="/Scripts/stevenjs.js"></script>
-    <script src="/Scripts/moment.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
@@ -901,10 +900,11 @@
             $scope.LegalCase.SecondaryInfo.StatuteOfLimitations = [];
             $scope.LoadLeadsCase = function (BBLE) {
                 var data = { bble: BBLE };
+
                 $http.post('LegalUI.aspx/GetCaseData', data).
                     success(function (data, status, headers, config) {
                         $scope.LegalCase = $.parseJSON(data.d);
-                        var arrays = ["AffidavitOfServices", "Assignments"];
+                        var arrays = ["AffidavitOfServices", "Assignments","MembersOfEstate"];
                         for (a in arrays) {
                             var porp = arrays[a]
                             var array = $scope.LegalCase.ForeclosureInfo[porp];
@@ -912,10 +912,10 @@
                                 $scope.LegalCase.ForeclosureInfo[porp] = [];
                                 $scope.LegalCase.ForeclosureInfo[porp].push({});
                             }
-
+                            
                         }
 
-
+                        
                     }).
                     error(function () {
                         alert("Fail to load data : " + BBLE);
@@ -1029,9 +1029,9 @@
             }
             $scope.ExceptVisable = function (h, CompareValue, arrayIndex) {
                 var visbale = false;
-                if (h.Value == 'true' || h.Value == 'false') {
-                    h.Value = h.Value == 'true';
-                }
+                    if (h.Value == 'true' || h.Value == 'false') {
+                        h.Value = h.Value == 'true';
+                    }
 
                 if (h.CallFunc) {
                     var func = h.CallFunc;
@@ -1050,12 +1050,12 @@
                     if (CompareValue[h.Name] == null && h.Value == false) {
                         visbale = true;
                     }
-                }
+                    }
                 h.Visable = visbale;
                 return visbale
-            }
+                }
             $scope.HighlightCompare = function (compareExpresstion) {
-
+           
                 var reslut = $scope.$eval(compareExpresstion);
                 return reslut;
             }
@@ -1070,7 +1070,7 @@
                 return CaseInfo;
             }
 
-            $scope.isPassByDays = function (start, end, count) {
+            $scope.isPassByDays = function (start, end, count) {                
                 var start_date = new Date(start);
                 var end_date = new Date(end);
 
@@ -1078,10 +1078,6 @@
                 var millisecondsPerDay = 1000 * 60 * 60 * 24;
                 var millisBetween = end_date.getTime() - start_date.getTime();
                 var days = millisBetween / millisecondsPerDay;
-
-                console.log("start: " + start_date);
-                console.log("end: " + end_date);
-                console.log(days);
 
                 if (days > count) {
                     return true;
@@ -1112,7 +1108,7 @@
                 var millisecondsPerDay = 1000 * 60 * 60 * 24;
                 var millisBetween = end_date.getTime() - start_date.getTime();
                 var days = millisBetween / millisecondsPerDay;
-
+  
                 if (days >= 0 && days <= count) {
                     return true;
                 }
@@ -1126,10 +1122,6 @@
 
                 if (months > count) return true;
                 else return false;
-
-
-
-
             }
 
             $scope.isPassOrEqualByMonths = function (start, end, count) {
@@ -1137,7 +1129,6 @@
                 var end_date = new Date(end);
                 var months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + end_date.getMonth() - start_date.getMonth();
 
-                console.log(months);
                 if (months >= count) return true;
                 else return false;
             }
@@ -1153,12 +1144,12 @@
 
             //    $scope.selectBoxData = data;
             //});
-
+        
             $scope.isLess08292013 = false;
             $scope.isBigger08302013 = false;
             $scope.isBigger03012015 = false;
             $scope.showSAndCFormFlag = false;
-
+            
             $scope.showSAndCFrom = function () {
                 var date = new Date($scope.LegalCase.ForeclosureInfo.SAndCFiledDate);
                 if (date - new Date("08/29/2013") > 0) {
@@ -1177,7 +1168,18 @@
                 }
                 $scope.showSAndCFormFlag = $scope.isLess08292013 | $scope.isBigger08302013 | $scope.isBigger03012015;
             };
-
+        
+            $scope.HighLightStauts= function(model, index){
+                if (parseInt(model) > index) return true;
+                else return false;
+            };
+            $scope.addToEstateMembers = function (index) {
+                $scope.LegalCase.ForeclosureInfo.MembersOfEstate.push({ "id": index, "name": $scope.LegalCase.membersText });
+                $scope.LegalCase.membersText = '';
+            }
+            $scope.delEstateMembers = function (index) {
+                $scope.LegalCase.ForeclosureInfo.MembersOfEstate.splice(index, 1);
+            }
             $scope.ShowECourts = function (borough) {
                 $http.post('/CallBackServices.asmx/GetBroughName', { bro: $scope.LegalCase.PropertyInfo.Borough }).success(function (data) {
                     var urls = ['http://bronxcountyclerkinfo.com/law/UI/User/lne.aspx', ' http://iapps.courts.state.ny.us/kcco/', ' https://iapps.courts.state.ny.us/qcco/'];
