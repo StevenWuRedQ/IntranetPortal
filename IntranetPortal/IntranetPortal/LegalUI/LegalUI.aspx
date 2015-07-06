@@ -912,10 +912,10 @@
                                 $scope.LegalCase.ForeclosureInfo[porp] = [];
                                 $scope.LegalCase.ForeclosureInfo[porp].push({});
                             }
-                            
+
                         }
 
-                        
+
                     }).
                     error(function () {
                         alert("Fail to load data : " + BBLE);
@@ -995,7 +995,7 @@
                             { "Name": "RJIDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.SAndCFiledDate, LegalCase.ForeclosureInfo.RJIDate, 12)", "Description": "When was RJI filed.", "ArrayName": "", "Value": "" },
                             { "Name": "ConferenceDate", "CallFunc": "isLessOrEqualByDays(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.ConferenceDate, 60)", "Description": "Date Conference was scheduled", "ArrayName": "", "Value": "" },
                             { "Name": "OREFDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)", "Description": "When was O/REF filed.", "ArrayName": "", "Value": "" },
-                            { "Name": "JudgementDate", "CallFunc": "", "Description": "When was Judgement submitted. ", "ArrayName": "", "Value": "" }];
+                            { "Name": "JudgementDate", "CallFunc": "", "Description": "When was Judgement submitted. ", "ArrayName": "", "Value": "" }]
             $scope.HightSummery = function () {
                 var highLight = hSummery
                 //hSummery.splice();
@@ -1003,13 +1003,13 @@
                 for (i = 0; i < highLight.length; i++) {
                     var h = highLight[i];
                     $scope.ExceptVisable(h, $scope.LegalCase.ForeclosureInfo);
-                    if (h.ArrayName) {
+                    if (h.ArrayName && h.ArrayName.length>0) {
                         var arrayItem = $scope.LegalCase.ForeclosureInfo[h.ArrayName];
                         if (arrayItem) {
                             var shouldVisible = false;
                             for (var j = 0; j < arrayItem.length; j++) {
 
-                                if ($scope.ExceptVisable(h, arrayItem[j]), j) {
+                                if ($scope.ExceptVisable(h, arrayItem[j], j)) {
                                     shouldVisible = true;
                                 }
                             }
@@ -1023,16 +1023,19 @@
 
                 return hSummery;
             };
-
+            $scope.HighLightStauts =function(stauts,Count)
+            {
+                return stauts > Count;
+            }
             $scope.ExceptVisable = function (h, CompareValue, arrayIndex) {
                 var visbale = false;
-                    if (h.Value == 'true' || h.Value == 'false') {
-                        h.Value = h.Value == 'true';
-                    }
+                if (h.Value == 'true' || h.Value == 'false') {
+                    h.Value = h.Value == 'true';
+                }
 
                 if (h.CallFunc) {
                     var func = h.CallFunc;
-                    if (func.indexOf("__index__")) {
+                    if (func.indexOf("__index__") > 0) {
                         func = func.replace("__index__", arrayIndex);
                     }
                     visbale = $scope.HighlightCompare(func);
@@ -1047,12 +1050,12 @@
                     if (CompareValue[h.Name] == null && h.Value == false) {
                         visbale = true;
                     }
-                    }
+                }
                 h.Visable = visbale;
                 return visbale
-                }
+            }
             $scope.HighlightCompare = function (compareExpresstion) {
-           
+
                 var reslut = $scope.$eval(compareExpresstion);
                 return reslut;
             }
@@ -1067,7 +1070,7 @@
                 return CaseInfo;
             }
 
-            $scope.isPassByDays = function (start, end, count) {                
+            $scope.isPassByDays = function (start, end, count) {
                 var start_date = new Date(start);
                 var end_date = new Date(end);
 
@@ -1095,7 +1098,7 @@
                 var millisBetween = end_date.getTime() - start_date.getTime();
                 var days = millisBetween / millisecondsPerDay;
 
-                if (days>=count){
+                if (days >= count) {
                     return true;
                 }
 
@@ -1109,8 +1112,8 @@
                 var millisecondsPerDay = 1000 * 60 * 60 * 24;
                 var millisBetween = end_date.getTime() - start_date.getTime();
                 var days = millisBetween / millisecondsPerDay;
-  
-                if (days >=0 && days <= count) {
+
+                if (days >= 0 && days <= count) {
                     return true;
                 }
 
@@ -1128,7 +1131,7 @@
 
 
             }
-           
+
             $scope.isPassOrEqualByMonths = function (start, end, count) {
                 var start_date = new Date(start);
                 var end_date = new Date(end);
@@ -1150,12 +1153,12 @@
 
             //    $scope.selectBoxData = data;
             //});
-        
+
             $scope.isLess08292013 = false;
             $scope.isBigger08302013 = false;
             $scope.isBigger03012015 = false;
             $scope.showSAndCFormFlag = false;
-            
+
             $scope.showSAndCFrom = function () {
                 var date = new Date($scope.LegalCase.ForeclosureInfo.SAndCFiledDate);
                 if (date - new Date("08/29/2013") > 0) {
@@ -1176,24 +1179,24 @@
             };
 
             $scope.ShowECourts = function (borough) {
-                $http.post('/CallBackServices.asmx/GetBroughName', { bro: $scope.LegalCase.PropertyInfo.Borough }).success(function (data)
-                {
+                $http.post('/CallBackServices.asmx/GetBroughName', { bro: $scope.LegalCase.PropertyInfo.Borough }).success(function (data) {
                     var urls = ['http://bronxcountyclerkinfo.com/law/UI/User/lne.aspx', ' http://iapps.courts.state.ny.us/kcco/', ' https://iapps.courts.state.ny.us/qcco/'];
                     var url = urls[borough - 2];
                     var title = $scope.LegalCase.CaseName;
                     var subTitle = ' (' + 'Brough: ' + data.d + ' Block: ' + $scope.LegalCase.PropertyInfo.Block + ' Lot: ' + $scope.LegalCase.PropertyInfo.Lot + ')';
                     ShowPopupMap(url, title, subTitle);
                 })
-                
+
             }
-        
+
         });
 
     </script>
     <script>
         $(document).ready(function () {
             $('body').tooltip({
-                selector: '.tooltip-examples'
+                selector: '.tooltip-examples',
+                placement: 'bottom'
             });
         })
     </script>

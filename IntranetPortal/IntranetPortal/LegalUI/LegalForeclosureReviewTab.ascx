@@ -17,72 +17,72 @@
     <div>
         <h4 class="ss_form_title">Estate Pending</h4>
         <div class="ss_form" ng-class="LegalCase.ForeclosureInfo.WasEstateFormed?'edit_text_area ss_show_from':''">
-        <ul class="ss_form_box clearfix">
-            <li class="ss_form_item">
-                <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.WasEstateFormed?'ss_warning':''">Was Estate formed? </label>
-                <input type="radio" id="WasEstateFormedY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.WasEstateFormed" ng-value="true" radio-init defaultvalue="true">
-                <label for="WasEstateFormedY" class="input_with_check ">
-                    <span class="box_text">Yes </span>
-                </label>
-                <input type="radio" id="WasEstateFormedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.WasEstateFormed" ng-value="false" radio-init defaultvalue="false">
-                <label for="WasEstateFormedN" class="input_with_check ">
-                    <span class="box_text">No </span>
-                </label>
-            </li>
-        </ul>
-        <div ng-show="LegalCase.ForeclosureInfo.WasEstateFormed">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Estate Index #</label>
-                    <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstateIndexNum">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Attorney who Filed </label>
-                    <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PendingAttorney')">
-                    </div>
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Date Filed </label>
-                    <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.PendingDateFiled">
-                </li>
-
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Members of Estate</label>
-                    <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.MembersofEstate">
-                </li>
-
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Administrator Name</label>
-                    <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AdministratorName">
-                </li>
-
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.EveryOneIn?'ss_warning':''">Was everyone who is a part of the estate served</label>
-                    <input type="radio" id="EveryOneInY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EveryOneIn" ng-value="true" radio-init defaultvalue="true">
-                    <label for="EveryOneInY" class="input_with_check ">
+                    <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.WasEstateFormed?'ss_warning':''">Was Estate formed? </label>
+                    <input type="radio" id="WasEstateFormedY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.WasEstateFormed" ng-value="true" radio-init defaultvalue="true">
+                    <label for="WasEstateFormedY" class="input_with_check ">
                         <span class="box_text">Yes </span>
                     </label>
-                    <input type="radio" id="EveryOneInN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EveryOneIn" ng-value="false" radio-init defaultvalue="false">
-                    <label for="EveryOneInN" class="input_with_check ">
+                    <input type="radio" id="WasEstateFormedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.WasEstateFormed" ng-value="false" radio-init defaultvalue="false">
+                    <label for="WasEstateFormedN" class="input_with_check ">
                         <span class="box_text">No </span>
                     </label>
                 </li>
-                <li class="ss_form_item ss_form_text" ng-show="!LegalCase.ForeclosureInfo.EveryOneIn">
-                    <label class="ss_form_input_title">Who was not served </label>
-                    <input class="ss_form_input " ng-model="LegalCase.ForeclosureInfo.EveryOneInDetail">
-                </li>
-
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">How was Deed Held? </label>
-                    <select class="ss_form_input" ng-model="LegalCase.PropertyInfo.HowWasDeedHeld">
-                        <option value="Tenants in Common">Tenants in Common</option>
-                        <option value="Joint Tenancy">Joint Tenancy</option>
-                        <option value="Tenancy by the entirety">Tenancy by the entirety</option>
-                    </select>
-                </li>
             </ul>
+            <div ng-show="LegalCase.ForeclosureInfo.WasEstateFormed">
+                <ul class="ss_form_box clearfix">
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Estate Index #</label>
+                        <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstateIndexNum">
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Attorney who Filed </label>
+                        <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PendingAttorney')">
+                        </div>
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Date Filed </label>
+                        <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.PendingDateFiled">
+                    </li>
+
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Members of Estate</label>
+                        <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.MembersofEstate">
+                    </li>
+
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Administrator Name</label>
+                        <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AdministratorName">
+                    </li>
+
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.EveryOneIn?'ss_warning':''">Was everyone who is a part of the estate served</label>
+                        <input type="radio" id="EveryOneInY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EveryOneIn" ng-value="true" radio-init defaultvalue="true">
+                        <label for="EveryOneInY" class="input_with_check ">
+                            <span class="box_text">Yes </span>
+                        </label>
+                        <input type="radio" id="EveryOneInN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EveryOneIn" ng-value="false" radio-init defaultvalue="false">
+                        <label for="EveryOneInN" class="input_with_check ">
+                            <span class="box_text">No </span>
+                        </label>
+                    </li>
+                    <li class="ss_form_item ss_form_text" ng-show="!LegalCase.ForeclosureInfo.EveryOneIn">
+                        <label class="ss_form_input_title">Who was not served </label>
+                        <input class="ss_form_input " ng-model="LegalCase.ForeclosureInfo.EveryOneInDetail">
+                    </li>
+
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">How was Deed Held? </label>
+                        <select class="ss_form_input" ng-model="LegalCase.PropertyInfo.HowWasDeedHeld">
+                            <option value="Tenants in Common">Tenants in Common</option>
+                            <option value="Joint Tenancy">Joint Tenancy</option>
+                            <option value="Tenancy by the entirety">Tenancy by the entirety</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
     </div>
 
     <!-- Bankruptcy -->
@@ -361,71 +361,71 @@ The courts no longer consider this proper service. "></i></span>
     <div class="ss_form">
         <h4 class="ss_form_title">Note</h4>
         <div class="ss_form" ng-class="LegalCase.ForeclosureInfo.NoteIsPossess?'edit_text_area ss_show_from':''">
-        <ul class="ss_form_box clearfix">
-            <li class="ss_form_item">
-                <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.NoteIsPossess?'ss_warning':''">Do we possess a copy of the note</label>
-                <input type="radio" id="NoteIsPossessY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteIsPossess" ng-value="true" radio-init defaultvalue="true">
-                <label for="NoteIsPossessY" class="input_with_check ">
-                    <span class="box_text">Yes </span>
-                </label>
-                <input type="radio" id="NoteIsPossessN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteIsPossess" ng-value="false" radio-init defaultvalue="false">
-                <label for="NoteIsPossessN" class="input_with_check ">
-                    <span class="box_text">No </span>
-                </label>
-            </li>
-        </ul>
-        <div ng-show="LegalCase.ForeclosureInfo.NoteIsPossess">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Obligor 1</label>
-                        <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteObligor1">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Obligor 2</label>
-                        <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteObligor2">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Obligor 3</label>
-                        <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteObligor3">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Is the current Plaintiff the same as the original lender</label>
-                    <input type="radio" id="PlainTiffSameAsOriginalY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlainTiffSameAsOriginal" ng-value="true" radio-init defaultvalue="true">
-                    <label for="PlainTiffSameAsOriginalY" class="input_with_check ">
+                    <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.NoteIsPossess?'ss_warning':''">Do we possess a copy of the note</label>
+                    <input type="radio" id="NoteIsPossessY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteIsPossess" ng-value="true" radio-init defaultvalue="true">
+                    <label for="NoteIsPossessY" class="input_with_check ">
                         <span class="box_text">Yes </span>
                     </label>
-                    <input type="radio" id="PlainTiffSameAsOriginalN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlainTiffSameAsOriginal" ng-value="false" radio-init defaultvalue="false">
-                    <label for="PlainTiffSameAsOriginalN" class="input_with_check ">
+                    <input type="radio" id="NoteIsPossessN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteIsPossess" ng-value="false" radio-init defaultvalue="false">
+                    <label for="NoteIsPossessN" class="input_with_check ">
                         <span class="box_text">No </span>
                     </label>
                 </li>
-                <li class="ss_form_item">
+            </ul>
+            <div ng-show="LegalCase.ForeclosureInfo.NoteIsPossess">
+                <ul class="ss_form_box clearfix">
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Obligor 1</label>
+                        <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteObligor1">
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Obligor 2</label>
+                        <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteObligor2">
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Obligor 3</label>
+                        <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteObligor3">
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Is the current Plaintiff the same as the original lender</label>
+                        <input type="radio" id="PlainTiffSameAsOriginalY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlainTiffSameAsOriginal" ng-value="true" radio-init defaultvalue="true">
+                        <label for="PlainTiffSameAsOriginalY" class="input_with_check ">
+                            <span class="box_text">Yes </span>
+                        </label>
+                        <input type="radio" id="PlainTiffSameAsOriginalN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlainTiffSameAsOriginal" ng-value="false" radio-init defaultvalue="false">
+                        <label for="PlainTiffSameAsOriginalN" class="input_with_check ">
+                            <span class="box_text">No </span>
+                        </label>
+                    </li>
+                    <li class="ss_form_item">
                         <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.NoteEndoresed?'ss_warning':''">
                             Note Endoresed
                         <span style='text-transform: none'><i class='fa fa-question-circle tooltip-examples icon-btn' title='If a note does not have the proper allonge, or a note endorsement, then there is no proof of proper transfer. '></i></span>
                         </label>
-                    <input type="radio" id="NoteEndoresedY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteEndoresed" ng-value="true" radio-init defaultvalue="true">
-                    <label for="NoteEndoresedY" class="input_with_check ">
-                        <span class="box_text">Yes </span>
-                    </label>
-                    <input type="radio" id="NoteEndoresedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteEndoresed" ng-value="false" radio-init defaultvalue="false">
-                    <label for="NoteEndoresedN" class="input_with_check ">
-                        <span class="box_text">No </span>
-                    </label>
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.NoteEndorserIsSignors?'ss_warning':''">Is the endorser one of these signors?</label>
-                    <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.NoteEndorserIsSignors')"></div>
+                        <input type="radio" id="NoteEndoresedY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteEndoresed" ng-value="true" radio-init defaultvalue="true">
+                        <label for="NoteEndoresedY" class="input_with_check ">
+                            <span class="box_text">Yes </span>
+                        </label>
+                        <input type="radio" id="NoteEndoresedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteEndoresed" ng-value="false" radio-init defaultvalue="false">
+                        <label for="NoteEndoresedN" class="input_with_check ">
+                            <span class="box_text">No </span>
+                        </label>
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.NoteEndorserIsSignors?'ss_warning':''">Is the endorser one of these signors?</label>
+                        <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.NoteEndorserIsSignors')"></div>
+                    </li>
+                </ul>
+            </div>
+            <ul class="ss_form_box clearfix">
+                <li class="ss_form_item ss_form_item_line">
+                    <label class="ss_form_input_title">Additional Note Comments</label>
+                    <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.AdditionalNoteComments"></textarea>
                 </li>
             </ul>
         </div>
-        <ul class="ss_form_box clearfix">
-            <li class="ss_form_item ss_form_item_line">
-                <label class="ss_form_input_title">Additional Note Comments</label>
-                <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.AdditionalNoteComments"></textarea>
-            </li>
-        </ul>
-    </div>
     </div>
 
     <!-- default letter -->
@@ -456,41 +456,41 @@ The courts no longer consider this proper service. "></i></span>
 
         <div class="ss_form" ng-class="LegalCase.ForeclosureInfo.AccelerationLetterReview?'edit_text_area ss_show_from':''">
             <ul class="ss_form_box clearfix">
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Do we have the acceleration letter to review?</label>
-                <input type="radio" id="AccelerationLetterReviewY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterReview" ng-value="true" radio-init defaultvalue="true">
-                <label for="AccelerationLetterReviewY" class="input_with_check ">
-                    <span class="box_text">Yes </span>
-                </label>
-                <input type="radio" id="AccelerationLetterReviewN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterReview" ng-value="false" radio-init defaultvalue="false">
-                <label for="AccelerationLetterReviewN" class="input_with_check ">
-                    <span class="box_text">No </span>
-                </label>
-            </li>
-        </ul>
-        <div ng-show="LegalCase.ForeclosureInfo.AccelerationLetterReview">
-            <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
+                    <label class="ss_form_input_title">Do we have the acceleration letter to review?</label>
+                    <input type="radio" id="AccelerationLetterReviewY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterReview" ng-value="true" radio-init defaultvalue="true">
+                    <label for="AccelerationLetterReviewY" class="input_with_check ">
+                        <span class="box_text">Yes </span>
+                    </label>
+                    <input type="radio" id="AccelerationLetterReviewN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterReview" ng-value="false" radio-init defaultvalue="false">
+                    <label for="AccelerationLetterReviewN" class="input_with_check ">
+                        <span class="box_text">No </span>
+                    </label>
+                </li>
+            </ul>
+            <div ng-show="LegalCase.ForeclosureInfo.AccelerationLetterReview">
+                <ul class="ss_form_box clearfix">
+                    <li class="ss_form_item">
                         <label class="ss_form_input_title {{isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )?'ss_warning':''}}">
                             When was Acceleration letter mailed to borrower?  
 					<span style='text-transform: none'><i class='fa fa-question-circle tooltip-examples icon-btn ' title='If Lender did not inform borrower within 12 months of original default, this is an issue'></i></span>
                         </label>
-                    <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterMailedDate">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Date of Acceleration letterDefault date </label>
-                    <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterDate">
-                </li>
-                <li class="ss_form_item">
+                        <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterMailedDate">
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Date of Acceleration letterDefault date </label>
+                        <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterDate">
+                    </li>
+                    <li class="ss_form_item">
                         <label class="ss_form_input_title {{isPassOrEqualByDays(LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,LegalCase.ForeclosureInfo.AccelerationLetterRegDate,3 )?'ss_warning':''}}">
                             Date of registration for Acceleration letter 
 					<span style='text-transform: none'><i class='fa fa-question-circle tooltip-examples icon-btn ' title='Lender must register Acceleration letter within 3 days of the date of said letter'></i></span>
                         </label>
-                    <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterRegDate">
-                </li>
+                        <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterRegDate">
+                    </li>
 
-            </ul>
-        </div>
+                </ul>
+            </div>
         </div>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ss_form_item_line {{isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,2 )?'ss_warning':''}}">
@@ -532,8 +532,8 @@ The courts no longer consider this proper service. "></i></span>
         </ul>
         <div class="ss_form" ng-class="showSAndCFormFlag?'edit_text_area ss_show_from':''">
             <ul class="ss_form_box clearfix">
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">When was S&C filed?</label>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">When was S&C filed?</label>
                     <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.SAndCFiledDate" ng-change="showSAndCFrom()">
                 </li>
             </ul>
@@ -542,7 +542,7 @@ The courts no longer consider this proper service. "></i></span>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">
                             When was Affirmation filed? 
-				<span style='text-transform: none'><i class='fa fa-question-circle tooltip-examples icon-btn ' title='Affirmations before 8/30/2013 must be filed prior to judgement. '></i></span>
+				            <span style='text-transform: none'><i class='fa fa-question-circle tooltip-examples icon-btn ' title='Affirmations before 8/30/2013 must be filed prior to judgement. '></i></span>
                             <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.AffirmationFiledDate">
                         </label>
                     </li>
@@ -603,12 +603,12 @@ The courts no longer consider this proper service. "></i></span>
                         <label for="CertificateReviewerByCompanyN" class="input_with_check ">
                             <span class="box_text">No </span>
                         </label>
-            </li>
-        </ul>
-        </div>
+                    </li>
+                </ul>
+            </div>
             <div ng-show="isBigger03012015">
-        <ul class="ss_form_box clearfix">
-            <li class="ss_form_item">
+                <ul class="ss_form_box clearfix">
+                    <li class="ss_form_item">
                         <label class="ss_form_input_title">Are the documents submitted to court properly redacted? </label>
                         <input type="radio" id="DocumentsRedactedY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.DocumentsRedacted" ng-value="true" radio-init defaultvalue="true">
                         <label for="DocumentsRedactedY" class="input_with_check ">
@@ -627,15 +627,15 @@ The courts no longer consider this proper service. "></i></span>
                             Are items of personal information Redacted?
 				<span style='text-transform: none'><i class='fa fa-question-circle tooltip-examples icon-btn ' title='All cases started after 3/1/2015 require that items of personal information (social secuirty numbers, bank accounts, loan numbers, etc.) be Redacted (blocked out) from filing documents.   '></i></span>
                         </label>
-                <input type="radio" id="ItemsRedactedY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ItemsRedacted" ng-value="true" radio-init defaultvalue="true">
-                <label for="ItemsRedactedY" class="input_with_check ">
-                    <span class="box_text">Yes </span>
-                </label>
-                <input type="radio" id="ItemsRedactedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ItemsRedacted" ng-value="false" radio-init defaultvalue="false">
-                <label for="ItemsRedactedN" class="input_with_check ">
-                    <span class="box_text">No </span>
-                </label>
-            </li>
+                        <input type="radio" id="ItemsRedactedY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ItemsRedacted" ng-value="true" radio-init defaultvalue="true">
+                        <label for="ItemsRedactedY" class="input_with_check ">
+                            <span class="box_text">Yes </span>
+                        </label>
+                        <input type="radio" id="ItemsRedactedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ItemsRedacted" ng-value="false" radio-init defaultvalue="false">
+                        <label for="ItemsRedactedN" class="input_with_check ">
+                            <span class="box_text">No </span>
+                        </label>
+                    </li>
                 </ul>
             </div>
         </div>
