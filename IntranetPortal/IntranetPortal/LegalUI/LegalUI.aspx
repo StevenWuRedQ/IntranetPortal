@@ -969,7 +969,7 @@
                 return m;
 
             }
-            var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Description": "What was the last milestone document recorded on Clerk Minutes. ", "ArrayName": "", "Value": "" },
+            var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Description": "What was the last milestone document recorded on Clerk Minutes after O/REF. ", "ArrayName": "", "Value": "" },
                             { "Name": "EveryOneIn", "CallFunc": "", "Description": "Was everyone who is NOT a part of the estate served .", "ArrayName": "", "Value": "false" },
                             { "Name": "ClientPersonallyServed", "CallFunc": "", "Description": "Client Personally Served. ", "ArrayName": "AffidavitOfServices", "Value": "false" },
                             { "Name": "NailAndMail", "CallFunc": "", "Description": "Nail and Mail.", "ArrayName": "AffidavitOfServices", "Value": "true" },
@@ -986,16 +986,16 @@
                             { "Name": "AccelerationLetterMailedDate", "CallFunc": "isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )", "Description": "When was Acceleration letter mailed to borrower. ", "ArrayName": "", "Value": " " },
                             { "Name": "AccelerationLetterRegDate", "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,LegalCase.ForeclosureInfo.AccelerationLetterRegDate,3 )", "Description": "Date of registration for Acceleration letter", "ArrayName": "", "Value": " " },
                             { "Name": "PlaintiffHaveAtCommencement", "CallFunc": "", "Description": "Did current plaintiff have, in possession, the note and mortgage at time of commencement. ", "ArrayName": "", "Value": "false" },
-                            { "Name": "AffirmationFiledDate", "CallFunc": "", "Description": "When was Affirmation filed. ", "ArrayName": "", "Value": "" },
-                            { "Name": "AffirmationReviewerByCompany", "CallFunc": "", "Description": "Was the reviewer employed by the servicing company. ", "ArrayName": "", "Value": "false" },
+                            { "Name": "AffirmationFiledDate", "CallFunc": "isPassByDays(LegalCase.ForeclosureInfo.JudgementDate,LegalCase.ForeclosureInfo.AffirmationFiledDate,0)", "Description": "When was Affirmation filed. ", "ArrayName": "", "Value": "" },
+                            { "Name": "AffirmationReviewerByCompany", "CallFunc": "", "Description": "Was the Affirmation reviewer employed by the servicing company. ", "ArrayName": "", "Value": "false" },
                             { "Name": "MortNoteAssInCert", "CallFunc": "", "Description": "In the Certificate of Merit, is the Mortgage, Note and Assignment included. ", "ArrayName": "", "Value": "false" },
                             { "Name": "MissInCert", "CallFunc": "", "Description": "Which of the above items are missing. ", "ArrayName": "", "Value": "" },
-                            { "Name": "CertificateReviewerByCompany", "CallFunc": "", "Description": "Was the reviewer employed by the servicing company. ", "ArrayName": "", "Value": "false" },
+                            { "Name": "CertificateReviewerByCompany", "CallFunc": "", "Description": "Was the certificate reviewer employed by the servicing company. ", "ArrayName": "", "Value": "false" },
                             { "Name": "ItemsRedacted", "CallFunc": "", "Description": "Are items of personal information Redacted.", "ArrayName": "", "Value": "false" },
                             { "Name": "RJIDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.SAndCFiledDate, LegalCase.ForeclosureInfo.RJIDate, 12)", "Description": "When was RJI filed.", "ArrayName": "", "Value": "" },
                             { "Name": "ConferenceDate", "CallFunc": "isLessOrEqualByDays(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.ConferenceDate, 60)", "Description": "Date Conference was scheduled", "ArrayName": "", "Value": "" },
                             { "Name": "OREFDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)", "Description": "When was O/REF filed.", "ArrayName": "", "Value": "" },
-                            { "Name": "JudgementDate", "CallFunc": "", "Description": "When was Judgement submitted. ", "ArrayName": "", "Value": "" }]
+                            { "Name": "JudgementDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.OREFDate, LegalCase.ForeclosureInfo.JudgementDate, 12)", "Description": "When was Judgement submitted. ", "ArrayName": "", "Value": "" }]
             $scope.HightSummery = function () {
                 var highLight = hSummery
                 //hSummery.splice();
