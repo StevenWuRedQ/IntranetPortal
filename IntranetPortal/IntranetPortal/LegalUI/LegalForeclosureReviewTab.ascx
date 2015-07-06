@@ -572,7 +572,7 @@ The courts no longer consider this proper service. "></i></span>
             <div ng-show="isLess08292013">
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
-                        <label class="ss_form_input_title">
+                        <label class="ss_form_input_title {{isPassByDays(LegalCase.ForeclosureInfo.JudgementDate,LegalCase.ForeclosureInfo.AffirmationFiledDate,0)?'ss_warning':''}}">
                             When was Affirmation filed? 
 				<span style='text-transform: none'><i class='fa fa-question-circle tooltip-examples icon-btn' title='Affirmations before 8/30/2013 must be filed prior to judgement. '></i></span>
                             <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.AffirmationFiledDate">
