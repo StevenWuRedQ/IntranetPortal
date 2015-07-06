@@ -598,7 +598,7 @@
             return {
                 restrict: 'A',
                 link: function (scope, el, attrs) {
-                    scope.$eval(attrs.ngModel + "=" + attrs.ngModel + "==null?"+ attrs.defaultvalue + ":" + attrs.ngModel);
+                    scope.$eval(attrs.ngModel + "=" + attrs.ngModel + "==null?" + attrs.defaultvalue + ":" + attrs.ngModel);
                 }
             }
         });
@@ -619,7 +619,7 @@
             };
         });
 
-        portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
+        portalApp.controller('PortalCtrl', function ($scope, $http, $element, $parse) {
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
             $http.post('/LegalUI/ContactService.svc/CheckInShortSale', { bble: leadsInfoBBLE }).success(function (data) {
 
@@ -904,13 +904,11 @@
                 $http.post('LegalUI.aspx/GetCaseData', data).
                     success(function (data, status, headers, config) {
                         $scope.LegalCase = $.parseJSON(data.d);
-                        var arrays = ["AffidavitOfServices","Assignments"];
-                        for (a in arrays)
-                        {
+                        var arrays = ["AffidavitOfServices", "Assignments"];
+                        for (a in arrays) {
                             var porp = arrays[a]
                             var array = $scope.LegalCase.ForeclosureInfo[porp];
-                            if (!array || array.length == 0)
-                            {
+                            if (!array || array.length == 0) {
                                 $scope.LegalCase.ForeclosureInfo[porp] = [];
                                 $scope.LegalCase.ForeclosureInfo[porp].push({});
                             }
@@ -924,8 +922,8 @@
                     });
             }
             /*return true it hight light check date  */
-            $scope.HighLightDate = function(date,comapteFunc)
-            {
+            $scope.HighLightFunc = function (funcStr) {
+                var args = funcStr.split(",");
 
             }
             $scope.AddSecondaryArray = function () {
@@ -971,50 +969,95 @@
                 return m;
 
             }
-            var hSummery = [{ "Value": "false", "Description": "Client Personally doesn't  Served", "Name": "ClientPersonallyServed" },
-                            { "Value": "true", "Description": "Nail and Mail", "Name": "NailAndMail" },
-                            { "Value": "false", "Description": "Borrower doesn\'t live in service Address", "Name": "LiveInService" },
-                            { "Value": "false", "Description": "Borrower didn\'t ever live in service address", "Name": "LiveInServiceBefore" },
-                            { "Value": "true", "Description": "The process server one of these servers", "Name": "ProcessOnServerList" },
-                            { "Value": "true", "Description": "Web search provide any negative information", "Name": "NegativeInformation" },
-                            { "Value": "false", "Description": "Pursuant to CPLR § 3408(a), the affidavit of service wasn\'t  fill within 20 days of service", "Name": "AffidavitWithin20Days" },
-                            { "Value": "false", "Description": "Web search didn\'t provide any negative information on the process service company", "Name": "NegativeAfterInvestigation" },
-                            { "Value": "false", "Description": "The client hasn't ever filed an answer before", "Name": "ClientAnswered" },
-                            { "Value": "false", "Description": "The current Plaintiff isn\'t the same as the original lender", "Name": "OriginalLender" },
-                            { "Value": "false", "Description": "There aren\'t any endorsements or allonges", "Name": "IsEndorsement" },
-                            { "Value": "true", "Description": "There are robo signors on the endorsements or allonges", "Name": "RoboOnEndorsement" },
-                            { "Value": "true", "Description": "There are documents drafted by DOCX LLC", "Name": "DOCXLLCDocument" },
-                            { "Value": "false", "Description": "We don\'t have the acceleration letter to review", "Name": "AccelerationLetter" },
-                            { "Value": "false", "Description": "The acceleration wasn't letter mailed to the defendant in the proper amount of time (relevant to the default date)", "Name": "LetterMailedInTime" },
-                            { "Value": "false", "Description": "We aren\'t able to see if the acceleration letter was “registered” within 3 business days of date on letter", "Name": "ALRegisteredIn3Days" },
-                            { "Value": "false", "Description": "We aren\'t able to see if the LP was “registered” within 5 business days of filing (RPAPL 1304(1))", "Name": "LPRegisteredIn5Days" }];
+            var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Description": "What was the last milestone document recorded on Clerk Minutes. ", "ArrayName": "", "Value": "" },
+                            { "Name": "EveryOneIn", "CallFunc": "", "Description": "Was everyone who is NOT a part of the estate served .", "ArrayName": "", "Value": "false" },
+                            { "Name": "ClientPersonallyServed", "CallFunc": "", "Description": "Client Personally Served. ", "ArrayName": "AffidavitOfServices", "Value": "false" },
+                            { "Name": "NailAndMail", "CallFunc": "", "Description": "Nail and Mail.", "ArrayName": "AffidavitOfServices", "Value": "true" },
+                            { "Name": "BorrowerLiveInAddrAtTimeServ", "CallFunc": "", "Description": "Did Borrower live in service Address at time of Serv.", "ArrayName": "AffidavitOfServices", "Value": "false" },
+                            { "Name": "BorrowerEverLiveHere", "CallFunc": "", "Description": "If No, did borrower ever live in service address.", "ArrayName": "AffidavitOfServices", "Value": "false" },
+                            { "Name": "ServerInSererList", "CallFunc": "", "Description": "Is the process server one of these servers.", "ArrayName": "AffidavitOfServices", "Value": "true" },
+                            { "Name": "isServerHasNegativeInfo", "CallFunc": "", "Description": "If not on list, did web search provide any negative information on process server. ", "ArrayName": "AffidavitOfServices", "Value": "true" },
+                            { "Name": "AffidavitServiceFiledIn20Day", "CallFunc": "", "Description": "Affidavit of service filed within 20 days of service.", "ArrayName": "AffidavitOfServices", "Value": "false" },
+                            { "Name": "AnswerClientFiledBefore", "CallFunc": "", "Description": "Has the client ever filed an answer before.", "ArrayName": "", "Value": "false" },
+                            { "Name": "NoteEndoresed", "CallFunc": "", "Description": "Note Endoresed.", "ArrayName": "", "Value": "false" },
+                            { "Name": "NoteEndorserIsSignors", "CallFunc": "", "Description": "Is the endorser one of these signors.", "ArrayName": "", "Value": "true" },
+                            { "Name": "HasDocDraftedByDOCXLLC", "CallFunc": "", "Description": "Are there any documents drafted by DOCX LLC .", "ArrayName": "Assignments", "Value": "true" },
+                            { "Name": "LisPendesRegDate", "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.LisPendesDate, LegalCase.ForeclosureInfo.LisPendesRegDate, 5)", "Description": "Date of registration for Lis Pendens letter", "ArrayName": "", "Value": "" },
+                            { "Name": "AccelerationLetterMailedDate", "CallFunc": "isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )", "Description": "When was Acceleration letter mailed to borrower. ", "ArrayName": "", "Value": " " },
+                            { "Name": "AccelerationLetterRegDate", "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,LegalCase.ForeclosureInfo.AccelerationLetterRegDate,3 )", "Description": "Date of registration for Acceleration letter", "ArrayName": "", "Value": " " },
+                            { "Name": "PlaintiffHaveAtCommencement", "CallFunc": "", "Description": "Did current plaintiff have, in possession, the note and mortgage at time of commencement. ", "ArrayName": "", "Value": "false" },
+                            { "Name": "AffirmationFiledDate", "CallFunc": "", "Description": "When was Affirmation filed. ", "ArrayName": "", "Value": "" },
+                            { "Name": "AffirmationReviewerByCompany", "CallFunc": "", "Description": "Was the reviewer employed by the servicing company. ", "ArrayName": "", "Value": "false" },
+                            { "Name": "MortNoteAssInCert", "CallFunc": "", "Description": "In the Certificate of Merit, is the Mortgage, Note and Assignment included. ", "ArrayName": "", "Value": "false" },
+                            { "Name": "MissInCert", "CallFunc": "", "Description": "Which of the above items are missing. ", "ArrayName": "", "Value": "" },
+                            { "Name": "CertificateReviewerByCompany", "CallFunc": "", "Description": "Was the reviewer employed by the servicing company. ", "ArrayName": "", "Value": "false" },
+                            { "Name": "ItemsRedacted", "CallFunc": "", "Description": "Are items of personal information Redacted.", "ArrayName": "", "Value": "false" },
+                            { "Name": "RJIDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.SAndCFiledDate, LegalCase.ForeclosureInfo.RJIDate, 12)", "Description": "When was RJI filed.", "ArrayName": "", "Value": "" },
+                            { "Name": "ConferenceDate", "CallFunc": "isLessOrEqualByDays(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.ConferenceDate, 60)", "Description": "Date Conference was scheduled", "ArrayName": "", "Value": "" },
+                            { "Name": "OREFDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)", "Description": "When was O/REF filed.", "ArrayName": "", "Value": "" },
+                            { "Name": "JudgementDate", "CallFunc": "", "Description": "When was Judgement submitted. ", "ArrayName": "", "Value": "" }];
             $scope.HightSummery = function () {
                 var highLight = hSummery
                 //hSummery.splice();
-                var foreclosureInfo = $scope.LegalCase.ForeclosureInfo;
+
                 for (i = 0; i < highLight.length; i++) {
                     var h = highLight[i];
+                    $scope.ExceptVisable(h, $scope.LegalCase.ForeclosureInfo);
+                    if (h.ArrayName) {
+                        var arrayItem = $scope.LegalCase.ForeclosureInfo[h.ArrayName];
+                        if (arrayItem) {
+                            var shouldVisible = false;
+                            for (var j = 0; j < arrayItem.length; j++) {
+
+                                if ($scope.ExceptVisable(h, arrayItem[j]), j) {
+                                    shouldVisible = true;
+                                }
+                            }
+
+                            h.Visable = shouldVisible;
+
+                        }
+
+                    }
+                }
+
+                return hSummery;
+            };
+
+            $scope.ExceptVisable = function (h, CompareValue, arrayIndex) {
+                var visbale = false;
                     if (h.Value == 'true' || h.Value == 'false') {
                         h.Value = h.Value == 'true';
                     }
 
-                    if (foreclosureInfo[h.Name] == h.Value) {
+                if (h.CallFunc) {
+                    var func = h.CallFunc;
+                    if (func.indexOf("__index__")) {
+                        func = func.replace("__index__", arrayIndex);
+                    }
+                    visbale = $scope.HighlightCompare(func);
+                } else {
+                    if (CompareValue[h.Name] == h.Value) {
                         //hSummery.push(h);
-                        h.Visable = true;
+                        visbale = true;
                     } else {
-                        h.Visable = false;
+                        visbale = false;
                     }
 
-                    if (foreclosureInfo[h.Name] == null && h.Value == false) {
-                        h.Visable = true;
+                    if (CompareValue[h.Name] == null && h.Value == false) {
+                        visbale = true;
                     }
+                    }
+                h.Visable = visbale;
+                return visbale
                 }
-                return hSummery;
-            };
+            $scope.HighlightCompare = function (compareExpresstion) {
            
-            var CaseInfo = {Name:'',Address:''}
-            $scope.GetCaseInfo = function()
-            {
+                var reslut = $scope.$eval(compareExpresstion);
+                return reslut;
+            }
+            var CaseInfo = { Name: '', Address: '' }
+            $scope.GetCaseInfo = function () {
                 var caseName = $scope.LegalCase.CaseName
                 if (caseName) {
                     CaseInfo.Address = caseName.replace(/-(?!.*-).*$/, '');
@@ -1066,14 +1109,14 @@
                 var millisecondsPerDay = 1000 * 60 * 60 * 24;
                 var millisBetween = end_date.getTime() - start_date.getTime();
                 var days = millisBetween / millisecondsPerDay;
-
+  
                 if (days >=0 && days <= count) {
                     return true;
                 }
 
                 return false;
             }
-            $scope.isPassByMonths = function(start, end, count) {
+            $scope.isPassByMonths = function (start, end, count) {
                 var start_date = new Date(start);
                 var end_date = new Date(end);
                 var months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + end_date.getMonth() - start_date.getMonth();
@@ -1085,9 +1128,9 @@
 
 
             }
-            $scope.isPassOrEqualByMonths = function(start, end, count) {
+            $scope.isPassOrEqualByMonths = function (start, end, count) {
                 var start_date = new Date(start);
-                var end_date = new Date(end);                
+                var end_date = new Date(end);
                 var months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + end_date.getMonth() - start_date.getMonth();
 
                 console.log(months);
@@ -1095,20 +1138,18 @@
                 else return false;
             }
 
-            $scope.AddArrayItem = function(model)
-            {
+            $scope.AddArrayItem = function (model) {
                 model = model || [];
                 model.push({});
             }
-            $scope.DeleteItem = function(model,index) 
-            {
+            $scope.DeleteItem = function (model, index) {
                 model.splice(index, 1);
             }
             //$.getJSON('/LegalUI/ContactService.svc/GetAllContacts', function (data) {
 
             //    $scope.selectBoxData = data;
             //});
-
+        
             $scope.isLess08292013 = false;
             $scope.isBigger08302013 = false;
             $scope.isBigger03012015 = false;
@@ -1135,6 +1176,13 @@
         
         });
 
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('body').tooltip({
+                selector: '.tooltip-examples'
+            });
+        })
     </script>
     <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
     <script src="/Scripts/bootstrap.min.js"></script>
