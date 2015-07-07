@@ -852,13 +852,20 @@
                 return false;
             }
 
-            $scope.SaveLegal = function () {
+            $scope.SaveLegal = function (scuessfunc) {
                 var json = JSON.stringify($scope.LegalCase);
 
                 var data = { bble: leadsInfoBBLE, caseData: json };
                 $http.post('LegalUI.aspx/SaveCaseData', data).
                     success(function () {
+                        if (scuessfunc)
+                        {
+                            scuessfunc()
+                        } else
+                        {
                         alert("Save Successed !");
+                        }
+                        
                     }).
                     error(function (data, status) {
                         alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
@@ -909,6 +916,8 @@
                 $http.post('LegalUI.aspx/GetCaseData', data).
                     success(function (data, status, headers, config) {
                         $scope.LegalCase = $.parseJSON(data.d);
+                        $scope.LegalCase.LegalComments = $scope.LegalCase.legalComments || [];
+                        var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
                         var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate", ];
                         for (a in arrays) {
                             var porp = arrays[a]
@@ -917,7 +926,7 @@
                                 $scope.LegalCase.ForeclosureInfo[porp] = [];
                                 $scope.LegalCase.ForeclosureInfo[porp].push({});
                             }
-
+                            
                         }
                         $scope.showSAndCFrom();
 
@@ -1033,9 +1042,9 @@
             }
             $scope.ExceptVisable = function (h, CompareValue, arrayIndex) {
                 var visbale = false;
-                if (h.Value == 'true' || h.Value == 'false') {
-                    h.Value = h.Value == 'true';
-                }
+                    if (h.Value == 'true' || h.Value == 'false') {
+                        h.Value = h.Value == 'true';
+                    }
 
                 if (h.CallFunc) {
                     var func = h.CallFunc;
@@ -1054,12 +1063,12 @@
                     if (CompareValue[h.Name] == null && h.Value == false) {
                         visbale = true;
                     }
-                }
+                    }
                 h.Visable = visbale;
                 return visbale
-            }
+                }
             $scope.HighlightCompare = function (compareExpresstion) {
-
+           
                 var reslut = $scope.$eval(compareExpresstion);
                 return reslut;
             }
@@ -1074,7 +1083,7 @@
                 return CaseInfo;
             }
 
-            $scope.isPassByDays = function (start, end, count) {
+            $scope.isPassByDays = function (start, end, count) {                
                 var start_date = new Date(start);
                 var end_date = new Date(end);
 
@@ -1112,7 +1121,7 @@
                 var millisecondsPerDay = 1000 * 60 * 60 * 24;
                 var millisBetween = end_date.getTime() - start_date.getTime();
                 var days = millisBetween / millisecondsPerDay;
-
+  
                 if (days >= 0 && days <= count) {
                     return true;
                 }
@@ -1148,12 +1157,12 @@
 
             //    $scope.selectBoxData = data;
             //});
-
+        
             $scope.isLess08292013 = false;
             $scope.isBigger08302013 = false;
             $scope.isBigger03012015 = false;
             $scope.showSAndCFormFlag = false;
-
+            
             $scope.showSAndCFrom = function () {
                 var date = new Date($scope.LegalCase.ForeclosureInfo.SAndCFiledDate);
                 if (date - new Date("08/29/2013") > 0) {
@@ -1172,7 +1181,7 @@
                 }
                 $scope.showSAndCFormFlag = $scope.isLess08292013 | $scope.isBigger08302013 | $scope.isBigger03012015;
             };
-
+        
             $scope.HighLightStauts = function (model, index) {
                 if (parseInt(model) > index) return true;
                 else return false;
@@ -1210,17 +1219,6 @@
                 if (!$scope.LegalCase.ForeclosureInfo.MissInCert || $scope.LegalCase.ForeclosureInfo.MissInCert.length == 0)
                     return true;
                 else return false;
-            }
-
-            $scope.initMissInCert = function () {
-                return {
-                    dataSource: $scope.missingItems,
-                    valueExpr: 'id',
-                    displayExpr: 'label',
-                    onValueChanged: function (e) {
-                        e.model.updateMissInCertValue(e.values);
-                    }
-                };
             }
 
         });

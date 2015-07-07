@@ -2351,12 +2351,16 @@ li.mag_tabv.active {
 
     .animate-show.ng-hide-add.ng-hide-add-active,
     .animate-show.ng-hide-remove.ng-hide-remove-active {
-        -webkit-transition: all linear 0.5s;
-        transition: all linear 0.5s;
+        transition: height 1s;
+        transition-property: all;
+        transition-duration: 1s;
+        transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+      
     }
 
     .animate-show.ng-hide {
         opacity: 0;
+       
     }
 
 .short_sale_head_tab > div.shot_sale_sub {
@@ -2390,22 +2394,19 @@ li.mag_tabv.active {
 .more_frame {
     min-height: 855px;
     overflow: auto;
-   
 }
 
-.ss_form_text
-{
-
+.ss_form_text {
 }
-.ss_highlight
-{
-    background:yellow;
+
+.ss_highlight {
+    background: yellow;
 }
 
 .ss_warning {
     color: red;
 }
-.ss_show_from
-{
-    padding-bottom:24px;
+
+.ss_show_from {
+    padding-bottom: 24px;
 }

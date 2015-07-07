@@ -678,7 +678,7 @@
     </Panes>
 </dx:ASPxSplitter>
 <%--change it to color sytle by steven--%>
-<div id="right-pane-container" class="clearfix">
+<div id="right-pane-container" class="clearfix" style="display:none">
     <div id="right-pane-button" style="margin-top: 125px"></div>
     <div id="right-pane">
         <div style="width: 290px; height: 100%; background: #EFF2F5;">

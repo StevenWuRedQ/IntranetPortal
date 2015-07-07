@@ -63,16 +63,16 @@
         $("#addition_info").html(' ');
     }
 
-    function ShowPopupMap(url, header,subHeader) {
+    function ShowPopupMap(url, header, subHeader) {
         aspxAcrisControl.SetContentHtml("Loading...");
         aspxAcrisControl.SetContentUrl(url);
 
         aspxAcrisControl.SetHeaderText(header);
         //header = header + "(Borough:" + ShortSaleCaseData.PropertyInfo.Borough + "Lot:" + ShortSaleCaseData.PropertyInfo.Lot + ")";
         $('#pop_up_header_text').html(header);
-       
+
         $('#addition_info').html(subHeader ? subHeader : '');
-       
+
         aspxAcrisControl.Show();
     }
 
@@ -86,7 +86,7 @@
     function DeleteComments(commentId) {
         leadsCommentsCallbackPanel.PerformCallback("Delete|" + commentId);
     }
-    
+
 </script>
 
 <div class="modal fade" id="RequestModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -122,7 +122,27 @@
         </div>
     </div>
 </div>
-
+<dx:ASPxPopupControl ClientInstanceName="aspxAddLeadsComments" Width="550px" Height="50px" ID="ASPxPopupControl2"
+    HeaderText="Add Comments" ShowHeader="false"
+    runat="server" EnableViewState="false" PopupHorizontalAlign="OutsideRight" PopupVerticalAlign="Middle" EnableHierarchyRecreation="True">
+    <ContentCollection>
+        <dx:PopupControlContentControl>
+            <table>
+                <tr style="padding-top: 3px;">
+                    <td style="width: 380px; vertical-align: central">
+                        <input type="text" ng-model="addCommentTxt" class="form-control" />
+                    </td>
+                    <td style="text-align: right">
+                        <div style="margin-left:20px">
+                            <input type="button" value="Add" ng-click="SaveLegalComments()" class="rand-button" style="background-color: #3993c1" />
+                            <input type="button" value="Close" onclick="aspxAddLeadsComments.Hide()" class="rand-button" style="background-color: #3993c1"/>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+</dx:ASPxPopupControl>
 <div id="" style="width: 100%;">
 
     <input hidden="" id="short_sale_case_id" value="23">
@@ -132,7 +152,7 @@
                 <div style="font-size: 30px">
                     <span>
                         <i class="fa fa-home"></i>
-                           
+
                         <span style="margin-left: 19px;">{{GetCaseInfo().Address}}&nbsp;</span>
                     </span>
                     <span class="time_buttons" style="margin-right: 30px" ng-click="ShowECourts(LegalCase.PropertyInfo.Borough, 'eCourts')" ng-show="LegalCase.PropertyInfo.Borough!=1">eCourts</span>
@@ -149,7 +169,7 @@
             <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
 
                 <div class="note_item" style="background: white">
-
+                    
                     <div style="overflow: auto; height: 100px">
                         <table style="width: 100%;" class="table-striped">
                             <tbody>
@@ -171,14 +191,28 @@
                                     </td>
 
                                 </tr>
-                               
+
+                                 <tr ng-repeat="n in LegalCase.LegalComments">
+                                    <td style="width: 30px">
+                                        <i class="fa fa-exclamation-circle note_img"></i>
+                                    </td>
+                                    <td>
+                                        <div class="note_text">{{n}}</div>
+                                    </td>
+                                     <td style="width: 30px; padding-right: 25px;">
+                                        <i class="fa fa-times" style="font-size: 18px; color: #b1b2b7; cursor: pointer" ng-click="DeleteComments($index)"></i>
+
+                                    </td>
+                                </tr>
+                                
 
                             </tbody>
                         </table>
+                       
                     </div>
 
 
-                    <i class="fa fa-plus-circle note_img tooltip-examples" title="" style="color: #3993c1; display: none; cursor: pointer" onclick="aspxAddLeadsComments.ShowAtElement(this)" data-original-title="Add Notes"></i>
+                    <i class="fa fa-plus-circle note_img tooltip-examples" title="" style="color: #3993c1; cursor: pointer" ng-click="ShowAddPopUp($event);" data-original-title="Add Notes"></i>
                 </div>
             </div>
 
@@ -202,7 +236,7 @@
                     <div class="tab-pane active" id="Summary">
                         <uc1:LegalSummaryTab runat="server" ID="LegalSummaryTab" />
                     </div>
-                    <div class="tab-pane " id="Foreclosure_Review" style="height: 580px; overflow: auto">
+                    <div class="tab-pane " id="Foreclosure_Review" style="height: 554px; overflow: auto">
 
                         <uc1:LegalForeclosureReviewTab runat="server" ID="LegalForeclosureReviewTab" />
 
@@ -226,11 +260,11 @@
                 <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
                 <span class="pop_up_header_text" id="pop_up_header_text">Acris</span> <span class="pop_up_header_text"></span>
             </div>
-            
+
             <div class="pop_up_buttons_div">
                 <i class="fa fa-times icon_btn" onclick="aspxAcrisControl.Hide()"></i>
             </div>
-           
+
         </div>
         <div style="text-align: center" id="addition_info"></div>
     </HeaderTemplate>

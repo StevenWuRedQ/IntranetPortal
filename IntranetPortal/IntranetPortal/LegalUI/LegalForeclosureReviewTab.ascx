@@ -51,7 +51,7 @@
                     </label>
                 </li>
             </ul>
-            <div ng-show="LegalCase.ForeclosureInfo.WasEstateFormed">
+            <div class="animate-show" ng-show="LegalCase.ForeclosureInfo.WasEstateFormed">
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Estate Index #</label>
