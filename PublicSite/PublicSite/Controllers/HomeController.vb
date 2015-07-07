@@ -29,9 +29,20 @@ Public Class HomeController
     '    Return View(criteria)
     'End Function
 
-    Function About() As ActionResult
-        ViewData("Message") = "Your application description page."
+    Function AgentInfo(id As Integer) As ActionResult
+        Dim agent = PortalAgent.GetAgent(id)
+        Return View("AgentDetail", agent)
+    End Function
 
+    Function Agents() As ActionResult
+        Return View()
+    End Function
+
+    Function About() As ActionResult
+        Return View()
+    End Function
+
+    Function WeBuyHouse() As ActionResult
         Return View()
     End Function
 

@@ -147,7 +147,7 @@ End Section
                         <h2 class="featured-agents-desc-h">@agent.Name</h2>
                         <p class="featured-agents-desc-p">
                             @agent.Description
-                        </p><a class="button featured-agents-desc-button" href="#">More About @agent.Name.Split(" ")(0)</a>
+                        </p><a class="button featured-agents-desc-button" href="/Home/AgentInfo/@agent.EmployeeID">More About @agent.Name.Split(" ")(0)</a>
                     </div>
                 </div>
             </div>

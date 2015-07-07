@@ -333,6 +333,8 @@
     <Content Include="fonts\font-awesome-4.3.0\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome-4.3.0\scss\_variables.scss" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="images\agents\.DS_Store" />
+    <Content Include="images\agents\Thumbs.db" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -342,7 +344,20 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <Content Include="images\agents\sample-2.jpg" />
+    <Content Include="images\agents\sample-3.jpg" />
+    <Content Include="images\agents\sample-4.jpg" />
+    <Content Include="images\agents\sample-5.jpg" />
+    <Content Include="images\agents\sample-6.jpg" />
+    <Content Include="images\agents\sample.jpg" />
+    <Content Include="images\bg-4.jpg" />
+    <Content Include="images\bg-5.jpg" />
+    <Content Include="images\bg-6.jpg" />
+    <Content Include="images\bg-7.jpg" />
+    <Content Include="images\bg-8.jpg" />
+    <Content Include="images\bg-9.jpg" />
     <Content Include="images\sample-image-70-54.jpg" />
+    <Content Include="images\team.jpg" />
     <Content Include="other\.DS_Store" />
     <Content Include="other\animated-headline\.DS_Store" />
     <Content Include="other\animated-headline\css\.DS_Store" />
@@ -416,6 +431,10 @@
     <Content Include="Views\Shared\_LoginPartial.vbhtml" />
     <Content Include="Views\Home\Detail.vbhtml" />
     <Content Include="Views\Home\List.vbhtml" />
+    <Content Include="Views\Home\Agents.vbhtml" />
+    <Content Include="Views\Shared\_TopMenuPartial.vbhtml" />
+    <Content Include="Views\Home\AgentDetail.vbhtml" />
+    <Content Include="Views\Home\WeBuyHouse.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
