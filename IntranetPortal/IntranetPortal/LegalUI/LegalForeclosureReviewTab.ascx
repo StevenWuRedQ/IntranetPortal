@@ -9,7 +9,7 @@
                 <option value="Steven Wu">Steven Wu</option>
             </select>
             <%--   <input type="button" class="rand-button short_sale_edit" visible="false" value="Assign" runat="server" onserverclick="btnAssign_ServerClick" id="btnAssign" />
-            <input type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveLegal()"  />--%>
+			<input type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveLegal()"  />--%>
         </div>
     </div>
     <!-- case -->
@@ -74,7 +74,7 @@
                         <li class="ss_form_item " ng-repeat="member in LegalCase.ForeclosureInfo.MembersOfEstate" ng-show="$index>0">
                             <input class="ss_form_input" ng-model="member.name"><i class="fa fa-minus-circle icon_btn" ng-click="delEstateMembers($index)"></i>
 
-                    </li>
+                        </li>
                         <li class="ss_form_item" ng-show="LegalCase.ForeclosureInfo.MembersOfEstate.length<=6">
                             <input class="ss_form_input" ng-model="LegalCase.membersText">
                             <i class="fa fa-plus-circle fa-lg icon_btn" ng-click="addToEstateMembers(LegalCase.ForeclosureInfo.MembersOfEstate.length)"></i>
@@ -434,7 +434,7 @@ The courts no longer consider this proper service. "></i></span>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.NoteEndoresed?'ss_warning':''">
                             Note Endoresed
-                        <span style='text-transform: none'><i class='fa fa-question-circle tooltip-examples icon-btn' title='If a note does not have the proper allonge, or a note endorsement, then there is no proof of proper transfer. '></i></span>
+						<span style='text-transform: none'><i class='fa fa-question-circle tooltip-examples icon-btn' title='If a note does not have the proper allonge, or a note endorsement, then there is no proof of proper transfer. '></i></span>
                         </label>
                         <input type="radio" id="NoteEndoresedY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteEndoresed" ng-value="true" radio-init defaultvalue="true">
                         <label for="NoteEndoresedY" class="input_with_check ">
@@ -609,24 +609,22 @@ The courts no longer consider this proper service. "></i></span>
                             <span class="box_text">No </span>
                         </label>
                     </li>
-                    <%--todo multiple selection--%>
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Which of the above items are missing</label>
-                        <select class="ss_form_input" ng-model="LegalCase.PropertyInfo.MissInCert">
-                            <option value="Mortgage">Mortgage</option>
-                            <option value="Note">Note</option>
-                            <option value="Assignment">Assignment</option>
-                        </select>
+
+                    <li class="ss_form_item" style="width: 66.6%">
+                        <label class="ss_form_input_title" ng-class="checkMissInCertValue()?'ss_warning':''">Which of the above items are missing</label>
+                        <div id="MissInCert" dx-tag-box="initMissInCert()"></div>
                     </li>
-                    <li class="ss_form_item">
+
+
+					<li class="ss_form_item">
                         <label class="ss_form_input_title">
                             In the Certificate of Merit, what is the name of the Reviewer
-				<span style='text-transform: none'><i class='fa fa-question-circle tooltip-examples icon-btn ' title='A Certificate of Merit has two requirement. First, it must have a Mortgage, Note, and Assignment included. Second, it must have a name of a party of the servicer who reviewed the name of the documents AND that person needs to have been employed by the servicer.  '></i></span>
+				<span style='text-transform: none'><i class='fa fa-question-circle tooltip-examples icon-btn ' title='A Certificate of Merit has two requirement. First, it must have a Mortgage, Note, and Assignment included. Second, it must have a name of a party of the servicer who reviewed the name of the documents AND that person needs to have been employed by the servicer.'></i></span>
                         </label>
                         <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CertificateReviewer">
                     </li>
                     <li class="ss_form_item">
-                        <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.CertificateReviewerByCompany?'ss_warning':''"">Was the reviewer employed by the servicing company</label>
+                        <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.CertificateReviewerByCompany?'ss_warning':''">Was the reviewer employed by the servicing company</label>
                         <input type="radio" id="CertificateReviewerByCompanyY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CertificateReviewerByCompany" ng-value="true" radio-init defaultvalue="true">
                         <label for="CertificateReviewerByCompanyY" class="input_with_check ">
                             <span class="box_text">Yes </span>

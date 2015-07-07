@@ -15,7 +15,9 @@
 
     <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/jquery.webui-popover.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
     <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
@@ -23,18 +25,21 @@
 
     <script src="/Scripts/dx.webappjs.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
     <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.light.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
+
     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
     <script src="/Scripts/stevenjs.js"></script>
+
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
-    <script src=""></script>
+
+
+
     <style type="text/css">
         .chipsdemoContactChips md-content.autocomplete {
             min-height: 250px;
@@ -555,7 +560,10 @@
 
         }
         function setLegalData(BBLE) {
-            $(document).ready(function () { angular.element(document.getElementById('PortalCtrl')).scope().LoadLeadsCase(BBLE) })
+            $(document).ready(function () {
+                angular.element(document.getElementById('PortalCtrl')).scope().LoadLeadsCase(BBLE);
+            });
+
         }
 
 
@@ -904,7 +912,7 @@
                 $http.post('LegalUI.aspx/GetCaseData', data).
                     success(function (data, status, headers, config) {
                         $scope.LegalCase = $.parseJSON(data.d);
-                        var arrays = ["AffidavitOfServices", "Assignments","MembersOfEstate"];
+                        var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate", ];
                         for (a in arrays) {
                             var porp = arrays[a]
                             var array = $scope.LegalCase.ForeclosureInfo[porp];
@@ -912,10 +920,9 @@
                                 $scope.LegalCase.ForeclosureInfo[porp] = [];
                                 $scope.LegalCase.ForeclosureInfo[porp].push({});
                             }
-                            
+
                         }
 
-                        
                     }).
                     error(function () {
                         alert("Fail to load data : " + BBLE);
@@ -1003,7 +1010,7 @@
                 for (i = 0; i < highLight.length; i++) {
                     var h = highLight[i];
                     $scope.ExceptVisable(h, $scope.LegalCase.ForeclosureInfo);
-                    if (h.ArrayName && h.ArrayName.length>0) {
+                    if (h.ArrayName && h.ArrayName.length > 0) {
                         var arrayItem = $scope.LegalCase.ForeclosureInfo[h.ArrayName];
                         if (arrayItem) {
                             var shouldVisible = false;
@@ -1023,15 +1030,14 @@
 
                 return hSummery;
             };
-            $scope.HighLightStauts =function(stauts,Count)
-            {
+            $scope.HighLightStauts = function (stauts, Count) {
                 return stauts > Count;
             }
             $scope.ExceptVisable = function (h, CompareValue, arrayIndex) {
                 var visbale = false;
-                    if (h.Value == 'true' || h.Value == 'false') {
-                        h.Value = h.Value == 'true';
-                    }
+                if (h.Value == 'true' || h.Value == 'false') {
+                    h.Value = h.Value == 'true';
+                }
 
                 if (h.CallFunc) {
                     var func = h.CallFunc;
@@ -1050,12 +1056,12 @@
                     if (CompareValue[h.Name] == null && h.Value == false) {
                         visbale = true;
                     }
-                    }
+                }
                 h.Visable = visbale;
                 return visbale
-                }
+            }
             $scope.HighlightCompare = function (compareExpresstion) {
-           
+
                 var reslut = $scope.$eval(compareExpresstion);
                 return reslut;
             }
@@ -1070,7 +1076,7 @@
                 return CaseInfo;
             }
 
-            $scope.isPassByDays = function (start, end, count) {                
+            $scope.isPassByDays = function (start, end, count) {
                 var start_date = new Date(start);
                 var end_date = new Date(end);
 
@@ -1108,7 +1114,7 @@
                 var millisecondsPerDay = 1000 * 60 * 60 * 24;
                 var millisBetween = end_date.getTime() - start_date.getTime();
                 var days = millisBetween / millisecondsPerDay;
-  
+
                 if (days >= 0 && days <= count) {
                     return true;
                 }
@@ -1144,12 +1150,12 @@
 
             //    $scope.selectBoxData = data;
             //});
-        
+
             $scope.isLess08292013 = false;
             $scope.isBigger08302013 = false;
             $scope.isBigger03012015 = false;
             $scope.showSAndCFormFlag = false;
-            
+
             $scope.showSAndCFrom = function () {
                 var date = new Date($scope.LegalCase.ForeclosureInfo.SAndCFiledDate);
                 if (date - new Date("08/29/2013") > 0) {
@@ -1168,8 +1174,8 @@
                 }
                 $scope.showSAndCFormFlag = $scope.isLess08292013 | $scope.isBigger08302013 | $scope.isBigger03012015;
             };
-        
-            $scope.HighLightStauts= function(model, index){
+
+            $scope.HighLightStauts = function (model, index) {
                 if (parseInt(model) > index) return true;
                 else return false;
             };
@@ -1191,7 +1197,35 @@
 
             }
 
+            $scope.missingItems = [
+                { id: 1, label: "Mortgage" },
+                { id: 2, label: "Note" },
+                { id: 3, label: "Assignment" },
+            ];
+
+            $scope.updateMissInCertValue = function(value){
+                $scope.LegalCase.ForeclosureInfo.MissInCert = value;
+            }
+
+            $scope.checkMissInCertValue = function () {
+                if (!$scope.LegalCase.ForeclosureInfo.MissInCert || $scope.LegalCase.ForeclosureInfo.MissInCert.length == 0)
+                    return true;
+                else return false;
+            }
+
+            $scope.initMissInCert = function () {
+                return {
+                    dataSource: $scope.missingItems,
+                    valueExpr: 'id',
+                    displayExpr: 'label',
+                    onValueChanged: function (e) {
+                        e.model.updateMissInCertValue(e.values);
+                    }
+                };
+            }
+
         });
+
 
     </script>
     <script>
