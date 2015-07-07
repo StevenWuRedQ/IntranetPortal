@@ -599,10 +599,10 @@ The courts no longer consider this proper service. "></i></span>
             <div ng-show="isBigger08302013">
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
-                        <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.MortNoteAssInCert?'ss_warning':''">In the Certificate of Merit, is the Mortgage, Note and Assignment included?</label>
+                        <span class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.MortNoteAssInCert?'ss_warning':''">In the Certificate of Merit, is the Mortgage, Note and Assignment included?</span>
                         <input type="radio" id="MortNoteAssInCertY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.MortNoteAssInCert" ng-value="true" radio-init defaultvalue="true">
                         <label for="MortNoteAssInCertY" class="input_with_check ">
-                            <span class="box_text">Yes </span>
+                            <span class="box_text">Yes</span>
                         </label>
                         <input type="radio" id="MortNoteAssInCertN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.MortNoteAssInCert" ng-value="false">
                         <label for="MortNoteAssInCertN" class="input_with_check ">
@@ -610,7 +610,7 @@ The courts no longer consider this proper service. "></i></span>
                         </label>
                     </li>
 
-                    <li class="ss_form_item" style="width: 66.6%">
+                    <li ng-show="!LegalCase.ForeclosureInfo.MortNoteAssInCert" class="ss_form_item" style="width: 66.6%">
                         <label class="ss_form_input_title" ng-class="checkMissInCertValue()?'ss_warning':''">Which of the above items are missing</label>
                         <div id="MissInCert" dx-tag-box="initMissInCert()"></div>
                     </li>

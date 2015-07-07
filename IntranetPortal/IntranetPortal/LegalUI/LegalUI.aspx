@@ -560,10 +560,7 @@
 
         }
         function setLegalData(BBLE) {
-            $(document).ready(function () {
-                angular.element(document.getElementById('PortalCtrl')).scope().LoadLeadsCase(BBLE);
-            });
-
+            angular.element(document.getElementById('PortalCtrl')).scope().LoadLeadsCase(BBLE);
         }
 
 
@@ -922,6 +919,7 @@
                             }
 
                         }
+                        $scope.showSAndCFrom();
 
                     }).
                     error(function () {
@@ -1208,6 +1206,7 @@
             }
 
             $scope.checkMissInCertValue = function () {
+                if ($LegalCase.ForeclosureInfo.MortNoteAssInCert) return false;
                 if (!$scope.LegalCase.ForeclosureInfo.MissInCert || $scope.LegalCase.ForeclosureInfo.MissInCert.length == 0)
                     return true;
                 else return false;
