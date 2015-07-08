@@ -201,7 +201,7 @@
                                         <i class="fa fa-exclamation-circle note_img"></i>
                                     </td>
                                     <td>
-                                        <div class="note_text">{{n}}</div>
+                                        <div class="note_text">{{n.Comment}}</div>
                                     </td>
                                      <td style="width: 30px; padding-right: 25px;">
                                         <i class="fa fa-times" style="font-size: 18px; color: #b1b2b7; cursor: pointer" ng-click="DeleteComments($index)"></i>

@@ -1246,10 +1246,11 @@
             $scope.SaveLegalComments = function()
             {
                 
-                $scope.LegalCase.LegalComments.push($scope.addCommentTxt);
+                $scope.LegalCase.LegalComments.push({ id: $scope.LegalCase.LegalComments.length + 1, Comment: $scope.addCommentTxt });
                 $scope.SaveLegal(function() 
                 {
                     console.log("ADD comments" + $scope.addCommentTxt);
+                    aspxAddLeadsComments.Hide();
                 })
             }
 
