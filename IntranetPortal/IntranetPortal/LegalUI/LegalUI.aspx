@@ -917,8 +917,9 @@
 
                 $http.post('LegalUI.aspx/GetCaseData', data).
                     success(function (data, status, headers, config) {
+                      
                         $scope.LegalCase = $.parseJSON(data.d);
-                        $scope.LegalCase.LegalComments = $scope.LegalCase.legalComments || [];
+                        $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
                         var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
                         var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate", ];
                         for (a in arrays) {
@@ -1234,9 +1235,31 @@
                     }
                 };
             }
-            //%--Steven code part--
+            //--Steven code part--
 
+            $scope.ShowAddPopUp = function(event)
+            {
+                $scope.addCommentTxt = "";
+                aspxAddLeadsComments.ShowAtElement(event.target);
+            }
+           
+            $scope.SaveLegalComments = function()
+            {
+                
+                $scope.LegalCase.LegalComments.push($scope.addCommentTxt);
+                $scope.SaveLegal(function() 
+                {
+                    console.log("ADD comments" + $scope.addCommentTxt);
+                })
+            }
 
+            $scope.DeleteComments =function(index)
+            {
+                $scope.LegalCase.LegalComments.splice(index, 1);
+                $scope.SaveLegal(function () {
+                    console.log("Deleted comments");
+                })
+            }
             //------------------------------
 
 

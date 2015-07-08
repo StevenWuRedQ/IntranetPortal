@@ -169,7 +169,7 @@
             <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
 
                 <div class="note_item" style="background: white">
-                    
+                   
                     <div style="overflow: auto; height: 100px">
                         <table style="width: 100%;" class="table-striped">
                             <tbody>
@@ -180,7 +180,9 @@
                                     <td>
                                         <div class="note_text">Agent description : {{LegalCase.Description}}</div>
                                     </td>
-
+                                    <td style="width: 30px; padding-right: 25px;">
+                                        &nbsp;
+                                    </td>
                                 </tr>
                                 <tr ng-repeat="n in HightSummery() | filter:{Visable:true}">
                                     <td style="width: 30px">
@@ -189,7 +191,9 @@
                                     <td>
                                         <div class="note_text">{{n.Description}}</div>
                                     </td>
-
+                                     <td style="width: 30px; padding-right: 25px;">
+                                        &nbsp;
+                                    </td>
                                 </tr>
 
                                  <tr ng-repeat="n in LegalCase.LegalComments">
