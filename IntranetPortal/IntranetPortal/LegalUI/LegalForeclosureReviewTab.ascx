@@ -12,6 +12,7 @@
 			<input type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveLegal()"  />--%>
         </div>
     </div>
+
     <!-- case -->
     <div>
         <h4 class="ss_form_title">Case Status</h4>
@@ -32,12 +33,11 @@
             </li>
         </ul>
     </div>
-    <br />
 
     <!-- Estate Pending -->
     <div class="ss_form">
         <h4 class="ss_form_title">Estate Pending</h4>
-        <div class="ss_form animate-show" ng-class="LegalCase.ForeclosureInfo.WasEstateFormed?'edit_text_area ss_show_from':''">
+        <div class="ss_form">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.WasEstateFormed?'ss_warning':''">Was Estate formed? </label>
@@ -51,7 +51,7 @@
                     </label>
                 </li>
             </ul>
-            <div class="animate-show" ng-show="LegalCase.ForeclosureInfo.WasEstateFormed">
+            <div class="arrow_box" ng-show="LegalCase.ForeclosureInfo.WasEstateFormed">
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Estate Index #</label>
@@ -116,6 +116,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Bankruptcy -->
     <div class="ss_form">
@@ -279,7 +280,7 @@ The courts no longer consider this proper service. "></i></span>
         </div>
     </div>
 
-    <%--Assignments--%>
+    <!-- Assignments -->
     <div class="ss_array">
 
         <h4 class="ss_form_title title_with_line  title_after_notes ">
@@ -375,10 +376,16 @@ The courts no longer consider this proper service. "></i></span>
                     <span class="box_text">No </span>
                 </label>
             </li>
-            <li class="ss_form_item ss_form_item_line" ng-show="!LegalCase.ForeclosureInfo.AnswerClientFiledBefore">
+        </ul>
+        <div class="arrow_box" ng-show="!LegalCase.ForeclosureInfo.AnswerClientFiledBefore">
+            <ul class="ss_form_box clearfix">
+                <li class="ss_form_item ss_form_item_line">
                 <label class="ss_form_input_title">Why did borrower not file a timely answer</label>
                 <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.AnswerClientFiledBeforeDetail"></textarea>
             </li>
+            </ul>
+        </div>
+        <ul class="ss_form_box clearfix">
             <li class="ss_form_item ss_form_item_line">
                 <label class="ss_form_input_title">Additional Answer Comments</label>
                 <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.AdditionalAnswerComments "></textarea>
@@ -392,7 +399,7 @@ The courts no longer consider this proper service. "></i></span>
     <!-- Note -->
     <div class="ss_form">
         <h4 class="ss_form_title">Note</h4>
-        <div class="ss_form" ng-class="LegalCase.ForeclosureInfo.NoteIsPossess?'edit_text_area ss_show_from':''">
+
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.NoteIsPossess?'ss_warning':''">Do we possess a copy of the note</label>
@@ -406,7 +413,7 @@ The courts no longer consider this proper service. "></i></span>
                     </label>
                 </li>
             </ul>
-            <div ng-show="LegalCase.ForeclosureInfo.NoteIsPossess">
+        <div class="arrow_box" ng-show="LegalCase.ForeclosureInfo.NoteIsPossess">
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Obligor 1</label>
@@ -458,7 +465,7 @@ The courts no longer consider this proper service. "></i></span>
                 </li>
             </ul>
         </div>
-    </div>
+
 
     <!-- default letter -->
     <div class="ss_form">
@@ -486,7 +493,7 @@ The courts no longer consider this proper service. "></i></span>
             </li>
         </ul>
 
-        <div class="ss_form" ng-class="LegalCase.ForeclosureInfo.AccelerationLetterReview?'edit_text_area ss_show_from':''">
+
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Do we have the acceleration letter to review?</label>
@@ -500,7 +507,7 @@ The courts no longer consider this proper service. "></i></span>
                     </label>
                 </li>
             </ul>
-            <div ng-show="LegalCase.ForeclosureInfo.AccelerationLetterReview">
+        <div class="arrow_box" ng-show="LegalCase.ForeclosureInfo.AccelerationLetterReview">
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title {{isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )?'ss_warning':''}}">
@@ -522,7 +529,7 @@ The courts no longer consider this proper service. "></i></span>
                     </li>
 
                 </ul>
-            </div>
+
         </div>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ss_form_item_line {{isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,2 )?'ss_warning':''}}">
@@ -562,13 +569,13 @@ The courts no longer consider this proper service. "></i></span>
             </li>
 
         </ul>
-        <div class="ss_form" ng-class="showSAndCFormFlag?'edit_text_area ss_show_from':''">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">When was S&C filed?</label>
                     <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.SAndCFiledDate" ng-change="showSAndCFrom()">
                 </li>
             </ul>
+        <div class="arrow_box" ng-show="showSAndCFormFlag">
             <div ng-show="isLess08292013">
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">

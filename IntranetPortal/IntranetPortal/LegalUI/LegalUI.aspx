@@ -106,6 +106,7 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
+
     <%--leagal Ui--%>
  
     <div id="Div1" ng-controller="PortalCtrl" runat="server" visible="false">
@@ -927,7 +928,7 @@
                                 $scope.LegalCase.ForeclosureInfo[porp] = [];
                                 $scope.LegalCase.ForeclosureInfo[porp].push({});
                             }
-                            
+
                         }
                         $scope.showSAndCFrom();
 
@@ -984,34 +985,33 @@
                 return m;
 
             }
-            var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Value": "", "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ", "ArrayName": "" },
-                            { "Name": "EveryOneIn", "CallFunc": "", "Value": "false", "Description": "everyone is not a part of the estate served .", "ArrayName": "" },
-                            { "Name": "ClientPersonallyServed", "CallFunc": "", "Value": "false", "Description": "Client personally is not served. ", "ArrayName": "AffidavitOfServices" },
-                            { "Name": "NailAndMail", "CallFunc": "", "Value": "true", "Description": "Nail and Mail.", "ArrayName": "AffidavitOfServices" },
-                            { "Name": "BorrowerLiveInAddrAtTimeServ", "CallFunc": "", "Value": "false", "Description": "Borrower didn\'t live in service Address at time of Serv.", "ArrayName": "AffidavitOfServices" },
-                            { "Name": "BorrowerEverLiveHere", "CallFunc": "", "Value": "false", "Description": "Borrower didn\'t ever live in service address.", "ArrayName": "AffidavitOfServices" },
-                            { "Name": "ServerInSererList", "CallFunc": "", "Value": "true", "Description": "process server is in server list.", "ArrayName": "AffidavitOfServices" },
-                            { "Name": "isServerHasNegativeInfo", "CallFunc": "", "Value": "true", "Description": "Web search provide any negative information on process server. ", "ArrayName": "AffidavitOfServices" },
-                            { "Name": "AffidavitServiceFiledIn20Day", "CallFunc": "", "Value": "false", "Description": "Affidavit of service wasn\'t file within 20 days of service.", "ArrayName": "AffidavitOfServices" },
-                            { "Name": "AnswerClientFiledBefore", "CallFunc": "", "Value": "false", "Description": "Client hasn\'t ever filed an answer before.", "ArrayName": "" },
-                            { "Name": "", "CallFunc": "", "Value": "false", "Description": "We Don't possess a copy of the note.", "ArrayName": "" },
-                            { "Name": "NoteEndoresed", "CallFunc": "", "Value": "false", "Description": "Note wasn\'t endores.", "ArrayName": "" },
-                            { "Name": "NoteEndorserIsSignors", "CallFunc": "", "Value": "true", "Description": "The endorser is in signors list.", "ArrayName": "" },
-                            { "Name": "HasDocDraftedByDOCXLLC", "CallFunc": "", "Value": "true", "Description": "There are documents drafted by DOCX LLC .", "ArrayName": "Assignments" },
-                            { "Name": "LisPendesRegDate", "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.LisPendesDate, LegalCase.ForeclosureInfo.LisPendesRegDate, 5)", "Value": "", "Description": "Date of registration 5 days after Lis Pendens letter", "ArrayName": "" },
-                            { "Name": "AccelerationLetterMailedDate", "CallFunc": "isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )", "Value": " ", "Description": "Acceleration letter mailed to borrower after 12 months of Default Date. ", "ArrayName": "" },
-                            { "Name": "AccelerationLetterRegDate", "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,LegalCase.ForeclosureInfo.AccelerationLetterRegDate,3 )", "Value": " ", "Description": "Date of registration for Acceleration letter filed  3 days after acceleration letter mailed date", "ArrayName": "" },
-                            { "Name": "PlaintiffHaveAtCommencement", "CallFunc": "", "Value": "false", "Description": "Current plaintiff didn\'t have  in possession, the note and mortgage at time of commencement. ", "ArrayName": "" },
-                            { "Name": "AffirmationFiledDate", "CallFunc": "isPassByDays(LegalCase.ForeclosureInfo.JudgementDate,LegalCase.ForeclosureInfo.AffirmationFiledDate,0)", "Value": "", "Description": "Affirmation filed after Judgement. ", "ArrayName": "" },
-                            { "Name": "AffirmationReviewerByCompany", "CallFunc": "", "Value": "false", "Description": "The affirmation reviewer wasn\'t employe by the servicing company. ", "ArrayName": "" },
-                            { "Name": "MortNoteAssInCert", "CallFunc": "", "Value": "false", "Description": "In the Certificate of Merit, the Mortgage, Note and Assignment aren\'t included. ", "ArrayName": "" },
-                            { "Name": "MissInCert", "CallFunc": "checkMissInCertValue()", "Value": "", "Description": "Mortgage Note or Assignment are missing. ", "ArrayName": "" },
-                            { "Name": "CertificateReviewerByCompany", "CallFunc": "", "Value": "false", "Description": "The certificate  reviewer wasn\'t employe by the servicing company. ", "ArrayName": "" },
-                            { "Name": "ItemsRedacted", "CallFunc": "", "Value": "false", "Description": "Are items of personal information Redacted.", "ArrayName": "" },
-                            { "Name": "RJIDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.SAndCFiledDate, LegalCase.ForeclosureInfo.RJIDate, 12)", "Value": "", "Description": "RJI filed after 12 months of S&C.", "ArrayName": "" },
-                            { "Name": "ConferenceDate", "CallFunc": "isLessOrEqualByDays(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.ConferenceDate, 60)", "Value": "", "Description": "Conference date scheduled 60 days before RJI", "ArrayName": "" },
-                            { "Name": "OREFDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)", "Value": "", "Description": "O/REF filed after 12 months after RJI.", "ArrayName": "" },
-                            { "Name": "JudgementDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)", "Value": "", "Description": "Judgement submitted 12 months after O/REF. ", "ArrayName": "" }]
+            var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Description": "What was the last milestone document recorded on Clerk Minutes after O/REF. ", "ArrayName": "", "Value": "" },
+                            { "Name": "EveryOneIn", "CallFunc": "", "Description": "Was everyone who is NOT a part of the estate served .", "ArrayName": "", "Value": "false" },
+                            { "Name": "ClientPersonallyServed", "CallFunc": "", "Description": "Client Personally Served. ", "ArrayName": "AffidavitOfServices", "Value": "false" },
+                            { "Name": "NailAndMail", "CallFunc": "", "Description": "Nail and Mail.", "ArrayName": "AffidavitOfServices", "Value": "true" },
+                            { "Name": "BorrowerLiveInAddrAtTimeServ", "CallFunc": "", "Description": "Did Borrower live in service Address at time of Serv.", "ArrayName": "AffidavitOfServices", "Value": "false" },
+                            { "Name": "BorrowerEverLiveHere", "CallFunc": "", "Description": "If No, did borrower ever live in service address.", "ArrayName": "AffidavitOfServices", "Value": "false" },
+                            { "Name": "ServerInSererList", "CallFunc": "", "Description": "Is the process server one of these servers.", "ArrayName": "AffidavitOfServices", "Value": "true" },
+                            { "Name": "isServerHasNegativeInfo", "CallFunc": "", "Description": "If not on list, did web search provide any negative information on process server. ", "ArrayName": "AffidavitOfServices", "Value": "true" },
+                            { "Name": "AffidavitServiceFiledIn20Day", "CallFunc": "", "Description": "Affidavit of service filed within 20 days of service.", "ArrayName": "AffidavitOfServices", "Value": "false" },
+                            { "Name": "AnswerClientFiledBefore", "CallFunc": "", "Description": "Has the client ever filed an answer before.", "ArrayName": "", "Value": "false" },
+                            { "Name": "NoteEndoresed", "CallFunc": "", "Description": "Note Endoresed.", "ArrayName": "", "Value": "false" },
+                            { "Name": "NoteEndorserIsSignors", "CallFunc": "", "Description": "Is the endorser one of these signors.", "ArrayName": "", "Value": "true" },
+                            { "Name": "HasDocDraftedByDOCXLLC", "CallFunc": "", "Description": "Are there any documents drafted by DOCX LLC .", "ArrayName": "Assignments", "Value": "true" },
+                            { "Name": "LisPendesRegDate", "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.LisPendesDate, LegalCase.ForeclosureInfo.LisPendesRegDate, 5)", "Description": "Date of registration for Lis Pendens letter", "ArrayName": "", "Value": "" },
+                            { "Name": "AccelerationLetterMailedDate", "CallFunc": "isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )", "Description": "When was Acceleration letter mailed to borrower. ", "ArrayName": "", "Value": " " },
+                            { "Name": "AccelerationLetterRegDate", "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,LegalCase.ForeclosureInfo.AccelerationLetterRegDate,3 )", "Description": "Date of registration for Acceleration letter", "ArrayName": "", "Value": " " },
+                            { "Name": "PlaintiffHaveAtCommencement", "CallFunc": "", "Description": "Did current plaintiff have, in possession, the note and mortgage at time of commencement. ", "ArrayName": "", "Value": "false" },
+                            { "Name": "AffirmationFiledDate", "CallFunc": "isPassByDays(LegalCase.ForeclosureInfo.JudgementDate,LegalCase.ForeclosureInfo.AffirmationFiledDate,0)", "Description": "When was Affirmation filed. ", "ArrayName": "", "Value": "" },
+                            { "Name": "AffirmationReviewerByCompany", "CallFunc": "", "Description": "Was the Affirmation reviewer employed by the servicing company. ", "ArrayName": "", "Value": "false" },
+                            { "Name": "MortNoteAssInCert", "CallFunc": "", "Description": "In the Certificate of Merit, is the Mortgage, Note and Assignment included. ", "ArrayName": "", "Value": "false" },
+                            { "Name": "MissInCert", "CallFunc": "checkMissInCertValue()", "Description": "Which of the above items are missing. ", "ArrayName": "", "Value": "" },
+                            { "Name": "CertificateReviewerByCompany", "CallFunc": "", "Description": "Was the certificate reviewer employed by the servicing company. ", "ArrayName": "", "Value": "false" },
+                            { "Name": "ItemsRedacted", "CallFunc": "", "Description": "Are items of personal information Redacted.", "ArrayName": "", "Value": "false" },
+                            { "Name": "RJIDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.SAndCFiledDate, LegalCase.ForeclosureInfo.RJIDate, 12)", "Description": "When was RJI filed.", "ArrayName": "", "Value": "" },
+                            { "Name": "ConferenceDate", "CallFunc": "isLessOrEqualByDays(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.ConferenceDate, 60)", "Description": "Date Conference was scheduled", "ArrayName": "", "Value": "" },
+                            { "Name": "OREFDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)", "Description": "When was O/REF filed.", "ArrayName": "", "Value": "" },
+                            { "Name": "JudgementDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.OREFDate, LegalCase.ForeclosureInfo.JudgementDate, 12)", "Description": "When was Judgement submitted. ", "ArrayName": "", "Value": "" }]
             $scope.HightSummery = function () {
                 var highLight = hSummery
                 //hSummery.splice();
@@ -1044,9 +1044,9 @@
             }
             $scope.ExceptVisable = function (h, CompareValue, arrayIndex) {
                 var visbale = false;
-                    if (h.Value == 'true' || h.Value == 'false') {
-                        h.Value = h.Value == 'true';
-                    }
+                if (h.Value == 'true' || h.Value == 'false') {
+                    h.Value = h.Value == 'true';
+                }
 
                 if (h.CallFunc) {
                     var func = h.CallFunc;
@@ -1065,12 +1065,12 @@
                     if (CompareValue[h.Name] == null && h.Value == false) {
                         visbale = true;
                     }
-                    }
+                }
                 h.Visable = visbale;
                 return visbale
-                }
+            }
             $scope.HighlightCompare = function (compareExpresstion) {
-           
+
                 var reslut = $scope.$eval(compareExpresstion);
                 return reslut;
             }
@@ -1085,7 +1085,7 @@
                 return CaseInfo;
             }
 
-            $scope.isPassByDays = function (start, end, count) {                
+            $scope.isPassByDays = function (start, end, count) {
                 var start_date = new Date(start);
                 var end_date = new Date(end);
 
@@ -1123,7 +1123,7 @@
                 var millisecondsPerDay = 1000 * 60 * 60 * 24;
                 var millisBetween = end_date.getTime() - start_date.getTime();
                 var days = millisBetween / millisecondsPerDay;
-  
+
                 if (days >= 0 && days <= count) {
                     return true;
                 }
@@ -1159,12 +1159,12 @@
 
             //    $scope.selectBoxData = data;
             //});
-        
+
             $scope.isLess08292013 = false;
             $scope.isBigger08302013 = false;
             $scope.isBigger03012015 = false;
             $scope.showSAndCFormFlag = false;
-            
+
             $scope.showSAndCFrom = function () {
                 var date = new Date($scope.LegalCase.ForeclosureInfo.SAndCFiledDate);
                 if (date - new Date("08/29/2013") > 0) {
@@ -1183,7 +1183,7 @@
                 }
                 $scope.showSAndCFormFlag = $scope.isLess08292013 | $scope.isBigger08302013 | $scope.isBigger03012015;
             };
-        
+
             $scope.HighLightStauts = function (model, index) {
                 if (parseInt(model) > index) return true;
                 else return false;
