@@ -1786,6 +1786,7 @@
     <Content Include="css\jquery.jPaginate.css" />
     <Content Include="css\jquery.ui.selectmenu.css" />
     <Content Include="css\main.css" />
+    <Content Include="css\nga.min.css" />
     <Content Include="css\normalize.css" />
     <Content Include="css\normalize.min.css" />
     <Content Include="css\qb\qb.ui.grid.css" />
