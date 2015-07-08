@@ -1212,7 +1212,7 @@
                 { id: 3, label: "Assignment" },
             ];
 
-            $scope.updateMissInCertValue = function(value){
+            $scope.updateMissInCertValue = function (value) {
                 $scope.LegalCase.ForeclosureInfo.MissInCert = value;
             }
 
@@ -1221,6 +1221,17 @@
                 if (!$scope.LegalCase.ForeclosureInfo.MissInCert || $scope.LegalCase.ForeclosureInfo.MissInCert.length == 0)
                     return true;
                 else return false;
+            }
+
+            $scope.initMissInCert = function () {
+                return {
+                    dataSource: $scope.missingItems,
+                    valueExpr: 'id',
+                    displayExpr: 'label',
+                    onValueChanged: function (e) {
+                        e.model.updateMissInCertValue(e.values);
+                    }
+                };
             }
 
         });
