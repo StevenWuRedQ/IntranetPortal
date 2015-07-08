@@ -37,7 +37,7 @@
     <!-- Estate Pending -->
     <div class="ss_form">
         <h4 class="ss_form_title">Estate Pending</h4>
-        <div class="ss_form" ng-class="LegalCase.ForeclosureInfo.WasEstateFormed?'edit_text_area ss_show_from':''">
+        <div class="ss_form animate-show" ng-class="LegalCase.ForeclosureInfo.WasEstateFormed?'edit_text_area ss_show_from':''">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title" ng-class="LegalCase.ForeclosureInfo.WasEstateFormed?'ss_warning':''">Was Estate formed? </label>

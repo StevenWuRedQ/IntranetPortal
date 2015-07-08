@@ -108,9 +108,6 @@
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <%--leagal Ui--%>
  
-    <div class="after1">
-        fojeoaefwefsde
-    </div>
     <div id="Div1" ng-controller="PortalCtrl" runat="server" visible="false">
         <script>
             leadsInfoBBLE = "123456789";
@@ -1220,7 +1217,7 @@
             }
 
             $scope.checkMissInCertValue = function () {
-                if ($LegalCase.ForeclosureInfo.MortNoteAssInCert) return false;
+                if ($scope.LegalCase.ForeclosureInfo.MortNoteAssInCert) return false;
                 if (!$scope.LegalCase.ForeclosureInfo.MissInCert || $scope.LegalCase.ForeclosureInfo.MissInCert.length == 0)
                     return true;
                 else return false;
