@@ -108,7 +108,7 @@
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
     <%--leagal Ui--%>
- 
+
     <div id="Div1" ng-controller="PortalCtrl" runat="server" visible="false">
         <script>
             leadsInfoBBLE = "123456789";
@@ -860,14 +860,12 @@
                 var data = { bble: leadsInfoBBLE, caseData: json };
                 $http.post('LegalUI.aspx/SaveCaseData', data).
                     success(function () {
-                        if (scuessfunc)
-                        {
+                        if (scuessfunc) {
                             scuessfunc()
-                        } else
-                        {
-                        alert("Save Successed !");
+                        } else {
+                            alert("Save Successed !");
                         }
-                        
+
                     }).
                     error(function (data, status) {
                         alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
@@ -1233,6 +1231,18 @@
                     }
                 };
             }
+            //%--Steven code part--
+
+
+            //------------------------------
+
+
+            //stephen code part ---------
+
+
+
+
+            //----------------------------
 
         });
 
