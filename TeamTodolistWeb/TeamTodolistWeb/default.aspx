@@ -7,6 +7,7 @@
     <title></title>
 
     <script type="text/javascript">
+        var IsLoadedChart = false;
 
         function CompleteTask(taskId) {
             gridTaskClient.PerformCallback("CompleteTask|" + taskId);
@@ -112,7 +113,7 @@
 <body>
     <form id="form1" runat="server">
         <div style="width: 1500px; background-color: #efefef; margin: 0 auto; padding: 10px; overflow: auto">
-            <h2 style="font-family: Tahoma; font-size: 20px; margin-top: 15px; text-align: center; padding-top: 15px;">Team Task List</h2>
+            <h2 style="font-family: Tahoma; font-size: 20px; margin-top: 10px; text-align: center; padding-top: 5px;">Team Task List</h2>
             <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" ClientInstanceName="AddTaskFormLayout">
                 <Items>
                     <dx:LayoutGroup Caption="Add Task" ColCount="3">
@@ -120,7 +121,11 @@
                             <dx:LayoutItem Caption="Title">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
-                                        <dx:ASPxTextBox runat="server" ID="txtTitle"></dx:ASPxTextBox>
+                                        <dx:ASPxTextBox runat="server" ID="txtTitle">
+                                            <ValidationSettings ErrorDisplayMode="None">
+                                                <RequiredField IsRequired="True" />
+                                            </ValidationSettings>                                        
+                                        </dx:ASPxTextBox>
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
@@ -137,7 +142,7 @@
                                 </LayoutItemNestedControlCollection>
                                 <CaptionSettings Location="Top"></CaptionSettings>
                             </dx:LayoutItem>
-                             <dx:LayoutItem Caption=" " RowSpan="6" CaptionSettings-Location="Top">
+                            <dx:LayoutItem Caption=" " RowSpan="6" CaptionSettings-Location="Top">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
                                         <table style="width: 100px;">
@@ -180,7 +185,6 @@
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
-                            
                             <dx:LayoutItem Caption="Assign to:">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
@@ -198,10 +202,7 @@
                                         </dx:ASPxComboBox>
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-                           
-
-
+                            </dx:LayoutItem>                            
                             <dx:LayoutItem Caption="Category:">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
@@ -217,7 +218,6 @@
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
-
                             <dx:LayoutItem Caption="Days need:">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
@@ -268,8 +268,7 @@
                     </dx:LayoutGroup>
                 </Items>
             </dx:ASPxFormLayout>
-
-            <dx:ASPxPageControl runat="server">
+            <dx:ASPxPageControl runat="server" ID="pageTasks" ClientInstanceName="pageTasks">
                 <TabPages>
                     <dx:TabPage Name="page1" Text="Tasks">
                         <ContentCollection>
@@ -432,15 +431,15 @@
                             </dx:ContentControl>
                         </ContentCollection>
                     </dx:TabPage>
-                    <dx:TabPage Text="Gantt Chart">
+                    <dx:TabPage Text="Gantt Chart" Name="tabGantt">
                         <ContentCollection>
                             <dx:ContentControl>
                                 <table style="width: 100%">
                                     <tr>
-                                        <td style="vertical-align: top; padding-top: 10px; width: 110px;">
+                                        <td style="vertical-align: top; padding-top: 10px; width: 130px;">
                                             <ul style="list-style: none; padding-left: 1px; line-height: 30px">
                                                 <li>User:
-                                                        <dx:ASPxComboBox runat="server" ID="cbChartUser">
+                                                        <dx:ASPxListBox runat="server" ID="cbChartUser" ClientInstanceName="cbChartuser" SelectionMode="CheckColumn" Width="120px" Height="140px">
                                                             <Items>
                                                                 <dx:ListEditItem Text="Ron" Value="Ron" />
                                                                 <dx:ListEditItem Text="George" Value="George" />
@@ -448,19 +447,27 @@
                                                                 <dx:ListEditItem Text="Steven" Value="Steven" />
                                                                 <dx:ListEditItem Text="Chris" Value="Chris" />
                                                             </Items>
-                                                        </dx:ASPxComboBox>
+                                                        </dx:ASPxListBox>
                                                 </li>
                                                 <li>
-                                                    <dx:ASPxButton Text="Gantt Chart" runat="server" ID="btnViewChart" OnClick="btnViewChart_Click" CausesValidation="false"></dx:ASPxButton>
+                                                    <dx:ASPxButton Text="Filter" runat="server" ID="btnViewChart" AutoPostBack="false" CausesValidation="false">
+                                                        <ClientSideEvents Click="function(s,e){
+                                                            cpGanttChart.PerformCallback(cbChartuser.GetSelectedValues().toString());
+                                                            }" />
+                                                    </dx:ASPxButton>
                                                 </li>
                                             </ul>
                                         </td>
                                         <td style="background-color: #efefef;">
-                                            <dx:WebChartControl runat="server" Height="400px" Width="800px" ID="ganttChart">
-                                                <legend alignmenthorizontal="Right" direction="LeftToRight">
-                                                    <margins bottom="10" left="10" right="10" top="10" />
-                                                </legend>
-                                                <diagramserializable>
+                                            <dx:ASPxCallbackPanel runat="server" ClientInstanceName="cpGanttChart" OnCallback="Unnamed_Callback">
+                                                <PanelCollection>
+                                                    <dx:PanelContent>
+                                                        <asp:HiddenField runat="server" ID="hfLoad" />
+                                                        <dx:WebChartControl runat="server" Height="550px" Width="1300px" ID="ganttChart">
+                                                            <legend alignmenthorizontal="Right" direction="LeftToRight">
+                                                                <margins bottom="10" left="10" right="10" top="10" />
+                                                            </legend>
+                                                            <diagramserializable>
             <dx:GanttDiagram>                
                 <AxisX Title-Text="Tasks" VisibleInPanesSerializable="-1"> 
                     <GridLines Visible="True"></GridLines>
@@ -474,8 +481,11 @@
                 </AxisY>
             </dx:GanttDiagram>
         </diagramserializable>
-                                                <borderoptions visibility="False" />
-                                            </dx:WebChartControl>
+                                                            <borderoptions visibility="False" />
+                                                        </dx:WebChartControl>
+                                                    </dx:PanelContent>
+                                                </PanelCollection>
+                                            </dx:ASPxCallbackPanel>
                                         </td>
                                     </tr>
                                 </table>
@@ -483,6 +493,12 @@
                         </ContentCollection>
                     </dx:TabPage>
                 </TabPages>
+                <ClientSideEvents ActiveTabChanged="function(s,e){
+                    if(e.tab.name=='tabGantt'){
+                    if(! IsLoadedChart)
+                    {cpGanttChart.PerformCallback(); IsLoadedChart = true;}
+                    }
+                    }" />
             </dx:ASPxPageControl>
             <dx:ASPxCallback runat="server" ID="callbackSaveComments" ClientInstanceName="callbackSaveComments" OnCallback="callbackSaveComments_Callback"></dx:ASPxCallback>
             <dx:ASPxCallback runat="server" ID="callbackChangeOwner" ClientInstanceName="callbackChangeOwner" OnCallback="callbackChangeOwner_Callback">
