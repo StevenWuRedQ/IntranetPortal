@@ -33,17 +33,21 @@ Public Class ShortSalePage
             'process the task
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
                 Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
-                Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
-                BindCaseData2(bble)
-                ASPxSplitter1.Panes("listPanel").Visible = False
-                contentSplitter.ClientVisible = True
 
-                If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
+                If wli IsNot Nothing Then
+                    Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
+                    BindCaseData2(bble)
+                    ASPxSplitter1.Panes("listPanel").Visible = False
+                    contentSplitter.ClientVisible = True
 
-                    Dim cstext1 As String = "<script type=""text/javascript"">" & _
-                                    String.Format("GetShortSaleData({0});", ShortSaleCaseData.CaseId) & "</script>"
-                    Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
+                    If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
+
+                        Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                                        String.Format("GetShortSaleData({0});", ShortSaleCaseData.CaseId) & "</script>"
+                        Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
+                    End If
                 End If
+
                 Return
             End If
 

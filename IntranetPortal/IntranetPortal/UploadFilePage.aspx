@@ -68,6 +68,7 @@
                         progress.value = progress.innerHTML = 100;
                         alert("Upload Completed!");
                         formData = null;
+                        formFiles = {};
                         ClearFilesTable();
                         LoadingPanel.Hide();
                     } else {
