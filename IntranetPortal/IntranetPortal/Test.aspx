@@ -5,7 +5,6 @@
 <%@ Register Src="~/EmailTemplate/TaskSummary.ascx" TagPrefix="uc1" TagName="TaskSummary" %>
 <%@ Register Src="~/EmailTemplate/ActivitySummary.ascx" TagPrefix="uc1" TagName="ActivitySummary" %>
 
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
