@@ -9,11 +9,11 @@ End Section
 
 <nav>
     <ul class="cd-primary-nav">
-        <li><a href="#0">Sales</a></li>
+        <li><a href="/Home">Sales</a></li>
         <li><a href="#0">Rentals</a></li>
-        <li><a href="#0">Agents</a></li>
-        <li><a href="#0">We Buy Houses</a></li>
-        <li><a href="#0">Company</a></li>
+        <li><a href="/Home/Agents">Agents</a></li>
+        <li><a href="/Home/WeBuyHouse">We Buy Houses</a></li>
+        <li><a href="/Home/About">Company</a></li>
         <!--<li class="cd-primary-nav-divider"></li>
         <li><a href="#0">Sign Up</a></li>-->
     </ul>
@@ -89,7 +89,7 @@ End Section
                                 <img class="featured-agents-list-item-pic" src="~/getAgentImage/@agent.EmployeeID" width="80" alt="/images/agent-1.jpg">
                                 <div>@agent.Name</div>
                             </a>                    
-                        </li>                        
+                        </li>
                     Next
                     @*<li class="featured-agents-list-item">
                             <a class="w-inline-block featured-agents-list-item-link" href="#fa-serah-zach">

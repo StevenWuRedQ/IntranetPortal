@@ -23,13 +23,13 @@ End Code
             Dim agents = PublicSiteData.PortalAgent.AgentList
         End Code
 
-        @For i = 0 To Math.Ceiling(agents.Count / 3)
+        @For i = 0 To Math.Ceiling(agents.Count / 4)
             @<div class="w-row">
-                @For j = 0 To 2
-                Dim index = 3 * i + j
+                @For j = 0 To 3
+                Dim index = 4 * i + j
                 If index < agents.Count Then
                     Dim agent = agents(index)
-                    @<div class="w-col w-col-4">
+                    @<div class="w-col w-col-3">
                         <a href="/home/AgentInfo/@agent.EmployeeID" class="agent-list">
                             <img src="/images/agents/sample.jpg" alt="">
                             @agent.Name

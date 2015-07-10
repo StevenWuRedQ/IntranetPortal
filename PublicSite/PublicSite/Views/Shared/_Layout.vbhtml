@@ -112,7 +112,7 @@ html {
                     <a class="global-nav-link" href="#">Rentals</a>
                     <a class="global-nav-link" href="/Home/Agents">Agents</a>
                     <a class="global-nav-link" href="/Home/WeBuyHouse">We Buy Houses</a>
-                    <a class="global-nav-link" href="Home/About">Company</a><!--<a class="global-nav-link gnl-user" href="#"><i class="fa fa-user"></i></a>-->
+                    <a class="global-nav-link" href="/Home/About">Company</a><!--<a class="global-nav-link gnl-user" href="#"><i class="fa fa-user"></i></a>-->
                 </div>
             </div>
         </div>
