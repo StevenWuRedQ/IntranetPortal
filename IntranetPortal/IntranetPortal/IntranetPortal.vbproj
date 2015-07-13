@@ -1316,115 +1316,115 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Settings.vb" />
-    <Compile Include="Task\ShortSale\SelectPartyUC.ascx.designer.vb">
+    <Compile Include="ShortSale\SelectPartyUC.ascx.designer.vb">
       <DependentUpon>SelectPartyUC.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\SelectPartyUC.ascx.vb">
+    <Compile Include="ShortSale\SelectPartyUC.ascx.vb">
       <DependentUpon>SelectPartyUC.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSale.aspx.designer.vb">
+    <Compile Include="ShortSale\ShortSale.aspx.designer.vb">
       <DependentUpon>ShortSale.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSale.aspx.vb">
+    <Compile Include="ShortSale\ShortSale.aspx.vb">
       <DependentUpon>ShortSale.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleCaseList.ascx.designer.vb">
+    <Compile Include="ShortSale\ShortSaleCaseList.ascx.designer.vb">
       <DependentUpon>ShortSaleCaseList.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleCaseList.ascx.vb">
+    <Compile Include="ShortSale\ShortSaleCaseList.ascx.vb">
       <DependentUpon>ShortSaleCaseList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleEvictionTab.ascx.designer.vb">
+    <Compile Include="ShortSale\ShortSaleEvictionTab.ascx.designer.vb">
       <DependentUpon>ShortSaleEvictionTab.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleEvictionTab.ascx.vb">
+    <Compile Include="ShortSale\ShortSaleEvictionTab.ascx.vb">
       <DependentUpon>ShortSaleEvictionTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleFileOverview.ascx.designer.vb">
+    <Compile Include="ShortSale\ShortSaleFileOverview.ascx.designer.vb">
       <DependentUpon>ShortSaleFileOverview.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleFileOverview.ascx.vb">
+    <Compile Include="ShortSale\ShortSaleFileOverview.ascx.vb">
       <DependentUpon>ShortSaleFileOverview.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleHomewonerTab.ascx.designer.vb">
+    <Compile Include="ShortSale\ShortSaleHomewonerTab.ascx.designer.vb">
       <DependentUpon>ShortSaleHomewonerTab.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleHomewonerTab.ascx.vb">
+    <Compile Include="ShortSale\ShortSaleHomewonerTab.ascx.vb">
       <DependentUpon>ShortSaleHomewonerTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleMortgageTab.ascx.designer.vb">
+    <Compile Include="ShortSale\ShortSaleMortgageTab.ascx.designer.vb">
       <DependentUpon>ShortSaleMortgageTab.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleMortgageTab.ascx.vb">
+    <Compile Include="ShortSale\ShortSaleMortgageTab.ascx.vb">
       <DependentUpon>ShortSaleMortgageTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleOverVew.ascx.designer.vb">
+    <Compile Include="ShortSale\ShortSaleOverVew.ascx.designer.vb">
       <DependentUpon>ShortSaleOverVew.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleOverVew.ascx.vb">
+    <Compile Include="ShortSale\ShortSaleOverVew.ascx.vb">
       <DependentUpon>ShortSaleOverVew.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSalePartiesTab.ascx.designer.vb">
+    <Compile Include="ShortSale\ShortSalePartiesTab.ascx.designer.vb">
       <DependentUpon>ShortSalePartiesTab.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSalePartiesTab.ascx.vb">
+    <Compile Include="ShortSale\ShortSalePartiesTab.ascx.vb">
       <DependentUpon>ShortSalePartiesTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSalePropertyTab.ascx.designer.vb">
+    <Compile Include="ShortSale\ShortSalePropertyTab.ascx.designer.vb">
       <DependentUpon>ShortSalePropertyTab.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSalePropertyTab.ascx.vb">
+    <Compile Include="ShortSale\ShortSalePropertyTab.ascx.vb">
       <DependentUpon>ShortSalePropertyTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleReport.aspx.designer.vb">
+    <Compile Include="ShortSale\ShortSaleReport.aspx.designer.vb">
       <DependentUpon>ShortSaleReport.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleReport.aspx.vb">
+    <Compile Include="ShortSale\ShortSaleReport.aspx.vb">
       <DependentUpon>ShortSaleReport.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleSubMenu.ascx.designer.vb">
+    <Compile Include="ShortSale\ShortSaleSubMenu.ascx.designer.vb">
       <DependentUpon>ShortSaleSubMenu.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleSubMenu.ascx.vb">
+    <Compile Include="ShortSale\ShortSaleSubMenu.ascx.vb">
       <DependentUpon>ShortSaleSubMenu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleSummaryPage.aspx.designer.vb">
+    <Compile Include="ShortSale\ShortSaleSummaryPage.aspx.designer.vb">
       <DependentUpon>ShortSaleSummaryPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleSummaryPage.aspx.vb">
+    <Compile Include="ShortSale\ShortSaleSummaryPage.aspx.vb">
       <DependentUpon>ShortSaleSummaryPage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleSummaryTab.ascx.designer.vb">
+    <Compile Include="ShortSale\ShortSaleSummaryTab.ascx.designer.vb">
       <DependentUpon>ShortSaleSummaryTab.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\ShortSaleSummaryTab.ascx.vb">
+    <Compile Include="ShortSale\ShortSaleSummaryTab.ascx.vb">
       <DependentUpon>ShortSaleSummaryTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\TitleControl.ascx.designer.vb">
+    <Compile Include="ShortSale\TitleControl.ascx.designer.vb">
       <DependentUpon>TitleControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\TitleControl.ascx.vb">
+    <Compile Include="ShortSale\TitleControl.ascx.vb">
       <DependentUpon>TitleControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Task\ShortSale\TitleSummary.ascx.designer.vb">
+    <Compile Include="ShortSale\TitleSummary.ascx.designer.vb">
       <DependentUpon>TitleSummary.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Task\ShortSale\TitleSummary.ascx.vb">
+    <Compile Include="ShortSale\TitleSummary.ascx.vb">
       <DependentUpon>TitleSummary.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -3244,22 +3244,22 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\DataAPI\item1.disco" />
-    <Content Include="Task\ShortSale\SelectPartyUC.ascx" />
-    <Content Include="Task\ShortSale\ShortSale.aspx" />
-    <Content Include="Task\ShortSale\ShortSaleCaseList.ascx" />
-    <Content Include="Task\ShortSale\ShortSaleEvictionTab.ascx" />
-    <Content Include="Task\ShortSale\ShortSaleFileOverview.ascx" />
-    <Content Include="Task\ShortSale\ShortSaleHomewonerTab.ascx" />
-    <Content Include="Task\ShortSale\ShortSaleMortgageTab.ascx" />
-    <Content Include="Task\ShortSale\ShortSaleOverVew.ascx" />
-    <Content Include="Task\ShortSale\ShortSalePartiesTab.ascx" />
-    <Content Include="Task\ShortSale\ShortSalePropertyTab.ascx" />
-    <Content Include="Task\ShortSale\ShortSaleReport.aspx" />
-    <Content Include="Task\ShortSale\ShortSaleSubMenu.ascx" />
-    <Content Include="Task\ShortSale\ShortSaleSummaryPage.aspx" />
-    <Content Include="Task\ShortSale\ShortSaleSummaryTab.ascx" />
-    <Content Include="Task\ShortSale\TitleControl.ascx" />
-    <Content Include="Task\ShortSale\TitleSummary.ascx" />
+    <Content Include="ShortSale\SelectPartyUC.ascx" />
+    <Content Include="ShortSale\ShortSale.aspx" />
+    <Content Include="ShortSale\ShortSaleCaseList.ascx" />
+    <Content Include="ShortSale\ShortSaleEvictionTab.ascx" />
+    <Content Include="ShortSale\ShortSaleFileOverview.ascx" />
+    <Content Include="ShortSale\ShortSaleHomewonerTab.ascx" />
+    <Content Include="ShortSale\ShortSaleMortgageTab.ascx" />
+    <Content Include="ShortSale\ShortSaleOverVew.ascx" />
+    <Content Include="ShortSale\ShortSalePartiesTab.ascx" />
+    <Content Include="ShortSale\ShortSalePropertyTab.ascx" />
+    <Content Include="ShortSale\ShortSaleReport.aspx" />
+    <Content Include="ShortSale\ShortSaleSubMenu.ascx" />
+    <Content Include="ShortSale\ShortSaleSummaryPage.aspx" />
+    <Content Include="ShortSale\ShortSaleSummaryTab.ascx" />
+    <Content Include="ShortSale\TitleControl.ascx" />
+    <Content Include="ShortSale\TitleSummary.ascx" />
     <Content Include="StreetView.aspx" />
     <Content Include="css\stevencss.css" />
     <Content Include="SummaryPage.aspx" />
