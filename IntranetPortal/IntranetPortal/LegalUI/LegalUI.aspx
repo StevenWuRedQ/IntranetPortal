@@ -110,7 +110,7 @@
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
     <%--leagal Ui--%>
-
+    
     <div id="Div1" ng-controller="PortalCtrl" runat="server" visible="false">
         <script>
             leadsInfoBBLE = "123456789";
@@ -151,6 +151,7 @@
         </div>
         <input class="ss_form_input" ng-model="GetContactById(LegalCase.PropertyInfo.AgentId).OfficeNO">
     </div>
+    
     <div id="PortalCtrl" ng-controller="PortalCtrl">
 
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
@@ -248,97 +249,100 @@
 
                             <div style="align-content: center; height: 100%">
                                 <!-- Nav tabs -->
+
                                 <% If Not HiddenTab Then%>
-                                <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
-                                    <li class="active short_sale_head_tab">
-                                        <a href="#LegalTab" role="tab" data-toggle="tab" class="tab_button_a">
-                                            <i class="fa fa-info-circle  head_tab_icon_padding"></i>
-                                            <div class="font_size_bold">Legal</div>
-                                        </a>
+                                <div class="legal-menu row">
+                                    <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height:70px">
+                                        <li class="active short_sale_head_tab">
+                                            <a href="#LegalTab" role="tab" data-toggle="tab" class="tab_button_a">
+                                                <i class="fa fa-info-circle  head_tab_icon_padding"></i>
+                                                <div class="font_size_bold">Legal</div>
+                                            </a>
 
 
-                                    </li>
-                                    <li class="short_sale_head_tab">
-                                        <a href="#DocumentTab" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
-                                            <i class="fa fa-file head_tab_icon_padding"></i>
-                                            <div class="font_size_bold">Documents</div>
-                                        </a>
-                                    </li>
+                                        </li>
+                                        <li class="short_sale_head_tab">
+                                            <a href="#DocumentTab" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
+                                                <i class="fa fa-file head_tab_icon_padding"></i>
+                                                <div class="font_size_bold">Documents</div>
+                                            </a>
+                                        </li>
 
-                                    <li class="short_sale_head_tab">
-
-
-                                        <a class="tab_button_a">
-                                            <i class="fa fa-list-ul head_tab_icon_padding"></i>
-                                            <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
-
-                                        </a>
-                                        <div class="shot_sale_sub">
-                                            <ul class="nav  clearfix" role="tablist">
-                                                <li class="short_sale_head_tab">
-                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="/ViewLeadsInfo.aspx?HiddenTab=true&id=BBLE" data-href="#more_leads" onclick="LoadMoreFrame(this)">
-                                                        <i class="fa fa-folder head_tab_icon_padding"></i>
-                                                        <div class="font_size_bold">Leads</div>
-
-                                                    </a>
-                                                </li>
-                                                <li class="short_sale_head_tab" ng-show="LegalCase.InShortSale">
-                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_short_sale" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&bble=BBLE" data-href="#more_short_sale" onclick="LoadMoreFrame(this)">
-                                                        <i class="fa fa-sign-out head_tab_icon_padding"></i>
-                                                        <div class="font_size_bold">Short Sale</div>
-                                                    </a>
-                                                </li>
-                                                <li class="short_sale_head_tab" ng-show="LegalCase.InShortSale">
-                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_evction" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&isEviction=true&bble=BBLE" data-href="#more_evction" onclick="LoadMoreFrame(this)">
-                                                        <i class="fa fa-sign-out head_tab_icon_padding"></i>
-                                                        <div class="font_size_bold">Eviction</div>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
+                                        <li class="short_sale_head_tab">
 
 
-                                    </li>
-                                    <li style="margin-right: 30px; color: #ffa484; float: right">
-                                        <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
+                                            <a class="tab_button_a">
+                                                <i class="fa fa-list-ul head_tab_icon_padding"></i>
+                                                <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
-                                        <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
-                                        <i class="fa fa-lightbulb-o sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Research');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Research"></i>
-                                        <% End If%>
+                                            </a>
+                                            <div class="shot_sale_sub">
+                                                <ul class="nav  clearfix" role="tablist">
+                                                    <li class="short_sale_head_tab">
+                                                        <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="/ViewLeadsInfo.aspx?HiddenTab=true&id=BBLE" data-href="#more_leads" onclick="LoadMoreFrame(this)">
+                                                            <i class="fa fa-folder head_tab_icon_padding"></i>
+                                                            <div class="font_size_bold">Leads</div>
 
-                                        <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.LegalResearch Then%>
-                                        <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="CompleteResearch()" data-original-title="Complete Search"></i>
-                                        <% End If%>
+                                                        </a>
+                                                    </li>
+                                                    <li class="short_sale_head_tab" ng-show="LegalCase.InShortSale">
+                                                        <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_short_sale" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&bble=BBLE" data-href="#more_short_sale" onclick="LoadMoreFrame(this)">
+                                                            <i class="fa fa-sign-out head_tab_icon_padding"></i>
+                                                            <div class="font_size_bold">Short Sale</div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="short_sale_head_tab" ng-show="LegalCase.InShortSale">
+                                                        <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_evction" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&isEviction=true&bble=BBLE" data-href="#more_evction" onclick="LoadMoreFrame(this)">
+                                                            <i class="fa fa-sign-out head_tab_icon_padding"></i>
+                                                            <div class="font_size_bold">Eviction</div>
+                                                        </a>
+                                                    </li>
 
-                                        <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Then%>
-                                        <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Attorney');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Attorney"></i>
-                                        <% End If%>
+                                                </ul>
+                                            </div>
 
-                                        <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.AttorneyHandle Then%>
-                                        <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="AttorneyComplete()" data-original-title="Complete"></i>
-                                        <% End If%>
 
-                                        <i class="fa fa-users sale_head_button sale_head_button_left tooltip-examples" title="" onclick="VendorsPopupClient.Show()" data-original-title="Contacts"></i>
-                                        <%--<i class="fa fa-external-link-square sale_head_button sale_head_button_left tooltip-examples" data-toggle="tooltip" data-original-title="Go To" onclick='ShowPopupLeadsMenu(this,leadsInfoBBLE)'></i>--%>
+                                        </li>
+                                        <li class="pull-right" style="margin-right: 30px; color: #ffa484">
+                                            <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
 
-                                        <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
-                                        <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
-                                    </li>
-                                </ul>
-                                <% End If%>
-                                <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
-                                <dx:ASPxPopupControl ClientInstanceName="popupSelectAttorneyCtr" Width="300px" Height="300px"
-                                    MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
-                                    HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
-                                    runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
-                                    <ContentCollection>
-                                        <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentReAssign">
-                                            <asp:HiddenField runat="server" ID="hfUserType" />
-                                            <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270" SelectedIndex="0" Width="100%">
-                                            </dx:ASPxListBox>
-                                            <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
-                                                <ClientSideEvents Click="function(s,e){
+                                            <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
+                                            <i class="fa fa-lightbulb-o sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Research');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Research"></i>
+                                            <% End If%>
+
+                                            <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.LegalResearch Then%>
+                                            <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="CompleteResearch()" data-original-title="Complete Search"></i>
+                                            <% End If%>
+
+                                            <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Then%>
+                                            <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Attorney');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Attorney"></i>
+                                            <% End If%>
+
+                                            <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.AttorneyHandle Then%>
+                                            <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="AttorneyComplete()" data-original-title="Complete"></i>
+                                            <% End If%>
+
+                                            <i class="fa fa-users sale_head_button sale_head_button_left tooltip-examples" title="" onclick="VendorsPopupClient.Show()" data-original-title="Contacts"></i>
+                                            <%--<i class="fa fa-external-link-square sale_head_button sale_head_button_left tooltip-examples" data-toggle="tooltip" data-original-title="Go To" onclick='ShowPopupLeadsMenu(this,leadsInfoBBLE)'></i>--%>
+
+                                            <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
+                                            <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+                            <% End If%>
+                            <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
+                            <dx:ASPxPopupControl ClientInstanceName="popupSelectAttorneyCtr" Width="300px" Height="300px"
+                                MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
+                                HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
+                                runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
+                                <ContentCollection>
+                                    <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentReAssign">
+                                        <asp:HiddenField runat="server" ID="hfUserType" />
+                                        <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270" SelectedIndex="0" Width="100%">
+                                        </dx:ASPxListBox>
+                                        <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
+                                            <ClientSideEvents Click="function(s,e){
                                         var item = listboxEmployeeClient.GetSelectedItem();
                                         if(item == null)
                                         {
@@ -348,63 +352,63 @@
                                         popupSelectAttorneyCtr.PerformCallback('Save|' + leadsInfoBBLE + '|' + item.text);
                                         popupSelectAttorneyCtr.Hide();
                                         }" />
-                                            </dx:ASPxButton>
-                                        </dx:PopupControlContentControl>
-                                    </ContentCollection>
-                                    <ClientSideEvents Closing="function(s,e){
+                                        </dx:ASPxButton>
+                                    </dx:PopupControlContentControl>
+                                </ContentCollection>
+                                <ClientSideEvents Closing="function(s,e){
                                               if (typeof gridTrackingClient != 'undefined')
                                                     gridTrackingClient.Refresh();
                                         }" />
-                                </dx:ASPxPopupControl>
-                                <% End If%>
+                            </dx:ASPxPopupControl>
+                            <% End If%>
 
-                                <style>
-                                    .AttachmentSpan {
-                                        margin-left: 10px;
-                                        border: 1px solid #efefef;
-                                        padding: 3px 20px 3px 10px;
-                                        background-color: #ededed;
-                                    }
-                                </style>
+                            <style>
+                                .AttachmentSpan {
+                                    margin-left: 10px;
+                                    border: 1px solid #efefef;
+                                    padding: 3px 20px 3px 10px;
+                                    background-color: #ededed;
+                                }
+                            </style>
 
-                                <div id="ctl00_MainContentPH_ASPxSplitter1_ASPxCallbackPanel2_contentSplitter_SendMail_PopupSendMail_PW-1" class="dxpcLite_MetropolisBlue1 dxpclW" style="height: 700px; width: 630px; cursor: default; z-index: 10000; display: none;">
-                                    <div class="dxpc-mainDiv dxpc-shadow">
-                                        <div class="dxpc-header dxpc-withBtn" id="ctl00_MainContentPH_ASPxSplitter1_ASPxCallbackPanel2_contentSplitter_SendMail_PopupSendMail_PWH-1">
-                                            <div class="clearfix">
-                                                <div class="pop_up_header_margin">
-                                                    <i class="fa fa-envelope with_circle pop_up_header_icon"></i>
-                                                    <span class="pop_up_header_text ">Email</span>
-                                                </div>
-                                                <div class="pop_up_buttons_div">
-                                                    <i class="fa fa-times icon_btn" onclick="popupSendEmailClient.Hide()"></i>
-                                                </div>
+                            <div id="ctl00_MainContentPH_ASPxSplitter1_ASPxCallbackPanel2_contentSplitter_SendMail_PopupSendMail_PW-1" class="dxpcLite_MetropolisBlue1 dxpclW" style="height: 700px; width: 630px; cursor: default; z-index: 10000; display: none;">
+                                <div class="dxpc-mainDiv dxpc-shadow">
+                                    <div class="dxpc-header dxpc-withBtn" id="ctl00_MainContentPH_ASPxSplitter1_ASPxCallbackPanel2_contentSplitter_SendMail_PopupSendMail_PWH-1">
+                                        <div class="clearfix">
+                                            <div class="pop_up_header_margin">
+                                                <i class="fa fa-envelope with_circle pop_up_header_icon"></i>
+                                                <span class="pop_up_header_text ">Email</span>
+                                            </div>
+                                            <div class="pop_up_buttons_div">
+                                                <i class="fa fa-times icon_btn" onclick="popupSendEmailClient.Hide()"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
 
-                                <div class="tab-content">
+                            <div class="tab-content">
 
-                                    <div class="tab-pane active" id="LegalTab">
-                                        <uc1:LegalTab runat="server" ID="LegalTab1" />
-                                        <script>
-                                            LegalShowAll = true;
-                                        </script>
-                                    </div>
-                                    <div class="tab-pane" id="DocumentTab">
-                                        <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
-                                    </div>
-                                    <div class="tab-pane load_bg" id="more_leads">
-                                        <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
-                                    </div>
-                                    <div class="tab-pane load_bg" id="more_evction">
-                                        <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
-                                    </div>
-                                    <div class="tab-pane load_bg" id="more_short_sale">
-                                        <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
-                                    </div>
+                                <div class="tab-pane active" id="LegalTab">
+                                    <uc1:LegalTab runat="server" ID="LegalTab1" />
+                                    <script>
+                                        LegalShowAll = true;
+                                    </script>
                                 </div>
+                                <div class="tab-pane" id="DocumentTab">
+                                    <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
+                                </div>
+                                <div class="tab-pane load_bg" id="more_leads">
+                                    <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+                                </div>
+                                <div class="tab-pane load_bg" id="more_evction">
+                                    <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+                                </div>
+                                <div class="tab-pane load_bg" id="more_short_sale">
+                                    <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+                                </div>
+                            </div>
                             </div>
 
                             <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
@@ -917,7 +921,7 @@
 
                 $http.post('LegalUI.aspx/GetCaseData', data).
                     success(function (data, status, headers, config) {
-                      
+
                         $scope.LegalCase = $.parseJSON(data.d);
                         $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
                         var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
@@ -1237,25 +1241,21 @@
             }
             //--Steven code part--
 
-            $scope.ShowAddPopUp = function(event)
-            {
+            $scope.ShowAddPopUp = function (event) {
                 $scope.addCommentTxt = "";
                 aspxAddLeadsComments.ShowAtElement(event.target);
             }
-           
-            $scope.SaveLegalComments = function()
-            {
-                
+
+            $scope.SaveLegalComments = function () {
+
                 $scope.LegalCase.LegalComments.push({ id: $scope.LegalCase.LegalComments.length + 1, Comment: $scope.addCommentTxt });
-                $scope.SaveLegal(function() 
-                {
+                $scope.SaveLegal(function () {
                     console.log("ADD comments" + $scope.addCommentTxt);
                     aspxAddLeadsComments.Hide();
                 })
             }
 
-            $scope.DeleteComments =function(index)
-            {
+            $scope.DeleteComments = function (index) {
                 $scope.LegalCase.LegalComments.splice(index, 1);
                 $scope.SaveLegal(function () {
                     console.log("Deleted comments");

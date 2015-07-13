@@ -12,4 +12,13 @@ Option Explicit On
 
 
 Partial Public Class NavMenu
+
+    '''<summary>
+    '''LeftPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LeftPanel As Global.DevExpress.Web.ASPxPanel.ASPxPanel
 End Class

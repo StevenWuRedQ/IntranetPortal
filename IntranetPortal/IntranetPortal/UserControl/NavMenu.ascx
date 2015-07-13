@@ -8,8 +8,8 @@
                     item.Expanded = True
                     setCurrent = False
                 End If
-                %>
-                <%= item.ToHtml %>
-            <% End If%>        
+    %>
+    <%= item.ToHtml %>
+    <% End If%>
     <% Next%>
 </ul>

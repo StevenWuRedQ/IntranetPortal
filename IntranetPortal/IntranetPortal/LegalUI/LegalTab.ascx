@@ -143,11 +143,11 @@
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
-<div id="" style="width: 100%;">
+<div class="row" style="width: 100%;">
 
     <input hidden="" id="short_sale_case_id" value="23">
     <div style="padding-top: 5px">
-        <div style="height: 850px; overflow: auto;" id="prioity_content">
+        <div style="" id="prioity_content">
             <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
                 <div style="font-size: 30px">
                     <span>
