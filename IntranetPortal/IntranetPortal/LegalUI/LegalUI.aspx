@@ -251,7 +251,7 @@
                                 <!-- Nav tabs -->
 
                                 <% If Not HiddenTab Then%>
-                                <div class="legal-menu row">
+                                <div class="legal-menu row" style="margin-left: 0px">
                                     <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height:70px">
                                         <li class="active short_sale_head_tab">
                                             <a href="#LegalTab" role="tab" data-toggle="tab" class="tab_button_a">

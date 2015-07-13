@@ -2457,11 +2457,13 @@ li.mag_tabv.active {
     display: block !important; /* yes, important */
 }
     .cssSlideUp {
-    transform: scaleY(1);    
+    transform: scaleY(1);
+    opacity: 1;    
     transform-origin: top;
-    transition: transform 0.5s ease;
+    transition: all 0.5s ease;
     overflow: hidden;
 }
 .cssSlideUp.ng-hide {
     transform: scaleY(0);
+    opacity: 0;
 }
