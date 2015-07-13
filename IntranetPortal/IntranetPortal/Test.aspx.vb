@@ -13,8 +13,8 @@ Public Class Test
 
         If Not (String.IsNullOrEmpty(Request.QueryString("team"))) Then
             Dim objTeam = Team.GetTeam(Request.QueryString("team").ToString)
-            Me.ActivitySummary.team = objTeam
-            Me.ActivitySummary.Manager = "Manager"
+            'Me.ActivitySummary.team = objTeam
+            'Me.ActivitySummary.Manager = "Manager"
         Else
 
         End If

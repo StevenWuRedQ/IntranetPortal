@@ -1391,7 +1391,7 @@
     </Compile>
     <Compile Include="ShortSale\ShortSaleReport.aspx.vb">
       <DependentUpon>ShortSaleReport.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ShortSale\ShortSaleSubMenu.ascx.designer.vb">
       <DependentUpon>ShortSaleSubMenu.ascx</DependentUpon>
@@ -1405,7 +1405,7 @@
     </Compile>
     <Compile Include="ShortSale\ShortSaleSummaryPage.aspx.vb">
       <DependentUpon>ShortSaleSummaryPage.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ShortSale\ShortSaleSummaryTab.ascx.designer.vb">
       <DependentUpon>ShortSaleSummaryTab.ascx</DependentUpon>
@@ -3461,7 +3461,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52923/</IISUrl>
+          <IISUrl>http://localhost:60956/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
