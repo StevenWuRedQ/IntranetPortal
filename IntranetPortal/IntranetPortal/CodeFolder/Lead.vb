@@ -230,6 +230,24 @@ Partial Public Class Lead
         End Using
     End Sub
 
+    Public Shared Sub Published(bble As String, publicBy As String)
+        Using ctx As New Entities
+            Dim ld = ctx.Leads.Find(bble)
+
+            If ld IsNot Nothing Then
+                ld.Process = LeadProcess.Published
+                ctx.SaveChanges()
+
+                Try
+                    Dim prop = PublicSiteData.ListProperty.GetProperty(bble)
+                    prop.Published(publicBy)
+                Catch ex As Exception
+                    Throw New Exception("Exception in Published. Exception: " & ex.Message)
+                End Try
+            End If
+        End Using
+    End Sub
+
     Public Shared Function InitPublicData(bble As String) As PublicSiteData.ListProperty
         Dim ld = LeadsInfo.GetInstance(bble)
 

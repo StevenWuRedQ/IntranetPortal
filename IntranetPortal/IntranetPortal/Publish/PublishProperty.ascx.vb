@@ -23,6 +23,7 @@ Public Class PublishProperty
     Private Sub BindFeatureList()
         cblFeatures.DataSource = FeatureData.GetList
         cblFeatures.DataBind()
+
     End Sub
 
     Private Sub BindImages(bble As String)
@@ -73,7 +74,7 @@ Public Class PublishProperty
 
     Sub BindFeatures()
         For Each item In ListPropertyData.Features
-            Dim ft = cblFeatures.Items.FindByText(item.FeatureId.ToString)
+            Dim ft = cblFeatures.Items.FindByText(item.Name.ToString)
             If ft IsNot Nothing Then
                 ft.Selected = True
             End If
@@ -131,6 +132,11 @@ Public Class PublishProperty
     Protected Sub cpPropertyContent_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         If e.Parameter = "Save" Then
             SaveListPropertyData()
+        End If
+
+        If e.Parameter = "Published" Then
+            Lead.Published(hfBBLE.Value, Page.User.Identity.Name)
+            BindData(hfBBLE.Value)
         End If
     End Sub
 
