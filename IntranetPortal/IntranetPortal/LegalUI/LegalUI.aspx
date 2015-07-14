@@ -991,7 +991,7 @@
 
             }
             var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Value": "", "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ", "ArrayName": "" },
-                            { "Name": "EveryOneIn", "CallFunc": "", "Value": "false", "Description": "everyone is not a part of the estate served .", "ArrayName": "" },
+                            { "Name": "EveryOneIn", "CallFunc": "", "Value": "false", "Description": "Nobody is part of the estate served .", "ArrayName": "" },
                             { "Name": "ClientPersonallyServed", "CallFunc": "", "Value": "false", "Description": "Client personally is not served. ", "ArrayName": "AffidavitOfServices" },
                             { "Name": "NailAndMail", "CallFunc": "", "Value": "true", "Description": "Nail and Mail.", "ArrayName": "AffidavitOfServices" },
                             { "Name": "BorrowerLiveInAddrAtTimeServ", "CallFunc": "", "Value": "false", "Description": "Borrower didn\'t live in service Address at time of Serv.", "ArrayName": "AffidavitOfServices" },

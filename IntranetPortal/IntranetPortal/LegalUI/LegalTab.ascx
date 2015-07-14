@@ -170,7 +170,7 @@
 
                 <div class="note_item" style="background: white">
                    
-                    <div style="overflow: auto; height: 100px">
+                    <div style="overflow: auto;max-height: 100px">
                         <table style="width: 100%;" class="table-striped">
                             <tbody>
                                 <tr ng-show="LegalCase.Description!=null">
