@@ -22,7 +22,6 @@
 					What was the last milestone document recorded on Clerk Minutes? 
 				</label>
 				<select class="ss_form_input" ng-model="LegalCase.CaseStauts">
-					<option value="1">Tenants in Common</option>
 					<option value="2">S&C / LP</option>
 					<option value="3">RJI</option>
 					<option value="4">Settlement Conf</option>
