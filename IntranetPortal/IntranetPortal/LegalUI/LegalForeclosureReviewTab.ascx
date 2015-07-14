@@ -538,7 +538,7 @@ The courts no longer consider this proper service. "></i></span><br />&nbsp
 						<input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterMailedDate">
 					</li>
 					<li class="ss_form_item">
-						<label class="ss_form_input_title">Date of Acceleration letterDefault date <br />&nbsp</label>
+						<label class="ss_form_input_title">Date of Acceleration letterDefault date &nbsp &nbsp</label>
 						<input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.AccelerationLetterDate">
 					</li>
 					<li class="ss_form_item">

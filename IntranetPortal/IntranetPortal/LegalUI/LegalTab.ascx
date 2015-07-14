@@ -143,7 +143,7 @@
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
-<div class="row" style="margin-left:0">
+<div class="row" style="margin-left:0; margin-right:0">
 
     <input hidden="" id="short_sale_case_id" value="23">
     <div style="padding-top: 5px">
