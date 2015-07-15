@@ -369,7 +369,7 @@ Public Class ShortSaleProcess
         Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString, Nothing, createBy, LeadsActivityLog.EnumActionType.SetAsTask)
         'For testing purpose, need change to ShortSale-Manager
 
-        Dim names = If(Not String.IsNullOrEmpty(RoleName), String.Join(",", Roles.GetUsersInRole("ShortSale-Manager")), UserNames)
+        Dim names = If(Not String.IsNullOrEmpty(RoleName), String.Join(";", Roles.GetUsersInRole("ShortSale-Manager")), UserNames)
         Dim task = UserTask.AddUserTask(bble, names, TaskName, "Normal", "In Office", DateTime.Now, comments, log.LogID, createBy, UserTask.UserTaskMode.Approval, taskData)
 
         Dim ld = LeadsInfo.GetInstance(bble)

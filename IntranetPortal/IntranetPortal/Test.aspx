@@ -23,7 +23,7 @@
         <%-- <input type="button" onclick="LoadData()" value="Test" />--%>
         
        <%-- <uc1:ActivitySummary runat="server" id="ActivitySummary" />--%>
-
+        test3
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/Scripts/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
         <script src="/Scripts/js/jquery.easing.1.3.js"></script>
@@ -36,7 +36,7 @@
         <script src="/Scripts/jquery.collapse_storage.js"></script>
         <script src="/Scripts/jquery.collapse_cookie_storage.js"></script>
         <script type="text/javascript">
-
+            
             function LoadData() {
                 var url = "https://api.cityofnewyork.us/geoclient/v1/address.json?houseNumber=123&street=main+st&borough=Queens&app_id=be97fb56&app_key=b51823efd58f25775df3b2956a7b2bef";
 
