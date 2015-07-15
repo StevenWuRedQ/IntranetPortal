@@ -40,7 +40,7 @@ Public Class CallBackServices
     Public Function AddContact(contact As PartyContact) As PartyContact
         Dim c = PartyContact.GetContactByName(contact.Name)
         If (c IsNot Nothing) Then
-            Throw New Exception("Already have " & c.Name & " in system please change name to identify ")
+            Throw New Exception("Already have " & contact.Name & " in system please change name to identify ")
         End If
         contact.Save()
         Return contact

@@ -209,7 +209,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
             // or server returns response with an error status.
             var message = data&& data.Message ?data.Message :JSON.stringify(data)
 
-            alert("Add contact error " + message);
+            alert("Add contact error: " + message);
         });
     }
 

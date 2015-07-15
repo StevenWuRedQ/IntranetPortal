@@ -21,6 +21,7 @@
        2. system or office and x-axis is employees name status show bar click function
        3.status user could choice most fild x-axis in dropdown menu
     */
+
     var chart_status_enum =
         {
             status_user: 0,
@@ -36,6 +37,11 @@
         //    $("#chars_with_scorll_wh").html("w =" + chart_div.width() + ";h =" + chart_div.height());
         //})
     });
+    var LabelConfig = {
+        visible: true,
+        format: "fixedPoint",
+        precision: 0
+    }
     var char_show_status = chart_status_enum.status_office;
     function chart_resize() {
         var chart_div = $('#chars_with_scorll')
@@ -118,6 +124,7 @@
             tooltip: {
                 enabled: true
             },
+            label:LabelConfig,
             title: "Historic, Current and Future Population Trends",
             legend: {
                 verticalAlignment: "bottom",
@@ -137,6 +144,7 @@
         $('#id_activity_log').css('display', display_style);
         $('#id_change_range_drop_down').css('display', display_style);
     }
+    
     function show_bar_chart(ds) {
         debugger;
         var dataFormSever = ds != null ? ds : $.parseJSON('<%=ChartSource()%>');
@@ -182,6 +190,10 @@
                 color: '#99bdcf'
             },
             //title: chartTitle,
+            commonSeriesSettings: {
+                label:LabelConfig
+            },
+            
             legend: {
                 visible: false,
                 verticalAlignment: "bottom",

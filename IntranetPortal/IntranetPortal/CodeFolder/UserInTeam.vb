@@ -28,7 +28,7 @@ Partial Public Class UserInTeam
                 result.Add(item.UserTeam)
             Next
 
-            Return result.ToList
+            Return result.Where(Function(e) e.EmployeeActive = True).ToList
         End Using
     End Function
 
