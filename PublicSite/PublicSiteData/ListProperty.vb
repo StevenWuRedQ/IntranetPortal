@@ -90,17 +90,37 @@ End Class
 Public Class SearchCriteria
     Public Property Type As String
     Public Property Keyword As String
-    Public Property PriceRange As Range
+    Public Property PriceRangeName As String
     Public Property BedRoomCount As Integer
     Public Property BathRoomCount As Integer
     Public Property More As String
-
     Public Property Result As List(Of ListProperty)
 
+    Public ReadOnly Property PriceRange As Range
+        Get
+            Return RangeList.FirstOrDefault(Function(r) r.Name = PriceRangeName)
+        End Get
+    End Property
+
     Public Structure Range
+        Public Property Name As String
+        Public Property Description As String
         Public Property Min As Decimal
         Public Property Max As Decimal
     End Structure
+
+    Public ReadOnly Property RangeList As Range()
+        Get
+            Return _rangeList
+        End Get
+    End Property
+
+    Private Shared _rangeList As Range() = {
+        New Range With {.Name = "", .Description = "Prices"},
+        New Range With {.Name = "Range1", .Description = "Under $200,000", .Min = 0, .Max = 200000},
+        New Range With {.Name = "Range2", .Description = "$200,000 - $300,000", .Min = 2000000, .Max = 300000},
+        New Range With {.Name = "Range3", .Description = "$300,000 - $400,000", .Min = 3000000, .Max = 4000000}
+        }
 End Class
 
 Partial Public Class FeatureData
