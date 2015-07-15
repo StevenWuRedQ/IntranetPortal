@@ -18,36 +18,74 @@ End Code
 
 <section class="hsearch-bar">
     <div class="w-container">
-        @Using Html.BeginForm("List", "Home", FormMethod.Post)
+        @Using Html.BeginRouteForm("Default", New With {.action = "Search", .controller = "Home"}, FormMethod.Post)
             @Html.AntiForgeryToken()
 
-            @Html.TextBoxFor(Function(model) model.Keyword, New With {.placeholder = "Search neighborhood, city, zip or address",
+            @Html.TextBoxFor(Function(model) model.Keyword, New With {.placeholder = "Search neighborhood, city, zip or address", .name = "searchCriteria",
                 .required = "required",
                 .class = "w-input hsearch-bar-input"})
+          
+              @*@Html.DropDownListFor(Function(model) model.PriceRange, New SelectList({New With {.value = "", .text = "Price"},
+                                                                                    New With {.value = "1", .text = "Under $200,000"},
+                                                                                    New With {.value = 2, .text = "$200,000 - $300,000"},
+                                                                                    New With {.value = "3", .text = "$300,000 - $400,000"}
+                                                                                   }, "value", "text"), New With {
+                                                                               .class = "w-select hsearch-bar-input hsearch-bar-input-selection",
+            .placeholder = "Price"
+                                                                               })*@
+          
+            @Html.DropDownListFor(Function(model) model.PriceRangeName, New SelectList(Model.RangeList, "Name", "Description"), New With {
+                                                                               .class = "w-select hsearch-bar-input hsearch-bar-input-selection",
+                                                                               .placeholder = "Price"
+                                                                               })
+
+            @Html.DropDownListFor(Function(model) model.BedRoomCount, New SelectList({New With {.value = "", .text = "Beds"},
+                                                                                    New With {.value = "1", .text = "1"},
+                                                                                    New With {.value = 2, .text = "2"},
+                                                                                    New With {.value = "3", .text = "3"}
+                                                                                   }, "value", "text"), New With {
+                                                                               .class = "w-select hsearch-bar-input hsearch-bar-input-selection",
+                                                                               .placeholder = "beds"
+                                                                               })
+
+            @Html.DropDownListFor(Function(model) model.BathRoomCount, New SelectList({New With {.value = "", .text = "baths"},
+                                                                                    New With {.value = "1", .text = "1"},
+                                                                                    New With {.value = 2, .text = "2"},
+                                                                                    New With {.value = "3", .text = "3"}
+                                                                                   }, "value", "text"), New With {
+                                                                               .class = "w-select hsearch-bar-input hsearch-bar-input-selection",
+                                                                                .placeholder = "baths"
+                                                                               })
+
+            @Html.DropDownListFor(Function(model) model.More, New SelectList({New With {.value = "", .text = "More"}
+                                                                                   }, "value", "text"), New With {
+                                                                               .class = "w-select hsearch-bar-input hsearch-bar-input-selection",
+                                                                               .placeholder = "More"
+                                                                               })
 
             @<text>
                 @*<input class="w-input hsearch-bar-input" id="hsearch-criteria" type="text" placeholder="Search neighborhood, city, zip or address" name="search-criteria" data-name="hsearch-criteria" required="required">*@
-                <select class="w-select hsearch-bar-input hsearch-bar-input-selection" id="price" name="price" data-name="price" required>
-                    <option value="">Price</option>
-                    <option value="Under $200,000">Under $200,000</option>
-                    <option value="$200,000 - $300,000">$200,000 - $300,000</option>
-                    <option value="$300,000 - $400,000">$300,000 - $400,000</option>
-                </select>
-                <select class="w-select hsearch-bar-input hsearch-bar-input-selection" id="beds" name="beds" data-name="beds">
-                    <option value="">Beds</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-                <select class="w-select hsearch-bar-input hsearch-bar-input-selection" id="baths" name="baths" data-name="baths">
-                    <option value="">Baths</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-                <select class="w-select hsearch-bar-input hsearch-bar-input-selection" id="more" name="more" data-name="more">
-                    <option value="">More</option>
-                </select>
+                @*<select class="w-select hsearch-bar-input hsearch-bar-input-selection" id="price" name="price" data-name="price">
+                        <option value="">Price</option>
+                        <option value="Under $200,000">Under $200,000</option>
+                        <option value="$200,000 - $300,000">$200,000 - $300,000</option>
+                        <option value="$300,000 - $400,000">$300,000 - $400,000</option>
+                    </select>*@
+                @*<select class="w-select hsearch-bar-input hsearch-bar-input-selection" id="beds" name="beds" data-name="beds">
+                        <option value="">Beds</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>*@
+                @*<select class="w-select hsearch-bar-input hsearch-bar-input-selection" id="baths" name="baths" data-name="baths">
+                        <option value="">Baths</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>*@
+                @*<select class="w-select hsearch-bar-input hsearch-bar-input-selection" id="more" name="more" data-name="more">
+                        <option value="">More</option>
+                    </select>*@
                 <input class="w-button hsearch-button" type="submit" value="&#xf002;" data-wait="Please wait...">
             </text>
 
@@ -71,13 +109,13 @@ End Code
             var reslut = @Html.Raw(JsonConvert.SerializeObject(Model.Result))
 
             function map_reslut(o) {
-                var image =  o.Images && o.Images[0] && o.Images[0].ImageData ? o.Images[0].ImageData : '';
+                var image = o.Images && o.Images[0] && o.Images[0].ImageData ? o.Images[0].ImageData : '';
                 return { BBLE: o.BBLE, lat: o.Latitude, lng: o.Longitude, image: image }
             };
             var myLayer = L.mapbox.featureLayer().addTo(map);
 
             reslut = reslut.map(map_reslut);
-            reslut.forEach(function (e, idx) { e.title = String.fromCharCode("A".charCodeAt(0) +idx ) })
+            reslut.forEach(function (e, idx) { e.title = String.fromCharCode("A".charCodeAt(0) + idx) })
             reslut = GeoJSON.parse(reslut, { Point: ['lat', 'lng'] });
             myLayer.on('layeradd', function (e) {
                 var marker = e.layer,
@@ -86,7 +124,7 @@ End Code
                 // Create custom popup content
                 var popupContent = '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
                                         '<img src="data:image/png;base64, ' + feature.properties.image + '" />' +
-                                        
+
                                     '</a>';
 
                 // http://leafletjs.com/reference.html#popup

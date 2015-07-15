@@ -23,6 +23,14 @@ Public Class HomeController
         Return View(criteria)
     End Function
 
+    Function Search(criteria As SearchCriteria) As ActionResult
+        If criteria Is Nothing Then
+            criteria = New PublicSiteData.SearchCriteria
+        End If
+        criteria.Result = PublicSiteData.ListProperty.SearchList(criteria)
+        Return View("List", criteria)
+    End Function
+
     '<HttpPost>
     'Function List(criteria As SearchCriteria) As ActionResult
     '    criteria.Result = ListProperty.SearchList(criteria)
