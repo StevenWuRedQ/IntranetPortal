@@ -12,11 +12,9 @@
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
-
     <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/jquery.webui-popover.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>

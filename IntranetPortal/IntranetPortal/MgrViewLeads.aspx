@@ -4,7 +4,9 @@
 <%@ Register Src="~/UserControl/LeadsInfo.ascx" TagPrefix="uc1" TagName="LeadsInfo" %>
 <%@ Register Src="~/UserControl/DoorKnockMap.ascx" TagPrefix="uc1" TagName="DoorKnockMap" %>
 <%@ Register Src="~/UserControl/LeadsStatisticSummary.ascx" TagPrefix="uc1" TagName="LeadsStatisticSummary" %>
-
+<asp:Content ContentPlaceHolderID="head" runat="server">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
+</asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
      <style>
         #__asptrace {

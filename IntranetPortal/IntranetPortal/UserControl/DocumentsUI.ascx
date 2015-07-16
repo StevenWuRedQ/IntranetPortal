@@ -26,8 +26,9 @@
 
     var IsDocumentLoaded = false;
     function BindDocuments(refreshDocuments) {
+
         if (!IsDocumentLoaded || refreshDocuments) {
-            
+
             cbpDocumentUI.PerformCallback(leadsInfoBBLE);
             isLoaded = true;
         }
@@ -75,6 +76,7 @@
 
 </script>
 
+
 <dx:ASPxPopupMenu ID="ASPxPopupMenu11" runat="server" ClientInstanceName="AspFilePopupMenu"
     PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
     PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
@@ -88,7 +90,7 @@
         <%--<dx:MenuItem Text="Preview History" Name="History">
         </dx:MenuItem>--%>
     </Items>
-     <ClientSideEvents ItemClick="function(s,e){OnFilePopUpClick(s,e);}" />
+    <ClientSideEvents ItemClick="function(s,e){OnFilePopUpClick(s,e);}" />
 </dx:ASPxPopupMenu>
 
 <div style="color: #999ca1;">
@@ -106,6 +108,7 @@
             </div>
         </div>
     </div>
+
     <dx:ASPxCallbackPanel runat="server" ID="cbpDocumentUI" ClientInstanceName="cbpDocumentUI" OnCallback="cbpDocumentUI_Callback">
         <PanelCollection>
             <dx:PanelContent>
@@ -126,7 +129,7 @@
                                                             <%--                <tr onclick="PreviewDocument('<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>', '<%# Eval("ContentType")%>');" style="cursor:pointer" onmouseover="this.bgColor = '#D1DEFB';" onmouseout="this.bgColor = '';">--%>
 
                                                             <div class="clearfix ">
-                                                                <input type="checkbox"  data-uniqueid="<%# Eval("Description")%>" class="FileCheckbox" value="<%# Eval("Name")%>" id="<%# String.Format("doc_list_id_{0}", Eval("Description"))%>" />
+                                                                <input type="checkbox" data-uniqueid="<%# Eval("Description")%>" class="FileCheckbox" value="<%# Eval("Name")%>" id="<%# String.Format("doc_list_id_{0}", Eval("Description"))%>" />
                                                                 <label class="doc_list_checks doc_border_left check_margin doc_list_checks_sub" for='<%# String.Format("doc_list_id_{0}", Eval("Description"))%>' style="width: 94%">
                                                                     <span class="color_balck ">
                                                                         <%-- NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}&spFile={1}", Eval("FileID"), Eval("Description"))%>' Text='<%# Eval("Name")%>'--%>
@@ -148,7 +151,7 @@
                                                 <%--                <tr onclick="PreviewDocument('<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>', '<%# Eval("ContentType")%>');" style="cursor:pointer" onmouseover="this.bgColor = '#D1DEFB';" onmouseout="this.bgColor = '';">--%>
 
                                                 <div class="clearfix ">
-                                                    <input type="checkbox"  data-uniqueid="<%# Eval("Description")%>" class="FileCheckbox" value="<%# Eval("Name")%>" id="<%# String.Format("doc_list_id_{0}", Eval("Description"))%>" />
+                                                    <input type="checkbox" data-uniqueid="<%# Eval("Description")%>" class="FileCheckbox" value="<%# Eval("Name")%>" id="<%# String.Format("doc_list_id_{0}", Eval("Description"))%>" />
                                                     <label class="doc_list_checks doc_border_left check_margin doc_list_checks_sub" for='<%# String.Format("doc_list_id_{0}", Eval("Description"))%>' style="width: 94%">
                                                         <span class="color_balck ">
                                                             <%-- NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}&spFile={1}", Eval("FileID"), Eval("Description"))%>' Text='<%# Eval("Name")%>'--%>
@@ -168,8 +171,72 @@
                         </div>
                     </ItemTemplate>
                 </asp:DataList>
+
+
+
             </dx:PanelContent>
         </PanelCollection>
-        <ClientSideEvents EndCallback="function(s,e){IsDocumentLoaded= true;}" Init="function(s,e){IsDocumentLoaded= false;}" />
+        <ClientSideEvents EndCallback="function(s,e){IsDocumentLoaded = true;}" Init="function(s,e){IsDocumentLoaded= false;}" />
+
+
     </dx:ASPxCallbackPanel>
 </div>
+
+    <%--
+          <style>
+    #newDocumentUI {
+        font-size: 14px;
+    }
+
+        #newDocumentUI row {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        #newDocumentUI div {
+            min-height: 45px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+
+    .title {
+    }
+</style>
+        <div id="newDocumentUI" class="angularScope" ng-controller="DocUIController" style="border: 1px solid red">
+            <div class="content">
+                <div class="row">
+                    <div>
+                        <div class="title row">
+                            <div class="col-md-offset-1 col-md-7">Name</div>
+                            <div class="col-md-3">Date modified</div>
+                        </div>
+                        <div class="folder-item" ng-repeat="folder in content.folders">
+                            <div class="col-md-offset-1 col-md-7"><i class="fa fa-folder fa-2x" style="color: blue"></i>{{folder.name}}</div>
+                            <div class="col-md-3">--</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script>
+
+        var portalApp = angular.module('PortalApp', [])
+            .controller('DocUIController', ['$scope', '$http', function ($scope, $http) {
+                $scope.bble = "1004490003";
+                $scope.pathUrl = "";
+                $scope.content = {};
+
+                $scope.init = function () {
+                    $http.post('Document.asmx/getFolderItems', { bble: $scope.bble, folderPath: $scope.pathUrl }).
+                        success(function (data, status, headers, config) {
+                            $scope.content = JSON.parse(data.d);
+                            console.log($scope.content);
+
+                        }).
+                        error(function () {
+                            console.log("bble is blank");
+                        });
+                }();
+            }]);
+
+    %>

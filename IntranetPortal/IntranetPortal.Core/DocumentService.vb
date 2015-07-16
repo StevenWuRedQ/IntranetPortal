@@ -33,6 +33,37 @@ Public Class DocumentService
         End Using
     End Function
 
+    Public Shared Function GetCateByBBLEAndFolder(bble As String, folderPath As String) As Object
+        Using ctx = GetClientContext()
+            If Not IsFolderExsit(ctx, bble & "/" & folderPath) Then
+                CreateFolder(bble & "/" & folderPath)
+            End If
+            Dim curFolder = ctx.Web.GetFolderByServerRelativeUrl("/" & RootFolderName & "/" & bble & "/" & folderPath)
+            Dim folders = getSubFolders(ctx, curFolder)
+            Dim files = GetFiles(ctx, curFolder)
+            Return New With {
+                .path = "/" & bble & "/" & folderPath,
+                .folders = folders,
+                .files = files
+            }
+        End Using
+    End Function
+
+    Public Shared Function getSubFolders(clientContext As ClientContext, curFolder As Folder) As Object
+        Dim folders = curFolder.Folders
+        clientContext.Load(folders)
+        clientContext.ExecuteQuery()
+
+        Dim ds = (From subFolder In folders
+                 Select New With {
+                     .name = subFolder.Name,
+                     .items = subFolder.ItemCount,
+                     .url = subFolder.ServerRelativeUrl,
+                     .tag = subFolder.Tag
+                    }).ToList
+        Return ds
+    End Function
+
     Public Shared Function GetSubCategories(clientContext As ClientContext, cate As Folder) As Object
         Dim categories = cate.Folders
         clientContext.Load(categories)
@@ -211,7 +242,7 @@ Public Class DocumentService
     End Function
 
     Private Shared Function CreateFolder(folderUrl As String) As Folder
-        Dim folders = folderUrl.Split(New Char() {"/"}, StringSplitOptions.RemoveEmptyEntries)
+        ' Dim folders = folderUrl.Split(New Char() {"/"}, StringSplitOptions.RemoveEmptyEntries)
 
         Using ClientContext = GetClientContext()
             If Not IsFolderExsit(ClientContext, folderUrl) Then

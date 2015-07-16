@@ -1,6 +1,8 @@
 ﻿Imports System.Security
 Imports System.Web.Services
 Imports IntranetPortal.Core
+Imports Newtonsoft.Json
+Imports System.Web.Script.Services
 
 Public Class DocumentsUI
     Inherits System.Web.UI.UserControl
