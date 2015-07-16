@@ -49,7 +49,10 @@
             padding-top: 8px;
             padding-bottom: 8px;
         }
-
+        #ctl00_MainContentPH_ASPxSplitter1_1,#ctl00_MainContentPH_ASPxSplitter1_2
+        {
+            visibility:hidden;
+        }
         .chipsdemoContactChips .contact-item {
             box-sizing: border-box;
         }
@@ -569,6 +572,8 @@
             $(document).ready(function () {
                 // Handler for .ready() called.
                 angular.element(document.getElementById('PortalCtrl')).scope().LoadLeadsCase(BBLE);
+               
+               
             });
             
         }
@@ -915,8 +920,9 @@
                         if (typeof gridTrackingClient != 'undefined')
                             gridTrackingClient.Refresh();
 
-                    }).error(function () {
-                        alert("Fail to save data.");
+                    }).error(function (data) {
+                        alert("Fail to save data :" + JSON.stringify(data));
+                        console.log(data);
                     });
 
             }
@@ -941,6 +947,7 @@
             }
             $scope.LegalCase.SecondaryInfo.StatuteOfLimitations = [];
             $scope.LoadLeadsCase = function (BBLE) {
+                $("#ctl00_MainContentPH_ASPxSplitter1_1,#ctl00_MainContentPH_ASPxSplitter1_2").css('visibility', 'visible');
                 var data = { bble: BBLE };
 
                 $http.post('LegalUI.aspx/GetCaseData', data).

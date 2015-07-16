@@ -37,6 +37,11 @@ Partial Public Class LegalCase
             Return ctx.LegalCases.Where(Function(lc) lc.Status = status).ToList
         End Using
     End Function
+    Public Shared Function GetAllCases() As List(Of LegalCase)
+        Using ctx As New LegalModelContainer
+            Return ctx.LegalCases.ToList
+        End Using
+    End Function
 
     Public Shared Function GetCaseList(status As LegalCaseStatus, userName As String) As List(Of LegalCase)
         Using ctx As New LegalModelContainer

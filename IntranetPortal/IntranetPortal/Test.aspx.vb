@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports Newtonsoft.Json.Linq
 
 Public Class Test
     Inherits System.Web.UI.Page
@@ -44,4 +45,14 @@ Public Class Test
     End Sub
 
 
+    Protected Sub Button1_Click(sender As Object, e As EventArgs)
+        Dim cases = Legal.LegalCase.GetAllCases
+        For Each c In cases
+            Dim data = JObject.Parse(c.CaseData)
+            data("CaseName") = c.CaseName
+            c.CaseData = data.ToJsonString
+            c.SaveData()
+        Next
+        UpdateStauts.Text = "completed"
+    End Sub
 End Class
