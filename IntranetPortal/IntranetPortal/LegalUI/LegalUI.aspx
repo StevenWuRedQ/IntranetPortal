@@ -568,7 +568,11 @@
 
         }
         function setLegalData(BBLE) {
-            angular.element(document.getElementById('PortalCtrl')).scope().LoadLeadsCase(BBLE);
+            $(document).ready(function () {
+                // Handler for .ready() called.
+                angular.element(document.getElementById('PortalCtrl')).scope().LoadLeadsCase(BBLE);
+            });
+            
         }
 
 

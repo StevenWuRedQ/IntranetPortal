@@ -238,7 +238,6 @@ The courts no longer consider this proper service. "></i></span><br />&nbsp
 						</li>
 
 					</ul>
-
 				</div>
 				<div>
 					<ul class="ss_form_box clearfix">
