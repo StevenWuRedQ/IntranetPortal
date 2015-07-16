@@ -82,6 +82,9 @@
     <Compile Include="DataModel\LegalCase.vb">
       <DependentUpon>LegalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\LegalJudge.vb">
+      <DependentUpon>LegalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\LegalModel.Context.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -97,7 +100,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LegalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\LegalRoboSignor.vb">
+      <DependentUpon>LegalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LegalCase.vb" />
+    <Compile Include="LegalJudge.vb" />
+    <Compile Include="LegalRoboSignor.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

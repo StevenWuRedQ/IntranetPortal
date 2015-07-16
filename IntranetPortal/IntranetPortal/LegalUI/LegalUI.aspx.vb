@@ -204,4 +204,10 @@ Public Class LegalUI
             LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal, LeadsActivityLog.EnumActionType.Comments)
         End If
     End Sub
+    Public Function GetAllRoboSingor() As String
+        Return Legal.LegalRoboSignor.GetAllRoboSignor.ToJsonString
+    End Function
+    Public Function GetAllJudge() As String
+        Return Legal.LegalJudge.GetAllJudge.ToJsonString
+    End Function
 End Class

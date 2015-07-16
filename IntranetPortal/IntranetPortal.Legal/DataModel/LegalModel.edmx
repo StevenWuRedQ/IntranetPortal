@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="LegalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LegalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="LegalCase">
           <Key>
             <PropertyRef Name="BBLE" />
@@ -15,11 +15,41 @@
           <Property Name="Attorney" Type="nvarchar" MaxLength="50" />
           <Property Name="CaseData" Type="nvarchar(max)" />
           <Property Name="Status" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="LegalJudge">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+          <Property Name="OfficeNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="CorpName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Office" Type="nvarchar" MaxLength="256" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cell" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LegalRoboSignor">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+          <Property Name="OfficeNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="CorpName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Office" Type="nvarchar" MaxLength="256" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cell" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityContainer Name="LegalModelStoreContainer">
           <EntitySet Name="LegalCase" EntityType="Self.LegalCase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LegalJudge" EntityType="Self.LegalJudge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LegalRoboSignor" EntityType="Self.LegalRoboSignor" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -27,6 +57,8 @@
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="LegalModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="LegalModelContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="LegalCases" EntityType="LegalModel.LegalCase" />
+          <EntitySet Name="LegalJudges" EntityType="LegalModel.LegalJudge" />
+          <EntitySet Name="LegalRoboSignors" EntityType="LegalModel.LegalRoboSignor" />
         </EntityContainer>
         <EntityType Name="LegalCase">
           <Key>
@@ -40,6 +72,34 @@
           <Property Name="ResearchBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Attorney" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LegalJudge">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CorpName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Office" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cell" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LegalRoboSignor">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CorpName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Office" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cell" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -52,6 +112,8 @@
           <EntitySetMapping Name="LegalCases">
             <EntityTypeMapping TypeName="LegalModel.LegalCase">
               <MappingFragment StoreEntitySet="LegalCase">
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Attorney" ColumnName="Attorney" />
                 <ScalarProperty Name="ResearchBy" ColumnName="ResearchBy" />
@@ -60,6 +122,34 @@
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CaseData" ColumnName="CaseData" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LegalJudges">
+            <EntityTypeMapping TypeName="LegalModel.LegalJudge">
+              <MappingFragment StoreEntitySet="LegalJudge">
+                <ScalarProperty Name="Cell" ColumnName="Cell" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Office" ColumnName="Office" />
+                <ScalarProperty Name="CorpName" ColumnName="CorpName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="OfficeNO" ColumnName="OfficeNO" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LegalRoboSignors">
+            <EntityTypeMapping TypeName="LegalModel.LegalRoboSignor">
+              <MappingFragment StoreEntitySet="LegalRoboSignor">
+                <ScalarProperty Name="Cell" ColumnName="Cell" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Office" ColumnName="Office" />
+                <ScalarProperty Name="CorpName" ColumnName="CorpName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="OfficeNO" ColumnName="OfficeNO" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

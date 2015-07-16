@@ -10,16 +10,14 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class LegalCase
-    Public Property BBLE As String
-    Public Property CaseData As String
-    Public Property CreateDate As Nullable(Of Date)
-    Public Property CreateBy As String
-    Public Property CaseName As String
-    Public Property ResearchBy As String
-    Public Property Attorney As String
-    Public Property Status As Nullable(Of Integer)
-    Public Property UpdateDate As Nullable(Of Date)
-    Public Property UpdateBy As String
+Partial Public Class LegalRoboSignor
+    Public Property ContactId As Integer
+    Public Property Name As String
+    Public Property OfficeNO As String
+    Public Property Email As String
+    Public Property CorpName As String
+    Public Property Office As String
+    Public Property Extension As String
+    Public Property Cell As String
 
 End Class

@@ -576,6 +576,11 @@
             function t() {
 
             }
+        var AllRoboSignor = <%= GetAllRoboSingor() %>
+            function s()
+            {
+
+            }
         var taskSN = '<%= Request.QueryString("sn")%>';
         <%--var LegalCase = $.parseJSON('<%= LegalCase%>');--%>
 
@@ -802,9 +807,31 @@
                 },
                 searchExpr: ["Name"]
             });
+            
             $scope.ContactDataSource = new DevExpress.data.DataSource({
                 store: cStore
             });
+            $scope.RoboSingerDataSource = new DevExpress.data.DataSource({
+                store: new DevExpress.data.CustomStore({
+                    load: function (loadOptions) {
+
+                        if (AllRoboSignor) {
+                            if (loadOptions.searchValue) {
+                                return AllRoboSignor.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(loadOptions.searchValue.toLowerCase()) >= 0 } return false });
+                            } 
+                            return [];
+                        }
+                    },
+                    byKey: function (key) {
+                        if (AllRoboSignor) {
+                            return AllRoboSignor.filter(function (o) { return o.ContactId == key })[0];
+                        }
+                       
+                    },
+                    searchExpr: ["Name"]
+                })
+            });
+            $scope.AllJudges = <%= GetAllJudge()%>
             $scope.PickedContactId = null;
 
             $scope.TestContactId = function (c) {
@@ -827,15 +854,8 @@
                 alert(JSON.stringify(e));
             }
 
-            $scope.InitContactAutoComelted = function (id) {
-                return {
-                    dataSource: AllContact,//$scope.ContactDataSource,
-                    valueExpr: 'ContactId',
-                    displayExpr: 'Name',
-
-                };
-            }
-            $scope.InitContact = function (id) {
+           
+            $scope.InitContact = function (id,dataSourceName) {
 
 
                 //new DevExpress.data.ODataStore({
@@ -844,7 +864,7 @@
                 //    keyType: "Int32"
                 //});
                 return {
-                    dataSource: $scope.ContactDataSource,
+                    dataSource: dataSourceName ? $scope[dataSourceName] : $scope.ContactDataSource,
                     valueExpr: 'ContactId',
                     displayExpr: 'Name',
                     searchEnabled: true,
