@@ -97,17 +97,15 @@
                     <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
                         <div style="font-size: 30px">
                             <i class="fa fa-user"></i>
-                            <span style="margin-left: 19px;">
-                     
-                                &nbsp;
+                            <span style="margin-left: 19px;">&nbsp;
                             </span>
 
-     
+
                             <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
                             <span class="time_buttons" onclick='ShowDOBWindow("<%--= shortSaleCaseData.PropertyInfo.Borough%>","<%= shortSaleCaseData.PropertyInfo.Block%>", "<%= shortSaleCaseData.PropertyInfo.Lot--%>")'>DOB</span>
                             <span class="time_buttons" onclick='ShowAcrisMap("<%--= shortSaleCaseData.BBLE --%>")'>Acris</span>
                             <span class="time_buttons" onclick='ShowPropertyMap("<%--= shortSaleCaseData.BBLE --%>")'>Maps</span>
-                        
+
                         </div>
                         <%--data format June 2, 2014 6:37 PM--%>
                         <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;"><%--=If(String.IsNullOrEmpty(shortSaleCaseData.OwnerFirstName),"",shortSaleCaseData.OwnerFirstName &" " &shortSaleCaseData.OwnerLastName) --%></span>
@@ -116,18 +114,18 @@
                     <%--note list--%>
                     <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
 
-                                    <% Dim i = 0%>
-                                    <asp:HiddenField ID="hfCaseId" runat="server" />
-                                    <%-- For Each comment In shortSaleCaseData.Comments--%>
-                                    <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
-                                        <i class="fa fa-exclamation-circle note_img"></i>
-                                        <span class="note_text"><%--= comment.Comments--%></span>
-                                        <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7; display: none"></i>
-                                        <i class="fa fa-times" style="float: right; padding-right: 25px; line-height: 40px; font-size: 18px; color: #b1b2b7; cursor: pointer" onclick="DeleteComments(<%--= comment.CommentId --%>)"></i>
-                                    </div>
-                                    <%-- i += 1--%>
-                                    <%-- Next--%>
-                        
+                        <% Dim i = 0%>
+                        <asp:HiddenField ID="hfCaseId" runat="server" />
+                        <%-- For Each comment In shortSaleCaseData.Comments--%>
+                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
+                            <i class="fa fa-exclamation-circle note_img"></i>
+                            <span class="note_text"><%--= comment.Comments--%></span>
+                            <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7; display: none"></i>
+                            <i class="fa fa-times" style="float: right; padding-right: 25px; line-height: 40px; font-size: 18px; color: #b1b2b7; cursor: pointer" onclick="DeleteComments(<%--= comment.CommentId --%>)"></i>
+                        </div>
+                        <%-- i += 1--%>
+                        <%-- Next--%>
+
 
                         <div class="note_item" style="background: white">
                             <%--<button class="btn" data-container="body" type="button" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">--%>
@@ -168,41 +166,38 @@
 
                     <div class="detail_tabs">
                         <ul class="nav nav-tabs overview_tabs" role="tablist" style="">
-                    <li class="short_sale_tab active">
-                        <a class="shot_sale_tab_a " href="#SSHomeowner" role="tab" data-toggle="tab">Homeowner Info</a></li>
-                    <%-- <% If Agent Then%>--%>
-                    <li class="short_sale_tab">
-                        <a class="shot_sale_tab_a " href="#SSProperty" role="tab" data-toggle="tab">Property Info</a></li>
-                    <%--    <% End If%>
-                    <% If SecondaryAction Then%>--%>
-                    <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#SSMortgage" role="tab" data-toggle="tab">Mortgages</a></li>
-                    <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#SSDeal" role="tab" data-toggle="tab">Deal Info</a></li>
-                    <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#SSParties" role="tab" data-toggle="tab">Parties</a></li>
-                    <%--  <% End If%>--%>
-                </ul>
+                            <li class="short_sale_tab active">
+                                <a class="shot_sale_tab_a " href="#SSHomeowner" role="tab" data-toggle="tab">Homeowner Info</a></li>
+                            <li class="short_sale_tab">
+                                <a class="shot_sale_tab_a " href="#SSProperty" role="tab" data-toggle="tab">Property Info</a></li>
+                            <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#SSMortgage" role="tab" data-toggle="tab">Mortgages</a></li>
+                            <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#SSDeal" role="tab" data-toggle="tab">Deal Info</a></li>
+                            <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#SSParties" role="tab" data-toggle="tab">Parties</a></li>
+                            <%--  <% End If%>--%>
+                        </ul>
 
-                <!-- Tab panes -->
+                        <!-- Tab panes -->
                         <div class="short_sale_content">
-                        <div class="tab-content">
-                    <div class="tab-pane active" id="SSHomeowner">
-                      <uc1:NGShortSaleHomewonerTab runat="server" id="NGShortSaleHomewonerTab1" />
-                    </div>
-                    <div class="tab-pane " id="SSProperty" style="height: 554px; overflow: auto">
-                        <uc1:NGShortSalePropertyTab runat="server" id="NGShortSalePropertyTab" />
-                    </div>
-                    <div class="tab-pane" id="SSMortgage">
-                        <uc1:NGShortSaleMortgageTab runat="server" id="NGShortSaleMortgageTab" />
-                    </div>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="SSHomeowner">
+                                    <uc1:NGShortSaleHomewonerTab runat="server" ID="NGShortSaleHomewonerTab1" />
+                                </div>
+                                <div class="tab-pane " id="SSProperty">
+                                    <uc1:NGShortSalePropertyTab runat="server" ID="NGShortSalePropertyTab" />
+                                </div>
+                                <div class="tab-pane" id="SSMortgage">
+                                    <uc1:NGShortSaleMortgageTab runat="server" ID="NGShortSaleMortgageTab" />
+                                </div>
 
-                    <div class="tab-pane" id="SSDeal">
-                        <uc1:NGShortSaleDealInfoTab runat="server" id="NGShortSaleDealInfoTab" />
-                    </div>
+                                <div class="tab-pane" id="SSDeal">
+                                    <uc1:NGShortSaleDealInfoTab runat="server" ID="NGShortSaleDealInfoTab" />
+                                </div>
 
-                     <div class="tab-pane" id="SSParties">
-                        <uc1:NGShortSalePartiesTab runat="server" id="NGShortSalePartiesTab" />
-                    </div>
+                                <div class="tab-pane" id="SSParties">
+                                    <uc1:NGShortSalePartiesTab runat="server" ID="NGShortSalePartiesTab" />
+                                </div>
 
-                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

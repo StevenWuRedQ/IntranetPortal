@@ -2,185 +2,232 @@
 <%@ Import Namespace="IntranetPortal.ShortSale" %>
 <%@ Import Namespace="IntranetPortal" %>
 <div class="clearfix">
-    <div style="float: right">
-        <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
-    </div>
 </div>
-<div data-array-index="0" data-field="PropertyInfo.Owners" class="ss_array" style="display: none">
-    <h4 class="ss_form_title title_with_line">
-        <span class="title_index title_span">Seller __index__1</span>&nbsp;
-        <i class="fa fa-expand expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="Add"></i>
-        <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="Delete"></i>
-    </h4>
-    <div class="collapse_div">
-        <div>
 
-            <ul class="ss_form_box clearfix">
+<div>
+    <!-- Open Document Detail -->
+</div>
 
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">First name</label>
-                    <input class="ss_form_input ss_not_empty" data-item="FirstName" data-error="Seller __index__1 First name is Empty" data-item-type="1">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Last name</label>
-                    <input class="ss_form_input ss_not_empty" data-item="LastName" data-error="Seller __index__1 Last name is Empty" data-item-type="1">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">ssn</label>
-                    <input class="ss_form_input ss_ssn" data-item="SSN" data-item-type="1">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">dob</label>
-                    <input class="ss_form_input ss_date" data-item="DOB" data-item-type="1">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Phone #</label>
-                    <input class="ss_form_input ss_phone" id="phone_id__index__" data-item="Phone" <%--onkeyup="format_phone(this)" onblur="format_phone(this)"--%> data-item-type="1">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Email</label>
-                    <input class="ss_form_input ss_email" data-item="Email" data-error="Seller __index__1 Email is Error" data-item-type="1">
-                </li>
-                <%-- <li class="ss_form_item">
-                    <label class="ss_form_input_title">Phone #</label>
-                    <input class="ss_form_input" id="phone_id__index__" onblur="format_phone(this)" data-item="Phone" data-item-type="1">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Email</label>
-                    <input class="ss_form_input" data-item="Email" data-item-type="1">
-                </li>--%>
-            </ul>
-        </div>
+<div class="ss_form">
+    <h4 class="ss_form_title">Listing Info</h4>
+    <ul class="ss_form_box clearfix">
 
-        <div class="ss_form">
-            <h4 class="ss_form_title">mailing address</h4>
-            <ul class="ss_form_box clearfix">
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">MLS</label>
+            <input class="ss_form_input " ng-model="SsCase.ListMLS">
+        </li>
+
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">MLS #</label>
+            <input class="ss_form_input " ng-model="SsCase.ListMLSNO">
+        </li>
+
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">List Price</label>
+            <input class="ss_form_input currency_input" ng-model="SsCase.ListPrice">
+        </li>
+
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Listing Date</label>
+            <input class="ss_form_input" ss-date="" ng-model="SsCase.ListingDate">
+        </li>
+
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Listing Expiry Date</label>
+            <input class="ss_form_input " ss-date="" ng-model="SsCase.ListingExpireDate">
+        </li>
+
+        <%--  
 
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">street nummber</label>
-                    <input class="ss_form_input" data-item="MailNumber" data-item-type="1">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">street name</label>
-                    <input class="ss_form_input" data-item="MailStreetName" data-item-type="1">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Apt #</label>
-                    <input class="ss_form_input" data-item="MailApt" data-item-type="1">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">City</label>
-                    <input class="ss_form_input" data-item="MailCity" data-item-type="1">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">State</label>
-                    <input class="ss_form_input" data-item="MailState" data-item-type="1">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">zip</label>
-                    <input class="ss_form_input ss_zip" data-item="MailZip" data-error="Seller __index__1 Mail zip is not zip code" data-item-type="1">
-                </li>
+            <label class="ss_form_input_title">MLS Status</label>
+            <select class="ss_form_input" data-field="MLSStatus">
+                <option>NYS MLS</option>
+                <option>MLS LI </option>
+                <option>Brooklyn MLS</option>
+            </select>
+        </li>
 
-            </ul>
-        </div>
+                
+ 
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">LockBox</label>
+            <input class="ss_form_input" data-field="Lockbox">
+        </li>
 
-        <div class="ss_form">
-            <h4 class="ss_form_title">other info</h4>
-            <ul class="ss_form_box clearfix">
+             <li class="ss_form_item">
+            <label class="ss_form_input_title">Document Missing</label>
+            <input type="checkbox" id="pdf_check120" name="DocumentMissing" value="YES" class="ss_form_input ss_visable" data-field="DocumentMissing">
+            <label for="pdf_check120" class="input_with_check">
+                <span class="box_text">Yes </span>
+            </label>
+        </li>
+        <li class="ss_form_item" data-visiable="DocumentMissing">
+            <label class="ss_form_input_title">Missed Document</label>
+            <input class="ss_form_input " data-field="MissingDocDescription">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Start Intake</label>
+            <input type="radio" id="pdf_check119" name="1" value="YES" class="ss_form_input" data-field="StartIntake">
+            <label for="pdf_check119" class="input_with_check">
+                <span class="box_text">Yes </span>
+            </label>
+            <input type="radio" id="pdf_check1191" name="1" value="NO" class="ss_form_input">
+            <label for="pdf_check1191" class="input_with_check">
+                <span class="box_text">No </span>
+            </label>
+        </li>
+        --%>
+    </ul>
+</div>
 
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">bankruptcy</label>
-
-                    <input type="radio" id="checkYes_Bankruptcy__index__" data-test="1" name="44__index__" data-radio="Y" data-item="Bankruptcy" data-item-type="1" value="YES" class="ss_form_input">
-                    <label for="checkYes_Bankruptcy__index__" class="input_with_check"><span class="box_text">Yes</span></label>
-
-                    <input type="radio" id="none_check_no__index__" name="44__index__" data-test="1" data-item="Bankruptcy" data-item-type="1" value="NO" class="ss_form_input">
-                    <label for="none_check_no__index__" class="input_with_check"><span class="box_text">No</span></label>
-
-                </li>
-
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">employed</label>
-                    <input class="ss_form_input" id="Employed" data-item="Employed" data-item-type="1">
-                </li>
-                <%--<li class="ss_form_item">
-                      <input type="button" onclick="testClick()" value="Test">
-                 </li>--%>
-
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">bank account</label>
-
-                    <input type="radio" id="checkYes_Bankaccount__index__" data-item="Bankaccount" data-radio="Y" data-item-type="1" name="45__index__" value="YES" class="ss_form_input">
-                    <label for="checkYes_Bankaccount__index__" class="input_with_check"><span class="box_text">Yes</span></label>
-
-                    <input type="radio" id="none_check_no452__index__" data-item="Bankaccount" data-item-type="1" name="45__index__" value="NO" class="ss_form_input">
-                    <label for="none_check_no452__index__" class="input_with_check"><span class="box_text">No</span></label>
-
-                </li>
-
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Tax Returns</label>
-
-                    <input type="radio" id="checkYes_TaxReturn__index__" name="47__index__" data-item="TaxReturn" data-item-type="1" data-radio="Y" value="YES" class="ss_form_input">
-                    <label for="checkYes_TaxReturn__index__" class="input_with_check"><span class="box_text">Yes</span></label>
-
-                    <input type="radio" id="none_check_no472__index__" name="47__index__" data-item="TaxReturn" data-item-type="1" value="NO" class="ss_form_input">
-                    <label for="none_check_no472__index__" class="input_with_check"><span class="box_text">No</span></label>
-
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">&nbsp;</label>
-                    <input class="ss_form_input ss_form_hidden" value=" ">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">&nbsp;</label>
-                    <input class="ss_form_input ss_form_hidden" value=" ">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">estate documents</label>
-
-                    <input type="radio" id="checkYes_EstateDocument__index__" name="49__index__" data-item="EstateDocument" data-radio="Y" data-item-type="1" value="YES">
-                    <label for="checkYes_EstateDocument__index__" class="input_with_check"><span class="box_text">Yes</span></label>
-
-                    <input type="radio" id="none_check_no47__index__" name="49__index__" data-item="EstateDocument" data-item-type="1" value="NO">
-                    <label for="none_check_no47__index__" class="input_with_check"><span class="box_text">No</span></label>
-
-                </li>
+<div class="ss_form">
+    <h4 class="ss_form_title">Valuation</h4>
+    <table class="ss_form_table">
+        <tr>
+            <th>Type</th>
+            <th>Date Completed</th>
+            <th>Date Expires</th>
+            <th>Value</th>
+            <th>Min Net</th>
+            <th><i class="fa fa-plus-circle"></i></th>
+        </tr>
+        <tr ng-repeat="valuation in SsCase.Valuations">
+            <td>
+                <select class="ss_form_input" ng-model="valuation.Method">
+                    <option value="Tenants in Common">Tenants in Common</option>
+                    <option value="Joint Tenancy">Joint Tenancy</option>
+                    <option value="Tenancy by the entirety">Tenancy by the entirety</option>
+                </select>
+            </td>
+            <td>
+                <input class="ss_form_input" ss-date="" ng-model="valuation.DateOfValue">
+            </td>
+            <td>
 
 
+                <input class="ss_form_input" ss-date="" ng-model="valuation.ExpiredOn">
+            </td>
 
-            </ul>
-        </div>
-        <div class="ss_form">
-            <h4 class="ss_form_title">Estate Attorney
-                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('PropertyInfo.Owners[__index__].EstateAttorneyContact', function(party){ShortSaleCaseData.PropertyInfo.Owners[__index__].EstateAttorneyId =party.ContactId; })"></i>
+            <td>
+                <input class="ss_form_input " ng-model="valuation.BankValue">
+            </td>
 
-            </h4>
-            <ul class="ss_form_box clearfix">
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Name</label>
-                    <input class="ss_form_input ss_not_edit" data-item="EstateAttorneyContact.Name" data-item-type="1">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Office #</label>
-                    <input class="ss_form_input ss_not_edit" data-item="EstateAttorneyContact.OfficeNO" data-item-type="1">
-                </li>
+            <td>
+                <input class="ss_form_input " ng-model="valuation.MNSP">
+            </td>
 
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Email</label>    
-                    <input class="ss_form_input ss_not_edit" data-item="EstateAttorneyContact.Email" data-item-type="1">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">also acting as seller attorney</label>
+            <td>
+                <i class="fa fa-check text-success"></i>
+                <i class="fa fa-minus-circle text-warning"></i>
+            </td>
+        </tr>
+    </table>
 
-                    <input type="radio" id="checkYes_ActingAsSellerAttorney__index__" data-item="ActingAsSellerAttorney" data-item-type="1" data-radio="Y" name="48__index__" value="YES">
-                    <label for="checkYes_ActingAsSellerAttorney__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_check_no48__index__" data-item="ActingAsSellerAttorney" data-item-type="1" name="48__index__" value="NO">
-                    <label for="none_check_no48__index__" class="input_with_check"><span class="box_text">No</span></label>
+    <%-- 
+    <asp:HiddenField ID="hfBBLE" runat="server" />
+    <dx:ASPxGridView ID="gvPropertyValueInfo" runat="server" KeyFieldName="ValueId" Width="100%" Theme="Moderno" OnDataBinding="gvPropertyValueInfo_DataBinding"
+        OnRowInserting="gvPropertyValueInfo_RowInserting" OnRowUpdating="gvPropertyValueInfo_RowUpdating" OnRowDeleting="gvPropertyValueInfo_RowDeleting">
+        <Columns>
+            <dx:GridViewDataComboBoxColumn FieldName="Method" Width="150px">
+                <PropertiesComboBox Native="true" Style-CssClass="form-control">
+                    <Items>
+                        <dx:ListEditItem Value="Exterior Appraisal" Text="Exterior Appraisal" />
+                        <dx:ListEditItem Value="Interior Appraisal" Text="Interior Appraisal" />
+                        <dx:ListEditItem Value="Exterior BPO" Text="Exterior BPO" />
+                        <dx:ListEditItem Value="Interior BPO" Text="Interior BPO" />
 
-                </li>
-            </ul>
-        </div>
-    </div>
+                    </Items>
+                </PropertiesComboBox>
+            </dx:GridViewDataComboBoxColumn>
+            <dx:GridViewDataTextColumn FieldName="BankValue" PropertiesTextEdit-DisplayFormatString="C2">
+                <PropertiesTextEdit Native="true" Style-CssClass="form-control">
+                </PropertiesTextEdit>
+            </dx:GridViewDataTextColumn>
+            <dx:GridViewDataTextColumn FieldName="MNSP" PropertiesTextEdit-DisplayFormatString="C2">
+                <PropertiesTextEdit Native="true" Style-CssClass="form-control">
+                </PropertiesTextEdit>
+            </dx:GridViewDataTextColumn>
+            <dx:GridViewDataDateColumn FieldName="DateOfValue" Width="120px">
+            </dx:GridViewDataDateColumn>
+            <dx:GridViewDataDateColumn FieldName="ExpiredOn" Width="120px"></dx:GridViewDataDateColumn>
+            <dx:GridViewCommandColumn ShowEditButton="true" ShowDeleteButton="true" ShowNewButtonInHeader="true"></dx:GridViewCommandColumn>
+        </Columns>
+        <SettingsEditing Mode="Inline"></SettingsEditing>
+    </dx:ASPxGridView>
+
+    --%>
+</div>
+<div class="ss_form">
+    <h4 class="ss_form_title">Offer</h4>
+
+        <table class="ss_form_table">
+        <tr>
+            <th>Type</th>
+            <th>Buying Entity</th>
+            <th>Signor</th>
+            <th>Date Corp Formed</th>
+            <th>Date of Contract</th>
+            <th>Offer Amount</th>
+            <th>Date Submitted</th>
+            <th><i class="fa fa-plus-circle"></i></th>
+        </tr>
+
+            <tr ng-repeat="offer in SsCase.Offers">
+                <td>
+                    <select class="ss_form_input" ng-model="valuation.Method">
+                    <option value="Tenants in Common">Tenants in Common</option>
+                    <option value="Joint Tenancy">Joint Tenancy</option>
+                    <option value="Tenancy by the entirety">Tenancy by the entirety</option>
+                </select>
+                </td>
+
+            </tr>
+            </table>
+
+
+    <%-- 
+    <ul class="ss_form_box clearfix">
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Offer Submited </label>
+
+            <input type="checkbox" id="pdf_check9995" name="HasOfferSubmit" value="true" class="ss_form_input ss_visable" data-field="HasOfferSubmit">
+            <label for="pdf_check9995" class="input_with_check">
+                <span class="box_text">Yes </span>
+            </label>
+            <%-- <input type="radio" id="pdf_check9993" name="HasOfferSubmit" value="false" class="ss_form_input ss_visable" data-field="HasOfferSubmit">
+                                                <label for="pdf_check9993" class="input_with_check">
+                                                    <span class="box_text">Yes </span>
+                                                </label>
+                                                <input type="radio" id="pdf_check9994" name="HasOfferSubmit" value="true" class="ss_form_input">
+                                                <label for="pdf_check9994" class="input_with_check">
+                                                    <span class="box_text">No </span>
+                                                </label>
+                                               
+        </li>
+
+        <li class="ss_form_item" data-visiable="HasOfferSubmit">
+            <label class="ss_form_input_title">Offer Submitted Amount</label>
+            <input class="ss_form_input currency_input" data-field="OfferSubmited">
+        </li>
+    <li class="ss_form_item" data-visiable="HasOfferSubmit">
+        <label class="ss_form_input_title">Offer Submitted Date </label>
+        <input class="ss_form_input ss_date" data-field="OfferDate">
+    </li>
+
+    <li class="ss_form_item">
+        <label class="ss_form_input_title">Lender Counter </label>
+        <input class="ss_form_input" data-field="LenderCounter">
+    </li>
+    <li class="ss_form_item">
+        <label class="ss_form_input_title">Date Counter Submitted </label>
+        <input class="ss_form_input ss_date" data-field="CounterSubmited">
+    </li>
+    <li class="ss_form_item">
+        <label class="ss_form_input_title">Counter Offer</label>
+        <input class="ss_form_input" data-field="CounterOffer">
+    </li>
+    </ul>
+    --%>
 </div>
