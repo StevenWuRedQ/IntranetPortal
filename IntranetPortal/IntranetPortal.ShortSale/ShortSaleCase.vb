@@ -173,6 +173,25 @@ Partial Public Class ShortSaleCase
         End Set
     End Property
 
+    Private _buyerEntity As ShortSaleBuyer
+    Public Property BuyerEntity As ShortSaleBuyer
+        Get
+            If _buyerEntity Is Nothing Then
+                _buyerEntity = ShortSaleBuyer.Instance(BBLE)
+            End If
+
+            Return _buyerEntity
+        End Get
+        Set(value As ShortSaleBuyer)
+            If String.IsNullOrEmpty(value.BBLE) Then
+                value.BBLE = BBLE
+            End If
+
+            _buyerEntity = value
+        End Set
+    End Property
+
+
     Public ReadOnly Property AssignedProcessor As PartyContact
         Get
             If Processor.HasValue Then
@@ -473,6 +492,10 @@ Partial Public Class ShortSaleCase
                     End If
                     opt.Save()
                 Next
+            End If
+
+            If _buyerEntity IsNot Nothing Then
+                _buyerEntity.Save()
             End If
 
         End Using

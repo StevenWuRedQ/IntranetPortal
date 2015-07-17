@@ -271,6 +271,21 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Shared" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ShortSaleBuyers">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="Entity" Type="nvarchar" MaxLength="50" />
+          <Property Name="EntityAddress" Type="nvarchar" MaxLength="256" />
+          <Property Name="SignorId" Type="int" />
+          <Property Name="Signor" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateOpened" Type="datetime" />
+          <Property Name="Office" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxId" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="ShortSaleCaseComments">
           <Key>
             <PropertyRef Name="CommentId" />
@@ -399,6 +414,7 @@
           <EntitySet Name="PropertyTitles" EntityType="Self.PropertyTitles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyValueInfo" EntityType="Self.PropertyValueInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleActivityLogs" EntityType="Self.ShortSaleActivityLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShortSaleBuyers" EntityType="Self.ShortSaleBuyers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleCaseComments" EntityType="Self.ShortSaleCaseComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleCases" EntityType="Self.ShortSaleCases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleOverview" EntityType="Self.ShortSaleOverview" Schema="dbo" store:Type="Tables" />
@@ -429,6 +445,7 @@
           <EntitySet Name="PropertyMortgages" EntityType="IntranetPortalModel.PropertyMortgage" />
           <EntitySet Name="PropertyOwners" EntityType="IntranetPortalModel.PropertyOwner" />
           <EntitySet Name="ShortSaleOverviews" EntityType="IntranetPortalModel.ShortSaleOverview" />
+          <EntitySet Name="ShortSaleBuyers" EntityType="IntranetPortalModel.ShortSaleBuyer" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -808,6 +825,21 @@
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ActivityDate" Type="DateTime" Precision="3" />
           <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ShortSaleBuyer">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Entity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EntityAddress" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SignorId" Type="Int32" />
+          <Property Name="Signor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOpened" Type="DateTime" Precision="3" />
+          <Property Name="Office" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaxId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1209,6 +1241,22 @@
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="LogId" ColumnName="LogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShortSaleBuyers">
+            <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleBuyer">
+              <MappingFragment StoreEntitySet="ShortSaleBuyers">
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+                <ScalarProperty Name="Office" ColumnName="Office" />
+                <ScalarProperty Name="DateOpened" ColumnName="DateOpened" />
+                <ScalarProperty Name="Signor" ColumnName="Signor" />
+                <ScalarProperty Name="SignorId" ColumnName="SignorId" />
+                <ScalarProperty Name="EntityAddress" ColumnName="EntityAddress" />
+                <ScalarProperty Name="Entity" ColumnName="Entity" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

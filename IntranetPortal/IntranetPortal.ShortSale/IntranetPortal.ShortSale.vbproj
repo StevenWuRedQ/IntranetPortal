@@ -142,6 +142,9 @@
     <Compile Include="ADOEntity\ShortSaleActivityLog.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\ShortSaleBuyer.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\ShortSaleCase.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
@@ -184,6 +187,7 @@
     <Compile Include="PropertyTitle.vb" />
     <Compile Include="PropertyValueInfo.vb" />
     <Compile Include="ShortSaleActivityLog.vb" />
+    <Compile Include="ShortSaleBuyer.vb" />
     <Compile Include="ShortSaleCase.vb" />
     <Compile Include="ShortSaleCaseComment.vb" />
     <Compile Include="ShortSaleOverview.vb" />
