@@ -182,6 +182,7 @@
                 </ul>
 
                 <!-- Tab panes -->
+                        <div class="short_sale_content">
                         <div class="tab-content">
                     <div class="tab-pane active" id="SSHomeowner">
                       <uc1:NGShortSaleHomewonerTab runat="server" id="NGShortSaleHomewonerTab1" />
@@ -202,7 +203,7 @@
                     </div>
 
                 </div>
-
+                        </div>
                     </div>
                 </div>
             </div>

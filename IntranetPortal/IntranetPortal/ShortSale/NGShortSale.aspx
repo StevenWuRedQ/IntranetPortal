@@ -47,7 +47,7 @@
                             <dx:ASPxCallbackPanel runat="server" ID="ASPxCallbackPanel2">
                                 <PanelCollection>
                                     <dx:PanelContent ID="PanelContent1" runat="server">
-                                        <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter" ClientVisible="true">
+                                        <dx:ASPxSplitter ID="contentSplitter" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter" ClientVisible="true">
                                             <Styles>
                                                 <Pane Paddings-Padding="0">
                                                     <Paddings Padding="0px"></Paddings>
