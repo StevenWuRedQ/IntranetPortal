@@ -14,6 +14,12 @@
 <%@ Register Src="~/ShortSale/ShortSaleFileOverview.ascx" TagPrefix="uc1" TagName="ShortSaleFileOverview" %>
 <%@ Register Src="~/ShortSale/NGShortSaleTab.ascx" TagPrefix="uc1" TagName="NGShortSaleTab" %>
 
+<asp:Content runat="server" ContentPlaceHolderID="head">
+    <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery.webui-popover.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+</asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
     <script type="text/javascript">
@@ -60,10 +66,10 @@
                                                     </PaneStyle>
                                                     <ContentCollection>
                                                         <dx:SplitterContentControl ID="SplitterContentControl3" runat="server">
-                                                            <div style="width: 100%; align-content: center; height: 100%">
+                                                            <div style="width: 100%; align-content: center; height: 100%" ng-controller="PortalCtrl">
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
-
+                                                              
                                                                 <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
                                                                     <li class="active short_sale_head_tab">
                                                                         <a href="#" role="tab" data-toggle="tab" class="tab_button_a">
@@ -73,7 +79,7 @@
                                                                     </li>
 
 
-                                                                    <li class="short_sale_head_tab" %>
+                                                                    <li class="short_sale_head_tab">
                                                                         <a href="#home_owner" role="tab" data-toggle="tab" class="tab_button_a">
                                                                             <i class="fa fa-key head_tab_icon_padding"></i>
                                                                             <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;Title&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -120,13 +126,13 @@
                                                                     </li>
 
                                                                     <li style="margin-right: 30px; color: #ffa484; float: right">
-                                                                        
+
                                                                         <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Re-Assign" onclick=""></i>
                                                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i>
                                                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick=""></i>
                                                                     </li>
                                                                 </ul>
-                              
+
 
                                                                 <uc1:SendMail runat="server" ID="SendMail" LogCategory="ShortSale" />
                                                                 <div class="tab-content">
@@ -176,7 +182,7 @@
                                                                             </li>
                                                                             <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                                             <li style="margin-right: 30px; color: #7396a9; float: right">
-                                                                                <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);" style="display: none"></i>                                                                                
+                                                                                <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);" style="display: none"></i>
                                                                                 <i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active" onclick="LogClick('Active')"></i>
                                                                                 <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Archived" onclick="LogClick('Archived')"></i>
                                                                                 <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" style="display: none" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>
@@ -185,91 +191,91 @@
                                                                                 <%--                                                                                <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>--%>
                                                                             </li>
                                                                         </ul>
-                                                                        <div class="tab-content">                                                                            
+                                                                        <div class="tab-content">
                                                                             <div class="tab-pane active" id="activity_log">
                                                                                 <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="ShortSale" />
                                                                             </div>
                                                                             <div class="tab-pane" id="file_overview">
-                                                                                <uc1:ShortSaleFileOverview runat="server" id="ShortSaleFileOverview" />
+                                                                                <uc1:ShortSaleFileOverview runat="server" ID="ShortSaleFileOverview" />
                                                                             </div>
                                                                         </div>
-                                                                    <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
-                                                                        AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
-                                                                        ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
-                                                                        <ItemStyle Paddings-PaddingLeft="20px" />
-                                                                        <Items>
-                                                                            <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
-                                                                            <dx:MenuItem Text="Next Week" Name="NextWeek"></dx:MenuItem>
-                                                                            <dx:MenuItem Text="30 Days" Name="ThirtyDays">
-                                                                            </dx:MenuItem>
-                                                                            <dx:MenuItem Text="60 Days" Name="SixtyDays">
-                                                                            </dx:MenuItem>
-                                                                            <dx:MenuItem Text="Custom" Name="Custom">
-                                                                            </dx:MenuItem>
-                                                                        </Items>
-                                                                        <ClientSideEvents ItemClick="OnCallbackMenuClick" />
-                                                                    </dx:ASPxPopupMenu>
-                                                                    <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="260px" Height="250px"
-                                                                        MaxWidth="800px" MaxHeight="150px" MinHeight="150px" MinWidth="150px" ID="pcMain"
-                                                                        HeaderText="Select Date" Modal="true"
-                                                                        runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
-                                                                        <ContentCollection>
-                                                                            <dx:PopupControlContentControl runat="server">
-                                                                                <asp:Panel ID="Panel1" runat="server">
-                                                                                    <table>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="false"></dx:ASPxCalendar>
-                                                                                                <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" TimeSectionProperties-Visible="True" CssClass="edit_drop">
-                                                                                                    <TimeSectionProperties Visible="True"></TimeSectionProperties>
-                                                                                                    <ClientSideEvents DropDown="function(s,e){ 
+                                                                        <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
+                                                                            AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+                                                                            ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                                                            <ItemStyle Paddings-PaddingLeft="20px" />
+                                                                            <Items>
+                                                                                <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
+                                                                                <dx:MenuItem Text="Next Week" Name="NextWeek"></dx:MenuItem>
+                                                                                <dx:MenuItem Text="30 Days" Name="ThirtyDays">
+                                                                                </dx:MenuItem>
+                                                                                <dx:MenuItem Text="60 Days" Name="SixtyDays">
+                                                                                </dx:MenuItem>
+                                                                                <dx:MenuItem Text="Custom" Name="Custom">
+                                                                                </dx:MenuItem>
+                                                                            </Items>
+                                                                            <ClientSideEvents ItemClick="OnCallbackMenuClick" />
+                                                                        </dx:ASPxPopupMenu>
+                                                                        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="260px" Height="250px"
+                                                                            MaxWidth="800px" MaxHeight="150px" MinHeight="150px" MinWidth="150px" ID="pcMain"
+                                                                            HeaderText="Select Date" Modal="true"
+                                                                            runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
+                                                                            <ContentCollection>
+                                                                                <dx:PopupControlContentControl runat="server">
+                                                                                    <asp:Panel ID="Panel1" runat="server">
+                                                                                        <table>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="false"></dx:ASPxCalendar>
+                                                                                                    <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" TimeSectionProperties-Visible="True" CssClass="edit_drop">
+                                                                                                        <TimeSectionProperties Visible="True"></TimeSectionProperties>
+                                                                                                        <ClientSideEvents DropDown="function(s,e){ 
                                                                     var d = new Date('May 1 2014 12:00:00');                                                                    
                                                                     s.GetTimeEdit().SetValue(d);
                                                                     }" />
-                                                                                                </dx:ASPxDateEdit>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                                                                                <dx:ASPxButton ID="ASPxButton1" runat="server" UseSubmitBehavior="false" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                                                                                    <ClientSideEvents Click="function(){
+                                                                                                    </dx:ASPxDateEdit>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
+                                                                                                    <dx:ASPxButton ID="ASPxButton1" runat="server" UseSubmitBehavior="false" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                                                                                        <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSelectDateControl.Hide();                                                                                                                       
                                                                                                                         LogClick('FollowUp', ScheduleDateClientFllowUp!=null?ScheduleDateClientFllowUp.GetDate().toLocaleString():callbackCalendar.GetSelectedDate().toLocaleString());
                                                                                                                         }"></ClientSideEvents>
-                                                                                                </dx:ASPxButton>
-                                                                                                &nbsp;
+                                                                                                    </dx:ASPxButton>
+                                                                                                    &nbsp;
                                                             <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" UseSubmitBehavior="false" CssClass="rand-button rand-button-gray">
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSelectDateControl.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>
                                                             </dx:ASPxButton>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                </asp:Panel>
-                                                                            </dx:PopupControlContentControl>
-                                                                        </ContentCollection>
-                                                                    </dx:ASPxPopupControl>
-                                                                    <dx:ASPxPopupControl ClientInstanceName="ASPxPopupScheduleClient" Width="400px" Height="280px"
-                                                                        MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"
-                                                                        HeaderText="Appointment" Modal="true"
-                                                                        runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-                                                                        <HeaderTemplate>
-                                                                            <div class="clearfix">
-                                                                                <div class="pop_up_header_margin">
-                                                                                    <i class="fa fa-clock-o with_circle pop_up_header_icon"></i>
-                                                                                    <span class="pop_up_header_text">Appointment</span>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </table>
+                                                                                    </asp:Panel>
+                                                                                </dx:PopupControlContentControl>
+                                                                            </ContentCollection>
+                                                                        </dx:ASPxPopupControl>
+                                                                        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupScheduleClient" Width="400px" Height="280px"
+                                                                            MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"
+                                                                            HeaderText="Appointment" Modal="true"
+                                                                            runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+                                                                            <HeaderTemplate>
+                                                                                <div class="clearfix">
+                                                                                    <div class="pop_up_header_margin">
+                                                                                        <i class="fa fa-clock-o with_circle pop_up_header_icon"></i>
+                                                                                        <span class="pop_up_header_text">Appointment</span>
+                                                                                    </div>
+                                                                                    <div class="pop_up_buttons_div">
+                                                                                        <i class="fa fa-times icon_btn" onclick="ASPxPopupScheduleClient.Hide()"></i>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="pop_up_buttons_div">
-                                                                                    <i class="fa fa-times icon_btn" onclick="ASPxPopupScheduleClient.Hide()"></i>
-                                                                                </div>
-                                                                            </div>
-                                                                        </HeaderTemplate>
-                                                                        <ContentCollection>
-                                                                            <dx:PopupControlContentControl runat="server">
-                                                                            </dx:PopupControlContentControl>
-                                                                        </ContentCollection>
-                                                                    </dx:ASPxPopupControl>
+                                                                            </HeaderTemplate>
+                                                                            <ContentCollection>
+                                                                                <dx:PopupControlContentControl runat="server">
+                                                                                </dx:PopupControlContentControl>
+                                                                            </ContentCollection>
+                                                                        </dx:ASPxPopupControl>
                                                                 </dx:SplitterContentControl>
                                                             </ContentCollection>
                                                         </dx:SplitterPane>
@@ -317,6 +323,22 @@
             ShortSaleDataBand(0);
 
         }
+    </script>
+    <script>
+        var portalApp = angular.module('PortalApp', []);
+        portalApp.controller('PortalCtrl', function ($scope, $http, $element, $parse) {
+            //Init Steven /////////
+            $scope.SsCase = {
+                PropertyInfo: { Owners: [{Contacts:[]}] }
+
+            };
+            $scope.NGAddArraryItem =function(item)
+            {
+                item.push({});
+            }
+            /////////////////Code Scope Steph ////////////////
+        });
+       
     </script>
 
 </asp:Content>

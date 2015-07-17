@@ -155,7 +155,12 @@ Public Class LegalUI
     <WebMethod()> _
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
     Public Shared Function GetCaseData(bble As String) As String
-        Return Legal.LegalCase.GetCase(bble).CaseData
+        Dim lcase = Legal.LegalCase.GetCase(bble)
+        If lcase IsNot Nothing Then
+            Return lcase.CaseData
+        End If
+        Return "{}"
+
     End Function
 
     Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)

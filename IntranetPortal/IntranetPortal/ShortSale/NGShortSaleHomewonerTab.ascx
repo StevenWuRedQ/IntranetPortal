@@ -1,15 +1,12 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGShortSaleHomewonerTab.ascx.vb" Inherits="IntranetPortal.NGShortSaleHomewonerTab" %>
 <%@ Import Namespace="IntranetPortal.ShortSale" %>
 <%@ Import Namespace="IntranetPortal" %>
-<div class="clearfix">
-    <div style="float: right">
-        <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
-    </div>
-</div>
-<div data-array-index="0" data-field="PropertyInfo.Owners" class="ss_array" style="display: none">
+
+<div ng-repeat="owner in SsCase.PropertyInfo.Owners" class="ss_array">
     <h4 class="ss_form_title title_with_line">
-        <span class="title_index title_span">Seller __index__1</span>&nbsp;
-        <i class="fa fa-expand expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="Add"></i>
+        <span class="title_index title_span">Seller {{$index+1}}</span>&nbsp;
+        <i class="fa fa-expand expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>&nbsp;
+        <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.PropertyInfo.Owners)" title="Add"></i>
         <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="Delete"></i>
     </h4>
     <div class="collapse_div">
@@ -19,66 +16,105 @@
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">First name</label>
-                    <input class="ss_form_input ss_not_empty" data-item="FirstName" data-error="Seller __index__1 First name is Empty" data-item-type="1">
+                    <input class="ss_form_input ss_not_empty" ng-model="owner.FirstName">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Last name</label>
-                    <input class="ss_form_input ss_not_empty" data-item="LastName" data-error="Seller __index__1 Last name is Empty" data-item-type="1">
+                    <input class="ss_form_input ss_not_empty" ng-model="owner.LastName">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">ssn</label>
-                    <input class="ss_form_input ss_ssn" data-item="SSN" data-item-type="1">
+                    <input class="ss_form_input ss_ssn" ng-model="owner.SSN">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">dob</label>
-                    <input class="ss_form_input ss_date" data-item="DOB" data-item-type="1">
+                    <input class="ss_form_input ss_date" ng-model="owner.DOB">
                 </li>
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Phone #</label>
-                    <input class="ss_form_input ss_phone" id="phone_id__index__" data-item="Phone" <%--onkeyup="format_phone(this)" onblur="format_phone(this)"--%> data-item-type="1">
+                    <label class="ss_form_input_title">Cell #</label>
+                    <input class="ss_form_input ss_phone" ng-model="owner.Phone">
                 </li>
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Email</label>
-                    <input class="ss_form_input ss_email" data-item="Email" data-error="Seller __index__1 Email is Error" data-item-type="1">
-                </li>
-                <%-- <li class="ss_form_item">
-                    <label class="ss_form_input_title">Phone #</label>
-                    <input class="ss_form_input" id="phone_id__index__" onblur="format_phone(this)" data-item="Phone" data-item-type="1">
+                    <label class="ss_form_input_title">Additional #</label>
+                    <input class="ss_form_input ss_email" ng-model="owner.AdditionalNumber">
                 </li>
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Email</label>
-                    <input class="ss_form_input" data-item="Email" data-item-type="1">
-                </li>--%>
+                    <label class="ss_form_input_title">Email Address</label>
+                    <input class="ss_form_input ss_email" ng-model="owner.Email">
+                </li>
+
             </ul>
         </div>
 
+        <div class="ss_form">
+            
+            <h4 class="ss_form_title">Contacts <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Contacts)" title="Add"></i></h4>
+            <ul class="ss_form_box clearfix" ng-repeat="(index,contact) in owner.Contacts">
+                <li style="list-style-type: none">
+                    <h4>Contact {{index + 1}} </h4>
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">name</label>
+                    <input class="ss_form_input ss_not_empty" ng-model="contact.Name">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Phone #</label>
+                    <input class="ss_form_input ss_not_empty" ng-model="contact.Phone">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Email</label>
+                    <input class="ss_form_input" ng-model="contact.Email">
+                </li>
+            </ul>
+        </div>
+        <div class="ss_form">
+           
+            <h4 class="ss_form_title">Contacts <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Notes)" title="Add"></i></h4>
+            <ul class="ss_form_box clearfix" ng-repeat="(index,note) in owner.Notes">
+                <li style="list-style-type: none">
+                    <h4>Note {{index + 1}} </h4>
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">name</label>
+                    <input class="ss_form_input ss_not_empty" ng-model="note.Name">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Phone #</label>
+                    <input class="ss_form_input ss_not_empty" ng-model="note.Phone">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Email</label>
+                    <input class="ss_form_input" ng-model="contact.Email">
+                </li>
+            </ul>
+        </div>
         <div class="ss_form">
             <h4 class="ss_form_title">mailing address</h4>
             <ul class="ss_form_box clearfix">
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">street nummber</label>
-                    <input class="ss_form_input" data-item="MailNumber" data-item-type="1">
+                    <input class="ss_form_input" ng-model="owner.MailNumber">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">street name</label>
-                    <input class="ss_form_input" data-item="MailStreetName" data-item-type="1">
+                    <input class="ss_form_input" ng-model="owner.MailStreetName">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Apt #</label>
-                    <input class="ss_form_input" data-item="MailApt" data-item-type="1">
+                    <input class="ss_form_input" ng-model="owner.MailApt">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">City</label>
-                    <input class="ss_form_input" data-item="MailCity" data-item-type="1">
+                    <input class="ss_form_input" ng-model="owner.MailCity">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">State</label>
-                    <input class="ss_form_input" data-item="MailState" data-item-type="1">
+                    <input class="ss_form_input" ng-model="owner.MailState">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">zip</label>
-                    <input class="ss_form_input ss_zip" data-item="MailZip" data-error="Seller __index__1 Mail zip is not zip code" data-item-type="1">
+                    <input class="ss_form_input ss_zip" ng-model="owner.MailZip">
                 </li>
 
             </ul>
@@ -91,17 +127,17 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">bankruptcy</label>
 
-                    <input type="radio" id="checkYes_Bankruptcy__index__" data-test="1" name="44__index__" data-radio="Y" data-item="Bankruptcy" data-item-type="1" value="YES" class="ss_form_input">
+                    <input type="radio" id="checkYes_Bankruptcy__index__" data-test="1" name="44__index__" data-radio="Y" ng-model="owner.Bankruptcy" value="YES" class="ss_form_input">
                     <label for="checkYes_Bankruptcy__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_check_no__index__" name="44__index__" data-test="1" data-item="Bankruptcy" data-item-type="1" value="NO" class="ss_form_input">
+                    <input type="radio" id="none_check_no__index__" name="44__index__" data-test="1" ng-model="owner.Bankruptcy" value="NO" class="ss_form_input">
                     <label for="none_check_no__index__" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">employed</label>
-                    <input class="ss_form_input" id="Employed" data-item="Employed" data-item-type="1">
+                    <input class="ss_form_input" id="Employed" ng-model="owner.Employed">
                 </li>
                 <%--<li class="ss_form_item">
                       <input type="button" onclick="testClick()" value="Test">
@@ -110,10 +146,10 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">bank account</label>
 
-                    <input type="radio" id="checkYes_Bankaccount__index__" data-item="Bankaccount" data-radio="Y" data-item-type="1" name="45__index__" value="YES" class="ss_form_input">
+                    <input type="radio" id="checkYes_Bankaccount__index__" ng-model="owner.Bankaccount" data-radio="Y" name="45__index__" value="YES" class="ss_form_input">
                     <label for="checkYes_Bankaccount__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_check_no452__index__" data-item="Bankaccount" data-item-type="1" name="45__index__" value="NO" class="ss_form_input">
+                    <input type="radio" id="none_check_no452__index__" ng-model="owner.Bankaccount" name="45__index__" value="NO" class="ss_form_input">
                     <label for="none_check_no452__index__" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>
@@ -121,10 +157,10 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Tax Returns</label>
 
-                    <input type="radio" id="checkYes_TaxReturn__index__" name="47__index__" data-item="TaxReturn" data-item-type="1" data-radio="Y" value="YES" class="ss_form_input">
+                    <input type="radio" id="checkYes_TaxReturn__index__" name="47__index__" ng-model="owner.TaxReturn" data-radio="Y" value="YES" class="ss_form_input">
                     <label for="checkYes_TaxReturn__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_check_no472__index__" name="47__index__" data-item="TaxReturn" data-item-type="1" value="NO" class="ss_form_input">
+                    <input type="radio" id="none_check_no472__index__" name="47__index__" ng-model="owner.TaxReturn" value="NO" class="ss_form_input">
                     <label for="none_check_no472__index__" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>
@@ -139,10 +175,10 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">estate documents</label>
 
-                    <input type="radio" id="checkYes_EstateDocument__index__" name="49__index__" data-item="EstateDocument" data-radio="Y" data-item-type="1" value="YES">
+                    <input type="radio" id="checkYes_EstateDocument__index__" name="49__index__" ng-model="owner.EstateDocument" data-radio="Y" value="YES">
                     <label for="checkYes_EstateDocument__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_check_no47__index__" name="49__index__" data-item="EstateDocument" data-item-type="1" value="NO">
+                    <input type="radio" id="none_check_no47__index__" name="49__index__" ng-model="owner.EstateDocument" value="NO">
                     <label for="none_check_no47__index__" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>
@@ -150,25 +186,25 @@
 
                 <%-- <li class="ss_form_item">
                     <label class="ss_form_input_title">estate attorney</label>
-                    <input class="ss_form_input" data-item="EstateAttorneyId" data-item-type="1">
+                    <input class="ss_form_input" ng-model="owner.EstateAttorneyId" >
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">phone #</label>
-                    <input class="ss_form_input" data-item="AttorneyPhone" data-item-type="1">
+                    <input class="ss_form_input" ng-model="owner.AttorneyPhone" >
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">email address</label>
-                    <input class="ss_form_input" data-item="Email" data-item-type="1" />
+                    <input class="ss_form_input" ng-model="owner.Email"  />
                 </li>
 
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">also acting as seller attorney</label>
 
-                    <input type="radio" id="checkYes_ActingAsSellerAttorney__index__" data-item="ActingAsSellerAttorney" data-item-type="1" data-radio="Y" name="48__index__" value="YES">
+                    <input type="radio" id="checkYes_ActingAsSellerAttorney__index__" ng-model="owner.ActingAsSellerAttorney"  data-radio="Y" name="48__index__" value="YES">
                     <label for="checkYes_ActingAsSellerAttorney__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_check_no48__index__" data-item="ActingAsSellerAttorney" data-item-type="1" name="48__index__" value="NO">
+                    <input type="radio" id="none_check_no48__index__" ng-model="owner.ActingAsSellerAttorney"  name="48__index__" value="NO">
                     <label for="none_check_no48__index__" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>--%>
@@ -182,24 +218,24 @@
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Name</label>
-                    <input class="ss_form_input ss_not_edit" data-item="EstateAttorneyContact.Name" data-item-type="1">
+                    <input class="ss_form_input ss_not_edit" ng-model="owner.EstateAttorneyContact.Name">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Office #</label>
-                    <input class="ss_form_input ss_not_edit" data-item="EstateAttorneyContact.OfficeNO" data-item-type="1">
+                    <input class="ss_form_input ss_not_edit" ng-model="owner.EstateAttorneyContact.OfficeNO">
                 </li>
 
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Email</label>    
-                    <input class="ss_form_input ss_not_edit" data-item="EstateAttorneyContact.Email" data-item-type="1">
+                    <label class="ss_form_input_title">Email</label>
+                    <input class="ss_form_input ss_not_edit" ng-model="owner.EstateAttorneyContact.Email">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">also acting as seller attorney</label>
 
-                    <input type="radio" id="checkYes_ActingAsSellerAttorney__index__" data-item="ActingAsSellerAttorney" data-item-type="1" data-radio="Y" name="48__index__" value="YES">
+                    <input type="radio" id="checkYes_ActingAsSellerAttorney__index__" ng-model="owner.ActingAsSellerAttorney" data-radio="Y" name="48__index__" value="YES">
                     <label for="checkYes_ActingAsSellerAttorney__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_check_no48__index__" data-item="ActingAsSellerAttorney" data-item-type="1" name="48__index__" value="NO">
+                    <input type="radio" id="none_check_no48__index__" ng-model="owner.ActingAsSellerAttorney" name="48__index__" value="NO">
                     <label for="none_check_no48__index__" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>

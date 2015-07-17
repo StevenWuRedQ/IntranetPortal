@@ -70,7 +70,7 @@
         initToolTips();
         if (sortPhones) {
             sortPhones();
-           
+
         }
     }
 
@@ -327,9 +327,9 @@
         temBBLE = BBLE;
         AspPopupColorMark.ShowAtElement(e);
     }
-    function click_item(e,index) {
-      
-        
+    function click_item(e, index) {
+
+
         onColoMarkClick(index, e);
 
         $("#color_drop").css("top", "-1000px")
@@ -356,14 +356,14 @@
         border: 1px solid gray;
     }
 
-    .arrow_box {
+    .arrow_box2 {
         position: absolute;
         background: #fff;
         border: 1px solid #cdd4d8;
         border-radius: 4px;
     }
 
-        .arrow_box:after, .arrow_box:before {
+        .arrow_box2:after, .arrow_box2:before {
             bottom: 100%;
             left: 15%;
             border: solid transparent;
@@ -374,41 +374,41 @@
             pointer-events: none;
         }
 
-        .arrow_box:after {
+        .arrow_box2:after {
             border-color: rgba(255, 255, 255, 0);
             border-bottom-color: #fff;
             border-width: 10px;
             margin-left: -10px;
         }
 
-        .arrow_box:before {
+        .arrow_box2:before {
             border-color: rgba(205, 212, 216, 0);
             border-bottom-color: #cdd4d8;
             border-width: 11px;
             margin-left: -11px;
         }
-        .color_star
-        {
-            cursor:pointer;
-        }
+
+    .color_star {
+        cursor: pointer;
+    }
 </style>
 <dx:ASPxCallback runat="server" ID="MarkColorCallBack" OnCallback="MarkColorCallBack_Callback" ClientInstanceName="MarkColorCallBack"></dx:ASPxCallback>
 
 
-    <div id="color_drop" class=" arrow_box" style="position: absolute; left: -100px; top: -1000px; z-index: 10000;">
-        <div style="padding: 10px 15px">
-            <div>Flag Tihis Leads:</div>
-            <div class="list-group-item icon_btn color_list" onclick="click_item(this,1)" style=" display: inline-block">
-                <i class="fa fa-circle" style="color: #a820e1;font-size:32px"></i>
-            </div>
-            <div class="list-group-item icon_btn color_list" onclick="click_item(this,2)" style=" display: inline-block">
-                 <i class="fa fa-circle" style="color: #ec471b;font-size:32px"></i>
-            </div>
-            <div class="icon_btn color_list diagonal" onclick="click_item(this,0)" style=" border:none;display: inline-block">
-                <i class="fa  fa-times-circle" style="font-size:32px"></i>
-            </div>
+<div id="color_drop" class=" arrow_box2" style="position: absolute; left: -100px; top: -1000px; z-index: 10000;">
+    <div style="padding: 10px 15px">
+        <div>Flag Tihis Leads:</div>
+        <div class="list-group-item icon_btn color_list" onclick="click_item(this,1)" style="display: inline-block">
+            <i class="fa fa-circle" style="color: #a820e1; font-size: 32px"></i>
+        </div>
+        <div class="list-group-item icon_btn color_list" onclick="click_item(this,2)" style="display: inline-block">
+            <i class="fa fa-circle" style="color: #ec471b; font-size: 32px"></i>
+        </div>
+        <div class="icon_btn color_list diagonal" onclick="click_item(this,0)" style="border: none; display: inline-block">
+            <i class="fa  fa-times-circle" style="font-size: 32px"></i>
         </div>
     </div>
+</div>
 
 
 
@@ -429,7 +429,7 @@
                 </div>
             </div>
         </div>
-       
+
 
         <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
@@ -517,14 +517,14 @@
                         </div>
                     </GroupRowTemplate>
                 </dx:GridViewDataColumn>
-                 <dx:GridViewDataColumn FieldName="ThirdPartyCategory" Visible="false" VisibleIndex="6">
+                <dx:GridViewDataColumn FieldName="ThirdPartyCategory" Visible="false" VisibleIndex="6">
                     <GroupRowTemplate>
                         <div>
                             <table style="height: 45px">
                                 <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
                                     <td style="width: 80px;">
                                         <span class="font_black">
-                                           <span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                            <span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
                                         </span>
                                     </td>
                                     <td style="padding-left: 10px">
@@ -936,7 +936,7 @@
             p = tmpCursor;
         }
         var color_drop = $("#color_drop");
-       
+
         color_drop.css("left", (p.left - 10) + "px");
         color_drop.css("top", (p.top - 5) + 'px');
         temStar = e;
