@@ -8,7 +8,6 @@ Public Class DocumentsUI
     Inherits System.Web.UI.UserControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
         'If Not String.IsNullOrEmpty(Request.QueryString("bble")) Then
 
         '    Dim bble = Request.QueryString("bble").ToString
@@ -19,10 +18,11 @@ Public Class DocumentsUI
     Public Property ViewMode As Boolean = False
     Public Property LeadsName As String
     Public Property LeadsBBLE As String
+    Public Property CurrentFolderUrl As String = ""
+    Public Property CurrentFolder As Object
 
     Sub BindFileList(bble As String)
         'BindFilesFromSharepoint(bble)
-        'Return
 
         Using Context As New Entities
             Dim groups = (From file In Context.FileAttachments
@@ -50,6 +50,7 @@ Public Class DocumentsUI
     Public Sub BindFilesFromSharepoint(bble As String)
         datalistCategory.DataSource = DocumentService.GetFilesByBBLE(bble)
         datalistCategory.DataBind()
+        CurrentFolder = DocumentService.GetCateByBBLEAndFolder(bble, CurrentFolderUrl)
     End Sub
 
     Protected Sub cbpDocumentUI_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
@@ -63,4 +64,5 @@ Public Class DocumentsUI
             rptFiles.DataBind()
         End If
     End Sub
+
 End Class
