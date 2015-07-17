@@ -13,8 +13,30 @@ Public Class ShortSaleServices
     '     and include the following line in the operation body:
     '         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml"
 
+#Region "Page Data Service"
 
-    ' Add more operations here and mark them with <OperationContract()>
+    <OperationContract()>
+   <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    Public Function ReferralManagerContact(agent As String) As Channels.Message
+
+        Dim emp = Employee.GetInstance(agent)
+        If Not emp.Position = "Manager" Then
+            Return (New With {
+                .Manager = Employee.GetInstance(emp.Manager).GetData,
+                .Assistant = ""
+            }).ToJson
+        Else
+            Return (New With {
+                .Manager = emp.GetData,
+                .Assistant = ""
+                }).ToJson
+        End If
+    End Function
+
+#End Region
+
+#Region "Data Report"
+
     <OperationContract()>
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function CategoryList() As String()
@@ -59,4 +81,8 @@ Public Class ShortSaleServices
 
         End If
     End Function
+
+#End Region
+
+
 End Class

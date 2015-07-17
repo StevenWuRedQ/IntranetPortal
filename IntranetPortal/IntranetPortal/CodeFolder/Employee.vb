@@ -1,5 +1,6 @@
 ﻿Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.IO
+Imports Newtonsoft.Json
 
 Partial Public Class Employee
 
@@ -54,6 +55,7 @@ Partial Public Class Employee
         End Get
     End Property
 
+    <JsonIgnoreAttribute>
     Public ReadOnly Property Manager As String
         Get
             If ReportTo.HasValue AndAlso ReportTo.Value > 0 Then
@@ -70,6 +72,8 @@ Partial Public Class Employee
     End Property
 
     Private _performance As EmployeePerformance
+
+    <JsonIgnoreAttribute>
     Public ReadOnly Property Performance As EmployeePerformance
         Get
             If _performance Is Nothing Then
@@ -202,6 +206,18 @@ Partial Public Class Employee
     Public Shared Function GetInstance(username As String) As Employee
         Using context As New Entities
             Dim emp = context.Employees.Where(Function(em) em.Name = username).FirstOrDefault
+            Return emp
+        End Using
+    End Function
+
+    Public Shared Function GetInstanceData(username As String) As Employee
+        Using context As New Entities
+            Dim emp = context.Employees.Where(Function(em) em.Name = username).ToList.Select(Function(em)
+                                                                                                 Dim result As New Employee
+                                                                                                 Core.Utility.CopyTo(em, result)
+                                                                                                 Return result
+                                                                                             End Function).FirstOrDefault
+
             Return emp
         End Using
     End Function
@@ -350,7 +366,7 @@ Partial Public Class Employee
 
         Return False
     End Function
-    
+
     Public Shared Function IsManager(empName As String) As Boolean
         Dim rs = Roles.GetRolesForUser(empName)
 
@@ -507,7 +523,40 @@ Partial Public Class Employee
         End Using
     End Function
 
+    Public Function GetData() As EmployeeData
+
+        Return Core.Utility.CopyTo(Me, New EmployeeData())
+
+    End Function
+
+    Public Class EmployeeData
+        Inherits Employee
+
+        <JsonIgnoreAttribute>
+        Public Overrides Property Leads As ICollection(Of Lead)
+            Get
+                Return MyBase.Leads
+            End Get
+            Set(value As ICollection(Of Lead))
+                MyBase.Leads = value
+            End Set
+        End Property
+
+        <JsonIgnoreAttribute>
+        Public Overrides Property LeadsActivityLogs As ICollection(Of LeadsActivityLog)
+            Get
+                Return MyBase.LeadsActivityLogs
+            End Get
+            Set(value As ICollection(Of LeadsActivityLog))
+                MyBase.LeadsActivityLogs = value
+            End Set
+        End Property
+    End Class
+
 End Class
+
+
+
 
 Public Enum ShortSaleRole
     Processor

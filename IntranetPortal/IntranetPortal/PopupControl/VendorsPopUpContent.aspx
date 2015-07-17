@@ -552,8 +552,8 @@
                                         <div class="detail_right">Ron Borovinsky</div>
                                     </td>
                                 </tr>--%>
-                                <tr class="vendor_info">
-                                    <td class="vendor_info_left">Name
+                                <tr class="vendor_info" ng-show="query.Type==0">
+                                    <td class="vendor_info_left" >Name
                                     </td>
                                     <td>
                                         <div class="detail_right">

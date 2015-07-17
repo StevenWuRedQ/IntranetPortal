@@ -457,7 +457,7 @@
                     <dx:LayoutItem Caption="Description">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                <dx:ASPxMemo runat="server" Width="100%" CssClass="edit_drop" Height="80px" ID="txtTaskDes"></dx:ASPxMemo>
+                                <dx:ASPxMemo runat="server" Width="100%" CssClass="edit_drop" Height="80px" ID="txtTaskDes" ClientInstanceName="txtRequestUpdateDescription" ValidationSettings-RequiredField-IsRequired="true"></dx:ASPxMemo>
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
@@ -465,10 +465,10 @@
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
                                 <dx:ASPxButton ID="ASPxButton4" runat="server" Text="Send Request" AutoPostBack="false">
-                                    <ClientSideEvents Click="function(){                                                                                                                      
+                                    <ClientSideEvents Click="function(){      if(txtRequestUpdateDescription.GetIsValid()) {                                                                                                               
                                                                                                                         ASPxPopupRequestUpdateControl.Hide();
                                                                                                                         ASPxPopupRequestUpdateControl.PerformCallback('SendRequest');
-                                                                                                                        isSendRequest =true;                                                                                                                                                                                                                                         
+                                                                                                                        isSendRequest =true;  } 
                                                                                                                         }"></ClientSideEvents>
                                 </dx:ASPxButton>
                                 &nbsp;
