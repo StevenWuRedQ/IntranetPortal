@@ -3309,6 +3309,7 @@
     </None>
     <None Include="Service References\DataAPI\item1.disco" />
     <Content Include="ShortSale\NGShortSaleDealInfoTab.ascx" />
+    <Content Include="ShortSale\NGShortSaleMortgageTab.ascx" />
     <Content Include="ShortSale\SelectPartyUC.ascx" />
     <Content Include="ShortSale\NGShortSaleHomewonerTab.ascx" />
     <Content Include="ShortSale\NGShortSale.aspx" />
@@ -3317,6 +3318,7 @@
     <Content Include="ShortSale\ShortSaleEvictionTab.ascx" />
     <Content Include="ShortSale\ShortSaleFileOverview.ascx" />
     <Content Include="ShortSale\ShortSaleHomewonerTab.ascx" />
+    <Content Include="ShortSale\ShortSaleManagement.aspx" />
     <Content Include="ShortSale\ShortSaleMortgageTab.ascx" />
     <Content Include="ShortSale\NGShortSaleTab.ascx" />
     <Content Include="ShortSale\ShortSaleOverVew.ascx" />
