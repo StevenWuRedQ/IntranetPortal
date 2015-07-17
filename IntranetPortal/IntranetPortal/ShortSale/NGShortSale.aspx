@@ -329,13 +329,14 @@
         portalApp.controller('PortalCtrl', function ($scope, $http, $element, $parse) {
             //Init Steven /////////
             $scope.SsCase = {
-                PropertyInfo: { Owners: [{Contacts:[]}] }
+                PropertyInfo: { Owners: [{Contacts:[] ,Notes:[]}] }
 
             };
             $scope.NGAddArraryItem =function(item)
             {
                 item.push({});
             }
+            
             var test = 123;
             /////////////////Code Scope Steph ////////////////
             $scope.SsCase.DealInfo = {};

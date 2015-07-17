@@ -47,7 +47,7 @@
         </div>
 
         <div class="ss_form">
-            
+
             <h4 class="ss_form_title">Contacts <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Contacts)" title="Add"></i></h4>
             <ul class="ss_form_box clearfix" ng-repeat="(index,contact) in owner.Contacts">
                 <li style="list-style-type: none">
@@ -68,24 +68,17 @@
             </ul>
         </div>
         <div class="ss_form">
-           
-            <h4 class="ss_form_title">Contacts <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Notes)" title="Add"></i></h4>
+
+            <h4 class="ss_form_title">Notes <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Notes)" title="Add"></i></h4>
             <ul class="ss_form_box clearfix" ng-repeat="(index,note) in owner.Notes">
                 <li style="list-style-type: none">
                     <h4>Note {{index + 1}} </h4>
                 </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">name</label>
-                    <input class="ss_form_input ss_not_empty" ng-model="note.Name">
+                <li class="ss_form_item ss_form_item_line">
+                    <label class="ss_form_input_title">Note</label>
+                    <textarea class="edit_text_area text_area_ss_form"></textarea>
                 </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Phone #</label>
-                    <input class="ss_form_input ss_not_empty" ng-model="note.Phone">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Email</label>
-                    <input class="ss_form_input" ng-model="contact.Email">
-                </li>
+
             </ul>
         </div>
         <div class="ss_form">
@@ -121,23 +114,29 @@
         </div>
 
         <div class="ss_form">
-            <h4 class="ss_form_title">other info</h4>
+            <h4 class="ss_form_title">Financials</h4>
             <ul class="ss_form_box clearfix">
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">bankruptcy</label>
 
-                    <input type="radio" id="checkYes_Bankruptcy__index__" data-test="1" name="44__index__" data-radio="Y" ng-model="owner.Bankruptcy" value="YES" class="ss_form_input">
-                    <label for="checkYes_Bankruptcy__index__" class="input_with_check"><span class="box_text">Yes</span></label>
+                    <input type="radio" id="checkYes_Bankruptcy{{$index}}" data-test="1" name="44{{$index}}" ng-model="owner.Bankruptcy" value="true" class="ss_form_input">
+                    <label for="checkYes_Bankruptcy{{$index}}" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_check_no__index__" name="44__index__" data-test="1" ng-model="owner.Bankruptcy" value="NO" class="ss_form_input">
-                    <label for="none_check_no__index__" class="input_with_check"><span class="box_text">No</span></label>
+                    <input type="radio" id="checkYes_BankruptcyNo{{$index}}" name="44{{$index}}" data-test="1" ng-model="owner.Bankruptcy" value="false" class="ss_form_input">
+                    <label for="checkYes_BankruptcyNo{{$index}}" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">employed</label>
-                    <input class="ss_form_input" id="Employed" ng-model="owner.Employed">
+                    <select class="ss_form_input" ng-model="owner.Employed">
+                        <option>Employed</option>
+                        <option>Self-Employed</option>
+                        <option>Unemployed</option>
+                        <option>Retired</option>
+                        <option>SSI / Disability</option>
+                    </select>
                 </li>
                 <%--<li class="ss_form_item">
                       <input type="button" onclick="testClick()" value="Test">
@@ -146,71 +145,28 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">bank account</label>
 
-                    <input type="radio" id="checkYes_Bankaccount__index__" ng-model="owner.Bankaccount" data-radio="Y" name="45__index__" value="YES" class="ss_form_input">
-                    <label for="checkYes_Bankaccount__index__" class="input_with_check"><span class="box_text">Yes</span></label>
+                    <input type="radio" id="checkYes_Bankaccount{{$index}}" ng-model="owner.Bankaccount" data-radio="Y" name="Bankaccount{{$index}}" value="YES" class="ss_form_input">
+                    <label for="checkYes_Bankaccount{{$index}}" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_check_no452__index__" ng-model="owner.Bankaccount" name="45__index__" value="NO" class="ss_form_input">
-                    <label for="none_check_no452__index__" class="input_with_check"><span class="box_text">No</span></label>
+                    <input type="radio" id="checkNOBankaccount{{$index}}" ng-model="owner.Bankaccount" name="Bankaccount{{$index}}" value="NO" class="ss_form_input">
+                    <label for="checkNOBankaccount{{$index}}" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Tax Returns</label>
 
-                    <input type="radio" id="checkYes_TaxReturn__index__" name="47__index__" ng-model="owner.TaxReturn" data-radio="Y" value="YES" class="ss_form_input">
-                    <label for="checkYes_TaxReturn__index__" class="input_with_check"><span class="box_text">Yes</span></label>
+                    <input type="radio" id="checkYes_TaxReturn{{$index}}" name="TaxReturn{{$index}}" ng-model="owner.TaxReturn" data-radio="Y" value="YES" class="ss_form_input">
+                    <label for="checkYes_TaxReturn{{$index}}" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_check_no472__index__" name="47__index__" ng-model="owner.TaxReturn" value="NO" class="ss_form_input">
-                    <label for="none_check_no472__index__" class="input_with_check"><span class="box_text">No</span></label>
-
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">&nbsp;</label>
-                    <input class="ss_form_input ss_form_hidden" value=" ">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">&nbsp;</label>
-                    <input class="ss_form_input ss_form_hidden" value=" ">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">estate documents</label>
-
-                    <input type="radio" id="checkYes_EstateDocument__index__" name="49__index__" ng-model="owner.EstateDocument" data-radio="Y" value="YES">
-                    <label for="checkYes_EstateDocument__index__" class="input_with_check"><span class="box_text">Yes</span></label>
-
-                    <input type="radio" id="none_check_no47__index__" name="49__index__" ng-model="owner.EstateDocument" value="NO">
-                    <label for="none_check_no47__index__" class="input_with_check"><span class="box_text">No</span></label>
+                    <input type="radio" id="TaxReturnNo{{$index}}" name="TaxReturn{{$index}}" ng-model="owner.TaxReturn" value="NO" class="ss_form_input">
+                    <label for="TaxReturnNo{{$index}}" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>
-
-
-                <%-- <li class="ss_form_item">
-                    <label class="ss_form_input_title">estate attorney</label>
-                    <input class="ss_form_input" ng-model="owner.EstateAttorneyId" >
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">phone #</label>
-                    <input class="ss_form_input" ng-model="owner.AttorneyPhone" >
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">email address</label>
-                    <input class="ss_form_input" ng-model="owner.Email"  />
-                </li>
-
-
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">also acting as seller attorney</label>
-
-                    <input type="radio" id="checkYes_ActingAsSellerAttorney__index__" ng-model="owner.ActingAsSellerAttorney"  data-radio="Y" name="48__index__" value="YES">
-                    <label for="checkYes_ActingAsSellerAttorney__index__" class="input_with_check"><span class="box_text">Yes</span></label>
-
-                    <input type="radio" id="none_check_no48__index__" ng-model="owner.ActingAsSellerAttorney"  name="48__index__" value="NO">
-                    <label for="none_check_no48__index__" class="input_with_check"><span class="box_text">No</span></label>
-
-                </li>--%>
+                
             </ul>
         </div>
-        <div class="ss_form">
+      <%--  <div class="ss_form">
             <h4 class="ss_form_title">Estate Attorney
                 <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('PropertyInfo.Owners[__index__].EstateAttorneyContact', function(party){ShortSaleCaseData.PropertyInfo.Owners[__index__].EstateAttorneyId =party.ContactId; })"></i>
 
@@ -240,6 +196,6 @@
 
                 </li>
             </ul>
-        </div>
+        </div>--%>
     </div>
 </div>
