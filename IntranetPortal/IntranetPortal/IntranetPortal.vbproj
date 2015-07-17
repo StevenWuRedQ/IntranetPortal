@@ -1362,6 +1362,13 @@
       <DependentUpon>ShortSaleHomewonerTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ShortSale\ShortSaleManagement.aspx.designer.vb">
+      <DependentUpon>ShortSaleManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ShortSaleManagement.aspx.vb">
+      <DependentUpon>ShortSaleManagement.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="ShortSale\ShortSaleMortgageTab.ascx.designer.vb">
       <DependentUpon>ShortSaleMortgageTab.ascx</DependentUpon>
     </Compile>
@@ -1396,6 +1403,9 @@
     <Compile Include="ShortSale\ShortSaleReport.aspx.vb">
       <DependentUpon>ShortSaleReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShortSale\ShortSaleServices.svc.vb">
+      <DependentUpon>ShortSaleServices.svc</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\ShortSaleSubMenu.ascx.designer.vb">
       <DependentUpon>ShortSaleSubMenu.ascx</DependentUpon>
@@ -3255,11 +3265,13 @@
     <Content Include="ShortSale\ShortSaleEvictionTab.ascx" />
     <Content Include="ShortSale\ShortSaleFileOverview.ascx" />
     <Content Include="ShortSale\ShortSaleHomewonerTab.ascx" />
+    <Content Include="ShortSale\ShortSaleManagement.aspx" />
     <Content Include="ShortSale\ShortSaleMortgageTab.ascx" />
     <Content Include="ShortSale\ShortSaleOverVew.ascx" />
     <Content Include="ShortSale\ShortSalePartiesTab.ascx" />
     <Content Include="ShortSale\ShortSalePropertyTab.ascx" />
     <Content Include="ShortSale\ShortSaleReport.aspx" />
+    <Content Include="ShortSale\ShortSaleServices.svc" />
     <Content Include="ShortSale\ShortSaleSubMenu.ascx" />
     <Content Include="ShortSale\ShortSaleSummaryPage.aspx" />
     <Content Include="ShortSale\ShortSaleSummaryTab.ascx" />

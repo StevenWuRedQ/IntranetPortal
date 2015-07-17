@@ -37,7 +37,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">manager</label>
-            <input class="ss_form_input ss_not_edit" data-field="Manager">
+            <input class="ss_form_input ss_not_edit" data-field="ReferralManager">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office</label>

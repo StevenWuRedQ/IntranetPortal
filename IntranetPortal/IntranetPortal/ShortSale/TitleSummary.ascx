@@ -463,7 +463,6 @@
                                                                 </tr>
                                                             </table>
                                                         </div>
-
                                                     </GroupRowTemplate>
                                                     <%-------end---------%>
                                                 </dx:GridViewDataTextColumn>

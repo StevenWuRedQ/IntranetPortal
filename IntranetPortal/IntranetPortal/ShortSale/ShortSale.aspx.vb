@@ -246,6 +246,13 @@ Public Class ShortSalePage
         Dim ssCase = ShortSaleCase.GetCase(caseId)
         'Dim json As New JavaScriptSerializer
         'Return json.Serialize(ssCase)
+        Dim emp = Employee.GetInstance(ssCase.ReferralContact.Name)
+        If Not emp.Position = "Manager" Then
+            ssCase.ReferralManager = Employee.GetInstance(ssCase.ReferralContact.Name).Manager
+        Else
+            ssCase.ReferralManager = ssCase.ReferralContact.Name
+        End If
+
         Return ssCase
     End Function
 

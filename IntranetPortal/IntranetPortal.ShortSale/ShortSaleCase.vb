@@ -89,6 +89,7 @@ Partial Public Class ShortSaleCase
     Public Property PipeLine As ShortSaleActivityLog
     Public Property MortgageStatus As String
     Public Property ReferralName As String
+    Public Property ReferralManager As String
     'Public Property MortgageCategory As String
 
     Private _sellerTitle As PropertyTitle
@@ -700,8 +701,7 @@ Partial Public Class ShortSaleCase
         Using ctx As New ShortSaleEntities
             Dim result = (From ss In ctx.ShortSaleCases
                         Join mort In ctx.PropertyMortgages On ss.CaseId Equals mort.CaseId
-                        Join status In ctx.MortgageStatusDatas On mort.Status Equals status.Name
-                        Where mortStatus.Contains(status.Name)
+                        Where mortStatus.Contains(mort.Status)
                         Select ss).Distinct.ToList
 
             Return result

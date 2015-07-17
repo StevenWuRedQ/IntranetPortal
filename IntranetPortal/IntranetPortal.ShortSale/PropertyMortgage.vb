@@ -100,7 +100,7 @@
 
     Public Shared ReadOnly Property StatusCategory As String()
         Get
-            Return _statusData.Select(Function(s) s.Category).Where(Function(s) Not String.IsNullOrEmpty(s)).Distinct.OrderBy(Function(s) s).ToArray
+            Return StatusData.Select(Function(s) s.Category).Where(Function(s) Not String.IsNullOrEmpty(s)).Distinct.OrderBy(Function(s) s).ToArray
         End Get
     End Property
 
