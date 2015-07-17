@@ -19,7 +19,6 @@
     }
 </style>
 
-<asp:ScriptManager ID="ScriptManager1" runat="server" />
 <script src="/Scripts/stevenjs.js"></script>
 <script type="text/javascript">
     function UploadFiles() {
@@ -28,9 +27,7 @@
             url = '/UploadFilePage.aspx?b=<%= LeadsBBLE%>';
         else
             url = '/UploadFilePage.aspx?b=' + leadsInfoBBLE;
-
-        //var centerLeft = parseInt((window.screen.availWidth - 640) / 2);
-        //var centerTop = parseInt(((window.screen.availHeight - 400) / 2) - 50);          
+        
         if (popupCtrUploadFiles) {
             popupCtrUploadFiles.SetContentUrl(url);
             popupCtrUploadFiles.Show();
@@ -108,96 +105,27 @@
         </dx:MenuItem>
         <dx:MenuItem Text="Download" Name="Download">
         </dx:MenuItem>
-        <%--<dx:MenuItem Text="Preview History" Name="History">
-        </dx:MenuItem>--%>
     </Items>
     <ClientSideEvents ItemClick="function(s,e){OnFilePopUpClick(s,e);}" />
 </dx:ASPxPopupMenu>
 
-<div style="color: #999ca1;">
-    <div style='padding: 35px 20px 35px 20px' class="border_under_line">
-        <div style="width: 100%">
-            <div class="font_30">
-                <i class="fa fa-file"></i>&nbsp;
+
+
+<dx:ASPxCallback ID="cbpDocumentUI" ClientInstanceName="cbpDocumentUI" OnCallback="cbpDocumentUI_Callback" runat="server">
+</dx:ASPxCallback>
+
+<div style='padding: 35px 20px 35px 20px' class="border_under_line">
+    <div style="width: 100%">
+        <div class="font_30">
+            <i class="fa fa-file"></i>&nbsp;
                 <span class="font_light">Documents</span>
-                <span class="time_buttons" onclick="UploadFiles()" style='<%= if(viewMode, "display:none", "") %>'>Upload File</span>
-            </div>
-            <div style="padding-left: 39px;" class="clearfix">
-                <span style="font-size: 14px;"><%= LeadsName %></span>
-                <span class="color_blue expand_button" style="padding-right: 25px" onclick="collapse_all(true)">Collapse All</span>
-                <span class="color_blue expand_button" onclick="collapse_all(false)">Expand All&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            </div>
+            <span class="time_buttons" onclick="UploadFiles()" style='<%= if(viewMode, "display:none", "") %>'>Upload File</span>
+        </div>
+        <div style="padding-left: 39px;" class="clearfix">
+            <span style="font-size: 14px;"><%= LeadsName %></span>
         </div>
     </div>
-
-    <dx:ASPxCallbackPanel runat="server" ID="cbpDocumentUI" ClientInstanceName="cbpDocumentUI" OnCallback="cbpDocumentUI_Callback">
-        <PanelCollection>
-            <dx:PanelContent>
-                <asp:DataList runat="server" ID="datalistCategory" RepeatColumns="1" Width="100%" ItemStyle-VerticalAlign="Top">
-                    <ItemTemplate>
-                        <%--border_right add line right--%>
-                        <div class="doc_list_section ">
-                            <div id="default-example" data-collapse="">
-                                <h3 class="doc_list_title  color_balck">&nbsp;<i class="fa fa-minus-square-o color_blue collapse_btn_e" onclick="clickCollapse(this)"></i> &nbsp;&nbsp; <%# Eval("Key")%> </h3>
-                                <div class="doc_collapse_div" style="padding-top: 5px">
-                                    <div class="doc_list_section doc_list_section_sub">
-                                        <asp:Repeater runat="server" ID="rptFolders" OnItemDataBound="rptFiles_ItemDataBound">
-                                            <ItemTemplate>
-                                                <h4 class="doc_list_title  color_balck" style="font-size: 16px"><i class="fa fa-minus-square-o color_blue collapse_btn_e" onclick="clickCollapse(this)"></i>&nbsp;&nbsp;<%# Eval("Key")%></h4>
-                                                <div class="doc_collapse_div" style="padding-top: 5px">
-                                                    <asp:Repeater runat="server" ID="rptFiles">
-                                                        <ItemTemplate>
-
-
-                                                            <div class="clearfix ">
-                                                                <input type="checkbox" data-uniqueid="<%# Eval("Description")%>" class="FileCheckbox" value="<%# Eval("Name")%>" id="<%# String.Format("doc_list_id_{0}", Eval("Description"))%>" />
-                                                                <label class="doc_list_checks doc_border_left check_margin doc_list_checks_sub" for='<%# String.Format("doc_list_id_{0}", Eval("Description"))%>' style="width: 94%">
-                                                                    <span class="color_balck ">
-
-                                                                        <dx:ASPxHyperLink runat="server" CssClass="doc_file_name" ClientSideEvents-Click='<%# String.Format("function(s,e){{clickFileLink(s,""{0}"")}}", Eval("Description"))%>' Text='<%# Eval("Name")%>' Target="_blank"></dx:ASPxHyperLink>
-                                                                    </span>
-                                                                    <span class="checks_data_text">
-                                                                        <dx:ASPxLabel runat="server" Text='<%# String.Format("{0}", Eval("CreateBy"))%>'></dx:ASPxLabel>
-                                                                        &nbsp;<dx:ASPxLabel runat="server" Text='<%# String.Format("{0:MMM d, yyyy}", Eval("CreateDate"))%>'></dx:ASPxLabel>
-                                                                    </span>
-                                                                </label>
-                                                            </div>
-                                                        </ItemTemplate>
-                                                    </asp:Repeater>
-                                                </div>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                        <asp:Repeater runat="server" ID="rptFiles">
-                                            <ItemTemplate>
-                                                <div class="clearfix ">
-                                                    <input type="checkbox" data-uniqueid="<%# Eval("Description")%>" class="FileCheckbox" value="<%# Eval("Name")%>" id="<%# String.Format("doc_list_id_{0}", Eval("Description"))%>" />
-                                                    <label class="doc_list_checks doc_border_left check_margin doc_list_checks_sub" for='<%# String.Format("doc_list_id_{0}", Eval("Description"))%>' style="width: 94%">
-                                                        <span class="color_balck ">
-                                                            <dx:ASPxHyperLink runat="server" CssClass="doc_file_name" ClientSideEvents-Click='<%# String.Format("function(s,e){{clickFileLink(s,""{0}"")}}", Eval("Description"))%>' Text='<%# Eval("Name")%>' Target="_blank"></dx:ASPxHyperLink>
-                                                        </span>
-                                                        <span class="checks_data_text">
-                                                            <dx:ASPxLabel runat="server" Text='<%# String.Format("{0}", Eval("CreateBy"))%>'></dx:ASPxLabel>
-                                                            &nbsp;<dx:ASPxLabel runat="server" Text='<%# String.Format("{0:MMM d, yyyy}", Eval("CreateDate"))%>'></dx:ASPxLabel>
-                                                        </span>
-                                                    </label>
-                                                </div>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ItemTemplate>
-
-                </asp:DataList>
-            </dx:PanelContent>
-        </PanelCollection>
-        <ClientSideEvents EndCallback="function(s,e){IsDocumentLoaded = true; show1(s,e);}" Init="function(s,e){IsDocumentLoaded= false;}" />
-
-    </dx:ASPxCallbackPanel>
 </div>
-
-<%--
 <div id="newDocumentUI" ng-controller="DocController" style="border: 1px solid red">
     <div class="content">
         <div class="row">
@@ -219,29 +147,22 @@
 
 <script type="text/javascript">
     angular.module('PortalApp', [])
-            .controller('DocController', ['$scope', '$http', function ($scope, $http) {
-                $scope.bble = "1004490003";
-                $scope.pathUrl = "";
-                $scope.content = {};
+             .controller('DocController', ['$scope', '$http', function ($scope, $http) {
+                 $scope.bble = "1004490003";
+                 $scope.pathUrl = "";
+                 $scope.content = {};
 
-                $scope.init = function () {
-                    $http.post('Document.asmx/getFolderItems', { bble: $scope.bble, folderPath: $scope.pathUrl }).
-                        success(function (data, status, headers, config) {
-                            $scope.content = JSON.parse(data.d);
-                            console.log($scope.content);
+                 $scope.init = function () {
+                     $http.post('Document.asmx/getFolderItems', { bble: $scope.bble, folderPath: $scope.pathUrl }).
+                         success(function (data, status, headers, config) {
+                             $scope.content = JSON.parse(data.d);
+                             console.log($scope.content);
 
-                        }).
-                        error(function () {
-                            console.log("bble is blank");
-                        });
-                }();
-            }]);
-    function show1(s, e) {
-        var count = 1;
-        console.log(count);
-        count = count + 1;
-    }
+                         }).
+                         error(function () {
+                             console.log("bble is blank");
+                         });
+                 }();
+             }]);
 
 </script>
-
---%>

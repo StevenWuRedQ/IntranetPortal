@@ -233,7 +233,7 @@ The courts no longer consider this proper service. "></i></span><br />&nbsp
 
 						<li class="ss_form_item">
 							<label class="ss_form_input_title" ng-class="service.ServerInSererList?'ss_warning':''">Is the process server one of these servers</label>
-                           
+						   
 							<select class="ss_form_input" ng-model="service.ServerInSererList" ng-options="o as o for o in ['Alan Feldman','John Medina','Robert Winckelmann']"></select>
 						</li>
 
@@ -731,7 +731,7 @@ The courts no longer consider this proper service. "></i></span><br />&nbsp
 			</li>
 			<li class="ss_form_item">
 				<label class="ss_form_input_title">Judge Name</label>
-                <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ProceduralJudgeName" ng-options="o.ContactId as o.Name for o in AllJudges"></select>
+				<select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ProceduralJudgeName" ng-options="o.ContactId as o.Name for o in AllJudges"></select>
 				<%--<div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.ProceduralJudgeName','')">
 				</div>--%>
 			</li>

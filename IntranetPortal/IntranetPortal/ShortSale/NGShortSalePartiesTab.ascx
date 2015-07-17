@@ -7,15 +7,15 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Name</label>
-            <input class="ss_form_input" ng-model="SsCase.AssignedProcessor.Name">
+            <input class="ss_form_input" ng-model="SsCase.Parties.AssignedProcessor.Name">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Phone #</label>
-            <input class="ss_form_input" type="phone" ng-model="SsCase.AssignedProcessor.OfficeNO">
+            <input class="ss_form_input" type="phone" ng-model="SsCase.Parties.AssignedProcessor.OfficeNO">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" type="email" ng-model="SsCase.AssignedProcessor.Email">
+            <input class="ss_form_input" type="email" ng-model="SsCase.Parties.AssignedProcessor.Email">
         </li>
     </ul>
 </div>
@@ -25,62 +25,62 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Agent</label>
-            <input class="ss_form_input" ng-model="SsCase.ReferralContact.Agent">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.Agent">
         </li>
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" ng-model="SsCase.ReferralContact.Cell">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.Cell">
         </li>
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" type="email" ng-model="SsCase.ReferralContact.Email">
+            <input class="ss_form_input" type="email" ng-model="SsCase.Parties.ReferralContact.Email">
         </li>
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Team</label>
-            <input class="ss_form_input" ng-model="SsCase.ReferralContact.Team">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.Team">
         </li>
 
                 <li class="ss_form_item">
             <label class="ss_form_input_title">Address</label>
-            <input class="ss_form_input" ng-model="SsCase.ReferralContact.Address">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.Address">
         </li>
 
                    <li class="ss_form_item">
             <label class="ss_form_input_title">Office #</label>
-            <input class="ss_form_input" ng-model="SsCase.ReferralContact.OfficeNO">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.OfficeNO">
         </li>
                        <li class="ss_form_item">
             <label class="ss_form_input_title">Manager</label>
-            <input class="ss_form_input" ng-model="SsCase.ReferralContact.Manager">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.Manager">
         </li>
 
          <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" ng-model="SsCase.ReferralContact.ManagerCellNO">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.ManagerCellNO">
         </li>
 
          <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" ng-model="SsCase.ReferralContact.ManagerEmail">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.ManagerEmail">
         </li>
 
          <li class="ss_form_item">
             <label class="ss_form_input_title">Assistant</label>
-            <input class="ss_form_input" ng-model="SsCase.ReferralContact.Assistant">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.Assistant">
         </li>
 
 
          <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" ng-model="SsCase.ReferralContact.AssistantCellNO">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.AssistantCellNO">
         </li>
 
          <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" ng-model="SsCase.ReferralContact.AssistantEmail">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.AssistantEmail">
         </li>
 
 
@@ -117,27 +117,27 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Name</label>
-            <input class="ss_form_input" ng-model="SsCase.ListingAgentContact.Name">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ListingAgentContact.Name">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" ng-model="SsCase.ListingAgentContact.Cell">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ListingAgentContact.Cell">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" ng-model="SsCase.ListingAgentContact.Email">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ListingAgentContact.Email">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Broker</label>
-            <input class="ss_form_input" ng-model="SsCase.ListingAgentContact.Broker">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ListingAgentContact.Broker">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Address</label>
-            <input class="ss_form_input" ng-model="SsCase.ListingAgentContact.Address">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ListingAgentContact.Address">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office #</label>
-            <input class="ss_form_input" ng-model="SsCase.ListingAgentContact.OfficeNO">
+            <input class="ss_form_input" ng-model="SsCase.Parties.ListingAgentContact.OfficeNO">
         </li>
 
         <%-- 
@@ -172,27 +172,27 @@
 
          <li class="ss_form_item">
             <label class="ss_form_input_title">Name</label>
-            <input class="ss_form_input" ng-model="SsCase.SellerAttorneyContact.Name">
+            <input class="ss_form_input" ng-model="SsCase.Parties.SellerAttorneyContact.Name">
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" ng-model="SsCase.SellerAttorneyContact.Cell">
+            <input class="ss_form_input" ng-model="SsCase.Parties.SellerAttorneyContact.Cell">
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" ng-model="SsCase.SellerAttorneyContact.Email">
+            <input class="ss_form_input" ng-model="SsCase.Parties.SellerAttorneyContact.Email">
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">Office</label>
-            <input class="ss_form_input" ng-model="SsCase.SellerAttorneyContact.Office">
+            <input class="ss_form_input" ng-model="SsCase.Parties.SellerAttorneyContact.Office">
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">Address</label>
-            <input class="ss_form_input" ng-model="SsCase.SellerAttorneyContact.Address">
+            <input class="ss_form_input" ng-model="SsCase.Parties.SellerAttorneyContact.Address">
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">Office #</label>
-            <input class="ss_form_input" ng-model="SsCase.SellerAttorneyContact.OfficeNO">
+            <input class="ss_form_input" ng-model="SsCase.Parties.SellerAttorneyContact.OfficeNO">
         </li>
 
 
@@ -232,33 +232,33 @@
 
               <li class="ss_form_item">
             <label class="ss_form_input_title">Entity</label>
-            <input class="ss_form_input" ng-model="SsCase.BuyerContact.Entity">
+            <input class="ss_form_input" ng-model="SsCase.Parties.BuyerContact.Entity">
         </li>
 
 
               <li class="ss_form_item">
             <label class="ss_form_input_title">Entity Address</label>
-            <input class="ss_form_input" ng-model="SsCase.BuyerContact.EntityAddr">
+            <input class="ss_form_input" ng-model="SsCase.Parties.BuyerContact.EntityAddr">
         </li>
 
          <li class="ss_form_item">
             <label class="ss_form_input_title">Signor</label>
-            <input class="ss_form_input" ng-model="SsCase.BuyerContact.Signor">
+            <input class="ss_form_input" ng-model="SsCase.Parties.BuyerContact.Signor">
         </li>
 
          <li class="ss_form_item">
             <label class="ss_form_input_title">Date Opened</label>
-            <input class="ss_form_input" ss-date="" ng-model="SsCase.BuyerContact.DateOpened">
+            <input class="ss_form_input" ss-date="" ng-model="SsCase.Parties.BuyerContact.DateOpened">
         </li>
 
          <li class="ss_form_item">
             <label class="ss_form_input_title">Office</label>
-            <input class="ss_form_input" ng-model="SsCase.BuyerContact.Office">
+            <input class="ss_form_input" ng-model="SsCase.Parties.BuyerContact.Office">
         </li>
 
          <li class="ss_form_item">
             <label class="ss_form_input_title">Tax Id</label>
-            <input class="ss_form_input" ng-model="SsCase.BuyerContact.TaxID">
+            <input class="ss_form_input" ng-model="SsCase.Parties.BuyerContact.TaxID">
         </li>
 
 
@@ -299,27 +299,27 @@
 
          <li class="ss_form_item">
             <label class="ss_form_input_title">Name</label>
-            <input class="ss_form_input" ng-model="SsCase.BuyerAttorneyContact.Name">
+            <input class="ss_form_input" ng-model="SsCase.Parties.BuyerAttorneyContact.Name">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" ng-model="SsCase.BuyerAttorneyContact.Cell">
+            <input class="ss_form_input" ng-model="SsCase.Parties.BuyerAttorneyContact.Cell">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" ng-model="SsCase.BuyerAttorneyContact.Email">
+            <input class="ss_form_input" ng-model="SsCase.Parties.BuyerAttorneyContact.Email">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office</label>
-            <input class="ss_form_input" ng-model="SsCase.BuyerAttorneyContact.Office">
+            <input class="ss_form_input" ng-model="SsCase.Parties.BuyerAttorneyContact.Office">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office Address</label>
-            <input class="ss_form_input" ng-model="SsCase.BuyerAttorneyContact.Address">
+            <input class="ss_form_input" ng-model="SsCase.Parties.BuyerAttorneyContact.Address">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office #</label>
-            <input class="ss_form_input" ng-model="SsCase.BuyerAttorneyContact.OfficeNO">
+            <input class="ss_form_input" ng-model="SsCase.Parties.BuyerAttorneyContact.OfficeNO">
         </li>
         <%-- 
         <li class="ss_form_item">
@@ -356,28 +356,28 @@
 
                 <li class="ss_form_item">
             <label class="ss_form_input_title">Company</label>
-            <input class="ss_form_input" ng-model="SsCase.TitleCompanyContact.Company">
+            <input class="ss_form_input" ng-model="SsCase.Parties.TitleCompanyContact.Company">
         </li
 
                      <li class="ss_form_item">
             <label class="ss_form_input_title">Address</label>
-            <input class="ss_form_input" ng-model="SsCase.TitleCompanyContact.Address">
+            <input class="ss_form_input" ng-model="SsCase.Parties.TitleCompanyContact.Address">
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">office #</label>
-            <input class="ss_form_input" ng-model="SsCase.TitleCompanyContact.OfficeNO">
+            <input class="ss_form_input" ng-model="SsCase.Parties.TitleCompanyContact.OfficeNO">
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">Rep</label>
-            <input class="ss_form_input" ng-model="SsCase.TitleCompanyContact.Rep">
+            <input class="ss_form_input" ng-model="SsCase.Parties.TitleCompanyContact.Rep">
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">Rep #</label>
-            <input class="ss_form_input" ng-model="SsCase.TitleCompanyContact.RepNO">
+            <input class="ss_form_input" ng-model="SsCase.Parties.TitleCompanyContact.RepNO">
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" ng-model="SsCase.TitleCompanyContact.Email">
+            <input class="ss_form_input" ng-model="SsCase.Parties.TitleCompanyContact.Email">
         </li>
 
 

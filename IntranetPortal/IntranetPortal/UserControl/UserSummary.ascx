@@ -5,15 +5,15 @@
 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 
 <link href="/Content/dx.light.css" rel="stylesheet" />
+<link rel="stylesheet" href="/css/right-pane.css" />
+
 <script src="/Scripts/globalize/globalize.js"></script>
 <script src="/Scripts/dx.chartjs.js"></script>
 <script src="/Scripts/dx.webappjs.js"></script>
 <script src="/Scripts/dx.phonejs.js"></script>
+<script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
 
-<%--<link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
-<script src="/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="/scrollbar/jquery.mCustomScrollbar.js"></script>--%>
-<link rel="stylesheet" href="/css/right-pane.css" />
+
 <script type="text/javascript">
     function OnNotesKeyDown(s, e) {
         var textArea = s.GetInputElement();
@@ -730,4 +730,4 @@
         </div>
     </div>
 </div>
-<script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
+
