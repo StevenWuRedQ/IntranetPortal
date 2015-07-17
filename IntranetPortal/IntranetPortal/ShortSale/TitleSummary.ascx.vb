@@ -76,13 +76,22 @@ Public Class UCTitleSummary
     End Property
 
     Sub BindData()
+
+        BindUrgent()
+        BindUpcomingBPO()
+        BindCounterOffer()
+        BindInvestorReview()
+        BindTask()
+        Return
+
         Select Case CurrentUserRole
             Case ShortSaleRole.Manager
                 BindUrgent()
                 BindUpcomingBPO()
                 BindCounterOffer()
                 BindInvestorReview()
-                BindDocumentRequest()
+                BindTask()
+                'BindDocumentRequest()
             Case ShortSaleRole.Negotiator
                 BindFollowUp()
                 BindUpcomingBPO()
@@ -106,25 +115,26 @@ Public Class UCTitleSummary
     Private Sub BindUrgent()
         tdUrgent.Visible = True
         'Bind Urgent Data
-        gridUrgent.DataSource = ShortSaleSummary.GetUrgentCases()
+        gridUrgent.DataSource = ShortSale.ShortSaleCase.GetCaseByCategory("Assign") 'ShortSaleSummary.GetUrgentCases()
         gridUrgent.DataBind()
     End Sub
 
     Private Sub BindUpcomingBPO()
         tdUpcomingBPO.Visible = True
         'Bind Priority Data
-        Dim priorityData = ShortSale.ShortSaleSummary.GetUpcomingClosings()
+        Dim priorityData = ShortSale.ShortSaleCase.GetCaseByCategory("Upcoming") 'ShortSale.ShortSaleSummary.GetUpcomingClosings()
+
         gridUpcomingApproval.DataSource = priorityData
         gridUpcomingApproval.DataBind()
 
         If Not Page.IsPostBack Then
-            gridUpcomingApproval.GroupBy(gridUpcomingApproval.Columns("UpComingBPODate"))
+            gridUpcomingApproval.GroupBy(gridUpcomingApproval.Columns("SaleDate"))
         End If
     End Sub
 
     Private Sub BindCounterOffer()
         tdCounterOffer.Visible = True
-        CounterOfferGrid.DataSource = ShortSaleSummary.GetCaseByMortStatus("Counter Offer")
+        CounterOfferGrid.DataSource = ShortSale.ShortSaleCase.GetCaseByMortgageStatus({"Counter Offer - Bank", "Counter Offer - Buyer"}) 'ShortSaleSummary.GetCaseByMortStatus("Counter Offer")
         CounterOfferGrid.DataBind()
     End Sub
 
@@ -142,6 +152,8 @@ Public Class UCTitleSummary
 
     Private Sub BindTask()
         tdTask.Visible = True
+        gridTask.DataSource = WorkflowService.GetMyWorklist()
+        gridTask.DataBind()
     End Sub
 
     Private Sub BindFollowUp()

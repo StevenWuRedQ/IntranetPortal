@@ -192,7 +192,7 @@
                                 <td style="width: 300px; vertical-align: top;" runat="server" id="tdUrgent" visible="false">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
-                                        <i class="fa fa-exclamation-triangle with_circle title_summary_icon" style=""></i><span class="heading_text2">Urgent</span>
+                                        <i class="fa fa-exclamation-triangle with_circle title_summary_icon" style=""></i><span class="heading_text2">New Files</span>
                                     </h4>
                                     <div class="div-underline " style="height: 260px;">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridUrgent" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
@@ -213,7 +213,7 @@
                                             </Columns>
                                             <GroupSummary>
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
-                                            </GroupSummary>
+                                            </GroupSummary><SettingsPager NumericButtonCount="3"></SettingsPager>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
@@ -226,7 +226,7 @@
                                 <td style="width: 300px; vertical-align: top;" class="gray_background" runat="server" id="tdUpcomingBPO" visible="false">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
-                                        <i class="fa fa-university with_circle title_summary_icon" style=""></i><span class="heading_text2">Upcoming BPO's</span>
+                                        <i class="fa fa-university with_circle title_summary_icon" style=""></i><span class="heading_text2">Auction Date</span>
                                     </h4>
                                     <div class="div-underline " style="height: 240px;">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridUpcomingApproval" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" CssClass="no_border_head" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="4">
@@ -236,7 +236,7 @@
                                                         <div style="cursor: pointer; height: 40px; padding-left: 20px; line-height: 40px;" onclick='<%# String.Format("GoToCase(""{0}"")",Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="UpComingBPODate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" GroupIndex="0" Settings-SortMode="Custom">
+                                                <dx:GridViewDataTextColumn FieldName="SaleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" GroupIndex="0" Settings-SortMode="Custom">
                                                     <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
                                                     <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
                                                     <GroupRowTemplate>
@@ -304,7 +304,7 @@
                                             </Columns>
                                             <GroupSummary>
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
-                                            </GroupSummary>
+                                            </GroupSummary><SettingsPager NumericButtonCount="3"></SettingsPager>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
@@ -338,6 +338,7 @@
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
                                             </GroupSummary>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
+                                            <SettingsPager NumericButtonCount="3"></SettingsPager>
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
                                                 <RowHotTrack BackColor="#ff400d" ForeColor="White"></RowHotTrack>
@@ -370,6 +371,7 @@
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
                                             </GroupSummary>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
+                                            <SettingsPager NumericButtonCount="3"></SettingsPager>
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
                                                 <RowHotTrack BackColor="#ff400d" ForeColor="White"></RowHotTrack>
@@ -384,39 +386,40 @@
                                     <div class="div-underline " style="height: 240px;">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridTask" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
-                                                <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
+                                                <dx:GridViewDataTextColumn FieldName="DisplayName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
+                                                    <Settings AutoFilterCondition="Contains" />
                                                     <DataItemTemplate>
-                                                        <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Task", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                        <div style="cursor: pointer; height: 30px; padding-left: 20px; line-height: 30px;" onclick='ShowWorklistItem("<%# Eval("ItemData")%>", "<%# Eval("ProcessName")%>")'><%# Eval("DisplayName")%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
-                                                    <GroupRowTemplate>
-                                                        <%--Date: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
-                                                        <%--change group template UI by steven--%>
-                                                        <grouprowtemplate>
-                                                        <div >
-                                                            <table>
-                                                                <tr>
-                                                                  <td><img src="../images/grid_call_backs_canlender.png"/></td>
-                                                                <td style="font-weight:900;width:80px;text-align:center;"> Date: <%# Container.GroupText%></td>
-                                                                <td style="padding-left: 10px">
-                                                                    <div  class="raund-label">
-                                                                     <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                                    </div>
-                                                                </td>
-                                                            <%--the round div--%>
-                                    
-                                                                </tr>
-                                                                </table>
-                                                        </div>
-                                                       </grouprowtemplate>
-                                                        <%-------end---------%>
-                                                    </GroupRowTemplate>
+                                                <dx:GridViewDataTextColumn FieldName="StartDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Caption="Date">
+                                                    <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
+                                                    <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
                                                 </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataColumn FieldName="ActivityName" Visible="false" VisibleIndex="3">
+                                                </dx:GridViewDataColumn>
+                                                <dx:GridViewDataColumn FieldName="ProcSchemeDisplayName" Visible="false" VisibleIndex="5">
+                                                    <GroupRowTemplate>
+                                                        <div>
+                                                            <table style="height: 45px">
+                                                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
+                                                                    <td style="width: 80px;">
+                                                                        <span class="font_black">
+                                                                            <i class="fa fa-user font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td style="padding-left: 10px">
+                                                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </GroupRowTemplate>
+                                                </dx:GridViewDataColumn>
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
-                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
+                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer; visibility: hidden;" />
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataColumn>
                                             </Columns>
@@ -424,6 +427,7 @@
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
                                             </GroupSummary>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
+                                            <SettingsPager NumericButtonCount="3"></SettingsPager>
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
                                                 <RowHotTrack BackColor="#ff400d" ForeColor="White"></RowHotTrack>
