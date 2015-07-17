@@ -337,6 +337,8 @@
                 item.push({});
             }
             /////////////////Code Scope Steph ////////////////
+            $scope.SsCase.DealInfo = {};
+
         });
        
     </script>
