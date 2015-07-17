@@ -14,24 +14,6 @@ Option Explicit On
 Partial Public Class NGShortSaleTab
 
     '''<summary>
-    '''SaveClicklCallback control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SaveClicklCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
-
-    '''<summary>
-    '''getShortSaleInstance control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents getShortSaleInstance As Global.DevExpress.Web.ASPxCallback.ASPxCallback
-
-    '''<summary>
     '''ShortSaleCaseSavePanel control.
     '''</summary>
     '''<remarks>
@@ -39,15 +21,6 @@ Partial Public Class NGShortSaleTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ShortSaleCaseSavePanel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
-
-    '''<summary>
-    '''leadsCommentsCallbackPanel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents leadsCommentsCallbackPanel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
 
     '''<summary>
     '''hfCaseId control.

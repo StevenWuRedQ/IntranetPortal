@@ -47,7 +47,7 @@
                             <dx:ASPxCallbackPanel runat="server" ID="ASPxCallbackPanel2">
                                 <PanelCollection>
                                     <dx:PanelContent ID="PanelContent1" runat="server">
-                                        <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter" ClientVisible="false">
+                                        <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter" ClientVisible="true">
                                             <Styles>
                                                 <Pane Paddings-Padding="0">
                                                     <Paddings Padding="0px"></Paddings>
@@ -66,18 +66,21 @@
 
                                                                 <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
                                                                     <li class="active short_sale_head_tab">
-                                                                        <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
-                                                                            <i class="fa isEviction,"fa-sign-out","fa-info-circle" %>  head_tab_icon_padding"></i>
-                                                                            <div class="font_size_bold">"Eviction","Overview")</div>
+                                                                        <a href="#" role="tab" data-toggle="tab" class="tab_button_a">
+                                                                            <i class="fa fa-sign-out fa-info-circle head_tab_icon_padding"></i>
+                                                                            <div class="font_size_bold">Eviction</div>
                                                                         </a>
                                                                     </li>
-                                                                    <li class="short_sale_head_tab" %>">
+
+
+                                                                    <li class="short_sale_head_tab" %>
                                                                         <a href="#home_owner" role="tab" data-toggle="tab" class="tab_button_a">
                                                                             <i class="fa fa-key head_tab_icon_padding"></i>
                                                                             <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;Title&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                                                         </a>
                                                                     </li>
                                                                     <li class="short_sale_head_tab">
+
                                                                         <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
                                                                             <i class="fa fa-file head_tab_icon_padding"></i>
                                                                             <div class="font_size_bold">Documents</div>
@@ -115,10 +118,9 @@
                                                                             </ul>
                                                                         </div>
                                                                     </li>
-                                                                    <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
+
                                                                     <li style="margin-right: 30px; color: #ffa484; float: right">
-                                                                        <%--<i class="fa fa-comments sale_head_button tooltip-examples" title="Chat"></i>
-                                                                        <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Email"></i>--%>
+                                                                        
                                                                         <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Re-Assign" onclick=""></i>
                                                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i>
                                                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick=""></i>
