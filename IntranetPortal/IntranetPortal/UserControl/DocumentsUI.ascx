@@ -23,7 +23,7 @@
         else
             window.open(url, 'Upload Files', popup_params(640, 400));
     }
-
+     
     var IsDocumentLoaded = false;
     function BindDocuments(refreshDocuments) {
         if (!IsDocumentLoaded || refreshDocuments) {
@@ -171,5 +171,5 @@
             </dx:PanelContent>
         </PanelCollection>
         <ClientSideEvents EndCallback="function(s,e){IsDocumentLoaded= true;}" Init="function(s,e){IsDocumentLoaded= false;}" />
-    </dx:ASPxCallbackPanel>
+    </dx:ASPxCallbackPanel> 
 </div>
