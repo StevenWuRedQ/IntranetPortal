@@ -3046,6 +3046,7 @@
     <Content Include="AutoDialer\Web.config" />
     <Content Include="img\img_files" />
     <Content Include="css\css_files" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />

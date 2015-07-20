@@ -212,7 +212,6 @@
         </tr>
 
         <tr ng-repeat="offer in SsCase.DealInfo.Offers">
-            <span class="title_index title_span">{{$index+1}}</span>
             <td>
                 <select class="ss_form_input" ng-model="offer.Type">
                     <option value="Initial Offer">Initial Offer</option>
@@ -239,7 +238,10 @@
             <td>
                 <input class="ss_form_input " ss-date="" ng-model="valuation.DateSubmitted">
             </td>
-
+            <td>
+                <i class="fa fa-check text-success"></i>
+                <i class="fa fa-minus-circle text-warning"></i>
+            </td>
         </tr>
     </table>
 

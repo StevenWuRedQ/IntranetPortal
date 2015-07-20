@@ -354,10 +354,10 @@
     <h4 class="ss_form_title">Title Company<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('TitleCompanyContact', function(party){ShortSaleCaseData.TitleCompany=party.ContactId})"></i></h4>
     <ul class="ss_form_box clearfix">
 
-                <li class="ss_form_item">
+         <li class="ss_form_item">
             <label class="ss_form_input_title">Company</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.TitleCompanyContact.Company">
-        </li
+        </li>
 
                      <li class="ss_form_item">
             <label class="ss_form_input_title">Address</label>
