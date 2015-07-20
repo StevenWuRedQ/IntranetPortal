@@ -196,10 +196,10 @@
                     <dx:ListEditItem Text="In House SS" Value="0" />
                     <dx:ListEditItem Text="Eviction" Value="1" />
                     <dx:ListEditItem Text="Legal" Value="3" />
-                    <dx:ListEditItem Text="Construction" Value="2" />                    
+                    <dx:ListEditItem Text="Construction" Value="2" />
                     <%--<dx:ListEditItem Text="Open Market Sale" Value="4" />--%>
                     <dx:ListEditItem Text="Straight Sale" Value="6" />
-                    <dx:ListEditItem Text="3rd Party" Value="5" />                    
+                    <dx:ListEditItem Text="3rd Party" Value="5" />
                 </Items>
                 <ClientSideEvents SelectedIndexChanged="function(s,e){
                         if(s.GetSelectedValues().indexOf('1')!=-1)
@@ -224,7 +224,7 @@
                 <dx:ASPxComboBox ID="cbEvictionUsers" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">
                 </dx:ASPxComboBox>
             </div>
-            <div id="divThirdParty" style="display:none; width:300px">
+            <div id="divThirdParty" style="display: none; width: 300px">
                 Select Third Parties:
                 <dx:ASPxComboBox ID="cbThirdParty" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">
                 </dx:ASPxComboBox>
@@ -382,7 +382,7 @@
         <div style="height: 30px; vertical-align: central">
             <span class="time_buttons" onclick="aspxPopupDeadLeadsClient.Hide()">Cancel</span>
             <span class="time_buttons" onclick="popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('Save');">Confirm</span>
-             <span class="time_buttons" onclick="popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('DumpDeadLeads');">Dump Dead Leads</span>
+            <span class="time_buttons" onclick="popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('DumpDeadLeads');">Dump Dead Leads</span>
         </div>
     </FooterContentTemplate>
     <ClientSideEvents EndCallback="function(s,e){

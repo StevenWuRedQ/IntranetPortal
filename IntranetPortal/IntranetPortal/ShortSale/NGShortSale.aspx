@@ -64,7 +64,7 @@
                                                     </PaneStyle>
                                                     <ContentCollection>
                                                         <dx:SplitterContentControl ID="SplitterContentControl3" runat="server">
-                                                            <div style="width: 100%; align-content: center; height: 100%" ng-controller="PortalCtrl">
+                                                            <div style="width: 100%; align-content: center; height: 100%" ng-controller="ShortSaleCtrl">
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
                                                               
@@ -324,7 +324,7 @@
     </script>
     <script>
         portalApp = angular.module('PortalApp');
-        portalApp.controller('PortalCtrl', function ($scope, $http, $element, $parse) {
+        portalApp.controller('ShortSaleCtrl', function ($scope, $http, $element, $parse) {
             //Init Steven /////////
             $scope.SsCase = {
                 PropertyInfo: { Owners: [{Contacts:[] ,Notes:[]}] }
@@ -337,10 +337,15 @@
             
             var test = 123;
             /////////////////Code Scope Steph ////////////////
-            $scope.SsCase.Mortgages = [{},];
-            $scope.SsCase.DealInfo = {};
-            $scope.SsCase.DealInfo.Valuations = [{}, ];
-            $scope.SsCase.DealInfo.Offers = [{}, ];
+            $scope.SsCase.Mortgages = [{
+                Contacts: [],
+                Notes: []
+
+            }, ];
+            $scope.SsCase.DealInfo = {
+                Valuations: [{}, ],
+                Offers: [{}, ]
+            };
 
         });
        

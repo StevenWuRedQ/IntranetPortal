@@ -437,6 +437,13 @@
       <DependentUpon>AgentOverview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Angular.master.designer.vb">
+      <DependentUpon>Angular.master</DependentUpon>
+    </Compile>
+    <Compile Include="Angular.master.vb">
+      <DependentUpon>Angular.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="AssignLeadsRulesPage.aspx.designer.vb">
       <DependentUpon>AssignLeadsRulesPage.aspx</DependentUpon>
     </Compile>
@@ -3047,6 +3054,7 @@
     <Content Include="img\img_files" />
     <Content Include="css\css_files" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="Angular.master" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />

@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="LegalSummaryTab.ascx.vb" Inherits="IntranetPortal.LegalSummaryTab" %>
-<div class="short_sale_content">
+<div class="legalui short_sale_content">
 
 
     <div>

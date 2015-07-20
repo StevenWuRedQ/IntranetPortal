@@ -112,8 +112,8 @@
         </div>
 
         <div class="ss_form">
-            <h4 class="ss_form_title">Contacts <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortage.Contacts)" title="Add"></i></h4>
-            <ul class="ss_form_box clearfix" ng-repeat="(index,contact) in mortage.Contacts">
+            <h4 class="ss_form_title">Contacts <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortgage.Contacts)" title="Add"></i></h4>
+            <ul class="ss_form_box clearfix" ng-repeat="(index,contact) in mortgage.Contacts">
                 <li style="list-style-type: none">
                     <h4>Contact {{index + 1}} </h4>
                 </li>
@@ -143,11 +143,8 @@
         <div class="ss_form">
             <h4 class="ss_form_title">Notes <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortgage.Notes)" title="Add"></i></h4>
             <ul class="ss_form_box clearfix" ng-repeat="(index,note) in mortgage.Notes">
-                <li style="list-style-type: none">
-                    <h4>Note {{index + 1}} </h4>
-                </li>
                 <li class="ss_form_item ss_form_item_line">
-                    <label class="ss_form_input_title">Note</label>
+                    <label class="ss_form_input_title">Note {{index + 1}}</label>
                     <textarea class="edit_text_area text_area_ss_form" ng-model="note.Content"></textarea>
                 </li>
 

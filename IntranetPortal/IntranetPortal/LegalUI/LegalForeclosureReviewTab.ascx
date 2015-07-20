@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="LegalForeclosureReviewTab.ascx.vb" Inherits="IntranetPortal.LegalForeclosureReviewTab" %>
-<div class="short_sale_content">
+
+
+<div class="legalui short_sale_content">
 	<div class="clearfix">
 		<div style="float: right">
 			<input type="button" class="rand-button short_sale_edit" value="Completed Research" runat="server" onserverclick="btnCompleteResearch_ServerClick" id="btnCompleteResearch" visible="false" />
@@ -14,7 +16,7 @@
 	</div>
 
 	<!-- case -->
-	<div>
+	<div style="margin-bottom: 50px">
 		<h4 class="ss_form_title">Case Status</h4>
 		<ul class="ss_form_box clearfix">
 			<li class="ss_form_item">
@@ -22,6 +24,7 @@
 					What was the last milestone document recorded on Clerk Minutes? 
 				</label>
 				<select class="ss_form_input" ng-model="LegalCase.CaseStauts">
+					<option value="1">No current action</option>
 					<option value="2">S&C / LP</option>
 					<option value="3">RJI</option>
 					<option value="4">Settlement Conf</option>
@@ -36,7 +39,7 @@
 	<!-- Estate Pending -->
 	<div class="ss_form">
 		<h4 class="ss_form_title">Estate Pending</h4>
-		<div class="ss_form">
+		<div class="">
 			<ul class="ss_form_box clearfix">
 				<li class="ss_form_item">
 					<label class="ss_form_input_title">Was Estate formed? </label>

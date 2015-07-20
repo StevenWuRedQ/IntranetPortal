@@ -3,7 +3,6 @@
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 <%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>
 <%@ Register Src="~/LegalUI/LegalCaseList.ascx" TagPrefix="uc1" TagName="LegalCaseList" %>
-
 <%@ Register Src="~/LegalUI/LegalTab.ascx" TagPrefix="uc1" TagName="LegalTab" %>
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
 <%@ Register TagPrefix="uc1" TagName="LegalSecondaryActions" Src="~/LegalUI/LegalSecondaryActions.ascx" %>
@@ -12,18 +11,9 @@
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
+
     <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="/css/nga.min.css">
     <script src="/Scripts/jquery.webui-popover.js"></script>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
-    <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
-    <script src="/Scripts/stevenjs.js"></script>
-
-    <%--<script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>--%>
-
-
     <style type="text/css">
         .chipsdemoContactChips md-content.autocomplete {
             min-height: 250px;
@@ -33,10 +23,11 @@
             padding-top: 8px;
             padding-bottom: 8px;
         }
-        #ctl00_MainContentPH_ASPxSplitter1_1,#ctl00_MainContentPH_ASPxSplitter1_2
-        {
-            visibility:hidden;
+
+        #ctl00_MainContentPH_ASPxSplitter1_1, #ctl00_MainContentPH_ASPxSplitter1_2 {
+            visibility: hidden;
         }
+
         .chipsdemoContactChips .contact-item {
             box-sizing: border-box;
         }
@@ -89,55 +80,17 @@
         .md-contact-suggestion img {
             margin-top: -35px;
         }
+        .legalui .ss_form_input_title{
+            color: rgb(50, 50, 50)
+        }
     </style>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
     <%--leagal Ui--%>
-    
-    <div id="Div1" ng-controller="PortalCtrl" runat="server" visible="false">
-        <script>
-            leadsInfoBBLE = "123456789";
-        </script>
-        <%-- {{LegalCase.PropertyInfo.AgentId}} {{LegalCase.PropertyInfo.Agent3Id}}--%>
-        <%-- <div>
-            <md-autocomplete
-                md-search-text="searchText1"
-                md-items="item in querySearch(searchText1)"
-                md-selected-item-change="LegalCase.PropertyInfo.AgentId = item.ContactId"
-                md-item-text="item.Name"
-                md-min-length="3">
-              
-              <md-item-template>
-                  <span md-highlight-text="searchText1" md-highlight-flags="^i">{{item.Name}}</span>
-                </md-item-template>
-                <md-not-found>
-                  No matches found for "{{searchText1}}".
-                </md-not-found>
-            </md-autocomplete>
 
-        </div>--%>
-
-
-
-
-        <div>
-            <%For i = 0 To 40%>
-            <%-- <div class="contact_box" dx-select-box="InitContact('LegalCase.PropertyInfo.Agent<%=i %>Id')">
-            </div>--%>
-            <div class="contact_box" dx-autocomplete="InitContact('LegalCase.PropertyInfo.AgentId')">
-            </div>
-            <%Next%>
-            <%--<div class="contact_box" dx-autocomplete="InitContact('LegalCase.PropertyInfo.AgentId')">
-            </div>
-            <div class="contact_box" dx-autocomplete="InitContact('LegalCase.PropertyInfo.Agent3Id')">
-            </div>--%>
-        </div>
-        <input class="ss_form_input" ng-model="GetContactById(LegalCase.PropertyInfo.AgentId).OfficeNO">
-    </div>
-    
-    <div id="PortalCtrl" ng-controller="PortalCtrl">
+    <div id="LegalCtrl" ng-controller="LegalCtrl">
 
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
@@ -237,7 +190,7 @@
 
                                 <% If Not HiddenTab Then%>
                                 <div class="legal-menu row" style="margin-left: 0px; margin-right: 0px">
-                                    <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height:70px">
+                                    <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
                                         <li class="active short_sale_head_tab">
                                             <a href="#LegalTab" role="tab" data-toggle="tab" class="tab_button_a">
                                                 <i class="fa fa-info-circle  head_tab_icon_padding"></i>
@@ -296,7 +249,7 @@
                                             <% End If%>
 
                                             <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.LegalResearch Then%>
-                                            <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="CompleteResearch()" data-original-title="Complete Search"></i>
+                                            <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="CompleteResearch()" data-original-title="Complete Research"></i>
                                             <% End If%>
 
                                             <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Then%>
@@ -315,19 +268,19 @@
                                         </li>
                                     </ul>
                                 </div>
-                            <% End If%>
-                            <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
-                            <dx:ASPxPopupControl ClientInstanceName="popupSelectAttorneyCtr" Width="300px" Height="300px"
-                                MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
-                                HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
-                                runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
-                                <ContentCollection>
-                                    <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentReAssign">
-                                        <asp:HiddenField runat="server" ID="hfUserType" />
-                                        <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270" SelectedIndex="0" Width="100%">
-                                        </dx:ASPxListBox>
-                                        <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
-                                            <ClientSideEvents Click="function(s,e){
+                                <% End If%>
+                                <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
+                                <dx:ASPxPopupControl ClientInstanceName="popupSelectAttorneyCtr" Width="300px" Height="300px"
+                                    MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
+                                    HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
+                                    runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
+                                    <ContentCollection>
+                                        <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentReAssign">
+                                            <asp:HiddenField runat="server" ID="hfUserType" />
+                                            <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270" SelectedIndex="0" Width="100%">
+                                            </dx:ASPxListBox>
+                                            <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
+                                                <ClientSideEvents Click="function(s,e){
                                         var item = listboxEmployeeClient.GetSelectedItem();
                                         if(item == null)
                                         {
@@ -337,63 +290,63 @@
                                         popupSelectAttorneyCtr.PerformCallback('Save|' + leadsInfoBBLE + '|' + item.text);
                                         popupSelectAttorneyCtr.Hide();
                                         }" />
-                                        </dx:ASPxButton>
-                                    </dx:PopupControlContentControl>
-                                </ContentCollection>
-                                <ClientSideEvents Closing="function(s,e){
+                                            </dx:ASPxButton>
+                                        </dx:PopupControlContentControl>
+                                    </ContentCollection>
+                                    <ClientSideEvents Closing="function(s,e){
                                               if (typeof gridTrackingClient != 'undefined')
                                                     gridTrackingClient.Refresh();
                                         }" />
-                            </dx:ASPxPopupControl>
-                            <% End If%>
+                                </dx:ASPxPopupControl>
+                                <% End If%>
 
-                            <style>
-                                .AttachmentSpan {
-                                    margin-left: 10px;
-                                    border: 1px solid #efefef;
-                                    padding: 3px 20px 3px 10px;
-                                    background-color: #ededed;
-                                }
-                            </style>
+                                <style>
+                                    .AttachmentSpan {
+                                        margin-left: 10px;
+                                        border: 1px solid #efefef;
+                                        padding: 3px 20px 3px 10px;
+                                        background-color: #ededed;
+                                    }
+                                </style>
 
-                            <div id="ctl00_MainContentPH_ASPxSplitter1_ASPxCallbackPanel2_contentSplitter_SendMail_PopupSendMail_PW-1" class="dxpcLite_MetropolisBlue1 dxpclW" style="height: 700px; width: 630px; cursor: default; z-index: 10000; display: none;">
-                                <div class="dxpc-mainDiv dxpc-shadow">
-                                    <div class="dxpc-header dxpc-withBtn" id="ctl00_MainContentPH_ASPxSplitter1_ASPxCallbackPanel2_contentSplitter_SendMail_PopupSendMail_PWH-1">
-                                        <div class="clearfix">
-                                            <div class="pop_up_header_margin">
-                                                <i class="fa fa-envelope with_circle pop_up_header_icon"></i>
-                                                <span class="pop_up_header_text ">Email</span>
-                                            </div>
-                                            <div class="pop_up_buttons_div">
-                                                <i class="fa fa-times icon_btn" onclick="popupSendEmailClient.Hide()"></i>
+                                <div id="ctl00_MainContentPH_ASPxSplitter1_ASPxCallbackPanel2_contentSplitter_SendMail_PopupSendMail_PW-1" class="dxpcLite_MetropolisBlue1 dxpclW" style="height: 700px; width: 630px; cursor: default; z-index: 10000; display: none;">
+                                    <div class="dxpc-mainDiv dxpc-shadow">
+                                        <div class="dxpc-header dxpc-withBtn" id="ctl00_MainContentPH_ASPxSplitter1_ASPxCallbackPanel2_contentSplitter_SendMail_PopupSendMail_PWH-1">
+                                            <div class="clearfix">
+                                                <div class="pop_up_header_margin">
+                                                    <i class="fa fa-envelope with_circle pop_up_header_icon"></i>
+                                                    <span class="pop_up_header_text ">Email</span>
+                                                </div>
+                                                <div class="pop_up_buttons_div">
+                                                    <i class="fa fa-times icon_btn" onclick="popupSendEmailClient.Hide()"></i>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
 
-                            <div class="tab-content">
+                                <div class="tab-content">
 
-                                <div class="tab-pane active" id="LegalTab">
-                                    <uc1:LegalTab runat="server" ID="LegalTab1" />
-                                    <script>
-                                        LegalShowAll = true;
-                                    </script>
+                                    <div class="tab-pane active" id="LegalTab">
+                                        <uc1:LegalTab runat="server" ID="LegalTab1" />
+                                        <script>
+                                            LegalShowAll = true;
+                                        </script>
+                                    </div>
+                                    <div class="tab-pane" id="DocumentTab">
+                                        <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
+                                    </div>
+                                    <div class="tab-pane load_bg" id="more_leads">
+                                        <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+                                    </div>
+                                    <div class="tab-pane load_bg" id="more_evction">
+                                        <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+                                    </div>
+                                    <div class="tab-pane load_bg" id="more_short_sale">
+                                        <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+                                    </div>
                                 </div>
-                                <div class="tab-pane" id="DocumentTab">
-                                    <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
-                                </div>
-                                <div class="tab-pane load_bg" id="more_leads">
-                                    <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
-                                </div>
-                                <div class="tab-pane load_bg" id="more_evction">
-                                    <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
-                                </div>
-                                <div class="tab-pane load_bg" id="more_short_sale">
-                                    <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
-                                </div>
-                            </div>
                             </div>
 
                             <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
@@ -535,8 +488,7 @@
     </div>--%>
     <uc1:SendMail runat="server" ID="SendMail" />
     <script type="text/javascript">
-        /*
-        function(case) */
+
         function VendorsClosing(s) {
             GetContactCallBack();
         }
@@ -549,85 +501,32 @@
         }
         function GetLegalData() {
 
-            return angular.element(document.getElementById('PortalCtrl')).scope().LegalCase;
+            return angular.element(document.getElementById('LegalCtrl')).scope().LegalCase;
 
         }
         function setLegalData(BBLE) {
             $(document).ready(function () {
                 // Handler for .ready() called.
-                angular.element(document.getElementById('PortalCtrl')).scope().LoadLeadsCase(BBLE);
-               
-               
-            });
-            
-        }
+                angular.element(document.getElementById('LegalCtrl')).scope().LoadLeadsCase(BBLE);
 
+            });
+
+        }
 
         var AllContact = <%= GetAllContact()%>
             function t() {
 
             }
         var AllRoboSignor = <%= GetAllRoboSingor() %>
-            function s()
-            {
+            function s() {
 
             }
         var taskSN = '<%= Request.QueryString("sn")%>';
         <%--var LegalCase = $.parseJSON('<%= LegalCase%>');--%>
 
         var portalApp = angular.module('PortalApp');
-        portalApp.directive('ssDate', function () {
-            return {
-                restrict: 'A',
-                link: function (scope, el, attrs) {
-                    $(el).datepicker({});
-                    $(el).on('change', function () {
-                        scope.$eval(attrs.ngModel + "='" + el.val() + "'");
-                        //scope[attrs.ngModel] = el.val(); //if your expression doesn't contain dot.
-                    });
-                }
-            };
-        });
-        portalApp.directive('inputMask', function () {
-            return {
-                restrict: 'A',
-                link: function (scope, el, attrs) {
 
-                    $(el).mask(attrs.inputMask);
-                    $(el).on('change', function () {
-                        scope.$eval(attrs.ngModel + "='" + el.val() + "'");
-                        //scope[attrs.ngModel] = el.val(); //if your expression doesn't contain dot.
-                    });
-                }
-            };
-        });
-
-        portalApp.directive('radioInit', function () {
-            return {
-                restrict: 'A',
-                link: function (scope, el, attrs) {
-                    scope.$eval(attrs.ngModel + "=" + attrs.ngModel + "==null?" + attrs.defaultvalue + ":" + attrs.ngModel);
-                }
-            }
-        });
-
-        portalApp.directive('maskMoney', function () {
-            return {
-                restrict: 'A',
-                link: function (scope, el, attrs) {
-
-                    $(el).formatCurrency();
-                    $(el).on("blur", function () { $(this).formatCurrency() });
-
-                    $(el).on('change', function () {
-                        scope.$eval(attrs.ngModel + "='" + el.val() + "'");
-                        //scope[attrs.ngModel] = el.val(); //if your expression doesn't contain dot.
-                    });
-                }
-            };
-        });
-
-        portalApp.controller('PortalCtrl', function ($scope, $http, $element, $parse) {
+        portalApp.controller('LegalCtrl', function ($scope, $http, $element, $parse) {
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
             $http.post('/LegalUI/ContactService.svc/CheckInShortSale', { bble: leadsInfoBBLE }).success(function (data) {
 
@@ -656,7 +555,6 @@
 
             function loadContacts() {
                 var contacts = AllContact;
-
                 return contacts.map(function (c, index) {
 
                     c.image = 'https://storage.googleapis.com/material-icons/external-assets/v1/icons/svg/ic_account_circle_black_48px.svg'
@@ -798,7 +696,7 @@
                 },
                 searchExpr: ["Name"]
             });
-            
+
             $scope.ContactDataSource = new DevExpress.data.DataSource({
                 store: cStore
             });
@@ -809,7 +707,7 @@
                         if (AllRoboSignor) {
                             if (loadOptions.searchValue) {
                                 return AllRoboSignor.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(loadOptions.searchValue.toLowerCase()) >= 0 } return false });
-                            } 
+                            }
                             return [];
                         }
                     },
@@ -817,7 +715,7 @@
                         if (AllRoboSignor) {
                             return AllRoboSignor.filter(function (o) { return o.ContactId == key })[0];
                         }
-                       
+
                     },
                     searchExpr: ["Name"]
                 })
@@ -829,31 +727,16 @@
                 $scope.$eval(c + '=' + '192');
             }
             $scope.GetContactById = function (id) {
-                //if (id) {
-                //    var d = new $.Deferred();
-                //    $.get('/LegalUI/ContactService.svc/GetAllContacts?id=' + id)
-                //        .done(function (result) {
-                //            d.resolve(result[0]);
-                //        });
-                //    var c = d.promise();
-                //    return c;
-                //}
                 return AllContact.filter(function (o) { return o.ContactId == id })[0];
-                //return {};
             }
+
             $scope.SelectBoxChange = function (e) {
                 alert(JSON.stringify(e));
             }
 
-           
-            $scope.InitContact = function (id,dataSourceName) {
 
+            $scope.InitContact = function (id, dataSourceName) {
 
-                //new DevExpress.data.ODataStore({
-                //    url: "/LegalUI/ContactService.svc/GetAllContacts",
-                //    key: "ContactId",
-                //    keyType: "Int32"
-                //});
                 return {
                     dataSource: dataSourceName ? $scope[dataSourceName] : $scope.ContactDataSource,
                     valueExpr: 'ContactId',
@@ -888,8 +771,6 @@
                         alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                     });
 
-                //$.getJSON('/LegalUI/LegalUI.aspx/SaveCaseData', data, function (data) {                    
-                //});
             }
 
 
@@ -926,10 +807,9 @@
                         alert("Fail to save data.");
                     });
 
-                //$.getJSON('/LegalUI/LegalUI.aspx/SaveCaseData', data, function (data) {                    
-                //});
             }
             $scope.LegalCase.SecondaryInfo.StatuteOfLimitations = [];
+
             $scope.LoadLeadsCase = function (BBLE) {
                 $("#ctl00_MainContentPH_ASPxSplitter1_1,#ctl00_MainContentPH_ASPxSplitter1_2").css('visibility', 'visible');
                 var data = { bble: BBLE };
