@@ -13,31 +13,15 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
     <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/css/nga.min.css">
     <script src="/Scripts/jquery.webui-popover.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
-    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
-    <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
-    <%--<script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>--%>
 
-    <script src="/Scripts/dx.webappjs.js"></script>
-
-    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
-    <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>
-    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.light.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
-
     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
     <script src="/Scripts/stevenjs.js"></script>
 
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
-    <link rel="stylesheet" href="/css/nga.min.css">
-
-
+    <%--<script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>--%>
 
 
     <style type="text/css">
@@ -591,7 +575,7 @@
         var taskSN = '<%= Request.QueryString("sn")%>';
         <%--var LegalCase = $.parseJSON('<%= LegalCase%>');--%>
 
-        var portalApp = angular.module('PortalApp', ['dx', 'ngMaterial']);
+        var portalApp = angular.module('PortalApp');
         portalApp.directive('ssDate', function () {
             return {
                 restrict: 'A',

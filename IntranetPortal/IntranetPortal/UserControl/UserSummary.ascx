@@ -7,9 +7,7 @@
 <link href="/Content/dx.light.css" rel="stylesheet" />
 <link rel="stylesheet" href="/css/right-pane.css" />
 
-<script src="/Scripts/globalize/globalize.js"></script>
 <script src="/Scripts/dx.chartjs.js"></script>
-<script src="/Scripts/dx.webappjs.js"></script>
 <script src="/Scripts/dx.phonejs.js"></script>
 <script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
 

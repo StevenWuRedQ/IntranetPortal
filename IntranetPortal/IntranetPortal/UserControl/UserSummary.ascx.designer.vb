@@ -50,15 +50,6 @@ Partial Public Class UserSummary
     Protected WithEvents gridPriority As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
-    '''todayScheduler control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents todayScheduler As Global.DevExpress.Web.ASPxScheduler.ASPxScheduler
-
-    '''<summary>
     '''gridTask control.
     '''</summary>
     '''<remarks>
@@ -75,6 +66,15 @@ Partial Public Class UserSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridCallback As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''todayScheduler control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents todayScheduler As Global.DevExpress.Web.ASPxScheduler.ASPxScheduler
 
     '''<summary>
     '''notesCallbackPanel control.
