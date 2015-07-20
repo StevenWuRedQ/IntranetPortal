@@ -10,45 +10,46 @@
 </div>
 
 <div>
-    <h4 class="ss_form_title">Property</h4>
+    <h4 class="ss_form_title">Property Address</h4>
     <ul class="ss_form_box clearfix">
 
+         <li class="ss_form_item" >
+            <label class="ss_form_input_title">Street Number</label>
+            <input class="ss_form_input" ng-value="SsCase.PropertyInfo.Block +'/'+SsCase.PropertyInfo.Lot">
+        </li>
+        <li class="ss_form_item" style="visibility:hidden">
+            <label class="ss_form_input_title">BBLE</label>
+            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.BBLE">
+        </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Street Number</label>
-            <input class="ss_form_input" data-field="PropertyInfo.Number" readonly="readonly">
+            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.Number" readonly="readonly">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Street Name</label>
-            <input class="ss_form_input" data-field="PropertyInfo.StreetName" readonly="readonly">
+            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.StreetName"  readonly="readonly">
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">Apt #</label>
-            <input class="ss_form_input" data-field="PropertyInfo.AptNo" readonly="readonly">
+            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.AptNo" readonly="readonly">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">City</label>
-            <input class="ss_form_input" data-field="PropertyInfo.City" readonly="readonly">
+            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.City" readonly="readonly">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">State</label>
-            <input class="ss_form_input" data-field="PropertyInfo.State" readonly="readonly">
+            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.State" readonly="readonly">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Zip</label>
-            <input class="ss_form_input" data-field="PropertyInfo.Zipcode" readonly="readonly">
+            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.Zipcode" readonly="readonly">
         </li>
         
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">BLOCK</label>
-            <input class="ss_form_input" data-field="PropertyInfo.Block" readonly="readonly">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Lot</label>
-            <input class="ss_form_input" data-field="PropertyInfo.Lot" readonly="readonly">
-        </li>
+       
         <li class="ss_form_item">
             <label class="ss_form_input_title">Building type</label>
-            <select class="ss_form_input" data-field="PropertyInfo.BuildingType">
+            <select class="ss_form_input" ng-model="SsCase.PropertyInfo.BuildingType">
                 <option value="House">House</option>
                 <option value="Apartment">Apartment</option>
                 <option value="Condo">Condo</option>
@@ -66,16 +67,16 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title"># Of stories</label>
-            <input class="ss_form_input" type="number" data-field="PropertyInfo.NumOfStories">
+            <input class="ss_form_input" type="number" ng-model="SsCase.PropertyInfo.NumOfStories">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title"># Of Unit</label>
-            <input class="ss_form_input" type="number" data-field="PropertyInfo.NumOfUnit">
+            <input class="ss_form_input" type="number" ng-model="SsCase.PropertyInfo.NumOfUnit">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Accessibility</label>
-            <input class="ss_form_input" type="number" data-field="PropertyInfo.Accessibility">
-            <%--<select class="ss_form_input" data-field="PropertyInfo.Accessibility">
+            <input class="ss_form_input" type="number" ng-model="SsCase.PropertyInfo.Accessibility">
+            <%--<select class="ss_form_input" ng-model="SsCase.PropertyInfo.Accessibility">
                 <option value="Lockbox-LOC">Lockbox-LOC</option>
                 <option value="Master Key">Master Key</option>
                 <option value="Homeowner's key">Homeowner's key</option>
@@ -86,7 +87,7 @@
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">Investor</label>
-            <select class="ss_form_input" data-field="PropertyInfo.Investor">
+            <select class="ss_form_input" ng-model="SsCase.PropertyInfo.Investor">
                 <option >Investor 1</option>
                 <option >Investor 2</option>
                 <option >Investor 3</option>
@@ -97,12 +98,12 @@
         <li class="ss_form_item">
             <span class="ss_form_input_title">c/o(<span class="linkey_pdf">pdf</span>)</span>
 
-            <input type="radio" class="ss_form_input" data-field="PropertyInfo.CO" data-radio="Y" id="key_PropertyInfo_checkYes_CO" name="pdf" value="YES">
+            <input type="radio" class="ss_form_input" ng-model="SsCase.PropertyInfo.CO" data-radio="Y" id="key_PropertyInfo_checkYes_CO" name="pdf" value="YES">
             <label for="key_PropertyInfo_checkYes_CO" class="input_with_check">
                 <span class="box_text">Yes</span>
             </label>
 
-            <input type="radio" class="ss_form_input" data-field="PropertyInfo.CO" id="none_pdf_checkey_no21" name="pdf" value="NO">
+            <input type="radio" class="ss_form_input" ng-model="SsCase.PropertyInfo.CO" id="none_pdf_checkey_no21" name="pdf" value="NO">
             <label for="none_pdf_checkey_no21" class="input_with_check">
                 <span class="box_text"><span class="box_text">No</span></span>
             </label>
@@ -112,10 +113,10 @@
         <li class="ss_form_item">
             <span class="ss_form_input_title">Freddie Mac</span>
 
-            <input type="radio" id="key_PropertyInfo_checkYes_FreddieMac" class="ss_form_input" data-field="PropertyInfo.FreddieMac" data-radio="Y" name="Freddie_Mac1" value="YES">
+            <input type="radio" id="key_PropertyInfo_checkYes_FreddieMac" class="ss_form_input" ng-model="SsCase.PropertyInfo.FreddieMac" data-radio="Y" name="Freddie_Mac1" value="YES">
             <label for="key_PropertyInfo_checkYes_FreddieMac" class="input_with_check"><span class="box_text">Yes</span></label>
 
-            <input type="radio" id="none_pdf_checkey_no24" class="ss_form_input" data-field="PropertyInfo.FreddieMac" name="Freddie_Mac1" value="NO">
+            <input type="radio" id="none_pdf_checkey_no24" class="ss_form_input" ng-model="SsCase.PropertyInfo.FreddieMac" name="Freddie_Mac1" value="NO">
             <label for="none_pdf_checkey_no24" class="input_with_check"><span class="box_text">No</span></label>
 
         </li>
