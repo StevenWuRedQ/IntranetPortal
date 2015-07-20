@@ -339,9 +339,9 @@
             
             var test = 123;
             /////////////////Code Scope Steph ////////////////
-            $scope.SsCase[DealInfo] = {};
-            $scope.SsCase[DealInfo][Valuations] = [{}, ];
-            $scope.SsCase[DealInfo][Offers] = [{}, ];
+            $scope.SsCase.DealInfo = {};
+            $scope.SsCase.DealInfo.Valuations = [{}, ];
+            $scope.SsCase.DealInfo.Offers = [{}, ];
 
         });
        
