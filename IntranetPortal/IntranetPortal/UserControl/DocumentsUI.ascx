@@ -33,7 +33,7 @@
         }
     }
 
-    function OnFilePopUpClick(s, e) {
+    function OnFilePopUpClick(s, e) { 
         if (tmpFileId == null)
             return;
 
