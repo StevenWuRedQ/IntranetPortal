@@ -53,7 +53,6 @@
             gridLeads.GetValuesOnCustomCallback(gridLeads.GetFocusedRowIndex(), OnGetRowValues);
         }
         else {
-
             leadsInfoBBLE = values;
             ContentCallbackPanel.PerformCallback(values);
         }

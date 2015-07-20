@@ -247,7 +247,7 @@ Public Class ShortSalePage
         'Dim json As New JavaScriptSerializer
         'Return json.Serialize(ssCase)
         Dim emp = Employee.GetInstance(ssCase.ReferralContact.Name)
-        If Not emp.Position = "Manager" Then
+        If emp IsNot Nothing AndAlso Not emp.Position = "Manager" Then
             ssCase.ReferralManager = Employee.GetInstance(ssCase.ReferralContact.Name).Manager
         Else
             ssCase.ReferralManager = ssCase.ReferralContact.Name
