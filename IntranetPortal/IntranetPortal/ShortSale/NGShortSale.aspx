@@ -327,7 +327,7 @@
         portalApp.controller('ShortSaleCtrl', function ($scope, $http, $element, $parse) {
             //Init Steven /////////
             $scope.SsCase = {
-                PropertyInfo: { Owners: [{Contacts:[] ,Notes:[]}] }
+                PropertyInfo: { Owners: [{Contacts:[] ,Notes:[]}],PropFloors:[] }
 
             };
             $scope.NGAddArraryItem =function(item)

@@ -12,12 +12,16 @@
 <div>
     <h4 class="ss_form_title">Property Address</h4>
     <ul class="ss_form_box clearfix">
-
+        
         <li class="ss_form_item">
-            <label class="ss_form_input_title">Street Number</label>
-            <input class="ss_form_input" ng-value="SsCase.PropertyInfo.Block +'/'+SsCase.PropertyInfo.Lot">
+            <label class="ss_form_input_title">Block/Lot</label>
+            <input class="ss_form_input" ng-value="SsCase.PropertyInfo.Block ?SsCase.PropertyInfo.Block +'/'+SsCase.PropertyInfo.Lot:''">
         </li>
         <li class="ss_form_item" style="visibility: hidden">
+            <label class="ss_form_input_title">BBLE</label>
+            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.BBLE">
+        </li>
+         <li class="ss_form_item" style="visibility: hidden">
             <label class="ss_form_input_title">BBLE</label>
             <input class="ss_form_input" ng-model="SsCase.PropertyInfo.BBLE">
         </li>
@@ -44,25 +48,6 @@
         <li class="ss_form_item">
             <label class="ss_form_input_title">Zip</label>
             <input class="ss_form_input" ng-model="SsCase.PropertyInfo.Zipcode" readonly="readonly">
-        </li>
-
-
-
-
-
-        <li class="ss_form_item">
-            <span class="ss_form_input_title">c/o(<span class="linkey_pdf">pdf</span>)</span>
-
-            <input type="radio" class="ss_form_input" ng-model="SsCase.PropertyInfo.CO" data-radio="Y" id="key_PropertyInfo_checkYes_CO" name="pdf" value="YES">
-            <label for="key_PropertyInfo_checkYes_CO" class="input_with_check">
-                <span class="box_text">Yes</span>
-            </label>
-
-            <input type="radio" class="ss_form_input" ng-model="SsCase.PropertyInfo.CO" id="none_pdf_checkey_no21" name="pdf" value="NO">
-            <label for="none_pdf_checkey_no21" class="input_with_check">
-                <span class="box_text"><span class="box_text">No</span></span>
-            </label>
-
         </li>
 
 
@@ -110,15 +95,17 @@
         </li>
         <li class="ss_form_item">&nbsp;
         </li>
+         <li class="ss_form_item">
+            <label class="ss_form_input_title">Tax Class</label>
+            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.TaxClass">
+        </li>
+        
         <li class="ss_form_item">
             <label class="ss_form_input_title">Total Units</label>
             <input class="ss_form_input" ng-model="SsCase.PropertyInfo.PropertyAddress">
         </li>
 
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Year Built</label>
-            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.UnitNum">
-        </li>
+      
         <li class="ss_form_item">
             <label class="ss_form_input_title">Year Built</label>
             <input class="ss_form_input" ng-model="SsCase.PropertyInfo.YearBuilt">
@@ -184,7 +171,7 @@
         </thead>
         <tr ng-repeat="floor in SsCase.PropertyInfo.PropFloors">
             <td>
-                {{$index}}
+                {{$index+1}}
             </td>
             <td>
                 <input class="ss_form_input" ng-model="floor.Bedroom">
@@ -205,7 +192,7 @@
                 <input class="ss_form_input" ng-model="floor.Occupied">
             </td>
              <td>
-                <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" ng-click="NGDeleteItem($index,SsCase.PropertyInfo.PropFloors)" title="Delete"></i>
+                <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" ng-click="NGDeleteItem(SsCase.PropertyInfo.PropFloors,$index)" title="Delete"></i>
             </td>
         </tr>
     </table>
