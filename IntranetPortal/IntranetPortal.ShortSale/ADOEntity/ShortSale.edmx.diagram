@@ -22,7 +22,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.GroupType" Width="1.5" PointX="8.625" PointY="9.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyValueInfo" Width="1.75" PointX="6.5" PointY="3.25" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyMortgage" Width="1.75" PointX="2.625" PointY="8.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.PropertyOwner" Width="1.5" PointX="12.375" PointY="1" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PropertyOwner" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleOverview" Width="1.75" PointX="12.375" PointY="7.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleBuyer" Width="1.5" PointX="14.125" PointY="3.125" />
       </Diagram>

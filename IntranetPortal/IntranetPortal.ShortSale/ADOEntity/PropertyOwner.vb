@@ -38,5 +38,6 @@ Partial Public Class PropertyOwner
     Public Property CreateBy As String
     Public Property CreateDate As Nullable(Of Date)
     Public Property EstateAttorneyId As Nullable(Of Integer)
+    Public Property MiddleName As String
 
 End Class
