@@ -503,8 +503,6 @@ Public Class Troubleshooting
         End Using
     End Function
 
-
-
     Private Sub Button10_Click_1(sender As Object, e As EventArgs) Handles Button10.Click
         IntranetPortal.ShortSaleManage.UpdateReferral()
         MessageBox.Show("Complete!")
@@ -548,5 +546,16 @@ Public Class Troubleshooting
 
     Private Sub btnGeoBBLE_Click(sender As Object, e As EventArgs) Handles btnGeoBBLE.Click
         txtGeoBBLE.Text = DataWCFService.GeoCode(txtGeoAddress.Text)
+    End Sub
+
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        Using client As New PortalService.CommonServiceClient
+            'sending email by email address
+            client.SendEmailByAddress("chrisy@myidealprop.com", "georgev@myidealprop.com", "testing eamil api", "this is email send by portal api.")
+
+            'sending email by User Name
+            client.SendEmail("Chris Yan", "testing eamil api", "this is email send by portal api.")
+
+        End Using
     End Sub
 End Class

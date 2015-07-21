@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:50214/WCFDataServices/CommonService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:60956/WCFDataServices/CommonService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="CommonService3.xsd" MetadataType="Schema" ID="62e819d1-6e69-41bf-8054-c0eec97c3664" SourceId="1" SourceUrl="http://localhost:50214/WCFDataServices/CommonService.svc?xsd=xsd2" />
-    <MetadataFile FileName="CommonService31.xsd" MetadataType="Schema" ID="c2b1249e-7ba6-4581-91e3-8ef2399dc86b" SourceId="1" SourceUrl="http://localhost:50214/WCFDataServices/CommonService.svc?xsd=xsd1" />
-    <MetadataFile FileName="CommonService1.wsdl" MetadataType="Wsdl" ID="00e37101-1132-4935-9801-0784fd8056f0" SourceId="1" SourceUrl="http://localhost:50214/WCFDataServices/CommonService.svc?wsdl" />
-    <MetadataFile FileName="CommonService32.xsd" MetadataType="Schema" ID="6c1cc0cc-248e-4738-ad92-6188d99be107" SourceId="1" SourceUrl="http://localhost:50214/WCFDataServices/CommonService.svc?xsd=xsd0" />
-    <MetadataFile FileName="CommonService1.disco" MetadataType="Disco" ID="49feb6a4-1c1f-4674-b043-76634b32004e" SourceId="1" SourceUrl="http://localhost:50214/WCFDataServices/CommonService.svc?disco" />
+    <MetadataFile FileName="CommonService.xsd" MetadataType="Schema" ID="cbb9ebc7-8226-4ca3-9562-72db90eecaac" SourceId="1" SourceUrl="http://localhost:60956/wcfdataservices/CommonService.svc?xsd=xsd1" />
+    <MetadataFile FileName="CommonService.wsdl" MetadataType="Wsdl" ID="b8986d7e-3a1e-467e-8ee8-ba8b5393e3b0" SourceId="1" SourceUrl="http://localhost:60956/wcfdataservices/CommonService.svc?wsdl" />
+    <MetadataFile FileName="CommonService1.xsd" MetadataType="Schema" ID="4a0e965d-ff07-468e-a820-367c15f971fa" SourceId="1" SourceUrl="http://localhost:60956/wcfdataservices/CommonService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CommonService2.xsd" MetadataType="Schema" ID="bd63d819-5a9c-45fe-8869-8fbb434304cd" SourceId="1" SourceUrl="http://localhost:60956/wcfdataservices/CommonService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CommonService.disco" MetadataType="Disco" ID="04303741-6202-453d-99b2-bdb01c4d0d25" SourceId="1" SourceUrl="http://localhost:60956/wcfdataservices/CommonService.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

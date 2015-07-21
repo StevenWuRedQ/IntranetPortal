@@ -59,6 +59,12 @@ Namespace PortalService
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendShortSaleActivityEmail", ReplyAction:="http://tempuri.org/ICommonService/SendShortSaleActivityEmailResponse")>  _
         Function SendShortSaleActivityEmailAsync() As System.Threading.Tasks.Task
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendEmailByAddress", ReplyAction:="http://tempuri.org/ICommonService/SendEmailByAddressResponse")>  _
+        Sub SendEmailByAddress(ByVal toAddress As String, ByVal ccAddress As String, ByVal subject As String, ByVal body As String)
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendEmailByAddress", ReplyAction:="http://tempuri.org/ICommonService/SendEmailByAddressResponse")>  _
+        Function SendEmailByAddressAsync(ByVal toAddress As String, ByVal ccAddress As String, ByVal subject As String, ByVal body As String) As System.Threading.Tasks.Task
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -146,6 +152,14 @@ Namespace PortalService
         
         Public Function SendShortSaleActivityEmailAsync() As System.Threading.Tasks.Task Implements PortalService.ICommonService.SendShortSaleActivityEmailAsync
             Return MyBase.Channel.SendShortSaleActivityEmailAsync
+        End Function
+        
+        Public Sub SendEmailByAddress(ByVal toAddress As String, ByVal ccAddress As String, ByVal subject As String, ByVal body As String) Implements PortalService.ICommonService.SendEmailByAddress
+            MyBase.Channel.SendEmailByAddress(toAddress, ccAddress, subject, body)
+        End Sub
+        
+        Public Function SendEmailByAddressAsync(ByVal toAddress As String, ByVal ccAddress As String, ByVal subject As String, ByVal body As String) As System.Threading.Tasks.Task Implements PortalService.ICommonService.SendEmailByAddressAsync
+            Return MyBase.Channel.SendEmailByAddressAsync(toAddress, ccAddress, subject, body)
         End Function
     End Class
 End Namespace

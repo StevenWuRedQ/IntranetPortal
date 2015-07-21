@@ -85,9 +85,10 @@ Partial Class Troubleshooting
         Me.Button10 = New System.Windows.Forms.Button()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.txtGeoAddress = New System.Windows.Forms.TextBox()
-        Me.btnGeoBBLE = New System.Windows.Forms.Button()
         Me.txtGeoBBLE = New System.Windows.Forms.TextBox()
+        Me.btnGeoBBLE = New System.Windows.Forms.Button()
+        Me.txtGeoAddress = New System.Windows.Forms.TextBox()
+        Me.Button12 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -405,6 +406,7 @@ Partial Class Troubleshooting
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Button12, 1, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -716,12 +718,12 @@ Partial Class Troubleshooting
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "GEO Address"
         '
-        'txtGeoAddress
+        'txtGeoBBLE
         '
-        Me.txtGeoAddress.Location = New System.Drawing.Point(6, 19)
-        Me.txtGeoAddress.Name = "txtGeoAddress"
-        Me.txtGeoAddress.Size = New System.Drawing.Size(199, 20)
-        Me.txtGeoAddress.TabIndex = 0
+        Me.txtGeoBBLE.Location = New System.Drawing.Point(6, 74)
+        Me.txtGeoBBLE.Name = "txtGeoBBLE"
+        Me.txtGeoBBLE.Size = New System.Drawing.Size(199, 20)
+        Me.txtGeoBBLE.TabIndex = 2
         '
         'btnGeoBBLE
         '
@@ -732,12 +734,21 @@ Partial Class Troubleshooting
         Me.btnGeoBBLE.Text = "Get BBLE"
         Me.btnGeoBBLE.UseVisualStyleBackColor = True
         '
-        'txtGeoBBLE
+        'txtGeoAddress
         '
-        Me.txtGeoBBLE.Location = New System.Drawing.Point(6, 74)
-        Me.txtGeoBBLE.Name = "txtGeoBBLE"
-        Me.txtGeoBBLE.Size = New System.Drawing.Size(199, 20)
-        Me.txtGeoBBLE.TabIndex = 2
+        Me.txtGeoAddress.Location = New System.Drawing.Point(6, 19)
+        Me.txtGeoAddress.Name = "txtGeoAddress"
+        Me.txtGeoAddress.Size = New System.Drawing.Size(199, 20)
+        Me.txtGeoAddress.TabIndex = 0
+        '
+        'Button12
+        '
+        Me.Button12.Location = New System.Drawing.Point(279, 3)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(136, 23)
+        Me.Button12.TabIndex = 1
+        Me.Button12.Text = "Send email by Service"
+        Me.Button12.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -842,4 +853,5 @@ Partial Class Troubleshooting
     Friend WithEvents txtGeoAddress As System.Windows.Forms.TextBox
     Friend WithEvents btnGeoBBLE As System.Windows.Forms.Button
     Friend WithEvents txtGeoBBLE As System.Windows.Forms.TextBox
+    Friend WithEvents Button12 As System.Windows.Forms.Button
 End Class
