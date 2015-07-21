@@ -3141,6 +3141,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\ngMask.min.js" />
     <Content Include="Scripts\phonejs-localization\dx.phonejs.de.js" />
     <Content Include="Scripts\phonejs-localization\dx.phonejs.ja.js" />
     <Content Include="Scripts\phonejs-localization\dx.phonejs.ru.js" />

@@ -11,7 +11,6 @@
     </h4>
     <div class="collapse_div">
         <div>
-
             <ul class="ss_form_box clearfix">
 
                 <li class="ss_form_item">
@@ -24,19 +23,19 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">ssn</label>
-                    <input class="ss_form_input ss_ssn" ng-model="owner.SSN">
+                    <input class="ss_form_input" mask="999-99-9999" clean="true" ng-model="owner.SSN">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">dob</label>
-                    <input class="ss_form_input ss_date" ng-model="owner.DOB">
+                    <input class="ss_form_input" ss-date ng-model="owner.DOB">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Cell #</label>
-                    <input class="ss_form_input ss_phone" ng-model="owner.Phone">
+                    <input class="ss_form_input" mask="(999) 999-9999" clean="true" ng-model="owner.Phone">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Additional #</label>
-                    <input class="ss_form_input ss_email" ng-model="owner.AdditionalNumber">
+                    <input class="ss_form_input ss_email" mask="(999) 999-9999" clean="true" ng-model="owner.AdditionalNumber">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Email Address</label>
@@ -107,7 +106,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">zip</label>
-                    <input class="ss_form_input ss_zip" ng-model="owner.MailZip">
+                    <input class="ss_form_input ss_zip" mask="99999" clean='true' ng-model="owner.MailZip">
                 </li>
 
             </ul>
