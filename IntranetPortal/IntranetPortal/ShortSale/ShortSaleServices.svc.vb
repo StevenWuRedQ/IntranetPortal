@@ -32,7 +32,6 @@ Public Class ShortSaleServices
         Return ssCase.ToJson
     End Function
 
-
     <OperationContract()>
     <WebInvoke(Method:="POST", RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json)>
     Public Sub SaveCase(ssCase As ShortSaleCase)
@@ -40,15 +39,17 @@ Public Class ShortSaleServices
     End Sub
 
 
+
+
+#End Region
+
+#Region "Page Data Service"
+
     <OperationContract()>
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetLeadsInfo(bble As String) As Channels.Message
         Return LeadsInfo.GetData(bble).ToJson
     End Function
-
-#End Region
-
-#Region "Page Data Service"
 
     <OperationContract()>
    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
