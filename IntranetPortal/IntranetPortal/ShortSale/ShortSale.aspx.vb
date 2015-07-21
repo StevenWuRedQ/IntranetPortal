@@ -253,6 +253,8 @@ Public Class ShortSalePage
             ssCase.ReferralManager = ssCase.ReferralContact.Name
         End If
 
+
+
         Return ssCase
     End Function
 

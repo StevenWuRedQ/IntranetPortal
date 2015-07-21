@@ -25,4 +25,7 @@ Public Interface ICommonService
     <OperationContract>
     Sub SendShortSaleActivityEmail()
 
+    <OperationContract()>
+    Sub SendEmailByAddress(toAddress As String, ccAddress As String, subject As String, body As String)
+
 End Interface

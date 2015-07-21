@@ -918,7 +918,11 @@ Public Class ActivityLogs
                         End If
 
                         LeadsActivityLog.AddActivityLog(aspxdate, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
-                        ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category & " - " & statusOfUpdate, txtComments)
+
+
+                        'ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category & " - " & statusOfUpdate, txtComments)
+                        ShortSaleManage.AddActivityLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category, statusOfUpdate, txtComments)
+
                     End If
                 Else
                     LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)

@@ -3,6 +3,41 @@ Imports Newtonsoft.Json.Linq
 
 Public Class ShortSaleManage
 
+    Public Shared ReadOnly Property OpenCaseLogTitle
+        Get
+            Return "OpenSSCaseLog"
+        End Get
+    End Property
+
+    Public Shared Sub AddActivityLog(bble As String, userName As String, typeOfUpdate As String, category As String, statusOfUpdate As String, comments As String)
+        ShortSale.ShortSaleActivityLog.AddLog(bble, userName, typeOfUpdate, category & " - " & statusOfUpdate, comments)
+
+
+        Dim NotifyUpdate = Sub()
+                               Try
+                                   Dim notifyEmails = Core.PortalSettings.GetValue("SSUpdateNotifyEmails")
+                                   Dim ssCase = ShortSaleCase.GetCase(bble)
+
+                                   Dim maildata As New Dictionary(Of String, String)
+                                   maildata.Add("UserName", userName)
+                                   maildata.Add("CaseName", ssCase.CaseName)
+                                   maildata.Add("Referral", ssCase.ReferralContact.Name)
+                                   maildata.Add("Address", ssCase.PropertyInfo.PropertyAddress)
+                                   maildata.Add("TypeofUpdate", typeOfUpdate)
+                                   maildata.Add("Category", category)
+                                   maildata.Add("StatusOfUpdate", statusOfUpdate)
+                                   maildata.Add("Comments", comments)
+
+                                   Core.EmailService.SendShortSaleMail(notifyEmails, "", "SSUpdateNotifyEmail", Nothing)
+                               Catch ex As Exception
+                                   Core.SystemLog.LogError("ShortSaleUpdateNotifyEmail", ex, "", "Portal", bble)
+                               End Try
+                           End Sub
+
+        System.Threading.ThreadPool.QueueUserWorkItem(NotifyUpdate)
+    End Sub
+
+
     Public Shared Sub MoveLeadsToShortSale(bble As String, createBy As String)
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
 

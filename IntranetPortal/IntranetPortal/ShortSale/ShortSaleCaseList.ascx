@@ -10,7 +10,7 @@
     function OnGridFocusedRowChanged() {
         // The values will be returned to the OnGetRowValues() function 
         if (gridCase.GetFocusedRowIndex() >= 0) {
-            if (ContentCallbackPanel.InCallback()) {
+            if (typeof ContentCallbackPanel != 'undefined' && ContentCallbackPanel.InCallback()) {
                 postponedCallbackRequired = true;
             }
             else {
@@ -22,7 +22,7 @@
                 }
             }
         }
-    }
+    }   
     
     function expandAllClick(s) {
         if (gridCase.IsGroupRowExpanded(0)) {
@@ -94,13 +94,18 @@
         else {
             caseId = values;
             //GetShortSaleData(caseId);
-            ContentCallbackPanel.PerformCallback(values);
+            RefreshContent();
         }
     }
 
     function RefreshContent() {
         if (caseId != null) {
-            ContentCallbackPanel.PerformCallback(caseId);
+            if (typeof ContentCallbackPanel != 'undefined')
+                ContentCallbackPanel.PerformCallback(caseId);
+            else
+            {
+                GetShortSaleData(caseId);
+            }
         }
     }
 

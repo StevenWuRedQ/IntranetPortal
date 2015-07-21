@@ -59,6 +59,7 @@ Public Class LegalUI
 
             End If
             Return
+
         End If
 
         If Not String.IsNullOrEmpty(Request.QueryString("lc")) Then

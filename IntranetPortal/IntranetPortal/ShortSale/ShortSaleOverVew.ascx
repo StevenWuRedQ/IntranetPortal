@@ -36,7 +36,6 @@
         if (e == null) {
             SaveClicklCallbackCallbackClinet.PerformCallback(strJson);
         }
-
     }
     function saveComplete(s, e) {
         //RefreshContent();

@@ -67,7 +67,7 @@
                                                             <div style="width: 100%; align-content: center; height: 100%" ng-controller="ShortSaleCtrl">
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
-                                                              
+
                                                                 <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
                                                                     <li class="active short_sale_head_tab">
                                                                         <a href="#" role="tab" data-toggle="tab" class="tab_button_a">
@@ -96,7 +96,6 @@
                                                                             <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                                                         </a>
                                                                         <div class="shot_sale_sub">
-
                                                                             <ul class="nav  clearfix" role="tablist">
                                                                                 <li class="short_sale_head_tab">
                                                                                     <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="" data-href="#more_leads" onclick="LoadMoreFrame(this)">
@@ -136,7 +135,7 @@
                                                                 <div class="tab-content">
                                                                     <%--<uc1:PropertyInfo runat="server" ID="PropertyInfo" />--%>
                                                                     <div class="tab-pane active" id="property_info">
-                                                                        <uc1:NGShortSaleTab runat="server" id="NGShortSaleTab" />
+                                                                        <uc1:NGShortSaleTab runat="server" ID="NGShortSaleTab" />
                                                                     </div>
                                                                     <div class="tab-pane " id="home_owner">
                                                                         <uc1:Title runat="server" ID="ucTitle" />
@@ -191,7 +190,13 @@
                                                                         </ul>
                                                                         <div class="tab-content">
                                                                             <div class="tab-pane active" id="activity_log">
-                                                                                <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="ShortSale" />
+                                                                                <dx:ASPxCallbackPanel runat="server" ID="cbpLogs" ClientInstanceName="cbpLogs" OnCallback="cbpLogs_Callback">
+                                                                                    <PanelCollection>
+                                                                                        <dx:PanelContent>
+                                                                                            <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="ShortSale" />
+                                                                                        </dx:PanelContent>
+                                                                                    </PanelCollection>
+                                                                                </dx:ASPxCallbackPanel>
                                                                             </div>
                                                                             <div class="tab-pane" id="file_overview">
                                                                                 <uc1:ShortSaleFileOverview runat="server" ID="ShortSaleFileOverview" />
@@ -295,13 +300,13 @@
     <uc1:SelectPartyUC runat="server" ID="SelectPartyUC" />
     <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
     <uc1:Common runat="server" ID="Common" />
-    <script>
+    <script type="text/javascript">
         function GetShortSaleData(caseId) {
+
             //debugger;
             $.ajax({
-                type: "POST",
-                url: "ShortSale.aspx/GetCase",
-                data: '{caseId: ' + caseId + '}',
+                type: "Get",
+                url: "ShortSaleServices.svc/GetCase?caseId=" + caseId,                
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: OnSuccess,
@@ -312,13 +317,16 @@
                     alert("Get ShortSaleData error" + response);
                 }
             });
+
+          if (cbpLogs)
+                cbpLogs.PerformCallback(caseId);
         }
 
         function OnSuccess(response) {
 
-            ShortSaleCaseData = response.d;  //JSON.parse(response.d);
+            ShortSaleCaseData = response;  //JSON.parse(response.d);
             leadsInfoBBLE = ShortSaleCaseData.BBLE;
-            ShortSaleDataBand(0);
+            //ShortSaleDataBand(0);
 
         }
     </script>

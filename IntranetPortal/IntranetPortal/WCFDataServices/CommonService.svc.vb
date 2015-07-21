@@ -9,6 +9,10 @@ Imports System.ServiceModel
 Public Class CommonService
     Implements ICommonService
 
+    Public Sub SendEmailByAddress(toAddress As String, ccAddress As String, subject As String, body As String) Implements ICommonService.SendEmailByAddress
+        IntranetPortal.Core.EmailService.SendMail(toAddress, ccAddress, subject, body, Nothing)
+    End Sub
+
     Public Sub SendEmail(userName As String, subject As String, body As String) Implements ICommonService.SendEmail
         Dim emp = Employee.GetInstance(userName)
         IntranetPortal.Core.EmailService.SendMail(emp.Email, "", subject, body, Nothing)
@@ -188,4 +192,6 @@ Public Class CommonService
             Return sb.ToString
         End Using
     End Function
+
+    
 End Class

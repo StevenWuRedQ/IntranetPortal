@@ -2,6 +2,7 @@
 Imports System.ServiceModel.Activation
 Imports System.ServiceModel.Web
 Imports System.Web.Script.Services
+Imports IntranetPortal.ShortSale
 
 <ServiceContract(Namespace:="")>
 <AspNetCompatibilityRequirements(RequirementsMode:=AspNetCompatibilityRequirementsMode.Allowed)>
@@ -12,6 +13,35 @@ Public Class ShortSaleServices
     '     add <WebGet(ResponseFormat:=WebMessageFormat.Xml)>,
     '     and include the following line in the operation body:
     '         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml"
+#Region "ShortSale Case"
+    <OperationContract()>
+    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    Public Function GetCase(caseId As Integer) As Channels.Message
+        Dim ssCase = ShortSaleCase.GetCase(caseId)
+        'Dim json As New JavaScriptSerializer
+        'Return json.Serialize(ssCase)
+        Dim emp = Employee.GetInstance(ssCase.ReferralContact.Name)
+        If emp IsNot Nothing AndAlso Not emp.Position = "Manager" Then
+            ssCase.ReferralManager = Employee.GetInstance(ssCase.ReferralContact.Name).Manager
+        Else
+            ssCase.ReferralManager = ssCase.ReferralContact.Name
+        End If
+
+        Core.SystemLog.Log(ShortSaleManage.OpenCaseLogTitle, Nothing, Core.SystemLog.LogCategory.Operation, ssCase.BBLE, HttpContext.Current.User.Identity.Name)
+
+        Return ssCase.ToJson
+    End Function
+
+    <OperationContract()>
+    <WebInvoke(Method:="POST", RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json)>
+    Public Sub SaveCase(ssCase As ShortSaleCase)
+        ssCase.SaveChanges()
+    End Sub
+
+#End Region
+
+
+
 
 #Region "Page Data Service"
 
