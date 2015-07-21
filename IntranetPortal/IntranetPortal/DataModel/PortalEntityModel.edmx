@@ -586,6 +586,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="TeamId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Manager" Type="nvarchar" MaxLength="500" />
+          <Property Name="Assistant" Type="nvarchar" MaxLength="500" />
+          <Property Name="OfficeNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="ParentId" Type="int" />
         </EntityType>
@@ -1767,6 +1770,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="Manager" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ParentId" Type="Int32" />
+          <Property Name="Assistant" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserInTeam">
           <Key>
@@ -2641,6 +2647,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="Teams">
             <EntityTypeMapping TypeName="IntranetPortalModel.Team">
               <MappingFragment StoreEntitySet="Teams">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="OfficeNo" ColumnName="OfficeNo" />
+                <ScalarProperty Name="Assistant" ColumnName="Assistant" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Manager" ColumnName="Manager" />

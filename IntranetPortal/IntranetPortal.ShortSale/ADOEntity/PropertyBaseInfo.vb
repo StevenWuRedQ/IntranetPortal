@@ -35,5 +35,6 @@ Partial Public Class PropertyBaseInfo
     Public Property UpdateBy As String
     Public Property Borough As String
     Public Property AptNo As String
+    Public Property COClass As String
 
 End Class

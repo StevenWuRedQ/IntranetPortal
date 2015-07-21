@@ -102,6 +102,7 @@
           <Property Name="BuildingType" Type="nvarchar" MaxLength="50" />
           <Property Name="NumOfStories" Type="int" />
           <Property Name="NumOfUnit" Type="int" />
+          <Property Name="COClass" Type="nvarchar" MaxLength="50" />
           <Property Name="Accessibility" Type="nvarchar" MaxLength="50" />
           <Property Name="TaxClass" Type="nvarchar" MaxLength="50" />
           <Property Name="NumOfFamilies" Type="int" />
@@ -228,6 +229,8 @@
           <Property Name="TaxReturn" Type="bit" />
           <Property Name="EstateDocument" Type="bit" />
           <Property Name="ActingAsSellerAttorney" Type="bit" />
+          <Property Name="Contacts" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
@@ -603,6 +606,7 @@
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Borough" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AptNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ShortSaleCaseComment">
           <Key>
@@ -817,6 +821,8 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="EstateAttorneyId" Type="Int32" />
           <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contacts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ShortSaleOverview">
           <Key>
@@ -984,6 +990,7 @@
           <EntitySetMapping Name="PropertyBaseInfoes">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyBaseInfo">
               <MappingFragment StoreEntitySet="PropertyBaseInfo">
+                <ScalarProperty Name="COClass" ColumnName="COClass" />
                 <ScalarProperty Name="AptNo" ColumnName="AptNo" />
                 <ScalarProperty Name="Borough" ColumnName="Borough" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
@@ -1205,6 +1212,8 @@
           <EntitySetMapping Name="PropertyOwners">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyOwner">
               <MappingFragment StoreEntitySet="PropertyOwners">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Contacts" ColumnName="Contacts" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="EstateAttorneyId" ColumnName="EstateAttorneyId" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />

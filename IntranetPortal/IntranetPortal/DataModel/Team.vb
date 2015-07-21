@@ -16,5 +16,8 @@ Partial Public Class Team
     Public Property Manager As String
     Public Property Description As String
     Public Property ParentId As Nullable(Of Integer)
+    Public Property Assistant As String
+    Public Property OfficeNo As String
+    Public Property Address As String
 
 End Class

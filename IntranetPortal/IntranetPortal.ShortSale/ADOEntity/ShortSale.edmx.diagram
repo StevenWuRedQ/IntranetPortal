@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.CleareneceNote" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PartyContact" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyFloor" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.PropertyTitle" Width="1.5" PointX="2.625" PointY="4.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PropertyTitle" Width="1.5" PointX="2.625" PointY="5.125" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCase" Width="1.5" PointX="8.625" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.TitleClearence" Width="1.5" PointX="10.625" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyBaseInfo" Width="1.5" PointX="4.75" PointY="0.5" />
