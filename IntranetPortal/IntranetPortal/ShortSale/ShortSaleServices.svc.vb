@@ -38,9 +38,6 @@ Public Class ShortSaleServices
         ssCase.SaveChanges()
     End Sub
 
-
-
-
 #End Region
 
 #Region "Page Data Service"
