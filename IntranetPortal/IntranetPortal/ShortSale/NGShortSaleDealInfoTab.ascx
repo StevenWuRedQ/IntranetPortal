@@ -84,7 +84,7 @@
             <th>Date Expires</th>
             <th>Value</th>
             <th>Min Net</th>
-            <th><i class="fa fa-plus-circle"></i></th>
+            <th><i class="fa fa-plus-circle" ng-click="NGAddArraryItem(SsCase.DealInfo.Valuations)"></i></th>
         </tr>
         <tr ng-repeat="valuation in SsCase.DealInfo.Valuations">
             <td>
@@ -112,8 +112,7 @@
             </td>
 
             <td>
-                <i class="fa fa-check text-success"></i>
-                <i class="fa fa-minus-circle text-warning"></i>
+                <i class="fa fa-minus-circle text-warning" ng-click="NGremoveArrayItem(SsCase.DealInfo.Valuations, index)"></i>
             </td>
         </tr>
     </table>
@@ -132,7 +131,7 @@
             <th>Date of Contract</th>
             <th>Offer Amount</th>
             <th>Date Submitted</th>
-            <th><i class="fa fa-plus-circle"></i></th>
+            <th><i class="fa fa-plus-circle" ng-click="NGAddArraryItem(SsCase.DealInfo.Offers)"></i></th>
         </tr>
 
         <tr ng-repeat="offer in SsCase.DealInfo.Offers">
@@ -151,20 +150,19 @@
                 <input class="ss_form_input disabled" ng-model="valuation.Signor">
             </td>
             <td>
-                <input class="ss_form_input disabled" ss-date="" ng-model="valuation.DateCorpFormed">
+                <input class="ss_form_input disabled" ss-date ng-model="valuation.DateCorpFormed">
             </td>
             <td>
-                <input class="ss_form_input " ss-date="" ng-model="valuation.DateOfContract">
+                <input class="ss_form_input " ss-date ng-model="valuation.DateOfContract">
             </td>
             <td>
                 <input class="ss_form_input " ng-model="valuation.OfferAmount">
             </td>
             <td>
-                <input class="ss_form_input " ss-date="" ng-model="valuation.DateSubmitted">
+                <input class="ss_form_input " ss-date ng-model="valuation.DateSubmitted">
             </td>
             <td>
-                <i class="fa fa-check text-success"></i>
-                <i class="fa fa-minus-circle text-warning"></i>
+                <i class="fa fa-minus-circle text-warning"  ng-click="NGRemoveArrayItem(SsCase.DealInfo.Offers, index)"></i>
             </td>
         </tr>
     </table>

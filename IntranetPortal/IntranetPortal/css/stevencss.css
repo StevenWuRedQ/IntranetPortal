@@ -2467,3 +2467,26 @@ li.mag_tabv.active {
 	transform: scaleY(0);
 	opacity: 0;
 }
+
+.input-group-addon {
+
+	padding: 6px 6px;
+	background-color: white;
+	border: 0px;
+	border-bottom: 1px solid #dde0e7;
+	border-radius: 0px
+}
+
+.tab-switch li.active {
+	background: white !important;
+}
+
+.tab-switch .nav-tabs > li.active > a, 
+.tab-switch .nav-tabs > li.active > a:hover,
+.tab-switch .nav-tabs > li.active > a:focus {
+	font-size: 14px;
+	border: 1px solid #ddd !important;
+	border-bottom-color: transparent !important
+}
+
+

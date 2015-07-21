@@ -345,10 +345,13 @@
             
             var test = 123;
             /////////////////Code Scope Steph ////////////////
+            $scope.NGremoveArrayItem = function (item, index) {
+                item.splice(index, 1);
+            }
             $scope.SsCase.Mortgages = [{
+                active: true,
                 Contacts: [],
                 Notes: []
-
             }, ];
             $scope.SsCase.DealInfo = {
                 Valuations: [{}, ],

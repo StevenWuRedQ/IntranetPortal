@@ -736,7 +736,6 @@
 
 
             $scope.InitContact = function (id, dataSourceName) {
-
                 return {
                     dataSource: dataSourceName ? $scope[dataSourceName] : $scope.ContactDataSource,
                     valueExpr: 'ContactId',

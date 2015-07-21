@@ -85,7 +85,7 @@
     }
 
 </script>
-{{SsCase.PropertyInfo.Owners| json}}
+{{SsCase| json}}
 <dx:ASPxCallbackPanel ID="ShortSaleCaseSavePanel" ClientInstanceName="ShortSaleCaseSavePanelClient" runat="server" Width="100%">
     <PanelCollection>
         <dx:PanelContent>

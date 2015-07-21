@@ -2,20 +2,22 @@
 <%@ Import Namespace="IntranetPortal.ShortSale" %>
 <%@ Import Namespace="IntranetPortal" %>
 
-<div ng-repeat="owner in SsCase.PropertyInfo.Owners" class="ss_array">
-    <h4 class="ss_form_title title_with_line">
-        <span class="title_index title_span">Seller {{$index+1}}</span>&nbsp;
-        <i class="fa fa-expand expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>&nbsp;
-        <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.PropertyInfo.Owners)" title="Add"></i>
-        <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="Delete"></i>
-    </h4>
+<tabset class="tab-switch">
+    <tab ng-repeat="owner in SsCase.PropertyInfo.Owners" active="owner.active" disable="owner.disabled">
+                <tab-heading>Seller {{$index+1}} </tab-heading>
     <div class="collapse_div">
+               <div class="text-right"><i class="fa fa-times btn tooltip-examples" ng-show="SsCase.PropertyInfo.Owners.length>=2" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.Owners, $index)" title="Delete" style="border:1px solid; border-radius:3px; margin:2px"></i></div>
+
         <div>
             <ul class="ss_form_box clearfix">
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">First name</label>
                     <input class="ss_form_input ss_not_empty" ng-model="owner.FirstName">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Middle name</label>
+                    <input class="ss_form_input ss_not_empty" ng-model="owner.MiddleName">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Last name</label>
@@ -68,17 +70,17 @@
         </div>
         <div class="ss_form">
 
-            <h4 class="ss_form_title">Notes <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Notes)" title="Add"></i></h4>
+
+                        <h4 class="ss_form_title">Notes <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Notes)" title="Add"></i></h4>
             <ul class="ss_form_box clearfix" ng-repeat="(index,note) in owner.Notes">
-                <li style="list-style-type: none">
-                    <h4>Note {{index + 1}} </h4>
-                </li>
                 <li class="ss_form_item ss_form_item_line">
-                    <label class="ss_form_input_title">Note</label>
-                    <textarea class="edit_text_area text_area_ss_form"></textarea>
+                    <label class="ss_form_input_title">Note {{index + 1}}&nbsp;<i class="fa fa-minus-circle text-warning" ng-click="NGremoveArrayItem(owner.Notes, index)"></i></label>                    
+                    <textarea class="edit_text_area text_area_ss_form" ng-model="note.Content"></textarea>
                 </li>
 
             </ul>
+
+
         </div>
         <div class="ss_form">
             <h4 class="ss_form_title">mailing address</h4>
@@ -197,4 +199,6 @@
             </ul>
         </div>--%>
     </div>
-</div>
+        </tab>
+       <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.PropertyInfo.Owners)" ng-show="SsCase.PropertyInfo.Owners.length<=2" title="Add"></i>
+</tabset>
