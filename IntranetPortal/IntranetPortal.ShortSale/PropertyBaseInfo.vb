@@ -1,7 +1,7 @@
 ﻿
 Partial Public Class PropertyBaseInfo
 
-    Public ReadOnly Property PropertyAddress
+    Public ReadOnly Property PropertyAddress As String
         Get
             Return IntranetPortal.Core.PropertyHelper.BuildPropertyAddress(Number, StreetName, "", City, Zipcode)
         End Get

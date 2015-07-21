@@ -1,6 +1,11 @@
 ﻿Imports System.Threading
 
 Partial Public Class SystemLog
+
+    Public Shared Sub Log(title As String, description As String, category As LogCategory, bble As String, createBy As String)
+        Log(title, description, category.ToString, bble, createBy)
+    End Sub
+
     Public Shared Sub Log(title As String, description As String, category As String, bble As String, createBy As String)
         Using ctx As New CoreEntities
             Dim log As New SystemLog
@@ -13,7 +18,6 @@ Partial Public Class SystemLog
 
             ctx.SystemLogs.Add(log)
             ctx.SaveChanges()
-
         End Using
     End Sub
 
@@ -23,6 +27,11 @@ Partial Public Class SystemLog
             Return
         End If
 
-        Log(title, String.Format("Error in Portal Application. Message:{0}, Request URL: {2}. Stack: {1}", ex.Message, ex.StackTrace, url), "Error", bble, createby)
+        Log(title, String.Format("Error in Portal Application. Message:{0}, Request URL: {2}. Stack: {1}", ex.Message, ex.StackTrace, url), LogCategory.Error, bble, createby)
     End Sub
+
+    Public Enum LogCategory
+        [Error]
+        Operation
+    End Enum
 End Class
