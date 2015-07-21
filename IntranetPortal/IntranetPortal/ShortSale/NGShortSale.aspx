@@ -64,7 +64,7 @@
                                                     </PaneStyle>
                                                     <ContentCollection>
                                                         <dx:SplitterContentControl ID="SplitterContentControl3" runat="server">
-                                                            <div style="width: 100%; align-content: center; height: 100%" ng-controller="ShortSaleCtrl">
+                                                            <div style="width: 100%; align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
 
@@ -72,7 +72,7 @@
                                                                     <li class="active short_sale_head_tab">
                                                                         <a href="#" role="tab" data-toggle="tab" class="tab_button_a">
                                                                             <i class="fa fa-sign-out fa-info-circle head_tab_icon_padding"></i>
-                                                                            <div class="font_size_bold">Eviction</div>
+                                                                            <div class="font_size_bold">ShortSale</div>
                                                                         </a>
                                                                     </li>
 
@@ -288,7 +288,7 @@
                                         </dx:ASPxSplitter>
                                     </dx:PanelContent>
                                 </PanelCollection>
-                                <ClientSideEvents EndCallback="function(s,e){GetShortSaleData(caseId);}" />
+
                             </dx:ASPxCallbackPanel>
                         </dx:SplitterContentControl>
                     </ContentCollection>
@@ -304,21 +304,22 @@
         function GetShortSaleData(caseId) {
 
             //debugger;
-            $.ajax({
-                type: "Get",
-                url: "ShortSaleServices.svc/GetCase?caseId=" + caseId,                
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess,
-                failure: function (response) {
-                    alert("Get ShortSaleData failed" + response);
-                },
-                error: function (response) {
-                    alert("Get ShortSaleData error" + response);
-                }
-            });
+            //$.ajax({
+            //    type: "Get",
+            //    url: "ShortSaleServices.svc/GetCase?caseId=" + caseId,                
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: OnSuccess,
+            //    failure: function (response) {
+            //        alert("Get ShortSaleData failed" + response);
+            //    },
+            //    error: function (response) {
+            //        alert("Get ShortSaleData error" + response);
+            //    }
+            //});
+            NGGetShortSale(caseId);
 
-          if (cbpLogs)
+            if (cbpLogs)
                 cbpLogs.PerformCallback(caseId);
         }
 
@@ -331,18 +332,47 @@
         }
     </script>
     <script>
+        function NGGetShortSale(caseId) {
+
+            angular.element(document.getElementById('ShortSaleCtrl')).scope().GetShortSaleCase(caseId);
+        }
         portalApp = angular.module('PortalApp');
         portalApp.controller('ShortSaleCtrl', function ($scope, $http, $element, $parse) {
             //Init Steven /////////
             $scope.SsCase = {
-                PropertyInfo: { Owners: [{Contacts:[] ,Notes:[]}],PropFloors:[] }
+                PropertyInfo: { Owners: [{ Contacts: [], Notes: [] }], PropFloors: [] }
 
             };
-            $scope.NGAddArraryItem =function(item)
-            {
+            $scope.GetShortSaleCase = function (caseId) {
+                var url = "ShortSaleServices.svc/GetCase?caseId=" + caseId;
+                $http.get(url).
+                    success(function (data, status, headers, config) {
+                        // this callback will be called asynchronously
+                        // when the response is available
+                        $scope.SsCase = data;
+                        leadsInfoBBLE = $scope.SsCase.BBLE
+                        var leadsInfoUrl = "ShortSaleServices.svc/GetLeadsInfo?bble=" + $scope.SsCase.BBLE;
+                        $http.get(leadsInfoUrl).
+                            success(function (data, status, headers, config) {
+                                $scope.SsCase.PropertyInfo = data;
+                            }).error(function (data, status, headers, config) {
+                               
+                                // called asynchronously if an error occurs
+                                // or server returns response with an error status.
+                                alert("Get Short sale Leads failed BBLE =" + $scope.SsCase.BBLE +" error : "+ JSON.stringify(data));
+                            });
+
+                    }).
+                    error(function (data, status, headers, config) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                        alert("Get Short sale failed CaseId= " + caseId +", error : " + JSON.stringify(data));
+                    });
+            }
+            $scope.NGAddArraryItem = function (item) {
                 item.push({});
             }
-            
+
             var test = 123;
             /////////////////Code Scope Steph ////////////////
             $scope.NGremoveArrayItem = function (item, index) {
@@ -359,7 +389,7 @@
             };
 
         });
-       
+
     </script>
 
 </asp:Content>

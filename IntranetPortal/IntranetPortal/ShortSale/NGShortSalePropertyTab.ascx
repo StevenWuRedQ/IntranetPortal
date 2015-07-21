@@ -17,7 +17,7 @@
             <label class="ss_form_input_title">Block/Lot</label>
             <input class="ss_form_input" ng-value="SsCase.PropertyInfo.Block ?SsCase.PropertyInfo.Block +'/'+SsCase.PropertyInfo.Lot:''">
         </li>
-        <li class="ss_form_item" style="visibility: hidden">
+        <li class="ss_form_item" >
             <label class="ss_form_input_title">BBLE</label>
             <input class="ss_form_input" ng-model="SsCase.PropertyInfo.BBLE">
         </li>
@@ -69,12 +69,9 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Access</label>
-            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.TTT">
+            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.Access">
         </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">TTTT</label>
-            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.Fillable">
-        </li>
+       
         <li class="ss_form_item">
             <label class="ss_form_input_title">Lockbox</label>
             <input class="ss_form_input" ng-model="SsCase.PropertyInfo.Lockbox">
@@ -102,10 +99,8 @@
         
         <li class="ss_form_item">
             <label class="ss_form_input_title">Total Units</label>
-            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.PropertyAddress">
+            <input class="ss_form_input" ng-model="SsCase.PropertyInfo.UnitNum">
         </li>
-
-      
         <li class="ss_form_item">
             <label class="ss_form_input_title">Year Built</label>
             <input class="ss_form_input" ng-model="SsCase.PropertyInfo.YearBuilt">
@@ -196,145 +191,7 @@
             </td>
         </tr>
     </table>
-    <asp:HiddenField ID="hfBble" runat="server" />
-    <asp:HiddenField ID="hfCaseId" runat="server" />
-    <div style="display: none">
-        <dx:ASPxGridView ID="home_breakdown_gridview" runat="server" KeyFieldName="BBLE;FloorId" SettingsBehavior-AllowDragDrop="false" SettingsBehavior-AllowSort="false" OnRowInserting="home_breakdown_gridview_RowInserting" OnRowDeleting="home_breakdown_gridview_RowDeleting" OnRowUpdating="home_breakdown_gridview_RowUpdating">
-
-            <Columns>
-
-                <dx:GridViewCommandColumn ShowEditButton="true" ShowNewButtonInHeader="true" ShowDeleteButton="True" />
-                <%--<dx:GridViewDataColumn FieldName="FloorId" VisibleIndex="1" Caption="Floor" 
-                    
-                    />--%>
-
-
-                <dx:GridViewDataColumn FieldName="FloorId" VisibleIndex="1" Caption="Floor" ReadOnly="true">
-                    <EditItemTemplate>
-                        <span>
-                            <%# GetFloorId(Eval("FloorId"))%>
-                        </span>
-                    </EditItemTemplate>
-
-                </dx:GridViewDataColumn>
-                <dx:GridViewDataColumn FieldName="Bedroom" VisibleIndex="1" />
-                <dx:GridViewDataColumn FieldName="Bathroom" VisibleIndex="2" />
-                <dx:GridViewDataColumn FieldName="Livingroom" VisibleIndex="3" />
-                <dx:GridViewDataColumn FieldName="Kitchen" VisibleIndex="4" />
-                <dx:GridViewDataColumn FieldName="Diningroom" VisibleIndex="5" />
-                <dx:GridViewDataColumn FieldName="Occupied" VisibleIndex="5" />
-                <%--<dx:GridViewDataColumn FieldName="Lease" VisibleIndex="5" />
-                <dx:GridViewDataColumn FieldName="Type" VisibleIndex="5" />
-                <dx:GridViewDataColumn FieldName="Rent" VisibleIndex="5" />
-
-                <dx:GridViewDataColumn FieldName="BoilerRoom" VisibleIndex="5" />--%>
-            </Columns>
-            <SettingsEditing Mode="PopupEditForm" />
-
-
-        </dx:ASPxGridView>
-
-        <%--   <table class="table">
-            <thead>
-                <tr>
-                    <th>Bedrooms</th>
-                    <th>Bathrooms</th>
-                    <th>Living Room</th>
-                    <th>Kitcken</th>
-                    <th>Dining Room</th>
-                    <th>Whatever</th>
-                    <th>Effective</th>
-                    <th>Basement</th>
-                    <th>1st floor</th>
-                    <th>2nd floor</th>
-                    <th>3rd floor</th>
-                    <th>4th floor</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="font_14">
-                    <td>Bedrooms</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                </tr>
-                <tr class="font_14">
-                    <td>Bathrooms</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>2</td>
-                </tr>
-                <tr class="font_14">
-                    <td>Living Room</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>3</td>
-                </tr>
-                <tr class="font_14">
-                    <td>Kitcken</td>
-                    <td>4</td>
-                    <td>4</td>
-                    <td>4</td>
-                    <td>4</td>
-                    <td>4</td>
-                </tr>
-                <tr class="font_14">
-                    <td>Dining Room</td>
-                    <td>6</td>
-                    <td>6</td>
-                    <td>6</td>
-                    <td>6</td>
-                    <td>6</td>
-                </tr>
-                <tr class="font_14">
-                    <td>Occupied</td>
-                    <td>Homeowner</td>
-                    <td>Homeowner</td>
-                    <td>Homeowner</td>
-                    <td>Homeowner</td>
-                    <td>Homeowner</td>
-                </tr>
-                <tr class="font_14">
-                    <td>Lease</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                </tr>
-                <tr class="font_14">
-                    <td>Rent</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                </tr>
-                <tr class="font_14">
-                    <td>Type</td>
-                    <td>Whatever</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr class="font_14">
-                    <td>Boiler Room</td>
-                    <td>1</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>--%>
-    </div>
+   
     <%------end-------%>
 </div>
 
