@@ -36,9 +36,9 @@ Public Class Utility
         Dim toProperties = toType.GetProperties
 
         For Each prop In type.GetProperties
-            If prop.PropertyType.IsPrimitive Or prop.PropertyType.Equals(GetType(System.String)) Then
-                Dim toProp = toType.GetProperty(prop.Name)
+            Dim toProp = toType.GetProperty(prop.Name)
 
+            If toProp.PropertyType.IsPrimitive Or toProp.PropertyType Is GetType(String) Or toProp.PropertyType.IsValueType Then
                 If toProp IsNot Nothing AndAlso toProp.CanWrite Then
                     toProp.SetValue(toObj, prop.GetValue(fromObj))
                 End If
