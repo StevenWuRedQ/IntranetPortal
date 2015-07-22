@@ -340,8 +340,6 @@
         portalApp = angular.module('PortalApp');
         portalApp.controller('ShortSaleCtrl', function ($scope, $http, $element, $parse) {
 
-
-
             /////test contact ///////////////
             var cStore = new DevExpress.data.CustomStore({
                 load: function (loadOptions) {

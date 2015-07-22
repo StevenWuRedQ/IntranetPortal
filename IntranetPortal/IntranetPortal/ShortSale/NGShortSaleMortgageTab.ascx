@@ -15,11 +15,11 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date of Sale</label>
-                    <input class="ss_form_input " ss_date ng-model="mortgage.SaleDate">
+                    <input class="ss_form_input " ss_date ng-model="mortgage.DateOfSale">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date Verified</label>
-                    <input class="ss_form_input " ss_date ng-model="mortgage.VerifiedDate">
+                    <input class="ss_form_input " ss_date ng-model="mortgage.DateVerified">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Requested</label>
@@ -28,7 +28,7 @@
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Expires</label>
-                    <input class="ss_form_input " ng-model="mortgage.PayoffExpires">
+                    <input class="ss_form_input " ng-model="mortgage.PayoffExpired">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Amount</label>
@@ -39,23 +39,21 @@
         </div>
 
         <div class="ss_form">
-            <h4 class="ss_form_title">Mortgage Company<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('AssignedProcessor', function(party){ShortSaleCaseData.Processor=party.ContactId})"></i></h4>
-            <ul class="ss_form_box clearfix">
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Bank Name</label>
+            <h4 class="ss_form_title">Mortgage Company&nbsp<i class="fa fa-compress btn  text-primary" ng-click="mortgageCompany = !mortgageCompanyCollapse"></i></h4>
                     <select class="ss_form_input" ng-model="mortgage.BankName">
                         <option>A</option>
                         <option>B</option>
                         <option>C</option>
                     </select>
-                </li>
+            <ul class="ss_form_box clearfix">
+                <div collapse="mortgageCompany">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Category</label>
-                    <input class="ss_form_input " ng-model="mortgage.CompanyCategory">
+                    <input class="ss_form_input " ng-model="mortgage.Category">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Status</label>
-                    <input class="ss_form_input " ng-model="mortgage.CompanyStatus">
+                    <input class="ss_form_input " ng-model="mortgage.Status">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Loan #</label>
@@ -71,7 +69,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Last Payment Date</label>
-                    <input class="ss_form_input " ss_date="" ng-model="mortgage.LastPayDate">
+                    <input class="ss_form_input " ss_date="" ng-model="mortgage.LastPaymentDate">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Mortgage Type</label>
@@ -94,6 +92,7 @@
                     <input class="ss_form_input " ss_date="" ng-model="mortgage.CancelationSent">
                 </li>
             </ul>
+            </div>
         </div>
 
         <div class="ss_form_box clearfix">
@@ -183,7 +182,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Attorney Direct #</label>
-                    <input class="ss_form_input" ng-model="mortgage.AttorneyDirectNO">
+                    <input class="ss_form_input" ng-model="mortgage.AttorneyDirectNo">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Attorney Email</label>
