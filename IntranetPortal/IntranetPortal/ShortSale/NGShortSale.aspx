@@ -302,6 +302,11 @@
     <uc1:Common runat="server" ID="Common" />
     <script type="text/javascript">
         AllContact = <%= GetAllContact()%>
+            function t()
+            {
+
+            }
+        ALLTeam = <%=GetAllTeam() %>
         function GetShortSaleData(caseId) {
 
             //debugger;
@@ -435,24 +440,19 @@
                 PropertyInfo: { Owners: [{ Contacts: [], Notes: [] }], PropFloors: [] }
 
             };
-            $scope.GetTeamByName = function(teamName,model)
+            $scope.GetTeamByName = function(teamName)
             {
                 if (teamName)
                 {
-                    var d = $.Deferred();
-
-                    $.getJSON('ShortSaleServices.svc/GetTeamInfo?teamName=' + teamName).done(function (data) {
-                        d.resolve(data);
-                        
-                    });
-                    return d.promise();
+                   return ALLTeam.filter(function (o) { return o.Name == teamName })[0];
                 }
                 
             }
             $scope.GetContactByName = function(teamName)
             {
-                if(AllContact)
+                if (AllContact && teamName)
                 {
+                    var ctax = AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(teamName.toLowerCase()) >= 0 } return false })[0];
                     return AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(teamName.toLowerCase()) >= 0 } return false })[0];
                 }
                 return {}
@@ -483,8 +483,22 @@
                         alert("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
                     });
             }
-            $scope.NGAddArraryItem = function (item) {
-                item.push({});
+            $scope.NGAddArraryItem = function (item, model) {
+                if (model)
+                {
+                    var array = $scope.$eval(model);
+                    if (!array)
+                    {
+                        $scope.$eval(model + '=[{}]');
+                    }else
+                    {
+                        $scope.$eval(model + '.push({})');
+                    }
+                } else
+                {
+                    item.push({});
+                }
+                
             }
 
             var test = 123;

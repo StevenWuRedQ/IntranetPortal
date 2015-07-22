@@ -248,9 +248,7 @@ Public Class NGShortSale
         'Return json.Serialize(ssCase)
         Return ssCase
     End Function
-    Public Function GetAllContact() As String
-        Return ShortSale.PartyContact.getAllContact.ToJsonString
-    End Function
+  
     Public Shared Function CheckBox(isChecked As Boolean?) As String
         If isChecked Is Nothing Then
             Return ""
@@ -262,4 +260,10 @@ Public Class NGShortSale
         Dim ssCase = ShortSaleCase.GetCase(e.Parameter)
         ActivityLogs.BindData(ssCase.BBLE)
     End Sub
+    Public Function GetAllContact() As String
+        Return ShortSale.PartyContact.getAllContact.ToJsonString
+    End Function
+    Public Function GetAllTeam() As String
+        Return Team.GetAllTeams.ToJsonString
+    End Function
 End Class

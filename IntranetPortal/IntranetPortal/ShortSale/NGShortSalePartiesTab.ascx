@@ -64,32 +64,37 @@
                 <label class="ss_form_input_title">Manager</label>
                 <input class="ss_form_input" ng-model="GetTeamByName(SsCase.ReferralTeam).Manager">
             </li>
-
-           <%-- <li class="ss_form_item">
+             <li class="ss_form_item" style="display:none">
+                <label class="ss_form_input_title">ContactId</label>
+                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Manager).ContactId">
+            </li>
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
-                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Cell">
+                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Manager).Cell">
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Email">
-            </li>--%>
+                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Manager).Email">
+            </li>
 
-            <li class="ss_form_item">
+             <li class="ss_form_item">
                 <label class="ss_form_input_title">Assistant</label>
-                <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.Assistant">
+                <input class="ss_form_input" ng-model="GetTeamByName(SsCase.ReferralTeam).Assistant">
             </li>
-
-
+             <li class="ss_form_item" style="display:none">
+                <label class="ss_form_input_title">ContactId</label>
+                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Assistant).ContactId">
+            </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
-                <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.AssistantCellNO">
+                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Assistant).Cell">
             </li>
-
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.AssistantEmail">
+                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Assistant).Email">
             </li>
+           
         </div>
 
 
