@@ -19,5 +19,8 @@ Partial Public Class ShortSaleOffer
     Public Property DateSubmited As Nullable(Of Date)
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
+    Public Property BuyerEntity As String
+    Public Property Signor As String
+    Public Property DateCorpFormed As Nullable(Of Date)
 
 End Class

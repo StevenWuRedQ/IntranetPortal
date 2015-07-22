@@ -374,6 +374,9 @@
           <Property Name="OfferId" Type="int" Nullable="false" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="OfferType" Type="nvarchar" MaxLength="50" />
+          <Property Name="BuyerEntity" Type="nvarchar" MaxLength="50" />
+          <Property Name="Signor" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateCorpFormed" Type="datetime" />
           <Property Name="DateOfContract" Type="datetime" />
           <Property Name="OfferAmount" Type="numeric" Precision="18" Scale="2" />
           <Property Name="DateSubmited" Type="datetime" />
@@ -918,6 +921,9 @@
           <Property Name="DateSubmited" Type="DateTime" Precision="3" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BuyerEntity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Signor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateCorpFormed" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1366,6 +1372,9 @@
           <EntitySetMapping Name="ShortSaleOffers">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleOffer">
               <MappingFragment StoreEntitySet="ShortSaleOffers">
+                <ScalarProperty Name="DateCorpFormed" ColumnName="DateCorpFormed" />
+                <ScalarProperty Name="Signor" ColumnName="Signor" />
+                <ScalarProperty Name="BuyerEntity" ColumnName="BuyerEntity" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="DateSubmited" ColumnName="DateSubmited" />
