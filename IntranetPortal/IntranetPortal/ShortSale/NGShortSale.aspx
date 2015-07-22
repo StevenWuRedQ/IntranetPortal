@@ -483,7 +483,7 @@
                 if (model) {
                     var array = $scope.$eval(model);
                     if (!array) {
-                        $scope.$eval(model + '=[{}]');
+                        $scope.$eval(model + '=[{Title: ""}]');
                     } else {
                         $scope.$eval(model + '.push({})');
                     }
@@ -518,6 +518,46 @@
                 item.splice(index, 1);
             }
           
+            $scope.mortgageContactsBindingOptions = function (index) {
+                var ds = 'SsCase.Mortgages[' + index + '].Contacts';
+
+                return {
+                    columns: [
+                        {
+                            dataFiled: 'Title',
+                            caption: 'Title',
+                            dataType: 'string',
+                        },
+                        {
+                            dataFiled: 'Name',
+                            caption: 'Name',
+                            dataType: 'string',
+                        },
+                        {
+                            dataFiled: 'Phone',
+                            caption: 'Phone #',
+                            dataType: 'string',
+                        },
+                        {
+                            dataFiled: 'Fax',
+                            caption: 'Fax #',
+                            dataType: 'string',
+                        },
+                        {
+                            dataFiled: 'Email',
+                            caption: 'Email',
+                            dataType: 'string',
+                        },
+                    ],
+                    bindingOptions: { dataSource: ds },
+                    editing: {
+                        editMode: 'row',
+                        editEnabled: true,
+                        removeEnabled: true,
+                        insertEnabled: true
+                    },
+                }
+            }
         });
 
     </script>

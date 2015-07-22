@@ -129,6 +129,7 @@
                 caption: 'Min Net'},
                 
             ],
+            bindingOptions: { dataSource: 'SsCase.ValueInfoes' },
              editing: {
                 editMode: 'row',
                 editEnabled: true,
@@ -145,10 +146,9 @@
     <h4 class="ss_form_title">Offer</h4>
     <div class="ss_form_box clearfix ss_form_small_font">
         <div dx-data-grid="{
-            dataSource: SsCase.DealInfo.Offers,
             columns: [
             { 
-                dataField: 'Type',
+                dataField: 'OfferType',
                 caption: 'Type',
                 lookup: {
                     dataSource:[
@@ -198,6 +198,7 @@
                 dataField: 'DateSubmitted',
                 dataType: 'date'
             }],
+            bindingOptions: { dataSource: 'SsCase.ShortSaleOffers' },
             editing: {
                 editMode: 'row',
                 editEnabled: true,

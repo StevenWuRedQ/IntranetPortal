@@ -111,41 +111,11 @@
                 <input class="ss_form_input " ng-model="mortgage.CustomerServiceNo">
             </li>
         </div>
-        
+        {{SsCase.Mortgages|json}}
         <div class="ss_form">
-            <h4 class="ss_form_title">Contacts</h4>
+            <h4 class="ss_form_title">Contacts&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortgage.Contacts,'SsCase.Mortgages['+$index+'].Contacts')" title="Add"></i></h4>
             <div class="ss_form_box clearfix">
-            <div dx-data-grid="{
-                dataSource: SsCase.Mortgages.Contacts,
-                columns: [ 
-                    {
-                        dataFiled: 'Title',
-                        caption: 'Title',
-                    },
-                    {
-                        dataFiled: 'Name',
-                        caption: 'Name',
-                    },
-                    {
-                        dataFiled: 'Phone',
-                        caption: 'Phone #',
-                    },
-                    {
-                        dataFiled: 'Fax',
-                        caption: 'Fax #',
-                    },
-                    {
-                        dataFiled: 'Email',
-                        caption: 'Email',
-                    },
-                ],
-                editing: {
-                    editMode: 'row',
-                    editEnabled: true,
-                    removeEnabled: true,
-                    insertEnabled: true
-                }
-            }">
+            <div dx-data-grid="mortgageContactsBindingOptions($index)">
             </div>
             </div>
         </div>
@@ -192,14 +162,13 @@
         
     </div>
     </tab>
-    <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.Mortgages)" ng-show="SsCase.Mortgages.length<=2" title="Add"></i>
+    <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.Mortgages, 'SsCase.Mortgages')" ng-show="SsCase.Mortgages.length<=2" title="Add"></i>
 </tabset>
 
 <div class="ss_form">
     <h4 class="ss_form_title">Lien</h4>
-    <div  class="ss_form_box clearfix">
+    <div class="ss_form_box clearfix">
         <div id="lienGrid" dx-data-grid="{
-                  
                     columns: [
                     {
                         dataField: 'Type',
