@@ -69,12 +69,10 @@
         </div>
         <div class="ss_form">
 
-
-             <h4 class="ss_form_title">Notes <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Notes,'SsCase.PropertyInfo.Owners['+$index+'].Notes')" title="Add"></i></h4>
+            <h4 class="ss_form_title">Notes <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Notes,'SsCase.PropertyInfo.Owners['+$index+'].Notes')" title="Add"></i></h4>
             <ul class="ss_form_box clearfix" ng-repeat="(index,note) in owner.Notes">
                 
                 <li class="ss_form_item ss_form_item_line">
-                    {{owner.Notes}}
                     <label class="ss_form_input_title">Note {{index + 1}}&nbsp;<i class="fa fa-minus-circle text-warning" ng-click="NGremoveArrayItem(owner.Notes, index)"></i></label>                    
                     <textarea class="edit_text_area text_area_ss_form" ng-model="note.Content"></textarea>
                 </li>
