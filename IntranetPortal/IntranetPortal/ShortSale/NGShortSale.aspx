@@ -493,10 +493,10 @@
 
             }
 
-            $scope.SaveLegal = function (scuessfunc) {
-                var json = JSON.stringify($scope.SsCase);
+            $scope.SaveShortSale = function (scuessfunc) {
+                var json = $scope.SsCase;
 
-                var data = {ssCase: json };
+                var data = { ssCase: JSON.stringify(json) };
                 $http.post('ShortSaleServices.svc/SaveCase', data).
                     success(function () {
                         if (scuessfunc) {

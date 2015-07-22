@@ -6,7 +6,7 @@
 <%@ Register Src="~/ShortSale/NGShortSalePartiesTab.ascx" TagPrefix="uc1" TagName="NGShortSalePartiesTab" %>
 <%@ Register Src="~/ShortSale/NGShortSalePropertyTab.ascx" TagPrefix="uc1" TagName="NGShortSalePropertyTab" %>
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
-{{SsCase.LeadsInfo|json}}
+
 <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 <script type="text/javascript">
     function init_currency() {

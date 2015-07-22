@@ -111,7 +111,7 @@
                 <input class="ss_form_input " ng-model="mortgage.CustomerServiceNo">
             </li>
         </div>
-        {{SsCase.Mortgages}}
+        
         <div class="ss_form">
             <h4 class="ss_form_title">Contacts</h4>
             <div class="ss_form_box clearfix">
