@@ -22,5 +22,8 @@ Partial Public Class PropertyTitle
     Public Property CreateBy As String
     Public Property CreateDate As Nullable(Of Date)
     Public Property ContactId As Nullable(Of Integer)
+    Public Property Address As String
+    Public Property Rep As String
+    Public Property RepNo As String
 
 End Class
