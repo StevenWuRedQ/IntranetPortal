@@ -310,6 +310,7 @@
           <Property Name="CaseName" Type="nvarchar" MaxLength="120" />
           <Property Name="Processor" Type="int" />
           <Property Name="Referral" Type="int" />
+          <Property Name="ReferralTeam" Type="nvarchar" MaxLength="50" />
           <Property Name="ListingAgent" Type="int" />
           <Property Name="Buyer" Type="int" />
           <Property Name="SellerAttorney" Type="int" />
@@ -561,6 +562,7 @@
           <Property Name="MissingDocDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CounterOffer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="HasOfferSubmit" Type="Boolean" />
+          <Property Name="ReferralTeam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TitleClearence">
           <Key>
@@ -927,6 +929,7 @@
           <EntitySetMapping Name="ShortSaleCases">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCase">
               <MappingFragment StoreEntitySet="ShortSaleCases">
+                <ScalarProperty Name="ReferralTeam" ColumnName="ReferralTeam" />
                 <ScalarProperty Name="HasOfferSubmit" ColumnName="HasOfferSubmit" />
                 <ScalarProperty Name="CounterOffer" ColumnName="CounterOffer" />
                 <ScalarProperty Name="MissingDocDescription" ColumnName="MissingDocDescription" />

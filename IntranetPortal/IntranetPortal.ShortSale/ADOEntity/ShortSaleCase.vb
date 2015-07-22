@@ -51,5 +51,6 @@ Partial Public Class ShortSaleCase
     Public Property MissingDocDescription As String
     Public Property CounterOffer As String
     Public Property HasOfferSubmit As Nullable(Of Boolean)
+    Public Property ReferralTeam As String
 
 End Class
