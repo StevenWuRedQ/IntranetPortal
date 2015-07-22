@@ -2,7 +2,14 @@
 
     Public Shared Function Instance(bble As String) As ShortSaleBuyer
         Using ctx As New ShortSaleEntities
-            Return ctx.ShortSaleBuyers.Find(bble)
+            Dim result = ctx.ShortSaleBuyers.Find(bble)
+            If result Is Nothing Then
+                result = New ShortSaleBuyer With {
+                    .BBLE = bble
+                    }
+            End If
+
+            Return result
         End Using
     End Function
 
