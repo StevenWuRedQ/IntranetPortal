@@ -259,6 +259,9 @@
           <Property Name="ReportOrderDate" Type="date" />
           <Property Name="ReceivedDate" Type="date" />
           <Property Name="OrderNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Rep" Type="nvarchar" MaxLength="50" />
+          <Property Name="RepNo" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
@@ -529,6 +532,9 @@
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="ContactId" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rep" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RepNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ShortSaleCase">
           <Key>
@@ -936,6 +942,9 @@
           <EntitySetMapping Name="PropertyTitles">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyTitle">
               <MappingFragment StoreEntitySet="PropertyTitles">
+                <ScalarProperty Name="RepNo" ColumnName="RepNo" />
+                <ScalarProperty Name="Rep" ColumnName="Rep" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="ContactId" ColumnName="ContactId" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
