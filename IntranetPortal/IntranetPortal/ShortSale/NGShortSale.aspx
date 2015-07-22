@@ -320,7 +320,7 @@
             //});
             NGGetShortSale(caseId);
 
-          if (cbpLogs)
+            if (cbpLogs)
                 cbpLogs.PerformCallback(caseId);
         }
 
@@ -402,7 +402,7 @@
                     searchExpr: ["Name"]
                 })
             });
-           
+
             $scope.PickedContactId = null;
 
             $scope.TestContactId = function (c) {
@@ -435,6 +435,28 @@
                 PropertyInfo: { Owners: [{ Contacts: [], Notes: [] }], PropFloors: [] }
 
             };
+            $scope.GetTeamByName = function(teamName,model)
+            {
+                if (teamName)
+                {
+                    var d = $.Deferred();
+
+                    $.getJSON('ShortSaleServices.svc/GetTeamInfo?teamName=' + teamName).done(function (data) {
+                        d.resolve(data);
+                        
+                    });
+                    return d.promise();
+                }
+                
+            }
+            $scope.GetContactByName = function(teamName)
+            {
+                if(AllContact)
+                {
+                    return AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(teamName.toLowerCase()) >= 0 } return false })[0];
+                }
+                return {}
+            }
             $scope.GetShortSaleCase = function (caseId) {
                 var url = "ShortSaleServices.svc/GetCase?caseId=" + caseId;
                 $http.get(url).
@@ -446,25 +468,25 @@
                         var leadsInfoUrl = "ShortSaleServices.svc/GetLeadsInfo?bble=" + $scope.SsCase.BBLE;
                         $http.get(leadsInfoUrl).
                             success(function (data, status, headers, config) {
-                                $scope.LeadsInfo = data;
+                                $scope.SsCase.LeadsInfo = data;
                             }).error(function (data, status, headers, config) {
-                               
+
                                 // called asynchronously if an error occurs
                                 // or server returns response with an error status.
-                                alert("Get Short sale Leads failed BBLE =" + $scope.SsCase.BBLE +" error : "+ JSON.stringify(data));
+                                alert("Get Short sale Leads failed BBLE =" + $scope.SsCase.BBLE + " error : " + JSON.stringify(data));
                             });
 
                     }).
                     error(function (data, status, headers, config) {
                         // called asynchronously if an error occurs
                         // or server returns response with an error status.
-                        alert("Get Short sale failed CaseId= " + caseId +", error : " + JSON.stringify(data));
+                        alert("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
                     });
             }
             $scope.NGAddArraryItem = function (item) {
                 item.push({});
             }
-            
+
             var test = 123;
             /////////////////Code Scope Steph ////////////////
             $scope.NGremoveArrayItem = function (item, index) {
@@ -474,7 +496,7 @@
                 active: true,
                 Contacts: [],
                 Notes: [],
-                
+
             }, ];
             $scope.SsCase.Liens = [{}, ];
             $scope.SsCase.DealInfo = {
@@ -483,7 +505,7 @@
             };
 
         });
-       
+
     </script>
 
 </asp:Content>

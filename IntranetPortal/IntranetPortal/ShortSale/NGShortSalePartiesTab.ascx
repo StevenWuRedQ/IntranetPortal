@@ -43,7 +43,12 @@
         <div collapse="!referralCollapse">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Team</label>
-                <input class="ss_form_input" ng-model="SsCase.ReferralTeam">
+                <select class="ss_form_input" ng-model="SsCase.ReferralTeam">
+                    <option></option>
+                    <%For Each t In IntranetPortal.Team.GetAllTeams%>
+                        <option><%= t.Name %></option>
+                    <%Next %>
+                 </select>
             </li>
 
             <li class="ss_form_item">
@@ -57,18 +62,18 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Manager</label>
-                <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.Manager">
+                <input class="ss_form_input" ng-model="GetTeamByName(SsCase.ReferralTeam).Manager">
             </li>
 
-            <li class="ss_form_item">
+           <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
-                <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.ManagerCellNO">
+                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Cell">
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.ManagerEmail">
-            </li>
+                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Email">
+            </li>--%>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Assistant</label>
