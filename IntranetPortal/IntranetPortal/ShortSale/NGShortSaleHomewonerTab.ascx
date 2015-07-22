@@ -1,7 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGShortSaleHomewonerTab.ascx.vb" Inherits="IntranetPortal.NGShortSaleHomewonerTab" %>
 <%@ Import Namespace="IntranetPortal.ShortSale" %>
 <%@ Import Namespace="IntranetPortal" %>
-
 <tabset class="tab-switch">
     <tab ng-repeat="owner in SsCase.PropertyInfo.Owners" active="owner.active" disable="owner.disabled">
                 <tab-heading>Seller {{$index+1}} </tab-heading>
@@ -37,7 +36,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Additional #</label>
-                    <input class="ss_form_input ss_email" mask="(999) 999-9999" clean="true" ng-model="owner.AdditionalNumber">
+                    <input class="ss_form_input ss_email" mask="(999) 999-9999" clean="true" ng-model="owner.AdlPhone">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Email Address</label>

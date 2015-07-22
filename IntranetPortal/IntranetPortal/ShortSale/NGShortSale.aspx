@@ -125,7 +125,7 @@
                                                                     </li>
 
                                                                     <li style="margin-right: 30px; color: #ffa484; float: right">
-
+                                                                        <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveShortSale()" data-original-title="Save"></i>
                                                                         <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Re-Assign" onclick=""></i>
                                                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i>
                                                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick=""></i>
@@ -437,7 +437,7 @@
             /////////////////////////end test contact
             //Init Steven /////////
             $scope.SsCase = {
-                PropertyInfo: { Owners: [{ Contacts: [], Notes: [] }], PropFloors: [] }
+                PropertyInfo: { Owners: [{}] }
 
             };
             $scope.GetTeamByName = function (teamName) {
@@ -490,6 +490,25 @@
                 } else {
                     item.push({});
                 }
+
+            }
+
+            $scope.SaveLegal = function (scuessfunc) {
+                var json = JSON.stringify($scope.SsCase);
+
+                var data = {ssCase: json };
+                $http.post('ShortSaleServices.svc/SaveCase', data).
+                    success(function () {
+                        if (scuessfunc) {
+                            scuessfunc()
+                        } else {
+                            alert("Save Successed !");
+                        }
+
+                    }).
+                    error(function (data, status) {
+                        alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
+                    });
 
             }
 

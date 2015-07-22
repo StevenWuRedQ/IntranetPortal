@@ -149,7 +149,7 @@
 
 </div>
 <div class="ss_form" id="home_breakdown_table">
-    <h4 class="ss_form_title">Home Breakdown   <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.PropertyInfo.PropFloors)" title="Add"></i>
+    <h4 class="ss_form_title">Home Breakdown   <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.PropertyInfo.PropFloors,'SsCase.PropertyInfo.PropFloors')" title="Add"></i>
     </h4>
     <%-- log tables--%>
     <table class="table table-striped">
