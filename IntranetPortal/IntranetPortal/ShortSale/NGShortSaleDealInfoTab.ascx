@@ -23,12 +23,12 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Company</label>
-            <input class="ss_form_input disabled" ng-model="SsCase.DealInfo.TitleCompany">
+            <input class="ss_form_input disabled" ng-model="SsCase.SellerTitle.CompanyName">
         </li>
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Title #</label>
-            <input class="ss_form_input disabled" ng-model="SsCase.DealInfo.TitleNO">
+            <input class="ss_form_input disabled" ng-model="SsCase.DealInfo.OrderNumber">
         </li>
 
         <li class="ss_form_item">
@@ -38,7 +38,7 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Order Date</label>
-            <input class="ss_form_input disabled" ss-date ng-model="SsCase.DealInfo.OrderDate">
+            <input class="ss_form_input disabled" ss-date ng-model="SsCase.DealInfo.ReportOrderDate">
         </li>
 
         <li class="ss_form_item">
@@ -49,8 +49,6 @@
             <label class="ss_form_input_title">Received Date</label>
             <input class="ss_form_input disabled" ss-date ng-model="SsCase.DealInfo.ReceivedDate">
         </li>
-
-
     </ul>
 </div>
 
@@ -60,22 +58,22 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">MLS</label>
-            <input class="ss_form_input " ng-model="SsCase.DealInfo.ListMLS">
+            <input class="ss_form_input " ng-model="SsCase.MLSStatus">
         </li>
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">MLS #</label>
-            <input class="ss_form_input " ng-model="SsCase.DealInfo.ListMLSNO">
+            <input class="ss_form_input " ng-model="SsCase.ListMLS">
         </li>
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">List Price</label>
-            <input class="ss_form_input currency_input" ng-model="SsCase.DealInfo.ListPrice">
+            <input class="ss_form_input currency_input" ng-model="SsCase.ListPrice">
         </li>
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Listing Date</label>
-            <input class="ss_form_input" ss-date="" ng-model="SsCase.DealInfo.ListingDate">
+            <input class="ss_form_input" ss-date="" ng-model="SsCase.ListingDate">
         </li>
 
         <li class="ss_form_item">
@@ -89,7 +87,7 @@
     <h4 class="ss_form_title">Valuation</h4>
     <div class="ss_form_box clearfix ss_form_small_font">
         <div dx-data-grid="{
-             dataSource: SsCase.DealInfo.Valuations,
+             dataSource: SsCase.ValueInfos,
             columns: [
                 {dataField: 'Method',
                  caption: 'Type',

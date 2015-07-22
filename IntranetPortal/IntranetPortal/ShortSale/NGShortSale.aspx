@@ -28,6 +28,8 @@
                 return;
             }
 
+
+
             LogClick("FollowUp", e.item.name);
             e.processOnServer = false;
         }
@@ -302,8 +304,7 @@
     <uc1:Common runat="server" ID="Common" />
     <script type="text/javascript">
         AllContact = <%= GetAllContact()%>
-            function t()
-            {
+            function t() {
 
             }
         ALLTeam = <%=GetAllTeam() %>
@@ -339,7 +340,6 @@
     </script>
     <script>
         function NGGetShortSale(caseId) {
-
             angular.element(document.getElementById('ShortSaleCtrl')).scope().GetShortSaleCase(caseId);
         }
         portalApp = angular.module('PortalApp');
@@ -440,18 +440,14 @@
                 PropertyInfo: { Owners: [{ Contacts: [], Notes: [] }], PropFloors: [] }
 
             };
-            $scope.GetTeamByName = function(teamName)
-            {
-                if (teamName)
-                {
-                   return ALLTeam.filter(function (o) { return o.Name == teamName })[0];
+            $scope.GetTeamByName = function (teamName) {
+                if (teamName) {
+                    return ALLTeam.filter(function (o) { return o.Name == teamName })[0];
                 }
-                
+
             }
-            $scope.GetContactByName = function(teamName)
-            {
-                if (AllContact && teamName)
-                {
+            $scope.GetContactByName = function (teamName) {
+                if (AllContact && teamName) {
                     var ctax = AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(teamName.toLowerCase()) >= 0 } return false })[0];
                     return AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(teamName.toLowerCase()) >= 0 } return false })[0];
                 }
@@ -484,21 +480,17 @@
                     });
             }
             $scope.NGAddArraryItem = function (item, model) {
-                if (model)
-                {
+                if (model) {
                     var array = $scope.$eval(model);
-                    if (!array)
-                    {
+                    if (!array) {
                         $scope.$eval(model + '=[{}]');
-                    }else
-                    {
+                    } else {
                         $scope.$eval(model + '.push({})');
                     }
-                } else
-                {
+                } else {
                     item.push({});
                 }
-                
+
             }
 
             var test = 123;
@@ -506,18 +498,12 @@
             $scope.NGremoveArrayItem = function (item, index) {
                 item.splice(index, 1);
             }
-            $scope.SsCase.Mortgages = [{
-                active: true,
-                Contacts: [],
-                Notes: [],
-
-            }, ];
-            $scope.SsCase.Liens = [{}, ];
-            $scope.SsCase.DealInfo = {
-                Valuations: [{}, ],
-                Offers: [{}, ]
-            };
-
+            
+            //$scope.lisPensSource = 
+            $scope.SsCase.LeadsInfo = {}
+            $scope.SsCase.LeadsInfo.LisPens = [{ "Type": "Foreclosure", "Effective": "2010-05-12T00:00:00", "Expiration": "", "Index": "11829/2010", "LisPenID": 56095, "BBLE": "3033650108", "Active": null, "Docket_Number": "11829 ", "CountyNum": 3, "County": "Kings", "Section": null, "Block": "3365 ", "Lot": "108 ", "Number": "645 ", "ST_Name": "KNICKERBOCKER AVE ", "Zip": "11221", "NEIGH_NAME": "BUSHWICK ", "FileDate": "2010-05-12T00:00:00", "Original_Mortgage": 399200, "Mortgage_Date": "2005-12-16T00:00:00", "Interest_Rate": 0, "Monthly_Payment": 0, "Defendant": "Tacoaman, Segundo F ", "Plaintiff": "Deutsche Bank National ", "Attorney": "Shapiro ", "Attorney_Phone": "585 247-9000 ", "Terms": "none ", "CollectedOn": "2014-04-07T14:30:31.387" },
+                { "Type": "Foreclosure", "Effective": "2010-05-12T00:00:00", "Expiration": "", "Index": "11829/2010", "LisPenID": 56095, "BBLE": "3033650108", "Active": null, "Docket_Number": "11829 ", "CountyNum": 3, "County": "Kings", "Section": null, "Block": "3365 ", "Lot": "108 ", "Number": "645 ", "ST_Name": "KNICKERBOCKER AVE ", "Zip": "11221", "NEIGH_NAME": "BUSHWICK ", "FileDate": "2010-05-12T00:00:00", "Original_Mortgage": 399200, "Mortgage_Date": "2005-12-16T00:00:00", "Interest_Rate": 0, "Monthly_Payment": 0, "Defendant": "Tacoaman, Segundo F ", "Plaintiff": "Deutsche Bank National ", "Attorney": "Shapiro ", "Attorney_Phone": "585 247-9000 ", "Terms": "none ", "CollectedOn": "2014-04-07T14:30:31.387" }
+            ];
         });
 
     </script>

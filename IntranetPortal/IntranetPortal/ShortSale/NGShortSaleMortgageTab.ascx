@@ -39,14 +39,15 @@
         </div>
 
         <div class="ss_form">
-            <h4 class="ss_form_title">Mortgage Company&nbsp<i class="fa fa-compress btn  text-primary" ng-click="mortgageCompany = !mortgageCompanyCollapse"></i></h4>
-                    <select class="ss_form_input" ng-model="mortgage.BankName">
+            <h4 class="ss_form_title">Mortgage Company&nbsp
+                    <select class="class="ss_form_item" ng-model="mortgage.BankName">
                         <option>A</option>
                         <option>B</option>
                         <option>C</option>
-                    </select>
+                    </select><i class="fa fa-compress btn  text-primary" ng-click="mortgageCompanyCollapse = !mortgageCompanyCollapse"></i>
+                </h4>
             <ul class="ss_form_box clearfix">
-                <div collapse="mortgageCompany">
+                <div collapse="mortgageCompanyCollapse">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Category</label>
                     <input class="ss_form_input " ng-model="mortgage.Category">
@@ -94,7 +95,7 @@
                  </div>
             </ul>
            
-        </div>
+            </div>
 
         <div class="ss_form_box clearfix">
             <li class="ss_form_item">
@@ -115,7 +116,7 @@
             <h4 class="ss_form_title">Contacts</h4>
             <div class="ss_form_box clearfix">
             <div dx-data-grid="{
-                dataSource: SsCase.Mortgages[{{$index}}].Contacts,
+                dataSource: SsCase.Mortgages.Contacts,
                 columns: [ 
                     {
                         dataFiled: 'Title',
@@ -166,16 +167,15 @@
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Foreclosure Attorney </label>
-                    <input class="css_form_input" ng-model="mortgage.ForeclosureAttorney">
-                    </input>
+                    <div class="contact_box" dx-select-box="InitContact('mortgage.ForeclosureAttorney')">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Address</label>
-                    <input class="ss_form_input" ng-model="mortgage.AttorneyAddr">
+                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ForeclosureAttorney).Address">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Office #</label>
-                    <input class="ss_form_input" ng-model="mortgage.AttorneyOfficeNo">
+                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ForeclosureAttorney).OfficeNO">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Assigned Attorney</label>
@@ -200,45 +200,41 @@
 
 </tabset>
 
-
 <div class="ss_form">
     <h4 class="ss_form_title">Lien</h4>
-    <div class="ss_form_box clearfix">
-        <div dx-data-grid="{
-            dataSource: SsCase.LeadsInfo.LisPens,
-            columns: [
-            {
-                dataField: 'LienType',
-                caption: 'Type'
-            }, {
-                dataField: 'LienEffectiveDate',
-                caption: 'Effective',
-                dataType: 'date'
-            }, {
-                dataField: 'LienExpirationDate',
-                caption: 'Expiration',
-                dataType: 'date'
-            },
-             {
-                dataField: 'LienPlaintiff',
-                caption: 'Plaintiff'
-            },
-             {
-                dataField: 'LienDefendant',
-                caption: 'Defendant'
-            },
-             {
-                dataField: 'LienIndex',
-                caption: 'Index'
-            },
-            ],
-            editing: {
-                editMode: 'row',
-                editEnabled: true,
-                removeEnabled: false,
-                insertEnabled: false
-            }, 
-        }">
+    <div  class="ss_form_box clearfix">
+        <div id="lienGrid" dx-data-grid="{
+                  
+                    columns: [
+                    {
+                        dataField: 'Type',
+                        caption: 'Type'
+                    },
+                        {
+                            dataField: 'Effective',
+                            caption: 'Effective',
+                            dataType: 'date'
+                        },
+                        {
+                            dataField: 'Expiration',
+                            caption: 'Expiration',
+                            dataType: 'date'
+                        },
+                     {
+                         dataField: 'Plaintiff',
+                         caption: 'Plaintiff'
+                     },
+                     {
+                         dataField: 'Defendant',
+                         caption: 'Defendant'
+                     },
+                     {
+                         dataField: 'Index',
+                         caption: 'Index'
+                     }
+                    ],
+                    bindingOptions: { dataSource: 'SsCase.LeadsInfo.LisPens' }
+                }">
         </div>
     </div>
 </div>
