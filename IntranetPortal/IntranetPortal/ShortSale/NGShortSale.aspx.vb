@@ -248,7 +248,9 @@ Public Class NGShortSale
         'Return json.Serialize(ssCase)
         Return ssCase
     End Function
-
+    Public Function GetAllContact() As String
+        Return ShortSale.PartyContact.getAllContact.ToJsonString
+    End Function
     Public Shared Function CheckBox(isChecked As Boolean?) As String
         If isChecked Is Nothing Then
             Return ""

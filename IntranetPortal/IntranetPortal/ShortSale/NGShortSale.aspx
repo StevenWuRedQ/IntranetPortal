@@ -301,7 +301,7 @@
     <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
     <uc1:Common runat="server" ID="Common" />
     <script type="text/javascript">
-        AllContact = null;
+        AllContact = <%= GetAllContact()%>
         function GetShortSaleData(caseId) {
 
             //debugger;
