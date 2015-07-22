@@ -41,5 +41,17 @@ Partial Public Class PropertyMortgage
     Public Property LenderContactId As Nullable(Of Integer)
     Public Property LenderAttorney As Nullable(Of Integer)
     Public Property Type As String
+    Public Property AuctionDate As Nullable(Of Date)
+    Public Property DateOfSale As Nullable(Of Date)
+    Public Property DateVerified As Nullable(Of Date)
+    Public Property PayoffRequested As Nullable(Of Date)
+    Public Property PayoffAmount As Nullable(Of Decimal)
+    Public Property LastPaymentDate As Nullable(Of Date)
+    Public Property CancelationSent As Nullable(Of Date)
+    Public Property ForeclosureAttorney As String
+    Public Property ForeclosureAttorneyId As Nullable(Of Integer)
+    Public Property AssignedAttorney As String
+    Public Property AttorneyDirectNo As String
+    Public Property AttorneyEmail As String
 
 End Class

@@ -141,22 +141,34 @@
           </Key>
           <Property Name="MortgageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CaseId" Type="int" Nullable="false" />
+          <Property Name="AuctionDate" Type="datetime" />
+          <Property Name="DateOfSale" Type="datetime" />
+          <Property Name="DateVerified" Type="datetime" />
+          <Property Name="PayoffExpired" Type="datetime" />
+          <Property Name="PayoffRequested" Type="datetime" />
+          <Property Name="PayoffAmount" Type="numeric" Precision="18" Scale="2" />
           <Property Name="Lender" Type="nvarchar" MaxLength="50" />
           <Property Name="Loan" Type="nvarchar" MaxLength="50" />
           <Property Name="LoanAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="LastPaymentDate" Type="datetime" />
+          <Property Name="LoanType" Type="nvarchar" MaxLength="50" />
           <Property Name="AuthorizationSent" Type="nvarchar" MaxLength="50" />
+          <Property Name="CancelationSent" Type="datetime" />
           <Property Name="LienPosition" Type="nvarchar" MaxLength="50" />
           <Property Name="CounterOffer" Type="nvarchar" MaxLength="256" />
-          <Property Name="PayoffExpired" Type="datetime" />
           <Property Name="ShortSaleDept" Type="int" />
           <Property Name="Processor" Type="int" />
           <Property Name="Negotiator" Type="int" />
           <Property Name="Closer" Type="int" />
+          <Property Name="ForeclosureAttorney" Type="nvarchar" MaxLength="50" />
+          <Property Name="ForeclosureAttorneyId" Type="int" />
+          <Property Name="AssignedAttorney" Type="nvarchar" MaxLength="50" />
+          <Property Name="AttorneyDirectNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="AttorneyEmail" Type="nvarchar" MaxLength="50" />
           <Property Name="DateAssigned" Type="datetime" />
           <Property Name="Supervisor" Type="int" />
           <Property Name="Category" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
-          <Property Name="LoanType" Type="nvarchar" MaxLength="50" />
           <Property Name="Fannie" Type="bit" />
           <Property Name="FHA" Type="bit" />
           <Property Name="Freddie" Type="bit" />
@@ -790,6 +802,18 @@
           <Property Name="LenderContactId" Type="Int32" />
           <Property Name="LenderAttorney" Type="Int32" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AuctionDate" Type="DateTime" Precision="3" />
+          <Property Name="DateOfSale" Type="DateTime" Precision="3" />
+          <Property Name="DateVerified" Type="DateTime" Precision="3" />
+          <Property Name="PayoffRequested" Type="DateTime" Precision="3" />
+          <Property Name="PayoffAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LastPaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="CancelationSent" Type="DateTime" Precision="3" />
+          <Property Name="ForeclosureAttorney" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ForeclosureAttorneyId" Type="Int32" />
+          <Property Name="AssignedAttorney" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AttorneyDirectNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AttorneyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -1179,6 +1203,18 @@
           <EntitySetMapping Name="PropertyMortgages">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
               <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="AttorneyEmail" ColumnName="AttorneyEmail" />
+                <ScalarProperty Name="AttorneyDirectNo" ColumnName="AttorneyDirectNo" />
+                <ScalarProperty Name="AssignedAttorney" ColumnName="AssignedAttorney" />
+                <ScalarProperty Name="ForeclosureAttorneyId" ColumnName="ForeclosureAttorneyId" />
+                <ScalarProperty Name="ForeclosureAttorney" ColumnName="ForeclosureAttorney" />
+                <ScalarProperty Name="CancelationSent" ColumnName="CancelationSent" />
+                <ScalarProperty Name="LastPaymentDate" ColumnName="LastPaymentDate" />
+                <ScalarProperty Name="PayoffAmount" ColumnName="PayoffAmount" />
+                <ScalarProperty Name="PayoffRequested" ColumnName="PayoffRequested" />
+                <ScalarProperty Name="DateVerified" ColumnName="DateVerified" />
+                <ScalarProperty Name="DateOfSale" ColumnName="DateOfSale" />
+                <ScalarProperty Name="AuctionDate" ColumnName="AuctionDate" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="LenderAttorney" ColumnName="LenderAttorney" />
                 <ScalarProperty Name="LenderContactId" ColumnName="LenderContactId" />
