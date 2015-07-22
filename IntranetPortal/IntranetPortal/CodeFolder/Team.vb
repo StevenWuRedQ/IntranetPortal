@@ -1,4 +1,6 @@
-﻿Partial Public Class Team
+﻿Imports Newtonsoft.Json
+
+Partial Public Class Team
     Public Shared Function GetAllTeams() As List(Of Team)
         Using ctx As New Entities
             Return ctx.Teams.ToList
@@ -17,24 +19,28 @@
         End Using
     End Function
 
+    <JsonIgnoreAttribute>
     Public ReadOnly Property AllUsers As String()
         Get
             Return UserInTeam.GetTeamUsersArray(Name)
         End Get
     End Property
 
+    <JsonIgnoreAttribute>
     Public ReadOnly Property ActiveUsers As String()
         Get
             Return UserInTeam.GetTeamActiveUser(Name)
         End Get
     End Property
 
+    <JsonIgnoreAttribute>
     Public ReadOnly Property UnActiveUsers As String()
         Get
             Return UserInTeam.GetTeamUnActiveUser(Name)
         End Get
     End Property
 
+    <JsonIgnoreAttribute>
     Public ReadOnly Property AssignLeadsView() As IEnumerable(Of LeadsAssignView2)
         Get
             Dim ctx As New Entities
@@ -50,6 +56,7 @@
         End Get
     End Property
 
+    <JsonIgnoreAttribute>
     Public ReadOnly Property AssignLeadsCount As Integer
         Get
             Dim ctx As New Entities
@@ -67,6 +74,7 @@
     End Property
 
     Private _managers As String()
+    <JsonIgnoreAttribute>
     Public ReadOnly Property TeamManagers As String()
         Get
             If _managers Is Nothing Then

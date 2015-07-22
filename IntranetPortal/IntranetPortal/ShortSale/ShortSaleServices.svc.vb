@@ -50,6 +50,12 @@ Public Class ShortSaleServices
 
     <OperationContract()>
    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    Public Function GetTeamInfo(teamName As String) As Channels.Message
+        Return Team.GetTeam(teamName).ToJson
+    End Function
+
+    <OperationContract()>
+   <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function ReferralManagerContact(agent As String) As Channels.Message
 
         Dim emp = Employee.GetInstance(agent)
