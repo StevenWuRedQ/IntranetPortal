@@ -105,6 +105,12 @@
         'End Using
     End Sub
 
+    Public Shared Function GetDocumentRequestTask(bble As String) As List(Of UserTask)
+        Using ctx As New Entities
+            Return ctx.UserTasks.Where(Function(tk) tk.BBLE = bble AndAlso tk.Status = TaskStatus.Active AndAlso tk.Action = "Documents Request").ToList
+        End Using
+    End Function
+
     Public Shared Function GetActiveTasks() As List(Of UserTask)
         Using ctx As New Entities
             Return ctx.UserTasks.Where(Function(t) t.Status = TaskStatus.Active).ToList

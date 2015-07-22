@@ -41,7 +41,10 @@ Partial Public Class ShortSaleCase
                 _propInfo = PropertyBaseInfo.GetInstance(BBLE)
                 '_propInfo.StreetName
                 If _propInfo Is Nothing Then
-                    _propInfo = New PropertyBaseInfo
+                    _propInfo = New PropertyBaseInfo With
+                                {
+                                    .BBLE = BBLE
+                                    }
                 End If
             End If
 
@@ -74,6 +77,10 @@ Partial Public Class ShortSaleCase
             If _mortgages Is Nothing Then
                 Using context As New ShortSaleEntities
                     _mortgages = context.PropertyMortgages.Where(Function(mg) mg.CaseId = CaseId).ToList
+
+                    If (_mortgages.Count = 0) Then
+                        _mortgages.Add(New PropertyMortgage)
+                    End If
                 End Using
             End If
 
@@ -205,6 +212,7 @@ Partial Public Class ShortSaleCase
         End Set
     End Property
 
+    Public Property DocumentRequestDetails As String
 
     Public ReadOnly Property AssignedProcessor As PartyContact
         Get

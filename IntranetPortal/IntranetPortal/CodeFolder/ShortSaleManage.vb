@@ -9,6 +9,15 @@ Public Class ShortSaleManage
         End Get
     End Property
 
+    Public Shared Function GetDocumentRequestDetail(bble As String) As String
+        Dim tasks = UserTask.GetDocumentRequestTask(bble)
+        If tasks.Count > 0 Then
+            Return tasks(0).Description
+        End If
+
+        Return ""
+    End Function
+
     Public Shared Sub AddActivityLog(bble As String, userName As String, typeOfUpdate As String, category As String, statusOfUpdate As String, comments As String)
         ShortSale.ShortSaleActivityLog.AddLog(bble, userName, typeOfUpdate, category & " - " & statusOfUpdate, comments)
 
@@ -36,7 +45,6 @@ Public Class ShortSaleManage
 
         System.Threading.ThreadPool.QueueUserWorkItem(NotifyUpdate)
     End Sub
-
 
     Public Shared Sub MoveLeadsToShortSale(bble As String, createBy As String)
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)

@@ -27,6 +27,10 @@ Partial Public Class PropertyBaseInfo
                 Using context As New ShortSaleEntities
                     _owners = context.PropertyOwners.Where(Function(po) po.BBLE = BBLE).ToList
                 End Using
+
+                If _owners.Count = 0 Then
+                    _owners.Add(New PropertyOwner)
+                End If
             End If
 
             Return _owners

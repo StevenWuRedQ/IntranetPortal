@@ -27,6 +27,8 @@ Public Class ShortSaleServices
             ssCase.ReferralManager = ssCase.ReferralContact.Name
         End If
 
+        ssCase.DocumentRequestDetails = ShortSaleManage.GetDocumentRequestDetail(ssCase.BBLE)
+
         Core.SystemLog.Log(ShortSaleManage.OpenCaseLogTitle, Nothing, Core.SystemLog.LogCategory.Operation, ssCase.BBLE, HttpContext.Current.User.Identity.Name)
 
         Return ssCase.ToJson

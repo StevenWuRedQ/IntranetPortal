@@ -148,8 +148,6 @@
             }">
             </div>
             </div>
-
-            
         </div>
 
         <div class="ss_form">
@@ -159,7 +157,6 @@
                     <label class="ss_form_input_title">Note {{index + 1}}&nbsp;<i class="fa fa-minus-circle text-warning" ng-click="NGremoveArrayItem(mortgage.Notes, index)"></i></label>                    
                     <textarea class="edit_text_area text_area_ss_form" ng-model="note.Content"></textarea>
                 </li>
-
             </ul>
         </div>
         <div class="ss_form">
@@ -196,8 +193,6 @@
     </div>
     </tab>
     <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.Mortgages)" ng-show="SsCase.Mortgages.length<=2" title="Add"></i>
-   
-
 </tabset>
 
 <div class="ss_form">
