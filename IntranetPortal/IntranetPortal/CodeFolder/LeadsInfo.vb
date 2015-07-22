@@ -71,8 +71,7 @@ Public Class LeadsInfo
     End Function
 
     Private _listPens As List(Of PortalLisPen)
-    <JsonIgnoreAttribute>
-       Public ReadOnly Property LisPens As List(Of PortalLisPen)
+    Public ReadOnly Property LisPens As List(Of PortalLisPen)
         Get
             If _listPens Is Nothing Then
                 Using context As New Entities

@@ -204,18 +204,16 @@
     <h4 class="ss_form_title">Lien</h4>
     <div class="ss_form_box clearfix">
         <div dx-data-grid="{
-            dataSource: SsCase.Liens,
+            dataSource: SsCase.LeadsInfo.LisPens,
             columns: [
             {
                 dataField: 'LienType',
                 caption: 'Type'
-            },
-             {
+            }, {
                 dataField: 'LienEffectiveDate',
                 caption: 'Effective',
                 dataType: 'date'
-            },
-             {
+            }, {
                 dataField: 'LienExpirationDate',
                 caption: 'Expiration',
                 dataType: 'date'
