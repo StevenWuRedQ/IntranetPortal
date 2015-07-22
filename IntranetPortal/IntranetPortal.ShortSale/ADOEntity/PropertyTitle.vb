@@ -25,5 +25,6 @@ Partial Public Class PropertyTitle
     Public Property Address As String
     Public Property Rep As String
     Public Property RepNo As String
+    Public Property RepEmail As String
 
 End Class
