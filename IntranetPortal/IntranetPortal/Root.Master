@@ -44,10 +44,13 @@
                 //window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
             }
 
-            function OpenLeadsWindow(url, title) {
-                var left = (screen.width / 2) - (1350 / 2);
-                var top = (screen.height / 2) - (930 / 2);
-                window.open(url, title, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+            function OpenLeadsWindow(url, title, width, height) {
+                alert('error '+width+ height);
+                //var vwidth = width ? width : 1350;
+                //var vheight = height ? height : 930;
+                //var left = (screen.width / 2) - (vwidth / 2);
+                //var top = (screen.height / 2) - (vheight / 2);
+                //window.open(url, title, 'Width=' + vwidth + 'px,Height=' + vheight + 'px, top=' + top + ', left=' + left);
             }
 
             function GoToLead(bble) {
@@ -187,6 +190,7 @@
                                     <div class="header under-line-header" style="width: 100%; display: table; height: 100%; margin-top: -1px; background-color: white;">
                                         <div style="display: table-row" class="clear-fix">
                                             <div style="float: left; display: table-cell; width: 260px;">
+                                                <i class="fa fa-users with_circle icon_btn color_black tooltip-examples" style="  margin-left: 20px;font-size: 20px;padding: 5px;" title="Contacts" onclick="OpenLeadsWindow('/PopupControl/VendorsPopUpContent.aspx','Contacts',1036,590)"></i>
                                             </div>
                                             <div style="display: table-cell; width: 700px">
                                                 <table style="margin-top: 10px; float: right">

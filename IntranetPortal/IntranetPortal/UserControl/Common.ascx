@@ -30,10 +30,13 @@
         commonTmpBBLE = bble;
         OnPopupMenuLeadsClick(null, { item: { name: tabText } });
     }
-    function OpenLeadsWindow(url, title) {
-        var left = (screen.width / 2) - (1350 / 2);
-        var top = (screen.height / 2) - (930 / 2);
-        window.open(url, title, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+    function OpenLeadsWindow(url, title, width, height) {
+        var vwidth = width ? width : 1350;
+        var vheight = height ? height : 930;
+        var left = (screen.width / 2) - (vwidth / 2);
+        var top = (screen.height / 2) - (vheight / 2);
+        window.open(url, title, 'Width=' + vwidth + 'px,Height=' + vheight + 'px, top=' + top + ', left=' + left);
+       
     }
 
 </script>

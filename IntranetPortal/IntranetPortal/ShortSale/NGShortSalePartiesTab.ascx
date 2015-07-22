@@ -6,8 +6,9 @@
     <h4 class="ss_form_title">Assigned Processor<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('AssignedProcessor', function(party){ShortSaleCaseData.Processor=party.ContactId})"></i></h4>
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
+            {{SsCase.AssignedProcessorId}}
             <label class="ss_form_input_title">Name</label>
-            <input class="ss_form_input" ng-model="SsCase.Parties.AssignedProcessor.Name">
+            <div class="contact_box"  dx-autocomplete="InitContact('SsCase.AssignedProcessorId')">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Phone #</label>
