@@ -261,6 +261,8 @@
           <Property Name="ReportOrderDate" Type="date" />
           <Property Name="ReceivedDate" Type="date" />
           <Property Name="OrderNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReviewedDate" Type="datetime" />
+          <Property Name="ConfirmationDate" Type="datetime" />
           <Property Name="Address" Type="nvarchar" MaxLength="50" />
           <Property Name="Rep" Type="nvarchar" MaxLength="50" />
           <Property Name="RepNo" Type="nvarchar" MaxLength="50" />
@@ -365,6 +367,19 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ShortSaleOffers">
+          <Key>
+            <PropertyRef Name="OfferId" />
+          </Key>
+          <Property Name="OfferId" Type="int" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="OfferType" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateOfContract" Type="datetime" />
+          <Property Name="OfferAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="DateSubmited" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="ShortSaleOverview">
           <Key>
             <PropertyRef Name="LogId" />
@@ -440,6 +455,7 @@
           <EntitySet Name="ShortSaleBuyers" EntityType="Self.ShortSaleBuyers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleCaseComments" EntityType="Self.ShortSaleCaseComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleCases" EntityType="Self.ShortSaleCases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShortSaleOffers" EntityType="Self.ShortSaleOffers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleOverview" EntityType="Self.ShortSaleOverview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleClearences" EntityType="Self.TitleClearences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleJudgementSearch" EntityType="Self.TitleJudgementSearch" Schema="dbo" store:Type="Tables" />
@@ -469,6 +485,7 @@
           <EntitySet Name="PropertyOwners" EntityType="IntranetPortalModel.PropertyOwner" />
           <EntitySet Name="ShortSaleOverviews" EntityType="IntranetPortalModel.ShortSaleOverview" />
           <EntitySet Name="ShortSaleBuyers" EntityType="IntranetPortalModel.ShortSaleBuyer" />
+          <EntitySet Name="ShortSaleOffers" EntityType="IntranetPortalModel.ShortSaleOffer" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -539,6 +556,8 @@
           <Property Name="Rep" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RepNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RepEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReviewedDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ShortSaleCase">
           <Key>
@@ -887,6 +906,19 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="ShortSaleOffer">
+          <Key>
+            <PropertyRef Name="OfferId" />
+          </Key>
+          <Property Name="OfferId" Type="Int32" Nullable="false" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="OfferType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfContract" Type="DateTime" Precision="3" />
+          <Property Name="OfferAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DateSubmited" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -948,6 +980,8 @@
           <EntitySetMapping Name="PropertyTitles">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyTitle">
               <MappingFragment StoreEntitySet="PropertyTitles">
+                <ScalarProperty Name="ConfirmationDate" ColumnName="ConfirmationDate" />
+                <ScalarProperty Name="ReviewedDate" ColumnName="ReviewedDate" />
                 <ScalarProperty Name="RepEmail" ColumnName="RepEmail" />
                 <ScalarProperty Name="RepNo" ColumnName="RepNo" />
                 <ScalarProperty Name="Rep" ColumnName="Rep" />
@@ -1326,6 +1360,20 @@
                 <ScalarProperty Name="EntityAddress" ColumnName="EntityAddress" />
                 <ScalarProperty Name="Entity" ColumnName="Entity" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShortSaleOffers">
+            <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleOffer">
+              <MappingFragment StoreEntitySet="ShortSaleOffers">
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="DateSubmited" ColumnName="DateSubmited" />
+                <ScalarProperty Name="OfferAmount" ColumnName="OfferAmount" />
+                <ScalarProperty Name="DateOfContract" ColumnName="DateOfContract" />
+                <ScalarProperty Name="OfferType" ColumnName="OfferType" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="OfferId" ColumnName="OfferId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

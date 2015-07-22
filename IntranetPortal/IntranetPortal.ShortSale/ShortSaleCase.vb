@@ -173,6 +173,20 @@ Partial Public Class ShortSaleCase
         End Set
     End Property
 
+    Private _offers As List(Of ShortSaleOffer)
+    Public Property ShortSaleOffers As List(Of ShortSaleOffer)
+        Get
+            If _offers Is Nothing Then
+                _offers = ShortSaleOffer.GetOffers(BBLE)
+            End If
+
+            Return _offers
+        End Get
+        Set(value As List(Of ShortSaleOffer))
+            _offers = value
+        End Set
+    End Property
+
     Private _buyerEntity As ShortSaleBuyer
     Public Property BuyerEntity As ShortSaleBuyer
         Get
@@ -465,6 +479,25 @@ Partial Public Class ShortSaleCase
                 Next
             End If
 
+            If _offers IsNot Nothing Then
+                For Each offer In _offers
+                    If String.IsNullOrEmpty(offer.BBLE) Then
+                        offer.BBLE = BBLE
+                    End If
+                    offer.Save()
+                Next
+            End If
+
+            If _valueInfos IsNot Nothing Then
+                For Each info In _valueInfos
+                    If String.IsNullOrEmpty(info.BBLE) Then
+                        info.BBLE = BBLE
+                    End If
+
+                    info.Save()
+                Next
+            End If
+
             If _propInfo IsNot Nothing Then
                 _propInfo.Save()
             End If
@@ -495,6 +528,10 @@ Partial Public Class ShortSaleCase
             End If
 
             If _buyerEntity IsNot Nothing Then
+                If String.IsNullOrEmpty(_buyerEntity.BBLE) Then
+                    _buyerEntity.BBLE = BBLE
+                End If
+
                 _buyerEntity.Save()
             End If
 

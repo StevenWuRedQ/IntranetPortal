@@ -26,5 +26,7 @@ Partial Public Class PropertyTitle
     Public Property Rep As String
     Public Property RepNo As String
     Public Property RepEmail As String
+    Public Property ReviewedDate As Nullable(Of Date)
+    Public Property ConfirmationDate As Nullable(Of Date)
 
 End Class
