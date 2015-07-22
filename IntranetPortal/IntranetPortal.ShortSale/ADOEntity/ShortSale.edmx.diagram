@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="9a653d02cbfe4334a4333f75b4deee58" Name="Diagram1" >
         <EntityTypeShape EntityType="IntranetPortalModel.CleareneceNote" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.PartyContact" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PartyContact" Width="1.5" PointX="2.625" PointY="0.625" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyFloor" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyTitle" Width="1.5" PointX="2.625" PointY="4.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCase" Width="1.5" PointX="8.625" PointY="0.5" />
@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyBaseInfo" Width="1.5" PointX="4.75" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCaseComment" Width="1.5" PointX="6.625" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyOccupant" Width="1.5" PointX="10.625" PointY="4.25" />
-        <EntityTypeShape EntityType="IntranetPortalModel.TitleJudgementSearch" Width="1.5" PointX="4.75" PointY="6.875" />
+        <EntityTypeShape EntityType="IntranetPortalModel.TitleJudgementSearch" Width="1.5" PointX="4.75" PointY="6.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.EvictionCas" Width="1.5" PointX="14.125" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.Employee" Width="1.5" PointX="0.75" PointY="8.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleActivityLog" Width="1.75" PointX="6.625" PointY="6.25" />

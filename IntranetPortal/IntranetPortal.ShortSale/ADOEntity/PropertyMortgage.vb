@@ -53,5 +53,7 @@ Partial Public Class PropertyMortgage
     Public Property AssignedAttorney As String
     Public Property AttorneyDirectNo As String
     Public Property AttorneyEmail As String
+    Public Property Contacts As String
+    Public Property Notes As String
 
 End Class

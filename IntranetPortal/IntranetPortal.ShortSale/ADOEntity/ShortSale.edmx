@@ -165,6 +165,8 @@
           <Property Name="AssignedAttorney" Type="nvarchar" MaxLength="50" />
           <Property Name="AttorneyDirectNo" Type="nvarchar" MaxLength="50" />
           <Property Name="AttorneyEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contacts" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="DateAssigned" Type="datetime" />
           <Property Name="Supervisor" Type="int" />
           <Property Name="Category" Type="nvarchar" MaxLength="50" />
@@ -822,6 +824,8 @@
           <Property Name="AssignedAttorney" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AttorneyDirectNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AttorneyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contacts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -1215,6 +1219,8 @@
           <EntitySetMapping Name="PropertyMortgages">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
               <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Contacts" ColumnName="Contacts" />
                 <ScalarProperty Name="AttorneyEmail" ColumnName="AttorneyEmail" />
                 <ScalarProperty Name="AttorneyDirectNo" ColumnName="AttorneyDirectNo" />
                 <ScalarProperty Name="AssignedAttorney" ColumnName="AssignedAttorney" />
