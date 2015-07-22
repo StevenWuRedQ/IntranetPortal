@@ -21,7 +21,7 @@
 </div>
 
 <div class="ss_form">
-   <h4 class="ss_form_title">Referral<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('ReferralContact', function(party){ShortSaleCaseData.Referral=party.ContactId})"></i></h4>
+   <h4 class="ss_form_title">Referral&nbsp<i class="fa fa-compress btn  text-primary" ng-click="referralCollapse = !referralCollapse"></i></h4>
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Agent</label>
@@ -37,7 +37,7 @@
             <label class="ss_form_input_title">Email</label>
             <input class="ss_form_input" type="email" ng-model="SsCase.Parties.ReferralContact.Email">
         </li>
-
+        <div collapse="!referralCollapse">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Team</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.Team">
@@ -82,7 +82,7 @@
             <label class="ss_form_input_title">Email</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.AssistantEmail">
         </li>
-
+        </div>
 
 
 
@@ -112,7 +112,7 @@
 </div>
 
 <div class="ss_form">
-      <h4 class="ss_form_title">Listing Agent<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('ListingAgentContact', function(party){ShortSaleCaseData.ListingAgent=party.ContactId})"></i></h4>
+      <h4 class="ss_form_title">Listing Agent&nbsp<i class="fa fa-compress btn text-primary" ng-click="listingAgentCollapse = !listingAgentCollapse"></i></h4>
 
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
@@ -127,6 +127,7 @@
             <label class="ss_form_input_title">Email</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.ListingAgentContact.Email">
         </li>
+        <div collapse="!listingAgentCollapse">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Broker</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.ListingAgentContact.Broker">
@@ -139,7 +140,7 @@
             <label class="ss_form_input_title">Office #</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.ListingAgentContact.OfficeNO">
         </li>
-
+        </div>
         <%-- 
         <li class="ss_form_item">
             <label class="ss_form_input_title">name</label>
@@ -166,7 +167,7 @@
 </div>
 
 <div class="ss_form">
-     <h4 class="ss_form_title">Seller Attorney<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('SellerAttorneyContact', function(party){ShortSaleCaseData.SellerAttorney=party.ContactId})"></i></h4>
+     <h4 class="ss_form_title">Seller Attorney&nbsp<i class="fa fa-compress btn  text-primary" ng-click="sellerAttorneyCollapse = !sellerAttorneyCollapse"></i></h4>
 
     <ul class="ss_form_box clearfix">
 
@@ -182,6 +183,7 @@
             <label class="ss_form_input_title">Email</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.SellerAttorneyContact.Email">
         </li>
+        <div collapse="!sellerAttorneyCollapse">
          <li class="ss_form_item">
             <label class="ss_form_input_title">Office</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.SellerAttorneyContact.Office">
@@ -194,7 +196,7 @@
             <label class="ss_form_input_title">Office #</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.SellerAttorneyContact.OfficeNO">
         </li>
-
+        </div>
 
         <%--
         <li class="ss_form_item">
@@ -227,7 +229,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Buyer<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('BuyerContact', function(party){ShortSaleCaseData.Buyer=party.ContactId})"></i></h4>
+    <h4 class="ss_form_title">Buyer&nbsp<i class="fa fa-compress btn  text-primary" ng-click="buyerCollapse = !buyerCollapse"></i></h4>
     <ul class="ss_form_box clearfix">
 
               <li class="ss_form_item">
@@ -245,7 +247,7 @@
             <label class="ss_form_input_title">Signor</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.BuyerContact.Signor">
         </li>
-
+        <div collapse="!buyerCollapse">
          <li class="ss_form_item">
             <label class="ss_form_input_title">Date Opened</label>
             <input class="ss_form_input" ss-date="" ng-model="SsCase.Parties.BuyerContact.DateOpened">
@@ -260,7 +262,7 @@
             <label class="ss_form_input_title">Tax Id</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.BuyerContact.TaxID">
         </li>
-
+        </div>
 
         <%--
         <li class="ss_form_item">
@@ -294,7 +296,7 @@
 
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Buyer Attorney<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('BuyerAttorneyContact', function(party){ShortSaleCaseData.BuyerAttorney=party.ContactId})"></i></h4>
+    <h4 class="ss_form_title">Buyer Attorney&nbsp<i class="fa fa-compress btn  text-primary" ng-click="buyerAttorneryCollapse = !buyerAttorneryCollapse"></i></h4>
     <ul class="ss_form_box clearfix">
 
          <li class="ss_form_item">
@@ -309,6 +311,7 @@
             <label class="ss_form_input_title">Email</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.BuyerAttorneyContact.Email">
         </li>
+        <div collapse="!buyerAttorneryCollapse">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.BuyerAttorneyContact.Office">
@@ -321,6 +324,7 @@
             <label class="ss_form_input_title">Office #</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.BuyerAttorneyContact.OfficeNO">
         </li>
+        </div>
         <%-- 
         <li class="ss_form_item">
             <label class="ss_form_input_title">name</label>
@@ -351,7 +355,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Title Company<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('TitleCompanyContact', function(party){ShortSaleCaseData.TitleCompany=party.ContactId})"></i></h4>
+    <h4 class="ss_form_title">Title Company&nbsp<i class="fa fa-compress btn  text-primary" ng-click="titleCompanyCollapse = !titleCompanyCollapse"></i></h4>
     <ul class="ss_form_box clearfix">
 
          <li class="ss_form_item">
@@ -367,6 +371,7 @@
             <label class="ss_form_input_title">office #</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.TitleCompanyContact.OfficeNO">
         </li>
+            <div collapse="!titleCompanyCollapse">
          <li class="ss_form_item">
             <label class="ss_form_input_title">Rep</label>
             <input class="ss_form_input" ng-model="SsCase.Parties.TitleCompanyContact.Rep">
@@ -380,7 +385,7 @@
             <input class="ss_form_input" ng-model="SsCase.Parties.TitleCompanyContact.Email">
         </li>
 
-
+        </div>
 
         <%-- 
         <li class="ss_form_item">

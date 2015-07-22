@@ -5,7 +5,7 @@
     <tab ng-repeat="mortgage in SsCase.Mortgages" active="mortgage.active" disable="mortage.disabled">
         <tab-heading>Mortgage {{$index+1}} </tab-heading>
     <div class="collapse_div">
-       <div class="text-right"><i class="fa fa-times btn tooltip-examples" ng-show="SsCase.Mortgages.length>=2" ng-click="NGremoveArrayItem(SsCase.Mortgages, $index)" title="Delete" style="border:1px solid; border-radius:3px; margin:2px"></i></div>
+       <div class="text-right"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.Mortgages.length>=2" ng-click="NGremoveArrayItem(SsCase.Mortgages, $index)" title="Delete"></i></div>
         <div style="margin-top: 20px">
             <h4 class="ss_form_title">Sale Date / Payoff Info</h4>
             <ul class="ss_form_box clearfix">
@@ -112,30 +112,43 @@
         </div>
 
         <div class="ss_form">
-            <h4 class="ss_form_title">Contacts <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortgage.Contacts)" title="Add"></i></h4>
-            <ul class="ss_form_box clearfix" ng-repeat="(index,contact) in mortgage.Contacts">
-                <h5>Contact {{index + 1}}&nbsp;<i class="fa fa-minus-circle text-warning" ng-click="NGremoveArrayItem(mortgage.Contacts, index)"></i></h5>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Title</label>
-                    <input class="ss_form_input ss_not_empty" ng-model="contact.Title">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Name</label>
-                    <input class="ss_form_input ss_not_empty" ng-model="contact.Name">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Phone #</label>
-                    <input class="ss_form_input ss_not_empty" ng-model="contact.Phone">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Fax #</label>
-                    <input class="ss_form_input" ng-model="contact.Email">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Email</label>
-                    <input class="ss_form_input" ng-model="contact.Email">
-                </li>
-            </ul>
+            <h4 class="ss_form_title">Contacts</h4>
+            <div class="ss_form_box clearfix">
+            <div dx-data-grid="{
+                dataSource: SsCase.Mortgages[{{$index}}].Contacts,
+                columns: [ 
+                    {
+                        dataFiled: 'Title',
+                        caption: 'Title',
+                    },
+                    {
+                        dataFiled: 'Name',
+                        caption: 'Name',
+                    },
+                    {
+                        dataFiled: 'Phone',
+                        caption: 'Phone #',
+                    },
+                    {
+                        dataFiled: 'Fax',
+                        caption: 'Fax #',
+                    },
+                    {
+                        dataFiled: 'Email',
+                        caption: 'Email',
+                    },
+                ],
+                editing: {
+                    editMode: 'row',
+                    editEnabled: true,
+                    removeEnabled: true,
+                    insertEnabled: true
+                }
+            }">
+            </div>
+            </div>
+
+            
         </div>
 
         <div class="ss_form">
@@ -182,7 +195,7 @@
         
     </div>
     </tab>
-    <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.Mortgages)" ng-show="SsCase.Mortgages.length<=3" title="Add"></i>
+    <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.Mortgages)" ng-show="SsCase.Mortgages.length<=2" title="Add"></i>
    
 
 </tabset>
@@ -190,36 +203,44 @@
 
 <div class="ss_form">
     <h4 class="ss_form_title">Lien</h4>
-
-    <table class="ss_form_table">
-        <tr>
-            <th>Type</th>
-            <th>Effective</th>
-            <th>Expiration</th>
-            <th>Plaintiff</th>
-            <th>Defendant</th>
-            <th>Index</th>
-        </tr>
-
-        <tr>
-            <td>
-                <input class="ss_form_input " ng-model="SsCase.Mortgages.LienType">
-            </td>
-            <td>
-                <input class="ss_form_input " ss-date="" ng-model="SsCase.Mortgages.LienEffectiveDate">
-            </td>
-            <td>
-                <input class="ss_form_input " ss-date="" ng-model="SsCase.Mortgages.LienExpirationDate">
-            </td>
-            <td>
-                <input class="ss_form_input " ss-date="" ng-model="SsCase.Mortgages.LienPlaintiff">
-            </td>
-            <td>
-                <input class="ss_form_input " ss-date="" ng-model="SsCase.Mortgages.LienDefendant">
-            </td>
-            <td>
-                <input class="ss_form_input " ss-date="" ng-model="mortageSsCase.Mortgages.LienIndex">
-            </td>
-        </tr>
-    </table>
+    <div class="ss_form_box clearfix">
+        <div dx-data-grid="{
+            dataSource: SsCase.Liens,
+            columns: [
+            {
+                dataField: 'LienType',
+                caption: 'Type'
+            },
+             {
+                dataField: 'LienEffectiveDate',
+                caption: 'Effective',
+                dataType: 'date'
+            },
+             {
+                dataField: 'LienExpirationDate',
+                caption: 'Expiration',
+                dataType: 'date'
+            },
+             {
+                dataField: 'LienPlaintiff',
+                caption: 'Plaintiff'
+            },
+             {
+                dataField: 'LienDefendant',
+                caption: 'Defendant'
+            },
+             {
+                dataField: 'LienIndex',
+                caption: 'Index'
+            },
+            ],
+            editing: {
+                editMode: 'row',
+                editEnabled: true,
+                removeEnabled: false,
+                insertEnabled: false
+            }, 
+        }">
+        </div>
+    </div>
 </div>

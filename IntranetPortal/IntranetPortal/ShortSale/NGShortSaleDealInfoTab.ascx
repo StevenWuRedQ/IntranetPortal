@@ -4,6 +4,16 @@
 <div class="clearfix">
 </div>
 
+<style>
+    .ss_form_small_font {
+        font-size: 10px !important;
+    }
+
+        .ss_form_small_font .dx-widget {
+            font-size: 10px;
+        }
+</style>
+
 <div>
     <!-- Open Document Detail -->
 </div>
@@ -23,21 +33,21 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Reviewed</label>
-            <input class="ss_form_input disabled" ss-date="" ng-model="SsCase.DealInfo.ReviewedDate">
+            <input class="ss_form_input disabled" ss-date ng-model="SsCase.DealInfo.ReviewedDate">
         </li>
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Order Date</label>
-            <input class="ss_form_input disabled" ss-date="" ng-model="SsCase.DealInfo.OrderDate">
+            <input class="ss_form_input disabled" ss-date ng-model="SsCase.DealInfo.OrderDate">
         </li>
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Confirmation Date</label>
-            <input class="ss_form_input disabled" ss-date="" ng-model="SsCase.DealInfo.ConfirmationDate">
+            <input class="ss_form_input disabled" ss-date ng-model="SsCase.DealInfo.ConfirmationDate">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Received Date</label>
-            <input class="ss_form_input disabled" ss-date="" ng-model="SsCase.DealInfo.ReceivedDate">
+            <input class="ss_form_input disabled" ss-date ng-model="SsCase.DealInfo.ReceivedDate">
         </li>
 
 
@@ -77,94 +87,126 @@
 
 <div class="ss_form">
     <h4 class="ss_form_title">Valuation</h4>
-    <table class="ss_form_table">
-        <tr>
-            <th>Type</th>
-            <th>Date Completed</th>
-            <th>Date Expires</th>
-            <th>Value</th>
-            <th>Min Net</th>
-            <th><i class="fa fa-plus-circle" ng-click="NGAddArraryItem(SsCase.DealInfo.Valuations)"></i></th>
-        </tr>
-        <tr ng-repeat="valuation in SsCase.DealInfo.Valuations">
-            <td>
-                <select class="ss_form_input" ng-model="valuation.Method">
-                    <option value="AVM">AVM</option>
-                    <option value="Exterior Appraisal">Exterior Appraisal</option>
-                    <option value="Exterior BPO">Exterior BPO</option>
-                    <option value="Interior Appraisal">Interior Appraisal</option>
-                    <option value="Interior BPO">Interior BPO</option>
-                </select>
-            </td>
-            <td>
-                <input class="ss_form_input" ss-date="" ng-model="valuation.DateOfValue">
-            </td>
-            <td>
-                <input class="ss_form_input" ss-date="" ng-model="valuation.ExpiredOn">
-            </td>
-
-            <td>
-                <input class="ss_form_input " ng-model="valuation.BankValue">
-            </td>
-
-            <td>
-                <input class="ss_form_input " ng-model="valuation.MNSP">
-            </td>
-
-            <td>
-                <i class="fa fa-minus-circle text-warning" ng-click="NGremoveArrayItem(SsCase.DealInfo.Valuations, index)"></i>
-            </td>
-        </tr>
-    </table>
+    <div class="ss_form_box clearfix ss_form_small_font">
+        <div dx-data-grid="{
+             dataSource: SsCase.DealInfo.Valuations,
+            columns: [
+                {dataField: 'Method',
+                 caption: 'Type',
+                 lookup: {
+                    dataSource:[
+                     {
+                        name: 'AVM',
+                        value: 'AVM'
+                    },
+                     {
+                         name: 'Exterior Appraisal',
+                         value: 'Exterior Appraisal'
+                     },
+                     {
+                         name: 'Exterior BPO',
+                         value: 'Exterior BPO'
+                     },
+                    {
+                        name: 'Interior Appraisal',
+                        value: 'Interior Appraisal'
+                    },
+                    {
+                        name: 'Interior BPO',
+                        value: 'Interior BPO'
+                    }
+                    ],
+                    displayExpr: 'name' ,
+                    valueExpr: 'value'
+                }},
+                {dataField: 'DateOfValue',
+                caption: 'Date Completed',
+                dataType: 'date'},
+                {dataField: 'ExpiredOn',
+                caption: 'Date Expires',
+                dataType: 'date'},
+                {dataField: 'BankValue',
+                caption: 'Value'},
+                {dataField: 'MNSP',
+                caption: 'Min Net'},
+                
+            ],
+             editing: {
+                editMode: 'row',
+                editEnabled: true,
+                removeEnabled: true,
+                insertEnabled: true
+            }, 
+             }">
+        </div>
+    </div>
 
 </div>
 
-<div class="ss_form">
+<div class="ss_form ">
     <h4 class="ss_form_title">Offer</h4>
+    <div class="ss_form_box clearfix ss_form_small_font">
+        <div dx-data-grid="{
+            dataSource: SsCase.DealInfo.Offers,
+            columns: [
+            { 
+                dataField: 'Type',
+                caption: 'Type',
+                lookup: {
+                    dataSource:[
 
-    <table class="ss_form_table">
-        <tr>
-            <th>Type</th>
-            <th>Buying Entity</th>
-            <th>Signor</th>
-            <th>Date Corp Formed</th>
-            <th>Date of Contract</th>
-            <th>Offer Amount</th>
-            <th>Date Submitted</th>
-            <th><i class="fa fa-plus-circle" ng-click="NGAddArraryItem(SsCase.DealInfo.Offers)"></i></th>
-        </tr>
-
-        <tr ng-repeat="offer in SsCase.DealInfo.Offers">
-            <td>
-                <select class="ss_form_input" ng-model="offer.Type">
-                    <option value="Initial Offer">Initial Offer</option>
-                    <option value="Bank Counter">Bank Counter</option>
-                    <option value="Buyer Counter">Buyer Counter</option>
-                    <option value="New Buyer Offer">New Buyer Offer</option>
-                </select>
-            </td>
-            <td>
-                <input class="ss_form_input disabled" ng-model="valuation.BuyingEntity">
-            </td>
-            <td>
-                <input class="ss_form_input disabled" ng-model="valuation.Signor">
-            </td>
-            <td>
-                <input class="ss_form_input disabled" ss-date ng-model="valuation.DateCorpFormed">
-            </td>
-            <td>
-                <input class="ss_form_input " ss-date ng-model="valuation.DateOfContract">
-            </td>
-            <td>
-                <input class="ss_form_input " ng-model="valuation.OfferAmount">
-            </td>
-            <td>
-                <input class="ss_form_input " ss-date ng-model="valuation.DateSubmitted">
-            </td>
-            <td>
-                <i class="fa fa-minus-circle text-warning"  ng-click="NGRemoveArrayItem(SsCase.DealInfo.Offers, index)"></i>
-            </td>
-        </tr>
-    </table>
-
+                    {
+                        name: 'Initial Offer',
+                        value: 'Initial Offer'
+                    },
+                     {
+                         name: 'Bank Counter',
+                         value: 'Bank Counter'
+                     },
+                     {
+                         name: 'Buyer Counter',
+                         value: 'Buyer Counter'
+                     },
+                    {
+                        name: 'New Buyer Offer',
+                        value: 'New Buyer Offer'
+                    }
+                    ],
+                    displayExpr: 'name' ,
+                    valueExpr: 'value'
+                }
+                
+            },
+            {
+                dataField: 'BuyingEntity',
+                allowEditing: false,
+            },
+            {
+                dataField: 'Signor',
+                allowEditing: false
+            },
+            {
+                dataField: 'DateCorpFormed',
+                allowEditing: false,
+            },
+            {   
+                dataField: 'DateOfContract',
+                dataType: 'date'
+            },
+            {
+                dataField: 'OfferAmount',
+            },
+            {
+                dataField: 'DateSubmitted',
+                dataType: 'date'
+            }],
+            editing: {
+                editMode: 'row',
+                editEnabled: true,
+                removeEnabled: true,
+                insertEnabled: true
+            }, 
+        }">
+        </div>
+    </div>
 </div>

@@ -319,7 +319,7 @@
             //});
             NGGetShortSale(caseId);
 
-            if (cbpLogs)
+          if (cbpLogs)
                 cbpLogs.PerformCallback(caseId);
         }
 
@@ -372,7 +372,7 @@
             $scope.NGAddArraryItem = function (item) {
                 item.push({});
             }
-
+            
             var test = 123;
             /////////////////Code Scope Steph ////////////////
             $scope.NGremoveArrayItem = function (item, index) {
@@ -381,15 +381,17 @@
             $scope.SsCase.Mortgages = [{
                 active: true,
                 Contacts: [],
-                Notes: []
+                Notes: [],
+                
             }, ];
+            $scope.SsCase.Liens = [{}, ];
             $scope.SsCase.DealInfo = {
                 Valuations: [{}, ],
                 Offers: [{}, ]
             };
 
         });
-
+       
     </script>
 
 </asp:Content>
