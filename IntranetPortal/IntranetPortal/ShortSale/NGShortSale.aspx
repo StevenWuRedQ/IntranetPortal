@@ -522,7 +522,7 @@
             $scope.AddComments = function () {
                 
                 $http.post('ShortSaleServices.svc/AddComments', { comment: $scope.addCommentTxt, caseId: $scope.SsCase.CaseId }).success(function (data) {
-
+                    $scope.SsCase.Comments.push(data);
                 }).error(function (data, status) {
                     alert("Fail to AddComments. status " + status + "Error : " + JSON.stringify(data));
                  });
