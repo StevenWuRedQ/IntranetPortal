@@ -26,31 +26,30 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Company</label>
-            <input class="ss_form_input disabled" ng-model="SsCase.SellerTitle.CompanyName">
+            <input class="ss_form_input disabled" ng-model="SsCase.BuyerTitle.CompanyName">
         </li>
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Title #</label>
-            <input class="ss_form_input disabled" ng-model="SsCase.DealInfo.OrderNumber">
+            <input class="ss_form_input disabled" ng-model="SsCase.BuyerTitle.OrderNumber">
         </li>
-
         <li class="ss_form_item">
             <label class="ss_form_input_title">Reviewed</label>
-            <input class="ss_form_input disabled" ss-date ng-model="SsCase.DealInfo.ReviewedDate">
+            <input class="ss_form_input disabled" ss-date ng-model="SsCase.BuyerTitle.ReviewedDate">
         </li>
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Order Date</label>
-            <input class="ss_form_input disabled" ss-date ng-model="SsCase.DealInfo.ReportOrderDate">
+            <input class="ss_form_input disabled" ss-date ng-model="SsCase.BuyerTitle.ReportOrderDate">
         </li>
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Confirmation Date</label>
-            <input class="ss_form_input disabled" ss-date ng-model="SsCase.DealInfo.ConfirmationDate">
+            <input class="ss_form_input disabled" ss-date ng-model="SsCase.BuyerTitle.ConfirmationDate">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Received Date</label>
-            <input class="ss_form_input disabled" ss-date ng-model="SsCase.DealInfo.ReceivedDate">
+            <input class="ss_form_input disabled" ss-date ng-model="SsCase.BuyerTitle.ReceivedDate">
         </li>
     </ul>
 </div>

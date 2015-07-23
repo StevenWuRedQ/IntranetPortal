@@ -57,12 +57,15 @@ Partial Public Class PropertyBaseInfo
             context.SaveChanges()
 
             If _propFloors IsNot Nothing Then
-                For Each floor In _propFloors
+                Dim i = 1
+                For Each floor In _propFloors.OrderBy(Function(fl) fl.FloorId)
                     If String.IsNullOrEmpty(floor.BBLE) Then
                         floor.BBLE = BBLE
                     End If
-
+                    floor.FloorId = i
                     floor.Save()
+
+                    i += 1
                 Next
             End If
 
