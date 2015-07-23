@@ -90,7 +90,7 @@ Public Class ShortSaleServices
         End If
     End Function
     <OperationContract()>
-   <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
     Public Function AddComments(comment As String, caseId As Integer) As Channels.Message
         Dim comm As New ShortSaleCaseComment
         comm.Comments = comment
@@ -101,6 +101,14 @@ Public Class ShortSaleServices
         Dim json = comm.ToJson
         Return json
     End Function
+
+    <OperationContract()>
+    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    Public Function DeleteComment(commentId As Integer) As Channels.Message
+        ShortSaleCaseComment.DeleteComment(commentId)
+        Return Nothing
+    End Function
+
 #End Region
 
 #Region "Data Report"

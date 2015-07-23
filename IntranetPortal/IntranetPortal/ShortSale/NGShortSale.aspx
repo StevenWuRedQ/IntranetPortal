@@ -531,10 +531,10 @@
 
             $scope.DeleteComments = function (index) {
                 var comment = $scope.SsCase.Comments[index];
-                $http.post('ShortSaleServices/DeleteComments', { commentId: comment.CommentId }).success(function (data) {
+                $http.get('ShortSaleServices/DeleteComment?commentId' + comment.CommentId).success(function (data) {
                     $scope.SsCase.Comments.splice(index, 1);
                 }).error(function (data, status) {
-                    alert("Fail to AddComments. status " + status + "Error : " + JSON.stringify(data));
+                    alert("Fail to delete comment. status " + status + "Error : " + JSON.stringify(data));
                 });
                
                 
