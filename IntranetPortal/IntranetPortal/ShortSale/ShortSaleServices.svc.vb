@@ -63,6 +63,13 @@ Public Class ShortSaleServices
     <OperationContract()>
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetBankList() As Channels.Message
+        'the id of "Lender" is 5
+        Dim gp = GroupType.GetGroup(5)
+
+        If gp IsNot Nothing Then
+            Return gp.Contacts.Select(Function(g) g.CorpName).Distinct.ToList.ToJson
+        End If
+
         Return Nothing
     End Function
 
