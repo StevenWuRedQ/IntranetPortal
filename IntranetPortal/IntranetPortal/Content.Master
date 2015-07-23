@@ -79,12 +79,14 @@
                 restrict: 'A',
                 link: function (scope, el, attrs) {
 
-                    $(el).formatCurrency();
-                    $(el).on("blur", function () { $(this).formatCurrency() });
-                    $(el).on('change', function () {
-                        scope.$eval(attrs.ngModel + "='" + el.val() + "'");
-                    });
-                }
+                    scope.$watch(attrs.ngModel, function () {
+                        if ($(el).is(":focus")) return;
+                        $(el).formatCurrency();
+                    })
+                    $(el).on('blur', function () { $(this).formatCurrency(); });
+                    $(el).on('focus', function () { $(this).toNumber() });
+                    
+                },
             };
         });
         

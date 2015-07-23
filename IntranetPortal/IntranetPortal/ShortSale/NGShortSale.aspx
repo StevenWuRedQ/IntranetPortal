@@ -189,100 +189,100 @@
                                                                             </li>
                                                                         </ul>
 
-                                                                        <dx:ASPxCallbackPanel runat="server" ID="cbpLogs" ClientInstanceName="cbpLogs" OnCallback="cbpLogs_Callback">
-                                                                            <PanelCollection>
-                                                                                <dx:PanelContent>
+                                                                                <dx:ASPxCallbackPanel runat="server" ID="cbpLogs" ClientInstanceName="cbpLogs" OnCallback="cbpLogs_Callback">
+                                                                                    <PanelCollection>
+                                                                                        <dx:PanelContent>
                                                                                     <div class="tab-content">
                                                                                         <div class="tab-pane active" id="activity_log">
                                                                                             <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="ShortSale" />
-                                                                                        </div>
-                                                                                        <div class="tab-pane" id="file_overview">
-                                                                                            <uc1:ShortSaleFileOverview runat="server" ID="ShortSaleFileOverview" />
-                                                                                        </div>
+                                                                            </div>
+                                                                            <div class="tab-pane" id="file_overview">
+                                                                                <uc1:ShortSaleFileOverview runat="server" ID="ShortSaleFileOverview" />
+                                                                            </div>
                                                                                     </div>
                                                                                 </dx:PanelContent>
                                                                             </PanelCollection>
                                                                             <ClientSideEvents EndCallback="" />
                                                                         </dx:ASPxCallbackPanel>
 
-                                                                    </div>
-                                                                    <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
-                                                                        AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
-                                                                        ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
-                                                                        <ItemStyle Paddings-PaddingLeft="20px" />
-                                                                        <Items>
-                                                                            <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
-                                                                            <dx:MenuItem Text="Next Week" Name="NextWeek"></dx:MenuItem>
-                                                                            <dx:MenuItem Text="30 Days" Name="ThirtyDays">
-                                                                            </dx:MenuItem>
-                                                                            <dx:MenuItem Text="60 Days" Name="SixtyDays">
-                                                                            </dx:MenuItem>
-                                                                            <dx:MenuItem Text="Custom" Name="Custom">
-                                                                            </dx:MenuItem>
-                                                                        </Items>
-                                                                        <ClientSideEvents ItemClick="OnCallbackMenuClick" />
-                                                                    </dx:ASPxPopupMenu>
-                                                                    <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="260px" Height="250px"
-                                                                        MaxWidth="800px" MaxHeight="150px" MinHeight="150px" MinWidth="150px" ID="pcMain"
-                                                                        HeaderText="Select Date" Modal="true"
-                                                                        runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
-                                                                        <ContentCollection>
-                                                                            <dx:PopupControlContentControl runat="server">
-                                                                                <asp:Panel ID="Panel1" runat="server">
-                                                                                    <table>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="false"></dx:ASPxCalendar>
-                                                                                                <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" TimeSectionProperties-Visible="True" CssClass="edit_drop">
-                                                                                                    <TimeSectionProperties Visible="True"></TimeSectionProperties>
-                                                                                                    <ClientSideEvents DropDown="function(s,e){ 
+                                                                        </div>
+                                                                        <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
+                                                                            AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+                                                                            ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                                                            <ItemStyle Paddings-PaddingLeft="20px" />
+                                                                            <Items>
+                                                                                <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
+                                                                                <dx:MenuItem Text="Next Week" Name="NextWeek"></dx:MenuItem>
+                                                                                <dx:MenuItem Text="30 Days" Name="ThirtyDays">
+                                                                                </dx:MenuItem>
+                                                                                <dx:MenuItem Text="60 Days" Name="SixtyDays">
+                                                                                </dx:MenuItem>
+                                                                                <dx:MenuItem Text="Custom" Name="Custom">
+                                                                                </dx:MenuItem>
+                                                                            </Items>
+                                                                            <ClientSideEvents ItemClick="OnCallbackMenuClick" />
+                                                                        </dx:ASPxPopupMenu>
+                                                                        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="260px" Height="250px"
+                                                                            MaxWidth="800px" MaxHeight="150px" MinHeight="150px" MinWidth="150px" ID="pcMain"
+                                                                            HeaderText="Select Date" Modal="true"
+                                                                            runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
+                                                                            <ContentCollection>
+                                                                                <dx:PopupControlContentControl runat="server">
+                                                                                    <asp:Panel ID="Panel1" runat="server">
+                                                                                        <table>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="false"></dx:ASPxCalendar>
+                                                                                                    <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" TimeSectionProperties-Visible="True" CssClass="edit_drop">
+                                                                                                        <TimeSectionProperties Visible="True"></TimeSectionProperties>
+                                                                                                        <ClientSideEvents DropDown="function(s,e){ 
                                                                     var d = new Date('May 1 2014 12:00:00');                                                                    
                                                                     s.GetTimeEdit().SetValue(d);
                                                                     }" />
-                                                                                                </dx:ASPxDateEdit>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                                                                                <dx:ASPxButton ID="ASPxButton1" runat="server" UseSubmitBehavior="false" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                                                                                    <ClientSideEvents Click="function(){
+                                                                                                    </dx:ASPxDateEdit>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
+                                                                                                    <dx:ASPxButton ID="ASPxButton1" runat="server" UseSubmitBehavior="false" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                                                                                        <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSelectDateControl.Hide();                                                                                                                       
                                                                                                                         LogClick('FollowUp', ScheduleDateClientFllowUp!=null?ScheduleDateClientFllowUp.GetDate().toLocaleString():callbackCalendar.GetSelectedDate().toLocaleString());
                                                                                                                         }"></ClientSideEvents>
-                                                                                                </dx:ASPxButton>
-                                                                                                &nbsp;
+                                                                                                    </dx:ASPxButton>
+                                                                                                    &nbsp;
                                                             <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" UseSubmitBehavior="false" CssClass="rand-button rand-button-gray">
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSelectDateControl.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>
                                                             </dx:ASPxButton>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                </asp:Panel>
-                                                                            </dx:PopupControlContentControl>
-                                                                        </ContentCollection>
-                                                                    </dx:ASPxPopupControl>
-                                                                    <dx:ASPxPopupControl ClientInstanceName="ASPxPopupScheduleClient" Width="400px" Height="280px"
-                                                                        MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"
-                                                                        HeaderText="Appointment" Modal="true"
-                                                                        runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-                                                                        <HeaderTemplate>
-                                                                            <div class="clearfix">
-                                                                                <div class="pop_up_header_margin">
-                                                                                    <i class="fa fa-clock-o with_circle pop_up_header_icon"></i>
-                                                                                    <span class="pop_up_header_text">Appointment</span>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </table>
+                                                                                    </asp:Panel>
+                                                                                </dx:PopupControlContentControl>
+                                                                            </ContentCollection>
+                                                                        </dx:ASPxPopupControl>
+                                                                        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupScheduleClient" Width="400px" Height="280px"
+                                                                            MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"
+                                                                            HeaderText="Appointment" Modal="true"
+                                                                            runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+                                                                            <HeaderTemplate>
+                                                                                <div class="clearfix">
+                                                                                    <div class="pop_up_header_margin">
+                                                                                        <i class="fa fa-clock-o with_circle pop_up_header_icon"></i>
+                                                                                        <span class="pop_up_header_text">Appointment</span>
+                                                                                    </div>
+                                                                                    <div class="pop_up_buttons_div">
+                                                                                        <i class="fa fa-times icon_btn" onclick="ASPxPopupScheduleClient.Hide()"></i>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="pop_up_buttons_div">
-                                                                                    <i class="fa fa-times icon_btn" onclick="ASPxPopupScheduleClient.Hide()"></i>
-                                                                                </div>
-                                                                            </div>
-                                                                        </HeaderTemplate>
-                                                                        <ContentCollection>
-                                                                            <dx:PopupControlContentControl runat="server">
-                                                                            </dx:PopupControlContentControl>
-                                                                        </ContentCollection>
-                                                                    </dx:ASPxPopupControl>
+                                                                            </HeaderTemplate>
+                                                                            <ContentCollection>
+                                                                                <dx:PopupControlContentControl runat="server">
+                                                                                </dx:PopupControlContentControl>
+                                                                            </ContentCollection>
+                                                                        </dx:ASPxPopupControl>
                                                                 </dx:SplitterContentControl>
                                                             </ContentCollection>
                                                         </dx:SplitterPane>
@@ -543,73 +543,64 @@
             $scope.NGremoveArrayItem = function (item, index) {
                 item.splice(index, 1);
             };
-
+          
             $scope.SsCase.Mortgages = [{}];
             $scope.offerBindingOptions = function () {
                 return {
                     columns: [
                         {
-                            dataField: 'OfferType',
-                            caption: 'Type',
-                            lookup: {
-                                dataSource: [
-
-                                {
-                                    name: 'Initial Offer',
-                                    value: 'Initial Offer'
-                                },
-                                 {
-                                     name: 'Bank Counter',
-                                     value: 'Bank Counter'
-                                 },
-                                 {
-                                     name: 'Buyer Counter',
-                                     value: 'Buyer Counter'
-                                 },
-                                {
-                                    name: 'New Buyer Offer',
-                                    value: 'New Buyer Offer'
-                                }
-                                ],
-                                displayExpr: 'name',
-                                valueExpr: 'value'
+                        dataField: 'OfferType',
+                        caption: 'Type',
+                        lookup: {
+                            dataSource: [
+                            {
+                                name: 'Initial Offer',
+                                value: 'Initial Offer'
+                            },
+                             {
+                                 name: 'Bank Counter',
+                                 value: 'Bank Counter'
+                             },
+                             {
+                                 name: 'Buyer Counter',
+                                 value: 'Buyer Counter'
+                             },
+                            {
+                                name: 'New Buyer Offer',
+                                value: 'New Buyer Offer'
                             }
+                            ],
+                            displayExpr: 'name',
+                            valueExpr: 'value'
+                        }
 
-                        },
-                    {
+                    },{
                         caption: 'Buying Entity',
                         calculateCellValue: function (data) {
                             if ($scope.SsCase.BuyerEntity === undefined) return "";
                             return $scope.SsCase.BuyerEntity.Entity;
                         },
                         allowEditing: false,
-                    },
-                        {
-                            caption: 'Signor',
-                            calculateCellValue: function (data) {
-                                if ($scope.SsCase.BuyerEntity === undefined) return "";
-                                return $scope.SsCase.BuyerEntity.Signor;
-                            },
-                            allowEditing: false,
-
-
+                    },{
+                        caption: 'Signor',
+                        calculateCellValue: function (data) {
+                            if ($scope.SsCase.BuyerEntity === undefined) return "";
+                            return $scope.SsCase.BuyerEntity.Signor;
                         },
-                        {
-                            caption: 'Date Corp Formed',
-                            calculateCellValue: function (data) {
-                                if ($scope.SsCase.BuyerEntity === undefined) return "";
-                                return $scope.SsCase.BuyerEntity.DateOpened;
-                            },
-                            allowEditing: false,
+                        allowEditing: false,
+                    },{
+                        caption: 'Date Corp Formed',
+                        calculateCellValue: function (data) {
+                            if ($scope.SsCase.BuyerEntity === undefined) return "";
+                            return $scope.SsCase.BuyerEntity.DateOpened;
                         },
-                        {
-                            dataField: 'DateOfContract',
-                            dataType: 'date'
-                        },
-                        {
-                            dataField: 'OfferAmount',
-                        },
-                    {
+                        allowEditing: false,
+                    },{
+                        dataField: 'DateOfContract',
+                        dataType: 'date'
+                    },{
+                        dataField: 'OfferAmount',
+                    },{
                         dataField: 'DateSubmitted',
                         dataType: 'date'
                     }],
@@ -620,9 +611,9 @@
                         removeEnabled: true,
                     },
                 }
-
+                    
             }
-
+          
         });
 
     </script>

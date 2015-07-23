@@ -32,10 +32,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Amount</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">$</span>
-                        <input class="ss_form_input " ng-model="mortgage.PayoffAmount">
-                        </div>
+                    <input class="ss_form_input" mask-money ng-model="mortgage.PayoffAmount">
                 </li>
 
             </ul>
@@ -66,10 +63,8 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Loan Amount</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">$</span>
-                        <input class="ss_form_input " ng-model="mortgage.LoanAmount">
-                    </div>
+                    <input class="ss_form_input" mask-money ng-model="mortgage.LoanAmount">
+
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Last Payment Date</label>
@@ -120,32 +115,18 @@
 
             <div ng-show="mortgage.Contacts.length>0" class="ss_form_box clearfix">
                 <div dx-data-grid="{
-                columns: [
-                { 
-                dataField: 'Title',
-                caption: 'Title',
-                
-                }, { 
-                dataField: 'Name',
-                caption: 'Name',
-                
-                },{ 
-                dataField: 'Phone',
-                caption: 'Phone #',
-                
-                },{ 
-                dataField: 'Fax',
-                caption: 'Fax #',
-                },{ 
-                dataField: 'Email',
-                caption: 'Email',
-                }],
-                bindingOptions: { 
-                    dataSource: 'SsCase.Mortgages['+$index+'].Contacts' },
-                editing: {
-                    editMode: 'row',
-                    editEnabled: true,
-                    removeEnabled: true,
+                    columns: [
+                        { dataField: 'Description', caption: 'Description' },
+                        { dataField: 'Title', caption: 'Title' },
+                        { dataField: 'Name', caption: 'Name' },
+                        { dataField: 'Phone',caption: 'Phone #' },
+                        { dataField: 'Fax', caption: 'Fax #' },
+                        { dataField: 'Email', caption: 'Email' }],
+                    bindingOptions: { dataSource: 'SsCase.Mortgages['+$index+'].Contacts' },
+                    editing: {
+                        editMode: 'row',
+                        editEnabled: true,
+                        removeEnabled: true,
                 } }">
                 </div>
             </div>
@@ -185,7 +166,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Attorney Email</label>
-                    <input class="ss_form_input" ng-model="mortgage.AttorneyEmail">
+                    <input class="ss_form_input" ng-model="mortgage.AttorneyEmail" type="email">
                 </li>
             </ul>
         </div>
@@ -202,32 +183,12 @@
     <div class="ss_form_box clearfix">
         <div id="lienGrid" dx-data-grid="{
                     columns: [
-                    {
-                        dataField: 'Type',
-                        caption: 'Type'
-                    },
-                    {
-                        dataField: 'Effective',
-                        caption: 'Effective',
-                        dataType: 'date'
-                    },
-                    {
-                        dataField: 'Expiration',
-                        caption: 'Expiration',
-                        dataType: 'date'
-                    },
-                    {
-                        dataField: 'Plaintiff',
-                        caption: 'Plaintiff'
-                    },
-                    {
-                        dataField: 'Defendant',
-                        caption: 'Defendant'
-                    },
-                    {
-                        dataField: 'Index',
-                        caption: 'Index'
-                    } ],
+                    { dataField: 'Type',caption: 'Type'},
+                    { dataField: 'Effective', caption: 'Effective', dataType: 'date' },
+                    { dataField: 'Expiration', caption: 'Expiration', dataType: 'date' },
+                    { dataField: 'Plaintiff',caption: 'Plaintiff'},
+                    { dataField: 'Defendant', caption: 'Defendant' },
+                    { dataField: 'Index', caption: 'Index' } ],
                     bindingOptions: { dataSource: 'SsCase.LeadsInfo.LisPens' }
                 }">
         </div>

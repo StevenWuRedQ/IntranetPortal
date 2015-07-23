@@ -141,50 +141,29 @@
 
 </div>
 <div class="ss_form" id="home_breakdown_table">
-    <h4 class="ss_form_title">Home Breakdown   <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.PropertyInfo.PropFloors,'SsCase.PropertyInfo.PropFloors')" title="Add"></i>
-    </h4>
-    <%-- log tables--%>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Floor</th>
-                <th>Bedrooms</th>
-                <th>Bathrooms</th>
-                <th>Living Room</th>
-                <th>Kitchen</th>
-                <th>Dinning Room</th>
-                <th>Occupied</th>
-                <th>Deleted</th>
-            </tr>
-        </thead>
-        <tr ng-repeat="floor in SsCase.PropertyInfo.PropFloors">
-            <td>{{$index+1}}
-            </td>
-            <td>
-                <input class="ss_form_input" ng-model="floor.Bedroom">
-            </td>
-            <td>
-                <input class="ss_form_input" ng-model="floor.Bathroom">
-            </td>
-            <td>
-                <input class="ss_form_input" ng-model="floor.Livingroom">
-            </td>
-            <td>
-                <input class="ss_form_input" ng-model="floor.Kitchen">
-            </td>
-            <td>
-                <input class="ss_form_input" ng-model="floor.Diningroom">
-            </td>
-            <td>
-                <input class="ss_form_input" ng-model="floor.Occupied">
-            </td>
-            <td>
-                <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.PropFloors,$index)" title="Delete"></i>
-            </td>
-        </tr>
-    </table>
 
-    <%------end-------%>
+    <h4 class="ss_form_title">Home Breakdown <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.PropertyInfo.PropFloors,'SsCase.PropertyInfo.PropFloors')" title="Add"></i>
+    </h4>
+        <div ng-show="SsCase.PropertyInfo.PropFloors.length>0" class="ss_form_box clearfix ss_form_small_font">
+        <div dx-data-grid="{
+            columns: [
+                {dataField: 'Floor', caption: 'Floor'},
+                {dataField: 'Bedroom', caption: 'Bedrooms'},
+                {dataField: 'Bathroom', caption: 'Bathrooms'},
+                {dataField: 'Livingroom', caption: 'Living Room'},
+                {dataField: 'Kitchen', caption: 'Kitchen'},
+                {dataField: 'Diningroom', caption: 'Dinning Room'},
+                {dataField: 'Occupied', caption: 'Occupied'}],
+
+                bindingOptions: { dataSource: 'SsCase.PropertyInfo.PropFloors' },
+                editing: {
+                    editMode: 'row',
+                    editEnabled: true,
+                    removeEnabled: true
+                }, 
+             }">
+        </div>
+    </div>
 </div>
 
 <script src="/Scripts/mindmup-editabletable.js"></script>

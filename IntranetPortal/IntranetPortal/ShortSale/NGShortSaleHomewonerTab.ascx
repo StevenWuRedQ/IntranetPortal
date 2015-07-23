@@ -36,11 +36,11 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Additional #</label>
-                    <input class="ss_form_input ss_email" mask="(999) 999-9999" clean="true" ng-model="owner.AdlPhone">
+                    <input class="ss_form_input" mask="(999) 999-9999" clean="true" ng-model="owner.AdlPhone">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Email Address</label>
-                    <input class="ss_form_input ss_email" ng-model="owner.Email">
+                    <input class="ss_form_input" ng-model="owner.Email" type="email">
                 </li>
 
             </ul>
@@ -52,6 +52,10 @@
             <div ng-show="owner.Contacts.length>0" class="ss_form_box clearfix">
                 <div dx-data-grid="{
                 columns: [
+                    { 
+                    dataField: 'Description',
+                    caption: 'Description',
+                },
                 { 
                     dataField: 'Name',
                     caption: 'Name',

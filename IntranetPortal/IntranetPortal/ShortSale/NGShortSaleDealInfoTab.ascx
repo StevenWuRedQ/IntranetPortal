@@ -71,10 +71,9 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">List Price</label>
-            <div class="input-group">
-                        <span class="input-group-addon">$</span>
-            <input class="ss_form_input currency_input" ng-model="SsCase.ListPrice">
-                </div>
+
+            <input class="ss_form_input currency_input" mask-money ng-model="SsCase.ListPrice">
+
         </li>
 
         <li class="ss_form_item">
@@ -94,8 +93,7 @@
     <div ng-show="SsCase.ValueInfoes.length>0" class="ss_form_box clearfix ss_form_small_font">
         <div dx-data-grid="{
             columns: [
-                {dataField: 'Method',
-                 caption: 'Type',
+                {dataField: 'Method', caption: 'Type',
                  lookup: {
                     dataSource:[
                      {
@@ -120,27 +118,22 @@
                     }
                     ],
                     displayExpr: 'name' ,
-                    valueExpr: 'value'
-                }},
-                {dataField: 'DateOfValue',
-                caption: 'Date Completed',
-                dataType: 'date'},
-                {dataField: 'ExpiredOn',
-                caption: 'Date Expires',
-                dataType: 'date'},
-                {dataField: 'BankValue',
-                caption: 'Value'},
-                {dataField: 'MNSP',
-                caption: 'Min Net'},
-                
+                    valueExpr: 'value'}
+                },
+                {dataField: 'DateOfValue', caption: 'Date Completed', dataType: 'date'},
+                {dataField: 'ExpiredOn', caption: 'Date Expires', dataType: 'date'},
+                {dataField: 'BankValue', caption: 'Value'},
+                {dataField: 'MNSP', caption: 'Min Net',format: 'currency'} 
             ],
             bindingOptions: { dataSource: 'SsCase.ValueInfoes' },
-             editing: {
+            editing: {
                 editMode: 'row',
                 editEnabled: true,
                 removeEnabled: true
-              }, 
-             }">
+            
+            
+            
+            }}">
         </div>
     </div>
 

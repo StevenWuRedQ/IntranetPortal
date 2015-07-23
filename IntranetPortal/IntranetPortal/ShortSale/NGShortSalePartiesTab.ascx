@@ -16,7 +16,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" type="email" ng-model="GetContactById(SsCase.Processor).Email">
+            <input class="ss_form_input"  ng-model="GetContactById(SsCase.Processor).Email" type="email">
         </li>
     </ul>
 </div>
@@ -38,7 +38,7 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" type="email" ng-model="GetContactById(SsCase.Referral).Email">
+            <input class="ss_form_input" ng-model="GetContactById(SsCase.Referral).Email" type="email" >
         </li>
         <div collapse="!referralCollapse">
             <li class="ss_form_item">
@@ -75,7 +75,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Manager).Email">
+                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Manager).Email" type="email">
             </li>
 
              <li class="ss_form_item">
@@ -92,7 +92,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Assistant).Email">
+                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Assistant).Email" type="email">
             </li>
            
         </div>
@@ -138,7 +138,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" ng-model="GetContactById(SsCase.ListingAgent).Email">
+            <input class="ss_form_input" ng-model="GetContactById(SsCase.ListingAgent).Email" type="email">
         </li>
         <div collapse="!listingAgentCollapse">
             <li class="ss_form_item">
@@ -172,7 +172,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" ng-model="GetContactById(SsCase.SellerAttorney).Email">
+            <input class="ss_form_input" ng-model="GetContactById(SsCase.SellerAttorney).Email" type="email">
         </li>
         <div collapse="!sellerAttorneyCollapse">
             <li class="ss_form_item">
@@ -247,7 +247,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" ng-model="GetContactById(SsCase.BuyerAttorney).Email">
+            <input class="ss_form_input" ng-model="GetContactById(SsCase.BuyerAttorney).Email" type="email">
         </li>
         <div collapse="!buyerAttorneryCollapse">
             <li class="ss_form_item">
@@ -295,7 +295,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.Email">
+                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.Email" type="email">
             </li>
 
         </div>
