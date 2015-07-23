@@ -1730,6 +1730,13 @@
       <DependentUpon>PropertyInfo.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControl\PropertyLinks.ascx.designer.vb">
+      <DependentUpon>PropertyLinks.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PropertyLinks.ascx.vb">
+      <DependentUpon>PropertyLinks.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControl\TitleInLeadsControl.ascx.designer.vb">
       <DependentUpon>TitleInLeadsControl.ascx</DependentUpon>
     </Compile>
@@ -3375,6 +3382,7 @@
     <Content Include="UserControl\LeadsSubMenu.ascx" />
     <Content Include="UserControl\NavMenu.ascx" />
     <Content Include="UserControl\PropertyInfo.ascx" />
+    <Content Include="UserControl\PropertyLinks.ascx" />
     <Content Include="UserControl\TitleInLeadsControl.ascx" />
     <Content Include="UserControl\UserSummary.ascx" />
     <Content Include="ViewHomeOwner.aspx" />
