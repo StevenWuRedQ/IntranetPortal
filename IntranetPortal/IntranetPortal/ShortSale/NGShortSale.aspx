@@ -338,7 +338,7 @@
 
         }
     </script>
-    <script>
+    <script type="text/javascript">
         function NGGetShortSale(caseId) {
             angular.element(document.getElementById('ShortSaleCtrl')).scope().GetShortSaleCase(caseId);
         }
@@ -499,34 +499,32 @@
 
             $scope.SaveShortSale = function (scuessfunc) {
                 var json = $scope.SsCase;
+                var data ={caseData:JSON.stringify(json)};
 
-                var data = { ssCase: JSON.stringify(json) };
-                $http.post('ShortSaleServices.svc/SaveCase', data).
+                $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
                     success(function () {
                         if (scuessfunc) {
-                            scuessfunc()
+                            scuessfunc();
                         } else {
                             alert("Save Successed !");
                         }
-
                     }).
                     error(function (data, status) {
                         alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                     });
-
             }
 
             var test = 123;
             /////////////////Code Scope Steph ////////////////
             $scope.NGremoveArrayItem = function (item, index) {
                 item.splice(index, 1);
-            }
-
+            };
+          
             $scope.SsCase.Mortgages = [{}];
             $scope.offerBindingOptions = function () {
                 return {
                     columns: [
-                    {
+                        {
                         dataField: 'OfferType',
                         caption: 'Type',
                         lookup: {
@@ -561,8 +559,8 @@
                             return $scope.SsCase.BuyerEntity.Entity;
                         },
                         allowEditing: false,
-                    },
-                    {
+                        },
+                        {
                         caption: 'Signor',
                         calculateCellValue: function (data) {
                             if ($scope.SsCase.BuyerEntity === undefined) return "";
@@ -571,22 +569,22 @@
                         allowEditing: false,
                         
 
-                    },
-                    {
+                        },
+                        {
                         caption: 'Date Corp Formed',
                         calculateCellValue: function (data) {
                             if ($scope.SsCase.BuyerEntity === undefined) return "";
                             return $scope.SsCase.BuyerEntity.DateOpened;
                         },
                         allowEditing: false,
-                    },
-                    {
+                        },
+                        {
                         dataField: 'DateOfContract',
                         dataType: 'date'
-                    },
-                    {
+                        },
+                        {
                         dataField: 'OfferAmount',
-                    },
+                        },
                     {
                         dataField: 'DateSubmitted',
                         dataType: 'date'

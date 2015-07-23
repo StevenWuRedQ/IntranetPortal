@@ -1,4 +1,7 @@
-﻿Partial Public Class PropertyOwner
+﻿Imports System.ComponentModel.DataAnnotations
+
+<MetadataType(GetType(PropertyOwnerMetadata))>
+Partial Public Class PropertyOwner
 
     Public Property DataStatus As ModelStatus
 
@@ -62,4 +65,13 @@
             context.SaveChanges()
         End Using
     End Sub
+End Class
+
+Public Class PropertyOwnerMetadata
+    <Newtonsoft.Json.JsonConverter(GetType(Core.JsArrayToStringConverter))>
+    Public Property Notes As String
+
+    <Newtonsoft.Json.JsonConverter(GetType(Core.JsArrayToStringConverter))>
+    Public Property Contacts As String
+
 End Class

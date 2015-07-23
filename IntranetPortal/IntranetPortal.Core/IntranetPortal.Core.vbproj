@@ -181,6 +181,7 @@
     <Compile Include="DocumentService.vb" />
     <Compile Include="EmailService.vb" />
     <Compile Include="HolidayService.vb" />
+    <Compile Include="JsArrayToStringConverter.vb" />
     <Compile Include="MapService.vb" />
     <Compile Include="PortalSetting.vb" />
     <Compile Include="Model\SpecialDay.vb" />

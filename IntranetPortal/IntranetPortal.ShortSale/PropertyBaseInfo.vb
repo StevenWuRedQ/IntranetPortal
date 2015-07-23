@@ -59,7 +59,10 @@ Partial Public Class PropertyBaseInfo
             If _owners IsNot Nothing Then
                 For Each owner In _owners
                     owner.BBLE = BBLE
-                    owner.Save()
+
+                    If Not String.IsNullOrEmpty(owner.FirstName) AndAlso Not String.IsNullOrEmpty(owner.LastName) Then
+                        owner.Save()
+                    End If
                 Next
             End If
         End Using

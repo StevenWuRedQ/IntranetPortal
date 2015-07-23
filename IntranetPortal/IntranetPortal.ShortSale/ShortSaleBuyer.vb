@@ -20,8 +20,7 @@
 
             If buyer Is Nothing Then
                 CreateDate = DateTime.Now
-                context.ShortSaleBuyers.Add(buyer)
-                context.Entry(Me).State = Data.Entity.EntityState.Added
+                context.ShortSaleBuyers.Add(Me)
             Else
                 buyer = ShortSaleUtility.SaveChangesObj(buyer, Me)
             End If

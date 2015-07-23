@@ -3,6 +3,7 @@ Imports System.ServiceModel.Activation
 Imports System.ServiceModel.Web
 Imports System.Web.Script.Services
 Imports IntranetPortal.ShortSale
+Imports Newtonsoft.Json
 
 <ServiceContract(Namespace:="")>
 <AspNetCompatibilityRequirements(RequirementsMode:=AspNetCompatibilityRequirementsMode.Allowed)>
@@ -35,10 +36,19 @@ Public Class ShortSaleServices
     End Function
 
     <OperationContract()>
-    <WebInvoke(Method:="POST", RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json)>
-    Public Sub SaveCase(ssCase As ShortSaleCase)
-        ssCase.SaveChanges()
-    End Sub
+    <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
+    Public Function SaveCase(caseData As String) As Channels.Message
+        Dim res = JsonConvert.DeserializeObject(Of ShortSaleCase)(caseData)
+
+        Try
+            res.SaveChanges()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+        Return Nothing
+    End Function
 
 #End Region
 
