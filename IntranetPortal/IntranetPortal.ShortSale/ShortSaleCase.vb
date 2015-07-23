@@ -166,30 +166,30 @@ Partial Public Class ShortSaleCase
         End Set
     End Property
 
-    Private _valueInfos As List(Of PropertyValueInfo)
-    Public Property ValueInfoes As List(Of PropertyValueInfo)
+    Private _valueInfos As PropertyValueInfo()
+    Public Property ValueInfoes As PropertyValueInfo()
         Get
             If _valueInfos Is Nothing Then
-                _valueInfos = PropertyValueInfo.GetValueInfos(BBLE)
+                _valueInfos = PropertyValueInfo.GetValueInfos(BBLE).ToArray
             End If
 
             Return _valueInfos
         End Get
-        Set(value As List(Of PropertyValueInfo))
+        Set(value As PropertyValueInfo())
             _valueInfos = value
         End Set
     End Property
 
-    Private _offers As List(Of ShortSaleOffer)
-    Public Property ShortSaleOffers As List(Of ShortSaleOffer)
+    Private _offers As ShortSaleOffer()
+    Public Property ShortSaleOffers As ShortSaleOffer()
         Get
             If _offers Is Nothing Then
-                _offers = ShortSaleOffer.GetOffers(BBLE)
+                _offers = ShortSaleOffer.GetOffers(BBLE).ToArray
             End If
 
             Return _offers
         End Get
-        Set(value As List(Of ShortSaleOffer))
+        Set(value As ShortSaleOffer())
             _offers = value
         End Set
     End Property
@@ -477,6 +477,7 @@ Partial Public Class ShortSaleCase
 
             context.SaveChanges()
 
+            'Save mortgages
             If _mortgages IsNot Nothing Then
                 For Each mg In _mortgages
                     If mg.CaseId = 0 Then
@@ -487,6 +488,7 @@ Partial Public Class ShortSaleCase
                 Next
             End If
 
+            'save offers
             If _offers IsNot Nothing Then
                 For Each offer In _offers
                     If String.IsNullOrEmpty(offer.BBLE) Then
@@ -496,6 +498,20 @@ Partial Public Class ShortSaleCase
                 Next
             End If
 
+            Dim oldOffers = context.ShortSaleOffers.Where(Function(so) so.BBLE = BBLE).ToList
+            If oldOffers.Count > _offers.Count Then
+                For Each offer In oldOffers
+                    If Not _offers.Any(Function(so) so.OfferId = offer.OfferId) Then
+                        context.ShortSaleOffers.Remove(offer)
+                    End If
+                Next
+
+                context.SaveChanges()
+            End If
+
+
+
+            'Save value info
             If _valueInfos IsNot Nothing Then
                 For Each info In _valueInfos
                     If String.IsNullOrEmpty(info.BBLE) Then
@@ -504,6 +520,17 @@ Partial Public Class ShortSaleCase
 
                     info.Save()
                 Next
+            End If
+
+            Dim oldInfoes = context.PropertyValueInfoes.Where(Function(pv) pv.BBLE = BBLE).ToList
+            If oldInfoes.Count > _valueInfos.Count Then
+                For Each info In oldInfoes
+                    If Not _valueInfos.Any(Function(vi) vi.ValueId = info.ValueId) Then
+                        context.PropertyValueInfoes.Remove(info)
+                    End If
+                Next
+
+                context.SaveChanges()
             End If
 
             If _propInfo IsNot Nothing Then
@@ -868,7 +895,7 @@ Partial Public Class ShortSaleCase
                 item.ShortSale.PropertyInfo = item.PropertyInfo
                 item.ShortSale.Mortgages = item.Mortgages.ToArray
                 item.ShortSale.PropertyOwner = item.Owner
-                item.ShortSale.ValueInfoes = item.ValueInfo.ToList
+                item.ShortSale.ValueInfoes = item.ValueInfo.ToArray
                 item.ShortSale.LastActivity = logData.OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault
                 item.ShortSale.PipeLine = logData.Where(Function(Sa) Sa.ActivityType = "Pipeline").OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault
 
