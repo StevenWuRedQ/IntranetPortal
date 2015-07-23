@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html id="rootMaster" xmlns="http://www.w3.org/1999/xhtml" xmlns:ng="http://angularjs.org"  ng-app="PortalApp">
+<html id="rootMaster" xmlns="http://www.w3.org/1999/xhtml" xmlns:ng="http://angularjs.org" ng-app="PortalApp">
 <head runat="server">
     <title></title>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
@@ -40,20 +40,26 @@
 
     <script>
         /* init angular app, add your dependency here 'ngMaterial' */
-        var portalApp = angular.module('PortalApp', ['ui.bootstrap','dx','ngMask']);
-        
+        var portalApp = angular.module('PortalApp', ['ui.bootstrap', 'dx', 'ngMask']);
+
         portalApp.directive('ssDate', function () {
             return {
                 restrict: 'A',
                 link: function (scope, el, attrs) {
                     $(el).datepicker({});
-                    $(el).on('change', function () {
-                        scope.$eval(attrs.ngModel + "='" + el.val() + "'");
-                    });
+
+                    scope.$watch(attrs.ngModel, function (newValue, oldValue) {
+                        var dateStr = newValue;
+                        dateStr = !dateStr ? '' : dateStr.toString();
+                        if (dateStr && dateStr.indexOf('-') >= 0) {
+                            var dd = new Date(dateStr);
+                            $(el).val((dd.getMonth() + 1) + '/' + (dd.getDate()) + '/' + (dd.getFullYear()));
+
+                        }
+                    })
                 }
             };
         });
-
         portalApp.directive('inputMask', function () {
             return {
                 restrict: 'A',
@@ -65,7 +71,6 @@
                 }
             };
         });
-
         portalApp.directive('radioInit', function () {
             return {
                 restrict: 'A',
@@ -85,11 +90,11 @@
                     })
                     $(el).on('blur', function () { $(this).formatCurrency(); });
                     $(el).on('focus', function () { $(this).toNumber() });
-                    
+
                 },
             };
         });
-        
+
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
