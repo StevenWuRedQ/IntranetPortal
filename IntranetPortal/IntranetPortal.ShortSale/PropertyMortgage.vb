@@ -1,4 +1,7 @@
-﻿Partial Public Class PropertyMortgage
+﻿Imports System.ComponentModel.DataAnnotations
+
+<MetadataType(GetType(PropertyMortgageMetadata))>
+Partial Public Class PropertyMortgage
 
     Private _shortSaleDeptContact As PartyContact
     Public Property ShortSaleDeptContact As PartyContact
@@ -160,4 +163,12 @@
             context.SaveChanges()
         End Using
     End Sub
+End Class
+
+Public Class PropertyMortgageMetadata
+    <Newtonsoft.Json.JsonConverter(GetType(Core.JsArrayToStringConverter))>
+    Public Property Notes As String
+
+    <Newtonsoft.Json.JsonConverter(GetType(Core.JsArrayToStringConverter))>
+    Public Property Contacts As String
 End Class

@@ -73,5 +73,4 @@ Public Class PropertyOwnerMetadata
 
     <Newtonsoft.Json.JsonConverter(GetType(Core.JsArrayToStringConverter))>
     Public Property Contacts As String
-
 End Class
