@@ -483,9 +483,13 @@
                 if (model) {
                     var array = $scope.$eval(model);
                     if (!array) {
-                        $scope.$eval(model + '=[{Title: ""}]');
+
+                        $scope.$eval(model + '=[{}]');
                     } else {
+
                         $scope.$eval(model + '.push({})');
+
+
                     }
                 } else {
                     item.push({});
@@ -517,47 +521,86 @@
             $scope.NGremoveArrayItem = function (item, index) {
                 item.splice(index, 1);
             }
-          
-            $scope.mortgageContactsBindingOptions = function (index) {
-                var ds = 'SsCase.Mortgages[' + index + '].Contacts';
 
+            $scope.SsCase.Mortgages = [{}];
+            $scope.offerBindingOptions = function () {
                 return {
                     columns: [
-                        {
-                            dataFiled: 'Title',
-                            caption: 'Title',
-                            dataType: 'string',
+                    {
+                        dataField: 'OfferType',
+                        caption: 'Type',
+                        lookup: {
+                            dataSource: [
+
+                            {
+                                name: 'Initial Offer',
+                                value: 'Initial Offer'
+                            },
+                             {
+                                 name: 'Bank Counter',
+                                 value: 'Bank Counter'
+                             },
+                             {
+                                 name: 'Buyer Counter',
+                                 value: 'Buyer Counter'
+                             },
+                            {
+                                name: 'New Buyer Offer',
+                                value: 'New Buyer Offer'
+                            }
+                            ],
+                            displayExpr: 'name',
+                            valueExpr: 'value'
+                        }
+
+                    },
+                    {
+                        caption: 'Buying Entity',
+                        calculateCellValue: function (data) {
+                            if ($scope.SsCase.BuyerEntity === undefined) return "";
+                            return $scope.SsCase.BuyerEntity.Entity;
                         },
-                        {
-                            dataFiled: 'Name',
-                            caption: 'Name',
-                            dataType: 'string',
+                        allowEditing: false,
+                    },
+                    {
+                        caption: 'Signor',
+                        calculateCellValue: function (data) {
+                            if ($scope.SsCase.BuyerEntity === undefined) return "";
+                            return $scope.SsCase.BuyerEntity.Signor;
                         },
-                        {
-                            dataFiled: 'Phone',
-                            caption: 'Phone #',
-                            dataType: 'string',
+                        allowEditing: false,
+                        
+
+                    },
+                    {
+                        caption: 'Date Corp Formed',
+                        calculateCellValue: function (data) {
+                            if ($scope.SsCase.BuyerEntity === undefined) return "";
+                            return $scope.SsCase.BuyerEntity.DateOpened;
                         },
-                        {
-                            dataFiled: 'Fax',
-                            caption: 'Fax #',
-                            dataType: 'string',
-                        },
-                        {
-                            dataFiled: 'Email',
-                            caption: 'Email',
-                            dataType: 'string',
-                        },
-                    ],
-                    bindingOptions: { dataSource: ds },
+                        allowEditing: false,
+                    },
+                    {
+                        dataField: 'DateOfContract',
+                        dataType: 'date'
+                    },
+                    {
+                        dataField: 'OfferAmount',
+                    },
+                    {
+                        dataField: 'DateSubmitted',
+                        dataType: 'date'
+                    }],
+                    bindingOptions: { dataSource: 'SsCase.ShortSaleOffers' },
                     editing: {
                         editMode: 'row',
                         editEnabled: true,
                         removeEnabled: true,
-                        insertEnabled: true
                     },
                 }
+                    
             }
+          
         });
 
     </script>

@@ -1,4 +1,7 @@
-﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGShortSaleDealInfoTab.ascx.vb" Inherits="IntranetPortal.NGShortSaleDealInfoTab" %>
+﻿
+
+
+<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGShortSaleDealInfoTab.ascx.vb" Inherits="IntranetPortal.NGShortSaleDealInfoTab" %>
 <%@ Import Namespace="IntranetPortal.ShortSale" %>
 <%@ Import Namespace="IntranetPortal" %>
 <div class="clearfix">
@@ -68,7 +71,10 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">List Price</label>
+            <div class="input-group">
+                        <span class="input-group-addon">$</span>
             <input class="ss_form_input currency_input" ng-model="SsCase.ListPrice">
+                </div>
         </li>
 
         <li class="ss_form_item">
@@ -84,10 +90,9 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Valuation</h4>
-    <div class="ss_form_box clearfix ss_form_small_font">
+    <h4 class="ss_form_title">Valuation&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.ValueInfoes,'SsCase.ValueInfoes')" title="Add"></i></h4>
+    <div ng-show="SsCase.ValueInfoes.length>0" class="ss_form_box clearfix ss_form_small_font">
         <div dx-data-grid="{
-             dataSource: SsCase.ValueInfos,
             columns: [
                 {dataField: 'Method',
                  caption: 'Type',
@@ -133,9 +138,8 @@
              editing: {
                 editMode: 'row',
                 editEnabled: true,
-                removeEnabled: true,
-                insertEnabled: true
-            }, 
+                removeEnabled: true
+              }, 
              }">
         </div>
     </div>
@@ -143,69 +147,10 @@
 </div>
 
 <div class="ss_form ">
-    <h4 class="ss_form_title">Offer</h4>
-    <div class="ss_form_box clearfix ss_form_small_font">
-        <div dx-data-grid="{
-            columns: [
-            { 
-                dataField: 'OfferType',
-                caption: 'Type',
-                lookup: {
-                    dataSource:[
-
-                    {
-                        name: 'Initial Offer',
-                        value: 'Initial Offer'
-                    },
-                     {
-                         name: 'Bank Counter',
-                         value: 'Bank Counter'
-                     },
-                     {
-                         name: 'Buyer Counter',
-                         value: 'Buyer Counter'
-                     },
-                    {
-                        name: 'New Buyer Offer',
-                        value: 'New Buyer Offer'
-                    }
-                    ],
-                    displayExpr: 'name' ,
-                    valueExpr: 'value'
-                }
-                
-            },
-            {
-                dataField: 'BuyingEntity',
-                allowEditing: false,
-            },
-            {
-                dataField: 'Signor',
-                allowEditing: false
-            },
-            {
-                dataField: 'DateCorpFormed',
-                allowEditing: false,
-            },
-            {   
-                dataField: 'DateOfContract',
-                dataType: 'date'
-            },
-            {
-                dataField: 'OfferAmount',
-            },
-            {
-                dataField: 'DateSubmitted',
-                dataType: 'date'
-            }],
-            bindingOptions: { dataSource: 'SsCase.ShortSaleOffers' },
-            editing: {
-                editMode: 'row',
-                editEnabled: true,
-                removeEnabled: true,
-                insertEnabled: true
-            }, 
-        }">
+    <h4 class="ss_form_title">Offer&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.ShortSaleOffers,'SsCase.ShortSaleOffers')" title="Add"></i></h4>
+    <div ng-show="SsCase.ShortSaleOffers.length>0" class="ss_form_box clearfix ss_form_small_font">
+        <div dx-data-grid="offerBindingOptions()">
         </div>
     </div>
 </div>
+

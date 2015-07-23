@@ -12,7 +12,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Phone #</label>
-            <input class="ss_form_input" type="phone" ng-model="GetContactById(SsCase.Processor).OfficeNO">
+            <input class="ss_form_input" type="phone" ng-model="GetContactById(SsCase.Processor).OfficeNO" mask="(999) 999-9999" clean="true">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
@@ -33,7 +33,7 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" ng-model="GetContactById(SsCase.Referral).Cell">
+            <input class="ss_form_input" ng-model="GetContactById(SsCase.Referral).Cell" mask="(999) 999-9999" clean="true">
         </li>
 
         <li class="ss_form_item">
@@ -58,7 +58,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office #</label>
-                <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.OfficeNO">
+                <input class="ss_form_input" ng-model="SsCase.Parties.ReferralContact.OfficeNO" mask="(999) 999-9999" clean="true">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Manager</label>
@@ -70,7 +70,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
-                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Manager).Cell">
+                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Manager).Cell" mask="(999) 999-9999" clean="true">
             </li>
 
             <li class="ss_form_item">
@@ -88,7 +88,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
-                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Assistant).Cell">
+                <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Assistant).Cell" mask="(999) 999-9999" clean="true">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
@@ -134,7 +134,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" ng-model="GetContactById(SsCase.ListingAgent).Cell">
+            <input class="ss_form_input" ng-model="GetContactById(SsCase.ListingAgent).Cell" mask="(999) 999-9999" clean="true">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
@@ -151,31 +151,9 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office #</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.ListingAgent).OfficeNO">
+                <input class="ss_form_input" ng-model="GetContactById(SsCase.ListingAgent).OfficeNO" mask="(999) 999-9999" clean="true">
             </li>
         </div>
-        <%-- 
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">name</label>
-            <input class="ss_form_input ss_not_edit" data-field="ListingAgentContact.Name">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Office</label>
-            <input class="ss_form_input ss_not_edit" data-field="ListingAgentContact.Office">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">office #</label>
-            <input class="ss_form_input ss_not_edit" data-field="ListingAgentContact.OfficeNO">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input ss_not_edit" data-field="ListingAgentContact.Cell">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">email</label>
-            <input class="ss_form_input ss_not_edit" data-field="ListingAgentContact.Email">
-        </li>
-        --%>
     </ul>
 </div>
 
@@ -190,7 +168,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" ng-model="GetContactById(SsCase.SellerAttorney).Cell">
+            <input class="ss_form_input" ng-model="GetContactById(SsCase.SellerAttorney).Cell" mask="(999) 999-9999" clean="true">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
@@ -207,37 +185,10 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office #</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.SellerAttorney).OfficeNO">
+                <input class="ss_form_input" ng-model="GetContactById(SsCase.SellerAttorney).OfficeNO" mask="(999) 999-9999" clean="true">
             </li>
         </div>
 
-        <%--
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">name</label>
-            <input class="ss_form_input ss_not_edit" data-field="SellerAttorneyContact.Name">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">office</label>
-            <input class="ss_form_input ss_not_edit" data-field="SellerAttorneyContact.Office">
-        </li>
-
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Address</label>
-            <input class="ss_form_input ss_not_edit" data-field="SellerAttorneyContact.Address">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Office #</label>
-            <input class="ss_form_input ss_not_edit" data-field="SellerAttorneyContact.OfficeNO">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input ss_not_edit" data-field="SellerAttorneyContact.Cell">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">email</label>
-            <input class="ss_form_input ss_not_edit" data-field="SellerAttorneyContact.Email">
-        </li>
-        --%>
     </ul>
 </div>
 
@@ -264,11 +215,11 @@
         <div collapse="!buyerCollapse">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Opened</label>
-                <input class="ss_form_input" ss-date="" ng-model="SsCase.BuyerEntity.DateOpened">
+                <input class="ss_form_input" ss-date ng-model="SsCase.BuyerEntity.DateOpened">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.BuyerEntity.SignorId).OfficeNO">
+                <input class="ss_form_input" ng-model="GetContactById(SsCase.BuyerEntity.SignorId).OfficeNO" mask="(999) 999-9999" clean="true">
                 
             </li>
             <li class="ss_form_item">
@@ -277,32 +228,6 @@
             </li>
         </div>
 
-        <%--
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">name</label>
-            <input class="ss_form_input ss_not_edit" data-field="BuyerContact.Name">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">corp name</label>
-            <input class="ss_form_input ss_not_edit" data-field="BuyerContact.CorpName">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Office</label>
-            <input class="ss_form_input ss_not_edit" data-field="BuyerContact.Office">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">office #</label>
-            <input class="ss_form_input ss_not_edit" data-field="BuyerContact.OfficeNO">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input ss_not_edit" data-field="BuyerContact.Cell">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">email</label>
-            <input class="ss_form_input ss_not_edit" data-field="BuyerContact.Email">
-        </li>
-        --%>
     </ul>
 </div>
 
@@ -318,7 +243,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" ng-model="GetContactById(SsCase.BuyerAttorney).Cell">
+            <input class="ss_form_input" ng-model="GetContactById(SsCase.BuyerAttorney).Cell" mask="(999) 999-9999" clean="true">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
@@ -335,35 +260,10 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office #</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.BuyerAttorney).OfficeNO">
+                <input class="ss_form_input" ng-model="GetContactById(SsCase.BuyerAttorney).OfficeNO" mask="(999) 999-9999" clean="true">
             </li>
         </div>
-        <%-- 
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">name</label>
-            <input class="ss_form_input ss_not_edit" data-field="BuyerAttorneyContact.Name">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">office</label>
-            <input class="ss_form_input ss_not_edit" data-field="BuyerAttorneyContact.Office">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">address</label>
-            <input class="ss_form_input ss_not_edit" data-field="BuyerAttorneyContact.Address">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Office #</label>
-            <input class="ss_form_input ss_not_edit" data-field="BuyerAttorneyContact.OfficeNO">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input ss_not_edit" data-field="BuyerAttorneyContact.Cell">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">email</label>
-            <input class="ss_form_input ss_not_edit" data-field="BuyerAttorneyContact.Email">
-        </li>
-        --%>
+
     </ul>
 </div>
 
@@ -382,7 +282,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">office #</label>
-            <input class="ss_form_input" ng-model="SsCase.BuyerTitle.OfficeNO">
+            <input class="ss_form_input" ng-model="SsCase.BuyerTitle.OfficeNO" mask="(999) 999-9999" clean="true">
         </li>
         <div collapse="!titleCompanyCollapse">
             <li class="ss_form_item">
@@ -391,7 +291,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Rep #</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.RepNo">
+                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.RepNo" mask="(999) 999-9999" clean="true">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
@@ -399,33 +299,6 @@
             </li>
 
         </div>
-
-        <%-- 
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">name</label>
-            <input class="ss_form_input ss_not_edit" data-field="TitleCompanyContact.Name">
-        </li>
-
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Office</label>
-            <input class="ss_form_input ss_not_edit" data-field="TitleCompanyContact.Office">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">address</label>
-            <input class="ss_form_input ss_not_edit" data-field="TitleCompanyContact.Address">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">office #</label>
-            <input class="ss_form_input ss_not_edit" data-field="TitleCompanyContact.OfficeNO">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input ss_not_edit" data-field="TitleCompanyContact.Cell">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">email</label>
-            <input class="ss_form_input ss_not_edit" data-field="TitleCompanyContact.Email">
-        </li>
-        --%>
+                
     </ul>
 </div>

@@ -32,7 +32,10 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Amount</label>
-                    <input class="ss_form_input " ng-model="mortgage.PayoffAmount">
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input class="ss_form_input " ng-model="mortgage.PayoffAmount">
+                        </div>
                 </li>
 
             </ul>
@@ -99,7 +102,7 @@
 
         <div class="ss_form_box clearfix">
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Short Sale Dept #</label>
+                <label class="ss_form_input_title">Short Sale Dept</label>
                 <input class="ss_form_input " ng-model="mortgage.ShortSaleDeptNo">
             </li>
             <li class="ss_form_item">
@@ -107,16 +110,44 @@
                 <input class="ss_form_input " ng-model="mortgage.CustomerServiceNo">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Customer Service #</label>
+                <label class="ss_form_input_title">Short Sale Fax #</label>
                 <input class="ss_form_input " ng-model="mortgage.CustomerServiceNo">
             </li>
         </div>
-        {{SsCase.Mortgages|json}}
+
         <div class="ss_form">
-            <h4 class="ss_form_title">Contacts&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortgage.Contacts,'SsCase.Mortgages['+$index+'].Contacts')" title="Add"></i></h4>
-            <div class="ss_form_box clearfix">
-            <div dx-data-grid="mortgageContactsBindingOptions($index)">
-            </div>
+            <h4 class="ss_form_title">Title Contacts&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortgage.Contacts,'SsCase.Mortgages['+$index+'].Contacts')" title="Add"></i></h4>
+
+            <div ng-show="mortgage.Contacts.length>0" class="ss_form_box clearfix">
+                <div dx-data-grid="{
+                columns: [
+                { 
+                dataField: 'Title',
+                caption: 'Title',
+                
+                }, { 
+                dataField: 'Name',
+                caption: 'Name',
+                
+                },{ 
+                dataField: 'Phone',
+                caption: 'Phone #',
+                
+                },{ 
+                dataField: 'Fax',
+                caption: 'Fax #',
+                },{ 
+                dataField: 'Email',
+                caption: 'Email',
+                }],
+                bindingOptions: { 
+                    dataSource: 'SsCase.Mortgages['+$index+'].Contacts' },
+                editing: {
+                    editMode: 'row',
+                    editEnabled: true,
+                    removeEnabled: true,
+                } }">
+                </div>
             </div>
         </div>
 
@@ -138,11 +169,11 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Address</label>
-                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ForeclosureAttorney).Address">
+                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ForeclosureAttorney).Address" readonly="readonly">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Office #</label>
-                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ForeclosureAttorney).OfficeNO">
+                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ForeclosureAttorney).OfficeNO" mask="999-99-9999" clean="true" readonly="readonly">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Assigned Attorney</label>
@@ -150,7 +181,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Attorney Direct #</label>
-                    <input class="ss_form_input" ng-model="mortgage.AttorneyDirectNo">
+                    <input class="ss_form_input" ng-model="mortgage.AttorneyDirectNo" mask="999-99-9999" clean="true">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Attorney Email</label>
@@ -165,6 +196,7 @@
     <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.Mortgages, 'SsCase.Mortgages')" ng-show="SsCase.Mortgages.length<=2" title="Add"></i>
 </tabset>
 
+
 <div class="ss_form">
     <h4 class="ss_form_title">Lien</h4>
     <div class="ss_form_box clearfix">
@@ -174,29 +206,28 @@
                         dataField: 'Type',
                         caption: 'Type'
                     },
-                        {
-                            dataField: 'Effective',
-                            caption: 'Effective',
-                            dataType: 'date'
-                        },
-                        {
-                            dataField: 'Expiration',
-                            caption: 'Expiration',
-                            dataType: 'date'
-                        },
-                     {
-                         dataField: 'Plaintiff',
-                         caption: 'Plaintiff'
-                     },
-                     {
-                         dataField: 'Defendant',
-                         caption: 'Defendant'
-                     },
-                     {
-                         dataField: 'Index',
-                         caption: 'Index'
-                     }
-                    ],
+                    {
+                        dataField: 'Effective',
+                        caption: 'Effective',
+                        dataType: 'date'
+                    },
+                    {
+                        dataField: 'Expiration',
+                        caption: 'Expiration',
+                        dataType: 'date'
+                    },
+                    {
+                        dataField: 'Plaintiff',
+                        caption: 'Plaintiff'
+                    },
+                    {
+                        dataField: 'Defendant',
+                        caption: 'Defendant'
+                    },
+                    {
+                        dataField: 'Index',
+                        caption: 'Index'
+                    } ],
                     bindingOptions: { dataSource: 'SsCase.LeadsInfo.LisPens' }
                 }">
         </div>

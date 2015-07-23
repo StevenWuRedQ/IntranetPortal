@@ -1,13 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGShortSalePropertyTab.ascx.vb" Inherits="IntranetPortal.NGShortSalePropertyTab" %>
 <%@ Import Namespace="IntranetPortal" %>
-<script>
-    
-</script>
-<div class="clearfix">
-    <div style="float: right">
-        <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
-    </div>
-</div>
 
 <div>
     <h4 class="ss_form_title">Property Address</h4>
@@ -47,7 +39,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Zip</label>
-            <input class="ss_form_input" ng-model="SsCase.LeadsInfo.ZipCode" readonly="readonly">
+            <input class="ss_form_input" mask="99999" clean='true' ng-model="SsCase.LeadsInfo.ZipCode" readonly="readonly">
         </li>
 
 
@@ -187,7 +179,7 @@
                 <input class="ss_form_input" ng-model="floor.Occupied">
             </td>
             <td>
-                <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" ng-click="NGDeleteItem(SsCase.PropertyInfo.PropFloors,$index)" title="Delete"></i>
+                <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.PropFloors,$index)" title="Delete"></i>
             </td>
         </tr>
     </table>
@@ -203,28 +195,7 @@
         initToolTips();
 
         format_input();
-        //$("#prioity_content").mCustomScrollbar(
-        //      {
-        //          theme: "minimal-dark"
-        //      }
-        //      );
-        //$("#home_owner_content").mCustomScrollbar(
-        //    {
-        //        theme: "minimal-dark"
-        //    }
-        // );
 
-        //$(".dxgvCSD").mCustomScrollbar(
-        //    {
-        //        theme: "minimal-dark",
-
-        //    }
-        // );
     }
-    //$(document).ready(function () {
-    //    // Handler for .ready() called.
-    //    d_alert("rund edit ");
-    //    $("#home_breakdown_table").editableTableWidget();
-    //});
 
 </script>

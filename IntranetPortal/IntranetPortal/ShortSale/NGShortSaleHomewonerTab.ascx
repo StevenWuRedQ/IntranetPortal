@@ -47,29 +47,35 @@
         </div>
 
         <div class="ss_form">
-
             <h4 class="ss_form_title">Contacts <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Contacts,'SsCase.PropertyInfo.Owners['+$index+'].Contacts')" title="Add"></i></h4>
-            <ul class="ss_form_box clearfix" ng-repeat="(index,contact) in owner.Contacts">
-                <li style="list-style-type: none">
-                    <h4>Contact {{index + 1}} </h4>
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">name</label>
-                    <input class="ss_form_input ss_not_empty" ng-model="contact.Name">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Phone #</label>
-                    <input class="ss_form_input ss_not_empty" ng-model="contact.Phone">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Email</label>
-                    <input class="ss_form_input" ng-model="contact.Email">
-                </li>
-            </ul>
+
+            <div ng-show="owner.Contacts.length>0" class="ss_form_box clearfix">
+                <div dx-data-grid="{
+                columns: [
+                { 
+                    dataField: 'Name',
+                    caption: 'Name',
+                },{ 
+                    dataField: 'Phone',
+                    caption: 'Phone #'
+                },{ 
+                    dataField: 'Email',
+                    caption: 'Email',
+                }],
+                bindingOptions: { 
+                    dataSource: 'SsCase.PropertyInfo.Owners['+$index+'].Contacts' },
+                editing: {
+                    editMode: 'row',
+                    editEnabled: true,
+                    removeEnabled: true
+                } }">
+                </div>
+            </div>
         </div>
+
         <div class="ss_form">
 
-            <h4 class="ss_form_title">Notes <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Notes,'SsCase.PropertyInfo.Owners['+$index+'].Notes')" title="Add"></i></h4>
+             <h4 class="ss_form_title">Notes <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Notes,'SsCase.PropertyInfo.Owners['+$index+'].Notes')" title="Add"></i></h4>
             <ul class="ss_form_box clearfix" ng-repeat="(index,note) in owner.Notes">
                 
                 <li class="ss_form_item ss_form_item_line">
@@ -166,37 +172,6 @@
                 
             </ul>
         </div>
-      <%--  <div class="ss_form">
-            <h4 class="ss_form_title">Estate Attorney
-                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('PropertyInfo.Owners[__index__].EstateAttorneyContact', function(party){ShortSaleCaseData.PropertyInfo.Owners[__index__].EstateAttorneyId =party.ContactId; })"></i>
-
-            </h4>
-            <ul class="ss_form_box clearfix">
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Name</label>
-                    <input class="ss_form_input ss_not_edit" ng-model="owner.EstateAttorneyContact.Name">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Office #</label>
-                    <input class="ss_form_input ss_not_edit" ng-model="owner.EstateAttorneyContact.OfficeNO">
-                </li>
-
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Email</label>
-                    <input class="ss_form_input ss_not_edit" ng-model="owner.EstateAttorneyContact.Email">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">also acting as seller attorney</label>
-
-                    <input type="radio" id="checkYes_ActingAsSellerAttorney__index__" ng-model="owner.ActingAsSellerAttorney" data-radio="Y" name="48__index__" value="YES">
-                    <label for="checkYes_ActingAsSellerAttorney__index__" class="input_with_check"><span class="box_text">Yes</span></label>
-
-                    <input type="radio" id="none_check_no48__index__" ng-model="owner.ActingAsSellerAttorney" name="48__index__" value="NO">
-                    <label for="none_check_no48__index__" class="input_with_check"><span class="box_text">No</span></label>
-
-                </li>
-            </ul>
-        </div>--%>
     </div>
         </tab>
        <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.PropertyInfo.Owners)" ng-show="SsCase.PropertyInfo.Owners.length<=2" title="Add"></i>
