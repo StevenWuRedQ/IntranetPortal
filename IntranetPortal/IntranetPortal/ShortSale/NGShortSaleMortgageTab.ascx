@@ -103,15 +103,15 @@
         <div class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Short Sale Dept</label>
-                <input class="ss_form_input " ng-model="mortgage.ShortSaleDeptNo">
+                <div class="contact_box" dx-select-box="InitContact('SsCase.Mortgages['+$index+'].ShortSaleDept')"></div>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Customer Service #</label>
-                <input class="ss_form_input " ng-model="mortgage.CustomerServiceNo">
+                <input class="ss_form_input" ng-model="GetContactById(mortgage.ShortSaleDept).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Short Sale Fax #</label>
-                <input class="ss_form_input " ng-model="mortgage.CustomerServiceNo">
+                <input class="ss_form_input" ng-model="GetContactById(mortgage.ShortSaleDept).FAX" readonly="readonly">
             </li>
         </div>
 

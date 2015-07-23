@@ -144,9 +144,7 @@
                         <option>SSI / Disability</option>
                     </select>
                 </li>
-                <%--<li class="ss_form_item">
-                      <input type="button" onclick="testClick()" value="Test">
-                 </li>--%>
+
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">bank account</label>
