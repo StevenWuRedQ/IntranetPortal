@@ -54,7 +54,7 @@ Public Class Form1
         mg.AuthorizationSent = "test"
         mg.CreateBy = "Testing"
 
-        ssCase.Mortgages.Add(mg)
+        'ssCase.Mortgages.Add(mg)
 
         ssCase.Save()
     End Sub

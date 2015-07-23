@@ -1,7 +1,7 @@
 ﻿Imports IntranetPortal.ShortSale
 Public Class ShortSaleMortgageTab
     Inherits System.Web.UI.UserControl
-    Public Property mortgagesData As New List(Of PropertyMortgage)
+    Public Property mortgagesData As PropertyMortgage()
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 

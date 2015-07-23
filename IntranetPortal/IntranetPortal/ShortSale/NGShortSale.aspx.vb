@@ -259,6 +259,7 @@ Public Class NGShortSale
     Protected Sub cbpLogs_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         Dim ssCase = ShortSaleCase.GetCase(e.Parameter)
         ActivityLogs.BindData(ssCase.BBLE)
+        ShortSaleFileOverview.BindData(ssCase.BBLE)
     End Sub
     Public Function GetAllContact() As String
         Return ShortSale.PartyContact.getAllContact.ToJsonString

@@ -71,22 +71,22 @@ Partial Public Class ShortSaleCase
         End Get
     End Property
 
-    Private _mortgages As List(Of PropertyMortgage)
-    Public Property Mortgages As List(Of PropertyMortgage)
+    Private _mortgages As PropertyMortgage()
+    Public Property Mortgages As PropertyMortgage()
         Get
             If _mortgages Is Nothing Then
                 Using context As New ShortSaleEntities
-                    _mortgages = context.PropertyMortgages.Where(Function(mg) mg.CaseId = CaseId).ToList
+                    _mortgages = context.PropertyMortgages.Where(Function(mg) mg.CaseId = CaseId).ToArray
 
                     If (_mortgages.Count = 0) Then
-                        _mortgages.Add(New PropertyMortgage)
+                        _mortgages = {New PropertyMortgage}
                     End If
                 End Using
             End If
 
             Return _mortgages
         End Get
-        Set(value As List(Of PropertyMortgage))
+        Set(value As PropertyMortgage())
             _mortgages = value
         End Set
     End Property
@@ -866,7 +866,7 @@ Partial Public Class ShortSaleCase
                 Dim logData = logsData.Where(Function(sl) sl.BBLE.StartsWith(item.ShortSale.BBLE)).ToList
 
                 item.ShortSale.PropertyInfo = item.PropertyInfo
-                item.ShortSale.Mortgages = item.Mortgages.ToList
+                item.ShortSale.Mortgages = item.Mortgages.ToArray
                 item.ShortSale.PropertyOwner = item.Owner
                 item.ShortSale.ValueInfoes = item.ValueInfo.ToList
                 item.ShortSale.LastActivity = logData.OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault

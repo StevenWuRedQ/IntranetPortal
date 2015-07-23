@@ -7,34 +7,40 @@ Partial Public Class PropertyBaseInfo
         End Get
     End Property
 
-    Private _propFloors As List(Of PropertyFloor)
-    Public ReadOnly Property PropFloors As List(Of PropertyFloor)
+    Private _propFloors As PropertyFloor()
+    Public Property PropFloors As PropertyFloor()
         Get
             If _propFloors Is Nothing Then
                 Using context As New ShortSaleEntities
-                    _propFloors = context.PropertyFloors.Where(Function(fl) fl.BBLE = BBLE).ToList
+                    _propFloors = context.PropertyFloors.Where(Function(fl) fl.BBLE = BBLE).ToArray
                 End Using
             End If
 
             Return _propFloors
         End Get
+        Set(value As PropertyFloor())
+            _propFloors = value
+        End Set
     End Property
 
-    Private _owners As List(Of PropertyOwner)
-    Public ReadOnly Property Owners As List(Of PropertyOwner)
+    Private _owners As PropertyOwner()
+    Public Property Owners As PropertyOwner()
         Get
             If _owners Is Nothing Then
                 Using context As New ShortSaleEntities
-                    _owners = context.PropertyOwners.Where(Function(po) po.BBLE = BBLE).ToList
+                    _owners = context.PropertyOwners.Where(Function(po) po.BBLE = BBLE).ToArray
                 End Using
 
                 If _owners.Count = 0 Then
-                    _owners.Add(New PropertyOwner)
+                    _owners = {New PropertyOwner}
                 End If
             End If
 
             Return _owners
         End Get
+        Set(value As PropertyOwner())
+            _owners = value
+        End Set
     End Property
 
     Public Sub Save()
@@ -52,6 +58,10 @@ Partial Public Class PropertyBaseInfo
 
             If _propFloors IsNot Nothing Then
                 For Each floor In _propFloors
+                    If String.IsNullOrEmpty(floor.BBLE) Then
+                        floor.BBLE = BBLE
+                    End If
+
                     floor.Save()
                 Next
             End If

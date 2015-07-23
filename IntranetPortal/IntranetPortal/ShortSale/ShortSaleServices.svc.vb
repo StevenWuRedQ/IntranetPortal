@@ -61,6 +61,12 @@ Public Class ShortSaleServices
     End Function
 
     <OperationContract()>
+    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    Public Function GetBankList() As Channels.Message
+        Return Nothing
+    End Function
+
+    <OperationContract()>
    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetTeamInfo(teamName As String) As Channels.Message
         Return Team.GetTeam(teamName).ToJson
