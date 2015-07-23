@@ -36,6 +36,8 @@ Partial Public Class PartyContact
         End Using
     End Function
 
+    
+
     Public Shared Function GetContactByType(type As ContactType) As List(Of PartyContact)
         Using ctx As New ShortSaleEntities
             If type = ContactType.Employee Then
