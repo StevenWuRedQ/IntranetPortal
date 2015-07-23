@@ -141,6 +141,7 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">employed</label>
                     <select class="ss_form_input" ng-model="owner.Employed">
+                        <option></option>
                         <option>Employed</option>
                         <option>Self-Employed</option>
                         <option>Unemployed</option>
@@ -153,10 +154,10 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">bank account</label>
 
-                    <input type="radio" id="checkYes_Bankaccount{{$index}}" ng-model="owner.Bankaccount" data-radio="Y" name="Bankaccount{{$index}}" value="YES" class="ss_form_input">
+                    <input type="radio" id="checkYes_Bankaccount{{$index}}" ng-model="owner.Bankaccount" data-radio="Y" name="Bankaccount{{$index}}" value="true" class="ss_form_input">
                     <label for="checkYes_Bankaccount{{$index}}" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="checkNOBankaccount{{$index}}" ng-model="owner.Bankaccount" name="Bankaccount{{$index}}" value="NO" class="ss_form_input">
+                    <input type="radio" id="checkNOBankaccount{{$index}}" ng-model="owner.Bankaccount" name="Bankaccount{{$index}}" value="false" class="ss_form_input">
                     <label for="checkNOBankaccount{{$index}}" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>
@@ -164,10 +165,10 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Tax Returns</label>
 
-                    <input type="radio" id="checkYes_TaxReturn{{$index}}" name="TaxReturn{{$index}}" ng-model="owner.TaxReturn" data-radio="Y" value="YES" class="ss_form_input">
+                    <input type="radio" id="checkYes_TaxReturn{{$index}}" name="TaxReturn{{$index}}" ng-model="owner.TaxReturn" data-radio="Y" value="true" class="ss_form_input">
                     <label for="checkYes_TaxReturn{{$index}}" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="TaxReturnNo{{$index}}" name="TaxReturn{{$index}}" ng-model="owner.TaxReturn" value="NO" class="ss_form_input">
+                    <input type="radio" id="TaxReturnNo{{$index}}" name="TaxReturn{{$index}}" ng-model="owner.TaxReturn" value="false" class="ss_form_input">
                     <label for="TaxReturnNo{{$index}}" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>

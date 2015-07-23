@@ -23,12 +23,12 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Requested</label>
-                    <input class="ss_form_input " ng-model="mortgage.PayoffRequested">
+                    <input class="ss_form_input " ss_date ng-model="mortgage.PayoffRequested">
                 </li>
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Expires</label>
-                    <input class="ss_form_input " ng-model="mortgage.PayoffExpired">
+                    <input class="ss_form_input " ss_date ng-model="mortgage.PayoffExpired">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Amount</label>
@@ -49,11 +49,11 @@
                 <div collapse="mortgageCompanyCollapse">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Category</label>
-                    <input class="ss_form_input " ng-model="mortgage.Category">
+                    <input class="ss_form_input " ng-model="mortgage.Category" readonly="readonly">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Status</label>
-                    <input class="ss_form_input " ng-model="mortgage.Status">
+                    <input class="ss_form_input " ng-model="mortgage.Status" readonly="readonly">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Loan #</label>
