@@ -507,7 +507,7 @@
                 var json = $scope.SsCase;
                 var data = { caseData: JSON.stringify(json) };
 
-                $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
+            $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
                     success(function () {
                         if (scuessfunc) {
                             scuessfunc();
@@ -627,6 +627,14 @@
                 }
                     
             }
+
+            $http.get('ShortSaleServices.svc/getbanklist')
+                .success(function (data) {
+                    $scope.bankNameOptions = data;
+                })
+                .error(function (data) {
+                    $scope.bankNameOptions = [];
+                });
           
         });
 

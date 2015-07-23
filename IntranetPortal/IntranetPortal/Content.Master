@@ -53,8 +53,8 @@
                         dateStr = !dateStr ? '' : dateStr.toString();
                         if (dateStr && dateStr.indexOf('-') >= 0) {
                             var dd = new Date(dateStr);
-                            $(el).val((dd.getMonth() + 1) + '/' + (dd.getDate()) + '/' + (dd.getFullYear()));
-
+                            dd = (dd.getMonth() + 1) + '/' + (dd.getDate()) + '/' + (dd.getFullYear());
+                            scope.$eval(attrs.ngModel + "='" + dd + "'");
                         }
                     })
                 }
