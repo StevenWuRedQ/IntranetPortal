@@ -89,12 +89,14 @@ Public Class ShortSaleServices
                 }).ToJson
         End If
     End Function
+
     <OperationContract()>
     <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
     Public Function AddComments(comment As String, caseId As Integer) As Channels.Message
         Dim comm As New ShortSaleCaseComment
         comm.Comments = comment
-        comm.CreateBy = OperationContext.Current.ServiceSecurityContext.PrimaryIdentity.Name
+        'Dim name =
+        comm.CreateBy = HttpContext.Current.User.Identity.Name  'OperationContext.Current.ServiceSecurityContext.PrimaryIdentity.Name
         comm.CreateDate = DateTime.Now
         comm.CaseId = caseId
         comm.Save()
