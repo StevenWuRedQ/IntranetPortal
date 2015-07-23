@@ -83,7 +83,18 @@ Public Class ShortSaleServices
                 }).ToJson
         End If
     End Function
-
+    <OperationContract()>
+   <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    Public Function AddComments(comment As String, caseId As Integer) As Channels.Message
+        Dim comm As New ShortSaleCaseComment
+        comm.Comments = comment
+        comm.CreateBy = OperationContext.Current.ServiceSecurityContext.PrimaryIdentity.Name
+        comm.CreateDate = DateTime.Now
+        comm.CaseId = caseId
+        comm.Save()
+        Dim json = comm.ToJson
+        Return json
+    End Function
 #End Region
 
 #Region "Data Report"

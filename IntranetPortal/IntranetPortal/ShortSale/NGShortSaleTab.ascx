@@ -111,22 +111,18 @@
                     <%--note list--%>
                     <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
 
-                        <% Dim i = 0%>
-                        <asp:HiddenField ID="hfCaseId" runat="server" />
                         <%-- For Each comment In shortSaleCaseData.Comments--%>
-                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
+                   <%--     background: #e8e8e8 {{SsCase.Comments}}--%>
+                        <div class="note_item" ng-repeat="comment in SsCase.Comments">
                             <i class="fa fa-exclamation-circle note_img"></i>
-                            <span class="note_text"><%--= comment.Comments--%></span>
+                            <span class="note_text">{{comment.Comments}}</span>
                             <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7; display: none"></i>
-                            <i class="fa fa-times" style="float: right; padding-right: 25px; line-height: 40px; font-size: 18px; color: #b1b2b7; cursor: pointer" onclick="DeleteComments(<%--= comment.CommentId --%>)"></i>
+                            <i class="fa fa-times" style="float: right; padding-right: 25px; line-height: 40px; font-size: 18px; color: #b1b2b7; cursor: pointer" ng-click="DeleteComments($index)"></i>
                         </div>
-                        <%-- i += 1--%>
-                        <%-- Next--%>
-
 
                         <div class="note_item" style="background: white">
                             <%--<button class="btn" data-container="body" type="button" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">--%>
-                            <i class="fa fa-plus-circle note_img tooltip-examples" title="Add Notes" style="color: #3993c1; cursor: pointer" onclick="aspxAddLeadsComments.ShowAtElement(this)"></i>
+                            <i class="fa fa-plus-circle note_img tooltip-examples" title="Add Notes" style="color: #3993c1; cursor: pointer" ng-click="ShowAddPopUp($event)"></i>
 
                             <%--</button>--%>
                         </div>
@@ -140,18 +136,11 @@
                                 <table>
                                     <tr style="padding-top: 3px;">
                                         <td style="width: 380px; vertical-align: central">
-                                            <dx:ASPxTextBox runat="server" ID="txtLeadsComments" ClientInstanceName="txtLeadsComments" Width="360px"></dx:ASPxTextBox>
+                                            <input type="text" ng-model="addCommentTxt" class="form-control" />
                                         </td>
                                         <td style="text-align: right">
-                                            <div>
-                                                <input type="button" value="Add" onclick="SaveLeadsComments()" class="rand-button" style="background-color: #3993c1" />
-                                                <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1" Visible="false">
-                                                    <ClientSideEvents Click="SaveLeadsComments" />
-                                                </dx:ASPxButton>
-                                                &nbsp;
-                                    <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false" CssClass="rand-button" BackColor="#77787b" Visible="false">
-                                        <ClientSideEvents Click="function(s,e){aspxAddLeadsComments.Hide();}" />
-                                    </dx:ASPxButton>
+                                            <div style="margin-left: 20px">
+                                                <input type="button" value="Add" ng-click="AddComments()" class="rand-button" style="background-color: #3993c1" />
                                                 <input type="button" value="Close" onclick="aspxAddLeadsComments.Hide()" class="rand-button" style="background-color: #3993c1" />
                                             </div>
                                         </td>

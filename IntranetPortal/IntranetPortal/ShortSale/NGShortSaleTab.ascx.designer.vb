@@ -23,15 +23,6 @@ Partial Public Class NGShortSaleTab
     Protected WithEvents ShortSaleCaseSavePanel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
 
     '''<summary>
-    '''hfCaseId control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents hfCaseId As Global.System.Web.UI.WebControls.HiddenField
-
-    '''<summary>
     '''ASPxPopupControl2 control.
     '''</summary>
     '''<remarks>
@@ -39,33 +30,6 @@ Partial Public Class NGShortSaleTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
-
-    '''<summary>
-    '''txtLeadsComments control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtLeadsComments As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''btnAdd control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAdd As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
-    '''ASPxButton4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
     '''NGShortSaleHomewonerTab1 control.

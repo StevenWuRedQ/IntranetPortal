@@ -499,7 +499,7 @@
 
             $scope.SaveShortSale = function (scuessfunc) {
                 var json = $scope.SsCase;
-                var data ={caseData:JSON.stringify(json)};
+                var data = { caseData: JSON.stringify(json) };
 
                 $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
                     success(function () {
@@ -513,45 +513,67 @@
                         alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                     });
             }
+            $scope.ShowAddPopUp = function (event) {
+                $scope.addCommentTxt = "";
+                aspxAddLeadsComments.ShowAtElement(event.target);
+            }
+            $scope.AddComments = function () {
+                
+                $http.post('ShortSaleServices.svc/AddComments', { comment: $scope.addCommentTxt, caseId: $scope.SsCase.CaseId }).success(function (data) {
 
-            var test = 123;
+                }).error(function (data, status) {
+                    alert("Fail to AddComments. status " + status + "Error : " + JSON.stringify(data));
+                 });
+
+            }
+
+            $scope.DeleteComments = function (index) {
+                var comment = $scope.SsCase.Comments[index];
+                $http.post('ShortSaleServices/DeleteComments', { commentId: comment.CommentId }).success(function (data) {
+                    $scope.SsCase.Comments.splice(index, 1);
+                }).error(function (data, status) {
+                    alert("Fail to AddComments. status " + status + "Error : " + JSON.stringify(data));
+                });
+               
+                
+            }
             /////////////////Code Scope Steph ////////////////
             $scope.NGremoveArrayItem = function (item, index) {
                 item.splice(index, 1);
             };
-          
+
             $scope.SsCase.Mortgages = [{}];
             $scope.offerBindingOptions = function () {
                 return {
                     columns: [
                         {
-                        dataField: 'OfferType',
-                        caption: 'Type',
-                        lookup: {
-                            dataSource: [
+                            dataField: 'OfferType',
+                            caption: 'Type',
+                            lookup: {
+                                dataSource: [
 
-                            {
-                                name: 'Initial Offer',
-                                value: 'Initial Offer'
-                            },
-                             {
-                                 name: 'Bank Counter',
-                                 value: 'Bank Counter'
-                             },
-                             {
-                                 name: 'Buyer Counter',
-                                 value: 'Buyer Counter'
-                             },
-                            {
-                                name: 'New Buyer Offer',
-                                value: 'New Buyer Offer'
+                                {
+                                    name: 'Initial Offer',
+                                    value: 'Initial Offer'
+                                },
+                                 {
+                                     name: 'Bank Counter',
+                                     value: 'Bank Counter'
+                                 },
+                                 {
+                                     name: 'Buyer Counter',
+                                     value: 'Buyer Counter'
+                                 },
+                                {
+                                    name: 'New Buyer Offer',
+                                    value: 'New Buyer Offer'
+                                }
+                                ],
+                                displayExpr: 'name',
+                                valueExpr: 'value'
                             }
-                            ],
-                            displayExpr: 'name',
-                            valueExpr: 'value'
-                        }
 
-                    },
+                        },
                     {
                         caption: 'Buying Entity',
                         calculateCellValue: function (data) {
@@ -559,31 +581,31 @@
                             return $scope.SsCase.BuyerEntity.Entity;
                         },
                         allowEditing: false,
-                        },
+                    },
                         {
-                        caption: 'Signor',
-                        calculateCellValue: function (data) {
-                            if ($scope.SsCase.BuyerEntity === undefined) return "";
-                            return $scope.SsCase.BuyerEntity.Signor;
-                        },
-                        allowEditing: false,
-                        
+                            caption: 'Signor',
+                            calculateCellValue: function (data) {
+                                if ($scope.SsCase.BuyerEntity === undefined) return "";
+                                return $scope.SsCase.BuyerEntity.Signor;
+                            },
+                            allowEditing: false,
+
 
                         },
                         {
-                        caption: 'Date Corp Formed',
-                        calculateCellValue: function (data) {
-                            if ($scope.SsCase.BuyerEntity === undefined) return "";
-                            return $scope.SsCase.BuyerEntity.DateOpened;
-                        },
-                        allowEditing: false,
-                        },
-                        {
-                        dataField: 'DateOfContract',
-                        dataType: 'date'
+                            caption: 'Date Corp Formed',
+                            calculateCellValue: function (data) {
+                                if ($scope.SsCase.BuyerEntity === undefined) return "";
+                                return $scope.SsCase.BuyerEntity.DateOpened;
+                            },
+                            allowEditing: false,
                         },
                         {
-                        dataField: 'OfferAmount',
+                            dataField: 'DateOfContract',
+                            dataType: 'date'
+                        },
+                        {
+                            dataField: 'OfferAmount',
                         },
                     {
                         dataField: 'DateSubmitted',
@@ -596,9 +618,9 @@
                         removeEnabled: true,
                     },
                 }
-                    
+
             }
-          
+
         });
 
     </script>

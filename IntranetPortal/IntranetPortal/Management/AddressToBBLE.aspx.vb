@@ -22,6 +22,12 @@ Public Class AddressToBBLE
         Dim request As WebRequest = WebRequest.Create(baseURL)
         ' If required by the server, set the credentials.
         request.Credentials = CredentialCache.DefaultCredentials
+
+        Try
+            request.GetResponse()
+        Catch ex As Exception
+            Return "Get Error " + houseNumber + "," + street + "," + borough
+        End Try
         ' Get the response. 
         Dim response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
         ' Display the status.
