@@ -99,13 +99,10 @@
                             <i class="fa fa-user"></i>
                             <span style="margin-left: 19px;">&nbsp;
                             </span>
-
-
                             <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
                             <span class="time_buttons" onclick='ShowDOBWindow("<%--= shortSaleCaseData.PropertyInfo.Borough%>","<%= shortSaleCaseData.PropertyInfo.Block%>", "<%= shortSaleCaseData.PropertyInfo.Lot--%>")'>DOB</span>
                             <span class="time_buttons" onclick='ShowAcrisMap("<%--= shortSaleCaseData.BBLE --%>")'>Acris</span>
-                            <span class="time_buttons" onclick='ShowPropertyMap("<%--= shortSaleCaseData.BBLE --%>")'>Maps</span>
-
+                            <span class="time_buttons" onclick='ShowPropertyMap(leadsInfoBBLE)'>Maps</span>
                         </div>
                         <%--data format June 2, 2014 6:37 PM--%>
                         <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;"><%--=If(String.IsNullOrEmpty(shortSaleCaseData.OwnerFirstName),"",shortSaleCaseData.OwnerFirstName &" " &shortSaleCaseData.OwnerLastName) --%></span>
