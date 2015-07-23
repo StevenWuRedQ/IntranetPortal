@@ -40,9 +40,7 @@
 
         <div class="ss_form">
             <h4 class="ss_form_title" style="display: inline">Mortgage Company&nbsp</h4>
-            <select class="class="ss_form_item" ng-model="mortgage.Lender" >
-                <option ng-repeat="bank in bankNameOptions" value="{{bank}}">{{bank}}</option>
-            </select>
+            <select class="class="ss_form_item" ng-model="mortgage.Lender" ng-options="bank for bank in bankNameOptions"></select>
             <i class="fa fa-compress btn  text-primary" ng-click="mortgageCompanyCollapse = !mortgageCompanyCollapse"></i>
                 
             <ul class="ss_form_box clearfix">

@@ -144,25 +144,8 @@
 
     <h4 class="ss_form_title">Home Breakdown <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.PropertyInfo.PropFloors,'SsCase.PropertyInfo.PropFloors')" title="Add"></i>
     </h4>
-        <div ng-show="SsCase.PropertyInfo.PropFloors.length>0" class="ss_form_box clearfix ss_form_small_font">
-        <div dx-data-grid="{
-            columns: [
-                {dataField: 'Floor', caption: 'Floor'},
-                {dataField: 'Bedroom', caption: 'Bedrooms'},
-                {dataField: 'Bathroom', caption: 'Bathrooms'},
-                {dataField: 'Livingroom', caption: 'Living Room'},
-                {dataField: 'Kitchen', caption: 'Kitchen'},
-                {dataField: 'Diningroom', caption: 'Dinning Room'},
-                {dataField: 'Occupied', caption: 'Occupied'}],
-
-                bindingOptions: { dataSource: 'SsCase.PropertyInfo.PropFloors' },
-                editing: {
-                    editMode: 'row',
-                    editEnabled: true,
-                    removeEnabled: true
-                }, 
-             }">
-        </div>
+    <div ng-show="SsCase.PropertyInfo.PropFloors.length>0" class="ss_form_box clearfix ss_form_small_font">
+        <div dx-data-grid="homeBreakdownBindingOptions()"></div>
     </div>
 </div>
 
@@ -172,9 +155,6 @@
         //$("#home_breakdown_table").editableTableWidget();
         $(".ss_form_input, .input_with_check").not(".ss_allow_eidt").prop("disabled", true);
         initToolTips();
-
         format_input();
-
     }
-
 </script>

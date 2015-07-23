@@ -61,7 +61,11 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">MLS</label>
-            <input class="ss_form_input " ng-model="SsCase.MLSStatus">
+            <select class="ss_form_input" ng-model="SsCase.MLSStatus">
+                <option>NYS MLS</option>
+                <option>MLS LI</option>
+                <option>Brooklyn MLS</option>
+            </select>
         </li>
 
         <li class="ss_form_item">

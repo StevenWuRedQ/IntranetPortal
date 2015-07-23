@@ -559,6 +559,32 @@
             };
           
             $scope.SsCase.Mortgages = [{}];
+            $scope.homeBreakdownBindingOptions = function () {
+                return {
+                    columns: [
+                        {
+                            caption: 'Floor',
+                            allowEditing: false,
+                            cellTemplate: function (cellEl, cellInfo) {
+                                cellEl[0].innerHTML = cellInfo.rowIndex+1;
+                            }
+                        },
+                        { dataField: 'Bedroom', caption: 'Bedrooms' },
+                        { dataField: 'Bathroom', caption: 'Bathrooms' },
+                        { dataField: 'Livingroom', caption: 'Living Room' },
+                        { dataField: 'Kitchen', caption: 'Kitchen' },
+                        { dataField: 'Diningroom', caption: 'Dinning Room' },
+                        { dataField: 'Occupied', caption: 'Occupied' }
+                    ],
+                    bindingOptions: { dataSource: 'SsCase.PropertyInfo.PropFloors' },
+                    editing: {
+                        editMode: 'row',
+                        editEnabled: true,
+                        removeEnabled: true
+                    },
+
+                }
+            }
             $scope.offerBindingOptions = function () {
                 return {
                     columns: [
@@ -615,7 +641,7 @@
                     },{
                         dataField: 'OfferAmount',
                     },{
-                        dataField: 'DateSubmitted',
+                        dataField: 'DateSubmited',
                         dataType: 'date'
                     }],
                     bindingOptions: { dataSource: 'SsCase.ShortSaleOffers' },
