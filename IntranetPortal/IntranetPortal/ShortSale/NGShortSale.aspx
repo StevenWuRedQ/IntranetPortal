@@ -70,7 +70,7 @@
 
                                                                 <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
                                                                     <li class="active short_sale_head_tab">
-                                                                        <a href="#" role="tab" data-toggle="tab" class="tab_button_a">
+                                                                        <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
                                                                             <i class="fa fa-sign-out fa-info-circle head_tab_icon_padding"></i>
                                                                             <div class="font_size_bold">ShortSale</div>
                                                                         </a>
@@ -344,6 +344,10 @@
         function NGGetShortSale(caseId) {
             angular.element(document.getElementById('ShortSaleCtrl')).scope().GetShortSaleCase(caseId);
         }
+        function GetShortSaleCase()
+        {
+            return angular.element(document.getElementById('ShortSaleCtrl')).scope().SsCase;
+        }
         portalApp = angular.module('PortalApp');
         portalApp.controller('ShortSaleCtrl', function ($scope, $http, $element, $parse) {
 
@@ -531,13 +535,23 @@
 
             $scope.DeleteComments = function (index) {
                 var comment = $scope.SsCase.Comments[index];
-                $http.get('ShortSaleServices/DeleteComment?commentId' + comment.CommentId).success(function (data) {
+                $http.get('ShortSaleServices.svc/DeleteComment?commentId=' + comment.CommentId).success(function (data) {
                     $scope.SsCase.Comments.splice(index, 1);
                 }).error(function (data, status) {
                     alert("Fail to delete comment. status " + status + "Error : " + JSON.stringify(data));
                 });
                
                 
+            }
+            var CaseInfo = { Name: '', Address: '' }
+            $scope.GetCaseInfo = function () {
+                var caseName = $scope.SsCase.CaseName
+                if (caseName) {
+                    CaseInfo.Address = caseName.replace(/-(?!.*-).*$/, '');
+                    var matched = caseName.match(/-(?!.*-).*$/);
+                    CaseInfo.Name = matched[0].replace('-', '')
+                }
+                return CaseInfo;
             }
             /////////////////Code Scope Steph ////////////////
             $scope.NGremoveArrayItem = function (item, index) {

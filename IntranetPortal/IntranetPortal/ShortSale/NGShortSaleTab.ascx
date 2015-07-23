@@ -9,43 +9,7 @@
 
 <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 <script type="text/javascript">
-    function init_currency() {
-        $('.input_currency').formatCurrency();
-    }
-    $(document).ready(function () {
-        // Handler for .ready() called.
-        init_currency();
-    });
-    var short_sale_case_data = null;
-
-    function getShortSaleInstanceComplete(s, e) {
-        debugger;
-        short_sale_case_data = e != null ? $.parseJSON(e.result) : ShortSaleCaseData; //ShortSaleCaseData;//;
-        ShortSaleCaseData = short_sale_case_data;
-        short_sale_case_data.PropertyInfo.UpdateBy = "<%=Page.User.Identity.Name%>";
-
-
-        ShortSaleDataBand(1);
-
-        clearHomeOwner();
-        //console.log("the data is give to save is 222", JSON.stringify(ShortSaleCaseData));
-        var strJson = JSON.stringify(ShortSaleCaseData);
-
-        //d_alert(strJson);
-        if (e == null) {
-            SaveClicklCallbackCallbackClinet.PerformCallback(strJson);
-        }
-
-    }
-    function saveComplete(s, e) {
-        //RefreshContent();
-        ShortSaleCaseData = $.parseJSON(e.result);
-        clearArray(ShortSaleCaseData.Mortgages);
-        clearArray(ShortSaleCaseData.PropertyInfo.Owners);
-
-        ShortSaleDataBand(2);
-
-    }
+   
 
     function ShowAcrisMap(propBBLE) {
         //var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + propBBLE;
@@ -73,16 +37,6 @@
         aspxAcrisControl.Show();
     }
 
-    function SaveLeadsComments(s, e) {
-        var comments = txtLeadsComments.GetText();
-        leadsCommentsCallbackPanel.PerformCallback("Add|" + comments);
-        txtLeadsComments.SetText("");
-        aspxAddLeadsComments.Hide();
-    }
-
-    function DeleteComments(commentId) {
-        leadsCommentsCallbackPanel.PerformCallback("Delete|" + commentId);
-    }
 
 </script>
 
@@ -96,24 +50,22 @@
 
                     <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
                         <div style="font-size: 30px">
-                            <i class="fa fa-user"></i>
-                            <span style="margin-left: 19px;">&nbsp;
-                            </span>
+                            <i class="fa fa-home"></i>
+                            <span style="margin-left: 19px;">{{GetCaseInfo().Address}}&nbsp;</span>
                             <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
-                            <span class="time_buttons" onclick='ShowDOBWindow("<%--= shortSaleCaseData.PropertyInfo.Borough%>","<%= shortSaleCaseData.PropertyInfo.Block%>", "<%= shortSaleCaseData.PropertyInfo.Lot--%>")'>DOB</span>
-                            <span class="time_buttons" onclick='ShowAcrisMap("<%--= shortSaleCaseData.BBLE --%>")'>Acris</span>
-                            <span class="time_buttons" onclick='ShowPropertyMap(leadsInfoBBLE)'>Maps</span>
+                            <span class="time_buttons" onclick="ShowDOBWindow(GetShortSaleCase().PropertyInfo.Borough,GetShortSaleCase().PropertyInfo.Block, GetShortSaleCase().PropertyInfo.Lot)">DOB</span>
+                            <span class="time_buttons" onclick="ShowAcrisMap(leadsInfoBBLE)">Acris</span>
+                            <span class="time_buttons" onclick="ShowPropertyMap(leadsInfoBBLE)">Maps</span>
+                          
                         </div>
                         <%--data format June 2, 2014 6:37 PM--%>
-                        <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;"><%--=If(String.IsNullOrEmpty(shortSaleCaseData.OwnerFirstName),"",shortSaleCaseData.OwnerFirstName &" " &shortSaleCaseData.OwnerLastName) --%></span>
+                        <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;">{{GetCaseInfo().Name}}</span>
                     </div>
 
                     <%--note list--%>
                     <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
 
-                        <%-- For Each comment In shortSaleCaseData.Comments--%>
-                   <%--     background: #e8e8e8 {{SsCase.Comments}}--%>
-                        <div class="note_item" ng-repeat="comment in SsCase.Comments">
+                        <div class="note_item" ng-repeat="comment in SsCase.Comments" ng-style="$index%2?{'background':'#e8e8e8'}:{}">
                             <i class="fa fa-exclamation-circle note_img"></i>
                             <span class="note_text">{{comment.Comments}}</span>
                             <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7; display: none"></i>
