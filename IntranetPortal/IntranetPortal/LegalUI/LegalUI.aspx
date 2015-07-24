@@ -817,7 +817,9 @@
                     success(function (data, status, headers, config) {
 
                         $scope.LegalCase = $.parseJSON(data.d);
+                        
                         $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
+                        $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
                         var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
                         var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate", ];
                         for (a in arrays) {

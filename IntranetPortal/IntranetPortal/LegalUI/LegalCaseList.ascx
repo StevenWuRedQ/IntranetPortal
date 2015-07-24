@@ -201,7 +201,7 @@
             <GroupSummary>
                 <dx:ASPxSummaryItem FieldName="CaseName" SummaryType="Count" />
             </GroupSummary>
-            <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" EndCallback="function(s,e){AddScrollbarOnLeadsList();}" />
+            <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
             <Border BorderStyle="None"></Border>
         </dx:ASPxGridView>
     </div>
