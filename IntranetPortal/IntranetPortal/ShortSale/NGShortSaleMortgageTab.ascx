@@ -5,7 +5,7 @@
     <tab ng-repeat="mortgage in SsCase.Mortgages" active="mortgage.active" disable="mortage.disabled">
         <tab-heading>Mortgage {{$index+1}} </tab-heading>
     <div class="collapse_div">
-       <div class="text-right"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.Mortgages.length>=2" ng-click="NGremoveArrayItem(SsCase.Mortgages, $index)" title="Delete"></i></div>
+       <div class="text-right"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="$index>0" ng-click="NGremoveArrayItem(SsCase.Mortgages, $index)" title="Delete"></i></div>
         <div style="margin-top: 20px">
             <h4 class="ss_form_title">Sale Date / Payoff Info</h4>
             <ul class="ss_form_box clearfix">
@@ -43,8 +43,8 @@
             <select class="class="ss_form_item" ng-model="mortgage.Lender" ng-options="bank for bank in bankNameOptions"></select>
             <i class="fa fa-compress btn  text-primary" ng-click="mortgageCompanyCollapse = !mortgageCompanyCollapse"></i>
                 
-            <ul class="ss_form_box clearfix">
-                <div collapse="mortgageCompanyCollapse">
+            <ul class="ss_form_box clearfix" collapse="mortgageCompanyCollapse">
+               
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Category</label>
                     <input class="ss_form_input " ng-model="mortgage.Category" readonly="readonly">
@@ -87,12 +87,14 @@
                     <label class="ss_form_input_title">Cancelation Sent</label>
                     <input class="ss_form_input " ss_date="" ng-model="mortgage.CancelationSent">
                 </li>
-                 </div>
+              
             </ul>
            
-            </div>
+         </div>
 
+        
         <div class="ss_form_box clearfix">
+            <ul  class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Short Sale Dept</label>
                 <div class="contact_box" dx-select-box="InitContact('SsCase.Mortgages['+$index+'].ShortSaleDept')"></div>
@@ -105,6 +107,7 @@
                 <label class="ss_form_input_title">Short Sale Fax #</label>
                 <input class="ss_form_input" ng-model="GetContactById(mortgage.ShortSaleDept).FAX" readonly="readonly">
             </li>
+            </ul>
         </div>
 
         <div class="ss_form">
@@ -143,15 +146,16 @@
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Foreclosure Attorney </label>
-                    <div class="contact_box" dx-select-box="InitContact('SsCase.Mortgages['+$index+'].ForeclosureAttorney')">
+                    <div class="contact_box" dx-select-box="InitContact('SsCase.Mortgages['+$index+'].ForeclosureAttorneyId')"></div>
+                  
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Address</label>
-                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ForeclosureAttorney).Address" readonly="readonly">
+                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ForeclosureAttorneyId).Address" readonly="readonly">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Office #</label>
-                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ForeclosureAttorney).OfficeNO" mask="999-99-9999" clean="true" readonly="readonly">
+                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ForeclosureAttorneyId).OfficeNO" mask="999-99-9999" clean="true" readonly="readonly">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Assigned Attorney</label>
