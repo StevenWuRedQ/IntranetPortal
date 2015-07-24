@@ -342,7 +342,10 @@
     </script>
     <script type="text/javascript">
         function NGGetShortSale(caseId) {
-            angular.element(document.getElementById('ShortSaleCtrl')).scope().GetShortSaleCase(caseId);
+            $(document).ready(function () {
+                angular.element(document.getElementById('ShortSaleCtrl')).scope().GetShortSaleCase(caseId);
+            });
+            
         }
         function GetShortSaleCase()
         {
