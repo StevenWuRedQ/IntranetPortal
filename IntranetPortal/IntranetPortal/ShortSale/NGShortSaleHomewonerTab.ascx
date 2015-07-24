@@ -128,12 +128,13 @@
             <ul class="ss_form_box clearfix">
 
                 <li class="ss_form_item">
+                    {{SsCase.PropertyInfo.Owners[$index].Bankruptcy}}
                     <label class="ss_form_input_title">bankruptcy</label>
 
-                    <input type="radio" id="checkYes_Bankruptcy{{$index}}" data-test="1" name="44{{$index}}" ng-model="owner.Bankruptcy" value="true" class="ss_form_input">
+                    <input type="radio" id="checkYes_Bankruptcy{{$index}}" data-test="1" name="44{{$index}}" ng-model="SsCase.PropertyInfo.Owners[$index].Bankruptcy" value="true" class="ss_form_input">
                     <label for="checkYes_Bankruptcy{{$index}}" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="checkYes_BankruptcyNo{{$index}}" name="44{{$index}}" data-test="1" ng-model="owner.Bankruptcy" value="false" class="ss_form_input">
+                    <input type="radio" id="checkYes_BankruptcyNo{{$index}}" name="44{{$index}}" data-test="1" ng-model="SsCase.PropertyInfo.Owners[$index].Bankruptcy" value="false" class="ss_form_input">
                     <label for="checkYes_BankruptcyNo{{$index}}" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>
