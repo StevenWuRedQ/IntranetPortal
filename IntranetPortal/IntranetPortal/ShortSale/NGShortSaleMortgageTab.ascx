@@ -143,7 +143,7 @@
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Foreclosure Attorney </label>
-                    <div class="contact_box" dx-select-box="InitContact('mortgage.ForeclosureAttorney')">
+                    <div class="contact_box" dx-select-box="InitContact('SsCase.Mortgages['+$index+'].ForeclosureAttorney')">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Address</label>
