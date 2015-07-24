@@ -103,7 +103,6 @@
         }
 
         tempAddress = e.result.split("|")[0];
-
         $('#leads_address_popup').html(tempAddress + "(" + e.result.split("|")[1] + ")");
         //var streetViewFrm = "streetViewFrm";
         var streenViewWinFrm = ASPxPopupMapControl.GetContentIFrame(); //document.getElementById(streetViewFrm);

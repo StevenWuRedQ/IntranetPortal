@@ -38,6 +38,7 @@
                     center: newyork
                 };
                 myPano = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                return;
             }
             else {
                 myPano = new google.maps.StreetViewPanorama(
@@ -84,11 +85,17 @@
 
         }
 
-        google.maps.event.addDomListener(window, 'load', initialize);
+        google.maps.event.addDomListener(window, 'load', initialize);             
+
 
     </script>
 </head>
 <body>
     <div id="map-canvas"></div>
+    <script type="text/javascript">
+        google.maps.event.addDomListener(window, 'load', function () {
+            showAddress('<%= Address%>');
+        });
+    </script>
 </body>
 </html>
