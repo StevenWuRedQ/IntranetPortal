@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<div class="ss_form">
+<div>
     <h4 class="ss_form_title">Title</h4>
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
