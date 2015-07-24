@@ -28,6 +28,9 @@
     }
 
     function ShowPopupMap(url, header) {
+        OpenLeadsWindow(url, header);
+        return;
+
         aspxAcrisControl.SetContentHtml("Loading...");
         aspxAcrisControl.SetContentUrl(url);
 
@@ -55,7 +58,7 @@
                             <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
                             <span class="time_buttons" onclick="ShowDOBWindow(GetShortSaleCase().PropertyInfo.Borough,GetShortSaleCase().PropertyInfo.Block, GetShortSaleCase().PropertyInfo.Lot)">DOB</span>
                             <span class="time_buttons" onclick="ShowAcrisMap(leadsInfoBBLE)">Acris</span>
-                            <span class="time_buttons" onclick="ShowPropertyMap(leadsInfoBBLE)">Maps</span>
+                            <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?bble='+leadsInfoBBLE, 'Maps')">Maps</span>
                           
                         </div>
                         <%--data format June 2, 2014 6:37 PM--%>
