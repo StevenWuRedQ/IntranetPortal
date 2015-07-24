@@ -128,15 +128,15 @@
             <ul class="ss_form_box clearfix">
 
                 <li class="ss_form_item">
-                    {{SsCase.PropertyInfo.Owners[$index].Bankruptcy}}
                     <label class="ss_form_input_title">bankruptcy</label>
-
-                    <input type="radio" id="checkYes_Bankruptcy{{$index}}" data-test="1" name="44{{$index}}" ng-model="SsCase.PropertyInfo.Owners[$index].Bankruptcy" value="true" class="ss_form_input">
+                    <pt-radio model="owner.Bankruptcy" name="ownerBankruptcy{{$index}}"></pt-radio>
+                    <%-- 
+                    <input type="radio" id="checkYes_Bankruptcy{{$index}}" data-test="1" name="44{{$index}}" ng-model="owner.Bankruptcy" ng-value="true" class="ss_form_input" radio-init="false">
                     <label for="checkYes_Bankruptcy{{$index}}" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="checkYes_BankruptcyNo{{$index}}" name="44{{$index}}" data-test="1" ng-model="SsCase.PropertyInfo.Owners[$index].Bankruptcy" value="false" class="ss_form_input">
+                    <input type="radio" id="checkYes_BankruptcyNo{{$index}}" name="44{{$index}}" data-test="1" ng-model="owner.Bankruptcy" value="false" class="ss_form_input">
                     <label for="checkYes_BankruptcyNo{{$index}}" class="input_with_check"><span class="box_text">No</span></label>
-
+                    --%>
                 </li>
 
                 <li class="ss_form_item">
@@ -154,24 +154,26 @@
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">bank account</label>
-
-                    <input type="radio" id="checkYes_Bankaccount{{$index}}" ng-model="owner.Bankaccount" data-radio="Y" name="Bankaccount{{$index}}" value="true" class="ss_form_input">
+                    <pt-radio model="owner.Bankaccount" name="Bankaccount{{$index}}"></pt-radio>
+                    <%--
+                    <input type="radio" id="checkYes_Bankaccount{{$index}}" ng-model="owner.Bankaccount" data-radio="Y" name="Bankaccount{{$index}}" ng-value="true" class="ss_form_input" radio-init="false">
                     <label for="checkYes_Bankaccount{{$index}}" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="checkNOBankaccount{{$index}}" ng-model="owner.Bankaccount" name="Bankaccount{{$index}}" value="false" class="ss_form_input">
+                    <input type="radio" id="checkNOBankaccount{{$index}}" ng-model="owner.Bankaccount" name="Bankaccount{{$index}}" ng-value="false" class="ss_form_input">
                     <label for="checkNOBankaccount{{$index}}" class="input_with_check"><span class="box_text">No</span></label>
-
+                        --%>
                 </li>
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Tax Returns</label>
-
-                    <input type="radio" id="checkYes_TaxReturn{{$index}}" name="TaxReturn{{$index}}" ng-model="owner.TaxReturn" data-radio="Y" value="true" class="ss_form_input">
+                    <pt-radio model="owner.TaxReturn" name="TaxReturn{{$index}}"></pt-radio>
+                    <%-- 
+                    <input type="radio" id="checkYes_TaxReturn{{$index}}" name="TaxReturn{{$index}}" ng-model="owner.TaxReturn" data-radio="Y" ng-value="true" class="ss_form_input" radio-init="false">
                     <label for="checkYes_TaxReturn{{$index}}" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="TaxReturnNo{{$index}}" name="TaxReturn{{$index}}" ng-model="owner.TaxReturn" value="false" class="ss_form_input">
+                    <input type="radio" id="TaxReturnNo{{$index}}" name="TaxReturn{{$index}}" ng-model="owner.TaxReturn" ng-value="false" class="ss_form_input">
                     <label for="TaxReturnNo{{$index}}" class="input_with_check"><span class="box_text">No</span></label>
-
+                    --%>
                 </li>
                 
             </ul>

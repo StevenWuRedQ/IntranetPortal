@@ -1,7 +1,4 @@
-﻿
-
-
-<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGShortSaleDealInfoTab.ascx.vb" Inherits="IntranetPortal.NGShortSaleDealInfoTab" %>
+﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGShortSaleDealInfoTab.ascx.vb" Inherits="IntranetPortal.NGShortSaleDealInfoTab" %>
 <%@ Import Namespace="IntranetPortal.ShortSale" %>
 <%@ Import Namespace="IntranetPortal" %>
 <div class="clearfix">
@@ -18,7 +15,10 @@
 </style>
 
 <div>
-    <!-- Open Document Detail -->
+    <div ng-show="SsCase.DocumentMissing.length>0" class="well">
+        <label class="ss_form_input_title">Open Document Request</label>    
+        <p>{{SsCase.DocumentMissing}}</p>
+    </div>
 </div>
 
 <div class="ss_form">
@@ -86,7 +86,7 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Listing Expiry Date</label>
-            <input class="ss_form_input " ss-date="" ng-model="SsCase.DealInfo.ListingExpireDate">
+            <input class="ss_form_input " ss-date="" ng-model="SsCase.ListingExpireDate">
         </li>
     </ul>
 </div>

@@ -40,14 +40,14 @@
 
     <script>
         /* init angular app, add your dependency here 'ngMaterial' */
-        var portalApp = angular.module('PortalApp', ['ui.bootstrap', 'dx', 'ngMask']);
+		var portalApp = angular.module('PortalApp', ['ngAnimate','ui.bootstrap', 'dx', 'ngMask']);
 
         portalApp.directive('ssDate', function () {
             return {
                 restrict: 'A',
                 link: function (scope, el, attrs) {
                     $(el).datepicker({});
-                    
+
                     scope.$watch(attrs.ngModel, function (newValue, oldValue) {
                         var dateStr = newValue;
                         if (!dateStr && oldValue!=null)
@@ -80,7 +80,13 @@
             return {
                 restrict: 'A',
                 link: function (scope, el, attrs) {
-                    scope.$eval(attrs.ngModel + "=" + attrs.ngModel + "==null?" + attrs.defaultvalue + ":" + attrs.ngModel);
+					scope.$eval(attrs.ngModel + "=" + attrs.ngModel + "==null?" + attrs.radioInit + ":" + attrs.ngModel);
+					scope.$watch(attrs.ngModel, function () {
+					    var bVal = scope.$eval(attrs.ngModel);
+					    bVal = bVal != null && (bVal == 'true' || bVal==true);
+					    scope.$eval(attrs.ngModel + "=" + bVal.toString());
+						
+					})
                 }
             }
         });
@@ -99,6 +105,27 @@
                 },
             };
         });
+
+		portalApp.directive('ptRadio', function () {
+			return {
+				restrict: 'E',
+				template: 
+					'<input type=\'checkbox\' id=\'{{name}}Y\' ng-model=\'model\' class=\'ss_form_input\'>'+
+					'<label for=\'{{name}}Y\' class=\'input_with_check\'><span class=\'box_text\'>Yes&nbsp</span></label>' +
+					'<input type=\'checkbox\' id=\'{{name}}N\' ng-model=\'model\'  ng-true-value="false" ng-false-value="true" class=\'ss_form_input\'>' +
+					'<label for=\'{{name}}N\' class=\'input_with_check\'><span class=\'box_text\'>No&nbsp</span></label>',
+					
+				scope: {
+					model:'=',
+					name: '@'
+				},
+				link: function postLink(scope, el, attrs) {
+				    var bVal = scope.model;
+				    scope.model = bVal == null ? false : bVal;
+				}
+
+			}
+		});
 
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">

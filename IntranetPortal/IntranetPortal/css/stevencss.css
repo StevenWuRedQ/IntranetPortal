@@ -2404,8 +2404,12 @@ li.mag_tabv.active {
 	background: yellow;
 }
 
+		.legalui .ss_form_input_title{
+			color: rgb(50, 50, 50)
+		}
+
 .ss_warning {
-	color: red;
+	color: red !important;
 }
 
 .ss_show_from {

@@ -80,9 +80,7 @@
         .md-contact-suggestion img {
             margin-top: -35px;
         }
-        .legalui .ss_form_input_title{
-            color: rgb(50, 50, 50)
-        }
+
     </style>
 </asp:Content>
 
@@ -483,9 +481,6 @@
         </div>
     </div>
     <!-- /.modal-content -->
-    <%--  </div>
-        </div>
-    </div>--%>
     <uc1:SendMail runat="server" ID="SendMail" />
     <script type="text/javascript">
 
@@ -1169,7 +1164,6 @@
 
         });
 
-
     </script>
     <script>
         $(document).ready(function () {
@@ -1180,5 +1174,4 @@
         })
     </script>
     <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
-    <script src="/Scripts/bootstrap.min.js"></script>
 </asp:Content>
