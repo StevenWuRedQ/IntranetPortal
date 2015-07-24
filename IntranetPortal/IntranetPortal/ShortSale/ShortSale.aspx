@@ -653,7 +653,7 @@
                     editing: {
                         editMode: 'row',
                         editEnabled: true,
-                        removeEnabled: true,
+                        removeEnabled: true
                     },
                 }
                     

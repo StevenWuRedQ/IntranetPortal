@@ -1667,6 +1667,13 @@
       <DependentUpon>CustomInplaceEditor.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControl\NGDocumentsUI.ascx.designer.vb">
+      <DependentUpon>NGDocumentsUI.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\NGDocumentsUI.ascx.vb">
+      <DependentUpon>NGDocumentsUI.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControl\DocumentsUI.ascx.designer.vb">
       <DependentUpon>DocumentsUI.ascx</DependentUpon>
     </Compile>
@@ -1802,6 +1809,7 @@
     <Content Include="App_Data\PortalMenu.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Themes\compact\compact.css" />
     <Content Include="App_Themes\PortalTheme2.dll" />
     <Content Include="AssignLeadsRulesPage.aspx" />
     <Content Include="AutoDialer\CallManagement.aspx" />
@@ -3380,6 +3388,7 @@
     <Content Include="UserControl\Devexpress\CustomAppointmentForm.ascx" />
     <Content Include="UserControl\Devexpress\CustomVerticalAppointmentTemplate.ascx" />
     <Content Include="UserControl\Devexpress\CustomInplaceEditor.ascx" />
+    <Content Include="UserControl\NGDocumentsUI.ascx" />
     <Content Include="UserControl\DocumentsUI.ascx" />
     <Content Include="UserControl\DoorKnockMap.ascx" />
     <Content Include="UserControl\HomeOwnerInfo.ascx" />
