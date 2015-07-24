@@ -1,2 +1,33 @@
-﻿body {
+﻿short_sale_content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ss_form_item {
+    min-height: 50px;
+    font-size: 15px
+}
+
+.ss_form_input {
+    height: 30px;
+    font-size: 15px
+}
+
+.text_area_ss_form {
+    margin-top: 2px;
+}
+
+.dx-toolbar, .dx-device-phone .dx-toolbar {
+    height: 100%!important;
+}
+
+.dx-theme-generic .dx-device-phone .slideout-layout .layout-header,
+.dx-theme-generic .slideout-layout .layout-header
+    {
+        height: 40% !important;
+}
+
+.dx-theme-generic.dx-device-phone .slideout-layout .layout-content,
+.dx-theme-generic .slideout-layout .layout-content {
+    top: 40%!important;
 }

@@ -64,7 +64,7 @@
                                                     </PaneStyle>
                                                     <ContentCollection>
                                                         <dx:SplitterContentControl ID="SplitterContentControl3" runat="server">
-                                                            <div style="width: 100%; align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
+                                                            <div class="shortSaleUI" style="width: 100%; align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
 

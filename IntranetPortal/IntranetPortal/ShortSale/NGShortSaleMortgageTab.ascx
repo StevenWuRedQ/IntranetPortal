@@ -11,7 +11,7 @@
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Auction Date</label>
-                    <input class="ss_form_input " ss_date ng-model="mortgage.AuctionDate">
+                    <pt-radio model="mortgage.AuctionDate" name="mortgageAuctionDate"></pt-radio>
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date of Sale</label>
@@ -43,8 +43,8 @@
             <select class="class="ss_form_item" ng-model="mortgage.Lender" ng-options="bank for bank in bankNameOptions"></select>
             <i class="fa fa-compress btn  text-primary" ng-click="mortgageCompanyCollapse = !mortgageCompanyCollapse"></i>
                 
-            <ul class="ss_form_box clearfix" collapse="mortgageCompanyCollapse">
-               
+            <ul class="ss_form_box clearfix">
+                
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Category</label>
                     <input class="ss_form_input " ng-model="mortgage.Category" readonly="readonly">
@@ -58,6 +58,7 @@
 
                     <input class="ss_form_input " ng-model="mortgage.Loan">
                 </li>
+                <div collapse="mortgageCompanyCollapse">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Loan Amount</label>
                     <input class="ss_form_input" mask-money ng-model="mortgage.LoanAmount">
@@ -90,18 +91,17 @@
               
             </ul>
            
-         </div>
+            </div>
 
-        
-        <div class="ss_form_box clearfix">
+        <div class="ss_form_box clearfix" collapse="mortgageCompanyCollapse">
             <ul  class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Short Sale Dept</label>
-                <div class="contact_box" dx-select-box="InitContact('SsCase.Mortgages['+$index+'].ShortSaleDept')"></div>
+                <input class="ss_form_input" ng-model="GetContactById(mortgage.ShortSaleDept).OfficeNO" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Customer Service #</label>
-                <input class="ss_form_input" ng-model="GetContactById(mortgage.ShortSaleDept).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
+                <input class="ss_form_input" ng-model="GetContactById(mortgage.ShortSaleDept).OfficeNO" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Short Sale Fax #</label>
@@ -110,18 +110,17 @@
             </ul>
         </div>
 
-        <div class="ss_form">
-            <h4 class="ss_form_title">Title Contacts&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortgage.Contacts,'SsCase.Mortgages['+$index+'].Contacts')" title="Add"></i></h4>
+        <div class="ss_form" collapse="mortgageCompanyCollapse">
+            <h4 class="ss_form_title">Mortgage Contacts&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortgage.Contacts,'SsCase.Mortgages['+$index+'].Contacts')" title="Add"></i></h4>
 
             <div ng-show="mortgage.Contacts.length>0" class="ss_form_box clearfix">
                 <div dx-data-grid="{
                     columns: [
-                        { dataField: 'Description', caption: 'Description' },
-                        { dataField: 'Title', caption: 'Title' },
-                        { dataField: 'Name', caption: 'Name' },
-                        { dataField: 'Phone',caption: 'Phone #' },
-                        { dataField: 'Fax', caption: 'Fax #' },
-                        { dataField: 'Email', caption: 'Email' }],
+                        { dataField: 'Title', caption: 'Title',width: 50, },
+                        { dataField: 'Name', caption: 'Name', width: 100 },
+                        { dataField: 'Phone',caption: 'Phone #', width: 150 },
+                        { dataField: 'Fax', caption: 'Fax #',width: 150 },
+                        { dataField: 'Email', caption: 'Email',width: 150 }],
                     bindingOptions: { dataSource: 'SsCase.Mortgages['+$index+'].Contacts' },
                     editing: {
                         editMode: 'row',
@@ -132,10 +131,10 @@
             </div>
         </div>
 
-        <div class="ss_form">
+        <div class="ss_form" collapse="mortgageCompanyCollapse">
             <h4 class="ss_form_title">Notes <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortgage.Notes,'SsCase.Mortgages['+$index+'].Notes')" title="Add"></i></h4>
-            <ul class="ss_form_box clearfix" ng-repeat="(index,note) in mortgage.Notes track by index">
-                <li class="ss_form_item ss_form_item_line">
+            <ul class="ss_form_box clearfix textAreaDiv" ng-repeat="(index,note) in mortgage.Notes track by index">
+                <li class="ss_form_item ss_form_item_line ">
                     <label class="ss_form_input_title">Note {{index + 1}}&nbsp;<i class="fa fa-minus-circle text-warning" ng-click="NGremoveArrayItem(mortgage.Notes, index)"></i></label>                    
                     <textarea class="edit_text_area text_area_ss_form" ng-model="note.Content"></textarea>
                 </li>
@@ -175,7 +174,7 @@
         
     </div>
     </tab>
-    <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.Mortgages, 'SsCase.Mortgages')" ng-show="SsCase.Mortgages.length<=2" title="Add"></i>
+    <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.Mortgages, 'SsCase.Mortgages')" ng-show="SsCase.Mortgages.length<=2" title="Add" "font-size: 18px"></i>
 </tabset>
 
 
