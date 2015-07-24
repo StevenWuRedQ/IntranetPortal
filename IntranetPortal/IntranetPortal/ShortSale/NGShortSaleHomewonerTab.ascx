@@ -3,9 +3,9 @@
 <%@ Import Namespace="IntranetPortal" %>
 <tabset class="tab-switch">
     <tab ng-repeat="owner in SsCase.PropertyInfo.Owners" active="owner.active" disable="owner.disabled">
-                <tab-heading>Seller {{$index+1}} </tab-heading>
-    <div class="collapse_div nga-default nga-fade">
-               <div class="text-right"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.PropertyInfo.Owners.length>=2" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.Owners, $index)" title="Delete" style="border:1px solid; border-radius:3px; margin:2px"></i></div>
+              <tab-heading>Seller {{$index+1}} </tab-heading>
+              <div class="collapse_div nga-default nga-fade">
+              <div class="text-right"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="$index>0" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.Owners, $index)" title="Delete" style="border:1px solid; border-radius:3px; margin:2px"></i></div>
 
         <div>
             <ul class="ss_form_box clearfix">

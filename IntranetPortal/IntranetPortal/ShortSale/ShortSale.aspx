@@ -475,8 +475,7 @@
                         $http.get(leadsInfoUrl).
                             success(function (data, status, headers, config) {
                                 $scope.SsCase.LeadsInfo = data;
-                                SSCaseChanged = false;
-                                $scope.$watch('SsCase', function () { SSCaseChanged = true; });
+                                
                             }).error(function (data, status, headers, config) {
                                 
                                 // called asynchronously if an error occurs
