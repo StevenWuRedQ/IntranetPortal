@@ -50,7 +50,7 @@
                     
                     scope.$watch(attrs.ngModel, function (newValue, oldValue) {
                         var dateStr = newValue;
-                        if (!dateStr)
+                        if (!dateStr && oldValue!=null)
                         {
                             scope.$eval(attrs.ngModel + "='" + oldValue + "'");
                             return;
