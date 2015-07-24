@@ -341,6 +341,7 @@
         }
     </script>
     <script type="text/javascript">
+        var SSCaseChanged = false;
         function NGGetShortSale(caseId) {
             $(document).ready(function () {
                 angular.element(document.getElementById('ShortSaleCtrl')).scope().GetShortSaleCase(caseId);
@@ -474,8 +475,10 @@
                         $http.get(leadsInfoUrl).
                             success(function (data, status, headers, config) {
                                 $scope.SsCase.LeadsInfo = data;
+                                SSCaseChanged = false;
+                                $scope.$watch('SsCase', function () { SSCaseChanged = true; });
                             }).error(function (data, status, headers, config) {
-
+                                
                                 // called asynchronously if an error occurs
                                 // or server returns response with an error status.
                                 alert("Get Short sale Leads failed BBLE =" + $scope.SsCase.BBLE + " error : " + JSON.stringify(data));

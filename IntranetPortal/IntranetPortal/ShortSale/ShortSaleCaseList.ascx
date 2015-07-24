@@ -9,6 +9,7 @@
     //function is called on changing focused row
     function OnGridFocusedRowChanged() {
         // The values will be returned to the OnGetRowValues() function 
+        alert(SSCaseChanged);
         if (gridCase.GetFocusedRowIndex() >= 0) {
             if (typeof ContentCallbackPanel != 'undefined' && ContentCallbackPanel.InCallback()) {
                 postponedCallbackRequired = true;

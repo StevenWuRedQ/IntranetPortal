@@ -13,10 +13,13 @@ Public Class Transfer2Legal
             Return
         End If
         Dim BBLEs = JArray.Parse(BBLELists.Text)
-        For Each bble In BBLEs
 
-            LegalCaseManage.StartLegalRequest(bble, "{}", Page.User.Identity.Name)
-            LeadsActivityLog.AddActivityLog(Date.Now, "Transfter Leads to Legal", bble, LeadsActivityLog.LogCategory.Legal.ToString)
+        For Each bble In BBLEs
+            Dim legalCase = Legal.LegalCase.GetCase(bble)
+            If (legalCase Is Nothing) Then
+                LegalCaseManage.StartLegalRequest(bble, "{}", Page.User.Identity.Name)
+                LeadsActivityLog.AddActivityLog(Date.Now, "Transfter Leads to Legal", bble, LeadsActivityLog.LogCategory.Legal.ToString)
+            End If
         Next
         TransfterStauts.Text = "Transftered"
     End Sub

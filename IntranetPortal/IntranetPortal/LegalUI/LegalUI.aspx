@@ -869,8 +869,12 @@
                 if (typeof LegalShowAll == 'undefined' || LegalShowAll == null) {
                     return true;
                 }
-                return $scope.LegalCase.SecondaryInfo.SelectedType == filed;
-
+                if ($scope.LegalCase.SecondaryInfo)
+                {
+                    return $scope.LegalCase.SecondaryInfo.SelectedType == filed;
+                }
+               
+                return false;
             }
             $scope.ShowContorl = function (m) {
                 var t = typeof m;
