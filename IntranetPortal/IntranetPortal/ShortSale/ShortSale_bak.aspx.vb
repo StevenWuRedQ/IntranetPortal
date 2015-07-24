@@ -3,7 +3,7 @@ Imports System.Web.Services
 Imports System.Web.Script.Serialization
 Imports System.Web.Script.Services
 
-Public Class NGShortSale
+Public Class ShortSalePage
     Inherits System.Web.UI.Page
 
     Public Property ShortSaleCaseData As ShortSaleCase
@@ -183,9 +183,6 @@ Public Class NGShortSale
             End If
         End If
         hfIsEvction.Value = isEviction.ToString
-
-
-
     End Sub
 
     Sub MortgageStatusUpdate(mortageType As String, status As String, category As String, bble As String) Handles ActivityLogs.MortgageStatusUpdateEvent
@@ -201,10 +198,14 @@ Public Class NGShortSale
         End Select
     End Sub
 
+    Protected Sub ASPxCallbackPanel2_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        BindCaseData(e.Parameter)
+    End Sub
+
     Private Sub BindCaseData(caseId As Integer)
         ShortSaleCaseData = ShortSaleCase.GetCase(caseId)
         contentSplitter.ClientVisible = True
-        'ShortSaleOverVew.BindData(ShortSaleCaseData)
+        ShortSaleOverVew.BindData(ShortSaleCaseData)
         hfBBLE.Value = ShortSaleCaseData.BBLE
         ucTitle.BindData(ShortSaleCaseData)
         ActivityLogs.DisplayMode = IntranetPortal.ActivityLogs.ActivityLogMode.ShortSale
@@ -228,7 +229,7 @@ Public Class NGShortSale
         End If
 
         contentSplitter.ClientVisible = True
-        'ShortSaleOverVew.BindData(ShortSaleCaseData)
+        ShortSaleOverVew.BindData(ShortSaleCaseData)
         ucTitle.BindData(ShortSaleCaseData)
         ActivityLogs.DisplayMode = IntranetPortal.ActivityLogs.ActivityLogMode.ShortSale
         ActivityLogs.BindData(ShortSaleCaseData.BBLE)
@@ -246,25 +247,22 @@ Public Class NGShortSale
         Dim ssCase = ShortSaleCase.GetCase(caseId)
         'Dim json As New JavaScriptSerializer
         'Return json.Serialize(ssCase)
+        Dim emp = Employee.GetInstance(ssCase.ReferralContact.Name)
+        If emp IsNot Nothing AndAlso Not emp.Position = "Manager" Then
+            ssCase.ReferralManager = Employee.GetInstance(ssCase.ReferralContact.Name).Manager
+        Else
+            ssCase.ReferralManager = ssCase.ReferralContact.Name
+        End If
+
+
+
         Return ssCase
     End Function
-  
+
     Public Shared Function CheckBox(isChecked As Boolean?) As String
         If isChecked Is Nothing Then
             Return ""
         End If
         Return If(isChecked, "checked", "")
-    End Function
-
-    Protected Sub cbpLogs_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
-        Dim ssCase = ShortSaleCase.GetCase(e.Parameter)
-        ActivityLogs.BindData(ssCase.BBLE)
-        ShortSaleFileOverview.BindData(ssCase.BBLE)
-    End Sub
-    Public Function GetAllContact() As String
-        Return ShortSale.PartyContact.getAllContact.ToJsonString
-    End Function
-    Public Function GetAllTeam() As String
-        Return Team.GetAllTeams.ToJsonString
     End Function
 End Class

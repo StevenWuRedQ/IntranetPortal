@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class NGShortSale
+Partial Public Class ShortSalePage
 
     '''<summary>
     '''hfIsEvction control.
@@ -113,13 +113,13 @@ Partial Public Class NGShortSale
     Protected WithEvents SendMail As Global.IntranetPortal.SendMailControl
 
     '''<summary>
-    '''NGShortSaleTab control.
+    '''ShortSaleOverVew control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents NGShortSaleTab As Global.IntranetPortal.NGShortSaleTab
+    Protected WithEvents ShortSaleOverVew As Global.IntranetPortal.ShortSaleOverVew
 
     '''<summary>
     '''ucTitle control.
@@ -147,15 +147,6 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SplitterContentControl4 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
-
-    '''<summary>
-    '''cbpLogs control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cbpLogs As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
 
     '''<summary>
     '''ActivityLogs control.

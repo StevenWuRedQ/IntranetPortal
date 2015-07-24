@@ -1362,18 +1362,18 @@
       <DependentUpon>NGShortSaleHomewonerTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ShortSale\NGShortSale.aspx.designer.vb">
-      <DependentUpon>NGShortSale.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ShortSale\NGShortSale.aspx.vb">
-      <DependentUpon>NGShortSale.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ShortSale\ShortSale.aspx.designer.vb">
       <DependentUpon>ShortSale.aspx</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\ShortSale.aspx.vb">
       <DependentUpon>ShortSale.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShortSale\ShortSale_bak.aspx.designer.vb">
+      <DependentUpon>ShortSale_bak.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ShortSale_bak.aspx.vb">
+      <DependentUpon>ShortSale_bak.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ShortSale\ShortSaleCaseList.ascx.designer.vb">
@@ -3338,8 +3338,8 @@
     <Content Include="ShortSale\NGShortSaleMortgageTab.ascx" />
     <Content Include="ShortSale\SelectPartyUC.ascx" />
     <Content Include="ShortSale\NGShortSaleHomewonerTab.ascx" />
-    <Content Include="ShortSale\NGShortSale.aspx" />
     <Content Include="ShortSale\ShortSale.aspx" />
+    <Content Include="ShortSale\ShortSale_bak.aspx" />
     <Content Include="ShortSale\ShortSaleCaseList.ascx" />
     <Content Include="ShortSale\ShortSaleEvictionTab.ascx" />
     <Content Include="ShortSale\ShortSaleFileOverview.ascx" />
