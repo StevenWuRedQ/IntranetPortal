@@ -134,7 +134,7 @@
 </dx:ASPxCallback>
 
 <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMapControl" Width="900px" Height="700px"
-    ID="ASPxPopupControl1"
+    ID="ASPxPopupControl1" AllowDragging="true"
     HeaderText="Street View" AutoUpdatePosition="true" Modal="true" ContentUrlIFrameTitle="streetViewFrm"
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <HeaderTemplate>
@@ -153,7 +153,6 @@
                 <li><a href="#Oasis" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(3)">Oasis</a></li>
                 <li><a href="#ZOLA" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(4)">ZOLA</a></li>
             </ul>
-
             <!-- Tab panes -->
             <div class="tab-content" style="display: none">
                 <div class="tab-pane" id="street_image">

@@ -14,12 +14,7 @@ Public Class LegalCaseList
 
         lblLeadCategory.Text = Core.Utility.GetEnumDescription(status)
 
-        If (Roles.IsUserInRole(Page.User.Identity.Name, "Legal-Manager")) Then
-            gridCase.DataSource = LegalCase.GetCaseList(status)
-        Else
-            gridCase.DataSource = LegalCase.GetCaseList(status, Page.User.Identity.Name)
-        End If
-
+        BindLegalData(status)
         gridCase.DataBind()
 
         If status = LegalCaseStatus.LegalResearch Then
@@ -29,36 +24,14 @@ Public Class LegalCaseList
         If status = LegalCaseStatus.AttorneyHandle Then
             gridCase.GroupBy(gridCase.Columns("Attorney"))
         End If
+    End Sub
 
-        'If status = CaseStatus.Eviction Then
-        '    gridCase.DataSource = ShortSaleCase.GetEvictionCases
-        '    gridCase.DataBind()
-
-        '    If Not Page.IsPostBack Then
-        '        gridCase.GroupBy(gridCase.Columns("EvictionOwner"))
-        '    End If
-
-        '    Return
-        'End If
-
-        'If Employee.IsShortSaleManager(Page.User.Identity.Name) Then
-        '    gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status)
-
-        '    gridCase.DataBind()
-
-        '    If Not Page.IsPostBack Then
-        '        gridCase.GroupBy(gridCase.Columns("Owner"))
-        '    End If
-        'Else
-        '    gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status, Page.User.Identity.Name)
-        '    gridCase.DataBind()
-        'End If
-
-        'If Not Page.IsPostBack Then
-        '    If status = CaseStatus.FollowUp Then
-        '        gridCase.GroupBy(gridCase.Columns("CallbackDate"))
-        '    End If
-        'End If
+    Private Sub BindLegalData(status As LegalCaseStatus)
+        If (Roles.IsUserInRole(Page.User.Identity.Name, "Legal-Manager")) Then
+            gridCase.DataSource = LegalCase.GetCaseList(status)
+        Else
+            gridCase.DataSource = LegalCase.GetCaseList(status, Page.User.Identity.Name)
+        End If
     End Sub
 
     Public Sub BindCaseByBBLEs(bbles As List(Of String))
@@ -70,7 +43,7 @@ Public Class LegalCaseList
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)
         If gridCase.DataSource Is Nothing AndAlso gridCase.IsCallback Then
             If Not String.IsNullOrEmpty(hfCaseStatus.Value) Then
-                BindCaseList(hfCaseStatus.Value)
+                BindLegalData(hfCaseStatus.Value)
             End If
 
             'If (Not String.IsNullOrEmpty(hfCaseBBLEs.Value)) Then
@@ -87,8 +60,5 @@ Public Class LegalCaseList
             gridCase.SettingsBehavior.AllowClientEventsOnLoad = value
         End Set
     End Property
-
-
-
 
 End Class

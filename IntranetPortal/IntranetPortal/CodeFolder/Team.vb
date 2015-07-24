@@ -85,6 +85,18 @@ Partial Public Class Team
         End Get
     End Property
 
+    Public ReadOnly Property ManagerData As Employee
+        Get
+            Return Employee.GetInstance(Manager)
+        End Get
+    End Property
+
+    Public ReadOnly Property AssistantData As Employee
+        Get
+            Return Employee.GetInstance(Assistant)
+        End Get
+    End Property
+
     Public Function GetLeadsByStatus(status As LeadStatus) As List(Of Lead)
         Return Lead.GetUserLeadsData(AllUsers, status)
     End Function

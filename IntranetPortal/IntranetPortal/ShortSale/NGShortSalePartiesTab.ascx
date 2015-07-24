@@ -7,7 +7,7 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Name</label>
-            <div class="contact_box" dx-select-box="InitContact('SsCase.Processor')">
+            <div class="contact_box" dx-select-box="InitContact('SsCase.Processor')"></div>
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Phone #</label>

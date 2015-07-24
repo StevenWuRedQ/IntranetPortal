@@ -108,6 +108,17 @@
         End Using
     End Function
 
+    Public Shared Function GetLeadsActivityLogs(bble As String, categories As String()) As List(Of LeadsActivityLog)
+        Using ctx As New Entities
+            If categories Is Nothing Then
+                Return ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble).ToList
+            End If
+
+            Dim logs = ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble AndAlso categories.Contains(l.Category)).ToList
+            Return logs
+        End Using
+    End Function
+
     Enum LogCategory
         SalesAgent
         Finder
@@ -123,6 +134,7 @@
         RecycleTask
         ShortSale
         Legal
+        Eviction
     End Enum
 
     Enum EnumActionType

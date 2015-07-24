@@ -1,7 +1,9 @@
 ﻿Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.IO
 Imports Newtonsoft.Json
+Imports System.ComponentModel.DataAnnotations
 
+<MetadataType(GetType(EmployeeMetaData))>
 Partial Public Class Employee
 
     Public Shared Function GetProfile(name As String) As EmployeeProfile
@@ -526,7 +528,6 @@ Partial Public Class Employee
     Public Function GetData() As EmployeeData
 
         Return Core.Utility.CopyTo(Me, New EmployeeData())
-
     End Function
 
     Public Class EmployeeData
@@ -552,7 +553,15 @@ Partial Public Class Employee
             End Set
         End Property
     End Class
+End Class
 
+Public Class EmployeeMetaData
+    <JsonIgnoreAttribute>
+    Public Property Password As String
+    <JsonIgnoreAttribute>
+    Public Property Leads As ICollection(Of Lead)
+    <JsonIgnoreAttribute>
+    Public Property LeadsActivityLogs As ICollection(Of LeadsActivityLog)
 End Class
 
 

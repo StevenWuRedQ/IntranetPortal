@@ -27,10 +27,20 @@ Public Class ActivityLogs
 
     Public Sub BindData(bble As String)
         hfBBLE.Value = bble
-        Using Context As New Entities
-            gridTracking.DataSource = Context.LeadsActivityLogs.Where(Function(log) log.BBLE = bble).OrderByDescending(Function(log) log.ActivityDate).ToList
-            gridTracking.DataBind()
-        End Using
+
+        Select Case DisplayMode
+            Case ActivityLogMode.Legal
+                gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.LogCategory.Eviction.ToString})
+            Case Else
+                gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, Nothing)
+        End Select
+
+        gridTracking.DataBind()
+
+        'Using Context As New Entities
+        '    gridTracking.DataSource = Context.LeadsActivityLogs.Where(Function(log) log.BBLE = bble).OrderByDescending(Function(log) log.ActivityDate).ToList
+        '    gridTracking.DataBind()
+        'End Using
     End Sub
 
     Sub BindEmpList()

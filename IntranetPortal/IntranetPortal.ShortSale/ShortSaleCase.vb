@@ -463,6 +463,8 @@ Partial Public Class ShortSaleCase
                     If tmpCase IsNot Nothing Then
                         CaseId = tmpCase.CaseId
                     End If
+                Else
+                    Return
                 End If
             End If
 
