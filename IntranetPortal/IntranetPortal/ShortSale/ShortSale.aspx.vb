@@ -11,6 +11,7 @@ Public Class ShortSalePage
     Public Property HiddenTab As Boolean = False
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
         isEviction = CBool(hfIsEvction.Value)
         If Not Page.IsPostBack Then
 
