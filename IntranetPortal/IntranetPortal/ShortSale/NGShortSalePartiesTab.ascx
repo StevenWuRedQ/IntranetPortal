@@ -92,10 +92,8 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
                 <input class="ss_form_input" ng-model="GetContactByName(GetTeamByName(SsCase.ReferralTeam).Assistant).Email" type="email" readonly="readonly">
-            </li>
-           
-        </div>
-          
+            </li>           
+        </div>          
     </ul>
 </div>
 

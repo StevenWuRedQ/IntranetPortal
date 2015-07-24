@@ -44,7 +44,7 @@ Public Class NGShortSale
                     If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
 
                         Dim cstext1 As String = "<script type=""text/javascript"">" & _
-                                        String.Format("GetShortSaleData({0});", ShortSaleCaseData.CaseId) & "</script>"
+                                        String.Format("NGGetShortSale({0});", ShortSaleCaseData.CaseId) & "</script>"
                         Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
                     End If
                 End If
@@ -64,7 +64,7 @@ Public Class NGShortSale
 
                         If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
                             Dim cstext1 As String = "<script type=""text/javascript"">" & _
-                                            String.Format("GetShortSaleData({0});", ShortSaleCaseData.CaseId) & "</script>"
+                                            String.Format("NGGetShortSale({0});", ShortSaleCaseData.CaseId) & "</script>"
                             Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
                         End If
                         Return
@@ -82,7 +82,7 @@ Public Class NGShortSale
 
                 If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
                     Dim cstext1 As String = "<script type=""text/javascript"">" & _
-                                    String.Format("GetShortSaleData({0});", ShortSaleCaseData.CaseId) & "</script>"
+                                    String.Format("NGGetShortSale({0});", ShortSaleCaseData.CaseId) & "</script>"
                     Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
                 End If
             End If
@@ -100,7 +100,7 @@ Public Class NGShortSale
 
                 If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
                     Dim cstext1 As String = "<script type=""text/javascript"">" & _
-                                    String.Format("GetShortSaleData({0});", ShortSaleCaseData.CaseId) & "</script>"
+                                    String.Format("NGGetShortSale({0});", ShortSaleCaseData.CaseId) & "</script>"
                     Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
                 End If
             End If
@@ -116,7 +116,7 @@ Public Class NGShortSale
 
                 If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
                     Dim cstext1 As String = "<script type=""text/javascript"">" & _
-                                    String.Format("GetShortSaleData({0});", ShortSaleCaseData.CaseId) & "</script>"
+                                    String.Format("NGGetShortSale({0});", ShortSaleCaseData.CaseId) & "</script>"
                     Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
                 End If
             End If
