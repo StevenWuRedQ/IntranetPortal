@@ -9,6 +9,7 @@
                 <label class="ss_form_input_title">Block/Lot</label>
                 <input class="ss_form_input" readonly="readonly" ng-value="SsCase.LeadsInfo.Block ?SsCase.LeadsInfo.Block +'/'+SsCase.LeadsInfo.Lot:''">
             </li>
+            <%--
             <li class="ss_form_item" style="visibility: hidden">
                 <label class="ss_form_input_title">BBLE</label>
                 <input class="ss_form_input" readonly="readonly" ng-model="SsCase.LeadsInfo.BBLE">
@@ -17,7 +18,8 @@
                 <label class="ss_form_input_title">BBLE</label>
                 <input class="ss_form_input" ng-model="SsCase.LeadsInfo.BBLE">
             </li>
-            <li class="ss_form_item" style="width: 100%">
+            --%>
+            <li class="ss_form_item" style="width: 66.6%">
                 <label class="ss_form_input_title">Address</label>
                 <input class="ss_form_input" readonly="readonly" ng-model="SsCase.LeadsInfo.PropertyAddress" style="width: 93.5%;">
             </li>

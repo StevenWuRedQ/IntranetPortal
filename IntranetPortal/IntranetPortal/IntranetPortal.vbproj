@@ -2439,6 +2439,7 @@
     <Content Include="Scripts\devextreme-modules\dx.module-widgets-base.js" />
     <Content Include="Scripts\devextreme-modules\dx.module-widgets-web.debug.js" />
     <Content Include="Scripts\devextreme-modules\dx.module-widgets-web.js" />
+    <Content Include="Scripts\directives.js" />
     <Content Include="Scripts\dx.chartjs.debug.js" />
     <Content Include="Scripts\dx.chartjs.js" />
     <Content Include="Scripts\dx.phonejs.debug.js" />

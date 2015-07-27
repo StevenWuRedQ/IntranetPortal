@@ -155,7 +155,7 @@
                             <span><b>Date Completed</b>: {{value.DateOfValue | date: 'M/d/yyyy'}}</span>
                         </div>
                         <div class="col-sm-4" style="padding: 0px">
-                            <span><b>Value</b>: {{value.BankValue}}</span>
+                            <span><b>Value</b>: {{value.BankValue | currency}}</span>
                         </div>
                         <div class="col-sm-4" style="padding: 0px">
                             <span><b>Date Expires</b>: {{value.ExpiredOn | date: 'M/d/yyyy'}}</span>
@@ -200,7 +200,7 @@
                             </div>
                             <div>
                                 <label>Value</label>
-                                <input class="form-control" ng-model="value.BankValue" />
+                                <input class="form-control" ng-model="value.BankValue" mask-money/>
                             </div>
                             <div>
                                 <label>Date Expires</label>

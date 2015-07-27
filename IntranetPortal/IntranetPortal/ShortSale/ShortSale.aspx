@@ -568,6 +568,7 @@
             };
 
             $scope.SsCase.Mortgages = [{}];
+            /*
             $scope.homeBreakdownBindingOptions = function () {
                 return {
                     columns: [
@@ -661,7 +662,7 @@
                     },
                 }
 
-            }
+            }*/
 
             $http.get('ShortSaleServices.svc/getbanklist')
                 .success(function (data) {
