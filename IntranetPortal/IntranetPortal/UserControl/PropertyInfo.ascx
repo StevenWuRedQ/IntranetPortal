@@ -288,8 +288,6 @@
                     <label class="ss_form_input_title">SALE DATE</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.SaleDate%>">
                 </li>
-
-
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">ACTUAL FAR</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.ActualFar%>">

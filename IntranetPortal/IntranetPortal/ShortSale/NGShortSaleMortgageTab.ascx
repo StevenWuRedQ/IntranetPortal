@@ -25,7 +25,6 @@
                     <label class="ss_form_input_title">Payoff Requested</label>
                     <input class="ss_form_input " ss_date ng-model="mortgage.PayoffRequested">
                 </li>
-
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Expires</label>
                     <input class="ss_form_input " ss_date ng-model="mortgage.PayoffExpired">
@@ -34,10 +33,8 @@
                     <label class="ss_form_input_title">Payoff Amount</label>
                     <input class="ss_form_input" mask-money ng-model="mortgage.PayoffAmount">
                 </li>
-
             </ul>
         </div>
-
         <div class="ss_form">
             <h4 class="ss_form_title" style="display: inline">Mortgage Company&nbsp
             <select class="class="ss_form_item" ng-model="mortgage.Lender" ng-options="bank for bank in bankNameOptions"></select>&nbsp;

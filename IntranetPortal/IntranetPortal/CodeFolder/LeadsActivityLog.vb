@@ -111,10 +111,10 @@
     Public Shared Function GetLeadsActivityLogs(bble As String, categories As String()) As List(Of LeadsActivityLog)
         Using ctx As New Entities
             If categories Is Nothing Then
-                Return ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble).ToList
+                Return ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble).OrderByDescending(Function(l) l.ActivityDate).ToList
             End If
 
-            Dim logs = ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble AndAlso categories.Contains(l.Category)).ToList
+            Dim logs = ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble AndAlso categories.Contains(l.Category)).OrderByDescending(Function(l) l.ActivityDate).ToList
             Return logs
         End Using
     End Function
