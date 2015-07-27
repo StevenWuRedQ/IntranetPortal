@@ -13,7 +13,7 @@
         <AssociationConnector Association="IntranetPortalModel.EmployeeLead" />
         <AssociationConnector Association="IntranetPortalModel.LeadsActivityLogLead" />
         <AssociationConnector Association="IntranetPortalModel.EmployeeLeadsActivityLog" />
-        <EntityTypeShape EntityType="IntranetPortalModel.Role" Width="1.5" PointX="1.875" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntranetPortalModel.Role" Width="1.5" PointX="1.25" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="IntranetPortalModel.UsersInRole" Width="1.75" PointX="1.25" PointY="7" IsExpanded="true" />
         <AssociationConnector Association="IntranetPortalModel.RoleUsersInRole" />
         <EntityTypeShape EntityType="IntranetPortalModel.FileAttachment" Width="1.5" PointX="6.375" PointY="8.125" IsExpanded="true" />
@@ -24,10 +24,10 @@
         <EntityTypeShape EntityType="IntranetPortalModel.UserMessage" Width="1.5" PointX="5.375" PointY="11.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PortalLisPen" Width="1.5" PointX="12.5" PointY="6.875" />
         <EntityTypeShape EntityType="IntranetPortalModel.NYC_St_Names" Width="1.5" PointX="12.375" PointY="0.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.PortalQuote" Width="1.5" PointX="12.25" PointY="3.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PortalQuote" Width="1.5" PointX="12.375" PointY="2.625" />
         <EntityTypeShape EntityType="IntranetPortalModel.OwnerContact" Width="1.5" PointX="11.375" PointY="13.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.Agent_Properties" Width="1.5" PointX="0.75" PointY="14.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.HomeOwner" Width="1.5" PointX="3.375" PointY="15.875" />
+        <EntityTypeShape EntityType="IntranetPortalModel.HomeOwner" Width="1.5" PointX="3.375" PointY="15.375" />
         <EntityTypeShape EntityType="IntranetPortalModel.LoginLog" Width="1.5" PointX="13.375" PointY="13.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.SharedLead" Width="1.5" PointX="14.125" PointY="1" />
         <EntityTypeShape EntityType="IntranetPortalModel.HomeOwnerPhone" Width="1.5" PointX="14.5" PointY="3.5" />
@@ -60,6 +60,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.PendingAssignLead" Width="1.5" PointX="21.375" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.Leads_with_last_log" Width="1.5" PointX="21.375" PointY="11.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsInThirdParty" Width="1.5" PointX="3.25" PointY="21" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LeadsActivityLogArchived" Width="2.375" PointX="0.75" PointY="22.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

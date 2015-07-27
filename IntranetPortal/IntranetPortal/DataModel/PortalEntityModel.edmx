@@ -235,6 +235,19 @@
           <Property Name="ActivityDate" Type="datetime" />
           <Property Name="Comments" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="LeadsActivityLogArchived">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="int" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActionType" Type="int" />
+          <Property Name="ActivityDate" Type="datetime" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="LeadsComments">
           <Key>
             <PropertyRef Name="CommentId" />
@@ -889,6 +902,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="HomeOwners" EntityType="Self.HomeOwners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Leads" EntityType="Self.Leads" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsActivityLog" EntityType="Self.LeadsActivityLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeadsActivityLogArchived" EntityType="Self.LeadsActivityLogArchived" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsComments" EntityType="Self.LeadsComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsInfo" EntityType="Self.LeadsInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsInThirdParty" EntityType="Self.LeadsInThirdParty" Schema="dbo" store:Type="Tables" />
@@ -1173,6 +1187,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="PendingAssignLeads" EntityType="IntranetPortalModel.PendingAssignLead" />
           <EntitySet Name="Leads_with_last_log" EntityType="IntranetPortalModel.Leads_with_last_log" />
           <EntitySet Name="LeadsInThirdParties" EntityType="IntranetPortalModel.LeadsInThirdParty" />
+          <EntitySet Name="LeadsActivityLogArchiveds" EntityType="IntranetPortalModel.LeadsActivityLogArchived" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -2095,6 +2110,19 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="LeadsActivityLogArchived">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActionType" Type="Int32" />
+          <Property Name="ActivityDate" Type="DateTime" Precision="3" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2993,6 +3021,20 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
                 <ScalarProperty Name="ThirdParty" ColumnName="ThirdParty" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeadsActivityLogArchiveds">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LeadsActivityLogArchived">
+              <MappingFragment StoreEntitySet="LeadsActivityLogArchived">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
+                <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
