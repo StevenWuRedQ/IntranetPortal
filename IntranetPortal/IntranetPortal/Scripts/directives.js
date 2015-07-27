@@ -1,4 +1,5 @@
-﻿var portalApp = angular.module('PortalApp')
+﻿var portalApp = angular.module('PortalApp');
+
 portalApp.directive('ssDate', function () {
     return {
         restrict: 'A',
@@ -21,6 +22,7 @@ portalApp.directive('ssDate', function () {
         }
     };
 });
+
 portalApp.directive('inputMask', function () {
     return {
         restrict: 'A',
@@ -32,6 +34,7 @@ portalApp.directive('inputMask', function () {
         }
     };
 });
+
 portalApp.directive('radioInit', function () {
     return {
         restrict: 'A',
@@ -46,7 +49,8 @@ portalApp.directive('radioInit', function () {
         }
     }
 });
-portalApp.directive('maskMoney', function () {
+
+portalApp.directive('moneyMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {

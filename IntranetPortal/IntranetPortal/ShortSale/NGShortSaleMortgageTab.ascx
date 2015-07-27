@@ -14,23 +14,23 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date of Sale</label>
-                    <input class="ss_form_input " ss_date ng-model="mortgage.DateOfSale">
+                    <input class="ss_form_input " ng-model="mortgage.DateOfSale" ss-date>
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date Verified</label>
-                    <input class="ss_form_input " ss_date ng-model="mortgage.DateVerified">
+                    <input class="ss_form_input " ng-model="mortgage.DateVerified" ss-date>
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Requested</label>
-                    <input class="ss_form_input " ss_date ng-model="mortgage.PayoffRequested">
+                    <input class="ss_form_input " ng-model="mortgage.PayoffRequested" ss-date>
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Expires</label>
-                    <input class="ss_form_input " ss_date ng-model="mortgage.PayoffExpired">
+                    <input class="ss_form_input " ng-model="mortgage.PayoffExpired">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Amount</label>
-                    <input class="ss_form_input" mask-money ng-model="mortgage.PayoffAmount">
+                    <input class="ss_form_input" ng-model="mortgage.PayoffAmount" money-mask>
                 </li>
             </ul>
         </div>
@@ -57,12 +57,12 @@
                 <div collapse="mortgageCompanyCollapse">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Loan Amount</label>
-                    <input class="ss_form_input" mask-money ng-model="mortgage.LoanAmount">
+                    <input class="ss_form_input" ng-model="mortgage.LoanAmount" money-mask>
 
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Last Payment Date</label>
-                    <input class="ss_form_input " ss_date="" ng-model="mortgage.LastPaymentDate">
+                    <input class="ss_form_input " ng-model="mortgage.LastPaymentDate" ss-date>
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Mortgage Type</label>
