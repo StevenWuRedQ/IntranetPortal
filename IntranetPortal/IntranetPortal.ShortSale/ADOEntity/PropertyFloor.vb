@@ -30,5 +30,6 @@ Partial Public Class PropertyFloor
     Public Property LockupDate As Nullable(Of Date)
     Public Property LockedBy As String
     Public Property LastChecked As Nullable(Of Date)
+    Public Property Description As String
 
 End Class

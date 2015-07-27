@@ -123,6 +123,7 @@
           </Key>
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="FloorId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
           <Property Name="Bedroom" Type="int" />
           <Property Name="Bathroom" Type="int" />
           <Property Name="Livingroom" Type="int" />
@@ -288,6 +289,8 @@
           <Property Name="MNSP" Type="decimal" Precision="18" Scale="2" />
           <Property Name="DateOfValue" Type="datetime" />
           <Property Name="ExpiredOn" Type="datetime" />
+          <Property Name="AgentName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AgentPhone" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ShortSaleActivityLogs">
           <Key>
@@ -552,6 +555,7 @@
           <Property Name="LockupDate" Type="DateTime" Precision="3" />
           <Property Name="LockedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastChecked" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyTitle">
           <Key>
@@ -812,6 +816,8 @@
           <Property Name="MNSP" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="DateOfValue" Type="DateTime" Precision="3" />
           <Property Name="ExpiredOn" Type="DateTime" Precision="3" />
+          <Property Name="AgentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AgentPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyMortgage">
           <Key>
@@ -981,6 +987,7 @@
           <EntitySetMapping Name="PropertyFloors">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyFloor">
               <MappingFragment StoreEntitySet="PropertyFloors">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="LastChecked" ColumnName="LastChecked" />
                 <ScalarProperty Name="LockedBy" ColumnName="LockedBy" />
                 <ScalarProperty Name="LockupDate" ColumnName="LockupDate" />
@@ -1266,6 +1273,8 @@
           <EntitySetMapping Name="PropertyValueInfoes">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyValueInfo">
               <MappingFragment StoreEntitySet="PropertyValueInfo">
+                <ScalarProperty Name="AgentPhone" ColumnName="AgentPhone" />
+                <ScalarProperty Name="AgentName" ColumnName="AgentName" />
                 <ScalarProperty Name="ExpiredOn" ColumnName="ExpiredOn" />
                 <ScalarProperty Name="DateOfValue" ColumnName="DateOfValue" />
                 <ScalarProperty Name="MNSP" ColumnName="MNSP" />

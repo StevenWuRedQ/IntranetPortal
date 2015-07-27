@@ -18,5 +18,7 @@ Partial Public Class PropertyValueInfo
     Public Property MNSP As Nullable(Of Decimal)
     Public Property DateOfValue As Nullable(Of Date)
     Public Property ExpiredOn As Nullable(Of Date)
+    Public Property AgentName As String
+    Public Property AgentPhone As String
 
 End Class
