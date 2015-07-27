@@ -84,6 +84,7 @@
           <Property Name="GroupId" Type="int" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Disable" Type="bit" />
         </EntityType>
         <EntityType Name="PropertyBaseInfo">
           <Key>
@@ -347,7 +348,7 @@
           <Property Name="OccupiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="Evivtion" Type="nvarchar" MaxLength="50" />
           <Property Name="DateStarted" Type="datetime" />
-          <Property Name="LockBoxCode" Type="nchar" MaxLength="5" />
+          <Property Name="LockBoxCode" Type="nvarchar" MaxLength="50" />
           <Property Name="Owner" Type="nvarchar" MaxLength="50" />
           <Property Name="IsUrgent" Type="bit" />
           <Property Name="CallbackDate" Type="datetime" />
@@ -525,6 +526,7 @@
           <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GroupId" Type="Int32" />
           <Property Name="CustomerService" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Disable" Type="Boolean" />
         </EntityType>
         <EntityType Name="PropertyFloor">
           <Key>
@@ -594,7 +596,7 @@
           <Property Name="OccupiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Evivtion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateStarted" Type="DateTime" Precision="3" />
-          <Property Name="LockBoxCode" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="LockBoxCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -957,6 +959,7 @@
           <EntitySetMapping Name="PartyContacts">
             <EntityTypeMapping TypeName="IntranetPortalModel.PartyContact">
               <MappingFragment StoreEntitySet="PartyContacts">
+                <ScalarProperty Name="Disable" ColumnName="Disable" />
                 <ScalarProperty Name="CustomerService" ColumnName="CustomerService" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="Fax" ColumnName="Fax" />
