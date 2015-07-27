@@ -171,24 +171,24 @@
             <th></th>
         </tr>
         <tr class="icon_btn" ng-repeat="floor in SsCase.PropertyInfo.PropFloors" id="floor{{$index}}" ng-click="setVisiblePopup(SsCase.PropertyInfo.PropFloors[$index], true)">
-            <td>{{$index}}</td>
+            <td>{{$index+1}}</td>
             <td>
                 <div class="content">
                     <div class="row" style="margin: 0px">
                         <div class="col-sm-6" style="padding: 0px">
-                            <span>bedroom:{{floor.Bedroom}}</span>
+                            <span><b>bedroom:</b>{{floor.Bedroom}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span>Bathroom:{{floor.Bathroom}}</span>
+                            <span><b>Bathroom:</b>{{floor.Bathroom}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span>Livingroom:{{floor.Livingroom}}</span>
+                            <span><b>Livingroom:</b>{{floor.Livingroom}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span>Kitchen:{{floor.Kitchen}}</span>
+                            <span><b>Kitchen:</b>{{floor.Kitchen}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span>Diningroom:{{floor.Diningroom}}</span>
+                            <span><b>Diningroom:</b>{{floor.Diningroom}}</span>
                         </div>
                     </div>
                 </div>
@@ -197,22 +197,22 @@
                 <div class="content">
                     <div class="row" style="margin: 0px">
                         <div class="col-sm-6" style="padding: 0px">
-                            <span>Occupancy:{{floor.Occupied}}</span>
+                            <span><b>Occupancy:</b>{{floor.Occupied}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span>Access:{{floor.Access}}</span>
+                            <span><b>Access:</b>{{floor.Access}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span>Lockbox:{{floor.LockBox}}</span>
+                            <span><b>Lockbox:</b>{{floor.Lockbox}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span>LockupDate:{{floor.LockupDate}}</span>
+                            <span><b>LockupDate:</b>{{floor.LockupDate |date: 'M/d/yyyy'}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span>LockedBy:{{floor.LockedBy}}</span>
+                            <span><b>LockedBy:</b>{{floor.LockedBy}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span>LastChecked:{{floor.LastChecked}}</span>
+                            <span><b>LastChecked:</b>{{floor.LastChecked |date: 'M/d/yyyy'}}</span>
                         </div>
                     </div>
                 </div>
@@ -221,7 +221,7 @@
                 <div dx-popup="{    
                                 height: 850,
                                 width: 600, 
-                                title: 'Floor '+$index,
+                                title: 'Floor '+ ($index+1),
                                 dragEnabled: false,
                                 showCloseButton: true,
                                 bindingOptions:{ visible: 'SsCase.PropertyInfo.PropFloors['+$index+'].visiblePopup' }
@@ -251,8 +251,8 @@
                             </div>
                             <hr />
                             <div>
-                                <label>Occupancy</label><br />
-                                <select ng-model="floor.Occupied">
+                                <label>Occupancy</label>
+                                <select class="form-control" ng-model="floor.OccupiedBy">
                                     <option></option>
                                     <option>Vacant            </option>
                                     <option>Seller            </option>

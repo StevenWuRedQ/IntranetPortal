@@ -83,6 +83,7 @@
     </div>
 </div>
 
+<%-- 
 <div class="ss_form">
     <h4 class="ss_form_title">Valuation&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.ValueInfoes,'SsCase.ValueInfoes')" title="Add"></i></h4>
     <div class="ss_brder" ng-show="SsCase.ValueInfoes.length>0">
@@ -134,9 +135,10 @@
         </div>
     </div>
 </div>
+--%>
 
-<div class="ss_form" id="home_breakdown_table_new">
-    <h4 class="ss_form_title">Home Breakdown <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.ValueInfoes,'SsCase.ValueInfoes')" title="Add"></i>
+<div class="ss_form" id="valuation_table_new">
+    <h4 class="ss_form_title">Valuations <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.ValueInfoes,'SsCase.ValueInfoes')" title="Add"></i>
     </h4>
     <table class="table table-striped table-bordered table-responsive">
         <tr>
@@ -154,13 +156,13 @@
                             <span><b>Value</b>: {{value.BankValue}}</span>
                         </div>
                         <div class="col-sm-4" style="padding: 0px">
-                            <span><b>Min Net</b>: {{value.MNSP}}</span>
+                            <span><b>Min Net</b>: {{value.MNSP | currency}}</span>
                         </div>
                         <div class="col-sm-4" style="padding: 0px">
-                            <span><b>Date Completed</b>: {{value.DateOfValue | date}}</span>
+                            <span><b>Date Completed</b>: {{value.DateOfValue | date: 'M/d/yyyy'}}</span>
                         </div>
-                        <div class="col-sm-6" style="padding: 0px">
-                            <span><b>Date Expires</b>: {{value.ExpiredOn | date}}</span>
+                        <div class="col-sm-8" style="padding: 0px">
+                            <span><b>Date Expires</b>: {{value.ExpiredOn | date: 'M/d/yyyy'}}</span>
                         </div>
                     </div>
                 </div>
@@ -170,7 +172,7 @@
                 <div dx-popup="{    
                                 height: 450,
                                 width: 600, 
-                                title: 'Floor '+$index,
+                                title: 'Valuation '+($index+1),
                                 dragEnabled: false,
                                 showCloseButton: true,
                                 bindingOptions:{ visible: 'SsCase.ValueInfoes['+$index+'].visiblePopup' }
@@ -179,7 +181,14 @@
                         <form>
                             <div>
                                 <label>Type</label>
-                                <input class="form-control" ng-model="value.Method" />
+                                <select class="form-control" ng-model="value.Method">
+                                    <option></option>
+                                    <option>AVM</option>
+                                    <option>Exterior Appraisal</option>
+                                    <option>Exterior BPO</option>
+                                    <option>Interior Appraisal</option>
+                                    <option>Interior BPO</option>
+                                </select>
                             </div>
                             <div>
                                 <label>Date Completed</label>
@@ -195,7 +204,7 @@
                             </div>
                             <div>
                                 <label>Min Net</label>
-                                <input class="form-control" ng-model="value.MNSP" />
+                                <input class="form-control" ng-model="value.MNSP" mask-money />
                             </div>
                         </form>
                         <br />
@@ -205,7 +214,7 @@
             </td>
     </table>
 </div>
-
+<%-- 
 <div class="ss_form ">
     <h4 class="ss_form_title">Offer&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.ShortSaleOffers,'SsCase.ShortSaleOffers')" title="Add"></i></h4>
     <div class="ss_brder" ng-show="SsCase.ShortSaleOffers.length>0">
@@ -215,4 +224,95 @@
         </div>
     </div>
 </div>
+--%>
 
+<div class="ss_form" id="offer_table_new">
+    <h4 class="ss_form_title">Offers <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.ShortSaleOffers,'SsCase.ShortSaleOffers')" title="Add"></i>
+    </h4>
+    <table class="table table-striped table-bordered table-responsive">
+        <tr>
+            <th>Details</th>
+            <th></th>
+        </tr>
+        <tr class="icon_btn" ng-repeat="offer in SsCase.ShortSaleOffers" id="offer{{$index}}" ng-click="setVisiblePopup(SsCase.ShortSaleOffers[$index], true)">
+            <td>
+                <div class="content">
+                    <div class="row" style="margin: 0px">
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Type</b>: {{offer.OfferType}}</span>
+                        </div>
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Buying Entity</b>: {{SsCase.BuyerEntity.Entity}}</span>
+                        </div>
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Signor</b>: {{SsCase.BuyerEntity.Signor}}</span>
+                        </div>
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Date Corp Formed</b>: {{SsCase.BuyerEntity.DateOpened| date: 'M/d/yyyy'}}</span>
+                        </div>
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Date Of Contract</b>: {{offer.DateOfContract| date: 'M/d/yyyy'}}</span>
+                        </div>
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Offer Amount</b>: {{offer.OfferAmount| currency}}</span>
+                        </div>
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Date Submited</b>: {{offer.DateSubmited| date: 'M/d/yyyy'}}</span>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <i class="fa fa-times icon_btn tooltip-examples text-danger" ng-click="NGremoveArrayItem(SsCase.ShortSaleOffers, $index)" title="Delete"></i>
+                <div dx-popup="{    
+                                height: 600,
+                                width: 600, 
+                                title: 'Offers '+($index+1),
+                                dragEnabled: false,
+                                showCloseButton: true,
+                                bindingOptions:{ visible: 'SsCase.ShortSaleOffers['+$index+'].visiblePopup' }
+                            }">
+                    <div data-options="dxTemplate:{ name: 'content' }">
+                        <form>
+                            <div>
+                                <label>Type</label>
+                                <select ng-model="offer.OfferType" class="form-control">
+                                    <option></option>
+                                    <option>Initial Offer</option>
+                                    <option>Bank Counter</option>
+                                    <option>Buyer Counter</option>
+                                    <option>New Buyer Offer</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Buying Entity</label>
+                                <input class="form-control" ng-model="SsCase.BuyerEntity.Entity" disabled />
+                            </div>
+                            <div>
+                                <label>Signor</label>
+                                <input class="form-control" ng-model="SsCase.BuyerEntity.Signor" disabled ss-date />
+                            </div>
+                            <div>
+                                <label>Date Corp Formed</label>
+                                <input class="form-control" ng-model="SsCase.BuyerEntity.DateOpened" disabled />
+                            </div>
+                            <div>
+                                <label>Date Of Contract</label>
+                                <input class="form-control" ss-date ng-model="offer.DateOfContract" />
+                            </div>
+                            <div>
+                                <label>Offer Amount</label>
+                                <input class="form-control" ng-model="offer.OfferAmount" mask-money />
+                            </div>
+                            <div>
+                                <label>Date Submited</label>
+                                <input class="form-control" ss-date ng-model="offer.DateSubmited" />
+                            </div>
+                        </form>
+                        <br />
+                        <button class="btn btn-primary pull-right" ng-click="setVisiblePopup(SsCase.ShortSaleOffers[$index], false)">Save</button>
+                    </div>
+                </div>
+            </td>
+    </table>
+</div>
