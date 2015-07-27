@@ -4,16 +4,6 @@
 <div class="clearfix">
 </div>
 
-<style>
-    .ss_form_small_font {
-        font-size: 10px !important;
-    }
-
-        .ss_form_small_font .dx-widget {
-            font-size: 10px;
-        }
-</style>
-
 <div>
     <div ng-show="SsCase.DocumentMissing.length>0" class="well">
         <label class="ss_form_input_title">Open Document Request</label>
@@ -143,6 +133,77 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="ss_form" id="home_breakdown_table_new">
+    <h4 class="ss_form_title">Home Breakdown <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.ValueInfoes,'SsCase.ValueInfoes')" title="Add"></i>
+    </h4>
+    <table class="table table-striped table-bordered table-responsive">
+        <tr>
+            <th>Details</th>
+            <th></th>
+        </tr>
+        <tr class="icon_btn" ng-repeat="value in SsCase.ValueInfoes" id="value{{$index}}" ng-click="setVisiblePopup(SsCase.ValueInfoes[$index], true)">
+            <td>
+                <div class="content">
+                    <div class="row" style="margin: 0px">
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Type</b>: {{value.Method}}</span>
+                        </div>
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Value</b>: {{value.BankValue}}</span>
+                        </div>
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Min Net</b>: {{value.MNSP}}</span>
+                        </div>
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Date Completed</b>: {{value.DateOfValue | date}}</span>
+                        </div>
+                        <div class="col-sm-6" style="padding: 0px">
+                            <span><b>Date Expires</b>: {{value.ExpiredOn | date}}</span>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <i class="fa fa-times icon_btn tooltip-examples text-danger" ng-click="NGremoveArrayItem(SsCase.ValueInfoes, $index)" title="Delete"></i>
+                <div dx-popup="{    
+                                height: 450,
+                                width: 600, 
+                                title: 'Floor '+$index,
+                                dragEnabled: false,
+                                showCloseButton: true,
+                                bindingOptions:{ visible: 'SsCase.ValueInfoes['+$index+'].visiblePopup' }
+                            }">
+                    <div data-options="dxTemplate:{ name: 'content' }">
+                        <form>
+                            <div>
+                                <label>Type</label>
+                                <input class="form-control" ng-model="value.Method" />
+                            </div>
+                            <div>
+                                <label>Date Completed</label>
+                                <input class="form-control" ss-date ng-model="value.DateOfValue" />
+                            </div>
+                            <div>
+                                <label>Date Expires</label>
+                                <input class="form-control" ss-date ng-model="value.ExpiredOn" />
+                            </div>
+                            <div>
+                                <label>Value</label>
+                                <input class="form-control" ng-model="value.BankValue" />
+                            </div>
+                            <div>
+                                <label>Min Net</label>
+                                <input class="form-control" ng-model="value.MNSP" />
+                            </div>
+                        </form>
+                        <br />
+                        <button class="btn btn-primary pull-right" ng-click="setVisiblePopup(SsCase.ValueInfoes[$index], false)">Save</button>
+                    </div>
+                </div>
+            </td>
+    </table>
 </div>
 
 <div class="ss_form ">

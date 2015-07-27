@@ -46,7 +46,7 @@
         </div>
 
         <div class="ss_form">
-            <h4 class="ss_form_title">Contacts <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Contacts,'SsCase.PropertyInfo.Owners['+$index+'].Contacts')" title="Add"></i>&nbsp;<i class="fa fa-compress text-primary" ng-show="homeownerCollapse" ng-click="homeownerCollapse = !homeownerCollapse"></i><i class="fa fa-expand text-primary" ng-show="!homeownerCollapse" ng-click="homeownerCollapse = !homeownerCollapse"></i></h4>
+            <h4 class="ss_form_title">Contacts <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Contacts,'SsCase.PropertyInfo.Owners['+$index+'].Contacts')" title="Add"></i>&nbsp;<i class="fa fa-compress icon_btn text-primary" ng-show="homeownerCollapse" ng-click="homeownerCollapse = !homeownerCollapse"></i><i class="fa fa-expand icon_btn text-primary" ng-show="!homeownerCollapse" ng-click="homeownerCollapse = !homeownerCollapse"></i></h4>
             <div class="ss_border" collapse="homeownerCollapse" ng-show="owner.Contacts.length>0">
             <div class="ss_form_box clearfix" >
                 <div dx-data-grid="{

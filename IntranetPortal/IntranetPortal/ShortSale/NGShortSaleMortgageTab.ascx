@@ -36,9 +36,9 @@
         </div>
         <div class="ss_form">
             <h4 class="ss_form_title" style="display: inline">Mortgage Company&nbsp
-            <select class="class="ss_form_item" ng-model="mortgage.ShortSaleDept" ng-options="bank.ContactId as bank.Name for bank in bankNameOptions"></select>&nbsp;
-            <i class="fa fa-compress text-primary" ng-show="mortgageCompanyCollapse" ng-click="mortgageCompanyCollapse = !mortgageCompanyCollapse"></i>
-            <i class="fa fa-expand text-primary" ng-show="!mortgageCompanyCollapse" ng-click="mortgageCompanyCollapse = !mortgageCompanyCollapse"></i></h4>
+            <select class="class="ss_form_item" ng-model="mortgage.LenderId" ng-options="bank.ContactId as bank.Name for bank in bankNameOptions"></select>&nbsp;
+            <i class="fa fa-compress icon_btn text-primary" ng-show="mortgageCompanyCollapse" ng-click="mortgageCompanyCollapse = !mortgageCompanyCollapse"></i>
+            <i class="fa fa-expand icon_btn text-primary" ng-show="!mortgageCompanyCollapse" ng-click="mortgageCompanyCollapse = !mortgageCompanyCollapse"></i></h4>
             <div class="ss_border">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
@@ -88,16 +88,16 @@
             <ul  class="ss_form_box clearfix" collapse="mortgageCompanyCollapse">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Short Sale Dept</label>
-                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ShortSaleDept).OfficeNO" readonly="readonly">
+                    <input class="ss_form_input" ng-model="GetContactById(mortgage.Lender).OfficeNO" readonly="readonly">
 
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Customer Service #</label>
-                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ShortSaleDept).CustomerService" mask="(999) 999-9999" clean="true" readonly="readonly">
+                    <input class="ss_form_input" ng-model="GetContactById(mortgage.Lender).CustomerService" mask="(999) 999-9999" clean="true" readonly="readonly">
                 </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Short Sale Fax #</label>
-                <input class="ss_form_input" ng-model="GetContactById(mortgage.ShortSaleDept).FAX" readonly="readonly">
+                <input class="ss_form_input" ng-model="GetContactById(mortgage.Lender).FAX" readonly="readonly">
             </li>
             </ul>
         </div>

@@ -3,7 +3,7 @@
 </div>
 
 <div>
-    <h4 class="ss_form_title">Assigned Processor<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('AssignedProcessor', function(party){ShortSaleCaseData.Processor=party.ContactId})"></i></h4>
+    <h4 class="ss_form_title">Assigned Processor</h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
@@ -23,7 +23,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Referral&nbsp<i class="fa fa-compress text-primary" ng-show="!referralCollapse" ng-click="referralCollapse = !referralCollapse"></i><i class="fa fa-expand text-primary" ng-show="referralCollapse" ng-click="referralCollapse = !referralCollapse"></i></h4>
+    <h4 class="ss_form_title">Referral&nbsp<i class="fa fa-compass icon_btn text-primary" ng-show="!referralCollapse" ng-click="referralCollapse = !referralCollapse"></i><i class="fa fa-expand text-primary" ng-show="referralCollapse" ng-click="referralCollapse = !referralCollapse"></i></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
 
@@ -101,7 +101,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Listing Agent&nbsp<i class="fa fa-compress text-primary" ng-show="!listingAgentCollapse" ng-click="listingAgentCollapse = !listingAgentCollapse"></i><i class="fa fa-expand text-primary" ng-show="listingAgentCollapse" ng-click="listingAgentCollapse = !listingAgentCollapse"></i></h4>
+    <h4 class="ss_form_title">Listing Agent&nbsp<i class="fa fa-compass icon_btn text-primary" ng-show="!listingAgentCollapse" ng-click="listingAgentCollapse = !listingAgentCollapse"></i><i class="fa fa-expand text-primary" ng-show="listingAgentCollapse" ng-click="listingAgentCollapse = !listingAgentCollapse"></i></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
@@ -135,7 +135,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Seller Attorney&nbsp<i class="fa fa-compress text-primary" ng-show="!sellerAttorneyCollapse" ng-click="sellerAttorneyCollapse = !sellerAttorneyCollapse"></i><i class="fa fa-expand text-primary" ng-show="sellerAttorneyCollapse" ng-click="sellerAttorneyCollapse = !sellerAttorneyCollapse"></i></h4>
+    <h4 class="ss_form_title">Seller Attorney&nbsp<i class="fa fa-compass icon_btn text-primary" ng-show="!sellerAttorneyCollapse" ng-click="sellerAttorneyCollapse = !sellerAttorneyCollapse"></i><i class="fa fa-expand text-primary" ng-show="sellerAttorneyCollapse" ng-click="sellerAttorneyCollapse = !sellerAttorneyCollapse"></i></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
 
@@ -171,7 +171,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Buyer&nbsp<i class="fa fa-compress text-primary" ng-show="!buyerCollapse" ng-click="buyerCollapse = !buyerCollapse"></i><i class="fa fa-expand text-primary" ng-show="buyerCollapse" ng-click="buyerCollapse = !buyerCollapse"></i></h4>
+    <h4 class="ss_form_title">Buyer&nbsp<i class="fa fa-compass icon_btn text-primary" ng-show="!buyerCollapse" ng-click="buyerCollapse = !buyerCollapse"></i><i class="fa fa-expand text-primary" ng-show="buyerCollapse" ng-click="buyerCollapse = !buyerCollapse"></i></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
 
@@ -213,7 +213,7 @@
 
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Buyer Attorney&nbsp<i class="fa fa-compress text-primary" ng-show="!buyerAttorneryCollapse" ng-click="buyerAttorneryCollapse = !buyerAttorneryCollapse"></i><i class="fa fa-expand text-primary" ng-show="buyerAttorneryCollapse" ng-click="buyerAttorneryCollapse = !buyerAttorneryCollapse"></i></h4>
+    <h4 class="ss_form_title">Buyer Attorney&nbsp<i class="fa fa-compass icon_btn text-primary" ng-show="!buyerAttorneryCollapse" ng-click="buyerAttorneryCollapse = !buyerAttorneryCollapse"></i><i class="fa fa-expand text-primary" ng-show="buyerAttorneryCollapse" ng-click="buyerAttorneryCollapse = !buyerAttorneryCollapse"></i></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
 
@@ -249,7 +249,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Title Company&nbsp<i class="fa fa-compress text-primary" ng-show="!titleCompanyCollapse" ng-click="titleCompanyCollapse = !titleCompanyCollapse"></i><i class="fa fa-expand text-primary" ng-show="titleCompanyCollapse" ng-click="titleCompanyCollapse = !titleCompanyCollapse"></i></h4>
+    <h4 class="ss_form_title">Title Company&nbsp<i class="fa fa-compass icon_btn text-primary" ng-show="!titleCompanyCollapse" ng-click="titleCompanyCollapse = !titleCompanyCollapse"></i><i class="fa fa-expand text-primary" ng-show="titleCompanyCollapse" ng-click="titleCompanyCollapse = !titleCompanyCollapse"></i></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
 

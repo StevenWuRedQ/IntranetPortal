@@ -667,6 +667,10 @@
                     $scope.bankNameOptions = [];
                 });
 
+
+            $scope.setVisiblePopup = function (model, value) {
+                model.visiblePopup = value;
+            }
         });
 
     </script>
