@@ -128,7 +128,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Unbuilt Sqft</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.UnbuiltSqft" readonly="readonly">
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.UnbuiltSqft" readonly="readonly" number-mask>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Zoning Code</label>
@@ -175,23 +175,23 @@
             <td>
                 <div class="content">
                     <div class="row" style="margin: 0px">
-                        <div class="col-sm-6" style="padding: 0px">
-                            <span><b>Description:</b>{{floor.Description}}</span>
+                        <div class="col-sm-8" style="padding: 0px">
+                            <span><b>Description:</b> {{floor.Description}}</span>
                         </div>
-                        <div class="col-sm-6" style="padding: 0px">
-                            <span><b>Bedroom:</b>{{floor.Bedroom}}</span>
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Bedroom:</b> {{floor.Bedroom}}</span>
                         </div>
-                        <div class="col-sm-6" style="padding: 0px">
-                            <span><b>Bathroom:</b>{{floor.Bathroom}}</span>
+                        <div class="col-sm-8" style="padding: 0px">
+                            <span><b>Bathroom:</b> {{floor.Bathroom}}</span>
                         </div>
-                        <div class="col-sm-6" style="padding: 0px">
-                            <span><b>Livingroom:</b>{{floor.Livingroom}}</span>
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Livingroom:</b> {{floor.Livingroom}}</span>
                         </div>
-                        <div class="col-sm-6" style="padding: 0px">
-                            <span><b>Kitchen:</b>{{floor.Kitchen}}</span>
+                        <div class="col-sm-8" style="padding: 0px">
+                            <span><b>Kitchen:</b> {{floor.Kitchen}}</span>
                         </div>
-                        <div class="col-sm-6" style="padding: 0px">
-                            <span><b>Diningroom:</b>{{floor.Diningroom}}</span>
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Diningroom:</b> {{floor.Diningroom}}</span>
                         </div>
                     </div>
                 </div>
@@ -200,22 +200,22 @@
                 <div class="content">
                     <div class="row" style="margin: 0px">
                         <div class="col-sm-6" style="padding: 0px">
-                            <span><b>Occupancy:</b>{{floor.Occupied}}</span>
+                            <span><b>Occupancy:</b> {{floor.Occupied}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span><b>Access:</b>{{floor.Access}}</span>
+                            <span><b>Access:</b> {{floor.Access}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span><b>Lockbox:</b>{{floor.LockBox}}</span>
+                            <span><b>Lockbox:</b> {{floor.LockBox}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span><b>LockupDate:</b>{{floor.LockupDate |date: 'M/d/yyyy'}}</span>
+                            <span><b>LockupDate:</b> {{floor.LockupDate |date: 'M/d/yyyy'}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span><b>LockedBy:</b>{{floor.LockedBy}}</span>
+                            <span><b>LockedBy:</b> {{floor.LockedBy}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span><b>LastChecked:</b>{{floor.LastChecked |date: 'M/d/yyyy'}}</span>
+                            <span><b>LastChecked:</b> {{floor.LastChecked |date: 'M/d/yyyy'}}</span>
                         </div>
                     </div>
                 </div>
@@ -233,7 +233,7 @@
 
                         <form>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-8">
                                     <label>Description</label>
                                     <input class="form-control" ng-model="floor.Description" />
                                 </div>
@@ -267,7 +267,6 @@
                                     <option>Seller            </option>
                                     <option>Tenants (Coop)    </option>
                                     <option>Tenants (Non-Coop)</option>
-                                    <option>Seller + Tenant   </option>
                                 </select>
                             </div>
                             <div>
