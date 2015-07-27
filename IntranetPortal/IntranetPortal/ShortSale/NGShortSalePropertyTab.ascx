@@ -233,7 +233,7 @@
 
                         <form>
                             <div class="row">
-                                <div class="col-sm-8">
+                                <div class="col-sm-6">
                                     <label>Description</label>
                                     <input class="form-control" ng-model="floor.Description" />
                                 </div>
