@@ -5,7 +5,6 @@
     <tab ng-repeat="mortgage in SsCase.Mortgages" active="mortgage.active" disable="mortage.disabled">
         <tab-heading>Mortgage {{$index+1}} </tab-heading>
             <div class="text-right"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.Mortgages.length>1" ng-click="NGremoveArrayItem(SsCase.Mortgages, $index)" title="Delete" style="border:1px solid; border-radius:3px; margin:2px"></i></div>
-
         <div style="margin-top: 20px">
             <h4 class="ss_form_title">Sale Date / Payoff Info</h4>
             <ul class="ss_form_box clearfix">

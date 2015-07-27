@@ -5,46 +5,46 @@
     <h4 class="ss_form_title">Property Address</h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
-
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Block/Lot</label>
-                <input class="ss_form_input" ng-value="SsCase.LeadsInfo.Block ?SsCase.LeadsInfo.Block +'/'+SsCase.LeadsInfo.Lot:''">
+                <input class="ss_form_input" readonly="readonly" ng-value="SsCase.LeadsInfo.Block ?SsCase.LeadsInfo.Block +'/'+SsCase.LeadsInfo.Lot:''">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">BBLE</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.BBLE">
+                <input class="ss_form_input" readonly="readonly" ng-model="SsCase.LeadsInfo.BBLE">
             </li>
             <li class="ss_form_item" style="visibility: hidden">
                 <label class="ss_form_input_title">BBLE</label>
                 <input class="ss_form_input" ng-model="SsCase.LeadsInfo.BBLE">
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Street Number</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.Number" readonly="readonly">
+            <li class="ss_form_item" style="width: 100%">
+                <label class="ss_form_input_title">Address</label>
+                <input class="ss_form_input" readonly="readonly" ng-model="SsCase.LeadsInfo.PropertyAddress" style="width: 93.5%;">
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Street Name</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.StreetName" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Apt #</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.AptNo" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">City</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.NeighName" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">State</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.State" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Zip</label>
-                <input class="ss_form_input" mask="99999" clean='true' ng-model="SsCase.LeadsInfo.ZipCode" readonly="readonly">
-            </li>
-
-
-
+            <%--<li class="ss_form_item">
+            <label class="ss_form_input_title">Street Number</label>
+            <input class="ss_form_input" ng-model="SsCase.LeadsInfo.Number" readonly="readonly">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Street Name</label>
+            <input class="ss_form_input" ng-model="SsCase.LeadsInfo.StreetName" readonly="readonly">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Apt #</label>
+            <input class="ss_form_input" ng-model="SsCase.LeadsInfo.AptNo" readonly="readonly">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">City</label>
+            <input class="ss_form_input" ng-model="SsCase.LeadsInfo.NeighName" readonly="readonly">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">State</label>
+            <input class="ss_form_input" ng-model="SsCase.LeadsInfo.State" readonly="readonly">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Zip</label>
+            <input class="ss_form_input" mask="99999" clean='true' ng-model="SsCase.LeadsInfo.ZipCode" readonly="readonly">
+        </li>--%>
         </ul>
     </div>
 </div>
@@ -92,51 +92,51 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Tax Class</label>
-            <input class="ss_form_input" ng-model="SsCase.LeadsInfo.PropertyClass">
+                <input class="ss_form_input" readonly="readonly" ng-model="SsCase.LeadsInfo.PropertyClass">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Total Units</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.UnitNum">
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.UnitNum" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Year Built</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.YearBuilt">
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.YearBuilt" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Lot Size</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.LotDem">
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.LotDem" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Building Size</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.BuildingDem">
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.BuildingDem" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Building Stories</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.NumFloors">
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.NumFloors" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Calculated Sqft</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.CalculatedSqft">
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.CalculatedSqft" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">NYC Sqft</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.NYCSqft">
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.NYCSqft" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Unbuilt Sqft</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.UnbuiltSqft">
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.UnbuiltSqft" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Zoning Code</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.Zoning">
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.Zoning" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Max FAR</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.MaxFar">
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.MaxFar" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Actual FAR</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.ActualFar">
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.ActualFar" readonly="readonly">
             </li>
 
         </ul>
