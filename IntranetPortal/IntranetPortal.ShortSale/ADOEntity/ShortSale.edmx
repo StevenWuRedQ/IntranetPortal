@@ -148,6 +148,7 @@
           </Key>
           <Property Name="MortgageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CaseId" Type="int" Nullable="false" />
+          <Property Name="HasAuctionDate" Type="bit" />
           <Property Name="AuctionDate" Type="datetime" />
           <Property Name="DateOfSale" Type="datetime" />
           <Property Name="DateVerified" Type="datetime" />
@@ -868,6 +869,7 @@
           <Property Name="Contacts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LenderId" Type="Int32" />
+          <Property Name="HasAuctionDate" Type="Boolean" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -1288,6 +1290,7 @@
           <EntitySetMapping Name="PropertyMortgages">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
               <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="HasAuctionDate" ColumnName="HasAuctionDate" />
                 <ScalarProperty Name="LenderId" ColumnName="LenderId" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Contacts" ColumnName="Contacts" />

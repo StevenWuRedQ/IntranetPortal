@@ -56,5 +56,6 @@ Partial Public Class PropertyMortgage
     Public Property Contacts As String
     Public Property Notes As String
     Public Property LenderId As Nullable(Of Integer)
+    Public Property HasAuctionDate As Nullable(Of Boolean)
 
 End Class
