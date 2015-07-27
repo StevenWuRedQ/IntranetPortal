@@ -485,7 +485,7 @@
                         alert("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
                     });
             }
-            $scope.NGAddArraryItem = function (item, model) {
+            $scope.NGAddArraryItem = function (item, model, popup) {
                 if (model) {
                     var array = $scope.$eval(model);
                     if (!array) {
@@ -499,6 +499,10 @@
                     }
                 } else {
                     item.push({});
+                }
+
+                if (popup) {
+                    $scope.setVisiblePopup(item[item.length - 1], true);
                 }
 
             }
