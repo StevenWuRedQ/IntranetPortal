@@ -37,12 +37,11 @@
         </div>
         <div class="ss_form">
             <h4 class="ss_form_title" style="display: inline">Mortgage Company&nbsp
-            <select class="class="ss_form_item" ng-model="mortgage.Lender" ng-options="bank for bank in bankNameOptions"></select>&nbsp;
+            <select class="class="ss_form_item" ng-model="mortgage.ShortSaleDept" ng-options="bank.ContactId as bank.Name for bank in bankNameOptions"></select>&nbsp;
             <i class="fa fa-compress text-primary" ng-show="mortgageCompanyCollapse" ng-click="mortgageCompanyCollapse = !mortgageCompanyCollapse"></i>
             <i class="fa fa-expand text-primary" ng-show="!mortgageCompanyCollapse" ng-click="mortgageCompanyCollapse = !mortgageCompanyCollapse"></i></h4>
             <div class="ss_border">
             <ul class="ss_form_box clearfix">
-                
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Category</label>
                     <input class="ss_form_input " ng-model="mortgage.Category" readonly="readonly">
@@ -87,15 +86,16 @@
                     <input class="ss_form_input " ss_date="" ng-model="mortgage.CancelationSent">
                 </li>
             </ul>
-                 <ul  class="ss_form_box clearfix" collapse="mortgageCompanyCollapse">
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Short Sale Dept</label>
-                <div class="contact_box" dx-select-box="InitContact('SsCase.Mortgages['+$index+'].ShortSaleDept')"></div>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Customer Service #</label>
-                <input class="ss_form_input" ng-model="GetContactById(mortgage.ShortSaleDept).CustomerService" mask="(999) 999-9999" clean="true" readonly="readonly">
-            </li>
+            <ul  class="ss_form_box clearfix" collapse="mortgageCompanyCollapse">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Short Sale Dept</label>
+                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ShortSaleDept).OfficeNO" readonly="readonly">
+
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Customer Service #</label>
+                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ShortSaleDept).CustomerService" mask="(999) 999-9999" clean="true" readonly="readonly">
+                </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Short Sale Fax #</label>
                 <input class="ss_form_input" ng-model="GetContactById(mortgage.ShortSaleDept).FAX" readonly="readonly">
@@ -177,8 +177,8 @@
 <div class="ss_form">
     <h4 class="ss_form_title">Lien</h4>
     <div class="ss_border">
-    <div class="ss_form_box clearfix">
-        <div id="lienGrid" dx-data-grid="{
+        <div class="ss_form_box clearfix">
+            <div id="lienGrid" dx-data-grid="{
                     columns: [
                     { dataField: 'Type',caption: 'Type'},
                     { dataField: 'Effective', caption: 'Effective', dataType: 'date' },
@@ -188,7 +188,7 @@
                     { dataField: 'Index', caption: 'Index' } ],
                     bindingOptions: { dataSource: 'SsCase.LeadsInfo.LisPens' }
                 }">
+            </div>
         </div>
     </div>
-</div>
 </div>
