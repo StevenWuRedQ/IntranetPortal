@@ -203,7 +203,7 @@
                             <span>Access:{{floor.Access}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
-                            <span>Lockbox:{{floor.Lockbox}}</span>
+                            <span>Lockbox:{{floor.LockBox}}</span>
                         </div>
                         <div class="col-sm-6" style="padding: 0px">
                             <span>LockupDate:{{floor.LockupDate}}</span>
@@ -252,7 +252,7 @@
                             <hr />
                             <div>
                                 <label>Occupancy</label><br />
-                                <select ng-model="floor.OccupiedBy">
+                                <select ng-model="floor.Occupied">
                                     <option></option>
                                     <option>Vacant            </option>
                                     <option>Seller            </option>
@@ -267,7 +267,7 @@
                             </div>
                             <div>
                                 <label>Lockbox</label>
-                                <input class="form-control" ng-model="floor.Lockbox" />
+                                <input class="form-control" ng-model="floor.LockBox" />
                             </div>
                             <div>
                                 <label>LockupDate</label>

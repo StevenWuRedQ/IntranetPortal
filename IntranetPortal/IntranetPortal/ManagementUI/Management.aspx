@@ -2,8 +2,7 @@
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/Content/dx.common.css" rel="stylesheet" />
-    <%--<link href="/Content/dx.ios7.default.css" rel="stylesheet" />--%>
+    <link href="/Content/dx.common.css" rel="stylesheet" />    
     <link href="/Content/dx.light.css" rel="stylesheet" />
     <style>
         .nofoucs:focus {
@@ -13,9 +12,9 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script src="/Scripts/globalize/globalize.js"></script>
-    <script src="/Scripts/dx.chartjs.js"></script>
-    <script src="/Scripts/dx.webappjs.js"></script>
-    <script src="/Scripts/dx.phonejs.js"></script>
+    <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.chartjs.js"></script>
+    <%--<script src="/Scripts/dx.webappjs.js"></script>
+    <script src="/Scripts/dx.phonejs.js"></script>--%>
     <div class="container-fluid">
         <%--Head--%>
         <div style="padding-top: 30px">
@@ -193,7 +192,7 @@
             <%-- New layout --%>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-2" style="display:none">
+                    <div class="col-md-2" style="display: none">
                         <ul class="nav nav-tabs nav-stacked color_gray" role="tablist" id="mytab">
                             <li role="presentation" class="mag_tabv"><a href="#Agent_Activity_Tab" onclick="agentActivityTab.ShowTab(currentTeamInfo.TeamName, true)" role="tab" data-toggle="tab"><i class="fa fa-users mag_tabv_i"></i>Agent Activity</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Status_Of_Leads_Tab" onclick="LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true)" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Status Of Leads</a></li>
@@ -1310,7 +1309,7 @@
                 console.log(reportList[e.itemData]);
                 var report = reportList[e.itemData];
                 $("#tdReportTitle").html(report.text);
-               
+
                 report.action();
 
             },
