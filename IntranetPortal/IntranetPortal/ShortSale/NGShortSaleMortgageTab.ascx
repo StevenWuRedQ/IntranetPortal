@@ -10,7 +10,7 @@
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Auction Date</label>
-                    <pt-radio model="mortgage.AuctionDate" name="mortgageAuctionDate"></pt-radio>
+                    <pt-radio model="mortgage.HasAuctionDate" name="mortgageAuctionDate"></pt-radio>
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date of Sale</label>
