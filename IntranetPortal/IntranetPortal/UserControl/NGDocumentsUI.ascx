@@ -26,7 +26,7 @@
             window.open(url, 'Upload Files', popup_params(640, 400));
     }
 
-    function BindDocuments(refreshDocuments) {
+    function NGBindDocuments(refreshDocuments) {
         if (!IsDocumentLoaded || refreshDocuments) {
             cbpDocumentUI.PerformCallback(leadsInfoBBLE);
             isLoaded = true;

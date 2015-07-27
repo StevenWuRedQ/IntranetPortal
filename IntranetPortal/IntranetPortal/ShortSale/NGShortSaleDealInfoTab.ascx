@@ -16,85 +16,88 @@
 
 <div>
     <div ng-show="SsCase.DocumentMissing.length>0" class="well">
-        <label class="ss_form_input_title">Open Document Request</label>    
+        <label class="ss_form_input_title">Open Document Request</label>
         <p>{{SsCase.DocumentMissing}}</p>
     </div>
 </div>
 
 <div>
     <h4 class="ss_form_title">Title</h4>
-    <ul class="ss_form_box clearfix">
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Company</label>
-            <input class="ss_form_input disabled" ng-model="SsCase.BuyerTitle.CompanyName">
-        </li>
+    <div class="ss_border">
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Company</label>
+                <input class="ss_form_input disabled" ng-model="SsCase.BuyerTitle.CompanyName">
+            </li>
 
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Title #</label>
-            <input class="ss_form_input disabled" ng-model="SsCase.BuyerTitle.OrderNumber">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Reviewed</label>
-            <input class="ss_form_input disabled" ss-date ng-model="SsCase.BuyerTitle.ReviewedDate">
-        </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Title #</label>
+                <input class="ss_form_input disabled" ng-model="SsCase.BuyerTitle.OrderNumber">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Reviewed</label>
+                <input class="ss_form_input disabled" ss-date ng-model="SsCase.BuyerTitle.ReviewedDate">
+            </li>
 
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Order Date</label>
-            <input class="ss_form_input disabled" ss-date ng-model="SsCase.BuyerTitle.ReportOrderDate">
-        </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Order Date</label>
+                <input class="ss_form_input disabled" ss-date ng-model="SsCase.BuyerTitle.ReportOrderDate">
+            </li>
 
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Confirmation Date</label>
-            <input class="ss_form_input disabled" ss-date ng-model="SsCase.BuyerTitle.ConfirmationDate">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Received Date</label>
-            <input class="ss_form_input disabled" ss-date ng-model="SsCase.BuyerTitle.ReceivedDate">
-        </li>
-    </ul>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Confirmation Date</label>
+                <input class="ss_form_input disabled" ss-date ng-model="SsCase.BuyerTitle.ConfirmationDate">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Received Date</label>
+                <input class="ss_form_input disabled" ss-date ng-model="SsCase.BuyerTitle.ReceivedDate">
+            </li>
+        </ul>
+    </div>
 </div>
 
 <div class="ss_form">
     <h4 class="ss_form_title">Listing Info</h4>
-    <ul class="ss_form_box clearfix">
+    <div class="ss_border">
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">MLS</label>
+                <select class="ss_form_input" ng-model="SsCase.MLSStatus">
+                    <option>NYS MLS</option>
+                    <option>MLS LI</option>
+                    <option>Brooklyn MLS</option>
+                </select>
+            </li>
 
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">MLS</label>
-            <select class="ss_form_input" ng-model="SsCase.MLSStatus">
-                <option>NYS MLS</option>
-                <option>MLS LI</option>
-                <option>Brooklyn MLS</option>
-            </select>
-        </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">MLS #</label>
+                <input class="ss_form_input " ng-model="SsCase.ListMLS">
+            </li>
 
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">MLS #</label>
-            <input class="ss_form_input " ng-model="SsCase.ListMLS">
-        </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">List Price</label>
 
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">List Price</label>
+                <input class="ss_form_input currency_input" mask-money ng-model="SsCase.ListPrice">
+            </li>
 
-            <input class="ss_form_input currency_input" mask-money ng-model="SsCase.ListPrice">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Listing Date</label>
+                <input class="ss_form_input" ss-date="" ng-model="SsCase.ListingDate">
+            </li>
 
-        </li>
-
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Listing Date</label>
-            <input class="ss_form_input" ss-date="" ng-model="SsCase.ListingDate">
-        </li>
-
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Listing Expiry Date</label>
-            <input class="ss_form_input " ss-date="" ng-model="SsCase.ListingExpireDate">
-        </li>
-    </ul>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Listing Expiry Date</label>
+                <input class="ss_form_input " ss-date="" ng-model="SsCase.ListingExpireDate">
+            </li>
+        </ul>
+    </div>
 </div>
 
 <div class="ss_form">
     <h4 class="ss_form_title">Valuation&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.ValueInfoes,'SsCase.ValueInfoes')" title="Add"></i></h4>
-    <div ng-show="SsCase.ValueInfoes.length>0" class="ss_form_box clearfix ss_form_small_font">
-        <div dx-data-grid="{
+    <div class="ss_brder" ng-show="SsCase.ValueInfoes.length>0">
+        <div class="ss_form_box clearfix ss_form_small_font">
+            <div dx-data-grid="{
             columns: [
                 {dataField: 'Method', caption: 'Type',
                  lookup: {
@@ -137,15 +140,17 @@
             
             
             }}">
+            </div>
         </div>
     </div>
-
 </div>
 
 <div class="ss_form ">
     <h4 class="ss_form_title">Offer&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.ShortSaleOffers,'SsCase.ShortSaleOffers')" title="Add"></i></h4>
-    <div ng-show="SsCase.ShortSaleOffers.length>0" class="ss_form_box clearfix ss_form_small_font">
-        <div dx-data-grid="offerBindingOptions()">
+    <div class="ss_brder" ng-show="SsCase.ShortSaleOffers.length>0">
+        <div class="ss_form_box clearfix ss_form_small_font">
+            <div dx-data-grid="offerBindingOptions()">
+            </div>
         </div>
     </div>
 </div>
