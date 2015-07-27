@@ -25,5 +25,10 @@ Partial Public Class PropertyFloor
     Public Property BoilerRoom As Nullable(Of Integer)
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
+    Public Property Access As String
+    Public Property LockBox As String
+    Public Property LockupDate As Nullable(Of Date)
+    Public Property LockedBy As String
+    Public Property LastChecked As Nullable(Of Date)
 
 End Class

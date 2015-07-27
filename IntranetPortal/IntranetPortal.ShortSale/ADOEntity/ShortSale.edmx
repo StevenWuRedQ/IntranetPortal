@@ -127,11 +127,16 @@
           <Property Name="Livingroom" Type="int" />
           <Property Name="Kitchen" Type="int" />
           <Property Name="Diningroom" Type="int" />
+          <Property Name="BoilerRoom" Type="int" />
           <Property Name="Occupied" Type="nvarchar" MaxLength="50" />
+          <Property Name="Access" Type="nvarchar" MaxLength="50" />
+          <Property Name="LockBox" Type="nvarchar" MaxLength="50" />
+          <Property Name="LockupDate" Type="datetime" />
+          <Property Name="LockedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastChecked" Type="datetime" />
           <Property Name="Lease" Type="nvarchar" MaxLength="50" />
           <Property Name="Rent" Type="nvarchar" MaxLength="50" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
-          <Property Name="BoilerRoom" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -147,6 +152,7 @@
           <Property Name="PayoffExpired" Type="datetime" />
           <Property Name="PayoffRequested" Type="datetime" />
           <Property Name="PayoffAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="LenderId" Type="int" />
           <Property Name="Lender" Type="nvarchar" MaxLength="50" />
           <Property Name="Loan" Type="nvarchar" MaxLength="50" />
           <Property Name="LoanAmount" Type="numeric" Precision="18" Scale="2" />
@@ -539,6 +545,11 @@
           <Property Name="BoilerRoom" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Access" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LockBox" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LockupDate" Type="DateTime" Precision="3" />
+          <Property Name="LockedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastChecked" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="PropertyTitle">
           <Key>
@@ -848,6 +859,7 @@
           <Property Name="AttorneyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Contacts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LenderId" Type="Int32" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -966,6 +978,11 @@
           <EntitySetMapping Name="PropertyFloors">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyFloor">
               <MappingFragment StoreEntitySet="PropertyFloors">
+                <ScalarProperty Name="LastChecked" ColumnName="LastChecked" />
+                <ScalarProperty Name="LockedBy" ColumnName="LockedBy" />
+                <ScalarProperty Name="LockupDate" ColumnName="LockupDate" />
+                <ScalarProperty Name="LockBox" ColumnName="LockBox" />
+                <ScalarProperty Name="Access" ColumnName="Access" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="BoilerRoom" ColumnName="BoilerRoom" />
@@ -1259,6 +1276,7 @@
           <EntitySetMapping Name="PropertyMortgages">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
               <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="LenderId" ColumnName="LenderId" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Contacts" ColumnName="Contacts" />
                 <ScalarProperty Name="AttorneyEmail" ColumnName="AttorneyEmail" />

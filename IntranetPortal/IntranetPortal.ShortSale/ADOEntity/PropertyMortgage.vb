@@ -55,5 +55,6 @@ Partial Public Class PropertyMortgage
     Public Property AttorneyEmail As String
     Public Property Contacts As String
     Public Property Notes As String
+    Public Property LenderId As Nullable(Of Integer)
 
 End Class
