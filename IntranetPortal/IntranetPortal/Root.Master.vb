@@ -24,7 +24,7 @@ Public Class Root
 
                     _empUnderMgred = Employee.GetAllEmps()
                 Else
-                    Dim emps = Employee.GetManagedEmployees(Page.User.Identity.Name).ToList
+                    Dim emps = Employee.GetManagedEmployees(Page.User.Identity.Name, False).ToList
                     emps.AddRange(Employee.GetControledDeptEmployees(Page.User.Identity.Name).ToList)
                     _empUnderMgred = emps.ToArray
                 End If

@@ -134,7 +134,7 @@ Public Class LegalUI
         Legal.LegalCase.UpdateStatus(bble, Legal.LegalCaseStatus.ManagerAssign)
 
         Dim comments = String.Format("Research is completed. The case is move to manager.")
-        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal, LeadsActivityLog.EnumActionType.Comments)
+        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
     End Sub
 
     <WebMethod()> _
@@ -152,7 +152,7 @@ Public Class LegalUI
         Legal.LegalCase.UpdateStatus(bble, Legal.LegalCaseStatus.Closed)
 
         Dim comments = String.Format("Case is closed.")
-        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal, LeadsActivityLog.EnumActionType.Comments)
+        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
 
     End Sub
 
@@ -210,7 +210,7 @@ Public Class LegalUI
             End If
 
             Dim comments = String.Format("The case is assign to {0}.", user)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal, LeadsActivityLog.EnumActionType.Comments)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
         End If
     End Sub
     Public Function GetAllRoboSingor() As String

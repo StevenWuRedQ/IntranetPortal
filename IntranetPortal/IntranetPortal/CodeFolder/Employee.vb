@@ -192,6 +192,7 @@ Partial Public Class Employee
             If rl.StartsWith("OfficeManager") Then
                 Dim dept = rl.Split("-")(1)
                 emps.AddRange(GetDeptUsers(dept).ToList)
+                emps.AddRange(UserInTeam.GetTeamUsersArray(dept))
             End If
         Next
 
@@ -301,6 +302,7 @@ Partial Public Class Employee
     End Function
 
     Public Shared Function GetDeptUsers(deptName As String, Optional onlyActive As Boolean = True) As String()
+
         Return GetDeptUsersList(deptName, onlyActive).Select(Function(em) em.Name).ToArray
 
         'Dim emps As New List(Of Employee)
