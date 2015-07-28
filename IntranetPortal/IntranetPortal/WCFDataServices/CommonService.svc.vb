@@ -3,9 +3,11 @@ Imports Spire.Pdf
 Imports DevExpress.XtraReports.UI
 Imports System.Net
 Imports System.ServiceModel
+Imports System.ServiceModel.Activation
 
 ' NOTE: You can use the "Rename" command on the context menu to change the class name "CommonService" in code, svc and config file together.
 ' NOTE: In order to launch WCF Test Client for testing this service, please select CommonService.svc or CommonService.svc.vb at the Solution Explorer and start debugging.
+<AspNetCompatibilityRequirements(RequirementsMode:=AspNetCompatibilityRequirementsMode.Allowed)>
 Public Class CommonService
     Implements ICommonService
 
@@ -193,5 +195,5 @@ Public Class CommonService
         End Using
     End Function
 
-    
+
 End Class
