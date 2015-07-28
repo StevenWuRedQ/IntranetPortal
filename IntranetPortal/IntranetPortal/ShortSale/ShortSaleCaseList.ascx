@@ -23,7 +23,7 @@
                 }
             }
         }
-    }   
+    }
     
     function expandAllClick(s) {
         if (gridCase.IsGroupRowExpanded(0)) {
@@ -165,6 +165,25 @@
         gridCase.ApplyFilter(filterCondition);
     }
 
+    function OnGridRowClicked(s,e)
+    {
+        if(typeof CaseDataChanged == 'function')
+        {
+            if(CaseDataChanged())
+            {
+                e.cancel = confirm("You have pending changes, please save or press Cancel to continue?");                
+                //if(confirm("The data was changed, do you want to save?"))
+                //{
+                //    angular.element(document.getElementById('ShortSaleCtrl')).scope().SaveShortSale();
+                //}
+                //else
+                //{
+                //    e.cancel = false;
+                //}
+            }
+        }
+    }
+
 </script>
 
 <div style="width: 100%; height: 100%;" class="color_gray">
@@ -195,7 +214,7 @@
         <dx:ASPxGridView runat="server" SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" KeyFieldName="CaseId" OnDataBinding="gridCase_DataBinding">
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
-                    <Settings AutoFilterCondition="Contains" />
+                    <Settings AutoFilterCondition="Contains" />              
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataColumn FieldName="UpdateDate" Visible="false"></dx:GridViewDataColumn>
                 <dx:GridViewDataTextColumn FieldName="CallbackDate" Visible="false" VisibleIndex="5">
@@ -219,7 +238,6 @@
                         </div>
                     </GroupRowTemplate>
                 </dx:GridViewDataTextColumn>
-
                 <dx:GridViewDataColumn FieldName="Owner" Visible="false" VisibleIndex="4">
                     <GroupRowTemplate>
                         <div>
@@ -337,7 +355,7 @@
             <GroupSummary>
                 <dx:ASPxSummaryItem FieldName="CaseName" SummaryType="Count" />
             </GroupSummary>
-            <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" EndCallback="function(s,e){AddScrollbarOnLeadsList();}" />
+            <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" EndCallback="function(s,e){AddScrollbarOnLeadsList();}"  RowClick="OnGridRowClicked"/>
             <Border BorderStyle="None"></Border>
         </dx:ASPxGridView>
     </div>

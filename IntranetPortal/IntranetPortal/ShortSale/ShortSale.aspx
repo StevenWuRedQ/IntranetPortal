@@ -65,6 +65,7 @@
                                                     <ContentCollection>
                                                         <dx:SplitterContentControl ID="SplitterContentControl3" runat="server">
                                                             <div class="shortSaleUI" style="width: 100%; align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
+                                                               
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
 
@@ -298,6 +299,7 @@
     <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
     <uc1:SelectPartyUC runat="server" ID="SelectPartyUC" />
     <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
+    <input type="hidden" id="CaseData"/>
     <uc1:Common runat="server" ID="Common" />
     <script type="text/javascript">
         AllContact = <%= GetAllContact()%>
@@ -336,12 +338,19 @@
         }
     </script>
     <script type="text/javascript">
-        var SSCaseChanged = false;
+       
         function NGGetShortSale(caseId) {
             $(document).ready(function () {
                 angular.element(document.getElementById('ShortSaleCtrl')).scope().GetShortSaleCase(caseId);
             });
-
+        }
+        function CaseDataChanged()
+        {
+            return $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(GetShortSaleCase())
+        }
+        function ResetCaseDataChange()
+        {
+            $('#CaseData').val(JSON.stringify(GetShortSaleCase()));
         }
         function GetShortSaleCase() {
             return angular.element(document.getElementById('ShortSaleCtrl')).scope().SsCase;
@@ -470,7 +479,7 @@
                         $http.get(leadsInfoUrl).
                             success(function (data, status, headers, config) {
                                 $scope.SsCase.LeadsInfo = data;
-
+                                $('#CaseData').val(JSON.stringify($scope.SsCase))
                             }).error(function (data, status, headers, config) {
 
                                 // called asynchronously if an error occurs
@@ -518,6 +527,8 @@
                             } else {
                                 alert("Save Successed !");
                             }
+
+                            ResetCaseDataChange();
                         }).
                         error(function (data, status) {
                             alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
