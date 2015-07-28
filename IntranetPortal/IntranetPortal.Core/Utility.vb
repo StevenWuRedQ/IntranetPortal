@@ -38,7 +38,7 @@ Public Class Utility
         For Each prop In type.GetProperties
             Dim toProp = toType.GetProperty(prop.Name)
 
-            If toProp.PropertyType.IsPrimitive Or toProp.PropertyType Is GetType(String) Or toProp.PropertyType.IsValueType Then
+            If toProp IsNot Nothing AndAlso (toProp.PropertyType.IsPrimitive Or toProp.PropertyType Is GetType(String) Or toProp.PropertyType.IsValueType) Then
                 If toProp IsNot Nothing AndAlso toProp.CanWrite Then
                     toProp.SetValue(toObj, prop.GetValue(fromObj))
                 End If
