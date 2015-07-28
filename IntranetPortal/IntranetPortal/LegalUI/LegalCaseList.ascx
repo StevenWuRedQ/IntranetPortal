@@ -75,24 +75,45 @@
     function OnSortMenuClick(s, e) {
         var icon = document.getElementById("btnSortIcon");
         if (e.item.index == 0) {
-            SortLeadsList(icon, "UpdateDate");
+            //gridCase.GroupBy("Owner", 0);
         }
 
         if (e.item.index == 1) {
-            SortLeadsList(icon, "CaseName");
+
+            //gridCase.GroupBy("Owner", 2);
+            //gridCase.GroupBy("MortgageCategory", 0);
         }
 
         if (e.item.index == 2) {
-            gridCase.GroupBy("Neighborhood", 0);
+            SortLeadsList(document.getElementById("btnSortIcon"), "UpdateDate");
         }
 
         if (e.item.index == 3) {
-            gridCase.GroupBy("Owner", 0);
+            if ($("#divSearch").is(':visible')) {
+                $("#divSearch").hide();
+                gridCase.ClearFilter();
+            }
+            else {
+                $("#divSearch").show();
+            }
         }
 
-        if (e.item.index == 4) {
+        //if (e.item.index == 4) {
 
+        //}
+    }
+
+    function SearchGrid() {
+        var filterCondition = "";
+        var key = $('#QuickSearch').val();
+
+        if (key.trim() == "") {
+            gridCase.ClearFilter();
+            return;
         }
+
+        filterCondition = "CaseName LIKE '%" + key + "%'";
+        gridCase.ApplyFilter(filterCondition);
     }
 
     function RefreshContent() {
@@ -131,9 +152,13 @@
         <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
     </div>
-    <div style="overflow: auto; height: 768px; padding: 0px 10px;" id="leads_list_left">
+    <div style="overflow: auto; height: 798px; padding: 0px 10px;" id="leads_list_left">
         <asp:HiddenField runat="server" ID="hfCaseStatus" />
         <asp:HiddenField runat="server" ID="hfCaseBBLEs" />
+        <div class="form-inline" id="divSearch" style="display: none">
+            <input style="width: 200px; height: 30px;" class="form-control" id="QuickSearch" type="text" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid();return false; }">
+            <i class="fa fa-search tooltip-examples icon_btn grid_buttons" style="margin-left: 10px" onclick="SearchGrid()"></i>
+        </div>
         <dx:ASPxGridView runat="server" SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" KeyFieldName="BBLE" OnDataBinding="gridCase_DataBinding">
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -212,17 +237,13 @@
     PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
     <ItemStyle Paddings-PaddingLeft="20px" />
     <Items>
-        <dx:MenuItem Text="Date" Name="Date">
+        <dx:MenuItem Text="User" Name="User">
         </dx:MenuItem>
-        <dx:MenuItem Text="Name" Name="Name">
+        <dx:MenuItem Text="Status" Name="Status">
         </dx:MenuItem>
-        <dx:MenuItem Text="Borough" Name="Borough">
+        <dx:MenuItem Text="Last Update" Name="LastUpdate">
         </dx:MenuItem>
-        <dx:MenuItem Text="Employee" Name="Employee">
-        </dx:MenuItem>
-        <dx:MenuItem Text="Zip" Name="Zip">
-        </dx:MenuItem>
-        <dx:MenuItem Text="Type" Name="LeadsType">
+        <dx:MenuItem Text="Search" Name="Search">
         </dx:MenuItem>
     </Items>
     <ClientSideEvents ItemClick="OnSortMenuClick" />
