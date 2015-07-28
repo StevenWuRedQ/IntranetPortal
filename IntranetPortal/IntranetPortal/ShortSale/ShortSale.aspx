@@ -674,7 +674,31 @@
 
 
             $scope.setVisiblePopup = function (model, value) {
-                model.visiblePopup = value;
+                if(model) model.visiblePopup = value;
+            }
+
+            function capitalizeFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+
+            $scope.formatName = function (firstName, middleName, lastName) {
+                var result = '';
+                if (firstName) result += capitalizeFirstLetter(firstName) + ' ';
+                if (middleName) result += capitalizeFirstLetter(middleName) + ' ';
+                if (lastName) result += capitalizeFirstLetter(lastName);
+                return result;
+
+            }
+
+            $scope.formatAddr = function(strNO, strName, aptNO, city, state, zip){
+                var result = '';
+                if(strNO) result += strNO + ' ';
+                if(strName) result += strName + ', ';
+                if (aptNO) result += 'Apt ' + aptNO + ', ';
+                if (city) result += city + ', ';
+                if (state) result += state + ', ';
+                if (zip) result += zip;
+                return result;
             }
         });
 

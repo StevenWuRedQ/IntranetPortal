@@ -2546,3 +2546,9 @@ li.mag_tabv.active {
 .shortSaleUI .contact_box {
 	height: 25px !important;
 }
+
+.dx-popup-content input[type='checkbox'] + label{
+	font-size: 14px !important;
+	margin-top: 5px !important;
+	padding: 0px 10px;
+}
