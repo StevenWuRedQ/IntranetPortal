@@ -52,5 +52,11 @@ Partial Public Class ShortSaleCase
     Public Property CounterOffer As String
     Public Property HasOfferSubmit As Nullable(Of Boolean)
     Public Property ReferralTeam As String
+    Public Property ProcessorName As String
+    Public Property ListingAgentName As String
+    Public Property SellerAttorneyName As String
+    Public Property BuyerAttorneyName As String
+    Public Property TitleCompanyName As String
+    Public Property ReferralUserName As String
 
 End Class
