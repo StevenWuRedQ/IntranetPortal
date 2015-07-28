@@ -985,6 +985,13 @@
       <DependentUpon>CombineContact.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Management\ComplaintsNotify.aspx.designer.vb">
+      <DependentUpon>ComplaintsNotify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\ComplaintsNotify.aspx.vb">
+      <DependentUpon>ComplaintsNotify.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Management\ImportAgentData.aspx.designer.vb">
       <DependentUpon>ImportAgentData.aspx</DependentUpon>
     </Compile>
@@ -2266,6 +2273,7 @@
     <Content Include="ManagementUI\Management.aspx" />
     <Content Include="Management\AddressToBBLE.aspx" />
     <Content Include="Management\CombineContact.aspx" />
+    <Content Include="Management\ComplaintsNotify.aspx" />
     <Content Include="Management\ImportAgentData.aspx" />
     <Content Include="Management\Default.aspx" />
     <Content Include="Management\LeadsDataManage.aspx" />
