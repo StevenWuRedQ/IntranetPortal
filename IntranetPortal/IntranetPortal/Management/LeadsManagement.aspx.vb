@@ -182,9 +182,6 @@ Public Class LeadsManagement
                 End If
             End Using
 
-            'BindNewestLeads()
-
-            'gridLeads.DataBind()
         End If
         'BindData()
         Dim script = "<script type=""text/javascript"">"
@@ -253,7 +250,10 @@ Public Class LeadsManagement
         If e.Parameters.StartsWith("AssignLeads") Then
             If gridLeads.Selection.Count > 0 AndAlso listboxEmployee.SelectedItem IsNot Nothing Then
                 Dim selectedLeads = gridLeads.GetSelectedFieldValues("BBLE").Select(Function(l) l.ToString).ToArray
-                Lead.BatchAssignLeads(selectedLeads.ToArray, listboxEmployee.SelectedItem.Text, CInt(listboxEmployee.SelectedItem.Value), User.Identity.Name)
+
+
+
+                Lead.BatchAssignLeads(selectedLeads.ToArray, listboxEmployee.SelectedItem.Text, CInt(listboxEmployee.SelectedItem.Value), User.Identity.Name, cbArchived.Checked)
 
                 'Using Context As New Entities
                 '    For Each bble In selectedLeads

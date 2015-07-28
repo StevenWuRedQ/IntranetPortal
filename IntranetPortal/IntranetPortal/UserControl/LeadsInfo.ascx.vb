@@ -129,6 +129,8 @@ Public Class LeadsInfo1
 
                 If lead IsNot Nothing Then
                     BindActivityLog(bble)
+                Else
+                    BindActivityLog(bble)
                 End If
             End If
         End Using

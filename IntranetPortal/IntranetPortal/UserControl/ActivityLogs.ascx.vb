@@ -947,7 +947,7 @@ Public Class ActivityLogs
 
                 'Notify leads owner messager 
                 Dim ld = Lead.GetInstance(hfBBLE.Value)
-                If Not ld.EmployeeName.ToLower = Page.User.Identity.Name.ToLower Then
+                If ld IsNot Nothing AndAlso Not ld.EmployeeName.ToLower = Page.User.Identity.Name.ToLower Then
                     Dim comments = String.Format("{0} just added new comments on {1}", Page.User.Identity.Name, ld.LeadsName)
                     UserMessage.AddNewMessage(ld.EmployeeName, "New Comments", comments, hfBBLE.Value)
                 End If

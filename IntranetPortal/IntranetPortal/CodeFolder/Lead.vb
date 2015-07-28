@@ -388,9 +388,31 @@ Partial Public Class Lead
         Return results
     End Function
 
-    Public Shared Sub BatchAssignLeads(bbles As String(), name As String, empId As Integer, assignBy As String)
+    Public Shared Sub ArchivedLogs(bble As String)
+        Using ctx As New Entities
+            Dim logs = ctx.LeadsActivityLogs.Where(Function(log) log.BBLE = bble).ToList
+            Dim archivedLogs As New List(Of LeadsActivityLogArchived)
+
+            For Each log In logs
+                Dim tmp = New LeadsActivityLogArchived
+                tmp = Core.Utility.CopyTo(log, tmp)
+                archivedLogs.Add(tmp)
+            Next
+
+            ctx.LeadsActivityLogArchiveds.AddRange(archivedLogs)
+            ctx.LeadsActivityLogs.RemoveRange(logs)
+
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
+    Public Shared Sub BatchAssignLeads(bbles As String(), name As String, empId As Integer, assignBy As String, Optional archiveLogs As Boolean = False)
         Using Context As New Entities
             For Each item In bbles
+                If archiveLogs Then
+                    ArchivedLogs(item)
+                End If
+
                 Dim li = Context.LeadsInfoes.Find(item)
 
                 If li IsNot Nothing Then
@@ -408,6 +430,9 @@ Partial Public Class Lead
                                           .AssignBy = assignBy
                                           }
                         Context.Leads.Add(newlead)
+
+                        Dim comments = String.Format("Leads assign to  {0}", name)
+                        LeadsActivityLog.AddActivityLogEntity(DateTime.Now, comments, item, LeadsActivityLog.LogCategory.Status.ToString, Nothing, assignBy, LeadsActivityLog.EnumActionType.Reassign, Context)
                     Else
                         orgName = newlead.EmployeeName
                         newlead.LeadsName = li.LeadsName

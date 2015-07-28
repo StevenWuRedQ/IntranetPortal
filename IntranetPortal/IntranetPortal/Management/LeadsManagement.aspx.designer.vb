@@ -86,6 +86,15 @@ Partial Public Class LeadsManagement
     Protected WithEvents listboxEmployee As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
 
     '''<summary>
+    '''cbArchived control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbArchived As Global.DevExpress.Web.ASPxEditors.ASPxCheckBox
+
+    '''<summary>
     '''updateLeadsType control.
     '''</summary>
     '''<remarks>

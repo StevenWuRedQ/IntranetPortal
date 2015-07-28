@@ -272,7 +272,7 @@
                     <dx:SplitterPane Size="70px">
                         <ContentCollection>
                             <dx:SplitterContentControl>
-                                <table style="width: 500px; float: right; margin-top: 10px;">
+                                <table style="width: 600px; float: right; margin-top: 10px;">
                                     <tr>
                                         <td>
                                             <dx:ASPxLabel Text="Select Employee:" ID="ASPxLabel1" runat="server" Font-Size="Large"></dx:ASPxLabel>
@@ -285,6 +285,10 @@
                                             </dx:ASPxComboBox>
                                         </td>
                                         <td>
+                                            <dx:ASPxCheckBox runat="server" Text="Archive Logs" ID="cbArchived" ></dx:ASPxCheckBox>
+                                        </td>
+                                        <td>
+                                            
                                             <input type="button" id="btnAssign" value="Assign" class="rand-button rand-button-blue rand-button-pad" disabled="disabled" onclick="{ if (listboxEmployee.GetIsValid()) gridLeads.PerformCallback('AssignLeads'); }" />
                                             &nbsp;&nbsp;
                                       <input type="button" value="Rules" class="rand-button rand-button-blue rand-button-pad" onclick="AssignLeadsPopupClient.Show();" />
