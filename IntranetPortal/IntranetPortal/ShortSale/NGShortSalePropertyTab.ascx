@@ -227,7 +227,7 @@
                                 height: auto,
                                 width: 600, 
                                 title: 'Unit '+ ($index+1),
-                                dragEnabled: false,
+                                dragEnabled: true,
                                 showCloseButton: true,
                                 bindingOptions:{ visible: 'SsCase.PropertyInfo.PropFloors['+$index+'].visiblePopup' }
                             }">

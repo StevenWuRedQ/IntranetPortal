@@ -278,7 +278,7 @@
                                 height: 600,
                                 width: 600, 
                                 title: 'Offers '+($index+1),
-                                dragEnabled: false,
+                                dragEnabled: true,
                                 showCloseButton: true,
                                 bindingOptions:{ visible: 'SsCase.ShortSaleOffers['+$index+'].visiblePopup' }
                             }">

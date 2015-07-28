@@ -3191,6 +3191,7 @@
     <Content Include="Scripts\PortalApp.js" />
     <Content Include="Scripts\PortalMessager.js" />
     <Content Include="Scripts\prototype.js" />
+    <Content Include="Scripts\services.js" />
     <Content Include="Scripts\stevenjs.js" />
     <Content Include="Scripts\ui-bootstrap-0.13.0.js" />
     <Content Include="Scripts\vectormap-data\africa.js" />
