@@ -449,11 +449,12 @@
   <PortalNavItem Name="Legal" Text="Legal" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Legal-*</UserRoles>
     <Items>
-      <!--<PortalNavItem Name="Legal-Summary" Text="Summary" NavigationUrl="/LegalUI/LegalUI.aspx" ShowAmount="false">
+      <PortalNavItem Name="Legal-Summary" Text="Summary" NavigationUrl="/LegalUI/LegalSummaryUI.aspx" ShowAmount="false">
+        <UserRoles>Legal-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
-      </PortalNavItem>-->
+      </PortalNavItem>
       <PortalNavItem Name="Legal-ManagerPreview" Text="New Cases" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;lc=0" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-star"></i>]]>

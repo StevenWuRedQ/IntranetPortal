@@ -1,7 +1,27 @@
 ﻿Imports System.ComponentModel
 
-Partial Public Class LegalCase
 
+Partial Public Class LegalCase
+    Private _stuatsStr As String
+    Public ReadOnly Property StuatsStr As String
+        Get
+            If _stuatsStr Is Nothing Then
+
+                _stuatsStr = CType(Status, LegalCaseStatus).ToString
+            End If
+            Return _stuatsStr
+        End Get
+    End Property
+    Private _caseStatus As String
+    Public ReadOnly Property CaseStatus As String
+        Get
+            If _caseStatus Is Nothing Then
+                Dim mCaseDate = Newtonsoft.Json.Linq.JObject.Parse(CaseData)
+                _caseStatus = mCaseDate.Item("CaseStauts")
+            End If
+            Return _caseStatus
+        End Get
+    End Property
     Public Sub SaveData()
         Using ctx As New LegalModelContainer
             Dim lc = ctx.LegalCases.Find(BBLE)
