@@ -252,7 +252,7 @@
           <Property Name="Bankruptcy" Type="bit" />
           <Property Name="Bankaccount" Type="bit" />
           <Property Name="TaxReturn" Type="bit" />
-          <Property Name="Paystube" Type="bit" />
+          <Property Name="Paystubs" Type="bit" />
           <Property Name="EstateDocument" Type="bit" />
           <Property Name="ActingAsSellerAttorney" Type="bit" />
           <Property Name="Contacts" Type="nvarchar(max)" />
@@ -922,7 +922,7 @@
           <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Contacts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Paystube" Type="Boolean" />
+          <Property Name="Paystubs" Type="Boolean" />
         </EntityType>
         <EntityType Name="ShortSaleOverview">
           <Key>
@@ -1368,7 +1368,7 @@
           <EntitySetMapping Name="PropertyOwners">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyOwner">
               <MappingFragment StoreEntitySet="PropertyOwners">
-                <ScalarProperty Name="Paystube" ColumnName="Paystube" />
+                <ScalarProperty Name="Paystubs" ColumnName="Paystubs" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Contacts" ColumnName="Contacts" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />

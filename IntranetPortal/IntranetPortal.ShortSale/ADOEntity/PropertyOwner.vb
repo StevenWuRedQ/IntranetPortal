@@ -41,6 +41,6 @@ Partial Public Class PropertyOwner
     Public Property MiddleName As String
     Public Property Contacts As String
     Public Property Notes As String
-    Public Property Paystube As Nullable(Of Boolean)
+    Public Property Paystubs As Nullable(Of Boolean)
 
 End Class
