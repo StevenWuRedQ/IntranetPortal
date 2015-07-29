@@ -38,23 +38,15 @@
 
 	<!-- Estate Pending -->
 	<div class="ss_form">
-		<h4 class="ss_form_title">Estate Pending</h4>
+		<h4 class="ss_form_title">Estate</h4>
 		<div class="">
 			<ul class="ss_form_box clearfix">
 				<li class="ss_form_item">
 					<label class="ss_form_input_title">Was Estate formed? </label>
-					<input type="radio" id="WasEstateFormedY" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.WasEstateFormed" ng-value="true" radio-init="true">
-					<label for="WasEstateFormedY" class="input_with_check ">
-						<span class="box_text">Yes </span>
-					</label>
-					<input type="radio" id="WasEstateFormedN" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.WasEstateFormed" ng-value="false">
-					<label for="WasEstateFormedN" class="input_with_check ">
-						<span class="box_text">No </span>
-					</label>
+                    <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.WasEstateFormed" ng-options="o.val as o.text for o in [{id:1,val:null,text:'N/A'},{id:2, val:true,text:'Yes'},{id:3,val:false,text:'No'}]"></select>
 				</li>
 			</ul>
 
-			<my-radio model="LegalCase.ForeclosureInfo.WasEstateFormed" name="LegalCase.ForeclosureInfo.WasEstateFormed"></my-radio>
 
 			<div class="cssSlideUp" ng-show="LegalCase.ForeclosureInfo.WasEstateFormed">
 				<div class="arrow_box">
