@@ -250,8 +250,8 @@
                                             <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="CompleteResearch()" data-original-title="Complete Research"></i>
                                             <% End If%>
 
-                                            <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Then%>
-                                            <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Attorney');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Attorney"></i>
+                                          <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or Me.Page.User.IsInRole("Legal-Manager") Then%>
+                                            <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Attorney');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to paralegal / Attorney"></i>
                                             <% End If%>
 
                                             <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.AttorneyHandle Then%>
