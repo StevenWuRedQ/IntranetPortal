@@ -21,11 +21,10 @@ Public Class ShortSaleManage
     Public Shared Sub AddActivityLog(bble As String, userName As String, typeOfUpdate As String, category As String, statusOfUpdate As String, comments As String)
         ShortSale.ShortSaleActivityLog.AddLog(bble, userName, typeOfUpdate, category & " - " & statusOfUpdate, comments)
 
-
         Dim NotifyUpdate = Sub()
                                Try
                                    Dim notifyEmails = Core.PortalSettings.GetValue("SSUpdateNotifyEmails")
-                                   Dim ssCase = ShortSaleCase.GetCase(bble)
+                                   Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
 
                                    Dim maildata As New Dictionary(Of String, String)
                                    maildata.Add("UserName", userName)
