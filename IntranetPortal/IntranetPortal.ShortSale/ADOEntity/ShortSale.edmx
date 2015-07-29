@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CleareneceNotes">
           <Key>
             <PropertyRef Name="NoteId" />
@@ -73,6 +73,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="256" />
           <Property Name="OfficeNO" Type="nvarchar" MaxLength="50" />
           <Property Name="CustomerService" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerServiceFax" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="CorpName" Type="nvarchar" MaxLength="50" />
           <Property Name="Office" Type="nvarchar" MaxLength="256" />
@@ -85,6 +86,7 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="Disable" Type="bit" />
+          <Property Name="Notes" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="PropertyBaseInfo">
           <Key>
@@ -250,6 +252,7 @@
           <Property Name="Bankruptcy" Type="bit" />
           <Property Name="Bankaccount" Type="bit" />
           <Property Name="TaxReturn" Type="bit" />
+          <Property Name="Paystube" Type="bit" />
           <Property Name="EstateDocument" Type="bit" />
           <Property Name="ActingAsSellerAttorney" Type="bit" />
           <Property Name="Contacts" Type="nvarchar(max)" />
@@ -537,6 +540,8 @@
           <Property Name="GroupId" Type="Int32" />
           <Property Name="CustomerService" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Disable" Type="Boolean" />
+          <Property Name="CustomerServiceFax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyFloor">
           <Key>
@@ -917,6 +922,7 @@
           <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Contacts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Paystube" Type="Boolean" />
         </EntityType>
         <EntityType Name="ShortSaleOverview">
           <Key>
@@ -979,6 +985,8 @@
           <EntitySetMapping Name="PartyContacts">
             <EntityTypeMapping TypeName="IntranetPortalModel.PartyContact">
               <MappingFragment StoreEntitySet="PartyContacts">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="CustomerServiceFax" ColumnName="CustomerServiceFax" />
                 <ScalarProperty Name="Disable" ColumnName="Disable" />
                 <ScalarProperty Name="CustomerService" ColumnName="CustomerService" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
@@ -1360,6 +1368,7 @@
           <EntitySetMapping Name="PropertyOwners">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyOwner">
               <MappingFragment StoreEntitySet="PropertyOwners">
+                <ScalarProperty Name="Paystube" ColumnName="Paystube" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Contacts" ColumnName="Contacts" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />

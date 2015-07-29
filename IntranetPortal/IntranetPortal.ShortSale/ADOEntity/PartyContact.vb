@@ -27,5 +27,7 @@ Partial Public Class PartyContact
     Public Property GroupId As Nullable(Of Integer)
     Public Property CustomerService As String
     Public Property Disable As Nullable(Of Boolean)
+    Public Property CustomerServiceFax As String
+    Public Property Notes As String
 
 End Class
