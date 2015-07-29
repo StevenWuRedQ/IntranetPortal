@@ -8,40 +8,6 @@
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 
 <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
-<script type="text/javascript">
-   
-
-    function ShowAcrisMap(propBBLE) {
-        //var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + propBBLE;
-        ShowPopupMap("https://a836-acris.nyc.gov/DS/DocumentSearch/BBL", "Acris");
-    }
-
-    function ShowDOBWindow(boro, block, lot) {
-        if (block == null || block == "" || lot == null || lot == "" || boro == null || boro == "") {
-            alert("The property info isn't complete. Please try to refresh data.");
-            return;
-        }
-
-        var url = "http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?boro=" + boro + "&block=" + encodeURIComponent(block) + "&lot=" + encodeURIComponent(lot);
-        ShowPopupMap(url, "DOB");
-        $("#addition_info").html(' ');
-    }
-
-    function ShowPopupMap(url, header) {
-        OpenLeadsWindow(url, header);
-        return;
-
-        aspxAcrisControl.SetContentHtml("Loading...");
-        aspxAcrisControl.SetContentUrl(url);
-
-        aspxAcrisControl.SetHeaderText(header);
-        //header = header + "(Borough:" + ShortSaleCaseData.PropertyInfo.Borough + "Lot:" + ShortSaleCaseData.PropertyInfo.Lot + ")";
-        $('#pop_up_header_text').html(header)
-        aspxAcrisControl.Show();
-    }
-
-
-</script>
 
 <dx:ASPxCallbackPanel ID="ShortSaleCaseSavePanel" ClientInstanceName="ShortSaleCaseSavePanelClient" runat="server" Width="100%">
     <PanelCollection>
@@ -55,11 +21,10 @@
                         <div style="font-size: 30px">
                             <i class="fa fa-home"></i>
                             <span style="margin-left: 19px;">{{GetCaseInfo().Address}}&nbsp;</span>
-                            <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
-                            <span class="time_buttons" onclick="ShowDOBWindow(GetShortSaleCase().PropertyInfo.Borough,GetShortSaleCase().PropertyInfo.Block, GetShortSaleCase().PropertyInfo.Lot)">DOB</span>
-                            <span class="time_buttons" onclick="ShowAcrisMap(leadsInfoBBLE)">Acris</span>
-                            <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?bble='+leadsInfoBBLE, 'Maps')">Maps</span>
-                          
+                            <span class="time_buttons" style="margin-right: 30px" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=3&bble='+leadsInfoBBLE, 'eCourts')">eCourts</span>
+                            <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=2&bble='+leadsInfoBBLE, 'DOB')">DOB</span>
+                            <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=1&bble='+leadsInfoBBLE, 'Acris')">Acris</span>
+                            <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+leadsInfoBBLE, 'Maps')">Maps</span>                          
                         </div>
                         <%--data format June 2, 2014 6:37 PM--%>
                         <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;">{{GetCaseInfo().Name}}</span>

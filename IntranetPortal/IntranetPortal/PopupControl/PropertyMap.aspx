@@ -1,8 +1,8 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="PropertyMap.aspx.vb" Inherits="IntranetPortal.PropertyMap" MasterPageFile="~/Content.Master" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="PropertyMap.aspx.vb" Inherits="IntranetPortal.PropertyMap" Title="Property Map" MasterPageFile="~/Content.Master" %>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script type="text/javascript">
-        
+
         var tmpBBLE = '<%= Page.Request.QueryString("bble")%>';
 
         function popupControlMapTabClick(index) {
@@ -14,16 +14,16 @@
             }
 
             if (index == 1) {
-                if (tmpBBLE != null) {                   
-                        var url = "/StreetView.aspx?t=map&bble=" + tmpBBLE;
-                        SetPopupControlMapURL(url);                   
+                if (tmpBBLE != null) {
+                    var url = "/StreetView.aspx?t=map&bble=" + tmpBBLE;
+                    SetPopupControlMapURL(url);
                 }
             }
 
             if (index == 2) {
-                if (tmpBBLE != null) {                   
-                        var url = "/BingViewMap.aspx";
-                        SetPopupControlMapURL(url);                   
+                if (tmpBBLE != null) {
+                    var url = "/BingViewMap.aspx";
+                    SetPopupControlMapURL(url);
                 }
             }
 
@@ -45,10 +45,11 @@
 
         function SetPopupControlMapURL(url) {
             var pane = contentSplitter.GetPaneByName("mapPane");
-            pane.SetContentUrl(url);            
+            pane.SetContentUrl(url);
         }
-      
+
     </script>
+
     <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" FullscreenMode="true" ClientInstanceName="contentSplitter" Orientation="Vertical">
         <Styles>
             <Pane Paddings-Padding="0">
@@ -59,6 +60,7 @@
             <dx:SplitterPane ShowCollapseBackwardButton="false" MinSize="50" AutoHeight="true" Name="topTab">
                 <ContentCollection>
                     <dx:SplitterContentControl>
+                        <% If DisplayView = ViewType.PropertyMap Then%>
                         <ul class="nav nav-tabs" style="border: 0px" role="tablist">
                             <li class="active"><a href="#streetView" class="popup_tab_text" role="tab" data-toggle="tab" onclick="popupControlMapTabClick(0)">Street View</a></li>
                             <li class=""><a href="#mapView" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(1)">Map View</a></li>
@@ -75,6 +77,19 @@
                             <div class="tab-pane" id="Oasis">Oasis</div>
                             <div class="tab-pane" id="ZOLA">ZOLA</div>
                         </div>
+                        <% End If%>
+
+                        <% If DisplayView = ViewType.Acris Then%>
+                        <div class="clearfix">
+                            <div class="pop_up_header_margin">
+                                <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
+                                <% Dim ld = IntranetPortal.LeadsInfo.GetInstance(Request.QueryString("bble"))%>
+                                <% If ld IsNot Nothing Then%>
+                                <span class="pop_up_header_text"><%= ld.PropertyAddress%>&nbsp;-&nbsp;(Borough: <%=  ld.BoroughName %> , Block:<%=ld.Block %> ,Lot:<%=ld.Lot %>)  </span>                              
+                                <% End If%>
+                            </div>                           
+                        </div>
+                        <% End If%>
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
@@ -82,6 +97,6 @@
                 <Separator Visible="False"></Separator>
             </dx:SplitterPane>
         </Panes>
-        <ClientSideEvents Init="function(s,e){popupControlMapTabClick(0);}" />
+        <ClientSideEvents />
     </dx:ASPxSplitter>
 </asp:Content>
