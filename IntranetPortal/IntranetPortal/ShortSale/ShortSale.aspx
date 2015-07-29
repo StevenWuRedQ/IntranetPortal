@@ -675,7 +675,7 @@
 
             }*/
 
-            $http.get('ShortSaleServices.svc/getbanklist')
+            $http.get('/LegalUI/ContactService.svc/getbanklist')
                 .success(function (data) {
                     $scope.bankNameOptions = data;
                 })

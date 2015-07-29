@@ -97,7 +97,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Short Sale Fax #</label>
-                    <input class="ss_form_input" ng-model="GetContactById(mortgage.LenderId).FAX" readonly="readonly">
+                    <input class="ss_form_input" ng-model="GetContactById(mortgage.LenderId).Fax" readonly="readonly">
                 </li>
             </ul>
         </div>

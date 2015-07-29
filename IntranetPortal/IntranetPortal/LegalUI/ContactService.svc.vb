@@ -21,6 +21,18 @@ Public Class ContactService
         ' Add your operation implementation here
     End Function
     <OperationContract()>
+   <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    Public Function GetBankList() As Channels.Message
+        'the id of "Lender" is 5
+        Dim gp = GroupType.GetGroup(5)
+
+        If gp IsNot Nothing Then
+            Return gp.Contacts.Where(Function(a) (a.Disable Is Nothing Or a.Disable = False)).OrderBy(Function(p) p.Name).ToList.ToJson
+        End If
+
+        Return Nothing
+    End Function
+    <OperationContract()>
     <WebGet()>
     Public Function LoadContacts() As Channels.Message ' As List(Of PartyContact)
         Return PartyContact.getAllContact().ToJson()

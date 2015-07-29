@@ -17,12 +17,12 @@ Partial Public Class PartyContact
         Get
             If _corps Is Nothing Then
 
-                Using ctx As New ShortSaleEntities
-                    Dim mCorps = ctx.PartyContacts.Where(Function(p) p.Name = Name AndAlso p.CorpName IsNot Nothing).Select(Function(p) p.CorpName).ToList
-                    If (mCorps IsNot Nothing AndAlso mCorps.Count > 1) Then
-                        _corps = mCorps
-                    End If
-                End Using
+                'Using ctx As New ShortSaleEntities
+                '    Dim mCorps = ctx.PartyContacts.Where(Function(p) p.Name = Name AndAlso p.CorpName IsNot Nothing).Select(Function(p) p.CorpName).ToList
+                '    If (mCorps IsNot Nothing AndAlso mCorps.Count > 1) Then
+                '        _corps = mCorps
+                '    End If
+                'End Using
 
             End If
             Return _corps
