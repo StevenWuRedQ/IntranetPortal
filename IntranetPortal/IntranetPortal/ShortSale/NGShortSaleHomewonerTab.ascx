@@ -145,7 +145,6 @@
                         </form>
                         <br />
                         <button class="btn btn-primary pull-right" ng-click="setVisiblePopup(SsCase.PropertyInfo.Owners[$index], false)">Save</button>
-
                   </div>
                 </div>
         <div class="ss_form">
@@ -157,10 +156,6 @@
                     <label class="ss_form_input_title">Bankruptcy</label>
                     <pt-radio model="owner.Bankruptcy" name="ownerBankruptcy{{$index}}"></pt-radio>
                 </li>
-
-              
-
-
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Bank account</label>
                     <pt-radio model="owner.Bankaccount" name="Bankaccount{{$index}}"></pt-radio>
@@ -182,7 +177,7 @@
                     </select>
                 </li>
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Tax Returns</label>
+                    <label class="ss_form_input_title">Paystubs</label>
                     <pt-radio model="owner.Paystubs" name="Paystubs{{$index}}"></pt-radio>
                 </li> 
 
