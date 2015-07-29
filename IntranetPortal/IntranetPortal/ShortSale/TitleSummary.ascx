@@ -659,20 +659,14 @@
                                 <div class="color_gray upcase_text" style="font-size: 12px; padding-bottom: 10px;">Category </div>
                                 <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" Width="100%" ClientInstanceName="filed_CheckBoxList1">
                                     <Items>
-
                                         <dx:ListEditItem Value="PropertyInfo.PropertyAddress" Text="Street address" Selected="True" />
-
                                         <dx:ListEditItem Value="OwnerFullName" Text="Name" Selected="True" />
                                         <dx:ListEditItem Value="StatuStr" Text="Status" Selected="True" />
                                         <dx:ListEditItem Value="MortgageCategory" Text="MortgageCategory" Selected="True" />
                                         <dx:ListEditItem Value="OccupiedBy" Text="Occupancy" />
-
                                         <dx:ListEditItem Value="FristMortageProgress" Text="1st Mort Prog" />
-
                                         <dx:ListEditItem Value="FristMortageLender" Text="1st Mort Ser " />
-
                                         <dx:ListEditItem Value="SencondMortageProgress" Text="2nd Mort Prog" />
-
                                         <dx:ListEditItem Value="SencondMortageLender" Text="2nd Mort Ser" />
                                         <dx:ListEditItem Value="ProcessorContact.Name" Text="Processor" />
                                         <dx:ListEditItem Value="ListingAgentContact.Name" Text="Listing agent" />
@@ -680,15 +674,10 @@
                                         <dx:ListEditItem Value="LastActivity" Text="Last Activity" />
                                         <dx:ListEditItem Value="Owner" Text="Assgin To" />
                                         <dx:ListEditItem Value="BBLE" Text="Comments" />
-
-
-                                    </Items>
-                                    <%--<CheckBoxStyle  BackgroundImage-ImageUrl="../images/icon_checked_box.png"/>--%>
-                                    <%--<CheckedImage Url="../images/icon_checked_box.png"></CheckedImage>--%>
+                                    </Items>                                    
                                     <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
                                 </dx:ASPxCheckBoxList>
                             </div>
-
                         </div>
                     </div>
                 </div>
