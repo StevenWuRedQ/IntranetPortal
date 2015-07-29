@@ -4,7 +4,7 @@
 <tabset class="tab-switch">
     <tab ng-repeat="owner in SsCase.PropertyInfo.Owners" active="owner.active" disable="owner.disabled">
         <tab-heading>Seller {{$index+1}} </tab-heading>
-            <div class="text-right"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.PropertyInfo.Owners.length>1" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.Owners, $index)" title="Delete" style="border:1px solid; border-radius:3px; margin:2px"></i></div>
+            <div class="text-right" ng-show="SsCase.PropertyInfo.Owners.length>1" style="margin-bottom:-25px"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.PropertyInfo.Owners.length>1" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.Owners, $index)" title="Delete" style="border:1px solid; border-radius:3px; margin:2px"></i></div>
 
         <div ng-click="setVisiblePopup(SsCase.PropertyInfo.Owners[$index], true)">
             <ul class="ss_form_box clearfix">
@@ -13,7 +13,6 @@
                     <label class="ss_form_input_title">Name</label>
                     <input class="ss_form_input ss_not_empty" ng-value="formatName(owner.FirstName,owner.MiddleName,owner.LastName)" readonly>
                 </li>
-
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">DOB</label>
                     <input class="ss_form_input" ng-model="owner.DOB" ss-date readonly>
@@ -117,8 +116,15 @@
                             <div class="col-sm-4">
                                 <label>Bankruptcy</label>
                                 <pt-radio class="form-control" model="owner.Bankruptcy" name="ownerBankruptcy{{$index}}"></pt-radio>
+                            </div>                           
+                            <div class="col-sm-4">
+                                <label>Bank account</label>
+                                <pt-radio class="form-control" model="owner.Bankaccount" name="Bankaccount{{$index}}"></pt-radio>
                             </div>
-
+                            <div class="col-sm-4">
+                                <label>Tax Returns</label>
+                                <pt-radio class="form-control" model="owner.TaxReturn" name="TaxReturn{{$index}}"></pt-radio>
+                            </div>
                             <div class="col-sm-4">
                                 <label>Employed</label>
                                 <select class="form-control" ng-model="owner.Employed">
@@ -130,14 +136,9 @@
                                     <option>SSI / Disability</option>
                                 </select>
                             </div>
-                            <div class="col-sm-4">
-                                <label>Bank account</label>
-                                <pt-radio class="form-control" model="owner.Bankaccount" name="Bankaccount{{$index}}"></pt-radio>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <label>Tax Returns</label>
-                                <pt-radio class="form-control" model="owner.TaxReturn" name="TaxReturn{{$index}}"></pt-radio>
+                              <div class="col-sm-4">
+                                <label>Paystubs</label>
+                                <pt-radio class="form-control" model="owner.Paystubs" name="Paystubs{{$index}}"></pt-radio>
                             </div>
                           </div>
 
@@ -157,6 +158,18 @@
                     <pt-radio model="owner.Bankruptcy" name="ownerBankruptcy{{$index}}"></pt-radio>
                 </li>
 
+              
+
+
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Bank account</label>
+                    <pt-radio model="owner.Bankaccount" name="Bankaccount{{$index}}"></pt-radio>
+
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Tax Returns</label>
+                    <pt-radio model="owner.TaxReturn" name="TaxReturn{{$index}}"></pt-radio>
+                </li> 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Employed</label>
                     <select class="ss_form_input" ng-model="owner.Employed">
@@ -168,18 +181,10 @@
                         <option>SSI / Disability</option>
                     </select>
                 </li>
-
-
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Bank account</label>
-                    <pt-radio model="owner.Bankaccount" name="Bankaccount{{$index}}"></pt-radio>
-
-                </li>
-
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Tax Returns</label>
-                    <pt-radio model="owner.TaxReturn" name="TaxReturn{{$index}}"></pt-radio>
-                </li>
+                    <pt-radio model="owner.Paystubs" name="Paystubs{{$index}}"></pt-radio>
+                </li> 
 
             </ul>
                 </div>

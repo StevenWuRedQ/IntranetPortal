@@ -5,9 +5,9 @@
 </div>
 
 <div>
-    <div ng-show="SsCase.DocumentMissing.length>0" class="well">
+    <div ng-show="SsCase.DocumentRequestDetails.length>0" class="well">
         <label class="ss_form_input_title">Open Document Request</label>
-        <p>{{SsCase.DocumentMissing}}</p>
+        <p>{{SsCase.DocumentRequestDetails}}</p>
     </div>
 </div>
 
@@ -19,7 +19,6 @@
                 <label class="ss_form_input_title">Company</label>
                 <input class="ss_form_input disabled" ng-model="SsCase.BuyerTitle.CompanyName">
             </li>
-
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Title #</label>
                 <input class="ss_form_input disabled" ng-model="SsCase.BuyerTitle.OrderNumber">

@@ -81,86 +81,6 @@
 </div>
 --%>
 
-<div class="ss_form">
-    <h4 class="ss_form_title">Building Info</h4>
-    <div class="ss_border">
-        <ul class="ss_form_box clearfix">
-
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">C/O Class</label>
-                <input class="ss_form_input" ng-model="SsCase.PropertyInfo.COClass">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Total Units</label>
-                <input class="ss_form_input" ng-model="SsCase.PropertyInfo.NumOfUnit">
-            </li>
-            <li class="ss_form_item">&nbsp;
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Tax Class</label>
-                <input class="ss_form_input" readonly="readonly" ng-model="SsCase.LeadsInfo.PropertyClass">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Total Units</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.UnitNum" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Year Built</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.YearBuilt" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Lot Size</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.LotDem" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Building Size</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.BuildingDem" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Building Stories</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.NumFloors" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Calculated Sqft</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.CalculatedSqft" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">NYC Sqft</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.NYCSqft" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Unbuilt Sqft</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.UnbuiltSqft" readonly="readonly" number-mask>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Zoning Code</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.Zoning" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Max FAR</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.MaxFar" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Actual FAR</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.ActualFar" readonly="readonly">
-            </li>
-
-        </ul>
-    </div>
-</div>
-
-<%-- 
-<div class="ss_form" id="home_breakdown_table">
-
-    <h4 class="ss_form_title">Home Breakdown <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.PropertyInfo.PropFloors,'SsCase.PropertyInfo.PropFloors')" title="Add"></i>
-    </h4>
-    <div class="ss_border" ng-show="SsCase.PropertyInfo.PropFloors.length>0">
-        <div class="ss_form_box clearfix ss_form_small_font">
-            <div dx-data-grid="homeBreakdownBindingOptions()"></div>
-        </div>
-    </div>
-</div>
---%>
 
 <div class="ss_form" id="home_breakdown_table_new">
     <h4 class="ss_form_title">Home Breakdown <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.PropertyInfo.PropFloors,'SsCase.PropertyInfo.PropFloors', true)" title="Add"></i>
@@ -300,6 +220,89 @@
         </tr>
     </table>
 </div>
+
+
+
+<div class="ss_form">
+    <h4 class="ss_form_title">Building Info</h4>
+    <div class="ss_border">
+        <ul class="ss_form_box clearfix">
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">C/O Class</label>
+                <input class="ss_form_input" ng-model="SsCase.PropertyInfo.COClass">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Total Units</label>
+                <input class="ss_form_input" ng-model="SsCase.PropertyInfo.NumOfUnit">
+            </li>
+            <li class="ss_form_item">&nbsp;
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Tax Class</label>
+                <input class="ss_form_input" readonly="readonly" ng-model="SsCase.LeadsInfo.PropertyClass">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Total Units</label>
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.UnitNum" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Year Built</label>
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.YearBuilt" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Lot Size</label>
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.LotDem" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Building Size</label>
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.BuildingDem" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Building Stories</label>
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.NumFloors" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Calculated Sqft</label>
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.CalculatedSqft" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">NYC Sqft</label>
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.NYCSqft" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Unbuilt Sqft</label>
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.UnbuiltSqft" readonly="readonly" number-mask>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Zoning Code</label>
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.Zoning" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Max FAR</label>
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.MaxFar" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Actual FAR</label>
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.ActualFar" readonly="readonly">
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<%-- 
+<div class="ss_form" id="home_breakdown_table">
+
+    <h4 class="ss_form_title">Home Breakdown <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.PropertyInfo.PropFloors,'SsCase.PropertyInfo.PropFloors')" title="Add"></i>
+    </h4>
+    <div class="ss_border" ng-show="SsCase.PropertyInfo.PropFloors.length>0">
+        <div class="ss_form_box clearfix ss_form_small_font">
+            <div dx-data-grid="homeBreakdownBindingOptions()"></div>
+        </div>
+    </div>
+</div>
+--%>
 
 <script src="/Scripts/mindmup-editabletable.js"></script>
 <script>

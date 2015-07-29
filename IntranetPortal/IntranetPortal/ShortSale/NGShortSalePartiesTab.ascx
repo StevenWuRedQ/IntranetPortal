@@ -21,7 +21,6 @@
         </ul>
     </div>
 </div>
-
 <div class="ss_form">
     <h4 class="ss_form_title">Referral&nbsp
         <i class="fa fa-compress icon_btn text-primary" ng-show="!referralCollapse" ng-click="referralCollapse=!referralCollapse"></i>
