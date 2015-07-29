@@ -675,9 +675,12 @@
                                         <dx:ListEditItem Value="Owner" Text="Assgin To" />
                                         <dx:ListEditItem Value="BBLE" Text="Comments" />
                                     </Items>                                    
-                                    <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
+                                    <ClientSideEvents />
                                 </dx:ASPxCheckBoxList>
-                            </div>
+                                <dx:ASPxButton runat="server" Text="View" ID="btnViewReport">
+                                    <ClientSideEvents Click="function(s,e){AllLeadsGridClient.PerformCallback();}" />
+                                </dx:ASPxButton>
+                            </div>                            
                         </div>
                     </div>
                 </div>
