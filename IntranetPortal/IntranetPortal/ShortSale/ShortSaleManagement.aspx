@@ -14,9 +14,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script src="/Scripts/globalize/globalize.js"></script>
-    <script src="/Scripts/dx.chartjs.js"></script>
-    <script src="/Scripts/dx.webappjs.js"></script>
-    <script src="/Scripts/dx.phonejs.js"></script>
+    <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.chartjs.js"></script>
     <div class="container-fluid">
         <%--Head--%>
         <div style="padding-top: 30px">

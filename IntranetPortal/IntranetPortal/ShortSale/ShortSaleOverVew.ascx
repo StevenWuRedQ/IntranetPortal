@@ -44,7 +44,6 @@
         clearArray(ShortSaleCaseData.PropertyInfo.Owners);
 
         ShortSaleDataBand(2);
-
     }
 
     function ShowAcrisMap(propBBLE) {
