@@ -1031,3 +1031,9 @@ function OnStatusCategoryChange(selCategory, statusData) {
 
 }
 
+$(document).ready(function () {
+    $('body').tooltip({
+        selector: '.tooltip-examples',
+        placement: 'bottom'
+    });
+})

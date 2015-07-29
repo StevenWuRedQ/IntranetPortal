@@ -11,6 +11,25 @@ Partial Public Class PartyContact
     Public Sub New()
 
     End Sub
+    Private _corps As List(Of String)
+
+    Public ReadOnly Property Corps As List(Of String)
+        Get
+            If _corps Is Nothing Then
+
+                Using ctx As New ShortSaleEntities
+                    Dim mCorps = ctx.PartyContacts.Where(Function(p) p.Name = Name AndAlso p.CorpName IsNot Nothing).Select(Function(p) p.CorpName).ToList
+                    If (mCorps IsNot Nothing AndAlso mCorps.Count > 1) Then
+                        _corps = mCorps
+                    End If
+                End Using
+
+            End If
+            Return _corps
+        End Get
+    End Property
+
+
     Public Shared Function getAllEmail() As List(Of String)
 
         Using context As New ShortSaleEntities
@@ -19,7 +38,7 @@ Partial Public Class PartyContact
     End Function
     Public Shared Function getAllContact() As List(Of PartyContact)
         Using context As New ShortSaleEntities
-            Dim result = context.PartyContacts.Where(Function(pc) pc.Type <> ContactType.Employee AndAlso Not String.IsNullOrEmpty(pc.Name)).ToList
+            Dim result = context.PartyContacts.Where(Function(pc) pc.Type <> ContactType.Employee AndAlso Not String.IsNullOrEmpty(pc.Name) AndAlso (pc.Disable Is Nothing Or Not pc.Disable)).ToList
             result.AddRange(GetContactByType(ContactType.Employee))
 
             Return result '.Where(Function(pc) Not String.IsNullOrEmpty(pc.Name))

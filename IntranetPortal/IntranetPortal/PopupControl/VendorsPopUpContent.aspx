@@ -307,7 +307,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <button type="button" class="close"  data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                     <h4 class="modal-title">Add Group</h4>
                                 </div>
                                 <div class="modal-body">
@@ -342,7 +342,7 @@
                             <div class="sidebar__item" ng-repeat="group in Groups">
 
                                 <div class="sidebar__title" ng-class="group.SubGroups==null||group.SubGroups.length==0?'notafter':''" ng-click="ChangeGroups(group)">
-                                    <div>{{group.GroupName}} <i class="fa fa-user-plus icon_btn layout_float_right" title="Add group" ng-click="popAddgroup(group.Id)"></i></div>
+                                    <div>{{group.GroupName}} <i class="fa fa-user-plus icon_btn tooltip-examples layout_float_right" title="Add group" ng-click="popAddgroup(group.Id)"></i></div>
                                 </div>
                                 <div class="sidebar__content" ng-class="group.SubGroups==null||group.SubGroups.length==0?'nodisplay':''">
                                     <div data-block="inner" class="inner js-sidebar">
@@ -501,7 +501,8 @@
                                         <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.ContactId==currentContact.ContactId? 'popup_employee_list_item_active':''" ng-repeat="contact in groupedcontact.data|orderBy:predicate| filter:query.Name| ByContact:query ">
                                             <div>
                                                 <div style="font-weight: 900; font-size: 16px">
-                                                    <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}} </label>
+                                                    <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}} <a  ng-show="contact.Corps" data-toggle="popover" title="Companies" data-trigger="focus" data-html="true" data-content="{{contact.Corps.join('<br />')}}"><i class="fa fa-eye" onlick=""></i></a>  </label>
+                                                    
                                                     <%--<i class="fa fa-list-alt icon_btn" style="float: right; margin-right: 20px; margin-top: 0px; font-size: 18px;"></i>--%>
                                                 </div>
                                                 <%--<div style="font-size: 14px">Eviction</div>--%>
@@ -727,8 +728,21 @@
         {
             angular.element(document.getElementById("PortalCtrl")).scope().SaveCurrent();
         }
-        
+        $(document).ready(function()
+        {
+            $('body').popover({
+                selector: '[data-toggle="popover"]',
+                placement: 'bottom',
+                html: true,
+                trigger: 'focus'
+            })
+        })
     </script>
+    <style>
+        .popover-title,.popover-content {
+            color:#b1b2b7;
+        }
+    </style>
     <script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
