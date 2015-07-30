@@ -1,5 +1,6 @@
 ﻿Imports System.Text.RegularExpressions
 Imports System.Text
+Imports Newtonsoft.Json
 
 Partial Public Class ShortSaleCase
 
@@ -97,6 +98,7 @@ Partial Public Class ShortSaleCase
     Public Property MortgageStatus As String
     Public Property ReferralName As String
     Public Property ReferralManager As String
+    Public Property LastFileOverview As ShortSaleOverview
     'Public Property MortgageCategory As String
 
     Private _sellerTitle As PropertyTitle
@@ -298,6 +300,14 @@ Partial Public Class ShortSaleCase
 
     Public Property EvictionOwner As String
 
+#Region "Mortgages"
+
+    Public ReadOnly Property Investor As String
+        Get
+            Return GetMortageType(0)
+        End Get
+    End Property
+
     Function GetMortageStauts(ByVal index As Integer) As String
         If (Mortgages IsNot Nothing AndAlso Mortgages.Count > index) Then
 
@@ -354,6 +364,8 @@ Partial Public Class ShortSaleCase
             _mortgageCategory = value
         End Set
     End Property
+
+#End Region
 
     Public ReadOnly Property SellerAttorneyContact As PartyContact
         Get
@@ -418,6 +430,10 @@ Partial Public Class ShortSaleCase
         End Get
     End Property
 
+
+#Region "Report Properties"
+
+    <JsonIgnoreAttribute>
     Public ReadOnly Property ReportDetails As String
         Get
             Dim sb As New StringBuilder
@@ -451,12 +467,87 @@ Partial Public Class ShortSaleCase
         End Get
     End Property
 
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property RptPropertyInfo As String
+        Get
+            Dim sb As New StringBuilder
+            sb.Append(NewLine("Address", PropertyInfo.PropertyAddress))
+
+            If PropertyOwner IsNot Nothing Then
+                sb.Append(NewLine("First Name", PropertyOwner.FirstName))
+                sb.Append(NewLine("Last Name", PropertyOwner.LastName))
+            End If
+
+            sb.Append(NewLine("Occupancy", PropertyInfo.Occupancy))
+            Return sb.ToString
+        End Get
+    End Property
+
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property RptMortgageInfo As String
+        Get
+            Dim sb As New StringBuilder
+            sb.Append(NewLine("Investor", GetMortageType(0)))
+            sb.Append(NewLine("1st Mortgage", FristMortageLender))
+            sb.Append(NewLine("2nd Mortgage", SencondMortageLender))
+
+            Return sb.ToString
+        End Get
+    End Property
+
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property RptValuation As String
+        Get
+            If ValueInfoes IsNot Nothing AndAlso ValueInfoes.Count > 0 Then
+                Dim sb As New StringBuilder
+                sb.Append(NewLine("Type of Value", ValueInfoes(0).Method))
+                sb.Append(NewLine("Date of Value", String.Format("{0:d}", ValueInfoes(0).DateOfValue)))
+                sb.Append(NewLine("Value", String.Format("{0:c}", ValueInfoes(0).BankValue)))
+                sb.Append(NewLine("Expiration", String.Format("{0:d}", ValueInfoes(0).ExpiredOn)))
+
+                Return sb.ToString
+            End If
+
+            Return Nothing
+        End Get
+    End Property
+
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property RptOffer As String
+        Get
+            If ShortSaleOffers IsNot Nothing AndAlso ShortSaleOffers.Count > 0 Then
+
+                Dim sb As New StringBuilder
+                sb.Append(NewLine("Current Offer", String.Format("{0:c}", ShortSaleOffers(0).OfferAmount)))
+                sb.Append(NewLine("Date offer submitted", ""))
+                sb.Append(NewLine("Counter from Lender", ""))
+                sb.Append(NewLine("Buyer's Counter", ""))
+                Return sb.ToString
+            End If
+
+            Return Nothing
+        End Get
+    End Property
+
+    Private Function NewLine(title As String, text As String) As String
+        Return String.Format("{0}: {1}", title, text) & Environment.NewLine
+    End Function
+
+#End Region
+
+
+
+
+
 #End Region
 
 #Region "Methods"
 
     Public Sub Save()
         Using context As New ShortSaleEntities
+            'Init Occupancy Data
+            Me.OccupiedBy = If(_propInfo IsNot Nothing, _propInfo.Occupancy, Nothing)
+
             If CaseId = 0 Then
                 If Not String.IsNullOrEmpty(BBLE) Then
                     Dim tmpCase = context.ShortSaleCases.Where(Function(ss) ss.BBLE = BBLE).FirstOrDefault
@@ -905,6 +996,35 @@ Partial Public Class ShortSaleCase
             Next
 
             Return result
+        End Using
+    End Function
+
+    Public Shared Function CaseReport2() As List(Of ShortSaleCase)
+        Using ctx As New ShortSaleEntities
+            Dim data = From ss In ctx.ShortSaleCases
+                       Join pi In ctx.PropertyBaseInfoes On pi.BBLE Equals ss.BBLE
+                       Let owner = ctx.PropertyOwners.FirstOrDefault(Function(po) po.BBLE = ss.BBLE)
+                       Let morts = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = ss.CaseId)
+                       Let values = ctx.PropertyValueInfoes.Where(Function(pv) pv.BBLE = ss.BBLE)
+                       Let fileOverview = ctx.ShortSaleOverviews.Where(Function(pv) pv.BBLE = ss.BBLE).OrderByDescending(Function(pv) pv.ActivityDate).FirstOrDefault
+                       Select New With {.CaseId = ss.CaseId,
+                                        .ShortSale = ss,
+                                        .PropertyInfo = pi,
+                                        .Owner = owner,
+                                        .Mortgages = morts,
+                                        .ValueInfo = values,
+                                        .Overview = fileOverview}
+
+
+            Return data.ToList.Select(Function(item)
+                                          item.ShortSale.PropertyInfo = item.PropertyInfo
+                                          item.ShortSale.Mortgages = item.Mortgages.ToArray
+                                          item.ShortSale.PropertyOwner = item.Owner
+                                          item.ShortSale.ValueInfoes = item.ValueInfo.ToArray
+                                          item.ShortSale.LastFileOverview = item.Overview
+
+                                          Return item.ShortSale
+                                      End Function).ToList
         End Using
     End Function
 

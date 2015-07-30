@@ -212,6 +212,15 @@ Partial Public Class UCTitleSummary
     Protected WithEvents chkFields As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
 
     '''<summary>
+    '''btnViewReport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnViewReport As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
     '''notesCallbackPanel control.
     '''</summary>
     '''<remarks>

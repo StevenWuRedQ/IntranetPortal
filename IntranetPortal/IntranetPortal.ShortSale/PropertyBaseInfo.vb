@@ -1,6 +1,18 @@
 ﻿
 Partial Public Class PropertyBaseInfo
 
+
+    Public ReadOnly Property Occupancy As String
+        Get
+            If PropFloors IsNot Nothing AndAlso PropFloors.Count > 0 Then
+                Return PropFloors(0).Occupied
+            End If
+
+            Return Nothing
+        End Get
+    End Property
+
+
     Public ReadOnly Property PropertyAddress As String
         Get
             Return IntranetPortal.Core.PropertyHelper.BuildPropertyAddress(Number, StreetName, "", City, Zipcode)
@@ -56,7 +68,7 @@ Partial Public Class PropertyBaseInfo
 
             context.SaveChanges()
 
-            If _propFloors IsNot Nothing Then
+            If _propFloors IsNot Nothing AndAlso _propFloors.Count > 0 Then
                 Dim i = 1
                 For Each floor In _propFloors.OrderBy(Function(fl) fl.FloorId)
                     If String.IsNullOrEmpty(floor.BBLE) Then

@@ -400,7 +400,7 @@ Public Class UCTitleSummary
         '    AllLeadsGrid.DataBind()
         'End If
 
-        gridData.DataSource = ShortSaleCase.CaseReport
+        gridData.DataSource = ShortSaleCase.CaseReport2
         gridData.DataBind()
 
         AllLeadGridViewExporter.FileName = String.Format("All-{0}-{1}-{2}.xlsx", Today.Month, Today.Day, Today.Year)

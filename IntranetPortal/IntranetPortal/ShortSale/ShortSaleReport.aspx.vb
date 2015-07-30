@@ -7,7 +7,7 @@ Public Class ShortSaleReport
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        AllLeadsGrid.DataSource = ShortSale.ShortSaleCase.CaseReport
+        AllLeadsGrid.DataSource = ShortSale.ShortSaleCase.CaseReport2
         AllLeadsGrid.DataBind()
 
     End Sub

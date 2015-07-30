@@ -34,10 +34,10 @@
                     <input class="ss_form_input" ng-model="mortgage.PayoffAmount" money-mask>
                 </li>
             </ul>
-                </div>
+        </div>
         </div>
 
-        <div class="ss_form">
+            <div class="ss_form">
             <h4 class="ss_form_title">Foreclosure Attorney</h4>
             <div class="ss_border">
             <ul class="ss_form_box clearfix">
@@ -172,7 +172,7 @@
             </ul>
         </div>
 
-                  
+    
     </tab>
     <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.Mortgages, 'SsCase.Mortgages')" ng-show="SsCase.Mortgages.length<=2" title="Add" style="font-size: 18px"></i>
 </tabset>

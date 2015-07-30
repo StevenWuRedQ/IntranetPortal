@@ -213,7 +213,8 @@
                                             </Columns>
                                             <GroupSummary>
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
-                                            </GroupSummary><SettingsPager NumericButtonCount="3"></SettingsPager>
+                                            </GroupSummary>
+                                            <SettingsPager NumericButtonCount="3"></SettingsPager>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
@@ -304,7 +305,8 @@
                                             </Columns>
                                             <GroupSummary>
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
-                                            </GroupSummary><SettingsPager NumericButtonCount="3"></SettingsPager>
+                                            </GroupSummary>
+                                            <SettingsPager NumericButtonCount="3"></SettingsPager>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
@@ -572,7 +574,34 @@
                                             <dx:ASPxGridView ID="gridData" runat="server" Visible="false"
                                                 KeyFieldName="CaseId" Width="100%">
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.PropertyAddress" Caption="Full Property Address">
+                                                    <dx:GridViewDataTextColumn FieldName="RptPropertyInfo" Caption="Property Info">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="RptMortgageInfo" Caption="Mortgage Info">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="MortgageCategory" Caption="File Stage">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="File Status">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="RptValuation" Caption="Valuation">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="RptOffer" Caption="Offer">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="" Caption="Missing Docs">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="LastFileOverview.ActivityDate" Caption="Date of File Overview">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="LastFileOverview.Comments" Caption="Last File Overview">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ReferralContact.Name" Caption="Referral">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ReferralTeam" Caption="Office">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="CreateDate" Caption="File Created">
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <%--                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.PropertyAddress" Caption="Full Property Address">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="PropertyOwner.FirstName" Caption="First Name">
                                                     </dx:GridViewDataTextColumn>
@@ -607,7 +636,7 @@
                                                     <dx:GridViewDataTextColumn FieldName="Duration" Caption="Duration">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">
-                                                    </dx:GridViewDataTextColumn>
+                                                    </dx:GridViewDataTextColumn>--%>
                                                 </Columns>
                                             </dx:ASPxGridView>
                                         </div>
@@ -674,13 +703,13 @@
                                         <dx:ListEditItem Value="LastActivity" Text="Last Activity" />
                                         <dx:ListEditItem Value="Owner" Text="Assgin To" />
                                         <dx:ListEditItem Value="BBLE" Text="Comments" />
-                                    </Items>                                    
+                                    </Items>
                                     <ClientSideEvents />
                                 </dx:ASPxCheckBoxList>
                                 <dx:ASPxButton runat="server" Text="View" ID="btnViewReport" UseSubmitBehavior="false">
                                     <ClientSideEvents Click="function(s,e){AllLeadsGridClient.PerformCallback();}" />
                                 </dx:ASPxButton>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                 </div>
