@@ -1212,6 +1212,13 @@
       <DependentUpon>AssignLeadsPopup.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PopupControl\BuyerEntityPopUpContent.aspx.designer.vb">
+      <DependentUpon>BuyerEntityPopUpContent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\BuyerEntityPopUpContent.aspx.vb">
+      <DependentUpon>BuyerEntityPopUpContent.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="PopupControl\DoorknockChart.aspx.designer.vb">
       <DependentUpon>DoorknockChart.aspx</DependentUpon>
     </Compile>
@@ -1894,6 +1901,7 @@
     <Content Include="css\accessibility.css" />
     <Content Include="css\base.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\Contacts.css" />
     <Content Include="css\dx.common.css" />
     <Content Include="css\dx.light.css" />
     <Content Include="css\font-awesome.css" />
@@ -2392,6 +2400,7 @@
     <Content Include="pdfViewer\web\viewer.html" />
     <Content Include="pdfViewer\web\viewer.js" />
     <Content Include="PopupControl\AssignLeadsPopup.ascx" />
+    <Content Include="PopupControl\BuyerEntityPopUpContent.aspx" />
     <Content Include="PopupControl\DoorknockChart.aspx" />
     <Content Include="PopupControl\EditHomeOwner.ascx" />
     <Content Include="PopupControl\MapsPopup.ascx" />

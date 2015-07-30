@@ -1,0 +1,208 @@
+﻿
+
+.barebone, .sidebar {
+    max-width: 464px;
+    width: 86%;
+    margin: 20px auto;
+}
+
+.barebone__title {
+    cursor: pointer;
+    user-select: none;
+}
+
+.barebone__content {
+    height: 0;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    overflow: hidden;
+    -webkit-transition: height linear .1s;
+    transition: height linear .1s;
+}
+
+    .barebone__content.js-accordion--open {
+        height: auto;
+    }
+
+.sidebar {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background-color: white;
+}
+
+.sidebar__title {
+    cursor: pointer;
+    user-select: none;
+}
+
+.sidebar__content {
+    height: 0;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    overflow: hidden;
+    -webkit-transition: height linear .1s;
+    transition: height linear .1s;
+}
+
+    .sidebar__content.js-accordion--open {
+        height: auto;
+    }
+
+.sidebar__item {
+    border: 1px solid #ddd;
+    border-top: 0;
+}
+
+    .sidebar__item:first-child {
+        border-top: 1px solid #ddd;
+    }
+
+.sidebar__title {
+    position: relative;
+    padding: 10px 20px;
+    -webkit-transition: all ease-out .25s;
+    transition: all ease-out .25s;
+    font-weight: bold;
+    padding-right: 40px;
+}
+
+    .sidebar__title::after, .sidebar__title:after {
+        position: absolute;
+        content: '+';
+        right: 14px;
+        top: 50%;
+        -webkit-transform: translate(0%, -50%);
+        -ms-transform: translate(0%, -50%);
+        transform: translate(0%, -50%);
+        width: 22px;
+        height: 22px;
+        text-align: center;
+        background-color: white;
+        color: #666;
+        border-radius: 100%;
+        line-height: 23px;
+    }
+
+    .sidebar__title.js-accordion--open {
+        /*background-color: #eee;*/
+    }
+
+        .sidebar__title.js-accordion--open::after, .sidebar__title.js-accordion--open:after {
+            content: '–';
+            line-height: 20px;
+        }
+
+.sidebar__content {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 14px;
+    padding-top: 0;
+    padding-bottom: 0;
+    -webkit-transition: height ease-out .25s;
+    transition: height ease-out .25s;
+}
+
+.inner {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.inner__title {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.inner__content {
+    height: 0;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    overflow: hidden;
+    -webkit-transition: height linear .1s;
+    transition: height linear .1s;
+}
+
+    .inner__content.js-accordion--open {
+        height: auto;
+    }
+
+.inner__item {
+    border: 1px solid #ddd;
+    border-top: 0;
+}
+
+    .inner__item:first-child {
+        border-top: 1px solid #ddd;
+    }
+
+.inner__title {
+    position: relative;
+    padding: 10px 20px;
+    -webkit-transition: all ease-out .25s;
+    transition: all ease-out .25s;
+    font-weight: bold;
+    padding-right: 60px;
+}
+
+    /*.inner__title::after, .inner__title:after {
+                position: absolute;
+                content: '+';
+                right: 14px;
+                top: 50%;
+                -webkit-transform: translate(0%, -50%);
+                -ms-transform: translate(0%, -50%);
+                transform: translate(0%, -50%);
+                width: 22px;
+                height: 22px;
+                text-align: center;
+                background-color: white;
+                color: #666;
+                border-radius: 100%;
+                line-height: 23px;
+            }*/
+
+    .inner__title.js-accordion--open {
+        background-color: #eee;
+    }
+
+        .inner__title.js-accordion--open::after, .inner__title.js-accordion--open:after {
+            content: '–';
+            line-height: 20px;
+        }
+
+.inner__content {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 14px;
+    padding-top: 0;
+    padding-bottom: 0;
+    -webkit-transition: height ease-out .25s;
+    transition: height ease-out .25s;
+}
+
+.sidebar p, .inner p {
+    margin-bottom: 20px;
+    color: #777;
+    line-height: 20px;
+}
+
+    .sidebar p:first-child, .inner p:first-child {
+        margin-top: 20px;
+    }
+
+    .sidebar p strong, .inner p strong {
+        font-weight: bold;
+        color: #444;
+    }
+
+.notafter:after {
+    content: none !important;
+}
+
+.nodisplay {
+    display: none;
+}

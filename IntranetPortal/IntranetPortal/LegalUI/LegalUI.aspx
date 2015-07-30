@@ -250,7 +250,7 @@
                                             <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="CompleteResearch()" data-original-title="Complete Research"></i>
                                             <% End If%>
 
-                                          <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or Me.Page.User.IsInRole("Legal-Manager") Then%>
+                                          <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or (ShowReassginBtn()) Then%>
                                             <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Attorney');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to paralegal / Attorney"></i>
                                             <% End If%>
 
@@ -267,7 +267,7 @@
                                     </ul>
                                 </div>
                                 <% End If%>
-                                <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
+                                <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview or ShowReassginBtn Then%>
                                 <dx:ASPxPopupControl ClientInstanceName="popupSelectAttorneyCtr" Width="300px" Height="300px"
                                     MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
                                     HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"

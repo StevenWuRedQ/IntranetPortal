@@ -4,14 +4,14 @@ portalApp.directive('ssDate', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
-            $(el).datepicker({});
+            $(el).datepicker({ showOnFocus: false });
 
             scope.$watch(attrs.ngModel, function (newValue, oldValue) {
                 var dateStr = newValue;
-                if (!dateStr && oldValue != null) {
-                    scope.$eval(attrs.ngModel + "='" + oldValue + "'");
-                    return;
-                }
+                //if (!dateStr && oldValue != null) {
+                //    scope.$eval(attrs.ngModel + "='" + oldValue + "'");
+                //    return;
+                //}
                 dateStr = !dateStr ? '' : dateStr.toString();
                 if (dateStr && dateStr.indexOf('-') >= 0) {
                     var dd = new Date(dateStr);

@@ -3,7 +3,7 @@
         return '';
     }
     return name[0].toUpperCase();
-} getNameFirst
+} 
 
 Array.prototype.getUnique = function () {
     var u = {}, a = [];

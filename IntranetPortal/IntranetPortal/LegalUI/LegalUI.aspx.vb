@@ -54,7 +54,11 @@ Public Class LegalUI
         End If
 
     End Sub
-
+    Public Function ShowReassginBtn() As Boolean
+        Dim isCloase = (Not String.IsNullOrEmpty(Me.Request.QueryString("lc"))) AndAlso Me.Request.QueryString("lc") = "4"
+        Dim isNeedReAssginBtn = Me.Page.User.IsInRole("Legal-Manager") AndAlso isCloase
+        Return isNeedReAssginBtn
+    End Function
     Sub Page_init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
 
 

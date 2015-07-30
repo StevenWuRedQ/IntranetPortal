@@ -1,93 +1,13 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="VendorsPopUpContent.aspx.vb" Inherits="IntranetPortal.VendorsPopUpContent" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="BuyerEntityPopUpContent.aspx.vb" Inherits="IntranetPortal.BuyerEntityPopUpContent" MasterPageFile="~/Content.Master" %>
 
-<%@ Import Namespace="IntranetPortal.ShortSale" %>
+<asp:Content runat="server" ContentPlaceHolderID="head">
+</asp:Content>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml" ng-app="PortalApp" xmlns:ng="http://angularjs.org">
-<head runat="server">
-    <title></title>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
-    <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
-    <script src="/Scripts/bootstrap-datepicker.js"></script>
-    <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
-    
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
-    <link href="/css/Contacts.css" rel="stylesheet" type="text/css"/>
-    <script>
-        //$(document).ready(function () {
-        //    $(".ss_phone").mask("(000) 000-0000");
-
-        //});
-
-    </script>
-    <script>
-        $.fn.accordion = function (options) {
-            var settings = $.extend({
-                autoCollapse: false
-            }, options);
-
-            var
-              $accordion = $(this),
-              blockName = $accordion.attr('data-block'),
-              $items = $('.' + blockName + '__item', $accordion);
-
-            $accordion.delegate('.' + blockName + '__title', 'click', triggerAccordion);
-
-            function triggerAccordion() {
-                var
-                  $that = $(this),
-                  $parent = $that.parent(),
-                  $content = $parent.children('.' + blockName + '__content'),
-                  isOpen = $that.hasClass('js-accordion--open'),
-                  autoCollapse = true,
-                  contentHeight = $content.prop('scrollHeight');
-
-                if (isOpen) {
-                    $that.removeClass('js-accordion--open');
-                    $parent.removeClass('js-accordion--open');
-                    $content.css('height', contentHeight);
-                    setTimeout(function () {
-                        $content.removeClass('js-accordion--open').css('height', '');
-                    }, 4);
-                } else {
-                    if (settings.autoCollapse) {
-                        //auto collapse open accordions
-                    }
-                    $that.addClass('js-accordion--open');
-                    $parent.addClass('js-accordion--open');
-                    $content.addClass('js-accordion--open').css('height', contentHeight).one('webkitTransitionEnd', event, function () {
-                        if (event.propertyName === 'height') {
-                            $(this).css('height', '');
-                        }
-                    });
-                }
-            }
-        };
-
-        $(document).ready(function () {
-            $('.js-sidebar').accordion();
-
-        });
-    </script>
-
-  
-
-    <%--<script src="/Scripts/angular.js"></script>--%>
-</head>
-<body ng-controller="PortalCtrl" id="PortalCtrl">
-    <form id="form1" runat="server">
-        <link href="/css/stevencss.css?v=1.02" rel="stylesheet" type="text/css" />
+<asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
+    <div id="BuyerEntityCtrl" ng-controller="BuyerEntityCtrl">
         <div style="color: #b1b2b7" class="clearfix">
             <div class="row" style="margin: 0px">
-               
+
                 <input type="hidden" id="CurrentUser" value="<%= Page.User.Identity.Name%>" />
                 <div class="col-md-3">
 
@@ -95,7 +15,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close"  data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                     <h4 class="modal-title">Add Group</h4>
                                 </div>
                                 <div class="modal-body">
@@ -114,7 +34,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="height: 590px;overflow: auto">
+                    <div style="height: 590px; overflow: auto">
 
                         <div data-block="sidebar" class="sidebar js-sidebar">
                             <div class="sidebar__item">
@@ -289,8 +209,8 @@
                                         <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.ContactId==currentContact.ContactId? 'popup_employee_list_item_active':''" ng-repeat="contact in groupedcontact.data|orderBy:predicate| filter:query.Name| ByContact:query ">
                                             <div>
                                                 <div style="font-weight: 900; font-size: 16px">
-                                                    <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}} <a  ng-show="contact.Corps" data-toggle="popover" title="Companies" data-trigger="focus" data-html="true" data-content="{{contact.Corps.join('<br />')}}"><i class="fa fa-eye" onlick=""></i></a>  </label>
-                                                    
+                                                    <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}} <a ng-show="contact.Corps" data-toggle="popover" title="Companies" data-trigger="focus" data-html="true" data-content="{{contact.Corps.join('<br />')}}"><i class="fa fa-eye" onlick=""></i></a></label>
+
                                                     <%--<i class="fa fa-list-alt icon_btn" style="float: right; margin-right: 20px; margin-top: 0px; font-size: 18px;"></i>--%>
                                                 </div>
                                                 <%--<div style="font-size: 14px">Eviction</div>--%>
@@ -319,7 +239,7 @@
                                     <td>
                                         <div class="detail_right">
                                             <div style="font-size: 30px; color: #234b60">{{currentContact.Name}}</div>
-                                            
+
                                             <%-- <div style="font-size: 16px; color: #234b60; font-weight: 900">Sales Agent</div>--%>
                                         </div>
                                     </td>
@@ -342,13 +262,13 @@
                                     </td>
                                 </tr>--%>
                                 <%--do not eidt empolyee name --%>
-                                
+
                                 <tr class="vendor_info" ng-show="currentContact.GroupId!=4">
-                                    <td class="vendor_info_left" >Name
+                                    <td class="vendor_info_left">Name
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" ng-model="currentContact.Name" placeholder="Click to input">
+                                            <input class="form-control " ng-model="currentContact.Name" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
@@ -357,7 +277,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" ng-model="currentContact.CorpName" placeholder="Click to input">
+                                            <input class="form-control " ng-model="currentContact.CorpName" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
@@ -367,7 +287,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" ng-model="currentContact.Office" placeholder="Click to input">
+                                            <input class="form-control " ng-model="currentContact.Office" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
@@ -376,26 +296,26 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.OfficeNO" placeholder="Click to input">
+                                            <input class="form-control " input-mask="(000) 000-0000" ng-model="currentContact.OfficeNO" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
-                                 <tr class="vendor_info">
+                                <tr class="vendor_info">
                                     <td class="vendor_info_left">Customer Service
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.CustomerService" placeholder="Click to input">
+                                            <input class="form-control " input-mask="(000) 000-0000" ng-model="currentContact.CustomerService" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
-                                
+
                                 <tr class="vendor_info">
                                     <td class="vendor_info_left">Extension
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" ng-model="currentContact.Extension" placeholder="Click to input">
+                                            <input class="form-control " ng-model="currentContact.Extension" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
@@ -404,23 +324,17 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.Fax" placeholder="Click to input">
+                                            <input class="form-control " input-mask="(000) 000-0000" ng-model="currentContact.Fax" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
-                                <%--<tr class="vendor_info">
-                                    <td class="vendor_info_left">Employee Since
-                                    </td>
-                                    <td>
-                                        <div class="detail_right">{{currentContact.Office}}</div>
-                                    </td>
-                                </tr>--%>
+
                                 <tr class="vendor_info">
                                     <td class="vendor_info_left">Cell
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.Cell" placeholder="Click to input">
+                                            <input class="form-control " input-mask="(000) 000-0000" ng-model="currentContact.Cell" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
@@ -430,7 +344,7 @@
                                     <td>
                                         <div class="detail_right">
                                             <span style="color: #3993c1">
-                                                <input class="form-control contact_info_eidt" style="color: #3993c1" ng-model="currentContact.Email" placeholder="Click to input">
+                                                <input class="form-control " style="color: #3993c1" ng-model="currentContact.Email" placeholder="Click to input">
                                             </span>
 
                                         </div>
@@ -441,11 +355,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <select class="form-control contact_info_eidt" ng-model="currentContact.Type">
-                                                <option value=""></option>
-                                                <% For Each v In getVenderTypes()%>
-                                                <option value="<%= v.key %>"><%= v.value %> </option>
-                                                <% Next%>
+                                            <select class="form-control " ng-model="currentContact.Type">
                                             </select>
                                         </div>
                                     </td>
@@ -455,11 +365,9 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <select class="form-control contact_info_eidt" ng-model="currentContact.GroupId">
+                                            <select class="form-control " ng-model="currentContact.GroupId">
                                                 <option value=""></option>
-                                                <% For Each v In GroupType.GetAllGroupType(True)%>
-                                                <option value="<%= v.Id%>"><%= v.GroupName %> </option>
-                                                <% Next%>
+
                                             </select>
                                         </div>
                                     </td>
@@ -469,8 +377,8 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <span >
-                                                <input class="form-control contact_info_eidt" ng-model="currentContact.Address" placeholder="Click to input">
+                                            <span>
+                                                <input class="form-control " ng-model="currentContact.Address" placeholder="Click to input">
                                             </span>
 
                                         </div>
@@ -495,44 +403,8 @@
             </div>
 
         </div>
-    </form>
-    <!-- Angular Material Dependencies -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.js"></script>
-
-    
-   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="/Scripts/stevenjs.js"></script>
-    <script src="/Scripts/PortalApp.js?v=1.6"></script>
-    <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
-    <%--  <script>
-         $(document).ready(function () {
-                 format_input();
-             }
-         )
-    </script>--%>
+    </div>
     <script>
-        function saveContact()
-        {
-            angular.element(document.getElementById("PortalCtrl")).scope().SaveCurrent();
-        }
-        $(document).ready(function()
-        {
-            $('body').popover({
-                selector: '[data-toggle="popover"]',
-                placement: 'bottom',
-                html: true,
-                trigger: 'focus'
-            })
-        })
+
     </script>
-    <style>
-        .popover-title,.popover-content {
-            color:#b1b2b7;
-        }
-    </style>
-    <script src="/Scripts/bootstrap.min.js"></script>
-</body>
-</html>
+</asp:Content>
