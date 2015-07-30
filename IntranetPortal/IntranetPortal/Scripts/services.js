@@ -58,22 +58,21 @@ app.service('ptContactServices', ['$http', function ($http) {
           });
     }
 
-    this.GetContactById = function (id) {
-        return allContact.filter(function (o) { return o.ContactId == id })[0];
+    this.getContactById = function (id) {
+        if(allContact) return allContact.filter(function (o) { return o.ContactId == id })[0];
     }
 
-    this.GetContactByName = function (teamName) {
-        if (allContact && teamName) {
-            debugger;
-            return allContact.filter(function (o) { if (o.Name) { return o.Name.trim().toLowerCase().indexOf(teamName.trim().toLowerCase()) >= 0 } return false })[0];
-           
-        }
-        return {}
+    this.getContactByName = function (name) {
+        if(allContact) return allContact.filter(function (o) { if (o.Name && name) { return o.Name.trim().toLowerCase() === name.trim().toLowerCase() } return false })[0];
     }
 
-    this.GetTeamByName = function (teamName) {
-        if (teamName) {
-            return allTeam.filter(function (o) { return o.Name.trim() == teamName.trim() })[0];
+    this.getContact = function (id, name) {
+        if(allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
+    }
+
+    this.getTeamByName = function (teamName) {
+        if (allTeam) {
+            return allTeam.filter(function (o) {if(o.Name && teamName) return o.Name.trim() == teamName.trim() })[0];
         }
 
     }

@@ -8,15 +8,15 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.ProcessorName" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.Processor=$item.ContactId">
+                <input type="text" class="ss_form_input" ng-model="SsCase.ProcessorName" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.Processor=$item.ContactId" name-from-id="SsCase.Processor" >
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Phone #</label>
-                <input class="ss_form_input" type="phone" ng-model="GetContactById(SsCase.Processor).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.Processor, SsCase.ProcessorName).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.Processor).Email" type="email" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.Processor, SsCase.ProcessorName).Email" type="email" readonly="readonly">
             </li>
         </ul>
     </div>
@@ -27,20 +27,19 @@
         <i class="fa fa-expand icon_btn text-primary" ng-show="referralCollapse" ng-click="referralCollapse=!referralCollapse"></i></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
-
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Agent</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.ReferralUserName" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.Referral=$item.ContactId">
+                <input type="text" class="ss_form_input" ng-model="SsCase.ReferralUserName" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.Referral=$item.ContactId" name-from-id="SsCase.Referral">
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.Referral).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.Referral, SsCase.ReferralUserName).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.Referral).Email" type="email" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.Referral, SsCase.ReferralUserName).Email" type="email" readonly="readonly">
             </li>
         </ul>
         <ul class="ss_form_box clearfix" collapse="!referralCollapse">
@@ -65,37 +64,37 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Manager</label>
-                <input class="ss_form_input" ng-model="ptContactServices.GetTeamByName(SsCase.ReferralTeam).Manager">
+                <input class="ss_form_input" ng-model="ptContactServices.getTeamByName(SsCase.ReferralTeam).Manager">
             </li>
             <li class="ss_form_item" style="display: none">
                 <label class="ss_form_input_title">ContactId</label>
-                <input class="ss_form_input" ng-model="ptContactServices.GetContactByName(ptContactServices.GetTeamByName(SsCase.ReferralTeam).Manager).ContactId" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContactByName(ptContactServices.getTeamByName(SsCase.ReferralTeam).Manager).ContactId" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
-                <input class="ss_form_input" ng-model="ptContactServices.GetContactByName(ptContactServices.GetTeamByName(SsCase.ReferralTeam).Manager).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContactByName(ptContactServices.getTeamByName(SsCase.ReferralTeam).Manager).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="ptContactServices.GetContactByName(ptContactServices.GetTeamByName(SsCase.ReferralTeam).Manager).Email" type="email" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContactByName(ptContactServices.getTeamByName(SsCase.ReferralTeam).Manager).Email" type="email" readonly="readonly">
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Assistant</label>
-                <input class="ss_form_input" ng-model="ptContactServices.GetTeamByName(SsCase.ReferralTeam).Assistant" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getTeamByName(SsCase.ReferralTeam).Assistant" readonly="readonly">
             </li>
             <li class="ss_form_item" style="display: none">
                 <label class="ss_form_input_title">ContactId</label>
-                <input class="ss_form_input" ng-model="ptContactServices.GetContactByName(ptContactServices.GetTeamByName(SsCase.ReferralTeam).Assistant).ContactId" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContactByName(ptContactServices.getTeamByName(SsCase.ReferralTeam).Assistant).ContactId" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
-                <input class="ss_form_input" ng-model="ptContactServices.GetContactByName(ptContactServices.GetTeamByName(SsCase.ReferralTeam).Assistant).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContactByName(ptContactServices.getTeamByName(SsCase.ReferralTeam).Assistant).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="ptContactServices.GetContactByName(ptContactServices.GetTeamByName(SsCase.ReferralTeam).Assistant).Email" type="email" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContactByName(ptContactServices.getTeamByName(SsCase.ReferralTeam).Assistant).Email" type="email" readonly="readonly">
             </li>
         </ul>
     </div>
@@ -107,29 +106,29 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <div class="contact_box" dx-select-box="InitContact('SsCase.ListingAgent')"></div>
+                <input type="text" class="ss_form_input" ng-model="SsCase.ListingAgentName" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.ListingAgent=$item.ContactId" name-from-id="SsCase.ListingAgent">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.ListingAgent).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.ListingAgent, SsCase.ListingAgentName).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.ListingAgent).Email" type="email" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.ListingAgent, SsCase.ListingAgentName).Email" type="email" readonly="readonly">
             </li>
         </ul>
         <ul class="ss_form_box clearfix" collapse="!listingAgentCollapse">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Broker</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.ListingAgent).Broker" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.ListingAgent, SsCase.ListingAgentName).Broker" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Address</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.ListingAgent).Address" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.ListingAgent, SsCase.ListingAgentName).Address" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office #</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.ListingAgent).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.ListingAgent, SsCase.ListingAgentName).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
         </ul>
     </div>
@@ -142,29 +141,29 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <div class="contact_box" dx-select-box="InitContact('SsCase.SellerAttorney')"></div>
+                <input type="text" class="ss_form_input" ng-model="SsCase.SellerAttorneyName" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.SellerAttorney=$item.ContactId" name-from-id="SsCase.SellerAttorney">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.SellerAttorney).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.SellerAttorney, SsCase.SellerAttorneyName).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.SellerAttorney).Email" type="email" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.SellerAttorney, SsCase.SellerAttorneyName).Email" type="email" readonly="readonly">
             </li>
         </ul>
         <ul class="ss_form_box clearfix" collapse="!sellerAttorneyCollapse">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.SellerAttorney).Office" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.SellerAttorney, SsCase.SellerAttorneyName).Office" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Address</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.SellerAttorney).Address" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.SellerAttorney, SsCase.SellerAttorneyName).Address" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office #</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.SellerAttorney).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.SellerAttorney, SsCase.SellerAttorneyName).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
         </ul>
     </div>
@@ -190,7 +189,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Signor</label>
-                <div class="contact_box" dx-select-box="InitContact('SsCase.BuyerEntity.SignorId')"></div>
+                <input type="text" class="ss_form_input" ng-model="SsCase.BuyerEntity.Signor" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.BuyerEntity.SignorId=$item.ContactId" name-from-id="SsCase.BuyerEntity.SignorId">
             </li>
         </ul>
         <ul class="ss_form_box clearfix" collapse="!buyerCollapse">
@@ -200,7 +199,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.BuyerEntity.SignorId).OfficeNO" mask="(999) 999-9999" clean="true">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerEntity.SignorId, SsCase.BuyerEntity.Signor).OfficeNO" mask="(999) 999-9999" clean="true">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Tax Id</label>
@@ -220,29 +219,29 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <div class="contact_box" dx-select-box="InitContact('SsCase.BuyerAttorney')"></div>
+                <input type="text" class="ss_form_input" ng-model="SsCase.BuyerAttorneyName" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.BuyerAttorney=$item.ContactId" name-from-id="SsCase.BuyerAttorney">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.BuyerAttorney).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerAttorney, SsCase.BuyerAttorneyName).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.BuyerAttorney).Email" type="email" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerAttorney, SsCase.BuyerAttorneyName).Email" type="email" readonly="readonly">
             </li>
         </ul>
         <ul class="ss_form_box clearfix" collapse="!buyerAttorneryCollapse">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.BuyerAttorney).Office" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerAttorney, SsCase.BuyerAttorneyName).Office" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office Address</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.BuyerAttorney).Address" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerAttorney, SsCase.BuyerAttorneyName).Address" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office #</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.BuyerAttorney).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerAttorney, SsCase.BuyerAttorneyName).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
         </ul>
     </div>

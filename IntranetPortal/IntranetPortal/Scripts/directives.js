@@ -35,6 +35,20 @@ portalApp.directive('inputMask', function () {
     };
 });
 
+portalApp.directive('nameFromId', function (ptContactServices) {
+    return {
+        restrict: 'A',
+        link: function postLink(scope, el, attrs) {
+            scope.$watch(attrs.nameFromId, function (newValue, oldValue) {
+                if (newValue != oldValue) {
+                    scope.$eval(attrs.ngModel + "='" + ptContactServices.getContactById(newValue).Name + "'");
+                }
+            })
+        }
+
+    }
+});
+
 portalApp.directive('radioInit', function () {
     return {
         restrict: 'A',
@@ -101,3 +115,4 @@ portalApp.directive('ptRadio', function () {
 
     }
 });
+
