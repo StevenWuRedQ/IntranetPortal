@@ -92,6 +92,9 @@
     <Compile Include="ADOEntity\CleareneceNote.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\CorporationEntity.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\Employee.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
@@ -168,6 +171,7 @@
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="CleareneceNote.vb" />
+    <Compile Include="CorporationEntity.vb" />
     <Compile Include="EvictionCase.vb" />
     <Compile Include="GroupType.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

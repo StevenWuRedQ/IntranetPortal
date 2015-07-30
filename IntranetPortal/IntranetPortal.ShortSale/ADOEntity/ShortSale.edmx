@@ -15,6 +15,33 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="CorporationEntity">
+          <Key>
+            <PropertyRef Name="EntityId" />
+          </Key>
+          <Property Name="EntityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CorpName" Type="nvarchar" MaxLength="256" />
+          <Property Name="Address" Type="nvarchar" MaxLength="256" />
+          <Property Name="PropertyAssigned" Type="nvarchar" MaxLength="256" />
+          <Property Name="FillingDate" Type="datetime" />
+          <Property Name="Signer" Type="nvarchar" MaxLength="50" />
+          <Property Name="Office" Type="nvarchar" MaxLength="50" />
+          <Property Name="EIN" Type="nvarchar" MaxLength="50" />
+          <Property Name="AssignOn" Type="datetime" />
+          <Property Name="ReceivedOn" Type="datetime" />
+          <Property Name="SubmittedtoAcris" Type="bit" />
+          <Property Name="SubmittedOn" Type="datetime" />
+          <Property Name="RecordedOn" Type="datetime" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="1024" />
+          <Property Name="EINFile" Type="nvarchar" MaxLength="256" />
+          <Property Name="File2" Type="nvarchar" MaxLength="256" />
+          <Property Name="File3" Type="nvarchar" MaxLength="256" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -464,6 +491,7 @@
         </EntityType>
         <EntityContainer Name="IntranetPortalModelStoreContainer">
           <EntitySet Name="CleareneceNotes" EntityType="Self.CleareneceNotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CorporationEntity" EntityType="Self.CorporationEntity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EvictionCases" EntityType="Self.EvictionCases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupTypes" EntityType="Self.GroupTypes" Schema="dbo" store:Type="Tables" />
@@ -511,6 +539,7 @@
           <EntitySet Name="ShortSaleOverviews" EntityType="IntranetPortalModel.ShortSaleOverview" />
           <EntitySet Name="ShortSaleBuyers" EntityType="IntranetPortalModel.ShortSaleBuyer" />
           <EntitySet Name="ShortSaleOffers" EntityType="IntranetPortalModel.ShortSaleOffer" />
+          <EntitySet Name="CorporationEntities" EntityType="IntranetPortalModel.CorporationEntity" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -968,6 +997,33 @@
           <Property Name="BuyerEntity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Signor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateCorpFormed" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CorporationEntity">
+          <Key>
+            <PropertyRef Name="EntityId" />
+          </Key>
+          <Property Name="EntityId" Type="Int32" Nullable="false" />
+          <Property Name="CorpName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyAssigned" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FillingDate" Type="DateTime" Precision="3" />
+          <Property Name="Signer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Office" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AssignOn" Type="DateTime" Precision="3" />
+          <Property Name="ReceivedOn" Type="DateTime" Precision="3" />
+          <Property Name="SubmittedtoAcris" Type="Boolean" />
+          <Property Name="SubmittedOn" Type="DateTime" Precision="3" />
+          <Property Name="RecordedOn" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="EINFile" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="File2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="File3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1449,6 +1505,34 @@
                 <ScalarProperty Name="OfferType" ColumnName="OfferType" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="OfferId" ColumnName="OfferId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CorporationEntities">
+            <EntityTypeMapping TypeName="IntranetPortalModel.CorporationEntity">
+              <MappingFragment StoreEntitySet="CorporationEntity">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="File3" ColumnName="File3" />
+                <ScalarProperty Name="File2" ColumnName="File2" />
+                <ScalarProperty Name="EINFile" ColumnName="EINFile" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="RecordedOn" ColumnName="RecordedOn" />
+                <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
+                <ScalarProperty Name="SubmittedtoAcris" ColumnName="SubmittedtoAcris" />
+                <ScalarProperty Name="ReceivedOn" ColumnName="ReceivedOn" />
+                <ScalarProperty Name="AssignOn" ColumnName="AssignOn" />
+                <ScalarProperty Name="EIN" ColumnName="EIN" />
+                <ScalarProperty Name="Office" ColumnName="Office" />
+                <ScalarProperty Name="Signer" ColumnName="Signer" />
+                <ScalarProperty Name="FillingDate" ColumnName="FillingDate" />
+                <ScalarProperty Name="PropertyAssigned" ColumnName="PropertyAssigned" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CorpName" ColumnName="CorpName" />
+                <ScalarProperty Name="EntityId" ColumnName="EntityId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

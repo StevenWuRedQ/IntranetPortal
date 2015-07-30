@@ -43,5 +43,6 @@ Partial Public Class ShortSaleEntities
     Public Overridable Property ShortSaleOverviews() As DbSet(Of ShortSaleOverview)
     Public Overridable Property ShortSaleBuyers() As DbSet(Of ShortSaleBuyer)
     Public Overridable Property ShortSaleOffers() As DbSet(Of ShortSaleOffer)
+    Public Overridable Property CorporationEntities() As DbSet(Of CorporationEntity)
 
 End Class
