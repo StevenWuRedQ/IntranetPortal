@@ -561,19 +561,29 @@ Public Class Troubleshooting
 
     Private Sub btnImportOffer_Click(sender As Object, e As EventArgs) Handles btnImportOffer.Click
 
-        Dim allCases = ShortSaleCase.GetCase(2054)
+        For Each ssCase In ShortSaleCase.GetAllCase
 
+            ImportCaseOffer(ssCase)
 
-
+        Next
     End Sub
 
     Private Sub ImportCaseOffer(ssCase As ShortSaleCase)
-        
         If ssCase.HasOfferSubmit Then
+            Dim offers = ShortSaleOffer.GetOffers(ssCase.BBLE)
+
+            If offers IsNot Nothing AndAlso offers.Count > 0 Then
+                Return
+            End If
+
             Dim offer = New ShortSaleOffer
             offer.BBLE = ssCase.BBLE
-            offer.OfferType = "Initial Offer"
+            offer.OfferAmount = ssCase.OfferSubmited
+            offer.DateSubmited = ssCase.OfferDate
+            offer.CreateBy = "Imported"
+            offer.CreateDate = DateTime.Now
 
+            offer.Save()
         End If
     End Sub
 End Class
