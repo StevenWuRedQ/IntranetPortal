@@ -35,5 +35,7 @@ Partial Public Class PropertyOccupant
     Public Property CreateBy As String
     Public Property CreateDate As Nullable(Of Date)
     Public Property Notes As String
+    Public Property BBLE As String
+    Public Property FloorId As Nullable(Of Integer)
 
 End Class

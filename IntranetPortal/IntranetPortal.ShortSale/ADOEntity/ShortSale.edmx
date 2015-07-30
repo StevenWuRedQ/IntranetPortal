@@ -200,6 +200,8 @@
             <PropertyRef Name="OccupantId" />
           </Key>
           <Property Name="OccupantId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="FloorId" Type="int" />
           <Property Name="CaseId" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
@@ -728,6 +730,8 @@
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="Notes" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="FloorId" Type="Int32" />
         </EntityType>
         <EntityType Name="TitleJudgementSearch">
           <Key>
@@ -1171,6 +1175,8 @@
           <EntitySetMapping Name="PropertyOccupants">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyOccupant">
               <MappingFragment StoreEntitySet="PropertyOccupants">
+                <ScalarProperty Name="FloorId" ColumnName="FloorId" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />

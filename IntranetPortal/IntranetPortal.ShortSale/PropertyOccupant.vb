@@ -5,9 +5,14 @@
         End Using
     End Function
 
+    Public Shared Function GetOccupantByBBLE(bble As String, floorId As Integer) As PropertyOccupant()
+        Using ctx As New ShortSaleEntities
+            Return ctx.PropertyOccupants.Where(Function(pc) pc.BBLE = bble AndAlso pc.FloorId = floorId).ToArray
+        End Using
+    End Function
+
     Public Property DataStatus As ModelStatus
-   
-      
+
     Public Sub Save()
         Using context As New ShortSaleEntities
             Dim pbi = context.PropertyOccupants.Find(OccupantId)
