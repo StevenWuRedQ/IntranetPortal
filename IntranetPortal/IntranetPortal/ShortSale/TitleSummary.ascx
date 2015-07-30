@@ -504,7 +504,7 @@
                                             </h4>
                                             <%--margin-top: -35px;--%>
                                             <div style="float: right; margin-top: -35px;" class="form-inline">
-                                                <input style="margin-right: 20px; width: 250px; height: 30px;" class="form-control" id="QuickSearch" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); }">
+                                                <input style="margin-right: 20px; width: 250px; height: 30px;" class="form-control" id="QuickSearch" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid();return false; }">
                                                 <i class="fa fa-search tooltip-examples icon_btn grid_buttons" style="margin-right: 20px" onclick="SearchGrid()"></i>
                                                 <%-- <i class="fa fa-filter tooltip-examples icon_btn grid_buttons" style="margin-right: 40px"></i>--%>
                                                 <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" ></i>'></asp:LinkButton>
@@ -677,7 +677,7 @@
                                     </Items>                                    
                                     <ClientSideEvents />
                                 </dx:ASPxCheckBoxList>
-                                <dx:ASPxButton runat="server" Text="View" ID="btnViewReport">
+                                <dx:ASPxButton runat="server" Text="View" ID="btnViewReport" UseSubmitBehavior="false">
                                     <ClientSideEvents Click="function(s,e){AllLeadsGridClient.PerformCallback();}" />
                                 </dx:ASPxButton>
                             </div>                            
