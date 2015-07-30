@@ -488,7 +488,7 @@
             GetContactCallBack();
         }
         GetContactCallBack = function (contact) {
-            $.getJSON('/LegalUI/ContactService.svc/LoadContacts').done(function (data) {
+            $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
 
                 AllContact = data;
             });
@@ -523,7 +523,7 @@
 
         portalApp.controller('LegalCtrl', function ($scope, $http, $element, $parse) {
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
-            $http.post('/LegalUI/ContactService.svc/CheckInShortSale', { bble: leadsInfoBBLE }).success(function (data) {
+            $http.post('/Services/ContactService.svc/CheckInShortSale', { bble: leadsInfoBBLE }).success(function (data) {
 
                 $scope.LegalCase.InShortSale = data;
 
@@ -665,12 +665,12 @@
                     }
                     var d = $.Deferred();
                     if (loadOptions.searchValue) {
-                        $.getJSON('/LegalUI/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
+                        $.getJSON('/Services/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
                             d.resolve(data);
                         });
                     } else {
 
-                        $.getJSON('/LegalUI/ContactService.svc/LoadContacts').done(function (data) {
+                        $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
                             d.resolve(data);
                             AllContact = data;
                         });
@@ -683,7 +683,7 @@
                         return AllContact.filter(function (o) { return o.ContactId == key })[0];
                     }
                     var d = new $.Deferred();
-                    $.get('/LegalUI/ContactService.svc/GetAllContacts?id=' + key)
+                    $.get('/Services/ContactService.svc/GetAllContacts?id=' + key)
                         .done(function (result) {
                             d.resolve(result);
                         });
@@ -1056,7 +1056,7 @@
             $scope.DeleteItem = function (model, index) {
                 model.splice(index, 1);
             }
-            //$.getJSON('/LegalUI/ContactService.svc/GetAllContacts', function (data) {
+            //$.getJSON('/Services/ContactService.svc/GetAllContacts', function (data) {
 
             //    $scope.selectBoxData = data;
             //});

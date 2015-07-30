@@ -372,12 +372,12 @@
                     }
                     var d = $.Deferred();
                     if (loadOptions.searchValue) {
-                        $.getJSON('/LegalUI/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
+                        $.getJSON('/Services/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
                             d.resolve(data);
                         });
                     } else {
 
-                        $.getJSON('/LegalUI/ContactService.svc/LoadContacts').done(function (data) {
+                        $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
                             d.resolve(data);
                             AllContact = data;
                         });
@@ -390,7 +390,7 @@
                         return AllContact.filter(function (o) { return o.ContactId == key })[0];
                     }
                     var d = new $.Deferred();
-                    $.get('/LegalUI/ContactService.svc/GetAllContacts?id=' + key)
+                    $.get('/Services/ContactService.svc/GetAllContacts?id=' + key)
                         .done(function (result) {
                             d.resolve(result);
                         });
@@ -589,7 +589,7 @@
 
             $scope.SsCase.Mortgages = [{}];
 
-            $http.get('/LegalUI/ContactService.svc/getbanklist')
+            $http.get('/Services/ContactService.svc/getbanklist')
                 .success(function (data) {
                     $scope.bankNameOptions = data;
                 })

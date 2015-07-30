@@ -1364,6 +1364,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Services\TeamService.svc.vb">
+      <DependentUpon>TeamService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Settings.vb" />
     <Compile Include="ShortSale\NGShortSaleDealInfoTab.ascx.designer.vb">
       <DependentUpon>NGShortSaleDealInfoTab.ascx</DependentUpon>
@@ -1813,7 +1816,7 @@
     <Compile Include="WCFDataServices\CommonService.svc.vb">
       <DependentUpon>CommonService.svc</DependentUpon>
     </Compile>
-    <Compile Include="LegalUI\ContactService.svc.vb">
+    <Compile Include="Services\ContactService.svc.vb">
       <DependentUpon>ContactService.svc</DependentUpon>
     </Compile>
     <Compile Include="WCFDataServices\ICommonService.vb" />
@@ -3380,6 +3383,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\DataAPI\item1.disco" />
+    <Content Include="Services\TeamService.svc" />
     <Content Include="ShortSale\NGShortSaleDealInfoTab.ascx" />
     <Content Include="ShortSale\NGShortSaleMortgageTab.ascx" />
     <Content Include="ShortSale\SelectPartyUC.ascx" />
@@ -3443,7 +3447,7 @@
     <Content Include="ViewHomeOwner.aspx" />
     <Content Include="ViewLeadsInfo.aspx" />
     <Content Include="WCFDataServices\CommonService.svc" />
-    <Content Include="LegalUI\ContactService.svc" />
+    <Content Include="Services\ContactService.svc" />
     <Content Include="WCFDataServices\PortalDataService.svc" />
     <Content Include="WCFDataServices\PortalReportService.svc" />
     <Content Include="WebForm2.aspx" />
