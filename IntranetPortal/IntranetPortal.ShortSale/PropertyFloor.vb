@@ -48,7 +48,7 @@ Public Class PropertyFloor
     End Sub
 
     Private _evictionOccupants As PropertyOccupant()
-    Public Property EvictionOccupants As PropertyOccupant()
+    Public Property Occupants As PropertyOccupant()
         Get
             If _evictionOccupants Is Nothing Then
                 _evictionOccupants = PropertyOccupant.GetOccupantByBBLE(BBLE, FloorId)
