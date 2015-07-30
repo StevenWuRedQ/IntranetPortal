@@ -8,6 +8,8 @@ Imports IntranetPortal.ShortSale
 <AspNetCompatibilityRequirements(RequirementsMode:=AspNetCompatibilityRequirementsMode.Allowed)>
 Public Class ContactService
 
+   
+    ' Add more operations here and mark them with <OperationContract()>
     ' To use HTTP GET, add <WebGet()> attribute. (Default ResponseFormat is WebMessageFormat.Json)
     ' To create an operation that returns XML,
     '     add <WebGet(ResponseFormat:=WebMessageFormat.Xml)>,
@@ -36,7 +38,7 @@ Public Class ContactService
     <WebGet()>
     Public Function LoadContacts() As Channels.Message ' As List(Of PartyContact)
         Return PartyContact.getAllContact().ToJson()
-       
+
     End Function
     <OperationContract()>
     <WebGet()>
@@ -55,6 +57,11 @@ Public Class ContactService
         Return ShortSaleCase.InShortSale(BBLE).ToJson
         ' Add your operation implementation here
     End Function
-    ' Add more operations here and mark them with <OperationContract()>
+    <OperationContract()>
+   <WebGet()>
+    Public Function GetAllBuyerEntities() As Channels.Message
 
+        Return ShortSale.CorporationEntity.GetAllEntities().OrderBy(Function(c) c.CorpName).ToJson
+    End Function
+    ' Add more operations here and mark them with <OperationContract()>
 End Class

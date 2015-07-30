@@ -2444,6 +2444,7 @@
     <Content Include="Scripts\chartjs-modules\dx.module-viz-sparklines.js" />
     <Content Include="Scripts\chartjs-modules\dx.module-viz-vectormap.debug.js" />
     <Content Include="Scripts\chartjs-modules\dx.module-viz-vectormap.js" />
+    <Content Include="Scripts\ContactJs.js" />
     <Content Include="Scripts\devextreme-localization\dx.webappjs.de.js" />
     <Content Include="Scripts\devextreme-localization\dx.webappjs.ja.js" />
     <Content Include="Scripts\devextreme-localization\dx.webappjs.ru.js" />

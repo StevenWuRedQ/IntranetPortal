@@ -206,3 +206,12 @@
 .nodisplay {
     display: none;
 }
+
+.title_selected,.sidebar__title:hover.inner__item:hover
+{
+    background:#eee;
+}
+.input_info_table
+{
+    padding:3px 0;
+}

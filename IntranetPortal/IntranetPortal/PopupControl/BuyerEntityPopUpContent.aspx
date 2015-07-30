@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="BuyerEntityPopUpContent.aspx.vb" Inherits="IntranetPortal.BuyerEntityPopUpContent" MasterPageFile="~/Content.Master" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
+    <link href="/css/Contacts.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/ContactJs.js"></script>
 </asp:Content>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
@@ -34,28 +36,19 @@
                             </div>
                         </div>
                     </div>
-                    <div style="height: 590px; overflow: auto">
+                    <div style="overflow: auto">
 
                         <div data-block="sidebar" class="sidebar js-sidebar">
-                            <div class="sidebar__item">
 
-                                <div class="sidebar__title notafter" ng-click="ChangeGroups({})">
-                                    <div class="clear-fix">All Vendors  <i class="fa fa-user-plus icon_btn layout_float_right" title="Add group" ng-click="popAddgroup(0)"></i></div>
+                            <div class="sidebar__item" ng-class="group.GroupName==selectType?'title_selected':''" ng-repeat="group in Groups">
 
-                                </div>
-                                <div class="sidebar__content nodisplay">
-                                </div>
-
-                            </div>
-                            <div class="sidebar__item" ng-repeat="group in Groups">
-
-                                <div class="sidebar__title" ng-class="group.SubGroups==null||group.SubGroups.length==0?'notafter':''" ng-click="ChangeGroups(group)">
-                                    <div>{{group.GroupName}} <i class="fa fa-user-plus icon_btn tooltip-examples layout_float_right" title="Add group" ng-click="popAddgroup(group.Id)"></i></div>
+                                <div class="sidebar__title" ng-class="group.SubGroups==null||group.SubGroups.length==0?'notafter':''" ng-click="ChangeGroups(group.GroupName)">
+                                    {{group.GroupName}}
                                 </div>
                                 <div class="sidebar__content" ng-class="group.SubGroups==null||group.SubGroups.length==0?'nodisplay':''">
                                     <div data-block="inner" class="inner js-sidebar">
-                                        <div class="inner__item" ng-repeat="sbgroup in group.SubGroups">
-                                            <div class="inner__title" ng-click="ChangeGroups(sbgroup)">
+                                        <div class="inner__item" ng-class="sbgroup.GroupName==selectType?'title_selected':''" ng-repeat="sbgroup in group.SubGroups">
+                                            <div class="inner__title" ng-click="ChangeGroups(sbgroup.GroupName)">
                                                 <div>{{sbgroup.GroupName}}</div>
                                             </div>
 
@@ -125,7 +118,7 @@
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">office #</label>
-                                                                <input class="ss_form_input ss_phone" input-mask="(000) 000-0000" ng-model="addContact.OfficeNO" />
+                                                                <input class="ss_form_input ss_phone" ng-model="addContact.OfficeNO" />
 
                                                                 <%--  <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input ss_phone" Native="true">
                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
@@ -134,7 +127,7 @@
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Customer Service</label>
-                                                                <input class="ss_form_input ss_phone" input-mask="(000) 000-0000" ng-model="addContact.CustomerService" />
+                                                                <input class="ss_form_input ss_phone" ng-model="addContact.CustomerService" />
 
                                                             </li>
                                                             <li class="ss_form_item">
@@ -145,12 +138,12 @@
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Fax </label>
                                                                 <%--<input class="ss_form_input"  ng-model="addContact.OfficeNO" />--%>
-                                                                <input class="ss_form_input" input-mask="(000) 000-0000" ng-model="addContact.Fax" />
+                                                                <input class="ss_form_input" ng-model="addContact.Fax" />
                                                             </li>
 
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Cell #</label>
-                                                                <input class="ss_form_input ss_phone" input-mask="(000) 000-0000" ng-model="addContact.Cell" />
+                                                                <input class="ss_form_input ss_phone" ng-model="addContact.Cell" />
                                                                 <%--<dx:ASPxTextBox runat="server" ID="txtCell" ng-model="addContact.Cell" CssClass="ss_form_input ss_phone" Native="true">
                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
                                                                     <ValidationSettings CausesValidation="false" RequiredField-IsRequired="false" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
@@ -169,10 +162,6 @@
                                                                 <label class="ss_form_input_title">Type</label>
 
                                                                 <select class="ss_form_input" ng-model="addContact.Type">
-                                                                    <option value=""></option>
-                                                                    <% For Each v In getVenderTypes()%>
-                                                                    <option value="<%= v.key %>"><%= v.value %> </option>
-                                                                    <% Next%>
                                                                 </select>
                                                             </li>
 
@@ -181,9 +170,7 @@
 
                                                                 <select class="ss_form_input" ng-model="addContact.GroupId">
                                                                     <option value=""></option>
-                                                                    <% For Each v In GroupType.GetAllGroupType(True)%>
-                                                                    <option value="<%= v.Id%>"><%= v.GroupName %> </option>
-                                                                    <% Next%>
+
                                                                 </select>
                                                             </li>
                                                         </ul>
@@ -200,16 +187,16 @@
                                 </div>
                             </div>
                             <input style="margin-top: 20px;" type="text" class="form-control" placeholder="Type employee's name" ng-model="query.Name">
-                            <div style="margin-top: 10px; height: 350px; overflow: auto" id="employee_list">
+                            <div style="margin-top: 10px; height: 450px; overflow: auto" id="employee_list">
                                 <div>
-                                    <ul class="list-group" style="box-shadow: none" ng-repeat="groupedcontact in showingContacts|orderBy:group_text_order">
+                                    <ul class="list-group" style="box-shadow: none">
                                         <%--<li class="list-group-item popup_menu_list_item" style="font-size: 18px; width: 80px; cursor: default; font-weight: 900">{{groupedcontact.group_text}}
                                             <span class="badge" style="font-size: 18px; border-radius: 18px;">{{groupedcontact.data.length}}</span>
                                         </li>--%>
-                                        <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.ContactId==currentContact.ContactId? 'popup_employee_list_item_active':''" ng-repeat="contact in groupedcontact.data|orderBy:predicate| filter:query.Name| ByContact:query ">
+                                        <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.EntityId==currentContact.EntityId? 'popup_employee_list_item_active':''" ng-repeat="contact in CorpEntites| filter:EntitiesFilter|filter:query.Name">
                                             <div>
                                                 <div style="font-weight: 900; font-size: 16px">
-                                                    <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}} <a ng-show="contact.Corps" data-toggle="popover" title="Companies" data-trigger="focus" data-html="true" data-content="{{contact.Corps.join('<br />')}}"><i class="fa fa-eye" onlick=""></i></a></label>
+                                                    <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.CorpName}} </label>
 
                                                     <%--<i class="fa fa-list-alt icon_btn" style="float: right; margin-right: 20px; margin-top: 0px; font-size: 18px;"></i>--%>
                                                 </div>
@@ -233,12 +220,12 @@
                         <div style="padding-bottom: 20px;">
                             <table>
                                 <tr>
-                                    <td>
-                                        <img src="/images/User-Empty-icon.png" class="img-circle" style="width: 100px; height: 100px" />
+                                    <td align="center">
+                                        <i class="fa fa-building" style="font-size:50px"></i>
                                     </td>
                                     <td>
-                                        <div class="detail_right">
-                                            <div style="font-size: 30px; color: #234b60">{{currentContact.Name}}</div>
+                                        <div class="detail_right input_info_table">
+                                            <div style="font-size: 30px; color: #234b60">{{currentContact.CorpName}}</div>
 
                                             <%-- <div style="font-size: 16px; color: #234b60; font-weight: 900">Sales Agent</div>--%>
                                         </div>
@@ -254,21 +241,13 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <%-- <tr class="vendor_info">
-                                    <td class="vendor_info_left">Manager
+                                 <tr class="vendor_info">
+                                    <td class="vendor_info_left">Status
                                     </td>
                                     <td>
-                                        <div class="detail_right">Ron Borovinsky</div>
-                                    </td>
-                                </tr>--%>
-                                <%--do not eidt empolyee name --%>
-
-                                <tr class="vendor_info" ng-show="currentContact.GroupId!=4">
-                                    <td class="vendor_info_left">Name
-                                    </td>
-                                    <td>
-                                        <div class="detail_right">
-                                            <input class="form-control " ng-model="currentContact.Name" placeholder="Click to input">
+                                        <div class="detail_right input_info_table">
+                                            <select class="form-control " ng-model="currentContact.Status"  ng-options="o.GroupName as o.GroupName for o  in AllGroups()">
+                                             </select>
                                         </div>
                                     </td>
                                 </tr>
@@ -276,107 +255,97 @@
                                     <td class="vendor_info_left">Company Name
                                     </td>
                                     <td>
-                                        <div class="detail_right">
+                                        <div class="detail_right input_info_table">
                                             <input class="form-control " ng-model="currentContact.CorpName" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
 
                                 <tr class="vendor_info">
-                                    <td class="vendor_info_left">Office address
+                                    <td class="vendor_info_left">Address
                                     </td>
                                     <td>
-                                        <div class="detail_right">
+                                        <div class="detail_right input_info_table">
+                                            <input class="form-control " ng-model="currentContact.Address" placeholder="Click to input">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="vendor_info">
+                                    <td class="vendor_info_left">Property Assigned
+                                    </td>
+                                    <td>
+                                        <div class="detail_right input_info_table">
+                                            <input class="form-control " ng-model="currentContact.PropertyAssigned" placeholder="Click to input">
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="vendor_info">
+                                    <td class="vendor_info_left">Filling Date
+                                    </td>
+                                    <td>
+                                        <div class="detail_right input_info_table">
+                                            <input class="form-control " ss-date ng-model="currentContact.FillingDate" placeholder="Click to input">
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="vendor_info">
+                                    <td class="vendor_info_left">Signer
+                                    </td>
+                                    <td>
+                                        <div class="detail_right input_info_table">
+                                            <input class="form-control " ng-model="currentContact.Signer" placeholder="Click to input">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="vendor_info">
+                                    <td class="vendor_info_left">Office
+                                    </td>
+                                    <td>
+                                        <div class="detail_right input_info_table">
                                             <input class="form-control " ng-model="currentContact.Office" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="vendor_info">
-                                    <td class="vendor_info_left">Office #
-                                    </td>
-                                    <td>
-                                        <div class="detail_right">
-                                            <input class="form-control " input-mask="(000) 000-0000" ng-model="currentContact.OfficeNO" placeholder="Click to input">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="vendor_info">
-                                    <td class="vendor_info_left">Customer Service
-                                    </td>
-                                    <td>
-                                        <div class="detail_right">
-                                            <input class="form-control " input-mask="(000) 000-0000" ng-model="currentContact.CustomerService" placeholder="Click to input">
-                                        </div>
-                                    </td>
-                                </tr>
 
                                 <tr class="vendor_info">
-                                    <td class="vendor_info_left">Extension
+                                    <td class="vendor_info_left">EIN #
                                     </td>
                                     <td>
-                                        <div class="detail_right">
-                                            <input class="form-control " ng-model="currentContact.Extension" placeholder="Click to input">
+                                        <div class="detail_right input_info_table">
+                                            <input class="form-control " ng-model="currentContact.EIN" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr class="vendor_info">
-                                    <td class="vendor_info_left">Fax
+                                    <td class="vendor_info_left">Assign On
                                     </td>
                                     <td>
-                                        <div class="detail_right">
-                                            <input class="form-control " input-mask="(000) 000-0000" ng-model="currentContact.Fax" placeholder="Click to input">
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="vendor_info">
-                                    <td class="vendor_info_left">Cell
-                                    </td>
-                                    <td>
-                                        <div class="detail_right">
-                                            <input class="form-control " input-mask="(000) 000-0000" ng-model="currentContact.Cell" placeholder="Click to input">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="vendor_info">
-                                    <td class="vendor_info_left">Email
-                                    </td>
-                                    <td>
-                                        <div class="detail_right">
-                                            <span style="color: #3993c1">
-                                                <input class="form-control " style="color: #3993c1" ng-model="currentContact.Email" placeholder="Click to input">
+                                        <div class="detail_right input_info_table">
+                                            <span >
+                                                <input class="form-control " ss-date ng-model="currentContact.AssignOn" placeholder="Click to input">
                                             </span>
 
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="vendor_info" style="display: none">
-                                    <td class="vendor_info_left">Type
+                                <tr class="vendor_info" >
+                                    <td class="vendor_info_left">Received On
                                     </td>
                                     <td>
-                                        <div class="detail_right">
-                                            <select class="form-control " ng-model="currentContact.Type">
-                                            </select>
+                                        <div class="detail_right input_info_table">
+                                            <input class="form-control " ss-date ng-model="currentContact.ReceivedOn">
+                                            
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="vendor_info">
-                                    <td class="vendor_info_left">Group
-                                    </td>
-                                    <td>
-                                        <div class="detail_right">
-                                            <select class="form-control " ng-model="currentContact.GroupId">
-                                                <option value=""></option>
-
-                                            </select>
-                                        </div>
-                                    </td>
-                                </tr>
+                               
                                 <tr class="vendor_info">
                                     <td class="vendor_info_left">Address
                                     </td>
                                     <td>
-                                        <div class="detail_right">
+                                        <div class="detail_right input_info_table">
                                             <span>
                                                 <input class="form-control " ng-model="currentContact.Address" placeholder="Click to input">
                                             </span>
@@ -384,13 +353,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <%-- <tr class="vendor_info">
-                                    <td class="vendor_info_left">Closed deals
-                                    </td>
-                                    <td>
-                                        <div class="detail_right">21</div>
-                                    </td>
-                                </tr>--%>
+
                             </table>
                         </div>
                         <div>
@@ -405,6 +368,77 @@
         </div>
     </div>
     <script>
+        var portalApp = angular.module('PortalApp');
+        portalApp.filter('startsWithA', function () {
+            return function (items) {
+                var filtered = [];
+                for (var i = 0; i < items.length; i++) {
+                    var item = items[i];
+                    if (/a/i.test(item.name.substring(0, 1))) {
+                        filtered.push(item);
+                    }
+                }
+                return filtered;
+            };
+        });
+        portalApp.controller('BuyerEntityCtrl', function ($scope, $http, $element, $parse) {
+
+            $scope.selectType = 'All Entities'
+            $scope.Groups = [{ GroupName: 'All Entities' }, { GroupName: 'Available' }, { GroupName: 'Assigned Out' }, { GroupName: 'Current Offer', SubGroups: [{ GroupName: 'NHA Current Offer' }, { GroupName: 'Isabel Current Offer' }] },
+                { GroupName: 'Quiet Title Action' }, { GroupName: 'Deed Purchase' },
+                { GroupName: 'Straight Sale' }, { GroupName: 'Sold', SubGroups: [{ GroupName: 'Purchased' }, { GroupName: 'Partnered' }, { GroupName: 'Sold (Final Sale)/Recyclable' }] }, { GroupName: 'In House' }, { GroupName: 'Agent Corps' }]
+            $scope.ChangeGroups = function (name) {
+                $scope.selectType = name;
+            }
+
+
+            $http.get('/LegalUI/ContactService.svc/GetAllBuyerEntities').success(function (data, status, headers, config) {
+                $scope.CorpEntites = data;
+                $scope.currentContact = $scope.CorpEntites[0];
+            }).error(function (data, status, headers, config) {
+                 alert('Get All byer Entities error : '+ JSON.stringify(data))
+            });
+          
+            $scope.EntitiesFilter = function(entity)
+            {
+                if ($scope.selectType == 'All Entities' || $scope.selectType == entity.Status)
+                    return true;
+                var subs = $scope.Groups.filter(function (o) { return o.GroupName == $scope.selectType })[0];
+                if (subs && subs.SubGroups)
+                {
+                    for(var i = 0;i<subs.SubGroups.length;i++)
+                    {
+                        var sg = subs.SubGroups[i];
+                        if(sg.GroupName==entity.Status)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            }
+            $scope.selectCurrent =function(contact)
+            {
+                $scope.currentContact = contact
+            }
+            $scope.SaveCurrent = function()
+            {
+
+            }
+            $scope.AllGroups = function()
+            {
+                var HasSub = $scope.Groups.filter(function (o) { return o.SubGroups != null });
+                var groups = [];
+                for(var i ;i<HasSub.length;i++)
+                {
+                    groups = groups.concat(HasSub[i].SubGroups);
+                }
+                var HasNotSub = $scope.Groups.filter(function (o) { return o.SubGroups == null &&o.GroupName!='All Entities' });
+                groups = groups.concat(HasNotSub);
+                return groups;
+            }
+        });
 
     </script>
 </asp:Content>
