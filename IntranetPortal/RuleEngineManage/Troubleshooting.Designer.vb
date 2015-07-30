@@ -59,6 +59,7 @@ Partial Class Troubleshooting
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.Button12 = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.gvFiles = New System.Windows.Forms.DataGridView()
@@ -88,7 +89,7 @@ Partial Class Troubleshooting
         Me.txtGeoBBLE = New System.Windows.Forms.TextBox()
         Me.btnGeoBBLE = New System.Windows.Forms.Button()
         Me.txtGeoAddress = New System.Windows.Forms.TextBox()
-        Me.Button12 = New System.Windows.Forms.Button()
+        Me.btnImportOffer = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -472,6 +473,15 @@ Partial Class Troubleshooting
         Me.Label8.TabIndex = 1
         Me.Label8.Text = "Team Name:"
         '
+        'Button12
+        '
+        Me.Button12.Location = New System.Drawing.Point(279, 3)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(136, 23)
+        Me.Button12.TabIndex = 1
+        Me.Button12.Text = "Send email by Service"
+        Me.Button12.UseVisualStyleBackColor = True
+        '
         'TabPage3
         '
         Me.TabPage3.Controls.Add(Me.SplitContainer1)
@@ -629,6 +639,7 @@ Partial Class Troubleshooting
         '
         'TabPage5
         '
+        Me.TabPage5.Controls.Add(Me.btnImportOffer)
         Me.TabPage5.Controls.Add(Me.btnMoveStraight)
         Me.TabPage5.Controls.Add(Me.btnMove)
         Me.TabPage5.Controls.Add(Me.btnRemove)
@@ -741,14 +752,14 @@ Partial Class Troubleshooting
         Me.txtGeoAddress.Size = New System.Drawing.Size(199, 20)
         Me.txtGeoAddress.TabIndex = 0
         '
-        'Button12
+        'btnImportOffer
         '
-        Me.Button12.Location = New System.Drawing.Point(279, 3)
-        Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(136, 23)
-        Me.Button12.TabIndex = 1
-        Me.Button12.Text = "Send email by Service"
-        Me.Button12.UseVisualStyleBackColor = True
+        Me.btnImportOffer.Location = New System.Drawing.Point(27, 146)
+        Me.btnImportOffer.Name = "btnImportOffer"
+        Me.btnImportOffer.Size = New System.Drawing.Size(75, 23)
+        Me.btnImportOffer.TabIndex = 6
+        Me.btnImportOffer.Text = "Import Offer"
+        Me.btnImportOffer.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -854,4 +865,5 @@ Partial Class Troubleshooting
     Friend WithEvents btnGeoBBLE As System.Windows.Forms.Button
     Friend WithEvents txtGeoBBLE As System.Windows.Forms.TextBox
     Friend WithEvents Button12 As System.Windows.Forms.Button
+    Friend WithEvents btnImportOffer As System.Windows.Forms.Button
 End Class

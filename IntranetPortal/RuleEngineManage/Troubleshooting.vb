@@ -558,4 +558,22 @@ Public Class Troubleshooting
 
         End Using
     End Sub
+
+    Private Sub btnImportOffer_Click(sender As Object, e As EventArgs) Handles btnImportOffer.Click
+
+        Dim allCases = ShortSaleCase.GetCase(2054)
+
+
+
+    End Sub
+
+    Private Sub ImportCaseOffer(ssCase As ShortSaleCase)
+        
+        If ssCase.HasOfferSubmit Then
+            Dim offer = New ShortSaleOffer
+            offer.BBLE = ssCase.BBLE
+            offer.OfferType = "Initial Offer"
+
+        End If
+    End Sub
 End Class
