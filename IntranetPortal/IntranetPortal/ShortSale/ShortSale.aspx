@@ -356,8 +356,10 @@
             return angular.element(document.getElementById('ShortSaleCtrl')).scope().SsCase;
         }
         portalApp = angular.module('PortalApp');
-        portalApp.controller('ShortSaleCtrl', function ($scope, $http, $element, $parse) {
 
+        portalApp.controller('ShortSaleCtrl', function ($scope, $http, $element, $parse, ptContactServices) {
+
+            $scope.ptContactServices = ptContactServices;
             /////test contact ///////////////
             var cStore = new DevExpress.data.CustomStore({
                 load: function (loadOptions) {
@@ -397,6 +399,7 @@
                 searchExpr: ["Name"]
             });
 
+            
             $scope.ContactDataSource = new DevExpress.data.DataSource({
                 store: cStore
             });
@@ -420,6 +423,12 @@
                     searchExpr: ["Name"]
                 })
             });
+
+            $scope.onChange = function (newModel, newValue) {
+                if (newValue && newModel) {
+                    $scope.$eval(newModel + '=' + newValue);
+                }
+            }
 
             $scope.PickedContactId = null;
 
@@ -579,101 +588,6 @@
             };
 
             $scope.SsCase.Mortgages = [{}];
-            /*
-            $scope.homeBreakdownBindingOptions = function () {
-                return {
-                    columns: [
-                        {
-                            caption: 'Floor',
-                            allowEditing: false,
-                            cellTemplate: function (cellEl, cellInfo) {
-                                cellEl[0].innerHTML = cellInfo.rowIndex + 1;
-                            }
-                        },
-                        { dataField: 'Bedroom', caption: 'Bedrooms' },
-                        { dataField: 'Bathroom', caption: 'Bathrooms' },
-                        { dataField: 'Livingroom', caption: 'Living Room' },
-                        { dataField: 'Kitchen', caption: 'Kitchen' },
-                        { dataField: 'Diningroom', caption: 'Dinning Room' },
-                        { dataField: 'Occupied', caption: 'Occupied' }
-                    ],
-                    bindingOptions: { dataSource: 'SsCase.PropertyInfo.PropFloors' },
-                    editing: {
-                        editMode: 'row',
-                        editEnabled: true,
-                        removeEnabled: true
-                    },
-
-                }
-            }
-            $scope.offerBindingOptions = function () {
-                return {
-                    columns: [
-                        {
-                            dataField: 'OfferType',
-                            caption: 'Type',
-                            lookup: {
-                                dataSource: [
-                                {
-                                    name: 'Initial Offer',
-                                    value: 'Initial Offer'
-                                },
-                                 {
-                                     name: 'Bank Counter',
-                                     value: 'Bank Counter'
-                                 },
-                                 {
-                                     name: 'Buyer Counter',
-                                     value: 'Buyer Counter'
-                                 },
-                                {
-                                    name: 'New Buyer Offer',
-                                    value: 'New Buyer Offer'
-                                }
-                                ],
-                                displayExpr: 'name',
-                                valueExpr: 'value'
-                            }
-
-                        }, {
-                            caption: 'Buying Entity',
-                            calculateCellValue: function (data) {
-                                if ($scope.SsCase.BuyerEntity === undefined) return "";
-                                return $scope.SsCase.BuyerEntity.Entity;
-                            },
-                            allowEditing: false,
-                        }, {
-                            caption: 'Signor',
-                            calculateCellValue: function (data) {
-                                if ($scope.SsCase.BuyerEntity === undefined) return "";
-                                return $scope.SsCase.BuyerEntity.Signor;
-                            },
-                            allowEditing: false,
-                        }, {
-                            caption: 'Date Corp Formed',
-                            calculateCellValue: function (data) {
-                                if ($scope.SsCase.BuyerEntity === undefined) return "";
-                                return $scope.SsCase.BuyerEntity.DateOpened;
-                            },
-                            allowEditing: false,
-                        }, {
-                            dataField: 'DateOfContract',
-                            dataType: 'date'
-                        }, {
-                            dataField: 'OfferAmount',
-                        }, {
-                            dataField: 'DateSubmited',
-                            dataType: 'date'
-                        }],
-                    bindingOptions: { dataSource: 'SsCase.ShortSaleOffers' },
-                    editing: {
-                        editMode: 'row',
-                        editEnabled: true,
-                        removeEnabled: true
-                    },
-                }
-
-            }*/
 
             $http.get('/LegalUI/ContactService.svc/getbanklist')
                 .success(function (data) {

@@ -46,6 +46,7 @@
 		var portalApp = angular.module('PortalApp', ['ngAnimate', 'ui.bootstrap', 'dx', 'ngMask']);
 	</script>
 	<script src="/Scripts/directives.js"></script>
+	<script src="/Scripts/services.js"></script>
 	<asp:ContentPlaceHolder ID="head" runat="server">
 	</asp:ContentPlaceHolder>
 

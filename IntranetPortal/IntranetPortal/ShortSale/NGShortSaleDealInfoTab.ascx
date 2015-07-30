@@ -178,6 +178,7 @@
                                 title: 'Valuation '+($index+1),
                                 dragEnabled: true,
                                 showCloseButton: true,
+                                shading: false,
                                 bindingOptions:{ visible: 'SsCase.ValueInfoes['+$index+'].visiblePopup' }
                             }">
                     <div data-options="dxTemplate:{ name: 'content' }">
@@ -279,6 +280,7 @@
                                 title: 'Offers '+($index+1),
                                 dragEnabled: true,
                                 showCloseButton: true,
+                                shading: false,
                                 bindingOptions:{ visible: 'SsCase.ShortSaleOffers['+$index+'].visiblePopup' }
                             }">
                     <div data-options="dxTemplate:{ name: 'content' }">

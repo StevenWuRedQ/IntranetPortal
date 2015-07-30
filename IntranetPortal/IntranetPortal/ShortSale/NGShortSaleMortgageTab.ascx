@@ -4,8 +4,9 @@
 <tabset class="tab-switch">
     <tab ng-repeat="mortgage in SsCase.Mortgages" active="mortgage.active" disable="mortage.disabled">
         <tab-heading>Mortgage {{$index+1}} </tab-heading>
-            <div class="text-right" style="margin-bottom:-45px" ng-show="SsCase.Mortgages.length>1"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.Mortgages.length>1" ng-click="NGremoveArrayItem(SsCase.Mortgages, $index)" title="Delete" style="border:1px solid; border-radius:3px; margin:2px"></i></div>
+            <div class="text-right" style="margin-bottom:-45px" ng-show="SsCase.Mortgages.length>1"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.Mortgages.length>1" ng-click="NGremoveArrayItem(SsCase.Mortgages, $index)" title="Delete"></i></div>
         <div style="margin-top: 20px">
+            <div class="ss_border" style="border-top-color: transparent">
             <h4 class="ss_form_title">Sale Date / Payoff Info</h4>
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
@@ -33,9 +34,10 @@
                     <input class="ss_form_input" ng-model="mortgage.PayoffAmount" money-mask>
                 </li>
             </ul>
+                </div>
         </div>
 
-            <div class="ss_form">
+        <div class="ss_form">
             <h4 class="ss_form_title">Foreclosure Attorney</h4>
             <div class="ss_border">
             <ul class="ss_form_box clearfix">
@@ -70,7 +72,7 @@
 
         <div class="ss_form">
             <h4 class="ss_form_title" style="display: inline">Mortgage Company&nbsp
-            <select  ng-model="mortgage.LenderId" ng-options="bank.ContactId as bank.Name for bank in bankNameOptions"></select>&nbsp;
+            <select class="class="ss_form_item" ng-model="mortgage.LenderId" ng-options="bank.ContactId as bank.Name for bank in bankNameOptions"></select>&nbsp;
             <i class="fa fa-compress icon_btn text-primary" ng-show="mortgageCompanyCollapse" ng-click="mortgageCompanyCollapse = !mortgageCompanyCollapse"></i>
             <i class="fa fa-expand icon_btn text-primary" ng-show="!mortgageCompanyCollapse" ng-click="mortgageCompanyCollapse = !mortgageCompanyCollapse"></i></h4>
             <div class="ss_border">
@@ -170,7 +172,7 @@
             </ul>
         </div>
 
-    
+                  
     </tab>
     <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.Mortgages, 'SsCase.Mortgages')" ng-show="SsCase.Mortgages.length<=2" title="Add" style="font-size: 18px"></i>
 </tabset>

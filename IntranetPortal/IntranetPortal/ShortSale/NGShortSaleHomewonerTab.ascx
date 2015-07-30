@@ -4,9 +4,10 @@
 <tabset class="tab-switch">
     <tab ng-repeat="owner in SsCase.PropertyInfo.Owners" active="owner.active" disable="owner.disabled">
         <tab-heading>Seller {{$index+1}} </tab-heading>
-            <div class="text-right" ng-show="SsCase.PropertyInfo.Owners.length>1" style="margin-bottom:-25px"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.PropertyInfo.Owners.length>1" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.Owners, $index)" title="Delete" style="border:1px solid; border-radius:3px; margin:2px"></i></div>
+            <div class="text-right" ng-show="SsCase.PropertyInfo.Owners.length>1" style="margin-bottom:-25px"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.PropertyInfo.Owners.length>1" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.Owners, $index)" title="Delete"></i></div>
 
         <div ng-click="setVisiblePopup(SsCase.PropertyInfo.Owners[$index], true)">
+            <div class="ss_border" style="border-top-color: transparent">
             <ul class="ss_form_box clearfix">
 
                 <li class="ss_form_item">
@@ -39,6 +40,7 @@
                 </li>
 
             </ul>
+                </div>
         </div>
         <div dx-popup="{
                                 height: auto,
@@ -46,6 +48,7 @@
                                 title: 'Seller '+ ($index+1),
                                 dragEnabled: true,
                                 showCloseButton: true,
+                                shading: false,
                                 bindingOptions:{ visible: 'SsCase.PropertyInfo.Owners['+$index+'].visiblePopup' }
                             }">
                     <div data-options="dxTemplate:{ name: 'content' }">

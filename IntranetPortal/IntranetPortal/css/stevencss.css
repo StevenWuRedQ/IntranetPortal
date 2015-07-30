@@ -2500,7 +2500,11 @@ li.mag_tabv.active {
 }
 .tab-switch .btn-close {
 	border: 1px solid rgba(0,0,0,.15);
-	box-shadow: inset 0 1px rgba(255,255,255,.35),0 1px 2px rgba(0,0,0,.15);
+	border-radius:3px;
+	box-shadow: inset 0 1px rgba(255,255,255,.35),0 1px 2px rgba(0, 0, 0,.15);
+	line-height: 0.9;
+	padding: 4px;
+	margin:1px;
 	background-color: #eae9e9
 }
 

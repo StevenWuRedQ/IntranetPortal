@@ -12,12 +12,18 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Phone #</label>
-                <input class="ss_form_input" type="phone" ng-model="GetContactById(SsCase.Processor).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
+                <input class="ss_form_input" type="phone" ng-model="GetContactById(SsCase.ProcessorId).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="GetContactById(SsCase.Processor).Email" type="email" readonly="readonly">
+                <input class="ss_form_input" ng-model="GetContactById(SsCase.ProcessorId).Email" type="email" readonly="readonly">
             </li>
+            <%-- 
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Name</label>
+                <input type="text" class="ss_form_input" ng-model="SsCase.Processor" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.ProcessorId=$item.ContactId">
+            </li>
+            --%>
         </ul>
     </div>
 </div>
