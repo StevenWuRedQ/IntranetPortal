@@ -17,9 +17,10 @@ Public Class PropertyFloor
                 For Each occupant In _evictionOccupants
                     If String.IsNullOrEmpty(occupant.BBLE) Then
                         occupant.BBLE = BBLE
-                        occupant.FloorId = FloorId
+                        occupant.CaseId = ShortSaleCase.GetCaseByBBLE(BBLE).CaseId
                     End If
 
+                    occupant.FloorId = FloorId
                     occupant.Save()
                 Next
             End If
