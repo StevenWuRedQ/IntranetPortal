@@ -63,5 +63,15 @@ Public Class ContactService
 
         Return ShortSale.CorporationEntity.GetAllEntities().OrderBy(Function(c) c.CorpName).ToJson
     End Function
+
+    <OperationContract()>
+    Public Function SaveCorpEntitiy(c As String) As Channels.Message
+        If (Not String.IsNullOrEmpty(c)) Then
+            Dim entity = Newtonsoft.Json.JsonConvert.DeserializeObject(Of ShortSale.CorporationEntity)(c)
+            entity.Save()
+        End If
+
+        Return Nothing
+    End Function
     ' Add more operations here and mark them with <OperationContract()>
 End Class

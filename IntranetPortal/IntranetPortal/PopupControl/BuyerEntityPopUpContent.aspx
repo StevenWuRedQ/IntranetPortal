@@ -87,7 +87,7 @@
                                 {{selectType}}
                                 <div style="float: right">
                                     <div style="display: inline-block">
-                                        <i class="fa fa-plus-circle tooltip-examples icon_btn" title="Add" style="color: #3993c1; font-size: 24px" data-toggle="modal" data-target="#myModal"></i>
+                                        <i class="fa fa-plus-circle tooltip-examples icon_btn" title="Add" style="color: #3993c1; font-size: 24px;display:none" data-toggle="modal" data-target="#myModal"></i>
                                         <!-- Modal -->
                                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -183,10 +183,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <i class="fa fa-sort-amount-desc tooltip-examples icon_btn" title="Sort" ng-class="predicate=='Name'?'fa-sort-amount-desc':'fa-sort-amount-asc'" ng-click="group_text_order = group_text_order=='group_text'?'-group_text':'group_text'; " style="color: #999ca1"></i>
+                                    <i class="fa fa-sort-amount-desc tooltip-examples icon_btn"  title="Sort" ng-class="predicate=='Name'?'fa-sort-amount-desc':'fa-sort-amount-asc'" ng-click="group_text_order = group_text_order=='group_text'?'-group_text':'group_text'; " style="color: #999ca1;display:none"></i>
                                 </div>
                             </div>
-                            <input style="margin-top: 20px;" type="text" class="form-control" placeholder="Type employee's name" ng-model="query.Name">
+                            <input style="margin-top: 20px;" type="text" class="form-control" placeholder="Type entity's name" ng-model="query.Name">
                             <div style="margin-top: 10px; height: 450px; overflow: auto" id="employee_list">
                                 <div>
                                     <ul class="list-group" style="box-shadow: none">
@@ -341,19 +341,6 @@
                                     </td>
                                 </tr>
                                
-                                <tr class="vendor_info">
-                                    <td class="vendor_info_left">Address
-                                    </td>
-                                    <td>
-                                        <div class="detail_right input_info_table">
-                                            <span>
-                                                <input class="form-control " ng-model="currentContact.Address" placeholder="Click to input">
-                                            </span>
-
-                                        </div>
-                                    </td>
-                                </tr>
-
                             </table>
                         </div>
                         <div>
@@ -369,18 +356,7 @@
     </div>
     <script>
         var portalApp = angular.module('PortalApp');
-        portalApp.filter('startsWithA', function () {
-            return function (items) {
-                var filtered = [];
-                for (var i = 0; i < items.length; i++) {
-                    var item = items[i];
-                    if (/a/i.test(item.name.substring(0, 1))) {
-                        filtered.push(item);
-                    }
-                }
-                return filtered;
-            };
-        });
+     
         portalApp.controller('BuyerEntityCtrl', function ($scope, $http, $element, $parse) {
 
             $scope.selectType = 'All Entities'
@@ -392,7 +368,7 @@
             }
 
 
-            $http.get('/LegalUI/ContactService.svc/GetAllBuyerEntities').success(function (data, status, headers, config) {
+            $http.get('/Services/ContactService.svc/GetAllBuyerEntities').success(function (data, status, headers, config) {
                 $scope.CorpEntites = data;
                 $scope.currentContact = $scope.CorpEntites[0];
             }).error(function (data, status, headers, config) {
@@ -424,7 +400,11 @@
             }
             $scope.SaveCurrent = function()
             {
-
+                $http.post('/Services/ContactService.svc/SaveCorpEntitiy', { c: JSON.stringify( $scope.currentContact) }).success(function (data, status, headers, config) {
+                  alert("Save succeed!")
+                }).error(function (data, status, headers, config) {
+                    alert("Get error save corp entitiy : "+JSON.stringify(data))
+                });
             }
             $scope.AllGroups = function()
             {
