@@ -3,12 +3,13 @@ Imports System.ServiceModel.Activation
 Imports System.ServiceModel.Web
 Imports System.Web.Script.Services
 Imports IntranetPortal.ShortSale
+Imports System.IO
 
 <ServiceContract(Namespace:="")>
 <AspNetCompatibilityRequirements(RequirementsMode:=AspNetCompatibilityRequirementsMode.Allowed)>
 Public Class ContactService
 
-   
+
     ' Add more operations here and mark them with <OperationContract()>
     ' To use HTTP GET, add <WebGet()> attribute. (Default ResponseFormat is WebMessageFormat.Json)
     ' To create an operation that returns XML,
@@ -60,7 +61,6 @@ Public Class ContactService
     <OperationContract()>
    <WebGet()>
     Public Function GetAllBuyerEntities() As Channels.Message
-
         Return ShortSale.CorporationEntity.GetAllEntities().OrderBy(Function(c) c.CorpName).ToJson
     End Function
 
@@ -74,4 +74,19 @@ Public Class ContactService
         Return Nothing
     End Function
     ' Add more operations here and mark them with <OperationContract()>
+
+    <OperationContract()>
+    <WebInvoke(Method:="POST")>
+    Public Function UploadFile(stream As Stream) As String
+
+        Dim ms As New MemoryStream
+        stream.CopyTo(ms)
+        ms.Position = 0
+
+        Dim id = HttpContext.Current.Request.QueryString("id")
+        Dim fileName = HttpContext.Current.Request.QueryString("name")
+
+        Return ShortSale.CorporationEntity.UploadFile(id, fileName, ms.ToArray, HttpContext.Current.User.Identity.Name)
+
+    End Function
 End Class

@@ -19,11 +19,11 @@
 </head>
 <body>
     <form id="form1" runat="server">
-       <%-- <uc1:TaskSummary runat="server" ID="TaskSummary" />--%>
+        <%-- <uc1:TaskSummary runat="server" ID="TaskSummary" />--%>
         <%-- <input type="button" onclick="LoadData()" value="Test" />--%>
-        
-       <%-- <uc1:ActivitySummary runat="server" id="ActivitySummary" />--%>
-        <asp:Button ID="Button1" runat="server" Text="UpdateCaseName" OnClick="Button1_Click"/>
+
+        <%-- <uc1:ActivitySummary runat="server" id="ActivitySummary" />--%>
+        <asp:Button ID="Button1" runat="server" Text="UpdateCaseName" OnClick="Button1_Click" />
         <asp:Label ID="UpdateStauts" runat="server"></asp:Label>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/Scripts/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
@@ -37,14 +37,44 @@
         <script src="/Scripts/jquery.collapse_storage.js"></script>
         <script src="/Scripts/jquery.collapse_cookie_storage.js"></script>
         <script type="text/javascript">
-            
+
             function LoadData() {
                 var url = "https://api.cityofnewyork.us/geoclient/v1/address.json?houseNumber=123&street=main+st&borough=Queens&app_id=be97fb56&app_key=b51823efd58f25775df3b2956a7b2bef";
 
-                $.getJSON(url, function (data) { alert( JSON.stringify( data)); });
+                $.getJSON(url, function (data) { alert(JSON.stringify(data)); });
             }
-            LoadData();
+            //LoadData();
+
+            function UploadFile() {
+                // grab your file object from a file input
+                fileData = document.getElementById("fileUpload").files[0];
+              
+                $.ajax({
+                    url: '/services/ContactService.svc/UploadFile?id=1&name=' + fileData.name,
+                    type: 'POST',
+                    data: fileData,
+                    cache: false,
+                    dataType: 'json',
+                    processData: false, // Don't process the files
+                    contentType: "application/octet-stream", // Set content type to false as jQuery will tell the server its a query string request
+                    success: function (data) {
+                        alert('successful..');
+                    },
+                    error: function (data) {
+                        alert('Some error Occurred!');
+                    }
+                });
+            }
+
         </script>
+        <div>
+            <input type="file" id="fileUpload" value="" />
+            <br />
+            <br />
+            <button id="btnUpload" onclick="UploadFile()" type="button">
+                Upload</button>
+        </div>
+
     </form>
 </body>
 </html>

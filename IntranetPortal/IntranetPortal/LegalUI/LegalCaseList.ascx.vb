@@ -27,7 +27,7 @@ Public Class LegalCaseList
     End Sub
 
     Private Sub BindLegalData(status As LegalCaseStatus)
-        If (Roles.IsUserInRole(Page.User.Identity.Name, "Legal-Manager")) Then
+        If Page.User.IsInRole("Legal-Manager") OrElse Page.User.IsInRole("Admin") Then
             gridCase.DataSource = LegalCase.GetCaseList(status)
         Else
             gridCase.DataSource = LegalCase.GetCaseList(status, Page.User.Identity.Name)
