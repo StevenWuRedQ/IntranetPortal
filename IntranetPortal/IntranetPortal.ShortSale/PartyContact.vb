@@ -107,6 +107,14 @@ Partial Public Class PartyContact
         End Using
     End Sub
 
+    Public Shared Function GetContactName(contactId As Integer) As String
+        Dim contact = GetContact(contactId)
+        If contact IsNot Nothing Then
+            Return contact.Name
+        End If
+        Return Nothing
+    End Function
+
     Public Shared Function GetContact(contactId As Integer) As PartyContact
         Using context As New ShortSaleEntities
             Return context.PartyContacts.Find(contactId)

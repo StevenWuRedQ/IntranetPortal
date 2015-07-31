@@ -372,19 +372,19 @@
           <Property Name="BBLE" Type="nchar" MaxLength="11" />
           <Property Name="CaseName" Type="nvarchar" MaxLength="120" />
           <Property Name="Processor" Type="int" />
-          <Property Name="ProcessorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProcessorName" Type="nvarchar" MaxLength="256" />
           <Property Name="Referral" Type="int" />
-          <Property Name="ReferralUserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReferralUserName" Type="nvarchar" MaxLength="256" />
           <Property Name="ReferralTeam" Type="nvarchar" MaxLength="50" />
           <Property Name="ListingAgent" Type="int" />
-          <Property Name="ListingAgentName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ListingAgentName" Type="nvarchar" MaxLength="256" />
           <Property Name="Buyer" Type="int" />
           <Property Name="SellerAttorney" Type="int" />
-          <Property Name="SellerAttorneyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SellerAttorneyName" Type="nvarchar" MaxLength="256" />
           <Property Name="BuyerAttorney" Type="int" />
-          <Property Name="BuyerAttorneyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="BuyerAttorneyName" Type="nvarchar" MaxLength="256" />
           <Property Name="TitleCompany" Type="int" />
-          <Property Name="TitleCompanyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TitleCompanyName" Type="nvarchar" MaxLength="256" />
           <Property Name="ClosingDate" Type="date" />
           <Property Name="Status" Type="int" />
           <Property Name="OccupiedBy" Type="nvarchar" MaxLength="50" />
@@ -667,12 +667,12 @@
           <Property Name="CounterOffer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="HasOfferSubmit" Type="Boolean" />
           <Property Name="ReferralTeam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ProcessorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ListingAgentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SellerAttorneyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BuyerAttorneyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TitleCompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ReferralUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessorName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ListingAgentName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SellerAttorneyName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="BuyerAttorneyName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="TitleCompanyName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ReferralUserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TitleClearence">
           <Key>

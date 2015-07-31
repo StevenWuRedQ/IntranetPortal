@@ -28,7 +28,7 @@ Public Class PropertyFloor
             Dim oldOccupants = context.PropertyOccupants.Where(Function(pf) pf.BBLE = BBLE AndAlso pf.FloorId = FloorId).ToList
             If oldOccupants.Count > _evictionOccupants.Count Then
                 For Each occupant In oldOccupants
-                    If Not _evictionOccupants.Any(Function(ow) ow.BBLE = occupant.BBLE AndAlso ow.FloorId = occupant.FloorId) Then
+                    If Not _evictionOccupants.Any(Function(ow) ow.OccupantId = occupant.OccupantId) Then
                         context.PropertyOccupants.Remove(occupant)
                     End If
                 Next

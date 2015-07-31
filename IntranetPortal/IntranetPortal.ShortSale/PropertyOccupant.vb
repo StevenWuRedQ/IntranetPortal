@@ -15,17 +15,20 @@
 
     Public Sub Save()
         Using context As New ShortSaleEntities
-            Dim pbi = context.PropertyOccupants.Find(OccupantId)
 
-            If pbi Is Nothing Then
+            If OccupantId = 0 Then
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
-                If DataStatus = ModelStatus.Deleted Then
-                    'When delete Occupate better delete notes also by steven.
-                    context.PropertyOccupants.Remove(pbi)
-                Else
-                    pbi = ShortSaleUtility.SaveChangesObj(pbi, Me)
+                Dim pbi = context.PropertyOccupants.Find(OccupantId)
+
+                If pbi IsNot Nothing Then
+                    If DataStatus = ModelStatus.Deleted Then
+                        'When delete Occupate better delete notes also by steven.
+                        context.PropertyOccupants.Remove(pbi)
+                    Else
+                        pbi = ShortSaleUtility.SaveChangesObj(pbi, Me)
+                    End If
                 End If
             End If
 
