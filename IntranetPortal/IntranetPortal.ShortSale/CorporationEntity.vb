@@ -1,5 +1,7 @@
 ﻿Public Class CorporationEntity
 
+    Private Shared ReadOnly DocumentLibrary = "CorporationEntity"
+
     Public Shared Function GetEntitiesByStatus(status As String()) As List(Of CorporationEntity)
         Using ctx As New ShortSaleEntities
             Return ctx.CorporationEntities.Where(Function(s) status.Contains(s.Status)).ToList
@@ -16,6 +18,14 @@
         Using ctx As New ShortSaleEntities
             Return ctx.CorporationEntities.Find(entityId)
         End Using
+    End Function
+
+    Public Shared Function UploadFile(entityId As Integer, fileName As String, fileBytes As Byte(), uploadBy As String) As String
+        Dim corp = CorporationEntity.GetEntity(entityId)
+
+        Dim fileUrl = String.Format("/{0}/{1}/{2}", DocumentLibrary, corp.CorpName.Trim, fileName)
+        Core.DocumentService.CreateFolder(DocumentLibrary, corp.CorpName.Trim)
+        Return Core.DocumentService.UploadFile(fileUrl, fileBytes, uploadBy)
     End Function
 
     Public Sub Save()

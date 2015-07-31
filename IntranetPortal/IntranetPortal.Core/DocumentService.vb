@@ -183,26 +183,56 @@ Public Class DocumentService
         Return Nothing
     End Function
 
-    Public Shared Sub UploadFile(folderPath As String, fileBytes As Byte(), fileName As String, uploadBy As String)
+    Public Shared Function UploadFile(folderPath As String, fileBytes As Byte(), fileName As String, uploadBy As String) As String
         CreateFolder(folderPath)
         Dim fileUrl = String.Format("/{2}/{0}/{1}", folderPath, fileName, RootFolderName)
 
+        Dim result = UploadFile(fileUrl, fileBytes, uploadBy)
+        'Using fs As New IO.MemoryStream(fileBytes)
+        '    Microsoft.SharePoint.Client.File.SaveBinaryDirect(GetClientContext, fileUrl, fs, True)
+        'End Using
+
+        'Using ctx = GetClientContext()
+        '    Dim file = ctx.Web.GetFileByServerRelativeUrl(fileUrl)
+        '    'ctx.Load(file)
+        '    'ctx.ExecuteQuery()
+
+        '    file.ListItemAllFields("UploadBy") = uploadBy
+        '    file.ListItemAllFields.Update()
+        '    ctx.ExecuteQuery()
+        'End Using
+
+        CreateSharingLink(GetClientContext, fileUrl)
+
+        Return result
+    End Function
+
+    Public Shared Function UploadFile(fileUrl As String, fileBytes As Byte(), uploadBy As String) As String
         Using fs As New IO.MemoryStream(fileBytes)
             Microsoft.SharePoint.Client.File.SaveBinaryDirect(GetClientContext, fileUrl, fs, True)
         End Using
 
         Using ctx = GetClientContext()
             Dim file = ctx.Web.GetFileByServerRelativeUrl(fileUrl)
-            'ctx.Load(file)
-            'ctx.ExecuteQuery()
 
             file.ListItemAllFields("UploadBy") = uploadBy
             file.ListItemAllFields.Update()
             ctx.ExecuteQuery()
+
+            Return fileUrl
+        End Using
+    End Function
+
+    Public Shared Function CreateFolder(rootLibrary As String, folderUrl As String) As Folder
+        Using ClientContext = GetClientContext()
+            If Not IsFolderExsit(ClientContext, rootLibrary, folderUrl) Then
+                Dim list = ClientContext.Web.Lists.GetByTitle(rootLibrary)
+                Return EnsureFolder(ClientContext, list.RootFolder, folderUrl)
+            End If
         End Using
 
-        CreateSharingLink(GetClientContext, fileUrl)
-    End Sub
+        Return Nothing
+    End Function
 
     'Public Shared Sub UploadFile(folderPath As String, fileBytes As Byte(), fileName As String, uploadBy As String)
     '    CreateFolder(folderPath)
@@ -255,8 +285,12 @@ Public Class DocumentService
     End Function
 
     Private Shared Function IsFolderExsit(ClientContext As ClientContext, folderUrl As String) As Boolean
-        If Not folderUrl.StartsWith(RootFolderName) Then
-            folderUrl = RootFolderName & "/" & folderUrl
+        Return IsFolderExsit(ClientContext, RootFolderName, folderUrl)
+    End Function
+
+    Private Shared Function IsFolderExsit(ClientContext As ClientContext, rootLibrary As String, folderUrl As String) As Boolean
+        If Not folderUrl.StartsWith(rootLibrary) Then
+            folderUrl = rootLibrary & "/" & folderUrl
         End If
 
         Dim folder = ClientContext.Web.GetFolderByServerRelativeUrl(folderUrl)
