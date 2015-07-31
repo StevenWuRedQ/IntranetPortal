@@ -78,6 +78,7 @@ Partial Class Troubleshooting
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.btnImportOffer = New System.Windows.Forms.Button()
         Me.btnMoveStraight = New System.Windows.Forms.Button()
         Me.btnMove = New System.Windows.Forms.Button()
         Me.btnRemove = New System.Windows.Forms.Button()
@@ -89,7 +90,7 @@ Partial Class Troubleshooting
         Me.txtGeoBBLE = New System.Windows.Forms.TextBox()
         Me.btnGeoBBLE = New System.Windows.Forms.Button()
         Me.txtGeoAddress = New System.Windows.Forms.TextBox()
-        Me.btnImportOffer = New System.Windows.Forms.Button()
+        Me.btnInitialContact = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -639,6 +640,7 @@ Partial Class Troubleshooting
         '
         'TabPage5
         '
+        Me.TabPage5.Controls.Add(Me.btnInitialContact)
         Me.TabPage5.Controls.Add(Me.btnImportOffer)
         Me.TabPage5.Controls.Add(Me.btnMoveStraight)
         Me.TabPage5.Controls.Add(Me.btnMove)
@@ -653,6 +655,15 @@ Partial Class Troubleshooting
         Me.TabPage5.TabIndex = 5
         Me.TabPage5.Text = "ShortSale"
         Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'btnImportOffer
+        '
+        Me.btnImportOffer.Location = New System.Drawing.Point(27, 146)
+        Me.btnImportOffer.Name = "btnImportOffer"
+        Me.btnImportOffer.Size = New System.Drawing.Size(75, 23)
+        Me.btnImportOffer.TabIndex = 6
+        Me.btnImportOffer.Text = "Import Offer"
+        Me.btnImportOffer.UseVisualStyleBackColor = True
         '
         'btnMoveStraight
         '
@@ -752,14 +763,14 @@ Partial Class Troubleshooting
         Me.txtGeoAddress.Size = New System.Drawing.Size(199, 20)
         Me.txtGeoAddress.TabIndex = 0
         '
-        'btnImportOffer
+        'btnInitialContact
         '
-        Me.btnImportOffer.Location = New System.Drawing.Point(27, 146)
-        Me.btnImportOffer.Name = "btnImportOffer"
-        Me.btnImportOffer.Size = New System.Drawing.Size(75, 23)
-        Me.btnImportOffer.TabIndex = 6
-        Me.btnImportOffer.Text = "Import Offer"
-        Me.btnImportOffer.UseVisualStyleBackColor = True
+        Me.btnInitialContact.Location = New System.Drawing.Point(108, 146)
+        Me.btnInitialContact.Name = "btnInitialContact"
+        Me.btnInitialContact.Size = New System.Drawing.Size(96, 23)
+        Me.btnInitialContact.TabIndex = 7
+        Me.btnInitialContact.Text = "Initial Contact"
+        Me.btnInitialContact.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -866,4 +877,5 @@ Partial Class Troubleshooting
     Friend WithEvents txtGeoBBLE As System.Windows.Forms.TextBox
     Friend WithEvents Button12 As System.Windows.Forms.Button
     Friend WithEvents btnImportOffer As System.Windows.Forms.Button
+    Friend WithEvents btnInitialContact As System.Windows.Forms.Button
 End Class

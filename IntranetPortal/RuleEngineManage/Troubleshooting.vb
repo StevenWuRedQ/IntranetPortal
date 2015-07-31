@@ -586,4 +586,40 @@ Public Class Troubleshooting
             offer.Save()
         End If
     End Sub
+
+    Private Sub btnInitialContact_Click(sender As Object, e As EventArgs) Handles btnInitialContact.Click
+
+        For Each ssCase In ShortSaleCase.GetAllCase
+
+            If ssCase.Referral.HasValue Then
+                ssCase.ReferralUserName = PartyContact.GetContactName(ssCase.Referral)
+            End If
+
+            If ssCase.Processor.HasValue Then
+                ssCase.ProcessorName = PartyContact.GetContactName(ssCase.Processor)
+            End If
+
+            If ssCase.ListingAgent.HasValue Then
+                ssCase.ListingAgentName = PartyContact.GetContactName(ssCase.ListingAgent)
+            End If
+
+            If ssCase.SellerAttorney.HasValue Then
+                ssCase.SellerAttorneyName = PartyContact.GetContactName(ssCase.SellerAttorney)
+            End If
+
+
+            If ssCase.TitleCompany.HasValue Then
+                ssCase.TitleCompanyName = PartyContact.GetContactName(ssCase.TitleCompany)
+            End If
+
+            If ssCase.BuyerAttorney.HasValue Then
+                ssCase.BuyerAttorneyName = PartyContact.GetContactName(ssCase.BuyerAttorney)
+            End If
+
+           
+            ssCase.Save()
+        Next
+    End Sub
+
+
 End Class

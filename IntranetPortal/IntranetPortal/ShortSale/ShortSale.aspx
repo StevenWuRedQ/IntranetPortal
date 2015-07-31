@@ -31,6 +31,11 @@
             LogClick("FollowUp", e.item.name);
             e.processOnServer = false;
         }
+
+        window.onbeforeunload = function () {
+            if (CaseDataChanged())
+                return "You have pending changes, did you save it?";
+        }
     </script>
     <asp:HiddenField runat="server" ID="hfIsEvction" Value="false" />
     <div style="background: url(/images/MyIdealProptery.png) no-repeat center fixed; background-size: 260px, 280px; background-color: #dddddd; width: 100%; height: 100%;">
