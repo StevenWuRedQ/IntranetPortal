@@ -7,12 +7,12 @@ app.service('ptContactServices', ['$http', function ($http) {
 
     (function () {
         if (!allContact) {
-           $http.get('/Services/ContactService.svc/LoadContacts')
-          .success(function (data, status) {
-              allContact = data;
-          }).error(function (data, status) {
-              allContact = [];
-          });
+            $http.get('/Services/ContactService.svc/LoadContacts')
+           .success(function (data, status) {
+               allContact = data;
+           }).error(function (data, status) {
+               allContact = [];
+           });
         }
 
         if (!allTeam) {
@@ -59,20 +59,20 @@ app.service('ptContactServices', ['$http', function ($http) {
     }
 
     this.getContactById = function (id) {
-        if(allContact) return allContact.filter(function (o) { return o.ContactId == id })[0];
+        if (allContact) return allContact.filter(function (o) { return o.ContactId == id })[0];
     }
 
     this.getContactByName = function (name) {
-        if(allContact) return allContact.filter(function (o) { if (o.Name && name) { return o.Name.trim().toLowerCase() === name.trim().toLowerCase() } return false })[0];
+        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
     }
 
     this.getContact = function (id, name) {
-        if(allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
+        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
     }
 
     this.getTeamByName = function (teamName) {
         if (allTeam) {
-            return allTeam.filter(function (o) {if(o.Name && teamName) return o.Name.trim() == teamName.trim() })[0];
+            return allTeam.filter(function (o) { if (o.Name && teamName) return o.Name.trim() == teamName.trim() })[0];
         }
 
     }

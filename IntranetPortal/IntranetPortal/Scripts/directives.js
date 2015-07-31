@@ -35,11 +35,11 @@ portalApp.directive('inputMask', function () {
     };
 });
 
-portalApp.directive('nameFromId', function (ptContactServices) {
+portalApp.directive('bindId', function (ptContactServices) {
     return {
         restrict: 'A',
         link: function postLink(scope, el, attrs) {
-            scope.$watch(attrs.nameFromId, function (newValue, oldValue) {
+            scope.$watch(attrs.bindId, function (newValue, oldValue) {
                 if (newValue != oldValue) {
                     scope.$eval(attrs.ngModel + "='" + ptContactServices.getContactById(newValue).Name + "'");
                 }

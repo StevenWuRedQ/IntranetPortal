@@ -583,13 +583,15 @@
                 return CaseInfo;
             }
             /////////////////Code Scope Steph ////////////////
-            $scope.NGremoveArrayItem = function (item, index, disable) {
-                if (disable) {
-                    item[index].DataStatus = 3;
-                } else {
-                    item.splice(index, 1);
-                }
 
+            $scope.NGremoveArrayItem = function (item, index, disable) {
+                var result = DevExpress.ui.dialog.confirm("Deletion Confirm", "");
+                result.done(function (dialogResult) {
+                    if (dialogResult) {
+                        if (disable) item[index].DataStatus = 3;
+                        else item.splice(index, 1);
+                    }
+                })
             };
 
             $scope.SsCase.Mortgages = [{}];

@@ -143,8 +143,8 @@
             <th>Details</th>
             <th></th>
         </tr>
-        <tr class="icon_btn" ng-repeat="value in SsCase.ValueInfoes" id="value{{$index}}" ng-click="setVisiblePopup(SsCase.ValueInfoes[$index], true)">
-            <td>
+        <tr class="icon_btn" ng-repeat="value in SsCase.ValueInfoes" id="value{{$index}}" >
+            <td ng-click="setVisiblePopup(SsCase.ValueInfoes[$index], true)">
                 <div class="content">
                     <div class="row" style="margin: 0px">
                         <div class="col-sm-4" style="padding: 0px">
@@ -244,8 +244,8 @@
             <th>Details</th>
             <th></th>
         </tr>
-        <tr class="icon_btn" ng-repeat="offer in SsCase.ShortSaleOffers" id="offer{{$index}}" ng-click="setVisiblePopup(SsCase.ShortSaleOffers[$index], true)">
-            <td>
+        <tr class="icon_btn" ng-repeat="offer in SsCase.ShortSaleOffers" id="offer{{$index}}">
+            <td ng-click="setVisiblePopup(SsCase.ShortSaleOffers[$index], true)">
                 <div class="content">
                     <div class="row" style="margin: 0px">
                         <div class="col-sm-4" style="padding: 0px">

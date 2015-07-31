@@ -62,9 +62,9 @@
             <th>Access</th>
             <th></th>
         </tr>
-        <tr class="icon_btn" ng-repeat="floor in SsCase.PropertyInfo.PropFloors" id="floor{{$index}}" ng-click="setVisiblePopup(SsCase.PropertyInfo.PropFloors[$index], true)">
-            <td>{{$index+1}}</td>
-            <td class="col-sm-3">
+        <tr class="icon_btn" ng-repeat="floor in SsCase.PropertyInfo.PropFloors" id="floor{{$index}}">
+            <td>{{$index+1}}</td ng-click="setVisiblePopup(SsCase.PropertyInfo.PropFloors[$index], true)">
+            <td class="col-sm-3" ng-click="setVisiblePopup(SsCase.PropertyInfo.PropFloors[$index], true)">
                 <div class="content">
                     <div class="row" style="margin: 0px">
                         <div class="col-sm-12" style="padding: 0px">
@@ -88,7 +88,7 @@
                     </div>
                 </div>
             </td>
-            <td class="col-sm-4">
+            <td class="col-sm-4" ng-click="setVisiblePopup(SsCase.PropertyInfo.PropFloors[$index], true)">
                 <div class="content">
                     <div class="row" style="margin: 0px">
                         <div class="col-sm-12" style="padding: 0px">
@@ -105,7 +105,7 @@
                         </div>
                     </div>
             </td>
-            <td class="col-sm-4">
+            <td class="col-sm-4" ng-click="setVisiblePopup(SsCase.PropertyInfo.PropFloors[$index], true)">
                 <div class="content">
                     <div class="row" style="margin: 0px">
                         <div class="col-sm-12" style="padding: 0px">

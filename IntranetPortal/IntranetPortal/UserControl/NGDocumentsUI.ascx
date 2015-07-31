@@ -1,4 +1,4 @@
-﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGDocumentsUI.ascx.vb" Inherits="IntranetPortal.DocumentsUI" %>
+﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGDocumentsUI.ascx.vb" Inherits="IntranetPortal.NGDocumentsUI" %>
 
 <script src="/Scripts/stevenjs.js"></script>
 <script type="text/javascript">
