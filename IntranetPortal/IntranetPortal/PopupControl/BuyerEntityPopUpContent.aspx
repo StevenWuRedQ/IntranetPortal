@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="BuyerEntityPopUpContent.aspx.vb" Inherits="IntranetPortal.BuyerEntityPopUpContent" MasterPageFile="~/Content.Master" %>
 
+<%@ Register Src="~/ShortSale/ShortSaleSubMenu.ascx" TagPrefix="uc1" TagName="ShortSaleSubMenu" %>
+
+
 <asp:Content runat="server" ContentPlaceHolderID="head">
     <link href="/css/Contacts.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/ContactJs.js"></script>
@@ -53,28 +56,74 @@
                         </div>
                     </div>
                     <div style="overflow: auto">
+                        <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
+                        <div>
 
-                        <div data-block="sidebar" class="sidebar js-sidebar">
+                            <!-- Nav tabs -->
+                            <style>
+                                li.active
+                                {
+                                    background:none !important;
+                                }
+                            </style>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active" ><a href="#StatusTab" aria-controls="home" role="tab" data-toggle="tab">Entity Status</a></li>
+                                <li role="presentation"  ><a href="#OfficeTab" aria-controls="profile" role="tab" data-toggle="tab">Office</a></li>
+                               
+                            </ul>
 
-                            <div class="sidebar__item" ng-class="group.GroupName==selectType?'title_selected':''" ng-repeat="group in Groups">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="StatusTab">
+                                    <div data-block="sidebar" class="sidebar js-sidebar">
 
-                                <div class="sidebar__title" ng-class="group.SubGroups==null||group.SubGroups.length==0?'notafter':''" ng-click="ChangeGroups(group.GroupName)">
-                                    {{group.GroupName}} <span class=" badge pull-right" ng-show="GroupCount(group)>0">{{GroupCount(group)}} </span>
-                                </div>
-                                <div class="sidebar__content" ng-class="group.SubGroups==null||group.SubGroups.length==0?'nodisplay':''">
-                                    <div data-block="inner" class="inner js-sidebar">
-                                        <div class="inner__item" ng-class="sbgroup.GroupName==selectType?'title_selected':''" ng-repeat="sbgroup in group.SubGroups">
-                                            <div class="inner__title" ng-click="ChangeGroups(sbgroup.GroupName)">
-                                                <div>{{sbgroup.GroupName}} <span class="badge pull-right" ng-show="GroupCount(sbgroup)>0">{{GroupCount(sbgroup)}} </span></div>
+                                        <div class="sidebar__item" ng-class="group.GroupName==selectType?'title_selected':''" ng-repeat="group in Groups">
+
+                                            <div class="sidebar__title" ng-class="group.SubGroups==null||group.SubGroups.length==0?'notafter':''" ng-click="ChangeGroups(group.GroupName)">
+                                                {{group.GroupName}} <span class=" badge pull-right" ng-show="GroupCount(group)>0">{{GroupCount(group)}} </span>
                                             </div>
+                                            <div class="sidebar__content" ng-class="group.SubGroups==null||group.SubGroups.length==0?'nodisplay':''">
+                                                <div data-block="inner" class="inner js-sidebar">
+                                                    <div class="inner__item" ng-class="sbgroup.GroupName==selectType?'title_selected':''" ng-repeat="sbgroup in group.SubGroups">
+                                                        <div class="inner__title" ng-click="ChangeGroups(sbgroup.GroupName)">
+                                                            <div>{{sbgroup.GroupName}} <span class="badge pull-right" ng-show="GroupCount(sbgroup)>0">{{GroupCount(sbgroup)}} </span></div>
+                                                        </div>
 
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </div>
                                 </div>
+                                <div role="tabpanel" class="tab-pane" id="OfficeTab">
+                                    
+                                    <div data-block="sidebar" class="sidebar js-sidebar">
+                                        <div class="sidebar__item" ng-class="SelectedTeam==''?'title_selected':''">
+
+                                            <div class="sidebar__title" ng-class="group.SubGroups==null||group.SubGroups.length==0?'notafter':''" ng-click="ChangeTeam('')">
+                                                All Team <%--<span class=" badge pull-right" ng-show="GroupCount(group)>0">{{GroupCount(group)}} </span>--%>
+                                            </div>
+                                          
+                                        </div>
+                                        <div class="sidebar__item" ng-class="SelectedTeam==team.Name?'title_selected':''" ng-repeat="team in AllTeam">
+
+                                            <div class="sidebar__title" ng-class="group.SubGroups==null||group.SubGroups.length==0?'notafter':''" ng-click="ChangeTeam(team.Name)">
+                                                {{team.Name}} <%--<span class=" badge pull-right" ng-show="GroupCount(group)>0">{{GroupCount(group)}} </span>--%>
+                                            </div>
+                                          
+                                        </div>
+
+                                    </div>
+                                </div>
+                               
                             </div>
 
                         </div>
+                        <div>
+                        </div>
+
 
 
                     </div>
@@ -85,7 +134,7 @@
                         <div>
 
                             <div class="clearfix" style="color: #234b60; font-size: 20px">
-                                {{selectType}}
+                               {{SelectedTeam?(SelectedTeam==''?'All Team\'s ':SelectedTeam +'\'s '):''}} {{selectType}}
                                 <div style="float: right">
                                     <div style="display: inline-block">
                                         <i class="fa fa-plus-circle tooltip-examples icon_btn" title="Add" style="color: #3993c1; font-size: 24px;" data-toggle="modal" data-target="#myModal"></i>
@@ -176,7 +225,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <i class="fa fa-list-alt tooltip-examples icon_btn" title="Office" ng-click=""></i>
+                                    &nbsp;
+                                    <a href="https://appext20.dos.ny.gov/ecorp_public/f?p=2020:1:13820438194474" target="_blank">Corporation </a>&nbsp;
+                                    <a href="http://www.irs.gov/Businesses/Small-Businesses-&-Self-Employed/Apply-for-an-Employer-Identification-Number-(EIN)-Online" target="_blank">EIN </a>
                                     <i class="fa fa-sort-amount-desc tooltip-examples icon_btn" title="Sort" ng-class="predicate=='Name'?'fa-sort-amount-desc':'fa-sort-amount-asc'" ng-click="group_text_order = group_text_order=='group_text'?'-group_text':'group_text'; " style="color: #999ca1; display: none"></i>
                                 </div>
                             </div>
@@ -187,7 +238,7 @@
                                         <%--<li class="list-group-item popup_menu_list_item" style="font-size: 18px; width: 80px; cursor: default; font-weight: 900">{{groupedcontact.group_text}}
                                             <span class="badge" style="font-size: 18px; border-radius: 18px;">{{groupedcontact.data.length}}</span>
                                         </li>--%>
-                                        <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.EntityId==currentContact.EntityId? 'popup_employee_list_item_active':''" ng-repeat="contact in CorpEntites| filter:EntitiesFilter|filter:query.Name">
+                                        <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.EntityId==currentContact.EntityId? 'popup_employee_list_item_active':''" ng-repeat="contact in CorpEntites| filter:EntitiesFilter|filter:query.Name|filter:SelectedTeam">
                                             <div>
                                                 <div style="font-weight: 900; font-size: 16px">
                                                     <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.CorpName}} </label>
@@ -390,7 +441,7 @@
                 </div>
             </div>
 
-        </div>        
+        </div>
     </div>
     <script>
         var portalApp = angular.module('PortalApp');
@@ -497,7 +548,10 @@
                     alert('Add buyer Entities error : ' + JSON.stringify(data))
                 });
             }
-
+            $scope.ChangeTeam = function(team)
+            {
+                $scope.SelectedTeam = team;
+            }
             //for view and upload document -- add by chris
             $scope.encodeURIComponent = window.encodeURIComponent;
 
