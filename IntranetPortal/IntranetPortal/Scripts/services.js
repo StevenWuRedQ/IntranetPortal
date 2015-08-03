@@ -1,23 +1,15 @@
 ﻿var app = angular.module('PortalApp');
 
-app.service('ptCom', ['$scope', function ($scope) {
-    this.arrayAdd = function (item, model) {
-        if (model) {
-            var array = $scope.$eval(model);
-            if (!array) {
-                $scope.$eval(model + '=[{}]');
-            } else {
-                $scope.$eval(model + '.push({})');
-            }
-        } else {
-            item.push({});
-        }
+app.service('ptCom',  function () {
+    this.arrayAdd = function (model) {
+        model = model === undefined ? [] : model;
+        model.push({});
     }
 
     this.arrayRemove = function (model, index) {
         if (model && index < model.length) model.splice(index, 1);
     };
-}])
+})
 
 app.service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
 

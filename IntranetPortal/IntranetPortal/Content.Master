@@ -34,6 +34,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
 	-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
+    <script src="/Scripts/ng-infinite-scroll.min.js"></script>
 	<script src="/Scripts/ngMask.min.js"></script>
 
 	<script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.webappjs.js"></script>
@@ -45,7 +46,7 @@
 
 	<script>
 		/* init angular app, add your dependency here 'ngMaterial' */
-		var portalApp = angular.module('PortalApp', ['ngAnimate', 'ui.bootstrap', 'dx', 'ngMask']);
+	    var portalApp = angular.module('PortalApp', ['ngAnimate', 'ui.bootstrap', 'dx', 'ngMask', 'infinite-scroll']);
 	</script>
 	<script src="/Scripts/directives.js"></script>
 	<script src="/Scripts/services.js"></script>
