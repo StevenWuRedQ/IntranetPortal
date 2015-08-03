@@ -820,7 +820,7 @@
                                                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%=empName.Name %></a></li>
                                                                     <%Next%>
                                                                 </ul>
-                                                                <img src="<%=getProfileImage(58) %>" class="img-circle compare_profile_img " />
+                                                                <img src="<%=getProfileImage(47) %>" class="img-circle compare_profile_img " />
                                                                 <span class="compare_agent_name">Benn Martin</span>
                                                             </div>
                                                             <div>
