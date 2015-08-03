@@ -65,10 +65,11 @@ Public Class ContactService
     End Function
 
     <OperationContract()>
+    <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
     Public Function SaveCorpEntitiy(c As String) As Channels.Message
         If (Not String.IsNullOrEmpty(c)) Then
             Dim entity = Newtonsoft.Json.JsonConvert.DeserializeObject(Of ShortSale.CorporationEntity)(c)
-            If (CorporationEntity.GetEntityByCorpName(entity.CorpName) IsNot Nothing) Then
+            If (entity.EntityId = 0 AndAlso CorporationEntity.GetEntityByCorpName(entity.CorpName) IsNot Nothing) Then
                 Return Nothing
             End If
             entity.Save()
@@ -88,9 +89,8 @@ Public Class ContactService
         ms.Position = 0
 
         Dim id = HttpContext.Current.Request.QueryString("id")
-        Dim fileName = HttpContext.Current.Request.QueryString("name")
+        Dim fileName = HttpContext.Current.Request.QueryString("type")
 
-        Return ShortSale.CorporationEntity.UploadFile(id, fileName, ms.ToArray, HttpContext.Current.User.Identity.Name)
-
+        Return ShortSale.CorporationEntity.UploadFile(id, fileName & ".pdf", ms.ToArray, HttpContext.Current.User.Identity.Name)
     End Function
 End Class

@@ -291,13 +291,54 @@
                                         </div>
                                     </td>
                                 </tr>
-
                                 <tr class="vendor_info">
                                     <td class="vendor_info_left">EIN #
                                     </td>
                                     <td>
                                         <div class="detail_right input_info_table">
                                             <input class="form-control " ng-model="currentContact.EIN" placeholder="Click to input">
+                                        </div>                                        
+                                    </td>
+                                </tr>
+                                <tr class="vendor_info">
+                                    <td class="vendor_info_left">EIN File
+                                    </td>
+                                    <td>                                       
+                                        <div class="detail_right input_info_table" ng-show="!(currentContact.EINFile == null || currentContact.EINFile == '')">
+                                            <a href="{{'/pdfViewer/web/viewer.html?file='+encodeURIComponent('/downloadfile.aspx?pdfUrl=' + currentContact.EINFile)}}" target="_blank">View File</a>                                             
+                                            <i class="fa fa-remove tooltip-examples icon_btn" title="Remove" ng-click="currentContact.EINFile=null" style="color: #3993c1; font-size: 14px;"></i>
+                                        </div>
+                                        <div class="detail_right input_info_table" ng-show="(currentContact.EINFile == null || currentContact.EINFile == '')">                                            
+                                            <input type="file" id="fileEIN" />
+                                            <input type="button" value="Upload" ng-click="UploadFile('fileEIN', 'EIN', 'EINFile')" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                 <tr class="vendor_info">
+                                    <td class="vendor_info_left">Corporation File
+                                    </td>
+                                    <td>                                       
+                                        <div class="detail_right input_info_table" ng-show="!(currentContact.File2 == null || currentContact.File2 == '')">
+                                            <a href="{{'/pdfViewer/web/viewer.html?file='+encodeURIComponent('/downloadfile.aspx?pdfUrl=' + currentContact.File2)}}" target="_blank">View File</a>                                             
+                                            <i class="fa fa-remove tooltip-examples icon_btn" title="Remove" ng-click="currentContact.File2=null" style="color: #3993c1; font-size: 14px;"></i>
+                                        </div>
+                                        <div class="detail_right input_info_table" ng-show="(currentContact.File2 == null || currentContact.File2 == '')">                                            
+                                            <input type="file" id="File2" />
+                                            <input type="button" value="Upload" ng-click="UploadFile('File2', 'Corporation','File2')" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                 <tr class="vendor_info">
+                                    <td class="vendor_info_left">Other File
+                                    </td>
+                                    <td>                                       
+                                        <div class="detail_right input_info_table" ng-show="!(currentContact.File3 == null || currentContact.File3 == '')">
+                                            <a href="{{'/pdfViewer/web/viewer.html?file='+encodeURIComponent('/downloadfile.aspx?pdfUrl=' + currentContact.File3)}}" target="_blank">View File</a>                                             
+                                            <i class="fa fa-remove tooltip-examples icon_btn" title="Remove" ng-click="currentContact.File3=null" style="color: #3993c1; font-size: 14px;"></i>
+                                        </div>
+                                        <div class="detail_right input_info_table" ng-show="(currentContact.File3 == null || currentContact.File3 == '')">                                            
+                                            <input type="file" id="File3" />
+                                            <input type="button" value="Upload" ng-click="UploadFile('File3', 'Corporation2', 'File3')" />
                                         </div>
                                     </td>
                                 </tr>
@@ -309,7 +350,6 @@
                                             <span>
                                                 <input class="form-control " ss-date ng-model="currentContact.AssignOn" placeholder="Click to input">
                                             </span>
-
                                         </div>
                                     </td>
                                 </tr>
@@ -326,6 +366,7 @@
                             </table>
                         </div>
                         <div>
+                            
                             <div style="margin-top: 20px; margin-left: 5px">
                                 Notes 
                             </div>
@@ -362,8 +403,7 @@
             $scope.ChangeGroups = function (name) {
                 $scope.selectType = name;
             }
-
-
+            
             $http.get('/Services/ContactService.svc/GetAllBuyerEntities').success(function (data, status, headers, config) {
                 $scope.CorpEntites = data;
                 $scope.currentContact = $scope.CorpEntites[0];
@@ -441,6 +481,45 @@
                     alert("Add entity succeed !")
                 }).error(function (data, status, headers, config) {
                     alert('Add buyer Entities error : ' + JSON.stringify(data))
+                });
+            }
+            
+            //for view and upload document -- add by chris
+            $scope.encodeURIComponent = window.encodeURIComponent;
+
+            $scope.UploadFile = function(fileUploadId, type, field) {
+                var contact = $scope.currentContact;
+                var entityId = contact.EntityId;
+
+                // grab file object from a file input
+                var fileData = document.getElementById(fileUploadId).files[0];
+
+                //$http.post('/services/ContactService.svc/UploadFile?id=' + entityId + '&type=' + type, fileData).success(function (data, status, headers, config) {
+                //    $scope.currentContact.EINFile = data;
+                //    //$scope = data;
+                //    alert('successful..');                   
+                //}).error(function (data, status, headers, config) {
+                //    alert('error : ' + JSON.stringify(data))
+                //});
+
+                
+                $.ajax({
+                    url: '/services/ContactService.svc/UploadFile?id=' + entityId + '&type=' + type,
+                    type: 'POST',
+                    data: fileData,
+                    cache: false,
+                    dataType: 'json',
+                    processData: false, // Don't process the files
+                    contentType: "application/octet-stream", // Set content type to false as jQuery will tell the server its a query string request
+                    success: function (data) {
+                        alert('successful..');
+                        $scope.currentContact[field] = data;                        
+                        $scope.$apply()
+                       
+                    },
+                    error: function (data) {
+                        alert('Some error Occurred!');
+                    }
                 });
             }
         });
