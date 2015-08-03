@@ -68,7 +68,11 @@ Public Class ContactService
     Public Function SaveCorpEntitiy(c As String) As Channels.Message
         If (Not String.IsNullOrEmpty(c)) Then
             Dim entity = Newtonsoft.Json.JsonConvert.DeserializeObject(Of ShortSale.CorporationEntity)(c)
+            If (CorporationEntity.GetEntityByCorpName(entity.CorpName) IsNot Nothing) Then
+                Return Nothing
+            End If
             entity.Save()
+            Return entity.ToJson
         End If
 
         Return Nothing

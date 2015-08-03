@@ -28,6 +28,13 @@
         Return Core.DocumentService.UploadFile(fileUrl, fileBytes, uploadBy)
     End Function
 
+    Public Shared Function GetEntityByCorpName(CorpName As String) As CorporationEntity
+        Using ctx As New ShortSaleEntities
+            Return ctx.CorporationEntities.Where(Function(c) c.CorpName = CorpName).FirstOrDefault
+        End Using
+
+    End Function
+
     Public Sub Save()
         Using context As New ShortSaleEntities
 

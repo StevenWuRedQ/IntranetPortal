@@ -12,40 +12,4 @@ Option Explicit On
 
 
 Partial Public Class BuyerEntityPopUpContent
-
-    '''<summary>
-    '''txtContact control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtContact As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''txtCompanyName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtCompanyName As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''txtAddress control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtAddress As Global.System.Web.UI.HtmlControls.HtmlInputText
-
-    '''<summary>
-    '''txtEmail control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtEmail As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
 End Class
