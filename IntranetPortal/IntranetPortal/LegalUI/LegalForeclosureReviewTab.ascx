@@ -44,19 +44,19 @@
 					What was the last milestone document recorded on Clerk Minutes? 
 				</label>
 				<select class="ss_form_input" ng-model="LegalCase.CaseStauts">
-					<option value="No current action">No current action</option>
-					<option value="S&C / LP">S&C / LP</option>
-					<option value="RJI">RJI</option>
-					<option value="Settlement Conf">Settlement Conf</option>
-					<option value="O/REF">O/REF</option>
-					<option value="Judgement">Judgement</option>
-					<option value="Sale Date">Sale Date</option>
-					<option value="Dismissed w/ Prejudice">Dismissed w/ Prejudice</option>
-					<option value="Dismissed w/o Prejudice">Dismissed w/o Prejudice</option>
+					<option value="1">No current action</option>
+					<option value="2">S&C / LP</option>
+					<option value="3">RJI</option>
+					<option value="4">Settlement Conf</option>
+					<option value="5">O/REF</option>
+					<option value="6">Judgement</option>
+					<option value="7">Sale Date</option>
+					<option value="8">Dismissed w/ Prejudice</option>
+					<option value="9">Dismissed w/o Prejudice</option>
 				</select>
 			</li>
-			<li class="ss_form_item" ng-show="LegalCase.CaseStauts=='Sale Date'">
-				<label class="ss_form_input_title {{}}" ">Sale date</label>
+			<li class="ss_form_item" ng-show="LegalCase.CaseStauts==7">
+				<label class="ss_form_input_title" ">Sale date</label>
 				<input class="ss_form_input" ng-model="LegalCase.SaleDate" ss-date />
 			</li>
 		</ul>

@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="VB" Debug="true" Service="IntranetPortal.Documents" CodeBehind="Documents.svc.vb" %>

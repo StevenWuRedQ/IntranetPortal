@@ -1,4 +1,23 @@
-﻿app = angular.module('PortalApp');
+﻿var app = angular.module('PortalApp');
+
+app.service('ptCom', ['$scope', function ($scope) {
+    this.arrayAdd = function (item, model) {
+        if (model) {
+            var array = $scope.$eval(model);
+            if (!array) {
+                $scope.$eval(model + '=[{}]');
+            } else {
+                $scope.$eval(model + '.push({})');
+            }
+        } else {
+            item.push({});
+        }
+    }
+
+    this.arrayRemove = function (model, index) {
+        if (model && index < model.length) model.splice(index, 1);
+    };
+}])
 
 app.service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
 
@@ -72,3 +91,4 @@ app.service('ptContactServices', ['$http', 'limitToFilter', function ($http, lim
     }
 
 }]);
+

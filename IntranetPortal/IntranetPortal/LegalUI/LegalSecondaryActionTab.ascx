@@ -38,15 +38,15 @@
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Case Type</label>
                         <select class="ss_form_input" ng-model="LegalCase.SecondaryInfo.CaseType">
-                            <option value="Partition">Partition            </option>
-                            <option value="Breach of Contract">Breach of Contract   </option>
-                            <option value="Quiet Title">Quiet Title          </option>
-                            <option value="Estate">Estate               </option>
-                            <option value="Article 78">Article 78           </option>
-                            <option value="Declaratory Relief">Declaratory Relief   </option>
-                            <option value="Fraud">Fraud                </option>
-                            <option value="Deed Reversion">Deed Reversion       </option>
-                            <option value="Other">Other                </option>
+                            <option value="1">Partition            </option>
+                            <option value="2">Breach of Contract   </option>
+                            <option value="3">Quiet Title          </option>
+                            <option value="4">Estate               </option>
+                            <option value="5">Article 78           </option>
+                            <option value="6">Declaratory Relief   </option>
+                            <option value="7">Fraud                </option>
+                            <option value="8">Deed Reversion       </option>
+                            <option value="9">Other                </option>
 
                         </select>
                     </li>

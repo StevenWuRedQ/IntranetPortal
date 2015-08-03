@@ -139,10 +139,10 @@
 
         $scope.pathUrl = "";
         $scope.content = {};
-        $scope.bble = 
+        $scope.bble = 0;
 
         $scope.init = function (bble) {
-            $http.post('Document.asmx/getFolderItems', { bble: $scope.bble, folderPath: $scope.pathUrl }).
+            $http.post('/Services/Documents.svc/getFolderItems', { bble: $scope.bble, folderPath: $scope.pathUrl }).
                 success(function (data, status, headers, config) {
                     $scope.content = JSON.parse(data.d);
                     console.log($scope.content);

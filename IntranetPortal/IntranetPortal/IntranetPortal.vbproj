@@ -817,10 +817,6 @@
       <DependentUpon>VerticalAppointmentTemplate.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Document.asmx.vb">
-      <DependentUpon>Document.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="DownloadFile.aspx.designer.vb">
       <DependentUpon>DownloadFile.aspx</DependentUpon>
     </Compile>
@@ -1226,6 +1222,13 @@
       <DependentUpon>BuyerEntityPopUpContent.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="PopupControl\CaseLawRef.aspx.designer.vb">
+      <DependentUpon>CaseLawRef.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\CaseLawRef.aspx.vb">
+      <DependentUpon>CaseLawRef.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="PopupControl\DoorknockChart.aspx.designer.vb">
       <DependentUpon>DoorknockChart.aspx</DependentUpon>
     </Compile>
@@ -1370,6 +1373,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Documents.svc.vb">
+      <DependentUpon>Documents.svc</DependentUpon>
     </Compile>
     <Compile Include="Services\TeamService.svc.vb">
       <DependentUpon>TeamService.svc</DependentUpon>
@@ -1975,7 +1981,6 @@
     <Content Include="DLL\MyIdealProp.Workflow.DBPersistence.dll" />
     <Content Include="DLL\PublicSiteData.dll" />
     <Content Include="DLL\Spire.Pdf.dll" />
-    <Content Include="Document.asmx" />
     <Content Include="DownloadFile.aspx" />
     <Content Include="EmailTemplate\ActivitySummary.ascx" />
     <Content Include="EmailTemplate\EmailSummary.aspx" />
@@ -2412,6 +2417,7 @@
     <Content Include="pdfViewer\web\viewer.js" />
     <Content Include="PopupControl\AssignLeadsPopup.ascx" />
     <Content Include="PopupControl\BuyerEntityPopUpContent.aspx" />
+    <Content Include="PopupControl\CaseLawRef.aspx" />
     <Content Include="PopupControl\DoorknockChart.aspx" />
     <Content Include="PopupControl\EditHomeOwner.ascx" />
     <Content Include="PopupControl\MapsPopup.ascx" />
@@ -3392,6 +3398,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\DataAPI\item1.disco" />
+    <Content Include="Services\Documents.svc" />
     <Content Include="Services\TeamService.svc" />
     <Content Include="ShortSale\NGShortSaleDealInfoTab.ascx" />
     <Content Include="ShortSale\NGShortSaleMortgageTab.ascx" />

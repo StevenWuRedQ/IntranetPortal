@@ -1078,39 +1078,7 @@
             };
 
             $scope.HighLightStauts = function (model, index) {
-                var i;
-                switch (model) {
-                    case "No current action":
-                        i = 1;
-                        break;
-                    case "S&C / LP":
-                        i = 2;
-                        break;
-                    case "RJI":
-                        i = 3;
-                        break;
-                    case "Settlement Conf":
-                        i = 4;
-                        break;
-                    case "O/REF":
-                        i = 5;
-                        break;
-                    case "Judgement":
-                        i = 6;
-                        break;
-                    case "Sale Date":
-                        i = 7;
-                        break;
-                    case "Dismissed w/ Prejudice":
-                        i = 8;
-                        break;
-                    case "Dismissed w/o Prejudice":
-                        i = 9;
-                        break;
-                    default:
-                        i = 0;
-                }
-                return i>index?true:false;
+                 return parseInt(model)>index?true:false;
             };
             $scope.addToEstateMembers = function (index) {
                 $scope.LegalCase.ForeclosureInfo.MembersOfEstate.push({ "id": index, "name": $scope.LegalCase.membersText });
