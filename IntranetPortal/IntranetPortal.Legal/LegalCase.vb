@@ -24,6 +24,17 @@ Partial Public Class LegalCase
         End Get
     End Property
 
+    Public ReadOnly Property LegalStatusString As String
+        Get
+            If LegalStatus.HasValue Then
+                Dim ls As DataStatus = LegalStatus
+                Return Core.Utility.GetEnumDescription(ls)
+            End If
+
+            Return Nothing
+        End Get
+    End Property
+
     Public Sub SaveData()
         'Refresh data report fields
         RefreshReportFields()
@@ -98,4 +109,23 @@ Public Enum LegalCaseStatus
     AttorneyHandle = 3
     <Description("Closed")>
     Closed = 4
+End Enum
+
+Public Enum DataStatus
+    <Description("No current action")>
+    NoAction = 0
+    <Description("S&C/LP")>
+    SCLP = 1
+    <Description("RJI")>
+    RJI = 2
+    <Description("O/REF")>
+    OREF = 3
+    <Description("Judgement")>
+    Judgement = 4
+    <Description("Sale Date")>
+    SaleDate = 5
+    <Description("Dismissed w/ Prejudice")>
+    DismissedWithPrejudice = 6
+    <Description("Dismissed w/o Prejudice")>
+    DismissedWithoutPrejudice = 7
 End Enum

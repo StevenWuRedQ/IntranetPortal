@@ -164,6 +164,10 @@
       <Project>{5da9a152-6e61-4cde-baf5-6309ed56539a}</Project>
       <Name>IntranetPortal.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IntranetPortal.Legal\IntranetPortal.Legal.vbproj">
+      <Project>{f816325a-f7bd-4c84-93a4-ef33dae80e6f}</Project>
+      <Name>IntranetPortal.Legal</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IntranetPortal.RulesEngin\IntranetPortal.RulesEngine.vbproj">
       <Project>{4b4c5173-473a-449a-b117-25e18d3c401b}</Project>
       <Name>IntranetPortal.RulesEngine</Name>
