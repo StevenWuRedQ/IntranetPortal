@@ -21,5 +21,6 @@ Partial Public Class LegalCase
     Public Property Status As Nullable(Of Integer)
     Public Property UpdateDate As Nullable(Of Date)
     Public Property UpdateBy As String
+    Public Property LegalStatus As Nullable(Of Integer)
 
 End Class

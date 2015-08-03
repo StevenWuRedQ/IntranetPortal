@@ -820,7 +820,6 @@
                                 $scope.LegalCase.ForeclosureInfo[porp] = [];
                                 $scope.LegalCase.ForeclosureInfo[porp].push({});
                             }
-
                         }
                         $scope.showSAndCFrom();
 

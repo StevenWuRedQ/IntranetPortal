@@ -12,6 +12,7 @@ Partial Public Class LegalCase
             Return _stuatsStr
         End Get
     End Property
+
     Private _caseStatus As String
     Public ReadOnly Property CaseStatus As String
         Get
@@ -22,7 +23,11 @@ Partial Public Class LegalCase
             Return _caseStatus
         End Get
     End Property
+
     Public Sub SaveData()
+        'Refresh data report fields
+        RefreshReportFields()
+
         Using ctx As New LegalModelContainer
             Dim lc = ctx.LegalCases.Find(BBLE)
 
@@ -37,6 +42,15 @@ Partial Public Class LegalCase
         End Using
     End Sub
 
+    Private Sub RefreshReportFields()
+        Dim jsonCase = Newtonsoft.Json.Linq.JObject.Parse(CaseData)
+
+        If jsonCase IsNot Nothing Then
+            Me.LegalStatus = jsonCase.Item("CaseStauts")
+        End If
+    End Sub
+
+
     Public Shared Function GetCase(bble As String) As LegalCase
         Using ctx As New LegalModelContainer
             Return ctx.LegalCases.Find(bble)
@@ -49,14 +63,17 @@ Partial Public Class LegalCase
         lc.Status = status
         lc.SaveData()
     End Sub
+
     Public Shared Function InLegal(bble As String) As Boolean
         Return LegalCase.GetCase(bble) IsNot Nothing
     End Function
+
     Public Shared Function GetCaseList(status As LegalCaseStatus) As List(Of LegalCase)
         Using ctx As New LegalModelContainer
             Return ctx.LegalCases.Where(Function(lc) lc.Status = status).ToList
         End Using
     End Function
+
     Public Shared Function GetAllCases() As List(Of LegalCase)
         Using ctx As New LegalModelContainer
             Return ctx.LegalCases.ToList
