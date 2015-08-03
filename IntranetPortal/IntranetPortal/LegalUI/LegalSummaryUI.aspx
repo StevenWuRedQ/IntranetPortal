@@ -19,6 +19,7 @@
             filterCondition = "[CaseName] LIKE '%" + key + "%' OR [CaseName] LIKE '%" + key + "%'";
             filterCondition += " OR [ResearchBy] LIKE '%" + key + "%'";
             filterCondition += " OR [Attorney] LIKE '%" + key + "%'";
+            filterCondition += " OR [BBLE] LIKE '%" + key + "%'";
             AllLeadsGridClient.ApplyFilter(filterCondition);
             return false;
         }
@@ -55,7 +56,7 @@
                             <div style="cursor: pointer;" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("BBLE"))%>'><%# Eval("CaseName")%></div>
                         </DataItemTemplate>
                     </dx:GridViewDataColumn>
-                    <dx:GridViewDataColumn FieldName="CaseStatus" Caption="Case Status">
+                    <dx:GridViewDataColumn FieldName="LegalStatusString" Caption="Case Status">
                         <Settings HeaderFilterMode="CheckedList"/>
                     </dx:GridViewDataColumn>
                     <dx:GridViewDataColumn FieldName="StuatsStr" Caption="Process Stauts">

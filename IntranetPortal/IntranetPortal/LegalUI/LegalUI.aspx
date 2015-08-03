@@ -80,7 +80,6 @@
         .md-contact-suggestion img {
             margin-top: -35px;
         }
-
     </style>
 </asp:Content>
 
@@ -267,7 +266,7 @@
                                     </ul>
                                 </div>
                                 <% End If%>
-                                <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview or ShowReassginBtn Then%>
+                                <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Or ShowReassginBtn() Then%>
                                 <dx:ASPxPopupControl ClientInstanceName="popupSelectAttorneyCtr" Width="300px" Height="300px"
                                     MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
                                     HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
@@ -524,11 +523,15 @@
         portalApp.controller('LegalCtrl', function ($scope, $http, $element, $parse, ptContactServices) {
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
             $scope.ptContactServices = ptContactServices;
-            $http.post('/Services/ContactService.svc/CheckInShortSale', { bble: leadsInfoBBLE }).success(function (data) {
+            if (leadsInfoBBLE) {
+                $http.post('/Services/ContactService.svc/CheckInShortSale', { BBLE: leadsInfoBBLE }).success(function (data) {
 
                 $scope.LegalCase.InShortSale = data;
 
-            });
+                }).error(function (data) { alert("check in short sale error " + leadsInfoBBLE); }
+           );
+            }
+
 
             var self = $scope;
             function querySearch(query) {
@@ -864,8 +867,7 @@
                 if (typeof LegalShowAll == 'undefined' || LegalShowAll == null) {
                     return true;
                 }
-                if ($scope.LegalCase.SecondaryInfo)
-                {
+                if ($scope.LegalCase.SecondaryInfo) {
                     return $scope.LegalCase.SecondaryInfo.SelectedType == filed;
                 }
                
