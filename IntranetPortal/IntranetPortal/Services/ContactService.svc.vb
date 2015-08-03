@@ -76,7 +76,7 @@ Public Class ContactService
     ' Add more operations here and mark them with <OperationContract()>
 
     <OperationContract()>
-    <WebInvoke(Method:="POST")>
+    <WebInvoke(Method:="POST", ResponseFormat:=WebMessageFormat.Json)>
     Public Function UploadFile(stream As Stream) As String
 
         Dim ms As New MemoryStream
