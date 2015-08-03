@@ -59,6 +59,15 @@ Partial Public Class LegalTab
     Protected WithEvents LegalSecondaryActionTab As Global.IntranetPortal.LegalSecondaryActionTab
 
     '''<summary>
+    '''LegalWriteupTab control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LegalWriteupTab As Global.IntranetPortal.LegalWriteupTab
+
+    '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>

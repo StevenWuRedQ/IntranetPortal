@@ -8,7 +8,8 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.ProcessorName" ng-change="SsCase.Processor=null" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.Processor=$item.ContactId"  bind-id="SsCase.Processor" >
+                <input type="text" class="ss_form_input" ng-model="SsCase.ProcessorName" ng-change="SsCase.Processor=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.Processor=$item.ContactId" bind-id="SsCase.Processor" >
+
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Phone #</label>
@@ -29,7 +30,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Agent</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.ReferralUserName" ng-change="SsCase.Referral=null" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.Referral=$item.ContactId" bind-id="SsCase.Referral">
+                <input type="text" class="ss_form_input" ng-model="SsCase.ReferralUserName" ng-change="SsCase.Referral=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.Referral=$item.ContactId" bind-id="SsCase.Referral">
             </li>
 
             <li class="ss_form_item">
@@ -106,7 +107,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.ListingAgentName" ng-change="SsCase.ListingAgent=null" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.ListingAgent=$item.ContactId" bind-id="SsCase.ListingAgent">
+                <input type="text" class="ss_form_input" ng-model="SsCase.ListingAgentName" ng-change="SsCase.ListingAgent=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.ListingAgent=$item.ContactId" bind-id="SsCase.ListingAgent">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
@@ -141,7 +142,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.SellerAttorneyName" ng-change="SsCase.SellerAttorney=null" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.SellerAttorney=$item.ContactId" bind-id="SsCase.SellerAttorney">
+                <input type="text" class="ss_form_input" ng-model="SsCase.SellerAttorneyName" ng-change="SsCase.SellerAttorney=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.SellerAttorney=$item.ContactId" bind-id="SsCase.SellerAttorney">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
@@ -189,7 +190,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Signor</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.BuyerEntity.Signor" ng-change="SsCase.BuyerEntity.SignorId=null" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.BuyerEntity.SignorId=$item.ContactId" bind-id="SsCase.BuyerEntity.SignorId">
+                <input type="text" class="ss_form_input" ng-model="SsCase.BuyerEntity.Signor" ng-change="SsCase.BuyerEntity.SignorId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.BuyerEntity.SignorId=$item.ContactId" bind-id="SsCase.BuyerEntity.SignorId">
             </li>
         </ul>
         <ul class="ss_form_box clearfix" collapse="!buyerCollapse">
@@ -219,7 +220,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.BuyerAttorneyName" ng-change="SsCase.BuyerAttorney=null" typeahead="contact.Name for contact in ptContactServices.getAllContacts()|filter:$viewValue | limitTo:8" typeahead-on-select="SsCase.BuyerAttorney=$item.ContactId" bind-id="SsCase.BuyerAttorney">
+                <input type="text" class="ss_form_input" ng-model="SsCase.BuyerAttorneyName" ng-change="SsCase.BuyerAttorney=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.BuyerAttorney=$item.ContactId" bind-id="SsCase.BuyerAttorney">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>

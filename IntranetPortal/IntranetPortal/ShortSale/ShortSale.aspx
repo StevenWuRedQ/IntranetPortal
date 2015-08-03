@@ -70,7 +70,7 @@
                                                     <ContentCollection>
                                                         <dx:SplitterContentControl ID="SplitterContentControl3" runat="server">
                                                             <div class="shortSaleUI" style="width: 100%; align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
-                                                               
+
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
 
@@ -90,7 +90,6 @@
                                                                         </a>
                                                                     </li>
                                                                     <li class="short_sale_head_tab">
-
                                                                         <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
                                                                             <i class="fa fa-file head_tab_icon_padding"></i>
                                                                             <div class="font_size_bold">Documents</div>
@@ -304,7 +303,7 @@
     <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
     <uc1:SelectPartyUC runat="server" ID="SelectPartyUC" />
     <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
-    <input type="hidden" id="CaseData"/>
+    <input type="hidden" id="CaseData" />
     <uc1:Common runat="server" ID="Common" />
     <script type="text/javascript">
         AllContact = <%= GetAllContact()%>
@@ -343,18 +342,16 @@
         }
     </script>
     <script type="text/javascript">
-       
+
         function NGGetShortSale(caseId) {
             $(document).ready(function () {
                 angular.element(document.getElementById('ShortSaleCtrl')).scope().GetShortSaleCase(caseId);
             });
         }
-        function CaseDataChanged()
-        {
+        function CaseDataChanged() {
             return $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(GetShortSaleCase())
         }
-        function ResetCaseDataChange()
-        {
+        function ResetCaseDataChange() {
             $('#CaseData').val(JSON.stringify(GetShortSaleCase()));
         }
         function GetShortSaleCase() {
@@ -404,7 +401,7 @@
                 searchExpr: ["Name"]
             });
 
-            
+
             $scope.ContactDataSource = new DevExpress.data.DataSource({
                 store: cStore
             });
@@ -585,7 +582,7 @@
             /////////////////Code Scope Steph ////////////////
 
             $scope.NGremoveArrayItem = function (item, index, disable) {
-                var result = DevExpress.ui.dialog.confirm("Deletion Confirm", "");
+                var result = DevExpress.ui.dialog.confirm("Deletion This?", "");
                 result.done(function (dialogResult) {
                     if (dialogResult) {
                         if (disable) item[index].DataStatus = 3;
@@ -606,7 +603,7 @@
 
 
             $scope.setVisiblePopup = function (model, value) {
-                if(model) model.visiblePopup = value;
+                if (model) model.visiblePopup = value;
             }
 
             function capitalizeFirstLetter(string) {
@@ -622,10 +619,10 @@
 
             }
 
-            $scope.formatAddr = function(strNO, strName, aptNO, city, state, zip){
+            $scope.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
                 var result = '';
-                if(strNO) result += strNO + ' ';
-                if(strName) result += strName + ', ';
+                if (strNO) result += strNO + ' ';
+                if (strName) result += strName + ', ';
                 if (aptNO) result += 'Apt ' + aptNO + ', ';
                 if (city) result += city + ', ';
                 if (state) result += state + ', ';

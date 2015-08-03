@@ -929,6 +929,13 @@
       <DependentUpon>LegalUI.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="LegalUI\LegalWriteupTab.ascx.designer.vb">
+      <DependentUpon>LegalWriteupTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LegalUI\LegalWriteupTab.ascx.vb">
+      <DependentUpon>LegalWriteupTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="LegalUI\ManagePreview.aspx.designer.vb">
       <DependentUpon>ManagePreview.aspx</DependentUpon>
     </Compile>
@@ -2283,6 +2290,7 @@
     <Content Include="LegalUI\LegalSummaryTab.ascx" />
     <Content Include="LegalUI\LegalTab.ascx" />
     <Content Include="LegalUI\LegalUI.aspx" />
+    <Content Include="LegalUI\LegalWriteupTab.ascx" />
     <Content Include="LegalUI\ManagePreview.aspx" />
     <Content Include="LegalUI\LegalCaseList.ascx" />
     <Content Include="LegalUI\ManagePreViewControl.ascx" />

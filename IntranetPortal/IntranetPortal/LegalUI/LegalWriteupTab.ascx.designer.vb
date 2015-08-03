@@ -11,14 +11,14 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class NGDocumentsUI
+Partial Public Class LegalWriteupTab
 
     '''<summary>
-    '''ASPxPopupMenu11 control.
+    '''ASPxHtmlEditor1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupMenu11 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+    Protected WithEvents ASPxHtmlEditor1 As Global.DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor
 End Class

@@ -521,8 +521,9 @@
 
         var portalApp = angular.module('PortalApp');
 
-        portalApp.controller('LegalCtrl', function ($scope, $http, $element, $parse) {
+        portalApp.controller('LegalCtrl', function ($scope, $http, $element, $parse, ptContactServices) {
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
+            $scope.ptContactServices = ptContactServices;
             $http.post('/Services/ContactService.svc/CheckInShortSale', { bble: leadsInfoBBLE }).success(function (data) {
 
                 $scope.LegalCase.InShortSale = data;
@@ -623,7 +624,6 @@
             //ForeclosureInfo.ServicerId = 646;
 
             //var SecondaryInfo = $scope.LegalCase.PropertyInfo;
-
             //SecondaryInfo.OpposingPartyId = 638;
             //SecondaryInfo.Status = "Status 1";
             //SecondaryInfo.Tasks = "Task 1";
@@ -650,55 +650,51 @@
             //SecondaryInfo.OpposingPartyId = 638;
             //SecondaryInfo.OpposingPartyId = 638;
             //SecondaryInfo.OpposingPartyId = 638;
-
             //$scope.SelectContactId = 128;
-
             //$scope.selectBoxData = AllContact;
-            var cStore = new DevExpress.data.CustomStore({
-                load: function (loadOptions) {
-
-                    if (AllContact) {
-                        if (loadOptions.searchValue) {
-                            return AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(loadOptions.searchValue.toLowerCase()) >= 0 } return false });
-                        }
-                        return [];
-                    }
-                    var d = $.Deferred();
-                    if (loadOptions.searchValue) {
-                        $.getJSON('/Services/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
-                            d.resolve(data);
-                        });
-                    } else {
-
-                        $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
-                            d.resolve(data);
-                            AllContact = data;
-                        });
-                    }
-
-                    return d.promise();
-                },
-                byKey: function (key) {
-                    if (AllContact) {
-                        return AllContact.filter(function (o) { return o.ContactId == key })[0];
-                    }
-                    var d = new $.Deferred();
-                    $.get('/Services/ContactService.svc/GetAllContacts?id=' + key)
-                        .done(function (result) {
-                            d.resolve(result);
-                        });
-                    return d.promise();
-                },
-                searchExpr: ["Name"]
-            });
 
             $scope.ContactDataSource = new DevExpress.data.DataSource({
-                store: cStore
+                store: new DevExpress.data.CustomStore({
+                    load: function (loadOptions) {
+
+                        if (AllContact) {
+                            if (loadOptions.searchValue) {
+                                return AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(loadOptions.searchValue.toLowerCase()) >= 0 } return false });
+                            }
+                            return [];
+                        }
+                        var d = $.Deferred();
+                        if (loadOptions.searchValue) {
+                            $.getJSON('/Services/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
+                                d.resolve(data);
+                            });
+                        } else {
+
+                            $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
+                                d.resolve(data);
+                                AllContact = data;
+                            });
+                        }
+
+                        return d.promise();
+                    },
+                    byKey: function (key) {
+                        if (AllContact) {
+                            return AllContact.filter(function (o) { return o.ContactId == key })[0];
+                        }
+                        var d = new $.Deferred();
+                        $.get('/Services/ContactService.svc/GetAllContacts?id=' + key)
+                            .done(function (result) {
+                                d.resolve(result);
+                            });
+                        return d.promise();
+                    },
+                    searchExpr: ["Name"]
+                })
             });
             $scope.RoboSingerDataSource = new DevExpress.data.DataSource({
                 store: new DevExpress.data.CustomStore({
                     load: function (loadOptions) {
-
                         if (AllRoboSignor) {
                             if (loadOptions.searchValue) {
                                 return AllRoboSignor.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(loadOptions.searchValue.toLowerCase()) >= 0 } return false });
@@ -940,9 +936,6 @@
 
                 return hSummery;
             };
-            $scope.HighLightStauts = function (stauts, Count) {
-                return stauts > Count;
-            }
             $scope.ExceptVisable = function (h, CompareValue, arrayIndex) {
                 var visbale = false;
                 if (h.Value == 'true' || h.Value == 'false') {
@@ -1086,8 +1079,39 @@
             };
 
             $scope.HighLightStauts = function (model, index) {
-                if (parseInt(model) > index) return true;
-                else return false;
+                var i;
+                switch (model) {
+                    case "No current action":
+                        i = 1;
+                        break;
+                    case "S&C / LP":
+                        i = 2;
+                        break;
+                    case "RJI":
+                        i = 3;
+                        break;
+                    case "Settlement Conf":
+                        i = 4;
+                        break;
+                    case "O/REF":
+                        i = 5;
+                        break;
+                    case "Judgement":
+                        i = 6;
+                        break;
+                    case "Sale Date":
+                        i = 7;
+                        break;
+                    case "Dismissed w/ Prejudice":
+                        i = 8;
+                        break;
+                    case "Dismissed w/o Prejudice":
+                        i = 9;
+                        break;
+                    default:
+                        i = 0;
+                }
+                return i>index?true:false;
             };
             $scope.addToEstateMembers = function (index) {
                 $scope.LegalCase.ForeclosureInfo.MembersOfEstate.push({ "id": index, "name": $scope.LegalCase.membersText });
@@ -1156,15 +1180,6 @@
                     console.log("Deleted comments");
                 })
             }
-            //------------------------------
-
-
-            //stephen code part ---------
-
-
-
-
-            //----------------------------
 
         });
 

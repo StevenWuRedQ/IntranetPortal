@@ -3,7 +3,10 @@
 <%@ Register Src="~/LegalUI/LegalSummaryTab.ascx" TagPrefix="uc1" TagName="LegalSummaryTab" %>
 <%@ Register Src="~/LegalUI/LegalForeclosureReviewTab.ascx" TagPrefix="uc1" TagName="LegalForeclosureReviewTab" %>
 <%@ Register Src="~/LegalUI/LegalSecondaryActionTab.ascx" TagPrefix="uc1" TagName="LegalSecondaryActionTab" %>
+<%@ Register Src="~/LegalUI/LegalWriteupTab.ascx" TagPrefix="uc1" TagName="LegalWriteupTab" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
+
+
 
 <script type="text/javascript">
 
@@ -224,15 +227,10 @@
                 <!--detial Nav tabs -->
 
                 <ul class="nav nav-tabs overview_tabs" role="tablist" style="">
-                    <li class="short_sale_tab active">
-                        <a class="shot_sale_tab_a " href="#Summary" role="tab" data-toggle="tab">Summary</a></li>
-                    <%-- <% If Agent Then%>--%>
-                    <li class="short_sale_tab">
-                        <a class="shot_sale_tab_a " href="#Foreclosure_Review" role="tab" data-toggle="tab">Foreclosure Review</a></li>
-                    <%--    <% End If%>
-                    <% If SecondaryAction Then%>--%>
-                    <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#Secondary_Actions" role="tab" data-toggle="tab">Secondary Actions</a></li>
-                    <%--  <% End If%>--%>
+                    <li class="short_sale_tab active"><a class="shot_sale_tab_a " href="#Summary" role="tab" data-toggle="tab">Summary</a></li>
+                    <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Foreclosure_Review" role="tab" data-toggle="tab">Foreclosure Review</a></li>
+                    <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Secondary_Actions" role="tab" data-toggle="tab">Secondary Actions</a></li>
+                    <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#LegalWriteupTab" role="tab" data-toggle="tab">Write Up</a></li>
                 </ul>
 
                 <!-- Tab panes -->
@@ -247,6 +245,9 @@
                     </div>
                     <div class="tab-pane" id="Secondary_Actions">
                         <uc1:LegalSecondaryActionTab runat="server" ID="LegalSecondaryActionTab" />
+                    </div>
+                    <div class="tab-pane" id="LegalWriteupTab">
+                        <uc1:LegalWriteupTab runat="server" id="LegalWriteupTab" />
                     </div>
 
                 </div>

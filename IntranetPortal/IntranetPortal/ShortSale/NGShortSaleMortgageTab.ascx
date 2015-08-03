@@ -43,8 +43,7 @@
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Foreclosure Attorney </label>
-                    <div class="contact_box" dx-select-box="InitContact('SsCase.Mortgages['+$index+'].ForeclosureAttorneyId')"></div>
-                  
+                    <input type="text" class="ss_form_input" ng-model="mortgage.ForeclosureAttorney" ng-change="mortgage.ForeclosureAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="mortgage.ForeclosureAttorneyId=$item.ContactId" bind-id="mortgage.ForeclosureAttorneyId" >
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Address</label>
@@ -52,7 +51,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Office #</label>
-                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ForeclosureAttorneyId).OfficeNO" mask="999-99-9999" clean="true" readonly="readonly">
+                    <input class="ss_form_input" ng-model="GetContactById(mortgage.ForeclosureAttorneyId).OfficeNO" mask="(999)-999-9999" clean="true" readonly="readonly">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Assigned Attorney</label>

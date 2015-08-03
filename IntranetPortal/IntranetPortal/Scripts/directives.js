@@ -41,7 +41,8 @@ portalApp.directive('bindId', function (ptContactServices) {
         link: function postLink(scope, el, attrs) {
             scope.$watch(attrs.bindId, function (newValue, oldValue) {
                 if (newValue != oldValue) {
-                    scope.$eval(attrs.ngModel + "='" + ptContactServices.getContactById(newValue).Name + "'");
+                    var contact = ptContactServices.getContactById(newValue);
+                    if(contact) scope.$eval(attrs.ngModel + "='" + contact.Name + "'");
                 }
             })
         }
@@ -116,3 +117,25 @@ portalApp.directive('ptRadio', function () {
     }
 });
 
+portalApp.directive('ckEditor', [function () {
+    return {
+        require: '?ngModel',
+        link: function (scope, elm, attr, ngModel) {
+
+            var ck = CKEDITOR.replace(elm[0], {
+                allowedContent: true,
+                height: 450,
+            });
+
+            ck.on('pasteState', function () {
+                scope.$apply(function () {
+                    ngModel.$setViewValue(ck.getData());
+                });
+            });
+
+            ngModel.$render = function (value) {
+                ck.setData(ngModel.$modelValue);
+            };
+        }
+    };
+}])
