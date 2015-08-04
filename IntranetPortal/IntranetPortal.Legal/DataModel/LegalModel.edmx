@@ -31,6 +31,7 @@
           <Property Name="CaseData" Type="nvarchar(max)" />
           <Property Name="Status" Type="int" />
           <Property Name="LegalStatus" Type="int" />
+          <Property Name="FollowUp" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
@@ -93,6 +94,7 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LegalStatus" Type="Int32" />
+          <Property Name="FollowUp" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="LegalJudge">
           <Key>
@@ -146,6 +148,7 @@
           <EntitySetMapping Name="LegalCases">
             <EntityTypeMapping TypeName="LegalModel.LegalCase">
               <MappingFragment StoreEntitySet="LegalCase">
+                <ScalarProperty Name="FollowUp" ColumnName="FollowUp" />
                 <ScalarProperty Name="LegalStatus" ColumnName="LegalStatus" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
