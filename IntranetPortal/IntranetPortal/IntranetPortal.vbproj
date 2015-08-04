@@ -914,6 +914,13 @@
       <DependentUpon>LegalSummaryTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="LegalUI\LegalFollowUps.aspx.designer.vb">
+      <DependentUpon>LegalFollowUps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LegalUI\LegalFollowUps.aspx.vb">
+      <DependentUpon>LegalFollowUps.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="LegalUI\LegalTab.ascx.designer.vb">
       <DependentUpon>LegalTab.ascx</DependentUpon>
     </Compile>
@@ -2297,6 +2304,7 @@
     <Content Include="LegalUI\LegalSecondaryActionTab.ascx" />
     <Content Include="LegalUI\LegalServices.svc" />
     <Content Include="LegalUI\LegalSummaryTab.ascx" />
+    <Content Include="LegalUI\LegalFollowUps.aspx" />
     <Content Include="LegalUI\LegalTab.ascx" />
     <Content Include="LegalUI\LegalUI.aspx" />
     <Content Include="LegalUI\LegalWriteupTab.ascx" />
