@@ -883,6 +883,13 @@
       <DependentUpon>LeadsSearchApproval.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="LegalUI\CaseLawRef.aspx.designer.vb">
+      <DependentUpon>CaseLawRef.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LegalUI\CaseLawRef.aspx.vb">
+      <DependentUpon>CaseLawRef.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="LegalUI\LegalForeclosureReviewTab.ascx.designer.vb">
       <DependentUpon>LegalForeclosureReviewTab.ascx</DependentUpon>
     </Compile>
@@ -1230,13 +1237,6 @@
     </Compile>
     <Compile Include="PopupControl\BuyerEntityPopUpContent.aspx.vb">
       <DependentUpon>BuyerEntityPopUpContent.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="PopupControl\CaseLawRef.aspx.designer.vb">
-      <DependentUpon>CaseLawRef.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PopupControl\CaseLawRef.aspx.vb">
-      <DependentUpon>CaseLawRef.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PopupControl\DoorknockChart.aspx.designer.vb">
@@ -2299,6 +2299,7 @@
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchApproval.aspx" />
+    <Content Include="LegalUI\CaseLawRef.aspx" />
     <Content Include="LegalUI\LegalForeclosureReviewTab.ascx" />
     <Content Include="LegalUI\LegalSecondaryActions.ascx" />
     <Content Include="LegalUI\LegalSecondaryActionTab.ascx" />
@@ -2429,7 +2430,6 @@
     <Content Include="pdfViewer\web\viewer.js" />
     <Content Include="PopupControl\AssignLeadsPopup.ascx" />
     <Content Include="PopupControl\BuyerEntityPopUpContent.aspx" />
-    <Content Include="PopupControl\CaseLawRef.aspx" />
     <Content Include="PopupControl\DoorknockChart.aspx" />
     <Content Include="PopupControl\EditHomeOwner.ascx" />
     <Content Include="PopupControl\MapsPopup.ascx" />
