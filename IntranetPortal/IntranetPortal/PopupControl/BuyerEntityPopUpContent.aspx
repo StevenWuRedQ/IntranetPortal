@@ -103,14 +103,14 @@
                                         <div class="sidebar__item" ng-class="SelectedTeam==''?'title_selected':''">
 
                                             <div class="sidebar__title" ng-class="group.SubGroups==null||group.SubGroups.length==0?'notafter':''" ng-click="ChangeTeam('')">
-                                                All Team <%--<span class=" badge pull-right" ng-show="GroupCount(group)>0">{{GroupCount(group)}} </span>--%>
+                                                All Team <span class=" badge pull-right" ng-show="TeamCount('')>0">{{TeamCount('')}} </span>
                                             </div>
                                           
                                         </div>
                                         <div class="sidebar__item" ng-class="SelectedTeam==team.Name?'title_selected':''" ng-repeat="team in AllTeam">
 
                                             <div class="sidebar__title" ng-class="group.SubGroups==null||group.SubGroups.length==0?'notafter':''" ng-click="ChangeTeam(team.Name)">
-                                                {{team.Name}} <%--<span class=" badge pull-right" ng-show="GroupCount(group)>0">{{GroupCount(group)}} </span>--%>
+                                                {{team.Name}} <span class=" badge pull-right" ng-show="TeamCount(team.Name)>0">{{TeamCount(team.Name)}} </span>
                                             </div>
                                           
                                         </div>
@@ -121,8 +121,7 @@
                             </div>
 
                         </div>
-                        <div>
-                        </div>
+                      
 
 
 
@@ -498,6 +497,10 @@
                     return 0;
                 }
                 if (g.GroupName == 'All Entities') {
+                    if ($scope.SelectedTeam)
+                    {
+                        return $scope.CorpEntites.filter(function (o) { return o.Office && o.Office.toLowerCase().trim() == $scope.SelectedTeam.toLowerCase().trim() }).length;
+                    }
                     return $scope.CorpEntites.length;
                 }
                 var count = 0
@@ -507,9 +510,32 @@
                     }
                     return count
                 }
-                count = $scope.CorpEntites.filter(function (o) { return o.Status && o.Status.toLowerCase().trim() == g.GroupName.toLowerCase().trim() }).length;
-                return count;
+                var corps = $scope.CorpEntites.filter(function (o) { return (o.Status && o.Status.toLowerCase().trim() == g.GroupName.toLowerCase().trim()) });
+                if ($scope.SelectedTeam)
+                {
+                    corps = corps.filter(function (o) { return o.Office && o.Office.toLowerCase().trim() == $scope.SelectedTeam.toLowerCase().trim() });
+                }
+                return corps.length;
             }
+            
+            $scope.TeamCount =function(teamName)
+            {
+                if (!$scope.CorpEntites)
+                {
+                    return 0;
+                }
+                var crops=[];
+                crops = teamName ? $scope.CorpEntites.filter(function (o) { return o.Office && o.Office.toLowerCase().trim() == teamName.toLowerCase().trim() }) : $scope.CorpEntites;
+                
+
+                if ($scope.selectType&&$scope.selectType != $scope.Groups[0].GroupName)
+               {
+                    crops= crops.filter(function (o) { return o.Status && o.Status.toLowerCase().trim() == $scope.selectType.toLowerCase().trim() })
+               }
+
+               return crops.length;
+            }
+
             $scope.EntitiesFilter = function (entity) {
                 if ($scope.selectType == 'All Entities' || (entity.Status && $scope.selectType.toLowerCase().trim() == entity.Status.toLowerCase().trim()))
                     return true;
