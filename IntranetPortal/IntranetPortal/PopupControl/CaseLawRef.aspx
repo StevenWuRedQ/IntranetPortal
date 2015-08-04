@@ -79,12 +79,10 @@
             }
 
             $scope.deleteCase = function (index) {
-                $http.get('/LegalUI/LegalServices.svc/DeleteLawReference?refId=' + $scope.Cases[index].RefId)
-                .then(function (response) {
-                    if (response.status == 200) {
-                        ptCom.arrayRemove($scope.Cases, index);
-                    }
-                })
+                var confirm = ptCom.arrayRemove($scope.Cases, index, true, function (obj) {
+                    debugger;
+                    $http.get('/LegalUI/LegalServices.svc/DeleteLawReference?refId=' + obj.RefId);
+                });
             }
 
             $scope.updateCase = function (index) {
@@ -137,7 +135,7 @@
         </div>
         <div dx-popup="{
                     showTitle: false,
-                    width: 400,
+                    width: 650,
                     contentTemplate: 'formContent',
                     bindingOptions: {
                         visible: 'formVisiable'

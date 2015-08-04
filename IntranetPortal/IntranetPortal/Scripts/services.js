@@ -9,9 +9,20 @@ app.service('ptCom', function () {
         }
     }
 
-    this.arrayRemove = function (model, index) {
+    this.arrayRemove = function (model, index, confirm, callback) {
         if (model && index < model.length) {
-            model.splice(index, 1);
+            if (confirm) {
+                var result = DevExpress.ui.dialog.confirm("Delete This?", "Confirm");
+                result.done(function (dialogResult) {
+                    if (dialogResult) {
+                        var deleteObj = model.splice(index, 1)[0];
+                        if (callback) callback(deleteObj);
+                    }
+                })
+            }
+            else {
+                model.splice(index, 1);
+            }
         }
     };
 })
