@@ -72,6 +72,12 @@ Partial Public Class UserInTeam
         Return GetTeamUsers("*")
     End Function
 
+    Public Shared Function IsUserInTeam(userName As String) As Boolean
+        Using ctx As New Entities
+            Return ctx.UserInTeams.Any(Function(ui) ui.EmployeeName = userName)
+        End Using
+    End Function
+
     Public Shared Function GetTeamActiveUser(teamName As String) As String()
         Return SelectEmployeeArray(GetTeamUsers(teamName).Where(Function(emp) emp.EmployeeActive = True))
     End Function

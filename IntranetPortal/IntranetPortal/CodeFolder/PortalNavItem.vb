@@ -126,6 +126,10 @@ Public Class PortalNavItem
                         Return False
                     End If
 
+                    If Not UserInTeam.IsUserInTeam(userName) Then
+                        Return False
+                    End If
+
                     If Not Employee.HasSubordinates(userName) Then
                         Return True
                     End If
@@ -133,6 +137,10 @@ Public Class PortalNavItem
             Case NavItemType.Manager
                 If Roles.IsUserInRole(userName, "Admin") Then
                     Return True
+                End If
+
+                If Not UserInTeam.IsUserInTeam(userName) Then
+                    Return False
                 End If
 
                 If IsUserRoles(userName) Then
