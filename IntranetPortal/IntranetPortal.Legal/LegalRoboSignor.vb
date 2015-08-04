@@ -4,5 +4,4 @@
             Return ctx.LegalRoboSignors.ToList
         End Using
     End Function
-
 End Class

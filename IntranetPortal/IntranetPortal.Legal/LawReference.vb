@@ -1,4 +1,7 @@
-﻿Partial Public Class LawReference
+﻿Imports System.ComponentModel.DataAnnotations
+
+<MetadataType(GetType(LawReferenceMetadata))>
+Partial Public Class LawReference
 
     Public Shared Function GetReference(RefId As Integer) As LawReference
         Using ctx As New LegalModelContainer
@@ -27,8 +30,11 @@
 
             ctx.SaveChanges()
         End Using
-
     End Sub
+End Class
 
+Public Class LawReferenceMetadata
+    <Newtonsoft.Json.JsonConverter(GetType(Core.JsArrayToStringConverter))>
+    Public Property Notes As String
 
 End Class
