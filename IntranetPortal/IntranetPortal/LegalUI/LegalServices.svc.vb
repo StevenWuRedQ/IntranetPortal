@@ -56,4 +56,48 @@ Public Class LegalServices
 
 #End Region
 
+#Region "Legal Case"
+    <OperationContract()>
+    <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
+    Public Function SetLegalFollowUp(bble As String, type As String, dtSelected As String) As Boolean
+        Dim dateSelected = DateTime.Now
+
+        Select Case type
+            Case "Tomorrow"
+                dateSelected = DateTime.Now.AddDays(1)
+            Case "nextWeek"
+                dateSelected = DateTime.Now.AddDays(7)
+            Case "thirtyDays"
+                dateSelected = DateTime.Now.AddDays(30)
+            Case "sixtyDays"
+                dateSelected = DateTime.Now.AddDays(60)
+            Case "customDays"
+                If DateTime.TryParse(dtSelected, dateSelected) Then
+
+                Else
+
+                End If
+        End Select
+
+        Try
+            Dim lCase = Legal.LegalCase.GetCase(bble)
+            lCase.FollowUp = dateSelected
+            lCase.UpdateDate = DateTime.Now
+            lCase.UpdateBy = HttpContext.Current.User.Identity.Name
+            lCase.SaveData()
+
+            LeadsActivityLog.AddActivityLog(DateTime.Now, "New Legal follow up date: " & dateSelected.ToString("d"), bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.FollowUp)
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+        Return False
+    End Function
+
+#End Region
+
+
+
+
 End Class

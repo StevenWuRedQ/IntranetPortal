@@ -16,7 +16,7 @@ Public Class DateTimeJavaScriptConverter
 
     Public Overrides ReadOnly Property SupportedTypes() As IEnumerable(Of Type)
         Get
-            Return {GetType(DateTime)}
+            Return {GetType(DateTime), GetType(DateTime?)}
         End Get
     End Property
 

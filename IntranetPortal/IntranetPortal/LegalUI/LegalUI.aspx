@@ -247,7 +247,7 @@
                                             <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="CompleteResearch()" data-original-title="Complete Research"></i>
                                             <% End If%>
 
-                                          <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or (ShowReassginBtn()) Then%>
+                                            <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or (ShowReassginBtn()) Then%>
                                             <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Attorney');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to paralegal / Attorney"></i>
                                             <% End If%>
 
@@ -479,6 +479,113 @@
     </div>
     <!-- /.modal-content -->
     <uc1:SendMail runat="server" ID="SendMail" />
+
+
+    <!-- Follow up function  -->        
+    <script type="text/javascript">
+        
+        function OnCallbackMenuClick(s, e) {
+
+            if (e.item.name == "Custom") {
+                ASPxPopupSelectDateControl.PerformCallback("Show");
+                ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
+                e.processOnServer = false;
+                return;
+            }
+
+            //SetLeadStatus(e.item.name + "|" + leadsInfoBBLE);
+            SetLegalFollowUp(e.item.name)
+            e.processOnServer = false;
+        }
+
+        function SetLegalFollowUp(type, dateSelected)
+        {
+            if (typeof dateSelected == 'undefined')
+                dateSelected = new Date();
+
+            var fileData = {
+                "bble": leadsInfoBBLE,
+                "type": type,
+                "dtSelected": dateSelected
+            };
+
+            $.ajax({
+                url: '/LegalUI/LegalServices.svc/SetLegalFollowUp',
+                type: 'POST',
+                data: JSON.stringify(fileData),
+                cache: false,
+                dataType: 'json',
+                processData: false, // Don't process the files
+                contentType: 'application/json',
+                success: function (data) {
+                    alert('successful..');
+
+                    if (typeof gridTrackingClient != "undefined")
+                        gridTrackingClient.Refresh();
+                },
+                error: function (data) {
+                    alert('Some error Occurred! Detail: '+data);
+                }
+            });
+        }
+
+    </script>
+    <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
+        AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+        ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+        <ItemStyle Paddings-PaddingLeft="20px" />
+        <Items>
+            <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
+            <dx:MenuItem Text="Next Week" Name="nextWeek"></dx:MenuItem>
+            <dx:MenuItem Text="30 Days" Name="thirtyDays">
+            </dx:MenuItem>
+            <dx:MenuItem Text="60 Days" Name="sixtyDays">
+            </dx:MenuItem>
+            <dx:MenuItem Text="Custom" Name="Custom">
+            </dx:MenuItem>
+        </Items>
+        <ClientSideEvents ItemClick="OnCallbackMenuClick" />
+    </dx:ASPxPopupMenu>
+    <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="360px" Height="250px"
+        MaxWidth="800px" MaxHeight="150px" MinHeight="150px" MinWidth="150px" ID="pcMain"
+        HeaderText="Select Date" Modal="false"
+        runat="server" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
+        <ContentCollection>
+            <dx:PopupControlContentControl runat="server" ID="pcMainPopupControl">
+                <table>
+                    <tr>
+                        <td>
+                            <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="true"></dx:ASPxCalendar>
+                            <%--     <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" 
+                                                            TimeSectionProperties-Visible="True" CssClass="edit_drop">
+                                                            <TimeSectionProperties Visible="True"></TimeSectionProperties>
+                                                            <ClientSideEvents Init="function(s,e){ s.SetDate(new Date());}" />
+                                                        </dx:ASPxDateEdit>--%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
+                            <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                <ClientSideEvents Click="function(){
+                                                                                                                        ASPxPopupSelectDateControl.Hide();   
+                                                                                                                        SetLegalFollowUp('customDays',callbackCalendar.GetSelectedDate());                                                                                                                        
+                                                                                                                        }"></ClientSideEvents>
+                            </dx:ASPxButton>
+                            &nbsp;
+                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                                                <ClientSideEvents Click="function(){
+                                                                                                                        ASPxPopupSelectDateControl.Hide();                                                                                                                                                                                                                                               
+                                                                                                                        }"></ClientSideEvents>
+
+                                                            </dx:ASPxButton>
+                        </td>
+                    </tr>
+                </table>
+            </dx:PopupControlContentControl>
+        </ContentCollection>
+    </dx:ASPxPopupControl>
+    <!-- end follow up function -->
+
     <script type="text/javascript">
 
         function VendorsClosing(s) {
@@ -524,7 +631,7 @@
             if (leadsInfoBBLE) {
                 $http.post('/Services/ContactService.svc/CheckInShortSale', { "BBLE": leadsInfoBBLE }).success(function (data) {
 
-                $scope.LegalCase.InShortSale = data;
+                    $scope.LegalCase.InShortSale = data;
 
                 }).error(function (data) {
                     alert("check in short sale error " + leadsInfoBBLE + JSON.stringify(data));
@@ -762,7 +869,6 @@
                     error(function (data, status) {
                         alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                     });
-
             }
 
 
@@ -810,7 +916,7 @@
                     success(function (data, status, headers, config) {
 
                         $scope.LegalCase = $.parseJSON(data.d);
-                        
+
                         $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
                         $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
                         var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
@@ -869,7 +975,7 @@
                 if ($scope.LegalCase.SecondaryInfo) {
                     return $scope.LegalCase.SecondaryInfo.SelectedType == filed;
                 }
-               
+
                 return false;
             }
             $scope.ShowContorl = function (m) {
@@ -1079,7 +1185,7 @@
             };
 
             $scope.HighLightStauts = function (model, index) {
-                 return parseInt(model)>index?true:false;
+                return parseInt(model) > index ? true : false;
             };
             $scope.addToEstateMembers = function (index) {
                 $scope.LegalCase.ForeclosureInfo.MembersOfEstate.push({ "id": index, "name": $scope.LegalCase.membersText });
