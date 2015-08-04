@@ -904,6 +904,9 @@
       <DependentUpon>LegalSecondaryActionTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="LegalUI\LegalServices.svc.vb">
+      <DependentUpon>LegalServices.svc</DependentUpon>
+    </Compile>
     <Compile Include="LegalUI\LegalSummaryTab.ascx.designer.vb">
       <DependentUpon>LegalSummaryTab.ascx</DependentUpon>
     </Compile>
@@ -2292,6 +2295,7 @@
     <Content Include="LegalUI\LegalForeclosureReviewTab.ascx" />
     <Content Include="LegalUI\LegalSecondaryActions.ascx" />
     <Content Include="LegalUI\LegalSecondaryActionTab.ascx" />
+    <Content Include="LegalUI\LegalServices.svc" />
     <Content Include="LegalUI\LegalSummaryTab.ascx" />
     <Content Include="LegalUI\LegalTab.ascx" />
     <Content Include="LegalUI\LegalUI.aspx" />
