@@ -21,6 +21,19 @@ Public Class LegalServices
         Return Legal.LawReference.GetReference(refId).ToJson
     End Function
 
+    <OperationContract()>
+    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    Public Function DeleteLawReference(refId As Integer) As Boolean
+        Try
+            Legal.LawReference.GetReference(refId).Delete()
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+        Return False
+    End Function
+
 
     <OperationContract()>
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
