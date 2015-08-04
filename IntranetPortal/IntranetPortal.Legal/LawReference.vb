@@ -15,6 +15,14 @@ Partial Public Class LawReference
         End Using
     End Function
 
+    Public Sub Delete()
+        Using ctx As New LegalModelContainer
+            Dim lRef = ctx.LawReferences.Find(RefId)
+            ctx.LawReferences.Remove(lRef)
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
     Public Sub Save()
         Using ctx As New LegalModelContainer
             If RefId = 0 Then
