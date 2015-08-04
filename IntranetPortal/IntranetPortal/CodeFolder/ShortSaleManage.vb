@@ -36,7 +36,7 @@ Public Class ShortSaleManage
                                    maildata.Add("StatusOfUpdate", statusOfUpdate)
                                    maildata.Add("Comments", comments)
 
-                                   Core.EmailService.SendShortSaleMail(notifyEmails, "", "SSUpdateNotifyEmail", Nothing)
+                                   Core.EmailService.SendShortSaleMail(notifyEmails, "", "SSUpdateNotifyEmail", maildata)
                                Catch ex As Exception
                                    Core.SystemLog.LogError("ShortSaleUpdateNotifyEmail", ex, "", "Portal", bble)
                                End Try
@@ -147,6 +147,10 @@ Public Class ShortSaleManage
                     ssCase.SaveStatus(status)
                     Return True
                 End If
+            Case CaseStatus.Closed
+                ssCase.SaveStatus(status)
+                LegalCaseManage.NotifyLegalWhenClosedinSS(ssCase.BBLE)
+                Return True
             Case Else
                 ssCase.SaveStatus(status)
                 Return True

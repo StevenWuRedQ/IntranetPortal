@@ -72,4 +72,26 @@ Public Class LegalCaseManage
         lc.Attorney = attorney
         lc.SaveData()
     End Sub
+
+    Public Shared Sub NotifyLegalWhenClosedinSS(bble As String)
+        Dim lCase = Legal.LegalCase.GetCase(bble)
+
+        Dim NotifyUpdate = Sub()
+                               Try
+                                   Dim users = Roles.GetUsersInRole("Legal-Manager")
+
+                                   Dim notifyEmails = String.Join(";", users.Select(Function(name)
+                                                                                        Return Employee.GetInstance(name).Email
+                                                                                    End Function).ToArray)
+
+                                   Dim maildata As New Dictionary(Of String, String)
+                                   maildata.Add("CaseName", lCase.CaseName)
+                                   maildata.Add("BBLE", bble)
+
+                                   Core.EmailService.SendShortSaleMail(notifyEmails, "", "SSClosedNotifyforLegal", maildata)
+                               Catch ex As Exception
+                                   Core.SystemLog.LogError("Notify legal when ShortSale case is closed", ex, "", "Portal", bble)
+                               End Try
+                           End Sub
+    End Sub
 End Class
