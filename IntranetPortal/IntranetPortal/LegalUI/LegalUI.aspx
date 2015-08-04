@@ -86,9 +86,7 @@
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
     <%--leagal Ui--%>
-
     <div id="LegalCtrl" ng-controller="LegalCtrl">
-
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
                 <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
