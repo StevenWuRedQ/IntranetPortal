@@ -83,6 +83,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataModel\LawReference.vb">
+      <DependentUpon>LegalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\LegalCase.vb">
       <DependentUpon>LegalModel.tt</DependentUpon>
     </Compile>
@@ -107,6 +110,7 @@
     <Compile Include="DataModel\LegalRoboSignor.vb">
       <DependentUpon>LegalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="LawReference.vb" />
     <Compile Include="LegalCase.vb" />
     <Compile Include="LegalJudge.vb" />
     <Compile Include="LegalRoboSignor.vb" />

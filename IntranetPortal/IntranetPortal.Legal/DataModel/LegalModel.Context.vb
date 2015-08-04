@@ -25,5 +25,6 @@ Partial Public Class LegalModelContainer
     Public Overridable Property LegalCases() As DbSet(Of LegalCase)
     Public Overridable Property LegalJudges() As DbSet(Of LegalJudge)
     Public Overridable Property LegalRoboSignors() As DbSet(Of LegalRoboSignor)
+    Public Overridable Property LawReferences() As DbSet(Of LawReference)
 
 End Class

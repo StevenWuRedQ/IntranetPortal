@@ -5,6 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="LegalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="LawReferences">
+          <Key>
+            <PropertyRef Name="RefId" />
+          </Key>
+          <Property Name="RefId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Topic" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="CaseName" Type="nvarchar" MaxLength="256" />
+          <Property Name="Summary" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="LegalCase">
           <Key>
             <PropertyRef Name="BBLE" />
@@ -48,6 +63,7 @@
           <Property Name="Cell" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="LegalModelStoreContainer">
+          <EntitySet Name="LawReferences" EntityType="Self.LawReferences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalCase" EntityType="Self.LegalCase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalJudge" EntityType="Self.LegalJudge" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalRoboSignor" EntityType="Self.LegalRoboSignor" Schema="dbo" store:Type="Tables" />
@@ -60,6 +76,7 @@
           <EntitySet Name="LegalCases" EntityType="LegalModel.LegalCase" />
           <EntitySet Name="LegalJudges" EntityType="LegalModel.LegalJudge" />
           <EntitySet Name="LegalRoboSignors" EntityType="LegalModel.LegalRoboSignor" />
+          <EntitySet Name="LawReferences" EntityType="LegalModel.LawReference" />
         </EntityContainer>
         <EntityType Name="LegalCase">
           <Key>
@@ -102,6 +119,21 @@
           <Property Name="Office" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Cell" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LawReference">
+          <Key>
+            <PropertyRef Name="RefId" />
+          </Key>
+          <Property Name="RefId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Topic" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="CaseName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Summary" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -153,6 +185,22 @@
                 <ScalarProperty Name="OfficeNO" ColumnName="OfficeNO" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LawReferences">
+            <EntityTypeMapping TypeName="LegalModel.LawReference">
+              <MappingFragment StoreEntitySet="LawReferences">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
