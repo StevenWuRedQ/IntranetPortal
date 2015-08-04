@@ -624,7 +624,14 @@ Public Class Troubleshooting
 
     Private Sub btnRefreshLegalReport_Click(sender As Object, e As EventArgs) Handles btnRefreshLegalReport.Click
 
-        Dim lCase = IntranetPortal.Legal.LegalCase.GetCase(txtBBLE.Text)
-        lCase.SaveData()
+        If txtBBLE.Text = "*" Then
+
+            For Each item In Legal.LegalCase.GetAllCases
+                item.SaveData()
+            Next
+        Else
+            Dim lCase = IntranetPortal.Legal.LegalCase.GetCase(txtBBLE.Text)
+            lCase.SaveData()
+        End If
     End Sub
 End Class
