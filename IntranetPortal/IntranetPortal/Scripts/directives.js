@@ -96,6 +96,7 @@ portalApp.directive('numberMask', function () {
         },
     };
 });
+
 portalApp.directive('ptRadio', function () {
     return {
         restrict: 'E',
@@ -139,3 +140,19 @@ portalApp.directive('ckEditor', [function () {
         }
     };
 }])
+
+portalApp.directive('ptAdd', function () {
+    return {
+        restrict: 'E',
+        template: '<i class="fa fa-plus-circle icon_btn text-primary tooltip-examples" title="Add"></i>',
+    }
+})
+
+portalApp.directive('ptDel', function () {
+    return {
+        restrict: 'E',
+        template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
+    }
+})
+
+

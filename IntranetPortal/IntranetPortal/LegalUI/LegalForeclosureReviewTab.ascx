@@ -49,10 +49,13 @@
 					<option value="3">RJI</option>
 					<option value="4">Settlement Conf</option>
 					<option value="5">O/REF</option>
-					<option value="6">Judgement</option>
+					<option value="10">Judgement Submitted</option>     <!--replace the original option 6-->
+					<option value="11">Judgement Granted</option>
+					<option value="12">Judgement Entered</option>
 					<option value="7">Sale Date</option>
 					<option value="8">Dismissed w/ Prejudice</option>
 					<option value="9">Dismissed w/o Prejudice</option>
+
 				</select>
 			</li>
 			<li class="ss_form_item" ng-show="LegalCase.CaseStauts==7">

@@ -30,7 +30,6 @@ Partial Public Class LawReference
                 ctx.LawReferences.Add(Me)
             Else
                 Dim lRef = ctx.LawReferences.Find(RefId)
-
                 If lRef IsNot Nothing Then
                     lRef = Core.Utility.SaveChangesObj(lRef, Me)
                 End If

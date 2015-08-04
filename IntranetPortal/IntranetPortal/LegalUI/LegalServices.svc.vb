@@ -42,19 +42,16 @@ Public Class LegalServices
     End Function
 
     <OperationContract()>
-   <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
-    Public Function SaveLaeReference(lawRef As String) As Channels.Message
-
+    <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
+    Public Function SaveLaeReference(lawRef As String) As String
         Dim res = JsonConvert.DeserializeObject(Of Legal.LawReference)(lawRef)
-
         Try
             res.Save()
-
         Catch ex As Exception
             Throw ex
         End Try
 
-        Return Nothing
+        Return res.RefId
     End Function
 
 #End Region

@@ -41,12 +41,59 @@
     <script src="/Scripts/ng-infinite-scroll.min.js"></script>
     <script>
         var app = angular.module('PortalApp');
-        app.controller('CaseCtrl', ['$scope', 'ptCom', function ($scope, ptCom) {
-            $scope.Cases = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+        app.controller('CaseCtrl', ['$scope', '$http', 'ptCom', function ($scope, $http, ptCom) {
+            $scope.Cases = [{}, ];
             $scope.ptCom = ptCom;
-            $scope.totalItems = $scope.Cases.length;
-            $scope.itemsPerPage = 5;
-            $scope.currentPage = 1;
+            $scope.formVisiable = false;
+
+            (function () {
+                $http.get('/LegalUI/LegalServices.svc/GetAllReference')
+                    .then(function (response) {
+                        if (response.status == 200) {
+                            $scope.Cases = response.data;
+                        }
+                    });
+            }());
+            $scope.resetNewCase = function () {
+                $scope.newCase = {};
+                $scope.newCase.Topic = '';
+                $scope.newCase.CaseName = '';
+                $scope.newCase.Summary = '';
+                $scope.newCase.Notes = [{}, ];
+            }
+            $scope.resetNewCase();
+
+            $scope.closeForm = function () {
+                $scope.resetNewCase();
+                $scope.formVisiable = !$scope.formVisiable;
+            }
+
+            $scope.saveNew = function () {
+                var pushFlag = $scope.newCase.RefId ? false : true;
+                $http.post('/LegalUI/LegalServices.svc/SaveLaeReference', { 'lawRef': JSON.stringify($scope.newCase) })
+                .then(function (response) {
+                    $scope.newCase.RefId = parseInt(response.data);
+                    if(pushFlag) $scope.Cases.push($scope.newCase);
+                    $scope.closeForm();
+                })
+            }
+
+            $scope.deleteCase = function (index) {
+                $http.get('/LegalUI/LegalServices.svc/DeleteLawReference?refId=' + $scope.Cases[index].RefId)
+                .then(function (response) {
+                    if (response.status == 200) {
+                        ptCom.arrayRemove($scope.Cases, index);
+                    }
+                })
+            }
+
+            $scope.updateCase = function (index) {
+                $scope.resetNewCase();
+                $scope.newCase = $scope.Cases[index];
+                $scope.formVisiable = true;
+
+            }
+
         }]);
     </script>
     <div class="container caseUI" ng-controller="CaseCtrl">
@@ -55,30 +102,83 @@
                 <input class="search" style="width: 400px" type="text" placeholder="Search..." ng-model="searchCriteria" />
                 <span class="button"><i class="fa fa-search"></i></span>
             </div>
-            <h2 class="ss_form_title">Case&nbsp<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="ptCom.arrayAdd(Cases,'Cases')" title="Add"></i></h2>
-                <div ng-repeat="case in Cases|filter: searchCriteria| limitTo: 5" style="border-radius: 5px; padding: 5px; margin: 10px" >
-                    <table class="table table-bordered" style="font-size: 13px">
-                        <tr>
-                            <td>
-                                <label class="ss_form_input_title">Topic</label>&nbsp</td>
-                            <td>
-                                <input type="text" ng-model="case.topic" /></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="ss_form_input_title">Case name & citation</label>&nbsp</td>
-                            <td>
-                                <input type="text" ng-model="case.name" /></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="ss_form_input_title">Summary</label>&nbsp</td>
-                            <td>
-                                <textarea ng-model="case.summary" rows="4" cols="80" style="resize: none" /></td>
-                        </tr>
-                    </table>
+            <h2 class="ss_form_title">Case&nbsp<pt-add ng-click="formVisiable=true"></pt-add></h2>
+            <div ng-repeat="case in Cases|filter: searchCriteria| limitTo: 5" style="border-radius: 5px; padding: 5px; margin: 10px" ng-dblclick="updateCase($index)">
+                <table class="table table-bordered" style="font-size: 13px">
+                    <tr>
+                        <td>
+                            <label class="ss_form_input_title">Topic</label>&nbsp</td>
+                        <td>
+                            <input type="text" class="ss_form_input" ng-model="case.Topic" readonly /></td>
+                        <td>
+                            <label class="ss_form_input_title">Case name & citation</label>&nbsp</td>
+                        <td>
+                            <input type="text" class="ss_form_input" ng-model="case.CaseName" readonly />
+                            <pt-del ng-class="'pull-right'" ng-click="deleteCase($index)"></pt-del>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="ss_form_input_title">Summary</label>&nbsp</td>
+                        <td colspan="3">
+                            <input type="text" class="ss_form_input" ng-model="case.Summary" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="ss_form_input_title">Notes</label>&nbsp</td>
+                        <td colspan="3">
+                            <div ng-repeat="note in case.Notes">
+                                <textarea class="edit_text_area text_area_ss_form" ng-model="note.content" readonly></textarea>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div dx-popup="{
+                    showTitle: false,
+                    width: 400,
+                    contentTemplate: 'formContent',
+                    bindingOptions: {
+                        visible: 'formVisiable'
+                    }
+                }">
+
+            <div data-options="dxTemplate: { name: 'formContent'}">
+
+                <div class="row">
+                    <h2 class="ss_form_title">Add New Law Reference</h2>
+                    <br />
+                    <div>
+                        <label>Topic</label>
+                        <input class="form-control" type="text" ng-model="newCase.Topic" />
+                    </div>
+                    <div>
+                        <label>Case Name & citation</label>
+                        <input class="form-control" type="text" ng-model="newCase.CaseName" />
+                    </div>
+                    <div>
+                        <label>Summary</label>
+                        <input class="form-control" type="text" ng-model="newCase.Summary" />
+                    </div>
+                    <div>
+                        <label>Note&nbsp<pt-add ng-click="ptCom.arrayAdd(newCase.Notes)"></pt-add></label>
+                        <div ng-repeat="note in newCase.Notes">
+                            <textarea class="edit_text_area text_area_ss_form" ng-model="note.content" style="width: 95%"></textarea>
+                            <span>
+                                <pt-del ng-class="'pull-right'" ng-click="ptCom.arrayRemove(newCase.Notes, $index)"></pt-del>
+                            </span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="pull-right">
+                        <button class="btn btn-danger" ng-click="closeForm()">Cancel</button>
+                        <button class="btn btn-primary" ng-click="saveNew()">Save</button>
+                    </div>
                 </div>
             </div>
+        </div>
     </div>
 
 </asp:Content>
+

@@ -1,13 +1,18 @@
 ﻿var app = angular.module('PortalApp');
 
-app.service('ptCom',  function () {
-    this.arrayAdd = function (model) {
-        model = model === undefined ? [] : model;
-        model.push({});
+app.service('ptCom', function () {
+    this.arrayAdd = function (model, data) {
+        if (model) {
+            model = model === undefined ? [] : model;
+            data = data === undefined ? {} : data;
+            model.push(data);
+        }
     }
 
     this.arrayRemove = function (model, index) {
-        if (model && index < model.length) model.splice(index, 1);
+        if (model && index < model.length) {
+            model.splice(index, 1);
+        }
     };
 })
 
