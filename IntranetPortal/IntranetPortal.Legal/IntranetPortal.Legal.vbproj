@@ -89,6 +89,9 @@
     <Compile Include="DataModel\LegalCase.vb">
       <DependentUpon>LegalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\LegalCaseReport.vb">
+      <DependentUpon>LegalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\LegalJudge.vb">
       <DependentUpon>LegalModel.tt</DependentUpon>
     </Compile>
@@ -112,6 +115,7 @@
     </Compile>
     <Compile Include="LawReference.vb" />
     <Compile Include="LegalCase.vb" />
+    <Compile Include="LegalCaseReport.vb" />
     <Compile Include="LegalJudge.vb" />
     <Compile Include="LegalRoboSignor.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

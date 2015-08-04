@@ -4,6 +4,7 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not IsPostBack) Then
             BindGrid()
+            BindUpCommingFCGrid()
         End If
     End Sub
     Sub BindGrid()
@@ -11,6 +12,14 @@
 
         gdCases.DataSource = mCases
         gdCases.DataBind()
+    End Sub
+
+    Sub BindUpCommingFCGrid()
+        Dim mCases = Legal.LegalCaseReport.GetAllReport.Where(Function(r) r.SaleDate IsNot Nothing)
+        gridUpCommingFCSale.DataSource = mCases
+        gridUpCommingFCSale.GroupBy(gridUpCommingFCSale.Columns("SaleDate"))
+        gridUpCommingFCSale.ExpandAll()
+        gridUpCommingFCSale.DataBind()
     End Sub
 
     Protected Sub gdCases_DataBinding(sender As Object, e As EventArgs)
@@ -22,5 +31,11 @@
 
     Protected Sub lbExportExcel_Click(sender As Object, e As EventArgs)
         CaseExporter.WriteXlsxToResponse()
+    End Sub
+
+    Protected Sub gridUpCommingFCSale_DataBinding(sender As Object, e As EventArgs)
+        If (gridUpCommingFCSale.DataSource Is Nothing) Then
+            BindUpCommingFCGrid()
+        End If
     End Sub
 End Class

@@ -105,7 +105,7 @@ Public Class LegalCaseManage
         Return Nothing
     End Function
 
-    Public Shared Function GetSaleDate(bble As String) As DateTime
+    Public Shared Function GetSaleDate(bble As String) As DateTime?
         Dim c = ShortSale.ShortSaleCase.GetCaseByBBLE(bble)
         If (c IsNot Nothing) Then
             Return c.SaleDate

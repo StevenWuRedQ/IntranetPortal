@@ -24,6 +24,15 @@ Partial Public Class LegalCase
         End Get
     End Property
 
+    'Private _saleDate As DateTime
+    'Public ReadOnly Property SaleDate As Date
+    '    Get
+    '        If (_saleDate Is Nothing) Then
+
+    '        End If
+    '        Return _saleDate
+    '    End Get
+    'End Property
     Public ReadOnly Property LegalStatusString As String
         Get
             If LegalStatus.HasValue Then

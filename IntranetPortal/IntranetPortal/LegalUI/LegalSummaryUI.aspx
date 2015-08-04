@@ -23,8 +23,7 @@
             AllLeadsGridClient.ApplyFilter(filterCondition);
             return false;
         }
-        function ShowCaseInfo(BBLE)
-        {
+        function ShowCaseInfo(BBLE) {
             var url = '/LegalUI/LegalUI.aspx?bble=' + BBLE;
             OpenLeadsWindow(url, 'Legal')
         }
@@ -34,49 +33,95 @@
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <uc1:Common runat="server" ID="Common" />
-    <div class="container" style="margin-top:20px">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-8 form-inline">
-               <input type="text" style="margin-right: 20px" id="QuickSearch" class="form-control"  placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}"/> 
-                <i class="fa fa-search icon_btn tooltip-examples  grid_buttons"  style="margin-right: 20px;font-size:19px" onclick="SearchGrid()" title="search" ></i> 
-                <asp:LinkButton ID="lbExportExcel" runat="server" Text="<i class='fa fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples' title='export to excel'></i>" OnClick="lbExportExcel_Click"></asp:LinkButton>
-                
+    <div class=" container-fluid" style="padding: 20px 30px">
+        <div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3>ALL LEGAL FILES</h3>
+                        </div>
+                        <div class="col-md-4  form-inline">
+                            <input type="text" style="margin-right: 20px" id="QuickSearch" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />
+                            <i class="fa fa-search icon_btn tooltip-examples  grid_buttons" style="margin-right: 20px; font-size: 19px" onclick="SearchGrid()" title="search"></i>
+                            <asp:LinkButton ID="lbExportExcel" runat="server" Text="<i class='fa fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples' title='export to excel'></i>" OnClick="lbExportExcel_Click"></asp:LinkButton>
+
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        <dx:ASPxGridView ID="gdCases" runat="server" KeyFieldNam="BBLE" Theme="Moderno" CssClass="table" ClientInstanceName="AllLeadsGridClient" OnDataBinding="gdCases_DataBinding">
+                            <Columns>
+                                <dx:GridViewDataColumn FieldName="BBLE" Visible="false">
+                                    <Settings HeaderFilterMode="CheckedList" />
+
+                                </dx:GridViewDataColumn>
+                                <dx:GridViewDataColumn FieldName="CaseName">
+                                    <Settings HeaderFilterMode="CheckedList" />
+                                    <DataItemTemplate>
+                                        <div style="cursor: pointer;" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("BBLE"))%>'><%# Eval("CaseName")%></div>
+                                    </DataItemTemplate>
+                                </dx:GridViewDataColumn>
+                                <dx:GridViewDataColumn FieldName="LegalStatusString" Caption="Case Status">
+                                    <Settings HeaderFilterMode="CheckedList" />
+                                </dx:GridViewDataColumn>
+                                <dx:GridViewDataColumn FieldName="StuatsStr" Caption="Process Stauts">
+                                    <Settings HeaderFilterMode="CheckedList" />
+                                </dx:GridViewDataColumn>
+                                <dx:GridViewDataColumn FieldName="ResearchBy" Caption="Research">
+                                    <Settings HeaderFilterMode="CheckedList" />
+                                </dx:GridViewDataColumn>
+                                <dx:GridViewDataColumn FieldName="Attorney">
+                                    <Settings HeaderFilterMode="CheckedList" />
+                                </dx:GridViewDataColumn>
+
+                            </Columns>
+
+                            <Settings ShowHeaderFilterButton="true" />
+
+                        </dx:ASPxGridView>
+                        <dx:ASPxGridViewExporter ID="CaseExporter" runat="server" GridViewID="gdCases"></dx:ASPxGridViewExporter>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>Upcomming FC Sale / Auction Dates  </h3>
+                    <dx:ASPxGridView ID="gridUpCommingFCSale" runat="server" KeyFieldName="BBLE" OnDataBinding="gridUpCommingFCSale_DataBinding">
+                        <Columns>
+                            <dx:GridViewDataColumn FieldName="PropertyAddress">
+                                <DataItemTemplate>
+                                    <div style="cursor: pointer;" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("BBLE"))%>'><%# Eval("PropertyAddress")%></div>
+                                </DataItemTemplate>
+                            </dx:GridViewDataColumn>
+                            <dx:GridViewDataColumn FieldName="SaleDate"></dx:GridViewDataColumn>
+                        </Columns>
+                        <SettingsPager PageSize="10"></SettingsPager>
+                    </dx:ASPxGridView>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <h3>OSC's</h3>
+                    <dx:ASPxGridView ID="gridOSCs" runat="server"></dx:ASPxGridView>
+                </div>
+                <div class="col-md-2">
+                    <h3>Partitions</h3>
+                    <dx:ASPxGridView ID="gridPartitions" runat="server"></dx:ASPxGridView>
+                </div>
+                <div class="col-md-2">
+                    <h3>QTA's</h3>
+                    <dx:ASPxGridView ID="gridQTAs" runat="server"></dx:ASPxGridView>
+                </div>
+                <div class="col-md-2">
+                    <h3>Deed Reversions</h3>
+                    <dx:ASPxGridView ID="gridDeedReversions" runat="server"></dx:ASPxGridView>
+                </div>
+                <div class="col-md-2">
+                    <h3>SP's and other Misc. actions</h3>
+                    <dx:ASPxGridView ID="gridSPAndOther" runat="server"></dx:ASPxGridView>
+                </div>
             </div>
         </div>
-        <div class="row" style="margin-top:10px">
-            <dx:ASPxGridView ID="gdCases" runat="server" KeyFieldNam="BBLE" Theme="Moderno" CssClass="table" ClientInstanceName="AllLeadsGridClient" OnDataBinding="gdCases_DataBinding">
-                <Columns>
-                    <dx:GridViewDataColumn FieldName="BBLE">
-                        <Settings HeaderFilterMode="CheckedList"/>
-                      
-                    </dx:GridViewDataColumn>
-                    <dx:GridViewDataColumn FieldName="CaseName">
-                        <Settings HeaderFilterMode="CheckedList"/>
-                          <DataItemTemplate>
-                            <div style="cursor: pointer;" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("BBLE"))%>'><%# Eval("CaseName")%></div>
-                        </DataItemTemplate>
-                    </dx:GridViewDataColumn>
-                    <dx:GridViewDataColumn FieldName="LegalStatusString" Caption="Case Status">
-                        <Settings HeaderFilterMode="CheckedList"/>
-                    </dx:GridViewDataColumn>
-                    <dx:GridViewDataColumn FieldName="StuatsStr" Caption="Process Stauts">
-                        <Settings HeaderFilterMode="CheckedList"/>
-                    </dx:GridViewDataColumn>
-                    <dx:GridViewDataColumn FieldName="ResearchBy" Caption="Research">
-                        <Settings HeaderFilterMode="CheckedList"/>
-                    </dx:GridViewDataColumn>
-                    <dx:GridViewDataColumn FieldName="Attorney">
-                        <Settings HeaderFilterMode="CheckedList"/>
-                    </dx:GridViewDataColumn>
 
-                </Columns>
-                
-                <Settings  ShowHeaderFilterButton="true" />
-               
-            </dx:ASPxGridView>
-             <dx:ASPxGridViewExporter ID="CaseExporter" runat="server" GridViewID="gdCases"></dx:ASPxGridViewExporter>
-        </div>
-        
     </div>
 
 </asp:Content>

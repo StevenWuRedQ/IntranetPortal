@@ -48,4 +48,58 @@ Partial Public Class LegalSummaryUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents CaseExporter As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+
+    '''<summary>
+    '''gridUpCommingFCSale control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridUpCommingFCSale As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''gridOSCs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridOSCs As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''gridPartitions control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridPartitions As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''gridQTAs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridQTAs As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''gridDeedReversions control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridDeedReversions As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''gridSPAndOther control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridSPAndOther As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 End Class
