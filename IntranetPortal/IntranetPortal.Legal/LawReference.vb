@@ -30,6 +30,7 @@ Partial Public Class LawReference
 
             ctx.SaveChanges()
         End Using
+
     End Sub
 End Class
 
