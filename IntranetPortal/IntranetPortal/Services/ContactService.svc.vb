@@ -46,6 +46,7 @@ Public Class ContactService
     End Function
 
     <OperationContract()>
+     <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
     Public Function CheckInShortSale(BBLE As String) As Channels.Message ' As List(Of PartyContact)
 
         Return ShortSaleCase.InShortSale(BBLE).ToJson

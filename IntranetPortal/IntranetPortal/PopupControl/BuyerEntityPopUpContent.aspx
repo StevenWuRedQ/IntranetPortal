@@ -134,7 +134,7 @@
                         <div>
 
                             <div class="clearfix" style="color: #234b60; font-size: 20px">
-                               {{SelectedTeam?(SelectedTeam==''?'All Team\'s ':SelectedTeam +'\'s '):''}} {{selectType}}
+                               {{GetTitle()}} 
                                 <div style="float: right">
                                     <div style="display: inline-block">
                                         <i class="fa fa-plus-circle tooltip-examples icon_btn" title="Add" style="color: #3993c1; font-size: 24px;" data-toggle="modal" data-target="#myModal"></i>
@@ -226,6 +226,8 @@
                                         </div>
                                     </div>
                                     &nbsp;
+                                    <i class="fa fa-file-excel-o tooltip-examples icon_btn" title="Excel" style="color: #3993c1; font-size: 24px;" data-toggle="modal" ng-click="ExportExcel()"></i>
+                                    &nbsp;
                                     <a href="https://appext20.dos.ny.gov/ecorp_public/f?p=2020:1:13820438194474" target="_blank">Corporation </a>&nbsp;
                                     <a href="http://www.irs.gov/Businesses/Small-Businesses-&-Self-Employed/Apply-for-an-Employer-Identification-Number-(EIN)-Online" target="_blank">EIN </a>
                                     <i class="fa fa-sort-amount-desc tooltip-examples icon_btn" title="Sort" ng-class="predicate=='Name'?'fa-sort-amount-desc':'fa-sort-amount-asc'" ng-click="group_text_order = group_text_order=='group_text'?'-group_text':'group_text'; " style="color: #999ca1; display: none"></i>
@@ -238,7 +240,7 @@
                                         <%--<li class="list-group-item popup_menu_list_item" style="font-size: 18px; width: 80px; cursor: default; font-weight: 900">{{groupedcontact.group_text}}
                                             <span class="badge" style="font-size: 18px; border-radius: 18px;">{{groupedcontact.data.length}}</span>
                                         </li>--%>
-                                        <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.EntityId==currentContact.EntityId? 'popup_employee_list_item_active':''" ng-repeat="contact in CorpEntites| filter:EntitiesFilter|filter:query.Name|filter:SelectedTeam">
+                                        <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.EntityId==currentContact.EntityId? 'popup_employee_list_item_active':''" ng-repeat="contact in (filteredCorps = (CorpEntites| filter:EntitiesFilter|filter:query.Name|filter:SelectedTeam))">
                                             <div>
                                                 <div style="font-weight: 900; font-size: 16px">
                                                     <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.CorpName}} </label>
@@ -468,7 +470,15 @@
             $scope.ChangeGroups = function (name) {
                 $scope.selectType = name;
             }
-
+            $scope.GetTitle = function()
+            {
+                return ($scope.SelectedTeam ? ($scope.SelectedTeam == '' ? 'All Team\'s ' : $scope.SelectedTeam + '\'s ') : '') + $scope.selectType;
+            }
+            $scope.ExportExcel = function()
+            {
+                JSONToCSVConvertor($scope.filteredCorps, true, $scope.GetTitle());
+                
+            }
             $http.get('/Services/ContactService.svc/GetAllBuyerEntities').success(function (data, status, headers, config) {
                 $scope.CorpEntites = data;
                 $scope.currentContact = $scope.CorpEntites[0];
@@ -497,17 +507,17 @@
                     }
                     return count
                 }
-                count = $scope.CorpEntites.filter(function (o) { return o.Status && o.Status.toLowerCase() == g.GroupName.toLowerCase() }).length;
+                count = $scope.CorpEntites.filter(function (o) { return o.Status && o.Status.toLowerCase().trim() == g.GroupName.toLowerCase().trim() }).length;
                 return count;
             }
             $scope.EntitiesFilter = function (entity) {
-                if ($scope.selectType == 'All Entities' || $scope.selectType == entity.Status)
+                if ($scope.selectType == 'All Entities' || (entity.Status && $scope.selectType.toLowerCase().trim() == entity.Status.toLowerCase().trim()))
                     return true;
                 var subs = $scope.Groups.filter(function (o) { return o.GroupName == $scope.selectType })[0];
                 if (subs && subs.SubGroups) {
                     for (var i = 0; i < subs.SubGroups.length; i++) {
                         var sg = subs.SubGroups[i];
-                        if (sg.GroupName == entity.Status) {
+                        if (entity.Status && sg.GroupName.toLowerCase().trim() == entity.Status.toLowerCase().trim()) {
                             return true;
                         }
                     }

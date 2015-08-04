@@ -15,7 +15,7 @@ portalApp.directive('ssDate', function () {
                 dateStr = !dateStr ? null : dateStr.toString();
                 if (dateStr && dateStr.indexOf('-') >= 0) {
                     var dd = new Date(dateStr);
-                    dd = (dd.getMonth() + 1) + '/' + (dd.getDate()) + '/' + (dd.getFullYear());
+                    dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
                     scope.$eval(attrs.ngModel + "='" + dd + "'");
                 }
             })

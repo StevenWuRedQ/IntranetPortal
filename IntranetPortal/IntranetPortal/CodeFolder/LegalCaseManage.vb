@@ -94,4 +94,25 @@ Public Class LegalCaseManage
                                End Try
                            End Sub
     End Sub
+
+#Region "Share data from other project"
+
+    Public Shared Function GetPropertyAddress(bble As String)
+        Dim l = Lead.GetInstance(bble)
+        If (l IsNot Nothing) Then
+            Return l.LeadsInfo.PropertyAddress
+        End If
+        Return Nothing
+    End Function
+
+    Public Shared Function GetSaleDate(bble As String) As DateTime
+        Dim c = ShortSale.ShortSaleCase.GetCaseByBBLE(bble)
+        If (c IsNot Nothing) Then
+            Return c.SaleDate
+        End If
+        Return Nothing
+    End Function
+
+#End Region
+
 End Class

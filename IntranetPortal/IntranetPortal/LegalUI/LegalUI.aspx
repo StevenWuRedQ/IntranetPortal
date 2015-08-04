@@ -522,12 +522,13 @@
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
             $scope.ptContactServices = ptContactServices;
             if (leadsInfoBBLE) {
-                $http.post('/Services/ContactService.svc/CheckInShortSale', { BBLE: leadsInfoBBLE }).success(function (data) {
+                $http.post('/Services/ContactService.svc/CheckInShortSale', { "BBLE": leadsInfoBBLE }).success(function (data) {
 
                 $scope.LegalCase.InShortSale = data;
 
-                }).error(function (data) { alert("check in short sale error " + leadsInfoBBLE); }
-           );
+                }).error(function (data) {
+                    alert("check in short sale error " + leadsInfoBBLE + JSON.stringify(data));
+                });
             }
 
 
