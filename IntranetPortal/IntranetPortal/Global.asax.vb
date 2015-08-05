@@ -4,6 +4,7 @@ Imports System.Web.Routing
 Imports System.Web.Security
 Imports Microsoft.AspNet.SignalR
 Imports System.Threading
+Imports System.Web.Http
 
 Public Class Global_asax
     Inherits System.Web.HttpApplication
@@ -13,6 +14,9 @@ Public Class Global_asax
 
         Dim users As New List(Of OnlineUser)
         Application("Users") = users
+
+        WebApiConfig2.Register(GlobalConfiguration.Configuration)
+        GlobalConfiguration.Configuration.EnsureInitialized()
     End Sub
 
 
