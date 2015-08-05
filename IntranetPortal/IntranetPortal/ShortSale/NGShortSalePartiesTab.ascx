@@ -23,9 +23,7 @@
     </div>
 </div>
 <div class="ss_form">
-    <h4 class="ss_form_title">Referral&nbsp
-        <i class="fa fa-compress icon_btn text-primary" ng-show="!referralCollapse" ng-click="referralCollapse=!referralCollapse"></i>
-        <i class="fa fa-expand icon_btn text-primary" ng-show="referralCollapse" ng-click="referralCollapse=!referralCollapse"></i></h4>
+    <h4 class="ss_form_title">Referral&nbsp<pt-collapse model="referralCollapse"/></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">

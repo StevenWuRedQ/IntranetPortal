@@ -74,6 +74,10 @@ Public Class ContactService
     End Function
     ' Add more operations here and mark them with <OperationContract()>
 
+    '<OperationContract()>
+    '<WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
+    'Public Function GetCorpEntityByStatus(s As String)
+
     <OperationContract()>
     <WebInvoke(Method:="POST", ResponseFormat:=WebMessageFormat.Json)>
     Public Function UploadFile(stream As Stream) As String

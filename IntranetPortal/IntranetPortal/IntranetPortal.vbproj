@@ -563,6 +563,69 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CodeFolder\WorkflowService.vb" />
+    <Compile Include="Construction\ConstructionContractTab.ascx.designer.vb">
+      <DependentUpon>ConstructionContractTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionContractTab.ascx.vb">
+      <DependentUpon>ConstructionContractTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Construction\ConstructionInitialIntakeTab.ascx.designer.vb">
+      <DependentUpon>ConstructionInitialIntakeTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionInitialIntakeTab.ascx.vb">
+      <DependentUpon>ConstructionInitialIntakeTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Construction\ConstructionPhotosTab.ascx.designer.vb">
+      <DependentUpon>ConstructionPhotosTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionPhotosTab.ascx.vb">
+      <DependentUpon>ConstructionPhotosTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Construction\ConstructionPlansTab.ascx.designer.vb">
+      <DependentUpon>ConstructionPlansTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionPlansTab.ascx.vb">
+      <DependentUpon>ConstructionPlansTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Construction\ConstructionProposalBidTab.ascx.designer.vb">
+      <DependentUpon>ConstructionProposalBidTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionProposalBidTab.ascx.vb">
+      <DependentUpon>ConstructionProposalBidTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Construction\ConstructionSignoffsTab.ascx.designer.vb">
+      <DependentUpon>ConstructionSignoffsTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionSignoffsTab.ascx.vb">
+      <DependentUpon>ConstructionSignoffsTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Construction\ConstructionUI.aspx.designer.vb">
+      <DependentUpon>ConstructionUI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionUI.aspx.vb">
+      <DependentUpon>ConstructionUI.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Construction\ConstructionUtilitiesTab.ascx.designer.vb">
+      <DependentUpon>ConstructionUtilitiesTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionUtilitiesTab.ascx.vb">
+      <DependentUpon>ConstructionUtilitiesTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Construction\ConstructionViolationTab.ascx.designer.vb">
+      <DependentUpon>ConstructionViolationTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionViolationTab.ascx.vb">
+      <DependentUpon>ConstructionViolationTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Content.Master.designer.vb">
       <DependentUpon>Content.Master</DependentUpon>
     </Compile>
@@ -1905,6 +1968,15 @@
     <Content Include="CallBackServices.asmx" />
     <Content Include="Chat\ChatDefault.aspx" />
     <Content Include="Chat\index.html" />
+    <Content Include="Construction\ConstructionContractTab.ascx" />
+    <Content Include="Construction\ConstructionInitialIntakeTab.ascx" />
+    <Content Include="Construction\ConstructionPhotosTab.ascx" />
+    <Content Include="Construction\ConstructionPlansTab.ascx" />
+    <Content Include="Construction\ConstructionProposalBidTab.ascx" />
+    <Content Include="Construction\ConstructionSignoffsTab.ascx" />
+    <Content Include="Construction\ConstructionUI.aspx" />
+    <Content Include="Construction\ConstructionUtilitiesTab.ascx" />
+    <Content Include="Construction\ConstructionViolationTab.ascx" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
     <Content Include="Content\bootstrap-responsive.css" />
