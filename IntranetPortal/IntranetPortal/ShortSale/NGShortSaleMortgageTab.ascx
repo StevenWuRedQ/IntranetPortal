@@ -59,7 +59,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Attorney Direct #</label>
-                    <input class="ss_form_input" ng-model="mortgage.AttorneyDirectNo" mask="999-99-9999" clean="true">
+                    <input class="ss_form_input" ng-model="mortgage.AttorneyDirectNo" mask="999-999-9999" clean="true">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Attorney Email</label>
