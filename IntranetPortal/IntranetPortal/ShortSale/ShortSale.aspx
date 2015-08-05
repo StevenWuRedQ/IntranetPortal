@@ -48,7 +48,7 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
-                <dx:SplitterPane Name="contentPanel" ShowCollapseForwardButton="True" PaneStyle-BackColor="#f9f9f9" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px">
+                <dx:SplitterPane Name="contentPanel" ShowCollapseForwardButton="True" PaneStyle-BackColor="#f9f9f9" ScrollBars="None" PaneStyle-Paddings-Padding="0px">
                     <PaneStyle BackColor="#F9F9F9">
                     </PaneStyle>
                     <ContentCollection>
@@ -73,64 +73,66 @@
                                                             <div class="shortSaleUI" style="align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
-                                                                <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
-                                                                    <li class="active short_sale_head_tab">
-                                                                        <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
-                                                                            <i class="fa fa-sign-out fa-info-circle head_tab_icon_padding"></i>
-                                                                            <div class="font_size_bold">ShortSale</div>
-                                                                        </a>
-                                                                    </li>
+                                                                <div class="legal-menu row" style="margin-left: 0px; margin-right: 0px">
+                                                                    <ul class="nav-bar nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
+                                                                        <li class="active short_sale_head_tab">
+                                                                            <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
+                                                                                <i class="fa fa-sign-out fa-info-circle head_tab_icon_padding"></i>
+                                                                                <div class="font_size_bold">ShortSale</div>
+                                                                            </a>
+                                                                        </li>
 
 
-                                                                    <li class="short_sale_head_tab">
-                                                                        <a href="#home_owner" role="tab" data-toggle="tab" class="tab_button_a">
-                                                                            <i class="fa fa-key head_tab_icon_padding"></i>
-                                                                            <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;Title&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="short_sale_head_tab">
-                                                                        <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
-                                                                            <i class="fa fa-file head_tab_icon_padding"></i>
-                                                                            <div class="font_size_bold">Documents</div>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="short_sale_head_tab">
-                                                                        <a class="tab_button_a">
-                                                                            <i class="fa fa-list-ul head_tab_icon_padding"></i>
-                                                                            <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                                                        </a>
-                                                                        <div class="shot_sale_sub">
-                                                                            <ul class="nav  clearfix" role="tablist">
-                                                                                <li class="short_sale_head_tab">
-                                                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="" data-href="#more_leads" onclick="LoadMoreFrame(this)">
-                                                                                        <i class="fa fa-folder head_tab_icon_padding"></i>
-                                                                                        <div class="font_size_bold">Leads</div>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li class="short_sale_head_tab">
-                                                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_evction" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_evction" onclick="LoadMoreFrame(this)">
-                                                                                        <i class="fa fa-sign-out head_tab_icon_padding"></i>
-                                                                                        <div class="font_size_bold">Eviction</div>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <%If IntranetPortal.Legal.LegalCase.InLegal(hfBBLE.Value) Then%>
-                                                                                <li class="short_sale_head_tab">
-                                                                                    <a role="tab" data-toggle="tab" class="tab_button_a" href="#more_legal" data-url="/LegalUI/LegalUI.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_legal" onclick="LoadMoreFrame(this)">
-                                                                                        <i class="fa fa-university head_tab_icon_padding"></i>
-                                                                                        <div class="font_size_bold">Legal</div>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <% End If%>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="pull-right" style="margin-right: 30px; color: #ffa484">
-                                                                        <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveShortSale()" data-original-title="Save"></i>
-                                                                        <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Re-Assign" onclick="tmpBBLE=leadsInfoBBLE; popupCtrReassignEmployeeListCtr.PerformCallback();popupCtrReassignEmployeeListCtr.ShowAtElement(this);"></i>
-                                                                        <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i>
-                                                                        <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick=""></i>
-                                                                    </li>
-                                                                </ul>
+                                                                        <li class="short_sale_head_tab">
+                                                                            <a href="#home_owner" role="tab" data-toggle="tab" class="tab_button_a">
+                                                                                <i class="fa fa-key head_tab_icon_padding"></i>
+                                                                                <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;Title&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="short_sale_head_tab">
+                                                                            <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
+                                                                                <i class="fa fa-file head_tab_icon_padding"></i>
+                                                                                <div class="font_size_bold">Documents</div>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="short_sale_head_tab">
+                                                                            <a class="tab_button_a">
+                                                                                <i class="fa fa-list-ul head_tab_icon_padding"></i>
+                                                                                <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                                                            </a>
+                                                                            <div class="shot_sale_sub">
+                                                                                <ul class="nav  clearfix" role="tablist">
+                                                                                    <li class="short_sale_head_tab">
+                                                                                        <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="" data-href="#more_leads" onclick="LoadMoreFrame(this)">
+                                                                                            <i class="fa fa-folder head_tab_icon_padding"></i>
+                                                                                            <div class="font_size_bold">Leads</div>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li class="short_sale_head_tab">
+                                                                                        <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_evction" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_evction" onclick="LoadMoreFrame(this)">
+                                                                                            <i class="fa fa-sign-out head_tab_icon_padding"></i>
+                                                                                            <div class="font_size_bold">Eviction</div>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <%If IntranetPortal.Legal.LegalCase.InLegal(hfBBLE.Value) Then%>
+                                                                                    <li class="short_sale_head_tab">
+                                                                                        <a role="tab" data-toggle="tab" class="tab_button_a" href="#more_legal" data-url="/LegalUI/LegalUI.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_legal" onclick="LoadMoreFrame(this)">
+                                                                                            <i class="fa fa-university head_tab_icon_padding"></i>
+                                                                                            <div class="font_size_bold">Legal</div>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <% End If%>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="pull-right" style="margin-right: 10px; color: #ffa484">
+                                                                            <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveShortSale()" data-original-title="Save"></i>
+                                                                            <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Re-Assign" onclick="tmpBBLE=leadsInfoBBLE; popupCtrReassignEmployeeListCtr.PerformCallback();popupCtrReassignEmployeeListCtr.ShowAtElement(this);"></i>
+                                                                            <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i>
+                                                                            <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick=""></i>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
                                                                 <uc1:SendMail runat="server" ID="SendMail" LogCategory="ShortSale" />
                                                                 <div class="tab-content">
                                                                     <div class="tab-pane active" id="property_info">
@@ -156,7 +158,7 @@
                                                         </dx:SplitterContentControl>
                                                     </ContentCollection>
                                                 </dx:SplitterPane>
-                                                <dx:SplitterPane ShowCollapseForwardButton="True" Name="LogPanel"  AutoHeight="true">
+                                                <dx:SplitterPane ShowCollapseForwardButton="True" Name="LogPanel" AutoHeight="true">
                                                     <Panes>
                                                         <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9">
                                                             <PaneStyle BackColor="#F9F9F9"></PaneStyle>

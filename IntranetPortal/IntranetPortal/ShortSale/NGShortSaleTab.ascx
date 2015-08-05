@@ -74,7 +74,7 @@
                     </dx:ASPxPopupControl>
 
                     <div class="detail_tabs">
-                        <ul class="nav nav-tabs overview_tabs" role="tablist" style="">
+                        <ul class="nav nav-tabs overview_tabs" role="tablist">
                             <li class="short_sale_tab active">
                                 <a class="shot_sale_tab_a " href="#SSHomeowner" role="tab" data-toggle="tab">Homeowner Info</a></li>
                             <li class="short_sale_tab">

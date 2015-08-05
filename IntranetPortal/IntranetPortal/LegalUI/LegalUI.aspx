@@ -96,7 +96,7 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
-                <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px" Name="dataPane">
+                <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="None" PaneStyle-Paddings-Padding="0px" Name="dataPane">
                     <ContentCollection>
                         <dx:SplitterContentControl>
                             <script>
@@ -191,8 +191,6 @@
                                                 <i class="fa fa-info-circle  head_tab_icon_padding"></i>
                                                 <div class="font_size_bold">Legal</div>
                                             </a>
-
-
                                         </li>
                                         <li class="short_sale_head_tab">
                                             <a href="#DocumentTab" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
@@ -322,7 +320,6 @@
 
 
                                 <div class="tab-content">
-
                                     <div class="tab-pane active" id="LegalTab">
                                         <uc1:LegalTab runat="server" ID="LegalTab1" />
                                         <script>

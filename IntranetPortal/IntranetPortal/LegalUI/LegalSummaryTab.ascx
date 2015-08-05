@@ -1,8 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="LegalSummaryTab.ascx.vb" Inherits="IntranetPortal.LegalSummaryTab" %>
 
-
-
-
 <div class="legalui short_sale_content">
     <div>
         <ul class="ss_form_box clearfix">
