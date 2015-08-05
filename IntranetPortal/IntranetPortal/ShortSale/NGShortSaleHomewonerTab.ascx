@@ -24,7 +24,7 @@
                 </li>
                 <li class="ss_form_item" style="width: 100%">
                     <label class="ss_form_input_title">Mail Address</label>
-                    <input class="ss_form_input" ng-value="formatAddr(owner.MailNumbe, owner.MailStreetName, owner.MailApt, owner.MailCity, owner.MailState, owner.MailZip)" style="width: 96.66%" readonly>
+                    <input class="ss_form_input" ng-value="formatAddr(owner.MailNumber, owner.MailStreetName, owner.MailApt, owner.MailCity, owner.MailState, owner.MailZip)" style="width: 96.66%" readonly>
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Cell #</label>

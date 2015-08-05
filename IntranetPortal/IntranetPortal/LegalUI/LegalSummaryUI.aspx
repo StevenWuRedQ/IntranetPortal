@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10px">
-                        <dx:ASPxGridView ID="gdCases" runat="server" KeyFieldNam="BBLE" Theme="Moderno" CssClass="table" ClientInstanceName="AllLeadsGridClient" OnDataBinding="gdCases_DataBinding">
+                        <dx:ASPxGridView ID="gdCases" runat="server" KeyFieldName="BBLE" Theme="Moderno" CssClass="table" ClientInstanceName="AllLeadsGridClient" OnDataBinding="gdCases_DataBinding">
                             <Columns>
                                 <dx:GridViewDataColumn FieldName="BBLE" Visible="false">
                                     <Settings HeaderFilterMode="CheckedList" />
