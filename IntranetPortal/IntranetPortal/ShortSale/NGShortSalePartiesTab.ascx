@@ -256,16 +256,16 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Company</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.CompanyName">
+                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.CompanyName" ng-change="SsCase.BuyerTitle.ContactId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,1)" typeahead-on-select="SsCase.BuyerTitle.ContactId=$item.ContactId" bind-id="SsCase.BuyerTitle.ContactId">
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Address</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.Address">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerTitle.ContactId, SsCase.BuyerTitle.CompanyName).Address">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">office #</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.OfficeNO" mask="(999) 999-9999" clean="true">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerTitle.ContactId, SsCase.BuyerTitle.CompanyName).OfficeNO"" mask="(999) 999-9999" clean="true">
             </li>
         </ul>
         <ul class="ss_form_box clearfix" collapse="!titleCompanyCollapse">

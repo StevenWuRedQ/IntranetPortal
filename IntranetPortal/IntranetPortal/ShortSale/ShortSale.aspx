@@ -63,17 +63,16 @@
                                                 </Pane>
                                             </Styles>
                                             <Panes>
-                                                <dx:SplitterPane ShowCollapseBackwardButton="True" MinSize="665px" AutoHeight="true">
+                                                <dx:SplitterPane ShowCollapseBackwardButton="True" AutoHeight="true">
                                                     <PaneStyle Paddings-Padding="0">
                                                         <Paddings Padding="0px"></Paddings>
                                                     </PaneStyle>
                                                     <ContentCollection>
                                                         <dx:SplitterContentControl ID="SplitterContentControl3" runat="server">
-                                                            <div class="shortSaleUI" style="width: 100%; align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
 
+                                                            <div class="shortSaleUI" style="align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
-
                                                                 <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
                                                                     <li class="active short_sale_head_tab">
                                                                         <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
@@ -125,7 +124,7 @@
                                                                             </ul>
                                                                         </div>
                                                                     </li>
-                                                                    <li style="margin-right: 30px; color: #ffa484; float: right">
+                                                                    <li class="pull-right" style="margin-right: 30px; color: #ffa484">
                                                                         <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveShortSale()" data-original-title="Save"></i>
                                                                         <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Re-Assign" onclick="tmpBBLE=leadsInfoBBLE; popupCtrReassignEmployeeListCtr.PerformCallback();popupCtrReassignEmployeeListCtr.ShowAtElement(this);"></i>
                                                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i>
@@ -157,7 +156,7 @@
                                                         </dx:SplitterContentControl>
                                                     </ContentCollection>
                                                 </dx:SplitterPane>
-                                                <dx:SplitterPane ShowCollapseForwardButton="True" Name="LogPanel" MinSize="645px">
+                                                <dx:SplitterPane ShowCollapseForwardButton="True" Name="LogPanel"  AutoHeight="true">
                                                     <Panes>
                                                         <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9">
                                                             <PaneStyle BackColor="#F9F9F9"></PaneStyle>

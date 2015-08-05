@@ -17,29 +17,29 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Company</label>
-                <input class="ss_form_input disabled" ng-model="SsCase.BuyerTitle.CompanyName">
+                <input class="ss_form_input" type="text" ng-model="SsCase.BuyerTitle.CompanyName" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue, 1)">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Title #</label>
-                <input class="ss_form_input disabled" ng-model="SsCase.BuyerTitle.OrderNumber">
+                <input class="ss_form_input" type="text" ng-model="SsCase.BuyerTitle.OrderNumber">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Reviewed</label>
-                <input class="ss_form_input disabled" ng-model="SsCase.BuyerTitle.ReviewedDate" ss-date>
+                <input class="ss_form_input" type="text" ng-model="SsCase.BuyerTitle.ReviewedDate" ss-date>
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Order Date</label>
-                <input class="ss_form_input disabled" ng-model="SsCase.BuyerTitle.ReportOrderDate" ss-date>
+                <input class="ss_form_input" type="text" ng-model="SsCase.BuyerTitle.ReportOrderDate" ss-date>
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Confirmation Date</label>
-                <input class="ss_form_input disabled" ng-model="SsCase.BuyerTitle.ConfirmationDate" ss-date>
+                <input class="ss_form_input" type="text" ng-model="SsCase.BuyerTitle.ConfirmationDate" ss-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Received Date</label>
-                <input class="ss_form_input disabled" ng-model="SsCase.BuyerTitle.ReceivedDate" ss-date>
+                <input class="ss_form_input" type="text" ng-model="SsCase.BuyerTitle.ReceivedDate" ss-date>
             </li>
         </ul>
     </div>

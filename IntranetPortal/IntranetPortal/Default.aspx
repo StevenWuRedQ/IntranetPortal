@@ -17,7 +17,7 @@
     <uc1:NavMenu runat="server" ID="NavMenu" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-      <iframe id="contentUrlPane" width="100%" height="100%" frameborder="0" name="contentUrlPane" scrolling="no" marginheight="0" marginwidth="0" src="<%= ContentUrl%>"></iframe>
+      <iframe id="contentUrlPane" width="100%" height="100%" frameborder="0" name="contentUrlPane" scrolling="yes" marginheight="0" marginwidth="0" src="<%= ContentUrl%>"></iframe>
     <%--<dx:ASPxSplitter Width="100%" Height="100%" ID="splitter" runat="server" Border-BorderStyle="None" ClientInstanceName="splitterRightDefaultPage"  PaneMinSize="644px">
         <Panes>
             <dx:SplitterPane Name="ContentUrlPane" ContentUrlIFrameName="contentUrlPane" ContentUrl="/SummaryPage.aspx" PaneStyle-Border-BorderStyle="None" PaneStyle-Paddings-PaddingBottom="0" ScrollBars="None"  >
