@@ -27,12 +27,13 @@ Partial Public Class LawReference
         Using ctx As New LegalModelContainer
             If RefId = 0 Then
                 Me.CreateTime = DateTime.Now
-                ctx.LawReferences.Add(Me)
+                ctx.Entry(Me).State = Entity.EntityState.Added
             Else
-                Dim lRef = ctx.LawReferences.Find(RefId)
-                If lRef IsNot Nothing Then
-                    lRef = Core.Utility.SaveChangesObj(lRef, Me)
-                End If
+                'Dim lRef = ctx.LawReferences.Find(RefId)
+                'If lRef IsNot Nothing Then
+                '    lRef = Core.Utility.SaveChangesObj(lRef, Me)
+                'End If
+                ctx.Entry(Me).State = Entity.EntityState.Modified
             End If
 
             ctx.SaveChanges()
