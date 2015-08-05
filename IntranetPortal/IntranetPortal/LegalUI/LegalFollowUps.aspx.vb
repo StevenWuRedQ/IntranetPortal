@@ -23,4 +23,12 @@
     Protected Sub lbExportExcel_Click(sender As Object, e As EventArgs)
         CaseExporter.WriteXlsxToResponse()
     End Sub
+
+    Protected Sub gdCases_RowDeleting(sender As Object, e As DevExpress.Web.Data.ASPxDataDeletingEventArgs)
+        Dim bble = e.Keys("BBLE")
+        LegalCaseManage.ClearFollowUp(bble)
+
+        e.Cancel = True
+        BindGrid()
+    End Sub
 End Class

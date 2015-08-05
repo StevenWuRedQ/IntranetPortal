@@ -95,6 +95,26 @@ Public Class LegalCaseManage
                            End Sub
     End Sub
 
+    Public Shared Sub SetFollowUpDate(bble As String, type As String, dateSelected As DateTime)
+        Dim lCase = Legal.LegalCase.GetCase(bble)
+        lCase.FollowUp = dateSelected
+        lCase.UpdateDate = DateTime.Now
+        lCase.UpdateBy = HttpContext.Current.User.Identity.Name
+        lCase.SaveData()
+
+        LeadsActivityLog.AddActivityLog(DateTime.Now, "New Legal follow up date: " & dateSelected.ToString("d"), bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.FollowUp)
+    End Sub
+
+    Public Shared Sub ClearFollowUp(bble As String)
+        Dim lCase = Legal.LegalCase.GetCase(bble)
+        lCase.FollowUp = Nothing
+        lCase.UpdateDate = DateTime.Now
+        lCase.UpdateBy = HttpContext.Current.User.Identity.Name
+        lCase.SaveData()
+
+        LeadsActivityLog.AddActivityLog(DateTime.Now, "Legal follow up date was Cleared", bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.FollowUp)
+    End Sub
+
 #Region "Share data from other project"
 
     Public Shared Function GetPropertyAddress(bble As String)

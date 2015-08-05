@@ -80,13 +80,7 @@ Public Class LegalServices
         End Select
 
         Try
-            Dim lCase = Legal.LegalCase.GetCase(bble)
-            lCase.FollowUp = dateSelected
-            lCase.UpdateDate = DateTime.Now
-            lCase.UpdateBy = HttpContext.Current.User.Identity.Name
-            lCase.SaveData()
-
-            LeadsActivityLog.AddActivityLog(DateTime.Now, "New Legal follow up date: " & dateSelected.ToString("d"), bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.FollowUp)
+            LegalCaseManage.SetFollowUpDate(bble, type, dateSelected)
             Return True
         Catch ex As Exception
             Throw ex

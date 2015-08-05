@@ -42,10 +42,9 @@
             </div>
         </div>
         <div class="row" style="margin-top:10px">
-            <dx:ASPxGridView ID="gdCases" runat="server" KeyFieldNam="BBLE" Theme="Moderno" CssClass="table" ClientInstanceName="AllLeadsGridClient" OnDataBinding="gdCases_DataBinding">
+            <dx:ASPxGridView ID="gdCases" runat="server" KeyFieldName="BBLE" Theme="Moderno" CssClass="table" ClientInstanceName="AllLeadsGridClient" OnDataBinding="gdCases_DataBinding" OnRowDeleting="gdCases_RowDeleting">
                 <Columns>
                     <dx:GridViewDataColumn FieldName="BBLE" Visible="false">
-                        <Settings HeaderFilterMode="CheckedList"/>                      
                     </dx:GridViewDataColumn>
                     <dx:GridViewDataColumn FieldName="CaseName">
                         <Settings HeaderFilterMode="CheckedList"/>
@@ -68,8 +67,13 @@
                     <dx:GridViewDataColumn FieldName="ResearchBy" Caption="Research" Visible="false">
                         <Settings HeaderFilterMode="CheckedList"/>
                     </dx:GridViewDataColumn>
+                    <dx:GridViewCommandColumn ShowDeleteButton="true" ButtonType="Button">
+                        <DeleteButton Text="Clear Follow Up"></DeleteButton>                       
+                    </dx:GridViewCommandColumn>
                 </Columns>                
-                <Settings ShowHeaderFilterButton="true" />               
+                <Settings ShowHeaderFilterButton="true" /> 
+                <SettingsBehavior ConfirmDelete="true" />
+                <SettingsText ConfirmDelete="The follow up date will be cleared. Continue?" />
             </dx:ASPxGridView>
              <dx:ASPxGridViewExporter ID="CaseExporter" runat="server" GridViewID="gdCases"></dx:ASPxGridViewExporter>
         </div>
