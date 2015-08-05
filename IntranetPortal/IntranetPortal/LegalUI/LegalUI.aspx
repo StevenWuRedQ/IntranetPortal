@@ -478,9 +478,9 @@
     <uc1:SendMail runat="server" ID="SendMail" />
 
 
-    <!-- Follow up function  -->        
+    <!-- Follow up function  -->
     <script type="text/javascript">
-        
+
         function OnCallbackMenuClick(s, e) {
 
             if (e.item.name == "Custom") {
@@ -495,8 +495,7 @@
             e.processOnServer = false;
         }
 
-        function SetLegalFollowUp(type, dateSelected)
-        {
+        function SetLegalFollowUp(type, dateSelected) {
             if (typeof dateSelected == 'undefined')
                 dateSelected = new Date();
 
@@ -521,7 +520,7 @@
                         gridTrackingClient.Refresh();
                 },
                 error: function (data) {
-                    alert('Some error Occurred! Detail: '+data);
+                    alert('Some error Occurred! Detail: ' + data);
                 }
             });
         }
@@ -625,15 +624,15 @@
         portalApp.controller('LegalCtrl', function ($scope, $http, $element, $parse, ptContactServices) {
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
             $scope.ptContactServices = ptContactServices;
-            if (leadsInfoBBLE) {
-                $http.post('/Services/ContactService.svc/CheckInShortSale', { "BBLE": leadsInfoBBLE }).success(function (data) {
+            //if (leadsInfoBBLE) {
+            //    $http.post('/Services/ContactService.svc/CheckInShortSale', { "BBLE": leadsInfoBBLE }).success(function (data) {
 
-                    $scope.LegalCase.InShortSale = data;
+            //        $scope.LegalCase.InShortSale = data;
 
-                }).error(function (data) {
-                    alert("check in short sale error " + leadsInfoBBLE + JSON.stringify(data));
-                });
-            }
+            //    }).error(function (data) {
+            //        alert("check in short sale error " + leadsInfoBBLE + JSON.stringify(data));
+            //    });
+            //}
 
 
             var self = $scope;
@@ -683,81 +682,11 @@
             $scope.addTest = function () {
                 $scope.TestRepeatData[$scope.TestRepeatData.length] = $scope.TestRepeatData.length;
             }
-            //var PropertyInfo = $scope.LegalCase.PropertyInfo;
-            //CaseData = $scope.LegalCase;
-            //PropertyInfo.PropertyAddress = "421 HART ST, BEDFORD STUYVESANT,NY 11221";
-            //PropertyInfo.StreetName = 'HART ST';
-            //PropertyInfo.Number = "421";
-            //PropertyInfo.City = "BEDFORD STUYVESANT";
-            //PropertyInfo.State = "NY";
-            //PropertyInfo.Zipcode = "11221";
-            //PropertyInfo.Number = "421";
 
-
-            //PropertyInfo.Block = 1234;
-
-
-            //PropertyInfo.Lot = 123;
-            //PropertyInfo.BuildingType = "Apartment";
-            //PropertyInfo.Class = 'A0';
-            //PropertyInfo.Condition = 'Good';
-            //PropertyInfo.VacantOrOccupied = "Vacant";
-            //PropertyInfo.AgentId = 164;
-            //PropertyInfo.Use = '';
-            //PropertyInfo.OwnerOfRecordId = 164;
-            //PropertyInfo.CaseContactId = 164;
-            //PropertyInfo.Class = 'A0';
 
             var ForeclosureInfo = $scope.LegalCase.ForeclosureInfo;
             ForeclosureInfo.PlaintiffId = 638;
-            //ForeclosureInfo.ServicerId = 646;
-            //ForeclosureInfo.DefendantId = 646;
-            //ForeclosureInfo.AttorneyId = 646;
-            //ForeclosureInfo.LastCourtDate = '05/05/2015';
-            //ForeclosureInfo.NextCourtDate = '05/06/2015';
-            //ForeclosureInfo.SaleDate = '05/06/2015';
-            //ForeclosureInfo.HAMP = true;
-            //ForeclosureInfo.LastUpdate = '05/08/2015';
-            //ForeclosureInfo.ServicerId = 646;
-            //ForeclosureInfo.ServicerId = 646;
-            //ForeclosureInfo.ServicerId = 646;
-            //ForeclosureInfo.ServicerId = 646;
-            //ForeclosureInfo.ServicerId = 646;
-            //ForeclosureInfo.ServicerId = 646;
-            //ForeclosureInfo.ServicerId = 646;
-            //ForeclosureInfo.ServicerId = 646;
-            //ForeclosureInfo.ServicerId = 646;
-            //ForeclosureInfo.ServicerId = 646;
 
-            //var SecondaryInfo = $scope.LegalCase.PropertyInfo;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.Status = "Status 1";
-            //SecondaryInfo.Tasks = "Task 1";
-            //SecondaryInfo.AttorneyWorkingFile = "Working File 1";
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.BorrowerId = 638;
-            //SecondaryInfo.CoBorrowerId = 639;
-            //SecondaryInfo.Language = "Chinese";
-            //SecondaryInfo.MentalCapacity = "Capacity 1";
-            //SecondaryInfo.Divorce = false;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //SecondaryInfo.OpposingPartyId = 638;
-            //$scope.SelectContactId = 128;
-            //$scope.selectBoxData = AllContact;
 
             $scope.ContactDataSource = new DevExpress.data.DataSource({
                 store: new DevExpress.data.CustomStore({
@@ -916,7 +845,7 @@
 
                         $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
                         $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
-                        var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
+
                         var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate", ];
                         for (a in arrays) {
                             var porp = arrays[a]
@@ -932,7 +861,23 @@
                     error(function () {
                         alert("Fail to load data : " + BBLE);
                     });
+                $http.get('/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=' + BBLE).success(function (data, status, headers, config) {
+
+                    $scope.ShortSaleCase = data;
+                }).error(function () {
+                    alert("Fail to Short sale case  data : " + BBLE);
+                });
+
+                var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + BBLE;
+                $http.get(leadsInfoUrl).
+                success(function (data, status, headers, config) {
+                    $scope.LeadsInfo = data;
+                }).error(function (data, status, headers, config) {
+                    alert("Get Short Sale Leads failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
+                });
             }
+
+            
             /*return true it hight light check date  */
             $scope.HighLightFunc = function (funcStr) {
                 var args = funcStr.split(",");

@@ -34,7 +34,12 @@ Public Class ShortSaleServices
 
         Return ssCase.ToJson
     End Function
-
+    <OperationContract()>
+   <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    Public Function GetCaseByBBLE(bble As String) As Channels.Message
+       
+        Return ShortSale.ShortSaleCase.GetCaseByBBLE(bble).ToJson
+    End Function
     <OperationContract()>
     <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
     Public Function SaveCase(caseData As String) As Channels.Message

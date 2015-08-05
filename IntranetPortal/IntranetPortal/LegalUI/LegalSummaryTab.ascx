@@ -5,23 +5,23 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Current Servicer</label>
-                <input class="ss_form_input" disabled="disabled">
+                <input class="ss_form_input" disabled="disabled" ng-model="ShortSaleCase.Mortgages[0].Lender" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Vacant / Occupied?</label>
-                <input class="ss_form_input" disabled="disabled">
+                <input class="ss_form_input" disabled="disabled" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Condition</label>
-                <input class="ss_form_input" disabled="disabled">
+                <input class="ss_form_input" disabled="disabled" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Block / Lot</label>
-                <input class="ss_form_input" disabled="disabled">
+                <input class="ss_form_input" disabled="disabled" ng-value="LeadsInfo.Block+'/'+ LeadsInfo.Lot"  readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Client Name</label>
-                <input class="ss_form_input" disabled="disabled">
+                <input class="ss_form_input" disabled="disabled"  readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Client Contact #</label>
@@ -35,15 +35,15 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Original Loan Amt</label>
-                <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.OrigLoadAmt">
+                <input class="ss_form_input" ng-model="ShortSaleCase.Mortgages[0].LoanAmount" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Executed Date</label>
-                <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.ExecutedDate" ss-date>
+                <input class="ss_form_input" ng-model="ShortSaleCase.Mortgages[0].AuctionDate" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Recording Date</label>
-                <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.RecordingDate" ss-date>
+                <input class="ss_form_input" ng-model="ShortSaleCase.Mortgages[0].AuctionDate" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">CRFN #</label>
@@ -51,7 +51,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Last Payment Date </label>
-                <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.LastPayDate" ss-date>
+                <input class="ss_form_input" ng-model="ShortSaleCase.Mortgages[0].PayoffRequested" readonly="readonly">
             </li>
         </ul>
     </div>
