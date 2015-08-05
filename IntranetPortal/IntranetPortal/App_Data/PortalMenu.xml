@@ -464,7 +464,7 @@
       <PortalNavItem Name="Legal-LawReferences" Text="Law References" NavigationUrl="/LegalUI/CaseLawRef.aspx" ShowAmount="false">
         <UserRoles></UserRoles>
         <FontClass>
-          <![CDATA[<i class="fa fa-rotate-right"></i>]]>
+          <![CDATA[<i class="fa fa-bullhorn"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="Legal-ManagerPreview" Text="New Cases" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;lc=0" ShowAmount="true">
