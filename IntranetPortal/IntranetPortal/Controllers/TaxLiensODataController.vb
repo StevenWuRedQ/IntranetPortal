@@ -27,13 +27,13 @@ Namespace Controllers
         Private db As New Entities
 
         ' GET: odata/TaxLiensOData
-        <Queryable>
+        <EnableQuery>
         Function GetTaxLiensOData() As IQueryable(Of NYC_Scan_TaxLiens_Per_Year)
             Return db.NYC_Scan_TaxLiens_Per_Year
         End Function
 
         ' GET: odata/TaxLiensOData(5)
-        <Queryable>
+        <EnableQuery>
         Function GetNYC_Scan_TaxLiens_Per_Year(<FromODataUri> key As String) As SingleResult(Of NYC_Scan_TaxLiens_Per_Year)
             Return SingleResult.Create(db.NYC_Scan_TaxLiens_Per_Year.Where(Function(nYC_Scan_TaxLiens_Per_Year) nYC_Scan_TaxLiens_Per_Year.BBLE = key))
         End Function

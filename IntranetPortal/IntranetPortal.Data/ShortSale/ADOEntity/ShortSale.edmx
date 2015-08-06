@@ -198,9 +198,9 @@
           <Property Name="Processor" Type="int" />
           <Property Name="Negotiator" Type="int" />
           <Property Name="Closer" Type="int" />
-          <Property Name="ForeclosureAttorney" Type="nvarchar" MaxLength="50" />
+          <Property Name="ForeclosureAttorney" Type="nvarchar" MaxLength="256" />
           <Property Name="ForeclosureAttorneyId" Type="int" />
-          <Property Name="AssignedAttorney" Type="nvarchar" MaxLength="50" />
+          <Property Name="AssignedAttorney" Type="nvarchar" MaxLength="256" />
           <Property Name="AttorneyDirectNo" Type="nvarchar" MaxLength="50" />
           <Property Name="AttorneyEmail" Type="nvarchar" MaxLength="50" />
           <Property Name="Contacts" Type="nvarchar(max)" />
@@ -911,9 +911,9 @@
           <Property Name="PayoffAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="LastPaymentDate" Type="DateTime" Precision="3" />
           <Property Name="CancelationSent" Type="DateTime" Precision="3" />
-          <Property Name="ForeclosureAttorney" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ForeclosureAttorney" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="ForeclosureAttorneyId" Type="Int32" />
-          <Property Name="AssignedAttorney" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AssignedAttorney" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="AttorneyDirectNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AttorneyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Contacts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />

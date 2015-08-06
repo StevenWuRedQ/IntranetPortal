@@ -82,6 +82,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Construction\ConstructionCase.vb" />
     <Compile Include="Construction\DataModel\ConstructionCase.vb">
       <DependentUpon>ConstructionModel.tt</DependentUpon>
     </Compile>

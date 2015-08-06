@@ -25,3 +25,29 @@ Public Class JsArrayToStringConverter
         jData.WriteTo(writer)
     End Sub
 End Class
+
+Public Class JsObjectToStringConverter
+    Inherits Newtonsoft.Json.JsonConverter
+
+    Public Overrides Function CanConvert(objectType As Type) As Boolean
+        Return True
+    End Function
+
+    Public Overrides Function ReadJson(reader As Newtonsoft.Json.JsonReader, objectType As Type, existingValue As Object, serializer As Newtonsoft.Json.JsonSerializer) As Object
+        Dim jtoken = serializer.Deserialize(Of JToken)(reader)
+        Return jtoken.ToString
+    End Function
+
+    Public Overrides Sub WriteJson(writer As Newtonsoft.Json.JsonWriter, value As Object, serializer As Newtonsoft.Json.JsonSerializer)
+
+        Dim jData As JToken
+        If Not String.IsNullOrEmpty(value) Then
+            Try
+                jData = JToken.Parse(value)
+                jData.WriteTo(writer)
+            Catch ex As Exception
+
+            End Try
+        End If
+    End Sub
+End Class
