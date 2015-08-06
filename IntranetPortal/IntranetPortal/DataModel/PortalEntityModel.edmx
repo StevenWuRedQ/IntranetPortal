@@ -433,6 +433,21 @@
           <Property Name="Type" Type="nchar" MaxLength="20" />
           <Property Name="Data" Type="nvarchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="NYC_Scan_TaxLiens_Per_Year">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="Year" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="Borough" Type="char" MaxLength="15" />
+          <Property Name="BoroNum" Type="nchar" MaxLength="1" />
+          <Property Name="Block" Type="nchar" MaxLength="5" />
+          <Property Name="Lot" Type="nchar" MaxLength="4" />
+          <Property Name="Address" Type="char" MaxLength="100" />
+          <Property Name="Owner" Type="char" MaxLength="100" />
+          <Property Name="LienTotal" Type="float" />
+          <Property Name="Year" Type="float" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="NYC_St_Names">
@@ -913,6 +928,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="LoginLogs" EntityType="Self.LoginLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MapDataSet" EntityType="Self.MapDataSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NYC_DATA_COMMENT" EntityType="Self.NYC_DATA_COMMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NYC_Scan_TaxLiens_Per_Year" EntityType="Self.NYC_Scan_TaxLiens_Per_Year" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Offices" EntityType="Self.Offices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderResponses" EntityType="Self.OrderResponses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OwnerContacts" EntityType="Self.OwnerContacts" Schema="dbo" store:Type="Tables" />
@@ -1188,6 +1204,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="Leads_with_last_log" EntityType="IntranetPortalModel.Leads_with_last_log" />
           <EntitySet Name="LeadsInThirdParties" EntityType="IntranetPortalModel.LeadsInThirdParty" />
           <EntitySet Name="LeadsActivityLogArchiveds" EntityType="IntranetPortalModel.LeadsActivityLogArchived" />
+          <EntitySet Name="NYC_Scan_TaxLiens_Per_Year" EntityType="IntranetPortalModel.NYC_Scan_TaxLiens_Per_Year" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -2123,6 +2140,21 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="ActivityDate" Type="DateTime" Precision="3" />
           <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="NYC_Scan_TaxLiens_Per_Year">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="Year" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Borough" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="BoroNum" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="Block" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="Lot" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="Owner" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="LienTotal" Type="Double" />
+          <Property Name="Year" Type="Double" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3035,6 +3067,21 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="LogID" ColumnName="LogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NYC_Scan_TaxLiens_Per_Year">
+            <EntityTypeMapping TypeName="IntranetPortalModel.NYC_Scan_TaxLiens_Per_Year">
+              <MappingFragment StoreEntitySet="NYC_Scan_TaxLiens_Per_Year">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="LienTotal" ColumnName="LienTotal" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Lot" ColumnName="Lot" />
+                <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="BoroNum" ColumnName="BoroNum" />
+                <ScalarProperty Name="Borough" ColumnName="Borough" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

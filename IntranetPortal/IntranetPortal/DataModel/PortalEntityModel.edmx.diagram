@@ -49,7 +49,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsSearchTask" Width="1.5" PointX="11.375" PointY="17.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.SearchResult" Width="1.5" PointX="13.375" PointY="18.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.ApartmentBuilding" Width="1.75" PointX="16.875" PointY="18.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.Apartment" Width="1.5" PointX="10" PointY="21.125" />
+        <EntityTypeShape EntityType="IntranetPortalModel.Apartment" Width="1.5" PointX="7.875" PointY="20.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.LatLon_View" Width="1.5" PointX="0.75" PointY="19.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsAssignView" Width="1.5" PointX="19.375" PointY="7.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsAssignView2" Width="1.5" PointX="21.375" PointY="17.625" />
@@ -61,6 +61,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.Leads_with_last_log" Width="1.5" PointX="21.375" PointY="11.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsInThirdParty" Width="1.5" PointX="3.25" PointY="21" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsActivityLogArchived" Width="2.375" PointX="0.75" PointY="22.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.NYC_Scan_TaxLiens_Per_Year" Width="2.25" PointX="10" PointY="21.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
