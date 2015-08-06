@@ -60,6 +60,12 @@ Public Class ContactService
     End Function
 
     <OperationContract()>
+    <WebGet()>
+    Public Function GetCorpEntityByStatus(n As String, s As String) As Channels.Message
+        Return ShortSale.CorporationEntity.GetEntitiesByStatus(n, s).ToJson()
+    End Function
+
+    <OperationContract()>
     <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
     Public Function SaveCorpEntitiy(c As String) As Channels.Message
         If (Not String.IsNullOrEmpty(c)) Then
@@ -74,9 +80,7 @@ Public Class ContactService
     End Function
     ' Add more operations here and mark them with <OperationContract()>
 
-    '<OperationContract()>
-    '<WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
-    'Public Function GetCorpEntityByStatus(s As String)
+
 
     <OperationContract()>
     <WebInvoke(Method:="POST", ResponseFormat:=WebMessageFormat.Json)>

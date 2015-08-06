@@ -100,7 +100,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Listing Agent&nbsp<i class="fa fa-compress icon_btn text-primary" ng-show="!listingAgentCollapse" ng-click="listingAgentCollapse = !listingAgentCollapse"></i><i class="fa fa-expand icon_btn text-primary" ng-show="listingAgentCollapse" ng-click="listingAgentCollapse = !listingAgentCollapse"></i></h4>
+    <h4 class="ss_form_title">Listing Agent&nbsp<pt-collapse model="listingAgentCollapse"/></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
@@ -170,16 +170,14 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Buyer&nbsp<i class="fa fa-compress icon_btn text-primary" ng-show="!buyerCollapse" ng-click="buyerCollapse = !buyerCollapse"></i><i class="fa fa-expand icon_btn text-primary" ng-show="buyerCollapse" ng-click="buyerCollapse = !buyerCollapse"></i></h4>
+    <h4 class="ss_form_title">Buyer&nbsp<pt-collapse model="buyerCollapse"/></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
 
             <li class="ss_form_item">
-
                 <label class="ss_form_input_title">Entity</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerEntity.Entity">
+                <input type="text" class="ss_form_input" ng-model="SsCase.BuyerEntity.Entity" ng-change="SsCase.BuyerEntity.EntityAddress=null" typeahead="entity.CorpName for entity in ptContactServices.getEntities($viewValue)" typeahead-on-select="SsCase.BuyerEntity.EntityAddress=$item.Address">
             </li>
-
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Entity Address</label>

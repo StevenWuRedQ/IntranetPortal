@@ -65,36 +65,52 @@ app.service('ptContactServices', ['$http', 'limitToFilter', function ($http, lim
     this.getContacts = function (args, /* optional */ groupId) {
         groupId = groupId === undefined ? null : groupId;
         return $http.get('/Services/ContactService.svc/GetContacts?args=' + args)
-          .then(function (response) {
-              if (groupId) return limitToFilter(response.data.filter(function (x) { return x.GroupId == groupId }), 10);
-              return limitToFilter(response.data, 10);
-          })
+            .then(function (response) {
+                if (groupId) return limitToFilter(response.data.filter(function (x) { return x.GroupId == groupId }), 10);
+                return limitToFilter(response.data, 10);
+            });
     }
 
     this.getContactsByID = function (id) {
         if (allContact) return allContact.filter(function (o) { return o.ContactId == key });
         return $http.get('/Services/ContactService.svc/GetAllContacts?id=' + id)
-          .then(function (response) {
-              return limitToFilter(response.data, 10);
-          })
+            .then(function (response) {
+                return limitToFilter(response.data, 10);
+            });
     }
 
     this.getContactById = function (id) {
-        if (allContact) return allContact.filter(function (o) { return o.ContactId == id })[0];
+        if (allContact) return allContact.filter(function (o) { return o.ContactId == id; })[0];
+        return null;
+    }
+
+    this.getEntities = function (name, status) {
+
+        status = status === undefined ? 'Available' : status;
+        name = name ? '' : name;
+        return $http.get('/Services/ContactService.svc/GetCorpEntityByStatus?n=' + name + '&s=' + status)
+            .then(function (res) {
+                return limitToFilter(res.data, 10);
+            });
+
+
     }
 
     this.getContactByName = function (name) {
         if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
+        return {};
     }
 
     this.getContact = function (id, name) {
         if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
+        return {};
     }
 
     this.getTeamByName = function (teamName) {
         if (allTeam) {
             return allTeam.filter(function (o) { if (o.Name && teamName) return o.Name.trim() == teamName.trim() })[0];
         }
+        return {};
 
     }
 
