@@ -22,5 +22,6 @@ Partial Public Class ConstructionEntities
         Throw New UnintentionalCodeFirstException()
     End Sub
 
+    Public Overridable Property ConstructionCases() As DbSet(Of ConstructionCase)
 
 End Class

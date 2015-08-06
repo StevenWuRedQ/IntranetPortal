@@ -600,6 +600,8 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="CreateDate" Caption="File Created">
                                                     </dx:GridViewDataTextColumn>
+                                                     <dx:GridViewDataTextColumn FieldName="StatuStr" Caption="Status">
+                                                    </dx:GridViewDataTextColumn>
 
                                                     <%--                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.PropertyAddress" Caption="Full Property Address">
                                                     </dx:GridViewDataTextColumn>
