@@ -1,4 +1,4 @@
-﻿Imports IntranetPortal.Legal
+﻿Imports IntranetPortal.Data
 Imports System.Reflection
 Imports System.ComponentModel
 

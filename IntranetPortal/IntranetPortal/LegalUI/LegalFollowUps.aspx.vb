@@ -7,7 +7,7 @@
         End If
     End Sub
     Sub BindGrid()
-        Dim mCases = IntranetPortal.Legal.LegalCase.GetFollowUpCases
+        Dim mCases = IntranetPortal.Data.LegalCase.GetFollowUpCases
 
         gdCases.DataSource = mCases
         gdCases.DataBind()

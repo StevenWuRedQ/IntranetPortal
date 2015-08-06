@@ -4,14 +4,9 @@
 <%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>
 <%@ Register Src="~/Construction/ConstructionCaseList.ascx" TagPrefix="uc1" TagName="ConstructionCaseList" %>
 
-
-
-
 <asp:Content runat="server" ContentPlaceHolderID="head">
 
-
 </asp:Content>
-
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
 
@@ -95,8 +90,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-
+                                
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="ConstructionTab">
                                         

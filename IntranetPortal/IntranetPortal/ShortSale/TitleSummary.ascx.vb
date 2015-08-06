@@ -1,5 +1,6 @@
 ﻿Imports DevExpress.Web.ASPxGridView
-Imports IntranetPortal.ShortSale
+Imports IntranetPortal.Data
+Imports ShortSale = IntranetPortal.Data
 
 Public Class UCTitleSummary
     Inherits System.Web.UI.UserControl

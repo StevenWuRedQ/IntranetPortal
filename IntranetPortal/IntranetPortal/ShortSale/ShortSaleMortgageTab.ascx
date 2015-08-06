@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleMortgageTab.ascx.vb" Inherits="IntranetPortal.ShortSaleMortgageTab" %>
-<%@ Import Namespace="IntranetPortal.ShortSale" %>
+<%@ Import Namespace="IntranetPortal.Data" %>
 
 <div class="clearfix" style="margin-bottom: 25px">
     <label class="ss_form_title" style="font-size: 18px; margin-right: 10px">
@@ -38,7 +38,7 @@
                     <input class="ss_form_input " data-item="Status" data-item-type="1" readonly="readonly">
                     <%--  <select class="ss_form_input selStatusUpdate" data-item="Status" data-item-type="1" disabled>
                         <option value=""></option>
-                        <% For Each mortStatus In IntranetPortal.ShortSale.PropertyMortgage.StatusData%>
+                        <% For Each mortStatus In IntranetPortal.Data.PropertyMortgage.StatusData%>
                         <option value="<%= mortStatus.Name%>" data-cat="<%=mortStatus.Category %>"> <%= mortStatus.Name%></option>
                         <% Next%>
                     </select>--%>

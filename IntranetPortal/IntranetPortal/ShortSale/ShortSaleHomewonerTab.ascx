@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleHomewonerTab.ascx.vb" Inherits="IntranetPortal.ShortSaleHomewonerTab" %>
-<%@ Import Namespace="IntranetPortal.ShortSale" %>
+<%@ Import Namespace="IntranetPortal.Data" %>
 <%@ Import Namespace="IntranetPortal" %>
 <div class="clearfix">
     <div style="float: right">

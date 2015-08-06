@@ -1,4 +1,4 @@
-﻿Imports IntranetPortal.ShortSale
+﻿Imports IntranetPortal.Data
 Public Class NGShortSalePartiesTab
     Inherits System.Web.UI.UserControl
 

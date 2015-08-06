@@ -13,8 +13,8 @@
             wli.Finish()
 
             'update legal case status
-            Dim lc = Legal.LegalCase.GetCase(bble)
-            lc.Status = Legal.LegalCaseStatus.Closed
+            Dim lc = IntranetPortal.Data.LegalCase.GetCase(bble)
+            lc.Status = IntranetPortal.Data.LegalCaseStatus.Closed
             lc.SaveData()
 
             Response.Clear()

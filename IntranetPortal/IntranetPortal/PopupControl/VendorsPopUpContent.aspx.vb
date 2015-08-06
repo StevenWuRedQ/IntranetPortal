@@ -1,4 +1,4 @@
-﻿Imports IntranetPortal.ShortSale
+﻿Imports IntranetPortal.Data
 
 Public Class VendorsPopUpContent
     Inherits System.Web.UI.Page
@@ -7,7 +7,7 @@ Public Class VendorsPopUpContent
 
     End Sub
     Public Function getVenderTypes() As Dictionary(Of Integer, String)
-        Return Utility.Enum2Dictinary(GetType(ShortSale.PartyContact.ContactType))
+        Return Utility.Enum2Dictinary(GetType(PartyContact.ContactType))
     End Function
 
 End Class

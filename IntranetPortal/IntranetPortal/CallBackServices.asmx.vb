@@ -2,7 +2,7 @@
 Imports System.Web.Services.Protocols
 Imports System.ComponentModel
 Imports System.Web.Script.Services
-Imports IntranetPortal.ShortSale
+Imports IntranetPortal.Data
 Imports Newtonsoft.Json
 Imports System.Web.Script.Serialization
 

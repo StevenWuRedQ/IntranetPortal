@@ -1,5 +1,5 @@
 ﻿Imports Newtonsoft.Json
-Imports IntranetPortal.ShortSale
+Imports IntranetPortal.Data
 Imports DevExpress.Web.ASPxGridView
 
 Public Class ShortSalePropertyTab

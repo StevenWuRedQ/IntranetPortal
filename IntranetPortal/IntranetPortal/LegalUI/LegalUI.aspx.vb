@@ -1,8 +1,9 @@
 ﻿Imports System.Web.Script.Serialization
-Imports IntranetPortal.ShortSale
+Imports IntranetPortal.Data
 Imports Newtonsoft.Json
 Imports System.Web.Services
 Imports System.Web.Script.Services
+Imports Legal = IntranetPortal.Data
 
 Public Class LegalUI
     Inherits System.Web.UI.Page
@@ -94,8 +95,8 @@ Public Class LegalUI
     End Sub
 
     Public Sub SetView(viewName As String)
-        If Not ([Enum].TryParse(Of Legal.LegalCaseStatus)(viewName, DisplayView)) Then
-            DisplayView = Legal.LegalCaseStatus.Closed
+        If Not ([Enum].TryParse(Of IntranetPortal.Data.LegalCaseStatus)(viewName, DisplayView)) Then
+            DisplayView = IntranetPortal.Data.LegalCaseStatus.Closed
         End If
     End Sub
 
@@ -110,14 +111,14 @@ Public Class LegalUI
 
     <WebMethod()> _
     <ScriptMethod>
-    Public Shared Sub SaveCase(legalCase As Legal.LegalCase)
+    Public Shared Sub SaveCase(legalCase As IntranetPortal.Data.LegalCase)
         legalCase.SaveData()
     End Sub
 
     <WebMethod()> _
    <ScriptMethod>
     Public Shared Sub SaveCaseData(caseData As String, bble As String)
-        Dim lgCase = Legal.LegalCase.GetCase(bble)
+        Dim lgCase = IntranetPortal.Data.LegalCase.GetCase(bble)
         lgCase.CaseData = caseData
         lgCase.SaveData()
     End Sub
@@ -128,14 +129,14 @@ Public Class LegalUI
         'save data
         SaveCaseData(caseData, bble)
 
-        Dim wli = WorkflowService.GetLegalWorklistItem(sn, bble, Legal.LegalCaseStatus.LegalResearch, HttpContext.Current.User.Identity.Name)
+        Dim wli = WorkflowService.GetLegalWorklistItem(sn, bble, IntranetPortal.Data.LegalCaseStatus.LegalResearch, HttpContext.Current.User.Identity.Name)
 
         If wli IsNot Nothing Then
             wli.Finish()
         End If
 
         'update legal case status
-        Legal.LegalCase.UpdateStatus(bble, Legal.LegalCaseStatus.ManagerAssign)
+        IntranetPortal.Data.LegalCase.UpdateStatus(bble, IntranetPortal.Data.LegalCaseStatus.ManagerAssign)
 
         Dim comments = String.Format("Research is completed. The case is move to manager.")
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
@@ -147,13 +148,13 @@ Public Class LegalUI
         'save data
         SaveCaseData(caseData, bble)
 
-        Dim wli = WorkflowService.GetLegalWorklistItem(sn, bble, Legal.LegalCaseStatus.AttorneyHandle, HttpContext.Current.User.Identity.Name)
+        Dim wli = WorkflowService.GetLegalWorklistItem(sn, bble, LegalCaseStatus.AttorneyHandle, HttpContext.Current.User.Identity.Name)
 
         If wli IsNot Nothing Then
             wli.Finish()
         End If
 
-        Legal.LegalCase.UpdateStatus(bble, Legal.LegalCaseStatus.Closed)
+        LegalCase.UpdateStatus(bble, LegalCaseStatus.Closed)
 
         Dim comments = String.Format("Case is closed.")
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
@@ -218,9 +219,9 @@ Public Class LegalUI
         End If
     End Sub
     Public Function GetAllRoboSingor() As String
-        Return Legal.LegalRoboSignor.GetAllRoboSignor.ToJsonString
+        Return LegalRoboSignor.GetAllRoboSignor.ToJsonString
     End Function
     Public Function GetAllJudge() As String
-        Return Legal.LegalJudge.GetAllJudge.ToJsonString
+        Return LegalJudge.GetAllJudge.ToJsonString
     End Function
 End Class

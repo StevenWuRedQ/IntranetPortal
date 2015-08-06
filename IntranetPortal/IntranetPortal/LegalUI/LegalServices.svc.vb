@@ -1,6 +1,7 @@
 ﻿Imports System.ServiceModel
 Imports System.ServiceModel.Activation
 Imports System.ServiceModel.Web
+Imports Legal = IntranetPortal.Data
 Imports Newtonsoft.Json
 
 <ServiceContract(Namespace:="")>

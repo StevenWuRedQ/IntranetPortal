@@ -1,5 +1,6 @@
 ﻿Imports DevExpress.Web.ASPxHtmlEditor
 Imports DevExpress.Web.ASPxEditors
+Imports IntranetPortal.Data
 
 Public Class SendMailControl
     Inherits System.Web.UI.UserControl
@@ -73,7 +74,7 @@ Public Class SendMailControl
         Dim emailCClist = TryCast(EmailCCIDs.FindControl("tabPageEmailCCSelect").FindControl("lbEmailCCs"), ASPxListBox)
         Using Context As New Entities
             Dim emilListData = Context.Employees.Select(Function(e) e.Email).Where(Function(e) e IsNot Nothing And e.IndexOf("@") > 0).ToList
-            emilListData.AddRange(ShortSale.PartyContact.getAllEmail())
+            emilListData.AddRange(PartyContact.getAllEmail())
             emilListData = emilListData.Distinct.ToList
             emilList.DataSource = emilListData
             emilList.DataBind()

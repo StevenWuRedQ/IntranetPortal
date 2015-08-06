@@ -1,4 +1,4 @@
-﻿Imports IntranetPortal.ShortSale
+﻿Imports IntranetPortal.Data
 Imports System.Web.Services
 Imports System.Web.Script.Serialization
 Imports System.Web.Script.Services
@@ -262,7 +262,7 @@ Public Class NGShortSale
         ShortSaleFileOverview.BindData(ssCase.BBLE)
     End Sub
     Public Function GetAllContact() As String
-        Return ShortSale.PartyContact.getAllContact.ToJsonString
+        Return PartyContact.getAllContact.ToJsonString
     End Function
     Public Function GetAllTeam() As String
         Return Team.GetAllTeams.ToJsonString

@@ -3,7 +3,8 @@ Imports System.Globalization
 Imports DevExpress.Web.ASPxCallbackPanel
 Imports DevExpress.Web.ASPxPopupControl
 Imports DevExpress.Web.ASPxHtmlEditor
-Imports IntranetPortal.ShortSale
+Imports IntranetPortal.Data
+Imports ShortSale = IntranetPortal.Data
 
 Public Class ActivityLogs
     Inherits System.Web.UI.UserControl

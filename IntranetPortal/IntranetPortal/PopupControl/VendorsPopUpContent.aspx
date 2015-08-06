@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="VendorsPopUpContent.aspx.vb" Inherits="IntranetPortal.VendorsPopUpContent" %>
 
-<%@ Import Namespace="IntranetPortal.ShortSale" %>
+<%@ Import Namespace="IntranetPortal.Data" %>
 
 <!DOCTYPE html>
 

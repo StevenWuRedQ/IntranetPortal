@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGShortSaleHomewonerTab.ascx.vb" Inherits="IntranetPortal.NGShortSaleHomewonerTab" %>
-<%@ Import Namespace="IntranetPortal.ShortSale" %>
+<%@ Import Namespace="IntranetPortal.Data" %>
 <%@ Import Namespace="IntranetPortal" %>
 <tabset class="tab-switch">
     <tab ng-repeat="owner in SsCase.PropertyInfo.Owners" active="owner.active" disable="owner.disabled">

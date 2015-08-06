@@ -46,7 +46,7 @@ Public Class Test
 
 
     Protected Sub Button1_Click(sender As Object, e As EventArgs)
-        Dim cases = Legal.LegalCase.GetAllCases
+        Dim cases = IntranetPortal.Data.LegalCase.GetAllCases
         For Each c In cases
             Dim data = JObject.Parse(c.CaseData)
             data("CaseName") = c.CaseName

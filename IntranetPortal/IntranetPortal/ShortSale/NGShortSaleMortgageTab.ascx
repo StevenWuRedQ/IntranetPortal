@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGShortSaleMortgageTab.ascx.vb" Inherits="IntranetPortal.NGShortSaleMortgageTab" %>
-<%@ Import Namespace="IntranetPortal.ShortSale" %>
+<%@ Import Namespace="IntranetPortal.Data" %>
 
 <tabset class="tab-switch">
     <tab ng-repeat="mortgage in SsCase.Mortgages" active="mortgage.active" disable="mortage.disabled">

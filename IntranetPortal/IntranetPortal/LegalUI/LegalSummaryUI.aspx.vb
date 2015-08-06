@@ -8,14 +8,14 @@
         End If
     End Sub
     Sub BindGrid()
-        Dim mCases = IntranetPortal.Legal.LegalCase.GetAllCases
+        Dim mCases = IntranetPortal.Data.LegalCase.GetAllCases
 
         gdCases.DataSource = mCases
         gdCases.DataBind()
     End Sub
 
     Sub BindUpCommingFCGrid()
-        Dim mCases = Legal.LegalCaseReport.GetAllReport.Where(Function(r) r.SaleDate IsNot Nothing)
+        Dim mCases = IntranetPortal.Data.LegalCaseReport.GetAllReport.Where(Function(r) r.SaleDate IsNot Nothing)
         gridUpCommingFCSale.DataSource = mCases
         gridUpCommingFCSale.GroupBy(gridUpCommingFCSale.Columns("SaleDate"))
         gridUpCommingFCSale.ExpandAll()

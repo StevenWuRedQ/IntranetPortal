@@ -1,4 +1,4 @@
-﻿Imports IntranetPortal.ShortSale
+﻿Imports IntranetPortal.Data
 Public Class ShortSaleMortgageTab
     Inherits System.Web.UI.UserControl
     Public Property mortgagesData As PropertyMortgage()

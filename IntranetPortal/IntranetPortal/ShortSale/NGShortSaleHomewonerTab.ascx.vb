@@ -1,4 +1,4 @@
-﻿Imports IntranetPortal.ShortSale
+﻿Imports IntranetPortal.Data
 Public Class NGShortSaleHomewonerTab
     Inherits System.Web.UI.UserControl
     Public Property homeOwners As New List(Of PropertyOwner)

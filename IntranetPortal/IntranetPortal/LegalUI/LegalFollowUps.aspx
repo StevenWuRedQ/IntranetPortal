@@ -61,7 +61,7 @@
                     </dx:GridViewDataColumn>
                     <dx:GridViewDataDateColumn FieldName="AuctionDate">
                         <DataItemTemplate>
-                            <%# String.Format("{0:d}", IntranetPortal.ShortSale.ShortSaleCase.GetCaseByBBLE(Eval("BBLE")).SaleDate)%>
+                            <%# String.Format("{0:d}", IntranetPortal.Data.ShortSaleCase.GetCaseByBBLE(Eval("BBLE")).SaleDate)%>
                         </DataItemTemplate>
                     </dx:GridViewDataDateColumn>
                     <dx:GridViewDataColumn FieldName="ResearchBy" Caption="Research" Visible="false">

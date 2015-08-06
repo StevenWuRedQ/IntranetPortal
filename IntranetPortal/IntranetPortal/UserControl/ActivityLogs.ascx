@@ -456,7 +456,7 @@
                     <script type="text/javascript">
 
                         var ShortSale = {
-                            StatusData: <%= IntranetPortal.JsonExtension.ToJsonString(IntranetPortal.ShortSale.PropertyMortgage.StatusData)%>,
+                            StatusData: <%= IntranetPortal.JsonExtension.ToJsonString(IntranetPortal.Data.PropertyMortgage.StatusData)%>,
                             UpdateTypeChange: function(s)
                             {
                                 var type = s.value;
@@ -511,14 +511,14 @@
                         <div class="color_gray upcase_text">Category</div>
                         <select class="select_bootstrap select_margin " id="selCategory" onchange="OnStatusCategoryChange(this, ShortSale.StatusData)" data-required="true">
                             <option value=""></option>
-                            <% For Each category In IntranetPortal.ShortSale.PropertyMortgage.StatusCategory%>
+                            <% For Each category In IntranetPortal.Data.PropertyMortgage.StatusCategory%>
                             <option value="<%= category%>"><%= category%></option>
                             <% Next%>
                         </select>
                         <div class="color_gray upcase_text">Status Update</div>
                         <select class="select_bootstrap select_margin selStatusUpdate" id="selStatusUpdate" data-required="true">
                             <option value=""></option>
-                            <% For Each mortStatus In IntranetPortal.ShortSale.PropertyMortgage.StatusData%>
+                            <% For Each mortStatus In IntranetPortal.Data.PropertyMortgage.StatusData%>
                             <option value="<%= mortStatus.Category & "-" & mortStatus.Name%>" style="display: none"><%= mortStatus.Name%></option>
                             <% Next%>
                         </select>

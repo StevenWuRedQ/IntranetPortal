@@ -1,4 +1,5 @@
 ﻿Imports DevExpress.Web.ASPxHtmlEditor
+Imports IntranetPortal.Data
 
 Public Class ShortSaleFileOverview
     Inherits System.Web.UI.UserControl
@@ -11,7 +12,7 @@ Public Class ShortSaleFileOverview
 
         hfBBLE.Value = bble
 
-        gridTracking.DataSource = ShortSale.ShortSaleOverview.LoadOverview(bble)
+        gridTracking.DataSource = ShortSaleOverview.LoadOverview(bble)
         gridTracking.DataBind()
 
     End Sub
@@ -22,7 +23,7 @@ Public Class ShortSaleFileOverview
 
             Dim comments = e.Parameters.Split("|")(1)
 
-            Dim log As New ShortSale.ShortSaleOverview
+            Dim log As New ShortSaleOverview
             log.ActivityDate = DateTime.Now
             log.UserName = Page.User.Identity.Name
             log.Comments = comments

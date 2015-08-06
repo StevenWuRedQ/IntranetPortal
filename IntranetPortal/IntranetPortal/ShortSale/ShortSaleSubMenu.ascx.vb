@@ -1,4 +1,5 @@
-﻿Imports IntranetPortal.ShortSale
+﻿Imports IntranetPortal.Data
+Imports ShortSale = IntranetPortal.Data
 
 Public Class ShortSaleSubMenu
     Inherits System.Web.UI.UserControl

@@ -237,19 +237,19 @@
                                         <li class="pull-right" style="margin-right: 30px; color: #ffa484">
                                             <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
 
-                                            <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
+                                            <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerPreview Then%>
                                             <i class="fa fa-lightbulb-o sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Research');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Research"></i>
                                             <% End If%>
 
-                                            <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.LegalResearch Then%>
+                                            <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.LegalResearch Then%>
                                             <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="CompleteResearch()" data-original-title="Complete Research"></i>
                                             <% End If%>
 
-                                            <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or (ShowReassginBtn()) Then%>
+                                            <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerAssign Or (ShowReassginBtn()) Then%>
                                             <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Attorney');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to paralegal / Attorney"></i>
                                             <% End If%>
 
-                                            <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.AttorneyHandle Then%>
+                                            <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.AttorneyHandle Then%>
                                             <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="AttorneyComplete()" data-original-title="Complete"></i>
                                             <% End If%>
 
@@ -262,7 +262,7 @@
                                     </ul>
                                 </div>
                                 <% End If%>
-                                <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Or ShowReassginBtn() Then%>
+                                <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerPreview Or ShowReassginBtn() Then%>
                                 <dx:ASPxPopupControl ClientInstanceName="popupSelectAttorneyCtr" Width="300px" Height="300px"
                                     MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
                                     HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"

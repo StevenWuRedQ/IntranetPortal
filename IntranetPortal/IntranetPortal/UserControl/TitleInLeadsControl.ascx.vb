@@ -1,4 +1,4 @@
-﻿Imports IntranetPortal.ShortSale
+﻿Imports IntranetPortal.Data
 Imports DevExpress.Web.ASPxGridView
 Imports DevExpress.Web.ASPxPopupControl
 Imports System.Web.Script.Serialization
@@ -94,7 +94,7 @@ Public Class TitleInLeads
 
     Protected Sub cbGetJudgementData_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         Dim bble = e.Parameter
-        Dim objJudgement = ShortSale.TitleJudgementSearch.GetInstaceByBBLE(bble)
+        Dim objJudgement = TitleJudgementSearch.GetInstaceByBBLE(bble)
 
         If objJudgement Is Nothing Then
             objJudgement = New TitleJudgementSearch With

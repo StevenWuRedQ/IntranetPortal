@@ -375,7 +375,7 @@
                                 <% Dim i = 1%>
                                 <% For Each clearence In ShortSaleCaseData.Clearences%>
                                 <div class="clearence_list_item">
-                                    <div class="clearence_list_content clearfix  <%= If(Not String.IsNullOrEmpty(clearence.Status) AndAlso clearence.Status = IntranetPortal.ShortSale.TitleClearence.ClearenceStatus.Cleared, "TitleCleared", "")%>">
+                                    <div class="clearence_list_content clearfix  <%= If(Not String.IsNullOrEmpty(clearence.Status) AndAlso clearence.Status = IntranetPortal.Data.TitleClearence.ClearenceStatus.Cleared, "TitleCleared", "")%>">
                                         <div class="clearence_list_index TitleContent">
                                             <%= i%>
                                         </div>

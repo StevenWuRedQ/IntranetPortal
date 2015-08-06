@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleSummaryTab.ascx.vb" Inherits="IntranetPortal.ShortSaleSummaryTab" %>
-<%@ Import Namespace="IntranetPortal.ShortSale" %>
+<%@ Import Namespace="IntranetPortal.Data" %>
 <%@ Import Namespace="IntranetPortal" %>
 <script>
     function refreshSummary() {
@@ -106,7 +106,7 @@
                             <label class="ss_form_input_title">Status</label>
                             <select class="ss_form_input " data-item="Status" data-item-type="1">
                                 <option value=""></option>
-                                <% For Each mortStatus In IntranetPortal.ShortSale.PropertyMortgage.StatusData%>
+                                <% For Each mortStatus In IntranetPortal.Data.PropertyMortgage.StatusData%>
                                 <option value="<%= mortStatus.Category & "-" & mortStatus.Name%>"><%= mortStatus.Name%></option>
                                 <% Next%>
                             </select>

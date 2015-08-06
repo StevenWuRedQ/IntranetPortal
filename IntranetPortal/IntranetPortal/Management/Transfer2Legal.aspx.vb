@@ -15,7 +15,7 @@ Public Class Transfer2Legal
         Dim BBLEs = JArray.Parse(BBLELists.Text)
 
         For Each bble In BBLEs
-            Dim legalCase = Legal.LegalCase.GetCase(bble)
+            Dim legalCase = IntranetPortal.Data.LegalCase.GetCase(bble)
             If (legalCase Is Nothing) Then
                 LegalCaseManage.StartLegalRequest(bble, "{}", Page.User.Identity.Name)
                 LeadsActivityLog.AddActivityLog(Date.Now, "Transfter Leads to Legal", bble, LeadsActivityLog.LogCategory.Legal.ToString)

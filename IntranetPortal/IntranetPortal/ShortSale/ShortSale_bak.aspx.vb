@@ -1,4 +1,4 @@
-﻿Imports IntranetPortal.ShortSale
+﻿Imports IntranetPortal.Data
 Imports System.Web.Services
 Imports System.Web.Script.Serialization
 Imports System.Web.Script.Services

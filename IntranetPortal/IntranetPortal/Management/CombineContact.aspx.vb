@@ -1,4 +1,4 @@
-﻿Imports IntranetPortal.ShortSale
+﻿Imports IntranetPortal.Data
 Imports Newtonsoft.Json.Linq
 
 Public Class CombineContact

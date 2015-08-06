@@ -2,7 +2,7 @@
 Imports System.ServiceModel.Activation
 Imports System.ServiceModel.Web
 Imports System.Web.Script.Services
-Imports IntranetPortal.ShortSale
+Imports IntranetPortal.Data
 
 <ServiceContract(Namespace:="")>
 <AspNetCompatibilityRequirements(RequirementsMode:=AspNetCompatibilityRequirementsMode.Allowed)>

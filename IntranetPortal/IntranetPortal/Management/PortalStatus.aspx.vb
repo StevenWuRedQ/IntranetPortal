@@ -1,5 +1,6 @@
 ﻿Imports DevExpress.Web.ASPxEditors
 Imports DevExpress.Web.ASPxGridView
+Imports IntranetPortal.Data
 
 Public Class PortalStatus
     Inherits System.Web.UI.Page
@@ -142,6 +143,6 @@ Public Class PortalStatus
 
     Protected Sub btnCommonData_Click(sender As Object, e As EventArgs)
         Core.CommonData.RefreshData()
-        ShortSale.PropertyMortgage.RefreshMortgageStatusData()
+        PropertyMortgage.RefreshMortgageStatusData()
     End Sub
 End Class

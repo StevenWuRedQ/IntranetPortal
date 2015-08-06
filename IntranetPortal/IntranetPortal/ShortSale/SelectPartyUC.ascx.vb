@@ -1,5 +1,5 @@
 ﻿Imports DevExpress.Web.ASPxGridView
-Imports IntranetPortal.ShortSale
+Imports IntranetPortal.Data
 Imports System.Web.Script.Serialization
 Imports DevExpress.Web.ASPxEditors
 

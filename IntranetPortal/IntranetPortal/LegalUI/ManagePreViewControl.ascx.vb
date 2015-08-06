@@ -1,4 +1,6 @@
-﻿Public Class ManagePreViewControl
+﻿Imports IntranetPortal.Data
+
+Public Class ManagePreViewControl
     Inherits System.Web.UI.UserControl
     Public Property Applicant As String
     Public Property BBLE As String
@@ -24,7 +26,7 @@
     Private Sub BindLegalUser()
         Dim users = Roles.GetUsersInRole("Legal-Research")
 
-        Dim researchCase = Legal.LegalCase.GetCaseList(Legal.LegalCaseStatus.LegalResearch)
+        Dim researchCase = LegalCase.GetCaseList(LegalCaseStatus.LegalResearch)
 
 
         Dim userData As New List(Of Object)
@@ -52,8 +54,8 @@
             wli.ProcessInstance.DataFields("ResearchUser") = searchUser
             wli.Finish()
 
-            Dim lc = Legal.LegalCase.GetCase(bble)
-            lc.Status = Legal.LegalCaseStatus.LegalResearch
+            Dim lc = LegalCase.GetCase(bble)
+            lc.Status = LegalCaseStatus.LegalResearch
             lc.ResearchBy = searchUser
             lc.SaveData()
 

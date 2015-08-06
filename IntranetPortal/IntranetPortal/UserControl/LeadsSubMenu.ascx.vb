@@ -1,6 +1,7 @@
 ﻿Imports DevExpress.Web.ASPxMenu
 Imports System.ComponentModel
 Imports DevExpress.Web.ASPxEditors
+Imports IntranetPortal.Data
 
 Public Class LeadsSubMenu
     Inherits System.Web.UI.UserControl
@@ -115,7 +116,7 @@ Public Class LeadsSubMenu
                     End If
                     'Dim tmpdate = If(e.Parameter.Split("|").Count > 2, DateTime.Parse(e.Parameter.Split("|")(2)), DateTime.Now)
 
-                    UpdateLeadStatus(bble, LeadStatus.Callback, tmpdate)
+                    UpdateLeadStatus(bble, LeadStatus.Callback, tmpDate)
                 End If
             End If
 
@@ -223,7 +224,7 @@ Public Class LeadsSubMenu
             txtDeadLeadDescription.Text = ""
         End If
         If e.Parameter.StartsWith("DumpDeadLeads") Then
-            
+
             Dim l = Lead.GetInstance(hfBBLE.Value)
 
             l.ReAssignLeads("Dead Leads", Page.User.Identity.Name)
@@ -258,7 +259,7 @@ Public Class LeadsSubMenu
                 End If
 
                 If lbSelectionMode.SelectedValues.Contains("1") Then
-                    If ShortSale.ShortSaleCase.GetCaseByBBLE(bble) Is Nothing Then
+                    If ShortSaleCase.GetCaseByBBLE(bble) Is Nothing Then
                         ShortSaleManage.MoveLeadsToShortSale(bble, Page.User.Identity.Name)
                     End If
 
@@ -266,7 +267,7 @@ Public Class LeadsSubMenu
                     If String.IsNullOrEmpty(name) Then
                         Throw New Exception("Please select Eviction User")
                     End If
-                    ShortSale.EvictionCas.AddEviction(bble, name, Page.User.Identity.Name)
+                    EvictionCas.AddEviction(bble, name, Page.User.Identity.Name)
                 End If
 
                 If lbSelectionMode.SelectedValues.Contains("4") Then

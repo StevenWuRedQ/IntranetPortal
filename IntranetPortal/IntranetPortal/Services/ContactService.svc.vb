@@ -2,7 +2,7 @@
 Imports System.ServiceModel.Activation
 Imports System.ServiceModel.Web
 Imports System.Web.Script.Services
-Imports IntranetPortal.ShortSale
+Imports IntranetPortal.Data
 Imports System.IO
 
 <ServiceContract(Namespace:="")>
@@ -56,7 +56,7 @@ Public Class ContactService
     <OperationContract()>
    <WebGet()>
     Public Function GetAllBuyerEntities() As Channels.Message
-        Return ShortSale.CorporationEntity.GetAllEntities().OrderBy(Function(c) c.CorpName).ToJson
+        Return CorporationEntity.GetAllEntities().OrderBy(Function(c) c.CorpName).ToJson
     End Function
 
     <OperationContract()>
@@ -69,7 +69,7 @@ Public Class ContactService
     <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
     Public Function SaveCorpEntitiy(c As String) As Channels.Message
         If (Not String.IsNullOrEmpty(c)) Then
-            Dim entity = Newtonsoft.Json.JsonConvert.DeserializeObject(Of ShortSale.CorporationEntity)(c)
+            Dim entity = Newtonsoft.Json.JsonConvert.DeserializeObject(Of CorporationEntity)(c)
             If (entity.EntityId = 0 AndAlso CorporationEntity.GetEntityByCorpName(entity.CorpName) IsNot Nothing) Then
                 Return Nothing
             End If
@@ -93,6 +93,6 @@ Public Class ContactService
         Dim id = HttpContext.Current.Request.QueryString("id")
         Dim fileName = HttpContext.Current.Request.QueryString("type")
 
-        Return ShortSale.CorporationEntity.UploadFile(id, fileName & ".pdf", ms.ToArray, HttpContext.Current.User.Identity.Name)
+        Return CorporationEntity.UploadFile(id, fileName & ".pdf", ms.ToArray, HttpContext.Current.User.Identity.Name)
     End Function
 End Class

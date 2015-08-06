@@ -1,4 +1,5 @@
-﻿Imports IntranetPortal.ShortSale
+﻿Imports IntranetPortal.Data
+Imports ShortSale = IntranetPortal.Data
 Imports Newtonsoft.Json.Linq
 
 Public Class ShortSaleManage
@@ -222,11 +223,11 @@ Public Class ShortSaleManage
         Return New List(Of EvictionCas)
     End Function
 
-    Public Shared Function SaveProp(li As LeadsInfo, createBy As String) As IntranetPortal.ShortSale.PropertyBaseInfo
-        Dim propBase = IntranetPortal.ShortSale.PropertyBaseInfo.GetInstance(li.BBLE)
+    Public Shared Function SaveProp(li As LeadsInfo, createBy As String) As IntranetPortal.Data.PropertyBaseInfo
+        Dim propBase = IntranetPortal.Data.PropertyBaseInfo.GetInstance(li.BBLE)
 
         If propBase Is Nothing Then
-            propBase = New IntranetPortal.ShortSale.PropertyBaseInfo
+            propBase = New IntranetPortal.Data.PropertyBaseInfo
             propBase.BBLE = li.BBLE
             propBase.Borough = li.Borough
             propBase.Block = li.Block

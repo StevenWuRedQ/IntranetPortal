@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9a653d02cbfe4334a4333f75b4deee58" Name="Diagram1" >
+        <EntityTypeShape EntityType="IntranetPortalModel.CleareneceNote" Width="1.5" PointX="0.625" PointY="0.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PartyContact" Width="1.5" PointX="2.625" PointY="0.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PropertyFloor" Width="1.5" PointX="0.625" PointY="2.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PropertyTitle" Width="1.5" PointX="2.625" PointY="5.125" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCase" Width="1.5" PointX="8.625" PointY="0.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.TitleClearence" Width="1.5" PointX="10.625" PointY="0.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PropertyBaseInfo" Width="1.5" PointX="4.75" PointY="0.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCaseComment" Width="1.5" PointX="6.625" PointY="0.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PropertyOccupant" Width="1.5" PointX="10.625" PointY="4.125" />
+        <EntityTypeShape EntityType="IntranetPortalModel.TitleJudgementSearch" Width="1.5" PointX="4.75" PointY="6.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.EvictionCas" Width="1.5" PointX="14.125" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.Employee" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleActivityLog" Width="1.75" PointX="6.5" PointY="6.25" />
+        <EntityTypeShape EntityType="IntranetPortalModel.MortgageStatusData" Width="1.75" PointX="6.5" PointY="9.25" />
+        <EntityTypeShape EntityType="IntranetPortalModel.GroupType" Width="1.5" PointX="10.625" PointY="10.25" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PropertyValueInfo" Width="1.75" PointX="6.625" PointY="3" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PropertyMortgage" Width="1.75" PointX="2.625" PointY="9.875" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PropertyOwner" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleOverview" Width="1.75" PointX="14.125" PointY="6.25" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleBuyer" Width="1.5" PointX="14.125" PointY="3.125" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleOffer" Width="1.5" PointX="12.375" PointY="8.25" />
+        <EntityTypeShape EntityType="IntranetPortalModel.CorporationEntity" Width="1.5" PointX="6.625" PointY="11.375" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

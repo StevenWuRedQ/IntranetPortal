@@ -2,7 +2,8 @@
 Imports System.ServiceModel.Activation
 Imports System.ServiceModel.Web
 Imports System.Web.Script.Services
-Imports IntranetPortal.ShortSale
+Imports IntranetPortal.Data
+Imports ShortSale = IntranetPortal.Data
 Imports Newtonsoft.Json
 
 <ServiceContract(Namespace:="")>

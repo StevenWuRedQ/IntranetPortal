@@ -1,4 +1,6 @@
 ﻿Imports Newtonsoft.Json.Linq
+Imports Legal = IntranetPortal.Data
+Imports IntranetPortal.Data
 
 Public Class LegalCaseManage
 
@@ -126,7 +128,7 @@ Public Class LegalCaseManage
     End Function
 
     Public Shared Function GetSaleDate(bble As String) As DateTime?
-        Dim c = ShortSale.ShortSaleCase.GetCaseByBBLE(bble)
+        Dim c = ShortSaleCase.GetCaseByBBLE(bble)
         If (c IsNot Nothing) Then
             Return c.SaleDate
         End If

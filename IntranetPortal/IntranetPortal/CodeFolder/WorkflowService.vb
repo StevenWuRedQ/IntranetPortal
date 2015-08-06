@@ -212,7 +212,7 @@ Public Class WorkflowService
         End Using
     End Sub
 
-    Public Shared Function GetLegalWorklistItem(sn As String, bble As String, status As Legal.LegalCaseStatus, destName As String) As WorklistItem
+    Public Shared Function GetLegalWorklistItem(sn As String, bble As String, status As IntranetPortal.Data.LegalCaseStatus, destName As String) As WorklistItem
         If String.IsNullOrEmpty(sn) Then
             Dim result = WorkflowService.GetLegalWorklist(bble, status, destName)
 
@@ -228,7 +228,7 @@ Public Class WorkflowService
         Return Nothing
     End Function
 
-    Public Shared Function GetLegalWorklist(bble As String, legalStatus As Legal.LegalCaseStatus, userName As String) As DBPersistence.Worklist
+    Public Shared Function GetLegalWorklist(bble As String, legalStatus As IntranetPortal.Data.LegalCaseStatus, userName As String) As DBPersistence.Worklist
         Using conn = GetConnection()
             Dim pInstIds = conn.GetProcessInstancesByDataFields("LegalRequest", "BBLE", bble)
             If pInstIds.Count > 0 Then

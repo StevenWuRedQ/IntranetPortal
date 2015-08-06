@@ -1,4 +1,5 @@
 ﻿Imports DevExpress.Web.ASPxEditors
+Imports IntranetPortal.Data
 
 Public Class ManagePreview
     Inherits System.Web.UI.Page
@@ -50,8 +51,8 @@ Public Class ManagePreview
             wli.ProcessInstance.DataFields("ResearchUser") = searchUser
             wli.Finish()
 
-            Dim lc = Legal.LegalCase.GetCase(bble)
-            lc.Status = Legal.LegalCaseStatus.LegalResearch
+            Dim lc = LegalCase.GetCase(bble)
+            lc.Status = LegalCaseStatus.LegalResearch
             lc.ResearchBy = searchUser
             lc.SaveData()
 

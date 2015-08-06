@@ -1,6 +1,8 @@
 ﻿Imports System.Web.Script.Serialization
 Imports IntranetPortal.Messager
 Imports System.Data.SqlClient
+Imports ShortSale = IntranetPortal.Data
+Imports legal = IntranetPortal.Data
 
 Public Class NavMenu
     Inherits System.Web.UI.UserControl

@@ -1,4 +1,4 @@
-﻿Imports IntranetPortal.ShortSale
+﻿Imports IntranetPortal.Data
 Public Class ShortSaleEvictionTab
     Inherits System.Web.UI.UserControl
     Public Property evictionData As New ShortSaleCase

@@ -280,8 +280,8 @@ Public Class PortalReportService
         Dim result As New List(Of LeadsStatusData)
         Using Context As New Entities
             Dim source = Context.Leads.Where(Function(ld) users.Contains(ld.EmployeeName) And ld.Status = LeadStatus.InProcess).Select(Function(ld) ld.BBLE).ToList
-            Dim shortSale = IntranetPortal.ShortSale.ShortSaleCase.GetCaseByBBLEs(source).Select(Function(s) s.BBLE).ToList
-            Dim EvictionCase = IntranetPortal.ShortSale.EvictionCas.GetCaseByBBLEs(source).Select(Function(s) s.BBLE).ToList
+            Dim shortSale = IntranetPortal.Data.ShortSaleCase.GetCaseByBBLEs(source).Select(Function(s) s.BBLE).ToList
+            Dim EvictionCase = IntranetPortal.Data.EvictionCas.GetCaseByBBLEs(source).Select(Function(s) s.BBLE).ToList
             Dim others = (From ld In source
                          Where Not shortSale.Contains(ld) AndAlso Not EvictionCase.Contains(ld)).Distinct.Count
             result.Add(New LeadsStatusData With {.Status = "Short Sale", .Count = shortSale.Count})
