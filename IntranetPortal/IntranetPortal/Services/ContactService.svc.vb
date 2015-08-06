@@ -62,7 +62,7 @@ Public Class ContactService
     <OperationContract()>
     <WebGet()>
     Public Function GetCorpEntityByStatus(n As String, s As String) As Channels.Message
-        Return ShortSale.CorporationEntity.GetEntitiesByStatus(n, s).ToJson()
+        Return CorporationEntity.GetEntitiesByStatus(n, s).ToJson()
     End Function
 
     <OperationContract()>

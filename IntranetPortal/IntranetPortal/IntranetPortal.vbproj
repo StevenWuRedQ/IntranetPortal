@@ -633,6 +633,13 @@
       <DependentUpon>ConstructionCaseList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Construction\ConstructionTab.ascx.designer.vb">
+      <DependentUpon>ConstructionTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionTab.ascx.vb">
+      <DependentUpon>ConstructionTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Content.Master.designer.vb">
       <DependentUpon>Content.Master</DependentUpon>
     </Compile>
@@ -1985,6 +1992,7 @@
     <Content Include="Construction\ConstructionUtilitiesTab.ascx" />
     <Content Include="Construction\ConstructionViolationTab.ascx" />
     <Content Include="Construction\ConstructionCaseList.ascx" />
+    <Content Include="Construction\ConstructionTab.ascx" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
     <Content Include="Content\bootstrap-responsive.css" />

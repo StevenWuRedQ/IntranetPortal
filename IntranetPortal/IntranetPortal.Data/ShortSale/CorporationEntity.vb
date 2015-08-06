@@ -8,6 +8,12 @@
         End Using
     End Function
 
+    Public Shared Function GetEntitiesByStatus(name As String, status As String) As List(Of CorporationEntity)
+        Using ctx As New ShortSaleEntities
+            Return ctx.CorporationEntities.Where(Function(s) status = s.Status AndAlso s.CorpName.Contains(name)).ToList
+        End Using
+    End Function
+
     Public Shared Function GetAllEntities() As List(Of CorporationEntity)
         Using ctx As New ShortSaleEntities
             Return ctx.CorporationEntities.ToList
