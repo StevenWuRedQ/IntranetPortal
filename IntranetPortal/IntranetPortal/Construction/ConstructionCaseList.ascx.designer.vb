@@ -11,68 +11,59 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ConstructionUI
+Partial Public Class ConstructionCaseList
 
     '''<summary>
-    '''ASPxSplitter1 control.
+    '''lblLeadCategory control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
-    '''SplitterContentControl1 control.
+    '''divExpand control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
+    Protected WithEvents divExpand As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''ConstructionCaseList control.
+    '''hfCaseStatus control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ConstructionCaseList As Global.IntranetPortal.ConstructionCaseList
+    Protected WithEvents hfCaseStatus As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
-    '''DocumentsUI control.
+    '''hfCaseBBLEs control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DocumentsUI As Global.IntranetPortal.DocumentsUI
+    Protected WithEvents hfCaseBBLEs As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
-    '''ASPxPopupControl2 control.
+    '''gridCase control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents gridCase As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
-    '''cbpLogs control.
+    '''ASPxPopupMenu2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbpLogs As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
-
-    '''<summary>
-    '''ActivityLogs control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
+    Protected WithEvents ASPxPopupMenu2 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
 End Class
