@@ -32,6 +32,8 @@ Public Class ActivityLogs
         Select Case DisplayMode
             Case ActivityLogMode.Legal
                 gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.LogCategory.Eviction.ToString})
+            Case ActivityLogMode.Construction
+                gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.Construction.ToString})
             Case Else
                 gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, Nothing)
         End Select
@@ -429,6 +431,8 @@ Public Class ActivityLogs
             WorkflowService.StartTaskProcess("ShortSaleTask", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text)
         ElseIf DisplayMode = ActivityLogMode.Legal Then
             WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text, "", "/LegalUI/LegalUI.aspx")
+        ElseIf DisplayMode = ActivityLogMode.Construction Then
+            WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text, "", "/Construction/ConstructionUI.aspx")
         End If
 
         For i = 0 To emps.Count - 1
@@ -488,7 +492,7 @@ Public Class ActivityLogs
                                    "<tr><td>Description:</td><td>{3}</td></tr>" &
                                    "</table>", employees, taskAction, taskPriority, taskDescription)
 
-        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString, Nothing, createUser, LeadsActivityLog.EnumActionType.SetAsTask)
+        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LogCategory.ToString, Nothing, createUser, LeadsActivityLog.EnumActionType.SetAsTask)
         Dim task = UserTask.AddUserTask(bble, employees, taskAction, taskPriority, "In Office", scheduleDate, taskDescription, log.LogID, createUser)
         Return task.TaskID
     End Function
@@ -939,9 +943,9 @@ Public Class ActivityLogs
                     LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
                     ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, "Comments", "Comments", txtComments)
                 End If
-            Case ActivityLogMode.Legal
+            Case ActivityLogMode.Legal, ActivityLogMode.Construction
 
-                LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
+                LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.Comments)
 
             Case Else
                 LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.Comments)
@@ -1015,6 +1019,8 @@ Public Class ActivityLogs
                     Return LeadsActivityLog.LogCategory.ShortSale
                 Case ActivityLogMode.Legal
                     Return LeadsActivityLog.LogCategory.Legal
+                Case ActivityLogMode.Construction
+                    Return LeadsActivityLog.LogCategory.Construction
                 Case Else
                     Return LeadsActivityLog.LogCategory.SalesAgent
             End Select
@@ -1026,6 +1032,7 @@ Public Class ActivityLogs
         Leads
         ShortSale
         Legal
+        Construction
     End Enum
 
     Protected Sub EmailBody2_Load(sender As Object, e As EventArgs)

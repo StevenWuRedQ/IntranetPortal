@@ -43,8 +43,15 @@ Public Class ShortSaleServices
     End Function
 
     <OperationContract()>
-    Public Function StartConstruction(bble As String) As Channels.Message
-        Return ShortSale.ShortSaleCase.GetCaseByBBLE(bble).ToJson
+    <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
+    Public Function MoveToConstruction(bble As String) As Boolean
+
+        Try
+            ShortSaleManage.StartConstruction(bble, HttpContext.Current.User.Identity.Name)
+            Return True
+        Catch ex As Exception
+            Throw
+        End Try
     End Function
 
     <OperationContract()>

@@ -7,17 +7,19 @@ Public Class ConstructionManage
 
 
     Public Shared Sub StartConstruction(bble As String, caseName As String, userName As String)
-        Dim cc As New ConstructionCase
-        cc.BBLE = bble
-        cc.CaseName = caseName
+        If ConstructionCase.GetCase(bble) Is Nothing Then
+            Dim cc As New ConstructionCase
+            cc.BBLE = bble
+            cc.CaseName = caseName
 
-        Dim ccMgr = Roles.GetUsersInRole(MgrRoleName)
+            Dim ccMgr = Roles.GetUsersInRole(MgrRoleName)
 
-        If ccMgr IsNot Nothing AndAlso ccMgr.Length > 0 Then
-            cc.Owner = ccMgr(0)
+            If ccMgr IsNot Nothing AndAlso ccMgr.Length > 0 Then
+                cc.Owner = ccMgr(0)
+            End If
+
+            cc.Save(userName)
         End If
-
-        cc.Save(userName)
     End Sub
 
     Public Shared Function GetMyCases(userName As String) As ConstructionCase()

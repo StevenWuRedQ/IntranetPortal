@@ -4,6 +4,16 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
 
+            If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                ASPxSplitter1.Panes("listPanel").Visible = False
+                Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
+                If wli IsNot Nothing Then
+                    Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
+                    BindData(bble)
+                End If
+                Return
+            End If
+
             If Not String.IsNullOrEmpty(Request.QueryString("bble")) Then
                 Dim bble = Request.QueryString("bble").ToString
                 BindData(bble)

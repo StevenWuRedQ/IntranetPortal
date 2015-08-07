@@ -4,6 +4,8 @@
 <%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>
 <%@ Register Src="~/Construction/ConstructionCaseList.ascx" TagPrefix="uc1" TagName="ConstructionCaseList" %>
 <%@ Register Src="~/Construction/ConstructionTab.ascx" TagPrefix="uc1" TagName="ConstructionTab" %>
+<%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
+
 
 <asp:Content runat="server" ContentPlaceHolderID="head"></asp:Content>
 
@@ -118,7 +120,7 @@
                             </ContentCollection>
                             <ClientSideEvents CloseUp="function(s,e){}" />
                         </dx:ASPxPopupControl>
-
+                        <uc1:SendMail runat="server" ID="SendMail" />
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
@@ -142,7 +144,7 @@
                             <dx:ASPxCallbackPanel runat="server" ID="cbpLogs" ClientInstanceName="cbpLogs" OnCallback="cbpLogs_Callback">
                                 <PanelCollection>
                                     <dx:PanelContent>
-                                        <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="Legal" />
+                                        <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="Construction" />
                                     </dx:PanelContent>
                                 </PanelCollection>
                             </dx:ASPxCallbackPanel>

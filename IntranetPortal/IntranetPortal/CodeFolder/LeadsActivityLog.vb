@@ -135,6 +135,7 @@
         ShortSale
         Legal
         Eviction
+        Construction
     End Enum
 
     Enum EnumActionType

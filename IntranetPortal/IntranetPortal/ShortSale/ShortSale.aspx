@@ -184,7 +184,7 @@
                                                                                 <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Archived" onclick="LogClick('Archived')"></i>
                                                                                 <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" style="display: none" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>
                                                                                 <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')" style="display: none"></i>
-                                                                                <i class="fa fa-wrench sale_head_button sale_head_button_left tooltip-examples" title="Move to Construction"></i>
+                                                                                <i class="fa fa-wrench sale_head_button sale_head_button_left tooltip-examples" title="Move to Construction" onclick="MoveToConstruction()"></i>
                                                                                 <%--                                                                                <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>--%>
                                                                             </li>
                                                                         </ul>
@@ -356,11 +356,45 @@
         function GetShortSaleCase() {
             return angular.element(document.getElementById('ShortSaleCtrl')).scope().SsCase;
         }
+
+        function MoveToConstruction()
+        {
+            angular.element(document.getElementById('ShortSaleCtrl')).scope().MoveToConstruction(
+                function()
+                {
+                    if (typeof gridTrackingClient != "undefined") {
+                        alert("Success");
+                        gridTrackingClient.Refresh();
+                    }
+                });
+        }
+
+
         portalApp = angular.module('PortalApp');
 
         portalApp.controller('ShortSaleCtrl', function ($scope, $http, $element, $parse, ptContactServices, ptCom) {
 
             $scope.ptContactServices = ptContactServices;
+
+            //move to construction - add by chris
+            $scope.MoveToConstruction = function (scuessfunc) {
+                var json = $scope.SsCase;
+                var data = { bble: leadsInfoBBLE };
+
+                $http.post('ShortSaleServices.svc/MoveToConstruction', JSON.stringify(data)).
+                        success(function () {
+                            if (scuessfunc) {
+                                scuessfunc();
+                            } else {
+                                alert("Successed !");
+                            }
+                        }).
+                        error(function (data, status) {
+                            alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
+                        });
+            }
+            // -- end --
+
 
             var cStore = new DevExpress.data.CustomStore({
                 load: function (loadOptions) {
@@ -538,6 +572,7 @@
                             alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                         });
             }
+            
             $scope.ShowAddPopUp = function (event) {
                 $scope.addCommentTxt = "";
                 aspxAddLeadsComments.ShowAtElement(event.target);
