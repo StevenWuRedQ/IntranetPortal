@@ -18,7 +18,7 @@ portalApp.directive('ssDate', function () {
                     dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
                     scope.$eval(attrs.ngModel + "='" + dd + "'");
                 }
-            })
+            });
         }
     };
 });
@@ -59,8 +59,7 @@ portalApp.directive('radioInit', function () {
                 var bVal = scope.$eval(attrs.ngModel);
                 bVal = bVal != null && (bVal == 'true' || bVal == true);
                 scope.$eval(attrs.ngModel + "=" + bVal.toString());
-
-            })
+            });
         }
     }
 });
@@ -73,7 +72,7 @@ portalApp.directive('moneyMask', function () {
             scope.$watch(attrs.ngModel, function () {
                 if ($(el).is(":focus")) return;
                 $(el).formatCurrency();
-            })
+            });
             $(el).on('blur', function () { $(this).formatCurrency(); });
             $(el).on('focus', function () { $(this).toNumber() });
 
@@ -89,7 +88,7 @@ portalApp.directive('numberMask', function () {
             scope.$watch(attrs.ngModel, function () {
                 if ($(el).is(":focus")) return;
                 $(el).formatCurrency({ symbol: "" });
-            })
+            });
             $(el).on('blur', function () { $(this).formatCurrency({ symbol: "" }); });
             $(el).on('focus', function () { $(this).toNumber() });
 
@@ -101,16 +100,16 @@ portalApp.directive('ptRadio', function () {
     return {
         restrict: 'E',
         template:
-            '<input type=\'checkbox\' id=\'{{name}}Y\' ng-model=\'model\' class=\'ss_form_input\'>' +
-            '<label for=\'{{name}}Y\' class=\'input_with_check\'><span class=\'box_text\'>Yes&nbsp</span></label>' +
-            '<input type=\'checkbox\' id=\'{{name}}N\' ng-model=\'model\'  ng-true-value="false" ng-false-value="true" class=\'ss_form_input\'>' +
-            '<label for=\'{{name}}N\' class=\'input_with_check\'><span class=\'box_text\'>No&nbsp</span></label>',
+            '<input type="checkbox" id="{{name}}Y" ng-model="model" class="ss_form_input">' +
+            '<label for="{{name}}Y" class="input_with_check"><span class="box_text">Yes&nbsp</span></label>' +
+            '<input type="checkbox" id="{{name}}N" ng-model="model" ng-true-value="false" ng-false-value="true" class="ss_form_input">' +
+            '<label for="{{name}}N" class="input_with_check"><span class="box_text">No&nbsp</span></label>',
 
         scope: {
             model: '=',
             name: '@'
         },
-        link: function postLink(scope, el, attrs) {
+        link: function (scope, el, attrs) {
             var bVal = scope.model;
             scope.model = bVal == null ? false : bVal;
         }
@@ -135,46 +134,70 @@ portalApp.directive('ptCollapse', function () {
     }
 });
 
-portalApp.directive('ckEditor', [function() {
-        return {
-            require: '?ngModel',
-            link: function(scope, elm, attr, ngModel) {
+portalApp.directive('ckEditor', [function () {
+    return {
+        require: '?ngModel',
+        link: function (scope, elm, attr, ngModel) {
 
-                var ck = CKEDITOR.replace(elm[0], {
-                    allowedContent: true,
-                    height: 450,
+            var ck = CKEDITOR.replace(elm[0], {
+                allowedContent: true,
+                height: 450,
+            });
+
+            ck.on('pasteState', function () {
+                scope.$apply(function () {
+                    ngModel.$setViewValue(ck.getData());
                 });
+            });
 
-                ck.on('pasteState', function() {
-                    scope.$apply(function() {
-                        ngModel.$setViewValue(ck.getData());
-                    });
-                });
-
-                ngModel.$render = function(value) {
-                    ck.setData(ngModel.$modelValue);
-                };
-            }
-        };
-    }
+            ngModel.$render = function (value) {
+                ck.setData(ngModel.$modelValue);
+            };
+        }
+    };
+}
 ]);
 
-portalApp.directive('ptAdd', function() {
+portalApp.directive('ptAdd', function () {
     return {
         restrict: 'E',
         template: '<i class="fa fa-plus-circle icon_btn text-primary tooltip-examples" title="Add"></i>',
     }
 });
 
-portalApp.directive('ptDel', function() {
+portalApp.directive('ptDel', function () {
     return {
         restrict: 'E',
         template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
     }
 });
 
-portalApp.directive('ptFile', function() {
-    return{
-        
+portalApp.directive('ptFile', function () {
+    return {
+
     }
 });
+
+portalApp.directive('ptTags', function () {
+    return {
+        restrict: 'A',
+        scope: {
+            tagoptions: '@',
+            tagmodel: '=',
+        },
+        link: function (scope, el, attrs) {
+            var tag = $(el).dxTagBox({
+                items: eval(scope.tagoptions),
+                onValueChanged: function (e) {
+                    scope.tagmodel = e.values;
+                }
+            }).dxTagBox("instance");
+            
+            scope.$watch(attrs.tagmodel, function () {
+                debugger;
+                tag.options.values = scope.$eval(attrs.tagmodel);
+            });
+            
+        }
+    }
+})

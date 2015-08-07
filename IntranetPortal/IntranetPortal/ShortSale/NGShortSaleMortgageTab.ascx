@@ -151,7 +151,7 @@
                         { dataField: 'Fax', caption: 'Fax #',width: 150 },
                         { dataField: 'Email', caption: 'Email',width: 150 }],
                     bindingOptions: { dataSource: 'SsCase.Mortgages['+$index+'].Contacts' },
-                    wordWrapEnabled: true，
+                    wordWrapEnabled: true,
                     editing: {
                         editMode: 'row',
                         editEnabled: true,

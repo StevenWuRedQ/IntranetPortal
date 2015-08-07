@@ -154,17 +154,19 @@
     </dx:ASPxSplitter>
 
     <script>
-
         $(document).ready(function () {
             angular.element(document.getElementById('ConstructionCtrl')).scope().init(21);
         });
 
         portalApp = angular.module('PortalApp');
-        portalApp.controller('ConstructionCtrl', ['$scope', '$http', 'ptShortsSaleService', function ($scope, $http, ptShortsSaleService) {
+        portalApp.controller('ConstructionCtrl', ['$scope', '$http', 'ptShortsSaleService', 'ptCom', function ($scope, $http, ptShortsSaleService, ptCom) {
             $scope.Construction = {};
+            $scope.Construction.Utilities = {};
+
             $scope.init = function (caseId) {
                 ptShortsSaleService.getShortSaleCase(caseId, function (res) {
                     $scope.SsCase = res;
+                    $scope.Construction.Utilities.Company = ['Coned'];
                 });
             }
         }]);

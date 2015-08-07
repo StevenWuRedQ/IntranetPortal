@@ -1,6 +1,6 @@
 ﻿var app = angular.module('PortalApp');
 
-app.service('ptCom', function () {
+app.service('ptCom', [function () {
     var capitalizeFirstLetter = function (string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
@@ -51,7 +51,13 @@ app.service('ptCom', function () {
 
     this.capitalizeFirstLetter = capitalizeFirstLetter;
 
-});
+    this.ensureArray = function(model,scope) {
+        if (scope.$eval(model + '==null')) {
+            scope.$eval(model + '=[]');
+        }
+    };
+
+}]);
 
 app.service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
 
@@ -142,26 +148,28 @@ app.service('ptContactServices', ['$http', 'limitToFilter', function ($http, lim
 
 }]);
 
-app.service('ptShortsSaleService', ['$http', function ($http) {
-    this.getShortSaleCase = function (caseId, callback) {
-        var url = "/ShortSale/ShortSaleServices.svc/GetCase?caseId=" + caseId;
-        var res;
-        $http.get(url)
-            .success(function (data) {
-                res = data;
-                var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + res.BBLE;
-                $http.get(leadsInfoUrl)
-                    .success(function (data1) {
-                        res.LeadsInfo = data1;
-                    callback(res);
-                }).error(function (data1) {
-                        alert("Get Short sale Leads failed BBLE =" + res.BBLE + " error : " + JSON.stringify(data1));
-                    });
+app.service('ptShortsSaleService', [
+    '$http', function ($http) {
+        this.getShortSaleCase = function (caseId, callback) {
+            var url = "/ShortSale/ShortSaleServices.svc/GetCase?caseId=" + caseId;
+            var res;
+            $http.get(url)
+                .success(function (data) {
+                    res = data;
+                    var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + res.BBLE;
+                    $http.get(leadsInfoUrl)
+                        .success(function (data1) {
+                            res.LeadsInfo = data1;
+                            callback(res);
+                        }).error(function (data1) {
+                            alert("Get Short sale Leads failed BBLE =" + res.BBLE + " error : " + JSON.stringify(data1));
+                        });
 
-            })
-            .error(function (data, status, headers, config) {
-                alert("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
-            });
+                })
+                .error(function (data, status, headers, config) {
+                    alert("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
+                });
+        }
     }
-}])
+]);
 
