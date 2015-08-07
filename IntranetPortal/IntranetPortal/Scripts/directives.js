@@ -195,7 +195,7 @@ portalApp.directive('ptTags', function () {
             
             scope.$watch(attrs.tagmodel, function () {
                 debugger;
-                tag.options.values = scope.$eval(attrs.tagmodel);
+                tag.values = scope.$eval(attrs.tagmodel);
             });
             
         }

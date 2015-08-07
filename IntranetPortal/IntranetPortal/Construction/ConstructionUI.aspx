@@ -161,16 +161,30 @@
         });
 
         portalApp = angular.module('PortalApp');
-        portalApp.controller('ConstructionCtrl', ['$scope', '$http', 'ptShortsSaleService', 'ptCom', function ($scope, $http, ptShortsSaleService, ptCom) {
-            $scope.Construction = {};
-            $scope.Construction.Utilities = {};
-
+        portalApp.controller('ConstructionCtrl', ['$scope', '$http', 'ptShortsSaleService', 'ptContactServices', 'ptCom', function ($scope, $http, ptShortsSaleService, ptContactServices, ptCom) {
+            $scope.CSCase = {
+                InitialIntake: {},
+                Photos: {},
+                Utilities: {},
+                Violation: {},
+                ProposalBids: {},
+                Plans: {},
+                Contract: {},
+                Signoffs: {}
+            };
+            $scope.ptContactServices = ptContactServices;
             $scope.init = function (caseId) {
                 ptShortsSaleService.getShortSaleCase(caseId, function (res) {
                     $scope.SsCase = res;
-                    $scope.Construction.Utilities.Company = ['Coned'];
+                    
                 });
             }
+
+
+            /***spliter***/
+            $scope.CSCase.Utilities.Company = [];
+            
+
         }]);
     </script>
 
