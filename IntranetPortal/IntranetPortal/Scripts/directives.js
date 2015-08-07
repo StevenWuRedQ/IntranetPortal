@@ -135,41 +135,46 @@ portalApp.directive('ptCollapse', function () {
     }
 });
 
-portalApp.directive('ckEditor', [function () {
-    return {
-        require: '?ngModel',
-        link: function (scope, elm, attr, ngModel) {
+portalApp.directive('ckEditor', [function() {
+        return {
+            require: '?ngModel',
+            link: function(scope, elm, attr, ngModel) {
 
-            var ck = CKEDITOR.replace(elm[0], {
-                allowedContent: true,
-                height: 450,
-            });
-
-            ck.on('pasteState', function () {
-                scope.$apply(function () {
-                    ngModel.$setViewValue(ck.getData());
+                var ck = CKEDITOR.replace(elm[0], {
+                    allowedContent: true,
+                    height: 450,
                 });
-            });
 
-            ngModel.$render = function (value) {
-                ck.setData(ngModel.$modelValue);
-            };
-        }
-    };
-}])
+                ck.on('pasteState', function() {
+                    scope.$apply(function() {
+                        ngModel.$setViewValue(ck.getData());
+                    });
+                });
 
-portalApp.directive('ptAdd', function () {
+                ngModel.$render = function(value) {
+                    ck.setData(ngModel.$modelValue);
+                };
+            }
+        };
+    }
+]);
+
+portalApp.directive('ptAdd', function() {
     return {
         restrict: 'E',
         template: '<i class="fa fa-plus-circle icon_btn text-primary tooltip-examples" title="Add"></i>',
     }
-})
+});
 
-portalApp.directive('ptDel', function () {
+portalApp.directive('ptDel', function() {
     return {
         restrict: 'E',
         template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
     }
-})
+});
 
-
+portalApp.directive('ptFile', function() {
+    return{
+        
+    }
+});

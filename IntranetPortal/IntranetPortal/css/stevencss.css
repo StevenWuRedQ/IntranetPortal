@@ -16,18 +16,12 @@
 	height: 60px;
 }
 
-.currency_input {
-}
-
 .div-underline {
 	height: 320px;
 }
 
 .color_black {
 	color: black;
-}
-/*test steven  ssss  ddddd added*/
-.tooltip-examples {
 }
 
 .font_18 {
@@ -62,11 +56,6 @@
 .under-line-menu_hover {
 	background-color: #ff400d;
 	color: white;
-}
-
-.cell_hover {
-	/*background-color: #ff400d;
-	color:white;*/
 }
 
 .under-line-header {
@@ -131,11 +120,6 @@
 	background: #77787b;
 }
 
-@media (max-width: 1199px) {
-	/*#ctl00_MainContentPH_UserSummary_contentSplitter_1 {
-		display: none;
-	}*/
-}
 
 .dxmLite_MetropolisBlue1.dxm-ltr .dxm-popup .dxm-image {
 	margin-top: 4px;
@@ -174,8 +158,6 @@
 }
 /*add by steven fix UI*/
 .menuItem {
-	/*list-style: inside;*/
-	/*background: #163240;*/
 	height: 43px;
 	padding-left: 20px;
 	list-style-type: none;
@@ -230,12 +212,6 @@ div.Hrozral {
 	margin-top: 7px !important;
 	margin-right: -20px;
 }
-/*the exmaple to rewite the font */
-/*.dxtvControl_MetropolisBlue
-		{
-			font:18px/27px 'Indie Flower' !important;
-		}*/
-/*---end----*/
 
 /*add by steven rewrite the search class*/
 /*@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);*/
@@ -248,28 +224,6 @@ div.Hrozral {
 
 .dxsplControl_MetropolisBlue {
 	font: 'Source Sans Pro' !important;
-}
-
-i[title]:hover:after {
-	/*content: attr(title);
-  padding: 4px 8px;
-  color: #333;
-  position: absolute;
-  left: 0;
-  top: 100%;
-  white-space: nowrap;
-  
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  
-  background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
-  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #eeeeee),color-stop(1, #cccccc));
-  background-image: -webkit-linear-gradient(top, #eeeeee, #cccccc);
-  background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
-  background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
-  background-image: -o-linear-gradient(top, #eeeeee, #cccccc);
-	  */
 }
 
 .upcase_text {
@@ -506,28 +460,7 @@ input[type='checkbox'] {
 label {
 	cursor: pointer;
 }
-/*.circle-radio-boxes {
-  margin-left: -10px;
-  padding-top: 5px;
-}
-.circle-radio-boxes input[type=radio] {
-  visibility: hidden;
-  position: absolute !important;
-  top: -9999px !important;
-  left: -9999px !important;
-}
-.circle-radio-boxes label {
-  display: inline-block;
-  font-family: FontAwesome;
-  margin-left: 10px;
-}
-.circle-radio-boxes label:before {
-  content: "\f111";
-}
-.circle-radio-boxes input[type=radio]:checked ~ label:before {
-  content: "\f10c";
-}*/
-/*---end---*/
+
 /*fix the summay page layout*/
 .head_node_fix {
 	height: 52px;
@@ -541,10 +474,7 @@ label {
 	background: #e7e9ee !important;
 }
 
-/*li.dxm-item
-{
-	height:30px;
-}*/
+
 .pop_search_data {
 	padding-left: 10px;
 	padding-top: 22px;
@@ -727,7 +657,6 @@ i.with_circle {
 	padding-left: 12px;
 	color: #bfc2c6;
 	padding-top: 7px;
-	/* line-height: 18px !important; */
 	display: block !important;
 	float: left;
 }
@@ -745,7 +674,6 @@ i.with_circle {
 
 .employee_list_item {
 	border: 0px;
-	/*border-left: 3px solid #dde0e7;*/
 	list-style: none;
 	width: 255px;
 	height: 45px;
@@ -1052,13 +980,9 @@ h3 {
 		color: #b1b2b7 !important;
 	}
 
-	h3.open {
-		/*background: rgb(255,70,120);*/
+	h3.open a {
+		background-position: 13px -25px;
 	}
-
-		h3.open a {
-			background-position: 13px -25px;
-		}
 
 	h3 + div {
 		padding: 0 10px 10px;
@@ -1078,8 +1002,7 @@ h2 + div,
 --- */
 
 
-/* CSS3 Animation example
---- */
+/* CSS3 Animation example --- */
 #css3-animated-example h3 + div {
 	height: 0px;
 	padding: 0px;
@@ -1208,13 +1131,10 @@ input + label.font_12 {
 	padding-top: 0px;
 }
 
-.save_report_list {
+.save_report_list:hover {
+	color: black;
+	font-weight: 700;
 }
-
-	.save_report_list:hover {
-		color: black;
-		font-weight: 700;
-	}
 
 .icon_right_s {
 	float: right;
@@ -1226,10 +1146,6 @@ input + label.font_12 {
 	border-left: 3px solid #b1b2b7;
 }
 
-/*change the grid padding*/
-.dxgvEditFormDisplayRow_MetropolisBlue td.dxgv, .dxgvDataRow_MetropolisBlue td.dxgv, .dxgvDataRowAlt_MetropolisBlue td.dxgv, .dxgvSelectedRow_MetropolisBlue td.dxgv, .dxgvFocusedRow_MetropolisBlue td.dxgv {
-	/*padding:0px ;*/
-}
 
 .dxp-current {
 	border-radius: 12px;
@@ -1377,10 +1293,6 @@ i.log_item_hl_buttons {
 	}
 /*-----end----*/
 
-.dxm-image {
-	/*padding-left:10px !important;*/
-}
-
 .always_show {
 	visibility: visible !important;
 }
@@ -1483,8 +1395,6 @@ i.log_item_hl_buttons {
 	color: #2e2f31;
 }
 
-.input_currency {
-}
 /*compare popup ui*/
 .compare_titles_field {
 	width: 150px;
@@ -1663,8 +1573,6 @@ li.ss_form_item_line {
 		color: #0e9ee9;
 	}
 
-.ss_disable {
-}
 
 .ss_form_title {
 	color: rgb(177, 178, 183);
@@ -1814,12 +1722,6 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 		background: #3993c1;
 	}
 
-.ss_array {
-}
-
-.title_index {
-}
-
 .title_with_line {
 	margin: 0 0 30px;
 	border-bottom: 1px solid #ff400d;
@@ -1839,30 +1741,17 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 	display: inline-block;
 }
 
-.collapse_div {
-	/*display: none;*/
-}
 
 .popup_padding {
 	padding: 10px;
 }
 
-.ss_date {
-}
-
-.ss_not_empty {
-}
 
 .ss_input_error {
 	color: red !important;
 	border-color: red !important;
 }
 
-.ss_email {
-}
-
-.ss_phone {
-}
 
 .ss_control_btn {
 	display: none !important;
@@ -1937,13 +1826,11 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 	padding: 3px;
 }
 
-	.html_edit_div div {
-		/*padding-top:3px;*/
-	}
 
-		.html_edit_div div div table tbody tr td table tbody tr td table tbody tr td {
-			border: none;
-		}
+
+	.html_edit_div div div table tbody tr td table tbody tr td table tbody tr td {
+		border: none;
+	}
 
 .dxheDesignViewArea_MetropolisBlue1 {
 	border: none !important;
@@ -1994,9 +1881,6 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 	color: rgb(14, 158, 233);
 }
 
-.gray_background {
-	/*background:#f5f5f5;*/
-}
 
 .summary_row {
 	height: 35px !important;
@@ -2102,10 +1986,6 @@ td.vendor_info_left {
 	margin-left: 10px;
 }
 
-/*.selectpicker,.query_input
-{
-	background:#f5f5f5;
-}*/
 .bg_orange {
 	background: #ff400d;
 }
@@ -2281,8 +2161,7 @@ li.mag_tabv.active {
 	margin-left: 5px;
 }
 
-.mag_grid_chart {
-}
+
 
 .mag_grid_title {
 	font-size: 24px;
@@ -2402,8 +2281,6 @@ li.mag_tabv.active {
 	overflow: auto;
 }
 
-.ss_form_text {
-}
 
 .ss_highlight {
 	background: yellow;
@@ -2510,8 +2387,8 @@ li.mag_tabv.active {
 }
 
 .shortSaleUI .short_sale_content {
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin: 0px;
+	padding: 10px;
 }
 
 .shortSaleUI .ss_form_item {

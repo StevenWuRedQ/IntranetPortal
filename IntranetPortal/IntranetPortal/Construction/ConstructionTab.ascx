@@ -1,22 +1,24 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionTab.ascx.vb" Inherits="IntranetPortal.ConstructionTab" %>
-<%@ Register Src="~/ShortSale/NGShortSaleDealInfoTab.ascx" TagPrefix="uc1" TagName="NGShortSaleDealInfoTab" %>
-<%@ Register Src="~/ShortSale/NGShortSaleHomewonerTab.ascx" TagPrefix="uc1" TagName="NGShortSaleHomewonerTab" %>
-<%@ Register Src="~/ShortSale/NGShortSaleMortgageTab.ascx" TagPrefix="uc1" TagName="NGShortSaleMortgageTab" %>
-<%@ Register Src="~/ShortSale/NGShortSalePartiesTab.ascx" TagPrefix="uc1" TagName="NGShortSalePartiesTab" %>
-<%@ Register Src="~/ShortSale/NGShortSalePropertyTab.ascx" TagPrefix="uc1" TagName="NGShortSalePropertyTab" %>
+<%@ Register Src="~/Construction/ConstructionInitialIntakeTab.ascx" TagPrefix="uc1" TagName="ConstructionInitialIntakeTab" %>
+<%@ Register Src="~/Construction/ConstructionPhotosTab.ascx" TagPrefix="uc1" TagName="ConstructionPhotosTab" %>
+<%@ Register Src="~/Construction/ConstructionUtilitiesTab.ascx" TagPrefix="uc1" TagName="ConstructionUtilitiesTab" %>
+<%@ Register Src="~/Construction/ConstructionViolationTab.ascx" TagPrefix="uc1" TagName="ConstructionViolationTab" %>
+<%@ Register Src="~/Construction/ConstructionProposalBidTab.ascx" TagPrefix="uc1" TagName="ConstructionProposalBidTab" %>
+<%@ Register Src="~/Construction/ConstructionPlansTab.ascx" TagPrefix="uc1" TagName="ConstructionPlansTab" %>
+<%@ Register Src="~/Construction/ConstructionContractTab.ascx" TagPrefix="uc1" TagName="ConstructionContractTab" %>
+<%@ Register Src="~/Construction/ConstructionSignoffsTab.ascx" TagPrefix="uc1" TagName="ConstructionSignoffsTab" %>
+
 
 <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 
 <div id="constructionTabContent">
     <input hidden id="short_sale_case_id" value="" />
     <div style="padding-top: 5px">
-        <div style="height: 850px; overflow: auto;" id="prioity_content">
+        <div style="height: auto; max-height: 400px; overflow: auto;" id="prioity_content">
             <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
                 <div style="font-size: 30px">
                     <i class="fa fa-home"></i>
                     <span style="margin-left: 19px;">{{GetCaseInfo().Address}}&nbsp;</span>
-
-
                     <span class="time_buttons" style="margin-right: 30px" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=3&bble='+leadsInfoBBLE, 'eCourts')">eCourts</span>
                     <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=2&bble='+leadsInfoBBLE, 'DOB')">DOB</span>
                     <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=1&bble='+leadsInfoBBLE, 'Acris')">Acris</span>
@@ -64,39 +66,52 @@
             </dx:ASPxPopupControl>
         </div>
 
-        <div class="detail_tabs">
-            <ul class="nav nav-tabs overview_tabs" role="tablist">
-                <li class="short_sale_tab active">
-                    <a class="shot_sale_tab_a " href="#SSHomeowner" role="tab" data-toggle="tab">Homeowner Info</a></li>
-                <li class="short_sale_tab">
-                    <a class="shot_sale_tab_a " href="#SSProperty" role="tab" data-toggle="tab">Property Info</a></li>
-                <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#SSMortgage" role="tab" data-toggle="tab">Mortgages</a></li>
-                <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#SSDeal" role="tab" data-toggle="tab">Deal Info</a></li>
-                <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#SSParties" role="tab" data-toggle="tab">Parties</a></li>
+
+        <div class="shortSaleUI detail_tabs">
+            <style>
+                #CSTab .short_sale_tab {
+                    font-size: 12px;
+                }
+            </style>
+            <ul id="CSTab" class="nav nav-tabs overview_tabs" role="tablist">
+                <li class="short_sale_tab active"><a class="shot_sale_tab_a" href="#CSInitialIntake" role="tab" data-toggle="tab">Initial Intake</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSPhotos" role="tab" data-toggle="tab">Photos</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSUtilities" role="tab" data-toggle="tab">Utilities</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSViolations" role="tab" data-toggle="tab">Violation</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSProposal" role="tab" data-toggle="tab">ProposalBids</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSPlans" role="tab" data-toggle="tab">Plans</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSContract" role="tab" data-toggle="tab">Contract</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSSignoff" role="tab" data-toggle="tab">Signoffs</a></li>
                 <%--  <% End If%>--%>
             </ul>
 
             <!-- Tab panes -->
             <div class="short_sale_content">
                 <div class="tab-content">
-                    <div class="tab-pane active" id="SSHomeowner">
-                        <uc1:NGShortSaleHomewonerTab runat="server" ID="NGShortSaleHomewonerTab1" />
+                    <div class="tab-pane active" id="CSInitialIntake">
+                        <uc1:ConstructionInitialIntakeTab runat="server" ID="ConstructionInitialIntakeTab" />
                     </div>
-                    <div class="tab-pane " id="SSProperty">
-                        <uc1:NGShortSalePropertyTab runat="server" ID="NGShortSalePropertyTab" />
+                    <div class="tab-pane" id="CSPhotos">
+                        <uc1:ConstructionPhotosTab runat="server" ID="ConstructionPhotosTab" />
                     </div>
-                    <div class="tab-pane" id="SSMortgage">
-                        <uc1:NGShortSaleMortgageTab runat="server" ID="NGShortSaleMortgageTab" />
+                    <div class="tab-pane" id="CSUtilities">
+                        <uc1:ConstructionUtilitiesTab runat="server" ID="ConstructionUtilitiesTab" />
                     </div>
-
-                    <div class="tab-pane" id="SSDeal">
-                        <uc1:NGShortSaleDealInfoTab runat="server" ID="NGShortSaleDealInfoTab" />
+                    <div class="tab-pane" id="CSViolations">
+                        <uc1:ConstructionViolationTab runat="server" ID="ConstructionViolationTab" />
                     </div>
-
-                    <div class="tab-pane" id="SSParties">
-                        <uc1:NGShortSalePartiesTab runat="server" ID="NGShortSalePartiesTab" />
+                    <div class="tab-pane" id="CSProposal">
+                        <uc1:ConstructionProposalBidTab runat="server" ID="ConstructionProposalBidTab" />
                     </div>
-
+                    <div class="tab-pane" id="CSPlans">
+                        <uc1:ConstructionPlansTab runat="server" ID="ConstructionPlansTab" />
+                    </div>
+                    <div class="tab-pane" id="CSContract">
+                        <uc1:ConstructionContractTab runat="server" ID="ConstructionContractTab" />
+                    </div>
+                    <div class="tab-pane" id="CSSignoff">
+                        <uc1:ConstructionSignoffsTab runat="server" ID="ConstructionSignoffsTab" />
+                    </div>
                 </div>
             </div>
         </div>

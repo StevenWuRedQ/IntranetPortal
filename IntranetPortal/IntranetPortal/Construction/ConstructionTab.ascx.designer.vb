@@ -23,49 +23,76 @@ Partial Public Class ConstructionTab
     Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
-    '''NGShortSaleHomewonerTab1 control.
+    '''ConstructionInitialIntakeTab control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents NGShortSaleHomewonerTab1 As Global.IntranetPortal.NGShortSaleHomewonerTab
+    Protected WithEvents ConstructionInitialIntakeTab As Global.IntranetPortal.ConstructionInitialIntakeTab
 
     '''<summary>
-    '''NGShortSalePropertyTab control.
+    '''ConstructionPhotosTab control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents NGShortSalePropertyTab As Global.IntranetPortal.NGShortSalePropertyTab
+    Protected WithEvents ConstructionPhotosTab As Global.IntranetPortal.ConstructionPhotosTab
 
     '''<summary>
-    '''NGShortSaleMortgageTab control.
+    '''ConstructionUtilitiesTab control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents NGShortSaleMortgageTab As Global.IntranetPortal.NGShortSaleMortgageTab
+    Protected WithEvents ConstructionUtilitiesTab As Global.IntranetPortal.ConstructionUtilitiesTab
 
     '''<summary>
-    '''NGShortSaleDealInfoTab control.
+    '''ConstructionViolationTab control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents NGShortSaleDealInfoTab As Global.IntranetPortal.NGShortSaleDealInfoTab
+    Protected WithEvents ConstructionViolationTab As Global.IntranetPortal.ConstructionViolationTab
 
     '''<summary>
-    '''NGShortSalePartiesTab control.
+    '''ConstructionProposalBidTab control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents NGShortSalePartiesTab As Global.IntranetPortal.NGShortSalePartiesTab
+    Protected WithEvents ConstructionProposalBidTab As Global.IntranetPortal.ConstructionProposalBidTab
+
+    '''<summary>
+    '''ConstructionPlansTab control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ConstructionPlansTab As Global.IntranetPortal.ConstructionPlansTab
+
+    '''<summary>
+    '''ConstructionContractTab control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ConstructionContractTab As Global.IntranetPortal.ConstructionContractTab
+
+    '''<summary>
+    '''ConstructionSignoffsTab control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ConstructionSignoffsTab As Global.IntranetPortal.ConstructionSignoffsTab
 
     '''<summary>
     '''ASPxPopupControl1 control.

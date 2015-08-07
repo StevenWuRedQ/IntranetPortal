@@ -63,13 +63,12 @@
                                                 </Pane>
                                             </Styles>
                                             <Panes>
-                                                <dx:SplitterPane ShowCollapseBackwardButton="True" AutoHeight="true">
+                                                <dx:SplitterPane ShowCollapseBackwardButton="True" Name="ContentPanel" AutoHeight="true">
                                                     <PaneStyle Paddings-Padding="0">
                                                         <Paddings Padding="0px"></Paddings>
                                                     </PaneStyle>
                                                     <ContentCollection>
                                                         <dx:SplitterContentControl ID="SplitterContentControl3" runat="server">
-
                                                             <div class="shortSaleUI" style="align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
@@ -350,7 +349,7 @@
             });
         }
         function CaseDataChanged() {
-            return $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(GetShortSaleCase())
+            return $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(GetShortSaleCase());
         }
         function ResetCaseDataChange() {
             $('#CaseData').val(JSON.stringify(GetShortSaleCase()));
@@ -360,10 +359,10 @@
         }
         portalApp = angular.module('PortalApp');
 
-        portalApp.controller('ShortSaleCtrl', function ($scope, $http, $element, $parse, ptContactServices) {
+        portalApp.controller('ShortSaleCtrl', function ($scope, $http, $element, $parse, ptContactServices, ptCom) {
 
             $scope.ptContactServices = ptContactServices;
-            /////test contact ///////////////
+
             var cStore = new DevExpress.data.CustomStore({
                 load: function (loadOptions) {
 
@@ -483,8 +482,6 @@
                 var url = "ShortSaleServices.svc/GetCase?caseId=" + caseId;
                 $http.get(url).
                     success(function (data, status, headers, config) {
-                        // this callback will be called asynchronously
-                        // when the response is available
                         $scope.SsCase = data;
                         leadsInfoBBLE = $scope.SsCase.BBLE
                         var leadsInfoUrl = "ShortSaleServices.svc/GetLeadsInfo?bble=" + $scope.SsCase.BBLE;
@@ -494,15 +491,11 @@
                                 $('#CaseData').val(JSON.stringify($scope.SsCase))
                             }).error(function (data, status, headers, config) {
 
-                                // called asynchronously if an error occurs
-                                // or server returns response with an error status.
                                 alert("Get Short sale Leads failed BBLE =" + $scope.SsCase.BBLE + " error : " + JSON.stringify(data));
                             });
 
                     }).
                     error(function (data, status, headers, config) {
-                        // called asynchronously if an error occurs
-                        // or server returns response with an error status.
                         alert("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
                     });
             }
@@ -567,8 +560,6 @@
                 }).error(function (data, status) {
                     alert("Fail to delete comment. status " + status + "Error : " + JSON.stringify(data));
                 });
-
-
             }
             var CaseInfo = { Name: '', Address: '' }
             $scope.GetCaseInfo = function () {
@@ -589,7 +580,7 @@
                         if (disable) item[index].DataStatus = 3;
                         else item.splice(index, 1);
                     }
-                })
+                });
             };
 
             $scope.SsCase.Mortgages = [{}];
@@ -607,29 +598,9 @@
                 if (model) model.visiblePopup = value;
             }
 
-            function capitalizeFirstLetter(string) {
-                return string.charAt(0).toUpperCase() + string.slice(1);
-            }
-
-            $scope.formatName = function (firstName, middleName, lastName) {
-                var result = '';
-                if (firstName) result += capitalizeFirstLetter(firstName) + ' ';
-                if (middleName) result += capitalizeFirstLetter(middleName) + ' ';
-                if (lastName) result += capitalizeFirstLetter(lastName);
-                return result;
-
-            }
-
-            $scope.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
-                var result = '';
-                if (strNO) result += strNO + ' ';
-                if (strName) result += strName + ', ';
-                if (aptNO) result += 'Apt ' + aptNO + ', ';
-                if (city) result += city + ', ';
-                if (state) result += state + ', ';
-                if (zip) result += zip;
-                return result;
-            }
+            $scope.capitalizeFirstLetter = ptCom.capitalizeFirstLetter;
+            $scope.formatName = ptCom.formatName;
+            $scope.formatAddr = ptCom.formatAddr;
         });
 
     </script>

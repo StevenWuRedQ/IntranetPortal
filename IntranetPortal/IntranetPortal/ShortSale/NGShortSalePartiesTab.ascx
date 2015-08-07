@@ -9,7 +9,6 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
                 <input type="text" class="ss_form_input" ng-model="SsCase.ProcessorName" ng-change="SsCase.Processor=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.Processor=$item.ContactId" bind-id="SsCase.Processor" >
-
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Phone #</label>
@@ -100,7 +99,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Listing Agent&nbsp<pt-collapse model="listingAgentCollapse"/></h4>
+    <h4 class="ss_form_title">Listing Agent&nbsp;<pt-collapse model="listingAgentCollapse"/></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
@@ -134,7 +133,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Seller Attorney&nbsp<i class="fa fa-compress icon_btn text-primary" ng-show="!sellerAttorneyCollapse" ng-click="sellerAttorneyCollapse = !sellerAttorneyCollapse"></i><i class="fa fa-expand icon_btn text-primary" ng-show="sellerAttorneyCollapse" ng-click="sellerAttorneyCollapse = !sellerAttorneyCollapse"></i></h4>
+    <h4 class="ss_form_title">Seller Attorney&nbsp;<pt-collapse model="sellerAttorneyCollapse" /></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
 
@@ -170,7 +169,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Buyer&nbsp<pt-collapse model="buyerCollapse"/></h4>
+    <h4 class="ss_form_title">Buyer&nbsp;<pt-collapse model="buyerCollapse"/></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
 
@@ -207,10 +206,8 @@
 
 </div>
 
-
-
 <div class="ss_form">
-    <h4 class="ss_form_title">Buyer Attorney&nbsp<i class="fa fa-compress icon_btn text-primary" ng-show="!buyerAttorneryCollapse" ng-click="buyerAttorneryCollapse = !buyerAttorneryCollapse"></i><i class="fa fa-expand icon_btn text-primary" ng-show="buyerAttorneryCollapse" ng-click="buyerAttorneryCollapse = !buyerAttorneryCollapse"></i></h4>
+    <h4 class="ss_form_title">Buyer Attorney&nbsp;<pt-collapse model="buyerAttorneryCollapse"/></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
 
