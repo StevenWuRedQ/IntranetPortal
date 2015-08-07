@@ -20,19 +20,23 @@ Public Class ConstructionManage
         cc.Save(userName)
     End Sub
 
+    Public Shared Function GetMyCases(userName As String) As ConstructionCase()
+        If IsManager(userName) Then
+            Return ConstructionCase.GetAllCases()
+        Else
+            Return ConstructionCase.GetAllCases(userName)
+        End If
+    End Function
+
 
     Public Function GetAmount(type As String, userName As String) As Integer Implements INavMenuAmount.GetAmount
 
-        If IsManager(userName) Then
-            Return ConstructionCase.GetAllCases().Length
-        Else
-            Return ConstructionCase.GetAllCases(userName).Length
-        End If
+        Return GetMyCases(userName).Length
 
     End Function
 
 
-    Public Function IsManager(userName As String) As String
+    Public Shared Function IsManager(userName As String) As String
 
         If Roles.IsUserInRole(userName, MgrRoleName) OrElse Roles.IsUserInRole(userName, "Admin") Then
             Return True

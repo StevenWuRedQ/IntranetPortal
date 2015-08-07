@@ -12,6 +12,10 @@ Public Class Test
         '    TaskSummary.DestinationUser = "Chris Yan"
         'End If
 
+
+      
+
+
         If Not (String.IsNullOrEmpty(Request.QueryString("team"))) Then
             Dim objTeam = Team.GetTeam(Request.QueryString("team").ToString)
             'Me.ActivitySummary.team = objTeam

@@ -15,7 +15,7 @@ Public Class ConstructionCaseList
         lblLeadCategory.Text = "Cases" 'Core.Utility.GetEnumDescription(status)
         BindData()
 
-        If Page.User.IsInRole("Construction-Manager") OrElse Page.User.IsInRole("Admin") Then
+        If ConstructionManage.IsManager(Page.User.Identity.Name) Then
             gridCase.GroupBy(gridCase.Columns("Owner"))
         End If
 
@@ -23,17 +23,7 @@ Public Class ConstructionCaseList
     End Sub
 
     Private Sub BindData()
-        If Page.User.IsInRole("Construction-Manager") OrElse Page.User.IsInRole("Admin") Then
-            gridCase.DataSource = ConstructionCase.GetAllCases
-        Else
-            gridCase.DataSource = ConstructionCase.GetAllCases(Page.User.Identity.Name)
-        End If
-    End Sub
-
-    Public Sub BindCaseByBBLEs(bbles As List(Of String))
-        'hfCaseBBLEs.Value = String.Join(";", bbles.ToArray)
-        'gridCase.DataSource = ShortSaleCase.GetCaseByBBLEs(bbles)
-        'gridCase.DataBind()
+        gridCase.DataSource = ConstructionManage.GetMyCases(Page.User.Identity.Name)
     End Sub
 
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)

@@ -38,7 +38,7 @@
             //ContentCallbackPanel.PerformCallback(values);
             if (cbpLogs)
                 cbpLogs.PerformCallback(leadsInfoBBLE);
-            angular.element(document.getElementById('LegalCtrl')).scope().LoadLeadsCase(leadsInfoBBLE);
+            angular.element(document.getElementById('ConstructionCtrl')).scope().LoadLeadsCase(leadsInfoBBLE);
         }
     }
 

@@ -198,7 +198,7 @@ Public Class RefreshLeadsCountHandler
 
         If Not String.IsNullOrEmpty(item.AmountManageClass) Then
             Try
-                Dim myObj = CType(Activator.CreateInstance(Me.GetType.Namespace, item.AmountManageClass), INavMenuAmount)
+                Dim myObj = CType(Activator.CreateInstance(Type.GetType("IntranetPortal." & item.AmountManageClass)), INavMenuAmount)
 
                 If myObj IsNot Nothing Then
                     Return myObj.GetAmount(item.Name, userName)
