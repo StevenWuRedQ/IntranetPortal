@@ -58,14 +58,16 @@
                     </tr>
                     <tr>
                         <td>Hydrant Flow test</td>
-                        <td><input ss_date class="form-control"></td>
-                        <td><button class="btn" type="button">Remider me</button></td>
                         <td>
-                        
-      <select class="form-control" >
-            <option>Yes</option>
-            <option>No</option>
-      </select>
+                            <input ss_date class="form-control"></td>
+                        <td>
+                            <button class="btn" type="button">Remider me</button></td>
+                        <td>
+
+                            <select class="form-control">
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -84,21 +86,45 @@
                     </tr>
                 </table>
             </li>
-<li class="ss_form_item" style="width:97%">
-{{UploadTest}} {{1+1}}
-      <label class="ss_form_input_title">OP98</label>
-      <button class="btn" ng-click='UploadTest?UploadTest="123image":UploadTest=null' type="button">Upload</button>
-</li>
+            <li class="ss_form_item">
+
+                <label class="ss_form_input_title">OP98</label>
+                <button class="btn" ng-click='UploadTest?UploadTest=null:UploadTest="123image"' type="button">Upload</button>
+            </li>
 
 
-                 
-<li class="ss_form_item" ng-show="UploadTest!=null">
-      <label class="ss_form_input_title">Objections POP</label>
-      <button class="btn" type="button">Upload</button>
-</li>
-    
-    </div>
-</li>
+
+            <li class="ss_form_item" ng-show="UploadTest!=null">
+                <label class="ss_form_input_title">Objections POP</label>
+                <button class="btn" type="button">Upload</button>
+            </li>
+
+
+            <li class="ss_form_item" style="width: 97%">
+                <label class="ss_form_input_title">PAA <i class="fa icon_btn text-primary" ng-class="PAAcollapse?'fa-compress':'fa-expand'" ng-click="PAAcollapse=!PAAcollapse"></i></label>
+                <button class="btn" type="button" ng-click="PAAcollapse=true">Upload</button>
+            </li>
+            <li class="ss_form_item" style="width: 97%,height:auto" ng-show="PAAcollapse">
+                <div class="arrow_box">
+                    <ul class="ss_form_box clearfix">
+
+                        <li class="ss_form_item">
+                            <label class="ss_form_input_title">date fee paid</label>
+                            <input class="ss_form_input" ss-date>
+                        </li>
+                        <li class="ss_form_item">
+                            <label class="ss_form_input_title">Date Approval</label>
+                            <input class="ss_form_input" ss-date>
+                        </li>
+                    </ul>
+
+                </div>
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">LAA</label>
+                <button class="btn" type="button">Upload</button>
+            </li>
         </ul>
 
     </div>
