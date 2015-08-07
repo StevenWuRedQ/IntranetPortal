@@ -508,6 +508,18 @@
     </Items>
   </PortalNavItem>
 
+  <PortalNavItem Name="Construction" Text="Construction" NavigationUrl="#" ShowAmount="false" Expanded="false">
+    <!--Temporarily use Admin roles for Eviction-->
+    <UserRoles>Construction-*</UserRoles>
+    <Items>
+      <PortalNavItem Name="Construction-All" Text="All Cases" NavigationUrl="/Construction/ConstructionUI.aspx" ShowAmount="true" AmountManageClass="ConstructionManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
+  </PortalNavItem>
+
   <PortalNavItem Name="OfficeManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
     <UserRoles>OfficeManager-*,OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen,OfficeManager-GalleriaTeam,OfficeManager-TomTeam,OfficeManager-RonTeam,OfficeManager-GendinTeam</UserRoles>
     <Items>

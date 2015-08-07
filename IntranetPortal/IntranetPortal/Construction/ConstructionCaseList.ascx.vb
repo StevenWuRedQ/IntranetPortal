@@ -9,28 +9,24 @@ Public Class ConstructionCaseList
         'BindCaseList()
     End Sub
 
-    Public Sub BindCaseList(status As LegalCaseStatus)
-        hfCaseStatus.Value = status
+    Public Sub BindCaseList()
+        'hfCaseStatus.Value = status
 
-        lblLeadCategory.Text = Core.Utility.GetEnumDescription(status)
+        lblLeadCategory.Text = "Cases" 'Core.Utility.GetEnumDescription(status)
+        BindData()
 
-        BindLegalData(status)
+        If Page.User.IsInRole("Construction-Manager") OrElse Page.User.IsInRole("Admin") Then
+            gridCase.GroupBy(gridCase.Columns("Owner"))
+        End If
+
         gridCase.DataBind()
-
-        If status = LegalCaseStatus.LegalResearch Then
-            gridCase.GroupBy(gridCase.Columns("ResearchBy"))
-        End If
-
-        If status = LegalCaseStatus.AttorneyHandle Then
-            gridCase.GroupBy(gridCase.Columns("Attorney"))
-        End If
     End Sub
 
-    Private Sub BindLegalData(status As LegalCaseStatus)
-        If Page.User.IsInRole("Legal-Manager") OrElse Page.User.IsInRole("Admin") Then
-            gridCase.DataSource = LegalCase.GetCaseList(status)
+    Private Sub BindData()
+        If Page.User.IsInRole("Construction-Manager") OrElse Page.User.IsInRole("Admin") Then
+            gridCase.DataSource = ConstructionCase.GetAllCases
         Else
-            gridCase.DataSource = LegalCase.GetCaseList(status, Page.User.Identity.Name)
+            gridCase.DataSource = ConstructionCase.GetAllCases(Page.User.Identity.Name)
         End If
     End Sub
 
@@ -42,10 +38,7 @@ Public Class ConstructionCaseList
 
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)
         If gridCase.DataSource Is Nothing AndAlso gridCase.IsCallback Then
-            If Not String.IsNullOrEmpty(hfCaseStatus.Value) Then
-                BindLegalData(hfCaseStatus.Value)
-            End If
-
+            BindData()
             'If (Not String.IsNullOrEmpty(hfCaseBBLEs.Value)) Then
             '    BindCaseByBBLEs(hfCaseBBLEs.Value.Split(";").ToList())
             'End If
@@ -60,5 +53,6 @@ Public Class ConstructionCaseList
             gridCase.SettingsBehavior.AllowClientEventsOnLoad = value
         End Set
     End Property
+
 
 End Class

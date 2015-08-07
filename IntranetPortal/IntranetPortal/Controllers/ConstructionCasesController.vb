@@ -24,6 +24,7 @@ Namespace Controllers
         <ResponseType(GetType(ConstructionCase))>
         Function GetConstructionCase(ByVal id As String) As IHttpActionResult
             Dim constructionCase As ConstructionCase = constructionCase.GetCase(id)
+
             If IsNothing(constructionCase) Then
                 Return NotFound()
             End If

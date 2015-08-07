@@ -70,6 +70,13 @@ Public Class ShortSaleManage
         End If
     End Sub
 
+    Public Shared Sub StartConstruction(bble As String, userName As String)
+        Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
+        ConstructionManage.StartConstruction(bble, ssCase.CaseName, userName)
+
+        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Start Construction progress."), bble, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.InProcess)
+    End Sub
+
     Public Shared Sub NewCaseApproved(bble As String)
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
 
@@ -287,7 +294,7 @@ Public Class ShortSaleManage
 
     Public Shared Sub AssignCase(bble As String, userName As String, createBy As String)
         ShortSaleCase.ReassignOwner(bble, userName)
-        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} reassign this case to {1}.", createBy, userName), bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reassign)
+        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} reassign this case to {1}.", createBy, userName), bble, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Reassign)
     End Sub
 
     Public Shared Sub ReassignApproval(task As UserTask)

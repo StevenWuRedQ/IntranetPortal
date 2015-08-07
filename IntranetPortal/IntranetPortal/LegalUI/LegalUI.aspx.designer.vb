@@ -131,6 +131,15 @@ Partial Public Class LegalUI
     Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
 
     '''<summary>
+    '''SendMail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SendMail As Global.IntranetPortal.SendMailControl
+
+    '''<summary>
     '''Common control.
     '''</summary>
     '''<remarks>
@@ -183,15 +192,6 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ManagePreViewControl As Global.IntranetPortal.ManagePreViewControl
-
-    '''<summary>
-    '''SendMail control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SendMail As Global.IntranetPortal.SendMailControl
 
     '''<summary>
     '''ASPxPopupCallBackMenu2 control.

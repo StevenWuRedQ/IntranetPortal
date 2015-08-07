@@ -162,9 +162,9 @@ Public Class RefreshLeadsCountHandler
         Dim results = From item In items.Where(Function(nav) nav.ShowAmount = True)
                      Select New With {
                          .Name = item.LeadsCountSpanId,
-                         .Count = GetLeadsCount(item.Name, item.Text, context.User.Identity.Name, context)
+                         .Count = GetAmount(item, context.User.Identity.Name, context)
                                 }
-
+        ''GetLeadsCount(item.Name, item.Text, context.User.Identity.Name, context)
         Dim json As New JavaScriptSerializer
         Dim jsonString = json.Serialize(results)
 
@@ -192,6 +192,23 @@ Public Class RefreshLeadsCountHandler
         Next
 
         Return results
+    End Function
+
+    Public Function GetAmount(item As PortalNavItem, userName As String, context As HttpContext) As Integer
+
+        If Not String.IsNullOrEmpty(item.AmountManageClass) Then
+            Try
+                Dim myObj = CType(Activator.CreateInstance(Me.GetType.Namespace, item.AmountManageClass), INavMenuAmount)
+
+                If myObj IsNot Nothing Then
+                    Return myObj.GetAmount(item.Name, userName)
+                End If
+            Catch ex As Exception
+                Return 0
+            End Try
+        Else
+            Return GetLeadsCount(item.Name, item.Text, context.User.Identity.Name, context)
+        End If
     End Function
 
     Public Function GetLeadsCount(name As String, itemText As String, userName As String, context As HttpContext) As Integer
@@ -256,6 +273,7 @@ Public Class RefreshLeadsCountHandler
         If name.StartsWith("Legal") Then
             Return GetLegalCaseCount(name, itemText, userName)
         End If
+
     End Function
 
     Function GetLegalCaseCount(name As String, itemText As String, userName As String) As Integer

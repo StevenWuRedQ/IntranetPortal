@@ -28,6 +28,9 @@ Public Class PortalNavItem
     <XmlAttribute()>
     Public Property Expanded As Boolean
 
+    <XmlAttribute()>
+    Public Property AmountManageClass As String
+
     Private rootItemFormat As String = "<li><a href=""{0}"" class=""category {2}"" target=""contentUrlPane"">{1}</a>"
     Private rootOfficeItemFormat As String = "<li><a href=""{0}"" class=""category {2}"" target=""contentUrlPane"">{1}</a>"
     Private itemFormat As String = "<li class=""{4}"">{3}<a href=""{1}"" target=""contentUrlPane"">{0}{2}</a>"

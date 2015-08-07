@@ -44,7 +44,6 @@ Public Class LegalUI
 
                 End If
                 Return
-
             End If
 
             If Not String.IsNullOrEmpty(Request.QueryString("lc")) Then
@@ -53,7 +52,6 @@ Public Class LegalUI
                 LegalCaseList.AutoLoadCase = True
             End If
         End If
-
     End Sub
     Public Function ShowReassginBtn() As Boolean
         Dim isCloase = (Not String.IsNullOrEmpty(Me.Request.QueryString("lc"))) AndAlso Me.Request.QueryString("lc") = "4"
@@ -63,22 +61,23 @@ Public Class LegalUI
     Sub Page_init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
 
 
-        HiddenTab = Not String.IsNullOrEmpty(Request.QueryString("HiddenTab"))
-        If (HiddenTab) Then
-            ASPxSplitter1.GetPaneByName("LogPanel").Visible = False
-        End If
+        'HiddenTab = Not String.IsNullOrEmpty(Request.QueryString("HiddenTab"))
+        'If (HiddenTab) Then
+        '    ASPxSplitter1.GetPaneByName("LogPanel").Visible = False
+        'End If
 
-        Dim isInPoupUp = Request.QueryString("InPopUp") IsNot Nothing
-        If (isInPoupUp) Then
-            SencnedAction.Visible = True
-            ASPxSplitter1.Visible = False
-        End If
+        'Dim isInPoupUp = Request.QueryString("InPopUp") IsNot Nothing
+        'If (isInPoupUp) Then
+        '    SencnedAction.Visible = True
+        '    ASPxSplitter1.Visible = False
+        'End If
 
 
     End Sub
 
     Private Sub BindData(bble As String)
-        ASPxSplitter1.Panes("listPanel").Visible = False
+        'should using collapsed, visible=false could cause viewstate problems
+        ASPxSplitter1.Panes("listPanel").Collapsed = True
         BBLEStr = bble
         ActivityLogs.BindData(bble)
         If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
@@ -181,7 +180,7 @@ Public Class LegalUI
             listboxEmployee.DataSource = Roles.GetUsersInRole("Legal-" & type)
             listboxEmployee.DataBind()
         End If
-        
+
         If Not String.IsNullOrEmpty(e.Parameter) AndAlso e.Parameter.StartsWith("Save") Then
             Dim bble = e.Parameter.Split("|")(1)
             Dim user = e.Parameter.Split("|")(2)

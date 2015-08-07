@@ -8,8 +8,10 @@
                 Dim bble = Request.QueryString("bble").ToString
                 BindData(bble)
                 Return
+            Else
+                ConstructionCaseList.BindCaseList()
+                ConstructionCaseList.AutoLoadCase = True
             End If
-
         End If
     End Sub
 

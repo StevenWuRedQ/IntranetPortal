@@ -402,6 +402,7 @@
                                     </PanelCollection>
                                 </dx:ASPxCallbackPanel>
                             </div>
+                            <uc1:SendMail runat="server" ID="SendMail" />
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
@@ -474,7 +475,6 @@
         </div>
     </div>
     <!-- /.modal-content -->
-    <uc1:SendMail runat="server" ID="SendMail" />
 
 
     <!-- Follow up function  -->
