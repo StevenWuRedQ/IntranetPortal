@@ -22,7 +22,7 @@ Namespace Controllers
         ' GET: api/TaxLiens/5
         <ResponseType(GetType(NYC_Scan_TaxLiens_Per_Year))>
         Function GetNYC_Scan_TaxLiens_Per_Year(ByVal id As String) As IHttpActionResult
-            Dim nYC_Scan_TaxLiens_Per_Year As NYC_Scan_TaxLiens_Per_Year = db.NYC_Scan_TaxLiens_Per_Year.Find(id)
+            Dim nYC_Scan_TaxLiens_Per_Year = db.NYC_Scan_TaxLiens_Per_Year.Where(Function(t) t.BBLE = id)
             If IsNothing(nYC_Scan_TaxLiens_Per_Year) Then
                 Return NotFound()
             End If

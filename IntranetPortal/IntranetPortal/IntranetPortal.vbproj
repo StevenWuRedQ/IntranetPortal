@@ -529,6 +529,7 @@
     <Compile Include="CodeFolder\LeadsStatusLog.vb" />
     <Compile Include="CodeFolder\LegalCaseManage.vb" />
     <Compile Include="CodeFolder\MapDataSet.vb" />
+    <Compile Include="CodeFolder\NYC_Scan_TaxLiens_Per_Year.vb" />
     <Compile Include="CodeFolder\Office.vb" />
     <Compile Include="CodeFolder\OnlineUser.vb" />
     <Compile Include="CodeFolder\OwnerContact.vb" />

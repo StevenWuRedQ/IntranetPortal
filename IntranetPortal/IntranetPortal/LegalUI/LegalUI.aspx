@@ -216,13 +216,13 @@
 
                                                         </a>
                                                     </li>
-                                                    <li class="short_sale_head_tab" ng-show="LegalCase.InShortSale">
+                                                    <li class="short_sale_head_tab" ng-show="ShortSaleCase!=null">
                                                         <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_short_sale" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&bble=BBLE" data-href="#more_short_sale" onclick="LoadMoreFrame(this)">
                                                             <i class="fa fa-sign-out head_tab_icon_padding"></i>
                                                             <div class="font_size_bold">Short Sale</div>
                                                         </a>
                                                     </li>
-                                                    <li class="short_sale_head_tab" ng-show="LegalCase.InShortSale">
+                                                    <li class="short_sale_head_tab" ng-show="ShortSaleCase!=null">
                                                         <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_evction" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&isEviction=true&bble=BBLE" data-href="#more_evction" onclick="LoadMoreFrame(this)">
                                                             <i class="fa fa-sign-out head_tab_icon_padding"></i>
                                                             <div class="font_size_bold">Eviction</div>
@@ -860,13 +860,15 @@
                     error(function () {
                         alert("Fail to load data : " + BBLE);
                     });
+                
+                /******************* get short sale case ***********************/
                 $http.get('/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=' + BBLE).success(function (data, status, headers, config) {
 
                     $scope.ShortSaleCase = data;
                 }).error(function () {
                     alert("Fail to Short sale case  data : " + BBLE);
                 });
-
+                /*************** get leads info**************/
                 var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + BBLE;
                 $http.get(leadsInfoUrl).
                 success(function (data, status, headers, config) {
@@ -874,9 +876,20 @@
                 }).error(function (data, status, headers, config) {
                     alert("Get Short Sale Leads failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
                 });
+
+                $http.get('/api/TaxLiens/'+BBLE).
+                success(function (data, status, headers, config) {
+                    $scope.TaxLiens = data;
+                }).error(function (data, status, headers, config) {
+                    alert("Get Tax Liens failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
+                });
             }
 
-            
+            $scope.ModelArray = function(model)
+            {
+                var array = $scope.$eval(model);
+                return array && array.length>0?'Yes':''
+            }
             /*return true it hight light check date  */
             $scope.HighLightFunc = function (funcStr) {
                 var args = funcStr.split(",");

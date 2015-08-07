@@ -21,11 +21,11 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Client Name</label>
-                <input class="ss_form_input" disabled="disabled"  readonly="readonly">
+                <input class="ss_form_input" disabled="disabled"  readonly="readonly" ng-value="GetCorpy(id).Singor">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Client Contact #</label>
-                <input class="ss_form_input" disabled="disabled">
+                <input class="ss_form_input" disabled="disabled" ng-value="GetCorpy(name).C">
             </li>
         </ul>
     </div>
@@ -43,7 +43,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Recording Date</label>
-                <input class="ss_form_input" ng-model="ShortSaleCase.Mortgages[0].AuctionDate" readonly="readonly">
+                <input class="ss_form_input" ng-model="ShortSaleCase.Mortgages[0].AuctionDate" ss-date readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">CRFN #</label>
@@ -51,7 +51,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Last Payment Date </label>
-                <input class="ss_form_input" ng-model="ShortSaleCase.Mortgages[0].PayoffRequested" readonly="readonly">
+                <input class="ss_form_input" ng-model="ShortSaleCase.Mortgages[0].PayoffRequested"  ss-date readonly="readonly">
             </li>
         </ul>
     </div>
@@ -107,15 +107,16 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item" style="width: 66.6%">
                 <label class="ss_form_input_title">Are there any Tax liens?</label>
-                <select class="ss_form_input" ng-model="LegalCase.PropertyInfo.AreTaxLiens">
+                <select class="ss_form_input" ng-value="ModelArray('TaxLiens')">
+                  
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
-                    <option value="N/A">N/A</option>
+                    <option value="">N/A</option>
                 </select>
             </li>
         </ul>
     </div>
-    <div class="cssSlideUp" ng-show="LegalCase.PropertyInfo.AreTaxLiens=='Yes'">
+    <div class="cssSlideUp" ng-show="ModelArray('TaxLiens')=='Yes'">
         <div class="arrow_box">
             <ul class="ss_form_box clearfix ">
                 <li class="ss_form_item" style="width: 66.6%">
@@ -140,6 +141,7 @@
             <li class="ss_form_item" style="width: 66.6%">
                 <label class="ss_form_input_title">Are there any other judgment liens?</label>
                 <select class="ss_form_input" ng-model="LegalCase.PropertyInfo.AreJudgmentLiens">
+                    <option value=""></option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                     <option value="N/A">N/A</option>
@@ -162,19 +164,19 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item" style="width: 66.6%">
                 <label class="ss_form_input_title">Are there any other misc liens?</label>
-                <select class="ss_form_input" ng-model="LegalCase.PropertyInfo.AreMiscLiens">
+                <select class="ss_form_input" ng-value="ModelArray('LeadsInfo.LisPens')">
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
-                    <option value="N/A">N/A</option>
+                    <option value="">N/A</option>
                 </select>
             </li>
         </ul>
     </div>
-    <div class="cssSlideUp" ng-show="LegalCase.PropertyInfo.AreMiscLiens=='Yes'">
+    <div class="cssSlideUp" ng-show="ModelArray('LeadsInfo.LisPens')=='Yes'">
         <div class="arrow_box">
             <ul class="ss_form_box clearfix ">
                 <li class="ss_form_item ss_form_item_line">
-                    <label class="ss_form_input_title">Judgment Review:</label>
+                    <label class="ss_form_input_title">Other misc liens Review:</label>
                     <textarea class="edit_text_area text_area_ss_form"></textarea>
                 </li>
             </ul>
