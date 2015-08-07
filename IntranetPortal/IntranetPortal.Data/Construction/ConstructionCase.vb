@@ -10,6 +10,12 @@ Partial Public Class ConstructionCase
         End Using
     End Function
 
+    Public Shared Function GetAllCases(userName As String) As ConstructionCase()
+        Using ctx As New ConstructionEntities
+            Return ctx.ConstructionCases.Where(Function(c) c.Owner = userName).ToArray
+        End Using
+    End Function
+
     Public Shared Function GetCase(BBLE As String) As ConstructionCase
         Using ctx As New ConstructionEntities
             Return ctx.ConstructionCases.Find(BBLE)
