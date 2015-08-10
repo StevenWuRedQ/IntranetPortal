@@ -2,9 +2,9 @@
 <%@ Import Namespace="IntranetPortal.Data" %>
 
 <tabset class="tab-switch">
-    <tab ng-repeat="mortgage in SsCase.Mortgages" active="mortgage.active" disable="mortage.disabled">
+    <tab ng-repeat="mortgage in SsCase.Mortgages|filter:{DataStatus:'!3'}" active="mortgage.active" disable="mortage.disabled" >
         <tab-heading>Mortgage {{$index+1}} </tab-heading>
-            <div class="text-right" style="margin-bottom:-45px" ng-show="SsCase.Mortgages.length>1"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.Mortgages.length>1" ng-click="NGremoveArrayItem(SsCase.Mortgages, $index)" title="Delete"></i></div>
+            <div class="text-right" style="margin-bottom:-45px" ng-show="$index>0"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="NGremoveArrayItem(SsCase.Mortgages, $index,true)" title="Delete"></i></div>
         <div>
             <div class="ss_border" style="border-top-color: transparent">
             <h4 class="ss_form_title">Sale Date / Payoff Info</h4>
