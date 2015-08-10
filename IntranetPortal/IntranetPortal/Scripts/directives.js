@@ -39,12 +39,12 @@ portalApp.directive('bindId', function (ptContactServices) {
     return {
         restrict: 'A',
         link: function postLink(scope, el, attrs) {
-            scope.$watch(attrs.bindId, function (newValue, oldValue) {
+            scope.$watch(attrs.bindId, function(newValue, oldValue) {
                 if (newValue != oldValue) {
                     var contact = ptContactServices.getContactById(newValue);
                     if (contact) scope.$eval(attrs.ngModel + "='" + contact.Name + "'");
                 }
-            })
+            });
         }
 
     }
@@ -172,32 +172,30 @@ portalApp.directive('ptDel', function () {
     }
 });
 
-portalApp.directive('ptFile', function () {
+portalApp.directive('ptFile', ['ptCom', function (ptCom) {
     return {
-
-    }
-});
-
-portalApp.directive('ptTags', function () {
-    return {
-        restrict: 'A',
+        restrict: 'E',
+        templateUrl: '/Scripts/templates/ptfile.html',
         scope: {
-            tagoptions: '@',
-            tagmodel: '=',
+            fileModel: '=',
+            fileId: '@'
         },
         link: function (scope, el, attrs) {
-            var tag = $(el).dxTagBox({
-                items: eval(scope.tagoptions),
-                onValueChanged: function (e) {
-                    scope.tagmodel = e.values;
-                }
-            }).dxTagBox("instance");
-            
-            scope.$watch(attrs.tagmodel, function () {
+            scope.encodeURIComponent = window.encodeURIComponent;
+            scope.getFileName = ptCom.getFileName;
+            scope.delFile = function() {
+                scope.fileModel = '';
+
+            }
+            $(el).on('change', function () {
+                var file = $('#' + scope.fileId)[0].files[0];
                 debugger;
-                tag.values = scope.$eval(attrs.tagmodel);
+                ptCom.uploadFile(file, function(data) {
+                    scope.fileModel = data;
+                    scope.$apply();
+                });
             });
-            
         }
     }
-})
+}]);
+

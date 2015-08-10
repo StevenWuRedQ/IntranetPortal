@@ -133,7 +133,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Landmark</label>
-                <pt-radio model="CSCase.InitialIntake.Landmark" name="CSCase.InitialIntake.Landmark"></pt-radio>
+                <pt-radio model="CSCase-InitialIntake-Landmark" name="CSCase.InitialIntake.Landmark"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Flood Zone</label>
@@ -141,24 +141,24 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Deed</label>
-                <pt-file ng-model="CSCase.InitialIntake.UploadDeed"></pt-file>
+                <pt-file file-id="SCase-InitialIntake-UploadDeed" file-model="CSCase.InitialIntake.UploadDeed"></pt-file>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload EIN</label>
-                <pt-file ng-model="CSCase.InitialIntake.UploadEIN"></pt-file>
+                <pt-file file-id="CSCase-InitialIntake-UploadEIN" file-model="CSCase.InitialIntake.UploadEIN"></pt-file>
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Filing Receipt</label>
-                <pt-file ng-model="CSCase.InitialIntake.UploadFilingReceipt"></pt-file>
+                <pt-file file-id="CSCase-InitialIntake-UploadFilingReceipt" file-model="CSCase.InitialIntake.UploadFilingReceipt"></pt-file>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Article of Operation</label>
-                <pt-file ng-model="CSCase.InitialIntake.UploadArticleOfOperation"></pt-file>
+                <pt-file file-id="SCase-InitialIntake-UploadArticleOfOperation" file-model="CSCase.InitialIntake.UploadArticleOfOperation"></pt-file>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Operation Agreement</label>
-                <pt-file ng-model="CSCase.InitialIntake.UploadOperationAgreement"></pt-file>
+                <pt-file file-id="CSCase-InitialIntake-UploadOperationAgreement" file-model="CSCase.InitialIntake.UploadOperationAgreement"></pt-file>
             </li>
 
 
@@ -207,7 +207,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Sketch Layout</label>
-                <pt-file class="ss_form_input" ng-model="CSCase.InitialIntake.Sketch" />
+                <pt-file file-id="CSCase-InitialIntake-Sketch" file-model="CSCase.InitialIntake.Sketch" />
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Initial Budget</label>

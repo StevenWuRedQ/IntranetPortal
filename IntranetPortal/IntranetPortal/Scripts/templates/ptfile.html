@@ -1,0 +1,10 @@
+﻿<div style="margin: 2px" ng-show="fileModel">
+    <a ng-href="/pdfViewer/web/viewer.html?file={{encodeURIComponent('/downloadfile.aspx?pdfUrl=' + fileModel)}}" target="_blank">{{getFileName(fileModel)}}</a>
+    &nbsp;<i class="fa fa-remove text-danger" ng-click="delFile()"></i>
+</div>
+<div style="margin: 2px" ng-show="!fileModel">
+    <span class="btn btn-default btn-file">
+        Upload<input type="file" id="{{fileId}}" />
+        <i class="fa fa-upload text-primary"></i>
+    </span>
+</div>

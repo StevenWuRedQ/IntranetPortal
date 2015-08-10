@@ -184,6 +184,7 @@
 
             /***spliter***/
             $scope.CSCase.Utilities.Company = [];
+            $scope.CSCase.Photos.AMPhotos = "/CorporationEntity/100 Ave Equities LLC/Corporation.pdf";
 
 
         }]);

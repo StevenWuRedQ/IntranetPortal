@@ -3365,6 +3365,7 @@
     <Content Include="Scripts\prototype.js" />
     <Content Include="Scripts\services.js" />
     <Content Include="Scripts\stevenjs.js" />
+    <Content Include="Scripts\templates\ptfile.html" />
     <Content Include="Scripts\ui-bootstrap-0.13.0.js" />
     <Content Include="Scripts\vectormap-data\africa.js" />
     <Content Include="Scripts\vectormap-data\canada.js" />

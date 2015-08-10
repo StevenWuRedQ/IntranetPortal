@@ -1,63 +1,88 @@
 ﻿var app = angular.module('PortalApp');
 
-app.service('ptCom', [function () {
-    var capitalizeFirstLetter = function (string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
-    this.arrayAdd = function (model, data) {
-        if (model) {
-            model = model === undefined ? [] : model;
-            data = data === undefined ? {} : data;
-            model.push(data);
+app.service('ptCom', [
+    function () {
+        var capitalizeFirstLetter = function (string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
         }
-    }
 
-    this.arrayRemove = function (model, index, confirm, callback) {
-        if (model && index < model.length) {
-            if (confirm) {
-                var result = DevExpress.ui.dialog.confirm("Delete This?", "Confirm");
-                result.done(function (dialogResult) {
-                    if (dialogResult) {
-                        var deleteObj = model.splice(index, 1)[0];
-                        if (callback) callback(deleteObj);
-                    }
-                })
-            } else {
-                model.splice(index, 1);
+        this.arrayAdd = function (model, data) {
+            if (model) {
+                data = data === undefined ? {} : data;
+                model.push(data);
             }
         }
-    };
 
-    this.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
-        var result = '';
-        if (strNO) result += strNO + ' ';
-        if (strName) result += strName + ', ';
-        if (aptNO) result += 'Apt ' + aptNO + ', ';
-        if (city) result += city + ', ';
-        if (state) result += state + ', ';
-        if (zip) result += zip;
-        return result;
-    }
+        this.arrayRemove = function (model, index, confirm, callback) {
+            if (model && index < model.length) {
+                if (confirm) {
+                    var result = DevExpress.ui.dialog.confirm("Delete This?", "Confirm");
+                    result.done(function (dialogResult) {
+                        if (dialogResult) {
+                            var deleteObj = model.splice(index, 1)[0];
+                            if (callback) callback(deleteObj);
+                        }
+                    })
+                } else {
+                    model.splice(index, 1);
+                }
+            }
+        };
 
-    this.formatName = function (firstName, middleName, lastName) {
-        var result = '';
-        if (firstName) result += capitalizeFirstLetter(firstName) + ' ';
-        if (middleName) result += capitalizeFirstLetter(middleName) + ' ';
-        if (lastName) result += capitalizeFirstLetter(lastName);
-        return result;
-
-    }
-
-    this.capitalizeFirstLetter = capitalizeFirstLetter;
-
-    this.ensureArray = function(model,scope) {
-        if (scope.$eval(model + '==null')) {
-            scope.$eval(model + '=[]');
+        this.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
+            var result = '';
+            if (strNO) result += strNO + ' ';
+            if (strName) result += strName + ', ';
+            if (aptNO) result += 'Apt ' + aptNO + ', ';
+            if (city) result += city + ', ';
+            if (state) result += state + ', ';
+            if (zip) result += zip;
+            return result;
         }
-    };
 
-}]);
+        this.formatName = function (firstName, middleName, lastName) {
+            var result = '';
+            if (firstName) result += capitalizeFirstLetter(firstName) + ' ';
+            if (middleName) result += capitalizeFirstLetter(middleName) + ' ';
+            if (lastName) result += capitalizeFirstLetter(lastName);
+            return result;
+
+        }
+
+        this.capitalizeFirstLetter = capitalizeFirstLetter;
+
+        this.ensureArray = function (model, scope) {
+            if (scope.$eval(model + '==null')) {
+                scope.$eval(model + '=[]');
+            }
+        }
+
+        this.uploadFile = function (file, callback) {
+            $.ajax({
+                url: '',
+                type: 'POST',
+                data: file,
+                cache: false,
+                processData: false,
+                contentType: "application/octet-stream",
+                success: function (data) {
+                    debugger;
+                    callback(data);
+                },
+                error: function (data) {
+                    debugger;
+                    alert('upload file fails');
+                }
+            });
+        }
+
+        this.getFileName = function(fullPath) {
+            var paths = fullPath.split('/');
+            return paths[paths.length - 1];
+        }
+
+
+    }]);
 
 app.service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
 
