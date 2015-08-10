@@ -34,6 +34,8 @@ Public Class ActivityLogs
                 gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.LogCategory.Eviction.ToString})
             Case ActivityLogMode.Construction
                 gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.Construction.ToString})
+            Case ActivityLogMode.Eviction
+                gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.Eviction})
             Case Else
                 gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, Nothing)
         End Select
@@ -82,7 +84,7 @@ Public Class ActivityLogs
             Throw New Exception("Comments can not be empty.")
         End If
 
-        LeadsActivityLog.AddActivityLog(getdate, txtComments.Text, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.Comments)
+        LeadsActivityLog.AddActivityLog(getdate, txtComments.Text, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.Comments)
         'AddActivityLog(aspxdate.Date, txtComments.Text, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString)
         e.Cancel = True
 
@@ -127,7 +129,7 @@ Public Class ActivityLogs
                     Context.SaveChanges()
                 End If
 
-                LeadsActivityLog.AddActivityLog(DateTime.Now, "Task is completed by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
+                LeadsActivityLog.AddActivityLog(DateTime.Now, "Task is completed by " & Page.User.Identity.Name, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
 
                 Dim sn = ""
                 If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
@@ -191,7 +193,7 @@ Public Class ActivityLogs
 
                     Context.SaveChanges()
 
-                    LeadsActivityLog.AddActivityLog(DateTime.Now, "New Lead is approved by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Approved)
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, "New Lead is approved by " & Page.User.Identity.Name, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.Approved)
 
                     If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
                         Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
@@ -222,7 +224,7 @@ Public Class ActivityLogs
                     log.Category = LeadsActivityLog.LogCategory.Declined.ToString
                     Context.SaveChanges()
 
-                    LeadsActivityLog.AddActivityLog(DateTime.Now, "New Lead is declined by " & Page.User.Identity.Name, log.BBLE, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Declined)
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, "New Lead is declined by " & Page.User.Identity.Name, log.BBLE, LogCategory.ToString, LeadsActivityLog.EnumActionType.Declined)
 
                     'Connect to Workflow Server
                     If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
@@ -241,7 +243,7 @@ Public Class ActivityLogs
                     lead.AssignBy = Page.User.Identity.Name
                     Context.SaveChanges()
 
-                    LeadsActivityLog.AddActivityLog(DateTime.Now, "The Leads status changes to new leads of " & Page.User.Identity.Name, log.BBLE, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reassign)
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, "The Leads status changes to new leads of " & Page.User.Identity.Name, log.BBLE, LogCategory.ToString, LeadsActivityLog.EnumActionType.Reassign)
 
                     'Add Notify Message
                     Dim title = "Your lead is declined"
@@ -265,7 +267,7 @@ Public Class ActivityLogs
             Dim logId = CInt(e.Parameters.Split("|")(1))
 
             Dim appointment = UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.Accepted)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is accepted by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.AcceptAppoitment)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is accepted by " & Page.User.Identity.Name, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.AcceptAppoitment)
 
             Dim sn = ""
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
@@ -304,7 +306,7 @@ Public Class ActivityLogs
             Dim logId = CInt(e.Parameters.Split("|")(1))
 
             Dim appointment = UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.Declined)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is Decline by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.DeclineAppointment)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is Decline by " & Page.User.Identity.Name, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.DeclineAppointment)
 
             Dim sn = ""
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
@@ -341,7 +343,7 @@ Public Class ActivityLogs
             Dim logId = CInt(e.Parameters.Split("|")(1))
 
             Dim appointment = UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.ReScheduled)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is Rescheduled by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reschedule)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is Rescheduled by " & Page.User.Identity.Name, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.Reschedule)
 
             Dim sn = ""
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
@@ -398,7 +400,7 @@ Public Class ActivityLogs
 
                         Dim rDate = recycle.PostponeDays(days)
 
-                        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Recycle action is postponed to {0} by {1} ", rDate.ToShortDateString, Page.User.Identity.Name), hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.ExtendRecycle)
+                        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Recycle action is postponed to {0} by {1} ", rDate.ToShortDateString, Page.User.Identity.Name), hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.ExtendRecycle)
                     End If
                 End If
             End If
@@ -943,12 +945,12 @@ Public Class ActivityLogs
                     LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
                     ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, "Comments", "Comments", txtComments)
                 End If
-            Case ActivityLogMode.Legal, ActivityLogMode.Construction
+            Case ActivityLogMode.Legal, ActivityLogMode.Construction, ActivityLogMode.Eviction
 
                 LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.Comments)
 
             Case Else
-                LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.Comments)
+                LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.Comments)
 
                 'Notify leads owner messager 
                 Dim ld = Lead.GetInstance(hfBBLE.Value)
@@ -1006,7 +1008,7 @@ Public Class ActivityLogs
                 wli.Finish()
             End If
 
-            LeadsActivityLog.AddActivityLog(DateTime.Now, "Task is Resend by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, "Task is Resend by " & Page.User.Identity.Name, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
         End Using
     End Sub
 
@@ -1021,6 +1023,8 @@ Public Class ActivityLogs
                     Return LeadsActivityLog.LogCategory.Legal
                 Case ActivityLogMode.Construction
                     Return LeadsActivityLog.LogCategory.Construction
+                Case ActivityLogMode.Eviction
+                    Return LeadsActivityLog.LogCategory.Eviction
                 Case Else
                     Return LeadsActivityLog.LogCategory.SalesAgent
             End Select
@@ -1033,6 +1037,7 @@ Public Class ActivityLogs
         ShortSale
         Legal
         Construction
+        Eviction
     End Enum
 
     Protected Sub EmailBody2_Load(sender As Object, e As EventArgs)
@@ -1082,7 +1087,7 @@ Public Class ActivityLogs
             Dim comments = String.Format("Value Info: {0}, {1} - {2}, Expired on {3}", propValue.Method, String.Format("{0:C0}", propValue.BankValue),
                                          String.Format("{0:d}", propValue.DateOfValue), String.Format("{0:d}", propValue.ExpiredOn))
 
-            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, "ShortSale", LeadsActivityLog.EnumActionType.Comments)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LogCategory.ToString, LeadsActivityLog.EnumActionType.Comments)
 
             cbMethods.Text = ""
             txtBankValue.Text = ""

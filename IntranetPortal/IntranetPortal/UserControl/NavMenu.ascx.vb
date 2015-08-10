@@ -201,7 +201,7 @@ Public Class RefreshLeadsCountHandler
                 Dim myObj = CType(Activator.CreateInstance(Type.GetType("IntranetPortal." & item.AmountManageClass)), INavMenuAmount)
 
                 If myObj IsNot Nothing Then
-                    Return myObj.GetAmount(item.Name, userName)
+                    Return myObj.GetAmount(item, userName)
                 End If
             Catch ex As Exception
                 Return 0

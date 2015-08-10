@@ -311,7 +311,7 @@ Partial Public Class ShortSaleCase
     Function GetMortageStauts(ByVal index As Integer) As String
         If (Mortgages IsNot Nothing AndAlso Mortgages.Count > index) Then
 
-            Return Mortgages(index).Status
+            Return Mortgages.OrderBy(Function(mort) mort.MortgageId).ToList(index).Status
         End If
         Return Nothing
     End Function
@@ -319,7 +319,7 @@ Partial Public Class ShortSaleCase
     Function GetMortageType(ByVal index As Integer) As String
         If (Mortgages IsNot Nothing AndAlso Mortgages.Count > index) Then
 
-            Return Mortgages(index).Type
+            Return Mortgages.OrderBy(Function(mort) mort.MortgageId).ToList(index).Type
         End If
         Return Nothing
     End Function
@@ -338,7 +338,7 @@ Partial Public Class ShortSaleCase
     Function GetMortageLonder(ByVal index As Integer) As String
         If (Mortgages IsNot Nothing AndAlso Mortgages.Count > index) Then
 
-            Return Mortgages(index).Lender
+            Return Mortgages.OrderBy(Function(mort) mort.MortgageId).ToList(index).Lender
         End If
         Return Nothing
     End Function
@@ -353,8 +353,8 @@ Partial Public Class ShortSaleCase
     Public Property MortgageCategory As String
         Get
             If String.IsNullOrEmpty(_mortgageCategory) Then
-                If Mortgages IsNot Nothing AndAlso Mortgages.Count > 1 Then
-                    _mortgageCategory = Mortgages(0).Category
+                If Mortgages IsNot Nothing AndAlso Mortgages.Count > 0 Then
+                    _mortgageCategory = Mortgages.OrderBy(Function(m) m.MortgageId).ToList(0).Category
                 End If
             End If
 
@@ -1004,7 +1004,7 @@ Partial Public Class ShortSaleCase
             Dim data = From ss In ctx.ShortSaleCases
                        Join pi In ctx.PropertyBaseInfoes On pi.BBLE Equals ss.BBLE
                        Let owner = ctx.PropertyOwners.FirstOrDefault(Function(po) po.BBLE = ss.BBLE)
-                       Let morts = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = ss.CaseId)
+                       Let morts = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = ss.CaseId).OrderBy(Function(m) m.MortgageId)
                        Let values = ctx.PropertyValueInfoes.Where(Function(pv) pv.BBLE = ss.BBLE)
                        Let fileOverview = ctx.ShortSaleOverviews.Where(Function(pv) pv.BBLE = ss.BBLE).OrderByDescending(Function(pv) pv.ActivityDate).FirstOrDefault
                        Select New With {.CaseId = ss.CaseId,
@@ -1029,7 +1029,6 @@ Partial Public Class ShortSaleCase
     End Function
 
 #End Region
-
 
     'Public Overrides Function Equals(obj As Object) As Boolean
     '    If obj Is Nothing Then

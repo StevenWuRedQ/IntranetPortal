@@ -455,13 +455,13 @@
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Legal-FollowUps" Text="Follow Up" NavigationUrl="/LegalUI/LegalFollowUps.aspx" ShowAmount="false">
+      <PortalNavItem Name="Legal-FollowUps" Text="Follow Up" NavigationUrl="/LegalUI/LegalFollowUps.aspx" ShowAmount="true" AmountManageClass="LegalCaseManage">
         <UserRoles></UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-rotate-right"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Legal-LawReferences" Text="Law References" NavigationUrl="/LegalUI/CaseLawRef.aspx" ShowAmount="false">
+      <PortalNavItem Name="Legal-LawReferences" Text="Law References" NavigationUrl="/LegalUI/CaseLawRef.aspx" ShowAmount="true" AmountManageClass="LegalCaseManage">
         <UserRoles></UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-bullhorn"></i>]]>

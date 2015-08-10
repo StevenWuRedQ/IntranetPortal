@@ -31,7 +31,7 @@ Public Class ConstructionManage
     End Function
 
 
-    Public Function GetAmount(type As String, userName As String) As Integer Implements INavMenuAmount.GetAmount
+    Public Function GetAmount(menu As PortalNavItem, userName As String) As Integer Implements INavMenuAmount.GetAmount
 
         Return GetMyCases(userName).Length
 

@@ -184,7 +184,9 @@ Public Class NGShortSale
         End If
         hfIsEvction.Value = isEviction.ToString
 
-
+        If isEviction Then
+            ActivityLogs.DisplayMode = IntranetPortal.ActivityLogs.ActivityLogMode.Eviction
+        End If
 
     End Sub
 

@@ -3,6 +3,7 @@ Imports Legal = IntranetPortal.Data
 Imports IntranetPortal.Data
 
 Public Class LegalCaseManage
+    Implements INavMenuAmount
 
     Public Shared Sub StartLegalRequest(bble As String, caseData As String, createBy As String)
         Dim ld = Lead.GetInstance(bble)
@@ -136,5 +137,17 @@ Public Class LegalCaseManage
     End Function
 
 #End Region
+
+    Public Function GetAmount(menu As PortalNavItem, userName As String) As Integer Implements INavMenuAmount.GetAmount
+
+        Select Case menu.Name
+            Case "Legal-FollowUps"
+                Return LegalCase.GetFollowUpCases.Count
+            Case "Legal-LawReferences"
+                Return LawReference.GetAllReference().Count
+        End Select
+
+        Return 0
+    End Function
 
 End Class
