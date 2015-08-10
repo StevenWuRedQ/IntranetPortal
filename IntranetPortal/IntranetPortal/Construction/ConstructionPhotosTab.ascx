@@ -11,13 +11,6 @@
                 <label class="ss_form_input_title">PM Photos</label>
                 <pt-file></pt-file>
             </li>
-
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Meter Photos</label>
-                <pt-file></pt-file>
-            </li>
-
-
         </ul>
     </div>
 </div>

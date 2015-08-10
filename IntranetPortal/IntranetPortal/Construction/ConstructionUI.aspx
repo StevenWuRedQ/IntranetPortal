@@ -27,9 +27,9 @@
             <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="None" PaneStyle-Paddings-Padding="0px" Name="dataPane">
                 <ContentCollection>
                     <dx:SplitterContentControl>
-                        <div id="ConstructionCtrl" ng-controller="ConstructionCtrl" style="align-content: center; height: 100%">
+                        <div id="ConstructionCtrl" ng-controller="ConstructionCtrl" style="align-content: center;">
                             <!-- Nav tabs -->
-                            <div class="legal-menu row" style="margin:0px">
+                            <div class="legal-menu row" style="margin: 0px;">
                                 <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
                                     <li class="active short_sale_head_tab">
                                         <a href="#LegalTab" role="tab" data-toggle="tab" class="tab_button_a">
@@ -49,7 +49,7 @@
                                             <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                         </a>
                                         <div class="shot_sale_sub">
-                                            <ul class="nav  clearfix" role="tablist">
+                                            <ul class="nav clearfix" role="tablist">
                                                 <li class="short_sale_head_tab">
                                                     <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="/ViewLeadsInfo.aspx?HiddenTab=true&id=BBLE" data-href="#more_leads" onclick="LoadMoreFrame(this)">
                                                         <i class="fa fa-folder head_tab_icon_padding"></i>
@@ -69,7 +69,6 @@
                                                         <div class="font_size_bold">Eviction</div>
                                                     </a>
                                                 </li>
-
                                             </ul>
                                         </div>
                                     </li>
@@ -88,6 +87,7 @@
                                 <div class="tab-pane" id="DocumentTab">
                                     <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
                                 </div>
+
                                 <div class="tab-pane load_bg" id="more_leads">
                                     <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
                                 </div>
@@ -98,6 +98,7 @@
                                     <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
                                 </div>
                             </div>
+
                         </div>
 
                         <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
@@ -176,14 +177,14 @@
             $scope.init = function (caseId) {
                 ptShortsSaleService.getShortSaleCase(caseId, function (res) {
                     $scope.SsCase = res;
-                    
+
                 });
             }
 
 
             /***spliter***/
             $scope.CSCase.Utilities.Company = [];
-            
+
 
         }]);
     </script>

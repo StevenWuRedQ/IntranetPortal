@@ -11,7 +11,7 @@
 
 <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 
-<div id="constructionTabContent">
+<div id="constructionTabContent" style="max-height: 900px; overflow:auto">
     <input hidden id="short_sale_case_id" value="" />
     <div style="padding-top: 5px">
         <div style="height: auto; max-height: 400px; overflow: auto;" id="prioity_content">
@@ -67,7 +67,7 @@
         </div>
 
 
-        <div class="shortSaleUI detail_tabs">
+        <div class="shortSaleUI">
             <style>
                 #CSTab .short_sale_tab {
                     font-size: 12px;
@@ -86,8 +86,8 @@
             </ul>
 
             <!-- Tab panes -->
-            <div class="short_sale_content">
-                <div class="tab-content">
+            <div class="short_sale_content" >
+                <div class="tab-content" >
                     <div class="tab-pane active" id="CSInitialIntake">
                         <uc1:ConstructionInitialIntakeTab runat="server" ID="ConstructionInitialIntakeTab" />
                     </div>
