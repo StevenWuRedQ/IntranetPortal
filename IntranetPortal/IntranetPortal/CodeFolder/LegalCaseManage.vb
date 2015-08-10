@@ -5,6 +5,8 @@ Imports IntranetPortal.Data
 Public Class LegalCaseManage
     Implements INavMenuAmount
 
+    Private Const MgrRoleName As String = "Legal-Manager"
+
     Public Shared Sub StartLegalRequest(bble As String, caseData As String, createBy As String)
         Dim ld = Lead.GetInstance(bble)
 
@@ -118,6 +120,15 @@ Public Class LegalCaseManage
 
         LeadsActivityLog.AddActivityLog(DateTime.Now, "Legal follow up date was Cleared", bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.FollowUp)
     End Sub
+
+    Public Shared Function IsManager(userName As String) As String
+
+        If Roles.IsUserInRole(userName, MgrRoleName) OrElse Roles.IsUserInRole(userName, "Admin") Then
+            Return True
+        End If
+
+        Return False
+    End Function
 
 #Region "Share data from other project"
 

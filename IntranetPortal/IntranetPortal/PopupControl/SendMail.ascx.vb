@@ -65,8 +65,8 @@ Public Class SendMailControl
             EmailBody.Html = msg.Body
             EmailAttachments.Text = msg.Attachments
         End If
-
     End Sub
+
     Protected Sub BindEmail()
 
         'tabPageEmailSelect()

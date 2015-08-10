@@ -99,7 +99,6 @@
 
             if (typeof gridTrackingClient != 'undefined')
                 gridTrackingClient.Refresh();
-
         }
     }
 
