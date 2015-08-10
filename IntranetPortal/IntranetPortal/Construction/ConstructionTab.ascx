@@ -7,10 +7,12 @@
 <%@ Register Src="~/Construction/ConstructionPlansTab.ascx" TagPrefix="uc1" TagName="ConstructionPlansTab" %>
 <%@ Register Src="~/Construction/ConstructionContractTab.ascx" TagPrefix="uc1" TagName="ConstructionContractTab" %>
 <%@ Register Src="~/Construction/ConstructionSignoffsTab.ascx" TagPrefix="uc1" TagName="ConstructionSignoffsTab" %>
+<%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
+
 
 
 <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
-
+<uc1:Common runat="server" ID="Common" />
 <div id="constructionTabContent" style="max-height: 900px; overflow:auto">
     <input hidden id="short_sale_case_id" value="" />
     <div style="padding-top: 5px">
@@ -19,11 +21,16 @@
                 <div style="font-size: 30px">
                     <i class="fa fa-home"></i>
                     <span style="margin-left: 19px;">{{GetCaseInfo().Address}}&nbsp;</span>
-                    <span class="time_buttons" style="margin-right: 30px" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=3&bble='+leadsInfoBBLE, 'eCourts')">eCourts</span>
+                    <span class="time_buttons" onclick="OpenLeadsWindow('http://www1.nyc.gov/site/hpd/index.page', 'HPD')">HPD</span>
                     <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=2&bble='+leadsInfoBBLE, 'DOB')">DOB</span>
-                    <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=1&bble='+leadsInfoBBLE, 'Acris')">Acris</span>
-                    <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+leadsInfoBBLE, 'Maps')">Maps</span>
+
+                    <span class="time_buttons" onclick="OpenLeadsWindow('http://www1.nyc.gov/site/finance/index.page', 'Department of Finance')">Department of Finance</span>
+                    <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+leadsInfoBBLE, 'Maps')">Map</span>
                     <span class="time_buttons" onclick="OpenLeadsWindow('http://nycserv.nyc.gov/NYCServWeb/NYCSERVMain', 'eCourts')">Water&Taxes</span>
+                    <span class="time_buttons" onclick="OpenLeadsWindow('http://www1.nyc.gov/assets/hpd/downloads/pdf/Dismissal-Request-Form-2013.pdf', 'Dismissal Request form')">Dismissal Request form</span>
+                    <span class="time_buttons" onclick="OpenLeadsWindow('http://a820-ecbticketfinder.nyc.gov/searchHome.action ', 'ECB')">ECB</span>
+                   
+                    
                 </div>
 
                 <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;">{{GetCaseInfo().Name}}</span>
@@ -75,7 +82,7 @@
             </style>
             <ul id="CSTab" class="nav nav-tabs overview_tabs" role="tablist">
                 <li class="short_sale_tab active"><a class="shot_sale_tab_a" href="#CSInitialIntake" role="tab" data-toggle="tab">Initial Intake</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSPhotos" role="tab" data-toggle="tab">Photos</a></li>
+                <li class="short_sale_tab" ng-show="CSCase.InitialIntake.Access!=null"><a class="shot_sale_tab_a" href="#CSPhotos" role="tab" data-toggle="tab">Photos</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSUtilities" role="tab" data-toggle="tab">Utilities</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSViolations" role="tab" data-toggle="tab">Violation</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSProposal" role="tab" data-toggle="tab">ProposalBids</a></li>

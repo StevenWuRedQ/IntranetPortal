@@ -21,11 +21,11 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Client Name</label>
-                <input class="ss_form_input" disabled="disabled"  readonly="readonly" ng-value="GetCorpy(id).Singor">
+                <input class="ss_form_input" disabled="disabled"  readonly="readonly" ng-value="ShortSaleCase.BuyerEntity.Signor">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Client Contact #</label>
-                <input class="ss_form_input" disabled="disabled" ng-value="GetCorpy(name).C">
+                <input class="ss_form_input" disabled="disabled" ng-value="">
             </li>
         </ul>
     </div>

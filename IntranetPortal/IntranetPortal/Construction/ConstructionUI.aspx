@@ -177,7 +177,7 @@
             $scope.init = function (caseId) {
                 ptShortsSaleService.getShortSaleCase(caseId, function (res) {
                     $scope.SsCase = res;
-
+                    leadsInfoBBLE = $scope.SsCase.BBLE;
                 });
             }
 
@@ -185,7 +185,7 @@
             /***spliter***/
             $scope.CSCase.Utilities.Company = [];
             $scope.CSCase.Photos.AMPhotos = "/CorporationEntity/100 Ave Equities LLC/Corporation.pdf";
-
+            
 
         }]);
     </script>
