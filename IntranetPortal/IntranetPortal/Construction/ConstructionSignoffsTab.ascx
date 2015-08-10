@@ -104,19 +104,23 @@
                 <label class="ss_form_input_title">PAA <i class="fa icon_btn text-primary" ng-class="PAAcollapse?'fa-compress':'fa-expand'" ng-click="PAAcollapse=!PAAcollapse"></i></label>
                 <button class="btn" type="button" ng-click="PAAcollapse=true">Upload</button>
             </li>
-            <li class="ss_form_item" style="width: 97%,height:auto" ng-show="PAAcollapse">
+            <li class="ss_form_item" style="width: 97%; height: auto" ng-show="PAAcollapse">
                 <div class="arrow_box">
-                    <ul class="ss_form_box clearfix">
 
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">date fee paid</label>
-                            <input class="ss_form_input" ss-date>
-                        </li>
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">Date Approval</label>
-                            <input class="ss_form_input" ss-date>
-                        </li>
-                    </ul>
+                    <div class="ss_form">
+                        <ul class="ss_form_box clearfix">
+
+
+                            <li class="ss_form_item">
+                                <label class="ss_form_input_title">date fee paid</label>
+                                <input class="ss_form_input" ss-date>
+                            </li>
+                            <li class="ss_form_item">
+                                <label class="ss_form_input_title">Date Approval</label>
+                                <input class="ss_form_input" ss-date>
+                            </li>
+                        </ul>
+                    </div>
 
                 </div>
             </li>
@@ -125,6 +129,125 @@
                 <label class="ss_form_input_title">LAA</label>
                 <button class="btn" type="button">Upload</button>
             </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Plumbing job signed off date</label>
+                <input class="ss_form_input" ss-date>
+            </li>
+
+        </ul>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item ss_form_item_line">
+                <label class="ss_form_input_title">notes</label>
+                <textarea class="edit_text_area text_area_ss_form"></textarea>
+            </li>
+
+        </ul>
+    </div>
+
+
+    <div class="ss_form" style="margin-top:70px">
+        <h4 class="ss_form_title title_after_notes">Electrical</h4>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Date Permit was pulled</label>
+                <input class="ss_form_input" ss-date>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">PW2</label>
+                <button class="btn" type="button">Upload</button>
+            </li>
+            <li class="ss_form_item" style="visibility: hidden">
+                <label class="ss_form_input_title"></label>
+                <input class="ss_form_input">
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Inspection date requested</label>
+                <input class="ss_form_input" ss-date>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">date of inspection</label>
+                <input class="ss_form_input">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">results</label>
+                <select class="ss_form_input">
+                    <option></option>
+                    <option>Passed</option>
+                    <option>Failed</option>
+                </select>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Completetion fee</label>
+                <input class="ss_form_input">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Amount due</label>
+                <input class="ss_form_input">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Date paid</label>
+                <input class="ss_form_input" ss-date>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title ss_warning">date electric signed of</label>
+                <input class="ss_form_input" ss-date>
+            </li>
+        </ul>
+
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item ss_form_item_line">
+                <label class="ss_form_input_title">Notes</label>
+                <textarea class="edit_text_area text_area_ss_form"></textarea>
+            </li>
+
+        </ul>
+    </div>
+    <div class="ss_form " style="margin-top:70px">
+        <h4 class="ss_form_title title_after_notes">Construction</h4>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Date Permit was pulled</label>
+                <input class="ss_form_input" ss-date>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">PW2</label>
+                <button class="btn" type="button">Upload</button>
+            </li>
+            <li class="ss_form_item" style="visibility: hidden">
+                <label class="ss_form_input_title"></label>
+                <input class="ss_form_input">
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">date inspection was requested</label>
+                <input class="ss_form_input" ss-date>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">inspection date</label>
+                <input class="ss_form_input">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Objecteions</label>
+                <button class="btn" type="button">Upload</button>
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Constaction report</label>
+                <input class="ss_form_input">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">construction job jigned off date</label>
+                <input class="ss_form_input" ss-date>
+            </li>
+        </ul>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item ss_form_item_line">
+                <label class="ss_form_input_title">Notes</label>
+                <textarea class="edit_text_area text_area_ss_form"></textarea>
+            </li>
+
         </ul>
 
     </div>

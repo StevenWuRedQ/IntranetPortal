@@ -860,7 +860,7 @@
                     error(function () {
                         alert("Fail to load data : " + BBLE);
                     });
-                
+
                 /******************* get short sale case ***********************/
                 $http.get('/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=' + BBLE).success(function (data, status, headers, config) {
 
@@ -877,7 +877,7 @@
                     alert("Get Short Sale Leads failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
                 });
 
-                $http.get('/api/TaxLiens/'+BBLE).
+                $http.get('/api/TaxLiens/' + BBLE).
                 success(function (data, status, headers, config) {
                     $scope.TaxLiens = data;
                 }).error(function (data, status, headers, config) {
@@ -885,10 +885,9 @@
                 });
             }
 
-            $scope.ModelArray = function(model)
-            {
+            $scope.ModelArray = function (model) {
                 var array = $scope.$eval(model);
-                return array && array.length>0?'Yes':''
+                return array && array.length > 0 ? 'Yes' : ''
             }
             /*return true it hight light check date  */
             $scope.HighLightFunc = function (funcStr) {
