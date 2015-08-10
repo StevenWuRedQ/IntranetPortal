@@ -117,6 +117,14 @@ Partial Public Class Lead
             Return True
         End If
 
+        If Roles.IsUserInRole(name, "Legal-Manager") Then
+            Return True
+        End If
+
+        If Roles.IsUserInRole(name, "ShortSale-Manager") Then
+            Return True
+        End If
+
         Dim owner = EmployeeName
 
         If owner = name Then

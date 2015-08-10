@@ -82,6 +82,7 @@ Public Class Root
         End If
     End Sub
 
+
     Protected Sub HeadLoginStatus_LoggingOut(sender As Object, e As LoginCancelEventArgs)
         OnlineUser.LogoutUser(HttpContext.Current.User.Identity.Name)
     End Sub

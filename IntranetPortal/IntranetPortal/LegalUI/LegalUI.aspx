@@ -246,6 +246,7 @@
                                             <% End If%>
 
                                             <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerAssign Or (ShowReassginBtn()) Then%>
+                                            <i class="fa fa-mail-reply sale_head_button sale_head_button_left tooltip-examples" title="" onclick="PopupComments.Show(this, angular.element(document.getElementById('LegalCtrl')).scope().BackToResearch);" data-original-title="Back to Research"></i>
                                             <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Attorney');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to paralegal / Attorney"></i>
                                             <% End If%>
 
@@ -291,6 +292,51 @@
                                         }" />
                                 </dx:ASPxPopupControl>
                                 <% End If%>
+                                
+                                <dx:ASPxPopupControl ClientInstanceName="popupBackToResearch" Width="300px" Height="300px"
+                                    MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"
+                                    HeaderText="Comments" AutoUpdatePosition="true" Modal="true" runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
+                                    <ContentCollection>
+                                        <dx:PopupControlContentControl runat="server">
+                                            <dx:ASPxMemo runat="server" ID="txtBackComments" ClientInstanceName="txtBackComments" Height="270" Width="100%"></dx:ASPxMemo>
+                                            <dx:ASPxButton Text="Submit" runat="server" ID="ASPxButton2" AutoPostBack="false">
+                                                <ClientSideEvents Click="function(s,e){
+                                            PopupComments.ButtonClick();
+                                        }" />
+                                            </dx:ASPxButton>
+                                        </dx:PopupControlContentControl>
+                                    </ContentCollection>
+                                    <ClientSideEvents Closing="function(s,e){
+                                              if (typeof gridTrackingClient != 'undefined')
+                                                    gridTrackingClient.Refresh();
+                                        }" />
+                                </dx:ASPxPopupControl>
+
+                                  <script type="text/javascript">
+                                      //angular.element(document.getElementById('LegalCtrl')).scope().BackToResearch(comments);
+                                      var PopupComments = {
+                                          Action:null,
+                                          Show: function (element, action) {
+                                              this.Action = action;
+                                              popupBackToResearch.ShowAtElement(element);
+                                          },
+                                          ButtonClick: function () {
+                                              var comments = txtBackComments.GetText();
+                                              if (comments == null || comments == '') {
+                                                  alert('Please input comments.');
+                                                  return;
+                                              }
+
+                                              if (typeof this.Action == 'function')
+                                                  this.Action(comments);
+                                              
+                                              popupBackToResearch.Hide();
+                                              txtBackComments.SetText('');
+                                          }
+                                      }
+
+                                </script>
+
 
                                 <style>
                                     .AttachmentSpan {
@@ -390,7 +436,7 @@
                                         <%--<i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active" onclick="LogClick('Active')"></i>--%>
                                         <%--<i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>--%>
                                         <%-- <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')"></i>--%>
-                                        <%--<i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Closed" onclick="LogClick('Closed')"></i>--%>
+                                        <i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Closed" onclick="PopupComments.Show(this, angular.element(document.getElementById('LegalCtrl')).scope().CloseCase)"></i>
                                         <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                     </li>
                                 </ul>
@@ -492,6 +538,11 @@
             //SetLeadStatus(e.item.name + "|" + leadsInfoBBLE);
             SetLegalFollowUp(e.item.name)
             e.processOnServer = false;
+        }
+
+        function CloseCase(comments)
+        {
+            angular.element(document.getElementById('LegalCtrl')).scope().CloseCase(comments);
         }
 
         function SetLegalFollowUp(type, dateSelected) {
@@ -812,7 +863,36 @@
                         alert("Fail to save data :" + JSON.stringify(data));
                         console.log(data);
                     });
+            }
 
+            $scope.BackToResearch = function (comments) {
+                var json = JSON.stringify($scope.LegalCase);
+
+                var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN, comments: comments };
+                $http.post('LegalUI.aspx/BackToResearch', data).
+                    success(function () {
+                        alert("Submit Success!");
+                        if (typeof gridTrackingClient != 'undefined')
+                            gridTrackingClient.Refresh();
+
+                    }).error(function (data) {
+                        alert("Fail to save data :" + JSON.stringify(data));
+                        console.log(data);
+                    });
+            }
+
+            $scope.CloseCase = function (comments) {                
+                var data = { bble: leadsInfoBBLE, comments: comments };
+                $http.post('LegalUI.aspx/CloseCase', data).
+                    success(function () {
+                        alert("Submit Success!");
+                        if (typeof gridTrackingClient != 'undefined')
+                            gridTrackingClient.Refresh();
+
+                    }).error(function (data) {
+                        alert("Fail to save data :" + JSON.stringify(data));
+                        console.log(data);
+                    });
             }
 
             $scope.AttorneyComplete = function () {

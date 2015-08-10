@@ -67,6 +67,7 @@ Public Class LegalCaseManage
 
         If wli IsNot Nothing Then
             wli.ProcessInstance.DataFields("Attorney") = attorney
+            wli.ProcessInstance.DataFields("Result") = "Complete"
             wli.Finish()
         End If
 

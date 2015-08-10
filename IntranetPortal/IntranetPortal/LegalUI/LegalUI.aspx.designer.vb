@@ -86,6 +86,33 @@ Partial Public Class LegalUI
     Protected WithEvents btnAssign As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
+    '''ASPxPopupControl1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''txtBackComments control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtBackComments As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+
+    '''<summary>
+    '''ASPxButton2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
     '''LegalTab1 control.
     '''</summary>
     '''<remarks>

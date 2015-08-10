@@ -142,7 +142,28 @@ Public Class LegalUI
     End Sub
 
     <WebMethod()> _
-  <ScriptMethod>
+   <ScriptMethod>
+    Public Shared Sub BackToResearch(caseData As String, bble As String, sn As String, comments As String)
+        'save data
+        SaveCaseData(caseData, bble)
+
+        'move out from process
+        'Dim wli = WorkflowService.GetLegalWorklistItem(sn, bble, IntranetPortal.Data.LegalCaseStatus.ManagerAssign, HttpContext.Current.User.Identity.Name)
+
+        'If wli IsNot Nothing Then
+        '    wli.ProcessInstance.DataFields("Result") = "Back"
+        '    wli.Finish()
+        'End If
+
+        'update legal case status
+        IntranetPortal.Data.LegalCase.UpdateStatus(bble, IntranetPortal.Data.LegalCaseStatus.LegalResearch)
+
+        comments = String.Format("The case is sent back to research. <br />Comments: {0}", comments)
+        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
+    End Sub
+
+    <WebMethod()> _
+    <ScriptMethod>
     Public Shared Sub AttorneyComplete(caseData As String, bble As String, sn As String)
         'save data
         SaveCaseData(caseData, bble)
@@ -158,6 +179,15 @@ Public Class LegalUI
         Dim comments = String.Format("Case is closed.")
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
 
+    End Sub
+
+    <WebMethod()> _
+    <ScriptMethod>
+    Public Shared Sub CloseCase(bble As String, comments As String)
+        LegalCase.UpdateStatus(bble, LegalCaseStatus.Closed)
+        WorkflowService.ExpireLegalProcess(bble)
+        comments = String.Format("Case is closed. <br /> Comments: {0}", comments)
+        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
     End Sub
 
     <WebMethod()> _

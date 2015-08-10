@@ -243,6 +243,15 @@ Public Class WorkflowService
         End Using
     End Function
 
+    Public Shared Sub ExpireLegalProcess(bble As String)
+        Using conn = GetConnection()
+            Dim pInsts = conn.GetProcessInstancesByDataFields("LegalRequest", "BBLE", bble)
+            For Each pInstId In pInsts
+                conn.ExpiredProcessInstance(pInstId)
+            Next
+        End Using
+    End Sub
+
     Public Shared Sub CompleteResearch(sn As String)
         Dim wli = WorkflowService.LoadTaskProcess(sn)
         wli.Finish()
