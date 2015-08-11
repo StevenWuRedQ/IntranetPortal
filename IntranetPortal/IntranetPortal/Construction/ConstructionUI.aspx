@@ -160,6 +160,7 @@
 
         function LoadCaseData(bble)
         {
+
             //put construction data loading logic here
             console.log(bble);
         }

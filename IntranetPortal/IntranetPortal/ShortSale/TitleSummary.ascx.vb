@@ -409,7 +409,11 @@ Public Class UCTitleSummary
     End Sub
 
     Protected Sub ExportPdf_Click(sender As Object, e As EventArgs)
-        AllLeadGridViewExporter.WritePdfToResponse()
+        AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase()
+        AllLeadsGrid.DataBind()
+
+        gridExporter.FileName = String.Format("GridData-{0}-{1}-{2}.xlsx", Today.Month, Today.Day, Today.Year)
+        gridExporter.WriteXlsToResponse()
     End Sub
 
     'Protected Sub SearchBtn_Click(sender As Object, e As EventArgs)

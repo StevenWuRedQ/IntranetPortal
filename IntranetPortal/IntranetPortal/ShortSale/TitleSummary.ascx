@@ -509,8 +509,8 @@
                                                 <input style="margin-right: 20px; width: 250px; height: 30px;" class="form-control" id="QuickSearch" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid();return false; }">
                                                 <i class="fa fa-search tooltip-examples icon_btn grid_buttons" style="margin-right: 20px" onclick="SearchGrid()"></i>
                                                 <%-- <i class="fa fa-filter tooltip-examples icon_btn grid_buttons" style="margin-right: 40px"></i>--%>
-                                                <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" ></i>'></asp:LinkButton>
-                                                <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-pdf-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;"></i>'></asp:LinkButton>
+                                                <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" title="Export Pipeline" ></i>'></asp:LinkButton>
+                                                <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;" title="Export Grid Data"></i>'></asp:LinkButton>
                                             </div>
                                             <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="8" KeyFieldName="CaseId" Width="100%" Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="300" ForeColor="#b1b2b7" Settings-HorizontalScrollBarMode="Auto" OnCustomCallback="AllLeadsGrid_OnCustomCallback">
                                                 <Styles>
@@ -518,7 +518,7 @@
                                                     </Row>
                                                 </Styles>
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn Name="PropertyInfo.PropertyAddress" Caption="Street address" Width="100%">
+                                                    <dx:GridViewDataTextColumn Name="PropertyInfo.PropertyAddress" Caption="Street address" Width="100%" FieldName="PropertyInfo.PropertyAddress">
                                                         <DataItemTemplate>
                                                             <div style="cursor: pointer; width: 600px" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.Data.ShortSaleCase))%></div>
                                                         </DataItemTemplate>
@@ -557,15 +557,16 @@
                                                         </DataItemTemplate>
                                                     </dx:GridViewDataTextColumn>
                                                 </Columns>
-                                                <Settings ShowHeaderFilterButton="true" />
+                                                <Settings ShowHeaderFilterButton="true" ShowFilterRow="true" />
                                                 <SettingsPager>
                                                     <PageSizeItemSettings Visible="true"></PageSizeItemSettings>
                                                 </SettingsPager>
-                                                <SettingsBehavior ColumnResizeMode="NextColumn" />
+                                                <SettingsBehavior ColumnResizeMode="NextColumn" EnableCustomizationWindow="true" />
                                                 <SettingsPopup>
                                                     <HeaderFilter Height="200" />
                                                 </SettingsPopup>
                                             </dx:ASPxGridView>
+                                            <dx:ASPxGridViewExporter ID="gridExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
 
                                             <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="gridData"></dx:ASPxGridViewExporter>
                                             <dx:ASPxGridView ID="gridData" runat="server" Visible="false"
@@ -676,7 +677,7 @@
                             <i class="fa fa-question-circle tooltip-examples" title="Check items view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
                         </div>
 
-                        <div style="margin-top: 20px; overflow: auto; height: 346px;" id="custom_fields_div">
+                        <div style="margin-top: 20px; overflow: auto; height: 500px;" id="custom_fields_div">
 
                             <script type="text/javascript">
                                 function Fields_ValueChanged(s, e) {
