@@ -76,6 +76,28 @@ Namespace Controllers
             Return CreatedAtRoute("DefaultApi", New With {.id = constructionCase.BBLE}, constructionCase)
         End Function
 
+        ' POST: api/ConstructionCases
+        <ResponseType(GetType(String))>
+        <Route("api/ConstructionCases/UploadFiles")>
+        Function PostConstructionFiles() As IHttpActionResult
+            If Not ModelState.IsValid Then
+                Return BadRequest(ModelState)
+            End If
+
+            If HttpContext.Current.Request.Files.Count > 0 Then
+                Dim file = HttpContext.Current.Request.Files(0)
+                Dim ms = New MemoryStream()
+                file.InputStream.CopyTo(ms)
+                Dim bble = HttpContext.Current.Request.QueryString("bble")
+                Dim fileName = HttpContext.Current.Request.QueryString("fileName")
+
+
+                Return Ok(Core.DocumentService.UploadFile(String.Format("{0}/{1}", bble, "Construction"), ms.ToArray, fileName, User.Identity.Name))
+            End If
+
+            Return BadRequest("Can't find File")
+        End Function
+
         ' DELETE: api/ConstructionCases/5
         <ResponseType(GetType(ConstructionCase))>
         Function DeleteConstructionCase(ByVal id As String) As IHttpActionResult

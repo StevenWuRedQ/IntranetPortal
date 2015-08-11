@@ -59,7 +59,7 @@
     }
 
     function LogClick(itemName, objData) {
-        SaveStatus(itemName, ShortSaleCaseData.CaseId, objData);
+        SaveStatus(itemName, GetShortSaleCase().CaseId, objData);
     }
 
     function SaveStatus(status, caseId, objData) {

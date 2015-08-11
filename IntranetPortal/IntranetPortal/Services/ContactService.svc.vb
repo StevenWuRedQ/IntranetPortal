@@ -78,10 +78,8 @@ Public Class ContactService
         End If
         Return Nothing
     End Function
+
     ' Add more operations here and mark them with <OperationContract()>
-
-
-
     <OperationContract()>
     <WebInvoke(Method:="POST", ResponseFormat:=WebMessageFormat.Json)>
     Public Function UploadFile(stream As Stream) As String

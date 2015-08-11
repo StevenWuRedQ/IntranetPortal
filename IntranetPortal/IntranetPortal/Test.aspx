@@ -48,16 +48,18 @@
             function UploadFile() {
                 // grab your file object from a file input
                 fileData = document.getElementById("fileUpload").files[0];
-              
+                var data = new FormData();
+                data.append("file", fileData);
+                                       
                 $.ajax({
-                    url: '/services/ContactService.svc/UploadFile?id=1&name=' + fileData.name,
+                    url: '/api/ConstructionCases/UploadFiles?bble=1004490003&fileName=' + fileData.name,
                     type: 'POST',
-                    data: fileData,
+                    data: data,
                     cache: false,
-                    dataType: 'json',
                     processData: false, // Don't process the files
-                    contentType: "application/octet-stream", // Set content type to false as jQuery will tell the server its a query string request
+                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
                     success: function (data) {
+                        alert(data);
                         alert('successful..');
                     },
                     error: function (data) {
