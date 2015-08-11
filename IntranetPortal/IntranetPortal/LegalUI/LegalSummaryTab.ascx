@@ -47,7 +47,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">CRFN #</label>
-                <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.CRFNNum">
+                <input class="ss_form_input" ng-model="LegalCase.Mortgages[0].CRFNNum">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Last Payment Date </label>
