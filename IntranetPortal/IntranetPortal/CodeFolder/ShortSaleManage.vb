@@ -10,6 +10,10 @@ Public Class ShortSaleManage
         End Get
     End Property
 
+    Public Shared Function GetSSOpenCaseLogs(startDate As DateTime, endDate As DateTime) As List(Of Core.SystemLog)
+        Return Core.SystemLog.GetLogs(OpenCaseLogTitle, startDate, endDate)
+    End Function
+
     Public Shared Function GetDocumentRequestDetail(bble As String) As String
         Dim tasks = UserTask.GetDocumentRequestTask(bble)
         If tasks.Count > 0 Then

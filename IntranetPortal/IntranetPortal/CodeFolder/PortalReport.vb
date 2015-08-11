@@ -14,7 +14,17 @@
             Dim logs = ctx.LeadsActivityLogs.Where(Function(al) (al.Category.Contains(category) Or al.Category.Contains(12)) And al.ActivityDate < endDate And al.ActivityDate > startDate And actionTypes.Contains(al.ActionType)).ToList
 
 
-            Return BuildAgentActivityData(logs, ssUsers.Distinct.ToArray)
+            Dim report = BuildAgentActivityData(logs, ssUsers.Distinct.ToArray)
+
+            Dim openCaseLogs = ShortSaleManage.GetSSOpenCaseLogs(startDate, endDate)
+
+            Return report.Select(Function(r)
+                                     Dim useLogs = openCaseLogs.Where(Function(l) l.CreateBy = r.Name).ToList
+                                     r.AmountofViewCase = useLogs.Count
+                                     r.UniqueBBLE = useLogs.Select(Function(l) l.BBLE).Distinct.Count
+                                     Return r
+                                 End Function).ToList
+
         End Using
     End Function
 
@@ -96,5 +106,6 @@
         Public Property Appointment As Integer
         Public Property Email As Integer
         Public Property UniqueBBLE As Integer
+        Public Property AmountofViewCase As Integer
     End Class
 End Class

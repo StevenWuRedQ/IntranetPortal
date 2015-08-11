@@ -1,6 +1,7 @@
 ﻿Imports IntranetPortal.Data
 
 Public Class ConstructionManage
+    Inherits ActivityManageBase
     Implements INavMenuAmount
 
     Private Const MgrRoleName As String = "Construction-Manager"
@@ -45,4 +46,21 @@ Public Class ConstructionManage
 
         Return False
     End Function
+
+#Region "Activitylog Manage"
+    Private Shared _actionLists = {"Updated pics needed", "Material order update", "Head count", "Document needed"}
+
+    Public Sub New()
+        
+    End Sub
+
+    Public Sub New(actityLog As Boolean)
+        Me.TaskActionList = _actionLists
+        Me.LogCategory = LeadsActivityLog.LogCategory.Construction
+    End Sub
+
+
+
+
+#End Region
 End Class

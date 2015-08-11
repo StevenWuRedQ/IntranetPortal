@@ -535,7 +535,7 @@
                     <i class="fa fa-comment activity_add_buttons tooltip-examples" style="margin-right: 15px; cursor: pointer" title="Previous Notes" onclick="popupPreviousNotes.Show();popupPreviousNotes.PerformCallback()"></i>
                     <% End If%>
                     <% End If%>
-                    <i class="fa fa-tasks activity_add_buttons tooltip-examples icon_btn" title="Create Task" style="margin-right: 15px;" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this);ASPxPopupSetAsTaskControl.PerformCallback();"></i>
+                    <i class="fa fa-tasks activity_add_buttons tooltip-examples icon_btn" title="Create Task" style="margin-right: 15px;" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this);ASPxPopupSetAsTaskControl.PerformCallback('Show');"></i>
                     <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
                 </div>
             </div>
@@ -627,7 +627,7 @@
                             </div>
                         </asp:Panel>
 
-                        <asp:Panel runat="server" ID="pnlTask" Visible='<%# Eval("Category").ToString.StartsWith("Task")%>'>
+                        <asp:Panel runat="server" ID="pnlTask" Visible='<%# Eval("Category").ToString.StartsWith("Task") OrElse Eval("ActionType") = IntranetPortal.LeadsActivityLog.EnumActionType.SetAsTask%>'>
                             <div class="log_item_col1" style="width: auto">
                                 <div class="font_black color_balck clearfix">
                                     <table style="width: 100%">
@@ -757,7 +757,8 @@
                                 </tbody>
                             </table>
                         </asp:Panel>
-                        <asp:Literal runat="server" Visible='<%# Not (Eval("Category").ToString.StartsWith("Task") Or Eval("Category").ToString.StartsWith("Appointment") Or Eval("Category").ToString.StartsWith("Approval") Or Eval("Category").ToString.StartsWith("DoorknockTask") Or Eval("Category").ToString.StartsWith("RecycleTask"))%>' Text='<%# String.Format("<div class=""divComments"">{0}</div>", Eval("Comments"))%>'>
+
+                        <asp:Literal runat="server" Visible='<%# Not ((Eval("Category").ToString.StartsWith("Task") orelse Eval("ActionType") = IntranetPortal.LeadsActivityLog.EnumActionType.SetAsTask) Or Eval("Category").ToString.StartsWith("Appointment") Or Eval("Category").ToString.StartsWith("Approval") Or Eval("Category").ToString.StartsWith("DoorknockTask") Or Eval("Category").ToString.StartsWith("RecycleTask"))%>' Text='<%# String.Format("<div class=""divComments"">{0}</div>", Eval("Comments"))%>'>
                         </asp:Literal>
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
@@ -1159,7 +1160,6 @@
                             <dx:ASPxComboBox runat="server" Width="100%" DropDownStyle="DropDown" ID="cbTaskAction" ClientInstanceName="cbTaskAction" CssClass="edit_drop">
                                 <Items>
                                     <dx:ListEditItem Text="" Value="" />
-
                                     <dx:ListEditItem Text="Manager Review Needed" Value="Manager Review Needed" />
                                     <dx:ListEditItem Text="Update Needed" Value="Update Needed" />
                                     <dx:ListEditItem Text="Person Lookup" Value="Lookup Request" />

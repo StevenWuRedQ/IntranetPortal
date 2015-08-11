@@ -21,6 +21,13 @@ Partial Public Class SystemLog
         End Using
     End Sub
 
+    Public Shared Function GetLogs(title As String, startDate As DateTime, endDate As DateTime) As List(Of SystemLog)
+
+        Using ctx As New CoreEntities
+            Return ctx.SystemLogs.Where(Function(l) l.Title = title And l.CreateDate > startDate And l.CreateDate < endDate).ToList
+        End Using
+    End Function
+
     Public Shared Sub LogError(title As String, ex As Exception, url As String, createby As String, bble As String)
 
         If TypeOf ex Is ThreadAbortException Then

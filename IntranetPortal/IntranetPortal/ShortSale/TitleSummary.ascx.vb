@@ -422,7 +422,7 @@ Public Class UCTitleSummary
     Private Sub RefreshGrid()
         Dim showColumn = chkFields.SelectedValues
         For Each c In AllLeadsGrid.AllColumns
-            Dim column = CType(c, GridViewDataTextColumn)
+            Dim column = CType(c, GridViewDataColumn)
             Dim name = column.FieldName
 
             If String.IsNullOrEmpty(name) Then

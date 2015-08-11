@@ -545,11 +545,8 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="Manager">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn Width="120px" Caption="Last Activity" Name="LastActivity">
-                                                        <DataItemTemplate>
-                                                            <%# GetLastActivity(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.Data.ShortSaleCase))%>
-                                                        </DataItemTemplate>
-                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataDateColumn  Width="120px" Caption="Last Activity" Name="LastActivity" FieldName="UpdateDate">
+                                                    </dx:GridViewDataDateColumn>
                                                     <dx:GridViewDataTextColumn FieldName="Owner" Caption="Assgin To">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="BBLE" Width="75px" Caption="Comments">
@@ -702,13 +699,13 @@
                                         <dx:ListEditItem Value="ProcessorContact.Name" Text="Processor" />
                                         <dx:ListEditItem Value="ListingAgentContact.Name" Text="Listing agent" />
                                         <dx:ListEditItem Value="Manager" Text="Manager" />
-                                        <dx:ListEditItem Value="LastActivity" Text="Last Activity" />
+                                        <dx:ListEditItem Value="UpdateDate" Text="Last Activity" />
                                         <dx:ListEditItem Value="Owner" Text="Assgin To" />
                                         <dx:ListEditItem Value="BBLE" Text="Comments" />
                                     </Items>
                                     <ClientSideEvents />
                                 </dx:ASPxCheckBoxList>
-                                <dx:ASPxButton runat="server" Text="View" ID="btnViewReport" UseSubmitBehavior="false">
+                                <dx:ASPxButton runat="server" Text="View" ID="btnViewReport" UseSubmitBehavior="false" AutoPostBack="false">
                                     <ClientSideEvents Click="function(s,e){AllLeadsGridClient.PerformCallback();}" />
                                 </dx:ASPxButton>
                             </div>

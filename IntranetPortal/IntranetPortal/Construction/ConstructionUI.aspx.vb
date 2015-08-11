@@ -44,5 +44,4 @@
     Protected Sub cbpLogs_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         ActivityLogs.BindData(e.Parameter)
     End Sub
-
 End Class

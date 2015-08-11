@@ -524,6 +524,7 @@
     <Compile Include="CodeFolder\EmployeePerformance.vb" />
     <Compile Include="CodeFolder\EmployeeProfile.vb" />
     <Compile Include="CodeFolder\HomeOwner.vb" />
+    <Compile Include="CodeFolder\ActivityManageBase.vb" />
     <Compile Include="CodeFolder\INavMenuAmount.vb" />
     <Compile Include="CodeFolder\Lead.vb" />
     <Compile Include="CodeFolder\LeadsActivityLog.vb" />

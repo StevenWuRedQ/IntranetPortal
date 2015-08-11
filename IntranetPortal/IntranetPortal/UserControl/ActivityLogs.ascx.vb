@@ -14,6 +14,8 @@ Public Class ActivityLogs
                                                     "</div>"
 
     Public Property DisplayMode As ActivityLogMode
+    Public Property ActivityLogProvider As ActivityManageBase
+
     Public Event MortgageStatusUpdateEvent As OnMortgageStatusUpdate
     Public Delegate Sub OnMortgageStatusUpdate(updateType As String, status As String, category As String, bble As String)
 
@@ -24,28 +26,37 @@ Public Class ActivityLogs
         Else
             gridTracking.Settings.VerticalScrollableHeight = 600
         End If
+
+        If DisplayMode = ActivityLogMode.Construction Then
+            ActivityLogProvider = New ConstructionManage(True)
+        End If
+
+    End Sub
+
+    Public Sub BindData(bble As String, activityMng As ActivityManageBase)
+        Me.ActivityLogProvider = activityMng
+        Me.BindData(bble)
     End Sub
 
     Public Sub BindData(bble As String)
         hfBBLE.Value = bble
 
-        Select Case DisplayMode
-            Case ActivityLogMode.Legal
-                gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.LogCategory.Eviction.ToString})
-            Case ActivityLogMode.Construction
-                gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.Construction.ToString})
-            Case ActivityLogMode.Eviction
-                gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.Eviction})
-            Case Else
-                gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, Nothing)
-        End Select
+        If ActivityLogProvider IsNot Nothing Then
+            gridTracking.DataSource = ActivityLogProvider.LogDataSource(bble)
+        Else
+            Select Case DisplayMode
+                Case ActivityLogMode.Legal
+                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.LogCategory.Eviction.ToString})
+                Case ActivityLogMode.Construction
+                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.Construction.ToString})
+                Case ActivityLogMode.Eviction
+                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.Eviction})
+                Case Else
+                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, Nothing)
+            End Select
+        End If
 
         gridTracking.DataBind()
-
-        'Using Context As New Entities
-        '    gridTracking.DataSource = Context.LeadsActivityLogs.Where(Function(log) log.BBLE = bble).OrderByDescending(Function(log) log.ActivityDate).ToList
-        '    gridTracking.DataBind()
-        'End Using
     End Sub
 
     Sub BindEmpList()
@@ -622,7 +633,9 @@ Public Class ActivityLogs
             End If
         End If
 
-        If category = "Task" Then
+        Dim action = CType(e.GetValue("ActionType"), LeadsActivityLog.EnumActionType)
+
+        If category = "Task" OrElse action = LeadsActivityLog.EnumActionType.SetAsTask Then
             If e.GetValue("LogID") IsNot Nothing Then
                 Dim logId = CInt(e.GetValue("LogID"))
 
@@ -966,9 +979,16 @@ Public Class ActivityLogs
     'Set as task popup call back
     Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
         Dim popup = CType(source, ASPxPopupControl)
+        
         PopupContentSetAsTask.Visible = True
         hfResend.Value = ""
         BindEmpList()
+        If e.Parameter.StartsWith("Show") Then
+            If ActivityLogProvider IsNot Nothing Then
+                Me.cbTaskAction.DataSource = ActivityLogProvider.TaskActionList
+                Me.cbTaskAction.DataBind()
+            End If
+        End If
 
         If e.Parameter.StartsWith("ResendTask") Then
             Dim logId = e.Parameter.Split("|")(1)
@@ -1014,6 +1034,10 @@ Public Class ActivityLogs
 
     Public ReadOnly Property LogCategory As LeadsActivityLog.LogCategory
         Get
+            If ActivityLogProvider IsNot Nothing Then
+                Return ActivityLogProvider.LogCategory
+            End If
+
             Select Case DisplayMode
                 Case ActivityLogMode.Leads
                     Return LeadsActivityLog.LogCategory.SalesAgent

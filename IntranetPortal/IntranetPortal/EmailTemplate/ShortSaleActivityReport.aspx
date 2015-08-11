@@ -35,7 +35,7 @@
                 <thead style="border: 1px solid black; font-weight:bold;background-color: #efefef;">
                     <tr>
                         <td>Name</td>
-                        <td>CallOwner</td>
+                        <td>View Case</td>
                         <td>Emails</td>
                         <td>Comments</td>                       
                         <td>UniqueBBLE</td>
@@ -45,8 +45,8 @@
                     <% For Each item In TeamActivityData%>                  
                     <tr>
                         <td><%= item.Name%></td>
+                        <td><%= item.AmountofViewCase%></td>
                         <td><%= item.Email%></td>
-                        <td><%= item.CallOwner %></td>
                         <td><%= item.Comments %></td>                     
                         <td><%= item.UniqueBBLE%></td>
                     </tr>                  
