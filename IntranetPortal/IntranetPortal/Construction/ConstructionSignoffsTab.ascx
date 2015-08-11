@@ -146,7 +146,7 @@
     </div>
 
 
-    <div class="ss_form" style="margin-top:70px">
+    <div class="ss_form" style="margin-top: 70px">
         <h4 class="ss_form_title title_after_notes">Electrical</h4>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
@@ -204,7 +204,7 @@
 
         </ul>
     </div>
-    <div class="ss_form " style="margin-top:70px">
+    <div class="ss_form " style="margin-top: 70px">
         <h4 class="ss_form_title title_after_notes">Construction</h4>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">

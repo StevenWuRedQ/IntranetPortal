@@ -1597,7 +1597,7 @@ li.ss_form_item_line {
 
 .ss_border {
 	border: 1px #c8c8c8 solid;
-	padding: 2px;
+	padding: 2px !important;
 }
 
 .link_pdf {

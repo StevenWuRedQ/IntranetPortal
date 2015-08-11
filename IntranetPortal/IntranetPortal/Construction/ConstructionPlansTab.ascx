@@ -28,15 +28,12 @@
                 </td>
                 <td>
                     <input type="text" class="form-control">
-
                 </td>
                 <td>
                     <input class=" form-control" ss-date>
-
                 </td>
                 <td>
                     <input class="btn" type="file">
-
                 </td>
             </tr>
 
@@ -45,7 +42,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">PW1</label>
-                 <input class="btn" type="file">
+                <input class="btn" type="file">
             </li>
 
         </ul>

@@ -50,8 +50,10 @@
 		/* init angular app, add your dependency here 'ngMaterial' */
 		var portalApp = angular.module('PortalApp', ['ngAnimate', 'ui.bootstrap', 'dx', 'ngMask', 'infinite-scroll']);
 	</script>
+    <script src="/Scripts/filters.js"></script>
+    <script src="/Scripts/services.js"></script>
 	<script src="/Scripts/directives.js"></script>
-	<script src="/Scripts/services.js"></script>
+
 	<asp:ContentPlaceHolder ID="head" runat="server">
 	</asp:ContentPlaceHolder>
 

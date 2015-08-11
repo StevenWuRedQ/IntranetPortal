@@ -2,9 +2,6 @@
 
 app.service('ptCom', [
     function () {
-        var capitalizeFirstLetter = function (string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
 
         this.arrayAdd = function (model, data) {
             if (model) {
@@ -17,12 +14,12 @@ app.service('ptCom', [
             if (model && index < model.length) {
                 if (confirm) {
                     var result = DevExpress.ui.dialog.confirm("Delete This?", "Confirm");
-                    result.done(function (dialogResult) {
+                    result.done(function(dialogResult) {
                         if (dialogResult) {
                             var deleteObj = model.splice(index, 1)[0];
                             if (callback) callback(deleteObj);
                         }
-                    })
+                    });
                 } else {
                     model.splice(index, 1);
                 }
@@ -39,49 +36,23 @@ app.service('ptCom', [
             if (zip) result += zip;
             return result;
         }
+        this.capitalizeFirstLetter = function (string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        };
 
         this.formatName = function (firstName, middleName, lastName) {
             var result = '';
-            if (firstName) result += capitalizeFirstLetter(firstName) + ' ';
-            if (middleName) result += capitalizeFirstLetter(middleName) + ' ';
-            if (lastName) result += capitalizeFirstLetter(lastName);
+            if (firstName) result += this.capitalizeFirstLetter(firstName) + ' ';
+            if (middleName) result += this.capitalizeFirstLetter(middleName) + ' ';
+            if (lastName) result += this.capitalizeFirstLetter(lastName);
             return result;
-
         }
-
-        this.capitalizeFirstLetter = capitalizeFirstLetter;
 
         this.ensureArray = function (model, scope) {
             if (scope.$eval(model + '==null')) {
                 scope.$eval(model + '=[]');
             }
         }
-
-        this.uploadFile = function (file, callback) {
-            $.ajax({
-                url: '',
-                type: 'POST',
-                data: file,
-                cache: false,
-                processData: false,
-                contentType: "application/octet-stream",
-                success: function (data) {
-                    debugger;
-                    callback(data);
-                },
-                error: function (data) {
-                    debugger;
-                    alert('upload file fails');
-                }
-            });
-        }
-
-        this.getFileName = function(fullPath) {
-            var paths = fullPath.split('/');
-            return paths[paths.length - 1];
-        }
-
-
     }]);
 
 app.service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
@@ -114,9 +85,9 @@ app.service('ptContactServices', ['$http', 'limitToFilter', function ($http, lim
     this.getAllContacts = function () {
         if (allContact) return allContact;
         return $http.get('/Services/ContactService.svc/LoadContacts')
-          .then(function (response) {
-              return limitToFilter(response.data, 10);
-          })
+            .then(function (response) {
+                return limitToFilter(response.data, 10);
+            });
     }
 
     this.getContacts = function (args, /* optional */ groupId) {
@@ -198,3 +169,63 @@ app.service('ptShortsSaleService', [
     }
 ]);
 
+app.service('ptFileService', function () {
+    this.uploadFile = function (file, rename, callback) {
+        $.ajax({
+            url: 'xxx?fileName=' + rename,
+            type: 'POST',
+            data: file,
+            cache: false,
+            processData: false,
+            contentType: "application/octet-stream",
+            success: function (data) {
+                debugger;
+                callback(data);
+            },
+            error: function (data) {
+                debugger;
+                alert('upload file fails');
+            }
+        });
+    }
+
+    this.getFileName = function (fullPath) {
+        if (fullPath) {
+            var paths = fullPath.split('/');
+            return paths[paths.length - 1];
+        }
+        return '';
+    }
+
+    this.getFileExt = function (fullPath) {
+        if (fullPath) {
+            var exts = fullPath.split('.');
+            return exts[exts.length - 1].toLowerCase();
+        }
+        return '';
+    }
+
+    this.makePreviewUrl = function (filePath) {
+        var ext = this.getFileExt(filePath);
+        switch (ext) {
+            case 'pdf':
+                return '/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath);
+                /*
+                case 'jpg':
+                    return '';
+                case 'jpeg':
+                    return '';
+                case 'bmp':
+                    return '';
+                case 'gif':
+                    return '';
+                case 'png':
+                    return '';
+                    */
+            default:
+                return '/downloadfile.aspx?pdfUrl=' + encodeURIComponent(filePath);
+
+        }
+    }
+}
+);

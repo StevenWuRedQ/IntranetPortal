@@ -1,0 +1,14 @@
+﻿<div style="margin: 2px">
+    <ul>
+        <li ng-repeat="file in fileModel" style="list-style-type: none; display: inline">
+            <a style="font-size:16px;font-weight:bold" ng-href="{{ptFileService.makePreviewUrl(file)}}" target="_blank">{{ptFileService.getFileName(file)}}</a>
+            &nbsp;<i class="fa fa-remove btn text-danger" ng-click="ptCom.arrayRemove(fileModel, $index, true)"></i>
+        </li>
+    </ul>
+</div>
+<div style="margin: 2px">
+    <span class="btn btn-default btn-file">
+        Upload<input type="file" id="{{fileId}}" />
+        <i class="fa fa-upload text-primary"></i>
+    </span>
+</div>

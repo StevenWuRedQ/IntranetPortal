@@ -1,5 +1,5 @@
 ﻿<div style="margin: 2px" ng-show="fileModel">
-    <a ng-href="/pdfViewer/web/viewer.html?file={{encodeURIComponent('/downloadfile.aspx?pdfUrl=' + fileModel)}}" target="_blank">{{getFileName(fileModel)}}</a>
+    <a ng-href="{{ptFileService.makePreviewUrl(fileModel)}}" target="_blank">{{ptFileService.getFileName(fileModel)}}</a>
     &nbsp;<i class="fa fa-remove text-danger" ng-click="delFile()"></i>
 </div>
 <div style="margin: 2px" ng-show="!fileModel">

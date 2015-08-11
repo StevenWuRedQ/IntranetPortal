@@ -184,7 +184,7 @@
                             </table>
                         </div>
                     </GroupRowTemplate>
-                </dx:GridViewDataColumn>             
+                </dx:GridViewDataColumn>
                 <dx:GridViewDataColumn Width="40px" VisibleIndex="6" Visible="false">
                     <DataItemTemplate>
                         <div class="hidden_icon">

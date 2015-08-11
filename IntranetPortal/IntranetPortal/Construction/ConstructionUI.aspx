@@ -193,8 +193,38 @@
 
             /***spliter***/
             $scope.CSCase.Utilities.Company = [];
-            $scope.CSCase.Photos.AMPhotos = "/CorporationEntity/100 Ave Equities LLC/Corporation.pdf";
-            
+            $scope.CSCase.Photos.AMPhotos = ["/CorporationEntity/100 Ave Equities LLC/Corporation.pdf","/foo/bar.jpg"];
+            $scope.DataSource = {};
+            $scope.DataSource.Collapses = {
+                'ConED': 'CSCase.Utilities.ConED.Collapsed',
+                'Energy Service': 'CSCase.Utilities.EnergyService.Collapsed',
+                'National Grid': 'CSCase.Utilities.NationalGrid.Collapsed',
+                'DEP': 'CSCase.Utilities.DEP.Collapsed',
+                'MISSING Water Meter' : 'CSCase.Utilities.MissingMeter.Collapsed',
+                'Taxes' : 'CSCase.Utilities.Taxes.Collapsed',
+                'ADT' : 'CSCase.Utilities.ADT.Collapsed',
+                'Insurance': 'CSCase.Utilities.Insurance.Collapsed',
+            }
+
+            $scope.resetCollapses = function(obj) {
+                for (var key in obj) {
+                    var value = obj[key];
+                    $scope.$eval(value + '=true');
+                }
+            };
+            $scope.$watch('CSCase.Utilities.Company', function () {
+                var ds = $scope.DataSource.Collapses;
+                var target = $scope.CSCase.Utilities.Company;
+                $scope.resetCollapses(ds);
+                for (var i in target) {
+                    $scope.$eval(ds[target[i]] + '=false');
+                }
+            }, true);
+
+            $scope.sendNotice = function (id, name) {
+                // TODO
+                var confirmed = confirm("Send Intake Sheet To " + name + " ?");
+            }
 
         }]);
     </script>

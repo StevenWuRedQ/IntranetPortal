@@ -28,6 +28,8 @@
                 <label class="ss_form_input_title">Date Purchased</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.InitialIntake.DatePurchased" ss-date>
             </li>
+        </ul>
+        <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Access</label>
                 <select class="ss_form_input" ng-model="CSCase.InitialIntake.Access">
@@ -41,14 +43,17 @@
                 <label class="ss_form_input_title">ADT Code</label>
                 <input class="ss_form_input" ng-model="CSCase.InitialIntake.ADT">
             </li>
+        </ul>
+        <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Asset Manager</label>
-                <input class="ss_form_input" ng-model="CSCase.InitialIntake.AssetManager">
+                <input type="text" class="ss_form_input" ng-model="CSCase.InitialIntake.AssetManager" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Project Manager</label>
-                <input class="ss_form_input" ng-model="CSCase.InitialIntake.ProjectManager">
+                <input type="text" class="ss_form_input" ng-model="CSCase.InitialIntake.ProjectManager" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
+
         </ul>
     </div>
 </div>
@@ -75,18 +80,42 @@
                 <input class="ss_form_input" ng-model="CSCase.InitialIntake.Signor">
             </li>
         </ul>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Upload Deed</label>
+                <pt-file file-id="SCase-InitialIntake-UploadDeed" file-model="CSCase.InitialIntake.UploadDeed"></pt-file>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Upload EIN</label>
+                <pt-file file-id="CSCase-InitialIntake-UploadEIN" file-model="CSCase.InitialIntake.UploadEIN"></pt-file>
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Upload Filing Receipt</label>
+                <pt-file file-id="CSCase-InitialIntake-UploadFilingReceipt" file-model="CSCase.InitialIntake.UploadFilingReceipt"></pt-file>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Upload Article of Operation</label>
+                <pt-file file-id="SCase-InitialIntake-UploadArticleOfOperation" file-model="CSCase.InitialIntake.UploadArticleOfOperation"></pt-file>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Upload Operation Agreement</label>
+                <pt-file file-id="CSCase-InitialIntake-UploadOperationAgreement" file-model="CSCase.InitialIntake.UploadOperationAgreement"></pt-file>
+            </li>
+        </ul>
     </div>
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Building Info</h4>
+    <h4 class="ss_form_title">Building Info<pt-collapse model="CSCase.InitialIntake.BuildingInfoCollapsed" /></h4>
     <div class="ss_border">
-
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">C/O</label>
                 <input class="ss_form_input" ng-model="CSCase.InitialIntake.CO">
             </li>
+        </ul>
+        <ul class="ss_form_box clearfix" collapse="CSCase.InitialIntake.BuildingInfoCollapsed" ng-init="CSCase.InitialIntake.BuildingInfoCollapsed=true">
             <li class="ss_form_item">
                 <label class="ss_form_input_title"># of Family</label>
                 <input class="ss_form_input" ng-model="CSCase.InitialIntake.FamilyNum">
@@ -98,6 +127,18 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Tax Class</label>
                 <input class="ss_form_input" ng-model="CSCase.InitialIntake.TaxClass">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Total Units</label>
+                <input class="ss_form_input" ng-model="CSCase.InitialIntake.TotalUnits">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Year Built</label>
+                <input class="ss_form_input" ng-model="CSCase.InitialIntake.YearBuilt">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Lot Size</label>
+                <input class="ss_form_input" ng-model="CSCase.InitialIntake.LotSize">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Building Size</label>
@@ -133,36 +174,18 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Landmark</label>
-                <pt-radio model="CSCase-InitialIntake-Landmark" name="CSCase.InitialIntake.Landmark"></pt-radio>
+                <pt-radio name="CSCase-InitialIntake-Landmark" model="CSCase.InitialIntake.Landmark"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Flood Zone</label>
                 <input class="ss_form_input" ng-model="CSCase.InitialIntake.FloodZone">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Upload Deed</label>
-                <pt-file file-id="SCase-InitialIntake-UploadDeed" file-model="CSCase.InitialIntake.UploadDeed"></pt-file>
+                <label class="ss_form_input_title">Upload GeoData Report</label>
+                <pt-file file-id="CSCase-InitialIntake-UploadGeoDataReport" file-model="CSCase.InitialIntake.UploadGeoDataReport"></pt-file>
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Upload EIN</label>
-                <pt-file file-id="CSCase-InitialIntake-UploadEIN" file-model="CSCase.InitialIntake.UploadEIN"></pt-file>
-            </li>
-
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Upload Filing Receipt</label>
-                <pt-file file-id="CSCase-InitialIntake-UploadFilingReceipt" file-model="CSCase.InitialIntake.UploadFilingReceipt"></pt-file>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Upload Article of Operation</label>
-                <pt-file file-id="SCase-InitialIntake-UploadArticleOfOperation" file-model="CSCase.InitialIntake.UploadArticleOfOperation"></pt-file>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Upload Operation Agreement</label>
-                <pt-file file-id="CSCase-InitialIntake-UploadOperationAgreement" file-model="CSCase.InitialIntake.UploadOperationAgreement"></pt-file>
-            </li>
-
-
         </ul>
+
     </div>
 </div>
 
@@ -199,34 +222,31 @@
 <div class="ss_form">
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
+            <li style="list-style-type: none; color: red"><span>Press Enter To Send Notification!</span></li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Intake Sheet</label>
-                <select class="ss_from_input" ng-model="CSCase.InitialIntake.IntakeSheet">
-                    <option value="value">text</option>
-                </select>
+                <input type="text" class="ss_form_input" ng-model="CSCase.InitialIntake.IntakeSheet" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Sketch Layout</label>
-                <pt-file file-id="CSCase-InitialIntake-Sketch" file-model="CSCase.InitialIntake.Sketch" />
+                <input type="text" class="ss_form_input" ng-model="CSCase.InitialIntake.SketchLayout" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Initial Budget</label>
-                <select class="ss_from_input" ng-model="CSCase.InitialIntake.InitialBudget">
-                    <option value="value">text</option>
-                </select>
+                <input type="text" class="ss_form_input" ng-model="CSCase.InitialIntake.InitialBudget" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
             </li>
         </ul>
     </div>
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Reports</h4>
+    <h4 class="ss_form_title">Reports
     <select ng-model="CSCase.InitialIntake.ReportsDropDown">
         <option value="Asbestos">Asbestos Report</option>
         <option value="Survey">Survey</option>
         <option value="Exhibit">Exhibit 1 & 3</option>
         <option value="TRs">TR's</option>
-    </select>
+    </select></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix" ng-show="CSCase.InitialIntake.ReportsDropDown=='Asbestos'">
             <li class="ss_form_item">
@@ -239,8 +259,10 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Vendor</label>
-                <input class="ss_form_input" ng-model="CSCase.InitialIntake.AsbestosVendor">
+                <input type="text" class="ss_form_input" ng-model="SCase.InitialIntake.AsbestosVendor" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
+
+
         </ul>
         <ul class="ss_form_box clearfix" ng-show="CSCase.InitialIntake.ReportsDropDown=='Survey'">
             <li class="ss_form_item">
@@ -251,9 +273,10 @@
                 <label class="ss_form_input_title">Date Received</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.InitialIntake.SurveyReceivedDate" ss-date>
             </li>
+
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Vendor</label>
-                <input class="ss_form_input" ng-model="CSCase.InitialIntake.SurveyVendor">
+                <input type="text" class="ss_form_input" ng-model="SCase.InitialIntake.SurveyVendor" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
         </ul>
         <ul class="ss_form_box clearfix" ng-show="CSCase.InitialIntake.ReportsDropDown=='Exhibit'">
@@ -265,9 +288,10 @@
                 <label class="ss_form_input_title">Date Received</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.InitialIntake.ExhibitReceivedDate" ss-date>
             </li>
+
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Vendor</label>
-                <input class="ss_form_input" ng-model="CSCase.InitialIntake.ExhibitVendor">
+                <input type="text" class="ss_form_input" ng-model="SCase.InitialIntake.ExhibitVendor" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
         </ul>
         <ul class="ss_form_box clearfix" ng-show="CSCase.InitialIntake.ReportsDropDown=='TRs'">
@@ -281,7 +305,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Vendor</label>
-                <input class="ss_form_input" ng-model="CSCase.InitialIntake.TRsVendor">
+                <input type="text" class="ss_form_input" ng-model="SCase.InitialIntake.TRsVendor" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
         </ul>
 

@@ -172,25 +172,24 @@ portalApp.directive('ptDel', function () {
     }
 });
 
-portalApp.directive('ptFile', ['ptCom', function (ptCom) {
+portalApp.directive('ptFile', ['ptFileService', function (ptFileService) {
     return {
         restrict: 'E',
         templateUrl: '/Scripts/templates/ptfile.html',
         scope: {
             fileModel: '=',
+            fileName: '@',
             fileId: '@'
         },
         link: function (scope, el, attrs) {
-            scope.encodeURIComponent = window.encodeURIComponent;
-            scope.getFileName = ptCom.getFileName;
+            scope.ptFileService = ptFileService;
             scope.delFile = function() {
                 scope.fileModel = '';
-
             }
             $(el).on('change', function () {
                 var file = $('#' + scope.fileId)[0].files[0];
                 debugger;
-                ptCom.uploadFile(file, function(data) {
+                ptFileService.uploadFile(file, scope.defaultName, function (data) {
                     scope.fileModel = data;
                     scope.$apply();
                 });
@@ -199,3 +198,25 @@ portalApp.directive('ptFile', ['ptCom', function (ptCom) {
     }
 }]);
 
+portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileService, ptCom) {
+    return {
+        restrict: 'E',
+        templateUrl: '/Scripts/templates/ptfiles.html',
+        scope: {
+            fileModel: '=',
+            fileName: '@',
+            fileId: '@'
+        },
+        link: function (scope, el, attrs) {
+            scope.ptFileService = ptFileService;
+            scope.ptCom = ptCom;
+            $(el).on('change', function () {
+                var file = $('#' + scope.fileId)[0].files[0];
+                ptFileService.uploadFile(file, scope.defaultName, function (data) {
+                    scope.fileModel.push(data);
+                    scope.$apply();
+                });
+            });
+        }
+    }
+}]);

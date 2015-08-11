@@ -15,30 +15,27 @@
                             {name: 'Insurance'}],
                 valueExpr: 'name',
                 displayExpr: 'name',
-                bindingOptions: {
-                    values: 'CSCase.Utilities.Company'
-                }
-                }">
+                bindingOptions: {values: 'CSCase.Utilities.Company'}}">
             </div>
         </li>
     </ul>
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">ConED</h4>
-    <div class="ss_border">
+    <h4 class="ss_form_title" ng-style="!CSCase.Utilities.ConED.Collapsed?'{color: \'red\'}':''">ConED<pt-collapse model="CSCase.Utilities.ConED.Collapsed"/></h4>
+    <div class="ss_border" collapse="CSCase.Utilities.ConED.Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">DATE</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.Utilities.ConED.Date" ss-date>
+                <input class="ss_form_input" type="text" ng-model="CSCase.Utilities.ConED.Date" ss-date />
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Rep Name</label>
-                <input class="ss_form_input" ng-model="CSCase.Utilities.ConED.RepName">
+                <input class="ss_form_input" ng-model="CSCase.Utilities.ConED.RepName" />
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Service</label>
-                <pt-radio model="CSCase.Utilities.ConED.Service" name="CSCase.Utilities.ConED.Service"></pt-radio>
+                <pt-radio name="CSCase-Utilities-ConED-Service" model="CSCase.Utilities.ConED.Service"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Meter Number</label>
@@ -46,7 +43,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Missing/Damaged Meter</label>
-                <select class="ss_form_input" ng-model="CSCase.Utilities.ConED..MissingMeter">
+                <select class="ss_form_input" ng-model="CSCase.Utilities.ConED.MissingMeter">
                     <option value="PLP">PLP</option>
                     <option value="bsmt">bsmt</option>
                     <option value="1st_Fillable">1st Fillable</option>
@@ -56,11 +53,11 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Open</label>
-                <pt-radio model="CSCase.Utilities.ConED.AccountOpen" name="CSCase.Utilities.ConED.AccountOpen"></pt-radio>
+                <pt-radio name="CSCase-Utilities-ConED-AccountOpen" model="CSCase.Utilities.ConED.AccountOpen"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Energy service required</label>
-                <pt-radio model="CSCase.Utilities.ConED.EnergyServiceRequired" name="CSCase.Utilities.ConED.EnergyServiceRequired"></pt-radio>
+                <pt-radio name="CSCase-Utilities-ConED-EnergyServiceRequired" model="CSCase.Utilities.ConED.EnergyServiceRequired"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Floor #</label>
@@ -74,21 +71,20 @@
                 <label class="ss_form_input_title">Appointments</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.Utilities.ConED.Appointments" ss-date>
             </li>
-            <li class="ss_form_item3">
-                <label class="ss_form_input_title">Note</label>
-                <textarea class="edit_text_area text_area_ss_form " ng-model="CSCase.Utilities.ConED.Note"></textarea>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">autopopulate</label>
-
-            </li>
         </ul>
+        <div>
+            <label class="ss_form_input_title">Auto Populate</label>
+        </div>
+        <div>
+            <label class="ss_form_input_title">Note</label>
+            <textarea class="edit_text_area text_area_ss_form " ng-model="CSCase.Utilities.ConED.Note"></textarea>
+        </div>
     </div>
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Energy Service</h4>
-    <div class="ss_border">
+    <h4 class="ss_form_title">Energy Service<pt-collapse model="CSCase.Utilities.EnergyService.Collapsed"/></h4>
+    <div class="ss_border" collapse="CSCase.Utilities.EnergyService.Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date</label>
@@ -100,10 +96,10 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Lic Electrician</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.Utilities.EnergyService..LicElectrician" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                <input type="text" class="ss_form_input" ng-model="CSCase.Utilities.EnergyService.LicElectrician" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Eletric permit pulled Date</label>
+                <label class="ss_form_input_title">Electric permit pulled Date</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.Utilities.EnergyService.ElecPermPulledDate" ss-date>
             </li>
             <li class="ss_form_item">
@@ -130,21 +126,23 @@
                 <label class="ss_form_input_title">Appointments</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.Utilities.EnergyService.Appointments" ss-date>
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Notes</label>
-                <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.Utilities.EnergyService.Notes"></textarea>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Upload</label>
-                <pt-file></pt-file>
-            </li>
         </ul>
+        <div class="ss_form_item">
+            <label class="ss_form_input_title">Upload</label>
+            <pt-file file-id="CSCase-Utilities-EnergyService-Upload" file-model="CSCase.Utilities.EnergyService.Upload"></pt-file>
+        </div>
+        <div>
+            <label class="ss_form_input_title">Notes</label>
+            <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.Utilities.EnergyService.Notes"></textarea>
+        </div>
+
+
     </div>
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">National Grid</h4>
-    <div class="ss_border">
+    <h4 class="ss_form_title">National Grid<pt-collapse model="CSCase.Utilities.NationalGrid.Collapsed"/></h4>
+    <div class="ss_border" collapse="CSCase.Utilities.NationalGrid.Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date</label>
@@ -160,7 +158,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Service</label>
-                <pt-radio model="CSCase.Utilities.NationalGrid.Service" name="CSCase.Utilities.NationalGrid.Service"></pt-radio>
+                <pt-radio name="CSCase-Utilities-NationalGrid-Service" model="CSCase.Utilities.NationalGrid.Service"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Meter Number</label>
@@ -168,7 +166,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Open</label>
-                <pt-radio model="CSCase.Utilities.NationalGrid.AccountOpen" name="CSCase.Utilities.NationalGrid.AccountOpen"></pt-radio>
+                <pt-radio name="CSCase-Utilities-NationalGrid-AccountOpen" model="CSCase.Utilities.NationalGrid.AccountOpen"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Num</label>
@@ -178,20 +176,22 @@
                 <label class="ss_form_input_title">Appointments</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.Utilities.NationalGrid.Appointments" ss-date>
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Notes</label>
-                <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.Utilities.NationalGrid.Notes"></textarea>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">autopopulate</label>
-            </li>
         </ul>
+
+        <div>
+            <label class="ss_form_input_title">Auto Populate</label>
+        </div>
+        <div>
+            <label class="ss_form_input_title">Notes</label>
+            <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.Utilities.NationalGrid.Notes"></textarea>
+        </div>
+
     </div>
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">DEP</h4>
-    <div class="ss_border">
+    <h4 class="ss_form_title">DEP<pt-collapse model="CSCase.Utilities.DEP.Collapsed"/></h4>
+    <div class="ss_border" collapse="CSCase.Utilities.DEP.Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date</label>
@@ -207,11 +207,11 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Service</label>
-                <pt-radio model="CSCase.Utilities.DEP.Service" name="CSCase.Utilities.DEP.Service"></pt-radio>
+                <pt-radio name="CSCase-Utilities-DEP-Service" model="CSCase.Utilities.DEP.Service"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Water Lien</label>
-                <pt-radio model="CSCase.Utilities.DEP.WaterLien" name="CSCase.Utilities.DEP.WaterLien"></pt-radio>
+                <pt-radio name="CSCase-Utilities-DEP-WaterLien" model="CSCase.Utilities.DEP.WaterLien"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Payment Agreement inplace</label>
@@ -229,22 +229,23 @@
                 <label class="ss_form_input_title">Appointments</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.Utilities.DEP.Appointments" ss-date>
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Notes</label>
-                <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.Utilities.DEP.Notes"></textarea>
-            </li>
+
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cancellation Date</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.Utilities.DEP.CancellationDate" ss-date>
             </li>
         </ul>
+        <div>
+            <label class="ss_form_input_title">Notes</label>
+            <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.Utilities.DEP.Notes"></textarea>
+        </div>
     </div>
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Missing Water Meter</h4>
-    <div class="ss_border">
+    <h4 class="ss_form_title">Missing Water Meter<pt-collapse model="CSCase.Utilities.MissingMeter.Collapsed"/></h4>
+    <div class="ss_border" collapse="CSCase.Utilities.MissingMeter.Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Plumber</label>
@@ -266,22 +267,22 @@
                 <label class="ss_form_input_title">Tap Size</label>
                 <input class="ss_form_input" ng-model="CSCase.Utilities.MissingMeter.TapSize">
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Notes</label>
-                <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.Utilities.MissingMeter.Notes"></textarea>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Upload</label>
-                <pt-file class="ss_form_input"></pt-file>
-            </li>
         </ul>
+        <div>
+            <label class="ss_form_input_title">Upload</label>
+            <pt-file class="ss_form_input" file-id="CSCase-Utilities-MissingMeter-Upload" file-model="CSCase.Utilities.MissingMeter.Upload"></pt-file>
+        </div>
+        <div>
+            <label class="ss_form_input_title">Notes</label>
+            <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.Utilities.MissingMeter.Notes"></textarea>
+        </div>
     </div>
 </div>
- 
+
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Taxes</h4>
-    <div class="ss_border">		
+    <h4 class="ss_form_title">Taxes<pt-collapse model="CSCase.Utilities.Taxes.Collapsed"/></h4>
+    <div class="ss_border" collapse="CSCase.Utilities.Taxes.Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Type</label>
@@ -301,7 +302,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Tax Lien</label>
-                <pt-radio model="CSCase.Utilities.Taxes.TaxLien" name="CSCase.Utilities.Taxes.TaxLien"></pt-radio>
+                <pt-radio name="CSCase-Utilities-Taxes-TaxLien" model="CSCase.Utilities.Taxes.TaxLien"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Payment Agreement Inplace</label>
@@ -312,8 +313,8 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">ADT</h4>
-    <div class="ss_border">		
+    <h4 class="ss_form_title">ADT<pt-collapse model="CSCase.Utilities.ADT.Collapsed"/></h4>
+    <div class="ss_border" collapse="CSCase.Utilities.ADT.Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Requested</label>
@@ -336,8 +337,8 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Insuracne</h4>
-    <div class="ss_border">		
+    <h4 class="ss_form_title">Insuracne<pt-collapse model="CSCase.Utilities.Insurance.Collapsed"/></h4>
+    <div class="ss_border" collapse="CSCase.Utilities.Insurance.Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Policy Number</label>

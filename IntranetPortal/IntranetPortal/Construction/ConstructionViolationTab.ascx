@@ -5,7 +5,7 @@
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Autopopulation From DOB Site</label>
+                <label class="ss_form_input_title">Auto population From DOB Site</label>
                 <input class="ss_form_input" type="checkbox" />
             </li>
             <li class="ss_form_item">
@@ -17,10 +17,8 @@
                 <input class="ss_form_input" ng-model="CSCase.Violations.DOB.TotalOpenViolations">
             </li>
         </ul>
-        <ul class="ss_form_box clearfix">
-            <li class="ss_form_item3">
-                <label class="ss_form_input_title">Civil Penalty</label>
-            </li>
+        <ul class="ss_form_box clearfix ss_border">
+            <li style="list-style-type: none"><span>Civil Penalty</span></li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Amount Owed</label>
                 <input class="ss_form_input" ng-model="CSCase.Violations.DOB.PenaltyAmountOwed">
@@ -63,11 +61,12 @@
                 <label class="ss_form_input_title">Description</label>
                 <input class="ss_form_input" ng-model="CSCase.Violations.DOB.Description">
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Notes</label>
-                <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.Violations.DOB.Notes"></textarea>
-            </li>
         </ul>
+        <div>
+            <label class="ss_form_input_title">Notes</label>
+            <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.Violations.DOB.Notes"></textarea>
+        </div>
+
     </div>
 </div>
 
@@ -103,16 +102,18 @@
                 <label class="ss_form_input_title">Filed Date</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.Violations.ECB.FiledDate" ss-date>
             </li>
-        </ul>
-        <ul class="ss_form_box clearfix">
-            <li class="ss_form_item3">
-                <label class="ss_form_input_title">ECB Penalty</label>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Severity</label>
+                <input class="ss_form_input" ng-model="CSCase.Violations.ECB.Severity">
             </li>
+        </ul>
+        <ul class="ss_form_box clearfix ss_border">
+            <li style="list-style-type: none"><span>ECB Penalty</span></li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Due</label>
                 <input class="ss_form_input" ng-model="CSCase.Violations.ECB.PenaltyDue">
             </li>
-                        <li class="ss_form_item">
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">Amount Owed</label>
                 <input class="ss_form_input" ng-model="CSCase.Violations.ECB.PenaltyAmountOwed">
             </li>
@@ -125,22 +126,17 @@
                 <input class="ss_form_input" ng-model="CSCase.Violations.ECB.PenaltyAmountPaid">
             </li>
         </ul>
-        <ul class="ss_form_box clearfix">
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Severity</label>
-                <input class="ss_form_input" ng-model="CSCase.Violations.ECB.Severity">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Notes</label>
-                <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.Violations.ECB.Notes"></textarea>
-            </li>    
-        </ul>
+        <div>
+            <label class="ss_form_input_title">Notes</label>
+            <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.Violations.ECB.Notes"></textarea>
+        </div>
+
     </div>
 </div>
 
 <div class="ss_form">
     <h4 class="ss_form_title">Expeditor</h4>
-    <div class="ss_border">		
+    <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Project Assigned Date</label>
@@ -152,11 +148,11 @@
 
 <div class="ss_form">
     <h4 class="ss_form_title">HPD Violation</h4>
-    <div class="ss_border">		
+    <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Open HPD Violation</label>
-                <pt-radio model="CSCase.Violations.HPD.OpenHPDViolation" name="CSCase.Violations.HPD.OpenHPDViolation"></pt-radio>
+                <pt-radio model="CSCase.Violations.HPD.OpenHPDViolation" name="CSCase-Violations-HPD-OpenHPDViolation"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Open Violation Number</label>
@@ -184,11 +180,12 @@
                     <option value="1000">Multiple Dwelling Active in the Alternative Enforcement Program (AEP) ... $ 1000</option>
                 </select>
             </li>
-            <li class="ss_form_item">
+            </ul>
+            <div>
                 <label class="ss_form_input_title">Notes</label>
                 <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.Violations.HPD.Notes"></textarea>
-            </li>
-        </ul>
+            </div>
+        
     </div>
 </div>
 
