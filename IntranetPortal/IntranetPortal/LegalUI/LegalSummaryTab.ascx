@@ -35,7 +35,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Original Loan Amt</label>
-                <input class="ss_form_input" ng-model="ShortSaleCase.Mortgages[0].LoanAmount" readonly="readonly">
+                <input class="ss_form_input" money-mask ng-model="ShortSaleCase.Mortgages[0].LoanAmount" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Executed Date</label>
