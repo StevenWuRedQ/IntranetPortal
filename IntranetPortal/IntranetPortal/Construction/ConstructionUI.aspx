@@ -156,10 +156,19 @@
         </Panes>
     </dx:ASPxSplitter>
 
-    <script>
+    <script type="text/javascript">
+
+        function LoadCaseData(bble)
+        {
+            //put construction data loading logic here
+            console.log(bble);
+        }
+
         $(document).ready(function () {
             angular.element(document.getElementById('ConstructionCtrl')).scope().init(21);
         });
+
+
 
         portalApp = angular.module('PortalApp');
         portalApp.controller('ConstructionCtrl', ['$scope', '$http', 'ptShortsSaleService', 'ptContactServices', 'ptCom', function ($scope, $http, ptShortsSaleService, ptContactServices, ptCom) {
