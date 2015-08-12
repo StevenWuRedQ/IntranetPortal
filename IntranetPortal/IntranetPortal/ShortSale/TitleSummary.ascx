@@ -501,8 +501,7 @@
                                             <h4 style="padding-top: 20px">
                                                 <i class="fa fa-folder-open with_circle title_summary_icon" style=""></i><span class="heading_text2"><%--Leads and Active--%> Files</span>
                                                 <%--<span class="table_tips" style="margin-left: 40px;">Shows all files that haven’t closed or been archived.
-                                                </span>--%>
-                                                <%--<a href="#" onclick="LoadReportLayout('Report1')">Report</a>--%>
+                                                </span>--%>                                                
                                             </h4>
                                             <%--margin-top: -35px;--%>
                                             <div style="float: right; margin-top: -35px;" class="form-inline">
@@ -510,7 +509,8 @@
                                                 <i class="fa fa-search tooltip-examples icon_btn grid_buttons" style="margin-right: 20px" onclick="SearchGrid()"></i>
                                                 <%-- <i class="fa fa-filter tooltip-examples icon_btn grid_buttons" style="margin-right: 40px"></i>--%>
                                                 <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" title="Export Pipeline" ></i>'></asp:LinkButton>
-                                                <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;" title="Export Grid Data"></i>'></asp:LinkButton>
+                                                <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 20px;" title="Export Grid Data"></i>'></asp:LinkButton>
+                                                <i class="fa fa-wrench report_head_button report_head_button_padding tooltip-examples" style="" title="Customized" onclick="AllLeadsGridClient.ShowCustomizationWindow(this)"></i>
                                                 <i class="fa fa-save report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;" title="Save Report" onclick="SaveReportPopup.Show()"></i>
                                             </div>
                                             
@@ -567,6 +567,94 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="OwnerFullName" Caption="Name">
                                                     </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.FirstOwner.MailingAddress" Caption="Mail Address">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="PropertyInfo.FirstOwner.DOB" Caption="Owner DOB">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.FirstOwner.SSN" Caption="Owner SSN">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.FirstOwner.Cell" Caption="Owner Cell">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.FirstOwner.Email" Caption="Owner Email">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.FirstOwner.Bankruptcy" Caption="Owner Bankruptcy">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ProcessorName" Caption="Processor">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ReferralUserName" Caption="Referral">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ReferralTeam" Caption="Team">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ListAgentName" Caption="List Agent">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="SellerAttorneyName" Caption="Seller Attorney">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="BuyerAttorneyName" Caption="Buyer Attorney">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="TitleCompanyName" Caption="Title Company">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FirstMortgage.LoanAmount" Caption="1st Mort Amt" PropertiesTextEdit-DisplayFormatString="C">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FirstMortgage.HasAuctionDate" Caption="1stMort Auction">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="FirstMortgage.DateOfSale" Caption="1stMort DateofSale">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="FirstMortgage.DateOfVerified" Caption="1stMort Verified">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="FirstMortgage.PayoffRequested" Caption="1stMort Payoff Requested">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="FirstMortgage.PayoffExpired" Caption="1stMort Payoff Verified">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FirstMortgage.PayoffAmount" Caption="1stMort Payoff Amt" PropertiesTextEdit-DisplayFormatString="C">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FirstMortgage.ForeclosureAttorney" Caption="1stMort Attorney">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FirstMortgage.Category" Caption="1stMort Category">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FirstMortgage.Status" Caption="1stMort Status">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FirstMortgage.Loan" Caption="1stMort Loan#">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="FirstMortgage.LastPaymentDate" Caption="1stMort LastPaymentDate">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FirstMortgage.Type" Caption="1stMort Type#">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="FirstMortgage.AuthorizationSent" Caption="1stMort Sent">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="FirstMortgage.CancelationSent" Caption="1stMort CancelationSent">
+                                                    </dx:GridViewDataDateColumn>
+
+                                                    <dx:GridViewDataTextColumn FieldName="SecondMortgage.LoanAmount" Caption="2ndMort Amt" PropertiesTextEdit-DisplayFormatString="C">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="SecondMortgage.HasAuctionDate" Caption="2ndMort Auction">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="SecondMortgage.DateOfSale" Caption="2ndMort DateofSale">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="SecondMortgage.DateOfVerified" Caption="2ndMort Verified">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="SecondMortgage.PayoffRequested" Caption="2ndMort Payoff Requested">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="SecondMortgage.PayoffExpired" Caption="2ndMort Payoff Verified">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="SecondMortgage.PayoffAmount" Caption="2ndMort Payoff Amt" PropertiesTextEdit-DisplayFormatString="C">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="SecondMortgage.ForeclosureAttorney" Caption="2ndMort Attorney">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="SecondMortgage.Category" Caption="2ndMort Category">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="SecondMortgage.Status" Caption="2ndMort Status">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="SecondMortgage.Loan" Caption="2ndMort Loan#">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="SecondMortgage.LastPaymentDate" Caption="2ndMort LastPaymentDate">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="SecondMortgage.Type" Caption="2ndMort Type#">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="SecondMortgage.AuthorizationSent" Caption="2ndMort Sent">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="SecondMortgage.CancelationSent" Caption="2ndMort CancelationSent">
+                                                    </dx:GridViewDataDateColumn>
+                                                    
                                                     <dx:GridViewDataTextColumn FieldName="StatuStr" Caption="Status">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="MortgageCategory" Caption="Category">
@@ -603,7 +691,7 @@
                                                 <SettingsPager>
                                                     <PageSizeItemSettings Visible="true"></PageSizeItemSettings>
                                                 </SettingsPager>
-                                                <SettingsBehavior ColumnResizeMode="NextColumn" EnableCustomizationWindow="true" />
+                                                <SettingsBehavior ColumnResizeMode="NextColumn" EnableCustomizationWindow="true" />                                               
                                                 <SettingsPopup>
                                                     <HeaderFilter Height="200" />
                                                 </SettingsPopup>
@@ -733,9 +821,14 @@
                                     <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" Width="100%" Height="350px" ClientInstanceName="filed_CheckBoxList1">
                                         <Items>
                                             <dx:ListEditItem Value="PropertyInfo.PropertyAddress" Text="Street address" Selected="True" />
-                                            <dx:ListEditItem Value="OwnerFullName" Text="Name" Selected="True" />
+                                            <dx:ListEditItem Value="OwnerFullName" Text="Name" Selected="True" />                                            
                                             <dx:ListEditItem Value="StatuStr" Text="Status" Selected="True" />
                                             <dx:ListEditItem Value="MortgageCategory" Text="MortgageCategory" Selected="True" />
+                                            <dx:ListEditItem Value="OwnerMailAddress" Text="Owner Mail Address" />
+                                            <dx:ListEditItem Value="OwnerDOB" Text="Owner DOB" />
+                                            <dx:ListEditItem Value="OwnerSSN" Text="Owner SSN" />
+                                            <dx:ListEditItem Value="OwnerCell" Text="Owner Cell" />
+                                            <dx:ListEditItem Value="MortgageCategory" Text="MortgageCategory" />
                                             <dx:ListEditItem Value="OccupiedBy" Text="Occupancy" />
                                             <dx:ListEditItem Value="FristMortageProgress" Text="1st Mort Prog" />
                                             <dx:ListEditItem Value="FristMortageLender" Text="1st Mort Ser " />

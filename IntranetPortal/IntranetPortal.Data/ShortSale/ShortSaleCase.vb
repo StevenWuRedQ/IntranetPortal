@@ -92,6 +92,28 @@ Partial Public Class ShortSaleCase
         End Set
     End Property
 
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property FirstMortgage As PropertyMortgage
+        Get
+            If Mortgages IsNot Nothing AndAlso Mortgages.Count > 0 Then
+                Return Mortgages(0)
+            End If
+
+            Return New PropertyMortgage
+        End Get
+    End Property
+
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property SecondMortgage As PropertyMortgage
+        Get
+            If Mortgages IsNot Nothing AndAlso Mortgages.Count > 1 Then
+                Return Mortgages(1)
+            End If
+
+            Return New PropertyMortgage
+        End Get
+    End Property
+
     Public Property PropertyOwner As PropertyOwner
     Public Property LastActivity As ShortSaleActivityLog
     Public Property PipeLine As ShortSaleActivityLog
