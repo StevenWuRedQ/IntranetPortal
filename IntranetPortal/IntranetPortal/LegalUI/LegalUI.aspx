@@ -956,6 +956,7 @@
                 $http.get(leadsInfoUrl).
                 success(function (data, status, headers, config) {
                     $scope.LeadsInfo = data;
+                    $scope.LPShow = $scope.ModelArray('LeadsInfo.LisPens');
                 }).error(function (data, status, headers, config) {
                     alert("Get Short Sale Leads failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
                 });
@@ -963,6 +964,7 @@
                 $http.get('/api/TaxLiens/' + BBLE).
                 success(function (data, status, headers, config) {
                     $scope.TaxLiens = data;
+                    $scope.TaxLiensShow = $scope.ModelArray('TaxLiens');
                 }).error(function (data, status, headers, config) {
                     alert("Get Tax Liens failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
                 });
@@ -970,7 +972,7 @@
 
             $scope.ModelArray = function (model) {
                 var array = $scope.$eval(model);
-                return array && array.length > 0 ? 'Yes' : ''
+                return (array && array.length > 0) ? 'Yes' : ''
             }
             /*return true it hight light check date  */
             $scope.HighLightFunc = function (funcStr) {

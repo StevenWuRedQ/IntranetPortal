@@ -50,7 +50,7 @@ Partial Public Class PartyContact
         End If
         query = query.ToUpper()
         Using context As New ShortSaleEntities
-            Dim result = context.PartyContacts.Where(Function(pc) pc.Name.ToUpper().Contains(query) Or pc.OfficeNO.ToUpper().Contains(query) Or pc.Cell.ToUpper().Contains(query) Or pc.CorpName.ToUpper().Contains(query)).ToList()
+            Dim result = context.PartyContacts.Where(Function(pc) (pc.Name.ToUpper().Contains(query) Or pc.OfficeNO.ToUpper().Contains(query) Or pc.Cell.ToUpper().Contains(query) Or pc.CorpName.ToUpper().Contains(query)) AndAlso (pc.Disable Is Nothing Or Not pc.Disable)).ToList()
             Return result
         End Using
     End Function

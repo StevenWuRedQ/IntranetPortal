@@ -30,7 +30,7 @@
         </ul>
     </div>
 
-    <div>
+    <div class="ss_form">
         <h4 class="ss_form_title">Mortgage</h4>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
@@ -106,15 +106,34 @@
     <div>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item" style="width: 66.6%">
-                <label class="ss_form_input_title">Are there any Tax liens?</label>
-                <select class="ss_form_input" ng-value="ModelArray('TaxLiens')">
-                  
-                    <option value="Yes">Yes</option>
+                <label class="ss_form_input_title">Are there any Tax liens?{{TaxLiensShow}}</label>
+                 
+               <select class="ss_form_input" ng-model="TaxLiensShow">
+                   <option value="">N/A</option> 
+                   <option value="Yes">Yes</option>
                     <option value="No">No</option>
-                    <option value="">N/A</option>
+                   
                 </select>
             </li>
         </ul>
+    </div>
+    <div class="ss_form" ng-show="ModelArray('TaxLiens')=='Yes'">
+        <h4 class="ss_form_title">Tax Lien</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Owner</th>
+                    <th>Amount</th>
+                    <th>Year</th>
+                </tr>
+               
+            </thead>
+            <tr ng-repeat="s in TaxLiens">
+                <td>{{s.Owner}}</td>
+                <td>{{s.LienTotal}}</td>
+                <td>{{s.Year}}</td>
+            </tr>
+        </table>
     </div>
     <div class="cssSlideUp" ng-show="ModelArray('TaxLiens')=='Yes'">
         <div class="arrow_box">
@@ -164,15 +183,38 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item" style="width: 66.6%">
                 <label class="ss_form_input_title">Are there any other misc liens?</label>
-                <select class="ss_form_input" ng-value="ModelArray('LeadsInfo.LisPens')">
+                <select class="ss_form_input" ng-model="LPShow">
+                   <option value="">N/A</option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
-                    <option value="">N/A</option>
+                    
                 </select>
             </li>
         </ul>
     </div>
     <div class="cssSlideUp" ng-show="ModelArray('LeadsInfo.LisPens')=='Yes'">
+         <h4 class="ss_form_title">Mortage Lien</h4>
+          <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Type</td>
+                    <td>Effective</td>
+                    <td>Docket Number</td>
+                    <td>Defendant</td>
+                    <td>Plaintiff</td>
+                    <td>Attorney</td>
+                </tr>
+                
+            </thead>
+              <tr ng-repeat="t in LeadsInfo.LisPens">
+                  <td>{{t.Type}}</td>
+                  <td>{{t.Effective |date:'shortDate'}}</td>
+                  <td>{{t.Docket_Number}}</td>
+                  <td>{{t.Defendant}}</td>
+                  <td>{{t.Plaintiff}}</td>
+                  <td>{{t.Attorney}}</td>
+              </tr>
+        </table>
         <div class="arrow_box">
             <ul class="ss_form_box clearfix ">
                 <li class="ss_form_item ss_form_item_line">

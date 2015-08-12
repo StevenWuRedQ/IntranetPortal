@@ -61,15 +61,14 @@
 
                             <!-- Nav tabs -->
                             <style>
-                                li.active
-                                {
-                                    background:none !important;
+                                li.active {
+                                    background: none !important;
                                 }
                             </style>
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active" ><a href="#StatusTab" aria-controls="home" role="tab" data-toggle="tab">Entity Status</a></li>
-                                <li role="presentation"  ><a href="#OfficeTab" aria-controls="profile" role="tab" data-toggle="tab">Office</a></li>
-                               
+                                <li role="presentation" class="active"><a href="#StatusTab" aria-controls="home" role="tab" data-toggle="tab">Entity Status</a></li>
+                                <li role="presentation"><a href="#OfficeTab" aria-controls="profile" role="tab" data-toggle="tab">Office</a></li>
+
                             </ul>
 
                             <!-- Tab panes -->
@@ -98,30 +97,30 @@
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="OfficeTab">
-                                    
+
                                     <div data-block="sidebar" class="sidebar js-sidebar">
                                         <div class="sidebar__item" ng-class="SelectedTeam==''?'title_selected':''">
 
                                             <div class="sidebar__title" ng-class="group.SubGroups==null||group.SubGroups.length==0?'notafter':''" ng-click="ChangeTeam('')">
                                                 All Team <span class=" badge pull-right" ng-show="TeamCount('')>0">{{TeamCount('')}} </span>
                                             </div>
-                                          
+
                                         </div>
                                         <div class="sidebar__item" ng-class="SelectedTeam==team.Name?'title_selected':''" ng-repeat="team in AllTeam">
 
                                             <div class="sidebar__title" ng-class="group.SubGroups==null||group.SubGroups.length==0?'notafter':''" ng-click="ChangeTeam(team.Name)">
                                                 {{team.Name}} <span class=" badge pull-right" ng-show="TeamCount(team.Name)>0">{{TeamCount(team.Name)}} </span>
                                             </div>
-                                          
+
                                         </div>
 
                                     </div>
                                 </div>
-                               
+
                             </div>
 
                         </div>
-                      
+
 
 
 
@@ -133,7 +132,7 @@
                         <div>
 
                             <div class="clearfix" style="color: #234b60; font-size: 20px">
-                               {{GetTitle()}} 
+                                {{GetTitle()}} 
                                 <div style="float: right">
                                     <div style="display: inline-block">
                                         <i class="fa fa-plus-circle tooltip-examples icon_btn" title="Add" style="color: #3993c1; font-size: 24px;" data-toggle="modal" data-target="#myModal"></i>
@@ -261,6 +260,45 @@
 
                     </div>
                 </div>
+
+                <div dx-popup="{
+                        width:'50%',
+                        height:'auto',
+                        title:'Email',
+                        closeOnOutsideClick: true,
+                        bindingOptions: {
+                            visible:'ShowEmailPopUp'
+                        }
+                    }">
+
+                    <div data-options="dxTemplate:{ name: 'content' }">
+                        <div class=" row">
+                            <div class="col-md-2">To</div>
+                            <div class="col-md-4">
+                                <div dx-tag-box="EmployeeDataSource()"></div>
+
+                            </div>
+                        </div>
+                        <div class=" row">
+                            <div class="col-md-2">CC</div>
+                            <div class="col-md-4">
+                                <div dx-tag-box="{
+                              
+                                placeholder: 'Select states',
+                                displayExpr: 'Email',
+                                valueExpr: 'Email',
+                                bindingOptions: {
+                                    values: 'EmailCC'
+                                }
+                            }">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
                 <div class="col-md-5">
                     <div style="padding: 10px; border-bottom: 1px solid #eee">
                         <div style="padding-bottom: 20px;">
@@ -277,12 +315,14 @@
                                         </div>
                                     </td>
                                     <td valign="top">
-                                        <input style="margin-left: 40px;" type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveCurrent()">
+                                        <input style="margin-left: 40px;" type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveCurrent()"><br />
+                                        <input style="margin-left: 40px; margin-top: 5px" type="button" class="rand-button short_sale_edit" value="Mail" ng-click="ShowEmailPopUp=true">
                                     </td>
+
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div style="height: 45px">
+                                        <div style="height: 30px">
                                             &nbsp;
                                         </div>
                                     </td>
@@ -447,8 +487,10 @@
     <script>
         var portalApp = angular.module('PortalApp');
 
-        portalApp.controller('BuyerEntityCtrl', function ($scope, $http, $element, $parse) {
-
+        portalApp.controller('BuyerEntityCtrl', ['$scope', '$http', 'ptContactServices', function ($scope, $http, ptContactServices) {
+            $scope.EmailTo = [];
+            $scope.EmailCC = [];
+            $scope.ptContactServices = ptContactServices;
             $scope.selectType = 'All Entities'
             $scope.Groups = [{ GroupName: 'All Entities' }, { GroupName: 'Available' }, { GroupName: 'Assigned Out' },
                 {
@@ -469,14 +511,12 @@
             $scope.ChangeGroups = function (name) {
                 $scope.selectType = name;
             }
-            $scope.GetTitle = function()
-            {
+            $scope.GetTitle = function () {
                 return ($scope.SelectedTeam ? ($scope.SelectedTeam == '' ? 'All Team\'s ' : $scope.SelectedTeam + '\'s ') : '') + $scope.selectType;
             }
-            $scope.ExportExcel = function()
-            {
+            $scope.ExportExcel = function () {
                 JSONToCSVConvertor($scope.filteredCorps, true, $scope.GetTitle());
-                
+
             }
             $http.get('/Services/ContactService.svc/GetAllBuyerEntities').success(function (data, status, headers, config) {
                 $scope.CorpEntites = data;
@@ -497,8 +537,7 @@
                     return 0;
                 }
                 if (g.GroupName == 'All Entities') {
-                    if ($scope.SelectedTeam)
-                    {
+                    if ($scope.SelectedTeam) {
                         return $scope.CorpEntites.filter(function (o) { return o.Office && o.Office.toLowerCase().trim() == $scope.SelectedTeam.toLowerCase().trim() }).length;
                     }
                     return $scope.CorpEntites.length;
@@ -511,31 +550,55 @@
                     return count
                 }
                 var corps = $scope.CorpEntites.filter(function (o) { return (o.Status && o.Status.toLowerCase().trim() == g.GroupName.toLowerCase().trim()) });
-                if ($scope.SelectedTeam)
-                {
+                if ($scope.SelectedTeam) {
                     corps = corps.filter(function (o) { return o.Office && o.Office.toLowerCase().trim() == $scope.SelectedTeam.toLowerCase().trim() });
                 }
                 return corps.length;
             }
-            
-            $scope.TeamCount =function(teamName)
-            {
-                if (!$scope.CorpEntites)
-                {
+
+            $scope.TeamCount = function (teamName) {
+                if (!$scope.CorpEntites) {
                     return 0;
                 }
-                var crops=[];
+                var crops = [];
                 crops = teamName ? $scope.CorpEntites.filter(function (o) { return o.Office && o.Office.toLowerCase().trim() == teamName.toLowerCase().trim() }) : $scope.CorpEntites;
-                
 
-                if ($scope.selectType&&$scope.selectType != $scope.Groups[0].GroupName)
-               {
-                    crops= crops.filter(function (o) { return o.Status && o.Status.toLowerCase().trim() == $scope.selectType.toLowerCase().trim() })
-               }
 
-               return crops.length;
+                if ($scope.selectType && $scope.selectType != $scope.Groups[0].GroupName) {
+                    crops = crops.filter(function (o) { return o.Status && o.Status.toLowerCase().trim() == $scope.selectType.toLowerCase().trim() })
+                }
+
+                return crops.length;
             }
+            $scope.EmployeeDataSource = function () {
+                var employees = $scope.ptContactServices.getContactsByGroup(4);
 
+                var mSource = new DevExpress.data.CustomStore({
+                    load: function (loadOptions) {
+                        if (loadOptions.searchValue)
+                        {
+                            var q = loadOptions.searchValue;
+                            return employees.filter(function (e) { e.Email&&(e.Email.toLowerCase() == q.toLowerCase() || e.Name.toLowerCase() == q.toLowerCase()) }).slice(0, 10);
+                        }
+                        return employees.slice(0,10);
+                    },
+                    byKey: function (key, extra) {
+                        // . . .
+                    },
+                  
+
+                });
+                return {
+                    dataSource: mSource,
+                    searchEnabled: true,
+                    placeholder: 'Type to Search',
+                    displayExpr: 'Email',
+                    valueExpr: 'Email',
+                    bindingOptions: {
+                        values: 'EmailTo'
+                    }
+                };
+            }
             $scope.EntitiesFilter = function (entity) {
                 if ($scope.selectType == 'All Entities' || (entity.Status && $scope.selectType.toLowerCase().trim() == entity.Status.toLowerCase().trim()))
                     return true;
@@ -584,8 +647,7 @@
                     alert('Add buyer Entities error : ' + JSON.stringify(data))
                 });
             }
-            $scope.ChangeTeam = function(team)
-            {
+            $scope.ChangeTeam = function (team) {
                 $scope.SelectedTeam = team;
             }
             //for view and upload document -- add by chris
@@ -632,7 +694,7 @@
             }
 
             //end - view and upload document
-        });
+        }]);
 
     </script>
 

@@ -89,7 +89,11 @@ app.service('ptContactServices', ['$http', 'limitToFilter', function ($http, lim
                 return limitToFilter(response.data, 10);
             });
     }
-
+    this.getContactsByGroup =function(groupId)
+    {
+        if (allContact) return allContact.filter(function (x) { return x.GroupId == groupId })
+       
+    }
     this.getContacts = function (args, /* optional */ groupId) {
         groupId = groupId === undefined ? null : groupId;
         return $http.get('/Services/ContactService.svc/GetContacts?args=' + args)
