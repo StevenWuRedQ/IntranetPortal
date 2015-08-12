@@ -560,7 +560,7 @@
                                                     </Row>
                                                 </Styles>
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn Name="PropertyInfo.PropertyAddress" Caption="Street address" Width="100%" FieldName="PropertyInfo.PropertyAddress">
+                                                    <dx:GridViewDataTextColumn Name="PropertyInfo.PropertyAddress" Caption="Street address" Width="100%" MinWidth="100" FieldName="PropertyInfo.PropertyAddress">
                                                         <DataItemTemplate>
                                                             <div style="cursor: pointer; width: 600px" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.Data.ShortSaleCase))%></div>
                                                         </DataItemTemplate>
