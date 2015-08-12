@@ -11,7 +11,7 @@
           </Key>
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="CaseName" Type="nvarchar" MaxLength="256" />
-          <Property Name="CaseData" Type="nvarchar(max)" />
+          <Property Name="CSCase" Type="nvarchar(max)" />
           <Property Name="Status" Type="int" />
           <Property Name="Owner" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateTime" Type="datetime" />
@@ -35,13 +35,13 @@
           </Key>
           <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
           <Property Name="CaseName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="CaseData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
           <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CSCase" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -52,13 +52,13 @@
           <EntitySetMapping Name="ConstructionCases">
             <EntityTypeMapping TypeName="ConstructionModel.ConstructionCase">
               <MappingFragment StoreEntitySet="ConstructionCases">
+                <ScalarProperty Name="CSCase" ColumnName="CSCase" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="Owner" ColumnName="Owner" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CaseData" ColumnName="CaseData" />
                 <ScalarProperty Name="CaseName" ColumnName="CaseName" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>

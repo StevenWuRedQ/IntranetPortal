@@ -59,5 +59,5 @@ End Class
 
 Public Class ConstructionCaseMetaData
     <Newtonsoft.Json.JsonConverter(GetType(Core.JsObjectToStringConverter))>
-    Public Property CaseData As String
+    Public Property CSCase As String
 End Class

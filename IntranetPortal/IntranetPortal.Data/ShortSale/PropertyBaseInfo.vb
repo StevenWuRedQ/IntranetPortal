@@ -1,6 +1,15 @@
 ﻿
 Partial Public Class PropertyBaseInfo
 
+    Public ReadOnly Property FirstOwner As PropertyOwner
+        Get
+            If Owners IsNot Nothing AndAlso Owners.Count > 0 Then
+                Return Owners(0)
+            End If
+
+            Return New PropertyOwner
+        End Get
+    End Property
 
     Public ReadOnly Property Occupancy As String
         Get
