@@ -511,7 +511,7 @@
                                                 <%-- <i class="fa fa-filter tooltip-examples icon_btn grid_buttons" style="margin-right: 40px"></i>--%>
                                                 <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" title="Export Pipeline" ></i>'></asp:LinkButton>
                                                 <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;" title="Export Grid Data"></i>'></asp:LinkButton>
-                                                <i class="fa fa-save report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;" title="Save Layout" onclick="SaveReportPopup.Show()"></i>
+                                                <i class="fa fa-save report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;" title="Save Report" onclick="SaveReportPopup.Show()"></i>
                                             </div>
                                             
                                             <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" HeaderText="Save Report" ClientInstanceName="SaveReportPopup" Modal="true" Width="400px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
@@ -765,9 +765,8 @@
                             <PanelCollection>
                                 <dx:PanelContent>
                                     <% Dim reports = SavedReports%>
-                                    <% If Not reports Is Nothing Then%>
+                                    <% If reports IsNot Nothing AndAlso reports.Count > 0 Then%>
                                     <ul class="list-group" style="font-size: 14px; box-shadow: none">
-
                                         <% For Each key In reports%>
                                         <li class="list-group-item color_gray save_report_list" style="background-color: transparent; border: 0px;">
                                             <i class="fa fa-file-o" style="font-size: 18px"></i>
@@ -778,7 +777,7 @@
                                         <% Next%>
                                     </ul>
                                     <% Else%>
-                                     No reports saved.
+                                     <span style="font-size:14px"> No reports saved.</span>
                                      <% End If%>
                                 </dx:PanelContent>
                             </PanelCollection>

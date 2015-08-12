@@ -50,6 +50,11 @@ Public Class Utility
 
     Public Shared Function GetEnumDescription(ByVal EnumConstant As [Enum]) As String
         Dim fi As FieldInfo = EnumConstant.GetType().GetField(EnumConstant.ToString())
+
+        If fi Is Nothing Then
+            Return ""
+        End If
+
         Dim attr() As DescriptionAttribute = _
                       DirectCast(fi.GetCustomAttributes(GetType(DescriptionAttribute), _
                       False), DescriptionAttribute())

@@ -482,7 +482,11 @@ Public Class UCTitleSummary
         Get
             Dim up = Employee.GetProfile(Page.User.Identity.Name)
             Dim ssReport As Dictionary(Of String, Object) = up.GetData(SSReports)
-            Return ssReport.Keys.ToArray
+            If ssReport IsNot Nothing Then
+                Return ssReport.Keys.ToArray
+            End If
+
+            Return {}
         End Get
     End Property
 
