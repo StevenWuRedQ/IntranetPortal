@@ -502,7 +502,7 @@
                                                 <i class="fa fa-folder-open with_circle title_summary_icon" style=""></i><span class="heading_text2"><%--Leads and Active--%> Files</span>
                                                 <%--<span class="table_tips" style="margin-left: 40px;">Shows all files that haven’t closed or been archived.
                                                 </span>--%>
-
+                                                <%--<a href="#" onclick="LoadReportLayout('Report1')">Report</a>--%>
                                             </h4>
                                             <%--margin-top: -35px;--%>
                                             <div style="float: right; margin-top: -35px;" class="form-inline">
@@ -511,7 +511,49 @@
                                                 <%-- <i class="fa fa-filter tooltip-examples icon_btn grid_buttons" style="margin-right: 40px"></i>--%>
                                                 <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" title="Export Pipeline" ></i>'></asp:LinkButton>
                                                 <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;" title="Export Grid Data"></i>'></asp:LinkButton>
+                                                <i class="fa fa-save report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;" title="Save Layout" onclick="SaveReportPopup.Show()"></i>
                                             </div>
+                                            
+                                            <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" HeaderText="Save Report" ClientInstanceName="SaveReportPopup" Modal="true" Width="400px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
+                                                <HeaderTemplate>
+                                                    <div class="pop_up_header_margin">
+                                                        <i class="fa fa-save with_circle pop_up_header_icon"></i>
+                                                        <span class="pop_up_header_text">Save Report</span>
+                                                    </div>
+                                                </HeaderTemplate>
+                                                <ContentCollection>
+                                                    <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol1" runat="server">
+                                                        <dx:ASPxTextBox runat="server" ID="txtReportName" Native="true" CssClass="form-control" ClientInstanceName="txtClientReportName"></dx:ASPxTextBox>
+                                                        <div style="margin-top: 20px">
+                                                            <dx:ASPxButton runat="server" ID="btnSave" AutoPostBack="false" Text="Save" CssClass="rand-button rand-button-blue">
+                                                                <ClientSideEvents Click="function(s, e){
+                                                                SaveReportPopup.Hide();
+                                                                SaveReportLayout(txtClientReportName.GetText());
+                                                                }" />
+                                                            </dx:ASPxButton>
+                                                        </div>
+                                                    </dx:PopupControlContentControl>
+                                                </ContentCollection>
+                                            </dx:ASPxPopupControl>
+
+                                            <script type="text/javascript">
+
+                                                function SaveReportLayout(name) {
+                                                    cbpSavedReportClient.PerformCallback("SaveLayout|" + name);
+                                                }
+
+                                                function LoadReportLayout(reportName) {
+                                                    AllLeadsGridClient.PerformCallback("LoadLayout|" + reportName);
+                                                }
+
+                                                function RemoveReport(name) {
+                                                    if (confirm("Are you sure to delete this report?"))
+                                                    {
+                                                        cbpSavedReportClient.PerformCallback("RemoveReport|" + name);
+                                                    }
+                                                }
+
+                                            </script>
                                             <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="8" KeyFieldName="CaseId" Width="100%" Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="300" ForeColor="#b1b2b7" Settings-HorizontalScrollBarMode="Auto" OnCustomCallback="AllLeadsGrid_OnCustomCallback">
                                                 <Styles>
                                                     <Row CssClass="summary_row">
@@ -545,7 +587,7 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="Manager">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataDateColumn  Width="120px" Caption="Last Activity" Name="LastActivity" FieldName="UpdateDate">
+                                                    <dx:GridViewDataDateColumn Width="120px" Caption="Last Activity" Name="LastActivity" FieldName="UpdateDate">
                                                     </dx:GridViewDataDateColumn>
                                                     <dx:GridViewDataTextColumn FieldName="Owner" Caption="Assgin To">
                                                     </dx:GridViewDataTextColumn>
@@ -598,7 +640,9 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="CreateDate" Caption="File Created">
                                                     </dx:GridViewDataTextColumn>
-                                                     <dx:GridViewDataTextColumn FieldName="StatuStr" Caption="Status">
+                                                    <dx:GridViewDataDateColumn Width="120px" Caption="Last Activity" Name="LastActivity" FieldName="UpdateDate">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="StatuStr" Caption="Status">
                                                     </dx:GridViewDataTextColumn>
 
                                                     <%--                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.PropertyAddress" Caption="Full Property Address">
@@ -677,7 +721,7 @@
                             <i class="fa fa-question-circle tooltip-examples" title="Check items view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
                         </div>
 
-                        <div style="margin-top: 20px; overflow: auto; height: 500px;" id="custom_fields_div">
+                        <div style="margin-top: 20px;" id="custom_fields_div">
 
                             <script type="text/javascript">
                                 function Fields_ValueChanged(s, e) {
@@ -685,33 +729,63 @@
                                 }
                             </script>
                             <div>
-                                <div class="color_gray upcase_text" style="font-size: 12px; padding-bottom: 10px;">Category </div>
-                                <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" Width="100%" ClientInstanceName="filed_CheckBoxList1">
-                                    <Items>
-                                        <dx:ListEditItem Value="PropertyInfo.PropertyAddress" Text="Street address" Selected="True" />
-                                        <dx:ListEditItem Value="OwnerFullName" Text="Name" Selected="True" />
-                                        <dx:ListEditItem Value="StatuStr" Text="Status" Selected="True" />
-                                        <dx:ListEditItem Value="MortgageCategory" Text="MortgageCategory" Selected="True" />
-                                        <dx:ListEditItem Value="OccupiedBy" Text="Occupancy" />
-                                        <dx:ListEditItem Value="FristMortageProgress" Text="1st Mort Prog" />
-                                        <dx:ListEditItem Value="FristMortageLender" Text="1st Mort Ser " />
-                                        <dx:ListEditItem Value="SencondMortageProgress" Text="2nd Mort Prog" />
-                                        <dx:ListEditItem Value="SencondMortageLender" Text="2nd Mort Ser" />
-                                        <dx:ListEditItem Value="ProcessorContact.Name" Text="Processor" />
-                                        <dx:ListEditItem Value="ListingAgentContact.Name" Text="Listing agent" />
-                                        <dx:ListEditItem Value="Manager" Text="Manager" />
-                                        <dx:ListEditItem Value="UpdateDate" Text="Last Activity" />
-                                        <dx:ListEditItem Value="Owner" Text="Assgin To" />
-                                        <dx:ListEditItem Value="BBLE" Text="Comments" />
-                                    </Items>
-                                    <ClientSideEvents />
-                                </dx:ASPxCheckBoxList>
+                                <div style="height: 360px; overflow-y: scroll">
+                                    <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" Width="100%" Height="350px" ClientInstanceName="filed_CheckBoxList1">
+                                        <Items>
+                                            <dx:ListEditItem Value="PropertyInfo.PropertyAddress" Text="Street address" Selected="True" />
+                                            <dx:ListEditItem Value="OwnerFullName" Text="Name" Selected="True" />
+                                            <dx:ListEditItem Value="StatuStr" Text="Status" Selected="True" />
+                                            <dx:ListEditItem Value="MortgageCategory" Text="MortgageCategory" Selected="True" />
+                                            <dx:ListEditItem Value="OccupiedBy" Text="Occupancy" />
+                                            <dx:ListEditItem Value="FristMortageProgress" Text="1st Mort Prog" />
+                                            <dx:ListEditItem Value="FristMortageLender" Text="1st Mort Ser " />
+                                            <dx:ListEditItem Value="SencondMortageProgress" Text="2nd Mort Prog" />
+                                            <dx:ListEditItem Value="SencondMortageLender" Text="2nd Mort Ser" />
+                                            <dx:ListEditItem Value="ProcessorContact.Name" Text="Processor" />
+                                            <dx:ListEditItem Value="ListingAgentContact.Name" Text="Listing agent" />
+                                            <dx:ListEditItem Value="Manager" Text="Manager" />
+                                            <dx:ListEditItem Value="UpdateDate" Text="Last Activity" />
+                                            <dx:ListEditItem Value="Owner" Text="Assgin To" />
+                                            <dx:ListEditItem Value="BBLE" Text="Comments" />
+                                        </Items>
+                                    </dx:ASPxCheckBoxList>
+                                </div>
                                 <dx:ASPxButton runat="server" Text="View" ID="btnViewReport" UseSubmitBehavior="false" AutoPostBack="false">
                                     <ClientSideEvents Click="function(s,e){AllLeadsGridClient.PerformCallback();}" />
                                 </dx:ASPxButton>
                             </div>
                         </div>
+
+                        <div style="padding-top: 19px; padding-bottom: 14px;" class="border_under_line">
+                            <span style="color: #234b60">Saved Reports</span>
+                            <i class="fa fa-question-circle tooltip-examples" title="Check items view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
+                        </div>
+
+                        <dx:ASPxCallbackPanel runat="server" ID="cbpSavedReport" ClientInstanceName="cbpSavedReportClient" OnCallback="cbpSavedReport_Callback">
+                            <PanelCollection>
+                                <dx:PanelContent>
+                                    <% Dim reports = SavedReports%>
+                                    <% If Not reports Is Nothing Then%>
+                                    <ul class="list-group" style="font-size: 14px; box-shadow: none">
+
+                                        <% For Each key In reports%>
+                                        <li class="list-group-item color_gray save_report_list" style="background-color: transparent; border: 0px;">
+                                            <i class="fa fa-file-o" style="font-size: 18px"></i>
+                                            <span class="drappable_field_text" onclick='LoadReportLayout(this.innerHTML)' style="cursor: pointer; width: 178px;"><% = key%></span>
+                                            <i class="fa fa-times icon_btn tooltip-examples" title="Delete" onclick='RemoveReport("<%= key %>")'></i>
+                                            <%--<button type="button" value="delete" onclick='RemoveReport("<%= key %>")'>Delete</button>--%>
+                                        </li>
+                                        <% Next%>
+                                    </ul>
+                                    <% Else%>
+                                     No reports saved.
+                                     <% End If%>
+                                </dx:PanelContent>
+                            </PanelCollection>
+                        </dx:ASPxCallbackPanel>
+
                     </div>
+
                 </div>
             </div>
         </div>

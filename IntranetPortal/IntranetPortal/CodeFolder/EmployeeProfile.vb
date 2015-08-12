@@ -17,8 +17,28 @@ Public Class EmployeeProfile
         End Set
     End Property
 
+    Public Function GetData(key As String) As Object
+        If EmployeeData Is Nothing Then
+            EmployeeData = New Dictionary(Of String, Object)
+        End If
+
+        If EmployeeData.ContainsKey(key) Then
+            Return EmployeeData(key)
+        End If
+
+        Return Nothing
+    End Function
+
+    Public Sub SetData(key As String, value As Object)
+        If EmployeeData.ContainsKey(key) Then
+            EmployeeData(key) = value
+        Else
+            EmployeeData.Add(key, value)
+        End If
+    End Sub
 
     Public Property ReportTemplates As StringDictionary
+    Private EmployeeData As New Dictionary(Of String, Object)
 End Class
 
 <Serializable>

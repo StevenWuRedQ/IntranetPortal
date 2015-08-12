@@ -482,7 +482,7 @@
                                                     </HeaderTemplate>
                                                     <ContentCollection>
                                                         <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol1" runat="server">
-                                                            <dx:ASPxTextBox runat="server" ID="txtReportName" ClientInstanceName="txtClientReportName"></dx:ASPxTextBox>
+                                                            <dx:ASPxTextBox runat="server" ID="txtReportName" Native="true" ClientInstanceName="txtClientReportName"></dx:ASPxTextBox>
                                                             <div style="margin-top: 20px">
                                                                 <dx:ASPxButton runat="server" ID="btnSave" AutoPostBack="false" Text="Save" CssClass="rand-button rand-button-blue">
                                                                     <ClientSideEvents Click="function(s, e){
@@ -586,7 +586,6 @@
                             <div style="padding-bottom: 20px;" class="border_under_line">
                                 <span style="color: #234b60">Saved Reports</span>
                                 <i class="fa fa-question-circle tooltip-examples" title="Select item view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
-
                             </div>
 
                             <dx:ASPxCallbackPanel runat="server" ID="callbackPnlTemplates" ClientInstanceName="callbackPnlTemplatesClient" OnCallback="callbackPnlTemplates_Callback">

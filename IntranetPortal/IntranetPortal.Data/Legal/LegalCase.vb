@@ -102,7 +102,7 @@ Partial Public Class LegalCase
 
     Public Shared Function GetFollowUpCases() As List(Of LegalCase)
         Using ctx As New LegalModelContainer
-            Return ctx.LegalCases.Where(Function(lc) lc.FollowUp.HasValue).ToList
+            Return ctx.LegalCases.Where(Function(lc) lc.FollowUp.HasValue).OrderByDescending(Function(lc) lc.FollowUp).ToList
         End Using
     End Function
 

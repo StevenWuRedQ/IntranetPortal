@@ -6,6 +6,7 @@ Public Class UCTitleSummary
     Inherits System.Web.UI.UserControl
 
     Public CurrentUserRole As ShortSaleRole
+    Private Const SSReports As String = "SSReport"
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
@@ -436,11 +437,93 @@ Public Class UCTitleSummary
             c.Visible = showColumn.Contains(name)
         Next
     End Sub
+
     Protected Sub AllLeadsGrid_OnCustomCallback(sender As Object, e As ASPxGridViewCustomCallbackEventArgs)
         RefreshGrid()
 
         If e.Parameters = "Load" Then
             AllLeadsGrid.DataBind()
+        End If
+
+        'If e.Parameters.StartsWith("SaveLayout") Then
+
+        '    Dim name = e.Parameters.Split("|")(1)
+
+        '    Dim up = Employee.GetProfile(Page.User.Identity.Name)
+
+        '    Dim ssReport As Dictionary(Of String, Object) = up.GetData("SSReport")
+
+        '    If ssReport Is Nothing Then
+        '        ssReport = New Dictionary(Of String, Object)
+        '    End If
+
+        '    If Not ssReport.ContainsKey(name) Then
+        '        ssReport.Add(name, AllLeadsGrid.SaveClientLayout())
+        '    Else
+        '        ssReport(name) = AllLeadsGrid.SaveClientLayout()
+        '    End If
+
+        '    up.SetData("SSReport", ssReport)
+        '    Employee.SaveProfile(Page.User.Identity.Name, up)
+        'End If
+
+        If e.Parameters.StartsWith("LoadLayout") Then
+            Dim report = e.Parameters.Split("|")(1)
+            Dim up = Employee.GetProfile(Page.User.Identity.Name)
+            Dim ssReport As Dictionary(Of String, Object) = up.GetData(SSReports)
+
+            If ssReport IsNot Nothing Then
+                AllLeadsGrid.LoadClientLayout(ssReport(report))
+            End If
+        End If
+    End Sub
+
+    Public ReadOnly Property SavedReports() As String()
+        Get
+            Dim up = Employee.GetProfile(Page.User.Identity.Name)
+            Dim ssReport As Dictionary(Of String, Object) = up.GetData(SSReports)
+            Return ssReport.Keys.ToArray
+        End Get
+    End Property
+
+    Protected Sub cbpSavedReport_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        If e.Parameter.StartsWith("SaveLayout") Then
+
+            Dim name = e.Parameter.Split("|")(1)
+
+            Dim up = Employee.GetProfile(Page.User.Identity.Name)
+
+            Dim ssReport As Dictionary(Of String, Object) = up.GetData(SSReports)
+
+            If ssReport Is Nothing Then
+                ssReport = New Dictionary(Of String, Object)
+            End If
+
+            If Not ssReport.ContainsKey(name) Then
+                ssReport.Add(name, AllLeadsGrid.SaveClientLayout())
+            Else
+                ssReport(name) = AllLeadsGrid.SaveClientLayout()
+            End If
+
+            up.SetData(SSReports, ssReport)
+            Employee.SaveProfile(Page.User.Identity.Name, up)
+        End If
+
+        If e.Parameter.StartsWith("RemoveReport") Then
+            Dim name = e.Parameter.Replace("RemoveReport|", "")
+            Dim up = Employee.GetProfile(Page.User.Identity.Name)
+
+            Dim ssReport As Dictionary(Of String, Object) = up.GetData(SSReports)
+
+            If ssReport IsNot Nothing Then
+                If ssReport.ContainsKey(name) Then
+                    ssReport.Remove(name)
+                End If
+
+                up.SetData(SSReports, ssReport)
+            End If
+
+            Employee.SaveProfile(Page.User.Identity.Name, up)
         End If
     End Sub
 End Class
