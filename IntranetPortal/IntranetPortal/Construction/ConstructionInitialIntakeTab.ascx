@@ -10,7 +10,7 @@
             </li>
             <li class="ss_form_item" style="width: 66.6%">
                 <label class="ss_form_input_title">Address</label>
-                <input class="ss_form_input" readonly ng-value="SsCase.LeadsInfo.PropertyAddress" style="width: 93.5%;">
+                <input class="ss_form_input" readonly ng-value="" style="width: 93.5%;">
             </li>
         </ul>
     </div>

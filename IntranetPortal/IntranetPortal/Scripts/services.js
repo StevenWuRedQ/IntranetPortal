@@ -14,7 +14,7 @@ app.service('ptCom', [
             if (model && index < model.length) {
                 if (confirm) {
                     var result = DevExpress.ui.dialog.confirm("Delete This?", "Confirm");
-                    result.done(function(dialogResult) {
+                    result.done(function (dialogResult) {
                         if (dialogResult) {
                             var deleteObj = model.splice(index, 1)[0];
                             if (callback) callback(deleteObj);
@@ -162,35 +162,62 @@ app.service('ptShortsSaleService', [
                             res.LeadsInfo = data1;
                             callback(res);
                         }).error(function (data1) {
-                            alert("Get Short sale Leads failed BBLE =" + res.BBLE + " error : " + JSON.stringify(data1));
+                            console.log("Get Short sale Leads failed BBLE =" + res.BBLE + " error : " + JSON.stringify(data1));
                         });
 
                 })
                 .error(function (data, status, headers, config) {
-                    alert("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
+                    console.log("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
                 });
+        }
+
+        this.getShortSaleCaseByBBLE = function (bble, callback) {
+            var url = "/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=" + bble;
+            $http.get(url)
+                .success(function (data) {
+                    var res = data?data:{};
+                    url = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + bble;
+                    $http.get(url)
+                        .success(function (data1) {
+                            res.LeadsInfo = data1;
+                            callback(res);
+                        }).error(function (data1) {
+                            console.log("Get Shor Sale Leads Info fails");
+                        });
+                }).error(function (data) {
+                    console.log("Get Short Sale By BBLE fails.");
+                }
+            );
+
         }
     }
 ]);
 
 app.service('ptFileService', function () {
-    this.uploadFile = function (file, rename, callback) {
-        $.ajax({
-            url: 'xxx?fileName=' + rename,
-            type: 'POST',
-            data: file,
-            cache: false,
-            processData: false,
-            contentType: "application/octet-stream",
-            success: function (data) {
-                debugger;
-                callback(data);
-            },
-            error: function (data) {
-                debugger;
-                alert('upload file fails');
-            }
-        });
+    this.uploadFile = function (file, bble, callback, rename) {
+        var data = new FormData();
+        data.append('file', file);
+        var fileName = rename == '' ? file.name : rename;
+        debugger;
+        if (file && bble) {
+            bble = bble.trim();
+            $.ajax({
+                url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + fileName,
+                type: 'POST',
+                data: data,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    debugger;
+                    callback(data);
+                },
+                error: function(data) {
+                    debugger;
+                    alert('upload file fails');
+                }
+            });
+        }
     }
 
     this.getFileName = function (fullPath) {
@@ -233,3 +260,18 @@ app.service('ptFileService', function () {
     }
 }
 );
+
+app.service('ptConstructionService', [
+    '$http', function ($http) {
+        this.getConstructionCases = function (bble, callback) {
+            var url = "/api/ConstructionCases/" + bble;
+            $http.get(url)
+                .success(function (data) {
+                    callback(data);
+                }).error(function (data) {
+                    console.log("Get Construction Data fails.");
+                });
+
+        }
+    }
+]);

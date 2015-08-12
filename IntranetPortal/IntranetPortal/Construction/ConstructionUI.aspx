@@ -162,17 +162,13 @@
         {
 
             //put construction data loading logic here
+            angular.element(document.getElementById('ConstructionCtrl')).scope().init(bble);
             console.log(bble);
         }
 
-        $(document).ready(function () {
-            angular.element(document.getElementById('ConstructionCtrl')).scope().init(21);
-        });
-
-
-
         portalApp = angular.module('PortalApp');
-        portalApp.controller('ConstructionCtrl', ['$scope', '$http', 'ptShortsSaleService', 'ptContactServices', 'ptCom', function ($scope, $http, ptShortsSaleService, ptContactServices, ptCom) {
+        portalApp.controller('ConstructionCtrl', ['$scope', '$http', 'ptShortsSaleService', 'ptContactServices', 'ptConstructionService', function ($scope, $http, ptShortsSaleService, ptContactServices, ptConstructionService) {
+            $scope.ptContactServices = ptContactServices;
             $scope.CSCase = {
                 InitialIntake: {},
                 Photos: {},
@@ -183,18 +179,21 @@
                 Contract: {},
                 Signoffs: {}
             };
-            $scope.ptContactServices = ptContactServices;
-            $scope.init = function (caseId) {
-                ptShortsSaleService.getShortSaleCase(caseId, function (res) {
+
+            $scope.init = function (bble) {
+                bble = bble.trim();
+                ptShortsSaleService.getShortSaleCaseByBBLE(bble, function (res) {
                     $scope.SsCase = res;
-                    leadsInfoBBLE = $scope.SsCase.BBLE;
+                });
+                ptConstructionService.getConstructionCases(bble, function(res) {
+                    $.extend($scope.CSCase, res.CaseData);
+                    $scope.BBLE = res.BBLE;
                 });
             }
 
 
             /***spliter***/
             $scope.CSCase.Utilities.Company = [];
-            $scope.CSCase.Photos.AMPhotos = ["/CorporationEntity/100 Ave Equities LLC/Corporation.pdf","/foo/bar.jpg"];
             $scope.DataSource = {};
             $scope.DataSource.Collapses = {
                 'ConED': 'CSCase.Utilities.ConED.Collapsed',
@@ -221,7 +220,6 @@
                     $scope.$eval(ds[target[i]] + '=false');
                 }
             }, true);
-
             $scope.sendNotice = function (id, name) {
                 // TODO
                 var confirmed = confirm("Send Intake Sheet To " + name + " ?");

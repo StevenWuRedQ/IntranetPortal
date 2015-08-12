@@ -82,7 +82,7 @@
             </style>
             <ul id="CSTab" class="nav nav-tabs overview_tabs" role="tablist">
                 <li class="short_sale_tab active"><a class="shot_sale_tab_a" href="#CSInitialIntake" role="tab" data-toggle="tab">Initial Intake</a></li>
-                <li class="short_sale_tab" ng-show="CSCase.InitialIntake.Access!=null"><a class="shot_sale_tab_a" href="#CSPhotos" role="tab" data-toggle="tab">Photos</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSPhotos" role="tab" data-toggle="tab">Photos</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSUtilities" role="tab" data-toggle="tab">Utilities</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSViolations" role="tab" data-toggle="tab">Violation</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSProposal" role="tab" data-toggle="tab">ProposalBids</a></li>

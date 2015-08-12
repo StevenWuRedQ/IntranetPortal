@@ -178,6 +178,7 @@ portalApp.directive('ptFile', ['ptFileService', function (ptFileService) {
         templateUrl: '/Scripts/templates/ptfile.html',
         scope: {
             fileModel: '=',
+            fileBble: '=',
             fileName: '@',
             fileId: '@'
         },
@@ -186,13 +187,12 @@ portalApp.directive('ptFile', ['ptFileService', function (ptFileService) {
             scope.delFile = function() {
                 scope.fileModel = '';
             }
-            $(el).on('change', function () {
-                var file = $('#' + scope.fileId)[0].files[0];
-                debugger;
-                ptFileService.uploadFile(file, scope.defaultName, function (data) {
+            $(el).find('input:file').change(function() {
+                var file = $(this)[0].files[0];
+                ptFileService.uploadFile(file, scope.fileBble, function(data) {
                     scope.fileModel = data;
                     scope.$apply();
-                });
+                }, scope.fileName);
             });
         }
     }
@@ -204,18 +204,19 @@ portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileServic
         templateUrl: '/Scripts/templates/ptfiles.html',
         scope: {
             fileModel: '=',
+            fileBble: '=',
             fileName: '@',
             fileId: '@'
         },
         link: function (scope, el, attrs) {
             scope.ptFileService = ptFileService;
             scope.ptCom = ptCom;
-            $(el).on('change', function () {
-                var file = $('#' + scope.fileId)[0].files[0];
-                ptFileService.uploadFile(file, scope.defaultName, function (data) {
+            $(el).find('input:file').change(function() {
+                var file = $(this)[0].files[0];
+                ptFileService.uploadFile(file, scope.fileBble, function(data) {
                     scope.fileModel.push(data);
                     scope.$apply();
-                });
+                }, scope.fileName);
             });
         }
     }

@@ -128,19 +128,25 @@ End Enum
 
 Public Enum DataStatus
     <Description("No current action")>
-    NoAction = 0
+    NoAction = 1
     <Description("S&C/LP")>
-    SCLP = 1
+    SCLP = 2
     <Description("RJI")>
-    RJI = 2
+    RJI = 3
+    <Description("Settlement Conf")>
+    SettlementConf = 4
     <Description("O/REF")>
-    OREF = 3
-    <Description("Judgement")>
-    Judgement = 4
+    OREF = 5
+    <Description("Judgment Submitted")>
+    JudgmentSubmitted = 10
+    <Description("Judgment Granted")>
+    JudgmentGranted = 11
+    <Description("Judgment Entered")>
+    JudgmentEntered = 12
     <Description("Sale Date")>
-    SaleDate = 5
+    SaleDate = 7
     <Description("Dismissed w/ Prejudice")>
-    DismissedWithPrejudice = 6
+    DismissedWithPrejudice = 8
     <Description("Dismissed w/o Prejudice")>
-    DismissedWithoutPrejudice = 7
+    DismissedWithoutPrejudice = 9
 End Enum

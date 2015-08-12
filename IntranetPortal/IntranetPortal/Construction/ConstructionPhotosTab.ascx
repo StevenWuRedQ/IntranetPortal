@@ -4,7 +4,7 @@
     <div class="ss_border">
         <div>
             <h5 class="ss_form_title">AM Photos</h5>
-            <pt-files file-id="CSCase-Photos-AMPhotos" file-model="CSCase.Photos.AMPhotos"></pt-files>
+            <pt-file file-id="CSCase-Photos-AMPhoto" file-bble="BBLE" file-Name="" file-model="CSCase.Photos.AMPhotos"></pt-file>
         </div>
         <hr />
         <div>
@@ -16,7 +16,7 @@
 
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Metor Photos</h4>
+    <h4 class="ss_form_title">Meter Photos</h4>
     <div class="ss_border">
         <div>
             <h5 class="ss_form_title">Electric Meter</h5>
@@ -41,8 +41,8 @@
     <div class="ss_border">
 
         <div>
-            <h5 class="ss_form_title">Process</h5>
-            <pt-file file-id="CSCase-Photos-Process" file-model="CSCase.Photos.WaterMeterProcess"></pt-file>
+            <h5 class="ss_form_title">Progress</h5>
+            <pt-file file-id="CSCase-Photos-Progress" file-model="CSCase.Photos.WaterMeterProgress"></pt-file>
         </div>
         <div>
             <h5 class="ss_form_title">Appliances</h5>
