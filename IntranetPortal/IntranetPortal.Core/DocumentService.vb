@@ -201,8 +201,11 @@ Public Class DocumentService
         '    file.ListItemAllFields.Update()
         '    ctx.ExecuteQuery()
         'End Using
-
-        CreateSharingLink(GetClientContext, fileUrl)
+        Try
+            CreateSharingLink(GetClientContext, fileUrl)
+        Catch ex As Exception
+            Core.SystemLog.LogError("Create Sharing Link", ex, fileUrl, uploadBy, "")
+        End Try
 
         Return result
     End Function
