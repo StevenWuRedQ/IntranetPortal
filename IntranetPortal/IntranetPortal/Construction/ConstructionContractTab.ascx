@@ -7,7 +7,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Contact</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.ElectricalName" ng-change="SCCase.ElectricalId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="CSCase.ElectricalId=$item.ContactId" bind-id="SsCase.ElectricalId">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.ElectricalName" ng-change="SCCase.ElectricalId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="CSCase.CSCase.ElectricalId=$item.ContactId" bind-id="SsCase.ElectricalId">
             </li>
 
             <li class="ss_form_item">
@@ -34,7 +34,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Contact</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.ElectricalName" ng-change="SCCase.ElectricalId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="CSCase.ElectricalId=$item.ContactId" bind-id="SsCase.ElectricalId">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.ElectricalName" ng-change="SCCase.ElectricalId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="CSCase.CSCase.ElectricalId=$item.ContactId" bind-id="SsCase.ElectricalId">
             </li>
 
             <li class="ss_form_item">
@@ -60,7 +60,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Contact</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.ElectricalName" ng-change="SCCase.ElectricalId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="CSCase.ElectricalId=$item.ContactId" bind-id="SsCase.ElectricalId">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.ElectricalName" ng-change="SCCase.ElectricalId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="CSCase.CSCase.ElectricalId=$item.ContactId" bind-id="SsCase.ElectricalId">
             </li>
 
             <li class="ss_form_item">

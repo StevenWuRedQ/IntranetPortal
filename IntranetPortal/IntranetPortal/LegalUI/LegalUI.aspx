@@ -834,7 +834,6 @@
 
             $scope.SaveLegal = function (scuessfunc) {
                 var json = JSON.stringify($scope.LegalCase);
-
                 var data = { bble: leadsInfoBBLE, caseData: json };
                 $http.post('LegalUI.aspx/SaveCaseData', data).
                     success(function () {

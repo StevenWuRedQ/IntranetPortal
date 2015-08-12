@@ -89,10 +89,9 @@ app.service('ptContactServices', ['$http', 'limitToFilter', function ($http, lim
                 return limitToFilter(response.data, 10);
             });
     }
-    this.getContactsByGroup =function(groupId)
-    {
+    this.getContactsByGroup = function (groupId) {
         if (allContact) return allContact.filter(function (x) { return x.GroupId == groupId })
-       
+
     }
     this.getContacts = function (args, /* optional */ groupId) {
         groupId = groupId === undefined ? null : groupId;
@@ -175,7 +174,7 @@ app.service('ptShortsSaleService', [
             var url = "/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=" + bble;
             $http.get(url)
                 .success(function (data) {
-                    var res = data?data:{};
+                    var res = data ? data : {};
                     url = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + bble;
                     $http.get(url)
                         .success(function (data1) {
@@ -208,11 +207,11 @@ app.service('ptFileService', function () {
                 cache: false,
                 processData: false,
                 contentType: false,
-                success: function(data) {
+                success: function (data) {
                     debugger;
                     callback(data);
                 },
-                error: function(data) {
+                error: function (data) {
                     debugger;
                     alert('upload file fails');
                 }
@@ -254,7 +253,7 @@ app.service('ptFileService', function () {
                     return '';
                     */
             default:
-                return '/downloadfile.aspx?pdfUrl=' + encodeURIComponent(filePath);
+                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
 
         }
     }
@@ -267,11 +266,26 @@ app.service('ptConstructionService', [
             var url = "/api/ConstructionCases/" + bble;
             $http.get(url)
                 .success(function (data) {
-                    callback(data);
+                    if (callback) callback(data);
                 }).error(function (data) {
                     console.log("Get Construction Data fails.");
                 });
 
+        }
+
+        this.saveConstructionCases = function (bble, data, callback) {
+            if (bble && data) {
+                debugger;
+                bble = bble.trim();
+                var url = "/api/ConstructionCases/" + bble;
+                $http.put(url, data)
+                    .success(function (res) {
+                        if (callback) callback(res);
+                        alert("Save successfully!");
+                    }).error(function () {
+                        console.log('Save CSCase fails.');
+                    });
+            }
         }
     }
 ]);

@@ -11,10 +11,12 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
 
+
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
         <Panes>
 
-            <%-- list panel --%>
+
+            <%-- list panel  --%>
             <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
                 <ContentCollection>
                     <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
@@ -23,7 +25,7 @@
                 </ContentCollection>
             </dx:SplitterPane>
 
-            <%-- data panel --%>
+            <%-- data panel     --%>
             <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="None" PaneStyle-Paddings-Padding="0px" Name="dataPane">
                 <ContentCollection>
                     <dx:SplitterContentControl>
@@ -73,7 +75,7 @@
                                         </div>
                                     </li>
                                     <li class="pull-right" style="margin-right: 30px; color: #ffa484">
-                                        <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
+                                        <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="saveCSCase()" data-original-title="Save"></i>
                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
                                     </li>
@@ -126,6 +128,7 @@
                 </ContentCollection>
             </dx:SplitterPane>
 
+
             <%-- log panel --%>
             <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9" PaneStyle-Paddings-Padding="0px" Name="LogPanel">
                 <ContentCollection>
@@ -158,8 +161,7 @@
 
     <script type="text/javascript">
 
-        function LoadCaseData(bble)
-        {
+        function LoadCaseData(bble) {
 
             //put construction data loading logic here
             angular.element(document.getElementById('ConstructionCtrl')).scope().init(bble);
@@ -169,7 +171,7 @@
         portalApp = angular.module('PortalApp');
         portalApp.controller('ConstructionCtrl', ['$scope', '$http', 'ptShortsSaleService', 'ptContactServices', 'ptConstructionService', function ($scope, $http, ptShortsSaleService, ptContactServices, ptConstructionService) {
             $scope.ptContactServices = ptContactServices;
-            $scope.CSCase = {
+            $scope.CSCase.CSCase = {
                 InitialIntake: {},
                 Photos: {},
                 Utilities: {},
@@ -185,36 +187,39 @@
                 ptShortsSaleService.getShortSaleCaseByBBLE(bble, function (res) {
                     $scope.SsCase = res;
                 });
-                ptConstructionService.getConstructionCases(bble, function(res) {
-                    $.extend($scope.CSCase, res.CaseData);
-                    $scope.BBLE = res.BBLE;
+                ptConstructionService.getConstructionCases(bble, function (res) {
+                    $.extend($scope.CSCase, res);
                 });
             }
 
-
-            /***spliter***/
-            $scope.CSCase.Utilities.Company = [];
-            $scope.DataSource = {};
-            $scope.DataSource.Collapses = {
-                'ConED': 'CSCase.Utilities.ConED.Collapsed',
-                'Energy Service': 'CSCase.Utilities.EnergyService.Collapsed',
-                'National Grid': 'CSCase.Utilities.NationalGrid.Collapsed',
-                'DEP': 'CSCase.Utilities.DEP.Collapsed',
-                'MISSING Water Meter' : 'CSCase.Utilities.MissingMeter.Collapsed',
-                'Taxes' : 'CSCase.Utilities.Taxes.Collapsed',
-                'ADT' : 'CSCase.Utilities.ADT.Collapsed',
-                'Insurance': 'CSCase.Utilities.Insurance.Collapsed',
+            $scope.saveCSCase = function () {
+                var data = JSON.stringify($scope.CSCase);
+                ptConstructionService.saveConstructionCases($scope.BBLE, data);
             }
 
-            $scope.resetCollapses = function(obj) {
+            /***spliter***/
+            $scope.CSCase.CSCase.Utilities.Company = [];
+            $scope.DataSource = {};
+            $scope.DataSource.Collapses = {
+                'ConED': 'CSCase.CSCase.Utilities.ConED.Collapsed',
+                'Energy Service': 'CSCase.CSCase.Utilities.EnergyService.Collapsed',
+                'National Grid': 'CSCase.CSCase.Utilities.NationalGrid.Collapsed',
+                'DEP': 'CSCase.CSCase.Utilities.DEP.Collapsed',
+                'MISSING Water Meter': 'CSCase.CSCase.Utilities.MissingMeter.Collapsed',
+                'Taxes': 'CSCase.CSCase.Utilities.Taxes.Collapsed',
+                'ADT': 'CSCase.CSCase.Utilities.ADT.Collapsed',
+                'Insurance': 'CSCase.CSCase.Utilities.Insurance.Collapsed',
+            }
+
+            $scope.resetCollapses = function (obj) {
                 for (var key in obj) {
                     var value = obj[key];
                     $scope.$eval(value + '=true');
                 }
             };
-            $scope.$watch('CSCase.Utilities.Company', function () {
+            $scope.$watch('CSCase.CSCase.Utilities.Company', function () {
                 var ds = $scope.DataSource.Collapses;
-                var target = $scope.CSCase.Utilities.Company;
+                var target = $scope.CSCase.CSCase.Utilities.Company;
                 $scope.resetCollapses(ds);
                 for (var i in target) {
                     $scope.$eval(ds[target[i]] + '=false');
