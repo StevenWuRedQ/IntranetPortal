@@ -205,6 +205,7 @@ Public Class DocumentService
             CreateSharingLink(GetClientContext, fileUrl)
         Catch ex As Exception
             Core.SystemLog.LogError("Create Sharing Link", ex, fileUrl, uploadBy, "")
+            Return result
         End Try
 
         Return result

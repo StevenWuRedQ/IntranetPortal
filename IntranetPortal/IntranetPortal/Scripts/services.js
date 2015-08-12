@@ -26,6 +26,17 @@ app.service('ptCom', [
             }
         };
 
+        
+
+        this.ensureArray = function(model) {
+            model = (model == null || !(model instanceof Array)) ? [] : model;
+        }
+
+        this.createPush = function (model, data) {
+            this.ensureArray(model);
+            model.push(data);
+        }
+
         this.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
             var result = '';
             if (strNO) result += strNO + ' ';
@@ -198,7 +209,9 @@ app.service('ptFileService', function () {
         data.append('file', file);
         var fileName = rename == '' ? file.name : rename;
         debugger;
-        if (file && bble) {
+        if (!file || !bble) {
+            alert('Upload infomation missing!');
+        } else {
             bble = bble.trim();
             $.ajax({
                 url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + fileName,

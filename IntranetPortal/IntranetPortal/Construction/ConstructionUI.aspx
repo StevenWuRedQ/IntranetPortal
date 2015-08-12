@@ -171,6 +171,7 @@
         portalApp = angular.module('PortalApp');
         portalApp.controller('ConstructionCtrl', ['$scope', '$http', 'ptShortsSaleService', 'ptContactServices', 'ptConstructionService', function ($scope, $http, ptShortsSaleService, ptContactServices, ptConstructionService) {
             $scope.ptContactServices = ptContactServices;
+            $scope.CSCase = {}
             $scope.CSCase.CSCase = {
                 InitialIntake: {},
                 Photos: {},
@@ -194,7 +195,7 @@
 
             $scope.saveCSCase = function () {
                 var data = JSON.stringify($scope.CSCase);
-                ptConstructionService.saveConstructionCases($scope.BBLE, data);
+                ptConstructionService.saveConstructionCases($scope.CSCase.BBLE, data);
             }
 
             /***spliter***/

@@ -211,9 +211,11 @@ portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileServic
         link: function (scope, el, attrs) {
             scope.ptFileService = ptFileService;
             scope.ptCom = ptCom;
-            $(el).find('input:file').change(function() {
+            $(el).find('input:file').change(function () {
+                scope.fileModel = scope.fileModel == null ? [] : scope.fileModel;
                 var file = $(this)[0].files[0];
-                ptFileService.uploadFile(file, scope.fileBble, function(data) {
+                ptFileService.uploadFile(file, scope.fileBble, function (data) {
+                    debugger;
                     scope.fileModel.push(data);
                     scope.$apply();
                 }, scope.fileName);

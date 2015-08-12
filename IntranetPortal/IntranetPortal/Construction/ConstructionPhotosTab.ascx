@@ -4,7 +4,7 @@
     <div class="ss_border">
         <div>
             <h5 class="ss_form_title">AM Photos</h5>
-            <pt-file file-id="CSCase-Photos-AMPhoto" file-bble="BBLE" file-Name="" file-model="CSCase.CSCase.Photos.AMPhotos"></pt-file>
+            <pt-files file-bble="CSCase.BBLE" file-id="CSCase-Photos-AMPhoto"  file-Name="" file-model="CSCase.CSCase.Photos.AMPhotos"></pt-files>
         </div>
         <hr />
         <div>
