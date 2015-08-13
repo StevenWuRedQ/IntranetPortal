@@ -382,7 +382,18 @@ Partial Public Class ShortSaleCase
     Function GetMortageLonder(ByVal index As Integer) As String
         If (Mortgages IsNot Nothing AndAlso Mortgages.Count > index) Then
 
-            Return Mortgages.OrderBy(Function(mort) mort.MortgageId).ToList(index).Lender
+            Dim mtg = Mortgages.OrderBy(Function(mort) mort.MortgageId).ToList(index)
+
+            If Not String.IsNullOrEmpty(mtg.Lender) Then
+                Return mtg.Lender
+            Else
+                If mtg.LenderId.HasValue Then
+                    Dim party = PartyContact.GetContact(mtg.LenderId)
+                    If party IsNot Nothing Then
+                        Return party.Name
+                    End If
+                End If
+            End If
         End If
         Return Nothing
     End Function
@@ -784,6 +795,7 @@ Partial Public Class ShortSaleCase
 
         If party IsNot Nothing Then
             Me.Processor = party.ContactId
+            Me.ProcessorName = owner
         End If
 
         Me.UpdateDate = DateTime.Now

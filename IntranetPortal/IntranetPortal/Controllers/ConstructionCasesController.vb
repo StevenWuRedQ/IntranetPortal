@@ -87,7 +87,7 @@ Namespace Controllers
             Dim results = New List(Of String)
 
             If HttpContext.Current.Request.Files.Count > 0 Then
-                For Each file In HttpContext.Current.Request.Files
+                For Each file As HttpPostedFile In HttpContext.Current.Request.Files
                     Dim ms = New MemoryStream()
                     file.InputStream.CopyTo(ms)
                     Dim bble = HttpContext.Current.Request.QueryString("bble")
