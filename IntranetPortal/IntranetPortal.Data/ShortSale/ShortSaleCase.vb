@@ -114,6 +114,28 @@ Partial Public Class ShortSaleCase
         End Get
     End Property
 
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property ValuationData As PropertyValueInfo
+        Get
+            If ValueInfoes IsNot Nothing AndAlso ValueInfoes.Count > 0 Then
+                Return ValueInfoes(0)
+            End If
+
+            Return New PropertyValueInfo
+        End Get
+    End Property
+
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property OfferData As ShortSaleOffer
+        Get
+            If ShortSaleOffers IsNot Nothing AndAlso ShortSaleOffers.Count > 0 Then
+                Return ShortSaleOffers(0)
+            End If
+
+            Return New ShortSaleOffer
+        End Get
+    End Property
+
     Public Property PropertyOwner As PropertyOwner
     Public Property LastActivity As ShortSaleActivityLog
     Public Property PipeLine As ShortSaleActivityLog
@@ -541,9 +563,9 @@ Partial Public Class ShortSaleCase
 
                 Dim sb As New StringBuilder
                 sb.Append(NewLine("Current Offer", String.Format("{0:c}", ShortSaleOffers(0).OfferAmount)))
-                sb.Append(NewLine("Date offer submitted", ""))
-                sb.Append(NewLine("Counter from Lender", ""))
-                sb.Append(NewLine("Buyer's Counter", ""))
+                sb.Append(NewLine("Date offer submitted", String.Format("{0:d}", ShortSaleOffers(0).DateSubmited)))
+                sb.Append(NewLine("Counter from Lender", ShortSaleOffers(0).OfferType))
+                sb.Append(NewLine("Buyer's Counter", ShortSaleOffers(0).BuyerEntity))
                 Return sb.ToString
             End If
 
