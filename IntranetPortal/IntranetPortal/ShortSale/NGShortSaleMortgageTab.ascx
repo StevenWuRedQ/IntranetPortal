@@ -71,9 +71,7 @@
 
         <div class="ss_form">
             <h4 class="ss_form_title" style="display: inline">Mortgage Company&nbsp
-            <select class="class="ss_form_item" ng-model="mortgage.LenderId" ng-options="bank.ContactId as bank.Name for bank in bankNameOptions"></select>&nbsp;
-            <i class="fa fa-compress icon_btn text-primary" ng-show="mortgageCompanyCollapse" ng-click="mortgageCompanyCollapse = !mortgageCompanyCollapse"></i>
-            <i class="fa fa-expand icon_btn text-primary" ng-show="!mortgageCompanyCollapse" ng-click="mortgageCompanyCollapse = !mortgageCompanyCollapse"></i></h4>
+                <select ng-model="mortgage.LenderId" ng-options="bank.ContactId as bank.Name for bank in bankNameOptions"></select>&nbsp;<pt-collapse model="mortgageCompanyCollapse" /></h4>
             <div class="ss_border">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">

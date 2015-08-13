@@ -10,7 +10,7 @@
             </li>
             <li class="ss_form_item" style="width: 66.6%">
                 <label class="ss_form_input_title">Address</label>
-                <input class="ss_form_input" readonly ng-value="" style="width: 93.5%;">
+                <input class="ss_form_input" readonly ng-value="SsCase.LeadsInfo.PropertyAddress" style="width: 93.5%;">
             </li>
         </ul>
     </div>
@@ -188,6 +188,10 @@
                 <label class="ss_form_input_title">Upload GeoData Report</label>
                 <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-UploadGeoDataReport" file-model="CSCase.CSCase.InitialIntake.UploadGeoDataReport"></pt-file>
             </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Upload C/O</label>
+                <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-UploadCO" file-model="CSCase.CSCase.InitialIntake.UploadCO"></pt-file>
+            </li>
         </ul>
 
     </div>
@@ -266,7 +270,20 @@
             </ul>
     </div>
 </div>
-
+<div class="ss_form">
+    <h4 class="ss_form_title">Job Type
+        <select ng-model="CSCase.CSCase.InitialIntake.JobType1">
+            <option value="ALT1">ALT1</option>
+            <option value="ALT2">ALT2</option>
+            <option value="ALT2_EXT">ALT2 Extension</option>
+            <option value="Complated_Demo">Complated Demo</option>
+        </select>
+        <select ng-model="CSCase.CSCase.InitialIntake.JobType2" ng-show="CSCase.CSCase.InitialIntake.JobType1=='Complated_Demo'">
+            <option value="ALT1">ALT1</option>
+            <option value="ALT2">ALT2</option>
+        </select>
+    </h4>
+</div>
 <div class="ss_form">
     <h4 class="ss_form_title">Reports
     <select ng-model="CSCase.CSCase.InitialIntake.ReportsDropDown">
@@ -349,6 +366,6 @@
                 <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-TRsUpload" file-model="CSCase.CSCase.InitialIntake.TRsUpload"></pt-file>
             </li>
         </ul>
-
     </div>
 </div>
+

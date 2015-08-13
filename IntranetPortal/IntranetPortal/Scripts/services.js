@@ -48,15 +48,17 @@ app.service('ptCom', [
             return result;
         }
 
-        this.ensureArray = function (model, scope) {
-            if (scope.$eval(model + '==null')) {
-                scope.$eval(model + '=[]');
+        this.ensureArray = function (scope, modelName) {
+            /* caution: due to the ".", don't eval to create an array more than one level*/
+            if (!scope.$eval(modelName)) {
+                scope.$eval(modelName + '=[]');
             }
         }
 
-        this.createPush = function (model, data) {
-            this.ensureArray(model);
-            model.push(data);
+        this.ensurePush = function (scope, modelName, data) {
+            this.ensureArray(scope, modelName);
+            data = data ? data : {}
+            scope.$eval(modelName).push(data);
         }
     }]);
 

@@ -11,10 +11,8 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
 
-
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
         <Panes>
-
 
             <%-- list panel  --%>
             <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
@@ -169,8 +167,10 @@
         }
 
         portalApp = angular.module('PortalApp');
-        portalApp.controller('ConstructionCtrl', ['$scope', '$http', 'ptShortsSaleService', 'ptContactServices', 'ptConstructionService', function ($scope, $http, ptShortsSaleService, ptContactServices, ptConstructionService) {
+        portalApp.controller('ConstructionCtrl', ['$scope', '$http', 'ptCom', 'ptShortsSaleService', 'ptContactServices', 'ptConstructionService', function ($scope, $http, ptCom, ptShortsSaleService, ptContactServices, ptConstructionService) {
             $scope.ptContactServices = ptContactServices;
+            $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
+            $scope.arrayRemove = ptCom.arrayRemove;
             $scope.CSCase = {}
             $scope.CSCase.CSCase = {
                 InitialIntake: {},
@@ -202,14 +202,14 @@
             $scope.CSCase.CSCase.Utilities.Company = [];
             $scope.DataSource = {};
             $scope.DataSource.Shown = {
-                'ConED': 'CSCase.CSCase.Utilities.ConED.Shown',
-                'Energy Service': 'CSCase.CSCase.Utilities.EnergyService.Shown',
-                'National Grid': 'CSCase.CSCase.Utilities.NationalGrid.Shown',
-                'DEP': 'CSCase.CSCase.Utilities.DEP.Shown',
-                'MISSING Water Meter': 'CSCase.CSCase.Utilities.MissingMeter.Shown',
-                'Taxes': 'CSCase.CSCase.Utilities.Taxes.Shown',
-                'ADT': 'CSCase.CSCase.Utilities.ADT.Shown',
-                'Insurance': 'CSCase.CSCase.Utilities.Insurance.Shown',
+                'ConED': 'CSCase.CSCase.Utilities.ConED_Shown',
+                'Energy Service': 'CSCase.CSCase.Utilities.EnergyService_Shown',
+                'National Grid': 'CSCase.CSCase.Utilities.NationalGrid_Shown',
+                'DEP': 'CSCase.CSCase.Utilities.DEP_Shown',
+                'MISSING Water Meter': 'CSCase.CSCase.Utilities.MissingMeter_Shown',
+                'Taxes': 'CSCase.CSCase.Utilities.Taxes_Shown',
+                'ADT': 'CSCase.CSCase.Utilities.ADT_Shown',
+                'Insurance': 'CSCase.CSCase.Utilities.Insurance_Shown',
             };
             $scope.resetCompany = function (obj) {
                 for (var key in obj) {
@@ -224,16 +224,16 @@
                 for (var i in target) {
                     $scope.$eval(ds[target[i]] + '=true');
                 }
-                $scope.CSCase.CSCase.Utilities.ConED.EnergyServiceRequired = target.indexOf('Energy Service') >= 0;
+                $scope.CSCase.CSCase.Utilities.ConED_EnergyServiceRequired = target.indexOf('Energy Service') >= 0;
             }, true);
             $scope.sendNotice = function (id, name) {
                 // TODO
                 var confirmed = confirm("Send Intake Sheet To " + name + " ?");
             }
-            $scope.$watch('CSCase.CSCase.Utilities.ConED.EnergyServiceRequired', function(newVal) {
+            $scope.$watch('CSCase.CSCase.Utilities.ConED_EnergyServiceRequired', function(newVal) {
                 if (newVal) {
                     if ($scope.CSCase.CSCase.Utilities.Company.indexOf('Energy Service') < 0) $scope.CSCase.CSCase.Utilities.Company.push('Energy Service');
-                    $scope.CSCase.CSCase.Utilities.EnergyService.Collapsed = false;
+                    $scope.CSCase.CSCase.Utilities.EnergyService_Collapsed = false;
                 } else {
                     var index;
                     if ((index = $scope.CSCase.CSCase.Utilities.Company.indexOf('Energy Service')) != -1) $scope.CSCase.CSCase.Utilities.Company.splice(index, 1);
