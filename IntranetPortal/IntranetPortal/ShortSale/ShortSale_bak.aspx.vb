@@ -188,13 +188,14 @@ Public Class ShortSalePage
     Sub MortgageStatusUpdate(mortageType As String, status As String, category As String, bble As String) Handles ActivityLogs.MortgageStatusUpdateEvent
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
 
+        Dim updateBy = User.Identity.Name
         Select Case mortageType
             Case "2nd Lien"
-                ssCase.UpdateMortgageStatus(1, category, status)
+                ssCase.UpdateMortgageStatus(1, category, status, updateBy)
             Case "3rd Lien"
-                ssCase.UpdateMortgageStatus(2, category, status)
+                ssCase.UpdateMortgageStatus(2, category, status, updateBy)
             Case Else
-                ssCase.UpdateMortgageStatus(0, category, status)
+                ssCase.UpdateMortgageStatus(0, category, status, updateBy)
         End Select
     End Sub
 

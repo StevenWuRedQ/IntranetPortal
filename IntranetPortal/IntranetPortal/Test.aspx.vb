@@ -55,7 +55,7 @@ Public Class Test
             Dim data = JObject.Parse(c.CaseData)
             data("CaseName") = c.CaseName
             c.CaseData = data.ToJsonString
-            c.SaveData()
+            c.SaveData(Page.User.Identity.Name)
         Next
         UpdateStauts.Text = "completed"
     End Sub

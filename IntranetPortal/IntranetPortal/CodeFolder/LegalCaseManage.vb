@@ -6,6 +6,17 @@ Public Class LegalCaseManage
     Implements INavMenuAmount
 
     Private Const MgrRoleName As String = "Legal-Manager"
+    Private Const LogTitleSave As String = "LegalOpen"
+
+
+    Public Shared Function GetCaseData(bble As String, userName As String) As String
+        Dim lcase = Legal.LegalCase.GetCase(bble)
+        If lcase IsNot Nothing Then
+            Core.SystemLog.Log(LogTitleSave, lcase.CaseData, Core.SystemLog.LogCategory.Operation, lcase.BBLE, userName)
+            Return lcase.CaseData
+        End If
+        Return "{}"
+    End Function
 
     Public Shared Sub StartLegalRequest(bble As String, caseData As String, createBy As String)
         Dim ld = Lead.GetInstance(bble)
@@ -31,7 +42,7 @@ Public Class LegalCaseManage
         lc.CaseData = data.ToString
         lc.Status = Legal.LegalCaseStatus.ManagerPreview
         lc.CreateBy = createBy
-        lc.SaveData()
+        lc.SaveData(createBy)
 
         WorkflowService.StartLegalRequest(ld.LeadsName, bble, String.Join(";", Roles.GetUsersInRole("Legal-Manager")))
     End Sub
@@ -54,7 +65,7 @@ Public Class LegalCaseManage
         Dim lc = Legal.LegalCase.GetCase(bble)
         lc.Status = Legal.LegalCaseStatus.LegalResearch
         lc.ResearchBy = searchUser
-        lc.SaveData()
+        lc.SaveData(assignBy)
     End Sub
 
     Public Shared Sub AssignToAttorney(sn As String, bble As String, attorney As String, assignBy As String)
@@ -76,7 +87,7 @@ Public Class LegalCaseManage
         Dim lc = Legal.LegalCase.GetCase(bble)
         lc.Status = Legal.LegalCaseStatus.AttorneyHandle
         lc.Attorney = attorney
-        lc.SaveData()
+        lc.SaveData(assignBy)
     End Sub
 
     Public Shared Sub NotifyLegalWhenClosedinSS(bble As String)
@@ -106,7 +117,7 @@ Public Class LegalCaseManage
         lCase.FollowUp = dateSelected
         lCase.UpdateDate = DateTime.Now
         lCase.UpdateBy = HttpContext.Current.User.Identity.Name
-        lCase.SaveData()
+        lCase.SaveData(lCase.UpdateBy)
 
         LeadsActivityLog.AddActivityLog(DateTime.Now, "New Legal follow up date: " & dateSelected.ToString("d"), bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.FollowUp)
     End Sub
@@ -116,7 +127,7 @@ Public Class LegalCaseManage
         lCase.FollowUp = Nothing
         lCase.UpdateDate = DateTime.Now
         lCase.UpdateBy = HttpContext.Current.User.Identity.Name
-        lCase.SaveData()
+        lCase.SaveData(HttpContext.Current.User.Identity.Name)
 
         LeadsActivityLog.AddActivityLog(DateTime.Now, "Legal follow up date was Cleared", bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.FollowUp)
     End Sub

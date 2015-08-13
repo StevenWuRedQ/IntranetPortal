@@ -111,7 +111,7 @@ Public Class LegalUI
     <WebMethod()> _
     <ScriptMethod>
     Public Shared Sub SaveCase(legalCase As IntranetPortal.Data.LegalCase)
-        legalCase.SaveData()
+        legalCase.SaveData(HttpContext.Current.User.Identity.Name)
     End Sub
 
     <WebMethod()> _
@@ -119,7 +119,7 @@ Public Class LegalUI
     Public Shared Sub SaveCaseData(caseData As String, bble As String)
         Dim lgCase = IntranetPortal.Data.LegalCase.GetCase(bble)
         lgCase.CaseData = caseData
-        lgCase.SaveData()
+        lgCase.SaveData(HttpContext.Current.User.Identity.Name)
     End Sub
 
     <WebMethod()> _
@@ -135,7 +135,7 @@ Public Class LegalUI
         End If
 
         'update legal case status
-        IntranetPortal.Data.LegalCase.UpdateStatus(bble, IntranetPortal.Data.LegalCaseStatus.ManagerAssign)
+        IntranetPortal.Data.LegalCase.UpdateStatus(bble, IntranetPortal.Data.LegalCaseStatus.ManagerAssign, HttpContext.Current.User.Identity.Name)
 
         Dim comments = String.Format("Research is completed. The case is move to manager.")
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
@@ -156,7 +156,7 @@ Public Class LegalUI
         'End If
 
         'update legal case status
-        IntranetPortal.Data.LegalCase.UpdateStatus(bble, IntranetPortal.Data.LegalCaseStatus.LegalResearch)
+        IntranetPortal.Data.LegalCase.UpdateStatus(bble, IntranetPortal.Data.LegalCaseStatus.LegalResearch, HttpContext.Current.User.Identity.Name)
 
         comments = String.Format("The case is sent back to research. <br />Comments: {0}", comments)
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
@@ -174,7 +174,7 @@ Public Class LegalUI
             wli.Finish()
         End If
 
-        LegalCase.UpdateStatus(bble, LegalCaseStatus.Closed)
+        LegalCase.UpdateStatus(bble, LegalCaseStatus.Closed, HttpContext.Current.User.Identity.Name)
 
         Dim comments = String.Format("Case is closed.")
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
@@ -184,7 +184,7 @@ Public Class LegalUI
     <WebMethod()> _
     <ScriptMethod>
     Public Shared Sub CloseCase(bble As String, comments As String)
-        LegalCase.UpdateStatus(bble, LegalCaseStatus.Closed)
+        LegalCase.UpdateStatus(bble, LegalCaseStatus.Closed, HttpContext.Current.User.Identity.Name)
         WorkflowService.ExpireLegalProcess(bble)
         comments = String.Format("Case is closed. <br /> Comments: {0}", comments)
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
@@ -193,11 +193,8 @@ Public Class LegalUI
     <WebMethod()> _
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
     Public Shared Function GetCaseData(bble As String) As String
-        Dim lcase = Legal.LegalCase.GetCase(bble)
-        If lcase IsNot Nothing Then
-            Return lcase.CaseData
-        End If
-        Return "{}"
+
+        Return LegalCaseManage.GetCaseData(bble, HttpContext.Current.User.Identity.Name)
 
     End Function
 

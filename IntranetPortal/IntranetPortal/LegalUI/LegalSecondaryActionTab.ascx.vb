@@ -15,7 +15,7 @@
             'update legal case status
             Dim lc = IntranetPortal.Data.LegalCase.GetCase(bble)
             lc.Status = IntranetPortal.Data.LegalCaseStatus.Closed
-            lc.SaveData()
+            lc.SaveData(Page.User.Identity.Name)
 
             Response.Clear()
             Response.Write("The case is finished.")

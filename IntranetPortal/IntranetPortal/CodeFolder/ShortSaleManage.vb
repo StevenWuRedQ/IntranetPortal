@@ -1,14 +1,28 @@
 ﻿Imports IntranetPortal.Data
 Imports ShortSale = IntranetPortal.Data
 Imports Newtonsoft.Json.Linq
+Imports Newtonsoft.Json
 
 Public Class ShortSaleManage
+
+    Public Const SSLogTitleSave As String = "ShortSaleSave"
 
     Public Shared ReadOnly Property OpenCaseLogTitle
         Get
             Return "OpenSSCaseLog"
         End Get
     End Property
+
+    Public Shared Sub SaveCase(caseData As String, saveBy As String)
+        Dim res = JsonConvert.DeserializeObject(Of ShortSaleCase)(caseData)
+
+        Try
+            res.Save(HttpContext.Current.User.Identity.Name)
+            Core.SystemLog.Log(SSLogTitleSave, caseData, Core.SystemLog.LogCategory.SaveData, res.BBLE, HttpContext.Current.User.Identity.Name)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
 
     Public Shared Function GetSSOpenCaseLogs(startDate As DateTime, endDate As DateTime) As List(Of Core.SystemLog)
         Return Core.SystemLog.GetLogs(OpenCaseLogTitle, startDate, endDate)
@@ -81,7 +95,7 @@ Public Class ShortSaleManage
         LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Start Construction progress."), bble, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.InProcess)
     End Sub
 
-    Public Shared Sub NewCaseApproved(bble As String)
+    Public Shared Sub NewCaseApproved(bble As String, approvedBy As String)
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
 
         ssCase.Status = ShortSale.CaseStatus.Active
@@ -99,7 +113,7 @@ Public Class ShortSaleManage
                 mort.CaseId = ssCase.CaseId
                 mort.Category = "Assign"
                 mort.Status = "Intake - New File"
-                mort.Save()
+                mort.Save(approvedBy)
             End If
         End If
 
@@ -313,8 +327,8 @@ Public Class ShortSaleManage
 
     Public Shared Property NewCaseProcess As ShortSaleProcess = ShortSaleProcess.NewInstance("New Case", "ShortSale-Manager", Nothing,
                                                       Nothing,
-                                                      Sub(task)
-                                                          NewCaseApproved(task.TaskData)
+                                                      Sub(task As UserTask)
+                                                          NewCaseApproved(task.TaskData, task.CompleteBy)
                                                       End Sub,
                                                       Nothing)
 

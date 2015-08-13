@@ -54,7 +54,7 @@ Public Class ManagePreview
             Dim lc = LegalCase.GetCase(bble)
             lc.Status = LegalCaseStatus.LegalResearch
             lc.ResearchBy = searchUser
-            lc.SaveData()
+            lc.SaveData(Page.User.Identity.Name)
 
             Response.Clear()
             Response.Write("The case is assign to " & searchUser)

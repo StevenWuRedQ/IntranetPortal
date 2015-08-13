@@ -56,15 +56,7 @@ Public Class ShortSaleServices
     <OperationContract()>
     <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
     Public Function SaveCase(caseData As String) As Channels.Message
-        Dim res = JsonConvert.DeserializeObject(Of ShortSaleCase)(caseData)
-
-        Try
-            res.SaveChanges()
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-
+        ShortSaleManage.SaveCase(caseData, HttpContext.Current.User.Identity.Name)
         Return Nothing
     End Function
 

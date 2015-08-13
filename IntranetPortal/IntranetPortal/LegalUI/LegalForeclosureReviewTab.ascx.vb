@@ -25,7 +25,7 @@ Public Class LegalForeclosureReviewTab
             'update legal case status
             Dim lc = Legal.LegalCase.GetCase(bble)
             lc.Status = Legal.LegalCaseStatus.AttorneyHandle
-            lc.SaveData()
+            lc.SaveData(Page.User.Identity.Name)
 
             Response.Clear()
             Response.Write("The case is move to " & lbEmployee.Value)
@@ -44,7 +44,7 @@ Public Class LegalForeclosureReviewTab
             'update legal case status
             Dim lc = Legal.LegalCase.GetCase(bble)
             lc.Status = Legal.LegalCaseStatus.ManagerAssign
-            lc.SaveData()
+            lc.SaveData(Page.User.Identity.Name)
 
             Response.Clear()
             Response.Write("The case is move back to manager.")
