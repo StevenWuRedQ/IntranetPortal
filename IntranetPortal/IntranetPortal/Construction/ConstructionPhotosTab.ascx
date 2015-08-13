@@ -37,13 +37,12 @@
 
 
 <div class="ss_form">
-
     <div class="ss_border">
-
         <div>
             <h5 class="ss_form_title">Progress</h5>
             <pt-file file-id="CSCase-Photos-Progress" file-model="CSCase.CSCase.Photos.WaterMeterProgress"></pt-file>
         </div>
+        <hr />
         <div>
             <h5 class="ss_form_title">Appliances</h5>
             <pt-file file-id="CSCase-Photos-Appliances" file-model="CSCase.CSCase.Photos.Appliances"></pt-file>

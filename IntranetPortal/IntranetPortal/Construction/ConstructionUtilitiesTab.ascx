@@ -21,10 +21,15 @@
     </ul>
 </div>
 
-<div class="ss_form">
-    <h4 class="ss_form_title" ng-style="!CSCase.CSCase.Utilities.ConED.Collapsed?'{color: \'red\'}':''">ConED<pt-collapse model="CSCase.CSCase.Utilities.ConED.Collapsed"/></h4>
-    <div class="ss_border" collapse="CSCase.CSCase.Utilities.ConED.Collapsed">
+<%-- ConED --%>
+<div class="ss_form" ng-init="CSCase.CSCase.Utilities.ConED.Shown=false" ng-show="CSCase.CSCase.Utilities.ConED.Shown">
+    <h4 class="ss_form_title">ConED<pt-collapse model="CSCase.CSCase.Utilities.ConED.Collapsed" /></h4>
+    <div class="ss_border" collapse="CSCase.CSCase.Utilities.ConED.Collapsed" ng-init="CSCase.CSCase.Utilities.ConED.Collapsed=true">
         <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Floor #</label>
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.ConED.FloorNum">
+            </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Number</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.ConED.AccountNum">
@@ -38,8 +43,19 @@
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.ConED.RepName" />
             </li>
             <li class="ss_form_item">
+                <label class="ss_form_input_title">Account Open</label>
+                <pt-radio name="CSCase-Utilities-ConED-AccountOpen" model="CSCase.CSCase.Utilities.ConED.AccountOpen"></pt-radio>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Energy service required</label>
+                <pt-radio name="CSCase-Utilities-ConED-EnergyServiceRequired" model="CSCase.CSCase.Utilities.ConED.EnergyServiceRequired"></pt-radio>
+            </li>
+
+        </ul>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">Service</label>
-                <pt-radio name="CSCase-Utilities-ConED-Service" model="CSCase.CSCase.Utilities.ConED.Service"></pt-radio>
+                <pt-radio name="CSCase-Utilities-ConED-Service" model="CSCase.CSCase.Utilities.ConED.Service" true-value="on" false-value="off"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Meter Number</label>
@@ -55,29 +71,26 @@
                     <option value="3rd_Fillable">3rd Fillable</option>
                 </select>
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Account Open</label>
-                <pt-radio name="CSCase-Utilities-ConED-AccountOpen" model="CSCase.CSCase.Utilities.ConED.AccountOpen"></pt-radio>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Energy service required</label>
-                <pt-radio name="CSCase-Utilities-ConED-EnergyServiceRequired" model="CSCase.CSCase.Utilities.ConED.EnergyServiceRequired"></pt-radio>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Floor #</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.ConED.FloorNum">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Account #</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.ConED.AccountNum">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Appointments</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.ConED.Appointments" ss-date>
-            </li>
         </ul>
-        <div>
-            <label class="ss_form_input_title">Auto Populate</label>
+        <div class="cssSlideUp" ng-show="!CSCase.CSCase.Utilities.ConED.Service">
+            <div class="arrow_box" style="width: 40%">
+                <label class="ss_form_input_title">Service Off Reason</label>
+                <select class="ss_form_input" ng-model="CSCase.CSCase.Utilities.ConED.ServiceOffReason">
+                    <option value="Service_Cut_From_Street">Service Cut From Street</option>
+                    <option value="Meter_Locked">Meter Locked</option>
+                    <option value="Meter_Mising">Meter Mising</option>
+                    <option value="Meter_Damaged">Meter Damaged</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="ss_form_item">
+            <label class="ss_form_input_title">Appointments</label>
+            <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.ConED.Appointments" ss-date>
+        </div>
+        <div class="ss_form_item">
+            <label class="ss_form_input_title">Upload</label>
+            <pt-file file-id="CSCase-Utilities-EnergyService-Upload" file-model="CSCase.CSCase.Utilities.ConED.Upload"></pt-file>
         </div>
         <div>
             <label class="ss_form_input_title">Note</label>
@@ -86,11 +99,16 @@
     </div>
 </div>
 
-<div class="ss_form">
-    <h4 class="ss_form_title">Energy Service<pt-collapse model="CSCase.CSCase.Utilities.EnergyService.Collapsed"/></h4>
-    <div class="ss_border" collapse="CSCase.CSCase.Utilities.EnergyService.Collapsed">
+<%-- EnergyService --%>
+<div class="ss_form" ng-init="CSCase.CSCase.Utilities.EnergyService.Shown=false" ng-show="CSCase.CSCase.Utilities.EnergyService.Shown">
+    <h4 class="ss_form_title">Energy Service<pt-collapse model="CSCase.CSCase.Utilities.EnergyService.Collapsed" /></h4>
+    <div class="ss_border" collapse="CSCase.CSCase.Utilities.EnergyService.Collapsed" ng-init="CSCase.CSCase.Utilities.EnergyService.Collapsed=true">
         <ul class="ss_form_box clearfix">
-                        <li class="ss_form_item">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Floor #</label>
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.EnergyService.FloorNum">
+            </li>
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Number</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.EnergyService.AccountNum">
             </li>
@@ -111,30 +129,35 @@
                 <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.EnergyService.ElecPermPulledDate" ss-date>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">??</label>
+                <label class="ss_form_input_title">City permit pulled date</label>
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.EnergyService.CityPermitPulledDate" ss-date>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Check List Submitted Date</label>
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.EnergyService.DateCheckListSubmitted" ss-date>
+            </li>
+        </ul>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Energy Service</label>
+                <pt-radio name="CSCase-Utilities-EnergyService-EnergyServiceCheck" model="CSCase.CSCase.Utilities.EnergyService.EnergyServiceCheck" true-value="on" false-value="off"></pt-radio>
+            </li>
+        </ul>
+        <div class="cssSlideUp" ng-show="!CSCase.CSCase.Utilities.EnergyService.EnergyServiceCheck">
+            <div class="arrow_box" style="width: 40%">
+                <label class="ss_form_input_title">Service Off Reason</label>
                 <select class="ss_form_input">
                     <option value="Street_Turn_On">Street turn on</option>
                     <option value="Upgrade_Service">Upgrade Service</option>
                     <option value="New_Meter">New meter</option>
                 </select>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">City permit pulled date</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.EnergyService.CityPermitPulledDate" ss-date>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Energy Service Check</label>
-                <input class="ss_form_input" model="CSCase.CSCase.Utilities.EnergyService.EnergyServiceCheck">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Date Check List Submitted</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.EnergyService.DateCheckListSubmitted">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Appointments</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.EnergyService.Appointments" ss-date>
-            </li>
-        </ul>
+            </div>
+        </div>
+
+        <div class="ss_form_item">
+            <label class="ss_form_input_title">Appointments</label>
+            <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.EnergyService.Appointments" ss-date>
+        </div>
         <div class="ss_form_item">
             <label class="ss_form_input_title">Upload</label>
             <pt-file file-id="CSCase-Utilities-EnergyService-Upload" file-model="CSCase.CSCase.Utilities.EnergyService.Upload"></pt-file>
@@ -148,11 +171,16 @@
     </div>
 </div>
 
-<div class="ss_form">
-    <h4 class="ss_form_title">National Grid<pt-collapse model="CSCase.CSCase.Utilities.NationalGrid.Collapsed"/></h4>
-    <div class="ss_border" collapse="CSCase.CSCase.Utilities.NationalGrid.Collapsed">
+<%-- NationalGrid --%>
+<div class="ss_form" ng-init="CSCase.CSCase.Utilities.NationalGrid.Shown=false" ng-show="CSCase.CSCase.Utilities.NationalGrid.Shown">
+    <h4 class="ss_form_title">National Grid<pt-collapse model="CSCase.CSCase.Utilities.NationalGrid.Collapsed" /></h4>
+    <div class="ss_border" collapse="CSCase.CSCase.Utilities.NationalGrid.Collapsed" ng-init="CSCase.CSCase.Utilities.NationalGrid.Collapsed=true">
         <ul class="ss_form_box clearfix">
-             <li class="ss_form_item">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Floor #</label>
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.NationalGrid.FloorNum">
+            </li>
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Number</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.NationalGrid.AccountNum">
             </li>
@@ -165,33 +193,38 @@
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.NationalGrid.RepName">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Floor #</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.NationalGrid.FloorNum">
+                <label class="ss_form_input_title">Account Open</label>
+                <pt-radio name="CSCase-Utilities-NationalGrid-AccountOpen" model="CSCase.CSCase.Utilities.NationalGrid.AccountOpen"></pt-radio>
             </li>
+        </ul>
+        <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Service</label>
-                <pt-radio name="CSCase-Utilities-NationalGrid-Service" model="CSCase.CSCase.Utilities.NationalGrid.Service"></pt-radio>
+                <pt-radio name="CSCase-Utilities-NationalGrid-Service" model="CSCase.CSCase.Utilities.NationalGrid.Service" true-value="on" false-value="off"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Meter Number</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.NationalGrid.MeterNumber">
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Account Open</label>
-                <pt-radio name="CSCase-Utilities-NationalGrid-AccountOpen" model="CSCase.CSCase.Utilities.NationalGrid.AccountOpen"></pt-radio>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Account Num</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.NationalGrid.AccountNum">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Appointments</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.NationalGrid.Appointments" ss-date>
-            </li>
         </ul>
-
-        <div>
-            <label class="ss_form_input_title">Auto Populate</label>
+        <div class="cssSlideUp" ng-show="!CSCase.CSCase.Utilities.NationalGrid.Service">
+            <div class="arrow_box" style="width: 40%">
+                <label class="ss_form_input_title">Service Off Reason</label>
+                <select class="ss_form_input" ng-model="CSCase.CSCase.Utilities.NationalGrid.ServiceOffReason">
+                    <option value="Service_Cut_From_Street">Service Cut From Street</option>
+                    <option value="Meter_Locked">Meter Locked</option>
+                    <option value="Meter_Mising">Meter Mising</option>
+                    <option value="Meter_Damaged">Meter Damaged</option>
+                </select>
+            </div>
+        </div>
+        <div class="ss_form_item">
+            <label class="ss_form_input_title">Appointments</label>
+            <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.NationalGrid.Appointments" ss-date>
+        </div>
+        <div class="ss_form_item">
+            <label class="ss_form_input_title">Upload</label>
+            <pt-file file-id="CSCase-Utilities-EnergyServiceUpload" file-model="CSCase.CSCase.Utilities.NationalGridUpload"></pt-file>
         </div>
         <div>
             <label class="ss_form_input_title">Notes</label>
@@ -201,11 +234,12 @@
     </div>
 </div>
 
-<div class="ss_form">
-    <h4 class="ss_form_title">DEP<pt-collapse model="CSCase.CSCase.Utilities.DEP.Collapsed"/></h4>
-    <div class="ss_border" collapse="CSCase.CSCase.Utilities.DEP.Collapsed">
+<%-- DEP --%>
+<div class="ss_form" ng-init="CSCase.CSCase.Utilities.DEP.Shown=false" ng-show="CSCase.CSCase.Utilities.DEP.Shown">
+    <h4 class="ss_form_title">DEP<pt-collapse model="CSCase.CSCase.Utilities.DEP.Collapsed" /></h4>
+    <div class="ss_border" collapse="CSCase.CSCase.Utilities.DEP.Collapsed" ng-init="CSCase.CSCase.Utilities.DEP.Collapsed=true">
         <ul class="ss_form_box clearfix">
-             <li class="ss_form_item">
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Number</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.DEP.AccountNum">
             </li>
@@ -214,44 +248,43 @@
                 <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.DEP.Date" ss-date>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Open Charges</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.DEP.OpenCharges">
-            </li>
-            <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Name</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.DEP.AccountName">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Service</label>
-                <pt-radio name="CSCase-Utilities-DEP-Service" model="CSCase.CSCase.Utilities.DEP.Service"></pt-radio>
+                <label class="ss_form_input_title">Open Charges</label>
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.DEP.OpenCharges">
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Water Lien</label>
-                <pt-radio name="CSCase-Utilities-DEP-WaterLien" model="CSCase.CSCase.Utilities.DEP.WaterLien"></pt-radio>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Payment Agreement inplace</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.DEP.PaymentAgreementImplace" ss-date>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Meter Number</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.DEP.MeterNumber">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Account Number</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.DEP.AccountNumber">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Appointments</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.DEP.Appointments" ss-date>
-            </li>
-
-
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cancellation Date</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.DEP.CancellationDate" ss-date>
             </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Service</label>
+                <pt-radio name="CSCase-Utilities-DEP-Service" model="CSCase.CSCase.Utilities.DEP.Service" true-value="on" false-value="off"></pt-radio>
+            </li>
+
         </ul>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Meter Number</label>
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.DEP.MeterNumber">
+            </li>
+        </ul>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Water Lien</label>
+                <pt-radio name="CSCase-Utilities-DEP-WaterLien" model="CSCase.CSCase.Utilities.DEP.WaterLien"></pt-radio>
+            </li>
+            <li class="ss_form_item" ng-show="!CSCase.CSCase.Utilities.DEP.WaterLien">
+                <label class="ss_form_input_title">Upload Payment Agreement</label>
+                <pt-file file-id="CSCase-Utilities-DEP-PaymentAgreement" file-model="CSCase.CSCase.Utilities.DEP.PaymentAgreement"></pt-file>
+            </li>
+        </ul>
+        <div class="ss_form_item">
+            <label class="ss_form_input_title">Appointments</label>
+            <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.DEP.Appointments" ss-date>
+        </div>
         <div>
             <label class="ss_form_input_title">Notes</label>
             <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.CSCase.Utilities.DEP.Notes"></textarea>
@@ -259,9 +292,10 @@
     </div>
 </div>
 
-<div class="ss_form">
-    <h4 class="ss_form_title">Missing Water Meter<pt-collapse model="CSCase.CSCase.Utilities.MissingMeter.Collapsed"/></h4>
-    <div class="ss_border" collapse="CSCase.CSCase.Utilities.MissingMeter.Collapsed">
+<%-- Missing Water Metor--%>
+<div class="ss_form" ng-init="CSCase.CSCase.Utilities.MissingMeter.Shown=false" ng-show="CSCase.CSCase.Utilities.MissingMeter.Shown">
+    <h4 class="ss_form_title">Missing Water Meter<pt-collapse model="CSCase.CSCase.Utilities.MissingMeter.Collapsed" /></h4>
+    <div class="ss_border" collapse="CSCase.CSCase.Utilities.MissingMeter.Collapsed" ng-init="CSCase.CSCase.Utilities.MissingMeter.Collapsed=true;">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Number</label>
@@ -289,7 +323,7 @@
             </li>
         </ul>
         <div>
-            <label class="ss_form_input_title">Upload</label>
+            <label class="ss_form_input_title">Upload Letter To DEP</label>
             <pt-file class="ss_form_input" file-id="CSCase-Utilities-MissingMeter-Upload" file-model="CSCase.CSCase.Utilities.MissingMeter.Upload"></pt-file>
         </div>
         <div>
@@ -299,10 +333,10 @@
     </div>
 </div>
 
-
-<div class="ss_form">
-    <h4 class="ss_form_title">Taxes<pt-collapse model="CSCase.CSCase.Utilities.Taxes.Collapsed"/></h4>
-    <div class="ss_border" collapse="CSCase.CSCase.Utilities.Taxes.Collapsed">
+<%-- Taxes --%>
+<div class="ss_form" ng-init="CSCase.CSCase.Utilities.Taxes.Shown=false" ng-show="CSCase.CSCase.Utilities.Taxes.Shown">
+    <h4 class="ss_form_title">Taxes<pt-collapse model="CSCase.CSCase.Utilities.Taxes.Collapsed" /></h4>
+    <div class="ss_border" collapse="CSCase.CSCase.Utilities.Taxes.Collapsed" ng-init="CSCase.CSCase.Utilities.Taxes.Collapsed=true">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Number</label>
@@ -317,28 +351,31 @@
                 </select>
             </li>
             <li class="ss_form_item">
+                <label class="ss_form_input_title">Account Name</label>
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Utilities.Taxes.NameAccountIsUnder" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+            </li>
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">Open Charges</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.Taxes.OpenCharges">
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Name Account is Under</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Utilities.Taxes.NameAccountIsUnder" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
-            </li>
+        </ul>
+        <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Tax Lien</label>
                 <pt-radio name="CSCase-Utilities-Taxes-TaxLien" model="CSCase.CSCase.Utilities.Taxes.TaxLien"></pt-radio>
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Payment Agreement Inplace</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.Taxes.PaymentAgreementInplace" ss-date>
+            <li class="ss_form_item" ng-show="!CSCase.CSCase.Utilities.Taxes.TaxLien">
+                <label class="ss_form_input_title">Upload Payment Agreement</label>
+                <pt-file file-id="CSCase-Utilities-Taxes-PaymentAgreement" file-model="CSCase.CSCase.Utilities.Taxes.PaymentAgreement"></pt-file>
             </li>
         </ul>
     </div>
 </div>
 
-<div class="ss_form">
-    <h4 class="ss_form_title">ADT<pt-collapse model="CSCase.CSCase.Utilities.ADT.Collapsed"/></h4>
-    <div class="ss_border" collapse="CSCase.CSCase.Utilities.ADT.Collapsed">
+<%-- ADT --%>
+<div class="ss_form" ng-init="CSCase.CSCase.Utilities.ADT.Shown=false" ng-show="CSCase.CSCase.Utilities.ADT.Shown">
+    <h4 class="ss_form_title">ADT<pt-collapse model="CSCase.CSCase.Utilities.ADT.Collapsed" /></h4>
+    <div class="ss_border" collapse="CSCase.CSCase.Utilities.ADT.Collapsed" ng-init="CSCase.CSCase.Utilities.ADT.Collapsed=true">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Number</label>
@@ -353,22 +390,23 @@
                 <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.ADT.InstallationDate" ss-date>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Access Code</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.ADT.AccesCode">
-            </li>
-            <li class="ss_form_item">
                 <label class="ss_form_input_title">Cancellation Date</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.ADT.CancellatonDate" ss-date>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Access Code</label>
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.ADT">
             </li>
         </ul>
     </div>
 </div>
 
-<div class="ss_form">
-    <h4 class="ss_form_title">Insuracne<pt-collapse model="CSCase.CSCase.Utilities.Insurance.Collapsed"/></h4>
-    <div class="ss_border" collapse="CSCase.CSCase.Utilities.Insurance.Collapsed">
+<%-- Insurance --%>
+<div class="ss_form" ng-init="CSCase.CSCase.Utilities.Insurance.Shown=false" ng-show="CSCase.CSCase.Utilities.Insurance.Shown">
+    <h4 class="ss_form_title">Insuracne<pt-collapse model="CSCase.CSCase.Utilities.Insurance.Collapsed" /></h4>
+    <div class="ss_border" collapse="CSCase.CSCase.Utilities.Insurance.Collapsed" ng-init="CSCase.CSCase.Utilities.Insurance.Collapsed=true">
         <ul class="ss_form_box clearfix">
-               <li class="ss_form_item">
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Number</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.Insurance.AccountNum">
             </li>
@@ -380,14 +418,16 @@
                 <label class="ss_form_input_title">Expiration Date</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.Insurance.ExpirationDate" ss-date>
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Calender Option</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.Insurance.CalenderOption" ss-date>
-            </li>
+
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cancellation Date</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.Insurance.CancellationDate" ss-date>
             </li>
         </ul>
+        <div class="ss_form_item">
+            <label class="ss_form_input_title">Renewal Remind</label>
+            <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.Insurance.CalenderOption" ss-date>
+        </div>
     </div>
+
 </div>

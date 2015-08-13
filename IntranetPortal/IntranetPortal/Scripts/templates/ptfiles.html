@@ -1,7 +1,7 @@
 ﻿<div style="margin: 2px">
-    <ul>
+    <ul ng-if='!columns'>
         <li ng-repeat="file in fileModel" style="list-style-type: none; display: inline">
-            <a style="font-size:16px;font-weight:bold" ng-href="{{ptFileService.makePreviewUrl(file)}}" target="_blank">{{ptFileService.getFileName(file)}}</a>
+            <a style="font-size:16px;font-weight:bold" ng-href="{{ptFileService.makePreviewUrl(file.path)}}" target="_blank">{{ptFileService.getFileName(file.path)}}</a>
             &nbsp;<i class="fa fa-remove btn text-danger" ng-click="ptCom.arrayRemove(fileModel, $index, true)"></i>
         </li>
     </ul>

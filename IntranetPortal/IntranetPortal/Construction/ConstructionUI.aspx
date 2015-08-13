@@ -34,7 +34,7 @@
                             <div class="legal-menu row" style="margin: 0px;">
                                 <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
                                     <li class="active short_sale_head_tab">
-                                        <a href="#LegalTab" role="tab" data-toggle="tab" class="tab_button_a">
+                                        <a href="#ConstructionTab" role="tab" data-toggle="tab" class="tab_button_a">
                                             <i class="fa fa-info-circle  head_tab_icon_padding"></i>
                                             <div class="font_size_bold">Construction</div>
                                         </a>
@@ -201,36 +201,44 @@
             /***spliter***/
             $scope.CSCase.CSCase.Utilities.Company = [];
             $scope.DataSource = {};
-            $scope.DataSource.Collapses = {
-                'ConED': 'CSCase.CSCase.Utilities.ConED.Collapsed',
-                'Energy Service': 'CSCase.CSCase.Utilities.EnergyService.Collapsed',
-                'National Grid': 'CSCase.CSCase.Utilities.NationalGrid.Collapsed',
-                'DEP': 'CSCase.CSCase.Utilities.DEP.Collapsed',
-                'MISSING Water Meter': 'CSCase.CSCase.Utilities.MissingMeter.Collapsed',
-                'Taxes': 'CSCase.CSCase.Utilities.Taxes.Collapsed',
-                'ADT': 'CSCase.CSCase.Utilities.ADT.Collapsed',
-                'Insurance': 'CSCase.CSCase.Utilities.Insurance.Collapsed',
-            }
-
-            $scope.resetCollapses = function (obj) {
+            $scope.DataSource.Shown = {
+                'ConED': 'CSCase.CSCase.Utilities.ConED.Shown',
+                'Energy Service': 'CSCase.CSCase.Utilities.EnergyService.Shown',
+                'National Grid': 'CSCase.CSCase.Utilities.NationalGrid.Shown',
+                'DEP': 'CSCase.CSCase.Utilities.DEP.Shown',
+                'MISSING Water Meter': 'CSCase.CSCase.Utilities.MissingMeter.Shown',
+                'Taxes': 'CSCase.CSCase.Utilities.Taxes.Shown',
+                'ADT': 'CSCase.CSCase.Utilities.ADT.Shown',
+                'Insurance': 'CSCase.CSCase.Utilities.Insurance.Shown',
+            };
+            $scope.resetCompany = function (obj) {
                 for (var key in obj) {
                     var value = obj[key];
-                    $scope.$eval(value + '=true');
+                    $scope.$eval(value + '=false');
                 }
             };
             $scope.$watch('CSCase.CSCase.Utilities.Company', function () {
-                var ds = $scope.DataSource.Collapses;
+                var ds = $scope.DataSource.Shown;
                 var target = $scope.CSCase.CSCase.Utilities.Company;
-                $scope.resetCollapses(ds);
+                $scope.resetCompany(ds);
                 for (var i in target) {
-                    $scope.$eval(ds[target[i]] + '=false');
+                    $scope.$eval(ds[target[i]] + '=true');
                 }
+                $scope.CSCase.CSCase.Utilities.ConED.EnergyServiceRequired = target.indexOf('Energy Service') >= 0;
             }, true);
             $scope.sendNotice = function (id, name) {
                 // TODO
                 var confirmed = confirm("Send Intake Sheet To " + name + " ?");
             }
-
+            $scope.$watch('CSCase.CSCase.Utilities.ConED.EnergyServiceRequired', function(newVal) {
+                if (newVal) {
+                    if ($scope.CSCase.CSCase.Utilities.Company.indexOf('Energy Service') < 0) $scope.CSCase.CSCase.Utilities.Company.push('Energy Service');
+                    $scope.CSCase.CSCase.Utilities.EnergyService.Collapsed = false;
+                } else {
+                    var index;
+                    if ((index = $scope.CSCase.CSCase.Utilities.Company.indexOf('Energy Service')) != -1) $scope.CSCase.CSCase.Utilities.Company.splice(index, 1);
+                }
+            });
         }]);
     </script>
 

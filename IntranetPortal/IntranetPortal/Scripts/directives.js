@@ -39,7 +39,7 @@ portalApp.directive('bindId', function (ptContactServices) {
     return {
         restrict: 'A',
         link: function postLink(scope, el, attrs) {
-            scope.$watch(attrs.bindId, function(newValue, oldValue) {
+            scope.$watch(attrs.bindId, function (newValue, oldValue) {
                 if (newValue != oldValue) {
                     var contact = ptContactServices.getContactById(newValue);
                     if (contact) scope.$eval(attrs.ngModel + "='" + contact.Name + "'");
@@ -101,17 +101,20 @@ portalApp.directive('ptRadio', function () {
         restrict: 'E',
         template:
             '<input type="checkbox" id="{{name}}Y" ng-model="model" class="ss_form_input">' +
-            '<label for="{{name}}Y" class="input_with_check"><span class="box_text">Yes&nbsp</span></label>' +
+            '<label for="{{name}}Y" class="input_with_check"><span class="box_text">{{trueValue}}&nbsp</span></label>' +
             '<input type="checkbox" id="{{name}}N" ng-model="model" ng-true-value="false" ng-false-value="true" class="ss_form_input">' +
-            '<label for="{{name}}N" class="input_with_check"><span class="box_text">No&nbsp</span></label>',
+            '<label for="{{name}}N" class="input_with_check"><span class="box_text">{{falseValue}}&nbsp</span></label>',
 
         scope: {
             model: '=',
-            name: '@'
+            name: '@',
+            trueValue: '@',
+            falseValue: '@'
         },
         link: function (scope, el, attrs) {
-            var bVal = scope.model;
-            scope.model = bVal == null ? false : bVal;
+            scope.trueValue = scope.trueValue ? scope.trueValue : 'yes';
+            scope.falseValue = scope.falseValue ? scope.falseValue : 'no';
+            scope.model = scope.model == null ? false : scope.model;
         }
 
     }
@@ -184,13 +187,15 @@ portalApp.directive('ptFile', ['ptFileService', function (ptFileService) {
         },
         link: function (scope, el, attrs) {
             scope.ptFileService = ptFileService;
-            scope.delFile = function() {
+            scope.delFile = function () {
                 scope.fileModel = '';
             }
-            $(el).find('input:file').change(function() {
+            $(el).find('input:file').change(function () {
                 var file = $(this)[0].files[0];
-                ptFileService.uploadFile(file, scope.fileBble, function(data) {
-                    scope.fileModel = data;
+                var data = new FormData();
+                data.append('file', file);
+                ptFileService.uploadFile(data, scope.fileBble, function (res) {
+                    scope.fileModel = res[0];
                     scope.$apply();
                 }, scope.fileName);
             });
@@ -206,19 +211,26 @@ portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileServic
             fileModel: '=',
             fileBble: '=',
             fileName: '@',
-            fileId: '@'
+            fileId: '@',
+            fileColumns: '@',
+            onFileProcess: '&',
+            onFileDone: '&'
         },
         link: function (scope, el, attrs) {
             scope.ptFileService = ptFileService;
             scope.ptCom = ptCom;
+            scope.columns = scope.columns ? scope.scope.fileColumns.split('|') : [];
+            scope.fileModel = scope.fileModel ? scope.fileModel : [];
             $(el).find('input:file').change(function () {
-                scope.fileModel = scope.fileModel == null ? [] : scope.fileModel;
-                var file = $(this)[0].files[0];
-                ptFileService.uploadFile(file, scope.fileBble, function (data) {
-                    debugger;
-                    scope.fileModel.push(data);
-                    scope.$apply();
-                }, scope.fileName);
+                var files = $(this)[0].files;
+                for (var file in files) {
+                    ptFileService.uploadFile(file, scope.fileBble, function (data) {
+                        var newFile = {};
+                        newFile.path = data;
+                        scope.fileModel.push(data);
+                        scope.$apply();
+                    }, scope.fileName);
+                }
             });
         }
     }

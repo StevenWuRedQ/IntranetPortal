@@ -26,17 +26,6 @@ app.service('ptCom', [
             }
         };
 
-        
-
-        this.ensureArray = function(model) {
-            model = (model == null || !(model instanceof Array)) ? [] : model;
-        }
-
-        this.createPush = function (model, data) {
-            this.ensureArray(model);
-            model.push(data);
-        }
-
         this.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
             var result = '';
             if (strNO) result += strNO + ' ';
@@ -63,6 +52,11 @@ app.service('ptCom', [
             if (scope.$eval(model + '==null')) {
                 scope.$eval(model + '=[]');
             }
+        }
+
+        this.createPush = function (model, data) {
+            this.ensureArray(model);
+            model.push(data);
         }
     }]);
 
@@ -204,12 +198,10 @@ app.service('ptShortsSaleService', [
 ]);
 
 app.service('ptFileService', function () {
-    this.uploadFile = function (file, bble, callback, rename) {
-        var data = new FormData();
-        data.append('file', file);
+
+    this.uploadFile = function (data, bble, callback, rename) {
         var fileName = rename == '' ? file.name : rename;
-        debugger;
-        if (!file || !bble) {
+        if (!data || !bble) {
             alert('Upload infomation missing!');
         } else {
             bble = bble.trim();
@@ -220,11 +212,11 @@ app.service('ptFileService', function () {
                 cache: false,
                 processData: false,
                 contentType: false,
-                success: function (data) {
+                success: function (data1) {
                     debugger;
-                    callback(data);
+                    callback(data1);
                 },
-                error: function (data) {
+                error: function () {
                     debugger;
                     alert('upload file fails');
                 }
