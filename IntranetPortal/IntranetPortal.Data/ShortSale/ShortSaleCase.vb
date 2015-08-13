@@ -590,15 +590,11 @@ Partial Public Class ShortSaleCase
 
 #End Region
 
-
-
-
-
 #End Region
 
 #Region "Methods"
 
-    Public Sub Save()
+    Public Sub Save(Optional userName As String = Nothing)
         Using context As New ShortSaleEntities
             'Init Occupancy Data
             Me.OccupiedBy = If(_propInfo IsNot Nothing, _propInfo.Occupancy, Nothing)
@@ -616,10 +612,16 @@ Partial Public Class ShortSaleCase
 
             If CaseId = 0 Then
                 CreateDate = DateTime.Now
+                CreateDate = userName
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
                 Dim obj = context.ShortSaleCases.Find(CaseId)
                 obj = ShortSaleUtility.SaveChangesObj(obj, Me)
+                If userName IsNot Nothing Then
+                    obj.UpdateBy = userName
+                End If
+
+                obj.UpdateDate = DateTime.Now
                 context.SaveChanges()
             End If
 
@@ -632,7 +634,7 @@ Partial Public Class ShortSaleCase
                         mg.CaseId = CaseId
                     End If
 
-                    mg.Save()
+                    mg.Save(userName)
                 Next
             End If
 
@@ -642,7 +644,7 @@ Partial Public Class ShortSaleCase
                     If String.IsNullOrEmpty(offer.BBLE) Then
                         offer.BBLE = BBLE
                     End If
-                    offer.Save()
+                    offer.Save(userName)
                 Next
             End If
 
@@ -721,13 +723,13 @@ Partial Public Class ShortSaleCase
         End Using
     End Sub
 
-    Public Sub UpdateMortgageStatus(mortgageIndex As Integer, category As String, status As String)
+    Public Sub UpdateMortgageStatus(mortgageIndex As Integer, category As String, status As String, updateBy As String)
         If Mortgages.Count > mortgageIndex Then
             Dim obj = Mortgages(mortgageIndex)
             If obj IsNot Nothing Then
                 obj.Status = status
                 obj.Category = category
-                obj.Save()
+                obj.Save(updateBy)
 
                 RefreshStatus()
             End If
@@ -811,6 +813,15 @@ Partial Public Class ShortSaleCase
             Return False
         End Try
     End Function
+
+    Public Sub SaveEntity()
+        Using ctx As New ShortSaleEntities
+
+            ctx.Entry(Me).State = Entity.EntityState.Modified
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
 
     Public Shared Function DeleteCase(caseId As Integer) As Boolean
         Return True

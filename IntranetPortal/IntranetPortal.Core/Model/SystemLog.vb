@@ -7,18 +7,22 @@ Partial Public Class SystemLog
     End Sub
 
     Public Shared Sub Log(title As String, description As String, category As String, bble As String, createBy As String)
-        Using ctx As New CoreEntities
-            Dim log As New SystemLog
-            log.Title = title
-            log.BBLE = bble
-            log.Description = description
-            log.Category = category
-            log.CreateDate = DateTime.Now
-            log.CreateBy = createBy
+        Try
+            Using ctx As New CoreEntities
+                Dim log As New SystemLog
+                log.Title = title
+                log.BBLE = bble
+                log.Description = description
+                log.Category = category
+                log.CreateDate = DateTime.Now
+                log.CreateBy = createBy
 
-            ctx.SystemLogs.Add(log)
-            ctx.SaveChanges()
-        End Using
+                ctx.SystemLogs.Add(log)
+                ctx.SaveChanges()
+            End Using
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Public Shared Function GetLogs(title As String, startDate As DateTime, endDate As DateTime) As List(Of SystemLog)
@@ -40,5 +44,6 @@ Partial Public Class SystemLog
     Public Enum LogCategory
         [Error]
         Operation
+        SaveData
     End Enum
 End Class

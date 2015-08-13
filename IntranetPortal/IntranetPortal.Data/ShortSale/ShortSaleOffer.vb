@@ -6,11 +6,12 @@
         End Using
     End Function
 
-    Public Sub Save()
+    Public Sub Save(saveBy As String)
         Using context As New ShortSaleEntities
             'context.ShortSaleCases.Attach(Me)
             If OfferId = 0 Then
                 Me.CreateDate = DateTime.Now
+                Me.CreateBy = saveBy
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
                 Dim obj = context.ShortSaleOffers.Find(OfferId)

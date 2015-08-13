@@ -4,6 +4,9 @@ Imports System.Data.Entity.Infrastructure
 <MetadataType(GetType(ConstructionCaseMetaData))>
 Partial Public Class ConstructionCase
 
+    Private Const LogTitleOpen As String = "ConstructionOpen"
+    Private Const LogTitleSave As String = "ConstructionSave"
+
     Public Shared Function GetAllCases() As ConstructionCase()
         Using ctx As New ConstructionEntities
             Return ctx.ConstructionCases.ToArray
@@ -21,6 +24,20 @@ Partial Public Class ConstructionCase
             Return ctx.ConstructionCases.Find(BBLE)
         End Using
     End Function
+
+    Public Shared Function GetCase(BBLE As String, userName As String) As ConstructionCase
+        Using ctx As New ConstructionEntities
+            Dim csCase = ctx.ConstructionCases.Find(BBLE)
+
+            If csCase IsNot Nothing Then
+                Core.SystemLog.Log(LogTitleOpen, Nothing, Core.SystemLog.LogCategory.Operation, BBLE, userName)
+                Return csCase
+            End If
+        End Using
+
+        Return Nothing
+    End Function
+
 
     Public Sub Delete()
         Using ctx As New ConstructionEntities
@@ -43,6 +60,7 @@ Partial Public Class ConstructionCase
 
             Try
                 db.SaveChanges()
+                Core.SystemLog.Log(LogTitleSave, Newtonsoft.Json.JsonConvert.SerializeObject(Me), Core.SystemLog.LogCategory.SaveData, BBLE, userName)
             Catch ex As Exception
                 Throw
             End Try

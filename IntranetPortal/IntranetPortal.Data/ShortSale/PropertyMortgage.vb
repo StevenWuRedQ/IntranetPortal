@@ -145,18 +145,30 @@ Partial Public Class PropertyMortgage
         End Using
     End Function
 
-    Public Sub Save()
+    Public Sub Save(updateby As String)
         Using context As New ShortSaleEntities
             Dim pbi = context.PropertyMortgages.Find(MortgageId)
 
+            If LenderId.HasValue Then
+                Dim party = PartyContact.GetContact(LenderId)
+                If party IsNot Nothing Then
+                    Lender = party.Name
+                Else
+                    Lender = Nothing
+                End If
+            End If
+
             If pbi Is Nothing Then
                 CreateDate = DateTime.Now
+                CreateBy = updateby
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
                 If DataStatus = ModelStatus.Deleted Then
                     context.PropertyMortgages.Remove(pbi)
                 Else
                     pbi = ShortSaleUtility.SaveChangesObj(pbi, Me)
+                    pbi.UpdateDate = DateTime.Now
+                    pbi.UpdateBy = updateby
                 End If
             End If
 

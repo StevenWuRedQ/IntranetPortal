@@ -44,7 +44,7 @@ Partial Public Class LegalCase
         End Get
     End Property
 
-    Public Sub SaveData()
+    Public Sub SaveData(saveBy As String)
         'Refresh data report fields
         RefreshReportFields()
 
@@ -53,13 +53,18 @@ Partial Public Class LegalCase
 
             If lc Is Nothing Then
                 Me.CreateDate = DateTime.Now
+                Me.CreateBy = saveBy
                 ctx.LegalCases.Add(Me)
             Else
                 lc = Core.Utility.SaveChangesObj(lc, Me)
+                lc.UpdateBy = saveBy
+                lc.UpdateDate = DateTime.Now
             End If
 
             ctx.SaveChanges()
         End Using
+
+        Core.SystemLog.Log("LegalSave", Newtonsoft.Json.JsonConvert.SerializeObject(Me), Core.SystemLog.LogCategory.SaveData, Me.BBLE, saveBy)
     End Sub
 
     Private Sub RefreshReportFields()
@@ -77,11 +82,11 @@ Partial Public Class LegalCase
         End Using
     End Function
 
-    Public Shared Sub UpdateStatus(bble As String, status As LegalCaseStatus)
+    Public Shared Sub UpdateStatus(bble As String, status As LegalCaseStatus, updateBy As String)
         'update legal case status
         Dim lc = GetCase(bble)
         lc.Status = status
-        lc.SaveData()
+        lc.SaveData(updateBy)
     End Sub
 
     Public Shared Function InLegal(bble As String) As Boolean

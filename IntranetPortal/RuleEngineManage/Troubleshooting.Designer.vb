@@ -47,6 +47,8 @@ Partial Class Troubleshooting
         Me.txtRecycleDate = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtBBLE = New System.Windows.Forms.TextBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -93,8 +95,7 @@ Partial Class Troubleshooting
         Me.txtGeoAddress = New System.Windows.Forms.TextBox()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
         Me.btnRefreshLegalReport = New System.Windows.Forms.Button()
-        Me.txtBBLE = New System.Windows.Forms.TextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Button13 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -331,6 +332,22 @@ Partial Class Troubleshooting
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(750, 46)
         Me.Panel1.TabIndex = 25
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(303, 17)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(37, 13)
+        Me.Label12.TabIndex = 13
+        Me.Label12.Text = "BBLE:"
+        '
+        'txtBBLE
+        '
+        Me.txtBBLE.Location = New System.Drawing.Point(346, 14)
+        Me.txtBBLE.Name = "txtBBLE"
+        Me.txtBBLE.Size = New System.Drawing.Size(100, 20)
+        Me.txtBBLE.TabIndex = 12
         '
         'TabControl1
         '
@@ -648,6 +665,7 @@ Partial Class Troubleshooting
         '
         'TabPage5
         '
+        Me.TabPage5.Controls.Add(Me.Button13)
         Me.TabPage5.Controls.Add(Me.btnInitialContact)
         Me.TabPage5.Controls.Add(Me.btnImportOffer)
         Me.TabPage5.Controls.Add(Me.btnMoveStraight)
@@ -800,21 +818,14 @@ Partial Class Troubleshooting
         Me.btnRefreshLegalReport.Text = "Refresh Report Fields"
         Me.btnRefreshLegalReport.UseVisualStyleBackColor = True
         '
-        'txtBBLE
+        'Button13
         '
-        Me.txtBBLE.Location = New System.Drawing.Point(346, 14)
-        Me.txtBBLE.Name = "txtBBLE"
-        Me.txtBBLE.Size = New System.Drawing.Size(100, 20)
-        Me.txtBBLE.TabIndex = 12
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(303, 17)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(37, 13)
-        Me.Label12.TabIndex = 13
-        Me.Label12.Text = "BBLE:"
+        Me.Button13.Location = New System.Drawing.Point(210, 146)
+        Me.Button13.Name = "Button13"
+        Me.Button13.Size = New System.Drawing.Size(75, 23)
+        Me.Button13.TabIndex = 8
+        Me.Button13.Text = "Button13"
+        Me.Button13.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -927,4 +938,5 @@ Partial Class Troubleshooting
     Friend WithEvents btnRefreshLegalReport As System.Windows.Forms.Button
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents txtBBLE As System.Windows.Forms.TextBox
+    Friend WithEvents Button13 As System.Windows.Forms.Button
 End Class
