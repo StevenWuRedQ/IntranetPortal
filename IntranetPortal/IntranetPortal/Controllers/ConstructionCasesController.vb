@@ -23,7 +23,7 @@ Namespace Controllers
         ' GET: api/ConstructionCases/5
         <ResponseType(GetType(ConstructionCase))>
         Function GetConstructionCase(ByVal id As String) As IHttpActionResult
-            Dim constructionCase As ConstructionCase = constructionCase.GetCase(id)
+            Dim constructionCase As ConstructionCase = ConstructionManage.GetCase(id, HttpContext.Current.User.Identity.Name)
 
             If IsNothing(constructionCase) Then
                 Return NotFound()
