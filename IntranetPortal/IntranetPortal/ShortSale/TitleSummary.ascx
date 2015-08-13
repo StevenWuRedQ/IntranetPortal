@@ -593,6 +593,7 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="TitleCompanyName" Caption="Title Company">
                                                     </dx:GridViewDataTextColumn>
+
                                                     <dx:GridViewDataTextColumn FieldName="FirstMortgage.LoanAmount" Caption="1st Mort Amt" PropertiesTextEdit-DisplayFormatString="C">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="FirstMortgage.HasAuctionDate" Caption="1stMort Auction">
@@ -654,6 +655,48 @@
                                                     </dx:GridViewDataDateColumn>
                                                     <dx:GridViewDataDateColumn FieldName="SecondMortgage.CancelationSent" Caption="2ndMort CancelationSent">
                                                     </dx:GridViewDataDateColumn>
+
+                                                    <dx:GridViewDataTextColumn FieldName="BuyerTitle.OrderNumber" Caption="Title#">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="BuyerTitle.ReviewedDate" Caption="Title Reviewed">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="BuyerTitle.ReportOrderDate" Caption="Title OrderDate">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="BuyerTitle.ConfirmationDate" Caption="Title Confirmation">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="BuyerTitle.ReceivedDate" Caption="Title Received">
+                                                    </dx:GridViewDataDateColumn>
+
+                                                    <dx:GridViewDataTextColumn FieldName="MLSStatus" Caption="Listing MLS">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ListMLS" Caption="Listing MLS#">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ListPrice" Caption="Listing Price" PropertiesTextEdit-DisplayFormatString="C">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="ListingDate" Caption="Listing Date">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="ListingExpireDate" Caption="Listing ExpiryDate">
+                                                    </dx:GridViewDataDateColumn>
+
+                                                    <dx:GridViewDataTextColumn FieldName="ValuationData.Method" Caption="Valuation Type">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="ValuationData.DateOfValue" Caption="Valuation Completed Date">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ValuationData.BankValue" Caption="Valuation Value" PropertiesTextEdit-DisplayFormatString="C">
+                                                    </dx:GridViewDataTextColumn>                                                   
+                                                    <dx:GridViewDataTextColumn FieldName="ValuationData.AgentName" Caption="Valuation Agent">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ValuationData.AgentPhone" Caption="Valuation Phone">
+                                                    </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn FieldName="OfferData.OfferType" Caption="Offer Type">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="OfferData.DateOfContract" Caption="Offer Date Contract">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataDateColumn FieldName="OfferData.DateSubmited" Caption="Offer Date Submited">
+                                                    </dx:GridViewDataDateColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="OfferData.OfferAmount" Caption="Offer Amount" PropertiesTextEdit-DisplayFormatString="C">
+                                                    </dx:GridViewDataTextColumn>
                                                     
                                                     <dx:GridViewDataTextColumn FieldName="StatuStr" Caption="Status">
                                                     </dx:GridViewDataTextColumn>
@@ -804,12 +847,12 @@
 
                     <div>
 
-                        <div style="padding-top: 19px; padding-bottom: 14px;" class="border_under_line">
+                        <div style="padding-top: 19px; padding-bottom: 14px; display:none" class="border_under_line">
                             <span style="color: #234b60">Custom Fields</span>
                             <i class="fa fa-question-circle tooltip-examples" title="Check items view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
                         </div>
 
-                        <div style="margin-top: 20px;" id="custom_fields_div">
+                        <div style="margin-top: 20px; display:none" id="custom_fields_div">
 
                             <script type="text/javascript">
                                 function Fields_ValueChanged(s, e) {

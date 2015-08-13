@@ -21,6 +21,9 @@
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
     <script type="text/javascript">
+        var caseId = null;
+        var leadsInfoBBLE = null;
+
         function OnCallbackMenuClick(s, e) {
             if (e.item.name == "Custom") {
                 ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
@@ -516,7 +519,8 @@
                 $http.get(url).
                     success(function (data, status, headers, config) {
                         $scope.SsCase = data;
-                        leadsInfoBBLE = $scope.SsCase.BBLE
+                        leadsInfoBBLE = $scope.SsCase.BBLE;
+                        window.caseId = caseId;
                         var leadsInfoUrl = "ShortSaleServices.svc/GetLeadsInfo?bble=" + $scope.SsCase.BBLE;
                         $http.get(leadsInfoUrl).
                             success(function (data, status, headers, config) {

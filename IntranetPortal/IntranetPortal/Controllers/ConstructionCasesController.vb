@@ -77,22 +77,25 @@ Namespace Controllers
         End Function
 
         ' POST: api/ConstructionCases
-        <ResponseType(GetType(String))>
+        <ResponseType(GetType(String()))>
         <Route("api/ConstructionCases/UploadFiles")>
         Function PostConstructionFiles() As IHttpActionResult
             If Not ModelState.IsValid Then
                 Return BadRequest(ModelState)
             End If
 
+            Dim results = New List(Of String)
+
             If HttpContext.Current.Request.Files.Count > 0 Then
-                Dim file = HttpContext.Current.Request.Files(0)
-                Dim ms = New MemoryStream()
-                file.InputStream.CopyTo(ms)
-                Dim bble = HttpContext.Current.Request.QueryString("bble")
-                Dim fileName = HttpContext.Current.Request.QueryString("fileName")
+                For Each file In HttpContext.Current.Request.Files
+                    Dim ms = New MemoryStream()
+                    file.InputStream.CopyTo(ms)
+                    Dim bble = HttpContext.Current.Request.QueryString("bble")
+                    Dim fileName = HttpContext.Current.Request.QueryString("fileName")
 
-
-                Return Ok(Core.DocumentService.UploadFile(String.Format("{0}/{1}", bble, "Construction"), ms.ToArray, fileName, User.Identity.Name))
+                    results.Add(Core.DocumentService.UploadFile(String.Format("{0}/{1}", bble, "Construction"), ms.ToArray, fileName, User.Identity.Name))
+                Next
+                Return Ok(results.ToArray)
             End If
 
             Return BadRequest("Can't find File")

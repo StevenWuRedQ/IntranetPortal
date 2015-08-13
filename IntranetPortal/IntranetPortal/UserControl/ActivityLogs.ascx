@@ -795,7 +795,7 @@
             <Settings VerticalScrollBarMode="Auto" ShowHeaderFilterButton="true" />
             <SettingsBehavior AllowFocusedRow="false" AllowClientEventsOnLoad="false" AllowDragDrop="false"
                 EnableRowHotTrack="false" ColumnResizeMode="Disabled" />
-            <ClientSideEvents EndCallback="function(s,e){if(typeof dateActivityClient != 'undefined'){dateActivityClient.SetDate(new Date());} if(NeedToRefreshList){RefreshList();} if(needRefreshShortSale){ if(typeof GetShortSaleData != 'undefined'){ GetShortSaleData(caseId);}} }" />
+            <ClientSideEvents EndCallback="function(s,e){if(typeof dateActivityClient != 'undefined'){dateActivityClient.SetDate(new Date());} if(NeedToRefreshList){RefreshList();} if(needRefreshShortSale){ if(typeof GetShortSaleData != 'undefined'){ NGGetShortSale(caseId);}} }" />
         </dx:ASPxGridView>
 
         <dx:ASPxPopupControl ClientInstanceName="popupFilterControl" Width="160px" Height="200px"

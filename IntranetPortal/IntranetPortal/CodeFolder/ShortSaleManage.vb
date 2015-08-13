@@ -425,7 +425,7 @@ Public Class ShortSaleProcess
         End If
 
         'Dim comments = String.Format("{0} want to move this case to ShortSale. Please approval.", createBy)
-        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString, Nothing, createBy, LeadsActivityLog.EnumActionType.SetAsTask)
+        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.ShortSale.ToString, Nothing, createBy, LeadsActivityLog.EnumActionType.SetAsTask)
         'For testing purpose, need change to ShortSale-Manager
 
         Dim names = If(Not String.IsNullOrEmpty(RoleName), String.Join(";", Roles.GetUsersInRole("ShortSale-Manager")), UserNames)

@@ -46,7 +46,7 @@ Public Class ActivityLogs
         Else
             Select Case DisplayMode
                 Case ActivityLogMode.ShortSale
-                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString})
+                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Task.ToString})
                 Case ActivityLogMode.Legal
                     gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.LogCategory.Eviction.ToString})
                 Case ActivityLogMode.Construction

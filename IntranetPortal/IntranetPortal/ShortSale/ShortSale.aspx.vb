@@ -98,11 +98,13 @@ Public Class NGShortSale
                 ASPxSplitter1.Panes("listPanel").Visible = False
                 contentSplitter.ClientVisible = True
 
-                If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
-                    Dim cstext1 As String = "<script type=""text/javascript"">" & _
-                                    String.Format("NGGetShortSale({0});", ShortSaleCaseData.CaseId) & "</script>"
-                    Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
-                End If
+                RegisteredLoadDataScript(caseId)
+
+                'If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
+                '    Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                '                    String.Format("NGGetShortSale({0});", ShortSaleCaseData.CaseId) & "</script>"
+                '    Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
+                'End If
             End If
 
 
@@ -190,6 +192,14 @@ Public Class NGShortSale
 
     End Sub
 
+    Private Sub RegisteredLoadDataScript(caseId As Integer)
+        If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
+            Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                            String.Format("NGGetShortSale({0});", ShortSaleCaseData.CaseId) & "</script>"
+            Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
+        End If
+    End Sub
+
     Sub MortgageStatusUpdate(mortageType As String, status As String, category As String, bble As String) Handles ActivityLogs.MortgageStatusUpdateEvent
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
 
@@ -250,7 +260,7 @@ Public Class NGShortSale
         'Return json.Serialize(ssCase)
         Return ssCase
     End Function
-  
+
     Public Shared Function CheckBox(isChecked As Boolean?) As String
         If isChecked Is Nothing Then
             Return ""

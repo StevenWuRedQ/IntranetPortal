@@ -3,9 +3,9 @@
 
 <script type="text/javascript">
     var postponedCallbackRequired = false;
-    var caseId = null;
+    
     var ShortSaleCaseData = null;
-    var leadsInfoBBLE = null;
+
     //function is called on changing focused row
     function OnGridFocusedRowChanged() {
         // The values will be returned to the OnGetRowValues() function 
