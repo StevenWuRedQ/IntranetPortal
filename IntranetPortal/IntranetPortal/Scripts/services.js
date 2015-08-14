@@ -41,6 +41,7 @@ function ScopeAutoSave(getDataFunc, SaveFunc)
         {
             var sucessFunc = function () {
 
+
             }
             SaveFunc(sucessFunc);
             //ScopeResetCaseDataChange(getDataFunc)
@@ -48,6 +49,7 @@ function ScopeAutoSave(getDataFunc, SaveFunc)
     }, 30000)
 }
 
+/* above is global functions */
 app.service('ptCom', [
     function () {
 
@@ -106,7 +108,8 @@ app.service('ptCom', [
         this.ensurePush = function (scope, modelName, data) {
             this.ensureArray(scope, modelName);
             data = data ? data : {}
-            scope.$eval(modelName).push(data);
+            var model = scope.$eval(modelName);
+            model.push(data);
         }
     }]);
 
@@ -311,6 +314,14 @@ app.service('ptFileService', function () {
                 return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
 
         }
+    }
+
+    this.resetFileElement= function(ele) {
+        ele.val('');
+        ele.wrap('<form>').parent('form').trigger('reset');
+        ele.unwrap();
+        ele.prop('files')[0] = null;
+        ele.replaceWith(ele.clone());
     }
 }
 );

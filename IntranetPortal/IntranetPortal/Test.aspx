@@ -51,7 +51,7 @@
 
             function UploadFile() {
                 // grab your file object from a file input
-                fileData = document.getElementById("fileUpload").files[0];
+                fileData = document.getElementById("fileUpload").files;
                 var data = new FormData();
                 data.append("file", fileData);
                                        
@@ -74,7 +74,7 @@
 
         </script>
         <div >
-            <input type="file" id="fileUpload" value="" />
+            <input type="file" id="fileUpload" multiple="multiple" value="" />
             <br />
             <br />
             <button id="btnUpload" onclick="UploadFile()" type="button">

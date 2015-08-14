@@ -6,7 +6,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Permit is Issued</label>
-                <input class="ss_form_input" ss-date>
+                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Schedule B</label>
@@ -113,11 +113,11 @@
 
                             <li class="ss_form_item">
                                 <label class="ss_form_input_title">date fee paid</label>
-                                <input class="ss_form_input" ss-date>
+                                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
                             </li>
                             <li class="ss_form_item">
                                 <label class="ss_form_input_title">Date Approval</label>
-                                <input class="ss_form_input" ss-date>
+                                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
                             </li>
                         </ul>
                     </div>
@@ -132,7 +132,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Plumbing job signed off date</label>
-                <input class="ss_form_input" ss-date>
+                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
             </li>
 
         </ul>
@@ -151,7 +151,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Permit was pulled</label>
-                <input class="ss_form_input" ss-date>
+                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">PW2</label>
@@ -164,7 +164,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Inspection date requested</label>
-                <input class="ss_form_input" ss-date>
+                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">date of inspection</label>
@@ -188,11 +188,11 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date paid</label>
-                <input class="ss_form_input" ss-date>
+                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title ss_warning">date electric signed of</label>
-                <input class="ss_form_input" ss-date>
+                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
             </li>
         </ul>
 
@@ -209,7 +209,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Permit was pulled</label>
-                <input class="ss_form_input" ss-date>
+                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">PW2</label>
@@ -222,7 +222,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">date inspection was requested</label>
-                <input class="ss_form_input" ss-date>
+                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">inspection date</label>
@@ -239,7 +239,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">construction job jigned off date</label>
-                <input class="ss_form_input" ss-date>
+                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
             </li>
         </ul>
         <ul class="ss_form_box clearfix">

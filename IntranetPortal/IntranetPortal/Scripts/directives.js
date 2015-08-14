@@ -158,8 +158,7 @@ portalApp.directive('ckEditor', [function () {
             };
         }
     };
-}
-]);
+}]);
 
 portalApp.directive('ptAdd', function () {
     return {
@@ -182,22 +181,40 @@ portalApp.directive('ptFile', ['ptFileService', function (ptFileService) {
         scope: {
             fileModel: '=',
             fileBble: '=',
-            fileName: '@',
+            fileRename: '@',
             fileId: '@'
         },
         link: function (scope, el, attrs) {
             scope.ptFileService = ptFileService;
+            scope.fileChoosed = false;
+            var fileEl = el.find('input:file')[0];
             scope.delFile = function () {
                 scope.fileModel = '';
             }
-            $(el).find('input:file').change(function () {
-                var file = $(this)[0].files[0];
+            scope.delChoosed = function() {
+                scope.File = null;
+                scope.fileChoosed = false;
+
+            }
+            scope.uploadFile = function () {
                 var data = new FormData();
-                data.append('file', file);
+                data.append("file", scope.File);
                 ptFileService.uploadFile(data, scope.fileBble, function (res) {
-                    scope.fileModel = res[0];
-                    scope.$apply();
-                }, scope.fileName);
+                    scope.$apply(function () {
+                        scope.fileModel = res[0];
+                        scope.delChoosed();
+                        debugger;
+                    });
+                    
+                }, scope.fileRename);   
+            }
+            el.find('input:file').bind('change', function () {
+                var file = this.files[0];
+                scope.$apply(function() {
+                    scope.File = file;
+                    scope.fileChoosed = true;
+                });
+                this.value = '';
             });
         }
     }
@@ -221,16 +238,43 @@ portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileServic
             scope.ptCom = ptCom;
             scope.columns = scope.columns ? scope.scope.fileColumns.split('|') : [];
             scope.fileModel = scope.fileModel ? scope.fileModel : [];
-            $(el).find('input:file').change(function () {
-                var files = $(this)[0].files;
-                for (var file in files) {
-                    ptFileService.uploadFile(file, scope.fileBble, function (data) {
-                        var newFile = {};
-                        newFile.path = data;
-                        scope.fileModel.push(data);
-                        scope.$apply();
-                    }, scope.fileName);
+            scope.files = [];
+            scope.nameTable = [];
+
+            scope.removeChoosed = function (index) {
+                scope.nameTable.splice(scope.nameTable.indexOf(scope.files[index].name), 1);
+                scope.files.splice(index, 1);
+            }
+            scope.uploadFile = function () {
+                var data = new FormData();
+                for (var i = 0; i < scope.files.length; i++) {
+                    data.append("file", scope.files[i]);
                 }
+                ptFileService.uploadFile(data, scope.fileBble, function (res) {
+                    scope.$apply(function () {
+                        for (var i = 0; i < res.length; i++) {
+                            var newCol = {};
+                            newCol.path = res[i];
+                            scope.fileModel.push(newCol);
+                        }
+                    });
+
+                }, scope.fileRename);
+            }
+
+            $(el).find('input:file').change(function () {
+                var files = this.files;
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    scope.$apply(function() {
+                        if (scope.nameTable.indexOf(file.name)<0){
+                            scope.files.push(file);
+                            scope.nameTable.push(file.name);
+                        }
+                    });
+
+                }
+                this.value = '';
             });
         }
     }

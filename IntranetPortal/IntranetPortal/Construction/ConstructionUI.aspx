@@ -177,7 +177,7 @@
                 InitialIntake: {},
                 Photos: {},
                 Utilities: {},
-                Violation: {},
+                Violations: {},
                 ProposalBids: {},
                 Plans: {},
                 Contract: {},
@@ -240,7 +240,6 @@
                     if ((index = $scope.CSCase.CSCase.Utilities.Company.indexOf('Energy Service')) != -1) $scope.CSCase.CSCase.Utilities.Company.splice(index, 1);
                 }
             });
-            $scope.CSCase.CSCase.Utilities.ConED = [{}];
         }]);
     </script>
 

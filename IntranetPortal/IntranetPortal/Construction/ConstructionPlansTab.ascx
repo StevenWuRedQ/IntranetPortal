@@ -30,7 +30,7 @@
                     <input type="text" class="form-control">
                 </td>
                 <td>
-                    <input class=" form-control" ss-date>
+                    <input class=" form-control" ss-date ng-model="CSCase.FakeDate">
                 </td>
                 <td>
                     <input class="btn" type="file">

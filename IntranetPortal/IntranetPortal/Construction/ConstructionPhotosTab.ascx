@@ -4,12 +4,12 @@
     <div class="ss_border">
         <div>
             <h5 class="ss_form_title">AM Photos</h5>
-            <pt-files file-bble="CSCase.BBLE" file-id="CSCase-Photos-AMPhoto"  file-Name="" file-model="CSCase.CSCase.Photos.AMPhotos"></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="Photos-AMPhoto" file-model="CSCase.CSCase.Photos.AMPhotos"></pt-files>
         </div>
         <hr />
         <div>
             <h5 class="ss_form_title">PM Photos</h5>
-            <pt-file file-id="CSCase-Photos-PMPhotos" file-model="CSCase.CSCase.Photos.PMPhotos"></pt-file>
+            <pt-file file-bble="CSCase.BBLE" file-id="Photos-PMPhotos" file-model="CSCase.CSCase.Photos.PMPhotos"></pt-file>
         </div>
     </div>
 </div>
