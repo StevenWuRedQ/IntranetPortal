@@ -231,6 +231,7 @@
                 // TODO
                 var confirmed = confirm("Send Intake Sheet To " + name + " ?");
             }
+            /*
             $scope.$watch('CSCase.CSCase.Utilities.ConED_EnergyServiceRequired', function(newVal) {
                 if (newVal) {
                     if ($scope.CSCase.CSCase.Utilities.Company.indexOf('Energy Service') < 0) $scope.CSCase.CSCase.Utilities.Company.push('Energy Service');
@@ -240,6 +241,7 @@
                     if ((index = $scope.CSCase.CSCase.Utilities.Company.indexOf('Energy Service')) != -1) $scope.CSCase.CSCase.Utilities.Company.splice(index, 1);
                 }
             });
+            */
         }]);
     </script>
 

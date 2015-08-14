@@ -20,7 +20,7 @@
             <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
                 <div style="font-size: 30px">
                     <i class="fa fa-home"></i>
-                    <span style="margin-left: 19px;">{{GetCaseInfo().Address}}&nbsp;</span>
+                    <span style="margin-left: 19px;">{{CSCase.CaseName}}&nbsp;</span>
                     <span class="time_buttons" onclick="OpenLeadsWindow('http://www1.nyc.gov/site/hpd/index.page', 'HPD')">HPD</span>
                     <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=2&bble='+leadsInfoBBLE, 'DOB')">DOB</span>
 
@@ -38,7 +38,7 @@
 
             <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
 
-                <div class="note_item" ng-repeat="comment in SsCase.Comments" ng-style="$index%2?{'background':'#e8e8e8'}:{}">
+                <div class="note_item" ng-repeat="comment in CSCase.Comments" ng-style="$index%2?{'background':'#e8e8e8'}:{}">
                     <i class="fa fa-exclamation-circle note_img"></i>
                     <span class="note_text">{{comment.Comments}}</span>
                     <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7; display: none"></i>

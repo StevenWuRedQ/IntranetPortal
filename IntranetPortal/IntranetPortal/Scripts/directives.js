@@ -240,10 +240,13 @@ portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileServic
             scope.fileModel = scope.fileModel ? scope.fileModel : [];
             scope.files = [];
             scope.nameTable = [];
-
             scope.removeChoosed = function (index) {
                 scope.nameTable.splice(scope.nameTable.indexOf(scope.files[index].name), 1);
                 scope.files.splice(index, 1);
+            }
+            scope.clearChoosed = function() {
+                scope.nameTable = [];
+                scope.files = [];
             }
             scope.uploadFile = function () {
                 var data = new FormData();
@@ -255,8 +258,10 @@ portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileServic
                         for (var i = 0; i < res.length; i++) {
                             var newCol = {};
                             newCol.path = res[i];
+                            newCol.uploadTime = new Date();
                             scope.fileModel.push(newCol);
                         }
+                        scope.clearChoosed();
                     });
 
                 }, scope.fileRename);

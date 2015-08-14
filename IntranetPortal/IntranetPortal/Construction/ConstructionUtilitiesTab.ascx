@@ -29,6 +29,7 @@
         <tabset class="tab-switch">
         <tab ng-repeat="floor in CSCase.CSCase.Utilities.Floors" active="floor.active" disable="floor.disabled" >
         <tab-heading>Floor {{floor.FloorNum}}</tab-heading>       
+        <div class="text-right"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="arrayRemove(CSCase.CSCase.Utilities.Floors, $index, true)" title="Delete"></i></div>
             <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Floor #</label>
@@ -90,7 +91,7 @@
             <label class="ss_form_input_title">Appointments</label>
             <input class="ss_form_input" type="text" ng-model="floor.ConED.Appointments" ss-date>
             </div>
-            <div class="ss_form_item">
+            <div>
             <label class="ss_form_input_title">Upload</label>
             <pt-files file-bble="CSCase.BBLE" file-id="EnergyService-Upload{{$index}}" file-model="floor.ConED.Upload"></pt-files>
             </div>        
@@ -112,6 +113,7 @@
         <tabset class="tab-switch">
         <tab ng-repeat="floor in CSCase.CSCase.Utilities.Floors" active="floor.active" disable="floor.disabled" >
         <tab-heading>Floor {{floor.FloorNum}}</tab-heading>
+        <div class="text-right"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="arrayRemove(CSCase.CSCase.Utilities.Floors, $index, true)" title="Delete"></i></div>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Floor #</label>
@@ -166,7 +168,7 @@
             <label class="ss_form_input_title">Appointments</label>
             <input class="ss_form_input" type="text" ng-model="floor.EnergyService.Appointments" ss-date>
         </div>
-        <div class="ss_form_item">
+        <div>
             <label class="ss_form_input_title">Upload</label>
             <pt-files file-bble="CSCase.BBLE" file-id="EnergyService-Upload{{$index}}" file-model="floor.EnergyService.Upload"></pt-files>
         </div>
@@ -188,6 +190,7 @@
         <tabset class="tab-switch">
         <tab ng-repeat="floor in CSCase.CSCase.Utilities.Floors" active="floor.active" disable="floor.disabled" >
         <tab-heading>Floor {{floor.FloorNum}}</tab-heading>
+        <div class="text-right"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="arrayRemove(CSCase.CSCase.Utilities.Floors, $index, true)" title="Delete"></i></div>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Floor #</label>
@@ -235,7 +238,7 @@
             <label class="ss_form_input_title">Appointments</label>
             <input class="ss_form_input" type="text" ng-model="floor.NationalGrid.Appointments" ss-date>
         </div>
-        <div class="ss_form_item">
+        <div>
             <label class="ss_form_input_title">Upload</label>
             <pt-files file-bble="CSCase.BBLE" file-id="EnergyService_Upload{{$index}}" file-model="floor.NationalGrid.Upload"></pt-files>
         </div>

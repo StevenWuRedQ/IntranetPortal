@@ -1,21 +1,29 @@
-﻿<div style="margin: 2px;text-right">
-    <table class="table table-condensed">
-        <tr ng-repeat="file in fileModel" style="list-style-type: none; display: inline">
-            <td><a style="font-size:16px;font-weight:bold" ng-href="{{ptFileService.makePreviewUrl(file.path)}}" target="_blank">{{ptFileService.getFileName(file.path)}}</a></td>
-            <td><i class="fa fa-remove icon_btn text-danger" ng-click="ptCom.arrayRemove(fileModel, $index, true)"></i></td>
-        </tr>
-    </table>
-</div>
-<div style="margin: 2px; border: 1px gainsboro dashed">
-    <span class="btn btn-default btn-file" ng-click="uploadFile()" ng-disabled="files.length<1">
-        <span class="text-primary"><i class="fa fa-upload"></i></span>
-    </span>
-    <ul style="list-style-type: none; display: inline; height: 100%; padding: 2px; margin:2px">
-        <li ng-repeat="file in files" style="display: inline;">
-            <span class="btn-sm btn-danger" ng-click="removeChoosed($index)">{{file.name}}&nbsp;<i class="fa fa-remove"></i></span>
-        </li>
-    </ul>
-    <span class="btn btn-default btn-file pull-right">
-        <span class="text-success ">Add Files</span><input multiple="multiple" type="file" id="{{fileId}}" />
-    </span>
+﻿<div>
+    <div class="text-right" style="margin: 2px">
+        <table class="table table-condensed">
+            <tr ng-show="fileModel.length>0">
+                <th>file</th>
+                <th>Upload Time</th>
+                <th></th>
+            </tr>
+            <tr class="text-left" ng-repeat="file in fileModel">
+                <td><a style="font-size:12px;font-weight:bold" ng-href="{{ptFileService.makePreviewUrl(file.path)}}" target="_blank">{{ptFileService.getFileName(file.path)}}</a></td>
+                <td>{{file.uploadTime | date:'MM/dd/yyyy'}}</td>
+                <td><i class="fa fa-remove icon_btn text-danger" ng-click="ptCom.arrayRemove(fileModel, $index, true)"></i></td>
+            </tr>
+        </table>
+    </div>
+    <div style="margin: 2px; border: 1px gainsboro dashed">
+        <span class="btn btn-default btn-file" ng-click="uploadFile()" ng-disabled="files.length<1">
+            <span class="text-primary"><i class="fa fa-upload"></i></span>
+        </span>
+        <ul style="list-style-type: none; display: inline; height: 100%; padding: 2px; margin:2px">
+            <li ng-repeat="file in files" style="display: inline;">
+                <span class="btn-sm btn-danger" ng-click="removeChoosed($index)">{{file.name}}&nbsp;<i class="fa fa-remove"></i></span>
+            </li>
+        </ul>
+        <span class="btn btn-default btn-file pull-right">
+            <span class="text-success ">Add Files</span><input multiple="multiple" type="file" id="{{fileId}}" />
+        </span>
+    </div>
 </div>
