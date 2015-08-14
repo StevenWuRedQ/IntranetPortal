@@ -1,5 +1,12 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="AppointmentItem.ascx.vb" Inherits="IntranetPortal.AppointmentItem" %>
 
+<script type="text/javascript">
+    function NavigateURL(type, bble) {
+        window.location.href = "/Construction/ConstructionUI.aspx?bble=" + bble;
+    }
+</script>
+
+
 <h4>
     <img src="../images/grid_upcoming_icon.png" class="vertical-img"><span class="heading_text">Upcoming Appointments</span></h4>
 
@@ -34,7 +41,7 @@
                 <%-------end---------%>
             </GroupRowTemplate>
         </dx:GridViewDataTextColumn>
-        <dx:GridViewDataColumn Width="40px" VisibleIndex="5">
+        <dx:GridViewDataColumn Width="40px" VisibleIndex="5" Visible="false">
             <DataItemTemplate>
                 <%--change the image and the size by steven--%>
                 <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
