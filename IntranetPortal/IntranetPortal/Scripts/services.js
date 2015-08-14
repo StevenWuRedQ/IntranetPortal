@@ -1,5 +1,23 @@
 ﻿var app = angular.module('PortalApp');
 
+/* code area steven*/
+function NGAddArrayitemScope(scopeId, model) {
+    var $scope =  angular.element(document.getElementById(scopeId)).scope()
+    if (model) {
+        var array = $scope.$eval(model);
+        if (!array) {
+            $scope.$eval(model + '=[{}]');
+        } else {
+
+            $scope.$eval(model + '.push({})');
+
+        }
+        $scope.$apply();
+    } 
+
+}
+
+
 app.service('ptCom', [
     function () {
 

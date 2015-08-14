@@ -19,5 +19,6 @@ Partial Public Class LegalJudge
     Public Property Office As String
     Public Property Extension As String
     Public Property Cell As String
+    Public Property Borough As Nullable(Of Integer)
 
 End Class

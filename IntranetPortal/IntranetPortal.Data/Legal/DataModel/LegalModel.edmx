@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="LegalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LegalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="LawReferences">
           <Key>
             <PropertyRef Name="RefId" />
@@ -49,6 +49,7 @@
           <Property Name="Office" Type="nvarchar" MaxLength="256" />
           <Property Name="Extension" Type="nvarchar" MaxLength="50" />
           <Property Name="Cell" Type="nvarchar" MaxLength="50" />
+          <Property Name="Borough" Type="int" />
         </EntityType>
         <EntityType Name="LegalRoboSignor">
           <Key>
@@ -148,6 +149,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalCaseReport' does not have 
           <Property Name="Office" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Cell" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Borough" Type="Int32" />
         </EntityType>
         <EntityType Name="LegalRoboSignor">
           <Key>
@@ -225,6 +227,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalCaseReport' does not have 
           <EntitySetMapping Name="LegalJudges">
             <EntityTypeMapping TypeName="LegalModel.LegalJudge">
               <MappingFragment StoreEntitySet="LegalJudge">
+                <ScalarProperty Name="Borough" ColumnName="Borough" />
                 <ScalarProperty Name="Cell" ColumnName="Cell" />
                 <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="Office" ColumnName="Office" />

@@ -201,7 +201,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
             $scope.initLenderList();
             var stop = $(".popup_employee_list_item_active:first").position().top;
             $('#employee_list').scrollTop(stop);
-            var a = 10;
+            alert("Add" + $scope.currentContact.Name + " succeed !");
             //debugger;
         }).
         error(function (data, status, headers, config) {
@@ -241,6 +241,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
         
         $http.post("/CallBackServices.asmx/SaveContact", { json: $scope.currentContact }).
         success(function (data, status, headers, config) {
+            alert("Save succeed!");
             $scope.initLenderList();
         }).
         error(function (data, status, headers, config) {

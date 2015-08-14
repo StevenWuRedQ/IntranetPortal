@@ -781,8 +781,8 @@ The courts no longer consider this proper service. "></i></span>
                     <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.JudgementDate">
                 </li>
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Judge Name</label>
-                    <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ProceduralJudgeName" ng-options="o.ContactId as o.Name for o in AllJudges"></select>
+                    <label class="ss_form_input_title">{{LeadsInfo.BoroughName}} Judge Name</label>
+                    <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ProceduralJudgeName" ng-options="o.ContactId as o.Name for o in AllJudges|filter:{Borough:LeadsInfo.Borough}"></select>
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">HAMP Submitted</label>

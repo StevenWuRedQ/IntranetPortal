@@ -104,8 +104,8 @@ Public Class LeadsInfo
         End Get
     End Property
 
-    <JsonIgnoreAttribute>
-       Public ReadOnly Property BoroughName() As String
+
+    Public ReadOnly Property BoroughName() As String
         Get
             Return Utility.Borough2BoroughName(Borough)
         End Get

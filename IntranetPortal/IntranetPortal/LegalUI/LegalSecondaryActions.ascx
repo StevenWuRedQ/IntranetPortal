@@ -14,7 +14,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">hold Reason</label>
-                <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstateHoldReason">
+                <select class="ss_form_input" ng-model="LegalCase.SecondaryInfo.EstateHoldReason">
                     <option>Tenants in common</option>
                     <option>Joint Tenants w/right of survivorship</option>
                     <option>Tenancy by the entirety</option>
@@ -25,7 +25,7 @@
             <li class="ss_form_item">
                 <span class="ss_form_input_title">Estate set up</span>
 
-                <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstateSetUp">
+                <select class="ss_form_input" ng-model="LegalCase.SecondaryInfo.EstateSetUp">
                     <option value="Unknown">Unknown</option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
@@ -39,7 +39,7 @@
 
                 <span class="ss_form_input_title">borrower Died</span>
 
-                <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstateBorrowerDied">
+                <select class="ss_form_input" ng-model="LegalCase.SecondaryInfo.EstateBorrowerDied">
                     <option value="">Unknown</option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
@@ -57,11 +57,11 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">prior action</label>
 
-                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstatePriorAction">
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.EstatePriorAction">
             </li>
             <li class="ss_form_item ss_form_item_line">
                 <label class="ss_form_input_title">note</label>
-                <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.EstateNotes"></textarea>
+                <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.SecondaryInfo.EstateNotes"></textarea>
             </li>
         </ul>
     </div>
@@ -90,24 +90,23 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Parties 1</label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PartitionPartiesId')">
+                <div class="contact_box" dx-select-box="InitContact('LegalCase.SecondaryInfo.PartitionPartiesId')">
                 </div>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Parties 2</label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PartitionPartie2Id')">
+                <div class="contact_box" dx-select-box="InitContact('LegalCase.SecondaryInfo.PartitionPartie2Id')">
                 </div>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Parties 3</label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PartitionPartie3Id')">
+                <div class="contact_box" dx-select-box="InitContact('LegalCase.SecondaryInfo.PartitionPartie3Id')">
                 </div>
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Relationship Of Parties</label>
                 <select class="ss_form_input" ng-model="LegalCase.SecondaryInfo.RelationshipOfParties" ng-options='o as o for o  in [ "Married","Divorced","Seperated","Family members","Other"]'>
-                   
                 </select>
             </li>
             <li class="ss_form_item">
@@ -142,12 +141,12 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">parties 1</label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.BreachOfContractParties1Id')">
+                <div class="contact_box" dx-select-box="InitContact('LegalCase.SecondaryInfo.BreachOfContractParties1Id')">
                 </div>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">parties 2</label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.BreachOfContractParties2Id')">
+                <div class="contact_box" dx-select-box="InitContact('LegalCase.SecondaryInfo.BreachOfContractParties2Id')">
                 </div>
             </li>
             <li class="ss_form_item">
@@ -227,23 +226,23 @@
     })
 </script>
 <div></div>
-
+<%-- quiet title --%>
 <div id="Quiet_Title" class="legal_action_div animate-show" ng-show="CheckShow('Quiet Title')">
     <div class="ss_form">
         <h4 class="ss_form_title">Quiet Title</h4>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">LP date</label>
-                <input class="ss_form_input ss_date" ng-model="LegalCase.ForeclosureInfo.LPDate" />
+                <input class="ss_form_input ss_date" ng-model="LegalCase.SecondaryInfo.LPDate" />
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Default date</label>
-                <input class="ss_form_input ss_date" ng-model="LegalCase.ForeclosureInfo.DefaultDate" />
+                <input class="ss_form_input ss_date" ng-model="LegalCase.SecondaryInfo.DefaultDate" />
 
             </li>
             <li class="ss_form_item">
                 <span class="ss_form_input_title">foreclosure active</span>
-                <input type="checkbox" id="pdf_check_yes121" name="121" class="ss_form_input" value="YES" ng-model="LegalCase.ForeclosureInfo.InForeclosure" />
+                <input type="checkbox" id="pdf_check_yes121" name="121" class="ss_form_input" value="YES" ng-model="LegalCase.SecondaryInfo.InForeclosure" />
                 <label for="pdf_check_yes121" class="input_with_check">
                     <span class="box_text">Yes </span>
                 </label>
@@ -251,31 +250,34 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">foreclosure Action</label>
-                <input class="ss_form_input ss_date" ng-model="LegalCase.ForeclosureInfo.StatuteDisposition" />
+                <input class="ss_form_input ss_date" ng-model="LegalCase.SecondaryInfo.StatuteDisposition" />
 
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Prior Plaintiff</label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PriorPlaintiffId')">
-                </div>
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PriorPlaintiffName" ng-change="LegalCase.SecondaryInfo.PriorPlaintiffId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="LegalCase.SecondaryInfo.PriorPlaintiffId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.PriorPlaintiffId">
+                <%--<div class="contact_box" dx-select-box="InitContact('LegalCase.SecondaryInfo.PriorPlaintiffId')">
+                </div>--%>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Prior Plaintiff(Bank) gone out of business</label>
-                <input type="checkbox" id="pdf_check_yes399" name="122" class="ss_form_input" value="true" ng-model="LegalCase.ForeclosureInfo.PriorPlaintiffOutOfBusiness">
+                <input type="checkbox" id="pdf_check_yes399" name="122" class="ss_form_input" value="true" ng-model="LegalCase.SecondaryInfo.PriorPlaintiffOutOfBusiness">
                 <label for="pdf_check_yes399" class="input_with_check">
                     <span class="box_text">Yes </span>
                 </label>
             </li>
+
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Prior Attorney</label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PriorPlaintiffId')">
-                </div>
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PriorAttorneyName" ng-change="LegalCase.SecondaryInfo.PriorAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.PriorAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.PriorAttorneyId">
+                <%-- <div class="contact_box" dx-select-box="InitContact('LegalCase.SecondaryInfo.PriorPlaintiffId')">
+                </div>--%>
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">last payment date</label>
-                <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.LastPaymentDate" />
+                <input class="ss_form_input" ss-date="" ng-model="LegalCase.SecondaryInfo.LastPaymentDate" />
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Credit Report</label>
@@ -283,16 +285,17 @@
             </li>
             <li class="ss_form_item">
                 <%--Who owns mortgage?--%>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Lender </label>
-                    <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.OriginalLenderId')">
-                    </div>
-                </li>
+
+                <label class="ss_form_input_title">Lender </label>
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.OriginalLenderName" ng-change="LegalCase.SecondaryInfo.OriginalLenderId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,5)" typeahead-on-select="LegalCase.SecondaryInfo.OriginalLenderId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.OriginalLenderId">
+                <%-- <div class="contact_box" dx-select-box="InitContact('LegalCase.SecondaryInfo.OriginalLenderId')">
+                    </div--%>>
             </li>
             <li class="ss_form_item">
                 <%--Do we know who owns the Note--%>
                 <label class="ss_form_input_title">Mortage Owner</label>
-                <div class="ss_form_input " dx-select-box="InitContact('LegalCase.SecondaryInfo.QuietTitleMortageOwnerId')"> </div>
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QuietTitleMortageOwnerName" ng-change="LegalCase.SecondaryInfo.QuietTitleMortageOwnerId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="LegalCase.SecondaryInfo.QuietTitleMortageOwnerId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.QuietTitleMortageOwnerId">
+                <%-- <div class="ss_form_input " dx-select-box="InitContact('LegalCase.SecondaryInfo.QuietTitleMortageOwnerId')"></div>--%>
             </li>
             <li class="ss_form_item">
                 <%--Do we have the Deed--%>
@@ -310,8 +313,67 @@
             <li class="ss_form_item">
                 <%--Who is bringing the action--%>
                 <label class="ss_form_input_title">Action User</label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.ActionUserId')">
-                </div>
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.ActionUser" ng-change="LegalCase.SecondaryInfo.ActionUserId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="LegalCase.SecondaryInfo.ActionUserId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.ActionUserId">
+                <%-- <div class="contact_box" dx-select-box="InitContact('LegalCase.SecondaryInfo.ActionUserId')">
+                </div>--%>
+            </li>
+            <li class="ss_form_item" style="width: 97%">
+                <%--Who is bringing the action--%>
+                <label class="ss_form_input_title">Plaintiff Attorney</label>
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PlaintiffAttorneyName" ng-change="LegalCase.SecondaryInfo.PlaintiffAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.PlaintiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.PlaintiffAttorneyId">
+            </li>
+
+            <li class="ss_form_item">
+
+                <label class="ss_form_input_title">Office#</label>
+                <input type="text" class="ss_form_input" ng-model="ptContactServices.getContact(LegalCase.SecondaryInfo.PlaintiffAttorneyId, LegalCase.SecondaryInfo.PlaintiffAttorneyName).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+
+                <label class="ss_form_input_title">Cell</label>
+                <input type="text" class="ss_form_input" ng-model="ptContactServices.getContact(LegalCase.SecondaryInfo.PlaintiffAttorneyId, LegalCase.SecondaryInfo.PlaintiffAttorneyName).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+
+                <label class="ss_form_input_title">Address</label>
+                <input type="text" class="ss_form_input" ng-model="ptContactServices.getContact(LegalCase.SecondaryInfo.PlaintiffAttorneyId, LegalCase.SecondaryInfo.PlaintiffAttorneyName).Address" readonly="readonly">
+            </li>
+
+            <li class="ss_form_item" style="width: 97%">
+                <%--Who is bringing the action--%>
+                <label class="ss_form_input_title">Defendant's Attorney</label>
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.DefendantAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DefendantAttorneyId">
+            </li>
+            <li class="ss_form_item">
+
+                <label class="ss_form_input_title">Defendant</label>
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.Defendant">
+            </li>
+            <li class="ss_form_item">
+
+                <label class="ss_form_input_title">Office#</label>
+                <input type="text" class="ss_form_input" ng-model="ptContactServices.getContact(LegalCase.SecondaryInfo.DefendantAttorneyId, LegalCase.SecondaryInfo.DefendantAttorneyName).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
+            </li>
+
+            <li class="ss_form_item">
+
+                <label class="ss_form_input_title">Cell</label>
+                <input type="text" class="ss_form_input" ng-model="ptContactServices.getContact(LegalCase.SecondaryInfo.DefendantAttorneyId, LegalCase.SecondaryInfo.DefendantAttorneyName).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+
+                <label class="ss_form_input_title">Address</label>
+                <input type="text" class="ss_form_input" ng-model="ptContactServices.getContact(LegalCase.SecondaryInfo.DefendantAttorneyId, LegalCase.SecondaryInfo.DefendantAttorneyName).Address" readonly="readonly">
+            </li>
+            <li class="ss_form_item ss_form_item_line">
+                 <h4 class="ss_form_title">Defendants <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="NGAddArrayitemScope('LegalCtrl','LegalCase.SecondaryInfo.Defendants')"  title="Add" style="font-size: 18px" data-original-title="Add"></i> </h4>
+          
+             </li>
+
+             <li class="ss_form_item" ng-repeat="d in LegalCase.SecondaryInfo.Defendants track by $index">
+
+                <label class="ss_form_input_title">Defendant {{$index +1}} <i class="fa fa-times icon_btn  tooltip-examples" ng-click="ptCom.arrayRemove(LegalCase.SecondaryInfo.Defendants,$index)"  title="Add" style="font-size: 18px" data-original-title="Delete"></i></label>
+                <input type="text" class="ss_form_input" ng-model="d.Name">
             </li>
             <li class="ss_form_item ss_form_item_line">
                 <label class="ss_form_input_title">note</label>

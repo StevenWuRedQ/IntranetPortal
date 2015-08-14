@@ -292,7 +292,7 @@
                                         }" />
                                 </dx:ASPxPopupControl>
                                 <% End If%>
-                                
+
                                 <dx:ASPxPopupControl ClientInstanceName="popupBackToResearch" Width="300px" Height="300px"
                                     MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"
                                     HeaderText="Comments" AutoUpdatePosition="true" Modal="true" runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
@@ -312,28 +312,28 @@
                                         }" />
                                 </dx:ASPxPopupControl>
 
-                                  <script type="text/javascript">
-                                      //angular.element(document.getElementById('LegalCtrl')).scope().BackToResearch(comments);
-                                      var PopupComments = {
-                                          Action:null,
-                                          Show: function (element, action) {
-                                              this.Action = action;
-                                              popupBackToResearch.ShowAtElement(element);
-                                          },
-                                          ButtonClick: function () {
-                                              var comments = txtBackComments.GetText();
-                                              if (comments == null || comments == '') {
-                                                  alert('Please input comments.');
-                                                  return;
-                                              }
+                                <script type="text/javascript">
+                                    //angular.element(document.getElementById('LegalCtrl')).scope().BackToResearch(comments);
+                                    var PopupComments = {
+                                        Action: null,
+                                        Show: function (element, action) {
+                                            this.Action = action;
+                                            popupBackToResearch.ShowAtElement(element);
+                                        },
+                                        ButtonClick: function () {
+                                            var comments = txtBackComments.GetText();
+                                            if (comments == null || comments == '') {
+                                                alert('Please input comments.');
+                                                return;
+                                            }
 
-                                              if (typeof this.Action == 'function')
-                                                  this.Action(comments);
-                                              
-                                              popupBackToResearch.Hide();
-                                              txtBackComments.SetText('');
-                                          }
-                                      }
+                                            if (typeof this.Action == 'function')
+                                                this.Action(comments);
+
+                                            popupBackToResearch.Hide();
+                                            txtBackComments.SetText('');
+                                        }
+                                    }
 
                                 </script>
 
@@ -543,8 +543,7 @@
             e.processOnServer = false;
         }
 
-        function CloseCase(comments)
-        {
+        function CloseCase(comments) {
             angular.element(document.getElementById('LegalCtrl')).scope().CloseCase(comments);
         }
 
@@ -647,6 +646,7 @@
             });
 
         }
+        
         function GetLegalData() {
 
             return angular.element(document.getElementById('LegalCtrl')).scope().LegalCase;
@@ -674,9 +674,10 @@
 
         var portalApp = angular.module('PortalApp');
 
-        portalApp.controller('LegalCtrl', function ($scope, $http, $element, $parse, ptContactServices) {
+        portalApp.controller('LegalCtrl', function ($scope, $http, $element, $parse, ptContactServices, ptCom) {
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
             $scope.ptContactServices = ptContactServices;
+            $scope.ptCom = ptCom;
             //if (leadsInfoBBLE) {
             //    $http.post('/Services/ContactService.svc/CheckInShortSale', { "BBLE": leadsInfoBBLE }).success(function (data) {
 
@@ -883,7 +884,7 @@
                     });
             }
 
-            $scope.CloseCase = function (comments) {                
+            $scope.CloseCase = function (comments) {
                 var data = { bble: leadsInfoBBLE, comments: comments };
                 $http.post('LegalUI.aspx/CloseCase', data).
                     success(function () {
@@ -965,8 +966,9 @@
                     $scope.TaxLiens = data;
                     $scope.TaxLiensShow = $scope.ModelArray('TaxLiens');
                 }).error(function (data, status, headers, config) {
-                    alert("Get Tax Liens failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
+                    alert("Get Tax Liens failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
                 });
+
             }
 
             $scope.ModelArray = function (model) {
@@ -1291,7 +1293,7 @@
                     console.log("Deleted comments");
                 })
             }
-
+            
         });
 
     </script>

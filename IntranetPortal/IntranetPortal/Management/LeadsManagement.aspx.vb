@@ -206,7 +206,7 @@ Public Class LeadsManagement
         End If
 
         Dim imgType = TryCast(gridLeads.FindRowCellTemplateControl(e.VisibleIndex, gridLeads.Columns("Type"), "imgType"), ASPxImage)
-        imgType.ClientSideEvents.Click = String.Format("function(s,e){{tempBBLE={0};leadsTypeMenu.ShowAtElement(s.GetMainElement());}}", e.GetValue("BBLE"))
+        imgType.ClientSideEvents.Click = String.Format("function(s,e){{tempBBLE='{0}';leadsTypeMenu.ShowAtElement(s.GetMainElement());}}", e.GetValue("BBLE"))
 
         If e.GetValue("Type") IsNot Nothing Then
             Dim type = CType(e.GetValue("Type"), LeadsInfo.LeadsType)

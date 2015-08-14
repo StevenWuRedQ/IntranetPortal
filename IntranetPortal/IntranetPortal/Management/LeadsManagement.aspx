@@ -70,7 +70,7 @@
         }
 
         function OnEndCallback(s, e) {
-           
+
             return;
             $("#prioity_content").mCustomScrollbar(
              {
@@ -134,26 +134,26 @@
              );
         }
 
-        function ResizeGrid(pane)
-        {
-            if (pane.name == "gridPanel")
-            {           
+        function ResizeGrid(pane) {
+            if (pane.name == "gridPanel") {
                 var height = pane.GetClientHeight();
                 gridLeads.SetHeight(height);
-            }            
+            }
         }
 
         $(document).ready(function () {
             // Handler for .ready() called.
             //onInitScorllBar();
         });
+        function filterOutRecycel(filtedRecyceled) {
+            var condtion = filtedRecyceled ? '[IsRecycled] = false' : '';
+            gridLeads.ApplyFilter(condtion);
+        }
     </script>
     <style type="text/css">
-        .rand-button:disabled
-        {
-            background-color:gray;
+        .rand-button:disabled {
+            background-color: gray;
         }
-
     </style>
 </asp:Content>
 
@@ -187,9 +187,17 @@
                                             <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Size="30px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
 
                                         </span>
-                                        <span style="font-size:18px;margin-left:20px">
-                                            <span id="gridSelectCount"> 0 </span> selected
-                                        </span>                                     
+                                        <span style="font-size: 18px; margin-left: 20px">
+                                            <span id="gridSelectCount">0</span> selected
+                                        </span>
+                                        
+                                        <span style="margin-left:10px">
+                                            <input type="checkbox" id="cbfilterOutRecycel" name="cbfilterOutExist" class="font_12" onchange="filterOutRecycel(this.checked)">
+                                            <label for="cbfilterOutRecycel" class="font_12" style="padding-top: 20px;float:none">
+                                                <span class="upcase_text">Don't Show Recycled Leads</span>
+                                            </label>
+                                        </span>
+
                                         <div style="float: right">
                                             <%--  <a href="/LeadsGenerator/LeadsGenerator.aspx" target="_self" class="rand-button rand-button-blue">Create Leads</a>--%>
                                             <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" Text='<i class="fa  fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Export to Excel"></i>'>                                                                
@@ -205,13 +213,12 @@
                         <ContentCollection>
                             <dx:SplitterContentControl>
                                 <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding"
-                                    
                                     ID="gridLeads" ClientInstanceName="gridLeads" Width="100%" KeyFieldName="BBLE" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared" OnCustomCallback="gridLeads_CustomCallback"
                                     EnableViewState="true">
                                     <Columns>
                                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" SelectAllCheckboxMode="Page" VisibleIndex="0" Name="colSelect" Visible="true" Width="25px">
                                         </dx:GridViewCommandColumn>
-                                        <dx:GridViewDataColumn FieldName="BBLE" Caption="BBLE" Width="1px" ExportWidth="100">                                            
+                                        <dx:GridViewDataColumn FieldName="BBLE" Caption="BBLE" Width="1px" ExportWidth="100">
                                         </dx:GridViewDataColumn>
                                         <dx:GridViewDataTextColumn FieldName="PropertyAddress" Settings-AllowHeaderFilter="False">
                                             <Settings AllowHeaderFilter="False"></Settings>
@@ -236,11 +243,11 @@
                                             <DataItemTemplate>
                                                 <dx:ASPxCheckBox runat="server" ID="chkRecycled" ToolTip="Recycled" Checked='<%# Eval("IsRecycled")%>' ReadOnly="true" Visible='<%# Eval("IsRecycled")%>'></dx:ASPxCheckBox>
                                             </DataItemTemplate>
-                                        </dx:GridViewDataColumn>                                       
+                                        </dx:GridViewDataColumn>
                                     </Columns>
                                     <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true"
                                         EnableRowHotTrack="True" />
-                                    <Settings ShowFilterRowMenu="true"  ShowHeaderFilterButton="true"  ShowColumnHeaders="true" VerticalScrollableHeight="1000" GridLines="Both"></Settings>
+                                    <Settings ShowFilterRowMenu="true" ShowHeaderFilterButton="true" ShowColumnHeaders="true" VerticalScrollableHeight="1000" GridLines="Both"></Settings>
                                     <SettingsPager Mode="EndlessPaging" PageSize="50"></SettingsPager>
                                     <Styles>
                                         <Header HorizontalAlign="Center"></Header>
@@ -251,7 +258,7 @@
                                     <Border BorderStyle="None"></Border>
                                     <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" SelectionChanged="OnSelectionChanged" />
                                 </dx:ASPxGridView>
-                                <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridLeads" OnRenderBrick="gridExport_RenderBrick">                                    
+                                <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridLeads" OnRenderBrick="gridExport_RenderBrick">
                                 </dx:ASPxGridViewExporter>
                                 <dx:ASPxPopupMenu ID="ASPxPopupMenu3" runat="server" ClientInstanceName="leadsTypeMenu"
                                     AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -285,10 +292,10 @@
                                             </dx:ASPxComboBox>
                                         </td>
                                         <td>
-                                            <dx:ASPxCheckBox runat="server" Text="Archive Logs" ID="cbArchived" ></dx:ASPxCheckBox>
+                                            <dx:ASPxCheckBox runat="server" Text="Archive Logs" ID="cbArchived"></dx:ASPxCheckBox>
                                         </td>
                                         <td>
-                                            
+
                                             <input type="button" id="btnAssign" value="Assign" class="rand-button rand-button-blue rand-button-pad" disabled="disabled" onclick="{ if (listboxEmployee.GetIsValid()) gridLeads.PerformCallback('AssignLeads'); }" />
                                             &nbsp;&nbsp;
                                       <input type="button" value="Rules" class="rand-button rand-button-blue rand-button-pad" onclick="AssignLeadsPopupClient.Show();" />
