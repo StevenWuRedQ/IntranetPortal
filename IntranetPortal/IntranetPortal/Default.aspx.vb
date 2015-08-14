@@ -12,6 +12,10 @@ Public Class Default2
             If Not String.IsNullOrEmpty(Request.QueryString("key")) Then
                 ContentUrl = String.Format("/LeadAgent.aspx?c=Search&key={0}&id={1}", Request.QueryString("key"), Request.QueryString("id"))
             End If
+
+
+
+
         End If
 
         'Change layout by steven

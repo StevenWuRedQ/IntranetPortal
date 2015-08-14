@@ -191,18 +191,18 @@
                     </div>
 
 
-                                        <%------end------%>
+                    <%------end------%>
                     <div class="content" style="float: left; margin-right: 10px; margin-left: 35px;">
                         <div class="row">
                             <div class="col-md-6 col-lg-6">
-                            <div class="row under_line" style="min-height: 360px">                                
-                            <div class="col-md-6 " style="width: 380px; vertical-align: top">
-                                
-                                    <%--add image by steven--%>
-                                    <%--ments--%>
-                                    <h4>
-                                        <img src="../images/grid_upcoming_icon.png" class="vertical-img"><span class="heading_text">Upcoming Appointments</span></h4>
-                                    
+                                <div class="row under_line" style="min-height: 360px">
+                                    <div class="col-md-6 " style="width: 380px; vertical-align: top">
+
+                                        <%--add image by steven--%>
+                                        <%--ments--%>
+                                        <h4>
+                                            <img src="../images/grid_upcoming_icon.png" class="vertical-img"><span class="heading_text">Upcoming Appointments</span></h4>
+
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridAppointment" ClientInstanceName="gridAppointmentClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" SettingsPager-PageSize="5" OnDataBinding="gridAppointment_DataBinding">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -249,16 +249,16 @@
                                                 <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
                                             </Styles>
                                         </dx:ASPxGridView>
-                                    
-                                
-                            </div>
-                            <%--fix the disteance between the two grid by steven--%>
-                            <div class="col-md-6" style="width: 380px; vertical-align: top" >
-                                    <%--add icon by steven--%>
-                                    <h4>
-                                        <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Priority</span>
-                                    </h4>
-                                   
+
+
+                                    </div>
+                                    <%--fix the disteance between the two grid by steven--%>
+                                    <div class="col-md-6" style="width: 380px; vertical-align: top">
+                                        <%--add icon by steven--%>
+                                        <h4>
+                                            <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Priority</span>
+                                        </h4>
+
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridPriority" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="5"
                                             OnDataBinding="gridPriority_DataBinding">
                                             <Columns>
@@ -280,14 +280,14 @@
                                                 <RowHotTrack BackColor="#ff400d"></RowHotTrack>
                                             </Styles>
                                         </dx:ASPxGridView>
-                                    
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row under_line">
-                                <div style="width: 380px; vertical-align: top" class="col-md-6 ">
-                                    <h4>
-                                        <img src="../images/grid_task_icon.png" class="vertical-img" /><span class="heading_text">Task</span> </h4>
-                                   
+                                <div class="row under_line">
+                                    <div style="width: 380px; vertical-align: top" class="col-md-6 ">
+                                        <h4>
+                                            <img src="../images/grid_task_icon.png" class="vertical-img" /><span class="heading_text">Task</span> </h4>
+
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridTask" KeyFieldName="ProcInstId;ActInstId" ClientInstanceName="gridTaskClient"
                                             OnDataBinding="gridTask_DataBinding" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
@@ -332,20 +332,20 @@
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
                                             </GroupSummary>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
-                                            <SettingsPager NumericButtonCount="3" ></SettingsPager>
+                                            <SettingsPager NumericButtonCount="3"></SettingsPager>
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
                                                 <RowHotTrack BackColor="#ff400d" ForeColor="White"></RowHotTrack>
                                             </Styles>
                                         </dx:ASPxGridView>
-                                    
-                                </div>
-                                <div class="col-md-6" style="width: 380px; vertical-align: top" >
-                                    <%--add icon by steven--%>
-                                    <h4>
-                                        <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">Call Backs</span> </h4>
-                                    <%--------end-------%>
-                                    
+
+                                    </div>
+                                    <div class="col-md-6" style="width: 380px; vertical-align: top">
+                                        <%--add icon by steven--%>
+                                        <h4>
+                                            <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">Call Backs</span> </h4>
+                                        <%--------end-------%>
+
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridCallback" ClientInstanceName="gridCallbackClient" KeyFieldName="BBLE" AutoGenerateColumns="false"
                                             OnDataBinding="gridCallback_DataBinding" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
@@ -397,240 +397,112 @@
                                                 <dx:ASPxSummaryItem FieldName="CallbackDate" SummaryType="Count" />
                                             </GroupSummary>
                                         </dx:ASPxGridView>
-                                    
-                                
-                            </div>
-                            </div>
-                            <div class="row">
+
+
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-10" style="background: #fff5e7; border-left: 5px solid #ff400d; margin-top: 30px; padding-top: 0px; color: #2b586f; font: 14px 'PT Serif'; font-style: italic; margin-left: 19px;">
                                         <div style="float: left; font-size: 60px; margin-left: 30px; margin-top: 5px;">“</div>
                                         <p style="width: 90%; padding-top: 20px; padding-bottom: 20px; padding-left: 65px;">
                                             <%= HtmlBlackQuote(Quote)%>
-                                            <%--To accomplish great things, we must not only act, but also dream, not only plan, but also believe.”
-        - Anatole France--%>
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                        
                             <div class="col-md-2 col-lg-2" style="width: 380px">
-                                    <h4>
-                                        <img src="../images/grid_calendar.png" class="vertical-img" /><span class="heading_text">Today's Calendar</span>
-                                    </h4>
-                                    <div style="margin-top: 60px">
-                                        <dx:ASPxScheduler ID="todayScheduler" runat="server" Width="100%" ActiveViewType="Day" OnPopupMenuShowing="todayScheduler_PopupMenuShowing"
-                                            ClientInstanceName="ASPxClientScheduler1">
-                                            <Views>
-                                                <DayView ShowAllDayArea="False" ShowWorkTimeOnly="True" NavigationButtonVisibility="Never">
-                                                    <WorkTime End="23:00:00" Start="08:00:00" />
-                                                    <TimeRulers>
-                                                        <dx:TimeRuler />
-                                                    </TimeRulers>
-                                                    <Templates>
-                                                        <VerticalAppointmentTemplate>
-                                                            <uc1:CustomVerticalAppointmentTemplate ID="CustomVerticalAppointmentTemplate1" runat="server" />
-                                                        </VerticalAppointmentTemplate>
-                                                    </Templates>
-                                                </DayView>
-                                                <WorkWeekView Enabled="False">
-                                                    <TimeRulers>
-                                                        <dx:TimeRuler />
-                                                    </TimeRulers>
-                                                </WorkWeekView>
-                                                <WeekView Enabled="False" />
-                                                <MonthView Enabled="False" />
-                                                <TimelineView Enabled="False">
-                                                </TimelineView>
-                                            </Views>
-                                            <OptionsBehavior ShowViewSelector="False" ShowViewNavigator="False" ShowViewNavigatorGotoDateButton="False" ShowViewVisibleInterval="False" />
-                                            <OptionsCustomization AllowAppointmentDelete="None" AllowAppointmentDrag="None" AllowAppointmentDragBetweenResources="None" AllowAppointmentMultiSelect="False" AllowAppointmentResize="None" AllowAppointmentCreate="None" />
-                                            <OptionsForms AppointmentFormVisibility="PopupWindow" AppointmentFormTemplateUrl="~/UserControl/Devexpress/CustomAppointmentForm.ascx" GotoDateFormVisibility="None" RecurrentAppointmentDeleteFormVisibility="None" RecurrentAppointmentEditFormVisibility="None" AppointmentInplaceEditorFormTemplateUrl="~/UserControl/Devexpress/CustomInplaceEditor.ascx" GotoDateFormTemplateUrl="~/DevExpress/ASPxSchedulerForms/GotoDateForm.ascx" RecurrentAppointmentDeleteFormTemplateUrl="~/DevExpress/ASPxSchedulerForms/RecurrentAppointmentDeleteForm.ascx" RecurrentAppointmentEditFormTemplateUrl="~/DevExpress/ASPxSchedulerForms/RecurrentAppointmentEditForm.ascx" RemindersFormTemplateUrl="~/DevExpress/ASPxSchedulerForms/ReminderForm.ascx" />
-                                            <OptionsToolTips AppointmentDragToolTipUrl="~/DevExpress/ASPxSchedulerForms/AppointmentDragToolTip.ascx" AppointmentToolTipUrl="~/DevExpress/ASPxSchedulerForms/AppointmentToolTip.ascx" SelectionToolTipUrl="~/DevExpress/ASPxSchedulerForms/SelectionToolTip.ascx" />
-                                            <Storage EnableReminders="False" Appointments-ResourceSharing="true">
-                                                <Appointments>
-                                                    <%-- DXCOMMENT: Configure appointment mappings --%>
-                                                    <Mappings AppointmentId="AppointmentId" Start="Start" End="End" Location="Location"
-                                                        Subject="Subject" Description="Description" Status="Status" Label="Label" Type="Type" />
-                                                    <CustomFieldMappings>
-                                                        <dx:ASPxAppointmentCustomFieldMapping Name="Agent" ValueType="String" Member="Agent" />
-                                                        <dx:ASPxAppointmentCustomFieldMapping Name="Manager" ValueType="String" Member="Manager" />
-                                                        <dx:ASPxAppointmentCustomFieldMapping Name="AppointType" ValueType="String" Member="AppointType" />
-                                                        <dx:ASPxAppointmentCustomFieldMapping Name="TitleLink" ValueType="String" Member="TitleLink" />
-                                                    </CustomFieldMappings>
-                                                </Appointments>
-                                            </Storage>
-                                        </dx:ASPxScheduler>
+                                <h4>
+                                    <img src="../images/grid_calendar.png" class="vertical-img" /><span class="heading_text">Today's Calendar</span>
+                                </h4>
+                                <div style="margin-top: 60px">
+                                    <dx:ASPxScheduler ID="todayScheduler" runat="server" Width="100%" ActiveViewType="Day" OnPopupMenuShowing="todayScheduler_PopupMenuShowing"
+                                        ClientInstanceName="ASPxClientScheduler1">
+                                        <Views>
+                                            <DayView ShowAllDayArea="False" ShowWorkTimeOnly="True" NavigationButtonVisibility="Never">
+                                                <WorkTime End="23:00:00" Start="08:00:00" />
+                                                <TimeRulers>
+                                                    <dx:TimeRuler />
+                                                </TimeRulers>
+                                                <Templates>
+                                                    <VerticalAppointmentTemplate>
+                                                        <uc1:CustomVerticalAppointmentTemplate ID="CustomVerticalAppointmentTemplate1" runat="server" />
+                                                    </VerticalAppointmentTemplate>
+                                                </Templates>
+                                            </DayView>
+                                            <WorkWeekView Enabled="False">
+                                                <TimeRulers>
+                                                    <dx:TimeRuler />
+                                                </TimeRulers>
+                                            </WorkWeekView>
+                                            <WeekView Enabled="False" />
+                                            <MonthView Enabled="False" />
+                                            <TimelineView Enabled="False">
+                                            </TimelineView>
+                                        </Views>
+                                        <OptionsBehavior ShowViewSelector="False" ShowViewNavigator="False" ShowViewNavigatorGotoDateButton="False" ShowViewVisibleInterval="False" />
+                                        <OptionsCustomization AllowAppointmentDelete="None" AllowAppointmentDrag="None" AllowAppointmentDragBetweenResources="None" AllowAppointmentMultiSelect="False" AllowAppointmentResize="None" AllowAppointmentCreate="None" />
+                                        <OptionsForms AppointmentFormVisibility="PopupWindow" AppointmentFormTemplateUrl="~/UserControl/Devexpress/CustomAppointmentForm.ascx" GotoDateFormVisibility="None" RecurrentAppointmentDeleteFormVisibility="None" RecurrentAppointmentEditFormVisibility="None" AppointmentInplaceEditorFormTemplateUrl="~/UserControl/Devexpress/CustomInplaceEditor.ascx" GotoDateFormTemplateUrl="~/DevExpress/ASPxSchedulerForms/GotoDateForm.ascx" RecurrentAppointmentDeleteFormTemplateUrl="~/DevExpress/ASPxSchedulerForms/RecurrentAppointmentDeleteForm.ascx" RecurrentAppointmentEditFormTemplateUrl="~/DevExpress/ASPxSchedulerForms/RecurrentAppointmentEditForm.ascx" RemindersFormTemplateUrl="~/DevExpress/ASPxSchedulerForms/ReminderForm.ascx" />
+                                        <OptionsToolTips AppointmentDragToolTipUrl="~/DevExpress/ASPxSchedulerForms/AppointmentDragToolTip.ascx" AppointmentToolTipUrl="~/DevExpress/ASPxSchedulerForms/AppointmentToolTip.ascx" SelectionToolTipUrl="~/DevExpress/ASPxSchedulerForms/SelectionToolTip.ascx" />
+                                        <Storage EnableReminders="False" Appointments-ResourceSharing="true">
+                                            <Appointments>
+                                                <%-- DXCOMMENT: Configure appointment mappings --%>
+                                                <Mappings AppointmentId="AppointmentId" Start="Start" End="End" Location="Location"
+                                                    Subject="Subject" Description="Description" Status="Status" Label="Label" Type="Type" />
+                                                <CustomFieldMappings>
+                                                    <dx:ASPxAppointmentCustomFieldMapping Name="Agent" ValueType="String" Member="Agent" />
+                                                    <dx:ASPxAppointmentCustomFieldMapping Name="Manager" ValueType="String" Member="Manager" />
+                                                    <dx:ASPxAppointmentCustomFieldMapping Name="AppointType" ValueType="String" Member="AppointType" />
+                                                    <dx:ASPxAppointmentCustomFieldMapping Name="TitleLink" ValueType="String" Member="TitleLink" />
+                                                </CustomFieldMappings>
+                                            </Appointments>
+                                        </Storage>
+                                    </dx:ASPxScheduler>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-lg-3" style="vertical-align: top; min-width: 380px; padding-top: 40px;">
+                                <div style="width: 375px; background-color: #F2F2F2; -webkit-border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; border-radius: 10px;">
+                                    <div style="background-color: #D9F1FD; -webkit-border-top-left-radius: 10px; -webkit-border-top-right-radius: 10px; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                                        <div id="dateRange" class="containers" style="width: 100%;"></div>
+                                    </div>
+                                    <div style="padding: 10px 10px;">
+                                        <div id="agentActivityChart" class="containers" style="height: 240px; width: 100%;"></div>
+                                        <div id="ProcessStatusChart" class="containers" style="width: 100%;"></div>
                                     </div>
                                 </div>
-                                       
-                            <div class="col-md-3 col-lg-3" style="vertical-align: top; min-width: 380px; padding-top: 40px;">
-                                    <div style="width: 375px; background-color: #F2F2F2; -webkit-border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; border-radius: 10px;">
-                                        <div style="background-color: #D9F1FD; -webkit-border-top-left-radius: 10px; -webkit-border-top-right-radius: 10px; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                                            <div id="dateRange" class="containers" style="width: 100%;"></div>
-                                        </div>
-                                        <div style="padding: 10px 10px;">
-                                            <div id="agentActivityChart" class="containers" style="height: 240px; width: 100%;"></div>
-                                            <div id="ProcessStatusChart" class="containers" style="width: 100%;"></div>
-                                        </div>
-                                    </div>
-                                    <script type="text/javascript">
-                                        var agentSummaryReport = {
-                                            ActivityDataSource: null,
-                                            LeadsDataSource: null,
-                                            AgentName: null,
-                                            DateRange: function () { return $('#dateRange').has("svg").length ? $('#dateRange').dxRangeSelector('instance') : null },
-                                            BarChart: function () {
-                                                if ($("#agentActivityChart").has("svg").length)
-                                                    return $("#agentActivityChart").dxChart("instance");
-                                                else {
-                                                    var tab = this;
-                                                    $("#agentActivityChart").dxChart({
-                                                        dataSource: {},
-                                                        commonSeriesSettings: {
-                                                            argumentField: "Category",
-                                                            type: "bar",
-                                                            hoverMode: "allArgumentPoints",
-                                                            selectionMode: "allArgumentPoints",
-                                                            label: {
-                                                                visible: true,
-                                                                format: "fixedPoint",
-                                                                precision: 0
-                                                            }
-                                                        },
-                                                        argumentAxis: {
-                                                            argumentType: 'string'
-                                                        },
-                                                        series: [
-                                                            { valueField: "User", name: "User", tag: "User" },
-                                                            { valueField: "Avg", name: "Team", tag: "TeamAverage" }
-                                                        ],
-                                                        title: {
-                                                            text: "Activity Summary",
-                                                            font: {
-                                                                family: 'Source Sans Pro, sans-serif',
-                                                                size: 21,
-                                                                weight: 900
-                                                            },
-                                                            horizontalAlignment: 'left',
-                                                            margin: {
-                                                                left: 20
-                                                            }
-                                                        },
-                                                        legend: {
-                                                            verticalAlignment: "bottom",
-                                                            horizontalAlignment: "center"
-                                                        },
-                                                        loadingIndicator: {
-                                                            show: true
-                                                        },
-                                                        onPointClick: function (info) {
-                                                            var clickedPoint = info.target;
-                                                            clickedPoint.isSelected() ? clickedPoint.clearSelection() : clickedPoint.select();
-
-                                                            if (clickedPoint.isSelected()) {
-
-                                                            }
-                                                        },
-                                                        onPointSelectionChanged: function (info) {
-                                                            //var selectedPoint = info.target;
-                                                            //if (selectedPoint.isSelected()) {
-
-                                                            //}
-                                                        },
-                                                        onLegendClick: function (info) {
-
-                                                        }
-                                                    });
-                                                    return $("#agentActivityChart").dxChart("instance");
-                                                }
-                                            },
-                                            InitalTab: function () {
+                                <script type="text/javascript">
+                                    var agentSummaryReport = {
+                                        ActivityDataSource: null,
+                                        LeadsDataSource: null,
+                                        AgentName: null,
+                                        DateRange: function () { return $('#dateRange').has("svg").length ? $('#dateRange').dxRangeSelector('instance') : null },
+                                        BarChart: function () {
+                                            if ($("#agentActivityChart").has("svg").length)
+                                                return $("#agentActivityChart").dxChart("instance");
+                                            else {
                                                 var tab = this;
-                                                var dateNow = new Date();
-                                                var endDate = new Date();
-                                                endDate = endDate.setDate(dateNow.getDate() + 1);
-                                                var startDate = dateNow; //new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
-                                                $("#dateRange").dxRangeSelector({
-                                                    margin: {
-                                                        top: 5
-                                                    },
-                                                    size: {
-                                                        height: 150
-                                                    },
-                                                    background: { color: '#ff400d' },
-                                                    width: 375,
-                                                    scale: {
-                                                        startValue: new Date(2015, 1, 1),
-                                                        endValue: endDate,
-                                                        minorTickInterval: "day",
-                                                        majorTickInterval: 'week',
-                                                        minRange: "day",
-                                                        showMinorTicks: false
-                                                    },
-                                                    sliderMarker: {
-                                                        color: '#ff400d',
-                                                        format: "monthAndDay"
-                                                    },
-                                                    selectedRange: {
-                                                        startValue: startDate,
-                                                        endValue: endDate
-                                                    },
-                                                    onSelectedRangeChanged: function (e) {
-                                                        tab.UpdateActivityChart(e.startValue, e.endValue);
-                                                    }
-                                                });
-                                            },
-                                            ShowTab: function (name) {
-                                                this.AgentName = name;
-                                                var range = this.DateRange();
-                                                var selectedRange = range.getSelectedRange();
-                                                this.UpdateActivityChart(selectedRange.startValue, selectedRange.endValue);
-                                                this.LoadStatusChart();
-                                            },
-                                            LoadAgentActivityDs: function (startDate, endDate) {
-                                                var url = "/wcfdataservices/portalReportservice.svc/LoadAgentSummaryReport/" + this.AgentName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-");
-
-                                                this.ActivityDataSource = new DevExpress.data.DataSource(url);
-                                                this.LeadsDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentLeadsReport/" + this.AgentName);
-                                            },
-                                            UpdateActivityChart: function (startDate, endDate) {
-                                                var chart = this.BarChart();
-                                                chart.showLoadingIndicator();
-                                                this.LoadAgentActivityDs(startDate, endDate);
-                                                chart.beginUpdate();
-                                                chart.option("dataSource", this.ActivityDataSource);
-                                                chart.endUpdate();
-                                                //this.LoadStatusChart();
-                                            },
-                                            LoadStatusChart: function () {
-                                                var option = {
-                                                    dataSource: this.LeadsDataSource,
-                                                    tooltip: {
-                                                        enabled: true,
-                                                        percentPrecision: 0,
-                                                        customizeText: function () {
-                                                            return this.argumentText + " (" + this.percentText + ")";
-                                                        }
-                                                    },
-                                                    legend: {
-                                                        visible: true,
-                                                        verticalAlignment: "bottom",
-                                                        horizontalAlignment: "center"
-                                                    },
-                                                    series: [{
-                                                        type: "doughnut",
-                                                        argumentField: "Status",
-                                                        valueField: "Count",
-                                                        tagField: "StatusKey",
+                                                $("#agentActivityChart").dxChart({
+                                                    dataSource: {},
+                                                    commonSeriesSettings: {
+                                                        argumentField: "Category",
+                                                        type: "bar",
+                                                        hoverMode: "allArgumentPoints",
+                                                        selectionMode: "allArgumentPoints",
                                                         label: {
                                                             visible: true,
-                                                            connector: {
-                                                                visible: true
-                                                            }
+                                                            format: "fixedPoint",
+                                                            precision: 0
                                                         }
-                                                    }],
+                                                    },
+                                                    argumentAxis: {
+                                                        argumentType: 'string'
+                                                    },
+                                                    series: [
+                                                        { valueField: "User", name: "User", tag: "User" },
+                                                        { valueField: "Avg", name: "Team", tag: "TeamAverage" }
+                                                    ],
                                                     title: {
-                                                        text: "Leads Status",
+                                                        text: "Activity Summary",
                                                         font: {
                                                             family: 'Source Sans Pro, sans-serif',
                                                             size: 21,
@@ -641,21 +513,146 @@
                                                             left: 20
                                                         }
                                                     },
-                                                    palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
-                                                };
+                                                    legend: {
+                                                        verticalAlignment: "bottom",
+                                                        horizontalAlignment: "center"
+                                                    },
+                                                    loadingIndicator: {
+                                                        show: true
+                                                    },
+                                                    onPointClick: function (info) {
+                                                        var clickedPoint = info.target;
+                                                        clickedPoint.isSelected() ? clickedPoint.clearSelection() : clickedPoint.select();
 
-                                                $("#ProcessStatusChart").dxPieChart(option);
+                                                        if (clickedPoint.isSelected()) {
+
+                                                        }
+                                                    },
+                                                    onPointSelectionChanged: function (info) {
+                                                        //var selectedPoint = info.target;
+                                                        //if (selectedPoint.isSelected()) {
+
+                                                        //}
+                                                    },
+                                                    onLegendClick: function (info) {
+
+                                                    }
+                                                });
+                                                return $("#agentActivityChart").dxChart("instance");
                                             }
-                                        };
+                                        },
+                                        InitalTab: function () {
+                                            var tab = this;
+                                            var dateNow = new Date();
+                                            var endDate = new Date();
+                                            endDate = endDate.setDate(dateNow.getDate() + 1);
+                                            var startDate = dateNow; //new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
+                                            $("#dateRange").dxRangeSelector({
+                                                margin: {
+                                                    top: 5
+                                                },
+                                                size: {
+                                                    height: 150
+                                                },
+                                                background: { color: '#ff400d' },
+                                                width: 375,
+                                                scale: {
+                                                    startValue: new Date(2015, 1, 1),
+                                                    endValue: endDate,
+                                                    minorTickInterval: "day",
+                                                    majorTickInterval: 'week',
+                                                    minRange: "day",
+                                                    showMinorTicks: false
+                                                },
+                                                sliderMarker: {
+                                                    color: '#ff400d',
+                                                    format: "monthAndDay"
+                                                },
+                                                selectedRange: {
+                                                    startValue: startDate,
+                                                    endValue: endDate
+                                                },
+                                                onSelectedRangeChanged: function (e) {
+                                                    tab.UpdateActivityChart(e.startValue, e.endValue);
+                                                }
+                                            });
+                                        },
+                                        ShowTab: function (name) {
+                                            this.AgentName = name;
+                                            var range = this.DateRange();
+                                            var selectedRange = range.getSelectedRange();
+                                            this.UpdateActivityChart(selectedRange.startValue, selectedRange.endValue);
+                                            this.LoadStatusChart();
+                                        },
+                                        LoadAgentActivityDs: function (startDate, endDate) {
+                                            var url = "/wcfdataservices/portalReportservice.svc/LoadAgentSummaryReport/" + this.AgentName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-");
 
-                                        $(document).ready(function () {
-                                            agentSummaryReport.InitalTab();
-                                            var name = $("#spanUserName").html();
-                                            agentSummaryReport.ShowTab(name);
-                                        });
-                                    </script>
-                                </div>
-                                    
+                                            this.ActivityDataSource = new DevExpress.data.DataSource(url);
+                                            this.LeadsDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentLeadsReport/" + this.AgentName);
+                                        },
+                                        UpdateActivityChart: function (startDate, endDate) {
+                                            var chart = this.BarChart();
+                                            chart.showLoadingIndicator();
+                                            this.LoadAgentActivityDs(startDate, endDate);
+                                            chart.beginUpdate();
+                                            chart.option("dataSource", this.ActivityDataSource);
+                                            chart.endUpdate();
+                                            //this.LoadStatusChart();
+                                        },
+                                        LoadStatusChart: function () {
+                                            var option = {
+                                                dataSource: this.LeadsDataSource,
+                                                tooltip: {
+                                                    enabled: true,
+                                                    percentPrecision: 0,
+                                                    customizeText: function () {
+                                                        return this.argumentText + " (" + this.percentText + ")";
+                                                    }
+                                                },
+                                                legend: {
+                                                    visible: true,
+                                                    verticalAlignment: "bottom",
+                                                    horizontalAlignment: "center"
+                                                },
+                                                series: [{
+                                                    type: "doughnut",
+                                                    argumentField: "Status",
+                                                    valueField: "Count",
+                                                    tagField: "StatusKey",
+                                                    label: {
+                                                        visible: true,
+                                                        connector: {
+                                                            visible: true
+                                                        }
+                                                    }
+                                                }],
+                                                title: {
+                                                    text: "Leads Status",
+                                                    font: {
+                                                        family: 'Source Sans Pro, sans-serif',
+                                                        size: 21,
+                                                        weight: 900
+                                                    },
+                                                    horizontalAlignment: 'left',
+                                                    margin: {
+                                                        left: 20
+                                                    }
+                                                },
+                                                palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
+                                            };
+
+                                            $("#ProcessStatusChart").dxPieChart(option);
+                                        }
+                                    };
+
+                                    $(document).ready(function () {
+                                        agentSummaryReport.InitalTab();
+                                        var name = $("#spanUserName").html();
+                                        agentSummaryReport.ShowTab(name);
+                                    });
+                                </script>
+                            </div>
+
                         </div>
                     </div>
                 </dx:SplitterContentControl>

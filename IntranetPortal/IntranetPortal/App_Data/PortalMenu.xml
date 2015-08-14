@@ -509,9 +509,13 @@
   </PortalNavItem>
 
   <PortalNavItem Name="Construction" Text="Construction" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <!--Temporarily use Admin roles for Eviction-->
     <UserRoles>Construction-*</UserRoles>
     <Items>
+      <PortalNavItem Name="Construction-Summary" Text="Summary" NavigationUrl="/MyDefault.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <PortalNavItem Name="Construction-All" Text="All Cases" NavigationUrl="/Construction/ConstructionUI.aspx" ShowAmount="true" AmountManageClass="ConstructionManage">
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>

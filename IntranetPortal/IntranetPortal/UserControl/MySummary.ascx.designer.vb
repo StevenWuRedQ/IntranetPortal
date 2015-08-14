@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class MySummary
 
     '''<summary>
-    '''LeadsSubMenu control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents LeadsSubMenu As Global.IntranetPortal.LeadsSubMenu
-
-    '''<summary>
     '''rptModules control.
     '''</summary>
     '''<remarks>
