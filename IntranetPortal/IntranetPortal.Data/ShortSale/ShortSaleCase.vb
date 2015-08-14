@@ -554,11 +554,12 @@ Partial Public Class ShortSaleCase
     Public ReadOnly Property RptValuation As String
         Get
             If ValueInfoes IsNot Nothing AndAlso ValueInfoes.Count > 0 Then
+                Dim valueData = ValueInfoes.Last
                 Dim sb As New StringBuilder
-                sb.Append(NewLine("Type of Value", ValueInfoes(0).Method))
-                sb.Append(NewLine("Date of Value", String.Format("{0:d}", ValueInfoes(0).DateOfValue)))
-                sb.Append(NewLine("Value", String.Format("{0:c}", ValueInfoes(0).BankValue)))
-                sb.Append(NewLine("Expiration", String.Format("{0:d}", ValueInfoes(0).ExpiredOn)))
+                sb.Append(NewLine("Type of Value", valueData.Method))
+                sb.Append(NewLine("Date of Value", String.Format("{0:d}", valueData.DateOfValue)))
+                sb.Append(NewLine("Value", String.Format("{0:c}", valueData.BankValue)))
+                sb.Append(NewLine("Expiration", String.Format("{0:d}", valueData.ExpiredOn)))
 
                 Return sb.ToString
             End If
@@ -571,12 +572,12 @@ Partial Public Class ShortSaleCase
     Public ReadOnly Property RptOffer As String
         Get
             If ShortSaleOffers IsNot Nothing AndAlso ShortSaleOffers.Count > 0 Then
-
+                Dim offer = ShortSaleOffers.Last
                 Dim sb As New StringBuilder
-                sb.Append(NewLine("Current Offer", String.Format("{0:c}", ShortSaleOffers(0).OfferAmount)))
-                sb.Append(NewLine("Date offer submitted", String.Format("{0:d}", ShortSaleOffers(0).DateSubmited)))
-                sb.Append(NewLine("Counter from Lender", ShortSaleOffers(0).OfferType))
-                sb.Append(NewLine("Buyer's Counter", ShortSaleOffers(0).BuyerEntity))
+                sb.Append(NewLine("Type", offer.OfferType))
+                sb.Append(NewLine("Amount", String.Format("{0:c}", offer.OfferAmount)))
+                sb.Append(NewLine("Date offer submitted", String.Format("{0:d}", offer.DateSubmited)))
+                'sb.Append(NewLine("Buyer's Counter", ShortSaleOffers(0).BuyerEntity))
                 Return sb.ToString
             End If
 

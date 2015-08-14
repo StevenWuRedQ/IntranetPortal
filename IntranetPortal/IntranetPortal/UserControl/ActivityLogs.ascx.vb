@@ -31,6 +31,16 @@ Public Class ActivityLogs
             ActivityLogProvider = New ConstructionManage(True)
         End If
 
+        If Not Page.IsPostBack Then
+            If ActivityLogProvider IsNot Nothing Then
+                If ActivityLogProvider.LogCategoryFilter IsNot Nothing Then
+                    cbCateLog.Items.Clear()
+                    For Each cate In ActivityLogProvider.LogCategoryFilter
+                        cbCateLog.Items.Add(cate.ToString)
+                    Next
+                End If
+            End If
+        End If
     End Sub
 
     Public Sub BindData(bble As String, activityMng As ActivityManageBase)
@@ -43,6 +53,14 @@ Public Class ActivityLogs
 
         If ActivityLogProvider IsNot Nothing Then
             gridTracking.DataSource = ActivityLogProvider.LogDataSource(bble)
+
+            If ActivityLogProvider.LogCategoryFilter IsNot Nothing Then
+
+                cbCateLog.Items.Clear()
+                For Each cate In ActivityLogProvider.LogCategoryFilter
+                    cbCateLog.Items.Add(cate.ToString)
+                Next
+            End If
         Else
             Select Case DisplayMode
                 Case ActivityLogMode.ShortSale
@@ -59,6 +77,10 @@ Public Class ActivityLogs
         End If
 
         gridTracking.DataBind()
+    End Sub
+
+    Public Sub BindFilter()
+
     End Sub
 
     Sub BindEmpList()
@@ -750,8 +772,7 @@ Public Class ActivityLogs
             End If
         End If
 
-
-        If category = "Appointment" Then
+        If category = "Appointment" OrElse action = LeadsActivityLog.EnumActionType.Appointment Then
             Dim logId = CInt(e.GetValue("LogID"))
             Dim userAppoint = UserAppointment.GetAppointmentBylogID(logId)
 
@@ -950,7 +971,6 @@ Public Class ActivityLogs
                         End If
 
                         LeadsActivityLog.AddActivityLog(aspxdate, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
-
 
                         'ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category & " - " & statusOfUpdate, txtComments)
                         ShortSaleManage.AddActivityLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category, statusOfUpdate, txtComments)
@@ -1262,8 +1282,10 @@ Public Class ActivityLogs
             End If
         End If
 
-        'Update status to Priority
-        UpdateLeadStatus(hfBBLE.Value, LeadStatus.Priority, Nothing)
+        If LogCategory = LeadsActivityLog.LogCategory.SalesAgent Then
+            'Update status to Priority
+            UpdateLeadStatus(hfBBLE.Value, LeadStatus.Priority, Nothing)
+        End If
     End Sub
 
     Sub UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime)

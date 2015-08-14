@@ -35,7 +35,7 @@
 
             If Not Page.ClientScript.IsStartupScriptRegistered("InitData") Then
                 cstext1 = "<script type=""text/javascript"">" & _
-                                String.Format("InitData(""{0}"");", bble) & "</script>"
+                                String.Format("LoadCaseData(""{0}"");", bble) & "</script>"
                 Page.ClientScript.RegisterStartupScript(Me.GetType, "InitData", cstext1)
             End If
         End If

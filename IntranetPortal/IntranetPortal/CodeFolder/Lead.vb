@@ -298,7 +298,7 @@ Partial Public Class Lead
                     Dim empName = HttpContext.Current.User.Identity.Name
                     Dim comments = String.Format("Change status from {0} to {1}.", CType(originateStatus, LeadStatus).ToString, status.ToString)
                     If status = LeadStatus.DoorKnocks Then
-                        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName, LeadsActivityLog.EnumActionType.DoorKnock)
+                        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString, empId, empName, LeadsActivityLog.EnumActionType.DoorKnock)
                     Else
                         Dim action = LeadsActivityLog.EnumActionType.DefaultAction
                         If status = LeadStatus.Callback Then
@@ -326,14 +326,14 @@ Partial Public Class Lead
                         '    LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.DeadLeads, lead.EmployeeName, empName)
                         'End If
 
-                        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName, action)
+                        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString, empId, empName, action)
                     End If
                 Else
                     Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
                     Dim empName = HttpContext.Current.User.Identity.Name
                     If status = LeadStatus.Callback Then
                         Dim comments = "Lead Status changed to Follow Up on " & callbackDate.ToString("MM/dd/yyyy")
-                        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName, LeadsActivityLog.EnumActionType.FollowUp)
+                        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString, empId, empName, LeadsActivityLog.EnumActionType.FollowUp)
                     End If
                 End If
 
@@ -374,7 +374,7 @@ Partial Public Class Lead
                     Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
                     Dim empName = HttpContext.Current.User.Identity.Name
                     Dim comments = String.Format("Change status from {0} to {1}.", CType(originateStatus, LeadStatus).ToString, LeadStatus.DeadEnd.ToString)
-                    LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName, LeadsActivityLog.EnumActionType.DeadLead)
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString, empId, empName, LeadsActivityLog.EnumActionType.DeadLead)
                 End If
             End If
         End Using

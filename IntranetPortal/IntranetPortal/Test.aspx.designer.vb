@@ -39,4 +39,13 @@ Partial Public Class Test
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UpdateStauts As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''MySummary control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents MySummary As Global.IntranetPortal.MySummary
 End Class

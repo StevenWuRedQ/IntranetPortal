@@ -191,8 +191,7 @@
                     </div>
 
 
-
-                    <%------end------%>
+                                        <%------end------%>
                     <div class="content" style="float: left; margin-right: 10px; margin-left: 35px;">
                         <div class="row">
                             <div class="col-md-6 col-lg-6">

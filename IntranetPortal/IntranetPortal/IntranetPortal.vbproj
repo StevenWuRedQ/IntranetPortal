@@ -546,6 +546,9 @@
     <Compile Include="CodeFolder\RecycleManage.vb" />
     <Compile Include="CodeFolder\SearchResult.vb" />
     <Compile Include="CodeFolder\ShortSaleManage.vb" />
+    <Compile Include="CodeFolder\SummaryItemBase.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CodeFolder\Team.vb" />
     <Compile Include="CodeFolder\UserAppointment.vb" />
     <Compile Include="CodeFolder\UserInTeam.vb" />
@@ -1311,6 +1314,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="MyDefault.aspx.designer.vb">
+      <DependentUpon>MyDefault.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyDefault.aspx.vb">
+      <DependentUpon>MyDefault.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="OneDrive\LoadFileFromSharepoint.aspx.designer.vb">
       <DependentUpon>LoadFileFromSharepoint.aspx</DependentUpon>
     </Compile>
@@ -1915,11 +1925,39 @@
       <DependentUpon>PropertyLinks.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControl\SummaryItem\AppointmentItem.ascx.designer.vb">
+      <DependentUpon>AppointmentItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\AppointmentItem.ascx.vb">
+      <DependentUpon>AppointmentItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\CalendarItem.ascx.designer.vb">
+      <DependentUpon>CalendarItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\CalendarItem.ascx.vb">
+      <DependentUpon>CalendarItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\TaskItem.ascx.designer.vb">
+      <DependentUpon>TaskItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\TaskItem.ascx.vb">
+      <DependentUpon>TaskItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControl\TitleInLeadsControl.ascx.designer.vb">
       <DependentUpon>TitleInLeadsControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\TitleInLeadsControl.ascx.vb">
       <DependentUpon>TitleInLeadsControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\MySummary.ascx.designer.vb">
+      <DependentUpon>MySummary.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\MySummary.ascx.vb">
+      <DependentUpon>MySummary.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\UserSummary.ascx.designer.vb">
@@ -2456,6 +2494,7 @@
     <Content Include="Map\MapData\nyc-zip-code.js" />
     <Content Include="Map\ServiceTest.aspx" />
     <Content Include="Map\ZipMap.aspx" />
+    <Content Include="MyDefault.aspx" />
     <Content Include="OneDrive\constants.js" />
     <Content Include="OneDrive\Callback.html" />
     <Content Include="OneDrive\LoadFileFromSharepoint.aspx" />
@@ -3591,7 +3630,11 @@
     <Content Include="UserControl\NavMenu.ascx" />
     <Content Include="UserControl\PropertyInfo.ascx" />
     <Content Include="UserControl\PropertyLinks.ascx" />
+    <Content Include="UserControl\SummaryItem\AppointmentItem.ascx" />
+    <Content Include="UserControl\SummaryItem\CalendarItem.ascx" />
+    <Content Include="UserControl\SummaryItem\TaskItem.ascx" />
     <Content Include="UserControl\TitleInLeadsControl.ascx" />
+    <Content Include="UserControl\MySummary.ascx" />
     <Content Include="UserControl\UserSummary.ascx" />
     <Content Include="ViewHomeOwner.aspx" />
     <Content Include="ViewLeadsInfo.aspx" />

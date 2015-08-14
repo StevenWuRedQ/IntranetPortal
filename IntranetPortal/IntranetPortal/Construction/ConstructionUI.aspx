@@ -160,10 +160,11 @@
     <script type="text/javascript">
 
         function LoadCaseData(bble) {
-
-            //put construction data loading logic here
-            angular.element(document.getElementById('ConstructionCtrl')).scope().init(bble);
-            console.log(bble);
+            $(document).ready(function () {
+                //put construction data loading logic here
+                angular.element(document.getElementById('ConstructionCtrl')).scope().init(bble);
+                console.log(bble);
+            });
         }
 
         portalApp = angular.module('PortalApp');

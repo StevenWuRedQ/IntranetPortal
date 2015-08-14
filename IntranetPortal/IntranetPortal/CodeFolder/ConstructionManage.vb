@@ -62,10 +62,8 @@ Public Class ConstructionManage
     Public Sub New(actityLog As Boolean)
         Me.TaskActionList = _actionLists
         Me.LogCategory = LeadsActivityLog.LogCategory.Construction
+        Me.LogCategoryFilter = {LeadsActivityLog.LogCategory.Construction, LeadsActivityLog.LogCategory.ShortSale}
     End Sub
-
-
-
 
 #End Region
 End Class

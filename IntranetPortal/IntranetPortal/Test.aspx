@@ -4,6 +4,10 @@
 <%@ Register Src="~/UserControl/NavMenu.ascx" TagPrefix="uc1" TagName="NavMenu" %>
 <%@ Register Src="~/EmailTemplate/TaskSummary.ascx" TagPrefix="uc1" TagName="TaskSummary" %>
 <%@ Register Src="~/EmailTemplate/ActivitySummary.ascx" TagPrefix="uc1" TagName="ActivitySummary" %>
+<%@ Register Src="~/UserControl/UserSummary.ascx" TagPrefix="uc1" TagName="UserSummary" %>
+<%@ Register Src="~/UserControl/MySummary.ascx" TagPrefix="uc1" TagName="MySummary" %>
+
+
 
 <!DOCTYPE html>
 
@@ -69,14 +73,14 @@
             }
 
         </script>
-        <div>
+        <div >
             <input type="file" id="fileUpload" value="" />
             <br />
             <br />
             <button id="btnUpload" onclick="UploadFile()" type="button">
                 Upload</button>
         </div>
-
+   
     </form>
 </body>
 </html>

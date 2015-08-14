@@ -407,6 +407,25 @@
 
     var refreshLogs = false;
    
+    var showAppointmentPopup = false;
+    function OnSaveAppointment(s, e) {
+        if (ASPxClientEdit.ValidateGroup("Appointment")) {
+            debugger;
+            ASPxPopupScheduleClient.Hide();
+            var logId = hfLogIDClient.Get('logId');
+            if (logId != null && logId > 0) {
+                ReScheduledAppointment(logId);
+                //SetLeadStatus(9);
+                ASPxPopupScheduleClient.PerformCallback("Schedule");
+                ASPxPopupScheduleClient.Hide();
+            }
+            else {
+                ASPxPopupScheduleClient.PerformCallback("Schedule");
+            }
+            showAppointmentPopup = false;
+            gridTrackingClient.Refresh();
+        }
+    }
     
     // ]]>
 </script>
@@ -444,7 +463,7 @@
 
                 <%-- 50px --%>
                 <div style="margin-top: 50px">
-                    <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Legal or DisplayMode=ActivityLogMode.Construction or DisplayMode = ActivityLogMode.Eviction Then%>
+                    <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Legal Or DisplayMode = ActivityLogMode.Construction Or DisplayMode = ActivityLogMode.Eviction Then%>
                     <div>Date of Comment:</div>
                     <div class="border_under_line" style="height: 80px">
                         <dx:ASPxDateEdit ID="ASPxDateEdit1" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
@@ -528,7 +547,7 @@
                 </div>
                 <div style="margin-top: 15px; float: right; margin-right: 5px;">
                     <i class="fa fa-plus-circle activity_add_buttons tooltip-examples icon_btn" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
-                    <% If DisplayMode = ActivityLogMode.Leads Then%>
+                    <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Construction Then%>
                     <i class="fa fa-calendar-o activity_add_buttons tooltip-examples" style="margin-right: 15px; cursor: pointer" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
                     <%Else%>
                     <% If DisplayMode = ActivityLogMode.ShortSale Then%>
@@ -826,98 +845,6 @@
             </ContentCollection>
         </dx:ASPxPopupControl>
 
-        <%--  <dx:ASPxPopupControl ClientInstanceName="ASPxPopupScheduleSelectDateControl" Width="260px" Height="250px"
-            MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl2"
-            HeaderText="Select Date" Modal="true"
-            runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
-            <ContentCollection>
-                <dx:PopupControlContentControl runat="server">
-                    <table>
-                        <tr>
-                            <td>
-                                <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="TaskScheduleCalendar" ShowClearButton="False" ShowTodayButton="False"></dx:ASPxCalendar>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                <dx:ASPxButton ID="ASPxButton2" runat="server" Text="OK" AutoPostBack="false">
-                                    <ClientSideEvents Click="function(){
-                                                                                                                        cbTaskScheduleClient.SetText(TaskScheduleCalendar.GetSelectedDate().toLocaleDateString());
-                                                                                                                        ASPxPopupScheduleSelectDateControl.Hide();                                                                                                                         
-                                                                                                                        }"></ClientSideEvents>
-                                </dx:ASPxButton>
-                                &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false">
-                                                                <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupScheduleSelectDateControl.Hide();                                                                                                                                                                                                                                               
-                                                                                                                        }"></ClientSideEvents>
-
-                                                            </dx:ASPxButton>
-                            </td>
-                        </tr>
-                    </table>
-                </dx:PopupControlContentControl>
-            </ContentCollection>
-        </dx:ASPxPopupControl>--%>
-
-        <%--  <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectUserControl" Width="260px" Height="250px" MaxWidth="800px" MinWidth="150px" ID="pcMain" HeaderText="Select Employees:" Modal="true"
-            runat="server" EnableViewState="false" PopupHorizontalAlign="RightSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
-            <ContentCollection>
-                <dx:PopupControlContentControl runat="server" Visible="false">
-                    <table style="width: 100%">
-                        <tr>
-                            <td>
-                                <dx:ASPxListBox runat="server" ID="lbEmployees" Width="100%" Height="240px" ClientInstanceName="lbEmployeesClient"></dx:ASPxListBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table style="width: 100%; border-collapse: separate; border-spacing: 0px;">
-                                    <tr>
-                                        <td>
-                                            <dx:ASPxComboBox runat="server" Width="190px" ID="cbEmps" TextField="Name" ValueField="Name" ClientInstanceName="cbEmpsClient"></dx:ASPxComboBox>
-                                        </td>
-                                        <td>
-                                            <dx:ASPxButton runat="server" ID="btnAddEmp" RenderMode="Link" Image-IconID="actions_add_16x16" AutoPostBack="false">
-                                                <Image IconID="actions_add_16x16"></Image>
-                                                <ClientSideEvents Click="function(s,e){
-                                                                            var emp = cbEmpsClient.GetText();
-                                                                            lbEmployeesClient.AddItem(emp);
-                                                                            }" />
-                                            </dx:ASPxButton>
-                                            <dx:ASPxButton runat="server" ID="btnRemoveEmp" RenderMode="Link" AutoPostBack="false">
-                                                <Image IconID="actions_removeitem_16x16"></Image>
-                                                <ClientSideEvents Click="function(s, e){
-                                                                            var index = lbEmployeesClient.GetSelectedIndex();
-                                                                            lbEmployeesClient.RemoveItem(index);
-                                                                            }" />
-                                            </dx:ASPxButton>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false">
-                                    <ClientSideEvents Click="function(){
-                                                                                                                        OnSelectedEmpComplete();
-                                                                                                                        ASPxPopupSelectUserControl.Hide();                                                                                                                        
-                                                                                                                        }"></ClientSideEvents>
-                                </dx:ASPxButton>
-                                &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false">
-                                                                <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupSelectUserControl.Hide();                                                                                                                                                                                                                                               
-                                                                                                                        }"></ClientSideEvents>
-
-                                                            </dx:ASPxButton>
-                            </td>
-                        </tr>
-                    </table>
-                </dx:PopupControlContentControl>
-            </ContentCollection>
-        </dx:ASPxPopupControl>--%>
 
         <dx:ASPxPopupControl ClientInstanceName="popupBpo" Width="450px" Height="480px" OnWindowCallback="ASPxPopupControl2_WindowCallback"
             MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl2"

@@ -269,28 +269,7 @@
             __doPostBack(s.name, '');
         }
     }
-
-    var showAppointmentPopup = false;
-    function OnSaveAppointment(s, e) {
-        if (ASPxClientEdit.ValidateGroup("Appointment")) {
-            debugger;
-            ASPxPopupScheduleClient.Hide();
-            var logId = hfLogIDClient.Get('logId');
-            if (logId != null && logId > 0) {
-                ReScheduledAppointment(logId);
-                //SetLeadStatus(9);
-                ASPxPopupScheduleClient.PerformCallback("Schedule");
-                ASPxPopupScheduleClient.Hide();
-            }
-            else {
-
-                ASPxPopupScheduleClient.PerformCallback("Schedule");
-            }
-            showAppointmentPopup = false;
-            gridTrackingClient.Refresh();
-        }
-    }
-
+    
     var currOwner = "";
     function AddBestPhoneNum(bble, ownerName, ulClient, addButton) {
         //var ul = document.getElementById(ulClient);
