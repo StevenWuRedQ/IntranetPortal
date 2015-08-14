@@ -85,15 +85,15 @@ Namespace Controllers
             End If
 
             Dim results = New List(Of String)
+            Dim bble = HttpContext.Current.Request.QueryString("bble")
+            Dim fileName = HttpContext.Current.Request.QueryString("fileName")
 
             If HttpContext.Current.Request.Files.Count > 0 Then
                 For i = 0 To HttpContext.Current.Request.Files.Count - 1
                     Dim file As HttpPostedFile = HttpContext.Current.Request.Files(i)
                     Dim ms = New MemoryStream()
                     file.InputStream.CopyTo(ms)
-                    Dim bble = HttpContext.Current.Request.QueryString("bble")
-                    Dim fileName = HttpContext.Current.Request.QueryString("fileName")
-
+                    fileName = file.FileName
                     results.Add(Core.DocumentService.UploadFile(String.Format("{0}/{1}", bble, "Construction"), ms.ToArray, fileName, User.Identity.Name))
                 Next
                 Return Ok(results.ToArray)
