@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionPlansTab.ascx.vb" Inherits="IntranetPortal.ConstructionPlansTab" %>
 <div>
     <div class="">
+        
         <h4 class="ss_form_title">Electrical</h4>
         <table class="table table-striped">
             <thead>
@@ -16,8 +17,8 @@
 
                 </tr>
             </thead>
-            <tr ng-repeat="o in ['Architectural','Structural','Mechanical','Demo','Shoring & Underpinning','Foundation','Design']  track by $index">
-                <td>{{o}}</td>
+            <tr ng-repeat="o in [{'text':'Architectural','val':'Architectural'},{'text':'Structural',val:'Structural'},{'text':'Mechanical','val':'Mechanical'},{text:'Demo',val:'Demo'},{text:'Shoring & Underpinning',val:'ShoringUnderpinning'},{text:'Foundation',val:'Foundation'},{text:'Design',val:'Design'}]  track by $index">
+                <td>{{o.text}}</td>
                 <td>
                     <button class="btn" type="button">Upload</button>
 
@@ -27,10 +28,10 @@
 
                 </td>
                 <td>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="CSCase.CSCase.Plans[o.val+'Examiner']">
                 </td>
                 <td>
-                    <input class=" form-control" ss-date ng-model="CSCase.FakeDate">
+                    <input class=" form-control" ss-date ng-model="CSCase.CSCase.Plans[o.val+'ExaminationDate']">
                 </td>
                 <td>
                     <input class="btn" type="file">

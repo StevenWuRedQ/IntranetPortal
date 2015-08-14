@@ -6,7 +6,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Permit is Issued</label>
-                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
+                <input class="ss_form_input" ss-date ng-model="CSCase.CSCase.Signoffs.PlumbingDatePremitIssued">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Schedule B</label>
@@ -36,7 +36,7 @@
                             <button class="btn" type="button">Remider me</button></td>
                         <td>
 
-                            <select class="form-control">
+                            <select class="form-control" ng-model="CSCase.CSCase.Signoffs.RoughingInspection">
                                 <option>Yes</option>
                                 <option>No</option>
                             </select>
@@ -50,7 +50,7 @@
                             <button class="btn" type="button">Remider me</button></td>
                         <td>
 
-                            <select class="form-control">
+                            <select class="form-control" ng-model="CSCase.CSCase.Signoffs.GasTest">
                                 <option>Yes</option>
                                 <option>No</option>
                             </select>
@@ -64,7 +64,7 @@
                             <button class="btn" type="button">Remider me</button></td>
                         <td>
 
-                            <select class="form-control">
+                            <select class="form-control"  ng-model="CSCase.CSCase.Signoffs.HydrantFlowTest">
                                 <option>Yes</option>
                                 <option>No</option>
                             </select>
@@ -78,7 +78,7 @@
                             <button class="btn" type="button">Remider me</button></td>
                         <td>
 
-                            <select class="form-control">
+                            <select class="form-control"  ng-model="CSCase.CSCase.Signoffs.RPZTest">
                                 <option>Yes</option>
                                 <option>No</option>
                             </select>
@@ -113,11 +113,11 @@
 
                             <li class="ss_form_item">
                                 <label class="ss_form_input_title">date fee paid</label>
-                                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
+                                <input class="ss_form_input" ss-date ng-model="CSCase.CSCase.Signoffs.PAAPayFeeDate">
                             </li>
                             <li class="ss_form_item">
                                 <label class="ss_form_input_title">Date Approval</label>
-                                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
+                                <input class="ss_form_input" ss-date  ng-model="CSCase.CSCase.Signoffs.PAADateApproval">
                             </li>
                         </ul>
                     </div>
@@ -132,14 +132,14 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Plumbing job signed off date</label>
-                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
+                <input class="ss_form_input" ss-date ng-model="CSCase.CSCase.Signoffs.PlumbingJobSignedOffDate">
             </li>
 
         </ul>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ss_form_item_line">
                 <label class="ss_form_input_title">notes</label>
-                <textarea class="edit_text_area text_area_ss_form"></textarea>
+                <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.CSCase.Signoffs.PlumbingNotes"></textarea>
             </li>
 
         </ul>
@@ -151,7 +151,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Permit was pulled</label>
-                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
+                <input class="ss_form_input" ss-date ng-model="CSCase.CSCase.Signoffs.ElectricalPermitPulled">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">PW2</label>
@@ -159,20 +159,20 @@
             </li>
             <li class="ss_form_item" style="visibility: hidden">
                 <label class="ss_form_input_title"></label>
-                <input class="ss_form_input">
+                <input class="ss_form_input" >
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Inspection date requested</label>
-                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
+                <input class="ss_form_input" ss-date ng-model="CSCase.CSCase.Signoffs.ElectricalInspectionRequestedDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">date of inspection</label>
-                <input class="ss_form_input">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Signoffs.ElectricalInspectionDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">results</label>
-                <select class="ss_form_input">
+                <select class="ss_form_input" ng-model="CSCase.CSCase.Signoffs.ElectricalInspectionResults">
                     <option></option>
                     <option>Passed</option>
                     <option>Failed</option>
@@ -180,26 +180,26 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Completetion fee</label>
-                <input class="ss_form_input">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Signoffs.ElectricalCompletedFee">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Amount due</label>
-                <input class="ss_form_input">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Signoffs.ElectricalAmountDue">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date paid</label>
-                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
+                <input class="ss_form_input" ss-date ng-model="CSCase.CSCase.Signoffs.ElectricalDatePaid">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title ss_warning">date electric signed of</label>
-                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
+                <label class="ss_form_input_title ss_warning">date electric signed off</label>
+                <input class="ss_form_input" ss-date ng-model="CSCase.CSCase.Signoffs.ElectricalElectricSignedOffDate">
             </li>
         </ul>
 
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ss_form_item_line">
                 <label class="ss_form_input_title">Notes</label>
-                <textarea class="edit_text_area text_area_ss_form"></textarea>
+                <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.CSCase.Signoffs.ElectricalNote"></textarea>
             </li>
 
         </ul>
@@ -209,7 +209,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Permit was pulled</label>
-                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
+                <input class="ss_form_input" ss-date ng-model="CSCase.CSCase.Signoffs.ConstructionPermitPulledDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">PW2</label>
@@ -222,11 +222,11 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">date inspection was requested</label>
-                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
+                <input class="ss_form_input" ss-date ng-model="CSCase.CSCase.Signoffs.ConstructionInspectionRequestedDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">inspection date</label>
-                <input class="ss_form_input">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Signoffs.ConstructionInspectionDate">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Objecteions</label>
@@ -235,17 +235,17 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Constaction report</label>
-                <input class="ss_form_input">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Signoffs.ConstructionReport">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">construction job jigned off date</label>
-                <input class="ss_form_input" ss-date ng-model="CSCase.FakeDate">
+                <label class="ss_form_input_title">construction job Signed off date</label>
+                <input class="ss_form_input" ss-date ng-model="CSCase.CSCase.Signoffs.ConstructionSignedOffDate">
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ss_form_item_line">
                 <label class="ss_form_input_title">Notes</label>
-                <textarea class="edit_text_area text_area_ss_form"></textarea>
+                <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.CSCase.Signoffs.ConstructionNotes"></textarea>
             </li>
 
         </ul>
