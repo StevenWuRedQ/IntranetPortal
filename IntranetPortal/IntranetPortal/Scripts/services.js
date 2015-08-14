@@ -16,7 +16,35 @@ function NGAddArrayitemScope(scopeId, model) {
     } 
 
 }
+function ScopeCaseDataChanged(getDataFunc) {
+    if ($('#CaseData').length == 0)
+    {
+        alert("can not find input case data");
+        $('<input type="hidden" id="CaseData" />').appendTo(document.body);
+        return false;
+    }
+    return $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(getDataFunc());
+}
+function ScopeResetCaseDataChange(getDataFunc) {
+    if ($('#CaseData').length == 0) {
+        $('<input type="hidden" id="CaseData" />').appendTo(document.body);
+    }
+    $('#CaseData').val(JSON.stringify(getDataFunc()));
+}
 
+function ScopeAutoSave(getDataFunc, SaveFunc)
+{
+    window.setInterval(function () {
+        if(ScopeCaseDataChanged(getDataFunc))
+        {
+            var sucessFunc = function () {
+
+            }
+            SaveFunc(sucessFunc);
+            //ScopeResetCaseDataChange(getDataFunc)
+        }
+    }, 30000)
+}
 
 app.service('ptCom', [
     function () {

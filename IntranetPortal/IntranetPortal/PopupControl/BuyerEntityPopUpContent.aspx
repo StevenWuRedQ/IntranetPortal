@@ -226,8 +226,8 @@
                                     &nbsp;
                                     <i class="fa fa-file-excel-o tooltip-examples icon_btn" title="Excel" style="color: #3993c1; font-size: 24px;" data-toggle="modal" ng-click="ExportExcel()"></i>
                                     &nbsp;
-                                    <a href="https://appext20.dos.ny.gov/ecorp_public/f?p=2020:1:13820438194474" target="_blank">Corporation </a>&nbsp;
-                                    <a href="http://www.irs.gov/Businesses/Small-Businesses-&-Self-Employed/Apply-for-an-Employer-Identification-Number-(EIN)-Online" target="_blank">EIN </a>
+                                    <a href="https://myidealpropertyinc.sharepoint.com/_layouts/15/WopiFrame.aspx?guestaccesstoken=ke3i7wLDOmlMkG281EWWCMtumnI%2bacwzPS4SWC3Gbd0%3d&docid=0ad194ec84c4c41c6a338976b08c26b4d&action=view" target="_blank">Corporation </a>&nbsp;
+                                    <a href="https://myidealpropertyinc.sharepoint.com/_layouts/15/guestaccess.aspx?guestaccesstoken=oiGCRiJzAe7L5iy2EZPfhD9ONl04TTV8nod3VaVm1Dg%3d&docid=03571c7a8c6824d9787e6efb0a6696067" target="_blank">EIN </a>
                                     <i class="fa fa-sort-amount-desc tooltip-examples icon_btn" title="Sort" ng-class="predicate=='Name'?'fa-sort-amount-desc':'fa-sort-amount-asc'" ng-click="group_text_order = group_text_order=='group_text'?'-group_text':'group_text'; " style="color: #999ca1; display: none"></i>
                                 </div>
                             </div>

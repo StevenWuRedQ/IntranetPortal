@@ -849,7 +849,7 @@
                         alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                     });
             }
-
+            
 
 
             $scope.CompleteResearch = function () {

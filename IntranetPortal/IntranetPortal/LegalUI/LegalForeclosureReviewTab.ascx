@@ -169,6 +169,7 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Chapter filed</label>
                 <select class="ss_form_input" ng-model="LegalCase.PropertyInfo.BankruptcyChapterFiled">
+                    <option value=""></option>
                     <option value="7">7</option>
                     <option value="11">11</option>
                     <option value="13">13</option>
@@ -266,7 +267,9 @@ The courts no longer consider this proper service. "></i></span>
                         <li class="ss_form_item">
                             <label class="ss_form_input_title" ng-class="service.ServerInSererList?'ss_warning':''">Is the process server one of these servers</label>
 
-                            <select class="ss_form_input" ng-model="service.ServerInSererList" ng-options="o as o for o in ['Alan Feldman','John Medina','Robert Winckelmann']"></select>
+                            <select class="ss_form_input" ng-model="service.ServerInSererList" ng-options="o as o for o in ['Alan Feldman','John Medina','Robert Winckelmann']">
+                                <option value=""> </option>
+                            </select>
                         </li>
 
                     </ul>
@@ -366,7 +369,9 @@ The courts no longer consider this proper service. "></i></span>
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">Who Executed Document</label>
-                                    <select class="ss_form_input" ng-model="assignment.ExecutedDocPerson" ng-options="o as o for o in ['Alan Feldman','John Medina','Robert Winckelmann']"></select>
+                                    <select class="ss_form_input" ng-model="assignment.ExecutedDocPerson" ng-options="o as o for o in ['Alan Feldman','John Medina','Robert Winckelmann']">
+                                        <option value=""></option>
+                                    </select>
                                 </li>
 
                                 <li class="ss_form_item">

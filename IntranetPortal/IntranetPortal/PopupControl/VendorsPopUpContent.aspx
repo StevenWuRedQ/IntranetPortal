@@ -69,7 +69,7 @@
                     <div style="height: 590px;overflow: auto">
 
                         <div data-block="sidebar" class="sidebar js-sidebar">
-                            <div class="sidebar__item">
+                            <div class="sidebar__item" ng-class="selectType=='All Vendors'?'title_selected':''">
 
                                 <div class="sidebar__title notafter" ng-click="ChangeGroups({})">
                                     <div class="clear-fix">All Vendors  <i class="fa fa-user-plus icon_btn layout_float_right" title="Add group" ng-click="popAddgroup(0)"></i></div>
@@ -79,14 +79,14 @@
                                 </div>
 
                             </div>
-                            <div class="sidebar__item" ng-repeat="group in Groups">
+                            <div class="sidebar__item"  ng-class="group.GroupName==selectType?'title_selected':''"  ng-repeat="group in Groups">
 
                                 <div class="sidebar__title" ng-class="group.SubGroups==null||group.SubGroups.length==0?'notafter':''" ng-click="ChangeGroups(group)">
                                     <div>{{group.GroupName}} <i class="fa fa-user-plus icon_btn tooltip-examples layout_float_right" title="Add group" ng-click="popAddgroup(group.Id)"></i></div>
                                 </div>
                                 <div class="sidebar__content" ng-class="group.SubGroups==null||group.SubGroups.length==0?'nodisplay':''">
                                     <div data-block="inner" class="inner js-sidebar">
-                                        <div class="inner__item" ng-repeat="sbgroup in group.SubGroups">
+                                        <div class="inner__item" ng-class="sbgroup.GroupName==selectType?'title_selected':''" ng-repeat="sbgroup in group.SubGroups">
                                             <div class="inner__title" ng-click="ChangeGroups(sbgroup)">
                                                 <div>{{sbgroup.GroupName}}</div>
                                             </div>

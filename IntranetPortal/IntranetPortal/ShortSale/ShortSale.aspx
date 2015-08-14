@@ -351,10 +351,12 @@
             });
         }
         function CaseDataChanged() {
-            return $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(GetShortSaleCase());
+            return ScopeCaseDataChanged(GetShortSaleCase)
+            //return $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(GetShortSaleCase());
         }
         function ResetCaseDataChange() {
-            $('#CaseData').val(JSON.stringify(GetShortSaleCase()));
+            ScopeResetCaseDataChange(GetShortSaleCase)
+            //$('#CaseData').val(JSON.stringify(GetShortSaleCase()));
         }
         function GetShortSaleCase() {
             return angular.element(document.getElementById('ShortSaleCtrl')).scope().SsCase;
@@ -576,7 +578,7 @@
                             alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                         });
             }
-            
+            ScopeAutoSave(GetShortSaleCase,$scope.SaveShortSale)
             $scope.ShowAddPopUp = function (event) {
                 $scope.addCommentTxt = "";
                 aspxAddLeadsComments.ShowAtElement(event.target);

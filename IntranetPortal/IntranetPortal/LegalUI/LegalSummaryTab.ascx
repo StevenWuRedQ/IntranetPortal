@@ -35,15 +35,15 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Original Loan Amt</label>
-                <input class="ss_form_input" money-mask ng-model="ShortSaleCase.MortgageOriginalLoanAmt">
+                <input class="ss_form_input" money-mask ng-model="LegalCase.MortgageOriginalLoanAmt">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Executed Date</label>
-                <input class="ss_form_input" ng-model="ShortSaleCase.MortgageExecutedDate" >
+                <input class="ss_form_input" ng-model="LegalCase.MortgageExecutedDate" ss-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Recording Date</label>
-                <input class="ss_form_input" ng-model="ShortSaleCase.MortgageRecordingDate" ss-date >
+                <input class="ss_form_input" ng-model="LegalCase.MortgageRecordingDate" ss-date >
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">CRFN #</label>
@@ -51,7 +51,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Last Payment Date </label>
-                <input class="ss_form_input" ng-model="LegalCase.MortageCRFNNum.LastPaymentDate"  ss-date >
+                <input class="ss_form_input" ng-model="LegalCaseLastPaymentDate"  ss-date >
             </li>
         </ul>
     </div>
