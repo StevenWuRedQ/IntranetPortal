@@ -87,6 +87,7 @@
 
     <%--leagal Ui--%>
     <div id="LegalCtrl" ng-controller="LegalCtrl">
+        
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
                 <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
@@ -660,6 +661,16 @@
             });
 
         }
+        /*chris use this show alert when leave page*/
+        function CaseDataChanged()
+        {
+           return ScopeCaseDataChanged(GetLegalData);
+        }
+
+        function ResetCaseDataChange()
+        {
+            ScopeResetCaseDataChange(GetLegalData)
+        }
 
         var AllContact = <%= GetAllContact()%>
             function t() {
@@ -832,7 +843,7 @@
                 }
                 return false;
             }
-
+            
             $scope.SaveLegal = function (scuessfunc) {
                 var json = JSON.stringify($scope.LegalCase);
                 var data = { bble: leadsInfoBBLE, caseData: json };
@@ -843,14 +854,14 @@
                         } else {
                             alert("Save Successed !");
                         }
-
+                        ResetCaseDataChange();
                     }).
                     error(function (data, status) {
                         alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                     });
             }
             
-
+            ScopeAutoSave(GetLegalData, $scope.SaveLegal);
 
             $scope.CompleteResearch = function () {
                 var json = JSON.stringify($scope.LegalCase);
@@ -938,7 +949,7 @@
                             }
                         }
                         $scope.showSAndCFrom();
-
+                        ResetCaseDataChange();
                     }).
                     error(function () {
                         alert("Fail to load data : " + BBLE);

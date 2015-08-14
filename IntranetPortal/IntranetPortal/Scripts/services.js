@@ -26,7 +26,9 @@ function ScopeCaseDataChanged(getDataFunc) {
     return $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(getDataFunc());
 }
 function ScopeResetCaseDataChange(getDataFunc) {
+    var caseData = getDataFunc()
     if ($('#CaseData').length == 0) {
+        
         $('<input type="hidden" id="CaseData" />').appendTo(document.body);
     }
     $('#CaseData').val(JSON.stringify(getDataFunc()));
