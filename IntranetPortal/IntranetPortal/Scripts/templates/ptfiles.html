@@ -1,8 +1,8 @@
-﻿<div style="margin: 2px">
-    <table class="table table-bordered">
+﻿<div style="margin: 2px;text-right">
+    <table class="table table-condensed">
         <tr ng-repeat="file in fileModel" style="list-style-type: none; display: inline">
             <td><a style="font-size:16px;font-weight:bold" ng-href="{{ptFileService.makePreviewUrl(file.path)}}" target="_blank">{{ptFileService.getFileName(file.path)}}</a></td>
-            <td><i class="fa fa-remove btn text-danger" ng-click="ptCom.arrayRemove(fileModel, $index, true)"></i></td>
+            <td><i class="fa fa-remove icon_btn text-danger" ng-click="ptCom.arrayRemove(fileModel, $index, true)"></i></td>
         </tr>
     </table>
 </div>
@@ -16,6 +16,6 @@
         </li>
     </ul>
     <span class="btn btn-default btn-file pull-right">
-        <span class="text-warning ">Add Files</span><input multiple="multiple" type="file" id="{{fileId}}" />
+        <span class="text-success ">Add Files</span><input multiple="multiple" type="file" id="{{fileId}}" />
     </span>
 </div>

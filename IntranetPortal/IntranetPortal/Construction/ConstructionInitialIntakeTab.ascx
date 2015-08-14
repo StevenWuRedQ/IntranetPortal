@@ -87,24 +87,24 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Deed</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="SCase-InitialIntake-UploadDeed" file-model="CSCase.CSCase.InitialIntake.UploadDeed"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadDeed" file-model="CSCase.CSCase.InitialIntake.UploadDeed"></pt-file>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload EIN</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-UploadEIN" file-model="CSCase.CSCase.InitialIntake.UploadEIN"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadEIN" file-model="CSCase.CSCase.InitialIntake.UploadEIN"></pt-file>
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Filing Receipt</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-UploadFilingReceipt" file-model="CSCase.CSCase.InitialIntake.UploadFilingReceipt"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadFilingReceipt" file-model="CSCase.CSCase.InitialIntake.UploadFilingReceipt"></pt-file>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Article of Operation</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="SCase-InitialIntake-UploadArticleOfOperation" file-model="CSCase.CSCase.InitialIntake.UploadArticleOfOperation"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadArticleOfOperation" file-model="CSCase.CSCase.InitialIntake.UploadArticleOfOperation"></pt-file>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Operation Agreement</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-UploadOperationAgreement" file-model="CSCase.CSCase.InitialIntake.UploadOperationAgreement"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadOperationAgreement" file-model="CSCase.CSCase.InitialIntake.UploadOperationAgreement"></pt-file>
             </li>
         </ul>
     </div>
@@ -186,11 +186,11 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload GeoData Report</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-UploadGeoDataReport" file-model="CSCase.CSCase.InitialIntake.UploadGeoDataReport"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadGeoDataReport" file-model="CSCase.CSCase.InitialIntake.UploadGeoDataReport"></pt-file>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload C/O</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-UploadCO" file-model="CSCase.CSCase.InitialIntake.UploadCO"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadCO" file-model="CSCase.CSCase.InitialIntake.UploadCO"></pt-file>
             </li>
         </ul>
 
@@ -214,7 +214,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Comps</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-UploadComps" file-model="CSCase.CSCase.InitialIntake.UploadComps"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadComps" file-model="CSCase.CSCase.InitialIntake.UploadComps"></pt-file>
             </li>
         </ul>
     </div>
@@ -229,7 +229,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Water Search Upload</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-WaterSearchUpload" file-model="CSCase.CSCase.InitialIntake.WaterSearchUpload"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-WaterSearchUpload" file-model="CSCase.CSCase.InitialIntake.WaterSearchUpload"></pt-file>
             </li>
         </ul>
     </div>
@@ -245,7 +245,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Intake Sheet</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-UploadIntakeSheet" file-model="CSCase.CSCase.InitialIntake.UploadIntakeSheet"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadIntakeSheet" file-model="CSCase.CSCase.InitialIntake.UploadIntakeSheet"></pt-file>
             </li>
         </ul>
             <ul class="ss_form_box clearfix">
@@ -255,7 +255,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Upload Sketch Layout</label>
-                    <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-UploadSketchLayout" file-model="CSCase.CSCase.InitialIntake.UploadSketchLayout"></pt-file>
+                    <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadSketchLayout" file-model="CSCase.CSCase.InitialIntake.UploadSketchLayout"></pt-file>
                 </li>
             </ul>
             <ul class="ss_form_box clearfix">
@@ -265,7 +265,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Upload Initial Budget</label>
-                    <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-UploadInitialBudget" file-model="CSCase.CSCase.InitialIntake.UploadInitialBudget"></pt-file>
+                    <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadInitialBudget" file-model="CSCase.CSCase.InitialIntake.UploadInitialBudget"></pt-file>
                 </li>
             </ul>
     </div>
@@ -308,7 +308,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-AsbestosUpload" file-model="CSCase.CSCase.InitialIntake.AsbestosUpload"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-AsbestosUpload" file-model="CSCase.CSCase.InitialIntake.AsbestosUpload"></pt-file>
             </li>
         </ul>
         <ul class="ss_form_box clearfix" ng-show="CSCase.CSCase.InitialIntake.ReportsDropDown=='Survey'">
@@ -326,7 +326,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-SurveyUpload" file-model="CSCase.CSCase.InitialIntake.SurveyUpload"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-SurveyUpload" file-model="CSCase.CSCase.InitialIntake.SurveyUpload"></pt-file>
             </li>
         </ul>
         <ul class="ss_form_box clearfix" ng-show="CSCase.CSCase.InitialIntake.ReportsDropDown=='Exhibit'">
@@ -345,7 +345,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-ExhibitUpload" file-model="CSCase.CSCase.InitialIntake.ExhibitUpload"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-ExhibitUpload" file-model="CSCase.CSCase.InitialIntake.ExhibitUpload"></pt-file>
             </li>
         </ul>
         <ul class="ss_form_box clearfix" ng-show="CSCase.CSCase.InitialIntake.ReportsDropDown=='TRs'">
@@ -363,7 +363,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="CSCase-InitialIntake-TRsUpload" file-model="CSCase.CSCase.InitialIntake.TRsUpload"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-TRsUpload" file-model="CSCase.CSCase.InitialIntake.TRsUpload"></pt-file>
             </li>
         </ul>
     </div>

@@ -91,9 +91,9 @@
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.DOB_Description">
             </li>
         </ul>
-        <div class="ss_form_item">
+        <div>
             <label class="ss_form_input_title">Upload</label>
-            <pt-file file-id="CSCase-Violations-DOB_Upload" file-model="CSCase.CSCase.Violations.DOB_Upload"></pt-file>
+            <pt-files file-bble="CSCase.BBLE" file-id="Violations-DOB_Upload" file-model="CSCase.CSCase.Violations.DOB_Upload"></pt-files>
         </div>
         <div>
             <label class="ss_form_input_title">Notes</label>
@@ -170,9 +170,9 @@
                 </table>
             </li>
         </ul>
-        <div class="ss_form_item">
+        <div>
             <label class="ss_form_input_title">Upload</label>
-            <pt-file file-id="CSCase-Violations-ECP_Upload" file-model="CSCase.CSCase.Violations.ECP_Upload"></pt-file>
+            <pt-files file-bble="CSCase.BBLE" file-id="Violations-ECP_Upload" file-model="CSCase.CSCase.Violations.ECP_Upload"></pt-files>
         </div>
         <div>
             <label class="ss_form_input_title">Notes</label>
@@ -219,9 +219,9 @@
                 </select>
             </li>
         </ul>
-        <div class="ss_form_item">
+        <div>
             <label class="ss_form_input_title">Upload</label>
-            <pt-file file-id="CSCase-Violations-HPD_Upload" file-model="CSCase.CSCase.Violations.HPD_Upload"></pt-file>
+            <pt-files file-bble="CSCase.BBLE" file-id="Violations-HPD_Upload" file-model="CSCase.CSCase.Violations.HPD_Upload"></pt-files>
         </div>
         <div>
             <label class="ss_form_input_title">Notes</label>

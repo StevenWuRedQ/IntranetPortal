@@ -92,7 +92,7 @@
             </div>
             <div class="ss_form_item">
             <label class="ss_form_input_title">Upload</label>
-            <pt-file file-id="Utilities-EnergyService-Upload" file-model="floor.ConED.Upload"></pt-file>
+            <pt-files file-bble="CSCase.BBLE" file-id="EnergyService-Upload{{$index}}" file-model="floor.ConED.Upload"></pt-files>
             </div>        
             <div>
             <label class="ss_form_input_title">Note</label>
@@ -168,7 +168,7 @@
         </div>
         <div class="ss_form_item">
             <label class="ss_form_input_title">Upload</label>
-            <pt-file file-id="CSCase-Utilities-EnergyService-Upload" file-model="floor.EnergyService.Upload"></pt-file>
+            <pt-files file-bble="CSCase.BBLE" file-id="EnergyService-Upload{{$index}}" file-model="floor.EnergyService.Upload"></pt-files>
         </div>
         <div>
             <label class="ss_form_input_title">Notes</label>
@@ -237,7 +237,7 @@
         </div>
         <div class="ss_form_item">
             <label class="ss_form_input_title">Upload</label>
-            <pt-file file-id="EnergyService_Upload{{$index}}" file-model="floor.NationalGrid.Upload"></pt-file>
+            <pt-files file-bble="CSCase.BBLE" file-id="EnergyService_Upload{{$index}}" file-model="floor.NationalGrid.Upload"></pt-files>
         </div>
         <div>
             <label class="ss_form_input_title">Notes</label>
@@ -293,7 +293,7 @@
             </li>
             <li class="ss_form_item" ng-show="CSCase.CSCase.Utilities.DEP_WaterLien">
                 <label class="ss_form_input_title">Upload Payment Agreement</label>
-                <pt-file file-id="CSCase-Utilities-DEP-PaymentAgreement" file-model="CSCase.CSCase.Utilities.DEP_PaymentAgreement"></pt-file>
+                <pt-file file-bble="CSCase.BBLE" file-id="CSCase-Utilities-DEP-PaymentAgreement" file-model="CSCase.CSCase.Utilities.DEP_PaymentAgreement"></pt-file>
             </li>
         </ul>
         <div class="ss_form_item">
@@ -339,7 +339,7 @@
         </ul>
         <div>
             <label class="ss_form_input_title">Upload Letter To DEP</label>
-            <pt-file class="ss_form_input" file-id="CSCase-Utilities-MissingMeter-Upload" file-model="CSCase.CSCase.Utilities.MissingMeter_Upload"></pt-file>
+            <pt-files file-bble="CSCase.BBLE" class="ss_form_input" file-id="CSCase-Utilities-MissingMeter-Upload" file-model="CSCase.CSCase.Utilities.MissingMeter_Upload"></pt-files>
         </div>
         <div>
             <label class="ss_form_input_title">Notes</label>
@@ -379,9 +379,9 @@
                 <label class="ss_form_input_title">Tax Lien</label>
                 <pt-radio name="CSCase-Utilities-Taxes-TaxLien" model="CSCase.CSCase.Utilities.Taxes_TaxLien"></pt-radio>
             </li>
-            <li class="ss_form_item" ng-show="!CSCase.CSCase.Utilities.Taxes_TaxLien">
+            <li class="ss_form_item" ng-show="CSCase.CSCase.Utilities.Taxes_TaxLien">
                 <label class="ss_form_input_title">Upload Payment Agreement</label>
-                <pt-file file-id="CSCase-Utilities-Taxes_PaymentAgreement" file-model="CSCase.CSCase.Utilities.Taxes_PaymentAgreement"></pt-file>
+                <pt-file file-bble="CSCase.BBLE" file-id="CSCase-Utilities-Taxes_PaymentAgreement" file-model="CSCase.CSCase.Utilities.Taxes_PaymentAgreement"></pt-file>
             </li>
         </ul>
     </div>
@@ -439,9 +439,9 @@
                 <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.Insurance_CancellationDate" ss-date>
             </li>
         </ul>
-        <div class="ss_form_item">
+        <div>
             <label class="ss_form_input_title">Upload</label>
-            <pt-file file-id="CSCase-Utilities-InsuranceUpload" file-model="CSCase.CSCase.Utilities.Insurance_Upload"></pt-file>
+            <pt-files file-bble="CSCase.BBLE" file-id="CSCase-Utilities-InsuranceUpload" file-model="CSCase.CSCase.Utilities.Insurance_Upload"></pt-files>
         </div>
         <div class="ss_form_item">
             <label class="ss_form_input_title">Renewal Remind</label>
