@@ -73,7 +73,7 @@
             <ul class="ss_form_box clearfix ">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Index #</label>
-                    <input class="ss_form_input">
+                    <input class="ss_form_input" ng-model="LegalCase.CurrentFCIndexNum">
                 </li>
             </ul>
         </div>
@@ -97,7 +97,7 @@
             <ul class="ss_form_box clearfix ">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Index #</label>
-                    <input class="ss_form_input">
+                    <input class="ss_form_input" ng-model="LegalCase.PriorFcIndexNumb">
                 </li>
             </ul>
         </div>
@@ -106,7 +106,7 @@
     <div>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item" style="width: 66.6%">
-                <label class="ss_form_input_title">Are there any Tax liens?{{TaxLiensShow}}</label>
+                <label class="ss_form_input_title">Are there any Tax liens?</label>
                  
                <select class="ss_form_input" ng-model="TaxLiensShow">
                    <option value="">N/A</option> 
@@ -148,7 +148,7 @@
                 </li>
                 <li class="ss_form_item ss_form_item_line">
                     <label class="ss_form_input_title">Tax lien comments / review:</label>
-                    <textarea class="edit_text_area text_area_ss_form"></textarea>
+                    <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.TaxLienReview"></textarea>
                 </li>
             </ul>
 
@@ -172,8 +172,8 @@
         <div class="arrow_box">
             <ul class="ss_form_box clearfix ">
                 <li class="ss_form_item ss_form_item_line">
-                    <label class="ss_form_input_title">Judgment Review</label>
-                    <textarea class="edit_text_area text_area_ss_form"></textarea>
+                    <label class="ss_form_input_title">Judgment liens Review</label>
+                    <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.JudgemntLiensReview"></textarea>
                 </li>
             </ul>
         </div>
@@ -221,7 +221,7 @@
             <ul class="ss_form_box clearfix ">
                 <li class="ss_form_item ss_form_item_line">
                     <label class="ss_form_input_title">Mortage liens Review:</label>
-                    <textarea class="edit_text_area text_area_ss_form"></textarea>
+                    <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.MortageLinesReview"></textarea>
                 </li>
             </ul>
         </div>
@@ -247,7 +247,7 @@
             <ul class="ss_form_box clearfix ">
                 <li class="ss_form_item ss_form_item_line">
                     <label class="ss_form_input_title">Other misc liens Review:</label>
-                    <textarea class="edit_text_area text_area_ss_form"></textarea>
+                    <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.OtherMiscLiensReview"></textarea>
                 </li>
             </ul>
         </div>
