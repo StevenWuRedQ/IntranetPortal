@@ -1,4 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="LegalForeclosureReviewTab.ascx.vb" Inherits="IntranetPortal.LegalForeclosureReviewTab" %>
+<%@ Import Namespace="IntranetPortal" %>
+<%@ Import Namespace="Newtonsoft.Json" %>
+
 
 
 <div class="legalui short_sale_content">
@@ -43,20 +46,11 @@
                 <label class="ss_form_input_title {{HighLightStauts(LegalCase.CaseStauts,4)?'ss_warning':''}}">
                     What was the last milestone document recorded on Clerk Minutes? 
                 </label>
-                <select class="ss_form_input" ng-model="LegalCase.CaseStauts">
-                    <option value="1">No current action</option>
-                    <option value="2">S&C / LP</option>
-                    <option value="3">RJI</option>
-                    <option value="4">Settlement Conf</option>
-                    <option value="5">O/REF</option>
-                    <option value="10">Judgement Submitted</option>
-                    <!--replace the original option 6-->
-                    <option value="11">Judgement Granted</option>
-                    <option value="12">Judgement Entered</option>
-                    <option value="7">Sale Date</option>
-                    <option value="8">Dismissed w/ Prejudice</option>
-                    <option value="9">Dismissed w/o Prejudice</option>
 
+                <select class="ss_form_input" ng-model="LegalCase.CaseStauts">
+					<% For Each v In Utility.Enum2Dictinary(GetType(IntranetPortal.Data.DataStatus))%>
+					<option vaule="<%=v.Key%>"><%=v.Value%></option>
+					<% Next%>
                 </select>
             </li>
             <li class="ss_form_item" ng-show="LegalCase.CaseStauts==7">

@@ -5,7 +5,7 @@
     <tab ng-repeat="mortgage in SsCase.Mortgages|filter:{DataStatus:'!3'}" active="mortgage.active" disable="mortage.disabled" >
         <tab-heading>Mortgage {{$index+1}} </tab-heading>
             <div class="text-right" style="margin-bottom:-45px" ng-show="$index>0"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="NGremoveArrayItem(SsCase.Mortgages, $index,true)" title="Delete"></i></div>
-        <div>
+            <div>
             <div class="ss_border" style="border-top-color: transparent">
             <h4 class="ss_form_title">Sale Date / Payoff Info</h4>
             <ul class="ss_form_box clearfix">
@@ -69,7 +69,7 @@
         </div>
     </div>
 
-        <div class="ss_form">
+            <div class="ss_form">
             <h4 class="ss_form_title" style="display: inline">Mortgage Company&nbsp
                 <select ng-model="mortgage.LenderId" ng-options="bank.ContactId as bank.Name for bank in bankNameOptions"></select>&nbsp;<pt-collapse model="mortgageCompanyCollapse" /></h4>
             <div class="ss_border">
@@ -136,7 +136,7 @@
         </div>
         </div>
 
-        <div class="ss_form" collapse="mortgageCompanyCollapse">
+            <div class="ss_form" collapse="mortgageCompanyCollapse">
             <h4 class="ss_form_title">Mortgage Contacts&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortgage.Contacts,'SsCase.Mortgages['+$index+'].Contacts')" title="Add"></i></h4>
 
             <div class="ss_border" ng-show="mortgage.Contacts.length>0">
@@ -160,7 +160,7 @@
         </div>
         </div>
 
-        <div class="ss_form" collapse="mortgageCompanyCollapse">
+            <div class="ss_form" collapse="mortgageCompanyCollapse">
             <h4 class="ss_form_title">Notes <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortgage.Notes,'SsCase.Mortgages['+$index+'].Notes')" title="Add"></i></h4>
             <ul class="ss_form_box clearfix textAreaDiv" ng-repeat="(index,note) in mortgage.Notes track by index">
                 <li class="ss_form_item ss_form_item_line ">
@@ -170,7 +170,6 @@
             </ul>
         </div>
 
-    
     </tab>
     <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.Mortgages, 'SsCase.Mortgages')" ng-show="SsCase.Mortgages.length<=2" title="Add" style="font-size: 18px"></i>
 </tabset>
