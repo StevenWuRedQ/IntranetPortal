@@ -162,16 +162,17 @@
         function LoadCaseData(bble) {
             $(document).ready(function () {
                 //put construction data loading logic here
-                angular.element(document.getElementById('ConstructionCtrl')).scope().init(bble);
+                angular.element('#ConstructionCtrl').scope().reload();
+                angular.element('#ConstructionCtrl').scope().init(bble);
                 console.log(bble);
             });
         }
 
         portalApp = angular.module('PortalApp');
         portalApp.controller('ConstructionCtrl', ['$scope', '$http', 'ptCom', 'ptShortsSaleService', 'ptContactServices', 'ptConstructionService', function ($scope, $http, ptCom, ptShortsSaleService, ptContactServices, ptConstructionService) {
+            $scope.arrayRemove = ptCom.arrayRemove;
             $scope.ptContactServices = ptContactServices;
             $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
-            $scope.arrayRemove = ptCom.arrayRemove;
             $scope.CSCase = {}
             $scope.CSCase.CSCase = {
                 InitialIntake: {},
@@ -183,6 +184,45 @@
                 Contract: {},
                 Signoffs: {}
             };
+            $scope.CSCase.CSCase.Utilities.Company = [];
+            $scope.DataSource = {};
+            $scope.DataSource.Shown = {
+                'ConED': 'CSCase.CSCase.Utilities.ConED_Shown',
+                'Energy Service': 'CSCase.CSCase.Utilities.EnergyService_Shown',
+                'National Grid': 'CSCase.CSCase.Utilities.NationalGrid_Shown',
+                'DEP': 'CSCase.CSCase.Utilities.DEP_Shown',
+                'MISSING Water Meter': 'CSCase.CSCase.Utilities.MissingMeter_Shown',
+                'Taxes': 'CSCase.CSCase.Utilities.Taxes_Shown',
+                'ADT': 'CSCase.CSCase.Utilities.ADT_Shown',
+                'Insurance': 'CSCase.CSCase.Utilities.Insurance_Shown',
+            };
+            $scope.reload = function () {
+                $scope.$apply(function() {
+                    $scope.CSCase = {}
+                    $scope.CSCase.CSCase = {
+                        InitialIntake: {},
+                        Photos: {},
+                        Utilities: {},
+                        Violations: {},
+                        ProposalBids: {},
+                        Plans: {},
+                        Contract: {},
+                        Signoffs: {}
+                    };
+                    $scope.CSCase.CSCase.Utilities.Company = [];
+                    $scope.DataSource = {};
+                    $scope.DataSource.Shown = {
+                        'ConED': 'CSCase.CSCase.Utilities.ConED_Shown',
+                        'Energy Service': 'CSCase.CSCase.Utilities.EnergyService_Shown',
+                        'National Grid': 'CSCase.CSCase.Utilities.NationalGrid_Shown',
+                        'DEP': 'CSCase.CSCase.Utilities.DEP_Shown',
+                        'MISSING Water Meter': 'CSCase.CSCase.Utilities.MissingMeter_Shown',
+                        'Taxes': 'CSCase.CSCase.Utilities.Taxes_Shown',
+                        'ADT': 'CSCase.CSCase.Utilities.ADT_Shown',
+                        'Insurance': 'CSCase.CSCase.Utilities.Insurance_Shown',
+                    };
+                });
+            }
 
             $scope.init = function (bble) {
                 bble = bble.trim();
@@ -200,32 +240,22 @@
             }
 
             /***spliter***/
-            $scope.CSCase.CSCase.Utilities.Company = [];
-            $scope.DataSource = {};
-            $scope.DataSource.Shown = {
-                'ConED': 'CSCase.CSCase.Utilities.ConED_Shown',
-                'Energy Service': 'CSCase.CSCase.Utilities.EnergyService_Shown',
-                'National Grid': 'CSCase.CSCase.Utilities.NationalGrid_Shown',
-                'DEP': 'CSCase.CSCase.Utilities.DEP_Shown',
-                'MISSING Water Meter': 'CSCase.CSCase.Utilities.MissingMeter_Shown',
-                'Taxes': 'CSCase.CSCase.Utilities.Taxes_Shown',
-                'ADT': 'CSCase.CSCase.Utilities.ADT_Shown',
-                'Insurance': 'CSCase.CSCase.Utilities.Insurance_Shown',
-            };
+
             $scope.resetCompany = function (obj) {
                 for (var key in obj) {
                     var value = obj[key];
                     $scope.$eval(value + '=false');
                 }
             };
-            $scope.$watch('CSCase.CSCase.Utilities.Company', function () {
-                var ds = $scope.DataSource.Shown;
-                var target = $scope.CSCase.CSCase.Utilities.Company;
-                $scope.resetCompany(ds);
-                for (var i in target) {
-                    $scope.$eval(ds[target[i]] + '=true');
+            $scope.$watch('CSCase.CSCase.Utilities.Company', function (newValue) {
+                if (newValue) {
+                    var ds = $scope.DataSource.Shown;
+                    var target = $scope.CSCase.CSCase.Utilities.Company;
+                    $scope.resetCompany(ds);
+                    for (var i in target) {
+                        $scope.$eval(ds[target[i]] + '=true');
+                    }
                 }
-                $scope.CSCase.CSCase.Utilities.ConED_EnergyServiceRequired = target.indexOf('Energy Service') >= 0;
             }, true);
             $scope.sendNotice = function (id, name) {
                 // TODO

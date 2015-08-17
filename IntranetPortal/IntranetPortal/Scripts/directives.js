@@ -237,7 +237,6 @@ portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileServic
             scope.ptFileService = ptFileService;
             scope.ptCom = ptCom;
             scope.columns = scope.columns ? scope.scope.fileColumns.split('|') : [];
-            scope.fileModel = scope.fileModel ? scope.fileModel : [];
             scope.files = [];
             scope.nameTable = [];
             scope.removeChoosed = function (index) {
@@ -255,6 +254,7 @@ portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileServic
                 }
                 ptFileService.uploadFile(data, scope.fileBble, function (res) {
                     scope.$apply(function () {
+                        scope.fileModel = scope.fileModel ? scope.fileModel : [];
                         for (var i = 0; i < res.length; i++) {
                             var newCol = {};
                             newCol.path = res[i];
