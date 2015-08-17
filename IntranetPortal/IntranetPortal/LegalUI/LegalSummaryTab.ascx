@@ -17,15 +17,19 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Block / Lot</label>
-                <input class="ss_form_input" disabled="disabled" ng-value="LeadsInfo.Block+'/'+ LeadsInfo.Lot"  readonly="readonly">
+                <input class="ss_form_input" disabled="disabled" ng-value="LeadsInfo.Block+'/'+ LeadsInfo.Lot" readonly="readonly">
+            </li>
+              <li class="ss_form_item" style="display:none">
+                <label class="ss_form_input_title">BBLE</label>
+                <input class="ss_form_input" disabled="disabled" ng-value="LeadsInfo.BBLE" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Client Name</label>
-                <input class="ss_form_input" disabled="disabled"  readonly="readonly" ng-model="ShortSaleCase.PropertyInfo.Owners[0].FullName">
+                <input class="ss_form_input" disabled="disabled" readonly="readonly" ng-model="ShortSaleCase.PropertyInfo.Owners[0].FullName">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Client Contact #</label>
-                <input class="ss_form_input" disabled="disabled" readonly="readonly" mask="(999) 999-9999"  ng-model="ShortSaleCase.PropertyInfo.Owners[0].Phone">
+                <input class="ss_form_input" disabled="disabled" readonly="readonly" mask="(999) 999-9999" ng-model="ShortSaleCase.PropertyInfo.Owners[0].Phone">
             </li>
         </ul>
     </div>
@@ -33,6 +37,35 @@
     <div class="ss_form">
         <h4 class="ss_form_title">Mortgage</h4>
         <ul class="ss_form_box clearfix">
+
+            <li class="ss_form_item" style="width: 97%">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Lender</th>
+                            <th>Loan #</th>
+                            <th>Amount</th>
+                            <th>Authorization Sent</th>
+                            <th>LastPayment Date</th>
+                            <th>Type</th>
+                            <th>Cancelation Sent</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="mortgage in ShortSaleCase.Mortgages">
+                        <td>{{$index +1}}</td>
+                        <td>{{mortgage.Lender}}</td>
+                        <td>{{mortgage.Loan}}</td>
+                        <td>{{mortgage.LoanAmount}}</td>
+                        <td>{{mortgage.AuthorizationSent|date:'shortDate'}}</td>
+                        <td>{{mortgage.LastPaymentDate|date:'shortDate'}}</td>
+                        <td>{{mortgage.Type}}</td>
+                        <td>{{mortgage.CancelationSent|date:'shortDate'}}</td>
+                    </tr>
+
+                </table>
+            </li>
+
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Original Loan Amt</label>
                 <input class="ss_form_input" money-mask ng-model="LegalCase.MortgageOriginalLoanAmt">
@@ -107,12 +140,12 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item" style="width: 66.6%">
                 <label class="ss_form_input_title">Are there any Tax liens?</label>
-                 
-               <select class="ss_form_input" ng-model="TaxLiensShow">
-                   <option value="">N/A</option> 
-                   <option value="Yes">Yes</option>
+
+                <select class="ss_form_input" ng-model="TaxLiensShow">
+                    <option value="">N/A</option>
+                    <option value="Yes">Yes</option>
                     <option value="No">No</option>
-                   
+
                 </select>
             </li>
         </ul>
@@ -126,7 +159,7 @@
                     <th>Amount</th>
                     <th>Year</th>
                 </tr>
-               
+
             </thead>
             <tr ng-repeat="s in TaxLiens">
                 <td>{{s.Owner}}</td>
@@ -184,10 +217,10 @@
             <li class="ss_form_item" style="width: 66.6%">
                 <label class="ss_form_input_title">Are there Mortage liens?</label>
                 <select class="ss_form_input" ng-model="LPShow">
-                   <option value="">N/A</option>
+                    <option value="">N/A</option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
-                    
+
                 </select>
             </li>
         </ul>
@@ -195,8 +228,8 @@
 
 
     <div class="cssSlideUp ss_form" ng-show="ModelArray('LeadsInfo.LisPens')=='Yes'">
-         <h4 class="ss_form_title">Mortage Lien</h4>
-          <table class="table table-striped">
+        <h4 class="ss_form_title">Mortage Lien</h4>
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <td>Type</td>
@@ -206,16 +239,16 @@
                     <td>Plaintiff</td>
                     <td>Attorney</td>
                 </tr>
-                
+
             </thead>
-              <tr ng-repeat="t in LeadsInfo.LisPens">
-                  <td>{{t.Type}}</td>
-                  <td>{{t.Effective |date:'shortDate'}}</td>
-                  <td>{{t.Docket_Number}}</td>
-                  <td>{{t.Defendant}}</td>
-                  <td>{{t.Plaintiff}}</td>
-                  <td>{{t.Attorney}}</td>
-              </tr>
+            <tr ng-repeat="t in LeadsInfo.LisPens">
+                <td>{{t.Type}}</td>
+                <td>{{t.Effective |date:'shortDate'}}</td>
+                <td>{{t.Docket_Number}}</td>
+                <td>{{t.Defendant}}</td>
+                <td>{{t.Plaintiff}}</td>
+                <td>{{t.Attorney}}</td>
+            </tr>
         </table>
         <div class="arrow_box">
             <ul class="ss_form_box clearfix ">
@@ -233,16 +266,16 @@
             <li class="ss_form_item" style="width: 66.6%">
                 <label class="ss_form_input_title">Are there any other misc liens?</label>
                 <select class="ss_form_input" ng-model="LegalCase.HasOtherMiscLiens">
-                   <option value="">N/A</option>
+                    <option value="">N/A</option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
-                    
+
                 </select>
             </li>
         </ul>
     </div>
     <div class="cssSlideUp" ng-show="LegalCase.HasOtherMiscLiens=='Yes'">
-        
+
         <div class="arrow_box">
             <ul class="ss_form_box clearfix ">
                 <li class="ss_form_item ss_form_item_line">

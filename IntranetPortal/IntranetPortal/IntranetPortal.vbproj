@@ -1115,6 +1115,13 @@
       <DependentUpon>AddressToBBLE.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="ManagementUI\BuyerEntiyManage.aspx.designer.vb">
+      <DependentUpon>BuyerEntiyManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagementUI\BuyerEntiyManage.aspx.vb">
+      <DependentUpon>BuyerEntiyManage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Management\CombineContact.aspx.designer.vb">
       <DependentUpon>CombineContact.aspx</DependentUpon>
     </Compile>
@@ -2475,6 +2482,7 @@
     <Content Include="ManagementUI\Management1.aspx" />
     <Content Include="ManagementUI\Management.aspx" />
     <Content Include="Management\AddressToBBLE.aspx" />
+    <Content Include="ManagementUI\BuyerEntiyManage.aspx" />
     <Content Include="Management\CombineContact.aspx" />
     <Content Include="Management\ComplainsMng.aspx" />
     <Content Include="Management\ComplaintsNotify.aspx" />

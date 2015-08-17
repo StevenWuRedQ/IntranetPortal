@@ -33,5 +33,6 @@ Partial Public Class CorporationEntity
     Public Property UpdateBy As String
     Public Property UpdateTime As Nullable(Of Date)
     Public Property Status As String
+    Public Property OfficeName As String
 
 End Class

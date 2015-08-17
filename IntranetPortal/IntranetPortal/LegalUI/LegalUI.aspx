@@ -639,7 +639,7 @@
         </ContentCollection>
     </dx:ASPxPopupControl>
     <!-- end follow up function -->
-
+    <input type="hidden" id="CaseData" />
     <script type="text/javascript">
         LegalCaseBBLE = null;
         function VendorsClosing(s) {
