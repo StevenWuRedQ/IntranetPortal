@@ -38,7 +38,6 @@ Partial Public Class ConstructionCase
         Return Nothing
     End Function
 
-
     Public Sub Delete()
         Using ctx As New ConstructionEntities
             ctx.Entry(Me).State = Entity.EntityState.Deleted

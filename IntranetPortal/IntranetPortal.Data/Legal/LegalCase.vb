@@ -71,10 +71,15 @@ Partial Public Class LegalCase
         Dim jsonCase = Newtonsoft.Json.Linq.JObject.Parse(CaseData)
 
         If jsonCase IsNot Nothing Then
-            Me.LegalStatus = jsonCase.Item("CaseStauts")
+            Dim caseStatus = jsonCase.Item("CaseStauts")
+            Dim result As Integer
+            If Integer.TryParse(caseStatus, result) Then
+                If result > 0 Then
+                    Me.LegalStatus = result
+                End If
+            End If
         End If
     End Sub
-
 
     Public Shared Function GetCase(bble As String) As LegalCase
         Using ctx As New LegalModelContainer
