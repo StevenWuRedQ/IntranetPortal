@@ -1,16 +1,18 @@
-﻿<div style="margin: 2px" ng-show="fileModel">
-    <a style="font-size:16px;" ng-href="{{ptFileService.makePreviewUrl(fileModel)}}" target="_blank">{{ptFileService.getFileName(fileModel)}}</a>
-    &nbsp;<i class="fa fa-remove text-danger" ng-click="delFile()"></i>
-</div>
-<div style="margin: 2px" ng-show="!fileModel">
-    <div>
-        <span class="btn btn-default btn-file">
-            {{File?File.name:'Choose File'}}<input type="file" id="{{fileId}}" style="width: 50px" />
-        </span>
-        <span ng-show="fileChoosed">
-            <i class="fa fa-times icon_btn text-danger tooltip-examples" ng-click="delChoosed()" title="Delete" style="font-size: 18px;"></i>&nbsp;
-            <i class="fa fa-upload icon_btn text-primary tooltip-examples" ng-click="uploadFile()" title="upload" style="font-size: 18px;"></i>
-        </span>
+﻿<div>
+    <div style="margin: 2px" ng-show="fileModel">
+        <a style="font-size:16px;" ng-href="{{ptFileService.makePreviewUrl(fileModel)}}" target="_blank">{{ptFileService.getFileName(fileModel)}}</a>
+        &nbsp;<i class="fa fa-remove text-danger" ng-click="delFile()"></i>
     </div>
-
+    <div style="margin: 2px" ng-show="!fileModel">
+        <div>
+            <span class="btn btn-default btn-file">
+                {{File?File.name:'Choose File'}}<span dx-load-indicator="{ height: '14px', width:'14px', bindingOptions: { visible: 'loading' }}"></span><input type="file" id="{{fileId}}" />
+            </span>
+            <span ng-show="fileChoosed">
+                <i class="fa fa-times icon_btn text-danger tooltip-examples" ng-click="delChoosed()" title="Delete" style="font-size: 18px;"></i>&nbsp;
+                <i class="fa fa-upload icon_btn text-primary tooltip-examples" ng-click="uploadFile()" title="upload" style="font-size: 18px;"></i>
+            </span>
+        </div>
+    </div>
+   
 </div>

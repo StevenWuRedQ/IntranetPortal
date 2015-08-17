@@ -211,7 +211,7 @@
                                 }
 
                             </script>
-                            
+
                             <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
                                 AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                 ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -324,6 +324,7 @@
                     Signoffs: {}
                 };
                 $scope.CSCase.CSCase.Utilities.Company = [];
+                $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} })
             }
 
             $scope.init = function (bble) {
@@ -373,17 +374,20 @@
                 // TODO
                 var confirmed = confirm("Send Intake Sheet To " + name + " ?");
             }
-            /*
-            $scope.$watch('CSCase.CSCase.Utilities.ConED_EnergyServiceRequired', function(newVal) {
+            $scope.$watch('CSCase.CSCase.Utilities.ConED_EnergyServiceRequired', function (newVal) {
+
                 if (newVal) {
-                    if ($scope.CSCase.CSCase.Utilities.Company.indexOf('Energy Service') < 0) $scope.CSCase.CSCase.Utilities.Company.push('Energy Service');
-                    $scope.CSCase.CSCase.Utilities.EnergyService_Collapsed = false;
+                    if ($scope.CSCase.CSCase.Utilities.Company.indexOf('Energy Service') < 0) {
+                        $scope.CSCase.CSCase.Utilities.Company.push('Energy Service');
+                        $scope.CSCase.CSCase.Utilities.EnergyService_Collapsed = false;
+                    }
                 } else {
                     var index;
                     if ((index = $scope.CSCase.CSCase.Utilities.Company.indexOf('Energy Service')) != -1) $scope.CSCase.CSCase.Utilities.Company.splice(index, 1);
                 }
+
+
             });
-            */
         }]);
     </script>
 

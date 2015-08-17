@@ -113,8 +113,14 @@ app.service('ptCom', [
 
         this.nullToUndefined = function(obj) {
             for (var property in obj) {
-                if (obj[property] === null) {
-                    obj[property] = undefined;
+                if (obj.hasOwnProperty(property)) {
+                    if (obj[property] === null) {
+                        obj[property] = undefined;
+                    } else {
+                        if (typeof obj[property] == "object") {
+                            this.nullToUndefined(obj[property]);
+                        }
+                    }
                 }
             }
         }
@@ -259,10 +265,11 @@ app.service('ptShortsSaleService', [
 
 app.service('ptFileService', function () {
 
-    this.uploadFile = function (data, bble, callback, rename) {
+    this.uploadFile = function (data, bble, callback, cleanup, rename) {
         var fileName = rename == '' ? file.name : rename;
         if (!data || !bble) {
             alert('Upload infomation missing!');
+            if (cleanup) cleanup();
         } else {
             bble = bble.trim();
             $.ajax({
@@ -275,9 +282,11 @@ app.service('ptFileService', function () {
                 success: function (data1) {
                     debugger;
                     callback(data1);
+                    if (cleanup) cleanup();
                 },
                 error: function () {
                     debugger;
+                    if (cleanup) cleanup();
                     alert('upload file fails');
                 }
             });

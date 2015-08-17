@@ -20,7 +20,6 @@
         </li>
     </ul>
 </div>
-<span ng-init="ensurePush('CSCase.CSCase.Utilities.Floors', {FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {}} )"></span>
 <%-- ConED --%>
 
 <div class="ss_form" ng-init="CSCase.CSCase.Utilities.ConED_Shown=false" ng-show="CSCase.CSCase.Utilities.ConED_Shown">
@@ -53,7 +52,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Energy service required</label>
-                <pt-radio name="ConED-EnergyServiceRequired{{$index}}" model="floor.ConED.EnergyServiceRequired"></pt-radio>
+                <pt-radio name="ConED-EnergyServiceRequired{{$index}}" model="CSCase.CSCase.Utilities.ConED_EnergyServiceRequired"></pt-radio>
             </li>
             </ul>
             <ul class="ss_form_box clearfix">

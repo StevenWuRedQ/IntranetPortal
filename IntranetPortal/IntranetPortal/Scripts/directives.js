@@ -187,30 +187,32 @@ portalApp.directive('ptFile', ['ptFileService', function (ptFileService) {
         link: function (scope, el, attrs) {
             scope.ptFileService = ptFileService;
             scope.fileChoosed = false;
-            var fileEl = el.find('input:file')[0];
+            scope.loading = false;
             scope.delFile = function () {
                 scope.fileModel = '';
             }
-            scope.delChoosed = function() {
+            scope.delChoosed = function () {
                 scope.File = null;
                 scope.fileChoosed = false;
-
+            }
+            scope.toggleLoading = function () {
+                scope.loading = !scope.loading;
             }
             scope.uploadFile = function () {
+                scope.toggleLoading();
                 var data = new FormData();
                 data.append("file", scope.File);
-                ptFileService.uploadFile(data, scope.fileBble, function (res) {
-                    scope.$apply(function () {
+                ptFileService.uploadFile(data, scope.fileBble, function(res) {
+                    scope.$apply(function() {
                         scope.fileModel = res[0];
                         scope.delChoosed();
-                        debugger;
                     });
-                    
-                }, scope.fileRename);   
+
+                }, function() { scope.toggleLoading(); }, scope.fileRename);
             }
             el.find('input:file').bind('change', function () {
                 var file = this.files[0];
-                scope.$apply(function() {
+                scope.$apply(function () {
                     scope.File = file;
                     scope.fileChoosed = true;
                 });
@@ -239,15 +241,32 @@ portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileServic
             scope.columns = scope.columns ? scope.scope.fileColumns.split('|') : [];
             scope.files = [];
             scope.nameTable = [];
+            scope.loading = false;
             scope.removeChoosed = function (index) {
                 scope.nameTable.splice(scope.nameTable.indexOf(scope.files[index].name), 1);
                 scope.files.splice(index, 1);
             }
-            scope.clearChoosed = function() {
+            scope.clearChoosed = function () {
                 scope.nameTable = [];
                 scope.files = [];
             }
+            scope.addFiles = function (files) {
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    scope.$apply(function () {
+                        if (scope.nameTable.indexOf(file.name) < 0) {
+                            scope.files.push(file);
+                            scope.nameTable.push(file.name);
+                        }
+                    });
+
+                }
+            }
+            scope.toggleLoading = function() {
+                scope.loading = !scope.loading;
+            }
             scope.uploadFile = function () {
+                scope.toggleLoading();
                 var data = new FormData();
                 for (var i = 0; i < scope.files.length; i++) {
                     data.append("file", scope.files[i]);
@@ -262,25 +281,47 @@ portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileServic
                             scope.fileModel.push(newCol);
                         }
                         scope.clearChoosed();
+                       
                     });
 
-                }, scope.fileRename);
+                }, function () { scope.toggleLoading(); }, scope.fileRename);
+            }
+
+            scope.OnDropTextarea = function (event) {
+                if (event.originalEvent.dataTransfer) {
+                    var files = event.originalEvent.dataTransfer.files;
+                    scope.addFiles(files);
+                }
+                else {
+                    alert("Your browser does not support the drag files.");
+                }
             }
 
             $(el).find('input:file').change(function () {
                 var files = this.files;
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-                    scope.$apply(function() {
-                        if (scope.nameTable.indexOf(file.name)<0){
-                            scope.files.push(file);
-                            scope.nameTable.push(file.name);
-                        }
-                    });
-
-                }
+                scope.addFiles(files);
                 this.value = '';
             });
+            $(el).find('.drop-area')
+                .on('dragenter', function (e) {
+                    e.preventDefault();
+                    $(this).addClass('drop-area-hover');
+                })
+                .on('dragover', function (e) {
+                    e.preventDefault();
+                })
+                .on('dragleave', function (e) {
+                    $(this).removeClass('drop-area-hover');
+                })
+                .on('drop', function (e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    $(this).removeClass('drop-area-hover');
+                    scope.OnDropTextarea(e);
+                    debugger;
+                });
         }
+
     }
+
 }]);

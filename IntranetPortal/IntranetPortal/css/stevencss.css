@@ -2464,3 +2464,7 @@ li.mag_tabv.active {
     cursor: inherit;
     display: block;
 }
+
+.drop-area-hover {
+    background: #428bca
+}

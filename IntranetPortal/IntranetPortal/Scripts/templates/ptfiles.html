@@ -1,8 +1,8 @@
-﻿<div>
+﻿<div id="{{fileId}}_div">
     <div class="text-right" style="margin: 2px">
         <table class="table table-condensed">
             <tr ng-show="fileModel.length>0">
-                <th>file</th>
+                <th>files</th>
                 <th>Upload Time</th>
                 <th></th>
             </tr>
@@ -13,7 +13,7 @@
             </tr>
         </table>
     </div>
-    <div style="margin: 2px; border: 1px gainsboro dashed">
+    <div class="drop-area" style="margin: 2px; border: 1px #c8c8c8 dashed">
         <span class="btn btn-default btn-file" ng-click="uploadFile()" ng-disabled="files.length<1">
             <span class="text-primary"><i class="fa fa-upload"></i></span>
         </span>
@@ -25,5 +25,7 @@
         <span class="btn btn-default btn-file pull-right">
             <span class="text-success ">Add Files</span><input multiple="multiple" type="file" id="{{fileId}}" />
         </span>
+    </div>
+    <div dx-load-panel="{message:'uploading..', showIndicator: true,  position:{of: '#{{fileId}}_div'}, bindingOptions:{ visible: 'loading' }}">
     </div>
 </div>
