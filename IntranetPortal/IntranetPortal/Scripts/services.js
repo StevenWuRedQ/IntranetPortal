@@ -18,7 +18,7 @@ function NGAddArrayitemScope(scopeId, model) {
 function ScopeCaseDataChanged(getDataFunc) {
     if ($('#CaseData').length == 0)
     {
-        alert("can not find input case data");
+        alert("can not find input case data elment");
         $('<input type="hidden" id="CaseData" />').appendTo(document.body);
         return false;
     }

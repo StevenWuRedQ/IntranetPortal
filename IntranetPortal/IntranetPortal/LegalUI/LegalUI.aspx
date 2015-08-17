@@ -86,8 +86,8 @@
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
     <%--leagal Ui--%>
-    <div id="LegalCtrl" ng-controller="LegalCtrl">
-        
+    <div id="LegalCtrl" ng-controller="LegalCtrl" >
+
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
                 <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
@@ -370,8 +370,8 @@
                                 </div>
 
 
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="LegalTab">
+                                <div class="tab-content" >
+                                    <div class="tab-pane active" id="LegalTab" >
                                         <uc1:LegalTab runat="server" ID="LegalTab1" />
                                         <script>
                                             LegalShowAll = true;
@@ -641,7 +641,7 @@
     <!-- end follow up function -->
 
     <script type="text/javascript">
-
+        LegalCaseBBLE = null;
         function VendorsClosing(s) {
             GetContactCallBack();
         }
@@ -652,7 +652,7 @@
             });
 
         }
-        
+
         function GetLegalData() {
 
             return angular.element(document.getElementById('LegalCtrl')).scope().LegalCase;
@@ -667,13 +667,11 @@
 
         }
         /*chris use this show alert when leave page*/
-        function CaseDataChanged()
-        {
-           return ScopeCaseDataChanged(GetLegalData);
+        function CaseDataChanged() {
+            return ScopeCaseDataChanged(GetLegalData);
         }
 
-        function ResetCaseDataChange()
-        {
+        function ResetCaseDataChange() {
             ScopeResetCaseDataChange(GetLegalData)
         }
 
@@ -848,10 +846,17 @@
                 }
                 return false;
             }
-            
+
             $scope.SaveLegal = function (scuessfunc) {
+                //$scope.loadPanelVisible = true;
+                if (!LegalCaseBBLE || LegalCaseBBLE != leadsInfoBBLE)
+                {
+                    alert("Case not load completed please wait!");
+                    return;
+                }
                 var json = JSON.stringify($scope.LegalCase);
-                var data = { bble: leadsInfoBBLE, caseData: json };
+
+                var data = { bble: LegalCaseBBLE, caseData: json };
                 $http.post('LegalUI.aspx/SaveCaseData', data).
                     success(function () {
                         if (scuessfunc) {
@@ -860,12 +865,13 @@
                             alert("Save Successed !");
                         }
                         ResetCaseDataChange();
+                        //$scope.loadPanelVisible = false;
                     }).
                     error(function (data, status) {
                         alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                     });
             }
-            
+
             ScopeAutoSave(GetLegalData, $scope.SaveLegal);
 
             $scope.CompleteResearch = function () {
@@ -933,6 +939,7 @@
             $scope.LegalCase.SecondaryInfo.StatuteOfLimitations = [];
 
             $scope.LoadLeadsCase = function (BBLE) {
+                $scope.loadPanelVisible = true;
                 $("#ctl00_MainContentPH_ASPxSplitter1_1,#ctl00_MainContentPH_ASPxSplitter1_2").css('visibility', 'visible');
                 var data = { bble: BBLE };
 
@@ -955,6 +962,8 @@
                         }
                         $scope.showSAndCFrom();
                         ResetCaseDataChange();
+                        $scope.loadPanelVisible = false;
+                        LegalCaseBBLE = BBLE;
                     }).
                     error(function () {
                         alert("Fail to load data : " + BBLE);
@@ -1309,7 +1318,7 @@
                     console.log("Deleted comments");
                 })
             }
-            
+
         });
 
     </script>

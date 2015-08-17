@@ -289,7 +289,7 @@
                 <label class="ss_form_input_title">Lender </label>
                 <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.OriginalLenderName" ng-change="LegalCase.SecondaryInfo.OriginalLenderId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,5)" typeahead-on-select="LegalCase.SecondaryInfo.OriginalLenderId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.OriginalLenderId">
                 <%-- <div class="contact_box" dx-select-box="InitContact('LegalCase.SecondaryInfo.OriginalLenderId')">
-                    </div--%>>
+                    </div--%>
             </li>
             <li class="ss_form_item">
                 <%--Do we know who owns the Note--%>
