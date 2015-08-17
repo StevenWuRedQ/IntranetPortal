@@ -14,7 +14,6 @@ function NGAddArrayitemScope(scopeId, model) {
         }
         $scope.$apply();
     } 
-
 }
 function ScopeCaseDataChanged(getDataFunc) {
     if ($('#CaseData').length == 0)
@@ -110,6 +109,14 @@ app.service('ptCom', [
             data = data ? data : {}
             var model = scope.$eval(modelName);
             model.push(data);
+        }
+
+        this.nullToUndefined = function(obj) {
+            for (var property in obj) {
+                if (obj[property] === null) {
+                    obj[property] = undefined;
+                }
+            }
         }
     }]);
 
@@ -336,7 +343,6 @@ app.service('ptConstructionService', [
                 }).error(function (data) {
                     console.log("Get Construction Data fails.");
                 });
-
         }
 
         this.saveConstructionCases = function (bble, data, callback) {

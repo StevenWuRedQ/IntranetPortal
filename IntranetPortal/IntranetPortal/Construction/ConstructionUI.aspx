@@ -278,14 +278,13 @@
         function LoadCaseData(bble) {
             $(document).ready(function () {
                 //put construction data loading logic here
-                angular.element('#ConstructionCtrl').scope().reload();
-                angular.element('#ConstructionCtrl').scope().init(bble);
-                console.log(bble);
+                var _scope = angular.element('#ConstructionCtrl').scope()
+                _scope.init(bble);
             });
         }
 
         portalApp = angular.module('PortalApp');
-        portalApp.controller('ConstructionCtrl', ['$scope', '$http', 'ptCom', 'ptShortsSaleService', 'ptContactServices', 'ptConstructionService', function ($scope, $http, ptCom, ptShortsSaleService, ptContactServices, ptConstructionService) {
+        portalApp.controller('ConstructionCtrl', ['$scope', '$http', '$timeout', 'ptCom', 'ptShortsSaleService', 'ptContactServices', 'ptConstructionService', function ($scope, $http, $timeout, ptCom, ptShortsSaleService, ptContactServices, ptConstructionService) {
             $scope.arrayRemove = ptCom.arrayRemove;
             $scope.ptContactServices = ptContactServices;
             $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
@@ -313,41 +312,36 @@
                 'Insurance': 'CSCase.CSCase.Utilities.Insurance_Shown',
             };
             $scope.reload = function () {
-                $scope.$apply(function() {
-                    $scope.CSCase = {}
-                    $scope.CSCase.CSCase = {
-                        InitialIntake: {},
-                        Photos: {},
-                        Utilities: {},
-                        Violations: {},
-                        ProposalBids: {},
-                        Plans: {},
-                        Contract: {},
-                        Signoffs: {}
-                    };
-                    $scope.CSCase.CSCase.Utilities.Company = [];
-                    $scope.DataSource = {};
-                    $scope.DataSource.Shown = {
-                        'ConED': 'CSCase.CSCase.Utilities.ConED_Shown',
-                        'Energy Service': 'CSCase.CSCase.Utilities.EnergyService_Shown',
-                        'National Grid': 'CSCase.CSCase.Utilities.NationalGrid_Shown',
-                        'DEP': 'CSCase.CSCase.Utilities.DEP_Shown',
-                        'MISSING Water Meter': 'CSCase.CSCase.Utilities.MissingMeter_Shown',
-                        'Taxes': 'CSCase.CSCase.Utilities.Taxes_Shown',
-                        'ADT': 'CSCase.CSCase.Utilities.ADT_Shown',
-                        'Insurance': 'CSCase.CSCase.Utilities.Insurance_Shown',
-                    };
-                });
+                $scope.CSCase = {}
+                $scope.CSCase.CSCase = {
+                    InitialIntake: {},
+                    Photos: {},
+                    Utilities: {},
+                    Violations: {},
+                    ProposalBids: {},
+                    Plans: {},
+                    Contract: {},
+                    Signoffs: {}
+                };
+                $scope.CSCase.CSCase.Utilities.Company = [];
             }
 
             $scope.init = function (bble) {
+
                 bble = bble.trim();
-                ptShortsSaleService.getShortSaleCaseByBBLE(bble, function (res) {
-                    $scope.SsCase = res;
+                $timeout(function () {
+                    $scope.reload();
+                    ptConstructionService.getConstructionCases(bble, function (res) {
+                        ptCom.nullToUndefined(res);
+                        $.extend(true, $scope.CSCase, res);
+                    });
+
+                    ptShortsSaleService.getShortSaleCaseByBBLE(bble, function (res1) {
+                        $scope.SsCase = res1;
+                    });
+
                 });
-                ptConstructionService.getConstructionCases(bble, function (res) {
-                    $.extend($scope.CSCase, res);
-                });
+
             }
 
             $scope.saveCSCase = function () {
@@ -363,6 +357,8 @@
                     $scope.$eval(value + '=false');
                 }
             };
+
+
             $scope.$watch('CSCase.CSCase.Utilities.Company', function (newValue) {
                 if (newValue) {
                     var ds = $scope.DataSource.Shown;

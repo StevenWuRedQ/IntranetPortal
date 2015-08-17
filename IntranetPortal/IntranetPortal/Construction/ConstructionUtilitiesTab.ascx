@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionUtilitiesTab.ascx.vb" Inherits="IntranetPortal.ConstructionUtilitiesTab" %>
 
-<div class="ss_form">
+<div class="ss_form" ng-init="">
     <h4 class="ss_form_title">Utility Company</h4>
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item3">
