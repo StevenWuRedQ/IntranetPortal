@@ -450,7 +450,7 @@
     <UserRoles>Legal-*</UserRoles>
     <Items>
       <PortalNavItem Name="Legal-Summary" Text="Summary" NavigationUrl="/LegalUI/LegalSummaryUI.aspx" ShowAmount="false">
-        <UserRoles>Legal-Manager</UserRoles>
+        <UserRoles></UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>

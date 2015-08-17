@@ -20,6 +20,17 @@
         End If
     End Sub
 
+    Public Function GetAuctionDate(bble As String) As DateTime?
+
+        Dim ssCase = IntranetPortal.Data.ShortSaleCase.GetCaseByBBLE(Eval("BBLE"))
+
+        If ssCase IsNot Nothing Then
+            Return ssCase.SaleDate
+        End If
+
+        Return Nothing
+    End Function
+
     Protected Sub lbExportExcel_Click(sender As Object, e As EventArgs)
         CaseExporter.WriteXlsxToResponse()
     End Sub

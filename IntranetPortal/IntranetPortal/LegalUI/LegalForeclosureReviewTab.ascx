@@ -49,7 +49,7 @@
 
                 <select class="ss_form_input" ng-model="LegalCase.CaseStauts">
 					<% For Each v In Utility.Enum2Dictinary(GetType(IntranetPortal.Data.DataStatus))%>
-					<option vaule="<%=v.Key%>"><%=v.Value%></option>
+					<option value="<%=v.Key%>"><%=v.Value%></option>
 					<% Next%>
                 </select>
             </li>

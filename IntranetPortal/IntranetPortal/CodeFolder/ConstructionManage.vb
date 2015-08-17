@@ -42,6 +42,14 @@ Public Class ConstructionManage
 
     End Function
 
+    Public Shared Sub AssignCase(bble As String, userName As String, assignBy As String)
+        Dim cCase = ConstructionCase.GetCase(bble)
+        cCase.Owner = userName
+        cCase.Save(assignBy)
+
+        Dim comments = String.Format("The case is assign to {0}.", userName)
+        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Construction.ToString, LeadsActivityLog.EnumActionType.Comments)
+    End Sub
 
     Public Shared Function IsManager(userName As String) As String
 
@@ -50,6 +58,17 @@ Public Class ConstructionManage
         End If
 
         Return False
+    End Function
+
+    Public Shared Function GetConstructionUsers() As String()
+        Dim cRoles = Roles.GetAllRoles().ToList.Where(Function(r) r.StartsWith("Construction-")).ToList
+
+        Dim result = New List(Of String)
+        For Each r In cRoles
+            result.AddRange(Roles.GetUsersInRole(r))
+        Next
+
+        Return result.Distinct.ToArray
     End Function
 
 #Region "Activitylog Manage"

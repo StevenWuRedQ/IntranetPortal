@@ -106,6 +106,11 @@
                                     $('.popup').webuiPopover({ title: 'Contact ' + $("#vendor_btn").html(), content: $('#contact_popup').html(), width: 400 });
 
                                 });
+
+                                window.onbeforeunload = function () {
+                                    if (CaseDataChanged())
+                                        return "You have pending changes, would you save it?";
+                                }
                             </script>
 
                             <%-- <div>{{contacts}}</div>

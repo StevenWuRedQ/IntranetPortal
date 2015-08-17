@@ -37,7 +37,7 @@
 
         window.onbeforeunload = function () {
             if (CaseDataChanged())
-                return "You have pending changes, did you save it?";
+                return "You have pending changes, would you save it?";
         }
     </script>
     <asp:HiddenField runat="server" ID="hfIsEvction" Value="false" />

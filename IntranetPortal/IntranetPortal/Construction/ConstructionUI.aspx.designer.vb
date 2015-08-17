@@ -41,6 +41,51 @@ Partial Public Class ConstructionUI
     Protected WithEvents ConstructionCaseList As Global.IntranetPortal.ConstructionCaseList
 
     '''<summary>
+    '''ASPxPopupControl3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''PopupContentReAssign control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PopupContentReAssign As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+
+    '''<summary>
+    '''hfUserType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfUserType As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''listboxEmployee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents listboxEmployee As Global.DevExpress.Web.ASPxEditors.ASPxListBox
+
+    '''<summary>
+    '''btnAssign control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAssign As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
     '''ConstructionTab1 control.
     '''</summary>
     '''<remarks>
@@ -93,4 +138,49 @@ Partial Public Class ConstructionUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
+
+    '''<summary>
+    '''ASPxPopupCallBackMenu2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupCallBackMenu2 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+
+    '''<summary>
+    '''pcMain control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pcMain As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''pcMainPopupControl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pcMainPopupControl As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+
+    '''<summary>
+    '''ASPxCalendar1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxCalendar1 As Global.DevExpress.Web.ASPxEditors.ASPxCalendar
+
+    '''<summary>
+    '''ASPxButton1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 End Class

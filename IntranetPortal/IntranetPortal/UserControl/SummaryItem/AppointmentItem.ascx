@@ -5,8 +5,6 @@
         window.location.href = "/Construction/ConstructionUI.aspx?bble=" + bble;
     }
 </script>
-
-
 <h4>
     <img src="../images/grid_upcoming_icon.png" class="vertical-img"><span class="heading_text">Upcoming Appointments</span></h4>
 

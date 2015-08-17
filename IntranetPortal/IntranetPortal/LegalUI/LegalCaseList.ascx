@@ -133,6 +133,14 @@
         }
     }
 
+    function OnGridRowClicked(s, e) {
+        if (typeof CaseDataChanged == 'function') {
+            if (CaseDataChanged()) {
+                e.cancel = confirm("You have pending changes, please save or press Cancel to continue?");              
+            }
+        }
+    }
+
 </script>
 
 <div style="width: 100%; height: 100%;" class="color_gray">
@@ -226,7 +234,7 @@
             <GroupSummary>
                 <dx:ASPxSummaryItem FieldName="CaseName" SummaryType="Count" />
             </GroupSummary>
-            <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
+            <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" RowClick="OnGridRowClicked" />
             <Border BorderStyle="None"></Border>
         </dx:ASPxGridView>
     </div>

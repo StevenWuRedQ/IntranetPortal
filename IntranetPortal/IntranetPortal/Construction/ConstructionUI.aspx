@@ -74,11 +74,43 @@
                                     </li>
                                     <li class="pull-right" style="margin-right: 30px; color: #ffa484">
                                         <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="saveCSCase()" data-original-title="Save"></i>
+                                        <i class="fa fa-mail-reply sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectOwner.PerformCallback('Show');popupSelectOwner.ShowAtElement(this);" data-original-title="Reassign"></i>
                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
                                     </li>
                                 </ul>
                             </div>
+
+                            <dx:ASPxPopupControl ClientInstanceName="popupSelectOwner" Width="300px" Height="300px"
+                                MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
+                                HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
+                                runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
+                                <ContentCollection>
+                                    <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentReAssign">
+                                        <asp:HiddenField runat="server" ID="hfUserType" />
+                                        <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270" SelectedIndex="0" Width="100%">
+                                        </dx:ASPxListBox>
+                                        <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
+                                            <ClientSideEvents Click="function(s,e){
+                                        var item = listboxEmployeeClient.GetSelectedItem();
+                                        if(item == null)
+                                        {
+                                             alert('Please select user.');
+                                             return;
+                                         }
+                                        popupSelectOwner.PerformCallback('Save|' + leadsInfoBBLE + '|' + item.text);
+                                        popupSelectOwner.Hide();
+                                        }" />
+                                        </dx:ASPxButton>
+                                    </dx:PopupControlContentControl>
+                                </ContentCollection>
+                                <ClientSideEvents Closing="function(s,e){
+                                              if (typeof gridTrackingClient != 'undefined')
+                                                    gridTrackingClient.Refresh();
+                                              if (typeof gridCase != 'undefined')
+                                                    gridCase.Refresh();    
+                                        }" />
+                            </dx:ASPxPopupControl>
 
                             <div class="tab-content">
                                 <div class="tab-pane active" id="ConstructionTab">
@@ -150,6 +182,90 @@
                                     </dx:PanelContent>
                                 </PanelCollection>
                             </dx:ASPxCallbackPanel>
+
+                            <!-- Follow up function  -->
+                            <script type="text/javascript">
+
+                                function OnCallbackMenuClick(s, e) {
+
+                                    if (e.item.name == "Custom") {
+                                        ASPxPopupSelectDateControl.PerformCallback("Show");
+                                        ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
+                                        e.processOnServer = false;
+                                        return;
+                                    }
+
+                                    SetFollowUp(e.item.name)
+                                    e.processOnServer = false;
+                                }
+
+                                function SetFollowUp(type, dateSelected) {
+                                    if (typeof dateSelected == 'undefined')
+                                        dateSelected = new Date();
+
+                                    var fileData = {
+                                        "bble": leadsInfoBBLE,
+                                        "type": type,
+                                        "dtSelected": dateSelected
+                                    };
+                                }
+
+                            </script>
+                            
+                            <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
+                                AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+                                ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                <ItemStyle Paddings-PaddingLeft="20px" />
+                                <Items>
+                                    <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
+                                    <dx:MenuItem Text="Next Week" Name="nextWeek"></dx:MenuItem>
+                                    <dx:MenuItem Text="30 Days" Name="thirtyDays">
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="60 Days" Name="sixtyDays">
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Custom" Name="Custom">
+                                    </dx:MenuItem>
+                                </Items>
+                                <ClientSideEvents ItemClick="OnCallbackMenuClick" />
+                            </dx:ASPxPopupMenu>
+                            <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="360px" Height="250px"
+                                MaxWidth="800px" MaxHeight="150px" MinHeight="150px" MinWidth="150px" ID="pcMain"
+                                HeaderText="Select Date" Modal="false"
+                                runat="server" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
+                                <ContentCollection>
+                                    <dx:PopupControlContentControl runat="server" ID="pcMainPopupControl">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="true"></dx:ASPxCalendar>
+                                                    <%--     <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" 
+                                                            TimeSectionProperties-Visible="True" CssClass="edit_drop">
+                                                            <TimeSectionProperties Visible="True"></TimeSectionProperties>
+                                                            <ClientSideEvents Init="function(s,e){ s.SetDate(new Date());}" />
+                                                        </dx:ASPxDateEdit>--%>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
+                                                    <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                                        <ClientSideEvents Click="function(){
+                                                                                                                        ASPxPopupSelectDateControl.Hide();   
+                                                                                                                        SetFollowUp('customDays',callbackCalendar.GetSelectedDate());                                                                                                                        
+                                                                                                                        }"></ClientSideEvents>
+                                                    </dx:ASPxButton>
+                                                    &nbsp;
+                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                                                <ClientSideEvents Click="function(){
+                                                                                                                        ASPxPopupSelectDateControl.Hide();                                                                                                                                                                                                                                               
+                                                                                                                        }"></ClientSideEvents>
+
+                                                            </dx:ASPxButton>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </dx:PopupControlContentControl>
+                                </ContentCollection>
+                            </dx:ASPxPopupControl>
                         </div>
                     </dx:SplitterContentControl>
                 </ContentCollection>
