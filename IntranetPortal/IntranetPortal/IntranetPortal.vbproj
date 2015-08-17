@@ -517,6 +517,7 @@
     <Compile Include="CodeFolder\APIOrder.vb" />
     <Compile Include="CodeFolder\AssignRule.vb" />
     <Compile Include="CodeFolder\ConstructionManage.vb" />
+    <Compile Include="CodeFolder\CustomBinder.vb" />
     <Compile Include="CodeFolder\DataWCFService.vb" />
     <Compile Include="CodeFolder\DateTimeJavaScriptConverter .vb" />
     <Compile Include="CodeFolder\Employee.vb" />

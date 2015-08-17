@@ -17,7 +17,8 @@ Partial Public Class HomeOwner
     Public Property TLOLocateReport As DataAPI.TLOLocateReportOutput
         Get
             If objLocateReport Is Nothing And LocateReport IsNot Nothing AndAlso LocateReport.Length > 0 Then
-                Dim serializer As New BinaryFormatter
+                Dim serializer As New BinaryFormatter()
+                serializer.Binder = New CustomBinder
                 Dim writer As New MemoryStream(LocateReport)
                 Dim o As DataAPI.TLOLocateReportOutput = serializer.Deserialize(writer)
                 objLocateReport = o
