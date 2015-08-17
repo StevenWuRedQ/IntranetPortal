@@ -1,6 +1,6 @@
-﻿Imports IntranetPortal.ShortSale
+﻿Imports IntranetPortal.Data
 Imports IntranetPortal
-Imports IntranetPortal.DataAPI
+Imports IntranetPortal.Data.DataAPI
 
 Public Class Form1
 
@@ -22,9 +22,9 @@ Public Class Form1
         End If
     End Sub
 
-    Public Function SaveProp(bble As String) As IntranetPortal.ShortSale.PropertyBaseInfo
+    Public Function SaveProp(bble As String) As PropertyBaseInfo
         Dim li = LeadsInfo.GetInstance(bble)
-        Dim propBase = New IntranetPortal.ShortSale.PropertyBaseInfo
+        Dim propBase = New PropertyBaseInfo
         propBase.BBLE = li.BBLE
         propBase.Block = li.Block
         propBase.Lot = li.Lot
@@ -89,65 +89,73 @@ Public Class Form1
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        Using client As New IntranetPortal.DataAPI.WCFMacrosClient
-            Dim bble = "1004490043"
-            Dim data = client.Get_NYC_TaxLien(bble, "")
+        Using client As New IntranetPortal.Data.DataAPI.WCFMacrosClient
+
+            Dim data As New DataAPI.DOB_Complaints_In
+            data.BBLE = "1022150377"
+            data.DOB_PenOnly = True
+            data.APIorderNum = (New Random()).Next(1000)
+            data.SecurityCode = "DS543&8"
+            Dim result = client.DOB_Complaints_Get(data)
+
+            'Dim bble = "1004490043"
+            'Dim data = client.Get_NYC_TaxLien(bble, "")
 
             Return
 
-            Dim nameBase As New NameBase
-            nameBase.firstNameField = "George"
-            nameBase.lastNameField = "Vinsky"
+            'Dim nameBase As New NameBase
+            'nameBase.firstNameField = "George"
+            'nameBase.lastNameField = "Vinsky"
 
-            Dim rresult = client.Get_TLO_Person(100, Nothing, Nothing, False, False, Nothing, "13074497", Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+            'Dim rresult = client.Get_TLO_Person(100, Nothing, Nothing, False, False, Nothing, "13074497", Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
 
-            'client.Get_LocateReport(100, "3015340029 ", "BUZHAKER, IGOR", "284 MACDOUGAL STREET", "", "BROOKLYN", "NY", "11234", "US", "", "")
-
-
-
-            'Dim result = client.AB_GetFederalTaxLien("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "", "", "D & S ELECTRICAL CORP", "ByCorpName")
-            'Dim result = client.AB_GetPatriot("Test123", "Queens", "0000-00-00", "0000-00-00", "ABU SITTA", "", "", "ByPersonName")
-            'Dim result = client.AB_GetParkingViolations("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "CORPORATION", "ByCorpName")
-            'Dim result = client.AAbs_GetUcc("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "Smith", "", "", "ByPersonName")
-            'Dim result = client.AAbs_GetEmergencyRepair("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "111-08", "207 STREET", "ByAddress")
-            Dim SelectedOwners As New List(Of OwnerInfo)
-
-            '1st person Element
-            Dim NewItem = New OwnerInfo() With {.FirstName = "mohammad", .LastName = "moamem", .IsOwnerPerson = True, .CorpName = Nothing, .HouseNum = "18", .St_Name = "CLOVERDALE BLVD", .Apt = "6", .City = "OAKLAND GDNS", .State = "NY", .Zip = "11364"}
-            SelectedOwners.Add(NewItem)
-
-
-            '2nd person Element
-            NewItem = New OwnerInfo() With {.FirstName = "shaun", .LastName = "moamem", .IsOwnerPerson = True, .CorpName = Nothing, .HouseNum = "18", .St_Name = "CLOVERDALE BLVD", .Apt = "6", .City = "OAKLAND GDNS", .State = "NY", .Zip = "11364"}
-            SelectedOwners.Add(NewItem)
+            ''client.Get_LocateReport(100, "3015340029 ", "BUZHAKER, IGOR", "284 MACDOUGAL STREET", "", "BROOKLYN", "NY", "11234", "US", "", "")
 
 
 
-            '3rd person Element
-            NewItem = New OwnerInfo() With {.FirstName = "DALTON", .LastName = "SMITH", .IsOwnerPerson = True, .CorpName = Nothing, .HouseNum = "18", .St_Name = "CLOVERDALE BLVD", .Apt = "6", .City = "OAKLAND GDNS", .State = "NY", .Zip = "11364"}
-            SelectedOwners.Add(NewItem)
+            ''Dim result = client.AB_GetFederalTaxLien("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "", "", "D & S ELECTRICAL CORP", "ByCorpName")
+            ''Dim result = client.AB_GetPatriot("Test123", "Queens", "0000-00-00", "0000-00-00", "ABU SITTA", "", "", "ByPersonName")
+            ''Dim result = client.AB_GetParkingViolations("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "CORPORATION", "ByCorpName")
+            ''Dim result = client.AAbs_GetUcc("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "Smith", "", "", "ByPersonName")
+            ''Dim result = client.AAbs_GetEmergencyRepair("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "111-08", "207 STREET", "ByAddress")
+            'Dim SelectedOwners As New List(Of OwnerInfo)
+
+            ''1st person Element
+            'Dim NewItem = New OwnerInfo() With {.FirstName = "mohammad", .LastName = "moamem", .IsOwnerPerson = True, .CorpName = Nothing, .HouseNum = "18", .St_Name = "CLOVERDALE BLVD", .Apt = "6", .City = "OAKLAND GDNS", .State = "NY", .Zip = "11364"}
+            'SelectedOwners.Add(NewItem)
+
+
+            ''2nd person Element
+            'NewItem = New OwnerInfo() With {.FirstName = "shaun", .LastName = "moamem", .IsOwnerPerson = True, .CorpName = Nothing, .HouseNum = "18", .St_Name = "CLOVERDALE BLVD", .Apt = "6", .City = "OAKLAND GDNS", .State = "NY", .Zip = "11364"}
+            'SelectedOwners.Add(NewItem)
 
 
 
-            '4th Element s Corp
-            NewItem = New OwnerInfo() With {.FirstName = Nothing, .LastName = Nothing, .IsOwnerPerson = False, .CorpName = "D & S ELECTRICAL CORP", .HouseNum = "18", .St_Name = "CLOVERDALE BLVD", .Apt = "6", .City = "OAKLAND GDNS", .State = "NY", .Zip = "11364"}
-            SelectedOwners.Add(NewItem)
+            ''3rd person Element
+            'NewItem = New OwnerInfo() With {.FirstName = "DALTON", .LastName = "SMITH", .IsOwnerPerson = True, .CorpName = Nothing, .HouseNum = "18", .St_Name = "CLOVERDALE BLVD", .Apt = "6", .City = "OAKLAND GDNS", .State = "NY", .Zip = "11364"}
+            'SelectedOwners.Add(NewItem)
+
+
+
+            ''4th Element s Corp
+            'NewItem = New OwnerInfo() With {.FirstName = Nothing, .LastName = Nothing, .IsOwnerPerson = False, .CorpName = "D & S ELECTRICAL CORP", .HouseNum = "18", .St_Name = "CLOVERDALE BLVD", .Apt = "6", .City = "OAKLAND GDNS", .State = "NY", .Zip = "11364"}
+            'SelectedOwners.Add(NewItem)
 
 
 
 
-            '5ft person Element
-            NewItem = New OwnerInfo() With {.FirstName = "ANDREW", .LastName = "SMITH", .IsOwnerPerson = True, .CorpName = Nothing, .HouseNum = "18", .St_Name = "CLOVERDALE BLVD", .Apt = "6", .City = "OAKLAND GDNS", .State = "NY", .Zip = "11364"}
-            SelectedOwners.Add(NewItem)
+            ''5ft person Element
+            'NewItem = New OwnerInfo() With {.FirstName = "ANDREW", .LastName = "SMITH", .IsOwnerPerson = True, .CorpName = Nothing, .HouseNum = "18", .St_Name = "CLOVERDALE BLVD", .Apt = "6", .City = "OAKLAND GDNS", .State = "NY", .Zip = "11364"}
+            'SelectedOwners.Add(NewItem)
 
 
 
-            '6th Element Corp
-            NewItem = New OwnerInfo() With {.FirstName = Nothing, .LastName = Nothing, .IsOwnerPerson = False, .CorpName = "The Caprise Organization Inc", .HouseNum = "18", .St_Name = "CLOVERDALE BLVD", .Apt = "6", .City = "OAKLAND GDNS", .State = "NY", .Zip = "11364"}
-            SelectedOwners.Add(NewItem)
-            Dim result = client.AAbs_GetAreAbstractReport("4075321006", SelectedOwners.ToArray, True, True, True, True, True, True, True, True, True, True, True, False)
+            ''6th Element Corp
+            'NewItem = New OwnerInfo() With {.FirstName = Nothing, .LastName = Nothing, .IsOwnerPerson = False, .CorpName = "The Caprise Organization Inc", .HouseNum = "18", .St_Name = "CLOVERDALE BLVD", .Apt = "6", .City = "OAKLAND GDNS", .State = "NY", .Zip = "11364"}
+            'SelectedOwners.Add(NewItem)
+            'Dim result = client.AAbs_GetAreAbstractReport("4075321006", SelectedOwners.ToArray, True, True, True, True, True, True, True, True, True, True, True, False)
 
-            'client.NYC_Address_Search()
+            ''client.NYC_Address_Search()
         End Using
     End Sub
 
@@ -198,5 +206,5 @@ Public Class Form1
         IntranetPortal.HomeOwner.CheckLocateReportObject(txtReportToken.Text)
     End Sub
 
-  
+
 End Class

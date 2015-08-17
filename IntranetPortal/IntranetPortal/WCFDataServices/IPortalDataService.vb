@@ -1,5 +1,6 @@
 ﻿Imports System.ServiceModel
 Imports System.ServiceModel.Activation
+Imports IntranetPortal.Data
 
 ' NOTE: You can use the "Rename" command on the context menu to change the interface name "IPortalDataService" in both code and config file together.
 <ServiceContract()>
@@ -12,6 +13,9 @@ Public Interface IPortalDataService
     Function CompleteServicer(bble As String, billLine1 As String, billLine2 As String, billLine3 As String, billLine4 As String) As Boolean
 
     <OperationContract>
-    Sub TriggerIsReady(data As triggerdata)
+    Sub TriggerIsReady(data As TriggerData)
+
+    <OperationContract>
+    Sub DataIsReady(apiOrderNum As Integer, type As String, result As String)
 
 End Interface

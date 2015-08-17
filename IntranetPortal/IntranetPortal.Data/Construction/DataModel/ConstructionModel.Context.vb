@@ -23,5 +23,6 @@ Partial Public Class ConstructionEntities
     End Sub
 
     Public Overridable Property ConstructionCases() As DbSet(Of ConstructionCase)
+    Public Overridable Property CheckingComplains() As DbSet(Of CheckingComplain)
 
 End Class

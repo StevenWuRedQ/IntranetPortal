@@ -595,10 +595,22 @@ Partial Public Class ShortSaleCase
 
 #Region "Methods"
 
+    Public Sub RefreshReportFields()
+
+        'Init Occupancy Data
+        Me.OccupiedBy = If(_propInfo IsNot Nothing, _propInfo.Occupancy, Nothing)
+
+        'Sale Date
+        If FirstMortgage IsNot Nothing Then
+            If FirstMortgage.HasAuctionDate Then
+                SaleDate = FirstMortgage.DateOfSale
+            End If
+        End If
+    End Sub
+
     Public Sub Save(Optional userName As String = Nothing)
         Using context As New ShortSaleEntities
-            'Init Occupancy Data
-            Me.OccupiedBy = If(_propInfo IsNot Nothing, _propInfo.Occupancy, Nothing)
+            RefreshReportFields()
 
             If CaseId = 0 Then
                 If Not String.IsNullOrEmpty(BBLE) Then
@@ -659,8 +671,6 @@ Partial Public Class ShortSaleCase
 
                 context.SaveChanges()
             End If
-
-
 
             'Save value info
             If _valueInfos IsNot Nothing Then

@@ -1,4 +1,4 @@
-﻿Imports IntranetPortal.ShortSale
+﻿
 Imports Newtonsoft.Json
 Imports System.Web.Script.Serialization
 

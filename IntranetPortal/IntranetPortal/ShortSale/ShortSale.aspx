@@ -373,8 +373,7 @@
                     }
                 });
         }
-
-
+        
         portalApp = angular.module('PortalApp');
 
         portalApp.controller('ShortSaleCtrl', function ($scope, $http, $element, $parse, ptContactServices, ptCom) {

@@ -1,5 +1,6 @@
 ﻿Imports DevExpress.Web.ASPxCallback
 Imports IntranetPortal.Core
+Imports IntranetPortal.Data
 
 Public Class HomeOwnerInfo
     Inherits System.Web.UI.UserControl
@@ -180,11 +181,6 @@ Public Class HomeOwnerInfo
 
 End Class
 
-Namespace DataAPI
-    Partial Public Class TLOLocateReportOutput
-        Public Property BestPhones As String()
-    End Class
-End Namespace
 
 
 

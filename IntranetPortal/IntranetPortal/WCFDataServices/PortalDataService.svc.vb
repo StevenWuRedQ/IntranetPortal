@@ -1,4 +1,5 @@
 ﻿Imports System.ServiceModel.Activation
+Imports IntranetPortal.Data
 
 ' NOTE: You can use the "Rename" command on the context menu to change the class name "PortalDataService" in code, svc and config file together.
 ' NOTE: In order to launch WCF Test Client for testing this service, please select PortalDataService.svc or PortalDataService.svc.vb at the Solution Explorer and start debugging.
@@ -318,6 +319,10 @@ Public Class PortalDataService
     End Function
 
     Public Sub TriggerIsReady(data As TriggerData) Implements IPortalDataService.TriggerIsReady
+
+    End Sub
+
+    Public Sub DataIsReady(apiOrderNum As Integer, type As String, result As String) Implements IPortalDataService.DataIsReady
 
     End Sub
 End Class

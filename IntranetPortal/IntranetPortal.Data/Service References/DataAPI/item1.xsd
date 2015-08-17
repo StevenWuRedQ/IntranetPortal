@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://georgepc:8002/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/TestComponent_VB" />
+  <xs:import schemaLocation="http://georgepc:8002/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://georgepc:8002/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" />
+  <xs:element name="DoWork">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DoWorkResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DOD_PPO_Get">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Request" nillable="true" type="q1:DOB_PPO_In" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DOD_PPO_GetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="DOD_PPO_GetResult" nillable="true" type="q2:DOB_PPO_out" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DOB_Complaints_Get">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Request" nillable="true" type="q3:DOB_Complaints_In" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DOB_Complaints_GetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DOB_Complaints_GetResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Prop_tax_Get">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Request" nillable="true" type="q4:NYC_Prop_tax_In" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Prop_tax_GetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_Prop_tax_GetResult" nillable="true" type="q5:NYC_Prop_tax_Out" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_WaterSewer_Get">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Request" nillable="true" type="q6:NYC_WaterSewer_In" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_WaterSewer_GetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_WaterSewer_GetResult" nillable="true" type="q7:NYC_WaterSewer_Out" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Acris_Get">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Request" nillable="true" type="q8:Acris_In" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Acris_GetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Acris_GetResult" nillable="true" type="q9:Acris_Out" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Streets_lookup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Boro" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FullSet" type="xs:boolean" />
+        <xs:element minOccurs="0" name="FistLetter" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Streets_lookupResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="NYC_Streets_lookupResult" nillable="true" type="q10:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Address_Search">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Boro" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="HouseNumber" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ST_NAME" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Address_SearchResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_Address_SearchResult" nillable="true" type="q11:ArrayOfNYC_Assessment_Initial_Search_View" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Legal_Search">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Boro" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Block" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Lot" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Legal_SearchResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_Legal_SearchResult" nillable="true" type="q12:ArrayOfNYC_Assessment_Initial_Search_View" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Owner_Search">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Boro" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="OwnerName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Owner_SearchResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_Owner_SearchResult" nillable="true" type="q13:ArrayOfNYC_Assessment_Initial_Search_View" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Assessment_Full">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Assessment_FullResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_Assessment_FullResult" nillable="true" type="q14:ArrayOfNYC_Assessment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ALL_NYC_Tax_Liens_By_BBLE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ALL_NYC_Tax_Liens_By_BBLEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="ALL_NYC_Tax_Liens_By_BBLEResult" nillable="true" type="q15:ArrayOfALL_NYC_Tax_Liens_CO_Info" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPropdata">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="APIorderNum" type="xs:int" />
+        <xs:element minOccurs="0" name="GetAcrisMtgrs" type="xs:boolean" />
+        <xs:element minOccurs="0" name="GetTaxBill" type="xs:boolean" />
+        <xs:element minOccurs="0" name="GetECBviolations" type="xs:boolean" />
+        <xs:element minOccurs="0" name="GetWaterBill" type="xs:boolean" />
+        <xs:element minOccurs="0" name="GetZillow" type="xs:boolean" />
+        <xs:element minOccurs="0" name="GetTLO" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPropdataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetPropdataResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Zillow_Estimate_By_BBLE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Zillow_Estimate_By_BBLEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Zillow_Estimate_By_BBLEResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_Acris_Latest_OwnerName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_Acris_Latest_OwnerNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_Acris_Latest_OwnerNameResult" nillable="true" type="q16:ArrayOfAcris_LatestOwner_View" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_LisPendens">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_LisPendensResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_LisPendensResult" nillable="true" type="q17:ArrayOfLisPen" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_TLO">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="APIorderNum" type="xs:int" />
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonAddress1" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonAddress2" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonCity" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonState" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonZip" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonCountry" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Subject_Type" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonPhone" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_TLOResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_TLOResult" nillable="true" type="q18:ArrayOfTLO_SuperPhoneResults" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_LocateReport">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="APIorderNum" type="xs:int" />
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonAddress1" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonAddress2" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonCity" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonState" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonZip" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonCountry" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Subject_Type" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonPhone" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_LocateReportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" minOccurs="0" name="Get_LocateReportResult" nillable="true" type="q19:TLOLocateReportOutput" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Acris_Get_LatestSale">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="APIorderNum" type="xs:int" />
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Acris_Get_LatestSaleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Acris_Get_LatestSaleResult" nillable="true" type="q20:Acris_Last_Sales_Info" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_NameAndAddress">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_NameAndAddressResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_NameAndAddressResult" nillable="true" type="q21:ArrayOfNYC_NameAndAddress_View" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_Acris_TaxLien">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_Acris_TaxLienResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_Acris_TaxLienResult" nillable="true" type="q22:TaxLien_Info" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_Servicer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="APIorderNum" type="xs:int" />
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_ServicerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Get_ServicerResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Requests_Waiting">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Requests_WaitingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Requests_WaitingResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetJugments">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JobTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Block" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Lot" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="House_Num" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="St_Name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SearchType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetJugmentsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetJugmentsResult" nillable="true" type="q23:ArrayOfJudgment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetBankruptcy">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JobTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SearchType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetBankruptcyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetBankruptcyResult" nillable="true" type="q24:ArrayOfBankruptcy" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetEnvirnomental">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JobTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="House_Num" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="St_Name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetEnvirnomentalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetEnvirnomentalResult" nillable="true" type="q25:ArrayOfECB" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetMortDeed">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JobTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Block" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Lot" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetMortDeedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetMortDeedResult" nillable="true" type="q26:ArrayOfMortgages_Deeds" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetFederalTaxLien">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JobTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Block" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Lot" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SearchType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetFederalTaxLienResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetFederalTaxLienResult" nillable="true" type="q27:ArrayOfFederalTaxLien" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetPatriot">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JobTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SearchType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetPatriotResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetPatriotResult" nillable="true" type="q28:ArrayOfPatriot" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetParkingViolations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JobTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SearchType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetParkingViolationsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetParkingViolationsResult" nillable="true" type="q29:ArrayOfParkingViolation" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetTranscriptAdjunction">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JobTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetTranscriptAdjunctionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetTranscriptAdjunctionResult" nillable="true" type="q30:ArrayOfTranscriptAdjunction" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AAbs_GetUcc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JobTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Block" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Lot" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SearchType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AAbs_GetUccResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AAbs_GetUccResult" nillable="true" type="q31:ArrayOfUCC" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AAbs_GetEmergencyRepair">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JobTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Block" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Lot" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="HouseNumer" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="St_Name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SearchType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AAbs_GetEmergencyRepairResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AAbs_GetEmergencyRepairResult" nillable="true" type="q32:ArrayOfEmergencyRepair" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AAbs_GetAreAbstractReport">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="SelectedOwners" nillable="true" type="q33:ArrayOfOwnerInfo" />
+        <xs:element minOccurs="0" name="RunJudgement" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunFederalTaxLiens" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunMortgages" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunParkingViolation" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunPatriot" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunUcc" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunBankruptcy" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunECB" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunEmergenyRepairs" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunTransitAdjudication" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunTLO" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RetainRecords" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AAbs_GetAreAbstractReportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AAbs_GetAreAbstractReportResult" nillable="true" type="q34:AB_Report_Out" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_TLO_Person">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="APIorderNum" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FullName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" minOccurs="0" name="Name" nillable="true" type="q35:NameBase" />
+        <xs:element minOccurs="0" name="UseExactFirstNameMatch" type="xs:boolean" />
+        <xs:element minOccurs="0" name="UsePhoneticLastNameMatch" type="xs:boolean" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" minOccurs="0" name="Address" nillable="true" type="q36:AddressBase" />
+        <xs:element minOccurs="0" name="SSN" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="DateOfBirth" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="MinimumAge" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="MaximumAge" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="DriversLicenseNumber" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="IPAddress" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_TLO_PersonResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" minOccurs="0" name="Get_TLO_PersonResult" nillable="true" type="q37:TLOPersonSearchOutput" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_NYC_TaxLien">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="YEAR" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_NYC_TaxLienResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_NYC_TaxLienResult" nillable="true" type="q38:ArrayOfSP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Create_Subscription">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonOrBBLE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SubscriptionActive" type="xs:boolean" />
+        <xs:element minOccurs="0" name="SubscriptionFor" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="TrigThresholdDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="NotificationType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="NotificationEmail" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Create_SubscriptionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Trig_Create_SubscriptionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Delete_Subscription">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SubscriptionFor" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Delete_SubscriptionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Trig_Delete_SubscriptionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Activate_Deactivate_Subscription">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ActiveDeactive" type="xs:boolean" />
+        <xs:element minOccurs="0" name="SubscriptionFor" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Activate_Deactivate_SubscriptionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Trig_Activate_Deactivate_SubscriptionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Get_Subscriptions_List">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Get_Subscriptions_ListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Trig_Get_Subscriptions_ListResult" nillable="true" type="q39:ArrayOfTriggerManager" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Is_TrigOn_By_BBLE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Is_TrigOn_By_BBLEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Trig_Is_TrigOn_By_BBLEResult" nillable="true" type="q40:ArrayOfSP_Is_TrigOn_BY_BBLE_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Zoning_By_BBLE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Zoning_By_BBLEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_Zoning_By_BBLEResult" nillable="true" type="q41:ArrayOfSP_NYC_Zoning_BY_BBLE_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DCPGeododerBySingleLine">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DCPGeododerBySingleLineResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DCPGeododerBySingleLineResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DCPGeododerByAddress">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Address" nillable="true" type="q42:GeoAddress" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DCPGeododerByAddressResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DCPGeododerByAddressResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

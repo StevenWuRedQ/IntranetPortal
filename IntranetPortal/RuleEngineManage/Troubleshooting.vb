@@ -1,8 +1,8 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Imports IntranetPortal
-Imports IntranetPortal.ShortSale
 Imports System.Threading
+Imports IntranetPortal.data
 
 Public Class Troubleshooting
 
@@ -303,7 +303,7 @@ Public Class Troubleshooting
                 mtg.Status = mort("Progress").ToString
                 mtg.LenderContactId = PartyContact.GetContactByName(mtg.Lender, mtg.Lender, mort("Customer Service Phone/Fax 1").ToString, mort("ATR 1 Fax").ToString, "").ContactId
 
-                mtg.Save()
+                mtg.Save("Portal")
             End If
         Next
     End Sub
@@ -423,11 +423,11 @@ Public Class Troubleshooting
         bble = li.BBLE
 
         'load property info
-        Dim ssCase = ShortSale.ShortSaleCase.GetCaseByBBLE(bble)
+        Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
 
         If ssCase Is Nothing Then
             ShortSaleManage.MoveLeadsToShortSale(bble, "DataImport")
-            ssCase = ShortSale.ShortSaleCase.GetCaseByBBLE(bble)
+            ssCase = ShortSaleCase.GetCaseByBBLE(bble)
         End If
 
         ssCase.OccupiedBy = prop("Occupied By").ToString
@@ -446,9 +446,9 @@ Public Class Troubleshooting
 
 
         If prop.Table.Columns.Contains("Listing Agent") AndAlso Not String.IsNullOrEmpty(prop("Listing Agent").ToString) Then
-            Dim contact = ShortSale.PartyContact.GetContactByName(prop("Listing Agent").ToString)
+            Dim contact = PartyContact.GetContactByName(prop("Listing Agent").ToString)
             If contact Is Nothing Then
-                contact = New ShortSale.PartyContact(prop("Listing Agent").ToString, Nothing, Nothing)
+                contact = New PartyContact(prop("Listing Agent").ToString, Nothing, Nothing)
                 contact.Save()
             End If
 
@@ -583,7 +583,7 @@ Public Class Troubleshooting
             offer.CreateBy = "Imported"
             offer.CreateDate = DateTime.Now
 
-            offer.Save()
+            offer.Save("Imported")
         End If
     End Sub
 
@@ -626,12 +626,12 @@ Public Class Troubleshooting
 
         If txtBBLE.Text = "*" Then
 
-            For Each item In Legal.LegalCase.GetAllCases
-                item.SaveData()
+            For Each item In LegalCase.GetAllCases
+                item.SaveData("Portal")
             Next
         Else
-            Dim lCase = IntranetPortal.Legal.LegalCase.GetCase(txtBBLE.Text)
-            lCase.SaveData()
+            Dim lCase = LegalCase.GetCase(txtBBLE.Text)
+            lCase.SaveData("Portal")
         End If
     End Sub
 End Class

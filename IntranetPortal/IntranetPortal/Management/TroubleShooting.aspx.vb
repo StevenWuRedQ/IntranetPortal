@@ -60,30 +60,30 @@ Public Class TroubleShooting
         End Using
 
         Return
-        Dim cn As SqlConnection
-        Dim strCn As String
-        Dim cmd As SqlCommand
-        Dim prm As SqlParameter
-        strCn = "Data Source=(local);Initial Catalog=IntranetPortal;" & _
-            "Integrated Security=SSPI"
-        cn = New SqlConnection(strCn)
-        cmd = New SqlCommand("UpdateEmployeeName", cn)
-        cmd.CommandType = CommandType.StoredProcedure
-        prm = New SqlParameter("@OldName", SqlDbType.VarChar)
-        prm.Direction = ParameterDirection.Input
-        cmd.Parameters.Add(prm)
-        cmd.Parameters("@OldName").Value = "Test"
-        prm = New SqlParameter("@NewName", SqlDbType.VarChar)
-        prm.Direction = ParameterDirection.Input
-        cmd.Parameters.Add(prm)
-        cmd.Parameters("@NewName").Value = "Test"
-        cn.Open()
-        Dim dr As SqlDataReader = cmd.ExecuteReader
-        While dr.Read
-            Console.WriteLine("Product ordered: {0}", dr.GetSqlString(0))
-        End While
-        dr.Close()
-        cn.Close()
+        'Dim cn As SqlConnection
+        'Dim strCn As String
+        'Dim cmd As SqlCommand
+        'Dim prm As SqlParameter
+        'strCn = "Data Source=(local);Initial Catalog=IntranetPortal;" & _
+        '    "Integrated Security=SSPI"
+        'cn = New SqlConnection(strCn)
+        'cmd = New SqlCommand("UpdateEmployeeName", cn)
+        'cmd.CommandType = CommandType.StoredProcedure
+        'prm = New SqlParameter("@OldName", SqlDbType.VarChar)
+        'prm.Direction = ParameterDirection.Input
+        'cmd.Parameters.Add(prm)
+        'cmd.Parameters("@OldName").Value = "Test"
+        'prm = New SqlParameter("@NewName", SqlDbType.VarChar)
+        'prm.Direction = ParameterDirection.Input
+        'cmd.Parameters.Add(prm)
+        'cmd.Parameters("@NewName").Value = "Test"
+        'cn.Open()
+        'Dim dr As SqlDataReader = cmd.ExecuteReader
+        'While dr.Read
+        '    Console.WriteLine("Product ordered: {0}", dr.GetSqlString(0))
+        'End While
+        'dr.Close()
+        'cn.Close()
 
     End Sub
 

@@ -165,17 +165,13 @@
       <Project>{5da9a152-6e61-4cde-baf5-6309ed56539a}</Project>
       <Name>IntranetPortal.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IntranetPortal.Legal\IntranetPortal.Legal.vbproj">
-      <Project>{f816325a-f7bd-4c84-93a4-ef33dae80e6f}</Project>
-      <Name>IntranetPortal.Legal</Name>
+    <ProjectReference Include="..\IntranetPortal.Data\IntranetPortal.Data.vbproj">
+      <Project>{51557141-4472-40e6-82bd-30275f702486}</Project>
+      <Name>IntranetPortal.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\IntranetPortal.RulesEngin\IntranetPortal.RulesEngine.vbproj">
       <Project>{4b4c5173-473a-449a-b117-25e18d3c401b}</Project>
       <Name>IntranetPortal.RulesEngine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IntranetPortal.ShortSale\IntranetPortal.ShortSale.vbproj">
-      <Project>{fc0c5f0d-f387-48ed-a96c-6d4e1914fd0b}</Project>
-      <Name>IntranetPortal.ShortSale</Name>
     </ProjectReference>
     <ProjectReference Include="..\IntranetPortal\IntranetPortal.vbproj">
       <Project>{6ca9f52b-c8d7-4098-8fb4-0626d61a9e32}</Project>

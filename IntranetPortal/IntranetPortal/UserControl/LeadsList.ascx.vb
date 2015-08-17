@@ -1,6 +1,7 @@
 ﻿Imports DevExpress.Web.ASPxEditors
 Imports DevExpress.Web.ASPxTabControl
 Imports DevExpress.Web.ASPxCallbackPanel
+Imports IntranetPortal.Data
 
 Public Class LeadsList
     Inherits System.Web.UI.UserControl

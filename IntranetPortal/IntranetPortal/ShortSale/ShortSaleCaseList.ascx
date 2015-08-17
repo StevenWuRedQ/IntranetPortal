@@ -94,6 +94,7 @@
         }
         else {
             caseId = values;
+            console.log("CaseId: " + caseId);
             //GetShortSaleData(caseId);
             RefreshContent();
         }

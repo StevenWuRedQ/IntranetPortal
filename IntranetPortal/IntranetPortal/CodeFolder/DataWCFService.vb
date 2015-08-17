@@ -1,6 +1,32 @@
 ﻿Imports System.Threading.Tasks
+Imports IntranetPortal.Data
 
 Public Class DataWCFService
+
+#Region "Complains"
+
+    Public Shared Function RunComplains() As Boolean
+
+        Using client As New DataAPI.WCFMacrosClient
+
+            Dim data As New DataAPI.DOB_Complaints_In
+            data.BBLE = "1022150377"
+            data.DOB_PenOnly = True
+
+            Dim result = client.DOB_Complaints_Get(data)
+
+
+
+
+        End Using
+
+    End Function
+
+
+
+#End Region
+
+
     Public Shared Function GetLeadInfo(bble As String) As LeadsInfo
         Using client As New DataAPI.WCFMacrosClient
             'Dim result = client.GetPropdata(bble, False, False, False, False, False, False)
@@ -192,31 +218,31 @@ Public Class DataWCFService
     Public Shared Sub UpdateTaxLiens(bble As String)
         UpdateTaxLiens2(bble)
         Return
+        'Dim ct As New DataAPI.TLOLocateReportOutput
+        'Using client As New DataAPI.WCFMacrosClient
 
-        Using client As New DataAPI.WCFMacrosClient
+        '    Dim taxLiens = client.Get_Acris_TaxLien(bble)
 
-            Dim taxLiens = client.Get_Acris_TaxLien(bble)
+        '    If taxLiens IsNot Nothing AndAlso taxLiens.TaxLienAmt.HasValue Then
+        '        Using ctx As New Entities
+        '            Dim liens = ctx.LeadsTaxLiens.Where(Function(lt) lt.BBLE = bble)
+        '            ctx.LeadsTaxLiens.RemoveRange(liens)
 
-            If taxLiens IsNot Nothing AndAlso taxLiens.TaxLienAmt.HasValue Then
-                Using ctx As New Entities
-                    Dim liens = ctx.LeadsTaxLiens.Where(Function(lt) lt.BBLE = bble)
-                    ctx.LeadsTaxLiens.RemoveRange(liens)
+        '            Dim newLien As New LeadsTaxLien
+        '            newLien.BBLE = bble
+        '            If taxLiens.TaxLienCertDate.HasValue Then
+        '                newLien.TaxLiensYear = taxLiens.TaxLienCertDate
+        '            End If
 
-                    Dim newLien As New LeadsTaxLien
-                    newLien.BBLE = bble
-                    If taxLiens.TaxLienCertDate.HasValue Then
-                        newLien.TaxLiensYear = taxLiens.TaxLienCertDate
-                    End If
+        '            If taxLiens.TaxLienAmt.HasValue Then
+        '                newLien.Amount = taxLiens.TaxLienAmt
+        '            End If
+        '            ctx.LeadsTaxLiens.Add(newLien)
 
-                    If taxLiens.TaxLienAmt.HasValue Then
-                        newLien.Amount = taxLiens.TaxLienAmt
-                    End If
-                    ctx.LeadsTaxLiens.Add(newLien)
-
-                    ctx.SaveChanges()
-                End Using
-            End If
-        End Using
+        '            ctx.SaveChanges()
+        '        End Using
+        '    End If
+        'End Using
     End Sub
 
     Public Shared Sub UpdateTaxLiens2(bble As String)

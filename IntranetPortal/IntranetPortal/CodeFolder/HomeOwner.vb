@@ -3,6 +3,7 @@ Imports System.Xml
 Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization
+Imports IntranetPortal.Data
 
 Partial Public Class HomeOwner
 

@@ -44,6 +44,8 @@
             g.CreateDate = Date.Now
             ctx.GroupTypes.Add(g)
             ctx.SaveChanges()
+
+            Return g
         End Using
     End Function
 

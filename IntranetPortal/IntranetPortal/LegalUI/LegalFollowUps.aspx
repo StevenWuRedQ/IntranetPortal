@@ -34,6 +34,7 @@
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <uc1:Common runat="server" ID="Common" />
     <div class="container" style="margin-top:20px">
+     
         <div class="row">
             <div class="col-md-4 col-md-offset-8 form-inline">
                <input type="text" style="margin-right: 20px" id="QuickSearch" class="form-control"  placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}"/> 

@@ -34,6 +34,7 @@
         }
         else {
             leadsInfoBBLE = values;
+            console.log(values);
             //GetShortSaleData(caseId);
             //ContentCallbackPanel.PerformCallback(values);
             if (cbpLogs)

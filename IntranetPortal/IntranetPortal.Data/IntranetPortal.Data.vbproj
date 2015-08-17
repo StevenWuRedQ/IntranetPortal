@@ -17,6 +17,7 @@
     <SccProvider>SAK</SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,6 +50,8 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Data.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -65,6 +68,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -82,7 +86,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Complains\CheckingComplains.vb" />
     <Compile Include="Construction\ConstructionCase.vb" />
+    <Compile Include="Construction\DataModel\CheckingComplain.vb">
+      <DependentUpon>ConstructionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Construction\DataModel\ConstructionCase.vb">
       <DependentUpon>ConstructionModel.tt</DependentUpon>
     </Compile>
@@ -101,6 +109,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConstructionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataServices\TLOLocateReportOutput.vb" />
     <Compile Include="Legal\DataModel\LawReference.vb">
       <DependentUpon>LegalModel.tt</DependentUpon>
     </Compile>
@@ -150,6 +159,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Service References\DataAPI\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\ADOEntity\CleareneceNote.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
@@ -313,6 +327,118 @@
       <LastGenOutput>ShortSale.Designer.vb</LastGenOutput>
     </EntityDeploy>
     <None Include="packages.config" />
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.AB_Report_Out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.Acris_Last_Sales_Info.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.Acris_LatestOwner_View.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.Acris_Out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.ALL_NYC_Tax_Liens_CO_Info.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.Bankruptcy1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.DOB_PPO_out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.ECB.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.EmergencyRepair.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.FederalTaxLien.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.Judgment.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.LisPen.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.Mortgages_Deeds.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.NYC_Assessment.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.NYC_Assessment_Initial_Search_View.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.NYC_NameAndAddress_View.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.NYC_Prop_tax_Out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.NYC_WaterSewer_Out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.ParkingViolation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.Patriot.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.SP_Is_TrigOn_BY_BBLE_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.SP_NYC_Zoning_BY_BBLE_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.TaxLien_Info.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.TLOLocateReportOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.TLOPersonSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.TLO_SuperPhoneResults.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.TranscriptAdjunction.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.TriggerManager.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.UCC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\WCFMacros.wsdl" />
     <None Include="ShortSale\ADOEntity\ShortSale.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ShortSale.edmx</DependentUpon>
@@ -336,6 +462,27 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DataAPI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataAPI\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataAPI\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataAPI\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DataAPI\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

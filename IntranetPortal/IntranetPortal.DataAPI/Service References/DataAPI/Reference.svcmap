@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="be8da6e4-2d49-4ed5-884b-04515b471713" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://georgepc:8002" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="f9f527b2-8fef-483c-a5d0-b8549c953141" SourceId="1" SourceUrl="http://georgepc:8002/?xsd=xsd3" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="afe77e7f-2a2e-478a-921f-63b1be601947" SourceId="1" SourceUrl="http://georgepc:8002/?xsd=xsd0" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="0b8f7357-73ed-4a6d-9092-82c9184c2baa" SourceId="1" SourceUrl="http://georgepc:8002/?xsd=xsd1" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="a7d5f061-18f3-496f-9ea2-a2926676f85d" SourceId="1" SourceUrl="http://georgepc:8002/?disco" />
+    <MetadataFile FileName="WCFMacros.wsdl" MetadataType="Wsdl" ID="0c8307f6-2fc6-4821-8969-01d00bc2f4c8" SourceId="1" SourceUrl="http://georgepc:8002/?wsdl" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="a641f28d-fcdd-4e79-ad84-ef4e4a2b928c" SourceId="1" SourceUrl="http://georgepc:8002/?xsd=xsd6" />
+    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="d637e78c-9f75-4b03-a13a-8bcc6aec3fa0" SourceId="1" SourceUrl="http://georgepc:8002/?xsd=xsd4" />
+    <MetadataFile FileName="item5.xsd" MetadataType="Schema" ID="e9caab0b-23b0-449e-b3f1-2bb5b3064eba" SourceId="1" SourceUrl="http://georgepc:8002/?xsd=xsd5" />
+    <MetadataFile FileName="item6.xsd" MetadataType="Schema" ID="f4e8aecb-d08d-49e5-ac5e-e09e4373e61d" SourceId="1" SourceUrl="http://georgepc:8002/?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

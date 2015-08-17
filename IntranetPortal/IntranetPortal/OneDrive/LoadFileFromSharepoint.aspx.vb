@@ -90,30 +90,30 @@ Public Class LoadFileFromSharepoint
 
             Return
 
-            Dim lists = ClientContext.Web.Lists.GetByTitle("Documents")
-            ClientContext.Load(lists)
-            Dim camlQuery As New CamlQuery
-            camlQuery.ViewXml = "<View Scope='RecursiveAll'></View>"
-            Dim items = lists.GetItems(camlQuery)
-            ClientContext.Load(items)
-            ClientContext.ExecuteQuery()
+            'Dim lists = ClientContext.Web.Lists.GetByTitle("Documents")
+            'ClientContext.Load(lists)
+            'Dim camlQuery As New CamlQuery
+            'camlQuery.ViewXml = "<View Scope='RecursiveAll'></View>"
+            'Dim items = lists.GetItems(camlQuery)
+            'ClientContext.Load(items)
+            'ClientContext.ExecuteQuery()
 
-            For Each item As ListItem In items
-                If item.FileSystemObjectType = FileSystemObjectType.File Then
-                    Dim File = item.File
-                    ClientContext.Load(item.File)
-                    ClientContext.ExecuteQuery()
+            'For Each item As ListItem In items
+            '    If item.FileSystemObjectType = FileSystemObjectType.File Then
+            '        Dim File = item.File
+            '        ClientContext.Load(item.File)
+            '        ClientContext.ExecuteQuery()
 
-                    If item.File IsNot Nothing Then
-                        Dim objInfo = ObjectSharingInformation.GetObjectSharingInformation(ClientContext, item, True, True, True, True, True, True, True)
-                        ClientContext.Load(objInfo, Function(a As ObjectSharingInformation) a.AnonymousViewLink)
-                        ClientContext.ExecuteQuery()
+            '        If item.File IsNot Nothing Then
+            '            Dim objInfo = ObjectSharingInformation.GetObjectSharingInformation(ClientContext, item, True, True, True, True, True, True, True)
+            '            ClientContext.Load(objInfo, Function(a As ObjectSharingInformation) a.AnonymousViewLink)
+            '            ClientContext.ExecuteQuery()
 
-                        Response.Write(objInfo.AnonymousViewLink + " <br />")
-                        Response.Write(String.Format("Id: {0}. Name: {1}. Link: {2} <br />", item.Id, item.File.Name, item.File.ServerRelativeUrl))
-                    End If
-                End If
-            Next
+            '            Response.Write(objInfo.AnonymousViewLink + " <br />")
+            '            Response.Write(String.Format("Id: {0}. Name: {1}. Link: {2} <br />", item.Id, item.File.Name, item.File.ServerRelativeUrl))
+            '        End If
+            '    End If
+            'Next
         End Using
     End Sub
 

@@ -139,6 +139,8 @@ Public Class EmailSummaryRule
             Return True
         End If
 
+
+
         Return False
     End Function
 End Class
