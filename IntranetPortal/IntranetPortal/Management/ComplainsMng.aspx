@@ -3,7 +3,6 @@
 <asp:Content runat="server" ContentPlaceHolderID="head">
     <script type="text/javascript">
         function SearchGrid() {
-
             var filterCondition = "";
             var key = document.getElementById("QuickSearch").value;
 
@@ -17,6 +16,20 @@
             return false;
         }
 
+        function SearchComplains() {
+            var filterCondition = "";
+            var key = document.getElementById("gdComplainKey").value;
+
+            if (key.trim() == "") {
+                gdComplainsResult.ClearFilter();
+                return;
+            }
+
+            filterCondition = "[Address] LIKE '%" + key + "%'";
+            gdComplainsResult.ApplyFilter(filterCondition);
+            return false;
+        }
+
         function SetView() {
             var value = rbBBLE.GetChecked();
             txtBBLE.SetEnabled(value);
@@ -24,12 +37,30 @@
             txtStreet.SetEnabled(!value);
             txtCity.SetEnabled(!value);
         }
+        var needRefreshResult = false;
+        function RefreshProperty(bble)
+        {
+            needRefreshResult = true;
+            gdComplains.PerformCallback("Refresh|" + bble)
+           
+        }
+
+        function RemoveProperty(bble) {
+            needRefreshResult = true;
+            gdComplains.PerformCallback("Delete|" + bble)
+        }
+
+        function RefreshResult()
+        {
+            gdComplainsResult.Refresh();
+            needRefreshResult = false;
+        }
     </script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <div class="container" style="margin-top: 20px">
-        <h3>Complains Monitor</h3>
+        <h3>DOB Complains</h3>
         <div class="row">
             <table>
                 <tr>
@@ -94,18 +125,61 @@
                     </dx:GridViewDataColumn>
                     <dx:GridViewDataDateColumn FieldName="LastExecute"></dx:GridViewDataDateColumn>
                     <dx:GridViewDataColumn FieldName="CreateBy" Caption="CreateBy">
-                    </dx:GridViewDataColumn>
-                    <dx:GridViewCommandColumn ShowDeleteButton="true" ButtonType="Button">
-                        <DeleteButton Text="Remove"></DeleteButton>
-                    </dx:GridViewCommandColumn>
+                    </dx:GridViewDataColumn>                    
+                    <dx:GridViewDataColumn Width="80px">
+                        <DataItemTemplate>
+                            <i class="fa fa-refresh icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RefreshProperty('<%# Eval("BBLE")%>')" title="Refresh"></i>&nbsp;
+                            <i class="fa fa-close icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RemoveProperty('<%# Eval("BBLE")%>')" title="Remove"></i>
+                        </DataItemTemplate>
+                    </dx:GridViewDataColumn>                  
                 </Columns>
                 <Settings ShowHeaderFilterButton="true" />
                 <SettingsBehavior ConfirmDelete="true" />
                 <SettingsText ConfirmDelete="The follow up date will be cleared. Continue?" />
+                <ClientSideEvents EndCallback="function(s,e){ if(needRefreshResult){ RefreshResult();}}" />
             </dx:ASPxGridView>
         </div>
+        <div class="row">
+            <div class="col-md-4 form-inline">
+                Results&nbsp;<i class="fa fa-refresh icon_btn tooltip-examples  grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RefreshResult()" title="Refresh"></i>
+                <i class="fa fa-wrench icon_btn tooltip-examples  grid_buttons" style="margin-left: 10px; font-size: 19px" title="Customized" onclick="gdComplainsResult.ShowCustomizationWindow(this)"></i>
+
+                <input type="text" style="margin-right: 20px" id="gdComplainKey" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />
+                <i class="fa fa-search icon_btn tooltip-examples  grid_buttons" style="margin-right: 20px; font-size: 19px" onclick="SearchComplains()" title="search"></i>                
+            </div>
+        </div>
+        <div class="row" style="margin-top: 10px; overflow-x:scroll">
+            <dx:ASPxGridView ID="gdComplainsResult" ClientInstanceName="gdComplainsResult" AutoGenerateColumns="true" runat="server" Theme="Moderno" CssClass="table"
+                 KeyFieldName="ComplainNumber" OnDataBinding="gdComplainsResult_DataBinding" OnCustomCallback="gdComplainsResult_CustomCallback">
+                <%--<Columns>
+                     <dx:GridViewDataColumn FieldName="BBLE">
+                    </dx:GridViewDataColumn>
+                      <dx:GridViewDataColumn FieldName="Address">
+                    </dx:GridViewDataColumn>
+                      <dx:GridViewDataColumn FieldName="AssignedTo">
+                    </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="CategoryCode">
+                    </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="AssignedTo">
+                    </dx:GridViewDataColumn> 
+                        <dx:GridViewDataColumn FieldName="Comments">
+                    </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="ComplainNumber">
+                    </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="Reference311Number" Caption="Ref311Num">
+                    </dx:GridViewDataColumn>
+                </Columns>--%>
+                <Settings ShowHeaderFilterButton="true" />               
+                <SettingsBehavior ConfirmDelete="true" EnableCustomizationWindow="true" />
+                <SettingsText ConfirmDelete="The follow up date will be cleared. Continue?" EmptyDataRow="Data Service is not avaiable." />
+            </dx:ASPxGridView>
+        </div>
+        <br />        
     </div>
     <script>
         $(function () { SetView() });
+        $(function () {
+            setTimeout(RefreshResult(), 1000);
+        });
     </script>
 </asp:Content>

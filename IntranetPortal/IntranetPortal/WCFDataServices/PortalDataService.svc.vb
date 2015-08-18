@@ -322,7 +322,15 @@ Public Class PortalDataService
 
     End Sub
 
-    Public Sub DataIsReady(apiOrderNum As Integer, type As String, result As String) Implements IPortalDataService.DataIsReady
+    Public Sub DataIsReady(bble As String, apiOrderNum As Integer, type As String, result As String) Implements IPortalDataService.DataIsReady
+        Using client As New IntranetPortal.Data.DataAPI.WCFMacrosClient
+
+            If type = "DOBComplains" Then
+                Dim data = client.Get_DBO_Complaints_List(bble, False)
+            End If
+        End Using
+
+
 
     End Sub
 End Class

@@ -96,8 +96,9 @@ Public Class Form1
             data.DOB_PenOnly = True
             data.APIorderNum = (New Random()).Next(1000)
             data.SecurityCode = "DS543&8"
-            Dim result = client.DOB_Complaints_Get(data)
-
+            'Dim result = client.DOB_Complaints_Get(data)
+            Dim result = client.DOB_Complaints_Delete(data.BBLE)
+            'Dim tbl = client.Get_DBO_Complaints_List("1022150377", False)
             'Dim bble = "1004490043"
             'Dim data = client.Get_NYC_TaxLien(bble, "")
 

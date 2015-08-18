@@ -16,6 +16,6 @@ Public Interface IPortalDataService
     Sub TriggerIsReady(data As TriggerData)
 
     <OperationContract>
-    Sub DataIsReady(apiOrderNum As Integer, type As String, result As String)
+    Sub DataIsReady(bble As String, apiOrderNum As Integer, type As String, result As String)
 
 End Interface

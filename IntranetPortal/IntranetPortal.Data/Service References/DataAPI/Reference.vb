@@ -461,6 +461,340 @@ Namespace DataAPI
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="SP_DOB_Complaints_By_BBLE_Result", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class SP_DOB_Complaints_By_BBLE_Result
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AddressField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AssignedToField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BINField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BoroughField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CategoryField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CategoryCodeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CommentsField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ComplaintNumberField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DOBViolationField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DateEnteredField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DispositionField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DispositionDetailsField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ECBViolationField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private InspectionDateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LastInspectionField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LastUpdatedField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private OwnerField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private PriorityField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private REField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Reference311NumberField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private StatusField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private SubjectField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ZipField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Address() As String
+            Get
+                Return Me.AddressField
+            End Get
+            Set
+                Me.AddressField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property AssignedTo() As String
+            Get
+                Return Me.AssignedToField
+            End Get
+            Set
+                Me.AssignedToField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BIN() As String
+            Get
+                Return Me.BINField
+            End Get
+            Set
+                Me.BINField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Borough() As String
+            Get
+                Return Me.BoroughField
+            End Get
+            Set
+                Me.BoroughField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Category() As String
+            Get
+                Return Me.CategoryField
+            End Get
+            Set
+                Me.CategoryField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CategoryCode() As String
+            Get
+                Return Me.CategoryCodeField
+            End Get
+            Set
+                Me.CategoryCodeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Comments() As String
+            Get
+                Return Me.CommentsField
+            End Get
+            Set
+                Me.CommentsField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ComplaintNumber() As String
+            Get
+                Return Me.ComplaintNumberField
+            End Get
+            Set
+                Me.ComplaintNumberField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DOBViolation() As String
+            Get
+                Return Me.DOBViolationField
+            End Get
+            Set
+                Me.DOBViolationField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DateEntered() As System.Nullable(Of Date)
+            Get
+                Return Me.DateEnteredField
+            End Get
+            Set
+                Me.DateEnteredField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Disposition() As String
+            Get
+                Return Me.DispositionField
+            End Get
+            Set
+                Me.DispositionField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DispositionDetails() As String
+            Get
+                Return Me.DispositionDetailsField
+            End Get
+            Set
+                Me.DispositionDetailsField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ECBViolation() As String
+            Get
+                Return Me.ECBViolationField
+            End Get
+            Set
+                Me.ECBViolationField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property InspectionDate() As System.Nullable(Of Date)
+            Get
+                Return Me.InspectionDateField
+            End Get
+            Set
+                Me.InspectionDateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LastInspection() As String
+            Get
+                Return Me.LastInspectionField
+            End Get
+            Set
+                Me.LastInspectionField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LastUpdated() As System.Nullable(Of Date)
+            Get
+                Return Me.LastUpdatedField
+            End Get
+            Set
+                Me.LastUpdatedField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Owner() As String
+            Get
+                Return Me.OwnerField
+            End Get
+            Set
+                Me.OwnerField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Priority() As String
+            Get
+                Return Me.PriorityField
+            End Get
+            Set
+                Me.PriorityField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property RE() As String
+            Get
+                Return Me.REField
+            End Get
+            Set
+                Me.REField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Reference311Number() As String
+            Get
+                Return Me.Reference311NumberField
+            End Get
+            Set
+                Me.Reference311NumberField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Status() As String
+            Get
+                Return Me.StatusField
+            End Get
+            Set
+                Me.StatusField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Subject() As String
+            Get
+                Return Me.SubjectField
+            End Get
+            Set
+                Me.SubjectField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Zip() As String
+            Get
+                Return Me.ZipField
+            End Get
+            Set
+                Me.ZipField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="NYC_Prop_tax_In", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
      System.SerializableAttribute()>  _
     Partial Public Class NYC_Prop_tax_In
@@ -48145,173 +48479,187 @@ Namespace DataAPI
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DOB_Complaints_Get", ReplyAction:="http://tempuri.org/IWCFMacros/DOB_Complaints_GetResponse")>  _
         Function DOB_Complaints_Get(ByVal Request As DataAPI.DOB_Complaints_In) As String
         
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Prop_tax_Get", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Prop_tax_GetResponse")>  _
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_DBO_Complaints_List", ReplyAction:="http://tempuri.org/IWCFMacros/Get_DBO_Complaints_ListResponse")>  _
+        Function Get_DBO_Complaints_List(ByVal BBLE As String, ByVal ALL As Boolean) As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DOB_Complaints_Delete", ReplyAction:="http://tempuri.org/IWCFMacros/DOB_Complaints_DeleteResponse")> _
+        Function DOB_Complaints_Delete(ByVal BBLE As String) As Boolean
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Prop_tax_Get", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Prop_tax_GetResponse")> _
         Function NYC_Prop_tax_Get(ByVal Request As DataAPI.NYC_Prop_tax_In) As DataAPI.NYC_Prop_tax_Out
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_WaterSewer_Get", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_WaterSewer_GetResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_WaterSewer_Get", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_WaterSewer_GetResponse")> _
         Function NYC_WaterSewer_Get(ByVal Request As DataAPI.NYC_WaterSewer_In) As DataAPI.NYC_WaterSewer_Out
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Acris_Get", ReplyAction:="http://tempuri.org/IWCFMacros/Acris_GetResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Acris_Get", ReplyAction:="http://tempuri.org/IWCFMacros/Acris_GetResponse")> _
         Function Acris_Get(ByVal Request As DataAPI.Acris_In) As DataAPI.Acris_Out
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Streets_lookup", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Streets_lookupResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Streets_lookup", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Streets_lookupResponse")> _
         Function NYC_Streets_lookup(ByVal Boro As String, ByVal FullSet As Boolean, ByVal FistLetter As String) As String()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Address_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Address_SearchResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Address_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Address_SearchResponse")> _
         Function NYC_Address_Search(ByVal Boro As String, ByVal HouseNumber As String, ByVal ST_NAME As String) As DataAPI.NYC_Assessment_Initial_Search_View()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Legal_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Legal_SearchResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Legal_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Legal_SearchResponse")> _
         Function NYC_Legal_Search(ByVal Boro As String, ByVal Block As String, ByVal Lot As String) As DataAPI.NYC_Assessment_Initial_Search_View()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Owner_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Owner_SearchResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Owner_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Owner_SearchResponse")> _
         Function NYC_Owner_Search(ByVal Boro As String, ByVal OwnerName As String) As DataAPI.NYC_Assessment_Initial_Search_View()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Assessment_Full", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Assessment_FullResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Assessment_Full", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Assessment_FullResponse")> _
         Function NYC_Assessment_Full(ByVal BBLE As String) As DataAPI.NYC_Assessment()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLEResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLEResponse")> _
         Function ALL_NYC_Tax_Liens_By_BBLE(ByVal BBLE As String) As DataAPI.ALL_NYC_Tax_Liens_CO_Info()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/GetPropdata", ReplyAction:="http://tempuri.org/IWCFMacros/GetPropdataResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/GetPropdata", ReplyAction:="http://tempuri.org/IWCFMacros/GetPropdataResponse")> _
         Function GetPropdata(ByVal BBLE As String, ByVal APIorderNum As Integer, ByVal GetAcrisMtgrs As Boolean, ByVal GetTaxBill As Boolean, ByVal GetECBviolations As Boolean, ByVal GetWaterBill As Boolean, ByVal GetZillow As Boolean, ByVal GetTLO As Boolean) As String
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLEResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLEResponse")> _
         Function Zillow_Estimate_By_BBLE(ByVal BBLE As String) As Integer
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerName", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerNameResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerName", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerNameResponse")> _
         Function Get_Acris_Latest_OwnerName(ByVal BBLE As String) As DataAPI.Acris_LatestOwner_View()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_LisPendens", ReplyAction:="http://tempuri.org/IWCFMacros/Get_LisPendensResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_LisPendens", ReplyAction:="http://tempuri.org/IWCFMacros/Get_LisPendensResponse")> _
         Function Get_LisPendens(ByVal BBLE As String) As DataAPI.LisPen()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLOResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLOResponse")> _
         Function Get_TLO(ByVal APIorderNum As Integer, ByVal BBLE As String, ByVal PersonName As String, ByVal PersonAddress1 As String, ByVal PersonAddress2 As String, ByVal PersonCity As String, ByVal PersonState As String, ByVal PersonZip As String, ByVal PersonCountry As String, ByVal Subject_Type As String, ByVal PersonPhone As String) As DataAPI.TLO_SuperPhoneResults()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_LocateReport", ReplyAction:="http://tempuri.org/IWCFMacros/Get_LocateReportResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_LocateReport", ReplyAction:="http://tempuri.org/IWCFMacros/Get_LocateReportResponse")> _
         Function Get_LocateReport(ByVal APIorderNum As Integer, ByVal BBLE As String, ByVal PersonName As String, ByVal PersonAddress1 As String, ByVal PersonAddress2 As String, ByVal PersonCity As String, ByVal PersonState As String, ByVal PersonZip As String, ByVal PersonCountry As String, ByVal Subject_Type As String, ByVal PersonPhone As String) As DataAPI.TLOLocateReportOutput
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Acris_Get_LatestSale", ReplyAction:="http://tempuri.org/IWCFMacros/Acris_Get_LatestSaleResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Acris_Get_LatestSale", ReplyAction:="http://tempuri.org/IWCFMacros/Acris_Get_LatestSaleResponse")> _
         Function Acris_Get_LatestSale(ByVal APIorderNum As Integer, ByVal BBLE As String) As DataAPI.Acris_Last_Sales_Info
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_NameAndAddress", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_NameAndAddressResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_NameAndAddress", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_NameAndAddressResponse")> _
         Function NYC_NameAndAddress(ByVal BBLE As String) As DataAPI.NYC_NameAndAddress_View()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLienResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLienResponse")> _
         Function Get_Acris_TaxLien(ByVal BBLE As String) As DataAPI.TaxLien_Info
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Servicer", ReplyAction:="http://tempuri.org/IWCFMacros/Get_ServicerResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Servicer", ReplyAction:="http://tempuri.org/IWCFMacros/Get_ServicerResponse")> _
         Function Get_Servicer(ByVal APIorderNum As Integer, ByVal BBLE As String) As String
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Requests_Waiting", ReplyAction:="http://tempuri.org/IWCFMacros/Requests_WaitingResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Requests_Waiting", ReplyAction:="http://tempuri.org/IWCFMacros/Requests_WaitingResponse")> _
         Function Requests_Waiting() As Integer
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetJugments", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetJugmentsResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetJugments", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetJugmentsResponse")> _
         Function AB_GetJugments(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal CorpName As String, ByVal FirstName As String, ByVal LastName As String, ByVal House_Num As String, ByVal St_Name As String, ByVal SearchType As String) As DataAPI.Judgment()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetBankruptcy", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetBankruptcyResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetBankruptcy", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetBankruptcyResponse")> _
         Function AB_GetBankruptcy(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.Bankruptcy1()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetEnvirnomental", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetEnvirnomentalResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetEnvirnomental", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetEnvirnomentalResponse")> _
         Function AB_GetEnvirnomental(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal House_Num As String, ByVal St_Name As String) As DataAPI.ECB()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetMortDeed", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetMortDeedResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetMortDeed", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetMortDeedResponse")> _
         Function AB_GetMortDeed(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String) As DataAPI.Mortgages_Deeds()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLienResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLienResponse")> _
         Function AB_GetFederalTaxLien(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.FederalTaxLien()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetPatriot", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetPatriotResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetPatriot", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetPatriotResponse")> _
         Function AB_GetPatriot(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.Patriot()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetParkingViolations", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetParkingViolationsResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetParkingViolations", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetParkingViolationsResponse")> _
         Function AB_GetParkingViolations(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.ParkingViolation()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunction", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunctionResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunction", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunctionResponse")> _
         Function AB_GetTranscriptAdjunction(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String) As DataAPI.TranscriptAdjunction()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetUcc", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetUccResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetUcc", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetUccResponse")> _
         Function AAbs_GetUcc(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.UCC()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepair", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepairResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepair", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepairResponse")> _
         Function AAbs_GetEmergencyRepair(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal HouseNumer As String, ByVal St_Name As String, ByVal SearchType As String) As DataAPI.EmergencyRepair()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReport", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReportResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReport", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReportResponse")> _
         Function AAbs_GetAreAbstractReport(ByVal BBLE As String, ByVal SelectedOwners() As DataAPI.OwnerInfo, ByVal RunJudgement As Boolean, ByVal RunFederalTaxLiens As Boolean, ByVal RunMortgages As Boolean, ByVal RunParkingViolation As Boolean, ByVal RunPatriot As Boolean, ByVal RunUcc As Boolean, ByVal RunBankruptcy As Boolean, ByVal RunECB As Boolean, ByVal RunEmergenyRepairs As Boolean, ByVal RunTransitAdjudication As Boolean, ByVal RunTLO As Boolean, ByVal RetainRecords As Boolean) As DataAPI.AB_Report_Out
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO_Person", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLO_PersonResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO_Person", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLO_PersonResponse")> _
         Function Get_TLO_Person(ByVal APIorderNum As String, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As DataAPI.TLOPersonSearchOutput
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_NYC_TaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/Get_NYC_TaxLienResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_NYC_TaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/Get_NYC_TaxLienResponse")> _
         Function Get_NYC_TaxLien(ByVal BBLE As String, ByVal YEAR As String) As DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Create_Subscription", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Create_SubscriptionResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Create_Subscription", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Create_SubscriptionResponse")> _
         Function Trig_Create_Subscription(ByVal BBLE As String, ByVal PersonName As String, ByVal PersonOrBBLE As String, ByVal SubscriptionActive As Boolean, ByVal SubscriptionFor As String, ByVal TrigThresholdDate As String, ByVal NotificationType As String, ByVal NotificationEmail As String) As Integer
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Delete_Subscription", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Delete_SubscriptionResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Delete_Subscription", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Delete_SubscriptionResponse")> _
         Function Trig_Delete_Subscription(ByVal BBLE As String, ByVal SubscriptionFor As String) As Integer
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Activate_Deactivate_Subscription", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Activate_Deactivate_SubscriptionResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Activate_Deactivate_Subscription", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Activate_Deactivate_SubscriptionResponse")> _
         Function Trig_Activate_Deactivate_Subscription(ByVal BBLE As String, ByVal ActiveDeactive As Boolean, ByVal SubscriptionFor As String) As Integer
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Get_Subscriptions_List", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Get_Subscriptions_ListResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Get_Subscriptions_List", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Get_Subscriptions_ListResponse")> _
         Function Trig_Get_Subscriptions_List() As DataAPI.TriggerManager()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Is_TrigOn_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Is_TrigOn_By_BBLEResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Trig_Is_TrigOn_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/Trig_Is_TrigOn_By_BBLEResponse")> _
         Function Trig_Is_TrigOn_By_BBLE(ByVal BBLE As String) As DataAPI.SP_Is_TrigOn_BY_BBLE_Result()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Zoning_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Zoning_By_BBLEResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Zoning_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Zoning_By_BBLEResponse")> _
         Function NYC_Zoning_By_BBLE(ByVal BBLE As String) As DataAPI.SP_NYC_Zoning_BY_BBLE_Result()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DCPGeododerBySingleLine", ReplyAction:="http://tempuri.org/IWCFMacros/DCPGeododerBySingleLineResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DCPGeododerBySingleLine", ReplyAction:="http://tempuri.org/IWCFMacros/DCPGeododerBySingleLineResponse")> _
         Function DCPGeododerBySingleLine(ByVal Address As String) As String
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DCPGeododerByAddress", ReplyAction:="http://tempuri.org/IWCFMacros/DCPGeododerByAddressResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DCPGeododerByAddress", ReplyAction:="http://tempuri.org/IWCFMacros/DCPGeododerByAddressResponse")> _
         Function DCPGeododerByAddress(ByVal Address As DataAPI.GeoAddress) As String
     End Interface
-    
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
+
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")> _
     Public Interface IWCFMacrosChannel
         Inherits DataAPI.IWCFMacros, System.ServiceModel.IClientChannel
     End Interface
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
+
+    <System.Diagnostics.DebuggerStepThroughAttribute(), _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")> _
     Partial Public Class WCFMacrosClient
         Inherits System.ServiceModel.ClientBase(Of DataAPI.IWCFMacros)
         Implements DataAPI.IWCFMacros
-        
+
         Public Sub New()
-            MyBase.New
+            MyBase.New()
         End Sub
-        
+
         Public Sub New(ByVal endpointConfigurationName As String)
             MyBase.New(endpointConfigurationName)
         End Sub
-        
+
         Public Sub New(ByVal endpointConfigurationName As String, ByVal remoteAddress As String)
             MyBase.New(endpointConfigurationName, remoteAddress)
         End Sub
-        
+
         Public Sub New(ByVal endpointConfigurationName As String, ByVal remoteAddress As System.ServiceModel.EndpointAddress)
             MyBase.New(endpointConfigurationName, remoteAddress)
         End Sub
-        
+
         Public Sub New(ByVal binding As System.ServiceModel.Channels.Binding, ByVal remoteAddress As System.ServiceModel.EndpointAddress)
             MyBase.New(binding, remoteAddress)
         End Sub
-        
+
         Public Sub DoWork() Implements DataAPI.IWCFMacros.DoWork
-            MyBase.Channel.DoWork
+            MyBase.Channel.DoWork()
         End Sub
-        
+
         Public Function DOD_PPO_Get(ByVal Request As DataAPI.DOB_PPO_In) As DataAPI.DOB_PPO_out Implements DataAPI.IWCFMacros.DOD_PPO_Get
             Return MyBase.Channel.DOD_PPO_Get(Request)
         End Function
-        
+
         Public Function DOB_Complaints_Get(ByVal Request As DataAPI.DOB_Complaints_In) As String Implements DataAPI.IWCFMacros.DOB_Complaints_Get
             Return MyBase.Channel.DOB_Complaints_Get(Request)
         End Function
-        
+
+        Public Function Get_DBO_Complaints_List(ByVal BBLE As String, ByVal ALL As Boolean) As DataAPI.SP_DOB_Complaints_By_BBLE_Result() Implements DataAPI.IWCFMacros.Get_DBO_Complaints_List
+            Return MyBase.Channel.Get_DBO_Complaints_List(BBLE, ALL)
+        End Function
+
+        Public Function DOB_Complaints_Delete(ByVal BBLE As String) As Boolean Implements DataAPI.IWCFMacros.DOB_Complaints_Delete
+            Return MyBase.Channel.DOB_Complaints_Delete(BBLE)
+        End Function
+
         Public Function NYC_Prop_tax_Get(ByVal Request As DataAPI.NYC_Prop_tax_In) As DataAPI.NYC_Prop_tax_Out Implements DataAPI.IWCFMacros.NYC_Prop_tax_Get
             Return MyBase.Channel.NYC_Prop_tax_Get(Request)
         End Function
