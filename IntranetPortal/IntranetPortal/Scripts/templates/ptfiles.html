@@ -3,11 +3,13 @@
         <table class="table table-condensed">
             <tr ng-show="fileModel.length>0">
                 <th>files</th>
+                <th ng-repeat="col in columns">{{col}}</th>
                 <th>Upload Time</th>
                 <th></th>
             </tr>
             <tr class="text-left" ng-repeat="file in fileModel">
-                <td><a style="font-size:12px;font-weight:bold" ng-href="{{ptFileService.makePreviewUrl(file.path)}}" target="_blank">{{ptFileService.getFileName(file.path)}}</a></td>
+                <td><a style="font-size:12px;font-weight:bold" ng-href="{{ptFileService.makePreviewUrl(file.path)}}" target="_blank">{{file.name?file.name:ptFileService.getFileName(file.path)}}</a></td>
+                <td ng-repeat="col in columns"><input class="form-control" type="text" ng-model="file[col]"/></td>
                 <td>{{file.uploadTime | date:'MM/dd/yyyy'}}</td>
                 <td><i class="fa fa-remove icon_btn text-danger" ng-click="ptCom.arrayRemove(fileModel, $index, true)"></i></td>
             </tr>

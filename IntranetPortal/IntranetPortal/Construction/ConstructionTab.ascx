@@ -35,42 +35,9 @@
 
                 <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;">{{GetCaseInfo().Name}}</span>
             </div>
-
-            <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
-
-                <div class="note_item" ng-repeat="comment in CSCase.Comments" ng-style="$index%2?{'background':'#e8e8e8'}:{}">
-                    <i class="fa fa-exclamation-circle note_img"></i>
-                    <span class="note_text">{{comment.Comments}}</span>
-                    <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7; display: none"></i>
-                    <i class="fa fa-times" style="float: right; padding-right: 25px; line-height: 40px; font-size: 18px; color: #b1b2b7; cursor: pointer" ng-click="DeleteComments($index)"></i>
-                </div>
-
-                <div class="note_item" style="background: white">
-                    <i class="fa fa-plus-circle note_img tooltip-examples" title="Add Notes" style="color: #3993c1; cursor: pointer" ng-click="ShowAddPopUp($event)"></i>
-                </div>
-            </div>
-
-            <dx:ASPxPopupControl ClientInstanceName="aspxAddLeadsComments" Width="550px" Height="50px" ID="ASPxPopupControl2"
-                HeaderText="Add Comments" ShowHeader="false"
-                runat="server" EnableViewState="false" PopupHorizontalAlign="OutsideRight" PopupVerticalAlign="Middle" EnableHierarchyRecreation="True">
-                <ContentCollection>
-                    <dx:PopupControlContentControl>
-                        <table>
-                            <tr style="padding-top: 3px;">
-                                <td style="width: 380px; vertical-align: central">
-                                    <input type="text" ng-model="addCommentTxt" class="form-control" />
-                                </td>
-                                <td style="text-align: right">
-                                    <div style="margin-left: 20px">
-                                        <input type="button" value="Add" ng-click="AddComments()" class="rand-button" style="background-color: #3993c1" />
-                                        <input type="button" value="Close" onclick="aspxAddLeadsComments.Hide()" class="rand-button" style="background-color: #3993c1" />
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </dx:PopupControlContentControl>
-                </ContentCollection>
-            </dx:ASPxPopupControl>
+            <%-- 
+            <pt-comments comments-model="CSCase.CSCase.Comments" create-by="<%= HttpContext.Current.User.Identity.Name %>"></pt-comments>
+                --%>
         </div>
 
 

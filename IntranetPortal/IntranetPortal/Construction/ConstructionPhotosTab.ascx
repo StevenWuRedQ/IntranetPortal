@@ -45,7 +45,7 @@
         <hr />
         <div>
             <h5 class="ss_form_title">Appliances</h5>
-            <pt-files file-bble="CSCase.BBLE" file-id="Photos-Appliances" file-model="CSCase.CSCase.Photos.Appliances"></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="Photos-Appliances" file-model="CSCase.CSCase.Photos.Appliances" file-columns="Model# | Serial#"></pt-files>
         </div>
 
     </div>

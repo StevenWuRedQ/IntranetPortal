@@ -50,6 +50,20 @@ portalApp.directive('bindId', function (ptContactServices) {
     }
 });
 
+portalApp.directive('ptInitModel', function () {
+    return {
+        restrict: 'A',
+        require: '?ngModel',
+        link: function (scope, el, attrs) {
+            scope.$watch(attrs.ptInitModel, function (newVal) {
+                if (newVal) {
+                    scope.$eval(attrs.ngModel + "='" + newVal + "'");
+                }
+            });
+        }
+    }
+});
+
 portalApp.directive('radioInit', function () {
     return {
         restrict: 'A',
@@ -210,8 +224,8 @@ portalApp.directive('ptFile', ['ptFileService', function (ptFileService) {
                 scope.startLoading();
                 var data = new FormData();
                 data.append("file", scope.File);
-                ptFileService.uploadFile(data, scope.fileBble, function(res) {
-                    scope.$apply(function() {
+                ptFileService.uploadFile(data, scope.fileBble, function (res) {
+                    scope.$apply(function () {
                         scope.fileModel = res[0];
                         scope.delChoosed();
                     });
@@ -230,7 +244,7 @@ portalApp.directive('ptFile', ['ptFileService', function (ptFileService) {
     }
 }]);
 
-portalApp.directive('ptFiles', ['$timeout','ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
+portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
     return {
         restrict: 'E',
         templateUrl: '/Scripts/templates/ptfiles.html',
@@ -246,7 +260,14 @@ portalApp.directive('ptFiles', ['$timeout','ptFileService', 'ptCom', function ($
         link: function (scope, el, attrs) {
             scope.ptFileService = ptFileService;
             scope.ptCom = ptCom;
-            scope.columns = scope.columns ? scope.scope.fileColumns.split('|') : [];
+            scope.columns = [];
+            if (scope.fileColumns) {
+                scope.columns = scope.fileColumns.split('|');
+                scope.columns.forEach(function (elm) {
+                    elm = elm.trim();
+                });
+            }
+
             scope.files = [];
             scope.nameTable = [];
             scope.loading = false;
@@ -271,13 +292,13 @@ portalApp.directive('ptFiles', ['$timeout','ptFileService', 'ptCom', function ($
                 }
             }
             scope.toggleLoading = function () {
-                 scope.loading = !scope.loading;
+                scope.loading = !scope.loading;
             }
             scope.startLoading = function () {
                 scope.loading = true;
             }
             scope.stopLoading = function () {
-                $timeout(function() {
+                $timeout(function () {
                     scope.loading = false;
                 });
             }
@@ -293,7 +314,12 @@ portalApp.directive('ptFiles', ['$timeout','ptFileService', 'ptCom', function ($
                         for (var i = 0; i < res.length; i++) {
                             var newCol = {};
                             newCol.path = res[i];
+                            newCol.name = ptFileService.getFileName(newCol.path);
                             newCol.uploadTime = new Date();
+                            for (var j = 0; j < scope.columns.length; j++) {
+                                var column = scope.columns[j];
+                                newCol[column] = '';
+                            }
                             scope.fileModel.push(newCol);
                         }
                         scope.clearChoosed();
@@ -317,8 +343,6 @@ portalApp.directive('ptFiles', ['$timeout','ptFileService', 'ptCom', function ($
                 scope.addFiles(files);
                 this.value = '';
             });
-
-            
 
             $(el).find('.drop-area')
                 .on('dragenter', function (e) {
@@ -344,3 +368,32 @@ portalApp.directive('ptFiles', ['$timeout','ptFileService', 'ptCom', function ($
     }
 
 }]);
+
+portalApp.directive('ptComments', ['ptCom', function (ptCom) {
+
+    return {
+        restrict: 'E',
+        scope: {
+            commentsModel: '=',
+            createBy: '@',
+
+        },
+        templateUrl: '/Scripts/templates/comments_panel.html',
+        link: function (scope, el, attrs) {
+            scope.ptCom = ptCom;
+            scope.addComment = function () {
+                scope.$apply(function () {
+                    scope.commentsModel = scope.commentsModel ? scope.commentsModel : [];
+                    var newComment = {};
+                    newComment.comment = scope.inputText;
+                    newComment.createBy = scope.createBy;
+                    newComment.createDate = new Date();
+                    scope.commentsModel.push(newComment);
+                    scope.inputText = '';
+                });
+            }
+
+        }
+    }
+
+}])

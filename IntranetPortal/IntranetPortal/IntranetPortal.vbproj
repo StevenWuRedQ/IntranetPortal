@@ -3418,6 +3418,7 @@
     <Content Include="Scripts\prototype.js" />
     <Content Include="Scripts\services.js" />
     <Content Include="Scripts\stevenjs.js" />
+    <Content Include="Scripts\templates\comments_panel.html" />
     <Content Include="Scripts\templates\ptfile.html" />
     <Content Include="Scripts\templates\ptfiles.html" />
     <Content Include="Scripts\ui-bootstrap-0.13.0.js" />

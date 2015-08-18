@@ -2,7 +2,7 @@
 
 /* code area steven*/
 function NGAddArrayitemScope(scopeId, model) {
-    var $scope =  angular.element(document.getElementById(scopeId)).scope()
+    var $scope = angular.element(document.getElementById(scopeId)).scope()
     if (model) {
         var array = $scope.$eval(model);
         if (!array) {
@@ -13,11 +13,10 @@ function NGAddArrayitemScope(scopeId, model) {
 
         }
         $scope.$apply();
-    } 
+    }
 }
 function ScopeCaseDataChanged(getDataFunc) {
-    if ($('#CaseData').length == 0)
-    {
+    if ($('#CaseData').length == 0) {
         alert("can not find input case data elment");
         $('<input type="hidden" id="CaseData" />').appendTo(document.body);
         return false;
@@ -27,17 +26,14 @@ function ScopeCaseDataChanged(getDataFunc) {
 function ScopeResetCaseDataChange(getDataFunc) {
     var caseData = getDataFunc()
     if ($('#CaseData').length == 0) {
-        
+
         $('<input type="hidden" id="CaseData" />').appendTo(document.body);
     }
     $('#CaseData').val(JSON.stringify(getDataFunc()));
 }
-
-function ScopeAutoSave(getDataFunc, SaveFunc)
-{
+function ScopeAutoSave(getDataFunc, SaveFunc) {
     window.setInterval(function () {
-        if(ScopeCaseDataChanged(getDataFunc))
-        {
+        if (ScopeCaseDataChanged(getDataFunc)) {
             var sucessFunc = function () {
 
 
@@ -111,7 +107,7 @@ app.service('ptCom', [
             model.push(data);
         }
 
-        this.nullToUndefined = function(obj) {
+        this.nullToUndefined = function (obj) {
             for (var property in obj) {
                 if (obj.hasOwnProperty(property)) {
                     if (obj[property] === null) {
@@ -330,7 +326,7 @@ app.service('ptFileService', function () {
         }
     }
 
-    this.resetFileElement= function(ele) {
+    this.resetFileElement = function (ele) {
         ele.val('');
         ele.wrap('<form>').parent('form').trigger('reset');
         ele.unwrap();
@@ -365,6 +361,18 @@ app.service('ptConstructionService', [
                         console.log('Save CSCase fails.');
                     });
             }
+        }
+    }
+]);
+
+app.service('ptCommentsService', [
+    '$http', function ($http) {
+        this.addComments = function () {
+            //TODO
+        }
+
+        this.deleteComments = function (index) {
+            //TODO
         }
     }
 ]);
