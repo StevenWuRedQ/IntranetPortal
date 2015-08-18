@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class ComplainsMng
 
     '''<summary>
+    '''rbBBLE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rbBBLE As Global.DevExpress.Web.ASPxEditors.ASPxRadioButton
+
+    '''<summary>
     '''txtBBLE control.
     '''</summary>
     '''<remarks>
@@ -30,6 +39,51 @@ Partial Public Class ComplainsMng
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCheck As Global.System.Web.UI.HtmlControls.HtmlInputButton
+
+    '''<summary>
+    '''btnAdd control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAdd As Global.System.Web.UI.HtmlControls.HtmlInputButton
+
+    '''<summary>
+    '''rbAddress control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rbAddress As Global.DevExpress.Web.ASPxEditors.ASPxRadioButton
+
+    '''<summary>
+    '''txtNumber control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtNumber As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
+    '''txtStreet control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtStreet As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
+    '''txtCity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtCity As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
 
     '''<summary>
     '''lblAddress control.

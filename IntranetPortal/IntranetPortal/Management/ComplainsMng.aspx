@@ -8,20 +8,21 @@
             var key = document.getElementById("QuickSearch").value;
 
             if (key.trim() == "") {
-                AllLeadsGridClient.ClearFilter();
+                gdComplains.ClearFilter();
                 return;
             }
 
-            filterCondition = "[CaseName] LIKE '%" + key + "%' OR [CaseName] LIKE '%" + key + "%'";
-            filterCondition += " OR [ResearchBy] LIKE '%" + key + "%'";
-            filterCondition += " OR [Attorney] LIKE '%" + key + "%'";
-            filterCondition += " OR [BBLE] LIKE '%" + key + "%'";
-            AllLeadsGridClient.ApplyFilter(filterCondition);
+            filterCondition = "[Address] LIKE '%" + key + "%'";        
+            gdComplains.ApplyFilter(filterCondition);
             return false;
         }
-        function ShowCaseInfo(BBLE) {
-            var url = '/LegalUI/LegalUI.aspx?bble=' + BBLE;
-            OpenLeadsWindow(url, 'Legal')
+
+        function SetView() {
+            var value = rbBBLE.GetChecked();
+            txtBBLE.SetEnabled(value);
+            txtNumber.SetEnabled(!value);
+            txtStreet.SetEnabled(!value);
+            txtCity.SetEnabled(!value);
         }
     </script>
 </asp:Content>
@@ -32,29 +33,52 @@
         <div class="row">
             <table>
                 <tr>
-                    <td style="width:100px">BBLE:</td>
-                    <td style="width:170px">
-                        <dx:ASPxTextBox runat="server" ID="txtBBLE" Native="true" CssClass="form-control" Width="150px"></dx:ASPxTextBox>
-                    </td>
                     <td>
-                        <input type="button" value="Check" runat="server" id="btnCheck" onserverclick="btnCheck_ServerClick" />
+                        <dx:ASPxRadioButton runat="server" ID="rbBBLE" GroupName="Test" ClientInstanceName="rbBBLE" Checked="true">
+                            <ClientSideEvents CheckedChanged="function(s,e){
+                                SetView();
+                                }" />
+                        </dx:ASPxRadioButton>
+                        <%--<input type="radio" value="BBLE" name="rdBBLE" id="rdBBLE" runat="server" /><label for="rdBBLE">&nbsp;</label>--%></td>
+                    <td style="width: 100px">BBLE</td>
+                    <td style="width: 170px">
+                        <dx:ASPxTextBox runat="server" ID="txtBBLE" ClientInstanceName="txtBBLE" Native="true" CssClass="form-control" Width="150px"></dx:ASPxTextBox>
+                    </td>
+                    <td rowspan="4">
+                        <input type="button" value="Check" runat="server" id="btnCheck" onserverclick="btnCheck_ServerClick" /><br />
+                        <input type="button" value="Add to Watch" id="btnAdd" onclick="gdComplains.PerformCallback('Add')" style="margin-top: 10px;" runat="server" visible="false" />
                     </td>
                 </tr>
                 <tr>
-                    <td>Address:</td>
-                    <td colspan="2">
-                        <dx:ASPxLabel runat="server" ID="lblAddress"></dx:ASPxLabel>
-                    </td>                    
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="button" value="Add to Watch" id="btnAdd" onclick="gdComplains.PerformCallback('Add')" />
+                    <td rowspan="3">
+                        <dx:ASPxRadioButton runat="server" ID="rbAddress" GroupName="Test"></dx:ASPxRadioButton>
+                        <%--<input type="radio" value="BBLE" name="rdBBLE" id="rdAddress" runat="server" /><label for="rdAddress">&nbsp;</label>--%>
                     </td>
-                    <td></td>
+                    <td>Number:
+                    </td>
+                    <td>
+                        <dx:ASPxTextBox runat="server" ID="txtNumber" ClientInstanceName="txtNumber" Native="true" CssClass="form-control" Width="150px"></dx:ASPxTextBox>
+                    </td>
+                </tr>
+                <tr>                    
+                    <td>Street:
+                    </td>
+                    <td>
+                        <dx:ASPxTextBox runat="server" ID="txtStreet" ClientInstanceName="txtStreet" Native="true" CssClass="form-control" Width="150px"></dx:ASPxTextBox>
+                    </td>
+
+                </tr>
+                <tr>                   
+                    <td>City:
+                    </td>
+                    <td>                        
+                        <dx:ASPxTextBox runat="server" ID="txtCity" ClientInstanceName="txtCity" Native="true" CssClass="form-control" Width="150px"></dx:ASPxTextBox>
+                    </td>
+
                 </tr>
             </table>
         </div>
+        <dx:ASPxLabel runat="server" ID="lblAddress"></dx:ASPxLabel>
         <div class="row">
             <div class="col-md-4 col-md-offset-8 form-inline">
                 <input type="text" style="margin-right: 20px" id="QuickSearch" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />
@@ -64,12 +88,12 @@
         <div class="row" style="margin-top: 10px">
             <dx:ASPxGridView ID="gdComplains" ClientInstanceName="gdComplains" runat="server" KeyFieldName="BBLE" Theme="Moderno" CssClass="table" OnDataBinding="gdCases_DataBinding" OnCustomCallback="gdComplains_CustomCallback">
                 <Columns>
-                    <dx:GridViewDataColumn FieldName="BBLE" Visible="false">
+                    <dx:GridViewDataColumn FieldName="BBLE">
                     </dx:GridViewDataColumn>
-                    <dx:GridViewDataColumn FieldName="Address">                        
-                    </dx:GridViewDataColumn>                    
+                    <dx:GridViewDataColumn FieldName="Address">
+                    </dx:GridViewDataColumn>
                     <dx:GridViewDataDateColumn FieldName="LastExecute"></dx:GridViewDataDateColumn>
-                    <dx:GridViewDataColumn FieldName="CreateBy" Caption="CreateBy">                        
+                    <dx:GridViewDataColumn FieldName="CreateBy" Caption="CreateBy">
                     </dx:GridViewDataColumn>
                     <dx:GridViewCommandColumn ShowDeleteButton="true" ButtonType="Button">
                         <DeleteButton Text="Remove"></DeleteButton>
@@ -78,7 +102,10 @@
                 <Settings ShowHeaderFilterButton="true" />
                 <SettingsBehavior ConfirmDelete="true" />
                 <SettingsText ConfirmDelete="The follow up date will be cleared. Continue?" />
-            </dx:ASPxGridView>            
+            </dx:ASPxGridView>
         </div>
     </div>
+    <script>
+        $(function () { SetView() });
+    </script>
 </asp:Content>

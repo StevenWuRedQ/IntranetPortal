@@ -605,7 +605,7 @@ Public Class LeadsInfo1
             Eamil = ";" & em.Email
         End If
 
-        EmailService.SendMail("chris@konnectedsystems.com", "steven@konnectedsystems.com" & Eamil, "Leads " & BBLE & " Can not get homeower info", "Hi Chris,  Leads " & BBLE & " does not have homeower info after refersh please check !" & " Submmit by " + Page.User.Identity.Name, Nothing)
+        EmailService.SendMail("chrisy@myidealprop.com", "stevenw@myidealprop.com" & Eamil, "Leads " & BBLE & " Can not get homeower info", "Hi Chris,  Leads " & BBLE & " does not have homeower info after refersh please check !" & " Submmit by " + Page.User.Identity.Name, Nothing)
         Throw New Exception("Submit succeed !")
     End Sub
 End Class
