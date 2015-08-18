@@ -198,8 +198,16 @@ portalApp.directive('ptFile', ['ptFileService', function (ptFileService) {
             scope.toggleLoading = function () {
                 scope.loading = !scope.loading;
             }
+            scope.startLoading = function () {
+                scope.loading = true;
+            }
+            scope.stopLoading = function () {
+                $timeout(function () {
+                    scope.loading = false;
+                });
+            }
             scope.uploadFile = function () {
-                scope.toggleLoading();
+                scope.startLoading();
                 var data = new FormData();
                 data.append("file", scope.File);
                 ptFileService.uploadFile(data, scope.fileBble, function(res) {
@@ -208,7 +216,7 @@ portalApp.directive('ptFile', ['ptFileService', function (ptFileService) {
                         scope.delChoosed();
                     });
 
-                }, function() { scope.toggleLoading(); }, scope.fileRename);
+                }, function () { scope.stopLoading(); }, scope.fileRename);
             }
             el.find('input:file').bind('change', function () {
                 var file = this.files[0];
@@ -222,7 +230,7 @@ portalApp.directive('ptFile', ['ptFileService', function (ptFileService) {
     }
 }]);
 
-portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileService, ptCom) {
+portalApp.directive('ptFiles', ['$timeout','ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
     return {
         restrict: 'E',
         templateUrl: '/Scripts/templates/ptfiles.html',
@@ -262,11 +270,19 @@ portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileServic
 
                 }
             }
-            scope.toggleLoading = function() {
-                scope.loading = !scope.loading;
+            scope.toggleLoading = function () {
+                 scope.loading = !scope.loading;
+            }
+            scope.startLoading = function () {
+                scope.loading = true;
+            }
+            scope.stopLoading = function () {
+                $timeout(function() {
+                    scope.loading = false;
+                });
             }
             scope.uploadFile = function () {
-                scope.toggleLoading();
+                scope.startLoading();
                 var data = new FormData();
                 for (var i = 0; i < scope.files.length; i++) {
                     data.append("file", scope.files[i]);
@@ -281,10 +297,9 @@ portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileServic
                             scope.fileModel.push(newCol);
                         }
                         scope.clearChoosed();
-                       
                     });
 
-                }, function () { scope.toggleLoading(); }, scope.fileRename);
+                }, function () { scope.stopLoading(); }, scope.fileRename);
             }
 
             scope.OnDropTextarea = function (event) {
@@ -302,6 +317,9 @@ portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileServic
                 scope.addFiles(files);
                 this.value = '';
             });
+
+            
+
             $(el).find('.drop-area')
                 .on('dragenter', function (e) {
                     e.preventDefault();
@@ -309,6 +327,7 @@ portalApp.directive('ptFiles', ['ptFileService', 'ptCom', function (ptFileServic
                 })
                 .on('dragover', function (e) {
                     e.preventDefault();
+                    $(this).addClass('drop-area-hover');
                 })
                 .on('dragleave', function (e) {
                     $(this).removeClass('drop-area-hover');

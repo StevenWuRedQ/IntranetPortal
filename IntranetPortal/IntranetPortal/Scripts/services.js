@@ -280,12 +280,10 @@ app.service('ptFileService', function () {
                 processData: false,
                 contentType: false,
                 success: function (data1) {
-                    debugger;
                     callback(data1);
                     if (cleanup) cleanup();
                 },
                 error: function () {
-                    debugger;
                     if (cleanup) cleanup();
                     alert('upload file fails');
                 }

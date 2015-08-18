@@ -13,19 +13,25 @@
             </tr>
         </table>
     </div>
-    <div class="drop-area" style="margin: 2px; border: 1px #c8c8c8 dashed">
-        <span class="btn btn-default btn-file" ng-click="uploadFile()" ng-disabled="files.length<1">
-            <span class="text-primary"><i class="fa fa-upload"></i></span>
-        </span>
-        <ul style="list-style-type: none; display: inline; height: 100%; padding: 2px; margin:2px">
-            <li ng-repeat="file in files" style="display: inline;">
-                <span class="btn-sm btn-danger" ng-click="removeChoosed($index)">{{file.name}}&nbsp;<i class="fa fa-remove"></i></span>
-            </li>
-        </ul>
-        <span class="btn btn-default btn-file pull-right">
-            <span class="text-success ">Add Files</span><input multiple="multiple" type="file" id="{{fileId}}" />
-        </span>
+    <div class="drop-area row" style="margin: 2px; border: 1px #c8c8c8 dashed">
+        <div class="col-sm-1 text-left" style="padding: 1px">
+            <span class="btn btn-default btn-file" ng-click="uploadFile()" ng-disabled="files.length<1">
+                <span class="text-primary"><i class="fa fa-upload"></i></span>
+            </span>
+        </div>
+        <div class="col-sm-9">
+            <ul style="list-style-type: none; height: 100%; padding: 1px; margin:2px">
+                <li ng-repeat="file in files" style="display: inline;max-width: 100px; line-height: 2.4">
+                    <span class="btn-sm btn-danger" ng-click="removeChoosed($index)" style="max-width: 90px">{{file.name}}&nbsp;<i class="fa fa-remove"></i></span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-2 text-right" style="padding: 1px">
+            <span class="btn btn-default btn-file">
+                <span class="text-success ">Add Files</span><input multiple="multiple" type="file" id="{{fileId}}" />
+            </span>
+        </div>
     </div>
-    <div dx-load-panel="{message:'uploading..', showIndicator: true,  position:{of: '#{{fileId}}_div'}, bindingOptions:{ visible: 'loading' }}">
+    <div id="{{fileId}}_loadPanel" dx-load-panel="{message:'uploading..', showIndicator: true,  position:{of: '#{{fileId}}_div'}, bindingOptions:{ visible: 'loading' }}">
     </div>
 </div>
