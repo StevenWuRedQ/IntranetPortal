@@ -70,7 +70,7 @@ Public Class Utility
     End Function
 
     'Change address 2 BBLE
-    Function Address2BBLE(houseNumber As String, street As String, borough As String) As String
+    Public Shared Function Address2BBLE(houseNumber As String, street As String, borough As String) As String
         Dim baseURL = "https://api.cityofnewyork.us/geoclient/v1/address.json?app_id=be97fb56&app_key=b51823efd58f25775df3b2956a7b2bef"
         baseURL = baseURL & "&houseNumber=" & houseNumber
         baseURL = baseURL & "&street=" & street
@@ -108,6 +108,6 @@ Public Class Utility
         Else
             Erray = "Get Error " + houseNumber + "," + street + "," + borough
         End If
-        Return Erray
+        Throw New Exception(Erray)
     End Function
 End Class
