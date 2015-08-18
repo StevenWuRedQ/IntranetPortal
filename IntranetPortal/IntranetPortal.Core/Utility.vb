@@ -71,11 +71,12 @@ Public Class Utility
 
     'Change address 2 BBLE
     Public Shared Function Address2BBLE(houseNumber As String, street As String, borough As String) As String
-        Dim baseURL = "https://api.cityofnewyork.us/geoclient/v1/address.json?app_id=be97fb56&app_key=b51823efd58f25775df3b2956a7b2bef"
-        baseURL = baseURL & "&houseNumber=" & houseNumber
-        baseURL = baseURL & "&street=" & street
-        baseURL = baseURL & "&borough=" & borough
-        '"https://api.cityofnewyork.us/geoclient/v1/address.json?app_id=9cd0a15f&app_key=54dc84bcaca9ff4877da771750033275&houseNumber=433&street=EAST%208TH%20STREET&borough=BROOKLYN"
+        Dim baseURL = "https://api.cityofnewyork.us/geoclient/v1/search.json?app_id=be97fb56&app_key=b51823efd58f25775df3b2956a7b2bef"
+        baseURL = baseURL & "&input=" & String.Format("{0} {1} {2}", houseNumber, street, borough)
+        'baseURL = baseURL & "&houseNumber=" & houseNumber
+        'baseURL = baseURL & "&street=" & street
+        'baseURL = baseURL & "&borough=" & borough
+        '"https://api.cityofnewyork.us/geoclient/v1/search.json?app_id=9cd0a15f&app_key=54dc84bcaca9ff4877da771750033275&houseNumber=433&street=EAST%208TH%20STREET&borough=BROOKLYN"
         Dim request As WebRequest = WebRequest.Create(baseURL)
         ' If required by the server, set the credentials.
         request.Credentials = CredentialCache.DefaultCredentials
@@ -96,10 +97,10 @@ Public Class Utility
         ' Read the content. 
         Dim reslut As String = reader.ReadToEnd()
         Dim values = JObject.Parse(reslut)
-        Dim info = values.Item("address")
+        Dim info = CType(values.Item("results"), JArray)
         Dim Erray = ""
-        If (info IsNot Nothing) Then
-            Dim bbl = info.Item("bbl")
+        If (info IsNot Nothing) AndAlso info.Count > 0 Then
+            Dim bbl = info(0).Item("response").Item("bbl").ToString
             If (bbl IsNot Nothing) Then
                 Return bbl
             Else
