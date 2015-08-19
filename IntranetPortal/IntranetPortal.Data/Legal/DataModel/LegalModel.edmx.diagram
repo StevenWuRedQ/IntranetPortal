@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="LegalModel.LegalJudge" Width="1.5" PointX="2.5" PointY="0.75" />
         <EntityTypeShape EntityType="LegalModel.LegalRoboSignor" Width="1.875" PointX="4.375" PointY="0.75" />
         <EntityTypeShape EntityType="LegalModel.LawReference" Width="1.5" PointX="6.625" PointY="0.75" />
-        <EntityTypeShape EntityType="LegalModel.LegalCaseReport" Width="1.5" PointX="9.125" PointY="0.75" />
+        <EntityTypeShape EntityType="LegalModel.LegalCaseReport" Width="1.5" PointX="8.5" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

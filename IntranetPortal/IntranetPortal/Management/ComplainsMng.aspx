@@ -17,7 +17,6 @@
         }
 
         function SearchComplains() {
-            var filterCondition = "";
             var key = document.getElementById("gdComplainKey").value;
 
             if (key.trim() == "") {
@@ -25,11 +24,19 @@
                 return;
             }
 
+            FilterComplaints(key);
+        }
+
+        function FilterComplaints(key)
+        {
+            var filterCondition = "";
+
             filterCondition = "[Address] LIKE '%" + key + "%'";
+            filterCondition += " OR [BBLE] LIKE '%" + key + "%'";
             gdComplainsResult.ApplyFilter(filterCondition);
             return false;
         }
-
+        
         function SetView() {
             var value = rbBBLE.GetChecked();
             txtBBLE.SetEnabled(value);
@@ -40,13 +47,12 @@
         var needRefreshResult = false;
         function RefreshProperty(bble) {
             needRefreshResult = true;
-            gdComplains.PerformCallback("Refresh|" + bble)
-
+            gdComplains.PerformCallback("Refresh|" + bble);
         }
 
         function RemoveProperty(bble) {
             needRefreshResult = true;
-            gdComplains.PerformCallback("Delete|" + bble)
+            gdComplains.PerformCallback("Delete|" + bble);
         }
 
         function RefreshResult() {
@@ -60,6 +66,11 @@
     <style type="text/css">
         .Header {
             background-color:#efefef;
+        }
+
+        a:hover {
+            background-color:#045cad;
+            font-weight:600;
         }
     </style>
     <div class="container" style="margin-top: 20px">
@@ -115,11 +126,10 @@
                     <td>
                         <dx:ASPxTextBox runat="server" ID="txtCity" ClientInstanceName="txtCity" Native="true" CssClass="form-control" Width="150px"></dx:ASPxTextBox>
                     </td>
-
                 </tr>
             </table>
         </div>
-        <dx:ASPxLabel runat="server" ID="lblAddress"></dx:ASPxLabel>
+        <dx:ASPxLabel runat="server" ID="lblAddress" Visible="false"></dx:ASPxLabel>
         <div class="row">
             <div class="col-md-8  form-inline">
                 Properties Watch List                
@@ -130,14 +140,17 @@
             </div>
         </div>
         <div class="row" style="margin-top: 10px">
-            <dx:ASPxGridView ID="gdComplains" ClientInstanceName="gdComplains" runat="server" KeyFieldName="BBLE" Theme="Moderno" CssClass="table" OnDataBinding="gdCases_DataBinding" OnCustomCallback="gdComplains_CustomCallback">
+            <dx:ASPxGridView ID="gdComplains" Width="100%" ClientInstanceName="gdComplains" runat="server" KeyFieldName="BBLE" Theme="Moderno" CssClass="table" OnDataBinding="gdCases_DataBinding" OnCustomCallback="gdComplains_CustomCallback">
                 <Columns>
-                    <dx:GridViewDataColumn FieldName="BBLE">
+                    <dx:GridViewDataColumn FieldName="BBLE" Width="120px">
+                        <DataItemTemplate>
+                            <a href="#" onclick="FilterComplaints('<%# Eval("BBLE")%>')"><%# Eval("BBLE")%></a>
+                        </DataItemTemplate>
                     </dx:GridViewDataColumn>
                     <dx:GridViewDataColumn FieldName="Address">
                     </dx:GridViewDataColumn>
-                    <dx:GridViewDataDateColumn FieldName="LastExecute"></dx:GridViewDataDateColumn>
-                    <dx:GridViewDataColumn FieldName="CreateBy" Caption="CreateBy">
+                    <dx:GridViewDataDateColumn FieldName="LastExecute" Width="150px"></dx:GridViewDataDateColumn>
+                    <dx:GridViewDataColumn FieldName="CreateBy" Caption="CreateBy" Width="120px">
                     </dx:GridViewDataColumn>
                     <dx:GridViewDataColumn Width="80px">
                         <DataItemTemplate>
@@ -146,7 +159,8 @@
                         </DataItemTemplate>
                     </dx:GridViewDataColumn>
                 </Columns>
-                <Settings ShowHeaderFilterButton="true" />
+                <SettingsPager Mode="EndlessPaging" PageSize="20"></SettingsPager>
+                <Settings ShowHeaderFilterButton="true" VerticalScrollableHeight="400" />
                 <SettingsBehavior ConfirmDelete="true" />
                 <SettingsText ConfirmDelete="The follow up date will be cleared. Continue?" />
                 <ClientSideEvents EndCallback="function(s,e){ if(needRefreshResult){ RefreshResult();}}" />
@@ -165,7 +179,7 @@
             </div>
         </div>
         <div class="row" style="margin-top: 10px; overflow-x: scroll">
-            <dx:ASPxGridView ID="gdComplainsResult" ClientInstanceName="gdComplainsResult" AutoGenerateColumns="true" runat="server" Theme="Moderno" CssClass="table"
+            <dx:ASPxGridView ID="gdComplainsResult" ClientInstanceName="gdComplainsResult" runat="server" Theme="Moderno" CssClass="table"
                 KeyFieldName="ComplainNumber" OnDataBinding="gdComplainsResult_DataBinding" OnCustomCallback="gdComplainsResult_CustomCallback">
                 <%--<Columns>
                      <dx:GridViewDataColumn FieldName="BBLE">
@@ -192,7 +206,7 @@
         </div>
         <br />
     </div>
-    <script>
+    <script type="text/javascript">
         $(function () { SetView() });
         $(function () {
             setTimeout(RefreshResult(), 1000);
