@@ -570,7 +570,7 @@
                             } else {
                                 alert("Save Successed !");
                             }
-
+                            //
                             ResetCaseDataChange();
                         }).
                         error(function (data, status) {

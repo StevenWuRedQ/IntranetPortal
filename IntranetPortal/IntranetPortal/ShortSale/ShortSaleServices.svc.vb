@@ -56,8 +56,9 @@ Public Class ShortSaleServices
     <OperationContract()>
     <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
     Public Function SaveCase(caseData As String) As Channels.Message
-        ShortSaleManage.SaveCase(caseData, HttpContext.Current.User.Identity.Name)
-        Return Nothing
+        Dim ssCase = ShortSaleManage.SaveCase(caseData, HttpContext.Current.User.Identity.Name)
+        ssCase.DocumentRequestDetails = ShortSaleManage.GetDocumentRequestDetail(ssCase.BBLE)
+        Return ssCase.ToJson
     End Function
 
 #End Region

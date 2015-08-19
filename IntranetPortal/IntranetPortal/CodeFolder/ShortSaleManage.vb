@@ -13,16 +13,18 @@ Public Class ShortSaleManage
         End Get
     End Property
 
-    Public Shared Sub SaveCase(caseData As String, saveBy As String)
+    Public Shared Function SaveCase(caseData As String, saveBy As String) As ShortSaleCase
         Dim res = JsonConvert.DeserializeObject(Of ShortSaleCase)(caseData)
 
         Try
             res.Save(HttpContext.Current.User.Identity.Name)
             Core.SystemLog.Log(SSLogTitleSave, caseData, Core.SystemLog.LogCategory.SaveData, res.BBLE, HttpContext.Current.User.Identity.Name)
+
+            Return ShortSaleCase.GetCase(res.CaseId)
         Catch ex As Exception
             Throw ex
         End Try
-    End Sub
+    End Function
 
     Public Shared Function GetSSOpenCaseLogs(startDate As DateTime, endDate As DateTime) As List(Of Core.SystemLog)
         Return Core.SystemLog.GetLogs(OpenCaseLogTitle, startDate, endDate)

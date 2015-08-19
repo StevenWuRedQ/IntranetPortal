@@ -23,33 +23,6 @@ Partial Public Class ComplainsMng
     Protected WithEvents rbBBLE As Global.DevExpress.Web.ASPxEditors.ASPxRadioButton
 
     '''<summary>
-    '''txtBBLE control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtBBLE As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''btnCheck control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCheck As Global.System.Web.UI.HtmlControls.HtmlInputButton
-
-    '''<summary>
-    '''btnAdd control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAdd As Global.System.Web.UI.HtmlControls.HtmlInputButton
-
-    '''<summary>
     '''rbAddress control.
     '''</summary>
     '''<remarks>
@@ -57,6 +30,15 @@ Partial Public Class ComplainsMng
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents rbAddress As Global.DevExpress.Web.ASPxEditors.ASPxRadioButton
+
+    '''<summary>
+    '''txtBBLE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtBBLE As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
 
     '''<summary>
     '''txtNumber control.
@@ -84,6 +66,24 @@ Partial Public Class ComplainsMng
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtCity As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
+    '''btnCheck control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCheck As Global.System.Web.UI.HtmlControls.HtmlInputButton
+
+    '''<summary>
+    '''btnAdd control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAdd As Global.System.Web.UI.HtmlControls.HtmlInputButton
 
     '''<summary>
     '''lblAddress control.

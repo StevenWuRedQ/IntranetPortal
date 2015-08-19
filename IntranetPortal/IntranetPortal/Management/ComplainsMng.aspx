@@ -27,8 +27,7 @@
             FilterComplaints(key);
         }
 
-        function FilterComplaints(key)
-        {
+        function FilterComplaints(key) {
             var filterCondition = "";
 
             filterCondition = "[Address] LIKE '%" + key + "%'";
@@ -36,7 +35,7 @@
             gdComplainsResult.ApplyFilter(filterCondition);
             return false;
         }
-        
+
         function SetView() {
             var value = rbBBLE.GetChecked();
             txtBBLE.SetEnabled(value);
@@ -59,150 +58,294 @@
             gdComplainsResult.Refresh();
             needRefreshResult = false;
         }
+
+        function expandAllClick(s, content) {
+            if (content.is(':visible')) {
+                content.hide();
+                $(s).attr("class", 'fa fa-expand icon_btn tooltip-examples grid_buttons');
+            }
+            else {
+                content.show();
+                $(s).attr("class", 'fa fa-compress icon_btn tooltip-examples grid_buttons');
+            }
+        }
     </script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <style type="text/css">
-        .Header {
-            background-color:#efefef;
+        .form_header {
+            background-color: #efefef;
+            line-height: 40px;
+            padding-left: 15px;
+            font-weight: 600;
         }
 
         a:hover {
-            background-color:#045cad;
-            font-weight:600;
+            background-color: #045cad;
+            font-weight: 600;
+        }
+
+        table tr td {
+            padding-left: 5px;
+        }
+
+        .form_border {
+            border: 1px solid #808080;
+            padding: 0px;
+            margin-top: 10px;
         }
     </style>
-    <div class="container" style="margin-top: 20px">
-        <h3 style="text-align:center">DOB Complaints</h3>
-        <div class="row header">
-            <div class="col-md-8  form-inline">
-                Add Property to Watch
+    <div class="container">
+        <h3 style="text-align: center; line-height: 50px">DOB Complaints</h3>
+        <div class="row form_border">
+            <div class="form_header">
+                Add Property to Watch &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#tblAddProp'))"></i>
             </div>
-            <div class="col-md-4  form-inline">
-                </div>
-        </div>
-        <div class="row">
-            <table>
+            <table style="width: 550px; margin: 10px;" id="tblAddProp">
                 <tr>
-                    <td>
+                    <th style="width: 200px">
                         <dx:ASPxRadioButton runat="server" ID="rbBBLE" GroupName="Test" ClientInstanceName="rbBBLE" Checked="true">
                             <ClientSideEvents CheckedChanged="function(s,e){
                                 SetView();
                                 }" />
                         </dx:ASPxRadioButton>
-                        <%--<input type="radio" value="BBLE" name="rdBBLE" id="rdBBLE" runat="server" /><label for="rdBBLE">&nbsp;</label>--%></td>
-                    <td style="width: 100px">BBLE</td>
-                    <td style="width: 170px">
+                        &nbsp;By BBLE
+                    </th>
+                    <th style="width: 240px">
+                        <dx:ASPxRadioButton runat="server" ID="rbAddress" GroupName="Test"></dx:ASPxRadioButton>
+                        &nbsp;By Address
+                    </th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top">
                         <dx:ASPxTextBox runat="server" ID="txtBBLE" ClientInstanceName="txtBBLE" Native="true" CssClass="form-control" Width="150px"></dx:ASPxTextBox>
                     </td>
-                    <td rowspan="4">
-                        <input type="button" value="Check" runat="server" id="btnCheck" onserverclick="btnCheck_ServerClick" /><br />
+                    <td>
+                        <table style="line-height: 35px">
+                            <tr>
+                                <td>Number:
+                                </td>
+                                <td>
+                                    <dx:ASPxTextBox runat="server" ID="txtNumber" ClientInstanceName="txtNumber" Native="true" CssClass="form-control" Width="150px"></dx:ASPxTextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Street:
+                                </td>
+                                <td>
+                                    <dx:ASPxTextBox runat="server" ID="txtStreet" ClientInstanceName="txtStreet" Native="true" CssClass="form-control" Width="150px"></dx:ASPxTextBox>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>City:
+                                </td>
+                                <td>
+                                    <dx:ASPxTextBox runat="server" ID="txtCity" ClientInstanceName="txtCity" Native="true" CssClass="form-control" Width="150px"></dx:ASPxTextBox>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <input type="button" value="Verify" runat="server" id="btnCheck" onserverclick="btnCheck_ServerClick" /><br />
                         <input type="button" value="Add to Watch" id="btnAdd" onclick="gdComplains.PerformCallback('Add')" style="margin-top: 10px;" runat="server" visible="false" />
                     </td>
                 </tr>
-                <tr>
-                    <td rowspan="3">
-                        <dx:ASPxRadioButton runat="server" ID="rbAddress" GroupName="Test"></dx:ASPxRadioButton>
-                        <%--<input type="radio" value="BBLE" name="rdBBLE" id="rdAddress" runat="server" /><label for="rdAddress">&nbsp;</label>--%>
-                    </td>
-                    <td>Number:
-                    </td>
-                    <td>
-                        <dx:ASPxTextBox runat="server" ID="txtNumber" ClientInstanceName="txtNumber" Native="true" CssClass="form-control" Width="150px"></dx:ASPxTextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Street:
-                    </td>
-                    <td>
-                        <dx:ASPxTextBox runat="server" ID="txtStreet" ClientInstanceName="txtStreet" Native="true" CssClass="form-control" Width="150px"></dx:ASPxTextBox>
-                    </td>
-
-                </tr>
-                <tr>
-                    <td>City:
-                    </td>
-                    <td>
-                        <dx:ASPxTextBox runat="server" ID="txtCity" ClientInstanceName="txtCity" Native="true" CssClass="form-control" Width="150px"></dx:ASPxTextBox>
-                    </td>
-                </tr>
             </table>
+            <dx:ASPxLabel runat="server" ID="lblAddress" Visible="false"></dx:ASPxLabel>
         </div>
-        <dx:ASPxLabel runat="server" ID="lblAddress" Visible="false"></dx:ASPxLabel>
-        <div class="row">
-            <div class="col-md-8  form-inline">
-                Properties Watch List                
+        <div class="row form_border" style="">
+            <div class="form_header">
+                Properties Watch List &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplains'))"></i>
+                <div class="form-inline" style="float: right; font-weight: normal">
+                    <input type="text" style="margin-right: 20px" id="QuickSearch" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />
+                    <i class="fa fa-search icon_btn tooltip-examples  grid_buttons" style="margin-right: 20px; font-size: 19px" onclick="SearchGrid()" title="search"></i>
+                </div>
             </div>
-            <div class="col-md-4  form-inline">
-                <input type="text" style="margin-right: 20px" id="QuickSearch" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />
-                <i class="fa fa-search icon_btn tooltip-examples  grid_buttons" style="margin-right: 20px; font-size: 19px" onclick="SearchGrid()" title="search"></i>
-            </div>
-        </div>
-        <div class="row" style="margin-top: 10px">
-            <dx:ASPxGridView ID="gdComplains" Width="100%" ClientInstanceName="gdComplains" runat="server" KeyFieldName="BBLE" Theme="Moderno" CssClass="table" OnDataBinding="gdCases_DataBinding" OnCustomCallback="gdComplains_CustomCallback">
-                <Columns>
-                    <dx:GridViewDataColumn FieldName="BBLE" Width="120px">
-                        <DataItemTemplate>
-                            <a href="#" onclick="FilterComplaints('<%# Eval("BBLE")%>')"><%# Eval("BBLE")%></a>
-                        </DataItemTemplate>
-                    </dx:GridViewDataColumn>
-                    <dx:GridViewDataColumn FieldName="Address">
-                    </dx:GridViewDataColumn>
-                    <dx:GridViewDataDateColumn FieldName="LastExecute" Width="150px"></dx:GridViewDataDateColumn>
-                    <dx:GridViewDataColumn FieldName="CreateBy" Caption="CreateBy" Width="120px">
-                    </dx:GridViewDataColumn>
-                    <dx:GridViewDataColumn Width="80px">
-                        <DataItemTemplate>
-                            <i class="fa fa-refresh icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RefreshProperty('<%# Eval("BBLE")%>')" title="Refresh"></i>&nbsp;
+            <div id="divComplains">
+                <dx:ASPxGridView ID="gdComplains" Width="100%" ClientInstanceName="gdComplains" runat="server" KeyFieldName="BBLE" Theme="Moderno" CssClass="table" OnDataBinding="gdCases_DataBinding" OnCustomCallback="gdComplains_CustomCallback">
+                    <Columns>
+                        <dx:GridViewDataColumn FieldName="BBLE" Width="120px">
+                            <DataItemTemplate>
+                                <a href="#" onclick="FilterComplaints('<%# Eval("BBLE")%>')"><%# Eval("BBLE")%></a>
+                            </DataItemTemplate>
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="Address">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataDateColumn FieldName="LastExecute" Width="150px"></dx:GridViewDataDateColumn>
+                        <dx:GridViewDataColumn FieldName="CreateBy" Caption="CreateBy" Width="120px">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn Width="80px">
+                            <DataItemTemplate>
+                                <i class="fa fa-refresh icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RefreshProperty('<%# Eval("BBLE")%>')" title="Refresh"></i>&nbsp;
                             <i class="fa fa-close icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RemoveProperty('<%# Eval("BBLE")%>')" title="Remove"></i>
-                        </DataItemTemplate>
-                    </dx:GridViewDataColumn>
-                </Columns>
-                <SettingsPager Mode="EndlessPaging" PageSize="20"></SettingsPager>
-                <Settings ShowHeaderFilterButton="true" VerticalScrollableHeight="400" />
-                <SettingsBehavior ConfirmDelete="true" />
-                <SettingsText ConfirmDelete="The follow up date will be cleared. Continue?" />
-                <ClientSideEvents EndCallback="function(s,e){ if(needRefreshResult){ RefreshResult();}}" />
-            </dx:ASPxGridView>
-        </div>
-        <div class="row">
-            <div class="col-md-8  form-inline">
-                DOB Active Complaints&nbsp;
+                            </DataItemTemplate>
+                        </dx:GridViewDataColumn>
+                    </Columns>
+                    <SettingsPager Mode="EndlessPaging" PageSize="20"></SettingsPager>
+                    <Settings ShowHeaderFilterButton="true" VerticalScrollableHeight="400" />
+                    <SettingsBehavior ConfirmDelete="true" />
+                    <SettingsText ConfirmDelete="The follow up date will be cleared. Continue?" />
+                    <ClientSideEvents EndCallback="function(s,e){ if(needRefreshResult){ RefreshResult();}}" />
+                </dx:ASPxGridView>
             </div>
-            <div class="col-md-4 form-inline">
-                <i class="fa fa-refresh icon_btn tooltip-examples  grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RefreshResult()" title="Refresh"></i>
-                <i class="fa fa-wrench icon_btn tooltip-examples  grid_buttons" style="margin-left: 10px; font-size: 19px" title="Customized" onclick="gdComplainsResult.ShowCustomizationWindow(this)"></i>
-
-                <input type="text" style="margin-right: 20px" id="gdComplainKey" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />
-                <i class="fa fa-search icon_btn tooltip-examples  grid_buttons" style="margin-right: 20px; font-size: 19px" onclick="SearchComplains()" title="search"></i>
+        </div>        
+        <div class="row form_border">
+            <div class="form_header">
+                DOB Active Complaints &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplainResult'))"></i>
+                <div class="form-inline" style="float: right; font-weight: normal">
+                    <input type="text" style="margin-right: 20px" id="gdComplainKey" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />
+                    <i class="fa fa-search icon_btn tooltip-examples  grid_buttons" style="font-size: 19px" onclick="SearchComplains()" title="search"></i>
+                    <i class="fa fa-refresh icon_btn tooltip-examples  grid_buttons" style="margin-left: 10px; margin-right:20px; font-size: 19px" onclick="RefreshResult()" title="Refresh"></i>                    
+                </div>
             </div>
-        </div>
-        <div class="row" style="margin-top: 10px; overflow-x: scroll">
-            <dx:ASPxGridView ID="gdComplainsResult" ClientInstanceName="gdComplainsResult" runat="server" Theme="Moderno" CssClass="table"
-                KeyFieldName="ComplainNumber" OnDataBinding="gdComplainsResult_DataBinding" OnCustomCallback="gdComplainsResult_CustomCallback">
-                <%--<Columns>
-                     <dx:GridViewDataColumn FieldName="BBLE">
-                    </dx:GridViewDataColumn>
-                      <dx:GridViewDataColumn FieldName="Address">
-                    </dx:GridViewDataColumn>
-                      <dx:GridViewDataColumn FieldName="AssignedTo">
-                    </dx:GridViewDataColumn>
-                        <dx:GridViewDataColumn FieldName="CategoryCode">
-                    </dx:GridViewDataColumn>
+            <div id="divComplainResult">
+                <dx:ASPxGridView ID="gdComplainsResult" ClientInstanceName="gdComplainsResult" runat="server" Theme="Moderno" CssClass="table"
+                    KeyFieldName="BBLE;ComplaintNumber" OnDataBinding="gdComplainsResult_DataBinding" OnCustomCallback="gdComplainsResult_CustomCallback">
+                    <Columns>
+                        <dx:GridViewDataColumn FieldName="Address">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="ComplaintNumber">
+                        </dx:GridViewDataColumn>  
                         <dx:GridViewDataColumn FieldName="AssignedTo">
-                    </dx:GridViewDataColumn> 
-                        <dx:GridViewDataColumn FieldName="Comments">
-                    </dx:GridViewDataColumn>
-                        <dx:GridViewDataColumn FieldName="ComplainNumber">
-                    </dx:GridViewDataColumn>
-                        <dx:GridViewDataColumn FieldName="Reference311Number" Caption="Ref311Num">
-                    </dx:GridViewDataColumn>
-                </Columns>--%>
-                <Settings ShowHeaderFilterButton="true" />
-                <SettingsBehavior ConfirmDelete="true" EnableCustomizationWindow="true" />
-                <SettingsText ConfirmDelete="The follow up date will be cleared. Continue?" EmptyDataRow="Data Service is not avaiable." />
-            </dx:ASPxGridView>
+                        </dx:GridViewDataColumn>                                               
+                        <dx:GridViewDataDateColumn FieldName="LastUpdated">
+                        </dx:GridViewDataDateColumn>                       
+                        <dx:GridViewDataColumn FieldName="Status">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn Width="50px">
+                            <DataItemTemplate>
+                                <i class="fa fa-history icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" title="View History"></i>&nbsp;                            
+                            </DataItemTemplate>
+                        </dx:GridViewDataColumn>
+                    </Columns>
+                    <Templates>
+                        <DetailRow>
+                            <table class="" style="width:100%; border: 1px solid #808080; line-height: 25px">
+                                <tr>
+                                    <td colspan="4" class="form_header">Complaints Detail
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 150px;">Address
+                                    </td>
+                                    <td style="width: 35%">
+                                        <%#Eval("Address")%>
+                                    </td>
+                                    <td style="width: 150px">BIN
+                                    </td>
+                                    <td style="width: 35%">
+                                        <%#Eval("BIN")%>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td style="width: 150px">Comments
+                                    </td>
+                                    <td>
+                                        <%#Eval("Comments")%>
+                                    </td>
+                                    <td>AssignedTo
+                                    </td>
+                                    <td>
+                                        <%#Eval("AssignedTo")%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 150px">Category
+                                    </td>
+                                    <td>
+                                        <%#Eval("CategoryCode")%>
+                                    </td>
+                                    <td>ComplaintNumber
+                                    </td>
+                                    <td>
+                                        <%#Eval("ComplaintNumber")%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Subject
+                                    </td>
+                                    <td>
+                                        <%#Eval("Subject")%>
+                                    </td>
+                                    <td>Zip
+                                    </td>
+                                    <td>
+                                        <%#Eval("Zip")%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>DOB Violation
+                                    </td>
+                                    <td>
+                                        <%#Eval("DOBViolation")%>
+                                    </td>
+                                    <td>DateEntered
+                                    </td>
+                                    <td>
+                                        <%#Eval("DateEntered")%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Disposition
+                                    </td>
+                                    <td>
+                                        <%#Eval("Disposition")%>
+                                    </td>
+                                    <td>DispositionDetails
+                                    </td>
+                                    <td>
+                                        <%#Eval("DispositionDetails")%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>LastInspection
+                                    </td>
+                                    <td>
+                                        <%#Eval("LastInspection")%>
+                                    </td>
+                                    <td>LastUpdated
+                                    </td>
+                                    <td>
+                                        <%#Eval("LastUpdated")%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Owner
+                                    </td>
+                                    <td>
+                                        <%#Eval("Owner")%>
+                                    </td>
+                                    <td>Priority
+                                    </td>
+                                    <td>
+                                        <%#Eval("Priority")%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>RE
+                                    </td>
+                                    <td>
+                                        <%#Eval("ECBViolation")%>
+                                    </td>
+                                    <td>Reference311Number
+                                    </td>
+                                    <td>
+                                        <%#Eval("Reference311Number")%>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </DetailRow>
+                    </Templates>
+                    <SettingsDetail ShowDetailRow="true" />
+                    <Settings ShowHeaderFilterButton="true" />
+                    <SettingsBehavior ConfirmDelete="true" EnableCustomizationWindow="true" />
+                    <SettingsText ConfirmDelete="The follow up date will be cleared. Continue?" EmptyDataRow="Data Service is not avaiable." />
+                </dx:ASPxGridView>
+            </div>
         </div>
         <br />
     </div>

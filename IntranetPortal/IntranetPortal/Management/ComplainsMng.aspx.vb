@@ -4,6 +4,8 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
             BindGrid()
+
+            gdComplainsResult.FilterExpression = "[Status] LIKE '%ACT%'"
         End If
     End Sub
 
@@ -14,14 +16,20 @@
     End Sub
 
     Private Sub BindGrid()
-
-        gdComplains.DataSource = Data.CheckingComplain.GetAllComplains
-        gdComplains.DataBind()
+        Dim lists = Data.CheckingComplain.GetAllComplains
+        If lists IsNot Nothing Then
+            gdComplains.DataSource = Data.CheckingComplain.GetAllComplains
+            gdComplains.DataBind()
+        End If
     End Sub
 
     Private Sub BindResult()
-        gdComplainsResult.DataSource = Data.CheckingComplain.GetComplainsResult
-        gdComplainsResult.DataBind()
+        Dim result = Data.CheckingComplain.GetComplainsResult
+
+        If result IsNot Nothing Then
+            gdComplainsResult.DataSource = result
+            gdComplainsResult.DataBind()
+        End If
     End Sub
 
     Protected Sub btnCheck_ServerClick(sender As Object, e As EventArgs)
