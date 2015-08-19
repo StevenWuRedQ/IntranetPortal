@@ -279,11 +279,12 @@
         }
 
         portalApp = angular.module('PortalApp');
-        portalApp.controller('ConstructionCtrl', ['$scope', '$http', '$timeout', 'ptCom', 'ptShortsSaleService', 'ptContactServices', 'ptConstructionService', function ($scope, $http, $timeout, ptCom, ptShortsSaleService, ptContactServices, ptConstructionService) {
+        portalApp.controller('ConstructionCtrl', ['$scope', '$http', '$timeout', '$interpolate', 'ptCom', 'ptShortsSaleService', 'ptContactServices', 'ptConstructionService', function ($scope, $http, $timeout, $interpolate, ptCom, ptShortsSaleService, ptContactServices, ptConstructionService) {
             $scope.arrayRemove = ptCom.arrayRemove;
             $scope.ptContactServices = ptContactServices;
             $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
             $scope.CSCase = {}
+            
             $scope.CSCase.CSCase = {
                 InitialIntake: {},
                 Photos: {},
@@ -349,14 +350,13 @@
 
             /***spliter***/
 
+            /* multiple company selection */
             $scope.resetCompany = function (obj) {
                 for (var key in obj) {
                     var value = obj[key];
                     $scope.$eval(value + '=false');
                 }
             };
-
-
             $scope.$watch('CSCase.CSCase.Utilities.Company', function (newValue) {
                 if (newValue) {
                     var ds = $scope.DataSource.Shown;
@@ -367,10 +367,6 @@
                     }
                 }
             }, true);
-            $scope.sendNotice = function (id, name) {
-                // TODO
-                var confirmed = confirm("Send Intake Sheet To " + name + " ?");
-            }
             $scope.$watch('CSCase.CSCase.Utilities.ConED_EnergyServiceRequired', function (newVal) {
 
                 if (newVal) {
@@ -385,6 +381,14 @@
 
 
             });
+            /* multiple company selection */
+
+            /* reminder */
+            $scope.sendNotice = function (id, name) {
+                // TODO
+                var confirmed = confirm("Send Intake Sheet To " + name + " ?");
+            }
+            /* end reminder */
 
             /* comments */
             $scope.showPopover = function (e) {
@@ -404,11 +408,29 @@
                 $scope.addCommentTxt = '';
             }
             /* end comments */
+
+            /* active tab */
             $scope.activeTab = 'CSInitialIntake';
-            $scope.updateActive = function(id) {
+            $scope.updateActive = function (id) {
                 $scope.activeTab = id;
             }
+            /* end active tab */
 
+            /* highlight */
+            $scope.highlights = [
+                { model: 'Signoffs_Plumbing_SignedOffDate', message: 'Plumbing signed off at {{CSCase.CSCase.Signoffs.Plumbing_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate != null' },
+                { model: 'Signoffs_Electrical_SignedOffDate', message: 'Electrical signed off at {{CSCase.CSCase.Signoffs.Electrical_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate != null' },
+                { model: 'Signoffs_Construction_SignedOffDate', message: 'Construction signed off at {{CSCase.CSCase.Signoffs.Construction_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate != null' },
+                { model: 'Violations_HPD_OpenHPDViolation', message: 'HPD Violations has all finished', criteria: 'CSCase.CSCase.Violations.HPD_OpenHPDViolation === false' }
+            ];
+            $scope.isHighlight = function (criteria) {
+                return $scope.$eval(criteria);
+            }
+            $scope.highlightMsg = function (msg) {
+                var msgstr = $interpolate(msg)($scope);
+                return msgstr;
+            }
+            /* end highlight */
 
         }]);
     </script>

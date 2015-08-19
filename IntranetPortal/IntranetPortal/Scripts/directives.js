@@ -56,7 +56,7 @@ portalApp.directive('ptInitModel', function () {
         require: '?ngModel',
         link: function (scope, el, attrs) {
             scope.$watch(attrs.ptInitModel, function (newVal) {
-                if (newVal) {
+                if (!scope.$eval(attrs.ngModel) && newVal) {
                     scope.$eval(attrs.ngModel + "='" + newVal + "'");
                 }
             });
@@ -122,13 +122,15 @@ portalApp.directive('ptRadio', function () {
         scope: {
             model: '=',
             name: '@',
+            defaultValue: '@',
             trueValue: '@',
             falseValue: '@'
         },
         link: function (scope, el, attrs) {
             scope.trueValue = scope.trueValue ? scope.trueValue : 'yes';
             scope.falseValue = scope.falseValue ? scope.falseValue : 'no';
-            scope.model = scope.model == null ? false : scope.model;
+            scope.defaultValue = scope.defaultValue === 'true' ? true : false;
+            scope.model = scope.model == null ? scope.defaultValue : scope.model;
         }
 
     }

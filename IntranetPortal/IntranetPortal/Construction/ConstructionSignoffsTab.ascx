@@ -302,10 +302,12 @@
                 <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Objecteions" file-model="CSCase.CSCase.Signoffs.Construction_Objecteions"></pt-files>
             </div>
 
-            <div>
+
+            <div class="ss_form_item" style="width: 33.3%">
                 <label class="ss_form_input_title">Construction job Signed off date</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Signoffs.Construction_SignedOffDate" ss-date>
             </div>
+
 
             <div>
                 <label class="ss_form_input_title">Note</label>

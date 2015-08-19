@@ -17,7 +17,7 @@
     <input hidden id="short_sale_case_id" value="" />
     <div style="padding-top: 5px">
         <div id="prioity_content">
-            <div style="font-size: 30px; margin-left: 30px; height:80px" class="font_gray">
+            <div style="font-size: 30px; margin-left: 30px; height: 80px" class="font_gray">
                 <div style="font-size: 30px; margin-top: 20px;">
                     <i class="fa fa-home"></i>
                     <span style="margin-left: 19px;">{{CSCase.CaseName}}&nbsp;</span>
@@ -46,12 +46,18 @@
                 <%--note list--%>
                 <div style="width: 100%; overflow: auto; max-height: 160px;">
                     <table class="table table-striped" style="font-size: 14px; margin: 0px; padding: 5px">
+                        <tr ng-repeat="highlight in highlights" ng-show="isHighlight(highlight.criteria)">
+                            <td>
+                                <i class="fa fa-exclamation-circle text-success" style="font-size: 18px"></i>
+                                <span class="text-success" style="margin-left: 10px">{{highlightMsg(highlight.message)}}</span>
+                            </td>
+                        </tr>
                         <tr ng-repeat="comment in CSCase.CSCase.Comments">
                             <td>
-                                <i class="fa fa-exclamation-circle" style="font-size:18px" ></i>
+                                <i class="fa fa-exclamation-circle" style="font-size: 18px"></i>
                                 <span style="margin-left: 10px">{{comment.comment}}</span>
                                 <span class="pull-right">
-                                    <i class="fa fa-times icon_btn text-danger" style="font-size:18px"  ng-click="arrayRemove(CSCase.CSCase.Comments, $index, true)"></i>
+                                    <i class="fa fa-times icon_btn text-danger" style="font-size: 18px" ng-click="arrayRemove(CSCase.CSCase.Comments, $index, true)"></i>
                                 </span>
                             </td>
                         </tr>
@@ -59,7 +65,7 @@
                 </div>
 
                 <div>
-                    <i class="fa fa-plus-circle text-primary icon_btn tooltip-examples" style="font-size:19px; margin:8px" title="Add Notes" ng-click="showPopover($event)"></i>
+                    <i class="fa fa-plus-circle text-primary icon_btn tooltip-examples" style="font-size: 19px; margin: 8px" title="Add Notes" ng-click="showPopover($event)"></i>
                     <dx:ASPxPopupControl ClientInstanceName="aspxConstructionCommentsPopover" Width="550px" Height="50px" ID="ASPxPopupControl2"
                         ShowHeader="false" runat="server" EnableViewState="false" PopupHorizontalAlign="OutsideRight" PopupVerticalAlign="Middle" EnableHierarchyRecreation="True">
                         <ContentCollection>
