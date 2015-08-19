@@ -364,15 +364,3 @@ app.service('ptConstructionService', [
         }
     }
 ]);
-
-app.service('ptCommentsService', [
-    '$http', function ($http) {
-        this.addComments = function () {
-            //TODO
-        }
-
-        this.deleteComments = function (index) {
-            //TODO
-        }
-    }
-]);

@@ -238,11 +238,6 @@
                                             <tr>
                                                 <td>
                                                     <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="true"></dx:ASPxCalendar>
-                                                    <%--     <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" 
-                                                            TimeSectionProperties-Visible="True" CssClass="edit_drop">
-                                                            <TimeSectionProperties Visible="True"></TimeSectionProperties>
-                                                            <ClientSideEvents Init="function(s,e){ s.SetDate(new Date());}" />
-                                                        </dx:ASPxDateEdit>--%>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -274,12 +269,12 @@
     </dx:ASPxSplitter>
 
     <script type="text/javascript">
-
+        var Current_User = '<%= HttpContext.Current.User.Identity.Name%>';
         function LoadCaseData(bble) {
             $(document).ready(function () {
                 //put construction data loading logic here
-                var _scope = angular.element('#ConstructionCtrl').scope()
-                _scope.init(bble);
+                var scope = angular.element('#ConstructionCtrl').scope();
+                scope.init(bble);
             });
         }
 
@@ -297,7 +292,8 @@
                 ProposalBids: {},
                 Plans: {},
                 Contract: {},
-                Signoffs: {}
+                Signoffs: {},
+                Comments: []
             };
             $scope.CSCase.CSCase.Utilities.Company = [];
             $scope.DataSource = {};
@@ -321,7 +317,8 @@
                     ProposalBids: {},
                     Plans: {},
                     Contract: {},
-                    Signoffs: {}
+                    Signoffs: {},
+                    Comments: []
                 };
                 $scope.CSCase.CSCase.Utilities.Company = [];
                 $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} })
@@ -388,6 +385,31 @@
 
 
             });
+
+            /* comments */
+            $scope.showPopover = function (e) {
+                aspxConstructionCommentsPopover.ShowAtElement(e.target);
+            }
+            $scope.addComment = function (comment) {
+                var newComments = {}
+                newComments.comment = comment;
+                newComments.caseId = $scope.CaseId;
+                newComments.createBy = Current_User;
+                newComments.createDate = new Date();
+                $scope.CSCase.CSCase.Comments.push(newComments);
+            }
+            $scope.addCommentFromPopup = function () {
+                var comment = $scope.addCommentTxt;
+                $scope.addComment(comment);
+                $scope.addCommentTxt = '';
+            }
+            /* end comments */
+            $scope.activeTab = 'CSInitialIntake';
+            $scope.updateActive = function(id) {
+                $scope.activeTab = id;
+            }
+
+
         }]);
     </script>
 

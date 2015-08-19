@@ -5,12 +5,12 @@
             <span>{{comment.comment}}</span>
         </tr>
     </table>
-    <button popover-template="'myPopoverTemplate_html'" popover-placement="right" title="Add Notes" type="button" class="btn btn-default">test</button>
+    
     <script type="text/ng-template" id="myPopoverTemplate_html">
-        <div class='form-inline form-group' style="width: 450px">
-            <input type='text' class='form-control' ng-model='inputText' />
-            <button class='btn btn-sm btn-primary' ng-click='debugger;$parent.addComment()'>Add</button>
-            <button class='btn btn-sm btn-danger' ng-click='debugger;'>Close</button>
+        <div id="myPopoverTemplate_html" class="form-inline form-group" style="width: 450px">
+            <input type="text" class="form-control" ng-model="inputText" />
+            <button class="btn btn-sm btn-primary" ng-click="addComment()">Add</button>
+            <button class="btn btn-sm btn-danger" ng-click="debugger;">Close</button>
         </div>
     </script>
 </div>
