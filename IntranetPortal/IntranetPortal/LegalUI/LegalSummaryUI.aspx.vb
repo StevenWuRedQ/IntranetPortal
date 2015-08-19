@@ -15,7 +15,7 @@
     End Sub
 
     Sub BindUpCommingFCGrid()
-        Dim mCases = IntranetPortal.Data.LegalCaseReport.GetAllReport.Where(Function(r) r.SaleDate IsNot Nothing)
+        Dim mCases = IntranetPortal.Data.LegalCaseReport.GetAllReport.Where(Function(r) r.SaleDate IsNot Nothing).ToList
         gridUpCommingFCSale.DataSource = mCases
         gridUpCommingFCSale.GroupBy(gridUpCommingFCSale.Columns("SaleDate"))
         gridUpCommingFCSale.ExpandAll()

@@ -68,11 +68,9 @@ Public Class Utility
             Return EnumConstant.ToString()
         End If
     End Function
-
-    'Change address 2 BBLE
-    Public Shared Function Address2BBLE(houseNumber As String, street As String, borough As String) As String
+    Public Shared Function Address2BBLE(address As String) As String
         Dim baseURL = "https://api.cityofnewyork.us/geoclient/v1/search.json?app_id=be97fb56&app_key=b51823efd58f25775df3b2956a7b2bef"
-        baseURL = baseURL & "&input=" & String.Format("{0} {1} {2}", houseNumber, street, borough)
+        baseURL = baseURL & "&input=" & address
         'baseURL = baseURL & "&houseNumber=" & houseNumber
         'baseURL = baseURL & "&street=" & street
         'baseURL = baseURL & "&borough=" & borough
@@ -84,7 +82,7 @@ Public Class Utility
         Try
             request.GetResponse()
         Catch ex As Exception
-            Return "Get Error " + houseNumber + "," + street + "," + borough
+            Return "Get Error " + address
         End Try
         ' Get the response. 
         Dim response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
@@ -107,8 +105,21 @@ Public Class Utility
                 Erray = "Get Error " + If(info.Item("message") IsNot Nothing, info.Item("message").ToString, "")
             End If
         Else
-            Erray = "Get Error " + houseNumber + "," + street + "," + borough
+            Erray = "Get Error " + address
         End If
         Throw New Exception(Erray)
+    End Function
+    'Change address 2 BBLE
+    Public Shared Function Address2BBLE(houseNumber As String, street As String, borough As String) As String
+
+        Dim address = String.Format("{0} {1} {2}", houseNumber, street, borough)
+        'baseURL = baseURL & "&houseNumber=" & houseNumber
+        'baseURL = baseURL & "&street=" & street
+        'baseURL = baseURL & "&borough=" & borough
+        Try
+            Address2BBLE(address)
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 End Class

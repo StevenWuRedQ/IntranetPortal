@@ -266,10 +266,15 @@ The courts no longer consider this proper service. "></i></span>
 
                         <li class="ss_form_item">
                             <label class="ss_form_input_title" ng-class="service.ServerInSererList?'ss_warning':''">Is the process server one of these servers</label>
-
-                            <select class="ss_form_input" ng-model="service.ServerInSererList" ng-options="o as o for o in ['Alan Feldman','John Medina','Robert Winckelmann']">
+                            <input type="text" class="ss_form_input" ng-model="service.ServerInSererList" ng-change="service.ServerInSererListId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,35)" typeahead-on-select="LegalCase.ForeclosureInfo.AffidavitOfServices[$index].ServerInSererListId=$item.ContactId" bind-id="LegalCase.ForeclosureInfo.AffidavitOfServices[$index].ServerInSererListId" >
+                           <%-- <select class="ss_form_input" ng-model="service.ServerInSererList" ng-options="o as o for o in ['Alan Feldman','John Medina','Robert Winckelmann']">
                                 <option value=""> </option>
-                            </select>
+                            </select>--%>
+                        </li>
+                         <li class="ss_form_item" style="width:60%">
+                            <label class="ss_form_input_title" >index #</label>
+                            <input class="ss_form_input" ng-model="ptContactServices.getContact(service.ServerInSererListId, service.ServerInSererList).Notes"  readonly="readonly">
+                          
                         </li>
 
                     </ul>

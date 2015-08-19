@@ -438,9 +438,11 @@
                             </table>
                         </div>
                         <div>
-                            <div style="margin-top: 20px; margin-left: 5px">
+                          
+                             <div style="margin-top: 20px; margin-left: 5px">
                                 Notes 
                             </div>
+                            <textarea class="edit_drop" ng-model="currentContact.Notes" style="width: 100%"></textarea>
                         </div>
                     </div>
                 </div>

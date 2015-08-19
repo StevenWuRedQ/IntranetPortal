@@ -61,16 +61,14 @@ Public Class AddressToBBLE
         Dim needRunAddress = JArray.Parse(needToRun)
         For Each a In needRunAddress
             Dim getBBl = ""
-            If (a.Item("PropertyAddress") IsNot Nothing) Then
-                Dim address = a.Item("PropertyAddress").ToString
-                Dim fAddress = FormatAddress(address)
-                If (fAddress IsNot Nothing) Then
-
-                    getBBl = street2BBLE(fAddress.Item("houseNumber"), fAddress.Item("street"), a.Item("borough"))
-                End If
-
-            Else
-                getBBl = street2BBLE(a.Item("houseNumber"), a.Item("street"), a.Item("borough"))
+            If (a.ToString IsNot Nothing) Then
+                Dim address = a.ToString
+               
+                Try
+                    getBBl = Core.Utility.Address2BBLE(address)
+                Catch ex As Exception
+                    getBBl = "Get " + ex.ToString
+                End Try
             End If
 
             If (Not getBBl.StartsWith("Get") Or aspShowError.Checked Or String.IsNullOrEmpty(getBBl)) Then
