@@ -79,6 +79,41 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SP_DOB_Complaints_By_BBLE_Result" nillable="true" type="tns:SP_DOB_Complaints_By_BBLE_Result" />
+  <xs:complexType name="ArrayOfSP_DOB_Complaints_History_By_BBLE_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SP_DOB_Complaints_History_By_BBLE_Result" nillable="true" type="tns:SP_DOB_Complaints_History_By_BBLE_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSP_DOB_Complaints_History_By_BBLE_Result" nillable="true" type="tns:ArrayOfSP_DOB_Complaints_History_By_BBLE_Result" />
+  <xs:complexType name="SP_DOB_Complaints_History_By_BBLE_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AssignedTo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BIN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Borough" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CategoryCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Comments" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ComplaintNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DOBViolation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DateEntered" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Disposition" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DispositionDetails" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ECBViolation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InspectionDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastInspection" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastUpdated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Owner" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Priority" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Reference311Number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zip" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SP_DOB_Complaints_History_By_BBLE_Result" nillable="true" type="tns:SP_DOB_Complaints_History_By_BBLE_Result" />
   <xs:complexType name="NYC_Prop_tax_In">
     <xs:sequence>
       <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />

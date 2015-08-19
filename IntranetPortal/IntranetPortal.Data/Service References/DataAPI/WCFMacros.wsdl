@@ -35,6 +35,12 @@
   <wsdl:message name="IWCFMacros_Get_DBO_Complaints_List_OutputMessage">
     <wsdl:part name="parameters" element="tns:Get_DBO_Complaints_ListResponse" />
   </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_DBO_Complaints_History_List_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_DBO_Complaints_History_List" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_DBO_Complaints_History_List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_DBO_Complaints_History_ListResponse" />
+  </wsdl:message>
   <wsdl:message name="IWCFMacros_DOB_Complaints_Delete_InputMessage">
     <wsdl:part name="parameters" element="tns:DOB_Complaints_Delete" />
   </wsdl:message>
@@ -304,6 +310,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_DBO_Complaints_List" message="tns:IWCFMacros_Get_DBO_Complaints_List_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_DBO_Complaints_ListResponse" message="tns:IWCFMacros_Get_DBO_Complaints_List_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="Get_DBO_Complaints_History_List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_DBO_Complaints_History_List" message="tns:IWCFMacros_Get_DBO_Complaints_History_List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_DBO_Complaints_History_ListResponse" message="tns:IWCFMacros_Get_DBO_Complaints_History_List_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DOB_Complaints_Delete">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DOB_Complaints_Delete" message="tns:IWCFMacros_DOB_Complaints_Delete_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/DOB_Complaints_DeleteResponse" message="tns:IWCFMacros_DOB_Complaints_Delete_OutputMessage" />
@@ -504,6 +514,15 @@
     </wsdl:operation>
     <wsdl:operation name="Get_DBO_Complaints_List">
       <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_DBO_Complaints_List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_DBO_Complaints_History_List">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_DBO_Complaints_History_List" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

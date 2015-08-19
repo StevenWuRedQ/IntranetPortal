@@ -23,6 +23,12 @@
         End Using
     End Function
 
+    Public Shared Function GetComplaintsHistory(bble As String) As DataAPI.SP_DOB_Complaints_History_By_BBLE_Result()
+        Using client As New DataAPI.WCFMacrosClient
+            Return client.Get_DBO_Complaints_History_List(bble)
+        End Using
+    End Function
+
     Public Shared Function Remove(bble As String) As CheckingComplain
         Try
             Using client As New DataAPI.WCFMacrosClient

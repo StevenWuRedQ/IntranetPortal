@@ -86,7 +86,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Complains\CheckingComplains.vb" />
+    <Compile Include="Complaints\CheckingComplains.vb" />
     <Compile Include="Construction\ConstructionCase.vb" />
     <Compile Include="Construction\DataModel\CheckingComplain.vb">
       <DependentUpon>ConstructionModel.tt</DependentUpon>
@@ -388,6 +388,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.SP_DOB_Complaints_By_BBLE_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.SP_DOB_Complaints_History_By_BBLE_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.SP_Is_TrigOn_BY_BBLE_Result.datasource">

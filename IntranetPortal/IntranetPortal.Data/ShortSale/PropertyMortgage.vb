@@ -159,6 +159,10 @@ Partial Public Class PropertyMortgage
             End If
 
             If pbi Is Nothing Then
+                If DataStatus = ModelStatus.Deleted Then
+                    Return
+                End If
+
                 CreateDate = DateTime.Now
                 CreateBy = updateby
                 context.Entry(Me).State = Entity.EntityState.Added

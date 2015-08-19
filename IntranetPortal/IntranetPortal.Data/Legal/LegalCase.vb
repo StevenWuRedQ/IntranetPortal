@@ -33,6 +33,7 @@ Partial Public Class LegalCase
     '        Return _saleDate
     '    End Get
     'End Property
+
     Public ReadOnly Property LegalStatusString As String
         Get
             If LegalStatus.HasValue Then
@@ -80,9 +81,9 @@ Partial Public Class LegalCase
             End If
 
             Dim data = jsonCase.Item("SaleDate")
-            Dim saleData As DateTime?
+            Dim saleData As DateTime
             If data IsNot Nothing AndAlso DateTime.TryParse(data.ToString, saleData) Then
-                If saleData.HasValue Then
+                If saleData > DateTime.MinValue Then
                     Me.SaleDate = saleData
                 Else
                     Me.SaleDate = Nothing
