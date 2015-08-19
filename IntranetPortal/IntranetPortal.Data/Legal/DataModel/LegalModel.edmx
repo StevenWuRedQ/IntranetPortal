@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="LegalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LegalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="LawReferences">
           <Key>
             <PropertyRef Name="RefId" />
@@ -32,6 +32,7 @@
           <Property Name="Status" Type="int" />
           <Property Name="LegalStatus" Type="int" />
           <Property Name="FollowUp" Type="datetime" />
+          <Property Name="SaleDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
@@ -136,6 +137,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalCaseReport' does not have 
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LegalStatus" Type="Int32" />
           <Property Name="FollowUp" Type="DateTime" Precision="3" />
+          <Property Name="SaleDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="LegalJudge">
           <Key>
@@ -209,6 +211,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalCaseReport' does not have 
           <EntitySetMapping Name="LegalCases">
             <EntityTypeMapping TypeName="LegalModel.LegalCase">
               <MappingFragment StoreEntitySet="LegalCase">
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
                 <ScalarProperty Name="FollowUp" ColumnName="FollowUp" />
                 <ScalarProperty Name="LegalStatus" ColumnName="LegalStatus" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
