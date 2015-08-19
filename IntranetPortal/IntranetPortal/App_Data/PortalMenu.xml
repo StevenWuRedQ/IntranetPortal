@@ -556,7 +556,11 @@
           <![CDATA[<i class="fa fa-building"></i>]]>
         </FontClass>
       </PortalNavItem>
-      
+      <PortalNavItem Name="DOBComplains" Text="Complaints" NavigationUrl="/Management/ComplainsMng.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <!--<PortalNavItem Name="ReportCalendar" Text="Employees Calendar" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-calendar"></i>]]>
@@ -593,6 +597,7 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
+    
       <PortalNavItem Name="QueryBuilder" Text="Query Builder" NavigationUrl="/Management/QueryBuilder.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
