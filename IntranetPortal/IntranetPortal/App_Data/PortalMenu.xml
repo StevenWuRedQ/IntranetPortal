@@ -556,7 +556,7 @@
           <![CDATA[<i class="fa fa-building"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="DOBComplains" Text="Complaints" NavigationUrl="/Management/ComplainsMng.aspx" ShowAmount="false">
+      <PortalNavItem Name="DOBComplains" Text="DOB Complaints" NavigationUrl="/Management/ComplainsMng.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
