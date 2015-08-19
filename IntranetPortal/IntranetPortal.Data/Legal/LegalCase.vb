@@ -78,6 +78,16 @@ Partial Public Class LegalCase
                     Me.LegalStatus = result
                 End If
             End If
+
+            Dim data = jsonCase.Item("SaleDate")
+            Dim saleData As DateTime?
+            If data IsNot Nothing AndAlso DateTime.TryParse(data.ToString, saleData) Then
+                If saleData.HasValue Then
+                    Me.SaleDate = saleData
+                Else
+                    Me.SaleDate = Nothing
+                End If
+            End If
         End If
     End Sub
 
