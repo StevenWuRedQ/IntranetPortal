@@ -604,8 +604,13 @@ Public Class LeadsInfo1
         If (em.Email IsNot Nothing) Then
             Eamil = ";" & em.Email
         End If
+        Dim Chris = Employee.GetInstance("Chris Yan")
+        Dim Steven = Employee.GetInstance("Steven Wu")
+        If (Chris IsNot Nothing AndAlso Steven IsNot Nothing) Then
+            EmailService.SendMail(Chris.Email, Steven.Email & Eamil, "Leads " & BBLE & " Can not get homeower info", "Hi Chris,  Leads " & BBLE & " does not have homeower info after refersh please check !" & " Submmit by " + Page.User.Identity.Name, Nothing)
+            Throw New Exception("Submit succeed !")
+        End If
 
-        EmailService.SendMail("chrisy@myidealprop.com", "stevenw@myidealprop.com" & Eamil, "Leads " & BBLE & " Can not get homeower info", "Hi Chris,  Leads " & BBLE & " does not have homeower info after refersh please check !" & " Submmit by " + Page.User.Identity.Name, Nothing)
-        Throw New Exception("Submit succeed !")
+        Throw New Exception("Submit failed !")
     End Sub
 End Class
