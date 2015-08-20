@@ -45,7 +45,7 @@
                             <td>
                                 <input class="form-control" ng-model="CSCase.CSCase.Signoffs.Roughing_Reinspection" ss_date></td>
                             <td>
-                                <button class="btn" type="button">Remider me</button></td>
+                                <button class="btn" type="button">Remind me</button></td>
                             <td>
                                 <select class="form-control" ng-model="CSCase.CSCase.Signoffs.Roughing_Passed">
                                     <option>Yes</option>

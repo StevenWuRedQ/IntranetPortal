@@ -21,7 +21,7 @@
             </li>
             <li class="ss_form_item" style="display: none">
                 <label class="ss_form_input_title">BBLE</label>
-                <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.BBLE" pt-init-model="LeadsInfo.BBLE">
+                <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.BBLE" >
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Client Name</label>
