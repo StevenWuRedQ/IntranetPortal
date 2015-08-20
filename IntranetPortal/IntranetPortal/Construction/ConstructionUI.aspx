@@ -242,19 +242,9 @@
                                             </tr>
                                             <tr>
                                                 <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                                    <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                                        <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupSelectDateControl.Hide();   
-                                                                                                                        SetFollowUp('customDays',callbackCalendar.GetSelectedDate());                                                                                                                        
-                                                                                                                        }"></ClientSideEvents>
-                                                    </dx:ASPxButton>
+                                                    <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue"><ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();SetFollowUp('customDays',callbackCalendar.GetSelectedDate());}"></ClientSideEvents></dx:ASPxButton>
                                                     &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
-                                                                <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupSelectDateControl.Hide();                                                                                                                                                                                                                                               
-                                                                                                                        }"></ClientSideEvents>
-
-                                                            </dx:ASPxButton>
+                                                    <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray"><ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents></dx:ASPxButton>
                                                 </td>
                                             </tr>
                                         </table>
@@ -279,12 +269,12 @@
         }
 
         portalApp = angular.module('PortalApp');
-        portalApp.controller('ConstructionCtrl', ['$scope', '$http', '$timeout', '$interpolate', 'ptCom', 'ptShortsSaleService', 'ptContactServices', 'ptConstructionService', function ($scope, $http, $timeout, $interpolate, ptCom, ptShortsSaleService, ptContactServices, ptConstructionService) {
+        portalApp.controller('ConstructionCtrl', ['$scope', '$http', '$timeout', '$interpolate', 'ptCom', 'ptShortsSaleService', 'ptLeadsService', 'ptContactServices', 'ptConstructionService', function ($scope, $http, $timeout, $interpolate, ptCom, ptShortsSaleService, ptLeadsService, ptContactServices, ptConstructionService) {
             $scope.arrayRemove = ptCom.arrayRemove;
             $scope.ptContactServices = ptContactServices;
             $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
             $scope.CSCase = {}
-            
+
             $scope.CSCase.CSCase = {
                 InitialIntake: {},
                 Photos: {},
@@ -328,18 +318,22 @@
             $scope.init = function (bble) {
 
                 bble = bble.trim();
-                $timeout(function () {
-                    $scope.reload();
-                    ptConstructionService.getConstructionCases(bble, function (res) {
-                        ptCom.nullToUndefined(res);
-                        $.extend(true, $scope.CSCase, res);
-                    });
-
-                    ptShortsSaleService.getShortSaleCaseByBBLE(bble, function (res1) {
-                        $scope.SsCase = res1;
-                    });
-
+                
+                $scope.reload();
+                ptConstructionService.getConstructionCases(bble, function (res) {
+                    ptCom.nullToUndefined(res);
+                    $.extend(true, $scope.CSCase, res);
                 });
+
+                ptShortsSaleService.getShortSaleCaseByBBLE(bble, function (res) {
+                    $scope.SsCase = res;
+                });
+
+                ptLeadsService.getLeadsByBBLE(bble, function (res) {
+                    $scope.LeadsInfo = res;
+                });
+
+
 
             }
 
@@ -418,9 +412,9 @@
 
             /* highlight */
             $scope.highlights = [
-                { model: 'Signoffs_Plumbing_SignedOffDate', message: 'Plumbing signed off at {{CSCase.CSCase.Signoffs.Plumbing_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate != null' },
-                { model: 'Signoffs_Electrical_SignedOffDate', message: 'Electrical signed off at {{CSCase.CSCase.Signoffs.Electrical_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate != null' },
-                { model: 'Signoffs_Construction_SignedOffDate', message: 'Construction signed off at {{CSCase.CSCase.Signoffs.Construction_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate != null' },
+                { model: 'Signoffs_Plumbing_SignedOffDate', message: 'Plumbing signed off at {{CSCase.CSCase.Signoffs.Plumbing_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate' },
+                { model: 'Signoffs_Electrical_SignedOffDate', message: 'Electrical signed off at {{CSCase.CSCase.Signoffs.Electrical_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate' },
+                { model: 'Signoffs_Construction_SignedOffDate', message: 'Construction signed off at {{CSCase.CSCase.Signoffs.Construction_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate' },
                 { model: 'Violations_HPD_OpenHPDViolation', message: 'HPD Violations has all finished', criteria: 'CSCase.CSCase.Violations.HPD_OpenHPDViolation === false' }
             ];
             $scope.isHighlight = function (criteria) {

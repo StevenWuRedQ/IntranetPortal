@@ -57,6 +57,7 @@ portalApp.directive('ptInitModel', function () {
         link: function (scope, el, attrs) {
             scope.$watch(attrs.ptInitModel, function (newVal) {
                 if (!scope.$eval(attrs.ngModel) && newVal) {
+                    newVal = newVal.replace(/'/g, "\\'");
                     scope.$eval(attrs.ngModel + "='" + newVal + "'");
                 }
             });
@@ -266,7 +267,7 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             if (scope.fileColumns) {
                 scope.columns = scope.fileColumns.split('|');
                 scope.columns.forEach(function (elm) {
-                    elm = elm.trim();
+                    elm.trim();
                 });
             }
 

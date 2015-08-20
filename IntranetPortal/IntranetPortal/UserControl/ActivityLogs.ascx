@@ -410,7 +410,6 @@
     var showAppointmentPopup = false;
     function OnSaveAppointment(s, e) {
         if (ASPxClientEdit.ValidateGroup("Appointment")) {
-            debugger;
             ASPxPopupScheduleClient.Hide();
             var logId = hfLogIDClient.Get('logId');
             if (logId != null && logId > 0) {
@@ -1040,15 +1039,9 @@
                     <table style="width: 100%">
                         <tr>
                             <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                <dx:ASPxButton ID="ASPxButton3" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1" ValidationGroup="Appointment" CausesValidation="true">
-                                    <ClientSideEvents Click="OnSaveAppointment"></ClientSideEvents>
-                                </dx:ASPxButton>
-                                &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button" BackColor="#77787b" CausesValidation="false">
-                                                                <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupScheduleClient.Hide();                                                                                                                                                                                                                                               
-                                                                                                                        }"></ClientSideEvents>
-                                                            </dx:ASPxButton>
+                                <dx:ASPxButton ID="ASPxButton3" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1" ValidationGroup="Appointment" CausesValidation="true"><ClientSideEvents Click="OnSaveAppointment"></ClientSideEvents></dx:ASPxButton>&nbsp;
+                                <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button" BackColor="#77787b" CausesValidation="false">
+                                <ClientSideEvents Click="function(){ASPxPopupScheduleClient.Hide();}"></ClientSideEvents></dx:ASPxButton>
                             </td>
                         </tr>
                     </table>
@@ -1060,7 +1053,7 @@
                                             else
                                                 s.Hide();
                                         }" />
-        </dx:ASPxPopupControl>
+            </dx:ASPxPopupControl>
 
 
         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSetAsTaskControl" Width="450px" Height="550px" OnWindowCallback="ASPxPopupControl1_WindowCallback"

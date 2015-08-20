@@ -6,7 +6,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Block/Lot</label>
-                <input class="ss_form_input" ng-value="SsCase.LeadsInfo.Block?SsCase.LeadsInfo.Block +'/'+SsCase.LeadsInfo.Lot:''">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.BlockLot" pt-init-model="LeadsInfo.Block + '/ ' + LeadsInfo.Lot">
             </li>
             <li class="ss_form_item" style="display: none">
                 <label class="ss_form_input_title">BBLE</label>
@@ -14,7 +14,7 @@
             </li>
             <li class="ss_form_item" style="width: 66.6%">
                 <label class="ss_form_input_title">Address</label>
-                <input class="ss_form_input" ng-value="SsCase.LeadsInfo.PropertyAddress" style="width: 93.5%;">
+                <input class="ss_form_input" style="width: 93.3%" ng-model="CSCase.CSCase.InitialIntake.Address" pt-init-model="LeadsInfo.PropertyAddress">
             </li>
         </ul>
     </div>
@@ -39,7 +39,7 @@
         </ul>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
-                <labefl class="ss_form_input_title">Access</labefl>
+                <label class="ss_form_input_title">Access</label>
                 <select class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.Access">
                     <option value=""></option>
                     <option value="lockbox">lockbox</option>
@@ -138,19 +138,19 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Total Units</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.TotalUnits">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.TotalUnits" pt-init-model="LeadsInfo.UnitNum">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Year Built</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.YearBuilt">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.YearBuilt" pt-init-model="LeadsInfo.YearBuilt">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Lot Size</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.LotSize">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.LotSize" pt-init-model="LeadsInfo.LotDem">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Building Size</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.BuildingSize">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.BuildingSize" pt-init-model="LeadsInfo.BuildingDem">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Building Stories</label>

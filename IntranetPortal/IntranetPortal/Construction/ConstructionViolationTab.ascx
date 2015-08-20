@@ -1,4 +1,24 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionViolationTab.ascx.vb" Inherits="IntranetPortal.ConstructionViolationTab" %>
+
+<div class="ss_form" ng-init="CSCase.CSCase.Violations.OrdersPanelVisible=false" style="margin-bottom: 30px">
+    <h4 class="ss_form_title">Orders<input type="checkbox" ng-model="CSCase.CSCase.Violations.Orders" id="orders" /><label for="orders"></label></h4>
+    <div style="text-align: center">
+        <span style="padding: 1px 40px; background: red; font-size: 18px; color: white; text-decoration: underline; font-family: arial; font-weight: bold" ng-click="CSCase.CSCase.Violations.OrdersPanelVisible=true">Orders Exists On This Property   </span>
+    </div>
+    <%--<div dx-popup="{
+                                height: auto,
+                                width: 900,
+                                title: 'Exsiting Orders'
+                                dragEnabled: true,
+                                showCloseButton: true,
+                                shading: false,
+                                bindingOptions:{ visible: 'CSCase.CSCase.Violations.OrdersPanelVisible' }
+                            }"></div>
+        <div data-options="dxTemplate:{ name: 'content' }">
+        </div>
+    --%>
+</div>
+
 <div class="ss_form">
     <h4 class="ss_form_title">Expeditor</h4>
     <div class="ss_border">
@@ -47,13 +67,13 @@
                     <tr ng-repeat="penalty in CSCase.CSCase.Violations.DOB_Penalty">
                         <td>{{$index+1}}</td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.DueDate"></td>
+                            <input class="ss_form_input" ng-model="penalty.DueDate" ss-date></td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.AmountOwed"></td>
+                            <input class="ss_form_input" ng-model="penalty.AmountOwed" money-mask></td>
                         <td>
                             <input class="ss_form_input" type="text" ng-model="penalty.PaidDate" ss-date></td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.AmountPaid"></td>
+                            <input class="ss_form_input" ng-model="penalty.AmountPaid" money-mask></td>
                         <td>
                             <pt-del ng-click="arrayRemove(CSCase.CSCase.Violations.DOB_Penalty, $index, true)"></pt-del>
                         </td>
@@ -156,13 +176,13 @@
                     <tr ng-repeat="penalty in CSCase.CSCase.Violations.ECB_Penalty">
                         <td>{{$index+1}}</td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.DueDate"></td>
+                            <input class="ss_form_input" ng-model="penalty.DueDate" ss-date></td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.AmountOwed"></td>
+                            <input class="ss_form_input" ng-model="penalty.AmountOwed" money-mask></td>
                         <td>
                             <input class="ss_form_input" type="text" ng-model="penalty.PaidDate" ss-date></td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.AmountPaid"></td>
+                            <input class="ss_form_input" ng-model="penalty.AmountPaid" money-mask></td>
                         <td>
                             <pt-del ng-click="arrayRemove(CSCase.CSCase.Violations.ECB_Penalty, $index, true)"></pt-del>
                         </td>
@@ -230,5 +250,3 @@
 
     </div>
 </div>
-
-

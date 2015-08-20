@@ -81,6 +81,7 @@ app.service('ptCom', [
             if (zip) result += zip;
             return result;
         }
+
         this.capitalizeFirstLetter = function (string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         };
@@ -107,6 +108,8 @@ app.service('ptCom', [
             model.push(data);
         }
 
+        /* when use jquery.extend, jquery will override the dst even src is null, but will skip the undefined
+        this function convert null recursively to make the extend works as expected */
         this.nullToUndefined = function (obj) {
             for (var property in obj) {
                 if (obj.hasOwnProperty(property)) {
@@ -218,21 +221,11 @@ app.service('ptShortsSaleService', [
     '$http', function ($http) {
         this.getShortSaleCase = function (caseId, callback) {
             var url = "/ShortSale/ShortSaleServices.svc/GetCase?caseId=" + caseId;
-            var res;
             $http.get(url)
                 .success(function (data) {
-                    res = data;
-                    var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + res.BBLE;
-                    $http.get(leadsInfoUrl)
-                        .success(function (data1) {
-                            res.LeadsInfo = data1;
-                            callback(res);
-                        }).error(function (data1) {
-                            console.log("Get Short sale Leads failed BBLE =" + res.BBLE + " error : " + JSON.stringify(data1));
-                        });
-
+                    callback(data);
                 })
-                .error(function (data, status, headers, config) {
+                .error(function (data) {
                     console.log("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
                 });
         }
@@ -241,20 +234,26 @@ app.service('ptShortsSaleService', [
             var url = "/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=" + bble;
             $http.get(url)
                 .success(function (data) {
-                    var res = data ? data : {};
-                    url = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + bble;
-                    $http.get(url)
-                        .success(function (data1) {
-                            res.LeadsInfo = data1;
-                            callback(res);
-                        }).error(function (data1) {
-                            console.log("Get Shor Sale Leads Info fails");
-                        });
-                }).error(function (data) {
+                    callback(data);
+                }).error(function () {
                     console.log("Get Short Sale By BBLE fails.");
                 }
             );
 
+        }
+    }
+]);
+
+app.service('ptLeadsService', [
+    '$http', function ($http) {
+        this.getLeadsByBBLE = function (bble, callback) {
+            var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + bble;
+            $http.get(leadsInfoUrl)
+            .success(function (data) {
+                callback(data);
+            }).error(function (data) {
+                console.log("Get Short sale Leads failed BBLE =" + bble + " error : " + JSON.stringify(data));
+            });
         }
     }
 ]);
@@ -350,7 +349,6 @@ app.service('ptConstructionService', [
 
         this.saveConstructionCases = function (bble, data, callback) {
             if (bble && data) {
-                debugger;
                 bble = bble.trim();
                 var url = "/api/ConstructionCases/" + bble;
                 $http.put(url, data)

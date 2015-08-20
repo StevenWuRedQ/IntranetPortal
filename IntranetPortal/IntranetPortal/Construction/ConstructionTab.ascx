@@ -13,7 +13,7 @@
 
 <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 <uc1:Common runat="server" ID="Common" />
-<div id="constructionTabContent" style="max-height: 900px; overflow: auto">
+<div id="constructionTabContent" style="max-height: 850px; overflow: auto">
     <input hidden id="short_sale_case_id" value="" />
     <div style="padding-top: 5px">
         <div id="prioity_content">
