@@ -83,8 +83,6 @@
                                                                                 <div class="font_size_bold">ShortSale</div>
                                                                             </a>
                                                                         </li>
-
-
                                                                         <li class="short_sale_head_tab">
                                                                             <a href="#home_owner" role="tab" data-toggle="tab" class="tab_button_a">
                                                                                 <i class="fa fa-key head_tab_icon_padding"></i>

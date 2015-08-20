@@ -1,6 +1,6 @@
 ﻿Public Class PortalReport
 
-    Public Shared Function LoadShortSaleActivityReport(startDate As DateTime, endDate As DateTime) As List(Of AgentActivityData)
+    Public Shared Function LoadShortSaleActivityReport(startDate As DateTime, endDate As DateTime) As List(Of ShortSaleActivityData)
         Dim ssRoles = Roles.GetAllRoles().Where(Function(r) r.StartsWith("ShortSale-") OrElse r.StartsWith("Title-")).ToList
         Dim ssUsers As New List(Of String)
 
@@ -9,23 +9,46 @@
         Next
 
         Using ctx As New Entities
-            Dim actionTypes = {LeadsActivityLog.EnumActionType.CallOwner, LeadsActivityLog.EnumActionType.Comments, LeadsActivityLog.EnumActionType.Email}
+            Dim actionTypes = {LeadsActivityLog.EnumActionType.Comments, LeadsActivityLog.EnumActionType.Email}
             Dim category = LeadsActivityLog.LogCategory.ShortSale.ToString
             Dim logs = ctx.LeadsActivityLogs.Where(Function(al) (al.Category.Contains(category) Or al.Category.Contains(12)) And al.ActivityDate < endDate And al.ActivityDate > startDate And actionTypes.Contains(al.ActionType)).ToList
 
+            Return BuildShortSaleUserReport(logs, ssUsers.Distinct.ToArray, ShortSaleManage.GetSSOpenCaseLogs(startDate, endDate), ShortSaleManage.GetSSSaveCaseLogs(startDate, endDate))
 
-            Dim report = BuildAgentActivityData(logs, ssUsers.Distinct.ToArray)
+            'Dim report = BuildAgentActivityData(logs, ssUsers.Distinct.ToArray)
 
-            Dim openCaseLogs = ShortSaleManage.GetSSOpenCaseLogs(startDate, endDate)
+            'Dim openCaseLogs = ShortSaleManage.GetSSOpenCaseLogs(startDate, endDate)
 
-            Return report.Select(Function(r)
-                                     Dim useLogs = openCaseLogs.Where(Function(l) l.CreateBy = r.Name).ToList
-                                     r.AmountofViewCase = useLogs.Count
-                                     r.UniqueBBLE = useLogs.Select(Function(l) l.BBLE).Distinct.Count
-                                     Return r
-                                 End Function).ToList
+            'Return report.Select(Function(r)
+            '                         Dim useLogs = openCaseLogs.Where(Function(l) l.CreateBy = r.Name).ToList
+            '                         r.AmountofViewCase = useLogs.Count
+            '                         r.UniqueBBLE = useLogs.Select(Function(l) l.BBLE).Distinct.Count
+            '                         Return r
+            '                     End Function).ToList
 
         End Using
+    End Function
+
+    Private Shared Function BuildShortSaleUserReport(commentslogs As List(Of LeadsActivityLog), users As String(), openLogs As List(Of Core.SystemLog), saveLogs As List(Of Core.SystemLog)) As List(Of ShortSaleActivityData)
+        Dim result As New List(Of ShortSaleActivityData)
+
+
+        For Each user In users
+            Dim actData As New ShortSaleActivityData
+            Dim clogsBBLE = commentslogs.Where(Function(c) c.EmployeeName = user).Select(Function(c) c.BBLE).ToList
+            Dim oLogsBBLE = openLogs.Where(Function(o) o.CreateBy = user).Select(Function(o) o.BBLE).ToList
+            Dim sLogsBBLE = saveLogs.Where(Function(s) s.CreateBy = user).Select(Function(s) s.BBLE).ToList
+            actData.Name = user
+
+            actData.TotalFileOpened = Data.ShortSaleCase.GetCaseByBBLEs(oLogsBBLE)
+            actData.FilesWorkedWithComments = Data.ShortSaleCase.GetCaseByBBLEs(oLogsBBLE.Where(Function(b) clogsBBLE.Contains(b)).ToList)
+            actData.FilesWorkedWithoutComments = Data.ShortSaleCase.GetCaseByBBLEs(oLogsBBLE.Where(Function(s) sLogsBBLE.Contains(s) And Not clogsBBLE.Contains(s)).ToList)
+            actData.FilesViewedOnly = Data.ShortSaleCase.GetCaseByBBLEs(oLogsBBLE.Where(Function(o) Not clogsBBLE.Contains(o) And Not sLogsBBLE.Contains(o)).ToList)
+
+            result.Add(actData)
+        Next
+
+        Return result
     End Function
 
     Public Shared Function LoadTeamAgentActivityReport(teamName As String, startDate As DateTime, endDate As DateTime) As List(Of AgentActivityData)
@@ -107,5 +130,33 @@
         Public Property Email As Integer
         Public Property UniqueBBLE As Integer
         Public Property AmountofViewCase As Integer
+    End Class
+
+    Public Class ShortSaleActivityData
+        Inherits AgentActivityData
+
+        Public Property FilesWorkedWithComments As List(Of Data.ShortSaleCase)
+        Public Property FilesWorkedWithoutComments As List(Of Data.ShortSaleCase)
+        Public Property FilesViewedOnly As List(Of Data.ShortSaleCase)
+        Public Property TotalFileOpened As List(Of Data.ShortSaleCase)
+
+        Public ReadOnly Property FilesWithCmtCount As Integer
+            Get
+                Return FilesWorkedWithComments.Count
+            End Get
+        End Property
+
+        Public ReadOnly Property FilesWithoutCmtCount As Integer
+            Get
+                Return FilesWorkedWithoutComments.Count
+            End Get
+        End Property
+
+        Public ReadOnly Property FilesViewedCount As Integer
+            Get
+                Return FilesViewedOnly.Count
+            End Get
+        End Property
+
     End Class
 End Class

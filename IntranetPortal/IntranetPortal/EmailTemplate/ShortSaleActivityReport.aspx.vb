@@ -10,12 +10,12 @@ Public Class ShortSaleActivityReport
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            TeamActivityData = PortalReport.LoadShortSaleActivityReport(DateTime.Today.AddDays(-1), DateTime.Today.AddDays(1))
+            TeamActivityData = PortalReport.LoadShortSaleActivityReport(DateTime.Today, DateTime.Today.AddDays(1))
             BindChart()
         End If
     End Sub
 
-    Public Property TeamActivityData As List(Of PortalReport.AgentActivityData)
+    Public Property TeamActivityData As List(Of PortalReport.ShortSaleActivityData)
 
     Dim imgStr As String
     Public ReadOnly Property ChartImage As String
@@ -39,19 +39,19 @@ Public Class ShortSaleActivityReport
         chartActivity.Legend.AlignmentVertical = LegendAlignmentVertical.BottomOutside
 
 
-        Dim seriesCallOwner As New Series("CallOwner", ViewType.Bar)
-        seriesCallOwner.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True
-        seriesCallOwner.ArgumentDataMember = "Name"
-        seriesCallOwner.ValueDataMembers.AddRange({"CallOwner"})
-        chartActivity.Series.Add(seriesCallOwner)
+        Dim seriesFilesWithComments As New Series("FileWorkedWithComments", ViewType.Bar)
+        seriesFilesWithComments.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True
+        seriesFilesWithComments.ArgumentDataMember = "Name"
+        seriesFilesWithComments.ValueDataMembers.AddRange({"FilesWithCmtCount"})
+        chartActivity.Series.Add(seriesFilesWithComments)
 
-        Dim seriesComments As New Series("Comments", ViewType.Bar) With
+        Dim seriesFilesWithoutComments As New Series("FilesWorkedWithoutComments", ViewType.Bar) With
             {
                 .LabelsVisibility = DevExpress.Utils.DefaultBoolean.True
                 }
-        seriesComments.ArgumentDataMember = "Name"
-        seriesComments.ValueDataMembers.AddRange({"Comments"})
-        chartActivity.Series.Add(seriesComments)
+        seriesFilesWithoutComments.ArgumentDataMember = "Name"
+        seriesFilesWithoutComments.ValueDataMembers.AddRange({"FilesWithoutCmtCount"})
+        chartActivity.Series.Add(seriesFilesWithoutComments)
 
         'Dim seriesDoorKnock As New Series("DoorKnock", ViewType.Bar) With
         '    {
@@ -66,13 +66,13 @@ Public Class ShortSaleActivityReport
         'seriesFollowUp.ValueDataMembers.AddRange({"FollowUp"})
         'chartActivity.Series.Add(seriesFollowUp)
 
-        Dim seriesUniqueBBLE As New Series("UniqueBBLE", ViewType.Bar) With
+        Dim seriesFilesViewd As New Series("FilesViewedOnly", ViewType.Bar) With
             {
                 .LabelsVisibility = DevExpress.Utils.DefaultBoolean.True
                 }
-        seriesUniqueBBLE.ArgumentDataMember = "Name"
-        seriesUniqueBBLE.ValueDataMembers.AddRange({"UniqueBBLE"})
-        chartActivity.Series.Add(seriesUniqueBBLE)
+        seriesFilesViewd.ArgumentDataMember = "Name"
+        seriesFilesViewd.ValueDataMembers.AddRange({"FilesViewedCount"})
+        chartActivity.Series.Add(seriesFilesViewd)
 
         Dim diagram = CType(chartActivity.Diagram, XYDiagram)
         diagram.DefaultPane.BorderVisible = False

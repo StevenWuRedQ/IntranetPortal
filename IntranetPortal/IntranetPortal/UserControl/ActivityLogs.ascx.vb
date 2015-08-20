@@ -200,7 +200,7 @@ Public Class ActivityLogs
                 comments = comments + "<br /> Comments: " & EmailBody2.Html
             End If
 
-            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
 
             If result = "Approved" Then
                 task.Status = UserTask.TaskStatus.Approved
