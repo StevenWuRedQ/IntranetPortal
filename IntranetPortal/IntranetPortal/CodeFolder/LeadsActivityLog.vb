@@ -136,6 +136,7 @@
         Legal
         Eviction
         Construction
+        PublicUpdate
     End Enum
 
     Enum EnumActionType

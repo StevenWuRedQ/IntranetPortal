@@ -283,8 +283,14 @@ Public Class LeadsSubMenu
                     Lead.InThirdParty(bble, category, "", Page.User.Identity.Name)
                 End If
 
-                If lbSelectionMode.SelectedValues.Contains(6) Then
+                If lbSelectionMode.SelectedValues.Contains("6") Then
                     Lead.InThirdParty(bble, "Straight Sale", "", Page.User.Identity.Name)
+                End If
+
+                If lbSelectionMode.SelectedValues.Contains("2") Then
+                    Dim ld = Lead.GetInstance(bble)
+                    ConstructionManage.StartConstruction(bble, ld.LeadsName, Page.User.Identity.Name)
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, "Move to Construction.", bble, LeadsActivityLog.LogCategory.PublicUpdate.ToString)
                 End If
             End If
         End If

@@ -34,10 +34,10 @@
         }
         else {
             leadsInfoBBLE = values;
-            LoadCaseData(leadsInfoBBLE);
+            console.log(leadsInfoBBLE);
 
-            //GetShortSaleData(caseId);
-            //ContentCallbackPanel.PerformCallback(values);
+            LoadCaseData(leadsInfoBBLE);
+                        
             if (cbpLogs)
                 cbpLogs.PerformCallback(leadsInfoBBLE);
             //angular.element(document.getElementById('ConstructionCtrl')).scope().LoadLeadsCase(leadsInfoBBLE);
@@ -99,10 +99,6 @@
                 $("#divSearch").show();
             }
         }
-
-        //if (e.item.index == 4) {
-
-        //}
     }
 
     function SearchGrid() {
@@ -117,13 +113,7 @@
         filterCondition = "CaseName LIKE '%" + key + "%'";
         gridCase.ApplyFilter(filterCondition);
     }
-
-    function RefreshContent() {
-        if (caseId != null) {
-            ContentCallbackPanel.PerformCallback(caseId);
-        }
-    }
-
+    
     function ExpandOrCollapseGroupRow(rowIndex) {
         if (gridCase.IsGroupRow(rowIndex)) {
             if (gridCase.IsGroupRowExpanded(rowIndex)) {
