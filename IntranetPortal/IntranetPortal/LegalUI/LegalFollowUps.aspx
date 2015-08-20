@@ -60,10 +60,7 @@
                     <dx:GridViewDataColumn FieldName="LegalStatusString" Caption="Stage">
                         <Settings HeaderFilterMode="CheckedList"/>
                     </dx:GridViewDataColumn>
-                    <dx:GridViewDataDateColumn FieldName="AuctionDate">
-                        <DataItemTemplate>
-                            <%# String.Format("{0:d}", GetAuctionDate(Eval("BBLE")))%>
-                        </DataItemTemplate>
+                    <dx:GridViewDataDateColumn FieldName="SaleDate" Caption="Auction Date">                       
                     </dx:GridViewDataDateColumn>
                     <dx:GridViewDataColumn FieldName="ResearchBy" Caption="Research" Visible="false">
                         <Settings HeaderFilterMode="CheckedList"/>
