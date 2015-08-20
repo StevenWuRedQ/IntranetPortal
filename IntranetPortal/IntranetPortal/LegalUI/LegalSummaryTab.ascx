@@ -55,7 +55,7 @@
                         <td>{{$index +1}}</td>
                         <td>{{mortgage.Lender}} </td>
                         <td>{{mortgage.Loan}}</td>
-                        <td>{{mortgage.LoanAmount}}</td>
+                        <td>{{mortgage.LoanAmount |currency}}</td>
                         <td>{{mortgage.AuthorizationSent|date:'shortDate'}}</td>
                         <td>{{mortgage.LastPaymentDate|date:'shortDate'}}</td>
                         <td>{{mortgage.Type}}</td>
