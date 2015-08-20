@@ -80,6 +80,7 @@ Partial Class Troubleshooting
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.Button13 = New System.Windows.Forms.Button()
         Me.btnInitialContact = New System.Windows.Forms.Button()
         Me.btnImportOffer = New System.Windows.Forms.Button()
         Me.btnMoveStraight = New System.Windows.Forms.Button()
@@ -95,7 +96,7 @@ Partial Class Troubleshooting
         Me.txtGeoAddress = New System.Windows.Forms.TextBox()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
         Me.btnRefreshLegalReport = New System.Windows.Forms.Button()
-        Me.Button13 = New System.Windows.Forms.Button()
+        Me.btnSSUserReport = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -444,6 +445,7 @@ Partial Class Troubleshooting
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnSSUserReport)
         Me.GroupBox1.Controls.Add(Me.cbTeams)
         Me.GroupBox1.Controls.Add(Me.btnEmailSend)
         Me.GroupBox1.Controls.Add(Me.Label9)
@@ -682,6 +684,15 @@ Partial Class Troubleshooting
         Me.TabPage5.Text = "ShortSale"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
+        'Button13
+        '
+        Me.Button13.Location = New System.Drawing.Point(210, 146)
+        Me.Button13.Name = "Button13"
+        Me.Button13.Size = New System.Drawing.Size(75, 23)
+        Me.Button13.TabIndex = 8
+        Me.Button13.Text = "Button13"
+        Me.Button13.UseVisualStyleBackColor = True
+        '
         'btnInitialContact
         '
         Me.btnInitialContact.Location = New System.Drawing.Point(108, 146)
@@ -818,14 +829,14 @@ Partial Class Troubleshooting
         Me.btnRefreshLegalReport.Text = "Refresh Report Fields"
         Me.btnRefreshLegalReport.UseVisualStyleBackColor = True
         '
-        'Button13
+        'btnSSUserReport
         '
-        Me.Button13.Location = New System.Drawing.Point(210, 146)
-        Me.Button13.Name = "Button13"
-        Me.Button13.Size = New System.Drawing.Size(75, 23)
-        Me.Button13.TabIndex = 8
-        Me.Button13.Text = "Button13"
-        Me.Button13.UseVisualStyleBackColor = True
+        Me.btnSSUserReport.Location = New System.Drawing.Point(119, 154)
+        Me.btnSSUserReport.Name = "btnSSUserReport"
+        Me.btnSSUserReport.Size = New System.Drawing.Size(128, 23)
+        Me.btnSSUserReport.TabIndex = 6
+        Me.btnSSUserReport.Text = "ShortSale User Report"
+        Me.btnSSUserReport.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -939,4 +950,5 @@ Partial Class Troubleshooting
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents txtBBLE As System.Windows.Forms.TextBox
     Friend WithEvents Button13 As System.Windows.Forms.Button
+    Friend WithEvents btnSSUserReport As System.Windows.Forms.Button
 End Class

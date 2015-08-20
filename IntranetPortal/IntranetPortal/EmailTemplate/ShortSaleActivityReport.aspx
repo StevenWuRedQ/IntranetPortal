@@ -6,6 +6,15 @@
 <head runat="server">
     <title></title>
     <style type="text/css">
+        html
+        {
+          
+        }
+
+        ul li{
+            line-height:25px;
+        }
+
         table {
             border-collapse: collapse;
         }
@@ -72,28 +81,32 @@
             <table style="margin-left: 15px; border: 1px solid black; border-collapse: collapse; border-spacing: 0px; width: 700px" border="1" cellspacing="0">
                 <thead>
                     <tr>
-                        <td><%= item.Name%></td>
+                        <td><%= item.Name%>&nbsp;(Total Files Opened:<%=item.TotalFileOpened.Count%>)</td>
                     </tr>
                 </thead>
                 <tr>
                     <td>
                         <% If item.FilesWithCmtCount > 0 Then%>
-                        <strong>Files Worked With Comments (Total: <%= item.FilesWithCmtCount%>)</strong>
+                        <strong>Files Worked With Comments (<%= item.FilesWithCmtCount%>)</strong>
                         <ul>
                             <% For Each ssCase In item.FilesWorkedWithComments%>
                             <li>
-                                <%= ssCase.CaseName%>
+                                <a href="http://portal.myidealprop.com/ShortSale/ShortSale.aspx?bble=<%= ssCase.BBLE%>" target="_blank">
+                                    <%= ssCase.CaseName%>
+                                </a>                                
                             </li>
                             <% Next%>
                         </ul>
                         <% End If%>
 
                         <% If item.FilesWithoutCmtCount > 0 Then%>
-                        <strong>Files Worked Without Comments (Total: <%= item.FilesWithoutCmtCount%>)</strong>
+                        <strong>Files Worked Without Comments (<%= item.FilesWithoutCmtCount%>)</strong>
                         <ul>
                             <% For Each ssCase In item.FilesWorkedWithoutComments%>
                             <li>
-                                <%= ssCase.CaseName%>
+                               <a href="http://portal.myidealprop.com/ShortSale/ShortSale.aspx?bble=<%= ssCase.BBLE%>" target="_blank">
+                                    <%= ssCase.CaseName%>
+                                </a>     
                             </li>
                             <% Next%>
                         </ul>
@@ -101,11 +114,13 @@
 
 
                         <% If item.FilesViewedCount > 0 Then%>
-                        <strong>Files Viewed Only (Total: <%= item.FilesViewedCount%>)</strong>
+                        <strong>Files Viewed Only (<%= item.FilesViewedCount%>)</strong>
                         <ul>
                             <% For Each ssCase In item.FilesViewedOnly%>
                             <li>
-                                <%= ssCase.CaseName%>
+                                <a href="http://portal.myidealprop.com/ShortSale/ShortSale.aspx?bble=<%= ssCase.BBLE%>" target="_blank">
+                                    <%= ssCase.CaseName%>
+                                </a>     
                             </li>
                             <% Next%>
                         </ul>

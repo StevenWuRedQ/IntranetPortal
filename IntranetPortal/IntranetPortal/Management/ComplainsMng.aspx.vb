@@ -112,4 +112,14 @@
     Protected Sub gdComplainsResult_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
         BindResult()
     End Sub
+
+    Protected Sub popupComplaintHistory_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        popCtrHistory.Visible = True
+
+        Dim bble = e.Parameter
+
+        gdComplainsHistory.DataSource = Data.CheckingComplain.GetComplaintsHistory(bble)
+        gdComplainsHistory.DataBind()
+
+    End Sub
 End Class

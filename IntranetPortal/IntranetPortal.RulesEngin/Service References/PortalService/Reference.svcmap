@@ -18,14 +18,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:50214/WCFDataServices/CommonService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:60956/WCFDataServices/CommonService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="CommonService3.xsd" MetadataType="Schema" ID="3beed48e-b6d3-492b-a7a5-d5385005dffb" SourceId="1" SourceUrl="http://localhost:50214/wcfdataservices/CommonService.svc?xsd=xsd2" />
-    <MetadataFile FileName="CommonService31.xsd" MetadataType="Schema" ID="89137d67-473a-4981-a0fd-2189d13f627f" SourceId="1" SourceUrl="http://localhost:50214/wcfdataservices/CommonService.svc?xsd=xsd1" />
-    <MetadataFile FileName="CommonService32.xsd" MetadataType="Schema" ID="465ad0a6-690e-4561-a931-91eb42bd7ffb" SourceId="1" SourceUrl="http://localhost:50214/wcfdataservices/CommonService.svc?xsd=xsd0" />
-    <MetadataFile FileName="CommonService1.disco" MetadataType="Disco" ID="5000bd87-79fd-49d6-ad31-fba065a10927" SourceId="1" SourceUrl="http://localhost:50214/wcfdataservices/CommonService.svc?disco" />
-    <MetadataFile FileName="CommonService1.wsdl" MetadataType="Wsdl" ID="fe61a670-40ff-4f9b-bb16-8a72cfc51a88" SourceId="1" SourceUrl="http://localhost:50214/wcfdataservices/CommonService.svc?wsdl" />
+    <MetadataFile FileName="CommonService.disco" MetadataType="Disco" ID="4b911f8b-8f69-4192-9635-52513cda2711" SourceId="1" SourceUrl="http://localhost:60956/WCFDataServices/CommonService.svc?disco" />
+    <MetadataFile FileName="CommonService.wsdl" MetadataType="Wsdl" ID="1dd27ec4-47e1-46d2-bf3f-ba9dd4c96ee2" SourceId="1" SourceUrl="http://localhost:60956/WCFDataServices/CommonService.svc?wsdl" />
+    <MetadataFile FileName="CommonService.xsd" MetadataType="Schema" ID="75783b98-4236-4472-8f37-eb41442d0cc8" SourceId="1" SourceUrl="http://localhost:60956/WCFDataServices/CommonService.svc?xsd=xsd1" />
+    <MetadataFile FileName="CommonService1.xsd" MetadataType="Schema" ID="8495f6bd-95c9-49ef-b000-f7ac7d93afaf" SourceId="1" SourceUrl="http://localhost:60956/WCFDataServices/CommonService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CommonService2.xsd" MetadataType="Schema" ID="ad6d42fb-bb15-4e83-af23-97ff1f17cb20" SourceId="1" SourceUrl="http://localhost:60956/WCFDataServices/CommonService.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -16,5 +16,6 @@ Partial Public Class CheckingComplain
     Public Property LastExecute As Nullable(Of Date)
     Public Property CreateBy As String
     Public Property CreateTime As Nullable(Of Date)
+    Public Property ExecuteBy As String
 
 End Class

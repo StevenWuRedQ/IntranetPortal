@@ -53,9 +53,7 @@
     Public Sub Save(saveBy As String)
         Using ctx As New ConstructionEntities
 
-            Dim cc = ctx.CheckingComplains.Find(BBLE)
-
-            If cc Is Nothing Then
+            If Not ctx.CheckingComplains.Any(Function(c) c.BBLE = BBLE) Then
                 Me.CreateBy = saveBy
                 Me.CreateTime = DateTime.Now
                 ctx.CheckingComplains.Add(Me)
@@ -70,20 +68,41 @@
     Public Sub RefreshComplains(refreshBy As String)
 
         Me.LastExecute = DateTime.Now
+        Me.ExecuteBy = refreshBy
 
         Try
-            Using client As New DataAPI.WCFMacrosClient
-                Dim data As New DataAPI.DOB_Complaints_In
-                data.BBLE = BBLE
-                data.DOB_PenOnly = True
-                data.APIorderNum = (New Random()).Next(1000)
-                data.SecurityCode = "DS543&8"
-                client.DOB_Complaints_Get(data)
-            End Using
+            Dim dobComplaintsGet = Sub()
+                                       Try
+                                           Using client As New DataAPI.WCFMacrosClient
+                                               Dim data As New DataAPI.DOB_Complaints_In
+                                               data.BBLE = BBLE
+                                               data.DOB_PenOnly = True
+                                               data.APIorderNum = (New Random()).Next(1000)
+                                               data.SecurityCode = "DS543&8"
+                                               client.DOB_Complaints_Get(data)
+                                           End Using
+                                       Catch ex As Exception
+                                           Core.SystemLog.LogError("DOBComplaintsGet", ex, "", refreshBy, BBLE)
+                                       End Try
+                                   End Sub
+
+            System.Threading.ThreadPool.QueueUserWorkItem(dobComplaintsGet)
+
             Me.Save(refreshBy)
         Catch ex As Exception
-
+            Throw ex
         End Try
         
     End Sub
 End Class
+
+Namespace DataAPI
+    Partial Class SP_DOB_Complaints_History_By_BBLE_Result
+        Public ReadOnly Property ResultId As String
+            Get
+                Return Me.ComplaintNumber & Me.LastUpdated.ToString
+            End Get
+        End Property
+    End Class
+
+End Namespace

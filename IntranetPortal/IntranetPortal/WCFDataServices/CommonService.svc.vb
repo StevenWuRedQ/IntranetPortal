@@ -10,6 +10,7 @@ Imports System.ServiceModel.Activation
 Public Class CommonService
     Implements ICommonService
 
+
     Public Sub SendEmailByAddress(toAddress As String, ccAddress As String, subject As String, body As String) Implements ICommonService.SendEmailByAddress
         IntranetPortal.Core.EmailService.SendMail(toAddress, ccAddress, subject, body, Nothing)
     End Sub
@@ -114,7 +115,18 @@ Public Class CommonService
         Dim attachment As New System.Net.Mail.Attachment(GetPDf("ShortSale"), name)
 
         IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
+    End Sub
 
+    Public Sub SendShortSaleUserSummayEmail() Implements ICommonService.SendShortSaleUserSummayEmail
+        Dim TeamActivityData = PortalReport.LoadShortSaleActivityReport(DateTime.Today, DateTime.Today.AddDays(1))
+
+        For Each actData In TeamActivityData
+            Dim emailData As New Dictionary(Of String, String)
+            emailData.Add("Body", LoadSSUserSummaryEmail(actData))
+            emailData.Add("Date", DateTime.Today.ToString("m"))
+            'IntranetPortal.Core.EmailService.SendMail("Chris@gvs4u.com", "", "Task Summary on " & DateTime.Now, LoadSummaryEmail(userName), Nothing)
+            Me.SendEmailByTemplate(actData.Name, "SSUserSummary", emailData)
+        Next
     End Sub
 
     Private Function GetPDf(name As String) As MemoryStream
@@ -194,5 +206,27 @@ Public Class CommonService
         End Using
     End Function
 
+    Private Function LoadSSUserSummaryEmail(actData As PortalReport.ShortSaleActivityData) As String
+        Dim ts As ShortSaleUserReport
+        Using Page As New Page
+            ts = Page.LoadControl("~/EmailTemplate/ShortSaleUserReport.ascx")
+            ts.BindData(actData)
 
+            Return RenderUserControl(ts)
+        End Using
+    End Function
+
+    Private Function RenderUserControl(ctr As UserControl) As String
+        Dim sb As New StringBuilder
+        Using tw As New StringWriter(sb)
+            Using hw As New HtmlTextWriter(tw)
+                ctr.RenderControl(hw)
+            End Using
+        End Using
+
+        Return sb.ToString
+    End Function
+
+
+   
 End Class

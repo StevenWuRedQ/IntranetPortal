@@ -111,4 +111,31 @@ Partial Public Class ComplainsMng
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gdComplainsResult As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''popupComplaintHistory control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents popupComplaintHistory As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''popCtrHistory control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents popCtrHistory As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+
+    '''<summary>
+    '''gdComplainsHistory control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gdComplainsHistory As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 End Class

@@ -60,6 +60,12 @@ Namespace PortalService
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendShortSaleActivityEmail", ReplyAction:="http://tempuri.org/ICommonService/SendShortSaleActivityEmailResponse")>  _
         Function SendShortSaleActivityEmailAsync() As System.Threading.Tasks.Task
         
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmail", ReplyAction:="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmailResponse")>  _
+        Sub SendShortSaleUserSummayEmail()
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmail", ReplyAction:="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmailResponse")>  _
+        Function SendShortSaleUserSummayEmailAsync() As System.Threading.Tasks.Task
+        
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendEmailByAddress", ReplyAction:="http://tempuri.org/ICommonService/SendEmailByAddressResponse")>  _
         Sub SendEmailByAddress(ByVal toAddress As String, ByVal ccAddress As String, ByVal subject As String, ByVal body As String)
         
@@ -152,6 +158,14 @@ Namespace PortalService
         
         Public Function SendShortSaleActivityEmailAsync() As System.Threading.Tasks.Task Implements PortalService.ICommonService.SendShortSaleActivityEmailAsync
             Return MyBase.Channel.SendShortSaleActivityEmailAsync
+        End Function
+        
+        Public Sub SendShortSaleUserSummayEmail() Implements PortalService.ICommonService.SendShortSaleUserSummayEmail
+            MyBase.Channel.SendShortSaleUserSummayEmail
+        End Sub
+        
+        Public Function SendShortSaleUserSummayEmailAsync() As System.Threading.Tasks.Task Implements PortalService.ICommonService.SendShortSaleUserSummayEmailAsync
+            Return MyBase.Channel.SendShortSaleUserSummayEmailAsync
         End Function
         
         Public Sub SendEmailByAddress(ByVal toAddress As String, ByVal ccAddress As String, ByVal subject As String, ByVal body As String) Implements PortalService.ICommonService.SendEmailByAddress

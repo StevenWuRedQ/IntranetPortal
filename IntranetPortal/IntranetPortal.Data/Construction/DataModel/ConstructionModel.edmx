@@ -12,6 +12,7 @@
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="256" />
           <Property Name="LastExecute" Type="datetime" />
+          <Property Name="ExecuteBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateTime" Type="datetime" />
         </EntityType>
@@ -64,6 +65,7 @@
           <Property Name="LastExecute" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="ExecuteBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -89,6 +91,7 @@
           <EntitySetMapping Name="CheckingComplains">
             <EntityTypeMapping TypeName="ConstructionModel.CheckingComplain">
               <MappingFragment StoreEntitySet="CheckingComplains">
+                <ScalarProperty Name="ExecuteBy" ColumnName="ExecuteBy" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="LastExecute" ColumnName="LastExecute" />

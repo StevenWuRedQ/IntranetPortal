@@ -935,6 +935,13 @@
       <DependentUpon>DownloadFile.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="EmailTemplate\ShortSaleUserReport.ascx.designer.vb">
+      <DependentUpon>ShortSaleUserReport.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\ShortSaleUserReport.ascx.vb">
+      <DependentUpon>ShortSaleUserReport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="EmailTemplate\ActivitySummary.ascx.designer.vb">
       <DependentUpon>ActivitySummary.ascx</DependentUpon>
     </Compile>
@@ -2158,6 +2165,7 @@
     <Content Include="DLL\PublicSiteData.dll" />
     <Content Include="DLL\Spire.Pdf.dll" />
     <Content Include="DownloadFile.aspx" />
+    <Content Include="EmailTemplate\ShortSaleUserReport.ascx" />
     <Content Include="EmailTemplate\ActivitySummary.ascx" />
     <Content Include="EmailTemplate\EmailSummary.aspx" />
     <Content Include="EmailTemplate\TaskSummary.ascx" />

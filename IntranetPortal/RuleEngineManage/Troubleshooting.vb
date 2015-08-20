@@ -30,6 +30,13 @@ Public Class Troubleshooting
         End Using
     End Sub
 
+    Private Sub btnSSUserReport_Click(sender As Object, e As EventArgs) Handles btnSSUserReport.Click
+        Using client As New PortalService.CommonServiceClient
+            'client.SendShortSaleActivityEmail()
+            client.SendShortSaleUserSummayEmail()
+        End Using
+    End Sub
+
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Dim rule As New IntranetPortal.RulesEngine.LoopServiceRule
         rule.Execute()
@@ -634,4 +641,6 @@ Public Class Troubleshooting
             lCase.SaveData("Portal")
         End If
     End Sub
+
+  
 End Class

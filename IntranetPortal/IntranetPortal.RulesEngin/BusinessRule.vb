@@ -162,8 +162,24 @@ Public Class AgentActivitySummaryRule
 
             Try
                 client.SendShortSaleActivityEmail()
+                client.SendShortSaleUserSummayEmail()
             Catch ex As Exception
                 Log("AgentActivitySummaryRule Error. TeamName: ShortSale", ex)
+            End Try
+        End Using
+    End Sub
+End Class
+
+Public Class ShortSaleActivityReportRule
+    Inherits BaseRule
+
+    Public Overrides Sub Execute()
+        Using client As New PortalService.CommonServiceClient
+
+            Try
+                client.SendShortSaleActivityEmail()
+            Catch ex As Exception
+                Log("ShortSaleActivityReportRule Error. TeamName: ShortSale", ex)
             End Try
         End Using
     End Sub
