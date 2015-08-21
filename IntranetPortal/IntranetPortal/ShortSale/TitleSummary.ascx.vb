@@ -14,6 +14,8 @@ Public Class UCTitleSummary
             'BindNotes()
 
             BindData()
+
+            AllLeadsGrid.FilterExpression = "[StatuStr] LIKE '%Active%'"
         End If
     End Sub
 

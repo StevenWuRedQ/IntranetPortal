@@ -86,7 +86,7 @@ Public Class ShortSaleManage
                 ssCase.Owner = GetIntaker()
                 ssCase = SetReferral(ssCase)
                 ssCase.CreateBy = createBy
-                ssCase.Save()
+                ssCase.Save(createBy)
 
                 NewCaseProcess.ProcessStart(bble, bble, createBy, String.Format("{0} want to move this case to ShortSale. Please approval.", createBy))
                 'NewCaseWithWF(bble, createBy)

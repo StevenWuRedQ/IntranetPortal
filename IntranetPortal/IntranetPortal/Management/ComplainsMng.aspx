@@ -103,7 +103,7 @@
         }
     </style>
     <div class="container">
-        <h3 style="text-align: center; line-height: 50px">DOB Complaints</h3>
+        <h3 style="text-align: center; line-height: 50px">DOB Complaints Watch List</h3>
         <div class="row form_border">
             <div class="form_header">
                 Add Property to Watch &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#tblAddProp'))"></i>
@@ -156,7 +156,7 @@
                     </td>
                     <td>
                         <input type="button" value="Verify" runat="server" id="btnCheck" onserverclick="btnCheck_ServerClick" /><br />
-                        <input type="button" value="Add to Watch" id="btnAdd" onclick="gdComplains.PerformCallback('Add')" style="margin-top: 10px;" runat="server" visible="false" />
+                        <input type="button" value="Add to Watch List" id="btnAdd" onclick="gdComplains.PerformCallback('Add')" style="margin-top: 10px;" runat="server" visible="false" />
                     </td>
                 </tr>
             </table>
@@ -164,7 +164,7 @@
         </div>
         <div class="row form_border" style="">
             <div class="form_header">
-                Properties Watch List &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplains'))"></i>
+                Properties to Watch &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplains'))"></i>
                 <div class="form-inline" style="float: right; font-weight: normal">
                     <input type="text" style="margin-right: 10px" id="QuickSearch" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />
                     <i class="fa fa-search icon_btn tooltip-examples  grid_buttons" style="margin-right: 20px; font-size: 19px" onclick="SearchGrid()" title="search"></i>
@@ -175,7 +175,7 @@
                     <Columns>
                         <dx:GridViewDataColumn FieldName="BBLE" Width="120px">
                             <DataItemTemplate>
-                                <a href="#" onclick="FilterComplaints('<%# Eval("BBLE")%>')"><%# Eval("BBLE")%></a>
+                                <a href="#" class="tooltip-examples" title="View complaints details" onclick="FilterComplaints('<%# Eval("BBLE")%>')"><%# Eval("BBLE")%></a>
                             </DataItemTemplate>
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn FieldName="Address">
@@ -193,16 +193,17 @@
                         </dx:GridViewDataColumn>
                     </Columns>
                     <SettingsPager Mode="EndlessPaging" PageSize="20"></SettingsPager>
-                    <Settings ShowHeaderFilterButton="true" VerticalScrollableHeight="400" />
+                    <Settings ShowHeaderFilterButton="true" VerticalScrollableHeight="300" />
                     <SettingsBehavior ConfirmDelete="true" />
                     <SettingsText ConfirmDelete="The follow up date will be cleared. Continue?" />
                     <ClientSideEvents EndCallback="function(s,e){ if(needRefreshResult){ RefreshResult();}}" />
                 </dx:ASPxGridView>
+                <small style="margin-left:35%">(**Click on BBLE to view active complaints**)</small>
             </div>
         </div>        
         <div class="row form_border">
             <div class="form_header">
-                DOB Active Complaints &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplainResult'))"></i>
+                DOB Active Complaints Details &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplainResult'))"></i>
                 <div class="form-inline" style="float: right; font-weight: normal">
                     <i class="fa fa-refresh icon_btn tooltip-examples  grid_buttons" style="margin-left: 10px;margin-right: 10px;font-size: 19px" onclick="RefreshResult()" title="Refresh"></i>                    
                     <input type="text" style="margin-right: 10px" id="gdComplainKey" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />
@@ -216,9 +217,9 @@
                         <dx:GridViewDataColumn FieldName="Address">
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn FieldName="ComplaintNumber">
-                        </dx:GridViewDataColumn>  
-                        <dx:GridViewDataColumn FieldName="AssignedTo">
-                        </dx:GridViewDataColumn>                                               
+                        </dx:GridViewDataColumn>                    
+                         <dx:GridViewDataDateColumn FieldName="LastInspection" PropertiesDateEdit-DisplayFormatString="g">
+                        </dx:GridViewDataDateColumn>                                           
                         <dx:GridViewDataDateColumn FieldName="LastUpdated" PropertiesDateEdit-DisplayFormatString="g">
                         </dx:GridViewDataDateColumn>                       
                         <dx:GridViewDataColumn FieldName="Status">
@@ -378,9 +379,9 @@
                         <dx:GridViewDataColumn FieldName="Address">
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn FieldName="ComplaintNumber">
-                        </dx:GridViewDataColumn>  
-                        <dx:GridViewDataColumn FieldName="AssignedTo">
-                        </dx:GridViewDataColumn>                                               
+                        </dx:GridViewDataColumn>                           
+                         <dx:GridViewDataDateColumn FieldName="LastInspection" PropertiesDateEdit-DisplayFormatString="g">
+                        </dx:GridViewDataDateColumn>                                                
                         <dx:GridViewDataDateColumn FieldName="LastUpdated" PropertiesDateEdit-DisplayFormatString="g">
                         </dx:GridViewDataDateColumn>                       
                         <dx:GridViewDataColumn FieldName="Status">

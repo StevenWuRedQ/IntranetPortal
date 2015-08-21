@@ -625,7 +625,7 @@ Partial Public Class ShortSaleCase
 
             If CaseId = 0 Then
                 CreateDate = DateTime.Now
-                CreateDate = userName
+                CreateBy = userName
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
                 Dim obj = context.ShortSaleCases.Find(CaseId)
@@ -1079,7 +1079,7 @@ Partial Public Class ShortSaleCase
 
     Public Shared Function CaseReport2() As List(Of ShortSaleCase)
         Using ctx As New ShortSaleEntities
-            Dim data = From ss In ctx.ShortSaleCases
+            Dim data = From ss In ctx.ShortSaleCases.Where(Function(sc) sc.Status <> CaseStatus.Archived)
                        Join pi In ctx.PropertyBaseInfoes On pi.BBLE Equals ss.BBLE
                        Let owner = ctx.PropertyOwners.FirstOrDefault(Function(po) po.BBLE = ss.BBLE)
                        Let morts = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = ss.CaseId).OrderBy(Function(m) m.MortgageId)

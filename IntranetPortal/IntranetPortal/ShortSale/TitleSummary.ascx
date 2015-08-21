@@ -737,6 +737,7 @@
                                                 <SettingsBehavior ColumnResizeMode="NextColumn" EnableCustomizationWindow="true" />                                               
                                                 <SettingsPopup>
                                                     <HeaderFilter Height="200" />
+                                                    <CustomizationWindow Height="400px" Width="300px" />
                                                 </SettingsPopup>
                                             </dx:ASPxGridView>
                                             <dx:ASPxGridViewExporter ID="gridExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
