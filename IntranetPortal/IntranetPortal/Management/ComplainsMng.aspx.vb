@@ -112,8 +112,8 @@
 
     Protected Sub popupComplaintHistory_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
         popCtrHistory.Visible = True
-
         Dim bble = e.Parameter
+        hfBBLE.Value = bble
 
         gdComplainsHistory.DataSource = Data.CheckingComplain.GetComplaintsHistory(bble)
         gdComplainsHistory.DataBind()
@@ -136,6 +136,12 @@
                     e.Row.ForeColor = Drawing.Color.Red
                 End If
             End If
+        End If
+    End Sub
+
+    Protected Sub gdComplainsHistory_DataBinding(sender As Object, e As EventArgs)
+        If gdComplainsHistory.DataSource Is Nothing Then
+            gdComplainsHistory.DataSource = Data.CheckingComplain.GetComplaintsHistory(hfBBLE.Value)
         End If
     End Sub
 End Class

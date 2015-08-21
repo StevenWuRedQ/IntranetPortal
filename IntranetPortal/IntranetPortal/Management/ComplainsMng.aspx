@@ -379,7 +379,8 @@
             </HeaderTemplate>
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server" Visible="false" ID="popCtrHistory">
-                    <dx:ASPxGridView ID="gdComplainsHistory" ClientInstanceName="gdComplainsHistory" runat="server" Theme="Moderno" CssClass="table" Width="100%"
+                    <asp:HiddenField ID="hfBBLE" runat="server" />
+                    <dx:ASPxGridView ID="gdComplainsHistory" ClientInstanceName="gdComplainsHistory" runat="server" Theme="Moderno" CssClass="table" Width="100%" OnDataBinding="gdComplainsHistory_DataBinding"
                         KeyFieldName="ResultId">
                         <Columns>
                             <dx:GridViewDataColumn FieldName="Address">

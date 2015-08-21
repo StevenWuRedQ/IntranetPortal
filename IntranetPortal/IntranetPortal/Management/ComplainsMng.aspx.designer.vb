@@ -131,6 +131,15 @@ Partial Public Class ComplainsMng
     Protected WithEvents popCtrHistory As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
 
     '''<summary>
+    '''hfBBLE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfBBLE As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''gdComplainsHistory control.
     '''</summary>
     '''<remarks>
