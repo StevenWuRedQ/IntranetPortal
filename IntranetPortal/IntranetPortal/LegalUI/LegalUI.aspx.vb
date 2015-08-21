@@ -61,16 +61,16 @@ Public Class LegalUI
     Sub Page_init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
 
 
-        'HiddenTab = Not String.IsNullOrEmpty(Request.QueryString("HiddenTab"))
-        'If (HiddenTab) Then
-        '    ASPxSplitter1.GetPaneByName("LogPanel").Visible = False
-        'End If
+        HiddenTab = Not String.IsNullOrEmpty(Request.QueryString("HiddenTab"))
+        If (HiddenTab) Then
+            ASPxSplitter1.GetPaneByName("LogPanel").Visible = False
+        End If
 
-        'Dim isInPoupUp = Request.QueryString("InPopUp") IsNot Nothing
-        'If (isInPoupUp) Then
-        '    SencnedAction.Visible = True
-        '    ASPxSplitter1.Visible = False
-        'End If
+        Dim isInPoupUp = Request.QueryString("InPopUp") IsNot Nothing
+        If (isInPoupUp) Then
+            SencnedAction.Visible = True
+            ASPxSplitter1.Visible = False
+        End If
 
 
     End Sub

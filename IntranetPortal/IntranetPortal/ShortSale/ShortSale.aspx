@@ -75,6 +75,7 @@
                                                             <div class="shortSaleUI" style="align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
+                                                                <% If Not HiddenTab %>
                                                                 <div class="legal-menu row" style="margin-left: 0px; margin-right: 0px">
                                                                     <ul class="nav-bar nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
                                                                         <li class="active short_sale_head_tab">
@@ -133,6 +134,7 @@
                                                                         </li>
                                                                     </ul>
                                                                 </div>
+                                                                <% End If %>
                                                                 <uc1:SendMail runat="server" ID="SendMail" LogCategory="ShortSale" />
                                                                 <div class="tab-content">
                                                                     <div class="tab-pane active" id="property_info">
