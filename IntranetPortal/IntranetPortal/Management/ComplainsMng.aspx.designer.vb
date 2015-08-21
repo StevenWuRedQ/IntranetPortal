@@ -113,15 +113,6 @@ Partial Public Class ComplainsMng
     Protected WithEvents gdComplainsResult As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
-    '''txtValue control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtValue As Global.System.Web.UI.HtmlControls.HtmlInputText
-
-    '''<summary>
     '''popupComplaintHistory control.
     '''</summary>
     '''<remarks>

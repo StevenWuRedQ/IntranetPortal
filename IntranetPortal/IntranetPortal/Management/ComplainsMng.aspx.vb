@@ -128,13 +128,14 @@
 
         Dim dtEntered = CDate(e.GetValue("DateEntered"))
 
-        Dim ts = DateTime.Now - dtEntered
+        If dtEntered > DateTime.MinValue Then
+            Dim ts = DateTime.Now - dtEntered
 
-        If ts.Days < 5 Then
-            If dtEntered > DateTime.MinValue AndAlso Core.WorkingHours.GetWorkingDays(dtEntered, DateTime.Now, "").Days < 3 Then
-                e.Row.ForeColor = Drawing.Color.Red
+            If ts.Days < 5 Then
+                If dtEntered > DateTime.MinValue AndAlso Core.WorkingHours.GetWorkingDays(dtEntered, DateTime.Now, "").Days < 3 Then
+                    e.Row.ForeColor = Drawing.Color.Red
+                End If
             End If
         End If
-
     End Sub
 End Class
