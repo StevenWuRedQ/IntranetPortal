@@ -10,7 +10,7 @@
             </li>
             <li class="ss_form_item" style="display: none">
                 <label class="ss_form_input_title">BBLE</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.BBLE" >
+                <input class="ss_form_input" ng-model="LeadsInfo.BBLE" >
             </li>
             <li class="ss_form_item" style="width: 66.6%">
                 <label class="ss_form_input_title">Address</label>
@@ -120,13 +120,13 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">C/O</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.CO">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.CO" pt-init-model="SsCase.PropertyInfo.CO">
             </li>
         </ul>
         <ul class="ss_form_box clearfix" collapse="CSCase.CSCase.InitialIntake.BuildingInfoCollapsed" ng-init="CSCase.CSCase.InitialIntake.BuildingInfoCollapsed=true">
             <li class="ss_form_item">
                 <label class="ss_form_input_title"># of Family</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.FamilyNum">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.FamilyNum" pt-init-model="SsCase.PropertyInfo.NumOfFamilies">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Building Class</label>
@@ -134,7 +134,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Tax Class</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.TaxClass">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.TaxClass" pt-init-model="LeadsInfo.PropertyClass">>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Total Units</label>
@@ -154,7 +154,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Building Stories</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.BuildingStories">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.BuildingStories" pt-init-model="LeadsInfo.NumFloors">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Calculated Sqft</label>
@@ -162,7 +162,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">NYC Sqft</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.NycSqft">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.NycSqft" pt-init-model="LeadsInfo.NYCSqft">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Actual # Of Unit</label>
@@ -170,15 +170,15 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Zoning Code</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.ZoningCode">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.ZoningCode" pt-init-model="LeadsInfo.Zoning">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Max FAR</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.MaxFAR">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.MaxFAR" pt-init-model="LeadsInfo.MaxFar">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Actual Far</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.ActualFAR">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.ActualFAR" pt-init-model="LeadsInfo.ActualFar">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Landmark</label>

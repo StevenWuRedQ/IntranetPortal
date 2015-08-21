@@ -2,21 +2,137 @@
 
 <div class="ss_form" ng-init="CSCase.CSCase.Violations.OrdersPanelVisible=false" style="margin-bottom: 30px">
     <h4 class="ss_form_title">Orders<input type="checkbox" ng-model="CSCase.CSCase.Violations.Orders" id="orders" /><label for="orders"></label></h4>
-    <div style="text-align: center">
-        <span style="padding: 1px 40px; background: red; font-size: 18px; color: white; text-decoration: underline; font-family: arial; font-weight: bold" ng-click="CSCase.CSCase.Violations.OrdersPanelVisible=true">Orders Exists On This Property   </span>
+    <div style="text-align: center" ng-show="CSCase.CSCase.Violations.Orders">
+        <style>
+        </style>
+        <span id="barner-danger" ng-click="CSCase.CSCase.Violations.OrdersPanelVisible=true">STOP WORK ORDER EXISTS ON THIS PROPERTY</span>
+        <br />
+        <br />
+        <span id="barner-warning" ng-click="CSCase.CSCase.Violations.OrdersPanelVisible=true">FULL VACATE EXISTS ON THIS PROPERTY</span>
+        <br />
+        <br />
+        <span id="barner-warning" ng-click="CSCase.CSCase.Violations.OrdersPanelVisible=true">PARTIAL VACATE EXISTS ON THIS PROPERTY</span>
     </div>
-    <%--<div dx-popup="{
-                                height: auto,
-                                width: 900,
-                                title: 'Exsiting Orders'
-                                dragEnabled: true,
-                                showCloseButton: true,
-                                shading: false,
-                                bindingOptions:{ visible: 'CSCase.CSCase.Violations.OrdersPanelVisible' }
-                            }"></div>
-        <div data-options="dxTemplate:{ name: 'content' }">
+
+    <div dx-popup="{
+                    height: 800,
+                    width: 800,
+                    title: 'Exsiting Orders',
+                    contentTemplate: 'ordersContent',
+                    dragEnabled: true,
+                    showCloseButton: true,
+                    shading: false,
+                    bindingOptions:{ visible: 'CSCase.CSCase.Violations.OrdersPanelVisible' }
+     }">
+        <div data-options="dxTemplate:{ name: 'ordersContent' }">
+            <div id="Stop_Work_Orders">
+                <h4>Stop Work Orders&nbsp;<pt-add ng-click="ensurePush('CSCase.CSCase.Violations.stopWorkOrders')" /></h4>
+                <table class="table table-striped" style="font-size: 9pt; width: 750px; margin: 10px; table-layout: fixed;">
+                    <tr>
+                        <th>Complaint Number</th>
+                        <th style="width: 200px">Address</th>
+                        <th>Date Entered</th>
+                        <th>Category</th>
+                        <th>Inspection Date</th>
+                        <th>Disposition</th>
+                        <th>Status</th>
+                        <th style="width: 15px"></th>
+                    </tr>
+                    <tr ng-repeat="stopWorkOrder in CSCase.CSCase.Violations.stopWorkOrders">
+                        <td>
+                            <input class="table-input" type="text" ng-model="stopWorkOrder.CompliantNum" /></td>
+                        <td style="width: 200px">
+                            <input class="table-input" type="text" ng-model="stopWorkOrder.Address" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="stopWorkOrder.DateEntered" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="stopWorkOrder.Category" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="stopWorkOrder.InspectionDate" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="stopWorkOrder.CompliantNumDisposition" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="stopWorkOrder.Status" /></td>
+                        <td style="width: 15px">
+                            <pt-del ng-click="arrayRemove(CSCase.CSCase.Violations.stopWorkOrders, $index, true)" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <hr/>
+            <div id="FULL_VACATE_Orders">
+                <h4>Full VACATE Orders&nbsp;<pt-add ng-click="ensurePush('CSCase.CSCase.Violations.fullVacateOrders')" /></h4>
+                <table class="table table-striped" style="font-size: 9pt; width: 750px; margin: 10px; table-layout: fixed;">
+                    <tr>
+                        <th>Complaint Number</th>
+                        <th style="width: 200px">Address</th>
+                        <th>Date Entered</th>
+                        <th>Category</th>
+                        <th>Inspection Date</th>
+                        <th>Disposition</th>
+                        <th>Status</th>
+                        <th style="width: 15px"></th>
+                    </tr>
+                    <tr ng-repeat="order in CSCase.CSCase.Violations.fullVacateOrders">
+                        <td>
+                            <input class="table-input" type="text" ng-model="order.CompliantNum" /></td>
+                        <td style="width: 200px">
+                            <input class="table-input" type="text" ng-model="order.Address" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="order.DateEntered" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="order.Category" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="order.InspectionDate" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="order.CompliantNumDisposition" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="stopWorkOrderorder.Status" /></td>
+                        <td style="width: 15px">
+                            <pt-del ng-click="arrayRemove(CSCase.CSCase.Violations.fullVacateOrders, $index, true)" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <hr/>
+            <div id="Partial_VACATE_Orders">
+                <h4>Partial VACATE Orders&nbsp;<pt-add ng-click="ensurePush('CSCase.CSCase.Violations.partialVacateOrders')" /></h4>
+                <table class="table table-striped" style="font-size: 9pt; width: 750px; margin: 10px; table-layout: fixed;">
+                    <tr>
+                        <th>Complaint Number</th>
+                        <th style="width: 200px">Address</th>
+                        <th>Date Entered</th>
+                        <th>Category</th>
+                        <th>Inspection Date</th>
+                        <th>Disposition</th>
+                        <th>Status</th>
+                        <th style="width: 15px"></th>
+                    </tr>
+                    <tr ng-repeat="order in CSCase.CSCase.Violations.partialVacateOrders">
+                        <td>
+                            <input class="table-input" type="text" ng-model="order.CompliantNum" /></td>
+                        <td style="width: 200px">
+                            <input class="table-input" type="text" ng-model="order.Address" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="order.DateEntered" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="order.Category" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="order.InspectionDate" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="order.CompliantNumDisposition" /></td>
+                        <td>
+                            <input class="table-input" type="text" ng-model="stopWorkOrderorder.Status" /></td>
+                        <td style="width: 15px">
+                            <pt-del ng-click="arrayRemove(CSCase.CSCase.Violations.partialVacateOrders, $index, true)" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-    --%>
+    </div>
+
+
 </div>
 
 <div class="ss_form">

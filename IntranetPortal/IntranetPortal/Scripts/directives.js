@@ -57,7 +57,7 @@ portalApp.directive('ptInitModel', function () {
         link: function (scope, el, attrs) {
             scope.$watch(attrs.ptInitModel, function (newVal) {
                 if (!scope.$eval(attrs.ngModel) && newVal) {
-                    newVal = newVal.replace(/'/g, "\\'");
+                    if(typeof newVal == 'string') newVal = newVal.replace(/'/g, "\\'");
                     scope.$eval(attrs.ngModel + "='" + newVal + "'");
                 }
             });
