@@ -163,7 +163,7 @@
                                             <li class="active short_sale_head_tab">
                                                 <a href="#LegalTab" role="tab" data-toggle="tab" class="tab_button_a">
                                                     <i class="fa fa-info-circle  head_tab_icon_padding"></i>
-                                                    <div class="font_size_bold">Legal</div>
+                                                    <div class="font_size_bold" id="LegalTabHead">Legal</div>
                                                 </a>
                                             </li>
                                             <li class="short_sale_head_tab">
@@ -804,7 +804,7 @@
                         });
                 }
 
-                ScopeAutoSave(GetLegalData, $scope.SaveLegal);
+                ScopeAutoSave(GetLegalData, $scope.SaveLegal,'#LegalTabHead');
 
                 $scope.CompleteResearch = function () {
                     var json = JSON.stringify($scope.LegalCase);

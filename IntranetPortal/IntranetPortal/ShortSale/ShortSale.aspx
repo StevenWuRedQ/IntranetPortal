@@ -81,7 +81,7 @@
                                                                         <li class="active short_sale_head_tab">
                                                                             <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
                                                                                 <i class="fa fa-sign-out fa-info-circle head_tab_icon_padding"></i>
-                                                                                <div class="font_size_bold">ShortSale</div>
+                                                                                <div class="font_size_bold" id="ShortSaleTabHead">ShortSale</div>
                                                                             </a>
                                                                         </li>
                                                                         <li class="short_sale_head_tab">
@@ -577,7 +577,7 @@
                             alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                         });
             }
-            ScopeAutoSave(GetShortSaleCase,$scope.SaveShortSale)
+            ScopeAutoSave(GetShortSaleCase, $scope.SaveShortSale, '#ShortSaleTabHead')
             $scope.ShowAddPopUp = function (event) {
                 $scope.addCommentTxt = "";
                 aspxAddLeadsComments.ShowAtElement(event.target);

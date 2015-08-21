@@ -19,7 +19,8 @@
             background-color: white;
         }
     </style>
-    <div style="background: url(/images/Background2.png) no-repeat center fixed; background-size: auto, auto; background-color: #dddddd; width: 100%; height: 100%;">
+    <div style="background: url(/images/Background2.png) no-repeat center fixed; background-size: auto, auto; background-color: #dddddd; width: 100%; height: 100%;" id="LeadCotrl" ng-controller="LeadCtrl">
+      
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientVisible="false" ClientInstanceName="splitter" Orientation="Vertical" FullscreenMode="true">
             <Panes>
                 <dx:SplitterPane Name="leadContent">
@@ -58,4 +59,25 @@
             </Panes>
         </dx:ASPxSplitter>
     </div>    
+    <script>
+        
+        var portalApp = angular.module('PortalApp');
+
+        portalApp.controller('LeadCtrl', function ($scope) {
+
+        });
+        function reloadLead()
+        {
+            var leadctol = document.getElementById('LeadCtrl');
+            var $injector = angular.element(leadctol).injector();
+            $injector.invoke(function ($compile) {
+                /* if there any javacript function not found use leadctol.innerHTML instand */
+                var compiled = $compile(leadctol.innerHTML);//.replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gm, ''));
+                var cElem = compiled(angular.element(leadctol).scope())
+                angular.element(leadctol).scope().$digest();
+                $(leadctol).html(cElem);
+            });
+            
+        }
+    </script>
 </asp:Content>

@@ -31,7 +31,11 @@ function ScopeResetCaseDataChange(getDataFunc) {
     }
     $('#CaseData').val(JSON.stringify(getDataFunc()));
 }
-function ScopeAutoSave(getDataFunc, SaveFunc) {
+function ScopeAutoSave(getDataFunc, SaveFunc, headEelem) {
+    if ($(headEelem).length <= 0)
+    {
+        return;
+    }
     window.setInterval(function () {
         if (ScopeCaseDataChanged(getDataFunc)) {
             var sucessFunc = function () {

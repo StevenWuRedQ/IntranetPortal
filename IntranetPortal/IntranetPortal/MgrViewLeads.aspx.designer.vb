@@ -57,13 +57,4 @@ Partial Public Class MgrViewLeads
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents LeadsInfo As Global.IntranetPortal.LeadsInfo1
-
-    '''<summary>
-    '''LeadsStatisticSummary control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents LeadsStatisticSummary As Global.IntranetPortal.LeadsStatisticSummary
 End Class

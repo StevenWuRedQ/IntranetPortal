@@ -213,6 +213,8 @@
         <%--property form--%>
         <div style="margin: 20px" class="clearfix">
             <div class="form_head">General</div>
+            <div class="form_head">{{1+1}}</div>
+            <button type="button" onclick="reloadLead()">Reload</button>
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item" style="width: 66%">
                     <label class="ss_form_input_title">address</label>
