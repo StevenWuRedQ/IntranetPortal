@@ -3678,9 +3678,6 @@
       <Name>IntranetPortal.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\test.ts" />
-  </ItemGroup>
   <!--<ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>-->

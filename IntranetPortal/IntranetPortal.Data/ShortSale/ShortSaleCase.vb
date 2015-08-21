@@ -838,6 +838,12 @@ Partial Public Class ShortSaleCase
         Return True
     End Function
 
+    Public Shared Function IsExist(bble As String) As Boolean
+        Using ctx As New ShortSaleEntities
+            Return ctx.ShortSaleCases.Any(Function(ss) ss.BBLE = bble)
+        End Using
+    End Function
+
     Public Shared Function GetCase(caseId As Integer) As ShortSaleCase
         Using context As New ShortSaleEntities
             Return context.ShortSaleCases.Find(caseId)
