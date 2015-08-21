@@ -27,6 +27,7 @@
         Dim result = Data.CheckingComplain.GetComplainsResult
 
         If result IsNot Nothing Then
+
             gdComplainsResult.DataSource = result
             gdComplainsResult.DataBind()
         End If
@@ -99,7 +100,6 @@
         cc.Save(User.Identity.Name)
     End Sub
 
-
     Protected Sub gdComplainsResult_DataBinding(sender As Object, e As EventArgs)
         If gdComplainsResult.DataSource Is Nothing Then
             BindResult()
@@ -128,8 +128,13 @@
 
         Dim dtEntered = CDate(e.GetValue("DateEntered"))
 
-        If dtEntered > DateTime.MinValue AndAlso Core.WorkingHours.GetWorkingDays(dtEntered, DateTime.Now, "").Days < 3 Then
-            e.Row.ForeColor = Drawing.Color.Red
+        Dim ts = DateTime.Now - dtEntered
+
+        If ts.Days < 5 Then
+            If dtEntered > DateTime.MinValue AndAlso Core.WorkingHours.GetWorkingDays(dtEntered, DateTime.Now, "").Days < 3 Then
+                e.Row.ForeColor = Drawing.Color.Red
+            End If
         End If
+
     End Sub
 End Class

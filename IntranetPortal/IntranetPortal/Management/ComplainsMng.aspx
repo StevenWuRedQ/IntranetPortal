@@ -354,6 +354,8 @@
                     <SettingsDetail ShowDetailRow="true" />
                     <Settings ShowHeaderFilterButton="true" VerticalScrollableHeight="400" />
                 </dx:ASPxGridView>
+                <input type="text" id="txtValue" runat="server" />
+
             </div>
         </div>
 
