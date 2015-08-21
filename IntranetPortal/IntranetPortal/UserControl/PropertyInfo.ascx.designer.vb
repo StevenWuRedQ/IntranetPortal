@@ -77,6 +77,24 @@ Partial Public Class PropertyInfo
     Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
+    '''divShortSaleData control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divShortSaleData As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''ShortSaleInLeadsView control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ShortSaleInLeadsView As Global.IntranetPortal.ShortSaleInLeadsView
+
+    '''<summary>
     '''callPanelReferrel control.
     '''</summary>
     '''<remarks>

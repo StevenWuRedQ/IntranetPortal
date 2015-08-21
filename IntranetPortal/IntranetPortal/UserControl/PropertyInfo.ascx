@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PropertyInfo.ascx.vb" Inherits="IntranetPortal.PropertyInfo" %>
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
+<%@ Register Src="~/ShortSale/ShortSaleInLeadsView.ascx" TagPrefix="uc1" TagName="ShortSaleInLeadsView" %>
+
 
 <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 <script type="text/javascript">
@@ -292,9 +294,11 @@
                     <label class="ss_form_input_title">ACTUAL FAR</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.ActualFar%>">
                 </li>
-
             </ul>
+        </div>
 
+        <div style="margin: 20px;" class="clearfix" runat="server" id="divShortSaleData" visible="false">         
+            <uc1:ShortSaleInLeadsView runat="server" id="ShortSaleInLeadsView" Visible="false" />
         </div>
 
         <%-------end-----%>

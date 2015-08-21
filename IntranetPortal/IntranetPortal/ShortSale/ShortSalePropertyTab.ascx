@@ -130,9 +130,7 @@
     <asp:HiddenField ID="hfCaseId" runat="server" />
     <div>
         <dx:ASPxGridView ID="home_breakdown_gridview" runat="server" KeyFieldName="BBLE;FloorId" SettingsBehavior-AllowDragDrop="false" SettingsBehavior-AllowSort="false" OnRowInserting="home_breakdown_gridview_RowInserting" OnRowDeleting="home_breakdown_gridview_RowDeleting" OnRowUpdating="home_breakdown_gridview_RowUpdating" >
-
             <Columns>
-
                 <dx:GridViewCommandColumn ShowEditButton="true" ShowNewButtonInHeader="true" ShowDeleteButton="True" />
                 <%--<dx:GridViewDataColumn FieldName="FloorId" VisibleIndex="1" Caption="Floor" 
                     

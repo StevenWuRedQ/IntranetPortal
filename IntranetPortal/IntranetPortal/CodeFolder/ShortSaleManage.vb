@@ -13,6 +13,10 @@ Public Class ShortSaleManage
         End Get
     End Property
 
+    Public Shared Function IsInShortSale(bble As String) As Boolean
+        Return ShortSaleCase.IsExist(bble)
+    End Function
+
     Public Shared Function SaveCase(caseData As String, saveBy As String) As ShortSaleCase
         Dim res = JsonConvert.DeserializeObject(Of ShortSaleCase)(caseData)
 

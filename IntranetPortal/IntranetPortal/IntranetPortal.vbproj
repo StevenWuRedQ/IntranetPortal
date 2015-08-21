@@ -1562,6 +1562,13 @@
       <DependentUpon>ShortSale.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ShortSale\ShortSaleInLeadsView.ascx.designer.vb">
+      <DependentUpon>ShortSaleInLeadsView.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ShortSaleInLeadsView.ascx.vb">
+      <DependentUpon>ShortSaleInLeadsView.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ShortSale\ShortSale_bak.aspx.designer.vb">
       <DependentUpon>ShortSale_bak.aspx</DependentUpon>
     </Compile>
@@ -3481,6 +3488,7 @@
     <Content Include="ShortSale\SelectPartyUC.ascx" />
     <Content Include="ShortSale\NGShortSaleHomewonerTab.ascx" />
     <Content Include="ShortSale\ShortSale.aspx" />
+    <Content Include="ShortSale\ShortSaleInLeadsView.ascx" />
     <Content Include="ShortSale\ShortSale_bak.aspx" />
     <Content Include="ShortSale\ShortSaleCaseList.ascx" />
     <Content Include="ShortSale\ShortSaleEvictionTab.ascx" />

@@ -119,4 +119,17 @@
         gdComplainsHistory.DataBind()
 
     End Sub
+
+    Protected Sub gdComplainsResult_DataBound(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Protected Sub gdComplainsResult_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs)
+
+        Dim dtEntered = CDate(e.GetValue("DateEntered"))
+
+        If dtEntered > DateTime.MinValue AndAlso Core.WorkingHours.GetWorkingDays(dtEntered, DateTime.Now, "").Days < 3 Then
+            e.Row.ForeColor = Drawing.Color.Red
+        End If
+    End Sub
 End Class

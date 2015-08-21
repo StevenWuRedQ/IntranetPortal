@@ -19,6 +19,15 @@
             gridLiens.DataSource = lisPens
             gridLiens.DataBind()
         End If
+
+        If LeadsInfoData.InShortSale Then
+            divShortSaleData.Visible = True
+            ShortSaleInLeadsView.Visible = True
+            ShortSaleInLeadsView.BindData(LeadsInfoData.BBLE)
+        Else
+            divShortSaleData.Visible = False
+            ShortSaleInLeadsView.Visible = False
+        End If
     End Function
 
     Public Function LinesDefendantAndIndex() As String

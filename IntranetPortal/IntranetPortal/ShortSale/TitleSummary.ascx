@@ -594,9 +594,9 @@
                                                     <dx:GridViewDataTextColumn FieldName="TitleCompanyName" Caption="Title Company">
                                                     </dx:GridViewDataTextColumn>
 
-                                                    <dx:GridViewDataTextColumn FieldName="FirstMortgage.LoanAmount" Caption="1st Mort Amt" PropertiesTextEdit-DisplayFormatString="C">
+                                                    <dx:GridViewDataTextColumn FieldName="FirstMortgage.LoanAmount" Caption="1st Mort Loan Amount" PropertiesTextEdit-DisplayFormatString="C">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="FirstMortgage.HasAuctionDate" Caption="1stMort Auction">
+                                                    <dx:GridViewDataTextColumn FieldName="FirstMortgage.HasAuctionDate" Caption="1stMort Has Auction">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataDateColumn FieldName="FirstMortgage.DateOfSale" Caption="1stMort DateofSale">
                                                     </dx:GridViewDataDateColumn>
@@ -606,7 +606,7 @@
                                                     </dx:GridViewDataDateColumn>
                                                     <dx:GridViewDataDateColumn FieldName="FirstMortgage.PayoffExpired" Caption="1stMort Payoff Verified">
                                                     </dx:GridViewDataDateColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="FirstMortgage.PayoffAmount" Caption="1stMort Payoff Amt" PropertiesTextEdit-DisplayFormatString="C">
+                                                    <dx:GridViewDataTextColumn FieldName="FirstMortgage.PayoffAmount" Caption="1stMort Payoff Amount" PropertiesTextEdit-DisplayFormatString="C">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="FirstMortgage.ForeclosureAttorney" Caption="1stMort Attorney">
                                                     </dx:GridViewDataTextColumn>
@@ -625,9 +625,9 @@
                                                     <dx:GridViewDataDateColumn FieldName="FirstMortgage.CancelationSent" Caption="1stMort CancelationSent">
                                                     </dx:GridViewDataDateColumn>
 
-                                                    <dx:GridViewDataTextColumn FieldName="SecondMortgage.LoanAmount" Caption="2ndMort Amt" PropertiesTextEdit-DisplayFormatString="C">
+                                                    <dx:GridViewDataTextColumn FieldName="SecondMortgage.LoanAmount" Caption="2ndMort Loan Amount" PropertiesTextEdit-DisplayFormatString="C">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="SecondMortgage.HasAuctionDate" Caption="2ndMort Auction">
+                                                    <dx:GridViewDataTextColumn FieldName="SecondMortgage.HasAuctionDate" Caption="2ndMort Has Auction">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataDateColumn FieldName="SecondMortgage.DateOfSale" Caption="2ndMort DateofSale">
                                                     </dx:GridViewDataDateColumn>
@@ -637,7 +637,7 @@
                                                     </dx:GridViewDataDateColumn>
                                                     <dx:GridViewDataDateColumn FieldName="SecondMortgage.PayoffExpired" Caption="2ndMort Payoff Verified">
                                                     </dx:GridViewDataDateColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="SecondMortgage.PayoffAmount" Caption="2ndMort Payoff Amt" PropertiesTextEdit-DisplayFormatString="C">
+                                                    <dx:GridViewDataTextColumn FieldName="SecondMortgage.PayoffAmount" Caption="2ndMort Payoff Amount" PropertiesTextEdit-DisplayFormatString="C">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="SecondMortgage.ForeclosureAttorney" Caption="2ndMort Attorney">
                                                     </dx:GridViewDataTextColumn>
@@ -704,13 +704,13 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1st Mort Prog">
+                                                    <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1st Mort Progress">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="FristMortageLender" Caption="1st Mort Ser ">
+                                                    <dx:GridViewDataTextColumn FieldName="FristMortageLender" Caption="1st Mort Lender ">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="SencondMortageProgress" Caption="2nd Mort Prog">
+                                                    <dx:GridViewDataTextColumn FieldName="SencondMortageProgress" Caption="2nd Mort Progress">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="SencondMortageLender" Caption="2nd Mort Ser">
+                                                    <dx:GridViewDataTextColumn FieldName="SencondMortageLender" Caption="2nd Mort Lender">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">
                                                     </dx:GridViewDataTextColumn>

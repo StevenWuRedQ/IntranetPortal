@@ -18,6 +18,12 @@ Public Class LeadsInfo
         CoOpConversion = 12
     End Enum
 
+    Public ReadOnly Property InShortSale As Boolean
+        Get
+            Return ShortSaleManage.IsInShortSale(BBLE)
+        End Get
+    End Property
+
     <JsonIgnoreAttribute>
     Public ReadOnly Property IsApartment() As Boolean
         Get

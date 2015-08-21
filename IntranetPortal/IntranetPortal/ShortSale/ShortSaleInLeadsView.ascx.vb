@@ -1,35 +1,38 @@
-﻿Imports Newtonsoft.Json
-Imports IntranetPortal.Data
+﻿Imports IntranetPortal.Data
 Imports DevExpress.Web.ASPxGridView
 
-Public Class ShortSalePropertyTab
+Public Class ShortSaleInLeadsView
     Inherits System.Web.UI.UserControl
-
-    Public Property propertyInfo As New PropertyBaseInfo
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
     End Sub
 
+    Public Property propertyInfo As New PropertyBaseInfo
 
-    Sub initPropertyInfo()
-        Using Context As New Entities
-            'propertyInfo = Internal.sh .Where(Function(pi) pi.BBLE = "123").FirstOrDefault()
-        End Using
-    End Sub
+    Sub BindData(bble As String)
+        Dim ss = ShortSaleCase.GetCaseByBBLE(bble)
+        propertyInfo = ss.PropertyInfo
 
-    Sub BindData(caseID As Integer)
+        hfBble.Value = propertyInfo.BBLE
+        hfCaseId.Value = ss.CaseId
 
         home_breakdown_gridview.DataSource = propertyInfo.PropFloors
-        hfBble.Value = propertyInfo.BBLE
-        hfCaseId.Value = caseID
         home_breakdown_gridview.DataBind()
         home_breakdown_gridview.SettingsEditing.BatchEditSettings.EditMode = GridViewBatchEditMode.Cell
         home_breakdown_gridview.SettingsEditing.BatchEditSettings.StartEditAction = GridViewBatchStartEditAction.Click
-
     End Sub
 
-   
+    Protected Sub home_breakdown_gridview_RowDeleting(sender As Object, e As DevExpress.Web.Data.ASPxDataDeletingEventArgs)
+        Dim values = e.Values
+        PropertyFloor.Delete(hfBble.Value, values.Item("FloorId"))
+        finishEdit(sender, e)
+    End Sub
+
+    Protected Sub home_breakdown_gridview_RowUpdating(sender As Object, e As DevExpress.Web.Data.ASPxDataUpdatingEventArgs)
+        save_floor(e.NewValues, False)
+        finishEdit(sender, e)
+    End Sub
 
     Protected Sub home_breakdown_gridview_RowInserting(sender As Object, e As DevExpress.Web.Data.ASPxDataInsertingEventArgs)
         Dim values = e.NewValues
@@ -49,14 +52,14 @@ Public Class ShortSalePropertyTab
             Dim newData = ShortSaleCase.GetCase(hfCaseId.Value)
             grid.DataSource = newData.PropertyInfo.PropFloors
         End If
-        
+
         grid.DataBind()
     End Sub
     Sub save_floor(ByVal values As OrderedDictionary, ByVal is_insert As Boolean)
         Dim add_floor As PropertyFloor = New PropertyFloor()
         add_floor.BBLE = hfBble.Value
         If (is_insert) Then
-           
+
             add_floor.FloorId = get_floor_id()
         Else
             add_floor.FloorId = values.Item("FloorId")
@@ -75,7 +78,8 @@ Public Class ShortSalePropertyTab
         add_floor.Save()
     End Sub
 
-    Function get_floor_id() As Integer
+
+    Public Function get_floor_id() As Integer
         Dim ss_case As ShortSaleCase = ShortSaleCase.GetCase(hfCaseId.Value)
 
         If (ss_case Is Nothing) Then
@@ -90,16 +94,6 @@ Public Class ShortSalePropertyTab
 
     End Function
 
-    Protected Sub home_breakdown_gridview_RowDeleting(sender As Object, e As DevExpress.Web.Data.ASPxDataDeletingEventArgs)
-        Dim values = e.Values
-        PropertyFloor.Delete(hfBble.Value, values.Item("FloorId"))
-        finishEdit(sender, e)
-    End Sub
-
-    Protected Sub home_breakdown_gridview_RowUpdating(sender As Object, e As DevExpress.Web.Data.ASPxDataUpdatingEventArgs)
-        save_floor(e.NewValues, False)
-        finishEdit(sender, e)
-    End Sub
 
     Function GetFloorId(floorId) As Integer
         If floorId = 0 Then
@@ -108,4 +102,5 @@ Public Class ShortSalePropertyTab
             Return floorId
         End If
     End Function
+
 End Class
