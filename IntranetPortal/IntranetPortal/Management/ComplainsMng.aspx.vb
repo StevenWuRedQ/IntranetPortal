@@ -42,22 +42,19 @@
                 txtNumber.Text = ld.Number
                 txtStreet.Text = ld.StreetName
                 txtCity.Text = ld.Neighborhood
-            End If
 
-            btnAdd.Visible = True
-            Return
+                btnAdd.Disabled = False
+            End If
         Else
             Try
                 txtBBLE.Text = Core.Utility.Address2BBLE(txtNumber.Text, txtStreet.Text, txtCity.Text)
-                btnAdd.Visible = True
+                btnAdd.Disabled = False
                 Return
             Catch ex As Exception
                 lblAddress.Text = "Error: " & ex.Message
                 lblAddress.ForeColor = Drawing.Color.Red
             End Try
         End If
-
-        btnAdd.Visible = False
     End Sub
 
     Protected Sub gdComplains_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)

@@ -36,13 +36,21 @@
             return false;
         }
 
+        var verifyButtonId = "<%= btnCheck.ClientID%>";
+
         function SetView() {
             var value = rbBBLE.GetChecked();
             txtBBLE.SetEnabled(value);
             txtNumber.SetEnabled(!value);
             txtStreet.SetEnabled(!value);
             txtCity.SetEnabled(!value);
+
+            if (value)
+                $('#' + verifyButtonId).val("Verify BBLE");
+            else
+                $('#' + verifyButtonId).val("Verify Address");
         }
+
         var needRefreshResult = false;
         function RefreshProperty(bble) {
             needRefreshResult = true;
@@ -143,7 +151,6 @@
                                 <td>
                                     <dx:ASPxTextBox runat="server" ID="txtStreet" ClientInstanceName="txtStreet" Native="true" CssClass="form-control" Width="150px"></dx:ASPxTextBox>
                                 </td>
-
                             </tr>
                             <tr>
                                 <td>City:
@@ -155,8 +162,8 @@
                         </table>
                     </td>
                     <td>
-                        <input type="button" value="Verify" runat="server" id="btnCheck" onserverclick="btnCheck_ServerClick" /><br />
-                        <input type="button" value="Add to Watch List" id="btnAdd" onclick="gdComplains.PerformCallback('Add')" style="margin-top: 10px;" runat="server" visible="false" />
+                        <input type="button" class="btn btn-primary" value="Verify" runat="server" id="btnCheck" onserverclick="btnCheck_ServerClick" /><br />
+                        <input type="button" class="btn btn-primary" value="Add to Watch List" id="btnAdd" onclick="gdComplains.PerformCallback('Add')" style="margin-top: 10px;" runat="server" disabled="disabled" />
                     </td>
                 </tr>
             </table>
@@ -234,7 +241,7 @@
                         <DetailRow>
                             <table class="" style="width:100%; border: 1px solid #808080; line-height: 25px">
                                 <tr>
-                                    <td colspan="4" class="form_header">Complaints Detail
+                                    <td colspan="4" class="form_header">Complaints - <%# Eval("ComplaintNumber")%> - Detail
                                     </td>
                                 </tr>
                                 <tr>
