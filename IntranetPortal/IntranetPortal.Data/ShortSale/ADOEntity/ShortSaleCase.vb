@@ -58,5 +58,6 @@ Partial Public Class ShortSaleCase
     Public Property BuyerAttorneyName As String
     Public Property TitleCompanyName As String
     Public Property ReferralUserName As String
+    Public Property ApprovalChecklist As String
 
 End Class

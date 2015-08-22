@@ -1125,6 +1125,14 @@ Partial Public Class ShortSaleCase
 
 End Class
 
+Public Class ShortSaleCaseMetaType
+
+    <Newtonsoft.Json.JsonConverter(GetType(Core.JsObjectToStringConverter))>
+    Public Property ApprovalChecklist As String
+
+
+End Class
+
 Public Enum CaseStatus
     NewFile = 0
     FollowUp = 1
