@@ -225,7 +225,7 @@
                             </div>
                         </form>
                         <hr />
-                        <button class="btn btn-primary pull-right" ng-click="setVisiblePopup(SsCase.PropertyInfo.PropFloors[$index], false)">Save</button>
+                        <button type="button" class="btn btn-primary pull-right" ng-click="setVisiblePopup(SsCase.PropertyInfo.PropFloors[$index], false)">Save</button>
                     </div>
                 </div>
             </td>

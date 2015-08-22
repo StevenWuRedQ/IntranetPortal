@@ -21,9 +21,7 @@
                         <div style="font-size: 30px">
                             <i class="fa fa-home"></i>
                             <span style="margin-left: 19px;">{{GetCaseInfo().Address}}&nbsp;</span>
-                            <button type="button" ng-click="toggleApprovalPopup()">show</button>
-                            
-                            
+ 
                             <span class="time_buttons" style="margin-right: 30px" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=3&bble='+leadsInfoBBLE, 'eCourts')">eCourts</span>
                             <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=2&bble='+leadsInfoBBLE, 'DOB')">DOB</span>
                             <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=1&bble='+leadsInfoBBLE, 'Acris')">Acris</span>
