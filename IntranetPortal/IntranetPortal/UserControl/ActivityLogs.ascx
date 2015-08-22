@@ -532,16 +532,18 @@
                             },
                             Checkinglist:{
                                 "Approved":{
-                                    "Approval - Received":{
+                                    "Approval - Received":{                                        
                                         Checking:function()
                                         {
                                             if(typeof window.ssToggleApprovalPopup != "undefined")
                                                 window.ssToggleApprovalPopup(this.Success, this.Cancel);
                                         },
-                                        Success:function(){
-                                            alert("Success");
+                                        Success:function(result){
+                                            EmailBody.SetText("Checkinglist is finished.");
+                                            InsertNewComments();                                            
                                         },
                                         Cancel:function(){
+                                            $("#selStatusUpdate").val("");
                                             alert("Cancel");
                                         }
                                     }
