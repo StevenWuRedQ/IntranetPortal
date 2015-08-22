@@ -163,103 +163,104 @@
                                                                 </div>
 
                                                                 <div dx-popup="{  
-                                                                        height: 750,
+                                                                        height: 650,
                                                                         width: 600, 
                                                                         title: 'Approval CheckList',
                                                                         dragEnabled: true,
-                                                                        showCloseButton: true,
+                                                                        showCloseButton: false,
                                                                         shading: true,
                                                                         bindingOptions:{ visible: 'Approval_popupVisible' }
                                                                 }">
                                                                     <div data-options="dxTemplate:{ name: 'content' }">
                                                                         <div class="row">
-                                                                            <div class="col-sm-4">Date Approval Issued</div>
-                                                                            <div class="col-sm-7">
-                                                                                <input class="form-control" type="text" ng-model="Approval.DateIssued" ss-date />
+                                                                            <div class="col-sm-6"><h5>Date Approval Issued</h5></div>
+                                                                            <div class="col-sm-5">
+                                                                                <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.DateIssued" ss-date />
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <div class="col-sm-4">Date Approval Expires</div>
-                                                                            <div class="col-sm-7">
-                                                                                <input class="form-control" type="text" ng-model="Approval.DateExpired" ss-date />
+                                                                            <div class="col-sm-6"><h5>Date Approval Expires</h5></div>
+                                                                            <div class="col-sm-5">
+                                                                                <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.DateExpired" ss-date />
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <div class="col-sm-4">Buyers Name</div>
-                                                                            <div class="col-sm-7">
-                                                                                <input class="form-control" type="text" ng-model="Approval.BuyerName" />
+                                                                            <div class="col-sm-6"><h5>Buyers Name</h5></div>
+                                                                            <div class="col-sm-5">
+                                                                                <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.BuyerName" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <div class="col-sm-4">Contract Price</div>
-                                                                            <div class="col-sm-7">
-                                                                                <input class="form-control" type="text" ng-model="Approval.ContractPrice" money-mask/>
+                                                                            <div class="col-sm-6"><h5>Contract Price</h5></div>
+                                                                            <div class="col-sm-5">
+                                                                                <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.ContractPrice" money-mask />
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <div class="col-sm-4">Does Net Match - 1st Lien</div>
-                                                                            <div class="col-sm-7">
-                                                                                <select class="form-control" ng-model="Approval.IsFirstLienMatch">
+                                                                            <div class="col-sm-6"><h5>Does Net Match - 1st Lien</h5></div>
+                                                                            <div class="col-sm-5">
+                                                                                <select class="form-control" ng-model="SsCase.ApprovalChecklist.IsFirstLienMatch">
                                                                                     <option value="Y">Yes</option>
                                                                                     <option value="N">No</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <div class="col-sm-4">Approved Net - 1st Lien</div>
-                                                                            <div class="col-sm-7">
-                                                                                <input class="form-control" type="text" ng-model="Approval.FirstLien" money-mask/>
+                                                                            <div class="col-sm-6"><h5>Approved Net - 1st Lien</h5></div>
+                                                                            <div class="col-sm-5">
+                                                                                <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.FirstLien" money-mask />
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <div class="col-sm-4">Does Net Match - 2nd Lien</div>
-                                                                            <div class="col-sm-7">
-                                                                                <select class="form-control" ng-model="Approval.IsSecondLienMatch">
+                                                                            <div class="col-sm-6"><h5>Does Net Match - 2nd Lien</h5></div>
+                                                                            <div class="col-sm-5">
+                                                                                <select class="form-control" ng-model="SsCase.ApprovalChecklist.IsSecondLienMatch">
                                                                                     <option value="Y">Yes</option>
                                                                                     <option value="N">No</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <div class="col-sm-4">Approved Net - 2nd Lien</div>
-                                                                            <div class="col-sm-7">
-                                                                                <input class="form-control" type="text" ng-model="Approval.SecondLien" money-mask/>
+                                                                            <div class="col-sm-6"><h5>Approved Net - 2nd Lien</h5></div>
+                                                                            <div class="col-sm-5">
+                                                                                <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.SecondLien" money-mask />
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <div class="col-sm-4">Commission %</div>
-                                                                            <div class="col-sm-7">
-                                                                                <input class="form-control" type="text" ng-model="Approval.CommissionPercentage" percent-mask/>
+                                                                            <div class="col-sm-6"><h5>Commission %</h5></div>
+                                                                            <div class="col-sm-5">
+                                                                                <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.CommissionPercentage" percent-mask />
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <div class="col-sm-4">Commission Amount</div>
-                                                                            <div class="col-sm-7">
-                                                                                <input class="form-control" type="text" ng-model="Approval.CommissionAmount" money-mask/>
+                                                                            <div class="col-sm-6"><h5>Commission Amount</h5></div>
+                                                                            <div class="col-sm-5">
+                                                                                <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.CommissionAmount" money-mask />
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <div class="col-sm-4">Transfer Tax Amount Correct</div>
-                                                                            <div class="col-sm-7">
-                                                                                <select class="form-control" ng-model="Approval.IsTransferTaxAmount">
+                                                                            <div class="col-sm-6">
+                                                                                <h5>Transfer Tax Amount Correct</h5></div>
+                                                                            <div class="col-sm-5">
+                                                                                <select class="form-control" ng-model="SsCase.ApprovalChecklist.IsTransferTaxAmount">
                                                                                     <option value="Y">Yes</option>
                                                                                     <option value="N">No</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <div class="col-sm-4">Approval Letter Saved</div>
-                                                                            <div class="col-sm-7">
-                                                                                <select class="form-control" ng-model="Approval.IsApprovalLetterSaved">
+                                                                            <div class="col-sm-6"><h5>Approval Letter Saved</h5></div>
+                                                                            <div class="col-sm-5">
+                                                                                <select class="form-control" ng-model="SsCase.ApprovalChecklist.IsApprovalLetterSaved">
                                                                                     <option value="Y">Yes</option>
                                                                                     <option value="N">No</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <div class="col-sm-4">Confirm Occupancy</div>
-                                                                            <div class="col-sm-7">
-                                                                                <select class="form-control" ng-model="Approval.ConfirmOccupancy">
+                                                                            <div class="col-sm-6"><h5>Confirm Occupancy</h5></div>
+                                                                            <div class="col-sm-5">
+                                                                                <select class="form-control" ng-model="SsCase.ApprovalChecklist.ConfirmOccupancy">
                                                                                     <option value="Vacant">Vacant</option>
                                                                                     <option value="Seller">Seller Occupied</option>
                                                                                     <option value="Tenant">Tenant Occupied</option>
@@ -269,9 +270,36 @@
                                                                         </div>
 
                                                                         <hr />
-                                                                        <button type="button" class="btn btn-primary pull-right">Save </button>
+                                                                        <div class="pull-right">
+                                                                            <button type="button" class="btn btn-danger" ng-click="approvalCancl()">Cancel </button>
+                                                                            &nbsp;
+                                                                            <button type="button" class="btn btn-primary" ng-click="approvalSucc()">Save </button>
+
+                                                                        </div>
                                                                     </div>
                                                                 </div>
+                                                                <%--
+                                                                <div id="SS_Valuation_Popup" dx-popup="{  
+                                                                        height: 400,
+                                                                        width: 600, 
+                                                                        title: 'Valuation CheckList',
+                                                                        dragEnabled: true,
+                                                                        showCloseButton, false,
+                                                                        shading: true,
+                                                                        bindingOptions:{ visible: 'Valuation_popupVisible' }
+                                                                }">
+                                                                    <div data-options="dxTemplate:{ name: 'content' }">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-6">Type of Valuation</div>
+                                                                            <div class="col-sm-5">
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div> --%>
+
+
                                                             </div>
                                                         </dx:SplitterContentControl>
                                                     </ContentCollection>
@@ -475,7 +503,8 @@
                 });
         }
 
-        function ssToggleApprovalPopup() {
+        function ssToggleApprovalPopup(succ, cancl) {
+            angular.element(document.getElementById('ShortSaleCtrl')).scope().regApproval(succ, cancl);
             angular.element(document.getElementById('ShortSaleCtrl')).scope().toggleApprovalPopup();
         }
 
@@ -748,8 +777,18 @@
 
 
             /* approval popup */
-            $scope.Approval = {};
+            $scope.SsCaseApprovalChecklist = {};
             $scope.Approval_popupVisible = false;
+            $scope.approvalSucc = function() {
+                
+            };
+            $scope.approvalCancl = function() {
+                
+            };
+            $scope.regApproval = function (succ, cancl) {
+                if (!$scope.approvalSucc) $scope.approvalSucc = succ;
+                if (!$scope.approvalCancl) $scope.approvalCancl = cancl;
+            }
             $scope.toggleApprovalPopup = function () {
                 $scope.Approval_popupVisible = !$scope.Approval_popupVisible;
             }
