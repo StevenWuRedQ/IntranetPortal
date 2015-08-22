@@ -227,6 +227,38 @@
                         </dx:GridViewDataDateColumn>
                         <dx:GridViewDataDateColumn FieldName="LastUpdated" PropertiesDateEdit-DisplayFormatString="g">
                         </dx:GridViewDataDateColumn>
+                        
+                        <dx:GridViewDataColumn FieldName="DateEntered" Visible="false">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="Owner" Visible="false">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="AssignedTo" Visible="false">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="Subject" Visible="false">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="Zip" Visible="false">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="RE" Visible="false">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="Reference311Number" Visible="false">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="Category" Visible="false">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="Disposition" Visible="false">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="DispositionDetails" Visible="false">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="Comments" Visible="false">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="Priority" Visible="false">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="BIN" Visible="false">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="DOBViolation" Visible="false">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="ECBViolation" Visible="false">
+                        </dx:GridViewDataColumn>
+
                         <dx:GridViewDataColumn FieldName="Status">
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn Width="50px" CellStyle-VerticalAlign="Middle">

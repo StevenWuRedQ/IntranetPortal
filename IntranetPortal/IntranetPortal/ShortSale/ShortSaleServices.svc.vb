@@ -16,6 +16,7 @@ Public Class ShortSaleServices
     '     and include the following line in the operation body:
     '         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml"
 #Region "ShortSale Case"
+
     <OperationContract()>
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetCase(caseId As Integer) As Channels.Message
@@ -35,6 +36,7 @@ Public Class ShortSaleServices
 
         Return ssCase.ToJson
     End Function
+
     <OperationContract()>
    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetCaseByBBLE(bble As String) As Channels.Message
@@ -62,6 +64,30 @@ Public Class ShortSaleServices
     End Function
 
 #End Region
+
+#Region "Load Home Breakdown"
+
+    <OperationContract()>
+    <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
+    Public Function LoadHomeBreakData(bble As String) As Channels.Message
+        Dim homebreak = PropertyBaseInfo.GetInstance(bble).PropFloors.ToJson
+        Return homebreak
+    End Function
+
+
+    <OperationContract()>
+    <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
+    Public Function SaveBreakData(jsonData As String, bble As String) As Channels.Message
+        Dim propInfo = PropertyBaseInfo.GetInstance(bble)
+        propInfo.PropFloors = JsonConvert.DeserializeObject(Of PropertyFloor())(jsonData)
+        propInfo.Save()
+        Return propInfo.PropFloors.ToJson
+    End Function
+
+#End Region
+
+
+
 
 #Region "Page Data Service"
 

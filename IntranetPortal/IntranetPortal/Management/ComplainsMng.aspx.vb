@@ -107,7 +107,7 @@
     End Sub
 
     Protected Sub gdComplainsResult_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
-        BindResult()
+        'BindResult()
     End Sub
 
     Protected Sub popupComplaintHistory_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
@@ -120,23 +120,24 @@
 
     End Sub
 
-    Protected Sub gdComplainsResult_DataBound(sender As Object, e As EventArgs)
-
-    End Sub
-
     Protected Sub gdComplainsResult_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs)
+        If e.RowType = DevExpress.Web.ASPxGridView.GridViewRowType.Data Then
+            Dim dtEntered = CDate(e.GetValue("DateEntered"))
 
-        Dim dtEntered = CDate(e.GetValue("DateEntered"))
+            If dtEntered > DateTime.MinValue Then
+                Dim ts = DateTime.Now - dtEntered
 
-        If dtEntered > DateTime.MinValue Then
-            Dim ts = DateTime.Now - dtEntered
+                If ts.Days < 5 Then
+                    If dtEntered > DateTime.MinValue AndAlso Core.WorkingHours.GetWorkingDays(dtEntered, DateTime.Now, "").Days < 3 Then
+                        e.Row.ForeColor = Drawing.Color.Red
+                    End If
 
-            If ts.Days < 5 Then
-                If dtEntered > DateTime.MinValue AndAlso Core.WorkingHours.GetWorkingDays(dtEntered, DateTime.Now, "").Days < 3 Then
-                    e.Row.ForeColor = Drawing.Color.Red
                 End If
+
             End If
+
         End If
+
     End Sub
 
     Protected Sub gdComplainsHistory_DataBinding(sender As Object, e As EventArgs)

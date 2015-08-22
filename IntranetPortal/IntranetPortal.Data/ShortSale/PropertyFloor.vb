@@ -1,19 +1,28 @@
 ﻿
 Public Class PropertyFloor
+
+    Public Property DataStatus As ModelStatus
+
     Public Sub Save()
         Using context As New ShortSaleEntities
-            Dim obj = context.PropertyFloors.Find(BBLE, FloorId)
+            If Not context.PropertyFloors.Any(Function(pf) pf.BBLE = BBLE And pf.FloorId = FloorId) Then
+                If DataStatus = ModelStatus.Deleted Then
+                    Return
+                End If
 
-            If obj Is Nothing Then
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
-                obj = ShortSaleUtility.SaveChangesObj(obj, Me)
+                If DataStatus = ModelStatus.Deleted Then
+                    context.Entry(Me).State = Entity.EntityState.Deleted
+                Else
+                    context.Entry(Me).State = Entity.EntityState.Modified
+                End If
             End If
 
             context.SaveChanges()
 
-            If _evictionOccupants IsNot Nothing Then
+            If _evictionOccupants IsNot Nothing AndAlso Not DataStatus = ModelStatus.Deleted Then
                 For Each occupant In _evictionOccupants
                     If String.IsNullOrEmpty(occupant.BBLE) Then
                         occupant.BBLE = BBLE
