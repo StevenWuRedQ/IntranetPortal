@@ -44,6 +44,7 @@
     <div style="background: url(/images/MyIdealProptery.png) no-repeat center fixed; background-size: 260px, 280px; background-color: #dddddd; width: 100%; height: 100%;">
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
+                <%-- ShortSale List --%>
                 <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="2px">
                     <ContentCollection>
                         <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
@@ -51,6 +52,8 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
+                
+               
                 <dx:SplitterPane Name="contentPanel" ShowCollapseForwardButton="True" PaneStyle-BackColor="#f9f9f9" ScrollBars="None" PaneStyle-Paddings-Padding="0px">
                     <PaneStyle BackColor="#F9F9F9">
                     </PaneStyle>
@@ -66,6 +69,7 @@
                                                 </Pane>
                                             </Styles>
                                             <Panes>
+                                                <%-- ShortSale Panel--%>
                                                 <dx:SplitterPane ShowCollapseBackwardButton="True" Name="ContentPanel" AutoHeight="true">
                                                     <PaneStyle Paddings-Padding="0">
                                                         <Paddings Padding="0px"></Paddings>
@@ -75,7 +79,7 @@
                                                             <div class="shortSaleUI" style="align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
-                                                                <% If Not HiddenTab %>
+                                                                <% If Not HiddenTab Then%>
                                                                 <div class="legal-menu row" style="margin-left: 0px; margin-right: 0px">
                                                                     <ul class="nav-bar nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
                                                                         <li class="active short_sale_head_tab">
@@ -134,8 +138,9 @@
                                                                         </li>
                                                                     </ul>
                                                                 </div>
-                                                                <% End If %>
+                                                                <% End If%>
                                                                 <uc1:SendMail runat="server" ID="SendMail" LogCategory="ShortSale" />
+                                                                
                                                                 <div class="tab-content">
                                                                     <div class="tab-pane active" id="property_info">
                                                                         <uc1:NGShortSaleTab runat="server" ID="NGShortSaleTab" />
@@ -156,10 +161,99 @@
                                                                         <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
                                                                     </div>
                                                                 </div>
+                                                               
+                                                                <div dx-popup="{  
+                                                                        height: 750,
+                                                                        width: 600, 
+                                                                        title: 'Approval CheckList',
+                                                                        dragEnabled: true,
+                                                                        showCloseButton: true,
+                                                                        shading: true,
+                                                                        bindingOptions:{ visible: 'Approval.popupVisible' }
+                                                                }">
+                                                                    <div data-options="dxTemplate:{ name: 'content' }">
+                                                                        <div class="container row">
+                                                                            <div class="col-sm-4">Date Approval Issued</div>
+                                                                            <div class="col-sm-7">
+                                                                                <input type="text" ng-model="Approval.DateIssued" ss-date />
+                                                                            </div>
+                                                                            <div class="col-sm-4">Date Approval Expires</div>
+                                                                            <div class="col-sm-7">
+                                                                                <input type="text" ng-model="Approval.DateExpired" ss-date />
+                                                                            </div>
+                                                                            <div class="col-sm-4">Buyers Name</div>
+                                                                            <div class="col-sm-7">
+                                                                                <input type="text" ng-model="Approval.BuyerName" />
+                                                                            </div>
+                                                                            <div class="col-sm-4">Contract Price</div>
+                                                                            <div class="col-sm-7">
+                                                                                <input type="text" ng-model="Approval.ContractPrice" />
+                                                                            </div>
+                                                                            <div class="col-sm-4">Does Net Match - 1st Lien</div>
+                                                                            <div class="col-sm-7">
+                                                                                <select ng-model="Approval.IsFirstLienMatch">
+                                                                                    <option value="Y">Yes</option>
+                                                                                    <option value="N">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-sm-4">Approved Net - 1st Lien</div>
+                                                                            <div class="col-sm-7">
+                                                                                <input type="text" ng-model="Approval.FirstLien" />
+                                                                            </div>
+                                                                            <div class="col-sm-4">Does Net Match - 2nd Lien</div>
+                                                                            <div class="col-sm-7">
+                                                                                <select ng-model="Approval.IsSecondLienMatch">
+                                                                                    <option value="Y">Yes</option>
+                                                                                    <option value="N">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-sm-4">Approved Net - 2nd Lien</div>
+                                                                            <div class="col-sm-7">
+                                                                                <input type="text" ng-model="Approval.SecondMatch" />
+                                                                            </div>
+                                                                            <div class="col-sm-4">Commission %</div>
+                                                                            <div class="col-sm-7">
+                                                                                <input type="text" ng-model="Approval.CommissionPercentage" />
+                                                                            </div>
+                                                                            <div class="col-sm-4">Commission Amount</div>
+                                                                            <div class="col-sm-7">
+                                                                                <input type="text" ng-model="Approval.CommissionAmount" />
+                                                                            </div>
+                                                                            <div class="col-sm-4">Transfer Tax Amount Correct</div>
+                                                                            <div class="col-sm-7">
+                                                                                <select ng-model="Approval.IsTransferTaxAmount">
+                                                                                    <option value="Y">Yes</option>
+                                                                                    <option value="N">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-sm-4">Approval Letter Saved</div>
+                                                                            <div class="col-sm-7">
+                                                                                <select ng-model="Approval.IsApprovalLetterSaved">
+                                                                                    <option value="Y">Yes</option>
+                                                                                    <option value="N">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-sm-4">Confirm Occupancy</div>
+                                                                            <div class="col-sm-7">
+                                                                                <input type="text" ng-model="Approval.ConfirmOccupancy" />
+                                                                                <select ng-model="Approval.ConfirmOccupancy">
+                                                                                    <option value="Vacant">Vacant</option>
+                                                                                    <option value="Seller">Seller Occupied</option>
+                                                                                    <option value="Tenant">Tenant Occupied</option>
+                                                                                    <option value="Seller_Tenant">Seller + Tenant Occupied</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <hr />
+                                                                        <button type="button" class="btn btn-primary pull-right"></button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </dx:SplitterContentControl>
                                                     </ContentCollection>
                                                 </dx:SplitterPane>
+                                                
+                                                <%-- Log Panel--%>
                                                 <dx:SplitterPane ShowCollapseForwardButton="True" Name="LogPanel" AutoHeight="true">
                                                     <Panes>
                                                         <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9">
@@ -314,21 +408,6 @@
             }
         ALLTeam = <%=GetAllTeam() %>
         function GetShortSaleData(caseId) {
-
-            //debugger;
-            //$.ajax({
-            //    type: "Get",
-            //    url: "ShortSaleServices.svc/GetCase?caseId=" + caseId,                
-            //    contentType: "application/json; charset=utf-8",
-            //    dataType: "json",
-            //    success: OnSuccess,
-            //    failure: function (response) {
-            //        alert("Get ShortSaleData failed" + response);
-            //    },
-            //    error: function (response) {
-            //        alert("Get ShortSaleData error" + response);
-            //    }
-            //});
             NGGetShortSale(caseId);
 
             if (cbpLogs)
@@ -362,18 +441,16 @@
             return angular.element(document.getElementById('ShortSaleCtrl')).scope().SsCase;
         }
 
-        function MoveToConstruction()
-        {
+        function MoveToConstruction() {
             angular.element(document.getElementById('ShortSaleCtrl')).scope().MoveToConstruction(
-                function()
-                {
+                function () {
                     if (typeof gridTrackingClient != "undefined") {
                         alert("Success");
                         gridTrackingClient.Refresh();
                     }
                 });
         }
-        
+
         portalApp = angular.module('PortalApp');
 
         portalApp.controller('ShortSaleCtrl', function ($scope, $http, $element, $parse, ptContactServices, ptCom) {
@@ -640,6 +717,15 @@
             $scope.capitalizeFirstLetter = ptCom.capitalizeFirstLetter;
             $scope.formatName = ptCom.formatName;
             $scope.formatAddr = ptCom.formatAddr;
+
+
+            /* approval popup */
+            $scope.Approval = {};
+            $scope.Approval.popupVisible = false;
+            $scope.toggleApprovalPopup = function () {
+                $scope.Approval.popupVisible = !$scope.Approval.popupVisible;
+            }
+            /* end popup */
         });
 
     </script>

@@ -70,8 +70,15 @@ Public Class ShortSaleServices
     <OperationContract()>
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function LoadHomeBreakData(bble As String) As Channels.Message
-        Dim homebreak = PropertyBaseInfo.GetInstance(bble).PropFloors.ToJson
-        Return homebreak
+        Dim propertyBaseInfo = Data.PropertyBaseInfo.GetInstance(bble)
+        If propertyBaseInfo IsNot Nothing Then
+            Dim homebreak = propertyBaseInfo.PropFloors
+            If homebreak Is Nothing Then
+                Return homebreak.ToJson()
+            End If
+            Return Nothing
+        End If
+        Return Nothing
     End Function
 
 
