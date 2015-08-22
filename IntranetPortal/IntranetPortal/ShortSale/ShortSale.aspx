@@ -52,8 +52,8 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
-                
-               
+
+
                 <dx:SplitterPane Name="contentPanel" ShowCollapseForwardButton="True" PaneStyle-BackColor="#f9f9f9" ScrollBars="None" PaneStyle-Paddings-Padding="0px">
                     <PaneStyle BackColor="#F9F9F9">
                     </PaneStyle>
@@ -140,7 +140,7 @@
                                                                 </div>
                                                                 <% End If%>
                                                                 <uc1:SendMail runat="server" ID="SendMail" LogCategory="ShortSale" />
-                                                                
+
                                                                 <div class="tab-content">
                                                                     <div class="tab-pane active" id="property_info">
                                                                         <uc1:NGShortSaleTab runat="server" ID="NGShortSaleTab" />
@@ -161,7 +161,7 @@
                                                                         <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
                                                                     </div>
                                                                 </div>
-                                                               
+
                                                                 <div dx-popup="{  
                                                                         height: 750,
                                                                         width: 600, 
@@ -169,74 +169,97 @@
                                                                         dragEnabled: true,
                                                                         showCloseButton: true,
                                                                         shading: true,
-                                                                        bindingOptions:{ visible: 'Approval.popupVisible' }
+                                                                        bindingOptions:{ visible: 'Approval_popupVisible' }
                                                                 }">
                                                                     <div data-options="dxTemplate:{ name: 'content' }">
-                                                                        <div class="container row">
+                                                                        <div class="row">
                                                                             <div class="col-sm-4">Date Approval Issued</div>
                                                                             <div class="col-sm-7">
-                                                                                <input type="text" ng-model="Approval.DateIssued" ss-date />
+                                                                                <input class="form-control" type="text" ng-model="Approval.DateIssued" ss-date />
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="row">
                                                                             <div class="col-sm-4">Date Approval Expires</div>
                                                                             <div class="col-sm-7">
-                                                                                <input type="text" ng-model="Approval.DateExpired" ss-date />
+                                                                                <input class="form-control" type="text" ng-model="Approval.DateExpired" ss-date />
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="row">
                                                                             <div class="col-sm-4">Buyers Name</div>
                                                                             <div class="col-sm-7">
-                                                                                <input type="text" ng-model="Approval.BuyerName" />
+                                                                                <input class="form-control" type="text" ng-model="Approval.BuyerName" />
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="row">
                                                                             <div class="col-sm-4">Contract Price</div>
                                                                             <div class="col-sm-7">
-                                                                                <input type="text" ng-model="Approval.ContractPrice" />
+                                                                                <input class="form-control" type="text" ng-model="Approval.ContractPrice" money-mask/>
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="row">
                                                                             <div class="col-sm-4">Does Net Match - 1st Lien</div>
                                                                             <div class="col-sm-7">
-                                                                                <select ng-model="Approval.IsFirstLienMatch">
+                                                                                <select class="form-control" ng-model="Approval.IsFirstLienMatch">
                                                                                     <option value="Y">Yes</option>
                                                                                     <option value="N">No</option>
                                                                                 </select>
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="row">
                                                                             <div class="col-sm-4">Approved Net - 1st Lien</div>
                                                                             <div class="col-sm-7">
-                                                                                <input type="text" ng-model="Approval.FirstLien" />
+                                                                                <input class="form-control" type="text" ng-model="Approval.FirstLien" money-mask/>
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="row">
                                                                             <div class="col-sm-4">Does Net Match - 2nd Lien</div>
                                                                             <div class="col-sm-7">
-                                                                                <select ng-model="Approval.IsSecondLienMatch">
+                                                                                <select class="form-control" ng-model="Approval.IsSecondLienMatch">
                                                                                     <option value="Y">Yes</option>
                                                                                     <option value="N">No</option>
                                                                                 </select>
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="row">
                                                                             <div class="col-sm-4">Approved Net - 2nd Lien</div>
                                                                             <div class="col-sm-7">
-                                                                                <input type="text" ng-model="Approval.SecondMatch" />
+                                                                                <input class="form-control" type="text" ng-model="Approval.SecondLien" money-mask/>
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="row">
                                                                             <div class="col-sm-4">Commission %</div>
                                                                             <div class="col-sm-7">
-                                                                                <input type="text" ng-model="Approval.CommissionPercentage" />
+                                                                                <input class="form-control" type="text" ng-model="Approval.CommissionPercentage" percent-mask/>
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="row">
                                                                             <div class="col-sm-4">Commission Amount</div>
                                                                             <div class="col-sm-7">
-                                                                                <input type="text" ng-model="Approval.CommissionAmount" />
+                                                                                <input class="form-control" type="text" ng-model="Approval.CommissionAmount" money-mask/>
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="row">
                                                                             <div class="col-sm-4">Transfer Tax Amount Correct</div>
                                                                             <div class="col-sm-7">
-                                                                                <select ng-model="Approval.IsTransferTaxAmount">
+                                                                                <select class="form-control" ng-model="Approval.IsTransferTaxAmount">
                                                                                     <option value="Y">Yes</option>
                                                                                     <option value="N">No</option>
                                                                                 </select>
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="row">
                                                                             <div class="col-sm-4">Approval Letter Saved</div>
                                                                             <div class="col-sm-7">
-                                                                                <select ng-model="Approval.IsApprovalLetterSaved">
+                                                                                <select class="form-control" ng-model="Approval.IsApprovalLetterSaved">
                                                                                     <option value="Y">Yes</option>
                                                                                     <option value="N">No</option>
                                                                                 </select>
                                                                             </div>
+                                                                        </div>
+                                                                        <div class="row">
                                                                             <div class="col-sm-4">Confirm Occupancy</div>
                                                                             <div class="col-sm-7">
-                                                                                <input type="text" ng-model="Approval.ConfirmOccupancy" />
-                                                                                <select ng-model="Approval.ConfirmOccupancy">
+                                                                                <select class="form-control" ng-model="Approval.ConfirmOccupancy">
                                                                                     <option value="Vacant">Vacant</option>
                                                                                     <option value="Seller">Seller Occupied</option>
                                                                                     <option value="Tenant">Tenant Occupied</option>
@@ -244,15 +267,16 @@
                                                                                 </select>
                                                                             </div>
                                                                         </div>
+
                                                                         <hr />
-                                                                        <button type="button" class="btn btn-primary pull-right"></button>
+                                                                        <button type="button" class="btn btn-primary pull-right">Save </button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </dx:SplitterContentControl>
                                                     </ContentCollection>
                                                 </dx:SplitterPane>
-                                                
+
                                                 <%-- Log Panel--%>
                                                 <dx:SplitterPane ShowCollapseForwardButton="True" Name="LogPanel" AutoHeight="true">
                                                     <Panes>
@@ -449,6 +473,10 @@
                         gridTrackingClient.Refresh();
                     }
                 });
+        }
+
+        function ssToggleApprovalPopup() {
+            angular.element(document.getElementById('ShortSaleCtrl')).scope().toggleApprovalPopup();
         }
 
         portalApp = angular.module('PortalApp');
@@ -721,9 +749,9 @@
 
             /* approval popup */
             $scope.Approval = {};
-            $scope.Approval.popupVisible = false;
+            $scope.Approval_popupVisible = false;
             $scope.toggleApprovalPopup = function () {
-                $scope.Approval.popupVisible = !$scope.Approval.popupVisible;
+                $scope.Approval_popupVisible = !$scope.Approval_popupVisible;
             }
             /* end popup */
         });

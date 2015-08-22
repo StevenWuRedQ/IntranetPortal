@@ -57,7 +57,7 @@ portalApp.directive('ptInitModel', function () {
         link: function (scope, el, attrs) {
             scope.$watch(attrs.ptInitModel, function (newVal) {
                 if (!scope.$eval(attrs.ngModel) && newVal) {
-                    if(typeof newVal == 'string') newVal = newVal.replace(/'/g, "\\'");
+                    if (typeof newVal == 'string') newVal = newVal.replace(/'/g, "\\'");
                     scope.$eval(attrs.ngModel + "='" + newVal + "'");
                 }
             });
@@ -105,6 +105,22 @@ portalApp.directive('numberMask', function () {
                 $(el).formatCurrency({ symbol: "" });
             });
             $(el).on('blur', function () { $(this).formatCurrency({ symbol: "" }); });
+            $(el).on('focus', function () { $(this).toNumber() });
+
+        },
+    };
+});
+
+portalApp.directive('percentMask', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, el, attrs) {
+
+            scope.$watch(attrs.ngModel, function () {
+                if ($(el).is(":focus")) return;
+                $(el).formatCurrency({ symbol: "%", positiveFormat: '%n%s' });
+            });
+            $(el).on('blur', function () { $(this).formatCurrency({ symbol: "%", positiveFormat: '%n%s' }); });
             $(el).on('focus', function () { $(this).toNumber() });
 
         },
