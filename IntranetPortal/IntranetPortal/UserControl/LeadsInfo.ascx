@@ -269,7 +269,7 @@
             __doPostBack(s.name, '');
         }
     }
-    
+
     var currOwner = "";
     function AddBestPhoneNum(bble, ownerName, ulClient, addButton) {
         //var ul = document.getElementById(ulClient);
@@ -334,6 +334,53 @@
 
         btn.onclick();
     }
+
+    function OnLeadsInfoEndCallBack(s, e) {
+        if (leadsInfoBBLE) reloadHomeBreakCtrl(leadsInfoBBLE);
+    }
+
+    function reloadHomeBreakCtrl(bble) {
+        var homeBreakDownCtrl = document.getElementById('homeBreakDownCtrl');
+        var target = angular.element(homeBreakDownCtrl);
+        var $injector = target.injector();
+
+        $injector.invoke(function ($compile, ptCom, ptHomeBreakDownService) {
+            var compiled = $compile(homeBreakDownCtrl.innerHTML);
+            var $scope = target.scope();
+            /* think as setup controller */
+            $scope.PropFloors = [];
+            $scope.BBLE = bble;
+            $scope.init = function (bble) {
+                ptHomeBreakDownService.loadByBBLE(bble, function (res) {
+                    $scope.PropFloors = res?res: [];
+                });
+            }
+
+            $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
+            $scope.arrayRemove = ptCom.arrayRemove;
+
+            $scope.setPopupVisible = function (model, bVal) {
+                model.popupVisible = bVal;
+            }
+
+            $scope.addNewUnit = function () {
+                $scope.ensurePush('PropFloors');
+                $scope.setPopupVisible($scope.PropFloors[$scope.PropFloors.length - 1], true);
+            }
+            $scope.saveHomeBreakDown = function () {
+                ptHomeBreakDownService.save($scope.BBLE, $scope.PropFloors, function(res) {
+                    console.log(res);
+                    alert('Save Successfullly!');
+                })
+            }
+
+            /* end setup*/
+            var cElem = compiled($scope);
+            $scope.$digest();
+            target.html(cElem);
+        });
+        target.scope().init(bble);
+    }
 </script>
 <script src="/Scripts/stevenjs.js"></script>
 <style type="text/css">
@@ -388,7 +435,7 @@
                                     <asp:HiddenField ID="hfBBLE" runat="server" />
                                     <!-- Nav tabs -->
                                     <% If Not HiddenTab Then%>
-                                    
+
                                     <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 16px; color: white">
                                         <li class="active short_sale_head_tab">
                                             <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
@@ -429,7 +476,7 @@
                                             <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLeadInfo()"></i>
                                         </li>
                                     </ul>
-                                    <% End If %>
+                                    <% End If%>
                                     <div class="tab-content">
                                         <uc1:PropertyInfo runat="server" ID="PropertyInfo" />
                                         <div class="tab-pane clearfix" id="home_owner">
@@ -454,18 +501,15 @@
                                                                         </td>
                                                                     </tr>
                                                                 </table>
-                                                               <div>
-
-                                                               </div>
+                                                                <div>
+                                                                </div>
                                                             </div>
                                                         </dx:PanelContent>
                                                     </PanelCollection>
                                                 </dx:ASPxCallbackPanel>
                                             </div>
-                                            <div style="position:fixed;right: 0;bottom: 5px;">
-                                                <iframe src="/AutoDialer/Dialer.aspx" id="AutoDialer" style="width: 339px;height: 406px;border: none;display:none">
-
-                                                </iframe>
+                                            <div style="position: fixed; right: 0; bottom: 5px;">
+                                                <iframe src="/AutoDialer/Dialer.aspx" id="AutoDialer" style="width: 339px; height: 406px; border: none; display: none"></iframe>
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="documents">
@@ -551,7 +595,7 @@
                                                 <div class="tooltip-inner" style="background-color: #ff400d;">Show Property Info</div>
                                             </div>
                                             <% End If%>
-                                          
+
 
 
                                             <i class="fa fa-calendar-o sale_head_button sale_head_button_left tooltip-examples" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
@@ -597,7 +641,7 @@
                                                 <tr>
                                                     <td>
                                                         <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="true"></dx:ASPxCalendar>
-                                                   <%--     <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" 
+                                                        <%--     <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" 
                                                             TimeSectionProperties-Visible="True" CssClass="edit_drop">
                                                             <TimeSectionProperties Visible="True"></TimeSectionProperties>
                                                             <ClientSideEvents Init="function(s,e){ s.SetDate(new Date());}" />
@@ -625,14 +669,14 @@
                                         </dx:PopupControlContentControl>
                                     </ContentCollection>
                                 </dx:ASPxPopupControl>
-                                
+
                             </dx:SplitterContentControl>
                         </ContentCollection>
                     </dx:SplitterPane>
                 </Panes>
                 <ClientSideEvents PaneCollapsed="function(s,e){}" />
             </dx:ASPxSplitter>
-            
+
             <dx:ASPxPopupControl ClientInstanceName="aspxPopupAddPhoneNum" Width="320px" Height="80px" ID="ASPxPopupControl2"
                 HeaderText="Add Phone Number" ShowHeader="false"
                 runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
@@ -740,7 +784,7 @@
 
         </dx:PanelContent>
     </PanelCollection>
-    <ClientSideEvents EndCallback="OnEndCallback"></ClientSideEvents>
+    <ClientSideEvents EndCallback="OnLeadsInfoEndCallBack"></ClientSideEvents>
     <Border BorderStyle="None"></Border>
 </dx:ASPxCallbackPanel>
 <%--<dx:ASPxPopupControl runat="server" ID="PhoneCommentPopup" ClientInstanceName="PhoneCommentPopUpClient"

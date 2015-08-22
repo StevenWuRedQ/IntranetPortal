@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PropertyInfo.ascx.vb" Inherits="IntranetPortal.PropertyInfo" %>
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
-<%@ Register Src="~/ShortSale/ShortSaleInLeadsView.ascx" TagPrefix="uc1" TagName="ShortSaleInLeadsView" %>
+<%@ Register Src="~/ShortSale/NGShortSaleInLeadsView.ascx" TagPrefix="uc1" TagName="NGShortSaleInLeadsView" %>
+
+<%--@ Register Src="~/ShortSale/ShortSaleInLeadsView.ascx" TagPrefix="uc1" TagName="ShortSaleInLeadsView" --%>
 
 
 <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
@@ -213,8 +215,7 @@
         <%--property form--%>
         <div style="margin: 20px" class="clearfix">
             <div class="form_head">General</div>
-            <div class="form_head">{{1+1}}</div>
-            <button type="button" onclick="reloadLead()">Reload</button>
+
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item" style="width: 66%">
                     <label class="ss_form_input_title">address</label>
@@ -228,12 +229,7 @@
                     <label class="ss_form_input_title">BBLE</label>
                     <input class="ss_form_input font_black" id="BBLEId" value="<%= If(LeadsInfoData.IsApartment, LeadsInfoData.BuildingBBLE, LeadsInfoData.BBLE)%>">
                 </li>
-                <%-- <% If LeadsInfoData isnot Nothing andalso LeadsInfoData.IsApartment Then%>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Unit Number</label>
-                    <input class="ss_form_input" value="<%= LeadsInfoData.UnitNum %>">
-                </li>
-                <%End If%>--%>
+
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Neighborhood</label>
@@ -243,10 +239,7 @@
                     <label class="ss_form_input_title">Block | Lot</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.Block & "| " & LeadsInfoData.Lot %>">
                 </li>
-                <%--  <li class="ss_form_item">
-                    <label class="ss_form_input_title">Lot</label>
-                    <input class="ss_form_input" value="<%= LeadsInfoData.Lot %>">
-                </li>--%>
+
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">NYC SQFT</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.NYCSqft %>">
@@ -299,9 +292,10 @@
             </ul>
         </div>
 
-        <div style="margin: 20px;" class="clearfix" runat="server" id="divShortSaleData" visible="false">         
-            <uc1:ShortSaleInLeadsView runat="server" id="ShortSaleInLeadsView" Visible="false" />
-        </div>
+        <uc1:NGShortSaleInLeadsView runat="server" ID="NGShortSaleInLeadsView" />
+        <%--  <div style="margin: 20px;" class="clearfix" runat="server" id="divShortSaleData" visible="false">
+            <uc1:ShortSaleInLeadsView runat="server" ID="ShortSaleInLeadsView" Visible="false" />
+     
 
         <%-------end-----%>
         <dx:ASPxCallbackPanel runat="server" ID="callPanelReferrel" ClientInstanceName="callPanelClientReferrel" OnCallback="callPanelReferrel_Callback">

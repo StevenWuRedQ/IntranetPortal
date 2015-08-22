@@ -46,6 +46,14 @@ Public Class PropertyFloor
         End Using
     End Sub
 
+    Public Shared Function Instance(bble As String, floorId As Integer) As PropertyFloor
+        Using context As New ShortSaleEntities
+            Return context.PropertyFloors.Find(bble, floorId)
+
+        End Using
+    End Function
+
+
     Public Shared Sub Delete(bble As String, floorId As Integer)
         Using context As New ShortSaleEntities
             Dim obj = context.PropertyFloors.Find(bble, floorId)

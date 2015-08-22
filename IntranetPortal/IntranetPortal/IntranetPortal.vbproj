@@ -1534,6 +1534,13 @@
       <DependentUpon>NGShortSaleDealInfoTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ShortSale\NGShortSaleInLeadsView.ascx.designer.vb">
+      <DependentUpon>NGShortSaleInLeadsView.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\NGShortSaleInLeadsView.ascx.vb">
+      <DependentUpon>NGShortSaleInLeadsView.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ShortSale\NGShortSaleMortgageTab.ascx.designer.vb">
       <DependentUpon>NGShortSaleMortgageTab.ascx</DependentUpon>
     </Compile>
@@ -3484,6 +3491,7 @@
     <Content Include="Services\Documents.svc" />
     <Content Include="Services\TeamService.svc" />
     <Content Include="ShortSale\NGShortSaleDealInfoTab.ascx" />
+    <Content Include="ShortSale\NGShortSaleInLeadsView.ascx" />
     <Content Include="ShortSale\NGShortSaleMortgageTab.ascx" />
     <Content Include="ShortSale\SelectPartyUC.ascx" />
     <Content Include="ShortSale\NGShortSaleHomewonerTab.ascx" />

@@ -4,23 +4,21 @@
 <%@ Register Src="~/UserControl/LeadsInfo.ascx" TagPrefix="uc1" TagName="LeadsInfo" %>
 <%@ Register Src="~/UserControl/DoorKnockMap.ascx" TagPrefix="uc1" TagName="DoorKnockMap" %>
 <%@ Register Src="~/UserControl/LeadsStatisticSummary.ascx" TagPrefix="uc1" TagName="LeadsStatisticSummary" %>
-<asp:Content ContentPlaceHolderID="head" runat="server">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
-</asp:Content>
+
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-     <style>
+    <style>
         #__asptrace {
             position: absolute;
             height: 500px;
             width: 1000px;
             top: 10px;
-            right:10px;
+            right: 10px;
             overflow: scroll;
             background-color: white;
         }
     </style>
-    <div style="background: url(/images/Background2.png) no-repeat center fixed; background-size: auto, auto; background-color: #dddddd; width: 100%; height: 100%;" id="LeadCotrl" ng-controller="LeadCtrl">
-      
+    <div style="background: url(/images/Background2.png) no-repeat center fixed; background-size: auto, auto; background-color: #dddddd; width: 100%; height: 100%;" id="LeadCotrl">
+
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientVisible="false" ClientInstanceName="splitter" Orientation="Vertical" FullscreenMode="true">
             <Panes>
                 <dx:SplitterPane Name="leadContent">
@@ -58,26 +56,9 @@
                 </dx:SplitterPane>
             </Panes>
         </dx:ASPxSplitter>
-    </div>    
+    </div>
+
     <script>
         
-        var portalApp = angular.module('PortalApp');
-
-        portalApp.controller('LeadCtrl', function ($scope) {
-
-        });
-        function reloadLead()
-        {
-            var leadctol = document.getElementById('LeadCtrl');
-            var $injector = angular.element(leadctol).injector();
-            $injector.invoke(function ($compile) {
-                /* if there any javacript function not found use leadctol.innerHTML instand */
-                var compiled = $compile(leadctol.innerHTML);//.replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gm, ''));
-                var cElem = compiled(angular.element(leadctol).scope())
-                angular.element(leadctol).scope().$digest();
-                $(leadctol).html(cElem);
-            });
-            
-        }
     </script>
 </asp:Content>

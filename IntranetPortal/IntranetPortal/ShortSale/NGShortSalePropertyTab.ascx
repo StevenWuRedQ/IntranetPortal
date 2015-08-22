@@ -9,9 +9,9 @@
                 <label class="ss_form_input_title">Block/Lot</label>
                 <input class="ss_form_input" readonly="readonly" ng-value="SsCase.LeadsInfo.Block ?SsCase.LeadsInfo.Block +'/'+SsCase.LeadsInfo.Lot:''">
             </li>
-             <li class="ss_form_item" style="display: none">
+            <li class="ss_form_item" style="display: none">
                 <label class="ss_form_input_title">BBLE</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.BBLE" >
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.BBLE">
             </li>
             <%--
             <li class="ss_form_item" style="visibility: hidden">
@@ -27,7 +27,7 @@
                 <label class="ss_form_input_title">Address</label>
                 <input class="ss_form_input" readonly="readonly" ng-model="SsCase.LeadsInfo.PropertyAddress" style="width: 93.5%;">
             </li>
-           
+
             <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">Street Number</label>
                 <input class="ss_form_input" ng-model="SsCase.LeadsInfo.Number" readonly="readonly">
@@ -68,7 +68,7 @@
             <th></th>
         </tr>
         <tr class="icon_btn" ng-repeat="floor in SsCase.PropertyInfo.PropFloors" id="floor{{$index}}">
-            <td>{{$index+1}}</td ng-click="setVisiblePopup(SsCase.PropertyInfo.PropFloors[$index], true)">
+            <td ng-click="setVisiblePopup(SsCase.PropertyInfo.PropFloors[$index], true)">{{$index+1}}</td>
             <td class="col-sm-3" ng-click="setVisiblePopup(SsCase.PropertyInfo.PropFloors[$index], true)">
                 <div class="content">
                     <div class="row" style="margin: 0px">
@@ -109,6 +109,7 @@
                             <hr />
                         </div>
                     </div>
+                </div>
             </td>
             <td class="col-sm-4" ng-click="setVisiblePopup(SsCase.PropertyInfo.PropFloors[$index], true)">
                 <div class="content">
@@ -142,89 +143,89 @@
                                 bindingOptions:{ visible: 'SsCase.PropertyInfo.PropFloors['+$index+'].visiblePopup' },
                                 scrolling: {mode: 'virtual' },
                             }">
-                    <div  data-options="dxTemplate:{ name: 'content' }">
-                       
-                            <form style="height:88%;padding: 0px 5px;overflow-y:auto; overflow-x:hidden">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label>Description</label>
-                                        <input class="form-control" ng-model="floor.Description" />
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Bedroom</label>
-                                        <input class="form-control" ng-model="floor.Bedroom" />
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Bathroom</label>
-                                        <input class="form-control" ng-model="floor.Bathroom" />
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Livingroom</label>
-                                        <input class="form-control" ng-model="floor.Livingroom" />
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Kitchen</label>
-                                        <input class="form-control" ng-model="floor.Kitchen" />
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Diningroom</label>
-                                        <input class="form-control" ng-model="floor.Diningroom" />
-                                    </div>
+                    <div data-options="dxTemplate:{ name: 'content' }">
+
+                        <form style="height: 88%; padding: 0px 5px; overflow-y: auto; overflow-x: hidden">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Description</label>
+                                    <input class="form-control" ng-model="floor.Description" />
                                 </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <label>Occupancy&nbsp<i class="fa fa-plus-circle icon_btn tooltip-examples text-primary" ng-show="floor.Occupied  == 'Seller' || floor.Occupied  == 'Tenants (Coop)' || floor.Occupied == 'Tenants (Non-Coop)'" ng-click="NGAddArraryItem(SsCase.PropertyInfo.PropFloors[$index].Occupants,'SsCase.PropertyInfo.PropFloors['+$index+'].Occupants')" title="Add"></i></label>
-                                        <select class="form-control" ng-model="floor.Occupied">
-                                            <option>Vacant</option>
-                                            <option>Seller</option>
-                                            <option>Tenants (Coop)</option>
-                                            <option>Tenants (Non-Coop)</option>
-                                        </select>
-                                    </div>
-                                    <div ng-repeat="occupant in floor.Occupants" ng-show="floor.Occupied  == 'Seller' || floor.Occupied  == 'Tenants (Coop)' || floor.Occupied == 'Tenants (Non-Coop)'">
-                                        <div class="col-sm-6">
-                                            <label>Name</label>
-                                            <input class="form-control" ng-model="occupant.Name" />
-                                        </div>
-                                        <div class="col-sm-5">
-                                            <label>Phone</label>
-                                            <input class="form-control" ng-model="occupant.Phone" />
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <label>&nbsp</label>
-                                            <div class="text-right">
-                                                <i class="fa fa-times icon_btn tooltip-examples text-danger" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.PropFloors[$parent.$index].Occupants, $index)" title="Delete"></i>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-sm-6">
+                                    <label>Bedroom</label>
+                                    <input class="form-control" ng-model="floor.Bedroom" />
                                 </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label>Access</label>
-                                        <input class="form-control" ng-model="floor.Access" />
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>Lockbox</label>
-                                        <input class="form-control" ng-model="floor.LockBox" />
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>LockupDate</label>
-                                        <input class="form-control" ss-date ng-model="floor.LockupDate" />
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>LockedBy</label>
-                                        <input class="form-control" ng-model="floor.LockedBy" />
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>LastChecked</label>
-                                        <input class="form-control" ss-date ng-model="floor.LastChecked" />
-                                    </div>
+                                <div class="col-sm-6">
+                                    <label>Bathroom</label>
+                                    <input class="form-control" ng-model="floor.Bathroom" />
                                 </div>
-                            </form>
+                                <div class="col-sm-6">
+                                    <label>Livingroom</label>
+                                    <input class="form-control" ng-model="floor.Livingroom" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Kitchen</label>
+                                    <input class="form-control" ng-model="floor.Kitchen" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Diningroom</label>
+                                    <input class="form-control" ng-model="floor.Diningroom" />
+                                </div>
+                            </div>
                             <hr />
-                            <button class="btn btn-primary pull-right" ng-click="setVisiblePopup(SsCase.PropertyInfo.PropFloors[$index], false)">Save</button>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Occupancy&nbsp<i class="fa fa-plus-circle icon_btn tooltip-examples text-primary" ng-show="floor.Occupied  == 'Seller' || floor.Occupied  == 'Tenants (Coop)' || floor.Occupied == 'Tenants (Non-Coop)'" ng-click="NGAddArraryItem(SsCase.PropertyInfo.PropFloors[$index].Occupants,'SsCase.PropertyInfo.PropFloors['+$index+'].Occupants')" title="Add"></i></label>
+                                    <select class="form-control" ng-model="floor.Occupied">
+                                        <option>Vacant</option>
+                                        <option>Seller</option>
+                                        <option>Tenants (Coop)</option>
+                                        <option>Tenants (Non-Coop)</option>
+                                    </select>
+                                </div>
+                                <div ng-repeat="occupant in floor.Occupants" ng-show="floor.Occupied  == 'Seller' || floor.Occupied  == 'Tenants (Coop)' || floor.Occupied == 'Tenants (Non-Coop)'">
+                                    <div class="col-sm-6">
+                                        <label>Name</label>
+                                        <input class="form-control" ng-model="occupant.Name" />
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <label>Phone</label>
+                                        <input class="form-control" ng-model="occupant.Phone" />
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label>&nbsp</label>
+                                        <div class="text-right">
+                                            <i class="fa fa-times icon_btn tooltip-examples text-danger" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.PropFloors[$parent.$index].Occupants, $index)" title="Delete"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Access</label>
+                                    <input class="form-control" ng-model="floor.Access" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Lockbox</label>
+                                    <input class="form-control" ng-model="floor.LockBox" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>LockupDate</label>
+                                    <input class="form-control" ss-date ng-model="floor.LockupDate" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>LockedBy</label>
+                                    <input class="form-control" ng-model="floor.LockedBy" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>LastChecked</label>
+                                    <input class="form-control" ss-date ng-model="floor.LastChecked" />
+                                </div>
+                            </div>
+                        </form>
+                        <hr />
+                        <button class="btn btn-primary pull-right" ng-click="setVisiblePopup(SsCase.PropertyInfo.PropFloors[$index], false)">Save</button>
                     </div>
                 </div>
             </td>

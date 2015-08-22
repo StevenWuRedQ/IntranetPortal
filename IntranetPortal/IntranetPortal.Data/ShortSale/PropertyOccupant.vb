@@ -5,6 +5,12 @@
         End Using
     End Function
 
+    Public Shared Function Instance(occupantId As Integer) As PropertyOccupant
+        Using context As New ShortSaleEntities
+            Return context.PropertyOccupants.Find(occupantId)
+        End Using
+    End Function
+
     Public Shared Function GetOccupantByBBLE(bble As String, floorId As Integer) As PropertyOccupant()
         Using ctx As New ShortSaleEntities
             Return ctx.PropertyOccupants.Where(Function(pc) pc.BBLE = bble AndAlso pc.FloorId = floorId).ToArray

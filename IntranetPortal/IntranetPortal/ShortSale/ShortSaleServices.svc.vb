@@ -68,7 +68,7 @@ Public Class ShortSaleServices
 #Region "Load Home Breakdown"
 
     <OperationContract()>
-    <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
+    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function LoadHomeBreakData(bble As String) As Channels.Message
         Dim homebreak = PropertyBaseInfo.GetInstance(bble).PropFloors.ToJson
         Return homebreak

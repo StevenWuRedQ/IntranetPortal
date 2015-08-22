@@ -1,4 +1,5 @@
-﻿Imports IntranetPortal.Data
+﻿Imports DevExpress.Web.ASPxPopupControl
+Imports IntranetPortal.Data
 Imports DevExpress.Web.ASPxGridView
 
 Public Class ShortSaleInLeadsView
@@ -37,9 +38,7 @@ Public Class ShortSaleInLeadsView
     Protected Sub home_breakdown_gridview_RowInserting(sender As Object, e As DevExpress.Web.Data.ASPxDataInsertingEventArgs)
         Dim values = e.NewValues
         save_floor(values, True)
-
         finishEdit(sender, e)
-
 
     End Sub
     Sub finishEdit(ByRef sender As Object, e As System.ComponentModel.CancelEventArgs)
@@ -103,4 +102,57 @@ Public Class ShortSaleInLeadsView
         End If
     End Function
 
+    Protected Sub ASPxPopupControl2_OnWindowCallback(ByVal source As Object, ByVal e As PopupWindowCallbackArgs)
+
+        Dim bble = e.Parameter.Split("|")(0)
+        Dim floorId = e.Parameter.Split("|")(1)
+
+        Dim floorData = PropertyFloor.Instance(bble, floorId)
+        txtDescription.Value = floorData.Description
+
+        'ASPxPopupControl2.DataSource = floorData
+        'ASPxPopupControl2.DataBind()
+    End Sub
+
+    Protected Sub gridOccupants_RowInserting(sender As Object, e As DevExpress.Web.Data.ASPxDataInsertingEventArgs) Handles gridOccupants.RowInserting
+        Dim info As New PropertyOccupant
+        info.BBLE = hfFloorBBLE.Value
+        info.FloorId = hfFloorId.Value
+        info.Name = e.NewValues("Name")
+        info.Phone = e.NewValues("Phone")
+        info.Save()
+
+        e.Cancel = True
+        gridOccupants.CancelEdit()
+
+        gridOccupants.DataBind()
+    End Sub
+
+    Protected Sub gridOccupants_RowUpdating(sender As Object, e As DevExpress.Web.Data.ASPxDataUpdatingEventArgs) Handles gridOccupants.RowUpdating
+        Dim info = PropertyOccupant.Instance(e.Keys(0))
+        info.Name = e.NewValues("Name")
+        info.Phone = e.NewValues("Phone")
+ 
+        info.Save()
+
+        e.Cancel = True
+        gridOccupants.CancelEdit()
+
+        gridOccupants.DataBind()
+    End Sub
+
+    Protected Sub gridOccupants_RowDeleting(sender As Object, e As DevExpress.Web.Data.ASPxDataDeletingEventArgs) Handles gridOccupants.RowDeleting
+        Dim info = PropertyOccupant.Instance(e.Keys(0))
+        info.DataStatus = ModelStatus.Deleted
+        info.Save()
+
+        e.Cancel = True
+        gridOccupants.DataBind()
+    End Sub
+
+    Protected Sub gridOccupants_DataBinding(sender As Object, e As EventArgs) Handles gridOccupants.DataBinding
+        If gridOccupants.DataSource Is Nothing Then
+            gridOccupants.DataSource = PropertyOccupant.GetOccupantByBBLE(hfFloorBBLE.Value, hfFloorId.Value)
+        End If
+    End Sub
 End Class
