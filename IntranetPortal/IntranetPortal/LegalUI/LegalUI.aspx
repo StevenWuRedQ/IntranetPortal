@@ -11,7 +11,7 @@
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
-
+   
     <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/jquery.webui-popover.js"></script>
     <style type="text/css">
@@ -87,7 +87,10 @@
 
     <%--leagal Ui--%>
     <div id="LegalCtrl" ng-controller="LegalCtrl">
-
+        <%--<textarea ng-model="LegalCaseJson">
+        </textarea>
+        <button type="button" ng-click="SaveLegalJson()">GetCase</button>--%>
+         <input type="hidden" id="CaseData" />
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
                 <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
@@ -572,7 +575,7 @@
             </ContentCollection>
         </dx:ASPxPopupControl>
         <!-- end follow up function -->
-        <input type="hidden" id="CaseData" />
+       
         <script type="text/javascript">
             LegalCaseBBLE = null;
             function VendorsClosing(s) {
@@ -804,7 +807,7 @@
                         });
                 }
 
-                ScopeAutoSave(GetLegalData, $scope.SaveLegal,'#LegalTabHead');
+                //ScopeAutoSave(GetLegalData, $scope.SaveLegal,'#LegalTabHead');
 
                 $scope.CompleteResearch = function () {
                     var json = JSON.stringify($scope.LegalCase);
@@ -879,7 +882,7 @@
                         success(function (data, status, headers, config) {
 
                             $scope.LegalCase = $.parseJSON(data.d);
-
+                            
                             $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
                             $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
 
@@ -893,9 +896,12 @@
                                 }
                             }
                             $scope.showSAndCFrom();
-                            ResetCaseDataChange();
+                           
                             LegalCaseBBLE = BBLE;
                             $scope.stopLoading();
+
+                            ResetCaseDataChange();
+                            
                         }).
                         error(function () {
                             $scope.stopLoading();
@@ -974,6 +980,10 @@
                     }
 
                     return false;
+                }
+                $scope.SaveLegalJson =function()
+                {
+                    $scope.LegalCaseJson = JSON.stringify($scope.LegalCase)
                 }
                 $scope.ShowContorl = function (m) {
                     var t = typeof m;

@@ -1,4 +1,6 @@
-﻿Public Class LegalSummaryUI
+﻿Imports IntranetPortal.Data
+
+Public Class LegalSummaryUI
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -8,19 +10,33 @@
         End If
     End Sub
     Sub BindGrid()
-        Dim mCases = IntranetPortal.Data.LegalCase.GetAllCases
+        Dim mCases = LegalCase.GetAllCases
 
+        mCases = FilterByLogIn(mCases)
         gdCases.DataSource = mCases
         gdCases.DataBind()
     End Sub
 
     Sub BindUpCommingFCGrid()
-        Dim mCases = IntranetPortal.Data.LegalCaseReport.GetAllReport.Where(Function(r) r.SaleDate IsNot Nothing).ToList
+        Dim mCases = LegalCaseReport.GetAllReport.Where(Function(r) r.SaleDate IsNot Nothing).ToList
+
+
+        If (Not (User.IsInRole("Admin") Or User.IsInRole("Legal-Manager"))) Then
+            Dim loginName = Page.User.Identity.Name
+            mCases = mCases.Where(Function(c) c.Attorney = loginName Or c.Attorney = loginName).ToList
+        End If
         gridUpCommingFCSale.DataSource = mCases
         gridUpCommingFCSale.GroupBy(gridUpCommingFCSale.Columns("SaleDate"))
         gridUpCommingFCSale.ExpandAll()
         gridUpCommingFCSale.DataBind()
     End Sub
+    Function FilterByLogIn(cases As List(Of LegalCase)) As List(Of LegalCase)
+        If (Not (User.IsInRole("Admin") Or User.IsInRole("Legal-Manager"))) Then
+            Dim loginName = Page.User.Identity.Name
+            Return cases.Where(Function(c) c.Attorney = loginName Or c.Attorney = loginName).ToList
+        End If
+        Return cases
+    End Function
 
     Protected Sub gdCases_DataBinding(sender As Object, e As EventArgs)
 
@@ -38,4 +54,7 @@
             BindUpCommingFCGrid()
         End If
     End Sub
+
+  
+
 End Class
