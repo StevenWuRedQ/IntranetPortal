@@ -17,5 +17,10 @@ Partial Public Class CheckingComplain
     Public Property CreateBy As String
     Public Property CreateTime As Nullable(Of Date)
     Public Property ExecuteBy As String
+    Public Property NotifyUsers As String
+    Public Property LastAPIOrderId As Nullable(Of Integer)
+    Public Property LastComplaintsResult As String
+    Public Property LastDataEntered As Nullable(Of Date)
+    Public Property LastResultUpdate As Nullable(Of Date)
 
 End Class

@@ -513,6 +513,39 @@
                                     $("#selStatusUpdate").attr("data-required", true);
                                     $("#selCategory").attr("data-required", true);
                                 }
+                            },                         
+                            StatusUpdateChange: function(s)
+                            { 
+                                debugger;
+                                var categoryText = $("#selCategory").val();
+                                var statusUpdateText = $("#selStatusUpdate").val();
+
+                                if (categoryText in this.Checkinglist)
+                                {
+                                    var category = this.Checkinglist[categoryText];
+                                    
+                                    if(statusUpdateText in category)
+                                    {
+                                        category[statusUpdateText].Checking();
+                                    }
+                                }
+                            },
+                            Checkinglist:{
+                                "Approved":{
+                                    "Approval - Received":{
+                                        Checking:function()
+                                        {
+                                            if(typeof window.ssToggleApprovalPopup != "undefined")
+                                                window.ssToggleApprovalPopup(this.Success, this.Cancel);
+                                        },
+                                        Success:function(){
+                                            alert("Success");
+                                        },
+                                        Cancel:function(){
+                                            alert("Cancel");
+                                        }
+                                    }
+                                }
                             }
                         }
                         
@@ -534,7 +567,7 @@
                             <% Next%>
                         </select>
                         <div class="color_gray upcase_text">Status Update</div>
-                        <select class="select_bootstrap select_margin selStatusUpdate" id="selStatusUpdate" data-required="true">
+                        <select class="select_bootstrap select_margin selStatusUpdate" id="selStatusUpdate" data-required="true" onchange="ShortSale.StatusUpdateChange(this)">
                             <option value=""></option>
                             <% For Each mortStatus In IntranetPortal.Data.PropertyMortgage.StatusData%>
                             <option value="<%= mortStatus.Category & "-" & mortStatus.Name%>" style="display: none"><%= mortStatus.Name%></option>
@@ -1039,9 +1072,13 @@
                     <table style="width: 100%">
                         <tr>
                             <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                <dx:ASPxButton ID="ASPxButton3" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1" ValidationGroup="Appointment" CausesValidation="true"><ClientSideEvents Click="OnSaveAppointment"></ClientSideEvents></dx:ASPxButton>&nbsp;
+                                <dx:ASPxButton ID="ASPxButton3" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1" ValidationGroup="Appointment" CausesValidation="true">
+                                    <ClientSideEvents Click="OnSaveAppointment"></ClientSideEvents>
+                                </dx:ASPxButton>
+                                &nbsp;
                                 <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button" BackColor="#77787b" CausesValidation="false">
-                                <ClientSideEvents Click="function(){ASPxPopupScheduleClient.Hide();}"></ClientSideEvents></dx:ASPxButton>
+                                    <ClientSideEvents Click="function(){ASPxPopupScheduleClient.Hide();}"></ClientSideEvents>
+                                </dx:ASPxButton>
                             </td>
                         </tr>
                     </table>
@@ -1053,7 +1090,7 @@
                                             else
                                                 s.Hide();
                                         }" />
-            </dx:ASPxPopupControl>
+        </dx:ASPxPopupControl>
 
 
         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSetAsTaskControl" Width="450px" Height="550px" OnWindowCallback="ASPxPopupControl1_WindowCallback"

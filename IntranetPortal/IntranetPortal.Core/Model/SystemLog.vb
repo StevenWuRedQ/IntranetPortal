@@ -38,7 +38,11 @@ Partial Public Class SystemLog
             Return
         End If
 
-        Log(title, String.Format("Error in Portal Application. Message:{0}, Request URL: {2}. Stack: {1}", ex.Message, ex.StackTrace, url), LogCategory.Error, bble, createby)
+        Try
+            Log(title, String.Format("Error in Portal Application. Message:{0}, Request URL: {2}. Stack: {1}", ex.Message, ex.StackTrace, url), LogCategory.Error, bble, createby)
+        Catch exp As Exception
+
+        End Try
     End Sub
 
     Public Enum LogCategory

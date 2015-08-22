@@ -56,6 +56,7 @@ Partial Class Troubleshooting
         Me.tabEmail = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnSSUserReport = New System.Windows.Forms.Button()
         Me.cbTeams = New System.Windows.Forms.ComboBox()
         Me.btnEmailSend = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -96,7 +97,7 @@ Partial Class Troubleshooting
         Me.txtGeoAddress = New System.Windows.Forms.TextBox()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
         Me.btnRefreshLegalReport = New System.Windows.Forms.Button()
-        Me.btnSSUserReport = New System.Windows.Forms.Button()
+        Me.btnRefreshComplains = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -459,6 +460,15 @@ Partial Class Troubleshooting
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Team Activity Email"
         '
+        'btnSSUserReport
+        '
+        Me.btnSSUserReport.Location = New System.Drawing.Point(119, 154)
+        Me.btnSSUserReport.Name = "btnSSUserReport"
+        Me.btnSSUserReport.Size = New System.Drawing.Size(128, 23)
+        Me.btnSSUserReport.TabIndex = 6
+        Me.btnSSUserReport.Text = "ShortSale User Report"
+        Me.btnSSUserReport.UseVisualStyleBackColor = True
+        '
         'cbTeams
         '
         Me.cbTeams.FormattingEnabled = True
@@ -765,6 +775,7 @@ Partial Class Troubleshooting
         '
         'TabPage6
         '
+        Me.TabPage6.Controls.Add(Me.btnRefreshComplains)
         Me.TabPage6.Controls.Add(Me.GroupBox2)
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
@@ -829,14 +840,14 @@ Partial Class Troubleshooting
         Me.btnRefreshLegalReport.Text = "Refresh Report Fields"
         Me.btnRefreshLegalReport.UseVisualStyleBackColor = True
         '
-        'btnSSUserReport
+        'btnRefreshComplains
         '
-        Me.btnSSUserReport.Location = New System.Drawing.Point(119, 154)
-        Me.btnSSUserReport.Name = "btnSSUserReport"
-        Me.btnSSUserReport.Size = New System.Drawing.Size(128, 23)
-        Me.btnSSUserReport.TabIndex = 6
-        Me.btnSSUserReport.Text = "ShortSale User Report"
-        Me.btnSSUserReport.UseVisualStyleBackColor = True
+        Me.btnRefreshComplains.Location = New System.Drawing.Point(242, 23)
+        Me.btnRefreshComplains.Name = "btnRefreshComplains"
+        Me.btnRefreshComplains.Size = New System.Drawing.Size(115, 22)
+        Me.btnRefreshComplains.TabIndex = 1
+        Me.btnRefreshComplains.Text = "Refresh Complaints"
+        Me.btnRefreshComplains.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -951,4 +962,5 @@ Partial Class Troubleshooting
     Friend WithEvents txtBBLE As System.Windows.Forms.TextBox
     Friend WithEvents Button13 As System.Windows.Forms.Button
     Friend WithEvents btnSSUserReport As System.Windows.Forms.Button
+    Friend WithEvents btnRefreshComplains As System.Windows.Forms.Button
 End Class

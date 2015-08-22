@@ -33,31 +33,6 @@
         End If
     End Sub
 
-    Protected Sub btnCheck_ServerClick(sender As Object, e As EventArgs)
-        lblAddress.Text = ""
-
-        If rbBBLE.Checked Then
-            Dim ld = LeadsInfo.GetInstance(txtBBLE.Text)
-            If ld IsNot Nothing Then
-                lblAddress.Text = ld.PropertyAddress
-                txtNumber.Text = ld.Number
-                txtStreet.Text = ld.StreetName
-                txtCity.Text = ld.Neighborhood
-
-                btnAdd.Disabled = False
-            End If
-        Else
-            Try
-                txtBBLE.Text = Core.Utility.Address2BBLE(txtNumber.Text, txtStreet.Text, txtCity.Text)
-                btnAdd.Disabled = False
-                Return
-            Catch ex As Exception
-                lblAddress.Text = "Error: " & ex.Message
-                lblAddress.ForeColor = Drawing.Color.Red
-            End Try
-        End If
-    End Sub
-
     Protected Sub gdComplains_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
         If e.Parameters = "Add" Then
             Dim bble = txtBBLE.Text
@@ -121,7 +96,7 @@
     End Sub
 
     Protected Sub gdComplainsResult_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs)
-        If e.RowType = DevExpress.Web.ASPxGridView.GridViewRowType.Data Then
+        If e.RowType = DevExpress.Web.ASPxGridView.GridViewRowType.Data OrElse e.RowType = DevExpress.Web.ASPxGridView.GridViewRowType.Detail Then
             Dim dtEntered = CDate(e.GetValue("DateEntered"))
 
             If dtEntered > DateTime.MinValue Then
@@ -143,6 +118,34 @@
     Protected Sub gdComplainsHistory_DataBinding(sender As Object, e As EventArgs)
         If gdComplainsHistory.DataSource Is Nothing Then
             gdComplainsHistory.DataSource = Data.CheckingComplain.GetComplaintsHistory(hfBBLE.Value)
+        End If
+    End Sub
+
+    Protected Sub cpAddProperty_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        lblAddress.Visible = False
+
+        If e.Parameter = "Add" Then
+            If rbBBLE.Checked Then
+                Dim ld = LeadsInfo.GetInstance(txtBBLE.Text)
+                If ld IsNot Nothing Then
+                    lblAddress.Text = ld.PropertyAddress
+                    txtNumber.Text = ld.Number
+                    txtStreet.Text = ld.StreetName
+                    txtCity.Text = ld.Neighborhood
+
+                    btnAdd.Disabled = False
+                End If
+            Else
+                Try
+                    txtBBLE.Text = Core.Utility.Address2BBLE(txtNumber.Text, txtStreet.Text, txtCity.Text)
+                    btnAdd.Disabled = False
+                    Return
+                Catch ex As Exception
+                    lblAddress.Text = "Error: " & ex.Message
+                    lblAddress.ForeColor = Drawing.Color.Red
+                    lblAddress.Visible = True
+                End Try
+            End If
         End If
     End Sub
 End Class

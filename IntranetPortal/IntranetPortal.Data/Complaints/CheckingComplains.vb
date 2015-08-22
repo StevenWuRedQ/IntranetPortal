@@ -1,4 +1,9 @@
-﻿Partial Public Class CheckingComplain
+﻿Imports IntranetPortal.Core
+
+Partial Public Class CheckingComplain
+
+    Public Const LogTitleRefreshComplain As String = "RefreshPropertyComplaints"
+
 
     Public Shared Function GetAllComplains() As List(Of CheckingComplain)
 
@@ -13,10 +18,10 @@
         End Using
     End Function
 
-    Public Shared Function GetComplainsResult() As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
+    Public Shared Function GetComplainsResult(Optional bble As String = "") As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
         Using client As New DataAPI.WCFMacrosClient
             Try
-                Return client.Get_DBO_Complaints_List("", True)
+                Return client.Get_DBO_Complaints_List(bble, True)
             Catch ex As Exception
                 Return {}
             End Try
@@ -66,34 +71,54 @@
     End Sub
 
     Public Sub RefreshComplains(refreshBy As String)
-
         Me.LastExecute = DateTime.Now
         Me.ExecuteBy = refreshBy
 
         Try
-            Dim dobComplaintsGet = Sub()
-                                       Try
-                                           Using client As New DataAPI.WCFMacrosClient
-                                               Dim data As New DataAPI.DOB_Complaints_In
-                                               data.BBLE = BBLE
-                                               data.DOB_PenOnly = True
-                                               data.APIorderNum = (New Random()).Next(1000)
-                                               data.SecurityCode = "DS543&8"
-                                               client.DOB_Complaints_Get(data)
-                                           End Using
-                                       Catch ex As Exception
-                                           Core.SystemLog.LogError("DOBComplaintsGet", ex, "", refreshBy, BBLE)
-                                       End Try
-                                   End Sub
-
-            System.Threading.ThreadPool.QueueUserWorkItem(dobComplaintsGet)
+            If refreshBy = "RuleEngine" Then
+                RequestComplaints(refreshBy)
+            Else
+                System.Threading.ThreadPool.QueueUserWorkItem(AddressOf RequestComplaints, refreshBy)
+            End If
 
             Me.Save(refreshBy)
         Catch ex As Exception
             Throw ex
         End Try
-        
     End Sub
+
+    Public Sub UpdateComplaintsResult()
+        Dim result = GetComplainsResult(BBLE)
+
+        If result IsNot Nothing AndAlso result.Length > 0 Then
+            Dim complaints = result(0)
+            Me.LastDataEntered = complaints.DateEntered
+            Me.LastComplaintsResult = complaints.ToJsonString
+            Me.LastResultUpdate = DateTime.Now
+            Me.Save("")
+        End If
+    End Sub
+
+    Private Sub RequestComplaints(requestBy As String)
+
+        Try
+            Using client As New DataAPI.WCFMacrosClient
+                Dim data As New DataAPI.DOB_Complaints_In
+                data.BBLE = BBLE
+                data.DOB_PenOnly = True
+                data.APIorderNum = (New Random()).Next(1000)
+                data.SecurityCode = "DS543&8"
+
+                client.DOB_Complaints_Get(data)
+
+                Core.SystemLog.Log(LogTitleRefreshComplain, "RefreshComplaints", Core.SystemLog.LogCategory.Operation, BBLE, requestBy)
+            End Using
+        Catch ex As Exception
+            Core.SystemLog.LogError("DOBComplaintsGet", ex, "", requestBy, BBLE)
+        End Try
+
+    End Sub
+
 End Class
 
 Namespace DataAPI

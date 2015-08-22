@@ -643,4 +643,8 @@ Public Class Troubleshooting
     End Sub
 
   
+    Private Sub btnRefreshComplains_Click(sender As Object, e As EventArgs) Handles btnRefreshComplains.Click
+        Dim rule = New IntranetPortal.RulesEngine.DOBComplaintsCheckingRule
+        rule.Execute()
+    End Sub
 End Class

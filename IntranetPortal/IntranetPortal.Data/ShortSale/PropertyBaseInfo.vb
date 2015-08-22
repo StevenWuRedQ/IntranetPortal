@@ -79,7 +79,7 @@ Partial Public Class PropertyBaseInfo
 
             If _propFloors IsNot Nothing AndAlso _propFloors.Count > 0 Then
                 Dim i = 1
-                For Each floor In _propFloors.OrderBy(Function(fl) fl.FloorId)
+                For Each floor In _propFloors
                     If String.IsNullOrEmpty(floor.BBLE) Then
                         floor.BBLE = BBLE
                     End If

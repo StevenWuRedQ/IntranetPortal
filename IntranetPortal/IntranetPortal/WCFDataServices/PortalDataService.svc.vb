@@ -326,11 +326,9 @@ Public Class PortalDataService
         Using client As New IntranetPortal.Data.DataAPI.WCFMacrosClient
 
             If type = "DOBComplains" Then
-                Dim data = client.Get_DBO_Complaints_List(bble, False)
+
             End If
         End Using
-
-
 
     End Sub
 End Class

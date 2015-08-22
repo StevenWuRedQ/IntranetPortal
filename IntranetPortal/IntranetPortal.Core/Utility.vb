@@ -117,7 +117,7 @@ Public Class Utility
         'baseURL = baseURL & "&street=" & street
         'baseURL = baseURL & "&borough=" & borough
         Try
-            Address2BBLE(address)
+            Return Address2BBLE(address)
         Catch ex As Exception
             Throw ex
         End Try

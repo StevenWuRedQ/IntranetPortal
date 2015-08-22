@@ -526,7 +526,6 @@ Public Class RefreshDataRule
     Dim rules As List(Of Core.DataLoopRule)
     Public Overrides Sub Execute()
         rules = IntranetPortal.Core.DataLoopRule.GetAllActiveRule
-
       
     End Sub
 
@@ -566,5 +565,22 @@ Public Class PendingAssignRule
             Core.DataLoopRule.AddRules(ld.BBLE, Core.DataLoopRule.DataLoopType.All, "PendingAssignRule")
             ld.Update(PendingAssignLead.PendingStatus.InLoop)
         Next
+    End Sub
+End Class
+
+Public Class DOBComplaintsCheckingRule
+    Inherits BaseRule
+
+    Public Overrides Sub Execute()
+
+        Dim props = Data.CheckingComplain.GetAllComplains
+
+        For Each prop In props
+
+
+
+            prop.RefreshComplains("RuleEngine")
+        Next
+
     End Sub
 End Class

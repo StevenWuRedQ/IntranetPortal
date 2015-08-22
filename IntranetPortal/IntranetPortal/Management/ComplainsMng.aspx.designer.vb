@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class ComplainsMng
 
     '''<summary>
+    '''cpAddProperty control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cpAddProperty As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+
+    '''<summary>
     '''rbBBLE control.
     '''</summary>
     '''<remarks>

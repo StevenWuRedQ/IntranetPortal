@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="2be7360777eb446a87972da40dcc68b8" Name="Diagram1">
         <EntityTypeShape EntityType="ConstructionModel.ConstructionCase" Width="1.875" PointX="0.75" PointY="1" />
-        <EntityTypeShape EntityType="ConstructionModel.CheckingComplain" Width="1.5" PointX="4.25" PointY="1.25" />
+        <EntityTypeShape EntityType="ConstructionModel.CheckingComplain" Width="1.875" PointX="3.875" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
