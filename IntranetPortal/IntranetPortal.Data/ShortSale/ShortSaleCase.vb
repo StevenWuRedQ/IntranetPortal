@@ -820,7 +820,6 @@ Partial Public Class ShortSaleCase
 
     Public Shared Function SaveCase(ssCase As ShortSaleCase) As Boolean
         Try
-
             ssCase.Save()
             Return True
         Catch ex As Exception
