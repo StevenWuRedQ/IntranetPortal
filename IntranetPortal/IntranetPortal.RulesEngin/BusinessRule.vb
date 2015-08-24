@@ -577,9 +577,8 @@ Public Class DOBComplaintsCheckingRule
 
         For Each prop In props
 
-
-
             prop.RefreshComplains("RuleEngine")
+
         Next
 
     End Sub

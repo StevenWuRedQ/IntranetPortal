@@ -7,6 +7,7 @@ Public Class LegalCaseManage
 
     Private Const MgrRoleName As String = "Legal-Manager"
     Private Const LogTitleSave As String = "LegalOpen"
+    Private Const FollowupEmailTemplate As String = "LegalFollowUpNotify"
 
 
     Public Shared Function GetCaseData(bble As String, userName As String) As String
@@ -142,6 +143,8 @@ Public Class LegalCaseManage
     End Function
 
     Public Shared Sub ReminderFollowUp(lCase As Legal.LegalCase)
+
+        Dim emailData As New Dictionary(Of String, String)
 
 
 

@@ -1099,7 +1099,6 @@ Partial Public Class ShortSaleCase
                                         .ValueInfo = values,
                                         .Overview = fileOverview}
 
-
             Return data.ToList.Select(Function(item)
                                           item.ShortSale.PropertyInfo = item.PropertyInfo
                                           item.ShortSale.Mortgages = item.Mortgages.ToArray

@@ -547,6 +547,53 @@
                                             alert("Cancel");
                                         }
                                     }
+                                },
+                                "Valuation":{
+                                    "BPO Call Received": {
+                                        Checking:function()
+                                        {
+                                            if(typeof window.ssToggleValuationPopup != "undefined")
+                                                window.ssToggleValuationPopup(1,this.Success, this.Cancel);
+                                        },
+                                        Success:function(result){
+                                            EmailBody.SetHtml("Checkinglist is finished.");
+                                            InsertNewComments();                                            
+                                        },
+                                        Cancel:function(){
+                                            $("#selStatusUpdate").val("");                                            
+                                        }
+
+                                    },
+                                    "BPO Scheduled": {
+                                        Checking:function()
+                                        {
+                                            if(typeof window.ssToggleValuationPopup != "undefined")
+                                                window.ssToggleValuationPopup(2,this.Success, this.Cancel);
+                                        },
+                                        Success:function(result){
+                                            EmailBody.SetHtml("Checkinglist is finished.");
+                                            InsertNewComments();                                            
+                                        },
+                                        Cancel:function(){
+                                            $("#selStatusUpdate").val("");                                            
+                                        }
+
+                                    },
+                                    "BPO Complete": {
+                                        Checking:function()
+                                        {
+                                            if(typeof window.ssToggleValuationPopup != "undefined")
+                                                window.ssToggleValuationPopup(3,this.Success, this.Cancel);
+                                        },
+                                        Success:function(result){
+                                            EmailBody.SetHtml("Checkinglist is finished.");
+                                            InsertNewComments();                                            
+                                        },
+                                        Cancel:function(){
+                                            $("#selStatusUpdate").val("");                                            
+                                        }
+
+                                    }
                                 }
                             }
                         }

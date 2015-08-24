@@ -66,8 +66,7 @@ Public Class RulesService
 
         rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Data Loop Rule", .ExecuteNow = True})
         rules.Add(New PendingAssignRule With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Import Pending Assign Rule", .ExecuteNow = True})
-
-
+        rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("07:00:00"), .Period = TimeSpan.Parse("00:06:00"), .RuleName = "DOB Complaints refresh rule"})
 
         'rules.Add(New ExpiredAllReminderRule With {.ExecuteOn = TimeSpan.Parse("18:31:00"), .Period = TimeSpan.Parse("10.0:0:0"), .RuleName = "Expired all reminder"})
         'rules.Add(New CreateReminderBaseOnErrorProcess() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:20:00"), .RuleName = "CreateReminderBaseOnErrorProcess Rule", .ExecuteNow = True})
