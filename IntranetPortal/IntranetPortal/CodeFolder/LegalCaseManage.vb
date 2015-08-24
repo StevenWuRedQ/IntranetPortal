@@ -141,6 +141,12 @@ Public Class LegalCaseManage
         Return False
     End Function
 
+    Public Shared Sub ReminderFollowUp(lCase As Legal.LegalCase)
+
+
+
+    End Sub
+
 #Region "Share data from other project"
 
     Public Shared Function GetPropertyAddress(bble As String)

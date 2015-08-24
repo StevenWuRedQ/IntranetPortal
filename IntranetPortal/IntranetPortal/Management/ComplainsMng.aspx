@@ -80,6 +80,7 @@
 
         function ShowComplaintsHistory(bble) {
             popupComplaintHistory.PerformCallback(bble);
+            $('#spanPopupTitle').text('Complaints History - ' + bble);
             popupComplaintHistory.Show();
         }
     </script>
@@ -178,7 +179,7 @@
         </div>
         <div class="row form_border" style="">
             <div class="form_header">
-                Properties to Watch &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplains'))"></i>
+                Owned Properties Currently Being Watch &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplains'))"></i>
                 <div class="form-inline" style="float: right; font-weight: normal">
                     <small>(**Click on BBLE to view active complaints**)</small>
                     <input type="text" style="margin-right: 10px" id="QuickSearch" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />
@@ -222,7 +223,7 @@
                 DOB Active Complaints Details &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplainResult'))"></i>
                 <div class="form-inline" style="float: right; font-weight: normal">
                     <small style="color:red">
-                        (**Refresh Automatically at 7am, 1pm, 8pm**)
+                        (**Complaints records are set to refresh automatically at 7am, 1pm and 8pm daily.**)
                     </small>
                     <i class="fa fa-refresh icon_btn tooltip-examples  grid_buttons" style="margin-left: 10px; margin-right: 10px; font-size: 19px" onclick="RefreshResult()" title="Refresh"></i>
                     <input type="text" style="margin-right: 10px" id="gdComplainKey" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchComplains(); return false;}" />
@@ -277,7 +278,7 @@
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn Width="50px" CellStyle-VerticalAlign="Middle">
                             <DataItemTemplate>
-                                <i class="fa fa-history icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" title="View History" onclick='ShowComplaintsHistory("<%#Eval("BBLE")%>")'></i>
+                                <i class="fa fa-history icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" title="View History Details" onclick='ShowComplaintsHistory("<%#Eval("BBLE")%>")'></i>
                             </DataItemTemplate>
                         </dx:GridViewDataColumn>
                     </Columns>
@@ -416,7 +417,7 @@
                 <div class="clearfix">
                     <div class="pop_up_header_margin">
                         <i class="fa fa-history with_circle pop_up_header_icon"></i>
-                        <span class="pop_up_header_text">Complaints History</span>
+                        <span class="pop_up_header_text" id="spanPopupTitle">Complaints History</span>
                     </div>
                     <div class="pop_up_buttons_div">
                         <i class="fa fa-times icon_btn" onclick="popupComplaintHistory.Hide()"></i>

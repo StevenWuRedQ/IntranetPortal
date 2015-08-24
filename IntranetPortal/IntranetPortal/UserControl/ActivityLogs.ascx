@@ -539,7 +539,7 @@
                                                 window.ssToggleApprovalPopup(this.Success, this.Cancel);
                                         },
                                         Success:function(result){
-                                            EmailBody.SetText("Checkinglist is finished.");
+                                            EmailBody.SetHtml("Checkinglist is finished.");
                                             InsertNewComments();                                            
                                         },
                                         Cancel:function(){
