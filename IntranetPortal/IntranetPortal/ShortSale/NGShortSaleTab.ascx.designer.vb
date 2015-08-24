@@ -77,6 +77,15 @@ Partial Public Class NGShortSaleTab
     Protected WithEvents NGShortSalePartiesTab As Global.IntranetPortal.NGShortSalePartiesTab
 
     '''<summary>
+    '''NGShortSaleCheckListTab control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NGShortSaleCheckListTab As Global.IntranetPortal.NGShortSaleCheckListTab
+
+    '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>

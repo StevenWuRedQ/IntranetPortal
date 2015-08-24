@@ -93,7 +93,7 @@
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
-            <dx:SplitterPane ContentUrl="about:blank" Name="mapPane">
+            <dx:SplitterPane ContentUrl="about:blank" Name="mapPane" ScrollBars="Auto">
                 <Separator Visible="False"></Separator>
             </dx:SplitterPane>
         </Panes>

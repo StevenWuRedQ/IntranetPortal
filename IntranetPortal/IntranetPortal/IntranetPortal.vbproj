@@ -230,6 +230,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\MapData\GeoJSON.Net.MsSqlSpatial\src\GeoJSON.Net.MsSqlSpatial\bin\Debug\GeoJSON.Net.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="JWT">
       <HintPath>..\packages\JWT.1.3.2\lib\3.5\JWT.dll</HintPath>
     </Reference>
@@ -1527,6 +1530,13 @@
       <DependentUpon>TeamService.svc</DependentUpon>
     </Compile>
     <Compile Include="Settings.vb" />
+    <Compile Include="ShortSale\NGShortSaleCheckListTab.ascx.designer.vb">
+      <DependentUpon>NGShortSaleCheckListTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\NGShortSaleCheckListTab.ascx.vb">
+      <DependentUpon>NGShortSaleCheckListTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ShortSale\NGShortSaleDealInfoTab.ascx.designer.vb">
       <DependentUpon>NGShortSaleDealInfoTab.ascx</DependentUpon>
     </Compile>
@@ -3490,6 +3500,7 @@
     </None>
     <Content Include="Services\Documents.svc" />
     <Content Include="Services\TeamService.svc" />
+    <Content Include="ShortSale\NGShortSaleCheckListTab.ascx" />
     <Content Include="ShortSale\NGShortSaleDealInfoTab.ascx" />
     <Content Include="ShortSale\NGShortSaleInLeadsView.ascx" />
     <Content Include="ShortSale\NGShortSaleMortgageTab.ascx" />

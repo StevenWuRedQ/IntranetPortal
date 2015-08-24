@@ -6,6 +6,8 @@
 <%@ Register Src="~/ShortSale/NGShortSalePartiesTab.ascx" TagPrefix="uc1" TagName="NGShortSalePartiesTab" %>
 <%@ Register Src="~/ShortSale/NGShortSalePropertyTab.ascx" TagPrefix="uc1" TagName="NGShortSalePropertyTab" %>
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
+<%@ Register Src="~/ShortSale/NGShortSaleCheckListTab.ascx" TagPrefix="uc1" TagName="NGShortSaleCheckListTab" %>
+
 
 <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 
@@ -19,14 +21,14 @@
 
                     <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
                         <div style="font-size: 30px">
-                            <i class="fa fa-home"></i>
+                            <i class="fa fa-home" ng-dblclick="toggleValuationPopup()"></i>
                             <span style="margin-left: 19px;">{{GetCaseInfo().Address}}&nbsp;</span>
- 
+
                             <span class="time_buttons" style="margin-right: 30px" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=3&bble='+leadsInfoBBLE, 'eCourts')">eCourts</span>
                             <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=2&bble='+leadsInfoBBLE, 'DOB')">DOB</span>
                             <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=1&bble='+leadsInfoBBLE, 'Acris')">Acris</span>
-                            <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+leadsInfoBBLE, 'Maps')">Maps</span>    
-                            <span class="time_buttons"  onclick="OpenLeadsWindow('http://nycserv.nyc.gov/NYCServWeb/NYCSERVMain', 'eCourts')">Water&Taxes</span>                      
+                            <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+leadsInfoBBLE, 'Maps')">Maps</span>
+                            <span class="time_buttons" onclick="OpenLeadsWindow('http://nycserv.nyc.gov/NYCServWeb/NYCSERVMain', 'eCourts')">Water&Taxes</span>
                         </div>
                         <%--data format June 2, 2014 6:37 PM--%>
                         <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;">{{GetCaseInfo().Name}}</span>
@@ -81,6 +83,7 @@
                             <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#SSMortgage" role="tab" data-toggle="tab">Mortgages</a></li>
                             <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#SSDeal" role="tab" data-toggle="tab">Deal Info</a></li>
                             <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#SSParties" role="tab" data-toggle="tab">Parties</a></li>
+                            <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#CheckList" role="tab" data-toggle="tab">Checklist</a></li>
                             <%--  <% End If%>--%>
                         </ul>
 
@@ -100,11 +103,12 @@
                                 <div class="tab-pane" id="SSDeal">
                                     <uc1:NGShortSaleDealInfoTab runat="server" ID="NGShortSaleDealInfoTab" />
                                 </div>
-
                                 <div class="tab-pane" id="SSParties">
                                     <uc1:NGShortSalePartiesTab runat="server" ID="NGShortSalePartiesTab" />
                                 </div>
-
+                                <div class="tab-pane" id="CheckList">
+                                    <uc1:NGShortSaleCheckListTab runat="server" ID="NGShortSaleCheckListTab" />
+                                </div>
                             </div>
                         </div>
                     </div>
