@@ -15,7 +15,7 @@ Public Class ShortSaleActivityReport
         End If
     End Sub
 
-    Public Property TeamActivityData As List(Of PortalReport.ShortSaleActivityData)
+    Public Property TeamActivityData As List(Of PortalReport.CaseActivityData)
 
     Dim imgStr As String
     Public ReadOnly Property ChartImage As String

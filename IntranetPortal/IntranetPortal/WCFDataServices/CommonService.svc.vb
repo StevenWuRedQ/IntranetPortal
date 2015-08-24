@@ -206,7 +206,7 @@ Public Class CommonService
         End Using
     End Function
 
-    Private Function LoadSSUserSummaryEmail(actData As PortalReport.ShortSaleActivityData) As String
+    Private Function LoadSSUserSummaryEmail(actData As PortalReport.CaseActivityData) As String
         Dim ts As ShortSaleUserReport
         Using Page As New Page
             ts = Page.LoadControl("~/EmailTemplate/ShortSaleUserReport.ascx")

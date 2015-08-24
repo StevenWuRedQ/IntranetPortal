@@ -144,10 +144,21 @@ Public Class LegalCaseManage
 
     Public Shared Sub ReminderFollowUp(lCase As Legal.LegalCase)
 
-        Dim emailData As New Dictionary(Of String, String)
+        Try
+            Dim users = Roles.GetUsersInRole("Legal-Manager")
 
+            Dim notifyEmails = String.Join(";", users.Select(Function(name)
+                                                                 Return Employee.GetInstance(name).Email
+                                                             End Function).ToArray)
 
+            Dim emailData As New Dictionary(Of String, String)
+            emailData.Add("CaseName", lCase.CaseName)
+            emailData.Add("BBLE", lCase.BBLE)
 
+            Core.EmailService.SendMail(notifyEmails, "", FollowupEmailTemplate, emailData)
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Sub
 
 #Region "Share data from other project"

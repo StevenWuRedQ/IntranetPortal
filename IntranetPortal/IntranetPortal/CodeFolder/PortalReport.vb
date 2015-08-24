@@ -1,6 +1,10 @@
 ﻿Public Class PortalReport
 
-    Public Shared Function LoadShortSaleActivityReport(startDate As DateTime, endDate As DateTime) As List(Of ShortSaleActivityData)
+    Public Shared Function LoadActivityReport(users As String(), logCategorys As LeadsActivityLog.LogCategory(), startDate As DateTime, endDate As DateTime) As List(Of CaseActivityData)
+        Return Nothing
+    End Function
+
+    Public Shared Function LoadShortSaleActivityReport(startDate As DateTime, endDate As DateTime) As List(Of CaseActivityData)
         Dim ssRoles = Roles.GetAllRoles().Where(Function(r) r.StartsWith("ShortSale-") OrElse r.StartsWith("Title-")).ToList
         Dim ssUsers As New List(Of String)
 
@@ -29,12 +33,12 @@
         End Using
     End Function
 
-    Private Shared Function BuildShortSaleUserReport(commentslogs As List(Of LeadsActivityLog), users As String(), openLogs As List(Of Core.SystemLog), saveLogs As List(Of Core.SystemLog)) As List(Of ShortSaleActivityData)
-        Dim result As New List(Of ShortSaleActivityData)
+    Private Shared Function BuildShortSaleUserReport(commentslogs As List(Of LeadsActivityLog), users As String(), openLogs As List(Of Core.SystemLog), saveLogs As List(Of Core.SystemLog)) As List(Of CaseActivityData)
+        Dim result As New List(Of CaseActivityData)
 
 
         For Each user In users
-            Dim actData As New ShortSaleActivityData
+            Dim actData As New CaseActivityData
             Dim clogsBBLE = commentslogs.Where(Function(c) c.EmployeeName = user).Select(Function(c) c.BBLE).ToList
             Dim oLogsBBLE = openLogs.Where(Function(o) o.CreateBy = user).Select(Function(o) o.BBLE).ToList
             Dim sLogsBBLE = saveLogs.Where(Function(s) s.CreateBy = user).Select(Function(s) s.BBLE).ToList
@@ -132,7 +136,7 @@
         Public Property AmountofViewCase As Integer
     End Class
 
-    Public Class ShortSaleActivityData
+    Public Class CaseActivityData
         Inherits AgentActivityData
 
         Public Property FilesWorkedWithComments As List(Of Data.ShortSaleCase)
