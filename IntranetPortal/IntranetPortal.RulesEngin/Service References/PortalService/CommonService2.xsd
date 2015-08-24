@@ -113,6 +113,20 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="SendUserActivitySummayEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="startDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendUserActivitySummayEmailResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SendEmailByAddress">
     <xs:complexType>
       <xs:sequence>

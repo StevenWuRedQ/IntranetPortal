@@ -45,6 +45,9 @@ Namespace PortalService
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmail", ReplyAction:="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmailResponse")>  _
         Sub SendShortSaleUserSummayEmail()
         
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendUserActivitySummayEmail", ReplyAction:="http://tempuri.org/ICommonService/SendUserActivitySummayEmailResponse")>  _
+        Sub SendUserActivitySummayEmail(ByVal type As String, ByVal startDate As Date, ByVal endDate As Date)
+        
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendEmailByAddress", ReplyAction:="http://tempuri.org/ICommonService/SendEmailByAddressResponse")>  _
         Sub SendEmailByAddress(ByVal toAddress As String, ByVal ccAddress As String, ByVal subject As String, ByVal body As String)
     End Interface
@@ -114,6 +117,10 @@ Namespace PortalService
         
         Public Sub SendShortSaleUserSummayEmail() Implements PortalService.ICommonService.SendShortSaleUserSummayEmail
             MyBase.Channel.SendShortSaleUserSummayEmail
+        End Sub
+        
+        Public Sub SendUserActivitySummayEmail(ByVal type As String, ByVal startDate As Date, ByVal endDate As Date) Implements PortalService.ICommonService.SendUserActivitySummayEmail
+            MyBase.Channel.SendUserActivitySummayEmail(type, startDate, endDate)
         End Sub
         
         Public Sub SendEmailByAddress(ByVal toAddress As String, ByVal ccAddress As String, ByVal subject As String, ByVal body As String) Implements PortalService.ICommonService.SendEmailByAddress

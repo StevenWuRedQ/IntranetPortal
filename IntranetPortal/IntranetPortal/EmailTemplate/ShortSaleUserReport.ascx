@@ -24,7 +24,7 @@ Dear <%= ActivityData.Name%>,
 Below is summary of your activities today (<%= DateTime.Today.ToShortDateString() %>). Please review.
 <br />
 <br />
-<% Dim item = ActivityData %>
+<% Dim item = ActivityData%>
 <table style="margin-left: 15px; border: 1px solid black; border-collapse: collapse; border-spacing: 0px; width: 700px" border="1" cellspacing="0">
     <thead>
         <tr>
@@ -38,7 +38,7 @@ Below is summary of your activities today (<%= DateTime.Today.ToShortDateString(
             <ul>
                 <% For Each ssCase In item.FilesWorkedWithComments%>
                 <li>
-                    <a href="http://portal.myidealprop.com/ShortSale/ShortSale.aspx?bble=<%= ssCase.BBLE%>" target="_blank">
+                    <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
                         <%= ssCase.CaseName%>
                     </a>
                 </li>
@@ -51,7 +51,7 @@ Below is summary of your activities today (<%= DateTime.Today.ToShortDateString(
             <ul>
                 <% For Each ssCase In item.FilesWorkedWithoutComments%>
                 <li>
-                    <a href="http://portal.myidealprop.com/ShortSale/ShortSale.aspx?bble=<%= ssCase.BBLE%>" target="_blank">
+                    <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
                         <%= ssCase.CaseName%>
                     </a>
                 </li>
@@ -65,7 +65,7 @@ Below is summary of your activities today (<%= DateTime.Today.ToShortDateString(
             <ul>
                 <% For Each ssCase In item.FilesViewedOnly%>
                 <li>
-                    <a href="http://portal.myidealprop.com/ShortSale/ShortSale.aspx?bble=<%= ssCase.BBLE%>" target="_blank">
+                    <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
                         <%= ssCase.CaseName%>
                     </a>
                 </li>

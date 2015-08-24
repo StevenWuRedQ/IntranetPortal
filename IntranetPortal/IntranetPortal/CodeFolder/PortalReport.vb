@@ -8,7 +8,7 @@
             Dim category = LeadsActivityLog.LogCategory.Legal.ToString
             Dim logs = ctx.LeadsActivityLogs.Where(Function(al) al.Category.Contains(category) And al.ActivityDate < endDate And al.ActivityDate > startDate And actionTypes.Contains(al.ActionType)).ToList
 
-            Return BuildCaseActivityReport(logs, users, Core.SystemLog.GetLogs(LegalCaseManage.LogTitleOpen, startDate, endDate), Core.SystemLog.GetLogs(LegalCaseManage.LogTitleSave, startDate, endDate))
+            Return BuildCaseActivityReport(CaseActivityData.ActivityType.Legal, logs, users, Core.SystemLog.GetLogs(LegalCaseManage.LogTitleOpen, startDate, endDate), Core.SystemLog.GetLogs(LegalCaseManage.LogTitleSave, startDate, endDate))
         End Using
     End Function
 
@@ -25,7 +25,7 @@
             Dim category = LeadsActivityLog.LogCategory.ShortSale.ToString
             Dim logs = ctx.LeadsActivityLogs.Where(Function(al) (al.Category.Contains(category) Or al.Category.Contains(12)) And al.ActivityDate < endDate And al.ActivityDate > startDate And actionTypes.Contains(al.ActionType)).ToList
 
-            Return BuildCaseActivityReport(logs, ssUsers.Distinct.ToArray, ShortSaleManage.GetSSOpenCaseLogs(startDate, endDate), ShortSaleManage.GetSSSaveCaseLogs(startDate, endDate))
+            Return BuildCaseActivityReport(CaseActivityData.ActivityType.ShortSale, logs, ssUsers.Distinct.ToArray, ShortSaleManage.GetSSOpenCaseLogs(startDate, endDate), ShortSaleManage.GetSSSaveCaseLogs(startDate, endDate))
 
             'Dim report = BuildAgentActivityData(logs, ssUsers.Distinct.ToArray)
 
@@ -41,12 +41,13 @@
         End Using
     End Function
 
-    Private Shared Function BuildCaseActivityReport(commentslogs As List(Of LeadsActivityLog), users As String(), openLogs As List(Of Core.SystemLog), saveLogs As List(Of Core.SystemLog)) As List(Of CaseActivityData)
+    Private Shared Function BuildCaseActivityReport(type As CaseActivityData.ActivityType, commentslogs As List(Of LeadsActivityLog), users As String(), openLogs As List(Of Core.SystemLog), saveLogs As List(Of Core.SystemLog)) As List(Of CaseActivityData)
         Dim result As New List(Of CaseActivityData)
-
 
         For Each user In users
             Dim actData As New CaseActivityData
+            actData.Type = type
+
             Dim clogsBBLE = commentslogs.Where(Function(c) c.EmployeeName = user).Select(Function(c) c.BBLE).ToList
             Dim oLogsBBLE = openLogs.Where(Function(o) o.CreateBy = user).Select(Function(o) o.BBLE).ToList
             Dim sLogsBBLE = saveLogs.Where(Function(s) s.CreateBy = user).Select(Function(s) s.BBLE).ToList
@@ -147,6 +148,7 @@
     Public Class CaseActivityData
         Inherits AgentActivityData
 
+        Public Property Type As ActivityType
         Public Property FilesWorkedWithComments As List(Of Data.ShortSaleCase)
         Public Property FilesWorkedWithoutComments As List(Of Data.ShortSaleCase)
         Public Property FilesViewedOnly As List(Of Data.ShortSaleCase)
@@ -169,6 +171,21 @@
                 Return FilesViewedOnly.Count
             End Get
         End Property
+
+
+        Public Function GetViewLink(bble As String) As String
+            Select Case Type
+                Case ActivityType.Legal
+                    Return "LegalUI/LegalUI.aspx?bble=" & bble
+                Case Else
+                    Return "ShortSale/ShortSale.aspx?bble=" & bble
+            End Select
+        End Function
+
+        Public Enum ActivityType
+            ShortSale
+            Legal
+        End Enum
 
     End Class
 End Class

@@ -169,7 +169,7 @@ Public Class AgentActivitySummaryRule
 
             Try
                 client.SendLegalActivityEmail()
-
+                client.SendUserActivitySummayEmail("Legal", DateTime.Today, DateTime.Today.AddDays(1))
             Catch ex As Exception
                 Log("AgentActivitySummaryRule Error. TeamName: Legal", ex)
             End Try

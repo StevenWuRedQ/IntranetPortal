@@ -61,6 +61,12 @@
   <wsdl:message name="ICommonService_SendShortSaleUserSummayEmail_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendShortSaleUserSummayEmailResponse" />
   </wsdl:message>
+  <wsdl:message name="ICommonService_SendUserActivitySummayEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendUserActivitySummayEmail" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendUserActivitySummayEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendUserActivitySummayEmailResponse" />
+  </wsdl:message>
   <wsdl:message name="ICommonService_SendEmailByAddress_InputMessage">
     <wsdl:part name="parameters" element="tns:SendEmailByAddress" />
   </wsdl:message>
@@ -103,6 +109,10 @@
     <wsdl:operation name="SendShortSaleUserSummayEmail">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmail" message="tns:ICommonService_SendShortSaleUserSummayEmail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmailResponse" message="tns:ICommonService_SendShortSaleUserSummayEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendUserActivitySummayEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendUserActivitySummayEmail" message="tns:ICommonService_SendUserActivitySummayEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendUserActivitySummayEmailResponse" message="tns:ICommonService_SendUserActivitySummayEmail_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendEmailByAddress">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendEmailByAddress" message="tns:ICommonService_SendEmailByAddress_InputMessage" />
@@ -185,6 +195,15 @@
     </wsdl:operation>
     <wsdl:operation name="SendShortSaleUserSummayEmail">
       <soap:operation soapAction="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendUserActivitySummayEmail">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/SendUserActivitySummayEmail" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

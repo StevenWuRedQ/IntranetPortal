@@ -91,7 +91,7 @@
                         <ul>
                             <% For Each ssCase In item.FilesWorkedWithComments%>
                             <li>
-                                <a href="http://portal.myidealprop.com/<%=GetViewLink(ssCase.BBLE)%>" target="_blank">
+                                <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
                                     <%= ssCase.CaseName%>
                                 </a>                                
                             </li>
@@ -104,7 +104,7 @@
                         <ul>
                             <% For Each ssCase In item.FilesWorkedWithoutComments%>
                             <li>
-                                <a href="http://portal.myidealprop.com/<%=GetViewLink(ssCase.BBLE)%>" target="_blank">
+                                <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
                                     <%= ssCase.CaseName%>
                                 </a>     
                             </li>
@@ -118,7 +118,7 @@
                         <ul>
                             <% For Each ssCase In item.FilesViewedOnly%>
                             <li>
-                                <a href="http://portal.myidealprop.com/<%=GetViewLink(ssCase.BBLE)%>" target="_blank">
+                                <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
                                     <%= ssCase.CaseName%>
                                 </a>     
                             </li>

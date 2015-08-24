@@ -32,7 +32,7 @@ Public Interface ICommonService
     Sub SendShortSaleUserSummayEmail()
 
     <OperationContract>
-    Sub SendUserActivitySummayEmail(type As String)
+    Sub SendUserActivitySummayEmail(type As String, startDate As DateTime, endDate As DateTime)
 
     <OperationContract()>
     Sub SendEmailByAddress(toAddress As String, ccAddress As String, subject As String, body As String)

@@ -90,12 +90,5 @@ Public Class ShortSaleActivityReport
         chartActivity.DataBind()
     End Sub
 
-    Public Function GetViewLink(bble As String) As String
-        Select Case ReportType
-            Case "Legal"
-                Return "LegalUI/LegalUI.aspx?bble=" & bble
-            Case Else
-                Return "ShortSale/ShortSale.aspx?bble=" & bble
-        End Select
-    End Function
+   
 End Class

@@ -3,6 +3,7 @@ Imports DevExpress.XtraReports.UI
 Imports System.Net
 Imports System.ServiceModel
 Imports System.ServiceModel.Activation
+Imports IntranetPortal.PortalReport
 
 ' NOTE: You can use the "Rename" command on the context menu to change the class name "CommonService" in code, svc and config file together.
 ' NOTE: In order to launch WCF Test Client for testing this service, please select CommonService.svc or CommonService.svc.vb at the Solution Explorer and start debugging.
@@ -142,19 +143,28 @@ Public Class CommonService
         IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
     End Sub
 
-    Public Sub SendUserActivitySummayEmail(type As String) Implements ICommonService.SendUserActivitySummayEmail
+    Public Sub SendUserActivitySummayEmail(type As String, startDate As DateTime, endDate As DateTime) Implements ICommonService.SendUserActivitySummayEmail
         Select Case type
-            Case "ShortSale"
-
-
+            Case "Legal"
+                SendActivityDataEmail(PortalReport.LoadLegalActivityReport(startDate, endDate))
+            Case Else
 
         End Select
-
     End Sub
 
     Public Sub SendShortSaleUserSummayEmail() Implements ICommonService.SendShortSaleUserSummayEmail
         Dim TeamActivityData = PortalReport.LoadShortSaleActivityReport(DateTime.Today, DateTime.Today.AddDays(1))
 
+        For Each actData In TeamActivityData
+            Dim emailData As New Dictionary(Of String, String)
+            emailData.Add("Body", LoadSSUserSummaryEmail(actData))
+            emailData.Add("Date", DateTime.Today.ToString("m"))
+            'IntranetPortal.Core.EmailService.SendMail("Chris@gvs4u.com", "", "Task Summary on " & DateTime.Now, LoadSummaryEmail(userName), Nothing)
+            Me.SendEmailByTemplate(actData.Name, "SSUserSummary", emailData)
+        Next
+    End Sub
+
+    Private Sub SendActivityDataEmail(TeamActivityData As List(Of CaseActivityData))
         For Each actData In TeamActivityData
             Dim emailData As New Dictionary(Of String, String)
             emailData.Add("Body", LoadSSUserSummaryEmail(actData))
@@ -269,5 +279,5 @@ Public Class CommonService
 
 
 
-   
+
 End Class
