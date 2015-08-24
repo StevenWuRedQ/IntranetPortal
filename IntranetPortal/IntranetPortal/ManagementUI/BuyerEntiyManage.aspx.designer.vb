@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class BuyerEntiyManage
 
     '''<summary>
+    '''SendMailWithAttach2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SendMailWithAttach2 As Global.IntranetPortal.SendMailWithAttach
+
+    '''<summary>
     '''lbExportExcel control.
     '''</summary>
     '''<remarks>

@@ -807,7 +807,7 @@
                         });
                 }
 
-                //ScopeAutoSave(GetLegalData, $scope.SaveLegal,'#LegalTabHead');
+                ScopeAutoSave(GetLegalData, $scope.SaveLegal,'#LegalTabHead');
 
                 $scope.CompleteResearch = function () {
                     var json = JSON.stringify($scope.LegalCase);

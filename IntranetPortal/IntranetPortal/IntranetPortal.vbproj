@@ -1411,6 +1411,13 @@
       <DependentUpon>PropertyMap.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="PopupControl\SendMailWithAttach.ascx.designer.vb">
+      <DependentUpon>SendMailWithAttach.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\SendMailWithAttach.ascx.vb">
+      <DependentUpon>SendMailWithAttach.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="PopupControl\SendMail.ascx.designer.vb">
       <DependentUpon>SendMail.ascx</DependentUpon>
     </Compile>
@@ -2637,6 +2644,7 @@
     <Content Include="PopupControl\EditHomeOwner.ascx" />
     <Content Include="PopupControl\MapsPopup.ascx" />
     <Content Include="PopupControl\PropertyMap.aspx" />
+    <Content Include="PopupControl\SendMailWithAttach.ascx" />
     <Content Include="PopupControl\SendMail.ascx" />
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="PopupControl\testPopup.aspx" />
