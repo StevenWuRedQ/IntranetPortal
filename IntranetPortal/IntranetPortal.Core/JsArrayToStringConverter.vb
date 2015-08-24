@@ -40,14 +40,14 @@ Public Class JsObjectToStringConverter
 
     Public Overrides Sub WriteJson(writer As Newtonsoft.Json.JsonWriter, value As Object, serializer As Newtonsoft.Json.JsonSerializer)
 
-        Dim jData As JToken
+        Dim jData As New JObject
         If Not String.IsNullOrEmpty(value) Then
             Try
-                jData = JToken.Parse(value)
-                jData.WriteTo(writer)
+                jData = JObject.Parse(value)
             Catch ex As Exception
 
             End Try
         End If
+        jData.WriteTo(writer)
     End Sub
 End Class
