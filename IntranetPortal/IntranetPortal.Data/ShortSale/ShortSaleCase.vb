@@ -820,6 +820,7 @@ Partial Public Class ShortSaleCase
 
     Public Shared Function SaveCase(ssCase As ShortSaleCase) As Boolean
         Try
+
             ssCase.Save()
             Return True
         Catch ex As Exception
@@ -1131,6 +1132,8 @@ Public Class ShortSaleCaseMetaType
     <Newtonsoft.Json.JsonConverter(GetType(Core.JsObjectToStringConverter))>
     Public Property ApprovalChecklist As String
 
+    <Newtonsoft.Json.JsonConverter(GetType(Core.JsObjectToStringConverter))>
+    Public Property CaseData As String
 
 End Class
 

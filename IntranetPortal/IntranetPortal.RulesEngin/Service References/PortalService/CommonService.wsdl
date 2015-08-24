@@ -49,6 +49,12 @@
   <wsdl:message name="ICommonService_SendShortSaleActivityEmail_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendShortSaleActivityEmailResponse" />
   </wsdl:message>
+  <wsdl:message name="ICommonService_SendLegalActivityEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendLegalActivityEmail" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendLegalActivityEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendLegalActivityEmailResponse" />
+  </wsdl:message>
   <wsdl:message name="ICommonService_SendShortSaleUserSummayEmail_InputMessage">
     <wsdl:part name="parameters" element="tns:SendShortSaleUserSummayEmail" />
   </wsdl:message>
@@ -89,6 +95,10 @@
     <wsdl:operation name="SendShortSaleActivityEmail">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendShortSaleActivityEmail" message="tns:ICommonService_SendShortSaleActivityEmail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendShortSaleActivityEmailResponse" message="tns:ICommonService_SendShortSaleActivityEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendLegalActivityEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendLegalActivityEmail" message="tns:ICommonService_SendLegalActivityEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendLegalActivityEmailResponse" message="tns:ICommonService_SendLegalActivityEmail_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendShortSaleUserSummayEmail">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmail" message="tns:ICommonService_SendShortSaleUserSummayEmail_InputMessage" />
@@ -157,6 +167,15 @@
     </wsdl:operation>
     <wsdl:operation name="SendShortSaleActivityEmail">
       <soap:operation soapAction="http://tempuri.org/ICommonService/SendShortSaleActivityEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendLegalActivityEmail">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/SendLegalActivityEmail" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

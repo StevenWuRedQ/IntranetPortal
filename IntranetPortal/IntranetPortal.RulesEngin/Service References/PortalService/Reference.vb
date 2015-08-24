@@ -39,6 +39,9 @@ Namespace PortalService
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendShortSaleActivityEmail", ReplyAction:="http://tempuri.org/ICommonService/SendShortSaleActivityEmailResponse")>  _
         Sub SendShortSaleActivityEmail()
         
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendLegalActivityEmail", ReplyAction:="http://tempuri.org/ICommonService/SendLegalActivityEmailResponse")>  _
+        Sub SendLegalActivityEmail()
+        
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmail", ReplyAction:="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmailResponse")>  _
         Sub SendShortSaleUserSummayEmail()
         
@@ -103,6 +106,10 @@ Namespace PortalService
         
         Public Sub SendShortSaleActivityEmail() Implements PortalService.ICommonService.SendShortSaleActivityEmail
             MyBase.Channel.SendShortSaleActivityEmail
+        End Sub
+        
+        Public Sub SendLegalActivityEmail() Implements PortalService.ICommonService.SendLegalActivityEmail
+            MyBase.Channel.SendLegalActivityEmail
         End Sub
         
         Public Sub SendShortSaleUserSummayEmail() Implements PortalService.ICommonService.SendShortSaleUserSummayEmail

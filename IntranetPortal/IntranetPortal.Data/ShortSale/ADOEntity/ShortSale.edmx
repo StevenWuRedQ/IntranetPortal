@@ -413,6 +413,7 @@
           <Property Name="SaleDate" Type="datetime" />
           <Property Name="NoSaleDate" Type="bit" />
           <Property Name="ApprovalChecklist" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CaseData" Type="nvarchar(max)" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
@@ -676,6 +677,7 @@
           <Property Name="TitleCompanyName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="ReferralUserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="ApprovalChecklist" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CaseData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TitleClearence">
           <Key>
@@ -1122,6 +1124,7 @@
           <EntitySetMapping Name="ShortSaleCases">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCase">
               <MappingFragment StoreEntitySet="ShortSaleCases">
+                <ScalarProperty Name="CaseData" ColumnName="CaseData" />
                 <ScalarProperty Name="ApprovalChecklist" ColumnName="ApprovalChecklist" />
                 <ScalarProperty Name="ReferralUserName" ColumnName="ReferralUserName" />
                 <ScalarProperty Name="TitleCompanyName" ColumnName="TitleCompanyName" />
