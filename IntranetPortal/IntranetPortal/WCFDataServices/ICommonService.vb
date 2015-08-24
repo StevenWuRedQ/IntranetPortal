@@ -26,7 +26,13 @@ Public Interface ICommonService
     Sub SendShortSaleActivityEmail()
 
     <OperationContract>
+    Sub SendLegalActivityEmail()
+
+    <OperationContract>
     Sub SendShortSaleUserSummayEmail()
+
+    <OperationContract>
+    Sub SendUserActivitySummayEmail(type As String)
 
     <OperationContract()>
     Sub SendEmailByAddress(toAddress As String, ccAddress As String, subject As String, body As String)

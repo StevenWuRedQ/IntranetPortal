@@ -117,6 +117,41 @@ Public Class CommonService
         IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
     End Sub
 
+    Public Sub SendLegalActivityEmail() Implements ICommonService.SendLegalActivityEmail
+        Dim ssMgrs = Roles.GetUsersInRole("Legal-Manager")
+
+        Dim toAdds = New List(Of String)
+
+        For Each mgr In ssMgrs.Distinct
+            Dim emp = Employee.GetInstance(mgr)
+            If emp IsNot Nothing AndAlso emp.Active AndAlso Not String.IsNullOrEmpty(emp.Email) Then
+                toAdds.Add(emp.Email)
+            End If
+        Next
+
+        'toAdds.Add("ron@myidealprop.com")
+        'toAdds.Add("chris@gvs4u.com")
+
+        Dim emailData As New Dictionary(Of String, String)
+        'emailData.Add("Body", LoadTeamActivityEmail(objTeam))
+        emailData.Add("Date", DateTime.Today.ToString("m"))
+
+        Dim name = String.Format("{1}-ActivityReport-{0:m}.pdf", DateTime.Today, "Legal Team")
+        Dim attachment As New System.Net.Mail.Attachment(GetPDf("Legal"), name)
+
+        IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
+    End Sub
+
+    Public Sub SendUserActivitySummayEmail(type As String) Implements ICommonService.SendUserActivitySummayEmail
+        Select Case type
+            Case "ShortSale"
+
+
+
+        End Select
+
+    End Sub
+
     Public Sub SendShortSaleUserSummayEmail() Implements ICommonService.SendShortSaleUserSummayEmail
         Dim TeamActivityData = PortalReport.LoadShortSaleActivityReport(DateTime.Today, DateTime.Today.AddDays(1))
 
@@ -157,6 +192,10 @@ Public Class CommonService
 
         If name = "ShortSale" Then
             pageLink = String.Format("{0}/EmailTemplate/ShortSaleActivityReport.aspx", url)
+        End If
+
+        If name = "Legal" Then
+            pageLink = String.Format("{0}/EmailTemplate/ShortSaleActivityReport.aspx?t=Legal", url)
         End If
 
         Dim myRequest As WebRequest = WebRequest.Create(pageLink)
@@ -226,6 +265,8 @@ Public Class CommonService
 
         Return sb.ToString
     End Function
+
+
 
 
    

@@ -39,7 +39,7 @@
             Dear <%= Manager%>,
             <br />
             <br />
-            Below is summary of your Short Sale team activities today (<%= DateTime.Today.ToShortDateString() %>). Please review.
+            Below is summary of your team activities today (<%= DateTime.Today.ToShortDateString() %>). Please review.
             <br />
             <br />
             <table style="margin-left: 15px; border: 1px solid black; border-collapse: collapse; border-spacing: 0px;" border="1" cellspacing="0">
@@ -91,7 +91,7 @@
                         <ul>
                             <% For Each ssCase In item.FilesWorkedWithComments%>
                             <li>
-                                <a href="http://portal.myidealprop.com/ShortSale/ShortSale.aspx?bble=<%= ssCase.BBLE%>" target="_blank">
+                                <a href="http://portal.myidealprop.com/<%=GetViewLink(ssCase.BBLE)%>" target="_blank">
                                     <%= ssCase.CaseName%>
                                 </a>                                
                             </li>
@@ -104,7 +104,7 @@
                         <ul>
                             <% For Each ssCase In item.FilesWorkedWithoutComments%>
                             <li>
-                               <a href="http://portal.myidealprop.com/ShortSale/ShortSale.aspx?bble=<%= ssCase.BBLE%>" target="_blank">
+                                <a href="http://portal.myidealprop.com/<%=GetViewLink(ssCase.BBLE)%>" target="_blank">
                                     <%= ssCase.CaseName%>
                                 </a>     
                             </li>
@@ -118,7 +118,7 @@
                         <ul>
                             <% For Each ssCase In item.FilesViewedOnly%>
                             <li>
-                                <a href="http://portal.myidealprop.com/ShortSale/ShortSale.aspx?bble=<%= ssCase.BBLE%>" target="_blank">
+                                <a href="http://portal.myidealprop.com/<%=GetViewLink(ssCase.BBLE)%>" target="_blank">
                                     <%= ssCase.CaseName%>
                                 </a>     
                             </li>

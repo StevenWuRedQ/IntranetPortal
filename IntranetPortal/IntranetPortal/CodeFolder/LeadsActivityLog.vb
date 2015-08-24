@@ -35,7 +35,7 @@
             'Context.LeadsActivityLogs.Add(log)
 
             Select Case category
-                Case LogCategory.ShortSale
+                Case LogCategory.ShortSale.ToString
                     ShortSaleManage.UpdateDate(bble, empName)
 
                 Case Else

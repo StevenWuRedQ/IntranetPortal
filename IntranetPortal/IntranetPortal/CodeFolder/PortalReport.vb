@@ -1,7 +1,15 @@
 ﻿Public Class PortalReport
 
-    Public Shared Function LoadActivityReport(users As String(), logCategorys As LeadsActivityLog.LogCategory(), startDate As DateTime, endDate As DateTime) As List(Of CaseActivityData)
-        Return Nothing
+    Public Shared Function LoadLegalActivityReport(startDate As DateTime, endDate As DateTime) As List(Of CaseActivityData)
+        Dim users = LegalCaseManage.LegalUsers
+
+        Using ctx As New Entities
+            Dim actionTypes = {LeadsActivityLog.EnumActionType.Comments, LeadsActivityLog.EnumActionType.Email}
+            Dim category = LeadsActivityLog.LogCategory.Legal.ToString
+            Dim logs = ctx.LeadsActivityLogs.Where(Function(al) al.Category.Contains(category) And al.ActivityDate < endDate And al.ActivityDate > startDate And actionTypes.Contains(al.ActionType)).ToList
+
+            Return BuildCaseActivityReport(logs, users, Core.SystemLog.GetLogs(LegalCaseManage.LogTitleOpen, startDate, endDate), Core.SystemLog.GetLogs(LegalCaseManage.LogTitleSave, startDate, endDate))
+        End Using
     End Function
 
     Public Shared Function LoadShortSaleActivityReport(startDate As DateTime, endDate As DateTime) As List(Of CaseActivityData)
@@ -17,7 +25,7 @@
             Dim category = LeadsActivityLog.LogCategory.ShortSale.ToString
             Dim logs = ctx.LeadsActivityLogs.Where(Function(al) (al.Category.Contains(category) Or al.Category.Contains(12)) And al.ActivityDate < endDate And al.ActivityDate > startDate And actionTypes.Contains(al.ActionType)).ToList
 
-            Return BuildShortSaleUserReport(logs, ssUsers.Distinct.ToArray, ShortSaleManage.GetSSOpenCaseLogs(startDate, endDate), ShortSaleManage.GetSSSaveCaseLogs(startDate, endDate))
+            Return BuildCaseActivityReport(logs, ssUsers.Distinct.ToArray, ShortSaleManage.GetSSOpenCaseLogs(startDate, endDate), ShortSaleManage.GetSSSaveCaseLogs(startDate, endDate))
 
             'Dim report = BuildAgentActivityData(logs, ssUsers.Distinct.ToArray)
 
@@ -33,7 +41,7 @@
         End Using
     End Function
 
-    Private Shared Function BuildShortSaleUserReport(commentslogs As List(Of LeadsActivityLog), users As String(), openLogs As List(Of Core.SystemLog), saveLogs As List(Of Core.SystemLog)) As List(Of CaseActivityData)
+    Private Shared Function BuildCaseActivityReport(commentslogs As List(Of LeadsActivityLog), users As String(), openLogs As List(Of Core.SystemLog), saveLogs As List(Of Core.SystemLog)) As List(Of CaseActivityData)
         Dim result As New List(Of CaseActivityData)
 
 

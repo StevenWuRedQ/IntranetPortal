@@ -205,7 +205,8 @@ Public Class ShortSaleManage
     Public Shared Sub UpdateDate(bble As String, Optional updateBy As String = Nothing)
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
         ssCase.UpdateDate = DateTime.Now
-        If String.IsNullOrEmpty(updateBy) Then
+
+        If Not String.IsNullOrEmpty(updateBy) Then
             ssCase.UpdateBy = updateBy
         End If
 

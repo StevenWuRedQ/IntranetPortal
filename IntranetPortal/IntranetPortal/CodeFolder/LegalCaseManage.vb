@@ -6,14 +6,16 @@ Public Class LegalCaseManage
     Implements INavMenuAmount
 
     Private Const MgrRoleName As String = "Legal-Manager"
-    Private Const LogTitleSave As String = "LegalOpen"
+    Public Const LogTitleOpen As String = "LegalOpen"
+    Public Const LogTitleSave As String = "LegalSave"
     Private Const FollowupEmailTemplate As String = "LegalFollowUpNotify"
+
 
 
     Public Shared Function GetCaseData(bble As String, userName As String) As String
         Dim lcase = Legal.LegalCase.GetCase(bble)
         If lcase IsNot Nothing Then
-            Core.SystemLog.Log(LogTitleSave, lcase.CaseData, Core.SystemLog.LogCategory.Operation, lcase.BBLE, userName)
+            Core.SystemLog.Log(LogTitleOpen, lcase.CaseData, Core.SystemLog.LogCategory.Operation, lcase.BBLE, userName)
             Return lcase.CaseData
         End If
         Return "{}"
@@ -160,6 +162,17 @@ Public Class LegalCaseManage
             Throw ex
         End Try
     End Sub
+
+    Public Shared Function LegalUsers() As String()
+        Dim ssRoles = Roles.GetAllRoles().Where(Function(r) r.StartsWith("Legal-")).ToList
+        Dim ssUsers As New List(Of String)
+
+        For Each rl In ssRoles
+            ssUsers.AddRange(Roles.GetUsersInRole(rl))
+        Next
+
+        Return ssUsers.Distinct.ToArray
+    End Function
 
 #Region "Share data from other project"
 

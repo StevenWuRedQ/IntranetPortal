@@ -4,14 +4,23 @@ Imports DevExpress.XtraCharts.Native
 Public Class ShortSaleActivityReport
     Inherits System.Web.UI.Page
 
-    Public Property team As Team
     Public Property Manager As String = "Manager"
     Public Property TeamName As String
+    Public Property ReportType As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            TeamActivityData = PortalReport.LoadShortSaleActivityReport(DateTime.Today, DateTime.Today.AddDays(1))
-            BindChart()
+            If Request.QueryString("t") IsNot Nothing Then
+                ReportType = Request.QueryString("t")
+            End If
+
+            If ReportType = "Legal" Then
+                TeamActivityData = PortalReport.LoadLegalActivityReport(DateTime.Today, DateTime.Today.AddDays(1))
+                BindChart()
+            Else
+                TeamActivityData = PortalReport.LoadShortSaleActivityReport(DateTime.Today, DateTime.Today.AddDays(1))
+                BindChart()
+            End If
         End If
     End Sub
 
@@ -80,4 +89,13 @@ Public Class ShortSaleActivityReport
 
         chartActivity.DataBind()
     End Sub
+
+    Public Function GetViewLink(bble As String) As String
+        Select Case ReportType
+            Case "Legal"
+                Return "LegalUI/LegalUI.aspx?bble=" & bble
+            Case Else
+                Return "ShortSale/ShortSale.aspx?bble=" & bble
+        End Select
+    End Function
 End Class
