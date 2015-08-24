@@ -309,7 +309,7 @@
 
                                                                 <%-- Valuation Popup --%>
                                                                 <div dx-popup="{  
-                                                                        height: 550,
+                                                                        height: 600,
                                                                         width: 600, 
                                                                         title: 'Valuation CheckList',
                                                                         dragEnabled: true,
@@ -318,7 +318,7 @@
                                                                         bindingOptions:{ visible: 'Valuation_popupVisible' }
                                                                 }">
                                                                     <div data-options="dxTemplate:{ name: 'content' }">
-                                                                        <div ng-show="Valuation_Show_Option=1">
+                                                                        <div ng-show="Valuation_Show_Option==1">
                                                                             <div class="row">
                                                                                 <div class="col-sm-6">Type of Valuation</div>
                                                                                 <div class="col-sm-5">
@@ -335,13 +335,13 @@
                                                                             <div class="row">
                                                                                 <div class="col-sm-6">Date of Call</div>
                                                                                 <div class="col-sm-5">
-                                                                                    <input type="text" class="form-control" ng-model="SsCase.CaseData.Valuating.DateOfCall" />
+                                                                                    <input type="text" class="form-control" ng-model="SsCase.CaseData.Valuating.DateOfCall" ss-date/>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
                                                                                 <div class="col-sm-6">BPO Agent</div>
                                                                                 <div class="col-sm-5">
-                                                                                    <input type="text" class="form-control" ng-model="SsCase.CaseData.Valuating.BOPAgent" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)/>
+                                                                                    <input type="text" class="form-control" ng-model="SsCase.CaseData.Valuating.BOPAgent" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
@@ -350,9 +350,10 @@
                                                                                     <input type="text" class="form-control" ng-model="SsCase.CaseData.Valuating.AgentPhoneNum" />
                                                                                 </div>
                                                                             </div>
+                                                                            <hr />
                                                                         </div>
-                                                                        <hr />
-                                                                        <div ng-show="Valuation_Show_Option=2">
+
+                                                                        <div ng-show="Valuation_Show_Option==2">
                                                                             <div class="row">
                                                                                 <div class="col-sm-6">Date of Valuation</div>
                                                                                 <div class="col-sm-5">
@@ -371,9 +372,10 @@
                                                                                     <input type="text" class="form-control" ng-model="SsCase.CaseData.Valuating.Access">
                                                                                 </div>
                                                                             </div>
+                                                                            <hr />
                                                                         </div>
-                                                                        <hr />
-                                                                        <div ng-show="Valuation_Show_Option=2">
+
+                                                                        <div ng-show="Valuation_Show_Option==3">
                                                                             <div class="row">
                                                                                 <div class="col-sm-6">Valuation Completed</div>
                                                                                 <div class="col-sm-5">
@@ -383,13 +385,13 @@
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
+                                                                            <hr />
                                                                         </div>
-                                                                        <hr />
 
                                                                         <div class="pull-right">
-                                                                            <button type="button" class="btn btn-danger" ng-click="valuationCancl()">Cancel </button>
+                                                                            <button type="button" class="btn btn-danger" ng-click="valuationCancl()">Close </button>
                                                                             &nbsp;
-                                                                            <button type="button" class="btn btn-primary" ng-click="approvalSave()">Save </button>
+                                                                            <button ng-show="Valuation_Show_Option==3" type="button" class="btn btn-primary" ng-click="valuationSave()">Save </button>
 
                                                                         </div>
 
@@ -605,9 +607,13 @@
         }
 
         function ssToggleValuationPopup(status, succ, cancl) {
-            angular.element(document.getElementById('ShortSaleCtrl')).scope().regApproval(succ, cancl);
+            angular.element(document.getElementById('ShortSaleCtrl')).scope().regValuation(succ, cancl);
             angular.element(document.getElementById('ShortSaleCtrl')).scope().toggleValuationPopup(status);
         }
+
+        $(document).ready(function () {
+            ScopeAutoSave(GetShortSaleCase, angular.element(document.getElementById('ShortSaleCtrl')).scope().SaveShortSale, '#ShortSaleTabHead')
+        })
 
         portalApp = angular.module('PortalApp');
 
@@ -731,12 +737,12 @@
             }
 
             /* steven code */
-            ScopeAutoSave(GetShortSaleCase, $scope.SaveShortSale, '#ShortSaleTabHead')
+
             var CaseInfo = { Name: '', Address: '' }
 
             $scope.SsCase = {
-                PropertyInfo: { Owners: [{}] }
-
+                PropertyInfo: { Owners: [{}] },
+                CaseData: {}
             };
             $scope.GetTeamByName = function (teamName) {
                 if (teamName) {
@@ -889,14 +895,24 @@
             /* end approval popup */
 
             /* valuation popup */
+            $scope.SsCase.CaseData.Valuating = {}
             $scope.Valuation_popupVisible = false;
             $scope.Valuation_Show_Option = 1;
+            $scope.valuationSave = function () {
+                if ($scope.valuationSuccCallback) $scope.valuationSuccCallback();
+                $scope.Valuation_popupVisible = false;
+            };
+            $scope.valuationCancl = function () {
+                if ($scope.valuationCanclCallback) $scope.valuationCanclCallback();
+                $scope.Valuation_popupVisible = false;
+            };
             $scope.regValuation = function (succ, cancl) {
                 if (!$scope.valuationSuccCallback) $scope.valuationSuccCallback = succ;
                 if (!$scope.valuationCanclCallback) $scope.valuationCanclCallback = cancl;
             }
             $scope.toggleValuationPopup = function (status) {
-                $scope.Valuation_Show_Option = parseInt(status)
+                debugger;
+                $scope.Valuation_Show_Option = status
                 $scope.Valuation_popupVisible = !$scope.Valuation_popupVisible;
             }
 

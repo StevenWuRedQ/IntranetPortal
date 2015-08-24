@@ -41,7 +41,7 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Access</label>
                 <select class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.Access">
-                    <option value=""></option>
+                    <option value="NA">N/A</option>
                     <option value="lockbox">lockbox</option>
                     <option value="master_key">master key</option>
                     <option value="pad_lock">pad lock</option>
@@ -277,12 +277,14 @@
 <div class="ss_form">
     <h4 class="ss_form_title">Job Type
         <select ng-model="CSCase.CSCase.InitialIntake.JobType1">
+            <option value="NA">N/A</option>
             <option value="ALT1">ALT1</option>
             <option value="ALT2">ALT2</option>
             <option value="ALT2_EXT">ALT2 Extension</option>
             <option value="Complated_Demo">Complated Demo</option>
         </select>
         <select ng-model="CSCase.CSCase.InitialIntake.JobType2" ng-show="CSCase.CSCase.InitialIntake.JobType1=='Complated_Demo'">
+            <option value="NA">N/A</option>
             <option value="ALT1">ALT1</option>
             <option value="ALT2">ALT2</option>
         </select>
@@ -291,6 +293,7 @@
 <div class="ss_form">
     <h4 class="ss_form_title">Reports
     <select ng-model="CSCase.CSCase.InitialIntake.ReportsDropDown">
+        <option value="NA">N/A</option>
         <option value="Asbestos">Asbestos Report</option>
         <option value="Survey">Survey</option>
         <option value="Exhibit">Exhibit 1 & 3</option>

@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionViolationTab.ascx.vb" Inherits="IntranetPortal.ConstructionViolationTab" %>
 
+<%-- orders --%>
 <div class="ss_form" ng-init="CSCase.CSCase.Violations.OrdersPanelVisible=false" style="margin-bottom: 30px">
     <h4 class="ss_form_title">Orders<input type="checkbox" ng-model="CSCase.CSCase.Violations.Orders" id="orders" /><label for="orders"></label></h4>
     <div style="text-align: center" ng-show="CSCase.CSCase.Violations.Orders">
@@ -13,7 +14,6 @@
         <br />
         <span id="barner-warning" ng-click="CSCase.CSCase.Violations.OrdersPanelVisible=true">PARTIAL VACATE EXISTS ON THIS PROPERTY</span>
     </div>
-
     <div dx-popup="{
                     height: 800,
                     width: 800,
@@ -59,7 +59,7 @@
                     </tr>
                 </table>
             </div>
-            <hr/>
+            <hr />
             <div id="FULL_VACATE_Orders">
                 <h4>Full VACATE Orders&nbsp;<pt-add ng-click="ensurePush('CSCase.CSCase.Violations.fullVacateOrders')" /></h4>
                 <table class="table table-striped" style="font-size: 9pt; width: 750px; margin: 10px; table-layout: fixed;">
@@ -94,7 +94,7 @@
                     </tr>
                 </table>
             </div>
-            <hr/>
+            <hr />
             <div id="Partial_VACATE_Orders">
                 <h4>Partial VACATE Orders&nbsp;<pt-add ng-click="ensurePush('CSCase.CSCase.Violations.partialVacateOrders')" /></h4>
                 <table class="table table-striped" style="font-size: 9pt; width: 750px; margin: 10px; table-layout: fixed;">
@@ -131,7 +131,6 @@
             </div>
         </div>
     </div>
-
 
 </div>
 
@@ -197,36 +196,105 @@
                 </table>
             </li>
         </ul>
-        <ul class="ss_form_box clearfix">
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">DOB Violaton Num</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.DOB_ViolationNum">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">ECB Violation Number</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.DOB_ECBViolationNumber">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Filed Date</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Violations.DOB_FiledDate" ss-date>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Violation Status</label>
-                <select class="ss_form_input" ng-model="CSCase.CSCase.Violations.DOB_ViolationStatus">
-                    <option value="Dismissed">Dismissed</option>
-                    <option value="Active">Active</option>
-                    <option value="Resolved">Resolved</option>
-                </select>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Type of Violation</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.DOB_TypeOfViolations">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Description</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.DOB_Description">
-            </li>
+
+        <ul class="ss_form_box clearfix ss_border">
+            <h5 class="ss_form_title" style="margin: 3px;">DOB ViolationDOB Violations&nbsp;<pt-add ng-click="addNewDOBViolation()" />
+            </h5>
+
+            <table class="table table-striped">
+                <tr ng-repeat="violation in CSCase.CSCase.Violations.DOBViolations">
+                    <td class="col-sm-1" ng-click="setPopupVisible('DOBViolations_PopupVisible_'+$index, true)">{{$index+1}}</td>
+                    <td class="col-sm-5" ng-click="setPopupVisible('DOBViolations_PopupVisible_'+$index, true)">
+                        <div class="row">
+                            <div class="col-sm-5" style="padding: 0px"><b>DOB Violaton #</b></div>
+                            <div class="col-sm-7" style="padding: 0px">{{violation.DOBViolationNum}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5" style="padding: 0px"><b>Filed Date</b></div>
+                            <div class="col-sm-7" style="padding: 0px">{{violation.FiledDate}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4" style="padding: 0px"><b>Type of Violation</b></div>
+                            <div class="col-sm-7" style="padding: 0px">{{violation.TypeOfViolations}}</div>
+                        </div>
+
+                    </td>
+                    <td class="col-sm-5" ng-click="setPopupVisible('DOBViolations_PopupVisible_'+$index, true)">
+
+                        <div class="row">
+                            <div class="col-sm-5" style="padding: 0px"><b>ECB Violation #</b></div>
+                            <div class="col-sm-7" style="padding: 0px">{{violation.ECBViolationNumber}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5" style="padding: 0px"><b>Violation Status</b></div>
+                            <div class="col-sm-7" style="padding: 0px">{{violation.ViolationStatus}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5" style="padding: 0px"><b>Description</b></div>
+                            <div class="col-sm-7" style="padding: 0px">{{violation.Description}}</div>
+                        </div>
+
+                    </td>
+                    <td class="col-sm-1">
+                        <pt-del ng-click="arrayRemove(CSCase.CSCase.Violations.DOBViolations, $index, true)"></pt-del>
+                        <div dx-popup="{    
+                                height: 450,
+                                width: 600, 
+                                title: 'Violation '+ ($index+1),
+                                dragEnabled: true,
+                                showCloseButton: true,
+                                shading: false,
+                                bindingOptions:{ visible: 'DOBViolations_PopupVisible_'+$index },
+                                scrolling: {mode: 'virtual' },
+                            }">
+                            <div data-options="dxTemplate:{ name: 'content' }">
+                                <div style="height: 88%; padding: 0px 5px; overflow-y: auto; overflow-x: hidden">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label>DOB Violaton Num</label>
+                                            <input class="form-control" ng-model="violation.DOBViolationNum" />
+                                        </div>
+
+
+                                        <div class="col-sm-6">
+                                            <label>ECB Violation Number</label>
+                                            <input class="form-control" ng-model="violation.ECBViolationNumber" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label>Filed Date</label>
+                                            <input class="form-control" ng-model="violation.FiledDate" ss-date />
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <label>Violation Status</label>
+                                            <input class="form-control" ng-model="violation.ViolationStatus" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label>Type of Violation</label>
+                                            <input class="form-control" ng-model="violation.TypeOfViolations" />
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <label>Description</label>
+                                            <input class="form-control" ng-model="violation.Description" />
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <button class="btn btn-primary pull-right" ng-click="setPopupVisible('DOBViolations_PopupVisible_'+$index, false)">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
         </ul>
+
+
         <div>
             <label class="ss_form_input_title">Upload</label>
             <pt-files file-bble="CSCase.BBLE" file-id="Violations-DOB_Upload" file-model="CSCase.CSCase.Violations.DOB_Upload"></pt-files>
@@ -317,8 +385,6 @@
 
     </div>
 </div>
-
-
 
 <div class="ss_form">
     <h4 class="ss_form_title">HPD Violation</h4>

@@ -1,6 +1,11 @@
 ﻿var app = angular.module('PortalApp');
 
 /* code area steven*/
+$.wait = function (ms) {
+    var defer = $.Deferred();
+    setTimeout(function () { defer.resolve(); }, ms);
+    return defer;
+};
 function NGAddArrayitemScope(scopeId, model) {
     var $scope = angular.element(document.getElementById(scopeId)).scope()
     if (model) {
@@ -35,16 +40,21 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem) {
     if ($(headEelem).length <= 0) {
         return;
     }
-    window.setInterval(function () {
-        if (ScopeCaseDataChanged(getDataFunc)) {
-            var sucessFunc = function () {
 
-
+    // delay the first run after 30 second!
+    $.wait(30000).then(function () {
+        window.setInterval(function () {
+            if (ScopeCaseDataChanged(getDataFunc)) {
+                var sucessFunc = function () {
+                }
+                debugger;
+                SaveFunc(sucessFunc);
+                //ScopeResetCaseDataChange(getDataFunc)
             }
-            SaveFunc(sucessFunc);
-            //ScopeResetCaseDataChange(getDataFunc)
-        }
-    }, 30000)
+        }, 30000)
+    })
+
+
 }
 
 /* above is global functions */
@@ -273,16 +283,16 @@ app.factory('ptHomeBreakDownService', [
                         console.log('load home breakdown fail. BBLE: ' + bble);
                     });
             },
-            save: function(bble, data, callback) {
+            save: function (bble, data, callback) {
                 var url = '/ShortSale/ShortSaleServices.svc/SaveBreakData';
                 var postData = {
                     "bble": bble,
                     "jsonData": JSON.stringify(data)
                 };
                 $http.post(url, postData)
-                    .success(function(res) {
+                    .success(function (res) {
                         callback(res);
-                    }).error(function() {
+                    }).error(function () {
                         console.log('save home breakdone fail. BBLE: ' + bble);
                     });
 

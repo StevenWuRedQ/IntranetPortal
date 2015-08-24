@@ -48,6 +48,7 @@
                                 <button class="btn" type="button">Remind me</button></td>
                             <td>
                                 <select class="form-control" ng-model="CSCase.CSCase.Signoffs.Roughing_Passed">
+                                    <option>N/A</option>
                                     <option>Yes</option>
                                     <option>No</option>
                                 </select>
@@ -70,6 +71,7 @@
                                 <button class="btn" type="button">Remider me</button></td>
                             <td>
                                 <select class="form-control" ng-model="CSCase.CSCase.Signoffs.Gas_Passed">
+                                    <option>N/A</option>
                                     <option>Yes</option>
                                     <option>No</option>
                                 </select>
@@ -92,6 +94,7 @@
                                 <button class="btn" type="button">Remider me</button></td>
                             <td>
                                 <select class="form-control" ng-model="CSCase.CSCase.Signoffs.Hydrant_Passed">
+                                    <option>N/A</option>
                                     <option>Yes</option>
                                     <option>No</option>
                                 </select>
@@ -114,6 +117,7 @@
                                 <button class="btn" type="button">Remider me</button></td>
                             <td>
                                 <select class="form-control" ng-model="CSCase.CSCase.Signoffs.RPZ_Passed">
+                                    <option>N/A</option>
                                     <option>Yes</option>
                                     <option>No</option>
                                 </select>
@@ -224,7 +228,7 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">results</label>
                     <select class="ss_form_input" ng-model="CSCase.CSCase.Signoffs.Electrical_InspectionResults">
-                        <option></option>
+                        <option>N/A</option>
                         <option>Passed</option>
                         <option>Failed</option>
                     </select>

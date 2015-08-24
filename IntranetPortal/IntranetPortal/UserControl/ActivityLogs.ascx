@@ -544,7 +544,7 @@
                                         },
                                         Cancel:function(){
                                             $("#selStatusUpdate").val("");
-                                            alert("Cancel");
+                                            //console.log("Cancel");
                                         }
                                     }
                                 },

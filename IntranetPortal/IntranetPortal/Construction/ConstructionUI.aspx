@@ -426,6 +426,17 @@
             }
             /* end highlight */
 
+            /* DOBViolation Popup */
+            $scope.CSCase.CSCase.Violations.DOBViolations = [{}];
+            $scope.setPopupVisible = function (modelName, bVal) {
+                $scope.$eval(modelName + '=' + bVal )
+            }
+            $scope.addNewDOBViolation = function () {
+                $scope.ensurePush('CSCase.CSCase.Violations.DOBViolations');
+                $scope.setPopupVisible('DOBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.DOBViolations.length-1), true);
+            }
+            /* end */
+
         }]);
     </script>
 

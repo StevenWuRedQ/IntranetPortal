@@ -207,7 +207,7 @@ portalApp.directive('ptDel', function () {
     }
 });
 
-portalApp.directive('ptFile', ['ptFileService', function (ptFileService) {
+portalApp.directive('ptFile', ['ptFileService','$timeout', function (ptFileService, $timeout) {
     return {
         restrict: 'E',
         templateUrl: '/Scripts/templates/ptfile.html',

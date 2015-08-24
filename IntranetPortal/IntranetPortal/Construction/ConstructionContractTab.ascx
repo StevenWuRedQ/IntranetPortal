@@ -14,6 +14,7 @@
                 <label class="ss_form_input_title">Scope Of work</label>
 
                 <select class="ss_form_input" ng-model="CSCase.CSCase.Contract.ElectricalScopeOfwork">
+                    <option>N/A</option>
                     <option>Alt1</option>
                     <option>Alt2</option>
                     <option>Alt3</option>
@@ -40,6 +41,7 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Scope Of work</label>
                 <select class="ss_form_input" ng-model="CSCase.CSCase.Contract.Construction_ScopeOfwork">
+                    <option>N/A</option>
                     <option>Alt1</option>
                     <option>Alt2</option>
                     <option>Alt3</option>
@@ -66,6 +68,7 @@
                 <label class="ss_form_input_title">Scope Of work</label>
 
                 <select class="ss_form_input" ng-model="CSCase.CSCase.Contract.PlumbingScopeOfwork">
+                    <option>N/A</option>
                     <option>Alt1</option>
                     <option>Alt2</option>
                     <option>Alt3</option>

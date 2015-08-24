@@ -67,6 +67,7 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Missing/Damaged Meter</label>
                 <select class="ss_form_input" ng-model="floor.ConED.MissingMeter">
+                    <option value="NA">N/A</option>
                     <option value="PLP">PLP</option>
                     <option value="bsmt">bsmt</option>
                     <option value="1st_Fillable">1st Fillable</option>
@@ -79,6 +80,7 @@
             <div class="arrow_box" style="width: 40%">
                 <label class="ss_form_input_title">Service Off Reason</label>
                 <select class="ss_form_input" ng-model="floor.ConED.ServiceOffReason">
+                    <option value="NA">N/A</option>
                     <option value="Service_Cut_From_Street">Service Cut From Street</option>
                     <option value="Meter_Locked">Meter Locked</option>
                     <option value="Meter_Mising">Meter Mising</option>
@@ -157,6 +159,7 @@
             <div class="arrow_box" style="width: 40%">
                 <label class="ss_form_input_title">Service Off Reason</label>
                 <select class="ss_form_input" ng-model="floor.EnergyService.ServiceOffReason">
+                    <option value="NA">N/A</option>
                     <option value="Street_Turn_On">Street turn on</option>
                     <option value="Upgrade_Service">Upgrade Service</option>
                     <option value="New_Meter">New meter</option>
@@ -226,6 +229,7 @@
             <div class="arrow_box" style="width: 40%">
                 <label class="ss_form_input_title">Service Off Reason</label>
                 <select class="ss_form_input" ng-model="floor.NationalGrid.ServiceOffReason">
+                    <option value="NA">N/A</option>
                     <option value="Service_Cut_From_Street">Service Cut From Street</option>
                     <option value="Meter_Locked">Meter Locked</option>
                     <option value="Meter_Mising">Meter Mising</option>
@@ -362,6 +366,7 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Type</label>
                 <select class="ss_form_input" ng-model="CSCase.CSCase.Utilities.Taxes_AccountType">
+                    <option value="NA">N/A</option>
                     <option value="ERP">ERP</option>
                     <option value="Registration">Registration</option>
                     <option value="Tax">Tax</option>
