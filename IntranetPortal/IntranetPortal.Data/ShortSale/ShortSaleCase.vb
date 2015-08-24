@@ -1,7 +1,9 @@
 ﻿Imports System.Text.RegularExpressions
 Imports System.Text
 Imports Newtonsoft.Json
+Imports System.ComponentModel.DataAnnotations
 
+<MetadataType(GetType(ShortSaleCaseMetaType))>
 Partial Public Class ShortSaleCase
 
 #Region "Constructor"
