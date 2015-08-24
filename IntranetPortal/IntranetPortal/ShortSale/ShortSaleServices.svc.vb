@@ -73,7 +73,7 @@ Public Class ShortSaleServices
         Dim propertyBaseInfo = Data.PropertyBaseInfo.GetInstance(bble)
         If propertyBaseInfo IsNot Nothing Then
             Dim homebreak = propertyBaseInfo.PropFloors
-            If homebreak Is Nothing Then
+            If homebreak IsNot Nothing Then
                 Return homebreak.ToJson()
             End If
             Return Nothing

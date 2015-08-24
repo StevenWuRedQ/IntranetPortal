@@ -352,6 +352,7 @@
             $scope.BBLE = bble;
             $scope.init = function (bble) {
                 ptHomeBreakDownService.loadByBBLE(bble, function (res) {
+                    debugger;
                     $scope.PropFloors = res?res: [];
                 });
             }
@@ -379,6 +380,7 @@
             $scope.$digest();
             target.html(cElem);
         });
+        debugger;
         target.scope().init(bble);
     }
 </script>

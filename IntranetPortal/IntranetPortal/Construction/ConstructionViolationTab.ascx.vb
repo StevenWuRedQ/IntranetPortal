@@ -15,6 +15,7 @@ Public Class ConstructionViolationTab
     Public Sub GetInfoFromDOB(Url As String)
         Dim doc = New HtmlDocument
         doc.Load(Url)
+        Dim link = doc.DocumentNode.SelectNodes("//tr[./td/b/a.text()]")
     End Sub
 
 End Class
