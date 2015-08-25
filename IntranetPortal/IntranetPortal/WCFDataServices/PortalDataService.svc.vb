@@ -326,7 +326,8 @@ Public Class PortalDataService
         Using client As New IntranetPortal.Data.DataAPI.WCFMacrosClient
 
             If type = "DOBComplains" Then
-
+                Dim complaints = CheckingComplain.Instance(bble)
+                complaints.UpdateComplaintsResult()
             End If
         End Using
 
