@@ -139,7 +139,16 @@ Public Class EmailService
 
         If attachments IsNot Nothing AndAlso attachments.Count > 0 Then
             For Each att In attachments
-                Dim file = DocumentService.DownLoadFileStream(att)
+                Dim file As Object
+                If att.ToLower.EndsWith("pdf") Then
+                    
+                    file = New With {.Stream = New System.IO.MemoryStream(DocumentService.GetPDFContent(att)), .Name = Regex.Match(att,
+                     "\w+\.pdf$",
+                     RegexOptions.IgnoreCase)}
+                Else
+                    file = DocumentService.DownLoadFileStream(att)
+                End If
+
                 Message.Attachments.Add(New Attachment(CType(file.Stream, MemoryStream), file.Name.ToString))
                 tmpAttachs.Add(att, file.Name.ToString)
             Next

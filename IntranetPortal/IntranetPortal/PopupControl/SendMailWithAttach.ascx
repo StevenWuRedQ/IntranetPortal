@@ -33,7 +33,17 @@
     var sendingMail = false;
     function SendMail() {
         if (!popupSendEmailAttachClient.InCallback()) {
-            popupSendEmailAttachClient.PerformCallback('SendMail|' + '123');
+            var command = "SendMail|"
+            if (typeof GetAttachments === 'undefined')
+            {
+                command += "Exporter=CaseExporter"
+                
+            }else
+            {
+                command += GetAttachments();
+            }
+           
+            popupSendEmailAttachClient.PerformCallback(command);
           
         }
         else {

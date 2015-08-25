@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="BuyerEntityPopUpContent.aspx.vb" Inherits="IntranetPortal.BuyerEntityPopUpContent" MasterPageFile="~/Content.Master" %>
 
 <%@ Register Src="~/ShortSale/ShortSaleSubMenu.ascx" TagPrefix="uc1" TagName="ShortSaleSubMenu" %>
+<%@ Register Src="~/PopupControl/SendMailWithAttach.ascx" TagPrefix="uc1" TagName="SendMailWithAttach" %>
+
 
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
@@ -28,7 +30,7 @@
         </div>
         <div style="color: #b1b2b7" class="clearfix">
             <div class="row" style="margin: 0px">
-
+                <uc1:SendMailWithAttach runat="server" ID="SendMailWithAttach" />
                 <input type="hidden" id="CurrentUser" value="<%= Page.User.Identity.Name%>" />
                 <div class="col-md-3">
 
@@ -316,7 +318,7 @@
                                     </td>
                                     <td valign="top">
                                         <input style="margin-left: 40px;" type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveCurrent()"><br />
-                                        <input style="margin-left: 40px; margin-top: 5px" type="button" class="rand-button short_sale_edit" value="Mail" ng-click="ShowEmailPopUp=true">
+                                        <input style="margin-left: 40px; margin-top: 5px" type="button" class="rand-button short_sale_edit" value="Mail" onclick="popupSendEmailAttachClient.Show();popupSendEmailAttachClient.PerformCallback('Show');">
                                     </td>
 
                                 </tr>
@@ -485,6 +487,14 @@
         </div>
     </div>
     <script>
+        function GetAttachments()
+        {
+            
+            var currentCorp = angular.element(document.getElementById("BuyerEntityCtrl")).scope().currentContact;
+            var files = [currentCorp.EINFile, currentCorp.File2, currentCorp.File3];
+            files = files.filter(function (o) { return o })
+            return files.join(",")
+        }
         var portalApp = angular.module('PortalApp');
 
         portalApp.controller('BuyerEntityCtrl', ['$scope', '$http', 'ptContactServices', function ($scope, $http, ptContactServices) {

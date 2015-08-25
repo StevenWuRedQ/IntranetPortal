@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class BuyerEntityPopUpContent
 
     '''<summary>
+    '''SendMailWithAttach control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SendMailWithAttach As Global.IntranetPortal.SendMailWithAttach
+
+    '''<summary>
     '''ShortSaleSubMenu control.
     '''</summary>
     '''<remarks>

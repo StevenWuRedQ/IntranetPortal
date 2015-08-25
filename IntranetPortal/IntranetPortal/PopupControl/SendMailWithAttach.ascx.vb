@@ -3,6 +3,7 @@ Imports DevExpress.Web.ASPxEditors
 Imports IntranetPortal.Data
 Imports DevExpress.Web.ASPxGridView.Export
 Imports System.IO
+Imports System.Net.Mail
 
 Public Class SendMailWithAttach
     Inherits System.Web.UI.UserControl
@@ -35,8 +36,11 @@ Public Class SendMailWithAttach
         End If
 
         If e.Parameter.StartsWith("SendMail") Then
-
+            Dim command = e.Parameter.Split("|")(1)
             Dim attachments As New List(Of String)
+            If (command.IndexOf(",") > 0) Then
+                attachments = command.Split(",").ToList
+            End If
 
 
 
@@ -45,24 +49,30 @@ Public Class SendMailWithAttach
                 EmailCCIDs.Text = EmailCCIDs.Text & ";" & senderEmail
             End If
 
-            Dim caseAttachExp = Me.Parent.FindControl("CaseExporter")
-            If (caseAttachExp IsNot Nothing) Then
-                Dim caseAttach = TryCast(caseAttachExp, ASPxGridViewExporter)
-                If (caseAttach IsNot Nothing) Then
-                    Dim stream = New MemoryStream()
-                    caseAttach.WriteXlsx(stream)
-                    stream.Position = 0
-                    Dim cropAttach = New System.Net.Mail.Attachment(stream, "CorpsReport.xlsx")
-                    Dim mailId = IntranetPortal.Core.EmailService.SendMail(EmailToIDs.Text, EmailCCIDs.Text, EmailSuject.Text, EmailBody.Html, Nothing, {cropAttach}, If(LogCategory = LeadsActivityLog.LogCategory.ShortSale, "shortsale", "smtp"))
+            Dim cropAttach As Attachment = Nothing
+            If (attachments.Count = 0) Then
+                Dim caseAttachExp = Me.Parent.FindControl("CaseExporter")
+                If (caseAttachExp IsNot Nothing) Then
+                    Dim caseAttach = TryCast(caseAttachExp, ASPxGridViewExporter)
+                    If (caseAttach IsNot Nothing) Then
+                        Dim stream = New MemoryStream()
+                        caseAttach.WriteXlsx(stream)
+                        stream.Position = 0
 
-                    'LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, catgorys, LeadsActivityLog.EnumActionType.Email)
-                    EmailToIDs.Text = ""
-                    EmailCCIDs.Text = ""
-                    EmailSuject.Text = ""
-                    EmailBody.Html = ""
+                        cropAttach = New System.Net.Mail.Attachment(stream, "CorpsReport.xlsx")
 
+                    End If
                 End If
+
             End If
+            Dim CropAttachs As Attachment() = If(cropAttach IsNot Nothing, {cropAttach}, Nothing)
+            Dim mailId = IntranetPortal.Core.EmailService.SendMail(EmailToIDs.Text, EmailCCIDs.Text, EmailSuject.Text, EmailBody.Html, attachments, CropAttachs)
+
+            'LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, catgorys, LeadsActivityLog.EnumActionType.Email)
+            EmailToIDs.Text = ""
+            EmailCCIDs.Text = ""
+            EmailSuject.Text = ""
+            EmailBody.Html = ""
 
         End If
 
