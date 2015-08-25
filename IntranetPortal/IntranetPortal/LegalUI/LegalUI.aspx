@@ -11,7 +11,7 @@
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
-   
+
     <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/jquery.webui-popover.js"></script>
     <style type="text/css">
@@ -239,7 +239,7 @@
                                         </ul>
                                     </div>
                                     <% End If%>
-                                    <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerPreview Or ShowReassginBtn() Then%>
+                                    <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerPreview Or ShowReassginBtn() OrElse IntranetPortal.LegalCaseManage.IsManager(Page.User.Identity.Name) Then%>
                                     <dx:ASPxPopupControl ClientInstanceName="popupSelectAttorneyCtr" Width="300px" Height="300px"
                                         MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
                                         HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
@@ -448,6 +448,9 @@
                                     </li>
                                     <li style="margin-right: 30px; color: #7396a9; float: right">
                                         <% If IntranetPortal.LegalCaseManage.IsManager(Page.User.Identity.Name) Then%>
+                                        <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Attorney');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to paralegal / Attorney"></i>
+                                        <i class="fa fa-lightbulb-o sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Research');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Research"></i>
+
                                         <i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Closed" onclick="PopupComments.Show(this, angular.element(document.getElementById('LegalCtrl')).scope().CloseCase)"></i>
                                         <% End If%>
                                         <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
@@ -882,7 +885,7 @@
                         success(function (data, status, headers, config) {
 
                             $scope.LegalCase = $.parseJSON(data.d);
-                            
+
                             $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
                             $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
 

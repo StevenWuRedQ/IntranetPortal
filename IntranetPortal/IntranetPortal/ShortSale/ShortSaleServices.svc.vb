@@ -93,9 +93,6 @@ Public Class ShortSaleServices
 
 #End Region
 
-
-
-
 #Region "Page Data Service"
 
     <OperationContract()>

@@ -343,7 +343,7 @@
         var homeBreakDownCtrl = document.getElementById('homeBreakDownCtrl');
         var target = angular.element(homeBreakDownCtrl);
         var $injector = target.injector();
-
+        if ($injector) {
         $injector.invoke(function ($compile, ptCom, ptHomeBreakDownService) {
             var compiled = $compile(homeBreakDownCtrl.innerHTML);
             var $scope = target.scope();
@@ -369,7 +369,7 @@
                 $scope.setPopupVisible($scope.PropFloors[$scope.PropFloors.length - 1], true);
             }
             $scope.saveHomeBreakDown = function () {
-                ptHomeBreakDownService.save($scope.BBLE, $scope.PropFloors, function(res) {
+                    ptHomeBreakDownService.save($scope.BBLE, $scope.PropFloors, function (res) {
                     console.log(res);
                     alert('Save Successfullly!');
                 })
@@ -382,6 +382,7 @@
         });
         debugger;
         target.scope().init(bble);
+    }
     }
 </script>
 <script src="/Scripts/stevenjs.js"></script>

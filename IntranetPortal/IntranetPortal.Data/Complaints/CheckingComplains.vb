@@ -1,12 +1,11 @@
 ﻿Imports IntranetPortal.Core
+Imports Newtonsoft.Json
 
 Partial Public Class CheckingComplain
 
     Public Const LogTitleRefreshComplain As String = "RefreshPropertyComplaints"
 
-
     Public Shared Function GetAllComplains() As List(Of CheckingComplain)
-
         Using ctx As New ConstructionEntities
             Return ctx.CheckingComplains.ToList
         End Using
@@ -23,6 +22,9 @@ Partial Public Class CheckingComplain
             Try
                 Return client.Get_DBO_Complaints_List(bble, True)
             Catch ex As Exception
+                Core.SystemLog.LogError("Error in GetComplainsResult", ex, bble, "portal", bble)
+                Core.SystemLog.Log("Error in GetComplainsResult", ex.ToJsonString, SystemLog.LogCategory.Error, bble, "portal")
+
                 Return {}
             End Try
         End Using
@@ -91,16 +93,19 @@ Partial Public Class CheckingComplain
         Dim result = GetComplainsResult(BBLE)
 
         If result IsNot Nothing AndAlso result.Length > 0 Then
-            Dim complaints = result(0)
-            Me.LastDataEntered = complaints.DateEntered
-            Me.LastComplaintsResult = complaints.ToJsonString
+
+            If DataIsChange(result) Then
+                NotifyAction()
+            End If
+
+            Me.LastDataEntered = result.OrderByDescending(Function(r) r.DateEntered).FirstOrDefault.DateEntered
+            Me.ComplaintsResult = result
             Me.LastResultUpdate = DateTime.Now
             Me.Save("")
         End If
     End Sub
 
     Private Sub RequestComplaints(requestBy As String)
-
         Try
             Using client As New DataAPI.WCFMacrosClient
                 Dim data As New DataAPI.DOB_Complaints_In
@@ -116,9 +121,45 @@ Partial Public Class CheckingComplain
         Catch ex As Exception
             Core.SystemLog.LogError("DOBComplaintsGet", ex, "", requestBy, BBLE)
         End Try
-
     End Sub
 
+    Private Function DataIsChange(results As DataAPI.SP_DOB_Complaints_By_BBLE_Result()) As Boolean
+        For Each result In results
+            If result.Status = "ACT" Then
+                Dim lastReulst = ComplaintsResult.Where(Function(r) r.BBLE = result.BBLE AndAlso r.ComplaintNumber = result.ComplaintNumber).FirstOrDefault
+
+                'New complaints
+                If lastReulst Is Nothing Then
+                    Return True
+                End If
+
+                'Changed Complaints
+                If result.DateEntered.HasValue AndAlso result.DateEntered > lastReulst.DateEntered Then
+                    Return True
+                End If
+            End If
+        Next
+
+        Return False
+    End Function
+
+    Private _complaintsResult As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
+    Public Property ComplaintsResult As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
+        Get
+            If _complaintsResult Is Nothing Then
+                _complaintsResult = JsonConvert.DeserializeObject(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result())(Me.LastComplaintsResult)
+            End If
+            Return _complaintsResult
+        End Get
+        Set(value As DataAPI.SP_DOB_Complaints_By_BBLE_Result())
+            _complaintsResult = value
+            Me.LastComplaintsResult = value.ToJsonString
+        End Set
+    End Property
+
+    Public Sub NotifyAction()
+
+    End Sub
 End Class
 
 Namespace DataAPI

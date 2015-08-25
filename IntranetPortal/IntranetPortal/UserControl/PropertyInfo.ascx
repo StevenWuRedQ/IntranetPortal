@@ -292,7 +292,10 @@
             </ul>
         </div>
 
+        <% If LeadsInfoData.InShortSale Then%>
         <uc1:NGShortSaleInLeadsView runat="server" ID="NGShortSaleInLeadsView" />
+        <% End If%>
+
         <%--  <div style="margin: 20px;" class="clearfix" runat="server" id="divShortSaleData" visible="false">
             <uc1:ShortSaleInLeadsView runat="server" ID="ShortSaleInLeadsView" Visible="false" />
      

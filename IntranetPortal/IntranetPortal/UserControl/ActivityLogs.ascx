@@ -356,7 +356,8 @@
             needRefreshShortSale = false;
         }
 
-        addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate option:selected").text() + "|" + $("#selCategory").val());
+        var updateLevel = $("input:radio[name=is_public]:checked").val();
+        addCommentsCallbackClient.PerformCallback(updateLevel + "|" + addDate.toJSON() + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate option:selected").text() + "|" + $("#selCategory").val());
     }
 
     function OnCommentsKeyDown(e) {
@@ -437,11 +438,11 @@
         <div style="float: left; height: 110px; min-width: 450px; width: 60%; margin-top: 10px;">
             <div class="clearfix">
                 <span style="color: #295268;" class="upcase_text">Add Comment&nbsp;&nbsp;<i class="fa fa-comment" style="font-size: 14px"></i></span>
-                <input type="radio" id="is_public" name="is_public" value="Fannie" class="font_12" />
+                <input type="radio" id="is_public" name="is_public" value="Internal" class="font_12" checked="checked" />
                 <label for="is_public" class="font_12">
                     <span class="upcase_text">Internal update</span>
                 </label>
-                <input type="radio" id="is_publicf" name="is_public" value="FHA" class="font_12" />
+                <input type="radio" id="is_publicf" name="is_public" value="Public" class="font_12" />
                 <label for="is_publicf" class="font_12">
                     <span class="upcase_text">Public update</span>
                 </label>

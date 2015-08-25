@@ -1,4 +1,6 @@
-﻿Public Class ActivityManageBase
+﻿
+
+Public Class ActivityManageBase
 
     Public Property LogCategory As LeadsActivityLog.LogCategory
     Public Property TaskActionList() As String()

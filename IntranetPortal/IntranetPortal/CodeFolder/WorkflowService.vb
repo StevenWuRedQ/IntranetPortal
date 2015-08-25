@@ -234,7 +234,7 @@ Public Class WorkflowService
             If pInstIds.Count > 0 Then
                 Dim wls = MyIdealProp.Workflow.DBPersistence.Worklist.GetProcInstWorkList(pInstIds(0))
                 If wls IsNot Nothing Then
-                    Return wls.SingleOrDefault(Function(wl) wl.ActivityName = legalStatus.ToString)
+                    Return wls.FirstOrDefault(Function(wl) wl.ActivityName = legalStatus.ToString)
 
                 End If
             End If

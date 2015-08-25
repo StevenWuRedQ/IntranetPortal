@@ -64,13 +64,13 @@ Public Class ActivityLogs
         Else
             Select Case DisplayMode
                 Case ActivityLogMode.ShortSale
-                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Task.ToString})
+                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Task.ToString, LeadsActivityLog.LogCategory.PublicUpdate.ToString})
                 Case ActivityLogMode.Legal
-                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.LogCategory.Eviction.ToString})
+                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.LogCategory.Eviction.ToString, LeadsActivityLog.LogCategory.PublicUpdate.ToString})
                 Case ActivityLogMode.Construction
-                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.Construction.ToString})
+                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.Construction.ToString, LeadsActivityLog.LogCategory.PublicUpdate.ToString})
                 Case ActivityLogMode.Eviction
-                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.Eviction})
+                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.Eviction.ToString, LeadsActivityLog.LogCategory.PublicUpdate.ToString})
                 Case Else
                     gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, Nothing)
             End Select
@@ -909,9 +909,16 @@ Public Class ActivityLogs
             Return
         End If
 
+        Dim updateLevel = e.Parameter.Split("|")(0)
+
+        Dim logCategoryStr = LogCategory.ToString
+        If updateLevel = "Public" Then
+            logCategoryStr = LeadsActivityLog.LogCategory.PublicUpdate.ToString
+        End If
+
         Dim aspxdate As DateTime
 
-        If Not DateTime.TryParse(e.Parameter.Split("|")(0), aspxdate) Then
+        If Not DateTime.TryParse(e.Parameter.Split("|")(1), aspxdate) Then
             aspxdate = DateTime.Now
         End If
 
@@ -934,9 +941,9 @@ Public Class ActivityLogs
         Select Case DisplayMode
             Case ActivityLogMode.ShortSale
                 aspxdate = DateTime.Now
-                Dim typeOfUpdate = e.Parameter.Split("|")(1)
-                Dim statusOfUpdate = e.Parameter.Split("|")(2)
-                Dim category = e.Parameter.Split("|")(3)
+                Dim typeOfUpdate = e.Parameter.Split("|")(2)
+                Dim statusOfUpdate = e.Parameter.Split("|")(3)
+                Dim category = e.Parameter.Split("|")(4)
 
                 If Not String.IsNullOrEmpty(typeOfUpdate) Then
 
@@ -977,15 +984,15 @@ Public Class ActivityLogs
 
                     End If
                 Else
-                    LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
+                    LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, logCategoryStr, LeadsActivityLog.EnumActionType.Comments)
                     ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, "Comments", "Comments", txtComments)
                 End If
             Case ActivityLogMode.Legal, ActivityLogMode.Construction, ActivityLogMode.Eviction
 
-                LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.Comments)
+                LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, logCategoryStr, LeadsActivityLog.EnumActionType.Comments)
 
             Case Else
-                LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.Comments)
+                LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, logCategoryStr, LeadsActivityLog.EnumActionType.Comments)
 
                 'Notify leads owner messager 
                 Dim ld = Lead.GetInstance(hfBBLE.Value)
