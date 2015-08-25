@@ -18,7 +18,7 @@ Public Class LegalSummaryUI
     End Sub
 
     Sub BindUpCommingFCGrid()
-        Dim mCases = LegalCaseReport.GetAllReport.Where(Function(r) r.SaleDate IsNot Nothing).ToList
+        Dim mCases = LegalCaseReport.GetAllReport.Where(Function(r) r.SaleDate IsNot Nothing AndAlso r.LegalStatus.HasValue AndAlso r.LegalStatus = 7).ToList
 
 
         If (Not (User.IsInRole("Admin") Or User.IsInRole("Legal-Manager"))) Then
