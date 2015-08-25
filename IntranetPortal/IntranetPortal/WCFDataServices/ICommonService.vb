@@ -29,6 +29,9 @@ Public Interface ICommonService
     Sub SendLegalActivityEmail()
 
     <OperationContract>
+    Sub LegalFollowUp()
+
+    <OperationContract>
     Sub SendShortSaleUserSummayEmail()
 
     <OperationContract>

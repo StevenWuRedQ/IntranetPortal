@@ -212,6 +212,15 @@ Partial Public Class LegalUI
     Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
 
     '''<summary>
+    '''fileGamePlan control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fileGamePlan As Global.IntranetPortal.ShortSaleFileOverview
+
+    '''<summary>
     '''SendMail control.
     '''</summary>
     '''<remarks>

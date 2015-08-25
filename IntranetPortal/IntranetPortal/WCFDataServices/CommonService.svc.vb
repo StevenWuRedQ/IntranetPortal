@@ -11,7 +11,6 @@ Imports IntranetPortal.PortalReport
 Public Class CommonService
     Implements ICommonService
 
-
     Public Sub SendEmailByAddress(toAddress As String, ccAddress As String, subject As String, body As String) Implements ICommonService.SendEmailByAddress
         IntranetPortal.Core.EmailService.SendMail(toAddress, ccAddress, subject, body, Nothing)
     End Sub
@@ -141,6 +140,22 @@ Public Class CommonService
         Dim attachment As New System.Net.Mail.Attachment(GetPDf("Legal"), name)
 
         IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
+    End Sub
+
+    Public Sub LegalFollowUp() Implements ICommonService.LegalFollowUp
+        Dim startDateTime = DateTime.Today
+        Dim endDateTime = DateTime.Today.AddDays(1).AddTicks(-1)
+
+        Dim followUps = Data.LegalCase.GetFollowUpCases().Where(Function(l) l.FollowUp >= startDateTime AndAlso l.FollowUp <= endDateTime).ToList
+
+
+        For Each lc In followUps
+            Try
+                IntranetPortal.LegalCaseManage.ReminderFollowUp(lc)
+            Catch ex As Exception
+                Throw ex
+            End Try
+        Next
     End Sub
 
     Public Sub SendUserActivitySummayEmail(type As String, startDate As DateTime, endDate As DateTime) Implements ICommonService.SendUserActivitySummayEmail
@@ -275,9 +290,5 @@ Public Class CommonService
 
         Return sb.ToString
     End Function
-
-
-
-
-
+   
 End Class

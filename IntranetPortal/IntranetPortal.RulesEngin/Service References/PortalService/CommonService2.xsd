@@ -103,6 +103,16 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="LegalFollowUp">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LegalFollowUpResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SendShortSaleUserSummayEmail">
     <xs:complexType>
       <xs:sequence />

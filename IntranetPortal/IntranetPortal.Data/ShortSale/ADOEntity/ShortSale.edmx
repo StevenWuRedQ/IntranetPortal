@@ -441,6 +441,7 @@
           </Key>
           <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
           <Property Name="ActivityDate" Type="datetime" />
           <Property Name="Comments" Type="nvarchar(max)" />
@@ -971,6 +972,7 @@
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ActivityDate" Type="DateTime" Precision="3" />
           <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ShortSaleBuyer">
           <Key>
@@ -1475,6 +1477,7 @@
           <EntitySetMapping Name="ShortSaleOverviews">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleOverview">
               <MappingFragment StoreEntitySet="ShortSaleOverview">
+                <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />

@@ -445,7 +445,7 @@
                                                                                             <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="ShortSale" />
                                                                                         </div>
                                                                                         <div class="tab-pane" id="file_overview">
-                                                                                            <uc1:ShortSaleFileOverview runat="server" ID="ShortSaleFileOverview" />
+                                                                                            <uc1:ShortSaleFileOverview runat="server" ID="ShortSaleFileOverview" Category="ShortSale" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </dx:PanelContent>

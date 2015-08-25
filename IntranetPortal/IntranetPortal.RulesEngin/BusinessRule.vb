@@ -596,18 +596,16 @@ Public Class LegalFollowUpRule
 
     Public Overrides Sub Execute()
 
-        Dim startDateTime = DateTime.Today
-        Dim endDateTime = DateTime.Today.AddDays(1).AddTicks(-1)
+        Using client As New PortalService.CommonServiceClient
 
-        Dim followUps = Data.LegalCase.GetFollowUpCases().Where(Function(l) l.FollowUp >= startDateTime AndAlso l.FollowUp <= endDateTime).ToList
-
-
-        For Each lc In followUps
             Try
-                IntranetPortal.LegalCaseManage.ReminderFollowUp(lc)
+                client.LegalFollowUp()
+
             Catch ex As Exception
-                Log("LegalFollowUpRule error " & lc.BBLE, ex)
+                Log("Legal Followup Rule Error", ex)
             End Try
-        Next
+
+        End Using
+     
     End Sub
 End Class

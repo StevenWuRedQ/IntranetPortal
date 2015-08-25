@@ -91,13 +91,14 @@ Partial Class Troubleshooting
         Me.txtSSBBLE = New System.Windows.Forms.TextBox()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.btnRefreshComplains = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtGeoBBLE = New System.Windows.Forms.TextBox()
         Me.btnGeoBBLE = New System.Windows.Forms.Button()
         Me.txtGeoAddress = New System.Windows.Forms.TextBox()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
         Me.btnRefreshLegalReport = New System.Windows.Forms.Button()
-        Me.btnRefreshComplains = New System.Windows.Forms.Button()
+        Me.btnFollowUp = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -785,6 +786,15 @@ Partial Class Troubleshooting
         Me.TabPage6.Text = "Data Service"
         Me.TabPage6.UseVisualStyleBackColor = True
         '
+        'btnRefreshComplains
+        '
+        Me.btnRefreshComplains.Location = New System.Drawing.Point(242, 23)
+        Me.btnRefreshComplains.Name = "btnRefreshComplains"
+        Me.btnRefreshComplains.Size = New System.Drawing.Size(115, 22)
+        Me.btnRefreshComplains.TabIndex = 1
+        Me.btnRefreshComplains.Text = "Refresh Complaints"
+        Me.btnRefreshComplains.UseVisualStyleBackColor = True
+        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.txtGeoBBLE)
@@ -822,6 +832,7 @@ Partial Class Troubleshooting
         '
         'TabPage7
         '
+        Me.TabPage7.Controls.Add(Me.btnFollowUp)
         Me.TabPage7.Controls.Add(Me.btnRefreshLegalReport)
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
@@ -840,14 +851,14 @@ Partial Class Troubleshooting
         Me.btnRefreshLegalReport.Text = "Refresh Report Fields"
         Me.btnRefreshLegalReport.UseVisualStyleBackColor = True
         '
-        'btnRefreshComplains
+        'btnFollowUp
         '
-        Me.btnRefreshComplains.Location = New System.Drawing.Point(242, 23)
-        Me.btnRefreshComplains.Name = "btnRefreshComplains"
-        Me.btnRefreshComplains.Size = New System.Drawing.Size(115, 22)
-        Me.btnRefreshComplains.TabIndex = 1
-        Me.btnRefreshComplains.Text = "Refresh Complaints"
-        Me.btnRefreshComplains.UseVisualStyleBackColor = True
+        Me.btnFollowUp.Location = New System.Drawing.Point(8, 48)
+        Me.btnFollowUp.Name = "btnFollowUp"
+        Me.btnFollowUp.Size = New System.Drawing.Size(122, 28)
+        Me.btnFollowUp.TabIndex = 1
+        Me.btnFollowUp.Text = "Follow up Testing"
+        Me.btnFollowUp.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -963,4 +974,5 @@ Partial Class Troubleshooting
     Friend WithEvents Button13 As System.Windows.Forms.Button
     Friend WithEvents btnSSUserReport As System.Windows.Forms.Button
     Friend WithEvents btnRefreshComplains As System.Windows.Forms.Button
+    Friend WithEvents btnFollowUp As System.Windows.Forms.Button
 End Class

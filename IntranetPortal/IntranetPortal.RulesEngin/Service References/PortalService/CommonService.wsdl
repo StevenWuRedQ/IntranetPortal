@@ -55,6 +55,12 @@
   <wsdl:message name="ICommonService_SendLegalActivityEmail_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendLegalActivityEmailResponse" />
   </wsdl:message>
+  <wsdl:message name="ICommonService_LegalFollowUp_InputMessage">
+    <wsdl:part name="parameters" element="tns:LegalFollowUp" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_LegalFollowUp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LegalFollowUpResponse" />
+  </wsdl:message>
   <wsdl:message name="ICommonService_SendShortSaleUserSummayEmail_InputMessage">
     <wsdl:part name="parameters" element="tns:SendShortSaleUserSummayEmail" />
   </wsdl:message>
@@ -105,6 +111,10 @@
     <wsdl:operation name="SendLegalActivityEmail">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendLegalActivityEmail" message="tns:ICommonService_SendLegalActivityEmail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendLegalActivityEmailResponse" message="tns:ICommonService_SendLegalActivityEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LegalFollowUp">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/LegalFollowUp" message="tns:ICommonService_LegalFollowUp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/LegalFollowUpResponse" message="tns:ICommonService_LegalFollowUp_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendShortSaleUserSummayEmail">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmail" message="tns:ICommonService_SendShortSaleUserSummayEmail_InputMessage" />
@@ -186,6 +196,15 @@
     </wsdl:operation>
     <wsdl:operation name="SendLegalActivityEmail">
       <soap:operation soapAction="http://tempuri.org/ICommonService/SendLegalActivityEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LegalFollowUp">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/LegalFollowUp" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

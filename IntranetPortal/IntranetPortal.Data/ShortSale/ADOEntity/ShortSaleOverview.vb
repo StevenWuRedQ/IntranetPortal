@@ -16,5 +16,6 @@ Partial Public Class ShortSaleOverview
     Public Property UserName As String
     Public Property ActivityDate As Nullable(Of Date)
     Public Property Comments As String
+    Public Property Category As String
 
 End Class

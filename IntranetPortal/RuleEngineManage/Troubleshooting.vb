@@ -647,4 +647,9 @@ Public Class Troubleshooting
         Dim rule = New IntranetPortal.RulesEngine.DOBComplaintsCheckingRule
         rule.Execute()
     End Sub
+
+    Private Sub btnFollowUp_Click(sender As Object, e As EventArgs) Handles btnFollowUp.Click
+        Dim rule = New IntranetPortal.RulesEngine.LegalFollowUpRule
+        rule.Execute()
+    End Sub
 End Class

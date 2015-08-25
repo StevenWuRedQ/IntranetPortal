@@ -4,6 +4,8 @@ Imports IntranetPortal.Data
 Public Class ShortSaleFileOverview
     Inherits System.Web.UI.UserControl
 
+    Public Property Category As LeadsActivityLog.LogCategory
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
     End Sub
@@ -12,7 +14,7 @@ Public Class ShortSaleFileOverview
 
         hfBBLE.Value = bble
 
-        gridTracking.DataSource = ShortSaleOverview.LoadOverview(bble)
+        gridTracking.DataSource = ShortSaleOverview.LoadOverview(bble, Category.ToString)
         gridTracking.DataBind()
 
     End Sub
@@ -28,6 +30,7 @@ Public Class ShortSaleFileOverview
             log.UserName = Page.User.Identity.Name
             log.Comments = comments
             log.BBLE = hfBBLE.Value
+            log.Category = Category.ToString
             log.Save()
 
             BindData(hfBBLE.Value)

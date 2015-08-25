@@ -80,6 +80,8 @@ Public Class LegalUI
         ASPxSplitter1.Panes("listPanel").Collapsed = True
         BBLEStr = bble
         ActivityLogs.BindData(bble)
+        fileGamePlan.BindData(bble)
+
         If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
             Dim cstext1 As String = "<script type=""text/javascript"">" & _
                             String.Format("var leadsInfoBBLE = ""{0}"";", bble) & "</script>"
@@ -106,6 +108,7 @@ Public Class LegalUI
 
     Protected Sub cbpLogs_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         ActivityLogs.BindData(e.Parameter)
+        fileGamePlan.BindData(e.Parameter)
     End Sub
 
     <WebMethod()> _

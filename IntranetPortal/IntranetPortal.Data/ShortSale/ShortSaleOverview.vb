@@ -1,9 +1,9 @@
 ﻿
 Public Class ShortSaleOverview
 
-    Public Shared Function LoadOverview(bble As String) As List(Of ShortSaleOverview)
+    Public Shared Function LoadOverview(bble As String, Optional category As String = Nothing) As List(Of ShortSaleOverview)
         Using ctx As New ShortSaleEntities
-            Return ctx.ShortSaleOverviews.Where(Function(s) s.BBLE = bble).OrderByDescending(Function(s) s.ActivityDate).ToList
+            Return ctx.ShortSaleOverviews.Where(Function(s) s.BBLE = bble And s.Category = category).OrderByDescending(Function(s) s.ActivityDate).ToList
         End Using
     End Function
 

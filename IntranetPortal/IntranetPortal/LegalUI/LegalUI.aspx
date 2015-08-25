@@ -9,6 +9,7 @@
 <%@ Register Src="~/LegalUI/ManagePreViewControl.ascx" TagPrefix="uc1" TagName="ManagePreViewControl" %>
 <%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
+<%@ Register Src="~/ShortSale/ShortSaleFileOverview.ascx" TagPrefix="uc1" TagName="ShortSaleFileOverview" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
 
@@ -90,7 +91,7 @@
         <%--<textarea ng-model="LegalCaseJson">
         </textarea>
         <button type="button" ng-click="SaveLegalJson()">GetCase</button>--%>
-         <input type="hidden" id="CaseData" />
+        <input type="hidden" id="CaseData" />
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
                 <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
@@ -446,6 +447,12 @@
                                             <div class="font_size_bold">Activity Log</div>
                                         </a>
                                     </li>
+                                    <li class="short_sale_head_tab">
+                                        <a href="#file_overview" role="tab" data-toggle="tab" class="tab_button_a" onclick="">
+                                            <i class="fa fa-info-circle head_tab_icon_padding"></i>
+                                            <div class="font_size_bold">Game Plan</div>
+                                        </a>
+                                    </li>
                                     <li style="margin-right: 30px; color: #7396a9; float: right">
                                         <% If IntranetPortal.LegalCaseManage.IsManager(Page.User.Identity.Name) Then%>
                                         <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Attorney');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to paralegal / Attorney"></i>
@@ -459,7 +466,14 @@
                                 <dx:ASPxCallbackPanel runat="server" ID="cbpLogs" ClientInstanceName="cbpLogs" OnCallback="cbpLogs_Callback">
                                     <PanelCollection>
                                         <dx:PanelContent>
-                                            <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="Legal" />
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="activity_log">
+                                                    <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="Legal" />
+                                                </div>
+                                                <div class="tab-pane" id="file_overview">
+                                                    <uc1:ShortSaleFileOverview runat="server" ID="fileGamePlan" Category="Legal" />
+                                                </div>
+                                            </div>
                                         </dx:PanelContent>
                                     </PanelCollection>
                                 </dx:ASPxCallbackPanel>
@@ -578,7 +592,7 @@
             </ContentCollection>
         </dx:ASPxPopupControl>
         <!-- end follow up function -->
-       
+
         <script type="text/javascript">
             LegalCaseBBLE = null;
             function VendorsClosing(s) {
@@ -810,7 +824,7 @@
                         });
                 }
 
-                ScopeAutoSave(GetLegalData, $scope.SaveLegal,'#LegalTabHead');
+                ScopeAutoSave(GetLegalData, $scope.SaveLegal, '#LegalTabHead');
 
                 $scope.CompleteResearch = function () {
                     var json = JSON.stringify($scope.LegalCase);
@@ -899,12 +913,12 @@
                                 }
                             }
                             $scope.showSAndCFrom();
-                           
+
                             LegalCaseBBLE = BBLE;
                             $scope.stopLoading();
 
                             ResetCaseDataChange();
-                            
+
                         }).
                         error(function () {
                             $scope.stopLoading();
@@ -984,8 +998,7 @@
 
                     return false;
                 }
-                $scope.SaveLegalJson =function()
-                {
+                $scope.SaveLegalJson = function () {
                     $scope.LegalCaseJson = JSON.stringify($scope.LegalCase)
                 }
                 $scope.ShowContorl = function (m) {
