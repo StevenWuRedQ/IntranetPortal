@@ -10,7 +10,6 @@
 
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
@@ -25,7 +24,6 @@
     <form id="form1" runat="server">
         <%-- <uc1:TaskSummary runat="server" ID="TaskSummary" />--%>
         <%-- <input type="button" onclick="LoadData()" value="Test" />--%>
-
         <%-- <uc1:ActivitySummary runat="server" id="ActivitySummary" />--%>
         <asp:Button ID="Button1" runat="server" Text="UpdateCaseName" OnClick="Button1_Click" />
         <asp:Label ID="UpdateStauts" runat="server"></asp:Label>

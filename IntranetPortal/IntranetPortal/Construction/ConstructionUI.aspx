@@ -426,16 +426,23 @@
             }
             /* end highlight */
 
-            /* DOBViolation Popup */
+
+            /* Popup */
             $scope.CSCase.CSCase.Violations.DOBViolations = [{}];
+            $scope.CSCase.CSCase.Violations.ECBViolations = [{}];
             $scope.setPopupVisible = function (modelName, bVal) {
-                $scope.$eval(modelName + '=' + bVal )
+                $scope.$eval(modelName + '=' + bVal)
             }
+
             $scope.addNewDOBViolation = function () {
                 $scope.ensurePush('CSCase.CSCase.Violations.DOBViolations');
                 $scope.setPopupVisible('DOBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.DOBViolations.length-1), true);
             }
-            /* end */
+            $scope.addNewECBViolation = function () {
+                $scope.ensurePush('CSCase.CSCase.Violations.ECBViolations');
+                $scope.setPopupVisible('ECBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.ECBViolations.length - 1), true);
+            }
+            /* end Popup*/
 
         }]);
     </script>

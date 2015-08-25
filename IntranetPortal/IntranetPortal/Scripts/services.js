@@ -47,7 +47,6 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem) {
             if (ScopeCaseDataChanged(getDataFunc)) {
                 var sucessFunc = function () {
                 }
-                debugger;
                 SaveFunc(sucessFunc);
                 //ScopeResetCaseDataChange(getDataFunc)
             }
@@ -401,6 +400,18 @@ app.service('ptConstructionService', [
                     }).error(function () {
                         console.log('Save CSCase fails.');
                     });
+            }
+        }
+
+        this.getDOBViolations = function (bble, callback) {
+            if (bble) {
+                var url = "/Construction/ConstructionServices.svc/GetDOBViolations?bble=" + bble
+                $http.get(url)
+                .success(function (res) {
+                    if(callback) callback(res)
+                }).error(function () {
+                    console.log("load dob violations fails")
+                })
             }
         }
     }

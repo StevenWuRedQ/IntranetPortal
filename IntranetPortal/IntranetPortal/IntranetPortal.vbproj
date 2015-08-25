@@ -604,6 +604,9 @@
       <DependentUpon>ConstructionProposalBidTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Construction\ConstructionServices.svc.vb">
+      <DependentUpon>ConstructionServices.svc</DependentUpon>
+    </Compile>
     <Compile Include="Construction\ConstructionSignoffsTab.ascx.designer.vb">
       <DependentUpon>ConstructionSignoffsTab.ascx</DependentUpon>
     </Compile>
@@ -2077,6 +2080,7 @@
     <Content Include="Construction\ConstructionPhotosTab.ascx" />
     <Content Include="Construction\ConstructionPlansTab.ascx" />
     <Content Include="Construction\ConstructionProposalBidTab.ascx" />
+    <Content Include="Construction\ConstructionServices.svc" />
     <Content Include="Construction\ConstructionSignoffsTab.ascx" />
     <Content Include="Construction\ConstructionUI.aspx" />
     <Content Include="Construction\ConstructionUtilitiesTab.ascx" />
