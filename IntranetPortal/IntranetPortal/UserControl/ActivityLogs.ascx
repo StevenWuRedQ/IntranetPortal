@@ -517,7 +517,6 @@
                             },                         
                             StatusUpdateChange: function(s)
                             { 
-                                debugger;
                                 var categoryText = $("#selCategory").val();
                                 var statusUpdateText = $("#selStatusUpdate").val();
 

@@ -2258,6 +2258,7 @@
     <Content Include="images\Closed.png" />
     <Content Include="images\close_icon.png" />
     <Content Include="images\construction.png" />
+    <Content Include="images\constructionbng.jpg" />
     <Content Include="images\Create.png" />
     <Content Include="images\Dead.png" />
     <Content Include="images\dead_lead_icon.png" />

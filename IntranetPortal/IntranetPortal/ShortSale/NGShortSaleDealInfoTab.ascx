@@ -81,60 +81,6 @@
     </div>
 </div>
 
-<%-- 
-<div class="ss_form">
-    <h4 class="ss_form_title">Valuation&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.ValueInfoes,'SsCase.ValueInfoes')" title="Add"></i></h4>
-    <div class="ss_brder" ng-show="SsCase.ValueInfoes.length>0">
-        <div class="ss_form_box clearfix ss_form_small_font">
-            <div dx-data-grid="{
-            columns: [
-                {dataField: 'Method', caption: 'Type',
-                 lookup: {
-                    dataSource:[
-                     {
-                        name: 'AVM',
-                        value: 'AVM'
-                    },
-                     {
-                         name: 'Exterior Appraisal',
-                         value: 'Exterior Appraisal'
-                     },
-                     {
-                         name: 'Exterior BPO',
-                         value: 'Exterior BPO'
-                     },
-                    {
-                        name: 'Interior Appraisal',
-                        value: 'Interior Appraisal'
-                    },
-                    {
-                        name: 'Interior BPO',
-                        value: 'Interior BPO'
-                    }
-                    ],
-                    displayExpr: 'name' ,
-                    valueExpr: 'value'}
-                },
-                {dataField: 'DateOfValue', caption: 'Date Completed', dataType: 'date'},
-                {dataField: 'ExpiredOn', caption: 'Date Expires', dataType: 'date'},
-                {dataField: 'BankValue', caption: 'Value'},
-                {dataField: 'MNSP', caption: 'Min Net',format: 'currency'} 
-            ],
-            bindingOptions: { dataSource: 'SsCase.ValueInfoes' },
-            editing: {
-                editMode: 'row',
-                editEnabled: true,
-                removeEnabled: true
-            
-            
-            
-            }}">
-            </div>
-        </div>
-    </div>
-</div>
---%>
-
 <div class="ss_form" id="valuation_table_new">
     <h4 class="ss_form_title">Valuations <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.ValueInfoes,'SsCase.ValueInfoes', true)" title="Add"></i>
     </h4>
@@ -143,7 +89,8 @@
             <th>Details</th>
             <th></th>
         </tr>
-        <tr class="icon_btn" ng-repeat="value in SsCase.ValueInfoes" id="value{{$index}}" >
+
+        <tr class="icon_btn" ng-repeat="value in SsCase.ValueInfoes" id="value{{$index}}">
             <td ng-click="setVisiblePopup(SsCase.ValueInfoes[$index], true)">
                 <div class="content">
                     <div class="row" style="margin: 0px">
@@ -151,13 +98,19 @@
                             <span><b>Type</b>: {{value.Method}}</span>
                         </div>
                         <div class="col-sm-4" style="padding: 0px">
-                            <span><b>Date Completed</b>: {{value.DateOfValue | date: 'M/d/yyyy'}}</span>
+                            <span><b>Date of Valuation</b>: {{value.DateOfValue| date: 'M/d/yyyy'}}</span>
+                        </div>
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Date Completed</b>: {{value.DateComplate | date: 'M/d/yyyy'}}</span>
                         </div>
                         <div class="col-sm-4" style="padding: 0px">
                             <span><b>Value</b>: {{value.BankValue | currency}}</span>
                         </div>
                         <div class="col-sm-4" style="padding: 0px">
-                            <span><b>Date Expires</b>: {{value.ExpiredOn | date: 'M/d/yyyy'}}</span>
+                            <span><b>Value Expires</b>: {{value.ExpiredOn | date: 'M/d/yyyy'}}</span>
+                        </div>
+                        <div class="col-sm-4" style="padding: 0px">
+                            <span><b>Access</b>: {{value.ExpiredOn | date: 'M/d/yyyy'}}</span>
                         </div>
                         <div class="col-sm-4" style="padding: 0px">
                             <span><b>Agent Name</b>: {{value.AgentName}}</span>
@@ -165,17 +118,18 @@
                         <div class="col-sm-4" style="padding: 0px">
                             <span><b>Agent Phone</b>: {{value.AgentPhone}}</span>
                         </div>
-
-                        
+                        <div ng-show="value.pending==true" class="col-sm-4" style="padding: 0px">
+                            <span><i class="fa fa-question"></i></span>
+                        </div>
                     </div>
                 </div>
             </td>
             <td>
                 <i class="fa fa-times icon_btn tooltip-examples text-danger" ng-click="NGremoveArrayItem(SsCase.ValueInfoes, $index)" title="Delete"></i>
                 <div dx-popup="{    
-                                height: 550,
+                                height: 650,
                                 width: 600, 
-                                title: 'Valuation '+($index+1),
+                                title: 'Valuation ',
                                 dragEnabled: true,
                                 showCloseButton: true,
                                 shading: false,
@@ -195,16 +149,24 @@
                                 </select>
                             </div>
                             <div>
+                                <label>Date of Valuation</label>
+                                <input class="form-control" ng-model="value.DateOfValue" ss-date />
+                            </div>
+                            <div>
                                 <label>Date Completed</label>
-                                <input class="form-control" ng-model="value.DateOfValue" ss-date/>
+                                <input class="form-control" ng-model="value.DateComplate" ss-date />
                             </div>
                             <div>
                                 <label>Value</label>
-                                <input class="form-control" ng-model="value.BankValue" money-mask/>
+                                <input class="form-control" ng-model="value.BankValue" money-mask />
                             </div>
                             <div>
                                 <label>Date Expires</label>
-                                <input class="form-control" ng-model="value.ExpiredOn" ss-date/>
+                                <input class="form-control" ng-model="value.ExpiredOn" ss-date />
+                            </div>
+                            <div>
+                                <label>Access</label>
+                                <input class="form-control" ng-model="value.Access" />
                             </div>
                             <div>
                                 <label>Agent Name</label>
@@ -214,13 +176,14 @@
                                 <label>Agent Phone</label>
                                 <input class="form-control" ng-model="value.AgentPhone" />
                             </div>
-                            
+
                         </form>
                         <br />
                         <button class="btn btn-primary pull-right" ng-click="setVisiblePopup(SsCase.ValueInfoes[$index], false)">Save</button>
                     </div>
                 </div>
             </td>
+        </tr>
     </table>
 </div>
 

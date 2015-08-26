@@ -207,7 +207,7 @@ portalApp.directive('ptDel', function () {
     }
 });
 
-portalApp.directive('ptFile', ['ptFileService','$timeout', function (ptFileService, $timeout) {
+portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout) {
     return {
         restrict: 'E',
         templateUrl: '/Scripts/templates/ptfile.html',
@@ -227,6 +227,8 @@ portalApp.directive('ptFile', ['ptFileService','$timeout', function (ptFileServi
             scope.delChoosed = function () {
                 scope.File = null;
                 scope.fileChoosed = false;
+                var fileEl = el.find('input:file')[0]
+                fileEl.value = ''
             }
             scope.toggleLoading = function () {
                 scope.loading = !scope.loading;
@@ -253,11 +255,12 @@ portalApp.directive('ptFile', ['ptFileService','$timeout', function (ptFileServi
             }
             el.find('input:file').bind('change', function () {
                 var file = this.files[0];
-                scope.$apply(function () {
-                    scope.File = file;
-                    scope.fileChoosed = true;
-                });
-                this.value = '';
+                if (file) {
+                    scope.$apply(function () {
+                        scope.File = file;
+                        scope.fileChoosed = true;
+                    });
+                }
             });
         }
     }

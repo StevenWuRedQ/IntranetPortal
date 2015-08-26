@@ -222,7 +222,6 @@ Public Class DocumentService
             file.ListItemAllFields("UploadBy") = uploadBy
             file.ListItemAllFields.Update()
             ctx.ExecuteQuery()
-
             Return fileUrl
         End Using
     End Function

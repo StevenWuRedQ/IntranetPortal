@@ -93,7 +93,8 @@ Namespace Controllers
                     Dim file As HttpPostedFile = HttpContext.Current.Request.Files(i)
                     Dim ms = New MemoryStream()
                     file.InputStream.CopyTo(ms)
-                    fileName = file.FileName
+                    Dim fileNameParts = file.FileName.Split("\")
+                    fileName = fileNameParts(fileNameParts.Length - 1)
                     results.Add(Core.DocumentService.UploadFile(String.Format("{0}/{1}", bble, "Construction"), ms.ToArray, fileName, User.Identity.Name))
                 Next
                 Return Ok(results.ToArray)

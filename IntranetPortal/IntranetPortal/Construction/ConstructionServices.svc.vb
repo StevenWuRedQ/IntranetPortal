@@ -32,7 +32,7 @@ Public Class ConstructionServices
         Dim doc = webGet.Load(uri)
         Dim dobViolationRow = doc.DocumentNode.SelectSingleNode("//tr[./td/b/a/text()='Violations-DOB']")
         While dobViolationRow Is Nothing
-            Thread.Sleep(5000)
+            Thread.Sleep(5000)  'DOB need 5secs to refresh the page!!
             doc = webGet.Load(uri)
             dobViolationRow = doc.DocumentNode.SelectSingleNode("//tr[./td/b/a/text()='Violations-DOB']")
         End While

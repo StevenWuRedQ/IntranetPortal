@@ -134,9 +134,9 @@
 
 </div>
 
-<div class="ss_form">
-    <h4 class="ss_form_title">Expeditor</h4>
-    <div class="ss_border">
+<div class="ss_form" >
+    <h4 class="ss_form_title">Expeditor&nbsp;<pt-collapse model="Expeditor_Collapsed" ng-init ="Expeditor_Collapsed=true"/></h4>
+    <div class="ss_border" collapse="Expeditor_Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Project Assigned Date</label>
