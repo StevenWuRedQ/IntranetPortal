@@ -569,6 +569,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CodeFolder\WorkflowService.vb" />
+    <Compile Include="Complaints\ComplaintsView.aspx.designer.vb">
+      <DependentUpon>ComplaintsView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Complaints\ComplaintsView.aspx.vb">
+      <DependentUpon>ComplaintsView.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Construction\ConstructionContractTab.ascx.designer.vb">
       <DependentUpon>ConstructionContractTab.ascx</DependentUpon>
     </Compile>
@@ -1145,10 +1152,10 @@
       <DependentUpon>CombineContact.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Management\ComplainsMng.aspx.designer.vb">
+    <Compile Include="Complaints\ComplainsMng.aspx.designer.vb">
       <DependentUpon>ComplainsMng.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Management\ComplainsMng.aspx.vb">
+    <Compile Include="Complaints\ComplainsMng.aspx.vb">
       <DependentUpon>ComplainsMng.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
@@ -2075,6 +2082,7 @@
     <Content Include="CallBackServices.asmx" />
     <Content Include="Chat\ChatDefault.aspx" />
     <Content Include="Chat\index.html" />
+    <Content Include="Complaints\ComplaintsView.aspx" />
     <Content Include="Construction\ConstructionContractTab.ascx" />
     <Content Include="Construction\ConstructionInitialIntakeTab.ascx" />
     <Content Include="Construction\ConstructionPhotosTab.ascx" />
@@ -2530,7 +2538,7 @@
     <Content Include="Management\AddressToBBLE.aspx" />
     <Content Include="ManagementUI\BuyerEntiyManage.aspx" />
     <Content Include="Management\CombineContact.aspx" />
-    <Content Include="Management\ComplainsMng.aspx" />
+    <Content Include="Complaints\ComplainsMng.aspx" />
     <Content Include="Management\ComplaintsNotify.aspx" />
     <Content Include="Management\ImportAgentData.aspx" />
     <Content Include="Management\Default.aspx" />

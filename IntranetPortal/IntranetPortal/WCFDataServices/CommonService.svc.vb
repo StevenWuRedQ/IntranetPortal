@@ -181,11 +181,15 @@ Public Class CommonService
 
     Private Sub SendActivityDataEmail(TeamActivityData As List(Of CaseActivityData))
         For Each actData In TeamActivityData
-            Dim emailData As New Dictionary(Of String, String)
-            emailData.Add("Body", LoadSSUserSummaryEmail(actData))
-            emailData.Add("Date", DateTime.Today.ToString("m"))
-            'IntranetPortal.Core.EmailService.SendMail("Chris@gvs4u.com", "", "Task Summary on " & DateTime.Now, LoadSummaryEmail(userName), Nothing)
-            Me.SendEmailByTemplate(actData.Name, "SSUserSummary", emailData)
+            Try
+                Dim emailData As New Dictionary(Of String, String)
+                emailData.Add("Body", LoadSSUserSummaryEmail(actData))
+                emailData.Add("Date", DateTime.Today.ToString("m"))
+                'IntranetPortal.Core.EmailService.SendMail("Chris@gvs4u.com", "", "Task Summary on " & DateTime.Now, LoadSummaryEmail(userName), Nothing)
+                Me.SendEmailByTemplate(actData.Name, "SSUserSummary", emailData)
+            Catch ex As Exception
+                Core.SystemLog.LogError("Error in SendActivityDataEmail", ex, actData.Name, "WCFServices", "")
+            End Try
         Next
     End Sub
 

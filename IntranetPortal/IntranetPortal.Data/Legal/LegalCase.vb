@@ -81,12 +81,17 @@ Partial Public Class LegalCase
             End If
 
             Dim data = jsonCase.Item("SaleDate")
-            Dim saleData As DateTime
-            If data IsNot Nothing AndAlso DateTime.TryParse(data.ToString, saleData) Then
-                If saleData > DateTime.MinValue Then
-                    Me.SaleDate = saleData
-                Else
-                    Me.SaleDate = Nothing
+
+            If String.IsNullOrEmpty(data) Then
+                Me.SaleDate = Nothing
+            Else
+                Dim saleData As DateTime
+                If data IsNot Nothing AndAlso DateTime.TryParse(data.ToString, saleData) Then
+                    If saleData > DateTime.MinValue Then
+                        Me.SaleDate = saleData
+                    Else
+                        Me.SaleDate = Nothing
+                    End If
                 End If
             End If
         End If

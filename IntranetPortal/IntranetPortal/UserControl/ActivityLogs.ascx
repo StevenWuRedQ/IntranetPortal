@@ -527,73 +527,48 @@
                                     
                                     if(statusUpdateText in category)
                                     {
-                                        category[statusUpdateText].Checking();
+                                        category[statusUpdateText].Checking(this.CheckingSuccess, this.CheckingCancel);
                                     }
                                 }
                             },
-                            Checkinglist:{
+                            CheckingSuccess: function(result){
+                                EmailBody.SetHtml("Checkinglist is finished." + result);
+                                InsertNewComments();                                            
+                            },
+                            CheckingCancel: function(){
+                                $("#selStatusUpdate").val("");
+                            },
+                            Checkinglist:{                                
                                 "Approved":{
                                     "Approval - Received":{                                        
-                                        Checking:function()
+                                        Checking:function(success,cancel)
                                         {
                                             if(typeof window.ssToggleApprovalPopup != "undefined")
-                                                window.ssToggleApprovalPopup(this.Success, this.Cancel);
-                                        },
-                                        Success:function(result){
-                                            EmailBody.SetHtml("Checkinglist is finished.");
-                                            InsertNewComments();                                            
-                                        },
-                                        Cancel:function(){
-                                            $("#selStatusUpdate").val("");
-                                            //console.log("Cancel");
-                                        }
+                                                window.ssToggleApprovalPopup(success,cancel);
+                                        }                                       
                                     }
                                 },
                                 "Valuation":{
                                     "BPO Call Received": {
-                                        Checking:function()
+                                        Checking:function(success,cancel)
                                         {
                                             if(typeof window.ssToggleValuationPopup != "undefined")
-                                                window.ssToggleValuationPopup(1,this.Success, this.Cancel);
-                                        },
-                                        Success:function(result){
-                                            EmailBody.SetHtml("Checkinglist is finished.");
-                                            InsertNewComments();                                            
-                                        },
-                                        Cancel:function(){
-                                            $("#selStatusUpdate").val("");                                            
-                                        }
-
+                                                window.ssToggleValuationPopup(1,success,cancel);
+                                        }                                       
                                     },
                                     "BPO Scheduled": {
-                                        Checking:function()
+                                        Checking:function(success,cancel)
                                         {
                                             if(typeof window.ssToggleValuationPopup != "undefined")
-                                                window.ssToggleValuationPopup(2,this.Success, this.Cancel);
-                                        },
-                                        Success:function(result){
-                                            EmailBody.SetHtml("Checkinglist is finished.");
-                                            InsertNewComments();                                            
-                                        },
-                                        Cancel:function(){
-                                            $("#selStatusUpdate").val("");                                            
-                                        }
-
+                                                window.ssToggleValuationPopup(2,success,cancel);
+                                        }                                       
                                     },
                                     "BPO Complete": {
-                                        Checking:function()
+                                        Checking:function(success,cancel)
                                         {
                                             if(typeof window.ssToggleValuationPopup != "undefined")
-                                                window.ssToggleValuationPopup(3,this.Success, this.Cancel);
-                                        },
-                                        Success:function(result){
-                                            EmailBody.SetHtml("Checkinglist is finished.");
-                                            InsertNewComments();                                            
-                                        },
-                                        Cancel:function(){
-                                            $("#selStatusUpdate").val("");                                            
-                                        }
-
+                                                window.ssToggleValuationPopup(3,success,cancel);
+                                        }                                       
                                     }
                                 }
                             }

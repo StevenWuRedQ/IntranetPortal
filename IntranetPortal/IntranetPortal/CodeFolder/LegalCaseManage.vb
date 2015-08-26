@@ -147,11 +147,19 @@ Public Class LegalCaseManage
     Public Shared Sub ReminderFollowUp(lCase As Legal.LegalCase)
 
         Try
-            Dim users = Roles.GetUsersInRole("Legal-Manager")
+            Dim users = Roles.GetUsersInRole("Legal-Manager").ToList
 
-            Dim notifyEmails = String.Join(";", users.Select(Function(name)
-                                                                 Return Employee.GetInstance(name).Email
-                                                             End Function).ToArray)
+            If Not String.IsNullOrEmpty(lCase.ResearchBy) Then
+                users.Add(lCase.ResearchBy)
+            End If
+
+            If Not String.IsNullOrEmpty(lCase.Attorney) Then
+                users.Add(lCase.Attorney)
+            End If
+
+            Dim notifyEmails = String.Join(";", users.Distinct.Select(Function(name)
+                                                                          Return Employee.GetInstance(name).Email
+                                                                      End Function).ToArray)
 
             Dim emailData As New Dictionary(Of String, String)
             emailData.Add("CaseName", lCase.CaseName)

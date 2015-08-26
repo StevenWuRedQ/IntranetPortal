@@ -36,11 +36,12 @@
     Protected Sub gdComplains_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
         If e.Parameters = "Add" Then
             Dim bble = txtBBLE.Text
+            AddProperty(bble)
 
-            Dim cc As New Data.CheckingComplain
-            cc.BBLE = bble
-            cc.Address = lblAddress.Text
-            cc.Save(User.Identity.Name)
+            'Dim cc As New Data.CheckingComplain
+            'cc.BBLE = bble
+            'cc.Address = lblAddress.Text
+            'cc.Save(User.Identity.Name)
         End If
 
         If e.Parameters.StartsWith("Refresh") Then
@@ -66,11 +67,14 @@
     End Sub
 
     Sub AddProperty(bble As String)
-        Dim cc As New Data.CheckingComplain
-        cc.BBLE = bble
+        Dim cc = Data.CheckingComplain.Instance(bble)
+
+        If cc Is Nothing Then
+            cc = New Data.CheckingComplain
+            cc.BBLE = bble
+        End If
 
         Dim ld = LeadsInfo.GetInstance(bble)
-
         cc.Address = ld.PropertyAddress
         cc.Save(User.Identity.Name)
     End Sub
@@ -125,27 +129,33 @@
         lblAddress.Visible = False
 
         If e.Parameter = "Add" Then
-            If rbBBLE.Checked Then
-                Dim ld = LeadsInfo.GetInstance(txtBBLE.Text)
-                If ld IsNot Nothing Then
-                    lblAddress.Text = ld.PropertyAddress
-                    txtNumber.Text = ld.Number
-                    txtStreet.Text = ld.StreetName
-                    txtCity.Text = ld.Neighborhood
+            Try
+                If rbBBLE.Checked Then
 
-                    btnAdd.Disabled = False
-                End If
-            Else
-                Try
+                    Dim ld = LeadsInfo.GetInstance(txtBBLE.Text)
+
+                    If ld Is Nothing Then
+                        ld = DataWCFService.UpdateAssessInfo(txtBBLE.Text)
+                    End If
+
+                    If ld IsNot Nothing Then
+                        lblAddress.Text = ld.PropertyAddress
+                        txtNumber.Text = ld.Number
+                        txtStreet.Text = ld.StreetName
+                        txtCity.Text = ld.Neighborhood
+
+                        btnAdd.Disabled = False
+                    End If
+                Else
                     txtBBLE.Text = Core.Utility.Address2BBLE(txtNumber.Text, txtStreet.Text, txtCity.Text)
                     btnAdd.Disabled = False
                     Return
-                Catch ex As Exception
-                    lblAddress.Text = "Error: " & ex.Message
-                    lblAddress.ForeColor = Drawing.Color.Red
-                    lblAddress.Visible = True
-                End Try
-            End If
+                End If
+            Catch ex As Exception
+                lblAddress.Text = "Error: " & ex.Message
+                lblAddress.ForeColor = Drawing.Color.Red
+                lblAddress.Visible = True
+            End Try
         End If
     End Sub
 End Class

@@ -8,8 +8,7 @@
         /*have scrollbar content class add by steven*/
         .scorllbar_content {
             /*it can' don't need postion relative by this class  in tree view it add atuo*/
-            position: relative;
-            
+            position: relative;            
             /*height: 600px;*/
         }
         /*-----end-------*/

@@ -97,8 +97,11 @@ Partial Class Troubleshooting
         Me.btnGeoBBLE = New System.Windows.Forms.Button()
         Me.txtGeoAddress = New System.Windows.Forms.TextBox()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
-        Me.btnRefreshLegalReport = New System.Windows.Forms.Button()
+        Me.btnSummaryEmail = New System.Windows.Forms.Button()
         Me.btnFollowUp = New System.Windows.Forms.Button()
+        Me.btnRefreshLegalReport = New System.Windows.Forms.Button()
+        Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.btnComplaintsRefresh = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -118,6 +121,7 @@ Partial Class Troubleshooting
         Me.TabPage6.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabPage7.SuspendLayout()
+        Me.TabPage8.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -362,6 +366,7 @@ Partial Class Troubleshooting
         Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Controls.Add(Me.TabPage7)
+        Me.TabControl1.Controls.Add(Me.TabPage8)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 46)
         Me.TabControl1.Name = "TabControl1"
@@ -832,6 +837,7 @@ Partial Class Troubleshooting
         '
         'TabPage7
         '
+        Me.TabPage7.Controls.Add(Me.btnSummaryEmail)
         Me.TabPage7.Controls.Add(Me.btnFollowUp)
         Me.TabPage7.Controls.Add(Me.btnRefreshLegalReport)
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
@@ -842,14 +848,14 @@ Partial Class Troubleshooting
         Me.TabPage7.Text = "Legal"
         Me.TabPage7.UseVisualStyleBackColor = True
         '
-        'btnRefreshLegalReport
+        'btnSummaryEmail
         '
-        Me.btnRefreshLegalReport.Location = New System.Drawing.Point(8, 6)
-        Me.btnRefreshLegalReport.Name = "btnRefreshLegalReport"
-        Me.btnRefreshLegalReport.Size = New System.Drawing.Size(122, 26)
-        Me.btnRefreshLegalReport.TabIndex = 0
-        Me.btnRefreshLegalReport.Text = "Refresh Report Fields"
-        Me.btnRefreshLegalReport.UseVisualStyleBackColor = True
+        Me.btnSummaryEmail.Location = New System.Drawing.Point(8, 94)
+        Me.btnSummaryEmail.Name = "btnSummaryEmail"
+        Me.btnSummaryEmail.Size = New System.Drawing.Size(122, 23)
+        Me.btnSummaryEmail.TabIndex = 2
+        Me.btnSummaryEmail.Text = "Summary Email Testing"
+        Me.btnSummaryEmail.UseVisualStyleBackColor = True
         '
         'btnFollowUp
         '
@@ -859,6 +865,35 @@ Partial Class Troubleshooting
         Me.btnFollowUp.TabIndex = 1
         Me.btnFollowUp.Text = "Follow up Testing"
         Me.btnFollowUp.UseVisualStyleBackColor = True
+        '
+        'btnRefreshLegalReport
+        '
+        Me.btnRefreshLegalReport.Location = New System.Drawing.Point(8, 6)
+        Me.btnRefreshLegalReport.Name = "btnRefreshLegalReport"
+        Me.btnRefreshLegalReport.Size = New System.Drawing.Size(122, 26)
+        Me.btnRefreshLegalReport.TabIndex = 0
+        Me.btnRefreshLegalReport.Text = "Refresh Report Fields"
+        Me.btnRefreshLegalReport.UseVisualStyleBackColor = True
+        '
+        'TabPage8
+        '
+        Me.TabPage8.Controls.Add(Me.btnComplaintsRefresh)
+        Me.TabPage8.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage8.Name = "TabPage8"
+        Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage8.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage8.TabIndex = 8
+        Me.TabPage8.Text = "Complaints"
+        Me.TabPage8.UseVisualStyleBackColor = True
+        '
+        'btnComplaintsRefresh
+        '
+        Me.btnComplaintsRefresh.Location = New System.Drawing.Point(8, 17)
+        Me.btnComplaintsRefresh.Name = "btnComplaintsRefresh"
+        Me.btnComplaintsRefresh.Size = New System.Drawing.Size(108, 29)
+        Me.btnComplaintsRefresh.TabIndex = 0
+        Me.btnComplaintsRefresh.Text = "Refresh Result"
+        Me.btnComplaintsRefresh.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -895,6 +930,7 @@ Partial Class Troubleshooting
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.TabPage7.ResumeLayout(False)
+        Me.TabPage8.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -975,4 +1011,7 @@ Partial Class Troubleshooting
     Friend WithEvents btnSSUserReport As System.Windows.Forms.Button
     Friend WithEvents btnRefreshComplains As System.Windows.Forms.Button
     Friend WithEvents btnFollowUp As System.Windows.Forms.Button
+    Friend WithEvents btnSummaryEmail As System.Windows.Forms.Button
+    Friend WithEvents TabPage8 As System.Windows.Forms.TabPage
+    Friend WithEvents btnComplaintsRefresh As System.Windows.Forms.Button
 End Class

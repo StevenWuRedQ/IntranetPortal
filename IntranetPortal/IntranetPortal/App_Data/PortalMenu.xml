@@ -529,8 +529,9 @@
     <Items>
     </Items>
   </PortalNavItem>
+  
   <PortalNavItem Name="ManagementReport" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <UserRoles>OfficeManager-*,Entity-Manager</UserRoles>
+    <UserRoles>OfficeManager-*,Entity-Manager,Complaints-Manager</UserRoles>
     <Items>
       <PortalNavItem Name="ReportSummary" Text="Summary" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
          <UserRoles>OfficeManager-*</UserRoles>
@@ -556,7 +557,7 @@
           <![CDATA[<i class="fa fa-building"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="DOBComplains" Text="DOB Complaints" NavigationUrl="/Management/ComplainsMng.aspx" ShowAmount="false">
+      <PortalNavItem Name="DOBComplains" Text="DOB Complaints" NavigationUrl="/Complaints/ComplainsMng.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>

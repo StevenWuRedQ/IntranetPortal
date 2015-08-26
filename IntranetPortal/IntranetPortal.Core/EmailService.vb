@@ -254,6 +254,7 @@ Public Class RegexUtilities
     Dim invalid As Boolean = False
 
     Public Function IsValidEmail(strIn As String) As Boolean
+        strIn = strIn.Trim
         invalid = False
         If String.IsNullOrEmpty(strIn) Then Return False
 

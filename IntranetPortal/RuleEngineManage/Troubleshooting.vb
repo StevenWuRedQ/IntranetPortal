@@ -652,4 +652,18 @@ Public Class Troubleshooting
         Dim rule = New IntranetPortal.RulesEngine.LegalFollowUpRule
         rule.Execute()
     End Sub
+
+    Private Sub btnSummaryEmail_Click(sender As Object, e As EventArgs) Handles btnSummaryEmail.Click
+        Dim rule = New IntranetPortal.RulesEngine.AgentActivitySummaryRule
+        rule.Execute()
+    End Sub
+
+    Private Sub btnComplaintsRefresh_Click(sender As Object, e As EventArgs) Handles btnComplaintsRefresh.Click
+        Dim bble = txtBBLE.Text
+
+        Dim complaints = CheckingComplain.Instance(bble)
+        complaints.UpdateComplaintsResult()
+
+    End Sub
+
 End Class

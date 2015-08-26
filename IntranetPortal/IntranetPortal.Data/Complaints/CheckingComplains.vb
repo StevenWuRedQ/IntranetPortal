@@ -20,7 +20,7 @@ Partial Public Class CheckingComplain
     Public Shared Function GetComplainsResult(Optional bble As String = "") As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
         Using client As New DataAPI.WCFMacrosClient
             Try
-                Return client.Get_DBO_Complaints_List(bble, True)
+                Return client.Get_DBO_Complaints_List(bble, String.IsNullOrEmpty(bble))
             Catch ex As Exception
                 Core.SystemLog.LogError("Error in GetComplainsResult", ex, bble, "portal", bble)
                 Core.SystemLog.Log("Error in GetComplainsResult", ex.ToJsonString, SystemLog.LogCategory.Error, bble, "portal")
@@ -89,19 +89,26 @@ Partial Public Class CheckingComplain
         End Try
     End Sub
 
-    Public Sub UpdateComplaintsResult()
-        Dim result = GetComplainsResult(BBLE)
+    Public Sub UpdateComplaintsResult(Optional jsonResult As String = Nothing)
+        Dim result As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
+
+        If String.IsNullOrEmpty(jsonResult) Then
+            result = GetComplainsResult(BBLE)
+        Else
+            result = JsonConvert.DeserializeObject(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result())(jsonResult)
+        End If
 
         If result IsNot Nothing AndAlso result.Length > 0 Then
+            If result.Any(Function(r) r.Status.Trim = "ACT") Then
+                If DataIsChange(result) Then
+                    NotifyAction(result)
+                End If
 
-            If DataIsChange(result) Then
-                NotifyAction()
+                Me.LastDataEntered = result.OrderByDescending(Function(r) r.DateEntered).FirstOrDefault.DateEntered
+                Me.ComplaintsResult = result
+                Me.LastResultUpdate = DateTime.Now
+                Me.Save("")
             End If
-
-            Me.LastDataEntered = result.OrderByDescending(Function(r) r.DateEntered).FirstOrDefault.DateEntered
-            Me.ComplaintsResult = result
-            Me.LastResultUpdate = DateTime.Now
-            Me.Save("")
         End If
     End Sub
 
@@ -146,7 +153,7 @@ Partial Public Class CheckingComplain
     Private _complaintsResult As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
     Public Property ComplaintsResult As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
         Get
-            If _complaintsResult Is Nothing Then
+            If _complaintsResult Is Nothing AndAlso Not String.IsNullOrEmpty(Me.LastComplaintsResult) Then
                 _complaintsResult = JsonConvert.DeserializeObject(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result())(Me.LastComplaintsResult)
             End If
             Return _complaintsResult
@@ -157,9 +164,27 @@ Partial Public Class CheckingComplain
         End Set
     End Property
 
-    Public Sub NotifyAction()
+    Public Sub NotifyAction(result As DataAPI.SP_DOB_Complaints_By_BBLE_Result())
 
+        If Not String.IsNullOrEmpty(NotifyUsers) Then
+
+            Dim users = NotifyUsers.Split(";")
+
+            For Each user In users
+
+                Dim party = PartyContact.GetContactByName(user)
+                If party IsNot Nothing Then
+                    Dim mailData As New Dictionary(Of String, String)
+                    mailData.Add("UserName", party.Name)
+                    mailData.Add("Address", Address)
+                    mailData.Add("BBLE", BBLE)
+
+                    Core.EmailService.SendMail(party.Email, "", "ComplaintsNotify2", mailData)
+                End If
+            Next
+        End If
     End Sub
+
 End Class
 
 Namespace DataAPI

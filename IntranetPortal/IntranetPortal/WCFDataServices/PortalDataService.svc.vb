@@ -325,13 +325,13 @@ Public Class PortalDataService
     Public Sub DataIsReady(bble As String, apiOrderNum As Integer, type As String, result As String) Implements IPortalDataService.DataIsReady
         Using client As New IntranetPortal.Data.DataAPI.WCFMacrosClient
 
-            If type = "DOBComplains" Then
+            If type = "DOBComplaints" Then
                 Dim complaints = CheckingComplain.Instance(bble)
-                complaints.UpdateComplaintsResult()
+                complaints.UpdateComplaintsResult(result)
             End If
         End Using
-
     End Sub
+
 End Class
 
 Public Class TriggerData
