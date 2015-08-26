@@ -1166,6 +1166,13 @@
       <DependentUpon>ComplaintsNotify.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Management\FormGenerator.aspx.designer.vb">
+      <DependentUpon>FormGenerator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\FormGenerator.aspx.vb">
+      <DependentUpon>FormGenerator.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Management\ImportAgentData.aspx.designer.vb">
       <DependentUpon>ImportAgentData.aspx</DependentUpon>
     </Compile>
@@ -1419,6 +1426,20 @@
     </Compile>
     <Compile Include="PopupControl\PropertyMap.aspx.vb">
       <DependentUpon>PropertyMap.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PopupControl\SearchRecodingPopupCtrl.ascx.designer.vb">
+      <DependentUpon>SearchRecodingPopupCtrl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\SearchRecodingPopupCtrl.ascx.vb">
+      <DependentUpon>SearchRecodingPopupCtrl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupControl\SearchRecordingPopup.aspx.designer.vb">
+      <DependentUpon>SearchRecordingPopup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\SearchRecordingPopup.aspx.vb">
+      <DependentUpon>SearchRecordingPopup.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PopupControl\SendMailWithAttach.ascx.designer.vb">
@@ -2540,6 +2561,7 @@
     <Content Include="Management\CombineContact.aspx" />
     <Content Include="Complaints\ComplainsMng.aspx" />
     <Content Include="Management\ComplaintsNotify.aspx" />
+    <Content Include="Management\FormGenerator.aspx" />
     <Content Include="Management\ImportAgentData.aspx" />
     <Content Include="Management\Default.aspx" />
     <Content Include="Management\LeadsDataManage.aspx" />
@@ -2656,6 +2678,8 @@
     <Content Include="PopupControl\EditHomeOwner.ascx" />
     <Content Include="PopupControl\MapsPopup.ascx" />
     <Content Include="PopupControl\PropertyMap.aspx" />
+    <Content Include="PopupControl\SearchRecodingPopupCtrl.ascx" />
+    <Content Include="PopupControl\SearchRecordingPopup.aspx" />
     <Content Include="PopupControl\SendMailWithAttach.ascx" />
     <Content Include="PopupControl\SendMail.ascx" />
     <Content Include="PopupControl\ShareLeads.aspx" />
