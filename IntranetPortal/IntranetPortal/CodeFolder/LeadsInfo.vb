@@ -35,7 +35,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property AptBBLE As String
+    Public ReadOnly Property AptBBLE As String
         Get
             If IsApartment Then
                 Return String.Format("{0}#{1}", BuildingBBLE, UnitNum)
@@ -46,7 +46,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property AptBuildingInfo As ApartmentBuilding
+    Public ReadOnly Property AptBuildingInfo As ApartmentBuilding
         Get
             If IsApartment Then
                 Using ctx As New Entities
@@ -60,7 +60,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-        Public ReadOnly Property Address1 As String
+    Public ReadOnly Property Address1 As String
         Get
             Return String.Format("{2} {0} {1}", Number, StreetName, UnitNum).Trim
         End Get
@@ -90,7 +90,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property LastComment As String
+    Public ReadOnly Property LastComment As String
         Get
             Using ctx As New Entities
                 Return ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = BBLE).Select(Function(l) l.Comments).FirstOrDefault
@@ -99,7 +99,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property LastLP As String
+    Public ReadOnly Property LastLP As String
         Get
 
             Dim lp = LisPens.FirstOrDefault()
@@ -118,7 +118,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property UserComments As List(Of LeadsComment)
+    Public ReadOnly Property UserComments As List(Of LeadsComment)
         Get
             Using context As New Entities
                 Return context.LeadsComments.Where(Function(li) li.BBLE = BBLE).OrderBy(Function(li) li.OrderIndex).ToList
@@ -127,7 +127,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property OwnerPhoneNo As String
+    Public ReadOnly Property OwnerPhoneNo As String
         Get
             Using context As New Entities
                 Dim phones = context.OwnerContacts.Where(Function(hp) hp.BBLE = BBLE And hp.ContactType = OwnerContact.OwnerContactType.Phone And hp.Status = OwnerContact.ContactStatus.Right).Select(Function(hp) hp.Contact).ToList
@@ -142,7 +142,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property OwnerAddress As List(Of String)
+    Public ReadOnly Property OwnerAddress As List(Of String)
         Get
             Using context As New Entities
                 Dim adds = context.OwnerContacts.Where(Function(hp) hp.BBLE = BBLE And hp.ContactType = OwnerContact.OwnerContactType.MailAddress And hp.Status = OwnerContact.ContactStatus.DoorKnock).Select(Function(hp) hp.Contact).ToList
@@ -227,7 +227,7 @@ Public Class LeadsInfo
     End Function
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property ReferrelName As String
+    Public ReadOnly Property ReferrelName As String
         Get
             Return Referrel.ReferrelName
         End Get
@@ -235,7 +235,7 @@ Public Class LeadsInfo
 
     Private _referrel As PropertyReferrel
     <JsonIgnoreAttribute>
-       Public ReadOnly Property Referrel As PropertyReferrel
+    Public ReadOnly Property Referrel As PropertyReferrel
         Get
             If _referrel Is Nothing Then
                 Using context As New Entities
@@ -260,7 +260,7 @@ Public Class LeadsInfo
 
     Private _mortgageData As LeadsMortgageData
     <JsonIgnoreAttribute>
-       Public ReadOnly Property MortgageData As LeadsMortgageData
+    Public ReadOnly Property MortgageData As LeadsMortgageData
         Get
             If _mortgageData Is Nothing Then
                 Using context As New Entities
@@ -280,14 +280,14 @@ Public Class LeadsInfo
 
     Public Property HomeOwners As List(Of HomeOwner)
     <JsonIgnoreAttribute>
-       Public ReadOnly Property LeadsName As String
+    Public ReadOnly Property LeadsName As String
         Get
             Return Utility.GetLeadsName(Me)
         End Get
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property StreetNameWithNo
+    Public ReadOnly Property StreetNameWithNo
         Get
             Dim strName = String.Format("{0} {1}", Number, StreetName)
             strName = strName.TrimStart(" ")
@@ -297,7 +297,7 @@ Public Class LeadsInfo
 
     'Leadsinfo status
     <JsonIgnoreAttribute>
-       Public ReadOnly Property Status As String
+    Public ReadOnly Property Status As String
         Get
             If Lead.Status.HasValue Then
                 Return CType(Lead.Status.Value, LeadStatus).ToString
@@ -309,7 +309,7 @@ Public Class LeadsInfo
 
     'the finder name or agent name of this leadsinfo
     <JsonIgnoreAttribute>
-       Public ReadOnly Property AgentName As String
+    Public ReadOnly Property AgentName As String
         Get
             If Lead IsNot Nothing Then
                 Return Lead.EmployeeName
@@ -320,7 +320,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property CallAttemps As Integer
+    Public ReadOnly Property CallAttemps As Integer
         Get
             Using context As New Entities
                 Return context.LeadsActivityLogs.Where(Function(log) log.BBLE = BBLE And (log.ActionType.HasValue AndAlso log.ActionType = 0)).Count
@@ -331,14 +331,14 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property DoorKnockAttemps As Integer
+    Public ReadOnly Property DoorKnockAttemps As Integer
         Get
             Return Lead.LeadsActivityLogs.Where(Function(log) log.ActionType IsNot Nothing AndAlso log.ActionType = LeadsActivityLog.EnumActionType.DoorKnock).Count
         End Get
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property FollowupAttemps As Integer
+    Public ReadOnly Property FollowupAttemps As Integer
         Get
             Return Lead.LeadsActivityLogs.Where(Function(log) log.ActionType IsNot Nothing AndAlso log.ActionType = LeadsActivityLog.EnumActionType.FollowUp).Count
         End Get
@@ -354,7 +354,7 @@ Public Class LeadsInfo
 
     Private _taxLiensInfo As LeadsTaxLien
     <JsonIgnoreAttribute>
-       Public ReadOnly Property TaxLiensInfo As LeadsTaxLien
+    Public ReadOnly Property TaxLiensInfo As LeadsTaxLien
         Get
             If _taxLiensInfo Is Nothing Then
                 Using ctx As New Entities
@@ -367,7 +367,7 @@ Public Class LeadsInfo
 
     Private _taxLiens As List(Of LeadsTaxLien)
     <JsonIgnoreAttribute>
-       Public ReadOnly Property TaxLiens As List(Of LeadsTaxLien)
+    Public ReadOnly Property TaxLiens As List(Of LeadsTaxLien)
         Get
             If _taxLiens Is Nothing Then
                 Using ctx As New Entities
@@ -380,7 +380,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property TotalTaxLienAmount As Decimal?
+    Public ReadOnly Property TotalTaxLienAmount As Decimal?
         Get
             If TaxLiens IsNot Nothing AndAlso TaxLiens.Count > 0 Then
                 Return TaxLiens.Sum(Function(a) a.Amount)
@@ -391,7 +391,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property TaxLiensDateText As String
+    Public ReadOnly Property TaxLiensDateText As String
         Get
             If TaxLiensInfo IsNot Nothing Then
                 Return TaxLiensInfo.TaxLiensYear
@@ -402,7 +402,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-        Public ReadOnly Property TaxLiensAmount As String
+    Public ReadOnly Property TaxLiensAmount As String
         Get
             If TaxLiensInfo IsNot Nothing Then
                 If TaxLiensInfo.Amount > 0 Then
@@ -417,7 +417,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property PropertyClassCode As String
+    Public ReadOnly Property PropertyClassCode As String
         Get
             Using context As New Entities
                 Dim bc = context.BuildingCodes.Find(PropertyClass)
@@ -438,14 +438,14 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property LastUpdate2 As DateTime
+    Public ReadOnly Property LastUpdate2 As DateTime
         Get
             Return Lead.LastUpdate2
         End Get
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property LastIssuedOn As String
+    Public ReadOnly Property LastIssuedOn As String
         Get
             If CreateDate.HasValue Then
                 Return String.Format("Last Issued On: {0:g}", CreateDate)
@@ -456,7 +456,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-   Public ReadOnly Property EstimatedMortageDefault As Decimal
+    Public ReadOnly Property EstimatedMortageDefault As Decimal
         Get
             'Return 1234564.123486456
             Dim EMD As Decimal
@@ -474,7 +474,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property MortgageCombo As Decimal
+    Public ReadOnly Property MortgageCombo As Decimal
         Get
             Dim debt As Decimal
 
@@ -495,7 +495,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property TotalDebt As Double
+    Public ReadOnly Property TotalDebt As Double
         Get
             Dim debt = 0
 
@@ -532,7 +532,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property IsHighLiens As Boolean
+    Public ReadOnly Property IsHighLiens As Boolean
         Get
             If EstValue.HasValue And EstValue > 0 Then
                 Return TotalDebt > EstValue
@@ -543,7 +543,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property IndicatorOfWater As String
+    Public ReadOnly Property IndicatorOfWater As String
         Get
             If Me.WaterAmt.HasValue AndAlso WaterAmt > 1000 Then
                 Return "HasWaterLiens"
@@ -554,7 +554,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property IsUpdating As Boolean
+    Public ReadOnly Property IsUpdating As Boolean
         Get
             Using context As New Entities
 
@@ -574,7 +574,7 @@ Public Class LeadsInfo
 
     Public Property IsRecycled As Boolean
     <JsonIgnoreAttribute>
-       Public ReadOnly Property UpdateInfo As String
+    Public ReadOnly Property UpdateInfo As String
         Get
             Using context As New Entities
 
@@ -593,7 +593,7 @@ Public Class LeadsInfo
 
     Private _otherProperties As List(Of LeadsInfo)
     <JsonIgnoreAttribute>
-       Public ReadOnly Property OtherProperties As List(Of LeadsInfo)
+    Public ReadOnly Property OtherProperties As List(Of LeadsInfo)
         Get
             If _otherProperties Is Nothing Then
 
@@ -670,7 +670,7 @@ Public Class LeadsInfo
     End Sub
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property Violation As String
+    Public ReadOnly Property Violation As String
         Get
             If ECBViolationsAmt.HasValue AndAlso ECBViolationsAmt.Value > 0 Then
                 Return "ECB"
@@ -685,7 +685,7 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-       Public ReadOnly Property ViolationAmount As Double
+    Public ReadOnly Property ViolationAmount As Double
         Get
             If ECBViolationsAmt.HasValue AndAlso ECBViolationsAmt.Value > 0 Then
                 Return ECBViolationsAmt.Value
@@ -828,7 +828,7 @@ Public Class LeadsData
     Inherits LeadsInfo
 
     <JsonIgnoreAttribute>
-     Public Overrides Property Lead As Lead
+    Public Overrides Property Lead As Lead
         Get
             Return MyBase.Lead
         End Get

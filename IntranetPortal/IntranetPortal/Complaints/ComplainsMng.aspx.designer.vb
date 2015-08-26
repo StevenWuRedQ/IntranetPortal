@@ -122,6 +122,33 @@ Partial Public Class ComplainsMng
     Protected WithEvents gdComplainsResult As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
+    '''ASPxPopupControl1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''hfBBLE2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfBBLE2 As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''tbUsers control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tbUsers As Global.DevExpress.Web.ASPxEditors.ASPxTokenBox
+
+    '''<summary>
     '''popupComplaintHistory control.
     '''</summary>
     '''<remarks>

@@ -17,7 +17,8 @@ Partial Public Class CheckingComplain
         End Using
     End Function
 
-    Public Shared Function GetComplainsResult(Optional bble As String = "") As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
+    Public Shared Function GetResultFromServices(Optional bble As String = "") As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
+
         Using client As New DataAPI.WCFMacrosClient
             Try
                 Return client.Get_DBO_Complaints_List(bble, String.IsNullOrEmpty(bble))
@@ -28,6 +29,36 @@ Partial Public Class CheckingComplain
                 Return {}
             End Try
         End Using
+
+    End Function
+
+    Public Shared Function GetComplainsResult(Optional bble As String = "") As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
+
+        Dim result As New List(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result)
+
+        For Each cp In GetAllComplains()
+
+            If Not String.IsNullOrEmpty(cp.LastComplaintsResult) Then
+                For Each item In cp.ComplaintsResult
+                    If Not result.Any(Function(r) r.BBLE = item.BBLE AndAlso r.ComplaintNumber = item.ComplaintNumber) Then
+                        result.Add(item)
+                    End If
+                Next
+            End If
+        Next
+
+        Return result.ToArray
+
+        'Using client As New DataAPI.WCFMacrosClient
+        '    Try
+        '        Return client.Get_DBO_Complaints_List(bble, String.IsNullOrEmpty(bble))
+        '    Catch ex As Exception
+        '        Core.SystemLog.LogError("Error in GetComplainsResult", ex, bble, "portal", bble)
+        '        Core.SystemLog.Log("Error in GetComplainsResult", ex.ToJsonString, SystemLog.LogCategory.Error, bble, "portal")
+
+        '        Return {}
+        '    End Try
+        'End Using
     End Function
 
     Public Shared Function GetComplaintsHistory(bble As String) As DataAPI.SP_DOB_Complaints_History_By_BBLE_Result()
@@ -93,7 +124,7 @@ Partial Public Class CheckingComplain
         Dim result As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
 
         If String.IsNullOrEmpty(jsonResult) Then
-            result = GetComplainsResult(BBLE)
+            result = GetResultFromServices(BBLE)
         Else
             result = JsonConvert.DeserializeObject(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result())(jsonResult)
         End If
@@ -103,12 +134,12 @@ Partial Public Class CheckingComplain
                 If DataIsChange(result) Then
                     NotifyAction(result)
                 End If
-
-                Me.LastDataEntered = result.OrderByDescending(Function(r) r.DateEntered).FirstOrDefault.DateEntered
-                Me.ComplaintsResult = result
-                Me.LastResultUpdate = DateTime.Now
-                Me.Save("")
             End If
+
+            Me.LastDataEntered = result.OrderByDescending(Function(r) r.DateEntered).FirstOrDefault.DateEntered
+            Me.ComplaintsResult = result
+            Me.LastResultUpdate = DateTime.Now
+            Me.Save("")
         End If
     End Sub
 

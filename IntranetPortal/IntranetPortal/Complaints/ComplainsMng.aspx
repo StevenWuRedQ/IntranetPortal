@@ -83,6 +83,22 @@
             $('#spanPopupTitle').text('Complaints History - ' + bble);
             popupComplaintHistory.Show();
         }
+
+        var editDiv = null;
+        function EditNotifyUsers(bble, div)
+        {
+            editDiv = div;
+            popupNotifyUsers.PerformCallback('Show|' + bble);
+            popupNotifyUsers.Show();
+        }
+
+        function SaveNotifyUsers(users)
+        {
+            popupNotifyUsers.PerformCallback('Save');
+            popupNotifyUsers.Hide();
+            $(editDiv).html(users + "&nbsp;");
+        }
+
     </script>
 </asp:Content>
 
@@ -196,7 +212,10 @@
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn FieldName="Address">
                         </dx:GridViewDataColumn>
-                        <dx:GridViewDataColumn FieldName="NotifyUsers">                            
+                        <dx:GridViewDataColumn FieldName="NotifyUsers">
+                            <DataItemTemplate>
+                              <div style="width:100%; cursor:pointer" onclick="EditNotifyUsers('<%# Eval("BBLE")%>', this);"><%# Eval("NotifyUsers")%>&nbsp;</div>
+                            </DataItemTemplate>
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataDateColumn FieldName="LastExecute" Width="150px" PropertiesDateEdit-DisplayFormatString="g">
                         </dx:GridViewDataDateColumn>
@@ -204,7 +223,7 @@
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn Width="80px">
                             <DataItemTemplate>
-                            <i class="fa fa-refresh icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RefreshProperty('<%# Eval("BBLE")%>')" title="Refresh"></i>&nbsp;
+                                <i class="fa fa-refresh icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RefreshProperty('<%# Eval("BBLE")%>')" title="Refresh"></i>&nbsp;
                             <i class="fa fa-close icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RemoveProperty('<%# Eval("BBLE")%>')" title="Remove"></i>
                             </DataItemTemplate>
                         </dx:GridViewDataColumn>
@@ -215,15 +234,13 @@
                     <SettingsText ConfirmDelete="The follow up date will be cleared. Continue?" />
                     <ClientSideEvents EndCallback="function(s,e){ if(needRefreshResult){ RefreshResult();}}" />
                 </dx:ASPxGridView>
-              
             </div>
         </div>
         <div class="row form_border">
             <div class="form_header">
                 DOB Active Complaints Details &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplainResult'))"></i>
                 <div class="form-inline" style="float: right; font-weight: normal">
-                    <small style="color:red">
-                        (**Complaints records are set to refresh automatically at 7am, 1pm and 8pm daily.**)
+                    <small style="color: red">(**Complaints records are set to refresh automatically at 7am, 1pm and 8pm daily.**)
                     </small>
                     <i class="fa fa-refresh icon_btn tooltip-examples  grid_buttons" style="margin-left: 10px; margin-right: 10px; font-size: 19px" onclick="RefreshResult()" title="Refresh"></i>
                     <input type="text" style="margin-right: 10px" id="gdComplainKey" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchComplains(); return false;}" />
@@ -408,6 +425,20 @@
                 </dx:ASPxGridView>
             </div>
         </div>
+
+        <dx:ASPxPopupControl ClientInstanceName="popupNotifyUsers" Width="200px" Height="200px"
+            ID="ASPxPopupControl1" OnWindowCallback="ASPxPopupControl1_WindowCallback" AllowDragging="true"
+            HeaderText="Notify Users" Modal="true"
+            runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+            <ContentCollection>
+                <dx:PopupControlContentControl runat="server">
+                    <asp:HiddenField runat="server" ID="hfBBLE2" />
+                    <dx:ASPxTokenBox runat="server" ID="tbUsers" TextSeparator=";" ClientInstanceName="tbUsers">
+                    </dx:ASPxTokenBox>
+                    <input type="button" class="btn btn-primary" value="Save" id="Button1" onclick="SaveNotifyUsers(tbUsers.GetText());" />
+                </dx:PopupControlContentControl>
+            </ContentCollection>
+        </dx:ASPxPopupControl>
 
         <dx:ASPxPopupControl ClientInstanceName="popupComplaintHistory" Width="800px" Height="480px"
             ID="popupComplaintHistory" OnWindowCallback="popupComplaintHistory_WindowCallback" AllowDragging="true"
@@ -601,7 +632,7 @@
 
         <br />
     </div>
-    
+
     <script type="text/javascript">
         $(function () { SetView() });
         $(function () {

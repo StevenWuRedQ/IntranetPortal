@@ -661,9 +661,20 @@ Public Class Troubleshooting
     Private Sub btnComplaintsRefresh_Click(sender As Object, e As EventArgs) Handles btnComplaintsRefresh.Click
         Dim bble = txtBBLE.Text
 
-        Dim complaints = CheckingComplain.Instance(bble)
-        complaints.UpdateComplaintsResult()
+        If String.IsNullOrEmpty(bble) Then
+            Dim complaints = CheckingComplain.GetAllComplains()
 
+            For Each cpl In complaints
+                cpl.UpdateComplaintsResult()
+            Next
+
+        Else
+            Dim complaints = CheckingComplain.Instance(bble)
+            complaints.UpdateComplaintsResult()
+
+        End If
+
+        
     End Sub
 
 End Class

@@ -879,6 +879,16 @@ Public Class DataWCFService
                 End If
             End If
 
+            If String.IsNullOrEmpty(add1.Trim) Then
+                Dim ld = LeadsInfo.GetInstance(bble)
+                add1 = ld.Address1
+            End If
+
+            If String.IsNullOrEmpty(city.Trim) Then
+                Dim ld = LeadsInfo.GetInstance(bble)
+                add1 = ld.NeighName
+            End If
+
             If localOwner IsNot Nothing Then
                 localOwner.Name = name.Trim
                 localOwner.Address1 = Trim(add1)

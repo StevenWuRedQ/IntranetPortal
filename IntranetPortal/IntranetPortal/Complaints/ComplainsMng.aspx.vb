@@ -158,4 +158,22 @@
             End Try
         End If
     End Sub
+
+    Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        If e.Parameter.StartsWith("Show") Then
+            tbUsers.DataSource = Employee.GetAllActiveEmps()
+            tbUsers.DataBind()
+
+            Dim bble = e.Parameter.Split("|")(1)
+            hfBBLE2.Value = bble
+            tbUsers.Text = Data.CheckingComplain.Instance(bble).NotifyUsers
+        End If
+        
+        If e.Parameter.StartsWith("Save") Then
+            Dim bble = hfBBLE2.Value
+            Dim cp = Data.CheckingComplain.Instance(bble)
+            cp.NotifyUsers = tbUsers.Text
+            cp.Save(Page.User.Identity.Name)
+        End If
+    End Sub
 End Class
