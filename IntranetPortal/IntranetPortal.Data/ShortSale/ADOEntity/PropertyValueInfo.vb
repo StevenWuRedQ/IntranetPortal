@@ -20,5 +20,11 @@ Partial Public Class PropertyValueInfo
     Public Property ExpiredOn As Nullable(Of Date)
     Public Property AgentName As String
     Public Property AgentPhone As String
+    Public Property DateOfCall As Nullable(Of Date)
+    Public Property TimeOfValue As String
+    Public Property Access As String
+    Public Property IsValuationComplete As String
+    Public Property DateComplate As Nullable(Of Date)
+    Public Property Pending As Nullable(Of Boolean)
 
 End Class

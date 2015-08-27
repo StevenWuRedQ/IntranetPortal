@@ -123,11 +123,12 @@ Partial Public Class CheckingComplain
     Public Sub UpdateComplaintsResult(Optional jsonResult As String = Nothing)
         Dim result As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
 
-        If String.IsNullOrEmpty(jsonResult) Then
-            result = GetResultFromServices(BBLE)
-        Else
-            result = JsonConvert.DeserializeObject(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result())(jsonResult)
-        End If
+        'If String.IsNullOrEmpty(jsonResult) Then
+        '    result = GetResultFromServices(BBLE)
+        'Else
+        '    result = JsonConvert.DeserializeObject(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result())(jsonResult)
+        'End If
+        result = GetResultFromServices(BBLE)
 
         If result IsNot Nothing AndAlso result.Length > 0 Then
             If result.Any(Function(r) r.Status.Trim = "ACT") Then
