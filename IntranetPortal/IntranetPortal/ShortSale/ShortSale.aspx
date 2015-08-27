@@ -916,15 +916,15 @@
 
             /* valuation popup */
             $scope.ValuationWatchField = {
-                'Method': 'Type of Valuation',
-                'DateOfCall': 'Date of Call',
-                'AgentName': 'BPO Agent',
-                'AgentPhone': 'Agent Phone #',
-                'DateOfValue': 'Date of Valuation',
-                'TimeOfValuation': 'Time of Valuation',
-                'Access': 'Access',
-                'IsValuationComplete': 'Valuation Completed',
-                'DateComplate': 'Complete Date'
+                Method: 'Type of Valuation',
+                DateOfCall: 'Date of Call',
+                AgentName: 'BPO Agent',
+                AgentPhone: 'Agent Phone #',
+                DateOfValue: 'Date of Valuation',
+                TimeOfValuation: 'Time of Valuation',
+                Access: 'Access',
+                IsValuationComplete: 'Valuation Completed',
+                DateComplate: 'Complete Date'
             }
             $scope.Valuation_popupVisible = false;
             $scope.Valuation_Show_Option = 1;
@@ -953,7 +953,7 @@
                                 newEl[property] = el[property]
                             }
                         }
-                        $scope.oldPendingValues.push[newEl]
+                        $scope.oldPendingValues.push(newEl)
                     }
                 })
             }
@@ -962,8 +962,7 @@
                 var updates = '';
                 _.each($scope.SsCase.ValueInfoes, function (el, index) {
                     if (el.pending) {
-                        var hash = el.$$hashKey
-                        var oldEl = $scope.oldPendingValues.filter(function (i, e) { e.$$hashKey == hash })[0];
+                        var oldEl = $scope.oldPendingValues.filter(function (e, i) { return e.$$hashKey == el.$$hashKey })[0];
                         if (!oldEl) {
                             for (var property in el) {
                                 if ($scope.ValuationWatchField.hasOwnProperty(property)) {
@@ -972,7 +971,7 @@
                             }
                         } else {
                             for (var property in el) {
-                                if ($scope.ValuationWatchField.hasOwnProperty(property) && el[property] !== oldEl[property]) {
+                                if ($scope.ValuationWatchField[property] && el[property] !== oldEl[property]) {
                                     updates += 'Valuation' + index + ' <b>' + $scope.ValuationWatchField[property] + '</b> changes to <b>' + el[property] + '</b><br/>';
                                 }
                             }
