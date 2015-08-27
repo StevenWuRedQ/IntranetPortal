@@ -102,6 +102,7 @@ Partial Class Troubleshooting
         Me.btnRefreshLegalReport = New System.Windows.Forms.Button()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
         Me.btnComplaintsRefresh = New System.Windows.Forms.Button()
+        Me.TabPage9 = New System.Windows.Forms.TabPage()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -367,6 +368,7 @@ Partial Class Troubleshooting
         Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Controls.Add(Me.TabPage7)
         Me.TabControl1.Controls.Add(Me.TabPage8)
+        Me.TabControl1.Controls.Add(Me.TabPage9)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 46)
         Me.TabControl1.Name = "TabControl1"
@@ -895,6 +897,16 @@ Partial Class Troubleshooting
         Me.btnComplaintsRefresh.Text = "Refresh Result"
         Me.btnComplaintsRefresh.UseVisualStyleBackColor = True
         '
+        'TabPage9
+        '
+        Me.TabPage9.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage9.Name = "TabPage9"
+        Me.TabPage9.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage9.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage9.TabIndex = 9
+        Me.TabPage9.Text = "Construction"
+        Me.TabPage9.UseVisualStyleBackColor = True
+        '
         'Troubleshooting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1014,4 +1026,5 @@ Partial Class Troubleshooting
     Friend WithEvents btnSummaryEmail As System.Windows.Forms.Button
     Friend WithEvents TabPage8 As System.Windows.Forms.TabPage
     Friend WithEvents btnComplaintsRefresh As System.Windows.Forms.Button
+    Friend WithEvents TabPage9 As System.Windows.Forms.TabPage
 End Class

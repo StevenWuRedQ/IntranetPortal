@@ -6,6 +6,19 @@ Imports System.ComponentModel.DataAnnotations
 <MetadataType(GetType(EmployeeMetaData))>
 Partial Public Class Employee
 
+    Private Shared _ceo As Employee
+    Public Shared ReadOnly Property CEO As Employee
+        Get
+            If _ceo Is Nothing Then
+                Using ctx As New Entities
+                    _ceo = ctx.Employees.Where(Function(em) em.Position = "CEO").FirstOrDefault
+                End Using
+            End If
+
+            Return _ceo
+        End Get
+    End Property
+
     Public Shared Function GetProfile(name As String) As EmployeeProfile
         Using context As New Entities
             Dim data = context.UserProfileDatas.Where(Function(up) up.UserName = name).Select(Function(up) up.ProfileData).SingleOrDefault

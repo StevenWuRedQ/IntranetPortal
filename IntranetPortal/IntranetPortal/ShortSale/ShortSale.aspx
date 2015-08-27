@@ -19,7 +19,6 @@
     <script src="/Scripts/jquery.webui-popover.js"></script>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-
     <script type="text/javascript">
         var caseId = null;
         var leadsInfoBBLE = null;

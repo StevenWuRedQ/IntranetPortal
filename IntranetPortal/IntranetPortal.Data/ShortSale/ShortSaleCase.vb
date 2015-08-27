@@ -147,6 +147,35 @@ Partial Public Class ShortSaleCase
     Public Property LastFileOverview As ShortSaleOverview
     'Public Property MortgageCategory As String
 
+    <JsonIgnoreAttribute>
+   Public ReadOnly Property FileOverview As ShortSaleOverview
+        Get
+            Dim overview = ShortSaleOverview.LastOverview(BBLE, "ShortSale")
+            If overview IsNot Nothing Then
+                Return overview
+            Else
+                Return New ShortSaleOverview
+            End If
+        End Get
+    End Property
+
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property LastActivityLog As String
+        Get
+            Dim log = ShortSaleActivityLog.LastActivityLog(BBLE)
+            If log IsNot Nothing Then
+                Dim sb As New StringBuilder
+                sb.Append("ActivityType: " & log.ActivityType & Environment.NewLine)
+                sb.Append("ActivityTitle: " & log.ActivityTitle & Environment.NewLine)
+                sb.Append("Description: " & log.Description & Environment.NewLine)
+
+                Return sb.ToString
+            End If
+
+            Return Nothing
+        End Get
+    End Property
+
     Private _sellerTitle As PropertyTitle
     Public ReadOnly Property SellerTitle As PropertyTitle
         Get
@@ -1096,7 +1125,7 @@ Partial Public Class ShortSaleCase
                        Let owner = ctx.PropertyOwners.FirstOrDefault(Function(po) po.BBLE = ss.BBLE)
                        Let morts = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = ss.CaseId).OrderBy(Function(m) m.MortgageId)
                        Let values = ctx.PropertyValueInfoes.Where(Function(pv) pv.BBLE = ss.BBLE)
-                       Let fileOverview = ctx.ShortSaleOverviews.Where(Function(pv) pv.BBLE = ss.BBLE).OrderByDescending(Function(pv) pv.ActivityDate).FirstOrDefault
+                       Let fileOverview = ctx.ShortSaleOverviews.Where(Function(pv) pv.BBLE = ss.BBLE And pv.Category = "ShortSale").OrderByDescending(Function(pv) pv.ActivityDate).FirstOrDefault
                        Select New With {.CaseId = ss.CaseId,
                                         .ShortSale = ss,
                                         .PropertyInfo = pi,

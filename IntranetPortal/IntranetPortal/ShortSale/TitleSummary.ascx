@@ -718,11 +718,19 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="Manager">
                                                     </dx:GridViewDataTextColumn>
+
+                                                    <dx:GridViewDataTextColumn FieldName="FileOverview.Comments" Caption="File Overview">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FileOverview.ActivityDate" Caption="File Overview Date">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FileOverview.UserName" Caption="File Overview User">
+                                                    </dx:GridViewDataTextColumn>
+                                                    
                                                     <dx:GridViewDataDateColumn Width="120px" Caption="Last Activity" Name="LastActivity" FieldName="UpdateDate">
                                                     </dx:GridViewDataDateColumn>
                                                     <dx:GridViewDataTextColumn FieldName="Owner" Caption="Assgin To">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="BBLE" Width="75px" Caption="Comments">
+                                                    <dx:GridViewDataTextColumn FieldName="LastActivityLog" Width="75px" Caption="Comments">
                                                         <DataItemTemplate>
                                                             <div style="text-align: center; width: 100%">
                                                                 <i class="fa fa-info-circle tooltip-examples icon_btn" style="font-size: 18px" data-toggle="tooltip" data-placement="bottom" title='<%# IntranetPortal.LeadsActivityLog.GetLastComments(Eval("BBLE"))%>'></i>

@@ -139,7 +139,7 @@ Public Class CommonService
         Dim name = String.Format("{1}-ActivityReport-{0:m}.pdf", DateTime.Today, "Legal Team")
         Dim attachment As New System.Net.Mail.Attachment(GetPDf("Legal"), name)
 
-        IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
+        IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), If(Employee.CEO IsNot Nothing, Employee.CEO.Email, ""), "TeamActivitySummary", emailData, {attachment})
     End Sub
 
     Public Sub LegalFollowUp() Implements ICommonService.LegalFollowUp

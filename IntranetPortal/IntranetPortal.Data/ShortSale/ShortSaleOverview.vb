@@ -8,6 +8,12 @@ Public Class ShortSaleOverview
     End Function
 
 
+    Public Shared Function LastOverview(bble As String, category As String) As ShortSaleOverview
+        Using ctx As New ShortSaleEntities
+            Return ctx.ShortSaleOverviews.Where(Function(s) s.BBLE = bble And s.Category = category).OrderByDescending(Function(s) s.ActivityDate).FirstOrDefault
+        End Using
+    End Function
+
 
     Public Sub Save()
 
@@ -21,7 +27,6 @@ Public Class ShortSaleOverview
 
             ctx.SaveChanges()
         End Using
-
     End Sub
 
 

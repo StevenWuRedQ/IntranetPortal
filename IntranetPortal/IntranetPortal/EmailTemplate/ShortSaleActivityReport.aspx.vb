@@ -40,7 +40,7 @@ Public Class ShortSaleActivityReport
         chartActivity.BorderOptions.Visibility = DevExpress.Utils.DefaultBoolean.False
 
         Dim title = New ChartTitle()
-        title.Text = String.Format("Short Sale Team Activity on {0:m}", DateTime.Today)
+        title.Text = String.Format("Team Activity on {0:m}", DateTime.Today)
         chartActivity.Titles.Add(title)
 
         chartActivity.Legend.Direction = LegendDirection.LeftToRight
