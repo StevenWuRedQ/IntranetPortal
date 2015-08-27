@@ -88,6 +88,7 @@
         function EditNotifyUsers(bble, div)
         {
             editDiv = div;
+            popupNotifyUsers.SetHeaderText("Edit Notify User - " + bble);
             popupNotifyUsers.PerformCallback('Show|' + bble);
             popupNotifyUsers.Show();
         }
@@ -426,14 +427,14 @@
             </div>
         </div>
 
-        <dx:ASPxPopupControl ClientInstanceName="popupNotifyUsers" Width="200px" Height="200px"
+        <dx:ASPxPopupControl ClientInstanceName="popupNotifyUsers" Width="300px" Height="300px"
             ID="ASPxPopupControl1" OnWindowCallback="ASPxPopupControl1_WindowCallback" AllowDragging="true"
             HeaderText="Notify Users" Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server">
                     <asp:HiddenField runat="server" ID="hfBBLE2" />
-                    <dx:ASPxTokenBox runat="server" ID="tbUsers" TextSeparator=";" ClientInstanceName="tbUsers">
+                    <dx:ASPxTokenBox runat="server" ID="tbUsers" TextSeparator=";" ClientInstanceName="tbUsers" CssClass="form-control">
                     </dx:ASPxTokenBox>
                     <input type="button" class="btn btn-primary" value="Save" id="Button1" onclick="SaveNotifyUsers(tbUsers.GetText());" />
                 </dx:PopupControlContentControl>
