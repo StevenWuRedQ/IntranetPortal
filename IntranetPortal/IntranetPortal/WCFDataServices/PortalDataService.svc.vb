@@ -326,8 +326,15 @@ Public Class PortalDataService
         Using client As New IntranetPortal.Data.DataAPI.WCFMacrosClient
 
             If type = "DOBComplaints" Then
-                Dim complaints = CheckingComplain.Instance(bble)
-                complaints.UpdateComplaintsResult(result)
+                Dim callback = Sub()
+                                   Try
+                                       Dim complaints = CheckingComplain.Instance(bble)
+                                       complaints.UpdateComplaintsResult(result)
+                                   Catch ex As Exception
+                                       Core.SystemLog.LogError("DataIsReady", ex, "DOBComplaints", "Backend Services", bble)
+                                   End Try
+                               End Sub
+                Threading.ThreadPool.QueueUserWorkItem(callback)
             End If
         End Using
     End Sub
