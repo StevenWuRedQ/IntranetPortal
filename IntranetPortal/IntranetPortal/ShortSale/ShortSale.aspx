@@ -336,7 +336,7 @@
                                                                     </div>
                                                                     <div data-options="dxTemplate:{ name: 'content' }">
                                                                         <tabset class="tab-switch">
-                                                                            <tab ng-repeat="valuation in SsCase.ValueInfoes|filter: {pending: true} " heading={{$index+1}}>
+                                                                            <tab ng-repeat="valuation in SsCase.ValueInfoes|filter: {Pending: true} " heading={{$index+1}}>
                                                                                 <div class="text-right" ng-show="$index>-1"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="removePendingValue(valuation)" title="Delete"></i></div>
                                                                                 <div ng-show="Valuation_Show_Option==1||Valuation_Show_Option==2||Valuation_Show_Option==3">
                                                                             <div class="row">
@@ -929,7 +929,7 @@
             $scope.Valuation_popupVisible = false;
             $scope.Valuation_Show_Option = 1;
             $scope.addPendingValue = function () {
-                $scope.SsCase.ValueInfoes.push({ pending: true });
+                $scope.SsCase.ValueInfoes.push({ Pending: true });
             }
             $scope.removePendingValue = function (el) {
                 var index = $scope.SsCase.ValueInfoes.indexOf(el);
@@ -939,14 +939,14 @@
             $scope.ensurePendingValue = function () {
                 var existPending = false;
                 angular.forEach($scope.SsCase.ValueInfoes, function (el, index) {
-                    if (el.pending) existPending = true;
+                    if (el.Pending) existPending = true;
                 })
                 if (!existPending) $scope.addPendingValue();
             }
             $scope.resetPendingModified = function () {
                 $scope.oldPendingValues = []
                 _.each($scope.SsCase.ValueInfoes, function (el, index) {
-                    if (el.pending) {
+                    if (el.Pending) {
                         var newEl = {}
                         for (var property in el) {
                             if (el.hasOwnProperty(property)) {
@@ -961,7 +961,7 @@
             $scope.checkPendingModified = function () {
                 var updates = '';
                 _.each($scope.SsCase.ValueInfoes, function (el, index) {
-                    if (el.pending) {
+                    if (el.Pending) {
                         var oldEl = $scope.oldPendingValues.filter(function (e, i) { return e.$$hashKey == el.$$hashKey })[0];
                         if (!oldEl) {
                             for (var property in el) {
@@ -979,18 +979,22 @@
 
                     }
                 })
-                console.log(updates)
+                //console.log(updates)
                 return updates
             }
             $scope.valuationSave = function () {
                 var updates = $scope.checkPendingModified();
-                /*if ($scope.valuationSuccCallback) {
+                if ($scope.valuationSuccCallback) {
                     $scope.valuationSuccCallback(updates);
-                }*/
+                }
                 $scope.Valuation_popupVisible = false;
             };
             $scope.valuationCompl = function (el) {
-                el.pending = false;
+                var updates = $scope.checkPendingModified();
+                if ($scope.valuationSuccCallback) {
+                    $scope.valuationSuccCallback(updates);
+                }
+                el.Pending = false;
                 $scope.Valuation_popupVisible = false;
             }
             $scope.regValuation = function (succ, cancl) {

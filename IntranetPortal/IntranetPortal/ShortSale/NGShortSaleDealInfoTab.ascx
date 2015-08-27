@@ -118,7 +118,7 @@
                         <div class="col-sm-4" style="padding: 0px">
                             <span><b>Agent Phone</b>: {{value.AgentPhone}}</span>
                         </div>
-                        <div ng-show="value.pending==true" class="col-sm-4" style="padding: 0px">
+                        <div ng-show="value.Pending==true" class="col-sm-4" style="padding: 0px">
                             <span><i class="fa fa-question"></i></span>
                         </div>
                     </div>
