@@ -302,27 +302,25 @@ app.factory('ptHomeBreakDownService', [
 
 app.service('ptFileService', function () {
 
-    this.uploadFile = function (data, bble, callback, cleanup, rename) {
-        var fileName = rename == '' ? file.name : rename;
+    this.uploadConstructionFile = function (data, bble, rename, folder, callback) {
+        var fileName = rename ? rename : '';
+        var folder = folder ? folder : '';
         if (!data || !bble) {
-            alert('Upload infomation missing!');
-            if (cleanup) cleanup();
+            callback('Upload infomation missing!')
         } else {
             bble = bble.trim();
             $.ajax({
-                url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + fileName,
+                url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + folder,
                 type: 'POST',
                 data: data,
                 cache: false,
                 processData: false,
                 contentType: false,
                 success: function (data1) {
-                    callback(data1);
-                    if (cleanup) cleanup();
+                    callback(null, data1);
                 },
                 error: function () {
-                    if (cleanup) cleanup();
-                    alert('upload file fails');
+                    callback('Upload fails!')
                 }
             });
         }
@@ -340,6 +338,20 @@ app.service('ptFileService', function () {
         if (fullPath) {
             var exts = fullPath.split('.');
             return exts[exts.length - 1].toLowerCase();
+        }
+        return '';
+    }
+
+    this.getFileFolder = function (fullPath) {
+        if (fullPath) {
+            var paths = fullPath.split('/');
+            var folderName = paths[paths.length - 2];
+            var topFolders = ['Construction',];
+            if (topFolders.indexOf(folderName) < 0) {
+                return folderName;
+            } else {
+                return '';
+            }
         }
         return '';
     }

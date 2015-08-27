@@ -20,8 +20,8 @@
             <div style="font-size: 30px; margin-left: 30px; height: 80px" class="font_gray">
                 <div style="font-size: 30px; margin-top: 20px;">
                     <i class="fa fa-home"></i>
-                    <span style="margin-left: 19px;">{{CSCase.CaseName}}&nbsp;</span>
-
+                    <span style="margin-left: 19px;"><span ng-bind="CSCase.CSCase.Header" pt-init-bind="CSCase.CaseName" ng-dblclick="toggleHeaderEditing()" ng-show="!HeaderEditing"></span>&nbsp;</span>
+                    <input ng-show="HeaderEditing" ng-Blur="toggleHeaderEditing()" ng-model="CSCase.CSCase.Header"/>
                     <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+leadsInfoBBLE, 'Maps')">Map</span>
 
                     <span class="time_buttons" onclick="OpenLeadsWindow('http://nycserv.nyc.gov/NYCServWeb/NYCSERVMain', 'eCourts')" ng-show="activeTab=='CSUtilities'">Water&Taxes</span>
@@ -34,7 +34,7 @@
 
                     <span class="time_buttons" onclick="OpenLeadsWindow('http://www1.nyc.gov/site/finance/index.page', 'Department of Finance')" ng-show="">Department of Finance</span>
 
-                    <span class="time_buttons" onclick="OpenLeadsWindow('http://www1.nyc.gov/assets/hpd/downloads/pdf/Dismissal-Request-Form-2013.pdf', 'Dismissal Request form')">Dismissal Request form</span>
+                    <span class="time_buttons" onclick="OpenLeadsWindow('http://www1.nyc.gov/assets/hpd/downloads/pdf/Dismissal-Request-Form-2013.pdf', 'Dismissal Request form')" ng-show="activeTab=='CSViolations'">Dismissal Request form</span>
 
 
                 </div>

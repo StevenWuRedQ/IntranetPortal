@@ -120,7 +120,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">C/O</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.CO" pt-init-model="SsCase.PropertyInfo.CO">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.CO" pt-init-model="SsCase.PropertyInfo.COClass">
             </li>
         </ul>
         <ul class="ss_form_box clearfix" collapse="CSCase.CSCase.InitialIntake.BuildingInfoCollapsed" ng-init="CSCase.CSCase.InitialIntake.BuildingInfoCollapsed=true">

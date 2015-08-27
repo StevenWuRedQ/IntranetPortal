@@ -65,6 +65,22 @@ portalApp.directive('ptInitModel', function () {
     }
 });
 
+//one way bind of ptInitModel
+portalApp.directive('ptInitBind', function () {
+    return {
+        restrict: 'A',
+        require: '?ngBind',
+        link: function (scope, el, attrs) {
+            scope.$watch(attrs.ptInitBind, function (newVal) {
+                if (!scope.$eval(attrs.ngBind) && newVal) {
+                    if (typeof newVal == 'string') newVal = newVal.replace(/'/g, "\\'");
+                    scope.$eval(attrs.ngBind + "='" + newVal + "'");
+                }
+            });
+        }
+    }
+});
+
 portalApp.directive('radioInit', function () {
     return {
         restrict: 'A',
@@ -214,7 +230,7 @@ portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileServ
         scope: {
             fileModel: '=',
             fileBble: '=',
-            fileRename: '@',
+            fileName: '@',
             fileId: '@'
         },
         link: function (scope, el, attrs) {
@@ -245,13 +261,18 @@ portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileServ
                 scope.startLoading();
                 var data = new FormData();
                 data.append("file", scope.File);
-                ptFileService.uploadFile(data, scope.fileBble, function (res) {
-                    scope.$apply(function () {
-                        scope.fileModel = res[0];
-                        scope.delChoosed();
-                    });
+                ptFileService.uploadConstructionFile(data, scope.fileBble, scope.fileName, '', function (error, data) {
+                    scope.stopLoading();
+                    if (error) {
+                        alert(error);
+                    } else {
+                        scope.$apply(function () {
+                            scope.fileModel = data[0];
+                            scope.delChoosed();
+                        });
+                    }
 
-                }, function () { scope.stopLoading(); }, scope.fileRename);
+                });
             }
             el.find('input:file').bind('change', function () {
                 var file = this.files[0];
@@ -276,96 +297,46 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             fileName: '@',
             fileId: '@',
             fileColumns: '@',
+            fileFolder: '@',
             onFileProcess: '&',
             onFileDone: '&'
         },
         link: function (scope, el, attrs) {
             scope.ptFileService = ptFileService;
             scope.ptCom = ptCom;
+
+
+            // init scope variale
+            scope.files = [];
             scope.columns = [];
+            scope.nameTable = [];   // record choosen files
+            scope.currentFolder = '';
+
+            scope.loading = false;
+            scope.folderEnable = scope.fileFolder == 'true' ? true : false;
+
+
             if (scope.fileColumns) {
                 scope.columns = scope.fileColumns.split('|');
-                scope.columns.forEach(function (elm) {
+                _.each(scope.columns, function (elm) {
                     elm.trim();
                 });
             }
+            scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined)
 
-            scope.files = [];
-            scope.nameTable = [];
-            scope.loading = false;
-            scope.removeChoosed = function (index) {
-                scope.nameTable.splice(scope.nameTable.indexOf(scope.files[index].name), 1);
-                scope.files.splice(index, 1);
-            }
-            scope.clearChoosed = function () {
-                scope.nameTable = [];
-                scope.files = [];
-            }
-            scope.addFiles = function (files) {
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-                    scope.$apply(function () {
-                        if (scope.nameTable.indexOf(file.name) < 0) {
-                            scope.files.push(file);
-                            scope.nameTable.push(file.name);
-                        }
-                    });
-
-                }
-            }
-            scope.toggleLoading = function () {
-                scope.loading = !scope.loading;
-            }
-            scope.startLoading = function () {
-                scope.loading = true;
-            }
-            scope.stopLoading = function () {
-                $timeout(function () {
-                    scope.loading = false;
-                });
-            }
-            scope.uploadFile = function () {
-                scope.startLoading();
-                var data = new FormData();
-                for (var i = 0; i < scope.files.length; i++) {
-                    data.append("file", scope.files[i]);
-                }
-                ptFileService.uploadFile(data, scope.fileBble, function (res) {
-                    scope.$apply(function () {
-                        scope.fileModel = scope.fileModel ? scope.fileModel : [];
-                        for (var i = 0; i < res.length; i++) {
-                            var newCol = {};
-                            newCol.path = res[i];
-                            newCol.name = ptFileService.getFileName(newCol.path);
-                            newCol.uploadTime = new Date();
-                            for (var j = 0; j < scope.columns.length; j++) {
-                                var column = scope.columns[j];
-                                newCol[column] = '';
-                            }
-                            scope.fileModel.push(newCol);
-                        }
-                        scope.clearChoosed();
-                    });
-
-                }, function () { scope.stopLoading(); }, scope.fileRename);
-            }
-
-            scope.OnDropTextarea = function (event) {
-                if (event.originalEvent.dataTransfer) {
-                    var files = event.originalEvent.dataTransfer.files;
-                    scope.addFiles(files);
-                }
-                else {
-                    alert("Your browser does not support the drag files.");
-                }
-            }
+            // reg events            
+            scope.$watch(function () {
+                return scope.fileModel.$modelValue;
+            }, function () {
+                scope.currentFolder = '';
+                scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')),undefined)
+            })
 
             $(el).find('input:file').change(function () {
                 var files = this.files;
                 scope.addFiles(files);
                 this.value = '';
             });
-
             $(el).find('.drop-area')
                 .on('dragenter', function (e) {
                     e.preventDefault();
@@ -385,6 +356,102 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                     scope.OnDropTextarea(e);
                     debugger;
                 });
+
+
+            // utility functions
+            scope.changeFolder = function (folder) {
+                scope.currentFolder = folder;
+            }
+            scope.addFolder = function (folderName) {
+                scope.folders.push(folderName);
+                scope.currentFolder = folderName;
+            }
+            scope.toggleNewFilePop = function () {
+                scope.NewFolderPop = !scope.NewFolderPop
+                scope.NewFolderName = '';
+            }
+            scope.newFolderPopSave = function () {
+                scope.addFolder(scope.NewFolderName);
+                scope.toggleNewFilePop()
+            }
+
+
+            scope.addFiles = function (files) {
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    scope.$apply(function () {
+                        if (scope.nameTable.indexOf(file.name) < 0) {
+                            scope.files.push(file);
+                            scope.nameTable.push(file.name);
+                        }
+                    });
+
+                }
+            }
+            scope.removeChoosed = function (index) {
+                scope.nameTable.splice(scope.nameTable.indexOf(scope.files[index].name), 1);
+                scope.files.splice(index, 1);
+            }
+            scope.clearChoosed = function () {
+                scope.nameTable = [];
+                scope.files = [];
+            }
+
+            scope.toggleLoading = function () {
+                scope.loading = !scope.loading;
+            }
+            scope.startLoading = function () {
+                scope.loading = true;
+            }
+            scope.stopLoading = function () {
+                $timeout(function () {
+                    scope.loading = false;
+                });
+            }
+
+            scope.OnDropTextarea = function (event) {
+                if (event.originalEvent.dataTransfer) {
+                    var files = event.originalEvent.dataTransfer.files;
+                    scope.addFiles(files);
+                }
+                else {
+                    alert("Your browser does not support the drag files.");
+                }
+            }
+            scope.uploadFile = function () {
+                scope.startLoading();
+                var data = new FormData();
+                for (var i = 0; i < scope.files.length; i++) {
+                    data.append("file", scope.files[i]);
+                }
+                ptFileService.uploadConstructionFile(data, scope.fileBble, scope.fileName, scope.currentFolder, function (error, data) {
+                    scope.stopLoading();
+                    if (error) {
+                        alert(error);
+                    } else {
+                        scope.$apply(function () {
+                            scope.fileModel = scope.fileModel ? scope.fileModel : [];
+                            for (var i = 0; i < data.length; i++) {
+                                var newCol = {};
+                                newCol.path = data[i];
+                                newCol.name = ptFileService.getFileName(newCol.path);
+                                newCol.folder = ptFileService.getFileFolder(newCol.path);
+                                newCol.uploadTime = new Date();                                
+                                for (var j = 0; j < scope.columns.length; j++) {
+                                    var column = scope.columns[j];
+                                    newCol[column] = '';
+                                }
+                                scope.fileModel.push(newCol);
+                            }
+                            scope.clearChoosed();
+                        });
+                    }
+
+                });
+            }
+
+
+
         }
 
     }

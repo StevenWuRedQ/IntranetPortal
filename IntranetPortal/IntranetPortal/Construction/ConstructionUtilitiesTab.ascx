@@ -64,7 +64,7 @@
                 <label class="ss_form_input_title">Meter Number</label>
                 <input class="ss_form_input" ng-model="floor.ConED.MeterNum">
             </li>
-            <li class="ss_form_item">
+            <li class="ss_form_item" ng-show="CSCase.CSCase.Utilities.ConED_EnergyServiceRequired">
                 <label class="ss_form_input_title">Missing/Damaged Meter</label>
                 <select class="ss_form_input" ng-model="floor.ConED.MissingMeter">
                     <option value="NA">N/A</option>

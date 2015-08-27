@@ -465,7 +465,7 @@
                 <pt-radio model="CSCase.CSCase.Violations.HPD_OpenHPDViolation" name="CSCase-Violations-HPD-OpenHPDViolation"></pt-radio>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Open Violation Number</label>
+                <label class="ss_form_input_title">number of open violations</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_OpenViolationNumber">
             </li>
             <li class="ss_form_item">

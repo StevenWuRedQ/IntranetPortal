@@ -2377,13 +2377,14 @@ li.mag_tabv.active {
 	border-bottom: 1px solid #dde0e7;
 	border-radius: 0px;
 }
+
 .tab-switch li {
-	font-size: 14px
+	font-size: 14px;
 }
 
-.tab-switch li.active {
-	background: white !important;
-}
+	.tab-switch li.active {
+		background: white !important;
+	}
 
 .tab-switch .nav-tabs > li.active > a,
 .tab-switch .nav-tabs > li.active > a:hover,
@@ -2515,3 +2516,20 @@ li.mag_tabv.active {
 	#barner-danger:hover {
 		cursor: pointer;
 	}
+
+.pt-files {
+	margin: 5px;
+	white-space: nowrap;
+}
+
+	.pt-files .pt-files-header {
+	
+		
+	}
+.pt-files .pt-files-drop-button {
+	padding: 3px 20px;
+	border: 1px solid #c8c8c8;
+	border-radius: 2px;
+	border-bottom: none;
+	margin-bottom: -1px;
+}

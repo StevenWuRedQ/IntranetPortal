@@ -444,6 +444,12 @@
             }
             /* end Popup*/
 
+            /* header editing */
+            $scope.HeaderEditing = false;
+            $scope.toggleHeaderEditing = function () {
+                $scope.HeaderEditing = !$scope.HeaderEditing;
+            }
+            /* end header editing */
         }]);
     </script>
 

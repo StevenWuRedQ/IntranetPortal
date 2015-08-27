@@ -2,9 +2,9 @@
 
 <div class="ss_form">
     <div class="ss_border">
-        <div>
+        <div >
             <h5 class="ss_form_title">AM Photos</h5>
-            <pt-files file-bble="CSCase.BBLE" file-id="Photos-AMPhoto" file-model="CSCase.CSCase.Photos.AMPhotos"></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="Photos-AMPhoto" file-model="CSCase.CSCase.Photos.AMPhotos" file-folder="true"></pt-files>
         </div>
         <hr />
         <div>
