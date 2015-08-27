@@ -88,16 +88,16 @@ Partial Public Class PropertyBaseInfo
 
                     i += 1
                 Next
-            End If
 
-            Dim olderEntities = context.PropertyFloors.Where(Function(pf) pf.BBLE = BBLE).ToList
-            If olderEntities.Count > _propFloors.Count Then
-                For Each floor In olderEntities
-                    If Not _propFloors.Any(Function(so) so.FloorId = floor.FloorId) Then
-                        context.PropertyFloors.Remove(floor)
-                    End If
-                Next
-                context.SaveChanges()
+                Dim olderEntities = context.PropertyFloors.Where(Function(pf) pf.BBLE = BBLE).ToList
+                If olderEntities.Count > _propFloors.Count Then
+                    For Each floor In olderEntities
+                        If Not _propFloors.Any(Function(so) so.FloorId = floor.FloorId) Then
+                            context.PropertyFloors.Remove(floor)
+                        End If
+                    Next
+                    context.SaveChanges()
+                End If
             End If
 
             If _owners IsNot Nothing Then
@@ -108,18 +108,17 @@ Partial Public Class PropertyBaseInfo
                         owner.Save()
                     End If
                 Next
-            End If
 
-            Dim oldOwners = context.PropertyOwners.Where(Function(pf) pf.BBLE = BBLE).ToList
-            If oldOwners.Count > _owners.Count Then
-                For Each owner In oldOwners
-                    If Not _owners.Any(Function(ow) ow.OwnerId = owner.OwnerId) Then
-                        context.PropertyOwners.Remove(owner)
-                    End If
-                Next
-                context.SaveChanges()
+                Dim oldOwners = context.PropertyOwners.Where(Function(pf) pf.BBLE = BBLE).ToList
+                If oldOwners.Count > _owners.Count Then
+                    For Each owner In oldOwners
+                        If Not _owners.Any(Function(ow) ow.OwnerId = owner.OwnerId) Then
+                            context.PropertyOwners.Remove(owner)
+                        End If
+                    Next
+                    context.SaveChanges()
+                End If
             End If
-
         End Using
     End Sub
 

@@ -371,10 +371,14 @@ Public Class LeadsInfo1
 
             Dim contact = Context.OwnerContacts.Where(Function(c) c.BBLE = hfBBLE.Value And c.Contact.Contains(phoneNo)).FirstOrDefault
 
+
             'Remove the saved info. 
             If status = OwnerContact.ContactStatus.Undo Then
-                Context.OwnerContacts.Remove(contact)
-                Context.SaveChanges()
+                If contact IsNot Nothing Then
+                    Context.OwnerContacts.Remove(contact)
+                    Context.SaveChanges()
+                End If
+                
                 Return
             End If
 

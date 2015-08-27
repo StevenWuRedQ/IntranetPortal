@@ -18,6 +18,8 @@
           <Property Name="LastDataEntered" Type="datetime" />
           <Property Name="LastComplaintsResult" Type="nvarchar(max)" />
           <Property Name="LastResultUpdate" Type="datetime" />
+          <Property Name="IsOwned" Type="bit" />
+          <Property Name="Status" Type="int" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateTime" Type="datetime" />
         </EntityType>
@@ -76,6 +78,8 @@
           <Property Name="LastComplaintsResult" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastDataEntered" Type="DateTime" Precision="3" />
           <Property Name="LastResultUpdate" Type="DateTime" Precision="3" />
+          <Property Name="IsOwned" Type="Boolean" />
+          <Property Name="Status" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -101,6 +105,8 @@
           <EntitySetMapping Name="CheckingComplains">
             <EntityTypeMapping TypeName="ConstructionModel.CheckingComplain">
               <MappingFragment StoreEntitySet="CheckingComplains">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IsOwned" ColumnName="IsOwned" />
                 <ScalarProperty Name="LastResultUpdate" ColumnName="LastResultUpdate" />
                 <ScalarProperty Name="LastDataEntered" ColumnName="LastDataEntered" />
                 <ScalarProperty Name="LastComplaintsResult" ColumnName="LastComplaintsResult" />

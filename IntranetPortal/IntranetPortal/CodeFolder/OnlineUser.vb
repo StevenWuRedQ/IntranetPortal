@@ -35,7 +35,7 @@ Public Class OnlineUser
             Else
                 Dim newUser As New OnlineUser
                 newUser.UserName = context.User.Identity.Name
-                newUser.IPAddress = context.Request.UserHostAddress
+                newUser.IPAddress = context.Request.ServerVariables("REMOTE_ADDR")
                 newUser.LoginTime = DateTime.Now
                 newUser.RefreshTime = DateTime.Now
 

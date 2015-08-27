@@ -360,6 +360,12 @@
         addCommentsCallbackClient.PerformCallback(updateLevel + "|" + addDate.toJSON() + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate option:selected").text() + "|" + $("#selCategory").val());
     }
 
+    function AddActivityLog(comments)
+    {
+        EmailBody.SetHtml(comments);
+        InsertNewComments();
+    }
+
     function OnCommentsKeyDown(e) {
         if (e.ctrlKey && e.keyCode == 13) {
             // Ctrl-Enter pressed
@@ -531,7 +537,7 @@
                                 }
                             },
                             CheckingSuccess: function(result){
-                                EmailBody.SetHtml("Checkinglist is finished." + result);
+                                EmailBody.SetHtml(result);
                                 InsertNewComments();                                            
                             },
                             CheckingCancel: function(){

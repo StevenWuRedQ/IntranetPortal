@@ -39,7 +39,7 @@ Partial Public Class SystemLog
         End If
 
         Try
-            Log(title, String.Format("Error in Portal Application. Message:{0}, Request URL: {2}. Stack: {1}", ex.Message, ex.StackTrace, url), LogCategory.Error, bble, createby)
+            Log(title, String.Format("Error in Portal Application. Message:{0}, Request URL: {2}. Stack: {1}", ex.Message, ex.ToJsonString, url), LogCategory.Error, bble, createby)
         Catch exp As Exception
 
         End Try

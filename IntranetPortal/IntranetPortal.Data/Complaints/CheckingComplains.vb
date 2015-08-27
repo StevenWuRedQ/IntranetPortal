@@ -217,6 +217,11 @@ Partial Public Class CheckingComplain
         End If
     End Sub
 
+    Public Enum RunningStatus
+        InRefresh
+        Ready
+    End Enum
+
 End Class
 
 Namespace DataAPI

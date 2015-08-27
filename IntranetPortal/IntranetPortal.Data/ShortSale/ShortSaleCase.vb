@@ -661,18 +661,20 @@ Partial Public Class ShortSaleCase
                     End If
                     offer.Save(userName)
                 Next
+
+                Dim oldOffers = context.ShortSaleOffers.Where(Function(so) so.BBLE = BBLE).ToList
+                If oldOffers.Count > _offers.Count Then
+                    For Each offer In oldOffers
+                        If Not _offers.Any(Function(so) so.OfferId = offer.OfferId) Then
+                            context.ShortSaleOffers.Remove(offer)
+                        End If
+                    Next
+
+                    context.SaveChanges()
+                End If
             End If
 
-            Dim oldOffers = context.ShortSaleOffers.Where(Function(so) so.BBLE = BBLE).ToList
-            If oldOffers.Count > _offers.Count Then
-                For Each offer In oldOffers
-                    If Not _offers.Any(Function(so) so.OfferId = offer.OfferId) Then
-                        context.ShortSaleOffers.Remove(offer)
-                    End If
-                Next
 
-                context.SaveChanges()
-            End If
 
             'Save value info
             If _valueInfos IsNot Nothing Then
@@ -683,18 +685,20 @@ Partial Public Class ShortSaleCase
 
                     info.Save()
                 Next
+
+                Dim oldInfoes = context.PropertyValueInfoes.Where(Function(pv) pv.BBLE = BBLE).ToList
+                If oldInfoes.Count > _valueInfos.Count Then
+                    For Each info In oldInfoes
+                        If Not _valueInfos.Any(Function(vi) vi.ValueId = info.ValueId) Then
+                            context.PropertyValueInfoes.Remove(info)
+                        End If
+                    Next
+
+                    context.SaveChanges()
+                End If
             End If
 
-            Dim oldInfoes = context.PropertyValueInfoes.Where(Function(pv) pv.BBLE = BBLE).ToList
-            If oldInfoes.Count > _valueInfos.Count Then
-                For Each info In oldInfoes
-                    If Not _valueInfos.Any(Function(vi) vi.ValueId = info.ValueId) Then
-                        context.PropertyValueInfoes.Remove(info)
-                    End If
-                Next
 
-                context.SaveChanges()
-            End If
 
             If _propInfo IsNot Nothing Then
                 _propInfo.Save()

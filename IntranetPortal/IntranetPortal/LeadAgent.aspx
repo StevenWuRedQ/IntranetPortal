@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="LeadAgent.aspx.vb" Inherits="IntranetPortal.LeadAgent" MasterPageFile="~/Content.Master" Trace="false" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="LeadAgent.aspx.vb" Inherits="IntranetPortal.LeadAgent" EnableEventValidation="false" MasterPageFile="~/Content.Master" Trace="false" %>
 
 <%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>
 <%@ Register Src="~/UserControl/LeadsInfo.ascx" TagPrefix="uc1" TagName="LeadsInfo" %>

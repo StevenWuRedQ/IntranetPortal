@@ -12,6 +12,7 @@
             }
 
             filterCondition = "[Address] LIKE '%" + key + "%'";
+            filterCondition += " OR [BBLE] LIKE '%" + key + "%'";
             gdComplains.ApplyFilter(filterCondition);
             return false;
         }
@@ -97,7 +98,7 @@
         {
             popupNotifyUsers.PerformCallback('Save');
             popupNotifyUsers.Hide();
-            $(editDiv).html(users + "&nbsp;");
+            $(editDiv).html(users);
         }
 
     </script>
@@ -215,7 +216,8 @@
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn FieldName="NotifyUsers">
                             <DataItemTemplate>
-                              <div style="width:100%; cursor:pointer" onclick="EditNotifyUsers('<%# Eval("BBLE")%>', this);"><%# Eval("NotifyUsers")%>&nbsp;</div>
+                              <div style="display:inline-block" onclick="EditNotifyUsers('<%# Eval("BBLE")%>', this);"><%# Eval("NotifyUsers")%></div>
+                              <i class="fa fa-edit icon_btn tooltip-examples  grid_buttons" style=" font-size: 19px;" onclick="EditNotifyUsers('<%# Eval("BBLE")%>', $(this).prev());" title="Edit"></i>
                             </DataItemTemplate>
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataDateColumn FieldName="LastExecute" Width="150px" PropertiesDateEdit-DisplayFormatString="g">
@@ -434,9 +436,9 @@
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server">
                     <asp:HiddenField runat="server" ID="hfBBLE2" />
-                    <dx:ASPxTokenBox runat="server" ID="tbUsers" TextSeparator=";" ClientInstanceName="tbUsers" CssClass="form-control">
+                    <dx:ASPxTokenBox runat="server" ID="tbUsers" TextSeparator=";" Theme="Moderno" Width="280px" ClientInstanceName="tbUsers">
                     </dx:ASPxTokenBox>
-                    <input type="button" class="btn btn-primary" value="Save" id="Button1" onclick="SaveNotifyUsers(tbUsers.GetText());" />
+                    <input type="button" class="btn btn-primary" value="Save" id="Button1" onclick="SaveNotifyUsers(tbUsers.GetText());" style="margin-top:15px" />
                 </dx:PopupControlContentControl>
             </ContentCollection>
         </dx:ASPxPopupControl>
