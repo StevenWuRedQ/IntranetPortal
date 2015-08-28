@@ -9,7 +9,71 @@
             <input type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveLegal()"  />--%>
         </div>
     </div>
+    <div>
+       
+        <h4 class="ss_form_title">Order to show case <span style="transform: none; font-size: 12px;">(Mark as * need to fill other read only here)</span>
+             <i  class="fa fa-download icon_btn color_blue tooltip-examples" title="Download OSC Document" ng-click="DocGenerator('OSCTemplate.docx')"></i>
+           
+        </h4>
+        
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Plantiff</label>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.Plantiff" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Plantiff Attorney</label>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlantiffAttorney" readonly="readonly">
+            </li>
+            
+            <li class="ss_form_item" style="width:97%">
+                <label class="ss_form_input_title">Plantiff Attorney Address *</label>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlantiffAttorneyAddress">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">FC filed Date:</label>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FCFiledDate" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">FC Index #</label>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FCIndexNum" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">County</label>
+                <input class="ss_form_input" ng-model="LeadsInfo.BoroughName" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Block/Lot</label>
+                <input class="ss_form_input" ng-value="LeadsInfo.Block+'/'+ LeadsInfo.Lot" readonly="readonly">
+            </li>
+            <li class="ss_form_item " style="width:97%">
+                <label class="ss_form_input_title">Court Address *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.CourtAddress" >
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Defendant *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.Defendant">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Defendant's Attorney *</label>
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.DefendantAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DefendantAttorneyId">
+            </li>
+        </ul>
 
+
+    </div>
+    <div>
+        <h4 class="ss_form_title">Other Defendants * <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="NGAddArrayitemScope('LegalCtrl','LegalCase.SecondaryInfo.Defendants')" title="Add" style="font-size: 18px"></i></h4>
+
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item" ng-repeat="d in LegalCase.SecondaryInfo.Defendants track by $index">
+                <label class="ss_form_input_title">Defendant {{$index +1}} <i class="fa fa-times icon_btn  tooltip-examples" ng-click="ptCom.arrayRemove(LegalCase.SecondaryInfo.Defendants,$index)" title="Delete" style="font-size: 18px"></i></label>
+                <input type="text" class="ss_form_input" ng-model="d.Name">
+            </li>
+        </ul>
+
+
+    </div>
     <div class="form-inline">
         <h4 class="ss_form_title" style="margin-bottom: 12px;">Select Types</h4>
         <select class="form-control" ng-model="LegalCase.SecondaryInfo.SelectedType" ng-change="SecondarySelectType()" ng-options='o as o for o  in SecondaryTypeSource' style="width: 94%; margin-top: -8px">

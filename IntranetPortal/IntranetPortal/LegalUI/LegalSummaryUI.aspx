@@ -39,7 +39,7 @@
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-8">
-                            <h3>ALL LEGAL FILES</h3>
+                            <h3>Available LEGAL FILES</h3>
                         </div>
                         <div class="col-md-4  form-inline">
                             <input type="text" style="margin-right: 20px" id="QuickSearch" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />

@@ -57,8 +57,18 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem) {
 }
 
 /* above is global functions */
-app.service('ptCom', [
-    function () {
+app.service('ptCom', ['$http',
+    function ($http) {
+        /******************Stven code area*********************/
+        this.DocGenerator = function( tplName,data,successFunc)
+        {
+            $http.post('/Services/Documents.svc/DocGenrate', { "tplName": tplName, "data": JSON.stringify( data) }).success(function (data) {
+                successFunc(data);
+            }).error(function (data, status) {
+                alert("Fail to save data. status: " + status + " Error : " + JSON.stringify(data));
+            });
+        }
+        /******************End Stven code area*********************/
 
         this.arrayAdd = function (model, data) {
             if (model) {
@@ -82,7 +92,7 @@ app.service('ptCom', [
                 }
             }
         };
-
+        
         this.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
             var result = '';
             if (strNO) result += strNO + ' ';
@@ -215,7 +225,7 @@ app.service('ptContactServices', ['$http', 'limitToFilter', function ($http, lim
     }
 
     this.getContact = function (id, name) {
-        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
+        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0] || {};
         return {};
     }
 

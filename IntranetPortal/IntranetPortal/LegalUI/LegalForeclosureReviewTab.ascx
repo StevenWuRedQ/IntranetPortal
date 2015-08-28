@@ -157,6 +157,7 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Who Filed</label>
                 <select class="ss_form_input" ng-model="LegalCase.PropertyInfo.BankruptcyWhoFiled">
+                    <option value="N/A">N/A</option>
                     <option value="Borrower">Borrower</option>
                     <option value="Co-Borrower">Co-Borrower</option>
                     <option value="Both">Both</option>

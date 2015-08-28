@@ -218,6 +218,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="DevExtreme.WebForms.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -1166,13 +1167,6 @@
       <DependentUpon>ComplaintsNotify.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Management\FormGenerator.aspx.designer.vb">
-      <DependentUpon>FormGenerator.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Management\FormGenerator.aspx.vb">
-      <DependentUpon>FormGenerator.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="Management\ImportAgentData.aspx.designer.vb">
       <DependentUpon>ImportAgentData.aspx</DependentUpon>
     </Compile>
@@ -1542,6 +1536,13 @@
     </Compile>
     <Compile Include="Reports\LeaderReport.vb">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\LegalReport.aspx.designer.vb">
+      <DependentUpon>LegalReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\LegalReport.aspx.vb">
+      <DependentUpon>LegalReport.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Reports\XtraReport1.Designer.vb">
       <DependentUpon>XtraReport1.vb</DependentUpon>
@@ -2562,7 +2563,6 @@
     <Content Include="Management\CombineContact.aspx" />
     <Content Include="Complaints\ComplainsMng.aspx" />
     <Content Include="Management\ComplaintsNotify.aspx" />
-    <Content Include="Management\FormGenerator.aspx" />
     <Content Include="Management\ImportAgentData.aspx" />
     <Content Include="Management\Default.aspx" />
     <Content Include="Management\LeadsDataManage.aspx" />
@@ -2695,6 +2695,7 @@
     <Content Include="Publish\PropertyList.ascx" />
     <Content Include="Publish\PublishProperty.ascx" />
     <Content Include="Publish\PublishPropertyPage.aspx" />
+    <Content Include="Reports\LegalReport.aspx" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -3393,6 +3394,7 @@
     <Content Include="css\css_files" />
     <Content Include="ClassDiagram1.cd" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="App_Data\OSCTemplate.docx" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -3706,6 +3708,7 @@
     </Content>
     <Content Include="WCFDataServices\Web.config" />
     <Content Include="Task\Reports\WorkflowReprot.Master" />
+    <Content Include="TempDataFile\reslut.docx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3730,7 +3733,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\jquery.globalize\cultures\" />
-    <Folder Include="TempDataFile\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntranetPortal.Core\IntranetPortal.Core.vbproj">

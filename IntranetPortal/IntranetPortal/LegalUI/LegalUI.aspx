@@ -1010,6 +1010,55 @@
                     return m;
 
                 }
+                $scope.DocGenerator = function(tplName)
+                {
+                    if (!$scope.LegalCase.SecondaryInfo)
+                    {
+                        $scope.LegalCase.SecondaryInfo = {}
+                    }
+                    var Tpls = [{
+                        "tplName": 'OSCTemplate.docx',
+                        data: {
+                            "Plantiff": $scope.LegalCase.ForeclosureInfo.Plantiff,
+                            "PlantiffAttorney": $scope.LegalCase.ForeclosureInfo.PlantiffAttorney,
+                            "PlantiffAttorneyAddress": $scope.LegalCase.ForeclosureInfo.PlantiffAttorneyAddress,//ptContactServices.getContact($scope.LegalCase.ForeclosureInfo.PlantiffAttorneyId, $scope.LegalCase.ForeclosureInfo.PlantiffAttorney).Address,
+                            "FCFiledDate": $scope.LegalCase.ForeclosureInfo.FCFiledDate,
+                            "FCIndexNum": $scope.LegalCase.ForeclosureInfo.FCIndexNum,
+                            "BoroughName": $scope.LeadsInfo.BoroughName,
+                            "Block": $scope.LeadsInfo.Block,
+                            "Lot": $scope.LeadsInfo.Lot,
+                            "Defendant": $scope.LegalCase.SecondaryInfo.Defendant,
+                            
+                            "Defendants": $scope.LegalCase.SecondaryInfo.Defendants ? ',' + $scope.LegalCase.SecondaryInfo.Defendants.map(function (o) { return o.Name }).join(",") : ' ',
+                            "DefendantAttorneyName": $scope.LegalCase.SecondaryInfo.DefendantAttorneyName,
+                            "DefendantAttorneyPhone": ptContactServices.getContact($scope.LegalCase.SecondaryInfo.DefendantAttorneyId, $scope.LegalCase.SecondaryInfo.DefendantAttorneyName).OfficeNO,
+                            "DefendantAttorneyAddress": ptContactServices.getContact($scope.LegalCase.SecondaryInfo.DefendantAttorneyId, $scope.LegalCase.SecondaryInfo.DefendantAttorneyName).Address,
+                            "CourtAddress": $scope.LegalCase.SecondaryInfo.CourtAddress,
+                            "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
+
+                        }
+                    }];
+                    var tpl = Tpls.filter(function (o) { return o.tplName == tplName })[0]
+
+                    if (tpl)
+                    {
+                        for (var v in tpl.data)
+                        {
+                            var filed = tpl.data[v];
+                            if(!filed)
+                            {
+                                alert("Some date missing please like " + v + "Please check!")
+                                return;
+                            }
+                        }
+                        ptCom.DocGenerator(tpl.tplName, tpl.data, function (url) {
+                            window.open(url,'blank');
+                        });
+                    }else
+                    {
+                        alert("can find tlp "+tplName)
+                    }
+                }
                 var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Value": "", "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ", "ArrayName": "" },
                                 { "Name": "EveryOneIn", "CallFunc": "", "Value": "false", "Description": "Nobody is part of the estate served .", "ArrayName": "" },
                                 { "Name": "ClientPersonallyServed", "CallFunc": "", "Value": "false", "Description": "Client personally is not served. ", "ArrayName": "AffidavitOfServices" },

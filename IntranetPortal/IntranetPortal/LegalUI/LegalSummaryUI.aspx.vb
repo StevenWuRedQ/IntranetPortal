@@ -10,7 +10,7 @@ Public Class LegalSummaryUI
         End If
     End Sub
     Sub BindGrid()
-        Dim mCases = LegalCase.GetAllCases
+        Dim mCases = LegalCase.GetAllCases.Where(Function(c) c.Status <> LegalCaseStatus.Closed).ToList
 
         mCases = FilterByLogIn(mCases)
         gdCases.DataSource = mCases
@@ -33,7 +33,7 @@ Public Class LegalSummaryUI
     Function FilterByLogIn(cases As List(Of LegalCase)) As List(Of LegalCase)
         If (Not (User.IsInRole("Admin") Or User.IsInRole("Legal-Manager"))) Then
             Dim loginName = Page.User.Identity.Name
-            Return cases.Where(Function(c) c.Attorney = loginName Or c.Attorney = loginName).ToList
+            Return cases.Where(Function(c) (c.Attorney = loginName Or c.Attorney = loginName) AndAlso (c.Status = LegalCaseStatus.AttorneyHandle Or c.Status = LegalCaseStatus.LegalResearch)).ToList
         End If
         Return cases
     End Function
