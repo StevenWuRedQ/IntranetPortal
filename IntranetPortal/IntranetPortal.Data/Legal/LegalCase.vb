@@ -6,9 +6,11 @@ Partial Public Class LegalCase
     Public ReadOnly Property StuatsStr As String
         Get
             If _stuatsStr Is Nothing Then
-                If Status.HasValue Then
+                If (Status IsNot Nothing) Then
                     _stuatsStr = CType(Status, LegalCaseStatus).ToString
                 End If
+
+            End If
 
             End If
             Return _stuatsStr
