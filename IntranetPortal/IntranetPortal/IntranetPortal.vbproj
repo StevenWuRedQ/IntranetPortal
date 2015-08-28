@@ -1167,6 +1167,13 @@
       <DependentUpon>ComplaintsNotify.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Management\FormGenerator.aspx.designer.vb">
+      <DependentUpon>FormGenerator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\FormGenerator.aspx.vb">
+      <DependentUpon>FormGenerator.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Management\ImportAgentData.aspx.designer.vb">
       <DependentUpon>ImportAgentData.aspx</DependentUpon>
     </Compile>
@@ -1536,13 +1543,6 @@
     </Compile>
     <Compile Include="Reports\LeaderReport.vb">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\LegalReport.aspx.designer.vb">
-      <DependentUpon>LegalReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\LegalReport.aspx.vb">
-      <DependentUpon>LegalReport.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Reports\XtraReport1.Designer.vb">
       <DependentUpon>XtraReport1.vb</DependentUpon>
@@ -2563,6 +2563,7 @@
     <Content Include="Management\CombineContact.aspx" />
     <Content Include="Complaints\ComplainsMng.aspx" />
     <Content Include="Management\ComplaintsNotify.aspx" />
+    <Content Include="Management\FormGenerator.aspx" />
     <Content Include="Management\ImportAgentData.aspx" />
     <Content Include="Management\Default.aspx" />
     <Content Include="Management\LeadsDataManage.aspx" />
@@ -2695,7 +2696,6 @@
     <Content Include="Publish\PropertyList.ascx" />
     <Content Include="Publish\PublishProperty.ascx" />
     <Content Include="Publish\PublishPropertyPage.aspx" />
-    <Content Include="Reports\LegalReport.aspx" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
