@@ -461,6 +461,479 @@ Namespace DataAPI
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="DOB_Complaints_out", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class DOB_Complaints_out
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Complaints_ListField() As DataAPI.ComplaintsColumns
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Complaints_OpenField As Integer
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Complaints_TotalField As Integer
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ErrorMessageField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LinesPlayedField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RedNotesField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ThreadIDField As Integer
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private URLField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Complaints_List() As DataAPI.ComplaintsColumns()
+            Get
+                Return Me.Complaints_ListField
+            End Get
+            Set
+                Me.Complaints_ListField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Complaints_Open() As Integer
+            Get
+                Return Me.Complaints_OpenField
+            End Get
+            Set
+                Me.Complaints_OpenField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Complaints_Total() As Integer
+            Get
+                Return Me.Complaints_TotalField
+            End Get
+            Set
+                Me.Complaints_TotalField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ErrorMessage() As String
+            Get
+                Return Me.ErrorMessageField
+            End Get
+            Set
+                Me.ErrorMessageField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LinesPlayed() As String
+            Get
+                Return Me.LinesPlayedField
+            End Get
+            Set
+                Me.LinesPlayedField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property RedNotes() As String
+            Get
+                Return Me.RedNotesField
+            End Get
+            Set
+                Me.RedNotesField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ThreadID() As Integer
+            Get
+                Return Me.ThreadIDField
+            End Get
+            Set
+                Me.ThreadIDField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property URL() As String
+            Get
+                Return Me.URLField
+            End Get
+            Set
+                Me.URLField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ComplaintsColumns", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class ComplaintsColumns
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AddressField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AssignedToField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BINField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BoroughField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CategoryField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CategoryCodeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CommentsField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ComplaintNumberField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DOBViolationField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DateEnteredField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DispositionField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DispositionDetailsField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ECBViolationField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private InspectionDateField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LastInspectionField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private OwnerField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private PriorityField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private REField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RedNotesField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Reference311NumberField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private StatusField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private SubjectField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ZipField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Address() As String
+            Get
+                Return Me.AddressField
+            End Get
+            Set
+                Me.AddressField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property AssignedTo() As String
+            Get
+                Return Me.AssignedToField
+            End Get
+            Set
+                Me.AssignedToField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BIN() As String
+            Get
+                Return Me.BINField
+            End Get
+            Set
+                Me.BINField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Borough() As String
+            Get
+                Return Me.BoroughField
+            End Get
+            Set
+                Me.BoroughField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Category() As String
+            Get
+                Return Me.CategoryField
+            End Get
+            Set
+                Me.CategoryField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CategoryCode() As String
+            Get
+                Return Me.CategoryCodeField
+            End Get
+            Set
+                Me.CategoryCodeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Comments() As String
+            Get
+                Return Me.CommentsField
+            End Get
+            Set
+                Me.CommentsField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ComplaintNumber() As String
+            Get
+                Return Me.ComplaintNumberField
+            End Get
+            Set
+                Me.ComplaintNumberField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DOBViolation() As String
+            Get
+                Return Me.DOBViolationField
+            End Get
+            Set
+                Me.DOBViolationField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DateEntered() As String
+            Get
+                Return Me.DateEnteredField
+            End Get
+            Set
+                Me.DateEnteredField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Disposition() As String
+            Get
+                Return Me.DispositionField
+            End Get
+            Set
+                Me.DispositionField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DispositionDetails() As String
+            Get
+                Return Me.DispositionDetailsField
+            End Get
+            Set
+                Me.DispositionDetailsField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ECBViolation() As String
+            Get
+                Return Me.ECBViolationField
+            End Get
+            Set
+                Me.ECBViolationField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property InspectionDate() As String
+            Get
+                Return Me.InspectionDateField
+            End Get
+            Set
+                Me.InspectionDateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LastInspection() As String
+            Get
+                Return Me.LastInspectionField
+            End Get
+            Set
+                Me.LastInspectionField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Owner() As String
+            Get
+                Return Me.OwnerField
+            End Get
+            Set
+                Me.OwnerField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Priority() As String
+            Get
+                Return Me.PriorityField
+            End Get
+            Set
+                Me.PriorityField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property RE() As String
+            Get
+                Return Me.REField
+            End Get
+            Set
+                Me.REField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property RedNotes() As String
+            Get
+                Return Me.RedNotesField
+            End Get
+            Set
+                Me.RedNotesField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Reference311Number() As String
+            Get
+                Return Me.Reference311NumberField
+            End Get
+            Set
+                Me.Reference311NumberField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Status() As String
+            Get
+                Return Me.StatusField
+            End Get
+            Set
+                Me.StatusField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Subject() As String
+            Get
+                Return Me.SubjectField
+            End Get
+            Set
+                Me.SubjectField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Zip() As String
+            Get
+                Return Me.ZipField
+            End Get
+            Set
+                Me.ZipField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="SP_DOB_Complaints_By_BBLE_Result", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
      System.SerializableAttribute()>  _
     Partial Public Class SP_DOB_Complaints_By_BBLE_Result
@@ -1123,6 +1596,293 @@ Namespace DataAPI
             End Get
             Set
                 Me.ZipField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ADT_In", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class ADT_In
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private APIorderNumField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ArmField As Boolean
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DisarmField As Boolean
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private GetAdtPropListField As Boolean
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private SecurityCodeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ThreadIDField As Integer
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property APIorderNum() As String
+            Get
+                Return Me.APIorderNumField
+            End Get
+            Set
+                Me.APIorderNumField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Arm() As Boolean
+            Get
+                Return Me.ArmField
+            End Get
+            Set
+                Me.ArmField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Disarm() As Boolean
+            Get
+                Return Me.DisarmField
+            End Get
+            Set
+                Me.DisarmField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property GetAdtPropList() As Boolean
+            Get
+                Return Me.GetAdtPropListField
+            End Get
+            Set
+                Me.GetAdtPropListField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property SecurityCode() As String
+            Get
+                Return Me.SecurityCodeField
+            End Get
+            Set
+                Me.SecurityCodeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ThreadID() As Integer
+            Get
+                Return Me.ThreadIDField
+            End Get
+            Set
+                Me.ThreadIDField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ADT_out", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class ADT_out
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ADT_PropertiesField() As DataAPI.ADT_Props
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ErrorMessageField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LinesPlayedField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private StatusField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ThreadIDField As Integer
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private URLField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ADT_Properties() As DataAPI.ADT_Props()
+            Get
+                Return Me.ADT_PropertiesField
+            End Get
+            Set
+                Me.ADT_PropertiesField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ErrorMessage() As String
+            Get
+                Return Me.ErrorMessageField
+            End Get
+            Set
+                Me.ErrorMessageField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LinesPlayed() As String
+            Get
+                Return Me.LinesPlayedField
+            End Get
+            Set
+                Me.LinesPlayedField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Status() As String
+            Get
+                Return Me.StatusField
+            End Get
+            Set
+                Me.StatusField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ThreadID() As Integer
+            Get
+                Return Me.ThreadIDField
+            End Get
+            Set
+                Me.ThreadIDField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property URL() As String
+            Get
+                Return Me.URLField
+            End Get
+            Set
+                Me.URLField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ADT_Props", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class ADT_Props
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ADT_PropIDField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AddressField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ADT_PropID() As String
+            Get
+                Return Me.ADT_PropIDField
+            End Get
+            Set
+                Me.ADT_PropIDField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Address() As String
+            Get
+                Return Me.AddressField
+            End Get
+            Set
+                Me.AddressField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
             End Set
         End Property
     End Class
@@ -48810,6 +49570,9 @@ Namespace DataAPI
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DOD_PPO_Get", ReplyAction:="http://tempuri.org/IWCFMacros/DOD_PPO_GetResponse")>  _
         Function DOD_PPO_Get(ByVal Request As DataAPI.DOB_PPO_In) As DataAPI.DOB_PPO_out
         
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DOB_Complaints_Out_Class", ReplyAction:="http://tempuri.org/IWCFMacros/DOB_Complaints_Out_ClassResponse")>  _
+        Function DOB_Complaints_Out_Class(ByVal Request As DataAPI.DOB_Complaints_In) As DataAPI.DOB_Complaints_out
+        
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DOB_Complaints_Get", ReplyAction:="http://tempuri.org/IWCFMacros/DOB_Complaints_GetResponse")>  _
         Function DOB_Complaints_Get(ByVal Request As DataAPI.DOB_Complaints_In) As String
         
@@ -48821,6 +49584,9 @@ Namespace DataAPI
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DOB_Complaints_Delete", ReplyAction:="http://tempuri.org/IWCFMacros/DOB_Complaints_DeleteResponse")>  _
         Function DOB_Complaints_Delete(ByVal BBLE As String) As Boolean
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/ADT_SignIn", ReplyAction:="http://tempuri.org/IWCFMacros/ADT_SignInResponse")>  _
+        Function ADT_SignIn(ByVal Request As DataAPI.ADT_In) As DataAPI.ADT_out
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Prop_tax_Get", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Prop_tax_GetResponse")>  _
         Function NYC_Prop_tax_Get(ByVal Request As DataAPI.NYC_Prop_tax_In) As DataAPI.NYC_Prop_tax_Out
@@ -48985,6 +49751,10 @@ Namespace DataAPI
             Return MyBase.Channel.DOD_PPO_Get(Request)
         End Function
         
+        Public Function DOB_Complaints_Out_Class(ByVal Request As DataAPI.DOB_Complaints_In) As DataAPI.DOB_Complaints_out Implements DataAPI.IWCFMacros.DOB_Complaints_Out_Class
+            Return MyBase.Channel.DOB_Complaints_Out_Class(Request)
+        End Function
+        
         Public Function DOB_Complaints_Get(ByVal Request As DataAPI.DOB_Complaints_In) As String Implements DataAPI.IWCFMacros.DOB_Complaints_Get
             Return MyBase.Channel.DOB_Complaints_Get(Request)
         End Function
@@ -48999,6 +49769,10 @@ Namespace DataAPI
         
         Public Function DOB_Complaints_Delete(ByVal BBLE As String) As Boolean Implements DataAPI.IWCFMacros.DOB_Complaints_Delete
             Return MyBase.Channel.DOB_Complaints_Delete(BBLE)
+        End Function
+        
+        Public Function ADT_SignIn(ByVal Request As DataAPI.ADT_In) As DataAPI.ADT_out Implements DataAPI.IWCFMacros.ADT_SignIn
+            Return MyBase.Channel.ADT_SignIn(Request)
         End Function
         
         Public Function NYC_Prop_tax_Get(ByVal Request As DataAPI.NYC_Prop_tax_In) As DataAPI.NYC_Prop_tax_Out Implements DataAPI.IWCFMacros.NYC_Prop_tax_Get

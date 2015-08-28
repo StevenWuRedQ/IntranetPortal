@@ -339,10 +339,16 @@
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.Acris_Out.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.ADT_out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.ALL_NYC_Tax_Liens_CO_Info.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.Bankruptcy1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.DOB_Complaints_out.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.DOB_PPO_out.datasource">

@@ -121,14 +121,26 @@ Partial Public Class CheckingComplain
     End Sub
 
     Public Sub UpdateComplaintsResult(Optional jsonResult As String = Nothing)
-        Dim result As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
+        Dim res As DataAPI.DOB_Complaints_out = Nothing
+        Dim result As DataAPI.SP_DOB_Complaints_By_BBLE_Result() = Nothing
 
-        'If String.IsNullOrEmpty(jsonResult) Then
-        '    result = GetResultFromServices(BBLE)
-        'Else
-        '    result = JsonConvert.DeserializeObject(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result())(jsonResult)
-        'End If
-        result = GetResultFromServices(BBLE)
+        Try
+            res = JsonConvert.DeserializeObject(Of DataAPI.DOB_Complaints_out)(jsonResult)
+        Catch ex As Exception
+            Core.SystemLog.LogError("Error UpdateComplaintsResult", ex, jsonResult, Nothing, BBLE)
+        End Try
+
+        If res IsNot Nothing Then
+            Try
+                result = JsonConvert.DeserializeObject(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result())(res.Complaints_List.ToJsonString)
+            Catch ex As Exception
+
+            End Try
+        End If
+
+        If result Is Nothing Then
+            result = GetComplainsResult(BBLE)
+        End If
 
         If result IsNot Nothing AndAlso result.Length > 0 Then
             If result.Any(Function(r) r.Status.Trim = "ACT") Then
@@ -166,17 +178,22 @@ Partial Public Class CheckingComplain
     Private Function DataIsChange(results As DataAPI.SP_DOB_Complaints_By_BBLE_Result()) As Boolean
         For Each result In results
             If result.Status = "ACT" Then
-                Dim lastReulst = ComplaintsResult.Where(Function(r) r.BBLE = result.BBLE AndAlso r.ComplaintNumber = result.ComplaintNumber).FirstOrDefault
+                Dim lastResult = ComplaintsResult.Where(Function(r) r.BBLE = result.BBLE AndAlso r.ComplaintNumber = result.ComplaintNumber).FirstOrDefault
 
                 'New complaints
-                If lastReulst Is Nothing Then
+                If lastResult Is Nothing Then
                     Return True
                 End If
 
                 'Changed Complaints
-                If result.DateEntered.HasValue AndAlso result.DateEntered > lastReulst.DateEntered Then
+                If result.DateEntered.HasValue AndAlso result.DateEntered > lastResult.DateEntered Then
                     Return True
                 End If
+
+                If lastResult.LastInspection <> result.LastInspection Then
+                    Return True
+                End If
+
             End If
         Next
 

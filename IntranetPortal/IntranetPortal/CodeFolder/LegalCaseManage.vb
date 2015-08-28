@@ -22,32 +22,33 @@ Public Class LegalCaseManage
     End Function
 
     Public Shared Sub StartLegalRequest(bble As String, caseData As String, createBy As String)
-        Dim ld = Lead.GetInstance(bble)
 
-        Dim lc As New Legal.LegalCase
-        lc.BBLE = bble
-        lc.CaseName = ld.LeadsName
-        'lc.CaseData = caseData
+        If Not Legal.LegalCase.InLegal(bble) Then
+            Dim ld = Lead.GetInstance(bble)
 
-        Dim data = JObject.Parse(caseData)
-        Dim propInfo As JObject = data("PropertyInfo")
-        'propInfo.Add("Address", li.PropertyAddress)
-        'propInfo.Add("Block", li.Block)
-        'propInfo.Add("Lot", li.Lot)
 
-        data("PropertyInfo") = JObject.Parse(LeadsInfo.GetData(bble).ToJsonString)
-        data.Add("CreateDate", DateTime.Now)
-        data.Add("CreateBy", createBy)
-        data.Add("UpdateDate", DateTime.Now)
-        data.Add("UpdateBy", createBy)
-        data.Add("CaseName", lc.CaseName)
-        'data.PropertyInfo.Lot = li.Lot
-        lc.CaseData = data.ToString
-        lc.Status = Legal.LegalCaseStatus.ManagerPreview
-        lc.CreateBy = createBy
-        lc.SaveData(createBy)
+            Dim lc As New Legal.LegalCase
+            lc.BBLE = bble
+            lc.CaseName = ld.LeadsName
+            'lc.CaseData = caseData
 
-        WorkflowService.StartLegalRequest(ld.LeadsName, bble, String.Join(";", Roles.GetUsersInRole("Legal-Manager")))
+            Dim data = JObject.Parse(caseData)
+            Dim propInfo As JObject = data("PropertyInfo")
+
+            data("PropertyInfo") = JObject.Parse(LeadsInfo.GetData(bble).ToJsonString)
+            data("CreateDate") = DateTime.Now
+            data("CreateBy") = createBy
+            data("UpdateDate") = DateTime.Now
+            data("UpdateBy") = createBy
+            data("CaseName") = lc.CaseName
+            'data.PropertyInfo.Lot = li.Lot
+            lc.CaseData = data.ToString
+            lc.Status = Legal.LegalCaseStatus.ManagerPreview
+            lc.CreateBy = createBy
+            lc.SaveData(createBy)
+
+            WorkflowService.StartLegalRequest(ld.LeadsName, bble, String.Join(";", Roles.GetUsersInRole("Legal-Manager")))
+        End If
     End Sub
 
     Public Shared Sub AssignToResearch(sn As String, bble As String, searchUser As String, assignBy As String)

@@ -44,6 +44,55 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DOB_Complaints_In" nillable="true" type="tns:DOB_Complaints_In" />
+  <xs:complexType name="DOB_Complaints_out">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Complaints_List" nillable="true" type="tns:ArrayOfComplaintsColumns" />
+      <xs:element minOccurs="0" name="Complaints_Open" type="xs:int" />
+      <xs:element minOccurs="0" name="Complaints_Total" type="xs:int" />
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LinesPlayed" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RedNotes" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ThreadID" type="xs:int" />
+      <xs:element minOccurs="0" name="URL" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DOB_Complaints_out" nillable="true" type="tns:DOB_Complaints_out" />
+  <xs:complexType name="ArrayOfComplaintsColumns">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ComplaintsColumns" nillable="true" type="tns:ComplaintsColumns" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfComplaintsColumns" nillable="true" type="tns:ArrayOfComplaintsColumns" />
+  <xs:complexType name="ComplaintsColumns">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AssignedTo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BIN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Borough" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CategoryCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Comments" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ComplaintNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DOBViolation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DateEntered" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Disposition" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DispositionDetails" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ECBViolation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InspectionDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastInspection" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Owner" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Priority" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RedNotes" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Reference311Number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zip" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ComplaintsColumns" nillable="true" type="tns:ComplaintsColumns" />
   <xs:complexType name="ArrayOfSP_DOB_Complaints_By_BBLE_Result">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SP_DOB_Complaints_By_BBLE_Result" nillable="true" type="tns:SP_DOB_Complaints_By_BBLE_Result" />
@@ -114,6 +163,44 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SP_DOB_Complaints_History_By_BBLE_Result" nillable="true" type="tns:SP_DOB_Complaints_History_By_BBLE_Result" />
+  <xs:complexType name="ADT_In">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="APIorderNum" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Arm" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Disarm" type="xs:boolean" />
+      <xs:element minOccurs="0" name="GetAdtPropList" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SecurityCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ThreadID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ADT_In" nillable="true" type="tns:ADT_In" />
+  <xs:complexType name="ADT_out">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ADT_Properties" nillable="true" type="tns:ArrayOfADT_Props" />
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LinesPlayed" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ThreadID" type="xs:int" />
+      <xs:element minOccurs="0" name="URL" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ADT_out" nillable="true" type="tns:ADT_out" />
+  <xs:complexType name="ArrayOfADT_Props">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ADT_Props" nillable="true" type="tns:ADT_Props" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfADT_Props" nillable="true" type="tns:ArrayOfADT_Props" />
+  <xs:complexType name="ADT_Props">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ADT_PropID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ADT_Props" nillable="true" type="tns:ADT_Props" />
   <xs:complexType name="NYC_Prop_tax_In">
     <xs:sequence>
       <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />

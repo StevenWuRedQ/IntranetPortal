@@ -6,8 +6,10 @@ Partial Public Class LegalCase
     Public ReadOnly Property StuatsStr As String
         Get
             If _stuatsStr Is Nothing Then
+                If Status.HasValue Then
+                    _stuatsStr = CType(Status, LegalCaseStatus).ToString
+                End If
 
-                _stuatsStr = CType(Status, LegalCaseStatus).ToString
             End If
             Return _stuatsStr
         End Get
@@ -50,16 +52,14 @@ Partial Public Class LegalCase
         RefreshReportFields()
 
         Using ctx As New LegalModelContainer
-            Dim lc = ctx.LegalCases.Find(BBLE)
-
-            If lc Is Nothing Then
+            If Not ctx.LegalCases.Any(Function(l) l.BBLE = BBLE) Then
                 Me.CreateDate = DateTime.Now
                 Me.CreateBy = saveBy
                 ctx.LegalCases.Add(Me)
             Else
-                lc = Core.Utility.SaveChangesObj(lc, Me)
-                lc.UpdateBy = saveBy
-                lc.UpdateDate = DateTime.Now
+                Me.UpdateBy = saveBy
+                Me.UpdateDate = DateTime.Now
+                ctx.Entry(Me).State = Entity.EntityState.Modified
             End If
 
             ctx.SaveChanges()

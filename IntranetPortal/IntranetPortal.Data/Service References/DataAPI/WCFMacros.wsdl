@@ -23,6 +23,12 @@
   <wsdl:message name="IWCFMacros_DOD_PPO_Get_OutputMessage">
     <wsdl:part name="parameters" element="tns:DOD_PPO_GetResponse" />
   </wsdl:message>
+  <wsdl:message name="IWCFMacros_DOB_Complaints_Out_Class_InputMessage">
+    <wsdl:part name="parameters" element="tns:DOB_Complaints_Out_Class" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_DOB_Complaints_Out_Class_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DOB_Complaints_Out_ClassResponse" />
+  </wsdl:message>
   <wsdl:message name="IWCFMacros_DOB_Complaints_Get_InputMessage">
     <wsdl:part name="parameters" element="tns:DOB_Complaints_Get" />
   </wsdl:message>
@@ -46,6 +52,12 @@
   </wsdl:message>
   <wsdl:message name="IWCFMacros_DOB_Complaints_Delete_OutputMessage">
     <wsdl:part name="parameters" element="tns:DOB_Complaints_DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_ADT_SignIn_InputMessage">
+    <wsdl:part name="parameters" element="tns:ADT_SignIn" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_ADT_SignIn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ADT_SignInResponse" />
   </wsdl:message>
   <wsdl:message name="IWCFMacros_NYC_Prop_tax_Get_InputMessage">
     <wsdl:part name="parameters" element="tns:NYC_Prop_tax_Get" />
@@ -302,6 +314,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DOD_PPO_Get" message="tns:IWCFMacros_DOD_PPO_Get_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/DOD_PPO_GetResponse" message="tns:IWCFMacros_DOD_PPO_Get_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="DOB_Complaints_Out_Class">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DOB_Complaints_Out_Class" message="tns:IWCFMacros_DOB_Complaints_Out_Class_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/DOB_Complaints_Out_ClassResponse" message="tns:IWCFMacros_DOB_Complaints_Out_Class_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DOB_Complaints_Get">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DOB_Complaints_Get" message="tns:IWCFMacros_DOB_Complaints_Get_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/DOB_Complaints_GetResponse" message="tns:IWCFMacros_DOB_Complaints_Get_OutputMessage" />
@@ -317,6 +333,10 @@
     <wsdl:operation name="DOB_Complaints_Delete">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DOB_Complaints_Delete" message="tns:IWCFMacros_DOB_Complaints_Delete_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/DOB_Complaints_DeleteResponse" message="tns:IWCFMacros_DOB_Complaints_Delete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ADT_SignIn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/ADT_SignIn" message="tns:IWCFMacros_ADT_SignIn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/ADT_SignInResponse" message="tns:IWCFMacros_ADT_SignIn_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="NYC_Prop_tax_Get">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Prop_tax_Get" message="tns:IWCFMacros_NYC_Prop_tax_Get_InputMessage" />
@@ -503,6 +523,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="DOB_Complaints_Out_Class">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/DOB_Complaints_Out_Class" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="DOB_Complaints_Get">
       <soap:operation soapAction="http://tempuri.org/IWCFMacros/DOB_Complaints_Get" style="document" />
       <wsdl:input>
@@ -532,6 +561,15 @@
     </wsdl:operation>
     <wsdl:operation name="DOB_Complaints_Delete">
       <soap:operation soapAction="http://tempuri.org/IWCFMacros/DOB_Complaints_Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ADT_SignIn">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/ADT_SignIn" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
