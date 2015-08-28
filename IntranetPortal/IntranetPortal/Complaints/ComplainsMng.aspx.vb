@@ -46,8 +46,26 @@
 
         If e.Parameters.StartsWith("Refresh") Then
             Dim bble = e.Parameters.Split("|")(1)
-            Dim com = Data.CheckingComplain.Instance(bble)
-            com.RefreshComplains(User.Identity.Name)
+
+            If bble = "All" Then
+                Dim name = User.Identity.Name
+                Dim callback = Sub()
+                                   Try
+                                       Dim complaints = Data.CheckingComplain.GetAllComplains()
+
+                                       For Each cp In complaints
+                                           cp.RefreshComplains(name)
+                                       Next
+
+                                   Catch ex As Exception
+                                       Core.SystemLog.LogError("ManualRefreshAll", ex, "", name, "")
+                                   End Try
+                               End Sub
+                Threading.ThreadPool.QueueUserWorkItem(callback)
+            Else
+                Dim com = Data.CheckingComplain.Instance(bble)
+                com.RefreshComplains(User.Identity.Name)
+            End If
         End If
 
         If e.Parameters.StartsWith("Delete") Then

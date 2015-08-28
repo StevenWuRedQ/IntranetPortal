@@ -297,7 +297,7 @@ Public Class Utility
     End Function
 
     Public Shared Function RemoveHtmlTags(html As String) As String
-        Dim text = Regex.Replace(html, "<(.|\n)*?>", String.Empty)
+        Dim text = Regex.Replace(html, "<[^>]*>", String.Empty)
         Return text
     End Function
 

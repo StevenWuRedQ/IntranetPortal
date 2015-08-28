@@ -1,4 +1,6 @@
-﻿Public Class ShortSaleUtility
+﻿Imports System.Text.RegularExpressions
+
+Public Class ShortSaleUtility
     Public Shared Function SaveChangesObj(oldObj As Object, newObj As Object) As Object
 
         Return Core.Utility.SaveChangesObj(oldObj, newObj)
@@ -63,28 +65,4 @@
         End Get
     End Property
 
-    Public Shared Function StripTagsCharArray(source As String) As String
-        Dim array As Char() = New Char(source.Length - 1) {}
-        Dim arrayIndex As Integer = 0
-        Dim inside As Boolean = False
-
-        For i As Integer = 0 To source.Length - 1
-            Dim [let] As Char = source(i)
-            If [let] = "<"c Then
-                inside = True
-                Continue For
-            End If
-            If [let] = ">"c Then
-                inside = False
-                Continue For
-            End If
-            If Not inside Then
-                array(arrayIndex) = [let]
-                arrayIndex += 1
-            End If
-        Next
-        Return New String(array, 0, arrayIndex)
-    End Function
-
-    
 End Class

@@ -35,7 +35,7 @@
 
     Public Shared Function LastActivityLog(bble As String) As ShortSaleActivityLog
         Using ctx As New ShortSaleEntities
-            Return ctx.ShortSaleActivityLogs.Where(Function(l) l.BBLE = bble).OrderByDescending(Function(l) l.ActivityDate).LastOrDefault
+            Return ctx.ShortSaleActivityLogs.Where(Function(l) l.BBLE = bble).OrderByDescending(Function(l) l.ActivityDate).FirstOrDefault
         End Using
     End Function
 End Class

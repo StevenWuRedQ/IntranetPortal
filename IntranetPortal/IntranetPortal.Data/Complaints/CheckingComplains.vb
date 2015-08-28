@@ -106,7 +106,7 @@ Partial Public Class CheckingComplain
     Public Sub RefreshComplains(refreshBy As String)
         Me.LastExecute = DateTime.Now
         Me.ExecuteBy = refreshBy
-
+        Me.Status = RunningStatus.InRefresh
         Try
             If refreshBy = "RuleEngine" Then
                 RequestComplaints(refreshBy)
@@ -140,6 +140,7 @@ Partial Public Class CheckingComplain
             Me.LastDataEntered = result.OrderByDescending(Function(r) r.DateEntered).FirstOrDefault.DateEntered
             Me.ComplaintsResult = result
             Me.LastResultUpdate = DateTime.Now
+            Me.Status = RunningStatus.Ready
             Me.Save("")
         End If
     End Sub

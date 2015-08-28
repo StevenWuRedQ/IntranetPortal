@@ -225,9 +225,12 @@
                         <dx:GridViewDataColumn FieldName="CreateBy" Caption="CreateBy" Width="120px">
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn Width="80px">
+                            <HeaderTemplate>
+                                <i class="fa fa-refresh icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RefreshProperty('All')" title="Refresh All"></i>&nbsp;
+                            </HeaderTemplate>
                             <DataItemTemplate>
                                 <i class="fa fa-refresh icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RefreshProperty('<%# Eval("BBLE")%>')" title="Refresh"></i>&nbsp;
-                            <i class="fa fa-close icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RemoveProperty('<%# Eval("BBLE")%>')" title="Remove"></i>
+                                <i class="fa fa-close icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RemoveProperty('<%# Eval("BBLE")%>')" title="Remove"></i>
                             </DataItemTemplate>
                         </dx:GridViewDataColumn>
                     </Columns>

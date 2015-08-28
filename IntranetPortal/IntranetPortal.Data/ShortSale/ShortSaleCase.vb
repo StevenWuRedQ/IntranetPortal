@@ -167,7 +167,7 @@ Partial Public Class ShortSaleCase
                 Dim sb As New StringBuilder
                 sb.Append("ActivityType: " & log.ActivityType & Environment.NewLine)
                 sb.Append("ActivityTitle: " & log.ActivityTitle & Environment.NewLine)
-                sb.Append("Description: " & log.Description & Environment.NewLine)
+                sb.Append("Description: " & Core.Utility.StripTagsCharArray(log.Description) & Environment.NewLine)
 
                 Return sb.ToString
             End If
@@ -546,7 +546,7 @@ Partial Public Class ShortSaleCase
             sb.Append("Start Intake: " & If(StartIntake, "Yes", "No") & Environment.NewLine)
 
             If PipeLine IsNot Nothing Then
-                sb.Append("Update/Notes: " & ShortSaleUtility.StripTagsCharArray(PipeLine.Description))
+                sb.Append("Update/Notes: " & Core.Utility.StripTagsCharArray(PipeLine.Description))
             End If
 
             Return sb.ToString
