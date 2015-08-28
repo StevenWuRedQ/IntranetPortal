@@ -32,6 +32,17 @@ Partial Public Class CheckingComplain
 
     End Function
 
+    Public Shared Function GetComplainsResultString(Optional bble As String = "") As String()
+
+        Dim result As New List(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result)
+
+        Using ctx As New ConstructionEntities
+
+            Return ctx.CheckingComplains.Select(Function(c) c.LastComplaintsResult).ToArray
+        End Using
+
+    End Function
+
     Public Shared Function GetComplainsResult(Optional bble As String = "") As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
 
         Dim result As New List(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result)
@@ -121,6 +132,7 @@ Partial Public Class CheckingComplain
     End Sub
 
     Public Sub UpdateComplaintsResult(Optional jsonResult As String = Nothing)
+
         Dim res As DataAPI.DOB_Complaints_out = Nothing
         Dim result As DataAPI.SP_DOB_Complaints_By_BBLE_Result() = Nothing
 

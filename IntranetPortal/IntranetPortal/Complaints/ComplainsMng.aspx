@@ -86,16 +86,14 @@
         }
 
         var editDiv = null;
-        function EditNotifyUsers(bble, div)
-        {
+        function EditNotifyUsers(bble, div) {
             editDiv = div;
             popupNotifyUsers.SetHeaderText("Edit Notify User - " + bble);
             popupNotifyUsers.PerformCallback('Show|' + bble);
             popupNotifyUsers.Show();
         }
 
-        function SaveNotifyUsers(users)
-        {
+        function SaveNotifyUsers(users) {
             popupNotifyUsers.PerformCallback('Save');
             popupNotifyUsers.Hide();
             $(editDiv).html(users);
@@ -216,8 +214,8 @@
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn FieldName="NotifyUsers">
                             <DataItemTemplate>
-                              <div style="display:inline-block" onclick="EditNotifyUsers('<%# Eval("BBLE")%>', this);"><%# Eval("NotifyUsers")%></div>
-                              <i class="fa fa-edit icon_btn tooltip-examples  grid_buttons" style=" font-size: 19px;" onclick="EditNotifyUsers('<%# Eval("BBLE")%>', $(this).prev());" title="Edit"></i>
+                                <div style="display: inline-block" onclick="EditNotifyUsers('<%# Eval("BBLE")%>', this);"><%# Eval("NotifyUsers")%></div>
+                                <i class="fa fa-edit icon_btn tooltip-examples  grid_buttons" style="font-size: 19px;" onclick="EditNotifyUsers('<%# Eval("BBLE")%>', $(this).prev());" title="Edit"></i>
                             </DataItemTemplate>
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataDateColumn FieldName="LastExecute" Width="150px" PropertiesDateEdit-DisplayFormatString="g">
@@ -254,6 +252,72 @@
                 </div>
             </div>
             <div id="divComplainResult">
+                <div id="dgComplaintsResult" style="display:none"></div>
+                <script type="text/javascript">
+                    
+                    var Complaints = {
+                        Result: null,
+                        LoadResult: function () {
+                            var view = this;
+                            var customStore = new DevExpress.data.CustomStore({
+                                load: function (loadOptions) {
+                                    if (view.Result != null)
+                                        return view.Result
+
+                                    var d = $.Deferred();
+                                    $.getJSON("/api/Complaints").done(function (data) {
+                                        d.resolve(data, { totalCount: data.length });
+                                        view.Result = data;
+                                    });
+                                    return d.promise();
+                                }
+                            });
+                            return customStore;
+                        },
+                        LoadGrid: function () {
+                            $("#dgComplaintsResult").dxDataGrid({
+                                dataSource: this.LoadResult(),
+                                showColumnLines: false,
+                                showRowLines: true,
+                                rowAlternationEnabled: true,
+                                remoteOperations: {
+                                    sorting: false
+                                },
+                                columns: [{
+                                    dataField: "Address",
+                                    caption: "Address"
+                                }, {
+                                    dataField: "ComplaintNumber",
+                                    caption: "Complaint Number"
+                                }, {
+                                    dataField: "LastInspection",
+                                    caption: "Last Inspection",
+                                    dataType: 'date'
+                                },
+                                {
+                                    dataField: "LastUpdated",
+                                    caption: "Last Updated",
+                                    dataType: 'date'
+                                }, {
+                                    dataField: "Status",
+                                    caption: "Status",
+                                    filterValue: 'ACT',
+                                    dataType: "string"
+                                }, {                                                               
+                                    allowFiltering: false,
+                                    allowSorting: false,
+                                    cellTemplate: function (container, options) {
+                                                                             
+                                    }
+                                }],
+                            });
+                        }
+                    }
+               
+                    Complaints.LoadGrid();
+                </script>
+
+               
                 <dx:ASPxGridView ID="gdComplainsResult" ClientInstanceName="gdComplainsResult" runat="server" Theme="Moderno" CssClass="table" Width="100%" ViewStateMode="Disabled"
                     KeyFieldName="BBLE;ComplaintNumber" OnDataBinding="gdComplainsResult_DataBinding" OnCustomCallback="gdComplainsResult_CustomCallback" OnHtmlRowPrepared="gdComplainsResult_HtmlRowPrepared">
                     <Columns>
@@ -441,7 +505,7 @@
                     <asp:HiddenField runat="server" ID="hfBBLE2" />
                     <dx:ASPxTokenBox runat="server" ID="tbUsers" TextSeparator=";" Theme="Moderno" Width="280px" ClientInstanceName="tbUsers">
                     </dx:ASPxTokenBox>
-                    <input type="button" class="btn btn-primary" value="Save" id="Button1" onclick="SaveNotifyUsers(tbUsers.GetText());" style="margin-top:15px" />
+                    <input type="button" class="btn btn-primary" value="Save" id="Button1" onclick="SaveNotifyUsers(tbUsers.GetText());" style="margin-top: 15px" />
                 </dx:PopupControlContentControl>
             </ContentCollection>
         </dx:ASPxPopupControl>

@@ -442,7 +442,7 @@
                             <div style="font-size: 12px; color: #9fa1a8;">
                                 <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
                                     <li class="short_sale_head_tab activity_light_blue">
-                                        <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
+                                        <a href="#activity_log" role="tab" data-toggle="tab" class="tab_button_a">
                                             <i class="fa fa-history head_tab_icon_padding"></i>
                                             <div class="font_size_bold">Activity Log</div>
                                         </a>
