@@ -148,6 +148,28 @@ Public Class DocumentService
         End Using
     End Function
 
+    Public Shared Function GetPreviewContentLinkByFileUrl(fileUrl As String) As String
+        Using ClientContext = GetClientContext()
+
+            Dim item = GetFileByUrl(fileUrl, ClientContext)
+
+            If item IsNot Nothing Then
+                Dim link = GetAnonymousEditLink(ClientContext, item)
+                Dim file = item.File
+                ClientContext.Load(file, Function(f As File) f.ServerRelativeUrl, Function(f As File) f.Name)
+                ClientContext.ExecuteQuery()
+                If String.IsNullOrEmpty(link) Then
+                    CreateEditLink(ClientContext, file.ServerRelativeUrl)
+                    link = GetAnonymousEditLink(ClientContext, item)
+                End If
+
+                Return link
+            End If
+
+            Return ""
+        End Using
+    End Function
+
     Public Shared Function GetTitleReport(bble As String) As String
         Using ClientContext = GetClientContext()
             Dim titleFolder = bble & "/Short%20Sale/Title%20Report"
@@ -181,6 +203,13 @@ Public Class DocumentService
         End If
 
         Return Nothing
+    End Function
+
+    Private Shared Function GetFileByUrl(fileUrl As String, clientContext As ClientContext) As ListItem
+        Dim file = clientContext.Web.GetFileByServerRelativeUrl(fileUrl)
+        clientContext.Load(file.ListItemAllFields)
+        clientContext.ExecuteQuery()
+        Return file.ListItemAllFields
     End Function
 
     Public Shared Function UploadFile(folderPath As String, fileBytes As Byte(), fileName As String, uploadBy As String) As String
@@ -309,6 +338,14 @@ Public Class DocumentService
         Return True
     End Function
 
+    Private Shared Function GetAnonymousEditLink(clientContext As ClientContext, item As ListItem)
+        Dim objInfo = ObjectSharingInformation.GetObjectSharingInformation(clientContext, item, True, True, True, True, True, True, True)
+        clientContext.Load(objInfo, Function(a As ObjectSharingInformation) a.AnonymousEditLink)
+        clientContext.ExecuteQuery()
+
+        Return objInfo.AnonymousEditLink
+    End Function
+
     Private Shared Function GetAnonymousViewLink(clientContext As ClientContext, item As ListItem)
         Dim objInfo = ObjectSharingInformation.GetObjectSharingInformation(clientContext, item, True, True, True, True, True, True, True)
         clientContext.Load(objInfo, Function(a As ObjectSharingInformation) a.AnonymousViewLink)
@@ -316,6 +353,17 @@ Public Class DocumentService
 
         Return objInfo.AnonymousViewLink
     End Function
+
+    Private Shared Sub CreateEditLink(clientContext As ClientContext, fileUrl As String)
+        Dim serverurl = clientContext.Url
+        Dim userRoleAssignments As New List(Of UserRoleAssignment)
+        userRoleAssignments.Add(New UserRoleAssignment With
+                                {.UserId = "Everyone",
+                                    .Role = Sharing.Role.Edit
+                                    })
+        Dim returnValue = DocumentSharingManager.UpdateDocumentSharingInfo(clientContext, serverurl & fileUrl, userRoleAssignments, False, True, True, "", True)
+        clientContext.ExecuteQuery()
+    End Sub
 
     Private Shared Sub CreateSharingLink(clientContext As ClientContext, fileUrl As String)
         Dim serverurl = clientContext.Url

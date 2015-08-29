@@ -43,6 +43,17 @@ Public Class DownloadFile
         If Not String.IsNullOrEmpty(Request.QueryString("fileUrl")) Then
             Dim fileUrl = Request.QueryString("fileUrl").ToString
             Dim fileName = fileUrl.Substring(fileUrl.LastIndexOf("/") + 1)
+
+            If Not String.IsNullOrEmpty(Request.QueryString("edit")) Then
+                If Request.QueryString("edit").ToArray = "true" Then
+                    Dim link = DocumentService.GetPreviewContentLinkByFileUrl(fileUrl)
+                    If Not String.IsNullOrEmpty(link) Then
+                        Response.Redirect(link)
+                        Return
+                    End If
+                End If
+            End If
+
             Dim data = DocumentService.GetPDFContent(fileUrl)
 
             Response.Clear()
@@ -50,7 +61,7 @@ Public Class DownloadFile
             Response.AddHeader("Content-Disposition", "attachment; filename=" & fileName)
             'Response.AddHeader("Content-Disposition", String.Format("inline; filename=""{0}""", File.Name))
             'Response.AddHeader("Content-Length", File.Size)
-            Response.BinaryWrite(Data)
+            Response.BinaryWrite(data)
             Response.[End]()
         End If
 
