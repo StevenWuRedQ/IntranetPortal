@@ -27,7 +27,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleBuyer" Width="1.5" PointX="14.125" PointY="3.125" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleOffer" Width="1.5" PointX="12.375" PointY="8.25" />
         <EntityTypeShape EntityType="IntranetPortalModel.CorporationEntity" Width="1.5" PointX="6.625" PointY="11.375" />
-        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleLeadsInfo" Width="1.5" PointX="9.375" PointY="13.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleLeadsInfo" Width="1.75" PointX="8.625" PointY="12.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

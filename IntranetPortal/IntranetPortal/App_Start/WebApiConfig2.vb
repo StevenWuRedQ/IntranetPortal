@@ -21,6 +21,7 @@ Public Class WebApiConfig2
 
         Dim builder As New ODataConventionModelBuilder
         builder.EntitySet(Of NYC_Scan_TaxLiens_Per_Year)("TaxLiensOData")
+        builder.EntitySet(Of IntranetPortal.Data.ShortSaleLeadsInfo)("ShortSaleLeadsInfoes")
         config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel())
     End Sub
 
