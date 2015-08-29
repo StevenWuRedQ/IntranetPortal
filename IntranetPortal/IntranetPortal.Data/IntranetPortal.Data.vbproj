@@ -234,6 +234,9 @@
     <Compile Include="ShortSale\ADOEntity\ShortSaleCaseComment.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ShortSale\ADOEntity\ShortSaleLeadsInfo.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShortSale\ADOEntity\ShortSaleOffer.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
