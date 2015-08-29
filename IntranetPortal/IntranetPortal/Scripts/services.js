@@ -381,7 +381,7 @@ app.service('ptFileService', function () {
             case 'xlsx':
             case 'doc':
             case 'docx':
-                return '/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath) + encodeURIComponent('&edit=true');
+                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true';
                 break;
                 /*
                 case 'jpg':
