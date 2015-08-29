@@ -83,7 +83,7 @@ Public Class Utility
         Try
             request.GetResponse()
         Catch ex As Exception
-            Return "Get Error " + address
+            Throw New Exception("Get Error " + address)
         End Try
         ' Get the response. 
         Dim response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)

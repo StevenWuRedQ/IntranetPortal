@@ -18,7 +18,17 @@ Namespace Controllers
         Function GetCorporationEntities() As IQueryable(Of CorporationEntity)
             Return db.CorporationEntities
         End Function
+        ' GET /api/CorporationEntities/ByBBLE?BBLE=3041250022
+        <ResponseType(GetType(CorporationEntity))>
+        <Route("api/CorporationEntities/ByBBLE")>
+        Function GetCorporationEntityByBBLE(ByVal BBLE As String) As IHttpActionResult
+            Dim corporationentity As CorporationEntity = db.CorporationEntities.Where(Function(c) c.BBLE = BBLE).FirstOrDefault
+            If IsNothing(corporationentity) Then
+                Return NotFound()
+            End If
 
+            Return Ok(corporationentity)
+        End Function
         ' GET: api/CorporationEntities/5
         <ResponseType(GetType(CorporationEntity))>
         Function GetCorporationEntity(ByVal id As Integer) As IHttpActionResult

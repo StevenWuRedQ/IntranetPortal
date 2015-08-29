@@ -78,7 +78,25 @@ Public Class ContactService
         End If
         Return Nothing
     End Function
+    <OperationContract()>
+  <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
+    Public Function AssginEntity(c As String) As Channels.Message
+        If (Not String.IsNullOrEmpty(c)) Then
+            Dim entity = Newtonsoft.Json.JsonConvert.DeserializeObject(Of CorporationEntity)(c)
 
+            Try
+                Dim BBLE = IntranetPortal.Core.Utility.Address2BBLE(entity.PropertyAssigned)
+                entity.BBLE = BBLE
+
+                entity.Save()
+                Return entity.BBLE.ToJson
+            Catch ex As Exception
+                Throw ex
+            End Try
+
+        End If
+        Throw New Exception("entiy is emplty")
+    End Function
     ' Add more operations here and mark them with <OperationContract()>
     <OperationContract()>
     <WebInvoke(Method:="POST", ResponseFormat:=WebMessageFormat.Json)>

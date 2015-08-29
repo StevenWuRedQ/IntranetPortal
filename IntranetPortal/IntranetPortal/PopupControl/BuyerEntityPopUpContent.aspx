@@ -339,21 +339,11 @@
                                     </td>
                                     <td>
                                         <div class="detail_right input_info_table ">
-                                            <div dx-lookup="{
-                                                dataSource: lookupData,
-                                                displayExpr: 'PropertyAddress',
-                                                searchEnabled: true
-                                            }">
-                                            </div>
                                             <input class="form-control" ng-model="currentContact.PropertyAssigned" placeholder="Click to input">
                                         </div>
                                     </td>
                                     <td>
-
-                                        <button class="btn btn-primary"><i class="fa fa-search " data-toggle="tooltip" data-placement="bottom" title="Search"></i></button>
-
-                                        <button class="btn btn-primary">Assgin</button>
-
+                                        <button class="btn btn-primary" type="button" ng-click="AssginEntity()" style=" margin-left:10px">Assgin</button>
                                     </td>
                                 </tr>
 
@@ -654,6 +644,18 @@
                 }).error(function (data, status, headers, config) {
                     $scope.loadPanelVisible = false;
                     alert('Add buyer Entities error : ' + JSON.stringify(data))
+                });
+            }
+            $scope.AssginEntity = function()
+            {
+                $scope.loadPanelVisible = true;
+                $http.post('/Services/ContactService.svc/AssginEntity', { c: JSON.stringify($scope.currentContact) }).success(function (data, status, headers, config) {
+                    $scope.loadPanelVisible = false;
+                    $scope.currentContact.BBLE = data;
+                    alert("Assigned succeed !")
+                }).error(function (data, status, headers, config) {
+                    $scope.loadPanelVisible = false;
+                    alert('Can not find BBLE of address:(' + $scope.currentContact.PropertyAssigned + ") Please make sure this address is available");
                 });
             }
             $scope.ChangeTeam = function (team) {
