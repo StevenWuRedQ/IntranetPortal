@@ -64,7 +64,11 @@
         }
 
         function RefreshResult() {
-            gdComplainsResult.Refresh();
+            //gdComplainsResult.Refresh();
+
+            //refresh data grid
+            Complaints.Refresh();
+
             needRefreshResult = false;
         }
 
@@ -252,11 +256,124 @@
                 </div>
             </div>
             <div id="divComplainResult">
-                <div id="dgComplaintsResult" style="display:none"></div>
+                <div id="dgComplaintsResult"></div>
+
+                <script id="gridCellHistory" type="text/html">
+                    <i class="fa fa-history icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" title="View History Details" onclick='ShowComplaintsHistory("{%= value %}")'></i>
+                </script>
+
+                <script id="gridComplaitsDetail" type="text/html">
+                    <table class="" style="width: 100%; border: 1px solid #808080; line-height: 25px; white-space: normal">
+                        <tr>
+                            <td colspan="4" class="form_header">Complaints - {%= data.ComplaintNumber%} - Detail
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px;">Address
+                            </td>
+                            <td style="width: 35%">{%=data.Address%}
+                            </td>
+                            <td style="width: 150px">DateEntered
+                            </td>
+                            <td style="width: 35%">{%=data.DateEntered%}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Owner
+                            </td>
+                            <td>{%=data.Owner%}
+                            </td>
+                            <td>AssignedTo
+                            </td>
+                            <td>{%=data.AssignedTo%}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Subject
+                            </td>
+                            <td>{%=data.Subject%}
+                            </td>
+                            <td>Zip
+                            </td>
+                            <td>{%=data.Zip%}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>RE
+                            </td>
+                            <td>{%=data.RE%}
+                            </td>
+
+                            <td>Reference311Number
+                            </td>
+                            <td>{%=data.Reference311Number%}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>LastInspection
+                            </td>
+                            <td>{%=data.LastInspection%}
+                            </td>
+                            <td style="width: 150px">Category
+                            </td>
+                            <td>{%=data.CategoryCode%}
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>Disposition
+                            </td>
+                            <td>{%=data.Disposition%}
+                            </td>
+                            <td>DispositionDetails
+                            </td>
+                            <td>{%=data.DispositionDetails%}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px">Comments
+                            </td>
+                            <td>{%=data.Comments%}
+                            </td>
+                            <td>LastUpdated
+                            </td>
+                            <td>{%=data.LastUpdated%}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Priority
+                            </td>
+                            <td>{%=data.Priority%}
+                            </td>
+                            <td>BIN
+                            </td>
+                            <td>{%=data.BIN%}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>DOB Violation
+                            </td>
+                            <td>{%=data.DOBViolation%}
+                            </td>
+                            <td>ECB Violation
+                            </td>
+                            <td>{%=data.ECBViolation%}
+                            </td>
+                        </tr>
+                    </table>
+                </script>
+
                 <script type="text/javascript">
-                    
+                    DevExpress.ui.setTemplateEngine("underscore");
+                    _.templateSettings = {
+                        interpolate: /\{%=(.+?)%\}/g,
+                        escape: /\{%-(.+?)%\}/g,
+                        evaluate: /\{%(.+?)%\}/g
+                    };
+
                     var Complaints = {
                         Result: null,
+                        DataGrid: null,
                         LoadResult: function () {
                             var view = this;
                             var customStore = new DevExpress.data.CustomStore({
@@ -275,20 +392,33 @@
                             return customStore;
                         },
                         LoadGrid: function () {
-                            $("#dgComplaintsResult").dxDataGrid({
+                            var gridOptions = {
                                 dataSource: this.LoadResult(),
                                 showColumnLines: false,
                                 showRowLines: true,
                                 rowAlternationEnabled: true,
+                                wordWrapEnabled: true,
                                 remoteOperations: {
                                     sorting: false
+                                },
+                                selection: {
+                                    mode: 'single'
+                                },
+                                onSelectionChanged: function (e) {
+                                    e.component.collapseAll(-1);
+                                    e.component.expandRow(e.currentSelectedRowKeys[0]);
+                                },
+                                onContentReady: function (e) {
+                                    //if (!e.component.getSelectedRowKeys().length)
+                                    //    e.component.selectRowsByIndexes(0);
                                 },
                                 columns: [{
                                     dataField: "Address",
                                     caption: "Address"
                                 }, {
                                     dataField: "ComplaintNumber",
-                                    caption: "Complaint Number"
+                                    caption: "Complaint Number",
+                                    width: 150
                                 }, {
                                     dataField: "LastInspection",
                                     caption: "Last Inspection",
@@ -297,28 +427,46 @@
                                 {
                                     dataField: "LastUpdated",
                                     caption: "Last Updated",
-                                    dataType: 'date'
+                                    dataType: 'date',
+                                    width: 150,
+                                    format: 'M/dd/yyyy h:mm tt'
                                 }, {
                                     dataField: "Status",
                                     caption: "Status",
                                     filterValue: 'ACT',
+                                    width: '80px',
                                     dataType: "string"
-                                }, {                                                               
+                                }, {
+                                    dataField: 'BBLE',
+                                    caption: '',
+                                    width: '60px',
                                     allowFiltering: false,
                                     allowSorting: false,
-                                    cellTemplate: function (container, options) {
-                                                                             
-                                    }
+                                    cellTemplate: $("#gridCellHistory")
                                 }],
-                            });
+                                masterDetail: {
+                                    enabled: true,
+                                    template: "#gridComplaitsDetail"
+                                }
+                            }
+
+                            this.DataGrid = $("#dgComplaintsResult").dxDataGrid(gridOptions).dxDataGrid("instance");
+                        },
+                        Refresh: function () {
+                            if(this.DataGrid == null)
+                                this.LoadGrid();
+                            else
+                            {
+                                this.Result = null;
+                                this.DataGrid.refresh();
+                            }
                         }
                     }
-               
-                    Complaints.LoadGrid();
+
                 </script>
 
-               
-                <dx:ASPxGridView ID="gdComplainsResult" ClientInstanceName="gdComplainsResult" runat="server" Theme="Moderno" CssClass="table" Width="100%" ViewStateMode="Disabled"
+
+                <dx:ASPxGridView ID="gdComplainsResult" ClientInstanceName="gdComplainsResult" runat="server" Theme="Moderno" CssClass="table" Width="100%" ViewStateMode="Disabled" Visible="false"
                     KeyFieldName="BBLE;ComplaintNumber" OnDataBinding="gdComplainsResult_DataBinding" OnCustomCallback="gdComplainsResult_CustomCallback" OnHtmlRowPrepared="gdComplainsResult_HtmlRowPrepared">
                     <Columns>
                         <dx:GridViewDataColumn FieldName="Address">

@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
-    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css" />
-    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.light.css" />
+    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" type="text/css" />
+    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />
     <link href="/css/stevencss.css" rel="stylesheet" type="text/css" />
 
     <!--
@@ -36,8 +36,8 @@
     <script src="/Scripts/ng-infinite-scroll.min.js"></script>
     <script src="/Scripts/ngMask.min.js"></script>
 
-    <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.webappjs.js"></script>
-    <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
+    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.webappjs.js"></script>
+    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/angular-sanitize.js"></script>
 
     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
     <script src="http://cdn.ckeditor.com/4.5.1/standard/ckeditor.js"></script>
