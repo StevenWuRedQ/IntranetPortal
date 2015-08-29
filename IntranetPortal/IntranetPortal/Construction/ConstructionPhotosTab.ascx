@@ -4,7 +4,7 @@
     <div class="ss_border">
         <div >
             <h5 class="ss_form_title">AM Photos</h5>
-            <pt-files file-bble="CSCase.BBLE" file-id="Photos-AMPhoto" file-model="CSCase.CSCase.Photos.AMPhotos" file-folder="true"></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="Photos-AMPhoto" file-model="CSCase.CSCase.Photos.AMPhotos"></pt-files>
         </div>
         <hr />
         <div>
@@ -40,7 +40,7 @@
     <div class="ss_border">
         <div>
             <h5 class="ss_form_title">Progress</h5>
-            <pt-files file-bble="CSCase.BBLE" file-id="Photos-Progress" file-model="CSCase.CSCase.Photos.WaterMeterProgress"></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="Photos-Progress" file-model="CSCase.CSCase.Photos.WaterMeterProgress" folder-enable="true" base-folder="Photos-Progress"></pt-files>
         </div>
         <hr />
         <div>

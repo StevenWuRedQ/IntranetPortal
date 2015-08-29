@@ -10,7 +10,7 @@
             </li>
             <li class="ss_form_item" style="display: none">
                 <label class="ss_form_input_title">BBLE</label>
-                <input class="ss_form_input" ng-model="LeadsInfo.BBLE" >
+                <input class="ss_form_input" ng-model="LeadsInfo.BBLE">
             </li>
             <li class="ss_form_item" style="width: 66.6%">
                 <label class="ss_form_input_title">Address</label>
@@ -220,6 +220,10 @@
                 <label class="ss_form_input_title">Upload Comps</label>
                 <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadComps" file-model="CSCase.CSCase.InitialIntake.UploadComps"></pt-file>
             </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Is Comps Task Finished?</label>
+                <pt-finished-mark ss-model="CSCase.CSCase.InitialIntake.IsCompsFinished"></pt-finished-mark>
+            </li>
         </ul>
     </div>
 </div>
@@ -235,13 +239,17 @@
                 <label class="ss_form_input_title">Water Search Upload</label>
                 <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-WaterSearchUpload" file-model="CSCase.CSCase.InitialIntake.WaterSearchUpload"></pt-file>
             </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Is Water Search Finished?</label>
+                <pt-finished-mark ss-model="CSCase.CSCase.InitialIntake.IsWaterSearchFinished"></pt-finished-mark>
+            </li>
         </ul>
     </div>
 </div>
 
 <div class="ss_form">
     <div class="ss_border">
-        <span style="color: red">Press Enter To Send Notification!</spa>
+        <span style="color: red">Press Enter To Send Notification!</span>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Remind Intake Sheet</label>
@@ -250,6 +258,10 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Intake Sheet</label>
                 <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadIntakeSheet" file-model="CSCase.CSCase.InitialIntake.UploadIntakeSheet"></pt-file>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Is Intake Sheet Finished?</label>
+                <pt-finished-mark ss-model="CSCase.CSCase.InitialIntake.IsIntakeSheetFinished"></pt-finished-mark>
             </li>
         </ul>
             <ul class="ss_form_box clearfix">
@@ -261,7 +273,12 @@
                     <label class="ss_form_input_title">Upload Sketch Layout</label>
                     <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadSketchLayout" file-model="CSCase.CSCase.InitialIntake.UploadSketchLayout"></pt-file>
                 </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Is Sketch Task Finished?</label>
+                    <pt-finished-mark ss-model="CSCase.CSCase.InitialIntake.IsSketchFinished"></pt-finished-mark>
+                </li>
             </ul>
+
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Remind Initial Budget</label>
@@ -270,6 +287,10 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Upload Initial Budget</label>
                     <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadInitialBudget" file-model="CSCase.CSCase.InitialIntake.UploadInitialBudget"></pt-file>
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Is Intial Budget Task Finished?</label>
+                    <pt-finished-mark ss-model="CSCase.CSCase.InitialIntake.IsInitialBudgetFinished"></pt-finished-mark>
                 </li>
             </ul>
     </div>

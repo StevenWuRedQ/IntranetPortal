@@ -3,20 +3,23 @@
 portalApp.directive('ssDate', function () {
     return {
         restrict: 'A',
+        scope: true,
         link: function (scope, el, attrs) {
-            $(el).datepicker();
-            var initFlag = true;
+            $(el).datepicker({
+                forceParse: false,
+                format: "mm/dd/yyyy"
+            });
+
+            scope.intFlag = false;
             scope.$watch(attrs.ngModel, function (newValue, oldValue) {
                 var dateStr = newValue;
-                if (!dateStr && oldValue != null && initFlag) {
-                    scope.$eval(attrs.ngModel + "='" + oldValue + "'");
-                    initFlag = false;
-                }
-                dateStr = !dateStr ? null : dateStr.toString();
-                if (dateStr && dateStr.indexOf('-') >= 0) {
-                    var dd = new Date(dateStr);
-                    dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
-                    scope.$eval(attrs.ngModel + "='" + dd + "'");
+                if (dateStr !== undefined && !scope.intFlag) {
+                    if (dateStr) {
+                        var dd = new Date(dateStr);
+                        dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
+                        $(el).datepicker('update', new Date(dd))
+                    }
+                    scope.intFlag = true;
                 }
             });
         }
@@ -294,17 +297,14 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
         scope: {
             fileModel: '=',
             fileBble: '=',
-            fileName: '@',
             fileId: '@',
             fileColumns: '@',
-            fileFolder: '@',
-            onFileProcess: '&',
-            onFileDone: '&'
+            folderEnable: '@',
+            baseFolder: '@'
         },
         link: function (scope, el, attrs) {
             scope.ptFileService = ptFileService;
             scope.ptCom = ptCom;
-
 
             // init scope variale
             scope.files = [];
@@ -313,7 +313,8 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             scope.currentFolder = '';
 
             scope.loading = false;
-            scope.folderEnable = scope.fileFolder == 'true' ? true : false;
+            scope.folderEnable = scope.folderEnable == 'true' ? true : false;
+            scope.baseFolder = scope.fileFolder ? scope.fileFolder : '';
 
 
             if (scope.fileColumns) {
@@ -325,11 +326,10 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined)
 
             // reg events            
-            scope.$watch(function () {
-                return scope.fileModel.$modelValue;
-            }, function () {
+            scope.$watch('fileModel', function () {
                 scope.currentFolder = '';
-                scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')),undefined)
+                scope.baseFolder = scope.fileFolder ? scope.fileFolder : '';
+                scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined)
             })
 
             $(el).find('input:file').change(function () {
@@ -359,8 +359,8 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
 
 
             // utility functions
-            scope.changeFolder = function (folder) {
-                scope.currentFolder = folder;
+            scope.changeFolder = function (folderName) {
+                scope.currentFolder = folderName;
             }
             scope.addFolder = function (folderName) {
                 scope.folders.push(folderName);
@@ -419,38 +419,56 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                 }
             }
             scope.uploadFile = function () {
-                scope.startLoading();
-                var data = new FormData();
-                for (var i = 0; i < scope.files.length; i++) {
-                    data.append("file", scope.files[i]);
-                }
-                ptFileService.uploadConstructionFile(data, scope.fileBble, scope.fileName, scope.currentFolder, function (error, data) {
-                    scope.stopLoading();
-                    if (error) {
-                        alert(error);
-                    } else {
-                        scope.$apply(function () {
-                            scope.fileModel = scope.fileModel ? scope.fileModel : [];
-                            for (var i = 0; i < data.length; i++) {
-                                var newCol = {};
-                                newCol.path = data[i];
-                                newCol.name = ptFileService.getFileName(newCol.path);
-                                newCol.folder = ptFileService.getFileFolder(newCol.path);
-                                newCol.uploadTime = new Date();                                
-                                for (var j = 0; j < scope.columns.length; j++) {
-                                    var column = scope.columns[j];
-                                    newCol[column] = '';
-                                }
-                                scope.fileModel.push(newCol);
-                            }
-                            scope.clearChoosed();
-                        });
+                scope.fileModel = scope.fileModel ? scope.fileModel : [];
+                var targetFolder = (scope.baseFolder ? scope.baseFolder + '/' : '') + (scope.currentFolder ? scope.currentFolder + '/' : '')
+                scope.result = [];
+                var len = scope.files.length;
+
+                //scope.startLoading();
+                for (var i = 0; i < len; i++) {
+                    var f = {};
+                    f.name = ptFileService.getFileName(scope.files[i].name);
+                    f.folder = scope.currentFolder;
+                    f.uploadTime = new Date();
+                    for (var j = 0; j < scope.columns.length; j++) {
+                        var column = scope.columns[j];
+                        f[column] = '';
                     }
+                    scope.result.push(f);
+                }
 
-                });
+                for (var i = 0; i < len; i++) {
+                    var data = new FormData();
+                    data.append("file", scope.files[i]);
+                    var targetName = ptFileService.getFileName(scope.files[i].name);
+                    ptFileService.uploadConstructionFile(data, scope.fileBble, targetName, targetFolder, function (error, data, targetName) {
+                        if (error) {
+                            var targetElement = _.filter(scope.result, function (el) { return el.name == targetName })[0];
+                            if (targetElement) targetElement.error = error;
+                            scope.countCallback(len)
+                        } else {
+                            var targetElement = _.filter(scope.result, function (el) { return el.name == targetName })[0];
+                            if (targetElement) targetElement.path = data[0];
+                            scope.fileModel.push(targetElement);
+                            scope.countCallback(len)
+                        }
+                    });
+                }
+
             }
-
-
+            scope.count = 0;
+            scope.countCallback = function (total) {
+                if (scope.count >= total - 1) {
+                    scope.$apply(function () {
+                        //scope.stopLoading();
+                        scope.clearChoosed();
+                        scope.count = 0;
+                    });
+                    return;
+                } else {
+                    scope.count++;
+                }
+            }
 
         }
 
@@ -485,4 +503,19 @@ portalApp.directive('ptComments', ['ptCom', function (ptCom) {
         }
     }
 
+}])
+
+portalApp.directive('ptFinishedMark', [function () {
+    return {
+        restrict: 'E',
+        template: '<div>' +
+                  '<button class="btn btn-default" type="button" ng-click="ssModel=!ssModel" ng-show="!ssModel">{{button1?button1:"Click To Confirm"}}</button>' +
+                  '<button class="btn btn-success" type="button" ng-dblclick="ssModel=!ssModel" ng-show="ssModel">{{button2?button2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></button>' +
+                  '</div>',
+        scope: {
+            ssModel: '=',
+            button1: '@',
+            button2: '@',
+        }
+    }
 }])

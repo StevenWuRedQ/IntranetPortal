@@ -327,10 +327,10 @@ app.service('ptFileService', function () {
                 processData: false,
                 contentType: false,
                 success: function (data1) {
-                    callback(null, data1);
+                    callback(null, data1, rename);
                 },
                 error: function () {
-                    callback('Upload fails!')
+                    callback('Upload fails!', null, rename)
                 }
             });
         }
@@ -338,8 +338,13 @@ app.service('ptFileService', function () {
 
     this.getFileName = function (fullPath) {
         if (fullPath) {
-            var paths = fullPath.split('/');
-            return paths[paths.length - 1];
+            if (this.isIE(fullPath)) {
+               var paths = fullPath.split('\\');
+               return this.cleanName(paths[paths.length - 1]);
+            } else {
+                var paths = fullPath.split('/');
+                return this.cleanName(paths[paths.length - 1]);
+            }           
         }
         return '';
     }
@@ -395,6 +400,14 @@ app.service('ptFileService', function () {
         ele.unwrap();
         ele.prop('files')[0] = null;
         ele.replaceWith(ele.clone());
+    }
+
+    this.cleanName = function(filename){
+        return filename.replace(/[^a-z0-9_\-\.()]/gi, '_')
+    }
+
+    this.isIE = function (fileName) {
+        return fileName.indexOf(':\\')>-1;
     }
 }
 );

@@ -88,6 +88,7 @@ Namespace Controllers
             Dim bble = HttpContext.Current.Request.QueryString("bble")
             Dim fileName = HttpContext.Current.Request.QueryString("fileName")
             Dim fileFoler = HttpContext.Current.Request.QueryString("folder")
+            fileFoler = IIf(fileFoler.Last() = "/", fileFoler.Substring(0, fileFoler.Length - 1), fileFoler)
 
             If HttpContext.Current.Request.Files.Count > 0 Then
                 For i = 0 To HttpContext.Current.Request.Files.Count - 1
@@ -100,8 +101,11 @@ Namespace Controllers
                         folderPath = folderPath & "/" & fileFoler
                     End If
 
-                    Dim fileNameParts = file.FileName.Split("\")
-                    fileName = fileNameParts(fileNameParts.Length - 1)
+                    If String.IsNullOrEmpty(fileName) Then
+                        Dim fileNameParts = file.FileName.Split("\")
+                        fileName = fileNameParts(fileNameParts.Length - 1)
+                    End If
+
                     results.Add(Core.DocumentService.UploadFile(folderPath, ms.ToArray, fileName, User.Identity.Name))
                 Next
                 Return Ok(results.ToArray)
