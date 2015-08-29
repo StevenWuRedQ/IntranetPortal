@@ -74,6 +74,7 @@
                                     </li>
                                     <li class="pull-right" style="margin-right: 30px; color: #ffa484">
                                         <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="saveCSCase()" data-original-title="Save"></i>
+                                        <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="Intake Complete" ng-click="intakeComplete()" data-original-title="Intake Completed"></i>
                                         <i class="fa fa-mail-reply sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectOwner.PerformCallback('Show');popupSelectOwner.ShowAtElement(this);" data-original-title="Reassign"></i>
                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
@@ -242,9 +243,13 @@
                                             </tr>
                                             <tr>
                                                 <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                                    <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue"><ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();SetFollowUp('customDays',callbackCalendar.GetSelectedDate());}"></ClientSideEvents></dx:ASPxButton>
+                                                    <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                                        <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();SetFollowUp('customDays',callbackCalendar.GetSelectedDate());}"></ClientSideEvents>
+                                                    </dx:ASPxButton>
                                                     &nbsp;
-                                                    <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray"><ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents></dx:ASPxButton>
+                                                    <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                                        <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents>
+                                                    </dx:ASPxButton>
                                                 </td>
                                             </tr>
                                         </table>
@@ -274,7 +279,7 @@
             $scope.ptContactServices = ptContactServices;
             $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
             $scope.CSCase = {}
-
+            $scope.ReloadedData = {}
             $scope.CSCase.CSCase = {
                 InitialIntake: {},
                 Photos: {},
@@ -300,6 +305,7 @@
             };
             $scope.reload = function () {
                 $scope.CSCase = {}
+                $scope.ReloadedData = {}
                 $scope.CSCase.CSCase = {
                     InitialIntake: {},
                     Photos: {},
@@ -318,11 +324,12 @@
             $scope.init = function (bble) {
 
                 bble = bble.trim();
-                
+
                 $scope.reload();
                 ptConstructionService.getConstructionCases(bble, function (res) {
                     ptCom.nullToUndefined(res);
                     $.extend(true, $scope.CSCase, res);
+                    $scope.initWatchedModel()
                 });
 
                 ptShortsSaleService.getShortSaleCaseByBBLE(bble, function (res) {
@@ -340,6 +347,7 @@
             $scope.saveCSCase = function () {
                 var data = JSON.stringify($scope.CSCase);
                 ptConstructionService.saveConstructionCases($scope.CSCase.BBLE, data);
+                $scope.checkWatchedModel();
             }
 
             /***spliter***/
@@ -412,10 +420,10 @@
 
             /* highlight */
             $scope.highlights = [
-                { model: 'Signoffs_Plumbing_SignedOffDate', message: 'Plumbing signed off at {{CSCase.CSCase.Signoffs.Plumbing_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate' },
-                { model: 'Signoffs_Electrical_SignedOffDate', message: 'Electrical signed off at {{CSCase.CSCase.Signoffs.Electrical_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate' },
-                { model: 'Signoffs_Construction_SignedOffDate', message: 'Construction signed off at {{CSCase.CSCase.Signoffs.Construction_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate' },
-                { model: 'Violations_HPD_OpenHPDViolation', message: 'HPD Violations has all finished', criteria: 'CSCase.CSCase.Violations.HPD_OpenHPDViolation === false' }
+                { message: 'Plumbing signed off at {{CSCase.CSCase.Signoffs.Plumbing_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate' },
+                { message: 'Electrical signed off at {{CSCase.CSCase.Signoffs.Electrical_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate' },
+                { message: 'Construction signed off at {{CSCase.CSCase.Signoffs.Construction_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate' },
+                { message: 'HPD Violations has all finished', criteria: 'CSCase.CSCase.Violations.HPD_OpenHPDViolation === false' }
             ];
             $scope.isHighlight = function (criteria) {
                 return $scope.$eval(criteria);
@@ -424,6 +432,42 @@
                 var msgstr = $interpolate(msg)($scope);
                 return msgstr;
             }
+            $scope.intakeComplete = function () {
+                AddActivityLog("Intake Process have finished!");
+            }
+            $scope.WatchedModel = [
+                {
+                    model: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate',
+                    backedModel: 'ReloadedData.Backed_Plumbing_SignedOffDate',
+                    info: 'Plumbing Sign Off Date'
+                },
+                {
+                    model: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate',
+                    backedModel: 'ReloadedData.Backed_Construction_SignedOffDate',
+                    info: 'Construction Sign Off Date'
+                },
+                {
+                    model: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate',
+                    backedModel: 'ReloadedData.Electrical_SignedOffDate',
+                    info: 'Electrical Sign Off Date'
+                }];
+
+            $scope.initWatchedModel = function () {
+                _.each($scope.WatchedModel, function (el, i) {
+                    $scope.$eval(el.backedModel + '=' + el.model);
+                })
+            }
+            $scope.checkWatchedModel = function () {
+                var res = ''
+                _.each($scope.WatchedModel, function (el, i) {
+                    if ($scope.$eval(el.backedModel + '!=' + el.model)) {
+                        $scope.$eval(el.backedModel + '=' + el.model);
+                        res += (el.info + ' changes to ' + $scope.$eval(el.model) + '.<br>')
+                    }
+                })
+                if (res) AddActivityLog(res);
+            }
+
             /* end highlight */
 
 
@@ -436,7 +480,7 @@
 
             $scope.addNewDOBViolation = function () {
                 $scope.ensurePush('CSCase.CSCase.Violations.DOBViolations');
-                $scope.setPopupVisible('DOBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.DOBViolations.length-1), true);
+                $scope.setPopupVisible('DOBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.DOBViolations.length - 1), true);
             }
             $scope.addNewECBViolation = function () {
                 $scope.ensurePush('CSCase.CSCase.Violations.ECBViolations');

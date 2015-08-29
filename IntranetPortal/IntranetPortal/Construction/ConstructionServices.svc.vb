@@ -93,3 +93,10 @@ Class DOBViolationDetail
         Return Regex.Replace(dirty, patten, "")
     End Function
 End Class
+
+Class ECBViolation
+    Public Property totalViolations As String
+    Public Property totalOpenViolations As String
+    Public Property violations As ArrayList
+End Class
+

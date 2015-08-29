@@ -94,7 +94,7 @@
             </div>
             <div>
             <label class="ss_form_input_title">Upload</label>
-            <pt-files file-bble="CSCase.BBLE" file-id="EnergyService-Upload{{$index}}" file-model="floor.ConED.Upload"></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="EnergyService-Upload{{$index}}" base-folder="EnergyService-Upload{{$index}}" file-model="floor.ConED.Upload"></pt-files>
             </div>        
             <div>
             <label class="ss_form_input_title">Note</label>
@@ -172,7 +172,7 @@
         </div>
         <div>
             <label class="ss_form_input_title">Upload</label>
-            <pt-files file-bble="CSCase.BBLE" file-id="EnergyService-Upload{{$index}}" file-model="floor.EnergyService.Upload"></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="EnergyService-Upload{{$index}}" base-folder="EnergyService-Upload{{$index}}" file-model="floor.EnergyService.Upload"></pt-files>
         </div>
         <div>
             <label class="ss_form_input_title">Notes</label>
@@ -243,7 +243,7 @@
         </div>
         <div>
             <label class="ss_form_input_title">Upload</label>
-            <pt-files file-bble="CSCase.BBLE" file-id="EnergyService_Upload{{$index}}" file-model="floor.NationalGrid.Upload"></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="EnergyService_Upload{{$index}}" base-folder="EnergyService_Upload{{$index}}" file-model="floor.NationalGrid.Upload"></pt-files>
         </div>
         <div>
             <label class="ss_form_input_title">Notes</label>
@@ -345,7 +345,7 @@
         </ul>
         <div>
             <label class="ss_form_input_title">Upload Letter To DEP</label>
-            <pt-files file-bble="CSCase.BBLE" class="ss_form_input" file-id="CSCase-Utilities-MissingMeter-Upload" file-model="CSCase.CSCase.Utilities.MissingMeter_Upload"></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="CSCase-Utilities-MissingMeter-Upload" base-folder="CSCase-Utilities-MissingMeter-Upload" file-model="CSCase.CSCase.Utilities.MissingMeter_Upload"></pt-files>
         </div>
         <div>
             <label class="ss_form_input_title">Notes</label>
@@ -448,7 +448,7 @@
         </ul>
         <div>
             <label class="ss_form_input_title">Upload</label>
-            <pt-files file-bble="CSCase.BBLE" file-id="CSCase-Utilities-InsuranceUpload" file-model="CSCase.CSCase.Utilities.Insurance_Upload"></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="CSCase-Utilities-InsuranceUpload" base-folder="CSCase-Utilities-InsuranceUpload" file-model="CSCase.CSCase.Utilities.Insurance_Upload"></pt-files>
         </div>
         <div class="ss_form_item">
             <label class="ss_form_input_title">Renewal Remind</label>

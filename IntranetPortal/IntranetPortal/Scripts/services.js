@@ -376,6 +376,13 @@ app.service('ptFileService', function () {
         switch (ext) {
             case 'pdf':
                 return '/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath);
+                break;
+            case 'xls':
+            case 'xlsx':
+            case 'doc':
+            case 'docx':
+                return '/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath) + encodeURIComponent('&edit=true');
+                break;
                 /*
                 case 'jpg':
                     return '';
