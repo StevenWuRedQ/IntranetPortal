@@ -274,30 +274,6 @@
                     }">
 
                     <div data-options="dxTemplate:{ name: 'content' }">
-                        <div class=" row">
-                            <div class="col-md-2">To</div>
-                            <div class="col-md-4">
-                                <div dx-tag-box="EmployeeDataSource()"></div>
-
-                            </div>
-                        </div>
-                        <div class=" row">
-                            <div class="col-md-2">CC</div>
-                            <div class="col-md-4">
-                                <div dx-tag-box="{
-                              
-                                placeholder: 'Select states',
-                                displayExpr: 'Email',
-                                valueExpr: 'Email',
-                                bindingOptions: {
-                                    values: 'EmailCC'
-                                }
-                            }">
-                                </div>
-
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
@@ -318,7 +294,7 @@
                                     </td>
                                     <td valign="top">
                                         <input style="margin-left: 40px;" type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveCurrent()"><br />
-                                        <input style="margin-left: 40px; margin-top: 5px" type="button" class="rand-button short_sale_edit" value="Mail" onclick="popupSendEmailAttachClient.Show();popupSendEmailAttachClient.PerformCallback('Show');">
+                                        <input style="margin-left: 40px; margin-top: 5px" type="button" class="rand-button short_sale_edit" value="Mail" onclick="popupSendEmailAttachClient.Show(); popupSendEmailAttachClient.PerformCallback('Show');">
                                     </td>
 
                                 </tr>
@@ -362,9 +338,22 @@
                                     <td class="vendor_info_left">Property Assigned
                                     </td>
                                     <td>
-                                        <div class="detail_right input_info_table">
-                                            <input class="form-control " ng-model="currentContact.PropertyAssigned" placeholder="Click to input">
+                                        <div class="detail_right input_info_table ">
+                                            <div dx-lookup="{
+                                                dataSource: lookupData,
+                                                displayExpr: 'PropertyAddress',
+                                                searchEnabled: true
+                                            }">
+                                            </div>
+                                            <input class="form-control" ng-model="currentContact.PropertyAssigned" placeholder="Click to input">
                                         </div>
+                                    </td>
+                                    <td>
+
+                                        <button class="btn btn-primary"><i class="fa fa-search " data-toggle="tooltip" data-placement="bottom" title="Search"></i></button>
+
+                                        <button class="btn btn-primary">Assgin</button>
+
                                     </td>
                                 </tr>
 
@@ -487,9 +476,8 @@
         </div>
     </div>
     <script>
-        function GetAttachments()
-        {
-            
+        function GetAttachments() {
+
             var currentCorp = angular.element(document.getElementById("BuyerEntityCtrl")).scope().currentContact;
             var files = [currentCorp.EINFile, currentCorp.File2, currentCorp.File3];
             files = files.filter(function (o) { return o })
@@ -528,9 +516,11 @@
                 JSONToCSVConvertor($scope.filteredCorps, true, $scope.GetTitle());
 
             }
+            $scope.loadPanelVisible = true;
             $http.get('/Services/ContactService.svc/GetAllBuyerEntities').success(function (data, status, headers, config) {
                 $scope.CorpEntites = data;
                 $scope.currentContact = $scope.CorpEntites[0];
+                $scope.loadPanelVisible = false;
             }).error(function (data, status, headers, config) {
                 alert('Get All buyers Entities error : ' + JSON.stringify(data))
             });
@@ -565,7 +555,11 @@
                 }
                 return corps.length;
             }
-
+            $scope.lookupDataSource = new DevExpress.data.ODataStore({
+                url: "/odata/LeadsInfoes",
+                key: "CategoryID",
+                keyType: "Int32"
+            }); 
             $scope.TeamCount = function (teamName) {
                 if (!$scope.CorpEntites) {
                     return 0;
@@ -585,17 +579,16 @@
 
                 var mSource = new DevExpress.data.CustomStore({
                     load: function (loadOptions) {
-                        if (loadOptions.searchValue)
-                        {
+                        if (loadOptions.searchValue) {
                             var q = loadOptions.searchValue;
-                            return employees.filter(function (e) { e.Email&&(e.Email.toLowerCase() == q.toLowerCase() || e.Name.toLowerCase() == q.toLowerCase()) }).slice(0, 10);
+                            return employees.filter(function (e) { e.Email && (e.Email.toLowerCase() == q.toLowerCase() || e.Name.toLowerCase() == q.toLowerCase()) }).slice(0, 10);
                         }
-                        return employees.slice(0,10);
+                        return employees.slice(0, 10);
                     },
                     byKey: function (key, extra) {
                         // . . .
                     },
-                  
+
 
                 });
                 return {
@@ -628,10 +621,13 @@
                 $scope.currentContact = contact
             }
             $scope.SaveCurrent = function () {
+                $scope.loadPanelVisible = true;
                 $http.post('/Services/ContactService.svc/SaveCorpEntitiy', { c: JSON.stringify($scope.currentContact) }).success(function (data, status, headers, config) {
+                    $scope.loadPanelVisible = false;
                     alert("Save succeed!")
                 }).error(function (data, status, headers, config) {
                     alert("Get error save corp entitiy : " + JSON.stringify(data))
+                    $scope.loadPanelVisible = false;
                 });
             }
             $scope.AllGroups = function () {
@@ -645,7 +641,9 @@
                 return groups;
             }
             $scope.addContactFunc = function () {
+                $scope.loadPanelVisible = true;
                 $http.post('/Services/ContactService.svc/SaveCorpEntitiy', { c: JSON.stringify($scope.addContact) }).success(function (data, status, headers, config) {
+                    $scope.loadPanelVisible = false;
                     if (!data) {
                         alert("Already have a entitity named " + $scope.addContact.CorpName + "! please pick other name");
                         return;
@@ -654,6 +652,7 @@
                     $scope.CorpEntites.push($scope.addContact);
                     alert("Add entity succeed !")
                 }).error(function (data, status, headers, config) {
+                    $scope.loadPanelVisible = false;
                     alert('Add buyer Entities error : ' + JSON.stringify(data))
                 });
             }
