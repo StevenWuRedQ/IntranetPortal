@@ -314,7 +314,7 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
 
             scope.loading = false;
             scope.folderEnable = scope.folderEnable == 'true' ? true : false;
-            scope.baseFolder = scope.fileFolder ? scope.fileFolder : '';
+            scope.baseFolder = scope.baseFolder ? scope.baseFolder : '';
 
 
             if (scope.fileColumns) {
@@ -328,7 +328,7 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             // reg events            
             scope.$watch('fileModel', function () {
                 scope.currentFolder = '';
-                scope.baseFolder = scope.fileFolder ? scope.fileFolder : '';
+                scope.baseFolder = scope.baseFolder ? scope.baseFolder : '';
                 scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined)
             })
 
@@ -397,16 +397,16 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                 scope.files = [];
             }
 
-            scope.toggleLoading = function () {
-                scope.loading = !scope.loading;
+            scope.showUpoading = function () {
+                scope.uploadProcess = true;
+                scope.dynamic = 1;
             }
-            scope.startLoading = function () {
-                scope.loading = true;
+            scope.hideUpoading = function () {
+                scope.uploadProcess = false;
             }
-            scope.stopLoading = function () {
-                $timeout(function () {
-                    scope.loading = false;
-                });
+            scope.showUploadErrors = function () {
+                var error = _.some(scope.result, function (el) { return el.error });
+                return !scope.uploading && error;
             }
 
             scope.OnDropTextarea = function (event) {
@@ -423,8 +423,8 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                 var targetFolder = (scope.baseFolder ? scope.baseFolder + '/' : '') + (scope.currentFolder ? scope.currentFolder + '/' : '')
                 scope.result = [];
                 var len = scope.files.length;
-
-                //scope.startLoading();
+                scope.showUpoading();
+                scope.uploading = true;
                 for (var i = 0; i < len; i++) {
                     var f = {};
                     f.name = ptFileService.getFileName(scope.files[i].name);
@@ -460,13 +460,18 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             scope.countCallback = function (total) {
                 if (scope.count >= total - 1) {
                     scope.$apply(function () {
-                        //scope.stopLoading();
-                        scope.clearChoosed();
+                        scope.count++;
+                        scope.dynamic = Math.floor(scope.count / total * 100);
                         scope.count = 0;
+                        scope.uploading = false;
+                        scope.clearChoosed();
                     });
                     return;
                 } else {
-                    scope.count++;
+                    $timeout(function () {
+                        scope.count++;
+                        scope.dynamic = Math.floor(scope.count / total * 100);
+                    })
                 }
             }
 

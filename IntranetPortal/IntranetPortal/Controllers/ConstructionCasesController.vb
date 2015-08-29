@@ -88,7 +88,6 @@ Namespace Controllers
             Dim bble = HttpContext.Current.Request.QueryString("bble")
             Dim fileName = HttpContext.Current.Request.QueryString("fileName")
             Dim fileFoler = HttpContext.Current.Request.QueryString("folder")
-            fileFoler = IIf(fileFoler.Last() = "/", fileFoler.Substring(0, fileFoler.Length - 1), fileFoler)
 
             If HttpContext.Current.Request.Files.Count > 0 Then
                 For i = 0 To HttpContext.Current.Request.Files.Count - 1
@@ -98,6 +97,7 @@ Namespace Controllers
 
                     Dim folderPath = String.Format("{0}/{1}", bble, "Construction")
                     If Not String.IsNullOrEmpty(fileFoler) Then
+                        fileFoler = IIf(fileFoler.Last() = "/", fileFoler.Substring(0, fileFoler.Length - 1), fileFoler)
                         folderPath = folderPath & "/" & fileFoler
                     End If
 

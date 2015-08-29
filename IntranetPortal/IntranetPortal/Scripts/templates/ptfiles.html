@@ -16,7 +16,7 @@
                 </ul>
             </div>
         </div>
-        <div ng-class="folderEnable?'ss_border':''" >
+        <div ng-class="folderEnable?'ss_border':''">
             <div style="max-height: 200px; overflow: auto;">
                 <table class="table table-condensed">
                     <tr ng-show="fileModel.length>0">
@@ -59,16 +59,16 @@
     </div>
 
     <div dx-popup="{
-                                height: 200,
-                                width: 600,
-                                showTitle: false,
-                                dragEnabled: true,
-                                shading: true,
-                                bindingOptions:{ visible: 'NewFolderPop' },
-                            }">
+        height: 200,
+        width: 600,
+        showTitle: false,
+        dragEnabled: true,
+        shading: true,
+        bindingOptions:{ visible: 'NewFolderPop' },
+        }">
         <div data-options="dxTemplate:{ name: 'content' }">
             <h5>FolderName</h5>
-            <input ng-model="NewFolderName"/>
+            <input ng-model="NewFolderName" />
             <hr>
             <div class="pull-right">
                 <button class="btn btn-danger" ng-click="toggleNewFilePop()">Cancel</button>
@@ -77,4 +77,52 @@
         </div>
     </div>
 
+    <div dx-popup="{
+        height: 600,
+        width: 600,
+        showTitle: false,
+        dragEnabled: false,
+        shading: true,
+        bindingOptions:{ visible: 'uploadProcess' },
+        }">
+        <div data-options="dxTemplate:{ name: 'content' }">
+            <div>
+                <div class="text-center text-warning" ng-show="uploading"><h3>File Uploading...</h3></div>
+                <div class="text-center text-success" ng-show="!uploading"><h3>Upload Complete</h3></div>
+                <br />
+                <br />
+                <div>
+                    <progressbar class="{{uploading?'progress-striped active':''}}" value="dynamic" type="{{uploading?'warning':'success'}}"><b>{{dynamic}}%</b></progressbar>
+                </div>
+                <div>
+                    <div ng-show="showUploadErrors()">
+                        <h5 class="text-danger">The following files upload fails, please upload again!</h5>
+                        <table class="table table-bordered table-condensed">
+                            <tr>
+                                <th>File Name</th>
+                                <th>error</th>
+                            </tr>
+                            <tr ng-repeat="file in result| filter: {error: ''} ">
+                                <td>
+                                    {{file.name}}
+                                </td>
+                                <td>
+                                    {{file.error}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div ng-show="uploading">
+                    <hr />
+                    <button type="button" class="btn btn-primary pull-right" ng-click="hideUpoading()">Cancel</button>
+                </div>
+                <div ng-show="!uploading">
+                    <hr />
+                    <button type="button" class="btn btn-primary pull-right" ng-click="hideUpoading()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
