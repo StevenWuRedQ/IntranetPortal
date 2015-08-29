@@ -23,7 +23,7 @@ Public Class LegalSummaryUI
 
         If (Not (User.IsInRole("Admin") Or User.IsInRole("Legal-Manager"))) Then
             Dim loginName = Page.User.Identity.Name
-            mCases = mCases.Where(Function(c) c.Attorney = loginName Or c.Attorney = loginName).ToList
+            mCases = mCases.Where(Function(c) c.Attorney = loginName Or c.ResearchBy = loginName).ToList
         End If
         gridUpCommingFCSale.DataSource = mCases
         gridUpCommingFCSale.GroupBy(gridUpCommingFCSale.Columns("SaleDate"))
@@ -33,7 +33,7 @@ Public Class LegalSummaryUI
     Function FilterByLogIn(cases As List(Of LegalCase)) As List(Of LegalCase)
         If (Not (User.IsInRole("Admin") Or User.IsInRole("Legal-Manager"))) Then
             Dim loginName = Page.User.Identity.Name
-            Return cases.Where(Function(c) (c.Attorney = loginName Or c.Attorney = loginName) AndAlso (c.Status = LegalCaseStatus.AttorneyHandle Or c.Status = LegalCaseStatus.LegalResearch)).ToList
+            Return cases.Where(Function(c) (c.Attorney = loginName Or c.ResearchBy = loginName) AndAlso (c.Status = LegalCaseStatus.AttorneyHandle Or c.Status = LegalCaseStatus.LegalResearch)).ToList
         End If
         Return cases
     End Function
