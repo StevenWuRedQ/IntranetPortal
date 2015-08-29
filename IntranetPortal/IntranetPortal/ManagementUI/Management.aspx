@@ -12,7 +12,7 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script src="/Scripts/globalize/globalize.js"></script>
-    <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.chartjs.js"></script>
+    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>
     <%--<script src="/Scripts/dx.webappjs.js"></script>
     <script src="/Scripts/dx.phonejs.js"></script>--%>
     <div class="container-fluid">

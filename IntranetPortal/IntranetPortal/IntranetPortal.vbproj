@@ -669,6 +669,7 @@
     <Compile Include="Controllers\BuildingCodes1Controller.vb" />
     <Compile Include="Controllers\ComplaintsController.vb" />
     <Compile Include="Controllers\ConstructionCasesController.vb" />
+    <Compile Include="Controllers\CorporationEntitiesController.vb" />
     <Compile Include="Controllers\ShortSaleLeadsInfoesController.vb" />
     <Compile Include="Controllers\TaxLiensController.vb" />
     <Compile Include="Controllers\TaxLiensODataController.vb" />
