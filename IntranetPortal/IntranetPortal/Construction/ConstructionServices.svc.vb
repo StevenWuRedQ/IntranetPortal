@@ -83,11 +83,11 @@ Public Class ConstructionServices
         Dim webGet = New HtmlWeb
 
         Dim doc = webGet.Load(uri)
-        Dim ecbViolationRow = doc.DocumentNode.SelectSingleNode("//tr[./td/b/a/text()='Violations-ECB (DOB)']")
+        Dim ecbViolationRow = doc.DocumentNode.SelectSingleNode("//tr[./td/b/a/text()='Violations-ECB (DOB)']|//tr[./td/b/text()='Violations-ECB (DOB)']")
         While ecbViolationRow Is Nothing
             Thread.Sleep(5000)  'DOB need 5secs to refresh the page!!
             doc = webGet.Load(uri)
-            ecbViolationRow = doc.DocumentNode.SelectSingleNode("//tr[./td/b/a/text()='Violations-ECB (DOB)']")
+            ecbViolationRow = doc.DocumentNode.SelectSingleNode("//tr[./td/b/a/text()='Violations-ECB (DOB)']|//tr[./td/b/text()='Violations-ECB (DOB)']")
         End While
         result.ECP_TotalViolation = ecbViolationRow.SelectSingleNode("./td[2]").InnerHtml.Trim
         result.ECP_TotalOpenViolations = ecbViolationRow.SelectSingleNode("./td[3]").InnerHtml.Trim
