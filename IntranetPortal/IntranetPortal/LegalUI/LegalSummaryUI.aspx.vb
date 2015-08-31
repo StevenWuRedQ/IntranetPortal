@@ -7,6 +7,11 @@ Public Class LegalSummaryUI
         If (Not IsPostBack) Then
             BindGrid()
             BindUpCommingFCGrid()
+            gridOSCs_DataBinding(Nothing, Nothing)
+            gridDeedReversions_DataBinding(Nothing, Nothing)
+            gridPartitions_DataBinding(Nothing, Nothing)
+            gridSPAndOther_DataBinding(Nothing, Nothing)
+            gridQTAs_DataBinding(Nothing, Nothing)
         End If
     End Sub
     Sub BindGrid()
@@ -56,5 +61,48 @@ Public Class LegalSummaryUI
     End Sub
 
   
+
+    Protected Sub gridOSCs_DataBinding(sender As Object, e As EventArgs)
+        If (gridOSCs.DataSource Is Nothing) Then
+            gridOSCs.DataSource = GetSecondaryTypeList(LegalSencdaryType.OSC)
+            gridOSCs.DataBind()
+        End If
+    End Sub
+    Function GetSecondaryTypeList(type As LegalSencdaryType) As List(Of LegalCase)
+
+        If (gdCases.DataSource IsNot Nothing) Then
+            Dim Cases = TryCast(gdCases.DataSource, List(Of LegalCase))
+            If (Cases IsNot Nothing) Then
+                Return Cases.Where(Function(c) c.SecondaryTypes IsNot Nothing AndAlso c.SecondaryTypes.Contains(CInt(type).ToString)).ToList()
+            End If
+
+        End If
+        Return Nothing
+    End Function
+
+    Protected Sub gridPartitions_DataBinding(sender As Object, e As EventArgs)
+        BindTypeGrid(gridPartitions, LegalSencdaryType.Partitions)
+    End Sub
+
+    Protected Sub gridQTAs_DataBinding(sender As Object, e As EventArgs)
+        BindTypeGrid(gridQTAs, LegalSencdaryType.QTA)
+
+    End Sub
+    
+
+    Protected Sub gridDeedReversions_DataBinding(sender As Object, e As EventArgs)
+        BindTypeGrid(gridDeedReversions, LegalSencdaryType.DeedReversions)
+    End Sub
+
+    Protected Sub gridSPAndOther_DataBinding(sender As Object, e As EventArgs)
+        BindTypeGrid(gridSPAndOther, LegalSencdaryType.Other)
+    End Sub
+
+    Private Sub BindTypeGrid(grid As DevExpress.Web.ASPxGridView.ASPxGridView, lType As LegalSencdaryType)
+        If (grid.DataSource Is Nothing) Then
+            grid.DataSource = GetSecondaryTypeList(lType)
+            grid.DataBind()
+        End If
+    End Sub
 
 End Class

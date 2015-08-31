@@ -25,5 +25,6 @@ Partial Public Class LegalCaseReport
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
     Public Property PropertyAddress As String
+    Public Property SecondaryTypes As String
 
 End Class

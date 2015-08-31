@@ -101,25 +101,68 @@
             <div class="row">
                 <div class="col-md-2">
                     <h3>OSC's</h3>
-                    <dx:ASPxGridView ID="gridOSCs" runat="server">
-
+                    <dx:ASPxGridView ID="gridOSCs" KeyFieldName="BBLE" runat="server" OnDataBinding="gridOSCs_DataBinding" Settings-ShowColumnHeaders="false">
+                        <Columns>
+                            <dx:GridViewDataColumn FieldName="CaseName">
+                                <Settings HeaderFilterMode="CheckedList" />
+                                <DataItemTemplate>
+                                    <div style="cursor: pointer;" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("BBLE"))%>'><%# Eval("CaseName")%></div>
+                                </DataItemTemplate>
+                            </dx:GridViewDataColumn>
+                        </Columns>
                     </dx:ASPxGridView>
                 </div>
                 <div class="col-md-2">
                     <h3>Partitions</h3>
-                    <dx:ASPxGridView ID="gridPartitions" runat="server"></dx:ASPxGridView>
+                    <dx:ASPxGridView ID="gridPartitions" KeyFieldName="BBLE" runat="server" OnDataBinding="gridPartitions_DataBinding" Settings-ShowColumnHeaders="false" >
+                          <Columns>
+                            <dx:GridViewDataColumn FieldName="CaseName">
+                                <Settings HeaderFilterMode="CheckedList" />
+                                <DataItemTemplate>
+                                    <div style="cursor: pointer;" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("BBLE"))%>'><%# Eval("CaseName")%></div>
+                                </DataItemTemplate>
+                            </dx:GridViewDataColumn>
+                        </Columns>
+                    </dx:ASPxGridView>
                 </div>
                 <div class="col-md-2">
                     <h3>QTA's</h3>
-                    <dx:ASPxGridView ID="gridQTAs" runat="server"></dx:ASPxGridView>
+                    <dx:ASPxGridView ID="gridQTAs" runat="server" KeyFieldName="BBLE" OnDataBinding="gridQTAs_DataBinding" Settings-ShowColumnHeaders="false">
+                          <Columns>
+                            <dx:GridViewDataColumn FieldName="CaseName">
+                                <Settings HeaderFilterMode="CheckedList" />
+                                <DataItemTemplate>
+                                    <div style="cursor: pointer;" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("BBLE"))%>'><%# Eval("CaseName")%></div>
+                                </DataItemTemplate>
+                            </dx:GridViewDataColumn>
+                        </Columns>
+                    </dx:ASPxGridView>
                 </div>
                 <div class="col-md-2">
                     <h3>Deed Reversions</h3>
-                    <dx:ASPxGridView ID="gridDeedReversions" runat="server"></dx:ASPxGridView>
+                    <dx:ASPxGridView ID="gridDeedReversions" KeyFieldName="BBLE" runat="server" OnDataBinding="gridDeedReversions_DataBinding" Settings-ShowColumnHeaders="false">
+                          <Columns>
+                            <dx:GridViewDataColumn FieldName="CaseName">
+                                <Settings HeaderFilterMode="CheckedList" />
+                                <DataItemTemplate>
+                                    <div style="cursor: pointer;" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("BBLE"))%>'><%# Eval("CaseName")%></div>
+                                </DataItemTemplate>
+                            </dx:GridViewDataColumn>
+                        </Columns>
+                    </dx:ASPxGridView>
                 </div>
                 <div class="col-md-2">
                     <h3>SP's and other Misc. actions</h3>
-                    <dx:ASPxGridView ID="gridSPAndOther" runat="server"></dx:ASPxGridView>
+                    <dx:ASPxGridView ID="gridSPAndOther" KeyFieldName="BBLE" runat="server" OnDataBinding="gridSPAndOther_DataBinding" Settings-ShowColumnHeaders="false">
+                          <Columns>
+                            <dx:GridViewDataColumn FieldName="CaseName">
+                                <Settings HeaderFilterMode="CheckedList" />
+                                <DataItemTemplate>
+                                    <div style="cursor: pointer;" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("BBLE"))%>'><%# Eval("CaseName")%></div>
+                                </DataItemTemplate>
+                            </dx:GridViewDataColumn>
+                        </Columns>
+                    </dx:ASPxGridView>
                 </div>
             </div>
         </div>

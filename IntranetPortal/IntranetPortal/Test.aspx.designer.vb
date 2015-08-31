@@ -41,11 +41,29 @@ Partial Public Class Test
     Protected WithEvents UpdateStauts As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''MySummary control.
+    '''CropNotes control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MySummary As Global.IntranetPortal.MySummary
+    Protected WithEvents CropNotes As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''CropGrid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CropGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''TestCrop control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TestCrop As Global.System.Web.UI.WebControls.Button
 End Class

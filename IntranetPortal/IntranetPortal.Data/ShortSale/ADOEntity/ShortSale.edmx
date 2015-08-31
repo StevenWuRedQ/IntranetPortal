@@ -34,7 +34,7 @@
           <Property Name="SubmittedtoAcris" Type="bit" />
           <Property Name="SubmittedOn" Type="datetime" />
           <Property Name="RecordedOn" Type="datetime" />
-          <Property Name="Notes" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="EINFile" Type="nvarchar" MaxLength="256" />
           <Property Name="File2" Type="nvarchar" MaxLength="256" />
           <Property Name="File3" Type="nvarchar" MaxLength="256" />
@@ -1117,7 +1117,7 @@
           <Property Name="SubmittedtoAcris" Type="Boolean" />
           <Property Name="SubmittedOn" Type="DateTime" Precision="3" />
           <Property Name="RecordedOn" Type="DateTime" Precision="3" />
-          <Property Name="Notes" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="EINFile" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="File2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="File3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />

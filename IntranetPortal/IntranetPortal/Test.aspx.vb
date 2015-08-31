@@ -63,5 +63,28 @@ Public Class Test
     End Sub
 
 
+    Protected Sub CropGrid_DataBinding(sender As Object, e As EventArgs)
+        If (CropGrid.DataSource Is Nothing) Then
+            CropGrid.DataSource = JArray.Parse(Data.CorporationEntity.GetAllEntities.ToJsonString).ToList
+            CropGrid.DataBind()
+        End If
+    End Sub
+
+    Protected Sub TestCrop_Click(sender As Object, e As EventArgs)
+        Dim CorpNotesList = JArray.Parse(CropNotes.Text)
+        Dim Conps = Data.CorporationEntity.GetAllEntities
+        Dim result = New List(Of String)
+        For Each c In Conps
+            If (c.Notes) Then
+                Dim cNotes = CorpNotesList.Where(Function(n) n.Item("Corp_Name").ToString = c.Notes).ToList()
+                If (cNotes.Count > 0) Then
+                    Dim cNotesStr = cNotes.Select(Function(n) "BBLE:(" & n.Item("BBLE").ToString & n.Item("NUMBER").ToString & " " & n.Item("NEIGH_NAME").ToString)
+                End If
+
+            End If
+
+            result.Add(If(c.Notes, c.Notes, "NULL"))
+        Next
+    End Sub
 End Class
 
