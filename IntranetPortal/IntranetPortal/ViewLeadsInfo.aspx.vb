@@ -101,7 +101,7 @@
         If ShortSaleManage.IsInShortSale(bble) Then
             If Not Page.ClientScript.IsStartupScriptRegistered("ReloadHomebreakCtr") Then
                 Dim js As String = "<script type=""text/javascript"">" & _
-                                   "$(function () {setTimeout(reloadHomeBreakCtrl(leadsInfoBBLE),3000)});" & _
+                                   "$(function () {setTimeout(reloadHomeBreakCtrl(leadsInfoBBLE),1000)});" & _
                                    "</script>"
                 Page.ClientScript.RegisterStartupScript(Me.GetType, "ReloadHomebreakCtr", js)
             End If
