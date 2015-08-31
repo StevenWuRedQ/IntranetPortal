@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="LegalSecondaryActionTab.ascx.vb" Inherits="IntranetPortal.LegalSecondaryActionTab" %>
+<%@ Import Namespace="IntranetPortal.Data" %>
+<%@ Import Namespace="IntranetPortal" %>
 <%@ Register TagPrefix="uc1" TagName="legalsecondaryactions" Src="~/LegalUI/LegalSecondaryActions.ascx" %>
 <div class="legalui short_sale_content">
 
@@ -10,12 +12,31 @@
         </div>
     </div>
     <div>
-       
-        <h4 class="ss_form_title">Order to show case <span style="transform: none; font-size: 12px;">(Mark as * need to fill other read only here)</span>
-             <i  class="fa fa-download icon_btn color_blue tooltip-examples" title="Download OSC Document" ng-click="DocGenerator('OSCTemplate.docx')"></i>
-           
+        <h4 class="ss_form_title">Tag Types
         </h4>
-        
+       
+        <div dx-tag-box="{
+            dataSource: [ <% For Each v In Utility.Enum2Dictinary(GetType(IntranetPortal.Data.LegalSencdaryType))%> {'id': <%=v.Key %>, 'text':'<%=v.Value%>'}, <% Next%> ],
+            displayExpr: 'text',
+            valueExpr: 'id',
+             bindingOptions: {
+           
+            values: {
+                deep: true,
+                dataPath: 'LegalCase.SecondaryTypes'
+            }
+            }
+        }
+             ">
+        </div>
+    </div>
+    <div class="ss_form cssSlideUp" ng-show="CheckSecondaryTags(1)">
+
+        <h4 class="ss_form_title">Order to show case <span style="transform: none; font-size: 12px;">(Mark as * need to fill other read only here)</span>
+            <i class="fa fa-download icon_btn color_blue tooltip-examples" title="Download OSC Document" ng-click="DocGenerator('OSCTemplate.docx')"></i>
+
+        </h4>
+
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Plantiff</label>
@@ -25,8 +46,8 @@
                 <label class="ss_form_input_title">Plantiff Attorney</label>
                 <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlantiffAttorney" readonly="readonly">
             </li>
-            
-            <li class="ss_form_item" style="width:97%">
+
+            <li class="ss_form_item" style="width: 97%">
                 <label class="ss_form_input_title">Plantiff Attorney Address *</label>
                 <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlantiffAttorneyAddress">
             </li>
@@ -46,9 +67,9 @@
                 <label class="ss_form_input_title">Block/Lot</label>
                 <input class="ss_form_input" ng-value="LeadsInfo.Block+'/'+ LeadsInfo.Lot" readonly="readonly">
             </li>
-            <li class="ss_form_item " style="width:97%">
+            <li class="ss_form_item " style="width: 97%">
                 <label class="ss_form_input_title">Court Address *</label>
-                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.CourtAddress" >
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.CourtAddress">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Defendant *</label>
@@ -62,6 +83,22 @@
 
 
     </div>
+
+     <div class="ss_formc ssSlideUp" ng-show="CheckSecondaryTags(2)">
+
+        <h4 class="ss_form_title"> 
+            Partitions
+        </h4>
+
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                Partitions test
+            </li>
+        </ul>
+
+
+    </div>
+
     <div>
         <h4 class="ss_form_title">Other Defendants * <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="NGAddArrayitemScope('LegalCtrl','LegalCase.SecondaryInfo.Defendants')" title="Add" style="font-size: 18px"></i></h4>
 

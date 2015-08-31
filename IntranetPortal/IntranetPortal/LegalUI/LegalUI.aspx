@@ -595,6 +595,7 @@
 
         <script type="text/javascript">
             LegalCaseBBLE = null;
+           
             function VendorsClosing(s) {
                 GetContactCallBack();
             }
@@ -644,6 +645,7 @@
             portalApp.controller('LegalCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
                 $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
                 $scope.ptContactServices = ptContactServices;
+                
                 $scope.ptCom = ptCom;
                 //if (leadsInfoBBLE) {
                 //    $http.post('/Services/ContactService.svc/CheckInShortSale', { "BBLE": leadsInfoBBLE }).success(function (data) {
@@ -889,7 +891,7 @@
 
                 }
                 $scope.LegalCase.SecondaryInfo.StatuteOfLimitations = [];
-
+                $scope.LegalCase.SecondaryTypes = []
                 $scope.LoadLeadsCase = function (BBLE) {
                     $scope.startLoading();
                     $("#ctl00_MainContentPH_ASPxSplitter1_1,#ctl00_MainContentPH_ASPxSplitter1_2").css('visibility', 'visible');
@@ -903,7 +905,7 @@
                             $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
                             $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
 
-                            var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate", ];
+                            var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate" ];
                             for (a in arrays) {
                                 var porp = arrays[a]
                                 var array = $scope.LegalCase.ForeclosureInfo[porp];
@@ -912,6 +914,7 @@
                                     $scope.LegalCase.ForeclosureInfo[porp].push({});
                                 }
                             }
+                            $scope.LegalCase.SecondaryTypes = $scope.LegalCase.SecondaryTypes|| []
                             $scope.showSAndCFrom();
 
                             LegalCaseBBLE = BBLE;
@@ -1052,12 +1055,27 @@
                             }
                         }
                         ptCom.DocGenerator(tpl.tplName, tpl.data, function (url) {
-                            window.open(url,'blank');
+                            //window.open(url,'blank');
+                            var link = document.createElement("a");
+                            link.href = url;
+
+                            //set the visibility hidden so it will not effect on your web-layout
+                            link.style = "visibility:hidden";
+                            link.download = "OSC" + ".docx";
+
+                            //this part will append the anchor tag and remove it after automatic click
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
                         });
                     }else
                     {
                         alert("can find tlp "+tplName)
                     }
+                }
+                $scope.CheckSecondaryTags = function(tag)
+                {
+                    return $scope.LegalCase.SecondaryTypes.filter(function (t) { return t == tag })[0];
                 }
                 var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Value": "", "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ", "ArrayName": "" },
                                 { "Name": "EveryOneIn", "CallFunc": "", "Value": "false", "Description": "Nobody is part of the estate served .", "ArrayName": "" },
@@ -1292,7 +1310,7 @@
                         return true;
                     else return false;
                 }
-
+              
                 $scope.initMissInCert = function () {
                     return {
                         dataSource: $scope.missingItems,
@@ -1303,7 +1321,7 @@
                         }
                     };
                 }
-                //--Steven code part--
+                //-- end Steven code part--
 
                 $scope.ShowAddPopUp = function (event) {
                     $scope.addCommentTxt = "";

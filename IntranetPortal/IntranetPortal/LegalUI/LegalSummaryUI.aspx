@@ -101,7 +101,9 @@
             <div class="row">
                 <div class="col-md-2">
                     <h3>OSC's</h3>
-                    <dx:ASPxGridView ID="gridOSCs" runat="server"></dx:ASPxGridView>
+                    <dx:ASPxGridView ID="gridOSCs" runat="server">
+
+                    </dx:ASPxGridView>
                 </div>
                 <div class="col-md-2">
                     <h3>Partitions</h3>

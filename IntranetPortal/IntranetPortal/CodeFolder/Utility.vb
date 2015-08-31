@@ -51,7 +51,8 @@ Public Class Utility
 
         Dim vals = [Enum].GetValues(cEnum)
         For Each v In vals
-            VenderTypes.Add(CInt(v), v.ToString())
+
+            VenderTypes.Add(CInt(v), Core.Utility.GetEnumDescription(v))
         Next
         Return VenderTypes
     End Function

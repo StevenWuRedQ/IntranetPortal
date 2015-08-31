@@ -176,3 +176,17 @@ Public Enum DataStatus
     <Description("Dismissed w/o Prejudice")>
     DismissedWithoutPrejudice = 9
 End Enum
+
+
+Public Enum LegalSencdaryType
+    <Description("Order to show case")>
+    OSC = 1
+    <Description("Partitions")>
+    Partitions = 2
+    <Description("QTA")>
+    QTA = 3
+    <Description("DeedReversions")>
+    DeedReversions = 4
+    <Description("Special and other Misc. actions")>
+    Other = 5
+End Enum
