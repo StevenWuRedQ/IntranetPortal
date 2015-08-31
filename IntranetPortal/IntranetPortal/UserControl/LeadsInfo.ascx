@@ -344,46 +344,72 @@
         var target = angular.element(homeBreakDownCtrl);
         var $injector = target.injector();
         if ($injector) {
-        $injector.invoke(function ($compile, ptCom, ptHomeBreakDownService) {
-            var compiled = $compile(homeBreakDownCtrl.innerHTML);
-            var $scope = target.scope();
-            /* think as setup controller */
-            $scope.PropFloors = [];
-            $scope.BBLE = bble;
-            $scope.init = function (bble) {
-                ptHomeBreakDownService.loadByBBLE(bble, function (res) {
-                    debugger;
-                    $scope.PropFloors = res?res: [];
-                });
-            }
+            $injector.invoke(function ($compile, ptCom, ptHomeBreakDownService) {
+                var compiled = $compile(homeBreakDownCtrl.innerHTML);
+                var $scope = target.scope();
+                /* think as setup controller */
+                $scope.PropFloors = [];
+                $scope.BBLE = bble;
+                $scope.init = function (bble) {
+                    ptHomeBreakDownService.loadByBBLE(bble, function (res) {
+                        debugger;
+                        $scope.PropFloors = res ? res : [];
+                    });
+                }
 
-            $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
-            $scope.arrayRemove = ptCom.arrayRemove;
+                $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
+                $scope.arrayRemove = ptCom.arrayRemove;
 
-            $scope.setPopupVisible = function (model, bVal) {
-                model.popupVisible = bVal;
-            }
+                $scope.setPopupVisible = function (model, bVal) {
+                    model.popupVisible = bVal;
+                }
 
-            $scope.addNewUnit = function () {
-                $scope.ensurePush('PropFloors');
-                $scope.setPopupVisible($scope.PropFloors[$scope.PropFloors.length - 1], true);
-            }
-            $scope.saveHomeBreakDown = function () {
+                $scope.addNewUnit = function () {
+                    $scope.ensurePush('PropFloors');
+                    $scope.setPopupVisible($scope.PropFloors[$scope.PropFloors.length - 1], true);
+                }
+                $scope.saveHomeBreakDown = function () {
                     ptHomeBreakDownService.save($scope.BBLE, $scope.PropFloors, function (res) {
-                    console.log(res);
-                    alert('Save Successfullly!');
-                })
-            }
+                        console.log(res);
+                        alert('Save Successfullly!');
+                    })
+                }
 
-            /* end setup*/
-            var cElem = compiled($scope);
-            $scope.$digest();
-            target.html(cElem);
+                /* end setup*/
+                var cElem = compiled($scope);
+                $scope.$digest();
+                target.html(cElem);
+            });
+            debugger;
+            target.scope().init(bble);
+        }
+    }
+    angular.module('PortalApp').controller('homeBreakDownCtrl', function ($scope, ptCom, ptHomeBreakDownService) {
+
+        $scope.PropFloors = [];
+        $scope.BBLE = leadsInfoBBLE;
+
+        $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
+        $scope.arrayRemove = ptCom.arrayRemove;
+
+        $scope.setPopupVisible = function (model, bVal) {
+            model.popupVisible = bVal;
+        }
+
+        $scope.addNewUnit = function () {
+            $scope.ensurePush('PropFloors');
+            $scope.setPopupVisible($scope.PropFloors[$scope.PropFloors.length - 1], true);
+        }
+        $scope.saveHomeBreakDown = function () {
+            ptHomeBreakDownService.save($scope.BBLE, $scope.PropFloors, function (res) {
+                console.log(res);
+                alert('Save Successfullly!');
+            })
+        }
+        ptHomeBreakDownService.loadByBBLE(leadsInfoBBLE, function (res) {
+            $scope.PropFloors = res ? res : [];
         });
-        debugger;
-        target.scope().init(bble);
-    }
-    }
+    })
 </script>
 <script src="/Scripts/stevenjs.js"></script>
 <style type="text/css">

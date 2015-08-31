@@ -16,6 +16,9 @@
 
             <%-- list panel  --%>
             <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
+                <PaneStyle>
+                    <Paddings Padding="0px"></Paddings>
+                </PaneStyle>
                 <ContentCollection>
                     <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
                         <uc1:ConstructionCaseList runat="server" ID="ConstructionCaseList" />
@@ -25,6 +28,9 @@
 
             <%-- data panel     --%>
             <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="None" PaneStyle-Paddings-Padding="0px" Name="dataPane">
+                <PaneStyle>
+                    <Paddings Padding="0px"></Paddings>
+                </PaneStyle>
                 <ContentCollection>
                     <dx:SplitterContentControl>
                         <div id="ConstructionCtrl" ng-controller="ConstructionCtrl" style="align-content: center;">
@@ -162,6 +168,9 @@
 
             <%-- log panel --%>
             <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9" PaneStyle-Paddings-Padding="0px" Name="LogPanel">
+                <PaneStyle BackColor="#F9F9F9">
+                    <Paddings Padding="0px"></Paddings>
+                </PaneStyle>
                 <ContentCollection>
                     <dx:SplitterContentControl>
                         <div style="font-size: 12px; color: #9fa1a8;">
@@ -216,7 +225,11 @@
                             <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
                                 AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                 ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
-                                <ItemStyle Paddings-PaddingLeft="20px" />
+                                <ItemStyle Paddings-PaddingLeft="20px">
+                                    <Paddings PaddingLeft="20px"></Paddings>
+                                </ItemStyle>
+
+                                <Paddings PaddingTop="15px" PaddingBottom="18px"></Paddings>
                                 <Items>
                                     <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
                                     <dx:MenuItem Text="Next Week" Name="nextWeek"></dx:MenuItem>
@@ -279,7 +292,8 @@
             $scope.ptContactServices = ptContactServices;
             $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
             $scope.CSCase = {}
-            $scope.ReloadedData = {}
+            $scope.
+                edData = {}
             $scope.CSCase.CSCase = {
                 InitialIntake: {},
                 Photos: {},
@@ -494,6 +508,41 @@
                 $scope.HeaderEditing = !$scope.HeaderEditing;
             }
             /* end header editing */
+
+            /* dob fetch */
+            $scope.fetchDOBViolations = function () {
+                var dialog = DevExpress.ui.dialog.confirm("Get the information from DOB will take a while\n and REPLACE your current Data, are you sure to continue?", "Warning");
+                dialog.done(function (confirmed) {
+                    if (confirmed) {
+                        ptConstructionService.getDOBViolations($scope.CSCase.BBLE, function (error, res) {
+                            if (error) {
+                                alert(error);
+                                console.log(error)
+                            } else {
+                                var dialog = DevExpress.ui.dialog.confirm("Your current DOB Violation data will be replaced?", "Warning");
+                                dialog.done(function (confirmed) {
+                                    if (confirmed) {
+                                        var data = JSON.parse(res.d)
+                                        $scope.$apply(function () {
+                                            if (data.DOB_TotalDOBViolation) $scope.CSCase.CSCase.Violations.DOB_TotalDOBViolation = data.DOB_TotalDOBViolation;
+                                            if (data.DOB_TotalOpenViolations) $scope.CSCase.CSCase.Violations.DOB_TotalOpenViolations = data.DOB_TotalOpenViolations;
+                                            if (data.violations) $scope.CSCase.CSCase.Violations.DOBViolations = data.violations;
+                                        })
+                                    }
+                                })
+
+                            }
+                        })
+                    }
+
+                })
+
+            }
+            $scope.fetchECBViolations = function () {
+
+            }
+
+            /* end dob fetch */
         }]);
     </script>
 

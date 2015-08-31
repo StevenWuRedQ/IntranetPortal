@@ -450,10 +450,25 @@ app.service('ptConstructionService', [
                 var url = "/Construction/ConstructionServices.svc/GetDOBViolations?bble=" + bble
                 $http.get(url)
                 .success(function (res) {
-                    if(callback) callback(res)
+                    if (callback) callback(null, res)
                 }).error(function () {
-                    console.log("load dob violations fails")
+                    if (callback) callback("load dob violations fails")
                 })
+            } else {
+                if(callback) callback("bble is missing")
+            }
+        }
+
+        this.getECBViolations = function (bble, callback) {
+            if (bble) {
+                var url = "/Construction/ConstructionServices.svc/GetECBViolations?bble=" + bble
+                $http.get(url)
+                .success(function (res) {
+                    if(callback) callback(null, res)
+                }).error(function () {
+                    if(callback) callback("load ecb violations fails")
+                })
+
             }
         }
     }

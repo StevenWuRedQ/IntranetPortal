@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGShortSaleInLeadsView.ascx.vb" Inherits="IntranetPortal.NGShortSaleInLeadsView" %>
-<div id="homeBreakDownCtrl" class="ss_form" style="margin: 20px">
+<div id="homeBreakDownCtrl" ng-controller="homeBreakDownCtrl" class="ss_form" style="margin: 20px">
     <h4 class="ss_form_title">Home Breakdown&nbsp;
         <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="addNewUnit()" title="Add"></i>&nbsp;
         <i class="fa fa-save color_blue_edit collapse_btn" title="Save Home Breakdown" ng-click="saveHomeBreakDown()"></i>

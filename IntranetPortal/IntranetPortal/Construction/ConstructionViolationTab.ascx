@@ -131,7 +131,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <div class="ss_form" >
@@ -156,7 +155,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Auto population From DOB Site</label>
-                <input class="ss_form_input" type="checkbox" />
+                <button type="button" class="btn btn-danger btn-sm " ng-click="fetchDOBViolations()">Fetch From DOB</button>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Total DOB Violations</label>
@@ -309,7 +308,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Autopopulation From ECB Site</label>
-                <input class="ss_form_input" type="checkbox" />
+                <button type="button" class="btn btn-danger" ng-click="fetchECBViolations()">Fetch From DOB</button>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Total ECB Violations</label>
@@ -415,7 +414,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>Respondent</label>
-                                            <input class="form-control" ng-model="violation.Respondent" ss-date />
+                                            <input class="form-control" ng-model="violation.Respondent"/>
                                         </div>
 
                                         <div class="col-sm-6">
@@ -426,7 +425,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>Filed Date</label>
-                                            <input class="form-control" ng-model="violation.FiledDate" />
+                                            <input class="form-control" ng-model="violation.FiledDate" ss-date/>
                                         </div>
 
                                         <div class="col-sm-6">
