@@ -60,7 +60,7 @@ Public Class ConstructionServices
                     Thread.Sleep(5000)
                     detailPage = webGet.Load(detailPageLink)
                 End While
-                detail.ECBViolationNumber = detailPage.DocumentNode.SelectSingleNode("//td[text()='ECB No.:']/following::td").InnerHtml.Trim
+                detail.ECBViolationNumber = getLinkContent(detailPage.DocumentNode.SelectSingleNode("//td[text()='ECB No.:']/following::td").InnerHtml.Trim)
                 detail.ViolationStatus = cleanStatus(detailPage.DocumentNode.SelectSingleNode("//td[text()='Violation Category:']/following::td").InnerHtml.Trim)
                 detail.TypeOfViolations = detailPage.DocumentNode.SelectSingleNode("//td[text()='Violation Type:']/following::td").InnerHtml.Trim
                 detail.Description = detailPage.DocumentNode.SelectSingleNode("//td[text()='Description:']/following::td").InnerHtml.Trim
@@ -110,7 +110,7 @@ Public Class ConstructionServices
                 detail.HearingStatus = cleanNbsp(violationRow.SelectSingleNode("./td[4]").InnerHtml.Trim)
                 detail.FiledDate = cleanNbsp(violationRow.SelectSingleNode("./td[5]").InnerHtml.Trim)
                 detail.infractionCodes = cleanNbsp(violationRow.SelectSingleNode("./td[6]").InnerHtml.Trim)
-                detail.Severity = cleanNbsp(violationRow.SelectSingleNode("./following::tr/td[2]").InnerHtml.Trim)
+                detail.Severity = replaceB(cleanNbsp(violationRow.SelectSingleNode("./following::tr/td[2]").InnerHtml.Trim))
                 detail.violationType = cleanNbsp(violationRow.SelectSingleNode("./following::tr/td[4]").InnerHtml.Trim)
                 result.violations.Add(detail)
             Next
@@ -121,7 +121,7 @@ Public Class ConstructionServices
     End Function
 
     Public Shared Function cleanStatus(dirty As String) As String
-        Dim patten = "^V\*?(\\r|\\n|\\t|\s|-)*"
+        Dim patten = "^V(\*|%)?(\\r|\\n|\\t|\s|-)*"
         Return Regex.Replace(dirty, patten, "")
     End Function
 
@@ -131,7 +131,17 @@ Public Class ConstructionServices
     End Function
 
     Public Shared Function getLinkContent(link As String) As String
-        Return ""
+        Dim patten = "<a[^>]*>(\w+)</a>"
+        Dim match = Regex.Matches(link, patten)
+        If (match.Count > 0) Then
+            Return match.Item(0).Groups(1).Value
+        Else
+            Return ""
+        End If
+    End Function
+
+    Public Shared Function replaceB(content As String) As String
+        Return Regex.Replace(content, "<b>Severity:</b>", "")
     End Function
 End Class
 

@@ -539,7 +539,33 @@
 
             }
             $scope.fetchECBViolations = function () {
+                var dialog = DevExpress.ui.dialog.confirm("Get the information from DOB will REPLACE your current data, yes to continue?", "Warning");
+                dialog.done(function (confirmed) {
+                    if (confirmed) {
+                        ptConstructionService.getECBViolations($scope.CSCase.BBLE, function (error, res) {
+                            if (error) {
+                                alert(error);
+                                console.log(error)
+                            } else {
+                                var dialog = DevExpress.ui.dialog.confirm("Your current ECB Violation data will be replaced?", "Warning");
+                                dialog.done(function (confirmed) {
+                                    if (confirmed) {
+                                        var data = JSON.parse(res.d)
+                                        $scope.$apply(function () {
+                                            if (data.ECP_TotalViolation) $scope.CSCase.CSCase.Violations.ECP_TotalViolation = data.ECP_TotalViolation;
+                                            if (data.ECP_TotalOpenViolations) $scope.CSCase.CSCase.Violations.ECP_TotalOpenViolations = data.ECP_TotalOpenViolations;
+                                            if (data.violations) {
+                                                $scope.CSCase.CSCase.Violations.ECBViolations = _.filter(data.violations, function (el, i) { return el.DOBViolationStatus.startsWith("OPEN") });
+                                            }
+                                        })
+                                    }
+                                })
 
+                            }
+                        })
+                    }
+
+                })
             }
 
             /* end dob fetch */

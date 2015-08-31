@@ -308,7 +308,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Autopopulation From ECB Site</label>
-                <button type="button" class="btn btn-danger" ng-click="fetchECBViolations()">Fetch From DOB</button>
+                <button type="button" class="btn btn-danger btn-sm" ng-click="fetchECBViolations()">Fetch From DOB</button>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Total ECB Violations</label>
