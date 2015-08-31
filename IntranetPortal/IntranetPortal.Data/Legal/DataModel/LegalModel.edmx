@@ -33,6 +33,7 @@
           <Property Name="LegalStatus" Type="int" />
           <Property Name="FollowUp" Type="datetime" />
           <Property Name="SaleDate" Type="datetime" />
+          <Property Name="SecondaryTypes" Type="nvarchar" MaxLength="256" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
@@ -71,7 +72,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalCaseReport' does not have 
           <Key>
             <PropertyRef Name="BBLE" />
           </Key>
-          <Property Name="SaleDate" Type="datetime" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="CaseName" Type="nvarchar" MaxLength="256" />
           <Property Name="ResearchBy" Type="nvarchar" MaxLength="50" />
@@ -85,6 +85,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalCaseReport' does not have 
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="SaleDate" Type="datetime" />
         </EntityType>
         <EntityContainer Name="LegalModelStoreContainer">
           <EntitySet Name="LawReferences" EntityType="Self.LawReferences" Schema="dbo" store:Type="Tables" />
@@ -93,7 +94,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalCaseReport' does not have 
           <EntitySet Name="LegalRoboSignor" EntityType="Self.LegalRoboSignor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalCaseReport" EntityType="Self.LegalCaseReport" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [LegalCaseReport].[SaleDate] AS [SaleDate], 
     [LegalCaseReport].[BBLE] AS [BBLE], 
     [LegalCaseReport].[CaseName] AS [CaseName], 
     [LegalCaseReport].[ResearchBy] AS [ResearchBy], 
@@ -106,7 +106,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalCaseReport' does not have 
     [LegalCaseReport].[UpdateBy] AS [UpdateBy], 
     [LegalCaseReport].[CreateDate] AS [CreateDate], 
     [LegalCaseReport].[CreateBy] AS [CreateBy], 
-    [LegalCaseReport].[PropertyAddress] AS [PropertyAddress]
+    [LegalCaseReport].[PropertyAddress] AS [PropertyAddress], 
+    [LegalCaseReport].[SaleDate] AS [SaleDate]
     FROM [dbo].[LegalCaseReport] AS [LegalCaseReport]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -138,6 +139,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalCaseReport' does not have 
           <Property Name="LegalStatus" Type="Int32" />
           <Property Name="FollowUp" Type="DateTime" Precision="3" />
           <Property Name="SaleDate" Type="DateTime" Precision="3" />
+          <Property Name="SecondaryTypes" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LegalJudge">
           <Key>
@@ -211,6 +213,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalCaseReport' does not have 
           <EntitySetMapping Name="LegalCases">
             <EntityTypeMapping TypeName="LegalModel.LegalCase">
               <MappingFragment StoreEntitySet="LegalCase">
+                <ScalarProperty Name="SecondaryTypes" ColumnName="SecondaryTypes" />
                 <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
                 <ScalarProperty Name="FollowUp" ColumnName="FollowUp" />
                 <ScalarProperty Name="LegalStatus" ColumnName="LegalStatus" />

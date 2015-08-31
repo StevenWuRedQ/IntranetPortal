@@ -24,5 +24,6 @@ Partial Public Class LegalCase
     Public Property LegalStatus As Nullable(Of Integer)
     Public Property FollowUp As Nullable(Of Date)
     Public Property SaleDate As Nullable(Of Date)
+    Public Property SecondaryTypes As String
 
 End Class
