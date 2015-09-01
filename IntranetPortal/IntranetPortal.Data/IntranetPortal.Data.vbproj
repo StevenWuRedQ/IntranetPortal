@@ -145,6 +145,7 @@
     <Compile Include="Legal\LegalCaseReport.vb" />
     <Compile Include="Legal\LegalJudge.vb" />
     <Compile Include="Legal\LegalRoboSignor.vb" />
+    <Compile Include="Management\RulesEngineServices.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -161,6 +162,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Service References\DataAPI\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RulesEngine\Reference.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -454,6 +460,19 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\DataAPI\WCFMacros.wsdl" />
+    <None Include="Service References\RulesEngine\IntranetPortal.Data.RulesEngine.BaseRule.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\RulesEngine\IntranetPortal.RulesEngine.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RulesEngine\service.wsdl" />
+    <None Include="Service References\RulesEngine\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RulesEngine\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ShortSale\ADOEntity\ShortSale.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ShortSale.edmx</DependentUpon>
@@ -483,6 +502,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\DataAPI\" />
+    <WCFMetadataStorage Include="Service References\RulesEngine\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\DataAPI\item.disco" />
@@ -495,6 +515,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\DataAPI\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Service References\RulesEngine\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RulesEngine\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RulesEngine\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>

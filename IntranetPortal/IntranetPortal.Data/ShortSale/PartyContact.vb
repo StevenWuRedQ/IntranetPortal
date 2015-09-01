@@ -70,8 +70,9 @@ Partial Public Class PartyContact
                                         .Name = emp.Name,
                                         .Office = emp.Department,
                                         .Email = emp.Email,
-                                        .Cell = emp.Cellphone,
-                                        .Type = ContactType.Employee
+                                        .Cell = emp.CellPhone,
+                                        .Type = ContactType.Employee,
+                                        .GroupId = 3
                                         }).ToList
 
                 For Each emp In result.Where(Function(em) em.ContactId = 0).Distinct

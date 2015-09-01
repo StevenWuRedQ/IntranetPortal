@@ -1,7 +1,7 @@
 /*! 
 * DevExtreme (Single Page App Framework)
-* Version: 14.2.4
-* Build date: Jan 16, 2015
+* Version: 15.1.6
+* Build date: Aug 14, 2015
 *
 * Copyright (c) 2012 - 2015 Developer Express Inc. ALL RIGHTS RESERVED
 * EULA: https://www.devexpress.com/Support/EULAs/DevExtreme.xml
@@ -47,24 +47,20 @@ if (!DevExpress.MOD_FRAMEWORK) {
             };
         var resolveTextValue = function(command, containerOptions) {
                 var showText = resolvePropertyValue(command, containerOptions, "showText"),
-                    hasIcon = !!command.option("icon") || command.option("iconSrc"),
+                    hasIcon = !!command.option("icon"),
                     titleValue = resolvePropertyValue(command, containerOptions, "title", "");
                 return showText || !hasIcon ? titleValue : ""
             };
-        var resolveIconValue = function(command, containerOptions, propertyName) {
+        var resolveIconValue = function(command, containerOptions) {
                 var showIcon = resolvePropertyValue(command, containerOptions, "showIcon"),
                     hasText = !!command.option("title"),
-                    iconValue = resolvePropertyValue(command, containerOptions, propertyName, "");
+                    iconValue = resolvePropertyValue(command, containerOptions, "icon", "");
                 return showIcon || !hasText ? iconValue : ""
-            };
-        var resolveTypeValue = function(command, containerOptions) {
-                return resolvePropertyValue(command, containerOptions, "type")
             };
         DX.framework = {
             utils: {
                 mergeCommands: mergeCommands,
                 commandToContainer: {
-                    resolveTypeValue: resolveTypeValue,
                     resolveIconValue: resolveIconValue,
                     resolveTextValue: resolveTextValue,
                     resolvePropertyValue: resolvePropertyValue
@@ -102,7 +98,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
             W3002: "A view with the '{0}' key has already been released.",
             W3003: "Layout resolving context:\n{0}\nAvailable layout controller registrations:\n{1}\n",
             W3004: "Layout resolving context:\n{0}\nConcurent layout controller registrations for the context:\n{1}\n",
-            W3005: "Direct hash-based navigation is detected. Use data-bind=\"dxAction: url\" instead of href=\"#url\".\nFound markup:\n{0}\n"
+            W3005: "Direct hash-based navigation is detected in a mobile application. Use data-bind=\"dxAction: url\" instead of href=\"#url\" to avoid navigation issues.\nFound markup:\n{0}\n"
         })
     })(jQuery, DevExpress);
     /*! Module framework, file framework.routing.js */
@@ -328,7 +324,6 @@ if (!DevExpress.MOD_FRAMEWORK) {
     })(jQuery, DevExpress);
     /*! Module framework, file framework.command.js */
     (function($, DX) {
-        var ui = DX.ui;
         var Command = DX.DOMComponent.inherit({
                 ctor: function(element, options) {
                     if ($.isPlainObject(element)) {
@@ -342,10 +337,16 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 },
                 _setDeprecatedOptions: function() {
                     this.callBase();
-                    $.extend(this._deprecatedOptions, {action: {
+                    $.extend(this._deprecatedOptions, {
+                        action: {
                             since: "14.2",
                             alias: "onExecute"
-                        }})
+                        },
+                        iconSrc: {
+                            since: "15.1",
+                            alias: "icon"
+                        }
+                    })
                 },
                 _setDefaultOptions: function() {
                     this.callBase();
@@ -354,9 +355,9 @@ if (!DevExpress.MOD_FRAMEWORK) {
                         id: null,
                         title: "",
                         icon: "",
-                        iconSrc: "",
                         visible: true,
-                        disabled: false
+                        disabled: false,
+                        renderStage: "onViewShown"
                     })
                 },
                 execute: function() {
@@ -504,14 +505,23 @@ if (!DevExpress.MOD_FRAMEWORK) {
                         id: "back",
                         showIcon: false,
                         location: "before"
-                    }, "create", "edit", "save", {
-                        id: "cancel",
+                    }, "create", {
+                        id: "save",
                         showText: true,
-                        location: "menu"
+                        showIcon: false,
+                        location: "after"
+                    }, {
+                        id: "edit",
+                        showText: false,
+                        location: "after"
+                    }, {
+                        id: "cancel",
+                        showText: false,
+                        location: "before"
                     }, {
                         id: "delete",
-                        showText: true,
-                        location: "menu"
+                        showText: false,
+                        location: "after"
                     }]
             },
             "android-simple-toolbar": {
@@ -527,19 +537,20 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     }, {id: "create"}, {
                         id: "save",
                         showText: true,
-                        location: "before"
+                        showIcon: false,
+                        location: "after"
                     }, {
                         id: "edit",
-                        showText: true,
-                        location: "menu"
+                        showText: false,
+                        location: "after"
                     }, {
                         id: "cancel",
-                        showText: true,
-                        location: "menu"
+                        showText: false,
+                        location: "before"
                     }, {
                         id: "delete",
-                        showText: true,
-                        location: "menu"
+                        showText: false,
+                        location: "after"
                     }]
             },
             "android-footer-toolbar": {
@@ -559,72 +570,6 @@ if (!DevExpress.MOD_FRAMEWORK) {
                         id: "save",
                         showIcon: false,
                         location: "before"
-                    }]
-            },
-            "tizen-header-toolbar": {
-                defaults: {
-                    showIcon: true,
-                    showText: false,
-                    location: "after"
-                },
-                commands: [{
-                        id: "back",
-                        showIcon: false,
-                        location: "before"
-                    }, "create", "edit", "save", {
-                        id: "cancel",
-                        showText: true,
-                        location: "menu"
-                    }, {
-                        id: "delete",
-                        showText: true,
-                        location: "menu"
-                    }]
-            },
-            "tizen-footer-toolbar": {
-                defaults: {location: "after"},
-                commands: [{
-                        id: "create",
-                        showText: false
-                    }, {
-                        id: "edit",
-                        showText: false,
-                        location: "before"
-                    }, {
-                        id: "delete",
-                        location: "menu"
-                    }, {
-                        id: "save",
-                        showIcon: false,
-                        location: "before"
-                    }]
-            },
-            "tizen-simple-toolbar": {
-                defaults: {
-                    showIcon: true,
-                    showText: false,
-                    location: "after"
-                },
-                commands: [{
-                        id: "back",
-                        showIcon: false,
-                        location: "before"
-                    }, {id: "create"}, {
-                        id: "save",
-                        showText: true,
-                        location: "before"
-                    }, {
-                        id: "edit",
-                        showText: true,
-                        location: "menu"
-                    }, {
-                        id: "cancel",
-                        showText: true,
-                        location: "menu"
-                    }, {
-                        id: "delete",
-                        showText: true,
-                        location: "menu"
                     }]
             },
             "generic-header-toolbar": {
@@ -731,7 +676,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
     (function($, DX, undefined) {
         var Class = DX.Class;
         DX.framework.ViewCache = Class.inherit({
-            ctor: function(options) {
+            ctor: function() {
                 this._cache = {};
                 this.viewRemoved = $.Callbacks();
                 this._callbacksToEvents("ViewCache", ["viewRemoved"])
@@ -800,7 +745,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
             },
             setView: function(key, viewInfo) {
                 if (!this.hasView(key)) {
-                    if (this._keys.length == this._size)
+                    if (this._keys.length === this._size)
                         this.removeView(this._keys[0]);
                     this._keys.push(key)
                 }
@@ -1121,7 +1066,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
             ctor: function(options) {
                 this.callBase(options);
                 this.backInitiated = $.Callbacks();
-                this._deferredNavigate = null;
+                this._rootStateHandler = null;
                 $(window).on("unload", this._saveBrowserState)
             },
             init: function() {
@@ -1138,28 +1083,36 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 return this.callBase(uri, !this._browserAdapter.isRootPage())
             },
             _saveBrowserState: function() {
-                if (window.sessionStorage)
+                var sessionStorage = DX.utils.getSessionStorage();
+                if (sessionStorage)
                     sessionStorage.setItem(SESSION_KEY, true)
             },
             _initRootPage: function() {
-                var hash = this.getUri();
-                if (!window.sessionStorage || sessionStorage.getItem(SESSION_KEY))
+                var hash = this.getUri(),
+                    sessionStorage = DX.utils.getSessionStorage();
+                if (!sessionStorage || sessionStorage.getItem(SESSION_KEY))
                     return $.Deferred().resolve().promise();
                 sessionStorage.removeItem(SESSION_KEY);
                 this._browserAdapter.createRootPage();
                 return this._browserAdapter.pushState(hash)
             },
             _onPopState: function() {
-                var navigationPending = this._deferredNavigate && this._deferredNavigate.state() === "pending";
                 if (this._browserAdapter.isRootPage())
-                    if (navigationPending)
-                        this._deferredNavigate.resolve();
+                    if (this._rootStateHandler)
+                        this._rootStateHandler();
                     else
                         this.backInitiated.fire();
                 else {
-                    if (!navigationPending)
-                        this._deferredNavigate = $.Deferred().done($.proxy(this.callBase, this));
+                    if (!this._rootStateHandler)
+                        this._createRootStateHndler();
                     this.back()
+                }
+            },
+            _createRootStateHndler: function() {
+                var uri = this.getUri();
+                this._rootStateHandler = function() {
+                    this.uriChanged.fire(uri);
+                    this._rootStateHandler = null
                 }
             }
         })
@@ -1197,7 +1150,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
             },
             _syncUriWithCurrentNavigationItem: function() {
                 var currentUri = this._currentItem && this._currentItem.uri;
-                this._navigationDevice.setUri(currentUri)
+                this._navigationDevice.setUri(currentUri, true)
             },
             _cancelNavigation: function(args) {
                 this._syncUriWithCurrentNavigationItem();
@@ -1215,7 +1168,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     uri: uri,
                     key: uri
                 };
-                this._navigationDevice.setUri(uri, options.target == NAVIGATION_TARGETS.current)
+                this._navigationDevice.setUri(uri, options.target === NAVIGATION_TARGETS.current)
             },
             _setCurrentItem: function(item) {
                 this._currentItem = item
@@ -1223,6 +1176,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
             navigate: function(uri, options) {
                 options = options || {};
                 var that = this,
+                    isFirstNavigate = !that._currentItem,
                     currentItem = that._currentItem || {},
                     targetItem = options.item || {},
                     currentUri = currentItem.uri,
@@ -1236,6 +1190,8 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     return
                 }
                 options = $.extend(that._getDefaultOptions(), options || {});
+                if (isFirstNavigate)
+                    options.target = NAVIGATION_TARGETS.current;
                 args = {
                     currentUri: currentUri,
                     uri: uri,
@@ -1352,11 +1308,28 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 this.currentStack = stack;
                 this.currentStackKey = stackKey
             },
+            _getViewTargetStackKey: function(uri, isRoot) {
+                var result;
+                if (isRoot)
+                    if (this.navigationStacks[uri] !== undefined)
+                        result = uri;
+                    else {
+                        for (var stackKey in this.navigationStacks)
+                            if (this.navigationStacks[stackKey].items[0].uri === uri) {
+                                result = stackKey;
+                                break
+                            }
+                        result = result || uri
+                    }
+                else
+                    result = this.currentStackKey || uri;
+                return result
+            },
             _updateHistory: function(uri, options) {
                 var isRoot = options.root,
                     forceIsRoot = isRoot,
                     forceToRoot = false,
-                    stackKey = options.stack || (isRoot ? uri : this.currentStackKey || uri),
+                    stackKey = options.stack || this._getViewTargetStackKey(uri, isRoot),
                     previousStack = this.currentStack,
                     keepPositionInStack = options.keepPositionInStack !== undefined ? options.keepPositionInStack : this._keepPositionInStack;
                 this._setCurrentStack(stackKey);
@@ -1370,6 +1343,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                         if (this.currentItem().uri !== uri)
                             this.currentStack.navigate(uri, true)
                     }
+                    options.direction = options.direction || "none"
                 }
                 else {
                     var prevIndex = this.currentStack.currentIndex,
@@ -1439,15 +1413,20 @@ if (!DevExpress.MOD_FRAMEWORK) {
             saveState: function(storage) {
                 if (this.currentStack.items.length) {
                     var state = {
-                            items: $.map(this.currentStack.items, function(item) {
-                                return {
-                                        key: item.key,
-                                        uri: item.uri
-                                    }
-                            }),
-                            currentIndex: this.currentStack.currentIndex,
-                            currentStackKey: this.currentStack.items[0].uri
+                            navigationStacks: {},
+                            currentStackKey: this.currentStackKey
                         };
+                    $.each(this.navigationStacks, function(stackKey, stack) {
+                        var stackState = {};
+                        state.navigationStacks[stackKey] = stackState;
+                        stackState.currentIndex = stack.currentIndex;
+                        stackState.items = $.map(stack.items, function(item) {
+                            return {
+                                    key: item.key,
+                                    uri: item.uri
+                                }
+                        })
+                    });
                     var json = JSON.stringify(state);
                     storage.setItem(this._stateStorageKey, json)
                 }
@@ -1460,16 +1439,17 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 var json = storage.getItem(this._stateStorageKey);
                 if (json)
                     try {
-                        var state = JSON.parse(json),
-                            stack = this._createNavigationStack();
-                        if (!state.items[0].uri)
-                            throw DX.Error("E3007");
-                        stack.items = $.map(state.items, function(item) {
-                            item.stack = stack;
-                            return item
+                        var that = this,
+                            state = JSON.parse(json);
+                        $.each(state.navigationStacks, function(stackKey, stackState) {
+                            var stack = that._createNavigationStack();
+                            that.navigationStacks[stackKey] = stack;
+                            stack.currentIndex = stackState.currentIndex;
+                            stack.items = $.map(stackState.items, function(item) {
+                                item.stack = stack;
+                                return item
+                            })
                         });
-                        stack.currentIndex = state.currentIndex;
-                        this.navigationStacks[stack.items[0].uri] = stack;
                         this.currentStackKey = state.currentStackKey;
                         this.currentStack = this.navigationStacks[this.currentStackKey];
                         this._currentItem = this.currentStack.currentItem();
@@ -1478,7 +1458,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     }
                     catch(e) {
                         this.removeState(storage);
-                        throw e;
+                        throw DX.Error("E3007");
                     }
             },
             removeState: function(storage) {
@@ -1488,7 +1468,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 return this.currentStack.currentIndex
             },
             previousItem: function(stackKey) {
-                var stack = stackKey ? this.navigationStacks[stackKey] : this.currentStack;
+                var stack = this.navigationStacks[stackKey] || this.currentStack;
                 return stack.previousItem()
             },
             getItemByIndex: function(index) {
@@ -1607,6 +1587,13 @@ if (!DevExpress.MOD_FRAMEWORK) {
             if ((actionArguments.component || {}).NAME === "dxCommand")
                 $.extend(options, actionArguments.component.option())
         }
+        function preventDefaultLinkBehaviour(e) {
+            if (!e)
+                return;
+            var $targetElement = $(e.target);
+            if ($targetElement.attr('href'))
+                e.preventDefault()
+        }
         DX.framework.createActionExecutors = function(app) {
             return {
                     routing: {execute: function(e) {
@@ -1622,6 +1609,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                                     routeValues = action;
                                 uri = app.router.format(routeValues);
                                 prepareNavigateOptions(options, e);
+                                preventDefaultLinkBehaviour(options.jQueryEvent);
                                 app.navigate(uri, options);
                                 e.handled = true
                             }
@@ -1650,6 +1638,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                             });
                             var options = {};
                             prepareNavigateOptions(options, e);
+                            preventDefaultLinkBehaviour(options.jQueryEvent);
                             app.navigate(uri, options);
                             e.handled = true
                         }}
@@ -1667,7 +1656,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
             ctor: function(options) {
                 options = options || {};
                 this._options = options;
-                this.namespace = options.namespace || options.ns || window;
+                this.namespace = options.namespace || window;
                 this._applicationMode = options.mode ? options.mode : "mobileApp";
                 this.components = [];
                 BACK_COMMAND_TITLE = DX.localization.localizeString("@Back");
@@ -1681,7 +1670,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 this.navigationManager.on("navigatingBack", $.proxy(this._onNavigatingBack, this));
                 this.navigationManager.on("navigated", $.proxy(this._onNavigated, this));
                 this.navigationManager.on("navigationCanceled", $.proxy(this._onNavigationCanceled, this));
-                this.stateManager = options.stateManager || new DX.framework.StateManager({storage: options.stateStorage || sessionStorage});
+                this.stateManager = options.stateManager || new DX.framework.StateManager({storage: options.stateStorage || DX.utils.getSessionStorage()});
                 this.stateManager.addStateSource(this.navigationManager);
                 this.viewCache = this._createViewCache(options);
                 this.commandMapping = this._createCommandMapping(options.commandMapping);
@@ -1734,8 +1723,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
             _createNavigationCommands: function(commandConfig) {
                 if (!commandConfig)
                     return [];
-                var that = this,
-                    generatedIdCount = 0;
+                var generatedIdCount = 0;
                 return $.map(commandConfig, function(item) {
                         var command;
                         if (item instanceof frameworkNS.dxCommand)
@@ -1794,6 +1782,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 var uri = this.router.format(routeData);
                 if (args.uri !== uri && uri) {
                     args.cancel = true;
+                    args.cancelReason = "redirect";
                     DX.utils.executeAsync(function() {
                         that.navigate(uri, args.options)
                     })
@@ -1804,32 +1793,24 @@ if (!DevExpress.MOD_FRAMEWORK) {
             _onNavigated: function(args) {
                 var that = this,
                     direction = args.options.direction,
-                    deferred = $.Deferred(),
+                    resultDeferred,
                     viewInfo = that._acquireViewInfo(args.item, args.options);
-                if (!that._isViewReadyToShow(viewInfo))
-                    that._setViewLoadingState(viewInfo, direction).done(function() {
+                if (!viewInfo.model) {
+                    this._processEvent("beforeViewSetup", {viewInfo: viewInfo});
+                    that._createViewModel(viewInfo);
+                    that._createViewCommands(viewInfo);
+                    this._processEvent("afterViewSetup", {viewInfo: viewInfo})
+                }
+                that._highlightCurrentNavigationCommand(viewInfo);
+                resultDeferred = that._showView(viewInfo, direction).always(function() {
+                    that._isNavigating = false;
+                    var pendingArgs = that._pendingNavigationArgs;
+                    if (pendingArgs)
                         DX.utils.executeAsync(function() {
-                            that._createViewModel(viewInfo);
-                            that._createViewCommands(viewInfo);
-                            deferred.resolve()
+                            that.navigate(pendingArgs.uri, pendingArgs.options)
                         })
-                    }).fail(function() {
-                        that._isNavigating = false;
-                        deferred.reject()
-                    });
-                else
-                    deferred.resolve();
-                deferred.done(function() {
-                    that._highlightCurrentNavigationCommand(viewInfo);
-                    that._showView(viewInfo, direction).always(function() {
-                        that._isNavigating = false;
-                        var pendingArgs = that._pendingNavigationArgs;
-                        if (pendingArgs)
-                            DX.utils.executeAsync(function() {
-                                that.navigate(pendingArgs.uri, pendingArgs.options)
-                            })
-                    })
-                })
+                });
+                return resultDeferred
             },
             _isViewReadyToShow: function(viewInfo) {
                 return !!viewInfo.model
@@ -1841,7 +1822,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     if (currentItem)
                         DX.utils.executeAsync(function() {
                             var viewInfo = that._acquireViewInfo(currentItem, args.options);
-                            that._highlightCurrentNavigationCommand(viewInfo)
+                            that._highlightCurrentNavigationCommand(viewInfo, true)
                         });
                     that._isNavigating = false
                 }
@@ -1870,13 +1851,26 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 })
             },
             _acquireViewInfo: function(navigationItem, navigateOptions) {
-                var viewInfo = this.viewCache.getView(navigationItem.key);
+                var routeData = this.router.parse(navigationItem.uri),
+                    viewInfoKey = this._getViewInfoKey(navigationItem, routeData),
+                    viewInfo = this.viewCache.getView(viewInfoKey);
                 if (!viewInfo) {
                     viewInfo = this._createViewInfo(navigationItem, navigateOptions);
                     this._obtainViewLink(viewInfo);
-                    this.viewCache.setView(navigationItem.key, viewInfo)
+                    this.viewCache.setView(viewInfoKey, viewInfo)
                 }
+                else
+                    viewInfo.routeData = routeData;
                 return viewInfo
+            },
+            _getViewInfoKey: function(navigationItem, routeData) {
+                var args = {
+                        key: navigationItem.key,
+                        navigationItem: navigationItem,
+                        routeData: routeData
+                    };
+                this._processEvent("resolveViewCacheKey", args);
+                return args.key
             },
             _processEvent: function(eventName, args, model) {
                 this._callComponentMethod(eventName, args);
@@ -1892,7 +1886,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                         viewName: routeData.view,
                         routeData: routeData,
                         uri: uri,
-                        key: navigationItem.key,
+                        key: this._getViewInfoKey(navigationItem, routeData),
                         canBack: this.canBack(),
                         navigateOptions: navigateOptions,
                         previousViewInfo: this._getPreviousViewInfo(navigateOptions)
@@ -1900,9 +1894,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 return viewInfo
             },
             _createViewModel: function(viewInfo) {
-                this._processEvent("beforeViewSetup", {viewInfo: viewInfo});
-                viewInfo.model = viewInfo.model || this._callViewCodeBehind(viewInfo);
-                this._processEvent("afterViewSetup", {viewInfo: viewInfo})
+                viewInfo.model = viewInfo.model || this._callViewCodeBehind(viewInfo)
             },
             _createViewCommands: function(viewInfo) {
                 viewInfo.commands = viewInfo.model.commands || [];
@@ -1931,7 +1923,8 @@ if (!DevExpress.MOD_FRAMEWORK) {
                                 that.back({stack: stackKey})
                             },
                             icon: "arrowleft",
-                            type: "back"
+                            type: "back",
+                            renderStage: that._options.useViewTitleAsBackText ? "onViewRendering" : "onViewShown"
                         })];
                 var result = DX.framework.utils.mergeCommands(toMergeTo, commands);
                 commands.length = 0;
@@ -1941,9 +1934,9 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 var that = this;
                 var eventArgs = {
                         viewInfo: viewInfo,
-                        direction: direction
+                        direction: direction,
+                        params: viewInfo.routeData
                     };
-                that._processEvent("viewShowing", eventArgs, viewInfo.model);
                 return that._showViewImpl(eventArgs.viewInfo, eventArgs.direction).done(function() {
                         DX.utils.executeAsync(function() {
                             that._processEvent("viewShown", eventArgs, viewInfo.model);
@@ -1951,10 +1944,9 @@ if (!DevExpress.MOD_FRAMEWORK) {
                         })
                     })
             },
-            _highlightCurrentNavigationCommand: function(viewInfo) {
+            _highlightCurrentNavigationCommand: function(viewInfo, forceUpdate) {
                 var that = this,
                     selectedCommand,
-                    currentUri = viewInfo.uri,
                     currentNavigationItemId = viewInfo.model && viewInfo.model.currentNavigationItemId;
                 if (currentNavigationItemId !== undefined)
                     $.each(this.navigation, function(index, command) {
@@ -1975,7 +1967,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                         }
                     });
                 $.each(this.navigation, function(index, command) {
-                    if (command === selectedCommand && command.option("highlighted"))
+                    if (forceUpdate && command === selectedCommand && command.option("highlighted"))
                         command.fireEvent("optionChanged", [{
                                 name: "highlighted",
                                 value: true,
@@ -1984,7 +1976,6 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     command.option("highlighted", command === selectedCommand)
                 })
             },
-            _setViewLoadingState: DX.abstract,
             _showViewImpl: DX.abstract,
             _obtainViewLink: function(viewInfo) {
                 var key = viewInfo.key;
@@ -2015,8 +2006,10 @@ if (!DevExpress.MOD_FRAMEWORK) {
                         that.restoreState();
                         that.navigate(uri, options)
                     });
-                else if (that._initState === INIT_COMPLETE)
-                    that.navigationManager.navigate(uri, options);
+                else if (that._initState === INIT_COMPLETE) {
+                    if (!that._isNavigating || uri)
+                        that.navigationManager.navigate(uri, options)
+                }
                 else
                     throw DX.Error("E3003");
             },
@@ -2026,8 +2019,10 @@ if (!DevExpress.MOD_FRAMEWORK) {
             _getPreviousViewInfo: function(navigateOptions) {
                 var previousNavigationItem = this.navigationManager.previousItem(navigateOptions.stack),
                     result;
-                if (previousNavigationItem)
-                    result = this.viewCache.getView(previousNavigationItem.key);
+                if (previousNavigationItem) {
+                    var routeData = this.router.parse(previousNavigationItem.uri);
+                    result = this.viewCache.getView(this._getViewInfoKey(previousNavigationItem, routeData))
+                }
                 return result
             },
             back: function(options) {
@@ -2047,8 +2042,232 @@ if (!DevExpress.MOD_FRAMEWORK) {
     /*! Module framework, file framework.html.js */
     (function($, DX, undefined) {
         DX.framework.html = {
-            layoutControllers: [],
-            layoutSets: {}
+            layoutSets: {},
+            animationSets: {
+                "native": {
+                    "view-content-change": [{animation: "slide"}, {
+                            animation: "ios7-slide",
+                            device: {platform: "ios"}
+                        }, {
+                            animation: "none",
+                            device: {
+                                deviceType: "desktop",
+                                platform: "generic"
+                            }
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "view-header-toolbar": [{animation: "ios7-toolbar"}, {
+                            animation: "slide",
+                            device: {grade: "B"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }]
+                },
+                "default": {
+                    "view-content-change": [{animation: "slide"}, {
+                            animation: "ios7-slide",
+                            device: {platform: "ios"}
+                        }, {
+                            animation: "fade",
+                            device: {
+                                deviceType: "desktop",
+                                platform: "generic"
+                            }
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "view-content-rendered": [{animation: "fade"}, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "view-header-toolbar": [{animation: "ios7-toolbar"}, {
+                            animation: "slide",
+                            device: {grade: "B"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "command-rendered": [{animation: "stagger-fade-drop"}, {
+                            animation: "fade",
+                            device: {grade: "B"}
+                        }, {
+                            animation: "fade",
+                            device: {deviceType: "desktop"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "list-item-rendered": [{
+                            animation: "stagger-3d-drop",
+                            device: {grade: "A"}
+                        }, {
+                            animation: "fade",
+                            device: {deviceType: "desktop"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "detail-item-rendered": [{
+                            animation: "stagger-3d-drop",
+                            device: {grade: "A"}
+                        }, {
+                            animation: "fade",
+                            device: {deviceType: "desktop"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "edit-item-rendered": [{
+                            animation: "stagger-3d-drop",
+                            device: {grade: "A"}
+                        }, {
+                            animation: "fade",
+                            device: {deviceType: "desktop"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }]
+                },
+                slide: {
+                    "view-content-change": [{animation: "slide"}, {
+                            animation: "ios7-slide",
+                            device: {platform: "ios"}
+                        }, {
+                            animation: "fade",
+                            device: {
+                                deviceType: "desktop",
+                                platform: "generic"
+                            }
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "view-content-rendered": [{animation: "fade"}, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "view-header-toolbar": [{animation: "ios7-toolbar"}, {
+                            animation: "slide",
+                            device: {grade: "B"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "command-rendered": [{animation: "stagger-fade-drop"}, {
+                            animation: "fade",
+                            device: {grade: "B"}
+                        }, {
+                            animation: "fade",
+                            device: {deviceType: "desktop"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "list-item-rendered": [{
+                            animation: "stagger-fade-slide",
+                            device: {grade: "A"}
+                        }, {
+                            animation: "fade",
+                            device: {deviceType: "desktop"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "detail-item-rendered": [{
+                            animation: "stagger-fade-slide",
+                            device: {grade: "A"}
+                        }, {
+                            animation: "fade",
+                            device: {deviceType: "desktop"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "edit-item-rendered": [{
+                            animation: "stagger-fade-slide",
+                            device: {grade: "A"}
+                        }, {
+                            animation: "fade",
+                            device: {deviceType: "desktop"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }]
+                },
+                zoom: {
+                    "view-content-change": [{animation: "slide"}, {
+                            animation: "ios7-slide",
+                            device: {platform: "ios"}
+                        }, {
+                            animation: "fade",
+                            device: {
+                                deviceType: "desktop",
+                                platform: "generic"
+                            }
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "view-content-rendered": [{animation: "fade"}, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "view-header-toolbar": [{animation: "ios7-toolbar"}, {
+                            animation: "slide",
+                            device: {grade: "B"}
+                        }, {
+                            animation: "fade",
+                            device: {deviceType: "desktop"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "command-rendered": [{animation: "stagger-fade-zoom"}, {
+                            animation: "fade",
+                            device: {grade: "B"}
+                        }, {
+                            animation: "fade",
+                            device: {deviceType: "desktop"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "list-item-rendered": [{
+                            animation: "stagger-fade-zoom",
+                            device: {grade: "A"}
+                        }, {
+                            animation: "fade",
+                            device: {deviceType: "desktop"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "detail-item-rendered": [{
+                            animation: "stagger-fade-zoom",
+                            device: {grade: "A"}
+                        }, {
+                            animation: "fade",
+                            device: {deviceType: "desktop"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }],
+                    "edit-item-rendered": [{
+                            animation: "stagger-fade-zoom",
+                            device: {grade: "A"}
+                        }, {
+                            animation: "fade",
+                            device: {deviceType: "desktop"}
+                        }, {
+                            animation: "none",
+                            device: {grade: "C"}
+                        }]
+                }
+            }
         }
     })(jQuery, DevExpress);
     /*! Module framework, file framework.widgetCommandAdapters.js */
@@ -2058,49 +2277,49 @@ if (!DevExpress.MOD_FRAMEWORK) {
         var WidgetItemWrapperBase = DX.Class.inherit({
                 ctor: function(command, containerOptions) {
                     this.command = command;
-                    this.containerOptions = containerOptions;
-                    this._createWidgetItem(command, containerOptions);
-                    this._commandChangedHandler = $.proxy(this._onCommandChanged, this);
-                    command.on("optionChanged", this._commandChangedHandler)
+                    this.widgetItem = this._createWidgetItem(command, containerOptions)
                 },
                 _createWidgetItem: function(command, containerOptions) {
-                    this.widgetItem = $.extend({
-                        command: command,
-                        containerOptions: containerOptions
-                    }, containerOptions, command.option());
-                    this._updateItem()
+                    var itemOptions = $.extend({}, containerOptions, command.option()),
+                        executeCommandCallback = function(e) {
+                            command.execute(e)
+                        },
+                        result;
+                    itemOptions.text = commandToContainer.resolveTextValue(command, containerOptions);
+                    itemOptions.icon = commandToContainer.resolveIconValue(command, containerOptions);
+                    itemOptions.type = commandToContainer.resolvePropertyValue(command, containerOptions, "type");
+                    itemOptions.location = commandToContainer.resolvePropertyValue(command, containerOptions, "location");
+                    result = this._createWidgetItemCore(itemOptions, executeCommandCallback);
+                    result.command = command;
+                    return result
                 },
-                _onCommandChanged: function(args) {
-                    var optionName = args.name,
-                        newValue = args.value,
-                        oldValue = args.previousValue;
-                    this.widgetItem[optionName] = newValue;
-                    this._updateItem(optionName, newValue, oldValue)
+                _createWidgetItemCore: function(itemOptions, executeCommandCallback) {
+                    return itemOptions
                 },
-                _updateItem: function(optionName, newValue, oldValue){},
                 dispose: function() {
-                    if (this.command)
-                        this.command.off("optionChanged", this._commandChangedHandler);
                     delete this.command;
-                    delete this.containerOptions;
-                    delete this.widgetItem;
-                    delete this.updateItemHandler
+                    delete this.widgetItem
                 }
             });
         var WidgetAdapterBase = DX.Class.inherit({
                 ctor: function($widgetElement) {
+                    this._commandToWidgetItemOptionNames = {};
                     this.$widgetElement = $widgetElement;
                     this.$widgetElement.data(DX_COMMAND_TO_WIDGET_ADAPTER, this);
                     this.widget = this._getWidgetByElement($widgetElement);
+                    this._widgetWidgetContentReadyHandler = $.proxy(this._onWidgetContentReady, this);
+                    this._widgetWidgetItemRenderedHandler = $.proxy(this._onWidgetItemRendered, this);
                     this._widgetDisposingHandler = $.proxy(this._onWidgetDisposing, this);
+                    this.widget.on("itemRendered", this._widgetWidgetItemRenderedHandler);
+                    this.widget.on("contentReady", this._widgetWidgetContentReadyHandler);
                     this.widget.on("disposing", this._widgetDisposingHandler);
-                    this.itemWrappers = []
+                    this.itemWrappers = [];
+                    this._transitionExecutor = new DX.TransitionExecutor
                 },
                 addCommand: function(command, containerOptions) {
                     var itemWrapper = this._createItemWrapper(command, containerOptions);
                     this.itemWrappers.push(itemWrapper);
                     this._addItemToWidget(itemWrapper);
-                    this.refresh();
                     this._commandChangedHandler = $.proxy(this._onCommandChanged, this);
                     itemWrapper.command.on("optionChanged", this._commandChangedHandler)
                 },
@@ -2108,18 +2327,45 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     this.widget.beginUpdate()
                 },
                 endUpdate: function() {
-                    this.widget.endUpdate()
+                    this.widget.endUpdate();
+                    return this.animationDeferred
+                },
+                _onWidgetItemRendered: function(e) {
+                    if (e.itemData.isJustAdded && e.itemElement.is(":visible")) {
+                        this._transitionExecutor.enter(e.itemElement, "command-rendered");
+                        delete e.itemData.isJustAdded
+                    }
+                },
+                _onWidgetContentReady: function(e) {
+                    this.animationDeferred = this._transitionExecutor.start()
                 },
                 _onWidgetDisposing: function() {
                     this.dispose(true)
                 },
+                _setWidgetItemOption: function(optionName, optionValue, itemCommand) {
+                    var items = this.widget.option("items"),
+                        itemIndex = $.inArray(itemCommand, $.map(items, function(item) {
+                            return item.command || {}
+                        }));
+                    if (itemIndex > -1) {
+                        var optionPath = "items[" + itemIndex + "].";
+                        if (optionName !== "visible" && optionName !== "location" && this.widget.option("items[" + itemIndex + "]").options)
+                            optionPath += "options.";
+                        optionPath += this._commandToWidgetItemOptionNames[optionName] || optionName;
+                        this.widget.option(optionPath, optionValue)
+                    }
+                },
                 _onCommandChanged: function(args) {
-                    if (args.name !== "highlighted")
-                        this.refresh()
+                    if (args.name === "highlighted")
+                        return;
+                    this._setWidgetItemOption(args.name, args.value, args.component)
                 },
                 _addItemToWidget: function(itemWrapper) {
                     var items = this.widget.option("items");
-                    items.push(itemWrapper.widgetItem)
+                    items.push(itemWrapper.widgetItem);
+                    if (this.widget.element().is(":visible"))
+                        itemWrapper.widgetItem.isJustAdded = true;
+                    this.widget.option("items", items)
                 },
                 refresh: function() {
                     var items = this.widget.option("items");
@@ -2141,6 +2387,8 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 dispose: function(widgetDisposing) {
                     this.clear(widgetDisposing);
                     if (this.widget) {
+                        this.widget.off("itemRendered", this._widgetWidgetItemRenderedHandler);
+                        this.widget.off("contentReady", this._widgetContentReadyHandler);
                         this.widget.off("disposing", this._widgetDisposingHandler);
                         this.$widgetElement.removeData(DX_COMMAND_TO_WIDGET_ADAPTER);
                         delete this.widget;
@@ -2172,37 +2420,30 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 },
                 endUpdate: function($container) {
                     var widgetAdapter = this._getWidgetAdapter($container);
-                    widgetAdapter.endUpdate()
+                    return widgetAdapter.endUpdate()
                 }
             });
-        var dxToolbarItemWrapper = WidgetItemWrapperBase.inherit({_updateItem: function() {
-                    var widgetItem = this.widgetItem,
-                        command = this.command,
-                        containerOptions = this.containerOptions,
-                        location = commandToContainer.resolvePropertyValue(command, containerOptions, "location"),
-                        optionsTarget;
-                    widgetItem.location = location;
-                    if (location === "menu")
-                        optionsTarget = widgetItem;
+        var dxToolbarItemWrapper = WidgetItemWrapperBase.inherit({_createWidgetItemCore: function(itemOptions, executeCommandCallback) {
+                    var widgetItem;
+                    itemOptions.onClick = executeCommandCallback;
+                    if (itemOptions.location === "menu")
+                        widgetItem = itemOptions;
                     else {
-                        optionsTarget = $.extend({}, widgetItem);
-                        widgetItem.options = optionsTarget;
-                        widgetItem.widget = "button"
+                        widgetItem = {
+                            location: itemOptions.location,
+                            visible: itemOptions.visible,
+                            options: itemOptions,
+                            widget: "button"
+                        };
+                        itemOptions.visible = true;
+                        delete itemOptions.location
                     }
-                    optionsTarget.text = commandToContainer.resolveTextValue(command, containerOptions);
-                    optionsTarget.disabled = command.option("disabled");
-                    optionsTarget.icon = commandToContainer.resolveIconValue(command, containerOptions, "icon");
-                    optionsTarget.iconSrc = commandToContainer.resolveIconValue(command, containerOptions, "iconSrc");
-                    optionsTarget.type = commandToContainer.resolveTypeValue(command, containerOptions)
+                    return widgetItem
                 }});
         var dxToolbarAdapter = WidgetAdapterBase.inherit({
                 ctor: function($widgetElement) {
                     this.callBase($widgetElement);
-                    this.widget.option("onItemClick", $.proxy(this._onToolbarItemClick, this))
-                },
-                _onToolbarItemClick: function(e) {
-                    if (e.itemData.command)
-                        e.itemData.command.execute(e)
+                    this._commandToWidgetItemOptionNames = {title: "text"}
                 },
                 _getWidgetByElement: function($element) {
                     return $element.dxToolbar("instance")
@@ -2215,39 +2456,11 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     this.widget.option("visible", true)
                 }
             });
-        var dxActionSheetItemWrapper = WidgetItemWrapperBase.inherit({_updateItem: function() {
-                    var widgetItem = this.widgetItem,
-                        command = this.command,
-                        containerOptions = this.containerOptions;
-                    widgetItem.text = commandToContainer.resolveTextValue(command, containerOptions);
-                    widgetItem.icon = commandToContainer.resolveIconValue(command, containerOptions, "icon");
-                    widgetItem.iconSrc = commandToContainer.resolveIconValue(command, containerOptions, "iconSrc")
+        var dxListItemWrapper = WidgetItemWrapperBase.inherit({_createWidgetItemCore: function(itemOptions, executeCommandCallback) {
+                    itemOptions.title = itemOptions.text;
+                    itemOptions.onClick = executeCommandCallback;
+                    return itemOptions
                 }});
-        var dxActionSheetAdapter = WidgetAdapterBase.inherit({
-                _createItemWrapper: function(command, containerOptions) {
-                    return new dxActionSheetItemWrapper(command, containerOptions)
-                },
-                _getWidgetByElement: function($element) {
-                    return $element.dxActionSheet("instance")
-                }
-            });
-        var dxListItemWrapper = WidgetItemWrapperBase.inherit({
-                _createWidgetItem: function(command, containerOptions) {
-                    this.callBase(command, containerOptions);
-                    this.widgetItem.click = $.proxy(this._itemClick, this)
-                },
-                _updateItem: function() {
-                    var widgetItem = this.widgetItem,
-                        command = this.command,
-                        containerOptions = this.containerOptions;
-                    widgetItem.title = commandToContainer.resolveTextValue(command, containerOptions);
-                    widgetItem.icon = commandToContainer.resolveIconValue(command, containerOptions, "icon");
-                    widgetItem.iconSrc = commandToContainer.resolveIconValue(command, containerOptions, "iconSrc")
-                },
-                _itemClick: function(e) {
-                    this.command.execute(e)
-                }
-            });
         var dxListAdapter = WidgetAdapterBase.inherit({
                 _createItemWrapper: function(command, containerOptions) {
                     return new dxListItemWrapper(command, containerOptions)
@@ -2256,18 +2469,11 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     return $element.dxList("instance")
                 }
             });
-        var dxNavBarItemWrapper = WidgetItemWrapperBase.inherit({_updateItem: function(optionName, newValue, oldValue) {
-                    var command = this.command,
-                        containerOptions = this.containerOptions;
-                    if (optionName !== "highlighted") {
-                        this.widgetItem.text = commandToContainer.resolveTextValue(command, containerOptions);
-                        this.widgetItem.icon = commandToContainer.resolveIconValue(command, containerOptions, "icon");
-                        this.widgetItem.iconSrc = commandToContainer.resolveIconValue(command, containerOptions, "iconSrc")
-                    }
-                }});
+        var dxNavBarItemWrapper = WidgetItemWrapperBase.inherit({});
         var dxNavBarAdapter = WidgetAdapterBase.inherit({
                 ctor: function($widgetElement) {
                     this.callBase($widgetElement);
+                    this._commandToWidgetItemOptionNames = {title: "text"};
                     this.widget.option("onItemClick", $.proxy(this._onNavBarItemClick, this))
                 },
                 _onNavBarItemClick: function(e) {
@@ -2288,29 +2494,29 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 },
                 _onCommandChanged: function(args) {
                     var optionName = args.name,
-                        newValue = args.value,
-                        oldValue = args.previousValue;
-                    if (optionName !== "highlighted" || newValue)
+                        newValue = args.value;
+                    if (optionName === "highlighted" && newValue)
                         this._updateSelectedIndex();
                     this.callBase(args)
                 },
                 _updateSelectedIndex: function() {
                     var items = this.widget.option("items");
-                    for (var i = 0, itemsCount = items.length; i < itemsCount; i++)
-                        if (items[i].highlighted) {
+                    for (var i = 0, itemsCount = items.length; i < itemsCount; i++) {
+                        var command = items[i].command;
+                        if (command && command.option("highlighted")) {
                             this.widget.option("selectedIndex", i);
                             break
                         }
+                    }
                 }
             });
-        var dxPivotItemWrapper = WidgetItemWrapperBase.inherit({_updateItem: function(optionName, newValue, oldValue) {
-                    if (optionName === "title")
-                        this.widgetItem.title = commandToContainer.resolveTextValue(this.command, this.containerOptions)
+        var dxPivotItemWrapper = WidgetItemWrapperBase.inherit({_createWidgetItemCore: function(itemOptions, executeCommandCallback) {
+                    itemOptions.title = itemOptions.text;
+                    return itemOptions
                 }});
         var dxPivotAdapter = WidgetAdapterBase.inherit({
                 ctor: function($widgetElement) {
                     this.callBase($widgetElement);
-                    this._highlighting = false;
                     this.widget.option("onSelectionChanged", $.proxy(this._onPivotSelectionChange, this))
                 },
                 _onPivotSelectionChange: function(e) {
@@ -2321,7 +2527,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     return $element.dxPivot("instance")
                 },
                 _createItemWrapper: function(command, containerOptions) {
-                    return new dxToolbarItemWrapper(command, containerOptions)
+                    return new dxPivotItemWrapper(command, containerOptions)
                 },
                 addCommand: function(command, containerOptions) {
                     this.callBase(command, containerOptions);
@@ -2332,8 +2538,9 @@ if (!DevExpress.MOD_FRAMEWORK) {
                         newValue = args.value;
                     if (optionName === "visible")
                         this._rerenderPivot();
-                    else if (optionName !== "highlighted" || newValue)
-                        this._updateSelectedIndex()
+                    else if (optionName === "highlighted" && newValue)
+                        this._updateSelectedIndex();
+                    this.callBase(args)
                 },
                 _addItemToWidget: function(itemWrapper) {
                     if (itemWrapper.command.option("visible"))
@@ -2343,13 +2550,13 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     var pivot = this.widget,
                         items = pivot.option("items") || [];
                     DX.fx.off = true;
-                    for (var i = 0, itemsCount = items.length; i < itemsCount; i++)
-                        if (items[i].highlighted) {
-                            if (this._highlighting && pivot.option("selectedIndex") === i)
-                                this._highlighting = false;
+                    for (var i = 0, itemsCount = items.length; i < itemsCount; i++) {
+                        var command = items[i].command;
+                        if (command && command.option("highlighted")) {
                             pivot.option("selectedIndex", i);
                             break
                         }
+                    }
                     DX.fx.off = false
                 },
                 _rerenderPivot: function() {
@@ -2363,19 +2570,11 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     that._updateSelectedIndex()
                 }
             });
-        var dxSlideOutItemWrapper = WidgetItemWrapperBase.inherit({_updateItem: function(optionName, newValue, oldValue) {
-                    var widgetItem = this.widgetItem,
-                        command = this.command,
-                        containerOptions = this.containerOptions;
-                    if (name !== "highlighted") {
-                        widgetItem.title = commandToContainer.resolveTextValue(command, containerOptions);
-                        widgetItem.icon = commandToContainer.resolveIconValue(command, containerOptions, "icon");
-                        widgetItem.iconSrc = commandToContainer.resolveIconValue(command, containerOptions, "iconSrc")
-                    }
-                }});
+        var dxSlideOutItemWrapper = WidgetItemWrapperBase.inherit({});
         var dxSlideOutAdapter = WidgetAdapterBase.inherit({
                 ctor: function($widgetElement) {
                     this.callBase($widgetElement);
+                    this._commandToWidgetItemOptionNames = {title: "text"};
                     this.widget.option("onItemClick", $.proxy(this._onSlideOutItemClick, this))
                 },
                 _onSlideOutItemClick: function(e) {
@@ -2389,11 +2588,13 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 },
                 _updateSelectedIndex: function() {
                     var items = this.widget.option("items") || [];
-                    for (var i = 0, itemsCount = items.length; i < itemsCount; i++)
-                        if (items[i].highlighted) {
+                    for (var i = 0, itemsCount = items.length; i < itemsCount; i++) {
+                        var command = items[i].command;
+                        if (command && command.option("highlighted")) {
                             this.widget.option("selectedIndex", i);
                             break
                         }
+                    }
                 },
                 addCommand: function(command, containerOptions) {
                     this.callBase(command, containerOptions);
@@ -2401,9 +2602,8 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 },
                 _onCommandChanged: function(args) {
                     var optionName = args.name,
-                        newValue = args.value,
-                        oldValue = args.previousValue;
-                    if (optionName !== "highlighted" || newValue)
+                        newValue = args.value;
+                    if (optionName === "highlighted" && newValue)
                         this._updateSelectedIndex();
                     this.callBase(args)
                 }
@@ -2411,9 +2611,6 @@ if (!DevExpress.MOD_FRAMEWORK) {
         var adapters = DX.framework.html.commandToDXWidgetAdapters = {};
         adapters.dxToolbar = new CommandToWidgetAdapter(function($widgetElement) {
             return new dxToolbarAdapter($widgetElement)
-        });
-        adapters.dxActionSheet = new CommandToWidgetAdapter(function($widgetElement) {
-            return new dxActionSheetAdapter($widgetElement)
         });
         adapters.dxList = new CommandToWidgetAdapter(function($widgetElement) {
             return new dxListAdapter($widgetElement)
@@ -2432,8 +2629,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
     })(jQuery, DevExpress);
     /*! Module framework, file framework.commandManager.js */
     (function($, DX, undefined) {
-        var Class = DX.Class,
-            ui = DevExpress.ui;
+        var Class = DX.Class;
         var CommandContainer = DX.DOMComponent.inherit({
                 ctor: function(element, options) {
                     if ($.isPlainObject(element)) {
@@ -2460,7 +2656,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
             },
             _getDefaultWidgetAdapter: function() {
                 return {
-                        addCommand: this._defaultAddCommand,
+                        addCommand: $.noop,
                         clearContainer: $.noop
                     }
             },
@@ -2494,7 +2690,8 @@ if (!DevExpress.MOD_FRAMEWORK) {
             renderCommandsToContainers: function(commands, containers) {
                 var that = this,
                     commandHash = {},
-                    commandIds = [];
+                    commandIds = [],
+                    deferreds = [];
                 $.each(commands, function(i, command) {
                     var id = command.option("id");
                     that._checkCommandId(id, command);
@@ -2513,9 +2710,13 @@ if (!DevExpress.MOD_FRAMEWORK) {
                                 options: commandOptions
                             })
                     });
-                    if (commandInfos.length)
-                        that._attachCommandsToContainer(container.element(), commandInfos)
-                })
+                    if (commandInfos.length) {
+                        var deferred = that._attachCommandsToContainer(container.element(), commandInfos);
+                        if (deferred)
+                            deferreds.push(deferred)
+                    }
+                });
+                return $.when.apply($, deferreds)
             },
             clearContainer: function(container) {
                 var $container = container.element(),
@@ -2527,45 +2728,41 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 this.renderCommandsToContainers(commands, containers)
             },
             _attachCommandsToContainer: function($container, commandInfos) {
-                var adapter = this._getContainerAdapter($container);
+                var adapter = this._getContainerAdapter($container),
+                    result;
                 if (adapter.beginUpdate)
                     adapter.beginUpdate($container);
                 $.each(commandInfos, function(index, commandInfo) {
                     adapter.addCommand($container, commandInfo.command, commandInfo.options)
                 });
                 if (adapter.endUpdate)
-                    adapter.endUpdate($container);
-                return true
-            },
-            _defaultAddCommand: function($container, command, options) {
-                var $source = command.element();
-                if ($source) {
-                    $container.append($source);
-                    $source.on("dxclick", function() {
-                        command.execute()
-                    })
-                }
+                    result = adapter.endUpdate($container);
+                return result
             }
         })
     })(jQuery, DevExpress);
     /*! Module framework, file framework.layoutController.js */
     (function($, DX, undefined) {
-        var Class = DX.Class;
-        var HIDDEN_BAG_ID = "__hidden-bag";
-        var TRANSITION_SELECTOR = ".dx-transition:not(.dx-transition .dx-transition)";
+        var Class = DX.Class,
+            HIDDEN_BAG_ID = "__hidden-bag",
+            TRANSITION_SELECTOR = ".dx-transition:not(.dx-transition .dx-transition)",
+            CONTENT_SELECTOR = ".dx-content",
+            DEFAULT_COMMAND_RENDER_STAGE = "onViewShown";
         var transitionSelector = function(transitionName) {
                 return ".dx-transition-" + transitionName
             };
         DX.framework.html.DefaultLayoutController = Class.inherit({
             ctor: function(options) {
                 options = options || {};
-                this.name = options.layoutTemplateName || options.name || "";
-                this._disableViewLoadingState = options.disableViewLoadingState;
+                this.name = options.name || "";
                 this._layoutModel = options.layoutModel || {};
                 this._defaultPaneName = options.defaultPaneName || "content";
+                this._transitionDuration = options.transitionDuration === undefined ? 400 : options.transitionDuration;
                 this.viewReleased = $.Callbacks();
+                this.viewHidden = $.Callbacks();
+                this.viewShowing = $.Callbacks();
                 this.viewRendered = $.Callbacks();
-                this._callbacksToEvents("DefaultLayoutController", ["viewReleased", "viewRendered"])
+                this._callbacksToEvents("DefaultLayoutController", ["viewReleased", "viewHidden", "viewShowing", "viewRendered"])
             },
             init: function(options) {
                 options = options || {};
@@ -2573,29 +2770,51 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 this._$viewPort = options.$viewPort || $("body");
                 this._commandManager = options.commandManager;
                 this._viewEngine = options.viewEngine;
+                this.transitionExecutor = new DX.TransitionExecutor;
                 this._prepareTemplates();
                 this._$viewPort.append(this._getRootElement());
                 this._hideElements(this._getRootElement());
-                this.DEFAULT_LOADING_TITLE = DX.localization.localizeString("@Loading");
                 if (options.templateContext) {
                     this._templateContext = options.templateContext;
                     this._proxiedTemplateContextChangedHandler = $.proxy(this._templateContextChangedHandler, this)
                 }
             },
             activate: function() {
+                if (this._disabledState) {
+                    this._disabledState = false;
+                    this._notifyShowing();
+                    return $.Deferred().resolve().promise()
+                }
                 var $rootElement = this._getRootElement();
                 this._showElements($rootElement);
                 this._attachRefreshViewRequiredHandler();
                 return $.Deferred().resolve().promise()
             },
             deactivate: function() {
+                this._disabledState = false;
                 this._releaseVisibleViews();
                 this._hideElements(this._getRootElement());
                 this._detachRefreshViewRequiredHandler();
                 return $.Deferred().resolve().promise()
             },
+            disable: function() {
+                this._disabledState = true;
+                this._notifyHidden()
+            },
             activeViewInfo: function() {
                 return this._visibleViews[this._defaultPaneName]
+            },
+            _notifyShowing: function() {
+                var that = this;
+                $.each(this._visibleViews, function(index, viewInfo) {
+                    that.viewShowing.fireWith(that, [viewInfo])
+                })
+            },
+            _notifyHidden: function() {
+                var that = this;
+                $.each(this._visibleViews, function(index, viewInfo) {
+                    that.viewHidden.fireWith(that, [viewInfo])
+                })
             },
             _applyTemplate: function($elements, model) {
                 $elements.each(function(i, element) {
@@ -2633,8 +2852,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 that._$mainLayout = that._createEmptyLayout();
                 that._showElements(that._$mainLayout);
                 that._applyTemplate(that._$mainLayout, that._layoutModel);
-                that._$navigationWidget = that._createNavigationWidget();
-                that._loadingStateViewInfo = that._createLoadingStateViewInfo($layoutTemplate)
+                that._$navigationWidget = that._createNavigationWidget()
             },
             renderNavigation: function(navigationCommands) {
                 this._clearNavigationWidget();
@@ -2644,11 +2862,13 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 this._renderCommands(this._$mainLayout, navigationCommands)
             },
             _createNavigationWidget: function() {
-                var result;
-                this._$mainLayout.find(".dx-command-container").each(function() {
-                    var container = $(this).dxCommandContainer("instance");
-                    if (container.option("id") === "global-navigation")
-                        result = $(this)
+                var containers = this._findCommandContainers(this._$mainLayout),
+                    result;
+                $.each(containers, function(k, container) {
+                    if (container.option("id") === "global-navigation") {
+                        result = container.element();
+                        return false
+                    }
                 });
                 return result
             },
@@ -2671,67 +2891,34 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     that._applyTemplate($(item).children(), model)
                 })
             },
-            _createLoadingStateViewModel: function() {
-                return {title: ko.observable()}
-            },
-            _createLoadingStateViewInfo: function($layoutTemplate) {
-                var $loadingStateView = $layoutTemplate.clone().addClass("dx-loading-state-view"),
-                    model = this._createLoadingStateViewModel();
-                this._hideElements($loadingStateView);
-                DX.utils.createComponents($loadingStateView);
-                this._applyModelToTransitionElements($loadingStateView, model);
-                var result = {
-                        model: model,
-                        renderResult: {
-                            $markup: $loadingStateView,
-                            $viewItems: $()
-                        },
-                        isLoadingStateView: true
-                    };
-                this._appendViewToLayout(result);
-                return result
-            },
             _createViewLayoutTemplate: function() {
                 var that = this;
                 var $viewLayoutTemplate = that._$layoutTemplate.clone();
                 this._hideElements($viewLayoutTemplate);
-                DX.utils.createComponents($viewLayoutTemplate);
                 return $viewLayoutTemplate
             },
             _createEmptyLayout: function() {
                 var that = this;
                 var $result = that._$layoutTemplate.clone();
                 this._hideElements($result);
-                DX.utils.createComponents($result);
-                that._removeTransitionContent($result);
+                this._getTransitionElements($result).empty();
+                $result.children(CONTENT_SELECTOR).remove();
                 return $result
-            },
-            _removeTransitionContent: function($markup) {
-                var $transitionElements = this._getTransitionElements($markup);
-                $transitionElements.children().remove()
             },
             _getTransitionElements: function($markup) {
                 return $markup.find(TRANSITION_SELECTOR).addBack(TRANSITION_SELECTOR)
             },
-            setViewLoadingState: function(viewInfo, direction) {
-                var that = this;
-                if (that._disableViewLoadingState)
-                    return $.Deferred().resolve().promise();
-                var loadingStateViewInfo = $.extend({}, viewInfo, that._loadingStateViewInfo);
-                that._loadingStateViewInfo.model.title((viewInfo.viewTemplateInfo || {}).title || this.DEFAULT_LOADING_TITLE);
-                return that._showViewImpl(loadingStateViewInfo, direction)
-            },
             showView: function(viewInfo, direction) {
+                direction = direction || "forward";
                 var that = this,
                     previousViewInfo = that._getPreviousViewInfo(viewInfo),
-                    previousViewTemplateId = previousViewInfo && previousViewInfo.currentViewTemplateId;
+                    previousViewTemplateId = previousViewInfo === viewInfo ? previousViewInfo.currentViewTemplateId : undefined;
                 this._defineCurrentViewTemplateId(viewInfo);
                 if (previousViewTemplateId && previousViewTemplateId === viewInfo.currentViewTemplateId && viewInfo === previousViewInfo)
                     return $.Deferred().resolve().promise();
-                if (previousViewInfo && previousViewInfo.isLoadingStateView)
-                    direction = "none";
                 that._ensureViewRendered(viewInfo);
-                return this._showViewImpl(viewInfo, direction).done(function() {
+                that.viewShowing.fireWith(that, [viewInfo, direction]);
+                return this._showViewImpl(viewInfo, direction, previousViewTemplateId).done(function() {
                         that._onViewShown(viewInfo)
                     })
             },
@@ -2745,9 +2932,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     delete viewInfo.renderResult
                 }
             },
-            _prepareViewTemplate: function($viewTemplate, viewInfo) {
-                DX.utils.createComponents($viewTemplate)
-            },
+            _prepareViewTemplate: function($viewTemplate, viewInfo){},
             _renderViewImpl: function($viewTemplate, viewInfo) {
                 var that = this,
                     allowedChildrenSelector = ".dx-command,.dx-content,script",
@@ -2776,14 +2961,32 @@ if (!DevExpress.MOD_FRAMEWORK) {
             },
             _renderCommands: function($markup, commands) {
                 var commandContainers = this._findCommandContainers($markup);
-                this._commandManager.renderCommandsToContainers(commands, commandContainers)
+                return this._commandManager.renderCommandsToContainers(commands, commandContainers)
             },
-            _applyViewCommands: function(viewInfo) {
+            _prepareViewCommands: function(viewInfo) {
                 var $viewItems = viewInfo.renderResult.$viewItems,
-                    $markup = viewInfo.renderResult.$markup,
-                    viewCommands = this._commandManager.findCommands($viewItems);
+                    viewCommands = this._commandManager.findCommands($viewItems),
+                    commandsToRenderMap = {};
                 viewInfo.commands = DX.framework.utils.mergeCommands(viewInfo.commands || [], viewCommands);
-                this._renderCommands($markup, viewInfo.commands)
+                viewInfo.commandsToRenderMap = commandsToRenderMap;
+                $.each(viewInfo.commands, function(index, command) {
+                    var renderStage = command.option("renderStage") || DEFAULT_COMMAND_RENDER_STAGE,
+                        targetArray = commandsToRenderMap[renderStage] = commandsToRenderMap[renderStage] || [];
+                    targetArray.push(command)
+                })
+            },
+            _applyViewCommands: function(viewInfo, renderStage) {
+                renderStage = renderStage || DEFAULT_COMMAND_RENDER_STAGE;
+                var commandsToRender = viewInfo.commandsToRenderMap[renderStage],
+                    $markup = viewInfo.renderResult.$markup,
+                    result;
+                if (commandsToRender) {
+                    result = this._renderCommands($markup, commandsToRender);
+                    delete viewInfo.commandsToRenderMap[renderStage]
+                }
+                else
+                    result = $.Deferred().resolve().promise();
+                return result
             },
             _findCommandContainers: function($markup) {
                 return DX.utils.createComponents($markup, ["dxCommandContainer"])
@@ -2807,7 +3010,8 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 var $viewTemplate = viewInfo.$viewTemplate || this._viewEngine.getViewTemplate(viewInfo.viewName);
                 this._prepareViewTemplate($viewTemplate, viewInfo);
                 this._renderViewImpl($viewTemplate, viewInfo);
-                this._applyViewCommands(viewInfo);
+                this._prepareViewCommands(viewInfo);
+                this._applyViewCommands(viewInfo, "onViewRendering");
                 this._appendViewToLayout(viewInfo);
                 $viewTemplate.remove();
                 this._onRenderComplete(viewInfo);
@@ -2817,71 +3021,120 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 var that = this,
                     $viewFrame = that._getViewFrame(viewInfo),
                     $markup = viewInfo.renderResult.$markup,
-                    $transitionContentElements = $();
+                    $transitionContentElements = $(),
+                    animationItems = [];
                 $.each($markup.find(".dx-content-placeholder"), function(index, el) {
-                    var placeholder = $(el).dxContentPlaceholder("instance");
-                    placeholder.prepareTransition()
+                    DX.framework.prepareTransition($(el), $(el).attr("data-dx-content-placeholder-name"))
                 });
                 $.each(that._getTransitionElements($viewFrame), function(index, transitionElement) {
                     var $transition = $(transitionElement),
-                        $viewElement = $markup.find(transitionSelector($transition.data("dx-transition-name"))).children();
+                        $viewElement = $markup.find(transitionSelector($transition.attr("data-dx-transition-name"))).children(),
+                        animationItem = {
+                            $element: $viewElement,
+                            animation: $transition.attr("data-dx-transition-type")
+                        };
+                    animationItems.push(animationItem);
                     that._hideViewElements($viewElement);
                     $transition.append($viewElement);
                     $transitionContentElements = $transitionContentElements.add($viewElement)
                 });
                 that._$mainLayout.append(viewInfo.renderResult.$viewItems.filter(".dx-command"));
                 $markup.remove();
-                viewInfo.renderResult.$markup = $transitionContentElements
+                viewInfo.renderResult.$markup = $transitionContentElements;
+                viewInfo.renderResult.animationItems = animationItems
             },
             _onRenderComplete: function(viewInfo){},
             _onViewShown: function(viewInfo) {
                 $(document).trigger("dx.viewchanged")
             },
-            _doTransition: function(viewInfo, direction) {
-                var that = this,
-                    deferred = $.Deferred();
-                var transitions = $.map(viewInfo.renderResult.$markup, function(transitionContent) {
-                        var $transitionContent = $(transitionContent),
-                            $transition = $transitionContent.parent(),
-                            transitionType = that._disableTransitions ? "none" : $transition.data("dx-transition-type");
-                        return {
-                                destination: $transition,
-                                source: $transitionContent,
-                                type: transitionType || "none",
-                                direction: direction || "none"
-                            }
-                    });
-                that._executeTransitions(transitions).done(function() {
-                    deferred.resolve()
-                });
-                return deferred.promise()
+            _enter: function(animationItems, animationModifier) {
+                var transitionExecutor = this.transitionExecutor;
+                $.each(animationItems, function(index, item) {
+                    transitionExecutor.enter(item.$element, item.animation, animationModifier)
+                })
             },
-            _hideView: function(viewInfo) {
-                if (viewInfo.renderResult)
-                    this._hideViewElements(viewInfo.renderResult.$markup)
+            _leave: function(animationItems, animationModifier) {
+                var transitionExecutor = this.transitionExecutor;
+                $.each(animationItems, function(index, item) {
+                    transitionExecutor.leave(item.$element, item.animation, animationModifier)
+                })
             },
-            _showViewImpl: function(viewInfo, direction) {
+            _doTransition: function(oldViewInfo, newViewInfo, direction) {
+                var animationModifier = {direction: direction};
+                if (oldViewInfo)
+                    this._leave(oldViewInfo.renderResult.animationItems, animationModifier);
+                this._enter(newViewInfo.renderResult.animationItems, animationModifier);
+                this._showView(newViewInfo);
+                return this.transitionExecutor.start()
+            },
+            _showViewImpl: function(viewInfo, direction, previousViewTemplateId) {
                 var that = this,
-                    deferred = $.Deferred(),
+                    result,
                     previousViewInfo = this._getPreviousViewInfo(viewInfo);
-                if (!previousViewInfo || previousViewInfo === viewInfo)
-                    direction = "none";
-                return that._doTransition(viewInfo, direction).done(function() {
-                        that._changeView(viewInfo)
-                    })
+                if (!previousViewInfo || previousViewInfo === viewInfo || DX.fx.off) {
+                    this._showView(viewInfo);
+                    result = that._changeView(viewInfo, previousViewTemplateId)
+                }
+                else
+                    result = that._doTransition(previousViewInfo, viewInfo, direction).then(function() {
+                        return that._changeView(viewInfo)
+                    });
+                return result
             },
             _releaseView: function(viewInfo) {
                 this.viewReleased.fireWith(this, [viewInfo])
             },
-            _changeView: function(viewInfo) {
+            _getReadyForRenderDeferredItems: function(viewInfo) {
+                return $.Deferred().resolve().promise()
+            },
+            _changeView: function(viewInfo, previousViewTemplateId) {
                 var that = this;
-                var previousViewInfo = that._getPreviousViewInfo(viewInfo);
-                if (previousViewInfo && previousViewInfo !== viewInfo) {
-                    that._hideView(previousViewInfo);
-                    if (!previousViewInfo.isLoadingStateView)
-                        this._releaseView(previousViewInfo)
+                if (previousViewTemplateId)
+                    that._hideView(viewInfo, previousViewTemplateId);
+                else {
+                    var previousViewInfo = that._getPreviousViewInfo(viewInfo);
+                    if (previousViewInfo && previousViewInfo !== viewInfo) {
+                        that._hideView(previousViewInfo);
+                        that._releaseView(previousViewInfo)
+                    }
+                    this._visibleViews[this._getViewPaneName(viewInfo.viewTemplateInfo)] = viewInfo
                 }
-                this._visibleViews[this._getViewPaneName(viewInfo.viewTemplateInfo)] = viewInfo
+                this._subscribeToDeferredItems(viewInfo);
+                return this._getReadyForRenderDeferredItems(viewInfo).then(function() {
+                        return that._applyViewCommands(viewInfo)
+                    }).then(function() {
+                        return that._renderDeferredItems(viewInfo.renderResult.$markup)
+                    })
+            },
+            _subscribeToDeferredItems: function(viewInfo) {
+                var that = this,
+                    $markup = viewInfo.renderResult.$markup;
+                $markup.find(".dx-pending-rendering").add($markup.filter(".dx-pending-rendering")).each(function() {
+                    var $element = $(this),
+                        promise = $element.data("dx-rendered-promise");
+                    if (promise)
+                        promise.done(function() {
+                            that._renderCommands($element, viewInfo.commands)
+                        })
+                })
+            },
+            _renderDeferredItems: function($items) {
+                var that = this,
+                    result = $.Deferred();
+                var $pendingItem = $items.find(".dx-pending-rendering-manual").add($items.filter(".dx-pending-rendering-manual")).first();
+                if ($pendingItem.length) {
+                    var render = $pendingItem.data("dx-render-delegate");
+                    setTimeout(function() {
+                        render().then(function() {
+                            return that._renderDeferredItems($items)
+                        }).then(function() {
+                            result.resolve()
+                        })
+                    })
+                }
+                else
+                    result.resolve();
+                return result.promise()
             },
             _getViewPaneName: function(viewTemplateInfo) {
                 return this._defaultPaneName
@@ -2891,41 +3144,30 @@ if (!DevExpress.MOD_FRAMEWORK) {
             },
             _showElements: function($elements) {
                 $elements.removeClass("dx-hidden");
-                $elements.find(".dx-visibility-change-handler").each(function() {
-                    $(this).triggerHandler("dxshown")
-                })
+                DX.utils.triggerShownEvent($elements)
             },
             _hideViewElements: function($elements) {
-                DX.utils.triggerHidingEvent($elements.filter(".dx-active-view"));
+                DX.utils.triggerHidingEvent($elements);
                 this._patchIDs($elements);
                 this._disableInputs($elements);
                 $elements.removeClass("dx-active-view").addClass("dx-inactive-view")
+            },
+            _hideView: function(viewInfo, templateId) {
+                if (viewInfo.renderResult) {
+                    var $markupToHide = templateId === undefined ? viewInfo.renderResult.$markup : viewInfo.renderResult.markupCache[templateId];
+                    this._hideViewElements($markupToHide);
+                    this.viewHidden.fireWith(this, [viewInfo])
+                }
             },
             _showViewElements: function($elements) {
                 this._unpatchIDs($elements);
                 this._enableInputs($elements);
                 $elements.removeClass("dx-inactive-view").addClass("dx-active-view");
-                DX.utils.triggerShownEvent($elements.filter(".dx-active-view"))
+                DX.utils.triggerShownEvent($elements)
             },
-            _executeTransitions: function(transitions) {
-                var that = this;
-                var animatedTransitions = $.map(transitions, function(transitionOptions) {
-                        that._showViewElements(transitionOptions.source);
-                        if (transitionOptions.source.children().length)
-                            return DX.framework.html.TransitionExecutor.create(transitionOptions.destination, transitionOptions)
-                    });
-                var animatedDeferreds = $.map(animatedTransitions, function(transition) {
-                        transition.options.source.addClass("dx-transition-source");
-                        return transition.exec()
-                    });
-                var result = $.when.apply($, animatedDeferreds).done(function() {
-                        $.each(animatedTransitions, function(index, transition) {
-                            transition.finalize();
-                            that._hideViewElements(transition.options.source.parent().find(".dx-active-view:not(.dx-transition-source)"));
-                            transition.options.source.removeClass("dx-transition-source")
-                        })
-                    });
-                return result
+            _showView: function(viewInfo) {
+                if (viewInfo.renderResult)
+                    this._showViewElements(viewInfo.renderResult.$markup)
             },
             _patchIDs: function($markup) {
                 this._processIDs($markup, function(id) {
@@ -2982,8 +3224,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 this.callBase();
                 this.option({
                     name: null,
-                    title: null,
-                    layout: null
+                    title: null
                 })
             },
             ctor: function() {
@@ -2992,7 +3233,8 @@ if (!DevExpress.MOD_FRAMEWORK) {
             },
             _render: function() {
                 this.callBase();
-                this.element().addClass("dx-view")
+                this.element().addClass("dx-view");
+                this.element().attr("dx-data-template-id", this._id)
             },
             getId: function() {
                 return this._id
@@ -3023,9 +3265,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     $element.addClass("dx-transition-absolute");
                 else
                     $element.addClass("dx-transition-static");
-                $element.addClass("dx-transition").addClass("dx-transition-" + transitionName);
-                $element.data("dx-transition-type", transitionType);
-                $element.data("dx-transition-name", transitionName)
+                $element.addClass("dx-transition").addClass("dx-transition-" + transitionName).addClass("dx-transition-" + transitionType).attr("data-dx-transition-type", transitionType).attr("data-dx-transition-name", transitionName)
             };
         var setupTransitionInnerElement = function($element) {
                 $element.addClass("dx-transition-inner-wrapper")
@@ -3035,27 +3275,37 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 this.callBase();
                 this.option({
                     name: null,
-                    type: "slide"
+                    type: undefined,
+                    animation: "slide"
                 })
             },
             _render: function() {
                 this.callBase();
                 var element = this.element();
-                setupTransitionElement(element, this.option("type"), this.option("name"), "absolute");
+                setupTransitionElement(element, this.option("type") || this.option("animation"), this.option("name"), "absolute");
                 element.wrapInner("<div/>");
-                setupTransitionInnerElement(element.children())
+                setupTransitionInnerElement(element.children());
+                if (this.option("type"))
+                    DX.log("W0003", "dxTransition", "type", "15.1", "Use the 'animation' property instead")
             },
             _clean: function() {
                 this.callBase();
                 this.element().empty()
             }
         }));
+        DX.framework.prepareTransition = function($element, targetPlaceholderName) {
+            if ($element.children(".dx-content").length === 0) {
+                $element.wrapInner("<div>");
+                $element.children().dxContent({targetPlaceholder: targetPlaceholderName})
+            }
+        };
         DX.registerComponent("dxContentPlaceholder", framework, DX.DOMComponent.inherit({
             _setDefaultOptions: function() {
                 this.callBase();
                 this.option({
                     name: null,
-                    transition: "none",
+                    transition: undefined,
+                    animation: "none",
                     contentCssPosition: "absolute"
                 })
             },
@@ -3063,14 +3313,13 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 this.callBase();
                 var $element = this.element();
                 $element.addClass("dx-content-placeholder").addClass("dx-content-placeholder-" + this.option("name"));
-                setupTransitionElement($element, this.option("transition"), this.option("name"), this.option("contentCssPosition"))
+                $element.attr("data-dx-content-placeholder-name", this.option("name"));
+                setupTransitionElement($element, this.option("transition") || this.option("animation"), this.option("name"), this.option("contentCssPosition"));
+                if (this.option("transition"))
+                    DX.log("W0003", "dxContentPlaceholder", "transition", "15.1", "Use the 'animation' property instead")
             },
             prepareTransition: function() {
-                var $element = this.element();
-                if ($element.children(".dx-content").length === 0) {
-                    $element.wrapInner("<div>");
-                    $element.children().dxContent({targetPlaceholder: this.option("name")})
-                }
+                DX.framework.prepareTransition(this.element(), this.option("name"))
             }
         }));
         DX.registerComponent("dxContent", framework, DX.DOMComponent.inherit({
@@ -3078,7 +3327,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 this.callBase();
                 this.option({targetPlaceholder: null})
             },
-            _optionChanged: function(args) {
+            _optionChanged: function() {
                 this._refresh()
             },
             _clean: function() {
@@ -3090,6 +3339,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 var element = this.element();
                 element.addClass("dx-content");
                 this._currentClass = "dx-content-" + this.option("targetPlaceholder");
+                element.attr("data-dx-target-placeholder-id", this.option("targetPlaceholder"));
                 element.addClass(this._currentClass);
                 setupTransitionInnerElement(element)
             }
@@ -3127,12 +3377,13 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 if (!component)
                     throw DX.Error("E3013", role, name);
                 var $template = component.element(),
-                    $result = $template.clone().removeClass("dx-hidden");
-                DX.utils.createComponents($result, [role]);
+                    $result;
+                if (!component._isStaticComponentsCreated) {
+                    DX.utils.createComponents($template, ["dxContent", "dxContentPlaceholder", "dxTransition"]);
+                    component._isStaticComponentsCreated = true
+                }
+                $result = $template.clone().removeClass("dx-hidden");
                 return $result
-            },
-            _extendModelFromViewData: function($view, model) {
-                DX.utils.extendFromObject(model, $view.data(_VIEW_ROLE).option())
             },
             _loadTemplatesFromMarkupCore: function($markup) {
                 var that = this;
@@ -3177,8 +3428,8 @@ if (!DevExpress.MOD_FRAMEWORK) {
             _loadTemplatesFromURL: function(url) {
                 var that = this,
                     options = this._getLoadOptions(),
-                    deferred = $.Deferred(),
-                    url = options.winPhonePrefix + url;
+                    deferred = $.Deferred();
+                url = options.winPhonePrefix + url;
                 this._ajaxImpl({
                     url: url,
                     isLocal: options.isLocal,
@@ -3248,22 +3499,16 @@ if (!DevExpress.MOD_FRAMEWORK) {
                     throw DX.Error("E3020", message, JSON.stringify(this.device));
                 }
             },
-            _extendModelFormViewTemplate: function($viewTemplate, model) {
-                this._extendModelFromViewData($viewTemplate, model)
-            },
             _wrapViewDefaultContent: function($viewTemplate) {
                 $viewTemplate.wrapInner("<div class=\"dx-full-height\"></div>");
                 $viewTemplate.children().eq(0).dxContent({targetPlaceholder: 'content'})
             },
             _initDefaultLayout: function() {
-                this._$defaultLayoutTemplate = $("<div class=\"dx-full-height\" data-options=\"dxLayout : { name: 'default' } \"> \
-                <div class=\"dx-full-height\" data-options=\"dxContentPlaceholder : { name: 'content' } \" ></div> \
-            </div>")
+                this._$defaultLayoutTemplate = $("<div class=\"dx-full-height\" data-options=\"dxLayout : { name: 'default' } \"> \n" + "    <div class=\"dx-full-height\" data-options=\"dxContentPlaceholder : { name: 'content' } \" ></div> \n" + "</div>");
+                DX.utils.createComponents(this._$defaultLayoutTemplate)
             },
             _getDefaultLayoutTemplate: function() {
-                var $result = this._$defaultLayoutTemplate.clone();
-                DX.utils.createComponents($result);
-                return $result
+                return this._$defaultLayoutTemplate.clone()
             },
             applyLayout: function($view, $layout) {
                 if ($layout === undefined || $layout.length === 0)
@@ -3274,7 +3519,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 var $placeholderContents = $toMerge.find(".dx-content");
                 $.each($placeholderContents, function() {
                     var $placeholderContent = $(this);
-                    var placeholderId = $placeholderContent.data("dxContent").option("targetPlaceholder");
+                    var placeholderId = $placeholderContent.attr("data-dx-target-placeholder-id");
                     var $placeholder = $toMerge.find(".dx-content-placeholder-" + placeholderId);
                     $placeholder.empty();
                     $placeholder.append($placeholderContent)
@@ -3330,21 +3575,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 if (this._applicationMode === "mobileApp")
                     DX.utils.initMobileViewport(options.viewPort);
                 this.device = options.device || DX.devices.current();
-                var layoutSets = DX.framework.html.layoutSets;
                 this.commandManager = options.commandManager || new DX.framework.html.CommandManager({commandMapping: this.commandMapping});
-                $.each(options.layoutControllers || DX.framework.html.layoutControllers, function(_, layoutControllerInfo) {
-                    var targetLayoutSet = layoutControllerInfo.navigationType;
-                    layoutSets[targetLayoutSet] = layoutSets[targetLayoutSet] || [];
-                    layoutSets[targetLayoutSet].push(layoutControllerInfo);
-                    delete layoutControllerInfo.navigationType
-                });
-                if (options.navigationType)
-                    DX.log("W0001", "HtmlApplication", "navigationType", "14.1", "Use the 'layoutSet' option instead.");
-                if (options.defaultLayout)
-                    DX.log("W0001", "HtmlApplication", "defaultLayout", "13.2", "Use the 'layoutSet' option instead.");
-                var navigationType = options.navigationType || options.defaultLayout;
-                if (navigationType)
-                    options.layoutSet = layoutSets[navigationType];
                 this._initTemplateContext();
                 this.viewEngine = options.viewEngine || new htmlNS.ViewEngine({
                     $root: this._$root,
@@ -3354,11 +3585,23 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 this.components.push(this.viewEngine);
                 this._initMarkupFilters(this.viewEngine);
                 this.viewRendered = $.Callbacks();
-                this._layoutSet = options.layoutSet || (options.layoutControllers && options.layoutControllers.length ? options.layoutControllers : layoutSets["default"]);
+                this._layoutSet = options.layoutSet || DX.framework.html.layoutSets["default"];
+                this._animationSet = options.animationSet || DX.framework.html.animationSets["default"];
                 this._availableLayoutControllers = [];
                 this._activeLayoutControllersStack = [];
                 this.resolveLayoutController = $.Callbacks();
-                this._callbacksToEvents("HtmlApplication", ["viewRendered", "resolveLayoutController"])
+                this._callbacksToEvents("HtmlApplication", ["viewRendered", "resolveLayoutController"]);
+                this._initAnimations(this._animationSet)
+            },
+            _initAnimations: function(animationSet) {
+                if (!animationSet)
+                    return;
+                $.each(animationSet, function(name, configs) {
+                    $.each(configs, function(index, config) {
+                        DX.animationPresets.registerPreset(name, config)
+                    })
+                });
+                DX.animationPresets.applyChanges()
             },
             _localizeMarkup: function($markup) {
                 DX.localization.localizeNode($markup)
@@ -3373,7 +3616,8 @@ if (!DevExpress.MOD_FRAMEWORK) {
             _initMarkupFilters: function(viewEngine) {
                 var filters = [];
                 filters.push(this._localizeMarkup);
-                filters.push(this._notifyIfBadMarkup);
+                if (this._applicationMode === "mobileApp")
+                    filters.push(this._notifyIfBadMarkup);
                 if (viewEngine.markupLoaded)
                     viewEngine.markupLoaded.add(function(args) {
                         $.each(filters, function(_, filter) {
@@ -3410,26 +3654,17 @@ if (!DevExpress.MOD_FRAMEWORK) {
             },
             _showViewImpl: function(viewInfo, direction) {
                 var that = this,
-                    result = $.Deferred(),
+                    deferred = $.Deferred(),
+                    result = deferred.promise(),
                     layoutController = viewInfo.layoutController;
                 that._obtainViewLink(viewInfo);
                 layoutController.showView(viewInfo, direction).done(function() {
                     that._activateLayoutController(layoutController, that._getTargetNode(viewInfo)).done(function() {
-                        result.resolve()
+                        deferred.resolve()
                     })
                 });
-                return result.promise()
-            },
-            _setViewLoadingState: function(viewInfo, direction) {
-                var that = this,
-                    result = $.Deferred(),
-                    layoutController = viewInfo.layoutController;
-                layoutController.setViewLoadingState(viewInfo, direction).done(function() {
-                    that._activateLayoutController(layoutController, that._getTargetNode(viewInfo)).done(function() {
-                        result.resolve()
-                    })
-                });
-                return result.promise()
+                DX.ui.events.lockFeedback(result);
+                return result
             },
             _resolveLayoutController: function(viewInfo) {
                 var args = {
@@ -3487,29 +3722,27 @@ if (!DevExpress.MOD_FRAMEWORK) {
             },
             _activateLayoutController: function(layoutController, targetNode) {
                 var that = this,
-                    result = $.Deferred(),
                     previousLayoutController = that._activeLayoutController();
-                if (previousLayoutController !== layoutController)
-                    layoutController.activate(targetNode).done(function() {
-                        var tasks = [];
-                        if (!layoutController.isOverlay) {
-                            var controllerToDeactivate;
-                            while (that._activeLayoutControllersStack.length && controllerToDeactivate !== layoutController) {
-                                controllerToDeactivate = that._activeLayoutController();
-                                if (controllerToDeactivate !== layoutController) {
-                                    that._activeLayoutControllersStack.pop();
-                                    tasks.push(controllerToDeactivate.deactivate())
-                                }
-                            }
-                        }
-                        $.when.apply($, tasks).done(function() {
-                            that._activeLayoutControllersStack.push(layoutController);
-                            result.resolve()
-                        })
-                    });
+                if (previousLayoutController === layoutController)
+                    return $.Deferred().resolve().promise();
+                return layoutController.activate(targetNode).then($.proxy(this._deactivatePreviousLayoutControllers, this, layoutController))
+            },
+            _deactivatePreviousLayoutControllers: function(layoutController) {
+                var that = this,
+                    tasks = [],
+                    controllerToDeactivate = that._activeLayoutControllersStack.pop();
+                if (layoutController.isOverlay) {
+                    that._activeLayoutControllersStack.push(controllerToDeactivate);
+                    tasks.push(controllerToDeactivate.disable())
+                }
                 else
-                    result.resolve();
-                return result.promise()
+                    while (controllerToDeactivate && controllerToDeactivate !== layoutController) {
+                        tasks.push(controllerToDeactivate.deactivate());
+                        controllerToDeactivate = that._activeLayoutControllersStack.pop()
+                    }
+                return $.when.apply($, tasks).then(function() {
+                        that._activeLayoutControllersStack.push(layoutController)
+                    })
             },
             init: function() {
                 var that = this,
@@ -3539,11 +3772,7 @@ if (!DevExpress.MOD_FRAMEWORK) {
             },
             _createViewModel: function(viewInfo) {
                 this.callBase(viewInfo);
-                var templateInfo = viewInfo.viewTemplateInfo,
-                    model = viewInfo.model;
-                for (var name in templateInfo)
-                    if (!(name in model))
-                        model[name] = templateInfo[name]
+                DX.utils.extendFromObject(viewInfo.model, viewInfo.viewTemplateInfo)
             },
             _initLayoutControllers: function() {
                 var that = this;
@@ -3565,15 +3794,24 @@ if (!DevExpress.MOD_FRAMEWORK) {
                             controller.on("viewReleased", function(viewInfo) {
                                 that._onViewReleased(viewInfo)
                             });
+                            controller.on("viewHidden", function(viewInfo) {
+                                that._onViewHidden(viewInfo)
+                            });
                             controller.on("viewRendered", function(viewInfo) {
                                 that._processEvent("viewRendered", {viewInfo: viewInfo}, viewInfo.model)
+                            });
+                            controller.on("viewShowing", function(viewInfo, direction) {
+                                that._processEvent("viewShowing", {
+                                    viewInfo: viewInfo,
+                                    direction: direction,
+                                    params: viewInfo.routeData
+                                }, viewInfo.model)
                             })
                         }
                     }
                 })
             },
             _onViewReleased: function(viewInfo) {
-                this._onViewHidden(viewInfo);
                 this._releaseViewLink(viewInfo)
             },
             renderNavigation: function() {
@@ -3598,220 +3836,6 @@ if (!DevExpress.MOD_FRAMEWORK) {
                 return this._templateContext
             }
         })
-    })(jQuery, DevExpress);
-    /*! Module framework, file framework.transitionExecutor.js */
-    (function($, DX) {
-        $.fn.extend({unwrapInner: function(selector) {
-                return this.each(function() {
-                        var t = this,
-                            c = $(t).children(selector);
-                        c.each(function() {
-                            var e = $(this);
-                            e.contents().appendTo(t);
-                            e.remove()
-                        })
-                    })
-            }});
-        var TRANSITION_DURATION = 400;
-        var TransitionExecutor = DX.Class.inherit({
-                ctor: function(container, options) {
-                    this.container = container;
-                    this.options = options
-                },
-                exec: function() {
-                    var that = this,
-                        options = that.options;
-                    var $source = options.source,
-                        $destination = options.destination;
-                    var $sourceAbsoluteWrapper = $source,
-                        $destinationRelativeWrapper = $destination,
-                        $destinationAbsoluteWrapper = that._getTransitionInnerElement($destination);
-                    this._finalize = function(){};
-                    return that._animate($.extend({}, options, {
-                            source: $sourceAbsoluteWrapper,
-                            destination: $destinationAbsoluteWrapper
-                        }))
-                },
-                finalize: function() {
-                    if (!this._finalize)
-                        throw DX.Error("E3015");
-                    this._finalize()
-                },
-                _getTransitionInnerElement: function($transitionElement) {
-                    return $transitionElement.children(".dx-active-view:not(.dx-transition-source)")
-                },
-                _animate: function() {
-                    return (new $.Deferred).resolve().promise()
-                }
-            });
-        var NoneTransitionExecutor = TransitionExecutor.inherit({_animate: function(options) {
-                    var $source = options.source,
-                        $destination = options.destination;
-                    var containerWidth = this.container.width();
-                    DX.fx.animate($source, {
-                        type: "slide",
-                        from: {left: 0},
-                        to: {left: 0},
-                        duration: 0
-                    });
-                    DX.fx.animate($destination, {
-                        type: "slide",
-                        from: {left: -containerWidth},
-                        to: {left: -containerWidth},
-                        duration: 0
-                    });
-                    return $.Deferred().resolve().promise()
-                }});
-        var SlideTransitionExecutor = TransitionExecutor.inherit({_animate: function(options) {
-                    if (options.direction === "none")
-                        return $.Deferred().resolve().promise();
-                    var $source = options.source,
-                        $destination = options.destination;
-                    var directionModifier = options.direction === "backward" ? -1 : 1,
-                        rtlModifier = DX.rtlEnabled ? -1 : 1,
-                        containerWidth = this.container.width() * directionModifier * rtlModifier;
-                    var promiseSource = DX.fx.animate($source, {
-                            type: "slide",
-                            from: {left: containerWidth},
-                            to: {left: 0},
-                            duration: TRANSITION_DURATION
-                        });
-                    var promiseDestination = DX.fx.animate($destination, {
-                            type: "slide",
-                            from: {left: 0},
-                            to: {left: -containerWidth},
-                            duration: TRANSITION_DURATION
-                        });
-                    return $.when(promiseDestination, promiseSource)
-                }});
-        var SlideIOS7TransitionExecutor = TransitionExecutor.inherit({_animate: function(options) {
-                    if (options.direction === "none")
-                        return $.Deferred().resolve().promise();
-                    var $source = options.source,
-                        $destination = options.destination;
-                    var rtlModifier = DX.rtlEnabled ? -1 : 1,
-                        containerWidth = this.container.width() * rtlModifier,
-                        slowTransitionWidth = containerWidth / 5,
-                        sourceLeftFrom,
-                        sourceLeftTo,
-                        destinationLeftFrom,
-                        destinationLeftTo,
-                        sourceZIndex = $source.css("z-index"),
-                        destinationZIndex = $destination.css("z-index");
-                    if (options.direction === "backward") {
-                        sourceLeftFrom = -slowTransitionWidth;
-                        sourceLeftTo = 0;
-                        destinationLeftFrom = 0;
-                        destinationLeftTo = containerWidth;
-                        $source.css("z-index", 1);
-                        $destination.css("z-index", 2)
-                    }
-                    else {
-                        sourceLeftFrom = containerWidth;
-                        sourceLeftTo = 0;
-                        destinationLeftFrom = 0;
-                        destinationLeftTo = -slowTransitionWidth;
-                        $source.css("z-index", 2);
-                        $destination.css("z-index", 1)
-                    }
-                    var promiseSource = DX.fx.animate($source, {
-                            type: "slide",
-                            from: {left: sourceLeftFrom},
-                            to: {left: sourceLeftTo},
-                            duration: TRANSITION_DURATION
-                        });
-                    var promiseDestination = DX.fx.animate($destination, {
-                            type: "slide",
-                            from: {left: destinationLeftFrom},
-                            to: {left: destinationLeftTo},
-                            duration: TRANSITION_DURATION
-                        });
-                    return $.when(promiseDestination, promiseSource).done(function() {
-                            $source.css("z-index", sourceZIndex);
-                            $destination.css("z-index", destinationZIndex)
-                        })
-                }});
-        var OverflowTransitionExecutor = TransitionExecutor.inherit({_animate: function(options) {
-                    var $source = options.source,
-                        $destination = options.destination,
-                        destinationTop = $destination.position().top,
-                        destinationLeft = $destination.position().left,
-                        containerWidth = this.container.width();
-                    if (options.direction === "backward")
-                        containerWidth = -containerWidth;
-                    var animations = [];
-                    if (options.direction === "forward")
-                        animations.push(DX.fx.animate($source, {
-                            type: "slide",
-                            from: {
-                                top: destinationTop,
-                                left: containerWidth + destinationLeft,
-                                "z-index": 1
-                            },
-                            to: {left: destinationLeft},
-                            duration: TRANSITION_DURATION
-                        }));
-                    else {
-                        animations.push(DX.fx.animate($source, {
-                            type: "slide",
-                            from: {
-                                left: destinationLeft,
-                                "z-index": 1
-                            },
-                            to: {left: destinationLeft},
-                            duration: TRANSITION_DURATION
-                        }));
-                        animations.push(DX.fx.animate($destination, {
-                            type: "slide",
-                            from: {"z-index": 2},
-                            to: {left: destinationLeft - containerWidth},
-                            duration: TRANSITION_DURATION
-                        }))
-                    }
-                    return $.when.apply($, animations)
-                }});
-        var FadeTransitionExecutor = TransitionExecutor.inherit({_animate: function(options) {
-                    var $source = options.source,
-                        $destination = options.destination,
-                        d = new $.Deferred;
-                    $source.css({opacity: 0});
-                    $destination.animate({opacity: 0}, TRANSITION_DURATION);
-                    $source.animate({opacity: 1}, TRANSITION_DURATION, function() {
-                        d.resolve()
-                    });
-                    return d.promise()
-                }});
-        var transitionType = function(options) {
-                if (options.type === "fade")
-                    return options.type;
-                if (options.direction === "none")
-                    return "none";
-                return options.type
-            };
-        TransitionExecutor.create = function(container, options) {
-            var device = DX.devices.current();
-            switch (transitionType(options)) {
-                case"none":
-                    return new NoneTransitionExecutor(container, options);
-                case"slide":
-                    if (device.platform === "ios" && device.version[0] === 7)
-                        return new SlideIOS7TransitionExecutor(container, options);
-                    else
-                        return new SlideTransitionExecutor(container, options);
-                case"fade":
-                    return new FadeTransitionExecutor(container, options);
-                case"overflow":
-                    return new OverflowTransitionExecutor(container, options);
-                default:
-                    throw DX.Error("E3016", options.type);
-            }
-        };
-        DX.framework.html.TransitionExecutor = TransitionExecutor;
-        DX.framework.html.NoneTransitionExecutor = NoneTransitionExecutor;
-        DX.framework.html.SlideIOS7TransitionExecutor = SlideIOS7TransitionExecutor;
-        DX.framework.html.SlideTransitionExecutor = SlideTransitionExecutor;
-        DX.framework.html.OverflowTransitionExecutor = OverflowTransitionExecutor;
-        DX.framework.html.FadeTransitionExecutor = FadeTransitionExecutor
     })(jQuery, DevExpress);
     DevExpress.MOD_FRAMEWORK = true
 }

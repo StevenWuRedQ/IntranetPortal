@@ -1,5 +1,7 @@
 ﻿Imports System.Threading
 Imports IntranetPortal.Core
+Imports System.ServiceModel
+Imports System.ServiceModel.Description
 
 Public Class RulesService
     Private Shared ServiceInstance As RulesService
@@ -39,11 +41,12 @@ Public Class RulesService
 
             InitServiceMode()
             InitRules()
+            HostService()
 
             Log("Service is running")
             Log("Service Running Mode: " + Mode.ToString)
 
-            For Each Rule In rules
+            For Each Rule In Rules
                 Log("Inital Rule: " & Rule.RuleName)
                 RunTimer(Rule)
                 Log("Inital Rule (" & Rule.RuleName & ") Finished. ")
@@ -53,23 +56,22 @@ Public Class RulesService
         End If
     End Sub
 
-    Dim rules As List(Of BaseRule)
+    Public Property Rules As List(Of BaseRule)
     Private Sub InitRules()
-        rules = New List(Of BaseRule)
-        rules.Add(New RecycleProcessRule() With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Recycle Leads"})
-        rules.Add(New CompleteTaskRule() With {.ExecuteOn = TimeSpan.Parse("20:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Complete Leads Task"})
-        rules.Add(New AgentActivitySummaryRule() With {.ExecuteOn = TimeSpan.Parse("21:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Team Activity Email Rule"})
-        rules.Add(New ShortSaleActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("12:01:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "ShortSale Activity Email Rule on 12pm"})
-        'rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("22:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Leads and Task Rule"})
-        rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("01:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Assign Leads Rule"})
-        rules.Add(New EmailSummaryRule() With {.ExecuteOn = TimeSpan.Parse("06:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "User Task Summary Rule"})
+        Rules = New List(Of BaseRule)
+        'Rules.Add(New RecycleProcessRule() With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Recycle Leads"})
+        'Rules.Add(New CompleteTaskRule() With {.ExecuteOn = TimeSpan.Parse("20:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Complete Leads Task"})
+        'Rules.Add(New AgentActivitySummaryRule() With {.ExecuteOn = TimeSpan.Parse("21:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Team Activity Email Rule"})
+        'Rules.Add(New ShortSaleActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("12:01:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "ShortSale Activity Email Rule on 12pm"})
+        'Rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("01:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Assign Leads Rule"})
+        'Rules.Add(New EmailSummaryRule() With {.ExecuteOn = TimeSpan.Parse("06:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "User Task Summary Rule"})
 
-        rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Data Loop Rule", .ExecuteNow = True})
-        rules.Add(New PendingAssignRule With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Import Pending Assign Rule", .ExecuteNow = True})
-        rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("07:00:00"), .Period = TimeSpan.Parse("06:00:00"), .RuleName = "DOB Complaints refresh rule", .ExecuteNow = False})
+        'Rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Data Loop Rule", .ExecuteNow = True})
+        'Rules.Add(New PendingAssignRule With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Import Pending Assign Rule", .ExecuteNow = True})
+        'Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("07:00:00"), .Period = TimeSpan.Parse("06:00:00"), .RuleName = "DOB Complaints refresh rule", .ExecuteNow = False})
 
         'Legal
-        rules.Add(New LegalFollowUpRule() With {.ExecuteOn = TimeSpan.Parse("07:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Legal Follow up Rule"})
+        Rules.Add(New LegalFollowUpRule() With {.ExecuteOn = TimeSpan.Parse("07:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Legal Follow up Rule"})
 
         'rules.Add(New ExpiredAllReminderRule With {.ExecuteOn = TimeSpan.Parse("18:31:00"), .Period = TimeSpan.Parse("10.0:0:0"), .RuleName = "Expired all reminder"})
         'rules.Add(New CreateReminderBaseOnErrorProcess() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:20:00"), .RuleName = "CreateReminderBaseOnErrorProcess Rule", .ExecuteNow = True})
@@ -88,12 +90,19 @@ Public Class RulesService
                 obj.TimerReference.Dispose()
             Next
         End If
+        host.Close()
     End Sub
 
-    Private Sub RunTimer(rule As BaseRule)
-        Dim StateObj As New StateObjClass
-        StateObj.TimerCanceled = False
-        StateObj.Rule = rule
+    Private Sub RunTimer(rule As BaseRule, Optional stateObj As StateObjClass = Nothing)
+        rule.Status = BaseRule.RuleStatus.Active
+
+        If stateObj Is Nothing Then
+            stateObj = New StateObjClass
+            stateObj.Rule = rule
+            StateObjs.Add(stateObj)
+        End If
+
+        stateObj.TimerCanceled = False
 
         Dim TimerDelegate As New System.Threading.TimerCallback(AddressOf TimerTask)
 
@@ -107,17 +116,17 @@ Public Class RulesService
         End If
 
         Log("Due Time: " & dueTime.ToString & " Period: " & rule.Period.ToString)
-        Dim timerItem = New System.Threading.Timer(TimerDelegate, StateObj, dueTime, rule.Period)
+        Dim timerItem = New System.Threading.Timer(TimerDelegate, stateObj, dueTime, rule.Period)
 
         ' Save a reference for Dispose.
-        StateObj.TimerReference = timerItem
-        StateObjs.Add(StateObj)
+        stateObj.TimerReference = timerItem
+
     End Sub
 
     Private Sub TimerTask(ByVal StateObj As Object)
         Dim State As StateObjClass = CType(StateObj, StateObjClass)
 
-        If State.InProcess Then
+        If State.Rule.Status = BaseRule.RuleStatus.InProcess Then
             Log("Timer is cancel")
             Return
         End If
@@ -128,13 +137,13 @@ Public Class RulesService
         End If
 
         Log("Launched rule Task: " & State.Rule.RuleName)
-        State.InProcess = True
+        State.Rule.Status = BaseRule.RuleStatus.InProcess
 
         Try
             If WorkingHours.IsWorkingDay(DateTime.Now) Then
                 'Run Rules
                 'RunRules()
-                State.Rule.Execute()
+                'State.Rule.Execute()
             End If
         Catch ex As Exception
             Log("Exception in Run Rules", ex)
@@ -149,12 +158,44 @@ Public Class RulesService
 
         'State.TimerReference.Change(dueTime, State.Rule.Period)
 
-        State.InProcess = False
+        State.Rule.Status = BaseRule.RuleStatus.Active
 
         If State.TimerCanceled Then
             ' Dispose Requested.
-            State.TimerReference.Dispose()
-            Log("Rule " & State.Rule.RuleName & " is cancel.")
+            DisposeTimer(State)
+        End If
+    End Sub
+
+    Public Sub ExecuteRule(ruleName As String)
+        Dim stateObj = StateObjs.SingleOrDefault(Function(s) s.Rule.RuleName = ruleName)
+        TimerTask(stateObj)
+    End Sub
+
+    Public Sub StartRule(ruleName As String)
+        Dim stateObj = StateObjs.SingleOrDefault(Function(s) s.Rule.RuleName = ruleName)
+        If stateObj IsNot Nothing Then
+            DisposeTimer(stateObj)
+            RunTimer(stateObj.Rule, stateObj)
+        End If
+    End Sub
+
+    Public Sub StopRule(ruleName As String)
+        Dim stateObj = StateObjs.SingleOrDefault(Function(s) s.Rule.RuleName = ruleName)
+
+        If stateObj IsNot Nothing Then
+            stateObj.Rule.Status = BaseRule.RuleStatus.Stoped
+            stateObj.TimerCanceled = True
+
+            If stateObj.TimerReference IsNot Nothing Then
+                stateObj.TimerReference.Dispose()
+            End If
+        End If
+    End Sub
+
+    Private Sub DisposeTimer(stateObj As StateObjClass)
+        If stateObj.TimerReference IsNot Nothing Then
+            stateObj.TimerReference.Dispose()
+            Log("Rule " & stateObj.Rule.RuleName & " is stoped.")
         End If
     End Sub
 
@@ -242,6 +283,40 @@ Public Class RulesService
             serviceMode = [Enum].Parse(GetType(RunningMode), mode)
         End If
     End Sub
+    Private host As ServiceHost
+    Private Sub HostService()
+
+        host = New ServiceHost(GetType(RulesEngineServices))
+
+        'host = New ServiceHost(GetType(RulesEngineServices), New Uri("net.tcp://localhost:8001/RulesEngineService"))
+        'Dim smb = host.Description.Behaviors.Find(Of ServiceMetadataBehavior)()
+        'If smb Is Nothing Then
+        '    smb = New ServiceMetadataBehavior
+        'End If
+
+        'smb.MetadataExporter.PolicyVersion = PolicyVersion.Policy15
+        'host.Description.Behaviors.Add(smb)
+
+        'Dim netTcp = New NetTcpBinding(SecurityMode.None, False)
+        'netTcp.CloseTimeout = TimeSpan.Parse("00:10:00")
+        'netTcp.OpenTimeout = TimeSpan.Parse("00:10:00")
+        'netTcp.SendTimeout = TimeSpan.Parse("00:10:00")
+        'netTcp.MaxBufferPoolSize = 2147483647
+        'netTcp.MaxBufferSize = 2147483647
+        'netTcp.MaxReceivedMessageSize = 2147483647
+        'netTcp.ReaderQuotas.MaxArrayLength = 2147483647
+        'netTcp.ReaderQuotas.MaxNameTableCharCount = 2147483647
+        'netTcp.ReaderQuotas.MaxStringContentLength = 2147483647
+        'netTcp.ReaderQuotas.MaxDepth = 2147483647
+        'netTcp.ReaderQuotas.MaxBytesPerRead = 2147483647
+
+        'Dim svrEndpoint As ServiceEndpoint = host.AddServiceEndpoint(GetType(IRulesEngineServices), netTcp, "")
+        'host.AddServiceEndpoint(ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexTcpBinding(), "mex")
+
+        host.Open()
+
+        Log("Client Service Host is started.")
+    End Sub
 
     Private Class StateObjClass
         ' Used to hold parameters for calls to TimerTask. 
@@ -250,6 +325,7 @@ Public Class RulesService
         Public TimerCanceled As Boolean
         Public InProcess As Boolean
         Public Rule As BaseRule
+
     End Class
 
     Enum ServiceStatus

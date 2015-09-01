@@ -26,7 +26,11 @@ Public Class PropertyFloor
                 For Each occupant In _evictionOccupants
                     If String.IsNullOrEmpty(occupant.BBLE) Then
                         occupant.BBLE = BBLE
-                        occupant.CaseId = ShortSaleCase.GetCaseByBBLE(BBLE).CaseId
+
+                        Dim ssCase = ShortSaleCase.GetCaseByBBLE(BBLE)
+                        If ssCase IsNot Nothing Then
+                            occupant.CaseId = ShortSaleCase.GetCaseByBBLE(BBLE).CaseId
+                        End If
                     End If
 
                     occupant.FloorId = FloorId
@@ -49,6 +53,12 @@ Public Class PropertyFloor
         End Using
     End Sub
 
+    Public Shared Function PropertyFloors(bble As String) As PropertyFloor()
+        Using context As New ShortSaleEntities
+            Return context.PropertyFloors.Where(Function(fl) fl.BBLE = bble).ToArray
+        End Using
+    End Function
+
     Public Shared Function Instance(bble As String, floorId As Integer) As PropertyFloor
         Using context As New ShortSaleEntities
             Return context.PropertyFloors.Find(bble, floorId)
@@ -56,6 +66,32 @@ Public Class PropertyFloor
         End Using
     End Function
 
+    Public Shared Function SavePropertyFloors(bble As String, floors As PropertyFloor()) As PropertyFloor()
+        Using context As New ShortSaleEntities
+            Dim i = 1
+            For Each floor In floors
+                If String.IsNullOrEmpty(floor.BBLE) Then
+                    floor.BBLE = bble
+                End If
+                floor.FloorId = i
+                floor.Save()
+
+                i += 1
+            Next
+
+            Dim olderEntities = context.PropertyFloors.Where(Function(pf) pf.BBLE = bble).ToList
+            If olderEntities.Count > floors.Count Then
+                For Each floor In olderEntities
+                    If Not floors.Any(Function(so) so.FloorId = floor.FloorId) Then
+                        context.PropertyFloors.Remove(floor)
+                    End If
+                Next
+                context.SaveChanges()
+            End If
+        End Using
+
+        Return PropertyFloors(bble)
+    End Function
 
     Public Shared Sub Delete(bble As String, floorId As Integer)
         Using context As New ShortSaleEntities

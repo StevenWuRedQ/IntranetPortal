@@ -29,11 +29,13 @@
         }
 
         function FilterComplaints(key) {
-            var filterCondition = "";
+            Complaints.Filter(key);
+                       
+            //var filterCondition = "";
 
-            filterCondition = "[Address] LIKE '%" + key + "%'";
-            filterCondition += " OR [BBLE] LIKE '%" + key + "%'";
-            gdComplainsResult.ApplyFilter(filterCondition);
+            //filterCondition = "[Address] LIKE '%" + key + "%'";
+            //filterCondition += " OR [BBLE] LIKE '%" + key + "%'";
+            //gdComplainsResult.ApplyFilter(filterCondition);
             return false;
         }
 
@@ -453,13 +455,20 @@
                             this.DataGrid = $("#dgComplaintsResult").dxDataGrid(gridOptions).dxDataGrid("instance");
                         },
                         Refresh: function () {
-                            if(this.DataGrid == null)
+                            if (this.DataGrid == null)
                                 this.LoadGrid();
-                            else
-                            {
+                            else {
                                 this.Result = null;
                                 this.DataGrid.refresh();
                             }
+                        },
+                        Filter: function (key) {
+                            this.DataGrid.clearFilter('dataSource');
+                            this.DataGrid.filter([
+                                ["Address", "contains", key],
+                                "or",
+                                ["BBLE", "contains", key]
+                            ]);
                         }
                     }
 

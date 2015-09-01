@@ -1,7 +1,7 @@
 /*! 
 * DevExtreme (Vector Map)
-* Version: 14.2.4
-* Build date: Jan 16, 2015
+* Version: 15.1.6
+* Build date: Aug 14, 2015
 *
 * Copyright (c) 2012 - 2015 Developer Express Inc. ALL RIGHTS RESERVED
 * EULA: https://www.devexpress.com/Support/EULAs/DevExtreme.xml
@@ -14,22 +14,20 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
     /*! Module viz-vectormap, file map.js */
     (function(DX, $, undefined) {
         DX.viz.map = {};
-        var _Number = window.Number,
-            _isFunction = DX.utils.isFunction,
-            _getRootOffset = DX.utils.getRootOffset,
-            _parseScalar = DX.viz.core.utils.parseScalar;
-        var DEFAULT_WIDTH = 800,
-            DEFAULT_HEIGHT = 400;
-        var _extend = $.extend;
-        var nextDataKey = 1;
+        var _parseScalar = DX.viz.core.utils.parseScalar,
+            DEFAULT_WIDTH = 800,
+            DEFAULT_HEIGHT = 400,
+            TOOLTIP_OFFSET = 12,
+            _extend = $.extend,
+            nextDataKey = 1;
         function generateDataKey() {
-            return 'vectormap-data-' + nextDataKey++
+            return "vectormap-data-" + nextDataKey++
         }
         var Map = DX.viz.core.BaseWidget.inherit({
                 _eventsMap: _extend({}, DX.viz.core.BaseWidget.prototype._eventsMap, {
                     onClick: {
-                        name: 'click',
-                        deprecated: 'click',
+                        name: "click",
+                        deprecated: "click",
                         deprecatedContext: function(arg) {
                             return arg.component
                         },
@@ -37,10 +35,10 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                             return [arg.jQueryEvent]
                         }
                     },
-                    click: {newName: 'onClick'},
+                    click: {newName: "onClick"},
                     onCenterChanged: {
-                        name: 'centerChanged',
-                        deprecated: 'centerChanged',
+                        name: "centerChanged",
+                        deprecated: "centerChanged",
                         deprecatedContext: function(arg) {
                             return arg.component
                         },
@@ -48,10 +46,10 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                             return [arg.center]
                         }
                     },
-                    centerChanged: {newName: 'onCenterChanged'},
+                    centerChanged: {newName: "onCenterChanged"},
                     onZoomFactorChanged: {
-                        name: 'zoomFactorChanged',
-                        deprecated: 'zoomFactorChanged',
+                        name: "zoomFactorChanged",
+                        deprecated: "zoomFactorChanged",
                         deprecatedContext: function(arg) {
                             return arg.component
                         },
@@ -59,10 +57,10 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                             return [arg.zoomFactor]
                         }
                     },
-                    zoomFactorChanged: {newName: 'onZoomFactorChanged'},
+                    zoomFactorChanged: {newName: "onZoomFactorChanged"},
                     onAreaClick: {
-                        name: 'areaClick',
-                        deprecated: 'areaSettings.click',
+                        name: "areaClick",
+                        deprecated: "areaSettings.click",
                         deprecatedContext: function(arg) {
                             return arg.target
                         },
@@ -70,10 +68,10 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                             return [arg.target, arg.jQueryEvent]
                         }
                     },
-                    onAreaHoverChanged: {name: 'areaHoverChanged'},
+                    onAreaHoverChanged: {name: "areaHoverChanged"},
                     onAreaSelectionChanged: {
-                        name: 'areaSelectionChanged',
-                        deprecated: 'areaSettings.selectionChanged',
+                        name: "areaSelectionChanged",
+                        deprecated: "areaSettings.selectionChanged",
                         deprecatedContext: function(arg) {
                             return arg.target
                         },
@@ -82,8 +80,8 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                         }
                     },
                     onMarkerClick: {
-                        name: 'markerClick',
-                        deprecated: 'markerSettings.click',
+                        name: "markerClick",
+                        deprecated: "markerSettings.click",
                         deprecatedContext: function(arg) {
                             return arg.target
                         },
@@ -91,10 +89,10 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                             return [arg.target, arg.jQueryEvent]
                         }
                     },
-                    onMarkerHoverChanged: {name: 'markerHoverChanged'},
+                    onMarkerHoverChanged: {name: "markerHoverChanged"},
                     onMarkerSelectionChanged: {
-                        name: 'markerSelectionChanged',
-                        deprecated: 'markerSettings.selectionChanged',
+                        name: "markerSelectionChanged",
+                        deprecated: "markerSettings.selectionChanged",
                         deprecatedContext: function(arg) {
                             return arg.target
                         },
@@ -107,143 +105,159 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     this.callBase();
                     $.extend(this._deprecatedOptions, {
                         click: {
-                            since: '14.2',
-                            message: "Use the 'onClick' option instead"
+                            since: "14.2",
+                            message: 'Use the "onClick" option instead'
                         },
                         centerChanged: {
-                            since: '14.2',
-                            message: "Use the 'onCenterChanged' option instead"
+                            since: "14.2",
+                            message: 'Use the "onCenterChanged" option instead'
                         },
                         zoomFactorChanged: {
-                            since: '14.2',
-                            message: "Use the 'onZoomFactorChanged' option instead"
+                            since: "14.2",
+                            message: 'Use the "onZoomFactorChanged" option instead'
                         },
-                        'areaSettings.click': {
-                            since: '14.2',
-                            message: "Use the 'onAreaClick' option instead"
+                        "areaSettings.click": {
+                            since: "14.2",
+                            message: 'Use the "onAreaClick" option instead'
                         },
-                        'areaSettings.selectionChanged': {
-                            since: '14.2',
-                            message: "Use the 'onAreaSelectionChanged' option instead"
+                        "areaSettings.selectionChanged": {
+                            since: "14.2",
+                            message: 'Use the "onAreaSelectionChanged" option instead'
                         },
-                        'markerSettings.click': {
-                            since: '14.2',
-                            message: "Use the 'onMarkerClick' option instead"
+                        "markerSettings.click": {
+                            since: "14.2",
+                            message: 'Use the "onMarkerClick" option instead'
                         },
-                        'markerSettings.selectionChanged': {
-                            since: '14.2',
-                            message: "Use the 'onMarkerSelectionChanged' option instead"
+                        "markerSettings.selectionChanged": {
+                            since: "14.2",
+                            message: 'Use the "onMarkerSelectionChanged" option instead'
+                        },
+                        "markerSettings.font": {
+                            since: "14.2",
+                            message: 'Use the "label.font" option instead'
                         }
                     })
                 },
-                _init: function() {
+                _rootClassPrefix: "dxm",
+                _rootClass: "dxm-vector-map",
+                _createThemeManager: function() {
+                    return this._factory.createThemeManager()
+                },
+                _initBackground: function(dataKey) {
+                    this._background = this._renderer.rect(0, 0, 0, 0).attr({"class": "dxm-background"}).data(dataKey, {type: "background"}).append(this._root)
+                },
+                _initAreasManager: function(dataKey, notifyDirty, notifyReady) {
                     var that = this;
-                    that._themeManager = that._factory.createThemeManager();
-                    that._themeManager.setTheme(that.option('theme'), that.option('rtlEnabled'));
-                    that.callBase.apply(that, arguments);
-                    that._dataExchanger = new DataExchanger;
-                    that._initCenterHandler();
-                    that._renderer = that._factory.createRenderer({
-                        width: 1,
-                        height: 1,
-                        pathModified: that.option('pathModified'),
-                        rtl: that.option('rtlEnabled')
-                    });
-                    that._renderer.draw(that.element().get(0));
-                    that._root = that._renderer.root;
-                    that._root.attr({
-                        'class': 'dxm',
-                        stroke: 'none',
-                        "stroke-width": 0,
-                        fill: 'none',
-                        align: 'center',
-                        cursor: 'default'
-                    }).css({overflow: 'hidden'});
-                    that._projection = that._factory.createProjection();
-                    var dataKey = generateDataKey();
-                    that._tracker = that._factory.createTracker({
-                        root: that._root,
-                        dataKey: dataKey
-                    });
-                    that._layoutControl = that._factory.createLayoutControl();
-                    that._background = that._renderer.rect(0, 0, 0, 0).attr({'class': 'dxm-background'});
-                    $(that._background.element).data(dataKey, {type: 'background'});
                     that._areasManager = that._factory.createAreasManager({
-                        container: that._root,
                         renderer: that._renderer,
+                        container: that._root,
                         projection: that._projection,
                         themeManager: that._themeManager,
                         tracker: that._tracker,
                         dataKey: dataKey,
                         eventTrigger: that._eventTrigger,
                         dataExchanger: that._dataExchanger,
-                        ready: function() {
-                            that.hideLoadingIndicator()
-                        }
-                    });
+                        notifyDirty: notifyDirty,
+                        notifyReady: notifyReady
+                    })
+                },
+                _initMarkersManager: function(dataKey, notifyDirty, notifyReady) {
+                    var that = this;
                     that._markersManager = that._factory.createMarkersManager({
-                        container: that._root,
                         renderer: that._renderer,
+                        container: that._root,
                         projection: that._projection,
                         themeManager: that._themeManager,
                         tracker: that._tracker,
                         eventTrigger: that._eventTrigger,
                         dataExchanger: that._dataExchanger,
-                        dataKey: dataKey
-                    });
+                        dataKey: dataKey,
+                        notifyDirty: notifyDirty,
+                        notifyReady: notifyReady
+                    })
+                },
+                _initLegendsControl: function() {
+                    var that = this;
                     that._legendsControl = that._factory.createLegendsControl({
-                        container: that._root,
                         renderer: that._renderer,
+                        container: that._root,
                         layoutControl: that._layoutControl,
                         dataExchanger: that._dataExchanger
-                    });
+                    })
+                },
+                _initControlBar: function(dataKey) {
+                    var that = this;
                     that._controlBar = that._factory.createControlBar({
-                        container: that._root,
                         renderer: that._renderer,
+                        container: that._root,
                         layoutControl: that._layoutControl,
                         projection: that._projection,
                         dataKey: dataKey
+                    })
+                },
+                _initElements: function() {
+                    var that = this,
+                        dataKey = generateDataKey(),
+                        notifyCounter = 0;
+                    that._dataExchanger = new DataExchanger;
+                    that._initCenterHandler();
+                    that._projection = that._factory.createProjection();
+                    that._tracker = that._factory.createTracker({
+                        root: that._root,
+                        projection: that._projection,
+                        dataKey: dataKey
                     });
-                    that._tooltip = that._factory.createTooltip({
-                        container: that._root,
-                        renderer: that._renderer,
-                        tracker: that._tracker
+                    that._layoutControl = that._factory.createLayoutControl();
+                    that._initBackground(dataKey);
+                    that._initAreasManager(dataKey, notifyDirty, notifyReady);
+                    that._initMarkersManager(dataKey, notifyDirty, notifyReady);
+                    that._initControlBar(dataKey);
+                    that._initLegendsControl();
+                    function notifyDirty() {
+                        that._resetIsReady();
+                        ++notifyCounter
+                    }
+                    function notifyReady() {
+                        if (--notifyCounter === 0) {
+                            that._drawn();
+                            that._checkLoadingIndicatorHiding(true)
+                        }
+                    }
+                },
+                _initCore: function() {
+                    var that = this;
+                    that._root = that._renderer.root.attr({
+                        align: 'center',
+                        cursor: 'default'
                     });
-                    that._setThemeDependentOptions();
-                    that._areasManager.setData(that.option('mapData'));
-                    that._markersManager.setData(that.option('markers'));
-                    that._projection.setBounds(that.option('bounds')).setMaxZoom(that.option('maxZoomFactor')).setZoom(that.option('zoomFactor'), true).setCenter(that.option('center'), true);
-                    that._setTrackerOptions();
-                    that._setupInteraction();
+                    that._initElements();
+                    that._projection.setBounds(that.option("bounds")).setMaxZoom(that.option("maxZoomFactor")).setZoom(that.option("zoomFactor"), true).setCenter(that.option("center"), true);
                     that._setTrackerCallbacks();
                     that._setControlBarCallbacks();
                     that._setProjectionCallbacks()
                 },
-                _dispose: function() {
+                _init: function() {
                     var that = this;
                     that.callBase.apply(that, arguments);
+                    that._areasManager.setData(that.option("mapData"));
+                    that._markersManager.setData(that.option("markers"))
+                },
+                _disposeCore: function() {
+                    var that = this;
                     that._resetProjectionCallbacks();
                     that._resetTrackerCallbacks();
                     that._resetControlBarCallbacks();
-                    that._themeManager.dispose();
                     that._tracker.dispose();
                     that._legendsControl.dispose();
+                    that._background.remove();
                     that._areasManager.dispose();
                     that._markersManager.dispose();
                     that._controlBar.dispose();
-                    that._tooltip.dispose();
                     that._layoutControl.dispose();
                     that._disposeCenterHandler();
                     that._dataExchanger.dispose();
                     that._projection.dispose();
-                    that._renderer.dispose();
-                    that._disposeLoadIndicator();
-                    that._renderer = that._themeManager = that._dataExchanger = that._projection = that._tracker = that._layoutControl = that._root = that._background = that._areasManager = that._markersManager = that._controlBar = that._legendsControl = that._tooltip = null
-                },
-                _getOption: function(name, isScalar) {
-                    var theme = this._themeManager.theme(name),
-                        option = this.option(name);
-                    return isScalar ? option !== undefined ? option : theme : _extend(true, {}, theme, option)
+                    that._dataExchanger = that._projection = that._tracker = that._layoutControl = that._root = that._background = that._areasManager = that._markersManager = that._controlBar = that._legendsControl = null
                 },
                 _initCenterHandler: function() {
                     var that = this,
@@ -261,7 +275,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                         processMove: function(arg) {
                             if (that._centeringEnabled) {
                                 if (!isCursorChanged) {
-                                    that._root.attr({cursor: 'move'});
+                                    that._root.attr({cursor: "move"});
                                     isCursorChanged = true
                                 }
                                 that._projection.moveCenter(xdrag - arg.x, ydrag - arg.y);
@@ -271,7 +285,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                         },
                         processEnd: function() {
                             if (that._centeringEnabled) {
-                                that._root.attr({cursor: 'default'});
+                                that._root.attr({cursor: "default"});
                                 that._noCenterChanged = null;
                                 isCursorChanged && that._raiseCenterChanged();
                                 isCursorChanged = false
@@ -309,17 +323,18 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                         isControlDrag = false;
                     that._tracker.setCallbacks({
                         click: function(arg) {
-                            var offset = _getRootOffset(renderer);
+                            var offset = renderer.getRootOffset(),
+                                manager;
                             arg.$event.x = arg.x - offset.left;
                             arg.$event.y = arg.y - offset.top;
-                            var manager = managers[arg.data.type];
+                            manager = managers[arg.data.type];
                             if (manager)
                                 manager.raiseClick(arg.data.index, arg.$event);
-                            if (manager || arg.data.type === 'background')
-                                that._eventTrigger('click', {jQueryEvent: arg.$event})
+                            if (manager || arg.data.type === "background")
+                                that._eventTrigger("click", {jQueryEvent: arg.$event})
                         },
                         start: function(arg) {
-                            isControlDrag = arg.data.type === 'control-bar';
+                            isControlDrag = arg.data.type === "control-bar";
                             if (isControlDrag) {
                                 arg.data = arg.data.index;
                                 controlBar.processStart(arg)
@@ -347,33 +362,36 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                         zoom: function(arg) {
                             controlBar.processZoom(arg)
                         },
-                        'hover-on': function(arg) {
+                        "hover-on": function(arg) {
                             var manager = managers[arg.data.type];
                             if (manager)
                                 manager.hoverItem(arg.data.index, true)
                         },
-                        'hover-off': function(arg) {
+                        "hover-off": function(arg) {
                             var manager = managers[arg.data.type];
                             if (manager)
                                 manager.hoverItem(arg.data.index, false)
                         },
-                        'focus-on': function(arg, done) {
-                            var result = false;
-                            if (tooltip.enabled()) {
-                                var proxy = managers[arg.data.type] ? managers[arg.data.type].getProxyItem(arg.data.index) : null;
-                                if (!!proxy && tooltip.prepare(proxy, {offset: 12})) {
-                                    var offset = _getRootOffset(renderer);
-                                    tooltip.show().move(arg.x - offset.left, arg.y - offset.top);
+                        "focus-on": function(arg, done) {
+                            var result = false,
+                                proxy;
+                            if (tooltip.isEnabled()) {
+                                proxy = managers[arg.data.type] ? managers[arg.data.type].getProxyItem(arg.data.index) : null;
+                                if (proxy && tooltip.show(proxy, {
+                                    x: 0,
+                                    y: 0,
+                                    offset: 0
+                                }, {target: proxy})) {
+                                    tooltip.move(arg.x, arg.y, TOOLTIP_OFFSET);
                                     result = true
                                 }
                             }
                             done(result)
                         },
-                        'focus-move': function(arg) {
-                            var offset = _getRootOffset(renderer);
-                            tooltip.move(arg.x - offset.left, arg.y - offset.top)
+                        "focus-move": function(arg) {
+                            tooltip.move(arg.x, arg.y, TOOLTIP_OFFSET)
                         },
-                        'focus-off': function(arg) {
+                        "focus-off": function() {
                             tooltip.hide()
                         }
                     });
@@ -409,7 +427,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                             var coords,
                                 screenPosition;
                             if (center) {
-                                screenPosition = _getRootOffset(that._renderer);
+                                screenPosition = that._renderer.getRootOffset();
                                 screenPosition = [center[0] - screenPosition.left, center[1] - screenPosition.top];
                                 coords = projection.fromScreenPoint(screenPosition[0], screenPosition[1])
                             }
@@ -426,129 +444,95 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 _setupInteraction: function() {
                     var that = this;
                     that._centerHandler.processEnd();
-                    that._centeringEnabled = !!_parseScalar(this._getOption('panningEnabled', true), true);
-                    that._zoomingEnabled = !!_parseScalar(this._getOption('zoomingEnabled', true), true);
+                    that._centeringEnabled = !!_parseScalar(this._getOption("panningEnabled", true), true);
+                    that._zoomingEnabled = !!_parseScalar(this._getOption("zoomingEnabled", true), true);
                     that._controlBar.setInteraction({
                         centeringEnabled: that._centeringEnabled,
                         zoomingEnabled: that._zoomingEnabled
                     })
                 },
-                _resize: function(_forceResize) {
-                    var that = this,
-                        size = that.option('size') || {},
-                        width = size.width >= 0 ? _Number(size.width) : that.element().width(),
-                        height = size.height >= 0 ? _Number(size.height) : that.element().height(),
-                        hidden = false;
-                    if (width === 0)
-                        if (_Number(size.width) === 0)
-                            hidden = true;
-                        else
-                            width = DEFAULT_WIDTH;
-                    if (height === 0)
-                        if (_Number(size.height) === 0)
-                            hidden = true;
-                        else
-                            height = DEFAULT_HEIGHT;
-                    if (hidden || !that.element().is(':visible')) {
-                        that._incidentOccured("W2001", [that.NAME]);
-                        that._width = that._height = 0;
-                        return false
-                    }
-                    var needResize = that._width !== width || that._height !== height || _forceResize;
-                    if (needResize) {
-                        that._width = width;
-                        that._height = height;
-                        that._renderer.resize(width, height);
-                        that._projection.setSize(width, height);
-                        that._layoutControl.setSize(width, height);
-                        that._tooltip.setSize(width, height);
-                        that._background.attr({
-                            x: 0,
-                            y: 0,
-                            width: width,
-                            height: height
-                        });
-                        that._updateLoadIndicator(undefined, width, height)
-                    }
-                    return needResize
+                _getDefaultSize: function() {
+                    return {
+                            width: DEFAULT_WIDTH,
+                            height: DEFAULT_HEIGHT
+                        }
                 },
+                _applySize: function() {
+                    var that = this,
+                        width = that._canvas.width,
+                        height = that._canvas.height;
+                    that._projection.setSize(width, height);
+                    that._layoutControl.setSize(width, height);
+                    that._background.attr({
+                        x: 0,
+                        y: 0,
+                        width: width,
+                        height: height
+                    })
+                },
+                _resize: $.noop,
                 _clean: function() {
                     var that = this;
                     that._tracker.reset();
                     that._layoutControl.stop();
-                    that._background.remove();
                     that._areasManager.clean();
                     that._markersManager.clean();
                     that._controlBar.clean();
-                    that._legendsControl.clean();
-                    that._tooltip.clean()
+                    that._legendsControl.clean()
                 },
                 _render: function() {
                     var that = this;
-                    if (!that._resize(true))
-                        return;
-                    that._background.append(that._root);
-                    that._areasManager.render();
-                    that._markersManager.render();
-                    that._controlBar.render();
+                    that._scheduleLoadingIndicatorHiding();
                     that._legendsControl.render();
-                    that._layoutControl.start();
-                    that._tooltip.render();
-                    that._drawn()
+                    that._controlBar.render();
+                    that._markersManager.render();
+                    that._areasManager.render();
+                    that._layoutControl.start()
                 },
                 _optionChanged: function(args) {
                     var that = this,
                         value = args.value;
+                    that._scheduleLoadingIndicatorHiding();
                     switch (args.name) {
-                        case'size':
-                            that._resize();
-                            break;
-                        case'theme':
-                            that._themeManager.setTheme(value, that.option('rtlEnabled'));
-                            that._setThemeDependentOptions();
-                            break;
-                        case'mapData':
+                        case"mapData":
                             that._areasManager.setData(value);
                             break;
-                        case'markers':
+                        case"markers":
                             that._markersManager.setData(value);
                             break;
-                        case'bounds':
+                        case"bounds":
                             that._projection.setBounds(value);
                             break;
-                        case'maxZoomFactor':
+                        case"maxZoomFactor":
                             that._projection.setMaxZoom(value);
                             break;
-                        case'zoomFactor':
+                        case"zoomFactor":
                             that._projection.setZoom(value);
                             break;
-                        case'center':
+                        case"center":
                             that._projection.setCenter(value);
                             break;
-                        case'background':
+                        case"background":
                             that._setBackgroundOptions();
                             break;
-                        case'areaSettings':
+                        case"areaSettings":
                             that._setAreasManagerOptions();
                             break;
-                        case'markerSettings':
+                        case"markerSettings":
                             that._setMarkersManagerOptions();
                             break;
-                        case'controlBar':
+                        case"controlBar":
                             that._setControlBarOptions();
                             break;
-                        case'legends':
+                        case"legends":
                             that._setLegendsOptions();
                             break;
-                        case'tooltip':
-                            that._setTooltipOptions();
-                            break;
-                        case'touchEnabled':
-                        case'wheelEnabled':
+                        case"touchEnabled":
+                        case"wheelEnabled":
                             that._setTrackerOptions();
                             break;
-                        case'panningEnabled':
-                        case'zoomingEnabled':
+                        case"panningEnabled":
+                        case"zoomingEnabled":
                             that._setupInteraction();
                             break;
                         default:
@@ -556,17 +540,19 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                             break
                     }
                 },
-                _setThemeDependentOptions: function() {
+                _handleThemeOptionsCore: function() {
                     var that = this;
+                    that._scheduleLoadingIndicatorHiding();
                     that._setBackgroundOptions();
                     that._setAreasManagerOptions();
                     that._setMarkersManagerOptions();
                     that._setControlBarOptions();
                     that._setLegendsOptions();
-                    that._setTooltipOptions()
+                    that._setTrackerOptions();
+                    that._setupInteraction()
                 },
                 _setBackgroundOptions: function() {
-                    var settings = this._getOption('background');
+                    var settings = this._getOption("background");
                     this._background.attr({
                         "stroke-width": settings.borderWidth,
                         stroke: settings.borderColor,
@@ -574,50 +560,32 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     })
                 },
                 _setAreasManagerOptions: function() {
-                    this._areasManager.setOptions(this.option('areaSettings'));
-                    this._createEventTrigger('onAreaClick');
-                    this._createEventTrigger('onAreaSelectionChanged')
+                    this._areasManager.setOptions(this.option("areaSettings"));
+                    this._eventTrigger.update("onAreaClick");
+                    this._eventTrigger.update("onAreaSelectionChanged")
                 },
                 _setMarkersManagerOptions: function() {
-                    this._markersManager.setOptions(this.option('markerSettings'));
-                    this._createEventTrigger('onMarkerClick');
-                    this._createEventTrigger('onMarkerSelectionChanged')
+                    this._markersManager.setOptions(this.option("markerSettings"));
+                    this._eventTrigger.update("onMarkerClick");
+                    this._eventTrigger.update("onMarkerSelectionChanged")
                 },
                 _setControlBarOptions: function() {
-                    this._controlBar.setOptions(this._getOption('controlBar'))
+                    this._controlBar.setOptions(this._getOption("controlBar"))
                 },
                 _setLegendsOptions: function() {
-                    this._legendsControl.setOptions(this.option('legends'), this._themeManager.theme('legend'))
-                },
-                _setTooltipOptions: function() {
-                    this._tooltip.setOptions(this._getOption('tooltip'))
+                    this._legendsControl.setOptions(this.option("legends"), this._themeManager.theme("legend"))
                 },
                 _setTrackerOptions: function() {
                     this._tracker.setOptions({
-                        touchEnabled: this._getOption('touchEnabled', true),
-                        wheelEnabled: this._getOption('wheelEnabled', true)
+                        touchEnabled: this._getOption("touchEnabled", true),
+                        wheelEnabled: this._getOption("wheelEnabled", true)
                     })
                 },
                 _raiseCenterChanged: function() {
-                    !this._noCenterChanged && this._eventTrigger('centerChanged', {center: this._projection.getCenter()})
+                    !this._noCenterChanged && this._eventTrigger("centerChanged", {center: this._projection.getCenter()})
                 },
                 _raiseZoomFactorChanged: function() {
-                    !this._noZoomFactorChanged && this._eventTrigger('zoomFactorChanged', {zoomFactor: this._projection.getZoom()})
-                },
-                _refresh: function() {
-                    var that = this,
-                        callBase = that.callBase;
-                    that._endLoading(function() {
-                        callBase.call(that)
-                    })
-                },
-                render: function() {
-                    var that = this;
-                    if (that._width === 0 && that._height === 0)
-                        that._refresh();
-                    else
-                        that._resize();
-                    return that
+                    !this._noZoomFactorChanged && this._eventTrigger("zoomFactorChanged", {zoomFactor: this._projection.getZoom()})
                 },
                 getAreas: function() {
                     return this._areasManager.getProxyItems()
@@ -670,25 +638,13 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     }
                 },
                 convertCoordinates: function(x, y) {
-                    return this._projection.fromScreenPointStrict(x, y)
-                },
-                _getLoadIndicatorOption: function() {
-                    return this._getOption('loadingIndicator')
-                },
-                showLoadingIndicator: function() {
-                    this._showLoadIndicator(this._getLoadIndicatorOption(), {
-                        width: this._width,
-                        height: this._height
-                    })
+                    return this._projection.fromScreenPoint(x, y)
                 },
                 _factory: {}
             });
-        Map.prototype._factory.createRenderer = function(parameters) {
-            return new DX.viz.renderers.Renderer(parameters)
-        };
-        function DataExchanger() {
-            this._store = {}
-        }
+        var DataExchanger = function() {
+                this._store = {}
+            };
         DataExchanger.prototype = {
             constructor: DataExchanger,
             dispose: function() {
@@ -717,7 +673,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 return this
             }
         };
-        DX.registerComponent('dxVectorMap', DX.viz.map, Map);
+        DX.registerComponent("dxVectorMap", DX.viz.map, Map);
         DX.viz.map._internal = {};
         DX.viz.map.sources = {};
         DX.viz.map._tests = {};
@@ -729,24 +685,25 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
     /*! Module viz-vectormap, file projection.js */
     (function(DX, $, undefined) {
         var _Number = Number,
-            _isFinite = isFinite,
-            _min = Math.min,
-            _max = Math.max,
-            _abs = Math.abs,
-            _tan = Math.tan,
-            _atan = Math.atan,
-            _exp = Math.exp,
-            _round = Math.round,
-            _ln = Math.log,
-            _pow = Math.pow,
-            _isArray = DX.utils.isArray;
-        var PI = Math.PI,
+            _isArray = DX.utils.isArray,
+            _math = Math,
+            _min = _math.min,
+            _max = _math.max,
+            _abs = _math.abs,
+            _tan = _math.tan,
+            _atan = _math.atan,
+            _exp = _math.exp,
+            _round = _math.round,
+            _ln = _math.log,
+            _pow = _math.pow,
+            PI = _math.PI,
             QUARTER_PI = PI / 4,
             PI_TO_360 = PI / 360,
-            TWO_TO_LN2 = 2 / Math.LN2;
-        var DEFAULT_MIN_ZOOM = 1,
-            DEFAULT_MAX_ZOOM = 1 << 8;
-        var MERCATOR_MIN_LON = -180,
+            TWO_TO_LN2 = 2 / _math.LN2,
+            MIN_BOUNDS_RANGE = 1 / 3600 / 180 / 10,
+            DEFAULT_MIN_ZOOM = 1,
+            DEFAULT_MAX_ZOOM = 1 << 8,
+            MERCATOR_MIN_LON = -180,
             MERCATOR_MAX_LON = 180,
             MERCATOR_MIN_LAT = -85.0511,
             MERCATOR_MAX_LAT = 85.0511;
@@ -803,13 +760,9 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 min = [_min(p1[0], p2[0]), _min(p1[1], p2[1])],
                 max = [_max(p1[0], p2[0]), _max(p1[1], p2[1])],
                 quad = bounds;
-            if (quad && quad.minLon)
-                quad = [quad.minLon, quad.minLat, quad.maxLon, quad.maxLat];
             if (quad)
                 quad = truncateQuad(quad, min, max);
             return {
-                    minBase: min,
-                    maxBase: max,
                     min: quad ? [_min(quad.lt[0], quad.rb[0]), _min(quad.lt[1], quad.rb[1])] : min,
                     max: quad ? [_max(quad.lt[0], quad.rb[0]), _max(quad.lt[1], quad.rb[1])] : max
                 }
@@ -830,7 +783,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 transform: $.Callbacks(),
                 center: $.Callbacks(),
                 zoom: $.Callbacks(),
-                'max-zoom': $.Callbacks()
+                "max-zoom": $.Callbacks()
             };
             this.setBounds(null)
         }
@@ -856,29 +809,28 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     that._xradius = height / 2 * mercator.aspectRatio;
                     that._yradius = height / 2
                 }
-                that._events['transform'].fire(that.getTransform());
+                that._events["transform"].fire(that.getTransform());
                 return that
             },
             setBounds: function(bounds) {
                 var that = this,
-                    _bounds = parseBounds(bounds);
-                that._minBase = _bounds.minBase;
-                that._maxBase = _bounds.maxBase;
+                    _bounds = parseBounds(bounds),
+                    p1,
+                    p2,
+                    delta,
+                    methods;
                 that._minBound = _bounds.min;
                 that._maxBound = _bounds.max;
-                var p1 = mercator.project(_bounds.min),
-                    p2 = mercator.project(_bounds.max),
-                    delta = _min(truncate(_abs(p2[0] - p1[0]), 0.1, 2, 2), truncate(_abs(p2[1] - p1[1]), 0.1, 2, 2)),
-                    methods = delta < 2 ? createProjectUnprojectMethods(p1, p2, delta) : mercator;
+                p1 = mercator.project(_bounds.min);
+                p2 = mercator.project(_bounds.max);
+                delta = [_abs(p2[0] - p1[0]), _abs(p2[1] - p1[1])];
+                delta = _min(delta[0] > MIN_BOUNDS_RANGE ? delta[0] : 2, delta[1] > MIN_BOUNDS_RANGE ? delta[1] : 2);
+                methods = delta < 2 ? createProjectUnprojectMethods(p1, p2, delta) : mercator;
                 that._project = methods.project;
                 that._unproject = methods.unproject;
-                var minv = that._project(_bounds.minBase),
-                    maxv = that._project(_bounds.maxBase);
-                that._minv = [_min(minv[0], maxv[0]), _min(minv[1], maxv[1])];
-                that._maxv = [_max(minv[0], maxv[0]), _max(minv[1], maxv[1])];
                 that._defaultCenter = that._unproject([0, 0]);
                 that.setCenter(that._defaultCenter);
-                that._events['project'].fire();
+                that._events.project.fire();
                 return that
             },
             _toScreen: function(coordinates) {
@@ -888,7 +840,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 return [(coordinates[0] - this._x0) / this._xradius, (coordinates[1] - this._y0) / this._yradius]
             },
             _toTransformed: function(coordinates) {
-                return [coordinates[0] * this._zoom + this._dxcenter, coordinates[1] * this._zoom + this._dycenter, ]
+                return [coordinates[0] * this._zoom + this._dxcenter, coordinates[1] * this._zoom + this._dycenter]
             },
             _toTransformedFast: function(coordinates) {
                 return [coordinates[0] * this._zoom, coordinates[1] * this._zoom]
@@ -961,7 +913,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 that._zoom = truncate(zoom, that._minZoom, that._maxZoom, that._minZoom);
                 that._adjustCenter();
                 if (!floatsEqual(zoom__, that._zoom) || _forceEvent)
-                    that._events['zoom'].fire(that.getZoom(), that.getTransform());
+                    that._events.zoom.fire(that.getZoom(), that.getTransform());
                 return that
             },
             getScaledZoom: function() {
@@ -975,11 +927,13 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
             },
             _setupScaling: function() {
                 var that = this,
-                    k = _round(TWO_TO_LN2 * _ln(that._maxZoom));
-                k = k > 4 ? k : 4;
-                var step = _pow(that._maxZoom, 1 / k),
-                    zoom = that._minZoom,
+                    k = _round(TWO_TO_LN2 * _ln(that._maxZoom)),
+                    step,
+                    zoom,
                     i = 1;
+                k = k > 4 ? k : 4;
+                step = _pow(that._maxZoom, 1 / k);
+                zoom = that._minZoom;
                 that._scale = [zoom];
                 for (; i <= k; ++i)
                     that._scale.push(zoom *= step)
@@ -991,7 +945,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 that._setupScaling();
                 if (that._zoom > that._maxZoom)
                     that.setZoom(that._maxZoom);
-                that._events['max-zoom'].fire(that._maxZoom);
+                that._events["max-zoom"].fire(that._maxZoom);
                 return that
             },
             getMinZoom: function() {
@@ -1004,14 +958,13 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 return [this._center[0], this._center[1]]
             },
             setCenter: function(center, _forceEvent) {
-                var _center = _isArray(center) ? center : null;
-                _center = _center || center && (center.lon || center.lat) && [center.lon, center.lat] || [];
                 var that = this,
+                    _center = _isArray(center) ? center : [],
                     center__ = that._center;
                 that._center = [truncate(_center[0], that._minBound[0], that._maxBound[0], that._defaultCenter[0]), truncate(_center[1], that._minBound[1], that._maxBound[1], that._defaultCenter[1])];
                 that._adjustCenter();
                 if (!floatsEqual(center__[0], that._center[0]) || !floatsEqual(center__[1], that._center[1]) || _forceEvent)
-                    that._events['center'].fire(that.getCenter(), that.getTransform());
+                    that._events.center.fire(that.getCenter(), that.getTransform());
                 return that
             },
             setCenterByPoint: function(coordinates, screenPosition) {
@@ -1035,7 +988,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 var that = this;
                 if (!_isArray(viewport))
                     return that.setZoom(that._minZoom).setCenter(that._defaultCenter);
-                var _viewport = truncateQuad(viewport, that._minBase, that._maxBase),
+                var _viewport = truncateQuad(viewport, that._minBound, that._maxBound),
                     lt = that._project(_viewport.lt),
                     rb = that._project(_viewport.rb),
                     l = _min(lt[0], rb[0]),
@@ -1055,12 +1008,6 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
             },
             fromScreenPoint: function(x, y) {
                 return this._unproject(this._fromTransformed(this._fromScreen([x, y])))
-            },
-            fromScreenPointStrict: function(x, y) {
-                var that = this,
-                    p = that._fromTransformed(that._fromScreen([x, y])),
-                    q = that._unproject(p);
-                return [p[0] >= that._minv[0] && p[0] <= that._maxv[0] ? q[0] : NaN, p[1] >= that._minv[1] && p[1] <= that._maxv[1] ? q[1] : NaN]
             },
             on: function(obj) {
                 $.each(this._events, function(name, list) {
@@ -1084,27 +1031,29 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
     /*! Module viz-vectormap, file controlBar.js */
     (function(DX, undefined) {
         var _Number = Number,
-            _String = String,
-            _round = Math.round,
-            _pow = Math.pow,
-            _ln = Math.log,
-            _parseScalar = DX.viz.core.utils.parseScalar,
-            parseHorizontalAlignment = DX.viz.core.utils.enumParser(['left', 'center', 'right']),
-            parseVerticalAlignment = DX.viz.core.utils.enumParser(['top', 'bottom']);
-        var _LN2 = Math.LN2;
-        var COMMAND_RESET = 'command-reset',
-            COMMAND_MOVE_UP = 'command-move-up',
-            COMMAND_MOVE_RIGHT = 'command-move-right',
-            COMMAND_MOVE_DOWN = 'command-move-down',
-            COMMAND_MOVE_LEFT = 'command-move-left',
-            COMMAND_ZOOM_IN = 'command-zoom-in',
-            COMMAND_ZOOM_OUT = 'command-zoom-out',
-            COMMAND_ZOOM_DRAG_LINE = 'command-zoom-drag-line',
-            COMMAND_ZOOM_DRAG = 'command-zoom-drag';
-        var EVENT_TARGET_TYPE = 'control-bar';
-        var FLAG_CENTERING = 1,
-            FLAG_ZOOMING = 2;
-        var SIZE_OPTIONS = {
+            _math = Math,
+            _round = _math.round,
+            _floor = _math.floor,
+            _pow = _math.pow,
+            _ln = _math.log,
+            _LN2 = _math.LN2,
+            utils = DX.viz.core.utils,
+            _parseScalar = utils.parseScalar,
+            parseHorizontalAlignment = utils.enumParser(["left", "center", "right"]),
+            parseVerticalAlignment = utils.enumParser(["top", "bottom"]),
+            COMMAND_RESET = "command-reset",
+            COMMAND_MOVE_UP = "command-move-up",
+            COMMAND_MOVE_RIGHT = "command-move-right",
+            COMMAND_MOVE_DOWN = "command-move-down",
+            COMMAND_MOVE_LEFT = "command-move-left",
+            COMMAND_ZOOM_IN = "command-zoom-in",
+            COMMAND_ZOOM_OUT = "command-zoom-out",
+            COMMAND_ZOOM_DRAG_LINE = "command-zoom-drag-line",
+            COMMAND_ZOOM_DRAG = "command-zoom-drag",
+            EVENT_TARGET_TYPE = "control-bar",
+            FLAG_CENTERING = 1,
+            FLAG_ZOOMING = 2,
+            SIZE_OPTIONS = {
                 bigCircleSize: 58,
                 smallCircleSize: 28,
                 buttonSize: 10,
@@ -1117,12 +1066,12 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 sliderLength: 20,
                 sliderWidth: 8,
                 trackerGap: 4
-            };
-        var OFFSET_X = 30.5,
+            },
+            OFFSET_X = 30.5,
             OFFSET_Y = 30.5,
             TOTAL_WIDTH = 61,
-            TOTAL_HEIGHT = 274;
-        var COMMAND_TO_TYPE_MAP = {};
+            TOTAL_HEIGHT = 274,
+            COMMAND_TO_TYPE_MAP = {};
         COMMAND_TO_TYPE_MAP[COMMAND_RESET] = ResetCommand;
         COMMAND_TO_TYPE_MAP[COMMAND_MOVE_UP] = COMMAND_TO_TYPE_MAP[COMMAND_MOVE_RIGHT] = COMMAND_TO_TYPE_MAP[COMMAND_MOVE_DOWN] = COMMAND_TO_TYPE_MAP[COMMAND_MOVE_LEFT] = MoveCommand;
         COMMAND_TO_TYPE_MAP[COMMAND_ZOOM_IN] = COMMAND_TO_TYPE_MAP[COMMAND_ZOOM_OUT] = ZoomCommand;
@@ -1132,7 +1081,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 ctor: function(parameters) {
                     var that = this;
                     that._params = parameters;
-                    that._createElements(parameters.renderer, parameters.dataKey);
+                    that._createElements(parameters.renderer, parameters.container, parameters.dataKey);
                     parameters.layoutControl.addItem(that);
                     that._subscribeToProjection(parameters.projection);
                     that._setVisibility(false)
@@ -1141,80 +1090,89 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     this._callbacks = callbacks;
                     return this
                 },
-                _createElements: function(renderer, dataKey) {
-                    var that = this;
-                    that._root = renderer.g().attr({'class': 'dxm-control-bar'});
-                    var buttonsGroups = that._buttonsGroup = renderer.g().attr({'class': 'dxm-control-buttons'}).append(that._root),
-                        trackersGroup = renderer.g().attr({
-                            stroke: 'none',
-                            "stroke-width": 0,
-                            fill: '#000000',
-                            opacity: 0.0001
-                        }).css({cursor: 'pointer'}).append(that._root);
-                    that._createButtons(renderer, SIZE_OPTIONS, dataKey, buttonsGroups);
-                    that._createTrackers(renderer, SIZE_OPTIONS, dataKey, trackersGroup)
+                _createElements: function(renderer, container, dataKey) {
+                    var that = this,
+                        buttonsGroups,
+                        trackersGroup;
+                    that._root = renderer.g().attr({"class": "dxm-control-bar"}).linkOn(container, "control-bar");
+                    buttonsGroups = that._buttonsGroup = renderer.g().attr({"class": "dxm-control-buttons"}).append(that._root);
+                    trackersGroup = renderer.g().attr({
+                        stroke: "none",
+                        "stroke-width": 0,
+                        fill: "#000000",
+                        opacity: 0.0001
+                    }).css({cursor: "pointer"}).append(that._root);
+                    that._createButtons(renderer, dataKey, buttonsGroups);
+                    that._createTrackers(renderer, dataKey, trackersGroup)
                 },
-                _createButtons: function(renderer, options, dataKey, group) {
-                    var size = options.buttonSize / 2,
+                _createButtons: function(renderer, dataKey, group) {
+                    var that = this,
+                        options = SIZE_OPTIONS,
+                        size = options.buttonSize / 2,
                         offset1 = options.arrowButtonOffset - size,
                         offset2 = options.arrowButtonOffset,
-                        incdecButtonSize = options.incdecButtonSize / 2;
+                        incdecButtonSize = options.incdecButtonSize / 2,
+                        directionOptions = {
+                            "stroke-linecap": "square",
+                            fill: "none"
+                        },
+                        line = "line";
                     renderer.circle(0, 0, options.bigCircleSize / 2).append(group);
-                    renderer.circle(0, 0, size).append(group);
-                    renderer.path([-size, -offset1, 0, -offset2, size, -offset1], "line").attr({"stroke-linecap": "square"}).append(group);
-                    renderer.path([offset1, -size, offset2, 0, offset1, size], "line").attr({"stroke-linecap": "square"}).append(group);
-                    renderer.path([size, offset1, 0, offset2, -size, offset1], "line").attr({"stroke-linecap": "square"}).append(group);
-                    renderer.path([-offset1, size, -offset2, 0, -offset1, -size], "line").attr({"stroke-linecap": "square"}).append(group);
+                    renderer.circle(0, 0, size).attr({fill: "none"}).append(group);
+                    renderer.path([-size, -offset1, 0, -offset2, size, -offset1], line).attr(directionOptions).append(group);
+                    renderer.path([offset1, -size, offset2, 0, offset1, size], line).attr(directionOptions).append(group);
+                    renderer.path([size, offset1, 0, offset2, -size, offset1], line).attr(directionOptions).append(group);
+                    renderer.path([-offset1, size, -offset2, 0, -offset1, -size], line).attr(directionOptions).append(group);
                     renderer.circle(0, options.incButtonOffset, options.smallCircleSize / 2).append(group);
                     renderer.path([[-incdecButtonSize, options.incButtonOffset, incdecButtonSize, options.incButtonOffset], [0, options.incButtonOffset - incdecButtonSize, 0, options.incButtonOffset + incdecButtonSize]], "area").append(group);
                     renderer.circle(0, options.decButtonOffset, options.smallCircleSize / 2).append(group);
                     renderer.path([-incdecButtonSize, options.decButtonOffset, incdecButtonSize, options.decButtonOffset], "area").append(group);
-                    renderer.path([0, options.sliderLineStartOffset, 0, options.sliderLineEndOffset], "area").append(group);
-                    this._zoomDrag = renderer.rect(-options.sliderLength / 2, options.sliderLineEndOffset - options.sliderWidth / 2, options.sliderLength, options.sliderWidth).append(group);
-                    this._sliderLineLength = options.sliderLineEndOffset - options.sliderLineStartOffset
+                    that._progressBar = renderer.path([], "area").append(group);
+                    that._zoomDrag = renderer.rect(_floor(-options.sliderLength / 2), _floor(options.sliderLineEndOffset - options.sliderWidth / 2), options.sliderLength, options.sliderWidth).append(group);
+                    that._sliderLineLength = options.sliderLineEndOffset - options.sliderLineStartOffset
                 },
-                _createTrackers: function(renderer, options, dataKey, group) {
-                    var size = _round((options.arrowButtonOffset - options.trackerGap) / 2),
+                _createTrackers: function(renderer, dataKey, group) {
+                    var options = SIZE_OPTIONS,
+                        size = _round((options.arrowButtonOffset - options.trackerGap) / 2),
                         offset1 = options.arrowButtonOffset - size,
                         offset2 = _round(_pow(options.bigCircleSize * options.bigCircleSize / 4 - size * size, 0.5)),
                         size2 = offset2 - offset1;
-                    $(renderer.rect(-size, -size, size * 2, size * 2).append(group).element).data(dataKey, {
+                    renderer.rect(-size, -size, size * 2, size * 2).data(dataKey, {
                         index: COMMAND_RESET,
                         type: EVENT_TARGET_TYPE
-                    });
-                    $(renderer.rect(-size, -offset2, size * 2, size2).append(group).element).data(dataKey, {
+                    }).append(group);
+                    renderer.rect(-size, -offset2, size * 2, size2).data(dataKey, {
                         index: COMMAND_MOVE_UP,
                         type: EVENT_TARGET_TYPE
-                    });
-                    $(renderer.rect(offset1, -size, size2, size * 2).append(group).element).data(dataKey, {
+                    }).append(group);
+                    renderer.rect(offset1, -size, size2, size * 2).data(dataKey, {
                         index: COMMAND_MOVE_RIGHT,
                         type: EVENT_TARGET_TYPE
-                    });
-                    $(renderer.rect(-size, offset1, size * 2, size2).append(group).element).data(dataKey, {
+                    }).append(group);
+                    renderer.rect(-size, offset1, size * 2, size2).data(dataKey, {
                         index: COMMAND_MOVE_DOWN,
                         type: EVENT_TARGET_TYPE
-                    });
-                    $(renderer.rect(-offset2, -size, size2, size * 2).append(group).element).data(dataKey, {
+                    }).append(group);
+                    renderer.rect(-offset2, -size, size2, size * 2).data(dataKey, {
                         index: COMMAND_MOVE_LEFT,
                         type: EVENT_TARGET_TYPE
-                    });
-                    $(renderer.circle(0, options.incButtonOffset, options.smallCircleSize / 2).append(group).element).data(dataKey, {
+                    }).append(group);
+                    renderer.circle(0, options.incButtonOffset, options.smallCircleSize / 2).data(dataKey, {
                         index: COMMAND_ZOOM_IN,
                         type: EVENT_TARGET_TYPE
-                    });
-                    $(renderer.circle(0, options.decButtonOffset, options.smallCircleSize / 2).append(group).element).data(dataKey, {
+                    }).append(group);
+                    renderer.circle(0, options.decButtonOffset, options.smallCircleSize / 2).data(dataKey, {
                         index: COMMAND_ZOOM_OUT,
                         type: EVENT_TARGET_TYPE
-                    });
-                    $(renderer.rect(-2, options.sliderLineStartOffset - 2, 4, options.sliderLineEndOffset - options.sliderLineStartOffset + 4).append(group).element).data(dataKey, {
+                    }).append(group);
+                    renderer.rect(-2, options.sliderLineStartOffset - 2, 4, options.sliderLineEndOffset - options.sliderLineStartOffset + 4).css({cursor: "default"}).data(dataKey, {
                         index: COMMAND_ZOOM_DRAG_LINE,
                         type: EVENT_TARGET_TYPE
-                    });
-                    this._zoomDragCover = renderer.rect(-options.sliderLength / 2, options.sliderLineEndOffset - options.sliderWidth / 2, options.sliderLength, options.sliderWidth).append(group);
-                    $(this._zoomDragCover.element).data(dataKey, {
+                    }).append(group);
+                    this._zoomDragCover = renderer.rect(-options.sliderLength / 2, options.sliderLineEndOffset - options.sliderWidth / 2, options.sliderLength, options.sliderWidth).data(dataKey, {
                         index: COMMAND_ZOOM_DRAG,
                         type: EVENT_TARGET_TYPE
-                    })
+                    }).append(group)
                 },
                 _subscribeToProjection: function(projection) {
                     var that = this;
@@ -1222,7 +1180,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                         zoom: function() {
                             that._adjustZoom(projection.getScaledZoom())
                         },
-                        'max-zoom': function() {
+                        "max-zoom": function() {
                             that._zoomPartition = projection.getZoomScalePartition();
                             that._sliderUnitLength = that._sliderLineLength / that._zoomPartition;
                             that._adjustZoom(projection.getScaledZoom())
@@ -1232,8 +1190,8 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 dispose: function() {
                     var that = this;
                     that._params.layoutControl.removeItem(that);
-                    that._root.clear();
-                    that._params = that._callbacks = that._root = that._buttonsGroup = that._zoomDrag = that._zoomDragCover = null;
+                    that._root.clear().linkOff();
+                    that._params = that._root = that._callbacks = that._buttonsGroup = that._zoomDrag = that._zoomDragCover = that._progressBar = null;
                     return that
                 },
                 resize: function(size) {
@@ -1241,7 +1199,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     return this
                 },
                 _setVisibility: function(state) {
-                    this._root.attr({visibility: state ? null : 'hidden'})
+                    this._root.attr({visibility: state ? null : "hidden"})
                 },
                 getLayoutOptions: function() {
                     var options = this._options;
@@ -1278,18 +1236,18 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     var that = this;
                     that.processEnd();
                     that._buttonsGroup.attr({
-                        'stroke-width': options.borderWidth,
+                        "stroke-width": options.borderWidth,
                         stroke: options.borderColor,
-                        fill: options.color
+                        fill: options.color,
+                        "fill-opacity": options.opacity
                     });
                     that._options = {
                         enabled: !!_parseScalar(options.enabled, true),
                         margin: options.margin > 0 ? _Number(options.margin) : 0,
-                        horizontalAlignment: parseHorizontalAlignment(options.horizontalAlignment, 'left'),
-                        verticalAlignment: parseVerticalAlignment(options.verticalAlignment, 'top')
+                        horizontalAlignment: parseHorizontalAlignment(options.horizontalAlignment, "left"),
+                        verticalAlignment: parseVerticalAlignment(options.verticalAlignment, "top")
                     };
-                    if (that._rendered)
-                        that._refresh();
+                    that._rendered && that._refresh();
                     return that
                 },
                 _refresh: function() {
@@ -1301,22 +1259,29 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 clean: function() {
                     var that = this;
                     that._rendered = null;
-                    that._root.remove();
+                    that._root.linkRemove();
                     return that
                 },
                 render: function() {
                     var that = this;
                     that._rendered = true;
-                    that._root.append(that._params.container);
+                    that._root.linkAppend();
                     that._refresh();
                     return that
                 },
                 _adjustZoom: function(zoom) {
-                    var that = this;
+                    var that = this,
+                        transform,
+                        y,
+                        start = SIZE_OPTIONS.sliderLineStartOffset,
+                        end = SIZE_OPTIONS.sliderLineEndOffset,
+                        h = SIZE_OPTIONS.sliderWidth;
                     that._zoomFactor = _round(zoom);
                     that._zoomFactor >= 0 || (that._zoomFactor = 0);
                     that._zoomFactor <= that._zoomPartition || (that._zoomFactor = that._zoomPartition);
-                    var transform = {translateY: -that._zoomFactor * that._sliderUnitLength};
+                    transform = {translateY: -that._zoomFactor * that._sliderUnitLength};
+                    y = end - h / 2 + transform.translateY;
+                    that._progressBar.attr({points: [[0, start, 0, _math.max(start, y)], [0, _math.min(end, y + h), 0, end]]});
                     that._zoomDrag.attr(transform);
                     that._zoomDragCover.attr(transform)
                 },
@@ -1398,7 +1363,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
             this._stop = function() {
                 clearTimeout(timeout);
                 owner._callbacks.endMove();
-                this._stop = owner = callback = null;
+                this._stop = owner = null;
                 return this
             };
             arg = null;
@@ -1424,7 +1389,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
             }
             this._stop = function() {
                 clearTimeout(timeout);
-                this._stop = owner = callback = null;
+                this._stop = owner = null;
                 return this
             };
             arg = null;
@@ -1466,29 +1431,29 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
     })(DevExpress);
     /*! Module viz-vectormap, file tracker.js */
     (function(DX, $, undefined) {
-        var _abs = Math.abs,
-            _sqrt = Math.sqrt,
-            _round = Math.round,
-            _max = Math.max,
-            _min = Math.min,
+        var _math = Math,
+            _abs = _math.abs,
+            _sqrt = _math.sqrt,
+            _round = _math.round,
             _addNamespace = DX.ui.events.addNamespace,
             _parseScalar = DX.viz.core.utils.parseScalar,
-            _now = $.now;
-        var _NAME = DX.viz.map.dxVectorMap.prototype.NAME;
-        var EVENTS = {};
+            _now = $.now,
+            _NAME = DX.viz.map.dxVectorMap.prototype.NAME,
+            EVENTS = {};
         setupEvents();
-        var EVENT_START = 'start',
-            EVENT_MOVE = 'move',
-            EVENT_END = 'end',
-            EVENT_ZOOM = 'zoom',
-            EVENT_HOVER_ON = 'hover-on',
-            EVENT_HOVER_OFF = 'hover-off',
-            EVENT_CLICK = 'click',
-            EVENT_FOCUS_ON = 'focus-on',
-            EVENT_FOCUS_MOVE = 'focus-move',
-            EVENT_FOCUS_OFF = 'focus-off';
-        var CLICK_TIME_THRESHOLD = 500,
-            CLICK_COORD_THRESHOLD = 5,
+        var EVENT_START = "start",
+            EVENT_MOVE = "move",
+            EVENT_END = "end",
+            EVENT_ZOOM = "zoom",
+            EVENT_HOVER_ON = "hover-on",
+            EVENT_HOVER_OFF = "hover-off",
+            EVENT_CLICK = "click",
+            EVENT_FOCUS_ON = "focus-on",
+            EVENT_FOCUS_MOVE = "focus-move",
+            EVENT_FOCUS_OFF = "focus-off",
+            CLICK_TIME_THRESHOLD = 500,
+            CLICK_COORD_THRESHOLD_MOUSE = 5,
+            CLICK_COORD_THRESHOLD_TOUCH = 20,
             DRAG_COORD_THRESHOLD_MOUSE = 5,
             DRAG_COORD_THRESHOLD_TOUCH = 10,
             FOCUS_ON_DELAY_MOUSE = 300,
@@ -1496,13 +1461,14 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
             FOCUS_ON_DELAY_TOUCH = 300,
             FOCUS_OFF_DELAY_TOUCH = 400,
             FOCUS_COORD_THRESHOLD_MOUSE = 5,
-            WHEEL_COOLDOWN = 150,
+            WHEEL_COOLDOWN = 50,
             WHEEL_DIRECTION_COOLDOWN = 300;
         function Tracker(parameters) {
             var that = this;
             that._root = parameters.root;
             that._callbacks = {};
             that._createEventHandlers(parameters.dataKey);
+            that._createProjectionHandlers(parameters.projection);
             that._focus = new Focus(that._callbacks);
             that._attachHandlers()
         }
@@ -1512,7 +1478,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 var that = this;
                 that._detachHandlers();
                 that._focus.dispose();
-                that._root = that._callbacks = that._focus = that._handlers = null;
+                that._root = that._callbacks = that._focus = that._docHandlers = that._rootHandlers = null;
                 return that
             },
             _startClick: function(event, data) {
@@ -1522,16 +1488,20 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 this._clickState = {
                     x: coords.x,
                     y: coords.y,
+                    threshold: isTouchEvent(event) ? CLICK_COORD_THRESHOLD_TOUCH : CLICK_COORD_THRESHOLD_MOUSE,
                     time: _now()
                 }
             },
             _endClick: function(event, data) {
-                var state = this._clickState;
+                var state = this._clickState,
+                    threshold,
+                    coords;
                 if (!state)
                     return;
                 if (_now() - state.time <= CLICK_TIME_THRESHOLD) {
-                    var coords = getEventCoords(event);
-                    if (_abs(coords.x - state.x) <= CLICK_COORD_THRESHOLD && _abs(coords.y - state.y) <= CLICK_COORD_THRESHOLD)
+                    threshold = state.threshold;
+                    coords = getEventCoords(event);
+                    if (_abs(coords.x - state.x) <= threshold && _abs(coords.y - state.y) <= threshold)
                         this._callbacks[EVENT_CLICK]({
                             data: data,
                             x: coords.x,
@@ -1557,11 +1527,13 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 })
             },
             _moveDrag: function(event, data) {
-                var state = this._dragState;
+                var state = this._dragState,
+                    coords,
+                    threshold;
                 if (!state)
                     return;
-                var coords = getEventCoords(event),
-                    threshold = isTouchEvent(event) ? DRAG_COORD_THRESHOLD_TOUCH : DRAG_COORD_THRESHOLD_MOUSE;
+                coords = getEventCoords(event);
+                threshold = isTouchEvent(event) ? DRAG_COORD_THRESHOLD_TOUCH : DRAG_COORD_THRESHOLD_MOUSE;
                 if (state.active || _abs(coords.x - state.x) > threshold || _abs(coords.y - state.y) > threshold) {
                     state.x = coords.x;
                     state.y = coords.y;
@@ -1574,7 +1546,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     })
                 }
             },
-            _endDrag: function(event, data) {
+            _endDrag: function() {
                 var state = this._dragState;
                 if (!state)
                     return;
@@ -1590,15 +1562,17 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     return;
                 var that = this,
                     lock = that._wheelLock,
-                    time = _now();
+                    time = _now(),
+                    delta,
+                    coords;
                 if (time - lock.time <= WHEEL_COOLDOWN)
                     return;
                 if (time - lock.dirTime > WHEEL_DIRECTION_COOLDOWN)
                     lock.dir = 0;
-                var delta = adjustWheelDelta(event.originalEvent.wheelDelta / 120 || event.originalEvent.detail / -3 || 0, lock);
+                delta = adjustWheelDelta(event.originalEvent.wheelDelta / 120 || event.originalEvent.detail / -3 || 0, lock);
                 if (delta === 0)
                     return;
-                var coords = getEventCoords(event);
+                coords = getEventCoords(event);
                 that._callbacks[EVENT_ZOOM]({
                     delta: delta,
                     x: coords.x,
@@ -1607,14 +1581,13 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 lock.time = lock.dirTime = time
             },
             _startZoom: function(event, data) {
-                if (!isTouchEvent(event))
+                if (!isTouchEvent(event) || !data)
                     return;
-                if (!data)
-                    return;
-                var state = this._zoomState = this._zoomState || {};
+                var state = this._zoomState = this._zoomState || {},
+                    coords,
+                    pointer2;
                 if (state.pointer1 && state.pointer2)
                     return;
-                var coords;
                 if (state.pointer1 === undefined) {
                     state.pointer1 = getPointerId(event) || 0;
                     coords = getMultitouchEventCoords(event, state.pointer1);
@@ -1622,7 +1595,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     state.y1 = state.y1_0 = coords.y
                 }
                 if (state.pointer2 === undefined) {
-                    var pointer2 = getPointerId(event) || 1;
+                    pointer2 = getPointerId(event) || 1;
                     if (pointer2 !== state.pointer1) {
                         coords = getMultitouchEventCoords(event, pointer2);
                         if (coords) {
@@ -1635,13 +1608,11 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     }
                 }
             },
-            _moveZoom: function(event, data) {
-                var state = this._zoomState;
-                if (!state)
+            _moveZoom: function(event) {
+                var state = this._zoomState,
+                    coords;
+                if (!state || !isTouchEvent(event))
                     return;
-                if (!isTouchEvent(event))
-                    return;
-                var coords;
                 if (state.pointer1 !== undefined) {
                     coords = getMultitouchEventCoords(event, state.pointer1);
                     if (coords) {
@@ -1657,15 +1628,15 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     }
                 }
             },
-            _endZoom: function(event, data) {
-                var state = this._zoomState;
-                if (!state)
-                    return;
-                if (!isTouchEvent(event))
+            _endZoom: function(event) {
+                var state = this._zoomState,
+                    startDistance,
+                    currentDistance;
+                if (!state || !isTouchEvent(event))
                     return;
                 if (state.ready) {
-                    var startDistance = getDistance(state.x1_0, state.y1_0, state.x2_0, state.y2_0),
-                        currentDistance = getDistance(state.x1, state.y1, state.x2, state.y2);
+                    startDistance = getDistance(state.x1_0, state.y1_0, state.x2_0, state.y2_0);
+                    currentDistance = getDistance(state.x1, state.y1, state.x2, state.y2);
                     this._callbacks[EVENT_ZOOM]({
                         ratio: currentDistance / startDistance,
                         x: (state.x1_0 + state.x2_0) / 2,
@@ -1686,11 +1657,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     that._cancelHover();
                     return
                 }
-                if (isTouchEvent(event) !== isTouch)
-                    return;
-                if (that._hoverTarget === event.target)
-                    return;
-                if (that._hoverState && that._hoverState.data === data)
+                if (isTouchEvent(event) !== isTouch || that._hoverTarget === event.target || that._hoverState && that._hoverState.data === data)
                     return;
                 that._cancelHover();
                 if (data) {
@@ -1720,10 +1687,9 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 if (isTouchEvent(event) !== isTouch)
                     return;
                 that._focus.turnOff(isTouch ? FOCUS_OFF_DELAY_TOUCH : FOCUS_OFF_DELAY_MOUSE);
-                if (data)
-                    that._focus.turnOn(data, getEventCoords(event), isTouch ? FOCUS_ON_DELAY_TOUCH : FOCUS_ON_DELAY_MOUSE, isTouch)
+                data && that._focus.turnOn(data, getEventCoords(event), isTouch ? FOCUS_ON_DELAY_TOUCH : FOCUS_ON_DELAY_MOUSE, isTouch)
             },
-            _endFocus: function(event, data) {
+            _endFocus: function(event) {
                 if (!isTouchEvent(event))
                     return;
                 this._focus.cancelOn()
@@ -1733,21 +1699,21 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
             },
             _createEventHandlers: function(DATA_KEY) {
                 var that = this;
-                that._handlers = {};
-                that._handlers[EVENTS.start] = function(event) {
+                that._docHandlers = {};
+                that._rootHandlers = {};
+                that._docHandlers[EVENTS.start] = function(event) {
                     var isTouch = isTouchEvent(event),
                         data = $(event.target).data(DATA_KEY);
                     if (isTouch && !that._isTouchEnabled)
                         return;
-                    if (data)
-                        event.preventDefault();
+                    data && event.preventDefault();
                     that._startClick(event, data);
                     that._startDrag(event, data);
                     that._startZoom(event, data);
                     that._startHover(event, data);
                     that._startFocus(event, data)
                 };
-                that._handlers[EVENTS.move] = function(event) {
+                that._docHandlers[EVENTS.move] = function(event) {
                     var isTouch = isTouchEvent(event),
                         data = $(event.target).data(DATA_KEY);
                     if (isTouch && !that._isTouchEnabled)
@@ -1757,7 +1723,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     that._moveHover(event, data);
                     that._moveFocus(event, data)
                 };
-                that._handlers[EVENTS.end] = function(event) {
+                that._docHandlers[EVENTS.end] = function(event) {
                     var isTouch = isTouchEvent(event),
                         data = $(event.target).data(DATA_KEY);
                     if (isTouch && !that._isTouchEnabled)
@@ -1767,15 +1733,28 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     that._endZoom(event, data);
                     that._endFocus(event, data)
                 };
-                that._handlers[EVENTS.wheel] = function(event) {
+                that._rootHandlers[EVENTS.wheel] = function(event) {
+                    that._cancelFocus();
                     if (!that._isWheelEnabled)
                         return;
                     var data = $(event.target).data(DATA_KEY);
-                    if (data)
+                    if (data) {
                         event.preventDefault();
-                    that._wheelZoom(event, data)
+                        event.stopPropagation();
+                        that._wheelZoom(event, data)
+                    }
                 };
                 that._wheelLock = {dir: 0}
+            },
+            _createProjectionHandlers: function(projection) {
+                var that = this;
+                projection.on({
+                    center: handler,
+                    zoom: handler
+                });
+                function handler() {
+                    that._cancelFocus()
+                }
             },
             reset: function() {
                 var that = this;
@@ -1799,118 +1778,118 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 return that
             },
             _detachHandlers: function() {
-                if (this._isTouchEnabled) {
-                    this._root.css({
-                        'touch-action': '',
-                        '-ms-touch-action': '',
-                        '-webkit-user-select': ''
-                    });
-                    $(this._root.element).off(_addNamespace('MSHoldVisual', _NAME)).off(_addNamespace('contextmenu', _NAME))
-                }
-                $(document).off(this._handlers)
+                var that = this;
+                if (that._isTouchEnabled)
+                    that._root.css({
+                        "touch-action": "",
+                        "-ms-touch-action": "",
+                        "-webkit-user-select": ""
+                    }).off(_addNamespace("MSHoldVisual", _NAME)).off(_addNamespace("contextmenu", _NAME));
+                $(document).off(that._docHandlers);
+                that._root.off(that._rootHandlers)
             },
             _attachHandlers: function() {
-                if (this._isTouchEnabled) {
-                    this._root.css({
-                        'touch-action': 'none',
-                        '-ms-touch-action': 'none',
-                        '-webkit-user-select': 'none'
-                    });
-                    $(this._root.element).on(_addNamespace('MSHoldVisual', _NAME), function(event) {
+                var that = this;
+                if (that._isTouchEnabled)
+                    that._root.css({
+                        "touch-action": "none",
+                        "-ms-touch-action": "none",
+                        "-webkit-user-select": "none"
+                    }).on(_addNamespace("MSHoldVisual", _NAME), function(event) {
                         event.preventDefault()
-                    }).on(_addNamespace('contextmenu', _NAME), function(event) {
+                    }).on(_addNamespace("contextmenu", _NAME), function(event) {
                         isTouchEvent(event) && event.preventDefault()
-                    })
-                }
-                $(document).on(this._handlers)
+                    });
+                $(document).on(that._docHandlers);
+                that._root.on(that._rootHandlers)
             }
         };
-        function Focus(callbacks) {
-            var that = this,
-                _activeData = null,
-                _data = null,
-                _disabled = false,
-                _onTimer = null,
-                _offTimer = null,
-                _x,
-                _y;
-            that.dispose = function() {
-                clearTimeout(_onTimer);
-                clearTimeout(_offTimer);
-                that.turnOn = that.turnOff = that.cancel = that.cancelOn = that.dispose = that = callbacks = _activeData = _data = _onTimer = _offTimer = null
-            };
-            that.turnOn = function(data, coords, timeout, forceTimeout) {
-                if (data === _data && _disabled)
-                    return;
-                _disabled = false;
-                _data = data;
-                if (_activeData) {
-                    _x = coords.x;
-                    _y = coords.y;
+        var Focus = function(callbacks) {
+                var that = this,
+                    _activeData = null,
+                    _data = null,
+                    _disabled = false,
+                    _onTimer = null,
+                    _offTimer = null,
+                    _x,
+                    _y;
+                that.dispose = function() {
                     clearTimeout(_onTimer);
-                    _onTimer = setTimeout(function() {
-                        _onTimer = null;
-                        if (_data === _activeData) {
-                            callbacks[EVENT_FOCUS_MOVE]({
-                                data: _data,
-                                x: _x,
-                                y: _y
-                            });
-                            onCheck(true)
-                        }
-                        else
+                    clearTimeout(_offTimer);
+                    that.turnOn = that.turnOff = that.cancel = that.cancelOn = that.dispose = that = callbacks = _activeData = _data = _onTimer = _offTimer = null
+                };
+                that.turnOn = function(data, coords, timeout, forceTimeout) {
+                    if (data === _data && _disabled)
+                        return;
+                    _disabled = false;
+                    _data = data;
+                    if (_activeData) {
+                        _x = coords.x;
+                        _y = coords.y;
+                        clearTimeout(_onTimer);
+                        _onTimer = setTimeout(function() {
+                            _onTimer = null;
+                            if (_data === _activeData) {
+                                callbacks[EVENT_FOCUS_MOVE]({
+                                    data: _data,
+                                    x: _x,
+                                    y: _y
+                                });
+                                onCheck(true)
+                            }
+                            else
+                                callbacks[EVENT_FOCUS_ON]({
+                                    data: _data,
+                                    x: _x,
+                                    y: _y
+                                }, onCheck)
+                        }, forceTimeout ? timeout : 0)
+                    }
+                    else if (!_onTimer || _abs(coords.x - _x) > FOCUS_COORD_THRESHOLD_MOUSE || _abs(coords.y - _y) > FOCUS_COORD_THRESHOLD_MOUSE || forceTimeout) {
+                        _x = coords.x;
+                        _y = coords.y;
+                        clearTimeout(_onTimer);
+                        _onTimer = setTimeout(function() {
+                            _onTimer = null;
                             callbacks[EVENT_FOCUS_ON]({
                                 data: _data,
                                 x: _x,
                                 y: _y
                             }, onCheck)
-                    }, forceTimeout ? timeout : 0)
-                }
-                else if (!_onTimer || _abs(coords.x - _x) > FOCUS_COORD_THRESHOLD_MOUSE || _abs(coords.y - _y) > FOCUS_COORD_THRESHOLD_MOUSE || forceTimeout) {
-                    _x = coords.x;
-                    _y = coords.y;
-                    clearTimeout(_onTimer);
-                    _onTimer = setTimeout(function() {
-                        _onTimer = null;
-                        callbacks[EVENT_FOCUS_ON]({
-                            data: _data,
-                            x: _x,
-                            y: _y
-                        }, onCheck)
-                    }, timeout)
-                }
-                function onCheck(result) {
-                    _disabled = !result;
-                    if (result) {
-                        _activeData = _data;
-                        clearTimeout(_offTimer);
-                        _offTimer = null
+                        }, timeout)
                     }
+                    function onCheck(result) {
+                        _disabled = !result;
+                        if (result) {
+                            _activeData = _data;
+                            clearTimeout(_offTimer);
+                            _offTimer = null
+                        }
+                    }
+                };
+                that.turnOff = function(timeout) {
+                    clearTimeout(_onTimer);
+                    _onTimer = null;
+                    _data = null;
+                    if (_activeData && !_disabled)
+                        _offTimer = _offTimer || setTimeout(function() {
+                            _offTimer = null;
+                            callbacks[EVENT_FOCUS_OFF]({data: _activeData});
+                            _activeData = null
+                        }, timeout)
+                };
+                that.cancel = function() {
+                    clearTimeout(_onTimer);
+                    clearTimeout(_offTimer);
+                    if (_activeData)
+                        callbacks[EVENT_FOCUS_OFF]({data: _activeData});
+                    _activeData = _data = _onTimer = _offTimer = null
+                };
+                that.cancelOn = function() {
+                    clearTimeout(_onTimer);
+                    _onTimer = null
                 }
             };
-            that.turnOff = function(timeout) {
-                clearTimeout(_onTimer);
-                _onTimer = null;
-                _data = null;
-                if (_activeData && !_disabled)
-                    _offTimer = _offTimer || setTimeout(function() {
-                        _offTimer = null;
-                        callbacks[EVENT_FOCUS_OFF]({data: _activeData});
-                        _activeData = null
-                    }, timeout)
-            };
-            that.cancel = function() {
-                clearTimeout(_onTimer);
-                clearTimeout(_offTimer);
-                if (_activeData)
-                    callbacks[EVENT_FOCUS_OFF]({data: _activeData});
-                _activeData = _data = _onTimer = _offTimer = null
-            };
-            that.cancelOn = function() {
-                clearTimeout(_onTimer);
-                _onTimer = null
-            }
-        }
         DX.viz.map._tests.Tracker = Tracker;
         DX.viz.map._tests._DEBUG_forceEventMode = function(mode) {
             setupEvents(mode)
@@ -1931,7 +1910,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
         function isTouchEvent(event) {
             var type = event.originalEvent.type,
                 pointerType = event.originalEvent.pointerType;
-            return /^touch/.test(type) || /^MSPointer/.test(type) && pointerType !== 4 || /^pointer/.test(type) && pointerType !== 'mouse'
+            return /^touch/.test(type) || /^MSPointer/.test(type) && pointerType !== 4 || /^pointer/.test(type) && pointerType !== "mouse"
         }
         function selectItem(flags, items) {
             var i = 0,
@@ -1945,14 +1924,14 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
             return _addNamespace(item || items[i], _NAME)
         }
         function setupEvents() {
-            var flags = [navigator.pointerEnabled, navigator.msPointerEnabled, 'ontouchstart' in window];
+            var flags = [navigator.pointerEnabled, navigator.msPointerEnabled, "ontouchstart" in window];
             if (arguments.length)
-                flags = [arguments[0] === 'pointer', arguments[0] === 'MSPointer', arguments[0] === 'touch'];
+                flags = [arguments[0] === "pointer", arguments[0] === "MSPointer", arguments[0] === "touch"];
             EVENTS = {
-                start: selectItem(flags, ['pointerdown', 'MSPointerDown', 'touchstart mousedown', 'mousedown']),
-                move: selectItem(flags, ['pointermove', 'MSPointerMove', 'touchmove mousemove', 'mousemove']),
-                end: selectItem(flags, ['pointerup', 'MSPointerUp', 'touchend mouseup', 'mouseup']),
-                wheel: selectItem([], ['mousewheel DOMMouseScroll'])
+                start: selectItem(flags, ["pointerdown", "MSPointerDown", "touchstart mousedown", "mousedown"]),
+                move: selectItem(flags, ["pointermove", "MSPointerMove", "touchmove mousemove", "mousemove"]),
+                end: selectItem(flags, ["pointerup", "MSPointerUp", "touchend mouseup", "mouseup"]),
+                wheel: selectItem([], ["mousewheel DOMMouseScroll"])
             }
         }
         function getEventCoords(event) {
@@ -1999,12 +1978,11 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
     /*! Module viz-vectormap, file themeManager.js */
     (function(DX, $, undefined) {
         var _Number = Number,
-            _parseScalar = DX.viz.core.utils.parseScalar,
             _extend = $.extend,
             _each = $.each;
         var ThemeManager = DX.viz.core.BaseThemeManager.inherit({
-                _themeSection: 'map',
-                _fontFields: ['areaSettings.label.font', 'markerSettings.label.font', 'tooltip.font', 'legend.font', 'loadingIndicator.font'],
+                _themeSection: "map",
+                _fontFields: ["areaSettings.label.font", "markerSettings.label.font", "tooltip.font", "legend.font", "loadingIndicator.font"],
                 getCommonAreaSettings: function(options) {
                     var settings = _extend(true, {}, this._theme.areaSettings, options),
                         palette,
@@ -2041,7 +2019,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                         optionsParts = {},
                         settings;
                     _each(theme, function(name, themePart) {
-                        if (name[0] === '_') {
+                        if (name[0] === "_") {
                             themeParts[name] = themePart;
                             optionsParts[name] = _options[name];
                             theme[name] = _options[name] = undefined
@@ -2054,7 +2032,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     return settings
                 },
                 getMarkerSettings: function(commonSettings, options, type) {
-                    var settings = _extend(true, {}, commonSettings['_' + type], options);
+                    var settings = _extend(true, {}, commonSettings["_" + type], options);
                     settings.borderWidth = _Number(settings.borderWidth) || 0;
                     settings.borderColor = settings.borderColor || null;
                     settings.color = settings.color || null;
@@ -2084,13 +2062,6 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                         commonSettings._pie._colors = colors
                     }
                     return colors
-                },
-                setTheme: function(theme, rtlEnabledOption) {
-                    var that = this;
-                    that.callBase(theme);
-                    if (_parseScalar(rtlEnabledOption, that._theme.rtlEnabled))
-                        _extend(true, that._theme, that._theme._rtl);
-                    return that
                 }
             });
         DX.viz.map._tests.ThemeManager = ThemeManager;
@@ -2100,51 +2071,57 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
     })(DevExpress, jQuery);
     /*! Module viz-vectormap, file legend.js */
     (function(DX, $, undefined) {
-        var _String = String,
-            _isArray = DX.utils.isArray,
+        var _core = DX.viz.core,
+            _String = String,
+            _utils = DX.utils,
+            _isArray = _utils.isArray,
             _extend = $.extend,
             _each = $.each,
-            _BaseLegend = DX.viz.core.Legend;
+            _BaseLegend = _core.Legend;
         function Legend(parameters) {
             var that = this;
             that._params = parameters;
-            that._root = parameters.renderer.g().attr({'class': 'dxm-legend'});
+            that._root = parameters.renderer.g().attr({"class": "dxm-legend"}).linkOn(parameters.container, {
+                name: "legend",
+                after: "legend-base"
+            });
             parameters.layoutControl.addItem(that);
             _BaseLegend.apply(that, [{
                     renderer: parameters.renderer,
                     group: that._root,
                     backgroundClass: null,
                     itemsGroupClass: null,
-                    textField: 'text',
+                    textField: "text",
                     getFormatObject: function(data) {
                         return data
                     }
                 }]);
             that._onDataChanged = function(items) {
-                var itemsForUpdate = $.map(items, function(item) {
+                var itemsForUpdate = _core.utils.map(items, function(item) {
                         return _extend(true, {states: {normal: {fill: item.color}}}, item)
                     });
                 that.update(itemsForUpdate, that._options);
                 that._refresh()
             }
         }
-        var legendPrototype = Legend.prototype = DX.utils.clone(_BaseLegend.prototype);
+        var legendPrototype = Legend.prototype = _utils.clone(_BaseLegend.prototype);
         legendPrototype.constructor = Legend;
         legendPrototype.dispose = function() {
             var that = this;
             that._params.layoutControl.removeItem(that);
             that._unbindData();
+            that._root.linkOff();
             that._params = that._root = that._onDataChanged = null;
             return _BaseLegend.prototype.dispose.apply(that, arguments)
         };
         legendPrototype.clean = function() {
             this._rendered = false;
-            this._root.remove();
+            this._root.linkRemove();
             return this
         };
         legendPrototype.render = function() {
             var that = this;
-            that._root.append(that._params.container);
+            that._root.linkAppend();
             that._rendered = true;
             that._refresh();
             return that
@@ -2166,21 +2143,21 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
         };
         var sourceMap = {
                 areacolorgroups: {
-                    category: 'areas',
-                    name: 'color'
+                    category: "areas",
+                    name: "color"
                 },
                 markercolorgroups: {
-                    category: 'markers',
-                    name: 'color'
+                    category: "markers",
+                    name: "color"
                 },
                 markersizegroups: {
-                    category: 'markers',
-                    name: 'size'
+                    category: "markers",
+                    name: "size"
                 }
             };
         var unknownSource = {
-                category: 'UNKNOWN',
-                name: 'UNKNOWN'
+                category: "UNKNOWN",
+                name: "UNKNOWN"
             };
         legendPrototype.setOptions = function(options) {
             var that = this;
@@ -2196,16 +2173,18 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
         };
         function LegendsControl(parameters) {
             this._parameters = parameters;
-            this._items = []
+            this._items = [];
+            parameters.container.virtualLink("legend-base")
         }
         LegendsControl.prototype = {
             constructor: LegendsControl,
             dispose: function() {
-                _each(this._items, function(_, item) {
+                var that = this;
+                _each(that._items, function(_, item) {
                     item.dispose()
                 });
-                this._parameters = this._items = null;
-                return this
+                that._parameters = that._items = null;
+                return that
             },
             setOptions: function(options, theme) {
                 var optionList = _isArray(options) ? options : [],
@@ -2214,7 +2193,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     item,
                     newItems = [],
                     items = this._items;
-                for (ii = optionList.length; i < ii; ++i) {
+                for (; i < ii; ++i) {
                     item = (items[i] || new Legend(this._parameters)).setOptions(_extend(true, {}, theme, optionList[i]));
                     newItems.push(item)
                 }
@@ -2250,52 +2229,19 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
             sourceMap[name] = value
         }
     })(DevExpress, jQuery);
-    /*! Module viz-vectormap, file tooltip.js */
-    (function(DX, undefined) {
-        var Tooltip = DX.viz.core.Tooltip.inherit({
-                ctor: function(parameters) {
-                    var that = this;
-                    that._container = parameters.container;
-                    that._root = parameters.renderer.g().attr({'class': 'dxm-tooltip'});
-                    that.callBase(null, that._root, parameters.renderer)
-                },
-                dispose: function() {
-                    var that = this;
-                    that._container = that._root = null;
-                    return that.callBase.apply(that, arguments)
-                },
-                clean: function() {
-                    this._root.remove();
-                    return this
-                },
-                setOptions: function(options) {
-                    options.border.color = options.borderColor || options.border.color;
-                    this.update(options);
-                    return this
-                },
-                render: function() {
-                    this._root.append(this._container);
-                    return this
-                }
-            });
-        DX.viz.map.dxVectorMap.prototype._factory.createTooltip = function(parameters) {
-            return new Tooltip(parameters)
-        };
-        DX.viz.map._tests.Tooltip = Tooltip
-    })(DevExpress);
     /*! Module viz-vectormap, file layout.js */
     (function(DX, $, undefined) {
         var _round = Math.round,
             _min = Math.min,
             _max = Math.max,
             _each = $.each,
-            _inArray = $.inArray;
-        var horizontalAlignmentMap = {
+            _inArray = $.inArray,
+            horizontalAlignmentMap = {
                 left: 0,
                 center: 1,
                 right: 2
-            };
-        var verticalAlignmentMap = {
+            },
+            verticalAlignmentMap = {
                 top: 0,
                 bottom: 1
             };
@@ -2533,19 +2479,32 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
     })(DevExpress, jQuery);
     /*! Module viz-vectormap, file mapItemsManager.js */
     (function(DX, $, undefined) {
-        var _Number = Number,
-            _String = String,
-            _isFinite = isFinite,
-            _isString = DX.utils.isString,
-            _isArray = DX.utils.isArray,
-            _isFunction = DX.utils.isFunction,
+        var _isFinite = isFinite,
+            _utils = DX.utils,
+            _coreUtils = DX.viz.core.utils,
+            _map = _coreUtils.map,
+            _isString = _utils.isString,
+            _isArray = _utils.isArray,
+            _isFunction = _utils.isFunction,
+            _patchFontOptions = _coreUtils.patchFontOptions,
+            _parseScalar = _coreUtils.parseScalar,
             _extend = $.extend,
-            _each = $.each,
-            _map = $.map,
-            _noop = $.noop;
-        var SELECTION_MODE_NONE = 'none',
-            SELECTION_MODE_SINGLE = 'single',
-            SELECTION_MODE_MULTIPLE = 'multiple';
+            _each = $.each;
+        var SELECTIONS = {
+                none: null,
+                single: -1,
+                multiple: NaN
+            };
+        function getSelection(selectionMode) {
+            var selection = String(selectionMode).toLowerCase();
+            selection = selection in SELECTIONS ? SELECTIONS[selection] : SELECTIONS.single;
+            if (selection !== null)
+                selection = {
+                    state: {},
+                    single: selection
+                };
+            return selection
+        }
         function createEventTriggers(context, trigger, names) {
             context.raiseHoverChanged = function(handle, state) {
                 trigger(names.hoverChanged, {
@@ -2582,109 +2541,130 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 },
                 _init: function() {
                     var that = this;
-                    that._root = that._params.renderer.g().attr({'class': that._rootClass});
                     that._context = {
                         renderer: that._params.renderer,
-                        root: that._root,
                         projection: that._params.projection,
-                        dataKey: that._params.dataKey
+                        dataKey: that._params.dataKey,
+                        selection: null,
+                        getItemSettings: that._createItemSettingsBuilder()
                     };
+                    that._initRoot();
                     createEventTriggers(that._context, that._params.eventTrigger, that._eventNames)
                 },
-                dispose: function() {
-                    this._destroyHandles();
-                    this._params = null;
-                    this._dispose();
-                    return this
+                _createItemSettingsBuilder: function() {
+                    var that = this;
+                    return function(proxy, settings) {
+                            var result = {};
+                            _each(that._grouping, function(settingField, grouping) {
+                                var value,
+                                    index;
+                                if (_isFinite(value = grouping.callback(proxy)) && (index = findGroupPosition(value, grouping.groups)) >= 0)
+                                    result[settingField] = grouping.groups[index][settingField]
+                            });
+                            return that._getItemSettings(proxy, _extend({}, settings, result))
+                        }
                 },
-                _dispose: function() {
-                    this._root = this._context = null
+                _initRoot: function() {
+                    this._context.root = this._root = this._params.renderer.g().attr({"class": this._rootClass}).linkOn(this._params.container, "mapitems-" + this._dataCategory)
+                },
+                dispose: function() {
+                    var that = this;
+                    that._destroyHandles();
+                    that._params = that._context = that._grouping = null;
+                    that._disposeRoot();
+                    return that
+                },
+                _disposeRoot: function() {
+                    this._root.linkOff();
+                    this._root = null
                 },
                 clean: function() {
-                    this._rendered = false;
-                    this._clean();
-                    this._destroyItems();
-                    return this
+                    var that = this;
+                    that._destroyItems();
+                    that._removeRoot();
+                    that._rendered = false;
+                    return that
                 },
-                _clean: function() {
-                    this._root.remove()
+                _removeRoot: function() {
+                    this._root.linkRemove()
                 },
                 setOptions: function(options) {
                     var that = this;
                     that._processOptions(options || {});
-                    if (that._rendered) {
-                        that._destroyItems();
-                        that._createItems()
-                    }
+                    that._params.notifyDirty();
+                    that._destroyItems();
+                    that._createItems(that._params.notifyReady);
                     return that
                 },
                 render: function() {
-                    this._rendered = true;
-                    this._render();
-                    this._createItems();
-                    return this
+                    var that = this;
+                    that._rendered = true;
+                    that._params.notifyDirty();
+                    that._appendRoot();
+                    that._createItems(that._params.notifyReady, true);
+                    return that
                 },
                 _processOptions: function(options) {
                     var that = this,
-                        settings = that._commonSettings = that._getCommonSettings(options);
-                    that._customizeCallback = _isFunction(settings.customize) ? settings.customize : null;
-                    var context = that._context;
-                    context.isHoverEnabled = 'hoverEnabled' in settings ? !!settings.hoverEnabled : true;
-                    var selectionMode = _String(settings.selectionMode).toLowerCase();
-                    selectionMode = selectionMode === SELECTION_MODE_NONE || selectionMode === SELECTION_MODE_SINGLE || selectionMode === SELECTION_MODE_MULTIPLE ? selectionMode : SELECTION_MODE_SINGLE;
-                    context.isSelectionEnabled = selectionMode !== SELECTION_MODE_NONE;
-                    context.isSingleSelection = selectionMode === SELECTION_MODE_SINGLE;
-                    context.selected = context.isSingleSelection ? null : {}
+                        settings = that._commonSettings = that._getCommonSettings(options),
+                        context = that._context;
+                    that._customizeCallback = _isFunction(settings.customize) ? settings.customize : $.noop;
+                    context.hover = !!_parseScalar(settings.hoverEnabled, true);
+                    if (context.selection)
+                        _each(context.selection.state, function(_, handle) {
+                            handle && handle.resetSelected()
+                        });
+                    context.selection = getSelection(settings.selectionMode);
+                    that._grouping = {};
+                    that._updateGrouping()
                 },
-                _getCommonSettings: null,
-                _render: function() {
-                    this._root.append(this._params.container)
+                _appendRoot: function() {
+                    this._root.linkAppend()
                 },
                 _destroyItems: function() {
-                    this._root.clear();
-                    this._handles && _each(this._handles, function(_, handle) {
+                    var that = this;
+                    that._clearRoot();
+                    clearTimeout(that._labelsTimeout);
+                    that._rendered && that._handles && _each(that._handles, function(_, handle) {
                         if (handle.item) {
-                            handle.item.clean().dispose();
+                            handle.item.dispose();
                             handle.item = null
                         }
                     })
+                },
+                _clearRoot: function() {
+                    this._root.clear()
                 },
                 _destroyHandles: function() {
                     var that = this;
                     that._handles && _each(that._handles, function(_, handle) {
                         handle.dispose()
                     });
+                    if (that._context.selection)
+                        that._context.selection.state = {};
                     that._handles = null
                 },
-                _itemType: null,
-                _initProxy: null,
-                _getItemSettings: null,
-                _createItem: null,
-                _arrangeItems: null,
-                _prepareItems: null,
                 _createHandles: function(source) {
                     var that = this;
-                    if (_isArray(source)) {
+                    if (_isArray(source))
                         that._handles = _map(source, function(dataItem, i) {
                             dataItem = dataItem || {};
                             var handle = new MapItemHandle(that._context, that._getItemCoordinates(dataItem), that._getItemAttributes(dataItem), i, that._itemType),
                                 proxy = handle.proxy;
                             that._initProxy(proxy, dataItem);
-                            handle.settings = that._customizeCallback && that._customizeCallback.call(proxy, proxy) || {};
+                            handle.settings = that._customizeCallback.call(proxy, proxy) || {};
                             if (handle.settings.isSelected)
                                 proxy.selected(true);
                             return handle
-                        });
-                        that._prepareItems()
-                    }
+                        })
                 },
-                _createItems: function() {
+                _createItems: function(notifyReady) {
                     var that = this,
-                        selectedItems = [];
-                    if (that._handles) {
-                        _each(that._handles, function(i, handle) {
-                            var settings = that._getItemSettings(handle.proxy, handle.settings);
-                            handle.item = that._createItem(settings).init(that._context, handle.proxy).render(settings).project().locate();
+                        selectedItems = [],
+                        immediateReady = true;
+                    if (that._rendered && that._handles) {
+                        _each(that._handles, function(_, handle) {
+                            handle.item = that._createItem(handle.proxy).init(that._context, handle.proxy).project().update(handle.settings).locate();
                             if (handle.proxy.selected())
                                 selectedItems.push(handle.item)
                         });
@@ -2693,23 +2673,24 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                         });
                         that._arrangeItems();
                         if (that._commonSettings.label.enabled) {
-                            that._labelsTimeout && clearTimeout(that._labelsTimeout);
+                            immediateReady = false;
+                            clearTimeout(that._labelsTimeout);
                             that._labelsTimeout = setTimeout(function() {
-                                that._labelsTimeout = null;
-                                if (that._rendered)
-                                    _each(that._handles, function(_, handle) {
-                                        handle.item.createLabel()
-                                    })
+                                _each(that._handles, function(_, handle) {
+                                    handle.item.createLabel()
+                                });
+                                notifyReady()
                             })
                         }
                     }
-                    that._params.ready && that._params.ready()
+                    immediateReady && notifyReady()
                 },
                 _processSource: null,
                 setData: function(data) {
                     var that = this;
+                    that._params.notifyDirty();
                     if (_isString(data))
-                        $.getJSON(data).done(updateSource).fail(function(_0, _1, error) {
+                        $.getJSON(data).done(updateSource).fail(function() {
                             updateSource(null)
                         });
                     else
@@ -2721,8 +2702,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                         that._destroyItems();
                         that._destroyHandles();
                         that._createHandles(that._processSource(source));
-                        if (that._rendered)
-                            that._createItems()
+                        that._createItems(that._params.notifyReady)
                     }
                 },
                 _transform: function(transform) {
@@ -2747,16 +2727,13 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     return this
                 },
                 clearSelection: function() {
-                    var context = this._context;
-                    if (context.isSelectionEnabled)
-                        if (context.isSingleSelection)
-                            context.selected && context.selected.setSelected(false);
-                        else {
-                            _each(context.selected, function(_, handle) {
-                                handle && handle.setSelected(false)
-                            });
-                            context.selected = {}
-                        }
+                    var selection = this._context.selection;
+                    if (selection) {
+                        _each(selection.state, function(_, handle) {
+                            handle && handle.setSelected(false)
+                        });
+                        selection.state = {}
+                    }
                     return this
                 },
                 raiseClick: function(index, $event) {
@@ -2779,21 +2756,23 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                         values;
                     if (groups) {
                         values = valuesCallback(groups.length);
-                        _each(this._handles, function(i, handle) {
-                            var value,
-                                index;
-                            if (_isFinite(value = valueCallback(handle, i)) && (index = findGroupPosition(value, groups)) >= 0)
-                                handle.settings[settingField] = values[index]
-                        });
                         _each(groups, function(i, group) {
                             group.index = i;
                             group[settingField] = values[i]
                         });
-                        this._params.dataExchanger.set(this._dataCategory, settingField, groups)
+                        this._grouping[settingField] = {
+                            callback: valueCallback,
+                            groups: groups
+                        }
                     }
+                    else {
+                        delete this._grouping[settingField];
+                        groups = []
+                    }
+                    this._params.dataExchanger.set(this._dataCategory, settingField, groups)
                 },
                 _groupByColor: function(colorGroups, palette, valueCallback) {
-                    this._performGrouping(colorGroups, 'color', valueCallback, function(count) {
+                    this._performGrouping(colorGroups, "color", valueCallback, function(count) {
                         var _palette = new DX.viz.core.GradientPalette(palette, count),
                             i = 0,
                             list = [];
@@ -2803,15 +2782,22 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     })
                 }
             });
+        MapItemsManager.prototype.TEST_getContext = function() {
+            return this._context
+        };
+        MapItemsManager.prototype.TEST_performGrouping = MapItemsManager.prototype._performGrouping;
+        MapItemsManager.prototype.TEST_groupByColor = MapItemsManager.prototype._groupByColor;
         DX.viz.map._internal.mapItemBehavior = {
             init: function(ctx, proxy) {
-                this._ctx = ctx;
-                this._data = {
+                var that = this;
+                that._ctx = ctx;
+                that._data = {
                     index: proxy.index,
                     type: proxy.type
                 };
-                this._proxy = proxy;
-                return this
+                that._proxy = proxy;
+                that._root = that._createRoot().append(that._ctx.root);
+                return that
             },
             dispose: function() {
                 disposeItem(this);
@@ -2825,96 +2811,129 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
             locate: function() {
                 var that = this;
                 that._locate(that._transform(that._ctx.projection, that._coords));
+                that._label && that._label.value && that._locateLabel();
                 return that
             },
-            clean: function() {
-                this._root.remove();
-                this._root = null;
-                return this
-            },
-            render: function(settings) {
+            update: function(settings) {
                 var that = this;
-                that._root = that._createRoot().append(that._ctx.root);
-                that._settings = settings;
-                that._render(settings);
+                that._settings = that._ctx.getItemSettings(that._proxy, settings);
+                that._update(that._settings);
+                that._label && that._updateLabel();
                 return that
-            }
-        };
-        function MapItemHandle(context, coordinates, attributes, index, type) {
-            var that = this;
-            that._ctx = context;
-            attributes = _extend({}, attributes);
-            that.proxy = {
-                index: index,
-                type: type,
-                coordinates: function() {
-                    return coordinates
-                },
-                attribute: function(name, value) {
-                    if (arguments.length > 1) {
-                        attributes[name] = value;
-                        return this
-                    }
-                    else
-                        return arguments.length > 0 ? attributes[name] : attributes
-                },
-                selected: function(state, _noEvent) {
-                    if (arguments.length > 0) {
-                        that.setSelected(!!state, _noEvent);
-                        return this
-                    }
-                    else
-                        return that._selected
+            },
+            createLabel: function() {
+                var that = this;
+                that._label = {
+                    root: that._createLabelRoot(),
+                    text: that._ctx.renderer.text(),
+                    tracker: that._ctx.renderer.rect().attr({
+                        stroke: "none",
+                        "stroke-width": 0,
+                        fill: "#000000",
+                        opacity: 0.0001
+                    }).data(that._ctx.dataKey, that._data)
+                };
+                that._updateLabel();
+                return that
+            },
+            _updateLabel: function() {
+                var that = this,
+                    settings = that._settings.label;
+                that._label.value = String(this._proxy.text || this._proxy.attribute(this._settings.label.dataField) || "");
+                if (that._label.value) {
+                    that._label.text.attr({
+                        text: that._label.value,
+                        x: 0,
+                        y: 0
+                    }).css(_patchFontOptions(settings.font)).attr({
+                        align: "center",
+                        stroke: settings.stroke,
+                        "stroke-width": settings["stroke-width"],
+                        "stroke-opacity": settings["stroke-opacity"]
+                    }).append(that._label.root);
+                    that._label.tracker.append(that._label.root);
+                    that._adjustLabel();
+                    that._locateLabel()
                 }
             }
-        }
+        };
+        var MapItemHandle = function(context, coordinates, attributes, index, type) {
+                var handle = this;
+                handle._ctx = context;
+                handle._idx = index;
+                handle._hovered = handle._selected = false;
+                attributes = _extend({}, attributes);
+                handle.proxy = {
+                    index: index,
+                    type: type,
+                    coordinates: function() {
+                        return coordinates
+                    },
+                    attribute: function(name, value) {
+                        if (arguments.length > 1) {
+                            attributes[name] = value;
+                            return this
+                        }
+                        else
+                            return arguments.length > 0 ? attributes[name] : attributes
+                    },
+                    selected: function(state, _noEvent) {
+                        if (arguments.length > 0) {
+                            handle.setSelected(!!state, _noEvent);
+                            return this
+                        }
+                        else
+                            return handle._selected
+                    },
+                    applySettings: function(settings) {
+                        _extend(true, handle.settings, settings);
+                        handle.item && handle.item.update(handle.settings);
+                        return this
+                    }
+                }
+            };
         MapItemHandle.prototype = {
             constructor: MapItemHandle,
-            _hovered: false,
-            _selected: false,
             dispose: function() {
                 disposeItem(this.proxy);
                 disposeItem(this);
                 return this
             },
             setHovered: function(state) {
+                state = !!state;
                 var that = this;
-                if (!that._ctx.isHoverEnabled)
-                    return that;
-                if (that._hovered !== !!state) {
-                    that._hovered = !!state;
-                    var item = that.item;
-                    if (item) {
+                if (that._ctx.hover && that._hovered !== state) {
+                    that._hovered = state;
+                    if (that.item) {
                         if (that._hovered)
-                            item.onHover();
+                            that.item.onHover();
                         if (!that._selected) {
-                            item[that._hovered ? 'setHoveredState' : 'setDefaultState']();
+                            that.item[that._hovered ? "setHoveredState" : "setDefaultState"]();
                             that._ctx.raiseHoverChanged(that, that._hovered)
                         }
                     }
                 }
                 return that
             },
+            resetSelected: function() {
+                this._selected = false;
+                return this
+            },
             setSelected: function(state, _noEvent) {
+                state = !!state;
                 var that = this,
-                    context = that._ctx;
-                if (!context.isSelectionEnabled)
-                    return that;
-                if (that._selected !== !!state) {
-                    that._selected = !!state;
-                    var selected = context.selected;
-                    if (context.isSingleSelection) {
-                        context.selected = null;
-                        if (selected)
-                            selected.setSelected(false);
-                        if (that._selected)
-                            context.selected = that
-                    }
-                    else
-                        context.selected[that.proxy.index] = that._selected ? that : null;
-                    var item = that.item;
-                    if (item) {
-                        item[that._selected ? 'setSelectedState' : that._hovered ? 'setHoveredState' : 'setDefaultState']();
+                    context = that._ctx,
+                    selection = that._ctx.selection,
+                    tmp;
+                if (selection && that._selected !== state) {
+                    that._selected = state;
+                    tmp = selection.state[selection.single];
+                    selection.state[selection.single] = null;
+                    if (tmp)
+                        tmp.setSelected(false);
+                    selection.state[selection.single || that._idx] = state ? that : null;
+                    if (that.item) {
+                        that.item[state ? "setSelectedState" : that._hovered ? "setHoveredState" : "setDefaultState"]();
                         if (!_noEvent)
                             context.raiseSelectionChanged(that)
                     }
@@ -2935,15 +2954,14 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 groups = [];
                 for (i = 0, ii = partition.length - 1; i < ii; ++i)
                     groups.push({
-                        start: _Number(partition[i]),
-                        end: _Number(partition[i + 1])
+                        start: Number(partition[i]),
+                        end: Number(partition[i + 1])
                     })
             }
             return groups
         }
         function findGroupPosition(value, groups) {
-            var group,
-                i = 0,
+            var i = 0,
                 ii = groups.length;
             for (; i < ii; ++i)
                 if (groups[i].start <= value && value <= groups[i].end)
@@ -2964,33 +2982,30 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
     })(DevExpress, jQuery);
     /*! Module viz-vectormap, file areasManager.js */
     (function(DX, $, undefined) {
-        var _String = String,
-            _abs = Math.abs,
+        var _abs = Math.abs,
             _sqrt = Math.sqrt,
-            _isArray = DX.utils.isArray,
             _noop = $.noop,
-            _patchFontOptions = DX.viz.core.utils.patchFontOptions;
-        var TOLERANCE = 1;
+            TOLERANCE = 1;
         var AreasManager = DX.viz.map.dxVectorMap.prototype._factory.MapItemsManager.inherit({
-                _rootClass: 'dxm-areas',
-                _dataCategory: 'areas',
+                _rootClass: "dxm-areas",
+                _dataCategory: "areas",
                 _eventNames: {
-                    click: 'areaClick',
-                    hoverChanged: 'areaHoverChanged',
-                    selectionChanged: 'areaSelectionChanged'
+                    click: "areaClick",
+                    hoverChanged: "areaHoverChanged",
+                    selectionChanged: "areaSelectionChanged"
                 },
-                _init: function() {
+                _initRoot: function() {
                     var that = this;
                     that.callBase.apply(that, arguments);
-                    that._labelRoot = that._params.renderer.g().attr({'class': 'dxm-area-labels'});
-                    that._context.labelRoot = that._labelRoot
+                    that._context.labelRoot = that._labelRoot = that._params.renderer.g().attr({"class": "dxm-area-labels"}).linkOn(that._params.container, "mapitems-areas-labels")
                 },
-                _dispose: function() {
+                _disposeRoot: function() {
                     this.callBase.apply(this, arguments);
+                    this._labelRoot.linkOff();
                     this._labelRoot = null
                 },
                 _processSource: function(source) {
-                    var isGeoJson = source && source.type === 'FeatureCollection';
+                    var isGeoJson = source && source.type === "FeatureCollection";
                     this._getItemCoordinates = isGeoJson ? getCoordinatesGeoJson : getCoordinatesDefault;
                     this._getItemAttributes = isGeoJson ? getAttributesGeoJson : getAttributesDefault;
                     return isGeoJson ? source.features : source
@@ -2999,16 +3014,20 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     return this._params.themeManager.getCommonAreaSettings(options)
                 },
                 _initProxy: _noop,
-                _itemType: 'area',
-                _clean: function() {
+                _itemType: "area",
+                _removeRoot: function() {
                     this.callBase.apply(this, arguments);
-                    this._labelRoot.remove()
+                    this._labelRoot.linkRemove()
                 },
-                _render: function() {
+                _appendRoot: function() {
                     var that = this;
                     that.callBase.apply(that, arguments);
                     if (that._commonSettings.label.enabled)
-                        that._labelRoot.append(that._params.container)
+                        that._labelRoot.linkAppend()
+                },
+                _clearRoot: function() {
+                    this.callBase.apply(this, arguments);
+                    this._labelRoot.clear()
                 },
                 _getItemSettings: function(_, options) {
                     return this._params.themeManager.getAreaSettings(this._commonSettings, options)
@@ -3020,13 +3039,12 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 _createItem: function() {
                     return new Area
                 },
-                _prepareItems: function() {
+                _updateGrouping: function() {
                     var commonSettings = this._commonSettings,
                         attributeName = commonSettings.colorGroupingField;
-                    if (commonSettings.colorGroups)
-                        this._groupByColor(commonSettings.colorGroups, commonSettings.palette, function(handle) {
-                            return handle.proxy.attribute(attributeName)
-                        })
+                    this._groupByColor(commonSettings.colorGroups, commonSettings.palette, function(proxy) {
+                        return proxy.attribute(attributeName)
+                    })
                 },
                 _arrangeItems: _noop
             });
@@ -3034,12 +3052,13 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
             return dataItem.coordinates
         }
         function getCoordinatesGeoJson(dataItem) {
-            var coordinates;
+            var coordinates,
+                type;
             if (dataItem.geometry) {
-                var type = dataItem.geometry.type;
+                type = dataItem.geometry.type;
                 coordinates = dataItem.geometry.coordinates;
-                if (coordinates && (type === 'Polygon' || type === 'MultiPolygon'))
-                    type === 'MultiPolygon' && (coordinates = [].concat.apply([], coordinates));
+                if (coordinates && (type === "Polygon" || type === "MultiPolygon"))
+                    type === "MultiPolygon" && (coordinates = [].concat.apply([], coordinates));
                 else
                     coordinates = undefined
             }
@@ -3057,39 +3076,37 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 return projection.projectArea(coords)
             },
             _createRoot: function() {
-                return this._ctx.renderer.path([], "area")
+                return this._ctx.renderer.path([], "area").data(this._ctx.dataKey, this._data)
             },
-            _render: function(settings) {
-                var that = this;
-                that._styles = {
+            _update: function(settings) {
+                this._styles = {
                     normal: {
-                        'class': 'dxm-area',
+                        "class": "dxm-area",
                         stroke: settings.borderColor,
                         "stroke-width": settings.borderWidth,
                         fill: settings.color
                     },
                     hovered: {
-                        'class': 'dxm-area dxm-area-hovered',
+                        "class": "dxm-area dxm-area-hovered",
                         stroke: settings.hoveredBorderColor,
                         "stroke-width": settings.hoveredBorderWidth,
                         fill: settings.hoveredColor
                     },
                     selected: {
-                        'class': 'dxm-area dxm-area-selected',
+                        "class": "dxm-area dxm-area-selected",
                         stroke: settings.selectedBorderColor,
                         "stroke-width": settings.selectedBorderWidth,
                         fill: settings.selectedColor
                     }
                 };
-                $(that._root.attr(that._styles.normal).element).data(that._ctx.dataKey, that._data);
-                return that
+                this._root.attr(this._styles.normal);
+                return this
             },
             _transform: function(projection, coords) {
                 return projection.getAreaCoordinates(coords)
             },
             _locate: function(coords) {
-                this._root.attr({points: coords});
-                this._label && this._locateLabel()
+                this._root.attr({points: coords})
             },
             onHover: _noop,
             setDefaultState: function() {
@@ -3101,46 +3118,33 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
             setSelectedState: function() {
                 this._root.attr(this._styles.selected).toForeground()
             },
-            createLabel: function() {
+            _createLabelRoot: function() {
+                return this._ctx.renderer.g().attr({"class": "dxm-area-label"}).append(this._ctx.labelRoot)
+            },
+            _adjustLabel: function() {
                 var that = this,
-                    textContent = _String(that._proxy.text || that._proxy.attribute(that._settings.label['dataField']) || '');
-                if (!textContent)
-                    return that;
-                var centroid = calculateAreaCentroid(that._coords);
+                    centroid = calculateAreaCentroid(that._coords),
+                    bbox = that._label.text.getBBox(),
+                    offset = -bbox.y - bbox.height / 2;
                 that._centroid = centroid.coords;
                 that._areaSize = _sqrt(centroid.area);
-                that._label = that._ctx.renderer.g().attr({'class': 'dxm-area-label'}).append(that._ctx.labelRoot);
-                var labelSettings = that._settings.label,
-                    text = that._ctx.renderer.text(textContent, 0, 0).css(_patchFontOptions(labelSettings.font)).attr({
-                        align: 'center',
-                        stroke: labelSettings.stroke,
-                        'stroke-width': labelSettings['stroke-width'],
-                        'stroke-opacity': labelSettings['stroke-opacity']
-                    }).append(that._label),
-                    bbox = that._label.getBBox(),
-                    offset = -bbox.y - bbox.height / 2;
-                text.attr({y: offset});
-                that._labelSize = {
-                    w: bbox.width,
-                    h: bbox.height
-                };
-                $(that._ctx.renderer.rect(bbox.x, bbox.y + offset, bbox.width, bbox.height).attr({
-                    "stroke-width": 0,
-                    stroke: 'none',
-                    fill: '#000000',
-                    opacity: 0.0001
-                }).append(that._label).element).data(that._ctx.dataKey, that._data);
-                that._locateLabel();
-                return that
+                that._labelSize = [bbox.width, bbox.height];
+                that._label.text.attr({y: offset});
+                that._label.tracker.attr({
+                    x: bbox.x,
+                    y: bbox.y + offset,
+                    width: bbox.width,
+                    height: bbox.height
+                })
             },
             _locateLabel: function() {
                 var that = this,
                     coords = that._ctx.projection.getPointCoordinates(that._centroid),
                     size = that._ctx.projection.getSquareSize([that._areaSize, that._areaSize]);
-                that._label.attr({
+                that._label.root.attr({
                     translateX: coords.x,
                     translateY: coords.y,
-                    visibility: that._labelSize.w / size[0] < TOLERANCE && that._labelSize.h / size[1] < TOLERANCE ? null : 'hidden'
+                    visibility: that._labelSize[0] / size[0] < TOLERANCE && that._labelSize[1] / size[1] < TOLERANCE ? null : "hidden"
                 })
             }
         });
@@ -3197,35 +3201,30 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
         var _Number = Number,
             _String = String,
             _isFinite = isFinite,
-            _round = Math.round,
-            _max = Math.max,
-            _min = Math.min,
+            _math = Math,
+            _round = _math.round,
+            _max = _math.max,
+            _min = _math.min,
             _extend = $.extend,
             _each = $.each,
-            _isArray = DX.utils.isArray,
-            _patchFontOptions = DX.viz.core.utils.patchFontOptions;
-        var CLASS_DEFAULT = 'dxm-marker',
-            CLASS_HOVERED = 'dxm-marker dxm-marker-hovered',
-            CLASS_SELECTED = 'dxm-marker dxm-marker-selected',
-            TRACKER_SETTINGS = {
-                stroke: 'none',
-                "stroke-width": 0,
-                fill: '#000000',
-                opacity: 0.0001
-            };
-        var DOT = 'dot',
-            BUBBLE = 'bubble',
-            PIE = 'pie',
-            IMAGE = 'image';
-        var DEFAULT_MARKER_TYPE = null,
+            utils = DX.utils,
+            _isArray = utils.isArray,
+            CLASS_DEFAULT = "dxm-marker",
+            CLASS_HOVERED = "dxm-marker dxm-marker-hovered",
+            CLASS_SELECTED = "dxm-marker dxm-marker-selected",
+            DOT = "dot",
+            BUBBLE = "bubble",
+            PIE = "pie",
+            IMAGE = "image",
+            DEFAULT_MARKER_TYPE = null,
             MARKER_TYPES = {};
         var MarkersManager = DX.viz.map.dxVectorMap.prototype._factory.MapItemsManager.inherit({
-                _rootClass: 'dxm-markers',
-                _dataCategory: 'markers',
+                _rootClass: "dxm-markers",
+                _dataCategory: "markers",
                 _eventNames: {
-                    click: 'markerClick',
-                    hoverChanged: 'markerHoverChanged',
-                    selectionChanged: 'markerSelectionChanged'
+                    click: "markerClick",
+                    hoverChanged: "markerHoverChanged",
+                    selectionChanged: "markerSelectionChanged"
                 },
                 _init: function() {
                     var that = this;
@@ -3233,7 +3232,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     that._context.getPieColors = function(count) {
                         return that._params.themeManager.getPieColors(that._commonSettings, count)
                     };
-                    that._filter = that._params.renderer.shadowFilter('-40%', '-40%', '180%', '200%', 0, 1, 1, '#000000', 0.2)
+                    that._filter = that._params.renderer.shadowFilter("-40%", "-40%", "180%", "200%", 0, 1, 1, "#000000", 0.2)
                 },
                 _dispose: function() {
                     this.callBase.apply(this, arguments);
@@ -3254,9 +3253,9 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 },
                 _processOptions: function(options) {
                     var that = this;
+                    that._commonType = parseMarkerType(options && options.type, DEFAULT_MARKER_TYPE);
                     that.callBase.apply(that, arguments);
-                    that._commonSettings._filter = that._filter.ref;
-                    that._commonType = parseMarkerType(options && options.type, DEFAULT_MARKER_TYPE)
+                    that._commonSettings._filter = that._filter.ref
                 },
                 _arrangeBubbles: function() {
                     var markers = this._handles,
@@ -3264,7 +3263,10 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                         i,
                         ii = markers.length,
                         marker,
-                        values = [];
+                        values = [],
+                        minValue,
+                        maxValue,
+                        deltaValue;
                     if (this._commonSettings._bubble.sizeGroups)
                         return;
                     for (i = 0; i < ii; ++i) {
@@ -3275,15 +3277,15 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                                 values.push(marker.proxy.value)
                         }
                     }
-                    var minValue = _min.apply(null, values),
-                        maxValue = _max.apply(null, values),
-                        deltaValue = maxValue - minValue || 1;
+                    minValue = _min.apply(null, values);
+                    maxValue = _max.apply(null, values);
+                    deltaValue = maxValue - minValue || 1;
                     for (i = 0, ii = bubbles.length; i < ii; ++i) {
                         marker = bubbles[i];
                         marker.item.setSize(_isFinite(marker.proxy.value) ? (marker.proxy.value - minValue) / deltaValue : 0)
                     }
                 },
-                _itemType: 'marker',
+                _itemType: "marker",
                 _initProxy: function(proxy, dataItem) {
                     _each(dataItem, function(name, value) {
                         if (proxy[name] === undefined)
@@ -3295,62 +3297,58 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     var type = proxy._TYPE || this._commonType,
                         settings = this._params.themeManager.getMarkerSettings(this._commonSettings, _extend({}, proxy.style, options), type);
                     proxy.text = proxy.text || settings.text;
-                    settings._type = type;
                     return settings
                 },
-                _createItem: function(settings) {
-                    return new MARKER_TYPES[settings._type]
+                _createItem: function(proxy) {
+                    return new MARKER_TYPES[proxy._TYPE || this._commonType]
                 },
-                _prepareItems: function() {
+                _updateGrouping: function() {
                     var that = this,
                         markerType = that._commonType,
-                        dataField,
-                        commonSettings = that._commonSettings['_' + markerType];
-                    if (markerType === DOT || markerType === BUBBLE)
-                        if (commonSettings.colorGroups) {
-                            dataField = commonSettings.colorGroupingField;
-                            that._groupByColor(commonSettings.colorGroups, commonSettings.palette, function(handle) {
-                                var proxy = handle.proxy;
-                                return !proxy._TYPE || proxy._TYPE === markerType ? proxy.attribute(dataField) : NaN
-                            })
-                        }
-                    if (markerType === PIE)
-                        that._updateLegendForPies();
-                    if (commonSettings.sizeGroups) {
-                        dataField = commonSettings.sizeGroupingField;
-                        that._performGrouping(commonSettings.sizeGroups, 'size', function(handle) {
-                            var proxy = handle.proxy;
-                            return !proxy._TYPE || proxy._TYPE === markerType ? proxy.value || proxy.attribute(dataField) : NaN
-                        }, function(count) {
-                            var minSize = commonSettings.minSize > 0 ? _Number(commonSettings.minSize) : 0,
-                                maxSize = commonSettings.maxSize >= minSize ? _Number(commonSettings.maxSize) : 0,
-                                i = 0,
-                                sizes = [];
-                            for (i = 0; i < count; ++i)
-                                sizes.push((minSize * (count - i - 1) + maxSize * i) / (count - 1));
-                            return sizes
+                        colorDataField,
+                        sizeDataField,
+                        commonSettings = that._commonSettings["_" + markerType];
+                    if (markerType === DOT || markerType === BUBBLE) {
+                        colorDataField = commonSettings.colorGroupingField;
+                        that._groupByColor(commonSettings.colorGroups, commonSettings.palette, function(proxy) {
+                            return !proxy._TYPE || proxy._TYPE === markerType ? proxy.attribute(colorDataField) : NaN
                         })
                     }
+                    sizeDataField = commonSettings.sizeGroupingField;
+                    that._performGrouping(commonSettings.sizeGroups, "size", function(proxy) {
+                        return !proxy._TYPE || proxy._TYPE === markerType ? proxy.value || proxy.attribute(sizeDataField) : NaN
+                    }, function(count) {
+                        var minSize = commonSettings.minSize > 0 ? _Number(commonSettings.minSize) : 0,
+                            maxSize = commonSettings.maxSize >= minSize ? _Number(commonSettings.maxSize) : 0,
+                            i = 0,
+                            sizes = [];
+                        for (i = 0; i < count; ++i)
+                            sizes.push((minSize * (count - i - 1) + maxSize * i) / (count - 1));
+                        return sizes
+                    })
                 },
                 _updateLegendForPies: function() {
                     var count = 0;
                     _each(this._handles, function(_, handle) {
-                        var proxy = handle.proxy;
+                        var proxy = handle.proxy,
+                            values;
                         if (!proxy._TYPE || proxy._TYPE === PIE) {
-                            var values = proxy.values;
+                            values = proxy.values;
                             if (values && values.length > count)
                                 count = values.length
                         }
                     });
-                    this._params.dataExchanger.set(this._dataCategory, 'color', $.map(this._context.getPieColors(count).slice(0, count), function(color, i) {
-                        return {
-                                index: i,
-                                color: color
-                            }
-                    }))
+                    if (count > 0)
+                        this._params.dataExchanger.set(this._dataCategory, "color", DX.viz.core.utils.map(this._context.getPieColors(count).slice(0, count), function(color, i) {
+                            return {
+                                    index: i,
+                                    color: color
+                                }
+                        }))
                 },
                 _arrangeItems: function() {
-                    this._arrangeBubbles()
+                    this._arrangeBubbles();
+                    this._updateLegendForPies()
                 }
             });
         var baseMarkerBehavior = _extend({}, DX.viz.map._internal.mapItemBehavior, {
@@ -3360,9 +3358,9 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 _createRoot: function() {
                     return this._ctx.renderer.g()
                 },
-                _render: function(settings) {
+                _update: function(settings) {
                     var that = this;
-                    that._root.attr({'class': CLASS_DEFAULT});
+                    that._root.attr({"class": CLASS_DEFAULT}).clear();
                     that._create(settings, that._ctx.renderer, that._root);
                     return that
                 },
@@ -3379,45 +3377,43 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     this._root.toForeground()
                 },
                 setDefaultState: function() {
-                    this._root.attr({'class': CLASS_DEFAULT}).toBackground();
+                    this._root.attr({"class": CLASS_DEFAULT}).toBackground();
                     this._applyDefault()
                 },
                 setHoveredState: function() {
-                    this._root.attr({'class': CLASS_HOVERED});
+                    this._root.attr({"class": CLASS_HOVERED});
                     this._applyHovered()
                 },
                 setSelectedState: function() {
-                    this._root.attr({'class': CLASS_SELECTED}).toForeground();
+                    this._root.attr({"class": CLASS_SELECTED}).toForeground();
                     this._applySelected()
                 },
-                createLabel: function() {
-                    var that = this;
-                    if (!that._proxy.text)
-                        return;
-                    var rootbox = that._root.getBBox(),
-                        labelSettings = that._settings.label,
-                        text = that._ctx.renderer.text(that._proxy.text, 0, 0).css(_patchFontOptions(labelSettings.font)).attr({
-                            align: 'center',
-                            stroke: labelSettings.stroke,
-                            'stroke-width': labelSettings['stroke-width'],
-                            'stroke-opacity': labelSettings['stroke-opacity']
-                        }).append(that._root),
-                        textBox = text.getBBox(),
-                        x = _round(-textBox.x + rootbox.width / 2) + 2,
-                        y = _round(-textBox.y - textBox.height / 2) - 1;
-                    text.attr({
+                _createLabelRoot: function() {
+                    return this._root
+                },
+                _adjustLabel: function() {
+                    var bbox = this._label.text.getBBox(),
+                        x = _round(-bbox.x + this._size / 2) + 2,
+                        y = _round(-bbox.y - bbox.height / 2) - 1;
+                    this._label.text.attr({
                         x: x,
                         y: y
                     });
-                    $(that._ctx.renderer.rect(x + textBox.x - 1, y + textBox.y - 1, textBox.width + 2, textBox.height + 2).attr(TRACKER_SETTINGS).append(that._root).element).data(that._ctx.dataKey, that._data)
-                }
+                    this._label.tracker.attr({
+                        x: x + bbox.x - 1,
+                        y: y + bbox.y - 1,
+                        width: bbox.width + 2,
+                        height: bbox.height + 2
+                    })
+                },
+                _locateLabel: $.noop
             });
         function DotMarker(){}
         _extend(DotMarker.prototype, baseMarkerBehavior, {
             type: DOT,
             _create: function(style, renderer, root) {
                 var that = this,
-                    size = style.size > 0 ? _Number(style.size) : 0,
+                    size = that._size = style.size > 0 ? _Number(style.size) : 0,
                     hoveredSize = size,
                     selectedSize = size + (style.selectedStep > 0 ? _Number(style.selectedStep) : 0),
                     hoveredBackSize = hoveredSize + (style.backStep > 0 ? _Number(style.backStep) : 0),
@@ -3452,7 +3448,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     cx: 0,
                     cy: 0,
                     r: r,
-                    stroke: 'none',
+                    stroke: "none",
                     "stroke-width": 0,
                     fill: style.backColor,
                     opacity: style.backOpacity
@@ -3461,7 +3457,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     cx: 0,
                     cy: 0,
                     r: hoveredBackSize / 2,
-                    stroke: 'none',
+                    stroke: "none",
                     "stroke-width": 0,
                     fill: style.backColor,
                     opacity: style.backOpacity
@@ -3470,15 +3466,13 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     cx: 0,
                     cy: 0,
                     r: selectedBackSize / 2,
-                    stroke: 'none',
+                    stroke: "none",
                     "stroke-width": 0,
                     fill: style.backColor,
                     opacity: style.backOpacity
                 };
-                that._back = renderer.circle().sharp().attr(that._backDefault).append(root);
-                that._dot = renderer.circle().sharp().attr(that._dotDefault).append(root);
-                $(that._back.element).data(that._ctx.dataKey, that._data);
-                $(that._dot.element).data(that._ctx.dataKey, that._data)
+                that._back = renderer.circle().sharp().attr(that._backDefault).data(that._ctx.dataKey, that._data).append(root);
+                that._dot = renderer.circle().sharp().attr(that._dotDefault).data(that._ctx.dataKey, that._data).append(root)
             },
             _destroy: function() {
                 this._back = this._dot = null
@@ -3522,8 +3516,8 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     fill: style.selectedColor,
                     opacity: style.selectedOpacity
                 };
-                that._bubble = renderer.circle(0, 0, (style.size || style.maxSize) / 2).sharp().attr(that._default).append(root);
-                $(that._bubble.element).data(that._ctx.dataKey, that._data)
+                that._bubble = renderer.circle(0, 0, 0).sharp().attr(that._default).data(that._ctx.dataKey, that._data).append(root);
+                that.setSize(style.size / that._maxSize || 1)
             },
             _applyDefault: function() {
                 this._bubble.attr(this._default)
@@ -3538,6 +3532,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 var that = this,
                     r = (that._minSize + ratio * (that._maxSize - that._minSize)) / 2;
                 that._default.r = that._hovered.r = that._selected.r = r;
+                that._size = 2 * r;
                 that._bubble.attr({r: r});
                 return that
             }
@@ -3547,7 +3542,18 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
             type: PIE,
             _create: function(style, renderer, root) {
                 var that = this,
-                    r = (style.size > 0 ? _Number(style.size) : 0) / 2;
+                    r = (style.size > 0 ? _Number(style.size) : 0) / 2,
+                    srcValues,
+                    i = 0,
+                    ii,
+                    values,
+                    value,
+                    sum = 0,
+                    translator,
+                    startAngle,
+                    endAngle,
+                    colors;
+                that._size = 2 * r;
                 that._pieDefault = {opacity: style.opacity};
                 that._pieHovered = {opacity: style.hoveredOpacity};
                 that._pieSelected = {opacity: style.selectedOpacity};
@@ -3563,12 +3569,9 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     stroke: style.selectedBorderColor,
                     "stroke-width": style.selectedBorderWidth
                 };
-                var srcValues = that._proxy.values,
-                    i = 0,
-                    ii = _isArray(srcValues) ? srcValues.length : 0,
-                    values = [],
-                    value,
-                    sum = 0;
+                srcValues = that._proxy.values;
+                ii = _isArray(srcValues) ? srcValues.length : 0;
+                values = [];
                 for (; i < ii; ++i) {
                     value = _Number(srcValues[i]);
                     if (_isFinite(value)) {
@@ -3577,22 +3580,20 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                     }
                 }
                 that._pie = renderer.g().attr(that._pieDefault);
-                var translator = new DX.viz.core.Translator1D(0, sum, 90, 450),
-                    startAngle = translator.translate(0),
-                    endAngle,
-                    colors = that._ctx.getPieColors(values.length);
+                translator = new DX.viz.core.Translator1D(0, sum, 90, 450);
+                startAngle = translator.translate(0);
+                colors = that._ctx.getPieColors(values.length);
                 for (value = 0, i = 0, ii = values.length; i < ii; ++i) {
                     value += values[i];
                     endAngle = translator.translate(value);
-                    $(renderer.arc(0, 0, 0, r, startAngle, endAngle).attr({
+                    renderer.arc(0, 0, 0, r, startAngle, endAngle).attr({
                         "stroke-linejoin": "round",
                         fill: colors[i]
-                    }).append(that._pie).element).data(that._ctx.dataKey, that._data);
+                    }).data(that._ctx.dataKey, that._data).append(that._pie);
                     startAngle = endAngle
                 }
                 that._pie.append(root);
-                that._border = renderer.circle(0, 0, r).sharp().attr(that._borderDefault).append(root);
-                $(that._border.element).data(that._ctx.dataKey, that._data)
+                that._border = renderer.circle(0, 0, r).sharp().attr(that._borderDefault).data(that._ctx.dataKey, that._data).append(root)
             },
             _applyDefault: function() {
                 this._pie.attr(this._pieDefault);
@@ -3612,7 +3613,7 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
             type: IMAGE,
             _create: function(style, renderer, root) {
                 var that = this,
-                    size = style.size > 0 ? _Number(style.size) : 0,
+                    size = that._size = style.size > 0 ? _Number(style.size) : 0,
                     hoveredSize = size + (style.hoveredStep > 0 ? _Number(style.hoveredStep) : 0),
                     selectedSize = size + (style.selectedStep > 0 ? _Number(style.selectedStep) : 0);
                 that._default = {
@@ -3635,10 +3636,14 @@ if (!DevExpress.MOD_VIZ_VECTORMAP) {
                 };
                 that._image = renderer.image().attr(that._default).attr({
                     href: that._proxy.url,
-                    location: 'center'
+                    location: "center"
                 }).append(root);
-                that._tracker = renderer.rect().attr(that._default).attr(TRACKER_SETTINGS).append(root);
-                $(that._tracker.element).data(that._ctx.dataKey, that._data)
+                that._tracker = renderer.rect().attr(that._default).attr({
+                    stroke: "none",
+                    "stroke-width": 0,
+                    fill: "#000000",
+                    opacity: 0.0001
+                }).data(that._ctx.dataKey, that._data).append(root)
             },
             _applyDefault: function() {
                 this._image.attr(this._default);

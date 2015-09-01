@@ -672,6 +672,7 @@
     <Compile Include="Controllers\ComplaintsController.vb" />
     <Compile Include="Controllers\ConstructionCasesController.vb" />
     <Compile Include="Controllers\CorporationEntitiesController.vb" />
+    <Compile Include="Controllers\ManagementController.vb" />
     <Compile Include="Controllers\ShortSaleLeadsInfoesController.vb" />
     <Compile Include="Controllers\TaxLiensController.vb" />
     <Compile Include="Controllers\TaxLiensODataController.vb" />
@@ -1151,6 +1152,13 @@
     </Compile>
     <Compile Include="ManagementUI\BuyerEntiyManage.aspx.vb">
       <DependentUpon>BuyerEntiyManage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Management\BusinessRulesMng.aspx.designer.vb">
+      <DependentUpon>BusinessRulesMng.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\BusinessRulesMng.aspx.vb">
+      <DependentUpon>BusinessRulesMng.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Management\CombineContact.aspx.designer.vb">
@@ -2134,6 +2142,9 @@
     <Content Include="Content\dx.android.holo-light.css" />
     <Content Include="Content\dx.android5.light.css" />
     <Content Include="Content\dx.common.css" />
+    <Content Include="Content\dx.contrast.compact.css" />
+    <Content Include="Content\dx.contrast.css" />
+    <Content Include="Content\dx.dark.compact.css" />
     <Content Include="Content\dx.dark.css" />
     <Content Include="Content\dx.dashboard.common.css" />
     <Content Include="Content\dx.dashboard.dark.css" />
@@ -2142,6 +2153,7 @@
     <Content Include="Content\dx.exporter.light.css" />
     <Content Include="Content\dx.ios.default.css" />
     <Content Include="Content\dx.ios7.default.css" />
+    <Content Include="Content\dx.light.compact.css" />
     <Content Include="Content\dx.light.css" />
     <Content Include="Content\dx.spa.css" />
     <Content Include="Content\dx.tizen.black.css" />
@@ -2162,6 +2174,9 @@
     <Content Include="Content\layouts\Pivot\PivotLayout.css" />
     <Content Include="Content\layouts\Pivot\PivotLayout.html" />
     <Content Include="Content\layouts\Pivot\PivotLayout.js" />
+    <Content Include="Content\layouts\Popup\PopupLayout.css" />
+    <Content Include="Content\layouts\Popup\PopupLayout.html" />
+    <Content Include="Content\layouts\Popup\PopupLayout.js" />
     <Content Include="Content\layouts\Simple\SimpleLayout.css" />
     <Content Include="Content\layouts\Simple\SimpleLayout.html" />
     <Content Include="Content\layouts\Simple\SimpleLayout.js" />
@@ -2567,6 +2582,7 @@
     <Content Include="ManagementUI\Management.aspx" />
     <Content Include="Management\AddressToBBLE.aspx" />
     <Content Include="ManagementUI\BuyerEntiyManage.aspx" />
+    <Content Include="Management\BusinessRulesMng.aspx" />
     <Content Include="Management\CombineContact.aspx" />
     <Content Include="Complaints\ComplainsMng.aspx" />
     <Content Include="Management\ComplaintsNotify.aspx" />
@@ -3402,6 +3418,12 @@
     <Content Include="ClassDiagram1.cd" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="App_Data\OSCTemplate.docx" />
+    <Content Include="Content\icons\dxiconsios.woff" />
+    <Content Include="Content\icons\dxiconsios.ttf" />
+    <Content Include="Content\icons\dxiconsios.eot" />
+    <Content Include="Content\icons\dxicons.woff" />
+    <Content Include="Content\icons\dxicons.ttf" />
+    <Content Include="Content\icons\dxicons.eot" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -3414,6 +3436,8 @@
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Scripts\jquery.webui-popover.css" />
     <Content Include="Scripts\jquery.webui-popover.js" />
+    <Content Include="Scripts\jszip.js" />
+    <Content Include="Scripts\jszip.min.js" />
     <Content Include="Scripts\js\jquery.backstretch.min.js" />
     <Content Include="Scripts\js\jquery.debouncedresize.js" />
     <Content Include="Scripts\js\jquery.easing.1.3.js" />

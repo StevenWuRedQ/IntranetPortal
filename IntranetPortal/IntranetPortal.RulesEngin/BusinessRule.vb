@@ -1,11 +1,17 @@
 ﻿Imports System.Threading
 Imports MyIdealProp.Workflow.DBPersistence
+Imports System.Runtime.Serialization
 
+<DataContract>
 Public Class BaseRule
+
+    <DataMember>
     Public Property RuleName As String
     Public Property ExecuteOn As TimeSpan
     Public Property Period As TimeSpan
+    <DataMember>
     Public Property ExecuteNow As Boolean
+    Public Property Status As RuleStatus = RuleStatus.Stoped
 
     Public Sub New()
 
@@ -27,6 +33,12 @@ Public Class BaseRule
     Protected Sub Log(msg As String, ex As Exception)
         ServiceLog.Log(msg, ex)
     End Sub
+
+    Enum RuleStatus
+        Active
+        InProcess
+        Stoped
+    End Enum
 End Class
 
 Public Class LeadsAndTaskRule
@@ -533,7 +545,7 @@ Public Class RefreshDataRule
     Dim rules As List(Of Core.DataLoopRule)
     Public Overrides Sub Execute()
         rules = IntranetPortal.Core.DataLoopRule.GetAllActiveRule
-      
+
     End Sub
 
 End Class
@@ -606,6 +618,6 @@ Public Class LegalFollowUpRule
             End Try
 
         End Using
-     
+
     End Sub
 End Class
