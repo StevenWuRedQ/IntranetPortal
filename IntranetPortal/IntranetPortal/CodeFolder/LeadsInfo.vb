@@ -299,7 +299,7 @@ Public Class LeadsInfo
     <JsonIgnoreAttribute>
     Public ReadOnly Property Status As String
         Get
-            If Lead.Status.HasValue Then
+            If Lead IsNot Nothing AndAlso Lead.Status.HasValue Then
                 Return CType(Lead.Status.Value, LeadStatus).ToString
             End If
 

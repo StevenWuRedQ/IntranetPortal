@@ -292,12 +292,9 @@
             </ul>
         </div>
 
+        <% If LeadsInfoData.Status = IntranetPortal.LeadStatus.InProcess.ToString Then%>                
         <uc1:NGShortSaleInLeadsView runat="server" ID="NGShortSaleInLeadsView" />
-
-
-        <%--  <div style="margin: 20px;" class="clearfix" runat="server" id="divShortSaleData" visible="false">
-            <uc1:ShortSaleInLeadsView runat="server" ID="ShortSaleInLeadsView" Visible="false" />
-     
+        <% end If %>
 
         <%-------end-----%>
         <dx:ASPxCallbackPanel runat="server" ID="callPanelReferrel" ClientInstanceName="callPanelClientReferrel" OnCallback="callPanelReferrel_Callback">
