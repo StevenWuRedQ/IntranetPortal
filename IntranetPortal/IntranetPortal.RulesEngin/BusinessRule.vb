@@ -2,6 +2,7 @@
 Imports MyIdealProp.Workflow.DBPersistence
 Imports System.Runtime.Serialization
 
+<KnownType(GetType(LegalFollowUpRule))>
 <DataContract>
 Public Class BaseRule
 
@@ -603,6 +604,7 @@ Public Class DOBComplaintsCheckingRule
     End Sub
 End Class
 
+<DataContract>
 Public Class LegalFollowUpRule
     Inherits BaseRule
 

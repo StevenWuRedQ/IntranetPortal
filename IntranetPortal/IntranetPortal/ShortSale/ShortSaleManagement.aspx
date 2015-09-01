@@ -1,10 +1,7 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleManagement.aspx.vb" Inherits="IntranetPortal.ShortSaleManagement" MasterPageFile="~/Content.Master" %>
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/Content/dx.common.css" rel="stylesheet" />
-    <%--<link href="/Content/dx.ios7.default.css" rel="stylesheet" />--%>
-    <link href="/Content/dx.light.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
     <style>
         .nofoucs:focus {
             border: none !important;
@@ -12,9 +9,8 @@
     </style>
 </asp:Content>
 
-<asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-    <script src="/Scripts/globalize/globalize.js"></script>
-    <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.chartjs.js"></script>
+<asp:Content ContentPlaceHolderID="MainContentPH" runat="server">    
+    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>
     <div class="container-fluid">
         <%--Head--%>
         <div style="padding-top: 30px">

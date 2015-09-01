@@ -8,6 +8,9 @@ Public Interface IRulesEngineServices
     Function GetRules() As BaseRule()
 
     <OperationContract()>
+    Function GetRule(ruleName As String) As BaseRule
+
+    <OperationContract()>
     Function GetRulesString() As String
 
     <OperationContract()>

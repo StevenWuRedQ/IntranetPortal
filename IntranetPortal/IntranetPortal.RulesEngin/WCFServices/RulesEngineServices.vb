@@ -25,4 +25,8 @@ Public Class RulesEngineServices
     Public Function GetRulesString() As String Implements IRulesEngineServices.GetRulesString
         Return GetRules().ToJsonString()
     End Function
+
+    Public Function GetRule(ruleName As String) As BaseRule Implements IRulesEngineServices.GetRule
+        Return GetRules().FirstOrDefault(Function(r) r.RuleName = ruleName)
+    End Function
 End Class

@@ -2093,6 +2093,13 @@
     <Compile Include="WCFDataServices\PortalReportService.svc.vb">
       <DependentUpon>PortalReportService.svc</DependentUpon>
     </Compile>
+    <Compile Include="WebForm1.aspx.designer.vb">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.vb">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="WebForm2.aspx.designer.vb">
       <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
@@ -3651,6 +3658,7 @@
     <Content Include="Services\ContactService.svc" />
     <Content Include="WCFDataServices\PortalDataService.svc" />
     <Content Include="WCFDataServices\PortalReportService.svc" />
+    <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
