@@ -96,8 +96,8 @@
                 </li>
 
                   <li class="ss_form_item">
-                    <label class="ss_form_input_title">Appointments</label>
-                    <input class="ss_form_input" type="text" ng-model="floor.ConED.Appointments" ss-date>
+                    <label class="ss_form_input_title">Appointments Time</label>
+                    <timepicker show-spinners="false" ng-model="floor.ConED.AppointmentsTime"></timepicker>
                 </li>
             </ul>
             <div>
@@ -174,10 +174,21 @@
                 </select>
             </div>
         </div>
-        <div class="ss_form_item">
-            <label class="ss_form_input_title">Appointments</label>
-            <input class="ss_form_input" type="text" ng-model="floor.EnergyService.Appointments" ss-date>
-        </div>
+
+
+                <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                    <label class="ss_form_input_title">Appointments</label>
+                    <input class="ss_form_input" type="text" ng-model="floor.EnergyService.Appointments" ss-date>
+                </li>
+
+                  <li class="ss_form_item">
+                    <label class="ss_form_input_title">Appointments Time</label>
+                    <timepicker show-spinners="false" ng-model="floor.EnergyService.AppointmentsTime"></timepicker>
+                </li>
+            </ul>
+       
+
         <div>
             <label class="ss_form_input_title">Upload</label>
             <pt-files file-bble="CSCase.BBLE" file-id="EnergyService-Upload{{$index}}" base-folder="EnergyService-Upload{{$index}}" file-model="floor.EnergyService.Upload"></pt-files>
@@ -245,10 +256,19 @@
                 </select>
             </div>
         </div>
-        <div class="ss_form_item">
-            <label class="ss_form_input_title">Appointments</label>
-            <input class="ss_form_input" type="text" ng-model="floor.NationalGrid.Appointments" ss-date>
-        </div>
+
+
+                            <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                    <label class="ss_form_input_title">Appointments</label>
+                    <input class="ss_form_input" type="text" ng-model="floor.NationalGrid.Appointments" ss-date>
+                </li>
+
+                  <li class="ss_form_item">
+                    <label class="ss_form_input_title">Appointments Time</label>
+                    <timepicker show-spinners="false" ng-model="floor.NationalGrid.AppointmentsTime"></timepicker>
+                </li>
+            </ul>
         <div>
             <label class="ss_form_input_title">Upload</label>
             <pt-files file-bble="CSCase.BBLE" file-id="EnergyService_Upload{{$index}}" base-folder="EnergyService_Upload{{$index}}" file-model="floor.NationalGrid.Upload"></pt-files>

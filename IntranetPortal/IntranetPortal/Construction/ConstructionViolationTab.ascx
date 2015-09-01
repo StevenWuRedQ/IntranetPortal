@@ -142,7 +142,11 @@
                 <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Violations.Expeditor_AssignedDate" ss-date>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Vendor</label>
+                <label class="ss_form_input_title">Vendor Company</label>
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Violations.Expeditor_VendorCompany" >
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Vendor Person</label>
                 <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Violations.Expeditor_Vendor" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
         </ul>
@@ -472,8 +476,8 @@
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_Registrant">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Dismissal Request</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_DismissalRequest">
+                <label class="ss_form_input_title">Date Dismissal Request</label>
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_DismissalRequest" ss-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Amount Owed</label>

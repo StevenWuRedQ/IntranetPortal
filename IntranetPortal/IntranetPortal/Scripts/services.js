@@ -60,9 +60,8 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem) {
 app.service('ptCom', ['$http',
     function ($http) {
         /******************Stven code area*********************/
-        this.DocGenerator = function( tplName,data,successFunc)
-        {
-            $http.post('/Services/Documents.svc/DocGenrate', { "tplName": tplName, "data": JSON.stringify( data) }).success(function (data) {
+        this.DocGenerator = function (tplName, data, successFunc) {
+            $http.post('/Services/Documents.svc/DocGenrate', { "tplName": tplName, "data": JSON.stringify(data) }).success(function (data) {
                 successFunc(data);
             }).error(function (data, status) {
                 alert("Fail to save data. status: " + status + " Error : " + JSON.stringify(data));
@@ -78,21 +77,20 @@ app.service('ptCom', ['$http',
         }
 
         this.arrayRemove = function (model, index, confirm, callback) {
+            debugger;
             if (model && index < model.length) {
                 if (confirm) {
-                    var result = DevExpress.ui.dialog.confirm("Delete This?", "Confirm");
-                    result.done(function (dialogResult) {
-                        if (dialogResult) {
-                            var deleteObj = model.splice(index, 1)[0];
-                            if (callback) callback(deleteObj);
-                        }
-                    });
+                    var r = window.confirm("Deletion This?", "");
+                    if (r) {
+                        var deleteObj = model.splice(index, 1)[0];
+                        if (callback) callback(deleteObj);
+                    }
                 } else {
                     model.splice(index, 1);
                 }
             }
         };
-        
+
         this.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
             var result = '';
             if (strNO) result += strNO + ' ';
@@ -339,12 +337,12 @@ app.service('ptFileService', function () {
     this.getFileName = function (fullPath) {
         if (fullPath) {
             if (this.isIE(fullPath)) {
-               var paths = fullPath.split('\\');
-               return this.cleanName(paths[paths.length - 1]);
+                var paths = fullPath.split('\\');
+                return this.cleanName(paths[paths.length - 1]);
             } else {
                 var paths = fullPath.split('/');
                 return this.cleanName(paths[paths.length - 1]);
-            }           
+            }
         }
         return '';
     }
@@ -361,7 +359,7 @@ app.service('ptFileService', function () {
         if (fullPath) {
             var paths = fullPath.split('/');
             var folderName = paths[paths.length - 2];
-            var topFolders = ['Construction',];
+            var topFolders = ['Construction', ];
             if (topFolders.indexOf(folderName) < 0) {
                 return folderName;
             } else {
@@ -409,12 +407,12 @@ app.service('ptFileService', function () {
         ele.replaceWith(ele.clone());
     }
 
-    this.cleanName = function(filename){
+    this.cleanName = function (filename) {
         return filename.replace(/[^a-z0-9_\-\.()]/gi, '_')
     }
 
     this.isIE = function (fileName) {
-        return fileName.indexOf(':\\')>-1;
+        return fileName.indexOf(':\\') > -1;
     }
 }
 );
@@ -455,7 +453,7 @@ app.service('ptConstructionService', [
                     if (callback) callback("load dob violations fails")
                 })
             } else {
-                if(callback) callback("bble is missing")
+                if (callback) callback("bble is missing")
             }
         }
 
@@ -464,9 +462,9 @@ app.service('ptConstructionService', [
                 var url = "/Construction/ConstructionServices.svc/GetECBViolations?bble=" + bble
                 $http.get(url)
                 .success(function (res) {
-                    if(callback) callback(null, res)
+                    if (callback) callback(null, res)
                 }).error(function () {
-                    if(callback) callback("load ecb violations fails")
+                    if (callback) callback("load ecb violations fails")
                 })
 
             }

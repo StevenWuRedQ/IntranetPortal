@@ -152,10 +152,10 @@
                                 <label>Date of Valuation</label>
                                 <input class="form-control" ng-model="value.DateOfValue" ss-date />
                             </div>
-                            <div>
+                            <%--<div>
                                 <label>Date Completed</label>
                                 <input class="form-control" ng-model="value.DateComplate" ss-date />
-                            </div>
+                            </div> --%>
                             <div>
                                 <label>Value</label>
                                 <input class="form-control" ng-model="value.BankValue" money-mask />
@@ -186,18 +186,6 @@
         </tr>
     </table>
 </div>
-
-<%-- 
-<div class="ss_form ">
-    <h4 class="ss_form_title">Offer&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.ShortSaleOffers,'SsCase.ShortSaleOffers')" title="Add"></i></h4>
-    <div class="ss_brder" ng-show="SsCase.ShortSaleOffers.length>0">
-        <div class="ss_form_box clearfix ss_form_small_font">
-            <div dx-data-grid="offerBindingOptions()">
-            </div>
-        </div>
-    </div>
-</div>
---%>
 
 <div class="ss_form" id="offer_table_new">
     <h4 class="ss_form_title">Offers <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.ShortSaleOffers,'SsCase.ShortSaleOffers', true)" title="Add"></i>

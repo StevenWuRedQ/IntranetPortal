@@ -57,7 +57,7 @@
                                 <i class="fa fa-exclamation-circle" style="font-size: 18px"></i>
                                 <span style="margin-left: 10px">{{comment.comment}}</span>
                                 <span class="pull-right">
-                                    <i class="fa fa-times icon_btn text-danger" style="font-size: 18px" ng-click="arrayRemove(CSCase.CSCase.Comments, $index, true)"></i>
+                                    <i class="fa fa-times icon_btn text-danger" style="font-size: 18px" ng-click="arrayRemove(CSCase.CSCase.Comments, $index, true);"></i>
                                 </span>
                             </td>
                         </tr>

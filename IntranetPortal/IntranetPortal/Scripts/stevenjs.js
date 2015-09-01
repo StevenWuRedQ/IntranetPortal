@@ -444,7 +444,6 @@ function toDateValue(date) {
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
     return now.getFullYear() + "-" + (month) + "-" + (day);
 }
-
 function delete_array_item(button) {
     var ss_obj = ShortSaleCaseData;
     var arr_item = $(button).parents(".ss_array");
@@ -456,7 +455,6 @@ function delete_array_item(button) {
     arr_item.remove();
     //getShortSaleInstanceComplete(null, null);
 }
-
 function clearArray(array) {
     if (array == null || array.length == 0) {
         //d_alert("clear empty array");

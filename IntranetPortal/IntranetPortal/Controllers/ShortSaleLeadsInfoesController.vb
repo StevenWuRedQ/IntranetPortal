@@ -27,13 +27,11 @@ Namespace Controllers
         Private db As New ShortSaleEntities
 
         ' GET: odata/ShortSaleLeadsInfoes
-        <Queryable>
         Function GetShortSaleLeadsInfoes() As IQueryable(Of ShortSaleLeadsInfo)
             Return db.ShortSaleLeadsInfoes
         End Function
 
         ' GET: odata/ShortSaleLeadsInfoes(5)
-        <Queryable>
         Function GetShortSaleLeadsInfo(<FromODataUri> key As String) As SingleResult(Of ShortSaleLeadsInfo)
             Return SingleResult.Create(db.ShortSaleLeadsInfoes.Where(Function(shortSaleLeadsInfo) shortSaleLeadsInfo.BBLE = key))
         End Function

@@ -2448,6 +2448,11 @@ li.mag_tabv.active {
 	height: 25px !important;
 }
 
+.shortSaleUI .dx-tag{
+    padding: 2px;
+    font-size: 14px;
+}
+
 .dx-popup-content input[type='checkbox'] + label {
 	font-size: 14px !important;
 	margin-top: 5px !important;
@@ -2532,3 +2537,4 @@ li.mag_tabv.active {
 	border-bottom: none;
 	margin-bottom: -1px;
 }
+

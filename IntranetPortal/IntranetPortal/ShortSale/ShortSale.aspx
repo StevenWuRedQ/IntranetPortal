@@ -872,13 +872,12 @@
             /* stephen code */
             $scope.SsCase.Mortgages = [{}];
             $scope.NGremoveArrayItem = function (item, index, disable) {
-                var result = DevExpress.ui.dialog.confirm("Deletion This?", "");
-                result.done(function (dialogResult) {
-                    if (dialogResult) {
-                        if (disable) item[index].DataStatus = 3;
-                        else item.splice(index, 1);
-                    }
-                });
+                var r = window.confirm("Deletion This?");
+                if (r) {
+                    if (disable) item[index].DataStatus = 3;
+                    else item.splice(index, 1);
+                }
+
             };
             $http.get('/Services/ContactService.svc/getbanklist')
                 .success(function (data) {
@@ -909,7 +908,9 @@
                 if (!$scope.approvalCanclCallback) $scope.approvalCanclCallback = cancl;
             }
             $scope.toggleApprovalPopup = function () {
-                $scope.Approval_popupVisible = !$scope.Approval_popupVisible;
+                $scope.$apply(function () {
+                    $scope.Approval_popupVisible = !$scope.Approval_popupVisible;
+                });
             }
             /* end approval popup */
 
@@ -1001,10 +1002,12 @@
                 if (!$scope.valuationCanclCallback) $scope.valuationCanclCallback = cancl;
             }
             $scope.toggleValuationPopup = function (status) {
-                $scope.Valuation_Show_Option = status
-                $scope.ensurePendingValue()
-                $scope.resetPendingModified()
-                $scope.Valuation_popupVisible = !$scope.Valuation_popupVisible;
+                $scope.$apply(function () {
+                    $scope.Valuation_Show_Option = status
+                    $scope.ensurePendingValue()
+                    $scope.resetPendingModified()
+                    $scope.Valuation_popupVisible = !$scope.Valuation_popupVisible;
+                });
             }
 
             /* end valuation popup */
