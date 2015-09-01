@@ -81,7 +81,11 @@ Partial Public Class LegalCase
             End If
 
             Dim sTypes = jsonCase.Item("SecondaryTypes")
-            Me.SecondaryTypes = sTypes.ToString
+
+            If (sTypes IsNot Nothing) Then
+                Me.SecondaryTypes = sTypes.ToString
+            End If
+
 
             Dim data = jsonCase.Item("SaleDate")
 

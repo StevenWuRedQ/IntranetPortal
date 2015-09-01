@@ -5,56 +5,45 @@
 
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
-     <script>
-         function SearchGrid() {
+    <link rel="stylesheet" href="/css/right-pane.css">
+    <script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
+    <script>
+        function SearchGrid() {
 
-             var filterCondition = "";
-             var key = document.getElementById("QuickSearch").value;
+            var filterCondition = "";
+            var key = document.getElementById("QuickSearch").value;
 
-             if (key.trim() == "") {
-                 entitiesGridClient.ClearFilter();
-                 return;
-             }
+            if (key.trim() == "") {
+                entitiesGridClient.ClearFilter();
+                return;
+            }
 
-             filterCondition = "[CorpName] LIKE '%" + key + "%' OR [Address] LIKE '%" + key + "%'";
-             filterCondition += " OR [PropertyAssigned] LIKE '%" + key + "%'";
-             filterCondition += " OR [Signer] LIKE '%" + key + "%'";
-             filterCondition += " OR [EIN] LIKE '%" + key + "%'";
-             entitiesGridClient.ApplyFilter(filterCondition);
-             return false;
-         }
-         function ShowCaseInfo(BBLE) {
-             var url = '/LegalUI/LegalUI.aspx?bble=' + BBLE;
-             OpenLeadsWindow(url, 'Legal')
-         }
-         function FilterGridByCondtion(filterName, filterCondition)
-         {
-             
-             entitiesGridClient.ApplyFilter(filterCondition);
-         }
-         
+            filterCondition = "[CorpName] LIKE '%" + key + "%' OR [Address] LIKE '%" + key + "%'";
+            filterCondition += " OR [PropertyAssigned] LIKE '%" + key + "%'";
+            filterCondition += " OR [Signer] LIKE '%" + key + "%'";
+            filterCondition += " OR [EIN] LIKE '%" + key + "%'";
+            entitiesGridClient.ApplyFilter(filterCondition);
+            return false;
+        }
+        function ShowCaseInfo(BBLE) {
+            var url = '/LegalUI/LegalUI.aspx?bble=' + BBLE;
+            OpenLeadsWindow(url, 'Legal')
+        }
+        function FilterGridByCondtion(filterName, filterCondition) {
+
+            entitiesGridClient.ApplyFilter(filterCondition);
+        }
+
     </script>
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
     <uc1:SendMailWithAttach runat="server" ID="SendMailWithAttach2" />
     <div class="container-fluid">
-        <div class="row" style="margin-top:20px">
+        <div class="row" style="margin-top: 20px">
             <div class="col-md-8">
                 <h3>All Entities
-                   
-                   
                 </h3>
-                <div>
-                    <% Dim filter = Team.GetAllTeams.Select(Function(t) New With {.Name = t.Name & "'s Assigned Out", .Condtion = "[Status] = 'Assigned Out' and [Office] = '" & t.Name & "'"}).Tolist()
-                        filter.AddRange(Team.GetAllTeams.Select(Function(t) New With {.Name = t.Name & "'s Available", .Condtion = "[Status] = 'Available' and [Office] = '" & t.Name & "'"}).ToList)
-                        Dim OtherStatus = {"NHA Current Offer", "Isabel Current Offers", "Jay Current Offers"}.ToList
-                        filter.AddRange(OtherStatus.Select(Function(o) New With {.Name = o, .Condtion = "[Status] = '" & o & "'"}))
-                        'filter.Add(New With {.Name = "Closed NHA Files", .Condtion = "[Status] = 'Close'"})
-                       %>
-                    <%For Each f In filter %>
-                    <span class="time_buttons" onclick="FilterGridByCondtion('<%= f.Name.Replace("'", "\'")%>','<%= f.Condtion.Replace("'","\'") %>')"><%=f.Name %></span>
-                    <%Next %>
-                </div>
+
             </div>
             <div class="col-md-4  form-inline">
                 <input type="text" style="margin-right: 20px" id="QuickSearch" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />
@@ -102,7 +91,7 @@
                         <dx:GridViewDataColumn FieldName="SubmittedtoAcris">
                             <Settings HeaderFilterMode="CheckedList" />
                         </dx:GridViewDataColumn>
-                      <%--  <dx:GridViewDataColumn FieldName="SubmittedOn">
+                        <%--  <dx:GridViewDataColumn FieldName="SubmittedOn">
                             <Settings HeaderFilterMode="CheckedList" />
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn FieldName="RecordedOn">
@@ -112,12 +101,58 @@
                         <dx:GridViewDataColumn FieldName="UpdateTime">
                             <Settings HeaderFilterMode="CheckedList" />
                         </dx:GridViewDataColumn>
-                        
-                        <dx:GridViewDataColumn FieldName="Notes"></dx:GridViewDataColumn>
+
+                        <dx:GridViewDataColumn FieldName="Notes" Visible="false"></dx:GridViewDataColumn>
                     </Columns>
-                    <Settings ShowHeaderFilterButton="true"/>
+                    <Settings ShowHeaderFilterButton="true" />
                 </dx:ASPxGridView>
-                 <dx:ASPxGridViewExporter ID="CaseExporter" runat="server" GridViewID="entitiesGrid"></dx:ASPxGridViewExporter>
+                <dx:ASPxGridViewExporter ID="CaseExporter" runat="server" GridViewID="entitiesGrid"></dx:ASPxGridViewExporter>
+            </div>
+        </div>
+
+
+    </div>
+    <div id="right-pane-container" class="clearfix">
+        <div id="right-pane-button" class="right-pane_custom_reports"></div>
+        <div id="right-pane">
+            <div style="height: 100%; background: #EFF2F5;">
+                <div style="width: 310px; background: #f5f5f5" class="agent_layout_float">
+                    <div style="margin-left: 30px; margin-top: 30px; margin-right: 20px; font-size: 24px; float: none;">
+
+                        <div>
+                            <div style="padding-top: 19px; padding-bottom: 14px;" class="border_under_line">
+                                <span style="color: #234b60">Custom Reports</span>
+                                <i class="fa fa-question-circle tooltip-examples" title="Check items view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
+                            </div>
+                            <ul class="list-group" style="font-size: 14px; box-shadow: none; height: 800px; overflow: auto">
+                                <% Dim filter = Team.GetAllTeams.Select(Function(t) New With {.Name = t.Name & "'s Assigned Out", .Condtion = "[Status] = 'Assigned Out' and [Office] = '" & t.Name & "'"}).Tolist()
+                                    filter.AddRange(Team.GetAllTeams.Select(Function(t) New With {.Name = t.Name & "'s Available", .Condtion = "[Status] = 'Available' and [Office] = '" & t.Name & "'"}).ToList)
+                                    Dim OtherStatus = {"NHA Current Offer", "Isabel Current Offers", "Jay Current Offers"}.ToList
+                                    filter.AddRange(OtherStatus.Select(Function(o) New With {.Name = o, .Condtion = "[Status] = '" & o & "'"}))
+                                    'filter.Add(New With {.Name = "Closed NHA Files", .Condtion = "[Status] = 'Close'"})
+                                %>
+                                <%For Each f In filter%>
+                                <li class="list-group-item color_gray save_report_list" style="background-color: transparent; border: 0px;">
+                                    <i class="fa fa-file-o" style="font-size: 18px"></i>
+                                    <span class="drappable_field_text" onclick="FilterGridByCondtion('<%= f.Name.Replace("'", "\'")%>','<%= f.Condtion.Replace("'","\'") %>')" style="cursor: pointer; width: 178px;"><%=f.Name %></span>
+
+                                </li>
+
+                                <%Next%>
+                            </ul>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div style="height: 100%; background: #EFF2F5; display: none">
+                <div style="width: 100%; height: 100%;">
+                    <div style="height: 70px;">
+                        <div style="color: #b2b4b7; padding-top: 35px; margin-left: 26px; font-size: 30px; font-weight: 300;">Notes</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
