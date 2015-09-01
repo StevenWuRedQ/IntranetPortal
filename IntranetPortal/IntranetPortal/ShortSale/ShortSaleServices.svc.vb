@@ -70,25 +70,17 @@ Public Class ShortSaleServices
     <OperationContract()>
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function LoadHomeBreakData(bble As String) As Channels.Message
-        Dim propertyBaseInfo = Data.PropertyBaseInfo.GetInstance(bble)
-        If propertyBaseInfo IsNot Nothing Then
-            Dim homebreak = propertyBaseInfo.PropFloors
-            If homebreak IsNot Nothing Then
-                Return homebreak.ToJson()
-            End If
-            Return Nothing
-        End If
-        Return Nothing
+        Return PropertyFloor.PropertyFloors(bble).ToJson
     End Function
 
 
     <OperationContract()>
     <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
     Public Function SaveBreakData(jsonData As String, bble As String) As Channels.Message
-        Dim propInfo = PropertyBaseInfo.GetInstance(bble)
-        propInfo.PropFloors = JsonConvert.DeserializeObject(Of PropertyFloor())(jsonData)
-        propInfo.Save()
-        Return propInfo.PropFloors.ToJson
+
+        Dim PropFloors = JsonConvert.DeserializeObject(Of PropertyFloor())(jsonData)
+        Dim result = PropertyFloor.SavePropertyFloors(bble, PropFloors)
+        Return result.ToJson
     End Function
 
 #End Region
