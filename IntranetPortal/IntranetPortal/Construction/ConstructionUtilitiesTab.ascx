@@ -88,10 +88,18 @@
                 </select>
             </div>
             </div>
-            <div class="ss_form_item">
-            <label class="ss_form_input_title">Appointments</label>
-            <input class="ss_form_input" type="text" ng-model="floor.ConED.Appointments" ss-date>
-            </div>
+
+                <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                    <label class="ss_form_input_title">Appointments</label>
+                    <input class="ss_form_input" type="text" ng-model="floor.ConED.Appointments" ss-date>
+                </li>
+
+                  <li class="ss_form_item">
+                    <label class="ss_form_input_title">Appointments</label>
+                    <input class="ss_form_input" type="text" ng-model="floor.ConED.Appointments" ss-date>
+                </li>
+            </ul>
             <div>
             <label class="ss_form_input_title">Upload</label>
             <pt-files file-bble="CSCase.BBLE" file-id="EnergyService-Upload{{$index}}" base-folder="EnergyService-Upload{{$index}}" file-model="floor.ConED.Upload"></pt-files>
@@ -425,12 +433,18 @@
 
 <%-- Insurance --%>
 <div class="ss_form" ng-init="CSCase.CSCase.Utilities.Insurance_Shown=false" ng-show="CSCase.CSCase.Utilities.Insurance_Shown">
-    <h4 class="ss_form_title">Insuracne<pt-collapse model="CSCase.CSCase.Utilities.Insurance_Collapsed" /></h4>
+    <h4 class="ss_form_title">Insurance<pt-collapse model="CSCase.CSCase.Utilities.Insurance_Collapsed" /></h4>
     <div class="ss_border" collapse="CSCase.CSCase.Utilities.Insurance_Collapsed" ng-init="CSCase.CSCase.Utilities.Insurance_Collapsed=false">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Account Number</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.Insurance_AccountNum">
+                <label class="ss_form_input_title">Insurance Type</label>
+                <div class="ss_form_input" dx-tag-box="{
+                dataSource: [{name: 'Property'},
+                            {name: 'Contract'}],
+                valueExpr: 'name',
+                displayExpr: 'name',
+                bindingOptions: {values: 'CSCase.CSCase.Utilities.Insurance_Type'}}">
+                </div>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Policy Number</label>

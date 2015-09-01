@@ -304,6 +304,7 @@
                 Comments: []
             };
             $scope.CSCase.CSCase.Utilities.Company = [];
+            $scope.CSCase.CSCase.Utilities.Insurance_Type = [];
             $scope.DataSource = {};
             $scope.DataSource.Shown = {
                 'ConED': 'CSCase.CSCase.Utilities.ConED_Shown',
@@ -330,6 +331,7 @@
                     Comments: []
                 };
                 $scope.CSCase.CSCase.Utilities.Company = [];
+                $scope.CSCase.CSCase.Utilities.Insurance_Type = [];
                 $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} })
             }
 

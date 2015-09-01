@@ -25,10 +25,10 @@
             //$(".phone_comment").text("-" + comment);
             temCommentSpan.text("-" + comment);
         } else {
-            debugger
+
         }
         OnCallPhoneCallback("SaveComment|" + tmpPhoneNo + "|" + comment);
-        debugger;
+
     }
 
     function OnTelphoneLinkClick(tellink, phoneNo) {
@@ -253,7 +253,6 @@
 
     function OnRefreshMenuClick(s, e) {
         if (typeof ContentCallbackPanel != "undefined") {
-            debugger;
             var parms = "Refresh|" + leadsInfoBBLE + "|" + e.item.name;
 
             //if (e.item.name == "TLO")
@@ -352,13 +351,16 @@
             $scope.BBLE = bble;
             $scope.init = function (bble) {
                 ptHomeBreakDownService.loadByBBLE(bble, function (res) {
-                    debugger;
+
                         $scope.PropFloors = res ? res : [];
                 });
             }
 
             $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
-            $scope.arrayRemove = ptCom.arrayRemove;
+            $scope.arrayRemove = function (a, b, c) {
+                ptCom.arrayRemove(a, b, c, function () { $scope.$apply(); });
+                
+            }
 
             $scope.setPopupVisible = function (model, bVal) {
                 model.popupVisible = bVal;
@@ -380,7 +382,7 @@
             $scope.$digest();
             target.html(cElem);
         });
-        debugger;
+
         target.scope().init(bble);
     }
     }
@@ -390,7 +392,10 @@
         $scope.BBLE = leadsInfoBBLE;
 
         $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
-        $scope.arrayRemove = ptCom.arrayRemove;
+        $scope.arrayRemove = function (a, b, c) {
+            ptCom.arrayRemove(a, b, c, function () { $scope.$apply(); });
+
+        }
 
         $scope.setPopupVisible = function (model, bVal) {
             model.popupVisible = bVal;
