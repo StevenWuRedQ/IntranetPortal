@@ -30,14 +30,15 @@
              ">
         </div>
     </div>
-    <div class="ss_form cssSlideUp" ng-show="CheckSecondaryTags(1)">
+    <%-- Can't use cssSlideUp  class for animation becuase typeahead will get error  --%>
+    <div class="ss_form  clearfix" ng-show="CheckSecondaryTags(1)">
 
         <h4 class="ss_form_title">Order to show case <span style="transform: none; font-size: 12px;">(Mark as * need to fill other read only here)</span>
             <i class="fa fa-download icon_btn color_blue tooltip-examples" title="Download OSC Document" ng-click="DocGenerator('OSCTemplate.docx')"></i>
 
         </h4>
 
-        <ul class="ss_form_box clearfix">
+        <ul class="ss_form_box  clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Plantiff</label>
                 <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.Plantiff" readonly="readonly">
@@ -75,9 +76,13 @@
                 <label class="ss_form_input_title">Defendant *</label>
                 <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.Defendant">
             </li>
-            <li class="ss_form_item">
+            <li class="ss_form_item clearfix">
                 <label class="ss_form_input_title">Defendant's Attorney *</label>
                 <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.DefendantAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DefendantAttorneyId">
+            </li>
+              <li class="ss_form_item">
+                <label class="ss_form_input_title">Defendant *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.Defendant">
             </li>
         </ul>
 
