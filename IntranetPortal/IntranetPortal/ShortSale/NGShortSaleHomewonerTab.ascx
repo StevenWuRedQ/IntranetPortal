@@ -188,7 +188,7 @@
                 </div>
         </div>
         <div class="ss_form">
-            <h4 class="ss_form_title">Contacts <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Contacts,'SsCase.PropertyInfo.Owners['+$index+'].Contacts')" title="Add"></i>&nbsp;<i class="fa fa-compress icon_btn text-primary" ng-show="homeownerCollapse" ng-click="homeownerCollapse = !homeownerCollapse"></i><i class="fa fa-expand icon_btn text-primary" ng-show="!homeownerCollapse" ng-click="homeownerCollapse = !homeownerCollapse"></i></h4>
+            <h4 class="ss_form_title">Contacts <pt-add ng-click="NGAddArraryItem(owner.Contacts,'SsCase.PropertyInfo.Owners['+$index+'].Contacts')" />&nbsp;<pt-collapse model="homeownerCollapse"></pt-collapse></h4>
             <div class="ss_border" collapse="homeownerCollapse" ng-show="owner.Contacts.length>0">
             <div class="ss_form_box clearfix" >
                 <div dx-data-grid="{
@@ -223,52 +223,15 @@
         </div>
 
         <div class="ss_form" collapse="homeownerCollapse">
-             <h4 class="ss_form_title">Notes <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(owner.Notes,'SsCase.PropertyInfo.Owners['+$index+'].Notes')" title="Add"></i></h4>
+             <h4 class="ss_form_title">Notes<pt-add ng-click="NGAddArraryItem(owner.Notes,'SsCase.PropertyInfo.Owners['+$index+'].Notes')" /></h4>
 
              <ul class="ss_form_box textAreaDiv clearfix" ng-repeat="(index,note) in owner.Notes track by index">
-
                 <li class="ss_form_item ss_form_item_line">
                     <label class="ss_form_input_title">Note {{index + 1}}&nbsp;<i class="fa fa-minus-circle text-warning" ng-click="NGremoveArrayItem(owner.Notes, index)"></i></label>
                     <textarea class="edit_text_area text_area_ss_form" ng-model="note.Content"></textarea>
                 </li>
             </ul>
         </div>
-        <%--
-        <div class="ss_form">
-            <h4 class="ss_form_title">mailing address</h4>
-            <div class="ss_border">
-            <ul class="ss_form_box clearfix">
-
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">street nummber</label>
-                    <input class="ss_form_input" ng-model="owner.MailNumber">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">street name</label>
-                    <input class="ss_form_input" ng-model="owner.MailStreetName">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Apt #</label>
-                    <input class="ss_form_input" ng-model="owner.MailApt">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">City</label>
-                    <input class="ss_form_input" ng-model="owner.MailCity">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">State</label>
-                    <input class="ss_form_input" ng-model="owner.MailState">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">zip</label>
-                    <input class="ss_form_input ss_zip" mask="99999" clean='true' ng-model="owner.MailZip">
-                </li>
-
-            </ul>
-                </div>
-        </div>
-        --%>
-
 
         </tab>
        <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.PropertyInfo.Owners,false,true)" ng-show="SsCase.PropertyInfo.Owners.length<=2" title="Add" style="font-size: 18px"></i>

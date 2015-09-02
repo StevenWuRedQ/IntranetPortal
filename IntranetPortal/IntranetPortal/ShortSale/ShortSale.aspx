@@ -988,6 +988,7 @@
                     $scope.valuationSuccCallback(updates);
                 }
                 $scope.Valuation_popupVisible = false;
+                $scope.$apply();
             };
             $scope.valuationCompl = function (el) {
                 var updates = $scope.checkPendingModified();
@@ -996,6 +997,7 @@
                 }
                 el.Pending = false;
                 $scope.Valuation_popupVisible = false;
+                $scope.$apply();
             }
             $scope.regValuation = function (succ, cancl) {
                 if (!$scope.valuationSuccCallback) $scope.valuationSuccCallback = succ;

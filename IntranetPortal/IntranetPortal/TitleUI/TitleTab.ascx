@@ -7,7 +7,7 @@
 <%@ Register Src="~/TitleUI/TitlePreclosing.ascx" TagPrefix="uc1" TagName="TitlePreclosing" %>
 
 <uc1:Common runat="server" ID="Common" />
-<div id="TitleTabContent" ng-controller="TitleCtrl" style="max-height: 850px; overflow: auto">
+<div id="TitleController" ng-controller="TitleController" style="max-height: 850px; overflow: auto">
     <div style="padding-top: 5px">
         <div id="prioity_content">
             <div style="font-size: 30px; margin-left: 30px; height: 80px" class="font_gray">
@@ -163,15 +163,15 @@
 </script>
 <script>
     var app = angular.module("PortalApp")
-    app.controller("TitleCtrl", function ($scope, ptCom) {
-        $scope.CaseData = {}
+    app.controller("TitleController", function ($scope, ptCom) {
+        $scope.FromData = {}
         $scope.ReloadedData = {}
         $scope.load = function (data) {
-            $scope.CaseData = data;
+            $scope.FromData = data;
             $scope.ReloadedData = {};
         }
         $scope.get = function () {
-            return $scope.CaseData;
+            return $scope.FromData;
         }
     })
 </script>
