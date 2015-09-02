@@ -292,7 +292,7 @@
             </ul>
         </div>
 
-        <% If LeadsInfoData.Status = IntranetPortal.LeadStatus.InProcess.ToString Then%>                
+        <% If LeadsInfoData.LeadsStatus = IntranetPortal.LeadStatus.InProcess Then%>
         <uc1:NGShortSaleInLeadsView runat="server" ID="NGShortSaleInLeadsView" />
         <% end If %>
 

@@ -8,7 +8,11 @@
     function OnGridFocusedRowChanged() {
         // The values will be returned to the OnGetRowValues() function 
         if (gridCase.GetFocusedRowIndex() >= 0) {
-            if (cbpLogs.InCallback()) {
+
+            if (typeof cbpLogs == "undefined")
+                return
+
+            if (cbpLogs && cbpLogs.InCallback()) {
                 postponedCallbackRequired = true;
             }
             else {

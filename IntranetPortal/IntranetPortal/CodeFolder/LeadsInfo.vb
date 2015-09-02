@@ -307,6 +307,17 @@ Public Class LeadsInfo
         End Get
     End Property
 
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property LeadsStatus As LeadStatus
+        Get
+            Dim ld = IntranetPortal.Lead.GetInstance(BBLE)
+
+            If ld IsNot Nothing AndAlso ld.Status.HasValue Then
+                Return CType(Lead.Status.Value, LeadStatus)
+            End If
+        End Get
+    End Property
+
     'the finder name or agent name of this leadsinfo
     <JsonIgnoreAttribute>
     Public ReadOnly Property AgentName As String

@@ -3,10 +3,15 @@ Imports System.Reflection
 Imports System.ComponentModel
 
 Public Class TitleCaseList
-    Inherits System.Web.UI.UserControl
+    Inherits BusinessListControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'BindCaseList()
+    End Sub
+
+    Public Overrides Sub BindList()
+        MyBase.BindList()
+        BindCaseList()
     End Sub
 
     Public Sub BindCaseList()
@@ -29,9 +34,6 @@ Public Class TitleCaseList
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)
         If gridCase.DataSource Is Nothing AndAlso gridCase.IsCallback Then
             BindData()
-            'If (Not String.IsNullOrEmpty(hfCaseBBLEs.Value)) Then
-            '    BindCaseByBBLEs(hfCaseBBLEs.Value.Split(";").ToList())
-            'End If
         End If
     End Sub
 
@@ -43,6 +45,4 @@ Public Class TitleCaseList
             gridCase.SettingsBehavior.AllowClientEventsOnLoad = value
         End Set
     End Property
-
-
 End Class

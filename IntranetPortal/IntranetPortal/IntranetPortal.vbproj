@@ -511,6 +511,17 @@
       <DependentUpon>BingViewMap.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="BusinessForm\BusinessControl.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusinessForm\BusinessForm.vb" />
+    <Compile Include="BusinessForm\Default.aspx.designer.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessForm\Default.aspx.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CallBackServices.asmx.vb">
       <DependentUpon>CallBackServices.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -2144,6 +2155,7 @@
     <Content Include="AutoDialer\DialerAjaxService.svc" />
     <Content Include="AutoDialer\Twiml.aspx" />
     <Content Include="BingViewMap.aspx" />
+    <Content Include="BusinessForm\Default.aspx" />
     <Content Include="CallBackServices.asmx" />
     <Content Include="Chat\ChatDefault.aspx" />
     <Content Include="Chat\index.html" />
