@@ -9,6 +9,24 @@
         // The values will be returned to the OnGetRowValues() function 
         if (gridCase.GetFocusedRowIndex() >= 0) {
 
+            if (gridCase.GetFocusedRowIndex() >= 0) {
+                //alert(gridLeads.GetFocusedRowIndex());
+                var rowKey = gridCase.GetRowKey(gridCase.GetFocusedRowIndex());
+                if (rowKey != null) {
+                    OnGetRowValues(rowKey);
+                }
+                else {
+                    if (splitter) {
+                        splitter.GetPaneByName('dataPane')
+                    }
+                }
+            }
+
+            return;
+
+
+
+
             if (typeof cbpLogs == "undefined")
                 return
 
@@ -43,6 +61,7 @@
             if (FormControl)
             {
                 FormControl.LoadData(1);
+                return;
             }
 
             LoadCaseData(leadsInfoBBLE);

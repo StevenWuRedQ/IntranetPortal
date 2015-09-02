@@ -103,21 +103,23 @@
 
                          <script type="text/javascript">
                              var FormControl = {
-                                 CurrentTab: null,
-                                 InitTab: function (tab) {
-                                     if (typeof tab != "undefined") {
-                                         currentTab = tab;
-                                     }
+                                 CurrentTab: {
+                                     Name: null,
+                                     BusinessData:null
+                                 },
+                                 InitTab: function (name, data) {                                     
+                                     this.CurrentTab.Name = name;
+                                     this.CurrentTab.BusinessData = data;                                     
                                  },
                                  LoadData: function (dataId) {
                                      var tab = this.CurrentTab;
-                                     var url = "/api/BusinessForm/" + dataId
+                                     var url = "/api/BusinessForm/" + tab.BusinessData + "/" + dataId
                                      $.ajax({
                                          type: "GET",
                                          url: url,
                                          dataType: 'json',
                                          success: function (data) {
-                                             angular.element($('#' + tab.CurrentTab + 'Controller')).scope().Load(data);                                             
+                                             angular.element(document.getElementById(tab.Name + 'Controller')).scope().Load(data);                                             
                                          },
                                          error: function (data) {
                                              alert("Failed to load data." + data)
@@ -126,7 +128,7 @@
                                  },
                                  SaveData: function () {
                                      var tab = this.CurrentTab;
-                                     var data = angular.element($('#' + tab.CurrentTab + 'Controller')).scope().Get();
+                                     var data = angular.element(document.getElementById(tab.Name + 'Controller')).scope().Get();
 
                                      var url = "/api/BusinessForm/"
                                      $.ajax({
@@ -145,7 +147,7 @@
                              }
 
                              $(function () {
-                                 FormControl.InitTab('<%= FormData.DefaultControl.Name%>');
+                                 FormControl.InitTab('<%= FormData.DefaultControl.Name%>', '<%= FormData.DefaultControl.BusinessData%>');
                              });
                         </script>
 

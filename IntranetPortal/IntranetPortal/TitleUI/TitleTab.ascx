@@ -166,11 +166,11 @@
     app.controller("TitleController", function ($scope, ptCom) {
         $scope.FromData = {}
         $scope.ReloadedData = {}
-        $scope.load = function (data) {
+        $scope.Load = function (data) {
             $scope.FromData = data;
             $scope.ReloadedData = {};
         }
-        $scope.get = function () {
+        $scope.Get = function () {
             return $scope.FromData;
         }
     })
