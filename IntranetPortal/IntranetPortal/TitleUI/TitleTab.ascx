@@ -1,55 +1,40 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TitleTab.ascx.vb" Inherits="IntranetPortal.TitleTab" %>
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
+<%@ Register Src="~/TitleUI/TitleInfo.ascx" TagPrefix="uc1" TagName="TitleInfo" %>
 
 
-
-<script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 <uc1:Common runat="server" ID="Common" />
-<div id="constructionTabContent" style="max-height: 850px; overflow: auto">
-    <input hidden id="short_sale_case_id" value="" />
+<div id="TitleTabContent" ng-controller="TitleController" style="max-height: 850px; overflow: auto">
     <div style="padding-top: 5px">
         <div id="prioity_content">
             <div style="font-size: 30px; margin-left: 30px; height: 80px" class="font_gray">
                 <div style="font-size: 30px; margin-top: 20px;">
                     <i class="fa fa-home"></i>
-                    <span style="margin-left: 19px;"><span ng-bind="CSCase.CSCase.Header" pt-init-bind="CSCase.CaseName" ng-dblclick="toggleHeaderEditing()" ng-show="!HeaderEditing"></span>&nbsp;</span>
-                    <input ng-show="HeaderEditing" ng-Blur="toggleHeaderEditing()" ng-model="CSCase.CSCase.Header"/>
+                    <span style="margin-left: 19px;"><span ng-bind="TitleUI.CaseName"></span>&nbsp;</span>
+
+                    <%-- 
                     <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+leadsInfoBBLE, 'Maps')">Map</span>
-
                     <span class="time_buttons" onclick="OpenLeadsWindow('http://nycserv.nyc.gov/NYCServWeb/NYCSERVMain', 'eCourts')" ng-show="activeTab=='CSUtilities'">Water&Taxes</span>
-
                     <span class="time_buttons" onclick="OpenLeadsWindow('http://a820-ecbticketfinder.nyc.gov/searchHome.action ', 'ECB')" ng-show="activeTab=='CSViolations'">ECB</span>
-
                     <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=2&bble='+leadsInfoBBLE, 'DOB')" ng-show="activeTab=='CSViolations'">DOB</span>
-
                     <span class="time_buttons" onclick="OpenLeadsWindow('http://www1.nyc.gov/site/hpd/index.page', 'HPD')" ng-show="activeTab=='CSViolations'">HPD</span>
-
                     <span class="time_buttons" onclick="OpenLeadsWindow('http://www1.nyc.gov/site/finance/index.page', 'Department of Finance')" ng-show="">Department of Finance</span>
-
                     <span class="time_buttons" onclick="OpenLeadsWindow('http://www1.nyc.gov/assets/hpd/downloads/pdf/Dismissal-Request-Form-2013.pdf', 'Dismissal Request form')" ng-show="activeTab=='CSViolations'">Dismissal Request form</span>
-
+                    --%>
 
                 </div>
-
-                <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;">{{GetCaseInfo().Name}}</span>
             </div>
 
-            <div class="comment-panel" style="margin: 10px; border-top: 1px solid #c8c8c8">
+            <div class="comment-panel" ng-controller="CommentCtrl" style="margin: 10px; border-top: 1px solid #c8c8c8">
                 <%--note list--%>
                 <div style="width: 100%; overflow: auto; max-height: 160px;">
-                    <table class="table table-striped" style="font-size: 14px; margin: 0px; padding: 5px">
-                        <tr ng-repeat="highlight in highlights" ng-show="isHighlight(highlight.criteria)">
-                            <td>
-                                <i class="fa fa-exclamation-circle text-success" style="font-size: 18px"></i>
-                                <span class="text-success" style="margin-left: 10px">{{highlightMsg(highlight.message)}}</span>
-                            </td>
-                        </tr>
-                        <tr ng-repeat="comment in CSCase.CSCase.Comments">
+                    <table class="table table-striped" style="font-size: 14px; margin: 0; padding: 5px">
+                        <tr ng-repeat="comment in CaseData.Comments">
                             <td>
                                 <i class="fa fa-exclamation-circle" style="font-size: 18px"></i>
                                 <span style="margin-left: 10px">{{comment.comment}}</span>
                                 <span class="pull-right">
-                                    <i class="fa fa-times icon_btn text-danger" style="font-size: 18px" ng-click="arrayRemove(CSCase.CSCase.Comments, $index, true);"></i>
+                                    <i class="fa fa-times icon_btn text-danger" style="font-size: 18px" ng-click="arrayRemove(CaseData.Comments, $index, true);"></i>
                                 </span>
                             </td>
                         </tr>
@@ -79,54 +64,19 @@
                         </ContentCollection>
                     </dx:ASPxPopupControl>
                 </div>
-
             </div>
         </div>
 
         <div class="shortSaleUI">
-            <style>
-                #CSTab .short_sale_tab {
-                    font-size: 12px;
-                }
-            </style>
-            <ul id="CSTab" class="nav nav-tabs overview_tabs" role="tablist">
-                <li class="short_sale_tab active"><a class="shot_sale_tab_a" href="#CSInitialIntake" role="tab" data-toggle="tab" ng-click="updateActive('CSInitialIntake')">Initial Intake</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSPhotos" role="tab" data-toggle="tab" ng-click="updateActive('CSPhotos')">Photos</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSUtilities" role="tab" data-toggle="tab" ng-click="updateActive('CSUtilities')">Utilities</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSViolations" role="tab" data-toggle="tab" ng-click="updateActive('CSViolations')">Violation</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSProposal" role="tab" data-toggle="tab" ng-click="updateActive('CSProposal')">ProposalBids</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSPlans" role="tab" data-toggle="tab" ng-click="updateActive('CSPlans')">Plans</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSContract" role="tab" data-toggle="tab" ng-click="updateActive('CSContract')">Contract</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSSignoff" role="tab" data-toggle="tab" ng-click="updateActive('CSSignoff')">Signoffs</a></li>
-                <%--  <% End If%>--%>
+            <ul class="nav nav-tabs overview_tabs" role="tablist">
+                <li class="short_sale_tab active"><a class="shot_sale_tab_a" href="#CSInitialIntake" role="tab" data-toggle="tab">Initial Intake</a></li>
             </ul>
 
             <!-- Tab panes -->
             <div class="short_sale_content">
                 <div class="tab-content">
-                    <div class="tab-pane active" id="CSInitialIntake">
-                        <uc1:ConstructionInitialIntakeTab runat="server" ID="ConstructionInitialIntakeTab" />
-                    </div>
-                    <div class="tab-pane" id="CSPhotos">
-                        <uc1:ConstructionPhotosTab runat="server" ID="ConstructionPhotosTab" />
-                    </div>
-                    <div class="tab-pane" id="CSUtilities">
-                        <uc1:ConstructionUtilitiesTab runat="server" ID="ConstructionUtilitiesTab" />
-                    </div>
-                    <div class="tab-pane" id="CSViolations">
-                        <uc1:ConstructionViolationTab runat="server" ID="ConstructionViolationTab" />
-                    </div>
-                    <div class="tab-pane" id="CSProposal">
-                        <uc1:ConstructionProposalBidTab runat="server" ID="ConstructionProposalBidTab" />
-                    </div>
-                    <div class="tab-pane" id="CSPlans">
-                        <uc1:ConstructionPlansTab runat="server" ID="ConstructionPlansTab" />
-                    </div>
-                    <div class="tab-pane" id="CSContract">
-                        <uc1:ConstructionContractTab runat="server" ID="ConstructionContractTab" />
-                    </div>
-                    <div class="tab-pane" id="CSSignoff">
-                        <uc1:ConstructionSignoffsTab runat="server" ID="ConstructionSignoffsTab" />
+                    <div class="tab-pane" id="tab.name">
+                        <uc1:TitleInfo runat="server" id="TitleInfo" />
                     </div>
                 </div>
             </div>
@@ -153,3 +103,52 @@
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
+<script>
+    function ShowPopupMap(url, header, subHeader) {
+        aspxAcrisControl.SetContentHtml("Loading...");
+        aspxAcrisControl.SetContentUrl(url);
+        aspxAcrisControl.SetHeaderText(header);
+
+        $('#pop_up_header_text').html(header);
+        $('#addition_info').html(subHeader ? subHeader : '');
+
+        aspxAcrisControl.Show();
+    }
+
+    function ShowAcrisMap(propBBLE) {
+        ShowPopupMap("https://a836-acris.nyc.gov/DS/DocumentSearch/BBL", "Acris");
+    }
+
+    function ShowDOBWindow(boro, block, lot) {
+        if (block == null || block == "" || lot == null || lot == "" || boro == null || boro == "") {
+            alert("The property info isn't complete. Please try to refresh data.");
+            return;
+        }
+        var url = "http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?boro=" + boro + "&block=" + encodeURIComponent(block) + "&lot=" + encodeURIComponent(lot);
+        ShowPopupMap(url, "DOB");
+        $("#addition_info").html(' ');
+    }
+</script>
+<script>
+    angular.module("PortalApp").controller("CommentCtrl", function ($scope) {
+        /* comments */
+        $scope.showPopover = function (e) {
+            aspxConstructionCommentsPopover.ShowAtElement(e.target);
+        }
+        $scope.addComment = function (comment) {
+            var newComments = {}
+            newComments.comment = comment;
+            newComments.caseId = $scope.CaseId;
+            newComments.createBy = Current_User;
+            newComments.createDate = new Date();
+            $scope.CaseData.Comments.push(newComments);
+        }
+        $scope.addCommentFromPopup = function () {
+            var comment = $scope.addCommentTxt;
+            $scope.addComment(comment);
+            $scope.addCommentTxt = '';
+        }
+        /* end comments */
+    })
+</script>
+<script src="/TitleUI/TitleUI.js"></script>

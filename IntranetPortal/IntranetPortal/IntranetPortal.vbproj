@@ -1882,19 +1882,19 @@
       <DependentUpon>TitleCaseList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="TitleUI\TitleInfo.ascx.designer.vb">
+      <DependentUpon>TitleInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="TitleUI\TitleInfo.ascx.vb">
+      <DependentUpon>TitleInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="TitleUI\TitleTab.ascx.designer.vb">
       <DependentUpon>TitleTab.ascx</DependentUpon>
     </Compile>
     <Compile Include="TitleUI\TitleTab.ascx.vb">
       <DependentUpon>TitleTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TitleUI\TitleUI.aspx.designer.vb">
-      <DependentUpon>TitleUI.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="TitleUI\TitleUI.aspx.vb">
-      <DependentUpon>TitleUI.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="UploadFilePage.aspx.designer.vb">
       <DependentUpon>UploadFilePage.aspx</DependentUpon>
@@ -2119,6 +2119,7 @@
     </Compile>
     <Compile Include="WebForm1.aspx.vb">
       <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebForm2.aspx.designer.vb">
       <DependentUpon>WebForm2.aspx</DependentUpon>
@@ -2613,6 +2614,7 @@
     <Content Include="Management\CombineContact.aspx" />
     <Content Include="Complaints\ComplainsMng.aspx" />
     <Content Include="Management\ComplaintsNotify.aspx" />
+    <Content Include="Management\convertcsvtojson.py" />
     <Content Include="Management\FormGenerator.aspx" />
     <Content Include="Management\ImportAgentData.aspx" />
     <Content Include="Management\Default.aspx" />
@@ -3647,8 +3649,9 @@
     <Content Include="Task\TasklistControl.ascx" />
     <Content Include="Test.aspx" />
     <Content Include="TitleUI\TitleCaseList.ascx" />
+    <Content Include="TitleUI\TitleInfo.ascx" />
     <Content Include="TitleUI\TitleTab.ascx" />
-    <Content Include="TitleUI\TitleUI.aspx" />
+    <Content Include="TitleUI\TitleUI.js" />
     <Content Include="UploadFilePage.aspx" />
     <Content Include="OneDrive\UploadToOneDrive.aspx" />
     <Content Include="UserControl\ActivityLogs.ascx" />

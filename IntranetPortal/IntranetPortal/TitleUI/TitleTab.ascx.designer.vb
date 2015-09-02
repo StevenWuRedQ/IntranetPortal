@@ -32,6 +32,15 @@ Partial Public Class TitleTab
     Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
     
     '''<summary>
+    '''TitleInfo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TitleInfo As Global.IntranetPortal.TitleInfo
+    
+    '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>

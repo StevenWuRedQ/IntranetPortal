@@ -14,15 +14,15 @@
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item" ng-repeat="item in form.items" ng-class="NeedChangeElement(item.type,'notes')?'ss_form_item_line':''">
                                     <label class="ss_form_input_title">{{item.label}}</label>
-                                    <input class="ss_form_input" tempt-type="{{GetType(item.type)}}{{'Quotation'}}" tempt-ng-model="{{GenerateModel(form.head,item.label)}}" ng-if="(!item.type)||(!NeedChangeElement(item.type))">
-                                    <select class="ss_form_input" tempt-ng-model="{{GenerateModel(form.head,item.label)}}" ng-if="NeedChangeElement(item.type,'select')">
+                                    <input class="ss_form_input" tempt-type="{{GetType(item.type)}}{{'Quotation'}}" tempt-ng-model="{{GenerateModel(item.label)}}" ng-if="(!item.type)||(!NeedChangeElement(item.type))">
+                                    <select class="ss_form_input" tempt-ng-model="{{GenerateModel(item.label)}}" ng-if="NeedChangeElement(item.type,'select')">
                                         <option></option>
                                         <option ng-repeat="option in item.options">{{option}}</option>
                                     </select>
-                                    <tempt-pt-file file-bble="{{BBLEModel}}" file-id="{{GetUniqueId(form.head,item.label)}}" file-model="{{GenerateModel(form.head,item.label)}}" ng-if="NeedChangeElement(item.type,'file')"></tempt-pt-file>
-                                    <textarea class="edit_text_area text_area_ss_form" model="{{GenerateModel(form.head,item.label)}}" ng-if="NeedChangeElement(item.type,'notes')"></textarea>
-                                    <input type="text" class="ss_form_input" tempt-ng-model="{{GenerateModel(form.head,item.label)}}" tempt-ng-change="{{GenerateModel(form.head,item.label)}}Id=null" tempt-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" tempt-typeahead-on-select="{{GenerateModel(form.head,item.label)}}Id=$item.ContactId" tempt-bind-id="{{GenerateModel(form.head,item.label)}}Id" ng-if="NeedChangeElement(item.type,'contact')">
-                                    <tempt-pt-radio name="{{GetUniqueId(form.head,item.label)}}" tempt-model="{{GenerateModel(form.head,item.label)}}" ng-if="NeedChangeElement(item.type,'radio')"></tempt-pt-radio>
+                                    <tempt-pt-file file-bble="{{BBLEModel}}" file-id="{{GetUniqueId(form.head,item.label)}}" file-model="{{GenerateModel(item.label)}}" ng-if="NeedChangeElement(item.type,'file')"></tempt-pt-file>
+                                    <textarea class="edit_text_area text_area_ss_form" model="{{GenerateModel(item.label)}}" ng-if="NeedChangeElement(item.type,'notes')"></textarea>
+                                    <input type="text" class="ss_form_input" tempt-ng-model="{{GenerateModel(item.label)}}" tempt-ng-change="{{GenerateModel(item.label)}}Id=null" tempt-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" tempt-typeahead-on-select="{{GenerateModel(item.label)}}Id=$item.ContactId" tempt-bind-id="{{GenerateModel(item.label)}}Id" ng-if="NeedChangeElement(item.type,'contact')">
+                                    <tempt-pt-radio name="{{GetUniqueId(form.head,item.label)}}" tempt-model="{{GenerateModel(item.label)}}" ng-if="NeedChangeElement(item.type,'radio')"></tempt-pt-radio>
 
                                 </li>
                             </ul>
@@ -30,8 +30,14 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    BBLE model:
+                    <p>
+                        BBLE model:
                     <input type="text" class="form-control" ng-model="BBLEModel" />
+                    </p>
+                    <p>
+                        Page model:
+                    <input type="text" class="form-control" ng-model="pageModel" />
+                    </p>
                     <button type="button" ng-click="GetReslut()">GetReslut</button>
                     <textarea ng-model="Resluts"></textarea>
                 </div>
@@ -49,42 +55,12 @@
             $scope.ptContactServices = ptContactServices;
             $scope.RecordDocuments = {}
             $scope.FormItems = [
-                {
-                    head: 'Documents Received On',
-                    items: [
-                        { label: 'Documents Received' },
-                        { label: 'Date Recorded select', type: 'select', options: ['Yes', 'No'] },
-                        { label: 'Deed', type: 'file' },
-                        { label: 'Deed Acris Document', type: 'file' },
-                        { label: 'Memorandum of Contract', type: 'file' },
-                        { label: 'Memorandum of Contract Acris Docs', type: 'file' },
-                        { label: 'Contract of Sales', type: 'file' },
-                        { label: 'Notes', type: 'notes' },
-                        { label: 'Are Documents Notarized', type: 'select', options: ['Yes', 'No'] },
-                        { label: 'This is Radio', type: 'radio' }
-                    ]
-                },
-            {
-                head: 'Record Documents',
-                items: [
-                    { label: 'Deed', type: 'select', options: ['Yes', 'No'] },
-                    { label: 'Memo', type: 'select', options: ['Yes', 'No'] },
-                    { label: 'Requested On', type: 'date' },
-                    { label: 'Requested By', type: 'contact' },
-                    { label: 'Date of Submission', type: 'date' },
-                    { label: 'Transaction ID' },
-                    { label: 'Rejected', type: 'select', options: ['Yes', 'No'] },
-                    { label: 'Rejected notes', type: 'notes' },
-                    { label: 'Recorded', type: 'select', options: ['Yes', 'No'] },
-                    { label: 'Date Recorded ', type: 'date' },
-                    { label: 'Recorded File', type: 'file' },
-                ]
-            }
+                
 
             ];
             //$scope.FormItems = [];
             $scope.GenerateModel = function () {
-                var model = Array.prototype.slice.call(arguments).filter(function (o) { return o }).join(".").replace(/ /gi, "")
+                var model = $scope.pageModel + '.' + arguments[0].replace(/[-\/\\\.\s]/gi, "_")
                 return model
             }
             $scope.GetType = function (type) {
@@ -95,8 +71,7 @@
 
             $scope.GetUniqueId = function () {
                 var id = Array.prototype.slice.call(arguments).filter(function (o) { return o }).join("_").replace(/ /gi, "")
-                //$scope.qniueId++;
-                id += $scope.qniueId;//Math.floor((Math.random() * 1000) + 1);
+                id += $scope.qniueId;
                 return id;
             }
             $scope.NeedChangeElement = function (type, ElemType) {
@@ -109,6 +84,7 @@
 
                 var t = $('#template').clone();
                 t.not(':visible').remove();
+                t.wrap("<div></div>");
                 var html = t.html();
                 html = html.replace(/-->/g, '-->\n');
                 html = html.replace(/<!--*.*-->/g, '');
@@ -130,4 +106,7 @@
         });
 
     </script>
+
+
+
 </asp:Content>
