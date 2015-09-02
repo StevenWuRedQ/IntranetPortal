@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="Default.aspx.vb" Inherits="IntranetPortal.BusinessFormDefault" %>
+
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -71,7 +72,7 @@
                                     </div>
                                 </li>
                                 <li class="pull-right" style="margin-right: 30px; color: #ffa484">
-                                    <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="saveCSCase()" data-original-title="Save"></i>
+                                    <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" onclick="FormControl.SaveData()" data-original-title="Save"></i>
                                     <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
                                     <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
                                 </li>
@@ -99,6 +100,54 @@
                                 <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
                             </div>
                         </div>
+
+                         <script type="text/javascript">
+                             var FormControl = {
+                                 CurrentTab: null,
+                                 InitTab: function (tab) {
+                                     if (typeof tab != "undefined") {
+                                         currentTab = tab;
+                                     }
+                                 },
+                                 LoadData: function (dataId) {
+                                     var tab = this.CurrentTab;
+                                     var url = "/api/BusinessForm/" + dataId
+                                     $.ajax({
+                                         type: "GET",
+                                         url: url,
+                                         dataType: 'json',
+                                         success: function (data) {
+                                             angular.element($('#' + tab.CurrentTab + 'Controller')).scope().Load(data);                                             
+                                         },
+                                         error: function (data) {
+                                             alert("Failed to load data." + data)
+                                         }
+                                     });
+                                 },
+                                 SaveData: function () {
+                                     var tab = this.CurrentTab;
+                                     var data = angular.element($('#' + tab.CurrentTab + 'Controller')).scope().Get();
+
+                                     var url = "/api/BusinessForm/"
+                                     $.ajax({
+                                         type: "POST",
+                                         url: url,
+                                         data:data,
+                                         dataType: 'json',
+                                         success: function (data) {
+                                             alert("Save successful.")
+                                         },
+                                         error: function (data) {
+                                             alert("Failed to save data." + data);
+                                         }
+                                     });
+                                 }
+                             }
+
+                             $(function () {
+                                 FormControl.InitTab('<%= FormData.DefaultControl.Name%>');
+                             });
+                        </script>
 
                     </dx:SplitterContentControl>
                 </ContentCollection>

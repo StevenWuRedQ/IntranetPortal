@@ -81,7 +81,6 @@ Partial Public Class CheckingComplain
     Public Shared Function Remove(bble As String) As CheckingComplain
         Try
             Using client As New DataAPI.WCFMacrosClient
-
                 If client.DOB_Complaints_Delete(bble) Then
                     Using ctx As New ConstructionEntities
                         Dim item = ctx.CheckingComplains.Find(bble)

@@ -86,6 +86,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessForm\BusinessDataBase.vb" />
+    <Compile Include="BusinessForm\FormDataItem.vb" />
     <Compile Include="Complaints\CheckingComplains.vb" />
     <Compile Include="Construction\ConstructionCase.vb" />
     <Compile Include="Construction\DataModel\CheckingComplain.vb">
@@ -107,6 +109,12 @@
     <Compile Include="Construction\DataModel\ConstructionModel.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>ConstructionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\DataModel\FormDataItem.vb">
+      <DependentUpon>ConstructionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\DataModel\TitleCase.vb">
       <DependentUpon>ConstructionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataServices\TLOLocateReportOutput.vb" />
@@ -295,6 +303,7 @@
     <Compile Include="ShortSale\TitleClearence.vb" />
     <Compile Include="ShortSale\TitleJudgementSearch.vb" />
     <Compile Include="ShortSale\Utility.vb" />
+    <Compile Include="Title\TitleCase.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

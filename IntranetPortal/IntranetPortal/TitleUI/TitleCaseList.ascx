@@ -40,6 +40,11 @@
             leadsInfoBBLE = values;
             console.log(leadsInfoBBLE);
 
+            if (FormControl)
+            {
+                FormControl.LoadData(1);
+            }
+
             LoadCaseData(leadsInfoBBLE);
                         
             if (cbpLogs)

@@ -3,6 +3,7 @@ Public Class BusinessControl
 
     Public Property Name As String
     Public Property AscxFile As String
+    Public Property BusinessData As String
     Public Property Visible As Boolean
 
 End Class

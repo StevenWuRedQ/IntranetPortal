@@ -37,9 +37,38 @@
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="FormDataItems">
+          <Key>
+            <PropertyRef Name="DataId" />
+          </Key>
+          <Property Name="DataId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FormData" Type="nvarchar(max)" />
+          <Property Name="Tag" Type="nvarchar" MaxLength="256" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TitleCase">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="FormItemId" Type="int" />
+          <Property Name="CaseName" Type="nvarchar" MaxLength="256" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityContainer Name="ConstructionModelStoreContainer">
           <EntitySet Name="CheckingComplains" EntityType="Self.CheckingComplains" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConstructionCases" EntityType="Self.ConstructionCases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormDataItems" EntityType="Self.FormDataItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TitleCase" EntityType="Self.TitleCase" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -48,6 +77,8 @@
         <EntityContainer Name="ConstructionEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ConstructionCases" EntityType="ConstructionModel.ConstructionCase" />
           <EntitySet Name="CheckingComplains" EntityType="ConstructionModel.CheckingComplain" />
+          <EntitySet Name="FormDataItems" EntityType="ConstructionModel.FormDataItem" />
+          <EntitySet Name="TitleCases" EntityType="ConstructionModel.TitleCase" />
         </EntityContainer>
         <EntityType Name="ConstructionCase">
           <Key>
@@ -80,6 +111,33 @@
           <Property Name="LastResultUpdate" Type="DateTime" Precision="3" />
           <Property Name="IsOwned" Type="Boolean" />
           <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FormDataItem">
+          <Key>
+            <PropertyRef Name="DataId" />
+          </Key>
+          <Property Name="DataId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FormData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tag" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TitleCase">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="CaseName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FormItemId" Type="Int32" />
+          <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -117,6 +175,35 @@
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="LastExecute" ColumnName="LastExecute" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormDataItems">
+            <EntityTypeMapping TypeName="ConstructionModel.FormDataItem">
+              <MappingFragment StoreEntitySet="FormDataItems">
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="FormData" ColumnName="FormData" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="DataId" ColumnName="DataId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TitleCases">
+            <EntityTypeMapping TypeName="ConstructionModel.TitleCase">
+              <MappingFragment StoreEntitySet="TitleCase">
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="FormItemId" ColumnName="FormItemId" />
+                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
