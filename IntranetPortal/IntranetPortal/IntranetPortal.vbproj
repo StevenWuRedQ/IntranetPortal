@@ -511,16 +511,13 @@
       <DependentUpon>BingViewMap.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="BusinessForm\BusinessControl.vb">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="BusinessForm\BusinessControl.vb" />
     <Compile Include="BusinessForm\BusinessForm.vb" />
     <Compile Include="BusinessForm\Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="BusinessForm\Default.aspx.vb">
       <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CallBackServices.asmx.vb">
       <DependentUpon>CallBackServices.asmx</DependentUpon>
@@ -970,7 +967,6 @@
     </Compile>
     <Compile Include="DocumentSearch\LeadsInfoDoucmentSearch.aspx.vb">
       <DependentUpon>LeadsInfoDoucmentSearch.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="DownloadFile.aspx.designer.vb">
       <DependentUpon>DownloadFile.aspx</DependentUpon>
@@ -1895,6 +1891,27 @@
       <DependentUpon>Test.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="TitleUI\TitlePreclosing.ascx.designer.vb">
+      <DependentUpon>TitlePreclosing.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="TitleUI\TitlePreclosing.ascx.vb">
+      <DependentUpon>TitlePreclosing.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TitleUI\TitleOwnerLiens.ascx.designer.vb">
+      <DependentUpon>TitleOwnerLiens.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="TitleUI\TitleOwnerLiens.ascx.vb">
+      <DependentUpon>TitleOwnerLiens.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TitleUI\TitleBuildingLiens.ascx.designer.vb">
+      <DependentUpon>TitleBuildingLiens.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="TitleUI\TitleBuildingLiens.ascx.vb">
+      <DependentUpon>TitleBuildingLiens.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="TitleUI\TitleCaseList.ascx.designer.vb">
       <DependentUpon>TitleCaseList.ascx</DependentUpon>
     </Compile>
@@ -1907,6 +1924,13 @@
     </Compile>
     <Compile Include="TitleUI\TitleInfo.ascx.vb">
       <DependentUpon>TitleInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TitleUI\TitleSurveyAndContin.ascx.designer.vb">
+      <DependentUpon>TitleSurveyAndContin.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="TitleUI\TitleSurveyAndContin.ascx.vb">
+      <DependentUpon>TitleSurveyAndContin.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="TitleUI\TitleTab.ascx.designer.vb">
@@ -3670,10 +3694,13 @@
     <Content Include="Task\Reports\WorklistReport.aspx" />
     <Content Include="Task\TasklistControl.ascx" />
     <Content Include="Test.aspx" />
+    <Content Include="TitleUI\TitlePreclosing.ascx" />
+    <Content Include="TitleUI\TitleOwnerLiens.ascx" />
+    <Content Include="TitleUI\TitleBuildingLiens.ascx" />
     <Content Include="TitleUI\TitleCaseList.ascx" />
     <Content Include="TitleUI\TitleInfo.ascx" />
+    <Content Include="TitleUI\TitleSurveyAndContin.ascx" />
     <Content Include="TitleUI\TitleTab.ascx" />
-    <Content Include="TitleUI\TitleUI.js" />
     <Content Include="UploadFilePage.aspx" />
     <Content Include="OneDrive\UploadToOneDrive.aspx" />
     <Content Include="UserControl\ActivityLogs.ascx" />

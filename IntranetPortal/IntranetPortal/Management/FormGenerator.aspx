@@ -31,14 +31,14 @@
                 </div>
                 <div class="col-md-6">
                     <p>
-                    BBLE model:
+                        BBLE model:
                     <input type="text" class="form-control" ng-model="BBLEModel" />
                     </p>
                     <p>
                         Page model:
                     <input type="text" class="form-control" ng-model="pageModel" />
                     </p>
-                    <button type="button" ng-click="GetReslut()">GetReslut</button>
+                    <button type="button" ng-click="GetReslut()">GetReslut</button><br />
                     <textarea ng-model="Resluts"></textarea>
                 </div>
 
@@ -55,103 +55,9 @@
             $scope.ptContactServices = ptContactServices;
             $scope.RecordDocuments = {}
             $scope.FormItems = [
-                {
-                    head: 'Property Request Info',
-                    items: [
-                        { label: 'Requested On', type: 'date' },
-                        { label: 'Team', },
-                        { label: 'Request By' },
-                        { label: 'Block' },
-                        { label: 'Lot' },
-                        { label: 'Owner Name' },
-                        { label: 'Owner Address' },
-                    ]
-                },
-            {
-                head: 'Research Info',
-                items: [
-                    { label: 'Property Taxes' },
-                    { label: 'Water Charges ' },
-                    { label: 'ECB Violation ' },
-                    { label: 'Dob' },
-                    { label: 'Judgement Search' },
-                    { label: 'Judgments' },
-                    { label: 'Irs Tax Lien ' },
-                    { label: 'NYS Tax Lien' },
-                    { label: 'Fannie', type: 'select', options: ['Yes', 'No'] },
-                    { label: 'FHA', type: 'select', options: ['Yes', 'No'] },
-                      { label: 'Mortgage Amount ', type: "money" },
-                      { label: '2nd Mortgage Amount', type: "money" },
-                      { label: 'Servicer ' },
-                      { label: 'Wells Fargo ', type: 'select', options: ['Yes', 'No'] },
-                      { label: 'Court Date ', type: 'date' },
-                      { label: 'Completed On', type: 'date' },
-                      { label: 'Notes', type: 'notes' },
-                ]
-            }
-            ,
-            {
-                head: 'Corporation Info',
-                items: [
-                    { label: 'Corporation Requested', type: 'select', options: ['Yes', 'No'] },
-                    { label: 'Requested On', type: 'date' },
-                    { label: 'Deed' },
-                    { label: 'Memo' },
-                    { label: 'Corp Address' },
-                    { label: 'Corp Signor' },
-                    { label: 'Corp Signor SSN' },
-                    { label: 'Contract Price' },
-                    { label: 'Listing Price' },
-                   
-
-                ]
-            },
-             {
-                 head: 'Research Completed',
-                 items: [
-                    { label: 'Deed', type: 'select', options: ['Yes', 'No'] },
-                    { label: 'Documents Received On',type:'date' }
-                 ]
-             }
+                
 
             ];
-            //$scope.FormItems = [
-            //    {
-            //        head: 'Documents Received On',
-            //        items: [
-            //            { label: 'Documents Received' },
-
-            //            { label: 'Date Recorded select', type: 'select', options: ['Yes', 'No'] },
-            //            { label: 'Deed', type: 'file' },
-            //            { label: 'Deed Acris Document', type: 'file' },
-            //            { label: 'Memorandum of Contract', type: 'file' },
-            //            { label: 'Memorandum of Contract Acris Docs', type: 'file' },
-            //            { label: 'Contract of Sales', type: 'file' },
-            //            { label: 'Notes', type: 'notes' },
-
-            //            { label: 'Are Documents Notarized', type: 'select', options: ['Yes', 'No'] },
-            //        ]
-            //    },
-            //{
-            //    head: 'Record Documents',
-            //    items: [
-            //        { label: 'Deed', type: 'select', options: ['Yes', 'No'] },
-            //        { label: 'Memo', type: 'select', options: ['Yes', 'No'] },
-            //        { label: 'Requested On', type: 'date' },
-            //        { label: 'Requested By', type: 'contact' },
-            //        { label: 'Date of Submission', type: 'date' },
-            //        { label: 'Transaction ID' },
-            //        { label: 'Rejected', type: 'select', options: ['Yes', 'No'] },
-            //        { label: 'Rejected notes', type: 'notes' },
-
-            //        { label: 'Recorded', type: 'select', options: ['Yes', 'No'] },
-            //        { label: 'Date Recorded ', type: 'date' },
-            //        { label: 'Recorded File', type: 'file' },
-            //    ]
-            //}
-
-            //];
-            //$scope.FormItems = [];
             $scope.GenerateModel = function () {
                 var model = $scope.pageModel + '.' + arguments[0].replace(/[-\/\\\.\s]/gi, "_")
                 return model
@@ -172,9 +78,7 @@
                 var iType = NeedChangeS.filter(function (o) { return o == type })[0];
                 return ElemType ? iType == ElemType : iType
             }
-
             $scope.GetReslut = function () {
-
                 var t = $('#template').clone();
                 t.not(':visible').remove();
                 t.wrap("<div></div>");

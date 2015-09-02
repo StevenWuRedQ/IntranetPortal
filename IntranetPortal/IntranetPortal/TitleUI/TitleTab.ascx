@@ -1,27 +1,20 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TitleTab.ascx.vb" Inherits="IntranetPortal.TitleTab" %>
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 <%@ Register Src="~/TitleUI/TitleInfo.ascx" TagPrefix="uc1" TagName="TitleInfo" %>
-
+<%@ Register Src="~/TitleUI/TitleOwnerLiens.ascx" TagPrefix="uc1" TagName="TitleOwnerLiens" %>
+<%@ Register Src="~/TitleUI/TitleBuildingLiens.ascx" TagPrefix="uc1" TagName="TitleBuildingLiens" %>
+<%@ Register Src="~/TitleUI/TitleSurveyAndContin.ascx" TagPrefix="uc1" TagName="TitleSurveyAndContin" %>
+<%@ Register Src="~/TitleUI/TitlePreclosing.ascx" TagPrefix="uc1" TagName="TitlePreclosing" %>
 
 <uc1:Common runat="server" ID="Common" />
-<div id="TitleTabContent" ng-controller="TitleController" style="max-height: 850px; overflow: auto">
+<div id="TitleTabContent" ng-controller="TitleCtrl" style="max-height: 850px; overflow: auto">
     <div style="padding-top: 5px">
         <div id="prioity_content">
             <div style="font-size: 30px; margin-left: 30px; height: 80px" class="font_gray">
                 <div style="font-size: 30px; margin-top: 20px;">
                     <i class="fa fa-home"></i>
                     <span style="margin-left: 19px;"><span ng-bind="TitleUI.CaseName"></span>&nbsp;</span>
-
-                    <%-- 
                     <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+leadsInfoBBLE, 'Maps')">Map</span>
-                    <span class="time_buttons" onclick="OpenLeadsWindow('http://nycserv.nyc.gov/NYCServWeb/NYCSERVMain', 'eCourts')" ng-show="activeTab=='CSUtilities'">Water&Taxes</span>
-                    <span class="time_buttons" onclick="OpenLeadsWindow('http://a820-ecbticketfinder.nyc.gov/searchHome.action ', 'ECB')" ng-show="activeTab=='CSViolations'">ECB</span>
-                    <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=2&bble='+leadsInfoBBLE, 'DOB')" ng-show="activeTab=='CSViolations'">DOB</span>
-                    <span class="time_buttons" onclick="OpenLeadsWindow('http://www1.nyc.gov/site/hpd/index.page', 'HPD')" ng-show="activeTab=='CSViolations'">HPD</span>
-                    <span class="time_buttons" onclick="OpenLeadsWindow('http://www1.nyc.gov/site/finance/index.page', 'Department of Finance')" ng-show="">Department of Finance</span>
-                    <span class="time_buttons" onclick="OpenLeadsWindow('http://www1.nyc.gov/assets/hpd/downloads/pdf/Dismissal-Request-Form-2013.pdf', 'Dismissal Request form')" ng-show="activeTab=='CSViolations'">Dismissal Request form</span>
-                    --%>
-
                 </div>
             </div>
 
@@ -69,14 +62,31 @@
 
         <div class="shortSaleUI">
             <ul class="nav nav-tabs overview_tabs" role="tablist">
-                <li class="short_sale_tab active"><a class="shot_sale_tab_a" href="#CSInitialIntake" role="tab" data-toggle="tab">Initial Intake</a></li>
+                <li class="short_sale_tab active"><a class="shot_sale_tab_a" href="#TitleInfoTab" role="tab" data-toggle="tab">Info</a></li>
+                <li class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleOwnerLiensTab" role="tab" data-toggle="tab">Owner Liens</a></li>
+                <li class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleBuildingLiensTab" role="tab" data-toggle="tab">Building Liens</a></li>
+                <li class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleSurveyAndContinTab" role="tab" data-toggle="tab">Surveys And Contins</a></li>
+                <li class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitlePreclosingTab" role="tab" data-toggle="tab">Preclosing Documents</a></li>
             </ul>
 
             <!-- Tab panes -->
             <div class="short_sale_content">
                 <div class="tab-content">
-                    <div class="tab-pane" id="tab.name">
-                        <uc1:TitleInfo runat="server" id="TitleInfo" />
+                    <div class="tab-pane active" id="TitleInfoTab">
+                        <uc1:TitleInfo runat="server" ID="TitleInfo" />
+                    </div>
+                    <div class="tab-pane" id="TitleOwnerLiensTab">
+                        <uc1:TitleOwnerLiens runat="server" ID="TitleOwnerLiens" />
+                    </div>
+
+                    <div class="tab-pane" id="TitleBuildingLiensTab">
+                        <uc1:TitleBuildingLiens runat="server" ID="TitleBuildingLiens" />
+                    </div>
+                    <div class="tab-pane" id="TitleSurveyAndContinTab">
+                        <uc1:TitleSurveyAndContin runat="server" id="TitleSurveyAndContin" />
+                    </div>
+                    <div class="tab-pane" id="TitlePreclosingTab">
+                        <uc1:TitlePreclosing runat="server" id="TitlePreclosing" />
                     </div>
                 </div>
             </div>
@@ -151,4 +161,17 @@
         /* end comments */
     })
 </script>
-<script src="/TitleUI/TitleUI.js"></script>
+<script>
+    var app = angular.module("PortalApp")
+    app.controller("TitleCtrl", function ($scope, ptCom) {
+        $scope.CaseData = {}
+        $scope.ReloadedData = {}
+        $scope.load = function (data) {
+            $scope.CaseData = data;
+            $scope.ReloadedData = {};
+        }
+        $scope.get = function () {
+            return $scope.CaseData;
+        }
+    })
+</script>
