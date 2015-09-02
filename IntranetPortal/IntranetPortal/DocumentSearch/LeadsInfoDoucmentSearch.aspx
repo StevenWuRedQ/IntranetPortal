@@ -10,7 +10,16 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="ss_form ">
-                    <h4 class="ss_form_title ">Property Request Info</h4>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4 class="ss_form_title ">Property Request Info  </h4>
+                        </div>
+                        <div class="col-md-2">
+                            
+                        </div>
+                         
+                    </div>
+                   
                     <ul class="ss_form_box clearfix">
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title ">Requested On</label>
@@ -193,6 +202,9 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div class="col-md-6">
+
             </div>
         </div>
     </div>

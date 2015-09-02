@@ -16,7 +16,7 @@ Partial Public Class LeadInfoDocumentSearch
     Public Property Recrod As String
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
-    Public Property UpDateDate As Nullable(Of Date)
-    Public Property UpDateBy As String
+    Public Property UpdateDate As Nullable(Of Date)
+    Public Property UpdateBy As String
 
 End Class

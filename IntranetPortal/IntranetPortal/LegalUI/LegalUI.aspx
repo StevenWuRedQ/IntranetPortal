@@ -1078,7 +1078,11 @@
                     return $scope.LegalCase.SecondaryTypes.filter(function (t) { return t == tag })[0];
                 }
                 var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Value": "", "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ", "ArrayName": "" },
-                                { "Name": "EveryOneIn", "CallFunc": "", "Value": "false", "Description": "Nobody is part of the estate served .", "ArrayName": "" },
+                                { "Name": "EveryOneIn", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.WasEstateFormed!=null')", "Value": "false", "Description": "There is an estate.", "ArrayName": "" },
+                                { "Name": "BankruptcyFiled", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.BankruptcyFiled')", "Value": "false", "Description": "Bankruptcy filed", "ArrayName": "" },
+                               
+                                { "Name": "Efile", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.Efile==true')", "Value": "false", "Description": "Has E-filed", "ArrayName": "" },
+                                { "Name": "EfileN", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.Efile==false')", "Value": "false", "Description": "No E-filed", "ArrayName": "" },
                                 { "Name": "ClientPersonallyServed", "CallFunc": "", "Value": "false", "Description": "Client personally is not served. ", "ArrayName": "AffidavitOfServices" },
                                 { "Name": "NailAndMail", "CallFunc": "", "Value": "true", "Description": "Nail and Mail.", "ArrayName": "AffidavitOfServices" },
                                 { "Name": "BorrowerLiveInAddrAtTimeServ", "CallFunc": "", "Value": "false", "Description": "Borrower didn\'t live in service Address at time of Serv.", "ArrayName": "AffidavitOfServices" },
@@ -1094,7 +1098,7 @@
                                 { "Name": "LisPendesRegDate", "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.LisPendesDate, LegalCase.ForeclosureInfo.LisPendesRegDate, 5)", "Value": "", "Description": "Date of registration 5 days after Lis Pendens letter", "ArrayName": "" },
                                 { "Name": "AccelerationLetterMailedDate", "CallFunc": "isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )", "Value": " ", "Description": "Acceleration letter mailed to borrower after 12 months of Default Date. ", "ArrayName": "" },
                                 { "Name": "AccelerationLetterRegDate", "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,LegalCase.ForeclosureInfo.AccelerationLetterRegDate,3 )", "Value": " ", "Description": "Date of registration for Acceleration letter filed  3 days after acceleration letter mailed date", "ArrayName": "" },
-                                { "Name": "PlaintiffHaveAtCommencement", "CallFunc": "", "Value": "false", "Description": "Current plaintiff didn\'t have  in possession, the note and mortgage at time of commencement. ", "ArrayName": "" },
+                              
                                 { "Name": "AffirmationFiledDate", "CallFunc": "isPassByDays(LegalCase.ForeclosureInfo.JudgementDate,LegalCase.ForeclosureInfo.AffirmationFiledDate,0)", "Value": "", "Description": "Affirmation filed after Judgement. ", "ArrayName": "" },
                                 { "Name": "AffirmationReviewerByCompany", "CallFunc": "", "Value": "false", "Description": "The affirmation reviewer wasn\'t employe by the servicing company. ", "ArrayName": "" },
                                 { "Name": "MortNoteAssInCert", "CallFunc": "", "Value": "false", "Description": "In the Certificate of Merit, the Mortgage, Note and Assignment aren\'t included. ", "ArrayName": "" },

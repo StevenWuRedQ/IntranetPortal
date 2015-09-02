@@ -57,12 +57,18 @@
                 <label class="ss_form_input_title ">Sale date</label>
                 <input class="ss_form_input" ng-model="LegalCase.SaleDate" ss-date />
             </li>
+              <li class="ss_form_item" >
+                <label class="ss_form_input_title "> E-file </label>
+                  <pt-radio name="Efile" model="LegalCase.ForeclosureInfo.Efile"></pt-radio>
+               
+            </li>
+           
         </ul>
     </div>
 
     <!-- Estate Pending -->
     <div class="ss_form">
-        <h4 class="ss_form_title">Estate&nbsp
+        <h4 class="ss_form_title">Estate {{LegalCase.ForeclosureInfo.WasEstateFormed}}&nbsp
 		<i class="fa fa-compress icon_btn text-primary" ng-show="!estateCollapse" ng-click="estateCollapse=!estateCollapse"></i>
             <i class="fa fa-expand icon_btn text-primary" ng-show="estateCollapse" ng-click="estateCollapse=!estateCollapse"></i></h4>
         <div collapse="estateCollapse">
@@ -154,6 +160,10 @@
 		<i class="fa fa-compress icon_btn text-primary" ng-show="!bankruptcyCollapse" ng-click="bankruptcyCollapse=!bankruptcyCollapse"></i>
             <i class="fa fa-expand icon_btn text-primary" ng-show="bankruptcyCollapse" ng-click="bankruptcyCollapse=!bankruptcyCollapse"></i></h4>
         <ul class="ss_form_box clearfix" collapse="bankruptcyCollapse">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title"> Was BK filed </label>
+                 <pt-radio name="WasBkfiled" model="LegalCase.ForeclosureInfo.BankruptcyFiled"></pt-radio>
+            </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Who Filed</label>
                 <select class="ss_form_input" ng-model="LegalCase.PropertyInfo.BankruptcyWhoFiled">

@@ -67,6 +67,25 @@
     function DeleteComments(commentId) {
         leadsCommentsCallbackPanel.PerformCallback("Delete|" + commentId);
     }
+    function RequestDocSearch()
+    {
+        $.ajax({
+            type: "POST",
+            url: 'api/LeadInfoDocumentSearches',
+            data: JSON.stringify({ "BBLE": leadsInfoBBLE }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                alert('Submit successful..');
+                if (typeof gridTrackingClient != "undefined")
+                    gridTrackingClient.Refresh();
+            },
+            error: function (data) {
+                alert('Some error Occurred! Detail: ' + JSON.stringify(data));
+            }
+           
+        });
+    }
     $(document).ready(function () {
         // Handler for .ready() called.
         init_currency();
@@ -342,7 +361,10 @@
                 <dx:PanelContent>
                     <%--Mortgage form--%>
                     <div style="margin: 20px;" class="clearfix">
-                        <div class="form_head" style="margin-top: 40px;">MORTGAGE AND VIOLATIONS <i class="fa fa-save  color_blue_edit collapse_btn" title="Save Mortgage" onclick="callbackPanelMortgage.PerformCallback('Save')"></i></div>
+                        <div class="form_head" style="margin-top: 40px;">MORTGAGE AND VIOLATIONS 
+                            <i class="fa fa-save  color_blue_edit collapse_btn tooltip-examples" title="Save Mortgage" onclick="callbackPanelMortgage.PerformCallback('Save')"></i>
+                            <i class="fa fa-search-plus  color_blue_edit collapse_btn tooltip-examples" title="Request a search" onclick="RequestDocSearch()"></i>
+                        </div>
 
                         <%--line 1--%>
                         <div class="form_div_node form_div_node_line_margin">

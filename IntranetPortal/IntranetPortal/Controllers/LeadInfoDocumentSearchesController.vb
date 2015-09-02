@@ -7,6 +7,7 @@ Imports System.Net.Http
 Imports System.Web.Http
 Imports System.Web.Http.Description
 Imports IntranetPortal.Data
+Imports IntranetPortal.LeadsActivityLog
 
 Namespace Controllers
     Public Class LeadInfoDocumentSearchesController
@@ -42,6 +43,8 @@ Namespace Controllers
             End If
 
             db.Entry(leadInfoDocumentSearch).State = EntityState.Modified
+            leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
+            leadInfoDocumentSearch.UpdateDate = Date.Now
 
             Try
                 db.SaveChanges()
@@ -62,8 +65,35 @@ Namespace Controllers
             If Not ModelState.IsValid Then
                 Return BadRequest(ModelState)
             End If
+            Dim findSearch = db.LeadInfoDocumentSearches.Find(leadInfoDocumentSearch.BBLE)
 
-            db.LeadInfoDocumentSearches.Add(leadInfoDocumentSearch)
+            If (findSearch Is Nothing) Then
+                db.LeadInfoDocumentSearches.Add(leadInfoDocumentSearch)
+                leadInfoDocumentSearch.CreateBy = HttpContext.Current.User.Identity.Name
+                leadInfoDocumentSearch.CreateDate = Date.Now
+            Else
+
+                findSearch.UpdateBy = HttpContext.Current.User.Identity.Name
+                findSearch.UpDateDate = Date.Now()
+                PutLeadInfoDocumentSearch(leadInfoDocumentSearch.BBLE, findSearch)
+
+            End If
+           
+            LeadsActivityLog.AddActivityLog(Date.Now(), "Create a search request to Elizabeth ", leadInfoDocumentSearch.BBLE, LogCategory.SalesAgent.ToString)
+            Dim LeadInfoSearchUser = Employee.GetInstance("Steven Wu") 'Employee.GetInstance("Elizabeth Rodriguez")
+            Dim empl = Employee.GetInstance(HttpContext.Current.User.Identity.Name)
+            Dim mLead = Lead.GetInstance(leadInfoDocumentSearch.BBLE)
+
+            If (LeadInfoSearchUser IsNot Nothing) Then
+                Core.EmailService.SendMail(LeadInfoSearchUser.Email, empl.Email, "DocSearchNotify",
+                                           New Dictionary(Of String, String) From
+                                           {
+                                               {"SubmitUser", empl.Name},
+                                               {"Address", mLead.LeadsInfo.PropertyAddress},
+                                               {"DocUser", LeadInfoSearchUser.Name},
+                                                {"BBLE", leadInfoDocumentSearch.BBLE}
+                                           })
+            End If
 
             Try
                 db.SaveChanges()
