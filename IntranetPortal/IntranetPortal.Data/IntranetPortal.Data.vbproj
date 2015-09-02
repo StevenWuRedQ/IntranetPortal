@@ -110,6 +110,24 @@
       <DependentUpon>ConstructionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataServices\TLOLocateReportOutput.vb" />
+    <Compile Include="DocumentSearch\SearchEntity\DocSearchEntity.Context.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocSearchEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSearch\SearchEntity\DocSearchEntity.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocSearchEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSearch\SearchEntity\DocSearchEntity.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocSearchEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSearch\SearchEntity\LeadInfoDocumentSearch.vb">
+      <DependentUpon>DocSearchEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Legal\DataModel\LawReference.vb">
       <DependentUpon>LegalModel.tt</DependentUpon>
     </Compile>
@@ -308,6 +326,13 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ConstructionModel.edmx</DependentUpon>
       <LastGenOutput>ConstructionModel.vb</LastGenOutput>
+    </None>
+    <EntityDeploy Include="DocumentSearch\SearchEntity\DocSearchEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DocSearchEntity.Designer.vb</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DocumentSearch\SearchEntity\DocSearchEntity.edmx.diagram">
+      <DependentUpon>DocSearchEntity.edmx</DependentUpon>
     </None>
     <None Include="Legal\DataModel\LegalModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -531,6 +556,18 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DocumentSearch\SearchEntity\DocSearchEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DocSearchEntity.edmx</DependentUpon>
+      <LastGenOutput>DocSearchEntity.Context.vb</LastGenOutput>
+    </Content>
+    <Content Include="DocumentSearch\SearchEntity\DocSearchEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DocSearchEntity.edmx</DependentUpon>
+      <LastGenOutput>DocSearchEntity.vb</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -963,6 +963,13 @@
       <DependentUpon>VerticalAppointmentTemplate.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="DocumentSearch\LeadsInfoDoucmentSearch.aspx.designer.vb">
+      <DependentUpon>LeadsInfoDoucmentSearch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSearch\LeadsInfoDoucmentSearch.aspx.vb">
+      <DependentUpon>LeadsInfoDoucmentSearch.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="DownloadFile.aspx.designer.vb">
       <DependentUpon>DownloadFile.aspx</DependentUpon>
     </Compile>
@@ -2293,6 +2300,7 @@
     <Content Include="DLL\MyIdealProp.Workflow.DBPersistence.dll" />
     <Content Include="DLL\PublicSiteData.dll" />
     <Content Include="DLL\Spire.Pdf.dll" />
+    <Content Include="DocumentSearch\LeadsInfoDoucmentSearch.aspx" />
     <Content Include="DownloadFile.aspx" />
     <Content Include="EmailTemplate\ShortSaleUserReport.ascx" />
     <Content Include="EmailTemplate\ActivitySummary.ascx" />
