@@ -17,7 +17,6 @@ Namespace Controllers
             Using svr As New RulesEngineServices(ruleEngineName)
                 Return svr.Rules
             End Using
-
         End Function
 
 

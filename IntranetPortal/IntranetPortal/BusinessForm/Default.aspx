@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="Default.aspx.vb" Inherits="IntranetPortal.BusinessFormDefault" %>
-
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
-
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -28,10 +26,9 @@
                     <dx:SplitterContentControl>
                         <div class="legal-menu row" style="margin: 0px;">
                             <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
-
                                 <asp:Repeater runat="server" ID="rptTopmenu">
                                     <ItemTemplate>
-                                        <li class="active short_sale_head_tab">
+                                        <li class="<%# ActivieTab(Container.ItemIndex)%> short_sale_head_tab">
                                             <a href='#<%#Eval("Name")%>' role="tab" data-toggle="tab" class="tab_button_a">
                                                 <i class="fa fa-info-circle  head_tab_icon_padding"></i>
                                                 <div class="font_size_bold"><%# Eval("Name")%></div>
@@ -39,7 +36,6 @@
                                         </li>
                                     </ItemTemplate>
                                 </asp:Repeater>
-
                                 <li class="short_sale_head_tab">
                                     <a href="#DocumentTab" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
                                         <i class="fa fa-file head_tab_icon_padding"></i>
@@ -57,7 +53,6 @@
                                                 <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="/ViewLeadsInfo.aspx?HiddenTab=true&id=BBLE" data-href="#more_leads" onclick="LoadMoreFrame(this)">
                                                     <i class="fa fa-folder head_tab_icon_padding"></i>
                                                     <div class="font_size_bold">Leads</div>
-
                                                 </a>
                                             </li>
                                             <li class="short_sale_head_tab" ng-show="LegalCase.InShortSale">
@@ -83,16 +78,14 @@
                             </ul>
                         </div>
                         <div class="tab-content">
-
                             <asp:Repeater runat="server" ID="rptBusinessControl" OnItemDataBound="rptBusinessControl_ItemDataBound">
                                 <ItemTemplate>
-                                    <div class="tab-pane" id="<%# Eval("Name")%>">
+                                    <div class="<%# ActivieTab(Container.ItemIndex)%> tab-pane" id="<%# Eval("Name")%>">
                                         <asp:Panel runat="server" ID="pnlHolder">
                                         </asp:Panel>
                                     </div>
                                 </ItemTemplate>
                             </asp:Repeater>
-
                             <div class="tab-pane" id="DocumentTab">
                                 <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
                             </div>

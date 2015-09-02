@@ -39,4 +39,12 @@
             lt.Controls.Add(myControl)
         End If
     End Sub
+
+    Public Function ActivieTab(index As Integer)
+        If index = 0 Then
+            Return "active"
+        End If
+
+        Return ""
+    End Function
 End Class
