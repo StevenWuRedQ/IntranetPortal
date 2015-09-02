@@ -5,15 +5,12 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
     <div id="FormCtrl" ng-controller="FormCtrl">
-
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
                     <div id="template">
-
                         <div class="ss_form" ng-repeat="form in FormItems">
                             <h4 class="ss_form_title">{{form.head}}</h4>
-
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item" ng-repeat="item in form.items" ng-class="NeedChangeElement(item.type,'notes')?'ss_form_item_line':''">
                                     <label class="ss_form_input_title">{{item.label}}</label>
@@ -25,6 +22,8 @@
                                     <tempt-pt-file file-bble="{{BBLEModel}}" file-id="{{GetUniqueId(form.head,item.label)}}" file-model="{{GenerateModel(form.head,item.label)}}" ng-if="NeedChangeElement(item.type,'file')"></tempt-pt-file>
                                     <textarea class="edit_text_area text_area_ss_form" model="{{GenerateModel(form.head,item.label)}}" ng-if="NeedChangeElement(item.type,'notes')"></textarea>
                                     <input type="text" class="ss_form_input" tempt-ng-model="{{GenerateModel(form.head,item.label)}}" tempt-ng-change="{{GenerateModel(form.head,item.label)}}Id=null" tempt-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" tempt-typeahead-on-select="{{GenerateModel(form.head,item.label)}}Id=$item.ContactId" tempt-bind-id="{{GenerateModel(form.head,item.label)}}Id" ng-if="NeedChangeElement(item.type,'contact')">
+                                    <tempt-pt-radio name="{{GetUniqueId(form.head,item.label)}}" tempt-model="{{GenerateModel(form.head,item.label)}}" ng-if="NeedChangeElement(item.type,'radio')"></tempt-pt-radio>
+
                                 </li>
                             </ul>
                         </div>
@@ -37,10 +36,8 @@
                     <textarea ng-model="Resluts"></textarea>
                 </div>
 
-
             </div>
         </div>
-
 
     </div>
 
@@ -50,12 +47,12 @@
         portalApp.controller('FormCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
             $scope.qniueId = 0
             $scope.ptContactServices = ptContactServices;
+            $scope.RecordDocuments = {}
             $scope.FormItems = [
                 {
                     head: 'Documents Received On',
                     items: [
                         { label: 'Documents Received' },
-
                         { label: 'Date Recorded select', type: 'select', options: ['Yes', 'No'] },
                         { label: 'Deed', type: 'file' },
                         { label: 'Deed Acris Document', type: 'file' },
@@ -63,8 +60,8 @@
                         { label: 'Memorandum of Contract Acris Docs', type: 'file' },
                         { label: 'Contract of Sales', type: 'file' },
                         { label: 'Notes', type: 'notes' },
-
                         { label: 'Are Documents Notarized', type: 'select', options: ['Yes', 'No'] },
+                        { label: 'This is Radio', type: 'radio' }
                     ]
                 },
             {
@@ -78,7 +75,6 @@
                     { label: 'Transaction ID' },
                     { label: 'Rejected', type: 'select', options: ['Yes', 'No'] },
                     { label: 'Rejected notes', type: 'notes' },
-
                     { label: 'Recorded', type: 'select', options: ['Yes', 'No'] },
                     { label: 'Date Recorded ', type: 'date' },
                     { label: 'Recorded File', type: 'file' },
@@ -104,8 +100,7 @@
                 return id;
             }
             $scope.NeedChangeElement = function (type, ElemType) {
-                var NeedChangeS = ["select", "contact", 'file', 'notes'];
-
+                var NeedChangeS = ["select", "contact", 'file', 'notes', 'radio'];
                 var iType = NeedChangeS.filter(function (o) { return o == type })[0];
                 return ElemType ? iType == ElemType : iType
             }

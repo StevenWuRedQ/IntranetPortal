@@ -1875,6 +1875,27 @@
       <DependentUpon>Test.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="TitleUI\TitleCaseList.ascx.designer.vb">
+      <DependentUpon>TitleCaseList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="TitleUI\TitleCaseList.ascx.vb">
+      <DependentUpon>TitleCaseList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TitleUI\TitleTab.ascx.designer.vb">
+      <DependentUpon>TitleTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="TitleUI\TitleTab.ascx.vb">
+      <DependentUpon>TitleTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TitleUI\TitleUI.aspx.designer.vb">
+      <DependentUpon>TitleUI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TitleUI\TitleUI.aspx.vb">
+      <DependentUpon>TitleUI.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="UploadFilePage.aspx.designer.vb">
       <DependentUpon>UploadFilePage.aspx</DependentUpon>
     </Compile>
@@ -2098,7 +2119,6 @@
     </Compile>
     <Compile Include="WebForm1.aspx.vb">
       <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="WebForm2.aspx.designer.vb">
       <DependentUpon>WebForm2.aspx</DependentUpon>
@@ -3626,6 +3646,9 @@
     <Content Include="Task\Reports\WorklistReport.aspx" />
     <Content Include="Task\TasklistControl.ascx" />
     <Content Include="Test.aspx" />
+    <Content Include="TitleUI\TitleCaseList.ascx" />
+    <Content Include="TitleUI\TitleTab.ascx" />
+    <Content Include="TitleUI\TitleUI.aspx" />
     <Content Include="UploadFilePage.aspx" />
     <Content Include="OneDrive\UploadToOneDrive.aspx" />
     <Content Include="UserControl\ActivityLogs.ascx" />
