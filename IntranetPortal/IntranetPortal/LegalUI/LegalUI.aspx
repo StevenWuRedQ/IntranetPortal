@@ -108,16 +108,20 @@
                         <dx:SplitterContentControl>
                             <div id="legalPanelContent">
                                 <script>
-                                    $(document).ready(function () {
-
-                                        $('.popup').webuiPopover({ title: 'Contact ' + $("#vendor_btn").html(), content: $('#contact_popup').html(), width: 400 });
-
-                                    });
 
                                     window.onbeforeunload = function () {
+
                                         if (CaseDataChanged())
                                             return "You have pending changes, would you save it?";
                                     }
+                                    setInterval(function()
+                                    {
+                                        if (CaseNeedComment && !$('#NeedAddCommentPopUp').is(':visible'))
+                                        {
+                                            $('#NeedAddCommentPopUp').modal({ backdrop: 'static' })
+                                        }
+                                       
+                                    }, 30000)
                                 </script>
 
                                 <div id="vendor_btn" style="display: none">
@@ -484,7 +488,27 @@
                 </dx:SplitterPane>
             </Panes>
         </dx:ASPxSplitter>
-
+        <div class="modal fade" id="NeedAddCommentPopUp">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">You didn't add a comment please input open files reason to continue!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">Comment:</label>
+                            <textarea class="form-control" ng-model="MustAddedComment" ></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"  ng-disabled="!MustAddedComment" ng-click="AddActivityLog()">Add Comment</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
         <!-- Follow up function  -->
         <script type="text/javascript">
 
@@ -531,7 +555,7 @@
                             gridTrackingClient.Refresh();
                     },
                     error: function (data) {
-                        alert('Some error Occurred! Detail: ' + data);
+                        alert('Some error Occurred! Detail: ' + JSON.stringify(data));
                     }
                 });
             }
@@ -595,7 +619,7 @@
 
         <script type="text/javascript">
             LegalCaseBBLE = null;
-           
+
             function VendorsClosing(s) {
                 GetContactCallBack();
             }
@@ -624,7 +648,9 @@
             function CaseDataChanged() {
                 return ScopeCaseDataChanged(GetLegalData);
             }
-
+            function GetCassNeedComment() {
+                return CaseNeedComment;
+            }
             function ResetCaseDataChange() {
                 ScopeResetCaseDataChange(GetLegalData)
             }
@@ -645,7 +671,7 @@
             portalApp.controller('LegalCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
                 $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
                 $scope.ptContactServices = ptContactServices;
-                
+
                 $scope.ptCom = ptCom;
                 //if (leadsInfoBBLE) {
                 //    $http.post('/Services/ContactService.svc/CheckInShortSale', { "BBLE": leadsInfoBBLE }).success(function (data) {
@@ -890,6 +916,7 @@
                         });
 
                 }
+
                 $scope.LegalCase.SecondaryInfo.StatuteOfLimitations = [];
                 $scope.LegalCase.SecondaryTypes = []
                 $scope.LoadLeadsCase = function (BBLE) {
@@ -905,7 +932,7 @@
                             $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
                             $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
 
-                            var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate" ];
+                            var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
                             for (a in arrays) {
                                 var porp = arrays[a]
                                 var array = $scope.LegalCase.ForeclosureInfo[porp];
@@ -914,14 +941,14 @@
                                     $scope.LegalCase.ForeclosureInfo[porp].push({});
                                 }
                             }
-                            $scope.LegalCase.SecondaryTypes = $scope.LegalCase.SecondaryTypes|| []
+                            $scope.LegalCase.SecondaryTypes = $scope.LegalCase.SecondaryTypes || []
                             $scope.showSAndCFrom();
 
                             LegalCaseBBLE = BBLE;
                             $scope.stopLoading();
 
                             ResetCaseDataChange();
-
+                            CaseNeedComment = true;
                         }).
                         error(function () {
                             $scope.stopLoading();
@@ -1013,10 +1040,8 @@
                     return m;
 
                 }
-                $scope.DocGenerator = function(tplName)
-                {
-                    if (!$scope.LegalCase.SecondaryInfo)
-                    {
+                $scope.DocGenerator = function (tplName) {
+                    if (!$scope.LegalCase.SecondaryInfo) {
                         $scope.LegalCase.SecondaryInfo = {}
                     }
                     var Tpls = [{
@@ -1031,7 +1056,7 @@
                             "Block": $scope.LeadsInfo.Block,
                             "Lot": $scope.LeadsInfo.Lot,
                             "Defendant": $scope.LegalCase.SecondaryInfo.Defendant,
-                            
+
                             "Defendants": $scope.LegalCase.SecondaryInfo.Defendants ? ',' + $scope.LegalCase.SecondaryInfo.Defendants.map(function (o) { return o.Name }).join(",") : ' ',
                             "DefendantAttorneyName": $scope.LegalCase.SecondaryInfo.DefendantAttorneyName,
                             "DefendantAttorneyPhone": ptContactServices.getContact($scope.LegalCase.SecondaryInfo.DefendantAttorneyId, $scope.LegalCase.SecondaryInfo.DefendantAttorneyName).OfficeNO,
@@ -1043,13 +1068,10 @@
                     }];
                     var tpl = Tpls.filter(function (o) { return o.tplName == tplName })[0]
 
-                    if (tpl)
-                    {
-                        for (var v in tpl.data)
-                        {
+                    if (tpl) {
+                        for (var v in tpl.data) {
                             var filed = tpl.data[v];
-                            if(!filed)
-                            {
+                            if (!filed) {
                                 alert("Some date missing please like " + v + "Please check!")
                                 return;
                             }
@@ -1068,19 +1090,17 @@
                             link.click();
                             document.body.removeChild(link);
                         });
-                    }else
-                    {
-                        alert("can find tlp "+tplName)
+                    } else {
+                        alert("can find tlp " + tplName)
                     }
                 }
-                $scope.CheckSecondaryTags = function(tag)
-                {
+                $scope.CheckSecondaryTags = function (tag) {
                     return $scope.LegalCase.SecondaryTypes.filter(function (t) { return t == tag })[0];
                 }
                 var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Value": "", "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ", "ArrayName": "" },
                                 { "Name": "EveryOneIn", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.WasEstateFormed!=null')", "Value": "false", "Description": "There is an estate.", "ArrayName": "" },
                                 { "Name": "BankruptcyFiled", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.BankruptcyFiled')", "Value": "false", "Description": "Bankruptcy filed", "ArrayName": "" },
-                               
+
                                 { "Name": "Efile", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.Efile==true')", "Value": "false", "Description": "Has E-filed", "ArrayName": "" },
                                 { "Name": "EfileN", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.Efile==false')", "Value": "false", "Description": "No E-filed", "ArrayName": "" },
                                 { "Name": "ClientPersonallyServed", "CallFunc": "", "Value": "false", "Description": "Client personally is not served. ", "ArrayName": "AffidavitOfServices" },
@@ -1098,7 +1118,7 @@
                                 { "Name": "LisPendesRegDate", "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.LisPendesDate, LegalCase.ForeclosureInfo.LisPendesRegDate, 5)", "Value": "", "Description": "Date of registration 5 days after Lis Pendens letter", "ArrayName": "" },
                                 { "Name": "AccelerationLetterMailedDate", "CallFunc": "isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )", "Value": " ", "Description": "Acceleration letter mailed to borrower after 12 months of Default Date. ", "ArrayName": "" },
                                 { "Name": "AccelerationLetterRegDate", "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,LegalCase.ForeclosureInfo.AccelerationLetterRegDate,3 )", "Value": " ", "Description": "Date of registration for Acceleration letter filed  3 days after acceleration letter mailed date", "ArrayName": "" },
-                              
+
                                 { "Name": "AffirmationFiledDate", "CallFunc": "isPassByDays(LegalCase.ForeclosureInfo.JudgementDate,LegalCase.ForeclosureInfo.AffirmationFiledDate,0)", "Value": "", "Description": "Affirmation filed after Judgement. ", "ArrayName": "" },
                                 { "Name": "AffirmationReviewerByCompany", "CallFunc": "", "Value": "false", "Description": "The affirmation reviewer wasn\'t employe by the servicing company. ", "ArrayName": "" },
                                 { "Name": "MortNoteAssInCert", "CallFunc": "", "Value": "false", "Description": "In the Certificate of Merit, the Mortgage, Note and Assignment aren\'t included. ", "ArrayName": "" },
@@ -1314,7 +1334,7 @@
                         return true;
                     else return false;
                 }
-              
+
                 $scope.initMissInCert = function () {
                     return {
                         dataSource: $scope.missingItems,
@@ -1360,6 +1380,13 @@
                     $timeout(function () {
                         $scope.panelLoading = false;
                     });
+                }
+                $scope.AddActivityLog = function()
+                {
+                    if (typeof AddActivityLog == "function")
+                    {
+                        AddActivityLog($scope.MustAddedComment);
+                    }
                 }
                 /* end loading panel */
             });

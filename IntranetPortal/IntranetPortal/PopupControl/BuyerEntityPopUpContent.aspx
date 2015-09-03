@@ -2,6 +2,8 @@
 
 <%@ Register Src="~/ShortSale/ShortSaleSubMenu.ascx" TagPrefix="uc1" TagName="ShortSaleSubMenu" %>
 <%@ Register Src="~/PopupControl/SendMailWithAttach.ascx" TagPrefix="uc1" TagName="SendMailWithAttach" %>
+<%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
+
 
 
 
@@ -17,7 +19,7 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
 
-
+    <uc1:Common runat="server" ID="Common" />
     <div id="BuyerEntityCtrl" ng-controller="BuyerEntityCtrl">
         <div dx-load-panel="{
                  message: 'Loading...',
@@ -335,7 +337,7 @@
                                     </td>
                                 </tr>
                                 <tr class="vendor_info">
-                                    <td class="vendor_info_left">Property Assigned
+                                    <td class="vendor_info_left">Property Assigned <span class="link_pdf" ng-click="OpenLeadsView()" ng-show="currentContact.BBLE">(view)</span>
                                     </td>
                                     <td>
                                         <div class="detail_right input_info_table ">
@@ -660,6 +662,12 @@
             }
             $scope.ChangeTeam = function (team) {
                 $scope.SelectedTeam = team;
+            }
+            $scope.OpenLeadsView = function()
+            {
+                var bble = $scope.currentContact.BBLE
+                var url = '/ViewLeadsInfo.aspx?id=' + bble;
+                OpenLeadsWindow(url, "View Leads Info " + bble);
             }
             //for view and upload document -- add by chris
             $scope.encodeURIComponent = window.encodeURIComponent;
