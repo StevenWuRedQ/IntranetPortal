@@ -167,12 +167,12 @@
         $scope.FormData = {}
         $scope.ReloadedData = {}
         $scope.Load = function (data) {
-            $scope.FormData = data.FormData;
+            $scope.Form = data;
             $scope.ReloadedData = {};
             $scope.$apply();
         }
         $scope.Get = function () {
-            return $scope.FormData;
+            return $scope.Form;
         }
     })
 </script>
