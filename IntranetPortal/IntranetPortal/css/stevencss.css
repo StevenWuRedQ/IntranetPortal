@@ -2449,8 +2449,8 @@ li.mag_tabv.active {
 }
 
 .shortSaleUI .dx-tag{
-    padding: 2px;
-    font-size: 14px;
+	padding: 2px;
+	font-size: 14px;
 }
 
 .dx-popup-content input[type='checkbox'] + label {

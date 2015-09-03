@@ -1,5 +1,5 @@
-﻿Public Class LegalPreQuestions
-    Inherits System.Web.UI.UserControl
+﻿Public Class LegalPreQuestions1
+    Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
