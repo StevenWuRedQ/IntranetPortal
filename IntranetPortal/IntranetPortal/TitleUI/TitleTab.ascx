@@ -164,7 +164,7 @@
 <script>
     var app = angular.module("PortalApp")
     app.controller("TitleController", function ($scope, ptCom) {
-        $scope.FormData = {}
+        $scope.Form = { FormData: {}}
         $scope.ReloadedData = {}
         $scope.Load = function (data) {
             $scope.Form = data;
