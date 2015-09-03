@@ -518,6 +518,7 @@
     </Compile>
     <Compile Include="BusinessForm\Default.aspx.vb">
       <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CallBackServices.asmx.vb">
       <DependentUpon>CallBackServices.asmx</DependentUpon>
@@ -968,6 +969,7 @@
     </Compile>
     <Compile Include="DocumentSearch\LeadsInfoDoucmentSearch.aspx.vb">
       <DependentUpon>LeadsInfoDoucmentSearch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DownloadFile.aspx.designer.vb">
       <DependentUpon>DownloadFile.aspx</DependentUpon>
@@ -1054,6 +1056,13 @@
     </Compile>
     <Compile Include="LegalUI\LegalForeclosureReviewTab.ascx.vb">
       <DependentUpon>LegalForeclosureReviewTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LegalUI\LegalPreQuestions.ascx.designer.vb">
+      <DependentUpon>LegalPreQuestions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LegalUI\LegalPreQuestions.ascx.vb">
+      <DependentUpon>LegalPreQuestions.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="LegalUI\LegalSecondaryActions.ascx.designer.vb">
@@ -2640,6 +2649,7 @@
     <Content Include="LeadsGenerator\LeadsSearchApproval.aspx" />
     <Content Include="LegalUI\CaseLawRef.aspx" />
     <Content Include="LegalUI\LegalForeclosureReviewTab.ascx" />
+    <Content Include="LegalUI\LegalPreQuestions.ascx" />
     <Content Include="LegalUI\LegalSecondaryActions.ascx" />
     <Content Include="LegalUI\LegalSecondaryActionTab.ascx" />
     <Content Include="LegalUI\LegalServices.svc" />

@@ -171,7 +171,7 @@
             $scope.ReloadedData = {};
             $scope.$apply();
         }
-        $scope.Get = function () {
+        $scope.Get = function () {           
             return $scope.Form;
         }
     })
