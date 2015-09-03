@@ -175,7 +175,8 @@ Public Class AgentActivitySummaryRule
 
             Try
                 client.SendShortSaleActivityEmail()
-                client.SendShortSaleUserSummayEmail()
+                'Disable user summary email
+                'client.SendShortSaleUserSummayEmail()
             Catch ex As Exception
                 Log("AgentActivitySummaryRule Error. TeamName: ShortSale", ex)
             End Try

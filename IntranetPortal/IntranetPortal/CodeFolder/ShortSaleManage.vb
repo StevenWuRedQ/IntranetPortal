@@ -102,7 +102,12 @@ Public Class ShortSaleManage
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
         ConstructionManage.StartConstruction(bble, ssCase.CaseName, userName)
 
-        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Start Construction progress."), bble, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.InProcess)
+        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Start Construction progress."), bble, LeadsActivityLog.LogCategory.PublicUpdate.ToString, LeadsActivityLog.EnumActionType.InProcess)
+    End Sub
+
+    Public Shared Sub StartTitle(bble As String, userName As String)
+        Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
+        TitleManage.StartTitle(bble, ssCase.CaseName, userName)
     End Sub
 
     Public Shared Sub NewCaseApproved(bble As String, approvedBy As String)

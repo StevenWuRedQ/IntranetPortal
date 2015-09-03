@@ -456,6 +456,7 @@
                                                                                 <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Archived" onclick="LogClick('Archived')"></i>
                                                                                 <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" style="display: none" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>
                                                                                 <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')" style="display: none"></i>
+                                                                                <i class="fa fa-key sale_head_button sale_head_button_left tooltip-examples" title="Enable Title" onclick="MoveToTitle()"></i>
                                                                                 <i class="fa fa-wrench sale_head_button sale_head_button_left tooltip-examples" title="Move to Construction" onclick="MoveToConstruction()"></i>
                                                                                 <%--                                                                                <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>--%>
                                                                             </li>
@@ -624,6 +625,17 @@
                 });
         }
 
+        function MoveToTitle() {
+            angular.element(document.getElementById('ShortSaleCtrl')).scope().MoveToTitle(
+                function () {
+                    if (typeof gridTrackingClient != "undefined") {
+                        alert("Success");
+                        gridTrackingClient.Refresh();
+                    }
+                });
+        }
+
+
         function ssToggleApprovalPopup(succ, cancl) {
             angular.element(document.getElementById('ShortSaleCtrl')).scope().regApproval(succ, cancl);
             angular.element(document.getElementById('ShortSaleCtrl')).scope().toggleApprovalPopup();
@@ -653,6 +665,23 @@
                 var data = { bble: leadsInfoBBLE };
 
                 $http.post('ShortSaleServices.svc/MoveToConstruction', JSON.stringify(data)).
+                        success(function () {
+                            if (scuessfunc) {
+                                scuessfunc();
+                            } else {
+                                alert("Successed !");
+                            }
+                        }).
+                        error(function (data, status) {
+                            alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
+                        });
+            }
+
+            $scope.MoveToTitle = function (scuessfunc) {
+                var json = $scope.SsCase;
+                var data = { bble: leadsInfoBBLE };
+
+                $http.post('ShortSaleServices.svc/MoveToTitle', JSON.stringify(data)).
                         success(function () {
                             if (scuessfunc) {
                                 scuessfunc();

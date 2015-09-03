@@ -57,6 +57,18 @@ Public Class ShortSaleServices
 
     <OperationContract()>
     <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
+    Public Function MoveToTitle(bble As String) As Boolean
+
+        Try
+            ShortSaleManage.StartTitle(bble, HttpContext.Current.User.Identity.Name)
+            Return True
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    <OperationContract()>
+    <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
     Public Function SaveCase(caseData As String) As Channels.Message
         Dim ssCase = ShortSaleManage.SaveCase(caseData, HttpContext.Current.User.Identity.Name)
         ssCase.DocumentRequestDetails = ShortSaleManage.GetDocumentRequestDetail(ssCase.BBLE)

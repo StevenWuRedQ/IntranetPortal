@@ -1,6 +1,24 @@
 ﻿Public Class TitleCase
     Inherits BusinessDataBase
 
+    Public Shared Function GetCase(bble As String) As TitleCase
+        Using ctx As New ConstructionEntities
+            Return ctx.TitleCases.Find(bble)
+        End Using
+    End Function
+
+    Public Shared Function GetAllCases() As TitleCase()
+        Using ctx As New ConstructionEntities
+            Return ctx.TitleCases.ToArray
+        End Using
+    End Function
+
+    Public Shared Function GetAllCases(userName As String) As TitleCase()
+        Using ctx As New ConstructionEntities
+            Return ctx.TitleCases.Where(Function(c) c.Owner = userName).ToArray
+        End Using
+    End Function
+
     Public Overrides Function LoadData(formId As Integer) As BusinessDataBase
         Dim data = MyBase.LoadData(formId)
 
@@ -40,11 +58,10 @@
                 ctx.Entry(Me).State = Entity.EntityState.Modified
             Else
                 UpdateFields(itemData, True)
-                ctx.Entry(Me).State = Entity.EntityState.Added
+                ctx.TitleCases.Add(Me)
             End If
 
             ctx.SaveChanges()
-
             Return BBLE
         End Using
     End Function
@@ -55,9 +72,16 @@
         If newCase Then
             FormItemId = itemData.DataId
             BBLE = jsonCase.Item("BBLE")
+            CaseName = jsonCase.Item("CaseName")
+            CreateDate = DateTime.Now
+            CreateBy = itemData.CreateBy
+
+            Return
         End If
 
         CaseName = jsonCase.Item("CaseName")
+        UpdateBy = itemData.UpdateBy
+        UpdateDate = DateTime.Now
     End Sub
 
 End Class

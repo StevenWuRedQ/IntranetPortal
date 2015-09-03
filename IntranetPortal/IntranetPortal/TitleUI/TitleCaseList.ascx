@@ -179,7 +179,7 @@
             <input style="width: 200px; height: 30px;" class="form-control" id="QuickSearch" type="text" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid();return false; }">
             <i class="fa fa-search tooltip-examples icon_btn grid_buttons" style="margin-left: 10px" onclick="SearchGrid()"></i>
         </div>
-        <dx:ASPxGridView runat="server" SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" KeyFieldName="BBLE" OnDataBinding="gridCase_DataBinding">
+        <dx:ASPxGridView runat="server" SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" KeyFieldName="BBLE;FormItemId" OnDataBinding="gridCase_DataBinding">
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />

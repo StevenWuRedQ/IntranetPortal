@@ -6,7 +6,6 @@ Public Class ConstructionManage
 
     Private Const MgrRoleName As String = "Construction-Manager"
 
-
     Public Shared Sub StartConstruction(bble As String, caseName As String, userName As String)
         If ConstructionCase.GetCase(bble) Is Nothing Then
             Dim cc As New ConstructionCase

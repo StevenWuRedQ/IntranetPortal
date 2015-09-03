@@ -20,7 +20,7 @@ Public Class TitleCaseList
         lblLeadCategory.Text = "Cases" 'Core.Utility.GetEnumDescription(status)
         BindData()
 
-        If ConstructionManage.IsManager(Page.User.Identity.Name) Then
+        If TitleManage.IsManager(Page.User.Identity.Name) Then
             gridCase.GroupBy(gridCase.Columns("Owner"))
         End If
 
@@ -28,7 +28,7 @@ Public Class TitleCaseList
     End Sub
 
     Private Sub BindData()
-        gridCase.DataSource = ConstructionManage.GetMyCases(Page.User.Identity.Name)
+        gridCase.DataSource = TitleManage.GetMyCases(Page.User.Identity.Name)
     End Sub
 
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)

@@ -7,7 +7,7 @@ Public Class FormDataItem
     Public ReadOnly Property BusinessData As BusinessDataBase
         Get
             If _businessData Is Nothing Then
-                _businessData = BusinessDataBase.Create(FormName).LoadData(DataId)
+                _businessData = BusinessDataBase.Create(FormName)
             End If
 
             Return _businessData
@@ -32,10 +32,9 @@ Public Class FormDataItem
                 Me.UpdateDate = DateTime.Now
                 ctx.Entry(Me).State = Entity.EntityState.Modified
             End If
+            ctx.SaveChanges()
 
             Me.Tag = BusinessData.Save(Me)
-
-            ctx.SaveChanges()
         End Using
     End Sub
 End Class
