@@ -16,7 +16,7 @@
         </li>
         <li class="ss_form_item ">
             <label class="ss_form_input_title ">Emergency Repairs search</label>
-            <pt-radio name="EmergencyRepairssearch0" model="FormData.buildingLiens.Emergency_Repairs_search"></pt-radio>
+            <pt-radio name="Emergency_Repairs_search" model="FormData.buildingLiens.Emergency_Repairs_search"></pt-radio>
         </li>
         <li class="ss_form_item ">
             <label class="ss_form_input_title ">Upload</label>

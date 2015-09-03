@@ -625,6 +625,10 @@
                 });
         }
 
+        function UpdateMortgageStatus(selType1, selStatusUpdate, selCategory) {
+            angular.element(document.getElementById('ShortSaleCtrl')).scope().UpdateMortgageStatus(selType1, selStatusUpdate, selCategory)
+        }
+
         function MoveToTitle() {
             angular.element(document.getElementById('ShortSaleCtrl')).scope().MoveToTitle(
                 function () {
@@ -652,7 +656,7 @@
 
         portalApp = angular.module('PortalApp');
 
-        portalApp.controller('ShortSaleCtrl', function ($scope, $http, ptContactServices, ptCom) {
+        portalApp.controller('ShortSaleCtrl', function ($scope, $http, $timeout, ptContactServices, ptCom) {
 
             $scope.ptContactServices = ptContactServices;
             $scope.capitalizeFirstLetter = ptCom.capitalizeFirstLetter;
@@ -1043,6 +1047,32 @@
             }
 
             /* end valuation popup */
+
+            /* update mortage status */
+            $scope.UpdateMortgageStatus = function (selType1, selStatusUpdate, selCategory) {
+                var index = 0;
+                switch (selType1) {
+                    case '2nd Lien':
+                        index = 1;
+                        break;
+                    case '3d Lien':
+                        index = 2;
+                        break;
+                    default:
+                        index = 0;
+                }
+                
+                $timeout(function () {
+
+                    if ($scope.SsCase.Mortgages[index]) {
+                        $scope.SsCase.Mortgages[index].Category = selCategory;
+                        $scope.SsCase.Mortgages[index].Status = selStatusUpdate;
+                    }
+
+                })
+
+            }
+            /* end update mortage status*/
         });
 
     </script>
