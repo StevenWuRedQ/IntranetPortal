@@ -350,7 +350,10 @@
 
         if ($("#selStatusUpdate").val() != "")
         {
-            needRefreshShortSale = true;
+            if(typeof UpdateMortgageStatus != "undefined")
+                UpdateMortgageStatus($("#selType1").val(), $("#selStatusUpdate option:selected").text(), $("#selCategory").val());
+
+            //needRefreshShortSale = true;
         } else
         {
             needRefreshShortSale = false;
