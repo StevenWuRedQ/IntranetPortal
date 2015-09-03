@@ -469,7 +469,7 @@
 
                 <%-- 50px --%>
                 <div style="margin-top: 50px">
-                    <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Legal Or DisplayMode = ActivityLogMode.Construction Or DisplayMode = ActivityLogMode.Eviction Then%>
+                    <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Legal Or DisplayMode = ActivityLogMode.Construction Or DisplayMode = ActivityLogMode.Eviction Or DisplayMode = ActivityLogMode.Title Then%>
                     <div>Date of Comment:</div>
                     <div class="border_under_line" style="height: 80px">
                         <dx:ASPxDateEdit ID="ASPxDateEdit1" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>

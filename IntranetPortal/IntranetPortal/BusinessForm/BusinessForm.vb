@@ -4,6 +4,7 @@
     Public Property DefaultControl As BusinessControl
     Public Property Controls As List(Of BusinessControl)
     Public Property ListControl As String
+    Public Property ShowActivityLog As Boolean
 
     Private Shared _instance As BusinessForm
 
@@ -21,9 +22,11 @@
         Me.Controls.Add(New BusinessControl() With {
                         .Name = "Title",
                         .BusinessData = "TitleCase",
-                        .AscxFile = "~/TitleUI/TitleTab.ascx"
+                        .AscxFile = "~/TitleUI/TitleTab.ascx",
+                        .ActivityLogMode = ActivityLogs.ActivityLogMode.Title
                     })
         Me.ListControl = "~/TitleUI/TitleCaseList.ascx"
+        Me.ShowActivityLog = True
         Me.DefaultControl = Me.Controls(0)
     End Sub
 

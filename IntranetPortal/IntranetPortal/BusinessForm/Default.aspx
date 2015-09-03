@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="Default.aspx.vb" Inherits="IntranetPortal.BusinessFormDefault" %>
 
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
+<%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -101,59 +102,172 @@
                             </div>
                         </div>
 
-                         <script type="text/javascript">
-                             var FormControl = {
-                                 CurrentTab: {
-                                     Name: null,
-                                     BusinessData:null
-                                 },
-                                 InitTab: function (name, data) {                                     
-                                     this.CurrentTab.Name = name;
-                                     this.CurrentTab.BusinessData = data;                                     
-                                 },
-                                 LoadData: function (dataId) {
-                                     var tab = this.CurrentTab;
-                                     var url = "/api/BusinessForm/" + tab.BusinessData + "/" + dataId
-                                     $.ajax({
-                                         type: "GET",
-                                         url: url,
-                                         dataType: 'json',
-                                         success: function (data) {
-                                             angular.element(document.getElementById(tab.Name + 'Controller')).scope().Load(data);                                             
-                                         },
-                                         error: function (data) {
-                                             alert("Failed to load data." + data)
-                                         }
-                                     });
-                                 },
-                                 SaveData: function () {
-                                     var tab = this.CurrentTab;
-                                     var data = angular.element(document.getElementById(tab.Name + 'Controller')).scope().Get();
+                        <script type="text/javascript">
+                            var FormControl = {
+                                CurrentTab: {
+                                    Name: null,
+                                    BusinessData: null
+                                },
+                                InitTab: function (name, data) {
+                                    this.CurrentTab.Name = name;
+                                    this.CurrentTab.BusinessData = data;
+                                },
+                                LoadData: function (dataId) {
+                                    var tab = this.CurrentTab;
+                                    var url = "/api/BusinessForm/" + tab.BusinessData + "/" + dataId
+                                    $.ajax({
+                                        type: "GET",
+                                        url: url,
+                                        dataType: 'json',
+                                        success: function (data) {
+                                            console.log(data);
+                                            angular.element(document.getElementById(tab.Name + 'Controller')).scope().Load(data);
+                                        },
+                                        error: function (data) {
+                                            alert("Failed to load data." + data)
+                                        }
+                                    });
+                                },
+                                SaveData: function () {
+                                    var tab = this.CurrentTab;
+                                    var data = angular.element(document.getElementById(tab.Name + 'Controller')).scope().Get();
+                                    console.log(data);
+                                    var url = "/api/BusinessForm/"
+                                    $.ajax({
+                                        type: "POST",
+                                        url: url,
+                                        data:JSON.stringify(data),
+                                        dataType: 'json',
+                                        contentType: "application/json",
+                                        success: function (data) {
+                                            alert("Save successful.")
+                                        },
+                                        error: function (data) {
+                                            alert("Failed to save data." + data);
+                                        }
+                                    });
+                                }
+                            }
 
-                                     var url = "/api/BusinessForm/"
-                                     $.ajax({
-                                         type: "POST",
-                                         url: url,
-                                         data:data,
-                                         dataType: 'json',
-                                         success: function (data) {
-                                             alert("Save successful.")
-                                         },
-                                         error: function (data) {
-                                             alert("Failed to save data." + data);
-                                         }
-                                     });
-                                 }
-                             }
-
-                             $(function () {
-                                 FormControl.InitTab('<%= FormData.DefaultControl.Name%>', '<%= FormData.DefaultControl.BusinessData%>');
+                            $(function () {
+                                FormControl.InitTab('<%= FormData.DefaultControl.Name%>', '<%= FormData.DefaultControl.BusinessData%>');
                              });
                         </script>
 
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
+
+            <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9" PaneStyle-Paddings-Padding="0px" Name="LogPanel" Visible="false">
+                <PaneStyle BackColor="#F9F9F9">
+                    <Paddings Padding="0px"></Paddings>
+                </PaneStyle>
+                <ContentCollection>
+                    <dx:SplitterContentControl>
+                        <div style="font-size: 12px; color: #9fa1a8;">
+                            <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
+                                <li class="short_sale_head_tab activity_light_blue">
+                                    <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
+                                        <i class="fa fa-history head_tab_icon_padding"></i>
+                                        <div class="font_size_bold">Activity Log</div>
+                                    </a>
+                                </li>
+                                <li style="margin-right: 30px; color: #7396a9; float: right">
+                                    <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
+                                </li>
+                            </ul>
+                            <dx:ASPxCallbackPanel runat="server" ID="cbpLogs" ClientInstanceName="cbpLogs" OnCallback="cbpLogs_Callback">
+                                <PanelCollection>
+                                    <dx:PanelContent>
+                                        <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
+                                    </dx:PanelContent>
+                                </PanelCollection>
+                            </dx:ASPxCallbackPanel>
+
+                            <!-- Follow up function  -->
+                            <script type="text/javascript">
+
+                                function OnCallbackMenuClick(s, e) {
+
+                                    if (e.item.name == "Custom") {
+                                        ASPxPopupSelectDateControl.PerformCallback("Show");
+                                        ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
+                                        e.processOnServer = false;
+                                        return;
+                                    }
+
+                                    SetFollowUp(e.item.name)
+                                    e.processOnServer = false;
+                                }
+
+                                function SetFollowUp(type, dateSelected) {
+                                    if (typeof dateSelected == 'undefined')
+                                        dateSelected = new Date();
+
+                                    var fileData = {
+                                        "bble": leadsInfoBBLE,
+                                        "type": type,
+                                        "dtSelected": dateSelected
+                                    };
+                                }
+
+                            </script>
+
+                            <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
+                                AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+                                ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                <ItemStyle Paddings-PaddingLeft="20px">
+                                    <Paddings PaddingLeft="20px"></Paddings>
+                                </ItemStyle>
+
+                                <Paddings PaddingTop="15px" PaddingBottom="18px"></Paddings>
+                                <Items>
+                                    <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
+                                    <dx:MenuItem Text="Next Week" Name="nextWeek"></dx:MenuItem>
+                                    <dx:MenuItem Text="30 Days" Name="thirtyDays">
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="60 Days" Name="sixtyDays">
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Custom" Name="Custom">
+                                    </dx:MenuItem>
+                                </Items>
+                                <ClientSideEvents ItemClick="OnCallbackMenuClick" />
+                            </dx:ASPxPopupMenu>
+                            <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="360px" Height="250px"
+                                MaxWidth="800px" MaxHeight="150px" MinHeight="150px" MinWidth="150px" ID="pcMain"
+                                HeaderText="Select Date" Modal="false"
+                                runat="server" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
+                                <ContentCollection>
+                                    <dx:PopupControlContentControl runat="server" ID="pcMainPopupControl">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="true"></dx:ASPxCalendar>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
+                                                    <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                                        <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();SetFollowUp('customDays',callbackCalendar.GetSelectedDate());}"></ClientSideEvents>
+                                                    </dx:ASPxButton>
+                                                    &nbsp;
+                                                    <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                                        <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents>
+                                                    </dx:ASPxButton>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </dx:PopupControlContentControl>
+                                </ContentCollection>
+                            </dx:ASPxPopupControl>
+                        </div>
+                    </dx:SplitterContentControl>
+                </ContentCollection>
+            </dx:SplitterPane>
+
+
+
+
         </Panes>
     </dx:ASPxSplitter>
 

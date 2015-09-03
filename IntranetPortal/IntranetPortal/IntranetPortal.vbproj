@@ -569,6 +569,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CodeFolder\Team.vb" />
+    <Compile Include="CodeFolder\TitleManage.vb" />
     <Compile Include="CodeFolder\UserAppointment.vb" />
     <Compile Include="CodeFolder\UserInTeam.vb" />
     <Compile Include="CodeFolder\UserMessage.vb" />

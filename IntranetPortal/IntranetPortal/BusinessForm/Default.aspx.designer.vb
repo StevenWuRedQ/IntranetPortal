@@ -57,4 +57,67 @@ Partial Public Class BusinessFormDefault
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DocumentsUI As Global.IntranetPortal.DocumentsUI
+
+    '''<summary>
+    '''cbpLogs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbpLogs As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+
+    '''<summary>
+    '''ActivityLogs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
+
+    '''<summary>
+    '''ASPxPopupCallBackMenu2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupCallBackMenu2 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+
+    '''<summary>
+    '''pcMain control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pcMain As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''pcMainPopupControl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pcMainPopupControl As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+
+    '''<summary>
+    '''ASPxCalendar1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxCalendar1 As Global.DevExpress.Web.ASPxEditors.ASPxCalendar
+
+    '''<summary>
+    '''ASPxButton1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 End Class

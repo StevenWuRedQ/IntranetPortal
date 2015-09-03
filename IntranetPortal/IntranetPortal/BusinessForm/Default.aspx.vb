@@ -26,6 +26,12 @@
         FormData = BusinessForm.Instance("title")
         BusinessList = Page.LoadControl(FormData.ListControl)
         contentSplitter.GetPaneByName("listPanel").Controls.Add(BusinessList)
+
+        If FormData.ShowActivityLog Then
+            contentSplitter.GetPaneByName("LogPanel").Visible = True
+            ActivityLogs.DisplayMode = FormData.DefaultControl.ActivityLogMode
+        End If
+
     End Sub
 
     Protected Sub rptBusinessControl_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)
@@ -47,4 +53,8 @@
 
         Return ""
     End Function
+
+    Protected Sub cbpLogs_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        ActivityLogs.BindData(e.Parameter)
+    End Sub
 End Class

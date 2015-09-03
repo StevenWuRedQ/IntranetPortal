@@ -5,7 +5,8 @@ Public Class BusinessControl
     Public Property AscxFile As String
     Public Property BusinessData As String
     Public Property Visible As Boolean
-
+    Public Property ActivityLogMode As ActivityLogs.ActivityLogMode
+    Public Property ActivityManager As String
 End Class
 
 Public Class BusinessListControl

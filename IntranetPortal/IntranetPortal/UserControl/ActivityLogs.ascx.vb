@@ -31,6 +31,10 @@ Public Class ActivityLogs
             ActivityLogProvider = New ConstructionManage(True)
         End If
 
+        If DisplayMode = ActivityLogMode.Title Then
+            ActivityLogProvider = New TitleManage(True)
+        End If
+
         If Not Page.IsPostBack Then
             If ActivityLogProvider IsNot Nothing Then
                 If ActivityLogProvider.LogCategoryFilter IsNot Nothing Then
@@ -1091,6 +1095,7 @@ Public Class ActivityLogs
         Legal
         Construction
         Eviction
+        Title
     End Enum
 
     Protected Sub EmailBody2_Load(sender As Object, e As EventArgs)
