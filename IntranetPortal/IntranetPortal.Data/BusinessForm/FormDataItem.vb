@@ -7,7 +7,8 @@ Public Class FormDataItem
     Public ReadOnly Property BusinessData As BusinessDataBase
         Get
             If _businessData Is Nothing Then
-                _businessData = BusinessDataBase.Create(FormName)
+                _businessData = CreateBusinessDataInstance()
+                _businessData.LoadData(DataId)
             End If
 
             Return _businessData
@@ -37,6 +38,22 @@ Public Class FormDataItem
             Me.Tag = BusinessData.Save(Me)
         End Using
     End Sub
+
+    Private Function CreateBusinessDataInstance() As BusinessDataBase
+        Dim myobj = New BusinessDataBase
+
+        If Not String.IsNullOrEmpty(FormName) Then
+            Dim t = Type.GetType("IntranetPortal.Data." & FormName)
+            If t IsNot Nothing Then
+                Dim obj = Activator.CreateInstance(t)
+                If obj IsNot Nothing Then
+                    myobj = obj
+                End If
+            End If
+        End If
+
+        Return myobj
+    End Function
 End Class
 
 Public Class FormDataItemMetaData

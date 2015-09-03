@@ -29,6 +29,7 @@ Public Class TitleManage
             Dim caseData As New JObject
             caseData.Item("BBLE") = bble
             caseData.Item("CaseName") = caseName
+            caseData.Item("Owner") = GetManager()
 
             Dim dataItem As New FormDataItem
             dataItem.FormName = FormName
@@ -39,6 +40,15 @@ Public Class TitleManage
 
         LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Start Title progress."), bble, LeadsActivityLog.LogCategory.PublicUpdate.ToString, LeadsActivityLog.EnumActionType.InProcess)
     End Sub
+
+    Public Shared Function GetManager() As String
+        Dim mgrs = Roles.GetUsersInRole(MgrRoleName)
+        If mgrs.Count > 0 Then
+            Return mgrs(0)
+        End If
+
+        Return Nothing
+    End Function
 
     Public Shared Function GetMyCases(userName As String) As TitleCase()
         If IsManager(userName) Then

@@ -55,15 +55,21 @@
             //gridCase.GetValuesOnCustomCallback(gridCase.GetFocusedRowIndex(), OnGetRowValues);
         }
         else {
-            leadsInfoBBLE = values;
+            console.log(values);
             console.log(leadsInfoBBLE);
 
             if (FormControl)
             {
-                FormControl.LoadData(1);
-                return;
+                var tmp = values.split("|");
+                if (tmp.length > 0)
+                {
+                    leadsInfoBBLE = tmp[0];
+                    FormControl.LoadData(tmp[1]);
+                    return;
+                }                
             }
 
+            leadsInfoBBLE = values;
             LoadCaseData(leadsInfoBBLE);
                         
             if (cbpLogs)

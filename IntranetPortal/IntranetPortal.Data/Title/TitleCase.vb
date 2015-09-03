@@ -73,13 +73,13 @@
             FormItemId = itemData.DataId
             BBLE = jsonCase.Item("BBLE")
             CaseName = jsonCase.Item("CaseName")
+            Owner = jsonCase.Item("Owner")
             CreateDate = DateTime.Now
             CreateBy = itemData.CreateBy
 
             Return
         End If
 
-        CaseName = jsonCase.Item("CaseName")
         UpdateBy = itemData.UpdateBy
         UpdateDate = DateTime.Now
     End Sub

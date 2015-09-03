@@ -102,11 +102,14 @@
                             </div>
                         </div>
 
-                        <script type="text/javascript">
+                        <script type="text/javascript">                            
                             var FormControl = {
+                                BBLE: null,
+                                ShowActivityLog: <%= If(FormData.ShowActivityLog, "true", "false")%>,
                                 CurrentTab: {
                                     Name: null,
-                                    BusinessData: null
+                                    BusinessData: null,
+                                    ActivityLogMode:null
                                 },
                                 InitTab: function (name, data) {
                                     this.CurrentTab.Name = name;
@@ -127,6 +130,16 @@
                                             alert("Failed to load data." + data)
                                         }
                                     });
+                                    this.LoadActivityLog();                                    
+                                },
+                                LoadActivityLog:function()
+                                {
+                                    if(this.ShowActivityLog)
+                                    {
+                                        this.BBLE = leadsInfoBBLE;
+                                        if(typeof cbpLogs != "undefined")
+                                            cbpLogs.PerformCallback(this.BBLE);
+                                    }
                                 },
                                 SaveData: function () {
                                     var tab = this.CurrentTab;
