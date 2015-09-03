@@ -164,14 +164,15 @@
 <script>
     var app = angular.module("PortalApp")
     app.controller("TitleController", function ($scope, ptCom) {
-        $scope.FromData = {}
+        $scope.FormData = {}
         $scope.ReloadedData = {}
         $scope.Load = function (data) {
-            $scope.FromData = data;
+            $scope.FormData = data.FormData;
             $scope.ReloadedData = {};
+            $scope.$apply();
         }
         $scope.Get = function () {
-            return $scope.FromData;
+            return $scope.FormData;
         }
     })
 </script>
