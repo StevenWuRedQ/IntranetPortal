@@ -540,7 +540,10 @@
                             },
                             CheckingSuccess: function(result){
                                 var comment = $("#selType1").val() + "/" + $("#selCategory").val() + " - " + $("#selStatusUpdate").val() + "<br />";
-                                comment += result;
+                                
+                                if(result)
+                                    comment += result;
+
                                 AddActivityLog(comment);                             
                             },
                             CheckingCancel: function(){
