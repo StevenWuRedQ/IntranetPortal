@@ -1009,6 +1009,11 @@ Public Class ActivityLogs
         'BindData(hfBBLE.Value)
     End Sub
 
+    Protected Sub addLogsCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        Dim comments = e.Parameter
+        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.Comments)
+    End Sub
+
     'Set as task popup call back
     Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
         Dim popup = CType(source, ASPxPopupControl)
@@ -1326,4 +1331,5 @@ Public Class ActivityLogs
         End If
     End Sub
 
+  
 End Class

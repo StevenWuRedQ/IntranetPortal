@@ -41,6 +41,15 @@ Partial Public Class ActivityLogs
     Protected WithEvents addCommentsCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 
     '''<summary>
+    '''addLogsCallback control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents addLogsCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+
+    '''<summary>
     '''hfBBLE control.
     '''</summary>
     '''<remarks>

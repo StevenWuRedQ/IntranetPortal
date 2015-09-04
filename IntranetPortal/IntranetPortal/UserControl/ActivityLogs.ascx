@@ -365,8 +365,7 @@
 
     function AddActivityLog(comments)
     {
-        EmailBody.SetHtml(comments);
-        InsertNewComments();
+        addLogsCallbackClient.PerformCallback(comments);
     }
 
     function OnCommentsKeyDown(e) {
@@ -540,8 +539,7 @@
                                 }
                             },
                             CheckingSuccess: function(result){
-                                EmailBody.SetHtml(result);
-                                InsertNewComments();
+                                AddActivityLog(result);                                
                             },
                             CheckingCancel: function(){
                                 $("#selStatusUpdate").val("");
@@ -628,6 +626,11 @@
     <dx:ASPxCallback runat="server" ID="addCommentsCallback" ClientInstanceName="addCommentsCallbackClient" OnCallback="addCommentsCallback_Callback">
         <ClientSideEvents EndCallback="function(s,e){gridTrackingClient.Refresh();EmailBody.SetHtml(''); document.getElementById('txtComments').value='';}" />
     </dx:ASPxCallback>
+
+    <dx:ASPxCallback runat="server" ID="addLogsCallback" ClientInstanceName="addLogsCallbackClient" OnCallback="addLogsCallback_Callback">
+        <ClientSideEvents EndCallback="function(s,e){gridTrackingClient.Refresh();}" />
+    </dx:ASPxCallback>
+    
     <%-------end-----%>
     <%-- log tables--%>
     <div style="width: 100%; padding: 0px; display: block;">
