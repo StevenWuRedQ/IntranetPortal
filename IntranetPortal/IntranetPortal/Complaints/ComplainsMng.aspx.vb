@@ -1,11 +1,13 @@
 ﻿Public Class ComplainsMng
     Inherits System.Web.UI.Page
 
+    Public Property ComplaintsAmount As Integer
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
             BindGrid()
 
-            gdComplainsResult.FilterExpression = "[Status] LIKE '%ACT%'"
+            'gdComplainsResult.FilterExpression = "[Status] LIKE '%ACT%'"
         End If
     End Sub
 
@@ -16,21 +18,22 @@
     End Sub
 
     Private Sub BindGrid()
-        Dim lists = Data.CheckingComplain.GetAllComplains
+        Dim lists = Data.CheckingComplain.GetLightAllComplains
         If lists IsNot Nothing Then
-            gdComplains.DataSource = Data.CheckingComplain.GetAllComplains
+            ComplaintsAmount = lists.Count
+            gdComplains.DataSource = lists
             gdComplains.DataBind()
         End If
     End Sub
 
     Private Sub BindResult()
-        Dim result = Data.CheckingComplain.GetComplainsResult
+        'Dim result = Data.CheckingComplain.GetComplainsResult
 
-        If result IsNot Nothing Then
+        'If result IsNot Nothing Then
 
-            gdComplainsResult.DataSource = result
-            gdComplainsResult.DataBind()
-        End If
+        '    gdComplainsResult.DataSource = result
+        '    gdComplainsResult.DataBind()
+        'End If
     End Sub
 
     Protected Sub gdComplains_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)

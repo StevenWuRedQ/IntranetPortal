@@ -21,7 +21,7 @@
             var key = document.getElementById("gdComplainKey").value;
             key = key.trim();
             if (key == "") {
-                gdComplainsResult.ClearFilter();
+                //gdComplainsResult.ClearFilter();
                 return;
             }
 
@@ -69,8 +69,7 @@
             //gdComplainsResult.Refresh();
 
             //refresh data grid
-            Complaints.Refresh();
-
+            Complaints.Refresh();          
             needRefreshResult = false;
         }
 
@@ -205,7 +204,7 @@
         </div>
         <div class="row form_border" style="">
             <div class="form_header">
-                Owned Properties Currently Being Watch &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplains'))"></i>
+                Owned Properties Currently Being Watch&nbsp;<span class="notification">(<%= ComplaintsAmount %>)</span>&nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplains'))"></i>
                 <div class="form-inline" style="float: right; font-weight: normal">
                     <small>(**Click on BBLE to view active complaints**)</small>
                     <input type="text" style="margin-right: 10px" id="QuickSearch" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />

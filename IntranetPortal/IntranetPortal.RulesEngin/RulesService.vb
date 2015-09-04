@@ -170,16 +170,16 @@ Public Class RulesService
         TimerTask(stateObj)
     End Sub
 
-    Public Sub StartRule(ruleName As String)
-        Dim stateObj = StateObjs.SingleOrDefault(Function(s) s.Rule.RuleName = ruleName)
+    Public Sub StartRule(ruleId As String)
+        Dim stateObj = StateObjs.SingleOrDefault(Function(s) s.Rule.RuleId.ToString = ruleId)
         If stateObj IsNot Nothing Then
             DisposeTimer(stateObj)
             RunTimer(stateObj.Rule, stateObj)
         End If
     End Sub
 
-    Public Sub StopRule(ruleName As String)
-        Dim stateObj = StateObjs.SingleOrDefault(Function(s) s.Rule.RuleName = ruleName)
+    Public Sub StopRule(ruleId As String)
+        Dim stateObj = StateObjs.SingleOrDefault(Function(s) s.Rule.RuleId.ToString = ruleId)
 
         If stateObj IsNot Nothing Then
             stateObj.Rule.Status = BaseRule.RuleStatus.Stoped

@@ -11,6 +11,19 @@ Partial Public Class CheckingComplain
         End Using
     End Function
 
+    Public Shared Function GetLightAllComplains() As List(Of CheckingComplain)
+        Using ctx As New ConstructionEntities
+            Return ctx.CheckingComplains.Select(Function(c) New With {c.BBLE, c.Address, c.TotalComplaints, c.ActiveComplaints, c.NotifyUsers, c.LastExecute, c.CreateBy}).ToList.Select(Function(c) New CheckingComplain With {
+                                                    .BBLE = c.BBLE,
+                                                    .Address = c.Address,
+                                                    .TotalComplaints = c.TotalComplaints,
+                                                    .ActiveComplaints = c.ActiveComplaints,
+                                                    .NotifyUsers = c.NotifyUsers,
+                                                    .LastExecute = c.LastExecute,
+                                                    .CreateBy = c.CreateBy}).ToList()
+        End Using
+    End Function
+
     Public Shared Function Instance(bble As String) As CheckingComplain
         Using ctx As New ConstructionEntities
             Return ctx.CheckingComplains.Find(bble)
@@ -164,6 +177,8 @@ Partial Public Class CheckingComplain
 
             Me.LastDataEntered = result.OrderByDescending(Function(r) r.DateEntered).FirstOrDefault.DateEntered
             Me.ComplaintsResult = result
+            Me.TotalComplaints = result.Length
+            Me.ActiveComplaints = result.Where(Function(a) a.Status = "ACT").Count
             Me.LastResultUpdate = DateTime.Now
             Me.Status = RunningStatus.Ready
             Me.Save("")

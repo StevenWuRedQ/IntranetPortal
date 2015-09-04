@@ -1,5 +1,6 @@
 ﻿Imports IntranetPortal.Data.RulesEngine
 Imports System.ServiceModel
+Imports System.Runtime.Serialization
 
 Public Class RulesEngineServices
     Implements IDisposable
@@ -98,7 +99,7 @@ End Class
 Namespace RulesEngine
 
     Partial Public Class BaseRule
-
+        <DataMember>
         Public Property StatusStr As String
             Get
                 Return Me.Status.ToString()
