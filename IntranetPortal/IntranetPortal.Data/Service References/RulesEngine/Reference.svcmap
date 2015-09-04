@@ -23,9 +23,9 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="988d9409-bf68-45d0-a4e5-35f0f60692f1" SourceId="1" SourceUrl="net.tcp://localhost:8001/RulesEngineService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="6fb33626-08ce-408c-ab86-7dc8b5db179c" SourceId="1" SourceUrl="net.tcp://localhost:8001/RulesEngineService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="bd4ca497-3ed3-41bd-8de1-bd6f05139a54" SourceId="1" SourceUrl="net.tcp://localhost:8001/RulesEngineService/mex" />
     <MetadataFile FileName="IntranetPortal.RulesEngine.xsd" MetadataType="Schema" ID="8960c928-ed50-417f-84c4-e9ab07d6d5c3" SourceId="1" SourceUrl="net.tcp://localhost:8001/RulesEngineService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="6fb33626-08ce-408c-ab86-7dc8b5db179c" SourceId="1" SourceUrl="net.tcp://localhost:8001/RulesEngineService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

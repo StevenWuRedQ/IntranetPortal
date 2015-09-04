@@ -541,7 +541,7 @@
                             },
                             CheckingSuccess: function(result){
                                 EmailBody.SetHtml(result);
-                                InsertNewComments();                                            
+                                InsertNewComments();
                             },
                             CheckingCancel: function(){
                                 $("#selStatusUpdate").val("");

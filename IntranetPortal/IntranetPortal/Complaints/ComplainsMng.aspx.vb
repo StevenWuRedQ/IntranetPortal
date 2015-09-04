@@ -48,6 +48,8 @@
             Dim bble = e.Parameters.Split("|")(1)
 
             If bble = "All" Then
+
+                'Dim result = Data.CheckingComplain.GetResultFromServices().ToJsonString
                 Dim name = User.Identity.Name
                 Dim callback = Sub()
                                    Try

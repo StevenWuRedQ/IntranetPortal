@@ -120,7 +120,6 @@ Public Class RulesService
 
         ' Save a reference for Dispose.
         stateObj.TimerReference = timerItem
-
     End Sub
 
     Private Sub TimerTask(ByVal StateObj As Object)
@@ -288,30 +287,30 @@ Public Class RulesService
 
         host = New ServiceHost(GetType(RulesEngineServices))
 
-        'host = New ServiceHost(GetType(RulesEngineServices), New Uri("net.tcp://localhost:8001/RulesEngineService"))
-        'Dim smb = host.Description.Behaviors.Find(Of ServiceMetadataBehavior)()
-        'If smb Is Nothing Then
-        '    smb = New ServiceMetadataBehavior
-        'End If
+        host = New ServiceHost(GetType(RulesEngineServices), New Uri("net.tcp://localhost:8001/RulesEngineService"))
+        Dim smb = host.Description.Behaviors.Find(Of ServiceMetadataBehavior)()
+        If smb Is Nothing Then
+            smb = New ServiceMetadataBehavior
+        End If
 
-        'smb.MetadataExporter.PolicyVersion = PolicyVersion.Policy15
-        'host.Description.Behaviors.Add(smb)
+        smb.MetadataExporter.PolicyVersion = PolicyVersion.Policy15
+        host.Description.Behaviors.Add(smb)
 
-        'Dim netTcp = New NetTcpBinding(SecurityMode.None, False)
-        'netTcp.CloseTimeout = TimeSpan.Parse("00:10:00")
-        'netTcp.OpenTimeout = TimeSpan.Parse("00:10:00")
-        'netTcp.SendTimeout = TimeSpan.Parse("00:10:00")
-        'netTcp.MaxBufferPoolSize = 2147483647
-        'netTcp.MaxBufferSize = 2147483647
-        'netTcp.MaxReceivedMessageSize = 2147483647
-        'netTcp.ReaderQuotas.MaxArrayLength = 2147483647
-        'netTcp.ReaderQuotas.MaxNameTableCharCount = 2147483647
-        'netTcp.ReaderQuotas.MaxStringContentLength = 2147483647
-        'netTcp.ReaderQuotas.MaxDepth = 2147483647
-        'netTcp.ReaderQuotas.MaxBytesPerRead = 2147483647
+        Dim netTcp = New NetTcpBinding(SecurityMode.None, False)
+        netTcp.CloseTimeout = TimeSpan.Parse("00:10:00")
+        netTcp.OpenTimeout = TimeSpan.Parse("00:10:00")
+        netTcp.SendTimeout = TimeSpan.Parse("00:10:00")
+        netTcp.MaxBufferPoolSize = 2147483647
+        netTcp.MaxBufferSize = 2147483647
+        netTcp.MaxReceivedMessageSize = 2147483647
+        netTcp.ReaderQuotas.MaxArrayLength = 2147483647
+        netTcp.ReaderQuotas.MaxNameTableCharCount = 2147483647
+        netTcp.ReaderQuotas.MaxStringContentLength = 2147483647
+        netTcp.ReaderQuotas.MaxDepth = 2147483647
+        netTcp.ReaderQuotas.MaxBytesPerRead = 2147483647
 
-        'Dim svrEndpoint As ServiceEndpoint = host.AddServiceEndpoint(GetType(IRulesEngineServices), netTcp, "")
-        'host.AddServiceEndpoint(ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexTcpBinding(), "mex")
+        Dim svrEndpoint As ServiceEndpoint = host.AddServiceEndpoint(GetType(IRulesEngineServices), netTcp, "")
+        host.AddServiceEndpoint(ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexTcpBinding(), "mex")
 
         host.Open()
 

@@ -21,7 +21,9 @@ Partial Public Class CheckingComplain
 
         Using client As New DataAPI.WCFMacrosClient
             Try
-                Return client.Get_DBO_Complaints_List(bble, String.IsNullOrEmpty(bble))
+                Dim result = client.Get_DBO_Complaints_List(bble, String.IsNullOrEmpty(bble))
+
+                Return result
             Catch ex As Exception
                 Core.SystemLog.LogError("Error in GetComplainsResult", ex, bble, "portal", bble)
                 Core.SystemLog.Log("Error in GetComplainsResult", ex.ToJsonString, SystemLog.LogCategory.Error, bble, "portal")
@@ -51,7 +53,7 @@ Partial Public Class CheckingComplain
 
             If Not String.IsNullOrEmpty(cp.LastComplaintsResult) Then
                 For Each item In cp.ComplaintsResult
-                    If Not result.Any(Function(r) r.BBLE = item.BBLE AndAlso r.ComplaintNumber = item.ComplaintNumber) Then
+                    If Not result.Any(Function(r) r.BBLE = item.BBLE AndAlso r.ComplaintNumber = item.ComplaintNumber) AndAlso item.Status.ToLower <> "none" Then
                         result.Add(item)
                     End If
                 Next
@@ -150,7 +152,7 @@ Partial Public Class CheckingComplain
         End If
 
         If result Is Nothing Then
-            result = GetComplainsResult(BBLE)
+            result = GetResultFromServices(BBLE)
         End If
 
         If result IsNot Nothing AndAlso result.Length > 0 Then

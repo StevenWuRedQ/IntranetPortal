@@ -46,6 +46,7 @@
   <xs:element name="DOB_Complaints_In" nillable="true" type="tns:DOB_Complaints_In" />
   <xs:complexType name="DOB_Complaints_out">
     <xs:sequence>
+      <xs:element minOccurs="0" name="AcquisitionDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Complaints_List" nillable="true" type="tns:ArrayOfComplaintsColumns" />
       <xs:element minOccurs="0" name="Complaints_Open" type="xs:int" />
@@ -66,6 +67,7 @@
   <xs:element name="ArrayOfComplaintsColumns" nillable="true" type="tns:ArrayOfComplaintsColumns" />
   <xs:complexType name="ComplaintsColumns">
     <xs:sequence>
+      <xs:element minOccurs="0" name="AcquisitionDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="AssignedTo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
@@ -101,6 +103,7 @@
   <xs:element name="ArrayOfSP_DOB_Complaints_By_BBLE_Result" nillable="true" type="tns:ArrayOfSP_DOB_Complaints_By_BBLE_Result" />
   <xs:complexType name="SP_DOB_Complaints_By_BBLE_Result">
     <xs:sequence>
+      <xs:element minOccurs="0" name="AcquisitionDate" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="AssignedTo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
@@ -121,6 +124,7 @@
       <xs:element minOccurs="0" name="Owner" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Priority" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RedNotes" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Reference311Number" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
@@ -136,6 +140,7 @@
   <xs:element name="ArrayOfSP_DOB_Complaints_History_By_BBLE_Result" nillable="true" type="tns:ArrayOfSP_DOB_Complaints_History_By_BBLE_Result" />
   <xs:complexType name="SP_DOB_Complaints_History_By_BBLE_Result">
     <xs:sequence>
+      <xs:element minOccurs="0" name="AcquisitionDate" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="AssignedTo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
@@ -154,9 +159,12 @@
       <xs:element minOccurs="0" name="LastInspection" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="LastUpdated" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Owner" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PreInspection" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Priority" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RedNotes" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Reference311Number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RowNum" nillable="true" type="xs:long" />
       <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Zip" nillable="true" type="xs:string" />

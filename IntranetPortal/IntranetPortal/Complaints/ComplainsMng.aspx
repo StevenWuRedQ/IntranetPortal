@@ -19,8 +19,8 @@
 
         function SearchComplains() {
             var key = document.getElementById("gdComplainKey").value;
-
-            if (key.trim() == "") {
+            key = key.trim();
+            if (key == "") {
                 gdComplainsResult.ClearFilter();
                 return;
             }
@@ -29,8 +29,8 @@
         }
 
         function FilterComplaints(key) {
-            Complaints.Filter(key);
-                       
+            Complaints.Filter(key.trim());
+
             //var filterCondition = "";
 
             //filterCondition = "[Address] LIKE '%" + key + "%'";
@@ -126,6 +126,10 @@
             padding-left: 5px;
         }
 
+        .important {
+            color:red;
+        }
+
         .form_border {
             border: 1px solid #808080;
             padding: 0px;
@@ -218,6 +222,10 @@
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn FieldName="Address">
                         </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="TotalComplaints" Caption="Total" Width="80px">
+                        </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="ActiveComplaints" Caption="Active" Width="80px">
+                        </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn FieldName="NotifyUsers">
                             <DataItemTemplate>
                                 <div style="display: inline-block" onclick="EditNotifyUsers('<%# Eval("BBLE")%>', this);"><%# Eval("NotifyUsers")%></div>
@@ -248,9 +256,9 @@
         </div>
         <div class="row form_border">
             <div class="form_header">
-                DOB Active Complaints Details &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplainResult'))"></i>
+                DOB Complaints Details &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplainResult'))"></i>
                 <div class="form-inline" style="float: right; font-weight: normal">
-                    <small style="color: red">(**Complaints records are set to refresh automatically at 7am, 1pm and 8pm daily.**)
+                    <small style="color: green">(**Complaints records are set to refresh automatically at 7am, 1pm and 8pm daily.**)
                     </small>
                     <i class="fa fa-refresh icon_btn tooltip-examples  grid_buttons" style="margin-left: 10px; margin-right: 10px; font-size: 19px" onclick="RefreshResult()" title="Refresh"></i>
                     <input type="text" style="margin-right: 10px" id="gdComplainKey" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchComplains(); return false;}" />
@@ -265,99 +273,108 @@
                 </script>
 
                 <script id="gridComplaitsDetail" type="text/html">
-                    <table class="" style="width: 100%; border: 1px solid #808080; line-height: 25px; white-space: normal">
+                    <table class="table" style="width: 100%; border: 1px solid #808080; line-height: 25px; white-space: normal; color:black">
                         <tr>
                             <td colspan="4" class="form_header">Complaints - {%= data.ComplaintNumber%} - Detail
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 150px;">Address
+                            <td style="width: 150px;">Address:
                             </td>
                             <td style="width: 35%">{%=data.Address%}
                             </td>
-                            <td style="width: 150px">DateEntered
+                            <td>Acquisition Date:
+                            </td>
+                            <td>{%=data.AcquisitionDate%}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Owner:
+                            </td>
+                            <td>{%=data.Owner%}
+                            </td>
+                            <td style="width: 150px">DateEntered:
                             </td>
                             <td style="width: 35%">{%=data.DateEntered%}
                             </td>
                         </tr>
                         <tr>
-                            <td>Owner
+                            <td style="color: red; vertical-align: top">Red Notes:
                             </td>
-                            <td>{%=data.Owner%}
+                            <td style="color: red">{%=data.RedNotes%}
                             </td>
-                            <td>AssignedTo
+                            <td>AssignedTo:
                             </td>
                             <td>{%=data.AssignedTo%}
                             </td>
                         </tr>
                         <tr>
-                            <td>Subject
+                            <td>Subject:
                             </td>
                             <td>{%=data.Subject%}
                             </td>
-                            <td>Zip
+                            <td>Zip:
                             </td>
                             <td>{%=data.Zip%}
                             </td>
                         </tr>
                         <tr>
-                            <td>RE
+                            <td>RE:
                             </td>
                             <td>{%=data.RE%}
                             </td>
-
-                            <td>Reference311Number
+                            <td>Reference311Number:
                             </td>
                             <td>{%=data.Reference311Number%}
                             </td>
                         </tr>
                         <tr>
-                            <td>LastInspection
+                            <td>LastInspection:
                             </td>
                             <td>{%=data.LastInspection%}
                             </td>
-                            <td style="width: 150px">Category
+                            <td style="width: 150px">Category:
                             </td>
                             <td>{%=data.CategoryCode%}
                             </td>
 
                         </tr>
                         <tr>
-                            <td>Disposition
+                            <td>Disposition:
                             </td>
                             <td>{%=data.Disposition%}
                             </td>
-                            <td>DispositionDetails
+                            <td>DispositionDetails:
                             </td>
                             <td>{%=data.DispositionDetails%}
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 150px">Comments
+                            <td style="width: 150px">Comments:
                             </td>
                             <td>{%=data.Comments%}
                             </td>
-                            <td>LastUpdated
+                            <td>LastUpdated:
                             </td>
                             <td>{%=data.LastUpdated%}
                             </td>
                         </tr>
                         <tr>
-                            <td>Priority
+                            <td>Priority:
                             </td>
                             <td>{%=data.Priority%}
                             </td>
-                            <td>BIN
+                            <td>BIN:
                             </td>
                             <td>{%=data.BIN%}
                             </td>
                         </tr>
                         <tr>
-                            <td>DOB Violation
+                            <td>DOB Violation:
                             </td>
                             <td>{%=data.DOBViolation%}
                             </td>
-                            <td>ECB Violation
+                            <td>ECB Violation:
                             </td>
                             <td>{%=data.ECBViolation%}
                             </td>
@@ -414,6 +431,9 @@
                                     //if (!e.component.getSelectedRowKeys().length)
                                     //    e.component.selectRowsByIndexes(0);
                                 },
+                                scrolling: {
+                                    mode: 'infinite'
+                                },
                                 columns: [{
                                     dataField: "Address",
                                     caption: "Address"
@@ -435,8 +455,8 @@
                                 }, {
                                     dataField: "Status",
                                     caption: "Status",
-                                    filterValue: 'ACT',
                                     width: '80px',
+                                    filter: '',
                                     dataType: "string"
                                 }, {
                                     dataField: 'BBLE',
@@ -449,6 +469,10 @@
                                 masterDetail: {
                                     enabled: true,
                                     template: "#gridComplaitsDetail"
+                                },
+                                onRowPrepared: function (info) {
+                                    if (info.data && info.data.RedNotes && info.data.RedNotes != "")
+                                        info.rowElement.addClass("important");
                                 }
                             }
 
@@ -473,7 +497,6 @@
                     }
 
                 </script>
-
 
                 <dx:ASPxGridView ID="gdComplainsResult" ClientInstanceName="gdComplainsResult" runat="server" Theme="Moderno" CssClass="table" Width="100%" ViewStateMode="Disabled" Visible="false"
                     KeyFieldName="BBLE;ComplaintNumber" OnDataBinding="gdComplainsResult_DataBinding" OnCustomCallback="gdComplainsResult_CustomCallback" OnHtmlRowPrepared="gdComplainsResult_HtmlRowPrepared">

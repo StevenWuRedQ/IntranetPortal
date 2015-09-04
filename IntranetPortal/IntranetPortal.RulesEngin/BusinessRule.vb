@@ -3,19 +3,34 @@ Imports MyIdealProp.Workflow.DBPersistence
 Imports System.Runtime.Serialization
 
 <KnownType(GetType(LegalFollowUpRule))>
+<KnownType(GetType(LeadsAndTaskRule))>
+<KnownType(GetType(EmailSummaryRule))>
+<KnownType(GetType(AgentActivitySummaryRule))>
+<KnownType(GetType(ShortSaleActivityReportRule))>
+<KnownType(GetType(LoopServiceRule))>
+<KnownType(GetType(CompleteTaskRule))>
+<KnownType(GetType(ExpiredAllReminderRule))>
+<KnownType(GetType(RecycleProcessRule))>
+<KnownType(GetType(PendingAssignRule))>
+<KnownType(GetType(AssignLeadsRule))>
+<KnownType(GetType(DOBComplaintsCheckingRule))>
 <DataContract>
 Public Class BaseRule
-
+    <DataMember>
+    Public Property RuleId As Guid
     <DataMember>
     Public Property RuleName As String
+    <DataMember>
     Public Property ExecuteOn As TimeSpan
+    <DataMember>
     Public Property Period As TimeSpan
     <DataMember>
     Public Property ExecuteNow As Boolean
+    <DataMember>
     Public Property Status As RuleStatus = RuleStatus.Stoped
 
     Public Sub New()
-
+        RuleId = Guid.NewGuid()
     End Sub
 
     Public Sub New(executeOn As TimeSpan, period As TimeSpan)

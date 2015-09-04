@@ -24,5 +24,7 @@ Partial Public Class CheckingComplain
     Public Property LastResultUpdate As Nullable(Of Date)
     Public Property IsOwned As Nullable(Of Boolean)
     Public Property Status As Nullable(Of Integer)
+    Public Property TotalComplaints As Nullable(Of Integer)
+    Public Property ActiveComplaints As Nullable(Of Integer)
 
 End Class

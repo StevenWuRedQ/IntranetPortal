@@ -13,6 +13,34 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetRule">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ruleName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRuleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine" minOccurs="0" name="GetRuleResult" nillable="true" type="q2:BaseRule" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRuleById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ruleId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRuleByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine" minOccurs="0" name="GetRuleByIdResult" nillable="true" type="q3:BaseRule" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetRulesString">
     <xs:complexType>
       <xs:sequence />
@@ -28,7 +56,7 @@
   <xs:element name="ExecuteRule">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="ruleName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ruleId" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -40,7 +68,7 @@
   <xs:element name="StartRule">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="ruleName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ruleId" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -52,7 +80,7 @@
   <xs:element name="StopRule">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="ruleName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ruleid" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

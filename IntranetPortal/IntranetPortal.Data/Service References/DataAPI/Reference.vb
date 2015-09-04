@@ -471,6 +471,9 @@ Namespace DataAPI
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AcquisitionDateField As Date
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private BBLEField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
@@ -504,6 +507,16 @@ Namespace DataAPI
             End Get
             Set
                 Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property AcquisitionDate() As Date
+            Get
+                Return Me.AcquisitionDateField
+            End Get
+            Set
+                Me.AcquisitionDateField = value
             End Set
         End Property
         
@@ -610,6 +623,9 @@ Namespace DataAPI
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AcquisitionDateField As Date
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private AddressField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
@@ -688,6 +704,16 @@ Namespace DataAPI
             End Get
             Set
                 Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property AcquisitionDate() As Date
+            Get
+                Return Me.AcquisitionDateField
+            End Get
+            Set
+                Me.AcquisitionDateField = value
             End Set
         End Property
         
@@ -944,6 +970,9 @@ Namespace DataAPI
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AcquisitionDateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private AddressField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
@@ -1004,6 +1033,9 @@ Namespace DataAPI
         Private REField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RedNotesField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private Reference311NumberField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
@@ -1022,6 +1054,16 @@ Namespace DataAPI
             End Get
             Set
                 Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property AcquisitionDate() As System.Nullable(Of Date)
+            Get
+                Return Me.AcquisitionDateField
+            End Get
+            Set
+                Me.AcquisitionDateField = value
             End Set
         End Property
         
@@ -1226,6 +1268,16 @@ Namespace DataAPI
         End Property
         
         <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property RedNotes() As String
+            Get
+                Return Me.RedNotesField
+            End Get
+            Set
+                Me.RedNotesField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
         Public Property Reference311Number() As String
             Get
                 Return Me.Reference311NumberField
@@ -1276,6 +1328,9 @@ Namespace DataAPI
         
         <System.NonSerializedAttribute()>  _
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AcquisitionDateField As System.Nullable(Of Date)
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private AddressField As String
@@ -1332,13 +1387,22 @@ Namespace DataAPI
         Private OwnerField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private PreInspectionField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private PriorityField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private REField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RedNotesField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private Reference311NumberField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RowNumField As System.Nullable(Of Long)
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private StatusField As String
@@ -1356,6 +1420,16 @@ Namespace DataAPI
             End Get
             Set
                 Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property AcquisitionDate() As System.Nullable(Of Date)
+            Get
+                Return Me.AcquisitionDateField
+            End Get
+            Set
+                Me.AcquisitionDateField = value
             End Set
         End Property
         
@@ -1540,6 +1614,16 @@ Namespace DataAPI
         End Property
         
         <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property PreInspection() As String
+            Get
+                Return Me.PreInspectionField
+            End Get
+            Set
+                Me.PreInspectionField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
         Public Property Priority() As String
             Get
                 Return Me.PriorityField
@@ -1560,12 +1644,32 @@ Namespace DataAPI
         End Property
         
         <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property RedNotes() As String
+            Get
+                Return Me.RedNotesField
+            End Get
+            Set
+                Me.RedNotesField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
         Public Property Reference311Number() As String
             Get
                 Return Me.Reference311NumberField
             End Get
             Set
                 Me.Reference311NumberField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property RowNum() As System.Nullable(Of Long)
+            Get
+                Return Me.RowNumField
+            End Get
+            Set
+                Me.RowNumField = value
             End Set
         End Property
         

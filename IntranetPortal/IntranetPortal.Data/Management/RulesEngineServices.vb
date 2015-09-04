@@ -18,29 +18,41 @@ Public Class RulesEngineServices
             Me.Open()
         End If
         'Dim r = rulesEngine.GetRulesString
-        Return rulesEngine.GetRules
+        Dim result As BaseRule() = rulesEngine.GetRules
+        Return result.Where(Function(r) Not String.IsNullOrEmpty(r.StatusStr)).ToArray
     End Function
 
+    Public Function StartRule(ruleId As String) As Boolean
+        If rulesEngine Is Nothing Then
+            Me.Open()
+        End If
+
+        rulesEngine.StartRule(ruleId)
+        Return True
+    End Function
+
+    Public Sub StopRule(ruleId As String)
+        rulesEngine.StopRule(ruleId)
+    End Sub
+
     Private Sub Open()
-        'Dim binding As New NetTcpBinding
-        'binding.Security.Mode = SecurityMode.None
-        'binding.CloseTimeout = TimeSpan.Parse("00:10:00")
-        'binding.OpenTimeout = TimeSpan.Parse("00:10:00")
-        'binding.SendTimeout = TimeSpan.Parse("00:10:00")
-        'binding.MaxBufferPoolSize = 2147483647
-        'binding.MaxBufferSize = 2147483647
-        'binding.MaxReceivedMessageSize = 2147483647
-        'binding.ReaderQuotas.MaxArrayLength = 2147483647
-        'binding.ReaderQuotas.MaxNameTableCharCount = 2147483647
-        'binding.ReaderQuotas.MaxStringContentLength = 2147483647
-        'binding.ReaderQuotas.MaxDepth = 2147483647
-        'binding.ReaderQuotas.MaxBytesPerRead = 2147483647
+        Dim binding As New NetTcpBinding
+        binding.Security.Mode = SecurityMode.None
+        binding.CloseTimeout = TimeSpan.Parse("00:10:00")
+        binding.OpenTimeout = TimeSpan.Parse("00:10:00")
+        binding.SendTimeout = TimeSpan.Parse("00:10:00")
+        binding.MaxBufferPoolSize = 2147483647
+        binding.MaxBufferSize = 2147483647
+        binding.MaxReceivedMessageSize = 2147483647
+        binding.ReaderQuotas.MaxArrayLength = 2147483647
+        binding.ReaderQuotas.MaxNameTableCharCount = 2147483647
+        binding.ReaderQuotas.MaxStringContentLength = 2147483647
+        binding.ReaderQuotas.MaxDepth = 2147483647
+        binding.ReaderQuotas.MaxBytesPerRead = 2147483647
 
-        'Dim endpointId = EndpointIdentity.CreateDnsIdentity("RulesEngineService")
-        'Dim myEndPoint As New EndpointAddress(New Uri(String.Format("net.tcp://{0}:8001/RulesEngineService", RulesEngineServer)), endpointId)
-        'rulesEngine = New RulesEngineServicesClient(binding, myEndPoint)
-
-        rulesEngine = New RulesEngineServicesClient
+        Dim endpointId = EndpointIdentity.CreateDnsIdentity("RulesEngineService")
+        Dim myEndPoint As New EndpointAddress(New Uri(String.Format("net.tcp://{0}:8001/RulesEngineService", RulesEngineServer)), endpointId)
+        rulesEngine = New RulesEngineServicesClient(binding, myEndPoint)
         rulesEngine.Open()
     End Sub
 
@@ -82,3 +94,20 @@ Public Class RulesEngineServices
 #End Region
 
 End Class
+
+Namespace RulesEngine
+
+    Partial Public Class BaseRule
+
+        Public Property StatusStr As String
+            Get
+                Return Me.Status.ToString()
+            End Get
+            Set(value As String)
+
+            End Set
+        End Property
+
+    End Class
+
+End Namespace

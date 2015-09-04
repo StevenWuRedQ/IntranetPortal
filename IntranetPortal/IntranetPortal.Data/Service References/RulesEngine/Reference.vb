@@ -19,7 +19,19 @@ Namespace RulesEngine
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="BaseRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
-     System.SerializableAttribute()>  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.RecycleProcessRule)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.LoopServiceRule)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.ShortSaleActivityReportRule)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.AgentActivitySummaryRule)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.EmailSummaryRule)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.LeadsAndTaskRule)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.LegalFollowUpRule)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.DOBComplaintsCheckingRule)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.AssignLeadsRule)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.PendingAssignRule)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.ExpiredAllReminderRule)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.CompleteTaskRule))>  _
     Partial Public Class BaseRule
         Inherits Object
         Implements System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
@@ -31,7 +43,19 @@ Namespace RulesEngine
         Private ExecuteNowField As Boolean
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ExecuteOnField As System.TimeSpan
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private PeriodField As System.TimeSpan
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RuleIdField As System.Guid
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private RuleNameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private StatusField As RulesEngine.BaseRule.RuleStatus
         
         <Global.System.ComponentModel.BrowsableAttribute(false)>  _
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
@@ -57,6 +81,45 @@ Namespace RulesEngine
         End Property
         
         <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ExecuteOn() As System.TimeSpan
+            Get
+                Return Me.ExecuteOnField
+            End Get
+            Set
+                If (Me.ExecuteOnField.Equals(value) <> true) Then
+                    Me.ExecuteOnField = value
+                    Me.RaisePropertyChanged("ExecuteOn")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Period() As System.TimeSpan
+            Get
+                Return Me.PeriodField
+            End Get
+            Set
+                If (Me.PeriodField.Equals(value) <> true) Then
+                    Me.PeriodField = value
+                    Me.RaisePropertyChanged("Period")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property RuleId() As System.Guid
+            Get
+                Return Me.RuleIdField
+            End Get
+            Set
+                If (Me.RuleIdField.Equals(value) <> true) Then
+                    Me.RuleIdField = value
+                    Me.RaisePropertyChanged("RuleId")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
         Public Property RuleName() As String
             Get
                 Return Me.RuleNameField
@@ -69,6 +132,19 @@ Namespace RulesEngine
             End Set
         End Property
         
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Status() As RulesEngine.BaseRule.RuleStatus
+            Get
+                Return Me.StatusField
+            End Get
+            Set
+                If (Me.StatusField.Equals(value) <> true) Then
+                    Me.StatusField = value
+                    Me.RaisePropertyChanged("Status")
+                End If
+            End Set
+        End Property
+        
         Public Event PropertyChanged As System.ComponentModel.PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
         
         Protected Sub RaisePropertyChanged(ByVal propertyName As String)
@@ -77,6 +153,116 @@ Namespace RulesEngine
                 propertyChanged(Me, New System.ComponentModel.PropertyChangedEventArgs(propertyName))
             End If
         End Sub
+        
+        <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+         System.Runtime.Serialization.DataContractAttribute(Name:="BaseRule.RuleStatus", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine")>  _
+        Public Enum RuleStatus As Integer
+            
+            <System.Runtime.Serialization.EnumMemberAttribute()>  _
+            Active = 0
+            
+            <System.Runtime.Serialization.EnumMemberAttribute()>  _
+            InProcess = 1
+            
+            <System.Runtime.Serialization.EnumMemberAttribute()>  _
+            Stoped = 2
+        End Enum
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="RecycleProcessRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class RecycleProcessRule
+        Inherits RulesEngine.BaseRule
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="LoopServiceRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class LoopServiceRule
+        Inherits RulesEngine.BaseRule
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ShortSaleActivityReportRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class ShortSaleActivityReportRule
+        Inherits RulesEngine.BaseRule
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="AgentActivitySummaryRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class AgentActivitySummaryRule
+        Inherits RulesEngine.BaseRule
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="EmailSummaryRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class EmailSummaryRule
+        Inherits RulesEngine.BaseRule
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="LeadsAndTaskRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class LeadsAndTaskRule
+        Inherits RulesEngine.BaseRule
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="LegalFollowUpRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class LegalFollowUpRule
+        Inherits RulesEngine.BaseRule
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="DOBComplaintsCheckingRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class DOBComplaintsCheckingRule
+        Inherits RulesEngine.BaseRule
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="AssignLeadsRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class AssignLeadsRule
+        Inherits RulesEngine.BaseRule
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="PendingAssignRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class PendingAssignRule
+        Inherits RulesEngine.BaseRule
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ExpiredAllReminderRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class ExpiredAllReminderRule
+        Inherits RulesEngine.BaseRule
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="CompleteTaskRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class CompleteTaskRule
+        Inherits RulesEngine.BaseRule
     End Class
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
@@ -89,6 +275,18 @@ Namespace RulesEngine
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IRulesEngineServices/GetRules", ReplyAction:="http://tempuri.org/IRulesEngineServices/GetRulesResponse")>  _
         Function GetRulesAsync() As System.Threading.Tasks.Task(Of RulesEngine.BaseRule())
         
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IRulesEngineServices/GetRule", ReplyAction:="http://tempuri.org/IRulesEngineServices/GetRuleResponse")>  _
+        Function GetRule(ByVal ruleName As String) As RulesEngine.BaseRule
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IRulesEngineServices/GetRule", ReplyAction:="http://tempuri.org/IRulesEngineServices/GetRuleResponse")>  _
+        Function GetRuleAsync(ByVal ruleName As String) As System.Threading.Tasks.Task(Of RulesEngine.BaseRule)
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IRulesEngineServices/GetRuleById", ReplyAction:="http://tempuri.org/IRulesEngineServices/GetRuleByIdResponse")>  _
+        Function GetRuleById(ByVal ruleId As String) As RulesEngine.BaseRule
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IRulesEngineServices/GetRuleById", ReplyAction:="http://tempuri.org/IRulesEngineServices/GetRuleByIdResponse")>  _
+        Function GetRuleByIdAsync(ByVal ruleId As String) As System.Threading.Tasks.Task(Of RulesEngine.BaseRule)
+        
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IRulesEngineServices/GetRulesString", ReplyAction:="http://tempuri.org/IRulesEngineServices/GetRulesStringResponse")>  _
         Function GetRulesString() As String
         
@@ -96,22 +294,22 @@ Namespace RulesEngine
         Function GetRulesStringAsync() As System.Threading.Tasks.Task(Of String)
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IRulesEngineServices/ExecuteRule", ReplyAction:="http://tempuri.org/IRulesEngineServices/ExecuteRuleResponse")>  _
-        Sub ExecuteRule(ByVal ruleName As String)
+        Sub ExecuteRule(ByVal ruleId As String)
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IRulesEngineServices/ExecuteRule", ReplyAction:="http://tempuri.org/IRulesEngineServices/ExecuteRuleResponse")>  _
-        Function ExecuteRuleAsync(ByVal ruleName As String) As System.Threading.Tasks.Task
+        Function ExecuteRuleAsync(ByVal ruleId As String) As System.Threading.Tasks.Task
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IRulesEngineServices/StartRule", ReplyAction:="http://tempuri.org/IRulesEngineServices/StartRuleResponse")>  _
-        Sub StartRule(ByVal ruleName As String)
+        Sub StartRule(ByVal ruleId As String)
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IRulesEngineServices/StartRule", ReplyAction:="http://tempuri.org/IRulesEngineServices/StartRuleResponse")>  _
-        Function StartRuleAsync(ByVal ruleName As String) As System.Threading.Tasks.Task
+        Function StartRuleAsync(ByVal ruleId As String) As System.Threading.Tasks.Task
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IRulesEngineServices/StopRule", ReplyAction:="http://tempuri.org/IRulesEngineServices/StopRuleResponse")>  _
-        Sub StopRule(ByVal ruleName As String)
+        Sub StopRule(ByVal ruleid As String)
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IRulesEngineServices/StopRule", ReplyAction:="http://tempuri.org/IRulesEngineServices/StopRuleResponse")>  _
-        Function StopRuleAsync(ByVal ruleName As String) As System.Threading.Tasks.Task
+        Function StopRuleAsync(ByVal ruleid As String) As System.Threading.Tasks.Task
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -153,6 +351,22 @@ Namespace RulesEngine
             Return MyBase.Channel.GetRulesAsync
         End Function
         
+        Public Function GetRule(ByVal ruleName As String) As RulesEngine.BaseRule Implements RulesEngine.IRulesEngineServices.GetRule
+            Return MyBase.Channel.GetRule(ruleName)
+        End Function
+        
+        Public Function GetRuleAsync(ByVal ruleName As String) As System.Threading.Tasks.Task(Of RulesEngine.BaseRule) Implements RulesEngine.IRulesEngineServices.GetRuleAsync
+            Return MyBase.Channel.GetRuleAsync(ruleName)
+        End Function
+        
+        Public Function GetRuleById(ByVal ruleId As String) As RulesEngine.BaseRule Implements RulesEngine.IRulesEngineServices.GetRuleById
+            Return MyBase.Channel.GetRuleById(ruleId)
+        End Function
+        
+        Public Function GetRuleByIdAsync(ByVal ruleId As String) As System.Threading.Tasks.Task(Of RulesEngine.BaseRule) Implements RulesEngine.IRulesEngineServices.GetRuleByIdAsync
+            Return MyBase.Channel.GetRuleByIdAsync(ruleId)
+        End Function
+        
         Public Function GetRulesString() As String Implements RulesEngine.IRulesEngineServices.GetRulesString
             Return MyBase.Channel.GetRulesString
         End Function
@@ -161,28 +375,28 @@ Namespace RulesEngine
             Return MyBase.Channel.GetRulesStringAsync
         End Function
         
-        Public Sub ExecuteRule(ByVal ruleName As String) Implements RulesEngine.IRulesEngineServices.ExecuteRule
-            MyBase.Channel.ExecuteRule(ruleName)
+        Public Sub ExecuteRule(ByVal ruleId As String) Implements RulesEngine.IRulesEngineServices.ExecuteRule
+            MyBase.Channel.ExecuteRule(ruleId)
         End Sub
         
-        Public Function ExecuteRuleAsync(ByVal ruleName As String) As System.Threading.Tasks.Task Implements RulesEngine.IRulesEngineServices.ExecuteRuleAsync
-            Return MyBase.Channel.ExecuteRuleAsync(ruleName)
+        Public Function ExecuteRuleAsync(ByVal ruleId As String) As System.Threading.Tasks.Task Implements RulesEngine.IRulesEngineServices.ExecuteRuleAsync
+            Return MyBase.Channel.ExecuteRuleAsync(ruleId)
         End Function
         
-        Public Sub StartRule(ByVal ruleName As String) Implements RulesEngine.IRulesEngineServices.StartRule
-            MyBase.Channel.StartRule(ruleName)
+        Public Sub StartRule(ByVal ruleId As String) Implements RulesEngine.IRulesEngineServices.StartRule
+            MyBase.Channel.StartRule(ruleId)
         End Sub
         
-        Public Function StartRuleAsync(ByVal ruleName As String) As System.Threading.Tasks.Task Implements RulesEngine.IRulesEngineServices.StartRuleAsync
-            Return MyBase.Channel.StartRuleAsync(ruleName)
+        Public Function StartRuleAsync(ByVal ruleId As String) As System.Threading.Tasks.Task Implements RulesEngine.IRulesEngineServices.StartRuleAsync
+            Return MyBase.Channel.StartRuleAsync(ruleId)
         End Function
         
-        Public Sub StopRule(ByVal ruleName As String) Implements RulesEngine.IRulesEngineServices.StopRule
-            MyBase.Channel.StopRule(ruleName)
+        Public Sub StopRule(ByVal ruleid As String) Implements RulesEngine.IRulesEngineServices.StopRule
+            MyBase.Channel.StopRule(ruleid)
         End Sub
         
-        Public Function StopRuleAsync(ByVal ruleName As String) As System.Threading.Tasks.Task Implements RulesEngine.IRulesEngineServices.StopRuleAsync
-            Return MyBase.Channel.StopRuleAsync(ruleName)
+        Public Function StopRuleAsync(ByVal ruleid As String) As System.Threading.Tasks.Task Implements RulesEngine.IRulesEngineServices.StopRuleAsync
+            Return MyBase.Channel.StopRuleAsync(ruleid)
         End Function
     End Class
 End Namespace

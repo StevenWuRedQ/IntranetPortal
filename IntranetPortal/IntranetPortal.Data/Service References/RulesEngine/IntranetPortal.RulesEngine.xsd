@@ -1,16 +1,125 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="RecycleProcessRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RecycleProcessRule" nillable="true" type="tns:RecycleProcessRule" />
+  <xs:complexType name="BaseRule">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExecuteNow" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ExecuteOn" type="ser:duration" />
+      <xs:element minOccurs="0" name="Period" type="ser:duration" />
+      <xs:element minOccurs="0" name="RuleId" type="ser:guid" />
+      <xs:element minOccurs="0" name="RuleName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="tns:BaseRule.RuleStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BaseRule" nillable="true" type="tns:BaseRule" />
+  <xs:simpleType name="BaseRule.RuleStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Active" />
+      <xs:enumeration value="InProcess" />
+      <xs:enumeration value="Stoped" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="BaseRule.RuleStatus" nillable="true" type="tns:BaseRule.RuleStatus" />
+  <xs:complexType name="LoopServiceRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LoopServiceRule" nillable="true" type="tns:LoopServiceRule" />
+  <xs:complexType name="ShortSaleActivityReportRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ShortSaleActivityReportRule" nillable="true" type="tns:ShortSaleActivityReportRule" />
+  <xs:complexType name="AgentActivitySummaryRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AgentActivitySummaryRule" nillable="true" type="tns:AgentActivitySummaryRule" />
+  <xs:complexType name="EmailSummaryRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EmailSummaryRule" nillable="true" type="tns:EmailSummaryRule" />
+  <xs:complexType name="LeadsAndTaskRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LeadsAndTaskRule" nillable="true" type="tns:LeadsAndTaskRule" />
+  <xs:complexType name="LegalFollowUpRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LegalFollowUpRule" nillable="true" type="tns:LegalFollowUpRule" />
+  <xs:complexType name="DOBComplaintsCheckingRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DOBComplaintsCheckingRule" nillable="true" type="tns:DOBComplaintsCheckingRule" />
+  <xs:complexType name="AssignLeadsRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AssignLeadsRule" nillable="true" type="tns:AssignLeadsRule" />
+  <xs:complexType name="PendingAssignRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PendingAssignRule" nillable="true" type="tns:PendingAssignRule" />
+  <xs:complexType name="ExpiredAllReminderRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ExpiredAllReminderRule" nillable="true" type="tns:ExpiredAllReminderRule" />
+  <xs:complexType name="CompleteTaskRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompleteTaskRule" nillable="true" type="tns:CompleteTaskRule" />
   <xs:complexType name="ArrayOfBaseRule">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="BaseRule" nillable="true" type="tns:BaseRule" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfBaseRule" nillable="true" type="tns:ArrayOfBaseRule" />
-  <xs:complexType name="BaseRule">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ExecuteNow" type="xs:boolean" />
-      <xs:element minOccurs="0" name="RuleName" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="BaseRule" nillable="true" type="tns:BaseRule" />
 </xs:schema>

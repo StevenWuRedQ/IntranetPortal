@@ -101,19 +101,26 @@
                                 <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
                             </div>
                         </div>
-
+                        <input type="hidden" id="CaseData" />
                         <script type="text/javascript">                            
                             var FormControl = {
                                 BBLE: null,
                                 ShowActivityLog: <%= If(FormData.ShowActivityLog, "true", "false")%>,
+                               
                                 CurrentTab: {
                                     Name: null,
                                     BusinessData: null,
+                                    EnableAutoSave:true,
                                     ActivityLogMode:null
                                 },
                                 InitTab: function (name, data) {
                                     this.CurrentTab.Name = name;
                                     this.CurrentTab.BusinessData = data;
+                                    this.CurrentTab.EnableAutoSave = true;
+
+                                    if(this.CurrentTab.EnableAutoSave){
+                                        ScopeAutoSave(angular.element(document.getElementById(name + 'Controller')).scope().Get, this.SaveData,"CaseData");
+                                    }
                                 },
                                 LoadData: function (dataId) {
                                     var tab = this.CurrentTab;
@@ -125,6 +132,11 @@
                                         success: function (data) {
                                             console.log(data);
                                             angular.element(document.getElementById(tab.Name + 'Controller')).scope().Load(data);
+
+                                            if(tab.EnableAutoSave){
+                                                //auto save reset data
+                                                ScopeResetCaseDataChange(angular.element(document.getElementById(tab.Name + 'Controller')).scope().Get);
+                                            }                                            
                                         },
                                         error: function (data) {
                                             alert("Failed to load data." + data)
