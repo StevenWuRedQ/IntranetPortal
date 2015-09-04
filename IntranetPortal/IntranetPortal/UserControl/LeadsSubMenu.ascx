@@ -189,7 +189,6 @@
     <ContentCollection>
         <dx:PopupControlContentControl runat="server" ID="popupContentInProcess" Visible="false">
             <asp:HiddenField runat="server" ID="hfInProcessBBLE" />
-
             <dx:ASPxCheckBoxList ID="lbSelectionMode" runat="server" ClientInstanceName="lbSelectionModeClient" AutoPostBack="false" Border-BorderStyle="None">
                 <Items>
                     <dx:ListEditItem Text="In House SS" Value="0" />
@@ -239,14 +238,12 @@
                     var index3 = selected.indexOf("3");
                     if (index3 >= 0) {
                         aspxPopupInprocessClient.Hide();
-                        //aspxPopupLegalInfoClient.Show();
-
+                        // aspxPopupLegalInfoClient.Show();                        
+                        // ASPLegalPopupClient.SetContentUrl('/LegalUI/LegalUI.aspx?InPopUp=true&bble=' + bble);
+                        // $("#LegalPopUp").modal();
+                        // ASPLegalPopupClient.Show();
                         var bble = $('#<%= hfInProcessBBLE.ClientID%>').val();
-
-                        ASPLegalPopupClient.SetContentUrl('/LegalUI/LegalUI.aspx?InPopUp=true&bble=' + bble);
-
-                        //$("#LegalPopUp").modal();
-                        ASPLegalPopupClient.Show();
+                        window.open('/LegalUI/LegalPreQuestions.aspx?bble=' + bble, 'LegalPreQuestion', "width=960, height=640");
                         aspxPopupInprocessClient.PerformCallback('Save');
                     } else {
 

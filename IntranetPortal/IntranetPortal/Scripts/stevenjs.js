@@ -1,5 +1,4 @@
-﻿
-if (typeof $().formatCurrency != 'function') {
+﻿if (typeof $().formatCurrency != 'function') {
     $.getScript("/Scripts/jquery.formatCurrency-1.1.0.js");
 }
 function clickCollapse(e) {
@@ -10,7 +9,6 @@ function clickCollapse(e) {
 
     collapse_doc_list($(e).parents(".doc_list_section:first"), isOpen);
 }
-
 function collapse_doc_list(div, isOpen) {
     var e = div.find(".collapse_btn_e");
     if (e.length == 0) {
@@ -28,7 +26,6 @@ function collapse_doc_list(div, isOpen) {
     debugger;
     div.find(".doc_collapse_div:first").css("display", toSwich ? "block" : "none");
 }
-
 function collapse_all(collapse_all) {
     $(".doc_list_section").each(function (ind) {
         collapse_doc_list($(this), collapse_all);
@@ -42,25 +39,21 @@ function d_alert(s) {
         alert(s);
     }
 }
-
 function d_assert(cond, s) {
     if (cond) {
         d_alert(s);
     }
 }
-
 function d_log(s) {
     if (wx_deubg) {
         console.log(s);
     }
 }
-
 function d_log_assert(cond, s) {
     if (cond) {
         d_log(s)
     }
 }
-
 /*when has value then is send object by value */
 function get_sub_property(obj, id_str, value) {
 
@@ -139,7 +132,6 @@ function expand_array_item(e) {
 
 
 }
-
 function control_array_btn(div, current_div) {
     var is_open = current_div.css("display") != "none";
     var btn = div.find(".expand_btn");
@@ -175,12 +167,6 @@ function control_array_div(div, is_open) {
 
 
 }
-
-
-
-/*
-*data_stauts == 1 then save data
-*/
 function ShortSaleDataBand(data_stauts) {
 
 
@@ -267,7 +253,6 @@ function format_input() {
     $(".ss_not_empty,.ss_ssn , .ss_zip,.ss_email, .ss_not_empty").blur();
     // return is_pass;
 }
-
 function pass_format_test(e_msg) {
     var is_pass = true;
     $(".ss_not_empty").each(function (ind) {
@@ -293,7 +278,6 @@ function pass_format_test(e_msg) {
     return is_pass;
 
 }
-
 function in_template(e) {
     return $(e).parents(".ss_array").css("display") == "none";
 }
@@ -397,12 +381,10 @@ function ss_field_data(elem, value) {
     }
     return null;
 }
-
 function onkeyUpSSN(e) {
     var value = $(e).val();
     $(e).val(fromatSSN(value));
 }
-
 function fromatSSN(value) {
     var ssn = value.replace(/[^\d]/g, "");
     var reslut = "";
@@ -544,7 +526,6 @@ function ShorSaleArrayDataBand(data_stauts) {
 
     });
 }
-
 function testClick() {
     d_alert("the radio_check_no_edit is " + radio_check_no_edit($("#checkYes_Bankaccount1")));
 }
@@ -616,7 +597,6 @@ function prepareArrayDivs(is_save) {
         }
     });
 }
-
 function expland_div(div) {
     control_array_div(div, true);
 }
@@ -657,8 +637,6 @@ function AddArraryItem(event, e) {
     format_input();
     return true;
 }
-
-
 function get_template_div(field) {
     var template = $(".ss_array[data-field='" + field + "']:contains('__index__1'):last");
     return template;
@@ -673,7 +651,6 @@ function addCloneTo(elem, add_div, index) {
     clone_div.insertAfter(add_div);
     return clone_div
 }
-
 function setArraryTitle(div, a_index) {
     var oldhtml = div.html();
     var _idx = parseInt(a_index) + 1;
@@ -685,7 +662,6 @@ function setArraryTitle(div, a_index) {
     return div;
 
 }
-
 function collectDate(objCase) {
     var obj = new Object();
 
@@ -749,7 +725,6 @@ function collectDate(objCase) {
     delete obj.pdf_check_no21;
     return obj;
 }
-
 function switch_edit_model(s, objCase) {
 
 
@@ -767,7 +742,6 @@ function switch_edit_model(s, objCase) {
         set_edit_model(false);
     }
 }
-
 function set_edit_model(is_edit) {
 
     var inputs = $(".ss_form_input, .input_with_check");
@@ -789,7 +763,6 @@ function set_edit_model(is_edit) {
     debugger;
     $(".short_sale_edit").val(is_edit ? "Save" : "Edit");
 }
-
 function format_phone(e) {
     var phone = $(e).val();
     if (phone == null || phone == "") {
@@ -809,13 +782,11 @@ function format_phone(e) {
     $(e).val("(" + numbers[0] + ") " + numbers[1] + "-" + numbers[2])
     return true;
 }
-
 function format_not_allow_empty(e) {
     var is_empty = $(e).val() == null || $(e).val() == "";
     format_error(e, is_empty);
     return !is_empty;
 }
-
 function format_error(e, is_error) {
     if (is_error) {
         $(e).addClass("ss_input_error");
@@ -823,7 +794,6 @@ function format_error(e, is_error) {
         $(e).removeClass("ss_input_error");
     }
 }
-
 function format_email(e) {
     if (is_empty(e)) {
         return true;
@@ -852,7 +822,6 @@ function format_zip(e) {
     format_error(e, !is_zip);
     return is_zip;
 }
-
 function initToolTips() {
     if ($(".tooltip-examples").tooltip) {
         $(".tooltip-examples").tooltip({
@@ -881,19 +850,6 @@ function initSelectByElem(e, dValue) {
     }
     return null;
 }
-
-$(document).ready(function () {
-    initToolTips();
-    $(".ss_disable").prop('disabled', 'disabled');
-    $(".ss_allow_eidt").prop("disabled", false);// allow alweays edit
-    $(document.body).on('change', '.ss_visable', function () {
-        var checked = this.checked; // $(e).porp("checked")
-        var filed = this.getAttribute("data-field")
-
-        $("[data-visiable='" + filed + "']").css("display", checked ? '' : "none");
-    });
-
-});
 function phone_InitAndKeyUp(s, e) {
     //d_alert("$(s.GetMainElement()) " + $(s.GetMainElement()).attr("id"));
     //console.log("$(s.GetMainElement()) " + $(s.GetMainElement()).attr("id") + "value is " + s.GetValue());
@@ -909,62 +865,6 @@ function init_visiable() {
         $(this).css("display", checked ? '' : "none");
     });
 }
-
-jQuery.fn.fitToParent = function (options) {
-
-    this.each(function () {
-
-        // Cache the resize element
-        var $el = jQuery(this);
-
-        // Get size parent (box to fit element in)
-        var $box;
-        if ($el.closest('.size-parent').length) {
-            $box = $el.closest('.size-parent');
-        } else {
-            $box = $el.parent();
-        }
-
-        // These are the defaults.
-        var settings = jQuery.extend({
-            height_offset: 0,
-            width_offset: 0,
-            box_height: $box.height(),
-            box_width: $box.width(),
-            callback: null
-        }, options);
-
-        // Setup box and element widths
-        var width = $el.width();
-        var height = $el.height();
-        var parentWidth = settings.box_width - settings.width_offset;
-        var parentHeight = settings.box_height - settings.height_offset;
-
-        // Maintin aspect ratio
-        var aspect = width / height;
-        var parentAspect = parentWidth / parentHeight;
-
-        // Resize to fit box
-        if (aspect > parentAspect) {
-            newWidth = parentWidth;
-            newHeight = (newWidth / aspect);
-        } else {
-            newHeight = parentHeight;
-            newWidth = newHeight * aspect;
-        }
-
-        // Set new size of element
-        $el.width(newWidth);
-        $el.height(newHeight);
-
-        // Fire callback
-        if (typeof (settings.callback) == "function") {
-            settings.callback(newWidth, newHeight);
-        }
-
-    });
-};
-
 function LoadMoreFrame(e) {
     var url = e.dataset.url;
     if (url.indexOf("BBLE") > 0) {
@@ -980,20 +880,6 @@ function LoadMoreFrame(e) {
     }
 
 }
-
-$(document).on("click", ".tab_button_a", function (e) {
-    $(".tab_button_a").parent().removeClass("active");
-    var list = $(".tab_button_a").parent();
-    var currentList = $(e.currentTarget).parent();
-
-    setTimeout(function () {
-
-        currentList.addClass("active");
-        var i = 0;
-    }, 500);
-
-});
-
 function OnStatusCategoryChange(selCategory, statusData) {
     var cat = selCategory.value;
     var selStatusUpdate = $(selCategory).parent().children(".selStatusUpdate");
@@ -1028,14 +914,6 @@ function OnStatusCategoryChange(selCategory, statusData) {
 
 
 }
-
-$(document).ready(function () {
-    $('body').tooltip({
-        selector: '.tooltip-examples',
-        placement: 'bottom'
-    });
-})
-
 function JSONToCSVConvertor(JSONData, ShowLabel, tFileName) {
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
@@ -1108,7 +986,6 @@ function JSONToCSVConvertor(JSONData, ShowLabel, tFileName) {
     link.click();
     document.body.removeChild(link);
 }
-
 function STDownloadFile(url,fileName)
 {
     var link = document.createElement("a");
@@ -1123,3 +1000,87 @@ function STDownloadFile(url,fileName)
     link.click();
     document.body.removeChild(link);
 }
+$(document).ready(function () {
+    initToolTips();
+    $(".ss_disable").prop('disabled', 'disabled');
+    $(".ss_allow_eidt").prop("disabled", false);// allow alweays edit
+    $(document.body).on('change', '.ss_visable', function () {
+        var checked = this.checked; // $(e).porp("checked")
+        var filed = this.getAttribute("data-field")
+
+        $("[data-visiable='" + filed + "']").css("display", checked ? '' : "none");
+    });
+
+});
+$(document).ready(function () {
+    $('body').tooltip({
+        selector: '.tooltip-examples',
+        placement: 'bottom'
+    });
+})
+$(document).on("click", ".tab_button_a", function (e) {
+    $(".tab_button_a").parent().removeClass("active");
+    var list = $(".tab_button_a").parent();
+    var currentList = $(e.currentTarget).parent();
+
+    setTimeout(function () {
+
+        currentList.addClass("active");
+        var i = 0;
+    }, 500);
+
+});
+jQuery.fn.fitToParent = function (options) {
+
+    this.each(function () {
+
+        // Cache the resize element
+        var $el = jQuery(this);
+
+        // Get size parent (box to fit element in)
+        var $box;
+        if ($el.closest('.size-parent').length) {
+            $box = $el.closest('.size-parent');
+        } else {
+            $box = $el.parent();
+        }
+
+        // These are the defaults.
+        var settings = jQuery.extend({
+            height_offset: 0,
+            width_offset: 0,
+            box_height: $box.height(),
+            box_width: $box.width(),
+            callback: null
+        }, options);
+
+        // Setup box and element widths
+        var width = $el.width();
+        var height = $el.height();
+        var parentWidth = settings.box_width - settings.width_offset;
+        var parentHeight = settings.box_height - settings.height_offset;
+
+        // Maintin aspect ratio
+        var aspect = width / height;
+        var parentAspect = parentWidth / parentHeight;
+
+        // Resize to fit box
+        if (aspect > parentAspect) {
+            newWidth = parentWidth;
+            newHeight = (newWidth / aspect);
+        } else {
+            newHeight = parentHeight;
+            newWidth = newHeight * aspect;
+        }
+
+        // Set new size of element
+        $el.width(newWidth);
+        $el.height(newHeight);
+
+        // Fire callback
+        if (typeof (settings.callback) == "function") {
+            settings.callback(newWidth, newHeight);
+        }
+
+    });
+};

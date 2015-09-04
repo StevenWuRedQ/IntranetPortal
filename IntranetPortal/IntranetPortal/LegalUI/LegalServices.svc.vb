@@ -91,7 +91,17 @@ Public Class LegalServices
     End Function
 
 #End Region
+    <OperationContract()>
+    <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
+    Public Function StartNewLegalCase(bble As String, casedata As String, createBy As String) As Boolean
+        If Not String.IsNullOrEmpty(bble) Then
+            LegalCaseManage.StartLegalRequest(bble, casedata, createBy)
+            Return True
+        Else
+            Return False
+        End If
 
+    End Function
 
 
 

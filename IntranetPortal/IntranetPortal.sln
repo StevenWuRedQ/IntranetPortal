@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal", "IntranetPortal\IntranetPortal.vbproj", "{6CA9F52B-C8D7-4098-8FB4-0626D61A9E32}"
 EndProject
@@ -28,42 +28,6 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.Data", "IntranetPortal.Data\IntranetPortal.Data.vbproj", "{51557141-4472-40E6-82BD-30275F702486}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 11
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://chrispc:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = IntranetPortal\\IntranetPortal.vbproj
-		SccProjectName1 = IntranetPortal
-		SccLocalPath1 = IntranetPortal
-		SccProjectUniqueName2 = IntranetPortal.ShortSale\\IntranetPortal.ShortSale.vbproj
-		SccProjectName2 = IntranetPortal.ShortSale
-		SccLocalPath2 = IntranetPortal.ShortSale
-		SccProjectUniqueName3 = IntranetPortal.Testing\\IntranetPortal.Testing.vbproj
-		SccProjectName3 = IntranetPortal.Testing
-		SccLocalPath3 = IntranetPortal.Testing
-		SccProjectUniqueName4 = IntranetPortal.Core\\IntranetPortal.Core.vbproj
-		SccProjectName4 = IntranetPortal.Core
-		SccLocalPath4 = IntranetPortal.Core
-		SccProjectUniqueName5 = IntranetPortal.RulesEngin\\IntranetPortal.RulesEngine.vbproj
-		SccProjectName5 = IntranetPortal.RulesEngin
-		SccLocalPath5 = IntranetPortal.RulesEngin
-		SccProjectUniqueName6 = RuleEngineManage\\RuleEngineManage.vbproj
-		SccProjectName6 = RuleEngineManage
-		SccLocalPath6 = RuleEngineManage
-		SccProjectUniqueName7 = RuleEngineService\\RuleEngineService.vbproj
-		SccProjectName7 = RuleEngineService
-		SccLocalPath7 = RuleEngineService
-		SccProjectUniqueName8 = IntranetPortal.Management\\IntranetPortal.Management.vbproj
-		SccProjectName8 = IntranetPortal.Management
-		SccLocalPath8 = IntranetPortal.Management
-		SccProjectUniqueName9 = IntranetPortal.Legal\\IntranetPortal.Legal.vbproj
-		SccProjectName9 = IntranetPortal.Legal
-		SccLocalPath9 = IntranetPortal.Legal
-		SccProjectUniqueName10 = IntranetPortal.Data\\IntranetPortal.Data.vbproj
-		SccProjectName10 = IntranetPortal.Data
-		SccLocalPath10 = IntranetPortal.Data
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -112,5 +76,41 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 11
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://chrispc:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = IntranetPortal\\IntranetPortal.vbproj
+		SccProjectName1 = IntranetPortal
+		SccLocalPath1 = IntranetPortal
+		SccProjectUniqueName2 = IntranetPortal.ShortSale\\IntranetPortal.ShortSale.vbproj
+		SccProjectName2 = IntranetPortal.ShortSale
+		SccLocalPath2 = IntranetPortal.ShortSale
+		SccProjectUniqueName3 = IntranetPortal.Testing\\IntranetPortal.Testing.vbproj
+		SccProjectName3 = IntranetPortal.Testing
+		SccLocalPath3 = IntranetPortal.Testing
+		SccProjectUniqueName4 = IntranetPortal.Core\\IntranetPortal.Core.vbproj
+		SccProjectName4 = IntranetPortal.Core
+		SccLocalPath4 = IntranetPortal.Core
+		SccProjectUniqueName5 = IntranetPortal.RulesEngin\\IntranetPortal.RulesEngine.vbproj
+		SccProjectName5 = IntranetPortal.RulesEngin
+		SccLocalPath5 = IntranetPortal.RulesEngin
+		SccProjectUniqueName6 = RuleEngineManage\\RuleEngineManage.vbproj
+		SccProjectName6 = RuleEngineManage
+		SccLocalPath6 = RuleEngineManage
+		SccProjectUniqueName7 = RuleEngineService\\RuleEngineService.vbproj
+		SccProjectName7 = RuleEngineService
+		SccLocalPath7 = RuleEngineService
+		SccProjectUniqueName8 = IntranetPortal.Management\\IntranetPortal.Management.vbproj
+		SccProjectName8 = IntranetPortal.Management
+		SccLocalPath8 = IntranetPortal.Management
+		SccProjectUniqueName9 = IntranetPortal.Legal\\IntranetPortal.Legal.vbproj
+		SccProjectName9 = IntranetPortal.Legal
+		SccLocalPath9 = IntranetPortal.Legal
+		SccProjectUniqueName10 = IntranetPortal.Data\\IntranetPortal.Data.vbproj
+		SccProjectName10 = IntranetPortal.Data
+		SccLocalPath10 = IntranetPortal.Data
 	EndGlobalSection
 EndGlobal
