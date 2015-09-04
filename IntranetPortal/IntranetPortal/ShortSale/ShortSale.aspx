@@ -79,7 +79,7 @@
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
                                                                 <% If Not HiddenTab Then%>
-                                                                <div class="legal-menu row" style="margin-left: 0px; margin-right: 0px">
+                                                                <div class="legal-menu row" style="margin-left: 0; margin-right: 0">
                                                                     <ul class="nav-bar nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
                                                                         <li class="active short_sale_head_tab">
                                                                             <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
@@ -412,7 +412,9 @@
                                                                         </div>
 
                                                                         <div class="pull-right">
-                                                                            <button type="button" class="btn btn-primary" ng-click="valuationSave()">Save </button>
+                                                                            <button type="button" class="btn btn-warning" ng-click="valuationCanl()">Cancel</button>
+                                                                            &nbsp;
+                                                                            <button type="button" class="btn btn-primary" ng-click="valuationSave()">Save</button>
                                                                             &nbsp;
                                                                             <button ng-show="Valuation_Show_Option==3" type="button" class="btn btn-success" ng-click="valuationCompl(valuation)">Complete</button>
                                                                         </div>
@@ -458,7 +460,7 @@
                                                                                 <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')" style="display: none"></i>
                                                                                 <i class="fa fa-key sale_head_button sale_head_button_left tooltip-examples" title="Enable Title" onclick="MoveToTitle()"></i>
                                                                                 <i class="fa fa-wrench sale_head_button sale_head_button_left tooltip-examples" title="Move to Construction" onclick="MoveToConstruction()"></i>
-                                                                                <%--                                                                                <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>--%>
+                                                                               
                                                                             </li>
                                                                         </ul>
                                                                         <dx:ASPxCallbackPanel runat="server" ID="cbpLogs" ClientInstanceName="cbpLogs" OnCallback="cbpLogs_Callback">
@@ -507,26 +509,18 @@
                                                                                                 <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="false"></dx:ASPxCalendar>
                                                                                                 <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" TimeSectionProperties-Visible="True" CssClass="edit_drop">
                                                                                                     <TimeSectionProperties Visible="True"></TimeSectionProperties>
-                                                                                                    <ClientSideEvents DropDown="function(s,e){ 
-                                                                    var d = new Date('May 1 2014 12:00:00');                                                                    
-                                                                    s.GetTimeEdit().SetValue(d);
-                                                                    }" />
+                                                                                                    <ClientSideEvents DropDown="function(s,e){var d = new Date('May 1 2014 12:00:00');s.GetTimeEdit().SetValue(d);}" />
                                                                                                 </dx:ASPxDateEdit>
                                                                                             </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
                                                                                                 <dx:ASPxButton ID="ASPxButton1" runat="server" UseSubmitBehavior="false" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                                                                                    <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupSelectDateControl.Hide();                                                                                                                       
-                                                                                                                        LogClick('FollowUp', ScheduleDateClientFllowUp!=null?ScheduleDateClientFllowUp.GetDate().toLocaleString():callbackCalendar.GetSelectedDate().toLocaleString());
-                                                                                                                        }"></ClientSideEvents>
+                                                                                                    <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();LogClick('FollowUp', ScheduleDateClientFllowUp!=null?ScheduleDateClientFllowUp.GetDate().toLocaleString():callbackCalendar.GetSelectedDate().toLocaleString());}"></ClientSideEvents>
                                                                                                 </dx:ASPxButton>
                                                                                                 &nbsp;
                                                             <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" UseSubmitBehavior="false" CssClass="rand-button rand-button-gray">
-                                                                <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupSelectDateControl.Hide();                                                                                                                                                                                                                                               
-                                                                                                                        }"></ClientSideEvents>
+                                                                <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents>
                                                             </dx:ASPxButton>
                                                                                             </td>
                                                                                         </tr>
@@ -976,7 +970,7 @@
                 })
                 if (!existPending) $scope.addPendingValue();
             }
-            $scope.resetPendingModified = function () {
+            $scope.setPendingModified = function () {
                 $scope.oldPendingValues = []
                 _.each($scope.SsCase.ValueInfoes, function (el, index) {
                     if (el.Pending) {
@@ -990,7 +984,6 @@
                     }
                 })
             }
-
             $scope.checkPendingModified = function () {
                 var updates = '';
                 _.each($scope.SsCase.ValueInfoes, function (el, index) {
@@ -1013,23 +1006,34 @@
                     }
                 })
                 //console.log(updates)
-                return updates
+                return updates;
             }
-            $scope.valuationSave = function () {
-                var updates = $scope.checkPendingModified();
-                if ($scope.valuationSuccCallback) {
-                    $scope.valuationSuccCallback(updates);
-                }
 
+            $scope.restorePendingModified = function () {
+                _.remove($scope.SsCase.ValueInfoes, function (el, index) {
+                    return el.Pending;
+                })
+                _.each($scope.oldPendingValues, function (el,index) {
+                    $scope.SsCase.ValueInfoes.push(el)
+                })
+            }
+
+            $scope.valuationCanl = function () {
+                $scope.restorePendingModified();
+                if ($scope.valuationCanclCallback) $scope.valuationCanclCallback();
                 $scope.Valuation_popupVisible = false;
 
+            }
+
+            $scope.valuationSave = function () {
+                var updates = $scope.checkPendingModified();
+                if ($scope.valuationSuccCallback) $scope.valuationSuccCallback(updates); 
+                $scope.Valuation_popupVisible = false;
 
             };
             $scope.valuationCompl = function (el) {
                 var updates = $scope.checkPendingModified();
-                if ($scope.valuationSuccCallback) {
-                    $scope.valuationSuccCallback(updates);
-                }
+                if ($scope.valuationSuccCallback) $scope.valuationSuccCallback(updates);
                 el.Pending = false;
                 $scope.Valuation_popupVisible = false;
             }
@@ -1040,8 +1044,8 @@
             $scope.toggleValuationPopup = function (status) {
                 $scope.$apply(function () {
                     $scope.Valuation_Show_Option = status
+                    $scope.setPendingModified()
                     $scope.ensurePendingValue()
-                    $scope.resetPendingModified()
                     $scope.Valuation_popupVisible = !$scope.Valuation_popupVisible;
                 });
             }
@@ -1061,7 +1065,7 @@
                     default:
                         index = 0;
                 }
-                
+
                 $timeout(function () {
 
                     if ($scope.SsCase.Mortgages[index]) {
