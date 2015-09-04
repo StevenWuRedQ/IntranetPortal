@@ -48,7 +48,8 @@
                 </label>
 
                 <select class="ss_form_input" ng-model="LegalCase.CaseStauts">
-					<% For Each v In Utility.Enum2Dictinary(GetType(IntranetPortal.Data.DataStatus))%>
+                    <%Dim statusDic = Utility.Enum2Dictinary(GetType(IntranetPortal.Data.DataStatus)).ToList.Select(Function(v)  New With {.Key = v.Key, .Value = v.Value, .Order = If(v.Key = 7, 1000, v.Key)}).OrderBy(Function(v) v.Order) %>
+					<% For Each v In statusDic%>
 					<option value="<%=v.Key%>"><%=v.Value%></option>
 					<% Next%>
                 </select>
