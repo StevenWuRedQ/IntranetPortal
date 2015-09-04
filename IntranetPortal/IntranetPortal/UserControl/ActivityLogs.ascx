@@ -539,7 +539,9 @@
                                 }
                             },
                             CheckingSuccess: function(result){
-                                AddActivityLog(result);                                
+                                var comment = $("#selType1").val() + "/" + $("#selCategory").val() + " - " + $("#selStatusUpdate").val() + "<br />";
+                                comment += result;
+                                AddActivityLog(comment);                             
                             },
                             CheckingCancel: function(){
                                 $("#selStatusUpdate").val("");
@@ -551,7 +553,7 @@
                                         {
                                             if(typeof window.ssToggleApprovalPopup != "undefined")
                                                 window.ssToggleApprovalPopup(success,cancel);
-                                        }                                       
+                                        }                                    
                                     }
                                 },
                                 "Valuation":{
@@ -560,7 +562,7 @@
                                         {
                                             if(typeof window.ssToggleValuationPopup != "undefined")
                                                 window.ssToggleValuationPopup(1,success,cancel);
-                                        }                                       
+                                        }
                                     },
                                     "BPO Scheduled": {
                                         Checking:function(success,cancel)
