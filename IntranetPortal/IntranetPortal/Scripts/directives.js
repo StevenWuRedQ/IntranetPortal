@@ -6,16 +6,17 @@ portalApp.directive('ssDate', function () {
         scope: true,
         link: function (scope, el, attrs) {
             $(el).datepicker({
-                format: "mm/dd/yyyy"
+                format: "mm/dd/yyyy",
+                forceParse: false
             });
 
             scope.$watch(attrs.ngModel, function (newValue, oldValue) {
                 var dateStr = newValue;
-                if (dateStr !== undefined) {
+                if (typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
                     if (dateStr) {
                         var dd = new Date(dateStr);
                         dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
-                        $(el).datepicker('setDate', new Date(dd))
+                        $(el).datepicker('update', new Date(dd))
                     }
                 }
             });

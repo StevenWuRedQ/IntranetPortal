@@ -33,24 +33,27 @@
             </div>
 
             <div class="ss_form col-md-6">
-                <h4 class="ss_form_input_title" ng-class="PreQuestions.RefusingMaintenanceOnHome?'':'ss_warning'">The party who is refusing to participate in the sale of the home, do they perform any maintenance on the home?</h4>
-                <pt-radio name="IsTenents" model="PreQuestions.IsTenents"></pt-radio>
+                <h4 class="ss_form_input_title">The party who is refusing to participate in the sale of the home, do they perform any maintenance on the home?</h4>
+                <pt-radio name="RefusingMaintenHome" model="PreQuestions.RefusingMaintenHome"></pt-radio>
             </div>
-
 
             <div class="ss_form col-md-6">
                 <h4 class="ss_form_input_title">Are there tenents?</h4>
                 <pt-radio name="IsTenents" model="PreQuestions.IsTenents"></pt-radio>
             </div>
 
-
-            <div class="ss_form col-md-6">
-                <h4 class="ss_form_input_title" ng-show="PreQuestions.IsTenents" >Do tenents pay rent currently?</h4>
-                <pt-radio name="TenentsPayRent" model="PreQuestions.IsTenentsPayRent"></pt-radio>
+            <div class="ss_form col-md-6" style="visibility:hidden">
+                <h4 class="ss_form_input_title">Are there tenents?</h4>
+                <pt-radio name="IsTenents" model="PreQuestions.IsTenents"></pt-radio>
             </div>
 
-            <div class="ss_form col-md-6">
-                <h4 class="ss_form_input_title" ng-show="PreQuestions.IsTenents" >Who tenents pay to?</h4>
+            <div class="ss_form col-md-6"  ng-show="PreQuestions.IsTenents">
+                <h4 class="ss_form_input_title"  >Do tenents pay rent currently?</h4>
+                <pt-radio name="TenentsPayRent" model="PreQuestions.IsTenentsPayRent"></pt-radio>
+            </div>
+            
+            <div class="ss_form col-md-6" ng-show="PreQuestions.IsTenents">
+                <h4 class="ss_form_input_title"  >Who tenents pay to?</h4>
                 <input class="ss_form_input" ng-model="PreQuestions.TenentsPayTo" />
             </div>
 
