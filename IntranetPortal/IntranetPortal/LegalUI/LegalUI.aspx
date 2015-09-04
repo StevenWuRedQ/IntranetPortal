@@ -121,7 +121,7 @@
                                             $('#NeedAddCommentPopUp').modal({ backdrop: 'static' })
                                         }
                                        
-                                    }, 30000)
+                                    }, 120000)
                                 </script>
 
                                 <div id="vendor_btn" style="display: none">
