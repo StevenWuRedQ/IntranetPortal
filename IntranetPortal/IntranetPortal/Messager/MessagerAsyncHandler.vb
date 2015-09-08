@@ -11,12 +11,19 @@ Namespace Messager
 
             'diable task popup notify
             'UserTask.UpdateNotify()
+
             Dim msg = UserMessage.GetNewMessage(context.User.Identity.Name)
             Dim result = New MessagerAsyncResult(context, msg)
 
             Return result
         End Function
+        Sub InitLegalFollowUp()
+            Dim user = HttpContext.Current.User
+            If (user.IsInRole("Legal-Attorney") Or user.IsInRole("Legal-Research") Or user.IsInRole("Legal-Manager")) Then
+                Dim emp = Employee.GetInstance(user.Identity.Name)
 
+            End If
+        End Sub
         Public Sub EndProcessRequest(result As IAsyncResult) Implements IHttpAsyncHandler.EndProcessRequest
             Dim rslt = CType(result, MessagerAsyncResult)
             Dim user = rslt.context.User.Identity.Name

@@ -12,12 +12,12 @@ portalApp.directive('ssDate', function () {
 
             scope.$watch(attrs.ngModel, function (newValue, oldValue) {
                 var dateStr = newValue;
-                if (typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
-                    if (dateStr) {
+                if (dateStr && typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
+                   
                         var dd = new Date(dateStr);
                         dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
                         $(el).datepicker('update', new Date(dd))
-                    }
+                    
                 }
             });
         }

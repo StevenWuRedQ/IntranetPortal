@@ -232,7 +232,9 @@
                                                 <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Attorney');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to paralegal / Attorney"></i>
                                                 <% End If%>
 
-                                                <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.AttorneyHandle Then%>
+                                               <%-- <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.AttorneyHandle Then%>--%>
+                                                <%-- Change to primssing only manager can close file to do by chris add it to process engine  --%>
+                                                <%If DisplayView = IntranetPortal.Data.LegalCaseStatus.AttorneyHandle AndAlso User.IsInRole("Legal-Manager") Then%>
                                                 <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="AttorneyComplete()" data-original-title="Complete"></i>
                                                 <% End If%>
 

@@ -62,7 +62,7 @@
                     </dx:GridViewDataColumn>
                     <dx:GridViewDataDateColumn FieldName="SaleDate" Caption="Auction Date">                       
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataColumn FieldName="ResearchBy" Caption="Research" Visible="false">
+                    <dx:GridViewDataColumn FieldName="ResearchBy" Caption="Researcher">
                         <Settings HeaderFilterMode="CheckedList"/>
                     </dx:GridViewDataColumn>
                     <dx:GridViewCommandColumn ShowDeleteButton="true" ButtonType="Button">

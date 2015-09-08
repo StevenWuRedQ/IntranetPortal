@@ -139,6 +139,9 @@ Partial Public Class LegalCase
         End Using
     End Function
 
+    Public Shared Function GetFollowUpCaseByUser(userName As String) As List(Of LegalCase)
+        Return GetFollowUpCases().Where(Function(lc) (lc.ResearchBy = userName Or lc.Attorney = userName))
+    End Function
     Public Shared Function GetCaseList(status As LegalCaseStatus, userName As String) As List(Of LegalCase)
         Using ctx As New LegalModelContainer
             Return ctx.LegalCases.Where(Function(lc) lc.Status = status AndAlso (lc.ResearchBy = userName Or lc.Attorney = userName)).ToList
@@ -176,12 +179,15 @@ Public Enum DataStatus
     JudgmentGranted = 11
     <Description("Judgment Entered")>
     JudgmentEntered = 12
-    <Description("Sale Date")>
-    SaleDate = 7
-    <Description("Dismissed w/ Prejudice")>
+    
+    <Description("Dismissed w Prejudice")>
     DismissedWithPrejudice = 8
     <Description("Dismissed w/o Prejudice")>
     DismissedWithoutPrejudice = 9
+
+
+    <Description("Sale Date")>
+    SaleDate = 7
 End Enum
 
 
