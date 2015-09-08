@@ -10,28 +10,28 @@
             <div class="col-md-12" style="margin: 20px 2px">
                 <h4 class="ss_form_input_title" ng-class="reviewChecked()?'':'ss_warning'">Please check the Legal review(s) you need:</h4>
 
-                <input type="checkbox" id="FCReview" ng-model="IsFCReview" class="ss_form_input">
+                <input type="checkbox" id="FCReview" ng-model="PreQuestions.IsFCReview" class="ss_form_input">
                 <label for="FCReview" class="input_with_check"><span class="box_text">FC Review&nbsp</span></label>
 
-                <input type="checkbox" id="PartitionReview" ng-model="IsPartitionReview" class="ss_form_input">
+                <input type="checkbox" id="PartitionReview" ng-model="PreQuestions.IsPartitionReview" class="ss_form_input">
                 <label for="PartitionReview" class="input_with_check"><span class="box_text">Partition Review&nbsp</span></label>
 
 
-                <input type="checkbox" id="DeedReversionReview" ng-model="IsDeedReversionReview" class="ss_form_input">
+                <input type="checkbox" id="DeedReversionReview" ng-model="PreQuestions.IsDeedReversionReview" class="ss_form_input">
                 <label for="DeedReversionReview" class="input_with_check"><span class="box_text">Deed Reversion Review&nbsp</span></label>
 
 
-                <input type="checkbox" id="QuietTitleReview" ng-model="IsQuietTitleReview" class="ss_form_input">
+                <input type="checkbox" id="QuietTitleReview" ng-model="PreQuestions.IsQuietTitleReview" class="ss_form_input">
                 <label for="QuietTitleReview" class="input_with_check"><span class="box_text">Quiet Title Review&nbsp</span></label>
 
 
-                <input type="checkbox" id="SpecificPerformanceReview" ng-model="IsSpecificReview" class="ss_form_input">
+                <input type="checkbox" id="SpecificPerformanceReview" ng-model="PreQuestions.IsSpecificReview" class="ss_form_input">
                 <label for="SpecificPerformanceReview" class="input_with_check"><span class="box_text">Specific Performance Review&nbsp</span></label>
 
             </div>
             <br />
             <%--  partition --%>
-            <div class="nga-fast nga-fade" ng-show="IsPartitionReview" style="margin: 20px">
+            <div class="nga-fast nga-fade" ng-show="PreQuestions.IsPartitionReview" style="margin: 20px">
                 <h4 class="ss_form_title ">Partition Review</h4>
                 <div class="ss_border">
                     <div class="col-md-6">
@@ -144,7 +144,7 @@
                 </div>
             </div>
             <%--  deed --%>
-            <div class="nga-fast nga-fade" ng-show="IsDeedReversionReview" style="margin: 20px">
+            <div class="nga-fast nga-fade" ng-show="PreQuestions.IsDeedReversionReview" style="margin: 20px">
                 <h4 class="ss_form_title">Deed Reversion Review</h4>
                 <div class="ss_border">
                     <div class="col-md-6">
@@ -218,7 +218,7 @@
             </div>
             .
             <%-- quiet --%>
-            <div class="nga-fast nga-fade" ng-show="IsQuietTitleReview" style="margin: 20px">
+            <div class="nga-fast nga-fade" ng-show="PreQuestions.IsQuietTitleReview" style="margin: 20px">
                 <h4 class="ss_form_title ">Quiet Title Review</h4>
                 <div class="ss_border">
                     <div class="col-md-6">
@@ -286,7 +286,7 @@
 
             </div>
             <%-- specific --%>
-            <div class="nga-fast nga-fade" ng-show="IsSpecificReview" style="margin: 20px">
+            <div class="nga-fast nga-fade" ng-show="PreQuestions.IsSpecificReview" style="margin: 20px">
                 <h4 class="ss_form_title">Specific Performance Review</h4>
                 <div class="ss_border">
                     <div class="col-md-6">
@@ -366,10 +366,10 @@
             $scope.validate = function(){
                 return $scope.reviewChecked()
                     && (!$scope.PreQuestions.IsTenents || ($scope.PreQuestions.IsTenents && !$scope.PreQuestions.IsTenentsPayRent) || ($scope.PreQuestions.IsTenents && $scope.PreQuestions.IsTenentsPayRent && $scope.PreQuestions.TenentsPayTo))
-                    && (!$scope.IsPartitionReview || ($scope.IsPartitionReview && $scope.validatePartitionReview()))
-                    && (!$scope.IsDeedReversionReview || ($scope.IsDeedReversionReview && $scope.validateDeed()))
-                    && (!$scope.IsQuietTitleReview || ($scope.IsQuietTitleReview && $scope.validateQuietTitle()))
-                    && (!$scope.IsSpecificReview || ($scope.IsSpecificReview && $scope.validateSpecific()))
+                    && (!$scope.PreQuestions.IsPartitionReview || ($scope.PreQuestions.IsPartitionReview && $scope.validatePartitionReview()))
+                    && (!$scope.PreQuestions.IsDeedReversionReview || ($scope.PreQuestions.IsDeedReversionReview && $scope.validateDeed()))
+                    && (!$scope.PreQuestions.IsQuietTitleReview || ($scope.PreQuestions.IsQuietTitleReview && $scope.validateQuietTitle()))
+                    && (!$scope.PreQuestions.IsSpecificReview || ($scope.PreQuestions.IsSpecificReview && $scope.validateSpecific()))
             }
 
             $scope.validatePartitionReview = function () {
@@ -409,7 +409,7 @@
             }
 
             $scope.reviewChecked = function(){
-                return $scope.IsFCReview||$scope.IsPartitionReview|| $scope.IsDeedReversionReview|| $scope.IsQuietTitleReview|| $scope.IsSpecificReview;
+                return $scope.PreQuestions.IsFCReview||$scope.PreQuestions.IsPartitionReview|| $scope.PreQuestions.IsDeedReversionReview|| $scope.PreQuestions.IsQuietTitleReview|| $scope.PreQuestions.IsSpecificReview;
             }
         })
     </script>

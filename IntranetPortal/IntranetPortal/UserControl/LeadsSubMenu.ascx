@@ -243,7 +243,7 @@
                         // $("#LegalPopUp").modal();
                         // ASPLegalPopupClient.Show();
                         var bble = $('#<%= hfInProcessBBLE.ClientID%>').val();
-                        window.open('/LegalUI/LegalPreQuestions.aspx?bble=' + bble, 'LegalPreQuestion', "width=960, height=640");
+                        window.open('/LegalUI/LegalPreQuestions.aspx?bble=' + bble, 'LegalPreQuestion', "width=1024, height=800");
                         aspxPopupInprocessClient.PerformCallback('Save');
                     } else {
 

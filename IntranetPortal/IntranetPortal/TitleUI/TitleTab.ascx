@@ -83,10 +83,10 @@
                         <uc1:TitleBuildingLiens runat="server" ID="TitleBuildingLiens" />
                     </div>
                     <div class="tab-pane" id="TitleSurveyAndContinTab">
-                        <uc1:TitleSurveyAndContin runat="server" id="TitleSurveyAndContin" />
+                        <uc1:TitleSurveyAndContin runat="server" ID="TitleSurveyAndContin" />
                     </div>
                     <div class="tab-pane" id="TitlePreclosingTab">
-                        <uc1:TitlePreclosing runat="server" id="TitlePreclosing" />
+                        <uc1:TitlePreclosing runat="server" ID="TitlePreclosing" />
                     </div>
                 </div>
             </div>
@@ -175,7 +175,7 @@
             $scope.ReloadedData = {};
             $scope.$apply();
         }
-        $scope.Get = function () {           
+        $scope.Get = function () {
             return $scope.Form;
         }
     })

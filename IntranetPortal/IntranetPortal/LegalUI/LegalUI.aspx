@@ -671,20 +671,10 @@
             var portalApp = angular.module('PortalApp');
 
             portalApp.controller('LegalCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
-                $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
+                $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {}, PreQuestions: {} };
                 $scope.ptContactServices = ptContactServices;
 
                 $scope.ptCom = ptCom;
-                //if (leadsInfoBBLE) {
-                //    $http.post('/Services/ContactService.svc/CheckInShortSale', { "BBLE": leadsInfoBBLE }).success(function (data) {
-
-                //        $scope.LegalCase.InShortSale = data;
-
-                //    }).error(function (data) {
-                //        alert("check in short sale error " + leadsInfoBBLE + JSON.stringify(data));
-                //    });
-                //}
-
 
                 var self = $scope;
                 function querySearch(query) {
