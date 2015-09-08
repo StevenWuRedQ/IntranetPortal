@@ -73,9 +73,9 @@ Public Class TitleManage
 
 #End Region
 
-
-
     Public Function GetAmount(navMenu As PortalNavItem, userName As String) As Integer Implements INavMenuAmount.GetAmount
+
+        Return GetMyCases(userName).Length
 
     End Function
 End Class

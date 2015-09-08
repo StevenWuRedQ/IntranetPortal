@@ -508,6 +508,22 @@
     </Items>
   </PortalNavItem>
 
+  <PortalNavItem Name="Title" Text="Title" NavigationUrl="#" ShowAmount="false" Expanded="false">
+    <UserRoles>Title-*</UserRoles>
+    <Items>
+      <PortalNavItem Name="Title-Summary" Text="Summary" NavigationUrl="/MyDefault.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Title-All" Text="All Cases" NavigationUrl="/BusinessForm/Default.aspx" ShowAmount="true" AmountManageClass="TitleManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
+  </PortalNavItem>
+  
   <PortalNavItem Name="Construction" Text="Construction" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Construction-*</UserRoles>
     <Items>
