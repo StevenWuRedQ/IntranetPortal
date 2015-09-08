@@ -232,9 +232,11 @@ portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileServ
             fileModel: '=',
             fileBble: '=',
             fileName: '@',
-            fileId: '@'
+            fileId: '@',
+            uploadType: '@'
         },
         link: function (scope, el, attrs) {
+            scope.uploadType = scope.uploadType || 'construction';
             scope.ptFileService = ptFileService;
             scope.fileChoosed = false;
             scope.loading = false;
@@ -262,7 +264,7 @@ portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileServ
                 scope.startLoading();
                 var data = new FormData();
                 data.append("file", scope.File);
-                ptFileService.uploadConstructionFile(data, scope.fileBble, scope.fileName, '', function (error, data) {
+                ptFileService.uploadFile(data, scope.fileBble, scope.fileName, '', scope.uploadType, function (error, data) {
                     scope.stopLoading();
                     if (error) {
                         alert(error);
@@ -296,11 +298,14 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             fileModel: '=',
             fileBble: '=',
             fileId: '@',
-            fileColumns: '@',
+            fileColumns: '@',       // addtion information
             folderEnable: '@',
-            baseFolder: '@'
+            baseFolder: '@',
+            uploadType: '@'         // control server folder, implete specific method in the service
+
         },
         link: function (scope, el, attrs) {
+            scope.uploadType = scope.uploadType || 'construction';
             scope.ptFileService = ptFileService;
             scope.ptCom = ptCom;
 
@@ -439,7 +444,7 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                     var data = new FormData();
                     data.append("file", scope.files[i]);
                     var targetName = ptFileService.getFileName(scope.files[i].name);
-                    ptFileService.uploadConstructionFile(data, scope.fileBble, targetName, targetFolder, function (error, data, targetName) {
+                    ptFileService.uploadFile(data, scope.fileBble, targetName, targetFolder, scope.uploadType, function (error, data, targetName) {
                         if (error) {
                             var targetElement = _.filter(scope.result, function (el) { return el.name == targetName })[0];
                             if (targetElement) targetElement.error = error;

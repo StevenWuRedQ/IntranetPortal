@@ -76,7 +76,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Title Vested</label>
-                <pt-file file-bble="" file-id="CHAINOFTITLE-Status_TitleVested0" file-model="Form.FormData.info.Title_Vested"></pt-file>
+                <pt-file file-bble="Form.FormData.BBLE" upload-type="uploadType" file-id="CHAINOFTITLE-Status_TitleVested0" file-model="Form.FormData.info.Title_Vested"></pt-file>
             </li>
         </ul>
         <ul class="ss_form_box clearfix">

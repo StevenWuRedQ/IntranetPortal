@@ -5,7 +5,7 @@
     </div>
     <div style="margin: 2px" ng-show="!fileModel">
         <div>
-            <span class="btn btn-default btn-file">
+            <span class="btn btn-default btn-file" style="max-width:160px">
                 {{File?File.name:'Choose File'}}<span dx-load-indicator="{ height: '14px', width:'14px', bindingOptions: { visible: 'loading' }}"></span><input type="file" id="{{fileId}}" />
             </span>
             <span ng-show="fileChoosed">

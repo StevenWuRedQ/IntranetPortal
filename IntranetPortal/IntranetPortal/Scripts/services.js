@@ -310,6 +310,18 @@ app.factory('ptHomeBreakDownService', [
 
 app.service('ptFileService', function () {
 
+    this.uploadFile = function (data, bble, rename, folder, type, callback) {
+        switch (type) {
+            case 'construction':
+                this.uploadConstructionFile(data, bble, rename, folder, callback);
+                break;
+            default:
+                this.uploadConstructionFile(data, bble, rename, folder, callback);
+                break;
+            
+        }
+    }
+
     this.uploadConstructionFile = function (data, bble, rename, folder, callback) {
         var fileName = rename ? rename : '';
         var folder = folder ? folder : '';
