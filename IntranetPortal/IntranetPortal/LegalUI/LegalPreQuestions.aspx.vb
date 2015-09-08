@@ -1,4 +1,4 @@
-﻿Public Class LegalPreQuestions1
+﻿Public Class LegalPreQuestions
     Inherits System.Web.UI.Page
     Public Property BBLE As String
 

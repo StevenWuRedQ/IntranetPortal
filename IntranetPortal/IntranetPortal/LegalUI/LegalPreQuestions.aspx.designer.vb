@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class LegalPreQuestions1
+Partial Public Class LegalPreQuestions
     
     '''<summary>
     '''hfInProcessBBLE control.
