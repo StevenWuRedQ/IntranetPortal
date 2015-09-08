@@ -115,7 +115,7 @@
 
     Public Overrides Function ValidateUser(username As String, password As String) As Boolean
         Using context As New Entities
-            Return context.Employees.Where(Function(em) em.Name = username And em.Password = password And em.Active = True).Count > 0
+            Return context.Employees.Where(Function(em) (em.Name = username Or em.Email = username) And em.Password = password And em.Active = True).Count > 0
         End Using
     End Function
 

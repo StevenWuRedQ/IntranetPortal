@@ -84,7 +84,7 @@
                     </header>
                     <div class="sign-in-form-wrapper">
                         <div class="sign-in-form fade-in" id="portal-sign-in-form">
-                            <input class="sif-username" id="username" name="username" type="text" placeholder="Username" autofocus="autofocus" required="required" />
+                            <input class="sif-username" id="username" name="username" type="text" placeholder="Name or Email" autofocus="autofocus" required="required" />
                             <input class="sif-password" id="password" name="password" type="password" placeholder="Password" required="required" onkeydown="return EnterInput(event)" />
                             <div class="sif-remember">
                                 <input id="remember-me" name="remember-me" type="checkbox" />

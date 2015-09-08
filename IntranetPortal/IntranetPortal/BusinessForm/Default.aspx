@@ -130,7 +130,7 @@
                                         url: url,
                                         dataType: 'json',
                                         success: function (data) {
-                                            console.log(data);
+                                            //console.log(data);
                                             angular.element(document.getElementById(tab.Name + 'Controller')).scope().Load(data);
 
                                             if(tab.EnableAutoSave){

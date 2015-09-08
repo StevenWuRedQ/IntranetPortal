@@ -291,4 +291,9 @@ Public Class RegexUtilities
         End Try
         Return match.Groups(1).Value + domainName
     End Function
+
+    Public Shared Function ValidEmail(email As String) As Boolean
+        Dim rgx As New RegexUtilities
+        Return rgx.IsValidEmail(email)
+    End Function
 End Class

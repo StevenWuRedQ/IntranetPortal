@@ -301,7 +301,7 @@
                             </td>
                             <td>Acquisition Date:
                             </td>
-                            <td>{%=data.AcquisitionDate%}
+                            <td>{%=_.template.formatdatevalue(data.AcquisitionDate)%}
                             </td>
                         </tr>
                         <tr>
@@ -311,7 +311,7 @@
                             </td>
                             <td style="width: 150px">DateEntered:
                             </td>
-                            <td style="width: 35%">{%=data.DateEntered%}
+                            <td style="width: 35%">{%=_.template.formatdatevalue(data.DateEntered)%}
                             </td>
                         </tr>
                         <tr>
@@ -372,7 +372,7 @@
                             </td>
                             <td>LastUpdated:
                             </td>
-                            <td>{%=data.LastUpdated%}
+                            <td>{%=_.template.formatdatevalue(data.LastUpdated)%}
                             </td>
                         </tr>
                         <tr>
@@ -404,6 +404,16 @@
                         interpolate: /\{%=(.+?)%\}/g,
                         escape: /\{%-(.+?)%\}/g,
                         evaluate: /\{%(.+?)%\}/g
+                    };
+                    _.template.formatdatevalue = function (newDate) {
+                        var tempDate = Date.parse(newDate);
+                        var myDate = new Date(tempDate);                      
+
+                        if (myDate.getFullYear() >= 1900)
+                        {
+                            return myDate.toLocaleDateString("en-US")
+                        }
+                        return "";                        
                     };
 
                     var Complaints = {

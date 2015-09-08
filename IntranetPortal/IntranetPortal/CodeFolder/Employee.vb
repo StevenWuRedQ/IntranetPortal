@@ -226,6 +226,12 @@ Partial Public Class Employee
         End Using
     End Function
 
+    Public Shared Function GetInstanceByEmail(email As String) As Employee
+        Using ctx As New Entities
+            Return ctx.Employees.Where(Function(em) em.Email = email).FirstOrDefault
+        End Using
+    End Function
+
     Public Shared Function GetInstanceData(username As String) As Employee
         Using context As New Entities
             Dim emp = context.Employees.Where(Function(em) em.Name = username).ToList.Select(Function(em)
