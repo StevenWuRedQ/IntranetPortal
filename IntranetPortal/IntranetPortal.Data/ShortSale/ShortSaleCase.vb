@@ -784,8 +784,8 @@ Partial Public Class ShortSaleCase
 
     Public Sub RefreshStatus()
         If Me.Mortgages.Where(Function(mt) mt.Status <> "").Count > 0 Then
-            If Mortgages.Where(Function(mt) mt.Status = "Closed").Count = Mortgages.Count Then
-                'SaveStatus(CaseStatus.Closed)
+            If Mortgages.Where(Function(mt) mt.Status = "Closed").Count > 0 Then
+                SaveStatus(CaseStatus.Closed)
             Else
                 If Status = CaseStatus.NewFile Then
                     SaveStatus(CaseStatus.Active)

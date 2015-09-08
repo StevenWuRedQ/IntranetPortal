@@ -69,7 +69,7 @@
             //gdComplainsResult.Refresh();
 
             //refresh data grid
-            Complaints.Refresh();          
+            Complaints.Refresh();
             needRefreshResult = false;
         }
 
@@ -126,13 +126,30 @@
         }
 
         .important {
-            color:red;
+            color: red;
         }
 
         .form_border {
             border: 1px solid #808080;
             padding: 0px;
             margin-top: 10px;
+        }
+
+        .notification {
+            background: #428bca;
+            -moz-border-radius: 50px;
+            -webkit-border-radius: 50px;
+            border-radius: 50px;
+            color: #fff;
+            display: inline-block;            
+            font-size: 16px;
+            font-weight: 900;
+            line-height: 30px;
+            margin-right: 10px;          
+            min-width: 16px;
+            padding-left: 7px;
+            padding-right: 7px;
+            text-align: center;
         }
     </style>
     <div class="container">
@@ -204,7 +221,7 @@
         </div>
         <div class="row form_border" style="">
             <div class="form_header">
-                Owned Properties Currently Being Watch&nbsp;<span class="notification">(<%= ComplaintsAmount %>)</span>&nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplains'))"></i>
+                Owned Properties Currently Being Watch&nbsp;<span class="notification"><%= ComplaintsAmount %></span>&nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplains'))"></i>
                 <div class="form-inline" style="float: right; font-weight: normal">
                     <small>(**Click on BBLE to view active complaints**)</small>
                     <input type="text" style="margin-right: 10px" id="QuickSearch" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />
@@ -272,7 +289,7 @@
                 </script>
 
                 <script id="gridComplaitsDetail" type="text/html">
-                    <table class="table" style="width: 100%; border: 1px solid #808080; line-height: 25px; white-space: normal; color:black">
+                    <table class="table" style="width: 100%; border: 1px solid #808080; line-height: 25px; white-space: normal; color: black">
                         <tr>
                             <td colspan="4" class="form_header">Complaints - {%= data.ComplaintNumber%} - Detail
                             </td>

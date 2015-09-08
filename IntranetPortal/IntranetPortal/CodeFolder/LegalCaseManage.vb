@@ -114,6 +114,8 @@ Public Class LegalCaseManage
                                    Core.SystemLog.LogError("Notify legal when ShortSale case is closed", ex, "", "Portal", bble)
                                End Try
                            End Sub
+
+        Threading.ThreadPool.QueueUserWorkItem(NotifyUpdate)
     End Sub
 
     Public Shared Sub SetFollowUpDate(bble As String, type As String, dateSelected As DateTime)

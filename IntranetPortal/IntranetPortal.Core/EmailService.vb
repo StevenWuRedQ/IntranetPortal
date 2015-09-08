@@ -32,7 +32,7 @@ Public Class EmailService
     End Sub
 
     Public Shared Sub SendShortSaleMail(toAddress As String, ccAddress As String, templateName As String, mailData As Dictionary(Of String, String))
-
+        SendMail(toAddress, ccAddress, templateName, mailData)
     End Sub
 
     Public Shared Sub SendMail(toAddress As String, ccAddress As String, templateName As String, mailData As Dictionary(Of String, String))

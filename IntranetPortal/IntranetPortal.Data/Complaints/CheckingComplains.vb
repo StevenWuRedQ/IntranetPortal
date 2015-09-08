@@ -160,7 +160,7 @@ Partial Public Class CheckingComplain
             Try
                 result = JsonConvert.DeserializeObject(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result())(res.Complaints_List.ToJsonString)
             Catch ex As Exception
-
+                Core.SystemLog.LogError("Error on Deserialize Complaints List", ex, jsonResult, Nothing, BBLE)
             End Try
         End If
 

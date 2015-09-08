@@ -109,7 +109,8 @@ Partial Public Class Lead
             Return True
         End If
 
-        Dim roleNames = {"Admin", "Title-Users", "Legal-Manager", "ShortSale-Manager", "Construction-Manager", "Construction-User"}
+        Dim roleNames = Core.PortalSettings.GetValue("LeadsViewableRoles").Split(";")
+        ' {"Admin", "Title-Users", "Legal-Manager", "ShortSale-Manager", "Construction-Manager", "Construction-User", "Entity-Manager"}
 
         Dim myRoles = Roles.GetRolesForUser(name)
 

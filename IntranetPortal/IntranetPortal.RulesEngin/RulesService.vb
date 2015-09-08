@@ -142,7 +142,7 @@ Public Class RulesService
             If WorkingHours.IsWorkingDay(DateTime.Now) Then
                 'Run Rules
                 'RunRules()
-                'State.Rule.Execute()
+                State.Rule.Execute()
             End If
         Catch ex As Exception
             Log("Exception in Run Rules", ex)

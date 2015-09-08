@@ -211,6 +211,10 @@ Public Class NGShortSale
             Case Else
                 ssCase.UpdateMortgageStatus(0, category, status, updateBy)
         End Select
+
+        If category = "Closed" AndAlso status = "Closed" Then
+            LegalCaseManage.NotifyLegalWhenClosedinSS(bble)
+        End If
     End Sub
 
     Private Sub BindCaseData(caseId As Integer)
