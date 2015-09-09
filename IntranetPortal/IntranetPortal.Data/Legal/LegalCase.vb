@@ -200,6 +200,8 @@ Public Enum LegalSencdaryType
     QTA = 3
     <Description("DeedReversions")>
     DeedReversions = 4
-    <Description("Special and other Misc. actions")>
-    Other = 5
+    <Description("Specific Performance")>
+    SpecificPerformance = 5
+    <Description("Misc. actions")>
+    Other = 6
 End Enum

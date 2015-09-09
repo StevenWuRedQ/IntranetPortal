@@ -1053,34 +1053,50 @@
                             "DefendantAttorneyName": $scope.LegalCase.SecondaryInfo.DefendantAttorneyName,
                             "DefendantAttorneyPhone": ptContactServices.getContact($scope.LegalCase.SecondaryInfo.DefendantAttorneyId, $scope.LegalCase.SecondaryInfo.DefendantAttorneyName).OfficeNO,
                             "DefendantAttorneyAddress": ptContactServices.getContact($scope.LegalCase.SecondaryInfo.DefendantAttorneyId, $scope.LegalCase.SecondaryInfo.DefendantAttorneyName).Address,
-                            "CourtAddress": $scope.LegalCase.SecondaryInfo.CourtAddress,
+                            "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
                             "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
 
                         }
-                    }];
+                    },
+                    {
+                        "tplName": 'DeedReversionTemplate.docx',
+                        data: {
+                            "Plantiff": $scope.LegalCase.SecondaryInfo.DeedReversionPlantiff,
+                            "PlantiffAttorney": $scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorney,
+                            "PlantiffAttorneyAddress": $scope.ptContactServices.getContact($scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId, $scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorney).Address,
+                            "PlantiffAttorneyPhone": $scope.ptContactServices.getContact($scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId, $scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorney).OfficeNO,
+                            "IndexNum": $scope.LegalCase.SecondaryInfo.DeedReversionIndexNum || ' ',
+                            "BoroughName": $scope.LeadsInfo.BoroughName,
+                            "Block": $scope.LeadsInfo.Block,
+                            "Lot": $scope.LeadsInfo.Lot,
+                            "Defendant": $scope.LegalCase.SecondaryInfo.DeedReversionDefendant,
+
+                            "Defendants": $scope.LegalCase.SecondaryInfo.DeedReversionDefendants ? ',' + $scope.LegalCase.SecondaryInfo.DeedReversionDefendants.map(function (o) { return o.Name }).join(",") : ' ',
+                           
+                            "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
+                            "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
+
+                        },
+                       
+                        
+                    }
+
+                    ];
                     var tpl = Tpls.filter(function (o) { return o.tplName == tplName })[0]
 
                     if (tpl) {
                         for (var v in tpl.data) {
                             var filed = tpl.data[v];
                             if (!filed) {
-                                alert("Some date missing please like " + v + "Please check!")
+                              
+                                alert("Some data missing please like " + v + "Please check!")
                                 return;
+                                
                             }
                         }
                         ptCom.DocGenerator(tpl.tplName, tpl.data, function (url) {
                             //window.open(url,'blank');
-                            var link = document.createElement("a");
-                            link.href = url;
-
-                            //set the visibility hidden so it will not effect on your web-layout
-                            link.style = "visibility:hidden";
-                            link.download = "OSC" + ".docx";
-
-                            //this part will append the anchor tag and remove it after automatic click
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
+                            STDownloadFile(url, tpl.tplName.replace("Template", ""));
                         });
                     } else {
                         alert("can find tlp " + tplName)
@@ -1088,6 +1104,11 @@
                 }
                 $scope.CheckSecondaryTags = function (tag) {
                     return $scope.LegalCase.SecondaryTypes.filter(function (t) { return t == tag })[0];
+                }
+                $scope.GetCourtAddress = function(boro)
+                {
+                    var address = ['', '851 Grand Concourse Bronx, NY 10451', '360 Adams St. Brooklyn, NY 11201', '8811 Sutphin Boulevard, Jamaica, NY 11435'];
+                    return address[boro-1];
                 }
                 var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Value": "", "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ", "ArrayName": "" },
                                 { "Name": "EveryOneIn", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.WasEstateFormed!=null')", "Value": "false", "Description": "There is an estate.", "ArrayName": "" },

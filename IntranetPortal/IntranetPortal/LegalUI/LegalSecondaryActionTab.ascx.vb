@@ -11,7 +11,7 @@
             Dim wli = WorkflowService.LoadTaskProcess(sn)
             Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
             wli.Finish()
-
+           
             'update legal case status
             Dim lc = IntranetPortal.Data.LegalCase.GetCase(bble)
             lc.Status = IntranetPortal.Data.LegalCaseStatus.Closed

@@ -511,7 +511,9 @@
       <DependentUpon>BingViewMap.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="BusinessForm\BusinessControl.vb" />
+    <Compile Include="BusinessForm\BusinessControl.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="BusinessForm\BusinessForm.vb" />
     <Compile Include="BusinessForm\Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -3510,6 +3512,7 @@
     <Content Include="Content\icons\dxicons.woff" />
     <Content Include="Content\icons\dxicons.ttf" />
     <Content Include="Content\icons\dxicons.eot" />
+    <Content Include="App_Data\DeedReversionTemplate.docx" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
