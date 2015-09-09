@@ -677,4 +677,61 @@ Public Class Troubleshooting
         
     End Sub
 
+    Private Sub btnComplaintsNotify_Click(sender As Object, e As EventArgs) Handles btnComplaintsNotify.Click
+        Dim filepath = "notifyusers.xlsx"
+        Dim data = LoadDataFromExcel(filepath)
+
+        Dim userList As New Dictionary(Of String, String)
+        userList.Add("Gendin", "Michael Gendin")
+        userList.Add("Bobby", "Bobby Panday")
+        userList.Add("Jamie", "Jamie Ventura")
+        userList.Add("Isaac A", "Isaac Aronov")
+        userList.Add("Isaac", "Isaac Aronov")
+        userList.Add("Melissa", "Melissa Ramlakhan")
+        userList.Add("Ron B", "Ron Borovinsky")
+        userList.Add("Albert", "Albert Gavriyelov")
+        userList.Add("Albert G", "Albert Gavriyelov")
+        userList.Add("Jay G", "Jay Gottlieb")
+        userList.Add("Mike K", "Michael Kay")
+        userList.Add("Paul", "Paul Rechsteiner")
+        userList.Add("Arthur", "Arthur Gukasyan")
+        userList.Add("Tara", "Tara Persaud")
+
+        Dim properties = data.Tables("Property")
+
+        For Each prop In properties.Rows
+            Dim address = prop(0).ToString
+            Dim complaints = CheckingComplain.GetComplaints(address.Split(" ")(0) & " ")
+
+            If complaints IsNot Nothing Then
+                Dim users As New List(Of String)
+
+                If Not String.IsNullOrEmpty(prop(1)) AndAlso userList.ContainsKey(prop(1)) Then
+                    users.Add(userList(prop(1)))
+                End If
+
+                If Not IsDBNull(prop(2)) AndAlso Not String.IsNullOrEmpty(prop(2)) AndAlso userList.ContainsKey(prop(2)) Then
+                    users.Add(userList(prop(2)))
+                End If
+
+                If Not IsDBNull(prop(3)) AndAlso Not String.IsNullOrEmpty(prop(3)) AndAlso userList.ContainsKey(prop(3)) Then
+                    users.Add(userList(prop(3)))
+                End If
+
+                If users.Count > 0 Then
+                    If String.IsNullOrEmpty(complaints.NotifyUsers) Then
+                        complaints.NotifyUsers = String.Join(";", users)
+                        complaints.Save("UpdateNotifyUser")
+
+                        MessageBox.Show(String.Format("{0} updated. users: {1}", complaints.Address, complaints.NotifyUsers))
+                    End If
+
+                    Continue For
+                End If
+            End If
+
+            MessageBox.Show("No update on " & address)
+            txtComplaintsResult.Text += address & Environment.NewLine
+        Next
+    End Sub
 End Class

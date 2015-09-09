@@ -103,6 +103,9 @@ Partial Class Troubleshooting
         Me.TabPage8 = New System.Windows.Forms.TabPage()
         Me.btnComplaintsRefresh = New System.Windows.Forms.Button()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.btnComplaintsNotify = New System.Windows.Forms.Button()
+        Me.txtComplaintsResult = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -879,6 +882,9 @@ Partial Class Troubleshooting
         '
         'TabPage8
         '
+        Me.TabPage8.Controls.Add(Me.txtComplaintsResult)
+        Me.TabPage8.Controls.Add(Me.btnComplaintsNotify)
+        Me.TabPage8.Controls.Add(Me.Label13)
         Me.TabPage8.Controls.Add(Me.btnComplaintsRefresh)
         Me.TabPage8.Location = New System.Drawing.Point(4, 22)
         Me.TabPage8.Name = "TabPage8"
@@ -890,7 +896,7 @@ Partial Class Troubleshooting
         '
         'btnComplaintsRefresh
         '
-        Me.btnComplaintsRefresh.Location = New System.Drawing.Point(8, 17)
+        Me.btnComplaintsRefresh.Location = New System.Drawing.Point(8, 15)
         Me.btnComplaintsRefresh.Name = "btnComplaintsRefresh"
         Me.btnComplaintsRefresh.Size = New System.Drawing.Size(108, 29)
         Me.btnComplaintsRefresh.TabIndex = 0
@@ -906,6 +912,32 @@ Partial Class Troubleshooting
         Me.TabPage9.TabIndex = 9
         Me.TabPage9.Text = "Construction"
         Me.TabPage9.UseVisualStyleBackColor = True
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(9, 78)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(31, 13)
+        Me.Label13.TabIndex = 2
+        Me.Label13.Text = "Files:"
+        '
+        'btnComplaintsNotify
+        '
+        Me.btnComplaintsNotify.Location = New System.Drawing.Point(12, 105)
+        Me.btnComplaintsNotify.Name = "btnComplaintsNotify"
+        Me.btnComplaintsNotify.Size = New System.Drawing.Size(108, 29)
+        Me.btnComplaintsNotify.TabIndex = 3
+        Me.btnComplaintsNotify.Text = "Update Notify"
+        Me.btnComplaintsNotify.UseVisualStyleBackColor = True
+        '
+        'txtComplaintsResult
+        '
+        Me.txtComplaintsResult.Location = New System.Drawing.Point(12, 155)
+        Me.txtComplaintsResult.Multiline = True
+        Me.txtComplaintsResult.Name = "txtComplaintsResult"
+        Me.txtComplaintsResult.Size = New System.Drawing.Size(336, 81)
+        Me.txtComplaintsResult.TabIndex = 4
         '
         'Troubleshooting
         '
@@ -943,6 +975,7 @@ Partial Class Troubleshooting
         Me.GroupBox2.PerformLayout()
         Me.TabPage7.ResumeLayout(False)
         Me.TabPage8.ResumeLayout(False)
+        Me.TabPage8.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1027,4 +1060,7 @@ Partial Class Troubleshooting
     Friend WithEvents TabPage8 As System.Windows.Forms.TabPage
     Friend WithEvents btnComplaintsRefresh As System.Windows.Forms.Button
     Friend WithEvents TabPage9 As System.Windows.Forms.TabPage
+    Friend WithEvents btnComplaintsNotify As System.Windows.Forms.Button
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents txtComplaintsResult As System.Windows.Forms.TextBox
 End Class

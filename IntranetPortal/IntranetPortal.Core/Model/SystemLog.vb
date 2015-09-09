@@ -32,6 +32,16 @@ Partial Public Class SystemLog
         End Using
     End Function
 
+    Public Shared Function GetLatestLogs(startDate As DateTime?) As List(Of SystemLog)
+        Using ctx As New CoreEntities
+            If startDate.HasValue AndAlso startDate > DateTime.MinValue Then
+                Return ctx.SystemLogs.Where(Function(l) l.CreateDate > startDate).OrderByDescending(Function(l) l.CreateDate).ToList
+            Else
+                Return ctx.SystemLogs.OrderByDescending(Function(l) l.CreateDate).Take(100).ToList
+            End If
+        End Using
+    End Function
+
     Public Shared Sub LogError(title As String, ex As Exception, url As String, createby As String, bble As String)
 
         If TypeOf ex Is ThreadAbortException Then

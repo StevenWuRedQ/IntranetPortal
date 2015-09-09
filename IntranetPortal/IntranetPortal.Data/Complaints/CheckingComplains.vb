@@ -11,6 +11,12 @@ Partial Public Class CheckingComplain
         End Using
     End Function
 
+    Public Shared Function GetComplaints(address As String) As CheckingComplain
+        Using ctx As New ConstructionEntities
+            Return ctx.CheckingComplains.Where(Function(c) c.Address.StartsWith(address)).FirstOrDefault
+        End Using
+    End Function
+
     Public Shared Function GetLightAllComplains() As List(Of CheckingComplain)
         Using ctx As New ConstructionEntities
             Return ctx.CheckingComplains.Select(Function(c) New With {c.BBLE, c.Address, c.TotalComplaints, c.ActiveComplaints, c.NotifyUsers, c.LastExecute, c.CreateBy}).ToList.Select(Function(c) New CheckingComplain With {
