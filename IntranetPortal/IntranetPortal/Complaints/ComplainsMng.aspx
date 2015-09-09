@@ -517,7 +517,9 @@
                             this.DataGrid.filter([
                                 ["Address", "contains", key],
                                 "or",
-                                ["BBLE", "contains", key]
+                                ["BBLE", "contains", key],
+                                "or",
+                                ["Status", "contains", key],
                             ]);
                         }
                     }

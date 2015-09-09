@@ -26,7 +26,6 @@ Public Class LegalCaseManage
         If Not Legal.LegalCase.InLegal(bble) Then
             Dim ld = Lead.GetInstance(bble)
 
-
             Dim lc As New Legal.LegalCase
             lc.BBLE = bble
             lc.CaseName = ld.LeadsName
@@ -48,6 +47,16 @@ Public Class LegalCaseManage
             lc.SaveData(createBy)
 
             WorkflowService.StartLegalRequest(ld.LeadsName, bble, String.Join(";", Roles.GetUsersInRole("Legal-Manager")))
+        Else
+            Dim data = JObject.Parse(caseData)
+            Dim questionData = data.Item("PreQuestions")
+            If questionData IsNot Nothing Then
+                Dim lcase = LegalCase.GetCase(bble)
+                Dim lcaseData = JObject.Parse(lcase.CaseData)
+                lcaseData.Item("PreQuestions") = questionData
+                lcase.CaseData = lcaseData.ToString
+                lcase.SaveData(createBy)
+            End If
         End If
     End Sub
 
