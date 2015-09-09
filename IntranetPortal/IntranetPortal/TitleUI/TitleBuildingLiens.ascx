@@ -9,7 +9,7 @@
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Upload</label>
-                <pt-file file-bble="Form.FormData.BBLE" upload-type="uploadType" file-id="Housing_and_Building_Search_Upload" file-model="FormData.buildingLiens.Housing_and_Building_Search_Upload"></pt-file>
+                <pt-file file-bble="BBLE" upload-type="title" file-id="Housing_and_Building_Search_Upload" file-model="FormData.buildingLiens.Housing_and_Building_Search_Upload"></pt-file>
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -19,7 +19,7 @@
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Upload</label>
-                <pt-file file-bble="Form.FormData.BBLE" upload-type="uploadType" file-id="Emergency_Repairs_search_Upload" file-model="FormData.buildingLiens.Emergency_Repairs_search_Upload"></pt-file>
+                <pt-file file-bble="BBLE" upload-type="title" file-id="Emergency_Repairs_search_Upload" file-model="FormData.buildingLiens.Emergency_Repairs_search_Upload"></pt-file>
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -29,7 +29,7 @@
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Upload</label>
-                <pt-file file-bble="Form.FormData.BBLE" upload-type="uploadType" file-id="Fire_Search_Upload" file-model="FormData.buildingLiens.Fire_Search_Upload"></pt-file>
+                <pt-file file-bble="BBLE" upload-type="title" file-id="Fire_Search_Upload" file-model="FormData.buildingLiens.Fire_Search_Upload"></pt-file>
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -39,7 +39,7 @@
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Upload</label>
-                <pt-file file-bble="Form.FormData.BBLE" upload-type="uploadType" file-id="Street_Report_Upload" file-model="FormData.buildingLiens.Street_Report_Upload"></pt-file>
+                <pt-file file-bble="BBLE" upload-type="title" file-id="Street_Report_Upload" file-model="FormData.buildingLiens.Street_Report_Upload"></pt-file>
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -49,7 +49,7 @@
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Upload</label>
-                <pt-file file-bble="Form.FormData.BBLE" upload-type="uploadType" file-id="Taxes_and_Water_Upload" file-model="FormData.buildingLiens.Taxes_and_Water_Upload"></pt-file>
+                <pt-file file-bble="BBLE" upload-type="title" file-id="Taxes_and_Water_Upload" file-model="FormData.buildingLiens.Taxes_and_Water_Upload"></pt-file>
             </li>
 
         </ul>

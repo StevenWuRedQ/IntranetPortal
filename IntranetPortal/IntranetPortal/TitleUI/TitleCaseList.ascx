@@ -21,12 +21,7 @@
                     }
                 }
             }
-
             return;
-
-
-
-
             if (typeof cbpLogs == "undefined")
                 return
 
