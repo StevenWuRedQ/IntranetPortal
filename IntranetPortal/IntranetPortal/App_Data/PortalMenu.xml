@@ -635,6 +635,11 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="PortalBusisnessRule" Text="System Monitor" NavigationUrl="/Management/BusinessRulesMng.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <PortalNavItem Name="PortalStatus" Text="Portal Status" NavigationUrl="/Management/PortalStatus.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>

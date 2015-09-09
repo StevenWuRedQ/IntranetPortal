@@ -54,7 +54,7 @@ Public Class LegalCaseManage
                 Dim lcase = LegalCase.GetCase(bble)
                 Dim lcaseData = JObject.Parse(lcase.CaseData)
                 If lcaseData IsNot Nothing Then
-                    lcaseData.Item("PreQuestions") = questionData.ToString
+                    lcaseData.Item("PreQuestions") = questionData
                     lcase.CaseData = lcaseData.ToString
                     lcase.SaveData(createBy)
                 End If

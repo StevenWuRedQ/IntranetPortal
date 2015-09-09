@@ -184,7 +184,7 @@
 
     Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
         If e.Parameter.StartsWith("Show") Then
-            tbUsers.DataSource = Employee.GetAllActiveEmps()
+            tbUsers.DataSource = Employee.GetAllActiveEmps().OrderBy(Function(r) r).ToArray
             tbUsers.DataBind()
 
             Dim bble = e.Parameter.Split("|")(1)

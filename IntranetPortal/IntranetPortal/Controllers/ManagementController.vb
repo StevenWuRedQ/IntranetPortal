@@ -4,6 +4,7 @@ Imports System.Web.Http.Description
 Imports Newtonsoft.Json.Linq
 Imports IntranetPortal.Data
 Imports IntranetPortal.Data.RulesEngine
+Imports System.Net.Http
 
 Namespace Controllers
     Public Class ManagementController
@@ -34,6 +35,21 @@ Namespace Controllers
                 svr.StopRule(ruleId)
                 Return True
             End Using
+        End Function
+
+        <Route("api/Management/SystemLogs/")>
+        Function PostSystemLogs(<FromBody> updateTime As DateTime?) As IHttpActionResult
+            Dim logs = Core.SystemLog.GetLatestLogs(updateTime)
+
+            If logs.Count > 0 Then
+                updateTime = logs.First.CreateDate
+            End If
+
+            Return Ok(New With {
+                      .Logs = logs,
+                      .UpdateTime = updateTime
+                      })
+
         End Function
 
     End Class
