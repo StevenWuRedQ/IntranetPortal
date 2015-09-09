@@ -1,6 +1,12 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TitleOwnerLiens.ascx.vb" Inherits="IntranetPortal.TitleOwnerLiens" %>
-<div class="ss_form ">
-    <h4 class="ss_form_title ">Mortgage +</h4>
+
+<tabset class="tab-switch">
+    <tab ng-repeat="mortgage in Form.FormData.Owners" active="mortgage.active" disable="mortgage.disabled">
+         <tab-heading>{{mortgage.name}}</tab-heading>
+        <%-- <div class="text-right" ng-show="SsCase.PropertyInfo.Owners.length>1" style="margin-bottom:-25px"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.PropertyInfo.Owners.length>1" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.Owners, $index)" title="Delete"></i></div>--%>
+        <div class="ss_border" style="border-top: 0">
+    <div class="ss_form ">
+    <h4 class="ss_form_title ">Mortgage</h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
@@ -159,4 +165,7 @@
             </li>
         </ul>
     </div>
-</div>
+</div></div>
+        </tab>
+    <%--i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.PropertyInfo.Owners,false,true)" ng-show="SsCase.PropertyInfo.Owners.length<=2" title="Add" style="font-size: 18px"></i>  --%>
+        </tabset>

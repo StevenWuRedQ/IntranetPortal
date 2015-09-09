@@ -5,7 +5,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Title Contin</label>
-                <input class="ss_form_input " ng-model="FormData.surveyAndContin.Title_Contin">
+               <%--  <input class="ss_form_input " ng-model="FormData.surveyAndContin.Title_Contin"> --%>
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Date Requested</label>
@@ -17,7 +17,7 @@
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Tax and Water Contin</label>
-                <input class="ss_form_input " ng-model="FormData.surveyAndContin.Tax_and_Water_Contin">
+               <%-- <input class="ss_form_input " ng-model="FormData.surveyAndContin.Tax_and_Water_Contin">  --%>
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Date Requested</label>
@@ -29,7 +29,7 @@
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">ER Contin</label>
-                <input class="ss_form_input " ng-model="FormData.surveyAndContin.ER_Contin">
+              <%--  <input class="ss_form_input " ng-model="FormData.surveyAndContin.ER_Contin"> --%>
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Date Requested</label>

@@ -1,13 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TitleBuildingLiens.ascx.vb" Inherits="IntranetPortal.TitleBuildingLiens" %>
 <div class="ss_form ">
-    <h4 class="ss_form_title "></h4>
+    <h4 class="ss_form_title ">Municipal Schedule</h4>
     <div class="ss_border">
-        <ul class="ss_form_box clearfix">
-            <li class="ss_form_item ">
-                <label class="ss_form_input_title ">Municipal Schedule</label>
-                <input class="ss_form_input" ng-model="FormData.buildingLiens.Municipal_Schedule">
-            </li>
-        </ul>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Housing and Building Search</label>

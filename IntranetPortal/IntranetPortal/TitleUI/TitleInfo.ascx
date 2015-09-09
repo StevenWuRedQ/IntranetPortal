@@ -7,7 +7,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">PROPERTY ADDRESS</label>
-                <input class="ss_form_input " ng-model="Form.FormData.info.PROPERTY_ADDRESS">
+                <input class="ss_form_input " ng-model="Form.FormData.info.PROPERTY_ADDRESS" pt-init-model="LeadsInfo.PropertyAddress">
             </li>
         </ul>
     </div>
@@ -18,23 +18,23 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Company</label>
-                <input class="ss_form_input " ng-model="Form.FormData.info.Company">
+                <input class="ss_form_input " ng-model="Form.FormData.info.Company" pt-init-model="SsCase.BuyerTitle.CompanyName">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Title Num</label>
-                <input class="ss_form_input " ng-model="Form.FormData.info.Title_Num">
+                <input class="ss_form_input " ng-model="Form.FormData.info.Title_Num" pt-init-model="SsCase.BuyerTitle.OrderNumber">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Order Date</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Order_Date">
+                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Order_Date" pt-init-model="SsCase.BuyerTitle.ReportOrderDate"> 
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Confirmation Date</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Confirmation_Date">
+                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Confirmation_Date" pt-init-model="SsCase.BuyerTitle.ConfirmationDate">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Received Date</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Received_Date">
+                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Received_Date" pt-init-model="SsCase.BuyerTitle.ReceivedDate">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Initial Reivew Date</label>
@@ -49,15 +49,15 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Lot Size</label>
-                <input class="ss_form_input " ng-model="Form.FormData.info.Lot_Size">
+                <input class="ss_form_input " ng-model="Form.FormData.info.Lot_Size" pt-init-model="LeadsInfo.LotDem">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Tax Class</label>
-                <input class="ss_form_input " ng-model="Form.FormData.info.Tax_Class">
+                <input class="ss_form_input " ng-model="Form.FormData.info.Tax_Class" pt-init-model="LeadsInfo.PropertyClass">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Total Units</label>
-                <input class="ss_form_input " ng-model="Form.FormData.info.Total_Units">
+                <input class="ss_form_input " ng-model="Form.FormData.info.Total_Units" pt-init-model="PropertyInfo.NumOfUnit">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Certificate</label>
@@ -76,7 +76,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Title Vested</label>
-                <pt-file file-bble="Form.FormData.BBLE" upload-type="uploadType" file-id="CHAINOFTITLE-Status_TitleVested0" file-model="Form.FormData.info.Title_Vested"></pt-file>
+                <pt-file file-bble="BBLE" upload-type="title" file-id="CHAINOFTITLE-Status_TitleVested0" file-model="Form.FormData.info.Title_Vested"></pt-file>
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -85,8 +85,8 @@
                 <pt-radio name="CHAINOFTITLE-Status_Consideration0" model="Form.FormData.info.Consideration"></pt-radio>
             </li>
         </ul>
-        <div class="ss_form_item_line">
-            <label class="ss_form_input_title ">Consideration Note</label>
+        <div class="ss_form_item_line nga-fast nga-fade" ng-show="Form.FormData.info.Consideration">
+            <label class="ss_form_input_title" >Consideration Note</label>
             <textarea class="edit_text_area text_area_ss_form " model="Form.FormData.info.Consideration_Note"></textarea>
         </div>
         <ul class="ss_form_box clearfix">
@@ -95,8 +95,8 @@
                 <pt-radio name="CHAINOFTITLE-Status_LifeEstate0" model="Form.FormData.info.Life_Estate"></pt-radio>
             </li>
         </ul>
-        <div class="ss_form_item_line">
-            <label class="ss_form_input_title ">Life Estate Note</label>
+        <div class="ss_form_item_line nga-fast nga-fade" ng-show="Form.FormData.info.Life_Estate">
+            <label class="ss_form_input_title" >Life Estate Note</label>
             <textarea class="edit_text_area text_area_ss_form " model="Form.FormData.info.Life_Estate_Note"></textarea>
         </div>
         <ul class="ss_form_box clearfix">
@@ -104,10 +104,9 @@
                 <label class="ss_form_input_title ">Devolution of Title</label>
                 <pt-radio name="CHAINOFTITLE-Status_DevolutionofTitle0" model="Form.FormData.info.Devolution_of_Title"></pt-radio>
             </li>
-
         </ul>
-        <div class="ss_form_item_line">
-            <label class="ss_form_input_title ">Devolution of Title Note</label>
+        <div class="ss_form_item_line nga-fast nga-fade" ng-show="Form.FormData.info.Devolution_of_Title">
+            <label class="ss_form_input_title" >Devolution of Title Note</label>
             <textarea class="edit_text_area text_area_ss_form " model="Form.FormData.info.Devolution_of_Title_Note"></textarea>
         </div>
     </div>

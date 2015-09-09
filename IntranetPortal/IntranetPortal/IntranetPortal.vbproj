@@ -690,6 +690,7 @@
     <Compile Include="Controllers\ShortSaleLeadsInfoesController.vb" />
     <Compile Include="Controllers\TaxLiensController.vb" />
     <Compile Include="Controllers\TaxLiensODataController.vb" />
+    <Compile Include="Controllers\TitleController.vb" />
     <Compile Include="DataAPITesting.aspx.designer.vb">
       <DependentUpon>DataAPITesting.aspx</DependentUpon>
     </Compile>

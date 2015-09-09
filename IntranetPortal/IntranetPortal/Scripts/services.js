@@ -315,10 +315,37 @@ app.service('ptFileService', function () {
             case 'construction':
                 this.uploadConstructionFile(data, bble, rename, folder, callback);
                 break;
+            case 'title':
+                this.uploadTitleFile(data, bble, rename, folder, callback);
+                break;
             default:
                 this.uploadConstructionFile(data, bble, rename, folder, callback);
                 break;
 
+        }
+    }
+
+    this.uploadTitleFile = function (data, bble, rename, folder, callback) {
+        var fileName = rename ? rename : '';
+        var folder = folder ? folder : '';
+        if (!data || !bble) {
+            callback('Upload infomation missing!')
+        } else {
+            bble = bble.trim();
+            $.ajax({
+                url: '/api/Title/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + folder,
+                type: 'POST',
+                data: data,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (data1) {
+                    callback(null, data1, rename);
+                },
+                error: function () {
+                    callback('Upload fails!', null, rename)
+                }
+            });
         }
     }
 
