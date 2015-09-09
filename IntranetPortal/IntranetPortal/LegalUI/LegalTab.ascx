@@ -165,7 +165,7 @@
                     <span class="time_buttons" onclick="$('#RequestModal').modal()" style="display: none">Request Document</span>
                     <br />
                     
-                    <span class="time_buttons" ng-show="LegalCase.PreQuestions" onclick="window.open('/LegalUI/LegalPreQuestions.aspx?bble=' + leadsInfoBBLE, 'LegalPreQuestion', 'width=1024, height=800');">Show Questions Form</span>
+                    <span class="time_buttons" ng-show="LegalCase.PreQuestions" onclick="window.open('/LegalUI/LegalPreQuestions.aspx?r=true&bble=' + leadsInfoBBLE, 'LegalPreQuestion', 'width=1024, height=800');">Show Questions Form</span>
                 </div>
                 <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; visibility: visible">{{GetCaseInfo().Name}}</span>
             </div>

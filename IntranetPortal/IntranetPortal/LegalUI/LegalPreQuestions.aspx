@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <asp:HiddenField runat="server" ID="hfInProcessBBLE" />
-    <div ng-controller="LegalPreQuesCtrl" style="margin: 20px">
+    <div id="LegalPreQuesCtrl" ng-controller="LegalPreQuesCtrl" style="margin: 20px">
         <div class="container ss_border">
             <h4 class="text-center text-uppercase text-warning">Note: All the infomation must be filled out before send to Legal Department.</h4>
             <div class="col-md-12" style="margin: 20px 2px">
@@ -325,44 +325,56 @@
                     <div class="clearfix"></div>
                 </div>
             </div>
-
+            <% If Not IsReview Then %>
             <div class="col-md-12 text-center" style="margin: 10px 2px">
                 <hr />
                 <button type="button" class="btn btn-primary" ng-class="validate()?'':'disabled'" ng-click="save()">Assign To Legal</button>
             </div>
+            <% Else %>
+            <div class="col-md-12 text-center" style="margin: 10px 2px">
+                <hr />
+                <button type="button" class="btn btn-primary" onclick="window.close()">Close</button>
+            </div>
+            <% End If %>
         </div>
     </div>
     <script>
-        angular.module('PortalApp').controller('LegalPreQuesCtrl', function ($scope) {
+        $(document).ready(function () {
+            var isReview = '<%= IsReview %>' === 'True'? true: false;
+            var scope = angular.element($('#LegalPreQuesCtrl')[0]).scope();
+            if(isReview) scope.load();
+        })
+        angular.module('PortalApp').controller('LegalPreQuesCtrl', function ($scope, ptLegalService) {
             $scope.PreQuestions = {
                 PartitionReview: {},
-            
-            }
-            $scope.save = function () {
-                if ($scope.validate()) {
-                    var url = '/LegalUI/LegalServices.svc/StartNewLegalCase';
-                    var data = {
-                        bble: <%= BBLE %>, 
-                        casedata: JSON.stringify({PreQuestions: $scope.PreQuestions}),
-                        createBy: "<%= Page.User.Identity.Name %>",
-                    }
-                        $.ajax({
-                            type: "POST",
-                            url: url,
-                            data: JSON.stringify(data),
-                            dataType: 'json',
-                            contentType: "application/json",
-                            success: function (data) {
-                                alert("Assign to Legal Success!");
-                                window.close();
-                            },
-                            error: function (data) {
-                                alert("Assign to Legal failed, BBLE is " + "<%= BBLE%>");
-                        }
-                    });
-                    }
+                DeedReversionReview: {},
+                QuietTitleReview: {},
+                SpecificReview: {}            
             }
             
+            $scope.save = function (){
+                ptLegalService.savePreQuestions(<%= BBLE %> , '<%= Page.User.Identity.Name %>', $scope.PreQuestions, function(error, data){
+                    if(error) console.log("Assign to Legal failed, BBLE is <%= BBLE %>");
+                    else{
+                        alert("Assign to Legal Success!");
+                        window.close();
+                    }
+                })
+            }
+            
+            $scope.load = function (){
+                ptLegalService.load(<%= BBLE %>, function(error, data){
+                    if(error) console.log(error)
+                    else{
+                        var data = data.d;
+                        $scope.$apply(function(){
+                            _.extend($scope.PreQuestions, JSON.parse(data).PreQuestions)                        
+                        })
+                        
+                    }
+                })
+            }
+
             $scope.validate = function(){
                 return $scope.reviewChecked()
                     && (!$scope.PreQuestions.IsTenents || ($scope.PreQuestions.IsTenents && !$scope.PreQuestions.IsTenentsPayRent) || ($scope.PreQuestions.IsTenents && $scope.PreQuestions.IsTenentsPayRent && $scope.PreQuestions.TenentsPayTo))

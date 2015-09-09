@@ -318,7 +318,7 @@ app.service('ptFileService', function () {
             default:
                 this.uploadConstructionFile(data, bble, rename, folder, callback);
                 break;
-            
+
         }
     }
 
@@ -483,3 +483,47 @@ app.service('ptConstructionService', [
         }
     }
 ]);
+
+app.factory('ptLegalService', [
+    '$http', function () {
+        return {
+            load: function (bble, callback) {
+                var url = '/LegalUI/LegalUI.aspx/GetCaseData';
+                var data = { bble: bble };
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (data) {
+                        callback(null, data)},
+                    error: function () {
+                        callback('load data fails')
+                    }
+                })
+            },
+            savePreQuestions: function (bble, createBy, data, callback) {
+                var url = '/LegalUI/LegalServices.svc/StartNewLegalCase';
+                var data = {
+                    bble: bble,
+                    casedata: JSON.stringify({ PreQuestions: data }),
+                    createBy: createBy,
+                }
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (data) {
+                        callback(null, data)                        
+                    },
+                    error: function () {
+                        callback('load data fails')
+                    }
+                });
+            }
+        }
+    }
+])
