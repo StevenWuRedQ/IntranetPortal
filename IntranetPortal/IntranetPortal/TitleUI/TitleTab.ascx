@@ -184,7 +184,8 @@
         }
         $scope.Load = function (data) {
             $scope.reload();
-            $.extend(true, $scope.Form, ptCom.nullToUndefined(data))
+            ptCom.nullToUndefined(data)
+            $.extend(true, $scope.Form, data)
             $scope.BBLE = data.FormData.BBLE;
             ptLeadsService.getLeadsByBBLE($scope.BBLE, function (res) {
                 $scope.LeadsInfo = res;                
