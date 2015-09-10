@@ -734,4 +734,20 @@ Public Class Troubleshooting
             txtComplaintsResult.Text += address & Environment.NewLine
         Next
     End Sub
+
+    Private Sub btnNotify_Click(sender As Object, e As EventArgs) Handles btnNotify.Click
+        Dim bble = txtBBLE.Text
+
+        If String.IsNullOrEmpty(bble) Then
+            Dim complaints = CheckingComplain.GetAllComplains()
+
+            For Each cpl In complaints
+                cpl.NotifyAction(Nothing)
+            Next
+
+        Else
+            Dim complaints = CheckingComplain.Instance(bble)
+            complaints.NotifyAction(Nothing)
+        End If
+    End Sub
 End Class

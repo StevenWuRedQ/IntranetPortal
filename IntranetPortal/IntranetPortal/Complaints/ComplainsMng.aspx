@@ -423,7 +423,7 @@
                         var myDate = new Date(tempDate);
 
                         if (myDate.getFullYear() >= 1900) {
-                            return myDate.toDateString("en-US")
+                            return myDate.getUTCMonth() + "/" + myDate.getUTCDate() + "/" + myDate.getUTCFullYear();
                         }
                         return "";
                     };

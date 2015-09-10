@@ -101,11 +101,12 @@ Partial Class Troubleshooting
         Me.btnFollowUp = New System.Windows.Forms.Button()
         Me.btnRefreshLegalReport = New System.Windows.Forms.Button()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.txtComplaintsResult = New System.Windows.Forms.TextBox()
+        Me.btnComplaintsNotify = New System.Windows.Forms.Button()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.btnComplaintsRefresh = New System.Windows.Forms.Button()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.btnComplaintsNotify = New System.Windows.Forms.Button()
-        Me.txtComplaintsResult = New System.Windows.Forms.TextBox()
+        Me.btnNotify = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -882,6 +883,7 @@ Partial Class Troubleshooting
         '
         'TabPage8
         '
+        Me.TabPage8.Controls.Add(Me.btnNotify)
         Me.TabPage8.Controls.Add(Me.txtComplaintsResult)
         Me.TabPage8.Controls.Add(Me.btnComplaintsNotify)
         Me.TabPage8.Controls.Add(Me.Label13)
@@ -893,6 +895,32 @@ Partial Class Troubleshooting
         Me.TabPage8.TabIndex = 8
         Me.TabPage8.Text = "Complaints"
         Me.TabPage8.UseVisualStyleBackColor = True
+        '
+        'txtComplaintsResult
+        '
+        Me.txtComplaintsResult.Location = New System.Drawing.Point(12, 155)
+        Me.txtComplaintsResult.Multiline = True
+        Me.txtComplaintsResult.Name = "txtComplaintsResult"
+        Me.txtComplaintsResult.Size = New System.Drawing.Size(336, 81)
+        Me.txtComplaintsResult.TabIndex = 4
+        '
+        'btnComplaintsNotify
+        '
+        Me.btnComplaintsNotify.Location = New System.Drawing.Point(12, 105)
+        Me.btnComplaintsNotify.Name = "btnComplaintsNotify"
+        Me.btnComplaintsNotify.Size = New System.Drawing.Size(108, 29)
+        Me.btnComplaintsNotify.TabIndex = 3
+        Me.btnComplaintsNotify.Text = "Update Notify"
+        Me.btnComplaintsNotify.UseVisualStyleBackColor = True
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(9, 78)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(31, 13)
+        Me.Label13.TabIndex = 2
+        Me.Label13.Text = "Files:"
         '
         'btnComplaintsRefresh
         '
@@ -913,31 +941,14 @@ Partial Class Troubleshooting
         Me.TabPage9.Text = "Construction"
         Me.TabPage9.UseVisualStyleBackColor = True
         '
-        'Label13
+        'btnNotify
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(9, 78)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(31, 13)
-        Me.Label13.TabIndex = 2
-        Me.Label13.Text = "Files:"
-        '
-        'btnComplaintsNotify
-        '
-        Me.btnComplaintsNotify.Location = New System.Drawing.Point(12, 105)
-        Me.btnComplaintsNotify.Name = "btnComplaintsNotify"
-        Me.btnComplaintsNotify.Size = New System.Drawing.Size(108, 29)
-        Me.btnComplaintsNotify.TabIndex = 3
-        Me.btnComplaintsNotify.Text = "Update Notify"
-        Me.btnComplaintsNotify.UseVisualStyleBackColor = True
-        '
-        'txtComplaintsResult
-        '
-        Me.txtComplaintsResult.Location = New System.Drawing.Point(12, 155)
-        Me.txtComplaintsResult.Multiline = True
-        Me.txtComplaintsResult.Name = "txtComplaintsResult"
-        Me.txtComplaintsResult.Size = New System.Drawing.Size(336, 81)
-        Me.txtComplaintsResult.TabIndex = 4
+        Me.btnNotify.Location = New System.Drawing.Point(138, 15)
+        Me.btnNotify.Name = "btnNotify"
+        Me.btnNotify.Size = New System.Drawing.Size(108, 29)
+        Me.btnNotify.TabIndex = 5
+        Me.btnNotify.Text = "Notify Action"
+        Me.btnNotify.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1063,4 +1074,5 @@ Partial Class Troubleshooting
     Friend WithEvents btnComplaintsNotify As System.Windows.Forms.Button
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents txtComplaintsResult As System.Windows.Forms.TextBox
+    Friend WithEvents btnNotify As System.Windows.Forms.Button
 End Class

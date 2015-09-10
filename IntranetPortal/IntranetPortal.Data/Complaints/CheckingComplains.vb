@@ -5,9 +5,9 @@ Partial Public Class CheckingComplain
 
     Public Const LogTitleRefreshComplain As String = "RefreshPropertyComplaints"
 
-    Public Shared Function GetAllComplains() As List(Of CheckingComplain)
+    Public Shared Function GetAllComplains(Optional bble As String = "") As List(Of CheckingComplain)
         Using ctx As New ConstructionEntities
-            Return ctx.CheckingComplains.ToList
+            Return ctx.CheckingComplains.Where(Function(c) c.BBLE = bble Or bble = "").ToList
         End Using
     End Function
 
@@ -68,7 +68,7 @@ Partial Public Class CheckingComplain
 
         Dim result As New List(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result)
 
-        For Each cp In GetAllComplains()
+        For Each cp In GetAllComplains(bble)
 
             If Not String.IsNullOrEmpty(cp.LastComplaintsResult) Then
                 For Each item In cp.ComplaintsResult
