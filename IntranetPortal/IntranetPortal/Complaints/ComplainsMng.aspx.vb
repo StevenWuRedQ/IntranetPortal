@@ -2,11 +2,16 @@
     Inherits System.Web.UI.Page
 
     Public Property ComplaintsAmount As Integer
+    Public Property DetailView As Boolean
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
-            BindGrid()
 
+            If Request.QueryString("BBLE") Is Nothing Then
+                BindGrid()
+            Else
+                DetailView = True
+            End If
             'gdComplainsResult.FilterExpression = "[Status] LIKE '%ACT%'"
         End If
     End Sub

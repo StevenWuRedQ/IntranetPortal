@@ -21,6 +21,7 @@
             var key = document.getElementById("gdComplainKey").value;
             key = key.trim();
             if (key == "") {
+                Complaints.Filter("");
                 //gdComplainsResult.ClearFilter();
                 return;
             }
@@ -141,11 +142,11 @@
             -webkit-border-radius: 50px;
             border-radius: 50px;
             color: #fff;
-            display: inline-block;            
+            display: inline-block;
             font-size: 16px;
             font-weight: 900;
             line-height: 30px;
-            margin-right: 10px;          
+            margin-right: 10px;
             min-width: 16px;
             padding-left: 7px;
             padding-right: 7px;
@@ -153,7 +154,9 @@
         }
     </style>
     <div class="container">
-        <h3 style="text-align: center; line-height: 50px">DOB Complaints Watch List</h3>
+        <h3 style="text-align: center; line-height: 50px">DOB Complaints <% If Not DetailView Then%> Watch List <% End If%> </h3>
+        <% If Not DetailView Then%>
+
         <div class="row form_border">
             <div class="form_header">
                 Add Property to Watch &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#tblAddProp'))"></i>
@@ -270,6 +273,16 @@
                 </dx:ASPxGridView>
             </div>
         </div>
+
+        <script type="text/javascript">
+            $(function () { SetView() });
+            $(function () {
+                setTimeout(RefreshResult(), 1000);
+            });
+        </script>
+
+        <% End If%>
+
         <div class="row form_border">
             <div class="form_header">
                 DOB Complaints Details &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplainResult'))"></i>
@@ -347,7 +360,7 @@
                         <tr>
                             <td>LastInspection:
                             </td>
-                            <td>{%=data.LastInspection%}
+                            <td style="background-color: lightyellow">{%=data.LastInspection%}
                             </td>
                             <td style="width: 150px">Category:
                             </td>
@@ -356,9 +369,9 @@
 
                         </tr>
                         <tr>
-                            <td>Disposition:
+                            <td style="width: 150px">Comments:
                             </td>
-                            <td>{%=data.Disposition%}
+                            <td style="background-color: lightyellow">{%=data.Comments%}
                             </td>
                             <td>DispositionDetails:
                             </td>
@@ -366,9 +379,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 150px">Comments:
+                            <td>Disposition:
                             </td>
-                            <td>{%=data.Comments%}
+                            <td>{%=data.Disposition%}
                             </td>
                             <td>LastUpdated:
                             </td>
@@ -407,16 +420,16 @@
                     };
                     _.template.formatdatevalue = function (newDate) {
                         var tempDate = Date.parse(newDate);
-                        var myDate = new Date(tempDate);                      
+                        var myDate = new Date(tempDate);
 
-                        if (myDate.getFullYear() >= 1900)
-                        {
-                            return myDate.toLocaleDateString("en-US")
+                        if (myDate.getFullYear() >= 1900) {
+                            return myDate.toDateString("en-US")
                         }
-                        return "";                        
+                        return "";
                     };
 
                     var Complaints = {
+                        BBLE: null,
                         Result: null,
                         DataGrid: null,
                         LoadResult: function () {
@@ -427,7 +440,10 @@
                                         return view.Result
 
                                     var d = $.Deferred();
-                                    $.getJSON("/api/Complaints").done(function (data) {
+
+                                    var url = "/api/Complaints/" + (view.BBLE == null? "":view.BBLE);
+
+                                    $.getJSON(url).done(function (data) {
                                         d.resolve(data, { totalCount: data.length });
                                         view.Result = data;
                                     });
@@ -512,15 +528,19 @@
                                 this.DataGrid.refresh();
                             }
                         },
-                        Filter: function (key) {
+                        Filter: function (key) {                            
                             this.DataGrid.clearFilter('dataSource');
-                            this.DataGrid.filter([
+
+                            if (key && key != "")
+                            {
+                                this.DataGrid.filter([
                                 ["Address", "contains", key],
                                 "or",
                                 ["BBLE", "contains", key],
                                 "or",
                                 ["Status", "contains", key],
-                            ]);
+                                ]);
+                            }                            
                         }
                     }
 
@@ -911,10 +931,13 @@
         <br />
     </div>
 
+    <% If DetailView Then%>
     <script type="text/javascript">
-        $(function () { SetView() });
         $(function () {
-            setTimeout(RefreshResult(), 1000);
+            Complaints.BBLE = '<%= Request.QueryString("BBLE").ToString%>';
+            Complaints.Refresh();
         });
     </script>
+    <% End If%>
+
 </asp:Content>

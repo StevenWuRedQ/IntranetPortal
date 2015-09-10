@@ -63,6 +63,43 @@
             padding-left: 5px;
         }
 
+        /* Chrome, Safari, Opera */
+        @-webkit-keyframes example {
+            from {
+                background-color: red;
+            }
+
+            to {
+                background-color: yellow;
+            }
+        }
+
+        /* Standard syntax */
+        @keyframes example {
+            from {
+                background-color: red;
+            }
+
+            to {
+                background-color: yellow;
+            }
+        }
+
+        tr.new_row {
+            animation-name: example;
+            animation-duration: 4s;
+             background-color: inherit;
+            -webkit-animation-name: example; /* Chrome, Safari, Opera */
+            -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+        }
+
+        td.description {
+            white-space: nowrap;
+            overflow: hidden;
+            width: 200px;
+            cursor: pointer;
+        }
+
         .form_border {
             border: 1px solid #808080;
             padding: 0px;
@@ -160,12 +197,12 @@
         <div class="row form_border">
             <div class="form_header">
                 System Logs &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divLogs'))"></i>
-                  <div class="form-inline" style="float: right; font-weight: normal">
-                    <span id="txtLastUpdateTime" style="font-size:16px"></span>&nbsp;
-                    <i class="fa fa-refresh icon_btn tooltip-examples  grid_buttons" style="margin-right: 20px; font-size: 19px" onclick="systemLogs.Monitor()" title="Refresh"></i>
+                <div class="form-inline" style="float: right; font-weight: normal">
+                    <span id="txtLastUpdateTime" style="font-size: 16px"></span>&nbsp;
+                    <i class="fa fa-refresh icon_btn tooltip-examples  grid_buttons" style="margin-right: 20px; font-size: 19px" onclick="systemLogs.Refresh()" title="Refresh"></i>
                 </div>
             </div>
-            <div id="divLogs" style="height:500px;overflow-y:scroll;font-size: 14px;">
+            <div id="divLogs" style="height: 500px; overflow-y: scroll; font-size: 14px;">
                 <table id="tblLogs" class="table">
                     <thead>
                         <tr>
@@ -184,10 +221,30 @@
             </div>
         </div>
 
+        <div id="popup">
+            <textarea id="txtDesciption" style="width: 100%; height: 100%">
+
+            </textarea>
+        </div>
+
         <script type="text/javascript">
+
+            $("#popup").dxPopup({
+                width: 500,
+                height: 400,
+                showTitle: true,
+                title: 'Details',
+                closeOnOutsideClick: true,
+            });
+
+            function ShowDetails(td) {
+                $("#txtDesciption").val(td.title)
+                $("#popup").dxPopup("instance").show();
+            }
 
             var systemLogs = {
                 UpdateTime: null,
+                InUpdateing:false,
                 Refresh: function () {
                     var url = "/api/Management/SystemLogs/";
                     var data = this.UpdateTime;
@@ -199,12 +256,12 @@
                         dataType: 'json',
                         contentType: "application/json",
                         success: function (data) {
-                            sLogs.RenderData(data);
+                            sLogs.RenderData(data);                            
                         },
                         error: function (data) {
-                            alert("Failed to refresh data." + data);
+                            alert("Failed to refresh data." + JSON.stringify(data));
                         }
-                    });                   
+                    });
                 },
                 RenderData: function (data) {
                     this.UpdateTime = data.UpdateTime;
@@ -216,7 +273,7 @@
                         var table = document.getElementById("tblLogs");
                         // Create an empty <tr> element and add it to the 1st position of the table:
                         var row = table.insertRow(1);
-
+                        row.className = "new_row";
                         // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
                         var cell0 = row.insertCell(0);
                         cell0.innerHTML = log.LogId;
@@ -225,8 +282,10 @@
                         cell1.innerHTML = log.Title;
 
                         var cell2 = row.insertCell(2);
-                        cell2.innerHTML = ""; //  log.Description;
-                        cell2.style.wordWrapEnabled = false;
+                        cell2.title = log.Description;
+                        cell2.innerHTML = "View Details";
+                        cell2.className = "description";
+                        cell2.onclick = function () { ShowDetails(this); };
 
                         var cell3 = row.insertCell(3);
                         cell3.innerHTML = log.Category;
@@ -240,9 +299,15 @@
                         cell = row.insertCell(6);
                         cell.innerHTML = log.CreateBy;
                     });
+
+                    this.InUpdateing = false;
                 },
                 Monitor: function () {
-                    this.Refresh();
+                    if (!this.InUpdateing)
+                    {
+                        this.InUpdateing = true;
+                        this.Refresh();
+                    }
                     
                     window.setTimeout(function () { systemLogs.Monitor(); }, 3000);
                 },
