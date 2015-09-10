@@ -4,6 +4,8 @@ Imports System.Web.Http.Description
 Imports Newtonsoft.Json.Linq
 Imports IntranetPortal.Data
 Imports IntranetPortal.Data.RulesEngine
+Imports System.IO
+Imports Newtonsoft.Json
 Imports System.Net.Http
 
 Namespace Controllers
@@ -52,5 +54,61 @@ Namespace Controllers
 
         End Function
 
+        <ResponseType(GetType(String()))>
+        <Route("api/Management/ConvertCSV/")>
+        Public Function ConvertCSV() As String
+            If HttpContext.Current.Request.Files.Count > 0 Then
+                Dim file = HttpContext.Current.Request.Files(0)
+                Dim fileReader = New StreamReader(file.InputStream)
+
+                Dim template = Nothing
+                Dim templates = New List(Of Template)
+                Dim line = fileReader.ReadLine()
+                While Not String.IsNullOrWhiteSpace(line)
+                    Dim tokens = line.Split(",")
+                    If Not String.IsNullOrEmpty(tokens(0)) Then
+                        If tokens(1).Contains("#") Then
+                            If Not template Is Nothing Then
+                                templates.Add(template)
+                            End If
+                            template = New Template()
+                            template.title = tokens(0).Trim
+                            template.items = New List(Of TemplateItem)
+                        Else
+                            If Not template Is Nothing Then
+                                Dim item = New TemplateItem
+                                item.label = tokens(0).Trim
+                                item.type = tokens(1).Trim
+                                item.args = New List(Of String)
+                                For i As Integer = 2 To tokens.Length - 1
+                                    item.args.Add(tokens(i).Trim)
+                                Next
+                                template.items.add(item)
+                            End If
+
+                        End If
+                    End If
+
+                    line = fileReader.ReadLine()
+                End While
+                If Not template Is Nothing Then
+                    templates.Add(template)
+                End If
+                Return JsonConvert.SerializeObject(templates)
+            End If
+            Return ""
+        End Function
+
+    End Class
+
+    Class Template
+        Public title As String
+        Public items As List(Of TemplateItem)
+    End Class
+
+    Class TemplateItem
+        Public label As String
+        Public type As String
+        Public args As List(Of String)
     End Class
 End Namespace

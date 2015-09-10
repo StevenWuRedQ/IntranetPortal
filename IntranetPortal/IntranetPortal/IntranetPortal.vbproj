@@ -511,9 +511,7 @@
       <DependentUpon>BingViewMap.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="BusinessForm\BusinessControl.vb">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="BusinessForm\BusinessControl.vb" />
     <Compile Include="BusinessForm\BusinessForm.vb" />
     <Compile Include="BusinessForm\Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -1209,6 +1207,13 @@
     </Compile>
     <Compile Include="Management\ComplaintsNotify.aspx.vb">
       <DependentUpon>ComplaintsNotify.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Management\FormGenerator2.aspx.designer.vb">
+      <DependentUpon>FormGenerator2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\FormGenerator2.aspx.vb">
+      <DependentUpon>FormGenerator2.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Management\FormGenerator.aspx.designer.vb">
@@ -2674,7 +2679,7 @@
     <Content Include="Management\CombineContact.aspx" />
     <Content Include="Complaints\ComplainsMng.aspx" />
     <Content Include="Management\ComplaintsNotify.aspx" />
-    <Content Include="Management\convertcsvtojson.py" />
+    <Content Include="Management\FormGenerator2.aspx" />
     <Content Include="Management\FormGenerator.aspx" />
     <Content Include="Management\ImportAgentData.aspx" />
     <Content Include="Management\Default.aspx" />

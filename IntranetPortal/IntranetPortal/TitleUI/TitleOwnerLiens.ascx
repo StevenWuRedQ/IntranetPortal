@@ -58,7 +58,7 @@
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Index Num</label>
                 <input class="ss_form_input " ng-model="PriorOwnerLiensmortgage.Judgement_Index_Num">
-            </li>
+            </li>          
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Plaintiff</label>
                 <input type="text" class="ss_form_input " ng-model="mortgage.Judgement_Plaintiff" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
@@ -71,13 +71,16 @@
                 <label class="ss_form_input_title ">Attorney</label>
                 <input type="text" class="ss_form_input " ng-model="mortgage.Judgement_Attorney" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
-
+            <li class="clear-fix" style="list-style:none"></li>
+            <li class="ss_form_item_line" style="list-style:none">
+                <label class="ss_form_input_title ">Note +</label>
+                <textarea class="edit_text_area text_area_ss_form " model="mortgage.Judgement_Note"></textarea>
+            </li>
+            <li class="clear-fix" style="list-style:none"></li>
+            
         </ul>
     </div>
-    <div class="ss_form_item_line">
-        <label class="ss_form_input_title ">Note +</label>
-        <textarea class="edit_text_area text_area_ss_form " model="mortgage.Judgement_Note"></textarea>
-    </div>
+
 </div>
 <div class="ss_form ">
     <h4 class="ss_form_title ">ECB</h4>

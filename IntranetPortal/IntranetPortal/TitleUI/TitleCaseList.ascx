@@ -50,9 +50,6 @@
             //gridCase.GetValuesOnCustomCallback(gridCase.GetFocusedRowIndex(), OnGetRowValues);
         }
         else {
-            console.log(values);
-            console.log(leadsInfoBBLE);
-
             if (FormControl)
             {
                 var tmp = values.split("|");
@@ -170,8 +167,7 @@
                 </div>
             </div>
         </div>
-        <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
-        <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
+
     </div>
     <div style="overflow: auto; height: 798px; padding: 0 10px;" id="leads_list_left">
         <asp:HiddenField runat="server" ID="hfCaseStatus" />
