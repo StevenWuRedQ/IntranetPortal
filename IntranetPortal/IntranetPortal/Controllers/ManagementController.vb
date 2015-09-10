@@ -42,7 +42,7 @@ Namespace Controllers
             Dim logs = Core.SystemLog.GetLatestLogs(updateTime)
 
             If logs.Count > 0 Then
-                updateTime = logs.First.CreateDate
+                updateTime = logs.Last.CreateDate
             End If
 
             Return Ok(New With {

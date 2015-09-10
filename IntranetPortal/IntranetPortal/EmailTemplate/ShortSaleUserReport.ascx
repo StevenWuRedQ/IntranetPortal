@@ -39,7 +39,7 @@ Below is summary of your activities today (<%= DateTime.Today.ToShortDateString(
                 <% For Each ssCase In item.FilesWorkedWithComments%>
                 <li>
                     <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
-                        <%= ssCase.CaseName%>
+                        <%= ssCase.PropertyAddress%>
                     </a>
                 </li>
                 <% Next%>
@@ -52,7 +52,7 @@ Below is summary of your activities today (<%= DateTime.Today.ToShortDateString(
                 <% For Each ssCase In item.FilesWorkedWithoutComments%>
                 <li>
                     <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
-                        <%= ssCase.CaseName%>
+                        <%= ssCase.PropertyAddress%>
                     </a>
                 </li>
                 <% Next%>
@@ -66,7 +66,7 @@ Below is summary of your activities today (<%= DateTime.Today.ToShortDateString(
                 <% For Each ssCase In item.FilesViewedOnly%>
                 <li>
                     <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
-                        <%= ssCase.CaseName%>
+                        <%= ssCase.PropertyAddress%>
                     </a>
                 </li>
                 <% Next%>

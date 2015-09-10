@@ -73,8 +73,7 @@
             <br />
 
             <h3>Activity Breakdown:</h3>
-
-
+            
             <% For Each item In TeamActivityData%>
 
             <% If item.TotalFileOpened.Count > 0 Then%>
@@ -92,7 +91,7 @@
                             <% For Each ssCase In item.FilesWorkedWithComments%>
                             <li>
                                 <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
-                                    <%= ssCase.CaseName%>
+                                    <%= ssCase.PropertyAddress%>
                                 </a>                                
                             </li>
                             <% Next%>
@@ -105,7 +104,7 @@
                             <% For Each ssCase In item.FilesWorkedWithoutComments%>
                             <li>
                                 <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
-                                    <%= ssCase.CaseName%>
+                                    <%= ssCase.PropertyAddress%>
                                 </a>     
                             </li>
                             <% Next%>
@@ -119,7 +118,7 @@
                             <% For Each ssCase In item.FilesViewedOnly%>
                             <li>
                                 <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
-                                    <%= ssCase.CaseName%>
+                                    <%= ssCase.PropertyAddress%>
                                 </a>     
                             </li>
                             <% Next%>

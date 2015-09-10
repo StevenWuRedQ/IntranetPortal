@@ -226,6 +226,16 @@ Public Class LeadsInfo
         Return Nothing
     End Function
 
+    Public Shared Function GetLeadsByBBLEs(bbles As String()) As LeadsInfo()
+
+        Using ctx As New Entities
+
+            Return ctx.LeadsInfoes.Where(Function(ld) bbles.Contains(ld.BBLE)).ToArray
+
+        End Using
+
+    End Function
+
     <JsonIgnoreAttribute>
     Public ReadOnly Property ReferrelName As String
         Get

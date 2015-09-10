@@ -48,15 +48,15 @@
             Dim actData As New CaseActivityData
             actData.Type = type
 
-            Dim clogsBBLE = commentslogs.Where(Function(c) c.EmployeeName = user).Select(Function(c) c.BBLE).ToList
-            Dim oLogsBBLE = openLogs.Where(Function(o) o.CreateBy = user).Select(Function(o) o.BBLE).ToList
-            Dim sLogsBBLE = saveLogs.Where(Function(s) s.CreateBy = user).Select(Function(s) s.BBLE).ToList
+            Dim clogsBBLE = commentslogs.Where(Function(c) c.EmployeeName = user).Select(Function(c) c.BBLE).ToArray
+            Dim oLogsBBLE = openLogs.Where(Function(o) o.CreateBy = user).Select(Function(o) o.BBLE).ToArray
+            Dim sLogsBBLE = saveLogs.Where(Function(s) s.CreateBy = user).Select(Function(s) s.BBLE).ToArray
             actData.Name = user
 
-            actData.TotalFileOpened = Data.ShortSaleCase.GetCaseByBBLEs(oLogsBBLE)
-            actData.FilesWorkedWithComments = Data.ShortSaleCase.GetCaseByBBLEs(oLogsBBLE.Where(Function(b) clogsBBLE.Contains(b)).ToList)
-            actData.FilesWorkedWithoutComments = Data.ShortSaleCase.GetCaseByBBLEs(oLogsBBLE.Where(Function(s) sLogsBBLE.Contains(s) And Not clogsBBLE.Contains(s)).ToList)
-            actData.FilesViewedOnly = Data.ShortSaleCase.GetCaseByBBLEs(oLogsBBLE.Where(Function(o) Not clogsBBLE.Contains(o) And Not sLogsBBLE.Contains(o)).ToList)
+            actData.TotalFileOpened = LeadsInfo.GetLeadsByBBLEs(oLogsBBLE)
+            actData.FilesWorkedWithComments = LeadsInfo.GetLeadsByBBLEs(oLogsBBLE.Where(Function(b) clogsBBLE.Contains(b)).ToArray)
+            actData.FilesWorkedWithoutComments = LeadsInfo.GetLeadsByBBLEs(oLogsBBLE.Where(Function(s) sLogsBBLE.Contains(s) And Not clogsBBLE.Contains(s)).ToArray)
+            actData.FilesViewedOnly = LeadsInfo.GetLeadsByBBLEs(oLogsBBLE.Where(Function(o) Not clogsBBLE.Contains(o) And Not sLogsBBLE.Contains(o)).ToArray)
 
             result.Add(actData)
         Next
@@ -149,10 +149,10 @@
         Inherits AgentActivityData
 
         Public Property Type As ActivityType
-        Public Property FilesWorkedWithComments As List(Of Data.ShortSaleCase)
-        Public Property FilesWorkedWithoutComments As List(Of Data.ShortSaleCase)
-        Public Property FilesViewedOnly As List(Of Data.ShortSaleCase)
-        Public Property TotalFileOpened As List(Of Data.ShortSaleCase)
+        Public Property FilesWorkedWithComments As LeadsInfo()
+        Public Property FilesWorkedWithoutComments As LeadsInfo()
+        Public Property FilesViewedOnly As LeadsInfo()
+        Public Property TotalFileOpened As LeadsInfo()
 
         Public ReadOnly Property FilesWithCmtCount As Integer
             Get

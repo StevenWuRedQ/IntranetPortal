@@ -250,22 +250,28 @@ Partial Public Class CheckingComplain
 
     Public Sub NotifyAction(result As DataAPI.SP_DOB_Complaints_By_BBLE_Result())
 
+        Dim usersEmails As New List(Of String)
+
         If Not String.IsNullOrEmpty(NotifyUsers) Then
-
-            Dim users = NotifyUsers.Split(";")
-
-            For Each user In users
-
+            For Each user In NotifyUsers.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries)
                 Dim party = PartyContact.GetContactByName(user)
                 If party IsNot Nothing Then
-                    Dim mailData As New Dictionary(Of String, String)
-                    mailData.Add("UserName", party.Name)
-                    mailData.Add("Address", Address)
-                    mailData.Add("BBLE", BBLE)
-
-                    Core.EmailService.SendMail(party.Email, "", "ComplaintsNotify2", mailData)
+                    usersEmails.Add(party.Email)
                 End If
             Next
+        End If
+
+        If Not String.IsNullOrEmpty(Core.PortalSettings.GetValue("ComplaitntsNotifyEmails")) Then
+            usersEmails.AddRange(Core.PortalSettings.GetValue("ComplaitntsNotifyEmails").Split(";"))
+        End If
+
+        If usersEmails.Count > 0 Then
+            Dim mailData As New Dictionary(Of String, String)
+            mailData.Add("UserName", "All")
+            mailData.Add("Address", Address)
+            mailData.Add("BBLE", BBLE)
+
+            Core.EmailService.SendMail(String.Join(";", usersEmails), "", "ComplaintsNotify2", mailData)
         End If
     End Sub
 

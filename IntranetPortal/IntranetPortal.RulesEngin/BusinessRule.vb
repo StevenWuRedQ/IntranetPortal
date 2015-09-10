@@ -488,7 +488,7 @@ Public Class ExpiredAllReminderRule
             WorkflowService.ExpiredReminderProcess(pInstId)
 
             Dim comments = String.Format("{0} is expired by System.", tk.Action)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status, Nothing, "Portal", LeadsActivityLog.EnumActionType.SetAsTask)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString, Nothing, "Portal", LeadsActivityLog.EnumActionType.SetAsTask)
 
             Log(String.Format("Task is expired. BBLE: {0}, task Name: {1}, task user: {2}", bble, tk.Action, tk.EmployeeName))
             Return True

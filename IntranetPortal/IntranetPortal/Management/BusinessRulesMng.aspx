@@ -159,9 +159,13 @@
 
         <div class="row form_border">
             <div class="form_header">
-                System Logs &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divGridRules'))"></i>
+                System Logs &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divLogs'))"></i>
+                  <div class="form-inline" style="float: right; font-weight: normal">
+                    <span id="txtLastUpdateTime" style="font-size:16px"></span>&nbsp;
+                    <i class="fa fa-refresh icon_btn tooltip-examples  grid_buttons" style="margin-right: 20px; font-size: 19px" onclick="systemLogs.Monitor()" title="Refresh"></i>
+                </div>
             </div>
-            <div id="divLogs" style="height:500px;overflow-y:scroll">
+            <div id="divLogs" style="height:500px;overflow-y:scroll;font-size: 14px;">
                 <table id="tblLogs" class="table">
                     <thead>
                         <tr>
@@ -204,6 +208,8 @@
                 },
                 RenderData: function (data) {
                     this.UpdateTime = data.UpdateTime;
+                    var tmpDate = new Date(this.UpdateTime);
+                    $("#txtLastUpdateTime").html("Last Update Time: " + tmpDate.getUTCHours() + ":" + tmpDate.getUTCMinutes() + ":" + tmpDate.getUTCSeconds());
 
                     $.each(data.Logs, function (index, value) {
                         var log = value;
@@ -229,7 +235,7 @@
                         cell.innerHTML = log.BBLE;
 
                         var cell4 = row.insertCell(5);
-                        cell4.innerHTML = new Date(log.CreateDate).toLocaleString();
+                        cell4.innerHTML = log.CreateDate;
 
                         cell = row.insertCell(6);
                         cell.innerHTML = log.CreateBy;
@@ -237,8 +243,11 @@
                 },
                 Monitor: function () {
                     this.Refresh();
+                    
+                    window.setTimeout(function () { systemLogs.Monitor(); }, 3000);
                 },
             }
+
 
             $(function () {
                 systemLogs.Monitor();
