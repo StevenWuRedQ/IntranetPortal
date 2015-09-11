@@ -10,7 +10,7 @@ Namespace Controllers
 
         ' GET: api/ConstructionCases    
         Function GetComplaints() As IQueryable(Of Data.DataAPI.SP_DOB_Complaints_By_BBLE_Result)
-            Return Data.CheckingComplain.GetComplainsResult().AsQueryable
+            Return Data.CheckingComplain.GetComplainsResult("", If(ComplaintsManage.IsComplaintsManager(User.Identity.Name), "", User.Identity.Name)).AsQueryable
         End Function
 
         <ResponseType(GetType(SP_DOB_Complaints_By_BBLE_Result()))>

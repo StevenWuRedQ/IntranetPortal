@@ -347,8 +347,8 @@
             alert("Comments can't be empty.")
             return
         }
-
-        if ($("#selStatusUpdate").val() != "")
+      
+        if ($("#selStatusUpdate").val() != null && $("#selStatusUpdate").val() != "")
         {
             if(typeof UpdateMortgageStatus != "undefined")
                 UpdateMortgageStatus($("#selType1").val(), $("#selStatusUpdate option:selected").text(), $("#selCategory").val());

@@ -1,10 +1,15 @@
-﻿Public Class ComplainsMng
+﻿
+Public Class ComplainsMng
     Inherits System.Web.UI.Page
 
     Public Property ComplaintsAmount As Integer
     Public Property DetailView As Boolean
 
+    Public Property ManagerView As Boolean
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        ManagerView = IsComplaintsManager()
+
         If Not Page.IsPostBack Then
 
             If Request.QueryString("BBLE") Is Nothing Then
@@ -14,6 +19,7 @@
             End If
             'gdComplainsResult.FilterExpression = "[Status] LIKE '%ACT%'"
         End If
+
     End Sub
 
     Protected Sub gdCases_DataBinding(sender As Object, e As EventArgs)
@@ -22,8 +28,14 @@
         End If
     End Sub
 
+    Public Function IsComplaintsManager() As Boolean
+
+        Return ComplaintsManage.IsComplaintsManager(User.Identity.Name)
+    End Function
+
     Private Sub BindGrid()
-        Dim lists = Data.CheckingComplain.GetLightAllComplains
+        Dim lists = Data.CheckingComplain.GetLightAllComplains(If(ManagerView, "", User.Identity.Name))
+
         If lists IsNot Nothing Then
             ComplaintsAmount = lists.Count
             gdComplains.DataSource = lists
@@ -196,7 +208,7 @@
             hfBBLE2.Value = bble
             tbUsers.Text = Data.CheckingComplain.Instance(bble).NotifyUsers
         End If
-        
+
         If e.Parameter.StartsWith("Save") Then
             Dim bble = hfBBLE2.Value
             Dim cp = Data.CheckingComplain.Instance(bble)
