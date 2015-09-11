@@ -80,7 +80,7 @@ app.service('ptCom', ['$http',
             debugger;
             if (model && index < model.length) {
                 if (confirm) {
-                    var r = window.confirm("Deletion This?", "");
+                    var r = window.confirm("Delete This?", "");
                     if (r) {
                         var deleteObj = model.splice(index, 1)[0];
                         if (callback) callback(deleteObj);

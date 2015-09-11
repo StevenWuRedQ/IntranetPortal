@@ -62,7 +62,7 @@ Namespace Controllers
                 Dim fileReader = New StreamReader(file.InputStream)
 
                 Dim template = Nothing
-                Dim templates = New List(Of Template)
+                Dim templates = New List(Of CSVTemplate)
                 Dim line = fileReader.ReadLine()
                 While Not String.IsNullOrWhiteSpace(line)
                     Dim tokens = line.Split(",")
@@ -71,12 +71,12 @@ Namespace Controllers
                             If Not template Is Nothing Then
                                 templates.Add(template)
                             End If
-                            template = New Template()
+                            template = New CSVTemplate()
                             template.title = tokens(0).Trim
-                            template.items = New List(Of TemplateItem)
+                            template.items = New List(Of CSVTemplateItem)
                         Else
                             If Not template Is Nothing Then
-                                Dim item = New TemplateItem
+                                Dim item = New CSVTemplateItem
                                 item.label = tokens(0).Trim
                                 item.type = tokens(1).Trim
                                 item.args = New List(Of String)
@@ -101,12 +101,12 @@ Namespace Controllers
 
     End Class
 
-    Class Template
+    Class CSVTemplate
         Public title As String
-        Public items As List(Of TemplateItem)
+        Public items As List(Of CSVTemplateItem)
     End Class
 
-    Class TemplateItem
+    Class CSVTemplateItem
         Public label As String
         Public type As String
         Public args As List(Of String)

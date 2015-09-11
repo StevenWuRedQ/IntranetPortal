@@ -62,11 +62,11 @@
 
         <div class="shortSaleUI">
             <ul class="nav nav-tabs overview_tabs" role="tablist">
-                <li style="font-size:14px" class="short_sale_tab active"><a class="shot_sale_tab_a" href="#TitleInfoTab" role="tab" data-toggle="tab">Info</a></li>
-                <li style="font-size:14px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleOwnerLiensTab" role="tab" data-toggle="tab">Owner Liens</a></li>
-                <li style="font-size:14px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleBuildingLiensTab" role="tab" data-toggle="tab">Building Liens</a></li>
-                <li style="font-size:14px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleSurveyAndContinTab" role="tab" data-toggle="tab">Surveys And Contins</a></li>
-                <li style="font-size:14px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitlePreclosingTab" role="tab" data-toggle="tab">Preclosing Documents</a></li>
+                <li style="font-size: 14px" class="short_sale_tab active"><a class="shot_sale_tab_a" href="#TitleInfoTab" role="tab" data-toggle="tab">Info</a></li>
+                <li style="font-size: 14px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleOwnerLiensTab" role="tab" data-toggle="tab">Owner Liens</a></li>
+                <li style="font-size: 14px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleBuildingLiensTab" role="tab" data-toggle="tab">Building Liens</a></li>
+                <li style="font-size: 14px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleSurveyAndContinTab" role="tab" data-toggle="tab">Surveys And Contins</a></li>
+                <li style="font-size: 14px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitlePreclosingTab" role="tab" data-toggle="tab">Preclosing Documents</a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -168,7 +168,7 @@
         $scope.Form = {
             FormData: {
                 Comments: [],
-                Owners: [{name: "Prior Owner Liens"}, {name: "Current Owner Liens"}]
+                Owners: [{ name: "Prior Owner Liens" }, { name: "Current Owner Liens" }]
             }
         }
         $scope.ReloadedData = {}
@@ -180,15 +180,15 @@
                     Owners: [{ name: "Prior Owner Liens" }, { name: "Current Owner Liens" }]
                 }
             }
-            $scope.ReloadedData = {}
+            $scope.ReloadedData = {};
         }
         $scope.Load = function (data) {
             $scope.reload();
-            ptCom.nullToUndefined(data)
-            $.extend(true, $scope.Form, data)
+            ptCom.nullToUndefined(data);
+            $.extend(true, $scope.Form, data);
             $scope.BBLE = data.FormData.BBLE;
             ptLeadsService.getLeadsByBBLE($scope.BBLE, function (res) {
-                $scope.LeadsInfo = res;                
+                $scope.LeadsInfo = res;
             });
             ptShortsSaleService.getShortSaleCaseByBBLE($scope.BBLE, function (res) {
                 $scope.SsCase = res;

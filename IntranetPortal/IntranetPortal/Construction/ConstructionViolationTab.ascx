@@ -133,8 +133,8 @@
     </div>
 </div>
 
-<div class="ss_form" >
-    <h4 class="ss_form_title">Expeditor&nbsp;<pt-collapse model="Expeditor_Collapsed" ng-init ="Expeditor_Collapsed=true"/></h4>
+<div class="ss_form">
+    <h4 class="ss_form_title">Expeditor&nbsp;<pt-collapse model="Expeditor_Collapsed" ng-init="Expeditor_Collapsed=true" /></h4>
     <div class="ss_border" collapse="Expeditor_Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
@@ -143,7 +143,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Vendor Company</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Violations.Expeditor_VendorCompany" >
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Violations.Expeditor_VendorCompany">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Vendor Person</label>
@@ -239,7 +239,7 @@
                     <td class="col-sm-1">
                         <pt-del ng-click="arrayRemove(CSCase.CSCase.Violations.DOBViolations, $index, true)"></pt-del>
                         <div dx-popup="{    
-                                height: 450,
+                                height: 600,
                                 width: 600, 
                                 title: 'Violation '+ ($index+1),
                                 dragEnabled: true,
@@ -250,40 +250,40 @@
                             }">
                             <div data-options="dxTemplate:{ name: 'content' }">
                                 <div style="height: 88%; padding: 0px 5px; overflow-y: auto; overflow-x: hidden">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>DOB Violaton Num</label>
-                                            <input class="form-control" ng-model="violation.DOBViolationNum" />
-                                        </div>
 
-
-                                        <div class="col-sm-6">
-                                            <label>ECB Violation Number</label>
-                                            <input class="form-control" ng-model="violation.ECBViolationNumber" />
-                                        </div>
+                                    <div class="col-sm-6">
+                                        <label>DOB Violaton Num</label>
+                                        <input class="form-control" ng-model="violation.DOBViolationNum" />
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>Filed Date</label>
-                                            <input class="form-control" ng-model="violation.FiledDate" ss-date />
-                                        </div>
 
-                                        <div class="col-sm-6">
-                                            <label>Violation Status</label>
-                                            <input class="form-control" ng-model="violation.ViolationStatus" />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>Type of Violation</label>
-                                            <input class="form-control" ng-model="violation.TypeOfViolations" />
-                                        </div>
 
-                                        <div class="col-sm-6">
-                                            <label>Description</label>
-                                            <input class="form-control" ng-model="violation.Description" />
-                                        </div>
+                                    <div class="col-sm-6">
+                                        <label>ECB Violation Number</label>
+                                        <input class="form-control" ng-model="violation.ECBViolationNumber" />
                                     </div>
+
+
+                                    <div class="col-sm-6">
+                                        <label>Filed Date</label>
+                                        <input class="form-control" ng-model="violation.FiledDate" ss-date />
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label>Violation Status</label>
+                                        <input class="form-control" ng-model="violation.ViolationStatus" />
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label>Type of Violation</label>
+                                        <input class="form-control" ng-model="violation.TypeOfViolations" />
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                    <div class="col-sm-12">
+                                        <label>Description</label>
+                                        <textarea class="form-control" ng-model="violation.Description" style="resize:none; height: 100px" ></textarea>
+                                    </div>
+                                    <div class="clearfix"></div>
                                     <hr />
                                     <button class="btn btn-primary pull-right" ng-click="setPopupVisible('DOBViolations_PopupVisible_'+$index, false)">Close</button>
                                 </div>
@@ -418,7 +418,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>Respondent</label>
-                                            <input class="form-control" ng-model="violation.Respondent"/>
+                                            <input class="form-control" ng-model="violation.Respondent" />
                                         </div>
 
                                         <div class="col-sm-6">
@@ -429,7 +429,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>Filed Date</label>
-                                            <input class="form-control" ng-model="violation.FiledDate" ss-date/>
+                                            <input class="form-control" ng-model="violation.FiledDate" ss-date />
                                         </div>
 
                                         <div class="col-sm-6">
@@ -446,7 +446,7 @@
                 </tr>
             </table>
         </ul>
-        
+
         <div>
             <label class="ss_form_input_title">Upload</label>
             <pt-files file-bble="CSCase.BBLE" file-id="Violations-ECP_Upload" base-folder="Violations-ECP_Upload" file-model="CSCase.CSCase.Violations.ECP_Upload"></pt-files>
