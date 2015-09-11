@@ -6,6 +6,7 @@ Public Class ComplainsMng
     Public Property DetailView As Boolean
 
     Public Property ManagerView As Boolean
+    Public Property Complaint As Data.CheckingComplain
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         ManagerView = IsComplaintsManager()
@@ -16,6 +17,8 @@ Public Class ComplainsMng
                 BindGrid()
             Else
                 DetailView = True
+                Dim bble = Request.QueryString("BBLE")
+                Complaint = Data.CheckingComplain.Instance(bble)
             End If
             'gdComplainsResult.FilterExpression = "[Status] LIKE '%ACT%'"
         End If
@@ -71,10 +74,10 @@ Public Class ComplainsMng
 
                 'Dim result = Data.CheckingComplain.GetResultFromServices().ToJsonString
                 Dim name = User.Identity.Name
+                Dim complaints = Data.CheckingComplain.GetLightAllComplains(If(ManagerView, "", name))
+
                 Dim callback = Sub()
                                    Try
-                                       Dim complaints = Data.CheckingComplain.GetAllComplains()
-
                                        For Each cp In complaints
                                            cp.RefreshComplains(name)
                                        Next
@@ -83,6 +86,7 @@ Public Class ComplainsMng
                                        Core.SystemLog.LogError("ManualRefreshAll", ex, "", name, "")
                                    End Try
                                End Sub
+
                 Threading.ThreadPool.QueueUserWorkItem(callback)
             Else
                 Dim com = Data.CheckingComplain.Instance(bble)
@@ -112,6 +116,7 @@ Public Class ComplainsMng
         If cc Is Nothing Then
             cc = New Data.CheckingComplain
             cc.BBLE = bble
+            cc.NotifyUsers = If(ManagerView, "", User.Identity.Name)
         End If
 
         Dim ld = LeadsInfo.GetInstance(bble)

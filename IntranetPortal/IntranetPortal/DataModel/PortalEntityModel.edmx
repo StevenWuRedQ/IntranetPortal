@@ -660,6 +660,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Message" Type="nvarchar" MaxLength="1000" />
           <Property Name="NotifyTime" Type="datetime" />
           <Property Name="ReceiveTime" Type="datetime" />
+          <Property Name="MsgUrl" Type="nvarchar" MaxLength="256" />
           <Property Name="Status" Type="int" />
           <Property Name="Createby" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateTime" Type="datetime" />
@@ -1533,6 +1534,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="ParentMsg" Type="Int32" />
           <Property Name="ReceiveTime" Type="DateTime" Precision="3" />
           <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="MsgUrl" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PortalLisPen">
           <Key>
@@ -2411,6 +2413,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="UserMessages">
             <EntityTypeMapping TypeName="IntranetPortalModel.UserMessage">
               <MappingFragment StoreEntitySet="UserMessages">
+                <ScalarProperty Name="MsgUrl" ColumnName="MsgUrl" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="ReceiveTime" ColumnName="ReceiveTime" />
                 <ScalarProperty Name="ParentMsg" ColumnName="ParentMsg" />

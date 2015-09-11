@@ -980,6 +980,13 @@
       <DependentUpon>DownloadFile.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="EmailTemplate\ComplaintsNotify.ascx.designer.vb">
+      <DependentUpon>ComplaintsNotify.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\ComplaintsNotify.ascx.vb">
+      <DependentUpon>ComplaintsNotify.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="EmailTemplate\ShortSaleUserReport.ascx.designer.vb">
       <DependentUpon>ShortSaleUserReport.ascx</DependentUpon>
     </Compile>
@@ -2191,6 +2198,13 @@
       <DependentUpon>WebForm2.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="WebForm3.aspx.designer.vb">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm3.aspx.vb">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Login2.aspx" />
@@ -2347,6 +2361,7 @@
     <Content Include="DLL\Spire.Pdf.dll" />
     <Content Include="DocumentSearch\LeadsInfoDoucmentSearch.aspx" />
     <Content Include="DownloadFile.aspx" />
+    <Content Include="EmailTemplate\ComplaintsNotify.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserReport.ascx" />
     <Content Include="EmailTemplate\ActivitySummary.ascx" />
     <Content Include="EmailTemplate\EmailSummary.aspx" />
@@ -3520,6 +3535,7 @@
     <Content Include="Content\icons\dxicons.ttf" />
     <Content Include="Content\icons\dxicons.eot" />
     <Content Include="App_Data\DeedReversionTemplate.docx" />
+    <Content Include="WebForm3.aspx" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />

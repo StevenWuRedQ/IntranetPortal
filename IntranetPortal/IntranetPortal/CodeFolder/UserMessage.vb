@@ -17,17 +17,33 @@
         End Using
     End Function
 
-    Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String)
-        Return AddNewMessage(userName, title, message, bble, DateTime.Now)
+    Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String, Optional msgUrl As String = Nothing)
+        Return AddNewMessage(userName, title, message, bble, DateTime.Now, msgUrl)
     End Function
 
-    Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String, notifyTime As DateTime, createBy As String)
+    Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String, notifyTime As DateTime, Optional msgUrl As String = Nothing)
+        Dim createBy = ""
+        If HttpContext.Current IsNot Nothing AndAlso HttpContext.Current.User IsNot Nothing AndAlso HttpContext.Current.User.Identity IsNot Nothing Then
+            createBy = HttpContext.Current.User.Identity.Name
+        Else
+            createBy = "Portal"
+        End If
+
+        Return AddNewMessage(userName, title, message, bble, notifyTime, createBy, msgUrl)
+    End Function
+
+    Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String, notifyTime As DateTime, createBy As String, Optional msgUrl As String = Nothing)
         Dim msg As New UserMessage
         msg.BBLE = bble
         msg.Title = title
         msg.UserName = userName
         msg.Message = message
         msg.NotifyTime = notifyTime
+
+        If Not String.IsNullOrEmpty(msgUrl) Then
+            msg.MsgUrl = msgUrl
+        End If
+
         msg.Status = UserMessage.MsgStatus.Active
         msg.Createby = createBy
         msg.CreateTime = DateTime.Now
@@ -43,16 +59,7 @@
         End Try
     End Function
 
-    Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String, notifyTime As DateTime)
-        Dim createBy = ""
-        If HttpContext.Current IsNot Nothing AndAlso HttpContext.Current.User IsNot Nothing AndAlso HttpContext.Current.User.Identity IsNot Nothing Then
-            createBy = HttpContext.Current.User.Identity.Name
-        Else
-            createBy = "Portal"
-        End If
 
-        Return AddNewMessage(userName, title, message, bble, notifyTime, createBy)
-    End Function
 
     Public Shared Function ReadMsg(userName As String, msgId As Integer) As Boolean
         Using context As New Entities

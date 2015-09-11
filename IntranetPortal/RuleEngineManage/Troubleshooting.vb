@@ -20,7 +20,7 @@ Public Class Troubleshooting
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-     
+
 
 
 
@@ -640,7 +640,7 @@ Public Class Troubleshooting
         End If
     End Sub
 
-  
+
     Private Sub btnRefreshComplains_Click(sender As Object, e As EventArgs) Handles btnRefreshComplains.Click
         Dim rule = New IntranetPortal.RulesEngine.DOBComplaintsCheckingRule
         rule.Execute()
@@ -672,7 +672,7 @@ Public Class Troubleshooting
 
         End If
 
-        
+
     End Sub
 
     Private Sub btnComplaintsNotify_Click(sender As Object, e As EventArgs) Handles btnComplaintsNotify.Click
@@ -748,4 +748,46 @@ Public Class Troubleshooting
             complaints.NotifyAction(Nothing)
         End If
     End Sub
+
+    Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
+        Dim bbles = txtSSBBLE.Lines()
+
+        For Each bble In bbles
+
+            If Not String.IsNullOrEmpty(bble) Then
+                Dim sCase = ShortSaleCase.GetCaseByBBLE(bble)
+
+                If String.IsNullOrEmpty(sCase.FirstMortgage.Status) AndAlso String.IsNullOrEmpty(sCase.FirstMortgage.Category) Then
+
+                    Dim log = ShortSaleActivityLog.GetLogs(bble).Where(Function(l) l.ActivityType = "1st Lien").OrderByDescending(Function(l) l.ActivityDate).FirstOrDefault
+
+                    If log IsNot Nothing Then
+                        Dim title = log.ActivityTitle
+
+                        If Not String.IsNullOrEmpty(title) AndAlso title.Split("-").Length > 0 Then
+                            Dim data = title.Split("-")
+
+                            sCase.FirstMortgage.Category = data(0).Trim
+                            sCase.FirstMortgage.Status = title.Substring(title.IndexOf("-") + 1).Trim
+
+                            sCase.FirstMortgage.Save("UpdateEngine")
+                        End If
+                    End If
+                End If
+            End If
+
+        Next
+
+
+
+    End Sub
+
+    Private Sub btnNotifyAll_Click(sender As Object, e As EventArgs) Handles btnNotifyAll.Click
+
+        Dim cps = Data.CheckingComplain.GetAllComplains("", txtNotifyNames.Text)
+
+
+
+    End Sub
+
 End Class

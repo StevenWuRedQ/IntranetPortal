@@ -154,7 +154,7 @@
         }
     </style>
     <div class="container">
-        <h3 style="text-align: center; line-height: 50px">DOB Complaints <% If Not DetailView Then%> Watch List <% End If%> </h3>
+        <h3 style="text-align: center; line-height: 50px">DOB Complaints <% If Not DetailView Then%> Watch List <% Else %> for <%= Complaint.Address  %> <% End If%> </h3>
         <% If Not DetailView Then%>
 
         <div class="row form_border">
@@ -224,7 +224,7 @@
         </div>
         <div class="row form_border" style="">
             <div class="form_header">
-                Owned Properties Currently Being Watch&nbsp;<span class="notification"><%= ComplaintsAmount %></span>&nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplains'))"></i>
+                Owned Properties Currently Being Watch for You&nbsp;<span class="notification"><%= ComplaintsAmount %></span>&nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divComplains'))"></i>
                 <div class="form-inline" style="float: right; font-weight: normal">
                     <small>(**Click on BBLE to view active complaints**)</small>
                     <input type="text" style="margin-right: 10px" id="QuickSearch" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />

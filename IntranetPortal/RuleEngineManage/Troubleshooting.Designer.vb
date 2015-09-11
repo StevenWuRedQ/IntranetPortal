@@ -81,6 +81,7 @@ Partial Class Troubleshooting
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.Button14 = New System.Windows.Forms.Button()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.btnInitialContact = New System.Windows.Forms.Button()
         Me.btnImportOffer = New System.Windows.Forms.Button()
@@ -101,12 +102,14 @@ Partial Class Troubleshooting
         Me.btnFollowUp = New System.Windows.Forms.Button()
         Me.btnRefreshLegalReport = New System.Windows.Forms.Button()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.btnNotify = New System.Windows.Forms.Button()
         Me.txtComplaintsResult = New System.Windows.Forms.TextBox()
         Me.btnComplaintsNotify = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnComplaintsRefresh = New System.Windows.Forms.Button()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
-        Me.btnNotify = New System.Windows.Forms.Button()
+        Me.btnNotifyAll = New System.Windows.Forms.Button()
+        Me.txtNotifyNames = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -689,6 +692,7 @@ Partial Class Troubleshooting
         '
         'TabPage5
         '
+        Me.TabPage5.Controls.Add(Me.Button14)
         Me.TabPage5.Controls.Add(Me.Button13)
         Me.TabPage5.Controls.Add(Me.btnInitialContact)
         Me.TabPage5.Controls.Add(Me.btnImportOffer)
@@ -705,6 +709,15 @@ Partial Class Troubleshooting
         Me.TabPage5.TabIndex = 5
         Me.TabPage5.Text = "ShortSale"
         Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'Button14
+        '
+        Me.Button14.Location = New System.Drawing.Point(27, 235)
+        Me.Button14.Name = "Button14"
+        Me.Button14.Size = New System.Drawing.Size(140, 28)
+        Me.Button14.TabIndex = 9
+        Me.Button14.Text = "Makup MortgageStatus"
+        Me.Button14.UseVisualStyleBackColor = True
         '
         'Button13
         '
@@ -772,6 +785,7 @@ Partial Class Troubleshooting
         'txtSSBBLE
         '
         Me.txtSSBBLE.Location = New System.Drawing.Point(67, 66)
+        Me.txtSSBBLE.Multiline = True
         Me.txtSSBBLE.Name = "txtSSBBLE"
         Me.txtSSBBLE.Size = New System.Drawing.Size(100, 20)
         Me.txtSSBBLE.TabIndex = 1
@@ -883,6 +897,8 @@ Partial Class Troubleshooting
         '
         'TabPage8
         '
+        Me.TabPage8.Controls.Add(Me.txtNotifyNames)
+        Me.TabPage8.Controls.Add(Me.btnNotifyAll)
         Me.TabPage8.Controls.Add(Me.btnNotify)
         Me.TabPage8.Controls.Add(Me.txtComplaintsResult)
         Me.TabPage8.Controls.Add(Me.btnComplaintsNotify)
@@ -896,9 +912,18 @@ Partial Class Troubleshooting
         Me.TabPage8.Text = "Complaints"
         Me.TabPage8.UseVisualStyleBackColor = True
         '
+        'btnNotify
+        '
+        Me.btnNotify.Location = New System.Drawing.Point(138, 15)
+        Me.btnNotify.Name = "btnNotify"
+        Me.btnNotify.Size = New System.Drawing.Size(108, 29)
+        Me.btnNotify.TabIndex = 5
+        Me.btnNotify.Text = "Notify Action"
+        Me.btnNotify.UseVisualStyleBackColor = True
+        '
         'txtComplaintsResult
         '
-        Me.txtComplaintsResult.Location = New System.Drawing.Point(12, 155)
+        Me.txtComplaintsResult.Location = New System.Drawing.Point(11, 238)
         Me.txtComplaintsResult.Multiline = True
         Me.txtComplaintsResult.Name = "txtComplaintsResult"
         Me.txtComplaintsResult.Size = New System.Drawing.Size(336, 81)
@@ -906,7 +931,7 @@ Partial Class Troubleshooting
         '
         'btnComplaintsNotify
         '
-        Me.btnComplaintsNotify.Location = New System.Drawing.Point(12, 105)
+        Me.btnComplaintsNotify.Location = New System.Drawing.Point(11, 188)
         Me.btnComplaintsNotify.Name = "btnComplaintsNotify"
         Me.btnComplaintsNotify.Size = New System.Drawing.Size(108, 29)
         Me.btnComplaintsNotify.TabIndex = 3
@@ -916,7 +941,7 @@ Partial Class Troubleshooting
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(9, 78)
+        Me.Label13.Location = New System.Drawing.Point(8, 161)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(31, 13)
         Me.Label13.TabIndex = 2
@@ -941,14 +966,21 @@ Partial Class Troubleshooting
         Me.TabPage9.Text = "Construction"
         Me.TabPage9.UseVisualStyleBackColor = True
         '
-        'btnNotify
+        'btnNotifyAll
         '
-        Me.btnNotify.Location = New System.Drawing.Point(138, 15)
-        Me.btnNotify.Name = "btnNotify"
-        Me.btnNotify.Size = New System.Drawing.Size(108, 29)
-        Me.btnNotify.TabIndex = 5
-        Me.btnNotify.Text = "Notify Action"
-        Me.btnNotify.UseVisualStyleBackColor = True
+        Me.btnNotifyAll.Location = New System.Drawing.Point(11, 76)
+        Me.btnNotifyAll.Name = "btnNotifyAll"
+        Me.btnNotifyAll.Size = New System.Drawing.Size(108, 29)
+        Me.btnNotifyAll.TabIndex = 6
+        Me.btnNotifyAll.Text = "Property Notify"
+        Me.btnNotifyAll.UseVisualStyleBackColor = True
+        '
+        'txtNotifyNames
+        '
+        Me.txtNotifyNames.Location = New System.Drawing.Point(11, 50)
+        Me.txtNotifyNames.Name = "txtNotifyNames"
+        Me.txtNotifyNames.Size = New System.Drawing.Size(235, 20)
+        Me.txtNotifyNames.TabIndex = 7
         '
         'Troubleshooting
         '
@@ -1075,4 +1107,7 @@ Partial Class Troubleshooting
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents txtComplaintsResult As System.Windows.Forms.TextBox
     Friend WithEvents btnNotify As System.Windows.Forms.Button
+    Friend WithEvents Button14 As Button
+    Friend WithEvents btnNotifyAll As Button
+    Friend WithEvents txtNotifyNames As TextBox
 End Class

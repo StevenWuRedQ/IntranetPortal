@@ -23,5 +23,6 @@ Partial Public Class UserMessage
     Public Property ParentMsg As Nullable(Of Integer)
     Public Property ReceiveTime As Nullable(Of Date)
     Public Property BBLE As String
+    Public Property MsgUrl As String
 
 End Class
