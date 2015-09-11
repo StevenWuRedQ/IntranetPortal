@@ -102,6 +102,7 @@ function AwayMsg() {
 
 var currentMsgId = null;
 var popupBBLE = null;
+var msgUrl = null;
 function hook() {
     var url = 'MessagerAsyncHandler.ashx';
     var request = getRequestObject();
@@ -117,6 +118,7 @@ function hook() {
                         if (msg != null) {
                             currentMsgId = msg.MsgID;
                             popupBBLE = msg.BBLE;
+                            msgUrl = msg.MsgUrl;
                             document.getElementById('tdMsgTitle').innerHTML = msg.Title;
                             document.getElementById('tdMsgContent').innerHTML = msg.Message;
 
@@ -165,6 +167,13 @@ function ReadMsg() {
 }
 
 function PopupViewLead() {
+    if (msgUrl != null)
+    {
+        OpenLeadsWindow(msgUrl, "Notification");
+        ReadMsg();
+        return;
+    }
+    
     if (popupBBLE != null) {
         var iframe = document.getElementById("contentUrlPane");
         if (iframe && iframe != null) {
