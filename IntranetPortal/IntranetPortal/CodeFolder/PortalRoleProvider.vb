@@ -80,6 +80,7 @@
 
     Public Overrides Function IsUserInRole(username As String, roleName As String) As Boolean
         Using context As New Entities
+
             Return context.UsersInRoles.Where(Function(r) r.ApplicationName = ApplicationName And r.Rolename = roleName And r.Username = username).Count > 0
         End Using
     End Function

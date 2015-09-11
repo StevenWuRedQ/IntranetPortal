@@ -140,7 +140,7 @@ Partial Public Class LegalCase
     End Function
 
     Public Shared Function GetFollowUpCaseByUser(userName As String) As List(Of LegalCase)
-        Return GetFollowUpCases().Where(Function(lc) (lc.ResearchBy = userName Or lc.Attorney = userName))
+        Return GetFollowUpCases().Where(Function(lc) (lc.ResearchBy = userName Or lc.Attorney = userName)).ToList
     End Function
     Public Shared Function GetCaseList(status As LegalCaseStatus, userName As String) As List(Of LegalCase)
         Using ctx As New LegalModelContainer
