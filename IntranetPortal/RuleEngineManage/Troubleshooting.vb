@@ -614,7 +614,6 @@ Public Class Troubleshooting
                 ssCase.SellerAttorneyName = PartyContact.GetContactName(ssCase.SellerAttorney)
             End If
 
-
             If ssCase.TitleCompany.HasValue Then
                 ssCase.TitleCompanyName = PartyContact.GetContactName(ssCase.TitleCompany)
             End If
@@ -623,7 +622,6 @@ Public Class Troubleshooting
                 ssCase.BuyerAttorneyName = PartyContact.GetContactName(ssCase.BuyerAttorney)
             End If
 
-           
             ssCase.Save()
         Next
     End Sub

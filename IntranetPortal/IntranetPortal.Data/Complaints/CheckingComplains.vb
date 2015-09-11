@@ -5,9 +5,9 @@ Partial Public Class CheckingComplain
 
     Public Const LogTitleRefreshComplain As String = "RefreshPropertyComplaints"
 
-    Public Shared Function GetAllComplains(Optional bble As String = "") As List(Of CheckingComplain)
+    Public Shared Function GetAllComplains(Optional bble As String = "", Optional userName As String = "") As List(Of CheckingComplain)
         Using ctx As New ConstructionEntities
-            Return ctx.CheckingComplains.Where(Function(c) c.BBLE = bble Or bble = "").ToList
+            Return ctx.CheckingComplains.Where(Function(c) (c.BBLE = bble Or bble = "") And (c.NotifyUsers.Contains(userName) Or userName = "")).ToList
         End Using
     End Function
 
@@ -17,9 +17,9 @@ Partial Public Class CheckingComplain
         End Using
     End Function
 
-    Public Shared Function GetLightAllComplains() As List(Of CheckingComplain)
+    Public Shared Function GetLightAllComplains(Optional userName As String = "") As List(Of CheckingComplain)
         Using ctx As New ConstructionEntities
-            Return ctx.CheckingComplains.Select(Function(c) New With {c.BBLE, c.Address, c.TotalComplaints, c.ActiveComplaints, c.NotifyUsers, c.LastExecute, c.CreateBy}).ToList.Select(Function(c) New CheckingComplain With {
+            Return ctx.CheckingComplains.Where(Function(c) c.NotifyUsers.Contains(userName) Or userName = "").Select(Function(c) New With {c.BBLE, c.Address, c.TotalComplaints, c.ActiveComplaints, c.NotifyUsers, c.LastExecute, c.CreateBy}).ToList.Select(Function(c) New CheckingComplain With {
                                                     .BBLE = c.BBLE,
                                                     .Address = c.Address,
                                                     .TotalComplaints = c.TotalComplaints,
@@ -64,11 +64,11 @@ Partial Public Class CheckingComplain
 
     End Function
 
-    Public Shared Function GetComplainsResult(Optional bble As String = "") As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
+    Public Shared Function GetComplainsResult(Optional bble As String = "", Optional userName As String = "") As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
 
         Dim result As New List(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result)
 
-        For Each cp In GetAllComplains(bble)
+        For Each cp In GetAllComplains(bble, userName)
 
             If Not String.IsNullOrEmpty(cp.LastComplaintsResult) Then
                 For Each item In cp.ComplaintsResult
