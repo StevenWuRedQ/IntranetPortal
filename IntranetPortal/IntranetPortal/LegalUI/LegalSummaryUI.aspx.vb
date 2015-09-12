@@ -51,7 +51,12 @@ Public Class LegalSummaryUI
     End Sub
 
     Protected Sub lbExportExcel_Click(sender As Object, e As EventArgs)
-        CaseExporter.WriteXlsxToResponse()
+        If (MangerReportGrid.Visible) Then
+            MangerReportExporter.WriteXlsxToResponse()
+        Else
+            CaseExporter.WriteXlsxToResponse()
+        End If
+
     End Sub
 
     Protected Sub gridUpCommingFCSale_DataBinding(sender As Object, e As EventArgs)
@@ -105,4 +110,17 @@ Public Class LegalSummaryUI
         End If
     End Sub
 
+    Sub BindMangerReport()
+        If (MangerReportGrid.Visible AndAlso (MangerReportGrid.DataSource Is Nothing)) Then
+            MangerReportGrid.DataSource = LegalManagerReport.GetAllCase
+            MangerReportGrid.DataBind()
+        End If
+    End Sub
+    Protected Sub MangerReportGrid_DataBinding(sender As Object, e As EventArgs)
+        BindMangerReport()
+    End Sub
+
+    Protected Sub MangerReportGrid_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+        BindMangerReport()
+    End Sub
 End Class

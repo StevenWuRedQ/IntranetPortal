@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class LegalCaseReport
+Partial Public Class LegalManagerReport
     Public Property BBLE As String
     Public Property CaseName As String
     Public Property ResearchBy As String
@@ -26,5 +26,9 @@ Partial Public Class LegalCaseReport
     Public Property PropertyAddress As String
     Public Property SaleDate As Nullable(Of Date)
     Public Property SecondaryTypes As String
+    Public Property MiscComments As String
+    Public Property NextStep As String
+    Public Property Agent As String
+    Public Property Team As String
 
 End Class
