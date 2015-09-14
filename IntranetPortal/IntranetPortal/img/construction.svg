@@ -1,0 +1,7 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg"
+     version="1.1" width="200" height="200" fill="yellow" style="background:black">
+    <polygon points="50,0 0,50 0,100 100,0" style="fill:yellow" />
+    <polygon points="150,0 0,150 0,200 200,0" style="fill:yellow" />
+    <polygon points="250,0 0,250 0,300 300,0" style="fill:yellow" />
+    <polygon points="350,0 0,350 0,400 400,0" style="fill:yellow" />
+</svg>

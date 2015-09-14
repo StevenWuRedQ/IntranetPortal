@@ -2494,7 +2494,7 @@ li.mag_tabv.active {
 		border-radius: 2px;
 	}
 
-#barner-warning {
+.barner-warning {
 	padding: 1px 40px;
 	background: yellow;
 	font-size: 11pt;
@@ -2504,11 +2504,11 @@ li.mag_tabv.active {
 	font-family: arial;
 }
 
-	#barner-warning:hover {
+	.barner-warning:hover {
 		cursor: pointer;
 	}
 
-#barner-danger {
+.barner-danger {
 	padding: 1px 40px;
 	background: red;
 	font-size: 11pt;
@@ -2518,7 +2518,7 @@ li.mag_tabv.active {
 	font-family: arial;
 }
 
-	#barner-danger:hover {
+	.barner-danger:hover {
 		cursor: pointer;
 	}
 

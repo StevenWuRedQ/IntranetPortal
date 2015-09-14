@@ -2488,6 +2488,7 @@
     <Content Include="images\img\logo_landing%402x.png" />
     <Content Include="images\img\logo_landing.png" />
     <Content Include="images\img\submenu_shadow.png" />
+    <Content Include="img\construction.svg" />
     <Content Include="img\ContextMenu\arrow_down.png" />
     <Content Include="img\ContextMenu\arrow_up.png" />
     <Content Include="img\ContextMenu\bin.png" />

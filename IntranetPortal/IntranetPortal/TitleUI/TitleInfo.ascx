@@ -76,7 +76,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Title Vested</label>
-                <pt-file file-bble="BBLE" upload-type="title" file-id="CHAINOFTITLE-Status_TitleVested0" file-model="Form.FormData.info.Title_Vested"></pt-file>
+                <input class="ss_form_input " ng-model="Form.FormData.info.Title_Vested"></input>
             </li>
         </ul>
         <ul class="ss_form_box clearfix">

@@ -72,8 +72,10 @@
 
         </script>
         Notes Josn <asp:TextBox ID="CropNotes" runat="server"></asp:TextBox>
-        <dx:ASPxGridView ID="CropGrid" runat="server" OnDataBinding="CropGrid_DataBinding">
-           
+        <dx:ASPxGridView ID="CropGrid" runat="server" OnDataBinding="CropGrid_DataBinding" EnableCallbackAnimation="True">
+           <Templates>
+                
+           </Templates>
         </dx:ASPxGridView>
          <asp:Button ID="TestCrop" runat="server" Text="TestCrop"  OnClick="TestCrop_Click"/>
        

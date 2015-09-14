@@ -1,18 +1,18 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionViolationTab.ascx.vb" Inherits="IntranetPortal.ConstructionViolationTab" %>
 
 <%-- orders --%>
-<div class="ss_form" ng-init="Violations_OrdersPanelVisible=false" style="margin-bottom: 30px">
+<div class="ss_form" ng-init="Violations_OrdersPanelVisible=false" style="margin-bottom: 30">
     <h4 class="ss_form_title">Orders<input type="checkbox" ng-model="CSCase.CSCase.Violations.Orders" id="orders" /><label for="orders"></label></h4>
     <div style="text-align: center" ng-show="CSCase.CSCase.Violations.Orders">
         <style>
         </style>
-        <span id="barner-danger" ng-click="Violations_OrdersPanelVisible=true">STOP WORK ORDER EXISTS ON THIS PROPERTY</span>
+        <span class="barner-danger" ng-click="Violations_OrdersPanelVisible=true">STOP WORK ORDER EXISTS ON THIS PROPERTY</span>
         <br />
         <br />
-        <span id="barner-warning" ng-click="Violations_OrdersPanelVisible=true">FULL VACATE EXISTS ON THIS PROPERTY</span>
+        <span class="barner-warning" ng-click="Violations_OrdersPanelVisible=true">FULL VACATE EXISTS ON THIS PROPERTY</span>
         <br />
         <br />
-        <span id="barner-warning" ng-click="Violations_OrdersPanelVisible=true">PARTIAL VACATE EXISTS ON THIS PROPERTY</span>
+        <span idclass="barner-warning" ng-click="Violations_OrdersPanelVisible=true">PARTIAL VACATE EXISTS ON THIS PROPERTY</span>
     </div>
     <div dx-popup="{
                     height: 800,
@@ -27,10 +27,10 @@
         <div data-options="dxTemplate:{ name: 'ordersContent' }">
             <div id="Stop_Work_Orders">
                 <h4>Stop Work Orders&nbsp;<pt-add ng-click="ensurePush('CSCase.CSCase.Violations.stopWorkOrders')" /></h4>
-                <table class="table table-striped" style="font-size: 9pt; width: 750px; margin: 10px; table-layout: fixed;">
+                <table class="table table-striped" style="font-size: 9pt; width: 750; margin: 10; table-layout: fixed;">
                     <tr>
                         <th>Complaint Number</th>
-                        <th style="width: 200px">Address</th>
+                        <th style="width: 200">Address</th>
                         <th>Date Entered</th>
                         <th>Category</th>
                         <th>Inspection Date</th>
@@ -41,7 +41,7 @@
                     <tr ng-repeat="stopWorkOrder in CSCase.CSCase.Violations.stopWorkOrders">
                         <td>
                             <input class="table-input" type="text" ng-model="stopWorkOrder.CompliantNum" /></td>
-                        <td style="width: 200px">
+                        <td style="width: 200">
                             <input class="table-input" type="text" ng-model="stopWorkOrder.Address" /></td>
                         <td>
                             <input class="table-input" type="text" ng-model="stopWorkOrder.DateEntered" /></td>
@@ -62,10 +62,10 @@
             <hr />
             <div id="FULL_VACATE_Orders">
                 <h4>Full VACATE Orders&nbsp;<pt-add ng-click="ensurePush('CSCase.CSCase.Violations.fullVacateOrders')" /></h4>
-                <table class="table table-striped" style="font-size: 9pt; width: 750px; margin: 10px; table-layout: fixed;">
+                <table class="table table-striped" style="font-size: 9pt; width: 750; margin: 10; table-layout: fixed;">
                     <tr>
                         <th>Complaint Number</th>
-                        <th style="width: 200px">Address</th>
+                        <th style="width: 200">Address</th>
                         <th>Date Entered</th>
                         <th>Category</th>
                         <th>Inspection Date</th>
@@ -76,7 +76,7 @@
                     <tr ng-repeat="order in CSCase.CSCase.Violations.fullVacateOrders">
                         <td>
                             <input class="table-input" type="text" ng-model="order.CompliantNum" /></td>
-                        <td style="width: 200px">
+                        <td style="width: 200">
                             <input class="table-input" type="text" ng-model="order.Address" /></td>
                         <td>
                             <input class="table-input" type="text" ng-model="order.DateEntered" /></td>
@@ -97,10 +97,10 @@
             <hr />
             <div id="Partial_VACATE_Orders">
                 <h4>Partial VACATE Orders&nbsp;<pt-add ng-click="ensurePush('CSCase.CSCase.Violations.partialVacateOrders')" /></h4>
-                <table class="table table-striped" style="font-size: 9pt; width: 750px; margin: 10px; table-layout: fixed;">
+                <table class="table table-striped" style="font-size: 9pt; width: 750; margin: 10; table-layout: fixed;">
                     <tr>
                         <th>Complaint Number</th>
-                        <th style="width: 200px">Address</th>
+                        <th style="width: 200">Address</th>
                         <th>Date Entered</th>
                         <th>Category</th>
                         <th>Inspection Date</th>
@@ -111,7 +111,7 @@
                     <tr ng-repeat="order in CSCase.CSCase.Violations.partialVacateOrders">
                         <td>
                             <input class="table-input" type="text" ng-model="order.CompliantNum" /></td>
-                        <td style="width: 200px">
+                        <td style="width: 200">
                             <input class="table-input" type="text" ng-model="order.Address" /></td>
                         <td>
                             <input class="table-input" type="text" ng-model="order.DateEntered" /></td>
@@ -208,31 +208,31 @@
                     <td class="col-sm-1" ng-click="setPopupVisible('DOBViolations_PopupVisible_'+$index, true)">{{$index+1}}</td>
                     <td class="col-sm-5" ng-click="setPopupVisible('DOBViolations_PopupVisible_'+$index, true)">
                         <div class="row">
-                            <div class="col-sm-5" style="padding: 0px"><b>DOB Violaton #</b></div>
-                            <div class="col-sm-7" style="padding: 0px">{{violation.DOBViolationNum}}</div>
+                            <div class="col-sm-5" style="padding: 0"><b>DOB Violaton #</b></div>
+                            <div class="col-sm-7" style="padding: 0">{{violation.DOBViolationNum}}</div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-5" style="padding: 0px"><b>Filed Date</b></div>
-                            <div class="col-sm-7" style="padding: 0px">{{violation.FiledDate}}</div>
+                            <div class="col-sm-5" style="padding: 0"><b>Filed Date</b></div>
+                            <div class="col-sm-7" style="padding: 0">{{violation.FiledDate}}</div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-5" style="padding: 0px"><b>Type of Violation</b></div>
-                            <div class="col-sm-7" style="padding: 0px">{{violation.TypeOfViolations}}</div>
+                            <div class="col-sm-5" style="padding: 0"><b>Type of Violation</b></div>
+                            <div class="col-sm-7" style="padding: 0">{{violation.TypeOfViolations}}</div>
                         </div>
 
                     </td>
                     <td class="col-sm-5" ng-click="setPopupVisible('DOBViolations_PopupVisible_'+$index, true)">
                         <div class="row">
-                            <div class="col-sm-5" style="padding: 0px"><b>ECB Violation #</b></div>
-                            <div class="col-sm-7" style="padding: 0px">{{violation.ECBViolationNumber}}</div>
+                            <div class="col-sm-5" style="padding: 0"><b>ECB Violation #</b></div>
+                            <div class="col-sm-7" style="padding: 0">{{violation.ECBViolationNumber}}</div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-5" style="padding: 0px"><b>Violation Status</b></div>
-                            <div class="col-sm-7" style="padding: 0px">{{violation.ViolationStatus}}</div>
+                            <div class="col-sm-5" style="padding: 0"><b>Violation Status</b></div>
+                            <div class="col-sm-7" style="padding: 0">{{violation.ViolationStatus}}</div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-5" style="padding: 0px"><b>Description</b></div>
-                            <div class="col-sm-7" style="padding: 0px">{{violation.Description}}</div>
+                            <div class="col-sm-5" style="padding: 0"><b>Description</b></div>
+                            <div class="col-sm-7" style="padding: 0">{{violation.Description}}</div>
                         </div>
 
                     </td>
@@ -249,7 +249,7 @@
                                 scrolling: {mode: 'virtual' },
                             }">
                             <div data-options="dxTemplate:{ name: 'content' }">
-                                <div style="height: 88%; padding: 0px 5px; overflow-y: auto; overflow-x: hidden">
+                                <div style="height: 88%; padding: 0 5px; overflow-y: auto; overflow-x: hidden">
 
                                     <div class="col-sm-6">
                                         <label>DOB Violaton Num</label>
@@ -281,7 +281,7 @@
                                     <div class="clearfix"></div>
                                     <div class="col-sm-12">
                                         <label>Description</label>
-                                        <textarea class="form-control" ng-model="violation.Description" style="resize:none; height: 100px" ></textarea>
+                                        <textarea class="form-control" ng-model="violation.Description" style="resize:none; height: 100" ></textarea>
                                     </div>
                                     <div class="clearfix"></div>
                                     <hr />
@@ -361,31 +361,31 @@
                     <td class="col-sm-1" ng-click="setPopupVisible('ECBViolations_PopupVisible_'+$index, true)">{{$index+1}}</td>
                     <td class="col-sm-5" ng-click="setPopupVisible('ECBViolations_PopupVisible_'+$index, true)">
                         <div class="row">
-                            <div class="col-sm-5" style="padding: 0px"><b>ECB Violaton #</b></div>
-                            <div class="col-sm-7" style="padding: 0px">{{violation.ECBViolationNum}}</div>
+                            <div class="col-sm-5" style="padding: 0"><b>ECB Violaton #</b></div>
+                            <div class="col-sm-7" style="padding: 0">{{violation.ECBViolationNum}}</div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-5" style="padding: 0px"><b>Respondent</b></div>
-                            <div class="col-sm-7" style="padding: 0px">{{violation.Respondent}}</div>
+                            <div class="col-sm-5" style="padding: 0"><b>Respondent</b></div>
+                            <div class="col-sm-7" style="padding: 0">{{violation.Respondent}}</div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-5" style="padding: 0px"><b>Filed Date</b></div>
-                            <div class="col-sm-7" style="padding: 0px">{{violation.FiledDate}}</div>
+                            <div class="col-sm-5" style="padding: 0"><b>Filed Date</b></div>
+                            <div class="col-sm-7" style="padding: 0">{{violation.FiledDate}}</div>
                         </div>
 
                     </td>
                     <td class="col-sm-5" ng-click="setPopupVisible('ECBViolations_PopupVisible_'+$index, true)">
                         <div class="row">
-                            <div class="col-sm-5" style="padding: 0px"><b>DOB Violation Status</b></div>
-                            <div class="col-sm-7" style="padding: 0px">{{violation.DOBViolationStatus}}</div>
+                            <div class="col-sm-5" style="padding: 0"><b>DOB Violation Status</b></div>
+                            <div class="col-sm-7" style="padding: 0">{{violation.DOBViolationStatus}}</div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-5" style="padding: 0px"><b>Hearing Status</b></div>
-                            <div class="col-sm-7" style="padding: 0px">{{violation.HearingStatus}}</div>
+                            <div class="col-sm-5" style="padding: 0"><b>Hearing Status</b></div>
+                            <div class="col-sm-7" style="padding: 0">{{violation.HearingStatus}}</div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-5" style="padding: 0px"><b>Severity</b></div>
-                            <div class="col-sm-7" style="padding: 0px">{{violation.Severity}}</div>
+                            <div class="col-sm-5" style="padding: 0"><b>Severity</b></div>
+                            <div class="col-sm-7" style="padding: 0">{{violation.Severity}}</div>
                         </div>
 
                     </td>
@@ -402,7 +402,7 @@
                                 scrolling: {mode: 'virtual' },
                             }">
                             <div data-options="dxTemplate:{ name: 'content' }">
-                                <div style="height: 88%; padding: 0px 5px; overflow-y: auto; overflow-x: hidden">
+                                <div style="height: 88%; padding: 0 5px; overflow-y: auto; overflow-x: hidden">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>ECB Violaton #</label>

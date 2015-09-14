@@ -164,11 +164,37 @@
 <script>
     var app = angular.module("PortalApp")
 
-    app.controller("TitleController", function ($scope, ptCom, ptLeadsService, ptShortsSaleService) {
+    app.controller("TitleController", function ($scope, ptCom, ptContactServices, ptLeadsService, ptShortsSaleService) {
+        $scope.arrayRemove = ptCom.arrayRemove;
+        $scope.ptContactServices = ptContactServices;
+        $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
+
         $scope.Form = {
             FormData: {
                 Comments: [],
-                Owners: [{ name: "Prior Owner Liens" }, { name: "Current Owner Liens" }]
+                Owners: [{
+                    name: "Prior Owner Liens",
+                    Mortgages: [{}],
+                    Lis_Pendens: [{}],
+                    Judgements: [{}],
+                    ECB_Notes: [{}],
+                    PVB_Notes: [{}],
+                    UCCs: [{}],
+                    FederalTaxLiens: [{}],
+                    MechanicsLiens: [{}]
+
+                }, {
+                    name: "Current Owner Liens",
+                    Mortgages: [{}],
+                    Lis_Pendens: [{}],
+                    Judgements: [{}],
+                    ECB_Notes: [{}],
+                    PVB_Notes: [{}],
+                    UCCs: [{}],
+                    FederalTaxLiens: [{}],
+                    MechanicsLiens: [{}]
+
+                }]
             }
         }
         $scope.ReloadedData = {}
@@ -177,7 +203,29 @@
             $scope.Form = {
                 FormData: {
                     Comments: [],
-                    Owners: [{ name: "Prior Owner Liens" }, { name: "Current Owner Liens" }]
+                    Owners: [{
+                        name: "Prior Owner Liens",
+                        Mortgages: [{}],
+                        Lis_Pendens: [{}],
+                        Judgements: [{}],
+                        ECB_Notes: [{}],
+                        PVB_Notes: [{}],
+                        UCCs: [{}],
+                        FederalTaxLiens: [{}],
+                        MechanicsLiens: [{}]
+
+                    }, {
+                        name: "Current Owner Liens",
+                        Mortgages: [{}],
+                        Lis_Pendens: [{}],
+                        Judgements: [{}],
+                        ECB_Notes: [{}],
+                        PVB_Notes: [{}],
+                        UCCs: [{}],
+                        FederalTaxLiens: [{}],
+                        MechanicsLiens: [{}]
+
+                    }]
                 }
             }
             $scope.ReloadedData = {};
