@@ -118,6 +118,7 @@
       <DependentUpon>ConstructionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataServices\TLOLocateReportOutput.vb" />
+    <Compile Include="DocumentSearch\LeadInfoDocumentSearch.vb" />
     <Compile Include="DocumentSearch\SearchEntity\DocSearchEntity.Context.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

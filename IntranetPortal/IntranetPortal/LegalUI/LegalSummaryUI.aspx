@@ -41,10 +41,11 @@
             MangerReportGridClient.SetVisible(!MangerReportGridClient.GetVisible());
             if (MangerReportGridClient.GetVisible())
             {
-                $('#topGrid').addClass("col-md-12");
+                document.getElementById('topGrid').className = 'col-md-12'
+              
 
             } else {
-                $('#topGrid').removeClass("col-md-12");
+                document.getElementById('topGrid').className = 'col-md-8'
             }
             MangerReportGridClient.PerformCallback();
         }
@@ -144,7 +145,10 @@
                                 <dx:GridViewDataColumn FieldName="Agent">
                                     <Settings HeaderFilterMode="CheckedList" />
                                 </dx:GridViewDataColumn>
-                                <dx:GridViewDataColumn FieldName="Attorney">
+                                <dx:GridViewDataColumn FieldName="MiscComments">
+                                    <DataItemTemplate>
+                                        <div><%# Eval("MiscComments") %></div>
+                                    </DataItemTemplate>
                                     <Settings HeaderFilterMode="CheckedList" />
                                 </dx:GridViewDataColumn>
                                 <dx:GridViewDataColumn FieldName="Team">

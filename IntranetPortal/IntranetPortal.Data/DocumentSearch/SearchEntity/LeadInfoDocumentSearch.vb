@@ -13,10 +13,10 @@ Imports System.Collections.Generic
 Partial Public Class LeadInfoDocumentSearch
     Public Property BBLE As String
     Public Property LeadResearch As String
-    Public Property Recrod As String
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
     Public Property UpdateDate As Nullable(Of Date)
     Public Property UpdateBy As String
+    Public Property Status As Integer
 
 End Class

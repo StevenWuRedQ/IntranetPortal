@@ -21,6 +21,14 @@ Public Class TeamService
 
     End Function
 
+    <OperationContract()>
+    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    Public Function GetTeam(userName As String) As Channels.Message
+
+        Return UserInTeam.GetUserTeam(userName).ToJson
+        Return Nothing
+
+    End Function
     ' Add more operations here and mark them with <OperationContract()>
 
 End Class

@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class PropertyInfo
-
+    
     '''<summary>
     '''UpatingPanel control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UpatingPanel As Global.DevExpress.Web.ASPxPanel.ASPxPanel
-
+    
     '''<summary>
     '''leadsCommentsCallbackPanel control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents leadsCommentsCallbackPanel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
-
+    
     '''<summary>
     '''hfBBLE control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hfBBLE As Global.System.Web.UI.WebControls.HiddenField
-
+    
     '''<summary>
     '''ASPxPopupControl2 control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
-
+    
     '''<summary>
     '''txtLeadsComments control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtLeadsComments As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
+    
     '''<summary>
     '''btnAdd control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnAdd As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
+    
     '''<summary>
     '''ASPxButton4 control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
+    
     '''<summary>
     '''NGShortSaleInLeadsView control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NGShortSaleInLeadsView As Global.IntranetPortal.NGShortSaleInLeadsView
-
+    
     '''<summary>
     '''callPanelReferrel control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents callPanelReferrel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
-
+    
     '''<summary>
     '''txtReferrelName control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtReferrelName As Global.System.Web.UI.HtmlControls.HtmlInputText
-
+    
     '''<summary>
     '''txtReferrelPhone control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtReferrelPhone As Global.System.Web.UI.HtmlControls.HtmlInputText
-
+    
     '''<summary>
     '''txtReferrelEmail control.
     '''</summary>
@@ -120,7 +120,16 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtReferrelEmail As Global.System.Web.UI.HtmlControls.HtmlInputText
-
+    
+    '''<summary>
+    '''Common control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Common As Global.IntranetPortal.Common
+    
     '''<summary>
     '''cbpMortgageData control.
     '''</summary>
@@ -129,7 +138,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbpMortgageData As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
-
+    
     '''<summary>
     '''txtC1stMotgr control.
     '''</summary>
@@ -138,7 +147,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtC1stMotgr As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
+    
     '''<summary>
     '''cb1stFannie control.
     '''</summary>
@@ -147,7 +156,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cb1stFannie As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
-
+    
     '''<summary>
     '''cb1stFHA control.
     '''</summary>
@@ -156,7 +165,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cb1stFHA As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
-
+    
     '''<summary>
     '''txt1stServicer control.
     '''</summary>
@@ -165,7 +174,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txt1stServicer As Global.System.Web.UI.HtmlControls.HtmlInputText
-
+    
     '''<summary>
     '''txtC2ndMotgr control.
     '''</summary>
@@ -174,7 +183,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtC2ndMotgr As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
+    
     '''<summary>
     '''cb2ndFannie control.
     '''</summary>
@@ -183,7 +192,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cb2ndFannie As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
-
+    
     '''<summary>
     '''cb2ndFHA control.
     '''</summary>
@@ -192,7 +201,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cb2ndFHA As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
-
+    
     '''<summary>
     '''txt2ndServicer control.
     '''</summary>
@@ -201,7 +210,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txt2ndServicer As Global.System.Web.UI.HtmlControls.HtmlInputText
-
+    
     '''<summary>
     '''txtC3rdMotgr control.
     '''</summary>
@@ -210,7 +219,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtC3rdMotgr As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
+    
     '''<summary>
     '''cb3rdFannie control.
     '''</summary>
@@ -219,7 +228,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cb3rdFannie As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
-
+    
     '''<summary>
     '''cb3rdFHA control.
     '''</summary>
@@ -228,7 +237,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cb3rdFHA As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
-
+    
     '''<summary>
     '''txt3rdServicer control.
     '''</summary>
@@ -237,7 +246,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txt3rdServicer As Global.System.Web.UI.HtmlControls.HtmlInputText
-
+    
     '''<summary>
     '''txtTaxesAmt control.
     '''</summary>
@@ -246,7 +255,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtTaxesAmt As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
+    
     '''<summary>
     '''txtWaterAmt control.
     '''</summary>
@@ -255,7 +264,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtWaterAmt As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
+    
     '''<summary>
     '''txtViolationAmt control.
     '''</summary>
@@ -264,7 +273,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtViolationAmt As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
+    
     '''<summary>
     '''ASPxTextBox1 control.
     '''</summary>
@@ -273,7 +282,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxTextBox1 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
+    
     '''<summary>
     '''gridLiens control.
     '''</summary>
@@ -282,7 +291,7 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridLiens As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-
+    
     '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>

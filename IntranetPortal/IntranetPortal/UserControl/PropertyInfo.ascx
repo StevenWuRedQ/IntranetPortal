@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PropertyInfo.ascx.vb" Inherits="IntranetPortal.PropertyInfo" %>
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 <%@ Register Src="~/ShortSale/NGShortSaleInLeadsView.ascx" TagPrefix="uc1" TagName="NGShortSaleInLeadsView" %>
+<%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
+
 
 <%--@ Register Src="~/ShortSale/ShortSaleInLeadsView.ascx" TagPrefix="uc1" TagName="ShortSaleInLeadsView" --%>
 
@@ -71,7 +73,7 @@
     {
         $.ajax({
             type: "POST",
-            url: 'api/LeadInfoDocumentSearches',
+            url: '/api/LeadInfoDocumentSearches',
             data: JSON.stringify({ "BBLE": leadsInfoBBLE }),
             dataType: 'json',
             contentType: 'application/json',
@@ -355,7 +357,7 @@
             <%----end line ----%>
         </div>
 
-
+        <uc1:Common runat="server" ID="Common" />
         <dx:ASPxCallbackPanel runat="server" ID="cbpMortgageData" ClientInstanceName="callbackPanelMortgage" OnCallback="cbpMortgageData_Callback">
             <PanelCollection>
                 <dx:PanelContent>
@@ -363,7 +365,11 @@
                     <div style="margin: 20px;" class="clearfix">
                         <div class="form_head" style="margin-top: 40px;">MORTGAGE AND VIOLATIONS 
                             <i class="fa fa-save  color_blue_edit collapse_btn tooltip-examples" title="Save Mortgage" onclick="callbackPanelMortgage.PerformCallback('Save')"></i>
+                            <% If IntranetPortal.Data.LeadInfoDocumentSearch.Exist(hfBBLE.Value) Then %>
+                            <i class="fa fa-eye  color_blue_edit collapse_btn tooltip-examples" title="View search result" onclick="OpenLeadsWindow('/PopupControl/LeadTaxSearchRequest.aspx?BBLE=<%=hfBBLE.Value%>','Entities',800,700)"></i>
+                            <%Else %>
                             <i class="fa fa-search-plus  color_blue_edit collapse_btn tooltip-examples" title="Request a search" onclick="RequestDocSearch()"></i>
+                            <% End If %>
                         </div>
 
                         <%--line 1--%>

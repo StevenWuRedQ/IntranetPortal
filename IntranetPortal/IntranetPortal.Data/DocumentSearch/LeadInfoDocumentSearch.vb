@@ -1,0 +1,15 @@
+﻿Imports System.ComponentModel.DataAnnotations
+
+<MetadataType(GetType(LeadInfoDocumentSearchCaseMetaData))>
+Public Class LeadInfoDocumentSearch
+    Public Shared Function Exist(bble As String) As Boolean
+        Using ctx As New IntranetPortalEntities
+            Return ctx.LeadInfoDocumentSearches.Find(bble) IsNot Nothing
+        End Using
+    End Function
+End Class
+
+Public Class LeadInfoDocumentSearchCaseMetaData
+    <Newtonsoft.Json.JsonConverter(GetType(Core.JsObjectToStringConverter))>
+    Public Property LeadResearch As String
+End Class

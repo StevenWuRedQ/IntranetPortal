@@ -38,7 +38,7 @@ Namespace Controllers
                 Return BadRequest(ModelState)
             End If
 
-            If Not id = leadInfoDocumentSearch.BBLE Then
+            If Not id = leadInfoDocumentSearch.BBLE.Trim Then
                 Return BadRequest()
             End If
 
@@ -71,29 +71,35 @@ Namespace Controllers
                 db.LeadInfoDocumentSearches.Add(leadInfoDocumentSearch)
                 leadInfoDocumentSearch.CreateBy = HttpContext.Current.User.Identity.Name
                 leadInfoDocumentSearch.CreateDate = Date.Now
+                LeadsActivityLog.AddActivityLog(Date.Now(), "Create a search request to Elizabeth ", leadInfoDocumentSearch.BBLE, LogCategory.SalesAgent.ToString)
+                Dim EntityMananger = Roles.GetUsersInRole("Entity-Manager")(0)
+
+                If (Not String.IsNullOrEmpty(EntityMananger)) Then
+                    Dim LeadInfoSearchUser = Employee.GetInstance(EntityMananger) 'Employee.GetInstance("Elizabeth Rodriguez")
+                    Dim empl = Employee.GetInstance(HttpContext.Current.User.Identity.Name)
+                    Dim mLead = Lead.GetInstance(leadInfoDocumentSearch.BBLE)
+
+                    If (LeadInfoSearchUser IsNot Nothing) Then
+                        Core.EmailService.SendMail(LeadInfoSearchUser.Email, empl.Email, "DocSearchNotify",
+                                                New Dictionary(Of String, String) From
+                                                {
+                                                    {"SubmitUser", empl.Name},
+                                                    {"Address", mLead.LeadsInfo.PropertyAddress},
+                                                    {"DocUser", LeadInfoSearchUser.Name},
+                                                    {"BBLE", leadInfoDocumentSearch.BBLE}
+                                                })
+                    End If
+                End If
+
+
             Else
 
-                findSearch.UpdateBy = HttpContext.Current.User.Identity.Name
-                findSearch.UpDateDate = Date.Now()
-                PutLeadInfoDocumentSearch(leadInfoDocumentSearch.BBLE, findSearch)
+
+                    PutLeadInfoDocumentSearch(leadInfoDocumentSearch.BBLE, leadInfoDocumentSearch)
 
             End If
-           
-            LeadsActivityLog.AddActivityLog(Date.Now(), "Create a search request to Elizabeth ", leadInfoDocumentSearch.BBLE, LogCategory.SalesAgent.ToString)
-            Dim LeadInfoSearchUser = Employee.GetInstance("Steven Wu") 'Employee.GetInstance("Elizabeth Rodriguez")
-            Dim empl = Employee.GetInstance(HttpContext.Current.User.Identity.Name)
-            Dim mLead = Lead.GetInstance(leadInfoDocumentSearch.BBLE)
 
-            If (LeadInfoSearchUser IsNot Nothing) Then
-                Core.EmailService.SendMail(LeadInfoSearchUser.Email, empl.Email, "DocSearchNotify",
-                                           New Dictionary(Of String, String) From
-                                           {
-                                               {"SubmitUser", empl.Name},
-                                               {"Address", mLead.LeadsInfo.PropertyAddress},
-                                               {"DocUser", LeadInfoSearchUser.Name},
-                                                {"BBLE", leadInfoDocumentSearch.BBLE}
-                                           })
-            End If
+
 
             Try
                 db.SaveChanges()
