@@ -1,0 +1,41 @@
+.dxSpreadsheet_Copy_MetropolisBlue1,
+.dxSpreadsheet_Cut_MetropolisBlue1,
+.dxSpreadsheet_Delete_Hyperlink_MetropolisBlue1,
+.dxSpreadsheet_Hyperlink_MetropolisBlue1,
+.dxSpreadsheet_OpenHyperlink_MetropolisBlue1
+{
+    background-image: url('sprite.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+.dxSpreadsheet_Copy_MetropolisBlue1
+{
+    background-position: 0px -34px;
+    width: 16px;
+    height: 16px;
+}
+.dxSpreadsheet_Cut_MetropolisBlue1
+{
+    background-position: 0px -68px;
+    width: 16px;
+    height: 16px;
+}
+.dxSpreadsheet_Delete_Hyperlink_MetropolisBlue1
+{
+    background-position: 0px -51px;
+    width: 16px;
+    height: 16px;
+}
+.dxSpreadsheet_Hyperlink_MetropolisBlue1
+{
+    background-position: 0px -17px;
+    width: 16px;
+    height: 16px;
+}
+.dxSpreadsheet_OpenHyperlink_MetropolisBlue1
+{
+    background-position: 0px 0px;
+    width: 16px;
+    height: 16px;
+}
+

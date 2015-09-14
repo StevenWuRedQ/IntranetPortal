@@ -1,0 +1,360 @@
+.dxGridView_gvCellError_MetropolisBlue1,
+.dxGridView_gvCMClearFilter_MetropolisBlue1,
+.dxGridView_gvCMClearGrouping_MetropolisBlue1,
+.dxGridView_gvCMCollapseRow_MetropolisBlue1,
+.dxGridView_gvCMDeleteRow_MetropolisBlue1,
+.dxGridView_gvCMEditRow_MetropolisBlue1,
+.dxGridView_gvCMExpandRow_MetropolisBlue1,
+.dxGridView_gvCMFullCollapse_MetropolisBlue1,
+.dxGridView_gvCMFullExpand_MetropolisBlue1,
+.dxGridView_gvCMGroupByColumn_MetropolisBlue1,
+.dxGridView_gvCMNewRow_MetropolisBlue1,
+.dxGridView_gvCMRefresh_MetropolisBlue1,
+.dxGridView_gvCMShowCustomizationWindow_MetropolisBlue1,
+.dxGridView_gvCMShowFilterEditor_MetropolisBlue1,
+.dxGridView_gvCMShowGroupPanel_MetropolisBlue1,
+.dxGridView_gvCMSortAscending_MetropolisBlue1,
+.dxGridView_gvCMSortDescending_MetropolisBlue1,
+.dxGridView_gvCMSummaryAverage_MetropolisBlue1,
+.dxGridView_gvCMSummaryCount_MetropolisBlue1,
+.dxGridView_gvCMSummaryMax_MetropolisBlue1,
+.dxGridView_gvCMSummaryMin_MetropolisBlue1,
+.dxGridView_gvCMSummarySum_MetropolisBlue1,
+.dxGridView_gvCMUngroupColumn_MetropolisBlue1,
+.dxGridView_gvCollapsedButton_MetropolisBlue1,
+.dxGridView_gvCollapsedButtonRtl_MetropolisBlue1,
+.dxGridView_gvDetailCollapsedButton_MetropolisBlue1,
+.dxGridView_gvDetailCollapsedButtonRtl_MetropolisBlue1,
+.dxGridView_gvDetailExpandedButton_MetropolisBlue1,
+.dxGridView_gvDetailExpandedButtonRtl_MetropolisBlue1,
+.dxGridView_gvDragAndDropArrowDown_MetropolisBlue1,
+.dxGridView_gvDragAndDropArrowUp_MetropolisBlue1,
+.dxGridView_gvDragAndDropHideColumn_MetropolisBlue1,
+.dxGridView_gvExpandedButton_MetropolisBlue1,
+.dxGridView_gvExpandedButtonRtl_MetropolisBlue1,
+.dxGridView_gvFilterRowButton_MetropolisBlue1,
+.dxGridView_gvHeaderFilter_MetropolisBlue1,
+.dxGridView_gvHeaderFilterActive_MetropolisBlue1,
+.dxGridView_gvHeaderSortDown_MetropolisBlue1,
+.dxGridView_gvHeaderSortUp_MetropolisBlue1,
+.dxGridView_gvParentGroupRows_MetropolisBlue1,
+.dxGridView_WindowResizer_MetropolisBlue1,
+.dxGridView_WindowResizerRtl_MetropolisBlue1,
+.dxgvFocusedGroupRow_MetropolisBlue1 .dxGridView_gvCollapsedButton_MetropolisBlue1,
+.dxgvFocusedGroupRow_MetropolisBlue1 .dxGridView_gvCollapsedButtonRtl_MetropolisBlue1,
+.dxgvFocusedGroupRow_MetropolisBlue1 .dxGridView_gvExpandedButton_MetropolisBlue1,
+.dxgvFocusedGroupRow_MetropolisBlue1 .dxGridView_gvExpandedButtonRtl_MetropolisBlue1,
+.dxgvFocusedRow_MetropolisBlue1 .dxGridView_gvDetailCollapsedButton_MetropolisBlue1,
+.dxgvFocusedRow_MetropolisBlue1 .dxGridView_gvDetailCollapsedButtonRtl_MetropolisBlue1,
+.dxgvFocusedRow_MetropolisBlue1 .dxGridView_gvDetailExpandedButton_MetropolisBlue1,
+.dxgvFocusedRow_MetropolisBlue1 .dxGridView_gvDetailExpandedButtonRtl_MetropolisBlue1
+{
+    background-image: url('sprite.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+.dxGridView_gvCellError_MetropolisBlue1
+{
+    background-position: -32px -99px;
+    width: 14px;
+    height: 14px;
+}
+.dxGridView_gvCMClearFilter_MetropolisBlue1
+{
+    background-position: -38px -23px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMClearGrouping_MetropolisBlue1
+{
+    background-position: -76px -61px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMCollapseRow_MetropolisBlue1
+{
+    background-position: -57px -61px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMDeleteRow_MetropolisBlue1
+{
+    background-position: -19px -80px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMEditRow_MetropolisBlue1
+{
+    background-position: -38px -42px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMExpandRow_MetropolisBlue1
+{
+    background-position: -57px -42px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMFullCollapse_MetropolisBlue1
+{
+    background-position: -57px -80px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMFullExpand_MetropolisBlue1
+{
+    background-position: 0px -23px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMGroupByColumn_MetropolisBlue1
+{
+    background-position: -76px -42px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMNewRow_MetropolisBlue1
+{
+    background-position: -23px 0px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMRefresh_MetropolisBlue1
+{
+    background-position: 0px -61px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMShowCustomizationWindow_MetropolisBlue1
+{
+    background-position: -19px -23px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMShowFilterEditor_MetropolisBlue1
+{
+    background-position: -76px -23px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMShowGroupPanel_MetropolisBlue1
+{
+    background-position: -38px -80px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMSortAscending_MetropolisBlue1
+{
+    background-position: 0px -80px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMSortDescending_MetropolisBlue1
+{
+    background-position: -42px 0px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMSummaryAverage_MetropolisBlue1
+{
+    background-position: -57px -23px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMSummaryCount_MetropolisBlue1
+{
+    background-position: 0px -42px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMSummaryMax_MetropolisBlue1
+{
+    background-position: -19px -61px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMSummaryMin_MetropolisBlue1
+{
+    background-position: -61px 0px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMSummarySum_MetropolisBlue1
+{
+    background-position: -19px -42px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCMUngroupColumn_MetropolisBlue1
+{
+    background-position: -38px -61px;
+    width: 18px;
+    height: 18px;
+}
+.dxGridView_gvCollapsedButton_MetropolisBlue1
+{
+    background-position: 0px -116px;
+    width: 13px;
+    height: 13px;
+}
+.dxGridView_gvCollapsedButtonRtl_MetropolisBlue1
+{
+    background-position: -14px -144px;
+    width: 13px;
+    height: 13px;
+}
+.dxGridView_gvDetailCollapsedButton_MetropolisBlue1
+{
+    background-position: -42px -130px;
+    width: 13px;
+    height: 13px;
+}
+.dxGridView_gvDetailCollapsedButtonRtl_MetropolisBlue1
+{
+    background-position: -70px -116px;
+    width: 13px;
+    height: 13px;
+}
+.dxGridView_gvDetailExpandedButton_MetropolisBlue1
+{
+    background-position: -56px -116px;
+    width: 13px;
+    height: 13px;
+}
+.dxGridView_gvDetailExpandedButtonRtl_MetropolisBlue1
+{
+    background-position: -28px -130px;
+    width: 13px;
+    height: 13px;
+}
+.dxGridView_gvDragAndDropArrowDown_MetropolisBlue1
+{
+    background-position: -42px -144px;
+    width: 11px;
+    height: 9px;
+}
+.dxGridView_gvDragAndDropArrowUp_MetropolisBlue1
+{
+    background-position: -54px -144px;
+    width: 11px;
+    height: 9px;
+}
+.dxGridView_gvDragAndDropHideColumn_MetropolisBlue1
+{
+    background-position: 0px 0px;
+    width: 22px;
+    height: 22px;
+}
+.dxGridView_gvExpandedButton_MetropolisBlue1
+{
+    background-position: -28px -144px;
+    width: 13px;
+    height: 13px;
+}
+.dxGridView_gvExpandedButtonRtl_MetropolisBlue1
+{
+    background-position: -14px -130px;
+    width: 13px;
+    height: 13px;
+}
+.dxGridView_gvFilterRowButton_MetropolisBlue1
+{
+    background-position: -47px -99px;
+    width: 14px;
+    height: 14px;
+}
+.dxGridView_gvHeaderFilter_MetropolisBlue1
+{
+    background-position: -80px 0px;
+    width: 14px;
+    height: 16px;
+}
+.dxGridView_gvHeaderFilterActive_MetropolisBlue1
+{
+    background-position: -17px -99px;
+    width: 14px;
+    height: 16px;
+}
+.dxGridView_gvHeaderSortDown_MetropolisBlue1
+{
+    background-position: -87px -17px;
+    width: 7px;
+    height: 5px;
+}
+.dxGridView_gvHeaderSortUp_MetropolisBlue1
+{
+    background-position: -84px -116px;
+    width: 7px;
+    height: 5px;
+}
+.dxGridView_gvParentGroupRows_MetropolisBlue1
+{
+    background-position: -62px -99px;
+    width: 18px;
+    height: 13px;
+}
+.dxGridView_WindowResizer_MetropolisBlue1
+{
+    background-position: -76px -80px;
+    width: 16px;
+    height: 16px;
+}
+.dxGridView_WindowResizerRtl_MetropolisBlue1
+{
+    background-position: 0px -99px;
+    width: 16px;
+    height: 16px;
+}
+.dxgvFocusedGroupRow_MetropolisBlue1 .dxGridView_gvCollapsedButton_MetropolisBlue1
+{
+    background-position: -42px -116px;
+    width: 13px;
+    height: 13px;
+}
+.dxgvFocusedGroupRow_MetropolisBlue1 .dxGridView_gvCollapsedButtonRtl_MetropolisBlue1
+{
+    background-position: -81px -99px;
+    width: 13px;
+    height: 13px;
+}
+.dxgvFocusedGroupRow_MetropolisBlue1 .dxGridView_gvExpandedButton_MetropolisBlue1
+{
+    background-position: -14px -116px;
+    width: 13px;
+    height: 13px;
+}
+.dxgvFocusedGroupRow_MetropolisBlue1 .dxGridView_gvExpandedButtonRtl_MetropolisBlue1
+{
+    background-position: 0px -130px;
+    width: 13px;
+    height: 13px;
+}
+.dxgvFocusedRow_MetropolisBlue1 .dxGridView_gvDetailCollapsedButton_MetropolisBlue1
+{
+    background-position: -28px -116px;
+    width: 13px;
+    height: 13px;
+}
+.dxgvFocusedRow_MetropolisBlue1 .dxGridView_gvDetailCollapsedButtonRtl_MetropolisBlue1
+{
+    background-position: -56px -130px;
+    width: 13px;
+    height: 13px;
+}
+.dxgvFocusedRow_MetropolisBlue1 .dxGridView_gvDetailExpandedButton_MetropolisBlue1
+{
+    background-position: 0px -144px;
+    width: 13px;
+    height: 13px;
+}
+.dxgvFocusedRow_MetropolisBlue1 .dxGridView_gvDetailExpandedButtonRtl_MetropolisBlue1
+{
+    background-position: -70px -130px;
+    width: 13px;
+    height: 13px;
+}
+.dxGridView_gvHeaderFilterActive_MetropolisBlue1
+{
+	background-color: #FF400D;
+}
+

@@ -1,0 +1,550 @@
+.dxgvControl_MetropolisBlue1,
+.dxgvDisabled_MetropolisBlue1
+{
+	/*border: 1px Solid #c0c0c0;*/
+	font: 14px 'Source Sans Pro';
+	background-color: White;
+	color: #333333;
+	cursor: default;
+	/*add sholder and broder raduis by steven*/
+/*
+ box-shadow: 2.5px 4.33px 40px 0px rgba(2, 2, 2, 0.3);
+  border-radius: 5px;
+*/}
+.dxgvDisabled_MetropolisBlue1
+{
+	color: #b8b8b8;
+}
+.dxgvControl_MetropolisBlue1 a
+{
+	color: #FF400D;
+}
+.dxgvDisabled_MetropolisBlue1 a
+{
+	color: #b8b8b8;
+}
+.dxgvLoadingPanel_MetropolisBlue1
+{
+	border: 1px solid #C3C3C3;
+	background-color: white;
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: #333333;
+}
+.dxgvLoadingPanel_MetropolisBlue1 td.dx
+{
+	font-size: 1.17em;
+	white-space: nowrap;
+	text-align: center;
+	padding: 10px 14px;
+}
+.dxgvLoadingPanel_MetropolisBlue1 .dxlp-loadingImage
+{
+	background-image: url('../Web/Loading.gif');
+	height: 32px;
+	width: 32px;
+}
+.dxgvLoadingPanelStatusBar_MetropolisBlue1 .dxlp-loadingImage 
+{
+	background-image: url('gvLoadingOnStatusBar.gif');
+	height: 16px;
+	width: 16px;
+}
+.dxgvLoadingPanelStatusBar_MetropolisBlue1
+{
+	background-color: Transparent;
+}
+.dxgvLoadingPanelStatusBar_MetropolisBlue1 td
+{
+	white-space: nowrap;
+	text-align: center;
+	padding: 0px 2px;
+}
+
+.dxgvTable_MetropolisBlue1
+{
+	background-color: White;
+	border-width: 0;
+	border-collapse: separate!important;
+	overflow: hidden;
+}
+.dxgvTable_MetropolisBlue1 .dxgvHEC
+{
+	background-color: White;
+	border-width: 0;
+	overflow: hidden;
+}
+.dxgvControl_MetropolisBlue1 .dxgvFSDC .dxgvFooter_MetropolisBlue1 td.dxgv
+{
+    border-bottom: 0;
+}
+.dxgvInlineEditRow_MetropolisBlue1,
+.dxgvDataRow_MetropolisBlue1
+{
+color: #77787b;
+}
+.dxgvInlineEditRow_MetropolisBlue1 td.dxgv
+{
+	border-bottom: 1px Solid #D3D3D3;
+	border-right: 1px Solid #D3D3D3;
+}
+.dxgvDataRowAlt_MetropolisBlue1
+{
+	background-color: WhiteSmoke;
+}
+.dxgvFilterRow_MetropolisBlue1
+{
+	border-top: 1px Solid #c0c0c0;
+}
+.dxgvEditForm_MetropolisBlue1
+{
+}
+.dxgvEditForm_MetropolisBlue1 td.dxgv
+{
+	border-bottom: 1px Solid #D3D3D3;
+	padding: 8px 10px 10px;
+}
+.dxgvEditForm_MetropolisBlue1 td.dxgvIndentCell
+{
+	border-right: 1px Solid #CFCFCF;
+	border-left: 1px Solid #CFCFCF;
+	border-top-width: 0px;
+}
+.dxgvSelectedRow_MetropolisBlue1
+{
+	background-color: #e0e0e0;
+	color: #333333;
+}
+.dxgvFocusedRow_MetropolisBlue1
+{
+	background-color: #FF400D;
+	color: White;
+}
+.dxgvFocusedRow_MetropolisBlue1 a,
+.dxgvFocusedRow_MetropolisBlue1 .dxgvCommandColumn_MetropolisBlue1 a
+{
+	color: White;
+}
+.dxgvSelectedRow_MetropolisBlue1 .dxgvCommandColumn_MetropolisBlue1 a
+{
+	color: #FF400D;
+}
+.dxgvPreviewRow_MetropolisBlue1
+{
+	color: #999999;
+}
+.dxgvDetailCell_MetropolisBlue1,
+.dxgvPreviewRow_MetropolisBlue1 td.dxgv,
+.dxgvEmptyDataRow_MetropolisBlue1 td.dxgv
+{
+	padding: 20px 2px 20px 4px;
+	border-bottom: 1px Solid #D3D3D3;
+	border-top-width: 0;
+	border-left-width: 0;
+	border-right-width: 0;
+}
+.dxgvPreviewRow_MetropolisBlue1 td.dxgv
+{
+	padding: 10px 10px 10px 15px;
+}
+.dxgvDetailCell_MetropolisBlue1
+{
+	padding: 16px 18px;
+}
+.dxgvDetailRow_MetropolisBlue1 td.dxgvIndentCell
+{
+	padding-right: 0px;
+	border-bottom: 1px Solid #D3D3D3;
+}
+.dxgvEmptyDataRow_MetropolisBlue1
+{
+	color: Gray;
+}
+.dxgvEmptyDataRow_MetropolisBlue1 td.dxgv
+{
+	border-bottom: 1px Solid #CFCFCF;
+	text-align: center;
+}
+
+.dxgvEditFormDisplayRow_MetropolisBlue1 td.dxgv,
+.dxgvDataRow_MetropolisBlue1 td.dxgv,
+.dxgvDataRowAlt_MetropolisBlue1 td.dxgv,
+.dxgvSelectedRow_MetropolisBlue1 td.dxgv,
+.dxgvFocusedRow_MetropolisBlue1 td.dxgv
+{
+	overflow: hidden;
+	border-bottom: 1px Solid #dde0e7;
+	padding: 3px 6px 4px;
+
+/* delete border by steven 
+	border-bottom: 1px Solid #c0c0c0;
+	border-right: 1px Solid #c0c0c0;
+	border-top-width: 0;
+	border-left-width: 0;
+	padding: 3px 6px 4px;
+*/
+	/*change the font color by steven
+color:#77787b;*/
+}
+.dxgvEditFormDisplayRow_MetropolisBlue1
+{
+}
+.dxgvEditFormDisplayRow_MetropolisBlue1 td.dxgv
+{
+}
+.dxgvEditFormDisplayRow_MetropolisBlue1 td.dxgvIndentCell
+{
+	background: #EDEDED none;
+	border-right: 1px Solid #CFCFCF;
+	border-left: 1px Solid #CFCFCF;
+	border-top-width: 0px;
+}
+
+.dxgvEditingErrorRow_MetropolisBlue1
+{
+	background-color: #FFC8C8;
+	color: #FF0000;
+}
+.dxgvEditingErrorRow_MetropolisBlue1 td.dxgv
+{
+	white-space: pre-wrap;
+	border-bottom: 1px Solid #D3D3D3;
+	border-right-width: 0;
+	border-top-width: 0;
+	border-left-width: 0;
+	padding: 6px 10px;
+}
+
+.dxgvFilterRow_MetropolisBlue1 td.dxgv
+{
+	/*delete border by steven*/
+	border-bottom: 1px Solid #c0c0c0;
+	border-right: 1px Solid #c0c0c0;
+/*---end----*/
+	border-top-width: 0;
+	border-left-width: 0;
+	padding: 2px;
+	overflow: hidden;
+}
+.dxgvGroupRow_MetropolisBlue1
+{
+}
+.dxgvFocusedGroupRow_MetropolisBlue1
+{
+	background-color: #FF400D;
+	color: White;
+}
+.dxgvGroupRow_MetropolisBlue1 td.dxgv,
+.dxgvFocusedGroupRow_MetropolisBlue1 td.dxgv
+{
+	border: 0 none;
+	vertical-align: middle;
+	white-space: nowrap;
+	border-bottom: 1px Solid #D3D3D3;
+	padding: 3px 6px 4px;
+}
+.dxgvFocusedRow_MetropolisBlue1 td.dxgvIndentCell,
+.dxgvFocusedGroupRow_MetropolisBlue1 td.dxgvIndentCell,
+.dxgvSelectedRow_MetropolisBlue1 td.dxgvIndentCell
+{
+	background-color: white!important;
+	border-right: 1px solid #CFCFCF;
+	border-left: 1px solid #CFCFCF;
+	border-top-width: 0px;
+}
+.dxgvHeaderPanel_MetropolisBlue1
+{
+	background-color: #F9F9F9;
+	padding: 8px 6px;
+	border-bottom: 1px Solid #9F9F9F;
+}
+
+.dxgvMSDraggable_MetropolisBlue1 .dxgvHeader_MetropolisBlue1,
+.dxgvMSDraggable_MetropolisBlue1.dxgvGroupPanel_MetropolisBlue1
+{
+    -ms-touch-action: pinch-zoom;
+}
+.dxgvHeader_MetropolisBlue1
+{
+cursor: pointer;
+	white-space: nowrap;
+	padding: 4px 6px 5px;
+/*delete border by steven */
+	/*border: 1px Solid #c0c0c0;*/
+border-bottom:1px Solid #c0c0c0;
+    background-color: white;
+	overflow: hidden;
+	font-weight: normal;
+	text-align: left;
+	text-transform:uppercase;
+}
+.dxgvHeader_MetropolisBlue1,
+.dxgvHeader_MetropolisBlue1 table
+{
+}
+.dxgvHeader_MetropolisBlue1 td
+{
+	white-space: nowrap;
+}
+.dxgvHeader_MetropolisBlue1 a
+{
+	color: #FF400D;
+}
+.dxgvPopupEditForm_MetropolisBlue1
+{
+	padding: 4px;
+	margin: 0;
+}
+.dxgvCustomization_MetropolisBlue1
+{
+	margin: 0;
+	padding: 10px;
+	min-width: 220px;
+}
+.dxgvGroupPanel_MetropolisBlue1
+{
+	white-space: nowrap;
+	/*delete by steven border-bottom: 1px Solid #c0c0c0;*/
+	
+	padding: 7px 4px 8px 6px;
+}
+.dxgvFooter_MetropolisBlue1
+{
+	white-space: nowrap;
+}
+.dxgvFooter_MetropolisBlue1 td.dxgv
+{
+	padding: 5px 6px 6px;
+	border-bottom: 1px Solid #c0c0c0;
+	border-right-width: 0;
+}
+.dxgvGroupFooter_MetropolisBlue1
+{
+}
+.dxgvGroupFooter_MetropolisBlue1 td.dxgv
+{
+	white-space: nowrap;
+}
+.dxgvGroupFooter_MetropolisBlue1 td.dxgv
+{
+	padding: 5px 4px 6px 6px;
+	border-bottom: 1px Solid #c0c0c0;
+	border-right-width: 0;
+}
+.dxgvDataRow_MetropolisBlue1 td.dxgvIndentCell,
+.dxgvGroupRow_MetropolisBlue1 td.dxgvIndentCell,
+.dxgvGroupFooter_MetropolisBlue1 td.dxgvIndentCell
+{
+	background-color: white;
+	border-right: 1px Solid #CFCFCF;
+	border-left: 1px Solid #CFCFCF;
+	border-top-width: 0px;
+}
+
+.dxgvTitlePanel_MetropolisBlue1, 
+.dxgvTable_MetropolisBlue1 caption
+{
+	font-size: 1.25em;
+	font-weight: normal;
+	padding: 3px 3px 5px;
+	text-align: center;
+	color: #999999;
+		/*border-bottom: 1px Solid #c0c0c0;*/
+}
+.dxgvStatusBar_MetropolisBlue1
+{
+	border-top: 1px Solid #c0c0c0;
+}
+.dxgvStatusBar_MetropolisBlue1 tr.dxgv
+{
+	height: 20px;
+}
+.dxgvStatusBar_MetropolisBlue1 tr.dxgv > td
+{
+	padding: 4px;
+}
+.dxgvCommandColumn_MetropolisBlue1
+{
+	padding: 8px 4px;
+}
+.dxgvCommandColumn_MetropolisBlue1 a
+{
+	margin: 0 3px 0 0;
+	color: #FF400D;
+}
+.dxgvCommandColumn_MetropolisBlue1 a:hover
+{
+}
+
+.dxgvCommandColumnItem_MetropolisBlue1
+{
+}
+.dxgvEditFormTable_MetropolisBlue1
+{
+	padding: 2px 6px 6px 4px;
+	font-size: 0.91em;
+	min-width: 300px;
+}
+.dxgvEditFormTable_MetropolisBlue1 a
+{
+	color: #FF400D;
+}
+.dxgvEditFormTable_MetropolisBlue1 a:hover
+{
+}
+
+.dxgvEditFormCaption_MetropolisBlue1
+{
+	padding: 4px 4px 4px 10px;
+	white-space: nowrap;
+}
+
+.dxgvInlineEditCell_MetropolisBlue1
+{
+	padding: 1px;
+}
+
+.dxgvEditFormCell_MetropolisBlue1
+{
+	padding: 4px;
+	border-width: 0;
+}
+
+.dxgvPagerTopPanel_MetropolisBlue1,
+.dxgvPagerBottomPanel_MetropolisBlue1
+{
+	padding: 4px 0;
+}
+.dxgvPagerTopPanel_MetropolisBlue1
+{
+	border-bottom: 1px Solid #c0c0c0;
+}
+
+.dxgvDetailButton_MetropolisBlue1
+{
+}
+
+.dxgvFilterBar_MetropolisBlue1
+{
+	border-top: 1px Solid #c0c0c0;
+}
+.dxgvFilterBar_MetropolisBlue1 a
+{
+	color: #FF400D;
+	text-decoration: underline;
+}
+.dxgvFilterBarCheckBoxCell_MetropolisBlue1
+{
+	padding: 0 7px;
+}
+.dxgvFilterBarImageCell_MetropolisBlue1
+{
+	padding: 0 1px 0 3px;
+	cursor: pointer;
+}
+.dxgvFilterBarExpressionCell_MetropolisBlue1
+{
+	padding: 5px 5px 8px 0;
+	white-space: nowrap;
+}
+.dxgvFilterBarClearButtonCell_MetropolisBlue1
+{
+	padding: 5px 6px 8px;
+}
+.dxgvFilterBuilderMainArea_MetropolisBlue1
+{
+	background: white none;
+	padding: 6px 2px;
+} 
+.dxgvFilterBuilderButtonArea_MetropolisBlue1
+{
+	border-top: 1px solid #c0c0c0;
+	padding: 6px;
+	white-space: nowrap;
+}
+
+.dxgvDataRowHover_MetropolisBlue1
+{
+	background-color: #ff400d;
+	color: White;
+}
+.dxgvDataRowHover_MetropolisBlue1 a
+{
+	color: #FF400D!important;
+}
+
+.dxgvControl_MetropolisBlue1 .dxpLite_MetropolisBlue1,
+.dxgvDisabled_MetropolisBlue1 .dxpLite_MetropolisBlue1
+{
+	padding-top: 10px;
+}
+
+.dxgvControl_MetropolisBlue1 .dxgvHFSAC
+{
+    padding: 9px 0 0 4px;
+}
+.dxgvControl_MetropolisBlue1 .dxgvHFSC
+{
+    padding: 9px 0 6px;
+}
+.dxgvControl_MetropolisBlue1 .dxgvHFSC div
+{
+    height: 1px;
+    background: #c0c0c0;
+}
+.dxgvControl_MetropolisBlue1 div[id$='DXEPLPC']
+{
+    height: 53px;
+}
+
+/* Removes flicking in iOS Safari*/
+.dxgvTable_MetropolisBlue1
+{
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.dxgvControl_MetropolisBlue1 td.dxgvBatchEditCell_MetropolisBlue1
+{
+    padding: 0;
+}
+.dxgvControl_MetropolisBlue1 td.dxgvBatchEditModifiedCell_MetropolisBlue1
+{
+    background: #d7f9c7;
+}
+.dxgvControl_MetropolisBlue1 .dxgvErrorCell
+{
+    padding-left: 5px;
+    width: 1px;
+}
+.dxgvControl_MetropolisBlue1 .dxgvErrorCell img
+{
+    margin: -3px 0;
+}
+.dxgvStatusBar_MetropolisBlue1 .dxgvCommandColumn_MetropolisBlue1 a
+{
+    margin-right: 10px;
+}
+
+.dxmLite_MetropolisBlue1.dxm-ltr .dxgvContextMenu_MetropolisBlue1.dxm-popup .dxm-content {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+.dxmLite_MetropolisBlue1.dxm-ltr .dxgvContextMenu_MetropolisBlue1.dxm-popup .dxm-image,
+.dxgvContextMenu_MetropolisBlue1.dxm-popup .dxm-image {
+	margin-top: -2px;
+    margin-bottom: -2px;
+	margin-left: -1px;
+    border: 1px solid transparent;
+}
+.dxmLite_MetropolisBlue1.dxm-ltr .dxgvContextMenu_MetropolisBlue1.dxm-popup .dxm-image.dxgvcm-chk,
+.dxgvContextMenu_MetropolisBlue1.dxm-popup .dxm-image.dxgvcm-chk {
+	background-color: #e0e0e0;
+	border-color: #c2c2c2;
+}
+.dxmLite_MetropolisBlue1.dxm-ltr .dxgvContextMenu_MetropolisBlue1.dxm-popup .dxm-image {
+	margin-right: 9px;
+}
+.dxmLite_MetropolisBlue1.dxm-ltr .dxgvContextMenu_MetropolisBlue1.dxm-popup .dxm-image.dxWeb_mSubMenuItem_MetropolisBlue1,
+.dxmLite_MetropolisBlue1.dxm-ltr .dxgvContextMenu_MetropolisBlue1.dxm-popup .dxm-image.dxWeb_mSubMenuItemChecked_MetropolisBlue1 {
+	margin-left: 1px;
+	margin-right: 11px;
+}

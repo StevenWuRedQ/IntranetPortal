@@ -1,0 +1,17 @@
+.dxsplControl_MetropolisBlue1 .dxmLiteReportToolbarPane {
+    background-color: #f0f0f0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+table.dxXtraReports_PageTable_MetropolisBlue1 {
+    border-spacing: 0px;
+    margin: 0 auto;
+}
+
+    table.dxXtraReports_PageTable_MetropolisBlue1 td {
+        padding: 0px;
+    }
+

@@ -1,0 +1,105 @@
+.dxssControl_MetropolisBlue1 
+{
+	font: 12px Tahoma, Geneva, sans-serif;
+}
+.dxssControl_MetropolisBlue1 .dxss-gl .dxss-v,
+.dxssControl_MetropolisBlue1 .dxss-gl .dxss-h 
+{
+	border-color: #c0c0c0;
+}
+.dxssControl_MetropolisBlue1 .dxss-rowHeader 
+{	
+	border-right: 1px solid #c0c0c0;
+	border-top: 1px solid #c0c0c0;
+}
+.dxssControl_MetropolisBlue1 .dxss-colHeader 
+{
+	border-bottom: 1px solid #c0c0c0;
+	border-left: 1px solid #c0c0c0;
+}
+.dxssControl_MetropolisBlue1 .dxss-trbe 
+{
+	border-top-color: #FF400D;
+}
+.dxssControl_MetropolisBlue1 .dxss-rrbe 
+{
+	border-right-color: #FF400D;
+}
+.dxssControl_MetropolisBlue1 .dxss-brbe 
+{
+	border-bottom-color: #FF400D;
+}
+.dxssControl_MetropolisBlue1 .dxss-lrbe 
+{
+	border-left-color: #FF400D;
+}
+.dxssControl_MetropolisBlue1 .dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-leftIndent
+{
+	width: 3px;
+}
+.dxssControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-bottom .dxtc-leftIndent
+{
+	width: 8px;
+}
+.dxssControl_MetropolisBlue1 .dxrControl_MetropolisBlue1 .dxr-minBtn
+{
+	padding-right: 7px;
+}
+.dxssControl_MetropolisBlue1 .dxss-hrg,
+.dxssControl_MetropolisBlue1 .dxss-vrg
+{
+	background-color: #FF400D;
+}
+.dxssControl_MetropolisBlue1 .dxss-md 
+{
+	border-left: 1px solid #c0c0c0 !important;
+	border-right: 1px solid #c0c0c0 !important;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.dxssControl_MetropolisBlue1 .dxss-tse 
+{
+	border-color: #FF400D;
+}
+.dxssControl_MetropolisBlue1 .dxss-tre
+{
+	background: url('TouchResize.png');
+}
+/* Loading panel */
+.dxssLoadingDiv_MetropolisBlue1
+{
+    background: white;
+    opacity: 0.85 !important;
+    filter: alpha(opacity=85);
+}
+.dxssLoadingPanel_MetropolisBlue1
+{
+	border: 1px solid #c0c0c0;
+	background-color: white;
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: #333333;
+}
+.dxssLoadingPanel_MetropolisBlue1 td.dx
+{
+    font-size: 1.17em;
+    white-space: nowrap;
+    text-align: center;
+	padding: 10px 14px;
+}
+.dxssLoadingPanel_MetropolisBlue1 .dxlp-loadingImage
+{
+	background-image: url('../Web/Loading.gif');
+	height: 32px;
+	width: 32px;
+}
+/* --------------Dialogs----------------- */
+.dxpcLite_MetropolisBlue1 .dxssDlgFooter
+{
+	border-top: 1px #c0c0c0 solid;
+}
+.dxpcLite_MetropolisBlue1 .dxssDlgInsertImageForm .dxssDlgImagePreviewCell
+{
+    color: #878787;
+    border: dashed 1px #cac8c8;
+}

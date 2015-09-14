@@ -1,0 +1,266 @@
+.dxtlControl_MetropolisBlue1
+{
+	cursor: default;
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: #333333;
+	border: 1px none #c0c0c0;
+}
+.dxtlControl_MetropolisBlue1 caption
+{
+	background: #ACACAC none;
+	border-bottom: 0 solid #c0c0c0;
+	border: 1px solid #c0c0c0;
+	color: White;
+	font-size: 1.25em;
+	font-weight: normal;
+	padding: 3px 3px 5px;
+	text-align: center;
+}
+
+/* Indent cells */
+.dxtlIndent_MetropolisBlue1,
+.dxtlIndentWithButton_MetropolisBlue1
+{
+	vertical-align: top;
+	background: white none no-repeat top center;
+}
+.dxtlIndent_MetropolisBlue1
+{
+	padding: 0 11px;
+}
+.dxtlIndentWithButton_MetropolisBlue1
+{
+	padding: 5px 7px 6px;
+}
+.dxtlSelectionCell_MetropolisBlue1
+{
+	border: 1px solid #cfcfcf;
+	padding: 3px 5px 5px 6px;
+}
+
+/* Tree-lines cells */
+.dxtlLineRoot_MetropolisBlue1
+{
+
+}
+
+.dxtlLineFirst_MetropolisBlue1
+{
+
+}
+.dxtlLineMiddle_MetropolisBlue1
+{
+
+}
+.dxtlLineLast_MetropolisBlue1
+{
+
+}
+
+.dxtlLineFirstRtl_MetropolisBlue1
+{
+}
+.dxtlLineMiddleRtl_MetropolisBlue1
+{
+
+}
+.dxtlLineLastRtl_MetropolisBlue1
+{
+}
+
+/* Headers */
+.dxtlHeader_MetropolisBlue1
+{
+    background-color: white;
+	border: 1px solid #c0c0c0;
+	padding: 4px 6px 5px;
+	font-weight: normal;
+}
+.dxtlHeader_MetropolisBlue1 table.dxtl
+{
+	border-collapse: collapse;
+	width: 100%;
+}
+.dxtlHeader_MetropolisBlue1 td.dxtl
+{
+	padding: 0;
+}
+.dxtlHeader_MetropolisBlue1,
+.dxtlHeader_MetropolisBlue1 td.dxtl
+{
+	white-space: nowrap;
+	text-align: left;
+	overflow: hidden;
+}
+.dxtlControl_MetropolisBlue1 .dxpc-content 
+{
+	padding: 10px!important;
+}
+/* Nodes */
+.dxtlNode_MetropolisBlue1
+{
+	background: white none;
+}
+.dxtlAltNode_MetropolisBlue1
+{
+	background-color: WhiteSmoke;
+}
+.dxtlSelectedNode_MetropolisBlue1
+{
+	background: #e0e0e0 none;
+}
+.dxtlFocusedNode_MetropolisBlue1
+{
+	background: #FF400D none;
+	color: white;
+}
+.dxtlInlineEditNode_MetropolisBlue1
+{
+	background: white none;
+}
+.dxtlEditFormDisplayNode_MetropolisBlue1
+{
+	background: white none;
+}
+
+.dxtlNode_MetropolisBlue1 td.dxtl, 
+.dxtlAltNode_MetropolisBlue1  td.dxtl, 
+.dxtlSelectedNode_MetropolisBlue1 td.dxtl, 
+.dxtlFocusedNode_MetropolisBlue1 td.dxtl,
+.dxtlEditFormDisplayNode_MetropolisBlue1 td.dxtl,
+.dxtlCommandCell_MetropolisBlue1
+{
+	padding: 3px 6px 4px;
+	border: 1px solid #cfcfcf;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.dxtlInlineEditNode_MetropolisBlue1 td.dxtl
+{
+	border: 1px solid #cfcfcf;
+	padding: 1px;
+}
+
+/* Preview */
+.dxtlPreview_MetropolisBlue1
+{
+	color: #7f7f7f;
+	padding: 14px;
+	border: 1px solid #cfcfcf;
+	overflow: hidden;
+}
+
+/* Footers */
+.dxtlGroupFooter_MetropolisBlue1
+{
+}
+.dxtlFooter_MetropolisBlue1
+{
+}
+.dxtlGroupFooter_MetropolisBlue1 td.dxtl,
+.dxtlFooter_MetropolisBlue1 td.dxtl
+{
+	padding: 5px 6px 6px;
+	white-space: nowrap;
+	border: 1px solid #cfcfcf;
+	overflow: hidden;
+}
+
+/* Pagers */
+.dxtlPagerTopPanel_MetropolisBlue1
+{
+	border-bottom: 1px none #c0c0c0;
+	padding: 4px 0;
+}
+.dxtlPagerBottomPanel_MetropolisBlue1
+{
+	border-top: 1px none #c0c0c0;
+	padding: 7px 0;
+}
+
+/* Editing */
+.dxtlEditForm_MetropolisBlue1
+{
+	border: 1px solid #D3D3D3;
+	padding: 8px 10px 10px;
+}
+.dxtlEditFormCaption_MetropolisBlue1,
+.dxtlEditFormEditCell_MetropolisBlue1
+{
+	padding: 4px;
+}
+.dxtlEditFormCaption_MetropolisBlue1
+{
+	padding-left: 10px;
+	white-space: nowrap;
+}
+.dxtlError_MetropolisBlue1
+{
+	background: #FFC8C8 none;
+	color: #FF0000;
+	padding: 6px 10px;
+	border: 1px solid #cfcfcf;
+}
+.dxtlPopupEditForm_MetropolisBlue1
+{
+	padding: 0;
+	min-width: 300px;
+}
+
+/* Links */
+.dxtlControl_MetropolisBlue1 a
+{
+	color: #FF400D;
+}
+.dxtlControl_MetropolisBlue1 a:hover
+{
+}
+.dxtlFocusedNode_MetropolisBlue1 a
+{
+	color: White;
+}
+.dxtlSelectedNode_MetropolisBlue1 a
+{
+	color: #FF400D;
+}
+.dxtlCommandCell_MetropolisBlue1 a
+{
+	margin-right: 3px;
+}
+/* Customization window */
+.dxtlControl_MetropolisBlue1 .dxpcLite_MetropolisBlue1 .dxpc-content
+{
+	min-width: 220px;
+}
+
+/* Loading panel */
+.dxtlLoadingPanel_MetropolisBlue1
+{
+	border: 1px solid #C3C3C3;
+	background-color: white;
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: #333333;
+}
+.dxtlLoadingPanel_MetropolisBlue1 td.dx
+{
+	font-size: 1.17em;
+	white-space: nowrap;
+	text-align: center;
+	padding: 10px 14px;
+}
+.dxtlLoadingPanel_MetropolisBlue1 .dxlp-loadingImage
+{
+	background-image: url('../Web/Loading.gif');
+	height: 32px;
+	width: 32px;
+}
+
+/* Disabled */
+.dxtlDisabled_MetropolisBlue1,
+.dxtlDisabled_MetropolisBlue1 .dxtl
+{
+	color: #b8b8b8;
+	cursor: default;
+}
+
+

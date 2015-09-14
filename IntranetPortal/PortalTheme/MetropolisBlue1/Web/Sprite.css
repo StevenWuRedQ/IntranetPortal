@@ -1,0 +1,1212 @@
+.dxigControl_MetropolisBlue1.dxTouchUI .dxWeb_igCloseButton_MetropolisBlue1,
+.dxigControl_MetropolisBlue1.dxTouchUI .dxWeb_igPauseButton_MetropolisBlue1,
+.dxigControl_MetropolisBlue1.dxTouchUI .dxWeb_igPlayButton_MetropolisBlue1,
+.dxm-hovered .dxWeb_fmCopyButton_MetropolisBlue1,
+.dxm-hovered .dxWeb_fmCreateButton_MetropolisBlue1,
+.dxm-hovered .dxWeb_fmDeleteButton_MetropolisBlue1,
+.dxm-hovered .dxWeb_fmDwnlButton_MetropolisBlue1,
+.dxm-hovered .dxWeb_fmMoveButton_MetropolisBlue1,
+.dxm-hovered .dxWeb_fmRefreshButton_MetropolisBlue1,
+.dxm-hovered .dxWeb_fmRenameButton_MetropolisBlue1,
+.dxm-hovered .dxWeb_mHorizontalPopOut_MetropolisBlue1,
+.dxm-hovered .dxWeb_mVerticalPopOut_MetropolisBlue1,
+.dxm-hovered .dxWeb_mVerticalPopOutRtl_MetropolisBlue1,
+.dxm-scrollBtnHovered .dxWeb_mScrollDown_MetropolisBlue1,
+.dxm-scrollBtnHovered .dxWeb_mScrollUp_MetropolisBlue1,
+.dxpc-collapseBtnChecked .dxWeb_pcCollapseButton_MetropolisBlue1,
+.dxpc-maximizeBtnChecked .dxWeb_pcMaximizeButton_MetropolisBlue1,
+.dxpc-pinBtnChecked .dxWeb_pcPinButton_MetropolisBlue1,
+.dxp-hoverDropDownButton .dxWeb_pPopOut_MetropolisBlue1,
+.dxp-pressedDropDownButton .dxWeb_pPopOut_MetropolisBlue1,
+.dxr-itemHover .dxWeb_rPopOut_MetropolisBlue1,
+.dxrpCollapsed .dxWeb_rpCollapseButton_MetropolisBlue1,
+.dxWeb_edtCheckBoxChecked_MetropolisBlue1,
+.dxWeb_edtCheckBoxCheckedDisabled_MetropolisBlue1,
+.dxWeb_edtCheckBoxGrayed_MetropolisBlue1,
+.dxWeb_edtCheckBoxGrayedDisabled_MetropolisBlue1,
+.dxWeb_edtCheckBoxUnchecked_MetropolisBlue1,
+.dxWeb_edtCheckBoxUncheckedDisabled_MetropolisBlue1,
+.dxWeb_fmCopyButton_MetropolisBlue1,
+.dxWeb_fmCopyButtonDisabled_MetropolisBlue1,
+.dxWeb_fmCreateButton_MetropolisBlue1,
+.dxWeb_fmCreateButtonDisabled_MetropolisBlue1,
+.dxWeb_fmDeleteButton_MetropolisBlue1,
+.dxWeb_fmDeleteButtonDisabled_MetropolisBlue1,
+.dxWeb_fmDwnlButton_MetropolisBlue1,
+.dxWeb_fmDwnlButtonDisabled_MetropolisBlue1,
+.dxWeb_fmFolder_MetropolisBlue1,
+.dxWeb_fmFolderLocked_MetropolisBlue1,
+.dxWeb_fmMoveButton_MetropolisBlue1,
+.dxWeb_fmMoveButtonDisabled_MetropolisBlue1,
+.dxWeb_fmRefreshButton_MetropolisBlue1,
+.dxWeb_fmRefreshButtonDisabled_MetropolisBlue1,
+.dxWeb_fmRenameButton_MetropolisBlue1,
+.dxWeb_fmRenameButtonDisabled_MetropolisBlue1,
+.dxWeb_fmThumbnailCheck_MetropolisBlue1,
+.dxWeb_igCloseButton_MetropolisBlue1,
+.dxWeb_igNavigationBarMarker_MetropolisBlue1,
+.dxWeb_igNextButton_MetropolisBlue1,
+.dxWeb_igNextButtonDisabled_MetropolisBlue1,
+.dxWeb_igNextButtonHover_MetropolisBlue1,
+.dxWeb_igNextButtonPressed_MetropolisBlue1,
+.dxWeb_igPauseButton_MetropolisBlue1,
+.dxWeb_igPlayButton_MetropolisBlue1,
+.dxWeb_igPrevButton_MetropolisBlue1,
+.dxWeb_igPrevButtonDisabled_MetropolisBlue1,
+.dxWeb_igPrevButtonHover_MetropolisBlue1,
+.dxWeb_igPrevButtonPressed_MetropolisBlue1,
+.dxWeb_isDot_MetropolisBlue1,
+.dxWeb_isDotDisabled_MetropolisBlue1,
+.dxWeb_isDotPressed_MetropolisBlue1,
+.dxWeb_isDotSelected_MetropolisBlue1,
+.dxWeb_isNextBtnHor_MetropolisBlue1,
+.dxWeb_isNextBtnHorDisabled_MetropolisBlue1,
+.dxWeb_isNextBtnVert_MetropolisBlue1,
+.dxWeb_isNextBtnVertDisabled_MetropolisBlue1,
+.dxWeb_isNextPageBtnHor_MetropolisBlue1,
+.dxWeb_isNextPageBtnHorDisabled_MetropolisBlue1,
+.dxWeb_isNextPageBtnHorOutside_MetropolisBlue1,
+.dxWeb_isNextPageBtnHorOutsideDisabled_MetropolisBlue1,
+.dxWeb_isNextPageBtnVert_MetropolisBlue1,
+.dxWeb_isNextPageBtnVertDisabled_MetropolisBlue1,
+.dxWeb_isNextPageBtnVertOutside_MetropolisBlue1,
+.dxWeb_isNextPageBtnVertOutsideDisabled_MetropolisBlue1,
+.dxWeb_isPauseBtn_MetropolisBlue1,
+.dxWeb_isPlayBtn_MetropolisBlue1,
+.dxWeb_isPrevBtnHor_MetropolisBlue1,
+.dxWeb_isPrevBtnHorDisabled_MetropolisBlue1,
+.dxWeb_isPrevBtnVert_MetropolisBlue1,
+.dxWeb_isPrevBtnVertDisabled_MetropolisBlue1,
+.dxWeb_isPrevPageBtnHor_MetropolisBlue1,
+.dxWeb_isPrevPageBtnHorDisabled_MetropolisBlue1,
+.dxWeb_isPrevPageBtnHorOutside_MetropolisBlue1,
+.dxWeb_isPrevPageBtnHorOutsideDisabled_MetropolisBlue1,
+.dxWeb_isPrevPageBtnVert_MetropolisBlue1,
+.dxWeb_isPrevPageBtnVertDisabled_MetropolisBlue1,
+.dxWeb_isPrevPageBtnVertOutside_MetropolisBlue1,
+.dxWeb_isPrevPageBtnVertOutsideDisabled_MetropolisBlue1,
+.dxWeb_izEWCloseButton_MetropolisBlue1,
+.dxWeb_izHint_MetropolisBlue1,
+.dxWeb_mHorizontalPopOut_MetropolisBlue1,
+.dxWeb_mScrollDown_MetropolisBlue1,
+.dxWeb_mScrollUp_MetropolisBlue1,
+.dxWeb_mSubMenuItem_MetropolisBlue1,
+.dxWeb_mSubMenuItemChecked_MetropolisBlue1,
+.dxWeb_mVerticalPopOut_MetropolisBlue1,
+.dxWeb_mVerticalPopOutRtl_MetropolisBlue1,
+.dxWeb_nbCollapse_MetropolisBlue1,
+.dxWeb_nbExpand_MetropolisBlue1,
+.dxWeb_pAll_MetropolisBlue1,
+.dxWeb_pAllDisabled_MetropolisBlue1,
+.dxWeb_pcCloseButton_MetropolisBlue1,
+.dxWeb_pcCollapseButton_MetropolisBlue1,
+.dxWeb_pcMaximizeButton_MetropolisBlue1,
+.dxWeb_pcPinButton_MetropolisBlue1,
+.dxWeb_pcRefreshButton_MetropolisBlue1,
+.dxWeb_pcSizeGrip_MetropolisBlue1,
+.dxWeb_pcSizeGripRtl_MetropolisBlue1,
+.dxWeb_pFirst_MetropolisBlue1,
+.dxWeb_pFirstDisabled_MetropolisBlue1,
+.dxWeb_pLast_MetropolisBlue1,
+.dxWeb_pLastDisabled_MetropolisBlue1,
+.dxWeb_pNext_MetropolisBlue1,
+.dxWeb_pNextDisabled_MetropolisBlue1,
+.dxWeb_pPopOut_MetropolisBlue1,
+.dxWeb_pPopOutDisabled_MetropolisBlue1,
+.dxWeb_pPrev_MetropolisBlue1,
+.dxWeb_pPrevDisabled_MetropolisBlue1,
+.dxWeb_rMinBtn_MetropolisBlue1,
+.dxWeb_rMinBtn_MetropolisBlue1.dxWeb_rMinBtnHover_MetropolisBlue1,
+.dxWeb_rMinBtn_MetropolisBlue1.dxWeb_rMinBtnPressed_MetropolisBlue1,
+.dxWeb_rMinBtnChecked_MetropolisBlue1.dxWeb_rMinBtn_MetropolisBlue1,
+.dxWeb_rMinBtnChecked_MetropolisBlue1.dxWeb_rMinBtnHover_MetropolisBlue1,
+.dxWeb_rMinBtnChecked_MetropolisBlue1.dxWeb_rMinBtnPressed_MetropolisBlue1,
+.dxWeb_rpCollapseButton_MetropolisBlue1,
+.dxWeb_rPopOut_MetropolisBlue1,
+.dxWeb_splHCollapseBackwardButton_MetropolisBlue1,
+.dxWeb_splHCollapseBackwardButtonHover_MetropolisBlue1,
+.dxWeb_splHCollapseForwardButton_MetropolisBlue1,
+.dxWeb_splHCollapseForwardButtonHover_MetropolisBlue1,
+.dxWeb_splHSeparator_MetropolisBlue1,
+.dxWeb_splHSeparatorHover_MetropolisBlue1,
+.dxWeb_splVCollapseBackwardButton_MetropolisBlue1,
+.dxWeb_splVCollapseBackwardButtonHover_MetropolisBlue1,
+.dxWeb_splVCollapseForwardButton_MetropolisBlue1,
+.dxWeb_splVCollapseForwardButtonHover_MetropolisBlue1,
+.dxWeb_splVSeparator_MetropolisBlue1,
+.dxWeb_splVSeparatorHover_MetropolisBlue1,
+.dxWeb_tcScrollLeft_MetropolisBlue1,
+.dxWeb_tcScrollLeftDisabled_MetropolisBlue1,
+.dxWeb_tcScrollLeftHover_MetropolisBlue1,
+.dxWeb_tcScrollLeftPressed_MetropolisBlue1,
+.dxWeb_tcScrollRight_MetropolisBlue1,
+.dxWeb_tcScrollRightDisabled_MetropolisBlue1,
+.dxWeb_tcScrollRightHover_MetropolisBlue1,
+.dxWeb_tcScrollRightPressed_MetropolisBlue1,
+.dxWeb_tvColBtn_MetropolisBlue1,
+.dxWeb_tvColBtnRtl_MetropolisBlue1,
+.dxWeb_tvExpBtn_MetropolisBlue1,
+.dxWeb_tvExpBtnRtl_MetropolisBlue1,
+.dxWeb_ucClearButton_MetropolisBlue1,
+.dxWeb_ucClearButtonDisabled_MetropolisBlue1
+{
+    background-image: url('sprite.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+.dxigControl_MetropolisBlue1.dxTouchUI .dxWeb_igCloseButton_MetropolisBlue1
+{
+    background-position: -50px -327px;
+    width: 23px;
+    height: 23px;
+}
+.dxigControl_MetropolisBlue1.dxTouchUI .dxWeb_igPauseButton_MetropolisBlue1
+{
+    background-position: -100px -198px;
+    width: 21px;
+    height: 25px;
+}
+.dxigControl_MetropolisBlue1.dxTouchUI .dxWeb_igPlayButton_MetropolisBlue1
+{
+    background-position: -78px -198px;
+    width: 21px;
+    height: 25px;
+}
+.dxm-hovered .dxWeb_fmCopyButton_MetropolisBlue1
+{
+    background-position: -119px -390px;
+    width: 16px;
+    height: 16px;
+}
+.dxm-hovered .dxWeb_fmCreateButton_MetropolisBlue1
+{
+    background-position: 0px -390px;
+    width: 16px;
+    height: 16px;
+}
+.dxm-hovered .dxWeb_fmDeleteButton_MetropolisBlue1
+{
+    background-position: -102px -407px;
+    width: 16px;
+    height: 16px;
+}
+.dxm-hovered .dxWeb_fmDwnlButton_MetropolisBlue1
+{
+    background-position: -119px -424px;
+    width: 16px;
+    height: 16px;
+}
+.dxm-hovered .dxWeb_fmMoveButton_MetropolisBlue1
+{
+    background-position: -68px -424px;
+    width: 16px;
+    height: 16px;
+}
+.dxm-hovered .dxWeb_fmRefreshButton_MetropolisBlue1
+{
+    background-position: -102px -390px;
+    width: 16px;
+    height: 16px;
+}
+.dxm-hovered .dxWeb_fmRenameButton_MetropolisBlue1
+{
+    background-position: -17px -424px;
+    width: 16px;
+    height: 16px;
+}
+.dxm-hovered .dxWeb_mHorizontalPopOut_MetropolisBlue1
+{
+    background-position: -89px -348px;
+    width: 5px;
+    height: 3px;
+}
+.dxm-hovered .dxWeb_mVerticalPopOut_MetropolisBlue1
+{
+    background-position: -134px -198px;
+    width: 4px;
+    height: 8px;
+}
+.dxm-hovered .dxWeb_mVerticalPopOutRtl_MetropolisBlue1
+{
+    background-position: -136px -407px;
+    width: 4px;
+    height: 8px;
+}
+.dxm-scrollBtnHovered .dxWeb_mScrollDown_MetropolisBlue1
+{
+    background-position: -28px -488px;
+    width: 13px;
+    height: 13px;
+}
+.dxm-scrollBtnHovered .dxWeb_mScrollUp_MetropolisBlue1
+{
+    background-position: -56px -488px;
+    width: 13px;
+    height: 13px;
+}
+.dxpc-collapseBtnChecked .dxWeb_pcCollapseButton_MetropolisBlue1
+{
+    background-position: -16px -473px;
+    width: 15px;
+    height: 14px;
+}
+.dxpc-maximizeBtnChecked .dxWeb_pcMaximizeButton_MetropolisBlue1
+{
+    background-position: 0px -473px;
+    width: 15px;
+    height: 14px;
+}
+.dxpc-pinBtnChecked .dxWeb_pcPinButton_MetropolisBlue1
+{
+    background-position: -104px -458px;
+    width: 15px;
+    height: 14px;
+}
+.dxp-hoverDropDownButton .dxWeb_pPopOut_MetropolisBlue1
+{
+    background-position: -128px -222px;
+    width: 7px;
+    height: 4px;
+}
+.dxp-pressedDropDownButton .dxWeb_pPopOut_MetropolisBlue1
+{
+    background-position: -117px -347px;
+    width: 7px;
+    height: 4px;
+}
+.dxr-itemHover .dxWeb_rPopOut_MetropolisBlue1
+{
+    background-position: -130px -144px;
+    width: 5px;
+    height: 3px;
+}
+.dxrpCollapsed .dxWeb_rpCollapseButton_MetropolisBlue1
+{
+    background-position: 0px -277px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_edtCheckBoxChecked_MetropolisBlue1
+{
+    background-position: -119px -407px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_edtCheckBoxCheckedDisabled_MetropolisBlue1
+{
+    background-position: -34px -407px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_edtCheckBoxGrayed_MetropolisBlue1
+{
+    background-position: 0px -407px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_edtCheckBoxGrayedDisabled_MetropolisBlue1
+{
+    background-position: -68px -441px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_edtCheckBoxUnchecked_MetropolisBlue1
+{
+    background-position: -124px -372px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_edtCheckBoxUncheckedDisabled_MetropolisBlue1
+{
+    background-position: -51px -441px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmCopyButton_MetropolisBlue1
+{
+    background-position: -51px -407px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmCopyButtonDisabled_MetropolisBlue1
+{
+    background-position: -68px -390px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmCreateButton_MetropolisBlue1
+{
+    background-position: -17px -390px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmCreateButtonDisabled_MetropolisBlue1
+{
+    background-position: -102px -424px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmDeleteButton_MetropolisBlue1
+{
+    background-position: -85px -424px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmDeleteButtonDisabled_MetropolisBlue1
+{
+    background-position: -34px -424px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmDwnlButton_MetropolisBlue1
+{
+    background-position: -34px -441px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmDwnlButtonDisabled_MetropolisBlue1
+{
+    background-position: -17px -407px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmFolder_MetropolisBlue1
+{
+    background-position: -85px -441px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmFolderLocked_MetropolisBlue1
+{
+    background-position: 0px -441px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmMoveButton_MetropolisBlue1
+{
+    background-position: -51px -424px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmMoveButtonDisabled_MetropolisBlue1
+{
+    background-position: -85px -407px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmRefreshButton_MetropolisBlue1
+{
+    background-position: -102px -441px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmRefreshButtonDisabled_MetropolisBlue1
+{
+    background-position: -17px -441px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmRenameButton_MetropolisBlue1
+{
+    background-position: 0px -424px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmRenameButtonDisabled_MetropolisBlue1
+{
+    background-position: -51px -390px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_fmThumbnailCheck_MetropolisBlue1
+{
+    background-position: -130px -132px;
+    width: 10px;
+    height: 11px;
+}
+.dxWeb_igCloseButton_MetropolisBlue1
+{
+    background-position: -84px -488px;
+    width: 13px;
+    height: 13px;
+}
+.dxWeb_igNavigationBarMarker_MetropolisBlue1
+{
+    background-position: -119px -352px;
+    width: 20px;
+    height: 16px;
+}
+.dxWeb_igNextButton_MetropolisBlue1
+{
+    background-position: -46px 0px;
+    width: 45px;
+    height: 65px;
+}
+.dxWeb_igNextButtonDisabled_MetropolisBlue1
+{
+    background-position: 0px 0px;
+    width: 45px;
+    height: 65px;
+}
+.dxWeb_igNextButtonHover_MetropolisBlue1
+{
+    background-position: -92px 0px;
+    width: 45px;
+    height: 65px;
+}
+.dxWeb_igNextButtonPressed_MetropolisBlue1
+{
+    background-position: -46px -132px;
+    width: 45px;
+    height: 65px;
+}
+.dxWeb_igPauseButton_MetropolisBlue1
+{
+    background-position: -111px -372px;
+    width: 12px;
+    height: 17px;
+}
+.dxWeb_igPlayButton_MetropolisBlue1
+{
+    background-position: -98px -372px;
+    width: 12px;
+    height: 17px;
+}
+.dxWeb_igPrevButton_MetropolisBlue1
+{
+    background-position: 0px -66px;
+    width: 45px;
+    height: 65px;
+}
+.dxWeb_igPrevButtonDisabled_MetropolisBlue1
+{
+    background-position: -92px -66px;
+    width: 45px;
+    height: 65px;
+}
+.dxWeb_igPrevButtonHover_MetropolisBlue1
+{
+    background-position: 0px -132px;
+    width: 45px;
+    height: 65px;
+}
+.dxWeb_igPrevButtonPressed_MetropolisBlue1
+{
+    background-position: -46px -66px;
+    width: 45px;
+    height: 65px;
+}
+.dxWeb_isDot_MetropolisBlue1
+{
+    background-position: -70px -488px;
+    width: 13px;
+    height: 13px;
+}
+.dxWeb_isDotDisabled_MetropolisBlue1
+{
+    background-position: -124px -473px;
+    width: 13px;
+    height: 13px;
+}
+.dxWeb_isDotPressed_MetropolisBlue1
+{
+    background-position: -110px -473px;
+    width: 13px;
+    height: 13px;
+}
+.dxWeb_isDotSelected_MetropolisBlue1
+{
+    background-position: -14px -488px;
+    width: 13px;
+    height: 13px;
+}
+.dxWeb_isNextBtnHor_MetropolisBlue1
+{
+    background-position: -111px -132px;
+    width: 18px;
+    height: 31px;
+}
+.dxWeb_isNextBtnHorDisabled_MetropolisBlue1
+{
+    background-position: -92px -132px;
+    width: 18px;
+    height: 31px;
+}
+.dxWeb_isNextBtnVert_MetropolisBlue1
+{
+    background-position: -30px -352px;
+    width: 29px;
+    height: 19px;
+}
+.dxWeb_isNextBtnVertDisabled_MetropolisBlue1
+{
+    background-position: -89px -327px;
+    width: 29px;
+    height: 19px;
+}
+.dxWeb_isNextPageBtnHor_MetropolisBlue1
+{
+    background-position: -125px -302px;
+    width: 14px;
+    height: 21px;
+}
+.dxWeb_isNextPageBtnHorDisabled_MetropolisBlue1
+{
+    background-position: -74px -327px;
+    width: 14px;
+    height: 21px;
+}
+.dxWeb_isNextPageBtnHorOutside_MetropolisBlue1
+{
+    background-position: -13px -198px;
+    width: 12px;
+    height: 28px;
+}
+.dxWeb_isNextPageBtnHorOutsideDisabled_MetropolisBlue1
+{
+    background-position: 0px -198px;
+    width: 12px;
+    height: 28px;
+}
+.dxWeb_isNextPageBtnVert_MetropolisBlue1
+{
+    background-position: -66px -458px;
+    width: 21px;
+    height: 14px;
+}
+.dxWeb_isNextPageBtnVertDisabled_MetropolisBlue1
+{
+    background-position: 0px -458px;
+    width: 21px;
+    height: 14px;
+}
+.dxWeb_isNextPageBtnVertOutside_MetropolisBlue1
+{
+    background-position: 0px -502px;
+    width: 28px;
+    height: 12px;
+}
+.dxWeb_isNextPageBtnVertOutsideDisabled_MetropolisBlue1
+{
+    background-position: -98px -488px;
+    width: 28px;
+    height: 12px;
+}
+.dxWeb_isPauseBtn_MetropolisBlue1
+{
+    background-position: -72px -372px;
+    width: 12px;
+    height: 17px;
+}
+.dxWeb_isPlayBtn_MetropolisBlue1
+{
+    background-position: -85px -372px;
+    width: 12px;
+    height: 17px;
+}
+.dxWeb_isPrevBtnHor_MetropolisBlue1
+{
+    background-position: -103px -166px;
+    width: 18px;
+    height: 31px;
+}
+.dxWeb_isPrevBtnHorDisabled_MetropolisBlue1
+{
+    background-position: -122px -166px;
+    width: 18px;
+    height: 31px;
+}
+.dxWeb_isPrevBtnVert_MetropolisBlue1
+{
+    background-position: 0px -352px;
+    width: 29px;
+    height: 19px;
+}
+.dxWeb_isPrevBtnVertDisabled_MetropolisBlue1
+{
+    background-position: -60px -352px;
+    width: 29px;
+    height: 19px;
+}
+.dxWeb_isPrevPageBtnHor_MetropolisBlue1
+{
+    background-position: -125px -252px;
+    width: 14px;
+    height: 21px;
+}
+.dxWeb_isPrevPageBtnHorDisabled_MetropolisBlue1
+{
+    background-position: -125px -277px;
+    width: 14px;
+    height: 21px;
+}
+.dxWeb_isPrevPageBtnHorOutside_MetropolisBlue1
+{
+    background-position: -26px -198px;
+    width: 12px;
+    height: 28px;
+}
+.dxWeb_isPrevPageBtnHorOutsideDisabled_MetropolisBlue1
+{
+    background-position: -39px -198px;
+    width: 12px;
+    height: 28px;
+}
+.dxWeb_isPrevPageBtnVert_MetropolisBlue1
+{
+    background-position: -44px -458px;
+    width: 21px;
+    height: 14px;
+}
+.dxWeb_isPrevPageBtnVertDisabled_MetropolisBlue1
+{
+    background-position: -22px -458px;
+    width: 21px;
+    height: 14px;
+}
+.dxWeb_isPrevPageBtnVertOutside_MetropolisBlue1
+{
+    background-position: -90px -352px;
+    width: 28px;
+    height: 12px;
+}
+.dxWeb_isPrevPageBtnVertOutsideDisabled_MetropolisBlue1
+{
+    background-position: -29px -502px;
+    width: 28px;
+    height: 12px;
+}
+.dxWeb_izEWCloseButton_MetropolisBlue1
+{
+    background-position: -52px -198px;
+    width: 25px;
+    height: 25px;
+}
+.dxWeb_izHint_MetropolisBlue1
+{
+    background-position: -36px -372px;
+    width: 17px;
+    height: 17px;
+}
+.dxWeb_mHorizontalPopOut_MetropolisBlue1
+{
+    background-position: -122px -223px;
+    width: 5px;
+    height: 3px;
+}
+.dxWeb_mScrollDown_MetropolisBlue1
+{
+    background-position: 0px -488px;
+    width: 13px;
+    height: 13px;
+}
+.dxWeb_mScrollUp_MetropolisBlue1
+{
+    background-position: -42px -488px;
+    width: 13px;
+    height: 13px;
+}
+.dxWeb_mSubMenuItem_MetropolisBlue1
+{
+    background-position: -95px -473px;
+    width: 14px;
+    height: 14px;
+}
+.dxWeb_mSubMenuItemChecked_MetropolisBlue1
+{
+    background-position: -75px -473px;
+    width: 14px;
+    height: 14px;
+}
+.dxWeb_mVerticalPopOut_MetropolisBlue1
+{
+    background-position: -136px -218px;
+    width: 4px;
+    height: 8px;
+}
+.dxWeb_mVerticalPopOutRtl_MetropolisBlue1
+{
+    background-position: -136px -390px;
+    width: 4px;
+    height: 8px;
+}
+.dxWeb_nbCollapse_MetropolisBlue1
+{
+    background-position: -25px -302px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_nbExpand_MetropolisBlue1
+{
+    background-position: -100px -302px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_pAll_MetropolisBlue1
+{
+    background-position: -50px -227px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_pAllDisabled_MetropolisBlue1
+{
+    background-position: -75px -252px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_pcCloseButton_MetropolisBlue1
+{
+    background-position: -88px -458px;
+    width: 15px;
+    height: 14px;
+}
+.dxWeb_pcCollapseButton_MetropolisBlue1
+{
+    background-position: -64px -473px;
+    width: 15px;
+    height: 14px;
+}
+.dxWeb_pcMaximizeButton_MetropolisBlue1
+{
+    background-position: -48px -473px;
+    width: 15px;
+    height: 14px;
+}
+.dxWeb_pcPinButton_MetropolisBlue1
+{
+    background-position: -32px -473px;
+    width: 15px;
+    height: 14px;
+}
+.dxWeb_pcRefreshButton_MetropolisBlue1
+{
+    background-position: -120px -458px;
+    width: 15px;
+    height: 14px;
+}
+.dxWeb_pcSizeGrip_MetropolisBlue1
+{
+    background-position: -68px -407px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_pcSizeGripRtl_MetropolisBlue1
+{
+    background-position: -85px -390px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_pFirst_MetropolisBlue1
+{
+    background-position: -25px -252px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_pFirstDisabled_MetropolisBlue1
+{
+    background-position: -75px -277px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_pLast_MetropolisBlue1
+{
+    background-position: 0px -252px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_pLastDisabled_MetropolisBlue1
+{
+    background-position: -25px -327px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_pNext_MetropolisBlue1
+{
+    background-position: -100px -277px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_pNextDisabled_MetropolisBlue1
+{
+    background-position: -100px -252px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_pPopOut_MetropolisBlue1
+{
+    background-position: -109px -347px;
+    width: 7px;
+    height: 4px;
+}
+.dxWeb_pPopOutDisabled_MetropolisBlue1
+{
+    background-position: -101px -347px;
+    width: 7px;
+    height: 4px;
+}
+.dxWeb_pPrev_MetropolisBlue1
+{
+    background-position: 0px -227px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_pPrevDisabled_MetropolisBlue1
+{
+    background-position: -75px -302px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_rMinBtn_MetropolisBlue1
+{
+    background-position: -93px -189px;
+    width: 9px;
+    height: 8px;
+}
+.dxWeb_rMinBtn_MetropolisBlue1.dxWeb_rMinBtnHover_MetropolisBlue1
+{
+    background-position: -130px -157px;
+    width: 9px;
+    height: 8px;
+}
+.dxWeb_rMinBtn_MetropolisBlue1.dxWeb_rMinBtnPressed_MetropolisBlue1
+{
+    background-position: -130px -148px;
+    width: 9px;
+    height: 8px;
+}
+.dxWeb_rMinBtnChecked_MetropolisBlue1.dxWeb_rMinBtn_MetropolisBlue1
+{
+    background-position: -92px -180px;
+    width: 9px;
+    height: 8px;
+}
+.dxWeb_rMinBtnChecked_MetropolisBlue1.dxWeb_rMinBtnHover_MetropolisBlue1
+{
+    background-position: -92px -171px;
+    width: 9px;
+    height: 8px;
+}
+.dxWeb_rMinBtnChecked_MetropolisBlue1.dxWeb_rMinBtnPressed_MetropolisBlue1
+{
+    background-position: -127px -488px;
+    width: 9px;
+    height: 8px;
+}
+.dxWeb_rpCollapseButton_MetropolisBlue1
+{
+    background-position: 0px -327px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_rPopOut_MetropolisBlue1
+{
+    background-position: -95px -348px;
+    width: 5px;
+    height: 3px;
+}
+.dxWeb_splHCollapseBackwardButton_MetropolisBlue1
+{
+    background-position: -125px -345px;
+    width: 7px;
+    height: 6px;
+}
+.dxWeb_splHCollapseBackwardButtonHover_MetropolisBlue1
+{
+    background-position: -133px -345px;
+    width: 7px;
+    height: 6px;
+}
+.dxWeb_splHCollapseForwardButton_MetropolisBlue1
+{
+    background-position: -90px -365px;
+    width: 7px;
+    height: 6px;
+}
+.dxWeb_splHCollapseForwardButtonHover_MetropolisBlue1
+{
+    background-position: -92px -164px;
+    width: 7px;
+    height: 6px;
+}
+.dxWeb_splHSeparator_MetropolisBlue1
+{
+    background-position: -58px -502px;
+    width: 23px;
+    height: 11px;
+}
+.dxWeb_splHSeparatorHover_MetropolisBlue1
+{
+    background-position: -82px -502px;
+    width: 23px;
+    height: 11px;
+}
+.dxWeb_splVCollapseBackwardButton_MetropolisBlue1
+{
+    background-position: -106px -502px;
+    width: 6px;
+    height: 7px;
+}
+.dxWeb_splVCollapseBackwardButtonHover_MetropolisBlue1
+{
+    background-position: -113px -502px;
+    width: 6px;
+    height: 7px;
+}
+.dxWeb_splVCollapseForwardButton_MetropolisBlue1
+{
+    background-position: -120px -502px;
+    width: 6px;
+    height: 7px;
+}
+.dxWeb_splVCollapseForwardButtonHover_MetropolisBlue1
+{
+    background-position: -134px -210px;
+    width: 6px;
+    height: 7px;
+}
+.dxWeb_splVSeparator_MetropolisBlue1
+{
+    background-position: -125px -227px;
+    width: 11px;
+    height: 23px;
+}
+.dxWeb_splVSeparatorHover_MetropolisBlue1
+{
+    background-position: -122px -198px;
+    width: 11px;
+    height: 23px;
+}
+.dxWeb_tcScrollLeft_MetropolisBlue1
+{
+    background-position: -50px -277px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_tcScrollLeftDisabled_MetropolisBlue1
+{
+    background-position: 0px -302px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_tcScrollLeftHover_MetropolisBlue1
+{
+    background-position: -100px -227px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_tcScrollLeftPressed_MetropolisBlue1
+{
+    background-position: -75px -227px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_tcScrollRight_MetropolisBlue1
+{
+    background-position: -25px -277px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_tcScrollRightDisabled_MetropolisBlue1
+{
+    background-position: -50px -302px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_tcScrollRightHover_MetropolisBlue1
+{
+    background-position: -50px -252px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_tcScrollRightPressed_MetropolisBlue1
+{
+    background-position: -25px -227px;
+    width: 24px;
+    height: 24px;
+}
+.dxWeb_tvColBtn_MetropolisBlue1
+{
+    background-position: -119px -327px;
+    width: 17px;
+    height: 17px;
+}
+
+.dxWeb_tvColBtnRtl_MetropolisBlue1
+{
+    background-position: -54px -372px;
+    width: 17px;
+    height: 17px;
+}
+.dxWeb_tvExpBtn_MetropolisBlue1
+{
+    background-position: -18px -372px;
+    width: 17px;
+    height: 17px;
+}
+
+.dxWeb_tvColBtnRtl_MetropolisBlue1
+{
+    background-position: -54px -372px;
+    width: 17px;
+    height: 17px;
+}
+.dxWeb_tvExpBtn_MetropolisBlue1
+{
+    background-position: -18px -372px;
+    width: 17px;
+    height: 17px;
+}
+.dxWeb_tvExpBtnRtl_MetropolisBlue1
+{
+    background-position: 0px -372px;
+    width: 17px;
+    height: 17px;
+}
+.dxWeb_ucClearButton_MetropolisBlue1
+{
+    background-position: -34px -390px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_ucClearButtonDisabled_MetropolisBlue1
+{
+    background-position: -119px -441px;
+    width: 16px;
+    height: 16px;
+}
+.dxWeb_edtCheckBoxChecked_MetropolisBlue1,
+.dxWeb_edtCheckBoxCheckedDisabled_MetropolisBlue1,
+.dxWeb_edtCheckBoxGrayed_MetropolisBlue1,
+.dxWeb_edtCheckBoxGrayedDisabled_MetropolisBlue1,
+.dxWeb_edtCheckBoxUnchecked_MetropolisBlue1,
+.dxWeb_edtCheckBoxUncheckedDisabled_MetropolisBlue1
+{
+    background-color: #0072C6;
+}
+
+.dxWeb_rpHeaderTopLeftCorner_MetropolisBlue1,
+.dxWeb_rpHeaderTopRightCorner_MetropolisBlue1,
+.dxWeb_rpBottomLeftCorner_MetropolisBlue1,
+.dxWeb_rpBottomRightCorner_MetropolisBlue1,
+.dxWeb_rpTopLeftCorner_MetropolisBlue1,
+.dxWeb_rpTopRightCorner_MetropolisBlue1,
+.dxWeb_rpGroupBoxBottomLeftCorner_MetropolisBlue1,
+.dxWeb_rpGroupBoxBottomRightCorner_MetropolisBlue1,
+.dxWeb_rpGroupBoxTopLeftCorner_MetropolisBlue1,
+.dxWeb_rpGroupBoxTopRightCorner_MetropolisBlue1,
+.dxWeb_mHorizontalPopOut_MetropolisBlue1,
+.dxWeb_mHorizontalPopOutHover_MetropolisBlue1,
+.dxWeb_mVerticalPopOut_MetropolisBlue1,
+.dxWeb_mVerticalPopOutHover_MetropolisBlue1,
+.dxWeb_mVerticalPopOutRtl_MetropolisBlue1,
+.dxWeb_mVerticalPopOutHoverRtl_MetropolisBlue1,
+.dxWeb_mSubMenuItem_MetropolisBlue1,
+.dxWeb_mSubMenuItemChecked_MetropolisBlue1,
+.dxWeb_mScrollUp_MetropolisBlue1,
+.dxWeb_mScrollUpHover_MetropolisBlue1,
+.dxWeb_mScrollDown_MetropolisBlue1,
+.dxWeb_mScrollDownHover_MetropolisBlue1,
+.dxWeb_tcScrollLeft_MetropolisBlue1,
+.dxWeb_tcScrollRight_MetropolisBlue1,
+.dxWeb_tcScrollLeftHover_MetropolisBlue1,
+.dxWeb_tcScrollRightHover_MetropolisBlue1,
+.dxWeb_tcScrollLeftPressed_MetropolisBlue1,
+.dxWeb_tcScrollRightPressed_MetropolisBlue1,
+.dxWeb_tcScrollLeftDisabled_MetropolisBlue1,
+.dxWeb_tcScrollRightDisabled_MetropolisBlue1,
+.dxWeb_nbCollapse_MetropolisBlue1,
+.dxWeb_nbExpand_MetropolisBlue1,
+.dxWeb_splVSeparator_MetropolisBlue1,
+.dxWeb_splVSeparatorHover_MetropolisBlue1,
+.dxWeb_splHSeparator_MetropolisBlue1,
+.dxWeb_splHSeparatorHover_MetropolisBlue1,
+.dxWeb_splVCollapseBackwardButton_MetropolisBlue1,
+.dxWeb_splVCollapseBackwardButtonHover_MetropolisBlue1,
+.dxWeb_splHCollapseBackwardButton_MetropolisBlue1,
+.dxWeb_splHCollapseBackwardButtonHover_MetropolisBlue1,
+.dxWeb_splVCollapseForwardButton_MetropolisBlue1,
+.dxWeb_splVCollapseForwardButtonHover_MetropolisBlue1,
+.dxWeb_splHCollapseForwardButton_MetropolisBlue1,
+.dxWeb_splHCollapseForwardButtonHover_MetropolisBlue1,
+.dxWeb_pcCloseButton_MetropolisBlue1,
+.dxWeb_pcPinButton_MetropolisBlue1,
+.dxWeb_pcRefreshButton_MetropolisBlue1,
+.dxWeb_pcCollapseButton_MetropolisBlue1,
+.dxWeb_pcMaximizeButton_MetropolisBlue1,
+.dxWeb_pcSizeGrip_MetropolisBlue1,
+.dxWeb_pcSizeGripRtl_MetropolisBlue1,
+.dxWeb_pPopOut_MetropolisBlue1,
+.dxWeb_pPopOutDisabled_MetropolisBlue1,
+.dxWeb_pAll_MetropolisBlue1,
+.dxWeb_pAllDisabled_MetropolisBlue1,
+.dxWeb_pPrev_MetropolisBlue1,
+.dxWeb_pPrevDisabled_MetropolisBlue1,
+.dxWeb_pNext_MetropolisBlue1,
+.dxWeb_pNextDisabled_MetropolisBlue1,
+.dxWeb_pLast_MetropolisBlue1,
+.dxWeb_pLastDisabled_MetropolisBlue1,
+.dxWeb_pFirst_MetropolisBlue1,
+.dxWeb_pFirstDisabled_MetropolisBlue1,
+.dxWeb_tvColBtn_MetropolisBlue1,
+.dxWeb_tvColBtnRtl_MetropolisBlue1,
+.dxWeb_tvExpBtn_MetropolisBlue1,
+.dxWeb_tvExpBtnRtl_MetropolisBlue1,
+.dxWeb_fmFolder_MetropolisBlue1,
+.dxWeb_fmFolderLocked_MetropolisBlue1,
+.dxWeb_fmCreateButton_MetropolisBlue1,
+.dxWeb_fmMoveButton_MetropolisBlue1,
+.dxWeb_fmRenameButton_MetropolisBlue1,
+.dxWeb_fmDeleteButton_MetropolisBlue1,
+.dxWeb_fmRefreshButton_MetropolisBlue1,
+.dxWeb_fmDwnlButton_MetropolisBlue1,
+.dxWeb_fmCreateButtonDisabled_MetropolisBlue1,
+.dxWeb_fmMoveButtonDisabled_MetropolisBlue1,
+.dxWeb_fmRenameButtonDisabled_MetropolisBlue1,
+.dxWeb_fmDeleteButtonDisabled_MetropolisBlue1,
+.dxWeb_fmRefreshButtonDisabled_MetropolisBlue1,
+.dxWeb_fmDwnlButtonDisabled_MetropolisBlue1,
+.dxWeb_fmThumbnailCheck_MetropolisBlue1,
+.dxWeb_ucClearButton_MetropolisBlue1,
+.dxWeb_isPrevBtnHor_MetropolisBlue1,
+.dxWeb_isNextBtnHor_MetropolisBlue1,
+.dxWeb_isPrevBtnVert_MetropolisBlue1,
+.dxWeb_isNextBtnVert_MetropolisBlue1,
+.dxWeb_isPrevPageBtnHor_MetropolisBlue1,
+.dxWeb_isPrevPageBtnHorOutside_MetropolisBlue1,
+.dxWeb_isNextPageBtnHor_MetropolisBlue1,
+.dxWeb_isNextPageBtnHorOutside_MetropolisBlue1,
+.dxWeb_isPrevPageBtnVert_MetropolisBlue1,
+.dxWeb_isPrevPageBtnVertOutside_MetropolisBlue1,
+.dxWeb_isNextPageBtnVert_MetropolisBlue1,
+.dxWeb_isNextPageBtnVertOutside_MetropolisBlue1,
+.dxWeb_isPrevBtnHorDisabled_MetropolisBlue1,
+.dxWeb_isNextBtnHorDisabled_MetropolisBlue1,
+.dxWeb_isPrevBtnVertDisabled_MetropolisBlue1,
+.dxWeb_isNextBtnVertDisabled_MetropolisBlue1,
+.dxWeb_isPrevPageBtnHorDisabled_MetropolisBlue1,
+.dxWeb_isPrevPageBtnHorOutsideDisabled_MetropolisBlue1,
+.dxWeb_isNextPageBtnHorDisabled_MetropolisBlue1,
+.dxWeb_isNextPageBtnHorOutsideDisabled_MetropolisBlue1,
+.dxWeb_isPrevPageBtnVertDisabled_MetropolisBlue1,
+.dxWeb_isPrevPageBtnVertOutsideDisabled_MetropolisBlue1,
+.dxWeb_isNextPageBtnVertDisabled_MetropolisBlue1,
+.dxWeb_isNextPageBtnVertOutsideDisabled_MetropolisBlue1,
+.dxWeb_isDot_MetropolisBlue1,
+.dxWeb_isDotDisabled_MetropolisBlue1,
+.dxWeb_isDotSelected_MetropolisBlue1,
+.dxWeb_isPlayBtn_MetropolisBlue1,
+.dxWeb_isPauseBtn_MetropolisBlue1,
+.dxWeb_igCloseButton_MetropolisBlue1,
+.dxWeb_igNextButton_MetropolisBlue1,
+.dxWeb_igPrevButton_MetropolisBlue1,
+.dxWeb_igPlayButton_MetropolisBlue1,
+.dxWeb_igPauseButton_MetropolisBlue1,
+.dxWeb_igNavigationBarMarker_MetropolisBlue1
+{
+    display: block;
+}
+.dxWeb_mScrollUp_MetropolisBlue1, .dxWeb_mScrollDown_MetropolisBlue1
+{
+	margin: auto;
+}
+

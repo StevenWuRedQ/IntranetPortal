@@ -1,0 +1,516 @@
+.dxpgControl_MetropolisBlue1, .dxpgCustForm_MetropolisBlue1
+{
+	color: #333333;
+	font: 12px 'Source Sans Pro','Segoe UI';
+	border: solid 1px #c0c0c0;
+	background-color: white;
+}
+.dxpgContainerCell_MetropolisBlue1
+{
+	vertical-align: top;
+}
+.dxpgMainTable_MetropolisBlue1
+{
+	border: 0px;
+	border-collapse: separate;
+	width: 100%;
+	text-align: left;
+}
+div.dxpgMainTable_MetropolisBlue1
+{
+	-ms-touch-action: pinch-zoom;
+}
+.dxpgMainTable_MetropolisBlue1 caption 
+{
+	background: #ACACAC;
+	color: white;
+	border-bottom: Solid 1px #9F9F9F;
+    font-size: 1.25em;
+	font-weight: normal;
+	padding: 3px 3px 5px;
+	text-align: center;
+}
+.dxpgHeader_MetropolisBlue1
+{
+	border-width: 0px;
+	cursor: pointer;
+	white-space: nowrap;
+    	text-align: left;
+}
+.dxpgHeaderTable_MetropolisBlue1
+{
+	border: solid 1px #c0c0c0;
+	width: 100%;
+	border-collapse: separate !important;
+}
+.dxpgMSDraggable_MetropolisBlue1 .dxpgHeaderTable_MetropolisBlue1,
+.dxpgCustFieldsDiv_MetropolisBlue1 .dxpgHeaderTable_MetropolisBlue1
+{
+	-ms-touch-action: pinch-zoom;
+}
+
+.dxpgHeaderGroupButton_MetropolisBlue1
+{
+	padding-left: 4px;
+	vertical-align: middle;
+}
+.dxpgHeaderText_MetropolisBlue1
+{
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 3px;
+	padding-bottom: 4px;
+}
+.dxpgHeaderSort_MetropolisBlue1
+{
+	padding-left: 0px;
+	padding-right: 4px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	vertical-align: middle;
+}
+.dxpgHeaderFilter_MetropolisBlue1
+{
+	padding-left: 0px;
+	padding-right: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	vertical-align: middle;	
+}
+.dxpgArea_MetropolisBlue1
+{
+	border: solid 1px #c0c0c0;
+	border-left-style: none;
+	border-top-style: none;
+	border-bottom-style: none;
+	border-right-style: none;
+}
+.dxpgColumnArea_MetropolisBlue1
+{
+	border-bottom-style: solid;
+}
+.dxpgRowArea_MetropolisBlue1
+{
+}
+.dxpgDataArea_MetropolisBlue1
+{
+}
+.dxpgFilterArea_MetropolisBlue1
+{
+	border-bottom-style: solid;
+}
+.dxpgEmptyArea_MetropolisBlue1
+{
+	cursor: default;
+	padding-top: 6px;
+	padding-left: 6px;
+	padding-bottom: 7px;
+	padding-right: 6px;
+}
+.dxpgColumnFieldValue_MetropolisBlue1
+{
+	border: solid 1px #c0c0c0;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	border-right-style: none;
+	border-top-style: none;
+	padding: 4px 6px;
+	font-weight: normal;
+	text-align: left;	
+}
+.dxpgColumnTotalFieldValue_MetropolisBlue1
+{
+	border-left-style: solid;
+	border-bottom-style: solid;
+	border-right-style: none;
+	border-top-style: none;
+}
+.dxpgColumnGrandTotalFieldValue_MetropolisBlue1
+{
+	border-left-style: solid;
+	border-bottom-style: solid;
+	border-right-style: none;
+	border-top-style: none;
+}
+.dxpgRowFieldValue_MetropolisBlue1
+{
+	border: solid 1px #c0c0c0;
+	border-left-style: none;
+	border-bottom-style: none;
+	border-right-style: solid;
+	border-top-style: solid;
+	padding: 3px 6px 4px 6px;
+	font-weight: normal;
+	text-align: left;
+}
+.dxpgRowTotalFieldValue_MetropolisBlue1
+{
+	border-left-style: none;
+	border-bottom-style: none;
+	border-right-style: solid;
+	border-top-style: solid;
+}
+.dxpgRowTreeFieldValue_MetropolisBlue1
+{	
+	padding: 0;
+	font-size: 0;
+}
+.dxpgRowGrandTotalFieldValue_MetropolisBlue1
+{
+	border-left-style: none;
+	border-bottom-style: none;
+	border-right-style: solid;
+	border-top-style: solid;
+	padding-top: 5px;
+	padding-bottom: 6px;	
+}
+.dxpgCollapsedButton_MetropolisBlue1
+{
+	vertical-align: -1px;
+	border: 0px;
+	margin-right: 5px;
+}
+.dxpgSortByColumnImage_MetropolisBlue1
+{
+	vertical-align: -1px;
+	border: 0px;
+	margin-left: 5px;
+}
+.dxpgCell_MetropolisBlue1
+{
+	text-align: right;
+	background-color: White;	
+	border-color: #cecece;
+	border-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-bottom-style: none;
+	border-right-style: none;
+	padding: 4px;
+	padding-top:3px;
+	white-space: nowrap;
+}
+.dxpgKPICell_MetropolisBlue1
+{
+	text-align: center;
+	vertical-align: middle;
+}
+.dxpgTotalCell_MetropolisBlue1
+{
+}
+.dxpgGrandTotalCell_MetropolisBlue1
+{
+}
+.dxpgFilterItem_MetropolisBlue1
+{
+    white-space: nowrap;
+}
+.dxpgFilterButton_MetropolisBlue1
+{
+	padding: 2px 6px;
+}
+.dxpgTopPager_MetropolisBlue1
+{
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	border-bottom: solid 1px #c0c0c0;
+	padding: 4px 0;
+}
+.dxpgBottomPager_MetropolisBlue1
+{
+	border-top: solid 1px #c0c0c0;
+	border-bottom: none;
+	border-right: none;
+	border-left: none;
+	padding: 7px 0;
+}
+.dxpgTopPager_MetropolisBlue1,
+.dxpgBottomPager_MetropolisBlue1
+{
+	box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+}
+.dxpgCustomizationFieldsHeader_MetropolisBlue1
+{
+	color: White;
+	font-size: 0.91em;
+	background-image: none!important;
+}
+.dxpgCustomizationFieldsContent_MetropolisBlue1
+{
+	padding: 0px !important;
+	min-width: 300px;
+}
+.dxpgMenuItem_MetropolisBlue1 
+{
+}
+.dxpgDataHeadersImage_MetropolisBlue1
+{
+	margin-right: 5px;
+	vertical-align: -2px;
+}
+.dxpgPrefilterPanelContainer_MetropolisBlue1
+{
+	border-bottom-style: none;
+	border-left-style: none;
+	border-right-style: none;
+}
+.dxpgPrefilterPanel_MetropolisBlue1
+{
+	border: none;
+}
+.dxpgPrefilterPanelLink_MetropolisBlue1
+{
+	color: #FF400D;
+	text-decoration: underline;
+}
+.dxpgPrefilterPanelCheckBoxCell_MetropolisBlue1
+{
+	padding: 0 7px;
+}
+.dxpgPrefilterPanelImageCell_MetropolisBlue1
+{
+	padding: 0 3px;
+	padding-right: 1px;
+	cursor: pointer;
+}
+.dxpgPrefilterPanelExpressionCell_MetropolisBlue1
+{
+	padding: 5px 5px 8px 0;	
+	white-space: nowrap;
+}
+.dxpgPrefilterPanelClearButtonCell_MetropolisBlue1
+{
+	padding: 5px 6px 8px;
+}
+.dxpgFilterBuilderMainArea_MetropolisBlue1
+{
+	background: white;
+	padding: 6px 2px;
+} 
+.dxpgFilterBuilderButtonArea_MetropolisBlue1
+{
+	border-top: solid 1px #c0c0c0;
+	padding: 6px;
+	white-space: nowrap;
+}
+.dxpgGroupSeparator_MetropolisBlue1 
+{
+	vertical-align: middle;
+}
+.dxpgCustFieldsFilterAreaHeaders_MetropolisBlue1,
+.dxpgCustFieldsRowAreaHeaders_MetropolisBlue1,
+.dxpgCustFieldsColumnAreaHeaders_MetropolisBlue1,
+.dxpgCustFieldsDataAreaHeaders_MetropolisBlue1,
+.BottomPanelOnly1by4 .dxpgFLFRDiv_MetropolisBlue1,
+.BottomPanelOnly1by4 .dxpgFLCDDiv_MetropolisBlue1
+{
+width:100%;
+height:50%;
+}
+.StackedDefault .dxpgCustFieldsFieldList_MetropolisBlue1
+{
+height:34%;
+}
+.StackedDefault .dxpgFLFRDiv_MetropolisBlue1
+{
+width:50%;
+height:66%;
+float:left;
+}
+.StackedDefault .dxpgFLCDDiv_MetropolisBlue1
+{
+width:50%;
+height:66%;
+float:right;
+}
+.StackedDefault .dxpgCustFieldsFilterAreaHeaders_MetropolisBlue1 .dxpgFLTextDiv_MetropolisBlue1,
+.StackedDefault .dxpgCustFieldsColumnAreaHeaders_MetropolisBlue1 .dxpgFLTextDiv_MetropolisBlue1
+{
+height:47px;
+}
+.TopPanelOnly .dxpgCustFieldsFieldList_MetropolisBlue1
+{
+width:100%;
+height:100%;
+}
+.TopPanelOnly .dxpgFLDefereDiv_MetropolisBlue1 .dxeBase_MetropolisBlue1,
+.TopPanelOnly .dxpgFLDefereDiv_MetropolisBlue1 .dxpgFLDefereDB_MetropolisBlue1,
+.TopPanelOnly .dxpgFLFRDiv_MetropolisBlue1,
+.TopPanelOnly .dxpgFLCDDiv_MetropolisBlue1,
+.BottomPanelOnly1by4 .dxpgCustFieldsFieldList_MetropolisBlue1,
+.BottomPanelOnly2by2 .dxpgCustFieldsFieldList_MetropolisBlue1,
+.TopPanelOnly .dxpgFLTextDiv_MetropolisBlue1 div
+{
+display:none;
+}
+.TopPanelOnly .dxpgFLTextDiv_MetropolisBlue1
+{
+ height:19px;   
+}
+.TopPanelOnly .dxpgFLDefereDiv_MetropolisBlue1
+{
+ height:16px;   
+}
+.BottomPanelOnly2by2 .dxpgFLFRDiv_MetropolisBlue1,
+.StackedSideBySide .dxpgCustFieldsFieldList_MetropolisBlue1
+{
+width:50%;
+height:100%;
+float:left;
+}
+.BottomPanelOnly2by2 .dxpgFLCDDiv_MetropolisBlue1
+{
+width:50%;
+height:100%;
+float:right;
+}
+.StackedSideBySide .dxpgFLFRDiv_MetropolisBlue1,
+.StackedSideBySide .dxpgFLCDDiv_MetropolisBlue1
+{
+width:50%;
+height:50%;
+float:right;
+}
+.dxpgCustFields_MetropolisBlue1
+{
+    	display:block;
+position:relative;
+}
+.dxpgFLListDiv_MetropolisBlue1 > div
+{
+    border:1px solid #c0c0c0;
+    position:relative;
+    display:block;
+    height:100%;
+    padding:1px;
+    background:#FFFFFF;
+    overflow:hidden;
+}
+.dxpgFLListDiv_MetropolisBlue1 > div > div
+{
+    position:relative;
+    display:block;
+    background:#FFFFFF;
+    height:100%;
+    padding:0px;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+.DragOver .dxpgFLListDiv_MetropolisBlue1 > div
+{
+    background:#FFD324;
+}
+.dxpgFLListDiv_MetropolisBlue1 
+{
+    padding:0px 3px 0px 3px;
+}
+.dxpgFLButtonDiv_MetropolisBlue1 .dxbButton_MetropolisBlue1 div.dxb
+{
+	border: dotted 1px transparent;	
+	padding:1px 7px 0px;
+}
+.dxpgFLButtonDiv_MetropolisBlue1 .dxbButton_MetropolisBlue1 div.dxbf
+{
+	border: dotted 1px black;	
+}
+.dxpgFLTextDiv_MetropolisBlue1
+{
+ height:28px;
+}
+.dxpgFLTextDiv_MetropolisBlue1 div
+{
+   display:block;
+   float:left;
+   margin:-17px 0px 3px 0px;
+   left:6px;
+   top:100%;
+   position:relative;
+}
+div.dxpgFLTextImgDiv_MetropolisBlue1
+{
+    display:block;
+    height:16px;
+    width:16px;
+    margin:-18px 0px 3px 0px;
+    left:3px;
+}
+.dxpgFLButtonDiv_MetropolisBlue1
+{
+    float:right;
+    height:28px;
+    position:relative;
+    z-index:1;
+}
+.dxpgFLDefereDiv_MetropolisBlue1
+{
+    height:50px;
+}
+.dxpgCustFieldsDiv_MetropolisBlue1
+{
+ clear:both;   
+ padding:0px 9px;
+}
+.dxpgFLButton_MetropolisBlue1 
+{
+ margin:12px 12px 0px 0px;
+ width:40px;
+ height:23px;
+}
+.dxpgFLDefereDiv_MetropolisBlue1 .dxeBase_MetropolisBlue1
+{
+ float:left;
+ display:block;
+ border-collapse:separate;
+ padding:17px 0px 0px 0px; 
+ margin-left:8px;  
+}
+.dxpgFLDefereDB_MetropolisBlue1
+{
+float:right;
+display:block;
+margin: 16px 12px 0 0;
+}
+.dxpgFLDefereDiv_MetropolisBlue1 .dxbButton_MetropolisBlue1 div.dxb
+{
+    padding:1px 13px 1px 13px;
+    border: dotted 1px transparent;	
+}
+.dxpgFLDefereDiv_MetropolisBlue1 .dxbButton_MetropolisBlue1 div.dxbf
+{
+    border: dotted 1px black;	
+}
+.dxpgFLListDiv_MetropolisBlue1 table 
+{
+ width:100%;
+ table-layout:fixed;  
+ overflow:visible;
+}
+.dxpgFLListDiv_MetropolisBlue1 table table td
+{
+     overflow:hidden; 
+}
+/*Loading Panel*/
+.dxpgLoadingPanel_MetropolisBlue1
+{
+	border: 1px solid #C3C3C3;
+	background-color: white;
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: #333333;
+}
+.dxpgLoadingPanel_MetropolisBlue1 td.dx
+{
+	font-size: 1.17em;
+	white-space: nowrap;
+	text-align: center;
+	padding: 10px 14px;
+}
+.dxpgLoadingPanel_MetropolisBlue1 .dxlp-loadingImage
+{
+	background-image: url('../Web/Loading.gif');
+	height: 32px;
+	width: 32px;
+}
+

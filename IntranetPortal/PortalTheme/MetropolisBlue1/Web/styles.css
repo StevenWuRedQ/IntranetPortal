@@ -1,0 +1,4390 @@
+/* CheckBox */
+.dxICBFocused_MetropolisBlue1 
+{
+    outline: 1px dotted #ff400d;
+
+	*border: 1px dotted #ff400d;
+	*margin: 0;
+}
+.dxICheckBox_MetropolisBlue1 
+{
+}
+/* -- ASPxCallbackPanel -- */
+/* Disabled */
+.dxcpDisabled_MetropolisBlue1
+{
+	color: #acacac;
+	cursor: default;
+}
+
+/* -- ASPxCloudControl -- */
+.dxccControl_MetropolisBlue1
+{
+	font: 12px 'Source Sans Pro','Segoe UI';
+	text-decoration: none;
+	color: #ff400d;
+	background-color: #FFFFFF;
+}
+.dxccControl_MetropolisBlue1 a
+{
+	text-decoration: none!important;
+	color: #ff400d;
+}
+.dxccControl_MetropolisBlue1 a:hover
+{
+	text-decoration: underline!important;
+}
+.dxccControl_MetropolisBlue1 .dxccValue
+{
+    color: silver;
+}
+/* Disabled */
+.dxccDisabled_MetropolisBlue1,
+.dxccDisabled_MetropolisBlue1 span.dxccValue,
+.dxccDisabled_MetropolisBlue1 span.dxccBEText
+{
+	color: #b8b8b8;
+	cursor: default;
+}
+
+/* -- ASPxDataView -- */
+.dxdvControl_MetropolisBlue1 
+{
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: #333333;
+}
+.dxdvControl_MetropolisBlue1 td.dxdvCtrl_MetropolisBlue1
+{
+	padding: 12px 40px;
+}
+.dxdvContent_MetropolisBlue1
+{
+	border-top: 1px solid Silver;
+	border-bottom: 1px solid Silver;
+}
+.dxdvItem_MetropolisBlue1,
+.dxdvFlowItem_MetropolisBlue1
+{
+	padding: 12px 12px 12px 14px;
+	height: 180px;
+	height: expression("154px");
+}
+.dxdvFlowItem_MetropolisBlue1
+{
+	float: left;
+	overflow: hidden;
+}
+.dxdvFlowItemsContainer_MetropolisBlue1 
+{
+}
+.dxdvEmptyItem_MetropolisBlue1
+{
+	text-align: left;
+	vertical-align: top;
+	padding: 12px 12px 12px 14px;
+	height: 180px;
+	height: expression("154px");
+}
+.dxdvPagerPanel_MetropolisBlue1
+{
+}
+.dxdvEmptyData_MetropolisBlue1
+{
+	color: Gray;
+}
+.dxdvEPContainer_MetropolisBlue1
+{
+    height: 50px;
+	text-align: center;
+}
+.dxdvEPContainer_MetropolisBlue1 div
+{
+	padding-top: 16px;
+}
+.dxdvEPContainer_MetropolisBlue1 a
+{
+	color: #ff400d;
+}
+/* Disabled */
+.dxdvDisabled_MetropolisBlue1
+{
+	color: #b8b8b8;
+	cursor: default;
+}
+/* -- ASPxHeadline -- */
+.dxhlControl_MetropolisBlue1 
+{
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: black;
+}
+.dxhlControl_MetropolisBlue1 a
+{
+	color: #ff400d;
+}
+.dxhlContent_MetropolisBlue1
+{
+} 
+.dxhlContent_MetropolisBlue1 img
+{
+	display: none!important;
+}
+.dxhlDate_MetropolisBlue1
+{
+	white-space: nowrap;
+	display: inline;
+	color: silver;
+}
+.dxhlHeader_MetropolisBlue1
+{
+	font-size: 2em;
+	color: #ff400d;
+	vertical-align: top;
+}
+.dxhlDateHeader_MetropolisBlue1
+{
+	color: white;
+	background-color: Silver;
+	padding: 0 4px;
+	margin: 4px 0;
+}
+.dxhlLeftPanel_MetropolisBlue1,
+.dxhlRightPanel_MetropolisBlue1
+{
+	padding: 2px 0;
+}
+.dxhlDateLeftPanel_MetropolisBlue1,
+.dxhlDateRightPanel_MetropolisBlue1
+{
+    padding: 12px 0 0;
+	white-space: nowrap;
+}
+.dxhlTailDiv_MetropolisBlue1,
+.dxhlTailDiv_MetropolisBlue1 a
+{
+	color: #999999;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+.dxhlTailDiv_MetropolisBlue1
+{
+	padding: 8px 0;
+}
+.dxhlTailDiv_MetropolisBlue1 img
+{
+	vertical-align: middle;
+	margin-top: -2px;
+}
+/* Disabled */
+.dxhlDisabled_MetropolisBlue1
+{
+	color: #b8b8b8;
+	cursor: default;
+}
+
+/* -- ASPxLoadingPanel -- */
+.dxlpLoadingPanel_MetropolisBlue1,
+.dxlpLoadingPanelWithContent_MetropolisBlue1
+{
+	border: 1px solid #C3C3C3;
+	background-color: white;
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: #333333;
+}
+.dxlpLoadingPanel_MetropolisBlue1 td.dx,
+.dxlpLoadingPanelWithContent_MetropolisBlue1 td.dx
+{
+	font-size: 1.17em;
+	white-space: nowrap;
+	text-align: center;
+	padding: 10px 14px;
+}
+.dxlpLoadingPanel_MetropolisBlue1 .dxlp-loadingImage,
+.dxlpLoadingPanelWithContent_MetropolisBlue1 .dxlp-loadingImage {
+	background-image: url('Loading.gif');
+	height: 32px;
+	width: 32px;
+}
+.dxlpControl_MetropolisBlue1.dxlpLoadingDiv_MetropolisBlue1
+{
+	background-color: white;
+	opacity: 0.7;
+	filter: progid:DXImageTransform.Microsoft.Alpha(Style=0, Opacity=70);
+}
+
+/* -- ASPxMenu Lite -- */
+.dxmLite_MetropolisBlue1
+{
+	font: 12px 'Source Sans Pro','Segoe UI';
+}
+.dxmLite_MetropolisBlue1 .dxm-main 
+{
+	background-color: #f0f0f0;
+	padding: 0;
+}
+
+.dxmLite_MetropolisBlue1 .dxm-vertical 
+{
+	width: 150px;
+}
+
+.dxmLite_MetropolisBlue1 .dxm-popup 
+{
+	color: #333333;
+	background-color: white;
+	border: 1px solid #c0c0c0;
+	padding: 0px;
+	border-radius: 5px;
+	box-shadow: 2.5px 4.33px 40px 0px rgba(2, 2, 2, 0.3);}
+.dxm-popup::before
+{
+	border-left: 14px solid transparent;
+	border-right: 14px solid transparent;
+	border-bottom: 14px solid #fff;
+	top: -12px ;
+	content: '';
+	height: 0;
+	left: 50%;
+	margin-left: -13px;
+	position: absolute;
+	width: 0;
+	z-index: 1001;
+}
+.dxm-popup::after
+{
+	border-color: #fff;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	border-bottom: 12px solid #c0c0c0;
+	top: -13px ;
+	content: '';
+	height: 0;
+	left: 50%;
+	margin-left: -11px;
+	position: absolute;
+	width: 0;
+	z-index: 1000;
+
+}
+.dxmBrdCor_MetropolisBlue1 
+{
+	background-color: white;
+}
+
+.dxmLite_MetropolisBlue1 .dxm-item
+{
+	cursor: default;
+    text-align: left;
+}
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-item
+{
+	text-align: right;
+}
+.dxmLite_MetropolisBlue1 .dxm-image-t .dxm-item,
+.dxmLite_MetropolisBlue1 .dxm-image-b .dxm-item
+{
+	text-align: center;
+}
+
+.dxmLite_MetropolisBlue1 .dxm-content 
+{
+    display: block;
+	white-space: nowrap;
+padding-right:20px;/*fix menu padding right to 20px*/
+
+}
+
+.dxmLite_MetropolisBlue1,
+.dxmLite_MetropolisBlue1 .dxm-item a.dx 
+{
+	color: #333333;
+padding-right:20px;
+
+}
+.dxmLite_MetropolisBlue1 .dxm-disabled,
+.dxmLite_MetropolisBlue1 .dxm-disabled a.dx 
+{
+	color: #b8b8b8;
+}
+.dxmLite_MetropolisBlue1 .dxm-item a.dx 
+{
+	text-decoration: none;
+}
+
+.dxmLite_MetropolisBlue1 .dxm-item 
+{
+	border: 0px;
+}
+.dxmLite_MetropolisBlue1 .dxm-popOut
+{
+    border: solid 1px transparent;
+}
+
+/* Checked, Selected, Hovered */
+.dxmLite_MetropolisBlue1 .dxm-dropDownMode.dxm-checked .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-dropDownMode.dxm-selected .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-dropDownMode.dxm-hovered .dxm-popOut 
+{
+    border-left-color: white;
+}
+.dxmLite_MetropolisBlue1 .dxm-image-r .dxm-dropDownMode.dxm-checked .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-image-r .dxm-dropDownMode.dxm-selected .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-image-r .dxm-dropDownMode.dxm-hovered .dxm-popOut, 
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-dropDownMode.dxm-checked .dxm-popOut,
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-dropDownMode.dxm-selected .dxm-popOut,
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-dropDownMode.dxm-hovered .dxm-popOut 
+{
+    border-right-color: white;
+}
+.dxmLite_MetropolisBlue1 .dxm-main .dxm-checked,
+.dxmLite_MetropolisBlue1 .dxm-main .dxm-selected 
+{
+    background-color: #e0e0e0;
+}
+.dxmLite_MetropolisBlue1 .dxm-main .dxm-hovered
+{
+	background-color: #ff400d;
+	color: #FFFFFF;
+}
+.dxmLite_MetropolisBlue1 .dxm-main .dxm-hovered a.dx
+{
+	color: #FFFFFF;
+}
+.dxmLite_MetropolisBlue1 .dxm-popup .dxm-selected 
+{
+	background-color: #e0e0e0;
+}
+.dxmLite_MetropolisBlue1 .dxm-popup .dxm-hovered
+{
+	background-color: #d9f1fd;
+	color: #3993c1;
+}
+.dxmLite_MetropolisBlue1 .dxm-popup .dxm-hovered a.dx
+{
+	color: #FFFFFF;
+}
+
+/* Content */
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-l .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-r .dxm-content 
+{
+	padding: 3px 7px 4px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-t .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-b .dxm-content 
+{
+	padding: 3px 11px 4px 10px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-t.dxm-noImages .dxm-item .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-b.dxm-noImages .dxm-item .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-t .dxm-noImage .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-b .dxm-noImage .dxm-content {
+	padding: 4px 11px 5px 10px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-l .dxm-subMenu .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-t .dxm-subMenu .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-b .dxm-subMenu .dxm-content 
+{
+	padding-right: 3px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-l .dxm-dropDownMode .dxm-content 
+{
+	padding-right: 4px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-r .dxm-subMenu .dxm-content 
+{
+	padding-left: 3px;
+	padding-right: 5px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-r .dxm-dropDownMode .dxm-content 
+{
+	padding-left: 4px;
+	padding-right: 5px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-t .dxm-dropDownMode .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-b .dxm-dropDownMode .dxm-content 
+{
+	padding-right: 8px;
+}
+
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-l .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-r .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-popup .dxm-content 
+{
+	padding: 3px 18px 4px 3px;
+}
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-vertical .dxm-image-l .dxm-content,
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-vertical .dxm-image-r .dxm-content,
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-popup .dxm-content 
+{
+	padding: 3px 2px 4px 18px;
+}
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-r .dxm-noSubMenu .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-r .dxm-subMenu .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-r .dxm-dropDownMode .dxm-content 
+{
+	padding-right: 5px;
+	padding-left: 14px;
+}
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-t .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-b .dxm-content 
+{
+	padding: 5px 10px 6px;
+}
+
+/* Image */
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-l .dxm-hasText .dxm-image
+{
+	margin-right: 5px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-r .dxm-hasText .dxm-image
+{
+	margin-left: 5px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-t .dxm-hasText .dxm-image 
+{
+	margin-bottom: 4px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-b .dxm-hasText .dxm-image 
+{
+	margin-top: 4px;
+}
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-l .dxm-image 
+{
+	margin-right: 7px;
+}
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-r .dxm-image 
+{
+	margin-left: 7px;
+}
+.dxmLite_MetropolisBlue1.dxm-ltr .dxm-popup .dxm-image 
+{
+	margin-right: 12px;
+padding-left:20px;/*add by steven fix the middle of sub image*/
+
+}
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-popup .dxm-image 
+{
+	margin-left: 12px;
+}
+
+/* Image replacement */
+.dxmLite_MetropolisBlue1.dxm-ltr .dxm-vertical .dxm-image-l.dxm-noImages .dxm-content,
+.dxmLite_MetropolisBlue1.dxm-ltr .dxm-vertical .dxm-image-r.dxm-noImages .dxm-content  
+{
+	padding-left: 7px;
+}
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-vertical .dxm-image-l.dxm-noImages .dxm-content,
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-vertical .dxm-image-r.dxm-noImages .dxm-content  
+{
+	padding-right: 7px;
+}
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-l .dxm-noImage 
+{
+	padding-left: 23px;
+}
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-r .dxm-noImage 
+{
+	padding-right: 23px;
+}
+.dxmLite_MetropolisBlue1.dxm-ltr .dxm-popup .dxm-noImage 
+{
+	padding-left: 28px;
+
+	/*add padding by steven */
+	padding-right:30px;
+	padding-left:30px;
+	/*end*/
+}
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-popup .dxm-noImage 
+{
+	padding-right: 28px;
+}
+
+/* PopOut */
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-l .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-r .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-t.dxm-noImages .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-t .dxm-noImage .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-b.dxm-noImages .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-b .dxm-noImage .dxm-popOut 
+{
+	padding-top: 9px;
+	padding-bottom: 9px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-t .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-b .dxm-popOut 
+{
+	padding-top: 18px;
+	padding-bottom: 19px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-l .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-t .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-b .dxm-popOut 
+{
+	padding-right: 5px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-image-r .dxm-popOut 
+{
+	padding-left: 7px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-dropDownMode .dxm-popOut 
+{
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-l .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-r .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-popup .dxm-popOut 
+{
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-t.dxm-noImages .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-t .dxm-noImage .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-b.dxm-noImages .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-b .dxm-noImage .dxm-popOut 
+{
+	padding-top: 8px;
+	padding-bottom: 9px;
+}
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-t .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-b .dxm-popOut 
+{
+	padding-top: 18px;
+	padding-bottom: 19px;
+}
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-l .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-r .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-t .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-b .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-popup .dxm-popOut 
+{
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+/* PopOut replacement */
+.dxmLite_MetropolisBlue1.dxm-ltr .dxm-popup .dxm-noSubMenu 
+{
+	padding-right: 13px;
+}
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-popup .dxm-noSubMenu 
+{
+	padding-left: 13px;
+}
+
+/* Spacings, Separator */
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-spacing 
+{
+	width: 2px;
+    min-width: 2px;
+	height: 1px;
+}
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-l .dxm-spacing,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-r .dxm-spacing,
+.dxmLite_MetropolisBlue1 .dxm-popup .dxm-spacing 
+{
+	height: 1px;
+}
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-t .dxm-spacing,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-b .dxm-spacing 
+{
+	height: 2px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-separator 
+{
+	padding: 0px 2px;
+}
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-l .dxm-separator,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-r .dxm-separator,
+.dxmLite_MetropolisBlue1 .dxm-popup .dxm-separator 
+{
+	padding: 1px 0px;
+}
+.dxmLite_MetropolisBlue1.dxm-ie7 .dxm-vertical .dxm-image-l .dxm-separator,
+.dxmLite_MetropolisBlue1.dxm-ie7 .dxm-vertical .dxm-image-r .dxm-separator,
+.dxmLite_MetropolisBlue1.dxm-ie7 .dxm-popup .dxm-separator 
+{
+	padding-top: 0px;
+}
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-t .dxm-separator,
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-image-b .dxm-separator 
+{
+	padding: 2px 0px;
+}
+.dxmLite_MetropolisBlue1.dxm-ie7 .dxm-vertical .dxm-image-t .dxm-separator,
+.dxmLite_MetropolisBlue1.dxm-ie7 .dxm-vertical .dxm-image-b .dxm-separator 
+{
+	padding-top: 1px;
+}
+
+.dxmLite_MetropolisBlue1 .dxm-separator b
+{
+	background-color: #FFFFFF;
+}
+.dxmLite_MetropolisBlue1 .dxm-popup .dxm-separator b
+{
+	background-color: #C0C0C0;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal .dxm-separator b 
+{
+	height: 100%;
+	width: 1px;
+}
+.dxmLite_MetropolisBlue1 .dxm-vertical .dxm-separator b,
+.dxmLite_MetropolisBlue1 .dxm-popup .dxm-separator b 
+{
+	height: 1px;
+}
+.dxmLite_MetropolisBlue1.dxm-ltr .dxm-popup .dxm-separator
+{
+	padding-left: 29px;
+}
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-popup .dxm-separator
+{
+	padding-right: 29px;
+}
+.dxmLite_MetropolisBlue1.dxm-ltr .dxm-popup .dxm-noImages .dxm-separator
+{
+	padding-left: 0;
+}
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-popup .dxm-noImages .dxm-separator
+{
+	padding-left: 0;
+}
+/* Scroll elements */
+.dxmLite_MetropolisBlue1 .dxm-scrollUpBtn, 
+.dxmLite_MetropolisBlue1 .dxm-scrollDownBtn
+{
+	background-color: white;
+	cursor: pointer;
+	font-size: 0;
+	padding: 1px;
+	text-align: center;
+}
+.dxmLite_MetropolisBlue1 .dxm-scrollUpBtn
+{
+	margin-bottom: 1px;
+}
+.dxmLite_MetropolisBlue1 .dxm-scrollDownBtn
+{
+	margin-top: 1px;
+}
+.dxmLite_MetropolisBlue1 .dxm-scrollBtnHovered
+{
+	background-color: #ff400d;
+}
+.dxmLite_MetropolisBlue1 .dxm-scrollBtnPressed
+{
+	background-color: #f0f0f0;
+}
+.dxmLite_MetropolisBlue1 .dxm-scrollBtnDisabled
+{
+	cursor: default;
+}
+.dxmLite_MetropolisBlue1 .dxm-scrollArea
+{
+	overflow: hidden;
+	position: relative;
+}
+
+/* -- ASPxMenu Lite Toolbar mode -- */
+.dxmLite_MetropolisBlue1 .dxm-main.dxmtb {
+	padding: 2px;
+}
+/* has image */
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-l .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-r .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-l .dxm-subMenu .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-r .dxm-subMenu .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-t .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-b .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-t .dxm-subMenu .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-b .dxm-subMenu .dxm-content
+{
+	padding: 4px;
+}
+/* no image */
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-l .dxm-subMenu.dxm-noImage .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-r .dxm-subMenu.dxm-noImage .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-l.dxm-noImages .dxm-item .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-r.dxm-noImages .dxm-item .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-l .dxm-noImage .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-r .dxm-noImage .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-t .dxm-subMenu.dxm-noImage .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-b .dxm-subMenu.dxm-noImage .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-t.dxm-noImages .dxm-item .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-b.dxm-noImages .dxm-item .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-t .dxm-noImage .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-b .dxm-noImage .dxm-content
+{
+	padding: 4px 4px 5px;
+}
+/* dd has image */
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-l .dxm-dropDownMode .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-r .dxm-dropDownMode .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-t .dxm-dropDownMode .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-b .dxm-dropDownMode .dxm-content 
+{
+	padding: 4px 5px 4px 4px;
+}
+/* dd no image */
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-l .dxm-dropDownMode.dxm-noImage .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-r .dxm-dropDownMode.dxm-noImage .dxm-content, 
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-t .dxm-dropDownMode.dxm-noImage .dxm-content,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-image-b .dxm-dropDownMode.dxm-noImage .dxm-content 
+{
+	padding: 4px;
+}
+
+.dxmLite_MetropolisBlue1 .dxm-popup.dxmtb .dxm-image 
+{
+	margin-right: 10px;
+	margin-top: -1px;
+}
+.dxmLite_MetropolisBlue1.dxm-rtl .dxm-popup.dxmtb .dxm-image 
+{
+	margin-right: 0px;
+}
+
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-popOut,
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-dropDownMode .dxm-popOut 
+{
+	padding: 9px 3px;
+}
+.dxmLite_MetropolisBlue1 .dxmtb .dxtb-comboBoxMenuItem 
+{
+	padding: 2px 2px 1px;
+}
+.dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxtb-labelMenuItem 
+{
+	padding: 7px 2px 0!important;
+    padding: 6px 2px 0\0!important;
+}
+@-moz-document url-prefix() {
+    .dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxtb-labelMenuItem 
+    {
+	    padding: 6px 2px 0!important;
+    }
+}
+/* -- ASPxNavBar Lite -- */
+.dxnbLite_MetropolisBlue1 
+{
+	color: #333333;
+	background-color: white;
+	font: 12px 'Source Sans Pro','Segoe UI';
+	list-style: none none outside;
+	margin: 0;
+	padding: 0px;
+	float: left;
+	width: 200px;
+}
+.dxnbLite_MetropolisBlue1 a
+{
+	color: black;
+	text-decoration: none;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-gr 
+{
+	margin-bottom: 13px;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-header,
+.dxnbLite_MetropolisBlue1 .dxnb-headerCollapsed 
+{
+	background-color: #f0f0f0;
+	padding: 9px 10px 6px;
+	color: #666666;
+	font-weight: bold;
+	overflow: hidden;
+	cursor: pointer;
+	clear: both;
+    white-space: nowrap;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-header a,
+.dxnbLite_MetropolisBlue1 .dxnb-headerCollapsed a
+{
+	color: #666666;
+	text-decoration: underline;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-content 
+{
+	list-style: none none outside;
+	margin: 0;
+	padding: 5px;
+	overflow: hidden;
+}
+.dxnbLite_MetropolisBlue1.dxnb-noHeads .dxnb-content
+{
+	border-top-width: 1px;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-item,
+.dxnbLite_MetropolisBlue1 .dxnb-large,
+.dxnbLite_MetropolisBlue1 .dxnb-bullet 
+{
+	color: black;
+	clear: both;
+	overflow: hidden;
+	cursor: default;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-item,
+.dxnbLite_MetropolisBlue1 .dxnb-large,
+.dxnbLite_MetropolisBlue1 .dxnb-tmpl
+{
+	margin-bottom: 1px;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-item.dxnb-link,
+.dxnbLite_MetropolisBlue1 .dxnb-item .dxnb-link
+{
+	padding: 3px 4px 4px;
+    white-space: nowrap;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-large.dxnb-link,
+.dxnbLite_MetropolisBlue1 .dxnb-large .dxnb-link
+{
+	padding: 6px 12px 7px;
+    white-space: nowrap;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-bullet,
+.dxnbLite_MetropolisBlue1 .dxnb-bulletHover,
+.dxnbLite_MetropolisBlue1 .dxnb-bulletSelected 
+{
+	padding: 0 5px;
+	overflow: visible;
+	margin-bottom: 6px;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-itemSelected,
+.dxnbLite_MetropolisBlue1 .dxnb-largeSelected
+{
+    background-color: #f0f0f0;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-itemHover,
+.dxnbLite_MetropolisBlue1 .dxnb-itemHover a,
+.dxnbLite_MetropolisBlue1 .dxnb-largeHover,
+.dxnbLite_MetropolisBlue1 .dxnb-largeHover a
+{
+	background-color: #ff400d;
+	color: #FFFFFF;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-header,
+.dxnbLite_MetropolisBlue1 .dxnb-headerCollapsed, 
+.dxnbLite_MetropolisBlue1 .dxnb-item,
+.dxnbLite_MetropolisBlue1 .dxnb-itemHover,
+.dxnbLite_MetropolisBlue1 .dxnb-itemSelected,
+.dxnbLite_MetropolisBlue1 .dxnb-bullet,
+.dxnbLite_MetropolisBlue1 .dxnb-bulletHover,
+.dxnbLite_MetropolisBlue1 .dxnb-bulletSelected
+{
+	text-align: left;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-large,
+.dxnbLite_MetropolisBlue1 .dxnb-largeHover,
+.dxnbLite_MetropolisBlue1 .dxnb-largeSelected
+{
+	text-align: center;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-headerHover
+{
+}
+.dxnbLite_MetropolisBlue1 .dxnb-headerCollapsedHover
+{
+}
+.dxnbLite_MetropolisBlue1 .dxnb-last
+{
+	margin-bottom: 0;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-btn,
+.dxnbLite_MetropolisBlue1 .dxnb-btnLeft,
+.dxnbLite_MetropolisBlue1 .dxnb-img
+{
+	border-width: 0;
+}
+
+.dxnbLite_MetropolisBlue1 .dxnb-btn
+{
+	float: right;
+	margin: 0 0 0 4px;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-btnLeft,
+.dxnbLite_MetropolisBlue1 .dxnb-rtlHeader .dxnb-btn 
+{
+	float: left;
+	margin: 0 4px 0 0;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-img
+{
+	margin: 0 4px 0 0;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-right .dxnb-item .dxnb-img,
+.dxnbLite_MetropolisBlue1 .dxnb-rtlHeader .dxnb-img
+{
+	margin: 0 0 0 4px;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-header.dxnb-header-left,
+.dxnbLite_MetropolisBlue1 .dxnb-headerCollapsed.dxnb-header-left,
+.dxnbLite_MetropolisBlue1 .dxnb-rtlHeader
+{
+	text-align: right;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-top .dxnb-large .dxnb-img
+{
+	margin-bottom: 3px;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-bottom .dxnb-large .dxnb-img
+{
+	margin-top: 3px;
+}
+.dxnbLite_MetropolisBlue1 .dxnb-large .dxnb-img
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.dxnbLiteDisabled_MetropolisBlue1,
+.dxnbLite_MetropolisBlue1 .dxnbLiteDisabled_MetropolisBlue1,
+.dxnbLiteDisabled_MetropolisBlue1 a,
+.dxnbLiteDisabled_MetropolisBlue1 .dxnb-item,
+.dxnbLiteDisabled_MetropolisBlue1 .dxnb-large,
+.dxnbLiteDisabled_MetropolisBlue1 .dxnb-bullet,
+.dxnbLiteDisabled_MetropolisBlue1 .dxnb-header,
+.dxnbLiteDisabled_MetropolisBlue1 .dxnb-headerCollapsed 
+{
+	color: #b8b8b8;
+	cursor: default;
+}
+
+/* -- ASPxNewsControl -- */
+.dxncControl_MetropolisBlue1
+{
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: #333333;
+	background-color: White;
+}
+.dxncControl_MetropolisBlue1 a
+{
+	color: #ff400d;
+}
+.dxncControl_MetropolisBlue1 td.dxncCtrl_MetropolisBlue1
+{
+	padding: 18px;
+}
+.dxncContent_MetropolisBlue1
+{
+}
+.dxncPagerPanel_MetropolisBlue1
+{
+	padding: 0px 3px;
+}
+.dxncItem_MetropolisBlue1
+{
+	vertical-align: top;
+	border-bottom: 1px solid #c0c0c0;
+	border-top: 1px solid #c0c0c0;
+	padding: 12px 8px;
+}
+.dxncEmptyItem_MetropolisBlue1
+{
+	vertical-align: top;
+	padding: 12px 12px 12px 14px;
+}
+.dxncBackToTop_MetropolisBlue1
+{
+	padding: 12px 0;
+	margin-top: -40px!important;
+}
+.dxncBackToTop_MetropolisBlue1,
+.dxncBackToTop_MetropolisBlue1 a
+{
+	color: #999999;
+	text-align: right;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+.dxncBackToTop_MetropolisBlue1 img
+{
+	float: right;
+	margin-left: 4px;
+	margin-top: -4px;
+	vertical-align: middle;
+}
+.dxncEPContainer_MetropolisBlue1
+{
+    height: 50px;
+	text-align: center;
+}
+.dxncEPContainer_MetropolisBlue1 div
+{
+	padding-top: 16px;
+}
+.dxncEPContainer_MetropolisBlue1 a
+{
+	color: #ff400d;
+}
+.dxncItem_MetropolisBlue1 > table:not(:last-child) .dxhlContent_MetropolisBlue1:last-child
+{
+	margin-bottom: 40px!important;
+} 
+.dxncControl_MetropolisBlue1 .dxhlTailDiv_MetropolisBlue1 a
+{
+    color: #999999;
+}
+.dxncEmptyData_MetropolisBlue1
+{
+	color: Gray;
+}
+/* Disabled */
+.dxncDisabled_MetropolisBlue1
+{
+	color: #b8b8b8;
+	cursor: default;
+}
+
+/* -- ASPxPager Lite -- */
+.dxpLite_MetropolisBlue1
+{
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: #333333;
+	float: left;
+	padding: 2px 8px;
+
+    /*box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	delete menu border by steven
+*/
+}
+
+.dxpLite_MetropolisBlue1 .dxp-summary,
+.dxpLite_MetropolisBlue1 .dxp-sep,
+.dxpLite_MetropolisBlue1 .dxp-button,
+.dxpLite_MetropolisBlue1 .dxp-pageSizeItem,
+.dxpLite_MetropolisBlue1 .dxp-num,
+.dxpLite_MetropolisBlue1 .dxp-current,
+.dxpLite_MetropolisBlue1 .dxp-ellip
+{
+	margin-left: 0px;
+	font-weight: normal;
+	font-size: 12px;
+	color: #77787b;
+}
+.dxp-current
+{
+	text-align: center;
+	padding:3px 4px;
+}
+
+
+.dxpLite_MetropolisBlue1 .dxp-lead
+{
+	margin-left: 0!important;
+}
+
+.dxpLite_MetropolisBlue1 a
+{
+	color: #333333;
+	text-decoration: underline;
+}
+
+.dxpLite_MetropolisBlue1 .dxp-button
+{
+	white-space: nowrap;
+	text-align: center;
+	cursor: pointer;
+	padding: 6px 14px;
+	text-decoration: none;
+}
+.dxpLite_MetropolisBlue1 .dxp-button img
+{
+	border: none;
+	text-decoration: none;
+}
+.dxpLite_MetropolisBlue1 .dxp-button span
+{
+	text-decoration: none;
+}
+.dxpLite_MetropolisBlue1 .dxp-button.dxp-bi 
+{
+	padding: 0 3px;
+}
+.dxpLite_MetropolisBlue1 .dxp-button.dxp-bti 
+{
+	padding: 0 14px;
+}
+.dxpLite_MetropolisBlue1 .dxp-disabledButton
+{
+	text-decoration: none;
+	color: #acacac;
+	cursor: default;
+}
+.dxpLite_MetropolisBlue1 .dxp-pageSizeItem
+{
+    padding: 1px 4px 0 16px;
+    white-space: nowrap;
+}
+@-moz-document url-prefix() {
+    .dxpLite_MetropolisBlue1 .dxp-pageSizeItem
+    {
+        padding: 2px 4px 0 16px;
+    }
+}
+.dxpLite_MetropolisBlue1 .dxp-pageSizeItem .dx
+{
+    display: block;
+    float: left;
+    margin-top: 3px;
+    white-space: nowrap;
+}
+.dxpLite_MetropolisBlue1 .dxp-comboBox
+{
+    display: block;
+    float: left;
+    background-color: White;
+    border: 1px solid #c0c0c0;
+    padding: 0px;
+    margin: -2px 0px;
+}
+.dxpLite_MetropolisBlue1 .dxp-comboBox input
+{
+    margin: 4px 1px 4px 3px;
+}
+.dxpLite_MetropolisBlue1 .dxp-hoverComboBox
+{
+}
+.dxpLite_MetropolisBlue1 .dxp-pressedComboBox
+{
+}
+.dxpLite_MetropolisBlue1 .dxp-dropDownButton
+{
+    display: block;
+    float: left;
+    cursor: pointer;
+    font-size: 0;
+    padding: 10px 5px 9px;
+	background-color: White;
+}
+.dxpLite_MetropolisBlue1 .dxp-hoverDropDownButton
+{
+	background-color: #ff400d;
+}
+.dxpLite_MetropolisBlue1 .dxp-pressedDropDownButton
+{
+	background-color: Silver;
+}
+.dxpLite_MetropolisBlue1 .dxp-dropDownButton img
+{
+    border: none;
+	text-decoration: none;
+	vertical-align: middle;
+}
+.dxpLite_MetropolisBlue1 .dxp-num
+{
+	color: #333333;
+	text-decoration: none;
+	padding: 6px 12px;
+    	margin-top: 0px;
+	cursor: pointer;
+}
+
+.dxpLite_MetropolisBlue1 .dxp-current
+{
+	background-color: #999ca1;
+	color: #FFFFFF;
+	text-decoration: none;
+	cursor: text;
+}
+
+.dxpLite_MetropolisBlue1 .dxp-summary,
+.dxpLite_MetropolisBlue1 .dxp-ellip
+{
+	white-space: nowrap;
+	padding: 6px 16px 16px 0px;
+}
+
+.dxpLite_MetropolisBlue1 .dxp-sep
+{
+	background-color: #cccccc;
+	width: 1px;
+	height: 15px;
+	margin-top: 5px;
+}
+
+.dxpLiteDisabled_MetropolisBlue1,
+.dxpLiteDisabled_MetropolisBlue1 a,
+.dxpLiteDisabled_MetropolisBlue1 .dxp-summary,
+.dxpLiteDisabled_MetropolisBlue1 .dxp-sep, 
+.dxpLiteDisabled_MetropolisBlue1 .dxp-button,
+.dxpLiteDisabled_MetropolisBlue1 .dxp-num,
+.dxpLiteDisabled_MetropolisBlue1 .dxp-current,
+.dxpLiteDisabled_MetropolisBlue1 .dxp-ellip
+{
+	color: #acacac;
+	border-color: #808080;
+	cursor: default;
+}
+
+.dxpLite_MetropolisBlue1 .dxp-disabledComboBox
+{
+    border: 1px solid #9F9F9F;
+}
+
+.dxpLite_MetropolisBlue1 .dxp-disabledComboBox input
+{
+    color: #acacac;
+}
+
+.dxpLite_MetropolisBlue1 .dxp-disabledDropDownButton
+{
+    border-color: #C3C3C3;
+    cursor: default;
+}
+
+/* -- ASPxPopupControl Lite -- */
+.dxpcLite_MetropolisBlue1,
+.dxdpLite_MetropolisBlue1  
+{
+	width: 250px;
+	left: 0;
+	top: 0;
+	display: none;
+	position: absolute;
+	visibility: hidden;
+	border-spacing: 0;
+
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: black;
+
+	/*add border radus by steven */
+	border-radius: 10px;
+	/*end*/
+}
+
+.dxpcLite_MetropolisBlue1 .dxpc-shadow,
+.dxpcLite_MetropolisBlue1.dxpc-shadow,
+.dxdpLite_MetropolisBlue1 .dxpc-shadow,
+.dxdpLite_MetropolisBlue1.dxpc-shadow
+{
+/*
+pop have shadow change by steven	
+
+-moz-box-shadow: none;
+-webkit-box-shadow: none;
+    box-shadow: none;
+*/
+  box-shadow: 2.5px 4.33px 40px 0px rgba(2, 2, 2, 0.3);
+}
+
+.dxpcLite_MetropolisBlue1 .dxpc-mainDiv,
+.dxpcLite_MetropolisBlue1.dxpc-mainDiv,
+.dxdpLite_MetropolisBlue1 .dxpc-mainDiv,
+.dxdpLite_MetropolisBlue1.dxpc-mainDiv  
+{
+	top: 0;
+	left: 0;
+	background-color: white;
+	border: 1px solid silver;
+}
+
+.dxpcLite_MetropolisBlue1 a.dxpc-link,
+.dxdpLite_MetropolisBlue1 a.dxpc-link
+{
+	color: #ff400d;
+}
+.dxpcLite_MetropolisBlue1 a.dxpc-link *,
+.dxdpLite_MetropolisBlue1 a.dxpc-link *
+{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.dxpcLite_MetropolisBlue1 .dxpc-closeBtn,
+.dxpcLite_MetropolisBlue1 .dxpc-pinBtn,
+.dxpcLite_MetropolisBlue1 .dxpc-refreshBtn,
+.dxpcLite_MetropolisBlue1 .dxpc-collapseBtn,
+.dxpcLite_MetropolisBlue1 .dxpc-maximizeBtn,
+.dxdpLite_MetropolisBlue1 .dxpc-closeBtn,
+.dxdpLite_MetropolisBlue1 .dxpc-pinBtn,
+.dxdpLite_MetropolisBlue1 .dxpc-refreshBtn,
+.dxdpLite_MetropolisBlue1 .dxpc-collapseBtn,
+.dxdpLite_MetropolisBlue1 .dxpc-maximizeBtn
+{
+	padding: 6px;
+	float: right;
+}
+
+.dxpcLite_MetropolisBlue1.dxRtl .dxpc-closeBtn,
+.dxpcLite_MetropolisBlue1.dxRtl .dxpc-pinBtn,
+.dxpcLite_MetropolisBlue1.dxRtl .dxpc-refreshBtn,
+.dxpcLite_MetropolisBlue1.dxRtl .dxpc-collapseBtn,
+.dxpcLite_MetropolisBlue1.dxRtl .dxpc-maximizeBtn,
+.dxdpLite_MetropolisBlue1.dxRtl .dxpc-closeBtn,
+.dxdpLite_MetropolisBlue1.dxRtl .dxpc-pinBtn,
+.dxdpLite_MetropolisBlue1.dxRtl .dxpc-refreshBtn,
+.dxdpLite_MetropolisBlue1.dxRtl .dxpc-collapseBtn,
+.dxdpLite_MetropolisBlue1.dxRtl .dxpc-maximizeBtn
+{
+	float: left;
+}
+
+.dxpcLite_MetropolisBlue1 .dxpc-closeBtnHover,
+.dxpcLite_MetropolisBlue1 .dxpc-pinBtnHover,
+.dxpcLite_MetropolisBlue1 .dxpc-refreshBtnHover,
+.dxpcLite_MetropolisBlue1 .dxpc-collapseBtnHover,
+.dxpcLite_MetropolisBlue1 .dxpc-maximizeBtnHover,
+.dxdpLite_MetropolisBlue1 .dxpc-closeBtnHover,
+.dxdpLite_MetropolisBlue1 .dxpc-pinBtnHover,
+.dxdpLite_MetropolisBlue1 .dxpc-refreshBtnHover,
+.dxdpLite_MetropolisBlue1 .dxpc-collapseBtnHover,
+.dxdpLite_MetropolisBlue1 .dxpc-maximizeBtnHover
+{
+}
+
+.dxpcLite_MetropolisBlue1 .dxpc-header,
+.dxdpLite_MetropolisBlue1 .dxpc-header 
+{
+	color: #ff400d;
+	font-size: 1.66em;
+	padding: 7px 2px 7px 12px;
+	white-space: nowrap;
+}
+
+.dxpcLite_MetropolisBlue1.dxRtl .dxpc-header,
+.dxdpLite_MetropolisBlue1.dxRtl .dxpc-header  
+{
+	padding: 7px 12px 7px 2px;
+}
+
+.dxpcLite_MetropolisBlue1 .dxpc-headerText,
+.dxdpLite_MetropolisBlue1 .dxpc-headerText
+{
+	white-space: nowrap;
+	margin-top: -2px;
+}
+
+.dxpcLite_MetropolisBlue1 .dxpc-headerImg,
+.dxdpLite_MetropolisBlue1 .dxpc-headerImg
+{
+	margin: 0 16px 0 0;
+}
+
+.dxpcLite_MetropolisBlue1.dxRtl .dxpc-headerImg,
+.dxdpLite_MetropolisBlue1.dxRtl .dxpc-headerImg
+{
+	margin: 0 0 0 16px;
+}
+
+.dxpcLite_MetropolisBlue1 .dxpc-expandableDiv,
+.dxdpLite_MetropolisBlue1 .dxpc-expandableDiv 
+{
+	float: left;
+	overflow: hidden;
+}
+
+.dxpcLite_MetropolisBlue1.dxRtl .dxpc-expandableDiv,
+.dxdpLite_MetropolisBlue1.dxRtl .dxpc-expandableDiv 
+{
+	float: right;
+}
+
+.dxpcLite_MetropolisBlue1 .dxpc-content,
+.dxdpLite_MetropolisBlue1 .dxpc-content
+{
+	white-space: normal;
+	padding: 9px 12px;
+}
+
+.dxpcLite_MetropolisBlue1 .dxpc-footer,
+.dxdpLite_MetropolisBlue1 .dxpc-footer
+{
+	color: #c0c0c0;
+}
+
+.dxpcLite_MetropolisBlue1 .dxpc-footerContent,
+.dxdpLite_MetropolisBlue1 .dxpc-footerContent
+{
+	padding: 6px 20px 8px 12px;
+	min-height: 8px;
+}
+
+.dxpcLite_MetropolisBlue1.dxRtl .dxpc-footerContent,
+.dxdpLite_MetropolisBlue1.dxRtl .dxpc-footerContent
+{
+	padding: 6px 12px 8px 20px;
+}
+
+.dxpcLite_MetropolisBlue1 .dxpc-footerText,
+.dxdpLite_MetropolisBlue1 .dxpc-footerText
+{
+	white-space: nowrap;
+}
+
+.dxpcLite_MetropolisBlue1 .dxpc-footerImg,
+.dxdpLite_MetropolisBlue1 .dxpc-footerImg
+{
+	margin: 0 8px 0 0;
+}
+
+.dxpcLite_MetropolisBlue1.dxRtl .dxpc-footerImg,
+.dxdpLite_MetropolisBlue1.dxRtl .dxpc-footerImg
+{
+	margin: 0 0 0 8px;
+}
+
+.dxpcLite_MetropolisBlue1 .dxpc-sizeGrip,
+.dxdpLite_MetropolisBlue1 .dxpc-sizeGrip
+{
+	float: right;
+}
+
+.dxpcLite_MetropolisBlue1.dxRtl .dxpc-sizeGrip,
+.dxdpLite_MetropolisBlue1.dxRtl .dxpc-sizeGrip
+{
+	float: left;
+}
+
+.dxpcModalBackLite_MetropolisBlue1,
+.dxdpModalBackLite_MetropolisBlue1
+{
+	background-color: #777777;
+	opacity: 0.7;
+	filter: progid:DXImageTransform.Microsoft.Alpha(Style=0, Opacity=70);
+	position: fixed;
+	left: 0;
+	top: 0;
+	visibility: hidden;
+}
+.dxpcLiteDisabled_MetropolisBlue1,
+.dxdpLiteDisabled_MetropolisBlue1
+{
+	color: #b8b8b8;
+	cursor: default;
+}
+
+/* -- ASPxRoundPanel -- */
+.dxrpControl_MetropolisBlue1,
+.dxrpControlGB_MetropolisBlue1
+{
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: #333333;
+}
+.dxrpControl_MetropolisBlue1 .dxrpCI
+{
+	display:block;
+}
+/* Header */
+.dxrpControl_MetropolisBlue1 td.dxrpHeader_MetropolisBlue1
+{
+	color: #ff400d;
+	font-size: 1.66em;
+}
+*+html .dxrpControl_MetropolisBlue1 .dxrpHeader_MetropolisBlue1 span.dx-vam,
+*+html .dxrpControl_MetropolisBlue1 .dxrpHeader_MetropolisBlue1 span.dx-vat,
+*+html .dxrpControl_MetropolisBlue1 .dxrpHeader_MetropolisBlue1 span.dx-vab,
+*+html .dxrpControl_MetropolisBlue1 .dxrpHeader_MetropolisBlue1 a.dx-vam,
+*+html .dxrpControl_MetropolisBlue1 .dxrpHeader_MetropolisBlue1 a.dx-vat,
+*+html .dxrpControl_MetropolisBlue1 .dxrpHeader_MetropolisBlue1 a.dx-vab 
+{
+	padding-bottom:12px;
+}
+.dxrpControlGB_MetropolisBlue1 span.dxrpHeader_MetropolisBlue1
+{
+	font-weight: bold;
+	color: Silver;
+}
+.dxrpControl_MetropolisBlue1  > tbody > tr > .dxrpHeader_MetropolisBlue1 > a,
+.dxrpControl_MetropolisBlue1  > tbody > tr > .dxrpHeader_MetropolisBlue1 > a > span.dxrpHT,
+.dxrpControlGB_MetropolisBlue1 span.dxrpHeader_MetropolisBlue1 a
+{
+    color: #1E3695;
+}
+.dxrpControl_MetropolisBlue1 td.dxrpHeader_MetropolisBlue1
+{
+	line-height: 100%;
+	white-space: nowrap;
+}
+/* Header image */
+.dxrpControl_MetropolisBlue1 .dxrpHI
+{
+	margin-right: 4px;
+}
+.dxrpControl_MetropolisBlue1 .dxrpHIR
+{
+	margin-left: 4px;
+}
+/* Content */
+.dxrpControl_MetropolisBlue1 > tbody > tr.dxrpCR > .dxrpcontent,
+.dxrpControlGB_MetropolisBlue1 > tbody > tr.dxrpCR > .dxrpcontent
+{
+	vertical-align: top;
+}
+.dxrpControlGB_MetropolisBlue1 
+{
+	border: 1px solid Silver;
+}
+.dxrpControl_MetropolisBlue1
+{
+	border-top: 1px solid Silver;
+	border-bottom: 1px solid Silver;
+}
+.dxrpControlGB_MetropolisBlue1 > tbody > tr.dxrpCR > .dxrpcontent,
+.dxrpControlGB_MetropolisBlue1 span.dxrpHeader_MetropolisBlue1
+{
+    background: white none;
+}
+/* Paddings */
+.dxrpControl_MetropolisBlue1 td.dxrpHeader_MetropolisBlue1 
+{
+	padding: 7px 15px 8px 10px;
+}
+.dxrpControlGB_MetropolisBlue1 span.dxrpHeader_MetropolisBlue1 
+{
+	padding: 0px 3px 0px 3px;
+}
+.dxrpControl_MetropolisBlue1.dxrp-noCollapsing > tbody > tr.dxrpCR > .dxrpcontent,
+.dxrpControl_MetropolisBlue1 > tbody > tr.dxrpCR > .dxrpcontent > .dxrpAW > .dxrpCW, .dxrpControl_MetropolisBlue1 > tbody > tr.dxrpCR > .dxrpcontent >  .dxrpCW
+{
+	padding: 9px 10px 10px 10px;
+}
+.dxrpControlGB_MetropolisBlue1 > tbody > tr.dxrpCR > .dxrpcontent > .dxrpCW
+{
+	padding: 6px 10px 10px 10px;
+}
+/* GroupboxCaptionOffset */
+.dxrpControlGB_MetropolisBlue1 > tbody > tr.dxrpCR > .dxrpcontent > div:first-child
+{
+	top: -7px;
+	left: 4px;
+	margin-bottom: -7px;
+}
+.dxrpControlGB_MetropolisBlue1 {
+	margin-top: 6px;
+}
+/* Disabled */
+.dxrpDisabled_MetropolisBlue1,
+.dxrpDisabled_MetropolisBlue1 td.dxrp
+{
+	color: #b8b8b8;
+	cursor: default;
+}
+
+/* -- ASPxSiteMapControl -- */
+.dxsmControl_MetropolisBlue1 
+{
+	color: #333333;
+	background-color: white;
+	font: 12px 'Source Sans Pro','Segoe UI';
+}
+.dxsmControl_MetropolisBlue1 a:hover
+{
+	text-decoration: none!important;
+}
+.dxsmControl_MetropolisBlue1 a:visited
+{
+	color: #996085!important;
+}
+/* - Category Level - */
+.dxsmCategoryLevel_MetropolisBlue1,
+.dxsmCategoryLevel_MetropolisBlue1 a
+{
+	font-weight: bold;
+	text-decoration: none;
+	color: #999999;
+}
+.dxsmCategoryLevel_MetropolisBlue1
+{
+    font-size: 1.5em;
+	white-space: nowrap;
+	padding: 0px 0px 5px;
+}
+.dxsmCategoryLevel_MetropolisBlue1
+{
+	border-bottom: 1px solid #B8B8B8;
+}
+ /*flow layout*/
+.dxsmLevelCategoryFlow_MetropolisBlue1,
+.dxsmLevelCategoryFlow_MetropolisBlue1 a
+{
+	color: #1E3695;
+    font-weight: bold;
+	text-decoration: underline;
+}
+.dxsmLevelCategoryFlow_MetropolisBlue1
+{
+	font-size: 1.5em;
+}
+/* - Level 0 - */
+.dxsmLevel0_MetropolisBlue1,
+.dxsmLevel0_MetropolisBlue1 a,
+.dxsmLevel0Categorized_MetropolisBlue1 a,
+.dxsmLevel0Categorized_MetropolisBlue1
+{
+	color: #999999;
+	text-decoration: none;
+}
+.dxsmLevel0_MetropolisBlue1,
+.dxsmLevel0Categorized_MetropolisBlue1
+{
+    font-size: 1.5em;
+	white-space: nowrap;
+	padding: 0px 0px 2px;
+}
+.dxsmLevel0_MetropolisBlue1
+{
+	padding: 0px 0px 5px;
+}
+ /*flow layout*/
+.dxsmLevel0Flow_MetropolisBlue1,
+.dxsmLevel0Flow_MetropolisBlue1 a,
+.dxsmLevel0CategorizedFlow_MetropolisBlue1 a,
+.dxsmLevel0CategorizedFlow_MetropolisBlue1
+{
+	color: #ff400d;
+	font-weight: bold;
+	text-decoration: underline;
+}
+.dxsmLevel0Flow_MetropolisBlue1
+{
+	padding: 0px;
+}
+.dxsmLevel0Flow_MetropolisBlue1
+{
+	text-decoration: none;
+}
+
+/* - Level 1 - */
+.dxsmLevel1_MetropolisBlue1,
+.dxsmLevel1_MetropolisBlue1 a,
+.dxsmLevel1Categorized_MetropolisBlue1 a,
+.dxsmLevel1Categorized_MetropolisBlue1
+{
+	color: #ff400d;
+	text-decoration: none;
+}
+.dxsmLevel1_MetropolisBlue1,
+.dxsmLevel1Categorized_MetropolisBlue1
+{
+	white-space: nowrap;
+	padding: 0px;
+}
+.dxsmLevel1_MetropolisBlue1 ul,
+.dxsmLevel1Categorized_MetropolisBlue1 ul
+{
+	list-style-type: none!important;
+}
+
+/*flow layout*/
+.dxsmLevel1Flow_MetropolisBlue1,
+.dxsmLevel1Flow_MetropolisBlue1 a,
+.dxsmLevel1CategorizedFlow_MetropolisBlue1,
+.dxsmLevel1CategorizedFlow_MetropolisBlue1 a
+{
+	color: #ff400d;
+	text-decoration: underline;
+}
+.dxsmLevel1Flow_MetropolisBlue1
+{
+	text-decoration: none;
+	padding: 0px;
+}
+
+/* - Level 2 - */
+.dxsmLevel2_MetropolisBlue1,
+.dxsmLevel2_MetropolisBlue1 a,
+.dxsmLevel2Categorized_MetropolisBlue1 a,
+.dxsmLevel2Categorized_MetropolisBlue1
+{
+	color: #ff400d;
+	text-decoration: none;
+}
+.dxsmLevel2_MetropolisBlue1,
+.dxsmLevel2Categorized_MetropolisBlue1
+{
+    font-size: 0.91em;
+	white-space: nowrap;
+	padding: 0px;
+}
+/*flow layout*/
+.dxsmLevel2Flow_MetropolisBlue1,
+.dxsmLevel2Flow_MetropolisBlue1 a
+{
+	color: #5078DC;
+	text-decoration: underline;
+}
+.dxsmLevel2Flow_MetropolisBlue1
+{
+    font-size: 0.91em;
+	padding: 0px;
+}
+/* - Level 3 - */
+.dxsmLevel3_MetropolisBlue1,
+.dxsmLevel3_MetropolisBlue1 a
+{
+	color: #ff400d;
+	text-decoration: none;
+}
+.dxsmLevel3_MetropolisBlue1
+{
+    font-size: 0.75em;
+	white-space: nowrap;
+	padding: 0px;
+}
+/*flow layout*/
+.dxsmLevel3Flow_MetropolisBlue1,
+.dxsmLevel3Flow_MetropolisBlue1 a
+{
+	color: #999999;
+	text-decoration: underline;
+}
+.dxsmLevel3Flow_MetropolisBlue1
+{
+	font-size: 0.75em;
+}
+/* - Level 4 - */
+.dxsmLevel4_MetropolisBlue1,
+.dxsmLevel4_MetropolisBlue1 a
+{
+	color: #ff400d;
+	text-decoration: none;
+}
+.dxsmLevel4_MetropolisBlue1
+{
+    font-size: 0.66em;
+	white-space: nowrap;
+	padding: 0px;
+}
+/*flow layout*/
+.dxsmLevel4Flow_MetropolisBlue1,
+.dxsmLevel4Flow_MetropolisBlue1 a
+{
+	color: #A8A8A8;
+	text-decoration: underline;
+}
+.dxsmLevel4Flow_MetropolisBlue1
+{
+    font-size: 0.66em;
+	padding: 0px;
+}
+/* - Other Levels - */
+.dxsmLevelOther_MetropolisBlue1,
+.dxsmLevelOther_MetropolisBlue1 a
+{
+	color: #ff400d;
+	text-decoration: none;
+}
+.dxsmLevelOther_MetropolisBlue1
+{
+    font-size: 0.75em;
+	white-space: nowrap;
+	padding: 0px;
+}
+/*flow layout*/
+.dxsmLevelOtherFlow_MetropolisBlue1,
+.dxsmLevelOtherFlow_MetropolisBlue1 a
+{
+	color: #A8A8A8;
+	text-decoration: underline;
+}
+/* Disabled */
+.dxsmDisabled_MetropolisBlue1
+{
+	color: #b8b8b8;
+	cursor: default;
+}
+
+/* -- ASPxTabControl Lite -- */
+.dxtcLite_MetropolisBlue1 
+{
+	overflow: hidden;
+    color: #666666;
+	float: left;
+	font: 12px 'Source Sans Pro','Segoe UI';
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-strip
+{
+	list-style: none outside none;
+	float: left;
+	padding: 0;
+	margin: 0;
+	_overflow: hidden;
+}
+.dxtcLite_MetropolisBlue1.dxtc-top > .dxtc-stripContainer
+{
+	padding-top: 3px;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-tab,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-activeTab,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-spacer,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-rightIndent,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-sbWrapper,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-sbIndent,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-sbSpacer
+{
+	display: block;
+	margin: 0;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-lineBreak
+{
+	float: none;
+	display: block;
+	clear: both;
+	height: 0;
+	width: 0;
+	font-size: 0;
+	line-height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+.dxtcLite_MetropolisBlue1.dxtc-noSpacing > .dxtc-stripContainer .dxtc-tab,
+.dxtcLite_MetropolisBlue1.dxtc-noSpacing > .dxtc-stripContainer .dxtc-activeTab
+{
+	border-left-style: none;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-tab,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-activeTab
+{
+	float: left;
+	overflow: hidden;
+	text-align: center;
+	white-space: nowrap;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-tab
+{
+	background: #E0E0E0 url('tcTabBack.gif') repeat-x bottom;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-activeTab,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-activeTab a
+{
+	background-color: #ff400d;
+	color: #FFFFFF;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-tabHover,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-tabHover a
+{
+	color: #FFFFFF;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-tabHover
+{
+    background: #ff400d url('tcTabBack.gif') repeat-x bottom;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-spacer,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-rightIndent,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-sbWrapper,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-sbIndent,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-sbSpacer
+{
+	float: left;
+	border-right-width: 0;
+	border-left-width: 0;
+	overflow: hidden;
+	_border-top-color: #000001;
+	_zoom: 1;
+	_filter: progid:DXImageTransform.Microsoft.Chroma(color=#000001);
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-spacer
+{
+	width: 1px;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-rightIndent
+{
+	width: 5px;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-link
+{
+	padding: 4px 36px;
+	display: block;
+	height: 100%;
+	_float: left;
+}
+
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-link,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-rightIndent
+{
+	text-decoration: none;
+	white-space: nowrap;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-img
+{
+	border-style: none;
+	margin: 0 3px 0 0;
+} 
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-stripContainer .dxtc-img
+{
+	margin: 0 0 0 3px;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-content 
+{
+	background-color: #FFFFFF;
+	float: left;
+	clear: left;
+	border: 1px none #A8A8A8!important;
+	overflow: hidden;
+	padding: 11px;
+}
+.dxtcLite_MetropolisBlue1.dxtc-top > .dxtc-content 
+{
+	border-top-style: none!important;
+}
+.dxtcLite_MetropolisBlue1.dxtc-top > .dxtc-stripContainer .dxtc-activeTab,
+.dxtcLite_MetropolisBlue1.dxtc-top > .dxtc-stripContainer .dxtc-tab,
+.dxtcLite_MetropolisBlue1.dxtc-top > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1.dxtc-top > .dxtc-stripContainer .dxtc-spacer,
+.dxtcLite_MetropolisBlue1.dxtc-top > .dxtc-stripContainer .dxtc-rightIndent,
+.dxtcLite_MetropolisBlue1.dxtc-top > .dxtc-stripContainer .dxtc-sbWrapper,
+.dxtcLite_MetropolisBlue1.dxtc-top > .dxtc-stripContainer .dxtc-sbIndent,
+.dxtcLite_MetropolisBlue1.dxtc-top > .dxtc-stripContainer .dxtc-sbSpacer
+{
+    border-bottom: 4px solid #ff400d;
+}
+/* Rtl */
+.dxtcLite_MetropolisBlue1.dxtc-rtl,
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-content,
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-stripContainer,
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-stripContainer .dxtc-strip,
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-stripContainer .dxtc-spacer,
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-stripContainer .dxtc-rightIndent,
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-stripContainer .dxtc-sbWrapper,
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-stripContainer .dxtc-sbIndent,
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-stripContainer .dxtc-sbSpacer,
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-stripContainer .dxtc-tab,
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-stripContainer .dxtc-activeTab
+{
+	float: right;
+}
+.dxtcLite_MetropolisBlue1.dxtc-top.dxtc-rtl > .dxtc-content,
+.dxtcLite_MetropolisBlue1.dxtc-bottom.dxtc-rtl > .dxtc-stripContainer,
+.dxtcLite_MetropolisBlue1.dxtc-bottom.dxtc-rtl > .dxtc-stripContainer .dxtc-strip
+{
+	clear: right!important;
+}
+.dxtcLite_MetropolisBlue1.dxtc-left.dxtc-rtl > .dxtc-strip,
+.dxtcLite_MetropolisBlue1.dxtc-left.dxtc-rtl > .dxtc-stripContainer .dxtc-strip
+{
+	float: left;
+}
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-content,
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-stripContainer,
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-stripContainer .dxtc-strip
+{
+	*float: left;
+}
+.dxtcLite_MetropolisBlue1.dxtc-rtl > .dxtc-content
+{
+	*clear: left!important;
+}
+/* Scrolling */
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-sb          
+{
+	cursor: pointer;
+	font-size: 0;
+}
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-sb          
+{
+	margin-top: 0;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-sbHover
+{
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-sbPressed
+{
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-sbDisabled
+{
+	cursor: default;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-sb img 
+{
+	border: none;
+	border-style: none;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-sbIndent
+{
+	width: 5px;
+}
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-sbSpacer
+{
+	width: 1px;
+}
+/* Multi-row */
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtc-n
+{
+	_display: inline;
+}
+.dxtcLiteDisabled_MetropolisBlue1,
+.dxtcLiteDisabled_MetropolisBlue1 > .dxtc-stripContainer .dxtc-link,
+.dxtcLiteDisabled_MetropolisBlue1 > .dxtc-stripContainer .dxtc-activeTab .dxtc-link,
+.dxtcLiteDisabled_MetropolisBlue1 > .dxtc-content,
+.dxtcLite_MetropolisBlue1 > .dxtc-stripContainer .dxtcLiteDisabled_MetropolisBlue1 .dxtc-link
+{
+	color: #acacac;
+	cursor: default;
+}
+/* bottom  */
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer
+{
+	padding-bottom: 3px;
+}
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer,
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-strip
+{
+	clear: left;
+	*float: none;
+}
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-spacer,
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-rightIndent,
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-sbWrapper,
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-sbIndent,
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-sbSpacer
+{
+	border-bottom: 1px solid transparent;
+	_border-bottom-color: #000001;
+	_zoom: 1;
+	_filter: progid:DXImageTransform.Microsoft.Chroma(color=#000001);
+}
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-tab
+{
+	background: #E0E0E0 url('tcTabBack.gif') repeat-x top;
+}
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-tabHover
+{
+	background: #ff400d url('tcTabBack.gif') repeat-x top;
+}
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-activeTab
+{
+	background-color: #ff400d;
+	color: #FFFFFF;
+}
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-activeTab,
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-tab,
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-spacer,
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-rightIndent,
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-sbWrapper,
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-sbIndent,
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-stripContainer .dxtc-sbSpacer
+{
+    border-top: 4px solid #ff400d;
+}
+.dxtcLite_MetropolisBlue1.dxtc-bottom > .dxtc-content
+{
+	border-top: 1px solid #A8A8A8;
+	border-right: 1px solid #A8A8A8;
+	border-bottom-color: #A8A8A8;
+	border-left: 1px solid #A8A8A8;
+	border-bottom-width: 1px;
+	border-bottom-style: none!important;
+}
+/* left */
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer
+{
+	padding-left: 3px;
+}
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-tab,
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-activeTab,
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-spacer,
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-rightIndent
+{
+	float: none;
+	*float: left;
+	clear: none;
+	*clear: both;
+	width: auto;
+	height: auto;
+}
+.dxtcLite_MetropolisBlue1.dxtc-left.dxtc-noSpacing > .dxtc-stripContainer .dxtc-tab,
+.dxtcLite_MetropolisBlue1.dxtc-left.dxtc-noSpacing > .dxtc-stripContainer .dxtc-activeTab
+{
+	border-top-style: none;
+	border-bottom-style: none;
+}
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-link
+{
+	padding: 3px 15px 4px;
+}
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-tab
+{
+    background: #E0E0E0 url('tcTabBack.gif') repeat-y right;
+}
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-tabHover
+{
+	background: #ff400d url('tcTabBack.gif') repeat-y right;
+}
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-activeTab
+{
+	background-color: #ff400d;
+	color: #FFFFFF;
+}
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-spacer,
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-rightIndent
+{
+	border: none;
+	border-left: 1px solid transparent;
+	width: auto;
+	_border-left-color: #000001;
+	_zoom: 1;
+	_filter: progid:DXImageTransform.Microsoft.Chroma(color=#000001);
+}
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-activeTab,
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-tab,
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-spacer,
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-rightIndent,
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-sbWrapper,
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-sbIndent,
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-sbSpacer
+{
+    border-right: 4px solid #ff400d;
+}
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-rightIndent
+{
+	height: 5px;
+}
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-stripContainer .dxtc-spacer
+{
+	height: 1px;
+}
+.dxtcLite_MetropolisBlue1.dxtc-left > .dxtc-content
+{
+	border-top: 1px solid #A8A8A8;
+	border-right: 1px solid #A8A8A8;
+	border-bottom: 1px solid #A8A8A8;
+	border-left-color: #A8A8A8;
+	border-left-width: 1px;
+	border-left-style: none!important;
+	float: left;
+	clear: none;
+}
+/* right */
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer
+{
+	padding-right: 3px;
+}
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-tab,
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-activeTab,
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-spacer,
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-rightIndent
+{
+	float: none;
+	*float: left;
+	clear: none;
+	*clear: both;
+	width: auto;
+	height: auto;
+}
+.dxtcLite_MetropolisBlue1.dxtc-right.dxtc-noSpacing > .dxtc-stripContainer .dxtc-tab,
+.dxtcLite_MetropolisBlue1.dxtc-right.dxtc-noSpacing > .dxtc-stripContainer .dxtc-activeTab
+{
+	border-top-style: none;
+	border-bottom-style: none;
+	border-right-style: none;
+}
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-link
+{
+	padding: 3px 15px 4px;
+}
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-tab
+{
+    background: #E0E0E0 url('tcTabBack.gif') repeat-y left;
+}
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-tabHover
+{
+	background: #ff400d url('tcTabBack.gif') repeat-y left;
+}
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-activeTab
+{
+	background-color: #ff400d;
+	color: #FFFFFF;
+}
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-spacer,
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-rightIndent
+{
+	border: none;
+	border-right: 1px solid transparent;
+	_border-right-color: #000001;
+	_zoom: 1;
+	_filter: progid:DXImageTransform.Microsoft.Chroma(color=#000001);
+}
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-activeTab,
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-tab,
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-spacer,
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-rightIndent,
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-sbWrapper,
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-sbIndent,
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-sbSpacer
+{
+    border-left: 4px solid #ff400d;
+}
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-leftIndent,
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-rightIndent
+{
+	height: 5px;
+}
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-stripContainer .dxtc-spacer
+{
+	height: 1px;
+}
+.dxtcLite_MetropolisBlue1.dxtc-right > .dxtc-content
+{
+	border-top: 1px solid #A8A8A8;
+	border-right-color: #A8A8A8;
+	border-bottom: 1px solid #A8A8A8;
+	border-left: 1px solid #A8A8A8;
+	border-right-width: 1px;
+	border-right-style: none!important;
+	float: left;
+	clear: none;
+}
+
+/* -- ASPxTitleIndex -- */
+.dxtiControl_MetropolisBlue1 
+{
+	color: #ff400d;
+	font: 12px 'Source Sans Pro','Segoe UI';
+}
+.dxtiControl_MetropolisBlue1 a
+{
+	color: #ff400d;
+}
+.dxtiItem_MetropolisBlue1
+{
+	white-space: nowrap;
+}
+.dxtiGroupHeader_MetropolisBlue1,
+.dxtiGroupHeaderCategorized_MetropolisBlue1
+{
+	font-size: 1.5em;
+	text-decoration: none;
+}
+.dxtiGroupHeader_MetropolisBlue1,
+.dxtiGroupHeaderCategorized_MetropolisBlue1
+{
+	white-space: nowrap;
+	padding: 0px 0px 8px;
+}
+.dxtiGroupHeaderCategorized_MetropolisBlue1
+{
+	border-bottom: 1px Solid #C0C0C0;
+}
+/* - GroupHeaderText - */
+.dxtiGroupHeaderText_MetropolisBlue1
+{
+	background-color: #ff400d;
+	color: #FFFFFF;
+}
+.dxtiGroupHeaderText_MetropolisBlue1
+{
+	padding: 0px 8px 3px;
+}
+.dxtiGroupHeaderTextCategorized_MetropolisBlue1
+{
+	color: #FFFFFF;
+	background-color: #ff400d;
+}
+.dxtiGroupHeaderTextCategorized_MetropolisBlue1
+{
+	padding: 1px 8px;
+}
+/* - FilterBox - */
+.dxtiFilterBoxInfoText_MetropolisBlue1
+{
+	font-size: 0.75em;
+    font-weight: normal;
+	color: #999999;
+	padding-top: 0px;
+	padding-bottom: 4px;
+}
+.dxtiFilterBoxEdit_MetropolisBlue1
+{
+	border: 1px Solid silver;
+}
+.dxtiFilterBox_MetropolisBlue1,
+.dxtiFilterBox_MetropolisBlue1 table
+{
+	color: #333333;
+}
+.dxtiFilterBox_MetropolisBlue1
+{
+	padding: 15px;
+	background-color: #FAFAFA;
+}
+/* - IndexPanel - */
+.dxtiIndexPanel_MetropolisBlue1
+{
+    font-size: 1.33em;
+	padding: 10px 0;
+	text-decoration: none;
+}
+.dxtiIndexPanelItem_MetropolisBlue1,
+.dxtiCurrentIndexPanelItem_MetropolisBlue1
+{
+	text-decoration: none;
+}
+.dxtiIndexPanelItem_MetropolisBlue1,
+.dxtiCurrentIndexPanelItem_MetropolisBlue1
+{
+	padding: 0px 6px 3px;
+}
+.dxtiCurrentIndexPanelItem_MetropolisBlue1
+{
+	color: #FFFFFF;
+	background-color: #ff400d;
+}
+/* - BackToTop - */
+.dxtiBackToTop_MetropolisBlue1,
+.dxtiBackToTop_MetropolisBlue1 a
+{
+	color: #999999;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+.dxtiBackToTop_MetropolisBlue1
+{
+	border-top: 1px solid silver;
+	padding: 8px 0px;
+	text-align: right!important;
+}
+.dxtiBackToTopRtl_MetropolisBlue1
+{
+padding: 8px 0px;
+}
+.dxtiBackToTop_MetropolisBlue1 img
+{
+	float: right;
+	margin-top: -4px;
+	margin-left: 4px;
+}
+/* Disabled */
+.dxtiDisabled_MetropolisBlue1,
+.dxtiDisabled_MetropolisBlue1 a
+{
+	color: #b8b8b8;
+	cursor: default!important;
+}
+/* -- ASPxUploadControl -- */
+.dxucControl_MetropolisBlue1,
+.dxucEditArea_MetropolisBlue1,
+input[type="text"].dxucEditArea_MetropolisBlue1 /*Bootstrap correction*/
+{
+	font: 12px 'Source Sans Pro','Segoe UI';	
+}
+.dxucControl_MetropolisBlue1,
+.dxucEditArea_MetropolisBlue1,
+body input.dxucEditArea_MetropolisBlue1 /*Bootstrap correction*/
+{
+	color: #333333;
+}
+.dxucEditArea_MetropolisBlue1,
+input[type="text"].dxucEditArea_MetropolisBlue1 /*Bootstrap correction*/
+{
+    padding: 1px;
+}
+.dxucControl_MetropolisBlue1 .dxucInputs_MetropolisBlue1
+{
+}
+.dxucTextBox_MetropolisBlue1
+{
+	background-color: white;
+	border: 1px solid #c0c0c0;
+	padding: 1px 2px;
+}
+.dxucTextBox_MetropolisBlue1 .dxucEditArea_MetropolisBlue1
+{
+	margin: 0px;
+	background-color: white;
+}
+.dxucNullText_MetropolisBlue1 .dxucEditArea_MetropolisBlue1
+{
+    color: #818181;
+}
+.dxucErrorCell_MetropolisBlue1
+{
+	color: Red;
+	text-align: left;
+}
+.dxucButton_MetropolisBlue1,
+.dxucButton_MetropolisBlue1 a
+{
+	color: #ff400d;
+	white-space: nowrap;
+}
+.dxucBrowseButton_MetropolisBlue1,
+.dxucBrowseButton_MetropolisBlue1 a
+{
+	cursor: pointer;
+	white-space: nowrap;
+	text-decoration: none;
+}
+.dxucControl_MetropolisBlue1 .dxucBrowseButton_MetropolisBlue1 a
+{
+	color: #000000;
+}
+.dxucControl_MetropolisBlue1 a[unselectable="on"]
+{
+    user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+}
+.dxucBrowseButton_MetropolisBlue1
+{
+	border: 1px solid Silver;
+	padding: 3px 8px 4px;
+	background-color: White;
+}
+.dxucBrowseButton_MetropolisBlue1.dxbf
+{
+    padding: 3px 7px 4px;
+}
+.dxucBrowseButton_MetropolisBlue1.dxbf a
+{
+    border: 1px dotted black;
+}
+.dxucBrowseButtonHover_MetropolisBlue1
+{
+	background-color: #ff400d;
+	color: #FFFFFF;
+}
+.dxucBrowseButtonPressed_MetropolisBlue1
+{
+	background-color: Silver;
+	color: #FFFFFF;
+}
+.dxuc-IE7 .dxucTextBox_MetropolisBlue1 .dxucEditArea_MetropolisBlue1
+{
+    margin-left: -3px;
+}
+/* ProgressBar */
+.dxucProgressBar_MetropolisBlue1
+{
+	background-color: #E0E0E0;
+}
+.dxucProgressBar_MetropolisBlue1,
+.dxucProgressBar_MetropolisBlue1 td.dx
+{
+	color: #333333;
+}
+.dxucProgressBar_MetropolisBlue1 .dxucPBMainCell_MetropolisBlue1,
+.dxucProgressBar_MetropolisBlue1 td.dx
+{
+	padding: 0;
+}
+.dxucProgressBarIndicator_MetropolisBlue1 
+{
+	background-color: #ff400d;
+}
+/* Silverlight Plugin Link */
+.dxucSilverlightPluginLinkPanel_MetropolisBlue1 {
+	font-size: 0.75em;
+	color: #7d7d7d;
+	text-align: left;
+}
+.dxucSilverlightPluginLinkPanel_MetropolisBlue1 td {
+	padding: 0px 3px;
+	vertical-align: middle;
+}
+.dxucSilverlightPluginLinkPanel_MetropolisBlue1 a {
+	color: #0D45B7;
+}
+/* Disabled */
+.dxucDisabled_MetropolisBlue1,
+.dxucDisabled_MetropolisBlue1 a
+{
+	cursor: default;
+	color: #B8B8B8;
+}
+.dxucTextBoxDisabled_MetropolisBlue1
+{
+	border-color: #C3C3C3;
+}
+.dxucButtonDisabled_MetropolisBlue1,
+.dxucButtonDisabled_MetropolisBlue1 a
+{
+	text-decoration: none;
+}
+.dxucBrowseButtonDisabled_MetropolisBlue1
+{
+	cursor: default;
+}
+.dxucControl_MetropolisBlue1 .dxucBrowseButtonDisabled_MetropolisBlue1 a
+{
+    color: #b8b8b8;
+}
+
+/* -- ASPxSplitter -- */
+.dxsplControl_MetropolisBlue1
+{
+	font: 12px 'Source Sans Pro','Segoe UI';
+}
+.dxsplControl_MetropolisBlue1,
+.dxsplVSeparator_MetropolisBlue1,
+.dxsplHSeparator_MetropolisBlue1
+{
+	background-color: #e7e9ee;
+}
+.dxsplVSeparator_MetropolisBlue1,
+.dxsplHSeparator_MetropolisBlue1
+{
+	font-size: 0;
+	padding: 0 1px 1px 0;
+}
+.dxsplControl_MetropolisBlue1,
+.dxsplVSeparator_MetropolisBlue1,
+.dxsplHSeparator_MetropolisBlue1,
+.dxsplPane_MetropolisBlue1,
+.dxsplPaneCollapsed_MetropolisBlue1,
+.dxsplVSeparator_MetropolisBlue1,
+.dxsplHSeparator_MetropolisBlue1,
+.dxsplVSeparatorCollapsed_MetropolisBlue1,
+.dxsplHSeparatorCollapsed_MetropolisBlue1
+{
+}
+.dxsplPane_MetropolisBlue1,
+.dxsplPaneCollapsed_MetropolisBlue1
+{
+	background-color: white;
+}
+.dxsplPaneCollapsed_MetropolisBlue1
+{
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+}
+.dxsplVSeparatorHover_MetropolisBlue1
+{
+	cursor: w-resize;
+}
+.dxsplHSeparatorHover_MetropolisBlue1
+{
+	cursor: n-resize;
+}
+.dxsplVSeparatorCollapsed_MetropolisBlue1
+{
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+}
+.dxsplHSeparatorCollapsed_MetropolisBlue1
+{
+	border-left-width: 1px;
+	border-right-width: 1px;
+}
+.dxsplVSeparatorCollapsed_MetropolisBlue1,
+.dxsplHSeparatorCollapsed_MetropolisBlue1
+{
+	cursor: default!important;
+}
+.dxsplVSeparatorButton_MetropolisBlue1
+{
+	cursor: pointer;
+	padding: 5px 3px 5px 2px;
+}
+.dxsplHSeparatorButton_MetropolisBlue1
+{
+	cursor: pointer;
+	padding: 2px 5px 3px;
+}
+.dxsplDisabled_MetropolisBlue1 .dxsplVSeparatorButton_MetropolisBlue1,
+.dxsplDisabled_MetropolisBlue1 .dxsplHSeparatorButton_MetropolisBlue1
+{
+	cursor: default;
+}
+.dxsplVSeparatorHover_MetropolisBlue1,
+.dxsplHSeparatorHover_MetropolisBlue1,
+.dxsplVSeparatorButtonHover_MetropolisBlue1,
+.dxsplHSeparatorButtonHover_MetropolisBlue1
+{
+	background-color: #ff400d;
+}
+.dxsplResizingPointer_MetropolisBlue1
+{
+	background: url('splResizingPointer.gif') repeat;
+	font-size: 0;
+	line-height: 0px;
+}
+.dxsplControl_MetropolisBlue1 .dxsplLCC
+{
+	padding: 8px;
+}
+
+/* -- ASPxTreeView -- */
+.dxtvControl_MetropolisBlue1
+{
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: #7ba2b7;
+	float: left;
+}
+.dxtvControl_MetropolisBlue1 li 
+{
+	overflow-y: hidden;
+}
+.dxtvControl_MetropolisBlue1 ul 
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow-y: hidden;
+}
+
+.dxtvControl_MetropolisBlue1 a 
+{
+	color: #333333;
+	text-decoration: none;
+}
+
+.dxtvControl_MetropolisBlue1 .dxtv-ln
+{
+	vertical-align: top;
+}
+
+.dxtvControl_MetropolisBlue1 .dxtv-nd
+{
+	margin-top: 1px;
+	float: left;
+	padding: 3px 5px 4px;
+	cursor: pointer;
+	display: block;
+	text-decoration: none;
+	outline: 0 none;
+}
+
+.dxtvControl_MetropolisBlue1 .dxtv-elbNoLn,
+.dxtvControl_MetropolisBlue1 .dxtv-elb
+{
+	width: 26px;
+	height: 21px;
+	vertical-align: top;
+	float: left;
+}
+
+.dxtvControl_MetropolisBlue1 .dxtv-elb
+{
+}
+
+.dxtvControl_MetropolisBlue1 .dxtv-btn 
+{
+	margin-left: 10px;
+	margin-top: 5px;
+	cursor: pointer;
+}
+
+.dxtvControl_MetropolisBlue1 .dxtv-subnd 
+{
+	margin-left: 22px;
+}
+
+
+.dxtv-subnd:hover, .dxtv-subnd:hover A
+{
+	color: white;
+}
+.dxtv-subnd A
+{
+	color: #7ba2b7;
+}
+A.dxtv-nd
+{
+	color: #7ba2b7;
+}
+
+
+.dxtvControl_MetropolisBlue1 .dxtv-ndImg 
+{
+	margin:  0 4px 0 2px;
+	cursor: pointer;
+}
+
+.dxtvControl_MetropolisBlue1 .dxtv-ndTxt 
+{
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.dxtvControl_MetropolisBlue1 .dxtv-ndChk
+{
+	margin:  0 6px 0 2px;
+}
+  
+.dxtvControl_MetropolisBlue1 .dxtv-ndTmpl
+{
+	float: left;
+	white-space: nowrap;
+}
+
+.dxtvControl_MetropolisBlue1 .dxtv-ndSel
+{
+	background-color: #F53E0D;
+	color:white;
+	cursor: default;
+}
+
+.dxtvControl_MetropolisBlue1 .dxtv-ndHov
+{
+	background-color: #ff400d;
+	cursor: pointer;
+	color: #FFFFFF;
+}
+
+.dxtvControl_MetropolisBlue1 .dxtv-clr,
+.dxtvControl_MetropolisBlue1 .dxtv-clrIE7
+{
+	clear: both;
+	font-size: 0;
+	height: 0;
+	visibility: hidden;
+	width: 0;
+	display: block;
+} 
+
+.dxtvControl_MetropolisBlue1 .dxtv-clr
+{
+	line-height: 0;
+}
+
+.dxtvControl_MetropolisBlue1.dxtvRtl,
+.dxtvControl_MetropolisBlue1.dxtvRtl .dxtv-nd, 
+.dxtvControl_MetropolisBlue1.dxtvRtl .dxtv-elbNoLn,
+.dxtvControl_MetropolisBlue1.dxtvRtl .dxtv-elb,
+.dxtvControl_MetropolisBlue1.dxtvRtl .dxtv-ndTmpl
+{
+	float: right;
+}
+
+.dxtvControl_MetropolisBlue1.dxtvRtl .dxtv-elb,
+.dxtvControl_MetropolisBlue1.dxtvRtl .dxtv-ln 
+{
+	background-position: right top;
+}
+
+.dxtvControl_MetropolisBlue1.dxtvRtl .dxtv-elb
+{
+	background-image: url('tvElbowRtl.gif');
+}
+
+.dxtvControl_MetropolisBlue1.dxtvRtl .dxtv-btn 
+{
+	margin: 5px 10px 0 0;
+}
+
+.dxtvControl_MetropolisBlue1.dxtvRtl .dxtv-subnd 
+{
+	margin: 0 22px 0 0;
+}
+
+.dxtvControl_MetropolisBlue1.dxtvRtl .dxtv-ndImg 
+{
+    margin: 0 2px 0 4px;
+}
+
+.dxtvControl_MetropolisBlue1.dxtvRtl.OperaRtlFix .dxtv-btn
+{
+	margin: 5px 10px 0 0;
+}
+
+.dxtvControl_MetropolisBlue1.dxtvRtl .dxtv-ndChk
+{
+	margin: 0 2px 0 6px;
+}
+
+.dxtvControl_MetropolisBlue1.dxtvRtl.OperaRtlFix .dxtv-subnd 
+{
+	overflow-x: hidden;
+}
+
+.dxtvDisabled_MetropolisBlue1,
+.dxtvControl_MetropolisBlue1 .dxtvDisabled_MetropolisBlue1,
+.dxtvDisabled_MetropolisBlue1 a,
+.dxtvDisabled_MetropolisBlue1 .dxtv-ndTxt,
+.dxtvDisabled_MetropolisBlue1 .dxtv-ndImg,
+.dxtvDisabled_MetropolisBlue1 .dxtv-btn,
+.dxtvDisabled_MetropolisBlue1 .dxtv-nd
+{
+	color: #7ba2b7;
+	cursor: default;
+}
+
+/* ASPxFileManager */
+.dxfmControl_MetropolisBlue1
+{
+	font: 12px 'Source Sans Pro','Segoe UI';
+	outline: 0px;
+	color: #333333;
+}
+.dxfmDisabled_MetropolisBlue1
+{
+	color: #b8b8b8;
+}
+
+/* FileManager - Splitter */
+.dxfmControl_MetropolisBlue1 .dxsplControl_MetropolisBlue1
+{
+	border: 1px solid silver;
+}
+.dxfmControl_MetropolisBlue1 .dxsplPane_MetropolisBlue1
+{
+	border-width: 0px;
+	background-color: White;
+}
+.dxfmControl_MetropolisBlue1 .dxsplLCC {
+	outline-width: 0px;
+	padding: 4px;
+}
+.dxfmControl_MetropolisBlue1.dxfm-dst .dxsplVSeparator_MetropolisBlue1
+{
+	width: 3px;
+	background: url('fmSplitterSeparator.gif') repeat-y right;
+	border-width: 0px;
+}
+.dxfmControl_MetropolisBlue1.dxfm-dst.dxfm-rtl .dxsplVSeparator_MetropolisBlue1
+{
+	background-position-x: left;
+}
+.dxfmControl_MetropolisBlue1.dxfm-tch .dxsplVSeparator_MetropolisBlue1
+{
+	border-width: 0 1px;
+	border-color: #E0E0E0;
+}
+.dxfmControl_MetropolisBlue1 .dxsplHSeparator_MetropolisBlue1
+{
+	border-width: 0px;
+	background-color: #E0E0E0;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-filePane .dxsplLCC
+{
+    padding: 0;
+}
+
+/* FileManager - TreeView */
+.dxfmControl_MetropolisBlue1 .dxtvControl_MetropolisBlue1 
+{
+	margin-left: -5px;
+}
+.dxfmControl_MetropolisBlue1 .dxtvControl_MetropolisBlue1 .dxtv-nd.dxfm-folderSI
+{
+	border: 1px dotted #888888;
+	padding: 2px 4px 3px;
+}
+
+.dxtv-nd:hover
+{color:white;
+}
+
+/* FileManager - File */
+.dxfmControl_MetropolisBlue1 div.dxfm-file 
+{
+	float: left;
+	text-align: center;
+	cursor: pointer;
+	white-space: nowrap;
+	padding: 6px;
+	margin: 4px;
+}
+.dxfmControl_MetropolisBlue1.dxfm-rtl div.dxfm-file 
+{
+	float: right;
+}
+.dxfmDisabled_MetropolisBlue1 .dxfm-file
+{
+	cursor: default;
+}
+.dxfmControl_MetropolisBlue1 div.dxfm-fileSI
+{
+	border: 1px dotted #888888;
+}
+.dxfmControl_MetropolisBlue1 div.dxfm-fileSA
+{
+	background-color: #e0e0e0;
+}
+.dxfmControl_MetropolisBlue1 div.dxfm-fileH,
+.dxfmControl_MetropolisBlue1 div.dxfm-fileF
+{
+	background-color: #ff400d;
+	color: #FFFFFF;
+}
+.dxfmControl_MetropolisBlue1 td.dxgv .dxfm-fileName
+{
+    padding: 2px 0;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-file .dxfm-highlight
+{
+	background-color: #CFCFCF;
+	background-repeat: repeat;
+	color: #333333;
+	font-weight: bold;
+}
+.dxfmControl_MetropolisBlue1 .fileContainer
+{
+    margin: 4px;
+}
+
+/* FileManager - GridView */
+.dxfmControl_MetropolisBlue1 .dxgvControl_MetropolisBlue1
+{
+    outline: none;
+}
+.dxfmControl_MetropolisBlue1 .dxgvTable_MetropolisBlue1 td.dxgv 
+{
+    border-bottom-width: 0px;
+}
+.dxfmControl_MetropolisBlue1 .dxgvTable_MetropolisBlue1 tr.dxfm-fileSA
+{
+    background-color: #ff400d;
+    color: White;
+}     
+.dxfmControl_MetropolisBlue1 .dxgvTable_MetropolisBlue1 tr.dxfm-fileSI
+{
+    background-color: #999999;
+    color: White;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-fileF.dxgvFocusedRow_MetropolisBlue1
+{
+    background-color: #ff400d;
+    color: White;
+}
+.dxfmControl_MetropolisBlue1 .dxgvTable_MetropolisBlue1 tr.dxfm-fileH
+{
+    background-color: #E3E3E3;
+    color: Black;
+}
+.dxfmControl_MetropolisBlue1 tr.dxgvFocusedRow_MetropolisBlue1
+{
+    background: White;
+    color: Black;
+}
+.dxfm-file .dxgv.dxgvCommandColumn_MetropolisBlue1
+{
+	text-overflow: clip;
+}
+
+/* FileManager - Toolbar */
+.dxfmControl_MetropolisBlue1 .dxfm-toolbar
+{
+	background-color: #FAFAFA;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-toolbar.dxsplPane_MetropolisBlue1 table.dxfm
+{
+	width: 100%;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-toolbar.dxsplPane_MetropolisBlue1 .dxfm-filter
+{
+	text-align: right;
+	vertical-align: top;
+	white-space: nowrap;
+}
+.dxfmControl_MetropolisBlue1.dxfm-rtl .dxfm-toolbar.dxsplPane_MetropolisBlue1 .dxfm-filter 
+{
+	text-align: left;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-toolbar.dxsplPane_MetropolisBlue1 .dxfm-filter input,
+.dxfmControl_MetropolisBlue1 .dxfm-toolbar.dxsplPane_MetropolisBlue1 .dxfm-path input
+{
+	border: 1px solid silver;
+}
+
+.dxgvHeader_MetropolisBlue1.dxfmGridHeader
+{
+	background: White;
+}
+
+/* FileManager - Toolbar - Light */
+.dxfmControl_MetropolisBlue1 .dxfm-toolbar .dxsplLCC 
+{
+	padding: 5px;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-toolbar .dxmLite_MetropolisBlue1 .dxm-main
+{
+	margin-top: 0px;
+	border-width: 0px;
+	background: transparent none;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-toolbar .dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-separator 
+{
+	padding: 0px 11px;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-toolbar .dxmLite_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-separator b
+{
+	background-color: #e0e0e0;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-toolbar .dxmLite_MetropolisBlue1 .dxfm-path 
+{
+	padding-left: 1px;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-toolbar .dxmLite_MetropolisBlue1 .dxfm-path input
+{
+	margin: 3px 8px 0px 4px;
+}
+.dxfmControl_MetropolisBlue1.dxfm-rtl .dxfm-toolbar .dxmLite_MetropolisBlue1 .dxfm-path input 
+{
+	margin: 3px 4px 0px 8px;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-toolbar .dxmLite_MetropolisBlue1 .dxm-item .dxm-content 
+{
+	padding-top: 4px;
+}
+
+/* FileManager - UploadPanel */
+.dxfmControl_MetropolisBlue1 .dxfm-uploadPanel
+{
+	background-color: #FAFAFA;
+	text-align: right;
+}
+.dxfmControl_MetropolisBlue1.dxfm-rtl .dxfm-uploadPanel
+{
+	text-align: left;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-uploadPanel.dxsplPane_MetropolisBlue1 table.dxfm-uploadPanelTable
+{
+	display: inline-block;
+	margin-right: 5px;
+	margin-top: 1px;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-uploadPanel.dxsplPane_MetropolisBlue1 table.dxfm-uploadPanelTable .dxucControl_MetropolisBlue1 
+{
+	margin-top: 4px;
+	margin-right: 10px;
+}
+.dxfmControl_MetropolisBlue1.dxfm-rtl .dxfm-uploadPanel.dxsplPane_MetropolisBlue1 table.dxfm-uploadPanelTable .dxucControl_MetropolisBlue1 
+{
+	margin-right: 0px;
+	margin-left: 10px;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-uploadPanel.dxsplPane_MetropolisBlue1 table.dxfm-uploadPanelTable td.dxfm-uploadPanelTableBCell
+{
+    padding: 7px 0 0;
+    vertical-align: top;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-uploadPanel.dxsplPane_MetropolisBlue1 table.dxfm-uploadPanelTable td.dxfm-uploadPanelTableBCell a 
+{
+	color: #ff400d;
+	text-decoration: underline;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-uploadPanel.dxsplPane_MetropolisBlue1 table.dxfm-uploadPanelTable td.dxfm-uploadPanelTableBCell a.dxfm-uploadDisable
+{
+	color: #777777;
+	text-decoration: none;
+	cursor: default;
+}
+
+.dxfmControl_MetropolisBlue1 .dxfm-uploadPanel.dxsplPane_MetropolisBlue1 .dxucTextBox_MetropolisBlue1 {
+	padding: 0px 2px;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-uploadPanel.dxsplPane_MetropolisBlue1 .dxucBrowseButton_MetropolisBlue1 {
+	padding: 2px 8px 3px;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-uploadPanel.dxsplPane_MetropolisBlue1 .dxucBrowseButton_MetropolisBlue1.dxbf {
+    padding: 2px 7px 3px;
+}
+.dxfmControl_MetropolisBlue1 .dxfm-uploadPanel.dxsplPane_MetropolisBlue1 .dxucSilverlightPluginLinkPanel_MetropolisBlue1 {
+	margin-top: -8px;
+}
+
+/* FileManager - Create, Rename input */
+.dxfmControl_MetropolisBlue1 .dxfm-cInput,
+.dxfmControl_MetropolisBlue1 .dxfm-rInput
+{
+	border: 1px solid silver;
+}
+
+/* FileManager - Move PopupControl */
+.dxfmControl_MetropolisBlue1 .dxpc-content 
+{
+	padding: 5px 0px 0px;
+	background-color: White;
+}
+.dxfmControl_MetropolisBlue1 .dxpc-content .dxfm-mpFoldersC 
+{
+	overflow: auto;
+	padding: 0px 0px 20px 5px;
+}
+.dxfmControl_MetropolisBlue1 .dxpc-content .dxfm-mpButtonC
+{
+	margin-top: 5px;
+	background-color: #F3F3F3;
+	border-top: 1px solid #E0E0E0;
+	text-align: right;
+	padding: 10px 15px 10px 10px;
+}
+.dxfmControl_MetropolisBlue1 .dxpc-content .dxfm-mpButtonC a 
+{
+	margin-left: 12px;
+	color: #ff400d;
+}
+
+/* ASPxImageSlider */
+.dxisControl_MetropolisBlue1
+{
+    width: 660px;
+    height: 505px;
+    outline: 0;
+    user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+
+    font: 12px 'Source Sans Pro','Segoe UI';
+}
+.dxisControl_MetropolisBlue1 .dxis-playPauseBtnWrapper
+{
+    top: 0;
+    right: 0;
+    padding: 6px 12px 6px 14px;
+    position: absolute;
+    background-color: #333333;
+    background-color: rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+}
+*[dir="rtl"].dxisControl_MetropolisBlue1 .dxis-playPauseBtnWrapper {
+    right: auto;
+    left: 0;
+}
+.dxisControl_MetropolisBlue1 > .dxis-passePartout
+{
+    position: relative;
+    background-color: #000000;
+    width: 100%;
+    height:100%;
+}
+.dxisControl_MetropolisBlue1 .dxis-imageArea
+{
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+.dxisControl_MetropolisBlue1 .dxis-slidePanel,
+.dxisControl_MetropolisBlue1 .dxis-nbSlidePanel,
+.dxisControl_MetropolisBlue1 .dxis-nbSlidePanelWrapper
+{
+    position: absolute;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbSlidePanelWrapper
+{
+    overflow: hidden;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbTop,
+.dxisControl_MetropolisBlue1 .dxis-nbBottom,
+.dxisControl_MetropolisBlue1 .dxis-nbLeft,
+.dxisControl_MetropolisBlue1 .dxis-nbRight,
+.dxisControl_MetropolisBlue1 .dxis-nbDotsBottom,
+.dxisControl_MetropolisBlue1 .dxis-nbDotsTop,
+.dxisControl_MetropolisBlue1 .dxis-nbDotsLeft,
+.dxisControl_MetropolisBlue1 .dxis-nbDotsRight
+{
+    position: relative;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbTop
+{
+    padding-bottom: 5px;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbBottom
+{
+    padding-top: 5px;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbLeft
+{
+    padding-right: 5px;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbRight
+{
+    padding-left: 5px;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbDotsBottom,
+.dxisControl_MetropolisBlue1 .dxis-nbDotsTop
+{
+    padding: 20px 0;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbDotsLeft
+{
+    padding-right: 20px;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbDotsRight
+{
+    padding-left: 20px;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbLeft,
+.dxisControl_MetropolisBlue1 .dxis-nbRight,
+.dxisControl_MetropolisBlue1 .dxis-nbDotsLeft,
+.dxisControl_MetropolisBlue1 .dxis-nbDotsRight
+{
+    float: left;
+}
+.dxisControl_MetropolisBlue1 .dxis-item,
+.dxisControl_MetropolisBlue1 .dxis-nbItem
+{
+    background-image: url('isLoading.gif');
+    background-repeat: no-repeat;
+    background-position:center center;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbItem .dxis-nbHoverItem
+{
+    display: none;
+    position: absolute;
+    border: 2px solid #9f9f9f;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbItem .dxis-nbHoverItem > div
+{
+    border: 2px solid #ffffff;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbItem.dxis-hover .dxis-nbHoverItem
+{
+    display: block;
+}
+.dxisControl_MetropolisBlue1 .dxis-item,
+.dxisControl_MetropolisBlue1 .dxis-nbItem,
+.dxisControl_MetropolisBlue1 .dxis-nbDotItem
+{
+    position: absolute;
+    overflow: hidden;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbItem,
+.dxisControl_MetropolisBlue1 .dxis-nbDotItem
+{
+    cursor: pointer;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbDotItemSelected,
+.dxisControl_MetropolisBlue1 .dxis-nbDotItemDisabled
+{
+    cursor: default;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbItem
+{
+    width: 90px;
+    height: 60px;
+    background-color: black;
+}
+.dxisControl_MetropolisBlue1 .dxis-itemTextArea
+{
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    cursor: default;
+    padding: 22px;
+    color: white;
+    background-color: #333333;
+    background-color: rgba(0, 0, 0, 0.75);
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.dxisControl_MetropolisBlue1 .dxis-nbSelectedItem
+{
+    z-index: 1;
+    cursor: default;
+    position: absolute;
+    border: 2px solid black;
+    background-color: rgba(255, 255, 255, 0.00);
+}
+.dxisControl_MetropolisBlue1 .dxis-nbSelectedItem > div
+{
+    border: 2px solid White;
+}
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertWrapper,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertOutsideWrapper,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertWrapper,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertOutsideWrapper,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorWrapper,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorOutsideWrapper,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorWrapper,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorOutsideWrapper
+{
+    cursor: pointer;
+    z-index: 1;
+    position: absolute;
+    background-color: #333333;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorWrapperDisabled,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorOutsideWrapperDisabled,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorWrapperDisabled,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorOutsideWrapperDisabled,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertWrapperDisabled,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertOutsideWrapperDisabled,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertWrapperDisabled,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertOutsideWrapperDisabled
+{
+    cursor: default;
+}
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorWrapper,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorOutsideWrapper
+{
+    left: 0px;
+}
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorWrapper,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorOutsideWrapper
+{
+    right: 0px;
+}
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertWrapper,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertOutsideWrapper
+{
+    top: 0px;
+}
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertWrapper,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertOutsideWrapper
+{
+    bottom: 0px;
+}
+.dxisControl_MetropolisBlue1 > .dxis-passePartout > .dxis-prevBtnHorWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-passePartout > .dxis-prevBtnHorOutsideWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-passePartout > .dxis-nextBtnHorWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-passePartout > .dxis-nextBtnHorOutsideWrapper
+{
+    top: 50%;
+    margin-top: -32px;
+}
+.dxisControl_MetropolisBlue1 > .dxis-passePartout > .dxis-prevBtnVertWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-passePartout > .dxis-prevBtnVertOutsideWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-passePartout > .dxis-nextBtnVertWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-passePartout > .dxis-nextBtnVertOutsideWrapper
+{
+    left: 50%;
+    margin-left: -30px;
+}
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHor
+{
+    margin: 16px 12px 16px 8px;
+}
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHor
+{
+    margin: 16px 8px 16px 12px;
+}
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVert
+{
+    margin: 8px 16px 12px 16px;
+}
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVert
+{
+    margin: 12px 16px 8px 16px;
+}
+.dxisControl_MetropolisBlue1 > .dxis-nbBottom > .dxis-prevBtnHorWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-nbBottom > .dxis-prevBtnHorOutsideWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-nbBottom > .dxis-nextBtnHorWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-nbBottom > .dxis-nextBtnHorOutsideWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-nbTop > .dxis-prevBtnHorWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-nbTop > .dxis-prevBtnHorOutsideWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-nbTop > .dxis-nextBtnHorWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-nbTop > .dxis-nextBtnHorOutsideWrapper
+{
+    height: inherit;
+}
+.dxisControl_MetropolisBlue1 > .dxis-nbLeft > .dxis-prevBtnVertWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-nbLeft > .dxis-prevBtnVertOutsideWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-nbLeft > .dxis-nextBtnVertWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-nbLeft > .dxis-nextBtnVertOutsideWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-nbRight > .dxis-prevBtnVertWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-nbRight > .dxis-prevBtnVertOutsideWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-nbRight > .dxis-nextBtnVertWrapper,
+.dxisControl_MetropolisBlue1 > .dxis-nbRight > .dxis-nextBtnVertOutsideWrapper
+{
+    width: inherit;
+}
+.dxisControl_MetropolisBlue1 .dxis-prevPageBtnHor,
+.dxisControl_MetropolisBlue1 .dxis-prevPageBtnHorOutside,
+.dxisControl_MetropolisBlue1 .dxis-nextPageBtnHor,
+.dxisControl_MetropolisBlue1 .dxis-nextPageBtnHorOutside
+{
+    top: 50%;
+    position: relative;
+    margin: -11px 7px 0 7px;
+}
+.dxisControl_MetropolisBlue1 .dxis-prevPageBtnVert,
+.dxisControl_MetropolisBlue1 .dxis-prevPageBtnVertOutside,
+.dxisControl_MetropolisBlue1 .dxis-nextPageBtnVert,
+.dxisControl_MetropolisBlue1 .dxis-nextPageBtnVertOutside
+{
+    margin: 7px auto 6px;
+}
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorWrapperPressed > .dxis-prevBtnHor,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorOutsideWrapperPressed > .dxis-prevBtnHor,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorWrapperPressed > .dxis-nextBtnHor,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorOutsideWrapperPressed > .dxis-nextBtnHor,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorWrapperPressed > .dxis-prevPageBtnHor,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorWrapperPressed > .dxis-prevPageBtnHorOutside,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorOutsideWrapperPressed > .dxis-prevPageBtnHor,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorOutsideWrapperPressed > .dxis-prevPageBtnHorOutside,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorWrapperPressed > .dxis-nextPageBtnHor,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorWrapperPressed > .dxis-nextPageBtnHorOutside,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorOutsideWrapperPressed > .dxis-nextPageBtnHor,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorOutsideWrapperPressed > .dxis-nextPageBtnHorOutside,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertWrapperPressed > .dxis-prevBtnVert,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertOutsideWrapperPressed > .dxis-prevBtnVert,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertWrapperPressed > .dxis-nextBtnVert,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertOutsideWrapperPressed > .dxis-nextBtnVert,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertWrapperPressed > .dxis-prevPageBtnVert,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertWrapperPressed > .dxis-prevPageBtnVertOutside,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertOutsideWrapperPressed > .dxis-prevPageBtnVert,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertOutsideWrapperPressed > .dxis-prevPageBtnVertOutside,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertWrapperPressed > .dxis-nextPageBtnVert,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertWrapperPressed > .dxis-nextPageBtnVertOutside,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertOutsideWrapperPressed > .dxis-nextPageBtnVert,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertOutsideWrapperPressed > .dxis-nextPageBtnVertOutside,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertPressed,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertPressed,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorPressed,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorPressed,
+.dxisControl_MetropolisBlue1 .dxis-prevPageBtnVertPressed,
+.dxisControl_MetropolisBlue1 .dxis-prevPageBtnVertOutsidePressed,
+.dxisControl_MetropolisBlue1 .dxis-nextPageBtnVertPressed,
+.dxisControl_MetropolisBlue1 .dxis-nextPageBtnVertOutsidePressed,
+.dxisControl_MetropolisBlue1 .dxis-prevPageBtnHorPressed,
+.dxisControl_MetropolisBlue1 .dxis-prevPageBtnHorOutsidePressed,
+.dxisControl_MetropolisBlue1 .dxis-nextPageBtnHorPressed,
+.dxisControl_MetropolisBlue1 .dxis-nextPageBtnHorOutsidePressed,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertDisabled,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertDisabled,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorDisabled,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorDisabled,
+.dxisControl_MetropolisBlue1 .dxis-prevPageBtnVertDisabled,
+.dxisControl_MetropolisBlue1 .dxis-prevPageBtnVertOutsideDisabled,
+.dxisControl_MetropolisBlue1 .dxis-nextPageBtnVertDisabled,
+.dxisControl_MetropolisBlue1 .dxis-nextPageBtnVertOutsideDisabled,
+.dxisControl_MetropolisBlue1 .dxis-prevPageBtnHorDisabled,
+.dxisControl_MetropolisBlue1 .dxis-prevPageBtnHorOutsideDisabled,
+.dxisControl_MetropolisBlue1 .dxis-nextPageBtnHorDisabled,
+.dxisControl_MetropolisBlue1 .dxis-nextPageBtnHorOutsideDisabled
+{
+    opacity: 0.25;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Style=0, Opacity=25);
+}
+.dxisControl_MetropolisBlue1 .dxis-nextBtnHorOutsideWrapper,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnHorOutsideWrapper,
+.dxisControl_MetropolisBlue1 .dxis-nextBtnVertOutsideWrapper,
+.dxisControl_MetropolisBlue1 .dxis-prevBtnVertOutsideWrapper {
+	background-color: transparent;
+}
+.dxisControl_MetropolisBlue1 .dxis-nextPageBtnHorOutside,
+.dxisControl_MetropolisBlue1 .dxis-prevPageBtnHorOutside {
+	margin-top: -14px;
+}
+/* ASPxImageGallery */
+.dxigControl_MetropolisBlue1
+{
+    font: 12px 'Source Sans Pro','Segoe UI';
+	color: #333333;
+}
+.dxigControl_MetropolisBlue1 td.dxigCtrl
+{
+	padding: 12px 40px;
+}
+.dxigContent_MetropolisBlue1
+{
+    border-top: 1px solid Silver;
+	border-bottom: 1px solid Silver;
+    padding: 6px 0;
+}
+.dxigEmptyData_MetropolisBlue1
+{
+    color: Gray;
+}
+.dxigEmptyItem_MetropolisBlue1
+{
+	text-align: left;
+	vertical-align: top;
+}
+.dxigFlowItem_MetropolisBlue1
+{
+    float: left;
+}
+.dxigItem_MetropolisBlue1
+{
+    background-repeat: no-repeat;
+    background-position:center center;
+    background-image: url('igLoading.gif');
+}
+.dxigItem_MetropolisBlue1 a
+{
+    outline: 0;
+}
+.dxigItem_MetropolisBlue1 a > img
+{
+    display: block;
+}
+.dxigItem_MetropolisBlue1 .dxig-thumbnailBorder
+{
+    top: 0;
+    display: none;
+    position: absolute;
+    border: 1px solid gray;
+    border: 1px solid rgba(0, 0, 0, 0.20);
+}
+.dxigItem_MetropolisBlue1 .dxig-thumbnailWrapper,
+.dxigFlowItem_MetropolisBlue1
+{
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    position: relative;
+}
+.dxigControl_MetropolisBlue1 .dxig-thumbnailTextArea
+{
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    padding: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: white;
+    background-color: #333333;
+    background-color: rgba(0, 0, 0, 0.75);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    display: none;
+}
+.dxigControl_MetropolisBlue1 .dxpcLite_MetropolisBlue1 .dxpc-mainDiv,
+.dxigControl_MetropolisBlue1 .dxpcLite_MetropolisBlue1 .dxpc-contentWrapper
+{
+    border: 0;
+    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+.dxigControl_MetropolisBlue1 .dxpcLite_MetropolisBlue1 .dxpc-content
+{
+    padding: 0;
+}
+.dxigControl_MetropolisBlue1 .dxig-imageSliderWrapper
+{
+    overflow: hidden;
+    padding: 50px 65px;
+}
+.dxigControl_MetropolisBlue1.dxTouchUI .dxig-imageSliderWrapper
+{
+    padding: 0;
+}
+.dxigControl_MetropolisBlue1 .dxig-imageSliderWrapper .dxisControl_MetropolisBlue1 .dxis-item > img
+{
+    box-shadow: 0 0 50px rgb(0,0,0);
+    -moz-box-shadow: 0 0 50px rgb(0,0,0);
+    -webkit-box-shadow: 0 0 50px rgb(0,0,0);
+}
+.dxigControl_MetropolisBlue1 .dxig-bottomPanel
+{
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+}
+.dxigControl_MetropolisBlue1 .dxig-bottomPanel > .dxig-overflowPanel
+{
+    overflow: hidden;
+}
+.dxigControl_MetropolisBlue1 .dxig-bottomPanel .dxisControl_MetropolisBlue1
+{
+    position: relative;
+}
+.dxigControl_MetropolisBlue1 .dxisControl_MetropolisBlue1 > .dxis-passePartout
+{
+    background-color: transparent;
+}
+.dxigControl_MetropolisBlue1 .dxisControl_MetropolisBlue1 .dxis-nbBottom
+{
+    padding: 4px 4px 0 4px;
+}
+.dxigControl_MetropolisBlue1 .dxig-bottomPanel .dxis-nbBottom > .dxis-prevBtnHorWrapper,
+.dxigControl_MetropolisBlue1 .dxig-bottomPanel .dxis-nbBottom > .dxis-nextBtnHorWrapper
+{
+    width: 43px;
+    background: url('igNavBtnsBack.png') repeat-y;
+}
+.dxigControl_MetropolisBlue1 .dxig-bottomPanel .dxis-nbBottom > .dxis-prevBtnHorWrapper
+{
+    background-position: 0 0;
+}
+.dxigControl_MetropolisBlue1 .dxig-bottomPanel .dxis-nbBottom > .dxis-nextBtnHorWrapper
+{
+    background-position: -39px 0;
+}
+.dxigControl_MetropolisBlue1 .dxig-bottomPanel .dxis-nbBottom > .dxis-prevBtnHorWrapperDisabled,
+.dxigControl_MetropolisBlue1 .dxig-bottomPanel .dxis-nbBottom > .dxis-nextBtnHorWrapperDisabled
+{
+    display: none;
+}
+.dxigControl_MetropolisBlue1 .dxig-bottomPanel .dxis-nbBottom > .dxis-prevBtnHorWrapper .dxis-prevPageBtnHor,
+.dxigControl_MetropolisBlue1 .dxig-bottomPanel .dxis-nbBottom > .dxis-nextBtnHorWrapper .dxis-nextPageBtnHor
+{
+    position: absolute;
+}
+.dxigControl_MetropolisBlue1 .dxig-bottomPanel .dxis-nbBottom > .dxis-prevBtnHorWrapper .dxis-prevPageBtnHor
+{
+}
+.dxigControl_MetropolisBlue1 .dxig-bottomPanel .dxis-nbBottom > .dxis-nextBtnHorWrapper .dxis-nextPageBtnHor
+{
+    right: 0;
+}
+.dxigControl_MetropolisBlue1 .dxig-fullscreenViewerTextArea
+{
+    z-index: 1;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+.dxigControl_MetropolisBlue1 .dxig-prevButtonArea,
+.dxigControl_MetropolisBlue1 .dxig-nextButtonArea
+{
+    top: 0;
+    position: absolute;
+}
+.dxigControl_MetropolisBlue1 .dxig-prevButtonArea
+{
+    left: 0;
+}
+.dxigControl_MetropolisBlue1 .dxig-nextButtonArea
+{
+    right: 0;
+}
+.dxigControl_MetropolisBlue1 .dxig-prevButton,
+.dxigControl_MetropolisBlue1 .dxig-nextButton
+{
+    top: 50%;
+    cursor: pointer;
+    position: relative;
+    margin: -32px 11px 0;
+}
+.dxigControl_MetropolisBlue1 .dxig-prevButtonDisabled,
+.dxigControl_MetropolisBlue1 .dxig-nextButtonDisabled
+{
+    cursor: auto;
+    opacity: 0.5;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Style=0, Opacity=50);
+}
+.dxigControl_MetropolisBlue1 .dxig-closeButtonWrapper,
+.dxigControl_MetropolisBlue1 .dxig-playPauseButtonWrapper
+{
+    padding: 15px;
+    cursor: pointer;
+    position: absolute;
+}
+.dxigControl_MetropolisBlue1 .dxig-closeButtonWrapper
+{
+    top: 4px;
+    right: 7px;
+}
+.dxigControl_MetropolisBlue1 .dxig-closeButtonWrapper > .dxig-closeButton
+{
+    z-index: 1;
+}
+.dxigControl_MetropolisBlue1 .dxig-playPauseButtonWrapper
+{
+    top: 2px;
+    right: 48px;
+}
+*[dir="rtl"].dxigControl_MetropolisBlue1 .dxig-closeButtonWrapper {
+    left: 7px;
+    right: auto;
+}
+*[dir="rtl"].dxigControl_MetropolisBlue1 .dxig-playPauseButtonWrapper {
+    left: 48px;
+    right: auto;
+}
+.dxigControl_MetropolisBlue1 .dxisControl_MetropolisBlue1 .dxis-nbBottom,
+.dxigControl_MetropolisBlue1 .dxig-fullscreenViewerTextArea
+{
+    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.dxigControl_MetropolisBlue1 .dxig-overflowPanel .dxig-navigationBarMarker
+{
+    left: 50%;
+    bottom: 0;
+    margin-left: -10px;
+    position: absolute;
+    opacity: 0.7;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Style=0, Opacity=70);
+}
+.dxigControl_MetropolisBlue1 .dxisControl_MetropolisBlue1 .dxis-nbSelectedItem
+{
+    border: 2px solid #fff;
+}
+.dxigControl_MetropolisBlue1 .dxisControl_MetropolisBlue1 .dxis-nbHoverItem
+{
+    border: 2px solid #9F9F9F
+}
+.dxigControl_MetropolisBlue1 .dxisControl_MetropolisBlue1 .dxis-nbSelectedItem > div,
+.dxigControl_MetropolisBlue1 .dxisControl_MetropolisBlue1 .dxis-nbHoverItem > div
+{
+    border: 2px solid #000;
+}
+.dxigEPContainer_MetropolisBlue1
+{
+    height: 50px;
+	text-align: center;
+}
+.dxigEPContainer_MetropolisBlue1 div
+{
+	padding-top: 16px;
+}
+.dxigEPContainer_MetropolisBlue1 a
+{
+	color: #ff400d;
+}
+
+/* Removes flicking in iOS Safari*/
+.dxfmControl_MetropolisBlue1,
+.dxnbGroupHeader_MetropolisBlue1,
+.dxnbGroupHeaderCollapsed_MetropolisBlue1,
+.dxnbGroupContent_MetropolisBlue1 > TABLE > TBODY > TR,
+.dxtcTab_MetropolisBlue1,
+.dxtcActiveTab_MetropolisBlue1,
+.dxtvControl_MetropolisBlue1 .dxtv-nd
+{
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/* Form Layout */
+.dxflFormLayout_MetropolisBlue1{
+    display: table;
+    font: 12px 'Source Sans Pro','Segoe UI';
+	color: #333;
+}
+
+.dxflButtonItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1{ padding-top: 5px; }
+.dxflButtonItemSys .dxflVAMSys.dxflCaptionCell_MetropolisBlue1{ padding-bottom: 1px; }
+.dxflTextItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1{ padding-top: 0px; }
+.dxflTextEditItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1{ padding-top: 2px; }
+.dxflCheckBoxItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1{ padding-top: 3px; }
+.dxflRadioButtonItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1{ padding-top: 4px; }
+.dxflCheckBoxListItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1{ padding-top: 11px; }
+.dxflRadioButtonListItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1{ padding-top: 12px; }
+.dxflListBoxItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1{ padding-top: 5px; }
+.dxflTrackBarItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1{ padding-top: 2px; }
+.dxflProgressBarItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1{ padding-top: 3px; }
+.dxflMemoItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1{ padding-top: 4px; }
+.dxflCustomItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1{ padding-top: 5px; padding-bottom: 5px; }
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {   /*Chrome*/
+    .dxflTextEditItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1 {
+        padding-top: 3px;
+    }
+}
+
+.dxflTextEditItemSys.dxflSafariItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1 {   /*Safari*/
+    padding-top: 2px;
+}
+
+noindex:-o-prefocus, body:first-of-type .dxflTextEditItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1 {   /*Opera*/
+    padding-top: 3px;
+}
+
+html[xmlns*=""] .dxflMemoItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1 {   /*IE 8*/
+    padding-top: 3px;
+}
+
+.dxflMemoItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1 {   /*IE 7*/
+    *padding-top: 3px;
+}
+
+@-moz-document url-prefix() {   /*Firefox*/
+    .dxflMemoItemSys .dxflVATSys.dxflCaptionCell_MetropolisBlue1 {
+        padding-top: 3px;
+    }
+}
+
+.dxflCLTSys .dxflCaptionCell_MetropolisBlue1,
+.dxflCLBSys .dxflCaptionCell_MetropolisBlue1{
+    padding: 3px 0;
+}
+
+.dxflCLLSys .dxflCaptionCell_MetropolisBlue1,
+*[dir="rtl"].dxflFormLayout_MetropolisBlue1.dxflCLRSys .dxflCaptionCell_MetropolisBlue1{
+    padding-left: 0px;
+    padding-right: 6px;
+}
+.dxflCLRSys .dxflCaptionCell_MetropolisBlue1,
+*[dir="rtl"].dxflFormLayout_MetropolisBlue1.dxflCLLSys .dxflCaptionCell_MetropolisBlue1{
+    padding-right: 0px;
+    padding-left: 6px;
+}
+.dxflCaptionCell_MetropolisBlue1{
+    white-space: nowrap;
+    line-height: 16px;
+    height: 100%;
+    width: 1%;
+}
+.dxflNestedControlCell_MetropolisBlue1{
+    height: 0;
+}
+
+.dxflCheckBoxItemSys.dxflItem_MetropolisBlue1 .dxichCellSys.dxeBase_MetropolisBlue1
+{
+    padding-left: 0px;
+}
+*[dir="rtl"] .dxflCheckBoxItemSys.dxflItem_MetropolisBlue1 .dxichCellSys.dxeBase_MetropolisBlue1
+{
+    padding-right: 0px;
+}
+
+.dxflEmptyItem_MetropolisBlue1{
+    height: 21px;
+}
+
+.dxflItem_MetropolisBlue1{ padding: 2px 0; width: 100%; }
+.dxflItem_MetropolisBlue1 > table.dxflItemTable_MetropolisBlue1 { width: 100%; }
+.dxflGroup_MetropolisBlue1{ padding: 6px 5px; width: 100%;}
+.dxflGroup_MetropolisBlue1 > table.dxflGroupTable_MetropolisBlue1 { width: 100%; }
+.dxflGroupCell_MetropolisBlue1{ padding: 0 8px; }
+
+.dxflGroupBox_MetropolisBlue1 {
+    display: table;
+    border-collapse: separate;
+    width: 100%;
+    border: 1px Solid #C0C0C0;
+    padding: 0 0 12px;
+    margin: 10px 0; 
+}
+.dxflGroupBox_MetropolisBlue1.dxflHeadingLineGroupBoxSys {
+    border-width: 1px 0 0;
+}
+.dxflGroupBox_MetropolisBlue1.dxflHeadingLineGroupBoxSys.dxflWithCaptionSys {
+    margin-top: 22px!important;
+}
+.dxflHeadingLineGroupBoxSys > .dxflGroup_MetropolisBlue1{
+    margin-top: -6px;
+}
+
+.dxflGroupCell_MetropolisBlue1> .dxtcControl_MetropolisBlue1{ margin: 0px; }
+
+.dxflGroupBox_MetropolisBlue1> .dxflGroup_MetropolisBlue1{ margin-top: -9px; padding: 0 4px; }
+.dxflGroupBox_MetropolisBlue1> .dxflGroup_MetropolisBlue1 tr:first-child > .dxflGroupCell_MetropolisBlue1> .dxflItem_MetropolisBlue1{ padding-top: 9px; }
+.dxflGroupBox_MetropolisBlue1> .dxflGroup_MetropolisBlue1 tr:first-child > .dxflGroupCell_MetropolisBlue1> .dxtcControl_MetropolisBlue1{ margin-top: 10px; }
+.dxflGroupBox_MetropolisBlue1> .dxflGroup_MetropolisBlue1 tr:last-child > .dxflGroupCell_MetropolisBlue1> .dxflItem_MetropolisBlue1{ padding-bottom: 0px; }
+
+.dxflGroup_MetropolisBlue1 tr:first-child > .dxflGroupCell_MetropolisBlue1> .dxflGroupBox_MetropolisBlue1{ margin-top: 13px; }
+.dxflGroup_MetropolisBlue1 tr:last-child > .dxflGroupCell_MetropolisBlue1> .dxflGroupBox_MetropolisBlue1{ margin-bottom: 0px; }
+
+.dxtcPageContent_MetropolisBlue1> div > .dxflGroup_MetropolisBlue1{ padding-top: 0px; padding-bottom: 0px; }
+.dxtcPageContent_MetropolisBlue1> div > .dxflGroup_MetropolisBlue1 tr:first-child > .dxflGroupCell_MetropolisBlue1> .dxflItem_MetropolisBlue1{ padding-top: 12px; }
+.dxtcPageContent_MetropolisBlue1> div > .dxflGroup_MetropolisBlue1 tr:last-child > .dxflGroupCell_MetropolisBlue1> .dxflItem_MetropolisBlue1{ padding-bottom: 12px; }
+
+.dxflGroupBoxCaption_MetropolisBlue1{
+    background-color: White;
+    display: inline-block;  
+    left: 9px;
+    line-height: 16px;
+    padding: 0px 3px 0px 3px;  
+    position: relative;
+    top: -9px;
+}
+
+*[dir="rtl"].dxflFormLayout_MetropolisBlue1 .dxflGroupBoxCaption_MetropolisBlue1 {
+    padding: 0px 3px 0px 7px;
+    left: 0px;
+    right: 9px;
+}
+
+.dxflGroupBox_MetropolisBlue1 > div.dxflGroup_MetropolisBlue1:first-child,
+.dxflGroupBox_MetropolisBlue1 > table.dxflGroup_MetropolisBlue1:first-child {
+    margin-top: 0px;
+    padding-top: 7px;
+}
+
+.dxflHeadingLineGroupBoxSys > .dxflGroupBoxCaption_MetropolisBlue1{
+    top: -19px;
+}
+
+.dxflOptional_MetropolisBlue1{
+	color: gray;
+	font-style: normal;
+}
+.dxflRequired_MetropolisBlue1{
+	color: green;
+	font-style: normal;
+}
+.dxflInternalEditorTable_MetropolisBlue1 {
+    width: 100%;
+}
+.dxflHelpText_MetropolisBlue1 {
+    color: #9F9F9F;
+    font-size: 0.91em;
+}
+.dxflHelpText_MetropolisBlue1.dxflHHelpTextSys {
+    padding: 0 6px;
+}
+.dxflHelpText_MetropolisBlue1.dxflTHelpTextSys {
+    padding: 6px 0 2px;
+}
+.dxflHelpText_MetropolisBlue1.dxflBHelpTextSys {
+    padding: 2px 0 6px;
+}
+
+/* Ribbon */
+.dxrControl_MetropolisBlue1 {
+    font: 12px 'Segoe UI',Helvetica,'Droid Sans',Tahoma,Geneva,sans-serif;
+}
+.dxrControl_MetropolisBlue1 .dxr-tabContent {
+    border: 1px solid #c0c0c0;
+    border-top-width: 0px;
+    height: 95px;
+    background: #ffffff;
+}
+.dxrControl_MetropolisBlue1.dxr-grLabelsHidden .dxr-tabContent {
+    height: 81px;
+}
+.dxrControl_MetropolisBlue1.dxr-tabsHidden .dxr-tabContent {
+    border-top-width: 1px;
+}
+.dxrControl_MetropolisBlue1, 
+.dxrControl_MetropolisBlue1 a {
+    color: #201f35;
+}
+.dxrControl_MetropolisBlue1 .dxr-itemDisabled.dxr-item,
+.dxrControl_MetropolisBlue1 .dxr-groupLabelDisabled.dxr-groupLabel,
+.dxrControl_MetropolisBlue1 .dxr-grExpBtnDisabled.dxr-grExpBtn,
+.dxrControl_MetropolisBlue1 .dxr-grExpBtnDisabled.dxr-grExpBtn .dxr-img32,
+.dxrControl_MetropolisBlue1 .dxr-minBtn.dxr-minBtnDisabled {
+    cursor: default;
+    color: #c0c0c0;
+}
+
+/* Ribbon Popup */
+.dxrControl_MetropolisBlue1 .dxr-minPopupWindow {
+    padding: 0;
+}
+.dxrControl_MetropolisBlue1 .dxr-minPopup.dxpc-mainDiv {
+    border: 0;
+/*add border radius by steven*/
+	border-radius: 10px;
+	/*end*/
+
+}
+.dxrControl_MetropolisBlue1 .dxr-groupPopup .dxpc-mainDiv {
+    border: 1px solid #c0c0c0;
+}
+
+/* Ribbon Group List */
+.dxrControl_MetropolisBlue1 .dxr-groupList {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+.dxrControl_MetropolisBlue1 .dxr-groupList .dxr-groupSep {
+    height: 100%;
+    list-style: none;
+}
+
+.dxrControl_MetropolisBlue1 .dxr-groupList .dxr-groupSep b {
+    display: block;
+    width: 1px;
+    height: 100%;
+    background: #c0c0c0;
+}
+
+/* Ribbon Groups */
+.dxrControl_MetropolisBlue1 .dxr-groupList .dxr-group {
+    margin: 3px 3px 0 3px;
+    text-align: center;
+}
+.dxrControl_MetropolisBlue1 .dxr-groupContent {
+    height: 75px;
+}
+.dxrControl_MetropolisBlue1 .dxr-groupLabel {
+    text-align: center;
+    color: #333333;
+    line-height: 15px;
+    padding: 0px 5px 0 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+.dxrControl_MetropolisBlue1 .dxr-grExpBtn,
+.dxrControl_MetropolisBlue1 .dxr-grExpBtn .dxr-img32 {
+    cursor: pointer;
+}
+.dxrControl_MetropolisBlue1 .dxr-grExpBtn {
+    height: 89px;
+    text-align: center;
+}
+.dxrControl_MetropolisBlue1 .dxr-groupPopupWindow {
+    padding: 2px 3px;
+}
+
+/* Ribbon Item Separator */
+.dxrControl_MetropolisBlue1 .dxr-blRegItems .dxr-itemSep,
+.dxrControl_MetropolisBlue1 .dxr-blLrgItems .dxr-itemSep {
+    width: 3px;
+}
+.dxrControl_MetropolisBlue1 .dxr-blRegItems .dxr-itemSep b,
+.dxrControl_MetropolisBlue1 .dxr-blLrgItems .dxr-itemSep b {
+    background: #c0c0c0;
+    display: block;
+    width: 1px;
+}
+.dxrControl_MetropolisBlue1 .dxr-blRegItems .dxr-itemSep b {
+    margin: 3px auto;
+    height: 19px;
+}
+.dxrControl_MetropolisBlue1 .dxr-blLrgItems .dxr-itemSep b {
+    margin: 4px auto;
+    height: 67px;
+}
+
+/* Ribbon Item */
+.dxrControl_MetropolisBlue1 .dxr-item {
+    border: none;
+}
+.dxrControl_MetropolisBlue1 .dxr-blLrgItems .dxr-item,
+.dxrControl_MetropolisBlue1.dxr-grLabelsHidden .dxr-grExpBtn {
+    text-align: center;
+    height: 75px;
+}
+.dxrControl_MetropolisBlue1 .dxr-blRegItems .dxr-item,
+.dxrControl_MetropolisBlue1 .dxr-blHorItems .dxr-item {
+    height: 25px;
+    white-space: nowrap;
+}
+.dxrControl_MetropolisBlue1 .dxr-blRegItems .dxr-item {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+.dxrControl_MetropolisBlue1 .dxr-blHorItems .dxr-item {
+    margin: 0 3px;
+}
+.dxrControl_MetropolisBlue1 .dxr-blHorItems .dxr-item .dxr-lblText {
+    padding-left: 2px;
+    padding-right: 3px;
+}
+.dxrControl_MetropolisBlue1 .dxr-blHorItems .dxr-item .dxr-popOut {
+    height: 100%;
+    margin-left: 1px;
+}
+
+/* Ribbon Item Label */
+.dxrControl_MetropolisBlue1 .dxr-blLrgItems .dxr-item .dxr-label {
+    border-top: 1px solid transparent;
+    width: 100%;
+}
+.dxrControl_MetropolisBlue1 .dxr-blLrgItems .dxr-item .dxr-label .dxr-lblContent,
+.dxrControl_MetropolisBlue1 .dxr-grExpBtn .dxr-lblContent {
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+.dxrControl_MetropolisBlue1 .dxr-blLrgItems .dxr-item.dxr-itemHover.dxr-ddMode .dxr-label {
+    border-top: 1px solid #FFFFFF;
+}
+.dxrControl_MetropolisBlue1 .dxr-blHorItems .dxr-item .dxr-label {
+    margin: 4px 0;
+}
+
+/* Ribbon Item Label PopOut */
+.dxrControl_MetropolisBlue1 .dxr-blLrgItems .dxr-item .dxr-label .dxr-popOut,
+.dxrControl_MetropolisBlue1 .dxr-grExpBtn .dxr-popOut {
+    margin: -1px 3px 1px;
+}
+.dxrControl_MetropolisBlue1 .dxr-blRegItems .dxr-item .dxr-popOut,
+.dxrControl_MetropolisBlue1 .dxr-blHorItems .dxr-item .dxr-popOut {
+    padding: 11px 3px;
+    margin: -8px 0 -6px;
+    border-left: 1px solid transparent;
+    font-size: 0;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    ::i-block-chrome,
+    .dxrControl_MetropolisBlue1 .dxr-blRegItems .dxr-item .dxr-popOut,
+    .dxrControl_MetropolisBlue1 .dxr-blHorItems .dxr-item .dxr-popOut    
+    {
+	    margin: -9px 0 -6px;
+    }
+}
+noindex:-o-prefocus, 
+.dxrControl_MetropolisBlue1 .dxr-blRegItems .dxr-item .dxr-popOut,
+.dxrControl_MetropolisBlue1 .dxr-blHorItems .dxr-item .dxr-popOut    
+{
+    margin: -7px 0 -8px;
+}
+.dxrControl_MetropolisBlue1 .dxr-blRegItems .dxr-item.dxr-itemHover.dxr-ddMode .dxr-label .dxr-popOut,
+.dxrControl_MetropolisBlue1 .dxr-blHorItems .dxr-item.dxr-itemHover.dxr-ddMode .dxr-label .dxr-popOut {
+    border-left: 1px solid #FFFFFF;
+}
+
+/* Ribbon Editors Item */
+.dxrControl_MetropolisBlue1 .dxr-item.dxr-edtItem {
+    border: 0;
+    padding: 1px 0 0;
+    height: 24px;
+}
+.dxrControl_MetropolisBlue1 .dxr-item.dxr-edtItem .dxr-label {
+    padding: 1px 3px 0 0;
+}
+
+/* Ribbon Item Types */
+.dxrControl_MetropolisBlue1 .dxr-buttonItem {
+    cursor: pointer;
+}
+.dxrControl_MetropolisBlue1 .dxr-blLrgItems .dxr-buttonItem,
+.dxrControl_MetropolisBlue1 .dxr-grExpBtn {
+    min-width: 42px;
+}
+.dxrControl_MetropolisBlue1 .dxr-buttonItem.dxr-itemChecked {
+    background: #D0D0D0;
+}
+.dxrControl_MetropolisBlue1 .dxr-buttonItem.dxr-itemPressed {
+    background: #D0D0D0;
+}
+.dxrControl_MetropolisBlue1 .dxr-buttonItem.dxr-itemHover,
+.dxrControl_MetropolisBlue1 .dxr-grExpBtn.dxr-grExpBtnHover {
+    background: #ff400d;
+	color: #FFFFFF;
+}
+.dxrControl_MetropolisBlue1 .dxr-img32,
+.dxrControl_MetropolisBlue1 .dxr-blLrgItems .dxr-colorBtn .dxr-colorBtnNoImg32 {
+    width: 32px;
+    height: 32px;
+    margin: 2px auto 1px auto;
+}
+.dxrControl_MetropolisBlue1 .dxr-img16,
+.dxrControl_MetropolisBlue1 .dxr-blRegItems .dxr-colorBtn .dxr-colorBtnNoImg16,
+.dxrControl_MetropolisBlue1 .dxr-blHorItems .dxr-colorBtn .dxr-colorBtnNoImg16 {
+    width: 16px;
+    height: 16px;
+    margin: 4px;
+}
+.dxrControl_MetropolisBlue1 .dxr-ddImageContainer {
+    display: inline-block;
+}
+.dxrControl_MetropolisBlue1 .dxr-blLrgItems .dxr-ddImageContainer {
+    width: 100%;
+}
+
+/* Ribbon Color Button */
+.dxrControl_MetropolisBlue1 .dxr-colorBtn .dxr-colorDiv {
+    height: 4px;
+    width: 16px;
+    display: block;
+    margin: -6px 0 2px 4px;
+    position: relative;
+}
+
+.dxrControl_MetropolisBlue1 .dxr-blLrgItems .dxr-colorBtn .dxr-colorDiv {
+    width: 32px;
+    margin: -5px auto 1px;
+}
+
+.dxrControl_MetropolisBlue1 .dxr-blLrgItems .dxr-colorBtn .dxr-colorBtnNoImg32 {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.dxrControl_MetropolisBlue1 .dxr-blLrgItems .dxr-colorBtn .dxr-colorBtnNoImg32 .dxr-colorDiv,
+.dxrControl_MetropolisBlue1 .dxr-blRegItems .dxr-colorBtn .dxr-colorBtnNoImg16 .dxr-colorDiv,
+.dxrControl_MetropolisBlue1 .dxr-blHorItems .dxr-colorBtn .dxr-colorBtnNoImg16 .dxr-colorDiv {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+}
+
+.dxrControl_MetropolisBlue1 .dxpc-content.dxr-itemDDPopup {
+    padding: 0;
+}
+
+.dxrControl_MetropolisBlue1 .dxeColorTable_MetropolisBlue1 {
+    border: none;
+}
+
+.dxrControl_MetropolisBlue1 .dxr-minBtn {
+    cursor: pointer;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    font-size: 0;
+    text-align:center;
+    vertical-align: middle;
+    line-height: 14px;
+}
+.dxrControl_MetropolisBlue1 .dxr-minBtn img {
+    vertical-align: middle;
+}
+
+/* Ribbon TabControl */
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-tab.dxr-fileTab .dxtc-link {
+    color: #FFFFFF;
+}
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-tab.dxr-fileTab {
+    background: #bfbfbf;
+    border-color: #bfbfbf;
+}
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-tabHover.dxr-fileTab {
+    background: #ff400d;
+    border-color: #ff400d;
+}
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxr-fileTabPressed.dxr-fileTab {
+    background: #bfbfbf;
+    border-color: #bfbfbf;
+}
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-leftIndent, 
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-spacer, 
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-rightIndent, 
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-sbWrapper, 
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-sbIndent, 
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-sbSpacer
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-spacer.dxr-fileTabSpacing {
+    border-bottom: 1px solid #c0c0c0;
+}
+
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-tab .dxtc-link,
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-activeTab .dxtc-link {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-tab {
+    border-top: 1px solid transparent;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom: 1px solid #c0c0c0;
+    background: #FFFFFF;
+}
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-activeTab {
+    border: 1px solid #c0c0c0;
+    border-bottom: 1px solid transparent;
+}
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-activeTab,
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-activeTab a {
+    background: #ffffff;
+}
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-activeTab .dxtc-link {
+    color: #ff400d;
+}
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtcLiteDisabled_MetropolisBlue1 .dxtc-link {
+    color: #ACACAC;
+}
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-activeTab .dxtc-link {
+    padding: 3px 35px;
+}
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-tab .dxtc-link {
+    padding: 3px 36px;
+}
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-tabHover .dxtc-link {
+    color: #ff400d;
+}
+
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-leftIndent {
+    width: 0px;
+}
+
+.dxrControl_MetropolisBlue1 .dxtcLite_MetropolisBlue1.dxtc-top .dxtc-rightIndent {
+    text-align: right;
+}
+
+/* DocumentViewer Ribbon */
+.dxrControl_MetropolisBlue1 .dxr-tmplItem .dxxrdvrCurrentPageLabel {
+    padding: 0 0 2px 0;
+    display: block;
+}
+.dxrControl_MetropolisBlue1 .dxr-tmplItem .dxxrdvrPageCountLabel {
+    padding: 1px 0 0 0;
+    display: block;
+}
+.dxrControl_MetropolisBlue1 .dxr-tmplItem .dxxrdvrPageNumberComboBox {
+    width: 100px;
+}
+
+/* ASPxImageZoom */
+.dxizControl_MetropolisBlue1 {
+    display: none;
+    border: 1px solid #d8d8d8;
+}
+.dxizControl_MetropolisBlue1 .dxiz-hint {
+    padding: 3px;
+    top: 0;
+    position: absolute;
+}
+.dxizControl_MetropolisBlue1 .dxiz-hint > span {
+    margin-left: 3px;
+    color: gray;
+	vertical-align: top;
+    font: 12px Tahoma, Geneva, sans-serif;
+}
+.dxizControl_MetropolisBlue1 .dxiz-EWCloseButton {
+	top: 0;
+	right: 1px;
+	cursor: pointer;
+	position: absolute;
+}
+.dxizControl_MetropolisBlue1 .dxiz-expandW .dxpc-content {
+    height: inherit;
+}
+.dxizControl_MetropolisBlue1 .dxiz-wrapper {
+    position: relative;
+}
+.dxizControl_MetropolisBlue1 .dxiz-wrapper > img,
+.dxizControl_MetropolisBlue1 .dxiz-clipPanel > img,
+.dxizControl_MetropolisBlue1 .dxiz-expandW .dxpc-content > img {
+    display: block;
+}
+.dxizControl_MetropolisBlue1 .dxiz-clipPanel > img {
+    position: absolute;
+}
+.dxizControl_MetropolisBlue1 .dxiz-clipPanel {
+    overflow: hidden;
+    position: relative;
+}
+.dxizControl_MetropolisBlue1 .dxiz-clipPanel.dxiz-inside {
+    top: 0;
+    position: absolute;
+    opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Style=0, Opacity=0);
+}
+.dxizControl_MetropolisBlue1 .dxpcLite .dxpc-content {
+    padding: 0;
+}
+
+.dxizControl_MetropolisBlue1 .dxiz-lens {
+    overflow: hidden;
+    top: 0;
+    position: absolute;
+}
+.dxizControl_MetropolisBlue1 .dxiz-lens > .dxiz-pc {
+    opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Style=0, Opacity=0);
+	z-index: 1;
+    position: absolute;
+}
+.dxizControl_MetropolisBlue1 .dxiz-lens .dxiz-llp,
+.dxizControl_MetropolisBlue1 .dxiz-lens .dxiz-lrp,
+.dxizControl_MetropolisBlue1 .dxiz-lens .dxiz-ltp,
+.dxizControl_MetropolisBlue1 .dxiz-lens .dxiz-lbp,
+.dxizControl_MetropolisBlue1 .dxiz-lens .dxiz-lcp {
+    position: absolute;
+}
+.dxizControl_MetropolisBlue1 .dxiz-lens .dxiz-lcp {
+	background: white;
+	outline: 1px solid #969292;
+	filter: progid:DXImageTransform.Microsoft.Alpha(Style=0, Opacity=50);
+	background: rgba(255,255,255,0.5);
+    outline: 1px solid rgba(128,128,128,0.5);
+}
+.dxizControl_MetropolisBlue1 .dxiz-lens.outside .dxiz-lcp {
+    background: transparent;
+	outline: 1px solid black;
+    outline: 1px solid rgba(0,0,0,0.5);
+}
+.dxizControl_MetropolisBlue1 .dxiz-lens.outside .dxiz-llp,
+.dxizControl_MetropolisBlue1 .dxiz-lens.outside .dxiz-lrp,
+.dxizControl_MetropolisBlue1 .dxiz-lens.outside .dxiz-ltp,
+.dxizControl_MetropolisBlue1 .dxiz-lens.outside .dxiz-lbp {
+    opacity: 0.25;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Style=0, Opacity=25);
+    background-color: #000;
+}
+.dxizControl_MetropolisBlue1 .dxizLoadingPanel_MetropolisBlue1 {
+    position: absolute;
+}
+
+.dxisControl_MetropolisBlue1.dxis-zoomNavigator .dxis-nbItem {
+	width: 75px;
+    height: 75px;
+}

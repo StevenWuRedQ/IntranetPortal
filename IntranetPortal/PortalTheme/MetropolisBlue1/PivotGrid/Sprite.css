@@ -1,0 +1,266 @@
+.dxPivotGrid_CTNAttribute,
+.dxPivotGrid_CTNCalculatedMeasure,
+.dxPivotGrid_CTNDimension,
+.dxPivotGrid_CTNFolderClosed,
+.dxPivotGrid_CTNFolderOpen,
+.dxPivotGrid_CTNHierarchy,
+.dxPivotGrid_CTNKpi,
+.dxPivotGrid_CTNMeasure,
+.dxPivotGrid_FLBottomPanelOnly1by4_MetropolisBlue1,
+.dxPivotGrid_FLBottomPanelOnly2by2_MetropolisBlue1,
+.dxPivotGrid_FLButton_MetropolisBlue1,
+.dxPivotGrid_FLColumnAreaHeaders_MetropolisBlue1,
+.dxPivotGrid_FLDataAreaHeaders_MetropolisBlue1,
+.dxPivotGrid_FLFieldList_MetropolisBlue1,
+.dxPivotGrid_FLFilterAreaHeaders_MetropolisBlue1,
+.dxPivotGrid_FLRowAreaHeaders_MetropolisBlue1,
+.dxPivotGrid_FLStackedDefault_MetropolisBlue1,
+.dxPivotGrid_FLStackedSideBySide_MetropolisBlue1,
+.dxPivotGrid_FLTopPanelOnly_MetropolisBlue1,
+.dxPivotGrid_pgCollapsedButton_MetropolisBlue1,
+.dxPivotGrid_pgCustomizationFormCloseButton_MetropolisBlue1,
+.dxPivotGrid_pgDataHeaders_MetropolisBlue1,
+.dxPivotGrid_pgDragArrowDown_MetropolisBlue1,
+.dxPivotGrid_pgDragArrowLeft_MetropolisBlue1,
+.dxPivotGrid_pgDragArrowRight_MetropolisBlue1,
+.dxPivotGrid_pgDragArrowUp_MetropolisBlue1,
+.dxPivotGrid_pgDragHideField_MetropolisBlue1,
+.dxPivotGrid_pgExpandedButton_MetropolisBlue1,
+.dxPivotGrid_pgFilterButton_MetropolisBlue1,
+.dxPivotGrid_pgFilterButtonActive_MetropolisBlue1,
+.dxPivotGrid_pgFilterResizer_MetropolisBlue1,
+.dxPivotGrid_pgGroupSeparator_MetropolisBlue1,
+.dxPivotGrid_pgPrefilterButton_MetropolisBlue1,
+.dxPivotGrid_pgSortByColumn_MetropolisBlue1,
+.dxPivotGrid_pgSortDownButton_MetropolisBlue1,
+.dxPivotGrid_pgSortUpButton_MetropolisBlue1
+{
+    background-image: url('sprite.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+.dxPivotGrid_CTNAttribute
+{
+    background-position: -205px 0px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_CTNCalculatedMeasure
+{
+    background-position: -136px -33px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_CTNDimension
+{
+    background-position: -170px -33px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_CTNFolderClosed
+{
+    background-position: -102px -33px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_CTNFolderOpen
+{
+    background-position: -119px -33px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_CTNHierarchy
+{
+    background-position: -153px -33px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_CTNKpi
+{
+    background-position: 0px -33px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_CTNMeasure
+{
+    background-position: -222px 0px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_FLBottomPanelOnly1by4_MetropolisBlue1
+{
+    background-position: 0px 0px;
+    width: 32px;
+    height: 32px;
+}
+.dxPivotGrid_FLBottomPanelOnly2by2_MetropolisBlue1
+{
+    background-position: -99px 0px;
+    width: 32px;
+    height: 32px;
+}
+.dxPivotGrid_FLButton_MetropolisBlue1
+{
+    background-position: -17px -33px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_FLColumnAreaHeaders_MetropolisBlue1
+{
+    background-position: -239px 0px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_FLDataAreaHeaders_MetropolisBlue1
+{
+    background-position: -51px -33px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_FLFieldList_MetropolisBlue1
+{
+    background-position: -188px 0px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_FLFilterAreaHeaders_MetropolisBlue1
+{
+    background-position: -85px -33px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_FLRowAreaHeaders_MetropolisBlue1
+{
+    background-position: -34px -33px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_FLStackedDefault_MetropolisBlue1
+{
+    background-position: -66px 0px;
+    width: 32px;
+    height: 32px;
+}
+.dxPivotGrid_FLStackedSideBySide_MetropolisBlue1
+{
+    background-position: -33px 0px;
+    width: 32px;
+    height: 32px;
+}
+.dxPivotGrid_FLTopPanelOnly_MetropolisBlue1
+{
+    background-position: -132px 0px;
+    width: 32px;
+    height: 32px;
+}
+.dxPivotGrid_pgCollapsedButton_MetropolisBlue1
+{
+    background-position: -218px -19px;
+    width: 13px;
+    height: 13px;
+}
+.dxPivotGrid_pgCustomizationFormCloseButton_MetropolisBlue1
+{
+    background-position: -246px -18px;
+    width: 14px;
+    height: 14px;
+}
+.dxPivotGrid_pgDataHeaders_MetropolisBlue1
+{
+    background-position: -192px -20px;
+    width: 12px;
+    height: 12px;
+}
+.dxPivotGrid_pgDragArrowDown_MetropolisBlue1
+{
+    background-position: -168px -23px;
+    width: 11px;
+    height: 9px;
+}
+.dxPivotGrid_pgDragArrowLeft_MetropolisBlue1
+{
+    background-position: -217px -33px;
+    width: 9px;
+    height: 11px;
+}
+.dxPivotGrid_pgDragArrowRight_MetropolisBlue1
+{
+    background-position: -227px -33px;
+    width: 9px;
+    height: 11px;
+}
+.dxPivotGrid_pgDragArrowUp_MetropolisBlue1
+{
+    background-position: -180px -23px;
+    width: 11px;
+    height: 9px;
+}
+.dxPivotGrid_pgDragHideField_MetropolisBlue1
+{
+    background-position: -165px 0px;
+    width: 22px;
+    height: 22px;
+}
+.dxPivotGrid_pgExpandedButton_MetropolisBlue1
+{
+    background-position: -232px -19px;
+    width: 13px;
+    height: 13px;
+}
+.dxPivotGrid_pgFilterButton_MetropolisBlue1
+{
+    background-position: -187px -33px;
+    width: 14px;
+    height: 16px;
+}
+.dxPivotGrid_pgFilterButtonActive_MetropolisBlue1
+{
+    background-position: -202px -33px;
+    width: 14px;
+    height: 16px;
+}
+.dxPivotGrid_pgFilterResizer_MetropolisBlue1
+{
+    background-position: -68px -33px;
+    width: 16px;
+    height: 16px;
+}
+.dxPivotGrid_pgGroupSeparator_MetropolisBlue1
+{
+    background-position: -188px -17px;
+    width: 5px;
+    height: 1px;
+}
+.dxPivotGrid_pgPrefilterButton_MetropolisBlue1
+{
+    background-position: -205px -19px;
+    width: 12px;
+    height: 13px;
+}
+.dxPivotGrid_pgSortByColumn_MetropolisBlue1
+{
+    background-position: -237px -33px;
+    width: 14px;
+    height: 6px;
+}
+.dxPivotGrid_pgSortDownButton_MetropolisBlue1
+{
+    background-position: -252px -33px;
+    width: 7px;
+    height: 5px;
+}
+.dxPivotGrid_pgSortUpButton_MetropolisBlue1
+{
+    background-position: -253px -44px;
+    width: 7px;
+    height: 5px;
+}
+.dxPivotGrid_pgFilterButtonActive_MetropolisBlue1
+{
+    background-color: #FF400D;
+}
+.dxPivotGrid_pgCustomizationFormCloseButton_MetropolisBlue1,
+.dxPivotGrid_FLButton_MetropolisBlue1
+{
+    display:block;
+}

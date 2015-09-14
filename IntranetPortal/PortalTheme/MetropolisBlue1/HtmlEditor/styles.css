@@ -1,0 +1,253 @@
+/* ----------------- Main ----------------- */
+/* Loading panel */
+.dxheLoadingDiv_MetropolisBlue1
+{
+    background: white;
+    opacity: 0.85;
+    filter: alpha(opacity=85);
+}
+.dxheLoadingPanel_MetropolisBlue1
+{
+	border: 1px solid #C3C3C3;
+	background-color: white;
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: #333333;
+}
+.dxheLoadingPanel_MetropolisBlue1 td.dx
+{
+	font-size: 1.17em;
+	white-space: nowrap;
+	text-align: center;
+	padding: 10px 14px;
+}
+.dxheLoadingPanel_MetropolisBlue1 .dxlp-loadingImage
+{
+	background-image: url('../Web/Loading.gif');
+	height: 32px;
+	width: 32px;
+}
+
+.dxheControl_MetropolisBlue1
+{
+    font: 12px 'Source Sans Pro','Segoe UI';
+}
+
+/* Area */
+.dxheContentArea_MetropolisBlue1
+{
+    padding: 6px 4px;
+}
+.dxheErrorFrame_MetropolisBlue1
+{
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: #D00707;
+	background-color: #FBC7C7;
+	margin-bottom: 6px;
+}
+.dxheErrorFrame_MetropolisBlue1 .dxhe 
+{
+    padding: 5px;
+}
+.dxheErrorFrame_MetropolisBlue1 .dxhe td 
+{
+    padding: 0;
+}
+.dxheErrorFrame_MetropolisBlue1 .dxheErrorFrameCloseButton_MetropolisBlue1 
+{
+    cursor: pointer;
+}
+.dxheContentArea_MetropolisBlue1 td.dxheViewArea_MetropolisBlue1 /*B209529*/
+{
+    line-height: 0;
+}
+.dxheHtmlViewArea_MetropolisBlue1,
+.dxheDesignViewArea_MetropolisBlue1,
+.dxhePreviewArea_MetropolisBlue1 
+{
+    margin: 0px;
+    background: none #FFFFFF;
+    border: 0;
+    font-size: smaller;
+    font: 12px Arial, Helvetica, sans-serif;
+}
+.dxheContentArea_MetropolisBlue1 .dxeMemo_MetropolisBlue1 td,
+body.dxheDesignViewArea_MetropolisBlue1,
+body.dxhePreviewArea_MetropolisBlue1
+{
+    padding: 0 4px 0 4px;
+}
+.dxheControl_MetropolisBlue1 .dxheContentArea_MetropolisBlue1 .dxeMemo_MetropolisBlue1 td
+{
+    padding-right: 0;
+}
+.dxheContentArea_MetropolisBlue1 .dxeMemoEditArea_MetropolisBlue1
+{
+    padding-left: 0;
+    padding-right: 0;
+}
+.dxheControl_MetropolisBlue1.dxhe-rtl .dxheContentArea_MetropolisBlue1 .dxeMemo_MetropolisBlue1 td
+{
+	padding: 0 4px 0 0;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0)
+{
+    .dxheControl_MetropolisBlue1.dxhe-rtl .dxheContentArea_MetropolisBlue1 .dxeMemo_MetropolisBlue1 td
+    {
+	    padding: 0 0 0 4px;
+    }
+}
+.dxheControl_MetropolisBlue1 .dxeMemo_MetropolisBlue1 textarea 
+{
+	resize: none;
+}
+/* Element appearance in DesignView */
+body.dxheDesignViewArea_MetropolisBlue1 table.dxEmptyBorderTable_MetropolisBlue1,
+body.dxheDesignViewArea_MetropolisBlue1 table.dxEmptyBorderTable_MetropolisBlue1 td  {
+    border:1px dotted gray;
+}
+@media print 
+{
+	body.dxheDesignViewArea_MetropolisBlue1 table.dxEmptyBorderTable_MetropolisBlue1,
+	body.dxheDesignViewArea_MetropolisBlue1 table.dxEmptyBorderTable_MetropolisBlue1 td  
+	{
+		border:0px;
+	}
+}
+body.dxheDesignViewArea_MetropolisBlue1 pre
+{
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/* Status Bar */
+.dxheStatusBar_MetropolisBlue1 
+{
+}
+.dxheControl_MetropolisBlue1 .dxheStatusBar_MetropolisBlue1 .dxheStatusBarTab_MetropolisBlue1 .dxtc-link 
+{
+    padding: 4px 12px 5px 11px;
+}
+.dxheStatusBarActiveTab_MetropolisBlue1 
+{
+}
+.dxHtmlEditor_heSizeGrip_MetropolisBlue1
+{
+    cursor: se-resize;
+}
+.dxHtmlEditor_heSizeGripRtl_MetropolisBlue1
+{
+    cursor: ne-resize;
+}
+.dxheSizeGripContainer_MetropolisBlue1
+{
+    width: 100%;
+    text-align: right;
+    font-size: 0;
+    margin-top: -16px;
+}
+.dxheControl_MetropolisBlue1.dxhe-rtl .dxheSizeGripContainer_MetropolisBlue1 
+{
+	text-align: left;
+}
+/* ----------------- Dialog Forms ----------------- */
+.dxpcLite_MetropolisBlue1 .dxheDlgFooter,
+.dxpcLite_MetropolisBlue1 .dxheCustomDialog_MetropolisBlue1 .dxhecd-Buttons
+{
+    background-color: white;
+    border-top: Solid 1px #E0E0E0;
+	padding: 10px 11px;
+	text-align: right;
+}
+.dxpcLite_MetropolisBlue1.dxRtl .dxheDlgFooter,
+.dxpcLite_MetropolisBlue1.dxRtl .dxheCustomDialog_MetropolisBlue1 .dxhecd-Buttons
+{
+    text-align: left;
+}
+.dxpcLite_MetropolisBlue1 .dxheDlgFooterBtn
+{
+    width: 80px;
+    margin-left: 8px;
+}
+.dxpcLite_MetropolisBlue1.dxRtl .dxheDlgFooterBtn
+{
+    margin-right: 8px;
+    margin-left: 0;
+}
+/* Insert Image Form */
+.dxpcLite_MetropolisBlue1 .dxheDlgInsertImageForm .dxheDlgImagePreviewCell,
+.dxpcLite_MetropolisBlue1 .dxheDlgSelectImageForm .dxheDlgImagePreviewCell
+{
+    color: #878787;
+    border: dashed 1px #cac8c8;
+}
+.dxpcLite_MetropolisBlue1 .dxheDlgPasteFromWordForm .dxheDlgPasteContainerCell td
+{
+	border: Solid 1px #9F9F9F;
+}
+/*----------------- Toolbars -----------------*/
+.dxtbSpacing_MetropolisBlue1
+{
+	height: 1px;
+}
+.dxtbControl_MetropolisBlue1 
+{
+    color: #333333;
+    width: 100%;
+    border-bottom: Solid 1px #c0c0c0;
+}
+.dxtbControl_MetropolisBlue1 td.dxmMenu_MetropolisBlue1
+{
+	border-width: 0px;
+}
+.dxtbControl_MetropolisBlue1 .dxmLite_MetropolisBlue1 .dxm-main 
+{
+	background-color: #FFFFFF;
+}
+.dxtbControl_MetropolisBlue1 .dxmLite_MetropolisBlue1 .dxmtb.dxm-horizontal .dxm-separator b
+{
+	background-color: #c0c0c0;
+}
+.dxtbComboBoxMenuItem_MetropolisBlue1
+{
+    padding-top: 2px;
+}
+.dxheControl_MetropolisBlue1 .dxrControl_MetropolisBlue1 .dxr-minBtn
+{
+    padding-right: 8px;
+}
+.dxheControl_MetropolisBlue1 .dxtbControl_MetropolisBlue1.dxtbr_MetropolisBlue1,
+.dxheControl_MetropolisBlue1 .dxrControl_MetropolisBlue1 .dxpc-mainDiv.dxr-minPopup
+{
+    border: 0;
+}
+
+/* Toolbars Lightweight Mode */
+.dxtbControl_MetropolisBlue1 .dxmLite_MetropolisBlue1 .dxm-main 
+{
+    border-width: 0px;
+}
+.dxmLite_MetropolisBlue1 .dxhetipControl_MetropolisBlue1 img
+{
+	vertical-align: top;
+}
+.dxtbControl_MetropolisBlue1 .dxm-horizontal.dxmtb .dxm-dropDownMode .dxtcbColorDiv_MetropolisBlue1
+{
+    margin-top: -1px;
+    margin-bottom: -2px;
+}
+
+/* ToolbarColorButton */
+.dxtcbControl_MetropolisBlue1 { }
+.dxtcbColorDiv_MetropolisBlue1
+{
+	width: 16px;
+	height: 3px;
+	font-size: 0;
+	background-color: Transparent;
+}
+
+/*----------------- RoundPanel -----------------*/
+.dxheRP.dxrpControl_MetropolisBlue1 .dxrpcontent_MetropolisBlue1
+{
+    padding: 9px 10px 10px 10px !important;
+}

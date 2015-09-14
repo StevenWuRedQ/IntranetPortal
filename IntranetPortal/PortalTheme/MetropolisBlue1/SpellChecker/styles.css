@@ -1,0 +1,70 @@
+.dxwscCheckedTextContainer_MetropolisBlue1
+{
+	background-color: white;
+	border: solid 1px #c0c0c0;
+	vertical-align:top;
+	overflow:auto;
+	height: 110px;
+	width: 340px;
+	padding: 5px;
+}
+.dxwscErrorWord_MetropolisBlue1 
+{
+	background: url('scErrorUnderline.gif') bottom;
+	background-repeat:repeat-x;
+	padding-bottom: 3px;
+	color: #333333;
+	font-weight: bold;
+}
+/* -- Loading panel -- */
+.dxwscLoadingPanel_MetropolisBlue1
+{
+	border: 1px solid #C3C3C3;
+	background-color: white;
+	font: 12px 'Source Sans Pro','Segoe UI';
+	color: #333333;
+}
+.dxwscLoadingPanel_MetropolisBlue1 td.dx
+{
+	font-size: 1.17em;
+	white-space: nowrap;
+	text-align: center;
+	padding: 10px 14px;
+}
+.dxwscLoadingPanel_MetropolisBlue1 .dxlp-loadingImage
+{
+	background-image: url('../Web/Loading.gif');
+	height: 32px;
+	width: 32px;
+}
+/* -- Forms -- */
+.dxwsc-main .dxpcLite_MetropolisBlue1 .dxwscDlgFooter
+{
+	border-top: 1px solid #c0c0c0;
+	padding: 10px 15px;
+	text-align: right;
+}
+.dxwsc-main.dxwsc-rtl .dxpcLite_MetropolisBlue1 .dxwscDlgFooter
+{
+    text-align: left;
+}
+.dxwsc-main .dxpcLite_MetropolisBlue1 .dxwscDlgFooterBtn
+{
+    width: 80px;
+    margin-left: 8px;
+}
+.dxwsc-main.dxwsc-rtl .dxpcLite_MetropolisBlue1 .dxwscDlgFooterBtn
+{
+    margin-right: 8px;
+    margin-left: 0;
+}
+.dxwsc-main .dxpcLite_MetropolisBlue1 .dxwscDlgSpellCheckBtn
+{
+    width: 120px;
+}
+.dxwsc-main .dxpcLite_MetropolisBlue1 .dxrpControl_MetropolisBlue1 .dxrpHeader_MetropolisBlue1,
+.dxwsc-main .dxpcLite_MetropolisBlue1 .dxrpControl_MetropolisBlue1 .dxrpHeader_MetropolisBlue1 td.dxrp
+{
+	font-size: 1.83em;
+}
+
