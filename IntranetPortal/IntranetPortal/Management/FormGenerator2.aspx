@@ -143,7 +143,7 @@
 
                     result += '<div class="ss_form"><h4 class="ss_form_title ">';
                     result += $scope.compilingFormTitle;
-                    result += '<div class="ss_border"><ul class="ss_form_box clearfix">';
+                    result += '</h4><div class="ss_border"><ul class="ss_form_box clearfix">';
                     _.each(el.items, function (el1) {
                         result += $scope.compileElement(el1);
                     })

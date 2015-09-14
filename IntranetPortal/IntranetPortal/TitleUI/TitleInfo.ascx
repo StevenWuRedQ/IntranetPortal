@@ -5,7 +5,7 @@
     <div class="ss_border">
 
         <ul class="ss_form_box clearfix">
-            <li class="ss_form_item ">
+            <li class="ss_from_item3">
                 <label class="ss_form_input_title ">PROPERTY ADDRESS</label>
                 <input class="ss_form_input " ng-model="Form.FormData.info.PROPERTY_ADDRESS" pt-init-model="LeadsInfo.PropertyAddress">
             </li>
