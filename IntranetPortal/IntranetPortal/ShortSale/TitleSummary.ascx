@@ -78,6 +78,17 @@
         filterCondition += " OR [OccupiedBy] LIKE '%" + key + "%'";
         AllLeadsGridClient.ApplyFilter(filterCondition);
     }
+
+    function AdjustGridViewSize(s,e)
+    {        
+        if (e.pane.IsCollapsed())
+        {
+            AllLeadsGridClient.SetHeight(850);
+        }            
+        else
+            AllLeadsGridClient.SetHeight(480);
+    }
+
 </script>
 
 <%-------end-------%>
@@ -145,9 +156,6 @@
         border-right: 3px Solid #dde0e7 !important;
     }
 
-
-
-
     td.grid_padding {
         padding-top: 20px;
     }
@@ -167,34 +175,39 @@
     .top_h4 {
         padding: 0px;
     }
+
+    .div-underline
+    {
+        height:100%;
+    }
 </style>
 
-<dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter" FullscreenMode="true">
+<dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter" FullscreenMode="true" Orientation="Vertical">
     <Styles>
         <Pane Paddings-Padding="0">
             <Paddings Padding="0px"></Paddings>
         </Pane>
     </Styles>
     <Panes>
-        <dx:SplitterPane ScrollBars="Auto">
+        <dx:SplitterPane ScrollBars="None" ShowCollapseBackwardButton="True" ShowCollapseForwardButton="True">
             <ContentCollection>
                 <dx:SplitterContentControl>
-                    <div style="display: inline-table; font-family: 'Source Sans Pro'; margin-left: 19px; margin-top: 15px;">
+                    <%--  <div style="display: inline-table; font-family: 'Source Sans Pro'; margin-left: 19px; margin-top: 15px;">
                         <div style="float: left; font-weight: 300; font-size: 48px; color: #234b60">
                             <span style="text-transform: capitalize"></span>Summary &nbsp;
                         </div>
-                    </div>
+                    </div>--%>
                     <%------end------%>
-                    <div style="margin-right: 10px; margin-left: 35px; min-width: 1200px; height: 85%">
+                    <div style="margin-right: 10px; margin-left: 35px; min-width: 1200px; height:100%">
                         <table style="vertical-align: top; height: 100%">
-                            <tr style="height: 240px;" class="under_line_div ">
+                            <tr style="height: 100%;" class="under_line_div ">
                                 <%--fix the disteance between the two grid by steven--%>
-                                <td style="width: 300px; vertical-align: top;" runat="server" id="tdUrgent" visible="false">
+                                <td style="width: 300px; vertical-align: top;display: inline-block;overflow-x: hidden;" runat="server" id="tdUrgent" visible="false">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
                                         <i class="fa fa-exclamation-triangle with_circle title_summary_icon" style=""></i><span class="heading_text2">New Files</span>
                                     </h4>
-                                    <div class="div-underline " style="height: 260px;">
+                                    <div class="div-underline ">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridUrgent" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -214,7 +227,7 @@
                                             <GroupSummary>
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
                                             </GroupSummary>
-                                            <SettingsPager NumericButtonCount="3"></SettingsPager>
+                                            <SettingsPager ShowNumericButtons="false"></SettingsPager>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
@@ -223,13 +236,13 @@
                                         </dx:ASPxGridView>
                                     </div>
                                 </td>
-                                <td rowspan="3" style="width: 30px;"></td>
-                                <td style="width: 300px; vertical-align: top;" class="gray_background" runat="server" id="tdUpcomingBPO" visible="false">
+                                <td style="width: 30px;"></td>
+                                <td style="width: 300px; vertical-align: top;display: inline-block;overflow-x: hidden;" class="gray_background" runat="server" id="tdUpcomingBPO" visible="false">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
                                         <i class="fa fa-university with_circle title_summary_icon" style=""></i><span class="heading_text2">Auction Date</span>
                                     </h4>
-                                    <div class="div-underline " style="height: 240px;">
+                                    <div class="div-underline ">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridUpcomingApproval" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" CssClass="no_border_head" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="4">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -281,13 +294,13 @@
                                         </dx:ASPxGridView>
                                     </div>
                                 </td>
-                                <td rowspan="5" style="width: 30px;"></td>
-                                <td style="width: 300px; vertical-align: top;" runat="server" id="tdCounterOffer" visible="false">
+                                <td style="width: 30px;"></td>
+                                <td style="width: 300px; vertical-align: top;display: inline-block;overflow-x: hidden;" runat="server" id="tdCounterOffer" visible="false">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
                                         <i class="fa fa-check with_circle title_summary_icon" style=""></i><span class="heading_text2">Counter Offer</span>
                                     </h4>
-                                    <div class="div-underline " style="height: 240px;">
+                                    <div class="div-underline ">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="CounterOfferGrid" KeyFieldName="CaseId" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -305,7 +318,7 @@
                                             <GroupSummary>
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
                                             </GroupSummary>
-                                            <SettingsPager NumericButtonCount="3"></SettingsPager>
+                                            <SettingsPager ShowNumericButtons="false"></SettingsPager>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
@@ -314,13 +327,13 @@
                                         </dx:ASPxGridView>
                                     </div>
                                 </td>
-                                <td rowspan="3" style="width: 30px;"></td>
-                                <td style="width: 300px; vertical-align: top;" class="gray_background" runat="server" id="tdInvestorReview" visible="false">
+                                <td style="width: 30px;"></td>
+                                <td style="width: 300px; vertical-align: top;display: inline-block;overflow-x: hidden;" class="gray_background" runat="server" id="tdInvestorReview" visible="false">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
                                         <i class="fa fa-thumbs-up with_circle title_summary_icon" style=""></i><span class="heading_text2">Investor Review</span>
                                     </h4>
-                                    <div class="div-underline " style="height: 240px;">
+                                    <div class="div-underline ">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="InvestorReviewGrid" KeyFieldName="CaseId" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -339,7 +352,7 @@
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
                                             </GroupSummary>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
-                                            <SettingsPager NumericButtonCount="3"></SettingsPager>
+                                            <SettingsPager ShowNumericButtons="false"></SettingsPager>
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
                                                 <RowHotTrack BackColor="#ff400d" ForeColor="White"></RowHotTrack>
@@ -347,13 +360,13 @@
                                         </dx:ASPxGridView>
                                     </div>
                                 </td>
-                                <td rowspan="5" style="width: 30px;"></td>
-                                <td style="width: 300px; vertical-align: top;" runat="server" id="tdDocumentReq" visible="false">
+                                <td style="width: 30px;"></td>
+                                <td style="width: 300px; vertical-align: top;display: inline-block;overflow-x: hidden;" runat="server" id="tdDocumentReq" visible="false">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
                                         <i class="fa fa-files-o with_circle title_summary_icon" style=""></i><span class="heading_text2">Document Requests</span>
                                     </h4>
-                                    <div class="div-underline " style="height: 240px;">
+                                    <div class="div-underline ">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="DocumentRequestsGrid" KeyFieldName="CaseId" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -372,7 +385,7 @@
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
                                             </GroupSummary>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
-                                            <SettingsPager NumericButtonCount="3"></SettingsPager>
+                                            <SettingsPager ShowNumericButtons="false"></SettingsPager>
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
                                                 <RowHotTrack BackColor="#ff400d" ForeColor="White"></RowHotTrack>
@@ -380,11 +393,11 @@
                                         </dx:ASPxGridView>
                                     </div>
                                 </td>
-                                <td rowspan="5" style="width: 30px;"></td>
-                                <td style="width: 300px; vertical-align: top;" runat="server" id="tdTask" visible="false">
+                                <td style="width: 30px;"></td>
+                                <td style="width: 300px; vertical-align: top;display: inline-block;overflow-x: hidden;" runat="server" id="tdTask" visible="false">
                                     <h4 class="top_h4">
                                         <img src="../images/grid_task_icon.png" class="vertical-img" /><span class="heading_text">Task</span> </h4>
-                                    <div class="div-underline " style="height: 240px;">
+                                    <div class="div-underline ">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridTask" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="DisplayName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -428,7 +441,7 @@
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
                                             </GroupSummary>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
-                                            <SettingsPager NumericButtonCount="3"></SettingsPager>
+                                            <SettingsPager ShowNumericButtons="false"></SettingsPager>
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
                                                 <RowHotTrack BackColor="#ff400d" ForeColor="White"></RowHotTrack>
@@ -436,12 +449,12 @@
                                         </dx:ASPxGridView>
                                     </div>
                                 </td>
-                                <td rowspan="5" style="width: 30px;"></td>
+                                <td style="width: 30px;"></td>
                                 <td style="width: 300px; vertical-align: top;" runat="server" id="tdFollowup" visible="false">
                                     <h4 class="top_h4">
                                         <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">Follow Up</span> </h4>
                                     <%--------end-------%>
-                                    <div class="div-underline " style="height: 240px;">
+                                    <div class="div-underline " >
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridFollowUp" ClientInstanceName="gridCallbackClient" KeyFieldName="BBLE" AutoGenerateColumns="false" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1" CellStyle-CssClass="cell_hover">
@@ -491,13 +504,20 @@
                                         </dx:ASPxGridView>
                                     </div>
                                 </td>
-                                <td rowspan="5" style="width: 30px;"></td>
+                                <td style="width: 30px;"></td>
                             </tr>
-                            <tr style="height: 100%">
-                                <td colspan="14" style="border-bottom: 3px solid white" id="tdGrid">
-                                    <div style="margin-right: 30px;">
-                                        <div class="clearfix" style="margin-bottom: 20px; overflow: auto">
-                                            <h4 style="padding-top: 20px">
+                        </table>
+                    </div>
+                </dx:SplitterContentControl>
+            </ContentCollection>
+        </dx:SplitterPane>
+        <dx:SplitterPane Size="560px" MinSize="280px" AllowResize="False">   
+            <PaneStyle Paddings-Padding="10" ></PaneStyle>            
+            <ContentCollection>
+                <dx:SplitterContentControl>
+                    <div style="">
+                        <div class="clearfix" style="overflow: auto">
+                            <h4 style="padding-top:1px">
                                                 <i class="fa fa-folder-open with_circle title_summary_icon" style=""></i><span class="heading_text2"><%--Leads and Active--%> Files</span>
                                                 <%--<span class="table_tips" style="margin-left: 40px;">Shows all files that haven’t closed or been archived.
                                                 </span>--%>                                                
@@ -546,14 +566,14 @@
                                                 }
 
                                                 function RemoveReport(name) {
-                                                    if (confirm("Are you sure to delete this report?"))
-                                                    {
+                                    if (confirm("Are you sure to delete this report?")) {
                                                         cbpSavedReportClient.PerformCallback("RemoveReport|" + name);
                                                     }
                                                 }
 
                                             </script>
-                                            <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="8" KeyFieldName="CaseId" Width="100%" Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="300" ForeColor="#b1b2b7" Settings-HorizontalScrollBarMode="Auto" OnCustomCallback="AllLeadsGrid_OnCustomCallback">
+                            <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="20" KeyFieldName="CaseId" Width="100%" 
+                                Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="370" ForeColor="#b1b2b7" Settings-HorizontalScrollBarMode="Auto" OnCustomCallback="AllLeadsGrid_OnCustomCallback">
                                                 <Styles>
                                                     <Row CssClass="summary_row">
                                                     </Row>
@@ -584,7 +604,7 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="ReferralTeam" Caption="Team">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="ListAgentName" Caption="List Agent">
+                                    <dx:GridViewDataTextColumn FieldName="ListingAgentName" Caption="List Agent">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="SellerAttorneyName" Caption="Seller Attorney">
                                                     </dx:GridViewDataTextColumn>
@@ -713,8 +733,8 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name" Caption="Listing agent">
-                                                    </dx:GridViewDataTextColumn>
+                                    <%--   <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name" Caption="Listing agent">
+                                                    </dx:GridViewDataTextColumn>--%>
                                                     <dx:GridViewDataTextColumn FieldName="Manager">
                                                     </dx:GridViewDataTextColumn>
 
@@ -747,6 +767,7 @@
                                                     <CustomizationWindow Height="400px" Width="300px" />
                                                 </SettingsPopup>
                                             </dx:ASPxGridView>
+
                                             <dx:ASPxGridViewExporter ID="gridExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
                                             <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="gridData"></dx:ASPxGridViewExporter>
                                             <dx:ASPxGridView ID="gridData" runat="server" Visible="false"
@@ -822,27 +843,12 @@
                                                 </Columns>
                                             </dx:ASPxGridView>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </dx:SplitterContentControl>
-            </ContentCollection>
-        </dx:SplitterPane>
-        <dx:SplitterPane Size="290px" MinSize="280px" Visible="false">
-            <PaneStyle BackColor="#EFF2F5"></PaneStyle>
-            <Separator Visible="False"></Separator>
-            <ContentCollection>
-                <dx:SplitterContentControl>
-                    <div style="width: 290px; height: 100%; background: #EFF2F5;">
-                        <%--/*the showlder box*--%>
-                        <div style="width: 30px; height: 100%; float: left; position: relative; left: 0px; top: 0px; box-shadow: inset 20px -10px 13px -15px rgba(2, 2, 2, 0.3);"></div>
                     </div>
                 </dx:SplitterContentControl>
             </ContentCollection>
         </dx:SplitterPane>
     </Panes>
+    <ClientSideEvents PaneCollapsed="function(s,e){AdjustGridViewSize(s,e);}" PaneExpanded="function(s,e){ AdjustGridViewSize(s,e);}" />
 </dx:ASPxSplitter>
 <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
 <div id="right-pane-container" class="clearfix">
@@ -851,16 +857,12 @@
         <div style="height: 100%; background: #EFF2F5;">
             <div style="width: 310px; background: #f5f5f5" class="agent_layout_float">
                 <div style="margin-left: 30px; margin-top: 30px; margin-right: 20px; font-size: 24px; float: none;">
-
                     <div>
-
-                        <div style="padding-top: 19px; padding-bottom: 14px; display:none" class="border_under_line">
+                        <div style="padding-top: 19px; padding-bottom: 14px; display: none" class="border_under_line">
                             <span style="color: #234b60">Custom Fields</span>
                             <i class="fa fa-question-circle tooltip-examples" title="Check items view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
                         </div>
-
-                        <div style="margin-top: 20px; display:none" id="custom_fields_div">
-
+                        <div style="margin-top: 20px; display: none" id="custom_fields_div">
                             <script type="text/javascript">
                                 function Fields_ValueChanged(s, e) {
                                     AllLeadsGridClient.PerformCallback();
@@ -920,7 +922,7 @@
                                         <% Next%>
                                     </ul>
                                     <% Else%>
-                                     <span style="font-size:14px"> No reports saved.</span>
+                                    <span style="font-size: 14px">No reports saved.</span>
                                      <% End If%>
                                 </dx:PanelContent>
                             </PanelCollection>
