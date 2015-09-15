@@ -29,7 +29,7 @@ Partial Public Class UploadFilePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblSelectImage As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblSelectImage As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''uplImage control.
@@ -38,7 +38,7 @@ Partial Public Class UploadFilePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents uplImage As Global.DevExpress.Web.ASPxUploadControl.ASPxUploadControl
+    Protected WithEvents uplImage As Global.DevExpress.Web.ASPxUploadControl
 
     '''<summary>
     '''hfBBLE control.
@@ -47,7 +47,7 @@ Partial Public Class UploadFilePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents hfBBLE As Global.DevExpress.Web.ASPxHiddenField.ASPxHiddenField
+    Protected WithEvents hfBBLE As Global.DevExpress.Web.ASPxHiddenField
 
     '''<summary>
     '''hfBBLEData control.
@@ -65,7 +65,7 @@ Partial Public Class UploadFilePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblAllowebMimeType As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblAllowebMimeType As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''ASPxLabel2 control.
@@ -74,7 +74,7 @@ Partial Public Class UploadFilePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxLabel2 As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents ASPxLabel2 As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''ASPxLabel1 control.
@@ -83,7 +83,7 @@ Partial Public Class UploadFilePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxLabel1 As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents ASPxLabel1 As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''cbCategory control.
@@ -92,7 +92,7 @@ Partial Public Class UploadFilePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbCategory As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbCategory As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''btnUpload control.
@@ -101,7 +101,7 @@ Partial Public Class UploadFilePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnUpload As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnUpload As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxButton1 control.
@@ -110,7 +110,7 @@ Partial Public Class UploadFilePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''LoadingPanel control.
@@ -119,5 +119,5 @@ Partial Public Class UploadFilePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LoadingPanel As Global.DevExpress.Web.ASPxLoadingPanel.ASPxLoadingPanel
+    Protected WithEvents LoadingPanel As Global.DevExpress.Web.ASPxLoadingPanel
 End Class

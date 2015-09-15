@@ -1,4 +1,4 @@
-﻿Imports DevExpress.Web.ASPxEditors
+﻿Imports DevExpress.Web
 
 Public Class AssignRulesControl
     Inherits System.Web.UI.UserControl

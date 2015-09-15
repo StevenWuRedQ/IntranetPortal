@@ -20,5 +20,5 @@ Partial Public Class Common
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupMenu2 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+    Protected WithEvents ASPxPopupMenu2 As Global.DevExpress.Web.ASPxPopupMenu
 End Class

@@ -38,5 +38,5 @@ Partial Public Class ShortSalePropertyTab
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents home_breakdown_gridview As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents home_breakdown_gridview As Global.DevExpress.Web.ASPxGridView
 End Class

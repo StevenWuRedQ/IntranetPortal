@@ -96,18 +96,18 @@ Public Class AgentCharts
         End Using
     End Function
 
-    Protected Sub callbackDs_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub callbackDs_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         LeadsCategory = CType(e.Parameter, LeadStatus)
 
         e.Result = ChartSource()
     End Sub
 
-    Protected Sub ASPxCallback1_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub ASPxCallback1_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         current_employee = e.Parameter
         e.Result = Agent_leads_activity_source()
     End Sub
 
-    Protected Sub loadAgentCallBack_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub loadAgentCallBack_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         current_employee = e.Parameter.Split(",")(0)
         Dim days = e.Parameter.Split(",")(1)
         Dim formeDate = Date.Today
@@ -116,13 +116,13 @@ Public Class AgentCharts
         e.Result = AgentActivityToday(formeDate)
     End Sub
 
-    Protected Sub loadAgentZoning_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub loadAgentZoning_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         current_employee = e.Parameter
 
         e.Result = AgentZoningData()
     End Sub
 
-    Protected Sub loadOfficeLeadsCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub loadOfficeLeadsCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         e.Result = OfficeLeadsSource(e.Parameter)
     End Sub
     Public Function map_x_axis(x_axis As String) As String
@@ -227,7 +227,7 @@ Public Class AgentCharts
         End Using
     End Function
 
-    Protected Sub char_change_x_axis_id_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub char_change_x_axis_id_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim a_x_axis = e.Parameter.Split("|")(0)
         Dim a_empID = e.Parameter.Split("|")(1)
         current_employee = a_empID
@@ -249,7 +249,7 @@ Public Class AgentCharts
 
     End Function
 
-    Protected Sub LoadStatusBarChartByOffice_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub LoadStatusBarChartByOffice_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim status = Convert.ToInt32(e.Parameter.Split("|")(0))
         Dim office = e.Parameter.Split("|")(1)
         e.Result = getStatusBarChartByOffice(status, office)

@@ -1,7 +1,5 @@
-﻿Imports DevExpress.Web.ASPxEditors
+﻿Imports DevExpress.Web
 Imports System.Globalization
-Imports DevExpress.Web.ASPxCallbackPanel
-Imports DevExpress.Web.ASPxPopupControl
 Imports DevExpress.Web.ASPxHtmlEditor
 Imports IntranetPortal.Data
 Imports ShortSale = IntranetPortal.Data
@@ -147,7 +145,7 @@ Public Class ActivityLogs
     '    End Using
     'End Function
 
-    Protected Sub gridTracking_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs) Handles gridTracking.CustomCallback
+    Protected Sub gridTracking_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs) Handles gridTracking.CustomCallback
         If (e.Parameters = "Task") Then
             SetAsTask()
         End If
@@ -581,8 +579,8 @@ Public Class ActivityLogs
 
     End Sub
 
-    Protected Sub gridTracking_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs) Handles gridTracking.HtmlRowPrepared
-        If Not e.RowType = DevExpress.Web.ASPxGridView.GridViewRowType.Data Then
+    Protected Sub gridTracking_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridViewTableRowEventArgs) Handles gridTracking.HtmlRowPrepared
+        If Not e.RowType = DevExpress.Web.GridViewRowType.Data Then
             Return
         End If
 
@@ -874,7 +872,7 @@ Public Class ActivityLogs
         End If
     End Sub
 
-    Protected Sub gridTracking_AfterPerformCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewAfterPerformCallbackEventArgs)
+    Protected Sub gridTracking_AfterPerformCallback(sender As Object, e As DevExpress.Web.ASPxGridViewAfterPerformCallbackEventArgs)
         If Not String.IsNullOrEmpty(hfBBLE.Value) Then
             BindData(hfBBLE.Value)
         End If
@@ -908,7 +906,7 @@ Public Class ActivityLogs
         Return String.Format(CommentTypeIconFormat, bgColor, fontClass)
     End Function
 
-    Protected Sub addCommentsCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub addCommentsCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         If String.IsNullOrEmpty(e.Parameter) Then
             Return
         End If
@@ -1009,13 +1007,13 @@ Public Class ActivityLogs
         'BindData(hfBBLE.Value)
     End Sub
 
-    Protected Sub addLogsCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub addLogsCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim comments = e.Parameter
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.Comments)
     End Sub
 
     'Set as task popup call back
-    Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         Dim popup = CType(source, ASPxPopupControl)
         
         PopupContentSetAsTask.Visible = True
@@ -1116,7 +1114,7 @@ Public Class ActivityLogs
         End If
     End Sub
 
-    Protected Sub callbackGetEmployeesByAction_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub callbackGetEmployeesByAction_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim action = e.Parameter
 
         If action = "Lookup Request" Then
@@ -1171,7 +1169,7 @@ Public Class ActivityLogs
         End If
     End Sub
 
-    Protected Sub cmbStatus_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub cmbStatus_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
 
     End Sub
 
@@ -1195,7 +1193,7 @@ Public Class ActivityLogs
         End If
     End Sub
 
-    Protected Sub aspxPopupSchedule_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub aspxPopupSchedule_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         popupContentSchedule.Visible = True
         cbMgr.DataBind()
         If Not String.IsNullOrEmpty(e.Parameter) Then

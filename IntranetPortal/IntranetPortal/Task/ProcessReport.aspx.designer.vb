@@ -29,7 +29,7 @@ Partial Public Class ProcessReport
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''ASPxNavBar1 control.
@@ -38,5 +38,5 @@ Partial Public Class ProcessReport
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxNavBar1 As Global.DevExpress.Web.ASPxNavBar.ASPxNavBar
+    Protected WithEvents ASPxNavBar1 As Global.DevExpress.Web.ASPxNavBar
 End Class

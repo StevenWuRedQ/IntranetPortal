@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class SearchRecodingPopupCtrl
-    
+
     '''<summary>
     '''RecodingPopup1 control.
     '''</summary>
@@ -20,5 +20,5 @@ Partial Public Class SearchRecodingPopupCtrl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RecodingPopup1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents SearchRecodingPopup As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 End Class

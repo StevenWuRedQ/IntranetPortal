@@ -20,7 +20,7 @@ Partial Public Class WorklistReport
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblUserName As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblUserName As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''GridWorklist control.
@@ -29,5 +29,5 @@ Partial Public Class WorklistReport
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents GridWorklist As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents GridWorklist As Global.DevExpress.Web.ASPxGridView
 End Class

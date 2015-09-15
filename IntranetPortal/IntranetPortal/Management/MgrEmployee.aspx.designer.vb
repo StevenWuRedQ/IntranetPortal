@@ -29,7 +29,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''ASPxRoundPanel1 control.
@@ -38,7 +38,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxRoundPanel1 As Global.DevExpress.Web.ASPxRoundPanel.ASPxRoundPanel
+    Protected WithEvents ASPxRoundPanel1 As Global.DevExpress.Web.ASPxRoundPanel
 
     '''<summary>
     '''SearchName control.
@@ -65,7 +65,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkActive As Global.DevExpress.Web.ASPxEditors.ASPxCheckBox
+    Protected WithEvents chkActive As Global.DevExpress.Web.ASPxCheckBox
 
     '''<summary>
     '''treeList control.
@@ -83,7 +83,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''Popupcontrolcontentcontrol1 control.
@@ -92,7 +92,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Popupcontrolcontentcontrol1 As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents Popupcontrolcontentcontrol1 As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''npsw control.
@@ -101,7 +101,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents npsw As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents npsw As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''cnpsw control.
@@ -110,7 +110,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cnpsw As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents cnpsw As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''confirmButton control.
@@ -119,7 +119,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents confirmButton As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents confirmButton As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxPopupControl2 control.
@@ -128,7 +128,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''Popupcontrolcontentcontrol2 control.
@@ -137,7 +137,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Popupcontrolcontentcontrol2 As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents Popupcontrolcontentcontrol2 As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''lblSelectImage control.
@@ -146,7 +146,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblSelectImage As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblSelectImage As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''uplImage control.
@@ -155,7 +155,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents uplImage As Global.DevExpress.Web.ASPxUploadControl.ASPxUploadControl
+    Protected WithEvents uplImage As Global.DevExpress.Web.ASPxUploadControl
 
     '''<summary>
     '''lblAllowebMimeType control.
@@ -164,7 +164,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblAllowebMimeType As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblAllowebMimeType As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''lblMaxFileSize control.
@@ -173,7 +173,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblMaxFileSize As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblMaxFileSize As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''btnUpload control.
@@ -182,7 +182,7 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnUpload As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnUpload As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''btnConfirm control.
@@ -191,5 +191,5 @@ Partial Public Class MgrEmployee
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnConfirm As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnConfirm As Global.DevExpress.Web.ASPxButton
 End Class

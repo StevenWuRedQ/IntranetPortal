@@ -29,7 +29,7 @@ Partial Public Class Main
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LeftSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents LeftSplitter As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''MenuCorner control.
@@ -38,7 +38,7 @@ Partial Public Class Main
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MenuCorner As Global.DevExpress.Web.ASPxMenu.ASPxMenu
+    Protected WithEvents MenuCorner As Global.DevExpress.Web.ASPxMenu
 
     '''<summary>
     '''Content control.

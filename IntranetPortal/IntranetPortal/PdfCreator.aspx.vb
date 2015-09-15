@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Imports System.Threading
-Imports DevExpress.Web.ASPxClasses.Internal
+Imports DevExpress.Web.Internal
 Imports DevExpress.XtraReports.UI
 Imports System.Net
 

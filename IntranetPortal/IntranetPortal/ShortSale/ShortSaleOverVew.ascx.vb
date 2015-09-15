@@ -17,7 +17,7 @@ Public Class ShortSaleOverVew
 
     End Sub
 
-    Protected Sub overviewCallbackPanel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub overviewCallbackPanel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
 
     End Sub
 
@@ -37,7 +37,7 @@ Public Class ShortSaleOverVew
         gvPropertyValueInfo.DataBind()
     End Sub
 
-    Protected Sub SaveClicklCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub SaveClicklCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim res = JsonConvert.DeserializeObject(Of ShortSaleCase)(e.Parameter)
 
         res.SaveChanges()
@@ -51,12 +51,12 @@ Public Class ShortSaleOverVew
         Return json
     End Function
 
-    Protected Sub getShortSaleInstance_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub getShortSaleInstance_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim ID As String = e.Parameter
         e.Result = getShortSaleJson(ShortSaleCase.GetCase(Convert.ToInt32(ID)))
     End Sub
 
-    Protected Sub leadsCommentsCallbackPanel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub leadsCommentsCallbackPanel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         If shortSaleCaseData.CaseId = 0 AndAlso Not String.IsNullOrEmpty(hfCaseId.Value) Then
             shortSaleCaseData = ShortSaleCase.GetCase(CInt(hfCaseId.Value))
         End If

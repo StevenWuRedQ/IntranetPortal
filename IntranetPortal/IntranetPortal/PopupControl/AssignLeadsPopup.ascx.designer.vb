@@ -20,7 +20,7 @@ Partial Public Class AssignLeadsPopup
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents AssignLeadsPopUp As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents AssignLeadsPopUp As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''RulesGrid control.
@@ -29,7 +29,7 @@ Partial Public Class AssignLeadsPopup
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RulesGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents RulesGrid As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''hfSource control.

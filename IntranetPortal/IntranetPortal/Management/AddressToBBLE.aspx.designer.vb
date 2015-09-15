@@ -38,7 +38,7 @@ Partial Public Class AddressToBBLE
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents aspShowError As Global.DevExpress.Web.ASPxEditors.ASPxCheckBox
+    Protected WithEvents aspShowError As Global.DevExpress.Web.ASPxCheckBox
 
     '''<summary>
     '''FormatAddressBtn control.

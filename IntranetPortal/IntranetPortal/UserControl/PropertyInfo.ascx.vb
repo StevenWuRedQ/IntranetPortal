@@ -32,7 +32,7 @@
         End If
         Return add_info
     End Function
-    Protected Sub leadsCommentsCallbackPanel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub leadsCommentsCallbackPanel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         If LeadsInfoData.BBLE Is Nothing AndAlso hfBBLE.Value IsNot Nothing Then
             LeadsInfoData = LeadsInfo.GetInstance(hfBBLE.Value)
         End If
@@ -62,7 +62,7 @@
         End If
     End Sub
 
-    Protected Sub callPanelReferrel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub callPanelReferrel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         If e.Parameter = "Save" Then
             Dim bble = hfBBLE.Value
 
@@ -88,7 +88,7 @@
         End If
     End Sub
 
-    Protected Sub cbpMortgageData_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub cbpMortgageData_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         If e.Parameter = "Save" Then
             Dim bble = hfBBLE.Value
 

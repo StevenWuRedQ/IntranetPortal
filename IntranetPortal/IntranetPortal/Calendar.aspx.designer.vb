@@ -20,7 +20,7 @@ Partial Public Class Calendar
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents calendarPages As Global.DevExpress.Web.ASPxTabControl.ASPxPageControl
+    Protected WithEvents calendarPages As Global.DevExpress.Web.ASPxPageControl
 
     '''<summary>
     '''Scheduler control.

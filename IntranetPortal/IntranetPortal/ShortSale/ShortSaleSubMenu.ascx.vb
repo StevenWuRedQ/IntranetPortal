@@ -8,12 +8,12 @@ Public Class ShortSaleSubMenu
 
     End Sub
 
-    Protected Sub getAddressCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub getAddressCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim propInfo = ShortSale.PropertyBaseInfo.GetInstance(e.Parameter)
         e.Result = propInfo.PropertyAddress + "|Block:" + propInfo.Block + " Lot:" + propInfo.Lot
     End Sub
 
-    Protected Sub statusCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub statusCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim status As ShortSale.CaseStatus
         If [Enum].TryParse(Of ShortSale.CaseStatus)(e.Parameter.Split("|")(0), status) Then
             Dim caseId = CInt(e.Parameter.Split("|")(1))
@@ -55,7 +55,7 @@ Public Class ShortSaleSubMenu
         End If
     End Sub
 
-    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         If String.IsNullOrEmpty(e.Parameter) Then
             PopupContentReAssign.Visible = True
             BindEmployeeList()
@@ -80,7 +80,7 @@ Public Class ShortSaleSubMenu
         End Using
     End Sub
 
-    Protected Sub ASPxPopupControl4_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub ASPxPopupControl4_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         If String.IsNullOrEmpty(e.Parameter) Then
             popupCtrEvictionUser.Visible = True
             BindEvictionUser()

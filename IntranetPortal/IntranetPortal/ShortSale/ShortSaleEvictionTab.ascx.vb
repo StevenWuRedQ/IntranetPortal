@@ -8,7 +8,7 @@ Public Class ShortSaleEvictionTab
 
     
 
-    Protected Sub AddOccupantNotes_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub AddOccupantNotes_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         Dim OccupantId = CInt(e.Parameter.Split("|")(0))
         Dim Notes = e.Parameter.Split("|")(1)
         Using context As New ShortSaleEntities

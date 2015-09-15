@@ -29,7 +29,7 @@ Partial Public Class LeadsSearchApproval
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbApproval As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents cbApproval As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''hfSearchName control.

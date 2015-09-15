@@ -4,8 +4,6 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal", "IntranetPortal\IntranetPortal.vbproj", "{6CA9F52B-C8D7-4098-8FB4-0626D61A9E32}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.ShortSale", "IntranetPortal.ShortSale\IntranetPortal.ShortSale.vbproj", "{FC0C5F0D-F387-48ED-A96C-6D4E1914FD0B}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.Testing", "IntranetPortal.Testing\IntranetPortal.Testing.vbproj", "{F69C9FCB-55A1-423E-A1DC-FB08A28BBC8D}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.Core", "IntranetPortal.Core\IntranetPortal.Core.vbproj", "{5DA9A152-6E61-4CDE-BAF5-6309ED56539A}"
@@ -23,8 +21,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{43375D
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.Legal", "IntranetPortal.Legal\IntranetPortal.Legal.vbproj", "{F816325A-F7BD-4C84-93A4-EF33DAE80E6F}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.Data", "IntranetPortal.Data\IntranetPortal.Data.vbproj", "{51557141-4472-40E6-82BD-30275F702486}"
 EndProject
 Global
@@ -37,10 +33,6 @@ Global
 		{6CA9F52B-C8D7-4098-8FB4-0626D61A9E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CA9F52B-C8D7-4098-8FB4-0626D61A9E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CA9F52B-C8D7-4098-8FB4-0626D61A9E32}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FC0C5F0D-F387-48ED-A96C-6D4E1914FD0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FC0C5F0D-F387-48ED-A96C-6D4E1914FD0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FC0C5F0D-F387-48ED-A96C-6D4E1914FD0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FC0C5F0D-F387-48ED-A96C-6D4E1914FD0B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F69C9FCB-55A1-423E-A1DC-FB08A28BBC8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F69C9FCB-55A1-423E-A1DC-FB08A28BBC8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F69C9FCB-55A1-423E-A1DC-FB08A28BBC8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,10 +57,6 @@ Global
 		{2B915A55-7815-4D0D-8CF6-8384F4638099}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B915A55-7815-4D0D-8CF6-8384F4638099}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B915A55-7815-4D0D-8CF6-8384F4638099}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F816325A-F7BD-4C84-93A4-EF33DAE80E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F816325A-F7BD-4C84-93A4-EF33DAE80E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F816325A-F7BD-4C84-93A4-EF33DAE80E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F816325A-F7BD-4C84-93A4-EF33DAE80E6F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{51557141-4472-40E6-82BD-30275F702486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{51557141-4472-40E6-82BD-30275F702486}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51557141-4472-40E6-82BD-30275F702486}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -78,39 +66,33 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 11
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://chrispc:8080/tfs/defaultcollection
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = IntranetPortal\\IntranetPortal.vbproj
 		SccProjectName1 = IntranetPortal
 		SccLocalPath1 = IntranetPortal
-		SccProjectUniqueName2 = IntranetPortal.ShortSale\\IntranetPortal.ShortSale.vbproj
-		SccProjectName2 = IntranetPortal.ShortSale
-		SccLocalPath2 = IntranetPortal.ShortSale
-		SccProjectUniqueName3 = IntranetPortal.Testing\\IntranetPortal.Testing.vbproj
-		SccProjectName3 = IntranetPortal.Testing
-		SccLocalPath3 = IntranetPortal.Testing
-		SccProjectUniqueName4 = IntranetPortal.Core\\IntranetPortal.Core.vbproj
-		SccProjectName4 = IntranetPortal.Core
-		SccLocalPath4 = IntranetPortal.Core
-		SccProjectUniqueName5 = IntranetPortal.RulesEngin\\IntranetPortal.RulesEngine.vbproj
-		SccProjectName5 = IntranetPortal.RulesEngin
-		SccLocalPath5 = IntranetPortal.RulesEngin
-		SccProjectUniqueName6 = RuleEngineManage\\RuleEngineManage.vbproj
-		SccProjectName6 = RuleEngineManage
-		SccLocalPath6 = RuleEngineManage
-		SccProjectUniqueName7 = RuleEngineService\\RuleEngineService.vbproj
-		SccProjectName7 = RuleEngineService
-		SccLocalPath7 = RuleEngineService
-		SccProjectUniqueName8 = IntranetPortal.Management\\IntranetPortal.Management.vbproj
-		SccProjectName8 = IntranetPortal.Management
-		SccLocalPath8 = IntranetPortal.Management
-		SccProjectUniqueName9 = IntranetPortal.Legal\\IntranetPortal.Legal.vbproj
-		SccProjectName9 = IntranetPortal.Legal
-		SccLocalPath9 = IntranetPortal.Legal
-		SccProjectUniqueName10 = IntranetPortal.Data\\IntranetPortal.Data.vbproj
-		SccProjectName10 = IntranetPortal.Data
-		SccLocalPath10 = IntranetPortal.Data
+		SccProjectUniqueName2 = IntranetPortal.Testing\\IntranetPortal.Testing.vbproj
+		SccProjectName2 = IntranetPortal.Testing
+		SccLocalPath2 = IntranetPortal.Testing
+		SccProjectUniqueName3 = IntranetPortal.Core\\IntranetPortal.Core.vbproj
+		SccProjectName3 = IntranetPortal.Core
+		SccLocalPath3 = IntranetPortal.Core
+		SccProjectUniqueName4 = IntranetPortal.RulesEngin\\IntranetPortal.RulesEngine.vbproj
+		SccProjectName4 = IntranetPortal.RulesEngin
+		SccLocalPath4 = IntranetPortal.RulesEngin
+		SccProjectUniqueName5 = RuleEngineManage\\RuleEngineManage.vbproj
+		SccProjectName5 = RuleEngineManage
+		SccLocalPath5 = RuleEngineManage
+		SccProjectUniqueName6 = RuleEngineService\\RuleEngineService.vbproj
+		SccProjectName6 = RuleEngineService
+		SccLocalPath6 = RuleEngineService
+		SccProjectUniqueName7 = IntranetPortal.Management\\IntranetPortal.Management.vbproj
+		SccProjectName7 = IntranetPortal.Management
+		SccLocalPath7 = IntranetPortal.Management
+		SccProjectUniqueName8 = IntranetPortal.Data\\IntranetPortal.Data.vbproj
+		SccProjectName8 = IntranetPortal.Data
+		SccLocalPath8 = IntranetPortal.Data
 	EndGlobalSection
 EndGlobal

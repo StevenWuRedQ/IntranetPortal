@@ -29,7 +29,7 @@ Partial Public Class ViewHomeOwner
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtBBLE As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtBBLE As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''btnLoad control.
@@ -38,7 +38,7 @@ Partial Public Class ViewHomeOwner
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnLoad As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnLoad As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''cbOwners control.
@@ -47,7 +47,7 @@ Partial Public Class ViewHomeOwner
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbOwners As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbOwners As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''btnView control.
@@ -56,7 +56,7 @@ Partial Public Class ViewHomeOwner
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnView As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnView As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''btnLoadOwnerInfo control.
@@ -65,7 +65,7 @@ Partial Public Class ViewHomeOwner
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnLoadOwnerInfo As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnLoadOwnerInfo As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''lbArgumentSend control.
@@ -74,7 +74,7 @@ Partial Public Class ViewHomeOwner
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbArgumentSend As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lbArgumentSend As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''txtOwnerData control.
@@ -83,5 +83,5 @@ Partial Public Class ViewHomeOwner
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtOwnerData As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+    Protected WithEvents txtOwnerData As Global.DevExpress.Web.ASPxMemo
 End Class

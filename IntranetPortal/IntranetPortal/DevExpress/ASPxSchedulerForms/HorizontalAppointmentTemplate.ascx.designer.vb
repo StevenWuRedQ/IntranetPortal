@@ -47,7 +47,7 @@ Partial Public Class HorizontalAppointmentTemplate
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblStartContinueText As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblStartContinueText As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''startTimeClockContainer control.
@@ -65,7 +65,7 @@ Partial Public Class HorizontalAppointmentTemplate
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblStartTime As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblStartTime As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''imageContainer control.
@@ -83,7 +83,7 @@ Partial Public Class HorizontalAppointmentTemplate
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblTitle As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblTitle As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''endTimeClockContainer control.
@@ -101,7 +101,7 @@ Partial Public Class HorizontalAppointmentTemplate
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblEndTime As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblEndTime As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''lblEndContinueText control.
@@ -110,7 +110,7 @@ Partial Public Class HorizontalAppointmentTemplate
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblEndContinueText As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblEndContinueText As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''imgEndContinueArrow control.

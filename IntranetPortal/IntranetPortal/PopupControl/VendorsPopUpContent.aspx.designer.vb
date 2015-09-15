@@ -29,7 +29,7 @@ Partial Public Class VendorsPopUpContent
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtContact As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtContact As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''txtCompanyName control.
@@ -38,7 +38,7 @@ Partial Public Class VendorsPopUpContent
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtCompanyName As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtCompanyName As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''txtAddress control.
@@ -56,5 +56,5 @@ Partial Public Class VendorsPopUpContent
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtEmail As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtEmail As Global.DevExpress.Web.ASPxTextBox
 End Class

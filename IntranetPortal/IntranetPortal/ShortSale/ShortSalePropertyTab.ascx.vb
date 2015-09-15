@@ -1,6 +1,6 @@
 ﻿Imports Newtonsoft.Json
 Imports IntranetPortal.Data
-Imports DevExpress.Web.ASPxGridView
+Imports DevExpress.Web
 
 Public Class ShortSalePropertyTab
     Inherits System.Web.UI.UserControl

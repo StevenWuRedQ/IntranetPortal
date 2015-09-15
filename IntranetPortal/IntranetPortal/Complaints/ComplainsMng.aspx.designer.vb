@@ -20,7 +20,7 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cpAddProperty As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents cpAddProperty As Global.DevExpress.Web.ASPxCallbackPanel
 
     '''<summary>
     '''rbBBLE control.
@@ -29,7 +29,7 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rbBBLE As Global.DevExpress.Web.ASPxEditors.ASPxRadioButton
+    Protected WithEvents rbBBLE As Global.DevExpress.Web.ASPxRadioButton
 
     '''<summary>
     '''rbAddress control.
@@ -38,7 +38,7 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rbAddress As Global.DevExpress.Web.ASPxEditors.ASPxRadioButton
+    Protected WithEvents rbAddress As Global.DevExpress.Web.ASPxRadioButton
 
     '''<summary>
     '''txtBBLE control.
@@ -47,7 +47,7 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtBBLE As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtBBLE As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''txtNumber control.
@@ -56,7 +56,7 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtNumber As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtNumber As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''txtStreet control.
@@ -65,7 +65,7 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtStreet As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtStreet As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''txtCity control.
@@ -74,7 +74,7 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtCity As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtCity As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''btnCheck control.
@@ -101,7 +101,7 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblAddress As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblAddress As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''gdComplains control.
@@ -110,7 +110,7 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gdComplains As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gdComplains As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''gdComplainsResult control.
@@ -119,7 +119,7 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gdComplainsResult As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gdComplainsResult As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''ASPxPopupControl1 control.
@@ -128,7 +128,7 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''hfBBLE2 control.
@@ -146,7 +146,7 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tbUsers As Global.DevExpress.Web.ASPxEditors.ASPxTokenBox
+    Protected WithEvents tbUsers As Global.DevExpress.Web.ASPxTokenBox
 
     '''<summary>
     '''popupComplaintHistory control.
@@ -155,7 +155,7 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents popupComplaintHistory As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents popupComplaintHistory As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''popCtrHistory control.
@@ -164,7 +164,7 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents popCtrHistory As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents popCtrHistory As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''hfBBLE control.
@@ -182,5 +182,5 @@ Partial Public Class ComplainsMng
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gdComplainsHistory As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gdComplainsHistory As Global.DevExpress.Web.ASPxGridView
 End Class

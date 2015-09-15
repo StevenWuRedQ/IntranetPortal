@@ -47,14 +47,13 @@ Imports Microsoft.VisualBasic
 Imports System
 Imports System.Web.UI
 Imports DevExpress.XtraScheduler
-Imports DevExpress.Web.ASPxEditors
+Imports DevExpress.Web
 Imports DevExpress.Web.ASPxScheduler
 Imports DevExpress.Web.ASPxScheduler.Internal
 Imports System.Collections
 Imports System.Collections.Generic
 Imports DevExpress.XtraScheduler.Localization
 Imports DevExpress.Web.ASPxScheduler.Controls
-Imports DevExpress.Web.ASPxClasses
 Imports DevExpress.Web.ASPxScheduler.Localization
 
 Partial Public Class AppointmentFormEx

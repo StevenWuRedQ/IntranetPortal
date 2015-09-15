@@ -41,11 +41,11 @@
         End If
     End Sub
 
-    Protected Sub cbpLogs_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub cbpLogs_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         ActivityLogs.BindData(e.Parameter)
     End Sub
 
-    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         PopupContentReAssign.Visible = True
 
         If e.Parameter.StartsWith("Show") Then

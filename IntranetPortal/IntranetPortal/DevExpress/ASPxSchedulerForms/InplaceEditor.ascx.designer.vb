@@ -29,7 +29,7 @@ Partial Public Class InplaceEditor
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents memSubject As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+    Protected WithEvents memSubject As Global.DevExpress.Web.ASPxMemo
 
     '''<summary>
     '''buttonContainer control.

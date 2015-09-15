@@ -20,7 +20,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''gridEmps control.
@@ -29,7 +29,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridEmps As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridEmps As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''contentSplitter control.
@@ -38,7 +38,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''infoCallback control.
@@ -47,7 +47,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents infoCallback As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents infoCallback As Global.DevExpress.Web.ASPxCallbackPanel
 
     '''<summary>
     '''AgentInfoPanel control.
@@ -65,7 +65,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents profile_image As Global.DevExpress.Web.ASPxEditors.ASPxImage
+    Protected WithEvents profile_image As Global.DevExpress.Web.ASPxImage
 
     '''<summary>
     '''OfficeInfoPanel control.
@@ -83,7 +83,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxImage1 As Global.DevExpress.Web.ASPxEditors.ASPxImage
+    Protected WithEvents ASPxImage1 As Global.DevExpress.Web.ASPxImage
 
     '''<summary>
     '''hfEmpName control.
@@ -119,7 +119,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents hfReports As Global.DevExpress.Web.ASPxHiddenField.ASPxHiddenField
+    Protected WithEvents hfReports As Global.DevExpress.Web.ASPxHiddenField
 
     '''<summary>
     '''AgentCharts control.
@@ -137,7 +137,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''Popupcontrolcontentcontrol2 control.
@@ -146,7 +146,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Popupcontrolcontentcontrol2 As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents Popupcontrolcontentcontrol2 As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''ASPxPopupControl1 control.
@@ -155,7 +155,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''Popupcontrolcontentcontrol1 control.
@@ -164,7 +164,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Popupcontrolcontentcontrol1 As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents Popupcontrolcontentcontrol1 As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''txtReportName control.
@@ -173,7 +173,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtReportName As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtReportName As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''btnSave control.
@@ -182,7 +182,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSave As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnSave As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''btnExport control.
@@ -200,7 +200,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridReport As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridReport As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''gridExport control.
@@ -209,7 +209,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+    Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridViewExporter
 
     '''<summary>
     '''callbackPnlTemplates control.
@@ -218,7 +218,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents callbackPnlTemplates As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents callbackPnlTemplates As Global.DevExpress.Web.ASPxCallbackPanel
 
     '''<summary>
     '''chkFields control.
@@ -227,7 +227,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkFields As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
+    Protected WithEvents chkFields As Global.DevExpress.Web.ASPxCheckBoxList
 
     '''<summary>
     '''chkFields2 control.
@@ -236,7 +236,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkFields2 As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
+    Protected WithEvents chkFields2 As Global.DevExpress.Web.ASPxCheckBoxList
 
     '''<summary>
     '''getEmployeeIDByName control.
@@ -245,7 +245,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents getEmployeeIDByName As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents getEmployeeIDByName As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''ASPxPopupControl3 control.
@@ -254,7 +254,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''cbPnlCompare control.
@@ -263,7 +263,7 @@ Partial Public Class AgentOverview
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbPnlCompare As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents cbPnlCompare As Global.DevExpress.Web.ASPxCallbackPanel
 
     '''<summary>
     '''hfComparedEmps control.

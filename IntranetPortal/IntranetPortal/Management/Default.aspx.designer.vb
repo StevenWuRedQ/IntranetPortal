@@ -38,7 +38,7 @@ Partial Public Class _Default1
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridHomeOwner As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridHomeOwner As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''gridExport control.
@@ -47,5 +47,5 @@ Partial Public Class _Default1
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+    Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridViewExporter
 End Class

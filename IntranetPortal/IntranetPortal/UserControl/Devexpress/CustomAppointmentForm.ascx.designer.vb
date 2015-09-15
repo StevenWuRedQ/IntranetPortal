@@ -29,7 +29,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblSubject As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblSubject As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''tbSubject control.
@@ -38,7 +38,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tbSubject As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents tbSubject As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''lblLocation control.
@@ -47,7 +47,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblLocation As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblLocation As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''tbLocation control.
@@ -56,7 +56,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tbLocation As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents tbLocation As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''lblType control.
@@ -65,7 +65,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblType As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblType As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''txtType control.
@@ -74,7 +74,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtType As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtType As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''lblStartDate control.
@@ -83,7 +83,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblStartDate As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblStartDate As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''edtStartDate control.
@@ -92,7 +92,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents edtStartDate As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
+    Protected WithEvents edtStartDate As Global.DevExpress.Web.ASPxDateEdit
 
     '''<summary>
     '''lblEndDate control.
@@ -101,7 +101,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblEndDate As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblEndDate As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''edtEndDate control.
@@ -110,7 +110,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents edtEndDate As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
+    Protected WithEvents edtEndDate As Global.DevExpress.Web.ASPxDateEdit
 
     '''<summary>
     '''lblAgent control.
@@ -119,7 +119,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblAgent As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblAgent As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''txtAgent control.
@@ -128,7 +128,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtAgent As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtAgent As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''lblManger control.
@@ -137,7 +137,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblManger As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblManger As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''ASPxTextBox1 control.
@@ -146,7 +146,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxTextBox1 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents ASPxTextBox1 As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''tbDescription control.
@@ -155,7 +155,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tbDescription As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+    Protected WithEvents tbDescription As Global.DevExpress.Web.ASPxMemo
 
     '''<summary>
     '''AppointmentRecurrenceForm1 control.
@@ -173,7 +173,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnOk As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnOk As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''btnCancel control.
@@ -182,7 +182,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnCancel As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnCancel As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''btnDelete control.
@@ -191,7 +191,7 @@ Partial Public Class CustomAppointmentForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnDelete As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnDelete As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''schedulerStatusInfo control.

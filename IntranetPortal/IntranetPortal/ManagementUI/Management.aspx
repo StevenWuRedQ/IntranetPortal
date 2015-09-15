@@ -750,7 +750,6 @@
                                                                     visible: true
                                                                 }
                                                             },
-
                                                         }],
                                                         title: "In Process Leads",
                                                         palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
@@ -827,9 +826,9 @@
                                         };
                                     </script>
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="Geo_Leads_tab">
+                                <%--<div role="tabpanel" class="tab-pane" id="Geo_Leads_tab">
                                     <iframe src="/Map/ZipMap.aspx" style="width: 100%; height: 800px"></iframe>
-                                </div>
+                                </div>--%>
                             </div>
                         </div>
 

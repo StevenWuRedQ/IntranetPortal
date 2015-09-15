@@ -272,7 +272,7 @@ Public Class NGShortSale
         Return If(isChecked, "checked", "")
     End Function
 
-    Protected Sub cbpLogs_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub cbpLogs_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         Dim ssCase = ShortSaleCase.GetCase(e.Parameter)
         ActivityLogs.BindData(ssCase.BBLE)
         ShortSaleFileOverview.BindData(ssCase.BBLE)

@@ -29,7 +29,7 @@ Partial Public Class MgrOffDays
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridOffDays As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridOffDays As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''FormLayoutOffDays control.
@@ -38,7 +38,7 @@ Partial Public Class MgrOffDays
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents FormLayoutOffDays As Global.DevExpress.Web.ASPxFormLayout.ASPxFormLayout
+    Protected WithEvents FormLayoutOffDays As Global.DevExpress.Web.ASPxFormLayout
 
     '''<summary>
     '''cbAgents control.
@@ -47,7 +47,7 @@ Partial Public Class MgrOffDays
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbAgents As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbAgents As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''sDate control.
@@ -56,7 +56,7 @@ Partial Public Class MgrOffDays
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents sDate As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
+    Protected WithEvents sDate As Global.DevExpress.Web.ASPxDateEdit
 
     '''<summary>
     '''endDate control.
@@ -65,7 +65,7 @@ Partial Public Class MgrOffDays
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents endDate As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
+    Protected WithEvents endDate As Global.DevExpress.Web.ASPxDateEdit
 
     '''<summary>
     '''cbReason control.
@@ -74,7 +74,7 @@ Partial Public Class MgrOffDays
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbReason As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbReason As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''submitButton control.
@@ -83,7 +83,7 @@ Partial Public Class MgrOffDays
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents submitButton As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents submitButton As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''gridPublicHoliday control.
@@ -92,7 +92,7 @@ Partial Public Class MgrOffDays
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridPublicHoliday As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridPublicHoliday As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''lblError control.
@@ -101,5 +101,5 @@ Partial Public Class MgrOffDays
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblError As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblError As Global.DevExpress.Web.ASPxLabel
 End Class

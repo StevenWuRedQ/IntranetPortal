@@ -25,7 +25,7 @@
         Next
     End Sub
 
-    Protected Sub cpPrint_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub cpPrint_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         CreateTasks()
     End Sub
 End Class

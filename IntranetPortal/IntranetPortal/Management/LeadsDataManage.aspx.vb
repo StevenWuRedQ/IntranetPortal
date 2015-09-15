@@ -1,4 +1,4 @@
-﻿Imports DevExpress.Web.ASPxUploadControl
+﻿Imports DevExpress.Web
 Imports System.IO
 Imports System.Threading
 Imports System.Web.Script.Serialization
@@ -18,7 +18,7 @@ Public Class LeadsDataManage
         End If
     End Sub
 
-    Protected Sub uplImage_FileUploadComplete(sender As Object, e As DevExpress.Web.ASPxUploadControl.FileUploadCompleteEventArgs) Handles uplImage.FileUploadComplete
+    Protected Sub uplImage_FileUploadComplete(sender As Object, e As DevExpress.Web.FileUploadCompleteEventArgs) Handles uplImage.FileUploadComplete
         e.CallbackData = SavePostedFile(e.UploadedFile)
     End Sub
 
@@ -33,7 +33,7 @@ Public Class LeadsDataManage
         Return uploadedFile.FileName
     End Function
 
-    Protected Sub gridLeadsData_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+    Protected Sub gridLeadsData_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
         Dim fileName = e.Parameters
         ImportLeads(LoadDataFromExcel(fileName))
         gridLeadsData.DataBind()
@@ -75,11 +75,11 @@ Public Class LeadsDataManage
         End If
     End Sub
 
-    Protected Sub gridNewLeads_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+    Protected Sub gridNewLeads_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
         gridNewLeads.DataBind()
     End Sub
 
-    Protected Sub callBackService_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub callBackService_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         If e.Parameter.StartsWith("Start") Then
             StartService()
         End If
@@ -104,7 +104,7 @@ Public Class LeadsDataManage
         End If
     End Sub
 
-    Protected Sub callbackLogs_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs) Handles callbackLogs.Callback
+    Protected Sub callbackLogs_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs) Handles callbackLogs.Callback
         Dim leadsDs = LeadsDataService.GetInstance()
         Dim logs = UserMessage.GetUserMessages(KEY)
 
@@ -114,7 +114,7 @@ Public Class LeadsDataManage
         e.Result = JSONString(logs)
     End Sub
 
-    Protected Sub checkProgress_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub checkProgress_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim leadsDs = LeadsDataService.GetInstance()
         e.Result = JSONString(leadsDs)
     End Sub

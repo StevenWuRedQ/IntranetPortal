@@ -29,7 +29,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxDateEdit1 As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
+    Protected WithEvents ASPxDateEdit1 As Global.DevExpress.Web.ASPxDateEdit
 
     '''<summary>
     '''addCommentsCallback control.
@@ -38,7 +38,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents addCommentsCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents addCommentsCallback As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''addLogsCallback control.
@@ -47,7 +47,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents addLogsCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents addLogsCallback As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''hfBBLE control.
@@ -65,7 +65,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridTracking As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridTracking As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''ASPxPopupControl3 control.
@@ -74,7 +74,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''cbCateLog control.
@@ -83,7 +83,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbCateLog As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
+    Protected WithEvents cbCateLog As Global.DevExpress.Web.ASPxCheckBoxList
 
     '''<summary>
     '''ASPxPopupControl2 control.
@@ -92,7 +92,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''popupContentBpo control.
@@ -101,7 +101,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents popupContentBpo As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents popupContentBpo As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''cbMethods control.
@@ -110,7 +110,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbMethods As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbMethods As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''txtBankValue control.
@@ -119,7 +119,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtBankValue As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtBankValue As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''txtDateofValue control.
@@ -146,7 +146,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''popupPreviousNotes control.
@@ -155,7 +155,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents popupPreviousNotes As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents popupPreviousNotes As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''popupCtontrlPreviousNotes control.
@@ -164,7 +164,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents popupCtontrlPreviousNotes As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents popupCtontrlPreviousNotes As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''gvPreviousNotes control.
@@ -173,7 +173,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gvPreviousNotes As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gvPreviousNotes As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''aspxPopupSchedule control.
@@ -182,7 +182,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents aspxPopupSchedule As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents aspxPopupSchedule As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''popupContentSchedule control.
@@ -191,7 +191,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents popupContentSchedule As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents popupContentSchedule As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''HiddenFieldLogId control.
@@ -200,7 +200,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents HiddenFieldLogId As Global.DevExpress.Web.ASPxHiddenField.ASPxHiddenField
+    Protected WithEvents HiddenFieldLogId As Global.DevExpress.Web.ASPxHiddenField
 
     '''<summary>
     '''formLayout control.
@@ -209,7 +209,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents formLayout As Global.DevExpress.Web.ASPxFormLayout.ASPxFormLayout
+    Protected WithEvents formLayout As Global.DevExpress.Web.ASPxFormLayout
 
     '''<summary>
     '''cbScheduleType control.
@@ -218,7 +218,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbScheduleType As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbScheduleType As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''dateEditSchedule control.
@@ -227,7 +227,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents dateEditSchedule As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
+    Protected WithEvents dateEditSchedule As Global.DevExpress.Web.ASPxDateEdit
 
     '''<summary>
     '''txtLocation control.
@@ -236,7 +236,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtLocation As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtLocation As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''cbMgr control.
@@ -245,7 +245,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbMgr As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbMgr As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''txtScheduleDescription control.
@@ -254,7 +254,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtScheduleDescription As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+    Protected WithEvents txtScheduleDescription As Global.DevExpress.Web.ASPxMemo
 
     '''<summary>
     '''ASPxButton3 control.
@@ -263,7 +263,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton3 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton3 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxPopupControl1 control.
@@ -272,7 +272,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''PopupContentSetAsTask control.
@@ -281,7 +281,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents PopupContentSetAsTask As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents PopupContentSetAsTask As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''hfResend control.
@@ -299,7 +299,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbTaskAction As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbTaskAction As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''callbackGetEmployeesByAction control.
@@ -308,7 +308,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents callbackGetEmployeesByAction As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents callbackGetEmployeesByAction As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''empsDropDownEdit control.
@@ -317,7 +317,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents empsDropDownEdit As Global.DevExpress.Web.ASPxEditors.ASPxDropDownEdit
+    Protected WithEvents empsDropDownEdit As Global.DevExpress.Web.ASPxDropDownEdit
 
     '''<summary>
     '''cbTaskImportant control.
@@ -326,7 +326,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbTaskImportant As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbTaskImportant As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''txtTaskDes control.
@@ -335,7 +335,7 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtTaskDes As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+    Protected WithEvents txtTaskDes As Global.DevExpress.Web.ASPxMemo
 
     '''<summary>
     '''ASPxButton4 control.
@@ -344,5 +344,5 @@ Partial Public Class ActivityLogs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxButton
 End Class

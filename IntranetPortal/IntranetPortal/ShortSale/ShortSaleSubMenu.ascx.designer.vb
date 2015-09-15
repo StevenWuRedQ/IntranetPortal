@@ -20,7 +20,7 @@ Partial Public Class ShortSaleSubMenu
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents popupMenuLeads As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+    Protected WithEvents popupMenuLeads As Global.DevExpress.Web.ASPxPopupMenu
 
     '''<summary>
     '''ASPxPopupControl1 control.
@@ -29,7 +29,7 @@ Partial Public Class ShortSaleSubMenu
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''ASPxPopupControl3 control.
@@ -38,7 +38,7 @@ Partial Public Class ShortSaleSubMenu
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''PopupContentReAssign control.
@@ -47,7 +47,7 @@ Partial Public Class ShortSaleSubMenu
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents PopupContentReAssign As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents PopupContentReAssign As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''listboxEmployee control.
@@ -56,7 +56,7 @@ Partial Public Class ShortSaleSubMenu
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents listboxEmployee As Global.DevExpress.Web.ASPxEditors.ASPxListBox
+    Protected WithEvents listboxEmployee As Global.DevExpress.Web.ASPxListBox
 
     '''<summary>
     '''btnAssign control.
@@ -65,7 +65,7 @@ Partial Public Class ShortSaleSubMenu
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAssign As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnAssign As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxPopupControl4 control.
@@ -74,7 +74,7 @@ Partial Public Class ShortSaleSubMenu
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl4 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl4 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''popupCtrEvictionUser control.
@@ -83,7 +83,7 @@ Partial Public Class ShortSaleSubMenu
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents popupCtrEvictionUser As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents popupCtrEvictionUser As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''lbEvictionUsers control.
@@ -92,7 +92,7 @@ Partial Public Class ShortSaleSubMenu
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbEvictionUsers As Global.DevExpress.Web.ASPxEditors.ASPxListBox
+    Protected WithEvents lbEvictionUsers As Global.DevExpress.Web.ASPxListBox
 
     '''<summary>
     '''ASPxButton1 control.
@@ -101,7 +101,7 @@ Partial Public Class ShortSaleSubMenu
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''getAddressCallback control.
@@ -110,7 +110,7 @@ Partial Public Class ShortSaleSubMenu
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents getAddressCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents getAddressCallback As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''statusCallback control.
@@ -119,7 +119,7 @@ Partial Public Class ShortSaleSubMenu
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents statusCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents statusCallback As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''ASPxPopupControl2 control.
@@ -128,5 +128,5 @@ Partial Public Class ShortSaleSubMenu
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
 End Class

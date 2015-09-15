@@ -1,5 +1,4 @@
-﻿Imports DevExpress.Web.ASPxEditors
-Imports DevExpress.Web.ASPxGridView
+﻿Imports DevExpress.Web
 Imports IntranetPortal.AssignRule
 Imports Newtonsoft.Json
 Imports DevExpress.Web.Data

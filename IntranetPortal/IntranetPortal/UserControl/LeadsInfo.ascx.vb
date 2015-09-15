@@ -1,6 +1,5 @@
-﻿Imports DevExpress.Web.ASPxEditors
+﻿Imports DevExpress.Web
 Imports System.Threading
-Imports DevExpress.Web.ASPxCallback
 Imports IntranetPortal.Core
 
 Public Class LeadsInfo1
@@ -186,7 +185,7 @@ Public Class LeadsInfo1
         Lead.UpdateLeadStatus(bble, status, callbackDate)
     End Sub
 
-    Protected Sub leadStatusCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub leadStatusCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         If e.Parameter.Length > 0 Then
 
             If e.Parameter.StartsWith("Tomorrow") Then
@@ -302,7 +301,7 @@ Public Class LeadsInfo1
         End If
     End Sub
 
-    Protected Sub callPhoneCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub callPhoneCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim needRefesh = False
 
         If e.Parameter.StartsWith("CallPhone") Then
@@ -402,7 +401,7 @@ Public Class LeadsInfo1
         End Using
     End Sub
 
-    Protected Sub ASPxCallbackPanel2_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub ASPxCallbackPanel2_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         Dim bble = ""
         'Dim start = DateTime.Now
         'Debug.WriteLine("Callpanel start:" & DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"))
@@ -497,7 +496,7 @@ Public Class LeadsInfo1
         End Using
 
     End Sub
-    Protected Sub ownerInfoCallbackPanel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub ownerInfoCallbackPanel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         Dim bble = hfBBLE.Value
 
         If Not String.IsNullOrEmpty(e.Parameter) Then
@@ -563,7 +562,7 @@ Public Class LeadsInfo1
         End Using
     End Sub
 
-    Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         popupContentAddAddress.Visible = True
 
         If e.Parameter.StartsWith("Save") Then
@@ -595,7 +594,7 @@ Public Class LeadsInfo1
     End Sub
 
 
-    Protected Sub pcMain_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub pcMain_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         If Not pcMainPopupControl.Visible Then
             pcMainPopupControl.Visible = True
         End If

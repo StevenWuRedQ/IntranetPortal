@@ -29,7 +29,7 @@ Partial Public Class TroubleShooting
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtBble As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtBble As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''btnLoad control.
@@ -38,7 +38,7 @@ Partial Public Class TroubleShooting
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnLoad As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnLoad As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''linkInfo control.
@@ -47,7 +47,7 @@ Partial Public Class TroubleShooting
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents linkInfo As Global.DevExpress.Web.ASPxEditors.ASPxHyperLink
+    Protected WithEvents linkInfo As Global.DevExpress.Web.ASPxHyperLink
 
     '''<summary>
     '''btnGetphone control.
@@ -56,7 +56,7 @@ Partial Public Class TroubleShooting
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnGetphone As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnGetphone As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''Button1 control.
@@ -74,7 +74,7 @@ Partial Public Class TroubleShooting
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtName As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtName As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''btnTestIsManager control.
@@ -83,7 +83,7 @@ Partial Public Class TroubleShooting
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnTestIsManager As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnTestIsManager As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''lblMsg control.
@@ -92,7 +92,7 @@ Partial Public Class TroubleShooting
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblMsg As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblMsg As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''btnTestDataService control.
@@ -101,7 +101,7 @@ Partial Public Class TroubleShooting
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnTestDataService As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnTestDataService As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxButton1 control.
@@ -110,5 +110,5 @@ Partial Public Class TroubleShooting
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxButton
 End Class

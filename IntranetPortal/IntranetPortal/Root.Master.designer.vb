@@ -47,7 +47,7 @@ Partial Public Class Root
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MainSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents MainSplitter As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''NavContentHolder control.
@@ -65,7 +65,7 @@ Partial Public Class Root
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblVersion As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblVersion As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''txtSearchKey control.
@@ -74,7 +74,7 @@ Partial Public Class Root
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtSearchKey As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtSearchKey As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''btnSearch control.
@@ -83,7 +83,7 @@ Partial Public Class Root
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSearch As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnSearch As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''HeadLoginView control.
@@ -101,7 +101,7 @@ Partial Public Class Root
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pcMain As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents pcMain As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''popupContentSearchPanel control.
@@ -110,7 +110,7 @@ Partial Public Class Root
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents popupContentSearchPanel As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents popupContentSearchPanel As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''gridSearch control.
@@ -119,7 +119,7 @@ Partial Public Class Root
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridSearch As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridSearch As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''Panel1 control.
@@ -137,7 +137,7 @@ Partial Public Class Root
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''LeadsSubMenu control.
@@ -173,7 +173,7 @@ Partial Public Class Root
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxButton3 control.
@@ -182,7 +182,7 @@ Partial Public Class Root
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton3 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton3 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxPopupControl1 control.
@@ -191,7 +191,7 @@ Partial Public Class Root
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''SendMail control.

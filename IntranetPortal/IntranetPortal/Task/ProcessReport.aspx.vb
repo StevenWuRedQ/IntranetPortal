@@ -1,4 +1,4 @@
-﻿Imports DevExpress.Web.ASPxGridView
+﻿Imports DevExpress.Web
 
 Public Class ProcessReport
     Inherits System.Web.UI.Page

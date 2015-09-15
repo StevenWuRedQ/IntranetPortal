@@ -30,7 +30,7 @@
         End If
     End Sub
 
-    Protected Sub gridUser_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+    Protected Sub gridUser_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
         CType(gridUser.FindFooterRowTemplateControl("hfUser"), HiddenField).Value = e.Parameters
         'hfUser.Value = e.Parameters
         lblUserName.Text = e.Parameters

@@ -1,13 +1,13 @@
 <%@ Control Language="vb" AutoEventWireup="true" Inherits="IntranetPortal.CustomAppointmentForm" CodeBehind="CustomAppointmentForm.ascx.vb" %>
-<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dxe" %>
-<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler.Controls" TagPrefix="dxsc" %>
-<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler" TagPrefix="dxwschs" %>
+<%@ Register Assembly="DevExpress.Web.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dxe" %>
+<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler.Controls" TagPrefix="dxsc" %>
+<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler" TagPrefix="dxwschs" %>
 
 <div runat="server" id="ValidationContainer">
-    <table class="dxscAppointmentForm" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %> style="width: 100%; height: 230px;">
+    <table class="dxscAppointmentForm" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %> style="width: 100%; height: 230px;">
         <tr>
             <td class="dxscDoubleCell" colspan="2">
-                <table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+                <table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
                     <tr>
                         <td class="dxscLabelCell">
                             <dxe:ASPxLabel ID="lblSubject" runat="server" AssociatedControlID="tbSubject">
@@ -22,7 +22,7 @@
         </tr>
         <tr>
             <td class="dxscSingleCell">
-                <table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+                <table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
                     <tr>
                         <td class="dxscLabelCell">
                             <dxe:ASPxLabel ID="lblLocation" runat="server" AssociatedControlID="tbLocation">
@@ -35,7 +35,7 @@
                 </table>
             </td>
             <td class="dxscSingleCell">
-                <table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+                <table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
                     <tr>
                         <td class="dxscLabelCell" style="padding-left: 25px;">
                             <dxe:ASPxLabel ID="lblType" runat="server" AssociatedControlID="edtLabel" Text="Type">
@@ -50,7 +50,7 @@
         </tr>
         <tr>
             <td class="dxscSingleCell">
-                <table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+                <table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
                     <tr>
                         <td class="dxscLabelCell">
                             <dxe:ASPxLabel ID="lblStartDate" runat="server" AssociatedControlID="edtStartDate" Wrap="false">
@@ -67,7 +67,7 @@
                 </table>
             </td>
             <td class="dxscSingleCell">
-                <table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+                <table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
                     <tr>
                         <td class="dxscLabelCell" style="padding-left: 25px;">
                             <dxe:ASPxLabel runat="server" ID="lblEndDate" Wrap="false" AssociatedControlID="edtEndDate" />
@@ -85,7 +85,7 @@
         </tr>
         <tr>
             <td class="dxscSingleCell">
-                <table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+                <table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
                     <tr>
                         <td class="dxscLabelCell">
                             <dxe:ASPxLabel ID="lblAgent" runat="server" AssociatedControlID="edtStatus" Wrap="false" Text="Agent">
@@ -99,7 +99,7 @@
                 </table>
             </td>
             <td class="dxscSingleCell" style="padding-left: 22px;">
-                 <table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+                 <table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
                     <tr>
                         <td class="dxscLabelCell">
                             <dxe:ASPxLabel ID="lblManger" runat="server" AssociatedControlID="edtStatus" Wrap="false" Text="Manager">
@@ -136,9 +136,9 @@
     IsFormRecreated='<%#(CType(Container, AppointmentFormTemplateContainer)).IsFormRecreated%>'>
 </dxsc:AppointmentRecurrenceForm>
 
-<table <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %> style="width: 100%; height: 35px;">
+<table <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %> style="width: 100%; height: 35px;">
     <tr>
-        <td class="dx-ac" style="width: 100%; height: 100%;" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetAlignAttributes(Me, "center", Nothing)%>>
+        <td class="dx-ac" style="width: 100%; height: 100%;" <%= DevExpress.Web.Internal.RenderUtils.GetAlignAttributes(Me, "center", Nothing)%>>
             <table class="dxscButtonTable" style="height: 100%">
                 <tr>
                     <td class="dxscCellWithPadding">
@@ -160,24 +160,24 @@
         </td>
     </tr>
 </table>
-<table <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %> style="width: 100%;">
+<table <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %> style="width: 100%;">
     <tr>
-        <td class="dx-al" style="width: 100%;" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetAlignAttributes(Me, "left", Nothing)%>>
+        <td class="dx-al" style="width: 100%;" <%= DevExpress.Web.Internal.RenderUtils.GetAlignAttributes(Me, "left", Nothing)%>>
             <dxsc:ASPxSchedulerStatusInfo runat="server" ID="schedulerStatusInfo" Priority="1" MasterControlID='<%#(CType(Container, DevExpress.Web.ASPxScheduler.AppointmentFormTemplateContainer)).ControlId%>' />
         </td>
     </tr>
 </table>
 <script id="dxss_ASPxSchedulerAppoinmentForm" type="text/javascript">
-    ASPxAppointmentForm = _aspxCreateClass(ASPxClientFormBase, {
+    ASPxAppointmentForm = ASPx.CreateClass(ASPxClientFormBase, {
         Initialize: function () {
-            this.controls.edtStartDate.Validation.AddHandler(_aspxCreateDelegate(this.OnEdtStartDateValidate, this));
-            this.controls.edtEndDate.Validation.AddHandler(_aspxCreateDelegate(this.OnEdtEndDateValidate, this));
-            this.controls.edtStartDate.ValueChanged.AddHandler(_aspxCreateDelegate(this.OnUpdateStartEndValue, this));
-            this.controls.edtEndDate.ValueChanged.AddHandler(_aspxCreateDelegate(this.OnUpdateStartEndValue, this));
+            this.controls.edtStartDate.Validation.AddHandler(ASPx.CreateDelegate(this.OnEdtStartDateValidate, this));
+            this.controls.edtEndDate.Validation.AddHandler(ASPx.CreateDelegate(this.OnEdtEndDateValidate, this));
+            this.controls.edtStartDate.ValueChanged.AddHandler(ASPx.CreateDelegate(this.OnUpdateStartEndValue, this));
+            this.controls.edtEndDate.ValueChanged.AddHandler(ASPx.CreateDelegate(this.OnUpdateStartEndValue, this));
             if (this.controls.chkReminder)
-                this.controls.chkReminder.CheckedChanged.AddHandler(_aspxCreateDelegate(this.OnChkReminderCheckedChanged, this));
+                this.controls.chkReminder.CheckedChanged.AddHandler(ASPx.CreateDelegate(this.OnChkReminderCheckedChanged, this));
             if (this.controls.edtMultiResource)
-                this.controls.edtMultiResource.SelectedIndexChanged.AddHandler(_aspxCreateDelegate(this.OnEdtMultiResourceSelectedIndexChanged, this));
+                this.controls.edtMultiResource.SelectedIndexChanged.AddHandler(ASPx.CreateDelegate(this.OnEdtMultiResourceSelectedIndexChanged, this));
         },
         OnEdtMultiResourceSelectedIndexChanged: function (s, e) {
             var resourceNames = new Array();

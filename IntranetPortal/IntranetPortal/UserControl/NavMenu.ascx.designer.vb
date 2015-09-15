@@ -20,5 +20,5 @@ Partial Public Class NavMenu
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LeftPanel As Global.DevExpress.Web.ASPxPanel.ASPxPanel
+    Protected WithEvents LeftPanel As Global.DevExpress.Web.ASPxPanel
 End Class

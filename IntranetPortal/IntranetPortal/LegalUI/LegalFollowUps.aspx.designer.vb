@@ -38,7 +38,7 @@ Partial Public Class LegalFollowUps
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gdCases As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gdCases As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''CaseExporter control.
@@ -47,5 +47,5 @@ Partial Public Class LegalFollowUps
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents CaseExporter As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+    Protected WithEvents CaseExporter As Global.DevExpress.Web.ASPxGridViewExporter
 End Class

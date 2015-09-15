@@ -12,7 +12,7 @@ Imports System.Web.UI.HtmlControls
 Imports DevExpress.Web.ASPxScheduler
 Imports DevExpress.XtraScheduler
 Imports DevExpress.Web.ASPxScheduler.Internal
-Imports DevExpress.Web.ASPxEditors
+Imports DevExpress.Web
 Imports DevExpress.XtraScheduler.Native
 Imports DevExpress.XtraScheduler.Localization
 Imports DevExpress.Web.ASPxScheduler.Localization

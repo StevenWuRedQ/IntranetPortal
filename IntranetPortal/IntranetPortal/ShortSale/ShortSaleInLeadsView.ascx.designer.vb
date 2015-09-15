@@ -38,7 +38,7 @@ Partial Public Class ShortSaleInLeadsView
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''hfFloorId control.
@@ -83,7 +83,7 @@ Partial Public Class ShortSaleInLeadsView
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridOccupants As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridOccupants As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''home_breakdown_gridview control.
@@ -92,5 +92,5 @@ Partial Public Class ShortSaleInLeadsView
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents home_breakdown_gridview As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents home_breakdown_gridview As Global.DevExpress.Web.ASPxGridView
 End Class

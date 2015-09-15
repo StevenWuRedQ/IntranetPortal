@@ -34,7 +34,7 @@ Imports Microsoft.VisualBasic
 Imports System
 Imports System.Web.UI.WebControls
 Imports System.Web.UI.HtmlControls
-Imports DevExpress.Web.ASPxClasses.Internal
+Imports DevExpress.Web.Internal
 Imports DevExpress.Web.ASPxScheduler
 Imports DevExpress.Web.ASPxScheduler.Drawing
 
@@ -65,7 +65,7 @@ Partial Public Class CustomVerticalAppointmentTemplate
         LayoutAppointmentImages()
     End Sub
     Private Sub PrepareImageContainer()
-        DevExpress.Web.ASPxClasses.Internal.RenderUtils.SetTableSpacings(imageContainer, 1, 0)
+        DevExpress.Web.Internal.RenderUtils.SetTableSpacings(imageContainer, 1, 0)
     End Sub
     Private Sub PrepareImageCell(ByVal targetCell As HtmlTableCell)
         targetCell.Attributes.Add("class", "dxscCellWithPadding")

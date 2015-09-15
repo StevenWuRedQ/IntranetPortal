@@ -29,7 +29,7 @@ Partial Public Class ZipMap
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridZipCountInfo As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridZipCountInfo As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''gridZipCountExporter control.
@@ -38,7 +38,7 @@ Partial Public Class ZipMap
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridZipCountExporter As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+    Protected WithEvents gridZipCountExporter As Global.DevExpress.Web.ASPxGridViewExporter
 
     '''<summary>
     '''btnExport control.

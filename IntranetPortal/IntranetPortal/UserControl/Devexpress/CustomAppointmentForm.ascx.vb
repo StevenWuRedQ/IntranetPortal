@@ -47,7 +47,7 @@ Imports Microsoft.VisualBasic
 Imports System
 Imports System.Web.UI
 Imports DevExpress.XtraScheduler
-Imports DevExpress.Web.ASPxEditors
+Imports DevExpress.Web
 Imports DevExpress.Web.ASPxScheduler
 Imports DevExpress.Web.ASPxScheduler.Internal
 Imports System.Collections

@@ -1,5 +1,5 @@
 ﻿Imports DevExpress.Web.ASPxHtmlEditor
-Imports DevExpress.Web.ASPxEditors
+Imports DevExpress.Web
 Imports IntranetPortal.Data
 
 Public Class SendMailControl
@@ -26,7 +26,7 @@ Public Class SendMailControl
     '    Return New HtmlEditorToolbar(name, New ToolbarFontSizeEdit(), New ToolbarJustifyLeftButton(True), New ToolbarJustifyCenterButton(), New ToolbarJustifyRightButton(), New ToolbarJustifyFullButton(), New ToolbarBoldButton(), New ToolbarItalicButton(), New ToolbarUnderlineButton()).CreateDefaultItems()
     'End Function
 
-    Protected Sub PopupSendMail_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub PopupSendMail_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         If Not PopupContentSendMail.Visible Then
             PopupContentSendMail.Visible = True
             BindEmail()

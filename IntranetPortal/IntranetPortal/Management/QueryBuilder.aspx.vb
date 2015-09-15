@@ -1,6 +1,6 @@
 ﻿Imports ActiveDatabaseSoftware.ActiveQueryBuilder
 Imports System.Data.SqlClient
-Imports DevExpress.Web.ASPxGridView
+Imports DevExpress.Web
 
 Public Class QueryBuilder
     Inherits System.Web.UI.Page

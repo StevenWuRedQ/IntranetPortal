@@ -20,7 +20,7 @@ Partial Public Class SelectPartyUC
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''popupContentSelectParty control.
@@ -29,7 +29,7 @@ Partial Public Class SelectPartyUC
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents popupContentSelectParty As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents popupContentSelectParty As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''rblType control.
@@ -38,7 +38,7 @@ Partial Public Class SelectPartyUC
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rblType As Global.DevExpress.Web.ASPxEditors.ASPxRadioButtonList
+    Protected WithEvents rblType As Global.DevExpress.Web.ASPxRadioButtonList
 
     '''<summary>
     '''gridParties control.
@@ -47,5 +47,5 @@ Partial Public Class SelectPartyUC
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridParties As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridParties As Global.DevExpress.Web.ASPxGridView
 End Class

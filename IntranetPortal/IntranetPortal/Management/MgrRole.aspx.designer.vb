@@ -29,7 +29,7 @@ Partial Public Class MgrRole
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbRoles As Global.DevExpress.Web.ASPxEditors.ASPxListBox
+    Protected WithEvents lbRoles As Global.DevExpress.Web.ASPxListBox
 
     '''<summary>
     '''txtRoles control.
@@ -38,7 +38,7 @@ Partial Public Class MgrRole
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtRoles As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtRoles As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''btnAddRole control.
@@ -47,7 +47,7 @@ Partial Public Class MgrRole
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddRole As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnAddRole As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''btnRemoveRole control.
@@ -56,7 +56,7 @@ Partial Public Class MgrRole
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnRemoveRole As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnRemoveRole As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''lbEmployees control.
@@ -65,7 +65,7 @@ Partial Public Class MgrRole
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbEmployees As Global.DevExpress.Web.ASPxEditors.ASPxListBox
+    Protected WithEvents lbEmployees As Global.DevExpress.Web.ASPxListBox
 
     '''<summary>
     '''cbEmps control.
@@ -74,7 +74,7 @@ Partial Public Class MgrRole
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbEmps As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbEmps As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''btnAddEmp control.
@@ -83,7 +83,7 @@ Partial Public Class MgrRole
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddEmp As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnAddEmp As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''btnRemoveEmp control.
@@ -92,7 +92,7 @@ Partial Public Class MgrRole
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnRemoveEmp As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnRemoveEmp As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''lblError control.
@@ -101,5 +101,5 @@ Partial Public Class MgrRole
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblError As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblError As Global.DevExpress.Web.ASPxLabel
 End Class

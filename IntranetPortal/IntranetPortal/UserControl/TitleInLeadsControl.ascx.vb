@@ -1,6 +1,5 @@
 ﻿Imports IntranetPortal.Data
-Imports DevExpress.Web.ASPxGridView
-Imports DevExpress.Web.ASPxPopupControl
+Imports DevExpress.Web
 Imports System.Web.Script.Serialization
 Imports Newtonsoft.Json
 
@@ -17,7 +16,7 @@ Public Class TitleInLeads
         ShortSaleCaseData = ssCase
     End Sub
 
-    Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         Dim popup = CType(source, ASPxPopupControl)
         Dim issue = txtIssue.Value
         Dim name = txtContactName.Value
@@ -39,7 +38,7 @@ Public Class TitleInLeads
         clearence.Save()
     End Sub
 
-    Protected Sub callbackClearence_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub callbackClearence_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         Dim caseId = 0
 
         If e.Parameter.StartsWith("Delete") Then
@@ -70,7 +69,7 @@ Public Class TitleInLeads
         txtNotes.Text = ""
     End Sub
 
-    Protected Sub callbackMakeUrgent_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub callbackMakeUrgent_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         If Not String.IsNullOrEmpty(e.Parameter) Then
             Dim caseId = CInt(e.Parameter)
 
@@ -92,7 +91,7 @@ Public Class TitleInLeads
         End If
     End Sub
 
-    Protected Sub cbGetJudgementData_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub cbGetJudgementData_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim bble = e.Parameter
         Dim objJudgement = TitleJudgementSearch.GetInstaceByBBLE(bble)
 
@@ -106,14 +105,14 @@ Public Class TitleInLeads
         e.Result = JsonConvert.SerializeObject(objJudgement)
     End Sub
 
-    Protected Sub cbSaveJudgementData_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub cbSaveJudgementData_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim res = JsonConvert.DeserializeObject(Of TitleJudgementSearch)(e.Parameter)
         res.Save()
 
         e.Result = "Save Success."
     End Sub
 
-    Protected Sub callbackTitleReportId_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub callbackTitleReportId_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim bble = e.Parameter.Trim
         e.Result = Core.DocumentService.GetTitleReport(bble)
     End Sub

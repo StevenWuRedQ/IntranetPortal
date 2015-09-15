@@ -29,7 +29,7 @@ Partial Public Class UserSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''gridAppointment control.
@@ -38,7 +38,7 @@ Partial Public Class UserSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridAppointment As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridAppointment As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''gridPriority control.
@@ -47,7 +47,7 @@ Partial Public Class UserSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridPriority As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridPriority As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''gridTask control.
@@ -56,7 +56,7 @@ Partial Public Class UserSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridTask As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridTask As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''gridCallback control.
@@ -65,7 +65,7 @@ Partial Public Class UserSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridCallback As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridCallback As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''todayScheduler control.
@@ -83,7 +83,7 @@ Partial Public Class UserSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents notesCallbackPanel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents notesCallbackPanel As Global.DevExpress.Web.ASPxCallbackPanel
 
     '''<summary>
     '''txtTitle control.
@@ -92,7 +92,7 @@ Partial Public Class UserSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtTitle As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+    Protected WithEvents txtTitle As Global.DevExpress.Web.ASPxMemo
 
     '''<summary>
     '''txtNotesDescription control.
@@ -101,5 +101,5 @@ Partial Public Class UserSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtNotesDescription As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+    Protected WithEvents txtNotesDescription As Global.DevExpress.Web.ASPxMemo
 End Class

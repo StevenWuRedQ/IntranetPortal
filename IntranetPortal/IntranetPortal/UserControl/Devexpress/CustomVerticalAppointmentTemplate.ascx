@@ -30,15 +30,15 @@
 {************************************************************************************}
 --%>
 <%@ Control Language="vb" AutoEventWireup="true" Inherits="IntranetPortal.CustomVerticalAppointmentTemplate" Codebehind="CustomVerticalAppointmentTemplate.ascx.vb" %>
-<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler" TagPrefix="dxwschs" %>
-<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dxe" %>
+<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler" TagPrefix="dxwschs" %>
+<%@ Register Assembly="DevExpress.Web.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dxe" %>
    <div id="appointmentDiv" runat="server" class='<%#(CType(Container, VerticalAppointmentTemplateContainer)).Items.AppointmentStyle.CssClass%>' style="background-color: #A8D5FF">
-                            <table <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0)%> style="width: 100%;background-color: #A8D5FF">
-                                <tr <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetAlignAttributes(Me, Nothing, "top")%> style="vertical-align: top">
+                            <table <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0)%> style="width: 100%;background-color: #A8D5FF">
+                                <tr <%= DevExpress.Web.Internal.RenderUtils.GetAlignAttributes(Me, Nothing, "top")%> style="vertical-align: top">
                                     <td runat="server" id="statusContainer"></td>
                                     <td style="width: 100%">
-                                        <table <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 1, 0)%> style="width: 100%;">
-                                            <tr <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetAlignAttributes(Me, Nothing, "top")%> style="vertical-align: top">
+                                        <table <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 1, 0)%> style="width: 100%;">
+                                            <tr <%= DevExpress.Web.Internal.RenderUtils.GetAlignAttributes(Me, Nothing, "top")%> style="vertical-align: top">
                                                 <td class="dxscCellWithPadding">
                                                     <table id="imageContainer" runat="server" style="text-align: center">
                                                         <tr>
@@ -47,7 +47,7 @@
                                                     </table>
                                                 </td>
                                                 <td class="dxscCellWithPadding" style="width: 100%;">
-                                                    <table <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 1, 0)%> style="width: 100%; font-size:11px;">
+                                                    <table <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 1, 0)%> style="width: 100%; font-size:11px;">
                                                         <tr>
                                                             <td class="dxscCellWithPadding" colspan="2">
                                                                 <dx:ASPxLabel runat="server" EnableViewState="false" EncodeHtml="true" ID="lblStartTime" Text='<%#(CType(Container, VerticalAppointmentTemplateContainer)).Items.StartTimeText.Text%>' Visible='<%#(CType(Container, VerticalAppointmentTemplateContainer)).Items.StartTimeText.Visible%>'></dx:ASPxLabel>

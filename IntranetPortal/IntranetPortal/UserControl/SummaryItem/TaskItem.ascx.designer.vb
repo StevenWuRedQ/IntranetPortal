@@ -20,5 +20,5 @@ Partial Public Class TaskItem
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridTask As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridTask As Global.DevExpress.Web.ASPxGridView
 End Class

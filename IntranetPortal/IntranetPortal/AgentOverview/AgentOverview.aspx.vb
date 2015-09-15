@@ -1,6 +1,5 @@
-﻿Imports DevExpress.Web.ASPxGridView
+﻿Imports DevExpress.Web
 Imports System.Linq.Expressions
-Imports DevExpress.Web.ASPxEditors
 
 Public Class AgentOverview
     Inherits System.Web.UI.Page
@@ -130,7 +129,7 @@ Public Class AgentOverview
         gridExport.WriteXlsxToResponse()
     End Sub
 
-    Protected Sub infoCallback_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub infoCallback_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         If e.Parameter.StartsWith("EMP") Then
             If Not String.IsNullOrEmpty(e.Parameter) Then
                 hfMode.Value = ""
@@ -156,7 +155,7 @@ Public Class AgentOverview
         End If
     End Sub
 
-    Protected Sub callbackPnlTemplates_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub callbackPnlTemplates_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         If e.Parameter.StartsWith("AddReport") Then
             Dim name = e.Parameter.Split("|")(1)
             Dim up = Employee.GetProfile(Page.User.Identity.Name)
@@ -306,11 +305,11 @@ Public Class AgentOverview
         Return _allEmps
     End Function
 
-    Protected Sub getEmployeeIDByName_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub getEmployeeIDByName_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         e.Result = EmployeeIDToName(e.Parameter)
     End Sub
 
-    Protected Sub cbPnlCompare_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub cbPnlCompare_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         If e.Parameter = "CompareEmp" Then
             If String.IsNullOrEmpty(hfComparedEmps.Value) Or Not hfComparedEmps.Value.StartsWith(CurrentEmployee.EmployeeID) Then
                 ComparedEmps.Add(CurrentEmployee)

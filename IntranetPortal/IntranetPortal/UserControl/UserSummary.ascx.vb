@@ -1,4 +1,4 @@
-﻿Imports DevExpress.Web.ASPxGridView
+﻿Imports DevExpress.Web
 
 Public Class UserSummary
     Inherits System.Web.UI.UserControl
@@ -255,7 +255,7 @@ Public Class UserSummary
         End If
     End Sub
 
-    Protected Sub notesCallbackPanel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub notesCallbackPanel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         Using Context As New Entities
 
             If e.Parameter.StartsWith("Show") Then

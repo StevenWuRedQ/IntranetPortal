@@ -1,5 +1,4 @@
-﻿Imports DevExpress.Web.ASPxClasses
-Imports DevExpress.Web.ASPxEditors
+﻿Imports DevExpress.Web
 
 Public Class LeadAgent
     Inherits System.Web.UI.Page

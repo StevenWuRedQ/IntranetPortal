@@ -20,7 +20,7 @@ Partial Public Class LeadsManagement
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''lblLeadCategory control.
@@ -29,7 +29,7 @@ Partial Public Class LeadsManagement
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''btnExport control.
@@ -47,7 +47,7 @@ Partial Public Class LeadsManagement
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridLeads As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridLeads As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''gridExport control.
@@ -56,7 +56,7 @@ Partial Public Class LeadsManagement
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+    Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridViewExporter
 
     '''<summary>
     '''ASPxPopupMenu3 control.
@@ -65,7 +65,7 @@ Partial Public Class LeadsManagement
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupMenu3 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+    Protected WithEvents ASPxPopupMenu3 As Global.DevExpress.Web.ASPxPopupMenu
 
     '''<summary>
     '''ASPxLabel1 control.
@@ -74,7 +74,7 @@ Partial Public Class LeadsManagement
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxLabel1 As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents ASPxLabel1 As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''listboxEmployee control.
@@ -83,7 +83,7 @@ Partial Public Class LeadsManagement
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents listboxEmployee As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents listboxEmployee As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''cbArchived control.
@@ -92,7 +92,7 @@ Partial Public Class LeadsManagement
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbArchived As Global.DevExpress.Web.ASPxEditors.ASPxCheckBox
+    Protected WithEvents cbArchived As Global.DevExpress.Web.ASPxCheckBox
 
     '''<summary>
     '''updateLeadsType control.
@@ -101,7 +101,7 @@ Partial Public Class LeadsManagement
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents updateLeadsType As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents updateLeadsType As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''popupAssignRules control.
@@ -110,7 +110,7 @@ Partial Public Class LeadsManagement
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents popupAssignRules As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents popupAssignRules As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''AssignLeadsPopup control.

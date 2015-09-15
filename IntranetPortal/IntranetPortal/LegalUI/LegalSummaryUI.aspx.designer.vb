@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class LegalSummaryUI
-    
+
     '''<summary>
     '''Common control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class LegalSummaryUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Common As Global.IntranetPortal.Common
-    
+
     '''<summary>
     '''lbExportExcel control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class LegalSummaryUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbExportExcel As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''gdCases control.
     '''</summary>
@@ -38,8 +38,8 @@ Partial Public Class LegalSummaryUI
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gdCases As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-    
+    Protected WithEvents gdCases As Global.DevExpress.Web.ASPxGridView
+
     '''<summary>
     '''MangerReportGrid control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class LegalSummaryUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MangerReportGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-    
+
     '''<summary>
     '''CaseExporter control.
     '''</summary>
@@ -56,8 +56,8 @@ Partial Public Class LegalSummaryUI
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents CaseExporter As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
-    
+    Protected WithEvents CaseExporter As Global.DevExpress.Web.ASPxGridViewExporter
+
     '''<summary>
     '''MangerReportExporter control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class LegalSummaryUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MangerReportExporter As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
-    
+
     '''<summary>
     '''gridUpCommingFCSale control.
     '''</summary>
@@ -74,8 +74,8 @@ Partial Public Class LegalSummaryUI
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridUpCommingFCSale As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-    
+    Protected WithEvents gridUpCommingFCSale As Global.DevExpress.Web.ASPxGridView
+
     '''<summary>
     '''gridOSCs control.
     '''</summary>
@@ -83,8 +83,8 @@ Partial Public Class LegalSummaryUI
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridOSCs As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-    
+    Protected WithEvents gridOSCs As Global.DevExpress.Web.ASPxGridView
+
     '''<summary>
     '''gridPartitions control.
     '''</summary>
@@ -92,8 +92,8 @@ Partial Public Class LegalSummaryUI
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridPartitions As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-    
+    Protected WithEvents gridPartitions As Global.DevExpress.Web.ASPxGridView
+
     '''<summary>
     '''gridQTAs control.
     '''</summary>
@@ -101,8 +101,8 @@ Partial Public Class LegalSummaryUI
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridQTAs As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-    
+    Protected WithEvents gridQTAs As Global.DevExpress.Web.ASPxGridView
+
     '''<summary>
     '''gridDeedReversions control.
     '''</summary>
@@ -110,8 +110,8 @@ Partial Public Class LegalSummaryUI
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridDeedReversions As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-    
+    Protected WithEvents gridDeedReversions As Global.DevExpress.Web.ASPxGridView
+
     '''<summary>
     '''gridSPAndOther control.
     '''</summary>
@@ -119,5 +119,5 @@ Partial Public Class LegalSummaryUI
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridSPAndOther As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridSPAndOther As Global.DevExpress.Web.ASPxGridView
 End Class

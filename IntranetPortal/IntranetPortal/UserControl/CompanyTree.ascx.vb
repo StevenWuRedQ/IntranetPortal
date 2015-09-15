@@ -1,4 +1,4 @@
-﻿Imports DevExpress.Web.ASPxTreeView
+﻿Imports DevExpress.Web
 
 Public Class CompanyTree
     Inherits System.Web.UI.UserControl

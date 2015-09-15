@@ -1,7 +1,9 @@
+
 Public Class Login
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
 
     End Sub
 
@@ -37,7 +39,7 @@ Public Class Login
     '    'End If
     'End Sub
 
-    Protected Sub LogInCallBack_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub LogInCallBack_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim name = e.Parameter.Split("|")(0)
         Dim password = e.Parameter.Split("|")(1)
         Dim rememberMe = e.Parameter.Split("|")(2)

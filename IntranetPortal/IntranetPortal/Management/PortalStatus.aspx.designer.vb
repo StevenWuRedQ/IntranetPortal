@@ -29,7 +29,7 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridOnlineUsers As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridOnlineUsers As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''cbUsers control.
@@ -38,7 +38,7 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbUsers As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbUsers As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''txtComments control.
@@ -47,7 +47,7 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtComments As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+    Protected WithEvents txtComments As Global.DevExpress.Web.ASPxMemo
 
     '''<summary>
     '''btnSend control.
@@ -56,7 +56,7 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSend As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnSend As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''gridSettings control.
@@ -65,7 +65,7 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridSettings As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridSettings As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''btnCommonData control.
@@ -74,7 +74,7 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnCommonData As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnCommonData As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''dtLog control.
@@ -83,7 +83,7 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents dtLog As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
+    Protected WithEvents dtLog As Global.DevExpress.Web.ASPxDateEdit
 
     '''<summary>
     '''btnLoad control.
@@ -92,7 +92,7 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnLoad As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnLoad As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''gridLogs control.
@@ -101,7 +101,7 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridLogs As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridLogs As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''cbEmployee control.
@@ -110,7 +110,7 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbEmployee As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbEmployee As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''txtSubject control.
@@ -119,7 +119,7 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtSubject As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtSubject As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''ASPxMemo1 control.
@@ -128,7 +128,7 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxMemo1 As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+    Protected WithEvents ASPxMemo1 As Global.DevExpress.Web.ASPxMemo
 
     '''<summary>
     '''ASPxButton1 control.
@@ -137,7 +137,7 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxButton2 control.
@@ -146,7 +146,7 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''lblResult control.
@@ -155,5 +155,5 @@ Partial Public Class PortalStatus
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblResult As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblResult As Global.DevExpress.Web.ASPxLabel
 End Class

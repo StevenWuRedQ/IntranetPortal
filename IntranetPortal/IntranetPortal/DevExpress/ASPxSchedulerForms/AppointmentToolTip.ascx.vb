@@ -25,7 +25,7 @@ Partial Public Class AppointmentToolTip
 	End Property
 
 	Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs)
-		'DevExpress.Web.ASPxClasses.ASPxWebControl.RegisterBaseScript(Page);
+		'DevExpress.Web.ASPxWebControl.RegisterBaseScript(Page);
 	End Sub
 	Protected Overrides Sub OnLoad(ByVal e As EventArgs)
 		MyBase.OnLoad(e)

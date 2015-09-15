@@ -20,7 +20,7 @@ Partial Public Class AppointmentDragToolTip
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblInterval As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblInterval As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''lblInfo control.
@@ -29,5 +29,5 @@ Partial Public Class AppointmentDragToolTip
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblInfo As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblInfo As Global.DevExpress.Web.ASPxLabel
 End Class

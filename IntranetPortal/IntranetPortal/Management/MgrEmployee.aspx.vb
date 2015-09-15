@@ -1,6 +1,5 @@
-﻿Imports DevExpress.Web.ASPxEditors
+﻿Imports DevExpress.Web
 Imports DevExpress.Web.ASPxTreeList
-Imports DevExpress.Web.ASPxUploadControl
 
 Public Class MgrEmployee
     Inherits System.Web.UI.Page
@@ -126,7 +125,7 @@ Public Class MgrEmployee
         End Using
     End Sub
 
-    Protected Sub uplImage_FileUploadComplete(sender As Object, e As DevExpress.Web.ASPxUploadControl.FileUploadCompleteEventArgs)
+    Protected Sub uplImage_FileUploadComplete(sender As Object, e As DevExpress.Web.FileUploadCompleteEventArgs)
         e.CallbackData = SavePostedFile(e.UploadedFile)
     End Sub
 

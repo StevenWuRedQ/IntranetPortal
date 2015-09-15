@@ -20,7 +20,7 @@ Partial Public Class EditHomeOwner
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents popupEditHomeOwner As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents popupEditHomeOwner As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''PopupContentHomeOwner control.
@@ -29,7 +29,7 @@ Partial Public Class EditHomeOwner
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents PopupContentHomeOwner As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents PopupContentHomeOwner As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''hfBBLE control.
@@ -74,7 +74,7 @@ Partial Public Class EditHomeOwner
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbHoweOwners As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbHoweOwners As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''txtOwnerName control.

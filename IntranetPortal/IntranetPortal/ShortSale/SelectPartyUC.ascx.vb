@@ -1,7 +1,6 @@
-﻿Imports DevExpress.Web.ASPxGridView
+﻿Imports DevExpress.Web
 Imports IntranetPortal.Data
 Imports System.Web.Script.Serialization
-Imports DevExpress.Web.ASPxEditors
 
 Public Class SelectPartyUC
     Inherits System.Web.UI.UserControl
@@ -62,7 +61,7 @@ Public Class SelectPartyUC
         e.Result = json.Serialize(PartyContact.GetContact(contactId))
     End Sub
 
-    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         popupContentSelectParty.Visible = True
         gridParties.DataBind()
     End Sub

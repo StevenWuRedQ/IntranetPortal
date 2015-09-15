@@ -20,7 +20,7 @@ Partial Public Class GotoDateForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblDate As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblDate As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''edtDate control.
@@ -29,7 +29,7 @@ Partial Public Class GotoDateForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents edtDate As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
+    Protected WithEvents edtDate As Global.DevExpress.Web.ASPxDateEdit
 
     '''<summary>
     '''lblView control.
@@ -38,7 +38,7 @@ Partial Public Class GotoDateForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblView As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblView As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''cbView control.
@@ -47,7 +47,7 @@ Partial Public Class GotoDateForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbView As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbView As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''btnOk control.
@@ -56,7 +56,7 @@ Partial Public Class GotoDateForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnOk As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnOk As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''btnCancel control.
@@ -65,5 +65,5 @@ Partial Public Class GotoDateForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnCancel As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnCancel As Global.DevExpress.Web.ASPxButton
 End Class

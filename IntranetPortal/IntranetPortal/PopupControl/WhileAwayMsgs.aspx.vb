@@ -16,7 +16,7 @@
         Next
     End Sub
 
-    Protected Sub gridMsgs_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+    Protected Sub gridMsgs_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
         Dim msgId = e.Parameters
 
         Dim userName = Context.User.Identity.Name

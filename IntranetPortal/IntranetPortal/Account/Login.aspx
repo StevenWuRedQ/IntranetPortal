@@ -97,8 +97,8 @@
                 <footer class="sign-in-footnote fade-in">
                     <p><a href="mailto:chrisy@myidealprop.com"><i class="fa fa-lock"></i>Forgot your password?</a></p>
                 </footer>
-            </article>
-        </div>
+            </article>            
+        </div>        
         <dx:ASPxCallback runat="server" ID="LogInCallBack" ClientInstanceName="LogInCallBackClinet" OnCallback="LogInCallBack_Callback">
             <ClientSideEvents CallbackComplete="function(s,e){LogInComplete(e.result);}" />
         </dx:ASPxCallback>

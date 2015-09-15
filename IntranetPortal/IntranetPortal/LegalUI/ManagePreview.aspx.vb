@@ -1,4 +1,4 @@
-﻿Imports DevExpress.Web.ASPxEditors
+﻿Imports DevExpress.Web
 Imports IntranetPortal.Data
 
 Public Class ManagePreview

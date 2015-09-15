@@ -20,7 +20,7 @@ Partial Public Class VendorsPopup
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents VendorsPopup As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents VendorsPopup As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''VendorsPopupContent control.
@@ -29,7 +29,7 @@ Partial Public Class VendorsPopup
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents VendorsPopupContent As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents VendorsPopupContent As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''AddNewVendorPopUp control.
@@ -38,5 +38,5 @@ Partial Public Class VendorsPopup
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents AddNewVendorPopUp As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents AddNewVendorPopUp As Global.DevExpress.Web.ASPxPopupControl
 End Class

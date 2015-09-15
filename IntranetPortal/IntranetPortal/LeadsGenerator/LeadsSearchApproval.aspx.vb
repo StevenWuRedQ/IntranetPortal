@@ -76,7 +76,7 @@ Public Class LeadsSearchApproval
         End Using
     End Sub
 
-    Protected Sub cbApproval_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub cbApproval_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
             Dim strReslut = e.Parameter

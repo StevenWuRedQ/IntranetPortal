@@ -1,4 +1,4 @@
-﻿Imports DevExpress.Web.ASPxGridView
+﻿Imports DevExpress.Web
 
 Public Class LeadsGenerator
     Inherits System.Web.UI.Page
@@ -298,7 +298,7 @@ Public Class LeadsGenerator
         Core.DataLoopRule.AddRulesUnique(bbles.ToArray, Core.DataLoopRule.DataLoopType.All, Page.User.Identity.Name)
     End Sub
 
-    Protected Sub cpTableView_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub cpTableView_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         If (e.Parameter.StartsWith("loadFunction")) Then
             Dim funName = e.Parameter.Split("|")(1)
             Dim funCall = "|" + funName + "|"

@@ -1,6 +1,5 @@
-﻿Imports DevExpress.Web.ASPxPopupControl
+﻿Imports DevExpress.Web
 Imports IntranetPortal.Data
-Imports DevExpress.Web.ASPxGridView
 
 Public Class ShortSaleInLeadsView
     Inherits System.Web.UI.UserControl

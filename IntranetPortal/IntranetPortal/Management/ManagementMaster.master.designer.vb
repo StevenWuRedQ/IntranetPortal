@@ -20,7 +20,7 @@ Partial Public Class ManagementMaster
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TreeManagement As Global.DevExpress.Web.ASPxTreeView.ASPxTreeView
+    Protected WithEvents TreeManagement As Global.DevExpress.Web.ASPxTreeView
 
     '''<summary>
     '''Content control.

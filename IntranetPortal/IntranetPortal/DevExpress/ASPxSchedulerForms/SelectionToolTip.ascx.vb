@@ -11,7 +11,7 @@ Imports System.Web.UI.WebControls.WebParts
 Imports System.Web.UI.HtmlControls
 Imports DevExpress.Web.ASPxScheduler
 Imports DevExpress.Web.ASPxScheduler.Internal
-Imports DevExpress.Web.ASPxClasses
+Imports DevExpress.Web
 
 Partial Public Class SelectionToolTip
 	Inherits ASPxSchedulerToolTipBase
@@ -27,7 +27,7 @@ Partial Public Class SelectionToolTip
 	End Property
 
 	Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs)
-		'DevExpress.Web.ASPxClasses.ASPxWebControl.RegisterBaseScript(Page);
+		'DevExpress.Web.ASPxWebControl.RegisterBaseScript(Page);
 	End Sub
 	Protected Overrides Sub OnLoad(ByVal e As EventArgs)
 		MyBase.OnLoad(e)

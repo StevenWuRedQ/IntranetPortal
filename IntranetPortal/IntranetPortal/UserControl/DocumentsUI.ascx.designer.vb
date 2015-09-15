@@ -20,7 +20,7 @@ Partial Public Class DocumentsUI
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupMenu11 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+    Protected WithEvents ASPxPopupMenu11 As Global.DevExpress.Web.ASPxPopupMenu
 
     '''<summary>
     '''cbpDocumentUI control.
@@ -29,7 +29,7 @@ Partial Public Class DocumentsUI
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbpDocumentUI As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents cbpDocumentUI As Global.DevExpress.Web.ASPxCallbackPanel
 
     '''<summary>
     '''datalistCategory control.

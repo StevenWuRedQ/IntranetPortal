@@ -1,6 +1,5 @@
 ﻿Imports IntranetPortal.Data
-Imports DevExpress.Web.ASPxGridView
-Imports DevExpress.Web.ASPxPopupControl
+Imports DevExpress.Web
 
 Public Class TitleControl
     Inherits System.Web.UI.UserControl
@@ -15,7 +14,7 @@ Public Class TitleControl
         ShortSaleCaseData = ssCase
     End Sub
 
-    Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         Dim popup = CType(source, ASPxPopupControl)
         Dim issue = txtIssue.Value
         Dim name = txtContactName.Value
@@ -37,7 +36,7 @@ Public Class TitleControl
         clearence.Save()
     End Sub
 
-    Protected Sub callbackClearence_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub callbackClearence_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         Dim caseId = 0
 
         If e.Parameter.StartsWith("Delete") Then
@@ -68,7 +67,7 @@ Public Class TitleControl
         txtNotes.Text = ""
     End Sub
 
-    Protected Sub callbackMakeUrgent_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub callbackMakeUrgent_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         If Not String.IsNullOrEmpty(e.Parameter) Then
             Dim caseId = CInt(e.Parameter)
 

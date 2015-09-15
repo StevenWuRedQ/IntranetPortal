@@ -1,4 +1,4 @@
-﻿Imports DevExpress.Web.ASPxEditors
+﻿Imports DevExpress.Web
 Imports DevExpress.XtraPrintingLinks
 
 Public Class LeadsManagement
@@ -200,8 +200,8 @@ Public Class LeadsManagement
         End If
     End Sub
 
-    Protected Sub gridLeads_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs)
-        If Not e.RowType = DevExpress.Web.ASPxGridView.GridViewRowType.Data Then
+    Protected Sub gridLeads_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridViewTableRowEventArgs)
+        If Not e.RowType = DevExpress.Web.GridViewRowType.Data Then
             Return
         End If
 
@@ -216,7 +216,7 @@ Public Class LeadsManagement
         End If
     End Sub
 
-    Protected Sub updateLeadsType_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub updateLeadsType_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         If Not String.IsNullOrEmpty(e.Parameter) Then
             Dim bble = e.Parameter.Split("|")(0)
             Dim type = e.Parameter.Split("|")(1)
@@ -246,7 +246,7 @@ Public Class LeadsManagement
         End Get
     End Property
 
-    Protected Sub gridLeads_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+    Protected Sub gridLeads_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
         If e.Parameters.StartsWith("AssignLeads") Then
             If gridLeads.Selection.Count > 0 AndAlso listboxEmployee.SelectedItem IsNot Nothing Then
                 Dim selectedLeads = gridLeads.GetSelectedFieldValues("BBLE").Select(Function(l) l.ToString).ToArray
@@ -300,7 +300,7 @@ Public Class LeadsManagement
         gridExport.WriteXlsxToResponse()
     End Sub
 
-    Protected Sub gridExport_RenderBrick(sender As Object, e As DevExpress.Web.ASPxGridView.Export.ASPxGridViewExportRenderingEventArgs)
+    Protected Sub gridExport_RenderBrick(sender As Object, e As DevExpress.Web.ASPxGridViewExportRenderingEventArgs)
         If e.Column.Caption = "Recycle" Then
             If e.GetValue("Comments") IsNot Nothing Then
                 e.TextValue = Utility.RemoveHtmlTags(e.GetValue("Comments")) 'String.Format("{0}@{1} {2}", e.GetValue("UpdateUser"), e.GetValue("ActivityDate"), e.GetValue("Comments"))                

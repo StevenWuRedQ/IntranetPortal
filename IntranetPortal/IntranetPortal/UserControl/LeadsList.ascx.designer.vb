@@ -20,7 +20,7 @@ Partial Public Class LeadsList
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MarkColorCallBack As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents MarkColorCallBack As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''lblLeadCategory control.
@@ -29,7 +29,7 @@ Partial Public Class LeadsList
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''divExpand control.
@@ -47,7 +47,7 @@ Partial Public Class LeadsList
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridLeads As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridLeads As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''hfView control.
@@ -74,5 +74,5 @@ Partial Public Class LeadsList
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupMenu2 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+    Protected WithEvents ASPxPopupMenu2 As Global.DevExpress.Web.ASPxPopupMenu
 End Class

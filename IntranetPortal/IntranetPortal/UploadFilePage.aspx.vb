@@ -1,5 +1,4 @@
-﻿Imports DevExpress.Web.ASPxUploadControl
-Imports DevExpress.Web.ASPxEditors
+﻿Imports DevExpress.Web
 Imports System.Net.Http
 Imports System.Web.Services
 Imports System.IO
@@ -54,7 +53,7 @@ Public Class UploadFilePage
         'End Using
     End Sub
 
-    'Protected Sub uplImage_FileUploadComplete(sender As Object, e As DevExpress.Web.ASPxUploadControl.FileUploadCompleteEventArgs)
+    'Protected Sub uplImage_FileUploadComplete(sender As Object, e As DevExpress.Web.FileUploadCompleteEventArgs)
     '    e.CallbackData = SavePostedFile(e.UploadedFile)
     'End Sub
 
@@ -91,7 +90,7 @@ Public Class UploadFilePage
         DocumentService.UploadFile(String.Format("{0}/{1}/", bble, category), uplImage.UploadedFiles(0).FileBytes, uplImage.UploadedFiles(0).FileName, User.Identity.Name)
     End Sub
 
-    'Protected Sub gridFiles_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+    'Protected Sub gridFiles_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
     '    If e.Parameters.StartsWith("UpdateCategory") Then
 
     '        Dim id = e.Parameters.Split("|")(1)
@@ -124,8 +123,8 @@ Public Class UploadFilePage
     '    End Using
     'End Sub
 
-    'Protected Sub gridFiles_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs) Handles gridFiles.HtmlRowPrepared
-    '    If Not e.RowType = DevExpress.Web.ASPxGridView.GridViewRowType.Data Then
+    'Protected Sub gridFiles_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridViewTableRowEventArgs) Handles gridFiles.HtmlRowPrepared
+    '    If Not e.RowType = DevExpress.Web.GridViewRowType.Data Then
     '        Return
     '    End If
 

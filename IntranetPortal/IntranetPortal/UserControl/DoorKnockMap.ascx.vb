@@ -12,7 +12,7 @@
         End If
     End Sub
 
-    Protected Sub callbackGetAddress_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub callbackGetAddress_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         If e.Parameter.StartsWith("OriginPoint") Then
             Dim address = e.Parameter.Replace("OriginPoint|", "")
             Dim profile = Employee.GetProfile(Page.User.Identity.Name)

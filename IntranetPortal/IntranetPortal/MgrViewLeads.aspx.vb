@@ -1,4 +1,4 @@
-﻿Imports DevExpress.Web.ASPxClasses
+﻿Imports DevExpress.Web
 
 Public Class MgrViewLeads
     Inherits System.Web.UI.Page

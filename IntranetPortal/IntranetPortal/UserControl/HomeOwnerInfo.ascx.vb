@@ -1,4 +1,4 @@
-﻿Imports DevExpress.Web.ASPxCallback
+﻿Imports DevExpress.Web
 Imports IntranetPortal.Core
 Imports IntranetPortal.Data
 

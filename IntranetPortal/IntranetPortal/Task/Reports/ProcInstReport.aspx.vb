@@ -1,4 +1,4 @@
-﻿Imports DevExpress.Web.ASPxGridView
+﻿Imports DevExpress.Web
 
 Public Class ProcInstReport
     Inherits System.Web.UI.Page
@@ -22,8 +22,8 @@ Public Class ProcInstReport
         End If
     End Sub
 
-    Protected Sub gridProcInst_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs)
-        If e.RowType = DevExpress.Web.ASPxGridView.GridViewRowType.Detail Then
+    Protected Sub gridProcInst_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridViewTableRowEventArgs)
+        If e.RowType = DevExpress.Web.GridViewRowType.Detail Then
             Dim gridActInst = CType(gridProcInst.FindDetailRowTemplateControl(e.VisibleIndex, "gridActInst"), ASPxGridView)
             gridActInst.DataSource = MyIdealProp.Workflow.DBPersistence.ActivityInstance.GetProcessActivityInstances(e.KeyValue)
             gridActInst.DataBind()

@@ -20,7 +20,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''tdUrgent control.
@@ -38,7 +38,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridUrgent As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridUrgent As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''tdUpcomingBPO control.
@@ -56,7 +56,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridUpcomingApproval As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridUpcomingApproval As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''tdCounterOffer control.
@@ -74,7 +74,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents CounterOfferGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents CounterOfferGrid As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''tdInvestorReview control.
@@ -92,7 +92,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents InvestorReviewGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents InvestorReviewGrid As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''tdDocumentReq control.
@@ -110,7 +110,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DocumentRequestsGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents DocumentRequestsGrid As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''tdTask control.
@@ -128,7 +128,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridTask As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridTask As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''tdFollowup control.
@@ -146,7 +146,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridFollowUp As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridFollowUp As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''ExportExcel control.
@@ -173,7 +173,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''Popupcontrolcontentcontrol1 control.
@@ -182,7 +182,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Popupcontrolcontentcontrol1 As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents Popupcontrolcontentcontrol1 As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''txtReportName control.
@@ -191,7 +191,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtReportName As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtReportName As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''btnSave control.
@@ -200,7 +200,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSave As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnSave As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''AllLeadsGrid control.
@@ -209,7 +209,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents AllLeadsGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents AllLeadsGrid As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''gridExporter control.
@@ -218,7 +218,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridExporter As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+    Protected WithEvents gridExporter As Global.DevExpress.Web.ASPxGridViewExporter
 
     '''<summary>
     '''AllLeadGridViewExporter control.
@@ -227,7 +227,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents AllLeadGridViewExporter As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+    Protected WithEvents AllLeadGridViewExporter As Global.DevExpress.Web.ASPxGridViewExporter
 
     '''<summary>
     '''gridData control.
@@ -236,7 +236,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridData As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridData As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''ShortSaleSubMenu control.
@@ -254,7 +254,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkFields As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
+    Protected WithEvents chkFields As Global.DevExpress.Web.ASPxCheckBoxList
 
     '''<summary>
     '''btnViewReport control.
@@ -263,7 +263,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnViewReport As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnViewReport As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''cbpSavedReport control.
@@ -272,7 +272,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbpSavedReport As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents cbpSavedReport As Global.DevExpress.Web.ASPxCallbackPanel
 
     '''<summary>
     '''notesCallbackPanel control.
@@ -281,7 +281,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents notesCallbackPanel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents notesCallbackPanel As Global.DevExpress.Web.ASPxCallbackPanel
 
     '''<summary>
     '''txtTitle control.
@@ -290,7 +290,7 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtTitle As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+    Protected WithEvents txtTitle As Global.DevExpress.Web.ASPxMemo
 
     '''<summary>
     '''txtNotesDescription control.
@@ -299,5 +299,5 @@ Partial Public Class UCTitleSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtNotesDescription As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+    Protected WithEvents txtNotesDescription As Global.DevExpress.Web.ASPxMemo
 End Class

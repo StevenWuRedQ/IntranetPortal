@@ -20,7 +20,7 @@ Partial Public Class MapsPopup
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''getAddressCallback control.
@@ -29,5 +29,5 @@ Partial Public Class MapsPopup
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents getAddressCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents getAddressCallback As Global.DevExpress.Web.ASPxCallback
 End Class

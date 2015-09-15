@@ -20,7 +20,7 @@ Partial Public Class ProcInstReport
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblProcName As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblProcName As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''gridProcInst control.
@@ -29,5 +29,5 @@ Partial Public Class ProcInstReport
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridProcInst As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridProcInst As Global.DevExpress.Web.ASPxGridView
 End Class

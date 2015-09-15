@@ -20,7 +20,7 @@ Partial Public Class LeadsStatisticSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblStatus As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblStatus As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''lbldeal control.
@@ -29,5 +29,5 @@ Partial Public Class LeadsStatisticSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbldeal As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lbldeal As Global.DevExpress.Web.ASPxLabel
 End Class

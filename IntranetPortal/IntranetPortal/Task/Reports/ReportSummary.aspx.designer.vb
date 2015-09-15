@@ -20,7 +20,7 @@ Partial Public Class ReportSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''gridWorklistStatistic control.
@@ -29,7 +29,7 @@ Partial Public Class ReportSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridWorklistStatistic As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridWorklistStatistic As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''ASPxGridView1 control.
@@ -38,7 +38,7 @@ Partial Public Class ReportSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxGridView1 As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents ASPxGridView1 As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''lblUserName control.
@@ -47,7 +47,7 @@ Partial Public Class ReportSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblUserName As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblUserName As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''gridUser control.
@@ -56,5 +56,5 @@ Partial Public Class ReportSummary
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridUser As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridUser As Global.DevExpress.Web.ASPxGridView
 End Class

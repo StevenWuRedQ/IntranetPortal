@@ -29,5 +29,5 @@ Partial Public Class WhileAwayMsgs
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridMsgs As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridMsgs As Global.DevExpress.Web.ASPxGridView
 End Class

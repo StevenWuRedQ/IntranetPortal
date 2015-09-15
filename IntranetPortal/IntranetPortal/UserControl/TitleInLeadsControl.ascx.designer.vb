@@ -20,7 +20,7 @@ Partial Public Class TitleInLeads
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents callbackTitleReportId As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents callbackTitleReportId As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''cbGetJudgementData control.
@@ -29,7 +29,7 @@ Partial Public Class TitleInLeads
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbGetJudgementData As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents cbGetJudgementData As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''cbSaveJudgementData control.
@@ -38,7 +38,7 @@ Partial Public Class TitleInLeads
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbSaveJudgementData As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents cbSaveJudgementData As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''callbackClearence control.
@@ -47,7 +47,7 @@ Partial Public Class TitleInLeads
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents callbackClearence As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents callbackClearence As Global.DevExpress.Web.ASPxCallbackPanel
 
     '''<summary>
     '''ASPxPopupControl1 control.
@@ -56,7 +56,7 @@ Partial Public Class TitleInLeads
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''txtIssue control.
@@ -110,7 +110,7 @@ Partial Public Class TitleInLeads
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtAmount As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtAmount As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''ASPxPopupControl2 control.
@@ -119,7 +119,7 @@ Partial Public Class TitleInLeads
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''txtNotes control.
@@ -128,7 +128,7 @@ Partial Public Class TitleInLeads
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtNotes As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtNotes As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''btnAdd control.
@@ -137,7 +137,7 @@ Partial Public Class TitleInLeads
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAdd As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnAdd As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''callbackMakeUrgent control.
@@ -146,5 +146,5 @@ Partial Public Class TitleInLeads
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents callbackMakeUrgent As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents callbackMakeUrgent As Global.DevExpress.Web.ASPxCallback
 End Class

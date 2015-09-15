@@ -20,7 +20,7 @@ Partial Public Class ReminderForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbItems As Global.DevExpress.Web.ASPxEditors.ASPxListBox
+    Protected WithEvents lbItems As Global.DevExpress.Web.ASPxListBox
 
     '''<summary>
     '''btnDismissAll control.
@@ -29,7 +29,7 @@ Partial Public Class ReminderForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnDismissAll As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnDismissAll As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''btnDismiss control.
@@ -38,7 +38,7 @@ Partial Public Class ReminderForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnDismiss As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnDismiss As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''lblClickSnooze control.
@@ -47,7 +47,7 @@ Partial Public Class ReminderForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblClickSnooze As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblClickSnooze As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''cbSnooze control.
@@ -56,7 +56,7 @@ Partial Public Class ReminderForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbSnooze As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbSnooze As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''btnSnooze control.
@@ -65,5 +65,5 @@ Partial Public Class ReminderForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSnooze As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnSnooze As Global.DevExpress.Web.ASPxButton
 End Class

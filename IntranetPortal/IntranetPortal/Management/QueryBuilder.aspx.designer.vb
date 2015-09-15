@@ -29,7 +29,7 @@ Partial Public Class QueryBuilder
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents splitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents splitter As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''QueryBuilderControl1 control.
@@ -83,7 +83,7 @@ Partial Public Class QueryBuilder
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''btnExport control.
@@ -92,7 +92,7 @@ Partial Public Class QueryBuilder
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnExport As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnExport As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''SQLEditor1 control.
@@ -110,7 +110,7 @@ Partial Public Class QueryBuilder
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridResult2 As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridResult2 As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''gridExport control.
@@ -119,5 +119,5 @@ Partial Public Class QueryBuilder
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+    Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridViewExporter
 End Class

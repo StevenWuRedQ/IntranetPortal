@@ -35,7 +35,7 @@ Imports Microsoft.VisualBasic
 Imports System
 Imports System.Web.UI.WebControls
 Imports System.Web.UI.HtmlControls
-Imports DevExpress.Web.ASPxClasses.Internal
+Imports DevExpress.Web.Internal
 Imports DevExpress.Web.ASPxScheduler
 Imports DevExpress.Web.ASPxScheduler.Drawing
 
@@ -68,8 +68,8 @@ Partial Public Class HorizontalAppointmentTemplate
 		endTimeClockContainer.Controls.Add(Items.EndTimeClock)
     End Sub
     Private Sub PrepareContainers()
-        DevExpress.Web.ASPxClasses.Internal.RenderUtils.SetTableSpacings(imageContainer, 0, 0)
-        DevExpress.Web.ASPxClasses.Internal.RenderUtils.SetAlignAttributes(statusContainer, Nothing, "top")
+        DevExpress.Web.Internal.RenderUtils.SetTableSpacings(imageContainer, 0, 0)
+        DevExpress.Web.Internal.RenderUtils.SetAlignAttributes(statusContainer, Nothing, "top")
     End Sub
     Private Sub LayoutAppointmentImages()
         Dim count As Integer = Items.Images.Count

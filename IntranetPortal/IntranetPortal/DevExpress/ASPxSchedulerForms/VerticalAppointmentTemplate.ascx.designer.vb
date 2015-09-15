@@ -47,7 +47,7 @@ Partial Public Class VerticalAppointmentTemplate
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblStartTime As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblStartTime As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''lblEndTime control.
@@ -56,7 +56,7 @@ Partial Public Class VerticalAppointmentTemplate
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblEndTime As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblEndTime As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''lblTitle control.
@@ -65,7 +65,7 @@ Partial Public Class VerticalAppointmentTemplate
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblTitle As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblTitle As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''horizontalSeparator control.
@@ -83,5 +83,5 @@ Partial Public Class VerticalAppointmentTemplate
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblDescription As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblDescription As Global.DevExpress.Web.ASPxLabel
 End Class

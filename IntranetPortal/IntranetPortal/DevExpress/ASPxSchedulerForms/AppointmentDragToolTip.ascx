@@ -1,5 +1,5 @@
 <%@ Control Language="vb" AutoEventWireup="true" Inherits="IntranetPortal.AppointmentDragToolTip" Codebehind="AppointmentDragToolTip.ascx.vb" %>
-<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors"
+<%@ Register Assembly="DevExpress.Web.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web"
 	TagPrefix="dxe" %>
 
 <div style="white-space:nowrap;">
@@ -10,7 +10,7 @@
 </div>
 
 <script id="dxss_ASPxClientAppointmentDragTooltip" type="text/javascript"><!--
-	ASPxClientAppointmentDragTooltip = _aspxCreateClass(ASPxClientToolTipBase, {
+    ASPxClientAppointmentDragTooltip = ASPx.CreateClass(ASPxClientToolTipBase, {
 		CalculatePosition: function(bounds) {
 			return new ASPxClientPoint(bounds.GetLeft(), bounds.GetTop() - bounds.GetHeight());
 		},

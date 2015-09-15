@@ -20,5 +20,5 @@ Partial Public Class ShortSaleSummaryTab
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents summary_call_back_panel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents summary_call_back_panel As Global.DevExpress.Web.ASPxCallbackPanel
 End Class

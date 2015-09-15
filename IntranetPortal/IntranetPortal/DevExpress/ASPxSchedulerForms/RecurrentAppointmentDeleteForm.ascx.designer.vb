@@ -20,7 +20,7 @@ Partial Public Class RecurrentAppointmentDeleteForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents imgWarning As Global.DevExpress.Web.ASPxEditors.ASPxImage
+    Protected WithEvents imgWarning As Global.DevExpress.Web.ASPxImage
 
     '''<summary>
     '''lblConfirm control.
@@ -29,7 +29,7 @@ Partial Public Class RecurrentAppointmentDeleteForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblConfirm As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblConfirm As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''rbAction control.
@@ -38,7 +38,7 @@ Partial Public Class RecurrentAppointmentDeleteForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rbAction As Global.DevExpress.Web.ASPxEditors.ASPxRadioButtonList
+    Protected WithEvents rbAction As Global.DevExpress.Web.ASPxRadioButtonList
 
     '''<summary>
     '''btnOk control.
@@ -47,7 +47,7 @@ Partial Public Class RecurrentAppointmentDeleteForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnOk As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnOk As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''btnCancel control.
@@ -56,5 +56,5 @@ Partial Public Class RecurrentAppointmentDeleteForm
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnCancel As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnCancel As Global.DevExpress.Web.ASPxButton
 End Class

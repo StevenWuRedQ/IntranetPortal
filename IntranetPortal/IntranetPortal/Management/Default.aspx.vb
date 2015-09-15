@@ -9,7 +9,7 @@
         End Using
     End Sub
 
-    Protected Sub gridExport_RenderBrick(sender As Object, e As DevExpress.Web.ASPxGridView.Export.ASPxGridViewExportRenderingEventArgs)
+    Protected Sub gridExport_RenderBrick(sender As Object, e As DevExpress.Web.ASPxGridViewExportRenderingEventArgs)
 
     End Sub
 

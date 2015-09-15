@@ -1,4 +1,4 @@
-﻿Imports DevExpress.Web.ASPxGridView
+﻿Imports DevExpress.Web
 
 Public Class MySummary
     Inherits System.Web.UI.UserControl

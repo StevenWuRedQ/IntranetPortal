@@ -20,7 +20,7 @@ Partial Public Class LegalTab
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
     
     '''<summary>
     '''btnAssignAttorney control.
@@ -38,7 +38,7 @@ Partial Public Class LegalTab
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPanel1 As Global.DevExpress.Web.ASPxPanel.ASPxPanel
+    Protected WithEvents ASPxPanel1 As Global.DevExpress.Web.ASPxPanel
     
     '''<summary>
     '''LegalSummaryTab control.
@@ -83,7 +83,7 @@ Partial Public Class LegalTab
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
     
     '''<summary>
     '''LeadsSubMenu control.

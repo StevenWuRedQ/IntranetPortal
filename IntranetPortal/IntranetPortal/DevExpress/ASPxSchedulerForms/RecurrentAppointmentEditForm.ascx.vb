@@ -37,7 +37,7 @@
 Imports Microsoft.VisualBasic
 Imports System
 Imports DevExpress.Web.ASPxScheduler
-Imports DevExpress.Web.ASPxEditors
+Imports DevExpress.Web
 Imports DevExpress.Web.ASPxScheduler.Localization
 
 Partial Public Class RecurrentAppointmentEditForm

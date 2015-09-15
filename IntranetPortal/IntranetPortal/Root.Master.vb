@@ -2,7 +2,7 @@ Public Class Root
     Inherits System.Web.UI.MasterPage
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'MainSplitter.GetPaneByName("HeaderPane").Size = If(DevExpress.Web.ASPxClasses.ASPxWebControl.GlobalTheme = "Moderno", 101, 87)
+        'MainSplitter.GetPaneByName("HeaderPane").Size = If(DevExpress.Web.ASPxWebControl.GlobalTheme = "Moderno", 101, 87)
         lblVersion.Text = String.Format("Application Beta Version: {0},{1}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString, Server.MachineName)
 
         If Page.IsCallback Then
@@ -10,7 +10,7 @@ Public Class Root
         End If
     End Sub
 
-    Protected Sub gridSearch_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+    Protected Sub gridSearch_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
         'Dim key = e.Parameters
         'BindSearchGrid(key)
     End Sub
@@ -103,7 +103,7 @@ Public Class Root
         Return False
     End Function
 
-    Protected Sub gridSearch_AfterPerformCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewAfterPerformCallbackEventArgs) Handles gridSearch.AfterPerformCallback
+    Protected Sub gridSearch_AfterPerformCallback(sender As Object, e As DevExpress.Web.ASPxGridViewAfterPerformCallbackEventArgs) Handles gridSearch.AfterPerformCallback
         BindSearchGrid("")
     End Sub
 
@@ -112,7 +112,7 @@ Public Class Root
         FormsAuthentication.RedirectToLoginPage()
     End Sub
 
-    Protected Sub pcMain_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub pcMain_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         popupContentSearchPanel.Visible = True
         'Dim menu = Page.LoadControl("~/UserControl/LeadsSubMenu.ascx")
         'popupContentSearchPanel.Controls.Add(menu)

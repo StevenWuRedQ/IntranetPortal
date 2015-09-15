@@ -20,7 +20,7 @@ Partial Public Class SendMailControl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents PopupSendMail As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents PopupSendMail As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''PopupContentSendMail control.
@@ -29,7 +29,7 @@ Partial Public Class SendMailControl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents PopupContentSendMail As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+    Protected WithEvents PopupContentSendMail As Global.DevExpress.Web.PopupControlContentControl
 
     '''<summary>
     '''EmailToIDs control.
@@ -38,7 +38,7 @@ Partial Public Class SendMailControl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents EmailToIDs As Global.DevExpress.Web.ASPxEditors.ASPxDropDownEdit
+    Protected WithEvents EmailToIDs As Global.DevExpress.Web.ASPxDropDownEdit
 
     '''<summary>
     '''EmailCCIDs control.
@@ -47,7 +47,7 @@ Partial Public Class SendMailControl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents EmailCCIDs As Global.DevExpress.Web.ASPxEditors.ASPxDropDownEdit
+    Protected WithEvents EmailCCIDs As Global.DevExpress.Web.ASPxDropDownEdit
 
     '''<summary>
     '''EmailSuject control.
@@ -56,7 +56,7 @@ Partial Public Class SendMailControl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents EmailSuject As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents EmailSuject As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''EmailAttachments control.
@@ -65,7 +65,7 @@ Partial Public Class SendMailControl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents EmailAttachments As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents EmailAttachments As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''EmailBody control.

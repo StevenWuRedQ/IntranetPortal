@@ -20,7 +20,7 @@ Partial Public Class ShortSaleEvictionTab
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents AddOccupantNotes As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents AddOccupantNotes As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''btnAdd control.
@@ -29,5 +29,5 @@ Partial Public Class ShortSaleEvictionTab
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAdd As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnAdd As Global.DevExpress.Web.ASPxButton
 End Class

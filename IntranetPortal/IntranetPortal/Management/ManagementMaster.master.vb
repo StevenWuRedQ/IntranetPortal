@@ -1,4 +1,4 @@
-﻿Imports DevExpress.Web.ASPxTreeView
+﻿Imports DevExpress.Web
 
 Public Class ManagementMaster
     Inherits System.Web.UI.MasterPage

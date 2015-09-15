@@ -1,6 +1,5 @@
-﻿Imports DevExpress.Web.ASPxMenu
+﻿Imports DevExpress.Web
 Imports System.ComponentModel
-Imports DevExpress.Web.ASPxEditors
 Imports IntranetPortal.Data
 
 Public Class LeadsSubMenu
@@ -42,7 +41,7 @@ Public Class LeadsSubMenu
         End Get
     End Property
 
-    Protected Sub reassignCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub reassignCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         If e.Parameter.Split("|").Length > 0 Then
             Dim bble = e.Parameter.Split("|")(0)
             Dim empId = CInt(e.Parameter.Split("|")(1))
@@ -66,14 +65,14 @@ Public Class LeadsSubMenu
         End If
     End Sub
 
-    Protected Sub getAddressCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub getAddressCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Using Context As New Entities
             Dim lead = Context.LeadsInfoes.Where(Function(ld) ld.BBLE = e.Parameter).SingleOrDefault
             e.Result = lead.PropertyAddress + "|Block:" + lead.Block + " Lot:" + lead.Lot
         End Using
     End Sub
 
-    Protected Sub leadStatusCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub leadStatusCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         If e.Parameter.Length > 0 Then
 
             If e.Parameter.StartsWith("Tomorrow") Then
@@ -174,13 +173,13 @@ Public Class LeadsSubMenu
         Lead.UpdateLeadStatus(bble, status, callbackDate)
     End Sub
 
-    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         PopupContentReAssign.Visible = True
         BindEmployeeList()
     End Sub
 
     'Dead Leads Popup
-    Protected Sub ASPxPopupControl5_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub ASPxPopupControl5_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         popupContentDeadLeads.Visible = True
         If (e.Parameter.StartsWith("Show")) Then
             Dim bble = e.Parameter.Split("|")(1)
@@ -236,7 +235,7 @@ Public Class LeadsSubMenu
     End Sub
 
     'In Process Popup
-    Protected Sub ASPxPopupControl4_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub ASPxPopupControl4_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         popupContentInProcess.Visible = True
         If (e.Parameter.StartsWith("Show")) Then
             Dim bble = e.Parameter.Split("|")(1)
@@ -311,7 +310,7 @@ Public Class LeadsSubMenu
         cbEvictionUsers.DataBind()
     End Sub
 
-    Protected Sub ASPxPopupControl6_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub ASPxPopupControl6_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         If e.Parameter.StartsWith("Show") Then
             Dim bble = e.Parameter.Split("|")(1)
             Dim ctr = CType(LoadControl("~/UserControl/DocumentsUI.ascx"), DocumentsUI)
@@ -323,7 +322,7 @@ Public Class LeadsSubMenu
         End If
     End Sub
 
-    Protected Sub popupRequestUpdate_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub popupRequestUpdate_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         popContentRequestUpdate.Visible = True
         If e.Parameter = "SendRequest" Then
             Dim bble = hfRequestUpdateBBLE.Value
@@ -357,7 +356,7 @@ Public Class LeadsSubMenu
         actlog.SetAsTask(emps, cbTaskImportant.Text, "Request Update", txtTaskDes.Text, bble, Page.User.Identity.Name)
     End Sub
 
-    Protected Sub aspxPopupLegalInfo_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub aspxPopupLegalInfo_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
 
     End Sub
 End Class

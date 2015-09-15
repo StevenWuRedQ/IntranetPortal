@@ -20,7 +20,7 @@ Partial Public Class LeadAgent
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''SplitterContentControl1 control.
@@ -29,7 +29,7 @@ Partial Public Class LeadAgent
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
+    Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.SplitterContentControl
 
     '''<summary>
     '''LeadsList control.
@@ -47,7 +47,7 @@ Partial Public Class LeadAgent
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl2 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
+    Protected WithEvents SplitterContentControl2 As Global.DevExpress.Web.SplitterContentControl
 
     '''<summary>
     '''LeadsInfo control.

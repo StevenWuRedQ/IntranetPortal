@@ -49,8 +49,8 @@
 Imports Microsoft.VisualBasic
 Imports System
 Imports DevExpress.Web.ASPxScheduler
-Imports DevExpress.Web.ASPxEditors
-Imports DevExpress.Web.ASPxClasses.Internal
+Imports DevExpress.Web
+Imports DevExpress.Web.Internal
 Imports DevExpress.Web.ASPxScheduler.Localization
 
 Partial Public Class InplaceEditor
@@ -62,8 +62,8 @@ Partial Public Class InplaceEditor
 		memSubject.Focus()
     End Sub
     Private Sub PrepareMainContainer()
-        DevExpress.Web.ASPxClasses.Internal.RenderUtils.SetTableSpacings(mainContainer, 2, 0)
-        DevExpress.Web.ASPxClasses.Internal.RenderUtils.SetAlignAttributes(buttonContainer, Nothing, "top")
+        DevExpress.Web.Internal.RenderUtils.SetTableSpacings(mainContainer, 2, 0)
+        DevExpress.Web.Internal.RenderUtils.SetAlignAttributes(buttonContainer, Nothing, "top")
     End Sub
 	Private Sub Localize()
 		btnSave.ToolTip = ASPxSchedulerLocalizer.GetString(ASPxSchedulerStringId.Form_Save)

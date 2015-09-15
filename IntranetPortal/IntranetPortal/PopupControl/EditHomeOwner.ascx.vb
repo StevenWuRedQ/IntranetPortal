@@ -12,7 +12,7 @@ Public Class EditHomeOwner
         'End If
     End Sub
 
-    Protected Sub popupEditHomeOwner_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub popupEditHomeOwner_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         PopupContentHomeOwner.Visible = True
 
         If e.Parameter.StartsWith("Load") Then

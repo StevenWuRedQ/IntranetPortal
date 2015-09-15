@@ -103,7 +103,7 @@ Public Class LegalSummaryUI
         BindTypeGrid(gridSPAndOther, LegalSencdaryType.Other)
     End Sub
 
-    Private Sub BindTypeGrid(grid As DevExpress.Web.ASPxGridView.ASPxGridView, lType As LegalSencdaryType)
+    Private Sub BindTypeGrid(grid As DevExpress.Web.ASPxGridView, lType As LegalSencdaryType)
         If (grid.DataSource Is Nothing) Then
             grid.DataSource = GetSecondaryTypeList(lType)
             grid.DataBind()

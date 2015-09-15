@@ -28,7 +28,7 @@ Partial Public Class AppointmentDragToolTip
 	Protected Overrides Sub OnLoad(ByVal e As EventArgs)
 		MyBase.OnLoad(e)
 		Localize()
-		'DevExpress.Web.ASPxClasses.ASPxWebControl.RegisterBaseScript(Page);
+		'DevExpress.Web.ASPxWebControl.RegisterBaseScript(Page);
 	End Sub
 	Private Sub Localize()
 		lblInfo.Text = ASPxSchedulerLocalizer.GetString(ASPxSchedulerStringId.Caption_OperationToolTip)

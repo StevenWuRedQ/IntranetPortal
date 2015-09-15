@@ -26,7 +26,7 @@
         End If
     End Sub
 
-    Protected Sub cbApproval_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub cbApproval_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
             If wli IsNot Nothing Then
@@ -36,7 +36,7 @@
         End If
     End Sub
 
-    Protected Sub SearchResultsUpolad_FilesUploadComplete(sender As Object, e As DevExpress.Web.ASPxUploadControl.FilesUploadCompleteEventArgs)
+    Protected Sub SearchResultsUpolad_FilesUploadComplete(sender As Object, e As DevExpress.Web.FilesUploadCompleteEventArgs)
 
     End Sub
 End Class

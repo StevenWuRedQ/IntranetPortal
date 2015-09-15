@@ -44,15 +44,15 @@
 --%>
 
 <%@ Control Language="vb" AutoEventWireup="true" Inherits="IntranetPortal.AppointmentFormEx" Codebehind="AppointmentFormEx.ascx.vb" %>
-<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dxe" %>
-<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler.Controls" TagPrefix="dxsc" %>
-<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler" TagPrefix="dxwschs" %>
-<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxCallbackPanel" TagPrefix="dxcp" %>
+<%@ Register Assembly="DevExpress.Web.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dxe" %>
+<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler.Controls" TagPrefix="dxsc" %>
+<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler" TagPrefix="dxwschs" %>
+<%@ Register Assembly="DevExpress.Web.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dxcp" %>
 
-<table class="dxscAppointmentForm" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %> style="width: 100%; height: 230px;">
+<table class="dxscAppointmentForm" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %> style="width: 100%; height: 230px;">
 	<tr>
 		<td class="dxscDoubleCell" colspan="2">
-			<table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+			<table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
 				<tr>
 					<td class="dxscLabelCell">
 						<dxe:ASPxLabel ID="lblSubject" runat="server" AssociatedControlID="tbSubject">
@@ -67,7 +67,7 @@
 	</tr>
 	<tr> 
 		<td class="dxscSingleCell">
-			<table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+			<table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
 				<tr>
 					<td class="dxscLabelCell">
 						<dxe:ASPxLabel ID="lblLocation" runat="server" AssociatedControlID="tbLocation">
@@ -80,7 +80,7 @@
 			</table>
 		</td>
 		<td class="dxscSingleCell">
-			<table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+			<table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
 				<tr>
 					<td class="dxscLabelCell" style="padding-left: 25px;">
 						<dxe:ASPxLabel ID="lblLabel" runat="server" AssociatedControlID="edtLabel">
@@ -95,7 +95,7 @@
 	</tr>
 	<tr>
 		<td class="dxscSingleCell">
-			<table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+			<table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
 				<tr>
 					<td class="dxscLabelCell">
 						<dxe:ASPxLabel ID="lblStartDate" runat="server" AssociatedControlID="edtStartDate" Wrap="false">
@@ -108,7 +108,7 @@
 			</table>
 		</td>
 		<td class="dxscSingleCell">
-			<table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+			<table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
 				<tr>
 					<td class="dxscLabelCell" style="padding-left: 25px;">
 						<dxe:ASPxLabel runat="server" ID="lblEndDate" Wrap="false" AssociatedControlID="edtEndDate"/>
@@ -124,7 +124,7 @@
 	</tr>
 	<tr>
 		<td class="dxscSingleCell">
-			<table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+			<table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
 				<tr>
 					<td class="dxscLabelCell">
 						<dxe:ASPxLabel ID="lblStatus" runat="server" AssociatedControlID="edtStatus" Wrap="false">
@@ -137,7 +137,7 @@
 			</table>
 		</td>
 		<td class="dxscSingleCell" style="padding-left: 22px;">
-			<table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+			<table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
 				<tr>
 					<td style="width: 20px; height: 20px;">
 						<dxe:ASPxCheckBox ClientInstanceName="_dx" ID="chkAllDay" runat="server" Checked='<%#(CType(Container, AppointmentFormTemplateContainer)).Appointment.AllDay%>' />
@@ -151,7 +151,7 @@
 	</tr>
 	<tr>
 <%
-   If CanShowReminders Then
+    If CanShowReminders Then
 %>
 		<td class="dxscSingleCell">
 <%
@@ -161,7 +161,7 @@
 <%
    End If
 %>
-			<table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+			<table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
 				<tr>
 					<td class="dxscLabelCell">
 						<dxe:ASPxLabel ID="lblResource" runat="server" AssociatedControlID="edtResource">
@@ -169,7 +169,7 @@
 					</td>
 					<td class="dxscControlCell">
 <%
-						   If ResourceSharing Then
+    If ResourceSharing Then
 %>
 						<dxe:ASPxDropDownEdit id="ddResource" runat="server" Width="100%" ClientInstanceName="ddResource" Enabled='<%#(CType(Container, AppointmentFormTemplateContainer)).CanEditResource%>' AllowUserInput="false">
 							<DropDownWindowTemplate>
@@ -204,10 +204,10 @@
    If CanShowReminders Then
 %>
 		<td class="dxscSingleCell">
-			<table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+			<table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
 				<tr>
 					<td class="dxscLabelCell" style="padding-left: 22px;">
-						<table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
+						<table class="dxscLabelControlPair" <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %>>
 							<tr>
 								<td style="width: 20px; height: 20px;">
 									<dxe:ASPxCheckBox ClientInstanceName="_dx" ID="chkReminder" runat="server"> 
@@ -227,7 +227,7 @@
 			</table>
 		</td>
 <%
-   End If
+    End If
 %>
 	</tr>
 	<tr>
@@ -251,9 +251,9 @@
 	</tr>
 </table>
 
-<table <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %> style="width: 100%; height: 35px;">
+<table <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %> style="width: 100%; height: 35px;">
 	<tr>
-		<td class="dx-ac" style="width: 100%; height: 100%;" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetAlignAttributes(Me, "center", Nothing)%>>
+		<td class="dx-ac" style="width: 100%; height: 100%;" <%= DevExpress.Web.Internal.RenderUtils.GetAlignAttributes(Me, "center", Nothing)%>>
 			<table class="dxscButtonTable" style="height: 100%">
 				<tr>
 					<td class="dxscCellWithPadding">
@@ -275,9 +275,9 @@
 		</td>
 	</tr>
 </table>
-<table <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %> style="width: 100%;">
+<table <%= DevExpress.Web.Internal.RenderUtils.GetTableSpacings(Me, 0, 0) %> style="width: 100%;">
 	<tr>
-		<td class="dx-al" style="width: 100%;" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetAlignAttributes(Me, "left", Nothing)%>>
+		<td class="dx-al" style="width: 100%;" <%= DevExpress.Web.Internal.RenderUtils.GetAlignAttributes(Me, "left", Nothing)%>>
 			<dxsc:ASPxSchedulerStatusInfo runat="server" ID="schedulerStatusInfo" Priority="1" MasterControlId='<%#(CType(Container, DevExpress.Web.ASPxScheduler.AppointmentFormTemplateContainer)).ControlId%>' />
 		</td>
 	</tr>

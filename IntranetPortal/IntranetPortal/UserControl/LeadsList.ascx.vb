@@ -1,6 +1,4 @@
-﻿Imports DevExpress.Web.ASPxEditors
-Imports DevExpress.Web.ASPxTabControl
-Imports DevExpress.Web.ASPxCallbackPanel
+﻿Imports DevExpress.Web
 Imports IntranetPortal.Data
 
 Public Class LeadsList
@@ -384,7 +382,7 @@ Public Class LeadsList
         End If
     End Function
 
-    Protected Sub gridLeads_CustomDataCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomDataCallbackEventArgs)
+    Protected Sub gridLeads_CustomDataCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomDataCallbackEventArgs)
 
         e.Result = gridLeads.GetRowValues(CInt(e.Parameters), "BBLE")
 
@@ -392,7 +390,7 @@ Public Class LeadsList
         Return
     End Sub
 
-    Protected Sub ASPxCallbackPanel1_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub ASPxCallbackPanel1_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         'BindLeadsList("")
     End Sub
 
@@ -470,7 +468,7 @@ Public Class LeadsList
         End Using
     End Sub
 
-    Protected Sub pageControlNewLeads_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub pageControlNewLeads_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
 
     End Sub
 
@@ -538,7 +536,7 @@ Public Class LeadsList
         End Using
     End Function
 
-    Protected Sub lbNewBBLE_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub lbNewBBLE_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         Dim pageRootControl = TryCast(gridLeads.FindEditFormTemplateControl("pageControlNewLeads"), ASPxPageControl)
         Dim pageInputData = TryCast(pageRootControl.FindControl("pageControlInputData"), ASPxPageControl)
         'Dim borough = TryCast(pageInputData.FindControl("txtStreetBorough"), ASPxTextBox).Text
@@ -555,14 +553,14 @@ Public Class LeadsList
         lbBBLE.DataBind()
     End Sub
 
-    Protected Sub getAddressCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub getAddressCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Using Context As New Entities
             Dim lead = Context.LeadsInfoes.Where(Function(ld) ld.BBLE = e.Parameter).SingleOrDefault
             e.Result = lead.PropertyAddress
         End Using
     End Sub
 
-    'Protected Sub ASPxCallback1_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    'Protected Sub ASPxCallback1_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
     '    Dim borough = e.Parameter
 
     '    Using client As New DataAPI.WCFMacrosClient
@@ -572,7 +570,7 @@ Public Class LeadsList
     '    End Using
     'End Sub
 
-    'Protected Sub callbackPanelRequestUpdate_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    'Protected Sub callbackPanelRequestUpdate_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
     '    If e.Parameter = "SendRequest" Then
     '        Dim bble = hfRequestUpdateBBLE.Value
 
@@ -645,7 +643,7 @@ Public Class LeadsList
     '    'Next
     'End Sub
 
-    Protected Sub cbStreetlookup_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub cbStreetlookup_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         If String.IsNullOrEmpty(e.Parameter) Then
             Return
         End If
@@ -657,7 +655,7 @@ Public Class LeadsList
         End Using
     End Sub
 
-    Protected Sub gridLeads_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+    Protected Sub gridLeads_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
         If e.Parameters.StartsWith("Search") Then
             Dim key = e.Parameters.Split("|")(1)
             BindLeadsListByKey(key)
@@ -688,7 +686,7 @@ Public Class LeadsList
         End If
         Return color
     End Function
-    Protected Sub gridLeads_AfterPerformCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewAfterPerformCallbackEventArgs) Handles gridLeads.AfterPerformCallback
+    Protected Sub gridLeads_AfterPerformCallback(sender As Object, e As DevExpress.Web.ASPxGridViewAfterPerformCallbackEventArgs) Handles gridLeads.AfterPerformCallback
         'If gridLeads.DataSource Is Nothing Then
         '    BindLeadsList(lblLeadCategory.Text)
         'End If
@@ -716,17 +714,17 @@ Public Class LeadsList
         End If
     End Sub
 
-    Protected Sub gridLeads_CustomGroupDisplayText(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewColumnDisplayTextEventArgs)
+    Protected Sub gridLeads_CustomGroupDisplayText(sender As Object, e As DevExpress.Web.ASPxGridViewColumnDisplayTextEventArgs)
 
     End Sub
 
-    Protected Sub gridLeads_SummaryDisplayText(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewSummaryDisplayTextEventArgs)
+    Protected Sub gridLeads_SummaryDisplayText(sender As Object, e As DevExpress.Web.ASPxGridViewSummaryDisplayTextEventArgs)
         If e.Item.FieldName = "LeadsName" Then
             e.Text = e.Value
         End If
     End Sub
 
-    'Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    'Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
     '    popContentRequestUpdate.Visible = True
     '    If e.Parameter = "SendRequest" Then
     '        Dim bble = hfRequestUpdateBBLE.Value
@@ -752,7 +750,7 @@ Public Class LeadsList
     '    End If
     'End Sub
 
-    Protected Sub MarkColorCallBack_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub MarkColorCallBack_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Dim BBLE = e.Parameter.Split("|")(1)
         Dim Color = CInt(e.Parameter.Split("|")(2))
         Using Context As New Entities

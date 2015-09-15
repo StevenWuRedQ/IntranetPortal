@@ -20,7 +20,7 @@ Partial Public Class Management
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents AgentTree As Global.DevExpress.Web.ASPxTreeView.ASPxTreeView
+    Protected WithEvents AgentTree As Global.DevExpress.Web.ASPxTreeView
 
     '''<summary>
     '''splitter control.
@@ -29,5 +29,5 @@ Partial Public Class Management
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents splitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents splitter As Global.DevExpress.Web.ASPxSplitter
 End Class

@@ -29,7 +29,7 @@ Partial Public Class ShortSalePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''SplitterContentControl1 control.
@@ -38,7 +38,7 @@ Partial Public Class ShortSalePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
+    Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.SplitterContentControl
 
     '''<summary>
     '''ShortSaleCaseList control.
@@ -56,7 +56,7 @@ Partial Public Class ShortSalePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl2 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
+    Protected WithEvents SplitterContentControl2 As Global.DevExpress.Web.SplitterContentControl
 
     '''<summary>
     '''ASPxCallbackPanel2 control.
@@ -65,7 +65,7 @@ Partial Public Class ShortSalePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxCallbackPanel2 As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents ASPxCallbackPanel2 As Global.DevExpress.Web.ASPxCallbackPanel
 
     '''<summary>
     '''PanelContent1 control.
@@ -74,7 +74,7 @@ Partial Public Class ShortSalePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents PanelContent1 As Global.DevExpress.Web.ASPxPanel.PanelContent
+    Protected WithEvents PanelContent1 As Global.DevExpress.Web.PanelContent
 
     '''<summary>
     '''contentSplitter control.
@@ -83,7 +83,7 @@ Partial Public Class ShortSalePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''SplitterContentControl3 control.
@@ -92,7 +92,7 @@ Partial Public Class ShortSalePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl3 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
+    Protected WithEvents SplitterContentControl3 As Global.DevExpress.Web.SplitterContentControl
 
     '''<summary>
     '''hfBBLE control.
@@ -146,7 +146,7 @@ Partial Public Class ShortSalePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl4 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
+    Protected WithEvents SplitterContentControl4 As Global.DevExpress.Web.SplitterContentControl
 
     '''<summary>
     '''ActivityLogs control.
@@ -173,7 +173,7 @@ Partial Public Class ShortSalePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupCallBackMenu2 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+    Protected WithEvents ASPxPopupCallBackMenu2 As Global.DevExpress.Web.ASPxPopupMenu
 
     '''<summary>
     '''pcMain control.
@@ -182,7 +182,7 @@ Partial Public Class ShortSalePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pcMain As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents pcMain As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''Panel1 control.
@@ -200,7 +200,7 @@ Partial Public Class ShortSalePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxCalendar1 As Global.DevExpress.Web.ASPxEditors.ASPxCalendar
+    Protected WithEvents ASPxCalendar1 As Global.DevExpress.Web.ASPxCalendar
 
     '''<summary>
     '''ASPxDateEdit1 control.
@@ -209,7 +209,7 @@ Partial Public Class ShortSalePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxDateEdit1 As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
+    Protected WithEvents ASPxDateEdit1 As Global.DevExpress.Web.ASPxDateEdit
 
     '''<summary>
     '''ASPxButton1 control.
@@ -218,7 +218,7 @@ Partial Public Class ShortSalePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxPopupControl1 control.
@@ -227,7 +227,7 @@ Partial Public Class ShortSalePage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''VendorsPopup control.

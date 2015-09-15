@@ -1,7 +1,7 @@
 Imports System.Data.SqlClient
 Imports DevExpress.Web.ASPxScheduler
 Imports DevExpress.XtraScheduler
-Imports DevExpress.Web.ASPxSplitter
+Imports DevExpress.Web
 
 Public Class Calendar
     Inherits System.Web.UI.Page
@@ -49,7 +49,7 @@ Public Class Calendar
         e.Container.Caption = e.Appointment.Subject
     End Sub
 
-    Protected Sub calendarPages_ActiveTabChanged(source As Object, e As DevExpress.Web.ASPxTabControl.TabControlEventArgs) Handles calendarPages.ActiveTabChanged
+    Protected Sub calendarPages_ActiveTabChanged(source As Object, e As DevExpress.Web.TabControlEventArgs) Handles calendarPages.ActiveTabChanged
         If e.Tab.Name = "tabOffice" Then
             BindOfficeCalandar()
         End If

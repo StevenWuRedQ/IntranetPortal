@@ -20,5 +20,5 @@ Partial Public Class CompanyTree
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TreeViewEmp As Global.DevExpress.Web.ASPxTreeView.ASPxTreeView
+    Protected WithEvents TreeViewEmp As Global.DevExpress.Web.ASPxTreeView
 End Class

@@ -20,7 +20,7 @@ Partial Public Class PropertyListControl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''divExpand control.
@@ -38,7 +38,7 @@ Partial Public Class PropertyListControl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridTasks As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridTasks As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''ASPxPopupMenu2 control.
@@ -47,7 +47,7 @@ Partial Public Class PropertyListControl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupMenu2 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+    Protected WithEvents ASPxPopupMenu2 As Global.DevExpress.Web.ASPxPopupMenu
 
     '''<summary>
     '''LeadsSubMenu control.

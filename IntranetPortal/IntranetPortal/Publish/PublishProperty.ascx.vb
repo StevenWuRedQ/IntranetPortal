@@ -1,6 +1,5 @@
 ﻿Imports PublicSiteData
-Imports DevExpress.Web.ASPxEditors
-Imports DevExpress.Web.ASPxGridView
+Imports DevExpress.Web
 
 Public Class PublishProperty
     Inherits System.Web.UI.UserControl
@@ -129,7 +128,7 @@ Public Class PublishProperty
         Return ListPropertyData
     End Function
 
-    Protected Sub cpPropertyContent_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub cpPropertyContent_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         If e.Parameter = "Save" Then
             SaveListPropertyData()
         End If
@@ -140,7 +139,7 @@ Public Class PublishProperty
         End If
     End Sub
 
-    Protected Sub UploadControl_FileUploadComplete(sender As Object, e As DevExpress.Web.ASPxUploadControl.FileUploadCompleteEventArgs)
+    Protected Sub UploadControl_FileUploadComplete(sender As Object, e As DevExpress.Web.FileUploadCompleteEventArgs)
         Dim img As New PropertyImage
         img.FileName = e.UploadedFile.FileName
         img.ImageData = e.UploadedFile.FileBytes
@@ -153,7 +152,7 @@ Public Class PublishProperty
         e.CallbackData = img.ImageId
     End Sub
 
-    Protected Sub gridImages_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+    Protected Sub gridImages_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
         If e.Parameters.StartsWith("Upload") Then
             Dim fileId = CInt(e.Parameters.Split("|")(1))
             Dim bble = hfBBLE.Value
@@ -168,12 +167,12 @@ Public Class PublishProperty
         BindImages(hfBBLE.Value)
     End Sub
 
-    Protected Sub cpImageSlider_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub cpImageSlider_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         Dim bble = hfBBLE.Value
         BindImages(bble)
     End Sub
 
-    Protected Sub gridImages_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs)
+    Protected Sub gridImages_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridViewTableRowEventArgs)
         If e.RowType = GridViewRowType.Data Then
             Dim rowOrder As Object = e.GetValue("OrderId")
             If rowOrder IsNot Nothing Then
@@ -188,7 +187,7 @@ Public Class PublishProperty
         End If
     End Sub
 
-    Protected Sub gridImages_CustomCallback1(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+    Protected Sub gridImages_CustomCallback1(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
         If e.Parameters.StartsWith("Upload") Then
             Dim fileId = CInt(e.Parameters.Split("|")(1))
             Dim bble = hfBBLE.Value
@@ -253,7 +252,7 @@ Public Class PublishProperty
         img.Save()
     End Sub
 
-    Protected Sub gridImages_CustomJSProperties(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewClientJSPropertiesEventArgs)
+    Protected Sub gridImages_CustomJSProperties(sender As Object, e As DevExpress.Web.ASPxGridViewClientJSPropertiesEventArgs)
         Dim gridView As ASPxGridView = TryCast(sender, ASPxGridView)
         UpdateGridViewButtons(gridView)
     End Sub
@@ -264,7 +263,7 @@ Public Class PublishProperty
         End If
     End Sub
 
-    Protected Sub callbackSaveDescription_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub callbackSaveDescription_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         If Not String.IsNullOrEmpty(e.Parameter) Then
             Dim imgId = e.Parameter.Substring(0, e.Parameter.IndexOf("|"))
             Dim comments = e.Parameter.Remove(0, e.Parameter.IndexOf("|") + 1)

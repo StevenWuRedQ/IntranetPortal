@@ -1,5 +1,5 @@
 ﻿Imports System.Threading
-Imports DevExpress.Web.ASPxEditors
+Imports DevExpress.Web
 Imports Newtonsoft.Json.Linq
 
 Public Class ImportAgentData
@@ -415,7 +415,7 @@ InitialLine:
         gridNewLeads.DataSource = LeadsData(cbLeadsType.Value)
     End Sub
 
-    Protected Sub checkProgress_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    Protected Sub checkProgress_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         Application.Lock()
         Dim total = Application("TotalCount")
         Dim count = Application("Processed")

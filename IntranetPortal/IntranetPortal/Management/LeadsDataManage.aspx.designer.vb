@@ -29,7 +29,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''lblSelectImage control.
@@ -38,7 +38,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblSelectImage As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblSelectImage As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''uplImage control.
@@ -47,7 +47,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents uplImage As Global.DevExpress.Web.ASPxUploadControl.ASPxUploadControl
+    Protected WithEvents uplImage As Global.DevExpress.Web.ASPxUploadControl
 
     '''<summary>
     '''btnUpload control.
@@ -56,7 +56,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnUpload As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnUpload As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''lblAllowebMimeType control.
@@ -65,7 +65,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblAllowebMimeType As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblAllowebMimeType As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''lblMaxFileSize control.
@@ -74,7 +74,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblMaxFileSize As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblMaxFileSize As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''lblDataFileName control.
@@ -83,7 +83,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblDataFileName As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents lblDataFileName As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''btnPreview control.
@@ -92,7 +92,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnPreview As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnPreview As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxButton1 control.
@@ -101,7 +101,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxButton2 control.
@@ -110,7 +110,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''btnRefresh control.
@@ -119,7 +119,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnRefresh As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnRefresh As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''gridLeadsData control.
@@ -128,7 +128,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridLeadsData As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridLeadsData As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''btnStart control.
@@ -137,7 +137,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnStart As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnStart As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxButton3 control.
@@ -146,7 +146,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton3 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton3 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxButton4 control.
@@ -155,7 +155,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''cbLeadsType control.
@@ -164,7 +164,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbLeadsType As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbLeadsType As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''cbEmployee control.
@@ -173,7 +173,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbEmployee As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbEmployee As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''btnLoadData control.
@@ -182,7 +182,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnLoadData As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnLoadData As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''gridNewLeads control.
@@ -191,7 +191,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridNewLeads As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridNewLeads As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''ASPxButton6 control.
@@ -200,7 +200,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton6 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton6 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxButton5 control.
@@ -209,7 +209,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton5 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton5 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxButton7 control.
@@ -218,7 +218,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton7 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton7 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxLabel1 control.
@@ -227,7 +227,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxLabel1 As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents ASPxLabel1 As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''RefreshBar control.
@@ -236,7 +236,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RefreshBar As Global.DevExpress.Web.ASPxEditors.ASPxProgressBar
+    Protected WithEvents RefreshBar As Global.DevExpress.Web.ASPxProgressBar
 
     '''<summary>
     '''checkProgress control.
@@ -245,7 +245,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents checkProgress As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents checkProgress As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''callBackService control.
@@ -254,7 +254,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents callBackService As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents callBackService As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''ASPxCallback1 control.
@@ -263,7 +263,7 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxCallback1 As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents ASPxCallback1 As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''callbackLogs control.
@@ -272,5 +272,5 @@ Partial Public Class LeadsDataManage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents callbackLogs As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents callbackLogs As Global.DevExpress.Web.ASPxCallback
 End Class

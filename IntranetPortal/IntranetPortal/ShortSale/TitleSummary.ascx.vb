@@ -1,4 +1,4 @@
-﻿Imports DevExpress.Web.ASPxGridView
+﻿Imports DevExpress.Web
 Imports IntranetPortal.Data
 Imports ShortSale = IntranetPortal.Data
 
@@ -331,7 +331,7 @@ Public Class UCTitleSummary
         End If
     End Sub
 
-    Protected Sub notesCallbackPanel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub notesCallbackPanel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         Using Context As New Entities
 
             If e.Parameter.StartsWith("Show") Then
@@ -492,7 +492,7 @@ Public Class UCTitleSummary
         End Get
     End Property
 
-    Protected Sub cbpSavedReport_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub cbpSavedReport_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         If e.Parameter.StartsWith("SaveLayout") Then
 
             Dim name = e.Parameter.Split("|")(1)

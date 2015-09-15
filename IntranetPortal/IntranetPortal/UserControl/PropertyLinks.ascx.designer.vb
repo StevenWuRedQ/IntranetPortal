@@ -20,7 +20,7 @@ Partial Public Class PropertyLinks
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''ASPxPopupControl2 control.
@@ -29,7 +29,7 @@ Partial Public Class PropertyLinks
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''txtLeadsComments control.
@@ -38,7 +38,7 @@ Partial Public Class PropertyLinks
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtLeadsComments As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtLeadsComments As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''btnAdd control.
@@ -47,7 +47,7 @@ Partial Public Class PropertyLinks
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAdd As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnAdd As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxButton4 control.
@@ -56,5 +56,5 @@ Partial Public Class PropertyLinks
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxButton
 End Class

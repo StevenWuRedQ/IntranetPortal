@@ -106,7 +106,7 @@ Public Class LegalUI
         Return json
     End Function
 
-    Protected Sub cbpLogs_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub cbpLogs_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         ActivityLogs.BindData(e.Parameter)
         fileGamePlan.BindData(e.Parameter)
     End Sub
@@ -201,7 +201,7 @@ Public Class LegalUI
 
     End Function
 
-    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         PopupContentReAssign.Visible = True
 
         If e.Parameter.StartsWith("type") Then

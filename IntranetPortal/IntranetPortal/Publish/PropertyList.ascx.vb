@@ -33,7 +33,7 @@ Public Class PropertyListControl
         End If
     End Sub
 
-    Protected Sub gridTasks_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+    Protected Sub gridTasks_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
         If e.Parameters.StartsWith("Group") Then
             gridTasks.UnGroup(gridTasks.Columns("ProcSchemeDisplayName"))
             gridTasks.UnGroup(gridTasks.Columns("Originator"))
@@ -42,7 +42,7 @@ Public Class PropertyListControl
         End If
     End Sub
 
-    Protected Sub gridTasks_CustomColumnSort(sender As Object, e As DevExpress.Web.ASPxGridView.CustomColumnSortEventArgs)
+    Protected Sub gridTasks_CustomColumnSort(sender As Object, e As DevExpress.Web.CustomColumnSortEventArgs)
         If e.Column.FieldName = "ProcSchemeDisplayName" Then
             e.Handled = True
             Dim s1 = e.Value1.ToString, s2 = e.Value2.ToString

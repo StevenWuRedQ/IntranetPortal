@@ -56,7 +56,7 @@ Public Class ComplainsMng
         'End If
     End Sub
 
-    Protected Sub gdComplains_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+    Protected Sub gdComplains_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
         If e.Parameters = "Add" Then
             Dim bble = txtBBLE.Text
             AddProperty(bble)
@@ -130,11 +130,11 @@ Public Class ComplainsMng
         End If
     End Sub
 
-    Protected Sub gdComplainsResult_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+    Protected Sub gdComplainsResult_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
         'BindResult()
     End Sub
 
-    Protected Sub popupComplaintHistory_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub popupComplaintHistory_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         popCtrHistory.Visible = True
         Dim bble = e.Parameter
         hfBBLE.Value = bble
@@ -144,8 +144,8 @@ Public Class ComplainsMng
 
     End Sub
 
-    Protected Sub gdComplainsResult_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs)
-        If e.RowType = DevExpress.Web.ASPxGridView.GridViewRowType.Data OrElse e.RowType = DevExpress.Web.ASPxGridView.GridViewRowType.Detail Then
+    Protected Sub gdComplainsResult_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridViewTableRowEventArgs)
+        If e.RowType = DevExpress.Web.GridViewRowType.Data OrElse e.RowType = DevExpress.Web.GridViewRowType.Detail Then
             Dim dtEntered = CDate(e.GetValue("DateEntered"))
 
             If dtEntered > DateTime.MinValue Then
@@ -170,7 +170,7 @@ Public Class ComplainsMng
         End If
     End Sub
 
-    Protected Sub cpAddProperty_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub cpAddProperty_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         lblAddress.Visible = False
 
         If e.Parameter = "Add" Then
@@ -204,7 +204,7 @@ Public Class ComplainsMng
         End If
     End Sub
 
-    Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         If e.Parameter.StartsWith("Show") Then
             tbUsers.DataSource = Employee.GetAllActiveEmps().OrderBy(Function(r) r).ToArray
             tbUsers.DataBind()

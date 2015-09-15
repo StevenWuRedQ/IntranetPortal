@@ -467,7 +467,7 @@
                                     </div>
                                     <div style="padding: 10px 10px;">
                                         <div id="agentActivityChart" class="containers" style="height: 240px; width: 100%;"></div>
-                                        <div id="ProcessStatusChart" class="containers" style="width: 100%;"></div>
+                                        <div id="ProcessStatusChart" class="containers" style="width: 100%;"></div>                                        
                                     </div>
                                 </div>
                                 <script type="text/javascript">
@@ -605,8 +605,10 @@
                                                 tooltip: {
                                                     enabled: true,
                                                     percentPrecision: 0,
-                                                    customizeText: function () {
-                                                        return this.argumentText + " (" + this.percentText + ")";
+                                                    customizeText: function (arg) {                                                   
+                                                        return {
+                                                            text: arg.argumentText + " (" + arg.percentText + ")"
+                                                        };                                                        
                                                     }
                                                 },
                                                 legend: {

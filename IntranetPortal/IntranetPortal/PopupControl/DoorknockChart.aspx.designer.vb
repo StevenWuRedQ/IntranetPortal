@@ -20,5 +20,5 @@ Partial Public Class DoorknockChart
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cpPrint As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents cpPrint As Global.DevExpress.Web.ASPxCallback
 End Class

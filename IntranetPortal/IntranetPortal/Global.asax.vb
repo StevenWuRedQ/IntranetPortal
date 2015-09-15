@@ -1,5 +1,5 @@
 Imports System.Web.SessionState
-Imports DevExpress.Web.ASPxClasses
+Imports DevExpress.Web
 Imports System.Web.Routing
 Imports System.Web.Security
 Imports Microsoft.AspNet.SignalR
@@ -10,7 +10,7 @@ Public Class Global_asax
     Inherits System.Web.HttpApplication
 
     Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
-        AddHandler DevExpress.Web.ASPxClasses.ASPxWebControl.CallbackError, AddressOf Application_Error
+        AddHandler DevExpress.Web.ASPxWebControl.CallbackError, AddressOf Application_Error
 
         Dim users As New List(Of OnlineUser)
         Application("Users") = users

@@ -20,7 +20,7 @@ Partial Public Class LeadsSearchUploadData
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxLabel2 As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents ASPxLabel2 As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''SearchResultsUpolad control.
@@ -29,7 +29,7 @@ Partial Public Class LeadsSearchUploadData
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SearchResultsUpolad As Global.DevExpress.Web.ASPxUploadControl.ASPxUploadControl
+    Protected WithEvents SearchResultsUpolad As Global.DevExpress.Web.ASPxUploadControl
 
     '''<summary>
     '''ASPxButton8 control.
@@ -38,7 +38,7 @@ Partial Public Class LeadsSearchUploadData
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton8 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton8 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxLabel3 control.
@@ -47,7 +47,7 @@ Partial Public Class LeadsSearchUploadData
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxLabel3 As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents ASPxLabel3 As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''ASPxLabel4 control.
@@ -56,7 +56,7 @@ Partial Public Class LeadsSearchUploadData
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxLabel4 As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents ASPxLabel4 As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''ASPxLabel5 control.
@@ -65,7 +65,7 @@ Partial Public Class LeadsSearchUploadData
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxLabel5 As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents ASPxLabel5 As Global.DevExpress.Web.ASPxLabel
 
     '''<summary>
     '''ASPxButton11 control.
@@ -74,7 +74,7 @@ Partial Public Class LeadsSearchUploadData
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton11 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton11 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxButton12 control.
@@ -83,7 +83,7 @@ Partial Public Class LeadsSearchUploadData
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxButton12 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxButton12 As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''ASPxGridView1 control.
@@ -92,7 +92,7 @@ Partial Public Class LeadsSearchUploadData
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxGridView1 As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents ASPxGridView1 As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''cbApproval control.
@@ -101,5 +101,5 @@ Partial Public Class LeadsSearchUploadData
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbApproval As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents cbApproval As Global.DevExpress.Web.ASPxCallback
 End Class

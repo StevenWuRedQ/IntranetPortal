@@ -20,7 +20,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cpPropertyContent As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents cpPropertyContent As Global.DevExpress.Web.ASPxCallbackPanel
 
     '''<summary>
     '''hfBBLE control.
@@ -38,7 +38,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbNumOfBed As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbNumOfBed As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''cbNumOfBath control.
@@ -47,7 +47,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbNumOfBath As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbNumOfBath As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''txtSalePrice control.
@@ -56,7 +56,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtSalePrice As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtSalePrice As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''txtAnnualTax control.
@@ -65,7 +65,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtAnnualTax As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtAnnualTax As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''txtAvaiableDate control.
@@ -83,7 +83,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtTransitLines As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtTransitLines As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''tokenBoxTransitLines control.
@@ -92,7 +92,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tokenBoxTransitLines As Global.DevExpress.Web.ASPxEditors.ASPxTokenBox
+    Protected WithEvents tokenBoxTransitLines As Global.DevExpress.Web.ASPxTokenBox
 
     '''<summary>
     '''txtDescription control.
@@ -110,7 +110,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cblFeatures As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
+    Protected WithEvents cblFeatures As Global.DevExpress.Web.ASPxCheckBoxList
 
     '''<summary>
     '''txtCommonCharges control.
@@ -119,7 +119,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtCommonCharges As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtCommonCharges As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''txtTaxes control.
@@ -128,7 +128,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtTaxes As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtTaxes As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''txtPriceSqft control.
@@ -137,7 +137,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtPriceSqft As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtPriceSqft As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''txtDownPayment control.
@@ -146,7 +146,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtDownPayment As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtDownPayment As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''rblDog control.
@@ -155,7 +155,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rblDog As Global.DevExpress.Web.ASPxEditors.ASPxRadioButtonList
+    Protected WithEvents rblDog As Global.DevExpress.Web.ASPxRadioButtonList
 
     '''<summary>
     '''rblCat control.
@@ -164,7 +164,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rblCat As Global.DevExpress.Web.ASPxEditors.ASPxRadioButtonList
+    Protected WithEvents rblCat As Global.DevExpress.Web.ASPxRadioButtonList
 
     '''<summary>
     '''txtSqft control.
@@ -173,7 +173,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtSqft As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtSqft As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''txtNumOfUnit control.
@@ -182,7 +182,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtNumOfUnit As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtNumOfUnit As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''txtNumOfFloor control.
@@ -191,7 +191,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtNumOfFloor As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtNumOfFloor As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''txtSchoolDistrict control.
@@ -200,7 +200,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtSchoolDistrict As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtSchoolDistrict As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''cpImageSlider control.
@@ -209,7 +209,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cpImageSlider As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents cpImageSlider As Global.DevExpress.Web.ASPxCallbackPanel
 
     '''<summary>
     '''imageSlider control.
@@ -218,7 +218,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents imageSlider As Global.DevExpress.Web.ASPxImageSlider.ASPxImageSlider
+    Protected WithEvents imageSlider As Global.DevExpress.Web.ASPxImageSlider
 
     '''<summary>
     '''gridImages control.
@@ -227,7 +227,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridImages As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridImages As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''btMoveUp control.
@@ -236,7 +236,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btMoveUp As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btMoveUp As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''btMoveDown control.
@@ -245,7 +245,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btMoveDown As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btMoveDown As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''callbackSaveDescription control.
@@ -254,7 +254,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents callbackSaveDescription As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents callbackSaveDescription As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''UploadControl control.
@@ -263,7 +263,7 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UploadControl As Global.DevExpress.Web.ASPxUploadControl.ASPxUploadControl
+    Protected WithEvents UploadControl As Global.DevExpress.Web.ASPxUploadControl
 
     '''<summary>
     '''ge control.
@@ -272,5 +272,5 @@ Partial Public Class PublishProperty
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ge As Global.DevExpress.Web.ASPxGlobalEvents.ASPxGlobalEvents
+    Protected WithEvents ge As Global.DevExpress.Web.ASPxGlobalEvents
 End Class

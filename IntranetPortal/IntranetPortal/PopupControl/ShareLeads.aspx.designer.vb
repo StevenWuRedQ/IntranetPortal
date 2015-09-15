@@ -38,7 +38,7 @@ Partial Public Class ShareLeads
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbEmployees As Global.DevExpress.Web.ASPxEditors.ASPxListBox
+    Protected WithEvents lbEmployees As Global.DevExpress.Web.ASPxListBox
 
     '''<summary>
     '''cbEmps control.
@@ -47,7 +47,7 @@ Partial Public Class ShareLeads
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbEmps As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbEmps As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''btnAddEmp control.
@@ -56,7 +56,7 @@ Partial Public Class ShareLeads
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddEmp As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnAddEmp As Global.DevExpress.Web.ASPxButton
 
     '''<summary>
     '''btnRemoveEmp control.
@@ -65,5 +65,5 @@ Partial Public Class ShareLeads
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnRemoveEmp As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnRemoveEmp As Global.DevExpress.Web.ASPxButton
 End Class

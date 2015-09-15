@@ -20,5 +20,5 @@ Partial Public Class NGDocumentsUI
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupMenu11 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+    Protected WithEvents ASPxPopupMenu11 As Global.DevExpress.Web.ASPxPopupMenu
 End Class

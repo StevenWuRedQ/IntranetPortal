@@ -29,5 +29,5 @@ Partial Public Class AppointmentToolTip
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnShowMenu As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnShowMenu As Global.DevExpress.Web.ASPxButton
 End Class

@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class Login
-
+    
     '''<summary>
     '''form1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class Login
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
+    
     '''<summary>
     '''LogInCallBack control.
     '''</summary>
@@ -29,5 +29,5 @@ Partial Public Class Login
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LogInCallBack As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents LogInCallBack As Global.DevExpress.Web.ASPxCallback
 End Class

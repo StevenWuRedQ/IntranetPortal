@@ -1,6 +1,4 @@
-﻿Imports DevExpress.Web.ASPxEditors
-Imports DevExpress.Web.ASPxClasses
-Imports DevExpress.Web.ASPxTreeView
+﻿Imports DevExpress.Web
 
 Public Class Default2
     Inherits System.Web.UI.Page

@@ -20,7 +20,7 @@ Partial Public Class DoorKnockMap
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtOriginPoint As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents txtOriginPoint As Global.DevExpress.Web.ASPxTextBox
 
     '''<summary>
     '''callbackGetAddress control.
@@ -29,7 +29,7 @@ Partial Public Class DoorKnockMap
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents callbackGetAddress As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents callbackGetAddress As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''ASPxCallback1 control.
@@ -38,7 +38,7 @@ Partial Public Class DoorKnockMap
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxCallback1 As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents ASPxCallback1 As Global.DevExpress.Web.ASPxCallback
 
     '''<summary>
     '''ASPxPopupControl2 control.
@@ -47,7 +47,7 @@ Partial Public Class DoorKnockMap
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''listboxAddress control.
@@ -56,7 +56,7 @@ Partial Public Class DoorKnockMap
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents listboxAddress As Global.DevExpress.Web.ASPxEditors.ASPxListBox
+    Protected WithEvents listboxAddress As Global.DevExpress.Web.ASPxListBox
 
     '''<summary>
     '''btnOk control.
@@ -65,5 +65,5 @@ Partial Public Class DoorKnockMap
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnOk As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents btnOk As Global.DevExpress.Web.ASPxButton
 End Class

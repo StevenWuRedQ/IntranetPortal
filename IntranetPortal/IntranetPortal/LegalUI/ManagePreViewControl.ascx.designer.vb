@@ -29,7 +29,7 @@ Partial Public Class ManagePreViewControl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbLegalUser As Global.DevExpress.Web.ASPxEditors.ASPxListBox
+    Protected WithEvents lbLegalUser As Global.DevExpress.Web.ASPxListBox
 
     '''<summary>
     '''btnSubmit control.

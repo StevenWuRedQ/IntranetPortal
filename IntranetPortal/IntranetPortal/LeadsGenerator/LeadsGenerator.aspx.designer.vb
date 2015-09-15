@@ -20,7 +20,7 @@ Partial Public Class LeadsGenerator
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
 
     '''<summary>
     '''cpTableView control.
@@ -29,7 +29,7 @@ Partial Public Class LeadsGenerator
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cpTableView As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents cpTableView As Global.DevExpress.Web.ASPxCallbackPanel
 
     '''<summary>
     '''hfSearchName control.
@@ -56,7 +56,7 @@ Partial Public Class LeadsGenerator
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ErrorMessage As Global.DevExpress.Web.ASPxHiddenField.ASPxHiddenField
+    Protected WithEvents ErrorMessage As Global.DevExpress.Web.ASPxHiddenField
 
     '''<summary>
     '''hfFilterOutExist control.
@@ -83,7 +83,7 @@ Partial Public Class LeadsGenerator
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents QueryResultsGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents QueryResultsGrid As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''gridExport control.
@@ -92,7 +92,7 @@ Partial Public Class LeadsGenerator
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+    Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridViewExporter
 
     '''<summary>
     '''EmployeeList control.
@@ -101,7 +101,7 @@ Partial Public Class LeadsGenerator
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents EmployeeList As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents EmployeeList As Global.DevExpress.Web.ASPxComboBox
 
     '''<summary>
     '''SaveSearchPopup control.
@@ -110,7 +110,7 @@ Partial Public Class LeadsGenerator
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SaveSearchPopup As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents SaveSearchPopup As Global.DevExpress.Web.ASPxPopupControl
 
     '''<summary>
     '''MapsPopup control.

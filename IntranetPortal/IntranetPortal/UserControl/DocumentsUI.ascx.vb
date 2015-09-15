@@ -50,7 +50,7 @@ Public Class DocumentsUI
         datalistCategory.DataBind()
     End Sub
 
-    Protected Sub cbpDocumentUI_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub cbpDocumentUI_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         BindFilesFromSharepoint(e.Parameter)
     End Sub
 
