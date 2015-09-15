@@ -5,8 +5,15 @@ Imports System.ComponentModel
 Public Class ConstructionCaseList
     Inherits System.Web.UI.UserControl
 
+    Dim Status As ConstructionCase.CaseStatus = ConstructionCase.CaseStatus.All
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'BindCaseList()
+
+        If Request.QueryString("s") IsNot Nothing Then
+            status = CInt(Request.QueryString("s"))
+        End If
+
     End Sub
 
     Public Sub BindCaseList()
@@ -19,11 +26,21 @@ Public Class ConstructionCaseList
             gridCase.GroupBy(gridCase.Columns("Owner"))
         End If
 
+        If Status = ConstructionCase.CaseStatus.All Then
+            gridCase.GroupBy(gridCase.Columns("StatusStr"))
+        End If
+
         gridCase.DataBind()
     End Sub
 
     Private Sub BindData()
-        gridCase.DataSource = ConstructionManage.GetMyCases(Page.User.Identity.Name)
+        'Dim status = ConstructionCase.CaseStatus.All
+
+        'If Request.QueryString("s") IsNot Nothing Then
+        '    status = CInt(Request.QueryString("s"))
+        'End If
+
+        gridCase.DataSource = ConstructionManage.GetMyCases(Page.User.Identity.Name, status)
     End Sub
 
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)

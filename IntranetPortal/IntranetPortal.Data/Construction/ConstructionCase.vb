@@ -7,15 +7,26 @@ Partial Public Class ConstructionCase
     Private Const LogTitleOpen As String = "ConstructionOpen"
     Private Const LogTitleSave As String = "ConstructionSave"
 
-    Public Shared Function GetAllCases() As ConstructionCase()
+
+    Public ReadOnly Property StatusStr As String
+        Get
+            If Status.HasValue Then
+                Return CType(Status, CaseStatus).ToString
+            End If
+
+            Return CaseStatus.Intake.ToString
+        End Get
+    End Property
+
+    Public Shared Function GetAllCasesByStatus(Optional status As CaseStatus = CaseStatus.All) As ConstructionCase()
         Using ctx As New ConstructionEntities
-            Return ctx.ConstructionCases.ToArray
+            Return ctx.ConstructionCases.Where(Function(c) c.Status = status Or status = CaseStatus.All).ToArray
         End Using
     End Function
 
-    Public Shared Function GetAllCases(userName As String) As ConstructionCase()
+    Public Shared Function GetAllCases(userName As String, Optional status As CaseStatus = CaseStatus.All) As ConstructionCase()
         Using ctx As New ConstructionEntities
-            Return ctx.ConstructionCases.Where(Function(c) c.Owner = userName).ToArray
+            Return ctx.ConstructionCases.Where(Function(c) c.Owner = userName Or (c.Status = status Or status = CaseStatus.All)).ToArray
         End Using
     End Function
 
@@ -45,6 +56,13 @@ Partial Public Class ConstructionCase
         End Using
     End Sub
 
+    Public Sub UpdateStatus(status As CaseStatus, updateBy As String)
+        If Me.Status <> status Then
+            Me.Status = status
+            Me.Save(updateBy)
+        End If
+    End Sub
+
     Public Sub Save(userName As String)
         Using db As New ConstructionEntities
             If db.ConstructionCases.Any(Function(c) c.BBLE = BBLE) Then
@@ -71,6 +89,13 @@ Partial Public Class ConstructionCase
             Return ctx.ConstructionCases.Any(Function(c) c.BBLE = bble)
         End Using
     End Function
+
+    Public Enum CaseStatus
+        All = -1
+        Intake = 0
+        Construction = 1
+        Complated = 2
+    End Enum
 End Class
 
 

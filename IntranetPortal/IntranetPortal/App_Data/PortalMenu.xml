@@ -537,6 +537,21 @@
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="Construction-Intake" Text="Intake" NavigationUrl="/Construction/ConstructionUI.aspx?s=0" ShowAmount="true" AmountManageClass="ConstructionManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Construction-Construction" Text="Construction" NavigationUrl="/Construction/ConstructionUI.aspx?s=1" ShowAmount="true" AmountManageClass="ConstructionManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Construction-Completed" Text="Completed" NavigationUrl="/Construction/ConstructionUI.aspx?s=2" ShowAmount="true" AmountManageClass="ConstructionManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>
     </Items>
   </PortalNavItem>
 

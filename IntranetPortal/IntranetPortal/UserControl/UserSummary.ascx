@@ -244,13 +244,12 @@
                                             <GroupSummary>
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
                                             </GroupSummary>
+                                            <SettingsPager ShowNumericButtons="false"></SettingsPager>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
                                             <Styles>
                                                 <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
                                             </Styles>
-                                        </dx:ASPxGridView>
-
-
+                                        </dx:ASPxGridView>                                        
                                     </div>
                                     <%--fix the disteance between the two grid by steven--%>
                                     <div class="col-md-6" style="width: 380px; vertical-align: top">
@@ -275,6 +274,7 @@
                                                 </dx:GridViewDataColumn>
                                             </Columns>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
+                                            <SettingsPager ShowNumericButtons="false"></SettingsPager>
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
                                                 <RowHotTrack BackColor="#ff400d"></RowHotTrack>
@@ -332,13 +332,12 @@
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
                                             </GroupSummary>
                                             <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
-                                            <SettingsPager NumericButtonCount="3"></SettingsPager>
+                                            <SettingsPager ShowNumericButtons="false"></SettingsPager>
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
                                                 <RowHotTrack BackColor="#ff400d" ForeColor="White"></RowHotTrack>
                                             </Styles>
                                         </dx:ASPxGridView>
-
                                     </div>
                                     <div class="col-md-6" style="width: 380px; vertical-align: top">
                                         <%--add icon by steven--%>
@@ -391,7 +390,7 @@
                                                 <RowHotTrack BackColor="#ff400d"></RowHotTrack>
 
                                             </Styles>
-                                            <SettingsPager NumericButtonCount="4">
+                                            <SettingsPager ShowNumericButtons="false">
                                             </SettingsPager>
                                             <GroupSummary>
                                                 <dx:ASPxSummaryItem FieldName="CallbackDate" SummaryType="Count" />

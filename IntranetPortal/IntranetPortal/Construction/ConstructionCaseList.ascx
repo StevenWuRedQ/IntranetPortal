@@ -77,13 +77,11 @@
     function OnSortMenuClick(s, e) {
         var icon = document.getElementById("btnSortIcon");
         if (e.item.index == 0) {
-            //gridCase.GroupBy("Owner", 0);
+            gridCase.GroupBy("Owner", 0);
         }
 
         if (e.item.index == 1) {
-
-            //gridCase.GroupBy("Owner", 2);
-            //gridCase.GroupBy("MortgageCategory", 0);
+            gridCase.GroupBy("Owner", 2);            
         }
 
         if (e.item.index == 2) {
@@ -165,6 +163,24 @@
                                     <td style="width: 80px;">
                                         <span class="font_black">
                                             <i class="fa fa-user font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                        </span>
+                                    </td>
+                                    <td style="padding-left: 10px">
+                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </GroupRowTemplate>
+                </dx:GridViewDataColumn>
+                <dx:GridViewDataColumn FieldName="StatusStr" Visible="false" VisibleIndex="4">
+                    <GroupRowTemplate>
+                        <div>
+                            <table style="height: 30px">
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
+                                    <td style="width: 80px;">
+                                        <span class="font_black">
+                                            <span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
                                         </span>
                                     </td>
                                     <td style="padding-left: 10px">

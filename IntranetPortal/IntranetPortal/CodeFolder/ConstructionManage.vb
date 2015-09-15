@@ -5,17 +5,19 @@ Public Class ConstructionManage
     Implements INavMenuAmount
 
     Private Const MgrRoleName As String = "Construction-Manager"
+    Private Const IntakeRoleName As String = "Construction-Intake"
 
     Public Shared Sub StartConstruction(bble As String, caseName As String, userName As String)
         If ConstructionCase.GetCase(bble) Is Nothing Then
             Dim cc As New ConstructionCase
             cc.BBLE = bble
             cc.CaseName = caseName
+            cc.Status = ConstructionCase.CaseStatus.Intake
 
-            Dim ccMgr = Roles.GetUsersInRole(MgrRoleName)
+            Dim ccIntake = Roles.GetUsersInRole(IntakeRoleName)
 
-            If ccMgr IsNot Nothing AndAlso ccMgr.Length > 0 Then
-                cc.Owner = ccMgr(0)
+            If ccIntake IsNot Nothing AndAlso ccIntake.Length > 0 Then
+                cc.Owner = ccIntake(0)
             End If
 
             cc.Save(userName)
@@ -26,19 +28,31 @@ Public Class ConstructionManage
         Return ConstructionCase.GetCase(bble, userName)
     End Function
 
-    Public Shared Function GetMyCases(userName As String) As ConstructionCase()
+    Public Shared Function GetMyCases(userName As String, Optional status As CaseStatus = -1) As ConstructionCase()
         If IsManager(userName) Then
-            Return ConstructionCase.GetAllCases()
+            Return ConstructionCase.GetAllCasesByStatus(status)
         Else
-            Return ConstructionCase.GetAllCases(userName)
+            Return ConstructionCase.GetAllCases(userName, status)
         End If
     End Function
 
-
     Public Function GetAmount(menu As PortalNavItem, userName As String) As Integer Implements INavMenuAmount.GetAmount
+        If menu.Name.Split("-").Count > 1 Then
+            Dim type = menu.Name.Split("-")(1)
 
-        Return GetMyCases(userName).Length
+            If (type = "All") Then
+                Return GetMyCases(userName).Length
+            End If
 
+            Dim cStatus = ConstructionCase.CaseStatus.All
+            If ([Enum].TryParse(Of ConstructionCase.CaseStatus)(type, cStatus)) Then
+
+                Return GetMyCases(userName, cStatus).Length
+
+            End If
+        End If
+
+        Return 0
     End Function
 
     Public Shared Sub AssignCase(bble As String, userName As String, assignBy As String)
