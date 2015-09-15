@@ -366,7 +366,7 @@
                         <div class="form_head" style="margin-top: 40px;">MORTGAGE AND VIOLATIONS 
                             <i class="fa fa-save  color_blue_edit collapse_btn tooltip-examples" title="Save Mortgage" onclick="callbackPanelMortgage.PerformCallback('Save')"></i>
                             <% If IntranetPortal.Data.LeadInfoDocumentSearch.Exist(hfBBLE.Value) Then %>
-                            <i class="fa fa-eye  color_blue_edit collapse_btn tooltip-examples" title="View search result" onclick="OpenLeadsWindow('/PopupControl/LeadTaxSearchRequest.aspx?BBLE=<%=hfBBLE.Value%>','Entities',800,700)"></i>
+                            <i class="fa fa-eye  color_blue_edit collapse_btn tooltip-examples" title="View search result" onclick="OpenLeadsWindow('/PopupControl/LeadTaxSearchRequest.aspx?BBLE=<%=hfBBLE.Value%>','Entities',667,900)"></i>
                             <%Else %>
                             <i class="fa fa-search-plus  color_blue_edit collapse_btn tooltip-examples" title="Request a search" onclick="RequestDocSearch()"></i>
                             <% End If %>

@@ -7,6 +7,12 @@ Public Class LeadInfoDocumentSearch
             Return ctx.LeadInfoDocumentSearches.Find(bble) IsNot Nothing
         End Using
     End Function
+
+    Public Shared Function GetAllSearches() As List(Of LeadInfoDocumentSearch)
+        Using ctx As New IntranetPortalEntities
+            Return ctx.LeadInfoDocumentSearches.ToList
+        End Using
+    End Function
 End Class
 
 Public Class LeadInfoDocumentSearchCaseMetaData

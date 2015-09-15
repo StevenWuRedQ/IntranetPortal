@@ -588,6 +588,12 @@
           <![CDATA[<i class="fa fa-building"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="DocSearch" Text="Doc Search" NavigationUrl="/ManagementUI/LeadDocSearch.aspx" ShowAmount="false">
+        <UserRoles>Entity-Manager</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-search-plus"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <PortalNavItem Name="DOBComplains" Text="DOB Complaints" NavigationUrl="/Complaints/ComplainsMng.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
