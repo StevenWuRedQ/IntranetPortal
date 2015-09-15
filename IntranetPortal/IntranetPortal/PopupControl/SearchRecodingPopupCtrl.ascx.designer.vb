@@ -20,5 +20,5 @@ Partial Public Class SearchRecodingPopupCtrl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RecodingPopup1 As Global.DevExpress.Web.ASPxPopupControl
+    Protected WithEvents RecodingPopup1 As DevExpress.Web.ASPxPopupControl
 End Class

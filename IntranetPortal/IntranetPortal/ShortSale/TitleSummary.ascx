@@ -282,7 +282,6 @@
                                     </div>
                                 </td>
                                 <td rowspan="5" style="width: 30px;"></td>
-
                                 <td style="width: 300px; vertical-align: top;" runat="server" id="tdCounterOffer" visible="false">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
@@ -749,7 +748,6 @@
                                                 </SettingsPopup>
                                             </dx:ASPxGridView>
                                             <dx:ASPxGridViewExporter ID="gridExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
-
                                             <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="gridData"></dx:ASPxGridViewExporter>
                                             <dx:ASPxGridView ID="gridData" runat="server" Visible="false"
                                                 KeyFieldName="CaseId" Width="100%">

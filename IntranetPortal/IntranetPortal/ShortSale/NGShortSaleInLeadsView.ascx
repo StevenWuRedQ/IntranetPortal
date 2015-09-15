@@ -98,23 +98,23 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Bedroom</label>
-                                    <input class="form-control" ng-model="floor.Bedroom" />
+                                    <input class="form-control" ng-model="floor.Bedroom" integer-mask/>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Bathroom</label>
-                                    <input class="form-control" ng-model="floor.Bathroom" />
+                                    <input class="form-control" ng-model="floor.Bathroom" integer-mask/>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Livingroom</label>
-                                    <input class="form-control" ng-model="floor.Livingroom" />
+                                    <input class="form-control" ng-model="floor.Livingroom" integer-mask/>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Kitchen</label>
-                                    <input class="form-control" ng-model="floor.Kitchen" />
+                                    <input class="form-control" ng-model="floor.Kitchen" integer-mask/>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Diningroom</label>
-                                    <input class="form-control" ng-model="floor.Diningroom" />
+                                    <input class="form-control" ng-model="floor.Diningroom" integer-mask/>
                                 </div>
                             </div>
                             <hr />
