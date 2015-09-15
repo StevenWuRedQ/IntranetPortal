@@ -8,7 +8,6 @@
     function OnGridFocusedRowChanged() {
         // The values will be returned to the OnGetRowValues() function 
         if (gridCase.GetFocusedRowIndex() >= 0) {
-
             if (gridCase.GetFocusedRowIndex() >= 0) {
                 //alert(gridLeads.GetFocusedRowIndex());
                 var rowKey = gridCase.GetRowKey(gridCase.GetFocusedRowIndex());

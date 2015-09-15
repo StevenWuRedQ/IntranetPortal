@@ -156,21 +156,24 @@
                                 SaveData: function () {
                                     var tab = this.CurrentTab;
                                     var data = angular.element(document.getElementById(tab.Name + 'Controller')).scope().Get();
-                                    console.log(data);
-                                    var url = "/api/BusinessForm/"
-                                    $.ajax({
-                                        type: "POST",
-                                        url: url,
-                                        data:JSON.stringify(data),
-                                        dataType: 'json',
-                                        contentType: "application/json",
-                                        success: function (data) {
-                                            alert("Save successful.")
-                                        },
-                                        error: function (data) {
-                                            alert("Failed to save data." + data);
-                                        }
-                                    });
+                                    if(data.DataId){    //verify that data is an exsiting one
+                                        var url = "/api/BusinessForm/"
+                                        $.ajax({
+                                            type: "POST",
+                                            url: url,
+                                            data:JSON.stringify(data),
+                                            dataType: 'json',
+                                            contentType: "application/json",
+                                            success: function (data) {
+                                                alert("Save successful.")
+                                            },
+                                            error: function (data) {
+                                                alert("Failed to save data." + data);
+                                            }
+                                        });
+                                    }else{
+                                        console.log("Try to save a not exist data.")
+                                    }
                                 }
                             }
 
