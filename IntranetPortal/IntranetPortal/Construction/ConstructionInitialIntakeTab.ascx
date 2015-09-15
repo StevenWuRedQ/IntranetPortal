@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionInitialIntakeeTab.ascx.vb" Inherits="IntranetPortal.ConstructionInitialIntakeTab" %>
 
 <div>
-    <h4 class="ss_form_title">Property Address</h4>
+    <h4 class="ss_form_title">Property Address&nbsp;<pt-collapse model="ReloadedData.PropertyAddress_Collapse"></pt-collapse></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
@@ -17,13 +17,7 @@
                 <input class="ss_form_input" style="width: 93.3%" ng-model="CSCase.CSCase.InitialIntake.Address" pt-init-model="LeadsInfo.PropertyAddress">
             </li>
         </ul>
-    </div>
-</div>
-
-<div class="ss_form">
-    <h4 class="ss_form_title"></h4>
-    <div class="ss_border">
-        <ul class="ss_form_box clearfix">
+        <ul class="ss_form_box clearfix" collapse="ReloadedData.PropertyAddress_Collapse">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Assigned</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.InitialIntake.DateAssigned" ss-date>
@@ -36,8 +30,8 @@
                 <label class="ss_form_input_title">ADT Code</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.ADT">
             </li>
-        </ul>
-        <ul class="ss_form_box clearfix">
+
+            <li class="clear-fix" style="list-style:none"></li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Access</label>
                 <select class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.Access">
@@ -47,12 +41,12 @@
                     <option value="pad_lock">pad lock</option>
                 </select>
             </li>
-            <li class="ss_form_item" ng-show="CSCase.CSCase.InitialIntake.Access=='lockbox'">
+            <li class="ss_form_item nga-fast nga-slide-left" ng-show="CSCase.CSCase.InitialIntake.Access=='lockbox'">
                 <label class="ss_form_input_title">Lock Code</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.LockCode">
             </li>
-        </ul>
-        <ul class="ss_form_box clearfix">
+            <li class="clear-fix" style="list-style:none"></li>
+
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Asset Manager</label>
                 <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.AssetManager" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
@@ -67,25 +61,24 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Owner</h4>
-    <div class="ss_border">
-
+    <h4 class="ss_form_title">Owner&nbsp;<pt-collapse model="ReloadedData.Owner_Collapse"></pt-collapse></h4>
+    <div class="ss_border" collapse="ReloadedData.Owner_Collapse">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Corporation Name</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.CorpName">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.CorpName" pt-init-model="EntityInfo.CorpName">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Corporation Address</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.Addr">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.Addr" pt-init-model="EntityInfo.Address">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Tax Id #</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.TaxIdNum">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.TaxIdNum" pt-init-model="EntityInfo.EIN">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Signor</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.Signor">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.Signor" pt-init-model="EntityInfo.Signor">
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -115,7 +108,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Building Info<pt-collapse model="CSCase.CSCase.InitialIntake.BuildingInfoCollapsed" /></h4>
+    <h4 class="ss_form_title">Building Info<pt-collapse model="ReloadedData.BuildingInfoCollapsed" /></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
@@ -123,7 +116,7 @@
                 <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.CO" pt-init-model="SsCase.PropertyInfo.COClass">
             </li>
         </ul>
-        <ul class="ss_form_box clearfix" collapse="CSCase.CSCase.InitialIntake.BuildingInfoCollapsed" ng-init="CSCase.CSCase.InitialIntake.BuildingInfoCollapsed=true">
+        <ul class="ss_form_box clearfix" collapse="ReloadedData.BuildingInfoCollapsed" ng-init="CSCase.CSCase.InitialIntake.BuildingInfoCollapsed=true">
             <li class="ss_form_item">
                 <label class="ss_form_input_title"># of Family</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.FamilyNum" pt-init-model="SsCase.PropertyInfo.NumOfFamilies">

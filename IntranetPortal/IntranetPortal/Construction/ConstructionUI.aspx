@@ -283,13 +283,13 @@
         }
 
         portalApp = angular.module('PortalApp');
-        portalApp.controller('ConstructionCtrl', ['$scope', '$http', '$timeout', '$interpolate', 'ptCom', 'ptShortsSaleService', 'ptLeadsService', 'ptContactServices', 'ptConstructionService', function ($scope, $http, $timeout, $interpolate, ptCom, ptShortsSaleService, ptLeadsService, ptContactServices, ptConstructionService) {
+        portalApp.controller('ConstructionCtrl', function ($scope, $http, $timeout, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
+            // scope variables
             $scope.arrayRemove = ptCom.arrayRemove;
             $scope.ptContactServices = ptContactServices;
             $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
             $scope.CSCase = {}
-            $scope.
-                edData = {}
+            $scope.ReloadedData = {}
             $scope.CSCase.CSCase = {
                 InitialIntake: {},
                 Photos: {},
@@ -303,6 +303,7 @@
             };
             $scope.CSCase.CSCase.Utilities.Company = [];
             $scope.CSCase.CSCase.Utilities.Insurance_Type = [];
+            $scope.EntityInfo = {}
             $scope.DataSource = {};
             $scope.DataSource.Shown = {
                 'ConED': 'CSCase.CSCase.Utilities.ConED_Shown',
@@ -314,6 +315,7 @@
                 'ADT': 'CSCase.CSCase.Utilities.ADT_Shown',
                 'Insurance': 'CSCase.CSCase.Utilities.Insurance_Shown',
             };
+
             $scope.reload = function () {
                 $scope.CSCase = {}
                 $scope.ReloadedData = {}
@@ -330,13 +332,13 @@
                 };
                 $scope.CSCase.CSCase.Utilities.Company = [];
                 $scope.CSCase.CSCase.Utilities.Insurance_Type = [];
+                $scope.EntityInfo = {}
                 $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} })
             }
 
             $scope.init = function (bble) {
 
                 bble = bble.trim();
-
                 $scope.reload();
                 ptConstructionService.getConstructionCases(bble, function (res) {
                     ptCom.nullToUndefined(res);
@@ -352,7 +354,10 @@
                     $scope.LeadsInfo = res;
                 });
 
-
+                ptEntityService.getEntityByBBLE(bble, function (error, data) {
+                    if (data) $scope.EntityInfo = data;
+                    else console.log(error);
+                })
 
             }
 
@@ -395,14 +400,14 @@
 
 
             });
-            /* multiple company selection */
+            /* END multiple company selection */
 
             /* reminder */
             $scope.sendNotice = function (id, name) {
                 // TODO
                 var confirmed = confirm("Send Intake Sheet To " + name + " ?");
             }
-            /* end reminder */
+            /* END reminder */
 
             /* comments */
             $scope.showPopover = function (e) {
@@ -421,14 +426,14 @@
                 $scope.addComment(comment);
                 $scope.addCommentTxt = '';
             }
-            /* end comments */
+            /* END comments */
 
             /* active tab */
             $scope.activeTab = 'CSInitialIntake';
             $scope.updateActive = function (id) {
                 $scope.activeTab = id;
             }
-            /* end active tab */
+            /* END active tab */
 
             /* highlight */
             $scope.highlights = [
@@ -480,7 +485,7 @@
                 if (res) AddActivityLog(res);
             }
 
-            /* end highlight */
+            /* END highlight */
 
 
             /* Popup */
@@ -505,7 +510,7 @@
             $scope.toggleHeaderEditing = function () {
                 $scope.HeaderEditing = !$scope.HeaderEditing;
             }
-            /* end header editing */
+            /* END header editing */
 
             /* dob fetch */
             $scope.fetchDOBViolations = function () {
@@ -566,8 +571,8 @@
                 })
             }
 
-            /* end dob fetch */
-        }]);
+            /* END dob fetch */
+        });
     </script>
 
 </asp:Content>

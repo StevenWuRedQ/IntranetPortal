@@ -524,7 +524,8 @@ app.factory('ptLegalService', [
                     dataType: 'json',
                     contentType: "application/json",
                     success: function (data) {
-                        callback(null, data)},
+                        callback(null, data)
+                    },
                     error: function () {
                         callback('load data fails')
                     }
@@ -544,7 +545,7 @@ app.factory('ptLegalService', [
                     dataType: 'json',
                     contentType: "application/json",
                     success: function (data) {
-                        callback(null, data)                        
+                        callback(null, data)
                     },
                     error: function () {
                         callback('load data fails')
@@ -554,3 +555,18 @@ app.factory('ptLegalService', [
         }
     }
 ])
+
+app.factory('ptEntityService', function ($http) {
+    return {
+        getEntityByBBLE: function (bble, callback) {
+            var url = '/api/CorporationEntities/ByBBLE?BBLE=' + bble;
+            $http.get(url).success(function (data) {
+                if (callback) callback(null, data);
+            }).error(function () {
+                if (callback) callback("load entity fails");
+            })
+        }
+    }
+
+
+})
