@@ -47,7 +47,7 @@ Partial Public Class LegalSummaryUI
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MangerReportGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents MangerReportGrid As Global.DevExpress.Web.ASPxGridView
 
     '''<summary>
     '''CaseExporter control.
@@ -65,7 +65,7 @@ Partial Public Class LegalSummaryUI
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MangerReportExporter As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+    Protected WithEvents MangerReportExporter As Global.DevExpress.Web.ASPxGridViewExporter
 
     '''<summary>
     '''gridUpCommingFCSale control.

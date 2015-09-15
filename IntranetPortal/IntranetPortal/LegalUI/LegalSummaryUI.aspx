@@ -159,8 +159,8 @@
                             </Columns>
 
                             <Settings ShowHeaderFilterButton="true" />
-
                         </dx:ASPxGridView>
+
                         <dx:ASPxGridViewExporter ID="CaseExporter" runat="server" GridViewID="gdCases"></dx:ASPxGridViewExporter>
                         <dx:ASPxGridViewExporter ID="MangerReportExporter" runat="server" GridViewID="MangerReportGrid"></dx:ASPxGridViewExporter>
                     </div>

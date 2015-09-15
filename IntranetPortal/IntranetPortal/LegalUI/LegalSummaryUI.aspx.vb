@@ -120,7 +120,7 @@ Public Class LegalSummaryUI
         BindMangerReport()
     End Sub
 
-    Protected Sub MangerReportGrid_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+    Protected Sub MangerReportGrid_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
         BindMangerReport()
     End Sub
 End Class
