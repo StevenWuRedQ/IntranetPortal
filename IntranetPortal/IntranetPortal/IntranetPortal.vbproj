@@ -3534,6 +3534,7 @@
     <Content Include="Content\icons\dxicons.eot" />
     <Content Include="App_Data\DeedReversionTemplate.docx" />
     <Content Include="WebForm3.aspx" />
+    <Content Include="App_Data\SpecificPerformanceComplaintTemplate.docx" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />

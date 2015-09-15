@@ -114,13 +114,11 @@
                                         if (CaseDataChanged())
                                             return "You have pending changes, would you save it?";
                                     }
-                                    setInterval(function()
-                                    {
-                                        if (CaseNeedComment && !$('#NeedAddCommentPopUp').is(':visible'))
-                                        {
+                                    setInterval(function () {
+                                        if (CaseNeedComment && !$('#NeedAddCommentPopUp').is(':visible')) {
                                             $('#NeedAddCommentPopUp').modal({ backdrop: 'static' })
                                         }
-                                       
+
                                     }, 120000)
                                 </script>
 
@@ -232,7 +230,7 @@
                                                 <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Attorney');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to paralegal / Attorney"></i>
                                                 <% End If%>
 
-                                               <%-- <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.AttorneyHandle Then%>--%>
+                                                <%-- <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.AttorneyHandle Then%>--%>
                                                 <%-- Change to primssing only manager can close file to do by chris add it to process engine  --%>
                                                 <%If DisplayView = IntranetPortal.Data.LegalCaseStatus.AttorneyHandle AndAlso User.IsInRole("Legal-Manager") Then%>
                                                 <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="AttorneyComplete()" data-original-title="Complete"></i>
@@ -499,11 +497,11 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="message-text" class="control-label">Comment:</label>
-                            <textarea class="form-control" ng-model="MustAddedComment" ></textarea>
+                            <textarea class="form-control" ng-model="MustAddedComment"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal"  ng-disabled="!MustAddedComment" ng-click="AddActivityLog()">Add Comment</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="!MustAddedComment" ng-click="AddActivityLog()">Add Comment</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -1049,7 +1047,7 @@
                             "Lot": $scope.LeadsInfo.Lot,
                             "Defendant": $scope.LegalCase.SecondaryInfo.Defendant,
 
-                            "Defendants": $scope.LegalCase.SecondaryInfo.Defendants ? ',' + $scope.LegalCase.SecondaryInfo.Defendants.map(function (o) { return o.Name }).join(",") : ' ',
+                            "Defendants": $scope.LegalCase.SecondaryInfo.OSC_Defendants ? ',' + $scope.LegalCase.SecondaryInfo.OSC_Defendants.map(function (o) { return o.Name }).join(",") : ' ',
                             "DefendantAttorneyName": $scope.LegalCase.SecondaryInfo.DefendantAttorneyName,
                             "DefendantAttorneyPhone": ptContactServices.getContact($scope.LegalCase.SecondaryInfo.DefendantAttorneyId, $scope.LegalCase.SecondaryInfo.DefendantAttorneyName).OfficeNO,
                             "DefendantAttorneyAddress": ptContactServices.getContact($scope.LegalCase.SecondaryInfo.DefendantAttorneyId, $scope.LegalCase.SecondaryInfo.DefendantAttorneyName).Address,
@@ -1070,15 +1068,29 @@
                             "Block": $scope.LeadsInfo.Block,
                             "Lot": $scope.LeadsInfo.Lot,
                             "Defendant": $scope.LegalCase.SecondaryInfo.DeedReversionDefendant,
-
                             "Defendants": $scope.LegalCase.SecondaryInfo.DeedReversionDefendants ? ',' + $scope.LegalCase.SecondaryInfo.DeedReversionDefendants.map(function (o) { return o.Name }).join(",") : ' ',
-                           
                             "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
                             "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
-
                         },
-                       
-                        
+
+                    },
+                    {
+                        "tplName": 'SpecificPerformanceComplaintTemplate.docx',
+                        data: {
+                            "Plantiff": $scope.LegalCase.SecondaryInfo.SPComplaint_Plantiff,
+                            "PlantiffAttorney": $scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorney,
+                            "PlantiffAttorneyAddress": $scope.ptContactServices.getContact($scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId, $scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorney).Address,
+                            "PlantiffAttorneyPhone": $scope.ptContactServices.getContact($scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId, $scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorney).OfficeNO,
+                            "IndexNum": $scope.LegalCase.SecondaryInfo.SPComplaint_IndexNum || ' ',
+                            "BoroughName": $scope.LeadsInfo.BoroughName,
+                            "Block": $scope.LeadsInfo.Block,
+                            "Lot": $scope.LeadsInfo.Lot,
+                            "Defendant": $scope.LegalCase.SecondaryInfo.SPComplaint_Defendant,
+                            "Defendants": $scope.LegalCase.SecondaryInfo.SPComplaint_Defendants ? ',' + $scope.LegalCase.SecondaryInfo.SPComplaint_Defendants.map(function (o) { return o.Name }).join(",") : ' ',
+                            "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
+                            "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
+                        },
+
                     }
 
                     ];
@@ -1088,10 +1100,10 @@
                         for (var v in tpl.data) {
                             var filed = tpl.data[v];
                             if (!filed) {
-                              
-                                alert("Some data missing please like " + v + "Please check!")
+
+                                alert("Some data missing please check " + v + "Please check!")
                                 return;
-                                
+
                             }
                         }
                         ptCom.DocGenerator(tpl.tplName, tpl.data, function (url) {
@@ -1105,10 +1117,9 @@
                 $scope.CheckSecondaryTags = function (tag) {
                     return $scope.LegalCase.SecondaryTypes.filter(function (t) { return t == tag })[0];
                 }
-                $scope.GetCourtAddress = function(boro)
-                {
+                $scope.GetCourtAddress = function (boro) {
                     var address = ['', '851 Grand Concourse Bronx, NY 10451', '360 Adams St. Brooklyn, NY 11201', '8811 Sutphin Boulevard, Jamaica, NY 11435'];
-                    return address[boro-1];
+                    return address[boro - 1];
                 }
                 var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Value": "", "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ", "ArrayName": "" },
                                 { "Name": "EveryOneIn", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.WasEstateFormed!=null')", "Value": "false", "Description": "There is an estate.", "ArrayName": "" },
@@ -1394,10 +1405,8 @@
                         $scope.panelLoading = false;
                     });
                 }
-                $scope.AddActivityLog = function()
-                {
-                    if (typeof AddActivityLog == "function")
-                    {
+                $scope.AddActivityLog = function () {
+                    if (typeof AddActivityLog == "function") {
                         AddActivityLog($scope.MustAddedComment);
                     }
                 }
