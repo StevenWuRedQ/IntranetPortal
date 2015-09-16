@@ -57,7 +57,7 @@ Partial Public Class ConstructionCase
     End Sub
 
     Public Sub UpdateStatus(status As CaseStatus, updateBy As String)
-        If Me.Status <> status Then
+        If Me.Status <> status Or Not Me.Status.HasValue Then
             Me.Status = status
             Me.Save(updateBy)
         End If
