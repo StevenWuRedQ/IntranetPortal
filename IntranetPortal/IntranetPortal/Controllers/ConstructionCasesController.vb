@@ -76,6 +76,13 @@ Namespace Controllers
             Return CreatedAtRoute("DefaultApi", New With {.id = constructionCase.BBLE}, constructionCase)
         End Function
 
+        <ResponseType(GetType(Void))>
+        <Route("api/ConstructionCases/MoveToIntake")>
+        Function PostMoveToIntake(<FromBody> bble As String) As IHttpActionResult
+            ConstructionManage.MoveToIntake(bble, HttpContext.Current.User.Identity.Name)
+            Return StatusCode(HttpStatusCode.NoContent)
+        End Function
+
         ' POST: api/ConstructionCases
         <ResponseType(GetType(String()))>
         <Route("api/ConstructionCases/UploadFiles")>

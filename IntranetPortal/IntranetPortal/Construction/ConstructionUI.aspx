@@ -178,6 +178,9 @@
                                     </a>
                                 </li>
                                 <li style="margin-right: 30px; color: #7396a9; float: right">
+                                    <i class="fa fa-chevron-circle-left sale_head_button sale_head_button_left tooltip-examples" title="Intake" onclick="MoveToIntake()" data-original-title="Intake"></i>
+                                    <i class="fa fa-chevron-circle-right sale_head_button sale_head_button_left tooltip-examples" title="Construction" onclick="" data-original-title="Construction"></i>
+                                    <i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Completed" onclick="" data-original-title="Completed"></i>
                                     <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                 </li>
                             </ul>
@@ -214,6 +217,20 @@
                                         "type": type,
                                         "dtSelected": dateSelected
                                     };
+                                }
+
+                                function MoveToIntake() {
+                                    angular.element(document.getElementById('ConstructionCtrl')).scope().MoveToIntake(
+                                        function () {
+                                            alert("Success");
+                                            if (typeof gridTrackingClient != "undefined") {                                                
+                                                gridTrackingClient.Refresh();
+                                            }
+
+                                            if (typeof gridCase != "undefined") {
+                                                gridCase.Refresh();
+                                            }
+                                        });
                                 }
 
                             </script>
@@ -358,8 +375,26 @@
                     if (data) $scope.EntityInfo = data;
                     else console.log(error);
                 })
-
             }
+
+            
+            // Status change function -- Chris
+            $scope.MoveToIntake = function (scuessfunc) {
+                var data = { "bble": leadsInfoBBLE };                
+                $http.post('/api/ConstructionCases/MoveToIntake', leadsInfoBBLE).
+                        success(function () {
+                            if (scuessfunc) {
+                                scuessfunc();
+                            } else {
+                                alert("Successed !");
+                            }
+                        }).
+                        error(function (data, status) {
+                            alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
+                        });
+            }
+            //end status change function
+
 
             $scope.saveCSCase = function () {
                 var data = JSON.stringify($scope.CSCase);

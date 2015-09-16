@@ -24,6 +24,17 @@ Public Class ConstructionManage
         End If
     End Sub
 
+    Private Shared Function GetIntakeUser() As String
+        Dim ccIntake = Roles.GetUsersInRole(IntakeRoleName)
+
+        If ccIntake IsNot Nothing AndAlso ccIntake.Length > 0 Then
+            Return ccIntake(0)
+        End If
+
+        Return Nothing
+    End Function
+
+
     Public Shared Function GetCase(bble As String, userName As String) As ConstructionCase
         Return ConstructionCase.GetCase(bble, userName)
     End Function
@@ -55,9 +66,27 @@ Public Class ConstructionManage
         Return 0
     End Function
 
+    Public Shared Sub MoveToIntake(bble As String, moveBy As String)
+        Dim cCase = ConstructionCase.GetCase(bble)
+
+        If cCase IsNot Nothing Then
+
+            If cCase.Owner = moveBy Or IsManager(moveBy) Then
+
+            End If
+
+            cCase.Owner = GetIntakeUser()
+            cCase.UpdateStatus(ConstructionCase.CaseStatus.Intake, moveBy)
+
+            Dim comments = String.Format("The case is move to intake ({1}) by {0}.", moveBy, cCase.Owner)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Construction.ToString, LeadsActivityLog.EnumActionType.Comments)
+        End If
+    End Sub
+
     Public Shared Sub AssignCase(bble As String, userName As String, assignBy As String)
         Dim cCase = ConstructionCase.GetCase(bble)
         cCase.Owner = userName
+
         cCase.Save(assignBy)
 
         Dim comments = String.Format("The case is assign to {0}.", userName)
