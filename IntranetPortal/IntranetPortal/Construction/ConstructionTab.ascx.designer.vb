@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class ConstructionTab
-
+    
     '''<summary>
     '''Common control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class ConstructionTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Common As Global.IntranetPortal.Common
-
+    
     '''<summary>
     '''ASPxPopupControl2 control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class ConstructionTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
-
+    
     '''<summary>
     '''ConstructionInitialIntakeTab control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class ConstructionTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ConstructionInitialIntakeTab As Global.IntranetPortal.ConstructionInitialIntakeTab
-
+    
     '''<summary>
     '''ConstructionPhotosTab control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class ConstructionTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ConstructionPhotosTab As Global.IntranetPortal.ConstructionPhotosTab
-
+    
     '''<summary>
     '''ConstructionUtilitiesTab control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class ConstructionTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ConstructionUtilitiesTab As Global.IntranetPortal.ConstructionUtilitiesTab
-
+    
     '''<summary>
     '''ConstructionViolationTab control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class ConstructionTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ConstructionViolationTab As Global.IntranetPortal.ConstructionViolationTab
-
+    
     '''<summary>
     '''ConstructionProposalBidTab control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class ConstructionTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ConstructionProposalBidTab As Global.IntranetPortal.ConstructionProposalBidTab
-
+    
     '''<summary>
     '''ConstructionPlansTab control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class ConstructionTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ConstructionPlansTab As Global.IntranetPortal.ConstructionPlansTab
-
+    
     '''<summary>
     '''ConstructionContractTab control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class ConstructionTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ConstructionContractTab As Global.IntranetPortal.ConstructionContractTab
-
+    
     '''<summary>
     '''ConstructionSignoffsTab control.
     '''</summary>
@@ -102,7 +102,16 @@ Partial Public Class ConstructionTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ConstructionSignoffsTab As Global.IntranetPortal.ConstructionSignoffsTab
-
+    
+    '''<summary>
+    '''ConstructionBudgetTab control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ConstructionBudgetTab As Global.IntranetPortal.ConstructionBudgetTab
+    
     '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>

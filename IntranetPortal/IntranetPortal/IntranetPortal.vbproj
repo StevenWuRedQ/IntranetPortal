@@ -591,6 +591,13 @@
       <DependentUpon>ComplaintsView.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Construction\ConstructionBudgetTab.ascx.designer.vb">
+      <DependentUpon>ConstructionBudgetTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionBudgetTab.ascx.vb">
+      <DependentUpon>ConstructionBudgetTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Construction\ConstructionContractTab.ascx.designer.vb">
       <DependentUpon>ConstructionContractTab.ascx</DependentUpon>
     </Compile>
@@ -2232,6 +2239,7 @@
     <Content Include="Chat\ChatDefault.aspx" />
     <Content Include="Chat\index.html" />
     <Content Include="Complaints\ComplaintsView.aspx" />
+    <Content Include="Construction\ConstructionBudgetTab.ascx" />
     <Content Include="Construction\ConstructionContractTab.ascx" />
     <Content Include="Construction\ConstructionInitialIntakeTab.ascx" />
     <Content Include="Construction\ConstructionPhotosTab.ascx" />

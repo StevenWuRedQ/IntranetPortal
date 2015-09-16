@@ -479,7 +479,7 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             scope.count = 0;
             scope.countCallback = function (total) {
                 if (scope.count >= total - 1) {
-                    scope.$apply(function () {
+                    $timeout(function () {
                         scope.count++;
                         scope.dynamic = Math.floor(scope.count / total * 100);
                         scope.count = 0;

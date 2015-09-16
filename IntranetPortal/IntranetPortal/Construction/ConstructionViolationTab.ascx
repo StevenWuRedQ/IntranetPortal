@@ -152,10 +152,10 @@
         </ul>
     </div>
 </div>
-
+<%--DOBViolations --%>
 <div class="ss_form">
-    <h4 class="ss_form_title">DOB Violations</h4>
-    <div class="ss_border">
+    <h4 class="ss_form_title">DOB Violations&nbsp;<pt-collapse model="ReloadedData.DOBViolation_Collapse"></pt-collapse></h4>
+    <div class="ss_border" collapse="ReloadedData.DOBViolation_Collapse">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Auto population From DOB Site</label>
@@ -305,10 +305,10 @@
         </div>
     </div>
 </div>
-
+<%--ECBViolations --%>
 <div class="ss_form">
-    <h4 class="ss_form_title">ECB Violations</h4>
-    <div class="ss_border">
+    <h4 class="ss_form_title">ECB Violations&nbsp;<pt-collapse model="ReloadedData.ECBViolations_Collapse"></pt-collapse></h4>
+    <div class="ss_border" collapse="ReloadedData.ECBViolations_Collapse">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Autopopulation From ECB Site</label>
@@ -458,10 +458,10 @@
 
     </div>
 </div>
-
+<%--HPDViolations --%>
 <div class="ss_form">
-    <h4 class="ss_form_title">HPD Violation</h4>
-    <div class="ss_border">
+    <h4 class="ss_form_title">HPD Violation&nbsp;<pt-collapse model="ReloadedData.HPDViolations_Collapse"></pt-collapse></h4>
+    <div class="ss_border" collapse="ReloadedData.HPDViolations_Collapse">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Open HPD Violation</label>

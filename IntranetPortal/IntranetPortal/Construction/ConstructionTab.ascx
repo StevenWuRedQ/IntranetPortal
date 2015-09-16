@@ -8,6 +8,8 @@
 <%@ Register Src="~/Construction/ConstructionContractTab.ascx" TagPrefix="uc1" TagName="ConstructionContractTab" %>
 <%@ Register Src="~/Construction/ConstructionSignoffsTab.ascx" TagPrefix="uc1" TagName="ConstructionSignoffsTab" %>
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
+<%@ Register Src="~/Construction/ConstructionBudgetTab.ascx" TagPrefix="uc1" TagName="ConstructionBudgetTab" %>
+
 
 
 
@@ -106,6 +108,7 @@
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSPlans" role="tab" data-toggle="tab" ng-click="updateActive('CSPlans')">Plans</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSContract" role="tab" data-toggle="tab" ng-click="updateActive('CSContract')">Contract</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSSignoff" role="tab" data-toggle="tab" ng-click="updateActive('CSSignoff')">Signoffs</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSBudget" role="tab" data-toggle="tab" ng-click="updateActive('CSBudget')">Budget</a></li>
                 <%--  <% End If%>--%>
             </ul>
 
@@ -135,6 +138,9 @@
                     </div>
                     <div class="tab-pane" id="CSSignoff">
                         <uc1:ConstructionSignoffsTab runat="server" ID="ConstructionSignoffsTab" />
+                    </div>
+                    <div class="tab-pane" id="CSBudget">
+                    <uc1:ConstructionBudgetTab runat="server" id="ConstructionBudgetTab" />
                     </div>
                 </div>
             </div>

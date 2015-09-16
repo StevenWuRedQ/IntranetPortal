@@ -370,6 +370,10 @@
                 <label class="ss_form_input_title">Tap Size</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Utilities.MissingMeter_TapSize">
             </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Upload plumbers invoice</label>
+                <pt-file file-bble='CSCase.BBLE' file-id="CSCase_Utilities_MissingMeter_UploadPlumbersInvoice" file-model="CSCase.CSCase.InitialIntake.Utilities.MissingMeter_PlumbersInvoice"></pt-file>
+            </li>
         </ul>
         <div>
             <label class="ss_form_input_title">Upload Letter To DEP</label>

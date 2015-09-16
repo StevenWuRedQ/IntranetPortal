@@ -81,7 +81,7 @@
                                         <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="Intake Complete" ng-click="intakeComplete()" data-original-title="Intake Completed"></i>
                                         <i class="fa fa-mail-reply sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectOwner.PerformCallback('Show');popupSelectOwner.ShowAtElement(this);" data-original-title="Reassign"></i>
                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
-                                        <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
+                                        <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="" data-original-title="Print"></i>
                                     </li>
                                 </ul>
                             </div>
@@ -304,6 +304,7 @@
             // scope variables
             $scope.arrayRemove = ptCom.arrayRemove;
             $scope.ptContactServices = ptContactServices;
+            $scope.printDiv = ptCom.printDiv;
             $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
             $scope.CSCase = {}
             $scope.ReloadedData = {}
