@@ -8,8 +8,10 @@
     Sub BindCase()
         If (gridDocSearch.DataSource Is Nothing) Then
             Using ctx As New Entities
-                gridDocSearch.DataSource = From c In Data.LeadInfoDocumentSearch.GetAllSearches Join l In ctx.Leads On c.BBLE Equals l.BBLE Select New With {.BBLE = c.BBLE, .Name = l.LeadsName}
+                gridDocSearch.DataSource = (From c In Data.LeadInfoDocumentSearch.GetAllSearches Join l In ctx.Leads On c.BBLE Equals l.BBLE Select New With {.BBLE = c.BBLE, .Name = l.LeadsName, .Status = c.Status}).ToList
+                gridDocSearch.GroupBy(gridDocSearch.Columns("Status"))
                 gridDocSearch.DataBind()
+
             End Using
 
         End If
