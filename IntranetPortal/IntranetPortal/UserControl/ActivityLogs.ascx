@@ -488,9 +488,9 @@
                             {
                                 var type = s.value;
 
-                                var liens = ["1st Lien", "2nd Lien"];
+                                var liens = ["1st Lien", "2nd Lien","3rd Lien"];
                                 var categorys = ["Assign", "Closed", "Dead", "Evictions", "Held", "Intake", "Litigation"];
-                                var updates = ["Referral Update", "Seller Update", "Title", "Pipeline"];
+                                var updates = ["Referral Update", "Seller Update", "Title", "Pipeline", "Manager Update"];
 
                                 if ($.inArray(type, categorys) > -1) {
                                     $("#selCategory").val(type);

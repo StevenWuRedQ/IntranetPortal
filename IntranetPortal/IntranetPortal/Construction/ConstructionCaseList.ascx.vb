@@ -10,14 +10,14 @@ Public Class ConstructionCaseList
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'BindCaseList()
 
-        If Request.QueryString("s") IsNot Nothing Then
-            status = CInt(Request.QueryString("s"))
-        End If
 
     End Sub
 
     Public Sub BindCaseList()
         'hfCaseStatus.Value = status
+        If Request.QueryString("s") IsNot Nothing Then
+            Status = CInt(Request.QueryString("s"))
+        End If
 
         lblLeadCategory.Text = "Cases" 'Core.Utility.GetEnumDescription(status)
         BindData()
@@ -34,11 +34,11 @@ Public Class ConstructionCaseList
     End Sub
 
     Private Sub BindData()
-        'Dim status = ConstructionCase.CaseStatus.All
-
-        'If Request.QueryString("s") IsNot Nothing Then
-        '    status = CInt(Request.QueryString("s"))
-        'End If
+        If Status = ConstructionCase.CaseStatus.All Then
+            If Request.QueryString("s") IsNot Nothing Then
+                Status = CInt(Request.QueryString("s"))
+            End If
+        End If
 
         gridCase.DataSource = ConstructionManage.GetMyCases(Page.User.Identity.Name, status)
     End Sub

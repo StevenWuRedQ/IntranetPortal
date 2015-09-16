@@ -39,7 +39,7 @@ Public Class ConstructionManage
         Return ConstructionCase.GetCase(bble, userName)
     End Function
 
-    Public Shared Function GetMyCases(userName As String, Optional status As CaseStatus = -1) As ConstructionCase()
+    Public Shared Function GetMyCases(userName As String, Optional status As ConstructionCase.CaseStatus = -1) As ConstructionCase()
         If IsManager(userName) Then
             Return ConstructionCase.GetAllCasesByStatus(status)
         Else
