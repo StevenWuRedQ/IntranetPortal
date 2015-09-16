@@ -49,6 +49,10 @@
         PopupContentReAssign.Visible = True
 
         If e.Parameter.StartsWith("Show") Then
+            If e.Parameter.Split("|").Length > 1 Then
+                hfUserType.Value = e.Parameter.Split("|")(1)
+            End If
+
             listboxEmployee.DataSource = ConstructionManage.GetConstructionUsers()
             listboxEmployee.DataBind()
         End If
@@ -56,9 +60,13 @@
         If Not String.IsNullOrEmpty(e.Parameter) AndAlso e.Parameter.StartsWith("Save") Then
             Dim bble = e.Parameter.Split("|")(1)
             Dim user = e.Parameter.Split("|")(2)
-            Dim selectType = hfUserType.Value
+            Dim status = Data.ConstructionCase.CaseStatus.All
 
-            ConstructionManage.AssignCase(bble, user, Page.User.Identity.Name)
+            If Not String.IsNullOrEmpty(hfUserType.Value) Then
+                status = CType(hfUserType.Value, Data.ConstructionCase.CaseStatus)
+            End If
+
+            ConstructionManage.AssignCase(bble, user, Page.User.Identity.Name, status)
         End If
     End Sub
 

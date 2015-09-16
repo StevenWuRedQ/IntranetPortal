@@ -1,4 +1,5 @@
-﻿Imports System.ComponentModel.DataAnnotations
+﻿Imports System.ComponentModel
+Imports System.ComponentModel.DataAnnotations
 Imports System.Data.Entity.Infrastructure
 
 <MetadataType(GetType(ConstructionCaseMetaData))>
@@ -91,9 +92,13 @@ Partial Public Class ConstructionCase
     End Function
 
     Public Enum CaseStatus
+        <Description("All Case")>
         All = -1
+        <Description("Intake")>
         Intake = 0
+        <Description("Construction")>
         Construction = 1
+        <Description("Completed")>
         Complated = 2
     End Enum
 End Class

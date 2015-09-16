@@ -769,19 +769,25 @@
                                             </dx:ASPxGridView>
 
                                             <dx:ASPxGridViewExporter ID="gridExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
-                                            <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="gridData"></dx:ASPxGridViewExporter>
-                                            <dx:ASPxGridView ID="gridData" runat="server" Visible="false"
-                                                KeyFieldName="CaseId" Width="100%">
+
+                                            <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="gridData" OnRenderBrick="AllLeadGridViewExporter_RenderBrick">
+                                                <Styles>
+                                                    <Cell Wrap="True"></Cell>
+                                                    <Default Wrap="True"></Default>                                                  
+                                                </Styles>
+                                            </dx:ASPxGridViewExporter>
+
+                                            <dx:ASPxGridView ID="gridData" runat="server" KeyFieldName="CaseId" Width="100%" Visible="false">
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn FieldName="RptPropertyInfo" Caption="Property Info">
-                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataColumn FieldName="RptPropertyInfo" Caption="Property Info" CellStyle-Wrap="True">                                                       
+                                                    </dx:GridViewDataColumn>
                                                     <dx:GridViewDataTextColumn FieldName="RptMortgageInfo" Caption="Mortgage Info">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="MortgageCategory" Caption="File Stage">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="File Status">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="RptValuation" Caption="Valuation">
+                                                    <dx:GridViewDataTextColumn FieldName="RptValuation" Caption="Valuation" >
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="RptOffer" Caption="Offer">
                                                     </dx:GridViewDataTextColumn>
@@ -802,44 +808,7 @@
                                                     <dx:GridViewDataDateColumn Width="120px" Caption="Last Activity" Name="LastActivity" FieldName="UpdateDate">
                                                     </dx:GridViewDataDateColumn>
                                                     <dx:GridViewDataTextColumn FieldName="StatuStr" Caption="Status">
-                                                    </dx:GridViewDataTextColumn>
-
-                                                    <%--                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.PropertyAddress" Caption="Full Property Address">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="PropertyOwner.FirstName" Caption="First Name">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="PropertyOwner.LastName" Caption="Last Name">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="StatuStr" Caption="Status">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="MortgageCategory" Caption="Category">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="File Progress">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn Caption="Description" FieldName="ReportDetails">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="FristMortageLender" Caption="1st Mortgage Company">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="SencondMortageLender" Caption="2nd Mortgage Company">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="PipeLine.Source" Caption="Update">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="LastActivity.ActivityDate" Caption="Last Activity">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="LastActivity.ActivityTitle" Caption="Last Activity Title">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="ReferralContact.Name" Caption="Referral">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="ReferralContact.Office" Caption="Office">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="CreateDate" Caption="File Created">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="Duration" Caption="Duration">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">
-                                                    </dx:GridViewDataTextColumn>--%>
+                                                    </dx:GridViewDataTextColumn>                                                   
                                                 </Columns>
                                             </dx:ASPxGridView>
                                         </div>

@@ -10,7 +10,6 @@ Public Class ConstructionCaseList
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'BindCaseList()
 
-
     End Sub
 
     Public Sub BindCaseList()
@@ -19,7 +18,7 @@ Public Class ConstructionCaseList
             Status = CInt(Request.QueryString("s"))
         End If
 
-        lblLeadCategory.Text = "Cases" 'Core.Utility.GetEnumDescription(status)
+        lblLeadCategory.Text = Core.Utility.GetEnumDescription(Status)
         BindData()
 
         If ConstructionManage.IsManager(Page.User.Identity.Name) Then

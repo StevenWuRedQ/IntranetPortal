@@ -77,9 +77,9 @@ Namespace Controllers
         End Function
 
         <ResponseType(GetType(Void))>
-        <Route("api/ConstructionCases/MoveToIntake")>
-        Function PostMoveToIntake(<FromBody> bble As String) As IHttpActionResult
-            ConstructionManage.MoveToIntake(bble, HttpContext.Current.User.Identity.Name)
+        <Route("api/ConstructionCases/ChangeStatus/{bble}")>
+        Function PostChangeStatus(bble As String, <FromBody> status As ConstructionCase.CaseStatus) As IHttpActionResult
+            ConstructionManage.ChnageStatus(bble, status, HttpContext.Current.User.Identity.Name)
             Return StatusCode(HttpStatusCode.NoContent)
         End Function
 

@@ -66,7 +66,7 @@ Public Class ConstructionManage
         Return 0
     End Function
 
-    Public Shared Sub MoveToIntake(bble As String, moveBy As String)
+    Public Shared Sub ChnageStatus(bble As String, status As ConstructionCase.CaseStatus, moveBy As String)
         Dim cCase = ConstructionCase.GetCase(bble)
 
         If cCase IsNot Nothing Then
@@ -75,17 +75,24 @@ Public Class ConstructionManage
 
             End If
 
-            cCase.Owner = GetIntakeUser()
-            cCase.UpdateStatus(ConstructionCase.CaseStatus.Intake, moveBy)
+            If status = ConstructionCase.CaseStatus.Intake Then
+                cCase.Owner = GetIntakeUser()
+            End If
 
-            Dim comments = String.Format("The case is move to intake ({1}) by {0}.", moveBy, cCase.Owner)
+            cCase.UpdateStatus(status, moveBy)
+
+            Dim comments = String.Format("The case is move to {2} ({1}) by {0}.", moveBy, cCase.Owner, status.ToString)
             LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Construction.ToString, LeadsActivityLog.EnumActionType.Comments)
         End If
     End Sub
 
-    Public Shared Sub AssignCase(bble As String, userName As String, assignBy As String)
+    Public Shared Sub AssignCase(bble As String, userName As String, assignBy As String, status As ConstructionCase.CaseStatus)
         Dim cCase = ConstructionCase.GetCase(bble)
         cCase.Owner = userName
+
+        If status <> ConstructionCase.CaseStatus.All Then
+            cCase.Status = status
+        End If
 
         cCase.Save(assignBy)
 

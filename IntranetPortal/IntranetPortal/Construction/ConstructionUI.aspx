@@ -178,9 +178,9 @@
                                     </a>
                                 </li>
                                 <li style="margin-right: 30px; color: #7396a9; float: right">
-                                    <i class="fa fa-chevron-circle-left sale_head_button sale_head_button_left tooltip-examples" title="Intake" onclick="MoveToIntake()" data-original-title="Intake"></i>
-                                    <i class="fa fa-chevron-circle-right sale_head_button sale_head_button_left tooltip-examples" title="Construction" onclick="" data-original-title="Construction"></i>
-                                    <i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Completed" onclick="" data-original-title="Completed"></i>
+                                    <i class="fa fa-chevron-circle-left sale_head_button sale_head_button_left tooltip-examples" title="Intake" onclick="ChangeStatus(0)" data-original-title="Intake"></i>
+                                    <i class="fa fa-chevron-circle-right sale_head_button sale_head_button_left tooltip-examples" title="Construction" onclick="popupSelectOwner.PerformCallback('Show|1');popupSelectOwner.ShowAtElement(this);" data-original-title="Construction"></i>
+                                    <i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Completed" onclick="ChangeStatus(2)" data-original-title="Completed"></i>
                                     <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                 </li>
                             </ul>
@@ -219,8 +219,8 @@
                                     };
                                 }
 
-                                function MoveToIntake() {
-                                    angular.element(document.getElementById('ConstructionCtrl')).scope().MoveToIntake(
+                                function ChangeStatus(status) {
+                                    angular.element(document.getElementById('ConstructionCtrl')).scope().ChangeStatus(
                                         function () {
                                             alert("Success");
                                             if (typeof gridTrackingClient != "undefined") {                                                
@@ -230,7 +230,7 @@
                                             if (typeof gridCase != "undefined") {
                                                 gridCase.Refresh();
                                             }
-                                        });
+                                        }, status);
                                 }
 
                             </script>
@@ -379,9 +379,9 @@
 
             
             // Status change function -- Chris
-            $scope.MoveToIntake = function (scuessfunc) {
-                var data = { "bble": leadsInfoBBLE };                
-                $http.post('/api/ConstructionCases/MoveToIntake', leadsInfoBBLE).
+            $scope.ChangeStatus = function ( scuessfunc, status) {              
+
+                $http.post('/api/ConstructionCases/ChangeStatus/' + leadsInfoBBLE, status).
                         success(function () {
                             if (scuessfunc) {
                                 scuessfunc();

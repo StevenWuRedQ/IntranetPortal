@@ -1,4 +1,6 @@
-﻿Imports DevExpress.Web
+﻿Imports System.Drawing
+Imports DevExpress.Web
+Imports DevExpress.XtraPrinting
 Imports IntranetPortal.Data
 Imports ShortSale = IntranetPortal.Data
 
@@ -95,7 +97,7 @@ Public Class UCTitleSummary
                 BindCounterOffer()
                 BindInvestorReview()
                 BindTask()
-                'BindDocumentRequest()
+            'BindDocumentRequest()
             Case ShortSaleRole.Negotiator
                 BindFollowUp()
                 BindUpcomingBPO()
@@ -407,7 +409,10 @@ Public Class UCTitleSummary
         gridData.DataSource = ShortSaleCase.CaseReport2
         gridData.DataBind()
 
+
         AllLeadGridViewExporter.FileName = String.Format("All-{0}-{1}-{2}.xlsx", Today.Month, Today.Day, Today.Year)
+        AllLeadGridViewExporter.Styles.Cell.Wrap = DevExpress.Utils.DefaultBoolean.True
+
         AllLeadGridViewExporter.WriteXlsToResponse()
     End Sub
 
@@ -531,5 +536,18 @@ Public Class UCTitleSummary
 
             Employee.SaveProfile(Page.User.Identity.Name, up)
         End If
+    End Sub
+
+    Protected Sub AllLeadGridViewExporter_RenderBrick(sender As Object, e As ASPxGridViewExportRenderingEventArgs)
+
+        If CType(e.Column, GridViewDataColumn).FieldName = "RptPropertyInfo" Then
+
+            Dim sFormat As New StringFormat(StringFormatFlags.NoWrap)
+            Dim brickFormat As New BrickStringFormat(sFormat)
+
+            e.BrickStyle.StringFormat = brickFormat
+
+        End If
+
     End Sub
 End Class
