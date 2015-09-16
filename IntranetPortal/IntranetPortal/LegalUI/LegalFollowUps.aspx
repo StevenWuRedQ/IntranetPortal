@@ -65,10 +65,12 @@
                     <dx:GridViewDataColumn FieldName="ResearchBy" Caption="Researcher">
                         <Settings HeaderFilterMode="CheckedList"/>
                     </dx:GridViewDataColumn>
-                    <dx:GridViewCommandColumn ShowDeleteButton="true" ButtonType="Button">
-                        <DeleteButton Text="Clear Follow Up"></DeleteButton>                       
+                    <dx:GridViewCommandColumn ShowDeleteButton="true" ButtonType="Button">                        
                     </dx:GridViewCommandColumn>
                 </Columns>                
+                <SettingsCommandButton>
+                    <DeleteButton Text="Clear Follow Up"></DeleteButton>
+                </SettingsCommandButton>                
                 <Settings ShowHeaderFilterButton="true" /> 
                 <SettingsBehavior ConfirmDelete="true" />
                 <SettingsText ConfirmDelete="The follow up date will be cleared. Continue?" />
