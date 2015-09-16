@@ -68,7 +68,8 @@ Public Class RulesService
 
         Rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Data Loop Rule", .ExecuteNow = True})
         Rules.Add(New PendingAssignRule With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Import Pending Assign Rule", .ExecuteNow = True})
-        Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("07:00:00"), .Period = TimeSpan.Parse("06:00:00"), .RuleName = "DOB Complaints refresh rule", .ExecuteNow = False})
+        Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("12:00:00"), .RuleName = "DOB Complaints refresh rule Morning and Afternoon", .ExecuteNow = False})
+        Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("13:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule at Noon", .ExecuteNow = False})
 
         'Legal
         Rules.Add(New LegalFollowUpRule() With {.ExecuteOn = TimeSpan.Parse("07:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Legal Follow up Rule"})
