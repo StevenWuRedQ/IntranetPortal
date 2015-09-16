@@ -10,7 +10,6 @@ Public Class ActivityLogs
     Private Const CommentTypeIconFormat As String = "<div class=""activity_log_item_icon {0}"">" &
                                                         "<i class=""{1}""></i>" &
                                                     "</div>"
-
     Public Property DisplayMode As ActivityLogMode
     Public Property ActivityLogProvider As ActivityManageBase
 
@@ -62,11 +61,13 @@ Public Class ActivityLogs
                 For Each cate In ActivityLogProvider.LogCategoryFilter
                     cbCateLog.Items.Add(cate.ToString)
                 Next
+
+                cbCateLog.Items(0).Selected = True
             End If
         Else
             Select Case DisplayMode
                 Case ActivityLogMode.ShortSale
-                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Task.ToString, LeadsActivityLog.LogCategory.PublicUpdate.ToString})
+                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.LogCategory.Task.ToString, LeadsActivityLog.LogCategory.PublicUpdate.ToString})
                 Case ActivityLogMode.Legal
                     gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.LogCategory.Eviction.ToString, LeadsActivityLog.LogCategory.PublicUpdate.ToString})
                 Case ActivityLogMode.Construction

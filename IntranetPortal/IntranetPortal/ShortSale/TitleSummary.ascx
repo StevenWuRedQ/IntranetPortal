@@ -770,11 +770,7 @@
 
                                             <dx:ASPxGridViewExporter ID="gridExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
 
-                                            <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="gridData" OnRenderBrick="AllLeadGridViewExporter_RenderBrick">
-                                                <Styles>
-                                                    <Cell Wrap="True"></Cell>
-                                                    <Default Wrap="True"></Default>                                                  
-                                                </Styles>
+                                            <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="gridData">                                             
                                             </dx:ASPxGridViewExporter>
 
                                             <dx:ASPxGridView ID="gridData" runat="server" KeyFieldName="CaseId" Width="100%" Visible="false">

@@ -109,7 +109,7 @@ Partial Public Class ConstructionCase
         <Description("Construction")>
         Construction = 1
         <Description("Completed")>
-        Complated = 2
+        Completed = 2
     End Enum
 End Class
 

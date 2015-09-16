@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports DevExpress.Export
 Imports DevExpress.Web
 Imports DevExpress.XtraPrinting
 Imports IntranetPortal.Data
@@ -411,9 +412,7 @@ Public Class UCTitleSummary
 
 
         AllLeadGridViewExporter.FileName = String.Format("All-{0}-{1}-{2}.xlsx", Today.Month, Today.Day, Today.Year)
-        AllLeadGridViewExporter.Styles.Cell.Wrap = DevExpress.Utils.DefaultBoolean.True
-
-        AllLeadGridViewExporter.WriteXlsToResponse()
+        AllLeadGridViewExporter.WriteXlsToResponse(New XlsExportOptionsEx() With {.ExportType = ExportType.WYSIWYG})
     End Sub
 
     Protected Sub ExportPdf_Click(sender As Object, e As EventArgs)
@@ -421,7 +420,7 @@ Public Class UCTitleSummary
         AllLeadsGrid.DataBind()
 
         gridExporter.FileName = String.Format("GridData-{0}-{1}-{2}.xlsx", Today.Month, Today.Day, Today.Year)
-        gridExporter.WriteXlsToResponse()
+        gridExporter.WriteXlsToResponse(New XlsExportOptionsEx() With {.ExportType = ExportType.WYSIWYG})
     End Sub
 
     'Protected Sub SearchBtn_Click(sender As Object, e As EventArgs)
@@ -538,16 +537,4 @@ Public Class UCTitleSummary
         End If
     End Sub
 
-    Protected Sub AllLeadGridViewExporter_RenderBrick(sender As Object, e As ASPxGridViewExportRenderingEventArgs)
-
-        If CType(e.Column, GridViewDataColumn).FieldName = "RptPropertyInfo" Then
-
-            Dim sFormat As New StringFormat(StringFormatFlags.NoWrap)
-            Dim brickFormat As New BrickStringFormat(sFormat)
-
-            e.BrickStyle.StringFormat = brickFormat
-
-        End If
-
-    End Sub
 End Class

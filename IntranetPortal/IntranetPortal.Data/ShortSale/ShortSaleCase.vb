@@ -635,6 +635,8 @@ Partial Public Class ShortSaleCase
         If FirstMortgage IsNot Nothing Then
             If FirstMortgage.HasAuctionDate Then
                 SaleDate = FirstMortgage.DateOfSale
+            Else
+                SaleDate = Nothing
             End If
         End If
     End Sub
