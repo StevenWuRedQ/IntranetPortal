@@ -102,14 +102,16 @@ Partial Class Troubleshooting
         Me.btnFollowUp = New System.Windows.Forms.Button()
         Me.btnRefreshLegalReport = New System.Windows.Forms.Button()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.txtNotifyNames = New System.Windows.Forms.TextBox()
+        Me.btnNotifyAll = New System.Windows.Forms.Button()
         Me.btnNotify = New System.Windows.Forms.Button()
         Me.txtComplaintsResult = New System.Windows.Forms.TextBox()
         Me.btnComplaintsNotify = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnComplaintsRefresh = New System.Windows.Forms.Button()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
-        Me.btnNotifyAll = New System.Windows.Forms.Button()
-        Me.txtNotifyNames = New System.Windows.Forms.TextBox()
+        Me.Button15 = New System.Windows.Forms.Button()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -130,6 +132,7 @@ Partial Class Troubleshooting
         Me.GroupBox2.SuspendLayout()
         Me.TabPage7.SuspendLayout()
         Me.TabPage8.SuspendLayout()
+        Me.TabPage9.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -912,6 +915,22 @@ Partial Class Troubleshooting
         Me.TabPage8.Text = "Complaints"
         Me.TabPage8.UseVisualStyleBackColor = True
         '
+        'txtNotifyNames
+        '
+        Me.txtNotifyNames.Location = New System.Drawing.Point(11, 50)
+        Me.txtNotifyNames.Name = "txtNotifyNames"
+        Me.txtNotifyNames.Size = New System.Drawing.Size(235, 20)
+        Me.txtNotifyNames.TabIndex = 7
+        '
+        'btnNotifyAll
+        '
+        Me.btnNotifyAll.Location = New System.Drawing.Point(11, 76)
+        Me.btnNotifyAll.Name = "btnNotifyAll"
+        Me.btnNotifyAll.Size = New System.Drawing.Size(108, 29)
+        Me.btnNotifyAll.TabIndex = 6
+        Me.btnNotifyAll.Text = "Property Notify"
+        Me.btnNotifyAll.UseVisualStyleBackColor = True
+        '
         'btnNotify
         '
         Me.btnNotify.Location = New System.Drawing.Point(138, 15)
@@ -958,6 +977,8 @@ Partial Class Troubleshooting
         '
         'TabPage9
         '
+        Me.TabPage9.Controls.Add(Me.TextBox4)
+        Me.TabPage9.Controls.Add(Me.Button15)
         Me.TabPage9.Location = New System.Drawing.Point(4, 22)
         Me.TabPage9.Name = "TabPage9"
         Me.TabPage9.Padding = New System.Windows.Forms.Padding(3)
@@ -966,21 +987,22 @@ Partial Class Troubleshooting
         Me.TabPage9.Text = "Construction"
         Me.TabPage9.UseVisualStyleBackColor = True
         '
-        'btnNotifyAll
+        'Button15
         '
-        Me.btnNotifyAll.Location = New System.Drawing.Point(11, 76)
-        Me.btnNotifyAll.Name = "btnNotifyAll"
-        Me.btnNotifyAll.Size = New System.Drawing.Size(108, 29)
-        Me.btnNotifyAll.TabIndex = 6
-        Me.btnNotifyAll.Text = "Property Notify"
-        Me.btnNotifyAll.UseVisualStyleBackColor = True
+        Me.Button15.Location = New System.Drawing.Point(9, 7)
+        Me.Button15.Name = "Button15"
+        Me.Button15.Size = New System.Drawing.Size(75, 23)
+        Me.Button15.TabIndex = 0
+        Me.Button15.Text = "UpLoad Activity"
+        Me.Button15.UseVisualStyleBackColor = True
         '
-        'txtNotifyNames
+        'TextBox4
         '
-        Me.txtNotifyNames.Location = New System.Drawing.Point(11, 50)
-        Me.txtNotifyNames.Name = "txtNotifyNames"
-        Me.txtNotifyNames.Size = New System.Drawing.Size(235, 20)
-        Me.txtNotifyNames.TabIndex = 7
+        Me.TextBox4.Location = New System.Drawing.Point(9, 121)
+        Me.TextBox4.Multiline = True
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(716, 200)
+        Me.TextBox4.TabIndex = 1
         '
         'Troubleshooting
         '
@@ -1019,6 +1041,8 @@ Partial Class Troubleshooting
         Me.TabPage7.ResumeLayout(False)
         Me.TabPage8.ResumeLayout(False)
         Me.TabPage8.PerformLayout()
+        Me.TabPage9.ResumeLayout(False)
+        Me.TabPage9.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1110,4 +1134,6 @@ Partial Class Troubleshooting
     Friend WithEvents Button14 As Button
     Friend WithEvents btnNotifyAll As Button
     Friend WithEvents txtNotifyNames As TextBox
+    Friend WithEvents Button15 As Button
+    Friend WithEvents TextBox4 As TextBox
 End Class

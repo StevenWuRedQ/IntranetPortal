@@ -108,7 +108,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Building Info<pt-collapse model="ReloadedData.BuildingInfoCollapsed" /></h4>
+    <h4 class="ss_form_title">Building Info&nbsp;<pt-collapse model="ReloadedData.BuildingInfoCollapsed" /></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
@@ -195,9 +195,8 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Comps</h4>
-    <div class="ss_border">
-
+    <h4 class="ss_form_title">Comps&nbsp;<pt-collapse model="ReloadedData.CompsCollapse" /></h4>
+    <div class="ss_border" collapse="ReloadedData.CompsCollapse">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Resale Range</label>
@@ -222,6 +221,7 @@
 </div>
 
 <div class="ss_form">
+    <h4 class="ss_form_title">Water Search</h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
@@ -241,7 +241,8 @@
 </div>
 
 <div class="ss_form">
-    <div class="ss_border">
+    <h4 class="ss_form_title">Intake&nbsp;<pt-collapse model="ReloadedData.IntakeCollapse" /></h4>
+    <div class="ss_border" collapse="ReloadedData.IntakeCollapse">
         <span style="color: red">Press Enter To Send Notification!</span>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">

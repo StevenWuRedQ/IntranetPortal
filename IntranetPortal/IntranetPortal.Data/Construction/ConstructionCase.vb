@@ -50,6 +50,16 @@ Partial Public Class ConstructionCase
         Return Nothing
     End Function
 
+    Public Shared Sub UpdateOwner(BBLE As String, Owner As String)
+        Using ctx As New ConstructionEntities
+            Dim CCase = ctx.ConstructionCases.Find(BBLE)
+            If (CCase.Owner <> Owner) Then
+                CCase.Owner = Owner
+            End If
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
     Public Sub Delete()
         Using ctx As New ConstructionEntities
             ctx.Entry(Me).State = Entity.EntityState.Deleted

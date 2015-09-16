@@ -542,8 +542,9 @@
 
             /* header editing */
             $scope.HeaderEditing = false;
-            $scope.toggleHeaderEditing = function () {
+            $scope.toggleHeaderEditing = function (open) {
                 $scope.HeaderEditing = !$scope.HeaderEditing;
+                if(open) $("#ConstructionTitleInput").focus();
             }
             /* END header editing */
 

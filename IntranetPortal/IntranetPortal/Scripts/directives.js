@@ -280,7 +280,8 @@ portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileServ
                 scope.startLoading();
                 var data = new FormData();
                 data.append("file", scope.File);
-                ptFileService.uploadFile(data, scope.fileBble, scope.fileName, '', scope.uploadType, function (error, data) {
+                var targetName = ptFileService.getFileName(scope.File.name);
+                ptFileService.uploadFile(data, scope.fileBble, targetName, '', scope.uploadType, function (error, data) {
                     scope.stopLoading();
                     if (error) {
                         alert(error);

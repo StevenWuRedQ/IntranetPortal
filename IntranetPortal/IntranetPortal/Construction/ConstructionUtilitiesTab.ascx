@@ -231,7 +231,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Open</label>
-                <pt-radio name="NationalGrid-AccountOpen{{$indxe}}" model="floor.NationalGrid.AccountOpen"></pt-radio>
+                <pt-radio name="NationalGrid-AccountOpen{{$index}}" model="floor.NationalGrid.AccountOpen"></pt-radio>
             </li>
         </ul>
         <ul class="ss_form_box clearfix">

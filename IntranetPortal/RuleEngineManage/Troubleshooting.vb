@@ -790,4 +790,31 @@ Public Class Troubleshooting
 
     End Sub
 
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
+        Dim data = LoadDataFromExcel("114.xlsx")
+        Dim BBLE = txtBBLE.Text.Trim
+
+        Dim logs = From l In data.Tables
+                   Where l.TableName = "log" Select l
+
+        For Each row As DataRow In logs.FirstOrDefault.Rows
+            Dim vdate = row.Item(0)
+            If Not IsDBNull(vdate) Then
+                Dim logDate = DateTime.Parse(vdate)
+                Dim ename = row.Item(1).trim
+                Dim log = row.Item(2).trim
+                Dim eid = CInt(row.Item(3))
+                LeadsActivityLog.AddActivityLog(logDate, log, BBLE, LeadsActivityLog.LogCategory.Construction.ToString, eid, ename)
+
+                ' TextBox4.AppendText(String.Format("{0}:{1}:{2}", vdate, name, log))
+                TextBox4.AppendText(logDate)
+            End If
+
+
+        Next
+
+
+
+    End Sub
+
 End Class

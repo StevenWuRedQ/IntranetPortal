@@ -7,19 +7,21 @@ Public Class ConstructionManage
     Private Const MgrRoleName As String = "Construction-Manager"
     Private Const IntakeRoleName As String = "Construction-Intake"
 
-    Public Shared Sub StartConstruction(bble As String, caseName As String, userName As String)
+    Public Shared Sub StartConstruction(bble As String, caseName As String, userName As String, Optional Owner As String = Nothing)
         If ConstructionCase.GetCase(bble) Is Nothing Then
             Dim cc As New ConstructionCase
             cc.BBLE = bble
             cc.CaseName = caseName
             cc.Status = ConstructionCase.CaseStatus.Intake
+            If Owner Is Nothing Then
+                Dim ccIntake = Roles.GetUsersInRole(IntakeRoleName)
 
-            Dim ccIntake = Roles.GetUsersInRole(IntakeRoleName)
-
-            If ccIntake IsNot Nothing AndAlso ccIntake.Length > 0 Then
-                cc.Owner = ccIntake(0)
+                If ccIntake IsNot Nothing AndAlso ccIntake.Length > 0 Then
+                    cc.Owner = ccIntake(0)
+                End If
+            Else
+                cc.Owner = Owner
             End If
-
             cc.Save(userName)
         End If
     End Sub

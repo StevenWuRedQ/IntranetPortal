@@ -110,7 +110,7 @@ Namespace Controllers
 
                     If String.IsNullOrEmpty(fileName) Then
                         Dim fileNameParts = file.FileName.Split("\")
-                        fileName = fileNameParts(fileNameParts.Length - 1)
+                        fileName = HttpUtility.UrlEncode(fileNameParts(fileNameParts.Length - 1))
                     End If
 
                     results.Add(Core.DocumentService.UploadFile(folderPath, ms.ToArray, fileName, User.Identity.Name))
