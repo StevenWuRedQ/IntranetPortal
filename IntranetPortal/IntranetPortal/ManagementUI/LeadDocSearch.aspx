@@ -34,7 +34,8 @@
 
 
                 </div>
-                <dx:ASPxGridView ID="gridDocSearch" ClientInstanceName="grid" runat="server" KeyFieldName="BBLE" OnDataBinding="gridDocSearch_DataBinding">
+
+                <dx:ASPxGridView ID="gridDocSearch" ClientInstanceName="grid" Width="100%" runat="server" KeyFieldName="BBLE" OnDataBinding="gridDocSearch_DataBinding" >
                     <Columns>
                         <dx:GridViewDataColumn FieldName="Name">
                             <DataItemTemplate>
@@ -61,8 +62,9 @@
                     <GroupSummary>
                         <dx:ASPxSummaryItem SummaryType="Count" />
                     </GroupSummary>
+                    <SettingsPager Mode="EndlessPaging" PageSize="20"></SettingsPager>
                     <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" AllowFocusedRow="true" AllowClientEventsOnLoad="true" />
-                    <Settings ShowColumnHeaders="False" GridLines="None"></Settings>
+                    <Settings ShowColumnHeaders="False" GridLines="None" VerticalScrollableHeight="800"></Settings>
                     <Border BorderStyle="None"></Border>
                     <Styles>
                         <Header HorizontalAlign="Center"></Header>
