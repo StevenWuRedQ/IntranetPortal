@@ -917,7 +917,7 @@
             var ZoomLevel = 11;
             function initMapBox() {
                 L.mapbox.accessToken = 'pk.eyJ1IjoicG9ydGFsIiwiYSI6ImtCdG9ac00ifQ.p2_3nTko4JskYcg0YIgeyw';
-                map = L.mapbox.map('map', 'examples.map-i87786ca', { loadingControl: true })
+                map = L.mapbox.map('map', 'mapbox.streets', { loadingControl: true })
                     .addControl(L.mapbox.geocoderControl('mapbox.places').on("found", function (e) {
 
                     }))

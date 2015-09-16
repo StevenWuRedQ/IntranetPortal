@@ -1071,7 +1071,9 @@
                             "Defendants": $scope.LegalCase.SecondaryInfo.DeedReversionDefendants ? ',' + $scope.LegalCase.SecondaryInfo.DeedReversionDefendants.map(function (o) { return o.Name }).join(",") : ' ',
                             "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
                             "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
+                            
                         },
+
 
                     },
                     {
@@ -1089,6 +1091,31 @@
                             "Defendants": $scope.LegalCase.SecondaryInfo.SPComplaint_Defendants ? ',' + $scope.LegalCase.SecondaryInfo.SPComplaint_Defendants.map(function (o) { return o.Name }).join(",") : ' ',
                             "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
                             "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
+                        },
+
+                    },
+                    {
+                        "tplName": 'QuietTitleComplantTemplate.docx',
+                        data: {
+                            "Plantiff": $scope.LegalCase.SecondaryInfo.QTA_Plantiff,
+                            "PlantiffAttorney": $scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorney,
+                            "PlantiffAttorneyAddress": $scope.ptContactServices.getContact($scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId, $scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorney).Address,
+                            "PlantiffAttorneyPhone": $scope.ptContactServices.getContact($scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId, $scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorney).OfficeNO,
+                            "OriginalMortgageLender": $scope.LegalCase.SecondaryInfo.QTA_OrgMorgLender,
+                            "Mortgagee": $scope.LegalCase.SecondaryInfo.QTA_Mortgagee,
+                            "IndexNum": $scope.LegalCase.SecondaryInfo.QTA_IndexNum || ' ',
+                            "BoroughName": $scope.LeadsInfo.BoroughName,
+                            "Block": $scope.LeadsInfo.Block,
+                            "Lot": $scope.LeadsInfo.Lot,
+                            "Defendant": $scope.LegalCase.SecondaryInfo.QTA_Defendant,
+                            "Defendant2": $scope.LegalCase.SecondaryInfo.QTA_Defendant2,
+                            "Defendants": $scope.LegalCase.SecondaryInfo.QTA_Defendants ? ',' + $scope.LegalCase.SecondaryInfo.QTA_Defendants.map(function (o) { return o.Name }).join(",") : ' ',
+                            "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
+                            "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
+                            "FCFiledDate": $scope.LegalCase.ForeclosureInfo.FCFiledDate,
+                            "FCIndexNum": $scope.LegalCase.ForeclosureInfo.FCIndexNum,
+                            "DefaultDate": $scope.LegalCase.ForeclosureInfo.QTA_DefaultDate,
+                            "DeedToPlaintiffDate": $scope.LegalCase.SecondaryInfo.QTA_DeedToPlaintiffDate,
                         },
 
                     }

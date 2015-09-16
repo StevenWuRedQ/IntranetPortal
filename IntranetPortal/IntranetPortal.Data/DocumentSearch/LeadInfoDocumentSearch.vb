@@ -13,6 +13,10 @@ Public Class LeadInfoDocumentSearch
             Return ctx.LeadInfoDocumentSearches.ToList
         End Using
     End Function
+    Public Enum SearchStauts
+        NewSearch = 0
+        Completed = 1
+    End Enum
 End Class
 
 Public Class LeadInfoDocumentSearchCaseMetaData

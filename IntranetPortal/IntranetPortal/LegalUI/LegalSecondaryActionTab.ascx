@@ -203,6 +203,88 @@
     </div>
     <%--  END SP doc --%>
 
+    <%--Quiet Title doc--%>
+    <div class="ss_form clearfix" ng-show="CheckSecondaryTags(3)">
+
+        <h4 class="ss_form_title">Quiet Title Complaint<span style="transform: none; font-size: 12px;">(Mark as * need to fill other read only here)</span>
+            <i class="fa fa-download icon_btn color_blue tooltip-examples" title="Download Quiet Title Complaint Document" ng-click="DocGenerator('QuietTitleComplantTemplate.docx')"></i>
+        </h4>
+
+        <ul class="ss_form_box  clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Plantiff *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_Plantiff">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Plantiff Attorney *</label>
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_PlantiffAttorney" ng-change="LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId">
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Index #</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_IndexNum">
+            </li>
+             <li class="ss_form_item">
+                <label class="ss_form_input_title">DATE OF DEED TO PLAINTIFF *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_DeedToPlaintiffDate" ss-date>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">County</label>
+                <input class="ss_form_input" ng-model="LeadsInfo.BoroughName" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Block/Lot</label>
+                <input class="ss_form_input" ng-value="LeadsInfo.Block+'/'+ LeadsInfo.Lot" readonly="readonly">
+            </li>
+            <li class="ss_form_item " style="width: 97%">
+                <label class="ss_form_input_title">Court Address </label>
+                <input class="ss_form_input" ng-value="GetCourtAddress(LeadsInfo.Borough)" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Defendant *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_Defendant">
+            </li>
+             <li class="ss_form_item">
+                <label class="ss_form_input_title">Defendant lender 2 *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_Defendant2">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Mortgagee *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_Mortgagee">
+            </li>
+             <li class="ss_form_item">
+                <label class="ss_form_input_title">ORIGINAL MORTGAGE LENDER	 *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_OrgMorgLender">
+            </li>
+
+             <li class="ss_form_item">
+                <label class="ss_form_input_title">DATE OF LP</label>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FCFiledDate" disabled="disabled" ss-date>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">FC Index #</label>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FCIndexNum" readonly="readonly">
+            </li>
+             <li class="ss_form_item">
+                <label class="ss_form_input_title">DEFAULT DATE</label>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.QTA_DefaultDate" ss-date>
+            </li>
+            <%--<li class="ss_form_item clearfix">
+                <label class="ss_form_input_title">Defendant's Attorney *</label>
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId">
+            </li>--%>
+        </ul>
+
+        <h5 class="ss_form_title">Quiet Title Other Defendants <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="NGAddArrayitemScope('LegalCtrl','LegalCase.SecondaryInfo.QTA_Defendants')" title="Add" style="font-size: 18px"></i></h5>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item" ng-repeat="d in LegalCase.SecondaryInfo.QTA_Defendants track by $index">
+                <label class="ss_form_input_title">Defendant {{$index +1}} <i class="fa fa-times icon_btn  tooltip-examples" ng-click="ptCom.arrayRemove(LegalCase.SecondaryInfo.QTA_Defendants,$index, true)" title="Delete" style="font-size: 18px"></i></label>
+                <input type="text" class="ss_form_input" ng-model="d.Name">
+            </li>
+        </ul>
+    </div>
+
+    <%--End Quiet Tile Doc --%>
     <div class="ss_form clearfix cssSlideUp" ng-show="CheckSecondaryTags(2)">
         <h4 class="ss_form_title">Partitions</h4>
         <ul class="ss_form_box clearfix">
@@ -339,7 +421,7 @@
 
 
         </div>
-        <uc1:legalsecondaryactions runat="server" ID="LegalSecondaryActions" />
+       <%-- <uc1:legalsecondaryactions runat="server" ID="LegalSecondaryActions" />--%>
     </div>
 
 
