@@ -400,22 +400,19 @@ Public Class LeadsList
         Dim bble = TryCast(pageRootControl.FindControl("txtNewBBLE"), ASPxTextBox).Text
         Dim leadsName = TryCast(pageRootControl.FindControl("txtNewLeadsName"), ASPxTextBox).Text
 
-        'Dim bble = lbNewBBLE.SelectedItem.GetValue("BBLE").ToString
-        'Dim leadsName = lbNewBBLE.SelectedItem.GetValue("LeadsName").ToString
-
         If String.IsNullOrEmpty(bble.Trim) Then
-            Throw New Exception("BBLE is not correct format! Please check.")
+            Throw New CallbackException("BBLE is not correct format! Please check.")
         End If
 
         Using Context As New Entities
             If Context.Leads.Where(Function(l) l.BBLE = bble).Count > 0 Then
                 Dim lead = Context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault
-                Throw New Exception(String.Format("You cann't create this leads. Lead is already created by {0}. <a href=""#"" id=""linkRequestUpdate"" onclick=""OnRequestUpdate('{1}');return false;"">Request update?</a>", lead.EmployeeName, lead.BBLE))
+                Throw New CallbackException(String.Format("You cann't create this leads. Lead is already created by {0}. <a href=""#"" id=""linkRequestUpdate"" onclick=""OnRequestUpdate('{1}');return false;"">Request update?</a>", lead.EmployeeName, lead.BBLE))
             End If
 
             If Context.PendingAssignLeads.Where(Function(l) l.BBLE = bble AndAlso (l.Status = PendingAssignLead.PendingStatus.Active Or l.Status = PendingAssignLead.PendingStatus.InLoop)).Count > 0 Then
                 Dim pendleads = Context.PendingAssignLeads.Where(Function(l) l.BBLE = bble AndAlso (l.Status = PendingAssignLead.PendingStatus.Active Or l.Status = PendingAssignLead.PendingStatus.InLoop)).FirstOrDefault
-                Throw New Exception(String.Format("You cann't create this leads. Lead is pending assign to {0}.", pendleads.EmployeeName))
+                Throw New CallbackException(String.Format("You cann't create this leads. Lead is pending assign to {0}.", pendleads.EmployeeName))
             End If
 
             'Dim lf As LeadsInfo = DataWCFService.UpdateBasicInfo(bble)
@@ -546,7 +543,7 @@ Public Class LeadsList
         Dim returnData = GetBBLEData()
 
         If returnData.Rows.Count = 0 Then
-            Throw New Exception("No data matched, Please check!")
+            Throw New CallbackException("No data matched, Please check!")
         End If
 
         lbBBLE.DataSource = returnData.DefaultView

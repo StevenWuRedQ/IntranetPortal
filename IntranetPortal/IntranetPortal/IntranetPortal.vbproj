@@ -533,6 +533,7 @@
     <Compile Include="CodeFolder\Agent_Properties.vb" />
     <Compile Include="CodeFolder\APIOrder.vb" />
     <Compile Include="CodeFolder\AssignRule.vb" />
+    <Compile Include="CodeFolder\CallbackException.vb" />
     <Compile Include="CodeFolder\ComplaintsManage.vb" />
     <Compile Include="CodeFolder\ConstructionManage.vb" />
     <Compile Include="CodeFolder\CustomBinder.vb" />

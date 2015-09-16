@@ -19,7 +19,6 @@ Public Class Global_asax
         GlobalConfiguration.Configuration.EnsureInitialized()
     End Sub
 
-
     Sub Session_Start(ByVal sender As Object, ByVal e As EventArgs)
         ' Fires when the session is started
         'If Not String.IsNullOrEmpty(User.Identity.Name) Then
@@ -55,6 +54,11 @@ Public Class Global_asax
             Dim ex = HttpContext.Current.AllErrors.Last
 
             If TypeOf ex Is ThreadAbortException Then
+                Return
+            End If
+
+            If TypeOf ex Is CallbackException Then
+                DevExpress.Web.ASPxWebControl.SetCallbackErrorMessage(ex.Message)
                 Return
             End If
 

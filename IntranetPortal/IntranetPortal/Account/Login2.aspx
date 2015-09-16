@@ -10,7 +10,7 @@
     <form id="form1" runat="server">
         <div style="height: 100%; left: 0; position: fixed; top: 0; width: 100%;background-color:#f9f9f9;">
             <div style="top: 22%; left: 40%; position: absolute; z-index: 10; background-color:#efefef;">
-                <dx:ASPxRoundPanel runat="server" HeaderText="Log In" HorizontalAlign="Center">
+                <dx:ASPxRoundPanel runat="server" HeaderText="Log In" HorizontalAlign="Center" Width="290px">
                     <PanelCollection>
                         <dx:PanelContent>
                             <div class="accountHeader">
@@ -21,7 +21,7 @@
                             </div>
                             <table style="width: 100%; padding: 2px;text-align:left;">
                                 <tr>
-                                    <td style="padding:2px;">
+                                    <td style="padding:2px;width:65px">
                                         <dx:ASPxLabel ID="lblUserName" runat="server" AssociatedControlID="tbUserName" Text="User Name:" />
                                     </td>
                                     <td style="padding:2px;">
