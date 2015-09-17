@@ -150,11 +150,11 @@
                 <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Violations.Expeditor_Vendor" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Vendor Person</label>
+                <label class="ss_form_input_title">Vendor Phone</label>
                 <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Violations.Expeditor_VendorPhone" mask="(999) 999-9999" clean="true">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Vendor Person</label>
+                <label class="ss_form_input_title">Vendor Email</label>
                 <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Violations.Expeditor_VendorEmail">
             </li>
 

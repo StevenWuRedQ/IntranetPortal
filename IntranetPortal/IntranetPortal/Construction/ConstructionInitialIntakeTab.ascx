@@ -269,7 +269,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Is Sketch Task Finished?</label>
-                    <pt-finished-mark ss-model="CSCase.CSCase.InitialIntake.IsSketchFinished" ss-style="label"></pt-finished-mark>
+                    <pt-finished-mark ss-model="CSCase.CSCase.InitialIntake.IsSketchFinished"></pt-finished-mark>
                 </li>
             </ul>
 
