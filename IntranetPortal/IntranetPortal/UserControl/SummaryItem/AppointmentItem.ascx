@@ -49,6 +49,7 @@
     <GroupSummary>
         <dx:ASPxSummaryItem SummaryType="Count" />
     </GroupSummary>
+    <SettingsPager ShowNumericButtons="false"></SettingsPager>
     <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
     <Styles>
         <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>

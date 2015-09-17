@@ -16,7 +16,7 @@ Public Class MySummary
             Dim ascx = e.Item.DataItem
 
             Dim myControl = CType(Page.LoadControl("~/UserControl/SummaryItem/" & ascx), SummaryItemBase)
-            myControl.DataBind()
+            myControl.BindData()
 
             Dim lt = CType(e.Item.FindControl("ltContainer"), HtmlControl)
             lt.Controls.Add(myControl)

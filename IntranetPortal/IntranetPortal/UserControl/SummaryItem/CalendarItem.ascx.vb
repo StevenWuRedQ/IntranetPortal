@@ -7,7 +7,7 @@
 
     Public Overrides Sub BindData()
         MyBase.BindData()
-        BindData()
+        BindCalendar()
     End Sub
 
     Sub BindCalendar()
