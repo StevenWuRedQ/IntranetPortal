@@ -49,6 +49,16 @@ Public Class ActivityLogs
         Me.BindData(bble)
     End Sub
 
+    Public Sub BindLogsByCategories(bble As String, categories As String())
+        If categories Is Nothing Then
+            BindData(bble)
+        Else
+            hfBBLE.Value = bble
+            gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, categories)
+            gridTracking.DataBind()
+        End If
+    End Sub
+
     Public Sub BindData(bble As String)
         hfBBLE.Value = bble
 
@@ -151,6 +161,13 @@ Public Class ActivityLogs
             SetAsTask()
         End If
 
+        If e.Parameters.StartsWith("Filter") Then
+            Dim categories = e.Parameters.Split("|")(1)
+            BindLogsByCategories(hfBBLE.Value, categories.Split(";"))
+
+            Return
+        End If
+
         'Complete Task
         If (e.Parameters.StartsWith("CompleteTask")) Then
             Dim logId = CInt(e.Parameters.Split("|")(1))
@@ -214,6 +231,8 @@ Public Class ActivityLogs
             task.Comments = EmailBody2.Html
             task.ExecuteAction()
             CompleteWorklistItem(task.TaskID)
+
+            BindData(hfBBLE.Value)
         End If
 
         'Approve New Lead
@@ -442,6 +461,8 @@ Public Class ActivityLogs
                     End If
                 End If
             End If
+
+            BindData(hfBBLE.Value)
         End If
     End Sub
 
@@ -875,7 +896,9 @@ Public Class ActivityLogs
 
     Protected Sub gridTracking_AfterPerformCallback(sender As Object, e As DevExpress.Web.ASPxGridViewAfterPerformCallbackEventArgs)
         If Not String.IsNullOrEmpty(hfBBLE.Value) Then
-            BindData(hfBBLE.Value)
+            If e.CallbackName = "REFRESH" Then
+                'BindData(hfBBLE.Value)
+            End If
         End If
     End Sub
 
@@ -1330,5 +1353,11 @@ Public Class ActivityLogs
         End If
     End Sub
 
-  
+    Protected Sub gridTracking_DataBinding(sender As Object, e As EventArgs)
+        If gridTracking.IsCallback AndAlso gridTracking.DataSource Is Nothing Then
+            If hfBBLE.Value IsNot Nothing Then
+                BindData(hfBBLE.Value)
+            End If
+        End If
+    End Sub
 End Class

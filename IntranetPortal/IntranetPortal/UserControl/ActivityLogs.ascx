@@ -34,7 +34,18 @@
 <script type="text/javascript">
     function OnlogSelectedIndexChanged(s, e) {
         var selectedItems = cbCateLogClient.GetSelectedItems();
-        //ddlCateLogClient.SetText(GetSelectedItemsText(selectedItems));
+        var categories = GetSelectedItemsValue(selectedItems);
+
+        if (categories == "") {
+            gridTrackingClient.Refresh();
+            $("#filter_btn").removeClass("filited");
+        }
+        else {
+            gridTrackingClient.PerformCallback("Filter|" + categories);
+            $("#filter_btn").addClass("filited");
+        }
+
+        return;
 
         var filterCondition = "";
 
@@ -43,6 +54,7 @@
             var cate = cbCateLogClient.GetItem(i);
 
             if (cate.selected) {
+
                 if (filterCondition == "")
                     filterCondition = "[Category] = '" + cate.value + "'";
                 else
@@ -149,6 +161,15 @@
                 texts.push(items[i].text);
         return texts.join(textSeparator);
     }
+
+    function GetSelectedItemsValue(items) {
+        var texts = [];
+        for (var i = 0; i < items.length; i++)
+            if (items[i].index >= 0)
+                texts.push(items[i].value);
+        return texts.join(";");
+    }
+
     function GetValuesByTexts(texts) {
         var actualValues = [];
         var item;
@@ -639,7 +660,9 @@
     <%-- log tables--%>
     <div style="width: 100%; padding: 0px; display: block;">
         <asp:HiddenField ID="hfBBLE" runat="server" />
-        <dx:ASPxGridView ID="gridTracking" Width="100%" ViewStateMode="Disabled" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true" SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID" SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" Styles-FilterBuilderHeader-BackColor="Gray">
+        <dx:ASPxGridView ID="gridTracking" Width="100%" ViewStateMode="Disabled" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true" 
+            SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID"
+             SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" OnDataBinding="gridTracking_DataBinding" Styles-FilterBuilderHeader-BackColor="Gray">
             <Styles>
                 <Cell VerticalAlign="Top"></Cell>
                 <Header BackColor="#F5F5F5"></Header>
