@@ -110,8 +110,10 @@ Partial Class Troubleshooting
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnComplaintsRefresh = New System.Windows.Forms.Button()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
-        Me.Button15 = New System.Windows.Forms.Button()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Button15 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -977,6 +979,8 @@ Partial Class Troubleshooting
         '
         'TabPage9
         '
+        Me.TabPage9.Controls.Add(Me.Label14)
+        Me.TabPage9.Controls.Add(Me.TextBox5)
         Me.TabPage9.Controls.Add(Me.TextBox4)
         Me.TabPage9.Controls.Add(Me.Button15)
         Me.TabPage9.Location = New System.Drawing.Point(4, 22)
@@ -987,14 +991,21 @@ Partial Class Troubleshooting
         Me.TabPage9.Text = "Construction"
         Me.TabPage9.UseVisualStyleBackColor = True
         '
-        'Button15
+        'Label14
         '
-        Me.Button15.Location = New System.Drawing.Point(9, 7)
-        Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(75, 23)
-        Me.Button15.TabIndex = 0
-        Me.Button15.Text = "UpLoad Activity"
-        Me.Button15.UseVisualStyleBackColor = True
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(54, 15)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(54, 13)
+        Me.Label14.TabIndex = 3
+        Me.Label14.Text = "File Name"
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(119, 8)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(151, 20)
+        Me.TextBox5.TabIndex = 2
         '
         'TextBox4
         '
@@ -1003,6 +1014,15 @@ Partial Class Troubleshooting
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(716, 200)
         Me.TextBox4.TabIndex = 1
+        '
+        'Button15
+        '
+        Me.Button15.Location = New System.Drawing.Point(276, 6)
+        Me.Button15.Name = "Button15"
+        Me.Button15.Size = New System.Drawing.Size(115, 23)
+        Me.Button15.TabIndex = 0
+        Me.Button15.Text = "UpLoad Activity"
+        Me.Button15.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1136,4 +1156,6 @@ Partial Class Troubleshooting
     Friend WithEvents txtNotifyNames As TextBox
     Friend WithEvents Button15 As Button
     Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents TextBox5 As TextBox
 End Class

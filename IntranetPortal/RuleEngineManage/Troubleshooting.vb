@@ -2,7 +2,7 @@
 Imports System.Data.OleDb
 Imports IntranetPortal
 Imports System.Threading
-Imports IntranetPortal.data
+Imports IntranetPortal.Data
 
 Public Class Troubleshooting
 
@@ -469,7 +469,7 @@ Public Class Troubleshooting
 
     Function LoadDataFromExcel(fileName As String) As DataSet
 
-        Dim fullName = Path.GetFullPath("Files\" & fileName)
+        Dim fullName = Path.GetFullPath("D:\Data\" & fileName)
         Dim data As New DataSet
         Dim connStr = String.Format("provider=Microsoft.ACE.OLEDB.12.0;" & "data source={0};Extended Properties=Excel 12.0;", fullName)
 
@@ -791,30 +791,49 @@ Public Class Troubleshooting
     End Sub
 
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
-        Dim data = LoadDataFromExcel("114.xlsx")
+        Dim file = TextBox5.Text.Trim
         Dim BBLE = txtBBLE.Text.Trim
 
-        Dim logs = From l In data.Tables
-                   Where l.TableName = "log" Select l
+        If Not String.IsNullOrEmpty(file) Then
+            Dim data = LoadDataFromExcel(file)
+            Dim logs = From l In data.Tables
+                       Where l.TableName = "log" Select l
 
-        For Each row As DataRow In logs.FirstOrDefault.Rows
-            Dim vdate = row.Item(0)
-            If Not IsDBNull(vdate) Then
-                Dim logDate = DateTime.Parse(vdate)
-                Dim ename = row.Item(1).trim
-                Dim log = row.Item(2).trim
-                Dim eid = CInt(row.Item(3))
-                LeadsActivityLog.AddActivityLog(logDate, log, BBLE, LeadsActivityLog.LogCategory.Construction.ToString, eid, ename)
+            For Each row As DataRow In logs.FirstOrDefault.Rows
+                Dim vdate = row.Item(0).ToString
+                If Not IsDBNull(vdate) Then
+                    Dim logDate = DateTime.Parse(vdate)
+                    Dim log = row.Item(1).ToString.Trim
+                    Dim ename = row.Item(2).ToString.Trim.ToLower
+                    Dim eid As Integer
+                    Select Case ename
+                        Case "jamie"
+                            ename = "Jamie Ventura"
+                            eid = 26
+                        Case "heidi"
+                            ename = "Heidi Velovic"
+                            eid = 46
+                        Case "melissa"
+                            ename = "Melissa Ramlakhan"
+                            eid = 30
+                        Case "yvette"
+                            ename = "Yvette Guizie"
+                            eid = 52
+                        Case "iskyo"
+                            ename = "Isaac Aronov"
+                            eid = 24
+                        Case Else
+                            ename = "Jamie Ventura"
+                            eid = 26
+                    End Select
 
-                ' TextBox4.AppendText(String.Format("{0}:{1}:{2}", vdate, name, log))
-                TextBox4.AppendText(logDate)
-            End If
-
-
-        Next
-
-
-
+                    LeadsActivityLog.AddActivityLog(logDate, log, BBLE, LeadsActivityLog.LogCategory.Construction.ToString, eid, ename)
+                    ' TextBox4.AppendText(String.Format("{0}:{1}:{2}", vdate, ename, log))
+                    TextBox4.AppendText(logDate)
+                End If
+            Next
+            TextBox4.AppendText("Success!")
+        End If
     End Sub
 
 End Class

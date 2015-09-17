@@ -13,11 +13,11 @@ portalApp.directive('ssDate', function () {
             scope.$watch(attrs.ngModel, function (newValue, oldValue) {
                 var dateStr = newValue;
                 if (dateStr && typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
-                   
-                        var dd = new Date(dateStr);
-                        dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
-                        $(el).datepicker('update', new Date(dd))
-                    
+
+                    var dd = new Date(dateStr);
+                    dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
+                    $(el).datepicker('update', new Date(dd))
+
                 }
             });
         }
@@ -67,8 +67,7 @@ portalApp.directive('ptInitModel', function () {
     }
 });
 
-//one way bind of ptInitModel
-portalApp.directive('ptInitBind', function () {
+portalApp.directive('ptInitBind', function () { //one way bind of ptInitModel
     return {
         restrict: 'A',
         require: '?ngBind',
@@ -533,14 +532,16 @@ portalApp.directive('ptComments', ['ptCom', function (ptCom) {
 portalApp.directive('ptFinishedMark', [function () {
     return {
         restrict: 'E',
-        template: '<div>' +
-                  '<button class="btn btn-default" type="button" ng-click="ssModel=!ssModel" ng-show="!ssModel">{{button1?button1:"Click To Confirm"}}</button>' +
-                  '<button class="btn btn-success" type="button" ng-dblclick="ssModel=!ssModel" ng-show="ssModel">{{button2?button2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></button>' +
-                  '</div>',
+        template:   '<span ng-if="ssStyle==0"><button type="button" class="btn btn-default"  ng-click="ssModel=!ssModel" ng-show="!ssModel">{{Text1?Text1:"Confirm"}}</button><button type="button" class="btn btn-success" ng-dblclick="ssModel=!ssModel" ng-show="ssModel">{{Text2?Text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></button></span>' + '<span ng-if="ssStyle==1"><span class="label label-default" ng-click="ssModel=!ssModel" ng-show="!ssModel">{{Text1?Text1:"Confirm"}}</span><span class="label label-success" ng-dblclick="ssModel=!ssModel" ng-show="ssModel">{{Text2?Text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></span></span>',
         scope: {
             ssModel: '=',
-            button1: '@',
-            button2: '@',
+            Text1: '@',
+            Text2: '@',
+            ssStyle: '@'
+        },
+        link: function (scope, el, attrs) {
+            if (scope.ssStyle && scope.ssStyle.toLowerCase() == 'label') scope.ssStyle = 1;
+            else scope.ssStyle = 0;
         }
     }
 }])

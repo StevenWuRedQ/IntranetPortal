@@ -1,31 +1,33 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionSignoffsTab.ascx.vb" Inherits="IntranetPortal.ConstructionSignoffsTab" %>
 <div>
     <div class="ss_form">
-
-        <h4 class="ss_form_title">Plumbing</h4>
-        <div class="ss_border">
+        <h4 class="ss_form_title">Plumbing&nbsp;<pt-collapse model="ReloadedData.Plumbing_Collapsed" /></h4>
+        <div class="ss_border" collapse="ReloadedData.Plumbing_Collapsed">
             <ul class="ss_form_box clearfix">
-
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date Permit is Issued</label>
                     <input class="ss_form_input" ss-date ng-model="CSCase.CSCase.Signoffs.PlumbingDatePremitIssued">
                 </li>
-                <li class="ss_form_item2">
-                    <div style="float: left">
-                        <label class="ss_form_input_title">Schedule B</label>
-                        <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Plumbing_ScheduleB" file-model="CSCase.CSCase.Signoffs.Plumbing_ScheduleB"></pt-file>
-                    </div>
-                    <div style="float: left; margin-left: 50px">
-                        <label class="ss_form_input_title">PW2</label>
-                        <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Plumbing_ScheduleB" file-model="CSCase.CSCase.Signoffs.Plumbing_PW2"></pt-file>
-                    </div>
-                    <div style="float: left; margin-left: 50px">
-                        <label class="ss_form_input_title">Permit</label>
-                        <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Plumbing_ScheduleB" file-model="CSCase.CSCase.Signoffs.Plumbing_Permit"></pt-file>
-                    </div>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Date Permit Expires</label>
+                    <input class="ss_form_input" ss-date ng-model="CSCase.CSCase.Signoffs.PlumbingDatePremitExpire">
                 </li>
 
-                <li class="ss_form_item3" style="font-size: 12px; height: auto">
+                <li class="clearfix" style="list-style: none"></li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Schedule B</label>
+                    <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Plumbing_ScheduleB" file-model="CSCase.CSCase.Signoffs.Plumbing_ScheduleB"></pt-file>
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">PW2</label>
+                    <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Plumbing_ScheduleB" file-model="CSCase.CSCase.Signoffs.Plumbing_PW2"></pt-file>
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Permit</label>
+                    <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Plumbing_ScheduleB" file-model="CSCase.CSCase.Signoffs.Plumbing_Permit"></pt-file>
+                </li>
+                <li class="clearfix" style="list-style: none"></li>
+                <li class="ss_form_item3" style="font-size: 12px; height: auto; margin-top: 10px">
                     <label class="ss_form_input_title">Inspection</label>
                     <table class="table table-striped">
                         <thead>
@@ -57,7 +59,7 @@
                             <td></td>
                             <td colspan="4">
                                 <label class="ss_form_input_title">Upload Objections</label>
-                                <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Roughing_Objection" base-folder="Signoffs_Roughing_Objection"  file-model="CSCase.CSCase.Signoffs.Roughing_Objection"></pt-files>
+                                <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Roughing_Objection" base-folder="Signoffs_Roughing_Objection" file-model="CSCase.CSCase.Signoffs.Roughing_Objection"></pt-files>
                             </td>
                         </tr>
                         <tr>
@@ -140,11 +142,11 @@
             </ul>
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">PAA&nbsp;<pt-collapse model="Signoffs_PAAcollapse" /></label>
+                    <label class="ss_form_input_title">PAA&nbsp;<pt-collapse model="ReloadedData.Signoffs_PAAcollapse" /></label>
                     <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_PAA_File" file-model="CSCase.CSCase.Signoffs.PAA_File"></pt-file>
                 </li>
             </ul>
-            <div class="cssSlideUp" collapse="Signoffs_PAAcollapse">
+            <div class="cssSlideUp" collapse="ReloadedData.Signoffs_PAAcollapse">
                 <div class="arrow_box">
                     <div class="ss_form">
                         <ul class="ss_form_box clearfix">
@@ -183,15 +185,19 @@
         </div>
     </div>
 
-
     <div class="ss_form">
-        <h4 class="ss_form_title title_after_notes">Electrical</h4>
-        <div class="ss_border">
+        <h4 class="ss_form_title title_after_notes">Electrical&nbsp;<pt-collapse model="ReloadedData.Electrical_Collapsed" /></h4>
+        <div class="ss_border" collapse="ReloadedData.Electrical_Collapsed">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date Permit was pulled</label>
                     <input class="ss_form_input" ng-model="CSCase.CSCase.Signoffs.Electrical_PermitPulled" ss-date>
                 </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Date Permit Expires</label>
+                    <input class="ss_form_input" ng-model="CSCase.CSCase.Signoffs.Electrical_PermitExpires" ss-date>
+                </li>
+                <li class="clearfix" style="list-style: none"></li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">PW2</label>
                     <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Electrical_PW2" file-model="CSCase.CSCase.Signoffs.Electrical_PW2"></pt-file>
@@ -200,7 +206,7 @@
                     <label class="ss_form_input_title">Permit</label>
                     <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Electrical_Permit" file-model="CSCase.CSCase.Signoffs.Electrical_Permit"></pt-file>
                 </li>
-
+                <li class="clearfix" style="list-style: none"></li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Inspection date requested</label>
                     <input class="ss_form_input" ss-date ng-model="CSCase.CSCase.Signoffs.Electrical_InspectionRequestedDate">
@@ -268,23 +274,35 @@
 
         </div>
     </div>
+
     <div class="ss_form">
-        <h4 class="ss_form_title title_after_notes">Construction</h4>
-        <div class="ss_border">
+        <h4 class="ss_form_title title_after_notes">Construction&nbsp;<pt-collapse model="ReloadedData.Construction_Collapsed" /></h4>
+        <div class="ss_border" collapse="ReloadedData.Construction_Collapsed">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Date Permit was pulled</label>
+                    <label class="ss_form_input_title">Date Permit Was Pulled</label>
                     <input class="ss_form_input" ng-model="CSCase.CSCase.Signoffs.Construction_PermitPulledDate" ss-date>
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Date Permit Expires</label>
+                    <input class="ss_form_input" ng-model="CSCase.CSCase.Signoffs.Construction_PermitExpireDate" ss-date>
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">PW2</label>
                     <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Construction_PW2" file-model="CSCase.CSCase.Signoffs.Construction_PW2"></pt-file>
                 </li>
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Permit</label>
+                    <label class="ss_form_input_title">Construction Permit</label>
                     <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Permit" file-model="CSCase.CSCase.Signoffs.Construction_Permit"></pt-file>
                 </li>
-
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Fence Permit</label>
+                    <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Permit" file-model="CSCase.CSCase.Signoffs.Construction_FencePermit"></pt-file>
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Mechanical Permit</label>
+                    <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Permit" file-model="CSCase.CSCase.Signoffs.Construction_MechanicalPermit"></pt-file>
+                </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date inspection was requested</label>
                     <input class="ss_form_input" ss-date ng-model="CSCase.CSCase.Signoffs.Construction_InspectionRequestedDate">

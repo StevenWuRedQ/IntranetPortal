@@ -2,14 +2,14 @@
 
 <div class="ss_form">
     <div class="ss_border">
-        <div >
+        <div>
             <h5 class="ss_form_title">AM Photos</h5>
-            <pt-files file-bble="CSCase.BBLE" file-id="Photos-AMPhoto" base-folder="Photos-AMPhoto" file-model="CSCase.CSCase.Photos.AMPhotos" ></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="Photos-AMPhoto" base-folder="Photos-AMPhoto" file-model="CSCase.CSCase.Photos.AMPhotos" folder-enable="true"></pt-files>
         </div>
         <hr />
         <div>
             <h5 class="ss_form_title">PM Photos</h5>
-            <pt-files file-bble="CSCase.BBLE" file-id="Photos-PMPhotos" base-folder="Photos-PMPhotos" file-model="CSCase.CSCase.Photos.PMPhotos"></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="Photos-PMPhotos" base-folder="Photos-PMPhotos" file-model="CSCase.CSCase.Photos.PMPhotos" folder-enable="true"></pt-files>
         </div>
     </div>
 </div>
@@ -40,7 +40,7 @@
     <div class="ss_border">
         <div>
             <h5 class="ss_form_title">Progress</h5>
-            <pt-files file-bble="CSCase.BBLE" file-id="Photos-Progress" base-folder="Photos-Progress" file-model="CSCase.CSCase.Photos.WaterMeterProgress" folder-enable="true" ></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="Photos-Progress" base-folder="Photos-Progress" file-model="CSCase.CSCase.Photos.WaterMeterProgress" folder-enable="true"></pt-files>
         </div>
         <hr />
         <div>

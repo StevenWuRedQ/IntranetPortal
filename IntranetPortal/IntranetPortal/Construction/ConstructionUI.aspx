@@ -427,7 +427,7 @@
                 if (newVal) {
                     if ($scope.CSCase.CSCase.Utilities.Company.indexOf('Energy Service') < 0) {
                         $scope.CSCase.CSCase.Utilities.Company.push('Energy Service');
-                        $scope.CSCase.CSCase.Utilities.EnergyService_Collapsed = false;
+                        $scope.ReloadedData.EnergyService_Collapsed = true;
                     }
                 } else {
                     var index;

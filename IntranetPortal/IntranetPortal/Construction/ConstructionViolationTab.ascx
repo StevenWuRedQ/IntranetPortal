@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionViolationTab.ascx.vb" Inherits="IntranetPortal.ConstructionViolationTab" %>
 
 <%-- orders --%>
-<div class="ss_form" ng-init="Violations_OrdersPanelVisible=false" style="margin-bottom: 30">
+<div class="ss_form" ng-init="Violations_OrdersPanelVisible=false" style="margin-bottom: 30px">
     <h4 class="ss_form_title">Orders<input type="checkbox" ng-model="CSCase.CSCase.Violations.Orders" id="orders" /><label for="orders"></label></h4>
     <div style="text-align: center" ng-show="CSCase.CSCase.Violations.Orders">
         <style>
@@ -12,7 +12,7 @@
         <span class="barner-warning" ng-click="Violations_OrdersPanelVisible=true">FULL VACATE EXISTS ON THIS PROPERTY</span>
         <br />
         <br />
-        <span idclass="barner-warning" ng-click="Violations_OrdersPanelVisible=true">PARTIAL VACATE EXISTS ON THIS PROPERTY</span>
+        <span class="barner-warning" ng-click="Violations_OrdersPanelVisible=true">PARTIAL VACATE EXISTS ON THIS PROPERTY</span>
     </div>
     <div dx-popup="{
                     height: 800,
@@ -27,10 +27,10 @@
         <div data-options="dxTemplate:{ name: 'ordersContent' }">
             <div id="Stop_Work_Orders">
                 <h4>Stop Work Orders&nbsp;<pt-add ng-click="ensurePush('CSCase.CSCase.Violations.stopWorkOrders')" /></h4>
-                <table class="table table-striped" style="font-size: 9pt; width: 750; margin: 10; table-layout: fixed;">
+                <table class="table table-striped" style="font-size: 9pt; width: 750px; margin: 10px; table-layout: fixed;">
                     <tr>
                         <th>Complaint Number</th>
-                        <th style="width: 200">Address</th>
+                        <th style="width: 200px">Address</th>
                         <th>Date Entered</th>
                         <th>Category</th>
                         <th>Inspection Date</th>
@@ -41,7 +41,7 @@
                     <tr ng-repeat="stopWorkOrder in CSCase.CSCase.Violations.stopWorkOrders">
                         <td>
                             <input class="table-input" type="text" ng-model="stopWorkOrder.CompliantNum" /></td>
-                        <td style="width: 200">
+                        <td style="width: 200px">
                             <input class="table-input" type="text" ng-model="stopWorkOrder.Address" /></td>
                         <td>
                             <input class="table-input" type="text" ng-model="stopWorkOrder.DateEntered" /></td>
@@ -62,10 +62,10 @@
             <hr />
             <div id="FULL_VACATE_Orders">
                 <h4>Full VACATE Orders&nbsp;<pt-add ng-click="ensurePush('CSCase.CSCase.Violations.fullVacateOrders')" /></h4>
-                <table class="table table-striped" style="font-size: 9pt; width: 750; margin: 10; table-layout: fixed;">
+                <table class="table table-striped" style="font-size: 9pt; width: 750px; margin: 10px; table-layout: fixed;">
                     <tr>
                         <th>Complaint Number</th>
-                        <th style="width: 200">Address</th>
+                        <th style="width: 200px">Address</th>
                         <th>Date Entered</th>
                         <th>Category</th>
                         <th>Inspection Date</th>
@@ -76,7 +76,7 @@
                     <tr ng-repeat="order in CSCase.CSCase.Violations.fullVacateOrders">
                         <td>
                             <input class="table-input" type="text" ng-model="order.CompliantNum" /></td>
-                        <td style="width: 200">
+                        <td style="width: 200px">
                             <input class="table-input" type="text" ng-model="order.Address" /></td>
                         <td>
                             <input class="table-input" type="text" ng-model="order.DateEntered" /></td>
@@ -97,10 +97,10 @@
             <hr />
             <div id="Partial_VACATE_Orders">
                 <h4>Partial VACATE Orders&nbsp;<pt-add ng-click="ensurePush('CSCase.CSCase.Violations.partialVacateOrders')" /></h4>
-                <table class="table table-striped" style="font-size: 9pt; width: 750; margin: 10; table-layout: fixed;">
+                <table class="table table-striped" style="font-size: 9pt; width: 750px; margin: 10px; table-layout: fixed;">
                     <tr>
                         <th>Complaint Number</th>
-                        <th style="width: 200">Address</th>
+                        <th style="width: 200px">Address</th>
                         <th>Date Entered</th>
                         <th>Category</th>
                         <th>Inspection Date</th>
@@ -111,7 +111,7 @@
                     <tr ng-repeat="order in CSCase.CSCase.Violations.partialVacateOrders">
                         <td>
                             <input class="table-input" type="text" ng-model="order.CompliantNum" /></td>
-                        <td style="width: 200">
+                        <td style="width: 200px">
                             <input class="table-input" type="text" ng-model="order.Address" /></td>
                         <td>
                             <input class="table-input" type="text" ng-model="order.DateEntered" /></td>
@@ -134,8 +134,8 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Expeditor&nbsp;<pt-collapse model="Expeditor_Collapsed" ng-init="Expeditor_Collapsed=true" /></h4>
-    <div class="ss_border" collapse="Expeditor_Collapsed">
+    <h4 class="ss_form_title">Expeditor&nbsp;<pt-collapse model="ReloadedData.Expeditor_Collapsed" /></h4>
+    <div class="ss_border" collapse="!ReloadedData.Expeditor_Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Project Assigned Date</label>
@@ -149,6 +149,15 @@
                 <label class="ss_form_input_title">Vendor Person</label>
                 <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Violations.Expeditor_Vendor" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Vendor Person</label>
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Violations.Expeditor_VendorPhone" mask="(999) 999-9999" clean="true">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Vendor Person</label>
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Violations.Expeditor_VendorEmail">
+            </li>
+
         </ul>
     </div>
 </div>
@@ -281,7 +290,7 @@
                                     <div class="clearfix"></div>
                                     <div class="col-sm-12">
                                         <label>Description</label>
-                                        <textarea class="form-control" ng-model="violation.Description" style="resize:none; height: 100" ></textarea>
+                                        <textarea class="form-control" ng-model="violation.Description" style="resize: none; height: 100"></textarea>
                                     </div>
                                     <div class="clearfix"></div>
                                     <hr />
@@ -503,5 +512,15 @@
             <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.CSCase.Violations.HPD_Notes"></textarea>
         </div>
 
+    </div>
+</div>
+
+<div class="ss_form">
+    <h4 class="ss_form_title">Cure</h4>
+    <div class="ss_border">
+        <div>
+            <label class="ss_form_input_title">Notes</label>
+            <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.CSCase.Violations.Cure_Notes"></textarea>
+        </div>
     </div>
 </div>
