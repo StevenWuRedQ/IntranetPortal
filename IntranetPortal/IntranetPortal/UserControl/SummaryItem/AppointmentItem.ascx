@@ -5,9 +5,7 @@
         window.location.href = "/Construction/ConstructionUI.aspx?bble=" + bble;
     }
 </script>
-<h4>
-    <img src="../images/grid_upcoming_icon.png" class="vertical-img"><span class="heading_text">Upcoming Appointments</span></h4>
-
+<h4><img src="../images/grid_upcoming_icon.png" class="vertical-img"><span class="heading_text">Upcoming Appointments</span></h4>
 <dx:ASPxGridView runat="server" Width="100%" ID="gridAppointment" ClientInstanceName="gridAppointmentClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" SettingsPager-PageSize="5" OnDataBinding="gridAppointment_DataBinding">
     <Columns>
         <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
