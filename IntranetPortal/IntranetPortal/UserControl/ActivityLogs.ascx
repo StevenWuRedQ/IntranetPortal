@@ -207,6 +207,8 @@
         }
 
         NeedToRefreshList = true;
+        needRefreshShortSale= true;
+
         gridTrackingClient.EndCallback.AddHandler(function(s, e) { EmailBody.SetHtml(""); });
         gridTrackingClient.PerformCallback("ApprovalTask|" + logId + "|" + result);
     }

@@ -219,9 +219,13 @@
         }
         else
             gridCase.Refresh();
-
+        
         if (typeof gridTrackingClient != "undefined")
             gridTrackingClient.Refresh();
+
+        if (typeof GetShortSaleData != 'undefined') {
+            NGGetShortSale(caseId);
+        }
     }
 </script>
 

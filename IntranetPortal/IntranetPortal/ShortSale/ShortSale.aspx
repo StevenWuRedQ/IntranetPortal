@@ -50,9 +50,7 @@
                             <uc1:ShortSaleCaseList runat="server" ID="ShortSaleCaseList" />
                         </dx:SplitterContentControl>
                     </ContentCollection>
-                </dx:SplitterPane>
-
-
+                </dx:SplitterPane>                
                 <dx:SplitterPane Name="contentPanel" ShowCollapseForwardButton="True" PaneStyle-BackColor="#f9f9f9" ScrollBars="None" PaneStyle-Paddings-Padding="0px">
                     <PaneStyle BackColor="#F9F9F9">
                     </PaneStyle>
