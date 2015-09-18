@@ -70,6 +70,18 @@ Partial Public Class Employee
         End Get
     End Property
 
+
+    Dim app As Core.Application
+    Public ReadOnly Property Application As Core.Application
+        Get
+            If app IsNot Nothing Then
+                app = Core.Application.Instance(Me.appid)
+            End If
+
+            Return app
+        End Get
+    End Property
+
     <JsonIgnoreAttribute>
     Public ReadOnly Property Manager As String
         Get
@@ -398,6 +410,10 @@ Partial Public Class Employee
         End If
 
         If rs.Where(Function(r) r.StartsWith("OfficeManager")).Count > 0 Then
+            Return True
+        End If
+
+        If rs.Any(Function(r) r.Contains("Manager")) Then
             Return True
         End If
 

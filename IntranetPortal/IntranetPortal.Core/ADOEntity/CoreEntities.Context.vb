@@ -31,5 +31,6 @@ Partial Public Class CoreEntities
     Public Overridable Property TLOApiLogs() As DbSet(Of TLOApiLog)
     Public Overridable Property PortalSettings() As DbSet(Of PortalSetting)
     Public Overridable Property CommonDatas() As DbSet(Of CommonData)
+    Public Overridable Property Applications() As DbSet(Of Application)
 
 End Class

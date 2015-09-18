@@ -562,6 +562,9 @@
     <Compile Include="CodeFolder\PortalLisPen.vb" />
     <Compile Include="CodeFolder\PortalMembership.vb" />
     <Compile Include="CodeFolder\PortalNavItem.vb" />
+    <Compile Include="CodeFolder\PortalPage.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CodeFolder\PortalReport.vb" />
     <Compile Include="CodeFolder\PortalRoleProvider.vb" />
     <Compile Include="CodeFolder\PublicSiteService.vb" />

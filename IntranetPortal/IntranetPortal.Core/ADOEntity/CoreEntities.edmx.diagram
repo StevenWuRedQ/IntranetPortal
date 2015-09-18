@@ -14,6 +14,7 @@
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.TLOApiLog" Width="1.5" PointX="5.5" PointY="4.625" />
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.PortalSetting" Width="1.5" PointX="7.75" PointY="4.25" />
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.CommonData" Width="1.5" PointX="10.25" PointY="2.75" />
+        <EntityTypeShape EntityType="IntranetPortal.Core.Model.Application" Width="1.5" PointX="10.25" PointY="4.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

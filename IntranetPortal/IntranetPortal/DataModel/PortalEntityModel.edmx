@@ -124,6 +124,7 @@
           <Property Name="CellPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="EmployeeSince" Type="date" />
           <Property Name="Picture" Type="nvarchar" MaxLength="100" />
+          <Property Name="AppId" Type="int" />
         </EntityType>
         <EntityType Name="FileAttachments">
           <Key>
@@ -1229,6 +1230,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="EmployeeSince" Type="DateTime" Precision="0" />
           <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CellPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AppId" Type="Int32" />
         </EntityType>
         <EntityType Name="LeadsActivityLog">
           <Key>
@@ -2166,6 +2168,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="IntranetPortalModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
                 <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
                 <ScalarProperty Name="Picture" ColumnName="Picture" />
                 <ScalarProperty Name="EmployeeSince" ColumnName="EmployeeSince" />
