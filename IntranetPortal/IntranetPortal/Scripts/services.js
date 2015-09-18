@@ -36,6 +36,7 @@ function ScopeResetCaseDataChange(getDataFunc) {
     }
     $('#CaseData').val(JSON.stringify(getDataFunc()));
 }
+
 function ScopeAutoSave(getDataFunc, SaveFunc, headEelem) {
     if ($(headEelem).length <= 0) {
         return;
@@ -54,6 +55,31 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem) {
     })
 
 
+}
+
+function ScopeSetLastUpdateTime(url)
+{
+    $.getJSON(url,function(data)
+    {
+        $('#LastUpdateTime').val(JSON.stringify(data));
+    })
+}
+
+function ScopeDateChangedByOther(urlFunc,reLoadUIfunc,loadUIIdFunc)
+{
+    window.setInterval(function () {
+        var url = urlFunc()
+        $.getJSON(url, function (data) {
+            var lastUpdateTime = JSON.stringify(data);
+            var localUpdateTime = $('#LastUpdateTime').val()
+            if (localUpdateTime && localUpdateTime != lastUpdateTime) {
+                alert("Someone change your file before you open your file system will load the refreshest data ! Will missing some data which you inputed.");
+                reLoadUIfunc(loadUIIdFunc());
+            }
+        });
+    }, 10000)
+   
+    
 }
 
 /* above is global functions */

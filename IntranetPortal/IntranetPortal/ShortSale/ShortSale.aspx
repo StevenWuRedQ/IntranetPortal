@@ -568,6 +568,7 @@
     <uc1:SelectPartyUC runat="server" ID="SelectPartyUC" />
     <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
     <input type="hidden" id="CaseData" />
+    <input type="hidden" id="LastUpdateTime" />
     <uc1:Common runat="server" ID="Common" />
     <script type="text/javascript">
         AllContact = <%= GetAllContact()%>
@@ -591,7 +592,11 @@
         }
     </script>
     <script type="text/javascript">
-
+      
+        function GetLasTUpDateURL()
+        {
+            return 'ShortSaleServices.svc/GetCaseLastUpDateTime?caseId=' + window.caseId
+        }
         function NGGetShortSale(caseId) {
             $(document).ready(function () {
                 angular.element(document.getElementById('ShortSaleCtrl')).scope().GetShortSaleCase(caseId);
@@ -818,6 +823,8 @@
                                 $scope.ReloadedData = {};
                                 $scope.SsCase.LeadsInfo = data;
                                 $('#CaseData').val(JSON.stringify($scope.SsCase))
+                                ScopeSetLastUpdateTime(GetLasTUpDateURL())
+                                
                             }).error(function (data, status, headers, config) {
                                 alert("Get Short sale Leads failed BBLE =" + $scope.SsCase.BBLE + " error : " + JSON.stringify(data));
                             });
@@ -827,6 +834,11 @@
                         alert("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
                     });
             }
+            $scope.GetLoadId = function ()
+            {
+                return window.caseId;
+            }
+            ScopeDateChangedByOther(GetLasTUpDateURL, $scope.GetShortSaleCase, $scope.GetLoadId);
             $scope.NGAddArraryItem = function (item, model, popup) {
                 if (model) {
                     var array = $scope.$eval(model);
@@ -855,7 +867,8 @@
                             } else {
                                 alert("Save Successed !");
                             }
-                            //
+                            
+                            ScopeSetLastUpdateTime(GetLasTUpDateURL());
                             ResetCaseDataChange();
                         }).
                         error(function (data, status) {

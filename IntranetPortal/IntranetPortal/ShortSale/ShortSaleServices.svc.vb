@@ -38,7 +38,13 @@ Public Class ShortSaleServices
     End Function
 
     <OperationContract()>
-   <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    Public Function GetCaseLastUpDateTime(caseId As Integer) As Channels.Message
+        Dim ssCase = ShortSaleCase.GetCase(caseId)
+        Return ssCase.UpdateDate.ToJson
+    End Function
+    <OperationContract()>
+    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetCaseByBBLE(bble As String) As Channels.Message
         Return ShortSale.ShortSaleCase.GetCaseByBBLE(bble).ToJson
     End Function

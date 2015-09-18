@@ -593,6 +593,17 @@
         <FontClass>
           <![CDATA[<i class="fa fa-search-plus"></i>]]>
         </FontClass>
+        <Items>
+          <PortalNavItem Name="AgentNewLeads" Text="New Leads" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
+            <FontClass>
+              <![CDATA[<i class="fa fa-star"></i>]]>
+            </FontClass>
+            <FrontButton>
+              <![CDATA[<a href="/LeadAgent.aspx?c=Create" class="add-button" target="contentUrlPane"><i class="fa fa-plus-circle"></i></a>]]>
+            </FrontButton>
+          </PortalNavItem>
+        </Items>
+      
       </PortalNavItem>
       <PortalNavItem Name="DOBComplains" Text="DOB Complaints" NavigationUrl="/Complaints/ComplainsMng.aspx" ShowAmount="false">
         <FontClass>
