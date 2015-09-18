@@ -315,7 +315,7 @@
         <option value="TRs">TR's</option>
     </select></h4>
     <div class="ss_border">
-        <ul class="ss_form_box clearfix" ng-show="CSCase.CSCase.InitialIntake.ReportsDropDown=='Asbestos'">
+        <ul class="ss_form_box clearfix nga-fast nga-slide-left" ng-show="CSCase.CSCase.InitialIntake.ReportsDropDown=='Asbestos'">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Requested</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.InitialIntake.AsbestosRequestDate" ss-date>
@@ -333,7 +333,7 @@
                 <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-AsbestosUpload" file-model="CSCase.CSCase.InitialIntake.AsbestosUpload"></pt-file>
             </li>
         </ul>
-        <ul class="ss_form_box clearfix" ng-show="CSCase.CSCase.InitialIntake.ReportsDropDown=='Survey'">
+        <ul class="ss_form_box clearfix nga-fast nga-slide-left" ng-show="CSCase.CSCase.InitialIntake.ReportsDropDown=='Survey'">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Requested</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.InitialIntake.SurveyRequestDate" ss-date>
@@ -351,7 +351,7 @@
                 <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-SurveyUpload" file-model="CSCase.CSCase.InitialIntake.SurveyUpload"></pt-file>
             </li>
         </ul>
-        <ul class="ss_form_box clearfix" ng-show="CSCase.CSCase.InitialIntake.ReportsDropDown=='Exhibit'">
+        <ul class="ss_form_box clearfix nga-fast nga-slide-left" ng-show="CSCase.CSCase.InitialIntake.ReportsDropDown=='Exhibit'">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Requested</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.InitialIntake.ExhibitRequestDate" ss-date>
@@ -370,7 +370,7 @@
                 <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-ExhibitUpload" file-model="CSCase.CSCase.InitialIntake.ExhibitUpload"></pt-file>
             </li>
         </ul>
-        <ul class="ss_form_box clearfix" ng-show="CSCase.CSCase.InitialIntake.ReportsDropDown=='TRs'">
+        <ul class="ss_form_box clearfix nga-fast nga-slide-left" ng-show="CSCase.CSCase.InitialIntake.ReportsDropDown=='TRs'">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Requested</label>
                 <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.InitialIntake.TRsRequestDate" ss-date>

@@ -26,10 +26,17 @@
                         <th></th>
                     </tr>
                     <tr class="text-left" ng-repeat="file in fileModel|filter: {folder: currentFolder} ">
-                        <td><a style="font-size:12px;font-weight:bold" ng-href="{{ptFileService.makePreviewUrl(file.path)}}" target="_blank">{{file.name?file.name:ptFileService.getFileName(file.path)}}</a></td>
+                        <td>
+                            <!--<img src="{{ptFileService.makePreviewUrl(file.path)}}" width="50" height="50"/>-->
+                            <a style="font-size:12px;font-weight:bold" ng-href="{{ptFileService.makePreviewUrl(file.path)}}" target="_blank">{{file.name?file.name:ptFileService.getFileName(file.path)}}</a>&nbsp;
+                            <i class="fa fa fa-pencil icon_btn text-danger tooltip-examples" title="Modify file name" ng-click="modifyName(fileModel, $index)"></i>
+                        </td>
                         <td ng-repeat="col in columns"><input class="form-control" type="text" ng-model="file[col]" /></td>
                         <td>{{file.uploadTime | date:'MM/dd/yyyy'}}</td>
-                        <td><i class="fa fa-remove icon_btn text-danger" ng-click="ptCom.arrayRemove(fileModel, $index, true)"></i></td>
+                        <td>
+                            <i class="fa fa-remove icon_btn text-danger tooltip-examples" title="Delete" ng-click="ptCom.arrayRemove(fileModel, $index, true)" ></i>
+                            
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -67,12 +74,31 @@
         bindingOptions:{ visible: 'NewFolderPop' },
         }">
         <div data-options="dxTemplate:{ name: 'content' }">
-            <h5>FolderName</h5>
-            <input ng-model="NewFolderName" />
+            <h5>New Folder Name</h5>
+            <input class="form-control" ng-model="NewFolderName" />
             <hr>
             <div class="pull-right">
                 <button class="btn btn-danger" ng-click="toggleNewFilePop()">Cancel</button>
                 <button class="btn btn-success" ng-click="newFolderPopSave()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div dx-popup="{
+        height: 200,
+        width: 600,
+        showTitle: false,
+        dragEnabled: true,
+        shading: true,
+        bindingOptions:{ visible: 'ModifyNamePop' },
+        }">
+        <div data-options="dxTemplate:{ name: 'content' }">
+            <h5>Modify File Name </h5>
+            <input class="form-control" ng-model="NewFileName" />
+            <hr>
+            <div class="pull-right">
+                <button class="btn btn-danger" ng-click="onModifyNamePopClose()">Cancel</button>
+                <button class="btn btn-success" ng-click="onModifyNamePopSave()">Save</button>
             </div>
         </div>
     </div>

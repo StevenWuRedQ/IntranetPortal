@@ -256,7 +256,7 @@ portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileServ
             scope.fileChoosed = false;
             scope.loading = false;
             scope.delFile = function () {
-                scope.fileModel = '';
+                scope.fileModel = null;
             }
             scope.delChoosed = function () {
                 scope.File = null;
@@ -302,6 +302,38 @@ portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileServ
                     });
                 }
             });
+
+            scope.modifyName = function (mdl) {
+                if (mdl) {
+                    scope.ModifyNamePop = true;
+                    scope.NewFileName = mdl.name ? mdl.name : '';
+                    scope.editingFileModel = mdl;
+                    scope.editingFileExt = ptFileService.getFileExt(scope.NewFileName);
+                }
+
+            }
+            scope.onModifyNamePopClose = function () {
+                scope.NewFileName = '';
+                scope.editingFileModel = null;
+                scope.editingFileExt = '';
+                scope.ModifyNamePop = false;
+                
+            }
+            scope.onModifyNamePopSave = function () {
+                if (scope.NewFileName) {
+                    if (scope.NewFileName.indexOf('.') > -1) {
+                        scope.editingFileModel.name = scope.NewFileName;
+                    } else {
+                        scope.editingFileModel.name = scope.NewFileName + '.' + scope.editingFileExt;
+                    }
+                }
+                scope.editingFileModel = null;
+                scope.editingFileExt = '';
+                scope.ModifyNamePop = false;
+                
+            }
+
+
         }
     }
 }]);
@@ -493,6 +525,37 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                     })
                 }
             }
+            scope.modifyName = function (mdl, indx) {
+                if (mdl[indx]) {
+                    scope.ModifyNamePop = true;
+                    scope.NewFileName = mdl[indx].name ? mdl[indx].name : '';
+                    scope.editingFileModel = mdl;
+                    scope.editingIndx = indx;
+                    scope.editingFileExt = ptFileService.getFileExt(scope.NewFileName);
+                }
+
+            }
+            scope.onModifyNamePopClose = function () {
+                scope.NewFileName = '';
+                scope.editingFileModel = null;
+                scope.editingIndx = null;
+                scope.ModifyNamePop = false;
+                scope.editingFileExt = '';
+            }
+            scope.onModifyNamePopSave = function () {
+                if (scope.NewFileName) {
+                    if (scope.NewFileName.indexOf('.') > -1) {
+                        scope.editingFileModel[scope.editingIndx].name = scope.NewFileName;
+                    } else {
+                        scope.editingFileModel[scope.editingIndx].name = scope.NewFileName + '.' + scope.editingFileExt;
+                    }
+                }
+                scope.editingFileModel = null;
+                scope.editingIndx = null;
+                scope.ModifyNamePop = false;
+                scope.editingFileExt = '';
+            }
+
 
         }
 

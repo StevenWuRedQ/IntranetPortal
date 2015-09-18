@@ -397,7 +397,7 @@ app.service('ptFileService', function () {
     }
 
     this.getFileExt = function (fullPath) {
-        if (fullPath) {
+        if (fullPath && fullPath.indexOf('.') > -1) {
             var exts = fullPath.split('.');
             return exts[exts.length - 1].toLowerCase();
         }
@@ -408,7 +408,7 @@ app.service('ptFileService', function () {
         if (fullPath) {
             var paths = fullPath.split('/');
             var folderName = paths[paths.length - 2];
-            var topFolders = ['Construction', ];
+            var topFolders = ['Construction', 'Title'];
             if (topFolders.indexOf(folderName) < 0) {
                 return folderName;
             } else {

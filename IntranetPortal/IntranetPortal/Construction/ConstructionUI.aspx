@@ -135,9 +135,8 @@
                                     <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
                                 </div>
                             </div>
-
+                             <div id="ConstructionCtrl_loadPanel" dx-load-panel="{message:'uploading..', showIndicator: true,  position:{of: '#ConstructionCtrl'}, bindingOptions:{ visible: 'panelLoading' }}"></div>
                         </div>
-
                         <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
                             HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true" CloseAction="CloseButton"
                             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -159,6 +158,7 @@
                             <ClientSideEvents CloseUp="function(s,e){}" />
                         </dx:ASPxPopupControl>
                         <uc1:SendMail runat="server" ID="SendMail" />
+                       
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
@@ -223,7 +223,7 @@
                                     angular.element(document.getElementById('ConstructionCtrl')).scope().ChangeStatus(
                                         function () {
                                             alert("Success");
-                                            if (typeof gridTrackingClient != "undefined") {                                                
+                                            if (typeof gridTrackingClient != "undefined") {
                                                 gridTrackingClient.Refresh();
                                             }
 
@@ -355,17 +355,20 @@
             }
 
             $scope.init = function (bble) {
-
-                bble = bble.trim();
+                $scope.startLoading();
+                bble = bble.trim();                
                 $scope.reload();
+                
                 ptConstructionService.getConstructionCases(bble, function (res) {
                     ptCom.nullToUndefined(res);
                     $.extend(true, $scope.CSCase, res);
                     $scope.initWatchedModel()
+                    
                 });
 
                 ptShortsSaleService.getShortSaleCaseByBBLE(bble, function (res) {
                     $scope.SsCase = res;
+                    $scope.stopLoading();
                 });
 
                 ptLeadsService.getLeadsByBBLE(bble, function (res) {
@@ -378,9 +381,8 @@
                 })
             }
 
-            
-            // Status change function -- Chris
-            $scope.ChangeStatus = function ( scuessfunc, status) {              
+            /* Status change function -- Chris */
+            $scope.ChangeStatus = function (scuessfunc, status) {
 
                 $http.post('/api/ConstructionCases/ChangeStatus/' + leadsInfoBBLE, status).
                         success(function () {
@@ -394,7 +396,7 @@
                             alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                         });
             }
-            //end status change function
+            /* end status change function */
 
 
             $scope.saveCSCase = function () {
@@ -427,7 +429,7 @@
                 if (newVal) {
                     if ($scope.CSCase.CSCase.Utilities.Company.indexOf('Energy Service') < 0) {
                         $scope.CSCase.CSCase.Utilities.Company.push('Energy Service');
-                        $scope.ReloadedData.EnergyService_Collapsed = true;
+                        $scope.ReloadedData.EnergyService_Collapsed = false;
                     }
                 } else {
                     var index;
@@ -436,14 +438,14 @@
 
 
             });
-            /* END multiple company selection */
+            /* end multiple company selection */
 
             /* reminder */
             $scope.sendNotice = function (id, name) {
                 // TODO
                 var confirmed = confirm("Send Intake Sheet To " + name + " ?");
             }
-            /* END reminder */
+            /* end reminder */
 
             /* comments */
             $scope.showPopover = function (e) {
@@ -462,14 +464,14 @@
                 $scope.addComment(comment);
                 $scope.addCommentTxt = '';
             }
-            /* END comments */
+            /* end comments */
 
             /* active tab */
             $scope.activeTab = 'CSInitialIntake';
             $scope.updateActive = function (id) {
                 $scope.activeTab = id;
             }
-            /* END active tab */
+            /* end active tab */
 
             /* highlight */
             $scope.highlights = [
@@ -521,7 +523,7 @@
                 if (res) AddActivityLog(res);
             }
 
-            /* END highlight */
+            /* end highlight */
 
 
             /* Popup */
@@ -545,9 +547,9 @@
             $scope.HeaderEditing = false;
             $scope.toggleHeaderEditing = function (open) {
                 $scope.HeaderEditing = !$scope.HeaderEditing;
-                if(open) $("#ConstructionTitleInput").focus();
+                if (open) $("#ConstructionTitleInput").focus();
             }
-            /* END header editing */
+            /* end header editing */
 
             /* dob fetch */
             $scope.fetchDOBViolations = function () {
@@ -607,8 +609,22 @@
 
                 })
             }
+            /* end dob fetch */
 
-            /* END dob fetch */
+            /* loading panel */
+            $scope.panelLoading = false;
+            $scope.toggleLoading = function () {
+                $scope.panelLoading = !$scope.panelLoading;
+            }
+            $scope.startLoading = function () {
+                $scope.panelLoading = true;
+            }
+            $scope.stopLoading = function () {
+                $timeout(function () {
+                    $scope.panelLoading = false;
+                });
+            }
+            /* end loading panel*/
         });
     </script>
 

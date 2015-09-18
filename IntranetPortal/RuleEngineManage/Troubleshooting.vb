@@ -790,11 +790,8 @@ Public Class Troubleshooting
 
     End Sub
 
-    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
-        Dim file = TextBox5.Text.Trim
-        Dim BBLE = txtBBLE.Text.Trim
-
-        If Not String.IsNullOrEmpty(file) Then
+    Private Function uploadActivity(bble As String, file As String) As String
+        If Not String.IsNullOrEmpty(file) And Not String.IsNullOrEmpty(bble) Then
             Dim data = LoadDataFromExcel(file)
             Dim logs = From l In data.Tables
                        Where l.TableName = "log" Select l
@@ -826,14 +823,28 @@ Public Class Troubleshooting
                             ename = "Jamie Ventura"
                             eid = 26
                     End Select
-
-                    LeadsActivityLog.AddActivityLog(logDate, log, BBLE, LeadsActivityLog.LogCategory.Construction.ToString, eid, ename)
-                    ' TextBox4.AppendText(String.Format("{0}:{1}:{2}", vdate, ename, log))
+                    LeadsActivityLog.AddActivityLog(logDate, log, bble, LeadsActivityLog.LogCategory.Construction.ToString, eid, ename)
                     TextBox4.AppendText(logDate)
                 End If
             Next
-            TextBox4.AppendText("Success!")
+            Return String.Format("{0}: {1}: is finished.", bble, file)
+        Else
+            Return "Information Missing"
         End If
+    End Function
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
+        Dim file = TextBox5.Text.Trim
+        Dim BBLE = txtBBLE.Text.Trim
+        TextBox4.AppendText(uploadActivity(BBLE, file))
     End Sub
 
+    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles("D:\data\")
+            ' TextBox4.AppendText(Path.GetFileNameWithoutExtension(foundFile))
+            Dim bble = Path.GetFileNameWithoutExtension(foundFile).Trim
+            Dim file = Path.GetFileName(foundFile).Trim
+            TextBox4.AppendText(bble & "start!")
+            uploadActivity(bble, file)
+        Next
+    End Sub
 End Class

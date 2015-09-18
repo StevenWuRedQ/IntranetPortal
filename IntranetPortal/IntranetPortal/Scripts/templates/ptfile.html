@@ -1,7 +1,7 @@
 ﻿<div>
     <div style="margin: 2px" ng-show="fileModel">
-        <a style="font-size:16px;" ng-href="{{ptFileService.makePreviewUrl(fileModel)}}" target="_blank">{{ptFileService.getFileName(fileModel)}}</a>
-        &nbsp;<i class="fa fa-remove text-danger" ng-click="delFile()"></i>
+        <a style="font-size:16px;" ng-href="{{ptFileService.makePreviewUrl(fileModel)}}" target="_blank">{{ptFileService.getFileName(fileModel)}}</a>&nbsp;        
+        <i class="fa fa-remove icon_btn text-danger tooltip-examples" title="Delete" ng-click="delFile()"></i>
     </div>
     <div style="margin: 2px" ng-show="!fileModel">
         <div>
@@ -14,5 +14,24 @@
             </span>
         </div>
     </div>
-   
+
+    <div dx-popup="{
+        height: 200,
+        width: 600,
+        showTitle: false,
+        dragEnabled: true,
+        shading: true,
+        bindingOptions:{ visible: 'ModifyNamePop' },
+        }">
+        <div data-options="dxTemplate:{ name: 'content' }">
+            <h5>Modify File Name </h5>
+            <input class="form-control" ng-model="NewFileName" />
+            <hr>
+            <div class="pull-right">
+                <button class="btn btn-danger" ng-click="onModifyNamePopClose()">Cancel</button>
+                <button class="btn btn-success" ng-click="onModifyNamePopSave()">Save</button>
+            </div>
+        </div>
+    </div>
+
 </div>
