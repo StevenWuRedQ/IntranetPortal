@@ -1052,7 +1052,7 @@ Public Class DataWCFService
                                                UpdateHomeOwnerApi(state.OrderId)
                                                'UserMessage.AddNewMessage(GetCurrentIdentityName, "Refresh", "HomeOwner info is ready. BBLE: " & state.BBLE, state.BBLE)
                                            Catch ex As Exception
-                                               UserMessage.AddNewMessage(userName, "Error", "Error happened on refresh. Message: " & ex.Message, state.BBLE, DateTime.Now, GetCurrentIdentityName)
+                                               UserMessage.AddNewMessage(userName, "Error", "Error happened on refresh. Message: " & ex.Message, state.BBLE, DateTime.Now, GetCurrentIdentityName, Nothing)
                                                UpdateHomeOwnerApi(state.OrderId, "Error")
                                            End Try
                                        End Sub
