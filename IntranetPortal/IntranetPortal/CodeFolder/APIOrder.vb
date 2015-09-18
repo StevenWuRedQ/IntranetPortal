@@ -71,7 +71,7 @@
                 If apiOrder.Status = OrderStatus.Complete AndAlso status <> "Error" Then
                     Dim ld = LeadsInfo.GetInstance(apiOrder.BBLE)
                     If ld IsNot Nothing Then
-                        UserMessage.AddNewMessage(apiOrder.Orderby, "Property Data is ready", String.Format("Property ({0}) Data is ready. Please check.", ld.LeadsName), apiOrder.BBLE, DateTime.Now, "Portal")
+                        UserMessage.AddNewMessage(apiOrder.Orderby, "Property Data is ready", String.Format("Property ({0}) Data is ready. Please check.", ld.LeadsName), apiOrder.BBLE, DateTime.Now, "Portal", Nothing)
                     End If
                 End If
 
