@@ -18,10 +18,6 @@
     End Function
 
     Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String, Optional msgUrl As String = Nothing)
-        Return AddNewMessage(userName, title, message, bble, DateTime.Now, msgUrl)
-    End Function
-
-    Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String, notifyTime As DateTime, Optional msgUrl As String = Nothing)
         Dim createBy = ""
         If HttpContext.Current IsNot Nothing AndAlso HttpContext.Current.User IsNot Nothing AndAlso HttpContext.Current.User.Identity IsNot Nothing Then
             createBy = HttpContext.Current.User.Identity.Name
@@ -29,8 +25,19 @@
             createBy = "Portal"
         End If
 
-        Return AddNewMessage(userName, title, message, bble, notifyTime, createBy, msgUrl)
+        Return AddNewMessage(userName, title, message, bble, DateTime.Now, createBy, msgUrl)
     End Function
+
+    'Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String, notifyTime As DateTime)
+    '    Dim createBy = ""
+    '    If HttpContext.Current IsNot Nothing AndAlso HttpContext.Current.User IsNot Nothing AndAlso HttpContext.Current.User.Identity IsNot Nothing Then
+    '        createBy = HttpContext.Current.User.Identity.Name
+    '    Else
+    '        createBy = "Portal"
+    '    End If
+
+    '    Return AddNewMessage(userName, title, message, bble, notifyTime, createBy, Nothing)
+    'End Function
 
     Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String, notifyTime As DateTime, createBy As String, Optional msgUrl As String = Nothing)
         Dim msg As New UserMessage
@@ -58,8 +65,6 @@
             Return False
         End Try
     End Function
-
-
 
     Public Shared Function ReadMsg(userName As String, msgId As Integer) As Boolean
         Using context As New Entities
