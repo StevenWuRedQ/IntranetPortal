@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class ImportAgentData
-
+    
     '''<summary>
     '''form1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
+    
     '''<summary>
     '''cbAgents control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbAgents As Global.DevExpress.Web.ASPxComboBox
-
+    
     '''<summary>
     '''btnLoad control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnLoad As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''gridLead control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridLead As Global.DevExpress.Web.ASPxGridView
-
+    
     '''<summary>
     '''cbImportAgent control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbImportAgent As Global.DevExpress.Web.ASPxComboBox
-
+    
     '''<summary>
     '''btnImport control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnImport As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''chkReplace control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents chkReplace As Global.DevExpress.Web.ASPxCheckBox
-
+    
     '''<summary>
     '''lblMsg control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMsg As Global.DevExpress.Web.ASPxLabel
-
+    
     '''<summary>
     '''ImportJson control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ImportJson As Global.DevExpress.Web.ASPxTextBox
-
+    
     '''<summary>
     '''LoadImportJson control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents LoadImportJson As Global.System.Web.UI.WebControls.Button
-
+    
     '''<summary>
     '''Import2PaddingBtn control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Import2PaddingBtn As Global.System.Web.UI.WebControls.Button
-
+    
     '''<summary>
     '''cbNotShowExist control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbNotShowExist As Global.DevExpress.Web.ASPxCheckBox
-
+    
     '''<summary>
     '''ImportStauts control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ImportStauts As Global.DevExpress.Web.ASPxLabel
-
+    
     '''<summary>
     '''Import2PaddingAssginGrid control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Import2PaddingAssginGrid As Global.DevExpress.Web.ASPxGridView
-
+    
     '''<summary>
     '''cbEmpFrom control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbEmpFrom As Global.DevExpress.Web.ASPxComboBox
-
+    
     '''<summary>
     '''btnLoad2 control.
     '''</summary>
@@ -156,7 +156,16 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnLoad2 As Global.DevExpress.Web.ASPxButton
-
+    
+    '''<summary>
+    '''cbLeadsCropOwned control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbLeadsCropOwned As Global.DevExpress.Web.ASPxCheckBox
+    
     '''<summary>
     '''BBLEList control.
     '''</summary>
@@ -165,7 +174,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents BBLEList As Global.System.Web.UI.WebControls.TextBox
-
+    
     '''<summary>
     '''cbStatusFrom control.
     '''</summary>
@@ -174,7 +183,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbStatusFrom As Global.DevExpress.Web.ASPxComboBox
-
+    
     '''<summary>
     '''txtLeadsAmount control.
     '''</summary>
@@ -183,7 +192,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtLeadsAmount As Global.DevExpress.Web.ASPxTextBox
-
+    
     '''<summary>
     '''gridAgentLeads control.
     '''</summary>
@@ -192,7 +201,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridAgentLeads As Global.DevExpress.Web.ASPxGridView
-
+    
     '''<summary>
     '''cbEmpTo control.
     '''</summary>
@@ -201,7 +210,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbEmpTo As Global.DevExpress.Web.ASPxComboBox
-
+    
     '''<summary>
     '''cbStatusToChange control.
     '''</summary>
@@ -210,7 +219,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbStatusToChange As Global.DevExpress.Web.ASPxComboBox
-
+    
     '''<summary>
     '''deCallBackTime control.
     '''</summary>
@@ -219,7 +228,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents deCallBackTime As Global.DevExpress.Web.ASPxDateEdit
-
+    
     '''<summary>
     '''btnTransfer control.
     '''</summary>
@@ -228,7 +237,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnTransfer As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''ASPxLabel2 control.
     '''</summary>
@@ -237,7 +246,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxLabel2 As Global.DevExpress.Web.ASPxLabel
-
+    
     '''<summary>
     '''cbKeepStatus control.
     '''</summary>
@@ -246,7 +255,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbKeepStatus As Global.DevExpress.Web.ASPxCheckBox
-
+    
     '''<summary>
     '''LoadLastLog control.
     '''</summary>
@@ -255,7 +264,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents LoadLastLog As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''exportLastLog control.
     '''</summary>
@@ -264,7 +273,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents exportLastLog As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''gridLastLogView control.
     '''</summary>
@@ -273,7 +282,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridLastLogView As Global.DevExpress.Web.ASPxGridView
-
+    
     '''<summary>
     '''ASPxLoadLastLogExporter control.
     '''</summary>
@@ -282,7 +291,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxLoadLastLogExporter As Global.DevExpress.Web.ASPxGridViewExporter
-
+    
     '''<summary>
     '''cbLeadsType control.
     '''</summary>
@@ -291,7 +300,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbLeadsType As Global.DevExpress.Web.ASPxComboBox
-
+    
     '''<summary>
     '''ASPxButton1 control.
     '''</summary>
@@ -300,7 +309,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''gridNewLeads control.
     '''</summary>
@@ -309,7 +318,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridNewLeads As Global.DevExpress.Web.ASPxGridView
-
+    
     '''<summary>
     '''ASPxButton2 control.
     '''</summary>
@@ -318,7 +327,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''ASPxLabel1 control.
     '''</summary>
@@ -327,7 +336,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxLabel1 As Global.DevExpress.Web.ASPxLabel
-
+    
     '''<summary>
     '''RefreshBar control.
     '''</summary>
@@ -336,7 +345,7 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RefreshBar As Global.DevExpress.Web.ASPxProgressBar
-
+    
     '''<summary>
     '''checkProgress control.
     '''</summary>

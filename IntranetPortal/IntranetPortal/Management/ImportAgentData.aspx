@@ -109,6 +109,15 @@
                             </tr>
                             <tr>
                                 <td style="width: 80px">
+                                    <label>Crop Owned:</label>
+                                </td>
+                                <td style="width: 150px;">
+                                    <dx:ASPxCheckBox ID="cbLeadsCropOwned" runat="server"></dx:ASPxCheckBox>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="width: 80px">
                                     <label>BBLEs:</label>
                                 </td>
                                 <td style="width: 150px;">

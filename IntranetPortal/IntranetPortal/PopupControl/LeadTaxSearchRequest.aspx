@@ -85,17 +85,27 @@
                                 </li>
 
 
-                              
+
 
                             </ul>
                             <h5 class="ss_form_title ">ECB Violation  </h5>
                             <div class="ss_border">
                                 <ul class="ss_form_box clearfix">
-                                      <li class="ss_form_item ">
-                                    <label class="ss_form_input_title">Dob Websites</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.dobWebsites" /></li>
-                                <li class="ss_form_item ">
-                                    <label class="ss_form_input_title">Judgement Search</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.judgementSearch" /></li>
+                                    <li class="ss_form_item ">
+                                        <label class="ss_form_input_title">Dob Websites</label>
+                                        <input class="ss_form_input" ng-model="DocSearch.LeadResearch.dobWebsites" money-mask />
+
+                                    </li>
+                                    <li class="ss_form_item ">
+                                        <label class="ss_form_input_title">Judgement Search</label>
+                                        <input class="ss_form_input" ng-model="DocSearch.LeadResearch.judgementSearch" money-mask />
+                                    </li>
+                                    <li class="ss_form_item ">
+                                        <label class="ss_form_input_title">Judgement Doc</label>
+                                        <pt-file file-bble="DocSearch.BBLE" file-id="DocSearch.LeadResearch.judgementSearchDocId" file-model="DocSearch.LeadResearch.judgementSearchDoc"></pt-file>
+                                    </li>
                                 </ul>
+
                             </div>
                         </div>
                         <div class="ss_form">
@@ -111,7 +121,10 @@
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">Fannie</label><pt-radio name="liens_info_fannie" model="DocSearch.LeadResearch.fannie"></pt-radio></li>
                                     <li class="ss_form_item ">
-                                        <label class="ss_form_input_title">FHA</label><pt-radio name="liens_info_fha" model="DocSearch.LeadResearch.fha"></pt-radio></li>
+                                        <label class="ss_form_input_title">FHA</label>
+                                        <pt-radio name="liens_info_fha" model="DocSearch.LeadResearch.fha">
+                                                                                      </pt-radio>
+                                    </li>
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">Mortgage Amount</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.mortgageAmount" money-mask /></li>
                                     <li class="ss_form_item ">
@@ -186,52 +199,52 @@
 
 
 
-    <script>
-        var portalApp = angular.module('PortalApp');
+        <script>
+            var portalApp = angular.module('PortalApp');
 
-        portalApp.controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
-            $scope.ptContactServices = ptContactServices;
-            leadsInfoBBLE = $('#BBLE').val();
-            if (!leadsInfoBBLE) {
-                alert("Can not load page without BBLE !")
-                return;
-            }
+            portalApp.controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
+                $scope.ptContactServices = ptContactServices;
+                leadsInfoBBLE = $('#BBLE').val();
+                if (!leadsInfoBBLE) {
+                    alert("Can not load page without BBLE !")
+                    return;
+                }
 
-            $http.get("/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + leadsInfoBBLE).
-            success(function (data, status, headers, config) {
-                $scope.LeadsInfo = data;
+                $http.get("/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + leadsInfoBBLE).
+                success(function (data, status, headers, config) {
+                    $scope.LeadsInfo = data;
 
-            }).error(function (data, status, headers, config) {
-                alert("Get Leads Info failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
-            });
-
-            $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
-            success(function (data, status, headers, config) {
-                $scope.DocSearch = data;
-                $http.get('/Services/TeamService.svc/GetTeam?userName=' + $scope.DocSearch.CreateBy).success(function (data) {
-                    $scope.DocSearch.team = data;
+                }).error(function (data, status, headers, config) {
+                    alert("Get Leads Info failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
                 });
-            }).error(function (data, status, headers, config) {
-                alert("Get Leads Info failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
-            });
-            $scope.SearchComplete = function () {
-                $scope.DocSearch.Status = 1;
-                $.ajax({
-                    type: "PUT",
-                    url: '/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE,
-                    data: JSON.stringify($scope.DocSearch),
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    success: function (data) {
 
-                        alert('Lead info search completed !');
-                    },
-                    error: function (data) {
-                        alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-                    }
-
+                $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
+                success(function (data, status, headers, config) {
+                    $scope.DocSearch = data;
+                    $http.get('/Services/TeamService.svc/GetTeam?userName=' + $scope.DocSearch.CreateBy).success(function (data) {
+                        $scope.DocSearch.team = data;
+                    });
+                }).error(function (data, status, headers, config) {
+                    alert("Get Leads Info failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
                 });
-            }
-        });
-    </script>
+                $scope.SearchComplete = function () {
+                    $scope.DocSearch.Status = 1;
+                    $.ajax({
+                        type: "PUT",
+                        url: '/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE,
+                        data: JSON.stringify($scope.DocSearch),
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function (data) {
+
+                            alert('Lead info search completed !');
+                        },
+                        error: function (data) {
+                            alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
+                        }
+
+                    });
+                }
+            });
+        </script>
 </asp:Content>

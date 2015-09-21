@@ -21,23 +21,23 @@
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Deed</label>
-                    <pt-file file-bble="" file-id="DocumentsReceivedOn_Deed0" file-model="DocSearch.LeadResearch.Deed"></pt-file>
+                    <pt-file file-bble="DocSearch.BBLE" file-id="DocumentsReceivedOn_Deed0" file-model="DocSearch.LeadResearch.Deed"></pt-file>
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Deed Acris Document</label>
-                    <pt-file file-bble="" file-id="DocumentsReceivedOn_DeedAcrisDocument0" file-model="DocSearch.LeadResearch.DeedAcrisDocument"></pt-file>
+                    <pt-file file-bble="DocSearch.BBLE" file-id="DocumentsReceivedOn_DeedAcrisDocument0" file-model="DocSearch.LeadResearch.DeedAcrisDocument"></pt-file>
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Memorandum of Contract</label>
-                    <pt-file file-bble="" file-id="DocumentsReceivedOn_MemorandumofContract0" file-model="DocSearch.LeadResearch.MemorandumofContract"></pt-file>
+                    <pt-file file-bble="DocSearch.BBLE" file-id="DocumentsReceivedOn_MemorandumofContract0" file-model="DocSearch.LeadResearch.MemorandumofContract"></pt-file>
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Memorandum of Contract Acris Docs</label>
-                    <pt-file file-bble="" file-id="DocumentsReceivedOn_MemorandumofContractAcrisDocs0" file-model="DocSearch.LeadResearch.MemorandumofContractAcrisDocs"></pt-file>
+                    <pt-file file-bble="DocSearch.BBLE" file-id="DocumentsReceivedOn_MemorandumofContractAcrisDocs0" file-model="DocSearch.LeadResearch.MemorandumofContractAcrisDocs"></pt-file>
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Contract of Sales</label>
-                    <pt-file file-bble="" file-id="DocumentsReceivedOn_ContractofSales0" file-model="DocSearch.LeadResearch.ContractofSales"></pt-file>
+                    <pt-file file-bble="DocSearch.BBLE" file-id="DocumentsReceivedOn_ContractofSales0" file-model="DocSearch.LeadResearch.ContractofSales"></pt-file>
                 </li>
                 <li class="ss_form_item  ss_form_item_line">
                     <label class="ss_form_input_title ">Notes</label>
@@ -114,7 +114,7 @@
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Recorded File</label>
-                    <pt-file file-bble="" file-id="RecordDocuments_RecordedFile0" file-model="DocSearch.LeadResearch.RecordedFile"></pt-file>
+                    <pt-file file-bble="DocSearch.BBLE" file-id="RecordDocuments_RecordedFile0" file-model="DocSearch.LeadResearch.RecordedFile"></pt-file>
                 </li>
             </ul>
         </div>

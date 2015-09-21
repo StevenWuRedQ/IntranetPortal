@@ -57,21 +57,30 @@ Public Class ImportAgentData
     Protected Sub btnLoad2_Click(sender As Object, e As EventArgs)
 
         Dim agent = cbEmpFrom.Text
+        Dim LoadLeads = New List(Of Lead)
         If Not String.IsNullOrEmpty(agent) Then
             Dim empId = CInt(cbEmpFrom.Value)
+
             If (String.IsNullOrEmpty(cbStatusFrom.Text)) Then
-                gridAgentLeads.DataSource = LoadAgentLeads(agent, empId)
+                LoadLeads = LoadAgentLeads(agent, empId)
             Else
 
-                gridAgentLeads.DataSource = LoadAgentLeads(agent, empId, ConvertLeadStatus(cbStatusFrom.Text))
+                LoadLeads = LoadAgentLeads(agent, empId, ConvertLeadStatus(cbStatusFrom.Text))
             End If
 
-            gridAgentLeads.DataBind()
+
+
         End If
         If (Not String.IsNullOrEmpty(BBLEList.Text)) Then
-            gridAgentLeads.DataSource = LoadBBLEsLeads(BBLEList.Text)
-            gridAgentLeads.DataBind()
+            LoadLeads = LoadBBLEsLeads(BBLEList.Text)
+
         End If
+
+        If (cbLeadsCropOwned.Checked) Then
+            LoadLeads = LoadAgentLeadsWithCorpOwned(LoadLeads)
+        End If
+        gridAgentLeads.DataSource = LoadLeads
+        gridAgentLeads.DataBind()
     End Sub
     Function LoadBBLEsLeads(json As String) As List(Of Lead)
         Dim BBLes = JArray.Parse(json).ToArray
@@ -100,6 +109,22 @@ Public Class ImportAgentData
     Function LoadAgentLeads(name As String, empId As Integer, Stauts As LeadStatus) As List(Of Lead)
         Return LoadAgentLeads(name, empId).Where(Function(l) l.Status = Stauts).ToList
     End Function
+
+    Function LoadAgentLeadsWithCorpOwned(ls As List(Of Lead)) As List(Of Lead)
+        Dim rls As List(Of Lead) = New List(Of Lead)
+        If (ls IsNot Nothing) Then
+            For Each l In ls
+                Dim li = LeadsInfo.GetInstance(l.BBLE)
+
+                If (Utility.IsCompany(li.Owner) Or Utility.IsCompany(li.CoOwner)) Then
+                    rls.Add(l)
+                End If
+
+            Next
+        End If
+        Return rls
+
+    End Function
     Protected Sub btnTransfer_Click(sender As Object, e As EventArgs)
         Using ctx As New Entities
             Dim agent = cbEmpFrom.Text
@@ -113,7 +138,6 @@ Public Class ImportAgentData
                     ASPxLabel2.Text = "Please select agent for transfer from."
                     Return
                 End If
-
 
             End If
 
@@ -150,6 +174,9 @@ Public Class ImportAgentData
                 lList = ctx.Leads.Where(Function(b) BBles.Contains(b.BBLE)).ToList
             End If
 
+            If (cbLeadsCropOwned.Checked) Then
+                lList = LoadAgentLeadsWithCorpOwned(lList)
+            End If
 
             For Each ld In lList
                 ld.EmployeeID = CInt(cbEmpTo.Value)

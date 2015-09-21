@@ -3556,6 +3556,7 @@
     <Content Include="Content\icons\dxicons.ttf" />
     <Content Include="Content\icons\dxicons.eot" />
     <Content Include="App_Data\DeedReversionTemplate.docx" />
+    <Content Include="SQL\SearchReslut.sql" />
     <Content Include="WebForm3.aspx" />
     <Content Include="App_Data\SpecificPerformanceComplaintTemplate.docx" />
     <Content Include="App_Data\QuietTitleComplantTemplate.docx" />

@@ -190,25 +190,53 @@ Partial Public Class Employee
     End Function
 
     Public Shared Function GetMyEmployees(userName As String) As List(Of Employee)
+
         Using ctx As New Entities
-            If Roles.IsUserInRole(userName, "Admin") Then
+
+            Dim roleNames = Core.PortalSettings.GetValue("LeadsViewableRoles").Split(";")
+
+            Dim myRoles = Roles.GetRolesForUser(userName)
+
+
+
+            If myRoles.Any(Function(r) roleNames.Contains(r)) Then
+
                 Return ctx.Employees.Where(Function(em) em.Active = True).OrderBy(Function(em) em.Name).ToList
+
             End If
+
+
 
             Dim emps As New List(Of Employee)
 
+
+
             For Each rl In Roles.GetRolesForUser(userName)
+
                 If rl.StartsWith("OfficeManager") Then
+
                     Dim dept = rl.Split("-")(1)
+
                     emps.AddRange(GetDeptUsersList(dept, True))
+
                 End If
+
             Next
+
+
+
             If Employee.HasSubordinates(userName) Then
+
                 emps.AddRange(Employee.GetManagedEmployeeList(userName))
+
             End If
 
+
+
             Return emps.Distinct(New EmployeeItemComparer()).OrderBy(Function(em) em.Name).ToList
+
         End Using
+
     End Function
 
     Public Shared Function GetControledDeptEmployees(userName As String) As String()

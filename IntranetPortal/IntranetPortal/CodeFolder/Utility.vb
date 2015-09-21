@@ -339,6 +339,9 @@ Public Class Utility
     End Function
 
     Public Shared Function IsCompany(name As String) As Boolean
+        If (String.IsNullOrEmpty(name)) Then
+            Return False
+        End If
         'regex match the comany like LLC Crop Etc. regex store in database
 
         Dim regexStr = Core.PortalSettings.GetValue("CompanyRegex")

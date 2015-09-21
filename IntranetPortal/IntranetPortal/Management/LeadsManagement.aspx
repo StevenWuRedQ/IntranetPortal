@@ -226,6 +226,9 @@
                                                 <%# String.Format("<span style=""font-weight: 900;"">{0}</span>-{1}", String.Format("{0} {1}", Eval("Number"), Eval("Street")).Trim, Eval("Owner"))%>
                                             </DataItemTemplate>
                                         </dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataColumn FieldName="ZipCode">
+                                            
+                                        </dx:GridViewDataColumn>
                                         <dx:GridViewDataTextColumn FieldName="Neighborhood" Width="80px" Caption="Neighbor"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataSpinEditColumn FieldName="NYCSqft" Width="60px" Caption="SQFT"></dx:GridViewDataSpinEditColumn>
                                         <dx:GridViewDataTextColumn FieldName="LotDem" Width="100px"></dx:GridViewDataTextColumn>
