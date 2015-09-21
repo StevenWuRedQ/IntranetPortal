@@ -391,7 +391,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload plumbers invoice</label>
-                <pt-file file-bble='CSCase.BBLE' file-id="CSCase_Utilities_MissingMeter_UploadPlumbersInvoice" file-model="CSCase.CSCase.InitialIntake.Utilities.MissingMeter_PlumbersInvoice"></pt-file>
+                <pt-file file-bble='CSCase.BBLE' file-id="CSCase_Utilities_MissingMeter_UploadPlumbersInvoice" file-model="CSCase.CSCase.Utilities.MissingMeter_PlumbersInvoice"></pt-file>
             </li>
         </ul>
         <div>

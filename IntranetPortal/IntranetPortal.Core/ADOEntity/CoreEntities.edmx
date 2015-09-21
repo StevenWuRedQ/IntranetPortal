@@ -107,6 +107,14 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Thumbnails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="content" Type="varbinary(max)" />
+          <Property Name="mime_type" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="TLOApiLogs">
           <Key>
             <PropertyRef Name="LogId" />
@@ -136,6 +144,7 @@
           <EntitySet Name="RecycleLeads" EntityType="Self.RecycleLeads" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpecialDays" EntityType="Self.SpecialDays" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SystemLogs" EntityType="Self.SystemLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Thumbnails" EntityType="Self.Thumbnails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TLOApiLogs" EntityType="Self.TLOApiLogs" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -167,6 +176,7 @@
           <EntitySet Name="PortalSettings" EntityType="IntranetPortal.Core.Model.PortalSetting" />
           <EntitySet Name="CommonDatas" EntityType="IntranetPortal.Core.Model.CommonData" />
           <EntitySet Name="Applications" EntityType="IntranetPortal.Core.Model.Application" />
+          <EntitySet Name="Thumbnails" EntityType="IntranetPortal.Core.Model.Thumbnail" />
         </EntityContainer>
         <EntityType Name="SpecialDay">
           <Key>
@@ -274,6 +284,14 @@
           <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Thumbnail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="content" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="mime_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -408,6 +426,15 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Thumbnails">
+            <EntityTypeMapping TypeName="IntranetPortal.Core.Model.Thumbnail">
+              <MappingFragment StoreEntitySet="Thumbnails">
+                <ScalarProperty Name="mime_type" ColumnName="mime_type" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

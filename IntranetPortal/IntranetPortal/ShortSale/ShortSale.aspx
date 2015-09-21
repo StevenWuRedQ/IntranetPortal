@@ -50,7 +50,7 @@
                             <uc1:ShortSaleCaseList runat="server" ID="ShortSaleCaseList" />
                         </dx:SplitterContentControl>
                     </ContentCollection>
-                </dx:SplitterPane>                
+                </dx:SplitterPane>
                 <dx:SplitterPane Name="contentPanel" ShowCollapseForwardButton="True" PaneStyle-BackColor="#f9f9f9" ScrollBars="None" PaneStyle-Paddings-Padding="0px">
                     <PaneStyle BackColor="#F9F9F9">
                     </PaneStyle>
@@ -592,7 +592,7 @@
         }
     </script>
     <script type="text/javascript">
-      
+
         function GetLasTUpDateURL()
         {
             return 'ShortSaleServices.svc/GetCaseLastUpDateTime?caseId=' + window.caseId
@@ -840,22 +840,16 @@
             }
             ScopeDateChangedByOther(GetLasTUpDateURL, $scope.GetShortSaleCase, $scope.GetLoadId);
             $scope.NGAddArraryItem = function (item, model, popup) {
+
                 if (model) {
                     var array = $scope.$eval(model);
-                    if (!array) {
-                        $scope.$eval(model + '=[{}]');
-                    } else {
-                        $scope.$eval(model + '.push({})');
-                    }
-                } else {
-                    item.push({});
+                    if (!array) { $scope.$eval(model + '=[{}]'); }
+                    else { $scope.$eval(model + '.push({})'); }
+                } else { item.push({}); }
+                if (popup) { $scope.setVisiblePopup(item[item.length - 1], true); }
+
                 }
 
-                if (popup) {
-                    $scope.setVisiblePopup(item[item.length - 1], true);
-                }
-
-            }
             $scope.SaveShortSale = function (scuessfunc) {
                 var json = $scope.SsCase;
                 var data = { caseData: JSON.stringify(json) };
@@ -925,9 +919,11 @@
                     $scope.bankNameOptions = [];
                 });
             $scope.setVisiblePopup = function (model, value) {
-                if (model) model.visiblePopup = value;
-            }
 
+                if (model) model.visiblePopup = value;
+                _.defer(function () { $scope.$apply(); });
+
+            }
             /* approval popup */
             $scope.SsCaseApprovalChecklist = {};
             $scope.Approval_popupVisible = false;
@@ -1024,7 +1020,7 @@
                 _.remove($scope.SsCase.ValueInfoes, function (el, index) {
                     return el.Pending;
                 })
-                _.each($scope.oldPendingValues, function (el,index) {
+                _.each($scope.oldPendingValues, function (el, index) {
                     $scope.SsCase.ValueInfoes.push(el)
                 })
             }

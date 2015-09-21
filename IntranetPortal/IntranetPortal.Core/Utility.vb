@@ -152,4 +152,6 @@ Public Class Utility
         Return New String(array, 0, arrayIndex)
     End Function
 
+
+
 End Class

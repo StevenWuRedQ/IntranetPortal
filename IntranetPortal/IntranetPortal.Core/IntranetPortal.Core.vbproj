@@ -85,6 +85,7 @@
     <Reference Include="System.Data">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
@@ -180,6 +181,9 @@
     <Compile Include="ADOEntity\SystemLog.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\Thumbnail.vb">
+      <DependentUpon>CoreEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\TLOApiLog.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
@@ -213,6 +217,7 @@
     </Compile>
     <Compile Include="PropertyHelper.vb" />
     <Compile Include="Model\RecycleLead.vb" />
+    <Compile Include="Model\Thumbnail.vb" />
     <Compile Include="Utility.vb" />
     <Compile Include="WorkingHours.vb" />
   </ItemGroup>

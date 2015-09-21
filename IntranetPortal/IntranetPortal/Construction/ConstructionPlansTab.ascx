@@ -17,7 +17,7 @@
 
                 </tr>
             </thead>
-            <tr ng-repeat="o in [{text:'Architectural',val:'Architectural'},{text:'Structural',val:'Structural'},{text:'Mechanical','val':'Mechanical'},{text:'Demo',val:'Demo'},{text:'Shoring & Underpinning',val:'ShoringUnderpinning'},{text:'Foundation',val:'Foundation'},{text:'Design',val:'Design'}]  track by $index">
+            <tr ng-repeat="o in [{text:'Architectural',val:'Architectural'},{text:'Structural',val:'Structural'},{text:'Mechanical','val':'Mechanical'},{text:'Demo',val:'Demo'},{text:'Shoring & Underpinning',val:'ShoringUnderpinning'},{text:'Foundation',val:'Foundation'},{text:'Design',val:'Design'}, {text:'Sprinkler', val: 'Sprinkler'}]  track by $index">
                 <td>{{o.text}}</td>
                 <td>
                     <pt-file file-bble="CSCase.BBLE" file-id="Plans_{{o.val+'_InitialDrawing'}}" file-model="CSCase.CSCase.Plans[o.val+'_InitialDrawing']"></pt-file>

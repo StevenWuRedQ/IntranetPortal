@@ -65,6 +65,16 @@ Public Class DownloadFile
             Response.[End]()
         End If
 
+        If Not String.IsNullOrEmpty(Request.QueryString("thumb")) Then
+            Dim thumbId = CInt(Request.QueryString("thumb").ToString)
+            Dim content = Core.Thumbnail.GetThumb(thumbId)
+            Response.Clear()
+            Response.ClearHeaders()
+            Response.ContentType = "image/bmp"
+            Response.BinaryWrite(content)
+            Response.[End]()
+        End If
+
         If Not String.IsNullOrEmpty(Request.QueryString("id")) Then
             ' Get the file id from the query string
             Dim id As Integer = Convert.ToInt16(Request.QueryString("id"))

@@ -1,15 +1,10 @@
-﻿Imports System.Data
-Imports System.Data.Entity
-Imports System.Data.Entity.Infrastructure
-Imports System.Linq
+﻿Imports System.Data.Entity.Infrastructure
 Imports System.Net
-Imports System.Net.Http
 Imports System.Web.Http
 Imports System.Web.Http.Description
 Imports IntranetPortal.Data
-Imports System.ServiceModel.Channels
 Imports System.IO
-Imports System.Net.Http.Headers
+Imports System.Drawing
 
 Namespace Controllers
     Public Class ConstructionCasesController
@@ -99,21 +94,36 @@ Namespace Controllers
             If HttpContext.Current.Request.Files.Count > 0 Then
                 For i = 0 To HttpContext.Current.Request.Files.Count - 1
                     Dim file As HttpPostedFile = HttpContext.Current.Request.Files(i)
-                    Dim ms = New MemoryStream()
-                    file.InputStream.CopyTo(ms)
+                    Using ms = New MemoryStream()
+                        file.InputStream.CopyTo(ms)
 
-                    Dim folderPath = String.Format("{0}/{1}", bble, "Construction")
-                    If Not String.IsNullOrEmpty(fileFoler) Then
-                        fileFoler = IIf(fileFoler.Last() = "/", fileFoler.Substring(0, fileFoler.Length - 1), fileFoler)
-                        folderPath = folderPath & "/" & fileFoler
-                    End If
+                        Dim folderPath = String.Format("{0}/{1}", bble, "Construction")
+                        If Not String.IsNullOrEmpty(fileFoler) Then
+                            fileFoler = IIf(fileFoler.Last() = "/", fileFoler.Substring(0, fileFoler.Length - 1), fileFoler)
+                            folderPath = folderPath & "/" & fileFoler
+                        End If
 
-                    If String.IsNullOrEmpty(fileName) Then
-                        Dim fileNameParts = file.FileName.Split("\")
-                        fileName = HttpUtility.UrlEncode(fileNameParts(fileNameParts.Length - 1))
-                    End If
+                        If String.IsNullOrEmpty(fileName) Then
+                            Dim fileNameParts = file.FileName.Split("\")
+                            fileName = HttpUtility.UrlEncode(fileNameParts(fileNameParts.Length - 1))
+                        End If
 
-                    results.Add(Core.DocumentService.UploadFile(folderPath, ms.ToArray, fileName, User.Identity.Name))
+                        results.Add(Core.DocumentService.UploadFile(folderPath, ms.ToArray, fileName, User.Identity.Name))
+
+                        'If (Core.Thumbnail.IsImageFile(file.FileName)) Then
+                        '    Dim image = System.Drawing.Image.FromStream(ms)
+                        '    Dim thumbImg = Core.Thumbnail.FixedSize(image, 50, 50)
+                        '    Using thumbms = New MemoryStream
+                        '        thumbImg.Save(thumbms, image.RawFormat)
+                        '        Core.Thumbnail.SaveThumb(Path.GetExtension(file.FileName).ToLower, thumbms.ToArray)
+
+                        '    End Using
+
+
+                        'End If
+
+                    End Using
+
                 Next
                 Return Ok(results.ToArray)
             End If
@@ -124,7 +134,7 @@ Namespace Controllers
         ' DELETE: api/ConstructionCases/5
         <ResponseType(GetType(ConstructionCase))>
         Function DeleteConstructionCase(ByVal id As String) As IHttpActionResult
-            Dim constructionCase As ConstructionCase = constructionCase.GetCase(id)
+            Dim constructionCase As ConstructionCase = ConstructionCase.GetCase(id)
             If IsNothing(constructionCase) Then
                 Return NotFound()
             End If

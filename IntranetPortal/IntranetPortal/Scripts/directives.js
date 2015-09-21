@@ -286,7 +286,10 @@ portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileServ
                         alert(error);
                     } else {
                         scope.$apply(function () {
-                            scope.fileModel = data[0];
+                            scope.fileModel = {}
+                            scope.fileModel.path = data[0];
+                            scope.fileModel.name = ptFileService.getFileName(scope.fileModel.path);
+                            scope.fileModel.uploadTime = new Date();
                             scope.delChoosed();
                         });
                     }

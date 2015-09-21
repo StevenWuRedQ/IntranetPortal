@@ -110,11 +110,12 @@ Partial Class Troubleshooting
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnComplaintsRefresh = New System.Windows.Forms.Button()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.Button16 = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Button15 = New System.Windows.Forms.Button()
-        Me.Button16 = New System.Windows.Forms.Button()
+        Me.Button17 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -980,6 +981,7 @@ Partial Class Troubleshooting
         '
         'TabPage9
         '
+        Me.TabPage9.Controls.Add(Me.Button17)
         Me.TabPage9.Controls.Add(Me.Button16)
         Me.TabPage9.Controls.Add(Me.Label14)
         Me.TabPage9.Controls.Add(Me.TextBox5)
@@ -992,6 +994,15 @@ Partial Class Troubleshooting
         Me.TabPage9.TabIndex = 9
         Me.TabPage9.Text = "Construction"
         Me.TabPage9.UseVisualStyleBackColor = True
+        '
+        'Button16
+        '
+        Me.Button16.Location = New System.Drawing.Point(410, 6)
+        Me.Button16.Name = "Button16"
+        Me.Button16.Size = New System.Drawing.Size(129, 23)
+        Me.Button16.TabIndex = 4
+        Me.Button16.Text = "Batch Upload Activity"
+        Me.Button16.UseVisualStyleBackColor = True
         '
         'Label14
         '
@@ -1026,14 +1037,14 @@ Partial Class Troubleshooting
         Me.Button15.Text = "UpLoad Activity"
         Me.Button15.UseVisualStyleBackColor = True
         '
-        'Button16
+        'Button17
         '
-        Me.Button16.Location = New System.Drawing.Point(434, 6)
-        Me.Button16.Name = "Button16"
-        Me.Button16.Size = New System.Drawing.Size(129, 23)
-        Me.Button16.TabIndex = 4
-        Me.Button16.Text = "Batch Upload Activity"
-        Me.Button16.UseVisualStyleBackColor = True
+        Me.Button17.Location = New System.Drawing.Point(558, 8)
+        Me.Button17.Name = "Button17"
+        Me.Button17.Size = New System.Drawing.Size(147, 23)
+        Me.Button17.TabIndex = 5
+        Me.Button17.Text = "UpdateFileModel"
+        Me.Button17.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1170,4 +1181,5 @@ Partial Class Troubleshooting
     Friend WithEvents Label14 As Label
     Friend WithEvents TextBox5 As TextBox
     Friend WithEvents Button16 As Button
+    Friend WithEvents Button17 As Button
 End Class

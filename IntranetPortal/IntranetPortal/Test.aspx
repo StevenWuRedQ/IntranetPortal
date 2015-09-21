@@ -35,6 +35,7 @@
         <script src="/Scripts/js/jquery.mousewheel.js"></script>
         <script src="/Scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>
         <script src="/Scripts/js/main.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
         <script src="/Scripts/jquery.collapse.js"></script>
         <script src="/Scripts/jquery.collapse_storage.js"></script>
         <script src="/Scripts/jquery.collapse_cookie_storage.js"></script>
@@ -52,7 +53,7 @@
                 fileData = document.getElementById("fileUpload").files;
                 var data = new FormData();
                 data.append("file", fileData);
-                                       
+
                 $.ajax({
                     url: '/api/ConstructionCases/UploadFiles?bble=1004490003&fileName=' + fileData.name,
                     type: 'POST',
@@ -71,23 +72,81 @@
             }
 
         </script>
-        Notes Josn <asp:TextBox ID="CropNotes" runat="server"></asp:TextBox>
+        Notes Josn
+        <asp:TextBox ID="CropNotes" runat="server"></asp:TextBox>
         <dx:ASPxGridView ID="CropGrid" runat="server" OnDataBinding="CropGrid_DataBinding" EnableCallbackAnimation="True">
-           <Templates>
-                
-           </Templates>
+            <Templates>
+            </Templates>
         </dx:ASPxGridView>
-         <asp:Button ID="TestCrop" runat="server" Text="TestCrop"  OnClick="TestCrop_Click"/>
-       
-        <div >
+        <asp:Button ID="TestCrop" runat="server" Text="TestCrop" OnClick="TestCrop_Click" />
+
+        <div>
             <input type="file" id="fileUpload" multiple="multiple" value="" />
             <br />
             <br />
-            <button id="btnUpload" onclick="UploadFile()" type="button">
-                Upload</button>
+            <button id="btnUpload" type="button">Upload</button>
+
         </div>
+        <hr />
+
+        <button id="updateConstructionFileModel" type="button" onclick="testController.updateFileModel()">update file model</button>
 
 
     </form>
 </body>
+<script>
+    var testController = {
+        models: ["InitialIntake.UploadDeed", "InitialIntake.UploadEIN", "InitialIntake.UploadFilingReceipt",
+                "InitialIntake.UploadArticleOfOperation", "InitialIntake.UploadOperationAgreement", "InitialIntake.UploadGeoDataReport",
+                "InitialIntake.UploadCO", "InitialIntake.UploadComps", "InitialIntake.WaterSearchUpload", "InitialIntake.UploadIntakeSheet",
+                "InitialIntake.UploadSketchLayout", "InitialIntake.UploadInitialBudget", "InitialIntake.AsbestosUpload",
+                "InitialIntake.SurveyUpload", "InitialIntake.ExhibitUpload", "InitialIntake.TRsUpload",
+                "Utilities.DEP_PaymentAgreement", "Utilities.MissingMeter_PlumbersInvoice", "Utilities.Taxes_PaymentAgreement"],
+        updateFileModel: function () {
+            var cases = $.getJSON("/api/ConstructionCases").success(function (data) {
+
+                _.each(data, function (dval, dindx) {
+                    var changeFlag = false;
+                    if (dval.BBLE.trim() == '1004490003') {
+
+                        _.each(testController.models, function (val, indx) {
+                            var model = "CSCase." + testController.models[indx];
+                            if (eval("dval." + model)) {
+                                changeFlag = true;
+                                var evaled = eval("dval." + model);
+                                var evaled_parts = evaled.split('/');
+
+                                var newModel = {};
+                                newModel.name = evaled_parts[evaled_parts.length - 1];
+                                newModel.path = evaled;
+                                newModel.uploadTime = new Date();
+                                eval("dval." + model + "=newModel");
+                            }
+                        })
+
+                        if (changeFlag) {
+                            var bble = dval.BBLE.trim();
+                            var url = "/api/ConstructionCases/" + bble;
+                            $.ajax(url, {
+                                method: "PUT",
+                                data: JSON.stringify(dval),
+                                dataType: "json",
+                                contentType: "application/json",
+                                success: function () { console.log(dval.BBLE + "updated.") },
+                            });
+
+                        }
+
+                    }
+
+                })
+
+                console.log("all finished");
+            })
+
+
+
+        }
+    }
+</script>
 </html>

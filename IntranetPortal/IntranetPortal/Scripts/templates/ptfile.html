@@ -1,6 +1,7 @@
 ﻿<div>
     <div style="margin: 2px" ng-show="fileModel">
-        <a style="font-size:16px;" ng-href="{{ptFileService.makePreviewUrl(fileModel)}}" target="_blank">{{ptFileService.getFileName(fileModel)}}</a>&nbsp;        
+        <a style="font-size:16px;" ng-href="{{fileModel.path?ptFileService.makePreviewUrl(fileModel.path):''}}" target="_blank">{{fileModel.name?fileModel.name:''}}</a>&nbsp;
+        <i class="fa fa fa-pencil icon_btn text-danger tooltip-examples" title="Modify file name" ng-click="modifyName(fileModel)"></i>
         <i class="fa fa-remove icon_btn text-danger tooltip-examples" title="Delete" ng-click="delFile()"></i>
     </div>
     <div style="margin: 2px" ng-show="!fileModel">

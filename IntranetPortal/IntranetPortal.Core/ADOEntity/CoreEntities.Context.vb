@@ -32,5 +32,6 @@ Partial Public Class CoreEntities
     Public Overridable Property PortalSettings() As DbSet(Of PortalSetting)
     Public Overridable Property CommonDatas() As DbSet(Of CommonData)
     Public Overridable Property Applications() As DbSet(Of Application)
+    Public Overridable Property Thumbnails() As DbSet(Of Thumbnail)
 
 End Class

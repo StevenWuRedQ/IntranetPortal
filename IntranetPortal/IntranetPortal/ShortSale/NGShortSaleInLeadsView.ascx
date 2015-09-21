@@ -85,7 +85,7 @@
                                 dragEnabled: true,
                                 showCloseButton: true,
                                 shading: false,
-                                bindingOptions:{ visible: 'PropFloors['+$index+'].popupVisible' },
+                                bindingOptions:{ visible: 'PropFloors['+$index+'].visiblePopup' },
                                 scrolling: {mode: 'virtual' },
                             }">
                     <div data-options="dxTemplate:{ name: 'content' }">
