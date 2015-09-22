@@ -450,7 +450,7 @@
   </PortalNavItem>
 
   <PortalNavItem Name="Legal" Text="Legal" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <UserRoles>Legal-*</UserRoles>
+    <UserRoles>Legal-*,ShortSale-Manager</UserRoles>
     <Items>
       <PortalNavItem Name="Legal-Summary" Text="Summary" NavigationUrl="/LegalUI/LegalSummaryUI.aspx" ShowAmount="false">
         <UserRoles></UserRoles>
