@@ -18,14 +18,14 @@ Public Class CallBackServices
 
     <WebMethod()> _
     Public Function GetContact(p As String) As List(Of PartyContact)
-        Dim allContact = PartyContact.getAllContact
+        Dim allContact = PartyContact.getAllContact(Employee.CurrentAppId)
         Return allContact
     End Function
 
     <WebMethod()> _
     <ScriptMethod(UseHttpGet:=True)> _
     Public Function GetContact2() As List(Of PartyContact)
-        Dim allContact = PartyContact.getAllContact
+        Dim allContact = PartyContact.getAllContact(Employee.CurrentAppId)
         Return allContact
     End Function
 
@@ -43,6 +43,7 @@ Public Class CallBackServices
             Throw New Exception("Already have " & contact.Name & " in system please change name to identify ")
         End If
         contact.CreateBy = HttpContext.Current.User.Identity.Name
+        contact.AppId = Employee.CurrentAppId
         contact.Save()
         Return contact
     End Function
@@ -52,7 +53,7 @@ Public Class CallBackServices
     End Function
     <WebMethod()> _
     Public Function GetLenderList() As List(Of String)
-        Dim l = PartyContact.GetContactByType(PartyContact.ContactType.Lender).Where(Function(c) c.CorpName IsNot Nothing).Select(Function(c) c.CorpName).Distinct().ToList()
+        Dim l = PartyContact.GetContactByType(PartyContact.ContactType.Lender, Employee.CurrentAppId).Where(Function(c) c.CorpName IsNot Nothing).Select(Function(c) c.CorpName).Distinct().ToList()
         Return l
     End Function
     <WebMethod()> _
@@ -63,10 +64,10 @@ Public Class CallBackServices
     <WebMethod()> _
     Public Function GetContactByGroup(gId? As Integer) As List(Of PartyContact)
         If gId = 0 Then
-            Return PartyContact.getAllContact()
+            Return PartyContact.getAllContact(Employee.CurrentAppId)
         End If
         Dim g = GroupType.GetGroup(gId)
-        Return g.Contacts
+        Return g.Contacts(Employee.CurrentAppId)
     End Function
 
     <WebMethod()> _

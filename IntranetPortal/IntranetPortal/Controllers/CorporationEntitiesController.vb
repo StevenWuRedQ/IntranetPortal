@@ -16,7 +16,7 @@ Namespace Controllers
 
         ' GET: api/CorporationEntities
         Function GetCorporationEntities() As IQueryable(Of CorporationEntity)
-            Return db.CorporationEntities
+            Return db.CorporationEntities.Where(Function(c) c.AppId = Employee.CurrentAppId)
         End Function
         ' GET /api/CorporationEntities/ByBBLE?BBLE=3041250022
         <ResponseType(GetType(CorporationEntity))>
@@ -74,7 +74,7 @@ Namespace Controllers
             End If
 
             db.CorporationEntities.Add(corporationEntity)
-
+            corporationEntity.AppId = Employee.CurrentAppId
             Try
                 db.SaveChanges()
             Catch ex As DbUpdateException

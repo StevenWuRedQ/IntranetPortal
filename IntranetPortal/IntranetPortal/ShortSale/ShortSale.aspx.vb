@@ -278,7 +278,7 @@ Public Class NGShortSale
         ShortSaleFileOverview.BindData(ssCase.BBLE)
     End Sub
     Public Function GetAllContact() As String
-        Return PartyContact.getAllContact.ToJsonString
+        Return PartyContact.getAllContact(Employee.CurrentAppId).ToJsonString
     End Function
     Public Function GetAllTeam() As String
         Return Team.GetAllTeams.ToJsonString

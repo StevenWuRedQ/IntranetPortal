@@ -35,5 +35,6 @@ Partial Public Class CorporationEntity
     Public Property Status As String
     Public Property OfficeName As String
     Public Property BBLE As String
+    Public Property AppId As Nullable(Of Integer)
 
 End Class

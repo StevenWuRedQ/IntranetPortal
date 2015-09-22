@@ -119,7 +119,12 @@
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">NYS Tax Lien</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.nysTaxLien" /></li>
                                     <li class="ss_form_item ">
-                                        <label class="ss_form_input_title">Fannie</label><pt-radio name="liens_info_fannie" model="DocSearch.LeadResearch.fannie"></pt-radio></li>
+                                        <label class="ss_form_input_title">Fannie</label>
+                                        <pt-radio name="liens_info_fannie1" model="DocSearch.LeadResearch.fannie">
+
+                                        </pt-radio>
+
+                                    </li>
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">FHA</label>
                                         <pt-radio name="liens_info_fha" model="DocSearch.LeadResearch.fha">

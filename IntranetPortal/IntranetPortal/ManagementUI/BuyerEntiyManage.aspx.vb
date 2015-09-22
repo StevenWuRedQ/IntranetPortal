@@ -14,7 +14,7 @@ Public Class BuyerEntiyManage
     End Sub
     Sub BindEntity()
         If (entitiesGrid.DataSource Is Nothing) Then
-            entitiesGrid.DataSource = CorporationEntity.GetAllEntities().OrderBy(Function(c) c.CorpName)
+            entitiesGrid.DataSource = CorporationEntity.GetAllEntities(Employee.CurrentAppId).OrderBy(Function(c) c.CorpName)
             entitiesGrid.DataBind()
         End If
     End Sub

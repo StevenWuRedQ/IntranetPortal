@@ -12,7 +12,7 @@ Public Class ContactService
     <OperationContract()>
     <WebGet()>
     Public Function GetContacts(args As String) As Channels.Message
-        Dim p = PartyContact.SearchContacts(args)
+        Dim p = PartyContact.SearchContacts(args, Employee.CurrentAppId)
         Return p.ToJson()
     End Function
 
@@ -21,7 +21,7 @@ Public Class ContactService
     Public Function GetBankList() As Channels.Message
         Dim gp = GroupType.GetGroup(5)
         If gp IsNot Nothing Then
-            Return gp.Contacts.Where(Function(a) (a.Disable Is Nothing Or a.Disable = False)).OrderBy(Function(p) p.Name).ToList.ToJson
+            Return gp.Contacts(Employee.CurrentAppId).Where(Function(a) (a.Disable Is Nothing Or a.Disable = False)).OrderBy(Function(p) p.Name).ToList.ToJson
         End If
         Return Nothing
     End Function
@@ -29,7 +29,7 @@ Public Class ContactService
     <OperationContract()>
     <WebGet()>
     Public Function LoadContacts() As Channels.Message ' As List(Of PartyContact)
-        Return PartyContact.getAllContact().ToJson()
+        Return PartyContact.getAllContact(Employee.CurrentAppId).ToJson()
 
     End Function
 
@@ -37,9 +37,9 @@ Public Class ContactService
     <WebGet()>
     Public Function GetAllContacts(id As Integer) As Channels.Message ' As List(Of PartyContact)
         If (id = 0) Then
-            Return PartyContact.getAllContact().ToJson()
+            Return PartyContact.getAllContact(Employee.CurrentAppId).ToJson()
         End If
-        Dim p = PartyContact.getAllContact().Where(Function(ps) ps.ContactId = id)
+        Dim p = PartyContact.getAllContact(Employee.CurrentAppId).Where(Function(ps) ps.ContactId = id)
 
         Return p.ToJson()
         ' Add your operation implementation here
@@ -56,7 +56,7 @@ Public Class ContactService
     <OperationContract()>
    <WebGet()>
     Public Function GetAllBuyerEntities() As Channels.Message
-        Return CorporationEntity.GetAllEntities().OrderBy(Function(c) c.CorpName).ToJson
+        Return CorporationEntity.GetAllEntities(Employee.CurrentAppId).OrderBy(Function(c) c.CorpName).ToJson
     End Function
 
     <OperationContract()>

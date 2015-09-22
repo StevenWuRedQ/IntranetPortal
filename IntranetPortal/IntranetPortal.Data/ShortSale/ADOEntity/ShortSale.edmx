@@ -43,6 +43,7 @@
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateTime" Type="datetime" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="AppId" Type="int" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -1136,6 +1137,7 @@
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OfficeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="AppId" Type="Int32" />
         </EntityType>
         <EntityType Name="ShortSaleLeadsInfo">
           <Key>
@@ -1716,6 +1718,7 @@
           <EntitySetMapping Name="CorporationEntities">
             <EntityTypeMapping TypeName="IntranetPortalModel.CorporationEntity">
               <MappingFragment StoreEntitySet="CorporationEntity">
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
                 <ScalarProperty Name="Status" ColumnName="Status" />

@@ -35,35 +35,36 @@ Partial Public Class PartyContact
             Return context.PartyContacts.Where(Function(e) e.AppId = appId).Select(Function(e) e.Email).Where(Function(e) e.IndexOf("@") > 0).ToList
         End Using
     End Function
-    Public Shared Function getAllContact() As List(Of PartyContact)
+
+    Public Shared Function getAllContact(appId As Integer) As List(Of PartyContact)
         Using context As New ShortSaleEntities
-            Dim result = context.PartyContacts.Where(Function(pc) pc.Type <> ContactType.Employee AndAlso Not String.IsNullOrEmpty(pc.Name) AndAlso (pc.Disable Is Nothing Or Not pc.Disable)).ToList
-            result.AddRange(GetContactByType(ContactType.Employee))
+            Dim result = context.PartyContacts.Where(Function(pc) pc.AppId = appId AndAlso pc.Type <> ContactType.Employee AndAlso (Not String.IsNullOrEmpty(pc.Name)) AndAlso (pc.Disable Is Nothing Or Not pc.Disable)).ToList
+            result.AddRange(GetContactByType(ContactType.Employee, appId))
 
             Return result '.Where(Function(pc) Not String.IsNullOrEmpty(pc.Name))
         End Using
     End Function
-    Public Shared Function SearchContacts(query As String) As List(Of PartyContact)
+    Public Shared Function SearchContacts(query As String, appId As Integer) As List(Of PartyContact)
         If (query Is Nothing) Then
             Return Nothing
         End If
         query = query.ToUpper()
         Using context As New ShortSaleEntities
-            Dim result = context.PartyContacts.Where(Function(pc) (pc.Name.ToUpper().Contains(query) Or pc.OfficeNO.ToUpper().Contains(query) Or pc.Cell.ToUpper().Contains(query) Or pc.CorpName.ToUpper().Contains(query)) AndAlso (pc.Disable Is Nothing Or Not pc.Disable)).ToList()
+            Dim result = context.PartyContacts.Where(Function(pc) (pc.Name.ToUpper().Contains(query) Or pc.OfficeNO.ToUpper().Contains(query) Or pc.Cell.ToUpper().Contains(query) Or pc.CorpName.ToUpper().Contains(query)) AndAlso (pc.Disable Is Nothing Or Not pc.Disable) AndAlso pc.AppId = appId).ToList()
             Return result
         End Using
     End Function
 
-    
 
-    Public Shared Function GetContactByType(type As ContactType) As List(Of PartyContact)
+
+    Public Shared Function GetContactByType(type As ContactType, appId As Integer) As List(Of PartyContact)
         Using ctx As New ShortSaleEntities
             If type = ContactType.Employee Then
                 Dim result = (From emp In ctx.Employees.Where(Function(em) em.Active = True).ToList
                               Group Join pc In ctx.PartyContacts.Where(Function(pc) pc.Type = ContactType.Employee).ToList On pc.Name Equals emp.Name
                               Into contacts = Group
-                            From cat In contacts.DefaultIfEmpty
-                             Select New PartyContact With
+                              From cat In contacts.DefaultIfEmpty
+                              Select New PartyContact With
                                     {
                                         .ContactId = If(cat Is Nothing, 0, cat.ContactId),
                                         .Name = emp.Name,
@@ -76,12 +77,13 @@ Partial Public Class PartyContact
 
                 For Each emp In result.Where(Function(em) em.ContactId = 0).Distinct
                     emp.CreateBy = "System"
+                    emp.CreateDate = DateTime.Now
                     emp.Save()
                 Next
 
-                Return ctx.PartyContacts.Where(Function(p) p.Type = type).ToList
+                Return ctx.PartyContacts.Where(Function(p) p.Type = type AndAlso p.AppId = appId).ToList
             Else
-                Return ctx.PartyContacts.Where(Function(p) p.Type = type).ToList
+                Return ctx.PartyContacts.Where(Function(p) p.Type = type AndAlso p.AppId = appId).ToList
             End If
         End Using
     End Function
@@ -100,6 +102,7 @@ Partial Public Class PartyContact
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
                 Dim obj = context.PartyContacts.Find(ContactId)
+
                 obj = ShortSaleUtility.SaveChangesObj(obj, Me)
             End If
 

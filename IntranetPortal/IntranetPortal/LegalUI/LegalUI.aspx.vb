@@ -102,7 +102,7 @@ Public Class LegalUI
     End Sub
 
     Public Function GetAllContact() As String
-        Dim json = PartyContact.getAllContact().OrderBy(Function(c) c.Name).ToJsonString
+        Dim json = PartyContact.getAllContact(Employee.CurrentAppId).OrderBy(Function(c) c.Name).ToJsonString
         Return json
     End Function
 

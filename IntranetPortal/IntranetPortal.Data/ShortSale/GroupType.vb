@@ -15,7 +15,7 @@
 
     Private Property _contacts As List(Of PartyContact)
 
-    Public ReadOnly Property Contacts() As List(Of PartyContact)
+    Public ReadOnly Property Contacts(appId As Integer) As List(Of PartyContact)
         Get
             If (_contacts Is Nothing) Then
                 Dim allGroup = New List(Of Integer)
@@ -24,7 +24,7 @@
                     allGroup.AddRange(SubGroups.Select(Function(l) l.Id).ToList())
                 End If
                 Using ctx As New ShortSaleEntities
-                    _contacts = ctx.PartyContacts.Where(Function(c) allGroup.Contains(c.GroupId) AndAlso (c.Disable Is Nothing Or c.Disable = False)).ToList()
+                    _contacts = ctx.PartyContacts.Where(Function(c) allGroup.Contains(c.GroupId) AndAlso (c.Disable Is Nothing Or c.Disable = False) AndAlso c.AppId = appId).ToList()
                 End Using
             End If
             Return _contacts

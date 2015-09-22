@@ -69,7 +69,7 @@ Public Class Test
 
     Protected Sub TestCrop_Click(sender As Object, e As EventArgs)
         Dim CorpNotesList = JArray.Parse(CropNotes.Text)
-        Dim Conps = Data.CorporationEntity.GetAllEntities
+        Dim Conps = Data.CorporationEntity.GetAllEntities(Employee.CurrentAppId)
         Dim result = New List(Of String)
         For Each c In Conps
 

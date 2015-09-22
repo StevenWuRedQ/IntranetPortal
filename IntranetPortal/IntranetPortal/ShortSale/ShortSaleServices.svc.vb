@@ -118,7 +118,7 @@ Public Class ShortSaleServices
         Dim gp = GroupType.GetGroup(5)
 
         If gp IsNot Nothing Then
-            Return gp.Contacts.Where(Function(a) Not String.IsNullOrEmpty(a.CorpName)).ToList.ToJson
+            Return gp.Contacts(Employee.CurrentAppId).Where(Function(a) (Not String.IsNullOrEmpty(a.CorpName))).ToList.ToJson
         End If
 
         Return Nothing

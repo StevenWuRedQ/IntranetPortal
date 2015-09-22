@@ -14,9 +14,9 @@
         End Using
     End Function
 
-    Public Shared Function GetAllEntities() As List(Of CorporationEntity)
+    Public Shared Function GetAllEntities(appId As Integer) As List(Of CorporationEntity)
         Using ctx As New ShortSaleEntities
-            Return ctx.CorporationEntities.ToList
+            Return ctx.CorporationEntities.Where(Function(c) c.AppId = appId).ToList
         End Using
     End Function
 
