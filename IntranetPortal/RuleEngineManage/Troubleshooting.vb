@@ -784,9 +784,13 @@ Public Class Troubleshooting
 
     Private Sub btnNotifyAll_Click(sender As Object, e As EventArgs) Handles btnNotifyAll.Click
 
-        Dim cps = Data.CheckingComplain.GetAllComplains("", txtNotifyNames.Text)
+        'Dim cps = Data.CheckingComplain.GetAllComplains("", txtNotifyNames.Text)
 
-
+        Dim rule As New IntranetPortal.RulesEngine.DOBComplaintsCheckingRule With {
+            .SendingNotifyEmail = True,
+            .IsTesting = True
+            }
+        rule.Execute()
 
     End Sub
 
@@ -832,6 +836,7 @@ Public Class Troubleshooting
             Return "Information Missing"
         End If
     End Function
+
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
         Dim file = TextBox5.Text.Trim
         Dim BBLE = txtBBLE.Text.Trim

@@ -608,7 +608,7 @@ Public Class DOBComplaintsCheckingRule
     Inherits BaseRule
 
     Public Property SendingNotifyEmail As Boolean
-
+    Public Property IsTesting As Boolean
 
     Public Overrides Sub Execute()
 
@@ -618,9 +618,13 @@ Public Class DOBComplaintsCheckingRule
 
         For Each prop In props
 
-            prop.RefreshComplains("RuleEngine")
+            If Not IsTesting Then
+                prop.RefreshComplains("RuleEngine")
+            End If
 
-            names.AddRange(prop.NotifyUsers.Split(";"))
+            If Not String.IsNullOrEmpty(prop.NotifyUsers) Then
+                names.AddRange(prop.NotifyUsers.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries))
+            End If
         Next
 
 
