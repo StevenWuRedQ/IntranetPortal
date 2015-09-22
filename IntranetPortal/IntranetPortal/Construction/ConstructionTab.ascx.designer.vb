@@ -113,6 +113,15 @@ Partial Public Class ConstructionTab
     Protected WithEvents ConstructionBudgetTab As Global.IntranetPortal.ConstructionBudgetTab
     
     '''<summary>
+    '''ConstructionCheckList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ConstructionCheckList As Global.IntranetPortal.ConstructionCheckList
+    
+    '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>

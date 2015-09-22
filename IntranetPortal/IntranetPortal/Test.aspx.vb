@@ -98,21 +98,7 @@ Public Class Test
 
     End Sub
 
-    Public Sub onCaseUploadClick()
-        Dim result = New StringBuilder
-        Dim Data = New Dictionary(Of String, Long) From {{"25-40 GILLMORE ST, EAST ELMHURST,NY 11369", 4016520027}}
-        For Each kvp As KeyValuePair(Of String, Long) In Data
-            Dim caseName = kvp.Key.Trim
-            Dim BBLE = kvp.Value
-            Try
-                IntranetPortal.ConstructionManage.StartConstruction(BBLE.ToString, caseName, "Jamie Ventura", "Jamie Ventura")
-                result.Append(BBLE.ToString & ", " & caseName & " success \n")
-            Catch ex As Exception
-                result.Append(BBLE.ToString & ", " & caseName & " fails \n")
-            End Try
-        Next
 
-    End Sub
 
 
     Public Sub UpdateOwner()

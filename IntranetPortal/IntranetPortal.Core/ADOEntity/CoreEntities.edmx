@@ -111,7 +111,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="content" Type="varbinary(max)" />
           <Property Name="mime_type" Type="nvarchar" MaxLength="20" />
         </EntityType>
@@ -289,7 +289,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="content" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="mime_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>

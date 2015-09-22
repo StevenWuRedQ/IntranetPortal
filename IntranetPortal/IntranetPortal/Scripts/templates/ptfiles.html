@@ -25,9 +25,9 @@
                         <th>Upload Time</th>
                         <th></th>
                     </tr>
-                    <tr class="text-left" ng-repeat="file in fileModel|filter: {folder: currentFolder} ">
+                    <tr class="text-left" ng-repeat="file in fileModel track by $index|filter: {folder: currentFolder} ">
                         <td>
-                            <!--<img src="{{ptFileService.makePreviewUrl(file.path)}}" width="50" height="50"/>-->
+                            <img ng-src="{{getThumb(file)}}" width="50" height="50"/>
                             <a style="font-size:12px;font-weight:bold" ng-href="{{ptFileService.makePreviewUrl(file.path)}}" target="_blank">{{file.name?file.name:ptFileService.getFileName(file.path)}}</a>&nbsp;
                             <i class="fa fa fa-pencil icon_btn text-danger tooltip-examples" title="Modify file name" ng-click="modifyName(fileModel, $index)"></i>
                         </td>

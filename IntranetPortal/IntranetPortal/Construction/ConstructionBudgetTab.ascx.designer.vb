@@ -12,13 +12,4 @@ Option Explicit On
 
 
 Partial Public Class ConstructionBudgetTab
-
-    '''<summary>
-    '''ASPxSpreadsheet1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxSpreadsheet1 As Global.DevExpress.Web.ASPxSpreadsheet.ASPxSpreadsheet
 End Class

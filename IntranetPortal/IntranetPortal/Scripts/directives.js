@@ -288,6 +288,7 @@ portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileServ
                         scope.$apply(function () {
                             scope.fileModel = {}
                             scope.fileModel.path = data[0];
+                            if (data[1]) fileModel.thumb = data[1];
                             scope.fileModel.name = ptFileService.getFileName(scope.fileModel.path);
                             scope.fileModel.uploadTime = new Date();
                             scope.delChoosed();
@@ -475,7 +476,7 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             scope.uploadFile = function () {
                 scope.fileModel = scope.fileModel ? scope.fileModel : [];
                 var targetFolder = (scope.baseFolder ? scope.baseFolder + '/' : '') + (scope.currentFolder ? scope.currentFolder + '/' : '')
-                scope.result = [];
+                scope.result = [];      // final result will store here, but we build up it first for counting
                 var len = scope.files.length;
                 scope.showUpoading();
                 scope.uploading = true;
@@ -502,7 +503,10 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                             scope.countCallback(len)
                         } else {
                             var targetElement = _.filter(scope.result, function (el) { return el.name == targetName })[0];
-                            if (targetElement) targetElement.path = data[0];
+                            if (targetElement) {
+                                targetElement.path = data[0];
+                                if (data[1]) targetElement.thumb = data[1];
+                            }
                             scope.fileModel.push(targetElement);
                             scope.countCallback(len)
                         }
@@ -558,7 +562,14 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                 scope.ModifyNamePop = false;
                 scope.editingFileExt = '';
             }
-
+            scope.getThumb = function (model) {
+                if(model && model.thumb){
+                    return ptFileService.getThumb(model.thumb);
+                }else{
+                    return '/images/no_image.jpg';
+                }
+                
+            }
 
         }
 

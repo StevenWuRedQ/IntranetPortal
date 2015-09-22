@@ -107,37 +107,38 @@
 
                 _.each(data, function (dval, dindx) {
                     var changeFlag = false;
-                    if (dval.BBLE.trim() == '1004490003') {
+                    // if (dval.BBLE.trim() == '1004490003') {
 
-                        _.each(testController.models, function (val, indx) {
-                            var model = "CSCase." + testController.models[indx];
-                            if (eval("dval." + model)) {
-                                changeFlag = true;
-                                var evaled = eval("dval." + model);
-                                var evaled_parts = evaled.split('/');
+                    _.each(testController.models, function (val, indx) {
+                        var model = "CSCase." + testController.models[indx];
+                        if (eval("dval.CSCase") && eval("dval.CSCase."+ testController.models[indx].split(".")[0]) && eval("dval." + model)) {
+                            changeFlag = true;
+                            var evaled = eval("dval." + model);
+                            var evaled_parts = evaled.split('/');
 
-                                var newModel = {};
-                                newModel.name = evaled_parts[evaled_parts.length - 1];
-                                newModel.path = evaled;
-                                newModel.uploadTime = new Date();
-                                eval("dval." + model + "=newModel");
-                            }
-                        })
-
-                        if (changeFlag) {
-                            var bble = dval.BBLE.trim();
-                            var url = "/api/ConstructionCases/" + bble;
-                            $.ajax(url, {
-                                method: "PUT",
-                                data: JSON.stringify(dval),
-                                dataType: "json",
-                                contentType: "application/json",
-                                success: function () { console.log(dval.BBLE + "updated.") },
-                            });
-
+                            var newModel = {};
+                            newModel.name = evaled_parts[evaled_parts.length - 1];
+                            newModel.path = evaled;
+                            newModel.uploadTime = new Date();
+                            eval("dval." + model + "=newModel");
                         }
+                    })
+
+                    if (changeFlag) {
+                        var bble = dval.BBLE.trim();
+                        var url = "/api/ConstructionCases/" + bble;
+                        $.ajax(url, {
+                            method: "PUT",
+                            data: JSON.stringify(dval),
+                            dataType: "json",
+                            contentType: "application/json",
+                            success: function () { console.log(dval.BBLE + "updated.") },
+                            error: function () { console.log(dval.BBLE + "fails.") }
+                        });
 
                     }
+
+                    //                    }
 
                 })
 

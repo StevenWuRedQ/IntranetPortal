@@ -3,6 +3,7 @@ Imports System.Data.OleDb
 Imports IntranetPortal
 Imports System.Threading
 Imports IntranetPortal.Data
+Imports System.Text
 
 Public Class Troubleshooting
 
@@ -856,4 +857,24 @@ Public Class Troubleshooting
     Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
 
     End Sub
+
+    Private Sub Button18_Click(sender As Object, e As EventArgs) Handles Button18.Click
+
+        Dim result = New StringBuilder
+        Dim Data = New Dictionary(Of String, Long) From {
+        {"1914 FENIMORE ST, Brooklyn,NY 11203", 3050370055}
+        }
+        For Each kvp As KeyValuePair(Of String, Long) In Data
+            Dim caseName = kvp.Key.Trim
+            Dim BBLE = kvp.Value
+            Try
+                IntranetPortal.ConstructionManage.StartConstruction(BBLE.ToString, caseName, "Melissa Ramlakhan", "Melissa Ramlakhan")
+                TextBox4.AppendText(BBLE.ToString & ", " & caseName & " success \n")
+            Catch ex As Exception
+                TextBox4.AppendText(BBLE.ToString & ", " & caseName & " fails \n")
+            End Try
+        Next
+
+    End Sub
+
 End Class

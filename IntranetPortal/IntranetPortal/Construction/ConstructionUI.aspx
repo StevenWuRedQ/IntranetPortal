@@ -350,8 +350,9 @@
                 };
                 $scope.CSCase.CSCase.Utilities.Company = [];
                 $scope.CSCase.CSCase.Utilities.Insurance_Type = [];
-                $scope.EntityInfo = {}
-                $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} })
+                $scope.EntityInfo = {};
+                $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} });
+                budgetControl.reload();
             }
 
             $scope.init = function (bble) {
@@ -362,7 +363,8 @@
                 ptConstructionService.getConstructionCases(bble, function (res) {
                     ptCom.nullToUndefined(res);
                     $.extend(true, $scope.CSCase, res);
-                    $scope.initWatchedModel()
+                    $scope.initWatchedModel();
+                    if ($scope.CSCase.CSCase.budgetData) budgetControl.load($scope.CSCase.CSCase.budgetData);
                     
                 });
 
@@ -400,6 +402,7 @@
 
 
             $scope.saveCSCase = function () {
+                $scope.getBudgetData();
                 var data = JSON.stringify($scope.CSCase);
                 ptConstructionService.saveConstructionCases($scope.CSCase.BBLE, data);
                 $scope.checkWatchedModel();
@@ -624,7 +627,17 @@
                     $scope.panelLoading = false;
                 });
             }
+
             /* end loading panel*/
+
+            /* budget table */
+            $scope.getBudgetData = function () {
+                var data = budgetControl.getData();
+                $scope.CSCase.CSCase.budgetData = data;
+            }
+
+
+            /* end budget table */
         });
     </script>
 

@@ -110,18 +110,15 @@ Namespace Controllers
 
                         results.Add(Core.DocumentService.UploadFile(folderPath, ms.ToArray, fileName, User.Identity.Name))
 
-                        'If (Core.Thumbnail.IsImageFile(file.FileName)) Then
-                        '    Dim image = System.Drawing.Image.FromStream(ms)
-                        '    Dim thumbImg = Core.Thumbnail.FixedSize(image, 50, 50)
-                        '    Using thumbms = New MemoryStream
-                        '        thumbImg.Save(thumbms, image.RawFormat)
-                        '        Core.Thumbnail.SaveThumb(Path.GetExtension(file.FileName).ToLower, thumbms.ToArray)
-
-                        '    End Using
-
-
-                        'End If
-
+                        If (Core.Thumbnail.IsImageFile(file.FileName)) Then
+                            Dim image = System.Drawing.Image.FromStream(ms)
+                            Dim thumbImg = Core.Thumbnail.FixedSize(image, 50, 50)
+                            Using thumbms = New MemoryStream
+                                thumbImg.Save(thumbms, image.RawFormat)
+                                Dim thumbId = Core.Thumbnail.SaveThumb(Path.GetExtension(file.FileName).ToLower, thumbms.ToArray)
+                                results.Add(thumbId)
+                            End Using
+                        End If
                     End Using
 
                 Next

@@ -9,6 +9,8 @@
 <%@ Register Src="~/Construction/ConstructionSignoffsTab.ascx" TagPrefix="uc1" TagName="ConstructionSignoffsTab" %>
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 <%@ Register Src="~/Construction/ConstructionBudgetTab.ascx" TagPrefix="uc1" TagName="ConstructionBudgetTab" %>
+<%@ Register Src="~/Construction/ConstructionCheckList.ascx" TagPrefix="uc1" TagName="ConstructionCheckList" %>
+
 
 
 
@@ -23,7 +25,7 @@
                 <div style="font-size: 30px; margin-top: 20px;">
                     <i class="fa fa-home"></i>
                     <span style="margin-left: 19px;"><span ng-bind="CSCase.CSCase.Header" pt-init-bind="CSCase.CaseName" ng-dblclick="toggleHeaderEditing(true)" ng-show="!HeaderEditing"></span>&nbsp;</span>
-                    <input id="ConstructionTitleInput" style="width:565px" ng-show="HeaderEditing" ng-Blur="toggleHeaderEditing()" ng-model="CSCase.CSCase.Header"/>
+                    <input id="ConstructionTitleInput" style="width: 565px" ng-show="HeaderEditing" ng-blur="toggleHeaderEditing()" ng-model="CSCase.CSCase.Header" />
                     <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+leadsInfoBBLE, 'Maps')">Map</span>
 
                     <span class="time_buttons" onclick="OpenLeadsWindow('http://nycserv.nyc.gov/NYCServWeb/NYCSERVMain', 'eCourts')" ng-show="activeTab=='CSUtilities'">Water&Taxes</span>
@@ -100,15 +102,22 @@
                 }
             </style>
             <ul id="CSTab" class="nav nav-tabs overview_tabs" role="tablist">
-                <li class="short_sale_tab active"><a class="shot_sale_tab_a" href="#CSInitialIntake" role="tab" data-toggle="tab" ng-click="updateActive('CSInitialIntake')">Initial Intake</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSPhotos" role="tab" data-toggle="tab" ng-click="updateActive('CSPhotos')">Photos</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSUtilities" role="tab" data-toggle="tab" ng-click="updateActive('CSUtilities')">Utilities</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSViolations" role="tab" data-toggle="tab" ng-click="updateActive('CSViolations')">Violation</a></li>
+                <li role="presentation" class="dropdown short_sale_tab">
+                    <a class="dropdown-toggle shot_sale_tab_a" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Intake <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class=""><a class="" href="#CSInitialIntake" role="tab" data-toggle="tab" ng-click="updateActive('CSInitialIntake')">Initial Intake</a></li>
+                        <li class=""><a class="" href="#CSPhotos" role="tab" data-toggle="tab" ng-click="updateActive('CSPhotos')">Photos</a></li>
+                        <li class=""><a class="" href="#CSUtilities" role="tab" data-toggle="tab" ng-click="updateActive('CSUtilities')">Utilities</a></li>
+                        <li class=""><a class="" href="#CSViolations" role="tab" data-toggle="tab" ng-click="updateActive('CSViolations')">Violation</a></li>
+                    </ul>
+                </li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSProposal" role="tab" data-toggle="tab" ng-click="updateActive('CSProposal')">ProposalBids</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSPlans" role="tab" data-toggle="tab" ng-click="updateActive('CSPlans')">Plans</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSContract" role="tab" data-toggle="tab" ng-click="updateActive('CSContract')">Contract</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSSignoff" role="tab" data-toggle="tab" ng-click="updateActive('CSSignoff')">Signoffs</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSBudget" role="tab" data-toggle="tab" ng-click="updateActive('CSBudget')">Budget</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSCheckList" role="tab" data-toggle="tab" ng-click="updateActive('CSCheckList')">CheckList</a></li>
+                
                 <%--  <% End If%>--%>
             </ul>
 
@@ -140,7 +149,10 @@
                         <uc1:ConstructionSignoffsTab runat="server" ID="ConstructionSignoffsTab" />
                     </div>
                     <div class="tab-pane" id="CSBudget">
-                    <uc1:ConstructionBudgetTab runat="server" id="ConstructionBudgetTab" />
+                        <uc1:ConstructionBudgetTab runat="server" ID="ConstructionBudgetTab" />
+                    </div>
+                    <div class="tab-pane" id="CSCheckList">
+                        <uc1:ConstructionCheckList runat="server" id="ConstructionCheckList" />
                     </div>
                 </div>
             </div>

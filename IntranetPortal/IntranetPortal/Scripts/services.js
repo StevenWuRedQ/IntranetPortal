@@ -489,6 +489,11 @@ app.service('ptFileService', function () {
     this.isIE = function (fileName) {
         return fileName.indexOf(':\\') > -1;
     }
+
+    this.getThumb = function (thumbId) {
+        return '/downloadfile.aspx?thumb=' + thumbId;
+
+    }
 }
 );
 
