@@ -186,9 +186,9 @@ Public Class ShortSaleServices
         Dim cases As List(Of ShortSale.ShortSaleCase)
 
         If (category = "All") Then
-            cases = ShortSale.ShortSaleCase.GetCaseByCategory(status)
+            cases = ShortSale.ShortSaleCase.GetCaseByCategory(status, Employee.CurrentAppId)
         Else
-            cases = ShortSale.ShortSaleCase.GetCaseByMortgageStatus({status})
+            cases = ShortSale.ShortSaleCase.GetCaseByMortgageStatus({status}, Employee.CurrentAppId)
         End If
 
         Return cases.Select(Function(ss) New With {ss.CaseName, ss.BBLE, ss.Owner, ss.UpdateDate, ss.CaseId, ss.OwnerFullName, ss.ReferralContact.Name, ss.OccupiedBy}).ToList.ToJson
@@ -198,7 +198,7 @@ Public Class ShortSaleServices
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetCategoryCount(category As String) As Channels.Message
 
-        Dim cases = ShortSale.ShortSaleCase.GetCaseByCategory(category)
+        Dim cases = ShortSale.ShortSaleCase.GetCaseByCategory(category, Employee.CurrentAppId)
 
         If category = "All" Then
             Return cases.GroupBy(Function(ss) ss.MortgageCategory).Select(Function(ss)

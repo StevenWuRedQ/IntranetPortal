@@ -29,11 +29,10 @@ Partial Public Class PartyContact
         End Get
     End Property
 
-
-    Public Shared Function getAllEmail() As List(Of String)
+    Public Shared Function getAllEmail(appId As Integer) As List(Of String)
 
         Using context As New ShortSaleEntities
-            Return context.PartyContacts.Select(Function(e) e.Email).Where(Function(e) e.IndexOf("@") > 0).ToList
+            Return context.PartyContacts.Where(Function(e) e.AppId = appId).Select(Function(e) e.Email).Where(Function(e) e.IndexOf("@") > 0).ToList
         End Using
     End Function
     Public Shared Function getAllContact() As List(Of PartyContact)

@@ -607,15 +607,43 @@ End Class
 Public Class DOBComplaintsCheckingRule
     Inherits BaseRule
 
+    Public Property SendingNotifyEmail As Boolean
+
+
     Public Overrides Sub Execute()
 
         Dim props = Data.CheckingComplain.GetAllComplains
+
+        Dim names As New List(Of String)
 
         For Each prop In props
 
             prop.RefreshComplains("RuleEngine")
 
+            names.AddRange(prop.NotifyUsers.Split(";"))
         Next
+
+
+        If SendingNotifyEmail Then
+            For Each name In names.Distinct.ToArray
+
+                Try
+                    Using client As New PortalService.CommonServiceClient
+
+
+                        Dim mailData As New Dictionary(Of String, String)
+                        mailData.Add("UserName", name)
+                        client.SendEmailByTemplate(name, "ComplaintsRefreshed", mailData)
+
+                    End Using
+                Catch ex As Exception
+                    Log("Sending Notify Email " & name, ex)
+                End Try
+
+            Next
+
+
+        End If
 
     End Sub
 End Class

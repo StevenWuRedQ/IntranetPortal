@@ -74,7 +74,15 @@
 
     Public Overrides Function GetUsersInRole(roleName As String) As String()
         Using context As New Entities
-            Return context.UsersInRoles.Where(Function(r) r.ApplicationName = ApplicationName And r.Rolename = roleName).Select(Function(r) r.Username).ToArray
+            Dim appid = Employee.CurrentAppId
+
+            Dim result = From ui In context.UsersInRoles
+                         Join emp In context.Employees On ui.Username Equals emp.Name
+                         Where ui.ApplicationName = ApplicationName And ui.Rolename = roleName And emp.AppId = appid
+                         Select ui.Username
+
+
+            Return result.ToArray
         End Using
     End Function
 

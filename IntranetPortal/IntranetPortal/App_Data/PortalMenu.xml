@@ -323,6 +323,9 @@
         <FontClass>
           <![CDATA[<i class="fa fa-file"></i>]]>
         </FontClass>
+        <FrontButton>
+          <![CDATA[<a href="/ShortSale/ShortSale.aspx?action=Create&category=Assign" class="add-button" target="contentUrlPane"><i class="fa fa-plus-circle"></i></a>]]>
+        </FrontButton>
       </PortalNavItem>      
       <PortalNavItem Name="ShortSale-Category-Approved" Text="Approved" NavigationUrl="/ShortSale/ShortSale.aspx?category=Approved" ShowAmount="true">
         <UserRoles>ShortSale-Manager,ShortSale-Negotiator,Title-Users</UserRoles>

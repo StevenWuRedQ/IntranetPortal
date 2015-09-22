@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class ShortSaleCaseList
-
+    
     '''<summary>
     '''lblLeadCategory control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class ShortSaleCaseList
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxLabel
-
+    
     '''<summary>
     '''divExpand control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class ShortSaleCaseList
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents divExpand As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
+    
     '''<summary>
     '''hfCaseStatus control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class ShortSaleCaseList
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hfCaseStatus As Global.System.Web.UI.WebControls.HiddenField
-
+    
     '''<summary>
     '''hfCaseBBLEs control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class ShortSaleCaseList
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hfCaseBBLEs As Global.System.Web.UI.WebControls.HiddenField
-
+    
     '''<summary>
     '''hfCaseCategory control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class ShortSaleCaseList
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hfCaseCategory As Global.System.Web.UI.WebControls.HiddenField
-
+    
     '''<summary>
     '''gridCase control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class ShortSaleCaseList
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridCase As Global.DevExpress.Web.ASPxGridView
-
+    
     '''<summary>
     '''ASPxPopupMenu2 control.
     '''</summary>
@@ -75,4 +75,13 @@ Partial Public Class ShortSaleCaseList
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupMenu2 As Global.DevExpress.Web.ASPxPopupMenu
+    
+    '''<summary>
+    '''CreateNew control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CreateNew As Global.IntranetPortal.CreateNew
 End Class

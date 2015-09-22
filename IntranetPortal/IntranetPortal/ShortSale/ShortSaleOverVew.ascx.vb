@@ -8,7 +8,7 @@ Public Class ShortSaleOverVew
     Public Property shortSaleCaseData As New ShortSaleCase
     Public ReadOnly Property isEviction As Boolean
         Get
-            Dim ShhortSale = CType(Me.Page, ShortSalePage)
+            Dim ShhortSale = CType(Me.Page, NGShortSale)
             Return ShhortSale.isEviction
         End Get
     End Property

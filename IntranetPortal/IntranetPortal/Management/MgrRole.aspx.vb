@@ -3,9 +3,17 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
+            InitApplications()
             BindRoles()
             BindEmployeeList()
         End If
+    End Sub
+
+    Sub InitApplications()
+        ddlApplications.DataSource = Core.Application.GetAll
+        ddlApplications.DataTextField = "Name"
+        ddlApplications.DataValueField = "ApplicationId"
+        ddlApplications.DataBind()
     End Sub
 
     Sub BindRoles()
@@ -19,7 +27,8 @@
 
     Sub BindEmployeeList()
         Using Context As New Entities
-            cbEmps.DataSource = Context.Employees.Where(Function(em) em.Active = True).OrderBy(Function(em) em.Name).ToList
+            Dim appId = ddlApplications.SelectedValue
+            cbEmps.DataSource = Context.Employees.Where(Function(em) em.Active = True And em.AppId = appId).OrderBy(Function(em) em.Name).ToList
             cbEmps.TextField = "Name"
             cbEmps.ValueField = "EmployeeID"
             cbEmps.DataBind()
@@ -75,9 +84,16 @@
 
         Using Context As New Entities
             Dim roleName = lbRoles.Value.ToString
-            lbEmployees.DataSource = Context.UsersInRoles.Where(Function(ur) ur.Rolename = roleName).OrderBy(Function(r) r.Username).ToList
-            lbEmployees.ValueField = "Username"
-            lbEmployees.TextField = "Username"
+            Dim appId = ddlApplications.SelectedValue
+
+            lbEmployees.DataSource = (From ui In Context.UsersInRoles
+                                      Join emp In Context.Employees On ui.Username Equals emp.Name
+                                      Where ui.Rolename = roleName And emp.AppId = appId
+                                      Select ui.Username).ToArray
+            'Context.UsersInRoles.Where(Function(ur) ur.Rolename = roleName).OrderBy(Function(r) r.Username).ToList
+
+            'lbEmployees.ValueField = "Username"
+            'lbEmployees.TextField = "Username"
             lbEmployees.DataBind()
         End Using
     End Sub
@@ -117,5 +133,9 @@
 
             End Using
         End If
+    End Sub
+
+    Protected Sub ddlApplications_SelectedIndexChanged(sender As Object, e As EventArgs)
+        BindEmployeeList()
     End Sub
 End Class

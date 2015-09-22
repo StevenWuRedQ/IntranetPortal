@@ -8,6 +8,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <div style="margin:10px">
+            Select Company: &nbsp;<asp:DropDownList ID="ddlApplications" runat="server" OnSelectedIndexChanged="ddlApplications_SelectedIndexChanged" AutoPostBack="true">
+            </asp:DropDownList>
+        </div>
         <div>
             <div style="float: left; width: 300px; margin-right: 10px;">
                 <dx:ASPxRoundPanel runat="server" HeaderText="Roles" Width="100%">
@@ -25,6 +29,7 @@
             <dx:ASPxRoundPanel runat="server" HeaderText="Employees" Width="300px">
                 <PanelCollection>
                     <dx:PanelContent>
+
                         <dx:ASPxListBox runat="server" ID="lbEmployees" Width="100%" Height="350px"></dx:ASPxListBox>
                         <br />
                         <dx:ASPxComboBox runat="server" Width="100%" ID="cbEmps"></dx:ASPxComboBox>

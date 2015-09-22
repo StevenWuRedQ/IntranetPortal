@@ -2,12 +2,12 @@
 Imports DevExpress.XtraPrinting
 
 Public Class ShortSaleReport
-    Inherits System.Web.UI.Page
+    Inherits PortalPage
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        AllLeadsGrid.DataSource = ShortSaleCase.CaseReport2
+        AllLeadsGrid.DataSource = ShortSaleCase.CaseReport2(CurrentAppId)
         AllLeadsGrid.DataBind()
 
     End Sub

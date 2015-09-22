@@ -91,8 +91,6 @@
         Throw New NotImplementedException()
     End Function
 
-
-
     Public Overrides ReadOnly Property MinRequiredPasswordLength As Integer
         Get
             Return 6

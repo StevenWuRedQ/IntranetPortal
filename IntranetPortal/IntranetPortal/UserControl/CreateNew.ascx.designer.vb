@@ -11,104 +11,140 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class MgrRole
+Partial Public Class CreateNew
     
     '''<summary>
-    '''form1 control.
+    '''popupCreateNew control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    Protected WithEvents popupCreateNew As Global.DevExpress.Web.ASPxPopupControl
     
     '''<summary>
-    '''ddlApplications control.
+    '''pageControlNewLeads control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlApplications As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents pageControlNewLeads As Global.DevExpress.Web.ASPxPageControl
     
     '''<summary>
-    '''lbRoles control.
+    '''txtNewBBLE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbRoles As Global.DevExpress.Web.ASPxListBox
+    Protected WithEvents txtNewBBLE As Global.DevExpress.Web.ASPxTextBox
     
     '''<summary>
-    '''txtRoles control.
+    '''txtNewLeadsName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtRoles As Global.DevExpress.Web.ASPxTextBox
+    Protected WithEvents txtNewLeadsName As Global.DevExpress.Web.ASPxTextBox
     
     '''<summary>
-    '''btnAddRole control.
+    '''pageControlInputData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddRole As Global.DevExpress.Web.ASPxButton
+    Protected WithEvents pageControlInputData As Global.DevExpress.Web.ASPxPageControl
     
     '''<summary>
-    '''btnRemoveRole control.
+    '''cbStreetBorough control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnRemoveRole As Global.DevExpress.Web.ASPxButton
+    Protected WithEvents cbStreetBorough As Global.DevExpress.Web.ASPxComboBox
     
     '''<summary>
-    '''lbEmployees control.
+    '''txtHouseNum control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbEmployees As Global.DevExpress.Web.ASPxListBox
+    Protected WithEvents txtHouseNum As Global.DevExpress.Web.ASPxTextBox
     
     '''<summary>
-    '''cbEmps control.
+    '''cbStreetlookup control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbEmps As Global.DevExpress.Web.ASPxComboBox
+    Protected WithEvents cbStreetlookup As Global.DevExpress.Web.ASPxComboBox
     
     '''<summary>
-    '''btnAddEmp control.
+    '''cblegalBorough control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddEmp As Global.DevExpress.Web.ASPxButton
+    Protected WithEvents cblegalBorough As Global.DevExpress.Web.ASPxComboBox
     
     '''<summary>
-    '''btnRemoveEmp control.
+    '''txtLegalBlock control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnRemoveEmp As Global.DevExpress.Web.ASPxButton
+    Protected WithEvents txtLegalBlock As Global.DevExpress.Web.ASPxTextBox
     
     '''<summary>
-    '''lblError control.
+    '''txtLegalLot control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblError As Global.DevExpress.Web.ASPxLabel
+    Protected WithEvents txtLegalLot As Global.DevExpress.Web.ASPxTextBox
+    
+    '''<summary>
+    '''cbNameBorough control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbNameBorough As Global.DevExpress.Web.ASPxComboBox
+    
+    '''<summary>
+    '''txtNameFirst control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtNameFirst As Global.DevExpress.Web.ASPxTextBox
+    
+    '''<summary>
+    '''txtNameLast control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtNameLast As Global.DevExpress.Web.ASPxTextBox
+    
+    '''<summary>
+    '''lbNewBBLE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbNewBBLE As Global.DevExpress.Web.ASPxListBox
 End Class

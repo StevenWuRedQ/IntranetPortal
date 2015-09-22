@@ -27,5 +27,6 @@ Partial Public Class Employee
     Public Property CellPhone As String
     Public Property EmployeeSince As Nullable(Of Date)
     Public Property Picture As String
+    Public Property AppId As Nullable(Of Integer)
 
 End Class

@@ -433,7 +433,7 @@ Public Class Troubleshooting
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
 
         If ssCase Is Nothing Then
-            ShortSaleManage.MoveLeadsToShortSale(bble, "DataImport")
+            ShortSaleManage.MoveLeadsToShortSale(bble, "DataImport", 1)
             ssCase = ShortSaleCase.GetCaseByBBLE(bble)
         End If
 

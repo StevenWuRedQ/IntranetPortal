@@ -24,6 +24,27 @@ Public Class LeadsInfo
         End Get
     End Property
 
+    Public Shared Function IsInProcess(bble As String) As Boolean
+
+        If ShortSaleManage.IsInShortSale(bble) Then
+            Return True
+        End If
+
+        If LegalCaseManage.IsInLegal(bble) Then
+            Return True
+        End If
+
+        If ConstructionManage.IsInConstruction(bble) Then
+            Return True
+        End If
+
+        If TitleManage.IsInTitle(bble) Then
+            Return True
+        End If
+
+        Return False
+    End Function
+
     <JsonIgnoreAttribute>
     Public ReadOnly Property IsApartment() As Boolean
         Get

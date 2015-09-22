@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CleareneceNotes">
           <Key>
             <PropertyRef Name="NoteId" />
@@ -64,6 +64,7 @@
           <Property Name="CellPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="EmployeeSince" Type="date" />
           <Property Name="Picture" Type="nvarchar" MaxLength="100" />
+          <Property Name="AppId" Type="int" />
         </EntityType>
         <EntityType Name="EvictionCases">
           <Key>
@@ -196,6 +197,7 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="Disable" Type="bit" />
           <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="AppId" Type="int" />
         </EntityType>
         <EntityType Name="PropertyBaseInfo">
           <Key>
@@ -501,6 +503,8 @@
           <Property Name="NoSaleDate" Type="bit" />
           <Property Name="ApprovalChecklist" Type="nvarchar" MaxLength="1000" />
           <Property Name="CaseData" Type="nvarchar(max)" />
+          <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="AppId" Type="int" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
@@ -666,6 +670,7 @@
           <Property Name="Disable" Type="Boolean" />
           <Property Name="CustomerServiceFax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AppId" Type="Int32" />
         </EntityType>
         <EntityType Name="PropertyFloor">
           <Key>
@@ -768,6 +773,8 @@
           <Property Name="ReferralUserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="ApprovalChecklist" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="CaseData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AppId" Type="Int32" />
         </EntityType>
         <EntityType Name="TitleClearence">
           <Key>
@@ -918,6 +925,7 @@
           <Property Name="CellPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmployeeSince" Type="DateTime" Precision="0" />
           <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AppId" Type="Int32" />
         </EntityType>
         <EntityType Name="ShortSaleActivityLog">
           <Key>
@@ -1229,6 +1237,7 @@
           <EntitySetMapping Name="PartyContacts">
             <EntityTypeMapping TypeName="IntranetPortalModel.PartyContact">
               <MappingFragment StoreEntitySet="PartyContacts">
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="CustomerServiceFax" ColumnName="CustomerServiceFax" />
                 <ScalarProperty Name="Disable" ColumnName="Disable" />
@@ -1302,6 +1311,8 @@
           <EntitySetMapping Name="ShortSaleCases">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCase">
               <MappingFragment StoreEntitySet="ShortSaleCases">
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="CaseData" ColumnName="CaseData" />
                 <ScalarProperty Name="ApprovalChecklist" ColumnName="ApprovalChecklist" />
                 <ScalarProperty Name="ReferralUserName" ColumnName="ReferralUserName" />
@@ -1492,6 +1503,7 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="IntranetPortalModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
                 <ScalarProperty Name="Picture" ColumnName="Picture" />
                 <ScalarProperty Name="EmployeeSince" ColumnName="EmployeeSince" />
                 <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />

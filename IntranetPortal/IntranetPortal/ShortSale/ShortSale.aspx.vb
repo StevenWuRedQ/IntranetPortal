@@ -4,7 +4,7 @@ Imports System.Web.Script.Serialization
 Imports System.Web.Script.Services
 
 Public Class NGShortSale
-    Inherits System.Web.UI.Page
+    Inherits PortalPage
 
     Public Property ShortSaleCaseData As ShortSaleCase
     Public Property isEviction As Boolean = False
@@ -23,12 +23,12 @@ Public Class NGShortSale
 
             If Not String.IsNullOrEmpty(Request.QueryString("s")) Then
                 Dim status = CType(Request.QueryString("s"), CaseStatus)
-                ShortSaleCaseList.BindCaseList(status)
+                ShortSaleCaseList.BindCaseList(status, CurrentAppId)
             End If
 
             If Not String.IsNullOrEmpty(Request.QueryString("category")) Then
                 Dim category = Request.QueryString("category").ToString
-                ShortSaleCaseList.BindCaseListByCategory(category)
+                ShortSaleCaseList.BindCaseListByCategory(category, CurrentAppId)
             End If
 
             'process the task
@@ -112,7 +112,7 @@ Public Class NGShortSale
                 ASPxSplitter1.Panes("listPanel").Visible = True
 
                 If ShortSaleCaseData IsNot Nothing Then
-                    ShortSaleCaseList.BindCaseList(ShortSaleCaseData.Status)
+                    ShortSaleCaseList.BindCaseList(ShortSaleCaseData.Status, CurrentAppId)
                     ShortSaleCaseList.AutoLoadCase = False
                 End If
 
@@ -178,7 +178,7 @@ Public Class NGShortSale
                         End If
                     End Using
                 Else
-                    ShortSaleCaseList.BindCaseList(CaseStatus.Eviction)
+                    ShortSaleCaseList.BindCaseList(CaseStatus.Eviction, CurrentAppId)
                 End If
             Else
                 isEviction = False

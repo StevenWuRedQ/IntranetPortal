@@ -44,12 +44,12 @@
                     <li class="ss_form_item">
                         <span class="ss_form_input_title">c/o(<span class="link_pdf">pdf</span>)</span>
 
-                        <input type="radio" id="pdf_check_yes" name="1" <%= ShortSalePage.CheckBox(summaryCase.PropertyInfo.CO)%> value="YES" class="ss_form_input">
+                        <input type="radio" id="pdf_check_yes" name="1" <%= NGShortSale.CheckBox(summaryCase.PropertyInfo.CO)%> value="YES" class="ss_form_input">
                         <label for="pdf_check_yes" class="input_with_check">
                             <span class="box_text">Yes </span>
                         </label>
 
-                        <input type="radio" id="pdf_check_no" name="1" <%= ShortSalePage.CheckBox(summaryCase.PropertyInfo.CO = False)%> value="NO" class="ss_form_input">
+                        <input type="radio" id="pdf_check_no" name="1" <%= NGShortSale.CheckBox(summaryCase.PropertyInfo.CO = False)%> value="NO" class="ss_form_input">
                         <label for="pdf_check_no" class="input_with_check">
                             <span class="box_text">No </span>
                         </label>

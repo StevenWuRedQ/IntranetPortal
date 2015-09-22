@@ -1694,13 +1694,6 @@
       <DependentUpon>ShortSaleInLeadsView.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ShortSale\ShortSale_bak.aspx.designer.vb">
-      <DependentUpon>ShortSale_bak.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ShortSale\ShortSale_bak.aspx.vb">
-      <DependentUpon>ShortSale_bak.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ShortSale\ShortSaleCaseList.ascx.designer.vb">
       <DependentUpon>ShortSaleCaseList.ascx</DependentUpon>
     </Compile>
@@ -2018,6 +2011,13 @@
     </Compile>
     <Compile Include="UserControl\CompanyTree.ascx.vb">
       <DependentUpon>CompanyTree.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\CreateNew.ascx.designer.vb">
+      <DependentUpon>CreateNew.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\CreateNew.ascx.vb">
+      <DependentUpon>CreateNew.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\Devexpress\CustomAppointmentForm.ascx.designer.vb">
@@ -3551,6 +3551,7 @@
     <Content Include="Content\icons\dxicons.eot" />
     <Content Include="App_Data\DeedReversionTemplate.docx" />
     <Content Include="SQL\SearchReslut.sql" />
+    <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="WebForm3.aspx" />
     <Content Include="App_Data\SpecificPerformanceComplaintTemplate.docx" />
     <Content Include="App_Data\QuietTitleComplantTemplate.docx" />
@@ -3716,7 +3717,6 @@
     <Content Include="ShortSale\NGShortSaleHomewonerTab.ascx" />
     <Content Include="ShortSale\ShortSale.aspx" />
     <Content Include="ShortSale\ShortSaleInLeadsView.ascx" />
-    <Content Include="ShortSale\ShortSale_bak.aspx" />
     <Content Include="ShortSale\ShortSaleCaseList.ascx" />
     <Content Include="ShortSale\ShortSaleEvictionTab.ascx" />
     <Content Include="ShortSale\ShortSaleFileOverview.ascx" />

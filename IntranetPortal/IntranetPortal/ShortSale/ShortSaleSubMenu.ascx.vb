@@ -75,7 +75,7 @@ Public Class ShortSaleSubMenu
 
     Sub BindEmployeeList()
         Using Context As New Entities
-            listboxEmployee.DataSource = Employee.GetDeptUsers("Short Sale")
+            listboxEmployee.DataSource = ShortSaleManage.GetShortSaleUsers 'Employee.GetDeptUsers("Short Sale")
             listboxEmployee.DataBind()
         End Using
     End Sub

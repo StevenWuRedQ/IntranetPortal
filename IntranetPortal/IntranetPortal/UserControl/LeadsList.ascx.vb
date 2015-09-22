@@ -430,6 +430,7 @@ Public Class LeadsList
             ld.Neighborhood = lf.NeighName
             ld.AssignDate = DateTime.Now
             ld.AssignBy = Page.User.Identity.Name
+            ld.AppId = Employee.CurrentAppId
 
             If Employee.IsManager(Page.User.Identity.Name) Or Page.User.IsInRole("SeniorAgent") Then
                 ld.Status = LeadStatus.NewLead

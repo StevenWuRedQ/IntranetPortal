@@ -73,8 +73,9 @@ Public Class SendMailControl
         Dim emilList = TryCast(EmailToIDs.FindControl("tabPageEmailSelect").FindControl("lbEmails"), ASPxListBox)
         Dim emailCClist = TryCast(EmailCCIDs.FindControl("tabPageEmailCCSelect").FindControl("lbEmailCCs"), ASPxListBox)
         Using Context As New Entities
-            Dim emilListData = Context.Employees.Select(Function(e) e.Email).Where(Function(e) e IsNot Nothing And e.IndexOf("@") > 0).ToList
-            emilListData.AddRange(PartyContact.getAllEmail())
+            Dim appId = Employee.CurrentAppId
+            Dim emilListData = Context.Employees.Where(Function(em) em.AppId = appId).Select(Function(e) e.Email).Where(Function(e) e IsNot Nothing And e.IndexOf("@") > 0).ToList
+            emilListData.AddRange(PartyContact.getAllEmail(appId))
             emilListData = emilListData.Distinct.ToList
             emilList.DataSource = emilListData
             emilList.DataBind()

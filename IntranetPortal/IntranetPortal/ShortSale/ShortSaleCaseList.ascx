@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleCaseList.ascx.vb" Inherits="IntranetPortal.ShortSaleCaseList" %>
 <%@ Register Src="~/ShortSale/ShortSaleSubMenu.ascx" TagPrefix="uc1" TagName="ShortSaleSubMenu" %>
+<%@ Register Src="~/UserControl/CreateNew.ascx" TagPrefix="uc1" TagName="CreateNew" %>
+
 
 <script type="text/javascript">
     var postponedCallbackRequired = false;
@@ -212,7 +214,7 @@
             <input style="width: 200px; height: 30px;" class="form-control" id="QuickSearch" type="text" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid();return false; }">
             <i class="fa fa-search tooltip-examples icon_btn grid_buttons" style="margin-left:10px" onclick="SearchGrid()"></i>
         </div>
-        <dx:ASPxGridView runat="server" SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" KeyFieldName="CaseId" OnDataBinding="gridCase_DataBinding">
+        <dx:ASPxGridView runat="server" SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" KeyFieldName="CaseId" OnDataBinding="gridCase_DataBinding">           
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />              
@@ -358,7 +360,7 @@
             </GroupSummary>
             <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" EndCallback="function(s,e){AddScrollbarOnLeadsList();}"  RowClick="OnGridRowClicked"/>
             <Border BorderStyle="None"></Border>
-        </dx:ASPxGridView>
+        </dx:ASPxGridView>        
     </div>
 </div>
 <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="aspxPopupSortMenu"
@@ -378,3 +380,4 @@
     </Items>
     <ClientSideEvents ItemClick="OnSortMenuClick" />
 </dx:ASPxPopupMenu>
+<uc1:CreateNew runat="server" id="CreateNew" Visible="false" />

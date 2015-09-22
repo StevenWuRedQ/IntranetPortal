@@ -17,6 +17,10 @@ Public Class TitleManage
         Return False
     End Function
 
+    Public Shared Function IsInTitle(bble As String) As Boolean
+        Return TitleCase.Exists(bble)
+    End Function
+
     Public Shared Sub StartTitle(bble As String, caseName As String, userName As String)
         Dim tCase = TitleCase.GetCase(bble)
 

@@ -11,9 +11,15 @@ Public Class Default2
                 ContentUrl = String.Format("/LeadAgent.aspx?c=Search&key={0}&id={1}", Request.QueryString("key"), Request.QueryString("id"))
             End If
 
+            If Roles.GetRolesForUser().Any(Function(ss) ss.Contains("ShortSale-")) Then
+                ContentUrl = "/ShortSale/ShortSaleSummaryPage.aspx"
+                Return
+            End If
+
             If User.IsInRole("Construction-Users") OrElse User.IsInRole("Construction-Manager") Then
                 ContentUrl = "/MyDefault.aspx"
             End If
+
         End If
 
         'Change layout by steven

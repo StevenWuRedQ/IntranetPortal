@@ -5,14 +5,32 @@ Public Class ShortSaleCaseList
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'BindCaseList()
+
+        If Not Page.IsPostBack Then
+
+            If Not String.IsNullOrEmpty(Request.QueryString("action")) Then
+
+                If Request.QueryString("action") = "Create" Then
+                    Me.CreateNew.Visible = True
+
+                    'If Not Page.ClientScript.IsStartupScriptRegistered("ShowCreateNewWindow") Then
+
+                    '    Dim cstext1 As String = "<script type=""text/javascript"">" &
+                    '                    String.Format("ShowCreateNew();") & "</script>"
+                    '    Page.ClientScript.RegisterStartupScript(Me.GetType, "ShowCreateNewWindow", cstext1)
+                    'End If
+
+                End If
+            End If
+        End If
     End Sub
 
-    Public Sub BindCaseListByCategory(category As String)
+    Public Sub BindCaseListByCategory(category As String, appId As Integer)
         hfCaseCategory.Value = category
         lblLeadCategory.Text = category
 
         If Employee.IsShortSaleManager(Page.User.Identity.Name) Then
-            gridCase.DataSource = ShortSaleCase.GetCaseByCategory(category)
+            gridCase.DataSource = ShortSaleCase.GetCaseByCategory(category, appId)
             gridCase.DataBind()
 
             If Not Page.IsPostBack Then
@@ -30,7 +48,7 @@ Public Class ShortSaleCaseList
                 End If
             End If
         Else
-            gridCase.DataSource = ShortSaleCase.GetCaseByCategory(category, Page.User.Identity.Name)
+            gridCase.DataSource = ShortSaleCase.GetCaseByCategory(category, appId, Page.User.Identity.Name)
             gridCase.DataBind()
 
             If Not Page.IsPostBack Then
@@ -47,7 +65,7 @@ Public Class ShortSaleCaseList
         End If
     End Sub
 
-    Public Sub BindCaseList(status As CaseStatus)
+    Public Sub BindCaseList(status As CaseStatus, appId As Integer)
         hfCaseStatus.Value = status
 
         If status = CaseStatus.Eviction Then
@@ -62,7 +80,7 @@ Public Class ShortSaleCaseList
         End If
 
         If status = CaseStatus.Archived Then
-            gridCase.DataSource = ShortSaleCase.GetArchivedCases
+            gridCase.DataSource = ShortSaleCase.GetArchivedCases(appId)
             gridCase.DataBind()
 
             If Not Page.IsPostBack Then
@@ -73,7 +91,7 @@ Public Class ShortSaleCaseList
         End If
 
         If Employee.IsShortSaleManager(Page.User.Identity.Name) Then
-            gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status)
+            gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status, appId)
 
             gridCase.DataBind()
 
@@ -81,7 +99,7 @@ Public Class ShortSaleCaseList
                 gridCase.GroupBy(gridCase.Columns("Owner"))
             End If
         Else
-            gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status, Page.User.Identity.Name)
+            gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status, Page.User.Identity.Name, appId)
             gridCase.DataBind()
         End If
 
@@ -97,9 +115,9 @@ Public Class ShortSaleCaseList
         gridCase.DataSource = ShortSaleCase.GetCaseByBBLEs(bbles)
         gridCase.DataBind()
     End Sub
-    Public Sub BindCaseForTest(needGorup As Boolean)
+    Public Sub BindCaseForTest(needGorup As Boolean, appId As Integer)
         'hfCaseStatus.Value = CaseStatus.NewFile
-        BindCaseList(CaseStatus.NewFile)
+        BindCaseList(CaseStatus.NewFile, appId)
         'gridCase.DataBind()
 
         If (Not needGorup) Then
@@ -116,7 +134,7 @@ Public Class ShortSaleCaseList
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)
         If gridCase.DataSource Is Nothing AndAlso gridCase.IsCallback Then
             If Not String.IsNullOrEmpty(hfCaseStatus.Value) Then
-                BindCaseList(hfCaseStatus.Value)
+                BindCaseList(hfCaseStatus.Value, CType(Page, PortalPage).CurrentAppId)
             End If
 
             If (Not String.IsNullOrEmpty(hfCaseBBLEs.Value)) Then
@@ -124,9 +142,20 @@ Public Class ShortSaleCaseList
             End If
 
             If Not String.IsNullOrEmpty(hfCaseCategory.Value) Then
-                BindCaseListByCategory(hfCaseCategory.Value)
+                BindCaseListByCategory(hfCaseCategory.Value, CType(Page, PortalPage).CurrentAppId)
             End If
         End If
+    End Sub
+
+    Public Sub CreateNewLeads(bble As String) Handles CreateNew.CaseCreatedEvent
+
+        Dim ld = LeadsInfo.GetInstance(bble)
+
+        If ld Is Nothing Then
+            Lead.CreateLeads(bble, LeadStatus.InProcess, Page.User.Identity.Name)
+        End If
+
+        ShortSaleManage.MoveLeadsToShortSale(bble, Page.User.Identity.Name, Employee.CurrentAppId)
     End Sub
 
     Public Property AutoLoadCase As Boolean

@@ -60,5 +60,7 @@ Partial Public Class ShortSaleCase
     Public Property ReferralUserName As String
     Public Property ApprovalChecklist As String
     Public Property CaseData As String
+    Public Property Department As String
+    Public Property AppId As Nullable(Of Integer)
 
 End Class

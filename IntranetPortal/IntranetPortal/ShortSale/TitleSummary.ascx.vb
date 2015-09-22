@@ -113,7 +113,7 @@ Public Class UCTitleSummary
 
         Return
         'Bind All Leads Grid
-        AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase()
+        AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase(Employee.CurrentAppId)
         AllLeadsGrid.DataBind()
         RefreshGrid()
     End Sub
@@ -122,14 +122,14 @@ Public Class UCTitleSummary
     Private Sub BindUrgent()
         tdUrgent.Visible = True
         'Bind Urgent Data
-        gridUrgent.DataSource = ShortSale.ShortSaleCase.GetCaseByCategory("Assign") 'ShortSaleSummary.GetUrgentCases()
+        gridUrgent.DataSource = ShortSale.ShortSaleCase.GetCaseByCategory("Assign", Employee.CurrentAppId) 'ShortSaleSummary.GetUrgentCases()
         gridUrgent.DataBind()
     End Sub
 
     Private Sub BindUpcomingBPO()
         tdUpcomingBPO.Visible = True
         'Bind Priority Data
-        Dim priorityData = ShortSale.ShortSaleCase.GetCaseByCategory("Upcoming") 'ShortSale.ShortSaleSummary.GetUpcomingClosings()
+        Dim priorityData = ShortSale.ShortSaleCase.GetCaseByCategory("Upcoming", Employee.CurrentAppId) 'ShortSale.ShortSaleSummary.GetUpcomingClosings()
 
         gridUpcomingApproval.DataSource = priorityData
         gridUpcomingApproval.DataBind()
@@ -141,13 +141,13 @@ Public Class UCTitleSummary
 
     Private Sub BindCounterOffer()
         tdCounterOffer.Visible = True
-        CounterOfferGrid.DataSource = ShortSale.ShortSaleCase.GetCaseByMortgageStatus({"Counter Offer - Bank", "Counter Offer - Buyer"}) 'ShortSaleSummary.GetCaseByMortStatus("Counter Offer")
+        CounterOfferGrid.DataSource = ShortSale.ShortSaleCase.GetCaseByMortgageStatus({"Counter Offer - Bank", "Counter Offer - Buyer"}, Employee.CurrentAppId) 'ShortSaleSummary.GetCaseByMortStatus("Counter Offer")
         CounterOfferGrid.DataBind()
     End Sub
 
     Private Sub BindInvestorReview()
         tdInvestorReview.Visible = True
-        InvestorReviewGrid.DataSource = ShortSaleSummary.GetCaseByMortStatus("Investor Review")
+        InvestorReviewGrid.DataSource = ShortSale.ShortSaleCase.GetCaseByMortgageStatus({"Investor Review"}, Employee.CurrentAppId)
         InvestorReviewGrid.DataBind()
     End Sub
 
@@ -206,7 +206,7 @@ Public Class UCTitleSummary
 
             If grid Is AllLeadsGrid Then
                 'Bind All Leads Grid
-                AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase()
+                AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase(Employee.CurrentAppId)
             End If
         End If
     End Sub
@@ -407,7 +407,7 @@ Public Class UCTitleSummary
         '    AllLeadsGrid.DataBind()
         'End If
 
-        gridData.DataSource = ShortSaleCase.CaseReport2
+        gridData.DataSource = ShortSaleCase.CaseReport2(Employee.CurrentAppId)
         gridData.DataBind()
 
 
@@ -416,7 +416,7 @@ Public Class UCTitleSummary
     End Sub
 
     Protected Sub ExportPdf_Click(sender As Object, e As EventArgs)
-        AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase()
+        AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase(Employee.CurrentAppId)
         AllLeadsGrid.DataBind()
 
         gridExporter.FileName = String.Format("GridData-{0}-{1}-{2}.xlsx", Today.Month, Today.Day, Today.Year)

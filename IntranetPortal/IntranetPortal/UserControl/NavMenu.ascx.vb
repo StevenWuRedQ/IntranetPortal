@@ -438,20 +438,20 @@ Public Class RefreshLeadsCountHandler
                         Dim category = tmpStr(2)
 
                         If (Employee.IsShortSaleManager(userName)) Then
-                            Return ShortSale.ShortSaleCase.GetCaseByCategory(category).Count
+                            Return ShortSale.ShortSaleCase.GetCaseByCategory(category, Employee.GetInstance(userName).AppId).Count
                         End If
 
-                        Return ShortSale.ShortSaleCase.GetCaseByCategory(category, userName).Count
+                        Return ShortSale.ShortSaleCase.GetCaseByCategory(category, userName, Employee.GetInstance(userName).AppId).Count
                     End If
                 Case Else
                     Dim status As ShortSale.CaseStatus
 
                     If [Enum].TryParse(Of ShortSale.CaseStatus)(type, status) Then
                         If (Employee.IsShortSaleManager(userName)) Then
-                            Return ShortSale.ShortSaleCase.GetCaseCount(status)
+                            Return ShortSale.ShortSaleCase.GetCaseCount(status, Employee.GetInstance(userName).AppId)
                         End If
 
-                        Return ShortSale.ShortSaleCase.GetCaseCount(status, userName)
+                        Return ShortSale.ShortSaleCase.GetCaseCount(status, userName, Employee.GetInstance(userName).AppId)
                     Else
                         Return 0
                     End If

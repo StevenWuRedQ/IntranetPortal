@@ -147,7 +147,7 @@ Public Class LeadsSubMenu
 
                     If Not String.IsNullOrEmpty(lbSelectionMode.Value) AndAlso lbSelectionMode.Value = 0 Then
                         'Add leads to short sale section
-                        ShortSaleManage.MoveLeadsToShortSale(hfBBLE.Value, Page.User.Identity.Name)
+                        ShortSaleManage.MoveLeadsToShortSale(hfBBLE.Value, Page.User.Identity.Name, Employee.CurrentAppId)
                     End If
                 End If
             End If
@@ -254,12 +254,12 @@ Public Class LeadsSubMenu
             If Not String.IsNullOrEmpty(lbSelectionMode.Value) Then
                 If lbSelectionMode.SelectedValues.Contains("0") Then
                     'Add leads to short sale section
-                    ShortSaleManage.MoveLeadsToShortSale(hfInProcessBBLE.Value, Page.User.Identity.Name)
+                    ShortSaleManage.MoveLeadsToShortSale(hfInProcessBBLE.Value, Page.User.Identity.Name, Employee.CurrentAppId)
                 End If
 
                 If lbSelectionMode.SelectedValues.Contains("1") Then
                     If ShortSaleCase.GetCaseByBBLE(bble) Is Nothing Then
-                        ShortSaleManage.MoveLeadsToShortSale(bble, Page.User.Identity.Name)
+                        ShortSaleManage.MoveLeadsToShortSale(bble, Page.User.Identity.Name, Employee.CurrentAppId)
                     End If
 
                     Dim name = cbEvictionUsers.Value

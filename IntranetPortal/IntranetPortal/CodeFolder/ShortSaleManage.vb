@@ -74,7 +74,7 @@ Public Class ShortSaleManage
         System.Threading.ThreadPool.QueueUserWorkItem(NotifyUpdate)
     End Sub
 
-    Public Shared Sub MoveLeadsToShortSale(bble As String, createBy As String)
+    Public Shared Sub MoveLeadsToShortSale(bble As String, createBy As String, appid As Integer)
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
 
         If ssCase Is Nothing OrElse ssCase.Status = ShortSale.CaseStatus.NewFile Then
@@ -87,6 +87,7 @@ Public Class ShortSaleManage
                 ssCase.BBLE = bble
                 ssCase.CaseName = li.LeadsName
                 ssCase.Status = ShortSale.CaseStatus.NewFile
+                ssCase.AppId = appid
                 ssCase.Owner = GetIntaker()
                 ssCase = SetReferral(ssCase)
                 ssCase.CreateBy = createBy
@@ -97,6 +98,17 @@ Public Class ShortSaleManage
             End If
         End If
     End Sub
+
+    Public Shared Function GetShortSaleUsers() As String()
+        Dim ssRoles = Roles.GetAllRoles().Where(Function(r) r.StartsWith("ShortSale-"))
+
+        Dim users As New List(Of String)
+        For Each r In ssRoles
+            users.AddRange(Roles.GetUsersInRole(r))
+        Next
+
+        Return users.Distinct.ToArray
+    End Function
 
     Public Shared Sub StartConstruction(bble As String, userName As String)
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
@@ -123,13 +135,11 @@ Public Class ShortSaleManage
         ssCase.Save()
 
         If ssCase.CaseId > 0 Then
-            If ssCase.Mortgages.Count = 0 Then
-                Dim mort As New PropertyMortgage
-                mort.CaseId = ssCase.CaseId
-                mort.Category = "Assign"
-                mort.Status = "Intake - New File"
-                mort.Save(approvedBy)
-            End If
+            Dim mort = ssCase.FirstMortgage
+            mort.CaseId = ssCase.CaseId
+            mort.Category = "Assign"
+            mort.Status = "Intake - New File"
+            mort.Save(approvedBy)
         End If
 
         'Send user email 
@@ -360,7 +370,7 @@ Public Class ShortSaleManage
                                                                                                 Dim category = objData("Category").ToString
                                                                                                 Dim statusofUpdate = objData("StatusUpdate").ToString
 
-                                                                                                Dim ssPage As New ShortSalePage
+                                                                                                Dim ssPage As New NGShortSale
                                                                                                 ssPage.MortgageStatusUpdate(typeofUpdate, statusofUpdate, category, task.BBLE)
 
                                                                                                 'Dim comments = String.Format("Mortgage Status Update: <br />Type of Update: {0}", typeofUpdate)
@@ -437,7 +447,7 @@ Public Class ShortSaleProcess
 
                 Dim ld = LeadsInfo.GetInstance(task.BBLE)
                 Dim msg = String.Format("Your {0}-{1} is approved by {2}.", task.Action, ld.StreetNameWithNo, task.CompleteBy)
-                UserMessage.AddNewMessage(task.CreateBy, "Approved", msg, task.BBLE, DateTime.Now, "Portal")
+                UserMessage.AddNewMessage(task.CreateBy, "Approved", msg, task.BBLE, DateTime.Now, "Portal", "/ShortSale/ShortSale.aspx?bble=" & task.BBLE)
             Case UserTask.TaskStatus.Declined
                 If DeclinedAction IsNot Nothing Then
                     DeclinedAction(task)
@@ -445,7 +455,7 @@ Public Class ShortSaleProcess
 
                 Dim ld = LeadsInfo.GetInstance(task.BBLE)
                 Dim msg = String.Format("Your {0}-{1} is declined by {2}. Comments: {3}", task.Action, ld.StreetNameWithNo, task.CompleteBy, task.Comments)
-                UserMessage.AddNewMessage(task.CreateBy, "Declined", msg, task.BBLE, DateTime.Now, "Portal")
+                UserMessage.AddNewMessage(task.CreateBy, "Declined", msg, task.BBLE, DateTime.Now, "Portal", "/ShortSale/ShortSale.aspx?bble=" & task.BBLE)
         End Select
     End Sub
 

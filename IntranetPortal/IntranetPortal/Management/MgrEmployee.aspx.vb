@@ -5,20 +5,42 @@ Public Class MgrEmployee
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not Page.IsPostBack Then
+            InitApplications()
+        End If
+
         BindTreeList()
     End Sub
 
+    Sub InitApplications()
+        ddlApplications.DataSource = Core.Application.GetAll
+        ddlApplications.DataTextField = "Name"
+        ddlApplications.DataValueField = "ApplicationId"
+        ddlApplications.DataBind()
+    End Sub
+
     Sub BindTreeList()
+        Dim appId = CInt(ddlApplications.SelectedValue)
+
         Using Context As New Entities
             If chkActive.Checked Then
-                treeList.DataSource = Context.Employees.Where(Function(em) em.Active = True).ToList
+                treeList.DataSource = Context.Employees.Where(Function(em) em.Active = True And em.AppId = appId).ToList
             Else
-                treeList.DataSource = Context.Employees.ToList
+                treeList.DataSource = Context.Employees.Where(Function(em) em.AppId = appId).ToList
             End If
 
             treeList.DataBind()
         End Using
     End Sub
+
+    Protected Sub ddlApplications_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Function EmployeeDataSource()
+
+
+    End Function
 
     Protected Sub treeList_NodeInserting(sender As Object, e As DevExpress.Web.Data.ASPxDataInsertingEventArgs) Handles treeList.NodeInserting
         Dim emp As New Employee
@@ -34,6 +56,7 @@ Public Class MgrEmployee
         emp.ReportTo = e.NewValues("ReportTo")
         emp.Description = e.NewValues("Description")
         emp.Active = e.NewValues("Active")
+        emp.AppId = CInt(ddlApplications.SelectedValue)
         emp.CreateDate = DateTime.Now
         emp.CreateBy = Page.User.Identity.Name
 
@@ -175,4 +198,6 @@ Public Class MgrEmployee
 
         End If
     End Sub
+
+
 End Class

@@ -175,6 +175,45 @@ Partial Public Class Lead
         Return False
     End Function
 
+    Public Shared Function CreateLeads(bble As String, status As LeadStatus, createBy As String) As Lead
+
+        Using ctx As New Entities
+
+            Dim li As LeadsInfo
+
+            If ctx.LeadsInfoes.Any(Function(l) l.BBLE = bble) Then
+                li = LeadsInfo.GetInstance(bble)
+            Else
+                li = DataWCFService.UpdateAssessInfo(bble)
+            End If
+
+            Dim emp = Employee.GetInstance(createBy)
+
+            Dim ld As Lead
+            If ctx.Leads.Any(Function(l) l.BBLE = bble) Then
+                ld = ctx.Leads.Find(bble)
+            Else
+                ld = New Lead
+                ctx.Leads.Add(ld)
+            End If
+
+            ld.BBLE = bble
+            ld.LeadsName = If(li Is Nothing, "", li.LeadsName)
+            ld.EmployeeID = Employee.GetInstance(createBy).EmployeeID
+            ld.EmployeeName = createBy
+            ld.Neighborhood = li.NeighName
+            ld.AssignDate = DateTime.Now
+            ld.AssignBy = createBy
+            ld.Status = status
+            ld.AppId = emp.AppId
+
+            ctx.SaveChanges()
+
+            Return ld
+        End Using
+    End Function
+
+
     'Get user data by status
     Public Shared Function GetUserLeadsData(name As String, status As LeadStatus) As List(Of Lead)
         Return GetUserLeadsData({name}, status)
@@ -413,6 +452,11 @@ Partial Public Class Lead
 
     Public Shared Sub ArchivedLogs(bble As String)
         Using ctx As New Entities
+
+            If LeadsInfo.IsInProcess(bble) Then
+                Return
+            End If
+
             Dim logs = ctx.LeadsActivityLogs.Where(Function(log) log.BBLE = bble).ToList
             Dim archivedLogs As New List(Of LeadsActivityLogArchived)
 

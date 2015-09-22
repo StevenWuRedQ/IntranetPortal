@@ -13,6 +13,12 @@
         End Using
     End Function
 
+    Public Shared Function Exists(bble As String) As Boolean
+        Using ctx As New ConstructionEntities
+            Return ctx.TitleCases.Any(Function(c) c.BBLE = bble)
+        End Using
+    End Function
+
     Public Shared Function GetAllCases(userName As String) As TitleCase()
         Using ctx As New ConstructionEntities
             Return ctx.TitleCases.Where(Function(c) c.Owner = userName).ToArray

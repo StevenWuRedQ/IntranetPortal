@@ -102,7 +102,7 @@ Public Class ActivityLogs
             'cbEmps.DataBind()
 
             Dim lbEmps = TryCast(empsDropDownEdit.FindControl("tabPageEmpSelect").FindControl("lbEmps"), ASPxListBox)
-            lbEmps.DataSource = Employee.GetAllActiveEmps()
+            lbEmps.DataSource = Employee.GetAllActiveEmps(Employee.CurrentAppId)
             lbEmps.DataBind()
 
             Dim lbRecentEmps = TryCast(empsDropDownEdit.FindControl("tabPageEmpSelect").FindControl("lbRecentEmps"), ASPxListBox)

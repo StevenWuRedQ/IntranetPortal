@@ -37,7 +37,7 @@
         End Using
     End Function
 
-    Public Shared Function GetAllCase() As List(Of ShortSaleCase)
+    Public Shared Function GetAllCase(appId As Integer) As List(Of ShortSaleCase)
         'Using ctx As New ShortSaleEntities
         '    Dim result = From ssCase In ctx.ShortSaleCases
         '                 Join prop In ctx.PropertyBaseInfoes On prop.BBLE Equals ssCase.BBLE
@@ -65,7 +65,7 @@
         'End Using
 
         Using ctx As New ShortSaleEntities
-            Return ctx.ShortSaleCases.OrderByDescending(Function(ss) ss.UpdateDate).ToList
+            Return ctx.ShortSaleCases.Where(Function(ss) ss.AppId = appId).OrderByDescending(Function(ss) ss.UpdateDate).ToList
         End Using
     End Function
 End Class

@@ -19,6 +19,17 @@ Partial Public Class Employee
         End Get
     End Property
 
+    Public Shared ReadOnly Property CurrentAppId As Integer
+        Get
+            Try
+                Return GetInstance(HttpContext.Current.User.Identity.Name).AppId
+            Catch ex As Exception
+                Core.SystemLog.LogError("Error to get CurrentAppId", ex, ex.ToJsonString, "", "")
+                Return 1
+            End Try
+        End Get
+    End Property
+
     Public Shared Function GetProfile(name As String) As EmployeeProfile
         Using context As New Entities
             Dim data = context.UserProfileDatas.Where(Function(up) up.UserName = name).Select(Function(up) up.ProfileData).SingleOrDefault
@@ -70,15 +81,9 @@ Partial Public Class Employee
         End Get
     End Property
 
-
-    Dim app As Core.Application
-    Public ReadOnly Property Application As Core.Application
+    Public Shared ReadOnly Property Application As Core.Application
         Get
-            If app IsNot Nothing Then
-                app = Core.Application.Instance(Me.appid)
-            End If
-
-            Return app
+            Return Core.Application.Instance(CurrentAppId)
         End Get
     End Property
 
@@ -413,10 +418,15 @@ Partial Public Class Employee
         End Using
     End Function
 
-
     Public Shared Function GetAllActiveEmps() As String()
         Using Context As New Entities
             Return Context.Employees.Where(Function(em) em.Active = True).Select(Function(em) em.Name).ToArray
+        End Using
+    End Function
+
+    Public Shared Function GetAllActiveEmps(appId As Integer) As String()
+        Using Context As New Entities
+            Return Context.Employees.Where(Function(em) em.Active = True And em.AppId = appId).Select(Function(em) em.Name).ToArray
         End Using
     End Function
 
@@ -462,9 +472,9 @@ Partial Public Class Employee
     Public Shared Function GetTeamUsers(teamId As Integer) As String()
         Using ctx As New Entities
             Dim emps = (From user In ctx.UserInTeams.Where(Function(ut) ut.TeamId = teamId)
-                       Join emp In ctx.Employees On user.EmployeeName Equals emp.Name
-                       Where emp.Active = True
-                       Select user.EmployeeName).ToArray
+                        Join emp In ctx.Employees On user.EmployeeName Equals emp.Name
+                        Where emp.Active = True
+                        Select user.EmployeeName).ToArray
 
             Return emps
         End Using
@@ -578,9 +588,9 @@ Partial Public Class Employee
     Public Shared Function GetEmpTeams(empName As String) As String()
         Using ctx As New Entities
             Dim team = (From t In ctx.Teams
-                       Join ut In ctx.UserInTeams On t.TeamId Equals ut.TeamId
-                       Where ut.EmployeeName = empName
-                       Select t.Name).ToList
+                        Join ut In ctx.UserInTeams On t.TeamId Equals ut.TeamId
+                        Where ut.EmployeeName = empName
+                        Select t.Name).ToList
 
             If team IsNot Nothing Then
                 Return team.ToArray

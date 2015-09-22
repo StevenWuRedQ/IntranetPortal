@@ -8,5 +8,10 @@
 
     End Function
 
+    Public Shared Function GetAll() As Application()
+        Using ctx As New CoreEntities
+            Return ctx.Applications.ToArray
+        End Using
+    End Function
 
 End Class

@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class MgrEmployee
-
+    
     '''<summary>
     '''form1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
+    
     '''<summary>
     '''ASPxSplitter1 control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
-
+    
     '''<summary>
     '''ASPxRoundPanel1 control.
     '''</summary>
@@ -39,7 +39,16 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxRoundPanel1 As Global.DevExpress.Web.ASPxRoundPanel
-
+    
+    '''<summary>
+    '''ddlApplications control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlApplications As Global.System.Web.UI.WebControls.DropDownList
+    
     '''<summary>
     '''SearchName control.
     '''</summary>
@@ -48,7 +57,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SearchName As Global.System.Web.UI.WebControls.TextBox
-
+    
     '''<summary>
     '''SearchnameBtn control.
     '''</summary>
@@ -57,7 +66,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SearchnameBtn As Global.System.Web.UI.WebControls.Button
-
+    
     '''<summary>
     '''chkActive control.
     '''</summary>
@@ -66,7 +75,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents chkActive As Global.DevExpress.Web.ASPxCheckBox
-
+    
     '''<summary>
     '''treeList control.
     '''</summary>
@@ -75,7 +84,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents treeList As Global.DevExpress.Web.ASPxTreeList.ASPxTreeList
-
+    
     '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
@@ -84,7 +93,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
-
+    
     '''<summary>
     '''Popupcontrolcontentcontrol1 control.
     '''</summary>
@@ -93,7 +102,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Popupcontrolcontentcontrol1 As Global.DevExpress.Web.PopupControlContentControl
-
+    
     '''<summary>
     '''npsw control.
     '''</summary>
@@ -102,7 +111,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents npsw As Global.DevExpress.Web.ASPxTextBox
-
+    
     '''<summary>
     '''cnpsw control.
     '''</summary>
@@ -111,7 +120,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cnpsw As Global.DevExpress.Web.ASPxTextBox
-
+    
     '''<summary>
     '''confirmButton control.
     '''</summary>
@@ -120,7 +129,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents confirmButton As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''ASPxPopupControl2 control.
     '''</summary>
@@ -129,7 +138,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
-
+    
     '''<summary>
     '''Popupcontrolcontentcontrol2 control.
     '''</summary>
@@ -138,7 +147,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Popupcontrolcontentcontrol2 As Global.DevExpress.Web.PopupControlContentControl
-
+    
     '''<summary>
     '''lblSelectImage control.
     '''</summary>
@@ -147,7 +156,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblSelectImage As Global.DevExpress.Web.ASPxLabel
-
+    
     '''<summary>
     '''uplImage control.
     '''</summary>
@@ -156,7 +165,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents uplImage As Global.DevExpress.Web.ASPxUploadControl
-
+    
     '''<summary>
     '''lblAllowebMimeType control.
     '''</summary>
@@ -165,7 +174,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblAllowebMimeType As Global.DevExpress.Web.ASPxLabel
-
+    
     '''<summary>
     '''lblMaxFileSize control.
     '''</summary>
@@ -174,7 +183,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMaxFileSize As Global.DevExpress.Web.ASPxLabel
-
+    
     '''<summary>
     '''btnUpload control.
     '''</summary>
@@ -183,7 +192,7 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnUpload As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''btnConfirm control.
     '''</summary>

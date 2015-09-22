@@ -11,6 +11,11 @@ Public Class LegalCaseManage
     Private Const FollowupEmailTemplate As String = "LegalFollowUpNotify"
 
 
+    Public Shared Function IsInLegal(bble As String) As Boolean
+
+        Return LegalCase.InLegal(bble)
+
+    End Function
 
     Public Shared Function GetCaseData(bble As String, userName As String) As String
         Dim lcase = Legal.LegalCase.GetCase(bble)
