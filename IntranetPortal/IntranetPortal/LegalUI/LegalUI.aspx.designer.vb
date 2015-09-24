@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class LegalUI
-
+    
     '''<summary>
     '''ASPxSplitter1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
-
+    
     '''<summary>
     '''SplitterContentControl1 control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.SplitterContentControl
-
+    
     '''<summary>
     '''LegalCaseList control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents LegalCaseList As Global.IntranetPortal.LegalCaseList
-
+    
     '''<summary>
     '''ASPxPopupControl3 control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl
-
+    
     '''<summary>
     '''PopupContentReAssign control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PopupContentReAssign As Global.DevExpress.Web.PopupControlContentControl
-
+    
     '''<summary>
     '''hfUserType control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hfUserType As Global.System.Web.UI.WebControls.HiddenField
-
+    
     '''<summary>
     '''listboxEmployee control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents listboxEmployee As Global.DevExpress.Web.ASPxListBox
-
+    
     '''<summary>
     '''btnAssign control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnAssign As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
-
+    
     '''<summary>
     '''txtBackComments control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtBackComments As Global.DevExpress.Web.ASPxMemo
-
+    
     '''<summary>
     '''ASPxButton2 control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''LegalTab1 control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents LegalTab1 As Global.IntranetPortal.LegalTab
-
+    
     '''<summary>
     '''DocumentsUI control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DocumentsUI As Global.IntranetPortal.DocumentsUI
-
+    
     '''<summary>
     '''ASPxPopupControl2 control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
-
+    
     '''<summary>
     '''SencnedAction control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SencnedAction As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
+    
     '''<summary>
     '''cbLegalType control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbLegalType As Global.DevExpress.Web.ASPxCheckBoxList
-
+    
     '''<summary>
     '''LegalSecondaryActions control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents LegalSecondaryActions As Global.IntranetPortal.LegalSecondaryActions
-
+    
     '''<summary>
     '''MangePreview control.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MangePreview As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
+    
     '''<summary>
     '''ManagePreViewControl control.
     '''</summary>
@@ -183,7 +183,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ManagePreViewControl As Global.IntranetPortal.ManagePreViewControl
-
+    
     '''<summary>
     '''Common control.
     '''</summary>
@@ -192,7 +192,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Common As Global.IntranetPortal.Common
-
+    
     '''<summary>
     '''cbpLogs control.
     '''</summary>
@@ -201,7 +201,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbpLogs As Global.DevExpress.Web.ASPxCallbackPanel
-
+    
     '''<summary>
     '''ActivityLogs control.
     '''</summary>
@@ -210,7 +210,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
-
+    
     '''<summary>
     '''fileGamePlan control.
     '''</summary>
@@ -219,7 +219,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents fileGamePlan As Global.IntranetPortal.ShortSaleFileOverview
-
+    
     '''<summary>
     '''SendMail control.
     '''</summary>
@@ -228,7 +228,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SendMail As Global.IntranetPortal.SendMailControl
-
+    
     '''<summary>
     '''ASPxPopupCallBackMenu2 control.
     '''</summary>
@@ -237,7 +237,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupCallBackMenu2 As Global.DevExpress.Web.ASPxPopupMenu
-
+    
     '''<summary>
     '''pcMain control.
     '''</summary>
@@ -246,7 +246,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pcMain As Global.DevExpress.Web.ASPxPopupControl
-
+    
     '''<summary>
     '''pcMainPopupControl control.
     '''</summary>
@@ -255,7 +255,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pcMainPopupControl As Global.DevExpress.Web.PopupControlContentControl
-
+    
     '''<summary>
     '''ASPxCalendar1 control.
     '''</summary>
@@ -264,7 +264,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxCalendar1 As Global.DevExpress.Web.ASPxCalendar
-
+    
     '''<summary>
     '''ASPxButton1 control.
     '''</summary>
@@ -273,7 +273,7 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''VendorsPopup control.
     '''</summary>

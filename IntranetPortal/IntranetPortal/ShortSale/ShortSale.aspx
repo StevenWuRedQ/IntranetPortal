@@ -98,7 +98,7 @@
                                                                                 <div class="font_size_bold">Documents</div>
                                                                             </a>
                                                                         </li>
-                                                                        <li class="short_sale_head_tab">
+                                                                        <li class="short_sale_head_tab" ng-show="SsCase&&SsCase.BBLE">
                                                                             <a class="tab_button_a">
                                                                                 <i class="fa fa-list-ul head_tab_icon_padding"></i>
                                                                                 <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -106,20 +106,20 @@
                                                                             <div class="shot_sale_sub">
                                                                                 <ul class="nav  clearfix" role="tablist">
                                                                                     <li class="short_sale_head_tab">
-                                                                                        <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="/ViewLeadsInfo.aspx?HiddenTab=true&id=BBLE" data-href="#more_leads" onclick="LoadMoreFrame(this)">
+                                                                                        <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="/ViewLeadsInfo.aspx?HiddenTab=true&id={{SsCase.BBLE}}" data-href="#more_leads" onclick="LoadMoreFrame(this)">
                                                                                             <i class="fa fa-folder head_tab_icon_padding"></i>
                                                                                             <div class="font_size_bold">Leads</div>
                                                                                         </a>
                                                                                     </li>
                                                                                     <li class="short_sale_head_tab">
-                                                                                        <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_evction" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_evction" onclick="LoadMoreFrame(this)">
+                                                                                        <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_evction" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&isEviction=true&bble={{SsCase.BBLE}}" data-href="#more_evction" onclick="LoadMoreFrame(this)">
                                                                                             <i class="fa fa-sign-out head_tab_icon_padding"></i>
                                                                                             <div class="font_size_bold">Eviction</div>
                                                                                         </a>
                                                                                     </li>
 
                                                                                     <li class="short_sale_head_tab">
-                                                                                        <a role="tab" data-toggle="tab" class="tab_button_a" href="#more_legal" data-url="/LegalUI/LegalUI.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_legal" onclick="LoadMoreFrame(this)">
+                                                                                        <a role="tab" data-toggle="tab" class="tab_button_a" href="#more_legal"  data-url="/LegalUI/LegalUI.aspx?HiddenTab=true&isEviction=true&bble={{SsCase.BBLE}}" data-href="#more_legal" onclick="LoadMoreFrame(this)">
                                                                                             <i class="fa fa-university head_tab_icon_padding"></i>
                                                                                             <div class="font_size_bold">Legal</div>
                                                                                         </a>

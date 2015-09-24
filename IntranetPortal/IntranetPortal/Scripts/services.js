@@ -26,6 +26,7 @@ function ScopeCaseDataChanged(getDataFunc) {
         $('<input type="hidden" id="CaseData" />').appendTo(document.body);
         return false;
     }
+
     return $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(getDataFunc());
 }
 function ScopeResetCaseDataChange(getDataFunc) {
@@ -41,7 +42,9 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem) {
     if ($(headEelem).length <= 0) {
         return;
     }
-
+    if (typeof GetDataReadOnly != 'undefined' && !GetDataReadOnly()) {
+        return;
+    }
     // delay the first run after 30 second!
     $.wait(30000).then(function () {
         window.setInterval(function () {
@@ -57,6 +60,7 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem) {
 
 }
 
+
 function ScopeSetLastUpdateTime(url)
 {
     $.getJSON(url,function(data)
@@ -67,6 +71,7 @@ function ScopeSetLastUpdateTime(url)
 
 function ScopeDateChangedByOther(urlFunc,reLoadUIfunc,loadUIIdFunc)
 {
+    
     window.setInterval(function () {
         var url = urlFunc()
         $.getJSON(url, function (data) {

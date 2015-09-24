@@ -92,6 +92,7 @@
         </textarea>
         <button type="button" ng-click="SaveLegalJson()">GetCase</button>--%>
         <input type="hidden" id="CaseData" />
+        <input type="hidden" id="Viewable"  value="<%= IntranetPortal.LegalCaseManage.IsViewable(Page.User.Identity.Name)  %>"/>
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
                 <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
@@ -114,12 +115,16 @@
                                         if (CaseDataChanged())
                                             return "You have pending changes, would you save it?";
                                     }
+
                                     setInterval(function () {
-                                        if (CaseNeedComment && !$('#NeedAddCommentPopUp').is(':visible')) {
+                                        if (typeof GetDataReadOnly != 'undefined' && !GetDataReadOnly()) {
+                                            return;
+                                        }
+                                        if (typeof CaseNeedComment != 'undefined' && !$('#NeedAddCommentPopUp').is(':visible')) {
                                             $('#NeedAddCommentPopUp').modal({ backdrop: 'static' })
                                         }
 
-                                    }, 120000)
+                                    }, 120000);
                                 </script>
 
                                 <div id="vendor_btn" style="display: none">
@@ -487,7 +492,9 @@
                     </ContentCollection>
                 </dx:SplitterPane>
             </Panes>
+          
         </dx:ASPxSplitter>
+
         <div class="modal fade" id="NeedAddCommentPopUp">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -619,7 +626,10 @@
 
         <script type="text/javascript">
             LegalCaseBBLE = null;
-
+            function GetDataReadOnly()
+            {
+                return $('#Viewable').val()=='True'
+            }
             function VendorsClosing(s) {
                 GetContactCallBack();
             }
