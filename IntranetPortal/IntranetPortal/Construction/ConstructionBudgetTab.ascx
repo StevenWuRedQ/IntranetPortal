@@ -3,14 +3,6 @@
 <div>
     <link rel="stylesheet" media="screen" href="/Scripts/handsontable-master/dist/handsontable.full.css" />
     <script src="/Scripts/handsontable-master/dist/handsontable.full.js"></script>
-    <script src="/Scripts/ruleJS-0.0.5/dist/lib/underscore.string/underscore.string.js"></script>
-    <script src="/Scripts/ruleJS-0.0.5/dist/lib/moment/moment.js"></script>
-    <script src="/Scripts/ruleJS-0.0.5/dist/lib/numeral/numeral.js"></script>
-    <script src="/Scripts/ruleJS-0.0.5/dist/lib/js-md5/md5.js"></script>
-    <script src="/Scripts/ruleJS-0.0.5/dist/lib/jstat/jstat.js"></script>
-    <script src="/Scripts/ruleJS-0.0.5/dist/lib/formulajs/formula.js"></script>
-    <script src="/Scripts/ruleJS-0.0.5/dist/js/parser.js"></script>
-    <script src="/Scripts/ruleJS-0.0.5/dist/js/ruleJS.js"></script>
     <script src="/Scripts/ruleJS-0.0.5/dist/full/ruleJS.all.full.js"></script>
 
 
@@ -32,7 +24,7 @@
         }
 
         initData = [
-            { "balance": "=SUM(A7:A6)", "estimate": "", "qty": "", "materials": "", "labor": "", "contract": "", "paid": "", "Description": "Pre-Construction" },
+            { "balance": "=SUM(F1:G1)", "estimate": "", "qty": "", "materials": "", "labor": "", "contract": "", "paid": "", "Description": "Pre-Construction" },
 { "balance": "", "estimate": "", "qty": "", "materials": "", "labor": "", "contract": "", "paid": "", "Description": "Asbestos" },
 { "balance": "", "estimate": "", "qty": "", "materials": "", "labor": "", "contract": "", "paid": "", "Description": "Survey" },
 { "balance": "", "estimate": "", "qty": "", "materials": "", "labor": "", "contract": "", "paid": "", "Description": "Borings" },
@@ -163,7 +155,7 @@
             rowHeaders: false,
             colHeaders: true,
             colWidths: [180, 65, 50, 60, 60, 90, 60, 60],
-            colHeaders: ["Description", "$ Estimate", "Qty", "Materials", "Labor", "Contract Price", "Paid", "Balance"],
+            colHeaders: ["Description", "Estimate", "Qty", "Materials", "Labor", "Contract Price", "Paid", "Balance"],
             columns: [
                 {
                     data: 'Description'
@@ -171,37 +163,41 @@
                 {
                     data: 'estimate',
                     type: 'numeric',
-                    format: '$0,0.00',
-                    language: 'en'
+                    format: '$0,0.00'
+
                 },
                 {
                     data: 'qty',
-                    type: 'numeric',
+                    type: 'numeric'
                 },
                 {
 
-                    data: 'materials'
+                    data: 'materials',
+                    type: 'numeric',
+                    format: '$0,0.00'
                 },
                 {
-                    data: 'labor'
+                    data: 'labor',
+                    type: 'numeric',
+                    format: '$0,0.00'
                 },
                 {
                     data: 'contract',
                     type: 'numeric',
-                    format: '$0,0.00',
-                    language: 'en'
+                    format: '$0,0.00'
+
                 },
                 {
                     data: 'paid',
                     type: 'numeric',
-                    format: '$0,0.00',
-                    language: 'en'
+                    format: '$0,0.00'
+
                 },
                 {
                     data: 'balance',
                     type: 'numeric',
-                    format: '$0,0.00',
-                    language: 'en'
+                    format: '$0,0.00'
+
                 }],
             manualColumnResize: true,
             formulas: true

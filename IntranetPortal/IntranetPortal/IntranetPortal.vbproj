@@ -2316,6 +2316,7 @@
     <Content Include="css\accessibility.css" />
     <Content Include="css\base.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\budgetTable.css" />
     <Content Include="css\Contacts.css" />
     <Content Include="css\dx.common.css" />
     <Content Include="css\dx.light.css" />

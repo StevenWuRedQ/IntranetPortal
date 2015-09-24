@@ -430,6 +430,12 @@ app.service('ptFileService', function () {
         return '';
     }
 
+    this.isPicture = function (fullPath) {
+        var ext = this.getFileExt(fullPath);
+        var pictureExts = ['jpg', 'jpeg', 'gif', 'bmp', 'png'];
+        return pictureExts.indexOf(ext) > -1;
+    }
+
     this.getFileFolder = function (fullPath) {
         if (fullPath) {
             var paths = fullPath.split('/');

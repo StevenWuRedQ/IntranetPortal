@@ -570,6 +570,11 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                 }
                 
             }
+            scope.fancyPreview = function (file) {
+                if (ptFileService.isPicture(file.name)) {
+                    $.fancybox.open(ptFileService.makePreviewUrl(file.path));
+                }
+            }
 
         }
 
