@@ -40,6 +40,9 @@ Public Class LeadsInfo1
     End Sub
 
     Sub BindLeadsInfo(bble As String)
+
+        Core.SystemLog.Log("ViewLeadsInfo", Request.RawUrl, Core.SystemLog.LogCategory.Operation, bble, Page.User.Identity.Name)
+
         If Not ShowLogPanel Then
             contentSplitter.GetPaneByName("LogPanel").Collapsed = True
             'contentSplitter.GetPaneByName("paneInfo").Separator.Visible = DevExpress.Utils.DefaultBoolean.False

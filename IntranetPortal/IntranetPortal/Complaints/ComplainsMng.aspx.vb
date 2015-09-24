@@ -12,6 +12,7 @@ Public Class ComplainsMng
         ManagerView = IsComplaintsManager()
 
         If Not Page.IsPostBack Then
+            Core.SystemLog.Log("ViewComplaints", Request.RawUrl, Core.SystemLog.LogCategory.Operation, "", Page.User.Identity.Name)
 
             If Request.QueryString("BBLE") Is Nothing Then
                 BindGrid()

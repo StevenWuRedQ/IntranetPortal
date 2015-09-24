@@ -10,7 +10,22 @@ Public Class TitleManage
 
     Public Shared Function IsManager(userName As String) As String
 
-        If Roles.IsUserInRole(userName, MgrRoleName) OrElse Roles.IsUserInRole(userName, "Admin") Then
+        If Roles.IsUserInRole(userName, MgrRoleName) OrElse Roles.IsUserInRole(userName, "Admin") OrElse IsViewable(userName) Then
+            Return True
+        End If
+
+        Return False
+    End Function
+
+    Public Shared Function IsViewable(userName As String) As Boolean
+
+        Dim roleNames = Core.PortalSettings.GetValue("TitleViewableRoles").Split(";")
+        Dim rols = ""
+        Dim b = Roles.GetRolesForUser(userName).Select(Function(r) r.Contains(rols)) IsNot Nothing
+
+        Dim myRoles = Roles.GetRolesForUser(userName)
+
+        If myRoles.Any(Function(r) roleNames.Contains(r)) Then
             Return True
         End If
 

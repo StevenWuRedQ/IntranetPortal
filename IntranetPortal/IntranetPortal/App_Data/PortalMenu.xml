@@ -512,7 +512,7 @@
   </PortalNavItem>
 
   <PortalNavItem Name="Title" Text="Title" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <UserRoles>Title-*</UserRoles>
+    <UserRoles>Title-*,ShortSale-Manager</UserRoles>
     <Items>
       <PortalNavItem Name="Title-Summary" Text="Summary" NavigationUrl="/MyDefault.aspx" ShowAmount="false">
         <FontClass>
