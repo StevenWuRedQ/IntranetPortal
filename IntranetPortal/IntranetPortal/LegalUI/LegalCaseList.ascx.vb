@@ -27,11 +27,15 @@ Public Class LegalCaseList
     End Sub
 
     Private Sub BindLegalData(status As LegalCaseStatus)
-        If Page.User.IsInRole("Legal-Manager") OrElse Page.User.IsInRole("Admin") Then
-            gridCase.DataSource = LegalCase.GetCaseList(status)
-        Else
-            gridCase.DataSource = LegalCase.GetCaseList(status, Page.User.Identity.Name)
-        End If
+
+        gridCase.DataSource = LegalCaseManage.GetLegalCaseList(Page.User.Identity.Name, status)
+        Return
+
+        'If Page.User.IsInRole("Legal-Manager") OrElse Page.User.IsInRole("Admin") OrElse LegalCaseManage.IsViewable(Page.User.Identity.Name) Then
+        '    gridCase.DataSource = LegalCase.GetCaseList(status)
+        'Else
+        '    gridCase.DataSource = LegalCase.GetCaseList(status, Page.User.Identity.Name)
+        'End If
     End Sub
 
     Public Sub BindCaseByBBLEs(bbles As List(Of String))

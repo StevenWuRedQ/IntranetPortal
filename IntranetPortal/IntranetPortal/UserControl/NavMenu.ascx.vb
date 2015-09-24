@@ -285,11 +285,7 @@ Public Class RefreshLeadsCountHandler
             Dim status As Legal.LegalCaseStatus
 
             If [Enum].TryParse(Of Legal.LegalCaseStatus)(type, status) Then
-                If (Roles.IsUserInRole(userName, "Legal-Manager") OrElse Roles.IsUserInRole(userName, "Admin")) Then
-                    Return Legal.LegalCase.GetCaseList(status).Count
-                End If
-
-                Return Legal.LegalCase.GetCaseList(status, userName).Count
+                Return LegalCaseManage.GetLegalCaseList(userName, status).Count
             Else
                 Return 0
             End If

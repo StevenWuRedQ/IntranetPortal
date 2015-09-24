@@ -110,35 +110,12 @@ Partial Public Class Lead
         End If
 
         Dim roleNames = Core.PortalSettings.GetValue("LeadsViewableRoles").Split(";")
-        ' {"Admin", "Title-Users", "Legal-Manager", "ShortSale-Manager", "Construction-Manager", "Construction-User", "Entity-Manager"}
 
         Dim myRoles = Roles.GetRolesForUser(name)
 
         If myRoles.Any(Function(r) roleNames.Contains(r)) Then
             Return True
         End If
-
-        'For Each r In roleNames
-        '    If Roles.IsUserInRole(name, r) Then
-        '        Return True
-        '    End If
-        'Next
-
-        'If Roles.IsUserInRole(name, "Admin") Then
-        '    Return True
-        'End If
-
-        'If Roles.IsUserInRole(name, "Title-Users") Then
-        '    Return True
-        'End If
-
-        'If Roles.IsUserInRole(name, "Legal-Manager") Then
-        '    Return True
-        'End If
-
-        'If Roles.IsUserInRole(name, "ShortSale-Manager") Then
-        '    Return True
-        'End If
 
         Dim owner = EmployeeName
 

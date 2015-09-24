@@ -11,6 +11,7 @@ Public Class LegalCaseManage
     Private Const FollowupEmailTemplate As String = "LegalFollowUpNotify"
 
 
+
     Public Shared Function IsInLegal(bble As String) As Boolean
 
         Return LegalCase.InLegal(bble)
@@ -24,6 +25,14 @@ Public Class LegalCaseManage
             Return lcase.CaseData
         End If
         Return "{}"
+    End Function
+
+    Public Shared Function GetLegalCaseList(userName As String, status As Legal.LegalCaseStatus) As List(Of LegalCase)
+        If Roles.IsUserInRole(userName, "Legal-Manager") OrElse Roles.IsUserInRole(userName, "Admin") OrElse LegalCaseManage.IsViewable(userName) Then
+            Return LegalCase.GetCaseList(status)
+        Else
+            Return LegalCase.GetCaseList(status, userName)
+        End If
     End Function
 
     Public Shared Sub StartLegalRequest(bble As String, caseData As String, createBy As String)
@@ -157,6 +166,21 @@ Public Class LegalCaseManage
     Public Shared Function IsManager(userName As String) As String
 
         If Roles.IsUserInRole(userName, MgrRoleName) OrElse Roles.IsUserInRole(userName, "Admin") Then
+            Return True
+        End If
+
+        Return False
+    End Function
+
+    Public Shared Function IsViewable(userName As String) As Boolean
+
+        Dim roleNames = Core.PortalSettings.GetValue("LegalViewableRoles").Split(";")
+        Dim rols = ""
+        Dim b = Roles.GetRolesForUser(userName).Select(Function(r) r.Contains(rols)) IsNot Nothing
+
+        Dim myRoles = Roles.GetRolesForUser(userName)
+
+        If myRoles.Any(Function(r) roleNames.Contains(r)) Then
             Return True
         End If
 
