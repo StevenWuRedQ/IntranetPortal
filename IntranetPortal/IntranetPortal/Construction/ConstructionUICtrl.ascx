@@ -480,6 +480,6 @@
 
         /* end budget table */
 
-        $scope.printPage = 
+        
     });
 </script>
