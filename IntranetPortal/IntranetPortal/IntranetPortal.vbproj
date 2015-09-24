@@ -632,6 +632,13 @@
       <DependentUpon>ConstructionPlansTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Construction\ConstructionPrint.aspx.designer.vb">
+      <DependentUpon>ConstructionPrint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionPrint.aspx.vb">
+      <DependentUpon>ConstructionPrint.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Construction\ConstructionProposalBidTab.ascx.designer.vb">
       <DependentUpon>ConstructionProposalBidTab.ascx</DependentUpon>
     </Compile>
@@ -655,6 +662,13 @@
     <Compile Include="Construction\ConstructionUI.aspx.vb">
       <DependentUpon>ConstructionUI.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Construction\ConstructionUICtrl.ascx.designer.vb">
+      <DependentUpon>ConstructionUICtrl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionUICtrl.ascx.vb">
+      <DependentUpon>ConstructionUICtrl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Construction\ConstructionUtilitiesTab.ascx.designer.vb">
       <DependentUpon>ConstructionUtilitiesTab.ascx</DependentUpon>
@@ -2251,10 +2265,12 @@
     <Content Include="Construction\ConstructionInitialIntakeTab.ascx" />
     <Content Include="Construction\ConstructionPhotosTab.ascx" />
     <Content Include="Construction\ConstructionPlansTab.ascx" />
+    <Content Include="Construction\ConstructionPrint.aspx" />
     <Content Include="Construction\ConstructionProposalBidTab.ascx" />
     <Content Include="Construction\ConstructionServices.svc" />
     <Content Include="Construction\ConstructionSignoffsTab.ascx" />
     <Content Include="Construction\ConstructionUI.aspx" />
+    <Content Include="Construction\ConstructionUICtrl.ascx" />
     <Content Include="Construction\ConstructionUtilitiesTab.ascx" />
     <Content Include="Construction\ConstructionViolationTab.ascx" />
     <Content Include="Construction\ConstructionCaseList.ascx" />

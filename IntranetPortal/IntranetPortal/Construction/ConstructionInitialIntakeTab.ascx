@@ -31,7 +31,7 @@
                 <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.ADT">
             </li>
 
-            <li class="clear-fix" style="list-style:none"></li>
+            <li class="clear-fix" style="list-style: none"></li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Access</label>
                 <select class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.Access">
@@ -45,7 +45,7 @@
                 <label class="ss_form_input_title">Lock Code</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.LockCode">
             </li>
-            <li class="clear-fix" style="list-style:none"></li>
+            <li class="clear-fix" style="list-style: none"></li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Asset Manager</label>
@@ -109,30 +109,33 @@
 
 <div class="ss_form">
     <h4 class="ss_form_title">Building Info&nbsp;<pt-collapse model="ReloadedData.BuildingInfoCollapsed" /></h4>
-    <div class="ss_border">
-        <ul class="ss_form_box clearfix">
+    <div class="ss_border" collapse="ReloadedData.BuildingInfoCollapsed">
+        <%-- <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">C/O</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.CO" pt-init-model="SsCase.PropertyInfo.COClass">
             </li>
-        </ul>
-        <ul class="ss_form_box clearfix" collapse="ReloadedData.BuildingInfoCollapsed" ng-init="CSCase.CSCase.InitialIntake.BuildingInfoCollapsed=true">
+
+        <li class="ss_form_item">
+            <label class="ss_form_input_title"># of Family</label>
+            <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.FamilyNum" pt-init-model="SsCase.PropertyInfo.NumOfFamilies">
+        </li>
+        </ul> --%>
+
+        <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
-                <label class="ss_form_input_title"># of Family</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.FamilyNum" pt-init-model="SsCase.PropertyInfo.NumOfFamilies">
+                <label class="ss_form_input_title">Total Units</label>
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.TotalUnits" pt-init-model="SsCase.PropertyInfo.NumOfFamilies">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Building Class</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.BuildingClass">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.BuildingClass" pt-init-model="LeadsInfo.PropertyClass">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Tax Class</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.TaxClass" pt-init-model="LeadsInfo.PropertyClass">>
+                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.TaxClass" pt-init-model="LeadsInfo.TaxClass">
             </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Total Units</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.TotalUnits" pt-init-model="LeadsInfo.UnitNum">
-            </li>
+
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Year Built</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.YearBuilt" pt-init-model="LeadsInfo.YearBuilt">
@@ -224,10 +227,10 @@
     <h4 class="ss_form_title">Water Search</h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
-            <li class="ss_form_item">
+            <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">Water Search</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.WaterSearch">
-            </li>
+            </li> --%>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Water Search Upload</label>
                 <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-WaterSearchUpload" file-model="CSCase.CSCase.InitialIntake.WaterSearchUpload"></pt-file>
@@ -258,35 +261,35 @@
                 <pt-finished-mark ss-model="CSCase.CSCase.InitialIntake.IsIntakeSheetFinished"></pt-finished-mark>
             </li>
         </ul>
-            <ul class="ss_form_box clearfix">
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Remind Sketch Layout</label>
-                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.SketchLayoutRemind" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Upload Sketch Layout</label>
-                    <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadSketchLayout" file-model="CSCase.CSCase.InitialIntake.UploadSketchLayout"></pt-file>
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Is Sketch Task Finished?</label>
-                    <pt-finished-mark ss-model="CSCase.CSCase.InitialIntake.IsSketchFinished"></pt-finished-mark>
-                </li>
-            </ul>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Remind Sketch Layout</label>
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.SketchLayoutRemind" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Upload Sketch Layout</label>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadSketchLayout" file-model="CSCase.CSCase.InitialIntake.UploadSketchLayout"></pt-file>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Is Sketch Task Finished?</label>
+                <pt-finished-mark ss-model="CSCase.CSCase.InitialIntake.IsSketchFinished"></pt-finished-mark>
+            </li>
+        </ul>
 
-            <ul class="ss_form_box clearfix">
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Remind Initial Budget</label>
-                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.InitialBudgetRemind" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Upload Initial Budget</label>
-                    <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadInitialBudget" file-model="CSCase.CSCase.InitialIntake.UploadInitialBudget"></pt-file>
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Is Intial Budget Task Finished?</label>
-                    <pt-finished-mark ss-model="CSCase.CSCase.InitialIntake.IsInitialBudgetFinished"></pt-finished-mark>
-                </li>
-            </ul>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Remind Initial Budget</label>
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.InitialBudgetRemind" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Upload Initial Budget</label>
+                <pt-file file-bble='CSCase.BBLE' file-id="InitialIntake-UploadInitialBudget" file-model="CSCase.CSCase.InitialIntake.UploadInitialBudget"></pt-file>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Is Intial Budget Task Finished?</label>
+                <pt-finished-mark ss-model="CSCase.CSCase.InitialIntake.IsInitialBudgetFinished"></pt-finished-mark>
+            </li>
+        </ul>
     </div>
 </div>
 <div class="ss_form">
@@ -314,7 +317,7 @@
         <option value="Exhibit">Exhibit 1 & 3</option>
         <option value="TRs">TR's</option>
     </select></h4>
-    <div class="ss_border">
+    <div class="ss_border" style="padding-bottom: 20px">
         <ul class="ss_form_box clearfix nga-fast nga-slide-left" ng-show="CSCase.CSCase.InitialIntake.ReportsDropDown=='Asbestos'">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Requested</label>
