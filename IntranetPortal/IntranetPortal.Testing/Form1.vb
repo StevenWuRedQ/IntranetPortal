@@ -90,6 +90,9 @@ Public Class Form1
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Using client As New IntranetPortal.Data.DataAPI.WCFMacrosClient
+            MessageBox.Show(client.Requests_Waiting)
+            Return
+
 
             Dim data As New DataAPI.DOB_Complaints_In
             data.BBLE = "1022150377"

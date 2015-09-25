@@ -753,6 +753,7 @@ Public Class LeadsInfo
                                       .Neighborhood = NeighName,
                                       .EmployeeID = emp.EmployeeID,
                                       .EmployeeName = emp.Name,
+                                      .AppId = emp.AppId,
                                       .Status = LeadStatus.NewLead,
                                       .AssignDate = DateTime.Now,
                                       .AssignBy = assignBy
@@ -767,6 +768,7 @@ Public Class LeadsInfo
                         newlead.EmployeeID = emp.EmployeeID
                         newlead.EmployeeName = emp.Name
                         newlead.Status = LeadStatus.NewLead
+                        newlead.AppId = emp.AppId
                         newlead.AssignDate = DateTime.Now
                         newlead.AssignBy = assignBy
 

@@ -215,7 +215,7 @@ Public Class LoadFileFromSharepoint
                                         }
                                     )
 
-            Dim returnValue = DocumentSharingManager.UpdateDocumentSharingInfo(ClientContext, fileUrl, userRoleAssignments, False, True, True, "", True)
+            Dim returnValue = DocumentSharingManager.UpdateDocumentSharingInfo(ClientContext, fileUrl, userRoleAssignments, False, True, True, "", True, False)
             ClientContext.ExecuteQuery()
         End Using
 
@@ -236,7 +236,7 @@ Public Class LoadFileFromSharepoint
                                     {.UserId = "Everyone",
                                         .Role = Sharing.Role.View
                                         })
-            Dim returnValue = DocumentSharingManager.UpdateDocumentSharingInfo(ClientContext, serverUrl & fileUrl, userRoleAssignments, False, True, True, "", True)
+            Dim returnValue = DocumentSharingManager.UpdateDocumentSharingInfo(ClientContext, serverUrl & fileUrl, userRoleAssignments, False, True, True, "", True, False)
             ClientContext.ExecuteQuery()
         End Using
     End Sub

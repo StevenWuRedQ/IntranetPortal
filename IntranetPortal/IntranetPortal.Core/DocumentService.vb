@@ -102,6 +102,23 @@ Public Class DocumentService
 
     Public Shared Function DownLoadFileStream(uniqueId As String) As Object
         Using ClientContext = GetClientContext()
+            'Dim file = ClientContext.Web.GetFileById(New Guid(uniqueId))
+            'If file IsNot Nothing Then
+            '    ClientContext.Load(file, Function(f As File) f.ServerRelativeUrl, Function(f As File) f.Name)
+
+            '    Dim ms As New IO.MemoryStream
+            '    Dim str = file.OpenBinaryStream()
+            '    ClientContext.ExecuteQuery()
+
+            '    str.Value.CopyTo(ms)
+            '    ms.Position = 0
+            '    Return New With {
+            '    .Stream = ms,
+            '    .Name = file.Name
+            '}
+
+            'End If
+
             Dim item = GetFileById(uniqueId, ClientContext)
             If item IsNot Nothing Then
                 Dim tmpfile = item.File
@@ -191,18 +208,24 @@ Public Class DocumentService
     End Function
 
     Private Shared Function GetFileById(uniqueId As String, clientContext As ClientContext) As ListItem
+
         Dim list = clientContext.Web.Lists.GetByTitle(DocumentLibraryTitle)
-        Dim camlQuery As New CamlQuery
-        camlQuery.ViewXml = String.Format("<View Scope='RecursiveAll'><RowLimit>1</RowLimit><Query><Where><Eq><FieldRef Name='UniqueId'/><Value Type='Guid'>{0}</Value></Eq></Where></Query></View>", uniqueId)
-        Dim items = list.GetItems(camlQuery)
-        clientContext.Load(items)
-        clientContext.ExecuteQuery()
 
-        If items.Count = 1 Then
-            Return items(0)
-        End If
+        Dim f = clientContext.Web.GetFileById(New Guid(uniqueId))
 
-        Return Nothing
+        Return f.ListItemAllFields
+
+        'Dim camlQuery As New CamlQuery
+        'camlQuery.ViewXml = String.Format("<View Scope='RecursiveAll'><RowLimit>1</RowLimit><Query><Where><Eq><FieldRef Name='UniqueId'/><Value Type='Guid'>{0}</Value></Eq></Where></Query></View>", uniqueId)
+        'Dim items = list.GetItems(camlQuery)
+        'clientContext.Load(items)
+        'clientContext.ExecuteQuery()
+
+        'If items.Count = 1 Then
+        '    Return items(0)
+        'End If
+
+        'Return Nothing
     End Function
 
     Private Shared Function GetFileByUrl(fileUrl As String, clientContext As ClientContext) As ListItem
@@ -361,7 +384,7 @@ Public Class DocumentService
                                 {.UserId = "Everyone",
                                     .Role = Sharing.Role.Edit
                                     })
-        Dim returnValue = DocumentSharingManager.UpdateDocumentSharingInfo(clientContext, serverurl & fileUrl, userRoleAssignments, False, True, True, "", True)
+        Dim returnValue = DocumentSharingManager.UpdateDocumentSharingInfo(clientContext, serverurl & fileUrl, userRoleAssignments, False, True, True, "", True, False)
         clientContext.ExecuteQuery()
     End Sub
 
@@ -372,7 +395,7 @@ Public Class DocumentService
                                 {.UserId = "Everyone",
                                     .Role = Sharing.Role.View
                                     })
-        Dim returnValue = DocumentSharingManager.UpdateDocumentSharingInfo(clientContext, serverurl & fileUrl, userRoleAssignments, False, True, True, "", True)
+        Dim returnValue = DocumentSharingManager.UpdateDocumentSharingInfo(clientContext, serverurl & fileUrl, userRoleAssignments, False, True, True, "", True, False)
         clientContext.ExecuteQuery()
     End Sub
 

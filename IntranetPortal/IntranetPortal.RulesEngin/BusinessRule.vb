@@ -297,6 +297,7 @@ InitialLine:
     Private Sub ExecuteDataloopRule(rule As Core.DataLoopRule)
         'check if server is busy
         While DataWCFService.IsServerBusy
+            Log("Server is Busy. Try 30s later.")
             Thread.Sleep(30000)
         End While
 
@@ -617,6 +618,11 @@ Public Class DOBComplaintsCheckingRule
         Dim names As New List(Of String)
 
         For Each prop In props
+
+            While DataWCFService.IsServerBusy
+                Log("DOB Complaints Refresh: the server is busy. Will try 30s later.")
+                Thread.Sleep(30000)
+            End While
 
             If Not IsTesting Then
                 prop.RefreshComplains("RuleEngine")
