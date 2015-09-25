@@ -22,7 +22,11 @@ Partial Public Class Employee
     Public Shared ReadOnly Property CurrentAppId As Integer
         Get
             Try
-                Return GetInstance(HttpContext.Current.User.Identity.Name).AppId
+                If HttpContext.Current IsNot Nothing AndAlso HttpContext.Current.User IsNot Nothing AndAlso HttpContext.Current.User.Identity IsNot Nothing Then
+                    Return GetInstance(HttpContext.Current.User.Identity.Name).AppId
+                Else
+                    Return 1
+                End If
             Catch ex As Exception
                 Core.SystemLog.LogError("Error to get CurrentAppId", ex, ex.ToJsonString, "", "")
                 Return 1

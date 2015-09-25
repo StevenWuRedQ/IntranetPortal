@@ -458,7 +458,7 @@ Partial Public Class Lead
                 End If
 
                 Dim li = Context.LeadsInfoes.Find(item)
-
+                Dim emp = Employee.GetInstance(empId)
                 If li IsNot Nothing Then
                     Dim newlead = Context.Leads.Find(item)
                     Dim orgName = Nothing
@@ -469,6 +469,7 @@ Partial Public Class Lead
                                           .Neighborhood = li.NeighName,
                                           .EmployeeID = empId,
                                           .EmployeeName = name,
+                                          .AppId = emp.AppId,
                                           .Status = LeadStatus.NewLead,
                                           .AssignDate = DateTime.Now,
                                           .AssignBy = assignBy
@@ -483,6 +484,7 @@ Partial Public Class Lead
                         newlead.Neighborhood = li.NeighName
                         newlead.EmployeeID = empId
                         newlead.EmployeeName = name
+                        newlead.AppId = emp.AppId
                         newlead.Status = LeadStatus.NewLead
                         newlead.AssignDate = DateTime.Now
                         newlead.AssignBy = assignBy
