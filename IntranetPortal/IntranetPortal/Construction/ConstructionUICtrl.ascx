@@ -4,7 +4,7 @@
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
 <div id="ConstructionCtrl" ng-controller="ConstructionCtrl" style="align-content: center;">
     <!-- Nav tabs -->
-    <input  id="LastUpdateTime" type="hidden"/>
+    <input id="LastUpdateTime" type="hidden" />
     <div class="legal-menu row" style="margin: 0px;">
         <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
             <li class="active short_sale_head_tab">
@@ -53,7 +53,7 @@
                 <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="Intake Complete" ng-click="intakeComplete()" data-original-title="Intake Completed"></i>
                 <i class="fa fa-mail-reply sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectOwner.PerformCallback('Show');popupSelectOwner.ShowAtElement(this);" data-original-title="Reassign"></i>
                 <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
-                <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="" data-original-title="Print"></i>
+                <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="printWindow()" data-original-title="Print"></i>
             </li>
         </ul>
     </div>
@@ -200,31 +200,53 @@
             $scope.clearWarning();
         }
 
-        $scope.init = function (bble) {
+        $scope.init = function (bble, callback) {
             $scope.startLoading();
             bble = bble.trim();
             $scope.reload();
+            var done1, done2, done3, done4;
+
 
             ptConstructionService.getConstructionCases(bble, function (res) {
                 ptCom.nullToUndefined(res);
                 $.extend(true, $scope.CSCase, res);
                 $scope.initWatchedModel();
                 if ($scope.CSCase.CSCase.budgetData) budgetControl.load($scope.CSCase.CSCase.budgetData);
-                ScopeSetLastUpdateTime($scope.GetTimeUrl())
+                done1 = true;
+                if (done1 && done2 && done3 & done4) {
+                    $scope.stopLoading();
+                    if (callback) callback();
+                }
+
             });
 
             ptShortsSaleService.getShortSaleCaseByBBLE(bble, function (res) {
                 $scope.SsCase = res;
-                $scope.stopLoading();
+                done2 = true;
+                if (done1 && done2 && done3 & done4) {
+                    $scope.stopLoading();
+                    if (callback) callback();
+                }
+
             });
 
             ptLeadsService.getLeadsByBBLE(bble, function (res) {
                 $scope.LeadsInfo = res;
+                done3 = true;
+                if (done1 && done2 && done3 & done4) {
+                    $scope.stopLoading();
+                    if (callback) callback();
+                }
             });
 
             ptEntityService.getEntityByBBLE(bble, function (error, data) {
                 if (data) $scope.EntityInfo = data;
                 else console.log(error);
+                done4 = true;
+                if (done1 && done2 && done3 & done4) {
+                    $scope.stopLoading();
+                    if (callback) callback();
+                }
             })
         }
 
@@ -249,12 +271,11 @@
         $scope.saveCSCase = function () {
             $scope.getBudgetData();
             var data = JSON.stringify($scope.CSCase);
-            ptConstructionService.saveConstructionCases($scope.CSCase.BBLE, data, function (res)
-            {
+            ptConstructionService.saveConstructionCases($scope.CSCase.BBLE, data, function (res) {
                 ScopeSetLastUpdateTime($scope.GetTimeUrl());
             });
             $scope.checkWatchedModel();
-            
+
         }
 
         /***spliter***/
@@ -531,19 +552,22 @@
         $scope.test = $scope.checkIntake;
 
         /*check file be modify*/
-        $scope.GetTimeUrl = function()
-        {
+        $scope.GetTimeUrl = function () {
             return "/api/ConstructionCases/LastLastUpdate/" + $scope.CSCase.BBLE;
         }
-        $scope.GetCSCaseId = function()
-        {
+        $scope.GetCSCaseId = function () {
             return $scope.CSCase.BBLE;
         }
-        $scope.GetModifyUserUrl = function()
-        {
+        $scope.GetModifyUserUrl = function () {
             return "/api/ConstructionCases/LastModifyUser/" + $scope.CSCase.BBLE;
         }
         ScopeDateChangedByOther($scope.GetTimeUrl, LoadCaseData, $scope.GetCSCaseId, $scope.GetModifyUserUrl);
         /****** end check file be modify*********/
+
+        /* printWindows*/
+        $scope.printWindow = function () {
+            window.open("http://localhost:60956/construction/ConstructionPrint.aspx?bble=" + $scope.CSCase.BBLE, 'Print', 'width=1024, height=800');
+        }
+        /* */
     });
 </script>

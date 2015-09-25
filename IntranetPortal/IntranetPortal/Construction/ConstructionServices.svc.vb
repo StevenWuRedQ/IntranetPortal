@@ -19,9 +19,10 @@ Public Class ConstructionServices
     End Sub
 
     ' Add more operations here and mark them with <OperationContract()>
-    <OperationContract()> _
+    <OperationContract()>
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetDOBViolations(bble As String) As String
+        Dim sleepCount = 0
         Dim baseuri = "http://a810-bisweb.nyc.gov/bisweb/"
         Dim ld = LeadsInfo.GetInstance(bble)
         Dim uri = "http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?boro=" + ld.Borough + "&block=" + ld.Block + "&lot=" + ld.Lot
@@ -35,6 +36,10 @@ Public Class ConstructionServices
             Thread.Sleep(5000)  'DOB need 5secs to refresh the page!!
             doc = webGet.Load(uri)
             dobViolationRow = doc.DocumentNode.SelectSingleNode("//tr[./td/b/a/text()='Violations-DOB']|//tr[./td/b/text()='Violations-DOB']")
+            sleepCount = sleepCount + 1
+            If sleepCount > 20 Then
+                Return ""
+            End If
         End While
         result.DOB_TotalDOBViolation = dobViolationRow.SelectSingleNode("./td[2]").InnerHtml.Trim
         result.DOB_TotalOpenViolations = dobViolationRow.SelectSingleNode("./td[3]").InnerHtml.Trim
@@ -48,6 +53,10 @@ Public Class ConstructionServices
                 Thread.Sleep(5000)
                 dboViolationsSummaryPage = webGet.Load(dobViolationsSummaryLink)
                 violationLinks = dboViolationsSummaryPage.DocumentNode.SelectNodes("//tr[./td/b/a]")
+                sleepCount = sleepCount + 1
+                If sleepCount > 20 Then
+                    Return ""
+                End If
             End While
             For Each link In violationLinks
                 Dim detail = New DOBViolationDetail
@@ -59,6 +68,10 @@ Public Class ConstructionServices
                 While detailPage.DocumentNode.SelectNodes("//td[text()='ECB No.:']") Is Nothing
                     Thread.Sleep(5000)
                     detailPage = webGet.Load(detailPageLink)
+                    sleepCount = sleepCount + 1
+                    If sleepCount > 20 Then
+                        Return ""
+                    End If
                 End While
                 detail.ECBViolationNumber = getLinkContent(detailPage.DocumentNode.SelectSingleNode("//td[text()='ECB No.:']/following::td").InnerHtml.Trim)
                 detail.ViolationStatus = cleanStatus(detailPage.DocumentNode.SelectSingleNode("//td[text()='Violation Category:']/following::td").InnerHtml.Trim)
@@ -72,9 +85,10 @@ Public Class ConstructionServices
         Return result.ToJsonString
     End Function
 
-    <OperationContract()> _
+    <OperationContract()>
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetECBViolations(bble As String) As String
+        Dim sleepCount = 0
         Dim baseuri = "http://a810-bisweb.nyc.gov/bisweb/"
         Dim ld = LeadsInfo.GetInstance(bble)
         Dim uri = "http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?boro=" + ld.Borough + "&block=" + ld.Block + "&lot=" + ld.Lot
@@ -88,6 +102,10 @@ Public Class ConstructionServices
             Thread.Sleep(5000)  'DOB need 5secs to refresh the page!!
             doc = webGet.Load(uri)
             ecbViolationRow = doc.DocumentNode.SelectSingleNode("//tr[./td/b/a/text()='Violations-ECB (DOB)']|//tr[./td/b/text()='Violations-ECB (DOB)']")
+            sleepCount = sleepCount + 1
+            If sleepCount > 20 Then
+                Return ""
+            End If
         End While
         result.ECP_TotalViolation = ecbViolationRow.SelectSingleNode("./td[2]").InnerHtml.Trim
         result.ECP_TotalOpenViolations = ecbViolationRow.SelectSingleNode("./td[3]").InnerHtml.Trim
@@ -101,6 +119,10 @@ Public Class ConstructionServices
                 Thread.Sleep(5000)
                 ecbViolationsSummaryPage = webGet.Load(ecbViolationsSummaryLink)
                 violationRows = ecbViolationsSummaryPage.DocumentNode.SelectNodes("//tr[./td/a/b]")
+                sleepCount = sleepCount + 1
+                If sleepCount > 20 Then
+                    Return ""
+                End If
             End While
             For Each violationRow In violationRows
                 Dim detail = New ECBViolationDetail

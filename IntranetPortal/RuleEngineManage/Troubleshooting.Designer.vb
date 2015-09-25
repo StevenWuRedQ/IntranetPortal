@@ -110,13 +110,14 @@ Partial Class Troubleshooting
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnComplaintsRefresh = New System.Windows.Forms.Button()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.Button18 = New System.Windows.Forms.Button()
         Me.Button17 = New System.Windows.Forms.Button()
         Me.Button16 = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Button15 = New System.Windows.Forms.Button()
-        Me.Button18 = New System.Windows.Forms.Button()
+        Me.Button19 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -982,6 +983,7 @@ Partial Class Troubleshooting
         '
         'TabPage9
         '
+        Me.TabPage9.Controls.Add(Me.Button19)
         Me.TabPage9.Controls.Add(Me.Button18)
         Me.TabPage9.Controls.Add(Me.Button17)
         Me.TabPage9.Controls.Add(Me.Button16)
@@ -996,6 +998,15 @@ Partial Class Troubleshooting
         Me.TabPage9.TabIndex = 9
         Me.TabPage9.Text = "Construction"
         Me.TabPage9.UseVisualStyleBackColor = True
+        '
+        'Button18
+        '
+        Me.Button18.Location = New System.Drawing.Point(57, 44)
+        Me.Button18.Name = "Button18"
+        Me.Button18.Size = New System.Drawing.Size(75, 23)
+        Me.Button18.TabIndex = 6
+        Me.Button18.Text = "AddCase"
+        Me.Button18.UseVisualStyleBackColor = True
         '
         'Button17
         '
@@ -1048,14 +1059,14 @@ Partial Class Troubleshooting
         Me.Button15.Text = "UpLoad Activity"
         Me.Button15.UseVisualStyleBackColor = True
         '
-        'Button18
+        'Button19
         '
-        Me.Button18.Location = New System.Drawing.Point(57, 44)
-        Me.Button18.Name = "Button18"
-        Me.Button18.Size = New System.Drawing.Size(75, 23)
-        Me.Button18.TabIndex = 6
-        Me.Button18.Text = "Button18"
-        Me.Button18.UseVisualStyleBackColor = True
+        Me.Button19.Location = New System.Drawing.Point(159, 44)
+        Me.Button19.Name = "Button19"
+        Me.Button19.Size = New System.Drawing.Size(75, 23)
+        Me.Button19.TabIndex = 7
+        Me.Button19.Text = "TestHPD"
+        Me.Button19.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1194,4 +1205,5 @@ Partial Class Troubleshooting
     Friend WithEvents Button16 As Button
     Friend WithEvents Button17 As Button
     Friend WithEvents Button18 As Button
+    Friend WithEvents Button19 As Button
 End Class
