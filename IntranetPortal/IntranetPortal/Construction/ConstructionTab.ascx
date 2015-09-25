@@ -23,7 +23,7 @@
         <div id="prioity_content">
             <div style="font-size: 30px; margin-left: 30px; height: 80px" class="font_gray">
                 <div style="font-size: 30px; margin-top: 20px;">
-                    <i class="fa fa-home"></i>
+                    <i class="fa fa-home" ng-dblclick="test()"></i>
                     <span style="margin-left: 19px;"><span ng-bind="CSCase.CSCase.Header" pt-init-bind="CSCase.CaseName" ng-dblclick="toggleHeaderEditing(true)" ng-show="!HeaderEditing"></span>&nbsp;</span>
                     <input id="ConstructionTitleInput" style="width: 565px" ng-show="HeaderEditing" ng-blur="toggleHeaderEditing()" ng-model="CSCase.CSCase.Header" />
                     <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+leadsInfoBBLE, 'Maps')">Map</span>

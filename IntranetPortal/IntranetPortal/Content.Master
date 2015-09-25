@@ -12,9 +12,9 @@
 	<link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
 	<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" type="text/css" />
 	<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" />
 	<link href="/css/stevencss.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="/css/nga.min.css" />
+	<link rel="stylesheet" href="/css/nga.min.css" />
 
 	<!--
 	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
@@ -45,7 +45,7 @@
 	<script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 	<script src="http://cdn.ckeditor.com/4.5.1/standard/ckeditor.js"></script>
 	<script src="/Scripts/bootstrap-datepicker.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 
 	<!--
 	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>

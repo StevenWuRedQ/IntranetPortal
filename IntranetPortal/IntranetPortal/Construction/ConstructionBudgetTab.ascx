@@ -3,7 +3,7 @@
 <div>
     <link rel="stylesheet" media="screen" href="/Scripts/handsontable-master/dist/handsontable.full.css" />
     <script src="/Scripts/handsontable-master/dist/handsontable.full.js"></script>
-    <script src="/Scripts/ruleJS-0.0.5/dist/full/ruleJS.all.full.js"></script>
+    <%-- <script src="/Scripts/ruleJS-0.0.5/dist/full/ruleJS.all.full.js"></script> --%>
 
 
 
@@ -24,7 +24,7 @@
         }
 
         initData = [
-            { "balance": "=SUM(F1:G1)", "estimate": "", "qty": "", "materials": "", "labor": "", "contract": "", "paid": "", "Description": "Pre-Construction" },
+            { "balance": "", "estimate": "", "qty": "", "materials": "", "labor": "", "contract": "", "paid": "", "Description": "Pre-Construction" },
 { "balance": "", "estimate": "", "qty": "", "materials": "", "labor": "", "contract": "", "paid": "", "Description": "Asbestos" },
 { "balance": "", "estimate": "", "qty": "", "materials": "", "labor": "", "contract": "", "paid": "", "Description": "Survey" },
 { "balance": "", "estimate": "", "qty": "", "materials": "", "labor": "", "contract": "", "paid": "", "Description": "Borings" },

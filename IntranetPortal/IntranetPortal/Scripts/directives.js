@@ -321,7 +321,7 @@ portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileServ
                 scope.editingFileModel = null;
                 scope.editingFileExt = '';
                 scope.ModifyNamePop = false;
-                
+
             }
             scope.onModifyNamePopSave = function () {
                 if (scope.NewFileName) {
@@ -334,7 +334,7 @@ portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileServ
                 scope.editingFileModel = null;
                 scope.editingFileExt = '';
                 scope.ModifyNamePop = false;
-                
+
             }
 
 
@@ -378,13 +378,13 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                     elm.trim();
                 });
             }
-            scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined)
+            scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined, '')
 
             // reg events            
             scope.$watch('fileModel', function () {
                 scope.currentFolder = '';
                 scope.baseFolder = scope.baseFolder ? scope.baseFolder : '';
-                scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined)
+                scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined, '')
             })
 
             $(el).find('input:file').change(function () {
@@ -563,12 +563,12 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                 scope.editingFileExt = '';
             }
             scope.getThumb = function (model) {
-                if(model && model.thumb){
+                if (model && model.thumb) {
                     return ptFileService.getThumb(model.thumb);
-                }else{
+                } else {
                     return '/images/no_image.jpg';
                 }
-                
+
             }
             scope.fancyPreview = function (file) {
                 if (ptFileService.isPicture(file.name)) {
@@ -614,7 +614,7 @@ portalApp.directive('ptComments', ['ptCom', function (ptCom) {
 portalApp.directive('ptFinishedMark', [function () {
     return {
         restrict: 'E',
-        template:   '<span ng-if="ssStyle==0"><button type="button" class="btn btn-default"  ng-click="ssModel=!ssModel" ng-show="!ssModel">{{Text1?Text1:"Confirm"}}</button><button type="button" class="btn btn-success" ng-dblclick="ssModel=!ssModel" ng-show="ssModel">{{Text2?Text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></button></span>' + '<span ng-if="ssStyle==1"><span class="label label-default" ng-click="ssModel=!ssModel" ng-show="!ssModel">{{Text1?Text1:"Confirm"}}</span><span class="label label-success" ng-dblclick="ssModel=!ssModel" ng-show="ssModel">{{Text2?Text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></span></span>',
+        template: '<span ng-if="ssStyle==0"><button type="button" class="btn btn-default"  ng-click="ssModel=!ssModel" ng-show="!ssModel">{{Text1?Text1:"Confirm"}}</button><button type="button" class="btn btn-success" ng-dblclick="ssModel=!ssModel" ng-show="ssModel">{{Text2?Text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></button></span>' + '<span ng-if="ssStyle==1"><span class="label label-default" ng-click="ssModel=!ssModel" ng-show="!ssModel">{{Text1?Text1:"Confirm"}}</span><span class="label label-success" ng-dblclick="ssModel=!ssModel" ng-show="ssModel">{{Text2?Text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></span></span>',
         scope: {
             ssModel: '=',
             Text1: '@',

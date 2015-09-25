@@ -172,11 +172,11 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Total DOB Violations</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.DOB_TotalDOBViolation">
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.DOB_TotalDOBViolation">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Total Open Violations</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.DOB_TotalOpenViolations">
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.DOB_TotalOpenViolations">
             </li>
         </ul>
 
@@ -314,6 +314,7 @@
         </div>
     </div>
 </div>
+
 <%--ECBViolations --%>
 <div class="ss_form">
     <h4 class="ss_form_title">ECB Violations&nbsp;<pt-collapse model="ReloadedData.ECBViolations_Collapse"></pt-collapse></h4>
@@ -325,11 +326,11 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Total ECB Violations</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.ECP_TotalViolation">
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.ECP_TotalViolation">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Total Open Violations</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.ECP_TotalOpenViolations">
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.ECP_TotalOpenViolations">
             </li>
         </ul>
 
@@ -478,23 +479,23 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">number of open violations</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_OpenViolationNumber">
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_OpenViolationNumber">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Registrant</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_Registrant">
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_Registrant">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Dismissal Request</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_DismissalRequest" ss-date>
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_DismissalRequest" ss-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Amount Owed</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_AmountOwed">
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_AmountOwed">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Dwelling Classification Fee</label>
-                <select class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_DwellingClassificationFee" ng-change="CSCase.CSCase.Violations.HPD_AmountOwed=CSCase.CSCase.Violations.HPD_DwellingClassificationFee">
+                <select class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_DwellingClassificationFee" ng-change="CSCase.CSCase.Violations.HPD_AmountOwed=CSCase.CSCase.Violations.HPD_DwellingClassificationFee">
                     <option value="250">Private Dwelling (1-2 units)............................................. $ 250</option>
                     <option value="300">Multiple Dwelling (3+ residential units) with 1 - 300 open violations.... $ 300</option>
                     <option value="400">Multiple Dwelling with 301 – 500 open violations......................... $ 400</option>

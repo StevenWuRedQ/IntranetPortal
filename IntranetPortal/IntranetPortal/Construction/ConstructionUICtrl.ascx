@@ -93,7 +93,7 @@
             <uc1:ConstructionTab runat="server" ID="ConstructionTab1" />
         </div>
         <div class="tab-pane" id="DocumentTab">
-            <uc1:documentsui runat="server" id="DocumentsUI" />
+            <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
         </div>
 
         <div class="tab-pane load_bg" id="more_leads">
@@ -144,6 +144,7 @@
     portalApp = angular.module('PortalApp');
     portalApp.controller('ConstructionCtrl', function ($scope, $http, $timeout, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
         // scope variables
+        $scope._ = _;
         $scope.arrayRemove = ptCom.arrayRemove;
         $scope.ptContactServices = ptContactServices;
         $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
@@ -193,7 +194,9 @@
             $scope.CSCase.CSCase.Utilities.Insurance_Type = [];
             $scope.EntityInfo = {};
             $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} });
+
             budgetControl.reload();
+            $scope.clearWarning();
         }
 
         $scope.init = function (bble) {
@@ -331,9 +334,7 @@
             var msgstr = $interpolate(msg)($scope);
             return msgstr;
         }
-        $scope.intakeComplete = function () {
-            AddActivityLog("Intake Process have finished!");
-        }
+
         $scope.WatchedModel = [
             {
                 model: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate',
@@ -480,6 +481,49 @@
 
         /* end budget table */
 
-        
+
+        /* intakeComplete */
+        $scope.intakeComplete = function () {
+            if (!$scope.checkIntake()) {
+                AddActivityLog("Intake Process have finished!");
+            }
+        }
+        $scope.checkIntake = function () {
+            $scope.clearWarning();
+            var errorFields = [];
+            $(".intakeCheck").each(function (idx) {
+
+                var model = $(this).attr('ng-model') || $(this).attr('ss-model') || $(this).attr('file-model') || $(this).attr('model');
+                if (model) {
+                    if (model.startsWith("floor")) {
+
+                        var test = _.has($(this).scope().floor, model.split(".").splice(1).join('.'));
+                        if (!test) {
+                            $(this).prev().css('background-color', 'yellow');
+                            errorFields.push("Floor " + $(this).scope().floor.FloorNum + " " + $(this).prev().text() + " is missing.");
+                        }
+                    } else {
+
+                        var test = $scope.$eval(model)
+                        if (test === undefined) {
+                            $(this).prev().css('background-color', 'yellow');
+                            errorFields.push($(this).prev().text() + " is missing.");
+                        }
+                    }
+                }
+
+            })
+            if (errorFields) alert("Intake Complete Fails.\nPlease check highlights for missing information!");
+            return true && errorFields;
+        }
+        $scope.clearWarning = function () {
+            $(".intakeCheck").each(function (idx) {
+                $(this).prev().css('background-color', 'transparent');
+            });
+        }
+        /* end intakeComplte */
+
+        $scope.test = $scope.checkIntake;
+
     });
 </script>

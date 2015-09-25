@@ -32,7 +32,7 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Floor #</label>
-            <input class="ss_form_input" ng-model="floor.FloorNum">
+            <input class="ss_form_input intakeCheck" ng-model="floor.FloorNum">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Account Number</label>
@@ -40,13 +40,13 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">DATE</label>
-            <input class="ss_form_input" type="text" ng-model="floor.ConED.Date" ss-date />
+            <input class="ss_form_input intakeCheck" type="text" ng-model="floor.ConED.Date" ss-date />
         </li>
     </ul>
     <ul class="ss_form_box clearfix" collapse="ReloadedData.ConED_Collapsed">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Rep Name</label>
-            <input class="ss_form_input" ng-model="floor.ConED.RepName" />
+            <input class="ss_form_input intakeCheck" ng-model="floor.ConED.RepName" />
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Account Open</label>
@@ -54,16 +54,16 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Energy service required</label>
-            <pt-radio name="ConED-EnergyServiceRequired{{$index}}" model="CSCase.CSCase.Utilities.ConED_EnergyServiceRequired"></pt-radio>
+            <pt-radio class="intakeCheck" name="ConED-EnergyServiceRequired{{$index}}" model="CSCase.CSCase.Utilities.ConED_EnergyServiceRequired"></pt-radio>
         </li>
         <li class="clearfix" style="list-style: none"></li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Service</label>
-            <pt-radio name="ConED-Service{{$index}}" model="floor.ConED.Service" true-value="on" false-value="off"></pt-radio>
+            <pt-radio class="intakeCheck" name="ConED-Service{{$index}}" model="floor.ConED.Service" true-value="on" false-value="off"></pt-radio>
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Meter Number</label>
-            <input class="ss_form_input" ng-model="floor.ConED.MeterNum">
+            <input class="ss_form_input intakeCheck" ng-model="floor.ConED.MeterNum">
         </li>
         <li class="ss_form_item" ng-show="CSCase.CSCase.Utilities.ConED_EnergyServiceRequired">
             <label class="ss_form_input_title">Missing/Damaged Meter</label>
@@ -218,7 +218,7 @@
 <%-- NationalGrid --%>
 <div class="ss_form" ng-init="CSCase.CSCase.Utilities.NationalGrid_Shown=false" ng-show="CSCase.CSCase.Utilities.NationalGrid_Shown">
     <h4 class="ss_form_title">National Grid&nbsp;<pt-collapse model="ReloadedData.NationalGrid_Collapsed" /></h4>
-    <div class="ss_border" >
+    <div class="ss_border">
         <tabset class="tab-switch">
         <tab ng-repeat="floor in CSCase.CSCase.Utilities.Floors" active="floor.active" disable="floor.disabled" >
         <tab-heading>Floor {{floor.FloorNum}}</tab-heading>
@@ -234,26 +234,26 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date</label>
-                <input class="ss_form_input" type="text" ng-model="floor.NationalGrid.Date" ss-date>
+                <input class="ss_form_input intakeCheck" type="text" ng-model="floor.NationalGrid.Date" ss-date>
             </li>
         </ul>
         <ul class="ss_form_box clearfix" collapse="ReloadedData.NationalGrid_Collapsed">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Rep Name</label>
-                <input class="ss_form_input" ng-model="floor.NationalGrid.RepName">
+                <input class="ss_form_input intakeCheck" ng-model="floor.NationalGrid.RepName">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Open</label>
-                <pt-radio name="NationalGrid-AccountOpen{{$index}}" model="floor.NationalGrid.AccountOpen"></pt-radio>
+                <pt-radio class="intakeCheck" name="NationalGrid-AccountOpen{{$index}}" model="floor.NationalGrid.AccountOpen"></pt-radio>
             </li>
             <li class="clearfix" style="list-style: none"></li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Service</label>
-                <pt-radio name="NationalGrid-Service{{$index}}" model="floor.NationalGrid.Service" true-value="on" false-value="off"></pt-radio>
+                <pt-radio class="intakeCheck" name="NationalGrid-Service{{$index}}" model="floor.NationalGrid.Service" true-value="on" false-value="off"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Meter Number</label>
-                <input class="ss_form_input" ng-model="floor.NationalGrid.MeterNumber">
+                <input class="ss_form_input intakeCheck" ng-model="floor.NationalGrid.MeterNumber">
             </li>
             <li class="clearfix" style="list-style: none"></li>
             <li class="ss_form_item_line">
