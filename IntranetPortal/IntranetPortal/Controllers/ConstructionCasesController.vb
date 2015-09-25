@@ -155,5 +155,27 @@ Namespace Controllers
         Private Function CurrentUser() As String
             Return RequestContext.Principal.Identity.Name
         End Function
+
+        <Route("api/ConstructionCases/LastLastUpdate/{bble}")>
+        <ResponseType(GetType(Void))>
+        Function GetLastLastUpdate(bble As String) As IHttpActionResult
+            Dim constructionCase As ConstructionCase = ConstructionCase.GetCase(bble)
+
+            If IsNothing(constructionCase) Then
+                Return NotFound()
+            End If
+            Return Ok(constructionCase.LastUpdate)
+        End Function
+
+        <Route("api/ConstructionCases/LastModifyUser/{bble}")>
+        <ResponseType(GetType(Void))>
+        Function GetLastModifyUser(bble As String) As IHttpActionResult
+            Dim constructionCase As ConstructionCase = ConstructionCase.GetCase(bble)
+
+            If IsNothing(constructionCase) Then
+                Return NotFound()
+            End If
+            Return Ok(constructionCase.UpdateBy)
+        End Function
     End Class
 End Namespace

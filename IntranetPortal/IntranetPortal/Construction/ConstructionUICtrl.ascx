@@ -4,6 +4,7 @@
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
 <div id="ConstructionCtrl" ng-controller="ConstructionCtrl" style="align-content: center;">
     <!-- Nav tabs -->
+    <input  id="LastUpdateTime" type="hidden"/>
     <div class="legal-menu row" style="margin: 0px;">
         <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
             <li class="active short_sale_head_tab">
@@ -209,7 +210,7 @@
                 $.extend(true, $scope.CSCase, res);
                 $scope.initWatchedModel();
                 if ($scope.CSCase.CSCase.budgetData) budgetControl.load($scope.CSCase.CSCase.budgetData);
-
+                ScopeSetLastUpdateTime($scope.GetTimeUrl())
             });
 
             ptShortsSaleService.getShortSaleCaseByBBLE(bble, function (res) {
@@ -248,8 +249,12 @@
         $scope.saveCSCase = function () {
             $scope.getBudgetData();
             var data = JSON.stringify($scope.CSCase);
-            ptConstructionService.saveConstructionCases($scope.CSCase.BBLE, data);
+            ptConstructionService.saveConstructionCases($scope.CSCase.BBLE, data, function (res)
+            {
+                ScopeSetLastUpdateTime($scope.GetTimeUrl());
+            });
             $scope.checkWatchedModel();
+            
         }
 
         /***spliter***/
@@ -525,5 +530,20 @@
 
         $scope.test = $scope.checkIntake;
 
+        /*check file be modify*/
+        $scope.GetTimeUrl = function()
+        {
+            return "/api/ConstructionCases/LastLastUpdate/" + $scope.CSCase.BBLE;
+        }
+        $scope.GetCSCaseId = function()
+        {
+            return $scope.CSCase.BBLE;
+        }
+        $scope.GetModifyUserUrl = function()
+        {
+            return "/api/ConstructionCases/LastModifyUser/" + $scope.CSCase.BBLE;
+        }
+        ScopeDateChangedByOther($scope.GetTimeUrl, LoadCaseData, $scope.GetCSCaseId, $scope.GetModifyUserUrl);
+        /****** end check file be modify*********/
     });
 </script>

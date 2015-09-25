@@ -69,7 +69,7 @@ function ScopeSetLastUpdateTime(url)
     })
 }
 
-function ScopeDateChangedByOther(urlFunc,reLoadUIfunc,loadUIIdFunc)
+function ScopeDateChangedByOther(urlFunc,reLoadUIfunc,loadUIIdFunc,urlModfiyUserFunc)
 {
     
     window.setInterval(function () {
@@ -78,8 +78,17 @@ function ScopeDateChangedByOther(urlFunc,reLoadUIfunc,loadUIIdFunc)
             var lastUpdateTime = JSON.stringify(data);
             var localUpdateTime = $('#LastUpdateTime').val()
             if (localUpdateTime && localUpdateTime != lastUpdateTime) {
-                alert("Someone change your file before you open your file system will load the refreshest data ! Will missing some data which you inputed.");
-                reLoadUIfunc(loadUIIdFunc());
+                if (urlModfiyUserFunc)
+                {
+                    $.getJSON(urlModfiyUserFunc(), function (mUser) {
+                        alert(mUser + " change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
+                        reLoadUIfunc(loadUIIdFunc());
+                    });
+                } else {
+                    alert("Someone change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
+                    reLoadUIfunc(loadUIIdFunc());
+                }  
+               
             }
         });
     }, 10000)
