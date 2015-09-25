@@ -217,7 +217,7 @@
                     $scope.stopLoading();
                     if (callback) callback();
                 }
-
+                ScopeSetLastUpdateTime($scope.GetTimeUrl());
             });
 
             ptShortsSaleService.getShortSaleCaseByBBLE(bble, function (res) {

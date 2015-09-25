@@ -878,17 +878,7 @@ Public Class Troubleshooting
     End Sub
 
     Private Sub Button19_Click(sender As Object, e As EventArgs) Handles Button19.Click
-        Dim driver = New Chrome.ChromeDriver
-        driver.Navigate.GoToUrl("https://hpdonline.hpdnyc.org/HPDonline/provide_address.aspx")
-        driver.FindElementById("RadioStrOrBlk_1").Click()
-        Thread.Sleep(1000)
-        Dim boroSelect = New Support.UI.SelectElement(driver.FindElementById("ddlBoro"))
-        boroSelect.SelectByValue("3")
-        driver.FindElementById("txtBlockNo").SendKeys("1386")
-        driver.FindElementById("txtLotNo").SendKeys("29")
-        driver.FindElementById("btnSearch").Click()
 
-        driver.Close()
 
 
 
