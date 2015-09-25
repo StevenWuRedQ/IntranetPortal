@@ -566,7 +566,7 @@
 
         /* printWindows*/
         $scope.printWindow = function () {
-            window.open("http://localhost:60956/construction/ConstructionPrint.aspx?bble=" + $scope.CSCase.BBLE, 'Print', 'width=1024, height=800');
+            window.open("/Construction/ConstructionPrint.aspx?bble=" + $scope.CSCase.BBLE, 'Print', 'width=1024, height=800');
         }
         /* */
     });
