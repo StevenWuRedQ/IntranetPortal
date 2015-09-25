@@ -437,7 +437,7 @@ Public Class RefreshLeadsCountHandler
                             Return ShortSale.ShortSaleCase.GetCaseByCategory(category, Employee.GetInstance(userName).AppId).Count
                         End If
 
-                        Return ShortSale.ShortSaleCase.GetCaseByCategory(category, userName, Employee.GetInstance(userName).AppId).Count
+                        Return ShortSale.ShortSaleCase.GetCaseByCategory(category, Employee.GetInstance(userName.ToString).AppId, userName).Count
                     End If
                 Case Else
                     Dim status As ShortSale.CaseStatus
