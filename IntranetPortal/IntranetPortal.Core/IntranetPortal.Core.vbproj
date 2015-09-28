@@ -74,6 +74,10 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Reeb.SqlOM, Version=0.3.1989.35954, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Reeb.SqlOM.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <Private>True</Private>
@@ -215,6 +219,7 @@
     <Compile Include="PropertyHelper.vb" />
     <Compile Include="Model\RecycleLead.vb" />
     <Compile Include="Model\Thumbnail.vb" />
+    <Compile Include="QueryBuilder.vb" />
     <Compile Include="Utility.vb" />
     <Compile Include="WorkingHours.vb" />
   </ItemGroup>
@@ -279,6 +284,8 @@
   <ItemGroup>
     <Content Include="DLL\GeoJSON.Net.dll" />
     <Content Include="DLL\GeoJSON.Net.MsSqlSpatial.dll" />
+    <Content Include="DLL\Reeb.SqlOM.dll" />
+    <Content Include="DLL\SqlDom.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
