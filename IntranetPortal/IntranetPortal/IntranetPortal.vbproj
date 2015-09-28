@@ -1642,6 +1642,13 @@
     <Compile Include="Reports\LeaderReport.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ReportWizard.aspx.designer.vb">
+      <DependentUpon>ReportWizard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportWizard.aspx.vb">
+      <DependentUpon>ReportWizard.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Reports\XtraReport1.Designer.vb">
       <DependentUpon>XtraReport1.vb</DependentUpon>
     </Compile>
@@ -2885,6 +2892,7 @@
     <Content Include="Publish\PropertyList.ascx" />
     <Content Include="Publish\PublishProperty.ascx" />
     <Content Include="Publish\PublishPropertyPage.aspx" />
+    <Content Include="Reports\ReportWizard.aspx" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -4863,6 +4871,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Construction\IntakeComplateCheck.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Reports\shortsale.json" />
   </ItemGroup>
   <!--<ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,266 @@
+﻿[
+  {
+    "category": "Seller1",
+    "fields": [
+      {
+        "name": "NAME",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "DOB",
+        "table": "",
+        "column": "",
+        "type": "date"
+      },
+      {
+        "name": "SSN",
+        "table": "",
+        "column": "",
+        "type": "String"
+      },
+      {
+        "name": "Mail Address",
+        "table": "",
+        "column": "",
+        "type": "String"
+      },
+      {
+        "name": "Cell #",
+        "table": "",
+        "column": "",
+        "type": "String"
+      },
+      {
+        "name": "Additional #",
+        "table": "",
+        "column": "",
+        "type": "String"
+      },
+      {
+        "name": "Email Address",
+        "table": "",
+        "column": "",
+        "type": "String"
+      }
+    ]
+  },
+  {
+    "category": "Seller2",
+    "fields": [
+      {
+        "name": "NAME",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "DOB",
+        "table": "",
+        "column": "",
+        "type": "date"
+      },
+      {
+        "name": "SSN",
+        "table": "",
+        "column": "",
+        "type": "String"
+      },
+      {
+        "name": "Mail Address",
+        "table": "",
+        "column": "",
+        "type": "String"
+      },
+      {
+        "name": "Cell #",
+        "table": "",
+        "column": "",
+        "type": "String"
+      },
+      {
+        "name": "Additional #",
+        "table": "",
+        "column": "",
+        "type": "String"
+      },
+      {
+        "name": "Email Address",
+        "table": "",
+        "column": "",
+        "type": "String"
+      }
+    ]
+  },
+  {
+    "category": "Fanancials",
+    "fields": [
+      {
+        "name": "BANKRUPTCY",
+        "table": "",
+        "column": "",
+        "type": "boolean"
+      },
+      {
+        "name": "BANK ACCOUNT",
+        "table": "",
+        "column": "",
+        "type": "boolean"
+
+      },
+      {
+        "name": "TAX RETURNS",
+        "table": "",
+        "column": "",
+        "type": "boolean"
+      },
+      {
+        "name": "EMPLOYED",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "PAYSTUBS",
+        "table": "",
+        "column": "",
+        "type": "boolean"
+      }
+    ]
+  },
+  {
+    "category": "Property Address",
+    "fields": [
+      {
+        "name": "BLOCK/LOT",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "Address",
+        "table": "",
+        "column": "",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "category": "HOME BREAKDOWN",
+    "fields": [
+      {
+        "name": "HOME BREAKDOWN",
+        "table": "",
+        "column": "",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "category": "BUILDING INFO",
+    "fields": [
+      {
+        "name": "C/O Class",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "TOTAL UNITS",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "TAX CLASS",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "YEAR BUILT",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "LOT SIZE",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "BUILDING SIZE",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "BUILDING STORIES",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "CALCULATED SQFT",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "NYC SQFT",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "UNBUILT SQFT",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "ZONING CODE",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "MAX FAR",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "ACTUAL FAR",
+        "table": "",
+        "column": "",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "category": "Mortgage 1",
+    "fields": [
+      {
+        "name": "AUCTION DATE",
+        "table": "",
+        "column": "",
+        "type": "boolean"
+      },
+      {
+        "name": "DATE OF SALE",
+        "table": "",
+        "column": "",
+        "type": "date"
+      },
+      {
+        "name": "DATE VERIFIED",
+        "table": "",
+        "column": "",
+        "type": "date"
+      }
+    ]
+  }
+]

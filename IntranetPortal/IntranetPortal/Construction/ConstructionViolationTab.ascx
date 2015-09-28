@@ -483,11 +483,11 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Registrant</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_Registrant">
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_Registrant">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Dismissal Request</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_DismissalRequest" ss-date>
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_DismissalRequest" ss-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Amount Owed</label>

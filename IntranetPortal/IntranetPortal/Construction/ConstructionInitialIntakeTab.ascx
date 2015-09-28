@@ -66,42 +66,42 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Corporation Name</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.CorpName" pt-init-model="EntityInfo.CorpName">
+                <input class="ss_form_input " ng-model="CSCase.CSCase.InitialIntake.CorpName" pt-init-model="EntityInfo.CorpName">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Corporation Address</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.Addr" pt-init-model="EntityInfo.Address">
+                <input class="ss_form_input " ng-model="CSCase.CSCase.InitialIntake.Addr" pt-init-model="EntityInfo.Address">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Tax Id #</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.TaxIdNum" pt-init-model="EntityInfo.EIN">
+                <input class="ss_form_input " ng-model="CSCase.CSCase.InitialIntake.TaxIdNum" pt-init-model="EntityInfo.EIN">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Signor</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.Signor" pt-init-model="EntityInfo.Signor">
+                <input class="ss_form_input " ng-model="CSCase.CSCase.InitialIntake.Signor" pt-init-model="EntityInfo.Signor">
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Deed</label>
-                <pt-file class="intakeCheck" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadDeed" file-model="CSCase.CSCase.InitialIntake.UploadDeed"></pt-file>
+                <pt-file class="" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadDeed" file-model="CSCase.CSCase.InitialIntake.UploadDeed"></pt-file>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload EIN</label>
-                <pt-file class="intakeCheck" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadEIN" file-model="CSCase.CSCase.InitialIntake.UploadEIN"></pt-file>
+                <pt-file class="" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadEIN" file-model="CSCase.CSCase.InitialIntake.UploadEIN"></pt-file>
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Filing Receipt</label>
-                <pt-file class="intakeCheck"file-bble='CSCase.BBLE' file-id="InitialIntake-UploadFilingReceipt" file-model="CSCase.CSCase.InitialIntake.UploadFilingReceipt"></pt-file>
+                <pt-file class=""file-bble='CSCase.BBLE' file-id="InitialIntake-UploadFilingReceipt" file-model="CSCase.CSCase.InitialIntake.UploadFilingReceipt"></pt-file>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Article of Operation</label>
-                <pt-file class="intakeCheck" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadArticleOfOperation" file-model="CSCase.CSCase.InitialIntake.UploadArticleOfOperation"></pt-file>
+                <pt-file class="" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadArticleOfOperation" file-model="CSCase.CSCase.InitialIntake.UploadArticleOfOperation"></pt-file>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Operation Agreement</label>
-                <pt-file class="intakeCheck" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadOperationAgreement" file-model="CSCase.CSCase.InitialIntake.UploadOperationAgreement"></pt-file>
+                <pt-file class="" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadOperationAgreement" file-model="CSCase.CSCase.InitialIntake.UploadOperationAgreement"></pt-file>
             </li>
         </ul>
     </div>

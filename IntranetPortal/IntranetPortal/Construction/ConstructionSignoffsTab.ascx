@@ -291,6 +291,7 @@
                     <label class="ss_form_input_title">PW2</label>
                     <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Construction_PW2" file-model="CSCase.CSCase.Signoffs.Construction_PW2"></pt-file>
                 </li>
+
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Construction Permit</label>
                     <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Permit" file-model="CSCase.CSCase.Signoffs.Construction_Permit"></pt-file>
@@ -302,6 +303,18 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Mechanical Permit</label>
                     <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Permit" file-model="CSCase.CSCase.Signoffs.Construction_MechanicalPermit"></pt-file>
+                </li>
+                                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Demolition</label>
+                    <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Demolition" file-model="CSCase.CSCase.Signoffs.Construction_Demolition"></pt-file>
+                </li>
+                                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Sidewalk</label>
+                    <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Sidewalk" file-model="CSCase.CSCase.Signoffs.Construction_Sidewalk"></pt-file>
+                </li>
+                                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Shed</label>
+                    <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Shed" file-model="CSCase.CSCase.Signoffs.Construction_Shed"></pt-file>
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date inspection was requested</label>
