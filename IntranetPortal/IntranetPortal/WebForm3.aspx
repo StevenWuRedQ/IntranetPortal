@@ -15,7 +15,6 @@
         <uc1:ComplaintsNotify runat="server" ID="ComplaintsNotify" />
         <br />
         <asp:Button ID="Button1" runat="server" Text="Send Email" OnClick="Button1_Click" />
-
     </div>
     </form>
 </body>
