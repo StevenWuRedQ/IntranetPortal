@@ -564,22 +564,28 @@
                             CheckingSuccess: function(result){
                                 var comment = $("#selType1").val() + "/" + $("#selCategory").val() + " - " + $("#selStatusUpdate").val() + "<br />";
                                 
+                                if(typeof UpdateMortgageStatus != "undefined")
+                                    UpdateMortgageStatus($("#selType1").val(), $("#selStatusUpdate option:selected").text(), $("#selCategory").val());                                
+
+                                if(typeof SaveShortSaleCase != "undefined")
+                                    SaveShortSaleCase()
+
                                 if(result)
                                     comment += result;
 
-                                AddActivityLog(comment);                             
+                                AddActivityLog(comment);
                             },
                             CheckingCancel: function(){
                                 $("#selStatusUpdate").val("");
                             },
-                            Checkinglist:{                                
+                            Checkinglist:{
                                 "Approved":{
-                                    "Approval - Received":{                                        
+                                    "Approval - Received":{
                                         Checking:function(success,cancel)
                                         {
                                             if(typeof window.ssToggleApprovalPopup != "undefined")
                                                 window.ssToggleApprovalPopup(success,cancel);
-                                        }                                    
+                                        }
                                     }
                                 },
                                 "Valuation":{

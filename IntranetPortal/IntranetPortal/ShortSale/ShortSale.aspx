@@ -648,6 +648,11 @@
             angular.element(document.getElementById('ShortSaleCtrl')).scope().toggleValuationPopup(status);
         }
 
+        function SaveShortSaleCase()
+        {
+            angular.element(document.getElementById('ShortSaleCtrl')).scope().SaveShortSale();
+        }
+
         $(document).ready(function () {
             ScopeAutoSave(GetShortSaleCase, angular.element(document.getElementById('ShortSaleCtrl')).scope().SaveShortSale, '#ShortSaleTabHead')
         })
@@ -1030,7 +1035,6 @@
                 $scope.restorePendingModified();
                 if ($scope.valuationCanclCallback) $scope.valuationCanclCallback();
                 $scope.Valuation_popupVisible = false;
-
             }
 
             $scope.valuationSave = function () {

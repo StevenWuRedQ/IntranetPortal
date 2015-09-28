@@ -23,7 +23,7 @@ Public Class ShortSaleFileOverview
 
         If e.Parameters.StartsWith("Add") Then
 
-            Dim comments = e.Parameters.Split("|")(1)
+            Dim comments = e.Parameters.Replace("Add|", "")
 
             Dim log As New ShortSaleOverview
             log.ActivityDate = DateTime.Now

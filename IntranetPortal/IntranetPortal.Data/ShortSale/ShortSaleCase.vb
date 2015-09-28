@@ -1122,7 +1122,7 @@ Partial Public Class ShortSaleCase
 
     Public Shared Function CaseReport2(appId As Integer) As List(Of ShortSaleCase)
         Using ctx As New ShortSaleEntities
-            Dim data = From ss In ctx.ShortSaleCases.Where(Function(sc) sc.AppId = appId And sc.Status <> CaseStatus.Archived)
+            Dim data = From ss In ctx.ShortSaleCases.Where(Function(sc) sc.AppId = appId And sc.Status = CaseStatus.Active)
                        Join pi In ctx.PropertyBaseInfoes On pi.BBLE Equals ss.BBLE
                        Let owner = ctx.PropertyOwners.FirstOrDefault(Function(po) po.BBLE = ss.BBLE)
                        Let morts = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = ss.CaseId).OrderBy(Function(m) m.MortgageId)

@@ -26,7 +26,7 @@ Public Class ShortSaleSubMenu
             End If
 
             If (ShortSaleManage.UpdateCaseStatus(caseId, status, Page.User.Identity.Name, objData)) Then
-                LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} change the case from {1} to {2}.", Page.User.Identity.Name, originStatus, status.ToString), ssCase.BBLE, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
+                LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} change the case from {1} to {2}.", Page.User.Identity.Name, originStatus, status.ToString), ssCase.BBLE, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
             End If
 
             'If status = CaseStatus.FollowUp Then
@@ -94,7 +94,7 @@ Public Class ShortSaleSubMenu
             ShortSaleCase.GetCaseByBBLE(bble).SaveStatus(CaseStatus.Eviction)
             EvictionCas.AddEviction(bble, name, Page.User.Identity.Name)
 
-            LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} set to eviction. Eviction User: {1}.", Page.User.Identity.Name, name), bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reassign)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} set to eviction. Eviction User: {1}.", Page.User.Identity.Name, name), bble, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
         End If
     End Sub
 

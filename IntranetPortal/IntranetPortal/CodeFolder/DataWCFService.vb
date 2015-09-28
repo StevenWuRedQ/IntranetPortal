@@ -185,7 +185,7 @@ Public Class DataWCFService
         Using client As New DataAPI.WCFMacrosClient
             Try
                 Dim waitingRequest = client.Requests_Waiting
-                Return waitingRequest > 50
+                Return waitingRequest > 20
             Catch ex As TimeoutException
                 Throw New Exception("Check Server is busy. Time out exception: " & ex.Message)
                 Return True
