@@ -73,10 +73,14 @@ Public Class ContactService
             If (entity.EntityId = 0 AndAlso CorporationEntity.GetEntityByCorpName(entity.CorpName) IsNot Nothing) Then
                 Return Nothing
             End If
+            If (entity.EntityId = 0) Then
+                entity.AppId = Employee.CurrentAppId
+            End If
+
             entity.Save()
-            Return entity.ToJson
-        End If
-        Return Nothing
+                Return entity.ToJson
+            End If
+            Return Nothing
     End Function
     <OperationContract()>
   <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>

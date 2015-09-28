@@ -142,7 +142,7 @@ Public Class LegalUI
         IntranetPortal.Data.LegalCase.UpdateStatus(bble, IntranetPortal.Data.LegalCaseStatus.ManagerAssign, HttpContext.Current.User.Identity.Name)
 
         Dim comments = String.Format("Research is completed. The case is move to manager.")
-        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
+        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
     End Sub
 
     <WebMethod()> _
@@ -245,7 +245,7 @@ Public Class LegalUI
             End If
 
             Dim comments = String.Format("The case is assign to {0}.", user)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
         End If
     End Sub
     Public Function GetAllRoboSingor() As String

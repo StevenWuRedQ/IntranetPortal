@@ -72,9 +72,9 @@ Namespace Controllers
             If Not ModelState.IsValid Then
                 Return BadRequest(ModelState)
             End If
-
-            db.CorporationEntities.Add(corporationEntity)
             corporationEntity.AppId = Employee.CurrentAppId
+            db.CorporationEntities.Add(corporationEntity)
+
             Try
                 db.SaveChanges()
             Catch ex As DbUpdateException

@@ -844,7 +844,11 @@
             {
                 return window.caseId;
             }
-            ScopeDateChangedByOther(GetLasTUpDateURL, $scope.GetShortSaleCase, $scope.GetLoadId);
+            $scope.GetModifyUserUrl = function()
+            {
+                return 'ShortSaleServices.svc/GetModifyUserUrl?caseId=' + window.caseId;
+            }
+            ScopeDateChangedByOther(GetLasTUpDateURL, $scope.GetShortSaleCase, $scope.GetLoadId, $scope.GetModifyUserUrl);
             $scope.NGAddArraryItem = function (item, model, popup) {
 
                 if (model) {

@@ -46,6 +46,17 @@ Public Class ShortSaleServices
 
     <OperationContract()>
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    Public Function GetModifyUserUrl(caseId As Integer) As Channels.Message
+        Dim ssCase = ShortSaleCase.GetCase(caseId)
+        If (ssCase IsNot Nothing) Then
+            If (HttpContext.Current.User.Identity.Name = ssCase.UpdateBy) Then
+                Return "".ToJson
+            End If
+        End If
+        Return ssCase.UpdateBy.ToJson
+    End Function
+    <OperationContract()>
+    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetCaseByBBLE(bble As String) As Channels.Message
         Return ShortSale.ShortSaleCase.GetCaseByBBLE(bble).ToJson
     End Function
@@ -126,13 +137,13 @@ Public Class ShortSaleServices
     End Function
 
     <OperationContract()>
-   <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetTeamInfo(teamName As String) As Channels.Message
         Return Team.GetTeam(teamName).ToJson
     End Function
 
     <OperationContract()>
-   <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function ReferralManagerContact(agent As String) As Channels.Message
 
         Dim emp = Employee.GetInstance(agent)

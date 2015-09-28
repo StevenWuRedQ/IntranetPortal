@@ -145,7 +145,7 @@
                                 <dx:GridViewDataColumn FieldName="Agent">
                                     <Settings HeaderFilterMode="CheckedList" />
                                 </dx:GridViewDataColumn>
-                                <dx:GridViewDataColumn FieldName="MiscComments">
+                                <dx:GridViewDataColumn FieldName="MiscComments" >
                                     <DataItemTemplate>
                                         <div><%# Eval("MiscComments") %></div>
                                     </DataItemTemplate>

@@ -81,8 +81,12 @@ function ScopeDateChangedByOther(urlFunc,reLoadUIfunc,loadUIIdFunc,urlModfiyUser
                 if (urlModfiyUserFunc)
                 {
                     $.getJSON(urlModfiyUserFunc(), function (mUser) {
-                        alert(mUser + " change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
-                        reLoadUIfunc(loadUIIdFunc());
+                        if (mUser)
+                        {
+                            alert(mUser + " change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
+                            reLoadUIfunc(loadUIIdFunc());
+                        }
+                        
                     });
                 } else {
                     alert("Someone change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");

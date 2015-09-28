@@ -175,6 +175,9 @@ Namespace Controllers
             If IsNothing(constructionCase) Then
                 Return NotFound()
             End If
+            If (constructionCase.UpdateBy = HttpContext.Current.User.Identity.Name) Then
+                Return Ok("")
+            End If
             Return Ok(constructionCase.UpdateBy)
         End Function
     End Class
