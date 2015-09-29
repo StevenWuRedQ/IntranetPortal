@@ -33,30 +33,42 @@
                             <span ng-show="f.filters">
                                 <span ng-repeat="x in f.filters">
                                     <span ng-if="f.type=='string'">
-                                        <select ng-model="x.criteria" ng-change="updateStringFilter(f)">
+                                        <select ng-model="x.criteria" ng-change="updateStringFilter(x)">
                                             <option value="1">is start with</option>
                                             <option value="2">is end with</option>
                                             <option value="3">contains</option>
                                         </select>
-                                        <input ng-model="x.value" type="text" ng-change="updateStringFilter(x)"/>
+                                        <input type="text" ng-model="x.value" ng-change="updateStringFilter(x)" />
                                     </span>
                                     <span ng-if="f.type=='date'">
-                                        <select>
-                                            <option>is before</option>
-                                            <option>is after</option>
-                                            <option>equals</option>
+                                        <select ng-model="x.criteria" ng-change="updateDateFilter(x)">
+                                            <option value="1">is before</option>
+                                            <option value="2">is after</option>
+                                            <option value="3">equals</option>
                                         </select>
-                                        <input type="text" ss-date />
+                                        <input type="text" ng-model="x.value" ng-change="updateDateFilter(x)" type="text" ss-date />
                                     </span>
                                     <span ng-if="f.type=='number'">
-                                        <select>
-                                            <option>></option>
-                                            <option>>=</option>
-                                            <option><</option>
-                                            <option><=</option>
+                                        <select ng-model="x.criteria" ng-change="updateNumberFilter(x)">
+                                            <option value="1"><</option>
+                                            <option value="2"><=</option>
+                                            <option value="3">></option>
+                                            <option value="4">>=</option>
+                                            <option value="5">between</option>
                                         </select>
-                                        <input type="text"/>
-                                        <span>AND <input type="text" /></span>
+                                        <input type="text" ng-model="x.value" ng-change="updateNumberFilter(x)" />
+                                        <span ng-show="x.criteria=='5'">AND
+                                            <input type="text" ng-model="x.value2" ng-change="updateNumberFilter(x)" /></span>
+                                    </span>
+                                    <span ng-if="f.type='list'">
+                                        <span style="display: block">
+                                            <ui-select multiple ng-model="x.value" style="width: 300px">
+                                            <ui-select-match placeholder="Choose items">{{$item}}</ui-select-match>
+                                            <ui-select-choices repeat="o in f.options | filter: $search.search">
+                                                {{o}}
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        </span>
                                     </span>
                                     <pt-del ng-click="removeFilter(f, $index)"></pt-del>
                                 </span>
@@ -67,7 +79,6 @@
                 </table>
             </div>
         </div>
-
         <hr />
         <div class="col-md-12 col-sm-12 clearfix" style="padding-top: 20px">
             <button ng-show="step>1" type="button" class="btn-primary pull-left" ng-click="prev()">Prev</button>
@@ -99,30 +110,80 @@
                 $scope.step = $scope.step - 1;
             }
             $scope.someCheck = function (category) {
-
                 return _.some(category.fields, { checked: true })
             }
             $scope.addFilter = function (f) {
                 if (!f.filters) f.filters = []
-                f.filters.push({ criteria:'', value:'', query:'' })
+                f.filters.push({ criteria: '', value: '', query: '' })
             }
             $scope.removeFilter = function (f, i) {
                 f.filters.splice(i, 1);
             }
             $scope.updateStringFilter = function (x) {
+                if (!x.criteria || !x.value) {
+                    x.query = ""
+                    return;
+                }
                 switch (x.criteria) {
                     case "1":
-                        x.query = " Like " + "'" + x.value + "%'";
+                        x.query = " Like " + " '" + x.value.trim() + "%' ";
                         break;
                     case "2":
-                        x.query = " Like " + "'%" + x.value + "'";
+                        x.query = " Like " + " '%" + x.value.trim() + "' ";
                         break;
                     case "3":
-                        x.query = " Like " + "'%" + x.value + "%'";
+                        x.query = " Like " + " '%" + x.value.trim() + "%' ";
                         break;
                     default:
-                        x.query = " Like " + "'%" + x.value + "%'";
+                        x.query = "";
                 }
+            }
+            $scope.updateDateFilter = function (x) {
+                if (!x.criteria || !x.value) {
+                    x.query = ""
+                    return;
+                }
+                switch (x.criteria) {
+                    case "1":
+                        x.query = " < " + " '" + x.value.trim() + "' ";
+                        break;
+                    case "2":
+                        x.query = " > " + " '" + x.value.trim() + "' ";
+                        break;
+                    case "3":
+                        x.query = " = " + " '" + x.value.trim() + "' ";
+                        break;
+                    default:
+                        x.query = ""
+                }
+
+            }
+            $scope.updateNumberFilter = function (x) {
+
+                if (!x.criteria || !x.value || (x.criteria == "5" && !x.value2)) {
+                    x.query = ""
+                    return;
+                }
+                switch (x.criteria) {
+                    case "1":
+                        x.query = " < " + x.value.trim();
+                        break;
+                    case "2":
+                        x.query = " <= " + x.value.trim();
+                        break;
+                    case "3":
+                        x.query = " > " + x.value.trim();
+                        break;
+                    case "4":
+                        x.query = " >= " + x.value.trim();
+                        break;
+                    case "5":
+                        x.query = " BETWEEN " + x.value.trim() + " AND " + x.value2.trim();
+                        break;
+                    default:
+                        x.query = ""
+                }
+
             }
             $scope.load();
 

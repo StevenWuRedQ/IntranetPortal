@@ -24,7 +24,8 @@
         "name": "Mail Address",
         "table": "",
         "column": "",
-        "type": "string"
+        "type": "list",
+        "options": [ "1", "2", "3"]
       },
       {
         "name": "Cell #",
@@ -157,90 +158,6 @@
       }
     ]
   },
-  {
-    "category": "BUILDING INFO",
-    "fields": [
-      {
-        "name": "C/O Class",
-        "table": "",
-        "column": "",
-        "type": "string"
-      },
-      {
-        "name": "TOTAL UNITS",
-        "table": "",
-        "column": "",
-        "type": "string"
-      },
-      {
-        "name": "TAX CLASS",
-        "table": "",
-        "column": "",
-        "type": "string"
-      },
-      {
-        "name": "YEAR BUILT",
-        "table": "",
-        "column": "",
-        "type": "string"
-      },
-      {
-        "name": "LOT SIZE",
-        "table": "",
-        "column": "",
-        "type": "string"
-      },
-      {
-        "name": "BUILDING SIZE",
-        "table": "",
-        "column": "",
-        "type": "string"
-      },
-      {
-        "name": "BUILDING STORIES",
-        "table": "",
-        "column": "",
-        "type": "string"
-      },
-      {
-        "name": "CALCULATED SQFT",
-        "table": "",
-        "column": "",
-        "type": "string"
-      },
-      {
-        "name": "NYC SQFT",
-        "table": "",
-        "column": "",
-        "type": "string"
-      },
-      {
-        "name": "UNBUILT SQFT",
-        "table": "",
-        "column": "",
-        "type": "string"
-      },
-      {
-        "name": "ZONING CODE",
-        "table": "",
-        "column": "",
-        "type": "string"
-      },
-      {
-        "name": "MAX FAR",
-        "table": "",
-        "column": "",
-        "type": "string"
-      },
-      {
-        "name": "ACTUAL FAR",
-        "table": "",
-        "column": "",
-        "type": "string"
-      }
-    ]
-  },
-
   {
     "category": "Mortgage 1",
     "fields": [

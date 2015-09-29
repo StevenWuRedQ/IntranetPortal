@@ -13,8 +13,9 @@
 	<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" type="text/css" />
 	<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" />
-	<link href="/css/stevencss.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.12.1/select.min.css" />
 	<link rel="stylesheet" href="/css/nga.min.css" />
+	<link rel="stylesheet" href="/css/stevencss.css" type="text/css" />
 
 	<!--
 	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
@@ -23,7 +24,7 @@
 	-->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>    
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>--%>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
 	<script src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
@@ -34,7 +35,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-sanitize.js"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.12.1/select.min.js"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js"></script>
 	<script src="/Scripts/ngMask.min.js"></script>
@@ -54,7 +55,7 @@
 	<script src="https://rawgithub.com/angular-ui/ui-layout/bower/ui-layout.min.js"></script>
 	-->
 	<script>
-		var portalApp = angular.module('PortalApp', ['ngAnimate', 'ui.bootstrap', 'dx', 'ngMask']);
+		var portalApp = angular.module('PortalApp', ['ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select']);
 	</script>
 	<script src="/Scripts/filters.js"></script>
 	<script src="/Scripts/services.js"></script>
