@@ -75,10 +75,16 @@ Public Class ShortSaleManage
     End Sub
 
     Public Shared Sub MoveLeadsToShortSale(bble As String, createBy As String, appid As Integer)
+        Dim li = LeadsInfo.GetInstance(bble)
+
+        If li Is Nothing Then
+            Lead.CreateLeads(bble, LeadStatus.InProcess, createBy)
+            li = LeadsInfo.GetInstance(bble)
+        End If
+
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
 
         If ssCase Is Nothing OrElse ssCase.Status = ShortSale.CaseStatus.NewFile Then
-            Dim li = LeadsInfo.GetInstance(bble)
 
             If li IsNot Nothing Then
                 Dim propBase = SaveProp(li, createBy)
@@ -93,7 +99,12 @@ Public Class ShortSaleManage
                 ssCase.CreateBy = createBy
                 ssCase.Save(createBy)
 
-                NewCaseProcess.ProcessStart(bble, bble, createBy, String.Format("{0} want to move this case to ShortSale. Please approval.", createBy))
+                If Roles.IsUserInRole(createBy, "ShortSale-Manager") Then
+                    NewCaseApproved(bble, createBy)
+                Else
+                    NewCaseProcess.ProcessStart(bble, bble, createBy, String.Format("{0} want to move this case to ShortSale. Please approval.", createBy))
+                End If
+
                 'NewCaseWithWF(bble, createBy)
             End If
         End If
@@ -140,6 +151,10 @@ Public Class ShortSaleManage
             mort.Category = "Assign"
             mort.Status = "Intake - New File"
             mort.Save(approvedBy)
+        End If
+
+        If approvedBy = "David" Then
+            Return
         End If
 
         'Send user email 

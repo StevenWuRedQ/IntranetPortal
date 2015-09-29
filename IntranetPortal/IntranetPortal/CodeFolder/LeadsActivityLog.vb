@@ -67,6 +67,8 @@
         Return log
     End Function
 
+    Public Property AppId As Integer
+
     Public Shared Function AddActivityLog(logDate As DateTime, comments As String, bble As String, category As String, actionType As EnumActionType) As LeadsActivityLog
         Dim empId As Integer
         Dim empName As String
@@ -114,7 +116,13 @@
                 Return ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble).OrderByDescending(Function(l) l.ActivityDate).ToList
             End If
 
-            Dim logs = ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble AndAlso categories.Contains(l.Category)).OrderByDescending(Function(l) l.ActivityDate).ToList
+            Dim logs = (From log In ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble AndAlso categories.Contains(l.Category)).OrderByDescending(Function(l) l.ActivityDate)
+                        Join emp In ctx.Employees On log.EmployeeID Equals emp.EmployeeID
+                        Select log, emp.AppId).ToList.Select(Function(item)
+                                                                 item.log.AppId = item.AppId
+                                                                 Return item.log
+                                                             End Function).ToList
+
             Return logs
         End Using
     End Function

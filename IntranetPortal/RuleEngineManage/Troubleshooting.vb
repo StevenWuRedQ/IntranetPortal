@@ -880,6 +880,12 @@ Public Class Troubleshooting
     Private Sub Button19_Click(sender As Object, e As EventArgs) Handles Button19.Click
 
 
+    End Sub
+
+    Private Sub btnImportCaseByBBLE_Click(sender As Object, e As EventArgs) Handles btnImportCaseByBBLE.Click
+        Dim bble = txtSSBBLE.Text
+
+        ShortSaleManage.MoveLeadsToShortSale(bble, "David", 2)
 
 
     End Sub

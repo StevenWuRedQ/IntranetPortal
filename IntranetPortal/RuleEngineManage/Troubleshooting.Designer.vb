@@ -110,6 +110,7 @@ Partial Class Troubleshooting
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnComplaintsRefresh = New System.Windows.Forms.Button()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.Button19 = New System.Windows.Forms.Button()
         Me.Button18 = New System.Windows.Forms.Button()
         Me.Button17 = New System.Windows.Forms.Button()
         Me.Button16 = New System.Windows.Forms.Button()
@@ -117,7 +118,8 @@ Partial Class Troubleshooting
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Button15 = New System.Windows.Forms.Button()
-        Me.Button19 = New System.Windows.Forms.Button()
+        Me.TabPage10 = New System.Windows.Forms.TabPage()
+        Me.btnImportCaseByBBLE = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -385,6 +387,7 @@ Partial Class Troubleshooting
         Me.TabControl1.Controls.Add(Me.TabPage7)
         Me.TabControl1.Controls.Add(Me.TabPage8)
         Me.TabControl1.Controls.Add(Me.TabPage9)
+        Me.TabControl1.Controls.Add(Me.TabPage10)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 46)
         Me.TabControl1.Name = "TabControl1"
@@ -701,6 +704,7 @@ Partial Class Troubleshooting
         '
         'TabPage5
         '
+        Me.TabPage5.Controls.Add(Me.btnImportCaseByBBLE)
         Me.TabPage5.Controls.Add(Me.Button14)
         Me.TabPage5.Controls.Add(Me.Button13)
         Me.TabPage5.Controls.Add(Me.btnInitialContact)
@@ -999,6 +1003,15 @@ Partial Class Troubleshooting
         Me.TabPage9.Text = "Construction"
         Me.TabPage9.UseVisualStyleBackColor = True
         '
+        'Button19
+        '
+        Me.Button19.Location = New System.Drawing.Point(159, 44)
+        Me.Button19.Name = "Button19"
+        Me.Button19.Size = New System.Drawing.Size(75, 23)
+        Me.Button19.TabIndex = 7
+        Me.Button19.Text = "TestHPD"
+        Me.Button19.UseVisualStyleBackColor = True
+        '
         'Button18
         '
         Me.Button18.Location = New System.Drawing.Point(57, 44)
@@ -1059,14 +1072,24 @@ Partial Class Troubleshooting
         Me.Button15.Text = "UpLoad Activity"
         Me.Button15.UseVisualStyleBackColor = True
         '
-        'Button19
+        'TabPage10
         '
-        Me.Button19.Location = New System.Drawing.Point(159, 44)
-        Me.Button19.Name = "Button19"
-        Me.Button19.Size = New System.Drawing.Size(75, 23)
-        Me.Button19.TabIndex = 7
-        Me.Button19.Text = "TestHPD"
-        Me.Button19.UseVisualStyleBackColor = True
+        Me.TabPage10.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage10.Name = "TabPage10"
+        Me.TabPage10.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage10.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage10.TabIndex = 10
+        Me.TabPage10.Text = "CustomReport"
+        Me.TabPage10.UseVisualStyleBackColor = True
+        '
+        'btnImportCaseByBBLE
+        '
+        Me.btnImportCaseByBBLE.Location = New System.Drawing.Point(27, 189)
+        Me.btnImportCaseByBBLE.Name = "btnImportCaseByBBLE"
+        Me.btnImportCaseByBBLE.Size = New System.Drawing.Size(118, 23)
+        Me.btnImportCaseByBBLE.TabIndex = 10
+        Me.btnImportCaseByBBLE.Text = "Import Case by BBLE"
+        Me.btnImportCaseByBBLE.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1206,4 +1229,6 @@ Partial Class Troubleshooting
     Friend WithEvents Button17 As Button
     Friend WithEvents Button18 As Button
     Friend WithEvents Button19 As Button
+    Friend WithEvents TabPage10 As TabPage
+    Friend WithEvents btnImportCaseByBBLE As Button
 End Class

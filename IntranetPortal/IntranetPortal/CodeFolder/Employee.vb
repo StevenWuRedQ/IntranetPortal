@@ -22,8 +22,11 @@ Partial Public Class Employee
     Public Shared ReadOnly Property CurrentAppId As Integer
         Get
             Try
-                If HttpContext.Current IsNot Nothing AndAlso HttpContext.Current.User IsNot Nothing AndAlso HttpContext.Current.User.Identity IsNot Nothing Then
-                    Return GetInstance(HttpContext.Current.User.Identity.Name).AppId
+                If HttpContext.Current IsNot Nothing AndAlso HttpContext.Current.User IsNot Nothing AndAlso HttpContext.Current.User.Identity IsNot Nothing AndAlso Not String.IsNullOrEmpty(HttpContext.Current.User.Identity.Name) Then
+                    Dim emp = GetInstance(HttpContext.Current.User.Identity.Name)
+                    If emp IsNot Nothing Then
+                        Return emp.AppId
+                    End If
                 Else
                     Return 1
                 End If

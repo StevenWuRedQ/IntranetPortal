@@ -16,10 +16,7 @@ Public Class QueryBuilder
         query.WherePhrase.Terms.Add(WhereTerm.CreateCompare(SqlExpression.Field("Name"), SqlExpression.String("Test"), CompareOperator.Equal))
 
         query.OrderByTerms.Add(New OrderByTerm("Id", OrderByDirection.Ascending))
-
-        Return New SqlServerRenderer().RenderSelect(query)
-
+        Return query.ToJsonString
     End Function
-
 
 End Class

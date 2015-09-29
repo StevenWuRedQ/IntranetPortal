@@ -148,14 +148,17 @@ Public Class ShortSaleCaseList
     End Sub
 
     Public Sub CreateNewLeads(bble As String) Handles CreateNew.CaseCreatedEvent
+        For Each item In bble.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries)
+            If Not String.IsNullOrEmpty(item) Then
+                Dim ld = LeadsInfo.GetInstance(item)
 
-        Dim ld = LeadsInfo.GetInstance(bble)
+                If ld Is Nothing Then
+                    Lead.CreateLeads(item, LeadStatus.InProcess, Page.User.Identity.Name)
+                End If
 
-        If ld Is Nothing Then
-            Lead.CreateLeads(bble, LeadStatus.InProcess, Page.User.Identity.Name)
-        End If
-
-        ShortSaleManage.MoveLeadsToShortSale(bble, Page.User.Identity.Name, Employee.CurrentAppId)
+                ShortSaleManage.MoveLeadsToShortSale(item, Page.User.Identity.Name, Employee.CurrentAppId)
+            End If
+        Next
     End Sub
 
     Public Property AutoLoadCase As Boolean

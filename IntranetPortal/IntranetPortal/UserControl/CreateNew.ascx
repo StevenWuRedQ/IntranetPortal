@@ -64,6 +64,9 @@
                                         <td>BBLE</td>
                                         <td>
                                             <dx:ASPxTextBox ID="txtNewBBLE" runat="server" Width="100%" ClientInstanceName="txtNewBBLEClient" CssClass="edit_drop"></dx:ASPxTextBox>
+                                            <dx:ASPxButton runat="server" ID="txtAddAll" AutoPostBack="false" Text="Batch Import">
+                                                <ClientSideEvents Click="function(s,e){popupCreateNew.PerformCallback('Add|' + txtNewBBLEClient.GetText()); }" />
+                                            </dx:ASPxButton>
                                         </td>
                                     </tr>
                                     <tr style="margin-bottom: 3px" hidden="hidden">

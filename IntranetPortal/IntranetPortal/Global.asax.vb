@@ -37,6 +37,26 @@ Public Class Global_asax
 
     Sub Application_BeginRequest(ByVal sender As Object, ByVal e As EventArgs)
         'Debug.WriteLine("BeginRequest:" & DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"))
+
+    End Sub
+
+    Public Sub RefreshUserTime(sessionId As Integer)
+        Application.Lock()
+        Dim users = CType(Application("Users"), List(Of OnlineUser))
+
+        If users Is Nothing Then
+            Application.Lock()
+            Application("Users") = New List(Of OnlineUser)
+            Application.UnLock()
+        End If
+
+        Dim currentUser = users.Where(Function(u) u.SessionID = sessionId).SingleOrDefault
+
+        If currentUser IsNot Nothing Then
+            currentUser.RefreshTime = DateTime.Now
+        End If
+        Context.Application("Users") = users
+        Context.Application.UnLock()
     End Sub
 
     Sub Application_EndRequest(ByVal sender As Object, ByVal e As EventArgs)

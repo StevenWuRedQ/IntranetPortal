@@ -219,7 +219,7 @@
     <Compile Include="PropertyHelper.vb" />
     <Compile Include="Model\RecycleLead.vb" />
     <Compile Include="Model\Thumbnail.vb" />
-    <Compile Include="QueryBuilder.vb" />
+    <Compile Include="QueryBuilder\QueryBuilder.vb" />
     <Compile Include="Utility.vb" />
     <Compile Include="WorkingHours.vb" />
   </ItemGroup>

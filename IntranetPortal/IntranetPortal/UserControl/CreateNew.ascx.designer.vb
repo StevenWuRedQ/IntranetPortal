@@ -41,6 +41,15 @@ Partial Public Class CreateNew
     Protected WithEvents txtNewBBLE As Global.DevExpress.Web.ASPxTextBox
     
     '''<summary>
+    '''txtAddAll control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtAddAll As Global.DevExpress.Web.ASPxButton
+    
+    '''<summary>
     '''txtNewLeadsName control.
     '''</summary>
     '''<remarks>

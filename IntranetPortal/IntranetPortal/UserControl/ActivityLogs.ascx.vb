@@ -77,7 +77,9 @@ Public Class ActivityLogs
         Else
             Select Case DisplayMode
                 Case ActivityLogMode.ShortSale
-                    gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.LogCategory.Task.ToString, LeadsActivityLog.LogCategory.PublicUpdate.ToString})
+                    Dim appId = Employee.CurrentAppId
+                    Dim ssLogs = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.LogCategory.Task.ToString, LeadsActivityLog.LogCategory.PublicUpdate.ToString})
+                    gridTracking.DataSource = ssLogs.Where(Function(log) log.AppId = appId).ToList
                 Case ActivityLogMode.Legal
                     gridTracking.DataSource = LeadsActivityLog.GetLeadsActivityLogs(bble, {LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.LogCategory.Eviction.ToString, LeadsActivityLog.LogCategory.PublicUpdate.ToString})
                 Case ActivityLogMode.Construction
