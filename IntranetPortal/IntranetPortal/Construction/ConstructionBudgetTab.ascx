@@ -60,7 +60,7 @@
                 "contract": "",
                 "paid": "",
             }
-            $http.get("budgetData.json")
+            $http.get("/Scripts/res/budgetData.json")
                 .then(function (res) {
                     $scope.template.form = res.data;
                     $scope.data = $scope.template;
