@@ -142,8 +142,7 @@
         });
     }
 
-    portalApp = angular.module('PortalApp');
-    portalApp.controller('ConstructionCtrl', function ($scope, $http, $timeout, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
+    angular.module('PortalApp').controller('ConstructionCtrl', function ($scope, $http, $timeout, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
         // scope variables
         $scope._ = _;
         $scope.arrayRemove = ptCom.arrayRemove;
@@ -196,7 +195,7 @@
             $scope.EntityInfo = {};
             $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} });
 
-            //budgetControl.reload();
+            budgetCtrl.reload();
             $scope.clearWarning();
         }
 
@@ -211,7 +210,7 @@
                 ptCom.nullToUndefined(res);
                 $.extend(true, $scope.CSCase, res);
                 $scope.initWatchedModel();
-                //if ($scope.CSCase.CSCase.budgetData) budgetControl.load($scope.CSCase.CSCase.budgetData);
+                if ($scope.CSCase.CSCase.BudateData) budgetCtrl.load($scope.CSCase.CSCase.BudateData);
                 done1 = true;
                 if (done1 && done2 && done3 & done4) {
                     $scope.stopLoading();
@@ -269,7 +268,8 @@
 
 
         $scope.saveCSCase = function () {
-            //$scope.getBudgetData();
+            var data = budgetCtrl.get();
+            if (data) $scope.CSCase.CSCase.BudateData = data;
             var data = JSON.stringify($scope.CSCase);
             ptConstructionService.saveConstructionCases($scope.CSCase.BBLE, data, function (res) {
                 ScopeSetLastUpdateTime($scope.GetTimeUrl());
@@ -497,15 +497,6 @@
         }
 
         /* end loading panel*/
-
-        /* budget table */
-        $scope.getBudgetData = function () {
-            var data = budgetControl.getData();
-            $scope.CSCase.CSCase.budgetData = data;
-        }
-
-
-        /* end budget table */
 
 
         /* intakeComplete */

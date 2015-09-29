@@ -4456,6 +4456,7 @@
     <Content Include="Scripts\handsontable-master\test\jasmine\lib\jasmine\MIT.LICENSE" />
     <Content Include="Scripts\handsontable-master\test\jasmine\templates\SpecRunner.tmpl" />
     <Content Include="Scripts\handsontable-master\update.json" />
+    <Content Include="Construction\budgetData.json" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
