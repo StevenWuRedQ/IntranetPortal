@@ -115,9 +115,9 @@
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">Judgments</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.judgments" /></li>
                                     <li class="ss_form_item ">
-                                        <label class="ss_form_input_title">Irs Tax Lien</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.irsTaxLien" /></li>
+                                        <label class="ss_form_input_title">Irs Tax Lien</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.irsTaxLien" money-mask/></li>
                                     <li class="ss_form_item ">
-                                        <label class="ss_form_input_title">NYS Tax Lien</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.nysTaxLien" /></li>
+                                        <label class="ss_form_input_title">NYS Tax Lien</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.nysTaxLien" money-mask/></li>
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">Fannie</label>
                                         <pt-radio name="liens_info_fannie1" model="DocSearch.LeadResearch.fannie">
@@ -137,7 +137,11 @@
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">Servicer</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.servicer" /></li>
                                     <li class="ss_form_item ">
-                                        <label class="ss_form_input_title">Wells Fargo</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.wellsFargo" /></li>
+                                        <label class="ss_form_input_title">Wells Fargo</label>
+                                         <pt-radio name="liens_info_fha" model="DocSearch.LeadResearch.wellsFargo">
+                                         </pt-radio>
+
+                                    </li>
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">Court Date</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.courtDate" ss-date /></li>
                                     <li class="clear-fix" style="list-style: none"></li>

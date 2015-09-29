@@ -553,7 +553,7 @@
 
         /*check file be modify*/
         $scope.GetTimeUrl = function () {
-            return "/api/ConstructionCases/LastLastUpdate/" + $scope.CSCase.BBLE;
+            return $scope.CSCase.BBLE?"/api/ConstructionCases/LastLastUpdate/" + $scope.CSCase.BBLE:"";
         }
         $scope.GetCSCaseId = function () {
             return $scope.CSCase.BBLE;

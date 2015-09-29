@@ -596,7 +596,7 @@
 
         function GetLasTUpDateURL()
         {
-            return 'ShortSaleServices.svc/GetCaseLastUpDateTime?caseId=' + window.caseId
+            return  window.caseId?'ShortSaleServices.svc/GetCaseLastUpDateTime?caseId=' + window.caseId:''
         }
         function NGGetShortSale(caseId) {
             $(document).ready(function () {
