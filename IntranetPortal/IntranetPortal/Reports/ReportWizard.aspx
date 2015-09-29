@@ -60,14 +60,14 @@
                                         <span ng-show="x.criteria=='5'">AND
                                             <input type="text" ng-model="x.value2" ng-change="updateNumberFilter(x)" /></span>
                                     </span>
-                                    <span ng-if="f.type='list'">
-                                        <span style="display: block">
-                                            <ui-select multiple ng-model="x.value" style="width: 300px">
-                                            <ui-select-match placeholder="Choose items">{{$item}}</ui-select-match>
-                                            <ui-select-choices repeat="o in f.options | filter: $search.search">
-                                                {{o}}
-                                            </ui-select-choices>
-                                        </ui-select>
+                                    <span ng-if="f.type=='list'" style="width: 300px; display: block">
+                                        <span>
+                                            <ui-select multiple ng-model="x.value">
+                                                <ui-select-match placeholder="Choose items">{{$item}}</ui-select-match>
+                                                <ui-select-choices repeat="o in f.options | filter: $search.search">
+                                                    {{o}}
+                                                </ui-select-choices>
+                                            </ui-select>
                                         </span>
                                     </span>
                                     <pt-del ng-click="removeFilter(f, $index)"></pt-del>
