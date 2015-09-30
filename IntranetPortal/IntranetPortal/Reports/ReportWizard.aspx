@@ -61,7 +61,7 @@
                                             <span ng-show="x.criteria=='5'">AND
                                             <input type="text" ng-model="x.value2" ng-change="updateNumberFilter(x)" /></span>
                                         </span>
-                                        <span ng-if="f.type=='list'" style="width: 300px; display: block">
+                                        <span ng-if="f.type=='list'" style="width: 300px; display: inline-block">
                                             <span>
                                                 <ui-select multiple ng-model="x.value">
                                                 <ui-select-match placeholder="Choose items">{{$item}}</ui-select-match>
@@ -95,7 +95,7 @@
         portalApp.controller("ReportWizardCtrl", function ($scope, $http) {
             $scope.step = 1;
             $scope.load = function () {
-                $http.get("shortsale.json")
+                $http.get("<%= Template %>.js")
                     .then(function (data) {
                         $scope.Fields = data.data;
                     })

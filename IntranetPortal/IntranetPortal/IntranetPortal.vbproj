@@ -4876,7 +4876,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Reports\shortsale.json" />
+    <Content Include="Reports\shortsale.js" />
   </ItemGroup>
   <!--<ItemGroup>
     <Folder Include="App_Data\" />
