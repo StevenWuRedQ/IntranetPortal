@@ -103,7 +103,6 @@ Public Class ShortSaleServices
         Return PropertyFloor.PropertyFloors(bble).ToJson
     End Function
 
-
     <OperationContract()>
     <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
     Public Function SaveBreakData(jsonData As String, bble As String) As Channels.Message

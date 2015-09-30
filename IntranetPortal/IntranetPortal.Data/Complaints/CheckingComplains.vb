@@ -212,6 +212,10 @@ Partial Public Class CheckingComplain
     Private Function DataIsChange(results As DataAPI.SP_DOB_Complaints_By_BBLE_Result()) As Boolean
         For Each result In results
             If result.Status = "ACT" Then
+                If ComplaintsResult Is Nothing Then
+                    Return False
+                End If
+
                 Dim lastResult = ComplaintsResult.Where(Function(r) r.BBLE = result.BBLE AndAlso r.ComplaintNumber = result.ComplaintNumber).FirstOrDefault
 
                 'New complaints

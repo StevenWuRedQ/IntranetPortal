@@ -1,4 +1,5 @@
-﻿Imports Reeb.SqlOM
+﻿Imports Newtonsoft.Json.Linq
+Imports Reeb.SqlOM
 Imports Reeb.SqlOM.Render
 
 Public Class QueryBuilder
@@ -18,5 +19,19 @@ Public Class QueryBuilder
         query.OrderByTerms.Add(New OrderByTerm("Id", OrderByDirection.Ascending))
         Return query.ToJsonString
     End Function
+
+    Public Function BuilderSelectQuery(json As String, baseTable As String) As String
+
+        Dim jsObj = JToken.Parse(json)
+
+        Dim baseTbl As FromTerm = FromTerm.Table(baseTable)
+
+
+
+
+        Return ""
+
+    End Function
+
 
 End Class

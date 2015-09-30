@@ -75,7 +75,7 @@ Public Class ComplainsMng
 
                 'Dim result = Data.CheckingComplain.GetResultFromServices().ToJsonString
                 Dim name = User.Identity.Name
-                Dim complaints = Data.CheckingComplain.GetLightAllComplains(If(ManagerView, "", name))
+                Dim complaints = Data.CheckingComplain.GetAllComplains(If(ManagerView, "", name))
 
                 Dim callback = Sub()
                                    Try
