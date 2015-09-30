@@ -24,7 +24,12 @@
                     allGroup.AddRange(SubGroups.Select(Function(l) l.Id).ToList())
                 End If
                 Using ctx As New ShortSaleEntities
-                    _contacts = ctx.PartyContacts.Where(Function(c) allGroup.Contains(c.GroupId) AndAlso (c.Disable Is Nothing Or c.Disable = False) AndAlso c.AppId = appId).ToList()
+                    If (appId = 0) Then
+                        _contacts = ctx.PartyContacts.Where(Function(c) allGroup.Contains(c.GroupId) AndAlso (c.Disable Is Nothing Or c.Disable = False)).ToList()
+                    Else
+                        _contacts = ctx.PartyContacts.Where(Function(c) allGroup.Contains(c.GroupId) AndAlso (c.Disable Is Nothing Or c.Disable = False) AndAlso c.AppId = appId).ToList()
+                    End If
+
                 End Using
             End If
             Return _contacts

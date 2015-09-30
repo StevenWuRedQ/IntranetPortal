@@ -21,7 +21,7 @@ Public Class ContactService
     Public Function GetBankList() As Channels.Message
         Dim gp = GroupType.GetGroup(5)
         If gp IsNot Nothing Then
-            Return gp.Contacts(Employee.CurrentAppId).Where(Function(a) (a.Disable Is Nothing Or a.Disable = False)).OrderBy(Function(p) p.Name).ToList.ToJson
+            Return gp.Contacts(0).Where(Function(a) (a.Disable Is Nothing Or a.Disable = False)).OrderBy(Function(p) p.Name).ToList.ToJson
         End If
         Return Nothing
     End Function

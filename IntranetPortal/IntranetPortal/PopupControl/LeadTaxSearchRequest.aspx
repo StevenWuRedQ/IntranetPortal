@@ -29,8 +29,8 @@
                 <div id="LeadTaxSearchCtrl" ng-controller="LeadTaxSearchCtrl" style="overflow: auto; height: 830px; padding: 0 20px">
 
                     <div class="ss_form">
-                        <h4 class="ss_form_title ">Request Info</h4>
-                        <div class="ss_border">
+                        <h4 class="ss_form_title ">Request Info <pt-collapse model="CollapseRequestInfo" /></h4>
+                        <div class="ss_border"  collapse="CollapseRequestInfo">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title">Requested On</label><input class="ss_form_input" ng-model="DocSearch.CreateDate" ss-date disabled="disabled" /></li>
@@ -61,8 +61,8 @@
                         </div>
                     </div>
                     <div class="ss_form">
-                        <h4 class="ss_form_title ">DOB/ECB</h4>
-                        <div class="ss_border">
+                        <h4 class="ss_form_title ">DOB/ECB <pt-collapse model="CollapseECBDOB" /></h4>
+                        <div class="ss_border" collapse="CollapseECBDOB">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title">Property Taxes</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.propertyTaxes" money-mask /></li>
@@ -88,8 +88,8 @@
 
 
                             </ul>
-                            <h5 class="ss_form_title ">ECB Violation  </h5>
-                            <div class="ss_border">
+                            <h5 class="ss_form_title ">ECB Violation  <pt-collapse model="ECBViolation" /></h5>
+                            <div class="ss_border" collapse="ECBViolation">
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">Dob Websites</label>
@@ -109,11 +109,12 @@
                             </div>
                         </div>
                         <div class="ss_form">
-                            <h4 class="ss_form_title ">Liens Info</h4>
+                            <h4 class="ss_form_title ">Liens Info  <pt-collapse model="LiensInfoCollapse" /></h4>
                             <div class="ss_border">
-                                <ul class="ss_form_box clearfix">
+                                <ul class="ss_form_box clearfix" collapse="LiensInfoCollapse">
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">Judgments</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.judgments" /></li>
+
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">Irs Tax Lien</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.irsTaxLien" money-mask/></li>
                                     <li class="ss_form_item ">
@@ -153,8 +154,8 @@
                             </div>
                         </div>
                         <div class="ss_form">
-                            <h4 class="ss_form_title ">Completed Info </h4>
-                            <div class="ss_border">
+                            <h4 class="ss_form_title ">Completed Info <pt-collapse model="CompletedInfo" /></h4>
+                            <div class="ss_border" collapse="CompletedInfo">
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">Searches Completed On</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.searchesCompletedOn" ss-date /></li>
@@ -183,8 +184,8 @@
                         </div>
                         <uc1:SearchRecodingPopupCtrl runat="server" ID="SearchRecodingPopupCtrl1" />
                         <div class="ss_form">
-                            <h4 class="ss_form_title ">Research Completed <i class="fa fa-pencil-square color_blue_edit collapse_btn tooltip-examples" title="Record Research" onclick="SearchRecodingPopupClient.Show()" ng-show="DocSearch.LeadResearch.documentsReceived"></i></h4>
-                            <div class="ss_border">
+                            <h4 class="ss_form_title ">Research Completed <i class="fa fa-pencil-square color_blue_edit collapse_btn tooltip-examples" title="Record Research" onclick="SearchRecodingPopupClient.Show()" ng-show="DocSearch.LeadResearch.documentsReceived"></i> <pt-collapse model="ResearchCompleted" /></h4>
+                            <div class="ss_border" collapse="ResearchCompleted">
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">Documents Received</label><pt-radio name="research_completed_documents_received" model="DocSearch.LeadResearch.documentsReceived"></pt-radio></li>
@@ -219,9 +220,15 @@
                     return;
                 }
 
+
                 $http.get("/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + leadsInfoBBLE).
                 success(function (data, status, headers, config) {
                     $scope.LeadsInfo = data;
+                    $scope.DocSearch.LeadResearch.ownerName = $scope.DocSearch.LeadResearch.ownerName || data.Owner;
+                    $scope.DocSearch.LeadResearch.waterCharges = $scope.DocSearch.LeadResearch.waterCharges || data.WaterAmt;
+                    $scope.DocSearch.LeadResearch.propertyTaxes = $scope.DocSearch.LeadResearch.propertyTaxes || data.TaxesAmt;
+                    $scope.DocSearch.LeadResearch.mortgageAmount = $scope.DocSearch.LeadResearch.mortgageAmount || data.C1stMotgrAmt;
+                    $scope.DocSearch.LeadResearch.secondMortgageAmount = $scope.DocSearch.LeadResearch.secondMortgageAmount || data.C2ndMotgrAmt;
 
                 }).error(function (data, status, headers, config) {
                     alert("Get Leads Info failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
