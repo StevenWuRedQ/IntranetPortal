@@ -23,6 +23,15 @@ Public Class RulesEngineServices
         Return result.Where(Function(r) Not String.IsNullOrEmpty(r.StatusStr)).ToArray
     End Function
 
+    Public Function RunRule(ruleId As String) As Boolean
+        If rulesEngine Is Nothing Then
+            Me.Open()
+        End If
+
+        rulesEngine.ExecuteRule(ruleId)
+        Return True
+    End Function
+
     Public Function StartRule(ruleId As String) As Boolean
         If rulesEngine Is Nothing Then
             Me.Open()

@@ -238,6 +238,11 @@
                                             <dx:ASPxButton RenderMode="Button" Text="OK" CssClass="rand-button rand-button-blue" AutoPostBack="false" runat="server">
                                                 <ClientSideEvents Click="function(){
                                                           IsAddNewLead = true;
+                                                          if(txtNewBBLEClient.GetText() == '')
+                                                            {
+                                                                 alert('please select address.');
+                                                                 return;
+                                                            }
                                                           popupCreateNew.PerformCallback('Add|' + txtNewBBLEClient.GetText());                                                                                                                                                                                                                                      
                                                           popupCreateNew.Hide();
                                                         }" />

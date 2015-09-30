@@ -255,6 +255,8 @@
                         </dx:GridViewDataDateColumn>
                         <dx:GridViewDataColumn FieldName="CreateBy" Caption="CreateBy" Width="120px">
                         </dx:GridViewDataColumn>
+                        <dx:GridViewDataColumn FieldName="StatusString" Caption="Status" Width="80px">                            
+                        </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn Width="80px">
                             <HeaderTemplate>
                                 <i class="fa fa-refresh icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" onclick="RefreshProperty('All')" title="Refresh All"></i>&nbsp;

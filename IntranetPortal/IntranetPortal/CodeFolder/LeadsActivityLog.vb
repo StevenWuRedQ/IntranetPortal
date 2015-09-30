@@ -116,12 +116,12 @@
                 Return ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble).OrderByDescending(Function(l) l.ActivityDate).ToList
             End If
 
-            Dim logs = (From log In ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble AndAlso categories.Contains(l.Category)).OrderByDescending(Function(l) l.ActivityDate)
+            Dim logs = (From log In ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble AndAlso categories.Contains(l.Category))
                         Join emp In ctx.Employees On log.EmployeeID Equals emp.EmployeeID
                         Select log, emp.AppId).ToList.Select(Function(item)
                                                                  item.log.AppId = item.AppId
                                                                  Return item.log
-                                                             End Function).ToList
+                                                             End Function).OrderByDescending(Function(l) l.ActivityDate).ToList
 
             Return logs
         End Using

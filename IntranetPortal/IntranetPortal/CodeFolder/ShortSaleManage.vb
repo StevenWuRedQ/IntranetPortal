@@ -107,6 +107,8 @@ Public Class ShortSaleManage
 
                 'NewCaseWithWF(bble, createBy)
             End If
+        Else
+
         End If
     End Sub
 

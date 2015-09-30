@@ -19,13 +19,14 @@ Partial Public Class CheckingComplain
 
     Public Shared Function GetLightAllComplains(Optional userName As String = "") As List(Of CheckingComplain)
         Using ctx As New ConstructionEntities
-            Return ctx.CheckingComplains.Where(Function(c) c.NotifyUsers.Contains(userName) Or userName = "").Select(Function(c) New With {c.BBLE, c.Address, c.TotalComplaints, c.ActiveComplaints, c.NotifyUsers, c.LastExecute, c.CreateBy}).ToList.Select(Function(c) New CheckingComplain With {
+            Return ctx.CheckingComplains.Where(Function(c) c.NotifyUsers.Contains(userName) Or userName = "").Select(Function(c) New With {c.BBLE, c.Address, c.TotalComplaints, c.ActiveComplaints, c.NotifyUsers, c.LastExecute, c.CreateBy, c.Status}).ToList.Select(Function(c) New CheckingComplain With {
                                                     .BBLE = c.BBLE,
                                                     .Address = c.Address,
                                                     .TotalComplaints = c.TotalComplaints,
                                                     .ActiveComplaints = c.ActiveComplaints,
                                                     .NotifyUsers = c.NotifyUsers,
                                                     .LastExecute = c.LastExecute,
+                                                    .Status = c.Status,
                                                     .CreateBy = c.CreateBy}).ToList()
         End Using
     End Function
@@ -213,7 +214,7 @@ Partial Public Class CheckingComplain
         For Each result In results
             If result.Status = "ACT" Then
                 If ComplaintsResult Is Nothing Then
-                    Return False
+                    Return True
                 End If
 
                 Dim lastResult = ComplaintsResult.Where(Function(r) r.BBLE = result.BBLE AndAlso r.ComplaintNumber = result.ComplaintNumber).FirstOrDefault
@@ -278,6 +279,13 @@ Partial Public Class CheckingComplain
             Core.EmailService.SendMail(String.Join(";", usersEmails), "", "ComplaintsNotify2", mailData)
         End If
     End Sub
+
+    Public ReadOnly Property StatusString As String
+        Get
+            Return CType(Status, RunningStatus).ToString
+        End Get
+    End Property
+
 
     Public Enum RunningStatus
         InRefresh

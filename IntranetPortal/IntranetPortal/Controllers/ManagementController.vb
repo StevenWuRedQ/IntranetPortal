@@ -39,6 +39,15 @@ Namespace Controllers
             End Using
         End Function
 
+        <ResponseType(GetType(BaseRule()))>
+        <Route("api/Management/RulesEngine/Run/{ruleId}")>
+        Function PostRunRule(ruleId As String) As Boolean
+            Using svr As New RulesEngineServices(ruleEngineName)
+                svr.RunRule(ruleId)
+                Return True
+            End Using
+        End Function
+
         <Route("api/Management/SystemLogs/")>
         Function PostSystemLogs(<FromBody> updateTime As DateTime?) As IHttpActionResult
             Dim logs = Core.SystemLog.GetLatestLogs(updateTime)

@@ -28,6 +28,11 @@
             PostData(url);
         }
 
+        function RunRule(ruleId) {
+            var url = "/api/Management/RulesEngine/Run/" + ruleId;
+            PostData(url);
+        }
+
         function PostData(url) {
             $.ajax({
                 type: "POST",
@@ -122,6 +127,7 @@
         <script id="gridCellAction" type="text/html">
             <i class="fa fa-play icon_btn tooltip-examples grid_buttons" style="margin-left: 10px;" title="Start Rule" onclick='StartRule("{%= value %}")'></i>
             <i class="fa fa-stop icon_btn tooltip-examples grid_buttons" style="margin-left: 10px;" title="Stop Rule" onclick='StopRule("{%= value %}")'></i>
+            <i class="fa fa-refresh icon_btn tooltip-examples grid_buttons" style="margin-left: 10px;" title="Stop Rule" onclick='RunRule("{%= value %}")'></i>
         </script>
 
         <script type="text/javascript">

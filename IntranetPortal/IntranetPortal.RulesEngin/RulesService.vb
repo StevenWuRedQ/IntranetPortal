@@ -168,8 +168,8 @@ Public Class RulesService
         End If
     End Sub
 
-    Public Sub ExecuteRule(ruleName As String)
-        Dim stateObj = StateObjs.SingleOrDefault(Function(s) s.Rule.RuleName = ruleName)
+    Public Sub ExecuteRule(ruleId As String)
+        Dim stateObj = StateObjs.SingleOrDefault(Function(s) s.Rule.RuleId.ToString = ruleId)
         TimerTask(stateObj)
     End Sub
 
