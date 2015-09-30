@@ -8,7 +8,9 @@
             <div ng-repeat="c in Fields" class="col-sm-6 col-md-6">
                 <table class="table table-condensed">
                     <tr>
-                        <th class="text-primary">{{c.category}} &nbsp <pt-collapse model="c.collpsed"></pt-collapse></th>
+                        <th class="text-primary">{{c.category}} &nbsp
+                            <pt-collapse model="c.collpsed"></pt-collapse>
+                        </th>
                     </tr>
                     <tr ng-repeat="f in c.fields" collapse="!c.collpsed">
                         <td>
@@ -24,7 +26,7 @@
         <div class="nga-fast nga-fade" ng-show="step==2">
             <div ng-show="someCheck(c)" ng-repeat="c in Fields" class="col-sm-12 col-md-12">
                 <h4 class="text-primary">{{c.category}}</h4>
-                <div >
+                <div>
                     <table class="table table-condensed">
                         <tr ng-repeat="f in c.fields|filter:{checked: true}">
                             <td class="col-sm-3 col-md-3">
@@ -39,7 +41,7 @@
                                                 <option value="2">is end with</option>
                                                 <option value="3">contains</option>
                                             </select>
-                                            <input type="text" ng-model="x.value" ng-change="updateStringFilter(x)" />
+                                            <input type="text" ng-model="x.input1" ng-change="updateStringFilter(x)" />
                                         </span>
                                         <span ng-if="f.type=='date'">
                                             <select ng-model="x.criteria" ng-change="updateDateFilter(x)">
@@ -47,7 +49,7 @@
                                                 <option value="2">is after</option>
                                                 <option value="3">equals</option>
                                             </select>
-                                            <input type="text" ng-model="x.value" ng-change="updateDateFilter(x)" type="text" ss-date />
+                                            <input type="text" ng-model="x.input1" ng-change="updateDateFilter(x)" type="text" ss-date />
                                         </span>
                                         <span ng-if="f.type=='number'">
                                             <select ng-model="x.criteria" ng-change="updateNumberFilter(x)">
@@ -57,13 +59,13 @@
                                                 <option value="4">>=</option>
                                                 <option value="5">between</option>
                                             </select>
-                                            <input type="text" ng-model="x.value" ng-change="updateNumberFilter(x)" />
+                                            <input type="text" ng-model="x.input1" ng-change="updateNumberFilter(x)" />
                                             <span ng-show="x.criteria=='5'">AND
-                                            <input type="text" ng-model="x.value2" ng-change="updateNumberFilter(x)" /></span>
+                                            <input type="text" ng-model="x.input2" ng-change="updateNumberFilter(x)" /></span>
                                         </span>
                                         <span ng-if="f.type=='list'" style="width: 300px; display: inline-block">
                                             <span>
-                                                <ui-select multiple ng-model="x.value">
+                                                <ui-select multiple ng-model="x.input1" ng-change="updateListFilter(x)">
                                                 <ui-select-match placeholder="Choose items">{{$item}}</ui-select-match>
                                                 <ui-select-choices repeat="o in f.options | filter: $search.search">
                                                     {{o}}
@@ -71,6 +73,13 @@
                                             </ui-select>
                                             </span>
                                         </span>
+                                        <span ng-if="f.type=='boolean'">
+                                            <select ng-model="x.input1" ng-change="updateBooleanFilter(x)">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </span>
+
                                         <pt-del ng-click="removeFilter(f, $index)"></pt-del>
                                     </span>
                                 </span>
@@ -123,70 +132,149 @@
                 f.filters.splice(i, 1);
             }
             $scope.updateStringFilter = function (x) {
-                if (!x.criteria || !x.value) {
-                    x.query = ""
+                if (!x.criteria || !x.input1) {
+                    x.WhereTerm = ""
+                    x.CompareOperator = ""
+                    x.value1 = ""
                     return;
-                }
-                switch (x.criteria) {
-                    case "1":
-                        x.query = " Like " + " '" + x.value.trim() + "%' ";
-                        break;
-                    case "2":
-                        x.query = " Like " + " '%" + x.value.trim() + "' ";
-                        break;
-                    case "3":
-                        x.query = " Like " + " '%" + x.value.trim() + "%' ";
-                        break;
-                    default:
-                        x.query = "";
+                } else {
+                    switch (x.criteria) {
+                        case "1":
+                            x.WhereTerm = "CreateCompare";
+                            x.CompareOperator = "Like";
+                            x.value1 = x.input1.trim() + "%";
+                            break;
+                        case "2":
+                            x.WhereTerm = "CreateCompare";
+                            x.CompareOperator = "Like";
+                            x.value1 = "%" + x.input1.trim();
+                            break;
+                        case "3":
+                            x.WhereTerm = "CreateCompare";
+                            x.CompareOperator = "Like";
+                            x.value1 = "%" + x.input1.trim() + "%";
+                            break;
+                        default:
+                            x.WhereTerm = ""
+                            x.CompareOperator = ""
+                            x.value1 = ""
+                    }
                 }
             }
             $scope.updateDateFilter = function (x) {
-                if (!x.criteria || !x.value) {
-                    x.query = ""
+                if (!x.criteria || !x.input1) {
+                    x.WhereTerm = ""
+                    x.CompareOperator = ""
+                    x.value1 = ""
                     return;
-                }
-                switch (x.criteria) {
-                    case "1":
-                        x.query = " < " + " '" + x.value.trim() + "' ";
-                        break;
-                    case "2":
-                        x.query = " > " + " '" + x.value.trim() + "' ";
-                        break;
-                    case "3":
-                        x.query = " = " + " '" + x.value.trim() + "' ";
-                        break;
-                    default:
-                        x.query = ""
+                } else {
+                    switch (x.criteria) {
+                        case "1":
+                            x.WhereTerm = "CreateCompare";
+                            x.CompareOperator = "Less";
+                            x.value1 = x.input1;
+                            break;
+                        case "2":
+                            x.WhereTerm = "CreateCompare";
+                            x.CompareOperator = "Greater";
+                            x.value1 = x.input1;
+                            break;
+                        case "3":
+                            x.WhereTerm = "CreateCompare";
+                            x.CompareOperator = "Equal";
+                            x.value1 = x.input1;
+                            break;
+                        default:
+                            x.WhereTerm = ""
+                            x.CompareOperator = ""
+                            x.value1 = ""
+                    }
                 }
 
             }
             $scope.updateNumberFilter = function (x) {
 
-                if (!x.criteria || !x.value || (x.criteria == "5" && !x.value2)) {
-                    x.query = ""
+                if (!x.criteria || !x.input1 || (x.criteria == "5" && !x.input2)) {
+                    x.WhereTerm = "";
+                    x.CompareOperator = "";
+                    x.value1 = "";
+                    x.value2 = "";
                     return;
+                } else {
+                    switch (x.criteria) {
+                        case "1":
+                            x.WhereTerm = "CreateCompare";
+                            x.CompareOperator = "Less";
+                            x.value1 = x.input1.trim();
+                            x.value2 = "";
+                            break;
+                        case "2":
+                            x.WhereTerm = "CreateCompare";
+                            x.CompareOperator = "LessOrEqual";
+                            x.value1 = x.input1.trim();
+                            x.value2 = "";
+                            break;
+                        case "3":
+                            x.WhereTerm = "CreateCompare";
+                            x.CompareOperator = "Greater";
+                            x.value1 = x.input1.trim();
+                            x.value2 = "";
+                            break;
+                        case "4":
+                            x.WhereTerm = "CreateCompare";
+                            x.CompareOperator = "GreaterOrEqual";
+                            x.value1 = x.input1.trim();
+                            x.value2 = "";
+                            break;
+                        case "5":
+                            x.WhereTerm = "CreateBetween";
+                            x.CompareOperator = "";
+                            x.value1 = x.input1.trim();
+                            x.value2 = x.input2.trim();
+                            break;
+                        default:
+                            x.WhereTerm = "";
+                            x.CompareOperator = "";
+                            x.value1 = "";
+                            x.value2 = "";
+                    }
                 }
-                switch (x.criteria) {
-                    case "1":
-                        x.query = " < " + x.value.trim();
-                        break;
-                    case "2":
-                        x.query = " <= " + x.value.trim();
-                        break;
-                    case "3":
-                        x.query = " > " + x.value.trim();
-                        break;
-                    case "4":
-                        x.query = " >= " + x.value.trim();
-                        break;
-                    case "5":
-                        x.query = " BETWEEN " + x.value.trim() + " AND " + x.value2.trim();
-                        break;
-                    default:
-                        x.query = ""
-                }
+            }
 
+            $scope.updateListFilter = function (x) {
+                if (!x.input1 || x.input1.length < 1) {
+                    x.WhereTerm = "";
+                    x.CompareOperator = "";
+                    x.value1 = "";
+                } else {
+                    x.WhereTerm = "CreateIn";
+                    x.CompareOperator = "";
+                    x.value1 = x.input1;
+                }
+            }
+            $scope.updateBooleanFilter = function (x) {
+                if (!x.input1) {
+                    x.WhereTerm = "";
+                    x.CompareOperator = "";
+                    x.value1 = "";
+                } else {
+                    switch (x.input1) {
+                        case "1":
+                            x.WhereTerm = "CreateCompare";
+                            x.CompareOperator = "Equal";
+                            x.value1 = true;
+                            break;
+                        case "0":
+                            x.WhereTerm = "CreateCompare";
+                            x.CompareOperator = "Equal";
+                            x.value1 = false;
+                            break;
+                        default:
+                            x.WhereTerm = "";
+                            x.CompareOperator = "";
+                            x.value1 = "";
+                    }
+                }
             }
             $scope.generate = function () {
                 var result = [];

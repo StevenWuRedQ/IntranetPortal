@@ -31,7 +31,7 @@
         "name": "Cell #",
         "table": "",
         "column": "",
-        "type": "string"
+        "type": "boolean"
       },
       {
         "name": "Additional #",
