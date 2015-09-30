@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataColectionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="LeadsSoldAfterLP">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="IsGood" Type="bit" />
+          <Property Name="LPReFiled" Type="bit" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastLPDate" Type="date" />
+        </EntityType>
+        <EntityType Name="LisPen">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="FileDate" />
+          </Key>
+          <Property Name="BBLE" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Docket_Number" Type="nchar" MaxLength="10" />
+          <Property Name="CountyNum" Type="int" />
+          <Property Name="County" Type="nvarchar" MaxLength="50" />
+          <Property Name="Section" Type="nchar" MaxLength="2" />
+          <Property Name="Block" Type="nchar" MaxLength="5" />
+          <Property Name="Lot" Type="nchar" MaxLength="4" />
+          <Property Name="Number" Type="nchar" MaxLength="10" />
+          <Property Name="ST_Name" Type="nchar" MaxLength="30" />
+          <Property Name="Zip" Type="nchar" MaxLength="5" />
+          <Property Name="NEIGH_NAME" Type="nchar" MaxLength="25" />
+          <Property Name="FileDate" Type="date" Nullable="false" />
+          <Property Name="Original_Mortgage" Type="float" />
+          <Property Name="Mortgage_Date" Type="date" Nullable="false" />
+          <Property Name="Interest_Rate" Type="float" />
+          <Property Name="Monthly_Payment" Type="float" />
+          <Property Name="Defendant" Type="nchar" MaxLength="90" />
+          <Property Name="Plaintiff" Type="nchar" MaxLength="90" />
+          <Property Name="Attorney" Type="nchar" MaxLength="60" />
+          <Property Name="Attorney_Phone" Type="nchar" MaxLength="20" />
+          <Property Name="Terms" Type="nchar" MaxLength="30" />
+          <Property Name="CollectedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DataColection.dbo.Acris_Master_Owner_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Acris_Master_Owner_View">
+          <Key>
+            <PropertyRef Name="DOCUMENT ID" />
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="PARTY TYPE" />
+            <PropertyRef Name="NAME" />
+          </Key>
+          <Property Name="DOCUMENT ID" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="CRFN" Type="varchar" MaxLength="13" />
+          <Property Name="BBLE" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="BOROUGH" Type="varchar" MaxLength="1" />
+          <Property Name="BLOCK" Type="varchar" MaxLength="5" />
+          <Property Name="LOT" Type="varchar" MaxLength="4" />
+          <Property Name="PARTIAL LOT" Type="varchar" MaxLength="1" />
+          <Property Name="DOC  DATE" Type="datetime" />
+          <Property Name="RECORDED   FILED" Type="datetime" />
+          <Property Name="DOC  TYPE DESCRIPTION" Type="varchar" MaxLength="30" />
+          <Property Name="DOC  AMOUNT" Type="float" />
+          <Property Name="REFERENCE BY CRFN" Type="varchar" MaxLength="13" />
+          <Property Name="PARTY TYPE" Type="smallint" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DataColection.dbo.Acris_Master_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Acris_Master_View">
+          <Key>
+            <PropertyRef Name="DOCUMENT ID" />
+            <PropertyRef Name="CRFN" />
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="DOCUMENT ID" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="CRFN" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="BBLE" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="BOROUGH" Type="varchar" MaxLength="1" />
+          <Property Name="BLOCK" Type="varchar" MaxLength="5" />
+          <Property Name="LOT" Type="varchar" MaxLength="4" />
+          <Property Name="PARTIAL LOT" Type="varchar" MaxLength="1" />
+          <Property Name="DOC  DATE" Type="datetime" />
+          <Property Name="RECORDED   FILED" Type="datetime" />
+          <Property Name="DOC  TYPE DESCRIPTION" Type="varchar" MaxLength="30" />
+          <Property Name="DOC  AMOUNT" Type="float" />
+          <Property Name="REFERENCE BY CRFN" Type="varchar" MaxLength="13" />
+          <Property Name="ZIP" Type="nvarchar" MaxLength="5" />
+          <Property Name="NEIGH_NAME" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityContainer Name="DataColectionModelStoreContainer">
+          <EntitySet Name="LeadsSoldAfterLP" EntityType="Self.LeadsSoldAfterLP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LisPen" EntityType="Self.LisPen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Acris_Master_Owner_View" EntityType="Self.Acris_Master_Owner_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Acris_Master_Owner_View].[DOCUMENT ID] AS [DOCUMENT ID], 
+    [Acris_Master_Owner_View].[CRFN] AS [CRFN], 
+    [Acris_Master_Owner_View].[BBLE] AS [BBLE], 
+    [Acris_Master_Owner_View].[BOROUGH] AS [BOROUGH], 
+    [Acris_Master_Owner_View].[BLOCK] AS [BLOCK], 
+    [Acris_Master_Owner_View].[LOT] AS [LOT], 
+    [Acris_Master_Owner_View].[PARTIAL LOT] AS [PARTIAL LOT], 
+    [Acris_Master_Owner_View].[DOC  DATE] AS [DOC  DATE], 
+    [Acris_Master_Owner_View].[RECORDED   FILED] AS [RECORDED   FILED], 
+    [Acris_Master_Owner_View].[DOC  TYPE DESCRIPTION] AS [DOC  TYPE DESCRIPTION], 
+    [Acris_Master_Owner_View].[DOC  AMOUNT] AS [DOC  AMOUNT], 
+    [Acris_Master_Owner_View].[REFERENCE BY CRFN] AS [REFERENCE BY CRFN], 
+    [Acris_Master_Owner_View].[PARTY TYPE] AS [PARTY TYPE], 
+    [Acris_Master_Owner_View].[NAME] AS [NAME]
+    FROM [dbo].[Acris_Master_Owner_View] AS [Acris_Master_Owner_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Acris_Master_View" EntityType="Self.Acris_Master_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Acris_Master_View].[DOCUMENT ID] AS [DOCUMENT ID], 
+    [Acris_Master_View].[CRFN] AS [CRFN], 
+    [Acris_Master_View].[BBLE] AS [BBLE], 
+    [Acris_Master_View].[BOROUGH] AS [BOROUGH], 
+    [Acris_Master_View].[BLOCK] AS [BLOCK], 
+    [Acris_Master_View].[LOT] AS [LOT], 
+    [Acris_Master_View].[PARTIAL LOT] AS [PARTIAL LOT], 
+    [Acris_Master_View].[DOC  DATE] AS [DOC  DATE], 
+    [Acris_Master_View].[RECORDED   FILED] AS [RECORDED   FILED], 
+    [Acris_Master_View].[DOC  TYPE DESCRIPTION] AS [DOC  TYPE DESCRIPTION], 
+    [Acris_Master_View].[DOC  AMOUNT] AS [DOC  AMOUNT], 
+    [Acris_Master_View].[REFERENCE BY CRFN] AS [REFERENCE BY CRFN], 
+    [Acris_Master_View].[ZIP] AS [ZIP], 
+    [Acris_Master_View].[NEIGH_NAME] AS [NEIGH_NAME]
+    FROM [dbo].[Acris_Master_View] AS [Acris_Master_View]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataColectionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="LisPen">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="FileDate" />
+          </Key>
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Docket_Number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CountyNum" Type="Int32" />
+          <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Section" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="Block" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="Lot" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ST_Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="NEIGH_NAME" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="FileDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Original_Mortgage" Type="Double" />
+          <Property Name="Mortgage_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Interest_Rate" Type="Double" />
+          <Property Name="Monthly_Payment" Type="Double" />
+          <Property Name="Defendant" Type="String" MaxLength="90" FixedLength="true" Unicode="true" />
+          <Property Name="Plaintiff" Type="String" MaxLength="90" FixedLength="true" Unicode="true" />
+          <Property Name="Attorney" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="Attorney_Phone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Terms" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="CollectedOn" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Acris_Master_View">
+          <Key>
+            <PropertyRef Name="DOCUMENT_ID" />
+            <PropertyRef Name="CRFN" />
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="DOCUMENT_ID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CRFN" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BOROUGH" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="BLOCK" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="LOT" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="PARTIAL_LOT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DOC__DATE" Type="DateTime" Precision="3" />
+          <Property Name="RECORDED___FILED" Type="DateTime" Precision="3" />
+          <Property Name="DOC__TYPE_DESCRIPTION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DOC__AMOUNT" Type="Double" />
+          <Property Name="REFERENCE_BY_CRFN" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="ZIP" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="NEIGH_NAME" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="DataColectionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LisPens" EntityType="Self.LisPen" />
+          <EntitySet Name="Acris_Master_View" EntityType="Self.Acris_Master_View" />
+          <EntitySet Name="Acris_Master_Owner_View" EntityType="DataColectionModel.Acris_Master_Owner_View" />
+          <EntitySet Name="LeadsSoldAfterLPs" EntityType="DataColectionModel.LeadsSoldAfterLP" />
+        </EntityContainer>
+        <EntityType Name="Acris_Master_Owner_View">
+          <Key>
+            <PropertyRef Name="DOCUMENT_ID" />
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="PARTY_TYPE" />
+            <PropertyRef Name="NAME" />
+          </Key>
+          <Property Name="DOCUMENT_ID" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="CRFN" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="BOROUGH" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="BLOCK" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="LOT" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="PARTIAL_LOT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DOC__DATE" Type="DateTime" Precision="3" />
+          <Property Name="RECORDED___FILED" Type="DateTime" Precision="3" />
+          <Property Name="DOC__TYPE_DESCRIPTION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DOC__AMOUNT" Type="Double" />
+          <Property Name="REFERENCE_BY_CRFN" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="PARTY_TYPE" Type="Int16" Nullable="false" />
+          <Property Name="NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LeadsSoldAfterLP">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="IsGood" Type="Boolean" />
+          <Property Name="Comments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LPReFiled" Type="Boolean" />
+          <Property Name="LastLPDate" Type="DateTime" Precision="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataColectionModelStoreContainer" CdmEntityContainer="DataColectionEntities">
+          <EntitySetMapping Name="LisPens">
+            <EntityTypeMapping TypeName="DataColectionModel.LisPen">
+              <MappingFragment StoreEntitySet="LisPen">
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Docket_Number" ColumnName="Docket_Number" />
+                <ScalarProperty Name="CountyNum" ColumnName="CountyNum" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="Lot" ColumnName="Lot" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="ST_Name" ColumnName="ST_Name" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="NEIGH_NAME" ColumnName="NEIGH_NAME" />
+                <ScalarProperty Name="FileDate" ColumnName="FileDate" />
+                <ScalarProperty Name="Original_Mortgage" ColumnName="Original_Mortgage" />
+                <ScalarProperty Name="Mortgage_Date" ColumnName="Mortgage_Date" />
+                <ScalarProperty Name="Interest_Rate" ColumnName="Interest_Rate" />
+                <ScalarProperty Name="Monthly_Payment" ColumnName="Monthly_Payment" />
+                <ScalarProperty Name="Defendant" ColumnName="Defendant" />
+                <ScalarProperty Name="Plaintiff" ColumnName="Plaintiff" />
+                <ScalarProperty Name="Attorney" ColumnName="Attorney" />
+                <ScalarProperty Name="Attorney_Phone" ColumnName="Attorney_Phone" />
+                <ScalarProperty Name="Terms" ColumnName="Terms" />
+                <ScalarProperty Name="CollectedOn" ColumnName="CollectedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Acris_Master_View">
+            <EntityTypeMapping TypeName="DataColectionModel.Acris_Master_View">
+              <MappingFragment StoreEntitySet="Acris_Master_View">
+                <ScalarProperty Name="DOCUMENT_ID" ColumnName="DOCUMENT ID" />
+                <ScalarProperty Name="CRFN" ColumnName="CRFN" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="BOROUGH" ColumnName="BOROUGH" />
+                <ScalarProperty Name="BLOCK" ColumnName="BLOCK" />
+                <ScalarProperty Name="LOT" ColumnName="LOT" />
+                <ScalarProperty Name="PARTIAL_LOT" ColumnName="PARTIAL LOT" />
+                <ScalarProperty Name="DOC__DATE" ColumnName="DOC  DATE" />
+                <ScalarProperty Name="RECORDED___FILED" ColumnName="RECORDED   FILED" />
+                <ScalarProperty Name="DOC__TYPE_DESCRIPTION" ColumnName="DOC  TYPE DESCRIPTION" />
+                <ScalarProperty Name="DOC__AMOUNT" ColumnName="DOC  AMOUNT" />
+                <ScalarProperty Name="REFERENCE_BY_CRFN" ColumnName="REFERENCE BY CRFN" />
+                <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+                <ScalarProperty Name="NEIGH_NAME" ColumnName="NEIGH_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Acris_Master_Owner_View">
+            <EntityTypeMapping TypeName="DataColectionModel.Acris_Master_Owner_View">
+              <MappingFragment StoreEntitySet="Acris_Master_Owner_View">
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="PARTY_TYPE" ColumnName="PARTY TYPE" />
+                <ScalarProperty Name="REFERENCE_BY_CRFN" ColumnName="REFERENCE BY CRFN" />
+                <ScalarProperty Name="DOC__AMOUNT" ColumnName="DOC  AMOUNT" />
+                <ScalarProperty Name="DOC__TYPE_DESCRIPTION" ColumnName="DOC  TYPE DESCRIPTION" />
+                <ScalarProperty Name="RECORDED___FILED" ColumnName="RECORDED   FILED" />
+                <ScalarProperty Name="DOC__DATE" ColumnName="DOC  DATE" />
+                <ScalarProperty Name="PARTIAL_LOT" ColumnName="PARTIAL LOT" />
+                <ScalarProperty Name="LOT" ColumnName="LOT" />
+                <ScalarProperty Name="BLOCK" ColumnName="BLOCK" />
+                <ScalarProperty Name="BOROUGH" ColumnName="BOROUGH" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="CRFN" ColumnName="CRFN" />
+                <ScalarProperty Name="DOCUMENT_ID" ColumnName="DOCUMENT ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeadsSoldAfterLPs">
+            <EntityTypeMapping TypeName="DataColectionModel.LeadsSoldAfterLP">
+              <MappingFragment StoreEntitySet="LeadsSoldAfterLP">
+                <ScalarProperty Name="LastLPDate" ColumnName="LastLPDate" />
+                <ScalarProperty Name="LPReFiled" ColumnName="LPReFiled" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="IsGood" ColumnName="IsGood" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

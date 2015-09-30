@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RonModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BasicName">
+          <Key>
+            <PropertyRef Name="ReportToken" />
+          </Key>
+          <Property Name="ReportToken" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="20" />
+          <Property Name="ProfessionalSuffix" Type="varchar" MaxLength="20" />
+          <Property Name="FirstName" Type="varchar" MaxLength="25" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="25" />
+          <Property Name="LastName" Type="varchar" MaxLength="25" />
+          <Property Name="NameSuffix" Type="varchar" MaxLength="20" />
+          <Property Name="FKDateFirstSeen" Type="int" Nullable="false" />
+          <Property Name="FKDateLastSeen" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="RonModel1StoreContainer">
+          <EntitySet Name="BasicName" EntityType="Self.BasicName" Schema="tlo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RonModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BasicName">
+          <Key>
+            <PropertyRef Name="ReportToken" />
+          </Key>
+          <Property Name="ReportToken" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ProfessionalSuffix" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="NameSuffix" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FKDateFirstSeen" Type="Int32" Nullable="false" />
+          <Property Name="FKDateLastSeen" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="RonEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BasicNames" EntityType="Self.BasicName" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RonModel1StoreContainer" CdmEntityContainer="RonEntities1">
+          <EntitySetMapping Name="BasicNames">
+            <EntityTypeMapping TypeName="RonModel1.BasicName">
+              <MappingFragment StoreEntitySet="BasicName">
+                <ScalarProperty Name="ReportToken" ColumnName="ReportToken" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ProfessionalSuffix" ColumnName="ProfessionalSuffix" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="NameSuffix" ColumnName="NameSuffix" />
+                <ScalarProperty Name="FKDateFirstSeen" ColumnName="FKDateFirstSeen" />
+                <ScalarProperty Name="FKDateLastSeen" ColumnName="FKDateLastSeen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

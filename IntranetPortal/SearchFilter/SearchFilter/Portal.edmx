@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="LeadsSoldAfterLP">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="IsGood" Type="bit" />
+          <Property Name="LPReFiled" Type="bit" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastLPDate" Type="date" />
+        </EntityType>
+        <EntityType Name="SearchResults">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="LeadsName" Type="nvarchar" MaxLength="180" />
+          <Property Name="MotgCombo" Type="numeric" Precision="19" Scale="0" />
+          <Property Name="Neigh_Name" Type="nvarchar" MaxLength="25" />
+          <Property Name="CLass" Type="nvarchar" MaxLength="2" />
+          <Property Name="ORIG_SQFT" Type="float" />
+          <Property Name="LOT_DIM" Type="nvarchar" MaxLength="17" />
+          <Property Name="Servicer" Type="varchar" MaxLength="100" />
+          <Property Name="TaxCombo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImportDate" Type="datetime" />
+          <Property Name="PropertyAddress" Type="nvarchar" MaxLength="70" />
+          <Property Name="BLOCK" Type="nvarchar" MaxLength="5" />
+          <Property Name="LOT" Type="nvarchar" MaxLength="4" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IntranetPortal.dbo.PenddingAssign_DataLoop_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PenddingAssign_DataLoop_View">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="DataLoopStatus" Type="int" />
+          <Property Name="DataLoopCreateDate" Type="datetime" />
+          <Property Name="LoopType" Type="int" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Acris" Type="int" />
+          <Property Name="TaxBill" Type="int" />
+          <Property Name="WaterBill" Type="int" />
+          <Property Name="Zillow" Type="int" />
+          <Property Name="TLO" Type="int" />
+          <Property Name="ECBViolation" Type="int" />
+          <Property Name="Id" Type="int" />
+          <Property Name="NEIGH_NAME" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IntranetPortal.dbo.PenddingAssign_TLO_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PenddingAssign_TLO_view">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="FinishDate" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="TLOBBLE" Type="nchar" MaxLength="11" />
+        </EntityType>
+        <EntityContainer Name="IntranetPortalModelStoreContainer">
+          <EntitySet Name="LeadsSoldAfterLP" EntityType="Self.LeadsSoldAfterLP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SearchResults" EntityType="Self.SearchResults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PenddingAssign_DataLoop_View" EntityType="Self.PenddingAssign_DataLoop_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PenddingAssign_DataLoop_View].[BBLE] AS [BBLE], 
+    [PenddingAssign_DataLoop_View].[EmployeeName] AS [EmployeeName], 
+    [PenddingAssign_DataLoop_View].[Status] AS [Status], 
+    [PenddingAssign_DataLoop_View].[Type] AS [Type], 
+    [PenddingAssign_DataLoop_View].[CreateDate] AS [CreateDate], 
+    [PenddingAssign_DataLoop_View].[DataLoopStatus] AS [DataLoopStatus], 
+    [PenddingAssign_DataLoop_View].[DataLoopCreateDate] AS [DataLoopCreateDate], 
+    [PenddingAssign_DataLoop_View].[LoopType] AS [LoopType], 
+    [PenddingAssign_DataLoop_View].[CreateBy] AS [CreateBy], 
+    [PenddingAssign_DataLoop_View].[Acris] AS [Acris], 
+    [PenddingAssign_DataLoop_View].[TaxBill] AS [TaxBill], 
+    [PenddingAssign_DataLoop_View].[WaterBill] AS [WaterBill], 
+    [PenddingAssign_DataLoop_View].[Zillow] AS [Zillow], 
+    [PenddingAssign_DataLoop_View].[TLO] AS [TLO], 
+    [PenddingAssign_DataLoop_View].[ECBViolation] AS [ECBViolation], 
+    [PenddingAssign_DataLoop_View].[Id] AS [Id], 
+    [PenddingAssign_DataLoop_View].[NEIGH_NAME] AS [NEIGH_NAME]
+    FROM [dbo].[PenddingAssign_DataLoop_View] AS [PenddingAssign_DataLoop_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PenddingAssign_TLO_view" EntityType="Self.PenddingAssign_TLO_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PenddingAssign_TLO_view].[BBLE] AS [BBLE], 
+    [PenddingAssign_TLO_view].[EmployeeName] AS [EmployeeName], 
+    [PenddingAssign_TLO_view].[Status] AS [Status], 
+    [PenddingAssign_TLO_view].[FinishDate] AS [FinishDate], 
+    [PenddingAssign_TLO_view].[CreateDate] AS [CreateDate], 
+    [PenddingAssign_TLO_view].[CreateBy] AS [CreateBy], 
+    [PenddingAssign_TLO_view].[Type] AS [Type], 
+    [PenddingAssign_TLO_view].[TLOBBLE] AS [TLOBBLE]
+    FROM [dbo].[PenddingAssign_TLO_view] AS [PenddingAssign_TLO_view]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IntranetPortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="LeadsSoldAfterLP">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IsGood" Type="Boolean" />
+          <Property Name="LPReFiled" Type="Boolean" />
+          <Property Name="Comments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastLPDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="PenddingAssign_DataLoop_View">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="DataLoopStatus" Type="Int32" />
+          <Property Name="DataLoopCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="LoopType" Type="Int32" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Acris" Type="Int32" />
+          <Property Name="TaxBill" Type="Int32" />
+          <Property Name="WaterBill" Type="Int32" />
+          <Property Name="Zillow" Type="Int32" />
+          <Property Name="TLO" Type="Int32" />
+          <Property Name="ECBViolation" Type="Int32" />
+          <Property Name="Id" Type="Int32" />
+          <Property Name="NEIGH_NAME" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PenddingAssign_TLO_view">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="FinishDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="TLOBBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="IntranetPortalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LeadsSoldAfterLPs" EntityType="Self.LeadsSoldAfterLP" />
+          <EntitySet Name="PenddingAssign_DataLoop_View" EntityType="Self.PenddingAssign_DataLoop_View" />
+          <EntitySet Name="PenddingAssign_TLO_view" EntityType="Self.PenddingAssign_TLO_view" />
+          <EntitySet Name="SearchResults" EntityType="IntranetPortalModel.SearchResult" />
+        </EntityContainer>
+        <EntityType Name="SearchResult">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="LeadsName" Type="String" MaxLength="180" FixedLength="false" Unicode="true" />
+          <Property Name="MotgCombo" Type="Decimal" Precision="19" Scale="0" />
+          <Property Name="Neigh_Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="CLass" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="ORIG_SQFT" Type="Double" />
+          <Property Name="LOT_DIM" Type="String" MaxLength="17" FixedLength="false" Unicode="true" />
+          <Property Name="Servicer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TaxCombo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImportDate" Type="DateTime" Precision="3" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="BLOCK" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="LOT" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IntranetPortalModelStoreContainer" CdmEntityContainer="IntranetPortalEntities">
+          <EntitySetMapping Name="LeadsSoldAfterLPs">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LeadsSoldAfterLP">
+              <MappingFragment StoreEntitySet="LeadsSoldAfterLP">
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="IsGood" ColumnName="IsGood" />
+                <ScalarProperty Name="LPReFiled" ColumnName="LPReFiled" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="LastLPDate" ColumnName="LastLPDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PenddingAssign_DataLoop_View">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PenddingAssign_DataLoop_View">
+              <MappingFragment StoreEntitySet="PenddingAssign_DataLoop_View">
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="DataLoopStatus" ColumnName="DataLoopStatus" />
+                <ScalarProperty Name="DataLoopCreateDate" ColumnName="DataLoopCreateDate" />
+                <ScalarProperty Name="LoopType" ColumnName="LoopType" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Acris" ColumnName="Acris" />
+                <ScalarProperty Name="TaxBill" ColumnName="TaxBill" />
+                <ScalarProperty Name="WaterBill" ColumnName="WaterBill" />
+                <ScalarProperty Name="Zillow" ColumnName="Zillow" />
+                <ScalarProperty Name="TLO" ColumnName="TLO" />
+                <ScalarProperty Name="ECBViolation" ColumnName="ECBViolation" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NEIGH_NAME" ColumnName="NEIGH_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PenddingAssign_TLO_view">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PenddingAssign_TLO_view">
+              <MappingFragment StoreEntitySet="PenddingAssign_TLO_view">
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="FinishDate" ColumnName="FinishDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TLOBBLE" ColumnName="TLOBBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SearchResults">
+            <EntityTypeMapping TypeName="IntranetPortalModel.SearchResult">
+              <MappingFragment StoreEntitySet="SearchResults">
+                <ScalarProperty Name="LOT" ColumnName="LOT" />
+                <ScalarProperty Name="BLOCK" ColumnName="BLOCK" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TaxCombo" ColumnName="TaxCombo" />
+                <ScalarProperty Name="Servicer" ColumnName="Servicer" />
+                <ScalarProperty Name="LOT_DIM" ColumnName="LOT_DIM" />
+                <ScalarProperty Name="ORIG_SQFT" ColumnName="ORIG_SQFT" />
+                <ScalarProperty Name="CLass" ColumnName="CLass" />
+                <ScalarProperty Name="Neigh_Name" ColumnName="Neigh_Name" />
+                <ScalarProperty Name="MotgCombo" ColumnName="MotgCombo" />
+                <ScalarProperty Name="LeadsName" ColumnName="LeadsName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
