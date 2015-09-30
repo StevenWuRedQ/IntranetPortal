@@ -24,6 +24,18 @@ portalApp.directive('ssDate', function () {
     };
 });
 
+app.directive('ptRightClick', function ($parse) {
+    return function (scope, element, attrs) {
+        var fn = $parse(attrs.ngRightClick);
+        element.bind('contextmenu', function (event) {
+            scope.$apply(function () {
+                event.preventDefault();
+                fn(scope, { $event: event });
+            });
+        });
+    };
+});
+
 portalApp.directive('inputMask', function () {
     return {
         restrict: 'A',
@@ -457,6 +469,7 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                 scope.dynamic = 1;
             }
             scope.hideUpoading = function () {
+                scope.clearChoosed();
                 scope.uploadProcess = false;
             }
             scope.showUploadErrors = function () {
@@ -500,15 +513,24 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                         if (error) {
                             var targetElement = _.filter(scope.result, function (el) { return el.name == targetName })[0];
                             if (targetElement) targetElement.error = error;
-                            scope.countCallback(len)
+                            scope.countCallback(len);
                         } else {
                             var targetElement = _.filter(scope.result, function (el) { return el.name == targetName })[0];
+                            if (scope.count == 0) {
+                                targetElement.error = "Up1";
+                            }
+                            if (scope.count == 1) {
+                                targetElement.error = "Up2";
+                            }
+                            if (scope.count == 2) {
+                                targetElement.error = "down";
+                            }
                             if (targetElement) {
                                 targetElement.path = data[0];
                                 if (data[1]) targetElement.thumb = data[1];
                             }
                             scope.fileModel.push(targetElement);
-                            scope.countCallback(len)
+                            scope.countCallback(len);
                         }
                     });
                 }
@@ -518,16 +540,15 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             scope.countCallback = function (total) {
                 if (scope.count >= total - 1) {
                     $timeout(function () {
-                        scope.count++;
+                        scope.count = scope.count + 1;
                         scope.dynamic = Math.floor(scope.count / total * 100);
                         scope.count = 0;
                         scope.uploading = false;
                         scope.clearChoosed();
                     });
-                    return;
                 } else {
                     $timeout(function () {
-                        scope.count++;
+                        scope.count = scope.count + 1;
                         scope.dynamic = Math.floor(scope.count / total * 100);
                     })
                 }
@@ -574,6 +595,9 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                 if (ptFileService.isPicture(file.name)) {
                     $.fancybox.open(ptFileService.makePreviewUrl(file.path));
                 }
+            }
+            scope.filterError = function (v, i) {
+                return v.error;
             }
 
         }

@@ -1,9 +1,12 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionBudgetTab.ascx.vb" Inherits="IntranetPortal.ConstructionBudgetTab" %>
 <%@ Register Assembly="DevExpress.Web.ASPxSpreadsheet.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxSpreadsheet" TagPrefix="dx" %>
 <div id="BudgetCtrl" ng-controller="BudgetCtrl">
+    <div class="budgetTitle">
+        <h3>Budget Form</h3>
+        <button type="button" class="btn btn-success btn-sm pull-right">Export Excel </button>
+    </div>
 
     <table class="table table-condensed">
-
         <tr>
             <th style="width: 180px">Description</th>
             <th style="width: 60px">Estimate</th>
@@ -15,7 +18,8 @@
             <th style="width: 60px">Balance</th>
         </tr>
         <tr ng-repeat="d in data.form ">
-            <td ng-style="getStyle(d)">{{d.description}}</td>
+            <td ng-style="getStyle(d)" popover-template="budgetPopover" popover-placement="bottom" popover-trigger="mouseenter">
+                <input type="checkbox" ng-model="d.checked" style="display: inline-block" /><span>{{d.description}}</span></td>
             <td>
                 <input style="width: 60px; border: none" ng-model="d.estimate" money-mask ng-change="updateTotal()" /></td>
             <td>
@@ -46,10 +50,9 @@
                 <input style="width: 60px; border: none; background-color: yellow" ng-model="total.balance" money-mask readonly /></td>
         </tr>
     </table>
-
 </div>
 <script>
-        
+
     angular.module('PortalApp').controller('BudgetCtrl', function ($scope, $http) {
         $scope.data = {};
         $scope.init = function () {
@@ -60,13 +63,13 @@
                 "contract": "",
                 "paid": "",
             }
-            $http.get("/Scripts/res/budgetData.json")
+            $http.get("/Scripts/res/budgetData.js")
                 .then(function (res) {
                     $scope.template.form = res.data;
                     $scope.data = $scope.template;
                 });
 
-            
+
         }();
         $scope.reload = function () {
             var newData = _.clone($scope.template, true);
@@ -118,6 +121,6 @@
             }
         })();
     })
-   
+
 
 </script>

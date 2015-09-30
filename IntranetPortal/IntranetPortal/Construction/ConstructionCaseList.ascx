@@ -6,7 +6,10 @@
 
     //function is called on changing focused row
     function OnGridFocusedRowChanged() {
-        // The values will be returned to the OnGetRowValues() function 
+        // The values will be returned to the OnGetRowValues() function
+        // var datapanel = document.getElementById("ctl00_MainContentPH_ASPxSplitter1_ASPxCallbackPanel2_contentSplitter_0");
+        // var logpanel = document.getElementById("ctl00_MainContentPH_ASPxSplitter1_ASPxCallbackPanel2_contentSplitter_1");
+
         if (gridCase.GetFocusedRowIndex() >= 0) {
             if (cbpLogs.InCallback()) {
                 postponedCallbackRequired = true;
@@ -22,6 +25,8 @@
                         if (splitter) {
                             splitter.GetPaneByName('dataPane')
                         }
+                        //datapanel.style.visibility = 'hidden';
+                        //logpanel.style.visibility = 'hidden';
                     }
                 }
             }
@@ -29,13 +34,15 @@
     }
 
     function OnGetRowValues(values) {
+
+        
         if (values == null) {
             //gridCase.GetValuesOnCustomCallback(gridCase.GetFocusedRowIndex(), OnGetRowValues);
+
         }
         else {
             leadsInfoBBLE = values;
             console.log(leadsInfoBBLE);
-
             LoadCaseData(leadsInfoBBLE);
                         
             if (cbpLogs)

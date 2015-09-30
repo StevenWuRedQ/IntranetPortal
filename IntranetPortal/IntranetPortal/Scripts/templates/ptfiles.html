@@ -128,12 +128,12 @@
                                 <th>File Name</th>
                                 <th>error</th>
                             </tr>
-                            <tr ng-repeat="file in result| filter: {error: ''} ">
+                            <tr ng-repeat="r in result| filter:filterError ">
                                 <td>
-                                    {{file.name}}
+                                    {{r.name}}
                                 </td>
                                 <td>
-                                    {{file.error}}
+                                    {{r.error}}
                                 </td>
                             </tr>
                         </table>

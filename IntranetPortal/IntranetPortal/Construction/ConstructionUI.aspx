@@ -27,7 +27,7 @@
                 </ContentCollection>
             </dx:SplitterPane>
             <%-- data panel     --%>
-            <dx:SplitterPane ShowCollapseBackwardButton="True" ShowCollapseForwardButton="True" ScrollBars="None" PaneStyle-Paddings-Padding="0px" Name="dataPane" >
+            <dx:SplitterPane  ShowCollapseBackwardButton="True" ShowCollapseForwardButton="True" ScrollBars="None" PaneStyle-Paddings-Padding="0px" Name="dataPane" >
                 <PaneStyle>
                     <Paddings Padding="0px"></Paddings>
                 </PaneStyle>

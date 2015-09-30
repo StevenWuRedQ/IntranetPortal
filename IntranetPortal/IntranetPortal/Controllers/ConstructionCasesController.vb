@@ -5,6 +5,9 @@ Imports System.Web.Http.Description
 Imports IntranetPortal.Data
 Imports System.IO
 Imports System.Drawing
+Imports ClosedXML
+Imports System.Net.Http
+Imports System.Net.Http.Headers
 
 Namespace Controllers
     Public Class ConstructionCasesController
@@ -179,6 +182,32 @@ Namespace Controllers
                 Return Ok("")
             End If
             Return Ok(constructionCase.UpdateBy)
+        End Function
+
+        <Route("api/ConstructionCases/GenerateExcel")>
+        Function GetGenerateExcel() As HttpResponseMessage
+            Dim response = New HttpResponseMessage(HttpStatusCode.OK)
+
+            Dim wb As New Excel.XLWorkbook
+            Dim ws = wb.Worksheets.Add("sheet1")
+            ws.Cell("B2").Value = "Contacts"
+
+            ws.Cell("B3").Value = "FName"
+            ws.Cell("B4").Value = "John"
+            ws.Cell("B5").Value = "Hank"
+            ws.Cell("B6").Value = "Dagny"
+
+
+            ws.Cell("C3").Value = "LName"
+            ws.Cell("C4").Value = "Galt"
+            ws.Cell("C5").Value = "Rearden"
+            ws.Cell("C6").Value = "Taggart"
+            Dim stream = New MemoryStream
+            wb.SaveAs(stream)
+
+            response.Content = New StreamContent(stream)
+            response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/octet-stream")
+            Return response
         End Function
     End Class
 End Namespace

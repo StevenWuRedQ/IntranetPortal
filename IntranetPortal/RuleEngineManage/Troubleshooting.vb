@@ -5,6 +5,7 @@ Imports System.Threading
 Imports IntranetPortal.Data
 Imports System.Text
 Imports OpenQA.Selenium
+
 Public Class Troubleshooting
 
     Private Sub btnLeadsRule_Click(sender As Object, e As EventArgs) Handles btnLeadsRule.Click
@@ -882,11 +883,4 @@ Public Class Troubleshooting
 
     End Sub
 
-    Private Sub btnImportCaseByBBLE_Click(sender As Object, e As EventArgs) Handles btnImportCaseByBBLE.Click
-        Dim bble = txtSSBBLE.Text
-
-        ShortSaleManage.MoveLeadsToShortSale(bble, "David", 2)
-
-
-    End Sub
 End Class

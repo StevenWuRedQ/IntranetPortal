@@ -161,6 +161,7 @@
         </ul>
     </div>
 </div>
+
 <%--DOBViolations --%>
 <div class="ss_form">
     <h4 class="ss_form_title">DOB Violations&nbsp;<pt-collapse model="ReloadedData.DOBViolation_Collapse"></pt-collapse></h4>

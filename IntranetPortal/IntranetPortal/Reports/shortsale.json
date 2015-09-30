@@ -44,6 +44,37 @@
         "table": "",
         "column": "",
         "type": "string"
+      },
+       {
+        "name": "BANKRUPTCY",
+        "table": "",
+        "column": "",
+        "type": "boolean"
+      },
+      {
+        "name": "BANK ACCOUNT",
+        "table": "",
+        "column": "",
+        "type": "boolean"
+
+      },
+      {
+        "name": "TAX RETURNS",
+        "table": "",
+        "column": "",
+        "type": "boolean"
+      },
+      {
+        "name": "EMPLOYED",
+        "table": "",
+        "column": "",
+        "type": "string"
+      },
+      {
+        "name": "PAYSTUBS",
+        "table": "",
+        "column": "",
+        "type": "boolean"
       }
     ]
   },
@@ -91,13 +122,8 @@
         "table": "",
         "column": "",
         "type": "string"
-      }
-    ]
-  },
-  {
-    "category": "Fanancials",
-    "fields": [
-      {
+      },
+       {
         "name": "BANKRUPTCY",
         "table": "",
         "column": "",
@@ -134,9 +160,15 @@
     "category": "Property Address",
     "fields": [
       {
-        "name": "BLOCK/LOT",
-        "table": "",
-        "column": "",
+        "name": "BLOCK",
+        "table": "LeadsInfo",
+        "column": "Block",
+        "type": "string"
+      },
+      {
+        "name": "LOT",
+        "table": "LeadsInfo",
+        "column": "Lot",
         "type": "string"
       },
       {

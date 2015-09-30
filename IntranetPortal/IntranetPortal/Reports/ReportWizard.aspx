@@ -5,12 +5,12 @@
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
     <div id="ReportWizardCtrl" ng-controller="ReportWizardCtrl" class="container" style="padding: 20px; font-size: small">
         <div class="nga-fast nga-fade" ng-show="step==1">
-            <div ng-repeat="c in Fields" class="col-sm-4 col-md-4">
+            <div ng-repeat="c in Fields" class="col-sm-6 col-md-6">
                 <table class="table table-condensed">
                     <tr>
-                        <th class="text-primary">{{c.category}}</th>
+                        <th class="text-primary">{{c.category}} &nbsp <pt-collapse model="c.collpsed"></pt-collapse></th>
                     </tr>
-                    <tr ng-repeat="f in c.fields">
+                    <tr ng-repeat="f in c.fields" collapse="!c.collpsed">
                         <td>
                             <label for="{{camel(f.name)}}">{{f.name}}</label></td>
                         <td>
@@ -24,66 +24,69 @@
         <div class="nga-fast nga-fade" ng-show="step==2">
             <div ng-show="someCheck(c)" ng-repeat="c in Fields" class="col-sm-12 col-md-12">
                 <h4 class="text-primary">{{c.category}}</h4>
-                <table class="table table-condensed">
-                    <tr ng-repeat="f in c.fields|filter:{checked: true}">
-                        <td>
-                            <label for="{{camel(f.name)}}">{{f.name}}</label></td>
-                        <td>
-                            <span class="btn btn-sm btn-primary" ng-show="!f.filters||f.filters.length==0" ng-click="addFilter(f)">add filter</span>
-                            <span ng-show="f.filters">
-                                <span ng-repeat="x in f.filters">
-                                    <span ng-if="f.type=='string'">
-                                        <select ng-model="x.criteria" ng-change="updateStringFilter(x)">
-                                            <option value="1">is start with</option>
-                                            <option value="2">is end with</option>
-                                            <option value="3">contains</option>
-                                        </select>
-                                        <input type="text" ng-model="x.value" ng-change="updateStringFilter(x)" />
-                                    </span>
-                                    <span ng-if="f.type=='date'">
-                                        <select ng-model="x.criteria" ng-change="updateDateFilter(x)">
-                                            <option value="1">is before</option>
-                                            <option value="2">is after</option>
-                                            <option value="3">equals</option>
-                                        </select>
-                                        <input type="text" ng-model="x.value" ng-change="updateDateFilter(x)" type="text" ss-date />
-                                    </span>
-                                    <span ng-if="f.type=='number'">
-                                        <select ng-model="x.criteria" ng-change="updateNumberFilter(x)">
-                                            <option value="1"><</option>
-                                            <option value="2"><=</option>
-                                            <option value="3">></option>
-                                            <option value="4">>=</option>
-                                            <option value="5">between</option>
-                                        </select>
-                                        <input type="text" ng-model="x.value" ng-change="updateNumberFilter(x)" />
-                                        <span ng-show="x.criteria=='5'">AND
+                <div >
+                    <table class="table table-condensed">
+                        <tr ng-repeat="f in c.fields|filter:{checked: true}">
+                            <td class="col-sm-3 col-md-3">
+                                <label for="{{camel(f.name)}}">{{f.name}}</label></td>
+                            <td>
+                                <span class="btn btn-sm btn-primary" ng-show="!f.filters||f.filters.length==0" ng-click="addFilter(f)">add filter</span>
+                                <span ng-show="f.filters">
+                                    <span ng-repeat="x in f.filters">
+                                        <span ng-if="f.type=='string'">
+                                            <select ng-model="x.criteria" ng-change="updateStringFilter(x)">
+                                                <option value="1">is start with</option>
+                                                <option value="2">is end with</option>
+                                                <option value="3">contains</option>
+                                            </select>
+                                            <input type="text" ng-model="x.value" ng-change="updateStringFilter(x)" />
+                                        </span>
+                                        <span ng-if="f.type=='date'">
+                                            <select ng-model="x.criteria" ng-change="updateDateFilter(x)">
+                                                <option value="1">is before</option>
+                                                <option value="2">is after</option>
+                                                <option value="3">equals</option>
+                                            </select>
+                                            <input type="text" ng-model="x.value" ng-change="updateDateFilter(x)" type="text" ss-date />
+                                        </span>
+                                        <span ng-if="f.type=='number'">
+                                            <select ng-model="x.criteria" ng-change="updateNumberFilter(x)">
+                                                <option value="1"><</option>
+                                                <option value="2"><=</option>
+                                                <option value="3">></option>
+                                                <option value="4">>=</option>
+                                                <option value="5">between</option>
+                                            </select>
+                                            <input type="text" ng-model="x.value" ng-change="updateNumberFilter(x)" />
+                                            <span ng-show="x.criteria=='5'">AND
                                             <input type="text" ng-model="x.value2" ng-change="updateNumberFilter(x)" /></span>
-                                    </span>
-                                    <span ng-if="f.type=='list'" style="width: 300px; display: block">
-                                        <span>
-                                            <ui-select multiple ng-model="x.value">
+                                        </span>
+                                        <span ng-if="f.type=='list'" style="width: 300px; display: block">
+                                            <span>
+                                                <ui-select multiple ng-model="x.value">
                                                 <ui-select-match placeholder="Choose items">{{$item}}</ui-select-match>
                                                 <ui-select-choices repeat="o in f.options | filter: $search.search">
                                                     {{o}}
                                                 </ui-select-choices>
                                             </ui-select>
+                                            </span>
                                         </span>
+                                        <pt-del ng-click="removeFilter(f, $index)"></pt-del>
                                     </span>
-                                    <pt-del ng-click="removeFilter(f, $index)"></pt-del>
                                 </span>
-                            </span>
-                        </td>
-                        <td></td>
-                    </tr>
-                </table>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
         <hr />
         <div class="col-md-12 col-sm-12 clearfix" style="padding-top: 20px">
             <button ng-show="step>1" type="button" class="btn-primary pull-left" ng-click="prev()">Prev</button>
             <button ng-show="step<2" type="button" class="btn-primary pull-right" ng-click="next()">Next</button>
-            <button ng-show="step==2" type="button" class="btn-primary pull-right">Generate</button>
+            <button ng-show="step==2" type="button" class="btn-primary pull-right" ng-click="generate()">Generate</button>
+            <a id="jsonlink"></a>
         </div>
     </div>
     <script>
@@ -184,6 +187,22 @@
                         x.query = ""
                 }
 
+            }
+            $scope.generate = function () {
+                var result = [];
+                _.each($scope.Fields, function (el, i) {
+                    _.each(el.fields, function (el, i) {
+                        if (el.checked) {
+                            result.push(el);
+                        }
+                    })
+                })
+                var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result));
+
+                var a = document.getElementById("jsonlink")
+                a.href = 'data:' + data;
+                a.download = 'data.json';
+                a.innerHTML = 'download JSON';
             }
             $scope.load();
 

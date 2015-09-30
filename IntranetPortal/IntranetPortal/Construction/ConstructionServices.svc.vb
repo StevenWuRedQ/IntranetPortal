@@ -85,6 +85,7 @@ Public Class ConstructionServices
         Return result.ToJsonString
     End Function
 
+
     <OperationContract()>
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetECBViolations(bble As String) As String
