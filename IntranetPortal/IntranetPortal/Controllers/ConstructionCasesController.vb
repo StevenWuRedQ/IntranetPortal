@@ -5,9 +5,9 @@ Imports System.Web.Http.Description
 Imports IntranetPortal.Data
 Imports System.IO
 Imports System.Drawing
-Imports ClosedXML
 Imports System.Net.Http
 Imports System.Net.Http.Headers
+Imports Newtonsoft.Json.Linq
 
 Namespace Controllers
     Public Class ConstructionCasesController
@@ -185,28 +185,16 @@ Namespace Controllers
         End Function
 
         <Route("api/ConstructionCases/GenerateExcel")>
-        Function GetGenerateExcel() As HttpResponseMessage
+        Function GetGenerateExcel(<FromBody> queryString As JToken) As HttpResponseMessage
             Dim response = New HttpResponseMessage(HttpStatusCode.OK)
-            Using ms = New MemoryStream
-                Dim wb As New Excel.XLWorkbook
-                Dim ws = wb.Worksheets.Add("sheet1")
-                ws.Cell("B2").Value = "Contacts"
-
-                ws.Cell("B3").Value = "FName"
-                ws.Cell("B4").Value = "John"
-                ws.Cell("B5").Value = "Hank"
-                ws.Cell("B6").Value = "Dagny"
-
-
-                ws.Cell("C3").Value = "LName"
-                ws.Cell("C4").Value = "Galt"
-                ws.Cell("C5").Value = "Rearden"
-                ws.Cell("C6").Value = "Taggart"
-
-                wb.SaveAs(ms)
-                response.Content = New StreamContent(ms)
-                response.Content.Headers.ContentDisposition = New ContentDispositionHeaderValue("attachement;filename=budget.xlsx")
-                response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/octet-stream")
+            Using ms As New MemoryStream
+                Core.ExcelBuilder.BuildBudgetReport(queryString, ms)
+                ms.Flush()
+                If Not ms Is Nothing Then
+                    response.Content = New StreamContent(ms)
+                    response.Content.Headers.Add("Content-Disposition", "attachement; filename=budget.xlsx")
+                    response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                End If
             End Using
             Return response
         End Function

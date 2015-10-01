@@ -205,6 +205,7 @@
     <Compile Include="DataLoopRule.vb" />
     <Compile Include="DocumentService.vb" />
     <Compile Include="EmailService.vb" />
+    <Compile Include="ExcelBuilder.vb" />
     <Compile Include="Extension.vb" />
     <Compile Include="HolidayService.vb" />
     <Compile Include="JsArrayToStringConverter.vb" />
