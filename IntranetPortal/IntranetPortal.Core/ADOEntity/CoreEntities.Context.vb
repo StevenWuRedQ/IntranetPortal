@@ -10,6 +10,8 @@
 Imports System
 Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
+Imports System.Data.Entity.Core.Objects
+Imports System.Linq
 
 Partial Public Class CoreEntities
     Inherits DbContext
@@ -33,5 +35,11 @@ Partial Public Class CoreEntities
     Public Overridable Property CommonDatas() As DbSet(Of CommonData)
     Public Overridable Property Applications() As DbSet(Of Application)
     Public Overridable Property Thumbnails() As DbSet(Of Thumbnail)
+
+    Public Overridable Function QueryReportData(sql As String) As Integer
+        Dim sqlParameter As ObjectParameter = If(sql IsNot Nothing, New ObjectParameter("sql", sql), New ObjectParameter("sql", GetType(String)))
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("QueryReportData", sqlParameter)
+    End Function
 
 End Class

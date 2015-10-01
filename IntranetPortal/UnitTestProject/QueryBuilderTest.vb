@@ -99,4 +99,47 @@ Imports IntranetPortal.Core
         Assert.IsInstanceOfType(sql, GetType(String))
     End Sub
 
+    <TestMethod()>
+    Public Sub ExecuteQueryTest()
+
+        Dim sql = "SELECT * FROM Employees"
+        Dim qb As New QueryBuilder
+        Dim dt = qb.ExecuteQuery(sql)
+        Assert.IsInstanceOfType(dt, GetType(DataTable))
+        Assert.IsTrue(dt.Rows.Count > 0)
+    End Sub
+
+    <TestMethod()>
+    Public Sub LoadReportDataTest()
+        Dim json = <string>
+                         [
+                               {
+                                  "name":"NAME",
+                                  "table":"ShortSaleCases",
+                                  "column":"CaseName",
+                                  "type":"string",
+                                  "$$hashKey":"object:66",
+                                  "checked":true,
+                                  "filters":[
+                                     {
+                                        "criteria": "2",
+                                        "value": "",
+                                        "query": "",
+                                        "$$hashKey": "object:386",
+                                        "WhereTerm": "CreateCompare",
+                                        "CompareOperator": "Like",
+                                        "value1": "%122%",
+                                        "input1": "sfs"
+                                     }
+                                  ]
+                               }
+                        ]
+                   </string>
+
+        Dim qb As New QueryBuilder
+        Dim dt = qb.LoadReportData(json, "ShortSaleCases")
+        Assert.IsInstanceOfType(dt, GetType(DataTable))
+        Assert.IsTrue(dt.Rows.Count > 0)
+    End Sub
+
 End Class

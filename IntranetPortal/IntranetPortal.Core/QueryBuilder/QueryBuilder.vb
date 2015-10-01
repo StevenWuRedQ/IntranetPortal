@@ -1,12 +1,36 @@
-﻿Imports Newtonsoft.Json.Linq
+﻿Imports System.Data.SqlClient
+Imports Newtonsoft.Json.Linq
 Imports Reeb.SqlOM
 Imports Reeb.SqlOM.Render
 
 Public Class QueryBuilder
 
+    Public Function LoadReportData(json As String, baseTable As String) As DataTable
+        Dim query = JToken.Parse(json)
+        Return LoadReportData(query, baseTable)
+    End Function
+
+    Public Function LoadReportData(query As JToken, baseTable As String) As DataTable
+        Dim sql = BuildSelectQuery(query, baseTable)
+        Return ExecuteQuery(sql)
+    End Function
 
     Public Function ExecuteQuery(sql As String) As DataTable
-        Return Nothing
+        Using ctx As New CoreEntities
+            Dim conn = CType(ctx.Database.Connection, SqlConnection)
+
+            If conn IsNot Nothing AndAlso conn.State = ConnectionState.Closed Then
+                conn.Open()
+            End If
+
+            Dim dt As New DataTable
+
+            Using ad As New SqlDataAdapter(sql, conn)
+                ad.Fill(dt)
+            End Using
+
+            Return dt
+        End Using
     End Function
 
     Public Function BuildSelectQuery() As String

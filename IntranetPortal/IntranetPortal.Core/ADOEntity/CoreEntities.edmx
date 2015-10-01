@@ -177,6 +177,9 @@
           <EntitySet Name="CommonDatas" EntityType="IntranetPortal.Core.Model.CommonData" />
           <EntitySet Name="Applications" EntityType="IntranetPortal.Core.Model.Application" />
           <EntitySet Name="Thumbnails" EntityType="IntranetPortal.Core.Model.Thumbnail" />
+          <FunctionImport Name="QueryReportData">
+            <Parameter Name="sql" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="SpecialDay">
           <Key>
