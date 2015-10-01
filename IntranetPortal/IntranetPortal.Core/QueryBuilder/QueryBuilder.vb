@@ -77,7 +77,8 @@ Public Class QueryBuilder
             'add columns
             For Each field In jsQuery.Where(Function(s) s.SelectToken("table").ToString = tbl).ToList
                 Dim col = field.SelectToken("column").ToString
-                selectQuery.Columns.Add(New SelectColumn(col, term))
+                Dim name = field.SelectToken("name").ToString
+                selectQuery.Columns.Add(New SelectColumn(col, term, name))
 
                 Dim type = field.SelectToken("type").ToString
 
