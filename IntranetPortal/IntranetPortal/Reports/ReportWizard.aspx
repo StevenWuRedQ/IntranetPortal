@@ -124,6 +124,7 @@
                 <button ng-show="step>1" type="button" class="btn-primary pull-left" ng-click="prev()">Prev</button>
                 <button ng-show="step<2" type="button" class="btn-primary pull-right" ng-click="next()">Next</button>
                 <button ng-show="step==2" type="button" class="btn-primary pull-right" ng-click="generate()">Generate</button>
+                <button ng-show="step==3" type="button" class="btn-primary pull-right" ng-click="SaveQueryPop=true">Save Query</button>
             </div>
         </div>
 
@@ -138,6 +139,9 @@
                             <div>
                                 <ul style="margin-right: 20px; font-size: 18px; list-style: none">
                                     <li><i class="fa fa-file-o"></i>&nbsp;<span>Test</span>&nbsp<pt-del class="pull-right"></pt-del></li>
+                                    <li ng-repeat="q in SavedReports">
+                                        <i class="fa fa-file-o"></i>&nbsp;<span>{{q.Name}}</span>&nbsp<pt-del class="pull-right"></pt-del>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -160,7 +164,7 @@
                 <hr>
                 <div class="pull-right">
                     <button class="btn btn-danger" ng-click="onSaveQueryPopCancel()">Cancel</button>
-                    <button class="btn btn-success" ng-click="save()">Save</button>
+                    <button class="btn btn-success" ng-click="onSaveQueryPopSave()">Save</button>
                 </div>
             </div>
         </div>
@@ -185,27 +189,21 @@
                 customLoad: $scope.customLoad,
                 customSave: $scope.customSave
             };
-            $scope.load = function () {
+            $scope.reload = function () {
                 $http.get("<%= Template %>.js")
                     .then(function (res) {
                         $scope.Fields = res.data[0].Fields;
                     })
+                $http.get("/api/Report/Load")
+                    .then(function (res) {
+                        $scope.SavedReports = res.data;
+                        debugger;
+                    })
             };
-            $scope.loadList = function () {
+            $scope.load = function (id) {
+                $scope.reload();
             }
-            $scope.save = function () {
-                var data = {};
-                data.Query = JSON.stringify($scope.Fields);
-                data.Layout = JSON.stringify($scope.gridState);
-                data = JSON.stringify(data)
-                $http({
-                    method: "POST",
-                    url: "/api/Report/Save",
-                    data: data,
-                }).then(function (res) {
-                    debugger;
-                })
-            }
+
             $scope.camel = _.camelCase;
             $scope.someCheck = function (category) {
                 return _.some(category.fields, { checked: true })
@@ -390,28 +388,35 @@
                 })
             }
 
-            scope.onModifyNamePopClose = function () {
-                scope.NewQueryName = '';
-                scope.ModifyNamePop = false;
+            $scope.onSaveQueryPopCancel = function () {
+                $scope.NewQueryName = '';
+                $scope.SaveQueryPop = false;
             }
-            scope.onModifyNamePopSave = function () {
-                if (scope.NewFileName) {
-                    if (scope.NewFileName.indexOf('.') > -1) {
-                        scope.editingFileModel[scope.editingIndx].name = scope.NewFileName;
-                    } else {
-                        scope.editingFileModel[scope.editingIndx].name = scope.NewFileName + '.' + scope.editingFileExt;
-                    }
+            $scope.onSaveQueryPopSave = function () {
+                if (!$scope.NewQueryName) {
+                    alert("New query name is empty!");
+                    $scope.NewQueryName = '';
+                    $scope.SaveQueryPop = false;
+                } else {
+                    var data = {};
+                    data.Query = JSON.stringify($scope.Fields);
+                    data.Layout = JSON.stringify($scope.gridState);
+                    data.Name = !$scope.NewQueryName
+                    data = JSON.stringify(data)
+                    $http({
+                        method: "POST",
+                        url: "/api/Report/Save",
+                        data: data,
+                    }).then(function (res) {
+                        debugger;
+                        $scope.NewQueryName = '';
+                        $scope.SaveQueryPop = false;
+                    })
                 }
-                scope.editingFileModel = null;
-                scope.editingIndx = null;
-                scope.ModifyNamePop = false;
-                scope.editingFileExt = '';
+                
             }
 
-
-            $scope.load();
-
-
+            $scope.reload();
         });
 
     </script>
