@@ -33,6 +33,7 @@
           <Property Name="ReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="256" />
           <Property Name="Description" Type="nvarchar" MaxLength="1024" />
+          <Property Name="BaseTable" Type="nvarchar" MaxLength="50" />
           <Property Name="Query" Type="nvarchar(max)" />
           <Property Name="SqlText" Type="nvarchar(max)" />
           <Property Name="Layout" Type="nvarchar(max)" />
@@ -329,6 +330,7 @@
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BaseTable" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -478,6 +480,7 @@
           <EntitySetMapping Name="CustomReports">
             <EntityTypeMapping TypeName="IntranetPortal.Core.Model.CustomReport">
               <MappingFragment StoreEntitySet="CustomReports">
+                <ScalarProperty Name="BaseTable" ColumnName="BaseTable" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />

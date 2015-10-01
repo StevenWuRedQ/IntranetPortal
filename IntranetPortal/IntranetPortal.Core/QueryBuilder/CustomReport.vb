@@ -45,6 +45,8 @@
                 Me.UpdateTime = DateTime.Now
             End If
 
+            Me.SqlText = New QueryBuilder().BuildSelectQuery(Me.Query, Me.BaseTable)
+
             ctx.SaveChanges()
 
         End Using

@@ -22,5 +22,6 @@ Partial Public Class CustomReport
     Public Property UpdateBy As String
     Public Property CreateTime As Nullable(Of Date)
     Public Property CreateBy As String
+    Public Property BaseTable As String
 
 End Class
