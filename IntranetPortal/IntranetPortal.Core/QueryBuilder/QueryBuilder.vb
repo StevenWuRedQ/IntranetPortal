@@ -4,6 +4,11 @@ Imports Reeb.SqlOM.Render
 
 Public Class QueryBuilder
 
+
+    Public Function ExecuteQuery(sql As String) As DataTable
+        Return Nothing
+    End Function
+
     Public Function BuildSelectQuery() As String
 
         Dim emp As FromTerm = FromTerm.Table("Employee")
