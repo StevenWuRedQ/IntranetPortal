@@ -118,6 +118,7 @@ Partial Class Troubleshooting
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Button15 = New System.Windows.Forms.Button()
+        Me.Button20 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -385,7 +386,6 @@ Partial Class Troubleshooting
         Me.TabControl1.Controls.Add(Me.TabPage7)
         Me.TabControl1.Controls.Add(Me.TabPage8)
         Me.TabControl1.Controls.Add(Me.TabPage9)
-
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 46)
         Me.TabControl1.Name = "TabControl1"
@@ -702,7 +702,6 @@ Partial Class Troubleshooting
         '
         'TabPage5
         '
-
         Me.TabPage5.Controls.Add(Me.Button14)
         Me.TabPage5.Controls.Add(Me.Button13)
         Me.TabPage5.Controls.Add(Me.btnInitialContact)
@@ -985,7 +984,7 @@ Partial Class Troubleshooting
         '
         'TabPage9
         '
-
+        Me.TabPage9.Controls.Add(Me.Button20)
         Me.TabPage9.Controls.Add(Me.Button19)
         Me.TabPage9.Controls.Add(Me.Button18)
         Me.TabPage9.Controls.Add(Me.Button17)
@@ -1071,14 +1070,14 @@ Partial Class Troubleshooting
         Me.Button15.Text = "UpLoad Activity"
         Me.Button15.UseVisualStyleBackColor = True
         '
-        'Button19
+        'Button20
         '
-        Me.Button19.Location = New System.Drawing.Point(159, 44)
-        Me.Button19.Name = "Button19"
-        Me.Button19.Size = New System.Drawing.Size(75, 23)
-        Me.Button19.TabIndex = 7
-        Me.Button19.Text = "TestHPD"
-        Me.Button19.UseVisualStyleBackColor = True
+        Me.Button20.Location = New System.Drawing.Point(261, 44)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(75, 23)
+        Me.Button20.TabIndex = 8
+        Me.Button20.Text = "Button20"
+        Me.Button20.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1218,4 +1217,5 @@ Partial Class Troubleshooting
     Friend WithEvents Button17 As Button
     Friend WithEvents Button18 As Button
     Friend WithEvents Button19 As Button
+    Friend WithEvents Button20 As Button
 End Class

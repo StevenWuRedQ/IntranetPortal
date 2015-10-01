@@ -84,10 +84,16 @@ Public Class QueryBuilder
 
                 'add filters
                 Dim filters As JArray = field.SelectToken("filters")
-                For Each flt In filters
-                    selectQuery.WherePhrase.Terms.Add(BuildWhereTerm(term, col, type, flt))
-                    'selectQuery.WherePhrase.Terms.Add(WhereTerm.CreateCompare(SqlExpression.Field(col, term), SqlExpression.String(flt("value")), CompareOperator.Like))
-                Next
+                If filters IsNot Nothing Then
+                    For Each flt In filters
+                        If Not String.IsNullOrEmpty(flt("WhereTerm")) Then
+                            selectQuery.WherePhrase.Terms.Add(BuildWhereTerm(term, col, type, flt))
+                            'selectQuery.WherePhrase.Terms.Add(WhereTerm.CreateCompare(SqlExpression.Field(col, term), SqlExpression.String(flt("value")), CompareOperator.Like))
+                        End If
+
+                    Next
+                End If
+
             Next
         Next
 

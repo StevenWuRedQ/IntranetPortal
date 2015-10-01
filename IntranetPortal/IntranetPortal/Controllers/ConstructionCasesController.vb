@@ -187,26 +187,27 @@ Namespace Controllers
         <Route("api/ConstructionCases/GenerateExcel")>
         Function GetGenerateExcel() As HttpResponseMessage
             Dim response = New HttpResponseMessage(HttpStatusCode.OK)
+            Using ms = New MemoryStream
+                Dim wb As New Excel.XLWorkbook
+                Dim ws = wb.Worksheets.Add("sheet1")
+                ws.Cell("B2").Value = "Contacts"
 
-            Dim wb As New Excel.XLWorkbook
-            Dim ws = wb.Worksheets.Add("sheet1")
-            ws.Cell("B2").Value = "Contacts"
-
-            ws.Cell("B3").Value = "FName"
-            ws.Cell("B4").Value = "John"
-            ws.Cell("B5").Value = "Hank"
-            ws.Cell("B6").Value = "Dagny"
+                ws.Cell("B3").Value = "FName"
+                ws.Cell("B4").Value = "John"
+                ws.Cell("B5").Value = "Hank"
+                ws.Cell("B6").Value = "Dagny"
 
 
-            ws.Cell("C3").Value = "LName"
-            ws.Cell("C4").Value = "Galt"
-            ws.Cell("C5").Value = "Rearden"
-            ws.Cell("C6").Value = "Taggart"
-            Dim stream = New MemoryStream
-            wb.SaveAs(stream)
+                ws.Cell("C3").Value = "LName"
+                ws.Cell("C4").Value = "Galt"
+                ws.Cell("C5").Value = "Rearden"
+                ws.Cell("C6").Value = "Taggart"
 
-            response.Content = New StreamContent(stream)
-            response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/octet-stream")
+                wb.SaveAs(ms)
+                response.Content = New StreamContent(ms)
+                response.Content.Headers.ContentDisposition = New ContentDispositionHeaderValue("attachement;filename=budget.xlsx")
+                response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/octet-stream")
+            End Using
             Return response
         End Function
     End Class

@@ -90,6 +90,21 @@
                 </div>
             </div>
         </div>
+
+        <div class="nga-fast nga-face" ng-show="step==3">
+            <div dx-data-grid="{
+                                    {
+                                        bindingOptions: {
+                                            dataSource: 'reportData' 
+                                        },
+                                        editing: {
+                                            editMode: 'row',
+                                            editEnabled: true,
+                                            removeEnabled: true
+                                        } 
+                                    }">
+            </div>
+        </div>
         <hr />
         <div class="col-md-12 col-sm-12 clearfix" style="padding-top: 20px">
             <button ng-show="step>1" type="button" class="btn-primary pull-left" ng-click="prev()">Prev</button>
@@ -110,23 +125,12 @@
                     })
             };
             $scope.camel = _.camelCase;
-            $scope.CheckField = [];
-            $scope.pushCheck = function (model) {
-                $scope.CheckField.push(f);
-            }
-
-            $scope.next = function () {
-                $scope.step = $scope.step + 1;
-            }
-            $scope.prev = function () {
-                $scope.step = $scope.step - 1;
-            }
             $scope.someCheck = function (category) {
                 return _.some(category.fields, { checked: true })
             }
             $scope.addFilter = function (f) {
                 if (!f.filters) f.filters = []
-                f.filters.push({ criteria: '', value: '', query: '' })
+                f.filters.push({})
             }
             $scope.removeFilter = function (f, i) {
                 f.filters.splice(i, 1);
@@ -276,7 +280,15 @@
                     }
                 }
             }
+
+            $scope.next = function () {
+                $scope.step = $scope.step + 1;
+            }
+            $scope.prev = function () {
+                $scope.step = $scope.step - 1;
+            }
             $scope.generate = function () {
+                $scope.step = 3;
                 var result = [];
                 _.each($scope.Fields, function (el, i) {
                     _.each(el.fields, function (el, i) {
@@ -285,12 +297,16 @@
                         }
                     })
                 })
-                var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(result));
+                $http({
+                    method: "POST",
+                    url: "/api/Report/QueryData",
+                    data: JSON.stringify(result),
+                }).then(function (res) {
+                    debugger;
+                    $scope.reportData = res.data;
+                })
 
-                var a = document.getElementById("jsonlink")
-                a.href = 'data:' + data;
-                a.download = 'data.json';
-                a.innerHTML = 'download JSON';
+
             }
             $scope.load();
 
