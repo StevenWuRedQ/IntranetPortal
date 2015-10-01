@@ -8,14 +8,15 @@
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.EmailMessage" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.SpecialDay" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.EmailTemplate" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="IntranetPortal.Core.Model.DataLoopRule" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="IntranetPortal.Core.Model.RecycleLead" Width="1.5" PointX="2.75" PointY="4.75" />
-        <EntityTypeShape EntityType="IntranetPortal.Core.Model.SystemLog" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="IntranetPortal.Core.Model.DataLoopRule" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="IntranetPortal.Core.Model.RecycleLead" Width="1.5" PointX="2.75" PointY="3.5" />
+        <EntityTypeShape EntityType="IntranetPortal.Core.Model.SystemLog" Width="1.5" PointX="4.75" PointY="3" />
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.TLOApiLog" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.PortalSetting" Width="1.5" PointX="6.75" PointY="5.75" />
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.CommonData" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="IntranetPortal.Core.Model.Application" Width="1.5" PointX="0.75" PointY="8.75" />
-        <EntityTypeShape EntityType="IntranetPortal.Core.Model.Thumbnail" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="IntranetPortal.Core.Model.Application" Width="1.5" PointX="0.75" PointY="6.375" />
+        <EntityTypeShape EntityType="IntranetPortal.Core.Model.Thumbnail" Width="1.5" PointX="2.75" PointY="6.375" />
+        <EntityTypeShape EntityType="IntranetPortal.Core.Model.CustomReport" Width="1.5" PointX="4.75" PointY="5.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

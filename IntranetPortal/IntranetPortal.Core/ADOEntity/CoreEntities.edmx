@@ -26,6 +26,22 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="CustomReports">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Query" Type="nvarchar(max)" />
+          <Property Name="SqlText" Type="nvarchar(max)" />
+          <Property Name="Layout" Type="nvarchar(max)" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="DataLoopRules">
           <Key>
             <PropertyRef Name="Id" />
@@ -137,6 +153,7 @@
         <EntityContainer Name="IntranetPortalCoreModelStoreContainer">
           <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CommonData" EntityType="Self.CommonData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomReports" EntityType="Self.CustomReports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DataLoopRules" EntityType="Self.DataLoopRules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailMessages" EntityType="Self.EmailMessages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailTemplates" EntityType="Self.EmailTemplates" Schema="dbo" store:Type="Tables" />
@@ -180,6 +197,7 @@
           <FunctionImport Name="QueryReportData">
             <Parameter Name="sql" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="CustomReports" EntityType="IntranetPortal.Core.Model.CustomReport" />
         </EntityContainer>
         <EntityType Name="SpecialDay">
           <Key>
@@ -295,6 +313,22 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="content" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="mime_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CustomReport">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="Query" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SqlText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Layout" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -438,6 +472,23 @@
                 <ScalarProperty Name="mime_type" ColumnName="mime_type" />
                 <ScalarProperty Name="content" ColumnName="content" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomReports">
+            <EntityTypeMapping TypeName="IntranetPortal.Core.Model.CustomReport">
+              <MappingFragment StoreEntitySet="CustomReports">
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Layout" ColumnName="Layout" />
+                <ScalarProperty Name="SqlText" ColumnName="SqlText" />
+                <ScalarProperty Name="Query" ColumnName="Query" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -142,4 +142,28 @@ Imports IntranetPortal.Core
         Assert.IsTrue(dt.Rows.Count > 0)
     End Sub
 
+    <TestMethod()>
+    Public Sub CustomReportTest()
+        Dim currentUser = "Chris Yan"
+
+        Dim report As New CustomReport
+        report.Name = "Test"
+        report.Description = "this is test report."
+        report.Save(currentUser)
+        Assert.IsTrue(report.ReportId > 0)
+        Assert.AreEqual(report.Owner, currentUser)
+
+        report = CustomReport.Instance(report.ReportId)
+        report.Name = "Test2"
+        report.Save(currentUser)
+        Assert.AreEqual(report.UpdateBy, "Chris Yan")
+
+        report = CustomReport.Instance(report.ReportId)
+        Assert.AreEqual(report.Name, "Test2")
+
+        report.Delete()
+        report = CustomReport.Instance(report.ReportId)
+        Assert.IsNull(report)
+    End Sub
+
 End Class

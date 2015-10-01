@@ -146,6 +146,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\CustomReport.vb">
+      <DependentUpon>CoreEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\DataLoopRule.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
@@ -228,6 +231,7 @@
     <Compile Include="PropertyHelper.vb" />
     <Compile Include="Model\RecycleLead.vb" />
     <Compile Include="Model\Thumbnail.vb" />
+    <Compile Include="QueryBuilder\CustomReport.vb" />
     <Compile Include="QueryBuilder\QueryBuilder.vb" />
     <Compile Include="Utility.vb" />
     <Compile Include="WorkingHours.vb" />

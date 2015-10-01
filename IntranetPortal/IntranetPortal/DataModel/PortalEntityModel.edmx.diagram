@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.Employee" Width="1.5" PointX="1.125" PointY="1.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsActivityLog" Width="2.5" PointX="3.75" PointY="1.375" />
         <EntityTypeShape EntityType="IntranetPortalModel.Lead" Width="1.75" PointX="3.625" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntranetPortalModel.LeadsInfo" Width="1.5" PointX="8.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LeadsInfo" Width="1.5" PointX="8.625" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="IntranetPortalModel.LeadLeadsInfo" />
         <AssociationConnector Association="IntranetPortalModel.EmployeeLead" />
         <AssociationConnector Association="IntranetPortalModel.LeadsActivityLogLead" />
