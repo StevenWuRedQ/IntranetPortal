@@ -111,30 +111,7 @@ Imports IntranetPortal.Core
 
     <TestMethod()>
     Public Sub LoadReportDataTest()
-        Dim json = <string>
-                         [
-                               {
-                                  "name":"NAME",
-                                  "table":"ShortSaleCases",
-                                  "column":"CaseName",
-                                  "type":"string",
-                                  "$$hashKey":"object:66",
-                                  "checked":true,
-                                  "filters":[
-                                     {
-                                        "criteria": "2",
-                                        "value": "",
-                                        "query": "",
-                                        "$$hashKey": "object:386",
-                                        "WhereTerm": "CreateCompare",
-                                        "CompareOperator": "Like",
-                                        "value1": "%122%",
-                                        "input1": "sfs"
-                                     }
-                                  ]
-                               }
-                        ]
-                   </string>
+        Dim json = jsonQuery
 
         Dim qb As New QueryBuilder
         Dim dt = qb.LoadReportData(json, "ShortSaleCases")
@@ -166,4 +143,41 @@ Imports IntranetPortal.Core
         Assert.IsNull(report)
     End Sub
 
+    <TestMethod()>
+    Public Sub CustomReportQueryDataTest()
+        Dim currentUser = "Chris Yan"
+
+        Dim report As New CustomReport
+        report.Name = "Test"
+        report.Description = "this is test report."
+        report.Query = jsonQuery
+        report.BaseTable = "ShortSaleCases"
+        Dim dt = report.QueryData()
+        Assert.IsTrue(dt.Rows.Count > 0)
+    End Sub
+
+    Private jsonQuery As String = <string>
+                         [
+                               {
+                                  "name":"NAME",
+                                  "table":"ShortSaleCases",
+                                  "column":"CaseName",
+                                  "type":"string",
+                                  "$$hashKey":"object:66",
+                                  "checked":true,
+                                  "filters":[
+                                     {
+                                        "criteria": "2",
+                                        "value": "",
+                                        "query": "",
+                                        "$$hashKey": "object:386",
+                                        "WhereTerm": "CreateCompare",
+                                        "CompareOperator": "Like",
+                                        "value1": "%122%",
+                                        "input1": "sfs"
+                                     }
+                                  ]
+                               }
+                        ]
+                   </string>
 End Class

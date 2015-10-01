@@ -21,6 +21,12 @@ Partial Public Class CustomReport
         End Using
     End Function
 
+    Public Function QueryData() As DataTable
+        Dim qb As New Core.QueryBuilder
+        Dim dt = qb.LoadReportData(Me.Query, Me.BaseTable)
+        Return dt
+    End Function
+
     Public Sub Delete()
         Using ctx As New Core.CoreEntities
             ctx.Entry(Me).State = Entity.EntityState.Deleted

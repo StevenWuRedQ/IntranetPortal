@@ -8,8 +8,6 @@ Namespace Controllers
     Public Class ReportController
         Inherits ApiController
 
-
-
         <ResponseType(GetType(String))>
         <Route("api/Report/Query")>
         Function PostQuery(<FromBody> queryString As JToken) As IHttpActionResult
@@ -36,6 +34,21 @@ Namespace Controllers
             Try
                 Dim qb As New Core.QueryBuilder
                 Dim dt = qb.LoadReportData(queryString, "ShortSaleCases")
+                Return Ok(dt)
+            Catch ex As Exception
+                Throw
+            End Try
+        End Function
+
+        <ResponseType(GetType(DataTable))>
+        <Route("api/Report/QueryReportData")>
+        Function PostLoadQueryData(report As CustomReport) As IHttpActionResult
+            If Not ModelState.IsValid Then
+                Return BadRequest(ModelState)
+            End If
+
+            Try
+                Dim dt = report.QueryData
                 Return Ok(dt)
             Catch ex As Exception
                 Throw
