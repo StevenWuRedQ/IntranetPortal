@@ -7,7 +7,7 @@ Imports IntranetPortal.Core
     <TestMethod()>
     Public Sub GenerateScript()
         Dim json = <string>
-                       [
+                         [
                                {
                                   "name":"NAME",
                                   "table":"ShortSaleCases",
@@ -17,15 +17,19 @@ Imports IntranetPortal.Core
                                   "checked":true,
                                   "filters":[
                                      {
-                                        "criteria":"1",
-                                        "value":"sss",
-                                        "query":" Like  'sss%' ",
-                                        "$$hashKey":"object:339"
+                                        "criteria": "2",
+                                        "value": "",
+                                        "query": "",
+                                        "$$hashKey": "object:386",
+                                        "WhereTerm": "CreateCompare",
+                                        "CompareOperator": "Like",
+                                        "value1": "%sfs",
+                                        "input1": "sfs"
                                      }
                                   ]
                                },
                                {
-                                  "name":"Block",
+                                  "name":"DOB",
                                   "table":"PropertyBaseInfo",
                                   "column":"Block",
                                   "type":"date",
@@ -33,10 +37,14 @@ Imports IntranetPortal.Core
                                   "checked":true,
                                   "filters":[
                                      {
-                                        "criteria":"1",
-                                        "value":"09/07/2015",
-                                        "query":" '09/07/2015' ",
-                                        " $$hashKey":" object:342"
+                                        "criteria": "2",
+                                        "value": "",
+                                        "query": "",
+                                        "$$hashKey": "object:382",
+                                        "WhereTerm": "CreateCompare",
+                                        "CompareOperator": "Greater",
+                                        "value1": "09/22/2015",
+                                        "input1": "09/22/2015"
                                      }
                                   ]
                                },
@@ -49,19 +57,44 @@ Imports IntranetPortal.Core
                                   "checked":true,
                                   "filters":[
                                      {
-                                        " criteria":" 5",
-                                        " value":" 111",
-                                        " query":" BETWEEN 111 AND 222",
-                                        " $$hashKey":" object:346",
-                                        " value2":" 222"
+                                        "criteria": "5",
+                                        "value": "",
+                                        "query": "",
+                                        "$$hashKey": "object:379",
+                                        "WhereTerm": "CreateBetween",
+                                        "CompareOperator": "",
+                                        "value1": "22",
+                                        "value2": "33",
+                                        "input1": "22",
+                                        "input2": "33"
                                      }
                                   ]
-                               }
+                               },{
+                                    "name": "Mail Address",
+                                    "table": "PropertyBaseInfo",
+                                    "column": "MailAddress",
+                                    "type": "list",
+                                    "options": [ "1", "2", "3" ],
+                                    "$$hashKey": "object:90",
+                                    "checked": true,
+                                    "filters": [
+                                      {
+                                        "criteria": "",
+                                        "value": "",
+                                        "query": "",
+                                        "$$hashKey": "object:365",
+                                        "input1": [ "1", "2" ],
+                                        "WhereTerm": "CreateIn",
+                                        "CompareOperator": "",
+                                        "value1": [ "1", "2" ]
+                                      }
+                                    ]
+                                  }
                             ]
                    </string>
 
         Dim qb As New QueryBuilder
-        Dim sql = qb.BuilderSelectQuery(json, "ShortSaleCases")
+        Dim sql = qb.BuildSelectQuery(json, "ShortSaleCases")
         Debug.Print(sql)
         Assert.IsInstanceOfType(sql, GetType(String))
     End Sub

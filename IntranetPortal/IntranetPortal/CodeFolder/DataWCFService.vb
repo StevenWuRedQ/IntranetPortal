@@ -187,11 +187,11 @@ Public Class DataWCFService
                 Dim waitingRequest = client.Requests_Waiting
                 Return waitingRequest > 20
             Catch ex As TimeoutException
-                Throw New Exception("Check Server is busy. Time out exception: " & ex.Message)
+                'Throw New Exception("Check Server is busy. Time out exception: " & ex.Message)
                 Return True
             Catch ex As Exception
-                Throw New Exception("Check Server is busy. exception: " & ex.Message)
-                Return False
+                'Throw New Exception("Check Server is busy. exception: " & ex.Message)
+                Return True
             End Try
         End Using
     End Function

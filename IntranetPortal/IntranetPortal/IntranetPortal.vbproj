@@ -725,6 +725,7 @@
     <Compile Include="Controllers\CorporationEntitiesController.vb" />
     <Compile Include="Controllers\LeadInfoDocumentSearchesController.vb" />
     <Compile Include="Controllers\ManagementController.vb" />
+    <Compile Include="Controllers\ReportController.vb" />
     <Compile Include="Controllers\ShortSaleLeadsInfoesController.vb" />
     <Compile Include="Controllers\TaxLiensController.vb" />
     <Compile Include="Controllers\TaxLiensODataController.vb" />

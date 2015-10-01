@@ -118,6 +118,9 @@
         <div class="row form_border">
             <div class="form_header">
                 Business Rules &nbsp;<i class="fa fa-compress icon_btn tooltip-examples grid_buttons" style="font-size: 18px;" title="Collapse" onclick="expandAllClick(this, $('#divGridRules'))"></i>
+                 <div class="form-inline" style="float: right; font-weight: normal">                    
+                    <i class="fa fa-refresh icon_btn tooltip-examples  grid_buttons" style="margin-right: 20px; font-size: 19px" onclick="RulesEngine.Refresh()" title="Refresh"></i>
+                </div>
             </div>
             <div id="divGridRules">
                 <div id="gridRules"></div>
@@ -127,7 +130,7 @@
         <script id="gridCellAction" type="text/html">
             <i class="fa fa-play icon_btn tooltip-examples grid_buttons" style="margin-left: 10px;" title="Start Rule" onclick='StartRule("{%= value %}")'></i>
             <i class="fa fa-stop icon_btn tooltip-examples grid_buttons" style="margin-left: 10px;" title="Stop Rule" onclick='StopRule("{%= value %}")'></i>
-            <i class="fa fa-refresh icon_btn tooltip-examples grid_buttons" style="margin-left: 10px;" title="Stop Rule" onclick='RunRule("{%= value %}")'></i>
+            <i class="fa fa-refresh icon_btn tooltip-examples grid_buttons" style="margin-left: 10px;" title="Run Rule" onclick='RunRule("{%= value %}")'></i>
         </script>
 
         <script type="text/javascript">
