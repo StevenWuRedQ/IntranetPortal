@@ -9,6 +9,7 @@ Namespace Controllers
         Inherits ApiController
 
 
+
         <ResponseType(GetType(String))>
         <Route("api/Report/Query")>
         Function PostQuery(<FromBody> queryString As JToken) As IHttpActionResult
@@ -36,6 +37,21 @@ Namespace Controllers
                 Dim qb As New Core.QueryBuilder
                 Dim dt = qb.LoadReportData(queryString, "ShortSaleCases")
                 Return Ok(dt)
+            Catch ex As Exception
+                Throw
+            End Try
+        End Function
+
+        <ResponseType(GetType(CustomReport()))>
+        <Route("api/Report/Load")>
+        Function GetMyReports() As IHttpActionResult
+            Try
+                Dim report = CustomReport.GetReports(CurrentUser)
+                If report Is Nothing Then
+                    Return NotFound()
+                End If
+
+                Return Ok(report)
             Catch ex As Exception
                 Throw
             End Try

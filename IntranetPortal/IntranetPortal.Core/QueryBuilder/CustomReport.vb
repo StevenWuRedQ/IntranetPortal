@@ -1,4 +1,6 @@
-﻿Partial Public Class CustomReport
+﻿Imports System.ComponentModel.DataAnnotations
+
+Partial Public Class CustomReport
 
     Public Shared Function Instance(reportId As Integer) As CustomReport
 
@@ -48,9 +50,6 @@
             Me.SqlText = New QueryBuilder().BuildSelectQuery(Me.Query, Me.BaseTable)
 
             ctx.SaveChanges()
-
         End Using
-
     End Sub
-
 End Class
