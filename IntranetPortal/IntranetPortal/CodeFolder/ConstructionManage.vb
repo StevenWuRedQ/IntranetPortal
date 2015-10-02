@@ -54,18 +54,26 @@ Public Class ConstructionManage
         End If
     End Function
 
+    Public Shared Function GetMyLightCases(userName As String, Optional status As ConstructionCase.CaseStatus = -1) As ConstructionCase()
+        If IsManager(userName) Then
+            Return ConstructionCase.GetLightCasesByStatus(status)
+        Else
+            Return ConstructionCase.GetLightCases(userName, status)
+        End If
+    End Function
+
     Public Function GetAmount(menu As PortalNavItem, userName As String) As Integer Implements INavMenuAmount.GetAmount
         If menu.Name.Split("-").Count > 1 Then
             Dim type = menu.Name.Split("-")(1)
 
             If (type = "All") Then
-                Return GetMyCases(userName).Length
+                Return GetMyLightCases(userName).Length
             End If
 
             Dim cStatus = ConstructionCase.CaseStatus.All
             If ([Enum].TryParse(Of ConstructionCase.CaseStatus)(type, cStatus)) Then
 
-                Return GetMyCases(userName, cStatus).Length
+                Return GetMyLightCases(userName, cStatus).Length
 
             End If
         End If

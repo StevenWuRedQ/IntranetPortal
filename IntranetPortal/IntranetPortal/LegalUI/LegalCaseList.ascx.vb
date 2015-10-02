@@ -28,7 +28,7 @@ Public Class LegalCaseList
 
     Private Sub BindLegalData(status As LegalCaseStatus)
 
-        gridCase.DataSource = LegalCaseManage.GetLegalCaseList(Page.User.Identity.Name, status)
+        gridCase.DataSource = LegalCaseManage.GetLegalLightCaseList(Page.User.Identity.Name, status)
         Return
 
         'If Page.User.IsInRole("Legal-Manager") OrElse Page.User.IsInRole("Admin") OrElse LegalCaseManage.IsViewable(Page.User.Identity.Name) Then

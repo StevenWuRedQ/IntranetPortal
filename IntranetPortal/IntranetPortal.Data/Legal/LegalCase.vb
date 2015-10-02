@@ -142,9 +142,62 @@ Partial Public Class LegalCase
     Public Shared Function GetFollowUpCaseByUser(userName As String) As List(Of LegalCase)
         Return GetFollowUpCases().Where(Function(lc) (lc.ResearchBy = userName Or lc.Attorney = userName)).ToList
     End Function
-    Public Shared Function GetCaseList(status As LegalCaseStatus, userName As String) As List(Of LegalCase)
+
+    Public Shared Function GetLightCaseList(status1 As LegalCaseStatus) As List(Of LegalCase)
         Using ctx As New LegalModelContainer
-            Return ctx.LegalCases.Where(Function(lc) lc.Status = status AndAlso (lc.ResearchBy = userName Or lc.Attorney = userName)).ToList
+            Dim result = From lCase In ctx.LegalCases.Where(Function(lc) lc.Status = status1)
+                         Select lCase.BBLE, lCase.CaseName, lCase.ResearchBy, lCase.Attorney, lCase.Status, lCase.LegalStatus, lCase.FollowUp, lCase.SaleDate, lCase.SecondaryTypes, lCase.UpdateDate, lCase.UpdateBy, lCase.CreateBy, lCase.CreateDate
+
+            Return result.AsEnumerable.Select(Function(lcase)
+                                                  Return New LegalCase With {
+                                                    .BBLE = lcase.BBLE,
+                                                    .Attorney = lcase.Attorney,
+                                                    .CaseName = lcase.CaseName,
+                                                    .CreateBy = lcase.CreateBy,
+                                                    .CreateDate = lcase.CreateDate,
+                                                    .FollowUp = lcase.FollowUp,
+                                                    .ResearchBy = lcase.ResearchBy,
+                                                    .LegalStatus = lcase.LegalStatus,
+                                                    .SaleDate = lcase.SaleDate,
+                                                    .SecondaryTypes = lcase.SecondaryTypes,
+                                                    .UpdateBy = lcase.UpdateBy,
+                                                    .UpdateDate = lcase.UpdateDate,
+                                                    .Status = lcase.Status
+                                                  }
+                                              End Function).ToList
+        End Using
+    End Function
+
+    Public Shared Function GetLightCaseList(status1 As LegalCaseStatus, userName As String) As List(Of LegalCase)
+        Using ctx As New LegalModelContainer
+            Dim result = From lCase In ctx.LegalCases.Where(Function(lc) lc.Status = status1 AndAlso (lc.ResearchBy = userName Or lc.Attorney = userName))
+                         Select lCase.BBLE, lCase.CaseName, lCase.ResearchBy, lCase.Attorney, lCase.Status, lCase.LegalStatus, lCase.FollowUp, lCase.SaleDate, lCase.SecondaryTypes, lCase.UpdateDate, lCase.UpdateBy, lCase.CreateBy, lCase.CreateDate
+
+            Return result.AsEnumerable.Select(Function(lcase)
+                                                  Return New LegalCase With {
+                                                    .BBLE = lcase.BBLE,
+                                                    .Attorney = lcase.Attorney,
+                                                    .CaseName = lcase.CaseName,
+                                                    .CreateBy = lcase.CreateBy,
+                                                    .CreateDate = lcase.CreateDate,
+                                                    .FollowUp = lcase.FollowUp,
+                                                    .ResearchBy = lcase.ResearchBy,
+                                                    .LegalStatus = lcase.LegalStatus,
+                                                    .SaleDate = lcase.SaleDate,
+                                                    .SecondaryTypes = lcase.SecondaryTypes,
+                                                    .UpdateBy = lcase.UpdateBy,
+                                                    .UpdateDate = lcase.UpdateDate,
+                                                    .Status = lcase.Status
+                                                  }
+                                              End Function).ToList
+
+
+        End Using
+    End Function
+
+    Public Shared Function GetCaseList(status1 As LegalCaseStatus, userName As String) As List(Of LegalCase)
+        Using ctx As New LegalModelContainer
+            Return ctx.LegalCases.Where(Function(lc) lc.Status = status1 AndAlso (lc.ResearchBy = userName Or lc.Attorney = userName)).ToList
         End Using
     End Function
 End Class

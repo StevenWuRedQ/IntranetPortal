@@ -35,6 +35,14 @@ Public Class LegalCaseManage
         End If
     End Function
 
+    Public Shared Function GetLegalLightCaseList(userName As String, status As Legal.LegalCaseStatus) As List(Of LegalCase)
+        If Roles.IsUserInRole(userName, "Legal-Manager") OrElse Roles.IsUserInRole(userName, "Admin") OrElse LegalCaseManage.IsViewable(userName) Then
+            Return LegalCase.GetLightCaseList(status)
+        Else
+            Return LegalCase.GetLightCaseList(status, userName)
+        End If
+    End Function
+
     Public Shared Sub StartLegalRequest(bble As String, caseData As String, createBy As String)
 
         If Not Legal.LegalCase.InLegal(bble) Then

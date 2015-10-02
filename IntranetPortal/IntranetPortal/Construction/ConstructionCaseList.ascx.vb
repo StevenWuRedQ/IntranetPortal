@@ -39,7 +39,7 @@ Public Class ConstructionCaseList
             End If
         End If
 
-        gridCase.DataSource = ConstructionManage.GetMyCases(Page.User.Identity.Name, status)
+        gridCase.DataSource = ConstructionManage.GetMyLightCases(Page.User.Identity.Name, Status)
     End Sub
 
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)

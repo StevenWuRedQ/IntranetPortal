@@ -8,7 +8,6 @@ Partial Public Class ConstructionCase
     Private Const LogTitleOpen As String = "ConstructionOpen"
     Private Const LogTitleSave As String = "ConstructionSave"
 
-
     Public ReadOnly Property StatusStr As String
         Get
             If Status.HasValue Then
@@ -19,15 +18,53 @@ Partial Public Class ConstructionCase
         End Get
     End Property
 
-    Public Shared Function GetAllCasesByStatus(Optional status As CaseStatus = CaseStatus.All) As ConstructionCase()
+    Public Shared Function GetAllCasesByStatus(Optional status1 As CaseStatus = CaseStatus.All) As ConstructionCase()
         Using ctx As New ConstructionEntities
-            Return ctx.ConstructionCases.Where(Function(c) c.Status = status Or status = CaseStatus.All).ToArray
+            Return ctx.ConstructionCases.Where(Function(c) c.Status = status1 Or status1 = CaseStatus.All).ToArray
         End Using
     End Function
 
-    Public Shared Function GetAllCases(userName As String, Optional status As CaseStatus = CaseStatus.All) As ConstructionCase()
+    Public Shared Function GetAllCases(userName As String, Optional status1 As CaseStatus = CaseStatus.All) As ConstructionCase()
         Using ctx As New ConstructionEntities
-            Return ctx.ConstructionCases.Where(Function(c) c.Owner = userName Or (c.Status = status Or status = CaseStatus.All)).ToArray
+            Return ctx.ConstructionCases.Where(Function(c) c.Owner = userName Or (c.Status = status1 Or status1 = CaseStatus.All)).ToArray
+        End Using
+    End Function
+
+    Public Shared Function GetLightCasesByStatus(Optional status1 As CaseStatus = CaseStatus.All) As ConstructionCase()
+        Using ctx As New ConstructionEntities
+            Dim result = (From cCase In ctx.ConstructionCases.Where(Function(c) c.Status = status1 Or status1 = CaseStatus.All)
+                          Select cCase.BBLE, cCase.Status, cCase.CaseName, cCase.CreateBy, cCase.CreateTime, cCase.LastUpdate, cCase.Owner, cCase.UpdateBy)
+
+            Return result.AsEnumerable.Select(Function(cCase)
+                                                  Return New ConstructionCase With {
+                                                             .BBLE = cCase.BBLE,
+                                                             .CaseName = cCase.CaseName,
+                                                             .CreateBy = cCase.CreateBy,
+                                                             .CreateTime = cCase.CreateTime,
+                                                             .LastUpdate = cCase.LastUpdate,
+                                                             .Owner = cCase.Owner,
+                                                             .UpdateBy = cCase.UpdateBy
+                                                             }
+                                              End Function).ToArray
+        End Using
+    End Function
+
+    Public Shared Function GetLightCases(userName As String, Optional status1 As CaseStatus = CaseStatus.All) As ConstructionCase()
+        Using ctx As New ConstructionEntities
+            Dim result = From cCase In ctx.ConstructionCases.Where(Function(c) c.Owner = userName Or (c.Status = status1 Or status1 = CaseStatus.All))
+                         Select cCase.BBLE, cCase.Status, cCase.CaseName, cCase.CreateBy, cCase.CreateTime, cCase.LastUpdate, cCase.Owner, cCase.UpdateBy
+
+            Return result.AsEnumerable.Select(Function(cCase)
+                                                  Return New ConstructionCase With {
+                                                             .BBLE = cCase.BBLE,
+                                                             .CaseName = cCase.CaseName,
+                                                             .CreateBy = cCase.CreateBy,
+                                                             .CreateTime = cCase.CreateTime,
+                                                             .LastUpdate = cCase.LastUpdate,
+                                                             .Owner = cCase.Owner,
+                                                             .UpdateBy = cCase.UpdateBy
+                                                             }
+                                              End Function).ToArray
         End Using
     End Function
 

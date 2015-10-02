@@ -320,8 +320,8 @@
                                                 popupBackToResearch.Hide();
                                                 txtBackComments.SetText('');
                                             }
-                                        }
-
+                                        }                                        
+                                        
                                     </script>
 
 

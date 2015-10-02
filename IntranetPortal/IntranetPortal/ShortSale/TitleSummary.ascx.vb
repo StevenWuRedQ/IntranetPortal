@@ -410,7 +410,6 @@ Public Class UCTitleSummary
         gridData.DataSource = ShortSaleCase.CaseReport2(Employee.CurrentAppId)
         gridData.DataBind()
 
-
         AllLeadGridViewExporter.FileName = String.Format("All-{0}-{1}-{2}.xlsx", Today.Month, Today.Day, Today.Year)
         AllLeadGridViewExporter.WriteXlsToResponse(New XlsExportOptionsEx() With {.ExportType = ExportType.WYSIWYG})
     End Sub

@@ -15,7 +15,7 @@ Namespace Controllers
 
         ' GET: api/ConstructionCases
         Function GetConstructionCases() As IQueryable(Of ConstructionCase)
-            Return ConstructionManage.GetMyCases(User.Identity.Name).AsQueryable
+            Return ConstructionManage.GetMyLightCases(User.Identity.Name).AsQueryable
         End Function
 
         ' GET: api/ConstructionCases/5
