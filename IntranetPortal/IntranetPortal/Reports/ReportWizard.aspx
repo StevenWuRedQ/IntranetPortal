@@ -93,6 +93,7 @@
             </div>
 
             <div class="nga-fast nga-face" ng-show="step==3">
+                <h3>{{getReportTitle()}}</h3>
                 <div id="queryReport" dx-data-grid="{
                                     width: 800,
                                     height: 600,
@@ -100,6 +101,9 @@
                                     allowColumnResizing: true,
                                     columnAutoWidth: true,
                                     columnChooser: {
+                                        enabled: true
+                                    },
+                                    stateStoring : {
                                         enabled: true
                                     },
                                     export: {
@@ -122,7 +126,10 @@
                 <button ng-show="step>1" type="button" class="btn-primary pull-left" ng-click="prev()">Prev</button>
                 <button ng-show="step<2" type="button" class="btn-primary pull-right" ng-click="next()">Next</button>
                 <button ng-show="step==2" type="button" class="btn-primary pull-right" ng-click="generate()">Generate</button>
-                <button ng-show="step==3" type="button" class="btn-primary pull-right" ng-click="SaveQueryPop=true">Save Query</button>
+                <%-- update --%>
+                <button ng-show="CurrentQuery && step==3" type="button" class="btn-primary pull-right" ng-click="update()">Save Query</button>
+                <%-- save new --%>
+                <button ng-show="!CurrentQuery && step==3" type="button" class="btn-primary pull-right" ng-click="SaveQueryPop=true">Save Query</button>
             </div>
         </div>
 
@@ -136,9 +143,9 @@
                             <hr />
                             <div>
                                 <ul style="margin-right: 20px; font-size: 18px; list-style: none">
-                                    <li><i class="fa fa-file-o"></i>&nbsp;<span>Test</span>&nbsp<pt-del class="pull-right"></pt-del></li>
-                                    <li class="icon_btn" ng-repeat="q in SavedReports" ng-click="load(q)">
-                                        <i class="fa fa-file-o"></i>&nbsp;<span>{{q.Name}}</span>&nbsp<pt-del class="pull-right"></pt-del>
+                                    <li class="icon_btn" ng-repeat="q in SavedReports track by q.ReportId">
+                                        <i class="fa fa-file-o" ng-click="load(q)"></i>&nbsp;<span ng-click="load(q)">{{q.Name}}</span>&nbsp
+                                        <pt-del ng-click="deleteSavedReport(q)" class="pull-right"></pt-del>
                                     </li>
                                 </ul>
                             </div>
@@ -172,31 +179,43 @@
         portalApp = angular.module('PortalApp');
         portalApp.controller("ReportWizardCtrl", function ($scope, $http, $timeout) {
             $scope.step = 1;
-            $scope.gridState = null;
             $scope.collpsed = [];
-            $scope.customLoad = function () {
-                return $scope.gridState;
-            }
-            $scope.customSave = function (gridState) {
-                $scope.gridState = gridState;
-            };
-            $scope.stateStoring = {
-                enabled: true,
-                type: 'custom',
-                customLoad: $scope.customLoad,
-                customSave: $scope.customSave
-            };
+            $scope.CurrentQuery = null;
             $scope.reload = function (callback) {
+                $scope.step = 1;
+                $scope.CurrentQuery = null;
                 $http.get("<%= Template %>.js")
                     .then(function (res) {
                         $scope.Fields = res.data[0].Fields;
                         if (callback) callback()
                     })
+                $scope.loadSavedReport();
+            };
+            $scope.loadSavedReport = function () {
                 $http.get("/api/Report/Load")
                     .then(function (res) {
                         $scope.SavedReports = res.data;
                     })
-            };
+            }
+            $scope.deleteSavedReport = function (q) {
+                var _confirm = confirm("Are you sure to delete?");
+                if (_confirm) {
+                    if (q.ReportId) {
+                        $http({
+                            method: "DELETE",
+                            url: "/api/Report/Delete/" + q.ReportId,
+                        }).then(function (res) {
+                            $scope.reload();
+                            alert("Delete Success.");
+                        })
+                    } else {
+                        alert("Delete Fails!");
+                    }
+                }
+
+            }
+
+            // load saved query
             $scope.load = function (q) {
                 $scope.reload(
                     function () {
@@ -204,9 +223,12 @@
                             $http.get("/api/Report/Load/" + q.ReportId)
                             .then(function (res) {
                                 var data = res.data
+                                $scope.CurrentQuery = data;
+
                                 $scope.Fields = JSON.parse(data.Query);
-                                $scope.gridState = JSON.parse(data.Layout);
                                 $scope.generate();
+                                var gridState = JSON.parse(data.Layout);
+                                $("#queryReport").dxDataGrid("instance").state(gridState);
                             })
                         }
                     }
@@ -214,6 +236,7 @@
             }
 
             $scope.camel = _.camelCase;
+
             $scope.someCheck = function (category) {
                 return _.some(category.fields, { checked: true })
             }
@@ -224,6 +247,7 @@
             $scope.removeFilter = function (f, i) {
                 f.filters.splice(i, 1);
             }
+
             $scope.updateStringFilter = function (x) {
                 if (!x.criteria || !x.input1) {
                     x.WhereTerm = ""
@@ -333,7 +357,6 @@
                     }
                 }
             }
-
             $scope.updateListFilter = function (x) {
                 if (!x.input1 || x.input1.length < 1) {
                     x.WhereTerm = "";
@@ -371,33 +394,6 @@
             }
 
 
-            $scope.next = function () {
-                $scope.step = $scope.step + 1;
-            }
-            $scope.prev = function () {
-                $scope.step = $scope.step - 1;
-            }
-            $scope.generate = function () {
-                $scope.step = 3;
-                var result = [];
-                _.each($scope.Fields, function (el, i) {
-                    _.each(el.fields, function (el, i) {
-                        if (el.checked) {
-                            result.push(el);
-                        }
-                    })
-                })
-                $http({
-                    method: "POST",
-                    url: "/api/Report/QueryData",
-                    data: JSON.stringify(result),
-                }).then(function (res) {
-                    $scope.reportData = res.data[0];
-                    $scope.sqlText = res.data[1];
-
-                })
-            }
-
             $scope.onSaveQueryPopCancel = function () {
                 $scope.NewQueryName = '';
                 $scope.SaveQueryPop = false;
@@ -408,12 +404,17 @@
                     $scope.NewQueryName = '';
                     $scope.SaveQueryPop = false;
                 } else {
+
                     var data = {};
-                    data.Query = JSON.stringify($scope.Fields);
-                    data.Layout = JSON.stringify($scope.gridState);
+
                     data.Name = $scope.NewQueryName;
+
+                    data.Query = JSON.stringify($scope.Fields);
                     data.sqlText = $scope.sqlText;
-                    data = JSON.stringify(data)
+                    data.Layout = JSON.stringify($("#queryReport").dxDataGrid("instance").state());
+
+                    data = JSON.stringify(data);
+
                     $http({
                         method: "POST",
                         url: "/api/Report/Save",
@@ -421,10 +422,76 @@
                     }).then(function (res) {
                         $scope.NewQueryName = '';
                         $scope.SaveQueryPop = false;
+                        $scope.reload()
+                        alert("Save successful!")
                     })
+
+                }
+            }
+            $scope.getReportTitle = function () {
+                if ($scope.CurrentQuery) {
+                    return "Report " + $scope.CurrentQuery.Name;
+                } else {
+                    return ""
                 }
             }
 
+            $scope.update = function () {
+
+                data = $scope.CurrentQuery;
+
+                data.Query = JSON.stringify($scope.Fields);
+                data.sqlText = $scope.sqlText;
+                data.Layout = JSON.stringify($("#queryReport").dxDataGrid("instance").state());
+
+                data = JSON.stringify(data);
+
+                $http({
+                    method: "POST",
+                    url: "/api/Report/Save",
+                    data: data,
+                }).then(function (res) {
+                    $scope.NewQueryName = '';
+                    $scope.SaveQueryPop = false;
+                    $scope.reload()
+                    alert("Save successful!")
+                })
+            }
+
+            $scope.next = function () {
+                $scope.step = $scope.step + 1;
+            }
+            $scope.prev = function () {
+                $scope.step = $scope.step - 1;
+            }
+            $scope.generate = function () {
+                
+                var result = [];
+                _.each($scope.Fields, function (el, i) {
+                    _.each(el.fields, function (el, i) {
+                        if (el.checked) {
+                            result.push(el);
+                        }
+                    })
+                })
+                if (result.length > 0) {
+                    $scope.step = 3;
+                    $http({
+                        method: "POST",
+                        url: "/api/Report/QueryData",
+                        data: JSON.stringify(result),
+                    }).then(function (res) {
+                        $scope.reportData = res.data[0];
+                        $scope.sqlText = res.data[1];
+
+                    })
+                } else {
+                    alert("Query is empty!");
+                }
+                
+            }
+
+            
             $scope.reload();
         });
 
