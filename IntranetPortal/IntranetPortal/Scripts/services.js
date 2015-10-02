@@ -61,43 +61,38 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem) {
 }
 
 
-function ScopeSetLastUpdateTime(url)
-{
-    $.getJSON(url,function(data)
-    {
+function ScopeSetLastUpdateTime(url) {
+    $.getJSON(url, function (data) {
         $('#LastUpdateTime').val(JSON.stringify(data));
     })
 }
 
-function ScopeDateChangedByOther(urlFunc,reLoadUIfunc,loadUIIdFunc,urlModfiyUserFunc)
-{
-    
+function ScopeDateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyUserFunc) {
+
     window.setInterval(function () {
         var url = urlFunc()
         $.getJSON(url, function (data) {
             var lastUpdateTime = JSON.stringify(data);
             var localUpdateTime = $('#LastUpdateTime').val()
             if (localUpdateTime && localUpdateTime != lastUpdateTime) {
-                if (urlModfiyUserFunc)
-                {
+                if (urlModfiyUserFunc) {
                     $.getJSON(urlModfiyUserFunc(), function (mUser) {
-                        if (mUser)
-                        {
+                        if (mUser) {
                             alert(mUser + " change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
                             reLoadUIfunc(loadUIIdFunc());
                         }
-                        
+
                     });
                 } else {
                     alert("Someone change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
                     reLoadUIfunc(loadUIIdFunc());
-                }  
-               
+                }
+
             }
         });
     }, 10000)
-   
-    
+
+
 }
 
 /* above is global functions */
@@ -188,14 +183,20 @@ app.service('ptCom', ['$http',
             }
         }
 
-        this.printDiv = function(divID){
+        this.printDiv = function (divID) {
             var divToPrint = document.getElementById(divID);
             var popupWin = window.open('', '_blank', 'width=300,height=300');
             popupWin.document.open();
             popupWin.document.write('<html <head><link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" type="text/css" /><link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" /><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" /><link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" /><link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" type="text/css" /><link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" /><link href="/css/stevencss.css" rel="stylesheet" type="text/css" /></head><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
             popupWin.document.close();
-                
-        
+
+
+        }
+
+        this.postRequest = function (url, data) {
+            $.post(url, data, function (retData) {
+                $("body").append("<iframe src='" + retData.url + "' style='display: none;' ></iframe>");
+            });
         }
     }]);
 

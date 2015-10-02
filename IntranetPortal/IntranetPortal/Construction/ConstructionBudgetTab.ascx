@@ -1,9 +1,14 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionBudgetTab.ascx.vb" Inherits="IntranetPortal.ConstructionBudgetTab" %>
 <%@ Register Assembly="DevExpress.Web.ASPxSpreadsheet.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxSpreadsheet" TagPrefix="dx" %>
 <div id="BudgetCtrl" ng-controller="BudgetCtrl">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
     <div class="budgetTitle">
         <h3>Budget Form</h3>
-        <button type="button" class="btn btn-success btn-sm pull-right">Export Excel </button>
+        <div>
+            <span style="position: relative; top: 10px;">
+                <input type="checkbox" style="display: inline-block" ng-model="checkall" ng-change="updateAll()" />CheckAll</span>
+            <button type="button" class="btn btn-success btn-sm pull-right" ng-click="exportExcel()">Export Excel</button>
+        </div>
     </div>
 
     <table class="table table-condensed">
@@ -53,7 +58,7 @@
 </div>
 <script>
 
-    angular.module('PortalApp').controller('BudgetCtrl', function ($scope, $http) {
+    angular.module('PortalApp').controller('BudgetCtrl', function ($scope, $http, ptCom) {
         $scope.data = {};
         $scope.init = function () {
             $scope.template = {};
@@ -74,6 +79,7 @@
         $scope.reload = function () {
             var newData = _.clone($scope.template, true);
             $scope.data = newData;
+            $scope.linkCreated = false;
         }
 
         $scope.load = function (data) {
@@ -107,6 +113,37 @@
         }
         $scope.getStyle = function (d) {
             if (d.style) return d.style;
+        }
+        $scope.exportExcel = function () {
+            var updata = []
+            _.each($scope.data.form, function (el, i) {
+                if (el.checked) {
+                    updata.push(el);
+                }
+            })
+            if (updata.length > 0) {
+                $http({
+                    method: "POST",
+                    url: "/api/ConstructionCases/GenerateExcel",
+                    data: JSON.stringify(updata),
+                }).then(function (res) {
+                    console.log("Download start")
+                })
+            } else {
+                alert("No data select!");
+            }
+        }
+        $scope.updateAll = function () {
+            if ($scope.checkall) {
+                _.each($scope.data.form, function (el, i) {
+                    el.checked = true;
+                })
+            } else {
+                _.each($scope.data.form, function (el, i) {
+                    el.checked = false;
+                })
+            }
+
         }
     });
 

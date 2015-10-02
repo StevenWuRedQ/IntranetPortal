@@ -134,7 +134,7 @@ Namespace Controllers
         ' DELETE: api/ConstructionCases/5
         <ResponseType(GetType(ConstructionCase))>
         Function DeleteConstructionCase(ByVal id As String) As IHttpActionResult
-            Dim constructionCase As ConstructionCase = constructionCase.GetCase(id)
+            Dim constructionCase As ConstructionCase = ConstructionCase.GetCase(id)
             If IsNothing(constructionCase) Then
                 Return NotFound()
             End If
@@ -162,7 +162,7 @@ Namespace Controllers
         <Route("api/ConstructionCases/LastLastUpdate/{bble}")>
         <ResponseType(GetType(Void))>
         Function GetLastLastUpdate(bble As String) As IHttpActionResult
-            Dim constructionCase As ConstructionCase = constructionCase.GetCase(bble)
+            Dim constructionCase As ConstructionCase = ConstructionCase.GetCase(bble)
 
             If IsNothing(constructionCase) Then
                 Return NotFound()
@@ -173,7 +173,7 @@ Namespace Controllers
         <Route("api/ConstructionCases/LastModifyUser/{bble}")>
         <ResponseType(GetType(Void))>
         Function GetLastModifyUser(bble As String) As IHttpActionResult
-            Dim constructionCase As ConstructionCase = constructionCase.GetCase(bble)
+            Dim constructionCase As ConstructionCase = ConstructionCase.GetCase(bble)
 
             If IsNothing(constructionCase) Then
                 Return NotFound()
@@ -185,20 +185,27 @@ Namespace Controllers
         End Function
 
         <Route("api/ConstructionCases/GenerateExcel")>
+        Function GenerateExcel(<FromBody> queryString As JToken) As IHttpActionResult
+
+            Dim excel = Core.ExcelBuilder.BuildBudgetReport(queryString)
+            Using tempFile = New FileStream(HttpContext.Current.Server.MapPath("~/TempDataFile/budget.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
+                tempFile.Write(excel, 0, excel.Length)
+                Return Ok()
+            End Using
+        End Function
+
+        <Route("api/ConstructionCases/GetGenerateExcel")>
         Function GetGenerateExcel(<FromBody> queryString As JToken) As HttpResponseMessage
             Dim response = New HttpResponseMessage(HttpStatusCode.OK)
-            Using ms As New MemoryStream
-                Core.ExcelBuilder.BuildBudgetReport(queryString, ms)
-                ms.Flush()
-                If Not ms Is Nothing Then
-                    response.Content = New StreamContent(ms)
-                    response.Content.Headers.ContentDisposition = New ContentDispositionHeaderValue("attachment")
-                    response.Content.Headers.ContentDisposition.FileName = "budget.xlsx"
-                    response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                    response.Content.Headers.ContentLength = ms.Length
-                End If
-                Return response
-            End Using
+            Dim fs = New FileStream(HttpContext.Current.Server.MapPath("~/TempDataFile/budget.xlsx"), FileMode.Open)
+            Dim bfs = New BinaryReader(fs).ReadBytes(fs.Length)
+            response.Content = New ByteArrayContent(bfs)
+            response.Content.Headers.Add("Content-Disposition", "inline; filename=budget.xlsx")
+                response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            response.Content.Headers.ContentLength = bfs.Length
+
+            Return response
+
         End Function
     End Class
 End Namespace
