@@ -841,11 +841,10 @@
                                 alert("Get Short sale Leads failed BBLE =" + $scope.SsCase.BBLE + " error : " + JSON.stringify(data));
                             });
 
-                        var data = { bble: leadsInfoBBLE };
-                        $http.post('/LegalUI/LegalUI.aspx/GetCaseData', data).
+                        $http.get('/LegalUI/LegalServices.svc/GetLegalCase?bble=' + leadsInfoBBLE).
                       success(function (data, status, headers, config) {
 
-                          $scope.LegalCase = $.parseJSON(data.d);
+                          $scope.LegalCase = data;
 
                       }).
                       error(function (data1) {

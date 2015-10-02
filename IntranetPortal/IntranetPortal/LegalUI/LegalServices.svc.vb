@@ -18,6 +18,11 @@ Public Class LegalServices
 
     <OperationContract()>
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
+    Public Function GetLegalCase(bble As String) As Channels.Message
+        Return Data.LegalCase.GetCase(bble).ToJson
+    End Function
+    <OperationContract()>
+    <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetLawReference(refId As Integer) As Channels.Message
         Return Legal.LawReference.GetReference(refId).ToJson
     End Function

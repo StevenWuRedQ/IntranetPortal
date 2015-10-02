@@ -172,7 +172,29 @@
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
+<script type="text/javascript">
+    function InProcessSelectChange(s, e) {
+        if (s.GetSelectedValues().indexOf('1') != -1) {
+            document.getElementById('divEvictionUsers').style.display = 'block';
+            s.SelectValues(['0']);
+        } else {
+            document.getElementById('divEvictionUsers').style.display = 'none';
+        }
 
+        if (s.GetSelectedValues().indexOf('5') != -1) {
+            document.getElementById('divThirdParty').style.display = 'block';
+        } else {
+            document.getElementById('divThirdParty').style.display = 'none';
+        }
+        var selected = s.GetSelectedValues();
+
+        if(selected.indexOf("0") != -1)
+        {
+            s.SelectValues(['3']);
+        }
+
+    }
+</script>
 <dx:ASPxPopupControl ClientInstanceName="aspxPopupInprocessClient" Width="356px" Height="350px" ID="ASPxPopupControl4"
     Modal="true" ShowFooter="true" OnWindowCallback="ASPxPopupControl4_WindowCallback" runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <HeaderTemplate>
@@ -199,23 +221,7 @@
                     <dx:ListEditItem Text="Straight Sale" Value="6" />
                     <dx:ListEditItem Text="3rd Party" Value="5" />
                 </Items>
-                <ClientSideEvents SelectedIndexChanged="function(s,e){
-                        if(s.GetSelectedValues().indexOf('1')!=-1)
-                        {
-                             document.getElementById('divEvictionUsers').style.display = 'block';
-                             s.SelectValues(['0']);     
-                        }else{
-                            document.getElementById('divEvictionUsers').style.display = 'none';
-                    }
-
-                        if(s.GetSelectedValues().indexOf('5')!=-1)
-                        {
-                             document.getElementById('divThirdParty').style.display = 'block';                             
-                        }else{
-                            document.getElementById('divThirdParty').style.display = 'none';
-                    }
-
-                    }" />
+                <ClientSideEvents SelectedIndexChanged="InProcessSelectChange" />
             </dx:ASPxCheckBoxList>
             <div id="divEvictionUsers" style="display: none; width: 300px;">
                 Eviction User: 
@@ -294,45 +300,7 @@
         </div>
     </FooterContentTemplate>
 </dx:ASPxPopupControl>
-<%--<div class="modal fade" id="LegalPopUp">
-   <iframe src="/LegalUI/LegalUI.aspx?InPopUp=true" class="noborder"></iframe>
-</div>--%>
 
-<!-- /.modal -->
-<%--<dx:ASPxPopupControl ClientInstanceName="aspxPopupLegalInfoClient" Width="680px" ID="aspxPopupLegalInfo"
-    Modal="true" ShowFooter="true" OnWindowCallback="aspxPopupLegalInfo_WindowCallback" runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-    <HeaderTemplate>
-        <div class="clearfix">
-            <div class="pop_up_header_margin">
-                <i class="fa fa-university  with_circle pop_up_header_icon"></i>
-                <span class="pop_up_header_text">In Process</span>
-            </div>
-            <div class="pop_up_buttons_div">
-                <i class="fa fa-times icon_btn" onclick="aspxPopupLegalInfoClient.Hide()"></i>
-            </div>
-        </div>
-    </HeaderTemplate>
-    <ContentCollection>
-        <dx:PopupControlContentControl runat="server" ID="aspxPopupLegalInfoClientcontecn">
-        </dx:PopupControlContentControl>
-    </ContentCollection>
-    <FooterContentTemplate>
-        <div style="height: 30px; vertical-align: central">
-
-            <span class="time_buttons" onclick="aspxPopupLegalInfoClient.Hide()">Cancel</span>
-            <span class="time_buttons" onclick="ConfirmClick();">Confirm</span>
-        </div>
-    </FooterContentTemplate>
-    <ClientSideEvents EndCallback="function(s,e){
-        if(popupShow)
-            s.Show();
-        else{
-            s.Hide();
-            
-        }
-        }"
-        Shown="function(s,e) {  $('.legal_action_div').css('display','none')}" />
-</dx:ASPxPopupControl>--%>
 
 <dx:ASPxPopupControl ClientInstanceName="aspxPopupDeadLeadsClient" Width="356px" Height="350px" ID="ASPxPopupControl5" Modal="true" ShowFooter="true" OnWindowCallback="ASPxPopupControl5_WindowCallback"
     runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
