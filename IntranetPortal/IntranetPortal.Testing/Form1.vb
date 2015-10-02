@@ -210,5 +210,7 @@ Public Class Form1
         IntranetPortal.HomeOwner.CheckLocateReportObject(txtReportToken.Text)
     End Sub
 
-
+    Private Sub ParseEamil_Click(sender As Object, e As EventArgs) Handles ParseEamil.Click
+        ParseText.Text = Core.ParseEmailService.LogInEmail()
+    End Sub
 End Class

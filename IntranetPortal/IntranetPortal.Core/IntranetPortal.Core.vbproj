@@ -49,10 +49,6 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClosedXML, Version=0.76.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
-      <HintPath>..\packages\ClosedXML.0.76.0\lib\net40-client\ClosedXML.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
@@ -70,6 +66,10 @@
     </Reference>
     <Reference Include="GeoJSON.Net.MsSqlSpatial">
       <HintPath>..\..\..\MapData\GeoJSON.Net.MsSqlSpatial\src\GeoJSON.Net.MsSqlSpatial\bin\Debug\GeoJSON.Net.MsSqlSpatial.dll</HintPath>
+    </Reference>
+    <Reference Include="ImapX, Version=2.0.0.16, Culture=neutral, PublicKeyToken=5992873d65130d1f, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImapX.2.0.0.16\lib\net45\ImapX.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.SharePoint.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SharePoint.Client.DocumentManagement, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
@@ -106,8 +106,9 @@
     <Reference Include="System.Data.DataSetExtensions">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Twilio.Twiml">
-      <HintPath>..\packages\Twilio.TwiML.3.3.6\lib\3.5\Twilio.Twiml.dll</HintPath>
+    <Reference Include="Twilio.Twiml, Version=3.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.TwiML.3.4.0\lib\3.5\Twilio.Twiml.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="TwilioSharp">
       <HintPath>..\packages\TwilioSharpCore.1.0\lib\TwilioSharp.dll</HintPath>
@@ -210,6 +211,7 @@
     <Compile Include="HolidayService.vb" />
     <Compile Include="JsArrayToStringConverter.vb" />
     <Compile Include="MapService.vb" />
+    <Compile Include="ParseEmailService.vb" />
     <Compile Include="PortalSetting.vb" />
     <Compile Include="Model\SpecialDay.vb" />
     <Compile Include="Model\SystemLog.vb" />

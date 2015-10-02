@@ -36,6 +36,8 @@ Partial Class Form1
         Me.btnInitialOwnerToken = New System.Windows.Forms.Button()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.txtReportToken = New System.Windows.Forms.TextBox()
+        Me.ParseEamil = New System.Windows.Forms.Button()
+        Me.ParseText = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Button1
@@ -158,11 +160,29 @@ Partial Class Form1
         Me.txtReportToken.Size = New System.Drawing.Size(100, 20)
         Me.txtReportToken.TabIndex = 13
         '
+        'ParseEamil
+        '
+        Me.ParseEamil.Location = New System.Drawing.Point(147, 214)
+        Me.ParseEamil.Name = "ParseEamil"
+        Me.ParseEamil.Size = New System.Drawing.Size(75, 23)
+        Me.ParseEamil.TabIndex = 14
+        Me.ParseEamil.Text = "ParseEamil"
+        Me.ParseEamil.UseVisualStyleBackColor = True
+        '
+        'ParseText
+        '
+        Me.ParseText.Location = New System.Drawing.Point(237, 216)
+        Me.ParseText.Name = "ParseText"
+        Me.ParseText.Size = New System.Drawing.Size(100, 20)
+        Me.ParseText.TabIndex = 15
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(695, 261)
+        Me.Controls.Add(Me.ParseText)
+        Me.Controls.Add(Me.ParseEamil)
         Me.Controls.Add(Me.txtReportToken)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.btnInitialOwnerToken)
@@ -197,5 +217,6 @@ Partial Class Form1
     Friend WithEvents btnInitialOwnerToken As System.Windows.Forms.Button
     Friend WithEvents Button10 As System.Windows.Forms.Button
     Friend WithEvents txtReportToken As System.Windows.Forms.TextBox
-
+    Friend WithEvents ParseEamil As Button
+    Friend WithEvents ParseText As TextBox
 End Class

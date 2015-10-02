@@ -229,20 +229,20 @@
                                        <%-- <dx:GridViewDataColumn FieldName="ZipCode">
                                             
                                         </dx:GridViewDataColumn>--%>
-                                        <dx:GridViewDataTextColumn FieldName="Neighborhood" Width="80px" Caption="Neighbor"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataSpinEditColumn FieldName="NYCSqft" Width="60px" Caption="SQFT"></dx:GridViewDataSpinEditColumn>
-                                        <dx:GridViewDataTextColumn FieldName="LotDem" Width="100px"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="Neighborhood" Width="85px" Caption="Neighbor" Settings-HeaderFilterMode="CheckedList"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataSpinEditColumn FieldName="NYCSqft" Width="60px" Caption="SQFT" Settings-HeaderFilterMode="CheckedList"></dx:GridViewDataSpinEditColumn>
+                                        <dx:GridViewDataTextColumn FieldName="LotDem" Width="100px" Settings-HeaderFilterMode="CheckedList"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="PropertyClass" Caption="Class" Width="60px" Settings-HeaderFilterMode="CheckedList"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="MortgageCombo" Width="80px" Caption="MtgCOMBO" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="C1stServicer" Caption="Servicer" Width="80px"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="TaxLiensAmount" Caption="TaxCOMBO" Width="60px" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="TypeText" Width="40px" CellStyle-HorizontalAlign="Center" CellStyle-VerticalAlign="Middle">
+                                        <dx:GridViewDataTextColumn FieldName="MortgageCombo" Width="95px" Caption="MtgCOMBO" PropertiesTextEdit-DisplayFormatString="C" Settings-HeaderFilterMode="CheckedList"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="C1stServicer" Caption="Servicer" Width="80px" Settings-HeaderFilterMode="CheckedList"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="TaxLiensAmount" Caption="TaxCOMBO" Width="70px" PropertiesTextEdit-DisplayFormatString="C" Settings-HeaderFilterMode="CheckedList"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="TypeText" Caption="Type" Width="50px" CellStyle-HorizontalAlign="Center" CellStyle-VerticalAlign="Middle" Settings-HeaderFilterMode="CheckedList">
                                             <DataItemTemplate>
                                                 <dx:ASPxImage EmptyImage-Url="~/images/ide.png" EmptyImage-Width="16" EmptyImage-Height="16" runat="server" ID="imgType" Width="24" Height="24" CssClass="always_show">
                                                 </dx:ASPxImage>
                                             </DataItemTemplate>
                                         </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataColumn FieldName="Comments" Width="50px" Caption="Recycle">
+                                        <dx:GridViewDataColumn FieldName="Comments" Width="60px" Caption="Recycle" Settings-HeaderFilterMode="CheckedList">
                                             <DataItemTemplate>
                                                 <dx:ASPxCheckBox runat="server" ID="chkRecycled" ToolTip="Recycled" Checked='<%# Eval("IsRecycled")%>' ReadOnly="true" Visible='<%# Eval("IsRecycled")%>'></dx:ASPxCheckBox>
                                             </DataItemTemplate>
