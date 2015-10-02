@@ -704,47 +704,6 @@
                           ]
                       },
                       {
-                          "category": "LISTING AGENT",
-                          "fields": [
-                            {
-                                "name": "NAME",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "CELL #",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "EMAIL",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "BROKER",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "ADDRESS",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "OFFICE #",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            }
-                          ]
-                      },
-                      {
                           "category": "SELLER ATTORNEY",
                           "fields": [
                             {

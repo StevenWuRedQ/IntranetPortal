@@ -8,19 +8,18 @@
     <div id="ReportWizardCtrl" ng-controller="ReportWizardCtrl">
         <div class="container" style="padding: 20px; font-size: small">
             <div class="nga-fast nga-fade" ng-show="step==1">
-                <div ng-repeat="c in Fields" class="col-sm-6 col-md-6">
+                <div ng-repeat="c in Fields track by c.category" class="col-sm-6 col-md-6">
                     <table class="table table-condensed">
                         <tr>
                             <th class="text-primary">{{c.category}} &nbsp
-                            <pt-collapse model="c.collpsed"></pt-collapse>
+                            <pt-collapse model="collpsed[c.category]"></pt-collapse>
                             </th>
                         </tr>
-                        <tr ng-repeat="f in c.fields" collapse="!c.collpsed">
+                        <tr ng-repeat="f in c.fields track by f.name" collapse="!collpsed[c.category]">
                             <td>
                                 <label for="{{camel(f.name)}}">{{f.name}}</label></td>
                             <td>
                                 <input type="checkbox" id="{{camel(f.name)}}" style="display: block" ng-model="f.checked" /></td>
-
                         </tr>
                     </table>
                 </div>
@@ -69,8 +68,8 @@
                                             <span ng-if="f.type=='list'" style="width: 300px; display: inline-block">
                                                 <span>
                                                     <ui-select multiple ng-model="x.input1" ng-change="updateListFilter(x)">
-                                                <ui-select-match placeholder="Choose items">{{$item}}</ui-select-match>
-                                                <ui-select-choices repeat="o in f.options | filter: $search.search">
+                                                    <ui-select-match placeholder="Choose items">{{$item}}</ui-select-match>
+                                                    <ui-select-choices repeat="o in f.options | filter: $search.search">
                                                     {{o}}
                                                 </ui-select-choices>
                                             </ui-select>
@@ -82,7 +81,6 @@
                                                     <option value="0">No</option>
                                                 </select>
                                             </span>
-
                                             <pt-del ng-click="removeFilter(f, $index)"></pt-del>
                                         </span>
                                     </span>
@@ -139,7 +137,7 @@
                             <div>
                                 <ul style="margin-right: 20px; font-size: 18px; list-style: none">
                                     <li><i class="fa fa-file-o"></i>&nbsp;<span>Test</span>&nbsp<pt-del class="pull-right"></pt-del></li>
-                                    <li ng-repeat="q in SavedReports">
+                                    <li class="icon_btn" ng-repeat="q in SavedReports" ng-click="load(q)">
                                         <i class="fa fa-file-o"></i>&nbsp;<span>{{q.Name}}</span>&nbsp<pt-del class="pull-right"></pt-del>
                                     </li>
                                 </ul>
@@ -175,12 +173,11 @@
         portalApp.controller("ReportWizardCtrl", function ($scope, $http, $timeout) {
             $scope.step = 1;
             $scope.gridState = null;
+            $scope.collpsed = [];
             $scope.customLoad = function () {
-                debugger;
                 return $scope.gridState;
             }
             $scope.customSave = function (gridState) {
-                debugger;
                 $scope.gridState = gridState;
             };
             $scope.stateStoring = {
@@ -189,19 +186,31 @@
                 customLoad: $scope.customLoad,
                 customSave: $scope.customSave
             };
-            $scope.reload = function () {
+            $scope.reload = function (callback) {
                 $http.get("<%= Template %>.js")
                     .then(function (res) {
                         $scope.Fields = res.data[0].Fields;
+                        if (callback) callback()
                     })
                 $http.get("/api/Report/Load")
                     .then(function (res) {
                         $scope.SavedReports = res.data;
-                        debugger;
                     })
             };
-            $scope.load = function (id) {
-                $scope.reload();
+            $scope.load = function (q) {
+                $scope.reload(
+                    function () {
+                        if (q.ReportId) {
+                            $http.get("/api/Report/Load/" + q.ReportId)
+                            .then(function (res) {
+                                var data = res.data
+                                $scope.Fields = JSON.parse(data.Query);
+                                $scope.gridState = JSON.parse(data.Layout);
+                                $scope.generate();
+                            })
+                        }
+                    }
+                );
             }
 
             $scope.camel = _.camelCase;
@@ -383,8 +392,9 @@
                     url: "/api/Report/QueryData",
                     data: JSON.stringify(result),
                 }).then(function (res) {
-                    debugger;
-                    $scope.reportData = res.data;
+                    $scope.reportData = res.data[0];
+                    $scope.sqlText = res.data[1];
+
                 })
             }
 
@@ -401,19 +411,18 @@
                     var data = {};
                     data.Query = JSON.stringify($scope.Fields);
                     data.Layout = JSON.stringify($scope.gridState);
-                    data.Name = !$scope.NewQueryName
+                    data.Name = $scope.NewQueryName;
+                    data.sqlText = $scope.sqlText;
                     data = JSON.stringify(data)
                     $http({
                         method: "POST",
                         url: "/api/Report/Save",
                         data: data,
                     }).then(function (res) {
-                        debugger;
                         $scope.NewQueryName = '';
                         $scope.SaveQueryPop = false;
                     })
                 }
-                
             }
 
             $scope.reload();

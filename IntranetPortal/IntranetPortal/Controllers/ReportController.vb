@@ -34,7 +34,8 @@ Namespace Controllers
             Try
                 Dim qb As New Core.QueryBuilder
                 Dim dt = qb.LoadReportData(queryString, "ShortSaleCases")
-                Return Ok(dt)
+                Dim sql = qb.BuildSelectQuery(queryString, "ShortSaleCases")
+                Return Ok({dt, sql})
             Catch ex As Exception
                 Throw
             End Try

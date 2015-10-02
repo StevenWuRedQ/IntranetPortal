@@ -53,8 +53,7 @@ Partial Public Class CustomReport
                 Me.UpdateTime = DateTime.Now
             End If
 
-            Me.SqlText = New QueryBuilder().BuildSelectQuery(Me.Query, Me.BaseTable)
-
+            ' Me.SqlText = New QueryBuilder().BuildSelectQuery(Me.Query, Me.BaseTable)
             ctx.SaveChanges()
         End Using
     End Sub
