@@ -86,18 +86,23 @@
                                                                                 <div class="font_size_bold" id="ShortSaleTabHead">ShortSale</div>
                                                                             </a>
                                                                         </li>
+                                                                        <%-- Only MyIdeal property is show those title --%>
+                                                                        <% If IntranetPortal.Employee.CurrentAppId = 1 Then  %>
                                                                         <li class="short_sale_head_tab">
                                                                             <a href="#home_owner" role="tab" data-toggle="tab" class="tab_button_a">
                                                                                 <i class="fa fa-key head_tab_icon_padding"></i>
                                                                                 <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;Title&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                                                             </a>
                                                                         </li>
+                                                                        <% End if %>
                                                                         <li class="short_sale_head_tab">
                                                                             <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
                                                                                 <i class="fa fa-file head_tab_icon_padding"></i>
                                                                                 <div class="font_size_bold">Documents</div>
                                                                             </a>
                                                                         </li>
+                                                                        <%-- Only MyIdeal property is show those title --%>
+                                                                        <% If IntranetPortal.Employee.CurrentAppId = 1 Then  %>
                                                                         <li class="short_sale_head_tab" ng-show="SsCase&&SsCase.BBLE">
                                                                             <a class="tab_button_a">
                                                                                 <i class="fa fa-list-ul head_tab_icon_padding"></i>
@@ -128,6 +133,7 @@
                                                                                 </ul>
                                                                             </div>
                                                                         </li>
+                                                                         <% End If   %>
                                                                         <li class="pull-right" style="margin-right: 10px; color: #ffa484">
                                                                             <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveShortSale()" data-original-title="Save"></i>
                                                                             <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Re-Assign" onclick="tmpBBLE=leadsInfoBBLE; popupCtrReassignEmployeeListCtr.PerformCallback();popupCtrReassignEmployeeListCtr.ShowAtElement(this);"></i>
@@ -835,6 +841,17 @@
                                 alert("Get Short sale Leads failed BBLE =" + $scope.SsCase.BBLE + " error : " + JSON.stringify(data));
                             });
 
+                        var data = { bble: leadsInfoBBLE };
+                        $http.post('/LegalUI/LegalUI.aspx/GetCaseData', data).
+                      success(function (data, status, headers, config) {
+
+                          $scope.LegalCase = $.parseJSON(data.d);
+
+                      }).
+                      error(function (data1) {
+                          console.log("Fail to load data : " + leadsInfoBBLE + " :" + JSON.stringify(data1))
+                         // alert("Fail to load data : " + leadsInfoBBLE + " :" + JSON.stringify(data1));
+                      });
                     }).
                     error(function (data, status, headers, config) {
                         alert("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));

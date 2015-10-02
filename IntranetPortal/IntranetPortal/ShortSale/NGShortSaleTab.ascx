@@ -36,7 +36,12 @@
 
                     <%--note list--%>
                     <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
-
+                        
+                         <div class="note_item" ng-show="LegalCase && LegalCase.LegalStatusString">
+                            <i class="fa fa-exclamation-circle note_img"></i>
+                            <span class="note_text">Foreclose status is {{LegalCase.LegalStatusString}} now !</span>
+                            
+                        </div>
                         <div class="note_item" ng-repeat="comment in SsCase.Comments" ng-style="$index%2?{'background':'#e8e8e8'}:{}">
                             <i class="fa fa-exclamation-circle note_img"></i>
                             <span class="note_text">{{comment.Comments}}</span>
