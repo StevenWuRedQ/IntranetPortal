@@ -1065,6 +1065,13 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LeadDocSearch\LeadDocSearchList.ascx.designer.vb">
+      <DependentUpon>LeadDocSearchList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LeadDocSearch\LeadDocSearchList.ascx.vb">
+      <DependentUpon>LeadDocSearchList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="LeadsGenerator\LeadsGenerator.aspx.designer.vb">
       <DependentUpon>LeadsGenerator.aspx</DependentUpon>
     </Compile>
@@ -2735,6 +2742,7 @@
     <Content Include="js\release\jquery-ui.js" />
     <Content Include="js\release\jquery.js" />
     <Content Include="js\release\usr_v2_8_7.js" />
+    <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchApproval.aspx" />

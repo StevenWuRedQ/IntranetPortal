@@ -2,6 +2,7 @@
 
 <MetadataType(GetType(LeadInfoDocumentSearchCaseMetaData))>
 Public Class LeadInfoDocumentSearch
+    Public Property ResutContent As String
     Public Shared Function Exist(bble As String) As Boolean
         Using ctx As New IntranetPortalEntities
             Return ctx.LeadInfoDocumentSearches.Find(bble) IsNot Nothing
@@ -13,6 +14,8 @@ Public Class LeadInfoDocumentSearch
             Return ctx.LeadInfoDocumentSearches.ToList
         End Using
     End Function
+
+
     Public Enum SearchStauts
         NewSearch = 0
         Completed = 1

@@ -11,41 +11,59 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class LeadTaxSearchRequest
+Partial Public Class LeadDocSearchList
     
     '''<summary>
-    '''ASPxSplitter1 control.
+    '''lblLeadCategory control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
+    Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxLabel
     
     '''<summary>
-    '''SplitterContentControl1 control.
+    '''divExpand control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.SplitterContentControl
+    Protected WithEvents divExpand As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''LeadDocSearchList control.
+    '''hfCaseStatus control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LeadDocSearchList As Global.IntranetPortal.LeadDocSearchList
+    Protected WithEvents hfCaseStatus As Global.System.Web.UI.WebControls.HiddenField
     
     '''<summary>
-    '''SearchRecodingPopupCtrl1 control.
+    '''hfCaseBBLEs control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SearchRecodingPopupCtrl1 As Global.IntranetPortal.SearchRecodingPopupCtrl
+    Protected WithEvents hfCaseBBLEs As Global.System.Web.UI.WebControls.HiddenField
+    
+    '''<summary>
+    '''gridDocSearch control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridDocSearch As Global.DevExpress.Web.ASPxGridView
+    
+    '''<summary>
+    '''ASPxPopupMenu2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupMenu2 As Global.DevExpress.Web.ASPxPopupMenu
 End Class

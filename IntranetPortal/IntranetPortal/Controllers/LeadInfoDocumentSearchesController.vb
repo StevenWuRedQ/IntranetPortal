@@ -46,6 +46,15 @@ Namespace Controllers
             leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
             leadInfoDocumentSearch.UpdateDate = Date.Now
 
+            If (leadInfoDocumentSearch.ResutContent IsNot Nothing) Then
+                Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
+                Dim maildata As New Dictionary(Of String, String)
+                maildata.Add("Address", l.PropertyAddress)
+                maildata.Add("UserName", leadInfoDocumentSearch.CreateBy)
+                maildata.Add("ResutContent", leadInfoDocumentSearch.ResutContent)
+                Core.EmailService.SendMail(Employee.GetInstance(leadInfoDocumentSearch.CreateBy).Email, Employee.GetInstance(leadInfoDocumentSearch.UpdateBy).Email & ";" & Employee.CEO.Email, "DocSearchCompleted", maildata)
+            End If
+
             Try
                 db.SaveChanges()
             Catch ex As DbUpdateConcurrencyException

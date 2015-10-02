@@ -134,7 +134,7 @@ Namespace Controllers
         ' DELETE: api/ConstructionCases/5
         <ResponseType(GetType(ConstructionCase))>
         Function DeleteConstructionCase(ByVal id As String) As IHttpActionResult
-            Dim constructionCase As ConstructionCase = ConstructionCase.GetCase(id)
+            Dim constructionCase As ConstructionCase = constructionCase.GetCase(id)
             If IsNothing(constructionCase) Then
                 Return NotFound()
             End If
@@ -162,7 +162,7 @@ Namespace Controllers
         <Route("api/ConstructionCases/LastLastUpdate/{bble}")>
         <ResponseType(GetType(Void))>
         Function GetLastLastUpdate(bble As String) As IHttpActionResult
-            Dim constructionCase As ConstructionCase = ConstructionCase.GetCase(bble)
+            Dim constructionCase As ConstructionCase = constructionCase.GetCase(bble)
 
             If IsNothing(constructionCase) Then
                 Return NotFound()
@@ -173,7 +173,7 @@ Namespace Controllers
         <Route("api/ConstructionCases/LastModifyUser/{bble}")>
         <ResponseType(GetType(Void))>
         Function GetLastModifyUser(bble As String) As IHttpActionResult
-            Dim constructionCase As ConstructionCase = ConstructionCase.GetCase(bble)
+            Dim constructionCase As ConstructionCase = constructionCase.GetCase(bble)
 
             If IsNothing(constructionCase) Then
                 Return NotFound()
@@ -185,18 +185,29 @@ Namespace Controllers
         End Function
 
         <Route("api/ConstructionCases/GenerateExcel")>
-        Function GetGenerateExcel(<FromBody> queryString As JToken) As HttpResponseMessage
-            Dim response = New HttpResponseMessage(HttpStatusCode.OK)
-            Using ms As New MemoryStream
-                Core.ExcelBuilder.BuildBudgetReport(queryString, ms)
-                ms.Flush()
-                If Not ms Is Nothing Then
-                    response.Content = New StreamContent(ms)
-                    response.Content.Headers.Add("Content-Disposition", "attachement; filename=budget.xlsx")
-                    response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                End If
-            End Using
-            Return response
+        Function GetGenerateExcel() As HttpResponseMessage
+            'Dim response = New HttpResponseMessage(HttpStatusCode.OK)
+
+            'Dim wb As New Excel.XLWorkbook
+            'Dim ws = wb.Worksheets.Add("sheet1")
+            'ws.Cell("B2").Value = "Contacts"
+
+            'ws.Cell("B3").Value = "FName"
+            'ws.Cell("B4").Value = "John"
+            'ws.Cell("B5").Value = "Hank"
+            'ws.Cell("B6").Value = "Dagny"
+
+
+            'ws.Cell("C3").Value = "LName"
+            'ws.Cell("C4").Value = "Galt"
+            'ws.Cell("C5").Value = "Rearden"
+            'ws.Cell("C6").Value = "Taggart"
+            'Dim stream = New MemoryStream
+            'wb.SaveAs(stream)
+
+            'response.Content = New StreamContent(stream)
+            'response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/octet-stream")
+            'Return response
         End Function
     End Class
 End Namespace

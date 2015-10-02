@@ -37,7 +37,7 @@
     <div class="ss_form">
         <h4 class="ss_form_title">Mortgage</h4>
         <ul class="ss_form_box clearfix">
-            <li class="" style="width: 97%; width: auto">
+            <li class="ss_form_item" style="width: 97%; width: auto">
                 <table class="table table-striped">
                     <thead>
                         <tr>
