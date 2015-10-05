@@ -156,6 +156,24 @@ Imports IntranetPortal.Core
         Assert.IsTrue(dt.Rows.Count > 0)
     End Sub
 
+    <TestMethod()>
+    Public Sub GenerateReportTeamplateTest()
+        Dim qb As New QueryBuilder
+        Dim js = qb.GenerateReportTemplate("SSSecondMortgage", {"BBLE", "MortgageId", "CaseId"})
+        Assert.IsTrue(js.Count > 0)
+
+        Dim tables = <string>
+                         [
+                            {
+                                "name": "SS_Valuation",
+                                "ignoreFields": ["BBLE", "MortgageId", "CaseId"]
+                            }
+                         ]
+                     </string>
+        Dim template = qb.GenerateReportTemplate(tables)
+        Assert.IsTrue(template.Length > 0)
+    End Sub
+
     Private jsonQuery As String = <string>
                          [
                                {

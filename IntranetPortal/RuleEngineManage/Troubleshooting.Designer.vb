@@ -110,6 +110,7 @@ Partial Class Troubleshooting
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnComplaintsRefresh = New System.Windows.Forms.Button()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.Button20 = New System.Windows.Forms.Button()
         Me.Button19 = New System.Windows.Forms.Button()
         Me.Button18 = New System.Windows.Forms.Button()
         Me.Button17 = New System.Windows.Forms.Button()
@@ -118,7 +119,11 @@ Partial Class Troubleshooting
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Button15 = New System.Windows.Forms.Button()
-        Me.Button20 = New System.Windows.Forms.Button()
+        Me.TabPage10 = New System.Windows.Forms.TabPage()
+        Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
+        Me.btnGeneratTemplate = New System.Windows.Forms.Button()
+        Me.txtReportTables = New System.Windows.Forms.TextBox()
+        Me.txtTemplateResult = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -140,6 +145,11 @@ Partial Class Troubleshooting
         Me.TabPage7.SuspendLayout()
         Me.TabPage8.SuspendLayout()
         Me.TabPage9.SuspendLayout()
+        Me.TabPage10.SuspendLayout()
+        CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainer2.Panel1.SuspendLayout()
+        Me.SplitContainer2.Panel2.SuspendLayout()
+        Me.SplitContainer2.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -386,6 +396,7 @@ Partial Class Troubleshooting
         Me.TabControl1.Controls.Add(Me.TabPage7)
         Me.TabControl1.Controls.Add(Me.TabPage8)
         Me.TabControl1.Controls.Add(Me.TabPage9)
+        Me.TabControl1.Controls.Add(Me.TabPage10)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 46)
         Me.TabControl1.Name = "TabControl1"
@@ -1001,6 +1012,15 @@ Partial Class Troubleshooting
         Me.TabPage9.Text = "Construction"
         Me.TabPage9.UseVisualStyleBackColor = True
         '
+        'Button20
+        '
+        Me.Button20.Location = New System.Drawing.Point(261, 44)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(75, 23)
+        Me.Button20.TabIndex = 8
+        Me.Button20.Text = "Button20"
+        Me.Button20.UseVisualStyleBackColor = True
+        '
         'Button19
         '
         Me.Button19.Location = New System.Drawing.Point(159, 44)
@@ -1070,14 +1090,62 @@ Partial Class Troubleshooting
         Me.Button15.Text = "UpLoad Activity"
         Me.Button15.UseVisualStyleBackColor = True
         '
-        'Button20
+        'TabPage10
         '
-        Me.Button20.Location = New System.Drawing.Point(261, 44)
-        Me.Button20.Name = "Button20"
-        Me.Button20.Size = New System.Drawing.Size(75, 23)
-        Me.Button20.TabIndex = 8
-        Me.Button20.Text = "Button20"
-        Me.Button20.UseVisualStyleBackColor = True
+        Me.TabPage10.Controls.Add(Me.SplitContainer2)
+        Me.TabPage10.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage10.Name = "TabPage10"
+        Me.TabPage10.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage10.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage10.TabIndex = 10
+        Me.TabPage10.Text = "Report"
+        Me.TabPage10.UseVisualStyleBackColor = True
+        '
+        'SplitContainer2
+        '
+        Me.SplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer2.Location = New System.Drawing.Point(3, 3)
+        Me.SplitContainer2.Name = "SplitContainer2"
+        '
+        'SplitContainer2.Panel1
+        '
+        Me.SplitContainer2.Panel1.Controls.Add(Me.btnGeneratTemplate)
+        Me.SplitContainer2.Panel1.Controls.Add(Me.txtReportTables)
+        '
+        'SplitContainer2.Panel2
+        '
+        Me.SplitContainer2.Panel2.Controls.Add(Me.txtTemplateResult)
+        Me.SplitContainer2.Size = New System.Drawing.Size(736, 323)
+        Me.SplitContainer2.SplitterDistance = 245
+        Me.SplitContainer2.TabIndex = 0
+        '
+        'btnGeneratTemplate
+        '
+        Me.btnGeneratTemplate.Location = New System.Drawing.Point(52, 286)
+        Me.btnGeneratTemplate.Name = "btnGeneratTemplate"
+        Me.btnGeneratTemplate.Size = New System.Drawing.Size(126, 23)
+        Me.btnGeneratTemplate.TabIndex = 1
+        Me.btnGeneratTemplate.Text = "Generat Template"
+        Me.btnGeneratTemplate.UseVisualStyleBackColor = True
+        '
+        'txtReportTables
+        '
+        Me.txtReportTables.Dock = System.Windows.Forms.DockStyle.Top
+        Me.txtReportTables.Location = New System.Drawing.Point(0, 0)
+        Me.txtReportTables.Multiline = True
+        Me.txtReportTables.Name = "txtReportTables"
+        Me.txtReportTables.Size = New System.Drawing.Size(245, 280)
+        Me.txtReportTables.TabIndex = 0
+        '
+        'txtTemplateResult
+        '
+        Me.txtTemplateResult.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtTemplateResult.Location = New System.Drawing.Point(0, 0)
+        Me.txtTemplateResult.Multiline = True
+        Me.txtTemplateResult.Name = "txtTemplateResult"
+        Me.txtTemplateResult.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtTemplateResult.Size = New System.Drawing.Size(487, 323)
+        Me.txtTemplateResult.TabIndex = 1
         '
         'Troubleshooting
         '
@@ -1118,6 +1186,13 @@ Partial Class Troubleshooting
         Me.TabPage8.PerformLayout()
         Me.TabPage9.ResumeLayout(False)
         Me.TabPage9.PerformLayout()
+        Me.TabPage10.ResumeLayout(False)
+        Me.SplitContainer2.Panel1.ResumeLayout(False)
+        Me.SplitContainer2.Panel1.PerformLayout()
+        Me.SplitContainer2.Panel2.ResumeLayout(False)
+        Me.SplitContainer2.Panel2.PerformLayout()
+        CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1218,4 +1293,9 @@ Partial Class Troubleshooting
     Friend WithEvents Button18 As Button
     Friend WithEvents Button19 As Button
     Friend WithEvents Button20 As Button
+    Friend WithEvents TabPage10 As TabPage
+    Friend WithEvents SplitContainer2 As SplitContainer
+    Friend WithEvents txtReportTables As TextBox
+    Friend WithEvents btnGeneratTemplate As Button
+    Friend WithEvents txtTemplateResult As TextBox
 End Class

@@ -7,76 +7,75 @@
                         "fields": [
                           {
                               "name": "NAME",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller1",
+                              "column": "FullName",
                               "type": "string"
                           },
                           {
                               "name": "DOB",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller1",
+                              "column": "DOB",
                               "type": "date"
                           },
                           {
                               "name": "SSN",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller1",
+                              "column": "SSN",
                               "type": "number"
                           },
                           {
                               "name": "Mail Address",
-                              "table": "",
-                              "column": "",
-                              "type": "list",
-                              "options": ["1", "2", "3"]
+                              "table": "SS_Seller1",
+                              "column": "MailAddress",
+                              "type": "string"
                           },
                           {
                               "name": "Cell #",
-                              "table": "",
-                              "column": "",
-                              "type": "boolean"
+                              "table": "SS_Seller1",
+                              "column": "Phone",
+                              "type": "string"
                           },
                           {
                               "name": "Additional #",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller1",
+                              "column": "AdlPhone",
                               "type": "string"
                           },
                           {
                               "name": "Email Address",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller1",
+                              "column": "Email",
                               "type": "string"
                           },
                            {
                                "name": "BANKRUPTCY",
-                               "table": "",
-                               "column": "",
+                               "table": "SS_Seller1",
+                               "column": "Bankruptcy",
                                "type": "boolean"
                            },
                           {
                               "name": "BANK ACCOUNT",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller1",
+                              "column": "Bankaccount",
                               "type": "boolean"
 
                           },
                           {
                               "name": "TAX RETURNS",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller1",
+                              "column": "TaxReturn",
                               "type": "boolean"
                           },
                           {
                               "name": "EMPLOYED",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller1",
+                              "column": "Employed",
                               "type": "string"
                           },
                           {
                               "name": "PAYSTUBS",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller1",
+                              "column": "Paystubs",
                               "type": "boolean"
                           }
                         ]
@@ -84,77 +83,77 @@
                     {
                         "category": "Seller2",
                         "fields": [
-                          {
-                              "name": "NAME",
-                              "table": "",
-                              "column": "",
-                              "type": "string"
-                          },
+                           {
+                               "name": "NAME",
+                               "table": "SS_Seller2",
+                               "column": "FullName",
+                               "type": "string"
+                           },
                           {
                               "name": "DOB",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller2",
+                              "column": "DOB",
                               "type": "date"
                           },
                           {
                               "name": "SSN",
-                              "table": "",
-                              "column": "",
-                              "type": "string"
+                              "table": "SS_Seller2",
+                              "column": "SSN",
+                              "type": "number"
                           },
                           {
                               "name": "Mail Address",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller2",
+                              "column": "MailAddress",
                               "type": "string"
                           },
                           {
                               "name": "Cell #",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller2",
+                              "column": "Phone",
                               "type": "string"
                           },
                           {
                               "name": "Additional #",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller2",
+                              "column": "AdlPhone",
                               "type": "string"
                           },
                           {
                               "name": "Email Address",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller2",
+                              "column": "Email",
                               "type": "string"
                           },
                            {
                                "name": "BANKRUPTCY",
-                               "table": "",
-                               "column": "",
+                               "table": "SS_Seller2",
+                               "column": "Bankruptcy",
                                "type": "boolean"
                            },
                           {
                               "name": "BANK ACCOUNT",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller2",
+                              "column": "Bankaccount",
                               "type": "boolean"
 
                           },
                           {
                               "name": "TAX RETURNS",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller2",
+                              "column": "TaxReturn",
                               "type": "boolean"
                           },
                           {
                               "name": "EMPLOYED",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller2",
+                              "column": "Employed",
                               "type": "string"
                           },
                           {
                               "name": "PAYSTUBS",
-                              "table": "",
-                              "column": "",
+                              "table": "SS_Seller2",
+                              "column": "Paystubs",
                               "type": "boolean"
                           }
                         ]
@@ -187,70 +186,70 @@
                           "fields": [
                             {
                                 "name": "Floor Id",
-                                "table": "PropertyFloors",
+                                "table": "SS_Floor1",
                                 "column": "FloorId",
                                 "type": "number"
                             },
                             {
                                 "name": "Description",
-                                "table": "PropertyFloors",
+                                "table": "SS_Floor1",
                                 "column": "Description",
                                 "type": "string"
                             }, {
                                 "name": "Bedroom",
-                                "table": "PropertyFloors",
+                                "table": "SS_Floor1",
                                 "column": "Bedroom",
                                 "type": "number"
                             }, {
                                 "name": "Bathroom",
-                                "table": "PropertyFloors",
+                                "table": "SS_Floor1",
                                 "column": "Bathroom",
                                 "type": "number"
                             }, {
                                 "name": "Livingroom",
-                                "table": "PropertyFloors",
+                                "table": "SS_Floor1",
                                 "column": "Livingroom",
                                 "type": "number"
                             }, {
                                 "name": "Diningroom",
-                                "table": "PropertyFloors",
+                                "table": "SS_Floor1",
                                 "column": "Diningroom",
                                 "type": "number"
 
                             }, {
                                 "name": "Occupied",
-                                "table": "PropertyFloors",
+                                "table": "SS_Floor1",
                                 "column": "Occupied",
                                 "type": "list",
                                 "options": ["Vacant", "Seller", "Tenants (Coop)", "Tenants (Non-Coop)"]
 
                             }, {
                                 "name": "Access",
-                                "table": "PropertyFloors",
+                                "table": "SS_Floor1",
                                 "column": "Access",
                                 "type": "string"
 
                             }, {
                                 "name": "LockBox",
-                                "table": "PropertyFloors",
+                                "table": "SS_Floor1",
                                 "column": "LockBox",
                                 "type": "string"
 
                             }, {
                                 "name": "LockupDate",
-                                "table": "PropertyFloors",
+                                "table": "SS_Floor1",
                                 "column": "LockupDate",
                                 "type": "date"
 
                             }, {
                                 "name": "LockedBy",
-                                "table": "PropertyFloors",
+                                "table": "SS_Floor1",
                                 "column": "LockedBy",
                                 "type": "string"
 
                             }, {
                                 "name": "LastChecked",
-                                "table": "PropertyFloors",
+                                "table": "SS_Floor1",
                                 "column": "LastChecked",
                                 "type": "date"
                             }
@@ -271,83 +270,539 @@
                       {
                           "category": "Mortgage 1",
                           "fields": [
-                            {
-                                "name": "AUCTION DATE",
-                                "table": "",
-                                "column": "",
-                                "type": "boolean"
-                            },
-                            {
-                                "name": "DATE OF SALE",
-                                "table": "",
-                                "column": "",
-                                "type": "date"
-                            },
-                            {
-                                "name": "DATE VERIFIED",
-                                "table": "",
-                                "column": "",
-                                "type": "date"
-                            },
-                            {
-                                "name": "PAYOFF REQUESTED",
-                                "table": "",
-                                "column": "",
-                                "type": "date"
-                            },
-                            {
-                                "name": "PAYOFF EXPIRES",
-                                "table": "",
-                                "column": "",
-                                "type": "date"
-                            },
-                            {
-                                "name": "PAYOFF AMOUNT",
-                                "table": "",
-                                "column": "",
-                                "type": "number"
-                            }
+                             {
+                                 "name": "HasAuctionDate",
+                                 "table": "SSFirstMortgage",
+                                 "column": "HasAuctionDate",
+                                 "type": "boolean"
+                             },
+      {
+          "name": "AuctionDate",
+          "table": "SSFirstMortgage",
+          "column": "AuctionDate",
+          "type": "date"
+      },
+      {
+          "name": "DateOfSale",
+          "table": "SSFirstMortgage",
+          "column": "DateOfSale",
+          "type": "date"
+      },
+      {
+          "name": "DateVerified",
+          "table": "SSFirstMortgage",
+          "column": "DateVerified",
+          "type": "date"
+      },
+      {
+          "name": "PayoffExpired",
+          "table": "SSFirstMortgage",
+          "column": "PayoffExpired",
+          "type": "date"
+      },
+      {
+          "name": "PayoffRequested",
+          "table": "SSFirstMortgage",
+          "column": "PayoffRequested",
+          "type": "date"
+      },
+      {
+          "name": "PayoffAmount",
+          "table": "SSFirstMortgage",
+          "column": "PayoffAmount",
+          "type": "number"
+      },
+      {
+          "name": "LenderId",
+          "table": "SSFirstMortgage",
+          "column": "LenderId",
+          "type": "number"
+      },
+      {
+          "name": "Lender",
+          "table": "SSFirstMortgage",
+          "column": "Lender",
+          "type": "string"
+      },
+      {
+          "name": "Loan",
+          "table": "SSFirstMortgage",
+          "column": "Loan",
+          "type": "string"
+      },
+      {
+          "name": "LoanAmount",
+          "table": "SSFirstMortgage",
+          "column": "LoanAmount",
+          "type": "number"
+      },
+      {
+          "name": "LastPaymentDate",
+          "table": "SSFirstMortgage",
+          "column": "LastPaymentDate",
+          "type": "date"
+      },
+      {
+          "name": "LoanType",
+          "table": "SSFirstMortgage",
+          "column": "LoanType",
+          "type": "string"
+      },
+      {
+          "name": "AuthorizationSent",
+          "table": "SSFirstMortgage",
+          "column": "AuthorizationSent",
+          "type": "string"
+      },
+      {
+          "name": "CancelationSent",
+          "table": "SSFirstMortgage",
+          "column": "CancelationSent",
+          "type": "date"
+      },
+      {
+          "name": "LienPosition",
+          "table": "SSFirstMortgage",
+          "column": "LienPosition",
+          "type": "string"
+      },
+      {
+          "name": "CounterOffer",
+          "table": "SSFirstMortgage",
+          "column": "CounterOffer",
+          "type": "string"
+      },
+      {
+          "name": "ShortSaleDept",
+          "table": "SSFirstMortgage",
+          "column": "ShortSaleDept",
+          "type": "number"
+      },
+      {
+          "name": "Processor",
+          "table": "SSFirstMortgage",
+          "column": "Processor",
+          "type": "number"
+      },
+      {
+          "name": "Negotiator",
+          "table": "SSFirstMortgage",
+          "column": "Negotiator",
+          "type": "number"
+      },
+      {
+          "name": "Closer",
+          "table": "SSFirstMortgage",
+          "column": "Closer",
+          "type": "number"
+      },
+      {
+          "name": "ForeclosureAttorney",
+          "table": "SSFirstMortgage",
+          "column": "ForeclosureAttorney",
+          "type": "string"
+      },
+      {
+          "name": "ForeclosureAttorneyId",
+          "table": "SSFirstMortgage",
+          "column": "ForeclosureAttorneyId",
+          "type": "number"
+      },
+      {
+          "name": "AssignedAttorney",
+          "table": "SSFirstMortgage",
+          "column": "AssignedAttorney",
+          "type": "string"
+      },
+      {
+          "name": "AttorneyDirectNo",
+          "table": "SSFirstMortgage",
+          "column": "AttorneyDirectNo",
+          "type": "string"
+      },
+      {
+          "name": "AttorneyEmail",
+          "table": "SSFirstMortgage",
+          "column": "AttorneyEmail",
+          "type": "string"
+      },
+      {
+          "name": "Contacts",
+          "table": "SSFirstMortgage",
+          "column": "Contacts",
+          "type": "string"
+      },
+      {
+          "name": "Notes",
+          "table": "SSFirstMortgage",
+          "column": "Notes",
+          "type": "string"
+      },
+      {
+          "name": "DateAssigned",
+          "table": "SSFirstMortgage",
+          "column": "DateAssigned",
+          "type": "date"
+      },
+      {
+          "name": "Supervisor",
+          "table": "SSFirstMortgage",
+          "column": "Supervisor",
+          "type": "number"
+      },
+      {
+          "name": "Category",
+          "table": "SSFirstMortgage",
+          "column": "Category",
+          "type": "string"
+      },
+      {
+          "name": "Status",
+          "table": "SSFirstMortgage",
+          "column": "Status",
+          "type": "string"
+      },
+      {
+          "name": "Fannie",
+          "table": "SSFirstMortgage",
+          "column": "Fannie",
+          "type": "boolean"
+      },
+      {
+          "name": "FHA",
+          "table": "SSFirstMortgage",
+          "column": "FHA",
+          "type": "boolean"
+      },
+      {
+          "name": "Freddie",
+          "table": "SSFirstMortgage",
+          "column": "Freddie",
+          "type": "boolean"
+      },
+      {
+          "name": "LastBPOUpdate",
+          "table": "SSFirstMortgage",
+          "column": "LastBPOUpdate",
+          "type": "date"
+      },
+      {
+          "name": "UpcomingBPODate",
+          "table": "SSFirstMortgage",
+          "column": "UpcomingBPODate",
+          "type": "date"
+      },
+      {
+          "name": "CreateDate",
+          "table": "SSFirstMortgage",
+          "column": "CreateDate",
+          "type": "date"
+      },
+      {
+          "name": "CreateBy",
+          "table": "SSFirstMortgage",
+          "column": "CreateBy",
+          "type": "string"
+      },
+      {
+          "name": "UpdateDate",
+          "table": "SSFirstMortgage",
+          "column": "UpdateDate",
+          "type": "date"
+      },
+      {
+          "name": "UpdateBy",
+          "table": "SSFirstMortgage",
+          "column": "UpdateBy",
+          "type": "string"
+      },
+      {
+          "name": "LenderContactId",
+          "table": "SSFirstMortgage",
+          "column": "LenderContactId",
+          "type": "number"
+      },
+      {
+          "name": "LenderAttorney",
+          "table": "SSFirstMortgage",
+          "column": "LenderAttorney",
+          "type": "number"
+      },
+      {
+          "name": "Type",
+          "table": "SSFirstMortgage",
+          "column": "Type",
+          "type": "string"
+      }
                           ]
                       },
                       {
                           "category": "Mortgage 2",
                           "fields": [
-                            {
-                                "name": "AUCTION DATE",
-                                "table": "",
-                                "column": "",
-                                "type": "boolean"
-                            },
-                            {
-                                "name": "DATE OF SALE",
-                                "table": "",
-                                "column": "",
-                                "type": "date"
-                            },
-                            {
-                                "name": "DATE VERIFIED",
-                                "table": "",
-                                "column": "",
-                                "type": "date"
-                            },
-                            {
-                                "name": "PAYOFF REQUESTED",
-                                "table": "",
-                                "column": "",
-                                "type": "date"
-                            },
-                            {
-                                "name": "PAYOFF EXPIRES",
-                                "table": "",
-                                "column": "",
-                                "type": "date"
-                            },
-                            {
-                                "name": "PAYOFF AMOUNT",
-                                "table": "",
-                                "column": "",
-                                "type": "number"
-                            }
+                           {
+                               "name": "HasAuctionDate",
+                               "table": "SSFirstMortgage",
+                               "column": "HasAuctionDate",
+                               "type": "boolean"
+                           },
+      {
+          "name": "AuctionDate",
+          "table": "SSFirstMortgage",
+          "column": "AuctionDate",
+          "type": "date"
+      },
+      {
+          "name": "DateOfSale",
+          "table": "SSFirstMortgage",
+          "column": "DateOfSale",
+          "type": "date"
+      },
+      {
+          "name": "DateVerified",
+          "table": "SSFirstMortgage",
+          "column": "DateVerified",
+          "type": "date"
+      },
+      {
+          "name": "PayoffExpired",
+          "table": "SSFirstMortgage",
+          "column": "PayoffExpired",
+          "type": "date"
+      },
+      {
+          "name": "PayoffRequested",
+          "table": "SSFirstMortgage",
+          "column": "PayoffRequested",
+          "type": "date"
+      },
+      {
+          "name": "PayoffAmount",
+          "table": "SSFirstMortgage",
+          "column": "PayoffAmount",
+          "type": "number"
+      },
+      {
+          "name": "LenderId",
+          "table": "SSFirstMortgage",
+          "column": "LenderId",
+          "type": "number"
+      },
+      {
+          "name": "Lender",
+          "table": "SSFirstMortgage",
+          "column": "Lender",
+          "type": "string"
+      },
+      {
+          "name": "Loan",
+          "table": "SSFirstMortgage",
+          "column": "Loan",
+          "type": "string"
+      },
+      {
+          "name": "LoanAmount",
+          "table": "SSFirstMortgage",
+          "column": "LoanAmount",
+          "type": "number"
+      },
+      {
+          "name": "LastPaymentDate",
+          "table": "SSFirstMortgage",
+          "column": "LastPaymentDate",
+          "type": "date"
+      },
+      {
+          "name": "LoanType",
+          "table": "SSFirstMortgage",
+          "column": "LoanType",
+          "type": "string"
+      },
+      {
+          "name": "AuthorizationSent",
+          "table": "SSFirstMortgage",
+          "column": "AuthorizationSent",
+          "type": "string"
+      },
+      {
+          "name": "CancelationSent",
+          "table": "SSFirstMortgage",
+          "column": "CancelationSent",
+          "type": "date"
+      },
+      {
+          "name": "LienPosition",
+          "table": "SSFirstMortgage",
+          "column": "LienPosition",
+          "type": "string"
+      },
+      {
+          "name": "CounterOffer",
+          "table": "SSFirstMortgage",
+          "column": "CounterOffer",
+          "type": "string"
+      },
+      {
+          "name": "ShortSaleDept",
+          "table": "SSFirstMortgage",
+          "column": "ShortSaleDept",
+          "type": "number"
+      },
+      {
+          "name": "Processor",
+          "table": "SSFirstMortgage",
+          "column": "Processor",
+          "type": "number"
+      },
+      {
+          "name": "Negotiator",
+          "table": "SSFirstMortgage",
+          "column": "Negotiator",
+          "type": "number"
+      },
+      {
+          "name": "Closer",
+          "table": "SSFirstMortgage",
+          "column": "Closer",
+          "type": "number"
+      },
+      {
+          "name": "ForeclosureAttorney",
+          "table": "SSFirstMortgage",
+          "column": "ForeclosureAttorney",
+          "type": "string"
+      },
+      {
+          "name": "ForeclosureAttorneyId",
+          "table": "SSFirstMortgage",
+          "column": "ForeclosureAttorneyId",
+          "type": "number"
+      },
+      {
+          "name": "AssignedAttorney",
+          "table": "SSFirstMortgage",
+          "column": "AssignedAttorney",
+          "type": "string"
+      },
+      {
+          "name": "AttorneyDirectNo",
+          "table": "SSFirstMortgage",
+          "column": "AttorneyDirectNo",
+          "type": "string"
+      },
+      {
+          "name": "AttorneyEmail",
+          "table": "SSFirstMortgage",
+          "column": "AttorneyEmail",
+          "type": "string"
+      },
+      {
+          "name": "Contacts",
+          "table": "SSFirstMortgage",
+          "column": "Contacts",
+          "type": "string"
+      },
+      {
+          "name": "Notes",
+          "table": "SSFirstMortgage",
+          "column": "Notes",
+          "type": "string"
+      },
+      {
+          "name": "DateAssigned",
+          "table": "SSFirstMortgage",
+          "column": "DateAssigned",
+          "type": "date"
+      },
+      {
+          "name": "Supervisor",
+          "table": "SSFirstMortgage",
+          "column": "Supervisor",
+          "type": "number"
+      },
+      {
+          "name": "Category",
+          "table": "SSFirstMortgage",
+          "column": "Category",
+          "type": "string"
+      },
+      {
+          "name": "Status",
+          "table": "SSFirstMortgage",
+          "column": "Status",
+          "type": "string"
+      },
+      {
+          "name": "Fannie",
+          "table": "SSFirstMortgage",
+          "column": "Fannie",
+          "type": "boolean"
+      },
+      {
+          "name": "FHA",
+          "table": "SSFirstMortgage",
+          "column": "FHA",
+          "type": "boolean"
+      },
+      {
+          "name": "Freddie",
+          "table": "SSFirstMortgage",
+          "column": "Freddie",
+          "type": "boolean"
+      },
+      {
+          "name": "LastBPOUpdate",
+          "table": "SSFirstMortgage",
+          "column": "LastBPOUpdate",
+          "type": "date"
+      },
+      {
+          "name": "UpcomingBPODate",
+          "table": "SSFirstMortgage",
+          "column": "UpcomingBPODate",
+          "type": "date"
+      },
+      {
+          "name": "CreateDate",
+          "table": "SSFirstMortgage",
+          "column": "CreateDate",
+          "type": "date"
+      },
+      {
+          "name": "CreateBy",
+          "table": "SSFirstMortgage",
+          "column": "CreateBy",
+          "type": "string"
+      },
+      {
+          "name": "UpdateDate",
+          "table": "SSFirstMortgage",
+          "column": "UpdateDate",
+          "type": "date"
+      },
+      {
+          "name": "UpdateBy",
+          "table": "SSFirstMortgage",
+          "column": "UpdateBy",
+          "type": "string"
+      },
+      {
+          "name": "LenderContactId",
+          "table": "SSFirstMortgage",
+          "column": "LenderContactId",
+          "type": "number"
+      },
+      {
+          "name": "LenderAttorney",
+          "table": "SSFirstMortgage",
+          "column": "LenderAttorney",
+          "type": "number"
+      },
+      {
+          "name": "Type",
+          "table": "SSFirstMortgage",
+          "column": "Type",
+          "type": "string"
+      }
                           ]
                       },
                       {
@@ -355,8 +810,8 @@
                           "fields": [
                             {
                                 "name": "FORECLOSURE ATTORNEY",
-                                "table": "",
-                                "column": "",
+                                "table": "SSFirstMortgage",
+                                "column": "ForeclosureAttorney",
                                 "type": "string"
                             },
                             {
@@ -386,121 +841,92 @@
                           ]
                       },
                       {
-                          "category": "MORTGAGE COMPANY",
+                          "category": "Seller TITLE",
                           "fields": [
-                            {
-                                "name": "MORTGAGE COMPANY",
-                                "table": "",
-                                "column": "",
-                                "type": "list"
-                            },
-                            {
-                                "name": "CATEGORY",
-                                "table": "",
-                                "column": "",
-                                "type": "address"
-                            },
-                            {
-                                "name": "STATUS",
-                                "table": "",
-                                "column": "",
-                                "type": "date"
-                            },
-                            {
-                                "name": "LOAN #",
-                                "table": "",
-                                "column": "",
-                                "type": "date"
-                            },
-                            {
-                                "name": "LOAN AMOUNT",
-                                "table": "",
-                                "column": "",
-                                "type": "number"
-                            },
-                            {
-                                "name": "LAST PAYMENT DATE",
-                                "table": "",
-                                "column": "",
-                                "type": "number"
-                            },
-                            {
-                                "name": "MORTGAGE TYPE",
-                                "table": "",
-                                "column": "",
-                                "type": "number"
-                            },
-                            {
-                                "name": "AUTHORIZATION SENT",
-                                "table": "",
-                                "column": "",
-                                "type": "number"
-                            },
-                            {
-                                "name": "CANCELATION SENT",
-                                "table": "",
-                                "column": "",
-                                "type": "number"
-                            },
-                            {
-                                "name": "SHORT SALE DEPT",
-                                "table": "",
-                                "column": "",
-                                "type": "number"
-                            },
-                            {
-                                "name": "CUSTOMER SERVICE #",
-                                "table": "",
-                                "column": "",
-                                "type": "number"
-                            },
-                            {
-                                "name": "SHORT SALE FAX #",
-                                "table": "",
-                                "column": "",
-                                "type": "number"
-                            }
-                          ]
-                      },
-                      {
-                          "category": "TITLE",
-                          "fields": [
-                            {
-                                "name": "COMPANY",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "TITLE #",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "REVIEWED",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "ORDER DATE",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "CONFIRMATION DATE",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "RECEIVED DATE",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            }
+      {
+          "name": "Type",
+          "table": "SS_SellerTitle",
+          "column": "Type",
+          "type": "string"
+      },
+      {
+          "name": "CompanyName",
+          "table": "SS_SellerTitle",
+          "column": "CompanyName",
+          "type": "string"
+      },
+      {
+          "name": "Phone",
+          "table": "SS_SellerTitle",
+          "column": "Phone",
+          "type": "string"
+      },
+      {
+          "name": "ReportOrderDate",
+          "table": "SS_SellerTitle",
+          "column": "ReportOrderDate",
+          "type": "date"
+      },
+      {
+          "name": "ReceivedDate",
+          "table": "SS_SellerTitle",
+          "column": "ReceivedDate",
+          "type": "date"
+      },
+      {
+          "name": "OrderNumber",
+          "table": "SS_SellerTitle",
+          "column": "OrderNumber",
+          "type": "string"
+      },
+      {
+          "name": "ReviewedDate",
+          "table": "SS_SellerTitle",
+          "column": "ReviewedDate",
+          "type": "date"
+      },
+      {
+          "name": "ConfirmationDate",
+          "table": "SS_SellerTitle",
+          "column": "ConfirmationDate",
+          "type": "date"
+      },
+      {
+          "name": "Address",
+          "table": "SS_SellerTitle",
+          "column": "Address",
+          "type": "string"
+      },
+      {
+          "name": "Rep",
+          "table": "SS_SellerTitle",
+          "column": "Rep",
+          "type": "string"
+      },
+      {
+          "name": "RepNo",
+          "table": "SS_SellerTitle",
+          "column": "RepNo",
+          "type": "string"
+      },
+      {
+          "name": "RepEmail",
+          "table": "SS_SellerTitle",
+          "column": "RepEmail",
+          "type": "string"
+      },
+      {
+          "name": "CreateBy",
+          "table": "SS_SellerTitle",
+          "column": "CreateBy",
+          "type": "string"
+      },
+      {
+          "name": "CreateDate",
+          "table": "SS_SellerTitle",
+          "column": "CreateDate",
+          "type": "date"
+      }
                           ]
                       },
                       {
@@ -508,56 +934,182 @@
                           "fields": [
                             {
                                 "name": "MLS",
-                                "table": "",
-                                "column": "",
+                                "table": "ShortSaleCases",
+                                "column": "MLSStatus",
                                 "type": "string"
                             },
                             {
                                 "name": "MLS #",
-                                "table": "",
-                                "column": "",
+                                "table": "ShortSaleCases",
+                                "column": "ListMLS",
                                 "type": "string"
                             },
                             {
                                 "name": "LIST PRICE",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCases",
+                                "column": "ListPrice",
+                                "type": "number"
                             },
                             {
                                 "name": "LISTING DATE",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCases",
+                                "column": "ListingDate",
+                                "type": "date"
                             },
                             {
                                 "name": "LISTING EXPIRY DATE",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCases",
+                                "column": "ListingExpireDate",
+                                "type": "date"
                             }
                           ]
                       },
                       {
                           "category": "VALUATIONS",
                           "fields": [
-                            {
-                                "name": "Valuation",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            }
+                        {
+                            "name": "Method",
+                            "table": "SS_Valuation",
+                            "column": "Method",
+                            "type": "string"
+                        },
+      {
+          "name": "BankValue",
+          "table": "SS_Valuation",
+          "column": "BankValue",
+          "type": "number"
+      },
+      {
+          "name": "MNSP",
+          "table": "SS_Valuation",
+          "column": "MNSP",
+          "type": "number"
+      },
+      {
+          "name": "DateOfValue",
+          "table": "SS_Valuation",
+          "column": "DateOfValue",
+          "type": "date"
+      },
+      {
+          "name": "ExpiredOn",
+          "table": "SS_Valuation",
+          "column": "ExpiredOn",
+          "type": "date"
+      },
+      {
+          "name": "AgentName",
+          "table": "SS_Valuation",
+          "column": "AgentName",
+          "type": "string"
+      },
+      {
+          "name": "AgentPhone",
+          "table": "SS_Valuation",
+          "column": "AgentPhone",
+          "type": "string"
+      },
+      {
+          "name": "DateOfCall",
+          "table": "SS_Valuation",
+          "column": "DateOfCall",
+          "type": "date"
+      },
+      {
+          "name": "TimeOfValue",
+          "table": "SS_Valuation",
+          "column": "TimeOfValue",
+          "type": "string"
+      },
+      {
+          "name": "Access",
+          "table": "SS_Valuation",
+          "column": "Access",
+          "type": "string"
+      },
+      {
+          "name": "IsValuationComplete",
+          "table": "SS_Valuation",
+          "column": "IsValuationComplete",
+          "type": "string"
+      },
+      {
+          "name": "DateComplate",
+          "table": "SS_Valuation",
+          "column": "DateComplate",
+          "type": "date"
+      },
+      {
+          "name": "Pending",
+          "table": "SS_Valuation",
+          "column": "Pending",
+          "type": "boolean"
+      }
                           ]
                       },
                       {
                           "category": "OFFERS",
                           "fields": [
-                            {
-                                "name": "OFFERS",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            }
+                           {
+                               "name": "OfferType",
+                               "table": "SS_FirstOffer",
+                               "column": "OfferType",
+                               "type": "string"
+                           },
+      {
+          "name": "DateOfContract",
+          "table": "SS_FirstOffer",
+          "column": "DateOfContract",
+          "type": "date"
+      },
+      {
+          "name": "OfferAmount",
+          "table": "SS_FirstOffer",
+          "column": "OfferAmount",
+          "type": "number"
+      },
+      {
+          "name": "DateSubmited",
+          "table": "SS_FirstOffer",
+          "column": "DateSubmited",
+          "type": "date"
+      },
+      {
+          "name": "CreateDate",
+          "table": "SS_FirstOffer",
+          "column": "CreateDate",
+          "type": "date"
+      },
+      {
+          "name": "CreateBy",
+          "table": "SS_FirstOffer",
+          "column": "CreateBy",
+          "type": "string"
+      },
+      {
+          "name": "Entity",
+          "table": "SS_FirstOffer",
+          "column": "Entity",
+          "type": "string"
+      },
+      {
+          "name": "EntityAddress",
+          "table": "SS_FirstOffer",
+          "column": "EntityAddress",
+          "type": "string"
+      },
+      {
+          "name": "Signor",
+          "table": "SS_FirstOffer",
+          "column": "Signor",
+          "type": "string"
+      },
+      {
+          "name": "DateOpened",
+          "table": "SS_FirstOffer",
+          "column": "DateOpened",
+          "type": "date"
+      }
                           ]
                       },
                       {
@@ -565,24 +1117,22 @@
                           "fields": [
                             {
                                 "name": "NAME",
-                                "table": "",
-                                "column": "",
+                                "table": "ShortSaleCases",
+                                "column": "ProcessorName",
                                 "type": "string"
                             },
                             {
                                 "name": "PHONE #",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_Processor",
+                                "column": "OfficeNO",
                                 "type": "string"
                             },
                             {
                                 "name": "EMAIL",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_Processor",
+                                "column": "Email",
                                 "type": "string"
                             }
-
-
                           ]
                       },
                       {
@@ -590,73 +1140,73 @@
                           "fields": [
                             {
                                 "name": "AGENT",
-                                "table": "",
-                                "column": "",
+                                "table": "ShortSaleCases",
+                                "column": "ReferralUserName",
                                 "type": "string"
                             },
                             {
                                 "name": "AGENT CELL #",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_Referral",
+                                "column": "OfficeNO",
                                 "type": "string"
                             },
                             {
                                 "name": "AGENT EMAIL",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_Referral",
+                                "column": "Email",
                                 "type": "string"
                             },
                             {
                                 "name": "TEAM",
-                                "table": "",
-                                "column": "",
+                                "table": "ShortSaleCases",
+                                "column": "ReferralTeam",
                                 "type": "string"
                             },
                             {
                                 "name": "ADDRESS",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_ReferralTeam",
+                                "column": "Address",
                                 "type": "string"
                             },
                             {
                                 "name": "OFFICE #",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_ReferralTeam",
+                                "column": "OfficeNo",
                                 "type": "string"
                             },
                             {
                                 "name": "MANAGER",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_ReferralTeam",
+                                "column": "Manager",
                                 "type": "string"
                             },
                             {
                                 "name": "MANAGER CELL #",
-                                "table": "",
+                                "table": "SS_ReferralTeam",
                                 "column": "",
                                 "type": "string"
                             },
                             {
                                 "name": "MANAGER EMAIL",
-                                "table": "",
+                                "table": "SS_ReferralTeam",
                                 "column": "",
                                 "type": "string"
                             },
                             {
                                 "name": "ASSISTANT",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_ReferralTeam",
+                                "column": "Assistant",
                                 "type": "string"
                             },
                             {
                                 "name": "ASSISTANT CELL #",
-                                "table": "",
+                                "table": "SS_ReferralTeam",
                                 "column": "",
                                 "type": "string"
                             },
                             {
                                 "name": "ASSISTANT EMAIL",
-                                "table": "",
+                                "table": "SS_ReferralTeam",
                                 "column": "",
                                 "type": "string"
                             }
@@ -667,38 +1217,38 @@
                           "fields": [
                             {
                                 "name": "NAME",
-                                "table": "",
-                                "column": "",
+                                "table": "ShortSaleCases",
+                                "column": "ListingAgentName",
                                 "type": "string"
                             },
                             {
                                 "name": "CELL #",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_ListingAgent",
+                                "column": "Cell",
                                 "type": "string"
                             },
                             {
                                 "name": "EMAIL",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_ListingAgent",
+                                "column": "Email",
                                 "type": "string"
                             },
                             {
                                 "name": "BROKER",
-                                "table": "",
+                                "table": "SS_ListingAgent",
                                 "column": "",
                                 "type": "string"
                             },
                             {
                                 "name": "ADDRESS",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_ListingAgent",
+                                "column": "Address",
                                 "type": "string"
                             },
                             {
                                 "name": "OFFICE #",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_ListingAgent",
+                                "column": "OfficeNO",
                                 "type": "string"
                             }
                           ]
@@ -708,38 +1258,38 @@
                           "fields": [
                             {
                                 "name": "NAME",
-                                "table": "",
-                                "column": "",
+                                "table": "ShortSaleCases",
+                                "column": "SellerAttorneyName",
                                 "type": "string"
                             },
                             {
                                 "name": "CELL #",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_SellerAttorney",
+                                "column": "Cell",
                                 "type": "string"
                             },
                             {
                                 "name": "EMAIL",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_SellerAttorney",
+                                "column": "Email",
                                 "type": "string"
                             },
                             {
                                 "name": "OFFICE",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_SellerAttorney",
+                                "column": "Office",
                                 "type": "string"
                             },
                             {
                                 "name": "ADDRESS",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_SellerAttorney",
+                                "column": "Address",
                                 "type": "string"
                             },
                             {
                                 "name": "OFFICE #",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_SellerAttorney",
+                                "column": "OfficeNO",
                                 "type": "string"
                             }
                           ]
@@ -747,42 +1297,60 @@
                       {
                           "category": "BUYER",
                           "fields": [
-                            {
-                                "name": "ENTITY",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "ENTITY ADDRESS",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "SIGNOR",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "DATE OPENED",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "OFFICE",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "TAX ID",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            }
+                           {
+                               "name": "Entity",
+                               "table": "ShortSaleBuyers",
+                               "column": "Entity",
+                               "type": "string"
+                           },
+      {
+          "name": "EntityAddress",
+          "table": "ShortSaleBuyers",
+          "column": "EntityAddress",
+          "type": "string"
+      },
+      {
+          "name": "SignorId",
+          "table": "ShortSaleBuyers",
+          "column": "SignorId",
+          "type": "number"
+      },
+      {
+          "name": "Signor",
+          "table": "ShortSaleBuyers",
+          "column": "Signor",
+          "type": "string"
+      },
+      {
+          "name": "DateOpened",
+          "table": "ShortSaleBuyers",
+          "column": "DateOpened",
+          "type": "date"
+      },
+      {
+          "name": "Office",
+          "table": "ShortSaleBuyers",
+          "column": "Office",
+          "type": "string"
+      },
+      {
+          "name": "TaxId",
+          "table": "ShortSaleBuyers",
+          "column": "TaxId",
+          "type": "string"
+      },
+      {
+          "name": "CreateDate",
+          "table": "ShortSaleBuyers",
+          "column": "CreateDate",
+          "type": "date"
+      },
+      {
+          "name": "CreateBy",
+          "table": "ShortSaleBuyers",
+          "column": "CreateBy",
+          "type": "string"
+      }
                           ]
                       },
                       {
@@ -790,81 +1358,141 @@
                           "fields": [
                             {
                                 "name": "NAME",
-                                "table": "",
-                                "column": "",
+                                "table": "ShortSaleCases",
+                                "column": "BuyerAttorneyName",
                                 "type": "string"
                             },
                             {
                                 "name": "CELL #",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_BuyerAttorney",
+                                "column": "Cell",
                                 "type": "string"
                             },
                             {
                                 "name": "EMAIL",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_BuyerAttorney",
+                                "column": "Email",
                                 "type": "string"
                             },
                             {
                                 "name": "OFFICE",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_BuyerAttorney",
+                                "column": "Office",
                                 "type": "string"
                             },
                             {
                                 "name": "OFFICE ADDRESS",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_BuyerAttorney",
+                                "column": "Address",
                                 "type": "string"
                             },
                             {
                                 "name": "OFFICE #",
-                                "table": "",
-                                "column": "",
+                                "table": "SS_BuyerAttorney",
+                                "column": "OfficeNO",
                                 "type": "string"
                             }
                           ]
                       },
                       {
-                          "category": "TITLE COMPANY",
+                          "category": "Buyer Title",
                           "fields": [
-                            {
-                                "name": "COMPANY",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "ADDRESS",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "OFFICE #",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "REP",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "REP #",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            },
-                            {
-                                "name": "EMAIL",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
-                            }
+                             {
+                                 "name": "TitleId",
+                                 "table": "SS_BuyerTitle",
+                                 "column": "TitleId",
+                                 "type": "number"
+                             },
+      {
+          "name": "Type",
+          "table": "SS_BuyerTitle",
+          "column": "Type",
+          "type": "string"
+      },
+      {
+          "name": "ContactId",
+          "table": "SS_BuyerTitle",
+          "column": "ContactId",
+          "type": "number"
+      },
+      {
+          "name": "CompanyName",
+          "table": "SS_BuyerTitle",
+          "column": "CompanyName",
+          "type": "string"
+      },
+      {
+          "name": "Phone",
+          "table": "SS_BuyerTitle",
+          "column": "Phone",
+          "type": "string"
+      },
+      {
+          "name": "ReportOrderDate",
+          "table": "SS_BuyerTitle",
+          "column": "ReportOrderDate",
+          "type": "date"
+      },
+      {
+          "name": "ReceivedDate",
+          "table": "SS_BuyerTitle",
+          "column": "ReceivedDate",
+          "type": "date"
+      },
+      {
+          "name": "OrderNumber",
+          "table": "SS_BuyerTitle",
+          "column": "OrderNumber",
+          "type": "string"
+      },
+      {
+          "name": "ReviewedDate",
+          "table": "SS_BuyerTitle",
+          "column": "ReviewedDate",
+          "type": "date"
+      },
+      {
+          "name": "ConfirmationDate",
+          "table": "SS_BuyerTitle",
+          "column": "ConfirmationDate",
+          "type": "date"
+      },
+      {
+          "name": "Address",
+          "table": "SS_BuyerTitle",
+          "column": "Address",
+          "type": "string"
+      },
+      {
+          "name": "Rep",
+          "table": "SS_BuyerTitle",
+          "column": "Rep",
+          "type": "string"
+      },
+      {
+          "name": "RepNo",
+          "table": "SS_BuyerTitle",
+          "column": "RepNo",
+          "type": "string"
+      },
+      {
+          "name": "RepEmail",
+          "table": "SS_BuyerTitle",
+          "column": "RepEmail",
+          "type": "string"
+      },
+      {
+          "name": "CreateBy",
+          "table": "SS_BuyerTitle",
+          "column": "CreateBy",
+          "type": "string"
+      },
+      {
+          "name": "CreateDate",
+          "table": "SS_BuyerTitle",
+          "column": "CreateDate",
+          "type": "date"
+      }
                           ]
                       },
                       {
@@ -958,3 +1586,4 @@
                       }]
     }
 ]
+

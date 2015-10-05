@@ -33,6 +33,48 @@ Public Class QueryBuilder
         End Using
     End Function
 
+    Public Function GenerateReportTemplate(tables As String) As String
+        Return GenerateReportTemplate(JArray.Parse(tables)).ToString
+    End Function
+
+    Public Function GenerateReportTemplate(tables As JArray) As JToken
+        Dim template As New JArray
+
+        For Each tbl In tables
+            template.Add(GenerateReportTemplate(tbl("name"), tbl("ignoreFields").Select(Function(s) s.ToString).ToArray))
+        Next
+
+        Return template
+    End Function
+
+    Public Function GenerateReportTemplate(tableName As String, ignoreFields As String()) As JToken
+        Dim sql = "select * from " & tableName
+        Dim dt = ExecuteQuery(sql)
+
+        Dim js As New JObject
+        js("category") = tableName
+
+        If dt IsNot Nothing Then
+            Dim fields = New JArray
+
+            For Each col As DataColumn In dt.Columns
+                If ignoreFields.Contains(col.ColumnName) Then
+                    Continue For
+                End If
+
+                Dim field As New JObject
+                field("name") = col.ColumnName
+                field("table") = tableName
+                field("column") = col.ColumnName
+                field("type") = GetJsDataType(col.DataType.FullName)
+                fields.Add(field)
+            Next
+
+            js("fields") = fields
+        End If
+        Return js
+    End Function
+
     Public Function BuildSelectQuery() As String
 
         Dim emp As FromTerm = FromTerm.Table("Employee")
@@ -115,15 +157,35 @@ Public Class QueryBuilder
 
     Private Function BuildSqlExpression(type As String, value As String) As SqlExpression
         Select Case type
-            Case "string"
+            Case "string", "System.String"
                 Return SqlExpression.String(value)
-            Case "number"
+            Case "number", "System.Int32"
                 Return SqlExpression.Number(CDbl(value))
-            Case "date"
+            Case "date", "System.DateTime"
                 Return SqlExpression.Date(CDate(value))
+            Case "boolean", "System.Boolean"
+                Return SqlExpression.Raw(value)
             Case Else
                 Return SqlExpression.String(value)
         End Select
+    End Function
+
+    Private Shared DataTypeMapInfo As New Dictionary(Of String, String)
+
+    Private Function GetJsDataType(dtType As String) As String
+        If DataTypeMapInfo.Count = 0 Then
+            DataTypeMapInfo.Add("System.String", "string")
+            DataTypeMapInfo.Add("System.Int32", "number")
+            DataTypeMapInfo.Add("System.DateTime", "date")
+            DataTypeMapInfo.Add("System.Boolean", "boolean")
+            DataTypeMapInfo.Add("System.Decimal", "number")
+        End If
+
+        If DataTypeMapInfo.ContainsKey(dtType) Then
+            Return DataTypeMapInfo(dtType)
+        End If
+
+        Return dtType
     End Function
 
     Private Function GetCompareOperator(oper As String) As CompareOperator

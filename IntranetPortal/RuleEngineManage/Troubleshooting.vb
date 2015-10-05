@@ -907,4 +907,14 @@ Public Class Troubleshooting
 
 
     End Sub
+
+    Private Sub btnGeneratTemplate_Click(sender As Object, e As EventArgs) Handles btnGeneratTemplate.Click
+        Try
+            Dim qb As New Core.QueryBuilder
+            Dim txt = qb.GenerateReportTemplate(txtReportTables.Text)
+            txtTemplateResult.Text = txt
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
 End Class
