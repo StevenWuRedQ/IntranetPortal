@@ -127,7 +127,8 @@
                     url: "/api/ConstructionCases/GenerateExcel",
                     data: JSON.stringify(updata),
                 }).then(function (res) {
-                    console.log("Download start")
+                    console.log("Download start");
+                    STDownloadFile("/api/ConstructionCases/GetGenerateExcel", "budget.xlsx")
                 })
             } else {
                 alert("No data select!");

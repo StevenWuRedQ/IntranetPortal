@@ -17,9 +17,9 @@
                         </tr>
                         <tr ng-repeat="f in c.fields track by f.name" collapse="!collpsed[c.category]">
                             <td>
-                                <label for="{{camel(f.name)}}">{{f.name}}</label></td>
+                                <label for="{{camel(f.name)}}" ng-class="" ng-style="isBindColumn(f)?{}:{'color': '#e0e0e0'}">{{f.name}}</label></td>
                             <td>
-                                <input type="checkbox" id="{{camel(f.name)}}" style="display: block" ng-model="f.checked" /></td>
+                                <input type="checkbox" id="{{camel(f.name)}}" style="display: block" ng-model="f.checked" ng-disabled="!isBindColumn(f)" /></td>
                         </tr>
                     </table>
                 </div>
@@ -456,6 +456,15 @@
                     $scope.reload()
                     alert("Save successful!")
                 })
+            }
+
+            $scope.isBindColumn = function (f) {
+
+                if (!f.table || !f.column) {
+                    return false;
+                } else {
+                    return true;
+                }
             }
 
             $scope.next = function () {

@@ -4860,6 +4860,7 @@
     <WCFMetadataStorage Include="Service References\CallTrackingService\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Mobile\" />
     <Folder Include="Scripts\jquery.globalize\cultures\" />
   </ItemGroup>
   <ItemGroup>

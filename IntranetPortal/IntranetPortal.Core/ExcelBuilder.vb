@@ -1,8 +1,11 @@
 ﻿Imports System.IO
 Imports ClosedXML
+Imports ClosedXML.Excel
 Imports Newtonsoft.Json.Linq
 
 Public Class ExcelBuilder
+    Public Shared Property XLColor As XLColor
+
     Public Shared Function BuildBudgetReport(jsQuery As JToken) As Byte()
         Using ms As New MemoryStream
             Dim wb As New Excel.XLWorkbook
@@ -68,6 +71,22 @@ Public Class ExcelBuilder
 
                     Index = Index + 1
                 Next
+            End If
+
+            If Index > 1 Then
+                ws.Cell("A" & Index).Value = "Total"
+                ws.Cell("B" & Index).FormulaA1 = "=SUM(B2:B" & (Index - 1) & ")"
+                ws.Cell("B" & Index).Style.NumberFormat.Format = "$ #,##0.00"
+                ws.Cell("F" & Index).FormulaA1 = "=SUM(F2:F" & (Index - 1) & ")"
+                ws.Cell("F" & Index).Style.NumberFormat.Format = "$ #,##0.00"
+                ws.Cell("G" & Index).FormulaA1 = "=SUM(G2:G" & (Index - 1) & ")"
+                ws.Cell("G" & Index).Style.NumberFormat.Format = "$ #,##0.00"
+                ws.Cell("H" & Index).FormulaA1 = "=SUM(H2:H" & (Index - 1) & ")"
+                ws.Cell("H" & Index).Style.NumberFormat.Format = "$ #,##0.00"
+
+                Dim TotalRange = ws.Range("A" & Index & ":H" & Index)
+                TotalRange.Style.Fill.BackgroundColor = XLColor.Yellow
+
             End If
             wb.SaveAs(ms)
             Return ms.ToArray
