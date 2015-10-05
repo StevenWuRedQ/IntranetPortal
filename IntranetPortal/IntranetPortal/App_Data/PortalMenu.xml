@@ -617,7 +617,7 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="CustomReport" Text="Custom Report" NavigationUrl="/Reports/ReportWizard.aspx" ShowAmount="false">
+      <PortalNavItem Name="CustomReport" Text="Custom Report" NavigationUrl="/CustomReport/ReportWizard.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-table"></i>]]>
         </FontClass>
