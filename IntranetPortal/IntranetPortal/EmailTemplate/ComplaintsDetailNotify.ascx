@@ -121,7 +121,7 @@ FYI - The DOB Complaint, for the property located at: (<%= GetMailDataItem("Addr
 
 
 
-For more information, Please click on <a href='http://portal.myidealprop.com/Complaints/ComplainsMng.aspx?bble={{$BBLE}}'> this link </a> to  review. 
+For more information, Please click on <a href='http://portal.myidealprop.com/Complaints/ComplainsMng.aspx?bble=<%= GetMailDataItem("BBLE") %>'> this link </a> to  review. 
 <br />
 <br />
 Regards, <br />
