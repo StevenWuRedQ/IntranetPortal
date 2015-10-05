@@ -25,5 +25,6 @@ Partial Public Class LegalCase
     Public Property FollowUp As Nullable(Of Date)
     Public Property SaleDate As Nullable(Of Date)
     Public Property SecondaryTypes As String
+    Public Property FCIndexNum As String
 
 End Class

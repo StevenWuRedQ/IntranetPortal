@@ -166,7 +166,7 @@
                                                                 <label class="ss_form_input_title">Servicer</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.servicer" /></li>
                                                             <li class="ss_form_item ">
                                                                 <label class="ss_form_input_title">Wells Fargo</label>
-                                                                <pt-radio name="liens_info_fha" model="DocSearch.LeadResearch.wellsFargo"></pt-radio>
+                                                                <pt-radio name="liens_info_wellsFargo" model="DocSearch.LeadResearch.wellsFargo"></pt-radio>
 
                                                             </li>
                                                             <li class="ss_form_item ">

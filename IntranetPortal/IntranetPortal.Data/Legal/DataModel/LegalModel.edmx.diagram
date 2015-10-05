@@ -11,6 +11,7 @@
         <EntityTypeShape EntityType="LegalModel.LawReference" Width="1.5" PointX="6.625" PointY="0.75" />
         <EntityTypeShape EntityType="LegalModel.LegalManagerReport" Width="1.5" PointX="3.375" PointY="4.75" />
         <EntityTypeShape EntityType="LegalModel.LegalCaseReport" Width="1.5" PointX="8.875" PointY="1.5" />
+        <EntityTypeShape EntityType="LegalModel.LegalECourt" Width="1.5" PointX="0.75" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

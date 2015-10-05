@@ -211,6 +211,15 @@ Public Class Form1
     End Sub
 
     Private Sub ParseEamil_Click(sender As Object, e As EventArgs) Handles ParseEamil.Click
-        ParseText.Text = Core.ParseEmailService.LogInEmail()
+        Dim serv = New Core.ParseEmailService("Portal.etrack@myidealprop.com", "ColorBlue1")
+
+        '''''''''''''''''''''''''''''''''
+        Dim msg = serv.GetNewEmails
+        For Each m In msg
+            LegalECourt.Parse(m)
+        Next
+
+
+
     End Sub
 End Class

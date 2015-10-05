@@ -85,23 +85,26 @@ Partial Public Class LegalCase
             If (sTypes IsNot Nothing) Then
                 Me.SecondaryTypes = sTypes.ToString
             End If
-
+            Dim forecloseInfo = jsonCase.Item("ForeclosureInfo")
+            If (forecloseInfo IsNot Nothing AndAlso forecloseInfo.Item("FCIndexNum") IsNot Nothing) Then
+                Me.FCIndexNum = forecloseInfo.Item("FCIndexNum").ToString().Trim()
+            End If
 
             Dim data = jsonCase.Item("SaleDate")
 
-            If String.IsNullOrEmpty(data) Then
-                Me.SaleDate = Nothing
-            Else
-                Dim saleData As DateTime
-                If data IsNot Nothing AndAlso DateTime.TryParse(data.ToString, saleData) Then
-                    If saleData > DateTime.MinValue Then
-                        Me.SaleDate = saleData
-                    Else
-                        Me.SaleDate = Nothing
+                If String.IsNullOrEmpty(data) Then
+                    Me.SaleDate = Nothing
+                Else
+                    Dim saleData As DateTime
+                    If data IsNot Nothing AndAlso DateTime.TryParse(data.ToString, saleData) Then
+                        If saleData > DateTime.MinValue Then
+                            Me.SaleDate = saleData
+                        Else
+                            Me.SaleDate = Nothing
+                        End If
                     End If
                 End If
             End If
-        End If
     End Sub
 
     Public Shared Function GetCase(bble As String) As LegalCase
@@ -110,6 +113,11 @@ Partial Public Class LegalCase
         End Using
     End Function
 
+    Public Shared Function GetLegalCaseByFcIndex(indexNum As String) As LegalCase
+        Using ctx As New LegalModelContainer
+            Return ctx.LegalCases.Where(Function(c) c.FCIndexNum = indexNum).FirstOrDefault
+        End Using
+    End Function
     Public Shared Sub UpdateStatus(bble As String, status As LegalCaseStatus, updateBy As String)
         'update legal case status
         Dim lc = GetCase(bble)

@@ -34,10 +34,25 @@
           <Property Name="FollowUp" Type="datetime" />
           <Property Name="SaleDate" Type="datetime" />
           <Property Name="SecondaryTypes" Type="nvarchar" MaxLength="256" />
+          <Property Name="FCIndexNum" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LegalECourts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="MessageId" Type="nvarchar" MaxLength="50" />
+          <Property Name="IndexNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="AppearanceDate" Type="date" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="255" />
+          <Property Name="BodyText" Type="nvarchar(max)" />
+          <Property Name="BodyHtml" Type="nvarchar(max)" />
+          <Property Name="UpdateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="LegalJudge">
           <Key>
@@ -117,6 +132,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
         <EntityContainer Name="LegalModelStoreContainer">
           <EntitySet Name="LawReferences" EntityType="Self.LawReferences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalCase" EntityType="Self.LegalCase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LegalECourts" EntityType="Self.LegalECourts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalJudge" EntityType="Self.LegalJudge" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalRoboSignor" EntityType="Self.LegalRoboSignor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalCaseReport" EntityType="Self.LegalCaseReport" store:Type="Views" store:Schema="dbo">
@@ -173,6 +189,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <EntitySet Name="LawReferences" EntityType="LegalModel.LawReference" />
           <EntitySet Name="LegalManagerReports" EntityType="LegalModel.LegalManagerReport" />
           <EntitySet Name="LegalCaseReports" EntityType="LegalModel.LegalCaseReport" />
+          <EntitySet Name="LegalECourts" EntityType="LegalModel.LegalECourt" />
         </EntityContainer>
         <EntityType Name="LegalCase">
           <Key>
@@ -192,6 +209,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <Property Name="FollowUp" Type="DateTime" Precision="3" />
           <Property Name="SaleDate" Type="DateTime" Precision="3" />
           <Property Name="SecondaryTypes" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FCIndexNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LegalJudge">
           <Key>
@@ -279,6 +297,20 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <Property Name="SaleDate" Type="DateTime" Precision="3" />
           <Property Name="SecondaryTypes" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="LegalECourt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="MessageId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IndexNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AppearanceDate" Type="DateTime" Precision="0" />
+          <Property Name="Subject" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BodyText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BodyHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -290,6 +322,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <EntitySetMapping Name="LegalCases">
             <EntityTypeMapping TypeName="LegalModel.LegalCase">
               <MappingFragment StoreEntitySet="LegalCase">
+                <ScalarProperty Name="FCIndexNum" ColumnName="FCIndexNum" />
                 <ScalarProperty Name="SecondaryTypes" ColumnName="SecondaryTypes" />
                 <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
                 <ScalarProperty Name="FollowUp" ColumnName="FollowUp" />
@@ -395,6 +428,21 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
                 <ScalarProperty Name="ResearchBy" ColumnName="ResearchBy" />
                 <ScalarProperty Name="CaseName" ColumnName="CaseName" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LegalECourts">
+            <EntityTypeMapping TypeName="LegalModel.LegalECourt">
+              <MappingFragment StoreEntitySet="LegalECourts">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="BodyHtml" ColumnName="BodyHtml" />
+                <ScalarProperty Name="BodyText" ColumnName="BodyText" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="AppearanceDate" ColumnName="AppearanceDate" />
+                <ScalarProperty Name="IndexNumber" ColumnName="IndexNumber" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

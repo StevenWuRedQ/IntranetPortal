@@ -171,7 +171,7 @@
                                 <SettingsEditing Mode="Batch"></SettingsEditing>
                             </dx:ASPxGridView>
                         </dx:SplitterContentControl>
-                       
+
                     </ContentCollection>
                 </dx:SplitterPane>
                 <dx:SplitterPane>
@@ -294,10 +294,38 @@
                                 </dx:SplitterContentControl>
                             </ContentCollection>
                         </dx:SplitterPane>
+                         <dx:SplitterPane ScrollBars="Auto" PaneStyle-Paddings-Padding="5px">
+                    <Panes>
+                        <dx:SplitterPane PaneStyle-Paddings-Padding="5px">
+                            <ContentCollection>
+                                <dx:SplitterContentControl>
+                                    <h3>Legal Data Report Sync</h3>
+                                    <asp:Button ID="LoadLeagl" runat="server" Text="Load" OnClick="LoadLeagl_Click"/>
+                                    <asp:Button ID="Button1" runat="server" Text="Sync Report" OnClick="Button1_Click"/>
+                                    <dx:ASPxGridView ID="gridLegalCase" runat="server" KeyFieldName="BBLE">
+                                        <Columns>
+                                           <dx:GridViewDataColumn FieldName="BBLE"></dx:GridViewDataColumn>
+                                             <dx:GridViewDataColumn FieldName="CaseName"></dx:GridViewDataColumn>
+                                            
+                                            <dx:GridViewDataColumn FieldName="FCIndexNum"></dx:GridViewDataColumn>
+                                           <dx:GridViewDataColumn FieldName="SaleDate"></dx:GridViewDataColumn>
+                                           <dx:GridViewDataColumn FieldName="LegalStatus"></dx:GridViewDataColumn>
+                                            
+                                        </Columns>
+                                    </dx:ASPxGridView>
+                                </dx:SplitterContentControl>
+                            </ContentCollection>
+                        </dx:SplitterPane>
+
                     </Panes>
                 </dx:SplitterPane>
+                    </Panes>
+                </dx:SplitterPane>
+               
             </Panes>
+
         </dx:ASPxSplitter>
+
         <dx:ASPxCallback runat="server" ID="callBackService" ClientInstanceName="callBackService" OnCallback="callBackService_Callback">
         </dx:ASPxCallback>
         <dx:ASPxCallback runat="server" ID="ASPxCallback1" ClientInstanceName="CheckProgress" OnCallback="checkProgress_Callback">

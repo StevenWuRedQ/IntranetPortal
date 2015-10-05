@@ -467,5 +467,20 @@ InitialLine:
         End Enum
     End Class
 
-  
+    Protected Sub LoadLeagl_Click(sender As Object, e As EventArgs)
+        BindgridLegalCase()
+    End Sub
+
+    Protected Sub Button1_Click(sender As Object, e As EventArgs)
+        For Each c In Data.LegalCase.GetAllCases()
+            c.SaveData(Page.User.Identity.Name)
+        Next
+        BindgridLegalCase()
+    End Sub
+    Sub BindgridLegalCase()
+        If (gridLegalCase.DataSource Is Nothing) Then
+            gridLegalCase.DataSource = Data.LegalCase.GetAllCases()
+            gridLegalCase.DataBind()
+        End If
+    End Sub
 End Class

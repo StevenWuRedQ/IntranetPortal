@@ -28,5 +28,6 @@ Partial Public Class LegalModelContainer
     Public Overridable Property LawReferences() As DbSet(Of LawReference)
     Public Overridable Property LegalManagerReports() As DbSet(Of LegalManagerReport)
     Public Overridable Property LegalCaseReports() As DbSet(Of LegalCaseReport)
+    Public Overridable Property LegalECourts() As DbSet(Of LegalECourt)
 
 End Class
