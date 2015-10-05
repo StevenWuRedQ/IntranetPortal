@@ -80,7 +80,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -114,6 +116,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="UnitTest1.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -140,6 +143,10 @@
     <ProjectReference Include="..\IntranetPortal.Core\IntranetPortal.Core.vbproj">
       <Project>{5da9a152-6e61-4cde-baf5-6309ed56539a}</Project>
       <Name>IntranetPortal.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IntranetPortal.Data\IntranetPortal.Data.vbproj">
+      <Project>{51557141-4472-40e6-82bd-30275f702486}</Project>
+      <Name>IntranetPortal.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\IntranetPortal\IntranetPortal.vbproj">
       <Project>{6ca9f52b-c8d7-4098-8fb4-0626d61a9e32}</Project>

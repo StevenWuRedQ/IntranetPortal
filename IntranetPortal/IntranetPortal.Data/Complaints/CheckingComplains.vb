@@ -3,6 +3,9 @@ Imports Newtonsoft.Json
 
 Partial Public Class CheckingComplain
 
+    Public Event OnComplaintsUpdated As ComplaintsUpdated
+    Public Delegate Sub ComplaintsUpdated(complaint As CheckingComplain)
+
     Public Const LogTitleRefreshComplain As String = "RefreshPropertyComplaints"
 
     Public Shared Function GetAllComplains(Optional bble As String = "", Optional userName As String = "") As List(Of CheckingComplain)
@@ -178,7 +181,9 @@ Partial Public Class CheckingComplain
         If result IsNot Nothing AndAlso result.Length > 0 Then
             If result.Any(Function(r) r.Status.Trim = "ACT") Then
                 If DataIsChange(result) Then
-                    NotifyAction(result)
+                    RaiseEvent OnComplaintsUpdated(Me)
+
+                    'NotifyAction(result)
                 End If
             End If
 
