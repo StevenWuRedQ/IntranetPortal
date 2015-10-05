@@ -1678,10 +1678,10 @@
     <Compile Include="Reports\LeaderReport.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\ReportWizard.aspx.designer.vb">
+    <Compile Include="CustomReport\ReportWizard.aspx.designer.vb">
       <DependentUpon>ReportWizard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportWizard.aspx.vb">
+    <Compile Include="CustomReport\ReportWizard.aspx.vb">
       <DependentUpon>ReportWizard.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
@@ -2933,7 +2933,7 @@
     <Content Include="Publish\PropertyList.ascx" />
     <Content Include="Publish\PublishProperty.ascx" />
     <Content Include="Publish\PublishPropertyPage.aspx" />
-    <Content Include="Reports\ReportWizard.aspx" />
+    <Content Include="CustomReport\ReportWizard.aspx" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -5065,7 +5065,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Reports\shortsale.js" />
+    <Content Include="CustomReport\shortsale.js" />
   </ItemGroup>
   <!--<ItemGroup>
     <Folder Include="App_Data\" />
