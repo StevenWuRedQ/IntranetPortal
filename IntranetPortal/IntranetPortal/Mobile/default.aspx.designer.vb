@@ -11,5 +11,5 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class SpotCheck
+Partial Public Class _default
 End Class

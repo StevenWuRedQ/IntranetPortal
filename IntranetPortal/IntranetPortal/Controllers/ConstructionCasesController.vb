@@ -201,11 +201,16 @@ Namespace Controllers
             Dim bfs = New BinaryReader(fs).ReadBytes(fs.Length)
             response.Content = New ByteArrayContent(bfs)
             response.Content.Headers.Add("Content-Disposition", "inline; filename=budget.xlsx")
-                response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
             response.Content.Headers.ContentLength = bfs.Length
-
             Return response
-
         End Function
+
+        <Route("api/ConstructionCases/SpotCheck")>
+        Function SpotCheck(<FromBody> queryString As JToken) As IHttpActionResult
+
+            Return Ok()
+        End Function
+
     End Class
 End Namespace

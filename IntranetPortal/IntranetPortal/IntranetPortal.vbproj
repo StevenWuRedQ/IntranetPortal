@@ -1436,6 +1436,27 @@
     <Compile Include="Messager\MessagerAsyncResult.vb" />
     <Compile Include="Messager\MessagerHandler.vb" />
     <Compile Include="Messager\WhileImAwayMessagerHandler.vb" />
+    <Compile Include="Mobile.Master.designer.vb">
+      <DependentUpon>Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Mobile.Master.vb">
+      <DependentUpon>Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mobile\Construction\default.aspx.designer.vb">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mobile\Construction\default.aspx.vb">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Mobile\default.aspx.designer.vb">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mobile\default.aspx.vb">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -2780,6 +2801,8 @@
     <Content Include="Map\MapData\nyc-zip-code.js" />
     <Content Include="Map\ServiceTest.aspx" />
     <Content Include="Map\ZipMap.aspx" />
+    <Content Include="Mobile\Construction\default.aspx" />
+    <Content Include="Mobile\default.aspx" />
     <Content Include="MyDefault.aspx" />
     <Content Include="OneDrive\constants.js" />
     <Content Include="OneDrive\Callback.html" />
@@ -4110,6 +4133,114 @@
     <Content Include="Scripts\handsontable-master\test\jasmine\spec\utils\samplesGeneratorSpec.js" />
     <Content Include="Scripts\handsontable-master\test\jasmine\spec\validators\dateValidatorSpec.js" />
     <Content Include="Scripts\handsontable-master\test\jasmine\spec\validators\numericValidatorSpec.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\.gitignore" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\accordion.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\carousel.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\demo.css" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\demo.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\drag.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\drag2.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\dropdown.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\favicon.png" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\forms.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\home.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\img\1.jpg" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\img\2.jpg" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\img\3.jpg" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\img\4.jpg" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\img\5.jpg" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\index.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\modal1.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\modal2.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\overlay.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\scroll.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\sidebar.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\sidebarRight.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\swipe.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\tabs.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\toggle.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\demo\touch.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\css\mobile-angular-ui-base.css" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\css\mobile-angular-ui-base.min.css" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\css\mobile-angular-ui-desktop.css" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\css\mobile-angular-ui-desktop.min.css" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\css\mobile-angular-ui-hover.css" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\css\mobile-angular-ui-hover.min.css" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\css\mobile-angular-ui-migrate.css" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\css\mobile-angular-ui-migrate.min.css" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\fonts\fontawesome-webfont.svg" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\js\mobile-angular-ui.core.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\js\mobile-angular-ui.core.min.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\js\mobile-angular-ui.gestures.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\js\mobile-angular-ui.gestures.min.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\js\mobile-angular-ui.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\js\mobile-angular-ui.migrate.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\js\mobile-angular-ui.migrate.min.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\js\mobile-angular-ui.min.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\examples\clock.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\examples\drag.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\examples\lightbulb.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\examples\tabs.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\gulpfile.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\components\modals.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\components\navbars.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\components\scrollable.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\components\sidebars.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\components\switch.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\core\activeLinks.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\core\capture.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\core\fastclick.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\core\outerClick.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\core\sharedState.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\core\touchmoveDefaults.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\gestures\drag.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\gestures\swipe.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\gestures\touch.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\gestures\transform.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\migrate\carousel.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\migrate\disabled.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\migrate\forms.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\migrate\namespaceAliases.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\migrate\overlay.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\migrate\panels.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\migrate\switch.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\migrate\toggle.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\mobile-angular-ui.components.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\mobile-angular-ui.core.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\mobile-angular-ui.gestures.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\mobile-angular-ui.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\js\mobile-angular-ui.migrate.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\chrome.conf.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\ci.conf.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\components\scrollable.test.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\components\switch-swipe.test.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\components\switch.test.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\core\capture.test.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\core\sharedstate-interpolation.test.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\core\sharedstate-ui-cond.test.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\core\sharedstate.test.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\favicon.ico" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\firefox.conf.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\gestures\drag.test.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\gestures\swipe.test.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\gestures\touch.test.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\gestures\transform.test.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\htmlTests.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\iphone5.conf.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\layout.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\manual\fastclick.html" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\onprepare.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\phantomjs.conf.js" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\test\server.js" />
+    <Content Include="Scripts\ratchet-v2.0.2\css\ratchet-theme-android.css" />
+    <Content Include="Scripts\ratchet-v2.0.2\css\ratchet-theme-android.min.css" />
+    <Content Include="Scripts\ratchet-v2.0.2\css\ratchet-theme-ios.css" />
+    <Content Include="Scripts\ratchet-v2.0.2\css\ratchet-theme-ios.min.css" />
+    <Content Include="Scripts\ratchet-v2.0.2\css\ratchet.css" />
+    <Content Include="Scripts\ratchet-v2.0.2\css\ratchet.min.css" />
+    <Content Include="Scripts\ratchet-v2.0.2\fonts\ratchicons.svg" />
+    <Content Include="Scripts\ratchet-v2.0.2\js\ratchet.js" />
+    <Content Include="Scripts\ratchet-v2.0.2\js\ratchet.min.js" />
     <Content Include="Scripts\ruleJS-0.0.5\.gitignore" />
     <Content Include="Scripts\ruleJS-0.0.5\dist\full\ruleJS.all.full.js" />
     <Content Include="Scripts\ruleJS-0.0.5\dist\full\ruleJS.all.full.min.js" />
@@ -4459,6 +4590,7 @@
     <Content Include="Scripts\handsontable-master\test\jasmine\templates\SpecRunner.tmpl" />
     <Content Include="Scripts\handsontable-master\update.json" />
     <Content Include="Scripts\res\budgetData.js" />
+    <Content Include="Mobile.Master" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -4636,6 +4768,50 @@
     <Content Include="Scripts\ruleJS-0.0.5\src\parser\parser.jison.old" />
     <Content Include="Scripts\ruleJS-0.0.5\test\jasmine\lib\jasmine\MIT.LICENSE" />
     <Content Include="Scripts\ruleJS-0.0.5\test\jasmine\templates\SpecRunner.tmpl" />
+    <Content Include="Scripts\ratchet-2.0.2-dist.zip" />
+    <Content Include="Scripts\ratchet-v2.0.2\fonts\ratchicons.eot" />
+    <Content Include="Scripts\ratchet-v2.0.2\fonts\ratchicons.ttf" />
+    <Content Include="Scripts\ratchet-v2.0.2\fonts\ratchicons.woff" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\.jshintrc" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\.travis.yml" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\bower.json" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\CHANGELOG.md" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\fonts\fontawesome-webfont.eot" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\fonts\fontawesome-webfont.woff" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\js\mobile-angular-ui.core.min.js.map" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\js\mobile-angular-ui.gestures.min.js.map" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\js\mobile-angular-ui.migrate.min.js.map" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\dist\js\mobile-angular-ui.min.js.map" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\LICENSE" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\package.json" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\README.md" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\ROADMAP.tasks" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\app.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\buttons.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\carousel.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\dropdown.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\forms.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\globals.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\justified.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\layout.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\list-groups.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\modal.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\navbars.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\normalize.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\panel.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\scrollable.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\sections.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\sidebar.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\switch.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\lib\validations.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\migrate\overlay.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\mobile-angular-ui-base.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\mobile-angular-ui-desktop.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\mobile-angular-ui-migrate.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\sm-grid.less" />
+    <Content Include="Scripts\mobile-angular-ui-1.2.0-rc.3\src\less\variables.less" />
     <None Include="Service References\CallTrackingService\CallTrackingService.wsdl" />
     <Content Include="Service References\CallTrackingService\IntranetPortal.CallTrackingService.EmployeeStatisticData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -4860,7 +5036,6 @@
     <WCFMetadataStorage Include="Service References\CallTrackingService\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Mobile\" />
     <Folder Include="Scripts\jquery.globalize\cultures\" />
   </ItemGroup>
   <ItemGroup>

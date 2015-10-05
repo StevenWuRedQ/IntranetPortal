@@ -33,15 +33,15 @@ Public Class Global_asax
         '    Application.UnLock()
         'End If
 
-        Dim httpRequest = HttpContext.Current.Request
-        If httpRequest.Browser.IsMobileDevice Then
-            Dim path = httpRequest.Url.PathAndQuery
-            Dim isOnMobilePage = path.StartsWith("/Mobile/", StringComparison.OrdinalIgnoreCase)
-            If Not isOnMobilePage Then
-                Dim redirectTo = "~/Mobile/default.aspx"
-                HttpContext.Current.Response.Redirect(redirectTo)
-            End If
-        End If
+        'Dim httpRequest = HttpContext.Current.Request
+        'If httpRequest.Browser.IsMobileDevice Then
+        '    Dim path = httpRequest.Url.PathAndQuery
+        '    Dim isOnMobilePage = path.StartsWith("/Mobile/", StringComparison.OrdinalIgnoreCase)
+        '    If Not isOnMobilePage Then
+        '        Dim redirectTo = "~/Mobile/default.aspx"
+        '        HttpContext.Current.Response.Redirect(redirectTo)
+        '    End If
+        'End If
     End Sub
 
 
