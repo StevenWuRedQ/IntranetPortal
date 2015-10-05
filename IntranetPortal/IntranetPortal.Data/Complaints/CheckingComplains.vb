@@ -179,10 +179,10 @@ Partial Public Class CheckingComplain
         End If
 
         If result IsNot Nothing AndAlso result.Length > 0 Then
+            Dim dataChanged = False
             If result.Any(Function(r) r.Status.Trim = "ACT") Then
                 If DataIsChange(result) Then
-                    RaiseEvent OnComplaintsUpdated(Me)
-
+                    dataChanged = True
                     'NotifyAction(result)
                 End If
             End If
@@ -194,6 +194,10 @@ Partial Public Class CheckingComplain
             Me.LastResultUpdate = DateTime.Now
             Me.Status = RunningStatus.Ready
             Me.Save("")
+
+            If dataChanged Then
+                RaiseEvent OnComplaintsUpdated(Me)
+            End If
         End If
     End Sub
 
