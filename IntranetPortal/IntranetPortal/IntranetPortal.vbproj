@@ -536,6 +536,9 @@
     <Compile Include="CodeFolder\CustomBinder.vb" />
     <Compile Include="CodeFolder\DataWCFService.vb" />
     <Compile Include="CodeFolder\DateTimeJavaScriptConverter .vb" />
+    <Compile Include="CodeFolder\EmailTemplateControl.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CodeFolder\Employee.vb" />
     <Compile Include="CodeFolder\EmployeeItemComparer.vb" />
     <Compile Include="CodeFolder\EmployeePerformance.vb" />
@@ -1001,6 +1004,13 @@
       <DependentUpon>DownloadFile.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="EmailTemplate\ComplaintsDetailNotify.ascx.designer.vb">
+      <DependentUpon>ComplaintsDetailNotify.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\ComplaintsDetailNotify.ascx.vb">
+      <DependentUpon>ComplaintsDetailNotify.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="EmailTemplate\ComplaintsNotify.ascx.designer.vb">
       <DependentUpon>ComplaintsNotify.ascx</DependentUpon>
     </Compile>
@@ -1049,6 +1059,13 @@
     <Compile Include="EmailTemplate\TeamActivityReport.aspx.vb">
       <DependentUpon>TeamActivityReport.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EmailTemplate\Testing.ascx.designer.vb">
+      <DependentUpon>Testing.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\Testing.ascx.vb">
+      <DependentUpon>Testing.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1441,21 +1458,18 @@
     </Compile>
     <Compile Include="Mobile.Master.vb">
       <DependentUpon>Mobile.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Mobile\Construction\default.aspx.designer.vb">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Mobile\Construction\default.aspx.vb">
       <DependentUpon>default.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Mobile\default.aspx.designer.vb">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Mobile\default.aspx.vb">
       <DependentUpon>default.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -2442,6 +2456,7 @@
     <Content Include="DLL\PublicSiteData.dll" />
     <Content Include="DLL\Spire.Pdf.dll" />
     <Content Include="DownloadFile.aspx" />
+    <Content Include="EmailTemplate\ComplaintsDetailNotify.ascx" />
     <Content Include="EmailTemplate\ComplaintsNotify.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserReport.ascx" />
     <Content Include="EmailTemplate\ActivitySummary.ascx" />
@@ -2449,6 +2464,7 @@
     <Content Include="EmailTemplate\TaskSummary.ascx" />
     <Content Include="EmailTemplate\ShortSaleActivityReport.aspx" />
     <Content Include="EmailTemplate\TeamActivityReport.aspx" />
+    <Content Include="EmailTemplate\Testing.ascx" />
     <Content Include="favicon.ico" />
     <Content Include="images\1_down_picto.png" />
     <Content Include="images\accounting_icon.jpg" />

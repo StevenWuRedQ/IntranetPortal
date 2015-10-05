@@ -4,6 +4,7 @@ Imports System.Net
 Imports System.ServiceModel
 Imports System.ServiceModel.Activation
 Imports IntranetPortal.PortalReport
+Imports IntranetPortal
 
 ' NOTE: You can use the "Rename" command on the context menu to change the class name "CommonService" in code, svc and config file together.
 ' NOTE: In order to launch WCF Test Client for testing this service, please select CommonService.svc or CommonService.svc.vb at the Solution Explorer and start debugging.
@@ -294,5 +295,21 @@ Public Class CommonService
 
         Return sb.ToString
     End Function
-   
+
+    Public Sub SendEmailByControl(toAddresses As String, subject As String, controlName As String, params As Dictionary(Of String, String)) Implements ICommonService.SendEmailByControl
+        Dim ts As EmailTemplateControl
+        Using page As New Page
+            ts = CType(page.LoadControl("~/EmailTemplate/" & controlName & ".ascx"), EmailTemplateControl)
+            ts.BindData(params)
+
+            Dim body = RenderUserControl(ts)
+
+            Dim emailData As New Dictionary(Of String, String)
+            emailData.Add("Body", body)
+            emailData.Add("Subject", subject)
+
+            Core.EmailService.SendMail(toAddresses, Nothing, "EmailControlTemplate", emailData)
+        End Using
+    End Sub
+
 End Class

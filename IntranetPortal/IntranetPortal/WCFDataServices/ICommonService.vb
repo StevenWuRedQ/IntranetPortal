@@ -14,6 +14,9 @@ Public Interface ICommonService
     Sub SendEmail(userName As String, subject As String, body As String)
 
     <OperationContract()>
+    Sub SendEmailByControl(toAddresses As String, subject As String, constrolName As String, params As Dictionary(Of String, String))
+
+    <OperationContract()>
     Sub SendTaskSummaryEmail(userName As String)
 
     <OperationContract()>

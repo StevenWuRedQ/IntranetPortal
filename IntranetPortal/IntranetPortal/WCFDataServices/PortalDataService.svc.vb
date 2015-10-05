@@ -323,20 +323,48 @@ Public Class PortalDataService
     End Sub
 
     Public Sub DataIsReady(bble As String, apiOrderNum As Integer, type As String, result As String) Implements IPortalDataService.DataIsReady
-        Using client As New IntranetPortal.Data.DataAPI.WCFMacrosClient
 
-            If type = "DOBComplaints" Then
-                Dim callback = Sub()
-                                   Try
-                                       Dim complaints = CheckingComplain.Instance(bble)
-                                       complaints.UpdateComplaintsResult(result)
-                                   Catch ex As Exception
-                                       Core.SystemLog.LogError("DataIsReady", ex, "DOBComplaints", "Backend Services", bble)
-                                   End Try
-                               End Sub
-                Threading.ThreadPool.QueueUserWorkItem(callback)
-            End If
-        End Using
+        If type = "DOBComplaints" Then
+            Dim callback = Sub()
+                               Try
+                                   Dim complaints = CheckingComplain.Instance(bble)
+                                   AddHandler complaints.OnComplaintsUpdated, AddressOf ComplaintsUpdatedNotify
+
+                                   complaints.UpdateComplaintsResult(result)
+                               Catch ex As Exception
+                                   Core.SystemLog.LogError("DataIsReady", ex, "DOBComplaints", "Backend Services", bble)
+                               End Try
+                           End Sub
+            Threading.ThreadPool.QueueUserWorkItem(callback)
+        End If
+    End Sub
+
+    Public Sub ComplaintsUpdatedNotify(complaint As CheckingComplain)
+        Dim usersEmails As New List(Of String)
+
+        If Not String.IsNullOrEmpty(complaint.NotifyUsers) Then
+            For Each user In complaint.NotifyUsers.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries)
+                Dim party = PartyContact.GetContactByName(user)
+                If party IsNot Nothing Then
+                    usersEmails.Add(party.Email)
+                End If
+            Next
+        End If
+
+        If Not String.IsNullOrEmpty(Core.PortalSettings.GetValue("ComplaitntsNotifyEmails")) Then
+            usersEmails.AddRange(Core.PortalSettings.GetValue("ComplaitntsNotifyEmails").Split(";"))
+        End If
+
+        If usersEmails.Count > 0 Then
+            Dim mailData As New Dictionary(Of String, String)
+            mailData.Add("UserName", "All")
+            mailData.Add("Address", complaint.Address)
+            mailData.Add("BBLE", complaint.BBLE)
+
+            Dim svr As New CommonService
+            svr.SendEmailByControl(String.Join(";", usersEmails), "DOB Complaint Update for: " & complaint.Address, "ComplaintsDetailNotify", mailData)
+        End If
+
     End Sub
 
 End Class
