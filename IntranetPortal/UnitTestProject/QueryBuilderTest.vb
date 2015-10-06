@@ -101,7 +101,6 @@ Imports IntranetPortal.Core
 
     <TestMethod()>
     Public Sub ExecuteQueryTest()
-
         Dim sql = "SELECT * FROM Employees"
         Dim qb As New QueryBuilder
         Dim dt = qb.ExecuteQuery(sql)

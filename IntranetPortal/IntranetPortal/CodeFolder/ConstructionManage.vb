@@ -135,11 +135,53 @@ Public Class ConstructionManage
         Return result.Distinct.ToArray
     End Function
 
+    Public Shared Sub NotifyWhenSpotCheck(form As Data.ConstructionSpotCheck)
+        Dim spotCheck = Data.ConstructionSpotCheck.GetSpotCheck(form.Id)
+        If Not spotCheck Is Nothing Then
+            Dim builder = New StringBuilder
+            For Each p In spotCheck.GetType.GetProperties
+                If Not p.GetValue(form, Nothing) Is Nothing Then
+                    If p.Name <> "Id" Then
+                        If Not p.PropertyType.Name = "String" Then
+                            builder.Append("<h5>" & Data.ConstructionSpotCheck.GetNameDesction(p.Name) & "</h5>")
+                            builder.Append("<p>" & p.GetValue(form, Nothing) & "</p>")
+                        Else 'this is a string
+                            builder.Append("<h5>" & Data.ConstructionSpotCheck.GetNameDesction(p.Name) & "</h5>")
+                            builder.Append("<p>" & p.GetValue(form, Nothing).Replace(vbLf, "<br>") & "</p>")
+                        End If
+                    End If
+                End If
+            Next
+            Dim Body = builder.ToString
+            Dim Address = spotCheck.propertyAddress
+            Dim Manager = Data.ConstructionCase.GetCase(spotCheck.BBLE).Owner
+            Dim User = spotCheck.owner
+            Dim logDate = spotCheck.date
+            Dim bble = spotCheck.BBLE
+
+            ' write log
+            LeadsActivityLog.AddActivityLog(logDate, Body, bble, LeadsActivityLog.LogCategory.Construction.ToString, Employee.GetInstance(User).EmployeeID, User)
+
+            ' send email
+            Dim emails = Employee.GetInstance(Manager).Email
+            ' Dim emails = "stephenz@myidealprop.com"
+            Dim maildata As New Dictionary(Of String, String)
+            maildata.Add("Address", Address)
+            maildata.Add("Manager", Manager)
+            maildata.Add("User", User)
+            maildata.Add("Body", Body)
+
+            Core.EmailService.SendShortSaleMail(emails, "", "SpotCheckNotify", maildata)
+
+        End If
+
+    End Sub
+
 #Region "Activitylog Manage"
     Private Shared _actionLists = {"Updated pics needed", "Material order update", "Head count", "Document needed"}
 
     Public Sub New()
-        
+
     End Sub
 
     Public Sub New(actityLog As Boolean)
@@ -147,6 +189,8 @@ Public Class ConstructionManage
         Me.LogCategory = LeadsActivityLog.LogCategory.Construction
         Me.LogCategoryFilter = {LeadsActivityLog.LogCategory.Construction, LeadsActivityLog.LogCategory.ShortSale}
     End Sub
+
+
 
 #End Region
 End Class

@@ -12,13 +12,4 @@ Option Explicit On
 
 
 Partial Public Class ActivitySummary
-
-    '''<summary>
-    '''WebChartControl1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents WebChartControl1 As Global.DevExpress.XtraCharts.Web.WebChartControl
 End Class

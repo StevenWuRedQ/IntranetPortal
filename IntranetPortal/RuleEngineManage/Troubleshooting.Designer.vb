@@ -995,7 +995,6 @@ Partial Class Troubleshooting
         '
         'TabPage9
         '
-        Me.TabPage9.Controls.Add(Me.Button20)
         Me.TabPage9.Controls.Add(Me.Button19)
         Me.TabPage9.Controls.Add(Me.Button18)
         Me.TabPage9.Controls.Add(Me.Button17)
@@ -1011,15 +1010,6 @@ Partial Class Troubleshooting
         Me.TabPage9.TabIndex = 9
         Me.TabPage9.Text = "Construction"
         Me.TabPage9.UseVisualStyleBackColor = True
-        '
-        'Button20
-        '
-        Me.Button20.Location = New System.Drawing.Point(261, 44)
-        Me.Button20.Name = "Button20"
-        Me.Button20.Size = New System.Drawing.Size(75, 23)
-        Me.Button20.TabIndex = 8
-        Me.Button20.Text = "Button20"
-        Me.Button20.UseVisualStyleBackColor = True
         '
         'Button19
         '
@@ -1090,62 +1080,14 @@ Partial Class Troubleshooting
         Me.Button15.Text = "UpLoad Activity"
         Me.Button15.UseVisualStyleBackColor = True
         '
-        'TabPage10
+        'Button20
         '
-        Me.TabPage10.Controls.Add(Me.SplitContainer2)
-        Me.TabPage10.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage10.Name = "TabPage10"
-        Me.TabPage10.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage10.Size = New System.Drawing.Size(742, 329)
-        Me.TabPage10.TabIndex = 10
-        Me.TabPage10.Text = "Report"
-        Me.TabPage10.UseVisualStyleBackColor = True
-        '
-        'SplitContainer2
-        '
-        Me.SplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer2.Location = New System.Drawing.Point(3, 3)
-        Me.SplitContainer2.Name = "SplitContainer2"
-        '
-        'SplitContainer2.Panel1
-        '
-        Me.SplitContainer2.Panel1.Controls.Add(Me.btnGeneratTemplate)
-        Me.SplitContainer2.Panel1.Controls.Add(Me.txtReportTables)
-        '
-        'SplitContainer2.Panel2
-        '
-        Me.SplitContainer2.Panel2.Controls.Add(Me.txtTemplateResult)
-        Me.SplitContainer2.Size = New System.Drawing.Size(736, 323)
-        Me.SplitContainer2.SplitterDistance = 245
-        Me.SplitContainer2.TabIndex = 0
-        '
-        'btnGeneratTemplate
-        '
-        Me.btnGeneratTemplate.Location = New System.Drawing.Point(52, 286)
-        Me.btnGeneratTemplate.Name = "btnGeneratTemplate"
-        Me.btnGeneratTemplate.Size = New System.Drawing.Size(126, 23)
-        Me.btnGeneratTemplate.TabIndex = 1
-        Me.btnGeneratTemplate.Text = "Generat Template"
-        Me.btnGeneratTemplate.UseVisualStyleBackColor = True
-        '
-        'txtReportTables
-        '
-        Me.txtReportTables.Dock = System.Windows.Forms.DockStyle.Top
-        Me.txtReportTables.Location = New System.Drawing.Point(0, 0)
-        Me.txtReportTables.Multiline = True
-        Me.txtReportTables.Name = "txtReportTables"
-        Me.txtReportTables.Size = New System.Drawing.Size(245, 280)
-        Me.txtReportTables.TabIndex = 0
-        '
-        'txtTemplateResult
-        '
-        Me.txtTemplateResult.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtTemplateResult.Location = New System.Drawing.Point(0, 0)
-        Me.txtTemplateResult.Multiline = True
-        Me.txtTemplateResult.Name = "txtTemplateResult"
-        Me.txtTemplateResult.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtTemplateResult.Size = New System.Drawing.Size(487, 323)
-        Me.txtTemplateResult.TabIndex = 1
+        Me.Button20.Location = New System.Drawing.Point(261, 44)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(75, 23)
+        Me.Button20.TabIndex = 8
+        Me.Button20.Text = "Button20"
+        Me.Button20.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '

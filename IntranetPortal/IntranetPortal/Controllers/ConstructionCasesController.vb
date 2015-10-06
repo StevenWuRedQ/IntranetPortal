@@ -206,9 +206,19 @@ Namespace Controllers
             Return response
         End Function
 
-        <Route("api/ConstructionCases/SpotCheck")>
-        Function SpotCheck(<FromBody> queryString As JToken) As IHttpActionResult
+        <Route("api/ConstructionCases/GetSpotCheckList")>
+        Function GetSpotCheckList() As IHttpActionResult
+            Dim username = HttpContext.Current.User.Identity.Name.ToString
+            Dim list = ConstructionSpotCheck.GetSpotChecks(username)
+            Dim result = From x In list
+                         Select x.Id, x.propertyAddress
+            Return Ok(result.ToArray)
+        End Function
 
+        <Route("api/ConstructionCases/SaveSpotList")>
+        Function UpdateSpotList(form As Data.ConstructionSpotCheck) As IHttpActionResult
+            ConstructionSpotCheck.UpdateSpotCheck(form)
+            ConstructionManage.NotifyWhenSpotCheck(form)
             Return Ok()
         End Function
 

@@ -39,6 +39,27 @@
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ConstructionSpotChecks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="propertyAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="access" Type="nvarchar" MaxLength="50" />
+          <Property Name="numOfWork" Type="int" />
+          <Property Name="descInterior" Type="nvarchar" MaxLength="500" />
+          <Property Name="descExterior" Type="nvarchar" MaxLength="500" />
+          <Property Name="descMaterial" Type="nvarchar" MaxLength="500" />
+          <Property Name="isPermitOnsite" Type="bit" />
+          <Property Name="permitsAndExpired" Type="nvarchar" MaxLength="500" />
+          <Property Name="isPlansOnSite" Type="bit" />
+          <Property Name="nextDayPlan" Type="nvarchar" MaxLength="500" />
+          <Property Name="note" Type="nvarchar" MaxLength="500" />
+          <Property Name="owner" Type="nvarchar" MaxLength="50" />
+          <Property Name="status" Type="int" />
+        </EntityType>
         <EntityType Name="FormDataItems">
           <Key>
             <PropertyRef Name="DataId" />
@@ -69,6 +90,7 @@
         <EntityContainer Name="ConstructionModelStoreContainer">
           <EntitySet Name="CheckingComplains" EntityType="Self.CheckingComplains" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConstructionCases" EntityType="Self.ConstructionCases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConstructionSpotChecks" EntityType="Self.ConstructionSpotChecks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormDataItems" EntityType="Self.FormDataItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleCase" EntityType="Self.TitleCase" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -81,6 +103,7 @@
           <EntitySet Name="CheckingComplains" EntityType="ConstructionModel.CheckingComplain" />
           <EntitySet Name="FormDataItems" EntityType="ConstructionModel.FormDataItem" />
           <EntitySet Name="TitleCases" EntityType="ConstructionModel.TitleCase" />
+          <EntitySet Name="ConstructionSpotCheck" EntityType="ConstructionModel.ConstructionSpotCheck" />
         </EntityContainer>
         <EntityType Name="ConstructionCase">
           <Key>
@@ -142,6 +165,27 @@
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ConstructionSpotCheck">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="propertyAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="access" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="numOfWork" Type="Int32" />
+          <Property Name="descInterior" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="descExterior" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="descMaterial" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="isPermitOnsite" Type="Boolean" />
+          <Property Name="permitsAndExpired" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="isPlansOnSite" Type="Boolean" />
+          <Property Name="nextDayPlan" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -210,6 +254,28 @@
                 <ScalarProperty Name="Owner" ColumnName="Owner" />
                 <ScalarProperty Name="FormItemId" ColumnName="FormItemId" />
                 <ScalarProperty Name="CaseName" ColumnName="CaseName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConstructionSpotCheck">
+            <EntityTypeMapping TypeName="ConstructionModel.ConstructionSpotCheck">
+              <MappingFragment StoreEntitySet="ConstructionSpotChecks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="nextDayPlan" ColumnName="nextDayPlan" />
+                <ScalarProperty Name="isPlansOnSite" ColumnName="isPlansOnSite" />
+                <ScalarProperty Name="permitsAndExpired" ColumnName="permitsAndExpired" />
+                <ScalarProperty Name="isPermitOnsite" ColumnName="isPermitOnsite" />
+                <ScalarProperty Name="descMaterial" ColumnName="descMaterial" />
+                <ScalarProperty Name="descExterior" ColumnName="descExterior" />
+                <ScalarProperty Name="descInterior" ColumnName="descInterior" />
+                <ScalarProperty Name="numOfWork" ColumnName="numOfWork" />
+                <ScalarProperty Name="access" ColumnName="access" />
+                <ScalarProperty Name="propertyAddress" ColumnName="propertyAddress" />
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>

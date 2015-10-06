@@ -94,6 +94,7 @@
     <Compile Include="BusinessForm\FormDataItem.vb" />
     <Compile Include="Complaints\CheckingComplains.vb" />
     <Compile Include="Construction\ConstructionCase.vb" />
+    <Compile Include="Construction\ConstructionSpotCheck.vb" />
     <Compile Include="Construction\DataModel\CheckingComplain.vb">
       <DependentUpon>ConstructionModel.tt</DependentUpon>
     </Compile>
@@ -113,6 +114,9 @@
     <Compile Include="Construction\DataModel\ConstructionModel.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>ConstructionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\DataModel\ConstructionSpotCheck.vb">
       <DependentUpon>ConstructionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Construction\DataModel\FormDataItem.vb">
