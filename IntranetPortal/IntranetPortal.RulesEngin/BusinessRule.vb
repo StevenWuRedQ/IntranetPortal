@@ -633,7 +633,6 @@ Public Class DOBComplaintsCheckingRule
             End If
         Next
 
-
         If SendingNotifyEmail Then
             For Each name In names.Distinct.ToArray
 
