@@ -895,4 +895,9 @@ Public Class Troubleshooting
             MessageBox.Show(ex.Message)
         End Try
     End Sub
+
+    Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
+        Dim rule As New IntranetPortal.RulesEngine.ScanECourtsRule
+        rule.Execute()
+    End Sub
 End Class

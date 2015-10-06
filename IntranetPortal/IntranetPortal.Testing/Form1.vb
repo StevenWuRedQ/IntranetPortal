@@ -1,6 +1,7 @@
 ﻿Imports IntranetPortal.Data
 Imports IntranetPortal
 Imports IntranetPortal.Data.DataAPI
+Imports IntranetPortal.RulesEngine
 
 Public Class Form1
 
@@ -211,13 +212,14 @@ Public Class Form1
     End Sub
 
     Private Sub ParseEamil_Click(sender As Object, e As EventArgs) Handles ParseEamil.Click
-        Dim serv = New Core.ParseEmailService("Portal.etrack@myidealprop.com", "ColorBlue1")
-
+        Dim r = New ScanECourtsRule
+        r.Execute()
+        ParseText.Text = "Success"
         '''''''''''''''''''''''''''''''''
-        Dim msg = serv.GetNewEmails
-        For Each m In msg
-            LegalECourt.Parse(m)
-        Next
+        'Dim msg = serv.GetNewEmails
+        'For Each m In msg
+        '    LegalECourt.Parse(m)
+        'Next
 
 
 

@@ -39,6 +39,7 @@ Public Class LegalECourt
         End If
     End Sub
 
+
     Public Shared Function Parse(msg As ImapX.Message) As LegalECourt
         Dim eCourt As LegalECourt
         If msg Is Nothing Then
@@ -48,6 +49,7 @@ Public Class LegalECourt
             eCourt = ctx.LegalECourts.Where(Function(e) e.UpdateTime = msg.Date AndAlso msg.Subject = msg.Subject).FirstOrDefault
             If (eCourt Is Nothing) Then
                 eCourt = New LegalECourt
+                eCourt.CreateDate = DateTime.Now
                 ctx.LegalECourts.Add(eCourt)
             End If
             eCourt.MessageId = msg.MessageId
@@ -58,9 +60,9 @@ Public Class LegalECourt
             eCourt.UpdateApperanceDate()
             eCourt.UpdateIndexNumber()
             eCourt.UpdateBBLE()
-            If (eCourt.AppearanceDate > DateTime.MinValue) Then
-                ctx.SaveChanges()
-            End If
+
+            ctx.SaveChanges()
+
         End Using
         Return eCourt
     End Function

@@ -179,7 +179,15 @@ Public Class LegalCaseManage
 
         Return False
     End Function
-
+    Public Shared Function GetLegalManger() As Employee
+        Using ctx As New Entities
+            Dim LegalManger = ctx.UsersInRoles.Where(Function(u) u.Rolename = MgrRoleName).FirstOrDefault
+            If (LegalManger IsNot Nothing AndAlso (Not String.IsNullOrEmpty(LegalManger.Username))) Then
+                Return Employee.GetInstance(LegalManger.Username)
+            End If
+        End Using
+        Return Nothing
+    End Function
     Public Shared Function IsViewable(userName As String) As Boolean
 
         Dim roleNames = Core.PortalSettings.GetValue("LegalViewableRoles").Split(";")

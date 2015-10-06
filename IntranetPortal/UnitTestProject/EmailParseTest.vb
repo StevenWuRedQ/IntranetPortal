@@ -1,5 +1,6 @@
 ﻿Imports IntranetPortal
 Imports IntranetPortal.Data
+Imports IntranetPortal.RulesEngine
 
 <TestClass()>
 Public Class EmailParseTest
@@ -113,8 +114,9 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
         'Next
         'Assert.IsTrue(msg.Count > 0)
         '''''''''''''''''''''''''
-        Dim client = serv.ConntectEmail()
-        Assert.IsTrue(client IsNot Nothing)
+
+        Assert.IsTrue(serv.IsLogedIn)
     End Sub
+
 
 End Class

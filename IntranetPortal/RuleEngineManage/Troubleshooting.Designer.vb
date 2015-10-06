@@ -124,6 +124,7 @@ Partial Class Troubleshooting
         Me.btnGeneratTemplate = New System.Windows.Forms.Button()
         Me.txtReportTables = New System.Windows.Forms.TextBox()
         Me.txtTemplateResult = New System.Windows.Forms.TextBox()
+        Me.Button21 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -878,6 +879,7 @@ Partial Class Troubleshooting
         '
         'TabPage7
         '
+        Me.TabPage7.Controls.Add(Me.Button21)
         Me.TabPage7.Controls.Add(Me.btnSummaryEmail)
         Me.TabPage7.Controls.Add(Me.btnFollowUp)
         Me.TabPage7.Controls.Add(Me.btnRefreshLegalReport)
@@ -1089,6 +1091,15 @@ Partial Class Troubleshooting
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
+        'Button21
+        '
+        Me.Button21.Location = New System.Drawing.Point(6, 136)
+        Me.Button21.Name = "Button21"
+        Me.Button21.Size = New System.Drawing.Size(122, 23)
+        Me.Button21.TabIndex = 3
+        Me.Button21.Text = "Scan Email"
+        Me.Button21.UseVisualStyleBackColor = True
+        '
         'Troubleshooting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1240,4 +1251,5 @@ Partial Class Troubleshooting
     Friend WithEvents txtReportTables As TextBox
     Friend WithEvents btnGeneratTemplate As Button
     Friend WithEvents txtTemplateResult As TextBox
+    Friend WithEvents Button21 As Button
 End Class

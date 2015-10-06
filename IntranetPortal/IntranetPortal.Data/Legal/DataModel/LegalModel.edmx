@@ -53,6 +53,7 @@
           <Property Name="BodyText" Type="nvarchar(max)" />
           <Property Name="BodyHtml" Type="nvarchar(max)" />
           <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" />
         </EntityType>
         <EntityType Name="LegalJudge">
           <Key>
@@ -310,6 +311,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <Property Name="BodyText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BodyHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -434,6 +436,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <EntitySetMapping Name="LegalECourts">
             <EntityTypeMapping TypeName="LegalModel.LegalECourt">
               <MappingFragment StoreEntitySet="LegalECourts">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
                 <ScalarProperty Name="BodyHtml" ColumnName="BodyHtml" />
                 <ScalarProperty Name="BodyText" ColumnName="BodyText" />

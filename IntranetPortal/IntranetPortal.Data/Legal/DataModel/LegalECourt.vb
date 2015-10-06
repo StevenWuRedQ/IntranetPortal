@@ -20,5 +20,6 @@ Partial Public Class LegalECourt
     Public Property BodyText As String
     Public Property BodyHtml As String
     Public Property UpdateTime As Nullable(Of Date)
+    Public Property CreateDate As Nullable(Of Date)
 
 End Class
