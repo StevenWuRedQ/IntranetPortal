@@ -435,7 +435,7 @@
                             var dialog = DevExpress.ui.dialog.confirm("Your current DOB Violation data will be replaced?", "Warning");
                             dialog.done(function (confirmed) {
                                 if (confirmed) {
-                                    var data = JSON.parse(res.d)
+                                    var data = res
                                     $scope.$apply(function () {
                                         if (data.DOB_TotalDOBViolation) $scope.CSCase.CSCase.Violations.DOB_TotalDOBViolation = data.DOB_TotalDOBViolation;
                                         if (data.DOB_TotalOpenViolations) $scope.CSCase.CSCase.Violations.DOB_TotalOpenViolations = data.DOB_TotalOpenViolations;
@@ -463,7 +463,7 @@
                             var dialog = DevExpress.ui.dialog.confirm("Your current ECB Violation data will be replaced?", "Warning");
                             dialog.done(function (confirmed) {
                                 if (confirmed) {
-                                    var data = JSON.parse(res.d)
+                                    var data = res
                                     $scope.$apply(function () {
                                         if (data.ECP_TotalViolation) $scope.CSCase.CSCase.Violations.ECP_TotalViolation = data.ECP_TotalViolation;
                                         if (data.ECP_TotalOpenViolations) $scope.CSCase.CSCase.Violations.ECP_TotalOpenViolations = data.ECP_TotalOpenViolations;

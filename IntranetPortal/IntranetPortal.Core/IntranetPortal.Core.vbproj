@@ -70,6 +70,10 @@
     <Reference Include="GeoJSON.Net.MsSqlSpatial">
       <HintPath>..\..\..\MapData\GeoJSON.Net.MsSqlSpatial\src\GeoJSON.Net.MsSqlSpatial\bin\Debug\GeoJSON.Net.MsSqlSpatial.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ImapX, Version=2.0.0.16, Culture=neutral, PublicKeyToken=5992873d65130d1f, processorArchitecture=MSIL">
       <HintPath>..\packages\ImapX.2.0.0.16\lib\net45\ImapX.dll</HintPath>
       <Private>True</Private>
@@ -86,9 +90,21 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RazorHosting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.0.5.46.0\lib\net40\RazorHosting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Reeb.SqlOM, Version=0.3.1989.35954, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\Reeb.SqlOM.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleBrowser, Version=0.5.46.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.0.5.46.0\lib\net40\SimpleBrowser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleBrowser.WebDriver, Version=0.5.34.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.WebDriver.0.5.34\lib\net40\SimpleBrowser.WebDriver.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations">
@@ -115,6 +131,14 @@
     </Reference>
     <Reference Include="TwilioSharp">
       <HintPath>..\packages\TwilioSharpCore.1.0\lib\TwilioSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver, Version=2.47.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.2.47.0\lib\net40\WebDriver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebDriver.Support, Version=2.47.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.Support.2.47.0\lib\net40\WebDriver.Support.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -240,6 +264,7 @@
     <Compile Include="QueryBuilder\CustomReport.vb" />
     <Compile Include="QueryBuilder\QueryBuilder.vb" />
     <Compile Include="Utility.vb" />
+    <Compile Include="WebGrabber.vb" />
     <Compile Include="WorkingHours.vb" />
   </ItemGroup>
   <ItemGroup>

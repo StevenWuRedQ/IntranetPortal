@@ -222,5 +222,18 @@ Namespace Controllers
             Return Ok()
         End Function
 
+        <Route("api/ConstructionCases/GetDOBViolations")>
+        Function GetDOBViolations(bble As String) As IHttpActionResult
+            Dim ld = LeadsInfo.GetInstance(bble)
+            Dim violations = Core.WebGrabber.GetDOBViolations(ld.Borough, ld.Block, ld.Lot)
+            Return Ok(violations)
+        End Function
+
+        <Route("api/ConstructionCases/GetECBViolations")>
+        Function GetECBViolations(bble As String) As IHttpActionResult
+            Dim ld = LeadsInfo.GetInstance(bble)
+            Dim violations = Core.WebGrabber.GetECBViolations(ld.Borough, ld.Block, ld.Lot)
+            Return Ok(violations)
+        End Function
     End Class
 End Namespace

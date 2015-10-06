@@ -149,7 +149,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntranetPortal.Core\IntranetPortal.Core.vbproj">
@@ -194,13 +196,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\WebDriverChromeDriver.2.10\tools\chromedriver.exe">
-      <Link>chromedriver.exe</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chromedriver-license.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="DLL\log4net.dll" />
     <Content Include="DLL\MyIdealProp.Workflow.Client.dll" />
     <Content Include="DLL\MyIdealProp.Workflow.DBPersistence.dll" />

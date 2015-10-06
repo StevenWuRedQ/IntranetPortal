@@ -5,7 +5,7 @@ Imports System.Threading
 Imports IntranetPortal.Data
 Imports System.Text
 Imports OpenQA.Selenium
-Imports ClosedXML
+Imports SimpleBrowser.WebDriver
 
 Public Class Troubleshooting
 
@@ -882,8 +882,7 @@ Public Class Troubleshooting
     End Sub
 
     Private Sub Button19_Click(sender As Object, e As EventArgs) Handles Button19.Click
-        Dim spotcheck = New Data.ConstructionSpotCheck
-        spotcheck.StartSpotCheck("1004490003", "Chris Yan")
+
     End Sub
 
     Private Sub btnGeneratTemplate_Click(sender As Object, e As EventArgs) Handles btnGeneratTemplate.Click

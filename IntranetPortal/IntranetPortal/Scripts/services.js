@@ -550,7 +550,7 @@ app.service('ptConstructionService', [
 
         this.getDOBViolations = function (bble, callback) {
             if (bble) {
-                var url = "/Construction/ConstructionServices.svc/GetDOBViolations?bble=" + bble
+                var url = "/api/ConstructionCases/GetDOBViolations?bble=" + bble
                 $http.get(url)
                 .success(function (res) {
                     if (callback) callback(null, res)
@@ -564,7 +564,7 @@ app.service('ptConstructionService', [
 
         this.getECBViolations = function (bble, callback) {
             if (bble) {
-                var url = "/Construction/ConstructionServices.svc/GetECBViolations?bble=" + bble
+                var url = "/api/ConstructionCases/GetECBViolations?bble=" + bble
                 $http.get(url)
                 .success(function (res) {
                     if (callback) callback(null, res)

@@ -223,13 +223,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\WebDriverChromeDriver.2.10\tools\chromedriver.exe">
-      <Link>chromedriver.exe</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="chromedriver-license.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="DLL\log4net.dll" />
     <None Include="Service References\PortalService\CommonService1.disco" />
   </ItemGroup>
