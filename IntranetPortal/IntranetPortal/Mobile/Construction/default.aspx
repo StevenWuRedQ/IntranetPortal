@@ -5,7 +5,7 @@
         <div class="section">
             <div class="form-group">
                 <label>Date</label>
-                <input class="form-control" type="text" placeholder="00/00/0000" ng-model="form.date">
+                <input class="form-control" type="date" placeholder="00/00/0000" ng-model="form.date">
             </div>
             <div class="form-group">
                 <label>Property Address</label>
