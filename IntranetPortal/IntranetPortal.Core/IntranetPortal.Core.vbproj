@@ -91,15 +91,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="RazorHosting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleBrowser.0.5.46.0\lib\net40\RazorHosting.dll</HintPath>
+      <HintPath>..\packages\SimpleBrowser.0.5.61.0\lib\net40\RazorHosting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Reeb.SqlOM, Version=0.3.1989.35954, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\Reeb.SqlOM.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleBrowser, Version=0.5.46.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleBrowser.0.5.46.0\lib\net40\SimpleBrowser.dll</HintPath>
+    <Reference Include="SimpleBrowser, Version=0.5.61.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.0.5.61.0\lib\net40\SimpleBrowser.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SimpleBrowser.WebDriver, Version=0.5.34.0, Culture=neutral, processorArchitecture=MSIL">

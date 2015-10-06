@@ -882,7 +882,7 @@ Public Class Troubleshooting
     End Sub
 
     Private Sub Button19_Click(sender As Object, e As EventArgs) Handles Button19.Click
-
+        Core.WebGrabber.GetHPDInfo()
     End Sub
 
     Private Sub btnGeneratTemplate_Click(sender As Object, e As EventArgs) Handles btnGeneratTemplate.Click

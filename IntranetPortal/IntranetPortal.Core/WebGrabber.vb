@@ -151,7 +151,8 @@ Public Class WebGrabber
         Dim driver = New SimpleBrowserDriver
         driver.Navigate.GoToUrl("https://hpdonline.hpdnyc.org/HPDonline/provide_address.aspx")
         driver.FindElement(By.Id("RadioStrOrBlk_1")).Click()
-        Thread.Sleep(1000)
+        Dim radiowait = New Support.UI.WebDriverWait(driver, New TimeSpan(10))
+        radiowait.Until(Function(d) d.FindElement(By.Id("txtBlockNo")))
         Dim boroSelect = New Support.UI.SelectElement(driver.FindElement(By.Id("ddlBoro")))
         boroSelect.SelectByValue("3")
         driver.FindElement(By.Id("txtBlockNo")).SendKeys("1386")
