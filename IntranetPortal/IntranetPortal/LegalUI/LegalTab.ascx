@@ -177,6 +177,15 @@
                     <div style="overflow: auto; max-height: 100px">
                         <table style="width: 100%;" class="table-striped">
                             <tbody>
+                                 <tr ng-show="LegalECourt" style="color:red">
+                                    <td style="width: 20px">
+                                        <i class="fa fa-exclamation-circle note_img"></i>
+                                    </td>
+                                    <td>
+                                        <div class="note_text">Get new Appearance Date : {{LegalECourt.AppearanceDate |date:'MM/dd/yyyy'}}</div>
+                                    </td>
+                                   
+                                </tr>
                                 <tr ng-show="LegalCase.Description!=null">
                                     <td style="width: 20px">
                                         <i class="fa fa-exclamation-circle note_img"></i>

@@ -30,6 +30,16 @@ Namespace Controllers
             Return Ok(legalECourt)
         End Function
 
+        <ResponseType(GetType(LegalECourt))>
+        <Route("api/LegalECourtByBBLE/{bble}")>
+        Function GetLegalECourtByBBLE(ByVal BBLE As String) As IHttpActionResult
+            Dim legalECourt As LegalECourt = Data.LegalECourt.GetLegalEcourt(BBLE)
+            If IsNothing(legalECourt) Then
+                Return NotFound()
+            End If
+
+            Return Ok(legalECourt)
+        End Function
         ' PUT: api/LegalECourts/5
         <ResponseType(GetType(Void))>
         Function PutLegalECourt(ByVal id As Integer, ByVal legalECourt As LegalECourt) As IHttpActionResult

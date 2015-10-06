@@ -979,7 +979,11 @@
                     }).error(function (data, status, headers, config) {
                         alert("Get Tax Liens failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
                     });
-
+                    /************ get LegalECourt info*************/
+                    $http.get("/api/LegalECourtByBBLE/"+BBLE).
+                   success(function (data, status, headers, config) {
+                       $scope.LegalECourt = data;
+                   });
                 }
 
                 $scope.ModelArray = function (model) {

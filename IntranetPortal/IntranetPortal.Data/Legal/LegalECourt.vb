@@ -1,6 +1,8 @@
 ﻿Imports System.Text.RegularExpressions
 Imports ImapX
 Public Class LegalECourt
+
+
     Public Sub UpdateApperanceDate()
         If (BodyText IsNot Nothing) Then
             Dim regexDate = "\d{2}\/\d{2}\/\d{4}"
@@ -39,7 +41,11 @@ Public Class LegalECourt
         End If
     End Sub
 
-
+    Public Shared Function GetLegalEcourt(bble As String) As LegalECourt
+        Using ctx As New LegalModelContainer
+            Return ctx.LegalECourts.Where(Function(e) e.BBLE = bble).OrderByDescending(Function(e) e.UpdateTime).FirstOrDefault
+        End Using
+    End Function
     Public Shared Function Parse(msg As ImapX.Message) As LegalECourt
         Dim eCourt As LegalECourt
         If msg Is Nothing Then
