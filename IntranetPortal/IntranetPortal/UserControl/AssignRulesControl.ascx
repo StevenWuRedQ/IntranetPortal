@@ -17,7 +17,6 @@
         <dx:GridViewDataTextColumn FieldName="Count">
             <EditItemTemplate>
                 <dx:ASPxTextBox runat="server" ID="txCount" CssClass="edit_drop" Value='<%# Bind("Count")%>'>
-
                 </dx:ASPxTextBox>
             </EditItemTemplate>
         </dx:GridViewDataTextColumn>

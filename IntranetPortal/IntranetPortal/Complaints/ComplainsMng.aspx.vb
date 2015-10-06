@@ -118,11 +118,21 @@ Public Class ComplainsMng
             cc = New Data.CheckingComplain
             cc.BBLE = bble
             cc.NotifyUsers = If(ManagerView, "", User.Identity.Name)
+
+            Dim ld = LeadsInfo.GetInstance(bble)
+            cc.Address = ld.PropertyAddress
+            cc.Save(User.Identity.Name)
+            cc.RefreshComplains(User.Identity.Name)
+        Else
+            If String.IsNullOrEmpty(cc.NotifyUsers) Then
+                cc.NotifyUsers = User.Identity.Name
+            Else
+                cc.NotifyUsers += ";" + User.Identity.Name
+            End If
+
+            cc.Save(User.Identity.Name)
         End If
 
-        Dim ld = LeadsInfo.GetInstance(bble)
-        cc.Address = ld.PropertyAddress
-        cc.Save(User.Identity.Name)
     End Sub
 
     Protected Sub gdComplainsResult_DataBinding(sender As Object, e As EventArgs)

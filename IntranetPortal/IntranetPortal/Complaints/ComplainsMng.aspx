@@ -211,7 +211,7 @@
                                 </td>
                                 <td>
                                     <input type="button" class="btn btn-primary" value="Verify" runat="server" id="btnCheck" onclick="cpAddProperty.PerformCallback('Add')" /><br />
-                                    <input type="button" class="btn btn-primary" value="Add to Watch List" id="btnAdd" onclick="gdComplains.PerformCallback('Add')" style="margin-top: 10px;" runat="server" disabled="disabled" />
+                                    <input type="button" class="btn btn-primary" value="Add to Watch List" id="btnAdd" onclick="gdComplains.PerformCallback('Add');alert('Success.')" style="margin-top: 10px;" runat="server" disabled="disabled" />
 
                                     <dx:ASPxLabel runat="server" ID="lblAddress" Visible="false"></dx:ASPxLabel>
                                 </td>
