@@ -42,6 +42,7 @@ Partial Public Class ConstructionSpotCheck
             Me.BBLE = BBLE
             Me.propertyAddress = ctx.ConstructionCases.Where(Function(c) c.BBLE).FirstOrDefault.CaseName
             Me.owner = Owner
+            Me.status = CaseStatus.Created
             ctx.ConstructionSpotCheck.Add(Me)
             ctx.SaveChanges()
         End Using

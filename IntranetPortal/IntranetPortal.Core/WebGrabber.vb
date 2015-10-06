@@ -148,17 +148,22 @@ Public Class WebGrabber
     End Function
 
     Public Shared Function GetHPDInfo() As HPDViolation
-        Dim driver = New SimpleBrowserDriver
-        driver.Navigate.GoToUrl("https://hpdonline.hpdnyc.org/HPDonline/provide_address.aspx")
-        driver.FindElement(By.Id("RadioStrOrBlk_1")).Click()
-        Dim radiowait = New Support.UI.WebDriverWait(driver, New TimeSpan(10))
-        radiowait.Until(Function(d) d.FindElement(By.Id("txtBlockNo")))
-        Dim boroSelect = New Support.UI.SelectElement(driver.FindElement(By.Id("ddlBoro")))
-        boroSelect.SelectByValue("3")
-        driver.FindElement(By.Id("txtBlockNo")).SendKeys("1386")
-        driver.FindElement(By.Id("txtLotNo")).SendKeys("29")
-        driver.FindElement(By.Id("btnSearch")).Click()
-        driver.Close()
+        Try
+            Dim driver = New SimpleBrowserDriver
+            driver.Navigate.GoToUrl("https://hpdonline.hpdnyc.org/HPDonline/provide_address.aspx")
+            driver.FindElement(By.Id("RadioStrOrBlk_1")).Click()
+            Console.WriteLine(driver.FindElement(By.Id("mymaintable_lblDate")).Text)
+            Dim radiowait = New Support.UI.WebDriverWait(driver, New TimeSpan(0, 0, 15))
+            radiowait.Until(Support.UI.ExpectedConditions.ElementExists(By.Id("txtBlockNo")))
+            Dim boroSelect = New Support.UI.SelectElement(By.Id("ddlBoro"))
+            boroSelect.SelectByValue("3")
+            driver.FindElement(By.Id("txtBlockNo")).SendKeys("1386")
+            driver.FindElement(By.Id("txtLotNo")).SendKeys("29")
+            driver.FindElement(By.Id("btnSearch")).Click()
+            driver.Close()
+        Catch ex As Exception
+
+        End Try
     End Function
 
     Class DOBViolation

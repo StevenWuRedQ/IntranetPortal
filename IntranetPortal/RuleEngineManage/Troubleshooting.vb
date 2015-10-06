@@ -881,7 +881,7 @@ Public Class Troubleshooting
 
     End Sub
 
-    Private Sub Button19_Click(sender As Object, e As EventArgs) Handles Button19.Click
+    Private Sub OnTestHDPClick(sender As Object, e As EventArgs) Handles TestHPD.Click
         Core.WebGrabber.GetHPDInfo()
     End Sub
 
@@ -898,5 +898,10 @@ Public Class Troubleshooting
     Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
         Dim rule As New IntranetPortal.RulesEngine.ScanECourtsRule
         rule.Execute()
+    End Sub
+
+    Private Sub SpotCheckTest_Click(sender As Object, e As EventArgs) Handles SpotCheckTest.Click
+        Dim sc = New Data.ConstructionSpotCheck
+        sc.StartSpotCheck("3013860029", "Chris Yan")
     End Sub
 End Class
