@@ -554,8 +554,8 @@ Public Class ActivityLogs
                                      "<tr><td>Important:</td><td>{2}</td></tr>" &
                                    "<tr><td>Description:</td><td>{3}</td></tr>" &
                                    "</table>", employees, taskAction, taskPriority, taskDescription)
-
-        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LogCategory.ToString, Nothing, createUser, LeadsActivityLog.EnumActionType.SetAsTask)
+        Dim emp = Employee.GetInstance(createUser)
+        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LogCategory.ToString, emp.EmployeeID, createUser, LeadsActivityLog.EnumActionType.SetAsTask)
         Dim task = UserTask.AddUserTask(bble, employees, taskAction, taskPriority, "In Office", scheduleDate, taskDescription, log.LogID, createUser)
         Return task.TaskID
     End Function

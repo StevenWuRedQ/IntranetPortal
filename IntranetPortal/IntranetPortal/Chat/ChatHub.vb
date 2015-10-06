@@ -29,7 +29,6 @@ Public Class ChatHub
                                })
 
             Clients.Caller.onConnected(id, userName, ConnectedUsers, CurrentMessage)
-
             Clients.AllExcept(id).onNewUserConnected(id, userName)
         End If
     End Sub
