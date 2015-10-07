@@ -4,8 +4,6 @@ Imports IntranetPortal
 Imports System.Threading
 Imports IntranetPortal.Data
 Imports System.Text
-Imports OpenQA.Selenium
-Imports SimpleBrowser.WebDriver
 
 Public Class Troubleshooting
 
@@ -861,23 +859,19 @@ Public Class Troubleshooting
     End Sub
 
     Private Sub Button18_Click(sender As Object, e As EventArgs) Handles Button18.Click
+        TextBox4.Text = ""
+        Dim input = TextBox5.Text
+        Dim tokens = input.Split("|")
+        Dim BBLE = tokens(0)
+        Dim owner = tokens(1)
+        Dim caseName = LeadsInfo.GetInstance(BBLE).PropertyAddress
+        Try
+            ConstructionManage.StartConstruction(BBLE, caseName, owner, owner)
+            TextBox4.AppendText("Success")
+        Catch ex As Exception
+            TextBox4.AppendText("Fails \n")
+        End Try
 
-        Dim result = New StringBuilder
-        Dim Data = New Dictionary(Of String, Long) From {
-        {"288 VERMONT ST, Brooklyn,NY 11207", 3037220024},
-        {"1340 BUSHWICK AVE, Brooklyn,NY 11207", 3034260027},
-        {"849 GREENE AVE, Brooklyn,NY 11221", 3016150051}
-        }
-        For Each kvp As KeyValuePair(Of String, Long) In Data
-            Dim caseName = kvp.Key.Trim
-            Dim BBLE = kvp.Value
-            Try
-                IntranetPortal.ConstructionManage.StartConstruction(BBLE.ToString, caseName, "Melissa Ramlakhan", "Melissa Ramlakhan")
-                TextBox4.AppendText(BBLE.ToString & ", " & caseName & " success \n")
-            Catch ex As Exception
-                TextBox4.AppendText(BBLE.ToString & ", " & caseName & " fails \n")
-            End Try
-        Next
 
     End Sub
 
@@ -906,5 +900,25 @@ Public Class Troubleshooting
         For Each c In cs
             sc.StartSpotCheck(c.BBLE, "Andrew Aronoff")
         Next
+    End Sub
+
+    Private Sub Organize_Click(sender As Object, e As EventArgs) Handles Organize.Click
+        TextBox4.Text = ""
+        Dim filen = TextBox5.Text
+        Dim fs = New StreamReader("D:\Data\" & filen)
+        Dim line = fs.ReadLine
+        While Not line Is Nothing
+            Dim tokens = line.Split(",")
+            Dim token = tokens(0)
+            Try
+                Dim BBLE = Core.Utility.Address2BBLE(token)
+                TextBox4.AppendText("'" & BBLE & "'" & ",")
+            Catch ex As Exception
+                TextBox4.AppendText("null,")
+            End Try
+            line = fs.ReadLine
+        End While
+        fs.Close()
+
     End Sub
 End Class

@@ -111,6 +111,7 @@ Partial Class Troubleshooting
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnComplaintsRefresh = New System.Windows.Forms.Button()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.SpotCheckTest = New System.Windows.Forms.Button()
         Me.TestHPD = New System.Windows.Forms.Button()
         Me.Button18 = New System.Windows.Forms.Button()
         Me.Button17 = New System.Windows.Forms.Button()
@@ -125,7 +126,7 @@ Partial Class Troubleshooting
         Me.btnGeneratTemplate = New System.Windows.Forms.Button()
         Me.txtReportTables = New System.Windows.Forms.TextBox()
         Me.txtTemplateResult = New System.Windows.Forms.TextBox()
-        Me.SpotCheckTest = New System.Windows.Forms.Button()
+        Me.Organize = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -1004,6 +1005,7 @@ Partial Class Troubleshooting
         '
         'TabPage9
         '
+        Me.TabPage9.Controls.Add(Me.Organize)
         Me.TabPage9.Controls.Add(Me.SpotCheckTest)
         Me.TabPage9.Controls.Add(Me.TestHPD)
         Me.TabPage9.Controls.Add(Me.Button18)
@@ -1020,6 +1022,15 @@ Partial Class Troubleshooting
         Me.TabPage9.TabIndex = 9
         Me.TabPage9.Text = "Construction"
         Me.TabPage9.UseVisualStyleBackColor = True
+        '
+        'SpotCheckTest
+        '
+        Me.SpotCheckTest.Location = New System.Drawing.Point(261, 44)
+        Me.SpotCheckTest.Name = "SpotCheckTest"
+        Me.SpotCheckTest.Size = New System.Drawing.Size(75, 23)
+        Me.SpotCheckTest.TabIndex = 8
+        Me.SpotCheckTest.Text = "SpotCheckTest"
+        Me.SpotCheckTest.UseVisualStyleBackColor = True
         '
         'TestHPD
         '
@@ -1134,14 +1145,14 @@ Partial Class Troubleshooting
         Me.txtTemplateResult.Size = New System.Drawing.Size(100, 20)
         Me.txtTemplateResult.TabIndex = 0
         '
-        'SpotCheckTest
+        'Organize
         '
-        Me.SpotCheckTest.Location = New System.Drawing.Point(261, 44)
-        Me.SpotCheckTest.Name = "SpotCheckTest"
-        Me.SpotCheckTest.Size = New System.Drawing.Size(75, 23)
-        Me.SpotCheckTest.TabIndex = 8
-        Me.SpotCheckTest.Text = "SpotCheckTest"
-        Me.SpotCheckTest.UseVisualStyleBackColor = True
+        Me.Organize.Location = New System.Drawing.Point(363, 43)
+        Me.Organize.Name = "Organize"
+        Me.Organize.Size = New System.Drawing.Size(75, 23)
+        Me.Organize.TabIndex = 9
+        Me.Organize.Text = "Organize"
+        Me.Organize.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1291,4 +1302,5 @@ Partial Class Troubleshooting
     Friend WithEvents txtTemplateResult As TextBox
     Friend WithEvents Button21 As Button
     Friend WithEvents SpotCheckTest As Button
+    Friend WithEvents Organize As Button
 End Class
