@@ -14,6 +14,7 @@ Imports System.Runtime.Serialization
 <KnownType(GetType(PendingAssignRule))>
 <KnownType(GetType(AssignLeadsRule))>
 <KnownType(GetType(DOBComplaintsCheckingRule))>
+<KnownType(GetType(ScanECourtsRule))>
 <DataContract>
 Public Class BaseRule
     <DataMember>
