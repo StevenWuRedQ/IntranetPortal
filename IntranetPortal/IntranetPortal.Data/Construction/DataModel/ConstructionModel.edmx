@@ -60,6 +60,13 @@
           <Property Name="owner" Type="nvarchar" MaxLength="50" />
           <Property Name="status" Type="int" />
         </EntityType>
+        <EntityType Name="ConstructionViolations">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="HPD_RegExpireDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="FormDataItems">
           <Key>
             <PropertyRef Name="DataId" />
@@ -91,6 +98,7 @@
           <EntitySet Name="CheckingComplains" EntityType="Self.CheckingComplains" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConstructionCases" EntityType="Self.ConstructionCases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConstructionSpotChecks" EntityType="Self.ConstructionSpotChecks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConstructionViolations" EntityType="Self.ConstructionViolations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormDataItems" EntityType="Self.FormDataItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleCase" EntityType="Self.TitleCase" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -104,6 +112,7 @@
           <EntitySet Name="FormDataItems" EntityType="ConstructionModel.FormDataItem" />
           <EntitySet Name="TitleCases" EntityType="ConstructionModel.TitleCase" />
           <EntitySet Name="ConstructionSpotCheck" EntityType="ConstructionModel.ConstructionSpotCheck" />
+          <EntitySet Name="ConstructionViolations" EntityType="ConstructionModel.ConstructionViolation" />
         </EntityContainer>
         <EntityType Name="ConstructionCase">
           <Key>
@@ -186,6 +195,13 @@
           <Property Name="status" Type="Int32" />
           <Property Name="owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="ConstructionViolation">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="HPD_RegExpireDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -276,6 +292,14 @@
                 <ScalarProperty Name="access" ColumnName="access" />
                 <ScalarProperty Name="propertyAddress" ColumnName="propertyAddress" />
                 <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConstructionViolations">
+            <EntityTypeMapping TypeName="ConstructionModel.ConstructionViolation">
+              <MappingFragment StoreEntitySet="ConstructionViolations">
+                <ScalarProperty Name="HPD_RegExpireDate" ColumnName="HPD_RegExpireDate" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>

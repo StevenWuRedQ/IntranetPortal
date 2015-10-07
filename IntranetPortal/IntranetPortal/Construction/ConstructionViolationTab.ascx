@@ -495,6 +495,10 @@
                 <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_AmountOwed">
             </li>
             <li class="ss_form_item">
+                <label class="ss_form_input_title">Registration Expiration Date</label>
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_RegExpireDate" ss-date>
+            </li>
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">Dwelling Classification Fee</label>
                 <select class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_DwellingClassificationFee" ng-change="CSCase.CSCase.Violations.HPD_AmountOwed=CSCase.CSCase.Violations.HPD_DwellingClassificationFee">
                     <option value="250">Private Dwelling (1-2 units)............................................. $ 250</option>

@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="AssignLeadsRule.vb" />
     <Compile Include="BusinessRule.vb" />
+    <Compile Include="ConstructionNotifyRule.vb" />
     <Compile Include="EscalationRule.vb" />
     <Compile Include="LeadsEscalationRule.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

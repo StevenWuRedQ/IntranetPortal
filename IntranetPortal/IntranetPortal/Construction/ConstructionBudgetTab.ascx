@@ -1,7 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionBudgetTab.ascx.vb" Inherits="IntranetPortal.ConstructionBudgetTab" %>
 <%@ Register Assembly="DevExpress.Web.ASPxSpreadsheet.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxSpreadsheet" TagPrefix="dx" %>
 <div id="BudgetCtrl" ng-controller="BudgetCtrl">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
     <div class="budgetTitle">
         <h3>Budget Form</h3>
         <div>
@@ -14,8 +13,6 @@
     <table class="table table-condensed">
         <tr>
             <th style="width: 180px">Description</th>
-            <th style="width: 60px">Estimate</th>
-            <th style="width: 60px">Qty</th>
             <th style="width: 60px">Materials</th>
             <th style="width: 60px">Labor</th>
             <th style="width: 60px">Contract Price</th>
@@ -25,10 +22,6 @@
         <tr ng-repeat="d in data.form ">
             <td ng-style="getStyle(d)" popover-template="budgetPopover" popover-placement="bottom" popover-trigger="mouseenter">
                 <input type="checkbox" ng-model="d.checked" style="display: inline-block" /><span>{{d.description}}</span></td>
-            <td>
-                <input style="width: 60px; border: none" ng-model="d.estimate" money-mask ng-change="updateTotal()" /></td>
-            <td>
-                <input style="width: 60px; border: none" ng-model="d.qty" integer-mask /></td>
             <td>
                 <input style="width: 60px; border: none" ng-model="d.materials" money-mask /></td>
             <td>
@@ -42,9 +35,6 @@
         </tr>
         <tr style="background-color: yellow; font-weight: bolder">
             <td>Total</td>
-            <td>
-                <input style="width: 60px; border: none; background-color: yellow" ng-model="total.estimate" money-mask readonly /></td>
-            <td></td>
             <td></td>
             <td></td>
             <td>
@@ -99,7 +89,6 @@
         $scope.updateTotal = function () {
             var total = {
                 balance: 0.0,
-                estimate: 0.0,
                 contract: 0.0,
                 paid: 0.0
             }

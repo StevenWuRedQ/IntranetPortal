@@ -95,6 +95,7 @@
     <Compile Include="Complaints\CheckingComplains.vb" />
     <Compile Include="Construction\ConstructionCase.vb" />
     <Compile Include="Construction\ConstructionSpotCheck.vb" />
+    <Compile Include="Construction\ConstructionViolations.vb" />
     <Compile Include="Construction\DataModel\CheckingComplain.vb">
       <DependentUpon>ConstructionModel.tt</DependentUpon>
     </Compile>
@@ -117,6 +118,9 @@
       <DependentUpon>ConstructionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Construction\DataModel\ConstructionSpotCheck.vb">
+      <DependentUpon>ConstructionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\DataModel\ConstructionViolation.vb">
       <DependentUpon>ConstructionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Construction\DataModel\FormDataItem.vb">

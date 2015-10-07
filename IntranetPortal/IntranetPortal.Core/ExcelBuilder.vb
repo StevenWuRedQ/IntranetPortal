@@ -13,8 +13,6 @@ Public Class ExcelBuilder
 
             Dim header = ws.Range("A1:H1")
             header.Cell("A1").Value = "Description"
-            header.Cell("B1").Value = "Estimate"
-            header.Cell("C1").Value = "Qty"
             header.Cell("D1").Value = "Materials"
             header.Cell("E1").Value = "Labor"
             header.Cell("F1").Value = "Contract Price"
@@ -30,44 +28,32 @@ Public Class ExcelBuilder
                         ws.Cell("A" & Index).Value = description
                     End If
 
-                    Dim estimate = row.SelectToken("estimate").ToString
-                    If Not String.IsNullOrEmpty(estimate) Then
-                        ws.Cell("B" & Index).Value = Double.Parse(estimate)
-                        ws.Cell("B" & Index).Style.NumberFormat.Format = "$ #,##0.00"
-                    End If
-
-                    Dim qty = row.SelectToken("qty").ToString
-                    If Not String.IsNullOrEmpty(qty) Then
-                        ws.Cell("C" & Index).Value = Integer.Parse(qty)
-                        ws.Cell("C" & Index).Style.NumberFormat.NumberFormatId = 1
-                    End If
-
                     Dim materials = row.SelectToken("materials").ToString
                     If Not String.IsNullOrEmpty(materials) Then
-                        ws.Cell("D" & Index).Value = Double.Parse(materials)
-                        ws.Cell("D" & Index).Style.NumberFormat.Format = "$ #,##0.00"
+                        ws.Cell("B" & Index).Value = Double.Parse(materials)
+                        ws.Cell("B" & Index).Style.NumberFormat.Format = "$ #,##0.00"
                     End If
 
                     Dim labor = row.SelectToken("labor").ToString
                     If Not String.IsNullOrEmpty(labor) Then
-                        ws.Cell("E" & Index).Value = Double.Parse(labor)
-                        ws.Cell("E" & Index).Style.NumberFormat.Format = "$ #,##0.00"
+                        ws.Cell("C" & Index).Value = Double.Parse(labor)
+                        ws.Cell("C" & Index).Style.NumberFormat.Format = "$ #,##0.00"
                     End If
 
                     Dim contract = row.SelectToken("contract").ToString
                     If Not String.IsNullOrEmpty(contract) Then
-                        ws.Cell("F" & Index).Value = Double.Parse(contract)
-                        ws.Cell("F" & Index).Style.NumberFormat.Format = "$ #,##0.00"
+                        ws.Cell("D" & Index).Value = Double.Parse(contract)
+                        ws.Cell("D" & Index).Style.NumberFormat.Format = "$ #,##0.00"
                     End If
 
                     Dim paid = row.SelectToken("paid").ToString
                     If Not String.IsNullOrEmpty(paid) Then
-                        ws.Cell("G" & Index).Value = Double.Parse(paid)
-                        ws.Cell("G" & Index).Style.NumberFormat.Format = "$ #,##0.00"
+                        ws.Cell("E" & Index).Value = Double.Parse(paid)
+                        ws.Cell("E" & Index).Style.NumberFormat.Format = "$ #,##0.00"
                     End If
 
-                    ws.Cell("H" & Index).FormulaA1 = "=(F" & Index & "-G" & Index & ")"
-                    ws.Cell("H" & Index).Style.NumberFormat.Format = "$ #,##0.00"
+                    ws.Cell("F" & Index).FormulaA1 = "=(F" & Index & "-G" & Index & ")"
+                    ws.Cell("F" & Index).Style.NumberFormat.Format = "$ #,##0.00"
 
                     Index = Index + 1
                 Next
@@ -75,16 +61,14 @@ Public Class ExcelBuilder
 
             If Index > 1 Then
                 ws.Cell("A" & Index).Value = "Total"
-                ws.Cell("B" & Index).FormulaA1 = "=SUM(B2:B" & (Index - 1) & ")"
-                ws.Cell("B" & Index).Style.NumberFormat.Format = "$ #,##0.00"
-                ws.Cell("F" & Index).FormulaA1 = "=SUM(F2:F" & (Index - 1) & ")"
+                ws.Cell("D" & Index).FormulaA1 = "=SUM(F2:D" & (Index - 1) & ")"
+                ws.Cell("D" & Index).Style.NumberFormat.Format = "$ #,##0.00"
+                ws.Cell("E" & Index).FormulaA1 = "=SUM(G2:E" & (Index - 1) & ")"
+                ws.Cell("E" & Index).Style.NumberFormat.Format = "$ #,##0.00"
+                ws.Cell("F" & Index).FormulaA1 = "=SUM(H2:F" & (Index - 1) & ")"
                 ws.Cell("F" & Index).Style.NumberFormat.Format = "$ #,##0.00"
-                ws.Cell("G" & Index).FormulaA1 = "=SUM(G2:G" & (Index - 1) & ")"
-                ws.Cell("G" & Index).Style.NumberFormat.Format = "$ #,##0.00"
-                ws.Cell("H" & Index).FormulaA1 = "=SUM(H2:H" & (Index - 1) & ")"
-                ws.Cell("H" & Index).Style.NumberFormat.Format = "$ #,##0.00"
 
-                Dim TotalRange = ws.Range("A" & Index & ":H" & Index)
+                Dim TotalRange = ws.Range("A" & Index & ":F" & Index)
                 TotalRange.Style.Fill.BackgroundColor = XLColor.Yellow
 
             End If

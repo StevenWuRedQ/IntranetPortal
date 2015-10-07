@@ -112,6 +112,7 @@ Partial Public Class ConstructionCase
     End Sub
 
     Public Sub Save(userName As String)
+
         Using db As New ConstructionEntities
             If db.ConstructionCases.Any(Function(c) c.BBLE = BBLE) Then
                 Me.UpdateBy = userName
@@ -122,6 +123,9 @@ Partial Public Class ConstructionCase
                 Me.CreateTime = DateTime.Now
                 db.ConstructionCases.Add(Me)
             End If
+
+            Dim violation = New ConstructionViolation
+            violation.Save(Me, userName)
 
             Try
                 db.SaveChanges()

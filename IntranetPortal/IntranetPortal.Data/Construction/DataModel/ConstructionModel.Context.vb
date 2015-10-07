@@ -27,5 +27,6 @@ Partial Public Class ConstructionEntities
     Public Overridable Property FormDataItems() As DbSet(Of FormDataItem)
     Public Overridable Property TitleCases() As DbSet(Of TitleCase)
     Public Overridable Property ConstructionSpotCheck() As DbSet(Of ConstructionSpotCheck)
+    Public Overridable Property ConstructionViolations() As DbSet(Of ConstructionViolation)
 
 End Class

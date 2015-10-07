@@ -513,7 +513,6 @@
                 var model = $(this).attr('ng-model') || $(this).attr('ss-model') || $(this).attr('file-model') || $(this).attr('model');
                 if (model) {
                     if (model.startsWith("floor")) {
-
                         var test = _.has($(this).scope().floor, model.split(".").splice(1).join('.'));
                         if (!test) {
                             $(this).prev().css('background-color', 'yellow');
@@ -530,7 +529,7 @@
                 }
 
             })
-            if (errorFields) alert("Intake Complete Fails.\nPlease check highlights for missing information!");
+            if (errorFields.length>1) alert("Intake Complete Fails.\nPlease check highlights for missing information!");
             return true && errorFields;
         }
         $scope.clearWarning = function () {
