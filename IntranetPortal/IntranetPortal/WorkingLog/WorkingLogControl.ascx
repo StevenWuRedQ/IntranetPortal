@@ -62,13 +62,13 @@
         },
         notifyUserOfDisconnect:function()
         {
-            alert("Service was not connected.");
+            //alert("Service was not connected.");
         },
         registerClientMethods:function()
         {
             this.wLog.client.hello = function(name)
             {
-                alert("hello, " + name);
+                //alert("hello, " + name);
             }
         },
         registerEvents: function () {
