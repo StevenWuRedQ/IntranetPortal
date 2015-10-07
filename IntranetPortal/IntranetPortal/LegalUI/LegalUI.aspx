@@ -94,7 +94,7 @@
         </textarea>
         <button type="button" ng-click="SaveLegalJson()">GetCase</button>--%>
         <input type="hidden" id="CaseData" />
-        <input type="hidden" id="Viewable"  value="<%= IntranetPortal.LegalCaseManage.IsViewable(Page.User.Identity.Name)  %>"/>
+        <input type="hidden" id="Viewable" value="<%= IntranetPortal.LegalCaseManage.IsViewable(Page.User.Identity.Name)  %>" />
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
                 <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
@@ -222,6 +222,7 @@
 
                                             </li>
                                             <li class="pull-right" style="margin-right: 30px; color: #ffa484">
+                                                <i class="fa fa-clock-o sale_head_button sale_head_button_left tooltip-examples" ng-click="CheckWorkHours()" data-original-title="Work hours"></i>
                                                 <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
 
                                                 <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerPreview Then%>
@@ -322,8 +323,8 @@
                                                 popupBackToResearch.Hide();
                                                 txtBackComments.SetText('');
                                             }
-                                        }                                        
-                                        
+                                        }
+
                                     </script>
 
 
@@ -374,6 +375,23 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="modal fade" id="WorkPopUp">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">Working Total</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p style="font-size:20px">Total spend on this case are {{TotleHours}} hours.</p>
+                                            </div>
+                                          
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.modal -->
                                 <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
                                     HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true" CloseAction="CloseButton"
                                     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -494,7 +512,7 @@
                     </ContentCollection>
                 </dx:SplitterPane>
             </Panes>
-          
+
         </dx:ASPxSplitter>
 
         <div class="modal fade" id="NeedAddCommentPopUp">
@@ -628,9 +646,8 @@
 
         <script type="text/javascript">
             LegalCaseBBLE = null;
-            function GetDataReadOnly()
-            {
-                return $('#Viewable').val()=='True'
+            function GetDataReadOnly() {
+                return $('#Viewable').val() == 'True'
             }
             function VendorsClosing(s) {
                 GetContactCallBack();
@@ -982,7 +999,7 @@
                         alert("Get Tax Liens failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
                     });
                     /************ get LegalECourt info*************/
-                    $http.get("/api/LegalECourtByBBLE/"+BBLE).
+                    $http.get("/api/LegalECourtByBBLE/" + BBLE).
                    success(function (data, status, headers, config) {
                        $scope.LegalECourt = data;
                    }).error(function (data, status, headers, config) {
@@ -1089,7 +1106,7 @@
                             "Defendants": $scope.LegalCase.SecondaryInfo.DeedReversionDefendants ? ',' + $scope.LegalCase.SecondaryInfo.DeedReversionDefendants.map(function (o) { return o.Name }).join(",") : ' ',
                             "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
                             "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
-                            
+
                         },
 
 
@@ -1456,6 +1473,15 @@
                     }
                 }
                 /* end loading panel */
+                $scope.CheckWorkHours = function()
+                {
+                    $http.get("").success(function (data)
+                    {
+                        $scope.TotleHours = data;
+                        $("#WorkPopUp").modal();
+                    });
+                   
+                }
             });
 
         </script>

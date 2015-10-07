@@ -227,6 +227,10 @@
                                                                 <label class="ss_form_input_title">&nbsp;</label>
                                                                 <input type="button" value="Complete" class="rand-button rand-button-blue rand-button-pad" ng-click="SearchComplete()">
                                                             </li>
+                                                             <li class="ss_form_item ">
+                                                                <label class="ss_form_input_title">&nbsp;</label>
+                                                                <input type="button" value="Save" class="rand-button rand-button-blue rand-button-pad" ng-click="SearchComplete(true)">
+                                                            </li>
 
                                                         </ul>
                                                     </div>
@@ -361,8 +365,9 @@
             }
 
             $scope.init(leadsInfoBBLE)
-            $scope.SearchComplete = function () {
+            $scope.SearchComplete = function (isSave) {
                 $scope.DocSearch.Status = 1;
+                $scope.DocSearch.IsSave = isSave
                 $scope.DocSearch.ResutContent = $("#searchReslut").html();
                 $.ajax({
                     type: "PUT",
@@ -372,7 +377,7 @@
                     contentType: 'application/json',
                     success: function (data) {
 
-                        alert('Lead info search completed !');
+                        alert(isSave ? 'Save success!' : 'Lead info search completed !');
                         if (typeof gridCase != 'undefined')
                         {
                             gridCase.Refresh();
