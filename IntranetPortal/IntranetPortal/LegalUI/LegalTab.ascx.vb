@@ -10,6 +10,7 @@
     Sub Page_init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
         SecondaryAction = Request.QueryString("Attorney") IsNot Nothing
         Agent = Request.QueryString("Agent") IsNot Nothing
+
     End Sub
 
 

@@ -51,11 +51,8 @@ Public Class LegalSummaryUI
     End Sub
 
     Protected Sub lbExportExcel_Click(sender As Object, e As EventArgs)
-        If (MangerReportGrid.Visible) Then
-            MangerReportExporter.WriteXlsxToResponse()
-        Else
-            CaseExporter.WriteXlsxToResponse()
-        End If
+
+        CaseExporter.WriteXlsxToResponse()
 
     End Sub
 
@@ -122,5 +119,9 @@ Public Class LegalSummaryUI
 
     Protected Sub MangerReportGrid_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
         BindMangerReport()
+    End Sub
+
+    Protected Sub mangerExport_Click(sender As Object, e As EventArgs)
+        MangerReportExporter.WriteXlsxToResponse()
     End Sub
 End Class

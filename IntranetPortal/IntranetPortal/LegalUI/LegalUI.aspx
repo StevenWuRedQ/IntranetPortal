@@ -983,7 +983,9 @@
                     $http.get("/api/LegalECourtByBBLE/"+BBLE).
                    success(function (data, status, headers, config) {
                        $scope.LegalECourt = data;
-                   });
+                   }).error(function (data, status, headers, config) {
+                       $scope.LegalECourt = null;
+                   });;
                 }
 
                 $scope.ModelArray = function (model) {

@@ -39,11 +39,14 @@
         {
             AllLeadsGridClient.SetVisible(!AllLeadsGridClient.GetVisible());
             MangerReportGridClient.SetVisible(!MangerReportGridClient.GetVisible());
+            var mangerMode = MangerReportGridClient.GetVisible();
+            $("#mangerExport").css("display", mangerMode ? "" : "none");
+            $("#Export").css("display", !mangerMode ? "" : "none");
             if (MangerReportGridClient.GetVisible())
             {
                 document.getElementById('topGrid').className = 'col-md-12'
               
-
+               
             } else {
                 document.getElementById('topGrid').className = 'col-md-8'
             }
@@ -52,6 +55,8 @@
         $(document).ready(function()
         {
             MangerReportGridClient.SetVisible(false);
+            var mangerMode = MangerReportGridClient.GetVisible();
+            $("#mangerExport").css("display", mangerMode ? "" : "none");
         }
         )
     </script>
@@ -71,7 +76,8 @@
                         <div class="col-md-4  form-inline">
                             <input type="text" style="margin-right: 20px" id="QuickSearch" class="form-control" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}" />
                             <i class="fa fa-search icon_btn tooltip-examples  grid_buttons" style="margin-right: 20px; font-size: 19px" onclick="SearchGrid()" title="search"></i>
-                            <asp:LinkButton ID="lbExportExcel" runat="server" Text="<i class='fa fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples' title='export to excel'></i>" OnClick="lbExportExcel_Click"></asp:LinkButton>
+                            <asp:LinkButton ID="lbExportExcel" runat="server" Text="<i class='fa fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples' id='Export' title='export to excel'></i>" OnClick="lbExportExcel_Click"></asp:LinkButton>
+                            <asp:LinkButton ID="mangerExport" runat="server" Text="<i class='fa fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples' id='mangerExport' title='export to excel'></i>" OnClick="mangerExport_Click"></asp:LinkButton>
                             <%If Page.User.IsInRole("Admin") Or Page.User.IsInRole("Legal-Manager") Then%> 
                             <i class='fa fa-user report_head_button report_head_button_padding tooltip-examples' title='switch to manager report It may be take long time becase a lot calculate' onclick="SwitchToMangerReport()"></i>
                             <%End If %>
