@@ -5,4 +5,9 @@
 
     End Sub
 
+
+    Public Sub LogOut_Click()
+        FormsAuthentication.SignOut()
+        FormsAuthentication.RedirectToLoginPage()
+    End Sub
 End Class

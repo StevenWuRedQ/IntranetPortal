@@ -39,12 +39,14 @@ Partial Public Class ConstructionSpotCheck
 
     Public Sub StartSpotCheck(BBLE As String, Owner As String)
         Using ctx = New ConstructionEntities()
-            Me.BBLE = BBLE
-            Me.propertyAddress = ctx.ConstructionCases.Where(Function(c) c.BBLE).FirstOrDefault.CaseName
-            Me.owner = Owner
-            Me.status = CaseStatus.Created
-            ctx.ConstructionSpotCheck.Add(Me)
-            ctx.SaveChanges()
+            If ctx.ConstructionSpotCheck.Where(Function(c) c.BBLE = BBLE).FirstOrDefault Is Nothing Then
+                Me.BBLE = BBLE
+                Me.propertyAddress = ctx.ConstructionCases.Where(Function(c) c.BBLE = BBLE).FirstOrDefault.CaseName
+                Me.owner = Owner
+                Me.status = CaseStatus.Created
+                ctx.ConstructionSpotCheck.Add(Me)
+                ctx.SaveChanges()
+            End If
         End Using
     End Sub
 

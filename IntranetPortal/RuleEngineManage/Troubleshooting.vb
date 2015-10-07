@@ -902,6 +902,9 @@ Public Class Troubleshooting
 
     Private Sub SpotCheckTest_Click(sender As Object, e As EventArgs) Handles SpotCheckTest.Click
         Dim sc = New Data.ConstructionSpotCheck
-        sc.StartSpotCheck("3013860029", "Chris Yan")
+        Dim cs = Data.ConstructionCase.GetAllCasesByStatus(Data.ConstructionCase.CaseStatus.Construction).ToList
+        For Each c In cs
+            sc.StartSpotCheck(c.BBLE, "Andrew Aronoff")
+        Next
     End Sub
 End Class

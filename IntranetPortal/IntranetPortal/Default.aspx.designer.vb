@@ -11,5 +11,14 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class SpotCheck
+Partial Public Class Default2
+    
+    '''<summary>
+    '''NavMenu control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavMenu As Global.IntranetPortal.NavMenu
 End Class

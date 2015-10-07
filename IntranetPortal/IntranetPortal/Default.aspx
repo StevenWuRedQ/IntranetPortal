@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Root.Master" CodeBehind="Default.aspx.vb" Inherits="IntranetPortal.Default2" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" CodeBehind="Default.aspx.vb" Inherits="IntranetPortal.Default2" MasterPageFile="~/Root.Master" %>
 
 <%@ Register Src="~/UserControl/UserSummary.ascx" TagPrefix="uc1" TagName="UserSummary" %>
 <%@ Register Src="~/UserControl/NavMenu.ascx" TagPrefix="uc1" TagName="NavMenu" %>
