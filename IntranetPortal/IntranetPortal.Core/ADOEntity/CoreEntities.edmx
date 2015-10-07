@@ -151,6 +151,22 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="WorkingLogs">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="PageUrl" Type="nvarchar" MaxLength="256" />
+          <Property Name="ConnectionId" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
         <EntityContainer Name="IntranetPortalCoreModelStoreContainer">
           <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CommonData" EntityType="Self.CommonData" Schema="dbo" store:Type="Tables" />
@@ -164,6 +180,7 @@
           <EntitySet Name="SystemLogs" EntityType="Self.SystemLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Thumbnails" EntityType="Self.Thumbnails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TLOApiLogs" EntityType="Self.TLOApiLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkingLogs" EntityType="Self.WorkingLogs" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -199,6 +216,7 @@
             <Parameter Name="sql" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="CustomReports" EntityType="IntranetPortal.Core.Model.CustomReport" />
+          <EntitySet Name="WorkingLogs" EntityType="IntranetPortal.Core.Model.WorkingLog" />
         </EntityContainer>
         <EntityType Name="SpecialDay">
           <Key>
@@ -331,6 +349,22 @@
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BaseTable" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WorkingLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="PageUrl" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ConnectionId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -492,6 +526,23 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkingLogs">
+            <EntityTypeMapping TypeName="IntranetPortal.Core.Model.WorkingLog">
+              <MappingFragment StoreEntitySet="WorkingLogs">
+                <ScalarProperty Name="ConnectionId" ColumnName="ConnectionId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="PageUrl" ColumnName="PageUrl" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -36,6 +36,7 @@ Partial Public Class CoreEntities
     Public Overridable Property Applications() As DbSet(Of Application)
     Public Overridable Property Thumbnails() As DbSet(Of Thumbnail)
     Public Overridable Property CustomReports() As DbSet(Of CustomReport)
+    Public Overridable Property WorkingLogs() As DbSet(Of WorkingLog)
 
     Public Overridable Function QueryReportData(sql As String) As Integer
         Dim sqlParameter As ObjectParameter = If(sql IsNot Nothing, New ObjectParameter("sql", sql), New ObjectParameter("sql", GetType(String)))

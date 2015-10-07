@@ -17,6 +17,8 @@ Public Class Global_asax
 
         WebApiConfig2.Register(GlobalConfiguration.Configuration)
         GlobalConfiguration.Configuration.EnsureInitialized()
+
+        'Core.WorkingLog.CloseAll()
     End Sub
 
     Sub Session_Start(ByVal sender As Object, ByVal e As EventArgs)

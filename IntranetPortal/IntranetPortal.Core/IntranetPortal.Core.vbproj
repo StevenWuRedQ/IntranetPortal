@@ -230,6 +230,9 @@
     <Compile Include="ADOEntity\TLOApiLog.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\WorkingLog.vb">
+      <DependentUpon>CoreEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Application.vb" />
     <Compile Include="CommonData.vb" />
     <Compile Include="DataLoopRule.vb" />
@@ -240,6 +243,7 @@
     <Compile Include="HolidayService.vb" />
     <Compile Include="JsArrayToStringConverter.vb" />
     <Compile Include="MapService.vb" />
+    <Compile Include="Model\WorkingLog.vb" />
     <Compile Include="ParseEmailService.vb" />
     <Compile Include="PortalSetting.vb" />
     <Compile Include="Model\SpecialDay.vb" />

@@ -12,6 +12,10 @@
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
+                If pbi.JudgementId <> Me.JudgementId Then
+                    Me.JudgementId = pbi.JudgementId
+                End If
+
                 pbi = ShortSaleUtility.SaveChangesObj(pbi, Me)
             End If
 

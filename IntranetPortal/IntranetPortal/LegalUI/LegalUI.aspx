@@ -10,6 +10,8 @@
 <%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 <%@ Register Src="~/ShortSale/ShortSaleFileOverview.ascx" TagPrefix="uc1" TagName="ShortSaleFileOverview" %>
+<%@ Register Src="~/WorkingLog/WorkingLogControl.ascx" TagPrefix="uc1" TagName="WorkingLogControl" %>
+
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
 
@@ -1466,5 +1468,16 @@
             })
         </script>
         <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
+        <uc1:WorkingLogControl runat="server" ID="WorkingLogControl" />
+        <script type="text/javascript">
+
+            $(function () {
+                if(leadsInfoBBLE && leadsInfoBBLE != null)
+                {
+                    if (WorkingLogControl)
+                        WorkingLogControl.openFile(leadsInfoBBLE, "Legal");
+                }
+            });
+        </script>
     </div>
 </asp:Content>

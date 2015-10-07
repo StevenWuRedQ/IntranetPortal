@@ -40,6 +40,9 @@
             if (cbpLogs)
                 cbpLogs.PerformCallback(leadsInfoBBLE);
             angular.element(document.getElementById('LegalCtrl')).scope().LoadLeadsCase(leadsInfoBBLE);
+            
+            if(WorkingLogControl)
+                WorkingLogControl.openFile(leadsInfoBBLE, "Legal")
         }
     }
 

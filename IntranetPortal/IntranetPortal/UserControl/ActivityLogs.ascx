@@ -348,6 +348,13 @@
         //    alert("Comments can not be empty.")
         //    return;
         //}
+
+        if(addCommentsCallbackClient.InCallback())
+        {
+            alert("The comments is adding. Please try later.");
+            return;
+        }
+
         var commentHtml = EmailBody.GetHtml();
         var addDate = null;
         if (typeof dateActivityClient != 'undefined') {

@@ -282,4 +282,13 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents VendorsPopup As Global.IntranetPortal.VendorsPopup
+    
+    '''<summary>
+    '''WorkingLogControl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents WorkingLogControl As Global.IntranetPortal.WorkingLogControl
 End Class

@@ -2287,6 +2287,14 @@
       <DependentUpon>WebForm3.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="WorkingLog\WorkingLogControl.ascx.designer.vb">
+      <DependentUpon>WorkingLogControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkingLog\WorkingLogControl.ascx.vb">
+      <DependentUpon>WorkingLogControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WorkingLog\WorkingLogHub.vb" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Login2.aspx" />
@@ -4597,6 +4605,7 @@
     <Content Include="Scripts\handsontable-master\update.json" />
     <Content Include="Scripts\res\budgetData.js" />
     <Content Include="Mobile.Master" />
+    <Content Include="WorkingLog\WorkingLogControl.ascx" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
