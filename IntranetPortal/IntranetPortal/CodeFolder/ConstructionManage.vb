@@ -163,8 +163,8 @@ Public Class ConstructionManage
             LeadsActivityLog.AddActivityLog(logDate, Body, bble, LeadsActivityLog.LogCategory.Construction.ToString, Employee.GetInstance(User).EmployeeID, User)
 
             ' send email
-            ' Dim emails = Employee.GetInstance(Manager).Email
-            Dim emails = "stephenz@myidealprop.com"
+            Dim emails = Employee.GetInstance(Manager).Email
+            ' Dim emails = "stephenz@myidealprop.com"
             Dim maildata As New Dictionary(Of String, String)
             maildata.Add("Address", Address)
             maildata.Add("Manager", Manager)

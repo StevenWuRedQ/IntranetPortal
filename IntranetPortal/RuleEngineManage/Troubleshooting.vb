@@ -795,53 +795,56 @@ Public Class Troubleshooting
 
     End Sub
 
-    Private Function uploadActivity(bble As String, file As String) As String
+    Private Sub uploadActivity(bble As String, file As String)
         If Not String.IsNullOrEmpty(file) And Not String.IsNullOrEmpty(bble) Then
             Dim data = LoadDataFromExcel(file)
             Dim logs = From l In data.Tables
                        Where l.TableName = "log" Select l
-
-            For Each row As DataRow In logs.FirstOrDefault.Rows
-                Dim vdate = row.Item(0).ToString
-                If Not IsDBNull(vdate) Then
-                    Dim logDate = DateTime.Parse(vdate)
-                    Dim log = row.Item(1).ToString.Trim
-                    Dim ename = row.Item(2).ToString.Trim.ToLower
-                    Dim eid As Integer
-                    Select Case ename
-                        Case "jamie"
-                            ename = "Jamie Ventura"
-                            eid = 26
-                        Case "heidi"
-                            ename = "Heidi Velovic"
-                            eid = 46
-                        Case "melissa"
-                            ename = "Melissa Ramlakhan"
-                            eid = 30
-                        Case "yvette"
-                            ename = "Yvette Guizie"
-                            eid = 52
-                        Case "iskyo"
-                            ename = "Isaac Aronov"
-                            eid = 24
-                        Case Else
-                            ename = "Jamie Ventura"
-                            eid = 26
-                    End Select
-                    LeadsActivityLog.AddActivityLog(logDate, log, bble, LeadsActivityLog.LogCategory.Construction.ToString, eid, ename)
-                    TextBox4.AppendText(logDate)
-                End If
-            Next
-            Return String.Format("{0}: {1}: is finished.", bble, file)
+            If Not logs Is Nothing Then
+                For Each row As DataRow In logs.FirstOrDefault.Rows
+                    Dim vdate = row.Item(0).ToString
+                    If Not IsDBNull(vdate) Then
+                        Dim logDate = DateTime.Parse(vdate)
+                        Dim log = row.Item(1).ToString.Trim
+                        Dim ename = row.Item(2).ToString.Trim.ToLower
+                        Dim eid As Integer
+                        Select Case ename
+                            Case "jamie"
+                                ename = "Jamie Ventura"
+                                eid = 26
+                            Case "heidi"
+                                ename = "Heidi Velovic"
+                                eid = 46
+                            Case "melissa"
+                                ename = "Melissa Ramlakhan"
+                                eid = 30
+                            Case "yvette"
+                                ename = "Yvette Guizie"
+                                eid = 52
+                            Case "iskyo"
+                                ename = "Isaac Aronov"
+                                eid = 24
+                            Case Else
+                                ename = "Jamie Ventura"
+                                eid = 26
+                        End Select
+                        LeadsActivityLog.AddActivityLog(logDate, log, bble, LeadsActivityLog.LogCategory.Construction.ToString, eid, ename)
+                        TextBox4.AppendText(logDate)
+                    End If
+                Next
+            Else
+                TextBox4.AppendText("logs sheet is not here.")
+            End If
+            TextBox4.AppendText(String.Format("{0}: {1}: is finished.", bble, file))
         Else
-            Return "Information Missing"
+            TextBox4.AppendText("File Empty")
         End If
-    End Function
+    End Sub
 
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
         Dim file = TextBox5.Text.Trim
         Dim BBLE = txtBBLE.Text.Trim
-        TextBox4.AppendText(uploadActivity(BBLE, file))
+        uploadActivity(BBLE, file)
     End Sub
 
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click

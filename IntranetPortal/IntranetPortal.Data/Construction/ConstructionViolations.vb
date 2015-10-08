@@ -17,26 +17,29 @@ Partial Public Class ConstructionViolation
     End Function
     Public Sub Save(constructionCase As ConstructionCase, userName As String)
         Using ctx = New ConstructionEntities
-            Dim caseData = constructionCase.CSCase
-            Dim jtoken = JsonConvert.DeserializeObject(Of Linq.JToken)(caseData)
-            Dim dateString = jtoken.SelectToken("Violations.HPD_RegExpireDate").ToString
-            If Not String.IsNullOrEmpty(dateString) Then
-                Dim hpdRegExpireDate = Date.Parse(dateString)
-                Dim savedViolation = GetViolation(constructionCase.BBLE)
-                If savedViolation Is Nothing Then
-                    Me.BBLE = constructionCase.BBLE
-                    Me.HPD_RegExpireDate = hpdRegExpireDate
-                    ctx.ConstructionViolations.Add(Me)
-                Else
-                    savedViolation.HPD_RegExpireDate = hpdRegExpireDate
-                End If
-            End If
-
             Try
+                Dim caseData = constructionCase.CSCase
+                Dim jtoken = JsonConvert.DeserializeObject(Of Linq.JToken)(caseData)
+                Dim dateToken = jtoken.SelectToken("Violations.HPD_RegExpireDate")
+                If Not dateToken Is Nothing Then
+                    Dim dateString = dateToken.ToString
+                    If Not String.IsNullOrEmpty(DateString) Then
+                        Dim hpdRegExpireDate = Date.Parse(DateString)
+                        Dim savedViolation = GetViolation(constructionCase.BBLE)
+                        If savedViolation Is Nothing Then
+                            Me.BBLE = constructionCase.BBLE
+                            Me.HPD_RegExpireDate = hpdRegExpireDate
+                            ctx.ConstructionViolations.Add(Me)
+                        Else
+                            savedViolation.HPD_RegExpireDate = hpdRegExpireDate
+                        End If
+                    End If
+                End If
+
                 ctx.SaveChanges()
                 Core.SystemLog.Log("Construction Violation Save", Newtonsoft.Json.JsonConvert.SerializeObject(Me), Core.SystemLog.LogCategory.SaveData, constructionCase.BBLE, userName)
             Catch ex As Exception
-                Throw
+
             End Try
         End Using
 
