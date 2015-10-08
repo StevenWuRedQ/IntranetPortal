@@ -222,7 +222,7 @@
 
                                             </li>
                                             <li class="pull-right" style="margin-right: 30px; color: #ffa484">
-                                                <i class="fa fa-clock-o sale_head_button sale_head_button_left tooltip-examples" ng-click="CheckWorkHours()" data-original-title="Work hours"></i>
+                                                <i class="fa fa-clock-o sale_head_button sale_head_button_left tooltip-examples" ng-click="CheckWorkHours()" data-original-title="Work hours" style="display:none"></i>
                                                 <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
 
                                                 <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerPreview Then%>

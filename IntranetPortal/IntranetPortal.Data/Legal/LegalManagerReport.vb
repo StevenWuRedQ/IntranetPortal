@@ -1,4 +1,17 @@
 ﻿Public Class LegalManagerReport
+    Private _MiscCommentsWithOurtHtml As String
+    Public ReadOnly Property MiscCommentsWithOurtHtml As String
+        Get
+            If (_MiscCommentsWithOurtHtml Is Nothing) Then
+                If (Not String.IsNullOrEmpty(MiscComments)) Then
+                    _MiscCommentsWithOurtHtml = Core.Utility.RemoveHtmlTags(MiscComments)
+                End If
+            End If
+            Return _MiscCommentsWithOurtHtml
+        End Get
+    End Property
+
+
     Public Shared Function GetAllCase() As List(Of LegalManagerReport)
         Using ctx As New LegalModelContainer
             Return ctx.LegalManagerReports.ToList

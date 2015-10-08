@@ -263,19 +263,19 @@
                                 <div style="padding: 20px" id="searchReslut">
                                     <table class="table table-striped" >
                                         <tr>
-                                            <td>Property tax search - {{DocSearch.LeadResearch.propertyTaxes | currency}}
+                                            <td>Property tax search - {{DocSearch.LeadResearch.propertyTaxes?'':'No'}} {{DocSearch.LeadResearch.propertyTaxes | currency}}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Water charges - {{DocSearch.LeadResearch.waterCharges | currency}}
+                                            <td>Water charges - {{DocSearch.LeadResearch.waterCharges?'':'No'}} {{DocSearch.LeadResearch.waterCharges | currency}}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>ECB Violation - {{DocSearch.LeadResearch.ecbViolation | currency}}
+                                            <td>ECB Violation - {{DocSearch.LeadResearch.ecbViolation?'':'No'}} {{DocSearch.LeadResearch.ecbViolation | currency}}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>DOB Violation - {{DocSearch.LeadResearch.dobWebsites | currency}}
+                                            <td>DOB Violation - {{DocSearch.LeadResearch.dobWebsites?'':'No'}} {{DocSearch.LeadResearch.dobWebsites | currency}}
                                             </td>
                                         </tr>
                                          <tr>
@@ -290,7 +290,10 @@
                                             <td>NYS Tax Lien - {{DocSearch.LeadResearch.nysTaxLien?'':'No'}} {{DocSearch.LeadResearch.nysTaxLien | currency}}
                                             </td>
                                         </tr>
-                                       
+                                        <tr>
+                                            <td>Mortgage - {{DocSearch.LeadResearch.mortgageAmount?'':'No'}} {{DocSearch.LeadResearch.mortgageAmount | currency}}
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>
                                                 {{ DocSearch.LeadResearch.fannie?"":'Not Fannie' }} {{ DocSearch.LeadResearch.fha?"":' Not FHA' }} 
