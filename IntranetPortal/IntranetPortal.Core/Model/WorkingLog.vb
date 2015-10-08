@@ -1,7 +1,26 @@
 ﻿Public Class WorkingLog
+
+    Public ReadOnly Property Duration As TimeSpan
+        Get
+            If Status = WorkingLogStatus.Closed Then
+                Return EndTime - StartTime
+            End If
+
+            Return Nothing
+        End Get
+    End Property
+
     Public Shared Function Instance(logid As Integer) As WorkingLog
         Using ctx As New CoreEntities
             Return ctx.WorkingLogs.Find(logid)
+        End Using
+    End Function
+
+    Public Shared Function GetLogs(bble As String, category As String) As WorkingLog()
+        Using ctx As New CoreEntities
+            Dim result = ctx.WorkingLogs.Where(Function(l) l.BBLE = bble AndAlso l.Category = category AndAlso l.Status = WorkingLogStatus.Closed).ToArray
+
+            Return result
         End Using
     End Function
 
