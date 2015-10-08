@@ -489,7 +489,7 @@ Public Class ActivityLogs
 
         Dim taskName = String.Format("{0} {1}", cbTaskAction.Text, ld.StreetNameWithNo)
         If DisplayMode = ActivityLogMode.Leads Then
-            WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text)
+            WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text, "", "/ViewLeadsInfo.aspx")
         ElseIf DisplayMode = ActivityLogMode.ShortSale Then
             WorkflowService.StartTaskProcess("ShortSaleTask", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text)
         ElseIf DisplayMode = ActivityLogMode.Legal Then
