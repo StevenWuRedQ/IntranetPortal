@@ -49,8 +49,8 @@
             <div class="comment-panel" style="margin: 10px; border-top: 1px solid #c8c8c8">
                 <%--note list--%>
                 <div style="width: 100%; overflow: auto; max-height: 160px;">
-                    <table class="table table-striped" style="font-size: 14px; margin: 0px; padding: 5px">
-                        <tr ng-repeat="highlight in highlights" ng-show="isHighlight(highlight.criteria)">
+                    <table class="table table-striped" style="font-size: 14px; margin: 0; padding: 5px">
+                        <tr ng-repeat="highlight in HIGHLIGHTS" ng-show="isHighlight(highlight.criteria)">
                             <td>
                                 <i class="fa fa-exclamation-circle text-success" style="font-size: 18px"></i>
                                 <span class="text-success" style="margin-left: 10px">{{highlightMsg(highlight.message)}}</span>

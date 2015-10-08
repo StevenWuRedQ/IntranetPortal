@@ -170,7 +170,7 @@
             construction: 0,
             test: 0
         }
-        $scope._SHOWN_ = {
+        $scope.UTILITY_SHOWN = {
             'ConED': 'CSCase.CSCase.Utilities.ConED_Shown',
             'Energy Service': 'CSCase.CSCase.Utilities.EnergyService_Shown',
             'National Grid': 'CSCase.CSCase.Utilities.NationalGrid_Shown',
@@ -180,12 +180,29 @@
             'ADT': 'CSCase.CSCase.Utilities.ADT_Shown',
             'Insurance': 'CSCase.CSCase.Utilities.Insurance_Shown',
         };
-        $scope.highlights = [
-    { message: 'Plumbing signed off at {{CSCase.CSCase.Signoffs.Plumbing_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate' },
-    { message: 'Electrical signed off at {{CSCase.CSCase.Signoffs.Electrical_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate' },
-    { message: 'Construction signed off at {{CSCase.CSCase.Signoffs.Construction_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate' },
-    { message: 'HPD Violations has all finished', criteria: 'CSCase.CSCase.Violations.HPD_OpenHPDViolation === false' }
+        $scope.HIGHLIGHTS = [
+            { message: 'Plumbing signed off at {{CSCase.CSCase.Signoffs.Plumbing_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate' },
+            { message: 'Electrical signed off at {{CSCase.CSCase.Signoffs.Electrical_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate' },
+            { message: 'Construction signed off at {{CSCase.CSCase.Signoffs.Construction_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate' },
+            { message: 'HPD Violations has all finished', criteria: 'CSCase.CSCase.Violations.HPD_OpenHPDViolation === false' }
         ];
+        $scope.WATCHED_MODEL = [
+                                {
+                                    model: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate',
+                                    backedModel: 'ReloadedData.Backed_Plumbing_SignedOffDate',
+                                    info: 'Plumbing Sign Off Date'
+                                },
+                                {
+                                    model: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate',
+                                    backedModel: 'ReloadedData.Backed_Construction_SignedOffDate',
+                                    info: 'Construction Sign Off Date'
+                                },
+                                {
+                                    model: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate',
+                                    backedModel: 'ReloadedData.Electrical_SignedOffDate',
+                                    info: 'Electrical Sign Off Date'
+                                }];
+
 
         $scope.reload = function () {
 
@@ -209,7 +226,6 @@
             budgetCtrl.reload();
             $scope.clearWarning();
         }
-
         $scope.init = function (bble, callback) {
             $scope.startLoading();
             bble = bble.trim();
@@ -290,7 +306,6 @@
             $scope.checkWatchedModel();
 
         }
-
         /***spliter***/
 
         /* multiple company selection */
@@ -302,7 +317,7 @@
         };
         $scope.$watch('CSCase.CSCase.Utilities.Company', function (newValue) {
             if (newValue) {
-                var ds = $scope._SHOWN_;
+                var ds = $scope.UTILITY_SHOWN;
                 var target = $scope.CSCase.CSCase.Utilities.Company;
                 $scope.resetCompany(ds);
                 for (var i in target) {
@@ -367,32 +382,14 @@
             var msgstr = $interpolate(msg)($scope);
             return msgstr;
         }
-
-        $scope.WatchedModel = [
-            {
-                model: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate',
-                backedModel: 'ReloadedData.Backed_Plumbing_SignedOffDate',
-                info: 'Plumbing Sign Off Date'
-            },
-            {
-                model: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate',
-                backedModel: 'ReloadedData.Backed_Construction_SignedOffDate',
-                info: 'Construction Sign Off Date'
-            },
-            {
-                model: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate',
-                backedModel: 'ReloadedData.Electrical_SignedOffDate',
-                info: 'Electrical Sign Off Date'
-            }];
-
         $scope.initWatchedModel = function () {
-            _.each($scope.WatchedModel, function (el, i) {
+            _.each($scope.WATCHED_MODEL, function (el, i) {
                 $scope.$eval(el.backedModel + '=' + el.model);
             })
         }
         $scope.checkWatchedModel = function () {
             var res = ''
-            _.each($scope.WatchedModel, function (el, i) {
+            _.each($scope.WATCHED_MODEL, function (el, i) {
                 if ($scope.$eval(el.backedModel + '!=' + el.model)) {
                     $scope.$eval(el.backedModel + '=' + el.model);
                     res += (el.info + ' changes to ' + $scope.$eval(el.model) + '.<br>')
@@ -403,21 +400,9 @@
 
         /* end highlight */
 
-
         /* Popup */
-        $scope.CSCase.CSCase.Violations.DOBViolations = [{}];
-        $scope.CSCase.CSCase.Violations.ECBViolations = [{}];
         $scope.setPopupVisible = function (modelName, bVal) {
             $scope.$eval(modelName + '=' + bVal)
-        }
-
-        $scope.addNewDOBViolation = function () {
-            $scope.ensurePush('CSCase.CSCase.Violations.DOBViolations');
-            $scope.setPopupVisible('DOBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.DOBViolations.length - 1), true);
-        }
-        $scope.addNewECBViolation = function () {
-            $scope.ensurePush('CSCase.CSCase.Violations.ECBViolations');
-            $scope.setPopupVisible('ECBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.ECBViolations.length - 1), true);
         }
         /* end Popup*/
 
@@ -430,6 +415,16 @@
         /* end header editing */
 
         /* dob fetch */
+        $scope.CSCase.CSCase.Violations.DOBViolations = [{}];
+        $scope.CSCase.CSCase.Violations.ECBViolations = [{}];
+        $scope.addNewDOBViolation = function () {
+            $scope.ensurePush('CSCase.CSCase.Violations.DOBViolations');
+            $scope.setPopupVisible('DOBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.DOBViolations.length - 1), true);
+        }
+        $scope.addNewECBViolation = function () {
+            $scope.ensurePush('CSCase.CSCase.Violations.ECBViolations');
+            $scope.setPopupVisible('ECBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.ECBViolations.length - 1), true);
+        }
         $scope.fetchDOBViolations = function () {
             var dialog = DevExpress.ui.dialog.confirm("Get the information from DOB will take a while\n and REPLACE your current Data, are you sure to continue?", "Warning");
             dialog.done(function (confirmed) {
@@ -507,6 +502,7 @@
 
 
         /* intakeComplete */
+        $scope.test = $scope.checkIntake;
         $scope.intakeComplete = function () {
             if (!$scope.checkIntake()) {
                 AddActivityLog("Intake Process have finished!");
@@ -539,11 +535,6 @@
             if (errorFields.length > 1) alert("Intake Complete Fails.\nPlease check highlights for missing information!");
             return true && errorFields;
         }
-        $scope.updatePercentage = function () {
-            var totalIntake = 0;
-            var total
-        }
-
         $scope.clearWarning = function () {
             $(".intakeCheck").each(function (idx) {
                 $(this).prev().css('background-color', 'transparent');
@@ -551,8 +542,8 @@
         }
         /* end intakeComplte */
 
-        $scope.test = $scope.checkIntake;
 
+        
         /*check file be modify*/
         $scope.GetTimeUrl = function () {
             return $scope.CSCase.BBLE ? "/api/ConstructionCases/LastLastUpdate/" + $scope.CSCase.BBLE : "";
@@ -570,6 +561,11 @@
         $scope.printWindow = function () {
             window.open("/Construction/ConstructionPrint.aspx?bble=" + $scope.CSCase.BBLE, 'Print', 'width=1024, height=800');
         }
-        /* */
+        /* end printWindows */
+
+        $scope.updatePercentage = function () {
+            var totalIntake = 0;
+            var total
+        }
     });
 </script>
