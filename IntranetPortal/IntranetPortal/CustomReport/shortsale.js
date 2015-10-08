@@ -1500,86 +1500,86 @@
                           "fields": [
                             {
                                 "name": "DATE APPROVAL ISSUED",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCheckList",
+                                "column": "DateIssued",
+                                "type": "date"
                             },
                             {
                                 "name": "DATE APPROVAL EXPIRES",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCheckList",
+                                "column": "DateExpired",
+                                "type": "date"
                             },
                             {
                                 "name": "BUYERS NAME",
-                                "table": "",
-                                "column": "",
+                                "table": "ShortSaleCheckList",
+                                "column": "BuyerName",
                                 "type": "string"
                             },
                             {
                                 "name": "CONTRACT PRICE",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCheckList",
+                                "column": "ContractPrice",
+                                "type": "number"
                             },
                             {
                                 "name": "DOES NET MATCH - 1ST LIEN",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCheckList",
+                                "column": "IsFirstLienMatch",
+                                "type": "boolean"
                             },
                             {
                                 "name": "APPROVED NET - 1ST LIEN",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCheckList",
+                                "column": "FirstLien",
+                                "type": "number"
                             },
                             {
                                 "name": "DOES NET MATCH - 2ND LIEN",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCheckList",
+                                "column": "IsSecondLienMatch",
+                                "type": "boolean"
                             },
                             {
                                 "name": "2ND MORTGAGE",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCheckList",
+                                "column": "SecondMortgage",
+                                "type": "number"
                             },
                             {
                                 "name": "APPROVED NET - 2ND LIEN",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCheckList",
+                                "column": "SecondLien",
+                                "type": "number"
                             },
                             {
                                 "name": "COMMISSION %",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCheckList",
+                                "column": "CommissionPercentage",
+                                "type": "number"
                             },
                             {
                                 "name": "COMMISSION AMOUNT",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCheckList",
+                                "column": "CommissionPercentage",
+                                "type": "number"
                             },
                             {
                                 "name": "TRANSFER TAX AMOUNT CORRECT",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCheckList",
+                                "column": "IsTransferTaxAmount",
+                                "type": "boolean"
                             },
                             {
                                 "name": "APPROVAL LETTER SAVED",
-                                "table": "",
-                                "column": "",
-                                "type": "string"
+                                "table": "ShortSaleCheckList",
+                                "column": "IsApprovalLetterSaved",
+                                "type": "boolean"
                             },
                             {
                                 "name": "CONFIRM OCCUPANCY",
-                                "table": "",
-                                "column": "",
+                                "table": "ShortSaleCheckList",
+                                "column": "ConfirmOccupancy",
                                 "type": "string"
                             }
                           ]

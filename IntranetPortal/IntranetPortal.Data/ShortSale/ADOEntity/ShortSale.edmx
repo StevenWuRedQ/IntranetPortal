@@ -511,6 +511,28 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ShortSaleCheckList">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="DateIssued" Type="datetime" />
+          <Property Name="DateExpired" Type="datetime" />
+          <Property Name="BuyerName" Type="nvarchar" MaxLength="256" />
+          <Property Name="ContractPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FirstLien" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsFirstLienMatch" Type="bit" />
+          <Property Name="SecondMortgage" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SecondLien" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsSecondLienMatch" Type="bit" />
+          <Property Name="CommissionPercentage" Type="float" />
+          <Property Name="CommissionAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsTransferTaxAmount" Type="bit" />
+          <Property Name="IsApprovalLetterSaved" Type="bit" />
+          <Property Name="ConfirmOccupancy" Type="nvarchar" MaxLength="256" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="ShortSaleOffers">
           <Key>
             <PropertyRef Name="OfferId" />
@@ -605,6 +627,7 @@
           <EntitySet Name="ShortSaleBuyers" EntityType="Self.ShortSaleBuyers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleCaseComments" EntityType="Self.ShortSaleCaseComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleCases" EntityType="Self.ShortSaleCases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShortSaleCheckList" EntityType="Self.ShortSaleCheckList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleOffers" EntityType="Self.ShortSaleOffers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleOverview" EntityType="Self.ShortSaleOverview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleClearences" EntityType="Self.TitleClearences" Schema="dbo" store:Type="Tables" />
@@ -638,6 +661,7 @@
           <EntitySet Name="ShortSaleOffers" EntityType="IntranetPortalModel.ShortSaleOffer" />
           <EntitySet Name="CorporationEntities" EntityType="IntranetPortalModel.CorporationEntity" />
           <EntitySet Name="ShortSaleLeadsInfoes" EntityType="IntranetPortalModel.ShortSaleLeadsInfo" />
+          <EntitySet Name="ShortSaleCheckLists" EntityType="IntranetPortalModel.ShortSaleCheckList" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -1218,6 +1242,28 @@
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ShortSaleCheckList">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="DateIssued" Type="DateTime" Precision="3" />
+          <Property Name="DateExpired" Type="DateTime" Precision="3" />
+          <Property Name="BuyerName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ContractPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsFirstLienMatch" Type="Boolean" />
+          <Property Name="IsSecondLienMatch" Type="Boolean" />
+          <Property Name="FirstLien" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CommissionPercentage" Type="Double" />
+          <Property Name="CommissionAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsTransferTaxAmount" Type="Boolean" />
+          <Property Name="IsApprovalLetterSaved" Type="Boolean" />
+          <Property Name="ConfirmOccupancy" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecondMortgage" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SecondLien" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1823,6 +1869,29 @@
                 <ScalarProperty Name="IsTaxesOwed" ColumnName="IsTaxesOwed" />
                 <ScalarProperty Name="IsOtherLiens" ColumnName="IsOtherLiens" />
                 <ScalarProperty Name="IsLisPendens" ColumnName="IsLisPendens" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShortSaleCheckLists">
+            <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCheckList">
+              <MappingFragment StoreEntitySet="ShortSaleCheckList">
+                <ScalarProperty Name="SecondLien" ColumnName="SecondLien" />
+                <ScalarProperty Name="SecondMortgage" ColumnName="SecondMortgage" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="ConfirmOccupancy" ColumnName="ConfirmOccupancy" />
+                <ScalarProperty Name="IsApprovalLetterSaved" ColumnName="IsApprovalLetterSaved" />
+                <ScalarProperty Name="IsTransferTaxAmount" ColumnName="IsTransferTaxAmount" />
+                <ScalarProperty Name="CommissionAmount" ColumnName="CommissionAmount" />
+                <ScalarProperty Name="CommissionPercentage" ColumnName="CommissionPercentage" />
+                <ScalarProperty Name="FirstLien" ColumnName="FirstLien" />
+                <ScalarProperty Name="IsSecondLienMatch" ColumnName="IsSecondLienMatch" />
+                <ScalarProperty Name="IsFirstLienMatch" ColumnName="IsFirstLienMatch" />
+                <ScalarProperty Name="ContractPrice" ColumnName="ContractPrice" />
+                <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
+                <ScalarProperty Name="DateExpired" ColumnName="DateExpired" />
+                <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>

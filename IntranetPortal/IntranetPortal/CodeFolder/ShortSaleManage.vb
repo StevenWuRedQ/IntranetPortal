@@ -256,6 +256,19 @@ Public Class ShortSaleManage
         Next
     End Sub
 
+    Public Shared Function UpdateCheckList() As Integer
+        Dim ssCases = ShortSaleCase.GetAllCase.Where(Function(ss) Not String.IsNullOrEmpty(ss.ApprovalChecklist)).ToList
+
+        Dim count = 0
+
+        For Each ss In ssCases
+            If ss.UpdateCheckList(ss.ApprovalChecklist, "System") Then
+                count += count
+            End If
+        Next
+
+    End Function
+
     Private Shared Function SetReferral(ssCase As ShortSaleCase)
         Dim ld = Lead.GetInstance(ssCase.BBLE)
         If ld IsNot Nothing Then

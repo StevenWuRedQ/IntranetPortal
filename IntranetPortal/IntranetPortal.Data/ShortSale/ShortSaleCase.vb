@@ -2,6 +2,7 @@
 Imports System.Text
 Imports Newtonsoft.Json
 Imports System.ComponentModel.DataAnnotations
+Imports Newtonsoft.Json.Linq
 
 <MetadataType(GetType(ShortSaleCaseMetaType))>
 Partial Public Class ShortSaleCase
@@ -148,7 +149,7 @@ Partial Public Class ShortSaleCase
     'Public Property MortgageCategory As String
 
     <JsonIgnoreAttribute>
-   Public ReadOnly Property FileOverview As ShortSaleOverview
+    Public ReadOnly Property FileOverview As ShortSaleOverview
         Get
             Dim overview = ShortSaleOverview.LastOverview(BBLE, "ShortSale")
             If overview IsNot Nothing Then
@@ -626,7 +627,7 @@ Partial Public Class ShortSaleCase
 
 #Region "Methods"
 
-    Public Sub RefreshReportFields()
+    Public Sub RefreshReportFields(refreshBy As String)
 
         'Init Occupancy Data
         Me.OccupiedBy = If(_propInfo IsNot Nothing, _propInfo.Occupancy, Nothing)
@@ -639,11 +640,85 @@ Partial Public Class ShortSaleCase
                 SaleDate = Nothing
             End If
         End If
+
+        'Update Check List
+        If Not String.IsNullOrEmpty(Me.ApprovalChecklist) Then
+            UpdateCheckList(Me.ApprovalChecklist, refreshBy)
+        End If
     End Sub
+
+    Public Function UpdateCheckList(json As String, refreshBy As String) As Boolean
+        Dim jsonClist = Newtonsoft.Json.Linq.JObject.Parse(json)
+
+        If jsonClist IsNot Nothing Then
+            Using ctx As New ShortSaleEntities
+                Dim clist = ctx.ShortSaleCheckLists.Find(BBLE)
+                If clist Is Nothing Then
+                    clist = New ShortSaleCheckList
+                    clist.BBLE = BBLE
+                    ctx.ShortSaleCheckLists.Add(clist)
+                End If
+                'For Each item In jsonClist
+                '    Dim clistType = clist.GetType()
+                '    Dim prop = clistType.GetProperty(item.Key)
+                '    If prop IsNot Nothing Then
+                '        prop.SetValue(clist, ParseFromJToken(Of ))
+
+                '    End If
+                'Next
+                clist.DateIssued = ParseFromJToken(Of DateTime?)(jsonClist, "DateIssued")
+                clist.DateExpired = ParseFromJToken(Of DateTime?)(jsonClist, "DateExpired")
+                clist.BuyerName = ParseFromJToken(Of String)(jsonClist, "BuyerName")
+                clist.ContractPrice = ParseFromJToken(Of Decimal?)(jsonClist, "ContractPrice")
+                clist.IsFirstLienMatch = ParseFromJToken(Of Boolean?)(jsonClist, "IsFirstLienMatch")
+                clist.IsSecondLienMatch = ParseFromJToken(Of Boolean?)(jsonClist, "IsSecondLienMatch")
+                clist.FirstLien = ParseFromJToken(Of Decimal?)(jsonClist, "FirstLien")
+                clist.SecondLien = ParseFromJToken(Of Decimal?)(jsonClist, "SecondLien")
+                clist.SecondMortgage = ParseFromJToken(Of Decimal?)(jsonClist, "SecondMortgage")
+                clist.CommissionPercentage = ParseFromJToken(Of Double?)(jsonClist, "CommissionPercentage")
+                clist.CommissionAmount = ParseFromJToken(Of Decimal?)(jsonClist, "CommissionAmount")
+                clist.IsTransferTaxAmount = ParseFromJToken(Of Boolean?)(jsonClist, "IsTransferTaxAmount")
+                clist.IsApprovalLetterSaved = ParseFromJToken(Of Boolean?)(jsonClist, "IsApprovalLetterSaved")
+                clist.ConfirmOccupancy = ParseFromJToken(Of String)(jsonClist, "ConfirmOccupancy")
+                clist.LastUpdate = DateTime.Now
+                clist.UpdateBy = refreshBy
+
+                ctx.SaveChanges()
+
+                Return True
+            End Using
+        End If
+
+        Return False
+    End Function
+
+    Private Function ParseFromJToken(Of T)(json As JToken, key As String) As T
+        If json(key) IsNot Nothing Then
+            Dim tp = GetType(T)
+            If tp = GetType(Boolean) Then
+                Dim value = json(key).ToString
+                If String.IsNullOrEmpty(value) Then
+                    Return Nothing
+                End If
+
+                Return CTypeDynamic(Of T)(value = "Y")
+            End If
+
+            Try
+                Dim result As T = CTypeDynamic(Of T)(json(key).ToString)
+                Return result
+            Catch ex As Exception
+
+            End Try
+        End If
+
+        Return Nothing
+    End Function
+
 
     Public Sub Save(Optional userName As String = Nothing)
         Using context As New ShortSaleEntities
-            RefreshReportFields()
+            RefreshReportFields(userName)
 
             If CaseId = 0 Then
                 If Not String.IsNullOrEmpty(BBLE) Then
@@ -825,7 +900,7 @@ Partial Public Class ShortSaleCase
             Throw New Exception("Can't find short sale case. Case Id is " & caseId)
         End If
 
-        ssCase.ReassignOwner(owner)
+        ssCase.ReAssignOwner(owner)
     End Sub
 
     Public Shared Sub ReassignOwner(bble As String, owner As String)
@@ -834,7 +909,7 @@ Partial Public Class ShortSaleCase
             Throw New Exception("Can't find short sale case. BBLE is " & bble)
         End If
 
-        ssCase.ReassignOwner(owner)
+        ssCase.ReAssignOwner(owner)
     End Sub
 
     Private Sub ReAssignOwner(owner As String)
@@ -1027,7 +1102,7 @@ Partial Public Class ShortSaleCase
     Public Shared Function GetCaseByBBLEs(bbles As List(Of String)) As List(Of ShortSaleCase)
         Using ctx As New ShortSaleEntities
             Dim result = (From ss In ctx.ShortSaleCases.Where(Function(s) bbles.Contains(s.BBLE))
-                         From mort In ctx.PropertyMortgages.Where(Function(m) m.CaseId = ss.CaseId).Take(1).DefaultIfEmpty
+                          From mort In ctx.PropertyMortgages.Where(Function(m) m.CaseId = ss.CaseId).Take(1).DefaultIfEmpty
                           Select ss, mort).Distinct.ToList.Select(Function(s)
                                                                       If s.mort IsNot Nothing Then
                                                                           s.ss.MortgageStatus = s.mort.Status
@@ -1044,8 +1119,8 @@ Partial Public Class ShortSaleCase
         Using ctx As New ShortSaleEntities
 
             Dim result = (From evi In ctx.EvictionCases
-                         Join ss In ctx.ShortSaleCases On ss.BBLE Equals evi.BBLE
-                         Select New With {.case = ss, .Name = evi.Owner}).ToList.Select(Function(s) ShortsaleCaseWithEvictionOwner(s.case, s.Name)).ToList
+                          Join ss In ctx.ShortSaleCases On ss.BBLE Equals evi.BBLE
+                          Select New With {.case = ss, .Name = evi.Owner}).ToList.Select(Function(s) ShortsaleCaseWithEvictionOwner(s.case, s.Name)).ToList
 
             Return result
         End Using
