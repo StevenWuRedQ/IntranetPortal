@@ -35,8 +35,8 @@ Public Class ConstructionNotifyRule
                 Next
                 builder.Append("</table>")
                 Dim body = builder.ToString
-                ' Dim toAddr = Employee.GetInstance(manager).Email
-                Dim toAddr = "stephenz@myidealprop.com"
+                Dim toAddr = Employee.GetInstance(manager).Email
+                ' Dim toAddr = "stephenz@myidealprop.com"
 
                 Dim maildata As New Dictionary(Of String, String)
 

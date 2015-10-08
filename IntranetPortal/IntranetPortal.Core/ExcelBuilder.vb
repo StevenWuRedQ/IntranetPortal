@@ -11,13 +11,13 @@ Public Class ExcelBuilder
             Dim wb As New Excel.XLWorkbook
             Dim ws = wb.Worksheets.Add("sheet1")
 
-            Dim header = ws.Range("A1:H1")
+            Dim header = ws.Range("A1:F1")
             header.Cell("A1").Value = "Description"
-            header.Cell("D1").Value = "Materials"
-            header.Cell("E1").Value = "Labor"
-            header.Cell("F1").Value = "Contract Price"
-            header.Cell("G1").Value = "Paid"
-            header.Cell("H1").Value = "Balance"
+            header.Cell("B1").Value = "Materials"
+            header.Cell("C1").Value = "Labor"
+            header.Cell("D1").Value = "Contract Price"
+            header.Cell("E1").Value = "Paid"
+            header.Cell("F1").Value = "Balance"
             header.Style.Font.SetBold()
 
             Dim Index = 2
@@ -52,7 +52,7 @@ Public Class ExcelBuilder
                         ws.Cell("E" & Index).Style.NumberFormat.Format = "$ #,##0.00"
                     End If
 
-                    ws.Cell("F" & Index).FormulaA1 = "=(F" & Index & "-G" & Index & ")"
+                    ws.Cell("F" & Index).FormulaA1 = "=(D" & Index & "-E" & Index & ")"
                     ws.Cell("F" & Index).Style.NumberFormat.Format = "$ #,##0.00"
 
                     Index = Index + 1
@@ -61,11 +61,11 @@ Public Class ExcelBuilder
 
             If Index > 1 Then
                 ws.Cell("A" & Index).Value = "Total"
-                ws.Cell("D" & Index).FormulaA1 = "=SUM(F2:D" & (Index - 1) & ")"
+                ws.Cell("D" & Index).FormulaA1 = "=SUM(D2:D" & (Index - 1) & ")"
                 ws.Cell("D" & Index).Style.NumberFormat.Format = "$ #,##0.00"
-                ws.Cell("E" & Index).FormulaA1 = "=SUM(G2:E" & (Index - 1) & ")"
+                ws.Cell("E" & Index).FormulaA1 = "=SUM(E2:E" & (Index - 1) & ")"
                 ws.Cell("E" & Index).Style.NumberFormat.Format = "$ #,##0.00"
-                ws.Cell("F" & Index).FormulaA1 = "=SUM(H2:F" & (Index - 1) & ")"
+                ws.Cell("F" & Index).FormulaA1 = "=SUM(F2:F" & (Index - 1) & ")"
                 ws.Cell("F" & Index).Style.NumberFormat.Format = "$ #,##0.00"
 
                 Dim TotalRange = ws.Range("A" & Index & ":F" & Index)

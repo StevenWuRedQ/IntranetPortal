@@ -128,6 +128,7 @@ Partial Class Troubleshooting
         Me.btnGeneratTemplate = New System.Windows.Forms.Button()
         Me.txtReportTables = New System.Windows.Forms.TextBox()
         Me.txtTemplateResult = New System.Windows.Forms.TextBox()
+        Me.TestRegExp = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -1029,6 +1030,7 @@ Partial Class Troubleshooting
         '
         'TabPage9
         '
+        Me.TabPage9.Controls.Add(Me.TestRegExp)
         Me.TabPage9.Controls.Add(Me.Organize)
         Me.TabPage9.Controls.Add(Me.SpotCheckTest)
         Me.TabPage9.Controls.Add(Me.TestHPD)
@@ -1185,9 +1187,16 @@ Partial Class Troubleshooting
         Me.txtTemplateResult.Location = New System.Drawing.Point(0, 0)
         Me.txtTemplateResult.Multiline = True
         Me.txtTemplateResult.Name = "txtTemplateResult"
-        Me.txtTemplateResult.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtTemplateResult.Size = New System.Drawing.Size(487, 323)
-        Me.txtTemplateResult.TabIndex = 1
+
+        '
+        'TestRegExp
+        '
+        Me.TestRegExp.Location = New System.Drawing.Point(464, 43)
+        Me.TestRegExp.Name = "TestRegExp"
+        Me.TestRegExp.Size = New System.Drawing.Size(75, 23)
+        Me.TestRegExp.TabIndex = 10
+        Me.TestRegExp.Text = "TestRegExpNotify"
+        Me.TestRegExp.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1342,5 +1351,6 @@ Partial Class Troubleshooting
     Friend WithEvents Button21 As Button
     Friend WithEvents SpotCheckTest As Button
     Friend WithEvents Organize As Button
+    Friend WithEvents TestRegExp As Button
     Friend WithEvents btnInitChecklist As Button
 End Class

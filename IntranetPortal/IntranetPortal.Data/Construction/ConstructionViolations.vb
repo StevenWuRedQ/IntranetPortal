@@ -11,7 +11,7 @@ Partial Public Class ConstructionViolation
 
     Public Shared Function GetViolationsWithin30Days() As ConstructionViolation()
         Using ctx = New ConstructionEntities
-            Dim result = ctx.ConstructionViolations.Where(Function(c) Entity.DbFunctions.DiffDays(c.HPD_RegExpireDate, Now) < 30).ToArray
+            Dim result = ctx.ConstructionViolations.Where(Function(c) Entity.DbFunctions.DiffDays(Now, c.HPD_RegExpireDate) = 30).ToArray
             Return result
         End Using
     End Function
