@@ -103,6 +103,9 @@
                                     columnChooser: {
                                         enabled: true
                                     },
+                                    columnFixing: { 
+                                        enabled: true
+                                    },
                                     stateStoring : {
                                         enabled: true
                                     },
@@ -474,7 +477,7 @@
                 $scope.step = $scope.step - 1;
             }
             $scope.generate = function () {
-                
+
                 var result = [];
                 _.each($scope.Fields, function (el, i) {
                     _.each(el.fields, function (el, i) {
@@ -497,10 +500,10 @@
                 } else {
                     alert("Query is empty!");
                 }
-                
+
             }
 
-            
+
             $scope.reload();
         });
 

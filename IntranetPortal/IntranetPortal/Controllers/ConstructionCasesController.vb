@@ -215,9 +215,21 @@ Namespace Controllers
             Return Ok(result.ToArray)
         End Function
 
+        <Route("api/ConstructionCases/GetSpotCheck/{id}")>
+        Function GetSpotCheck(ByVal id As Integer) As IHttpActionResult
+            Dim result = ConstructionSpotCheck.GetSpotCheck(id)
+            Return Ok(result)
+        End Function
+
         <Route("api/ConstructionCases/SaveSpotList")>
-        Function UpdateSpotList(form As Data.ConstructionSpotCheck) As IHttpActionResult
+        Function SaveSpotList(form As Data.ConstructionSpotCheck) As IHttpActionResult
             ConstructionSpotCheck.UpdateSpotCheck(form)
+            Return Ok()
+        End Function
+
+        <Route("api/ConstructionCases/FinishSpotList")>
+        Function FinishSpotList(form As Data.ConstructionSpotCheck) As IHttpActionResult
+            ConstructionSpotCheck.FinishSpotCheck(form)
             ConstructionManage.NotifyWhenSpotCheck(form)
             Return Ok()
         End Function

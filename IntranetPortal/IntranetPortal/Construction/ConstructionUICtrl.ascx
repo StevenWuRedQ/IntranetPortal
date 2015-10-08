@@ -2,10 +2,10 @@
 <%@ Register Src="~/Construction/ConstructionTab.ascx" TagPrefix="uc1" TagName="ConstructionTab" %>
 <%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
-<div id="ConstructionCtrl" ng-controller="ConstructionCtrl" style="align-content: center;">
+<div id="ConstructionCtrl" ng-controller="ConstructionCtrl">
     <!-- Nav tabs -->
     <input id="LastUpdateTime" type="hidden" />
-    <div class="legal-menu row" style="margin: 0px;">
+    <div class="legal-menu row" style="margin: 0;">
         <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
             <li class="active short_sale_head_tab">
                 <a href="#ConstructionTab" role="tab" data-toggle="tab" class="tab_button_a">
@@ -148,8 +148,9 @@
         $scope.arrayRemove = ptCom.arrayRemove;
         $scope.ptContactServices = ptContactServices;
         $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
-        $scope.CSCase = {}
+
         $scope.ReloadedData = {}
+        $scope.CSCase = {}
         $scope.CSCase.CSCase = {
             InitialIntake: {},
             Photos: {},
@@ -163,9 +164,13 @@
         };
         $scope.CSCase.CSCase.Utilities.Company = [];
         $scope.CSCase.CSCase.Utilities.Insurance_Type = [];
-        $scope.EntityInfo = {}
-        $scope.DataSource = {};
-        $scope.DataSource.Shown = {
+        $scope.percentage = {
+            intake: 0,
+            signoff: 0,
+            construction: 0,
+            test: 0
+        }
+        $scope._SHOWN_ = {
             'ConED': 'CSCase.CSCase.Utilities.ConED_Shown',
             'Energy Service': 'CSCase.CSCase.Utilities.EnergyService_Shown',
             'National Grid': 'CSCase.CSCase.Utilities.NationalGrid_Shown',
@@ -175,10 +180,17 @@
             'ADT': 'CSCase.CSCase.Utilities.ADT_Shown',
             'Insurance': 'CSCase.CSCase.Utilities.Insurance_Shown',
         };
+        $scope.highlights = [
+    { message: 'Plumbing signed off at {{CSCase.CSCase.Signoffs.Plumbing_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate' },
+    { message: 'Electrical signed off at {{CSCase.CSCase.Signoffs.Electrical_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate' },
+    { message: 'Construction signed off at {{CSCase.CSCase.Signoffs.Construction_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate' },
+    { message: 'HPD Violations has all finished', criteria: 'CSCase.CSCase.Violations.HPD_OpenHPDViolation === false' }
+        ];
 
         $scope.reload = function () {
-            $scope.CSCase = {}
+
             $scope.ReloadedData = {}
+            $scope.CSCase = {}
             $scope.CSCase.CSCase = {
                 InitialIntake: {},
                 Photos: {},
@@ -192,7 +204,6 @@
             };
             $scope.CSCase.CSCase.Utilities.Company = [];
             $scope.CSCase.CSCase.Utilities.Insurance_Type = [];
-            $scope.EntityInfo = {};
             $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} });
 
             budgetCtrl.reload();
@@ -204,7 +215,6 @@
             bble = bble.trim();
             $scope.reload();
             var done1, done2, done3, done4;
-
 
             ptConstructionService.getConstructionCases(bble, function (res) {
                 ptCom.nullToUndefined(res);
@@ -239,8 +249,12 @@
             });
 
             ptEntityService.getEntityByBBLE(bble, function (error, data) {
-                if (data) $scope.EntityInfo = data;
-                else console.log(error);
+                if (data) {
+                    $scope.EntityInfo = data;
+                } else {
+                    $scope.EntityInfo = {};
+                    console.log(error);
+                }
                 done4 = true;
                 if (done1 && done2 && done3 & done4) {
                     $scope.stopLoading();
@@ -266,7 +280,6 @@
         }
         /* end status change function */
 
-
         $scope.saveCSCase = function () {
             var data = budgetCtrl.get();
             if (data) $scope.CSCase.CSCase.BudateData = data;
@@ -289,7 +302,7 @@
         };
         $scope.$watch('CSCase.CSCase.Utilities.Company', function (newValue) {
             if (newValue) {
-                var ds = $scope.DataSource.Shown;
+                var ds = $scope._SHOWN_;
                 var target = $scope.CSCase.CSCase.Utilities.Company;
                 $scope.resetCompany(ds);
                 for (var i in target) {
@@ -315,7 +328,6 @@
 
         /* reminder */
         $scope.sendNotice = function (id, name) {
-            // TODO
             var confirmed = confirm("Send Intake Sheet To " + name + " ?");
         }
         /* end reminder */
@@ -347,12 +359,7 @@
         /* end active tab */
 
         /* highlight */
-        $scope.highlights = [
-            { message: 'Plumbing signed off at {{CSCase.CSCase.Signoffs.Plumbing_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate' },
-            { message: 'Electrical signed off at {{CSCase.CSCase.Signoffs.Electrical_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate' },
-            { message: 'Construction signed off at {{CSCase.CSCase.Signoffs.Construction_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate' },
-            { message: 'HPD Violations has all finished', criteria: 'CSCase.CSCase.Violations.HPD_OpenHPDViolation === false' }
-        ];
+
         $scope.isHighlight = function (criteria) {
             return $scope.$eval(criteria);
         }
@@ -529,9 +536,14 @@
                 }
 
             })
-            if (errorFields.length>1) alert("Intake Complete Fails.\nPlease check highlights for missing information!");
+            if (errorFields.length > 1) alert("Intake Complete Fails.\nPlease check highlights for missing information!");
             return true && errorFields;
         }
+        $scope.updatePercentage = function () {
+            var totalIntake = 0;
+            var total
+        }
+
         $scope.clearWarning = function () {
             $(".intakeCheck").each(function (idx) {
                 $(this).prev().css('background-color', 'transparent');
@@ -543,7 +555,7 @@
 
         /*check file be modify*/
         $scope.GetTimeUrl = function () {
-            return $scope.CSCase.BBLE?"/api/ConstructionCases/LastLastUpdate/" + $scope.CSCase.BBLE:"";
+            return $scope.CSCase.BBLE ? "/api/ConstructionCases/LastLastUpdate/" + $scope.CSCase.BBLE : "";
         }
         $scope.GetCSCaseId = function () {
             return $scope.CSCase.BBLE;

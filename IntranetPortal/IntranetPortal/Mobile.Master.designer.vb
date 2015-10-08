@@ -14,11 +14,11 @@ Option Explicit On
 Partial Public Class Mobile
     
     '''<summary>
-    '''content control.
+    '''mobile_content control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents content As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents mobile_content As Global.System.Web.UI.WebControls.ContentPlaceHolder
 End Class

@@ -626,13 +626,14 @@ app.factory('ptEntityService', function ($http) {
     return {
         getEntityByBBLE: function (bble, callback) {
             var url = '/api/CorporationEntities/ByBBLE?BBLE=' + bble;
-            $http.get(url).success(function (data) {
-                if (callback) callback(null, data);
-            }).error(function () {
-                if (callback) callback("load entity fails");
+            $http.get(url).then(function success(res) {
+                debugger;
+                if (callback) callback(null, res.data)
+            }, function error(res) {
+                debugger;
+                if (callback) callback("load fail", res.data)
             })
+
         }
     }
-
-
 })

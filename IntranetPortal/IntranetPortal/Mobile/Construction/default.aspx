@@ -1,15 +1,15 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="default.aspx.vb" Inherits="IntranetPortal.SpotCheck" MasterPageFile="~/Mobile.Master" %>
 
-<asp:Content runat="server" ContentPlaceHolderID="content">
+<asp:Content runat="server" ContentPlaceHolderID="mobile_content">
     <div ng-controller="SpotCheckCtrl">
         <div class="section">
             <div class="form-group">
                 <label>Date</label>
-                <input class="form-control" type="date" placeholder="00/00/0000" ng-model="form.date">
+                <input class="form-control" placeholder="00/00/0000" ng-model="form.date">
             </div>
             <div class="form-group">
                 <label>Property Address</label>
-                <select class="form-control" ng-options="l.Id as l.propertyAddress for l in CaseList" ng-model="form.id"></select>
+                <select class="form-control" ng-options="l.Id as l.propertyAddress for l in CaseList" ng-model="form.id" ng-change="onAddressChange()"></select>
             </div>
             <div class="form-group">
                 <label>Access</label>
@@ -40,6 +40,7 @@
             <div class="form-group">
                 <label>Are permits on site</label>
                 <input type="checkbox" ng-model="form.isPermitOnsite" />
+                <br />
                 <label>If YES, please confirm which permit(s) and date it expires</label>
                 <textarea class="form-control" rows="5" ng-model="form.permitsAndExpired"></textarea>
             </div>
@@ -58,12 +59,12 @@
                 <label>Additional Notes:</label>
                 <textarea class="form-control" rows="5" ng-model="form.note"></textarea>
             </div>
-
-            <button type="button" class="btn btn-success pull-right" ng-click="submitForm()">Submit</button>
+            <button type="button" class="btn btn-primary pull-left" ng-click="saveForm()">Save</button>
+            <button type="button" class="btn btn-success pull-right" ng-click="submitForm()">Finish</button>
         </div>
     </div>
     <script>
-        angular.module('PortalMapp').controller("SpotCheckCtrl", function ($scope, $http) {
+        angular.module('PortalMapp').controller("SpotCheckCtrl", function ($scope, $http, $filter) {
             $scope.form = {};
             $scope.reload = function () {
                 $scope.form = {};
@@ -77,19 +78,48 @@
                     $scope.CaseList = res.data;
                 })
             }
+            $scope.onAddressChange = function () {
+                var addressId = $scope.form.id;
+                $http.get("/api/ConstructionCases/GetSpotCheck/" + addressId)
+                .then(function success(res) {
+                    $scope.form = res.data;
+                    $scope.form.id = addressId;
+                    $scope.form.date = $filter('date')($scope.form.date, 'MM/dd/yyyy')
+                }, function error(res) {
+                    alert("load data fails");
+                })
+
+            }
+            $scope.saveForm = function () {
+                if ($scope.form.id) {
+                    $http({
+                        method: 'POST',
+                        url: '/api/ConstructionCases/SaveSpotList',
+                        data: JSON.stringify($scope.form)
+                    }).then(function () {
+                        alert("Save Successful");                        
+                    })
+
+                }
+
+            }
             $scope.submitForm = function () {
                 if ($scope.form.id) {
                     $http({
                         method: "POST",
-                        url: "/api/ConstructionCases/SaveSpotList",
+                        url: "/api/ConstructionCases/FinishSpotList",
                         data: JSON.stringify($scope.form)
                     }).then(function (res) {
                         alert("Save Successful");
                         $scope.reload();
                     })
+                } else {
+                    alert("Please select a correct address.")
                 }
             }
+
             $scope.init();
+
         });
     </script>
 </asp:Content>

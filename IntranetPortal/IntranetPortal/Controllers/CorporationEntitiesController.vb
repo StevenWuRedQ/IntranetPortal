@@ -26,7 +26,6 @@ Namespace Controllers
             If IsNothing(corporationentity) Then
                 Return NotFound()
             End If
-
             Return Ok(corporationentity)
         End Function
         ' GET: api/CorporationEntities/5

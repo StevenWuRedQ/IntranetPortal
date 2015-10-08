@@ -53,25 +53,43 @@ Partial Public Class ConstructionSpotCheck
     Public Shared Sub UpdateSpotCheck(data As ConstructionSpotCheck)
         If Not data.Id = Nothing Then
             Using ctx = New ConstructionEntities
-                Dim savedCased = ctx.ConstructionSpotCheck.Where(Function(sc) sc.Id = data.Id).FirstOrDefault
-                For Each P In savedCased.GetType.GetProperties
+                Dim saved = ctx.ConstructionSpotCheck.Where(Function(sc) sc.Id = data.Id).FirstOrDefault
+                For Each P In saved.GetType.GetProperties
                     If Not P.GetValue(data, Nothing) Is Nothing Then
                         If (P.Name <> "Id") Then
-                            P.SetValue(savedCased, P.GetValue(data, Nothing))
+                            P.SetValue(saved, P.GetValue(data, Nothing))
                         End If
                     End If
                 Next
-                If savedCased.date Is Nothing Then
-                    savedCased.date = New Date()
+                If saved.date Is Nothing Then
+                    saved.date = DateTime.Now
                 End If
-                savedCased.status = CaseStatus.Finished
                 ctx.SaveChanges()
             End Using
         End If
     End Sub
 
+    Public Shared Sub UpdateSpotCheckStatus(data As ConstructionSpotCheck)
+        If Not data.Id = Nothing Then
+            Using ctx = New ConstructionEntities
+                Dim saved = ctx.ConstructionSpotCheck.Where(Function(sc) sc.Id = data.Id).FirstOrDefault
+                saved.status = CaseStatus.Finished
+                ctx.SaveChanges()
+            End Using
+        End If
+    End Sub
+
+    Public Shared Sub FinishSpotCheck(data)
+        UpdateSpotCheck(data)
+        UpdateSpotCheckStatus(data)
+    End Sub
+
     Public Shared Function GetNameDesction(key As String) As String
         Return _KeyDescDict(key)
+    End Function
+
+    Public Shared Function ContainNameDesc(key As String) As Boolean
+        Return _KeyDescDict.ContainsKey(key)
     End Function
     Public Sub New()
 

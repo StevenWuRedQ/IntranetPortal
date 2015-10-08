@@ -141,12 +141,12 @@ Public Class ConstructionManage
             Dim builder = New StringBuilder
             For Each p In spotCheck.GetType.GetProperties
                 If Not p.GetValue(form, Nothing) Is Nothing Then
-                    If p.Name <> "Id" Then
+                    If ConstructionSpotCheck.ContainNameDesc(p.Name) Then
                         If Not p.PropertyType.Name = "String" Then
-                            builder.Append("<h5>" & Data.ConstructionSpotCheck.GetNameDesction(p.Name) & "</h5>")
+                            builder.Append("<h5 style='color:blue'>" & ConstructionSpotCheck.GetNameDesction(p.Name) & "</h5>")
                             builder.Append("<p>" & p.GetValue(form, Nothing) & "</p>")
                         Else 'this is a string
-                            builder.Append("<h5>" & Data.ConstructionSpotCheck.GetNameDesction(p.Name) & "</h5>")
+                            builder.Append("<h5 style='color:blue'>" & ConstructionSpotCheck.GetNameDesction(p.Name) & "</h5>")
                             builder.Append("<p>" & p.GetValue(form, Nothing).Replace(vbLf, "<br>") & "</p>")
                         End If
                     End If
