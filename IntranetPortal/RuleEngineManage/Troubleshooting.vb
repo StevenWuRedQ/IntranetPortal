@@ -293,6 +293,19 @@ Public Class Troubleshooting
 
     End Sub
 
+#Region "Short Sale"
+
+    Private Sub btnInitChecklist_Click(sender As Object, e As EventArgs) Handles btnInitChecklist.Click
+        ShortSaleManage.UpdateCheckList()
+        MessageBox.Show("Complete!")
+    End Sub
+
+    Private Sub Button10_Click_1(sender As Object, e As EventArgs) Handles Button10.Click
+        IntranetPortal.ShortSaleManage.UpdateReferral()
+        MessageBox.Show("Complete!")
+    End Sub
+
+
     Sub SaveMortgages(ssCase As ShortSaleCase, ds As DataSet)
         For Each mort In ds.Tables("Liens_Mortgage").Rows
             If Not IsDBNull(mort("Loan #")) Then
@@ -511,10 +524,8 @@ Public Class Troubleshooting
         End Using
     End Function
 
-    Private Sub Button10_Click_1(sender As Object, e As EventArgs) Handles Button10.Click
-        IntranetPortal.ShortSaleManage.UpdateReferral()
-        MessageBox.Show("Complete!")
-    End Sub
+
+#End Region
 
     Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
         Dim rule As New IntranetPortal.RulesEngine.PendingAssignRule
@@ -922,4 +933,6 @@ Public Class Troubleshooting
         fs.Close()
 
     End Sub
+
+
 End Class
