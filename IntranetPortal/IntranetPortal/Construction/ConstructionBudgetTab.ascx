@@ -31,7 +31,7 @@
             <td>
                 <input style="width: 60px; border: none" ng-model="d.paid" money-mask ng-change="update(d)" /></td>
             <td>
-                <input style="width: 60px; border: none" ng-model="d.balance" money-mask ng-change="updateTotal()" /></td>
+                <input style="width: 60px; border: none" ng-model="d.balance" money-mask ng-change="updateTotal()" readonly/></td>
         </tr>
         <tr style="background-color: yellow; font-weight: bolder">
             <td>Total</td>
