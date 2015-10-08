@@ -147,7 +147,7 @@ Public Class WebGrabber
         Return Regex.Replace(content, "<b>Severity:</b>", "")
     End Function
 
-    Public Shared Function GetHPDInfo() As HPDViolation
+    Public Shared Sub GetHPDInfo()
         Try
             Dim driver = New SimpleBrowserDriver
             driver.Navigate.GoToUrl("https://hpdonline.hpdnyc.org/HPDonline/provide_address.aspx")
@@ -164,7 +164,7 @@ Public Class WebGrabber
         Catch ex As Exception
 
         End Try
-    End Function
+    End Sub
 
     Class DOBViolation
         Public DOB_TotalDOBViolation As String

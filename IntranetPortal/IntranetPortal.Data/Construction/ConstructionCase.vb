@@ -124,8 +124,11 @@ Partial Public Class ConstructionCase
                 db.ConstructionCases.Add(Me)
             End If
 
-            Dim violation = New ConstructionViolation
-            violation.Save(Me, userName)
+            If Not Me.CSCase Is Nothing Then
+                Dim violation = New ConstructionViolation
+                violation.Save(Me, userName)
+            End If
+
 
             Try
                 db.SaveChanges()

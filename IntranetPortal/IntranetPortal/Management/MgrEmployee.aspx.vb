@@ -37,11 +37,6 @@ Public Class MgrEmployee
 
     End Sub
 
-    Function EmployeeDataSource()
-
-
-    End Function
-
     Protected Sub treeList_NodeInserting(sender As Object, e As DevExpress.Web.Data.ASPxDataInsertingEventArgs) Handles treeList.NodeInserting
         Dim emp As New Employee
         emp.Name = Utility.FormatUserName(e.NewValues("Name"))

@@ -2,14 +2,12 @@
     Inherits Exception
 
     ''' <summary>
-    ''' Initializes a new instance of the <see cref="DwmException"/> class.
     ''' </summary>
     Public Sub New()
         MyBase.New()
     End Sub
 
     ''' <summary>
-    ''' Initializes a new instance of the <see cref="DwmException"/> class
     ''' with the specified error message.
     ''' </summary>
     ''' <param name="message">The message that describes the error.</param>
@@ -18,7 +16,6 @@
     End Sub
 
     ''' <summary>
-    ''' Initializes a new instance of the <see cref="DwmException"/> class
     ''' with the specified error message and a reference to the inner
     ''' exception that is the cause of this exception.
     ''' </summary>

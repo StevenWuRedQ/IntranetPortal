@@ -866,13 +866,11 @@ Public Class Troubleshooting
         Dim owner = tokens(1)
         Dim caseName = LeadsInfo.GetInstance(BBLE).PropertyAddress
         Try
-            ConstructionManage.StartConstruction(BBLE, caseName, owner, owner)
+            ConstructionManage.StartConstruction(BBLE, caseName, "Chris Yan", owner)
             TextBox4.AppendText("Success")
         Catch ex As Exception
             TextBox4.AppendText("Fails \n")
         End Try
-
-
     End Sub
 
     Private Sub OnTestHDPClick(sender As Object, e As EventArgs) Handles TestHPD.Click
