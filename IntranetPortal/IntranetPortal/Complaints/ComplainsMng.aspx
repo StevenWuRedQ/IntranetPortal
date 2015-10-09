@@ -654,7 +654,7 @@
                                 }],
                                 masterDetail: {
                                     enabled: true,
-                                    template: "#gridComplaitsDetail2"
+                                    template: "#gridComplaitsDetail"
                                 },
                                 onRowPrepared: function (info) {
                                     if (info.data && info.data.RedNotes && info.data.RedNotes != "")
