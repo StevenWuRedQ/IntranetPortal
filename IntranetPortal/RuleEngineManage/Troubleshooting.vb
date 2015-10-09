@@ -771,7 +771,7 @@ Public Class Troubleshooting
 
                 If String.IsNullOrEmpty(sCase.FirstMortgage.Status) AndAlso String.IsNullOrEmpty(sCase.FirstMortgage.Category) Then
 
-                    Dim log = ShortSaleActivityLog.GetLogs(bble).Where(Function(l) l.ActivityType = "1st Lien").OrderByDescending(Function(l) l.ActivityDate).FirstOrDefault
+                    Dim log = ShortSaleActivityLog.GetLogs(bble, 1).Where(Function(l) l.ActivityType = "1st Lien").OrderByDescending(Function(l) l.ActivityDate).FirstOrDefault
 
                     If log IsNot Nothing Then
                         Dim title = log.ActivityTitle

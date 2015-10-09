@@ -163,7 +163,7 @@ Partial Public Class ShortSaleCase
     <JsonIgnoreAttribute>
     Public ReadOnly Property LastActivityLog As String
         Get
-            Dim log = ShortSaleActivityLog.LastActivityLog(BBLE)
+            Dim log = ShortSaleActivityLog.LastActivityLog(BBLE, AppId)
             If log IsNot Nothing Then
                 Dim sb As New StringBuilder
                 sb.Append("ActivityType: " & log.ActivityType & Environment.NewLine)

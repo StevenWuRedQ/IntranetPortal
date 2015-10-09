@@ -48,12 +48,13 @@ Public Class ShortSaleManage
     End Function
 
     Public Shared Sub AddActivityLog(bble As String, userName As String, typeOfUpdate As String, category As String, statusOfUpdate As String, comments As String)
-        ShortSale.ShortSaleActivityLog.AddLog(bble, userName, typeOfUpdate, category & " - " & statusOfUpdate, comments)
+        Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
+        ShortSale.ShortSaleActivityLog.AddLog(bble, userName, typeOfUpdate, category & " - " & statusOfUpdate, comments, ssCase.AppId)
 
         Dim NotifyUpdate = Sub()
                                Try
                                    Dim notifyEmails = Core.PortalSettings.GetValue("SSUpdateNotifyEmails")
-                                   Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
+                                   ssCase = ShortSaleCase.GetCaseByBBLE(bble)
 
                                    Dim maildata As New Dictionary(Of String, String)
                                    maildata.Add("UserName", userName)
@@ -410,7 +411,8 @@ Public Class ShortSaleManage
                                                                                                 'End If
 
                                                                                                 'LeadsActivityLog.AddActivityLog(DateTime.Now, comments, task.BBLE, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
-                                                                                                ShortSale.ShortSaleActivityLog.AddLog(task.BBLE, task.CreateBy, typeofUpdate, category & " - " & statusofUpdate, "")
+                                                                                                Dim ssCase = ShortSaleCase.GetCaseByBBLE(task.BBLE)
+                                                                                                ShortSale.ShortSaleActivityLog.AddLog(task.BBLE, task.CreateBy, typeofUpdate, category & " - " & statusofUpdate, "", ssCase.AppId)
 
                                                                                                 Dim users = Roles.GetUsersInRole("ShortSale-AssignReviewer")
                                                                                                 If users IsNot Nothing AndAlso users.Count > 0 Then

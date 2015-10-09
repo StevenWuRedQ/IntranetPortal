@@ -19,5 +19,6 @@ Partial Public Class ShortSaleActivityLog
     Public Property ActivityTitle As String
     Public Property Description As String
     Public Property [Shared] As String
+    Public Property AppId As Integer
 
 End Class

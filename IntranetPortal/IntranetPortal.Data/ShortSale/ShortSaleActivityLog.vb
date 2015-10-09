@@ -8,7 +8,7 @@
         End Using
     End Sub
 
-    Public Shared Sub AddLog(bble As String, source As String, activityType As String, activityTitle As String, description As String)
+    Public Shared Sub AddLog(bble As String, source As String, activityType As String, activityTitle As String, description As String, appId As Integer)
         Dim log As New ShortSaleActivityLog
         log.BBLE = bble
         log.ActivityDate = DateTime.Now
@@ -27,13 +27,13 @@
         End Using
     End Sub
 
-    Public Shared Function GetLogs(bble As String) As List(Of ShortSaleActivityLog)
+    Public Shared Function GetLogs(bble As String, appId As Integer) As List(Of ShortSaleActivityLog)
         Using ctx As New ShortSaleEntities
-            Return ctx.ShortSaleActivityLogs.Where(Function(l) l.BBLE = bble).OrderByDescending(Function(l) l.ActivityDate).ToList
+            Return ctx.ShortSaleActivityLogs.Where(Function(l) l.BBLE = bble AndAlso l.AppId = appId).OrderByDescending(Function(l) l.ActivityDate).ToList
         End Using
     End Function
 
-    Public Shared Function LastActivityLog(bble As String) As ShortSaleActivityLog
+    Public Shared Function LastActivityLog(bble As String, appId As Integer) As ShortSaleActivityLog
         Using ctx As New ShortSaleEntities
             Return ctx.ShortSaleActivityLogs.Where(Function(l) l.BBLE = bble).OrderByDescending(Function(l) l.ActivityDate).FirstOrDefault
         End Using

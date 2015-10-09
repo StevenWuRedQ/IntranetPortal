@@ -1013,7 +1013,7 @@ Public Class ActivityLogs
                     End If
                 Else
                     LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, logCategoryStr, LeadsActivityLog.EnumActionType.Comments)
-                    ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, "Comments", "Comments", txtComments)
+                    ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, "Comments", "Comments", txtComments, Employee.CurrentAppId)
                 End If
             Case ActivityLogMode.Legal, ActivityLogMode.Construction, ActivityLogMode.Eviction
 
@@ -1185,13 +1185,13 @@ Public Class ActivityLogs
 
     Protected Sub popupPreviousNotes_WindowCallback(source As Object, e As PopupWindowCallbackArgs)
         popupCtontrlPreviousNotes.Visible = True
-        gvPreviousNotes.DataSource = ShortSaleActivityLog.GetLogs(hfBBLE.Value)
+        gvPreviousNotes.DataSource = ShortSaleActivityLog.GetLogs(hfBBLE.Value, Employee.CurrentAppId)
         gvPreviousNotes.DataBind()
     End Sub
 
     Protected Sub gvPreviousNotes_DataBinding(sender As Object, e As EventArgs)
         If gvPreviousNotes.DataSource Is Nothing AndAlso gvPreviousNotes.IsCallback Then
-            gvPreviousNotes.DataSource = ShortSaleActivityLog.GetLogs(hfBBLE.Value)
+            gvPreviousNotes.DataSource = ShortSaleActivityLog.GetLogs(hfBBLE.Value, Employee.CurrentAppId)
         End If
     End Sub
 

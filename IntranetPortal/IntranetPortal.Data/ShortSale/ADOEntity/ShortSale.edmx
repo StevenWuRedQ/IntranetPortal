@@ -428,6 +428,7 @@
           <Property Name="ActivityTitle" Type="nvarchar" MaxLength="500" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Shared" Type="nvarchar" MaxLength="50" />
+          <Property Name="AppId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ShortSaleBuyers">
           <Key>
@@ -964,6 +965,7 @@
           <Property Name="ActivityTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Shared" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AppId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="MortgageStatusData">
           <Key>
@@ -1574,6 +1576,7 @@
           <EntitySetMapping Name="ShortSaleActivityLogs">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleActivityLog">
               <MappingFragment StoreEntitySet="ShortSaleActivityLogs">
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
                 <ScalarProperty Name="Shared" ColumnName="Shared" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ActivityTitle" ColumnName="ActivityTitle" />
