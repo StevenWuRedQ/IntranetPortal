@@ -222,7 +222,7 @@
 
                                             </li>
                                             <li class="pull-right" style="margin-right: 30px; color: #ffa484">
-                                                <i class="fa fa-clock-o sale_head_button sale_head_button_left tooltip-examples" ng-click="CheckWorkHours()" data-original-title="Work hours" style="display:none"></i>
+                                                <i class="fa fa-clock-o sale_head_button sale_head_button_left tooltip-examples" ng-click="CheckWorkHours()" data-original-title="Work hours"></i>
                                                 <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
 
                                                 <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerPreview Then%>
@@ -380,12 +380,38 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title">Working Total</h4>
+                                                <h4 class="modal-title">Working Total : {{TotleHours.Total}} hours</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <p style="font-size:20px">Total spend on this case are {{TotleHours}} hours.</p>
+                                                <div style=" overflow: auto">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <td>User</td>
+                                                                <td>StartTime</td>
+
+                                                                <td>EndTime</td>
+                                                                <td>Duration</td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="l in TotleHours.LogData">
+                                                                <td class="">{{l.UserName }}
+                                                                </td>
+                                                                <td>{{l.StartTime |date:'MM/dd/yyyy HH:mm:ss'}}
+                                                                </td>
+                                                                <td>{{l.EndTime |date:'MM/dd/yyyy HH:mm:ss'}}
+                                                                </td>
+                                                                <td>{{l.Duration |date:'HH:mm:ss'}}
+                                                                </td>
+
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
                                             </div>
-                                          
+
                                         </div>
                                         <!-- /.modal-content -->
                                     </div>
@@ -947,7 +973,7 @@
                         success(function (data, status, headers, config) {
 
                             $scope.LegalCase = $.parseJSON(data.d);
-
+                            $scope.LegalCase.BBLE = BBLE
                             $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
                             $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
 
@@ -1473,14 +1499,12 @@
                     }
                 }
                 /* end loading panel */
-                $scope.CheckWorkHours = function()
-                {
-                    $http.get("").success(function (data)
-                    {
+                $scope.CheckWorkHours = function () {
+                    $http.get("/api/WorkingLogs/Legal/" + $scope.LegalCase.BBLE).success(function (data) {
                         $scope.TotleHours = data;
                         $("#WorkPopUp").modal();
                     });
-                   
+
                 }
             });
 
@@ -1498,8 +1522,7 @@
         <script type="text/javascript">
 
             $(function () {
-                if(leadsInfoBBLE && leadsInfoBBLE != null)
-                {
+                if (leadsInfoBBLE && leadsInfoBBLE != null) {
                     if (WorkingLogControl)
                         WorkingLogControl.openFile(leadsInfoBBLE, "Legal");
                 }
