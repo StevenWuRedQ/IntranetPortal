@@ -64,8 +64,9 @@ Public Class ShortSaleManage
                                    maildata.Add("Category", category)
                                    maildata.Add("StatusOfUpdate", statusOfUpdate)
                                    maildata.Add("Comments", comments)
-
-                                   Core.EmailService.SendShortSaleMail(notifyEmails, "", "SSUpdateNotifyEmail", maildata)
+                                   If ssCase.AppId = 1 Then
+                                       Core.EmailService.SendShortSaleMail(notifyEmails, "", "SSUpdateNotifyEmail", maildata)
+                                   End If
                                Catch ex As Exception
                                    Core.SystemLog.LogError("ShortSaleUpdateNotifyEmail", ex, "", "Portal", bble)
                                End Try

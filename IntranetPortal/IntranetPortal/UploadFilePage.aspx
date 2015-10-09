@@ -401,7 +401,8 @@
                     <table>
                         <tr>
                             <td>
-                                <dx:ASPxUploadControl ID="uplImage" AdvancedModeSettings-EnableMultiSelect="true" runat="server" ClientInstanceName="uploader" CssClass="email_input input_files" NullText="Click here to browse files..." Size="35" Width="10%">
+                                <input type="file" />
+                                <dx:ASPxUploadControl ID="uplImage" AdvancedModeSettings-EnableMultiSelect="true" runat="server" ClientInstanceName="uploader" CssClass="email_input input_files" NullText="Click here to browse files..." Size="35" Width="10%" Visible="false">
                                     <ValidationSettings MaxFileSize="102194304">
                                     </ValidationSettings>
                                     <ClientSideEvents TextChanged="function(s,e){if(s.GetText()!=''){OnAddFileButtonClick();}}" />

@@ -39,7 +39,7 @@
             Dear <%= Manager%>,
             <br />
             <br />
-            Below is summary of your team activities today (<%= DateTime.Today.ToShortDateString() %>). Please review.
+            Below is summary of your team activities <%= ReportTitle %>. Please review.
             <br />
             <br />
             <table style="margin-left: 15px; border: 1px solid black; border-collapse: collapse; border-spacing: 0px;" border="1" cellspacing="0">

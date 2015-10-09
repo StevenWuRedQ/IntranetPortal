@@ -8,17 +8,30 @@ Public Class ShortSaleActivityReport
     Public Property TeamName As String
     Public Property ReportType As String
 
+    Public Property ReportTitle As String
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             If Request.QueryString("t") IsNot Nothing Then
                 ReportType = Request.QueryString("t")
             End If
 
+            Dim startTime = DateTime.Today
+            Dim endTime = DateTime.Today.AddDays(1)
+            ReportTitle = String.Format("today ({0})", startTime.ToShortDateString())
+            If Not String.IsNullOrEmpty(Request.QueryString("start")) AndAlso Not String.IsNullOrEmpty(Request.QueryString("end")) Then
+                If DateTime.TryParse(Request.QueryString("start"), startTime) Then
+                End If
+                DateTime.TryParse(Request.QueryString("end"), endTime)
+
+                ReportTitle = String.Format("from {0} to {1}", startTime.ToShortDateString, endTime.ToShortDateString)
+            End If
+
             If ReportType = "Legal" Then
-                TeamActivityData = PortalReport.LoadLegalActivityReport(DateTime.Today, DateTime.Today.AddDays(1))
+                TeamActivityData = PortalReport.LoadLegalActivityReport(startTime, endTime)
                 BindChart()
             Else
-                TeamActivityData = PortalReport.LoadShortSaleActivityReport(DateTime.Today, DateTime.Today.AddDays(1))
+                TeamActivityData = PortalReport.LoadShortSaleActivityReport(startTime, endTime)
                 BindChart()
             End If
         End If
@@ -40,7 +53,7 @@ Public Class ShortSaleActivityReport
         chartActivity.BorderOptions.Visibility = DevExpress.Utils.DefaultBoolean.False
 
         Dim title = New ChartTitle()
-        title.Text = String.Format("Team Activity on {0:m}", DateTime.Today)
+        title.Text = String.Format("Team Activity {0}", ReportTitle)
         chartActivity.Titles.Add(title)
 
         chartActivity.Legend.Direction = LegendDirection.LeftToRight
