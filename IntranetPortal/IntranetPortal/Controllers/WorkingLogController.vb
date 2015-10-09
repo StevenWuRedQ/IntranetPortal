@@ -7,8 +7,6 @@ Namespace Controllers
     Public Class WorkingLogController
         Inherits ApiController
 
-
-
         <Route("api/WorkingLogs/{category}/{bble}")>
         Function GetComplaints(ByVal bble As String, category As String) As IHttpActionResult
             Dim logs = WorkingLog.GetLogs(bble, category)
