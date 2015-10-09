@@ -1,35 +1,35 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ComplaintsDetailNotify.ascx.vb" Inherits="IntranetPortal.ComplaintsDetailNotify" %>
 <style type="text/css">
-       .maininfo {
-            font-family: arial;
-            font-size: 9pt;
-            color: black;
-            font-weight: bold;
-            background-color: #9BCDFF;
-        }
+    .maininfo {
+        font-family: arial;
+        font-size: 9pt;
+        color: black;
+        font-weight: bold;
+        background-color: #9BCDFF;
+    }
 
-        .content {
-            font-family: arial;
-            font-size: 9pt;
-            color: black;
-            font-weight: normal;
-        }
+    .content {
+        font-family: arial;
+        font-size: 9pt;
+        color: black;
+        font-weight: normal;
+    }
 
-        .mainhdg {
-            font-family: Arial;
-            font-size: 11pt;
-            font-weight: bold;
-            color: #000080;
-            text-align: center;
-        }
+    .mainhdg {
+        font-family: Arial;
+        font-size: 11pt;
+        font-weight: bold;
+        color: #000080;
+        text-align: center;
+    }
 
-        .rightcontent {
-            font-family: Arial;
-            font-size: 9pt;
-            color: black;
-            text-align: right;
-            font-weight: normal;
-        }
+    .rightcontent {
+        font-family: Arial;
+        font-size: 9pt;
+        color: black;
+        text-align: right;
+        font-weight: normal;
+    }
 </style>
 
 
@@ -42,7 +42,15 @@ FYI - The DOB Complaint, for the property located at: (<%= GetMailDataItem("Addr
 
 <% For Each item In complaint.ComplaintsResult.Where(Function(c) c.Status = "ACT").ToList %>
 
-<h3 class="mainhdg">Overview for Complaint #:<%= item.ComplaintNumber %>= <%= item.Status %></h3>
+<table border="0" cellpadding="1" cellspacing="0" width="750" style="margin: 0 auto;">
+    <tbody>
+        <tr>
+            <td>
+                <h3 class="mainhdg">Overview for Complaint #:<%= item.ComplaintNumber %>= <%= item.Status %></h3>
+            </td>
+        </tr>
+    </tbody>
+</table>
 <table border="0" cellpadding="1" cellspacing="0" width="750" style="margin: 0 auto;">
     <tbody>
         <tr>
@@ -115,7 +123,7 @@ FYI - The DOB Complaint, for the property located at: (<%= GetMailDataItem("Addr
             <td class="content"><b>Owner:</b></td>
             <td class="content">&nbsp;&nbsp;<%=item.Owner%></td>
             <!--- Value for Owner --->
-            <td colspan="5">& nbsp;</td>
+            <td colspan="5">&nbsp;</td>
         </tr>
 
     </tbody>
