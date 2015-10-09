@@ -1,4 +1,6 @@
-﻿Imports System.Text
+﻿Imports System.IO
+Imports System.Net
+Imports System.Text
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 
 <TestClass()> Public Class CheckingComplaintsTest
@@ -11,4 +13,11 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 
     End Sub
 
+    <TestMethod()>
+    Public Sub Writetest()
+        Dim stream = HttpWebRequest.Create("http://www.jerseysnflnba.com/image/data/nfl.jpg").GetResponse.GetResponseStream
+        stream.CopyTo(File.Open("D:\test.jpg", FileMode.OpenOrCreate, FileAccess.Write))
+        ' no exception throw
+        Assert.IsTrue(True)
+    End Sub
 End Class

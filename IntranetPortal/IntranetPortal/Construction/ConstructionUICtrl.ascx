@@ -138,12 +138,15 @@
         $(document).ready(function () {
             //put construction data loading logic here
             var scope = angular.element('#ConstructionCtrl').scope();
-            scope.init(bble);
+            scope.init(bble, function () {
+                scope.updatePercentage();
+
+            });
         });
     }
 
     angular.module('PortalApp').controller('ConstructionCtrl', function ($scope, $http, $timeout, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
-        // scope variables
+        // scope variables defination
         $scope._ = _;
         $scope.arrayRemove = ptCom.arrayRemove;
         $scope.ptContactServices = ptContactServices;
@@ -165,10 +168,22 @@
         $scope.CSCase.CSCase.Utilities.Company = [];
         $scope.CSCase.CSCase.Utilities.Insurance_Type = [];
         $scope.percentage = {
-            intake: 0,
-            signoff: 0,
-            construction: 0,
-            test: 0
+            intake: {
+                count: 0,
+                finished: 0,
+            },
+            signoff: {
+                count: 0,
+                finished: 0
+            },
+            construction: {
+                count: 0,
+                finished: 0
+            },
+            test: {
+                count: 0,
+                finished: 0
+            }
         }
         $scope.UTILITY_SHOWN = {
             'ConED': 'CSCase.CSCase.Utilities.ConED_Shown',
@@ -181,28 +196,29 @@
             'Insurance': 'CSCase.CSCase.Utilities.Insurance_Shown',
         };
         $scope.HIGHLIGHTS = [
-            { message: 'Plumbing signed off at {{CSCase.CSCase.Signoffs.Plumbing_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate' },
-            { message: 'Electrical signed off at {{CSCase.CSCase.Signoffs.Electrical_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate' },
-            { message: 'Construction signed off at {{CSCase.CSCase.Signoffs.Construction_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate' },
-            { message: 'HPD Violations has all finished', criteria: 'CSCase.CSCase.Violations.HPD_OpenHPDViolation === false' }
+                                { message: 'Plumbing signed off at {{CSCase.CSCase.Signoffs.Plumbing_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate' },
+                                { message: 'Electrical signed off at {{CSCase.CSCase.Signoffs.Electrical_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate' },
+                                { message: 'Construction signed off at {{CSCase.CSCase.Signoffs.Construction_SignedOffDate}}', criteria: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate' },
+                                { message: 'HPD Violations has all finished', criteria: 'CSCase.CSCase.Violations.HPD_OpenHPDViolation === false' }
         ];
         $scope.WATCHED_MODEL = [
-                                {
-                                    model: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate',
-                                    backedModel: 'ReloadedData.Backed_Plumbing_SignedOffDate',
-                                    info: 'Plumbing Sign Off Date'
-                                },
-                                {
-                                    model: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate',
-                                    backedModel: 'ReloadedData.Backed_Construction_SignedOffDate',
-                                    info: 'Construction Sign Off Date'
-                                },
-                                {
-                                    model: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate',
-                                    backedModel: 'ReloadedData.Electrical_SignedOffDate',
-                                    info: 'Electrical Sign Off Date'
-                                }];
+                                    {
+                                        model: 'CSCase.CSCase.Signoffs.Plumbing_SignedOffDate',
+                                        backedModel: 'ReloadedData.Backed_Plumbing_SignedOffDate',
+                                        info: 'Plumbing Sign Off Date'
+                                    },
+                                    {
+                                        model: 'CSCase.CSCase.Signoffs.Construction_SignedOffDate',
+                                        backedModel: 'ReloadedData.Backed_Construction_SignedOffDate',
+                                        info: 'Construction Sign Off Date'
+                                    },
+                                    {
+                                        model: 'CSCase.CSCase.Signoffs.Electrical_SignedOffDate',
+                                        backedModel: 'ReloadedData.Electrical_SignedOffDate',
+                                        info: 'Electrical Sign Off Date'
+                                    }];
 
+        // end scope variables defination
 
         $scope.reload = function () {
 
@@ -222,6 +238,24 @@
             $scope.CSCase.CSCase.Utilities.Company = [];
             $scope.CSCase.CSCase.Utilities.Insurance_Type = [];
             $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} });
+            $scope.percentage = {
+                intake: {
+                    count: 0,
+                    finished: 0,
+                },
+                signoff: {
+                    count: 0,
+                    finished: 0
+                },
+                construction: {
+                    count: 0,
+                    finished: 0
+                },
+                test: {
+                    count: 0,
+                    finished: 0
+                }
+            }
 
             budgetCtrl.reload();
             $scope.clearWarning();
@@ -504,46 +538,52 @@
         /* intakeComplete */
         $scope.test = $scope.checkIntake;
         $scope.intakeComplete = function () {
-            if (!$scope.checkIntake()) {
+            if (!$scope.checkIntake(function (el) {
+                el.prev().css('background-color', 'yellow')
+            })) {
+                $scope.CSCase.CSCase.isIntakeFinished = true;
                 AddActivityLog("Intake Process have finished!");
+            } else {
+                alert("Intake Complete Fails.\nPlease check highlights for missing information!");
             }
         }
-        $scope.checkIntake = function () {
+        $scope.checkIntake = function (callback) {
             $scope.clearWarning();
-            var errorFields = [];
+            $scope.percentage.intake.count = 0;
             $(".intakeCheck").each(function (idx) {
-
                 var model = $(this).attr('ng-model') || $(this).attr('ss-model') || $(this).attr('file-model') || $(this).attr('model');
                 if (model) {
                     if (model.startsWith("floor")) {
                         var test = _.has($(this).scope().floor, model.split(".").splice(1).join('.'));
                         if (!test) {
-                            $(this).prev().css('background-color', 'yellow');
-                            errorFields.push("Floor " + $(this).scope().floor.FloorNum + " " + $(this).prev().text() + " is missing.");
+                            if (callback) callback($(this))
+                        } else {
+                            $scope.percentage.intake.finished++;
                         }
                     } else {
-
                         var test = $scope.$eval(model)
                         if (test === undefined) {
-                            $(this).prev().css('background-color', 'yellow');
-                            errorFields.push($(this).prev().text() + " is missing.");
+                            if (callback) callback($(this))
+                        } else {
+                            $scope.percentage.intake.finished++;
                         }
                     }
                 }
-
+                $scope.percentage.intake.count++;
             })
-            if (errorFields.length > 1) alert("Intake Complete Fails.\nPlease check highlights for missing information!");
-            return true && errorFields;
+            var errors = $scope.percentage.intake.count - $scope.percentage.intake.finished;
+            return errors;
         }
         $scope.clearWarning = function () {
             $(".intakeCheck").each(function (idx) {
                 $(this).prev().css('background-color', 'transparent');
             });
         }
+        $scope.updatePercentage = function () {
+            $scope.checkIntake();
+        }
         /* end intakeComplte */
 
-
-        
         /*check file be modify*/
         $scope.GetTimeUrl = function () {
             return $scope.CSCase.BBLE ? "/api/ConstructionCases/LastLastUpdate/" + $scope.CSCase.BBLE : "";
@@ -563,9 +603,6 @@
         }
         /* end printWindows */
 
-        $scope.updatePercentage = function () {
-            var totalIntake = 0;
-            var total
-        }
+
     });
 </script>

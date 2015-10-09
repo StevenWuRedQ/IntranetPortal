@@ -300,7 +300,7 @@ portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileServ
                         scope.$apply(function () {
                             scope.fileModel = {}
                             scope.fileModel.path = data[0];
-                            if (data[1]) fileModel.thumb = data[1];
+                            if (data[1]) scope.fileModel.thumb = data[1];
                             scope.fileModel.name = ptFileService.getFileName(scope.fileModel.path);
                             scope.fileModel.uploadTime = new Date();
                             scope.delChoosed();

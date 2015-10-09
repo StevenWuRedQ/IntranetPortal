@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Imports Newtonsoft.Json.Linq
-
+Imports System.Net
 
 Public Class Test
     Inherits System.Web.UI.Page
@@ -12,6 +12,8 @@ Public Class Test
         'Else
         '    TaskSummary.DestinationUser = "Chris Yan"
         'End If
+
+
 
         If Not (String.IsNullOrEmpty(Request.QueryString("team"))) Then
             Dim objTeam = Team.GetTeam(Request.QueryString("team").ToString)
