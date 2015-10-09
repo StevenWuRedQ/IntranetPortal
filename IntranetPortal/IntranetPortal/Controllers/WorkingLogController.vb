@@ -12,9 +12,9 @@ Namespace Controllers
         <Route("api/WorkingLogs/{category}/{bble}")>
         Function GetComplaints(ByVal bble As String, category As String) As IHttpActionResult
             Dim logs = WorkingLog.GetLogs(bble, category)
-
+            Dim total = logs.Aggregate(New TimeSpan(0), Function(l As TimeSpan, v As WorkingLog) l.Add(v.Duration))
             Dim result = New With {
-                    .Total = logs.Aggregate(New TimeSpan(0), Function(l As TimeSpan, v As WorkingLog) l.Add(v.Duration)),
+                    .Total = String.Format("{0}:{1}:{2}", CInt(total.TotalHours), total.Minutes, total.Seconds),
                     .LogData = logs
                 }
 
