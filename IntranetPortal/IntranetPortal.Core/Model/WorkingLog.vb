@@ -26,7 +26,7 @@
 
     Public Shared Function Instance(bble As String, category As String, pageUrl As String) As WorkingLog
         Using ctx As New CoreEntities
-            Return ctx.WorkingLogs.SingleOrDefault(Function(l) l.BBLE = bble AndAlso l.Category = category AndAlso l.PageUrl = pageUrl AndAlso l.Status = WorkingLogStatus.Active)
+            Return ctx.WorkingLogs.FirstOrDefault(Function(l) l.BBLE = bble AndAlso l.Category = category AndAlso l.PageUrl = pageUrl AndAlso l.Status = WorkingLogStatus.Active)
         End Using
     End Function
 

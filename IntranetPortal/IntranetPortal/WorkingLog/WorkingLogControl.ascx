@@ -51,14 +51,27 @@
 
                 $.connection.hub.disconnected(function () {
                     if (ctr.tryingToReconnect) {
-                        notifyUserOfDisconnect();
+                        ctr.notifyUserOfDisconnect();
 
-                        setTimeout(function () {
-                            $.connection.hub.start();
-                        }, 5000); // Restart connection after 5 seconds.
+                        // Restart connection after 5 seconds.
+                        ctr.reConnectServer();
                     }
                 });
             }
+        },
+        reConnectServer:function()
+        {
+            var ctr = this;
+            $.connection.hub.start()
+                .done(function () {
+                    ctr.wLog.server.connect(ctr.bble, ctr.category, ctr.pageUrl);
+                })
+                .fail(function () {
+                    console.log("Reconnect to server failed. Retry 5s later.")
+                    setTimeout(function () {
+                        ctr.reConnectServer();
+                    }, 5000);
+                });
         },
         notifyUserOfDisconnect:function()
         {

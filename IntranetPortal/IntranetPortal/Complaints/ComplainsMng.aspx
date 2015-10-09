@@ -152,6 +152,37 @@
             padding-right: 7px;
             text-align: center;
         }
+
+        .maininfo {
+            font-family: arial;
+            font-size: 9pt;
+            color: black;
+            font-weight: bold;
+            background-color: #9BCDFF;
+        }
+
+        .content {
+            font-family: arial;
+            font-size: 9pt;
+            color: black;
+            font-weight: normal;
+        }
+
+        .mainhdg {
+            font-family: Arial;
+            font-size: 11pt;
+            font-weight: bold;
+            color: #000080;
+            text-align: center;
+        }
+
+        .rightcontent {
+            font-family: Arial;
+            font-size: 9pt;
+            color: black;
+            text-align: right;
+            font-weight: normal;
+        }
     </style>
     <div class="container">
         <h3 style="text-align: center; line-height: 50px">DOB Complaints <% If Not DetailView Then%> Watch List <% Else %> for <%= Complaint.Address  %> <% End If%> </h3>
@@ -211,7 +242,7 @@
                                 </td>
                                 <td>
                                     <input type="button" class="btn btn-primary" value="Verify" runat="server" id="btnCheck" onclick="cpAddProperty.PerformCallback('Add')" /><br />
-                                    <input type="button" class="btn btn-primary" value="Add to Watch List" id="btnAdd" onclick="gdComplains.PerformCallback('Add');alert('Success.')" style="margin-top: 10px;" runat="server" disabled="disabled" />
+                                    <input type="button" class="btn btn-primary" value="Add to Watch List" id="btnAdd" onclick="gdComplains.PerformCallback('Add'); alert('Success.')" style="margin-top: 10px;" runat="server" disabled="disabled" />
 
                                     <dx:ASPxLabel runat="server" ID="lblAddress" Visible="false"></dx:ASPxLabel>
                                 </td>
@@ -255,7 +286,7 @@
                         </dx:GridViewDataDateColumn>
                         <dx:GridViewDataColumn FieldName="CreateBy" Caption="CreateBy" Width="120px">
                         </dx:GridViewDataColumn>
-                        <dx:GridViewDataColumn FieldName="StatusString" Caption="Status" Width="80px">                            
+                        <dx:GridViewDataColumn FieldName="StatusString" Caption="Status" Width="80px">
                         </dx:GridViewDataColumn>
                         <dx:GridViewDataColumn Width="80px">
                             <HeaderTemplate>
@@ -301,6 +332,117 @@
 
                 <script id="gridCellHistory" type="text/html">
                     <i class="fa fa-history icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" title="View History Details" onclick='ShowComplaintsHistory("{%= value %}")'></i>
+                </script>
+
+                <script id="gridComplaitsDetail2" type="text/html">
+                    <div style="align-content: center">
+                        <h3 class="mainhdg">Overview for Complaint #:{%= data.ComplaintNumber%} = {%= data.Status%}</h3>
+                        <table border="0" cellpadding="1" cellspacing="0" width="750" style="margin: 0 auto;">
+                            <tbody>
+                                <tr>
+                                    <td class="maininfo" align="left" width="300" colspan="2">Complaint at:&nbsp;&nbsp;{%=data.Address%}</td>
+                                    <td class="maininfo" align="right">BIN: {%=data.BIN%}</td>
+                                    <td class="maininfo" width="10">&nbsp;&nbsp;</td>
+                                    <td class="maininfo" align="right">Borough:&nbsp;{%=data.Borough%}</td>
+                                    <td class="maininfo" width="10">&nbsp;&nbsp;</td>
+                                    <td class="maininfo" align="right">ZIP:&nbsp;{%=data.Zip%}</td>
+                                </tr>
+                                <tr valign="top">
+                                    <td class="content" colspan="6">Re:&nbsp;&nbsp;{%=data.RE%}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                        <table border="0" cellpadding="1" cellspacing="0" width="750" style="margin: 0 auto;">
+                            <tbody>
+                                <tr>
+                                    <td class="content" colspan="2"></td>
+                                    <td class="content"></td>
+                                </tr>
+                                <tr>
+                                    <td class="content" width="150"><b>Category Code:</b></td>
+                                    <td class="content" colspan="2" width="600">{%=data.CategoryCode%}</td>
+                                </tr>
+                                <tr>
+                                    <td class="content" width="150" colspan="3">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content" width="150" colspan="3">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content" width="150"><b>Assigned To:</b></td>
+                                    <td class="content" width="450">{%=data.AssignedTo%}</td>
+                                    <td class="content" width="150"><b>Priority:</b>&nbsp;&nbsp;{%=data.Priority%}&nbsp;
+			&nbsp;&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="rightcontent" colspan="3"><b>311 Reference Number:</b>&nbsp;&nbsp;{%=data.Reference311Number%}
+			&nbsp;&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table border="0" cellpadding="1" cellspacing="0" width="750" style="margin: 0 auto;">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <hr>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table border="0" cellpadding="1" cellspacing="0" width="750" style="margin: 0 auto;">
+                            <tbody>
+                                <tr>
+                                    <td class="content"><b>Received:</b></td>
+                                    <td class="content">&nbsp;&nbsp;{%=_.template.formatdatevalue(data.DateEntered)%}</td>
+                                    <td class="content" width="10">&nbsp;</td>
+                                    <td class="content"><b>BBLE:</b>&nbsp;&nbsp;{%=data.BBLE%}</td>
+                                    <td class="content"><b></b>&nbsp;&nbsp;</td>
+                                    <td class="content" width="25">&nbsp;</td>
+                                    <td class="content" align="right"><b>Community Board:</b>&nbsp;&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="content"><b>Owner:</b></td>
+                                    <td class="content">&nbsp;&nbsp;{%=data.Owner%}</td>
+                                    <!--- Value for Owner --->
+                                    <td colspan="5">&nbsp;</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <br />
+                        <table border="0" cellpadding="0" cellspacing="0" width="750" style="margin: 0 auto;">
+                            <tbody>
+                                <tr>
+                                    <td class="content" width="30%" align="right" valign="top"><b>Last Inspection:</b>&nbsp;&nbsp;</td>
+
+                                    <td class="content" width="70%">{%=data.LastInspection%} </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="content" width="30%" align="right" valign="top"><b>Disposition:</b>&nbsp;&nbsp;</td>
+                                    <td class="content" width="70%">{%=data.DispositionDetails%} </td>
+                                </tr>
+                                <tr>
+                                    <td class="content" width="30%" valign="top" align="right"><b>Comments:</b>&nbsp;&nbsp;</td>
+                                    <td class="content" width="70%">{%=data.Comments%}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table border="0" cellpadding="1" cellspacing="0" width="750" style="margin: 0 auto;">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <hr>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </script>
 
                 <script id="gridComplaitsDetail" type="text/html">
@@ -443,7 +585,7 @@
 
                                     var d = $.Deferred();
 
-                                    var url = "/api/Complaints/" + (view.BBLE == null? "":view.BBLE);
+                                    var url = "/api/Complaints/" + (view.BBLE == null ? "" : view.BBLE);
 
                                     $.getJSON(url).done(function (data) {
                                         d.resolve(data, { totalCount: data.length });
@@ -512,7 +654,7 @@
                                 }],
                                 masterDetail: {
                                     enabled: true,
-                                    template: "#gridComplaitsDetail"
+                                    template: "#gridComplaitsDetail2"
                                 },
                                 onRowPrepared: function (info) {
                                     if (info.data && info.data.RedNotes && info.data.RedNotes != "")
@@ -530,11 +672,10 @@
                                 this.DataGrid.refresh();
                             }
                         },
-                        Filter: function (key) {                            
+                        Filter: function (key) {
                             this.DataGrid.clearFilter('dataSource');
 
-                            if (key && key != "")
-                            {
+                            if (key && key != "") {
                                 this.DataGrid.filter([
                                 ["Address", "contains", key],
                                 "or",
@@ -542,7 +683,7 @@
                                 "or",
                                 ["Status", "contains", key],
                                 ]);
-                            }                            
+                            }
                         }
                     }
 
@@ -941,5 +1082,4 @@
         });
     </script>
     <% End If%>
-
 </asp:Content>

@@ -5,17 +5,26 @@ Imports Microsoft.AspNet.SignalR
 Public Class WorkingLogHub
     Inherits Hub
 
-    Shared ConnectedUsers As New List(Of Core.WorkingLog)
+    'Shared ConnectedUsers As New List(Of Core.WorkingLog)
 
     Public Sub Connect()
 
-        Clients.All.Hello(Context.User.Identity.Name)
+        'Clients.All.Hello(Context.User.Identity.Name)
+    End Sub
+
+    Public Sub Connect(bble As String, category As String, pageurl As String)
+        Dim log = WorkingLog.Instance(bble, category, pageurl)
+
+        If log IsNot Nothing Then
+            log.Close()
+            OpenFile(bble, category, pageurl)
+        End If
     End Sub
 
     Public Sub OpenFile(bble As String, category As String, pageUrl As String)
         Dim connId = Context.ConnectionId
 
-        If ConnectedUsers.Any(Function(c) c.ConnectionId = connId) Then
+        If WorkingLog.Exist(connId) Then
             CloseFile(connId)
         End If
 
@@ -31,8 +40,6 @@ Public Class WorkingLogHub
         log.Status = Core.WorkingLog.WorkingLogStatus.Active
         log.ConnectionId = Context.ConnectionId
         log.Save()
-
-        ConnectedUsers.Add(log)
     End Sub
 
     Public Sub CloseFile(bble As String, category As String, pageUrl As String)
@@ -49,7 +56,6 @@ Public Class WorkingLogHub
 
         If log IsNot Nothing Then
             log.Close()
-            ConnectedUsers.Remove(log)
         End If
     End Sub
 
@@ -58,7 +64,7 @@ Public Class WorkingLogHub
 
         If log IsNot Nothing Then
             log.Close()
-            ConnectedUsers.Remove(log)
+            'ConnectedUsers.Remove(log)
         End If
     End Sub
 
@@ -69,6 +75,6 @@ Public Class WorkingLogHub
     End Function
 
     Private Function GetWorkingLog(connId As String) As Core.WorkingLog
-        Return ConnectedUsers.SingleOrDefault(Function(l) l.ConnectionId = connId)
+        Return WorkingLog.Instance(connId)
     End Function
 End Class

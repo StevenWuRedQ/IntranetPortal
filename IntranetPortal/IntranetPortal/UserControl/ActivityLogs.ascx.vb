@@ -522,7 +522,7 @@ Public Class ActivityLogs
 
         Dim ld = LeadsInfo.GetInstance(bble)
         Dim taskName = String.Format("{0} {1}", taskAction, ld.StreetNameWithNo)
-        WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, bble, employees, taskPriority)
+        WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, bble, employees, taskPriority, "", "/ViewLeadsinfo.aspx")
     End Sub
 
     Public Sub SetAsReminder(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String)
