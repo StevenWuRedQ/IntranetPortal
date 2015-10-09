@@ -1,6 +1,7 @@
 ﻿Imports IntranetPortal.Data
 Imports System.Reflection
 Imports System.ComponentModel
+Imports DevExpress.Web
 
 Public Class ConstructionCaseList
     Inherits System.Web.UI.UserControl
@@ -60,5 +61,13 @@ Public Class ConstructionCaseList
         End Set
     End Property
 
-
+    Protected Sub gridCase_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridViewTableRowEventArgs)
+        If e.RowType <> GridViewRowType.Data Then
+            Return
+        End If
+        Dim isCompleted = Convert.ToBoolean(e.GetValue("IntakeCompleted"))
+        If isCompleted Then
+            e.Row.BackColor = System.Drawing.Color.LightCyan
+        End If
+    End Sub
 End Class

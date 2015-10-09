@@ -33,7 +33,7 @@ Partial Public Class ConstructionCase
     Public Shared Function GetLightCasesByStatus(Optional status1 As CaseStatus = CaseStatus.All) As ConstructionCase()
         Using ctx As New ConstructionEntities
             Dim result = (From cCase In ctx.ConstructionCases.Where(Function(c) c.Status = status1 Or status1 = CaseStatus.All)
-                          Select cCase.BBLE, cCase.Status, cCase.CaseName, cCase.CreateBy, cCase.CreateTime, cCase.LastUpdate, cCase.Owner, cCase.UpdateBy)
+                          Select cCase.BBLE, cCase.Status, cCase.CaseName, cCase.CreateBy, cCase.CreateTime, cCase.LastUpdate, cCase.Owner, cCase.UpdateBy, cCase.IntakeCompleted)
 
             Return result.AsEnumerable.Select(Function(cCase)
                                                   Return New ConstructionCase With {
@@ -43,7 +43,8 @@ Partial Public Class ConstructionCase
                                                              .CreateTime = cCase.CreateTime,
                                                              .LastUpdate = cCase.LastUpdate,
                                                              .Owner = cCase.Owner,
-                                                             .UpdateBy = cCase.UpdateBy
+                                                             .UpdateBy = cCase.UpdateBy,
+                                                             .IntakeCompleted = cCase.IntakeCompleted
                                                              }
                                               End Function).ToArray
         End Using
@@ -52,7 +53,7 @@ Partial Public Class ConstructionCase
     Public Shared Function GetLightCases(userName As String, Optional status1 As CaseStatus = CaseStatus.All) As ConstructionCase()
         Using ctx As New ConstructionEntities
             Dim result = From cCase In ctx.ConstructionCases.Where(Function(c) c.Owner = userName Or (c.Status = status1 Or status1 = CaseStatus.All))
-                         Select cCase.BBLE, cCase.Status, cCase.CaseName, cCase.CreateBy, cCase.CreateTime, cCase.LastUpdate, cCase.Owner, cCase.UpdateBy
+                         Select cCase.BBLE, cCase.Status, cCase.CaseName, cCase.CreateBy, cCase.CreateTime, cCase.LastUpdate, cCase.Owner, cCase.UpdateBy, cCase.IntakeCompleted
 
             Return result.AsEnumerable.Select(Function(cCase)
                                                   Return New ConstructionCase With {
@@ -62,7 +63,8 @@ Partial Public Class ConstructionCase
                                                              .CreateTime = cCase.CreateTime,
                                                              .LastUpdate = cCase.LastUpdate,
                                                              .Owner = cCase.Owner,
-                                                             .UpdateBy = cCase.UpdateBy
+                                                             .UpdateBy = cCase.UpdateBy,
+                                                             .IntakeCompleted = cCase.IntakeCompleted
                                                              }
                                               End Function).ToArray
         End Using
@@ -128,7 +130,6 @@ Partial Public Class ConstructionCase
                 Dim violation = New ConstructionViolation
                 violation.Save(Me, userName)
             End If
-
 
             Try
                 db.SaveChanges()

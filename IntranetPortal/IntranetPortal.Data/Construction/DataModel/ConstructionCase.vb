@@ -20,5 +20,6 @@ Partial Public Class ConstructionCase
     Public Property LastUpdate As Nullable(Of Date)
     Public Property UpdateBy As String
     Public Property CSCase As String
+    Public Property IntakeCompleted As Nullable(Of Boolean)
 
 End Class

@@ -38,6 +38,7 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="IntakeCompleted" Type="bit" />
         </EntityType>
         <EntityType Name="ConstructionSpotChecks">
           <Key>
@@ -127,6 +128,7 @@
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CSCase" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IntakeCompleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="CheckingComplain">
           <Key>
@@ -212,6 +214,7 @@
           <EntitySetMapping Name="ConstructionCases">
             <EntityTypeMapping TypeName="ConstructionModel.ConstructionCase">
               <MappingFragment StoreEntitySet="ConstructionCases">
+                <ScalarProperty Name="IntakeCompleted" ColumnName="IntakeCompleted" />
                 <ScalarProperty Name="CSCase" ColumnName="CSCase" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />

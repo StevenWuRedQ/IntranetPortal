@@ -336,6 +336,7 @@
             var data = JSON.stringify($scope.CSCase);
             ptConstructionService.saveConstructionCases($scope.CSCase.BBLE, data, function (res) {
                 ScopeSetLastUpdateTime($scope.GetTimeUrl());
+                alert("Save successfully!");
             });
             $scope.checkWatchedModel();
 
@@ -541,8 +542,9 @@
             if (!$scope.checkIntake(function (el) {
                 el.prev().css('background-color', 'yellow')
             })) {
-                $scope.CSCase.CSCase.isIntakeFinished = true;
+                $scope.CSCase.IntakeCompleted = true;
                 AddActivityLog("Intake Process have finished!");
+                $scope.saveCSCase();
             } else {
                 alert("Intake Complete Fails.\nPlease check highlights for missing information!");
             }
@@ -550,6 +552,7 @@
         $scope.checkIntake = function (callback) {
             $scope.clearWarning();
             $scope.percentage.intake.count = 0;
+            $scope.percentage.intake.finished = 0;
             $(".intakeCheck").each(function (idx) {
                 var model = $(this).attr('ng-model') || $(this).attr('ss-model') || $(this).attr('file-model') || $(this).attr('model');
                 if (model) {

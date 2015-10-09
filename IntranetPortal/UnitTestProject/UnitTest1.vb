@@ -20,4 +20,19 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
         ' no exception throw
         Assert.IsTrue(True)
     End Sub
+
+    <TestMethod()>
+    Public Sub WriteStreetName()
+        Dim fr = New StreamWriter(File.Open("D:\address", FileMode.OpenOrCreate))
+        Dim addrs = IntranetPortal.Data.ConstructionCase.GetAllCases("Chris Yan").ToList.Select(Function(c)
+                                                                                                    Return New With {
+                                                                                        .address = c.CaseName
+                                                                                        }
+                                                                                                End Function)
+        For Each add In addrs
+            fr.WriteLine(add.address)
+        Next
+
+
+    End Sub
 End Class

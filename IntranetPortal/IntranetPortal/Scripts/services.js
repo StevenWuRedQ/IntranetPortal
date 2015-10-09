@@ -541,9 +541,8 @@ app.service('ptConstructionService', [
                 $http.put(url, data)
                     .success(function (res) {
                         if (callback) callback(res);
-                        alert("Save successfully!");
                     }).error(function () {
-                        console.log('Save CSCase fails.');
+                        alert('Save CSCase fails.');
                     });
             }
         }

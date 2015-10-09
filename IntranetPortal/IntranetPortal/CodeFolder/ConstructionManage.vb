@@ -13,9 +13,9 @@ Public Class ConstructionManage
             cc.BBLE = bble
             cc.CaseName = caseName
             cc.Status = ConstructionCase.CaseStatus.Intake
+            cc.IntakeCompleted = False
             If Owner Is Nothing Then
                 Dim ccIntake = Roles.GetUsersInRole(IntakeRoleName)
-
                 If ccIntake IsNot Nothing AndAlso ccIntake.Length > 0 Then
                     cc.Owner = ccIntake(0)
                 End If
@@ -27,9 +27,7 @@ Public Class ConstructionManage
     End Sub
 
     Public Shared Function IsInConstruction(bble As String) As Boolean
-
         Return ConstructionCase.Exists(bble)
-
     End Function
 
     Private Shared Function GetIntakeUser() As String
