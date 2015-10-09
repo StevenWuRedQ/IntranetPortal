@@ -1,4 +1,7 @@
-﻿Public Class ScanECourtsRule
+﻿Imports System.Runtime.Serialization
+
+<DataContract>
+Public Class ScanECourtsRule
     Inherits BaseRule
 
     Function ParseEourtEmail(msg As ImapX.Message) As Boolean

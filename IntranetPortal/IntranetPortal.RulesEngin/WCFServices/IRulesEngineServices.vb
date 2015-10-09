@@ -3,6 +3,7 @@ Imports System.Runtime.Serialization
 
 ' NOTE: You can use the "Rename" command on the context menu to change the interface name "IRulesEngineServices" in both code and config file together.
 
+<ServiceContract()>
 <ServiceKnownType(GetType(LegalFollowUpRule))>
 <ServiceKnownType(GetType(LeadsAndTaskRule))>
 <ServiceKnownType(GetType(EmailSummaryRule))>
@@ -15,16 +16,20 @@ Imports System.Runtime.Serialization
 <ServiceKnownType(GetType(PendingAssignRule))>
 <ServiceKnownType(GetType(AssignLeadsRule))>
 <ServiceKnownType(GetType(DOBComplaintsCheckingRule))>
-<ServiceContract()>
+<ServiceKnownType(GetType(ScanECourtsRule))>
+<ServiceKnownType(GetType(ConstructionNotifyRule))>
 Public Interface IRulesEngineServices
 
     <OperationContract()>
+    <ServiceKnownType(GetType(ScanECourtsRule))>
     Function GetRules() As BaseRule()
 
     <OperationContract()>
+    <ServiceKnownType(GetType(ScanECourtsRule))>
     Function GetRule(ruleName As String) As BaseRule
 
     <OperationContract()>
+    <ServiceKnownType(GetType(ScanECourtsRule))>
     Function GetRuleById(ruleId As String) As BaseRule
 
     <OperationContract()>
