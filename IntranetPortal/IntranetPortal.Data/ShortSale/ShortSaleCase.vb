@@ -877,7 +877,7 @@ Partial Public Class ShortSaleCase
     End Sub
 
     Public Sub SaveFollowUp(dt As DateTime)
-        Me.Status = CaseStatus.FollowUp
+        'Me.Status = CaseStatus.FollowUp
         Me.CallbackDate = dt
         Save()
     End Sub

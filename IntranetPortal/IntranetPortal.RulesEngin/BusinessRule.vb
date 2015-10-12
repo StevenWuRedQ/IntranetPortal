@@ -16,6 +16,7 @@ Imports System.Runtime.Serialization
 <KnownType(GetType(DOBComplaintsCheckingRule))>
 <KnownType(GetType(ScanECourtsRule))>
 <KnownType(GetType(ConstructionNotifyRule))>
+<KnownType(GetType(LegalActivityReportRule))>
 <DataContract>
 Public Class BaseRule
     <DataMember>
@@ -30,6 +31,9 @@ Public Class BaseRule
     Public Property ExecuteNow As Boolean
     <DataMember>
     Public Property Status As RuleStatus = RuleStatus.Stoped
+
+    <DataMember>
+    Public Property ExecuteOnWeekend As Boolean
 
     Public Sub New()
         RuleId = Guid.NewGuid()
@@ -199,8 +203,24 @@ Public Class AgentActivitySummaryRule
             End Try
 
             Try
-                client.SendLegalActivityEmail()
+                'client.SendLegalActivityEmail()
                 client.SendUserActivitySummayEmail("Legal", DateTime.Today, DateTime.Today.AddDays(1))
+            Catch ex As Exception
+                Log("AgentActivitySummaryRule Error. TeamName: Legal", ex)
+            End Try
+        End Using
+    End Sub
+End Class
+
+Public Class LegalActivityReportRule
+    Inherits BaseRule
+
+    Public Overrides Sub Execute()
+
+        Using client As New PortalService.CommonServiceClient
+            Try
+                client.SendLegalActivityEmail()
+                'client.SendUserActivitySummayEmail("Legal", DateTime.Today, DateTime.Today.AddDays(1))
             Catch ex As Exception
                 Log("AgentActivitySummaryRule Error. TeamName: Legal", ex)
             End Try

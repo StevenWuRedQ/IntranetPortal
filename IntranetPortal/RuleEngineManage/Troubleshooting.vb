@@ -935,7 +935,7 @@ Public Class Troubleshooting
     End Sub
 
     Private Sub TestRegExp_Click(sender As Object, e As EventArgs) Handles TestRegExp.Click
-        Dim cn = New RulesEngine.ConstructionNotifyRule
+        Dim cn = New IntranetPortal.RulesEngine.ConstructionNotifyRule
         cn.NotifyHPDRegExpired()
     End Sub
 End Class

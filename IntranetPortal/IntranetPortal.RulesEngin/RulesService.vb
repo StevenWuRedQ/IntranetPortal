@@ -76,6 +76,8 @@ Public Class RulesService
         'Legal
         Rules.Add(New LegalFollowUpRule() With {.ExecuteOn = TimeSpan.Parse("07:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Legal Follow up Rule"})
         Rules.Add(New ScanECourtsRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:10:00"), .RuleName = "Legal eCourt Email Scan Rule", .ExecuteNow = True})
+        Rules.Add(New LegalActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("13:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Legal Activity Rules at Noon", .ExecuteOnWeekend = True})
+        Rules.Add(New LegalActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("21:30:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Legal Activity Rules at Evening", .ExecuteOnWeekend = True})
 
         'Construction
         'Rules.Add(New ConstructionNotifyRule() With {.ExecuteOn = TimeSpan.Parse("06:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Construction Notify Rule"})
@@ -148,8 +150,11 @@ Public Class RulesService
         Try
             If WorkingHours.IsWorkingDay(DateTime.Now) Then
                 'Run Rules
-                'RunRules()
                 State.Rule.Execute()
+            Else
+                If State.Rule.ExecuteOnWeekend Then
+                    State.Rule.Execute()
+                End If
             End If
         Catch ex As Exception
             Log("Exception in Run Rules", ex)

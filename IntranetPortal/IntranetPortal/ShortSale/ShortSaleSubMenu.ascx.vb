@@ -26,7 +26,11 @@ Public Class ShortSaleSubMenu
             End If
 
             If (ShortSaleManage.UpdateCaseStatus(caseId, status, Page.User.Identity.Name, objData)) Then
-                LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} change the case from {1} to {2}.", Page.User.Identity.Name, originStatus, status.ToString), ssCase.BBLE, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
+                If status = ShortSale.CaseStatus.FollowUp Then
+                    'LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} set followup on {2}.", Page.User.Identity.Name, objData), ssCase.BBLE, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
+                Else
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} change the case from {1} to {2}.", Page.User.Identity.Name, originStatus, status.ToString), ssCase.BBLE, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
+                End If
             End If
 
             'If status = CaseStatus.FollowUp Then

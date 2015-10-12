@@ -33,7 +33,8 @@ Namespace RulesEngine
      System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.PendingAssignRule)),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.AssignLeadsRule)),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.DOBComplaintsCheckingRule)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.ConstructionNotifyRule))>  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.ConstructionNotifyRule)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.LegalActivityReportRule))>  _
     Partial Public Class BaseRule
         Inherits Object
         Implements System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
@@ -46,6 +47,9 @@ Namespace RulesEngine
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private ExecuteOnField As System.TimeSpan
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ExecuteOnWeekendField As Boolean
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private PeriodField As System.TimeSpan
@@ -91,6 +95,19 @@ Namespace RulesEngine
                 If (Me.ExecuteOnField.Equals(value) <> true) Then
                     Me.ExecuteOnField = value
                     Me.RaisePropertyChanged("ExecuteOn")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ExecuteOnWeekend() As Boolean
+            Get
+                Return Me.ExecuteOnWeekendField
+            End Get
+            Set
+                If (Me.ExecuteOnWeekendField.Equals(value) <> true) Then
+                    Me.ExecuteOnWeekendField = value
+                    Me.RaisePropertyChanged("ExecuteOnWeekend")
                 End If
             End Set
         End Property
@@ -312,6 +329,14 @@ Namespace RulesEngine
      System.Runtime.Serialization.DataContractAttribute(Name:="ConstructionNotifyRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
      System.SerializableAttribute()>  _
     Partial Public Class ConstructionNotifyRule
+        Inherits RulesEngine.BaseRule
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="LegalActivityReportRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class LegalActivityReportRule
         Inherits RulesEngine.BaseRule
     End Class
     

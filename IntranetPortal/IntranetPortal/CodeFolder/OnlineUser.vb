@@ -10,8 +10,8 @@ Public Class OnlineUser
     Public Property RefreshTime As DateTime
     Public Property SessionID As String
 
-    Public Const LoginTimeout As Integer = 2
-    Public Const RefreshTimeout As Integer = 1
+    Public Const LoginTimeout As Integer = 30
+    Public Const RefreshTimeout As Integer = 10
 
     Public Shared ReadOnly Property OnlineUsers As List(Of OnlineUser)
         Get

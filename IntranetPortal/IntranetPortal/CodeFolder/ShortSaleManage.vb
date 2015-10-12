@@ -206,7 +206,7 @@ Public Class ShortSaleManage
                         End If
                 End Select
                 ssCase.SaveFollowUp(dt)
-
+                LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} set followup on {1}.", createBy, dt.ToShortDateString), ssCase.BBLE, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
                 Return True
             Case CaseStatus.Archived
                 If Not Roles.IsUserInRole(createBy, "ShortSale-Manager") Then

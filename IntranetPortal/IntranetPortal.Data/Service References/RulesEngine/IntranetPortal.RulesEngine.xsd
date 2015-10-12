@@ -13,6 +13,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ExecuteNow" type="xs:boolean" />
       <xs:element minOccurs="0" name="ExecuteOn" type="ser:duration" />
+      <xs:element minOccurs="0" name="ExecuteOnWeekend" type="xs:boolean" />
       <xs:element minOccurs="0" name="Period" type="ser:duration" />
       <xs:element minOccurs="0" name="RuleId" type="ser:guid" />
       <xs:element minOccurs="0" name="RuleName" nillable="true" type="xs:string" />
@@ -135,6 +136,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="ConstructionNotifyRule" nillable="true" type="tns:ConstructionNotifyRule" />
+  <xs:complexType name="LegalActivityReportRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LegalActivityReportRule" nillable="true" type="tns:LegalActivityReportRule" />
   <xs:complexType name="ArrayOfBaseRule">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="BaseRule" nillable="true" type="tns:BaseRule" />

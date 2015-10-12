@@ -9,5 +9,11 @@ Namespace Controllers
         Function GetIsActive() As IHttpActionResult
             Return Ok(OnlineUser.IsActive(HttpContext.Current.User.Identity.Name))
         End Function
+
+        <Route("api/UserInfo/UpdateRefreshTime")>
+        Function GetUpdateRefreshTime() As IHttpActionResult
+            Return Ok()
+        End Function
+
     End Class
 End Namespace
