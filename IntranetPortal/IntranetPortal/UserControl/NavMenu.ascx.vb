@@ -141,7 +141,7 @@ Public Class RefreshLeadsCountHandler
 
     Public Function BeginProcessRequest(context As HttpContext, cb As AsyncCallback, extraData As Object) As IAsyncResult Implements IHttpAsyncHandler.BeginProcessRequest
         'Refresh online user list
-        OnlineUser.Refresh(HttpContext.Current)
+        'OnlineUser.Refresh(HttpContext.Current)
 
         _Delegate = New AsyncProcessorDelegate(AddressOf ProcessRequest)
         Return _Delegate.BeginInvoke(context, cb, extraData)

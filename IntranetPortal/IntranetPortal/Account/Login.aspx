@@ -135,6 +135,24 @@
         <script src="/Scripts/js/main.js"></script>
         <!-- Latest compiled and minified JavaScript -->
        <%-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>--%>
+
+        <script type="text/javascript">
+            function inIframe() {
+                try {
+                    return window.self !== window.top;
+                } catch (e) {
+                    return true;
+                }
+            }
+
+            $(function () {
+                if(inIframe())
+                {
+                    top.window.location.href = window.location.href;
+                }
+            });
+
+        </script>
     </form>
 </body>
 </html>

@@ -9,7 +9,8 @@ Namespace Messager
         Public Shared LegalFollowCheckTime As DateTime?
         Public Function BeginProcessRequest(context As HttpContext, cb As AsyncCallback, extraData As Object) As IAsyncResult Implements IHttpAsyncHandler.BeginProcessRequest
             'Refresh online user list
-            OnlineUser.Refresh(HttpContext.Current)
+            'move refresh action to Global.asax Application_AuthicatedRequest
+            'OnlineUser.Refresh(HttpContext.Current)
 
             'diable task popup notify
             'UserTask.UpdateNotify()

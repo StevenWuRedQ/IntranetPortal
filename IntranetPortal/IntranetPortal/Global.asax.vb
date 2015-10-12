@@ -77,7 +77,30 @@ Public Class Global_asax
 
     Sub Application_AuthenticateRequest(ByVal sender As Object, ByVal e As EventArgs)
         ' Fires upon attempting to authenticate the use
+        If Context Is Nothing OrElse Context.User Is Nothing OrElse Context.User.Identity Is Nothing Then
+            Return
+        End If
+
+        Dim url = Context.Request.RawUrl
+        If url.Contains(".aspx") OrElse url.Contains("/api/") OrElse url.Contains(".svc") Then
+            If ExcludeUrlFromRefresh.Any(Function(str) url.Contains(str)) Then
+                Return
+            End If
+
+            If Not OnlineUser.Refresh(Context) Then
+                'LogoutCurrentUser(Context)
+            End If
+        End If
     End Sub
+
+    Private Sub LogoutCurrentUser(ctx As HttpContext)
+        FormsAuthentication.SignOut()
+        'ctx.Response.Redirect(FormsAuthentication.LoginUrl)
+    End Sub
+
+    Private Shared ExcludeUrlFromRefresh As String() = {"GetModifyUserUrl", "GetCaseLastUpDateTime", "LastLastUpdate"}
+
+
 
     Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)
         ' Fires when an error occurs

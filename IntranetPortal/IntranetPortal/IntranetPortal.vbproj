@@ -716,6 +716,7 @@
     <Compile Include="Controllers\TaxLiensController.vb" />
     <Compile Include="Controllers\TaxLiensODataController.vb" />
     <Compile Include="Controllers\TitleController.vb" />
+    <Compile Include="Controllers\UserInfoController.vb" />
     <Compile Include="Controllers\WorkingLogController.vb" />
     <Compile Include="DataAPITesting.aspx.designer.vb">
       <DependentUpon>DataAPITesting.aspx</DependentUpon>
