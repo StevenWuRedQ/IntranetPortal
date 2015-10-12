@@ -83,8 +83,14 @@ Public Class Global_asax
 
         Dim url = Context.Request.RawUrl
         If url.Contains(".aspx") OrElse url.Contains("/api/") OrElse url.Contains(".svc") Then
-            If ExcludeUrlFromRefresh.Any(Function(str) url.Contains(str)) Then
+            If ExcludeUrlFromRefresh.Any(Function(str) url.ToLower.Contains(str.ToLower)) Then
                 Return
+            End If
+
+            If Context.Request.QueryString("ignore") IsNot Nothing Then
+                If CBool(Request.QueryString("ignore")) Then
+                    Return
+                End If
             End If
 
             If Not OnlineUser.Refresh(Context) Then
@@ -98,7 +104,7 @@ Public Class Global_asax
         'ctx.Response.Redirect(FormsAuthentication.LoginUrl)
     End Sub
 
-    Private Shared ExcludeUrlFromRefresh As String() = {"GetModifyUserUrl", "GetCaseLastUpDateTime", "LastLastUpdate"}
+    Private Shared ExcludeUrlFromRefresh As String() = {"GetModifyUserUrl", "GetCaseLastUpDateTime", "LastLastUpdate", "IsActive"}
 
 
 
