@@ -144,13 +144,6 @@ Namespace Controllers
             Return Ok(constructionCase)
         End Function
 
-        Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-            If (disposing) Then
-
-            End If
-            MyBase.Dispose(disposing)
-        End Sub
-
         Private Function ConstructionCaseExists(ByVal id As String) As Boolean
             Return ConstructionCase.Exists(id)
         End Function
@@ -186,12 +179,17 @@ Namespace Controllers
 
         <Route("api/ConstructionCases/GenerateExcel")>
         Function GenerateExcel(<FromBody> queryString As JToken) As IHttpActionResult
-            Dim template = New FileStream(HttpContext.Current.Server.MapPath("~/App_Data/checkrequest.xlsx"), FileMode.Open)
-            Dim excel = Core.ExcelBuilder.BuildBudgetReport(queryString, template)
+            Dim ms = New MemoryStream
+            Using template = New FileStream(HttpContext.Current.Server.MapPath("~/App_Data/checkrequest.xlsx"), FileMode.Open, FileAccess.Read)
+                template.CopyTo(ms)
+            End Using
+
+            Dim excel = Core.ExcelBuilder.BuildBudgetReport(queryString, ms)
             Using tempFile = New FileStream(HttpContext.Current.Server.MapPath("~/TempDataFile/budget.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
                 tempFile.Write(excel, 0, excel.Length)
                 Return Ok()
             End Using
+
         End Function
 
         <Route("api/ConstructionCases/GetGenerateExcel")>

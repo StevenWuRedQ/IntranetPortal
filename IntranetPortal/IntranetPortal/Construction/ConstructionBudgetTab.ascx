@@ -87,7 +87,7 @@
             $scope.updateTotal();
         }
         $scope.updateBalance = function (d) {
-            d.balance = d.contract - (d.toDay ? d.toDay : 0.0) - d.paid;
+            d.balance = (parseFloat(d.contract) ? parseFloat(d.contract) : 0.0) - (parseFloat(d.toDay) ? parseFloat(d.toDay) : 0.0) - (parseFloat(d.paid) ? parseFloat(d.paid) : 0.0);
         }
         $scope.updateTotal = function () {
             var total = {
@@ -97,9 +97,9 @@
                 paid: 0.0
             }
             _.each($scope.data.form, function (el, i) {
-                total.contract = total.contract + parseFloat(el.contract) ? parseFloat(el.contract) : 0.0;
-                total.toDay = total.toDay + parseFloat(el.toDay) ? parseFloat(el.toDay) : 0.0;
-                total.paid = total.paid + parseFloat(el.paid) ? parseFloat(el.paid) : 0.0;
+                total.contract = total.contract + (parseFloat(el.contract) ? parseFloat(el.contract) : 0.0);
+                total.toDay = total.toDay + (parseFloat(el.toDay) ? parseFloat(el.toDay) : 0.0);
+                total.paid = total.paid + (parseFloat(el.paid) ? parseFloat(el.paid) : 0.0);
                 total.balance = total.contract - total.toDay - total.paid;
             })
             $scope.total = total;
@@ -108,33 +108,43 @@
             if (d.style) return d.style;
         }
         $scope.exportExcel = function () {
-            var updata = []
+            var data = {};
+            data.updata = [];
+            data.bble = $scope.$parent.CSCase.BBLE;
             _.each($scope.data.form, function (el, i) {
                 if (el.checked) {
-                    updata.push(el);
+                    data.updata.push(el);
                 }
             })
-            /*if (updata.length > 0) {
+
+            /*
+            if (data.updata.length > 0) {
                 $http({
                     method: "POST",
                     url: "/api/ConstructionCases/GenerateExcel",
-                    data: JSON.stringify(updata),
+                    data: JSON.stringify(data),
                 }).then(function (res) {
+                    
                     _.each(updata, function (el, i) {
                         el.toDay = parseFloat(el.toDay) ? (parseFloat(el.toDay)) : 0.0 + parseFloat(el.paid) ? parseFloat(el.paid) : 0.0;
                         el.paid = 0.0;
                     });
                     console.log("Download start");
                     STDownloadFile("/api/ConstructionCases/GetGenerateExcel", "budget.xlsx")
+                    
                 })
             } else {
                 alert("No data select!");
             }*/
 
-            _.each(updata, function (el, i) {
-                el.toDay = (parseFloat(el.toDay)?parseFloat(el.toDay):0.0) + (parseFloat(el.paid)?parseFloat(el.paid):0.0);
+            _.each(data.updata, function (el, i) {
+                el.toDay = (parseFloat(el.toDay) ? parseFloat(el.toDay) : 0.0) + (parseFloat(el.paid) ? parseFloat(el.paid) : 0.0);
                 el.paid = 0.0;
+                $scope.updateBalance(el);
             });
+
+            $scope.updateTotal();
+
 
         }
         $scope.checkedAll = function () {

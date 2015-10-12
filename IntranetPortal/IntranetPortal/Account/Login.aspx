@@ -11,7 +11,7 @@
     <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">--%>
     <%--<link href="/css/font-awesome.min.css" type="text/css" rel="stylesheet" />--%>
     <link rel="stylesheet" href="/css/normalize.min.css" />
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />    
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="/css/main.css" />
@@ -97,13 +97,13 @@
                 <footer class="sign-in-footnote fade-in">
                     <p><a href="mailto:chrisy@myidealprop.com"><i class="fa fa-lock"></i>Forgot your password?</a></p>
                 </footer>
-            </article>            
-        </div>        
+            </article>
+        </div>
         <dx:ASPxCallback runat="server" ID="LogInCallBack" ClientInstanceName="LogInCallBackClinet" OnCallback="LogInCallBack_Callback">
             <ClientSideEvents CallbackComplete="function(s,e){LogInComplete(e.result);}" />
         </dx:ASPxCallback>
         <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -115,7 +115,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Okay</button>
-                        
+
                     </div>
                 </div>
             </div>
@@ -134,7 +134,7 @@
         <script src="/Scripts/js/jquery.backstretch.min.js"></script>
         <script src="/Scripts/js/main.js"></script>
         <!-- Latest compiled and minified JavaScript -->
-       <%-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>--%>
+        <%-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>--%>
 
         <script type="text/javascript">
             function inIframe() {
@@ -146,12 +146,20 @@
             }
 
             $(function () {
-                if(inIframe())
-                {
+                if (inIframe()) {
                     top.window.location.href = window.location.href;
                 }
             });
+        </script>
+        <script type="text/javascript">
+            window.onload = setupRefresh;
 
+            function setupRefresh() {
+                setTimeout("refreshPage();", 1000 * 60 * 60);
+            }
+            function refreshPage() {
+                window.location = location.href;
+            }
         </script>
     </form>
 </body>

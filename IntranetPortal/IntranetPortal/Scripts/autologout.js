@@ -1,7 +1,7 @@
 ﻿$(function () {
     window.autoLogout_lastCheck = new Date();
     // recheck every 30 minutes
-    var CHECK_INTERVAL = 1000 * 60 * 60 * 30;
+    var CHECK_INTERVAL = 1000 * 60 * 30;
     // after 30 second logout
     var CONFRIM_INTERVAL = 1000 * 30;
     var autoLogoutPopup_visible = false;
@@ -16,8 +16,8 @@
 
     function checkOnline() {
         $.get("/api/UserInfo/IsActive")
-        .done(function (data, status, jqxhr) {
-            if (data == false) {
+        .done(function (data) {
+            if (data === false) {
                 $("#autoLogoutPopup").dxPopup("instance").show();
                 var countDown = 29;
                 var logoutCountDown = function () {
@@ -38,7 +38,7 @@
             }
 
         })
-        .fail(function (data, status, error) {
+        .fail(function () {
             window.onAutoLogout();
         })
     }
@@ -49,8 +49,6 @@
             .done(function () {
                 window.autoLogout_lastCheck = new Date();
             })
-
-
     }
 
     window.onAutoLogout = function () {
