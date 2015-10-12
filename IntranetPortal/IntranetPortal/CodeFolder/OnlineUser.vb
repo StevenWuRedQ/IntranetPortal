@@ -10,6 +10,9 @@ Public Class OnlineUser
     Public Property RefreshTime As DateTime
     Public Property SessionID As String
 
+    Public Const LoginTimeout As Integer = 2
+    Public Const RefreshTimeout As Integer = 1
+
     Public Shared ReadOnly Property OnlineUsers As List(Of OnlineUser)
         Get
             If HttpContext.Current.Application("Users") IsNot Nothing Then
@@ -25,7 +28,7 @@ Public Class OnlineUser
             If user Is Nothing Then
                 Return False
             Else
-                Return user.RefreshTime.AddMinutes(1) > DateTime.Now
+                Return user.RefreshTime.AddMinutes(LoginTimeout) > DateTime.Now
             End If
         End Get
     End Property
@@ -48,14 +51,14 @@ Public Class OnlineUser
             Dim currentUser = users.Where(Function(u) u.UserName = context.User.Identity.Name).SingleOrDefault
 
             If currentUser IsNot Nothing Then
-                If currentUser.RefreshTime.AddMinutes(1) < DateTime.Now Then
+                If currentUser.RefreshTime.AddMinutes(LoginTimeout) < DateTime.Now Then
                     users.Remove(currentUser)
                     context.Application("Users") = users
                     context.Application.UnLock()
                     Return False
                 End If
 
-                If currentUser.RefreshTime.AddMinutes(0.5) > DateTime.Now Then
+                If currentUser.RefreshTime.AddMinutes(RefreshTimeout) > DateTime.Now Then
                     context.Application.UnLock()
                     Return True
                 End If

@@ -436,6 +436,13 @@
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Account\Logout.aspx.designer.vb">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Logout.aspx.vb">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Account\Register.aspx.designer.vb">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
@@ -2300,6 +2307,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Login2.aspx" />
+    <Content Include="Account\Logout.aspx" />
     <Content Include="AgentOverview\AgentCharts.ascx" />
     <Content Include="AgentOverview\AgentOverview.aspx" />
     <Content Include="App_Data\PortalMenu.xml">
