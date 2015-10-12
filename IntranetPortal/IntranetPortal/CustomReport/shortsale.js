@@ -2,6 +2,30 @@
     {
         "BaseTable": "ShortSaleCase",
         "Fields": [
+            {
+                "category": "ShortSale Case",
+                "fields": [
+                  {
+                      "name": "Case Name",
+                      "table": "ShortSaleCases",
+                      "column": "CaseName",
+                      "type": "string"
+                  },
+                   {
+                       "name": "Followup Date",
+                       "table": "ShortSaleCases",
+                       "column": "CallbackDate",
+                       "type": "date"
+                   },
+                  {
+                      "name": "Status",
+                      "table": "SS_Status",
+                      "column": "Name",
+                      "type": "list",
+                      "options": ["Active", "Archived"]
+                  }
+                ]
+            },
                     {
                         "category": "Seller1",
                         "fields": [
