@@ -26,7 +26,7 @@ function ScopeCaseDataChanged(getDataFunc) {
         $('<input type="hidden" id="CaseData" />').appendTo(document.body);
         return false;
     }
-
+    
     return $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(getDataFunc());
 }
 function ScopeResetCaseDataChange(getDataFunc) {
@@ -626,10 +626,8 @@ app.factory('ptEntityService', function ($http) {
         getEntityByBBLE: function (bble, callback) {
             var url = '/api/CorporationEntities/ByBBLE?BBLE=' + bble;
             $http.get(url).then(function success(res) {
-                debugger;
                 if (callback) callback(null, res.data)
             }, function error(res) {
-                debugger;
                 if (callback) callback("load fail", res.data)
             })
 

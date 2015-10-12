@@ -186,8 +186,8 @@ Namespace Controllers
 
         <Route("api/ConstructionCases/GenerateExcel")>
         Function GenerateExcel(<FromBody> queryString As JToken) As IHttpActionResult
-
-            Dim excel = Core.ExcelBuilder.BuildBudgetReport(queryString)
+            Dim template = New FileStream(HttpContext.Current.Server.MapPath("~/App_Data/checkrequest.xlsx"), FileMode.Open)
+            Dim excel = Core.ExcelBuilder.BuildBudgetReport(queryString, template)
             Using tempFile = New FileStream(HttpContext.Current.Server.MapPath("~/TempDataFile/budget.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
                 tempFile.Write(excel, 0, excel.Length)
                 Return Ok()

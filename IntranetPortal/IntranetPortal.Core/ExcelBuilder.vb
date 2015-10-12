@@ -6,9 +6,9 @@ Imports Newtonsoft.Json.Linq
 Public Class ExcelBuilder
     Public Shared Property XLColor As XLColor
 
-    Public Shared Function BuildBudgetReport(jsQuery As JToken) As Byte()
+    Public Shared Function BuildBudgetReport(jsQuery As JToken, template As FileStream) As Byte()
         Using ms As New MemoryStream
-            Dim wb As New Excel.XLWorkbook
+            Dim wb As New Excel.XLWorkbook(template)
             Dim ws = wb.Worksheets.Add("sheet1")
 
             Dim header = ws.Range("A1:F1")

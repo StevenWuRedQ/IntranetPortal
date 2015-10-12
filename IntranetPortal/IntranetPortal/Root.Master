@@ -25,8 +25,7 @@
             width: 100% !important;
         }
 
-        .NewTaskAnimation{
-
+        .NewTaskAnimation {
         }
     </style>
 
@@ -45,7 +44,7 @@
             }
 
             function OpenLeadsWindow(url, title, width, height) {
-                alert('error '+width+ height);
+                alert('error ' + width + height);
                 //var vwidth = width ? width : 1350;
                 //var vheight = height ? height : 930;
                 //var left = (screen.width / 2) - (vwidth / 2);
@@ -116,13 +115,12 @@
             var inAnimate = false;
             function NewTask() {
                 //$("#SpanAmount_TotalTask").css("background-color", "#e63000");
-                if(!inAnimate)
-                    animate();                
+                if (!inAnimate)
+                    animate();
             }
 
             function animate() {
-                if (!$('#SpanAmount_TotalTask').is(':visible'))
-                {
+                if (!$('#SpanAmount_TotalTask').is(':visible')) {
                     $('#SpanAmount_TotalTask').css("background-color", "#1a3847");
                     inAnimate = false;
                     return;
@@ -171,7 +169,7 @@
                                             </p>
                                             <p>&copy; 2014 My Ideal Property</p>
                                             <div id="errorMsg" style="color: transparent"></div>
-<%--                                                                                        <input type="button" class="NewTask" onclick="NewTask()" value="NewTask" />--%>
+                                            <%--                                                                                        <input type="button" class="NewTask" onclick="NewTask()" value="NewTask" />--%>
                                         </footer>
                                     </div>
                                 </dx:SplitterContentControl>
@@ -190,8 +188,8 @@
                                     <div class="header under-line-header" style="width: 100%; display: table; height: 100%; margin-top: -1px; background-color: white;">
                                         <div style="display: table-row" class="clear-fix">
                                             <div style="float: left; display: table-cell; width: 260px;">
-                                                <i class="fa fa-users with_circle icon_btn color_black tooltip-examples" style="  margin-left: 20px;font-size: 20px;padding: 5px;" title="Contacts" onclick="OpenLeadsWindow('/PopupControl/VendorsPopUpContent.aspx','Contacts',1036,590)"></i>
-                                                <i class="fa fa-building with_circle icon_btn color_black tooltip-examples" style="  margin-left: 20px;font-size: 20px;padding: 5px;" title="Entities" onclick="OpenLeadsWindow('/PopupControl/BuyerEntityPopUpContent.aspx','Entities',1438,700)"></i>
+                                                <i class="fa fa-users with_circle icon_btn color_black tooltip-examples" style="margin-left: 20px; font-size: 20px; padding: 5px;" title="Contacts" onclick="OpenLeadsWindow('/PopupControl/VendorsPopUpContent.aspx','Contacts',1036,590)"></i>
+                                                <i class="fa fa-building with_circle icon_btn color_black tooltip-examples" style="margin-left: 20px; font-size: 20px; padding: 5px;" title="Entities" onclick="OpenLeadsWindow('/PopupControl/BuyerEntityPopUpContent.aspx','Entities',1438,700)"></i>
                                             </div>
                                             <div style="display: table-cell; width: 700px">
                                                 <table style="margin-top: 10px; float: right">
@@ -439,7 +437,7 @@
                 background-color: red;
                 animation-name: example;
                 animation-duration: 10s;
-                animation:infinite;
+                animation: infinite;
             }
         </style>
 

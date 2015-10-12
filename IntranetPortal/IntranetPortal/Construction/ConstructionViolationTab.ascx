@@ -483,8 +483,16 @@
                 <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_OpenViolationNumber">
             </li>
             <li class="ss_form_item">
+                <label class="ss_form_input_title">Registration Number</label>
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_RegNum">
+            </li>
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">Registrant</label>
                 <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_Registrant">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Registration Expiration Date</label>
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_RegExpireDate" ss-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Dismissal Request</label>
@@ -503,10 +511,6 @@
                     <option value="500">Multiple Dwelling with 501 or more open violations....................... $ 500</option>
                     <option value="1000">Multiple Dwelling Active in the Alternative Enforcement Program (AEP) ... $ 1000</option>
                 </select>
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Registration Expiration Date</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_RegExpireDate" ss-date>
             </li>
         </ul>
         <div>

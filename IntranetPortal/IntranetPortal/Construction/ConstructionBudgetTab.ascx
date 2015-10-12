@@ -4,8 +4,8 @@
     <div class="budgetTitle">
         <h3>Budget Form</h3>
         <div>
-            <span style="position: relative; top: 10px;">
-                <input type="checkbox" style="display: inline-block" ng-model="checkall" ng-change="updateAll()" />CheckAll</span>
+            <%--  <span style="position: relative; top: 10px;">
+                <input type="checkbox" style="display: inline-block" ng-model="checkall" ng-change="checkedAll()" />CheckAll</span>--%>
             <button type="button" class="btn btn-success btn-sm pull-right" ng-click="exportExcel()">Export Excel</button>
         </div>
     </div>
@@ -15,8 +15,9 @@
             <th style="width: 180px">Description</th>
             <th style="width: 60px">Materials</th>
             <th style="width: 60px">Labor</th>
-            <th style="width: 60px">Contract Price</th>
-            <th style="width: 60px">Paid</th>
+            <th style="width: 60px">Total Budget Amount</th>
+            <th style="width: 60px">Amount Spent to Date</th>
+            <th style="width: 60px">Amount Requested</th>
             <th style="width: 60px">Balance</th>
         </tr>
         <tr ng-repeat="d in data.form ">
@@ -29,9 +30,11 @@
             <td>
                 <input style="width: 60px; border: none" ng-model="d.contract" money-mask ng-change="update(d)" /></td>
             <td>
+                <input style="width: 60px; border: none" ng-model="d.toDay" money-mask ng-change="update(d)" readonly /></td>
+            <td>
                 <input style="width: 60px; border: none" ng-model="d.paid" money-mask ng-change="update(d)" /></td>
             <td>
-                <input style="width: 60px; border: none" ng-model="d.balance" money-mask ng-change="updateTotal()" readonly/></td>
+                <input style="width: 60px; border: none" ng-model="d.balance" money-mask readonly /></td>
         </tr>
         <tr style="background-color: yellow; font-weight: bolder">
             <td>Total</td>
@@ -39,6 +42,8 @@
             <td></td>
             <td>
                 <input style="width: 60px; border: none; background-color: yellow" ng-model="total.contract" money-mask readonly /></td>
+            <td>
+                <input style="width: 60px; border: none; background-color: yellow" ng-model="total.toDay" money-mask readonly /></td>
             <td>
                 <input style="width: 60px; border: none; background-color: yellow" ng-model="total.paid" money-mask readonly /></td>
             <td>
@@ -53,10 +58,10 @@
         $scope.init = function () {
             $scope.template = {};
             $scope.template.total = {
-                "balance": "",
-                "estimate": "",
-                "contract": "",
-                "paid": "",
+                "balance": 0.0,
+                "contract": 0.0,
+                "toDay": 0.0,
+                "paid": 0.0,
             }
             $http.get("/Scripts/res/budgetData.js")
                 .then(function (res) {
@@ -71,11 +76,9 @@
             $scope.data = newData;
             $scope.linkCreated = false;
         }
-
         $scope.load = function (data) {
             $scope.data = data;
         }
-
         $scope.get = function () {
             return $scope.data;
         }
@@ -84,19 +87,20 @@
             $scope.updateTotal();
         }
         $scope.updateBalance = function (d) {
-            d.balance = d.contract - d.paid;
+            d.balance = d.contract - (d.toDay ? d.toDay : 0.0) - d.paid;
         }
         $scope.updateTotal = function () {
             var total = {
                 balance: 0.0,
                 contract: 0.0,
+                toDay: 0.0,
                 paid: 0.0
             }
             _.each($scope.data.form, function (el, i) {
-                total.estimate = parseFloat(el.estimate) ? total.estimate + parseFloat(el.estimate) : total.estimate;
-                total.contract = parseFloat(el.contract) ? total.contract + parseFloat(el.contract) : total.contract;
-                total.paid = parseFloat(el.paid) ? total.paid + parseFloat(el.paid) : total.paid;
-                total.balance = parseFloat(el.balance) ? total.balance + parseFloat(el.balance) : total.balance;
+                total.contract = total.contract + parseFloat(el.contract) ? parseFloat(el.contract) : 0.0;
+                total.toDay = total.toDay + parseFloat(el.toDay) ? parseFloat(el.toDay) : 0.0;
+                total.paid = total.paid + parseFloat(el.paid) ? parseFloat(el.paid) : 0.0;
+                total.balance = total.contract - total.toDay - total.paid;
             })
             $scope.total = total;
         }
@@ -110,20 +114,30 @@
                     updata.push(el);
                 }
             })
-            if (updata.length > 0) {
+            /*if (updata.length > 0) {
                 $http({
                     method: "POST",
                     url: "/api/ConstructionCases/GenerateExcel",
                     data: JSON.stringify(updata),
                 }).then(function (res) {
+                    _.each(updata, function (el, i) {
+                        el.toDay = parseFloat(el.toDay) ? (parseFloat(el.toDay)) : 0.0 + parseFloat(el.paid) ? parseFloat(el.paid) : 0.0;
+                        el.paid = 0.0;
+                    });
                     console.log("Download start");
                     STDownloadFile("/api/ConstructionCases/GetGenerateExcel", "budget.xlsx")
                 })
             } else {
                 alert("No data select!");
-            }
+            }*/
+
+            _.each(updata, function (el, i) {
+                el.toDay = (parseFloat(el.toDay)?parseFloat(el.toDay):0.0) + (parseFloat(el.paid)?parseFloat(el.paid):0.0);
+                el.paid = 0.0;
+            });
+
         }
-        $scope.updateAll = function () {
+        $scope.checkedAll = function () {
             if ($scope.checkall) {
                 _.each($scope.data.form, function (el, i) {
                     el.checked = true;
