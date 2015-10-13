@@ -117,25 +117,25 @@
                 }
             })
 
-            /*
+            
             if (data.updata.length > 0) {
                 $http({
                     method: "POST",
                     url: "/api/ConstructionCases/GenerateExcel",
-                    data: JSON.stringify(data),
+                    data: data,
                 }).then(function (res) {
-                    
+                    /*
                     _.each(updata, function (el, i) {
                         el.toDay = parseFloat(el.toDay) ? (parseFloat(el.toDay)) : 0.0 + parseFloat(el.paid) ? parseFloat(el.paid) : 0.0;
                         el.paid = 0.0;
-                    });
+                    }); */
                     console.log("Download start");
                     STDownloadFile("/api/ConstructionCases/GetGenerateExcel", "budget.xlsx")
-                    
+                   
                 })
             } else {
                 alert("No data select!");
-            }*/
+            }
 
             _.each(data.updata, function (el, i) {
                 el.toDay = (parseFloat(el.toDay) ? parseFloat(el.toDay) : 0.0) + (parseFloat(el.paid) ? parseFloat(el.paid) : 0.0);

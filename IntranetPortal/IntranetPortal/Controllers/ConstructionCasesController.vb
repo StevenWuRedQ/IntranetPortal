@@ -8,6 +8,8 @@ Imports System.Drawing
 Imports System.Net.Http
 Imports System.Net.Http.Headers
 Imports Newtonsoft.Json.Linq
+Imports Newtonsoft.Json
+Imports IntranetPortal.Core.ExcelBuilder
 
 Namespace Controllers
     Public Class ConstructionCasesController
@@ -179,16 +181,30 @@ Namespace Controllers
 
         <Route("api/ConstructionCases/GenerateExcel")>
         Function GenerateExcel(<FromBody> queryString As JToken) As IHttpActionResult
-            Dim ms = New MemoryStream
-            Using template = New FileStream(HttpContext.Current.Server.MapPath("~/App_Data/checkrequest.xlsx"), FileMode.Open, FileAccess.Read)
-                template.CopyTo(ms)
-            End Using
 
-            Dim excel = Core.ExcelBuilder.BuildBudgetReport(queryString, ms)
-            Using tempFile = New FileStream(HttpContext.Current.Server.MapPath("~/TempDataFile/budget.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
-                tempFile.Write(excel, 0, excel.Length)
-                Return Ok()
-            End Using
+            Dim BBLEToken = queryString.SelectToken("bble")
+            Dim DataToken = queryString.SelectToken("updata")
+            If Not BBLEToken Is Nothing AndAlso Not DataToken Is Nothing Then
+                Dim BBLE = BBLEToken.ToString.Trim
+                Dim JData = JsonConvert.DeserializeObject(Of BudgetRow())(DataToken.ToJsonString)
+                If Not JData Is Nothing AndAlso Not BBLE Is Nothing Then
+                    Dim ccase = Data.ConstructionCase.GetCase(BBLE)
+                    If Not ccase Is Nothing Then
+                        Dim address = ccase.CaseName
+                        Dim owner = User.Identity.Name
+                        Dim ms = New MemoryStream
+                        Using fs = File.Open(HttpContext.Current.Server.MapPath("~/App_Data/checkrequest.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
+                            fs.CopyTo(ms)
+                        End Using
+                        Dim excelbytes = Core.ExcelBuilder.BuildBudgetReport(address, owner, JData, ms)
+                        ms.Close()
+                        Using tempFile = New FileStream(HttpContext.Current.Server.MapPath("~/TempDataFile/budget.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
+                            tempFile.Write(excelbytes, 0, excelbytes.Length)
+                            Return Ok()
+                        End Using
+                    End If
+                End If
+            End If
 
         End Function
 
