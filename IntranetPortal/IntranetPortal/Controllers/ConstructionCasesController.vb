@@ -206,6 +206,7 @@ Namespace Controllers
                 End If
             End If
 
+            Return Ok()
         End Function
 
         <Route("api/ConstructionCases/GetGenerateExcel")>

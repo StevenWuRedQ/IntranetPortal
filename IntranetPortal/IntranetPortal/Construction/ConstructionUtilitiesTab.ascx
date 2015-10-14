@@ -402,7 +402,24 @@
             <label class="ss_form_input_title">Notes</label>
             <textarea class="edit_text_area text_area_ss_form" ng-model="CSCase.CSCase.Utilities.MissingMeter_Notes"></textarea>
         </div>
+
+        <hr />
+        <h5 class="ss_form_title">Water Search</h5>
+        <div class="ss_border">
+            <ul class="ss_form_box clearfix">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Water Search Upload</label>
+                    <pt-file class="intakeCheck" file-bble='CSCase.BBLE' file-id="InitialIntake-WaterSearchUpload" file-model="CSCase.CSCase.InitialIntake.WaterSearchUpload"></pt-file>
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Is Water Search Finished?</label>
+                    <pt-finished-mark class="intakeCheck" ss-model="CSCase.CSCase.InitialIntake.IsWaterSearchFinished"></pt-finished-mark>
+                </li>
+            </ul>
+
+        </div>
     </div>
+
 </div>
 
 <%-- Taxes --%>
