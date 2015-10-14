@@ -613,6 +613,21 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
 
 }]);
 
+portalApp.directive('ptLink', function (ptFileService) {
+    return {
+        restrict: 'E',
+        scope: {
+            ptModel: '='
+        },
+        template: '<a ng-click="onFilePreview(ptModel.path)">{{trunc(ptModel.name,20)}}</a>',
+        link: function (scope, el, attrs) {
+            scope.onFilePreview = ptFileService.onFilePreview;
+            scope.trunc = ptFileService.trunc;
+        }
+
+    }
+})
+
 portalApp.directive('ptComments', ['ptCom', function (ptCom) {
 
     return {
@@ -641,6 +656,7 @@ portalApp.directive('ptComments', ['ptCom', function (ptCom) {
     }
 
 }])
+
 
 portalApp.directive('ptFinishedMark', [function () {
     return {

@@ -183,11 +183,11 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Upload GeoData Report</label>
-                    <pt-file class="intakeCheck" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadGeoDataReport" file-model="CSCase.CSCase.InitialIntake.UploadGeoDataReport"></pt-file>
+                    <pt-link pt-model="CSCase.CSCase.InitialIntake.UploadGeoDataReport"></pt-link>
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Upload C/O</label>
-                    <pt-file class="intakeCheck" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadCO" file-model="CSCase.CSCase.InitialIntake.UploadCO"></pt-file>
+                    <pt-link pt-model="CSCase.CSCase.InitialIntake.UploadCO"></pt-link>
                 </li>
             </ul>
         </div>
@@ -195,7 +195,7 @@
 </div>
 <div id="PropertyAddress_Popup" dx-popup="{  
                     width: 900,
-                    height: 950,
+                    height: 920,
                     title: 'Property Info',
                     dragEnabled: true,
                     showCloseButton: true,
@@ -258,7 +258,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <label class="ss_form_input_title">Total Units</label>
-                <input class="form-control intakeCheck" ng-model="CSCase.CSCase.InitialIntake.TotalUnits" pt-init-model="SsCase.PropertyInfo.NumOfFamilies">
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.TotalUnits" pt-init-model="SsCase.PropertyInfo.NumOfFamilies">
             </div>
             <div class="col-sm-4">
                 <label class="ss_form_input_title">Building Class</label>
@@ -358,24 +358,24 @@
             <li class="ss_form_item clearfix"></li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Deed</label>
-                <pt-file class="" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadDeed" file-model="CSCase.CSCase.InitialIntake.UploadDeed"></pt-file>
+                <pt-link pt-model="CSCase.CSCase.InitialIntake.UploadDeed"></pt-link>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload EIN</label>
-                <pt-file class="" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadEIN" file-model="CSCase.CSCase.InitialIntake.UploadEIN"></pt-file>
+                <pt-link pt-model="CSCase.CSCase.InitialIntake.UploadEIN"></pt-link>
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Filing Receipt</label>
-                <pt-file class="" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadFilingReceipt" file-model="CSCase.CSCase.InitialIntake.UploadFilingReceipt"></pt-file>
+                <pt-link pt-model="CSCase.CSCase.InitialIntake.UploadFilingReceipt"></pt-link>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Article of Operation</label>
-                <pt-file class="" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadArticleOfOperation" file-model="CSCase.CSCase.InitialIntake.UploadArticleOfOperation"></pt-file>
+                <pt-link pt-model="CSCase.CSCase.InitialIntake.UploadArticleOfOperation"></pt-link>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Operation Agreement</label>
-                <pt-file class="" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadOperationAgreement" file-model="CSCase.CSCase.InitialIntake.UploadOperationAgreement"></pt-file>
+                <pt-link pt-model="CSCase.CSCase.InitialIntake.UploadOperationAgreement"></pt-link>
             </li>
         </ul>
     </div>
@@ -383,7 +383,7 @@
 <div id="InitialTake_Owner_Popup" dx-popup="{  
                     width: 900,
                     height: 450,
-                    title: 'Property Info',
+                    title: 'Owner',
                     dragEnabled: true,
                     showCloseButton: true,
                     shading: false,
@@ -455,7 +455,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Comps</label>
-                <pt-file class="intakeCheck" file-bble='CSCase.BBLE' file-id="InitialIntake-UploadComps" file-model="CSCase.CSCase.InitialIntake.UploadComps"></pt-file>
+                <pt-link pt-model="CSCase.CSCase.InitialIntake.UploadComps"></pt-link>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Is Comps Task Finished?</label>
@@ -467,7 +467,7 @@
 <div id="InitialTake_Comps_Popup" dx-popup="{  
                     width: 900,
                     height: 450,
-                    title: 'Property Info',
+                    title: 'Comps',
                     dragEnabled: true,
                     showCloseButton: true,
                     shading: false,

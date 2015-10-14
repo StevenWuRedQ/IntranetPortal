@@ -26,7 +26,7 @@ function ScopeCaseDataChanged(getDataFunc) {
         $('<input type="hidden" id="CaseData" />').appendTo(document.body);
         return false;
     }
-    
+
     return $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(getDataFunc());
 }
 function ScopeResetCaseDataChange(getDataFunc) {
@@ -481,20 +481,41 @@ app.service('ptFileService', function () {
             case 'docx':
                 return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true';
                 break;
-                /*
-                case 'jpg':
-                    return '';
-                case 'jpeg':
-                    return '';
-                case 'bmp':
-                    return '';
-                case 'gif':
-                    return '';
-                case 'png':
-                    return '';
-                    */
+            case 'jpg':
+            case 'jpeg':
+            case 'bmp':
+            case 'gif':
+            case 'png':
+                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
+                break;
             default:
                 return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
+
+        }
+    }
+
+    this.onFilePreview = function (filePath) {
+
+        var ext = this.getFileExt(filePath);
+        switch (ext) {
+            case 'pdf':
+                window.open('/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath));
+                break;
+            case 'xls':
+            case 'xlsx':
+            case 'doc':
+            case 'docx':
+                window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true');
+                break;
+            case 'jpg':
+            case 'jpeg':
+            case 'bmp':
+            case 'gif':
+            case 'png':
+                $.fancybox.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
+                break;
+            default:
+                window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
 
         }
     }
@@ -517,6 +538,11 @@ app.service('ptFileService', function () {
 
     this.getThumb = function (thumbId) {
         return '/downloadfile.aspx?thumb=' + thumbId;
+
+    }
+
+    this.trunc = function (fileName, length) {
+        return _.trunc(fileName, length);
 
     }
 }

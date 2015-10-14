@@ -68,6 +68,7 @@
             $scope.form = {};
             $scope.reload = function () {
                 $scope.form = {};
+                $scope.getCaseList();
             }
             $scope.init = function () {
                 $scope.getCaseList()
@@ -101,7 +102,6 @@
                     })
 
                 }
-
             }
             $scope.submitForm = function () {
                 if ($scope.form.id) {

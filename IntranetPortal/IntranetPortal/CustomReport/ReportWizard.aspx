@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="/css/right-pane.css" />
     <script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
     <div id="ReportWizardCtrl" ng-controller="ReportWizardCtrl">
-        <div class="container" style="padding: 20px; font-size: small">
-            <div class="nga-fast nga-fade" ng-show="step==1">
+        <div class="container" style="padding-top: 30px; font-size: small">
+            <div class="nga-fast nga-fade" ng-show="step==1" style="margin-left: -50px">
                 <div ng-repeat="c in Fields track by c.category" class="col-sm-6 col-md-6">
                     <table class="table table-condensed">
                         <tr>
@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <div class="nga-fast nga-fade" ng-show="step==2">
+            <div class="nga-fast nga-fade" ng-show="step==2" style="margin-left: -50px">
                 <div ng-show="someCheck(c)" ng-repeat="c in Fields" class="col-sm-12 col-md-12">
                     <h4 class="text-primary">{{c.category}}</h4>
                     <div>
@@ -92,11 +92,11 @@
                 </div>
             </div>
 
-            <div class="nga-fast nga-face" ng-show="step==3">
-                <h3>{{getReportTitle()}}</h3>
+            <div class="nga-fast nga-face" ng-show="step==3" style="margin-left: -50px">
+                <h3>Report <span style="font-weight: bold; color: blue">{{CurrentQuery?CurrentQuery.Name:""}}</span></h3>
                 <div id="queryReport" dx-data-grid="{
-                                    width: 800,
-                                    height: 600,
+                                    width: 1200,
+                                    height: 750,
                                     allowColumnReordering: true,
                                     allowColumnResizing: true,
                                     columnAutoWidth: true,
@@ -429,13 +429,6 @@
                         alert("Save successful!")
                     })
 
-                }
-            }
-            $scope.getReportTitle = function () {
-                if ($scope.CurrentQuery) {
-                    return "Report " + $scope.CurrentQuery.Name;
-                } else {
-                    return ""
                 }
             }
 

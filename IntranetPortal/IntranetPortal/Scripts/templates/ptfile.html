@@ -1,13 +1,15 @@
 ﻿<div>
     <div style="margin: 2px" ng-show="fileModel">
-        <a style="font-size:16px;" ng-href="{{ptFileService.makePreviewUrl(fileModel.path)}}" target="_blank">{{fileModel.name?fileModel.name:''}}</a>&nbsp;
+        <a style="font-size:16px; cursor:pointer;" ng-click="ptFileService.onFilePreview(fileModel.path)" target="_blank">{{fileModel.name?ptFileService.trunc(fileModel.name,20):''}}</a>&nbsp;
         <i class="fa fa fa-pencil icon_btn text-danger tooltip-examples" title="Modify file name" ng-click="modifyName(fileModel)"></i>
         <i class="fa fa-remove icon_btn text-danger tooltip-examples" title="Delete" ng-click="delFile()"></i>
     </div>
     <div style="margin: 2px" ng-show="!fileModel">
         <div>
             <span class="btn btn-default btn-file" style="max-width:160px">
-                {{File?File.name:'Choose File'}}<span dx-load-indicator="{ height: '14px', width:'14px', bindingOptions: { visible: 'loading' }}"></span><input type="file" id="{{fileId}}" />
+                <span dx-load-indicator="{ height: '14px', width:'14px', bindingOptions: { visible: 'loading' }}"></span>
+                {{File?File.name:'Choose File'}}
+                <input type="file" id="{{fileId}}" />
             </span>
             <span ng-show="fileChoosed">
                 <i class="fa fa-times icon_btn text-danger tooltip-examples" ng-click="delChoosed()" title="Delete" style="font-size: 18px;"></i>&nbsp;
