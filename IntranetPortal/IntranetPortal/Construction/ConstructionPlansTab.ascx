@@ -13,8 +13,6 @@
                     <th>Examiner</th>
                     <th>Examination Date</th>
                     <th>DOB Approved</th>
-
-
                 </tr>
             </thead>
             <tr ng-repeat="o in [{text:'Architectural',val:'Architectural'},{text:'Structural',val:'Structural'},{text:'Mechanical','val':'Mechanical'},{text:'Demo',val:'Demo'},{text:'Shoring & Underpinning',val:'ShoringUnderpinning'},{text:'Foundation',val:'Foundation'},{text:'Design',val:'Design'}, {text:'Sprinkler', val: 'Sprinkler'}]  track by $index">

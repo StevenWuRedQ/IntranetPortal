@@ -378,6 +378,7 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             scope.columns = [];
             scope.nameTable = [];   // record choosen files
             scope.currentFolder = '';
+            scope.showFolder = false;
 
             scope.loading = false;
             scope.folderEnable = scope.folderEnable == 'true' ? true : false;
@@ -428,10 +429,16 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             // utility functions
             scope.changeFolder = function (folderName) {
                 scope.currentFolder = folderName;
+                scope.showFolder = true;
             }
             scope.addFolder = function (folderName) {
                 scope.folders.push(folderName);
                 scope.currentFolder = folderName;
+                scope.showFolder = true;
+            }
+            scope.hideFolder = function () {
+                scope.currentFolder = ""
+                scope.showFolder = false;
             }
             scope.toggleNewFilePop = function () {
                 scope.NewFolderPop = !scope.NewFolderPop

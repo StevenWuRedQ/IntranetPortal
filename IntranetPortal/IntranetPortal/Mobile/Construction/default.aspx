@@ -9,7 +9,7 @@
             </div>
             <div class="form-group">
                 <label>Property Address</label>
-                <select class="form-control" ng-options="l.Id as l.propertyAddress for l in CaseList" ng-model="form.id" ng-change="onAddressChange()"></select>
+                <select class="form-control" ng-options="l.Id as l.propertyAddress for l in CaseList|orderBy: 'propertyAddress' " ng-model="form.id" ng-change="onAddressChange()"></select>
             </div>
             <div class="form-group">
                 <label>Access</label>

@@ -102,7 +102,7 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
         Assert.IsTrue(Not String.IsNullOrEmpty(ecourt.BBLE))
     End Sub
 
-    <TestMethod()>
+    <TestMethod(), Timeout(30)>
     Public Sub EmailConnectedTest()
         Dim serv = New Core.ParseEmailService("Portal.etrack@myidealprop.com", "ColorBlue1")
 

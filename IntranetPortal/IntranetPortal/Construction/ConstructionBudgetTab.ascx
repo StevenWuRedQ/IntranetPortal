@@ -30,7 +30,7 @@
             <td>
                 <input style="width: 60px; border: none" ng-model="d.contract" money-mask ng-change="update(d)" /></td>
             <td>
-                <input style="width: 60px; border: none" ng-model="d.toDay" money-mask ng-change="update(d)" readonly /></td>
+                <input style="width: 60px; border: none" ng-model="d.toDay" money-mask ng-change="update(d)" /></td>
             <td>
                 <input style="width: 60px; border: none" ng-model="d.paid" money-mask ng-change="update(d)" /></td>
             <td>
@@ -124,28 +124,19 @@
                     url: "/api/ConstructionCases/GenerateExcel",
                     data: data,
                 }).then(function (res) {
-                    /*
-                    _.each(updata, function (el, i) {
-                        el.toDay = parseFloat(el.toDay) ? (parseFloat(el.toDay)) : 0.0 + parseFloat(el.paid) ? parseFloat(el.paid) : 0.0;
+                    _.each(data.updata, function (el, i) {
+                        el.toDay = (parseFloat(el.toDay) ? parseFloat(el.toDay) : 0.0) + (parseFloat(el.paid) ? parseFloat(el.paid) : 0.0);
                         el.paid = 0.0;
-                    }); */
+                        $scope.updateBalance(el);
+                    });
+                    $scope.updateTotal();
                     console.log("Download start");
-                    STDownloadFile("/api/ConstructionCases/GetGenerateExcel", "budget.xlsx")
+                    STDownloadFile("/api/ConstructionCases/GetGenerateExcel", "budget.xlsx"+new Date().toLocaleDateString)
                    
                 })
             } else {
                 alert("No data select!");
-            }
-
-            _.each(data.updata, function (el, i) {
-                el.toDay = (parseFloat(el.toDay) ? parseFloat(el.toDay) : 0.0) + (parseFloat(el.paid) ? parseFloat(el.paid) : 0.0);
-                el.paid = 0.0;
-                $scope.updateBalance(el);
-            });
-
-            $scope.updateTotal();
-
-
+            }    
         }
         $scope.checkedAll = function () {
             if ($scope.checkall) {

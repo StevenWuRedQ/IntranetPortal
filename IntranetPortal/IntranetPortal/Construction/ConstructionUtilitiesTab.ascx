@@ -104,7 +104,7 @@
         <li class="clearfix" style="list-style: none"></li>
         <li class="ss_form_item_line">
             <label class="ss_form_input_title">Upload</label>
-            <pt-files file-bble="CSCase.BBLE" file-id="EnergyService-Upload{{$index}}" base-folder="EnergyService-Upload{{$index}}" file-model="floor.ConED.Upload"></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="EnergyService-Upload{{$index}}"  file-model="floor.ConED.Upload" folder-enable="true" base-folder="EnergyService-Upload{{$index}}"></pt-files>
         </li>
         <li class="clearfix" style="list-style: none"></li>
         <li class="ss_form_item_line">
@@ -198,7 +198,7 @@
             <li class="clearfix" style="list-style: none"></li>
             <li class="ss_form_item_line">
                 <label class="ss_form_input_title">Upload</label>
-                <pt-files file-bble="CSCase.BBLE" file-id="EnergyService-Upload{{$index}}" base-folder="EnergyService-Upload{{$index}}" file-model="floor.EnergyService.Upload"></pt-files>
+                <pt-files file-bble="CSCase.BBLE" file-id="EnergyService-Upload{{$index}}" base-folder="EnergyService-Upload{{$index}}" file-model="floor.EnergyService.Upload" folder-enable="true" base-folder="EnergyService-Upload{{$index}}"></pt-files>
             </li>
 
             <li class="clearfix" style="list-style: none"></li>
@@ -286,7 +286,7 @@
             <li class="clearfix" style="list-style: none"></li>
             <li class="ss_form_item_line">
                 <label class="ss_form_input_title">Upload</label>
-                <pt-files file-bble="CSCase.BBLE" file-id="EnergyService_Upload{{$index}}" base-folder="EnergyService_Upload{{$index}}" file-model="floor.NationalGrid.Upload"></pt-files>
+                <pt-files file-bble="CSCase.BBLE" file-id="EnergyService_Upload{{$index}}" base-folder="EnergyService_Upload{{$index}}" file-model="floor.NationalGrid.Upload" folder-enable="true" base-folder="EnergyService_Upload{{$index}}"></pt-files>
             </li>
 
             <li class="clearfix" style="list-style: none"></li>
@@ -396,7 +396,7 @@
         </ul>
         <div>
             <label class="ss_form_input_title">Upload Letter To DEP</label>
-            <pt-files file-bble="CSCase.BBLE" file-id="CSCase-Utilities-MissingMeter-Upload" base-folder="CSCase-Utilities-MissingMeter-Upload" file-model="CSCase.CSCase.Utilities.MissingMeter_Upload"></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="CSCase-Utilities-MissingMeter-Upload" file-model="CSCase.CSCase.Utilities.MissingMeter_Upload" folder-enable="true" base-folder="CSCase-Utilities-MissingMeter-Upload"></pt-files>
         </div>
         <div>
             <label class="ss_form_input_title">Notes</label>
@@ -505,7 +505,7 @@
         </ul>
         <div>
             <label class="ss_form_input_title">Upload</label>
-            <pt-files file-bble="CSCase.BBLE" file-id="CSCase-Utilities-InsuranceUpload" base-folder="CSCase-Utilities-InsuranceUpload" file-model="CSCase.CSCase.Utilities.Insurance_Upload"></pt-files>
+            <pt-files file-bble="CSCase.BBLE" file-id="CSCase-Utilities-InsuranceUpload" file-model="CSCase.CSCase.Utilities.Insurance_Upload" folder-enable="true" base-folder="CSCase-Utilities-InsuranceUpload"></pt-files>
         </div>
         <div class="ss_form_item">
             <label class="ss_form_input_title">Renewal Remind</label>

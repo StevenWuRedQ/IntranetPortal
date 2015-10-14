@@ -2,10 +2,11 @@
     <div class="pt-files">
         <div class="pt-files-header" ng-show="folderEnable">
             <div class="dropdown">
-                <a href="#" class="dropdown-toggle pt-files-drop-button" data-toggle="dropdown"><i class="fa fa-folder-open" />&nbsp;{{currentFolder?currentFolder:'FOLDERS'}}</a>
+                <a href="#" class="dropdown-toggle pt-files-drop-button" data-toggle="dropdown"><i class="fa fa-folder-open" />&nbsp;{{currentFolder?currentFolder:'FOLDERS'}}&nbsp</a>
+                <span class="badge badge-inverted small">{{fileModel.length}}</span>
                 <ul class="dropdown-menu">
                     <li>
-                        <a ng-click="changeFolder('')"><i class="fa fa-folder" />&nbsp;/</a>
+                        <a ng-click="changeFolder('')"><i class="fa fa-folder" />&nbsp;All Photos</a>
                     </li>
                     <li ng-repeat="folder in folders">
                         <a ng-click="changeFolder(folder)"><i class="fa fa-folder" />&nbsp;{{folder}}</a>
@@ -13,12 +14,15 @@
                     <li>
                         <a class="text-success" ng-click="toggleNewFilePop()"><i class="fa fa-plus" />&nbsp;ADD NEW FOLDER</a>
                     </li>
+                    <li>
+                        <a class="text-success" ng-click="hideFolder()"><i class="fa fa-ban"></i>&nbsp;Hide</a>
+                    </li>
                 </ul>
             </div>
         </div>
         <div ng-class="folderEnable?'ss_border':''">
             <div style="max-height: 200px; overflow: auto;">
-                <table class="table table-condensed">
+                <table class="table table-condensed" ng-show="showFolder==true">
                     <tr ng-show="fileModel.length>0">
                         <th>files</th>
                         <th ng-repeat="col in columns">{{col}}</th>
@@ -27,15 +31,15 @@
                     </tr>
                     <tr class="text-left" ng-repeat="file in fileModel |filter: {folder: currentFolder} track by $index">
                         <td>
-                            <img class="open_fancybox" ng-src="{{getThumb(file)}}" width="50" height="50" ng-click="fancyPreview(file)"/>
+                            <img class="open_fancybox" ng-src="{{getThumb(file)}}" width="50" height="50" ng-click="fancyPreview(file)" />
                             <a style="font-size:12px;font-weight:bold" ng-href="{{ptFileService.makePreviewUrl(file.path)}}" target="_blank">{{file.name?file.name:ptFileService.getFileName(file.path)}}</a>&nbsp;
                             <i class="fa fa fa-pencil icon_btn text-danger tooltip-examples" title="Modify file name" ng-click="modifyName(fileModel, $index)"></i>
                         </td>
                         <td ng-repeat="col in columns"><input class="form-control" type="text" ng-model="file[col]" /></td>
                         <td>{{file.uploadTime | date:'MM/dd/yyyy'}}</td>
                         <td>
-                            <i class="fa fa-remove icon_btn text-danger tooltip-examples" title="Delete" ng-click="ptCom.arrayRemove(fileModel, $index, true)" ></i>
-                            
+                            <i class="fa fa-remove icon_btn text-danger tooltip-examples" title="Delete" ng-click="ptCom.arrayRemove(fileModel, $index, true)"></i>
+
                         </td>
                     </tr>
                 </table>

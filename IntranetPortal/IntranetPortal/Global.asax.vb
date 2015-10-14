@@ -49,7 +49,6 @@ Public Class Global_asax
 
     Sub Application_BeginRequest(ByVal sender As Object, ByVal e As EventArgs)
         'Debug.WriteLine("BeginRequest:" & DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"))
-
     End Sub
 
     Public Sub RefreshUserTime(sessionId As Integer)

@@ -59,7 +59,7 @@
                             <td></td>
                             <td colspan="4">
                                 <label class="ss_form_input_title">Upload Objections</label>
-                                <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Roughing_Objection" base-folder="Signoffs_Roughing_Objection" file-model="CSCase.CSCase.Signoffs.Roughing_Objection"></pt-files>
+                                <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Roughing_Objection" file-model="CSCase.CSCase.Signoffs.Roughing_Objection" folder-enable="true" base-folder="Signoffs_Roughing_Objection"></pt-files>
                             </td>
                         </tr>
                         <tr>
@@ -82,7 +82,7 @@
                             <td></td>
                             <td colspan="4">
                                 <label class="ss_form_input_title">Upload Objections</label>
-                                <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Gas_Objection" base-folder="Signoffs_Gas_Objection" file-model="CSCase.CSCase.Signoffs.Gas_Objection"></pt-files>
+                                <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Gas_Objection" file-model="CSCase.CSCase.Signoffs.Gas_Objection" folder-enable="true"  base-folder="Signoffs_Gas_Objection"></pt-files>
                             </td>
                         </tr>
                         <tr>
@@ -105,7 +105,7 @@
                             <td></td>
                             <td colspan="4">
                                 <label class="ss_form_input_title">Upload Objections</label>
-                                <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Hydrant_Objection" base-folder="Signoffs_Hydrant_Objection" file-model="CSCase.CSCase.Signoffs.Hydrant_Objection"></pt-files>
+                                <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Hydrant_Objection" file-model="CSCase.CSCase.Signoffs.Hydrant_Objection" folder-enable="true" base-folder="Signoffs_Hydrant_Objection"></pt-files>
                             </td>
                         </tr>
                         <tr>
@@ -245,7 +245,7 @@
 
                     <div>
                         <label class="ss_form_input_title">Objections Upload</label>
-                        <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Electrical_Objections_Upload" base-folder="Signoffs_Electrical_Objections_Upload" file-model="CSCase.CSCase.Signoffs.Electrical_Objections_Upload"></pt-files>
+                        <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Electrical_Objections_Upload" file-model="CSCase.CSCase.Signoffs.Electrical_Objections_Upload" folder-enable="true" base-folder="Signoffs_Electrical_Objections_Upload"></pt-files>
                     </div>
 
                     <span class="ss_form_item">
@@ -304,15 +304,15 @@
                     <label class="ss_form_input_title">Mechanical Permit</label>
                     <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Permit" file-model="CSCase.CSCase.Signoffs.Construction_MechanicalPermit"></pt-file>
                 </li>
-                                <li class="ss_form_item">
+                <li class="ss_form_item">
                     <label class="ss_form_input_title">Demolition</label>
                     <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Demolition" file-model="CSCase.CSCase.Signoffs.Construction_Demolition"></pt-file>
                 </li>
-                                <li class="ss_form_item">
+                <li class="ss_form_item">
                     <label class="ss_form_input_title">Sidewalk</label>
                     <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Sidewalk" file-model="CSCase.CSCase.Signoffs.Construction_Sidewalk"></pt-file>
                 </li>
-                                <li class="ss_form_item">
+                <li class="ss_form_item">
                     <label class="ss_form_input_title">Shed</label>
                     <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Shed" file-model="CSCase.CSCase.Signoffs.Construction_Shed"></pt-file>
                 </li>
@@ -327,13 +327,13 @@
             </ul>
             <div>
                 <label class="ss_form_input_title">Construction Report</label>
-                <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Report" base-folder="Signoffs_Construction_Report" file-model="CSCase.CSCase.Signoffs.Construction_Report"></pt-files>
+                <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Report" file-model="CSCase.CSCase.Signoffs.Construction_Report" folder-enable="true"  base-folder="Signoffs_Construction_Report"></pt-files>
             </div>
 
 
             <div>
                 <label class="ss_form_input_title">Objections</label>
-                <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Objecteions" base-folder="Signoffs_Construction_Objecteions" file-model="CSCase.CSCase.Signoffs.Construction_Objecteions"></pt-files>
+                <pt-files file-bble="CSCase.BBLE" file-id="Signoffs_Construction_Objecteions" file-model="CSCase.CSCase.Signoffs.Construction_Objecteions" folder-enable="true" base-folder="Signoffs_Construction_Objecteions"></pt-files>
             </div>
 
 

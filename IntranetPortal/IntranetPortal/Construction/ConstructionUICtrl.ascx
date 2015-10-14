@@ -505,7 +505,7 @@
                                         if (data.ECP_TotalViolation) $scope.CSCase.CSCase.Violations.ECP_TotalViolation = data.ECP_TotalViolation;
                                         if (data.ECP_TotalOpenViolations) $scope.CSCase.CSCase.Violations.ECP_TotalOpenViolations = data.ECP_TotalOpenViolations;
                                         if (data.violations) {
-                                            $scope.CSCase.CSCase.Violations.ECBViolations = _.filter(data.violations, function (el, i) { return el.DOBViolationStatus.startsWith("OPEN") });
+                                            $scope.CSCase.CSCase.Violations.ECBViolations = _.filter(data.violations, function (el, i) { return el.DOBViolationStatus.slice(0,4) == "OPEN" });
                                         }
                                     })
                                 }
@@ -556,7 +556,7 @@
             $(".intakeCheck").each(function (idx) {
                 var model = $(this).attr('ng-model') || $(this).attr('ss-model') || $(this).attr('file-model') || $(this).attr('model');
                 if (model) {
-                    if (model.startsWith("floor")) {
+                    if (model.slice(0,4) == "floor") {
                         var test = _.has($(this).scope().floor, model.split(".").splice(1).join('.'));
                         if (!test) {
                             if (callback) callback($(this))
