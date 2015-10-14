@@ -40,6 +40,29 @@ Partial Public Class CheckingComplain
         End Using
     End Function
 
+
+    'Public Shared Function GetResultFromServices2(Optional bble As String = "") As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
+
+    '    Using client As New DataAPI.WCFMacrosClient
+    '        Try
+    '            Dim result = client.Get_DBO_Complaints_Complete(bble, String.IsNullOrEmpty(bble))
+
+    '            If result.Has_Disposition_History Then
+    '                Dim history = result.DOB_Complaint_Disposition_History
+    '            End If
+
+    '            Return result.DOB_Complaint
+    '        Catch ex As Exception
+    '            Core.SystemLog.LogError("Error in GetComplainsResult", ex, bble, "portal", bble)
+    '            Core.SystemLog.Log("Error in GetComplainsResult", ex.ToJsonString, SystemLog.LogCategory.Error, bble, "portal")
+
+    '            Return {}
+    '        End Try
+    '    End Using
+
+    'End Function
+
+
     Public Shared Function GetResultFromServices(Optional bble As String = "") As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
 
         Using client As New DataAPI.WCFMacrosClient
@@ -169,6 +192,7 @@ Partial Public Class CheckingComplain
         If res IsNot Nothing Then
             Try
                 result = JsonConvert.DeserializeObject(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result())(res.Complaints_List.ToJsonString)
+
             Catch ex As Exception
                 Core.SystemLog.LogError("Error on Deserialize Complaints List", ex, jsonResult, Nothing, BBLE)
             End Try

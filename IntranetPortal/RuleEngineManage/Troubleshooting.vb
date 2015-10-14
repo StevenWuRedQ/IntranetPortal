@@ -938,4 +938,15 @@ Public Class Troubleshooting
         Dim cn = New IntranetPortal.RulesEngine.ConstructionNotifyRule
         cn.NotifyHPDRegExpired()
     End Sub
+
+    Private Sub btnRefreshComplaints_Click(sender As Object, e As EventArgs) Handles btnRefreshComplaints.Click
+        Dim bble = txtBBLE.Text
+
+        If Not String.IsNullOrEmpty(bble) Then
+
+            Dim complaints = CheckingComplain.Instance(bble)
+            complaints.RefreshComplains("RuleEngine")
+        End If
+    End Sub
+
 End Class

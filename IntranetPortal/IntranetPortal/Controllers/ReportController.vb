@@ -17,6 +17,7 @@ Namespace Controllers
 
             Try
                 Dim qb As New Core.QueryBuilder
+
                 Dim sql = qb.BuildSelectQuery(queryString, "ShortSaleCases")
                 Return Ok(sql)
             Catch ex As Exception
@@ -33,8 +34,37 @@ Namespace Controllers
 
             Try
                 Dim qb As New Core.QueryBuilder
+
+                'add appid into sql search
+                Dim jsAppId = <string>
+                                   {
+                                       "name": "AppId",
+                                       "table": "ShortSaleCases",
+                                       "column": "AppId",
+                                       "type": "number",
+                                       "hide":true,
+                                        "filters":[
+                                                             {
+                                                                "criteria": "2",
+                                                                "value": "",
+                                                                "query": "",
+                                                                "$$hashKey": "object:386",
+                                                                "WhereTerm": "CreateCompare",
+                                                                "CompareOperator": "Equal",
+                                                                "value1": ""                                                                
+                                                             }
+                                                   ]
+                                    }
+                              </string>
+
+                Dim jsAppObj = JObject.Parse(jsAppId)
+                jsAppObj("filters")(0)("value1") = Employee.CurrentAppId
+                queryString.Last.AddAfterSelf(jsAppObj)
+
+
                 Dim dt = qb.LoadReportData(queryString, "ShortSaleCases")
                 Dim sql = qb.BuildSelectQuery(queryString, "ShortSaleCases")
+
                 Return Ok({dt, sql})
             Catch ex As Exception
                 Throw

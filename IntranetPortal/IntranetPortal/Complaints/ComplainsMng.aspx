@@ -333,7 +333,6 @@
                 <script id="gridCellHistory" type="text/html">
                     <i class="fa fa-history icon_btn tooltip-examples grid_buttons" style="margin-left: 10px; font-size: 19px" title="View History Details" onclick='ShowComplaintsHistory("{%= value %}")'></i>
                 </script>
-
                 <script id="gridComplaitsDetail2" type="text/html">
                     <div style="align-content: center">
                         <h3 class="mainhdg">Overview for Complaint #:{%= data.ComplaintNumber%} = {%= data.Status%}</h3>

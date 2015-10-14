@@ -132,6 +132,34 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SP_DOB_Complaints_By_BBLE_Result" nillable="true" type="tns:SP_DOB_Complaints_By_BBLE_Result" />
+  <xs:complexType name="DOB_Complaints_Complete_Response">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DOB_Complaint" nillable="true" type="tns:ArrayOfSP_DOB_Complaints_By_BBLE_Result" />
+      <xs:element minOccurs="0" name="DOB_Complaint_Disposition_History" nillable="true" type="tns:ArrayOfSP_DOB_Complaints_Disposition_History_By_BBLE_Result" />
+      <xs:element minOccurs="0" name="Has_Disposition_History" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DOB_Complaints_Complete_Response" nillable="true" type="tns:DOB_Complaints_Complete_Response" />
+  <xs:complexType name="ArrayOfSP_DOB_Complaints_Disposition_History_By_BBLE_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SP_DOB_Complaints_Disposition_History_By_BBLE_Result" nillable="true" type="tns:SP_DOB_Complaints_Disposition_History_By_BBLE_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSP_DOB_Complaints_Disposition_History_By_BBLE_Result" nillable="true" type="tns:ArrayOfSP_DOB_Complaints_Disposition_History_By_BBLE_Result" />
+  <xs:complexType name="SP_DOB_Complaints_Disposition_History_By_BBLE_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ComplaintNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Disp_Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Disp_Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Disp_Num" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Disposition" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Inspection_By" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Inspection_Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastUpdated" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SP_DOB_Complaints_Disposition_History_By_BBLE_Result" nillable="true" type="tns:SP_DOB_Complaints_Disposition_History_By_BBLE_Result" />
   <xs:complexType name="ArrayOfSP_DOB_Complaints_History_By_BBLE_Result">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SP_DOB_Complaints_History_By_BBLE_Result" nillable="true" type="tns:SP_DOB_Complaints_History_By_BBLE_Result" />
@@ -174,11 +202,13 @@
   <xs:complexType name="ADT_In">
     <xs:sequence>
       <xs:element minOccurs="0" name="APIorderNum" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Arm" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ArmAway" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ArmStay" type="xs:boolean" />
       <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Disarm" type="xs:boolean" />
       <xs:element minOccurs="0" name="GetAdtPropList" type="xs:boolean" />
       <xs:element minOccurs="0" name="SecurityCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SignOut" type="xs:boolean" />
       <xs:element minOccurs="0" name="ThreadID" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
@@ -575,6 +605,7 @@
   <xs:element name="ArrayOfLisPen" nillable="true" type="tns:ArrayOfLisPen" />
   <xs:complexType name="LisPen">
     <xs:sequence>
+      <xs:element minOccurs="0" name="APN_Suff" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Active" nillable="true" type="xs:boolean" />
       <xs:element minOccurs="0" name="Attorney" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Attorney_Phone" nillable="true" type="xs:string" />
@@ -584,15 +615,18 @@
       <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CountyNum" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Defendant" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="District" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Docket_Number" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FileDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Interest_Rate" nillable="true" type="xs:double" />
       <xs:element minOccurs="0" name="Lot" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Lot_Suffix" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Monthly_Payment" nillable="true" type="xs:double" />
       <xs:element minOccurs="0" name="Mortgage_Date" type="xs:dateTime" />
       <xs:element minOccurs="0" name="NEIGH_NAME" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Number" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Original_Mortgage" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="PARID_Nass" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Plaintiff" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ST_Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Section" nillable="true" type="xs:string" />

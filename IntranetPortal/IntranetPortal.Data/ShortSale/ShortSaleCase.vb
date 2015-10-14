@@ -804,8 +804,6 @@ Partial Public Class ShortSaleCase
                 End If
             End If
 
-
-
             If _propInfo IsNot Nothing Then
                 _propInfo.Save()
             End If

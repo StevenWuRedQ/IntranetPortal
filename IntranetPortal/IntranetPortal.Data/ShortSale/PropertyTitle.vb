@@ -33,11 +33,11 @@
     Public Sub Save()
         Using context As New ShortSaleEntities
             'context.ShortSaleCases.Attach(Me)
-            If TitleId = 0 Then
+            If TitleId = 0 AndAlso Not context.PropertyTitles.Any(Function(t) t.CaseId = CaseId AndAlso t.Type = Type) Then
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
-                Dim obj = context.PropertyTitles.Find(TitleId)
+                Dim obj = context.PropertyTitles.Where(Function(t) t.CaseId = CaseId AndAlso t.Type = Type).FirstOrDefault
                 obj = ShortSaleUtility.SaveChangesObj(obj, Me)
             End If
 

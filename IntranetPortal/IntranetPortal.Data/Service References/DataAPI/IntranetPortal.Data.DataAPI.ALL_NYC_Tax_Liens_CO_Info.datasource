@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="ALL_NYC_Tax_Liens_CO_Info" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>IntranetPortal.Data.DataAPI.ALL_NYC_Tax_Liens_CO_Info, Service References.DataAPI.Reference.vb, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
+   <TypeInfo>IntranetPortal.Data.DataAPI.ALL_NYC_Tax_Liens_CO_Info, Service References.DataAPI.Reference.vb.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

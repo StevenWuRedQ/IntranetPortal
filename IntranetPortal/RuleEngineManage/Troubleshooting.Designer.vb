@@ -50,7 +50,6 @@ Partial Class Troubleshooting
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtBBLE = New System.Windows.Forms.TextBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage10 = New System.Windows.Forms.TabPage()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Button11 = New System.Windows.Forms.Button()
@@ -113,6 +112,7 @@ Partial Class Troubleshooting
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnComplaintsRefresh = New System.Windows.Forms.Button()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.TestRegExp = New System.Windows.Forms.Button()
         Me.Organize = New System.Windows.Forms.Button()
         Me.SpotCheckTest = New System.Windows.Forms.Button()
         Me.TestHPD = New System.Windows.Forms.Button()
@@ -123,12 +123,13 @@ Partial Class Troubleshooting
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Button15 = New System.Windows.Forms.Button()
-        Me.Button20 = New System.Windows.Forms.Button()
+        Me.TabPage10 = New System.Windows.Forms.TabPage()
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
         Me.btnGeneratTemplate = New System.Windows.Forms.Button()
         Me.txtReportTables = New System.Windows.Forms.TextBox()
         Me.txtTemplateResult = New System.Windows.Forms.TextBox()
-        Me.TestRegExp = New System.Windows.Forms.Button()
+        Me.Button20 = New System.Windows.Forms.Button()
+        Me.btnRefreshComplaints = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -150,6 +151,7 @@ Partial Class Troubleshooting
         Me.TabPage7.SuspendLayout()
         Me.TabPage8.SuspendLayout()
         Me.TabPage9.SuspendLayout()
+        Me.TabPage10.SuspendLayout()
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer2.Panel1.SuspendLayout()
         Me.SplitContainer2.Panel2.SuspendLayout()
@@ -407,17 +409,6 @@ Partial Class Troubleshooting
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(750, 355)
         Me.TabControl1.TabIndex = 26
-        '
-        'TabPage10
-        '
-        Me.TabPage10.Controls.Add(Me.SplitContainer2)
-        Me.TabPage10.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage10.Name = "TabPage10"
-        Me.TabPage10.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage10.Size = New System.Drawing.Size(742, 329)
-        Me.TabPage10.TabIndex = 10
-        Me.TabPage10.Text = "Report"
-        Me.TabPage10.UseVisualStyleBackColor = True
         '
         'TabPage1
         '
@@ -953,6 +944,7 @@ Partial Class Troubleshooting
         '
         'TabPage8
         '
+        Me.TabPage8.Controls.Add(Me.btnRefreshComplaints)
         Me.TabPage8.Controls.Add(Me.txtNotifyNames)
         Me.TabPage8.Controls.Add(Me.btnNotifyAll)
         Me.TabPage8.Controls.Add(Me.btnNotify)
@@ -1049,6 +1041,15 @@ Partial Class Troubleshooting
         Me.TabPage9.Text = "Construction"
         Me.TabPage9.UseVisualStyleBackColor = True
         '
+        'TestRegExp
+        '
+        Me.TestRegExp.Location = New System.Drawing.Point(464, 43)
+        Me.TestRegExp.Name = "TestRegExp"
+        Me.TestRegExp.Size = New System.Drawing.Size(75, 23)
+        Me.TestRegExp.TabIndex = 10
+        Me.TestRegExp.Text = "TestRegExpNotify"
+        Me.TestRegExp.UseVisualStyleBackColor = True
+        '
         'Organize
         '
         Me.Organize.Location = New System.Drawing.Point(363, 43)
@@ -1136,14 +1137,16 @@ Partial Class Troubleshooting
         Me.Button15.Text = "UpLoad Activity"
         Me.Button15.UseVisualStyleBackColor = True
         '
-        'Button20
+        'TabPage10
         '
-        Me.Button20.Location = New System.Drawing.Point(261, 44)
-        Me.Button20.Name = "Button20"
-        Me.Button20.Size = New System.Drawing.Size(75, 23)
-        Me.Button20.TabIndex = 8
-        Me.Button20.Text = "Button20"
-        Me.Button20.UseVisualStyleBackColor = True
+        Me.TabPage10.Controls.Add(Me.SplitContainer2)
+        Me.TabPage10.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage10.Name = "TabPage10"
+        Me.TabPage10.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage10.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage10.TabIndex = 10
+        Me.TabPage10.Text = "Report"
+        Me.TabPage10.UseVisualStyleBackColor = True
         '
         'SplitContainer2
         '
@@ -1187,16 +1190,26 @@ Partial Class Troubleshooting
         Me.txtTemplateResult.Location = New System.Drawing.Point(0, 0)
         Me.txtTemplateResult.Multiline = True
         Me.txtTemplateResult.Name = "txtTemplateResult"
-
+        Me.txtTemplateResult.Size = New System.Drawing.Size(487, 323)
+        Me.txtTemplateResult.TabIndex = 0
         '
-        'TestRegExp
+        'Button20
         '
-        Me.TestRegExp.Location = New System.Drawing.Point(464, 43)
-        Me.TestRegExp.Name = "TestRegExp"
-        Me.TestRegExp.Size = New System.Drawing.Size(75, 23)
-        Me.TestRegExp.TabIndex = 10
-        Me.TestRegExp.Text = "TestRegExpNotify"
-        Me.TestRegExp.UseVisualStyleBackColor = True
+        Me.Button20.Location = New System.Drawing.Point(261, 44)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(75, 23)
+        Me.Button20.TabIndex = 8
+        Me.Button20.Text = "Button20"
+        Me.Button20.UseVisualStyleBackColor = True
+        '
+        'btnRefreshComplaints
+        '
+        Me.btnRefreshComplaints.Location = New System.Drawing.Point(262, 15)
+        Me.btnRefreshComplaints.Name = "btnRefreshComplaints"
+        Me.btnRefreshComplaints.Size = New System.Drawing.Size(108, 29)
+        Me.btnRefreshComplaints.TabIndex = 8
+        Me.btnRefreshComplaints.Text = "Refresh Complaints"
+        Me.btnRefreshComplaints.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1237,6 +1250,7 @@ Partial Class Troubleshooting
         Me.TabPage8.PerformLayout()
         Me.TabPage9.ResumeLayout(False)
         Me.TabPage9.PerformLayout()
+        Me.TabPage10.ResumeLayout(False)
         Me.SplitContainer2.Panel1.ResumeLayout(False)
         Me.SplitContainer2.Panel1.PerformLayout()
         Me.SplitContainer2.Panel2.ResumeLayout(False)
@@ -1353,4 +1367,5 @@ Partial Class Troubleshooting
     Friend WithEvents Organize As Button
     Friend WithEvents TestRegExp As Button
     Friend WithEvents btnInitChecklist As Button
+    Friend WithEvents btnRefreshComplaints As Button
 End Class
