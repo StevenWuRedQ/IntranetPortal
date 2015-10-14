@@ -65,9 +65,13 @@
     </div>
     <script>
         angular.module('PortalMapp').controller("SpotCheckCtrl", function ($scope, $http, $filter) {
-            $scope.form = {};
+            $scope.form = {
+                date: new Date().toLocaleDateString()
+            };
             $scope.reload = function () {
-                $scope.form = {};
+                $scope.form = {
+                    date: new Date().toLocaleDateString()
+                };
                 $scope.getCaseList();
             }
             $scope.init = function () {
@@ -85,7 +89,12 @@
                 .then(function success(res) {
                     $scope.form = res.data;
                     $scope.form.id = addressId;
-                    $scope.form.date = $filter('date')($scope.form.date, 'MM/dd/yyyy')
+                    if ($scope.form.date) {
+                        $scope.form.date = $filter('date')($scope.form.date, 'MM/dd/yyyy');
+                    } else {
+                        $scope.form.date = new Date().toLocaleDateString();
+                    }
+                    
                 }, function error(res) {
                     alert("load data fails");
                 })
