@@ -159,7 +159,7 @@ FYI - The DOB Complaint, for the property located at: (<%= GetMailDataItem("Addr
 
 <% If item.Complaints_Disposition_History IsNot Nothing AndAlso item.Complaints_Disposition_History.Count > 0 %>
 
-<table border="0" cellpadding="1" cellspacing="0" width="750">
+<%--<table border="0" cellpadding="1" cellspacing="0" width="750">
     <tbody>
         <tr>
             <td class="mainhdg">Complaint Disposition History</td>
@@ -260,7 +260,7 @@ FYI - The DOB Complaint, for the property located at: (<%= GetMailDataItem("Addr
 
 
     </tbody>
-</table>
+</table>--%>
 
 <% End If %>
 
