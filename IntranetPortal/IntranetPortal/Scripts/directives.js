@@ -393,9 +393,8 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             }
             scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined, '')
 
-            // reg events            
-            scope.$watch('fileModel', function () {
-                scope.currentFolder = '';
+            scope.$watch('fileBble', function (newV, oldV) {
+                scope.currentFolder =  '';
                 scope.baseFolder = scope.baseFolder ? scope.baseFolder : '';
                 scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined, '')
             })
@@ -523,15 +522,6 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
                             scope.countCallback(len);
                         } else {
                             var targetElement = _.filter(scope.result, function (el) { return el.name == targetName })[0];
-                            if (scope.count == 0) {
-                                targetElement.error = "Up1";
-                            }
-                            if (scope.count == 1) {
-                                targetElement.error = "Up2";
-                            }
-                            if (scope.count == 2) {
-                                targetElement.error = "down";
-                            }
                             if (targetElement) {
                                 targetElement.path = data[0];
                                 if (data[1]) targetElement.thumb = data[1];
