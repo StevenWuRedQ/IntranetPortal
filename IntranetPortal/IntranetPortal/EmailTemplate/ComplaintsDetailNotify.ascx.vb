@@ -14,6 +14,7 @@
         Dim userName = params("UserName")
 
         complaint = Data.CheckingComplain.Instance(bble)
+
     End Sub
 
 End Class

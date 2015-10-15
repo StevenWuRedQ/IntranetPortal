@@ -700,7 +700,7 @@
                     <PropertiesTextEdit EncodeHtml="False"></PropertiesTextEdit>
                     <EditCellStyle Wrap="False"></EditCellStyle>
                     <DataItemTemplate>
-                        <asp:Panel runat="server" ID="pnlAppointment" Visible='<%# Eval("Category").ToString.StartsWith("Appointment")%>'>
+                        <asp:Panel runat="server" ID="pnlAppointment" Visible="false">
                             <div class="log_item_col1" style="width: auto">
                                 <div class="font_black color_balck clearfix">
                                     <table style="width: 100%">
@@ -887,7 +887,7 @@
                             </table>
                         </asp:Panel>
 
-                        <asp:Literal runat="server" Visible='<%# Not ((Eval("Category").ToString.StartsWith("Task") orelse Eval("ActionType") = IntranetPortal.LeadsActivityLog.EnumActionType.SetAsTask) Or Eval("Category").ToString.StartsWith("Appointment") Or Eval("Category").ToString.StartsWith("Approval") Or Eval("Category").ToString.StartsWith("DoorknockTask") Or Eval("Category").ToString.StartsWith("RecycleTask"))%>' Text='<%# String.Format("<div class=""divComments"">{0}</div>", Eval("Comments"))%>'>
+                        <asp:Literal runat="server" Visible='<%# Not ((Eval("Category").ToString.StartsWith("Task") OrElse Eval("ActionType") = IntranetPortal.LeadsActivityLog.EnumActionType.SetAsTask) Or (Eval("Category").ToString.StartsWith("Appointment") OrElse Eval("ActionType") = IntranetPortal.LeadsActivityLog.EnumActionType.Appointment) Or Eval("Category").ToString.StartsWith("Approval") Or Eval("Category").ToString.StartsWith("DoorknockTask") Or Eval("Category").ToString.StartsWith("RecycleTask"))%>' Text='<%# String.Format("<div class=""divComments"">{0}</div>", Eval("Comments"))%>'>
                         </asp:Literal>
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>

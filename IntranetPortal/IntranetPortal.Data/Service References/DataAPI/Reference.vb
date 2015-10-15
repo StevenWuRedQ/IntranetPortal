@@ -653,6 +653,9 @@ Namespace DataAPI
         Private ComplaintNumberField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Complaints_Disposition_HistoryField() As DataAPI.DOB_Complaints_Disposition_History
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private DOBViolationField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
@@ -808,6 +811,16 @@ Namespace DataAPI
         End Property
         
         <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Complaints_Disposition_History() As DataAPI.DOB_Complaints_Disposition_History()
+            Get
+                Return Me.Complaints_Disposition_HistoryField
+            End Get
+            Set
+                Me.Complaints_Disposition_HistoryField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
         Public Property DOBViolation() As String
             Get
                 Return Me.DOBViolationField
@@ -954,6 +967,145 @@ Namespace DataAPI
             End Get
             Set
                 Me.ZipField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="DOB_Complaints_Disposition_History", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class DOB_Complaints_Disposition_History
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ComplaintNumberField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Disp_CodeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Disp_DateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Disp_NumField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DispositionField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Inspection_ByField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Inspection_DateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LastUpdatedField As System.Nullable(Of Date)
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ComplaintNumber() As String
+            Get
+                Return Me.ComplaintNumberField
+            End Get
+            Set
+                Me.ComplaintNumberField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Disp_Code() As String
+            Get
+                Return Me.Disp_CodeField
+            End Get
+            Set
+                Me.Disp_CodeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Disp_Date() As System.Nullable(Of Date)
+            Get
+                Return Me.Disp_DateField
+            End Get
+            Set
+                Me.Disp_DateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Disp_Num() As String
+            Get
+                Return Me.Disp_NumField
+            End Get
+            Set
+                Me.Disp_NumField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Disposition() As String
+            Get
+                Return Me.DispositionField
+            End Get
+            Set
+                Me.DispositionField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Inspection_By() As String
+            Get
+                Return Me.Inspection_ByField
+            End Get
+            Set
+                Me.Inspection_ByField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Inspection_Date() As System.Nullable(Of Date)
+            Get
+                Return Me.Inspection_DateField
+            End Get
+            Set
+                Me.Inspection_DateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LastUpdated() As System.Nullable(Of Date)
+            Get
+                Return Me.LastUpdatedField
+            End Get
+            Set
+                Me.LastUpdatedField = value
             End Set
         End Property
     End Class

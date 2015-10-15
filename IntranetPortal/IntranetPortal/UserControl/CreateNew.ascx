@@ -244,7 +244,7 @@
                                                                  return;
                                                             }
                                                           popupCreateNew.PerformCallback('Add|' + txtNewBBLEClient.GetText());                                                                                                                                                                                                                                      
-                                                          popupCreateNew.Hide();
+                                                          
                                                         }" />
                                             </dx:ASPxButton>
                                             <dx:ASPxButton RenderMode="Button" Text="Cancel" CssClass="rand-button rand-button-gray" AutoPostBack="false" runat="server">

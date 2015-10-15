@@ -109,11 +109,11 @@ Public Class CreateNew
         If e.Parameter.StartsWith("Add") Then
 
             Dim bble = e.Parameter.Split("|")(1)
-
-            RaiseEvent CaseCreatedEvent(bble)
-
+            Try
+                RaiseEvent CaseCreatedEvent(bble)
+            Catch ex As Exception
+                Throw New CallbackException(ex.Message)
+            End Try
         End If
-
-
     End Sub
 End Class

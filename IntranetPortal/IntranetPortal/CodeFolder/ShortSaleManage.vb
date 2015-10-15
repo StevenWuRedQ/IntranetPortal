@@ -110,7 +110,7 @@ Public Class ShortSaleManage
                 'NewCaseWithWF(bble, createBy)
             End If
         Else
-
+            Throw New Exception("This address alread in system. please check.")
         End If
     End Sub
 

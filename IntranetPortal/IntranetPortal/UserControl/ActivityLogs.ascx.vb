@@ -803,7 +803,7 @@ Public Class ActivityLogs
             Dim userAppoint = UserAppointment.GetAppointmentBylogID(logId)
 
             Dim pnlAppointment = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "pnlAppointment"), Panel)
-
+            pnlAppointment.Visible = True
             If userAppoint IsNot Nothing Then
                 'Bind Data
                 Dim lblOwnerName = TryCast(pnlAppointment.FindControl("lblOwnerName"), Label)

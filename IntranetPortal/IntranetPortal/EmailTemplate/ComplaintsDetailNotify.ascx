@@ -157,8 +157,112 @@ FYI - The DOB Complaint, for the property located at: (<%= GetMailDataItem("Addr
     </tbody>
 </table>
 
+<% If item.Complaints_Disposition_History IsNot Nothing AndAlso item.Complaints_Disposition_History.Count > 0 %>
+
+<table border="0" cellpadding="1" cellspacing="0" width="750">
+    <tbody>
+        <tr>
+            <td class="mainhdg">Complaint Disposition History</td>
+        </tr>
+    </tbody>
+</table>
+<br />
+<table border="0" cellpadding="2" cellspacing="0" width="750">
+    <!--- Nested Table for Content Area --->
+    <tbody>    
+        <tr valign="middle">
+            <td class="centercolhdg">#</td>
+            <td class="centercolhdg" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Disposition</td>
+            <td class="centercolhdg" rowspan="2">Disposition</td>
+            <td class="centercolhdg">Inspection</td>
+            <td class="centercolhdg" rowspan="2">Date</td>
+        </tr>
+        <tr>
+            <td class="centercolhdg"></td>
+            <td class="centercolhdg">Date</td>
+            <td class="centercolhdg">Code</td>
+            <td class="centercolhdg">By</td>
+        </tr>
+        <tr>
+            <td colspan="6"></td>
+        </tr>
+
+        <tr class="inlineform" valign="top">
+            <!--- ROW For Data --->
+            <td class="content">3&nbsp;</td>
+            <td class="content">&nbsp;10/18/2012&nbsp;</td>
+            <!--- Cell for Disp Date --->
+            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;C2&nbsp;</td>
+            <td class="content">INSPECTOR UNABLE TO GAIN ACCESS - 2ND ATTEMPT&nbsp;</td>
+
+            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2222</td>
+            <!--- Cell for Inspection By --->
+
+            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10/17/2012&nbsp;</td>
+        </tr>
+
+        <tr valign="top">
+            <td class="content">&nbsp;</td>
+            <td class="content">&nbsp;</td>
+            <td class="content">&nbsp;</td>
+            <td class="content">NO ACCESS TO BUILDING. LS4 POSTED</td>
+            <td class="content" colspan="2"></td>
+        </tr>
+
+        <tr class="inlineform" valign="top">
+            <!--- ROW For Data --->
+            <td class="content">2&nbsp;</td>
+            <td class="content">&nbsp;10/18/2012&nbsp;</td>
+            <!--- Cell for Disp Date --->
+            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;C1&nbsp;</td>
+            <td class="content">INSPECTOR UNABLE TO GAIN ACCESS - 1ST ATTEMPT&nbsp;</td>
+
+            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2222</td>
+            <!--- Cell for Inspection By --->
+
+            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10/17/2012&nbsp;</td>
+        </tr>
+
+        <tr valign="top">
+            <td class="content">&nbsp;</td>
+            <td class="content">&nbsp;</td>
+            <td class="content">&nbsp;</td>
+            <td class="content">NO ACCESS LS4 POSTED</td>
+            <td class="content" colspan="2"></td>
+        </tr>
 
 
+
+
+        <tr class="inlineform" valign="top">
+            <!--- ROW For Data --->
+            <td class="content">1&nbsp;</td>
+            <td class="content">&nbsp;10/17/2012&nbsp;</td>
+            <!--- Cell for Disp Date --->
+            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;D5&nbsp;</td>
+            <td class="content">COMPLAINT ASSIGNED TO EMERGENCY RESPONSE TEAM&nbsp;</td>
+
+            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2374</td>
+            <!--- Cell for Inspection By --->
+
+            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10/17/2012&nbsp;</td>
+        </tr>
+
+        <tr valign="top">
+            <td class="content">&nbsp;</td>
+            <td class="content">&nbsp;</td>
+            <td class="content">&nbsp;</td>
+            <td class="content">REFER TO BORO ERT AS PER A. CHIEF OF BORO ERT</td>
+            <td class="content" colspan="2"></td>
+        </tr>
+
+
+
+
+    </tbody>
+</table>
+
+<% End If %>
 
 <%--<table class="table" style="width: 100%; border: 1px solid #808080; line-height: 25px; white-space: normal; color: black">
     <tr>

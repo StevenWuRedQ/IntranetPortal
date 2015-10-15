@@ -10,8 +10,8 @@ Public Class OnlineUser
     Public Property RefreshTime As DateTime
     Public Property SessionID As String
 
-    Public Const LoginTimeout As Integer = 120
-    Public Const RefreshTimeout As Integer = 20
+    Public Const LoginTimeout As Integer = 240
+    Public Const RefreshTimeout As Integer = 40
 
     Public Shared ReadOnly Property OnlineUsers As List(Of OnlineUser)
         Get
@@ -26,7 +26,7 @@ Public Class OnlineUser
         Get
             Dim user = OnlineUsers.Where(Function(a) a.UserName = userName).FirstOrDefault
             If user Is Nothing Then
-                Return False
+                Return True
             Else
                 Return user.RefreshTime.AddMinutes(LoginTimeout) > DateTime.Now
             End If

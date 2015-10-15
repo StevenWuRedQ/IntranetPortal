@@ -77,6 +77,7 @@
       <xs:element minOccurs="0" name="CategoryCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Comments" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ComplaintNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Complaints_Disposition_History" nillable="true" type="tns:ArrayOfDOB_Complaints_Disposition_History" />
       <xs:element minOccurs="0" name="DOBViolation" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DateEntered" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Disposition" nillable="true" type="xs:string" />
@@ -95,6 +96,26 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ComplaintsColumns" nillable="true" type="tns:ComplaintsColumns" />
+  <xs:complexType name="ArrayOfDOB_Complaints_Disposition_History">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DOB_Complaints_Disposition_History" nillable="true" type="tns:DOB_Complaints_Disposition_History" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDOB_Complaints_Disposition_History" nillable="true" type="tns:ArrayOfDOB_Complaints_Disposition_History" />
+  <xs:complexType name="DOB_Complaints_Disposition_History">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ComplaintNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Disp_Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Disp_Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Disp_Num" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Disposition" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Inspection_By" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Inspection_Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastUpdated" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DOB_Complaints_Disposition_History" nillable="true" type="tns:DOB_Complaints_Disposition_History" />
   <xs:complexType name="ArrayOfSP_DOB_Complaints_By_BBLE_Result">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SP_DOB_Complaints_By_BBLE_Result" nillable="true" type="tns:SP_DOB_Complaints_By_BBLE_Result" />

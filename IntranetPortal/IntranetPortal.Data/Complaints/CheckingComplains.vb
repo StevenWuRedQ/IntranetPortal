@@ -1,5 +1,6 @@
 ﻿Imports IntranetPortal.Core
 Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
 
 Partial Public Class CheckingComplain
 
@@ -282,6 +283,7 @@ Partial Public Class CheckingComplain
         End Get
         Set(value As DataAPI.SP_DOB_Complaints_By_BBLE_Result())
             _complaintsResult = value
+
             Me.LastComplaintsResult = value.ToJsonString
         End Set
     End Property
@@ -332,8 +334,14 @@ Namespace DataAPI
         Public ReadOnly Property ResultId As String
             Get
                 Return Me.ComplaintNumber & Me.LastUpdated.ToString
+
             End Get
         End Property
+
+    End Class
+
+    Partial Class SP_DOB_Complaints_By_BBLE_Result
+        Public Property Complaints_Disposition_History As JArray
     End Class
 
 End Namespace
