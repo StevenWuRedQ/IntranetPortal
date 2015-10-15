@@ -714,6 +714,13 @@
     <Compile Include="Controllers\BusinessFormController.vb" />
     <Compile Include="Controllers\ComplaintsController.vb" />
     <Compile Include="Controllers\ConstructionCasesController.vb" />
+    <Compile Include="Construction\ConstructionInitialForm.aspx.designer.vb">
+      <DependentUpon>ConstructionInitialForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionInitialForm.aspx.vb">
+      <DependentUpon>ConstructionInitialForm.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Controllers\CorporationEntitiesController.vb" />
     <Compile Include="Controllers\LeadInfoDocumentSearchesController.vb" />
     <Compile Include="Controllers\LegalECourtsController.vb" />
@@ -2395,6 +2402,7 @@
     <Content Include="Content\layouts\Split\SplitLayout.css" />
     <Content Include="Content\layouts\Split\SplitLayout.html" />
     <Content Include="Content\layouts\Split\SplitLayout.js" />
+    <Content Include="Construction\ConstructionInitialForm.aspx" />
     <Content Include="css\accessibility.css" />
     <Content Include="css\base.css" />
     <Content Include="css\bootstrap.min.css" />

@@ -5,7 +5,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Form</label>
-                <button type="button" class="btn btn-primary">Initial Form</button>
+                <button type="button" class="btn btn-primary" ng-click="openInitialForm()">Initial Form</button>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Budget</label>

@@ -1,7 +1,7 @@
 ﻿$(function () {
     window.autoLogout_lastCheck = new Date();
     // recheck every 30 minutes
-    var CHECK_INTERVAL = 1000 * 60 * 30;
+    var CHECK_INTERVAL = 1000 * 60 * 60;
     // after 30 second logout
     var CONFRIM_INTERVAL = 1000 * 30;
     var autoLogoutPopup_visible = false;

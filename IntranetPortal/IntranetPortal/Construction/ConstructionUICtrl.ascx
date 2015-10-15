@@ -606,6 +606,8 @@
         }
         /* end printWindows */
 
-
+        $scope.openInitialForm = function () {
+            window.open("/Construction/ConstructionInitialForm.aspx?bble=" + $scope.CSCase.BBLE, 'Initial Form', 'width=1280, height=960')
+        }
     });
 </script>

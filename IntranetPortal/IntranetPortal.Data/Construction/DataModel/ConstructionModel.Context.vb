@@ -28,5 +28,6 @@ Partial Public Class ConstructionEntities
     Public Overridable Property TitleCases() As DbSet(Of TitleCase)
     Public Overridable Property ConstructionSpotCheck() As DbSet(Of ConstructionSpotCheck)
     Public Overridable Property ConstructionViolations() As DbSet(Of ConstructionViolation)
+    Public Overridable Property ConstructionInitialForms() As DbSet(Of ConstructionInitialForm)
 
 End Class

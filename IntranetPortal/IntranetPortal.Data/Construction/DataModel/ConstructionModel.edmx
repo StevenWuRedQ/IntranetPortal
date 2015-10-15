@@ -40,6 +40,18 @@
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="IntakeCompleted" Type="bit" />
         </EntityType>
+        <EntityType Name="ConstructionInitialForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nvarchar" MaxLength="11" />
+          <Property Name="Form" Type="nvarchar(max)" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="ConstructionSpotChecks">
           <Key>
             <PropertyRef Name="Id" />
@@ -98,6 +110,7 @@
         <EntityContainer Name="ConstructionModelStoreContainer">
           <EntitySet Name="CheckingComplains" EntityType="Self.CheckingComplains" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConstructionCases" EntityType="Self.ConstructionCases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConstructionInitialForm" EntityType="Self.ConstructionInitialForm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConstructionSpotChecks" EntityType="Self.ConstructionSpotChecks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConstructionViolations" EntityType="Self.ConstructionViolations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormDataItems" EntityType="Self.FormDataItems" Schema="dbo" store:Type="Tables" />
@@ -114,6 +127,7 @@
           <EntitySet Name="TitleCases" EntityType="ConstructionModel.TitleCase" />
           <EntitySet Name="ConstructionSpotCheck" EntityType="ConstructionModel.ConstructionSpotCheck" />
           <EntitySet Name="ConstructionViolations" EntityType="ConstructionModel.ConstructionViolation" />
+          <EntitySet Name="ConstructionInitialForms" EntityType="ConstructionModel.ConstructionInitialForm" />
         </EntityContainer>
         <EntityType Name="ConstructionCase">
           <Key>
@@ -204,6 +218,18 @@
           </Key>
           <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
           <Property Name="HPD_RegExpireDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ConstructionInitialForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Form" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -304,6 +330,19 @@
               <MappingFragment StoreEntitySet="ConstructionViolations">
                 <ScalarProperty Name="HPD_RegExpireDate" ColumnName="HPD_RegExpireDate" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConstructionInitialForms">
+            <EntityTypeMapping TypeName="ConstructionModel.ConstructionInitialForm">
+              <MappingFragment StoreEntitySet="ConstructionInitialForm">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Form" ColumnName="Form" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

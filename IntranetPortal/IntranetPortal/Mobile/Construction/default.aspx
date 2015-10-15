@@ -119,7 +119,7 @@
                         url: "/api/ConstructionCases/FinishSpotList",
                         data: JSON.stringify($scope.form)
                     }).then(function (res) {
-                        alert("Save Successful");
+                        alert("Send Successful");
                         $scope.reload();
                     })
                 } else {

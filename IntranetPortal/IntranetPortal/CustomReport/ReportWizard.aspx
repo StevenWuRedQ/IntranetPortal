@@ -116,11 +116,10 @@
                                     bindingOptions: {
                                         dataSource: 'reportData',
                                         stateStoring: 'stateStoring'
-
                                     },
                                     editing: {
                                         editEnabled: false
-                                    }                                         
+                                    }                                        
                                 }">
                 </div>
             </div>
@@ -227,9 +226,9 @@
                             .then(function (res) {
                                 var data = res.data
                                 $scope.CurrentQuery = data;
-
                                 $scope.Fields = JSON.parse(data.Query);
                                 $scope.generate();
+                                
                                 var gridState = JSON.parse(data.Layout);
                                 $("#queryReport").dxDataGrid("instance").state(gridState);
                             })
@@ -371,6 +370,21 @@
                     x.value1 = x.input1;
                 }
             }
+            $scope.filterDate = function (model) {
+                var dtPatn = /\d{4}-\d{2}-\d{2}/
+                if (model) {
+                    _.each(model, function (el, idx) {
+                        if (el) {
+                            _.forOwn(el, function (v, k) {
+                                if (v && typeof(v) === 'string' && v.match(dtPatn)) {
+                                    el[k] = new Date(v).toLocaleDateString();
+                                }
+                            })
+                        }
+
+                    })
+                }
+            }
             $scope.updateBooleanFilter = function (x) {
                 if (!x.input1) {
                     x.WhereTerm = "";
@@ -486,7 +500,9 @@
                         url: "/api/Report/QueryData",
                         data: JSON.stringify(result),
                     }).then(function (res) {
-                        $scope.reportData = res.data[0];
+                        var rdata = res.data[0]
+                        var xdata = $scope.filterDate(rdata);
+                        $scope.reportData = rdata;
                         $scope.sqlText = res.data[1];
 
                     })
@@ -495,7 +511,6 @@
                 }
 
             }
-
 
             $scope.reload();
         });

@@ -70,7 +70,7 @@
         </asp:ContentPlaceHolder>
     </form>
     <div id="autoLogoutPopup">
-        You have been inactive for 30 minutes, are you still here?<br />
+        You have been inactive for a while, are you still here?<br />
         <b>(Click Yes to confirm, or system will automatically logout in <span id="autoLogoutCountDown"></span> seconds.)</b>
         <hr />
         <button type="button" class="btn btn-success pull-right" onclick="onAutoLogoutPopupYes()">Yes</button>
