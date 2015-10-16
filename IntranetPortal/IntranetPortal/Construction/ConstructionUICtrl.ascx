@@ -257,7 +257,6 @@
                 }
             }
 
-            budgetCtrl.reload();
             $scope.clearWarning();
         }
         $scope.init = function (bble, callback) {
@@ -270,7 +269,6 @@
                 ptCom.nullToUndefined(res);
                 $.extend(true, $scope.CSCase, res);
                 $scope.initWatchedModel();
-                if ($scope.CSCase.CSCase.BudateData) budgetCtrl.load($scope.CSCase.CSCase.BudateData);
                 done1 = true;
                 if (done1 && done2 && done3 & done4) {
                     $scope.stopLoading();
@@ -331,8 +329,6 @@
         /* end status change function */
 
         $scope.saveCSCase = function () {
-            var data = budgetCtrl.get();
-            if (data) $scope.CSCase.CSCase.BudateData = data;
             var data = JSON.stringify($scope.CSCase);
             ptConstructionService.saveConstructionCases($scope.CSCase.BBLE, data, function (res) {
                 ScopeSetLastUpdateTime($scope.GetTimeUrl());

@@ -29,5 +29,6 @@ Partial Public Class ConstructionEntities
     Public Overridable Property ConstructionSpotCheck() As DbSet(Of ConstructionSpotCheck)
     Public Overridable Property ConstructionViolations() As DbSet(Of ConstructionViolation)
     Public Overridable Property ConstructionInitialForms() As DbSet(Of ConstructionInitialForm)
+    Public Overridable Property ConstructionBudgets() As DbSet(Of ConstructionBudget)
 
 End Class

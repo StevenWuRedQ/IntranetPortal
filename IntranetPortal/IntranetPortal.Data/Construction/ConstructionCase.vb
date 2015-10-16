@@ -24,6 +24,12 @@ Partial Public Class ConstructionCase
         End Using
     End Function
 
+    Public Shared Function GetAllCases() As ConstructionCase()
+        Using ctx As New ConstructionEntities
+            Return ctx.ConstructionCases.ToArray()
+        End Using
+    End Function
+
     Public Shared Function GetAllCases(userName As String, Optional status1 As CaseStatus = CaseStatus.All) As ConstructionCase()
         Using ctx As New ConstructionEntities
             Return ctx.ConstructionCases.Where(Function(c) c.Owner = userName Or (c.Status = status1 Or status1 = CaseStatus.All)).ToArray

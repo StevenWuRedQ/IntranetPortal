@@ -8,7 +8,6 @@
 <%@ Register Src="~/Construction/ConstructionContractTab.ascx" TagPrefix="uc1" TagName="ConstructionContractTab" %>
 <%@ Register Src="~/Construction/ConstructionSignoffsTab.ascx" TagPrefix="uc1" TagName="ConstructionSignoffsTab" %>
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
-<%@ Register Src="~/Construction/ConstructionBudgetTab.ascx" TagPrefix="uc1" TagName="ConstructionBudgetTab" %>
 <%@ Register Src="~/Construction/ConstructionCheckList.ascx" TagPrefix="uc1" TagName="ConstructionCheckList" %>
 
 
@@ -115,9 +114,8 @@
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSPlans" role="tab" data-toggle="tab" ng-click="updateActive('CSPlans')">Plans</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSContract" role="tab" data-toggle="tab" ng-click="updateActive('CSContract')">Contract</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSSignoff" role="tab" data-toggle="tab" ng-click="updateActive('CSSignoff')">Signoffs</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSBudget" role="tab" data-toggle="tab" ng-click="updateActive('CSBudget')">Budget</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a" href="#CSCheckList" role="tab" data-toggle="tab" ng-click="updateActive('CSCheckList')">CheckList</a></li>
-                
+
                 <%--  <% End If%>--%>
             </ul>
 
@@ -148,11 +146,8 @@
                     <div class="tab-pane" id="CSSignoff">
                         <uc1:ConstructionSignoffsTab runat="server" ID="ConstructionSignoffsTab" />
                     </div>
-                    <div class="tab-pane" id="CSBudget">
-                        <uc1:ConstructionBudgetTab runat="server" ID="ConstructionBudgetTab" />
-                    </div>
                     <div class="tab-pane" id="CSCheckList">
-                        <uc1:ConstructionCheckList runat="server" id="ConstructionCheckList" />
+                        <uc1:ConstructionCheckList runat="server" ID="ConstructionCheckList" />
                     </div>
                 </div>
             </div>

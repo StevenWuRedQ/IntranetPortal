@@ -598,6 +598,13 @@
       <DependentUpon>ComplaintsView.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Construction\ConstructionBudgetForm.aspx.designer.vb">
+      <DependentUpon>ConstructionBudgetForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Construction\ConstructionBudgetForm.aspx.vb">
+      <DependentUpon>ConstructionBudgetForm.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Construction\ConstructionBudgetTab.ascx.designer.vb">
       <DependentUpon>ConstructionBudgetTab.ascx</DependentUpon>
     </Compile>
@@ -2333,6 +2340,7 @@
     <Content Include="Chat\ChatDefault.aspx" />
     <Content Include="Chat\index.html" />
     <Content Include="Complaints\ComplaintsView.aspx" />
+    <Content Include="Construction\ConstructionBudgetForm.aspx" />
     <Content Include="Construction\ConstructionBudgetTab.ascx" />
     <Content Include="Construction\ConstructionCheckList.ascx" />
     <Content Include="Construction\ConstructionContractTab.ascx" />
@@ -4732,7 +4740,6 @@
     <Content Include="Scripts\prototype.js" />
     <Content Include="Scripts\services.js" />
     <Content Include="Scripts\stevenjs.js" />
-    <Content Include="Scripts\templates\comments_panel.html" />
     <Content Include="Scripts\templates\ptfile.html" />
     <Content Include="Scripts\templates\ptfiles.html" />
     <Content Include="Scripts\ui-bootstrap-0.13.0.js" />

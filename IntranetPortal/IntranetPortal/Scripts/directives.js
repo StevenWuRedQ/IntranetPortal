@@ -24,7 +24,7 @@ portalApp.directive('ssDate', function () {
     };
 });
 
-app.directive('ptRightClick', function ($parse) {
+portalApp.directive('ptRightClick', function ($parse) {
     return function (scope, element, attrs) {
         var fn = $parse(attrs.ngRightClick);
         element.bind('contextmenu', function (event) {
@@ -617,36 +617,6 @@ portalApp.directive('ptLink', function (ptFileService) {
 
     }
 })
-
-portalApp.directive('ptComments', ['ptCom', function (ptCom) {
-
-    return {
-        restrict: 'E',
-        scope: {
-            commentsModel: '=',
-            createBy: '@',
-
-        },
-        templateUrl: '/Scripts/templates/comments_panel.html',
-        link: function (scope, el, attrs) {
-            scope.ptCom = ptCom;
-            scope.addComment = function () {
-                scope.$apply(function () {
-                    scope.commentsModel = scope.commentsModel ? scope.commentsModel : [];
-                    var newComment = {};
-                    newComment.comment = scope.inputText;
-                    newComment.createBy = scope.createBy;
-                    newComment.createDate = new Date();
-                    scope.commentsModel.push(newComment);
-                    scope.inputText = '';
-                });
-            }
-
-        }
-    }
-
-}])
-
 
 portalApp.directive('ptFinishedMark', [function () {
     return {

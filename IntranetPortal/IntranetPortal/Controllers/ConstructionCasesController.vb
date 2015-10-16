@@ -275,5 +275,18 @@ Namespace Controllers
             form.SaveForms(username)
             Return Ok()
         End Function
+
+        <Route("api/ConstructionCases/GetBudgetForm")>
+        Function GetBudgetForm(bble As String) As IHttpActionResult
+            Dim Form = Data.ConstructionBudget.GetForms(bble)
+            Return Ok(Form)
+        End Function
+
+        <Route("api/ConstructionCases/BudgetForm")>
+        Function SaveBudgetForm(form As Data.ConstructionBudget) As IHttpActionResult
+            Dim username = HttpContext.Current.User.Identity.Name.ToString
+            form.SaveForms(username)
+            Return Ok()
+        End Function
     End Class
 End Namespace

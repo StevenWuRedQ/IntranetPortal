@@ -104,15 +104,6 @@ Partial Public Class ConstructionTab
     Protected WithEvents ConstructionSignoffsTab As Global.IntranetPortal.ConstructionSignoffsTab
     
     '''<summary>
-    '''ConstructionBudgetTab control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ConstructionBudgetTab As Global.IntranetPortal.ConstructionBudgetTab
-    
-    '''<summary>
     '''ConstructionCheckList control.
     '''</summary>
     '''<remarks>

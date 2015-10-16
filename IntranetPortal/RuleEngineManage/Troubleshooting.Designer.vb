@@ -104,6 +104,7 @@ Partial Class Troubleshooting
         Me.btnFollowUp = New System.Windows.Forms.Button()
         Me.btnRefreshLegalReport = New System.Windows.Forms.Button()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.btnRefreshComplaints = New System.Windows.Forms.Button()
         Me.txtNotifyNames = New System.Windows.Forms.TextBox()
         Me.btnNotifyAll = New System.Windows.Forms.Button()
         Me.btnNotify = New System.Windows.Forms.Button()
@@ -129,7 +130,7 @@ Partial Class Troubleshooting
         Me.txtReportTables = New System.Windows.Forms.TextBox()
         Me.txtTemplateResult = New System.Windows.Forms.TextBox()
         Me.Button20 = New System.Windows.Forms.Button()
-        Me.btnRefreshComplaints = New System.Windows.Forms.Button()
+        Me.CleanBudgetData = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -960,6 +961,15 @@ Partial Class Troubleshooting
         Me.TabPage8.Text = "Complaints"
         Me.TabPage8.UseVisualStyleBackColor = True
         '
+        'btnRefreshComplaints
+        '
+        Me.btnRefreshComplaints.Location = New System.Drawing.Point(262, 15)
+        Me.btnRefreshComplaints.Name = "btnRefreshComplaints"
+        Me.btnRefreshComplaints.Size = New System.Drawing.Size(108, 29)
+        Me.btnRefreshComplaints.TabIndex = 8
+        Me.btnRefreshComplaints.Text = "Refresh Complaints"
+        Me.btnRefreshComplaints.UseVisualStyleBackColor = True
+        '
         'txtNotifyNames
         '
         Me.txtNotifyNames.Location = New System.Drawing.Point(11, 50)
@@ -1022,6 +1032,7 @@ Partial Class Troubleshooting
         '
         'TabPage9
         '
+        Me.TabPage9.Controls.Add(Me.CleanBudgetData)
         Me.TabPage9.Controls.Add(Me.TestRegExp)
         Me.TabPage9.Controls.Add(Me.Organize)
         Me.TabPage9.Controls.Add(Me.SpotCheckTest)
@@ -1202,14 +1213,14 @@ Partial Class Troubleshooting
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
-        'btnRefreshComplaints
+        'CleanBudgetData
         '
-        Me.btnRefreshComplaints.Location = New System.Drawing.Point(262, 15)
-        Me.btnRefreshComplaints.Name = "btnRefreshComplaints"
-        Me.btnRefreshComplaints.Size = New System.Drawing.Size(108, 29)
-        Me.btnRefreshComplaints.TabIndex = 8
-        Me.btnRefreshComplaints.Text = "Refresh Complaints"
-        Me.btnRefreshComplaints.UseVisualStyleBackColor = True
+        Me.CleanBudgetData.Location = New System.Drawing.Point(558, 42)
+        Me.CleanBudgetData.Name = "CleanBudgetData"
+        Me.CleanBudgetData.Size = New System.Drawing.Size(75, 23)
+        Me.CleanBudgetData.TabIndex = 11
+        Me.CleanBudgetData.Text = "CleanBudgetData"
+        Me.CleanBudgetData.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1368,4 +1379,5 @@ Partial Class Troubleshooting
     Friend WithEvents TestRegExp As Button
     Friend WithEvents btnInitChecklist As Button
     Friend WithEvents btnRefreshComplaints As Button
+    Friend WithEvents CleanBudgetData As Button
 End Class

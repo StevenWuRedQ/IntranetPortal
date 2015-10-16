@@ -3,6 +3,7 @@ Imports System.Data.OleDb
 Imports IntranetPortal
 Imports System.Threading
 Imports IntranetPortal.Data
+Imports Newtonsoft.Json.Linq
 Imports System.Text
 
 Public Class Troubleshooting
@@ -949,4 +950,24 @@ Public Class Troubleshooting
         End If
     End Sub
 
+    Private Sub CleanBudgetData_Click(sender As Object, e As EventArgs) Handles CleanBudgetData.Click
+
+        Dim cases = Data.ConstructionCase.GetAllCases()
+        For Each c In cases
+            Dim datax = c.CSCase
+            If Not String.IsNullOrEmpty(datax) Then
+                Dim casedata = JObject.Parse(datax)
+                If Not casedata("BudateData") Is Nothing Then
+                    casedata.Remove("BudateData")
+                End If
+                If Not casedata("budgetData") Is Nothing Then
+                    casedata.Remove("budgetData")
+                End If
+                c.CSCase = casedata.ToString
+                c.Save("Chris Yan")
+                TextBox4.AppendText(c.BBLE & " finished;")
+            End If
+
+        Next
+    End Sub
 End Class
