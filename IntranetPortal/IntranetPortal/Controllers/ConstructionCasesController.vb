@@ -262,5 +262,18 @@ Namespace Controllers
             Dim violations = Core.WebGrabber.GetECBViolations(ld.Borough, ld.Block, ld.Lot)
             Return Ok(violations)
         End Function
+
+        <Route("api/ConstructionCases/GetInitialForm")>
+        Function GetInitialForm(bble As String) As IHttpActionResult
+            Dim Form = Data.ConstructionInitialForm.GetForms(bble)
+            Return Ok(Form)
+        End Function
+
+        <Route("api/ConstructionCases/InitialForm")>
+        Function SaveInitialForm(form As Data.ConstructionInitialForm) As IHttpActionResult
+            Dim username = HttpContext.Current.User.Identity.Name.ToString
+            form.SaveForms(username)
+            Return Ok()
+        End Function
     End Class
 End Namespace

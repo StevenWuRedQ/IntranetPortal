@@ -4,13 +4,13 @@
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
 
-    <div id="initialForm" ng-controller="InitialformController">
+    <div id="initialForm" ng-controller="InitialFormController">
         <br />
         <div class="container">
             <h3 class="ss_form_title text-center">Initial Form</h3>
-            <button type="button" class="btn btn-primary pull-right"><i class="fa fa-floppy-o"></i>&nbsp;Save</button>
+            <button type="button" class="btn btn-primary pull-right" ng-click="save()"><i class="fa fa-floppy-o"></i>&nbsp;Save</button>
             <span class="pull-right">&nbsp;&nbsp;</span>
-            <button type="button" class="btn btn-primary pull-right"><i class="fa fa-print"></i>&nbsp;Print</button>
+            <button type="button" class="btn btn-primary pull-right" ng-click="print()"><i class="fa fa-print"></i>&nbsp;Print</button>
         </div>
         <div class="clearfix"></div>
         <br />
@@ -22,38 +22,38 @@
                             <h5 class="ss_form_title">Date</h5>
                         </td>
                         <td>
-                            <input class="ss_form_input" ng-model="form.date" ss-date />
+                            <input class="ss_form_input" ng-model="data.Form.date" ss-date />
                         </td>
                         <td>
                             <h5 class="ss_form_title">Clean Up</h5>
                         </td>
                         <td>
-                            <pt-radio name="cleanUp" model="form.xx"></pt-radio>
+                            <pt-radio name="cleanUp" model="data.Form.isCleanUp"></pt-radio>
                         </td>
                         <td>
                             <h5 class="ss_form_title">Tax class</h5>
                         </td>
                         <td>
-                            <input class="ss_form_input" /></td>
+                            <input class="ss_form_input" ng-model="data.Form.TaxClass" /></td>
                     </tr>
                     <tr>
                         <td>
                             <h5 class="ss_form_title">Asset Manager</h5>
                         </td>
                         <td>
-                            <input class="ss_form_input" />
+                            <input class="ss_form_input" ng-model="data.Form.AssetManager" />
                         </td>
                         <td>
                             <h5 class="ss_form_title">No. Of Family</h5>
                         </td>
                         <td>
-                            <input class="ss_form_input" />
+                            <input class="ss_form_input" ng-model="data.From.NumOfFamily" />
                         </td>
                         <td>
                             <h5 class="ss_form_title">Resale Value</h5>
                         </td>
                         <td>
-                            <input class="ss_form_input" />
+                            <input class="ss_form_input" ng-model="data.Form.ResaleValue" />
                         </td>
                     </tr>
                     <tr>
@@ -61,7 +61,7 @@
                             <h5 class="ss_form_title">Property Address</h5>
                         </td>
                         <td colspan="4">
-                            <input class="ss_form_input" />
+                            <input class="ss_form_input" ng-model="data.Form.Address" />
                         </td>
                     </tr>
 
@@ -74,20 +74,20 @@
                     <tr>
                         <th style="border-top: none">Floor</th>
                         <th style="border-top: none"># of Rooms</th>
-                        <th style="border-top: none"># of BathRooms</th>
+                        <th style="border-top: none"># of Bathrooms</th>
                         <th style="border-top: none"># of Bedrooms</th>
                         <th style="border-top: none">Condition/Description</th>
                     </tr>
                     <tr ng-repeat="floor in ['Cellar','Basement' ,'1st', '2nd', '3rd']">
                         <td>{{floor}}</td>
                         <td>
-                            <input class="ss_form_input" /></td>
+                            <input class="ss_form_input" ng-model="data.Form.Layout[floor + '_NumOfRoom']" /></td>
                         <td>
-                            <input class="ss_form_input" /></td>
+                            <input class="ss_form_input" ng-model="data.Form.Layout[floor + '_NumOfBathroom']" /></td>
                         <td>
-                            <input class="ss_form_input" /></td>
+                            <input class="ss_form_input" ng-model="data.Form.Layout[floor + '_NumOfBed']" /></td>
                         <td>
-                            <input class="ss_form_input" /></td>
+                            <input class="ss_form_input" ng-model="data.Form.Layout[floor + '_Desc']" /></td>
                     </tr>
                 </table>
             </div>
@@ -95,13 +95,13 @@
             <div class="clearfix"></div>
             <div>
                 <label class="ss_form_title col-sm-2">Exterior</label>
-                <textarea class="col-sm-10"></textarea>
+                <textarea class="col-sm-10" ng-model="data.Form.Exterior"></textarea>
             </div>
             <div class="clearfix"></div>
             <hr />
             <div>
                 <label class="ss_form_title ss_form_title col-sm-2">Backyard</label>
-                <textarea class="col-sm-10"></textarea>
+                <textarea class="col-sm-10" ng-model="data.Form.Backyard"></textarea>
             </div>
             <div class="clearfix"></div>
             <br />
@@ -118,15 +118,17 @@
                     </tr>
                     <tr ng-repeat="u in ['GAS', 'Electric', 'Water']">
                         <td>{{u}}</td>
-                        <td></td>
                         <td>
-                            <input class="ss_form_input" /></td>
+                            <pt-radio name="{{u}}Service" model="data.Form.Utility[u + '_isService']"></pt-radio>
+                        </td>
                         <td>
-                            <input class="ss_form_input" /></td>
+                            <input class="ss_form_input" ng-model="data.Form.Utility[u + '_NumOfMeters']"/></td>
                         <td>
-                            <input class="ss_form_input" /></td>
+                            <input class="ss_form_input" ng-model="data.Form.Utility[u + '_MissingMeters']"/></td>
                         <td>
-                            <input class="ss_form_input" /></td>
+                            <input class="ss_form_input" ng-model="data.Form.Utility[u + '_Location']"/></td>
+                        <td>
+                            <input class="ss_form_input" ng-model="data.Form.Utility[u + '_MeterReading']"/></td>
 
                     </tr>
                 </table>
@@ -134,34 +136,34 @@
             <br />
             <div>
                 <label class="ss_form_title col-sm-2">Comments</label>
-                <textarea class="col-sm-10"></textarea>
+                <textarea class="col-sm-10" ng-model="data.Form.Comments"></textarea>
             </div>
             <div class="clearfix"></div>
             <br />
             <div>
                 <h4 class="ss_form_title">Sketch</h4>
-                <div class="col-md-6" style="border:1px solid black">
+                <div class="col-md-6" style="border: 1px solid black">
                     <h5>Floors:&nbsp;<input style="border: none" /></h5>
                     <textarea></textarea>
                 </div>
-                <div class="col-md-6" style="border:1px solid black">
+                <div class="col-md-6" style="border: 1px solid black">
                     <h5>Floors:&nbsp;<input style="border: none" /></h5>
                     <textarea></textarea>
                 </div>
-                <div class="col-md-6" style="border:1px solid black">
+                <div class="col-md-6" style="border: 1px solid black">
                     <h5>Floors:&nbsp;<input style="border: none" /></h5>
                     <textarea></textarea>
                 </div>
-                <div class="col-md-6" style="border:1px solid black">
+                <div class="col-md-6" style="border: 1px solid black">
                     <h5>Floors:&nbsp;<input style="border: none" /></h5>
                     <textarea></textarea>
                 </div>
-                <div class="col-md-6" style="border:1px solid black">
+                <div class="col-md-6" style="border: 1px solid black">
                     <h5>Floors:&nbsp;<input style="border: none" /></h5>
 
                     <textarea></textarea>
                 </div>
-                <div class="col-md-6" style="border:1px solid black">
+                <div class="col-md-6" style="border: 1px solid black">
                     <h5>Floors:&nbsp;<input style="border: none" /></h5>
 
                     <textarea></textarea>
@@ -170,9 +172,43 @@
         </div>
     </div>
     <script>
-        angular.module("PortalApp").controller("InitialformController", function ($scope) {
+        angular.module("PortalApp")
+            .controller("InitialFormController", function ($scope, $http) {
 
-            $scope.form = {}
-        });
+                $scope.data = {
+                    BBLE: '<%= BBLE %>',
+                    Form: {
+                        Layout: {},
+                        Utility: {}
+                    }
+                }
+                $scope.load = function () {
+                    var url = "/api/ConstructionCases/GetInitialForm?bble=" + $scope.data.BBLE;
+                    $http.get(url)
+                    .then(function success(res) {
+                        if (res.data) {
+                            $scope.data = res.data;
+                        }
+                    }, function error(res) {
+                        alert("Get form fails");
+                    })
+                }
+                $scope.save = function () {
+                    var url = "/api/ConstructionCases/InitialForm"
+                    $http({
+                        method: 'POST',
+                        url: url,
+                        data: JSON.stringify($scope.data)
+                    }).then(function () {
+                        alert("Save Successful");
+                    }, function error() {
+                        alert("Fails to Save.")
+                    })
+                }
+                $scope.print = function () {
+                    window.print()
+                }
+                $scope.load();
+            });
     </script>
 </asp:Content>
