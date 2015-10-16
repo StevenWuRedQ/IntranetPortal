@@ -120,12 +120,12 @@
 
                                                             </li>
                                                             <li class="ss_form_item ">
-                                                                <label class="ss_form_input_title">Dob Websites</label>
+                                                                <label class="ss_form_input_title">Dob Violation</label>
                                                                 <input class="ss_form_input" ng-model="DocSearch.LeadResearch.dobWebsites" money-mask />
 
                                                             </li>
                                                             <li class="ss_form_item ">
-                                                                <label class="ss_form_input_title">Judgement Search</label>
+                                                                <label class="ss_form_input_title">ECB On JdmtSearch</label>
                                                                 <input class="ss_form_input" ng-model="DocSearch.LeadResearch.judgementSearch" money-mask />
                                                             </li>
                                                             <li class="ss_form_item ">
@@ -143,12 +143,15 @@
                                                     <div class="ss_border">
                                                         <ul class="ss_form_box clearfix" collapse="LiensInfoCollapse">
                                                             <li class="ss_form_item ">
-                                                                <label class="ss_form_input_title">Judgments</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.judgments" /></li>
+                                                                <label class="ss_form_input_title">Judgments</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.judgments" money-mask/></li>
 
                                                             <li class="ss_form_item ">
                                                                 <label class="ss_form_input_title">Irs Tax Lien</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.irsTaxLien" money-mask /></li>
                                                             <li class="ss_form_item ">
-                                                                <label class="ss_form_input_title">NYS Tax Lien</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.nysTaxLien" money-mask /></li>
+                                                                <label class="ss_form_input_title">NYS Tax Lien</label>
+                                                                  <pt-radio name="liens_info_wellsFargo" model="DocSearch.LeadResearch.hasNysTaxLien"></pt-radio>
+                                                               
+                                                            </li>
                                                             <li class="ss_form_item ">
                                                                 <label class="ss_form_input_title">Fannie</label>
                                                                 <pt-radio name="liens_info_fannie1" model="DocSearch.LeadResearch.fannie"></pt-radio>
@@ -279,24 +282,26 @@
                                             </td>
                                         </tr>
                                          <tr>
-                                            <td>Judgment - {{DocSearch.LeadResearch.judgementSearch?'':'No'}} {{DocSearch.LeadResearch.judgementSearch | currency}}
+                                            <td>Judgment - {{DocSearch.LeadResearch.judgments?'':'No'}} {{DocSearch.LeadResearch.judgments | currency}}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>IRS Tax Liens - {{DocSearch.LeadResearch.irsTaxLien?'':'No'}} {{DocSearch.LeadResearch.irsTaxLien | currency}}
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>NYS Tax Lien - {{DocSearch.LeadResearch.nysTaxLien?'':'No'}} {{DocSearch.LeadResearch.nysTaxLien | currency}}
+                                         <tr>
+                                            <td>NYS Tax Liens - {{DocSearch.LeadResearch.hasNysTaxLien?'Yes':'No'}} 
                                             </td>
                                         </tr>
+                                        
+                                       
                                         <tr>
                                             <td>Mortgage - {{DocSearch.LeadResearch.mortgageAmount?'':'No'}} {{DocSearch.LeadResearch.mortgageAmount | currency}}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                {{ DocSearch.LeadResearch.fannie?"":'Not Fannie' }} {{ DocSearch.LeadResearch.fha?"":' Not FHA' }} 
+                                                {{ DocSearch.LeadResearch.fannie?"Has FANNIE":'Not Fannie' }} {{ DocSearch.LeadResearch.fha?" Has FHA":' Not FHA' }} 
                                             </td>
                                         </tr>
                                          <tr>

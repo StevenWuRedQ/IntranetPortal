@@ -3,7 +3,10 @@
     Public ReadOnly Property Duration As TimeSpan
         Get
             If Status = WorkingLogStatus.Closed Then
-                Return EndTime - StartTime
+                If (EndTime IsNot Nothing) Then
+                    Return EndTime - StartTime
+                End If
+
             End If
 
             Return Nothing
