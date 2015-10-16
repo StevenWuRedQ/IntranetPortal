@@ -1,70 +1,5 @@
-﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ComplaintsDetailNotify.ascx.vb" Inherits="IntranetPortal.ComplaintsDetailNotify" %>
-<%@ Register Src="~/EmailTemplate/ComplaintContent.ascx" TagPrefix="uc1" TagName="ComplaintContent" %>
+﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ComplaintContent.ascx.vb" Inherits="IntranetPortal.ComplaintContent" %>
 
-<style type="text/css">
-    .maininfo {
-        font-family: arial;
-        font-size: 9pt;
-        color: black;
-        font-weight: bold;
-        background-color: #9BCDFF;
-    }
-
-    .content {
-        font-family: arial;
-        font-size: 9pt;
-        color: black;
-        font-weight: normal;
-    }
-
-    .mainhdg {
-        font-family: Arial;
-        font-size: 11pt;
-        font-weight: bold;
-        color: #000080;
-        text-align: center;
-    }
-
-    .rightcontent {
-        font-family: Arial;
-        font-size: 9pt;
-        color: black;
-        text-align: right;
-        font-weight: normal;
-    }
-
-    .inlineform {
-        font-family: arial;
-        font-size: 9pt;
-        color: black;
-        background-color: #CECECE;
-    }
-
-    .centercolhdg {
-        font-family: Arial;
-        font-size: 9pt;
-        font-weight: bold;
-        color: #000000;
-        text-align: center;
-        background-color: #CECECE;
-    }
-</style>
-
-
-Dear All,
-<br />
-<br />
-FYI - The DOB Complaint, for the property located at: (<%= GetMailDataItem("Address") %>), has been updated.
-<br />
-<br />
-
-<asp:Repeater ID="rptComplaints" runat="server">
-    <ItemTemplate>
-        <uc1:complaintcontent runat="server" id="ComplaintContent" item="<%# Container.DataItem %>" />
-    </ItemTemplate>
-</asp:Repeater>
-
-<%--<% For Each item In complaint.ComplaintsResult.Where(Function(c) c.Status = "ACT").ToList %>
 
 <table border="0" cellpadding="1" cellspacing="0" width="750" style="margin: 0 auto;">
     <tbody>
@@ -237,7 +172,7 @@ FYI - The DOB Complaint, for the property located at: (<%= GetMailDataItem("Addr
 <table border="0" cellpadding="1" cellspacing="0" width="750">
     <tbody>
         <tr>
-            <td class="mainhdg">No Complaint Disposition History</td>
+            <td class="content" align="center">(No Complaint Disposition History)</td>
         </tr>
     </tbody>
 </table>
@@ -245,16 +180,3 @@ FYI - The DOB Complaint, for the property located at: (<%= GetMailDataItem("Addr
 <% End If %>
 
 <br />
-
-<% Next %>--%>
-
-
-
-For more information, Please click on <a href='http://portal.myidealprop.com/Complaints/ComplainsMng.aspx?bble=<%= GetMailDataItem("BBLE") %>'>this link </a>to  review. 
-<br />
-<br />
-Regards,
-<br />
-Portal Team
-<br />
-<small>This is an automatic email. Please do not reply.</small>

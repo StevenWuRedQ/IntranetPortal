@@ -23,7 +23,7 @@ Public Class WebForm3
         emailData.Add("Body", sb.ToString)
         emailData.Add("Date", DateTime.Today.ToString("m"))
         'IntranetPortal.Core.EmailService.SendMail("Chris@gvs4u.com", "", "Task Summary on " & DateTime.Now, LoadSummaryEmail(userName), Nothing)
-        Core.EmailService.SendMail("Georgev@myidealprop.com", "chrisy@myidealprop.com", "ComplaintsNotifySummary", emailData)
+        Core.EmailService.SendMail("chrisy@myidealprop.com", "chrisy@myidealprop.com", "ComplaintsNotifySummary", emailData)
     End Sub
 
     Protected Sub Button2_Click(sender As Object, e As EventArgs)

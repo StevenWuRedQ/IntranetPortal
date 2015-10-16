@@ -603,7 +603,6 @@
     </Compile>
     <Compile Include="Construction\ConstructionBudgetForm.aspx.vb">
       <DependentUpon>ConstructionBudgetForm.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Construction\ConstructionBudgetTab.ascx.designer.vb">
       <DependentUpon>ConstructionBudgetTab.ascx</DependentUpon>
@@ -726,7 +725,6 @@
     </Compile>
     <Compile Include="Construction\ConstructionInitialForm.aspx.vb">
       <DependentUpon>ConstructionInitialForm.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Controllers\CorporationEntitiesController.vb" />
     <Compile Include="Controllers\LeadInfoDocumentSearchesController.vb" />
@@ -1021,6 +1019,13 @@
     <Compile Include="DownloadFile.aspx.vb">
       <DependentUpon>DownloadFile.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EmailTemplate\ComplaintContent.ascx.designer.vb">
+      <DependentUpon>ComplaintContent.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\ComplaintContent.ascx.vb">
+      <DependentUpon>ComplaintContent.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="EmailTemplate\ComplaintsDetailNotify.ascx.designer.vb">
       <DependentUpon>ComplaintsDetailNotify.ascx</DependentUpon>
@@ -2480,6 +2485,7 @@
     <Content Include="DLL\PublicSiteData.dll" />
     <Content Include="DLL\Spire.Pdf.dll" />
     <Content Include="DownloadFile.aspx" />
+    <Content Include="EmailTemplate\ComplaintContent.ascx" />
     <Content Include="EmailTemplate\ComplaintsDetailNotify.ascx" />
     <Content Include="EmailTemplate\ComplaintsNotify.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserReport.ascx" />

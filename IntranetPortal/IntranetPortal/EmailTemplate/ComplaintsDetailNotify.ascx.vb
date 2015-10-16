@@ -14,7 +14,8 @@
         Dim userName = params("UserName")
 
         complaint = Data.CheckingComplain.Instance(bble)
-
+        rptComplaints.DataSource = complaint.ComplaintsResult.Where(Function(c) c.Status = "ACT").ToList
+        rptComplaints.DataBind()
     End Sub
 
 End Class
