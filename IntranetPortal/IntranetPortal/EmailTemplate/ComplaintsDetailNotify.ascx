@@ -30,6 +30,15 @@
         text-align: right;
         font-weight: normal;
     }
+    .inlineform {font-family : arial; font-size : 9pt; color : black; background-color : #CECECE }
+    .centercolhdg {
+        font-family: Arial;
+        font-size: 9pt;
+        font-weight: bold;
+        color: #000000;
+        text-align: center;
+        background-color: #CECECE;
+    }
 </style>
 
 
@@ -157,9 +166,9 @@ FYI - The DOB Complaint, for the property located at: (<%= GetMailDataItem("Addr
     </tbody>
 </table>
 
-<% If item.Complaints_Disposition_History IsNot Nothing AndAlso item.Complaints_Disposition_History.Count > 0 %>
+<% If item.Complaints_Disposition_History IsNot Nothing AndAlso item.Complaints_Disposition_History.Count > 0 Then %>
 
-<%--<table border="0" cellpadding="1" cellspacing="0" width="750">
+<table border="0" cellpadding="1" cellspacing="0" width="750">
     <tbody>
         <tr>
             <td class="mainhdg">Complaint Disposition History</td>
@@ -169,7 +178,7 @@ FYI - The DOB Complaint, for the property located at: (<%= GetMailDataItem("Addr
 <br />
 <table border="0" cellpadding="2" cellspacing="0" width="750">
     <!--- Nested Table for Content Area --->
-    <tbody>    
+    <tbody>
         <tr valign="middle">
             <td class="centercolhdg">#</td>
             <td class="centercolhdg" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Disposition</td>
@@ -187,190 +196,38 @@ FYI - The DOB Complaint, for the property located at: (<%= GetMailDataItem("Addr
             <td colspan="6"></td>
         </tr>
 
-        <tr class="inlineform" valign="top">
-            <!--- ROW For Data --->
-            <td class="content">3&nbsp;</td>
-            <td class="content">&nbsp;10/18/2012&nbsp;</td>
-            <!--- Cell for Disp Date --->
-            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;C2&nbsp;</td>
-            <td class="content">INSPECTOR UNABLE TO GAIN ACCESS - 2ND ATTEMPT&nbsp;</td>
-
-            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2222</td>
-            <!--- Cell for Inspection By --->
-
-            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10/17/2012&nbsp;</td>
-        </tr>
-
-        <tr valign="top">
-            <td class="content">&nbsp;</td>
-            <td class="content">&nbsp;</td>
-            <td class="content">&nbsp;</td>
-            <td class="content">NO ACCESS TO BUILDING. LS4 POSTED</td>
-            <td class="content" colspan="2"></td>
-        </tr>
+        <% for each history In item.Complaints_Disposition_History %>
 
         <tr class="inlineform" valign="top">
             <!--- ROW For Data --->
-            <td class="content">2&nbsp;</td>
-            <td class="content">&nbsp;10/18/2012&nbsp;</td>
+            <td class="content"><%= history.Disp_Num  %>&nbsp;</td>
+            <td class="content">&nbsp;<%= String.Format("{0:d}", history.Disp_Date) %>&nbsp;</td>
             <!--- Cell for Disp Date --->
-            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;C1&nbsp;</td>
-            <td class="content">INSPECTOR UNABLE TO GAIN ACCESS - 1ST ATTEMPT&nbsp;</td>
+            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;<%= history.Disp_Code %>&nbsp;</td>
+            <td class="content"><%= history.Disposition %>&nbsp;</td>
 
-            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2222</td>
+            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= history.Inspection_By %></td>
             <!--- Cell for Inspection By --->
 
-            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10/17/2012&nbsp;</td>
+            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= String.Format("{0:d}", history.Inspection_Date) %>&nbsp;</td>
         </tr>
 
-        <tr valign="top">
-            <td class="content">&nbsp;</td>
-            <td class="content">&nbsp;</td>
-            <td class="content">&nbsp;</td>
-            <td class="content">NO ACCESS LS4 POSTED</td>
-            <td class="content" colspan="2"></td>
-        </tr>
-
-
-
-
-        <tr class="inlineform" valign="top">
-            <!--- ROW For Data --->
-            <td class="content">1&nbsp;</td>
-            <td class="content">&nbsp;10/17/2012&nbsp;</td>
-            <!--- Cell for Disp Date --->
-            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;D5&nbsp;</td>
-            <td class="content">COMPLAINT ASSIGNED TO EMERGENCY RESPONSE TEAM&nbsp;</td>
-
-            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2374</td>
-            <!--- Cell for Inspection By --->
-
-            <td class="content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10/17/2012&nbsp;</td>
-        </tr>
-
-        <tr valign="top">
-            <td class="content">&nbsp;</td>
-            <td class="content">&nbsp;</td>
-            <td class="content">&nbsp;</td>
-            <td class="content">REFER TO BORO ERT AS PER A. CHIEF OF BORO ERT</td>
-            <td class="content" colspan="2"></td>
-        </tr>
-
-
-
+        <% Next %>
 
     </tbody>
-</table>--%>
+</table>
+
+<% else %>
+
+<table border="0" cellpadding="1" cellspacing="0" width="750">
+    <tbody>
+        <tr>
+            <td class="mainhdg">No Complaint Disposition History</td>
+        </tr>
+    </tbody>
+</table>
 
 <% End If %>
-
-<%--<table class="table" style="width: 100%; border: 1px solid #808080; line-height: 25px; white-space: normal; color: black">
-    <tr>
-                                                                                                                            <td colspan="4" class="form_header">Complaints - <%= item.ComplaintNumber %> -Detail
-        </td>
-    </tr>
-    <tr>
-        <td style="width: 150px;">Address:  
-        </td>
-        <td style="width: 35%"><%= item.Address%>
-        </td>
-        <td>Acquisition Date:
-        </td>
-        <td><%= item.AcquisitionDate%>
-        </td>
-    </tr>
-    <tr>
-        <td>Owner :  
-        </td>
-        <td><%= item.Owner%>
-        </td>
-        <td style="width: 150px">DateEntered:  
-        </td>
-        <td style="width: 35%"><%= item.DateEntered%>
-        </td>
-    </tr>
-    <tr>
-        <td style="color: red; vertical-align: top">Red Notes:
-        </td>
-        <td style="color: red"><%= item.RedNotes%>
-        </td>
-        <td>AssignedTo:  
-        </td>
-        <td><%= item.AssignedTo%>
-        </td>
-    </tr>
-    <tr>
-        <td>Subject:  
-        </td>
-        <td><%= item.Subject%>
-        </td>
-        <td>Zip:  
-        </td>
-        <td><%= item.Zip%>
-        </td>
-    </tr>
-    <tr>
-        <td>RE:  
-        </td>
-        <td><%= item.RE%>
-        </td>
-        <td>Reference311Number :  
-        </td>
-        <td><%= item.Reference311Number%>
-        </td>
-    </tr>
-    <tr>
-        <td>LastInspection:  
-        </td>
-        <td style="background-color: lightyellow"><%= item.LastInspection%>
-        </td>
-        <td style="width: 150px">Category :  
-        </td>
-        <td><%= item.CategoryCode%>
-        </td>
-
-    </tr>
-    <tr>
-        <td style="width: 150px">Comments:  
-        </td>
-        <td style="background-color: lightyellow"><%= item.Comments%>
-        </td>
-        <td>DispositionDetails:  
-        </td>
-        <td><%= item.DispositionDetails%>
-        </td>
-    </tr>
-    <tr>
-        <td>Disposition:  
-        </td>
-        <td><%= item.Disposition%>
-        </td>
-        <td>LastUpdated:  
-        </td>
-        <td><%= item.LastUpdated%>
-        </td>
-    </tr>
-    <tr>
-        <td>Priority:  
-        </td>
-        <td><%= item.Priority%>
-        </td>
-        <td>BIN:  
-        </td>
-        <td><%= item.BIN%>
-        </td>
-    </tr>
-    <tr>
-        <td>DOB Violation:
-        </td>
-        <td><%= item.DOBViolation %>
-        </td>
-        <td>ECB Violation:
-        </td>
-        <td><%= item.ECBViolation%>
-        </td>
-    </tr>
-</table>--%>
 
 <br />
 

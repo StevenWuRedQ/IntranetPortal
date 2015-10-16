@@ -1,4 +1,5 @@
-﻿Imports IntranetPortal.Core
+﻿Imports System.Runtime.Serialization
+Imports IntranetPortal.Core
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 
@@ -192,7 +193,8 @@ Partial Public Class CheckingComplain
 
         If res IsNot Nothing Then
             Try
-                result = JsonConvert.DeserializeObject(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result())(res.Complaints_List.ToJsonString)
+                Dim complaintList = res.Complaints_List.ToJsonString
+                result = JsonConvert.DeserializeObject(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result())(complaintList)
 
             Catch ex As Exception
                 Core.SystemLog.LogError("Error on Deserialize Complaints List", ex, jsonResult, Nothing, BBLE)
@@ -341,7 +343,9 @@ Namespace DataAPI
     End Class
 
     Partial Class SP_DOB_Complaints_By_BBLE_Result
-        Public Property Complaints_Disposition_History As JArray
+        <DataMember>
+        Public Property Complaints_Disposition_History As List(Of DataAPI.DOB_Complaints_Disposition_History)
+        'Complaints_Disposition_History
     End Class
 
 End Namespace

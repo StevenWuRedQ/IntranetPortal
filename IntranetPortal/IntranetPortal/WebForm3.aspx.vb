@@ -24,6 +24,18 @@ Public Class WebForm3
         emailData.Add("Date", DateTime.Today.ToString("m"))
         'IntranetPortal.Core.EmailService.SendMail("Chris@gvs4u.com", "", "Task Summary on " & DateTime.Now, LoadSummaryEmail(userName), Nothing)
         Core.EmailService.SendMail("Georgev@myidealprop.com", "chrisy@myidealprop.com", "ComplaintsNotifySummary", emailData)
+    End Sub
+
+    Protected Sub Button2_Click(sender As Object, e As EventArgs)
+
+        Dim complaint = IntranetPortal.Data.CheckingComplain.Instance(Request.QueryString("bble").ToString)
+        Dim mailData As New Dictionary(Of String, String)
+        mailData.Add("UserName", "All")
+        mailData.Add("Address", complaint.Address)
+        mailData.Add("BBLE", complaint.BBLE)
+
+        Dim svr As New CommonService
+        svr.SendEmailByControl("chrisy@myidealprop.com", "DOB Complaint Update for: " & complaint.Address, "ComplaintsDetailNotify", mailData)
 
 
     End Sub
