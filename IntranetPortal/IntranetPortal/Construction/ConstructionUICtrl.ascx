@@ -605,5 +605,9 @@
         $scope.openInitialForm = function () {
             window.open("/Construction/ConstructionInitialForm.aspx?bble=" + $scope.CSCase.BBLE, 'Initial Form', 'width=1280, height=960')
         }
+
+        $scope.openBudgetForm = function () {
+            window.open("/Construction/ConstructionBudgetForm.aspx?bble=" + $scope.CSCase.BBLE, 'Budget Form', 'width=1024, height=768')
+        }
     });
 </script>

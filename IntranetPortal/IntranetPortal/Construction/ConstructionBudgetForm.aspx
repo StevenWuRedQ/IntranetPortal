@@ -4,60 +4,98 @@
 </asp:Content>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
+    <style>
+        #budgetTable {
+            font-size: 14px;
+        }
+
+            #budgetTable td > input {
+                border: none;
+            }
+
+            #budgetTable table {
+                width: 900px;
+                table-layout: fixed;
+            }
+
+            #budgetTable input[type=text] {
+                width: 100%;
+                padding: 2px;
+            }
+
+        #budgetTableHeader {
+            position: relative;
+            top: 0;
+        }
+    </style>
+    <script>
+
+    </script>
     <div id="BudgetCtrl" ng-controller="BudgetCtrl">
-        <div class="budgetTitle">
-            <h3>Budget Form</h3>
+        <div class="container">
+            <h3 class="ss_form_title text-center">Budget Form</h3>
             <div>
-                <button type="button" class="btn btn-success btn-sm pull-right" ng-click="exportExcel()">Export Excel</button>
+                <button type="button" class="btn btn-primary pull-right" ng-click="save()"><i class="fa fa-floppy-o"></i>&nbsp;Save</button>
+                <span class="pull-right">&nbsp;&nbsp;</span>
+                <button type="button" class="btn btn-success pull-right" ng-click="exportExcel()"><i class="fa fa-file-excel-o">&nbsp;</i>Export Excel</button>
             </div>
         </div>
-        <table class="table table-condensed">
-            <tr>
-                <th style="width: 180px">Description</th>
-                <th style="width: 60px">Materials</th>
-                <th style="width: 60px">Labor</th>
-                <th style="width: 60px">Total Budget Amount</th>
-                <th style="width: 60px">Amount Spent to Date</th>
-                <th style="width: 60px">Amount Requested</th>
-                <th style="width: 60px">Balance</th>
-            </tr>
-            <tr ng-repeat="d in data.Form ">
-                <td ng-style="getStyle(d)">
-                    <input type="checkbox" ng-model="d.checked" style="display: inline-block" /><span>{{d.description}}</span></td>
-                <td>
-                    <input style="width: 60px; border: none" ng-model="d.materials" money-mask /></td>
-                <td>
-                    <input style="width: 60px; border: none" ng-model="d.labor" money-mask /></td>
-                <td>
-                    <input style="width: 60px; border: none" ng-model="d.contract" money-mask ng-change="update(d)" /></td>
-                <td>
-                    <input style="width: 60px; border: none" ng-model="d.toDay" money-mask ng-change="update(d)" /></td>
-                <td>
-                    <input style="width: 60px; border: none" ng-model="d.paid" money-mask ng-change="update(d)" /></td>
-                <td>
-                    <input style="width: 60px; border: none" ng-model="d.balance" money-mask readonly /></td>
-            </tr>
-            <tr style="background-color: yellow; font-weight: bolder">
-                <td>Total</td>
-                <td></td>
-                <td></td>
-                <td>
-                    <input style="width: 60px; border: none; background-color: yellow" ng-model="data.Total.contract" money-mask readonly /></td>
-                <td>
-                    <input style="width: 60px; border: none; background-color: yellow" ng-model="data.Total.toDay" money-mask readonly /></td>
-                <td>
-                    <input style="width: 60px; border: none; background-color: yellow" ng-model="data.Total.paid" money-mask readonly /></td>
-                <td>
-                    <input style="width: 60px; border: none; background-color: yellow" ng-model="data.Total.balance" money-mask readonly /></td>
-            </tr>
-        </table>
+        <hr />
+        <div id="budgetTable" class="container">
+            <table class="table table-condensed">
+                <thead id="budgetTableHeader">
+                    <tr>
+                        <th class="col-sm-3">Description</th>
+                        <th class="col-sm-1">Materials</th>
+                        <th class="col-sm-1">Labor</th>
+                        <th class="col-sm-1">Total Budget Amount</th>
+                        <th class="col-sm-1">Amount Spent to Date</th>
+                        <th class="col-sm-1">Amount Requested</th>
+                        <th class="col-sm-1">Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="d in data.Form">
+                        <td ng-style="getStyle(d)" class="col-sm-3">
+                            <input type="checkbox" style="display: inline-block" ng-model="d.checked" /><span>&nbsp;{{d.description}}</span></td>
+                        <td class="col-sm-1">
+                            <input type="text" ng-model="d.materials" money-mask /></td>
+                        <td class="col-sm-1">
+                            <input type="text" ng-model="d.labor" money-mask /></td>
+                        <td class="col-sm-1">
+                            <input type="text" ng-model="d.contract" money-mask ng-change="update(d)" /></td>
+                        <td class="col-sm-1">
+                            <input type="text" ng-model="d.toDay" money-mask ng-change="update(d)" /></td>
+                        <td class="col-sm-1">
+                            <input type="text" ng-model="d.paid" money-mask ng-change="update(d)" /></td>
+                        <td class="col-sm-1">
+                            <input type="text" ng-model="d.balance" money-mask readonly /></td>
+                    </tr>
+                    <tr style="background-color: yellow; font-weight: bolder">
+                        <td>Total</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <input type="text" style="background-color: yellow" ng-model="data.Total.contract" money-mask readonly /></td>
+                        <td>
+                            <input type="text" style="background-color: yellow" ng-model="data.Total.toDay" money-mask readonly /></td>
+                        <td>
+                            <input type="text" style="background-color: yellow" ng-model="data.Total.paid" money-mask readonly /></td>
+                        <td>
+                            <input type="text" style="background-color: yellow" ng-model="data.Total.balance" money-mask readonly /></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
     </div>
+
     <script>
 
         angular.module('PortalApp').controller('BudgetCtrl', function ($scope, $http, ptCom) {
             $scope.data = {
                 BBLE: '<%= BBLE %>',
-                Form: {},
+                Form: [],
                 Total: {
                     contract: 0.0,
                     toDay: 0.0,
@@ -78,15 +116,28 @@
                          });
                 }
 
-                $http.get("/api/ConstructionCases/GetBudgetForm/?bble" + $scope.data.BBLE)
+                $http.get("/api/ConstructionCases/GetBudgetForm/?bble=" + $scope.data.BBLE)
                      .then(function (res) {
                          if (res.data) {
-                             $scope.data.Form = res.data
+                             $scope.data = res.data;
+                             $scope.updateTotal();
                          } else {
                              getTemplate();
                          }
                      })
 
+            }
+            $scope.save = function () {
+                var url = "/api/ConstructionCases/BudgetForm"
+                $http({
+                    method: 'POST',
+                    url: url,
+                    data: JSON.stringify($scope.data)
+                }).then(function () {
+                    alert("Save Successful");
+                }, function error() {
+                    alert("Fails to Save.")
+                })
             }
 
             $scope.update = function (d) {
@@ -114,7 +165,7 @@
                 $scope.data.Total = total;
             }
             $scope.getStyle = function (d) {
-                if (d.style) return d.style;
+                if (d&& d.style) return d.style;
             }
             $scope.exportExcel = function () {
                 var data = {};
@@ -156,7 +207,7 @@
                     })
                 }
             }
+            $scope.load();
         });
     </script>
-
 </asp:Content>

@@ -9,7 +9,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Budget</label>
-                <button type="button" class="btn btn-primary">Initial Budget</button>
+                <button type="button" class="btn btn-primary" ng-click="openBudgetForm()">Initial Budget</button>
             </li>
         </ul>
         <%-- 

@@ -20,13 +20,84 @@
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" type="text/css" href="/css/stevencss.css?v=1.02" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
     <style>
+
         html, body, #form1 {
             width: 100% !important;
         }
 
         .NewTaskAnimation {
         }
+
+    </style>
+    <style type="text/css">
+
+        .message {
+            background-size: 40px 40px;
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%, transparent 75%, transparent);
+            box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
+            width: 300px;
+            border: 1px solid;
+            color: #fff;
+            padding: 15px;
+            position: fixed;
+            _position: absolute;
+            text-shadow: 0 1px 0 rgba(0,0,0,.5);
+            animation: animate-bg 5s linear infinite;
+        }
+
+        .info {
+            background-color: #4ea5cd;
+            border-color: #3b8eb5;
+        }
+
+        .message .msgtitle {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+        }
+
+        .message p {
+            margin: 0;
+        }
+
+        @keyframes animate-bg {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: -80px 0;
+            }
+        }
+
+        /* The animation code */
+        @keyframes example {
+            0% {
+                background-color: red;
+            }
+
+            25% {
+                background-color: yellow;
+            }
+
+            50% {
+                background-color: blue;
+            }
+
+            100% {
+                background-color: green;
+            }
+        }
+
+        /* The element to apply the animation to */
+        .NewTask {
+            background-color: red;
+            animation-name: example;
+            animation-duration: 10s;
+            animation: infinite;
+        }
+
     </style>
 
     <script type="text/javascript" src="/scripts/PortalMessager.js"></script>
@@ -34,22 +105,19 @@
 </head>
 <body onload="init();" id="testIDbody">
     <form id="form1" runat="server">
+
         <script type="text/javascript">
+
+            var ctrId = 'divChat';
+            var inAnimate = false;
+
             function ShowSearchLeadsInfo(bble) {
                 var url = '/ViewLeadsInfo.aspx?id=' + bble;
                 OpenLeadsWindow(url, "View Leads Info " + bble);
-                //var left = (screen.width / 2) - (1350 / 2);
-                //var top = (screen.height / 2) - (930 / 2);
-                //window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
             }
 
             function OpenLeadsWindow(url, title, width, height) {
                 alert('error ' + width + height);
-                //var vwidth = width ? width : 1350;
-                //var vheight = height ? height : 930;
-                //var left = (screen.width / 2) - (vwidth / 2);
-                //var top = (screen.height / 2) - (vheight / 2);
-                //window.open(url, title, 'Width=' + vwidth + 'px,Height=' + vheight + 'px, top=' + top + ', left=' + left);
             }
 
             function GoToLead(bble) {
@@ -66,7 +134,6 @@
                 return str.indexOf(suffix, str.length - suffix.length) !== -1;
             }
 
-            var ctrId = 'divChat';
             function ShowChatWindow() {
                 var tmp = $('#' + ctrId);
                 if (tmp.is('div')) {
@@ -112,7 +179,6 @@
                 }
             }
 
-            var inAnimate = false;
             function NewTask() {
                 //$("#SpanAmount_TotalTask").css("background-color", "#e63000");
                 if (!inAnimate)
@@ -136,6 +202,7 @@
             }
 
         </script>
+
         <dx:ASPxSplitter ID="MainSplitter" runat="server" Height="100%" Width="100%" FullscreenMode="True" ShowCollapseBackwardButton="true">
             <Styles>
                 <Pane>
@@ -143,7 +210,9 @@
                     <Border BorderWidth="0px" />
                 </Pane>
             </Styles>
+
             <Panes>
+
                 <dx:SplitterPane Name="leftNavPane" Size="280" AllowResize="False">
                     <Panes>
                         <dx:SplitterPane Name="NavPane">
@@ -177,6 +246,7 @@
                         </dx:SplitterPane>
                     </Panes>
                 </dx:SplitterPane>
+
                 <dx:SplitterPane Name="RightContentPane">
                     <Panes>
                         <dx:SplitterPane Name="HeaderPane" Size="52px">
@@ -209,9 +279,7 @@
                                                             <%--delete search text by steven--%>
                                                             <dx:ASPxButton runat="server" RenderMode="Button" ID="btnSearch" ClientInstanceName="btnSearchClient" UseSubmitBehavior="false" Text=" " AutoPostBack="false" BackgroundImage-ImageUrl="/images/search_btn.png" Height="30px" Width="55px" Border-BorderStyle="None" HoverStyle-BackColor="Transparent">
                                                                 <%------end-------%>
-                                                                <%--<Image Height="16px" Width="16px" Url="/images/search_btn.png"></Image>--%>
-                                                                <%-- <FocusRectPaddings PaddingLeft="2" PaddingRight="2" PaddingBottom="0" PaddingTop="0" />--%>
-                                                                <%--<Image Url="/images/search_btn.png"></Image>--%>
+
                                                                 <ClientSideEvents Click="function(s,e){
                                                                     ASPxPopupSearchPanel.PerformCallback(txtSearchKeyClient.GetText());                                                                                                                          
                                                             }" />
@@ -236,8 +304,7 @@
                                                                     <a href="mailto:support@myidealprop.com">
                                                                         <i class="fa fa-wrench icon_btn color_black tooltip-examples" style="margin-left: 10px; color: black;" title="Support email: support@myidealprop.com"></i>
                                                                     </a>
-                                                                    <%-- <img src="/images/arrow_down.png" />--%>
-                                                                    <%--<asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />--%>
+
                                                                     <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" Text='<i class="fa fa-sign-out icon_btn color_black tooltip-examples" style="margin-left:10px;color: black;" title="Log Out"></i>'>                                                                
                                                                     </asp:LinkButton>
 
@@ -253,17 +320,6 @@
                                                     </tr>
                                                 </table>
                                             </div>
-                                            <%--change the pop search screen UI style by steven--%>
-                                            <%--MinHeight="150px"--%>
-                                            <%--       <dx:ASPxPopupMenu runat="server" ID="messageList" ClientInstanceName="messageListClinet"
-                                                AutoPostBack="false"
-                                                PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
-                                                ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
-                                                <ItemStyle Paddings-PaddingLeft="10px" />
-                                                <Items>
-                                                    <dx:MenuItem Text="Message1"></dx:MenuItem>
-                                                </Items>
-                                            </dx:ASPxPopupMenu>--%>
                                             <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSearchPanel" Width="600px" Height="250px"
                                                 MaxWidth="800px" MaxHeight="800px" MinWidth="150px" ID="pcMain" OnWindowCallback="pcMain_WindowCallback"
                                                 ShowHeader="false" CloseAction="CloseButton"
@@ -301,14 +357,12 @@
                                                                     <DataItemTemplate>
                                                                         <%--use font image to change the image--%>
                                                                         <i class="fa fa-sheqel tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Request Update?" onclick='<%# String.Format("OnRequestUpdate(""{0}"");return false;", Eval("BBLE")) %>' runat="server" visible='<%# not CBool(Eval("Viewable"))%>'></i>
-                                                                        <%--<i class="fa fa-external-link-square tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To Lead" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# Eval("Viewable")%>'></i>--%>
+
                                                                         <i class="fa fa-external-link-square tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To" onclick='<%# If(DirectCast(Eval("Status"), IntranetPortal.LeadStatus) = IntranetPortal.LeadStatus.InProcess, String.Format("ShowPopupLeadsMenu(this, {0})", Eval("BBLE")), String.Format("GoToLead({0})", Eval("BBLE")))%>' runat="server" visible='<%# Eval("Viewable")%>'></i>
                                                                         <span style="width: 10px">&nbsp;&nbsp;</span>
                                                                         <i class="fa fa-list-alt tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" onclick='<%#  String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# Eval("Viewable")%>'></i>
 
-                                                                        <%--change image to beaty style by steven--%>
-                                                                        <%--<img src="~/images/search_pop_go_leads.png" title="Go To Lead" style="vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />
-                                                                        <img src="~/images/search_pop_menu.png" style="vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />--%>
+
                                                                     </DataItemTemplate>
                                                                 </dx:GridViewDataColumn>
                                                             </Columns>
@@ -335,17 +389,6 @@
                                                                 </tr>
                                                             </table>
                                                         </asp:Panel>
-                                                        <%--  <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="popupMenuLeads"
-                                                            AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
-                                                            <ItemStyle Paddings-PaddingLeft="20px" />
-                                                            <Items>
-                                                                <dx:MenuItem Text="Leads" Name="Leads"></dx:MenuItem>
-                                                                <dx:MenuItem Text="Short Sale" Name="ShortSale"></dx:MenuItem>
-                                                                <dx:MenuItem Text="Eviction" Name="Eviction"></dx:MenuItem>
-                                                                <dx:MenuItem Text="Legal" Name="Legal"></dx:MenuItem>
-                                                            </Items>
-                                                            <ClientSideEvents ItemClick="OnPopupMenuLeadsClick" />
-                                                        </dx:ASPxPopupMenu>--%>
                                                     </dx:PopupControlContentControl>
                                                 </ContentCollection>
                                                 <ClientSideEvents EndCallback="function(s,e){s.ShowAtElement(txtSearchKeyClient.GetMainElement()); $('.tooltip-examples').tooltip(); }" />
@@ -360,6 +403,7 @@
                                 </dx:SplitterContentControl>
                             </ContentCollection>
                         </dx:SplitterPane>
+
                         <dx:SplitterPane Name="MainPane" Separator-Visible="False">
                             <Separator Visible="False"></Separator>
                             <PaneStyle CssClass="noborder"></PaneStyle>
@@ -369,79 +413,11 @@
                                 </dx:SplitterContentControl>
                             </ContentCollection>
                         </dx:SplitterPane>
+
                     </Panes>
                 </dx:SplitterPane>
             </Panes>
         </dx:ASPxSplitter>
-
-        <style type="text/css">
-            .message {
-                background-size: 40px 40px;
-                background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%, transparent 75%, transparent);
-                box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
-                width: 300px;
-                border: 1px solid;
-                color: #fff;
-                padding: 15px;
-                position: fixed;
-                _position: absolute;
-                text-shadow: 0 1px 0 rgba(0,0,0,.5);
-                animation: animate-bg 5s linear infinite;
-            }
-
-            .info {
-                background-color: #4ea5cd;
-                border-color: #3b8eb5;
-            }
-
-            .message .msgtitle {
-                margin: 0 0 5px 0;
-                font-size: 14px;
-            }
-
-            .message p {
-                margin: 0;
-            }
-
-            @keyframes animate-bg {
-                from {
-                    background-position: 0 0;
-                }
-
-                to {
-                    background-position: -80px 0;
-                }
-            }
-
-            /* The animation code */
-            @keyframes example {
-                0% {
-                    background-color: red;
-                }
-
-                25% {
-                    background-color: yellow;
-                }
-
-                50% {
-                    background-color: blue;
-                }
-
-                100% {
-                    background-color: green;
-                }
-            }
-
-            /* The element to apply the animation to */
-            .NewTask {
-                background-color: red;
-                animation-name: example;
-                animation-duration: 10s;
-                animation: infinite;
-            }
-        </style>
-
-
 
         <div id="divMsgTest" class="info message" style="bottom: -300px; right: 25px">
             <div class="msgtitle">
@@ -473,32 +449,6 @@
             </table>
         </div>
 
-        <%--   <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMessagerControlClient" Width="460px" Height="350px" 
-            MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl2"
-            Modal="true"
-            runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-            <HeaderTemplate>
-                <div class="pop_up_header_margin">
-                    <i class="fa fa-envelope with_circle pop_up_header_icon"></i>
-                    <span class="pop_up_header_text">New Message</span>
-                </div>
-            </HeaderTemplate>
-            <ContentCollection>
-                <dx:PopupControlContentControl runat="server" Visible="false">
-                    <dx:ASPxPageControl Width="100%" runat="server" ActiveTabIndex="0" TabSpacing="0px" EnableHierarchyRecreation="True" ShowTabs="false">
-                        <TabPages>
-                            <dx:TabPage Text="First" Name="tabStreet">
-                                <ContentCollection>
-                                    <dx:ContentControl runat="server">
-                                    </dx:ContentControl>
-                                </ContentCollection>
-                            </dx:TabPage>
-                        </TabPages>
-                    </dx:ASPxPageControl>
-                </dx:PopupControlContentControl>
-            </ContentCollection>
-            <ClientSideEvents Closing="function(){hook();}" />
-        </dx:ASPxPopupControl>--%>
         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupAwayControlClient" Width="800px" Height="400px"
             ID="ASPxPopupControl1" HeaderText="While You Were Away" Modal="true" CloseAction="CloseButton"
             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -510,7 +460,6 @@
         </dx:ASPxPopupControl>
         <uc1:SendMail runat="server" ID="SendMail" />
     </form>
-    <%--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>--%>
     <script>window.jQuery || document.write('<script src="/Scripts/jquery-2.1.3.min.js"><\/script>')</script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="/Scripts/js/jquery.easing.1.3.js"></script>

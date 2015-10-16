@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel.DataAnnotations
+Imports System.Runtime.Serialization
 
 <MetadataType(GetType(ConstructionBudgetMetaData))>
 Partial Public Class ConstructionBudget
@@ -28,7 +29,8 @@ End Class
 
 Public Class ConstructionBudgetMetaData
 
-    <Newtonsoft.Json.JsonConverter(GetType(Core.JsObjectToStringConverter))>
+    <DataMember>
+    <Newtonsoft.Json.JsonConverter(GetType(Core.JsArrayToStringConverter))>
     Public Property Form As String
 
 End Class
