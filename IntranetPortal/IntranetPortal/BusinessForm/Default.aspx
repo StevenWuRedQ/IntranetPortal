@@ -74,10 +74,51 @@
                                 </li>
                                 <li class="pull-right" style="margin-right: 30px; color: #ffa484">
                                     <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" onclick="FormControl.SaveData()" data-original-title="Save"></i>
+                                    <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Re-Assign" onclick="popupSelectAttorneyCtr.PerformCallback('type|Users');popupSelectAttorneyCtr.ShowAtElement(this);"></i>
                                     <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
                                     <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
                                 </li>
                             </ul>
+
+                            <script type="text/javascript">
+                                var refreshList = false;
+                            </script>
+                            
+                            <dx:ASPxPopupControl ClientInstanceName="popupSelectAttorneyCtr" Width="300px" Height="300px"
+                                MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
+                                HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
+                                runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
+                                <ContentCollection>
+                                    <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentReAssign">
+                                        <asp:HiddenField runat="server" ID="hfUserType" />
+                                        <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270" SelectedIndex="0" Width="100%">
+                                        </dx:ASPxListBox>
+                                        <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
+                                            <ClientSideEvents Click="function(s,e){
+                                        var item = listboxEmployeeClient.GetSelectedItem();
+                                        if(item == null)
+                                        {
+                                             alert('Please select Employee.');
+                                             return;
+                                         }
+                                        popupSelectAttorneyCtr.PerformCallback('Save|' + leadsInfoBBLE + '|' + item.text);
+                                        refreshList = true;
+                                        popupSelectAttorneyCtr.Hide();
+                                        }" />
+                                        </dx:ASPxButton>
+                                    </dx:PopupControlContentControl>
+                                </ContentCollection>
+                                <ClientSideEvents Closing="function(s,e){
+                                            if(refreshList)
+                                            { 
+                                              if (typeof gridTrackingClient != 'undefined')
+                                                    gridTrackingClient.Refresh();
+                                              if (typeof gridCase != 'undefined')
+                                                    gridCase.Refresh();
+                                              refreshList = false;
+                                            }
+                                        }" />
+                            </dx:ASPxPopupControl>
                         </div>
                         <div class="tab-content">
                             <asp:Repeater runat="server" ID="rptBusinessControl" OnItemDataBound="rptBusinessControl_ItemDataBound">
@@ -179,7 +220,7 @@
 
                             $(function () {
                                 FormControl.InitTab('<%= FormData.DefaultControl.Name%>', '<%= FormData.DefaultControl.BusinessData%>');
-                             });
+                            });
                         </script>
 
                     </dx:SplitterContentControl>

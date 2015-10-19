@@ -17,6 +17,15 @@ Public Class TitleManage
         Return False
     End Function
 
+    Public Shared Sub AssignTo(bble As String, userName As String, assignBy As String)
+        Dim tCase = TitleCase.GetCase(bble)
+        tCase.Owner = userName
+        tCase.SaveData(assignBy)
+
+        Dim comments = String.Format("The case is assign to {0}.", userName)
+        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Title.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
+    End Sub
+
     Public Shared Function IsViewable(userName As String) As Boolean
 
         Dim roleNames = Core.PortalSettings.GetValue("TitleViewableRoles").Split(";")

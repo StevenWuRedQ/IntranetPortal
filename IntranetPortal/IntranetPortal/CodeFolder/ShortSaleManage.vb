@@ -103,6 +103,8 @@ Public Class ShortSaleManage
 
                 If Roles.IsUserInRole(createBy, "ShortSale-Manager") Then
                     NewCaseApproved(bble, createBy)
+                    Dim emp = Employee.GetInstance(createBy)
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("The case was created and assigned to {0}.", ssCase.Owner), bble, LeadsActivityLog.LogCategory.ShortSale.ToString, emp.EmployeeID, createBy, LeadsActivityLog.EnumActionType.UpdateInfo)
                 Else
                     NewCaseProcess.ProcessStart(bble, bble, createBy, String.Format("{0} want to move this case to ShortSale. Please approval.", createBy))
                 End If
