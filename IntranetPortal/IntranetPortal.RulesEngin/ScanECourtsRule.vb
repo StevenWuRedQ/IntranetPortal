@@ -20,14 +20,17 @@ Public Class ScanECourtsRule
 
                 eList.Add(legalManger)
                 Dim emails = String.Join(";", eList.Select(Function(e) e.Email).Distinct.ToArray)
-                Dim Users = String.Join(",", eList.Select(Function(e) e.Name).Distinct.ToArray)
+                Dim Users = String.Join(";", eList.Select(Function(e) e.Name).Distinct.ToArray)
                 Dim maildata = New Dictionary(Of String, String)
                 maildata.Add("IndexNumber", eCourt.IndexNumber)
                 maildata.Add("Users", Users)
                 maildata.Add("CaseName", lcase.CaseName)
                 maildata.Add("BBLE", eCourt.BBLE)
                 maildata.Add("AppearanceDate", eCourt.AppearanceDate)
-                Core.EmailService.SendMail(emails, Nothing, "LegalScanECourtNotify", maildata)
+                Using client As New PortalService.CommonServiceClient
+                    client.SendEmailByTemplate(Users, "LegalScanECourtNotify", maildata)
+                End Using
+                'Core.EmailService.SendMail(emails, Nothing, "LegalScanECourtNotify", maildata)
                 Log("Send email to  :" & Users & " for BBLE" & lcase.BBLE)
 
             Else

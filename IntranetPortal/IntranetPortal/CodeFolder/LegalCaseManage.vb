@@ -26,7 +26,21 @@ Public Class LegalCaseManage
         End If
         Return "{}"
     End Function
+    Public Shared Function GetCaseRelateUsers(bble As String) As List(Of Employee)
+        Dim legalManger = GetLegalManger()
 
+
+        Dim lcase = LegalCase.GetCase(bble)
+        Dim SendList = {lcase.Attorney, lcase.ResearchBy}
+        Dim eList = SendList.Where(Function(e) Not String.IsNullOrEmpty(e)).Select(Function(e) Employee.GetInstance(e)).ToList
+        If (eList Is Nothing) Then
+            eList = New List(Of Employee)
+        End If
+        eList.Add(legalManger)
+
+        Return eList
+
+    End Function
     Public Shared Function GetLegalCaseList(userName As String, status As Legal.LegalCaseStatus) As List(Of LegalCase)
         If Roles.IsUserInRole(userName, "Legal-Manager") OrElse Roles.IsUserInRole(userName, "Admin") OrElse LegalCaseManage.IsViewable(userName) Then
             Return LegalCase.GetCaseList(status)
