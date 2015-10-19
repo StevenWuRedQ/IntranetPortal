@@ -2,66 +2,88 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="mobile_content">
     <div ng-controller="SpotCheckCtrl">
-        <div class="section">
-            <div class="form-group">
-                <label>Date</label>
-                <input class="form-control" placeholder="00/00/0000" ng-model="form.date">
-            </div>
-            <div class="form-group">
-                <label>Property Address</label>
-                <select class="form-control" ng-options="l.Id as l.propertyAddress for l in CaseList|orderBy: 'propertyAddress' " ng-model="form.id" ng-change="onAddressChange()"></select>
-            </div>
-            <div class="form-group">
-                <label>Access</label>
-                <input class="form-control" type="text" placeholder="" ng-model="form.access">
-            </div>
-            <div class="form-group">
-                <label>Number of workers</label>
-                <input class="form-control" type="text" placeholder="" ng-model="form.numOfWork">
+
+        <div class="card">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Date</span>
+                    <input type="text" placeholder="00/00/0000" ng-model="form.date" />
+                </label>
+                <label class="item item-input item-select">
+                    <span class="input-label">Property Address</span>
+                    <select ng-options="l.Id as l.propertyAddress for l in CaseList|orderBy: 'propertyAddress' " ng-model="form.id" ng-change="onAddressChange()"></select>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Access</span>
+                    <input type="text" placeholder="" ng-model="form.access" />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Number of workers</span>
+                    <input type="text" placeholder="" ng-model="form.numOfWork" />
+                </label>
             </div>
         </div>
-        <hr />
-        <div class="section">
-            <div class="form-group">
-                <label>Description of interior work being done </label>
-                <textarea class="form-control" rows="5" ng-model="form.descInterior"></textarea>
-            </div>
 
-            <div class="form-group">
-                <label>Description of exterior work being done </label>
-                <textarea class="form-control" rows="5" ng-model="form.descExterior"></textarea>
-            </div>
+        <div class="card">
+            <div class="list">
 
-            <div class="form-group">
-                <label>Description of Material on site</label>
-                <textarea class="form-control" rows="5" ng-model="form.descMaterial"></textarea>
-            </div>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Description of interior work being done </span>
+                    <textarea rows="5" ng-model="form.descInterior"></textarea>
+                </label>
 
-            <div class="form-group">
-                <label>Are permits on site</label>
-                <input type="checkbox" ng-model="form.isPermitOnsite" />
-                <br />
-                <label>If YES, please confirm which permit(s) and date it expires</label>
-                <textarea class="form-control" rows="5" ng-model="form.permitsAndExpired"></textarea>
-            </div>
 
-            <div class="form-group">
-                <label>Are plans on site</label>
-                <input type="checkbox" ng-model="form.isPlansOnSite" />
-            </div>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Description of exterior work being done </span>
+                    <textarea rows="5" ng-model="form.descExterior"></textarea>
+                </label>
 
-            <div class="form-group">
-                <label>Next day planned work/tasks</label>
-                <textarea class="form-control" rows="5" ng-model="form.nextDayPlan"></textarea>
-            </div>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Description of Material on site</span>
+                    <textarea class="form-control" rows="5" ng-model="form.descMaterial"></textarea>
+                </label>
 
-            <div class="form-group">
-                <label>Additional Notes:</label>
-                <textarea class="form-control" rows="5" ng-model="form.note"></textarea>
+                <span class="item item-toggle">Are permits on site
+                    <label class="toggle toggle-assertive">
+                        <input type="checkbox" ng-model="form.isPermitOnsite" />
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </span>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">If YES, please confirm which permit(s) and date it expires</span>
+                    <textarea rows="5" ng-model="form.permitsAndExpired"></textarea>
+                </label>
+
+                <span class="item item-toggle">Are plans on site
+                    <label class="toggle toggle-assertive">
+                        <input type="checkbox" ng-model="form.isPlansOnSite" />
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </span>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Next day planned work/tasks</span>
+                    <textarea rows="5" ng-model="form.nextDayPlan"></textarea>
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Additional Notes:</span>
+                    <textarea rows="5" ng-model="form.note"></textarea>
+                </label>
             </div>
-            <button type="button" class="btn btn-primary pull-left" ng-click="saveForm()">Save</button>
-            <button type="button" class="btn btn-success pull-right" ng-click="submitForm()">Finish</button>
         </div>
+
+        <div class="row">
+            <button type="button" class="button button-positive col col-40" ng-click="saveForm()">Save</button>
+            <div class="col"></div>
+            <button type="button" class="button button-balanced col col-40" ng-click="submitForm()">Finish</button>
+        </div>
+
     </div>
     <script>
         angular.module('PortalMapp').controller("SpotCheckCtrl", function ($scope, $http, $filter) {
@@ -94,7 +116,7 @@
                     } else {
                         $scope.form.date = new Date().toLocaleDateString();
                     }
-                    
+
                 }, function error(res) {
                     alert("load data fails");
                 })
@@ -107,7 +129,7 @@
                         url: '/api/ConstructionCases/SaveSpotList',
                         data: JSON.stringify($scope.form)
                     }).then(function () {
-                        alert("Save Successful");                        
+                        alert("Save Successful");
                     })
 
                 }

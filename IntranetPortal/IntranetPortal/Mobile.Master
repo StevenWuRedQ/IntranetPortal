@@ -3,62 +3,49 @@
 <!DOCTYPE html>
 <html ng-app="PortalMapp">
 <head>
-    <meta charset="utf-8" />
     <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
     <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
-    <link rel="stylesheet" href="/Scripts/mobile-angular-ui-1.2.0-rc.3/dist/css/mobile-angular-ui-hover.min.css" />
-    <link rel="stylesheet" href="/Scripts/mobile-angular-ui-1.2.0-rc.3/dist/css/mobile-angular-ui-base.min.css" />
-    <link rel="stylesheet" href="/Scripts/mobile-angular-ui-1.2.0-rc.3/dist/css/mobile-angular-ui-desktop.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.min.js"></script>
-    <script src="/Scripts/mobile-angular-ui-1.2.0-rc.3/dist/js/mobile-angular-ui.min.js"></script>
-    <script src="/Scripts/mobile-angular-ui-1.2.0-rc.3/dist/js/mobile-angular-ui.gestures.min.js"></script>
+    <link href="/Scripts/ionic/release/css/ionic.css" rel="stylesheet">
+    <link href="/Scripts/ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <script src="/Scripts/ionic/release/js/ionic.bundle.min.js"></script>
     <script>
-        angular.module('PortalMapp', ['ngRoute', 'mobile-angular-ui']);
+        angular.module('PortalMapp', ['ionic']);
         angular.module('PortalMapp').controller('MobileCtrl', function () {
         })
     </script>
 </head>
 <body ng-controller="MobileCtrl">
 
-    <div class="sidebar sidebar-left">
-        <div class="scrollable">
-            <h1 class="scrollable-header app-name">My IdealProp Portal</h1>
-            <div class="scrollable-content">
-                <form runat="server">
-                    <div class="list-group" ui-turn-off='uiSidebarLeft'>
-                        <a class="list-group-item" href="/Mobile">Home<i class="fa fa-chevron-right pull-right"></i></a>
-                        <a class="list-group-item" href="/Mobile/Construction">Construction<i class="fa fa-chevron-right pull-right"></i></a>
-                        <asp:LinkButton class="list-group-item" runat="server" OnClick="LogOut_Click">Logout<i class="fa fa-chevron-right pull-right"></i></asp:LinkButton>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="app">
-        <div class="navbar navbar-app navbar-absolute-top">
-            <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
-                My Ideal Property
-            </div>
-            <div class="btn-group pull-left">
-                <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
-                    <i class="fa fa-bars"></i>Menu
+
+
+    <ion-side-menus>
+        <ion-side-menu side="left">
+            <form runat="server">
+                <div class="list">
+                    <a class="item" href="/Mobile">Home</a>
+                    <a class="item" href="/Mobile/Construction">Construction</a>
+                    <asp:LinkButton class="item" runat="server" OnClick="LogOut_Click">Logout</asp:LinkButton>
                 </div>
+            </form>
+        </ion-side-menu>
+        <ion-side-menu-content>
+            <div class="bar bar-header bar-positive">  
+                <button menu-toggle="left" class="button icon ion-navicon"></button>
+                <h1 class="title">My Ideal Property</h1>
             </div>
-        </div>
-        <div class="app-body">
-            <div class="app-content">
-                <div class="container scrollable scrollable-content">
-                    <asp:ContentPlaceHolder ID="mobile_content" runat="server">
-                    </asp:ContentPlaceHolder>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div ui-yield-to="modals"></div>
+            <ion-content class="has-header">
+                <asp:ContentPlaceHolder ID="mobile_content" runat="server"></asp:ContentPlaceHolder>
+            </ion-content>
+        </ion-side-menu-content>
+    </ion-side-menus>
+
+
+
+
 
 </body>
 </html>

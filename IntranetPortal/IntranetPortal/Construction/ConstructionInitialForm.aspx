@@ -1,16 +1,21 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ConstructionInitialForm.aspx.vb" Inherits="IntranetPortal.ConstructionInitialForm" MasterPageFile="~/Content.Master" %>
 
-<asp:Content ContentPlaceHolderID="head" runat="server"></asp:Content>
+<asp:Content ContentPlaceHolderID="head" runat="server">
+
+    <link href="/Scripts/literallycanvas/css/literallycanvas.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js"></script>
+    <script src="/Scripts/literallycanvas/js/literallycanvas.js"></script>
+
+</asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
 
     <div id="initialForm" ng-controller="InitialFormController">
-        <br />
         <div class="container">
             <h3 class="ss_form_title text-center">Initial Form</h3>
             <button type="button" class="btn btn-primary pull-right" ng-click="save()"><i class="fa fa-floppy-o"></i>&nbsp;Save</button>
             <span class="pull-right">&nbsp;&nbsp;</span>
-            <button type="button" class="btn btn-primary pull-right" ng-click="print()"><i class="fa fa-print"></i>&nbsp;Print</button>
+            <button type="button" class="btn btn-success pull-right" ng-click="print()"><i class="fa fa-print"></i>&nbsp;Print</button>
         </div>
         <div class="clearfix"></div>
         <br />
@@ -122,13 +127,13 @@
                             <pt-radio name="{{u}}Service" model="data.Form.Utility[u + '_isService']"></pt-radio>
                         </td>
                         <td>
-                            <input class="ss_form_input" ng-model="data.Form.Utility[u + '_NumOfMeters']"/></td>
+                            <input class="ss_form_input" ng-model="data.Form.Utility[u + '_NumOfMeters']" /></td>
                         <td>
-                            <input class="ss_form_input" ng-model="data.Form.Utility[u + '_MissingMeters']"/></td>
+                            <input class="ss_form_input" ng-model="data.Form.Utility[u + '_MissingMeters']" /></td>
                         <td>
-                            <input class="ss_form_input" ng-model="data.Form.Utility[u + '_Location']"/></td>
+                            <input class="ss_form_input" ng-model="data.Form.Utility[u + '_Location']" /></td>
                         <td>
-                            <input class="ss_form_input" ng-model="data.Form.Utility[u + '_MeterReading']"/></td>
+                            <input class="ss_form_input" ng-model="data.Form.Utility[u + '_MeterReading']" /></td>
 
                     </tr>
                 </table>
@@ -144,29 +149,31 @@
                 <h4 class="ss_form_title">Sketch</h4>
                 <div class="col-md-6" style="border: 1px solid black">
                     <h5>Floors:&nbsp;<input style="border: none" /></h5>
-                    <textarea></textarea>
+                    <div id="InitialForm_Canvas1" class="LiterallyCanvas"></div>
                 </div>
                 <div class="col-md-6" style="border: 1px solid black">
                     <h5>Floors:&nbsp;<input style="border: none" /></h5>
-                    <textarea></textarea>
-                </div>
-                <div class="col-md-6" style="border: 1px solid black">
-                    <h5>Floors:&nbsp;<input style="border: none" /></h5>
-                    <textarea></textarea>
-                </div>
-                <div class="col-md-6" style="border: 1px solid black">
-                    <h5>Floors:&nbsp;<input style="border: none" /></h5>
-                    <textarea></textarea>
-                </div>
-                <div class="col-md-6" style="border: 1px solid black">
-                    <h5>Floors:&nbsp;<input style="border: none" /></h5>
+                    <div id="InitialForm_Canvas2" class="LiterallyCanvas"></div>
 
-                    <textarea></textarea>
                 </div>
                 <div class="col-md-6" style="border: 1px solid black">
                     <h5>Floors:&nbsp;<input style="border: none" /></h5>
+                    <div id="InitialForm_Canvas3" class="LiterallyCanvas"></div>
 
-                    <textarea></textarea>
+                </div>
+                <div class="col-md-6" style="border: 1px solid black">
+                    <h5>Floors:&nbsp;<input style="border: none" /></h5>
+                    <div id="InitialForm_Canvas4" class="LiterallyCanvas"></div>
+
+                </div>
+                <div class="col-md-6" style="border: 1px solid black">
+                    <h5>Floors:&nbsp;<input style="border: none" /></h5>
+                    <div id="InitialForm_Canvas5" class="LiterallyCanvas"></div>
+                </div>
+                <div class="col-md-6" style="border: 1px solid black">
+                    <h5>Floors:&nbsp;<input style="border: none" /></h5>
+                    <div id="InitialForm_Canvas6" class="LiterallyCanvas"></div>
+
                 </div>
             </div>
         </div>
@@ -184,6 +191,7 @@
                 }
                 $scope.load = function () {
                     var url = "/api/ConstructionCases/GetInitialForm?bble=" + $scope.data.BBLE;
+                    $scope.CanvasInit();
                     $http.get(url)
                     .then(function success(res) {
                         if (res.data) {
@@ -207,6 +215,22 @@
                 }
                 $scope.print = function () {
                     window.print()
+                }
+
+                $scope.CanvasInit = function () {
+                    $(".LiterallyCanvas").each(function (idx, el) {
+                        LC.init(el, {
+                            imageURLPrefix: "/Scripts/literallycanvas/img/",
+                            imageSize: {width: 480, height:360}
+                        });
+                    })
+                }
+                $scope.CanvasLoad = function () {
+
+
+                }
+                $scope.CanvasSave = function () {
+
                 }
                 $scope.load();
             });
