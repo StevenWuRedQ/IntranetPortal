@@ -881,12 +881,18 @@ Public Class DataWCFService
 
             If String.IsNullOrEmpty(add1) OrElse String.IsNullOrEmpty(add1.Trim) Then
                 Dim ld = LeadsInfo.GetInstance(bble)
-                add1 = ld.Address1
+                If ld IsNot Nothing Then
+                    add1 = ld.Address1
+                End If
+
             End If
 
-            If String.IsNullOrEmpty(add1) OrElse String.IsNullOrEmpty(city.Trim) Then
+            If String.IsNullOrEmpty(city) OrElse String.IsNullOrEmpty(city.Trim) Then
                 Dim ld = LeadsInfo.GetInstance(bble)
-                add1 = ld.NeighName
+                If ld IsNot Nothing Then
+                    city = ld.NeighName
+                End If
+
             End If
 
             If localOwner IsNot Nothing Then
