@@ -868,13 +868,13 @@ Public Class DataWCFService
             Dim localOwner = context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Name = name And ho.Active = True).FirstOrDefault
 
             If bble.StartsWith("3") Then
-                If city.Trim = "BK" Or city.Trim = "BKLYN" Then
+                If Not String.IsNullOrEmpty(city) AndAlso (city.Trim = "BK" Or city.Trim = "BKLYN") Then
                     city = "Brooklyn"
                 End If
             End If
 
             If bble.StartsWith("2") Then
-                If city.Trim = "BX" Then
+                If Not String.IsNullOrEmpty(city) AndAlso city.Trim = "BX" Then
                     city = "Bronx"
                 End If
             End If
