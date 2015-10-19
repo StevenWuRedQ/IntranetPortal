@@ -41,6 +41,11 @@ Public Class LegalECourt
         End If
     End Sub
 
+    Public Shared Function GetCaseByNoticeyDay(day As Integer) As List(Of LegalECourt)
+        Using ctx As New LegalModelContainer
+            Return ctx.LegalECourts.Where(Function(e) (e.AppearanceDate <= Date.Now.AddDays(day) AndAlso e.AppearanceDate > Date.Now.AddDays(day - 1)) AndAlso (Not String.IsNullOrEmpty(e.BBLE))).ToList
+        End Using
+    End Function
     Public Shared Function GetLegalEcourt(bble As String) As LegalECourt
         Using ctx As New LegalModelContainer
             Return ctx.LegalECourts.Where(Function(e) e.BBLE = bble).OrderByDescending(Function(e) e.UpdateTime).FirstOrDefault

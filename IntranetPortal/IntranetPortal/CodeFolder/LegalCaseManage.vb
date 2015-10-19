@@ -41,6 +41,11 @@ Public Class LegalCaseManage
         Return eList
 
     End Function
+    Public Shared Function GetCaseRelateUsersName(bble As String) As String
+        Dim users = GetCaseRelateUsers(bble)
+        Return String.Join(";", users)
+
+    End Function
     Public Shared Function GetLegalCaseList(userName As String, status As Legal.LegalCaseStatus) As List(Of LegalCase)
         If Roles.IsUserInRole(userName, "Legal-Manager") OrElse Roles.IsUserInRole(userName, "Admin") OrElse LegalCaseManage.IsViewable(userName) Then
             Return LegalCase.GetCaseList(status)

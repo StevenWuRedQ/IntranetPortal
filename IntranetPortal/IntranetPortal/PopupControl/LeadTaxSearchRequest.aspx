@@ -149,7 +149,7 @@
                                                                 <label class="ss_form_input_title">Irs Tax Lien</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.irsTaxLien" money-mask /></li>
                                                             <li class="ss_form_item ">
                                                                 <label class="ss_form_input_title">NYS Tax Lien</label>
-                                                                  <pt-radio name="liens_info_wellsFargo" model="DocSearch.LeadResearch.hasNysTaxLien"></pt-radio>
+                                                                  <pt-radio name="has_NysTaxLien" model="DocSearch.LeadResearch.hasNysTaxLien"></pt-radio>
                                                                
                                                             </li>
                                                             <li class="ss_form_item ">
