@@ -148,30 +148,30 @@
             <div>
                 <h4 class="ss_form_title">Sketch</h4>
                 <div class="col-md-6" style="border: 1px solid black">
-                    <h5>Floors:&nbsp;<input style="border: none" /></h5>
+                    <h5>Floors:&nbsp;<input style="border: none" ng-model="data.Form.Sketch[1].floorName" /></h5>
                     <div id="InitialForm_Canvas1" class="LiterallyCanvas"></div>
                 </div>
                 <div class="col-md-6" style="border: 1px solid black">
-                    <h5>Floors:&nbsp;<input style="border: none" /></h5>
+                    <h5>Floors:&nbsp;<input style="border: none" ng-model="data.Form.Sketch[2].floorName" /></h5>
                     <div id="InitialForm_Canvas2" class="LiterallyCanvas"></div>
 
                 </div>
                 <div class="col-md-6" style="border: 1px solid black">
-                    <h5>Floors:&nbsp;<input style="border: none" /></h5>
+                    <h5>Floors:&nbsp;<input style="border: none" ng-model="data.Form.Sketch[3].floorName" /></h5>
                     <div id="InitialForm_Canvas3" class="LiterallyCanvas"></div>
 
                 </div>
                 <div class="col-md-6" style="border: 1px solid black">
-                    <h5>Floors:&nbsp;<input style="border: none" /></h5>
+                    <h5>Floors:&nbsp;<input style="border: none" ng-model="data.Form.Sketch[4].floorName" /></h5>
                     <div id="InitialForm_Canvas4" class="LiterallyCanvas"></div>
 
                 </div>
                 <div class="col-md-6" style="border: 1px solid black">
-                    <h5>Floors:&nbsp;<input style="border: none" /></h5>
+                    <h5>Floors:&nbsp;<input style="border: none" ng-model="data.Form.Sketch[5].floorName" /></h5>
                     <div id="InitialForm_Canvas5" class="LiterallyCanvas"></div>
                 </div>
                 <div class="col-md-6" style="border: 1px solid black">
-                    <h5>Floors:&nbsp;<input style="border: none" /></h5>
+                    <h5>Floors:&nbsp;<input style="border: none" ng-model="data.Form.Sketch[6].floorName" /></h5>
                     <div id="InitialForm_Canvas6" class="LiterallyCanvas"></div>
 
                 </div>
@@ -186,23 +186,31 @@
                     BBLE: '<%= BBLE %>',
                     Form: {
                         Layout: {},
-                        Utility: {}
+                        Utility: {},
+                        Sketch: [
+                            { floorName: "" }, { floorName: "" }, { floorName: "" }, { floorName: "" }, { floorName: "" }, { floorName: "" }
+                        ]
                     }
                 }
+                $scope.canvasEls = [];
                 $scope.load = function () {
                     var url = "/api/ConstructionCases/GetInitialForm?bble=" + $scope.data.BBLE;
-                    $scope.CanvasInit();
                     $http.get(url)
                     .then(function success(res) {
                         if (res.data) {
                             $scope.data = res.data;
+                            if (!$scope.data.Form.Sketch) {
+                                $scope.data.Form.Sketch = [{ floorName: "" }, { floorName: "" }, { floorName: "" }, { floorName: "" }, { floorName: "" }, { floorName: "" }];
+                            }
+                            $scope.CanvasInit();
                         }
                     }, function error(res) {
                         alert("Get form fails");
                     })
                 }
                 $scope.save = function () {
-                    var url = "/api/ConstructionCases/InitialForm"
+                    $scope.CanvasSave();
+                    var url = "/api/ConstructionCases/InitialForm";
                     $http({
                         method: 'POST',
                         url: url,
@@ -219,18 +227,23 @@
 
                 $scope.CanvasInit = function () {
                     $(".LiterallyCanvas").each(function (idx, el) {
-                        LC.init(el, {
+                        var lc = LC.init(el, {
                             imageURLPrefix: "/Scripts/literallycanvas/img/",
-                            imageSize: {width: 480, height:360}
+                            imageSize: { width: 480, height: 360 },
+                            defaultStrokeWidth: 2
                         });
+                        $scope.canvasEls.push(lc);
+                        if ($scope.data.Form.Sketch && $scope.data.Form.Sketch[idx].snapshot) {
+                            lc.loadSnapshot($scope.data.Form.Sketch[idx].snapshot);
+                        }
                     })
-                }
-                $scope.CanvasLoad = function () {
-
-
+                   
                 }
                 $scope.CanvasSave = function () {
-
+                    _.each($scope.canvasEls, function (el, idx) {
+                        var snapshot = el.getSnapshot();
+                        $scope.data.Form.Sketch[idx].snapshot = snapshot;
+                    });
                 }
                 $scope.load();
             });

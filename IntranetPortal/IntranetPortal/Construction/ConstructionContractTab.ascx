@@ -27,7 +27,7 @@
             </ul>
             <div>
                 <label class="ss_form_title">Contracts Upload</label>
-                <pt-files file-bble="CSCase.BBLE" file-id="Contract_Electrical_Contract" base-folder="Contract_Electrical_Contract" file-model="CSCase.CSCase.Contract.Electrical_Contract"></pt-files>
+                <pt-files file-bble="CSCase.BBLE" file-id="Contract_Electrical_Contract" file-model="CSCase.CSCase.Contract.Electrical_Contract" folder-enable="true" base-folder="Contract_Electrical_Contract"></pt-files>
             </div>
         </div>
 
@@ -63,7 +63,7 @@
             </ul>
             <div>
                 <label class="ss_form_title">Contracts Upload</label>
-                <pt-files file-bble="CSCase.BBLE" file-id="Contract_Electrical_Contract" base-folder="Contract_Electrical_Contract" file-model="CSCase.CSCase.Contract.Electrical_Contract"></pt-files>
+                <pt-files file-bble="CSCase.BBLE" file-id="Contract_Electrical_Contract" file-model="CSCase.CSCase.Contract.Electrical_Contract" folder-enable="true" base-folder="Contract_Electrical_Contract"></pt-files>
             </div>
         </div>
     </div>
@@ -97,7 +97,7 @@
             </ul>
             <div>
                 <label class="ss_form_title">Contracts Upload</label>
-                <pt-files file-bble="CSCase.BBLE" file-id="Contract_Plumbing_Contract" base-folder="Contract_Plumbing_Contract" file-model="CSCase.CSCase.Contract.Plumbing_Contract"></pt-files>
+                <pt-files file-bble="CSCase.BBLE" file-id="Contract_Plumbing_Contract" file-model="CSCase.CSCase.Contract.Plumbing_Contract" folder-enable="true" base-folder="Contract_Plumbing_Contract"></pt-files>
             </div>
         </div>
     </div>

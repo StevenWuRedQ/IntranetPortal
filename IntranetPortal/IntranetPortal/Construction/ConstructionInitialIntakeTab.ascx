@@ -215,7 +215,7 @@
             <div class="clearfix"></div>
             <div class="col-sm-10">
                 <label class="ss_form_input_title">Address</label>
-                <input class="ss_form_input intakeCheck" style="width: 93.3%" ng-model="CSCase.CSCase.InitialIntake.Address" pt-init-model="LeadsInfo.PropertyAddress">
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.Address" pt-init-model="LeadsInfo.PropertyAddress">
             </div>
             <div class="col-sm-4">
                 <label class="ss_form_input_title">Date Assigned</label>
@@ -339,9 +339,9 @@
                 <label class="ss_form_input_title">Corporation Name</label>
                 <input class="ss_form_input " ng-model="CSCase.CSCase.InitialIntake.CorpName" pt-init-model="EntityInfo.CorpName">
             </li>
-            <li class="ss_form_item">
+            <li class="ss_form_item" style="width: 66.6%">
                 <label class="ss_form_input_title">Corporation Address</label>
-                <input class="ss_form_input " ng-model="CSCase.CSCase.InitialIntake.Addr" pt-init-model="EntityInfo.Address">
+                <input class="ss_form_input " style="width: 93.3%" ng-model="CSCase.CSCase.InitialIntake.Addr" pt-init-model="EntityInfo.Address">
             </li>
         </ul>
 
@@ -396,7 +396,7 @@
                 <label class="ss_form_input_title">Corporation Name</label>
                 <input class="ss_form_input " ng-model="CSCase.CSCase.InitialIntake.CorpName" pt-init-model="EntityInfo.CorpName">
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-8">
                 <label class="ss_form_input_title">Corporation Address</label>
                 <input class="ss_form_input " ng-model="CSCase.CSCase.InitialIntake.Addr" pt-init-model="EntityInfo.Address">
             </div>
