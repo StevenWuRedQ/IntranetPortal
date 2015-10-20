@@ -11,6 +11,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
     <link href="/Scripts/ionic/release/css/ionic.css" rel="stylesheet">
     <link href="/Scripts/ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <asp:ContentPlaceHolder ID="mobile_header" runat="server"></asp:ContentPlaceHolder>
     <script src="/Scripts/ionic/release/js/ionic.bundle.min.js"></script>
     <script>
         angular.module('PortalMapp', ['ionic']);
@@ -19,9 +22,6 @@
     </script>
 </head>
 <body ng-controller="MobileCtrl">
-
-
-
     <ion-side-menus>
         <ion-side-menu side="left">
             <form runat="server">
@@ -32,7 +32,7 @@
                 </div>
             </form>
         </ion-side-menu>
-        <ion-side-menu-content>
+        <ion-side-menu-content drag-content="false">
             <div class="bar bar-header bar-positive">  
                 <button menu-toggle="left" class="button icon ion-navicon"></button>
                 <h1 class="title">My Ideal Property</h1>
@@ -42,10 +42,6 @@
             </ion-content>
         </ion-side-menu-content>
     </ion-side-menus>
-
-
-
-
 
 </body>
 </html>

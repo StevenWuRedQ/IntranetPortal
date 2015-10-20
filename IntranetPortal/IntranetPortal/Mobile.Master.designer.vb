@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class Mobile
     
     '''<summary>
+    '''mobile_header control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents mobile_header As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    
+    '''<summary>
     '''mobile_content control.
     '''</summary>
     '''<remarks>

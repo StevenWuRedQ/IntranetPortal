@@ -1492,6 +1492,20 @@
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Mobile\Construction\InitialForm.aspx.designer.vb">
+      <DependentUpon>InitialForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mobile\Construction\InitialForm.aspx.vb">
+      <DependentUpon>InitialForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mobile\Construction\SpotCheck.aspx.designer.vb">
+      <DependentUpon>SpotCheck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mobile\Construction\SpotCheck.aspx.vb">
+      <DependentUpon>SpotCheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Mobile\default.aspx.designer.vb">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
@@ -2857,6 +2871,8 @@
     <Content Include="Map\ServiceTest.aspx" />
     <Content Include="Map\ZipMap.aspx" />
     <Content Include="Mobile\Construction\default.aspx" />
+    <Content Include="Mobile\Construction\InitialForm.aspx" />
+    <Content Include="Mobile\Construction\SpotCheck.aspx" />
     <Content Include="Mobile\default.aspx" />
     <Content Include="MyDefault.aspx" />
     <Content Include="OneDrive\constants.js" />

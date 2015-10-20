@@ -81,7 +81,7 @@ Partial Public Class ConstructionSpotCheck
 
     Public Shared Sub FinishSpotCheck(data)
         UpdateSpotCheck(data)
-        UpdateSpotCheckStatus(data)
+        ' UpdateSpotCheckStatus(data)
     End Sub
 
     Public Shared Function GetNameDesction(key As String) As String

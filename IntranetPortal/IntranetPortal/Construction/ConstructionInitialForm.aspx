@@ -228,6 +228,7 @@
                 $scope.CanvasInit = function () {
                     $(".LiterallyCanvas").each(function (idx, el) {
                         var lc = LC.init(el, {
+                            keyboardShortcuts: false,
                             imageURLPrefix: "/Scripts/literallycanvas/img/",
                             imageSize: { width: 480, height: 360 },
                             defaultStrokeWidth: 2
@@ -241,7 +242,7 @@
                 }
                 $scope.CanvasSave = function () {
                     _.each($scope.canvasEls, function (el, idx) {
-                        var snapshot = el.getSnapshot();
+                        var snapshot = el.getSnapshot("shapes", "colors");
                         $scope.data.Form.Sketch[idx].snapshot = snapshot;
                     });
                 }

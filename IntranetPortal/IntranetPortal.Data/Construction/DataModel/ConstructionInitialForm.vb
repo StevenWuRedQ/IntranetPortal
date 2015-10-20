@@ -18,5 +18,6 @@ Partial Public Class ConstructionInitialForm
     Public Property CreateDate As Nullable(Of Date)
     Public Property UpdateBy As String
     Public Property UpdateDate As Nullable(Of Date)
+    Public Property Owner As String
 
 End Class
