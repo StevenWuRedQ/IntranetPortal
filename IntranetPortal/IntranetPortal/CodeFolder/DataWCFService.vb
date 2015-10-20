@@ -15,9 +15,6 @@ Public Class DataWCFService
 
             Dim result = client.DOB_Complaints_Get(data)
 
-
-
-
         End Using
 
     End Function
@@ -868,13 +865,18 @@ Public Class DataWCFService
             Dim localOwner = context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Name = name And ho.Active = True).FirstOrDefault
 
             If bble.StartsWith("3") Then
-                If Not String.IsNullOrEmpty(city) AndAlso (city.Trim = "BK" Or city.Trim = "BKLYN") Then
+                If Not String.IsNullOrEmpty(city) AndAlso (city.Trim = "BK" Or city.Trim = "BKLYN" Or city.Trim = "BKLN" Or city.Contains("BK")) Then
                     city = "Brooklyn"
                 End If
             End If
 
             If bble.StartsWith("2") Then
-                If Not String.IsNullOrEmpty(city) AndAlso city.Trim = "BX" Then
+                If Not String.IsNullOrEmpty(city) AndAlso (city.Trim = "BX" Or city.Contains("BX")) Then
+                    city = "Bronx"
+                End If
+            End If
+            If bble.StartsWith("4") Then
+                If Not String.IsNullOrEmpty(city) AndAlso (city.Trim = "BX") Then
                     city = "Bronx"
                 End If
             End If
