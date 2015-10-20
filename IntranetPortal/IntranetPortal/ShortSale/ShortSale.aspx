@@ -511,17 +511,17 @@
                                                                                     <table>
                                                                                         <tr>
                                                                                             <td>
-                                                                                                <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="false"></dx:ASPxCalendar>
-                                                                                                <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" TimeSectionProperties-Visible="True" CssClass="edit_drop">
+                                                                                                <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="true"></dx:ASPxCalendar>
+                                                                                                <%--<dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" TimeSectionProperties-Visible="True" CssClass="edit_drop">
                                                                                                     <TimeSectionProperties Visible="True"></TimeSectionProperties>
                                                                                                     <ClientSideEvents DropDown="function(s,e){var d = new Date('May 1 2014 12:00:00');s.GetTimeEdit().SetValue(d);}" />
-                                                                                                </dx:ASPxDateEdit>
+                                                                                                </dx:ASPxDateEdit>--%>
                                                                                             </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
                                                                                                 <dx:ASPxButton ID="ASPxButton1" runat="server" UseSubmitBehavior="false" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                                                                                    <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();LogClick('FollowUp', ScheduleDateClientFllowUp!=null?ScheduleDateClientFllowUp.GetDate().toLocaleString():callbackCalendar.GetSelectedDate().toLocaleString());}"></ClientSideEvents>
+                                                                                                    <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();LogClick('FollowUp', callbackCalendar.GetSelectedDate().toLocaleString());}"></ClientSideEvents>
                                                                                                 </dx:ASPxButton>
                                                                                                 &nbsp;
                                                             <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" UseSubmitBehavior="false" CssClass="rand-button rand-button-gray">

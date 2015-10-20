@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class NGShortSale
-
+    
     '''<summary>
     '''hfIsEvction control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hfIsEvction As Global.System.Web.UI.WebControls.HiddenField
-
+    
     '''<summary>
     '''ASPxSplitter1 control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
-
+    
     '''<summary>
     '''SplitterContentControl1 control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.SplitterContentControl
-
+    
     '''<summary>
     '''ShortSaleCaseList control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ShortSaleCaseList As Global.IntranetPortal.ShortSaleCaseList
-
+    
     '''<summary>
     '''SplitterContentControl2 control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SplitterContentControl2 As Global.DevExpress.Web.SplitterContentControl
-
+    
     '''<summary>
     '''ASPxCallbackPanel2 control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxCallbackPanel2 As Global.DevExpress.Web.ASPxCallbackPanel
-
+    
     '''<summary>
     '''PanelContent1 control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PanelContent1 As Global.DevExpress.Web.PanelContent
-
+    
     '''<summary>
     '''contentSplitter control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter
-
+    
     '''<summary>
     '''SplitterContentControl3 control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SplitterContentControl3 As Global.DevExpress.Web.SplitterContentControl
-
+    
     '''<summary>
     '''hfBBLE control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hfBBLE As Global.System.Web.UI.WebControls.HiddenField
-
+    
     '''<summary>
     '''SendMail control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SendMail As Global.IntranetPortal.SendMailControl
-
+    
     '''<summary>
     '''NGShortSaleTab control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NGShortSaleTab As Global.IntranetPortal.NGShortSaleTab
-
+    
     '''<summary>
     '''ucTitle control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ucTitle As Global.IntranetPortal.TitleControl
-
+    
     '''<summary>
     '''DocumentsUI control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DocumentsUI As Global.IntranetPortal.DocumentsUI
-
+    
     '''<summary>
     '''SplitterContentControl4 control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SplitterContentControl4 As Global.DevExpress.Web.SplitterContentControl
-
+    
     '''<summary>
     '''cbpLogs control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbpLogs As Global.DevExpress.Web.ASPxCallbackPanel
-
+    
     '''<summary>
     '''ActivityLogs control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
-
+    
     '''<summary>
     '''ShortSaleFileOverview control.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ShortSaleFileOverview As Global.IntranetPortal.ShortSaleFileOverview
-
+    
     '''<summary>
     '''ASPxPopupCallBackMenu2 control.
     '''</summary>
@@ -183,7 +183,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupCallBackMenu2 As Global.DevExpress.Web.ASPxPopupMenu
-
+    
     '''<summary>
     '''pcMain control.
     '''</summary>
@@ -192,7 +192,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pcMain As Global.DevExpress.Web.ASPxPopupControl
-
+    
     '''<summary>
     '''Panel1 control.
     '''</summary>
@@ -201,7 +201,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Panel1 As Global.System.Web.UI.WebControls.Panel
-
+    
     '''<summary>
     '''ASPxCalendar1 control.
     '''</summary>
@@ -210,16 +210,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxCalendar1 As Global.DevExpress.Web.ASPxCalendar
-
-    '''<summary>
-    '''ASPxDateEdit1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxDateEdit1 As Global.DevExpress.Web.ASPxDateEdit
-
+    
     '''<summary>
     '''ASPxButton1 control.
     '''</summary>
@@ -228,7 +219,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
@@ -237,7 +228,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
-
+    
     '''<summary>
     '''VendorsPopup control.
     '''</summary>
@@ -246,7 +237,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents VendorsPopup As Global.IntranetPortal.VendorsPopup
-
+    
     '''<summary>
     '''SelectPartyUC control.
     '''</summary>
@@ -255,7 +246,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SelectPartyUC As Global.IntranetPortal.SelectPartyUC
-
+    
     '''<summary>
     '''ShortSaleSubMenu control.
     '''</summary>
@@ -264,7 +255,7 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ShortSaleSubMenu As Global.IntranetPortal.ShortSaleSubMenu
-
+    
     '''<summary>
     '''Common control.
     '''</summary>
