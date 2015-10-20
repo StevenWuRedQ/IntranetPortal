@@ -1498,6 +1498,7 @@
                         AddActivityLog($scope.MustAddedComment);
                     }
                 }
+                
                 /* end loading panel */
                 $scope.CheckWorkHours = function () {
                     $http.get("/api/WorkingLogs/Legal/" + $scope.LegalCase.BBLE).success(function (data) {

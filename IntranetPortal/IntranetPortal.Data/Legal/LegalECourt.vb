@@ -32,18 +32,37 @@ Public Class LegalECourt
             End If
         End If
     End Sub
-    Public Sub UpdateBBLE()
+    Public Function UpdateBBLE() As Boolean
         If (Not String.IsNullOrEmpty(Me.IndexNumber)) Then
             Dim lcase = LegalCase.GetLegalCaseByFcIndex(Me.IndexNumber)
             If (lcase IsNot Nothing) Then
+                Dim Changed = Me.BBLE Is Nothing Or Me.BBLE <> lcase.BBLE
                 Me.BBLE = lcase.BBLE
-            End If
-        End If
-    End Sub
 
-    Public Shared Function GetCaseByNoticeyDay(day As Integer) As List(Of LegalECourt)
+                'When changed save it to database
+                If (Changed) Then
+                    Using db As New LegalModelContainer
+                        Dim original = db.LegalECourts.Find(Me.Id)
+                        original.BBLE = Me.BBLE
+                        db.SaveChanges()
+                    End Using
+                End If
+
+                Return Changed
+                End If
+            End If
+        Return False
+    End Function
+    Public Shared Function GetIndexLegalECourts() As List(Of LegalECourt)
         Using ctx As New LegalModelContainer
-            Return ctx.LegalECourts.Where(Function(e) (e.AppearanceDate <= Date.Now.AddDays(day) AndAlso e.AppearanceDate > Date.Now.AddDays(day - 1)) AndAlso (Not String.IsNullOrEmpty(e.BBLE))).ToList
+            Return ctx.LegalECourts.Where(Function(e) Not String.IsNullOrEmpty(e.IndexNumber)).ToList
+        End Using
+    End Function
+    Public Shared Function GetCaseByNoticeyDay(day As Integer) As List(Of LegalECourt)
+
+        Using ctx As New LegalModelContainer
+            Dim MaxDate = Date.Now.AddDays(day)
+            Return ctx.LegalECourts.Where(Function(e) (e.AppearanceDate <= MaxDate AndAlso e.AppearanceDate > Date.Now) AndAlso (Not String.IsNullOrEmpty(e.BBLE))).ToList
         End Using
     End Function
     Public Shared Function GetLegalEcourt(bble As String) As LegalECourt

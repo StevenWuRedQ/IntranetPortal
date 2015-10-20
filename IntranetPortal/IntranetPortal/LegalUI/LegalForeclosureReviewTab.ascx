@@ -33,7 +33,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">FC Index #</label>
-                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FCIndexNum">
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FCIndexNum" mask="999999/9999">
             </li>
         </ul>
 

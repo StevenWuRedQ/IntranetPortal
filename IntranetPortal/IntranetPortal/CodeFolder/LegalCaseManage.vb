@@ -43,7 +43,7 @@ Public Class LegalCaseManage
     End Function
     Public Shared Function GetCaseRelateUsersName(bble As String) As String
         Dim users = GetCaseRelateUsers(bble)
-        Return String.Join(";", users)
+        Return String.Join(";", users.Select(Function(e) e.Name))
 
     End Function
     Public Shared Function GetLegalCaseList(userName As String, status As Legal.LegalCaseStatus) As List(Of LegalCase)

@@ -99,6 +99,7 @@ Partial Class Troubleshooting
         Me.btnGeoBBLE = New System.Windows.Forms.Button()
         Me.txtGeoAddress = New System.Windows.Forms.TextBox()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.BtnNoticeECourt = New System.Windows.Forms.Button()
         Me.Button21 = New System.Windows.Forms.Button()
         Me.btnSummaryEmail = New System.Windows.Forms.Button()
         Me.btnFollowUp = New System.Windows.Forms.Button()
@@ -113,6 +114,7 @@ Partial Class Troubleshooting
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnComplaintsRefresh = New System.Windows.Forms.Button()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.CleanBudgetData = New System.Windows.Forms.Button()
         Me.TestRegExp = New System.Windows.Forms.Button()
         Me.Organize = New System.Windows.Forms.Button()
         Me.SpotCheckTest = New System.Windows.Forms.Button()
@@ -130,7 +132,6 @@ Partial Class Troubleshooting
         Me.txtReportTables = New System.Windows.Forms.TextBox()
         Me.txtTemplateResult = New System.Windows.Forms.TextBox()
         Me.Button20 = New System.Windows.Forms.Button()
-        Me.CleanBudgetData = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -895,6 +896,7 @@ Partial Class Troubleshooting
         '
         'TabPage7
         '
+        Me.TabPage7.Controls.Add(Me.BtnNoticeECourt)
         Me.TabPage7.Controls.Add(Me.Button21)
         Me.TabPage7.Controls.Add(Me.btnSummaryEmail)
         Me.TabPage7.Controls.Add(Me.btnFollowUp)
@@ -906,6 +908,15 @@ Partial Class Troubleshooting
         Me.TabPage7.TabIndex = 7
         Me.TabPage7.Text = "Legal"
         Me.TabPage7.UseVisualStyleBackColor = True
+        '
+        'BtnNoticeECourt
+        '
+        Me.BtnNoticeECourt.Location = New System.Drawing.Point(6, 176)
+        Me.BtnNoticeECourt.Name = "BtnNoticeECourt"
+        Me.BtnNoticeECourt.Size = New System.Drawing.Size(122, 23)
+        Me.BtnNoticeECourt.TabIndex = 4
+        Me.BtnNoticeECourt.Text = "Notice ECourt"
+        Me.BtnNoticeECourt.UseVisualStyleBackColor = True
         '
         'Button21
         '
@@ -1051,6 +1062,15 @@ Partial Class Troubleshooting
         Me.TabPage9.TabIndex = 9
         Me.TabPage9.Text = "Construction"
         Me.TabPage9.UseVisualStyleBackColor = True
+        '
+        'CleanBudgetData
+        '
+        Me.CleanBudgetData.Location = New System.Drawing.Point(558, 42)
+        Me.CleanBudgetData.Name = "CleanBudgetData"
+        Me.CleanBudgetData.Size = New System.Drawing.Size(75, 23)
+        Me.CleanBudgetData.TabIndex = 11
+        Me.CleanBudgetData.Text = "CleanBudgetData"
+        Me.CleanBudgetData.UseVisualStyleBackColor = True
         '
         'TestRegExp
         '
@@ -1213,15 +1233,6 @@ Partial Class Troubleshooting
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
-        'CleanBudgetData
-        '
-        Me.CleanBudgetData.Location = New System.Drawing.Point(558, 42)
-        Me.CleanBudgetData.Name = "CleanBudgetData"
-        Me.CleanBudgetData.Size = New System.Drawing.Size(75, 23)
-        Me.CleanBudgetData.TabIndex = 11
-        Me.CleanBudgetData.Text = "CleanBudgetData"
-        Me.CleanBudgetData.UseVisualStyleBackColor = True
-        '
         'Troubleshooting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1380,4 +1391,5 @@ Partial Class Troubleshooting
     Friend WithEvents btnInitChecklist As Button
     Friend WithEvents btnRefreshComplaints As Button
     Friend WithEvents CleanBudgetData As Button
+    Friend WithEvents BtnNoticeECourt As Button
 End Class

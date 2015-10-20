@@ -35,13 +35,13 @@ Public Class ScanECourtsRule
                     Log("Can't get emails for case BBLE: " & eCourt.BBLE)
                 End If
                 Using client As New PortalService.CommonServiceClient
-                        client.SendEmailByTemplate(Users, "LegalScanECourtNotify", maildata)
-                    End Using
-                    'Core.EmailService.SendMail(emails, Nothing, "LegalScanECourtNotify", maildata)
-                    Log("Send email to  :" & Users & " for BBLE" & lcase.BBLE)
+                    client.SendEmailByTemplate(Users, "LegalScanECourtNotify", maildata)
+                End Using
+                'Core.EmailService.SendMail(emails, Nothing, "LegalScanECourtNotify", maildata)
+                Log("Send email to  :" & Users & " for BBLE" & lcase.BBLE)
 
-                Else
-                    Log("Can not find legal didn't send email please notice !")
+            Else
+                Log("Can not find legal didn't send email please notice !")
             End If
 
         Else
@@ -59,5 +59,14 @@ Public Class ScanECourtsRule
         End If
         serv.ParseNewEmails(AddressOf Me.ParseEourtEmail)
         Log("======================== Scan email for ECourts Completed. ========================================")
+
+        Log("======================== Start Upadate BBLE for all ECourt Email ========================================")
+        Dim eCases = Data.LegalECourt.GetIndexLegalECourts()
+        For Each c In eCases
+            If (c.UpdateBBLE()) Then
+                Log("UpDate Ecourt :" & c.IndexNumber & "Legal Ecourt Id: " & c.Id & "To BBLE: " & c.BBLE)
+            End If
+        Next
+        Log("======================== End Upadate BBLE for all ECourt Email ==========================================")
     End Sub
 End Class

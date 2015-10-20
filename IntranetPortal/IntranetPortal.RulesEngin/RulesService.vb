@@ -79,6 +79,7 @@ Public Class RulesService
         Rules.Add(New ScanECourtsRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:10:00"), .RuleName = "Legal eCourt Email Scan Rule", .ExecuteNow = True})
         Rules.Add(New LegalActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("13:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Legal Activity Rules at Noon", .ExecuteOnWeekend = True})
         Rules.Add(New LegalActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("21:30:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Legal Activity Rules at Evening", .ExecuteOnWeekend = True})
+        Rules.Add(New NoticeECourtRule() With {.ExecuteOn = TimeSpan.Parse("07:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Legal Send ECourt Notify Email Rules", .ExecuteOnWeekend = True})
 
         'ShortSale
         Rules.Add(New ShortSaleActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("10:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "ShortSale Activity Email Rule on 10am"})

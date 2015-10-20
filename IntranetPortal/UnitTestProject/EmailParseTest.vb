@@ -117,6 +117,15 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
 
         Assert.IsTrue(serv.IsLogedIn)
     End Sub
-
+    <TestMethod()>
+    Public Sub TestNeedCorrectLegalECourt()
+        Dim eCases = Data.LegalECourt.GetIndexLegalECourts()
+        'For Each c In eCases
+        '    If (c.UpdateBBLE()) Then
+        '        Console.WriteLine("UpDate Ecourt :" & c.IndexNumber & "Legal Ecourt Id: " & c.Id & "To BBLE: " & c.BBLE)
+        '    End If
+        'Next
+        Assert.IsTrue(eCases.Count > 0)
+    End Sub
 
 End Class

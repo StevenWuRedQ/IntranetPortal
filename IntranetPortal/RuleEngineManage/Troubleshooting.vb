@@ -5,6 +5,7 @@ Imports System.Threading
 Imports IntranetPortal.Data
 Imports Newtonsoft.Json.Linq
 Imports System.Text
+Imports IntranetPortal.RulesEngine
 
 Public Class Troubleshooting
 
@@ -969,5 +970,10 @@ Public Class Troubleshooting
             End If
 
         Next
+    End Sub
+
+    Private Sub BtnNoticeECourt_Click(sender As Object, e As EventArgs) Handles BtnNoticeECourt.Click
+        Dim r = New NoticeECourtRule()
+        r.Execute()
     End Sub
 End Class
