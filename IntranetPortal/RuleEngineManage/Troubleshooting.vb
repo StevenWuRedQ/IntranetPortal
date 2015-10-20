@@ -34,8 +34,8 @@ Public Class Troubleshooting
 
     Private Sub btnSSUserReport_Click(sender As Object, e As EventArgs) Handles btnSSUserReport.Click
         Using client As New PortalService.CommonServiceClient
-            'client.SendShortSaleActivityEmail()
-            client.SendShortSaleUserSummayEmail()
+            client.SendShortSaleActivityEmail()
+            'client.SendShortSaleUserSummayEmail()
         End Using
     End Sub
 
