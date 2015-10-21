@@ -6,6 +6,7 @@ Imports IntranetPortal.Data
 Imports Newtonsoft.Json.Linq
 Imports System.Text
 Imports IntranetPortal.RulesEngine
+Imports System.Configuration
 
 Public Class Troubleshooting
 
@@ -945,9 +946,9 @@ Public Class Troubleshooting
         Dim bble = txtBBLE.Text
 
         If Not String.IsNullOrEmpty(bble) Then
-
+            Dim complaintServer = ConfigurationManager.AppSettings("DOBComplaintServer").ToString
             Dim complaints = CheckingComplain.Instance(bble)
-            complaints.RefreshComplains("RuleEngine")
+            complaints.RefreshComplains("RuleEngine", complaintServer)
         End If
     End Sub
 

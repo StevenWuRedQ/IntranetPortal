@@ -163,13 +163,13 @@ Partial Public Class CheckingComplain
         End Using
     End Sub
 
-    Public Sub RefreshComplains(refreshBy As String)
+    Public Sub RefreshComplains(refreshBy As String, Optional serverAddress As String = Nothing)
         Me.LastExecute = DateTime.Now
         Me.ExecuteBy = refreshBy
         Me.Status = RunningStatus.InRefresh
         Try
             If refreshBy = "RuleEngine" Then
-                RequestComplaints(refreshBy, "DOBComplaints")
+                RequestComplaints(refreshBy, serverAddress)
             Else
                 System.Threading.ThreadPool.QueueUserWorkItem(AddressOf RequestComplaints, refreshBy)
             End If
@@ -228,9 +228,13 @@ Partial Public Class CheckingComplain
         End If
     End Sub
 
-    Private Sub RequestComplaints(requestBy As String, Optional configName As String = "WCFMacros_Http")
+    Private Sub RequestComplaints(requestBy As String, Optional serverAddress As String = Nothing)
         Try
-            Using client As New DataAPI.WCFMacrosClient(configName)
+            Using client As New DataAPI.WCFMacrosClient()
+                If Not String.IsNullOrEmpty(serverAddress) Then
+                    client.Endpoint.Address = New ServiceModel.EndpointAddress(serverAddress)
+                End If
+
                 Dim data As New DataAPI.DOB_Complaints_In
                 data.BBLE = BBLE
                 data.DOB_PenOnly = True

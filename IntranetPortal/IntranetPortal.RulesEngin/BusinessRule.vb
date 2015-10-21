@@ -1,6 +1,7 @@
 ﻿Imports System.Threading
 Imports MyIdealProp.Workflow.DBPersistence
 Imports System.Runtime.Serialization
+Imports System.Configuration
 
 <KnownType(GetType(LegalFollowUpRule))>
 <KnownType(GetType(LeadsAndTaskRule))>
@@ -336,10 +337,10 @@ InitialLine:
                 rule.Complete(Core.DataLoopRule.DataLoopType.AllHomeOwner)
                 Log("General Data is updated. BBLE: " & bble)
 
-                'If DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True) Then
-                '    rule.Complete()
-                '    Log("All Data is refreshed. BBLE: " & bble)
-                'End If
+            'If DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True) Then
+            '    rule.Complete()
+            '    Log("All Data is refreshed. BBLE: " & bble)
+            'End If
             Case Core.DataLoopRule.DataLoopType.AllHomeOwner
                 Try
                     If (DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)) Then
@@ -639,16 +640,17 @@ Public Class DOBComplaintsCheckingRule
         Dim props = Data.CheckingComplain.GetAllComplains
 
         Dim names As New List(Of String)
+        Dim complaintServer = ConfigurationManager.AppSettings("DOBComplaintServer").ToString
 
         For Each prop In props
 
-            While DataWCFService.IsServerBusy("DOBComplaints")
+            While DataWCFService.IsServerBusy(complaintServer)
                 Log("DOB Complaints Refresh: the server is busy. Will try 120s later.")
                 Thread.Sleep(120000)
             End While
 
             If Not IsTesting Then
-                prop.RefreshComplains("RuleEngine")
+                prop.RefreshComplains("RuleEngine", complaintServer)
             End If
 
             If Not String.IsNullOrEmpty(prop.NotifyUsers) Then
