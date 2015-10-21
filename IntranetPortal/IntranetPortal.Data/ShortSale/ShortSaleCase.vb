@@ -750,7 +750,7 @@ Partial Public Class ShortSaleCase
 
             'Save mortgages
             If _mortgages IsNot Nothing Then
-                For Each mg In _mortgages
+                For Each mg In _mortgages.Take(3)
                     If mg.CaseId = 0 Then
                         mg.CaseId = CaseId
                     End If

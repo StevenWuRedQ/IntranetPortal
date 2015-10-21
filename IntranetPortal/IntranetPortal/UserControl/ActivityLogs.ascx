@@ -644,6 +644,8 @@
                             <option value="<%= mortStatus.Category & "-" & mortStatus.Name%>" style="display: none"><%= mortStatus.Name%></option>
                             <% Next%>
                         </select>
+                        <div class="color_gray upcase_text">Follow Up date</div>
+                        <dx:ASPxDateEdit ID="dtFollowup" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                     </div>
 
                     <% End If%>
@@ -670,14 +672,14 @@
     <dx:ASPxCallback runat="server" ID="addLogsCallback" ClientInstanceName="addLogsCallbackClient" OnCallback="addLogsCallback_Callback">
         <ClientSideEvents EndCallback="function(s,e){gridTrackingClient.Refresh();}" />
     </dx:ASPxCallback>
-    
+
     <%-------end-----%>
     <%-- log tables--%>
     <div style="width: 100%; padding: 0px; display: block;">
         <asp:HiddenField ID="hfBBLE" runat="server" />
-        <dx:ASPxGridView ID="gridTracking" Width="100%" ViewStateMode="Disabled" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true" 
+        <dx:ASPxGridView ID="gridTracking" Width="100%" ViewStateMode="Disabled" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true"
             SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID"
-             SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" OnDataBinding="gridTracking_DataBinding" Styles-FilterBuilderHeader-BackColor="Gray">
+            SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" OnDataBinding="gridTracking_DataBinding" Styles-FilterBuilderHeader-BackColor="Gray">
             <Styles>
                 <Cell VerticalAlign="Top"></Cell>
                 <Header BackColor="#F5F5F5"></Header>
