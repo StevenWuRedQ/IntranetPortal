@@ -17,14 +17,20 @@
         End If
     End Sub
 
-    Protected Overrides Sub OnInit(e As EventArgs)
-        MyBase.OnInit(e)
+    Private Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Init
         BindControl()
+    End Sub
+
+    Protected Overrides Sub OnInit(e As EventArgs)
+
+        MyBase.OnInit(e)
+
     End Sub
 
     Private Sub BindControl()
         FormData = BusinessForm.Instance("title")
         BusinessList = Page.LoadControl(FormData.ListControl)
+        BusinessList.ID = "titleList"
         contentSplitter.GetPaneByName("listPanel").Controls.Add(BusinessList)
 
         If FormData.ShowActivityLog Then
