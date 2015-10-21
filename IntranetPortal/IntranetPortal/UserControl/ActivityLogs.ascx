@@ -366,7 +366,7 @@
         if ($("#selCategory").attr("data-required") == "true" && $("#selCategory").val() == "") {
             alert("Please select Category");
             return;
-        }
+        }       
 
         if ($("#selStatusUpdate").attr("data-required") == "true" && $("#selStatusUpdate").val() == "") {
             alert("Please select Status Update");
@@ -377,15 +377,29 @@
             alert("Comments can't be empty.")
             return
         }
+
+        if(typeof ShortSale != 'undefined')
+        {
+            if(typeof dtClientFollowup != 'undefined' )
+            {
+                
+                if($('#selCategory').val() == "Dead" || $('#selCategory').val() == "Closed" || $('#selCategory').val() == "Assign")
+                {
+                    dtClientFollowup.SetText("");
+                }
+                else
+                {
+                    if(dtClientFollowup.GetDate() == null)
+                    {
+                        alert("Please select next FollowUp date.")
+                        return;
+                    }
+                }
+            }
+        }
       
         if ($("#selStatusUpdate").val() != null && $("#selStatusUpdate").val() != "")
         {
-            if(dtClientFollowup.GetDate() == null)
-            {
-                alert("Please select next FollowUp date.")
-                return;
-            }
-
             if(typeof UpdateMortgageStatus != "undefined")
                 UpdateMortgageStatus($("#selType1").val(), $("#selStatusUpdate option:selected").text(), $("#selCategory").val());
             
