@@ -132,6 +132,7 @@ Partial Class Troubleshooting
         Me.txtReportTables = New System.Windows.Forms.TextBox()
         Me.txtTemplateResult = New System.Windows.Forms.TextBox()
         Me.Button20 = New System.Windows.Forms.Button()
+        Me.btnLegalTeamActivity = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -896,6 +897,7 @@ Partial Class Troubleshooting
         '
         'TabPage7
         '
+        Me.TabPage7.Controls.Add(Me.btnLegalTeamActivity)
         Me.TabPage7.Controls.Add(Me.BtnNoticeECourt)
         Me.TabPage7.Controls.Add(Me.Button21)
         Me.TabPage7.Controls.Add(Me.btnSummaryEmail)
@@ -1233,6 +1235,15 @@ Partial Class Troubleshooting
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
+        'btnLegalTeamActivity
+        '
+        Me.btnLegalTeamActivity.Location = New System.Drawing.Point(153, 94)
+        Me.btnLegalTeamActivity.Name = "btnLegalTeamActivity"
+        Me.btnLegalTeamActivity.Size = New System.Drawing.Size(183, 23)
+        Me.btnLegalTeamActivity.TabIndex = 5
+        Me.btnLegalTeamActivity.Text = "Legal Team Activity Report"
+        Me.btnLegalTeamActivity.UseVisualStyleBackColor = True
+        '
         'Troubleshooting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1392,4 +1403,5 @@ Partial Class Troubleshooting
     Friend WithEvents btnRefreshComplaints As Button
     Friend WithEvents CleanBudgetData As Button
     Friend WithEvents BtnNoticeECourt As Button
+    Friend WithEvents btnLegalTeamActivity As Button
 End Class

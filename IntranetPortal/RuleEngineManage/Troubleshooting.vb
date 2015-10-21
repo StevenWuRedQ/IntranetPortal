@@ -976,4 +976,9 @@ Public Class Troubleshooting
         Dim r = New NoticeECourtRule()
         r.Execute()
     End Sub
+
+    Private Sub btnLegalTeamActivity_Click(sender As Object, e As EventArgs) Handles btnLegalTeamActivity.Click
+        Dim rule = New IntranetPortal.RulesEngine.LegalActivityReportRule
+        rule.Execute()
+    End Sub
 End Class
