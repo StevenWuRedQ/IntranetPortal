@@ -892,7 +892,7 @@
                             ResetCaseDataChange();
                         }).
                         error(function (data, status) {
-                            alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
+                            alert("Fail to save data. status " + status + "Error : " + data.message ? data.message : JSON.stringify(data));
                         });
             }
             $scope.ShowAddPopUp = function (event) {
@@ -930,7 +930,7 @@
             /* stephen code */
             $scope.SsCase.Mortgages = [{}];
             $scope.NGremoveArrayItem = function (item, index, disable) {
-                var r = window.confirm("Deletion This?");
+                var r = window.confirm("Delete This?");
                 if (r) {
                     if (disable) item[index].DataStatus = 3;
                     else item.splice(index, 1);

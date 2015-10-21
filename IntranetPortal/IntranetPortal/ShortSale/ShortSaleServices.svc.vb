@@ -50,7 +50,7 @@ Public Class ShortSaleServices
         Dim ssCase = ShortSaleCase.GetCase(caseId)
         If (ssCase IsNot Nothing) Then
             If (HttpContext.Current.User.Identity.Name = ssCase.UpdateBy) Then
-                Return "".ToJson
+                Return "sameuser".ToJson
             End If
         End If
         Return ssCase.UpdateBy.ToJson

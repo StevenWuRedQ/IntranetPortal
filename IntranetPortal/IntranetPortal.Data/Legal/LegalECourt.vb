@@ -42,9 +42,12 @@ Public Class LegalECourt
                 'When changed save it to database
                 If (Changed) Then
                     Using db As New LegalModelContainer
-                        Dim original = db.LegalECourts.Find(Me.Id)
-                        original.BBLE = Me.BBLE
-                        db.SaveChanges()
+                        If (Me.Id <> 0) Then
+                            Dim original = db.LegalECourts.Find(Me.Id)
+                            original.BBLE = Me.BBLE
+                            db.SaveChanges()
+                        End If
+
                     End Using
                 End If
 

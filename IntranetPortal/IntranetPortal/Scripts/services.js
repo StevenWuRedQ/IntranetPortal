@@ -78,7 +78,10 @@ function ScopeDateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyU
                 if (urlModfiyUserFunc) {
                     $.getJSON(urlModfiyUserFunc(), function (mUser) {
                         if (mUser) {
-                            alert(mUser + " change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
+                            if (mUser != "sameuser")
+                            {
+                                alert(mUser + " change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
+                            }
                             reLoadUIfunc(loadUIIdFunc());
                         }
 

@@ -107,13 +107,13 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
         Dim serv = New Core.ParseEmailService("Portal.etrack@myidealprop.com", "ColorBlue1")
 
 
-        '''''''''''''''''''''''''''''''''
-        'Dim msg = serv.GetNewEmails
-        'For Each m In msg
-        '    LegalECourt.Parse(m)
-        'Next
-        'Assert.IsTrue(msg.Count > 0)
-        '''''''''''''''''''''''''
+        ''''''''''''''''''''''''''''''''
+        Dim msg = serv.GetNewEmails
+        For Each m In msg
+            LegalECourt.Parse(m)
+        Next
+        Assert.IsTrue(msg.Count > 0)
+        ''''''''''''''''''''''''
 
         Assert.IsTrue(serv.IsLogedIn)
     End Sub
