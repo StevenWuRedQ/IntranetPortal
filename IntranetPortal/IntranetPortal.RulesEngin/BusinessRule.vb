@@ -17,6 +17,7 @@ Imports System.Runtime.Serialization
 <KnownType(GetType(ScanECourtsRule))>
 <KnownType(GetType(ConstructionNotifyRule))>
 <KnownType(GetType(LegalActivityReportRule))>
+<KnownType(GetType(NoticeECourtRule))>
 <DataContract>
 Public Class BaseRule
     <DataMember>
