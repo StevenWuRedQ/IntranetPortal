@@ -642,7 +642,7 @@ Public Class DOBComplaintsCheckingRule
 
         For Each prop In props
 
-            While DataWCFService.IsServerBusy
+            While DataWCFService.IsServerBusy("DOBComplaints")
                 Log("DOB Complaints Refresh: the server is busy. Will try 120s later.")
                 Thread.Sleep(120000)
             End While

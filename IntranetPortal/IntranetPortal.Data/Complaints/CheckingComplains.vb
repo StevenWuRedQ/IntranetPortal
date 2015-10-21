@@ -67,7 +67,7 @@ Partial Public Class CheckingComplain
 
     Public Shared Function GetResultFromServices(Optional bble As String = "") As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
 
-        Using client As New DataAPI.WCFMacrosClient
+        Using client As New DataAPI.WCFMacrosClient()
             Try
                 Dim result = client.Get_DBO_Complaints_List(bble, String.IsNullOrEmpty(bble))
 
@@ -169,7 +169,7 @@ Partial Public Class CheckingComplain
         Me.Status = RunningStatus.InRefresh
         Try
             If refreshBy = "RuleEngine" Then
-                RequestComplaints(refreshBy)
+                RequestComplaints(refreshBy, "DOBComplaints")
             Else
                 System.Threading.ThreadPool.QueueUserWorkItem(AddressOf RequestComplaints, refreshBy)
             End If
@@ -228,9 +228,9 @@ Partial Public Class CheckingComplain
         End If
     End Sub
 
-    Private Sub RequestComplaints(requestBy As String)
+    Private Sub RequestComplaints(requestBy As String, Optional configName As String = "WCFMacros_Http")
         Try
-            Using client As New DataAPI.WCFMacrosClient
+            Using client As New DataAPI.WCFMacrosClient(configName)
                 Dim data As New DataAPI.DOB_Complaints_In
                 data.BBLE = BBLE
                 data.DOB_PenOnly = True

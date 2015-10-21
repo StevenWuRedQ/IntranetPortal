@@ -178,8 +178,8 @@ Public Class DataWCFService
         End Try
     End Function
 
-    Public Shared Function IsServerBusy() As Boolean
-        Using client As New DataAPI.WCFMacrosClient
+    Public Shared Function IsServerBusy(Optional configName As String = "WCFMacros_Http") As Boolean
+        Using client As New DataAPI.WCFMacrosClient(configName)
             Try
                 Dim waitingRequest = client.Requests_Waiting
                 Return waitingRequest > 20

@@ -34,7 +34,8 @@ Namespace RulesEngine
      System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.AssignLeadsRule)),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.DOBComplaintsCheckingRule)),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.ConstructionNotifyRule)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.LegalActivityReportRule))>  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.LegalActivityReportRule)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.NoticeECourtRule))>  _
     Partial Public Class BaseRule
         Inherits Object
         Implements System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
@@ -337,6 +338,14 @@ Namespace RulesEngine
      System.Runtime.Serialization.DataContractAttribute(Name:="LegalActivityReportRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
      System.SerializableAttribute()>  _
     Partial Public Class LegalActivityReportRule
+        Inherits RulesEngine.BaseRule
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="NoticeECourtRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class NoticeECourtRule
         Inherits RulesEngine.BaseRule
     End Class
     

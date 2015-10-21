@@ -17,8 +17,22 @@ Public Class ShortSaleManage
         Return ShortSaleCase.IsExist(bble)
     End Function
 
+    Public Shared Function IsOriginalCase(changedCase As ShortSaleCase) As Boolean
+        Dim oCase = ShortSaleCase.GetCase(changedCase.CaseId)
+
+        If oCase.UpdateDate.HasValue AndAlso changedCase.UpdateDate.HasValue Then
+            Return oCase.UpdateDate = changedCase.UpdateDate
+        End If
+
+        Return True
+    End Function
+
     Public Shared Function SaveCase(caseData As String, saveBy As String) As ShortSaleCase
         Dim res = JsonConvert.DeserializeObject(Of ShortSaleCase)(caseData)
+
+        'If Not IsOriginalCase(res) Then
+        '    Throw New Exception("Case Data was changed. Please load the latest data and try again.")
+        'End If
 
         Try
             res.Save(HttpContext.Current.User.Identity.Name)

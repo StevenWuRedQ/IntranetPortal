@@ -19,7 +19,7 @@ Public Class ActivityLogs
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If DisplayMode = ActivityLogMode.ShortSale Then
-            gridTracking.Settings.VerticalScrollableHeight = 550
+            gridTracking.Settings.VerticalScrollableHeight = 510
         Else
             gridTracking.Settings.VerticalScrollableHeight = 600
         End If
@@ -1001,17 +1001,23 @@ Public Class ActivityLogs
                             comments = comments & String.Format("<br />Status Update: {0} - {1}", category, statusOfUpdate)
                         End If
 
-                        If Not String.IsNullOrEmpty(txtComments) Then
-                            comments = comments & "<br />" & txtComments
+                        If dtFollowup.Date > DateTime.Now Then
+                            comments = comments & String.Format("<br />Follow Up Date: {0:d}", dtFollowup.Date)
+                            Dim ssCase = ShortSaleCase.GetCaseByBBLE(hfBBLE.Value)
+                            ssCase.SaveFollowUp(dtFollowup.Date)
                         End If
 
-                        LeadsActivityLog.AddActivityLog(aspxdate, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
+                        If Not String.IsNullOrEmpty(txtComments) Then
+                                comments = comments & "<br />" & txtComments
+                            End If
 
-                        'ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category & " - " & statusOfUpdate, txtComments)
-                        ShortSaleManage.AddActivityLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category, statusOfUpdate, txtComments)
+                            LeadsActivityLog.AddActivityLog(aspxdate, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
 
-                    End If
-                Else
+                            'ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category & " - " & statusOfUpdate, txtComments)
+                            ShortSaleManage.AddActivityLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category, statusOfUpdate, txtComments)
+
+                        End If
+                        Else
                     LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, logCategoryStr, LeadsActivityLog.EnumActionType.Comments)
                     ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, "Comments", "Comments", txtComments, Employee.CurrentAppId)
                 End If
@@ -1135,7 +1141,7 @@ Public Class ActivityLogs
             End If
 
             If DisplayMode = ActivityLogMode.ShortSale Then
-                htmlEditor.Height = 180
+                htmlEditor.Height = 220
             End If
         End If
     End Sub

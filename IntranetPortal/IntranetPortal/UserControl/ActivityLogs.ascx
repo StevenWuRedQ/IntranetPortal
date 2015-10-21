@@ -380,9 +380,15 @@
       
         if ($("#selStatusUpdate").val() != null && $("#selStatusUpdate").val() != "")
         {
+            if(dtClientFollowup.GetDate() == null)
+            {
+                alert("Please select next FollowUp date.")
+                return;
+            }
+
             if(typeof UpdateMortgageStatus != "undefined")
                 UpdateMortgageStatus($("#selType1").val(), $("#selStatusUpdate option:selected").text(), $("#selCategory").val());
-
+            
             //needRefreshShortSale = true;
         } else
         {
@@ -645,7 +651,7 @@
                             <% Next%>
                         </select>
                         <div class="color_gray upcase_text">Follow Up date</div>
-                        <dx:ASPxDateEdit ID="dtFollowup" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
+                        <dx:ASPxDateEdit ID="dtFollowup" Border-BorderStyle="None" CssClass="select_bootstrap" ClientInstanceName="dtClientFollowup" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                     </div>
 
                     <% End If%>
