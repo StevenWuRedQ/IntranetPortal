@@ -288,5 +288,12 @@ Namespace Controllers
             form.SaveForms(username)
             Return Ok()
         End Function
+
+        <Route("api/ConstructionCases/GetInitialForm")>
+        Function GetInitialForm() As IHttpActionResult
+            Dim username = HttpContext.Current.User.Identity.Name.ToString
+            Dim result = Data.ConstructionInitialForm.GetAddressByUser(username)
+            Return Ok(result)
+        End Function
     End Class
 End Namespace

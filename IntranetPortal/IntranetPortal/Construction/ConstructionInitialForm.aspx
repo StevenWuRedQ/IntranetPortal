@@ -9,7 +9,6 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
-
     <div id="initialForm" ng-controller="InitialFormController">
         <div class="container">
             <h3 class="ss_form_title text-center">Initial Form</h3>
@@ -181,7 +180,6 @@
     <script>
         angular.module("PortalApp")
             .controller("InitialFormController", function ($scope, $http) {
-
                 $scope.data = {
                     BBLE: '<%= BBLE %>',
                     Form: {
@@ -202,14 +200,14 @@
                             if (!$scope.data.Form.Sketch) {
                                 $scope.data.Form.Sketch = [{ floorName: "" }, { floorName: "" }, { floorName: "" }, { floorName: "" }, { floorName: "" }, { floorName: "" }];
                             }
-                            $scope.CanvasInit();
                         }
+                        $scope.canvasInit();
                     }, function error(res) {
                         alert("Get form fails");
                     })
                 }
                 $scope.save = function () {
-                    $scope.CanvasSave();
+                    $scope.canvasSave();
                     var url = "/api/ConstructionCases/InitialForm";
                     $http({
                         method: 'POST',
@@ -225,24 +223,26 @@
                     window.print()
                 }
 
-                $scope.CanvasInit = function () {
+                $scope.canvasInit = function () {
                     $(".LiterallyCanvas").each(function (idx, el) {
                         var lc = LC.init(el, {
+                            imageSize: { width: 470, height: 320 },
                             keyboardShortcuts: false,
+                            backgroundColor: '#fff',
+                            defaultStrokeWidth: 2,
                             imageURLPrefix: "/Scripts/literallycanvas/img/",
-                            imageSize: { width: 480, height: 360 },
-                            defaultStrokeWidth: 2
                         });
                         $scope.canvasEls.push(lc);
                         if ($scope.data.Form.Sketch && $scope.data.Form.Sketch[idx].snapshot) {
                             lc.loadSnapshot($scope.data.Form.Sketch[idx].snapshot);
                         }
                     })
-                   
+
                 }
-                $scope.CanvasSave = function () {
+
+                $scope.canvasSave = function () {
                     _.each($scope.canvasEls, function (el, idx) {
-                        var snapshot = el.getSnapshot("shapes", "colors");
+                        var snapshot = el.getSnapshot(["shapes", "colors"]);
                         $scope.data.Form.Sketch[idx].snapshot = snapshot;
                     });
                 }

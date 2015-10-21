@@ -11,12 +11,12 @@
     <div class="item item-divider">
         <h2 class="text-center">Initial Form</h2>
     </div>
-    <div id="initialForm" ng-controller="InitialFormController">
+    <div id="initialFormCtrl" ng-controller="InitialFormController">
         <div class="card">
             <div class="list">
                 <label class="item item-input item-select">
                     <span class="input-label">Property Address</span>
-                    <select class=""></select>
+                    <select ng-options="a[0] as a[1] for a in addressList" ng-model="data.BBLE" ng-change="load()"></select>
                 </label>
 
                 <label class="item item-input">
@@ -34,9 +34,7 @@
                 </span>
                 <label class="item item-input">
                     <span class="input-label">Tax class</span>
-
                     <input type="text" ng-model="data.Form.TaxClass" />
-
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Asset Manager</span>
@@ -147,22 +145,70 @@
         <div class="card">
             <label class="item item-input item-select">
                 <span class="input-label">Sketch</span>
-                <select ng-options="x for x in [1,2,3,4,5,6]" ng-model="data.currentSketch" ></select>
+                <select ng-options="x for x in [1,2,3,4,5,6]" ng-model="data.currentSketch" ng-change="updateSketch()"></select>
             </label>
 
-            <div class="card" ng-repeat="s in data.Form.Sketch">
+            <div class="sketchDiv">
                 <label class="item item-input">
-                    <label class="input-label">Floors</label>
-                    <input type="text" ng-model="s.floorName" />
+                    <span class="input-label">Floors</span>
+                    <input type="text" ng-model="data.From.Sketch[0].floorName" />
                 </label>
                 <div class="LiterallyCanvas"></div>
+                <button class="button button-calm button-full button-small" ng-click="canvasClear(0)">clear</button>
             </div>
+            <div class="sketchDiv">
+                <label class="item item-input">
+                    <span class="input-label">Floors</span>
+                    <input type="text" ng-model="data.From.Sketch[1].floorName" />
+                </label>
+                <div class="LiterallyCanvas"></div>
+                <button class="button button-calm button-full button-small" ng-click="canvasClear(1)">clear</button>
+            </div>
+            <div class="sketchDiv">
+                <label class="item item-input">
+                    <span class="input-label">Floors</span>
+                    <input type="text" ng-model="data.From.Sketch[2].floorName" />
+                </label>
+                <div class="LiterallyCanvas"></div>
+                <button class="button button-calm button-full button-small" ng-click="canvasClear(2)">clear</button>
+
+            </div>
+            <div class="sketchDiv">
+                <label class="item item-input">
+                    <span class="input-label">Floors</span>
+                    <input type="text" ng-model="data.From.Sketch[3].floorName" />
+                </label>
+
+                <div class="LiterallyCanvas"></div>
+                <button class="button button-calm button-full button-small" ng-click="canvasClear(3)">clear</button>
+
+            </div>
+            <div class="sketchDiv">
+                <label class="item item-input">
+                    <span class="input-label">Floors</span>
+                    <input type="text" ng-model="data.From.Sketch[4].floorName" />
+                </label>
+
+                <div class="LiterallyCanvas"></div>
+                <button class="button button-calm button-full button-small" ng-click="canvasClear(4)">clear</button>
+
+            </div>
+            <div class="sketchDiv">
+                <label class="item item-input">
+                    <span class="input-label">Floors</span>
+                    <input type="text" ng-model="data.From.Sketch[5].floorName" />
+                </label>
+
+                <div class="LiterallyCanvas"></div>
+                <button class="button button-calm button-full button-small" ng-click="canvasClear(5)">clear</button>
+            </div>
+
         </div>
 
         <div class="row">
             <div class="col"></div>
             <div class="col"></div>
-            <button class="button button-balanced col">Save</button>
+            <button class="button button-balanced col" ng-click="save()">Save</button>
         </div>
     </div>
     <script>
@@ -178,12 +224,29 @@
                     }
                 }
                 $scope.canvasEls = [];
+
+                $scope.init = function () {
+                    var url = "/api/ConstructionCases/GetInitialForm";
+                    $http.get(url)
+                    .then(function success(res) {
+                        if (res.data) {
+                            $scope.addressList = res.data;
+                        }
+                    }, function error() {
+                        alert("fail to load address")
+                    })
+                    $scope.canvasInit();
+                    $scope.updateSketch();
+                }
+
+
                 $scope.load = function () {
                     var url = "/api/ConstructionCases/GetInitialForm?bble=" + $scope.data.BBLE;
                     $http.get(url)
                     .then(function success(res) {
                         if (res.data) {
                             $scope.data = res.data;
+                            $scope.data.Form.Address = $scope.getAddressLocal($scope.data.BBLE);
                             if (!$scope.data.Form.Sketch) {
                                 $scope.data.Form.Sketch = [{ floorName: "" },
                                                             { floorName: "" },
@@ -192,15 +255,16 @@
                                                             { floorName: "" },
                                                             { floorName: "" }];
                             }
-                            $scope.CanvasInit();
+                            $scope.canvasRedraw();
+                            $scope.updateSketch();
                         }
                     }, function error(res) {
-                        alert("Get form fails");
+                        alert("fail to get form");
                     })
                 }
 
                 $scope.save = function () {
-                    $scope.CanvasSave();
+                    $scope.canvasSave();
                     var url = "/api/ConstructionCases/InitialForm";
                     $http({
                         method: 'POST',
@@ -217,27 +281,62 @@
                     window.print()
                 }
 
-                $scope.CanvasInit = function () {
+                $scope.getAddressLocal = function (bble) {
+                    var result = ""
+                    _.each($scope.addressList, function (el) {
+                        if (el[0] == bble) {
+                            result = el[1]
+                        }
+                    })
+                    return result;
+                }
+
+                $scope.canvasInit = function () {
                     _.each($(".LiterallyCanvas"), function (el, idx) {
                         var lc = LC.init(el, {
                             keyboardShortcuts: false,
-                            imageSize: { width: 480, height: 360 },
+                            imageSize: { width: 470, height: 320 },
+                            toolbarPosition: 'hidden',
+                            backgroundColor: '#fff',
+                            defaultStrokeWidth: 2,
                             imageURLPrefix: "/Scripts/literallycanvas/img/",
                         });
                         $scope.canvasEls.push(lc);
+                    })
+                }
+
+                $scope.canvasRedraw = function () {
+                    _.each($scope.canvasEls, function (el, idx) {
+                        el.clear()
                         if ($scope.data.Form.Sketch && $scope.data.Form.Sketch[idx].snapshot) {
-                            lc.loadSnapshot($scope.data.Form.Sketch[idx].snapshot);
+                            el.loadSnapshot($scope.data.Form.Sketch[idx].snapshot);
                         }
                     })
-
                 }
-                $scope.CanvasSave = function () {
+
+                $scope.canvasSave = function () {
                     _.each($scope.canvasEls, function (el, idx) {
                         var snapshot = el.getSnapshot();
                         $scope.data.Form.Sketch[idx].snapshot = snapshot;
                     });
                 }
-                $scope.load();
+
+                $scope.canvasClear = function (index) {
+                    $scope.canvasEls[index].clear();
+                }
+
+
+                $scope.updateSketch = function () {
+                    _.each($(".sketchDiv"), function (el, idx) {
+                        $(el).hide();
+                        if (idx == $scope.data.currentSketch - 1) {
+                            $(el).show();
+                        }
+                    })
+                }
+
+                $scope.init();
             });
+
     </script>
 </asp:Content>
