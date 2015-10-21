@@ -295,5 +295,13 @@ Namespace Controllers
             Dim result = Data.ConstructionInitialForm.GetAddressByUser(username)
             Return Ok(result)
         End Function
+
+        <Route("api/ConstructionCases/GetRunners")>
+        Function GetRunners() As IHttpActionResult
+            Using ctx As New Entities
+                Dim result = Roles.GetUsersInRole("Construction-Runner")
+                Return Ok(result)
+            End Using
+        End Function
     End Class
 End Namespace

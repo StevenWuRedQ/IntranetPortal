@@ -309,6 +309,7 @@
                     if (callback) callback();
                 }
             })
+
         }
 
         /* Status change function -- Chris */
@@ -609,5 +610,15 @@
         $scope.openBudgetForm = function () {
             window.open("/Construction/ConstructionBudgetForm.aspx?bble=" + $scope.CSCase.BBLE, 'Budget Form', 'width=1024, height=768')
         }
+
+        $scope.getRunnerList = function () {
+            var url = "/api/ConstructionCases/GetRunners"
+            $http.get(url)
+            .then(function (res) {
+                if (res.data) {
+                    $scope.RUNNER_LIST = res.data;
+                }
+            })
+        }();
     });
 </script>

@@ -3,7 +3,6 @@
 <tabset class="tab-switch">
     <tab ng-repeat="owner in Form.FormData.Owners" active="owner.active" disable="owner.disabled">
          <tab-heading>{{owner.name}}</tab-heading>
-<%-- <div class="text-right" ng-show="SsCase.PropertyInfo.Owners.length>1" style="margin-bottom:-25px"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.PropertyInfo.Owners.length>1" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.Owners, $index)" title="Delete"></i></div>--%>
 <div class="ss_border" style="border-top: 0">
     <div class="ss_form">
         <h4 class="ss_form_title ">Mortgages&nbsp<pt-add ng-click="ensurePush('Form.FormData.Owners['+$index+'].Mortgages')"></pt-add></h4>

@@ -136,6 +136,8 @@
                         data: JSON.stringify($scope.form)
                     }).then(function () {
                         alert("Save Successful");
+                    }, function error() {
+                        alert("Fails to save.")
                     })
 
                 }
@@ -149,6 +151,8 @@
                     }).then(function (res) {
                         alert("Send Successful");
                         $scope.reload();
+                    }, function error() {
+                        alert("Fails to send.")
                     })
                 } else {
                     alert("Please select a correct address.")

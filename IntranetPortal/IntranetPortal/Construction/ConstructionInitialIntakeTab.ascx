@@ -6,6 +6,18 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Form</label>
                 <button type="button" class="btn btn-primary" ng-click="openInitialForm()">Initial Form</button>
+                &nbsp
+                <button type="button" class="btn btn-info btn-circle icon_btn" popover-placement="right" popover-template="'intake'"><i class="fa fa-share"></i></button>
+                <script type="text/ng-template" id="intake">
+                <div>
+                    <span  ng-repeat="x in RUNNER_LIST" >
+                        <input type="radio" style="display: inline-block" ng-model="CSCase.CSCase.InitialIntake.InitialFormAssign" ng-value="x">&nbsp;{{x}}
+                        <br>
+                    </span>
+                    <br>
+                    <button type="button" class="btn btn-sm btn-info text-center">Assign to</button>
+                </div>
+                </script>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Budget</label>

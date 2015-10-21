@@ -172,8 +172,8 @@
         $scope.Form = {
             FormData: {
                 Comments: [],
-                Owners: [{
-                    name: "Prior Owner Liens",
+                Owners: [ {
+                    name: "Current Owner Liens",
                     Mortgages: [{}],
                     Lis_Pendens: [{}],
                     Judgements: [{}],
@@ -183,8 +183,8 @@
                     FederalTaxLiens: [{}],
                     MechanicsLiens: [{}]
 
-                }, {
-                    name: "Current Owner Liens",
+                },{
+                    name: "Prior Owner Liens",
                     Mortgages: [{}],
                     Lis_Pendens: [{}],
                     Judgements: [{}],

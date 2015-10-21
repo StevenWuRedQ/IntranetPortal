@@ -117,7 +117,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">fillable</label>
-                <input class="ss_form_input " ng-model="Form.FormData.info.fillable">
+                 <pt-file upload-type="title" file-bble="BBLE"  file-id="info_fillable" file-model="Form.FormData.info.fillable"></pt-file>
             </li>
         </ul>
     </div>
