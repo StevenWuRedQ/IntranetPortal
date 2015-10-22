@@ -303,5 +303,12 @@ Namespace Controllers
                 Return Ok(result)
             End Using
         End Function
+
+        <Route("api/ConstructionCases/UpdateInitialFormOwner")>
+        Function UpdateInitialFormOwner(ByVal BBLE As String, ByVal owner As String) As IHttpActionResult
+            Dim username = HttpContext.Current.User.Identity.Name.ToString
+            Data.ConstructionInitialForm.updateOwner(BBLE, username, owner)
+            Return Ok()
+        End Function
     End Class
 End Namespace

@@ -7,15 +7,18 @@
                 <label class="ss_form_input_title">Form</label>
                 <button type="button" class="btn btn-primary" ng-click="openInitialForm()">Initial Form</button>
                 &nbsp
-                <button type="button" class="btn btn-info btn-circle icon_btn" popover-placement="right" popover-template="'intake'"><i class="fa fa-share"></i></button>
+                <button type="button" class="btn btn-info btn-circle icon_btn" popover-placement="right" popover-template="'intake'" ng-style="CSCase.CSCase.InitialIntake.InitialFormAssign?{'background-color': '#5cb85c'}:{}"><i class="fa fa-share"></i ></button>
                 <script type="text/ng-template" id="intake">
                 <div>
+                    <h2 class="label label-info">Assign to</h3>
+
+                    <hr>
                     <span  ng-repeat="x in RUNNER_LIST" >
-                        <input type="radio" style="display: inline-block" ng-model="CSCase.CSCase.InitialIntake.InitialFormAssign" ng-value="x">&nbsp;{{x}}
+                        <input type="radio" style="display: inline-block" ng-model="CSCase.CSCase.InitialIntake.InitialFormAssign" ng-value="x" >&nbsp;{{x}}
                         <br>
                     </span>
                     <br>
-                    <button type="button" class="btn btn-sm btn-info text-center">Assign to</button>
+                    
                 </div>
                 </script>
             </li>

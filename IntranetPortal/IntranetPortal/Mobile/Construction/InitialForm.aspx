@@ -246,18 +246,20 @@
                     .then(function success(res) {
                         if (res.data) {
                             $scope.data = res.data;
-                            $scope.data.Form.Address = $scope.getAddressLocal($scope.data.BBLE);
-                            if (!$scope.data.Form.Sketch) {
-                                $scope.data.Form.Sketch = [{ floorName: "" },
-                                                            { floorName: "" },
-                                                            { floorName: "" },
-                                                            { floorName: "" },
-                                                            { floorName: "" },
-                                                            { floorName: "" }];
+                            
+                            if (!$scope.data.Form) {
+                                $scope.data.Form = {
+                                    Layout: {},
+                                    Utility: {},
+                                    Sketch: [
+                                        { floorName: "" }, { floorName: "" }, { floorName: "" }, { floorName: "" }, { floorName: "" }, { floorName: "" }
+                                    ]
+                                }
                             }
-                            $scope.canvasRedraw();
-                            $scope.updateSketch();
+                            $scope.data.Form.Address = $scope.getAddressLocal($scope.data.BBLE);
                         }
+                        $scope.canvasRedraw();
+                        $scope.updateSketch();
                     }, function error(res) {
                         alert("fail to get form");
                     })

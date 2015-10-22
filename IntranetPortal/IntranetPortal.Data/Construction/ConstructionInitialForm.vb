@@ -43,6 +43,27 @@ Partial Public Class ConstructionInitialForm
         End Using
     End Sub
 
+    Public Shared Sub updateOwner(BBLE As String, userName As String, owner As String)
+        Using ctx As New ConstructionEntities
+            If ctx.ConstructionInitialForms.Any(Function(t) t.BBLE = BBLE) Then
+                Dim form = ctx.ConstructionInitialForms.Where(Function(f) f.BBLE = BBLE).FirstOrDefault
+                form.Owner = owner
+                form.UpdateDate = DateTime.Now
+                form.UpdateBy = userName
+                ctx.Entry(form).State = Entity.EntityState.Modified
+            Else
+                Dim newForm = New ConstructionInitialForm
+                newForm.BBLE = BBLE
+                newForm.CreateBy = userName
+                newForm.CreateDate = DateTime.Now
+                newForm.Owner = owner
+                ctx.ConstructionInitialForms.Add(newForm)
+            End If
+
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
 End Class
 
 Public Class ConstructionInitialFormMetaData

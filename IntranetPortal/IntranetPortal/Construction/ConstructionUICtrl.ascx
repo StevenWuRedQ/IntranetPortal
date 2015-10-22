@@ -335,8 +335,8 @@
                 ScopeSetLastUpdateTime($scope.GetTimeUrl());
                 alert("Save successfully!");
             });
+            $scope.updateInitialFormOwner();
             $scope.checkWatchedModel();
-
         }
         /***spliter***/
 
@@ -620,5 +620,17 @@
                 }
             })
         }();
+
+        $scope.updateInitialFormOwner = function () {
+            var url = "/api/ConstructionCases/UpdateInitialFormOwner?BBLE=" + $scope.CSCase.BBLE + "&owner=" + $scope.CSCase.CSCase.InitialIntake.InitialFormAssign
+            $http({
+                method: 'POST',
+                url: url
+            }).then(function success(res) {
+                console.log("Assign Initial Form owner Success.")
+            }, function error(res) {
+                console.log("Fail to assign Initial Form owner.")
+            })
+        }
     });
 </script>
