@@ -381,12 +381,13 @@
                                                                                 <div class="col-sm-6">Date of Valuation</div>
                                                                                 <div class="col-sm-5">
                                                                                     <input type="text" class="form-control" ng-model="valuation.DateOfValue" ss-date />
+                                                                                    
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
                                                                                 <div class="col-sm-6">Time of Valuation</div>
                                                                                 <div class="col-sm-5">
-                                                                                    <timepicker show-spinners="false" ng-model="valuation.TimeOfValuation"></timepicker>
+                                                                                    <timepicker show-spinners="false" ng-model="valuation.TimeOfValue"></timepicker>  
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">

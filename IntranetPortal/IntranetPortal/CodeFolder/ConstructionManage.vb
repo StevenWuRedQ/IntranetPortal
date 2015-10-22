@@ -175,6 +175,10 @@ Public Class ConstructionManage
 
     End Sub
 
+    Public Shared Sub notifyWhenInitialForm(bble As String)
+
+    End Sub
+
 #Region "Activitylog Manage"
     Private Shared _actionLists = {"Updated pics needed", "Material order update", "Head count", "Document needed"}
 
