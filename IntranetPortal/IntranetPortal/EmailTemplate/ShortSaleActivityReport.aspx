@@ -48,7 +48,9 @@
                         <td>Files Worked w/o Comments</td>
                         <td>Files Viewed Only</td>
                         <td>Total Files Opened</td>
+                        <% If ReportType <> "Legal" %>
                         <td style="background-color: lightblue">Missed FollowUp</td>                        
+                        <% End If %>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,7 +61,9 @@
                         <td><%= item.FilesWorkedWithoutComments.Count%></td>
                         <td><%= item.FilesViewedOnly.Count%></td>
                         <td><%= item.TotalFileOpened.Count%></td>
+                         <% If ReportType <> "Legal" %>
                         <td><%= item.FollowUpMissedCount %></td>
+                        <% End If %>
                     </tr>
                     <% Next%>
                 </tbody>

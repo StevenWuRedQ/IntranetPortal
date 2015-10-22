@@ -10,8 +10,6 @@ Public Class LegalCaseManage
     Public Const LogTitleSave As String = "LegalSave"
     Private Const FollowupEmailTemplate As String = "LegalFollowUpNotify"
 
-
-
     Public Shared Function IsInLegal(bble As String) As Boolean
 
         Return LegalCase.InLegal(bble)
@@ -179,6 +177,12 @@ Public Class LegalCaseManage
 
         LeadsActivityLog.AddActivityLog(DateTime.Now, "New Legal follow up date: " & dateSelected.ToString("d"), bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.FollowUp)
     End Sub
+
+    Public Shared Function GetMissedFollowUp(userName As String, endDate As DateTime) As List(Of LegalCase)
+
+        Dim cases = Legal.LegalCase.GetFollowUpCaseByUser(userName).Where(Function(lc) lc.FollowUp < endDate).ToList
+        Return cases
+    End Function
 
     Public Shared Sub ClearFollowUp(bble As String)
         Dim lCase = Legal.LegalCase.GetCase(bble)

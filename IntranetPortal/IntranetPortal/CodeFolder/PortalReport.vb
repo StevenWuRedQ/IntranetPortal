@@ -68,8 +68,17 @@
                                                            }
                                                        End Function).ToArray
             Case CaseActivityData.ActivityType.Legal
+                'Dim lCases = LegalCaseManage.GetMissedFollowUp(actData.Name, missedDate)
+                'actData.FollowUpMissed = lCases.Select(Function(a)
+                '                                           Return New FollowUpItem With {
+                '                                           .BBLE = a.BBLE,
+                '                                           .CaseName = a.CaseName,
+                '                                           .FollowUpDate = a.FollowUp
+                '                                           }
+                '                                       End Function).ToArray
 
             Case Else
+
         End Select
     End Sub
 
@@ -186,7 +195,11 @@
 
         Public ReadOnly Property FollowUpMissedCount As Integer
             Get
-                Return FollowUpMissed.Count
+                If FollowUpMissed IsNot Nothing Then
+                    Return FollowUpMissed.Count
+                End If
+
+                Return 0
             End Get
         End Property
 
