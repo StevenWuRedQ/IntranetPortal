@@ -113,8 +113,14 @@
             <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270" TextField="Name" ValueField="EmployeeID"
                 SelectedIndex="0" Width="100%">
             </dx:ASPxListBox>
-            <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
-                <ClientSideEvents Click="function(s,e){
+            <table style="margin-top:3px;">
+                <tr>
+                    <td style="width: 100px">
+                        <dx:ASPxCheckBox runat="server" Text="Archive Logs" ID="cbArchived"></dx:ASPxCheckBox>
+                    </td>
+                    <td>
+                        <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
+                            <ClientSideEvents Click="function(s,e){
                                         var item = listboxEmployeeClient.GetSelectedItem();
                                         if(item == null)
                                         {
@@ -124,7 +130,10 @@
                                         reassignCallback.PerformCallback(tmpBBLE + '|' + item.value + '|' + item.text);
                                         popupCtrReassignEmployeeListCtr.Hide();                                       
                                         }" />
-            </dx:ASPxButton>
+                        </dx:ASPxButton>
+                    </td>
+                </tr>
+            </table>
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
@@ -188,8 +197,7 @@
         }
         var selected = s.GetSelectedValues();
 
-        if(selected.indexOf("0") != -1)
-        {
+        if (selected.indexOf("0") != -1) {
             s.SelectValues(['3']);
         }
 

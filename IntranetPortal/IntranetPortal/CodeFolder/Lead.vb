@@ -434,7 +434,16 @@ Partial Public Class Lead
                 Return
             End If
 
+            If ShortSaleManage.IsInShortSale(bble) Then
+                Return
+            End If
+
+            If LegalCaseManage.IsInLegal(bble) Then
+                Return
+            End If
+
             Dim logs = ctx.LeadsActivityLogs.Where(Function(log) log.BBLE = bble).ToList
+
             Dim archivedLogs As New List(Of LeadsActivityLogArchived)
 
             For Each log In logs
@@ -540,7 +549,7 @@ Partial Public Class Lead
         End Using
     End Sub
 
-    Public Sub ReAssignLeads(empName As String, Optional assignBy As String = "Portal")
+    Public Sub ReAssignLeads(empName As String, Optional assignBy As String = "Portal", Optional archieve As Boolean = False)
         If String.Equals(EmployeeName, empName, StringComparison.CurrentCultureIgnoreCase) Then
             Return
         End If
@@ -549,6 +558,11 @@ Partial Public Class Lead
 
         If emp IsNot Nothing Then
             Dim originator = EmployeeName
+
+            If archieve Then
+                ArchivedLogs(BBLE)
+            End If
+
             Using ctx As New Entities
                 Dim ld = ctx.Leads.Find(BBLE)
                 ld.EmployeeID = emp.EmployeeID

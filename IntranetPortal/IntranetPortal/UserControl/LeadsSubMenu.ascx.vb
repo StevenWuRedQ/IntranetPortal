@@ -49,7 +49,7 @@ Public Class LeadsSubMenu
 
             Dim ld = Lead.GetInstance(bble)
             If ld IsNot Nothing Then
-                ld.ReAssignLeads(name, Page.User.Identity.Name)
+                ld.ReAssignLeads(name, Page.User.Identity.Name, cbArchived.Checked)
             End If
 
             'Using Context As New Entities
