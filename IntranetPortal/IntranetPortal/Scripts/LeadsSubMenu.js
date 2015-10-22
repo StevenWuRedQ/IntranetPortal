@@ -254,15 +254,37 @@ function popup_params(width, height) {
     var top = parseInt(i + ((f - height) / 2.5), 10);
     return 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top + ',scrollbars=1';
 }
-
+var SEND_STATUS = null;
 function SetLeadStatus(status) {
     if (leadStatusCallbackClient.InCallback()) {
         alert("Server is busy! Please wait!")
     } else {
-        leadStatusCallbackClient.PerformCallback(status);
+        SEND_STATUS = status;
+        aspxPopupChangeLeadsStatusClient.Show();
+        //leadStatusCallbackClient.PerformCallback(status);
     }
 }
 
+function CofrimLeadStatusChange()
+{
+
+    var comments = ChangeStatusResonTextClient.GetText();
+    if (!comments) {
+        alert("The reason can not be empty please make sure you input change reason !");
+        
+        return;
+    }
+    if(SEND_STATUS)
+    {
+        AddActivityLog(comments)
+        leadStatusCallbackClient.PerformCallback(SEND_STATUS);
+        
+    }else
+    {
+        alert("Cofrim LeadStatus Change faled SEND_STATUS is null");
+    }
+    aspxPopupChangeLeadsStatusClient.Hide();
+}
 function OnGetAddressCallbackError(s, e) {
     alert(e.message);
 }

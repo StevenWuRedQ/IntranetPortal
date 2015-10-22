@@ -367,6 +367,42 @@
         }" />
 </dx:ASPxPopupControl>
 
+<dx:ASPxPopupControl ClientInstanceName="aspxPopupChangeLeadsStatusClient" Width="356px" Height="350px" ID="aspxPopupChangeLeadsStatus" Modal="true" ShowFooter="true" 
+    runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    <HeaderTemplate>
+        <div class="clearfix">
+            <div class="pop_up_header_margin">
+                <i class="fa fa-exchange with_circle pop_up_header_icon"></i>
+                <span class="pop_up_header_text">Change Status</span>
+            </div>
+            <div class="pop_up_buttons_div">
+                <i class="fa fa-times icon_btn" onclick="aspxPopupChangeLeadsStatusClient.Hide()"></i>
+            </div>
+        </div>
+    </HeaderTemplate>
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server" ID="PopupControlContentControl1" >
+           
+            <div style="color: #b1b2b7;">
+                
+                <div class="form-group ">
+                    <label class="upcase_text" style="display: block">Reason</label>
+                    <dx:ASPxMemo runat="server" Width="100%" Height="115px" ID="ChangeStatusResonText" ClientInstanceName="ChangeStatusResonTextClient" CssClass="edit_text_area"></dx:ASPxMemo>
+                </div>
+               
+            </div>
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+    <FooterContentTemplate>
+        <div style="height: 30px; vertical-align: central">
+            <span class="time_buttons" onclick="aspxPopupChangeLeadsStatusClient.Hide()">Cancel</span>
+            <span class="time_buttons" onclick="CofrimLeadStatusChange();">Confirm</span>
+          
+        </div>
+    </FooterContentTemplate>
+    
+</dx:ASPxPopupControl>
+
 <dx:ASPxPopupControl ClientInstanceName="AspxPopupShareleadClient" Width="356px" Height="450px" ID="aspxPopupShareleads"
     HeaderText="Share Lead" Modal="true" ContentUrl="~/PopupControl/ShareLeads.aspx"
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">

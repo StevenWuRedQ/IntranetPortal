@@ -38,7 +38,7 @@ Public Class ScanECourtsRule
                     client.SendEmailByTemplate(Users, "LegalScanECourtNotify", maildata)
                 End Using
                 'Core.EmailService.SendMail(emails, Nothing, "LegalScanECourtNotify", maildata)
-                Log("Send email to  :" & Users & " for BBLE" & lcase.BBLE)
+                Log("Send email to  :" & Users & " for BBLE: " & lcase.BBLE)
 
             Else
                 Log("Can not find legal didn't send email please notice !")

@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class LeadsSubMenu
-    
+
     '''<summary>
     '''popupMenuLeads control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents popupMenuLeads As Global.DevExpress.Web.ASPxPopupMenu
-    
+
     '''<summary>
     '''ASPxPopupMenu1 control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupMenu1 As Global.DevExpress.Web.ASPxPopupMenu
-    
+
     '''<summary>
     '''ASPxPopupControl2 control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
-    
+
     '''<summary>
     '''popupWinViewFiles control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents popupWinViewFiles As Global.DevExpress.Web.ASPxPopupControl
-    
+
     '''<summary>
     '''popupViewFiles control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents popupViewFiles As Global.DevExpress.Web.PopupControlContentControl
-    
+
     '''<summary>
     '''ASPxPopupControl3 control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl
-    
+
     '''<summary>
     '''PopupContentReAssign control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PopupContentReAssign As Global.DevExpress.Web.PopupControlContentControl
-    
+
     '''<summary>
     '''listboxEmployee control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents listboxEmployee As Global.DevExpress.Web.ASPxListBox
-    
+
     '''<summary>
     '''cbArchived control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbArchived As Global.DevExpress.Web.ASPxCheckBox
-    
+
     '''<summary>
     '''btnAssign control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnAssign As Global.DevExpress.Web.ASPxButton
-    
+
     '''<summary>
     '''reassignCallback control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents reassignCallback As Global.DevExpress.Web.ASPxCallback
-    
+
     '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
-    
+
     '''<summary>
     '''ASPxPopupControl4 control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl4 As Global.DevExpress.Web.ASPxPopupControl
-    
+
     '''<summary>
     '''popupContentInProcess control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents popupContentInProcess As Global.DevExpress.Web.PopupControlContentControl
-    
+
     '''<summary>
     '''hfInProcessBBLE control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hfInProcessBBLE As Global.System.Web.UI.WebControls.HiddenField
-    
+
     '''<summary>
     '''lbSelectionMode control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbSelectionMode As Global.DevExpress.Web.ASPxCheckBoxList
-    
+
     '''<summary>
     '''cbEvictionUsers control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbEvictionUsers As Global.DevExpress.Web.ASPxComboBox
-    
+
     '''<summary>
     '''cbThirdParty control.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbThirdParty As Global.DevExpress.Web.ASPxComboBox
-    
+
     '''<summary>
     '''ASPLegalPopup control.
     '''</summary>
@@ -183,7 +183,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPLegalPopup As Global.DevExpress.Web.ASPxPopupControl
-    
+
     '''<summary>
     '''ASPxPopupControl5 control.
     '''</summary>
@@ -192,7 +192,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl5 As Global.DevExpress.Web.ASPxPopupControl
-    
+
     '''<summary>
     '''popupContentDeadLeads control.
     '''</summary>
@@ -201,7 +201,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents popupContentDeadLeads As Global.DevExpress.Web.PopupControlContentControl
-    
+
     '''<summary>
     '''hfBBLE control.
     '''</summary>
@@ -210,7 +210,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hfBBLE As Global.System.Web.UI.WebControls.HiddenField
-    
+
     '''<summary>
     '''cbDeadReasons control.
     '''</summary>
@@ -219,7 +219,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbDeadReasons As Global.DevExpress.Web.ASPxComboBox
-    
+
     '''<summary>
     '''txtDeadLeadDescription control.
     '''</summary>
@@ -228,7 +228,34 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtDeadLeadDescription As Global.DevExpress.Web.ASPxMemo
-    
+
+    '''<summary>
+    '''aspxPopupChangeLeadsStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents aspxPopupChangeLeadsStatus As Global.DevExpress.Web.ASPxPopupControl
+
+    '''<summary>
+    '''PopupControlContentControl1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PopupControlContentControl1 As Global.DevExpress.Web.PopupControlContentControl
+
+    '''<summary>
+    '''ChangeStatusResonText control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ChangeStatusResonText As Global.DevExpress.Web.ASPxMemo
+
     '''<summary>
     '''aspxPopupShareleads control.
     '''</summary>
@@ -237,7 +264,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents aspxPopupShareleads As Global.DevExpress.Web.ASPxPopupControl
-    
+
     '''<summary>
     '''popupRequestUpdate control.
     '''</summary>
@@ -246,7 +273,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents popupRequestUpdate As Global.DevExpress.Web.ASPxPopupControl
-    
+
     '''<summary>
     '''popContentRequestUpdate control.
     '''</summary>
@@ -255,7 +282,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents popContentRequestUpdate As Global.DevExpress.Web.PopupControlContentControl
-    
+
     '''<summary>
     '''hfRequestUpdateBBLE control.
     '''</summary>
@@ -264,7 +291,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hfRequestUpdateBBLE As Global.System.Web.UI.WebControls.HiddenField
-    
+
     '''<summary>
     '''requestUpdateFormlayout control.
     '''</summary>
@@ -273,7 +300,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents requestUpdateFormlayout As Global.DevExpress.Web.ASPxFormLayout
-    
+
     '''<summary>
     '''txtRequestUpdateLeadsName control.
     '''</summary>
@@ -282,7 +309,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtRequestUpdateLeadsName As Global.DevExpress.Web.ASPxTextBox
-    
+
     '''<summary>
     '''txtRequestUpdateCreateby control.
     '''</summary>
@@ -291,7 +318,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtRequestUpdateCreateby As Global.DevExpress.Web.ASPxTextBox
-    
+
     '''<summary>
     '''txtRequestUpdateManager control.
     '''</summary>
@@ -300,7 +327,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtRequestUpdateManager As Global.DevExpress.Web.ASPxTextBox
-    
+
     '''<summary>
     '''cbTaskImportant control.
     '''</summary>
@@ -309,7 +336,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbTaskImportant As Global.DevExpress.Web.ASPxComboBox
-    
+
     '''<summary>
     '''txtTaskDes control.
     '''</summary>
@@ -318,7 +345,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtTaskDes As Global.DevExpress.Web.ASPxMemo
-    
+
     '''<summary>
     '''ASPxButton4 control.
     '''</summary>
@@ -327,7 +354,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxButton
-    
+
     '''<summary>
     '''leadStatusCallback control.
     '''</summary>
@@ -336,7 +363,7 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents leadStatusCallback As Global.DevExpress.Web.ASPxCallback
-    
+
     '''<summary>
     '''getAddressCallback control.
     '''</summary>
