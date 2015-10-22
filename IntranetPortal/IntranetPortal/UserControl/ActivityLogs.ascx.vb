@@ -161,6 +161,7 @@ Public Class ActivityLogs
     Protected Sub gridTracking_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs) Handles gridTracking.CustomCallback
         If (e.Parameters = "Task") Then
             SetAsTask()
+            BindData(hfBBLE.Value)
         End If
 
         If e.Parameters.StartsWith("Filter") Then
