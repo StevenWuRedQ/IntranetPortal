@@ -1152,6 +1152,17 @@ Partial Public Class ShortSaleCase
 
 #Region "Report"
 
+    Public Shared Function MissedFollowUpReport(userName As String, missedDate As DateTime) As List(Of ShortSaleCase)
+        Using ctx As New ShortSaleEntities
+
+            Dim data = From ss In ctx.ShortSaleCases.Where(Function(s) s.Owner = userName AndAlso s.Status = CaseStatus.Active)
+                       Where ss.CallbackDate IsNot Nothing AndAlso ss.CallbackDate < missedDate
+                       Select ss
+
+            Return data.ToList
+        End Using
+    End Function
+
     Public Shared Function CaseReport(appId As Integer) As List(Of ShortSaleCase)
         Using ctx As New ShortSaleEntities
             Dim data = From ss In ctx.ShortSaleCases.Where(Function(ss) ss.AppId = appId)

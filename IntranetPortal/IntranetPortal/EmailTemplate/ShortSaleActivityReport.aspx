@@ -6,13 +6,11 @@
 <head runat="server">
     <title></title>
     <style type="text/css">
-        html
-        {
-          
+        html {
         }
 
-        ul li{
-            line-height:25px;
+        ul li {
+            line-height: 25px;
         }
 
         table {
@@ -50,6 +48,7 @@
                         <td>Files Worked w/o Comments</td>
                         <td>Files Viewed Only</td>
                         <td>Total Files Opened</td>
+                        <td style="background-color: lightblue">Missed FollowUp</td>                        
                     </tr>
                 </thead>
                 <tbody>
@@ -60,6 +59,7 @@
                         <td><%= item.FilesWorkedWithoutComments.Count%></td>
                         <td><%= item.FilesViewedOnly.Count%></td>
                         <td><%= item.TotalFileOpened.Count%></td>
+                        <td><%= item.FollowUpMissedCount %></td>
                     </tr>
                     <% Next%>
                 </tbody>
@@ -73,7 +73,7 @@
             <br />
 
             <h3>Activity Breakdown:</h3>
-            
+
             <% For Each item In TeamActivityData%>
 
             <% If item.TotalFileOpened.Count > 0 Then%>
@@ -92,7 +92,7 @@
                             <li>
                                 <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
                                     <%= ssCase.PropertyAddress%>
-                                </a>                                
+                                </a>
                             </li>
                             <% Next%>
                         </ul>
@@ -105,7 +105,7 @@
                             <li>
                                 <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
                                     <%= ssCase.PropertyAddress%>
-                                </a>     
+                                </a>
                             </li>
                             <% Next%>
                         </ul>
@@ -119,7 +119,20 @@
                             <li>
                                 <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
                                     <%= ssCase.PropertyAddress%>
-                                </a>     
+                                </a>
+                            </li>
+                            <% Next%>
+                        </ul>
+                        <% End If%>
+
+                         <% If item.FollowUpMissedCount > 0 Then%>
+                        <strong>Missed FollowUp (<%= item.FollowUpMissedCount%>) / Followup Date</strong>
+                        <ul>
+                            <% For Each ssCase In item.FollowUpMissed%>
+                            <li>
+                                <a href="http://portal.myidealprop.com/<%=item.GetViewLink(ssCase.BBLE)%>" target="_blank">
+                                    <%= ssCase.CaseName%> 
+                                </a>&nbsp; (<%= ssCase.FollowUpDate.ToShortDateString %>)
                             </li>
                             <% Next%>
                         </ul>

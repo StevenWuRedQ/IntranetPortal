@@ -8,7 +8,7 @@
             Dim category = LeadsActivityLog.LogCategory.Legal.ToString
             Dim logs = ctx.LeadsActivityLogs.Where(Function(al) al.Category.Contains(category) And al.ActivityDate < endDate And al.ActivityDate > startDate And actionTypes.Contains(al.ActionType)).ToList
 
-            Return BuildCaseActivityReport(CaseActivityData.ActivityType.Legal, logs, users, Core.SystemLog.GetLogs(LegalCaseManage.LogTitleOpen, startDate, endDate), Core.SystemLog.GetLogs(LegalCaseManage.LogTitleSave, startDate, endDate))
+            Return BuildCaseActivityReport(CaseActivityData.ActivityType.Legal, logs, users, Core.SystemLog.GetLogs(LegalCaseManage.LogTitleOpen, startDate, endDate), Core.SystemLog.GetLogs(LegalCaseManage.LogTitleSave, startDate, endDate), endDate)
         End Using
     End Function
 
@@ -25,23 +25,13 @@
             Dim category = LeadsActivityLog.LogCategory.ShortSale.ToString
             Dim logs = ctx.LeadsActivityLogs.Where(Function(al) (al.Category.Contains(category) Or al.Category.Contains(12)) And al.ActivityDate < endDate And al.ActivityDate > startDate And actionTypes.Contains(al.ActionType)).ToList
 
-            Return BuildCaseActivityReport(CaseActivityData.ActivityType.ShortSale, logs, ssUsers.Distinct.ToArray, ShortSaleManage.GetSSOpenCaseLogs(startDate, endDate), ShortSaleManage.GetSSSaveCaseLogs(startDate, endDate))
+            Return BuildCaseActivityReport(CaseActivityData.ActivityType.ShortSale, logs, ssUsers.Distinct.ToArray, ShortSaleManage.GetSSOpenCaseLogs(startDate, endDate), ShortSaleManage.GetSSSaveCaseLogs(startDate, endDate), endDate)
 
-            'Dim report = BuildAgentActivityData(logs, ssUsers.Distinct.ToArray)
-
-            'Dim openCaseLogs = ShortSaleManage.GetSSOpenCaseLogs(startDate, endDate)
-
-            'Return report.Select(Function(r)
-            '                         Dim useLogs = openCaseLogs.Where(Function(l) l.CreateBy = r.Name).ToList
-            '                         r.AmountofViewCase = useLogs.Count
-            '                         r.UniqueBBLE = useLogs.Select(Function(l) l.BBLE).Distinct.Count
-            '                         Return r
-            '                     End Function).ToList
 
         End Using
     End Function
 
-    Private Shared Function BuildCaseActivityReport(type As CaseActivityData.ActivityType, commentslogs As List(Of LeadsActivityLog), users As String(), openLogs As List(Of Core.SystemLog), saveLogs As List(Of Core.SystemLog)) As List(Of CaseActivityData)
+    Private Shared Function BuildCaseActivityReport(type As CaseActivityData.ActivityType, commentslogs As List(Of LeadsActivityLog), users As String(), openLogs As List(Of Core.SystemLog), saveLogs As List(Of Core.SystemLog), endDate As DateTime) As List(Of CaseActivityData)
         Dim result As New List(Of CaseActivityData)
 
         For Each user In users
@@ -58,11 +48,30 @@
             actData.FilesWorkedWithoutComments = LeadsInfo.GetLeadsByBBLEs(oLogsBBLE.Where(Function(s) sLogsBBLE.Contains(s) And Not clogsBBLE.Contains(s)).ToArray)
             actData.FilesViewedOnly = LeadsInfo.GetLeadsByBBLEs(oLogsBBLE.Where(Function(o) Not clogsBBLE.Contains(o) And Not sLogsBBLE.Contains(o)).ToArray)
 
+            BuildMissedFollowUpData(actData, endDate)
+
             result.Add(actData)
         Next
 
         Return result
     End Function
+
+    Private Shared Sub BuildMissedFollowUpData(actData As CaseActivityData, missedDate As String)
+        Select Case actData.Type
+            Case CaseActivityData.ActivityType.ShortSale
+                Dim sCases = ShortSaleManage.GetSSMissedFollowUp(actData.Name, missedDate)
+                actData.FollowUpMissed = sCases.Select(Function(a)
+                                                           Return New FollowUpItem With {
+                                                           .BBLE = a.BBLE,
+                                                           .CaseName = a.CaseName,
+                                                           .FollowUpDate = a.CallbackDate
+                                                           }
+                                                       End Function).ToArray
+            Case CaseActivityData.ActivityType.Legal
+
+            Case Else
+        End Select
+    End Sub
 
     Public Shared Function LoadTeamAgentActivityReport(teamName As String, startDate As DateTime, endDate As DateTime) As List(Of AgentActivityData)
         Dim users = UserInTeam.GetTeamFinders(teamName)
@@ -143,6 +152,7 @@
         Public Property Email As Integer
         Public Property UniqueBBLE As Integer
         Public Property AmountofViewCase As Integer
+
     End Class
 
     Public Class CaseActivityData
@@ -153,6 +163,8 @@
         Public Property FilesWorkedWithoutComments As LeadsInfo()
         Public Property FilesViewedOnly As LeadsInfo()
         Public Property TotalFileOpened As LeadsInfo()
+
+        Public Property FollowUpMissed As FollowUpItem()
 
         Public ReadOnly Property FilesWithCmtCount As Integer
             Get
@@ -172,6 +184,11 @@
             End Get
         End Property
 
+        Public ReadOnly Property FollowUpMissedCount As Integer
+            Get
+                Return FollowUpMissed.Count
+            End Get
+        End Property
 
         Public Function GetViewLink(bble As String) As String
             Select Case Type
@@ -186,6 +203,13 @@
             ShortSale
             Legal
         End Enum
+
+    End Class
+
+    Public Class FollowUpItem
+        Public Property BBLE As String
+        Public Property CaseName As String
+        Public Property FollowUpDate As DateTime
 
     End Class
 End Class

@@ -44,6 +44,10 @@ Public Class ShortSaleManage
         End Try
     End Function
 
+    Public Shared Function GetSSMissedFollowUp(userName As String, missedDate As DateTime) As List(Of ShortSaleCase)
+        Return ShortSaleCase.MissedFollowUpReport(userName, missedDate)
+    End Function
+
     Public Shared Function GetSSOpenCaseLogs(startDate As DateTime, endDate As DateTime) As List(Of Core.SystemLog)
         Return Core.SystemLog.GetLogs(OpenCaseLogTitle, startDate, endDate)
     End Function
