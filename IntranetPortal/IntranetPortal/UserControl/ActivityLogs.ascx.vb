@@ -183,28 +183,32 @@ Public Class ActivityLogs
 
                 If task IsNot Nothing Then
                     task.Status = UserTask.TaskStatus.Complete
+                    task.CompleteBy = Page.User.Identity.Name
+                    task.CompleteDate = DateTime.Now
                     Context.SaveChanges()
                 End If
 
                 LeadsActivityLog.AddActivityLog(DateTime.Now, "Task is completed by " & Page.User.Identity.Name, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
 
-                Dim sn = ""
-                If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-                    sn = Request.QueryString("sn").ToString
-                Else
-                    Dim wliItem = WorkflowService.GetUserTaskWorklist(task.TaskID, Page.User.Identity.Name)
-                    If wliItem IsNot Nothing Then
-                        sn = String.Format("{0}_{1}", wliItem.ProcInstId, wliItem.ActInstId)
-                    End If
-                End If
+                CompleteWorklistItem(task.TaskID)
 
-                If Not String.IsNullOrEmpty(sn) Then
-                    Dim wli = WorkflowService.LoadTaskProcess(sn)
-                    If wli IsNot Nothing Then
-                        wli.ProcessInstance.DataFields("Result") = "Completed"
-                        wli.Finish()
-                    End If
-                End If
+                'Dim sn = ""
+                'If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                '    sn = Request.QueryString("sn").ToString
+                'Else
+                '    Dim wliItem = WorkflowService.GetUserTaskWorklist(task.TaskID, Page.User.Identity.Name)
+                '    If wliItem IsNot Nothing Then
+                '        sn = String.Format("{0}_{1}", wliItem.ProcInstId, wliItem.ActInstId)
+                '    End If
+                'End If
+
+                'If Not String.IsNullOrEmpty(sn) Then
+                '    Dim wli = WorkflowService.LoadTaskProcess(sn)
+                '    If wli IsNot Nothing Then
+                '        wli.ProcessInstance.DataFields("Result") = "Completed"
+                '        wli.Finish()
+                '    End If
+                'End If
             End Using
 
             BindData(hfBBLE.Value)
@@ -1077,24 +1081,29 @@ Public Class ActivityLogs
 
             If task IsNot Nothing Then
                 task.Status = UserTask.TaskStatus.Complete
+                task.CompleteBy = Page.User.Identity.Name
+                task.CompleteDate = DateTime.Now
+                task.Comments = "Resend"
                 Context.SaveChanges()
             End If
 
-            Dim sn = ""
-            If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-                sn = Request.QueryString("sn").ToString
-            Else
-                Dim wliItem = WorkflowService.GetUserTaskWorklist(task.TaskID, Page.User.Identity.Name)
-                If wliItem IsNot Nothing Then
-                    sn = String.Format("{0}_{1}", wliItem.ProcInstId, wliItem.ActInstId)
-                End If
-            End If
+            CompleteWorklistItem(task.TaskID)
 
-            If Not String.IsNullOrEmpty(sn) Then
-                Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
-                wli.ProcessInstance.DataFields("Result") = "Completed"
-                wli.Finish()
-            End If
+            'Dim sn = ""
+            'If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+            '    sn = Request.QueryString("sn").ToString
+            'Else
+            '    Dim wliItem = WorkflowService.GetUserTaskWorklist(task.TaskID, Page.User.Identity.Name)
+            '    If wliItem IsNot Nothing Then
+            '        sn = String.Format("{0}_{1}", wliItem.ProcInstId, wliItem.ActInstId)
+            '    End If
+            'End If
+
+            'If Not String.IsNullOrEmpty(sn) Then
+            '    Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
+            '    wli.ProcessInstance.DataFields("Result") = "Completed"
+            '    wli.Finish()
+            'End If
 
             LeadsActivityLog.AddActivityLog(DateTime.Now, "Task is Resend by " & Page.User.Identity.Name, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
         End Using
