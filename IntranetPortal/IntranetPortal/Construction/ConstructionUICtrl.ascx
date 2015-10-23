@@ -72,7 +72,7 @@
                                         var item = listboxEmployeeClient.GetSelectedItem();
                                         if(item == null)
                                         {
-                                             alert('Please select user.');
+                                             AngularRoot.alert('Please select user.');
                                              return;
                                          }
                                         popupSelectOwner.PerformCallback('Save|' + leadsInfoBBLE + '|' + item.text);
@@ -320,11 +320,11 @@
                         if (scuessfunc) {
                             scuessfunc();
                         } else {
-                            alert("Successed !");
+                            ptCom.alert("Successed !");
                         }
                     }).
                     error(function (data, status) {
-                        alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
+                        ptCom.alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                     });
         }
         /* end status change function */
@@ -333,7 +333,7 @@
             var data = JSON.stringify($scope.CSCase);
             ptConstructionService.saveConstructionCases($scope.CSCase.BBLE, data, function (res) {
                 ScopeSetLastUpdateTime($scope.GetTimeUrl());
-                alert("Save successfully!");
+                ptCom.alert("Save successfully!");
             });
             $scope.updateInitialFormOwner();
             $scope.checkWatchedModel();
@@ -463,7 +463,7 @@
                 if (confirmed) {
                     ptConstructionService.getDOBViolations($scope.CSCase.BBLE, function (error, res) {
                         if (error) {
-                            alert(error);
+                            ptCom.alert(error);
                             console.log(error)
                         } else {
                             var dialog = DevExpress.ui.dialog.confirm("Your current DOB Violation data will be replaced?", "Warning");
@@ -491,7 +491,7 @@
                 if (confirmed) {
                     ptConstructionService.getECBViolations($scope.CSCase.BBLE, function (error, res) {
                         if (error) {
-                            alert(error);
+                            ptCom.alert(error);
                             console.log(error)
                         } else {
                             var dialog = DevExpress.ui.dialog.confirm("Your current ECB Violation data will be replaced?", "Warning");
@@ -543,7 +543,7 @@
                 AddActivityLog("Intake Process have finished!");
                 $scope.saveCSCase();
             } else {
-                alert("Intake Complete Fails.\nPlease check highlights for missing information!");
+                ptCom.alert("Intake Complete Fails.\nPlease check highlights for missing information!");
             }
         }
         $scope.checkIntake = function (callback) {

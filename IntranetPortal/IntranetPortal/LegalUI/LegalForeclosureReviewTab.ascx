@@ -21,11 +21,11 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Plantiff</label>
-                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.Plantiff" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)"></input>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.Plantiff" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)"></input>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Plantiff Attorney</label>
-                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlantiffAttorney" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)"></input>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlantiffAttorney" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)"></input>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">FC filed Date:</label>
@@ -72,7 +72,7 @@
         <h4 class="ss_form_title">Estate {{LegalCase.ForeclosureInfo.WasEstateFormed}}&nbsp
 		<i class="fa fa-compress icon_btn text-primary" ng-show="!estateCollapse" ng-click="estateCollapse=!estateCollapse"></i>
             <i class="fa fa-expand icon_btn text-primary" ng-show="estateCollapse" ng-click="estateCollapse=!estateCollapse"></i></h4>
-        <div collapse="estateCollapse">
+        <div uib-collapse="estateCollapse">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Was Estate formed? </label>
@@ -90,7 +90,7 @@
                         </li>
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">Attorney who Filed </label>
-                            <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PendingAttorneyName" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" ng-change="LegalCase.ForeclosureInfo.PendingAttorney=null" bind-id="LegalCase.ForeclosureInfo.PendingAttorney" />
+                            <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PendingAttorneyName" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" ng-change="LegalCase.ForeclosureInfo.PendingAttorney=null" bind-id="LegalCase.ForeclosureInfo.PendingAttorney" />
                         </li>
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">Date Filed </label>
@@ -160,7 +160,7 @@
         <h4 class="ss_form_title">Bankruptcy&nbsp
 		<i class="fa fa-compress icon_btn text-primary" ng-show="!bankruptcyCollapse" ng-click="bankruptcyCollapse=!bankruptcyCollapse"></i>
             <i class="fa fa-expand icon_btn text-primary" ng-show="bankruptcyCollapse" ng-click="bankruptcyCollapse=!bankruptcyCollapse"></i></h4>
-        <ul class="ss_form_box clearfix" collapse="bankruptcyCollapse">
+        <ul class="ss_form_box clearfix" uib-collapse="bankruptcyCollapse">
             <li class="ss_form_item">
                 <label class="ss_form_input_title"> Was BK filed </label>
                  <pt-radio name="WasBkfiled" model="LegalCase.ForeclosureInfo.BankruptcyFiled"></pt-radio>
@@ -278,7 +278,7 @@ The courts no longer consider this proper service. "></i></span>
 
                         <li class="ss_form_item">
                             <label class="ss_form_input_title" ng-class="service.ServerInSererList?'ss_warning':''">Is the process server one of these servers</label>
-                            <input type="text" class="ss_form_input" ng-model="service.ServerInSererList" ng-change="service.ServerInSererListId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,35)" typeahead-on-select="LegalCase.ForeclosureInfo.AffidavitOfServices[$index].ServerInSererListId=$item.ContactId" bind-id="LegalCase.ForeclosureInfo.AffidavitOfServices[$index].ServerInSererListId" >
+                            <input type="text" class="ss_form_input" ng-model="service.ServerInSererList" ng-change="service.ServerInSererListId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,35)" typeahead-on-select="LegalCase.ForeclosureInfo.AffidavitOfServices[$index].ServerInSererListId=$item.ContactId" bind-id="LegalCase.ForeclosureInfo.AffidavitOfServices[$index].ServerInSererListId" >
                            <%-- <select class="ss_form_input" ng-model="service.ServerInSererList" ng-options="o as o for o in ['Alan Feldman','John Medina','Robert Winckelmann']">
                                 <option value=""> </option>
                             </select>--%>
@@ -435,7 +435,7 @@ The courts no longer consider this proper service. "></i></span>
         <h4 class="ss_form_title">Answer&nbsp
 		<i class="fa fa-compress icon_btn text-primary" ng-show="!answerCollapse" ng-click="answerCollapse=!answerCollapse"></i>
             <i class="fa fa-expand icon_btn text-primary" ng-show="answerCollapse" ng-click="answerCollapse=!answerCollapse"></i></h4>
-        <div collapse="answerCollapse">
+        <div uib-collapse="answerCollapse">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.AnswerClientFiledBefore?'ss_warning':''">Has the client ever filed an answer before</label>
@@ -472,7 +472,7 @@ The courts no longer consider this proper service. "></i></span>
         <h4 class="ss_form_title">Note&nbsp
 		<i class="fa fa-compress icon_btn text-primary" ng-show="!noteCollapse" ng-click="noteCollapse=!noteCollapse"></i>
             <i class="fa fa-expand icon_btn text-primary" ng-show="noteCollapse" ng-click="noteCollapse=!noteCollapse"></i></h4>
-        <div collapse="noteCollapse">
+        <div uib-collapse="noteCollapse">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title" ng-class="!LegalCase.ForeclosureInfo.NoteIsPossess?'ss_warning':''">Do we possess a copy of the note</label>
@@ -552,7 +552,7 @@ The courts no longer consider this proper service. "></i></span>
         <h4 class="ss_form_title">Default Letters&nbsp
 		<i class="fa fa-compress icon_btn text-primary" ng-show="!defaultLettersCollapse" ng-click="defaultLettersCollapse=!defaultLettersCollapse"></i>
             <i class="fa fa-expand icon_btn text-primary" ng-show="defaultLettersCollapse" ng-click="defaultLettersCollapse=!defaultLettersCollapse"></i></h4>
-        <div collapse="defaultLettersCollapse">
+        <div uib-collapse="defaultLettersCollapse">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">What is the Default date</label>
@@ -628,7 +628,7 @@ The courts no longer consider this proper service. "></i></span>
         <h4 class="ss_form_title">Procedural&nbsp
 		<i class="fa fa-compress icon_btn text-primary" ng-show="!proceduralCollapse" ng-click="proceduralCollapse=!proceduralCollapse"></i>
             <i class="fa fa-expand icon_btn text-primary" ng-show="proceduralCollapse" ng-click="proceduralCollapse=!proceduralCollapse"></i></h4>
-        <div collapse="proceduralCollapse">
+        <div uib-collapse="proceduralCollapse">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">

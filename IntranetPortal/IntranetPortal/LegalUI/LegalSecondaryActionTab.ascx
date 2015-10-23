@@ -78,7 +78,7 @@
             </li>
             <li class="ss_form_item clearfix">
                 <label class="ss_form_input_title">Defendant's Attorney *</label>
-                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.DefendantAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DefendantAttorneyId">
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.DefendantAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DefendantAttorneyId">
             </li>
             
         </ul>
@@ -117,7 +117,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Plantiff Attorney</label>
-                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorney" ng-change="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId">
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorney" ng-change="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId">
             </li>
 
             <li class="ss_form_item">
@@ -143,7 +143,7 @@
             </li>
             <%--<li class="ss_form_item clearfix">
                 <label class="ss_form_input_title">Defendant's Attorney *</label>
-                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.DefendantAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DefendantAttorneyId">
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.DefendantAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DefendantAttorneyId">
             </li>--%>
         </ul>
         <h5 class="ss_form_title">Deed Reversions Other Defendants <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="NGAddArrayitemScope('LegalCtrl','LegalCase.SecondaryInfo.DeedReversionDefendants')" title="Add" style="font-size: 18px"></i></h5>
@@ -170,7 +170,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Plantiff Attorney</label>
-                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorney" ng-change="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId">
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorney" ng-change="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId">
             </li>
 
             <li class="ss_form_item">
@@ -196,7 +196,7 @@
             </li>
             <%--<li class="ss_form_item clearfix">
                 <label class="ss_form_input_title">Defendant's Attorney *</label>
-                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.DefendantAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DefendantAttorneyId">
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.DefendantAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DefendantAttorneyId">
             </li>--%>
         </ul>
 
@@ -224,7 +224,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Plantiff Attorney *</label>
-                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_PlantiffAttorney" ng-change="LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId">
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_PlantiffAttorney" ng-change="LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId">
             </li>
 
             <li class="ss_form_item">
@@ -278,7 +278,7 @@
             </li>
             <%--<li class="ss_form_item clearfix">
                 <label class="ss_form_input_title">Defendant's Attorney *</label>
-                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId">
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId">
             </li>--%>
         </ul>
 
