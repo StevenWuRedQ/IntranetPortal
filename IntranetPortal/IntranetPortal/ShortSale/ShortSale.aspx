@@ -941,6 +941,7 @@
             $http.get('/Services/ContactService.svc/getbanklist')
                 .success(function (data) {
                     $scope.bankNameOptions = data;
+                    
                 })
                 .error(function (data) {
                     $scope.bankNameOptions = [];

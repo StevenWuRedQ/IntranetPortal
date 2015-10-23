@@ -40,7 +40,10 @@ Partial Public Class PartyContact
         Using context As New ShortSaleEntities
             Dim result = context.PartyContacts.Where(Function(pc) pc.AppId = appId AndAlso pc.Type <> ContactType.Employee AndAlso (Not String.IsNullOrEmpty(pc.Name)) AndAlso (pc.Disable Is Nothing Or Not pc.Disable)).ToList
             result.AddRange(GetContactByType(ContactType.Employee, appId))
-
+            Dim gp = GroupType.GroupGetBankList
+            If (appId <> 1) Then
+                result.AddRange(gp)
+            End If
             Return result '.Where(Function(pc) Not String.IsNullOrEmpty(pc.Name))
         End Using
     End Function

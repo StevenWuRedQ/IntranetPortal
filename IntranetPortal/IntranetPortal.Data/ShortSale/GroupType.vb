@@ -60,6 +60,16 @@
         End Using
 
     End Function
+    Public Shared Function GroupGetBankList() As List(Of PartyContact)
+        Dim gp = GetGroup(5)
+        If gp IsNot Nothing Then
+            Return gp.Contacts(0).Where(Function(a) (a.Disable Is Nothing Or a.Disable = False)).OrderBy(Function(p) p.Name).ToList
+        End If
+        Return Nothing
+    End Function
+
+
+
     Public Shared Function GetAllGroupType(isAll As Boolean) As List(Of GroupType)
         Using ctx As New ShortSaleEntities
             If isAll Then
