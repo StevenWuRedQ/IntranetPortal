@@ -1,8 +1,8 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGShortSaleMortgageTab.ascx.vb" Inherits="IntranetPortal.NGShortSaleMortgageTab" %>
 <%@ Import Namespace="IntranetPortal.Data" %>
 
-<tabset class="tab-switch">
-    <tab ng-repeat="mortgage in SsCase.Mortgages|filter:{DataStatus:'!3'}" active="mortgage.active" disable="mortage.disabled" >
+<uib-tabset class="tab-switch">
+    <uib-tab ng-repeat="mortgage in SsCase.Mortgages|filter:{DataStatus:'!3'}" active="mortgage.active" disable="mortage.disabled" >
         <tab-heading>Mortgage {{$index+1}} </tab-heading>
             <div class="text-right" style="margin-bottom:-25px" ng-show="$index>0"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="NGremoveArrayItem(SsCase.Mortgages, $index,true)" title="Delete"></i></div>
             <div>
@@ -43,7 +43,7 @@
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Foreclosure Attorney </label>
-                    <input type="text" class="ss_form_input" ng-model="mortgage.ForeclosureAttorney" ng-change="mortgage.ForeclosureAttorneyId=null" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="mortgage.ForeclosureAttorneyId=$item.ContactId" bind-id="mortgage.ForeclosureAttorneyId" >
+                    <input type="text" class="ss_form_input" ng-model="mortgage.ForeclosureAttorney" ng-change="mortgage.ForeclosureAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="mortgage.ForeclosureAttorneyId=$item.ContactId" bind-id="mortgage.ForeclosureAttorneyId" >
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Address</label>
@@ -87,7 +87,7 @@
 
                     <input class="ss_form_input " ng-model="mortgage.Loan">
                 </li>
-                <div collapse="mortgageCompanyCollapse">
+                <div uib-collapse="mortgageCompanyCollapse">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Loan Amount</label>
                     <input class="ss_form_input" ng-model="mortgage.LoanAmount" money-mask>
@@ -118,7 +118,7 @@
                     <input class="ss_form_input " ss_date="" ng-model="mortgage.CancelationSent">
                 </li>
             </ul>
-            <ul  class="ss_form_box clearfix" collapse="mortgageCompanyCollapse">
+            <ul  class="ss_form_box clearfix" uib-collapse="mortgageCompanyCollapse">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Short Sale Dept</label>
                     <input class="ss_form_input" ng-model="GetContactById(mortgage.LenderId).OfficeNO" readonly="readonly">
@@ -136,7 +136,7 @@
         </div>
         </div>
 
-            <div class="ss_form" collapse="mortgageCompanyCollapse">
+            <div class="ss_form" uib-collapse="mortgageCompanyCollapse">
             <h4 class="ss_form_title">Mortgage Contacts&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortgage.Contacts,'SsCase.Mortgages['+$index+'].Contacts')" title="Add"></i></h4>
 
             <div class="ss_border" ng-show="mortgage.Contacts.length>0">
@@ -160,7 +160,7 @@
         </div>
         </div>
 
-            <div class="ss_form" collapse="mortgageCompanyCollapse">
+            <div class="ss_form" uib-collapse="mortgageCompanyCollapse">
             <h4 class="ss_form_title">Notes <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortgage.Notes,'SsCase.Mortgages['+$index+'].Notes')" title="Add"></i></h4>
             <ul class="ss_form_box clearfix textAreaDiv" ng-repeat="(index,note) in mortgage.Notes track by index">
                 <li class="ss_form_item ss_form_item_line ">
@@ -170,9 +170,9 @@
             </ul>
         </div>
 
-    </tab>
+    </uib-tab>
     <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.Mortgages, 'SsCase.Mortgages')" ng-show="SsCase.Mortgages.length<=2" title="Add" style="font-size: 18px"></i>
-</tabset>
+</uib-tabset>
 
 
 <div class="ss_form">

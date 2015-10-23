@@ -17,7 +17,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Company</label>
-                <input class="ss_form_input" type="text" ng-model="SsCase.BuyerTitle.CompanyName" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue, 1)">
+                <input class="ss_form_input" type="text" ng-model="SsCase.BuyerTitle.CompanyName" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue, 1)">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Title #</label>

@@ -99,8 +99,7 @@ function ScopeDateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyU
 }
 
 /* above is global functions */
-app.service('ptCom', ['$http',
-    function ($http) {
+app.service('ptCom', ['$http','$rootScope', function ($http, $rootScope) {
         /******************Stven code area*********************/
         this.DocGenerator = function (tplName, data, successFunc) {
             $http.post('/Services/Documents.svc/DocGenrate', { "tplName": tplName, "data": JSON.stringify(data) }).success(function (data) {
@@ -200,6 +199,10 @@ app.service('ptCom', ['$http',
             $.post(url, data, function (retData) {
                 $("body").append("<iframe src='" + retData.url + "' style='display: none;' ></iframe>");
             });
+        }
+
+        this.alert = function (message) {
+            $rootScope.alert(message);
         }
     }]);
 
@@ -514,8 +517,16 @@ app.service('ptFileService', function () {
             case 'jpeg':
             case 'bmp':
             case 'gif':
-            case 'png':
+            case 'png':            
                 $.fancybox.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
+                break;
+            case 'txt':
+                $.fancybox.open([
+                    {
+                        type: 'ajax', 
+                        href: '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath),
+                    }
+                ]);
                 break;
             default:
                 window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));

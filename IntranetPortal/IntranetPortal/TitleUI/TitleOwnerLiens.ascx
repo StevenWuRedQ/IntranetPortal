@@ -1,8 +1,11 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TitleOwnerLiens.ascx.vb" Inherits="IntranetPortal.TitleOwnerLiens" %>
 
-<tabset class="tab-switch">
-    <tab ng-repeat="owner in Form.FormData.Owners" active="owner.active" disable="owner.disabled">
-         <tab-heading>{{owner.name}}</tab-heading>
+<uib-tabset class="tab-switch">
+    <uib-tab ng-repeat="owner in Form.FormData.Owners track by owner.name" active="owner.active" disable="owner.disabled">
+         <tab-heading>
+             <i class="fa fa-arrow-circle-left" ng-show="$index>0" ng-click="swapOwnerPos($index)"></i>
+             {{owner.name}}
+         </tab-heading>
 <div class="ss_border" style="border-top: 0">
     <div class="ss_form">
         <h4 class="ss_form_title ">Mortgages&nbsp<pt-add ng-click="ensurePush('Form.FormData.Owners['+$index+'].Mortgages')"></pt-add></h4>
@@ -12,7 +15,7 @@
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title ">Name of the Mortgagor</label>
-                        <input type="text" class="ss_form_input " ng-model="mortgage.Name_of_the_Mortgagor" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                        <input type="text" class="ss_form_input " ng-model="mortgage.Name_of_the_Mortgagor" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
                     </li>
                     <li class="ss_form_item ">
                         <label class="ss_form_input_title ">Date of mortgage</label>
@@ -46,11 +49,11 @@
                     </li>
                     <li class="ss_form_item ">
                         <label class="ss_form_input_title ">Servicer</label>
-                        <input type="text" class="ss_form_input " ng-model="lis_penden.Lis_Pendens_Servicer" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                        <input type="text" class="ss_form_input " ng-model="lis_penden.Lis_Pendens_Servicer" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
                     </li>
                     <li class="ss_form_item ">
                         <label class="ss_form_input_title ">Attorney</label>
-                        <input type="text" class="ss_form_input " ng-model="lis_penden.Lis_Pendens_Attorney" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                        <input type="text" class="ss_form_input " ng-model="lis_penden.Lis_Pendens_Attorney" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
                     </li>
                 </ul>
             </div>
@@ -68,15 +71,15 @@
                     </li>
                     <li class="ss_form_item ">
                         <label class="ss_form_input_title ">Plaintiff</label>
-                        <input type="text" class="ss_form_input " ng-model="judgement.Judgement_Plaintiff" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                        <input type="text" class="ss_form_input " ng-model="judgement.Judgement_Plaintiff" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
                     </li>
                     <li class="ss_form_item ">
                         <label class="ss_form_input_title ">Defendant</label>
-                        <input type="text" class="ss_form_input " ng-model="judgement.Judgement_Defendant" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                        <input type="text" class="ss_form_input " ng-model="judgement.Judgement_Defendant" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
                     </li>
                     <li class="ss_form_item ">
                         <label class="ss_form_input_title ">Attorney</label>
-                        <input type="text" class="ss_form_input " ng-model="judgement.Judgement_Attorney" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                        <input type="text" class="ss_form_input " ng-model="judgement.Judgement_Attorney" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
                     </li>
                     <li class="clear-fix" style="list-style: none"></li>
                     <li class="ss_form_item_line" style="list-style: none">
@@ -135,7 +138,7 @@
                     </li>
                     <li class="ss_form_item ">
                         <label class="ss_form_input_title ">Attorney</label>
-                        <input type="text" class="ss_form_input " ng-model="ucc.UCC_Attorney" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                        <input type="text" class="ss_form_input " ng-model="ucc.UCC_Attorney" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
                     </li>
                 </ul>
             </div>
@@ -183,13 +186,13 @@
                     </li>
                     <li class="ss_form_item ">
                         <label class="ss_form_input_title ">Attorney</label>
-                        <input type="text" class="ss_form_input " ng-model="mechanicsLien.Mechanics_Lien_Attorney" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                        <input type="text" class="ss_form_input " ng-model="mechanicsLien.Mechanics_Lien_Attorney" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-</tab>
+</uib-tab>
     <%--i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.PropertyInfo.Owners,false,true)" ng-show="SsCase.PropertyInfo.Owners.length<=2" title="Add" style="font-size: 18px"></i>  --%>
-        </tabset>
+        </uib-tabset>

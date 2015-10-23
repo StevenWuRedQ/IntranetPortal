@@ -2,7 +2,7 @@
 <div>
     <div class="ss_form">
         <h4 class="ss_form_title">Plumbing&nbsp;<pt-collapse model="ReloadedData.Plumbing_Collapsed" /></h4>
-        <div class="ss_border" collapse="ReloadedData.Plumbing_Collapsed">
+        <div class="ss_border" uib-collapse="ReloadedData.Plumbing_Collapsed">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date Permit is Issued</label>
@@ -146,7 +146,7 @@
                     <pt-file file-bble="CSCase.BBLE" file-id="Signoffs_PAA_File" file-model="CSCase.CSCase.Signoffs.PAA_File"></pt-file>
                 </li>
             </ul>
-            <div class="cssSlideUp" collapse="ReloadedData.Signoffs_PAAcollapse">
+            <div class="cssSlideUp" uib-collapse="ReloadedData.Signoffs_PAAcollapse">
                 <div class="arrow_box">
                     <div class="ss_form">
                         <ul class="ss_form_box clearfix">
@@ -187,7 +187,7 @@
 
     <div class="ss_form">
         <h4 class="ss_form_title title_after_notes">Electrical&nbsp;<pt-collapse model="ReloadedData.Electrical_Collapsed" /></h4>
-        <div class="ss_border" collapse="ReloadedData.Electrical_Collapsed">
+        <div class="ss_border" uib-collapse="ReloadedData.Electrical_Collapsed">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date Permit was pulled</label>
@@ -277,7 +277,7 @@
 
     <div class="ss_form">
         <h4 class="ss_form_title title_after_notes">Construction&nbsp;<pt-collapse model="ReloadedData.Construction_Collapsed" /></h4>
-        <div class="ss_border" collapse="ReloadedData.Construction_Collapsed">
+        <div class="ss_border" uib-collapse="ReloadedData.Construction_Collapsed">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date Permit Was Pulled</label>

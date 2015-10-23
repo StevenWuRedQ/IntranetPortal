@@ -135,7 +135,7 @@
 
 <div class="ss_form">
     <h4 class="ss_form_title">Expeditor&nbsp;<pt-collapse model="ReloadedData.Expeditor_Collapsed" /></h4>
-    <div class="ss_border" collapse="!ReloadedData.Expeditor_Collapsed">
+    <div class="ss_border" uib-collapse="!ReloadedData.Expeditor_Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Project Assigned Date</label>
@@ -147,7 +147,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Vendor Person</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Violations.Expeditor_Vendor" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Violations.Expeditor_Vendor" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Vendor Phone</label>
@@ -165,7 +165,7 @@
 <%--DOBViolations --%>
 <div class="ss_form">
     <h4 class="ss_form_title">DOB Violations&nbsp;<pt-collapse model="ReloadedData.DOBViolation_Collapse"></pt-collapse></h4>
-    <div class="ss_border" collapse="ReloadedData.DOBViolation_Collapse">
+    <div class="ss_border" uib-collapse="ReloadedData.DOBViolation_Collapse">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Auto population From DOB Site</label>
@@ -319,7 +319,7 @@
 <%--ECBViolations --%>
 <div class="ss_form">
     <h4 class="ss_form_title">ECB Violations&nbsp;<pt-collapse model="ReloadedData.ECBViolations_Collapse"></pt-collapse></h4>
-    <div class="ss_border" collapse="ReloadedData.ECBViolations_Collapse">
+    <div class="ss_border" uib-collapse="ReloadedData.ECBViolations_Collapse">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Autopopulation From ECB Site</label>
@@ -472,7 +472,7 @@
 <%--HPDViolations --%>
 <div class="ss_form">
     <h4 class="ss_form_title">HPD Violation&nbsp;<pt-collapse model="ReloadedData.HPDViolations_Collapse"></pt-collapse></h4>
-    <div class="ss_border" collapse="ReloadedData.HPDViolations_Collapse">
+    <div class="ss_border" uib-collapse="ReloadedData.HPDViolations_Collapse">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Open HPD Violation</label>

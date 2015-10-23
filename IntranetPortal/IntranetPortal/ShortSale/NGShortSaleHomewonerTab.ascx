@@ -3,8 +3,8 @@
 <%@ Import Namespace="IntranetPortal" %>
 
 
-<tabset class="tab-switch">
-    <tab ng-repeat="owner in SsCase.PropertyInfo.Owners" active="owner.active" disable="owner.disabled">
+<uib-tabset class="tab-switch">
+    <uib-tab ng-repeat="owner in SsCase.PropertyInfo.Owners" active="owner.active" disable="owner.disabled">
         <tab-heading>Seller {{$index+1}} </tab-heading>
 
 <div class="text-right" ng-show="SsCase.PropertyInfo.Owners.length>1" style="margin-bottom: -25px"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.PropertyInfo.Owners.length>1" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.Owners, $index)" title="Delete"></i></div>
@@ -194,7 +194,7 @@
     <h4 class="ss_form_title">Contacts
         <pt-add ng-click="NGAddArraryItem(owner.Contacts,'SsCase.PropertyInfo.Owners['+$index+'].Contacts')" />
         &nbsp;<pt-collapse model="homeownerCollapse"></pt-collapse></h4>
-    <div class="ss_border" collapse="homeownerCollapse" ng-show="owner.Contacts.length>0">
+    <div class="ss_border" uib-collapse="homeownerCollapse" ng-show="owner.Contacts.length>0">
         <div class="ss_form_box clearfix">
             <div dx-data-grid="{
                 columns: [
@@ -226,7 +226,7 @@
         </div>
     </div>
 </div>
-<div class="ss_form" collapse="homeownerCollapse">
+<div class="ss_form" uib-collapse="homeownerCollapse">
     <h4 class="ss_form_title">Notes<pt-add ng-click="NGAddArraryItem(owner.Notes,'SsCase.PropertyInfo.Owners['+$index+'].Notes')" /></h4>
 
     <ul class="ss_form_box textAreaDiv clearfix" ng-repeat="(index,note) in owner.Notes track by index">
@@ -237,6 +237,6 @@
     </ul>
 </div>
 
-    </tab>
+    </uib-tab>
     <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.PropertyInfo.Owners, false)" ng-show="SsCase.PropertyInfo.Owners.length<=2" title="Add" style="font-size: 18px"></i>
-</tabset>
+</uib-tabset>

@@ -25,8 +25,8 @@
 <div class="ss_form" ng-init="CSCase.CSCase.Utilities.ConED_Shown=false" ng-show="CSCase.CSCase.Utilities.ConED_Shown">
     <h4 class="ss_form_title">ConED&nbsp;<pt-collapse model="ReloadedData.ConED_Collapsed" /></h4>
     <div class="ss_border">
-        <tabset class="tab-switch">
-        <tab ng-repeat="floor in CSCase.CSCase.Utilities.Floors" active="floor.active" disable="floor.disabled" >
+        <uib-tabset class="tab-switch">
+        <uib-tab ng-repeat="floor in CSCase.CSCase.Utilities.Floors" active="floor.active" disable="floor.disabled" >
         <tab-heading>Floor {{floor.FloorNum}}</tab-heading>       
 <div class="text-right"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="arrayRemove(CSCase.CSCase.Utilities.Floors, $index, true)" title="Delete"></i></div>
     <ul class="ss_form_box clearfix">
@@ -43,7 +43,7 @@
             <input class="ss_form_input intakeCheck" type="text" ng-model="floor.ConED.Date" ss-date />
         </li>
     </ul>
-    <ul class="ss_form_box clearfix" collapse="ReloadedData.ConED_Collapsed">
+    <ul class="ss_form_box clearfix" uib-collapse="ReloadedData.ConED_Collapsed">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Rep Name</label>
             <input class="ss_form_input intakeCheck" ng-model="floor.ConED.RepName" />
@@ -99,7 +99,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Appointments Time</label>
-            <timepicker show-spinners="false" ng-model="floor.ConED.AppointmentsTime"></timepicker>
+            <uib-timepicker show-spinners="false" ng-model="floor.ConED.AppointmentsTime"></uib-timepicker>
         </li>
         <li class="clearfix" style="list-style: none"></li>
         <li class="ss_form_item_line">
@@ -113,9 +113,9 @@
         </li>
         <li class="clearfix" style="list-style: none"></li>
     </ul>
-    </tab>
+    </uib-tab>
     <pt-add ng-click="ensurePush('CSCase.CSCase.Utilities.Floors', {FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {}})" style="font-size: 18px"></pt-add>
-    </tabset>
+    </uib-tabset>
     </div>
 </div>
 
@@ -124,8 +124,8 @@
 <div class="ss_form" ng-init="CSCase.CSCase.Utilities.EnergyService_Shown=false" ng-show="CSCase.CSCase.Utilities.EnergyService_Shown">
     <h4 class="ss_form_title">Energy Service&nbsp;<pt-collapse model="ReloadedData.EnergyService_Collapsed" /></h4>
     <div class="ss_border">
-        <tabset class="tab-switch">
-        <tab ng-repeat="floor in CSCase.CSCase.Utilities.Floors" active="floor.active" disable="floor.disabled" >
+        <uib-tabset class="tab-switch">
+        <uib-tab ng-repeat="floor in CSCase.CSCase.Utilities.Floors" active="floor.active" disable="floor.disabled" >
         <tab-heading>Floor {{floor.FloorNum}}</tab-heading>
         <div class="text-right"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="arrayRemove(CSCase.CSCase.Utilities.Floors, $index, true)" title="Delete"></i></div>
         <ul class="ss_form_box clearfix">
@@ -142,14 +142,14 @@
                 <input class="ss_form_input" type="text" ng-model="floor.EnergyService.Date" ss-date>
             </li>
         </ul>
-        <ul class="ss_form_box clearfix" collapse="ReloadedData.EnergyService_Collapsed">
+        <ul class="ss_form_box clearfix" uib-collapse="ReloadedData.EnergyService_Collapsed">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Case Number</label>
                 <input class="ss_form_input" ng-model="floor.EnergyService.CaseNum">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Lic Electrician</label>
-                <input type="text" class="ss_form_input" ng-model="floor.EnergyService.LicElectrician" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                <input type="text" class="ss_form_input" ng-model="floor.EnergyService.LicElectrician" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Electric permit pulled Date</label>
@@ -193,7 +193,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Appointments Time</label>
-                <timepicker show-spinners="false" ng-model="floor.EnergyService.AppointmentsTime"></timepicker>
+                <uib-timepicker show-spinners="false" ng-model="floor.EnergyService.AppointmentsTime"></uib-timepicker>
             </li>
             <li class="clearfix" style="list-style: none"></li>
             <li class="ss_form_item_line">
@@ -209,9 +209,9 @@
             <li class="clearfix" style="list-style: none"></li>
         </ul>
 
-        </tab>
+        </uib-tab>
         <pt-add ng-click="ensurePush('CSCase.CSCase.Utilities.Floors', {FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {}})" style="font-size: 18px"></pt-add>
-        </tabset>
+        </uib-tabset>
     </div>
 </div>
 
@@ -219,8 +219,8 @@
 <div class="ss_form" ng-init="CSCase.CSCase.Utilities.NationalGrid_Shown=false" ng-show="CSCase.CSCase.Utilities.NationalGrid_Shown">
     <h4 class="ss_form_title">National Grid&nbsp;<pt-collapse model="ReloadedData.NationalGrid_Collapsed" /></h4>
     <div class="ss_border">
-        <tabset class="tab-switch">
-        <tab ng-repeat="floor in CSCase.CSCase.Utilities.Floors" active="floor.active" disable="floor.disabled" >
+        <uib-tabset class="tab-switch">
+        <uib-tab ng-repeat="floor in CSCase.CSCase.Utilities.Floors" active="floor.active" disable="floor.disabled" >
         <tab-heading>Floor {{floor.FloorNum}}</tab-heading>
         <div class="text-right"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="arrayRemove(CSCase.CSCase.Utilities.Floors, $index, true)" title="Delete"></i></div>
         <ul class="ss_form_box clearfix">
@@ -237,7 +237,7 @@
                 <input class="ss_form_input intakeCheck" type="text" ng-model="floor.NationalGrid.Date" ss-date>
             </li>
         </ul>
-        <ul class="ss_form_box clearfix" collapse="ReloadedData.NationalGrid_Collapsed">
+        <ul class="ss_form_box clearfix" uib-collapse="ReloadedData.NationalGrid_Collapsed">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Rep Name</label>
                 <input class="ss_form_input intakeCheck" ng-model="floor.NationalGrid.RepName">
@@ -280,7 +280,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Appointments Time</label>
-                <timepicker show-spinners="false" ng-model="floor.NationalGrid.AppointmentsTime"></timepicker>
+                <uib-timepicker show-spinners="false" ng-model="floor.NationalGrid.AppointmentsTime"></uib-timepicker>
             </li>
 
             <li class="clearfix" style="list-style: none"></li>
@@ -296,16 +296,16 @@
             </li>
             <li class="clearfix" style="list-style: none"></li>
         </ul>
-        </tab>
+        </uib-tab>
         <pt-add ng-click="ensurePush('CSCase.CSCase.Utilities.Floors', {FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {}})" style="font-size: 18px"></pt-add>
-        </tabset>
+        </uib-tabset>
     </div>
 </div>
 
 <%-- DEP --%>
 <div class="ss_form" ng-init="CSCase.CSCase.Utilities.DEP_Shown=false" ng-show="CSCase.CSCase.Utilities.DEP_Shown">
     <h4 class="ss_form_title">DEP&nbsp;<pt-collapse model="ReloadedData.DEP_Collapsed" /></h4>
-    <div class="ss_border" collapse="ReloadedData.DEP_Collapsed">
+    <div class="ss_border" uib-collapse="ReloadedData.DEP_Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Number</label>
@@ -363,7 +363,7 @@
 <%-- Missing Water Metor--%>
 <div class="ss_form" ng-init="CSCase.CSCase.Utilities.MissingMeter_Shown=false" ng-show="CSCase.CSCase.Utilities.MissingMeter_Shown">
     <h4 class="ss_form_title">Missing Water Meter&nbsp;<pt-collapse model="ReloadedData.MissingMeter_Collapsed" /></h4>
-    <div class="ss_border" collapse="ReloadedData.MissingMeter_Collapsed">
+    <div class="ss_border" uib-collapse="ReloadedData.MissingMeter_Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Number</label>
@@ -371,7 +371,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Plumber</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Utilities.MissingMeter_Plumber" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Utilities.MissingMeter_Plumber" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Permit pulled date</label>
@@ -425,7 +425,7 @@
 <%-- Taxes --%>
 <div class="ss_form" ng-init="CSCase.CSCase.Utilities.Taxes_Shown=false" ng-show="CSCase.CSCase.Utilities.Taxes_Shown">
     <h4 class="ss_form_title">Taxes&nbsp;<pt-collapse model="ReloadedData.Taxes_Collapsed" /></h4>
-    <div class="ss_border" collapse="ReloadedData.Taxes_Collapsed">
+    <div class="ss_border" uib-collapse="ReloadedData.Taxes_Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Number</label>
@@ -442,7 +442,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Name</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Utilities.Taxes_NameAccountIsUnder" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Utilities.Taxes_NameAccountIsUnder" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Open Charges</label>
@@ -465,7 +465,7 @@
 <%-- ADT --%>
 <div class="ss_form" ng-init="CSCase.CSCase.Utilities.ADT_Shown=false" ng-show="CSCase.CSCase.Utilities.ADT_Shown">
     <h4 class="ss_form_title">ADT&nbsp;<pt-collapse model="ReloadedData.ADT_Collapsed" /></h4>
-    <div class="ss_border" collapse="ReloadedData.ADT_Collapsed">
+    <div class="ss_border" uib-collapse="ReloadedData.ADT_Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Number</label>
@@ -494,7 +494,7 @@
 <%-- Insurance --%>
 <div class="ss_form" ng-init="CSCase.CSCase.Utilities.Insurance_Shown=false" ng-show="CSCase.CSCase.Utilities.Insurance_Shown">
     <h4 class="ss_form_title">Insurance&nbsp;<pt-collapse model="ReloadedData.Insurance_Collapsed" /></h4>
-    <div class="ss_border" collapse="ReloadedData.Insurance_Collapsed">
+    <div class="ss_border" uib-collapse="ReloadedData.Insurance_Collapsed">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Insurance Type</label>

@@ -130,13 +130,16 @@
             }
             $scope.saveForm = function () {
                 if ($scope.form.id) {
+                    $ionicLoading.show();
                     $http({
                         method: 'POST',
                         url: '/api/ConstructionCases/SaveSpotList',
                         data: JSON.stringify($scope.form)
                     }).then(function () {
+                        $ionicLoading.hide();
                         alert("Save Successful");
                     }, function error() {
+                        $ionicLoading.hide();
                         alert("Fails to save.")
                     })
 
@@ -144,14 +147,17 @@
             }
             $scope.submitForm = function () {
                 if ($scope.form.id) {
+                    $ionicLoading.show()
                     $http({
                         method: "POST",
                         url: "/api/ConstructionCases/FinishSpotList",
                         data: JSON.stringify($scope.form)
                     }).then(function (res) {
+                        $ionicLoading.hide();
                         alert("Send Successful");
                         $scope.reload();
                     }, function error() {
+                        $ionicLoading.hide();
                         alert("Fails to send.")
                     })
                 } else {

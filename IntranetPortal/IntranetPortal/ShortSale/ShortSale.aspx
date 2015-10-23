@@ -203,7 +203,7 @@
                                                                                     <h5>Buyers Name</h5>
                                                                                 </div>
                                                                                 <div class="col-sm-5">
-                                                                                    <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.BuyerName" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" />
+                                                                                    <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.BuyerName" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
@@ -365,7 +365,7 @@
                                                                             <div class="row">
                                                                                 <div class="col-sm-6">BPO Agent</div>
                                                                                 <div class="col-sm-5">
-                                                                                    <input type="text" class="form-control" ng-model="valuation.AgentName" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" />
+                                                                                    <input type="text" class="form-control" ng-model="valuation.AgentName" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
@@ -387,7 +387,7 @@
                                                                             <div class="row">
                                                                                 <div class="col-sm-6">Time of Valuation</div>
                                                                                 <div class="col-sm-5">
-                                                                                    <timepicker show-spinners="false" ng-model="valuation.TimeOfValue"></timepicker>  
+                                                                                    <uib-timepicker show-spinners="false" ng-model="valuation.TimeOfValue"></uib-timepicker>  
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
@@ -624,7 +624,7 @@
             angular.element(document.getElementById('ShortSaleCtrl')).scope().MoveToConstruction(
                 function () {
                     if (typeof gridTrackingClient != "undefined") {
-                        alert("Success");
+                        AngularRoot.alert("Success");
                         gridTrackingClient.Refresh();
                     }
                 });
@@ -638,7 +638,7 @@
             angular.element(document.getElementById('ShortSaleCtrl')).scope().MoveToTitle(
                 function () {
                     if (typeof gridTrackingClient != "undefined") {
-                        alert("Success");
+                        AngularRoot.alert("Success");
                         gridTrackingClient.Refresh();
                     }
                 });
@@ -672,6 +672,7 @@
             $scope.capitalizeFirstLetter = ptCom.capitalizeFirstLetter;
             $scope.formatName = ptCom.formatName;
             $scope.formatAddr = ptCom.formatAddr;
+            $scope.ptCom = ptCom;
 
             //move to construction - add by chris
             $scope.MoveToConstruction = function (scuessfunc) {
@@ -683,11 +684,11 @@
                             if (scuessfunc) {
                                 scuessfunc();
                             } else {
-                                alert("Successed !");
+                                ptCom.alert("Move to Construction successful!");
                             }
                         }).
                         error(function (data, status) {
-                            alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
+                            ptCom.alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                         });
             }
 
@@ -700,11 +701,11 @@
                             if (scuessfunc) {
                                 scuessfunc();
                             } else {
-                                alert("Successed !");
+                                ptCom.alert("Move to Title successful !");
                             }
                         }).
                         error(function (data, status) {
-                            alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
+                            ptCom.alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                         });
             }
             // -- end --
@@ -786,7 +787,7 @@
             }
 
             $scope.SelectBoxChange = function (e) {
-                alert(JSON.stringify(e));
+                ptCom.alert(JSON.stringify(e));
             }
 
 
@@ -839,7 +840,7 @@
                                 ScopeSetLastUpdateTime(GetLasTUpDateURL())
                                 
                             }).error(function (data, status, headers, config) {
-                                alert("Get Short sale Leads failed BBLE =" + $scope.SsCase.BBLE + " error : " + JSON.stringify(data));
+                                ptCom.alert("Get Short sale Leads failed BBLE =" + $scope.SsCase.BBLE + " error : " + JSON.stringify(data));
                             });
 
                         $http.get('/LegalUI/LegalServices.svc/GetLegalCase?bble=' + leadsInfoBBLE).
@@ -854,7 +855,7 @@
                       });
                     }).
                     error(function (data, status, headers, config) {
-                        alert("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
+                        ptCom.alert("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
                     });
             }
             $scope.GetLoadId = function ()
@@ -886,14 +887,14 @@
                             if (scuessfunc) {
                                 scuessfunc();
                             } else {
-                                alert("Save Successed !");
+                                ptCom.alert("Save Successed !");
                             }
                             
                             ScopeSetLastUpdateTime(GetLasTUpDateURL());
                             ResetCaseDataChange();
                         }).
                         error(function (data, status) {
-                            alert("Fail to save data. status " + status + "Error : " + data.message ? data.message : JSON.stringify(data));
+                            ptCom.alert("Fail to save data. status " + status + "Error : " + data.message ? data.message : JSON.stringify(data));
                         });
             }
             $scope.ShowAddPopUp = function (event) {
@@ -905,7 +906,7 @@
                 $http.post('ShortSaleServices.svc/AddComments', { comment: $scope.addCommentTxt, caseId: $scope.SsCase.CaseId }).success(function (data) {
                     $scope.SsCase.Comments.push(data);
                 }).error(function (data, status) {
-                    alert("Fail to AddComments. status " + status + "Error : " + JSON.stringify(data));
+                    ptCom.alert("Fail to AddComments. status " + status + "Error : " + JSON.stringify(data));
                 });
 
             }
@@ -914,7 +915,7 @@
                 $http.get('ShortSaleServices.svc/DeleteComment?commentId=' + comment.CommentId).success(function (data) {
                     $scope.SsCase.Comments.splice(index, 1);
                 }).error(function (data, status) {
-                    alert("Fail to delete comment. status " + status + "Error : " + JSON.stringify(data));
+                    ptCom.alert("Fail to delete comment. status " + status + "Error : " + JSON.stringify(data));
                 });
             }
             $scope.GetCaseInfo = function () {

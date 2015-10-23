@@ -6,7 +6,7 @@
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Contact</label>
-                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Contract.Electrical_Name" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" ng-change="" typeahead-on-select="">
+                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Contract.Electrical_Name" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" ng-change="" typeahead-on-select="">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Scope Of work</label>
@@ -21,7 +21,7 @@
                 <li class="clearfix" style="list-style: none"></li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Vender</label>
-                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Contract.Electrical_Vender" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" ng-change="CSCase.CSCase.Contract.Electrical_VenderId=null"  typeahead-on-select="CSCase.CSCase.Contract.Electrical_VenderId=$item.ContactId">
+                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Contract.Electrical_Vender" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" ng-change="CSCase.CSCase.Contract.Electrical_VenderId=null"  typeahead-on-select="CSCase.CSCase.Contract.Electrical_VenderId=$item.ContactId">
                 </li>
                 <li class="clearfix" style="list-style: none"></li>
             </ul>
@@ -40,7 +40,7 @@
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Contact</label>
-                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Contract.ConstructionName" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" ng-change="" typeahead-on-select="">
+                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Contract.ConstructionName" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" ng-change="" typeahead-on-select="">
                 </li>
 
                 <li class="ss_form_item">
@@ -57,7 +57,7 @@
                 <li class="clearfix" style="list-style: none"></li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Vender</label>
-                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Contract.Construction_Vender" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" ng-change="CSCase.CSCase.Contract.Construction_VenderId=null"  typeahead-on-select="CSCase.CSCase.Contract.Construction_VenderId=$item.ContactId">
+                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Contract.Construction_Vender" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" ng-change="CSCase.CSCase.Contract.Construction_VenderId=null"  typeahead-on-select="CSCase.CSCase.Contract.Construction_VenderId=$item.ContactId">
                 </li>
                 <li class="clearfix" style="list-style: none"></li>
             </ul>
@@ -74,7 +74,7 @@
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Contact</label>
-                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Contract.PlumbingName" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" ng-change="" typeahead-on-select="">
+                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Contract.PlumbingName" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" ng-change="" typeahead-on-select="">
                 </li>
 
                 <li class="ss_form_item">
@@ -91,7 +91,7 @@
                 <li class="clearfix" style="list-style: none"></li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Vender</label>
-                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Contract.Construction_Vender" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" ng-change="CSCase.CSCase.Contract.Construction_VenderId=null" typeahead-on-select="CSCase.CSCase.Contract.Construction_VenderId=$item.ContactId">
+                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.Contract.Construction_Vender" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" ng-change="CSCase.CSCase.Contract.Construction_VenderId=null" typeahead-on-select="CSCase.CSCase.Contract.Construction_VenderId=$item.ContactId">
                 </li>
                 <li class="clearfix" style="list-style: none"></li>
             </ul>

@@ -1,13 +1,13 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionInitialIntakeeTab.ascx.vb" Inherits="IntranetPortal.ConstructionInitialIntakeTab" %>
 <div>
     <h4 class="ss_form_title">Intake&nbsp;<pt-collapse model="ReloadedData.IntakeCollapse" /></h4>
-    <div class="ss_border" collapse="ReloadedData.IntakeCollapse">
+    <div class="ss_border" uib-collapse="ReloadedData.IntakeCollapse">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Form</label>
                 <button type="button" class="btn btn-primary" ng-click="openInitialForm()">Initial Form</button>
                 &nbsp
-                <button type="button" class="btn btn-info btn-circle icon_btn" popover-placement="right" popover-template="'intake'" ng-style="CSCase.CSCase.InitialIntake.InitialFormAssign?{'background-color': '#5cb85c'}:{}"><i class="fa fa-share"></i ></button>
+                <button type="button" class="btn btn-info btn-circle icon_btn" popover-placement="right" uib-popover-template="'intake'" ng-style="CSCase.CSCase.InitialIntake.InitialFormAssign?{'background-color': '#5cb85c'}:{}"><i class="fa fa-share"></i ></button>
                 <script type="text/ng-template" id="intake">
                 <div>
                     <h2 class="label label-info">Assign to</h3>
@@ -32,7 +32,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Remind Intake Sheet</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.IntakeSheetRemind" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.IntakeSheetRemind" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Intake Sheet</label>
@@ -46,7 +46,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Remind Sketch Layout</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.SketchLayoutRemind" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.SketchLayoutRemind" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Sketch Layout</label>
@@ -60,7 +60,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Remind Initial Budget</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.InitialBudgetRemind" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.InitialBudgetRemind" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Initial Budget</label>
@@ -92,7 +92,7 @@
                 <input class="ss_form_input intakeCheck" style="width: 93.3%" ng-model="CSCase.CSCase.InitialIntake.Address" pt-init-model="LeadsInfo.PropertyAddress">
             </li>
         </ul>
-        <div collapse="!ReloadedData.PropertyAddress_Collapse">
+        <div uib-collapse="!ReloadedData.PropertyAddress_Collapse">
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date Assigned</label>
@@ -125,11 +125,11 @@
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Asset Manager</label>
-                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.AssetManager" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.AssetManager" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Project Manager</label>
-                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.ProjectManager" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                    <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.ProjectManager" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
                 </li>
             </ul>
             <hr />
@@ -261,11 +261,11 @@
             <div class="clearfix"></div>
             <div class="col-sm-4">
                 <label class="ss_form_input_title">Asset Manager</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.AssetManager" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.AssetManager" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </div>
             <div class="col-sm-4">
                 <label class="ss_form_input_title">Project Manager</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.ProjectManager" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.ProjectManager" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </div>
         </div>
         <hr />
@@ -361,7 +361,7 @@
         </ul>
 
 
-        <ul class="ss_form_box clearfix" collapse="!ReloadedData.Owner_Collapse">
+        <ul class="ss_form_box clearfix" uib-collapse="!ReloadedData.Owner_Collapse">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Tax Id #</label>
                 <input class="ss_form_input " ng-model="CSCase.CSCase.InitialIntake.TaxIdNum" pt-init-model="EntityInfo.EIN">
@@ -463,10 +463,10 @@
                 <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.Comps" money-mask>
             </li>
         </ul>
-        <ul class="ss_form_box clearfix" collapse="!ReloadedData.CompsCollapse">
+        <ul class="ss_form_box clearfix" uib-collapse="!ReloadedData.CompsCollapse">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Remind AM</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.CompsRemind" ng-change="ONCHANGE" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.CompsRemind" ng-change="ONCHANGE" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload Comps</label>
@@ -501,7 +501,7 @@
             <div class="clearfix"></div>
             <div class="col-sm-4">
                 <label class="ss_form_input_title">Remind AM</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.CompsRemind" ng-change="ONCHANGE" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.CompsRemind" ng-change="ONCHANGE" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="sendNotice($item.ContactId, $item.Name)">
             </div>
             <div class="col-sm-4">
                 <label class="ss_form_input_title">Upload Comps</label>
@@ -555,7 +555,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Vendor</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.AsbestosVendor" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.AsbestosVendor" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload</label>
@@ -573,7 +573,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Vendor</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.SurveyVendor" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.SurveyVendor" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload</label>
@@ -592,7 +592,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Vendor</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.ExhibitVendor" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.ExhibitVendor" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload</label>
@@ -610,7 +610,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Vendor</label>
-                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.TRsVendor" ng-change="" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+                <input type="text" class="ss_form_input" ng-model="CSCase.CSCase.InitialIntake.TRsVendor" ng-change="" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Upload</label>

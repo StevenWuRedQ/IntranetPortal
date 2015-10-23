@@ -12,7 +12,7 @@
         <div id="prioity_content">
             <div style="font-size: 30px; margin-left: 30px; height: 80px" class="font_gray">
                 <div style="font-size: 30px; margin-top: 20px;">
-                    <i class="fa fa-home"></i>
+                    <i class="fa fa-home" ng-dblclick="ptCom.alert('nima')"></i>
                     <span style="margin-left: 19px;"><span ng-bind="Form.FormData.CaseName"></span>&nbsp;</span>
                     <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+leadsInfoBBLE, 'Maps')">Map</span>
                 </div>
@@ -140,7 +140,7 @@
     }
 </script>
 <script>
-    angular.module("PortalApp").controller("CommentCtrl", function ($scope) {
+    angular.module("PortalApp").controller("CommentCtrl", function ($scope, $timeout) {
         /* comments */
         $scope.showPopover = function (e) {
             aspxConstructionCommentsPopover.ShowAtElement(e.target);
@@ -162,17 +162,16 @@
     })
 </script>
 <script>
-    var app = angular.module("PortalApp")
-
-    app.controller("TitleController", function ($scope, ptCom, ptContactServices, ptLeadsService, ptShortsSaleService) {
+    angular.module("PortalApp").controller("TitleController", function ($scope, $timeout, ptCom, ptContactServices, ptLeadsService, ptShortsSaleService) {
         $scope.arrayRemove = ptCom.arrayRemove;
+        $scope.ptCom = ptCom;
         $scope.ptContactServices = ptContactServices;
         $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
 
         $scope.Form = {
             FormData: {
                 Comments: [],
-                Owners: [ {
+                Owners: [{
                     name: "Current Owner Liens",
                     Mortgages: [{}],
                     Lis_Pendens: [{}],
@@ -183,7 +182,7 @@
                     FederalTaxLiens: [{}],
                     MechanicsLiens: [{}]
 
-                },{
+                }, {
                     name: "Prior Owner Liens",
                     Mortgages: [{}],
                     Lis_Pendens: [{}],
@@ -245,6 +244,15 @@
         }
         $scope.Get = function () {
             return $scope.Form;
+        }
+
+        $scope.swapOwnerPos = function (index) {
+            $timeout(function () {
+                var temp1 = $scope.Form.FormData.Owners[index];
+                $scope.Form.FormData.Owners[index] = $scope.Form.FormData.Owners[index - 1]
+                $scope.Form.FormData.Owners[index - 1] = temp1;
+            })
+
         }
     })
 </script>
