@@ -1,6 +1,4 @@
-﻿var app = angular.module('PortalApp');
-
-/* code area steven*/
+﻿/* code area steven*/
 $.wait = function (ms) {
     var defer = $.Deferred();
     setTimeout(function () { defer.resolve(); }, ms);
@@ -78,8 +76,7 @@ function ScopeDateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyU
                 if (urlModfiyUserFunc) {
                     $.getJSON(urlModfiyUserFunc(), function (mUser) {
                         if (mUser) {
-                            if (mUser != "sameuser")
-                            {
+                            if (mUser != "sameuser") {
                                 alert(mUser + " change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
                             }
                             reLoadUIfunc(loadUIIdFunc());
@@ -99,7 +96,8 @@ function ScopeDateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyU
 }
 
 /* above is global functions */
-app.service('ptCom', ['$http','$rootScope', function ($http, $rootScope) {
+angular.module('PortalApp')
+    .service('ptCom', ['$http', '$rootScope', function ($http, $rootScope) {
         /******************Stven code area*********************/
         this.DocGenerator = function (tplName, data, successFunc) {
             $http.post('/Services/Documents.svc/DocGenrate', { "tplName": tplName, "data": JSON.stringify(data) }).success(function (data) {
@@ -118,14 +116,17 @@ app.service('ptCom', ['$http','$rootScope', function ($http, $rootScope) {
         }
 
         this.arrayRemove = function (model, index, confirm, callback) {
-            debugger;
             if (model && index < model.length) {
                 if (confirm) {
-                    var r = window.confirm("Delete This?", "");
-                    if (r) {
-                        var deleteObj = model.splice(index, 1)[0];
-                        if (callback) callback(deleteObj);
-                    }
+                    var x = this.confirm("Delete This?", "")
+                        x.then(function (r) {
+                            if (r) {
+                                var deleteObj = model.splice(index, 1)[0];
+                                if (callback) callback(deleteObj);
+                            }
+
+                        })
+
                 } else {
                     model.splice(index, 1);
                 }
@@ -204,101 +205,107 @@ app.service('ptCom', ['$http','$rootScope', function ($http, $rootScope) {
         this.alert = function (message) {
             $rootScope.alert(message);
         }
+
+        this.confirm = function (message) {
+            return $rootScope.confirm(message);
+        }
     }]);
 
-app.service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
+angular.module('PortalApp')
+    .service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
 
-    var allContact;
-    var allTeam;
+        var allContact;
+        var allTeam;
 
-    (function () {
-        if (!allContact) {
-            $http.get('/Services/ContactService.svc/LoadContacts')
-           .success(function (data, status) {
-               allContact = data;
-           }).error(function (data, status) {
-               allContact = [];
-           });
+        (function () {
+            if (!allContact) {
+                $http.get('/Services/ContactService.svc/LoadContacts')
+               .success(function (data, status) {
+                   allContact = data;
+               }).error(function (data, status) {
+                   allContact = [];
+               });
+            }
+
+            if (!allTeam) {
+                $http.get('/Services/TeamService.svc/GetAllTeam')
+                .success(function (data, status) {
+                    allTeam = data;
+                })
+                .error(function (data, status) {
+                    allTeam = [];
+                });
+            }
+
+        }());
+
+        this.getAllContacts = function () {
+            if (allContact) return allContact;
+            return $http.get('/Services/ContactService.svc/LoadContacts')
+                .then(function (response) {
+                    return limitToFilter(response.data, 10);
+                });
+        }
+        this.getContactsByGroup = function (groupId) {
+            if (allContact) return allContact.filter(function (x) { return x.GroupId == groupId })
+
+        }
+        this.getContacts = function (args, /* optional */ groupId) {
+            groupId = groupId === undefined ? null : groupId;
+            return $http.get('/Services/ContactService.svc/GetContacts?args=' + args)
+                .then(function (response) {
+                    if (groupId) return limitToFilter(response.data.filter(function (x) { return x.GroupId == groupId }), 10);
+                    return limitToFilter(response.data, 10);
+                });
         }
 
-        if (!allTeam) {
-            $http.get('/Services/TeamService.svc/GetAllTeam')
-            .success(function (data, status) {
-                allTeam = data;
-            })
-            .error(function (data, status) {
-                allTeam = [];
-            });
+        this.getContactsByID = function (id) {
+            if (allContact) return allContact.filter(function (o) { return o.ContactId == key });
+            return $http.get('/Services/ContactService.svc/GetAllContacts?id=' + id)
+                .then(function (response) {
+                    return limitToFilter(response.data, 10);
+                });
         }
 
-    }());
-
-    this.getAllContacts = function () {
-        if (allContact) return allContact;
-        return $http.get('/Services/ContactService.svc/LoadContacts')
-            .then(function (response) {
-                return limitToFilter(response.data, 10);
-            });
-    }
-    this.getContactsByGroup = function (groupId) {
-        if (allContact) return allContact.filter(function (x) { return x.GroupId == groupId })
-
-    }
-    this.getContacts = function (args, /* optional */ groupId) {
-        groupId = groupId === undefined ? null : groupId;
-        return $http.get('/Services/ContactService.svc/GetContacts?args=' + args)
-            .then(function (response) {
-                if (groupId) return limitToFilter(response.data.filter(function (x) { return x.GroupId == groupId }), 10);
-                return limitToFilter(response.data, 10);
-            });
-    }
-
-    this.getContactsByID = function (id) {
-        if (allContact) return allContact.filter(function (o) { return o.ContactId == key });
-        return $http.get('/Services/ContactService.svc/GetAllContacts?id=' + id)
-            .then(function (response) {
-                return limitToFilter(response.data, 10);
-            });
-    }
-
-    this.getContactById = function (id) {
-        if (allContact) return allContact.filter(function (o) { return o.ContactId == id; })[0];
-        return null;
-    }
-
-    this.getEntities = function (name, status) {
-
-        status = status === undefined ? 'Available' : status;
-        name = name ? '' : name;
-        return $http.get('/Services/ContactService.svc/GetCorpEntityByStatus?n=' + name + '&s=' + status)
-            .then(function (res) {
-                return limitToFilter(res.data, 10);
-            });
-
-
-    }
-
-    this.getContactByName = function (name) {
-        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
-        return {};
-    }
-
-    this.getContact = function (id, name) {
-        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0] || {};
-        return {};
-    }
-
-    this.getTeamByName = function (teamName) {
-        if (allTeam) {
-            return allTeam.filter(function (o) { if (o.Name && teamName) return o.Name.trim() == teamName.trim() })[0];
+        this.getContactById = function (id) {
+            if (allContact) return allContact.filter(function (o) { return o.ContactId == id; })[0];
+            return null;
         }
-        return {};
 
-    }
+        this.getEntities = function (name, status) {
 
-}]);
+            status = status === undefined ? 'Available' : status;
+            name = name ? '' : name;
+            return $http.get('/Services/ContactService.svc/GetCorpEntityByStatus?n=' + name + '&s=' + status)
+                .then(function (res) {
+                    return limitToFilter(res.data, 10);
+                });
 
-app.service('ptShortsSaleService', [
+
+        }
+
+        this.getContactByName = function (name) {
+            if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
+            return {};
+        }
+
+        this.getContact = function (id, name) {
+            if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0] || {};
+            return {};
+        }
+
+        this.getTeamByName = function (teamName) {
+            if (allTeam) {
+                return allTeam.filter(function (o) { if (o.Name && teamName) return o.Name.trim() == teamName.trim() })[0];
+            }
+            return {};
+
+        }
+
+    }]);
+
+angular.module('PortalApp')
+    .service('ptShortsSaleService', [
     '$http', function ($http) {
         this.getShortSaleCase = function (caseId, callback) {
             var url = "/ShortSale/ShortSaleServices.svc/GetCase?caseId=" + caseId;
@@ -323,9 +330,10 @@ app.service('ptShortsSaleService', [
 
         }
     }
-]);
+    ]);
 
-app.service('ptLeadsService', [
+angular.module('PortalApp')
+    .service('ptLeadsService', [
     '$http', function ($http) {
         this.getLeadsByBBLE = function (bble, callback) {
             var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + bble;
@@ -337,9 +345,10 @@ app.service('ptLeadsService', [
             });
         }
     }
-]);
+    ]);
 
-app.factory('ptHomeBreakDownService', [
+angular.module('PortalApp')
+    .factory('ptHomeBreakDownService', [
     '$http', function ($http) {
         return {
             loadByBBLE: function (bble, callback) {
@@ -367,202 +376,204 @@ app.factory('ptHomeBreakDownService', [
             }
         }
     }
-])
+    ])
 
-app.service('ptFileService', function () {
+angular.module('PortalApp')
+    .service('ptFileService', function () {
 
-    this.uploadFile = function (data, bble, rename, folder, type, callback) {
-        switch (type) {
-            case 'construction':
-                this.uploadConstructionFile(data, bble, rename, folder, callback);
-                break;
-            case 'title':
-                this.uploadTitleFile(data, bble, rename, folder, callback);
-                break;
-            default:
-                this.uploadConstructionFile(data, bble, rename, folder, callback);
-                break;
+        this.uploadFile = function (data, bble, rename, folder, type, callback) {
+            switch (type) {
+                case 'construction':
+                    this.uploadConstructionFile(data, bble, rename, folder, callback);
+                    break;
+                case 'title':
+                    this.uploadTitleFile(data, bble, rename, folder, callback);
+                    break;
+                default:
+                    this.uploadConstructionFile(data, bble, rename, folder, callback);
+                    break;
 
-        }
-    }
-
-    this.uploadTitleFile = function (data, bble, rename, folder, callback) {
-        var fileName = rename ? rename : '';
-        var folder = folder ? folder : '';
-        if (!data || !bble) {
-            callback('Upload infomation missing!')
-        } else {
-            bble = bble.trim();
-            $.ajax({
-                url: '/api/Title/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + folder,
-                type: 'POST',
-                data: data,
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function (data1) {
-                    callback(null, data1, rename);
-                },
-                error: function () {
-                    callback('Upload fails!', null, rename)
-                }
-            });
-        }
-    }
-
-    this.uploadConstructionFile = function (data, bble, rename, folder, callback) {
-        var fileName = rename ? rename : '';
-        var folder = folder ? folder : '';
-        if (!data || !bble) {
-            callback('Upload infomation missing!')
-        } else {
-            bble = bble.trim();
-            $.ajax({
-                url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + folder,
-                type: 'POST',
-                data: data,
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function (data1) {
-                    callback(null, data1, rename);
-                },
-                error: function () {
-                    callback('Upload fails!', null, rename)
-                }
-            });
-        }
-    }
-
-    this.getFileName = function (fullPath) {
-        if (fullPath) {
-            if (this.isIE(fullPath)) {
-                var paths = fullPath.split('\\');
-                return this.cleanName(paths[paths.length - 1]);
-            } else {
-                var paths = fullPath.split('/');
-                return this.cleanName(paths[paths.length - 1]);
             }
         }
-        return '';
-    }
 
-    this.getFileExt = function (fullPath) {
-        if (fullPath && fullPath.indexOf('.') > -1) {
-            var exts = fullPath.split('.');
-            return exts[exts.length - 1].toLowerCase();
-        }
-        return '';
-    }
-
-    this.isPicture = function (fullPath) {
-        var ext = this.getFileExt(fullPath);
-        var pictureExts = ['jpg', 'jpeg', 'gif', 'bmp', 'png'];
-        return pictureExts.indexOf(ext) > -1;
-    }
-
-    this.getFileFolder = function (fullPath) {
-        if (fullPath) {
-            var paths = fullPath.split('/');
-            var folderName = paths[paths.length - 2];
-            var topFolders = ['Construction', 'Title'];
-            if (topFolders.indexOf(folderName) < 0) {
-                return folderName;
+        this.uploadTitleFile = function (data, bble, rename, folder, callback) {
+            var fileName = rename ? rename : '';
+            var folder = folder ? folder : '';
+            if (!data || !bble) {
+                callback('Upload infomation missing!')
             } else {
-                return '';
-            }
-        }
-        return '';
-    }
-
-    this.makePreviewUrl = function (filePath) {
-        var ext = this.getFileExt(filePath);
-        switch (ext) {
-            case 'pdf':
-                return '/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath);
-                break;
-            case 'xls':
-            case 'xlsx':
-            case 'doc':
-            case 'docx':
-                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true';
-                break;
-            case 'jpg':
-            case 'jpeg':
-            case 'bmp':
-            case 'gif':
-            case 'png':
-                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
-                break;
-            default:
-                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
-
-        }
-    }
-
-    this.onFilePreview = function (filePath) {
-
-        var ext = this.getFileExt(filePath);
-        switch (ext) {
-            case 'pdf':
-                window.open('/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath));
-                break;
-            case 'xls':
-            case 'xlsx':
-            case 'doc':
-            case 'docx':
-                window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true');
-                break;
-            case 'jpg':
-            case 'jpeg':
-            case 'bmp':
-            case 'gif':
-            case 'png':            
-                $.fancybox.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
-                break;
-            case 'txt':
-                $.fancybox.open([
-                    {
-                        type: 'ajax', 
-                        href: '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath),
+                bble = bble.trim();
+                $.ajax({
+                    url: '/api/Title/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + folder,
+                    type: 'POST',
+                    data: data,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (data1) {
+                        callback(null, data1, rename);
+                    },
+                    error: function () {
+                        callback('Upload fails!', null, rename)
                     }
-                ]);
-                break;
-            default:
-                window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
+                });
+            }
+        }
+
+        this.uploadConstructionFile = function (data, bble, rename, folder, callback) {
+            var fileName = rename ? rename : '';
+            var folder = folder ? folder : '';
+            if (!data || !bble) {
+                callback('Upload infomation missing!')
+            } else {
+                bble = bble.trim();
+                $.ajax({
+                    url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + folder,
+                    type: 'POST',
+                    data: data,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (data1) {
+                        callback(null, data1, rename);
+                    },
+                    error: function () {
+                        callback('Upload fails!', null, rename)
+                    }
+                });
+            }
+        }
+
+        this.getFileName = function (fullPath) {
+            if (fullPath) {
+                if (this.isIE(fullPath)) {
+                    var paths = fullPath.split('\\');
+                    return this.cleanName(paths[paths.length - 1]);
+                } else {
+                    var paths = fullPath.split('/');
+                    return this.cleanName(paths[paths.length - 1]);
+                }
+            }
+            return '';
+        }
+
+        this.getFileExt = function (fullPath) {
+            if (fullPath && fullPath.indexOf('.') > -1) {
+                var exts = fullPath.split('.');
+                return exts[exts.length - 1].toLowerCase();
+            }
+            return '';
+        }
+
+        this.isPicture = function (fullPath) {
+            var ext = this.getFileExt(fullPath);
+            var pictureExts = ['jpg', 'jpeg', 'gif', 'bmp', 'png'];
+            return pictureExts.indexOf(ext) > -1;
+        }
+
+        this.getFileFolder = function (fullPath) {
+            if (fullPath) {
+                var paths = fullPath.split('/');
+                var folderName = paths[paths.length - 2];
+                var topFolders = ['Construction', 'Title'];
+                if (topFolders.indexOf(folderName) < 0) {
+                    return folderName;
+                } else {
+                    return '';
+                }
+            }
+            return '';
+        }
+
+        this.makePreviewUrl = function (filePath) {
+            var ext = this.getFileExt(filePath);
+            switch (ext) {
+                case 'pdf':
+                    return '/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath);
+                    break;
+                case 'xls':
+                case 'xlsx':
+                case 'doc':
+                case 'docx':
+                    return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true';
+                    break;
+                case 'jpg':
+                case 'jpeg':
+                case 'bmp':
+                case 'gif':
+                case 'png':
+                    return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
+                    break;
+                default:
+                    return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
+
+            }
+        }
+
+        this.onFilePreview = function (filePath) {
+
+            var ext = this.getFileExt(filePath);
+            switch (ext) {
+                case 'pdf':
+                    window.open('/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath));
+                    break;
+                case 'xls':
+                case 'xlsx':
+                case 'doc':
+                case 'docx':
+                    window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true');
+                    break;
+                case 'jpg':
+                case 'jpeg':
+                case 'bmp':
+                case 'gif':
+                case 'png':
+                    $.fancybox.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
+                    break;
+                case 'txt':
+                    $.fancybox.open([
+                        {
+                            type: 'ajax',
+                            href: '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath),
+                        }
+                    ]);
+                    break;
+                default:
+                    window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
+
+            }
+        }
+
+        this.resetFileElement = function (ele) {
+            ele.val('');
+            ele.wrap('<form>').parent('form').trigger('reset');
+            ele.unwrap();
+            ele.prop('files')[0] = null;
+            ele.replaceWith(ele.clone());
+        }
+
+        this.cleanName = function (filename) {
+            return filename.replace(/[^a-z0-9_\-\.()]/gi, '_')
+        }
+
+        this.isIE = function (fileName) {
+            return fileName.indexOf(':\\') > -1;
+        }
+
+        this.getThumb = function (thumbId) {
+            return '/downloadfile.aspx?thumb=' + thumbId;
+
+        }
+
+        this.trunc = function (fileName, length) {
+            return _.trunc(fileName, length);
 
         }
     }
-
-    this.resetFileElement = function (ele) {
-        ele.val('');
-        ele.wrap('<form>').parent('form').trigger('reset');
-        ele.unwrap();
-        ele.prop('files')[0] = null;
-        ele.replaceWith(ele.clone());
-    }
-
-    this.cleanName = function (filename) {
-        return filename.replace(/[^a-z0-9_\-\.()]/gi, '_')
-    }
-
-    this.isIE = function (fileName) {
-        return fileName.indexOf(':\\') > -1;
-    }
-
-    this.getThumb = function (thumbId) {
-        return '/downloadfile.aspx?thumb=' + thumbId;
-
-    }
-
-    this.trunc = function (fileName, length) {
-        return _.trunc(fileName, length);
-
-    }
-}
 );
 
-app.service('ptConstructionService', [
+angular.module('PortalApp')
+    .service('ptConstructionService', [
     '$http', function ($http) {
         this.getConstructionCases = function (bble, callback) {
             var url = "/api/ConstructionCases/" + bble;
@@ -614,9 +625,10 @@ app.service('ptConstructionService', [
             }
         }
     }
-]);
+    ]);
 
-app.factory('ptLegalService', [
+angular.module('PortalApp')
+    .factory('ptLegalService', [
     '$http', function () {
         return {
             load: function (bble, callback) {
@@ -659,18 +671,19 @@ app.factory('ptLegalService', [
             }
         }
     }
-])
+    ])
 
-app.factory('ptEntityService', function ($http) {
-    return {
-        getEntityByBBLE: function (bble, callback) {
-            var url = '/api/CorporationEntities/ByBBLE?BBLE=' + bble;
-            $http.get(url).then(function success(res) {
-                if (callback) callback(null, res.data)
-            }, function error(res) {
-                if (callback) callback("load fail", res.data)
-            })
+angular.module('PortalApp')
+    .factory('ptEntityService', function ($http) {
+        return {
+            getEntityByBBLE: function (bble, callback) {
+                var url = '/api/CorporationEntities/ByBBLE?BBLE=' + bble;
+                $http.get(url).then(function success(res) {
+                    if (callback) callback(null, res.data)
+                }, function error(res) {
+                    if (callback) callback("load fail", res.data)
+                })
 
+            }
         }
-    }
-})
+    })

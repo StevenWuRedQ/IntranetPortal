@@ -180,7 +180,7 @@
                                             }                                            
                                         },
                                         error: function (data) {
-                                            alert("Failed to load data." + data)
+                                            AngularRoot.alert("Failed to load data." + data)
                                         }
                                     });
                                     this.LoadActivityLog();                                    
@@ -206,10 +206,10 @@
                                             dataType: 'json',
                                             contentType: "application/json",
                                             success: function (data) {
-                                                alert("Save successful.")
+                                                AngularRoot.alert("Save successful.")
                                             },
                                             error: function (data) {
-                                                alert("Failed to save data." + data);
+                                                AngularRoot.alert("Failed to save data." + data);
                                             }
                                         });
                                     }else{

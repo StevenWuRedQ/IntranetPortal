@@ -55,16 +55,34 @@
     <script>
         var portalApp = angular.module('PortalApp', ['ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select']);
         portalApp.controller('MainCtrl', function ($rootScope, $uibModal) {
-            $rootScope.modal = null;
+            $rootScope.AlertModal = null;
+            $rootScope.ConfirmModal = null;
+
             $rootScope.alert = function (message) {
-                $rootScope.confirmMessage = message ? message : '';
-                $rootScope.modal = $uibModal.open({
-                    templateUrl: 'MainModal',
+                $rootScope.alertMessage = message ? message : '';
+                $rootScope.AlertModal = $uibModal.open({
+                    templateUrl: 'AlertModal',
                 })
             }
 
             $rootScope.alertOK = function () {
-                $rootScope.modal.close();
+                $rootScope.AlertModal.close();
+            }
+
+            $rootScope.confirm = function (message) {
+                $rootScope.confirmMessage = message ? message : '';
+                $rootScope.ConfirmModal = $uibModal.open({
+                    templateUrl: 'ConfirmModal'
+                })
+                return $rootScope.ConfirmModal.result;
+            }
+
+            $rootScope.confirmYes = function () {
+                $rootScope.ConfirmModal.close(true);
+            }
+
+            $rootScope.confirmNo = function () {
+                $rootScope.ConfirmModal.close(false);
             }
         })
     </script>
@@ -88,15 +106,26 @@
         <hr />
         <button type="button" class="btn btn-success pull-right" onclick="onAutoLogoutPopupYes()">Yes</button>
     </div>
-    <script type="text/ng-template" id="MainModal">
+    <script type="text/ng-template" id="AlertModal">
         <div class="modal-body">
-            <span class="text-center">{{confirmMessage}}</b>
+            <span class="text-center">{{alertMessage}}</b>
         </div>
         <br>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="alertOK()">OK</button>
         </div>
     </script>
+        <script type="text/ng-template" id="ConfirmModal">
+        <div class="modal-body">
+            <span class="text-center">{{confirmMessage}}</b>
+        </div>
+        <br>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="confirmYes()">Yes</button>
+            <button class="btn btn-danger" type="button" ng-click="confirmNo()">No</button>
+        </div>
+    </script>
+    
     <script src="/Scripts/stevenjs.js"></script>
     <script src="/Scripts/autologout.js"></script>
     <script>
@@ -105,8 +134,10 @@
             AngularRoot = function () {
                 var scope = angular.element(document.body).injector().get('$rootScope');
                 var alert = scope.alert;
+                var confirm = scope.confirm;
                 return {
-                    alert: alert
+                    alert: alert,
+                    confirm: confirm
                 }
             }();
         })        
