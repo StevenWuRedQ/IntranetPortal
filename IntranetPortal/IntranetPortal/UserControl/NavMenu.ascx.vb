@@ -46,7 +46,7 @@ Public Class NavMenu
 
         item.Items.Add(GetTeamAssignItem(teamId, teamName, "fa-check-square-o"))
         item.Items.Add(GetTeamNavItem("New Leads", teamId, "fa-star"))
-        item.Items.Add(GetTeamNavItem("Hot Leads", teamId, "fa-sun-o"))
+        item.Items.Add(GetTeamNavItem("Hot Leads", teamId, "glyphicon glyphicon-fire"))
         item.Items.Add(GetTeamNavItem("Follow Up", teamId, "fa-rotate-right"))
         item.Items.Add(GetTeamNavItem("Door Knock", teamId, "fa-sign-in"))
         item.Items.Add(GetTeamNavItem("In Process", teamId, "fa-refresh"))

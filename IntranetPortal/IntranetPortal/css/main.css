@@ -774,6 +774,10 @@ a {
     width: 30px;
 }
 
+#main-nav .mip-nav a .glyphicon {
+    width: 30px !important;
+}
+
 #main-nav .mip-nav a:hover .fa,
 #main-nav .mip-nav a:focus .fa {
     color: #fff;

@@ -53,7 +53,7 @@
       </PortalNavItem>
       <PortalNavItem Name="AgentHotLeads" Text="Hot Leads" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
         <FontClass>
-          <![CDATA[<i class="fa fa-sun-o"></i>]]>
+          <![CDATA[<i class="glyphicon glyphicon-fire>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="AgentFollowUp" Text="Follow Up" NavigationUrl="/LeadAgent.aspx?c=Call Back" ShowAmount="true">
@@ -149,7 +149,7 @@
           </PortalNavItem>
           <PortalNavItem Name="AgentHotLeads" Text="Hot Leads" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
             <FontClass>
-              <![CDATA[<i class="fa fa-sun-o"></i>]]>
+              <![CDATA[<i class="glyphicon glyphicon-fire"></i>]]>
             </FontClass>
           </PortalNavItem>
           <PortalNavItem Name="AgentFollowUp" Text="Follow Up" NavigationUrl="/LeadAgent.aspx?c=Call Back" ShowAmount="true">
@@ -228,7 +228,7 @@
       </PortalNavItem>
       <PortalNavItem Name="MgrHotLeads" Text="Hot Leads" NavigationUrl="/MgrViewLeads.aspx?c=Priority" ShowAmount="true">
         <FontClass>
-          <![CDATA[ <i class="fa fa-sun-o"></i>]]>
+          <![CDATA[ <i class="glyphicon glyphicon-fire"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="MgrFollowUp" Text="Follow Up" NavigationUrl="/MgrViewLeads.aspx?c=Call Back" ShowAmount="true">
