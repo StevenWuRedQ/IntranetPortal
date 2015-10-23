@@ -256,6 +256,7 @@ function popup_params(width, height) {
 }
 var SEND_STATUS = null;
 function SetLeadStatus(status) {
+    ChangeStatusResonTextClient.SetText("");
     if (leadStatusCallbackClient.InCallback()) {
         alert("Server is busy! Please wait!")
     } else {
@@ -276,8 +277,8 @@ function CofrimLeadStatusChange()
     }
     if(SEND_STATUS)
     {
-        AddActivityLog(comments)
-        leadStatusCallbackClient.PerformCallback(SEND_STATUS);
+        
+        leadStatusCallbackClient.PerformCallback(SEND_STATUS + "|" + comments);
         
     }else
     {

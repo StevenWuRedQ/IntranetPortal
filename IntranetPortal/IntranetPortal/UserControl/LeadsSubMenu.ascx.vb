@@ -74,32 +74,32 @@ Public Class LeadsSubMenu
 
     Protected Sub leadStatusCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         If e.Parameter.Length > 0 Then
-
+            Dim AddComment = e.Parameter.Split("|").ToList.Item(2)
             If e.Parameter.StartsWith("Tomorrow") Then
                 If e.Parameter.Contains("|") Then
                     Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(1))
+                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(1), AddComment)
                 End If
             End If
 
             If e.Parameter.StartsWith("nextWeek") Then
                 If e.Parameter.Contains("|") Then
                     Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(7))
+                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(7), AddComment)
                 End If
             End If
 
             If e.Parameter.StartsWith("thirtyDays") Then
                 If e.Parameter.Contains("|") Then
                     Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(30))
+                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(30), AddComment)
                 End If
             End If
 
             If e.Parameter.StartsWith("sixtyDays") Then
                 If e.Parameter.Contains("|") Then
                     Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(60))
+                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(60), AddComment)
                 End If
             End If
 
@@ -115,35 +115,35 @@ Public Class LeadsSubMenu
                     End If
                     'Dim tmpdate = If(e.Parameter.Split("|").Count > 2, DateTime.Parse(e.Parameter.Split("|")(2)), DateTime.Now)
 
-                    UpdateLeadStatus(bble, LeadStatus.Callback, tmpDate)
+                    UpdateLeadStatus(bble, LeadStatus.Callback, tmpDate, AddComment)
                 End If
             End If
 
             If e.Parameter.StartsWith(4) Then
                 If e.Parameter.Contains("|") Then
                     Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.DoorKnocks, Nothing)
+                    UpdateLeadStatus(bble, LeadStatus.DoorKnocks, Nothing, AddComment)
                 End If
             End If
 
             If e.Parameter.StartsWith(5) Then
                 If e.Parameter.Contains("|") Then
                     Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.Priority, Nothing)
+                    UpdateLeadStatus(bble, LeadStatus.Priority, Nothing, AddComment)
                 End If
             End If
 
             If e.Parameter.StartsWith(6) Then
                 If e.Parameter.Contains("|") Then
                     Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.DeadEnd, Nothing)
+                    UpdateLeadStatus(bble, LeadStatus.DeadEnd, Nothing, AddComment)
                 End If
             End If
 
             If e.Parameter.StartsWith(7) Then
                 If e.Parameter.Contains("|") Then
                     Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing)
+                    UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing, AddComment)
 
                     If Not String.IsNullOrEmpty(lbSelectionMode.Value) AndAlso lbSelectionMode.Value = 0 Then
                         'Add leads to short sale section
@@ -155,7 +155,7 @@ Public Class LeadsSubMenu
             If e.Parameter.StartsWith(8) Then
                 If e.Parameter.Contains("|") Then
                     Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.Closed, Nothing)
+                    UpdateLeadStatus(bble, LeadStatus.Closed, Nothing, AddComment)
                 End If
             End If
 
@@ -163,14 +163,14 @@ Public Class LeadsSubMenu
             If e.Parameter.StartsWith(11) Then
                 If e.Parameter.Contains("|") Then
                     Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.Deleted, Nothing)
+                    UpdateLeadStatus(bble, LeadStatus.Deleted, Nothing, AddComment)
                 End If
             End If
         End If
     End Sub
 
-    Sub UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime)
-        Lead.UpdateLeadStatus(bble, status, callbackDate)
+    Sub UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime, addCommend As String)
+        Lead.UpdateLeadStatus(bble, status, callbackDate, addCommend)
     End Sub
 
     Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
@@ -249,7 +249,7 @@ Public Class LeadsSubMenu
 
         If e.Parameter.StartsWith("Save") Then
             Dim bble = hfInProcessBBLE.Value
-            UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing)
+            UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing, Nothing)
 
             If Not String.IsNullOrEmpty(lbSelectionMode.Value) Then
                 If lbSelectionMode.SelectedValues.Contains("0") Then
@@ -296,7 +296,7 @@ Public Class LeadsSubMenu
 
         If e.Parameter.StartsWith("StartlegalProcess") Then
             Dim bble = hfInProcessBBLE.Value
-            UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing)
+            UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing, Nothing)
 
             Dim caseData = e.Parameter.Replace("StartlegalProcess|", "")
             LegalCaseManage.StartLegalRequest(bble, caseData, Page.User.Identity.Name)
