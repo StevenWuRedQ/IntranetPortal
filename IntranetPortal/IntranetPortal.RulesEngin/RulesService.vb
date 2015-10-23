@@ -35,7 +35,7 @@ Public Class RulesService
         End Get
     End Property
 
-    Public Sub srStart()
+    Public Sub Start()
         If Status <> ServiceStatus.Running Then
             Status = ServiceStatus.Running
 
