@@ -8,7 +8,7 @@
 
     Private Shared _instance As BusinessForm
 
-    Public Shared Function Instance(name As String)
+    Public Shared Function Instance(name As String) As BusinessForm
         If _instance Is Nothing Then
             _instance = New BusinessForm
             _instance.Name = name

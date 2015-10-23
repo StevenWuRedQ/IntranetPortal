@@ -381,9 +381,8 @@
         if(typeof ShortSale != 'undefined')
         {
             if(typeof dtClientFollowup != 'undefined' )
-            {
-                
-                if($('#selCategory').val() == "Dead" || $('#selCategory').val() == "Closed" || $('#selCategory').val() == "Assign")
+            {                
+                if($('#selType1').val()=="Title" || $('#selCategory').val() == "Dead" || $('#selCategory').val() == "Closed" || $('#selCategory').val() == "Assign")
                 {
                     dtClientFollowup.SetText("");
                 }

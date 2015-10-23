@@ -57,7 +57,7 @@
                     leadsInfoBBLE = tmp[0];
                     FormControl.LoadData(tmp[1]);
                     return;
-                }                
+                }
             }
 
             leadsInfoBBLE = values;

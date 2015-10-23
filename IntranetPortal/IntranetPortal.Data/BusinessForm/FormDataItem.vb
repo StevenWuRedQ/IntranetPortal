@@ -15,6 +15,12 @@ Public Class FormDataItem
         End Get
     End Property
 
+    Public Shared Function Instance(name As String, tag As String) As FormDataItem
+        Using ctx As New ConstructionEntities
+            Return ctx.FormDataItems.Where(Function(f) f.FormName = name AndAlso f.Tag = tag).FirstOrDefault
+        End Using
+    End Function
+
     Public Shared Function Instance(dataId As Integer) As FormDataItem
         Using ctx As New ConstructionEntities
             Return ctx.FormDataItems.Find(dataId)

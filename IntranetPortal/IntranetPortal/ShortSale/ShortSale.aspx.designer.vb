@@ -131,6 +131,15 @@ Partial Public Class NGShortSale
     Protected WithEvents ucTitle As Global.IntranetPortal.TitleControl
     
     '''<summary>
+    '''BusinessFormControl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents BusinessFormControl As Global.IntranetPortal.BusinessFormControl
+    
+    '''<summary>
     '''DocumentsUI control.
     '''</summary>
     '''<remarks>

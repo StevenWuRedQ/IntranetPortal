@@ -512,6 +512,13 @@
     </Compile>
     <Compile Include="BusinessForm\BusinessControl.vb" />
     <Compile Include="BusinessForm\BusinessForm.vb" />
+    <Compile Include="BusinessForm\BusinessFormControl.ascx.designer.vb">
+      <DependentUpon>BusinessFormControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessForm\BusinessFormControl.ascx.vb">
+      <DependentUpon>BusinessFormControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="BusinessForm\Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
@@ -2363,6 +2370,7 @@
     <Content Include="AutoDialer\DialerAjaxService.svc" />
     <Content Include="AutoDialer\Twiml.aspx" />
     <Content Include="BingViewMap.aspx" />
+    <Content Include="BusinessForm\BusinessFormControl.ascx" />
     <Content Include="BusinessForm\Default.aspx" />
     <Content Include="CallBackServices.asmx" />
     <Content Include="Chat\ChatDefault.aspx" />

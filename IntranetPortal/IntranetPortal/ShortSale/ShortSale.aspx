@@ -13,6 +13,8 @@
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 <%@ Register Src="~/ShortSale/ShortSaleFileOverview.ascx" TagPrefix="uc1" TagName="ShortSaleFileOverview" %>
 <%@ Register Src="~/ShortSale/NGShortSaleTab.ascx" TagPrefix="uc1" TagName="NGShortSaleTab" %>
+<%@ Register Src="~/BusinessForm/BusinessFormControl.ascx" TagPrefix="uc1" TagName="BusinessFormControl" %>
+
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
     <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
@@ -89,7 +91,7 @@
                                                                         <%-- Only MyIdeal property is show those title --%>
                                                                         <% If IntranetPortal.Employee.CurrentAppId = 1 Then  %>
                                                                         <li class="short_sale_head_tab">
-                                                                            <a href="#home_owner" role="tab" data-toggle="tab" class="tab_button_a">
+                                                                            <a href="#home_owner" role="tab" data-toggle="tab" class="tab_button_a" onclick="BusinessFormControl.LoadData(leadsInfoBBLE)">
                                                                                 <i class="fa fa-key head_tab_icon_padding"></i>
                                                                                 <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;Title&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                                                             </a>
@@ -150,7 +152,8 @@
                                                                         <uc1:NGShortSaleTab runat="server" ID="NGShortSaleTab" />
                                                                     </div>
                                                                     <div class="tab-pane " id="home_owner">
-                                                                        <uc1:Title runat="server" ID="ucTitle" />
+                                                                        <uc1:Title runat="server" ID="ucTitle" Visible="false" />
+                                                                        <uc1:BusinessFormControl runat="server" id="BusinessFormControl" ControlName="Title" />
                                                                     </div>
                                                                     <div class="tab-pane " id="documents">
                                                                         <uc1:DocumentsUI runat="server" ID="DocumentsUI" />

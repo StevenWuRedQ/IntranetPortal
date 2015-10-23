@@ -20,6 +20,18 @@ Namespace Controllers
         End Function
 
         <ResponseType(GetType(FormDataItem))>
+        <Route("api/BusinessForm/{formName}/Tag/{Tag}")>
+        Function GetBusinessFormByTag(tag As String, formName As String) As IHttpActionResult
+            Dim obj = FormDataItem.Instance(formName, tag)
+            If obj Is Nothing Then
+                obj = New FormDataItem With
+                      {.FormName = formName,
+                      .Tag = tag}
+            End If
+            Return Ok(obj)
+        End Function
+
+        <ResponseType(GetType(FormDataItem))>
         Function PostBusinessForm(formItem As FormDataItem) As IHttpActionResult
 
             If Not ModelState.IsValid Then

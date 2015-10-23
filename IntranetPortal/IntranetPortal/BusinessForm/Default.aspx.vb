@@ -7,13 +7,38 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not Page.IsPostBack Then
-            BusinessList.BindList()
+            If Not String.IsNullOrEmpty(Request.QueryString("tag")) Then
+                Dim tag = Request.QueryString("tag").ToString
+                BindData(tag)
+            Else
+                BusinessList.BindList()
+            End If
 
             rptTopmenu.DataSource = FormData.Controls
             rptTopmenu.DataBind()
 
             rptBusinessControl.DataSource = FormData.Controls
             rptBusinessControl.DataBind()
+        End If
+    End Sub
+
+    Private Sub BindData(tag As String)
+        contentSplitter.Panes("listPanel").Visible = False
+
+        Dim form = Data.FormDataItem.Instance(FormData.DefaultControl.BusinessData, tag)
+
+        If FormData.ShowActivityLog Then
+            If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
+                Dim cstext1 As String = "<script type=""text/javascript"">" &
+                                String.Format("var leadsInfoBBLE = ""{0}"";", form.Tag) & "</script>"
+                Page.ClientScript.RegisterStartupScript(Me.GetType, "SetleadBBLE", cstext1)
+            End If
+        End If
+
+        If Not Page.ClientScript.IsStartupScriptRegistered("InitData") Then
+            Dim cstext1 = "<script type=""text/javascript"">" &
+                                String.Format("$(function(){{ FormControl.LoadData(""{0}""); }});", form.DataId) & "</script>"
+            Page.ClientScript.RegisterStartupScript(Me.GetType, "InitData", cstext1)
         End If
     End Sub
 
@@ -82,4 +107,9 @@
             TitleManage.AssignTo(bble, user, Page.User.Identity.Name)
         End If
     End Sub
+
+    Public Enum FormMode
+        Popup
+        InPortal
+    End Enum
 End Class
