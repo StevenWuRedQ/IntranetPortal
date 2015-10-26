@@ -8,7 +8,7 @@
 
 <uc1:Common runat="server" ID="Common" />
 <div id="TitleController" ng-controller="TitleController" style="max-height: 850px; overflow: auto">
-    <div style="padding-top: 5px">
+    <div id="TitleUIContent" style="padding-top: 5px">
         <div id="prioity_content">
             <div style="font-size: 30px; margin-left: 30px; height: 80px" class="font_gray">
                 <div style="font-size: 30px; margin-top: 20px;">
@@ -239,8 +239,9 @@
             });
             ptShortsSaleService.getShortSaleCaseByBBLE($scope.BBLE, function (res) {
                 $scope.SsCase = res;
-            });
+            });            
             $scope.$apply();
+            $scope.checkReadOnly();
         }
         $scope.Get = function () {
             return $scope.Form;
@@ -253,6 +254,17 @@
                 $scope.Form.FormData.Owners[index - 1] = temp1;
             })
 
+        }
+
+        $scope.checkReadOnly = function () {
+            var ro = <%= ControlReadonly %>;
+            if (ro) {
+                $("#TitleUIContent input").attr("disabled", true);
+                if ($("#TitleROBanner").length == 0) {
+                    $("#prioity_content").before("<div class='barner-warning text-center' id='TitleROBanner' >Readonly</div>")
+                }
+                
+            }
         }
     })
 </script>

@@ -10,7 +10,8 @@
 
             Dim FormData = BusinessForm.Instance(ControlName)
             CurrentControl = FormData.DefaultControl
-            Dim dataControl = CType(Page.LoadControl(CurrentControl.AscxFile), UserControl)
+            Dim dataControl = CType(Page.LoadControl(CurrentControl.AscxFile), TitleTab)
+            dataControl.ControlReadonly = "true"
             dataControl.DataBind()
 
             pnMain.Controls.Add(dataControl)

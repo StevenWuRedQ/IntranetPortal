@@ -6,13 +6,13 @@
     <div style="text-align: center" ng-show="CSCase.CSCase.Violations.Orders">
         <style>
         </style>
-        <span class="barner-danger" ng-click="Violations_OrdersPanelVisible=true">STOP WORK ORDER EXISTS ON THIS PROPERTY</span>
+        <span class="barner-danger text-link" ng-click="Violations_OrdersPanelVisible=true">STOP WORK ORDER EXISTS ON THIS PROPERTY</span>
         <br />
         <br />
-        <span class="barner-warning" ng-click="Violations_OrdersPanelVisible=true">FULL VACATE EXISTS ON THIS PROPERTY</span>
+        <span class="barner-warning text-link" ng-click="Violations_OrdersPanelVisible=true">FULL VACATE EXISTS ON THIS PROPERTY</span>
         <br />
         <br />
-        <span class="barner-warning" ng-click="Violations_OrdersPanelVisible=true">PARTIAL VACATE EXISTS ON THIS PROPERTY</span>
+        <span class="barner-warning text-link" ng-click="Violations_OrdersPanelVisible=true">PARTIAL VACATE EXISTS ON THIS PROPERTY</span>
     </div>
     <div dx-popup="{
                     height: 800,

@@ -84,6 +84,14 @@
             $rootScope.confirmNo = function () {
                 $rootScope.ConfirmModal.close(false);
             }
+
+            $rootScope.addOverLay = function (divId) {
+                $("#" + divId).addClass("overylay");
+            }
+
+            $rootScope.removeOverLay = function (divId) {
+                $("#" + divId).removeClass("overylay");
+            }
         })
     </script>
     <script src="/Scripts/filters.js"></script>
@@ -115,7 +123,7 @@
             <button class="btn btn-primary" type="button" ng-click="alertOK()">OK</button>
         </div>
     </script>
-        <script type="text/ng-template" id="ConfirmModal">
+    <script type="text/ng-template" id="ConfirmModal">
         <div class="modal-body">
             <span class="text-center">{{confirmMessage}}</b>
         </div>
@@ -125,7 +133,7 @@
             <button class="btn btn-danger" type="button" ng-click="confirmNo()">No</button>
         </div>
     </script>
-    
+
     <script src="/Scripts/stevenjs.js"></script>
     <script src="/Scripts/autologout.js"></script>
     <script>
@@ -140,7 +148,7 @@
                     confirm: confirm
                 }
             }();
-        })        
+        })
     </script>
 </body>
 </html>
