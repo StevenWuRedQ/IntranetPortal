@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="Acris_Last_Sales_Info" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>WindowsFormsApplication1.WCFAPI.Acris_Last_Sales_Info, Service References.WCFAPI.Reference.cs.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
+   <TypeInfo>WindowsFormsApplication1.WCFAPI.Acris_Last_Sales_Info, Service References.WCFAPI.Reference.cs, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

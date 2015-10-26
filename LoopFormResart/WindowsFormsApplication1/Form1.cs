@@ -26,10 +26,10 @@ namespace WindowsFormsApplication1
         }
         private void showProcess()
         {
-           
-            ProcessGrid.DataSource = GetDroneMain().Select( clsProcess=> new { Name = clsProcess.ProcessName, Responding = clsProcess.Responding } );
+
+            ProcessGrid.DataSource = GetDroneMain().Select(clsProcess => new { Name = clsProcess.ProcessName, Responding = clsProcess.Responding });
         }
-        private List< Process> GetDroneMain()
+        private List<Process> GetDroneMain()
         {
             var name = "TestComponent_VB";
             var process_list = new List<Process>();
@@ -56,21 +56,21 @@ namespace WindowsFormsApplication1
 
         private void Restart_Click(object sender, EventArgs e)
         {
-           
+
         }
         private readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public delegate void StatusChangeDelegate(String status);
         private StatusChangeDelegate statusChangeListener;
         private int DroneResponseCount = 0;
-        private string MAIN_DRONE_PATH = "C:\\VS2013 Development\\TestComponent_VB\\TestComponent_VB\\bin\\Debug\\TestComponent_VB.exe";
+        private const string MAIN_DRONE_PATH = "C:\\VS2013 Development\\TestComponent_VB\\TestComponent_VB\\bin\\Debug\\TestComponent_VB.exe";
         private bool is_resarting = false;
-       
 
-        public  void OnStart()
+
+        public void OnStart()
         {
-          
+
             System.Timers.Timer timer = new System.Timers.Timer();
-            timer.Interval = 1000 * 60;//*5*6; // 5 mintues 
+            timer.Interval = 1000 * 10;//*5*6; // 5 mintues 
             timer.Elapsed += new System.Timers.ElapsedEventHandler(this.ScanDroneMain);
             timer.Start();
 
@@ -80,6 +80,7 @@ namespace WindowsFormsApplication1
 
         public void ScanDroneMain(object sender, System.Timers.ElapsedEventArgs args)
         {
+
             try
             {
                 log.Debug("====================Scan Start=======================");
@@ -88,19 +89,24 @@ namespace WindowsFormsApplication1
                     try
                     {
 
-                        log.Debug("Get dorne waiting count : (" + client.Requests_Waiting() + ") Reset respose cont = 0");
+                        log.Debug("dorne waiting count : (" + client.Requests_Waiting() + ") Reset respose count = 0");
+                        if (is_resarting)
+                        {
+                            is_resarting = false;
+                            log.Debug("start Drone completed! mark is_resarting as false");
+                        }
                         DroneResponseCount = 0;
                     }
                     catch
                     {
                         DroneResponseCount++;
-                        log.Debug("increse Drone Response Count to: (" + DroneResponseCount + ")");
+                        log.Debug("increse Drone not Response Count to: (" + DroneResponseCount + ")");
 
                     }
 
                 }
 
-                if (DroneResponseCount >= 3)
+                if (DroneResponseCount >= 3 && !is_resarting)
                 {
                     log.Debug("Server not response in 3 times starting resart it");
 
@@ -116,7 +122,7 @@ namespace WindowsFormsApplication1
 
 
         }
-      
+
         private Process GetDroneMainProcess()
         {
             var drones = GetDroneMain();
@@ -144,13 +150,10 @@ namespace WindowsFormsApplication1
             }
             else
             {
-                log.Debug("Start ran drone process");
-                if (GetDroneMainProcess() != null)
-                {
-                    mainDrone.Kill();
-                    mainDrone.WaitForExit();
-
-                }
+                log.Debug("Start run drone process");
+                
+                mainDrone.Kill();
+                mainDrone.WaitForExit();
 
                 log.Debug("Closed main drone completed! Start resart drone process");
                 mainDrone = Process.Start(MAIN_DRONE_PATH);
@@ -158,14 +161,14 @@ namespace WindowsFormsApplication1
             }
             log.Debug("resart Drone Completed");
             log.Debug("***********end resart main drone****************");
-            is_resarting = false;
+
         }
 
         public void SetStatusChangeListener(StatusChangeDelegate del)
         {
             statusChangeListener = del;
         }
-        protected  void OnStop()
+        protected void OnStop()
         {
             log.Debug("On Stop");
             ChangeSatus("Stop");
@@ -183,6 +186,11 @@ namespace WindowsFormsApplication1
         private void Start_Click(object sender, EventArgs e)
         {
             OnStart();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
