@@ -149,7 +149,7 @@ Public Class WebGrabber
 
     Public Shared Sub GetHPDInfo()
         Try
-            Dim driver = New SimpleBrowserDriver
+            Dim driver = New SimpleBrowserDriver()
             driver.Navigate.GoToUrl("https://hpdonline.hpdnyc.org/HPDonline/provide_address.aspx")
             driver.FindElement(By.Id("RadioStrOrBlk_1")).Click()
             Console.WriteLine(driver.FindElement(By.Id("mymaintable_lblDate")).Text)

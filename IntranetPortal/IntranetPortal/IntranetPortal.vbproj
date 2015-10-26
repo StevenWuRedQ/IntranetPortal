@@ -2043,6 +2043,13 @@
       <DependentUpon>Test.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="TitleUI\TitleFeeClearance.ascx.designer.vb">
+      <DependentUpon>TitleFeeClearance.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="TitleUI\TitleFeeClearance.ascx.vb">
+      <DependentUpon>TitleFeeClearance.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="TitleUI\TitlePreclosing.ascx.designer.vb">
       <DependentUpon>TitlePreclosing.ascx</DependentUpon>
     </Compile>
@@ -3694,7 +3701,6 @@
     <Content Include="AutoDialer\Web.config" />
     <Content Include="img\img_files" />
     <Content Include="css\css_files" />
-    <Content Include="ClassDiagram1.cd" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="App_Data\OSCTemplate.docx" />
     <Content Include="Content\icons\dxiconsios.woff" />
@@ -6283,6 +6289,7 @@
     <Content Include="Scripts\mobile-angular-ui\test\phantomjs.conf.js" />
     <Content Include="Scripts\mobile-angular-ui\test\server.js" />
     <Content Include="SQL\SearchReslut.sql" />
+    <Content Include="TitleUI\TitleFeeClearance.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="WebForm3.aspx" />
     <Content Include="App_Data\SpecificPerformanceComplaintTemplate.docx" />

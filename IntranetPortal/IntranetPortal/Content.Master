@@ -85,12 +85,12 @@
                 $rootScope.ConfirmModal.close(false);
             }
 
-            $rootScope.addOverLay = function (divId) {
-                $("#" + divId).addClass("overylay");
+            $rootScope.addOverlay = function (divId) {
+                $("#" + divId).addClass("overlay");
             }
 
             $rootScope.removeOverLay = function (divId) {
-                $("#" + divId).removeClass("overylay");
+                $("#" + divId).removeClass("overlay");
             }
         })
     </script>

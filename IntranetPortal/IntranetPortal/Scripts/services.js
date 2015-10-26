@@ -209,6 +209,14 @@ angular.module('PortalApp')
         this.confirm = function (message) {
             return $rootScope.confirm(message);
         }
+
+        this.addOverlay = function () {
+            $rootScope.addOverlay();
+        }
+
+        this.removeOverlay = function(){
+            $rootScope.removeOverlay();
+        }
     }]);
 
 angular.module('PortalApp')
