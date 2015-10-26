@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8a63f70d-5c7d-47fe-b942-6be5fe201f70" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8002/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="6da59e40-4d6f-409f-ac04-14c6bf514c1f" SourceId="1" SourceUrl="http://localhost:8002/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="587cf2a8-8905-4667-8a75-7e6e78594b05" SourceId="1" SourceUrl="http://localhost:8002/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="01a8c4b2-cd38-4e0b-bf75-cd961d894305" SourceId="1" SourceUrl="http://localhost:8002/mex" />
+    <MetadataFile FileName="TestComponent_VB.xsd" MetadataType="Schema" ID="a5434719-5b39-48e4-9881-279196ce4027" SourceId="1" SourceUrl="http://localhost:8002/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="c0b06e9a-cc1b-4adf-b93b-e6b103aa8821" SourceId="1" SourceUrl="http://localhost:8002/mex" />
+    <MetadataFile FileName="TestComponent_VB.TLOWebService.xsd" MetadataType="Schema" ID="6b28692f-e102-4624-848d-56029000a263" SourceId="1" SourceUrl="http://localhost:8002/mex" />
+    <MetadataFile FileName="System.ComponentModel.xsd" MetadataType="Schema" ID="775115a6-07ad-486f-ac8a-5c9524c88f51" SourceId="1" SourceUrl="http://localhost:8002/mex" />
+    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="42f6d663-13ee-4e64-8b4a-f8ab0375fde5" SourceId="1" SourceUrl="http://localhost:8002/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,955 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WCFMacros" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/TestComponent_VB" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.ComponentModel" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWCFMacros_DoWork_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoWork" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_DoWork_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoWorkResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_DOD_PPO_Get_InputMessage">
+    <wsdl:part name="parameters" element="tns:DOD_PPO_Get" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_DOD_PPO_Get_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DOD_PPO_GetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_DOB_Complaints_Out_Class_InputMessage">
+    <wsdl:part name="parameters" element="tns:DOB_Complaints_Out_Class" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_DOB_Complaints_Out_Class_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DOB_Complaints_Out_ClassResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_DOB_Complaints_Get_InputMessage">
+    <wsdl:part name="parameters" element="tns:DOB_Complaints_Get" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_DOB_Complaints_Get_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DOB_Complaints_GetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_DBO_Complaints_List_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_DBO_Complaints_List" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_DBO_Complaints_List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_DBO_Complaints_ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_DBO_Complaints_History_List_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_DBO_Complaints_History_List" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_DBO_Complaints_History_List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_DBO_Complaints_History_ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_DOB_Complaints_Delete_InputMessage">
+    <wsdl:part name="parameters" element="tns:DOB_Complaints_Delete" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_DOB_Complaints_Delete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DOB_Complaints_DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_ADT_SignIn_InputMessage">
+    <wsdl:part name="parameters" element="tns:ADT_SignIn" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_ADT_SignIn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ADT_SignInResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_Prop_tax_Get_InputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_Prop_tax_Get" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_Prop_tax_Get_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_Prop_tax_GetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_WaterSewer_Get_InputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_WaterSewer_Get" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_WaterSewer_Get_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_WaterSewer_GetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Acris_Get_InputMessage">
+    <wsdl:part name="parameters" element="tns:Acris_Get" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Acris_Get_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Acris_GetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_Streets_lookup_InputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_Streets_lookup" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_Streets_lookup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_Streets_lookupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_Address_Search_InputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_Address_Search" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_Address_Search_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_Address_SearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_Legal_Search_InputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_Legal_Search" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_Legal_Search_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_Legal_SearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_Owner_Search_InputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_Owner_Search" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_Owner_Search_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_Owner_SearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_Assessment_Full_InputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_Assessment_Full" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_Assessment_Full_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_Assessment_FullResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_ALL_NYC_Tax_Liens_By_BBLE_InputMessage">
+    <wsdl:part name="parameters" element="tns:ALL_NYC_Tax_Liens_By_BBLE" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_ALL_NYC_Tax_Liens_By_BBLE_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ALL_NYC_Tax_Liens_By_BBLEResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_GetPropdata_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPropdata" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_GetPropdata_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPropdataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Zillow_Estimate_By_BBLE_InputMessage">
+    <wsdl:part name="parameters" element="tns:Zillow_Estimate_By_BBLE" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Zillow_Estimate_By_BBLE_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Zillow_Estimate_By_BBLEResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_Acris_Latest_OwnerName_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_Acris_Latest_OwnerName" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_Acris_Latest_OwnerName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_Acris_Latest_OwnerNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_LisPendens_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_LisPendens" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_LisPendens_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_LisPendensResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_TLO_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_TLO" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_TLO_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_TLOResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_LocateReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_LocateReport" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_LocateReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_LocateReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Acris_Get_LatestSale_InputMessage">
+    <wsdl:part name="parameters" element="tns:Acris_Get_LatestSale" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Acris_Get_LatestSale_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Acris_Get_LatestSaleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_NameAndAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_NameAndAddress" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_NameAndAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_NameAndAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_Acris_TaxLien_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_Acris_TaxLien" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_Acris_TaxLien_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_Acris_TaxLienResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_Servicer_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_Servicer" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_Servicer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_ServicerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Requests_Waiting_InputMessage">
+    <wsdl:part name="parameters" element="tns:Requests_Waiting" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Requests_Waiting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Requests_WaitingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetJugments_InputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetJugments" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetJugments_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetJugmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetBankruptcy_InputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetBankruptcy" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetBankruptcy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetBankruptcyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetEnvirnomental_InputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetEnvirnomental" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetEnvirnomental_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetEnvirnomentalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetMortDeed_InputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetMortDeed" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetMortDeed_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetMortDeedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetFederalTaxLien_InputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetFederalTaxLien" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetFederalTaxLien_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetFederalTaxLienResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetPatriot_InputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetPatriot" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetPatriot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetPatriotResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetParkingViolations_InputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetParkingViolations" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetParkingViolations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetParkingViolationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetTranscriptAdjunction_InputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetTranscriptAdjunction" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetTranscriptAdjunction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetTranscriptAdjunctionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AAbs_GetUcc_InputMessage">
+    <wsdl:part name="parameters" element="tns:AAbs_GetUcc" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AAbs_GetUcc_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AAbs_GetUccResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AAbs_GetEmergencyRepair_InputMessage">
+    <wsdl:part name="parameters" element="tns:AAbs_GetEmergencyRepair" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AAbs_GetEmergencyRepair_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AAbs_GetEmergencyRepairResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AAbs_GetAreAbstractReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:AAbs_GetAreAbstractReport" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AAbs_GetAreAbstractReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AAbs_GetAreAbstractReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_TLO_Person_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_TLO_Person" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_TLO_Person_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_TLO_PersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_NYC_TaxLien_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_NYC_TaxLien" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_NYC_TaxLien_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_NYC_TaxLienResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Trig_Create_Subscription_InputMessage">
+    <wsdl:part name="parameters" element="tns:Trig_Create_Subscription" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Trig_Create_Subscription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Trig_Create_SubscriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Trig_Delete_Subscription_InputMessage">
+    <wsdl:part name="parameters" element="tns:Trig_Delete_Subscription" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Trig_Delete_Subscription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Trig_Delete_SubscriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Trig_Activate_Deactivate_Subscription_InputMessage">
+    <wsdl:part name="parameters" element="tns:Trig_Activate_Deactivate_Subscription" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Trig_Activate_Deactivate_Subscription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Trig_Activate_Deactivate_SubscriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Trig_Get_Subscriptions_List_InputMessage">
+    <wsdl:part name="parameters" element="tns:Trig_Get_Subscriptions_List" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Trig_Get_Subscriptions_List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Trig_Get_Subscriptions_ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Trig_Is_TrigOn_By_BBLE_InputMessage">
+    <wsdl:part name="parameters" element="tns:Trig_Is_TrigOn_By_BBLE" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Trig_Is_TrigOn_By_BBLE_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Trig_Is_TrigOn_By_BBLEResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_Zoning_By_BBLE_InputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_Zoning_By_BBLE" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_NYC_Zoning_By_BBLE_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NYC_Zoning_By_BBLEResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_DCPGeododerBySingleLine_InputMessage">
+    <wsdl:part name="parameters" element="tns:DCPGeododerBySingleLine" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_DCPGeododerBySingleLine_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DCPGeododerBySingleLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_DCPGeododerByAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:DCPGeododerByAddress" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_DCPGeododerByAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DCPGeododerByAddressResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWCFMacros">
+    <wsdl:operation name="DoWork">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DoWork" message="tns:IWCFMacros_DoWork_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/DoWorkResponse" message="tns:IWCFMacros_DoWork_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DOD_PPO_Get">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DOD_PPO_Get" message="tns:IWCFMacros_DOD_PPO_Get_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/DOD_PPO_GetResponse" message="tns:IWCFMacros_DOD_PPO_Get_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DOB_Complaints_Out_Class">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DOB_Complaints_Out_Class" message="tns:IWCFMacros_DOB_Complaints_Out_Class_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/DOB_Complaints_Out_ClassResponse" message="tns:IWCFMacros_DOB_Complaints_Out_Class_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DOB_Complaints_Get">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DOB_Complaints_Get" message="tns:IWCFMacros_DOB_Complaints_Get_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/DOB_Complaints_GetResponse" message="tns:IWCFMacros_DOB_Complaints_Get_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_DBO_Complaints_List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_DBO_Complaints_List" message="tns:IWCFMacros_Get_DBO_Complaints_List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_DBO_Complaints_ListResponse" message="tns:IWCFMacros_Get_DBO_Complaints_List_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_DBO_Complaints_History_List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_DBO_Complaints_History_List" message="tns:IWCFMacros_Get_DBO_Complaints_History_List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_DBO_Complaints_History_ListResponse" message="tns:IWCFMacros_Get_DBO_Complaints_History_List_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DOB_Complaints_Delete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DOB_Complaints_Delete" message="tns:IWCFMacros_DOB_Complaints_Delete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/DOB_Complaints_DeleteResponse" message="tns:IWCFMacros_DOB_Complaints_Delete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ADT_SignIn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/ADT_SignIn" message="tns:IWCFMacros_ADT_SignIn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/ADT_SignInResponse" message="tns:IWCFMacros_ADT_SignIn_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NYC_Prop_tax_Get">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Prop_tax_Get" message="tns:IWCFMacros_NYC_Prop_tax_Get_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Prop_tax_GetResponse" message="tns:IWCFMacros_NYC_Prop_tax_Get_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NYC_WaterSewer_Get">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/NYC_WaterSewer_Get" message="tns:IWCFMacros_NYC_WaterSewer_Get_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/NYC_WaterSewer_GetResponse" message="tns:IWCFMacros_NYC_WaterSewer_Get_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Acris_Get">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Acris_Get" message="tns:IWCFMacros_Acris_Get_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Acris_GetResponse" message="tns:IWCFMacros_Acris_Get_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NYC_Streets_lookup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Streets_lookup" message="tns:IWCFMacros_NYC_Streets_lookup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Streets_lookupResponse" message="tns:IWCFMacros_NYC_Streets_lookup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NYC_Address_Search">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Address_Search" message="tns:IWCFMacros_NYC_Address_Search_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Address_SearchResponse" message="tns:IWCFMacros_NYC_Address_Search_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NYC_Legal_Search">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Legal_Search" message="tns:IWCFMacros_NYC_Legal_Search_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Legal_SearchResponse" message="tns:IWCFMacros_NYC_Legal_Search_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NYC_Owner_Search">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Owner_Search" message="tns:IWCFMacros_NYC_Owner_Search_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Owner_SearchResponse" message="tns:IWCFMacros_NYC_Owner_Search_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NYC_Assessment_Full">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Assessment_Full" message="tns:IWCFMacros_NYC_Assessment_Full_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Assessment_FullResponse" message="tns:IWCFMacros_NYC_Assessment_Full_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ALL_NYC_Tax_Liens_By_BBLE">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLE" message="tns:IWCFMacros_ALL_NYC_Tax_Liens_By_BBLE_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLEResponse" message="tns:IWCFMacros_ALL_NYC_Tax_Liens_By_BBLE_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPropdata">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/GetPropdata" message="tns:IWCFMacros_GetPropdata_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/GetPropdataResponse" message="tns:IWCFMacros_GetPropdata_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Zillow_Estimate_By_BBLE">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLE" message="tns:IWCFMacros_Zillow_Estimate_By_BBLE_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLEResponse" message="tns:IWCFMacros_Zillow_Estimate_By_BBLE_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Acris_Latest_OwnerName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerName" message="tns:IWCFMacros_Get_Acris_Latest_OwnerName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerNameResponse" message="tns:IWCFMacros_Get_Acris_Latest_OwnerName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_LisPendens">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_LisPendens" message="tns:IWCFMacros_Get_LisPendens_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_LisPendensResponse" message="tns:IWCFMacros_Get_LisPendens_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_TLO">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_TLO" message="tns:IWCFMacros_Get_TLO_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_TLOResponse" message="tns:IWCFMacros_Get_TLO_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_LocateReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_LocateReport" message="tns:IWCFMacros_Get_LocateReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_LocateReportResponse" message="tns:IWCFMacros_Get_LocateReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Acris_Get_LatestSale">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Acris_Get_LatestSale" message="tns:IWCFMacros_Acris_Get_LatestSale_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Acris_Get_LatestSaleResponse" message="tns:IWCFMacros_Acris_Get_LatestSale_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NYC_NameAndAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/NYC_NameAndAddress" message="tns:IWCFMacros_NYC_NameAndAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/NYC_NameAndAddressResponse" message="tns:IWCFMacros_NYC_NameAndAddress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Acris_TaxLien">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien" message="tns:IWCFMacros_Get_Acris_TaxLien_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_Acris_TaxLienResponse" message="tns:IWCFMacros_Get_Acris_TaxLien_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Servicer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_Servicer" message="tns:IWCFMacros_Get_Servicer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_ServicerResponse" message="tns:IWCFMacros_Get_Servicer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Requests_Waiting">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Requests_Waiting" message="tns:IWCFMacros_Requests_Waiting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Requests_WaitingResponse" message="tns:IWCFMacros_Requests_Waiting_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetJugments">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetJugments" message="tns:IWCFMacros_AB_GetJugments_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetJugmentsResponse" message="tns:IWCFMacros_AB_GetJugments_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetBankruptcy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetBankruptcy" message="tns:IWCFMacros_AB_GetBankruptcy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetBankruptcyResponse" message="tns:IWCFMacros_AB_GetBankruptcy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetEnvirnomental">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetEnvirnomental" message="tns:IWCFMacros_AB_GetEnvirnomental_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetEnvirnomentalResponse" message="tns:IWCFMacros_AB_GetEnvirnomental_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetMortDeed">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetMortDeed" message="tns:IWCFMacros_AB_GetMortDeed_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetMortDeedResponse" message="tns:IWCFMacros_AB_GetMortDeed_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetFederalTaxLien">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLien" message="tns:IWCFMacros_AB_GetFederalTaxLien_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLienResponse" message="tns:IWCFMacros_AB_GetFederalTaxLien_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetPatriot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetPatriot" message="tns:IWCFMacros_AB_GetPatriot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetPatriotResponse" message="tns:IWCFMacros_AB_GetPatriot_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetParkingViolations">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetParkingViolations" message="tns:IWCFMacros_AB_GetParkingViolations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetParkingViolationsResponse" message="tns:IWCFMacros_AB_GetParkingViolations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetTranscriptAdjunction">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunction" message="tns:IWCFMacros_AB_GetTranscriptAdjunction_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunctionResponse" message="tns:IWCFMacros_AB_GetTranscriptAdjunction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AAbs_GetUcc">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AAbs_GetUcc" message="tns:IWCFMacros_AAbs_GetUcc_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AAbs_GetUccResponse" message="tns:IWCFMacros_AAbs_GetUcc_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AAbs_GetEmergencyRepair">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepair" message="tns:IWCFMacros_AAbs_GetEmergencyRepair_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepairResponse" message="tns:IWCFMacros_AAbs_GetEmergencyRepair_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AAbs_GetAreAbstractReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReport" message="tns:IWCFMacros_AAbs_GetAreAbstractReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReportResponse" message="tns:IWCFMacros_AAbs_GetAreAbstractReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_TLO_Person">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_TLO_Person" message="tns:IWCFMacros_Get_TLO_Person_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_TLO_PersonResponse" message="tns:IWCFMacros_Get_TLO_Person_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_NYC_TaxLien">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_NYC_TaxLien" message="tns:IWCFMacros_Get_NYC_TaxLien_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_NYC_TaxLienResponse" message="tns:IWCFMacros_Get_NYC_TaxLien_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Trig_Create_Subscription">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Trig_Create_Subscription" message="tns:IWCFMacros_Trig_Create_Subscription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Trig_Create_SubscriptionResponse" message="tns:IWCFMacros_Trig_Create_Subscription_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Trig_Delete_Subscription">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Trig_Delete_Subscription" message="tns:IWCFMacros_Trig_Delete_Subscription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Trig_Delete_SubscriptionResponse" message="tns:IWCFMacros_Trig_Delete_Subscription_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Trig_Activate_Deactivate_Subscription">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Trig_Activate_Deactivate_Subscription" message="tns:IWCFMacros_Trig_Activate_Deactivate_Subscription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Trig_Activate_Deactivate_SubscriptionResponse" message="tns:IWCFMacros_Trig_Activate_Deactivate_Subscription_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Trig_Get_Subscriptions_List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Trig_Get_Subscriptions_List" message="tns:IWCFMacros_Trig_Get_Subscriptions_List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Trig_Get_Subscriptions_ListResponse" message="tns:IWCFMacros_Trig_Get_Subscriptions_List_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Trig_Is_TrigOn_By_BBLE">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Trig_Is_TrigOn_By_BBLE" message="tns:IWCFMacros_Trig_Is_TrigOn_By_BBLE_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Trig_Is_TrigOn_By_BBLEResponse" message="tns:IWCFMacros_Trig_Is_TrigOn_By_BBLE_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NYC_Zoning_By_BBLE">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Zoning_By_BBLE" message="tns:IWCFMacros_NYC_Zoning_By_BBLE_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Zoning_By_BBLEResponse" message="tns:IWCFMacros_NYC_Zoning_By_BBLE_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DCPGeododerBySingleLine">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DCPGeododerBySingleLine" message="tns:IWCFMacros_DCPGeododerBySingleLine_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/DCPGeododerBySingleLineResponse" message="tns:IWCFMacros_DCPGeododerBySingleLine_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DCPGeododerByAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DCPGeododerByAddress" message="tns:IWCFMacros_DCPGeododerByAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/DCPGeododerByAddressResponse" message="tns:IWCFMacros_DCPGeododerByAddress_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WCFMacros_Http" type="tns:IWCFMacros">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DoWork">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/DoWork" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DOD_PPO_Get">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/DOD_PPO_Get" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DOB_Complaints_Out_Class">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/DOB_Complaints_Out_Class" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DOB_Complaints_Get">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/DOB_Complaints_Get" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_DBO_Complaints_List">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_DBO_Complaints_List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_DBO_Complaints_History_List">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_DBO_Complaints_History_List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DOB_Complaints_Delete">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/DOB_Complaints_Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ADT_SignIn">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/ADT_SignIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NYC_Prop_tax_Get">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/NYC_Prop_tax_Get" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NYC_WaterSewer_Get">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/NYC_WaterSewer_Get" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Acris_Get">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Acris_Get" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NYC_Streets_lookup">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/NYC_Streets_lookup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NYC_Address_Search">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/NYC_Address_Search" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NYC_Legal_Search">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/NYC_Legal_Search" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NYC_Owner_Search">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/NYC_Owner_Search" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NYC_Assessment_Full">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/NYC_Assessment_Full" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ALL_NYC_Tax_Liens_By_BBLE">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPropdata">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/GetPropdata" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Zillow_Estimate_By_BBLE">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Acris_Latest_OwnerName">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_LisPendens">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_LisPendens" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_TLO">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_TLO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_LocateReport">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_LocateReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Acris_Get_LatestSale">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Acris_Get_LatestSale" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NYC_NameAndAddress">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/NYC_NameAndAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Acris_TaxLien">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Servicer">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_Servicer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Requests_Waiting">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Requests_Waiting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetJugments">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetJugments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetBankruptcy">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetBankruptcy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetEnvirnomental">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetEnvirnomental" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetMortDeed">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetMortDeed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetFederalTaxLien">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLien" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetPatriot">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetPatriot" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetParkingViolations">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetParkingViolations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetTranscriptAdjunction">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AAbs_GetUcc">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AAbs_GetUcc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AAbs_GetEmergencyRepair">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepair" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AAbs_GetAreAbstractReport">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_TLO_Person">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_TLO_Person" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_NYC_TaxLien">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_NYC_TaxLien" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Trig_Create_Subscription">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Trig_Create_Subscription" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Trig_Delete_Subscription">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Trig_Delete_Subscription" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Trig_Activate_Deactivate_Subscription">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Trig_Activate_Deactivate_Subscription" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Trig_Get_Subscriptions_List">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Trig_Get_Subscriptions_List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Trig_Is_TrigOn_By_BBLE">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Trig_Is_TrigOn_By_BBLE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NYC_Zoning_By_BBLE">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/NYC_Zoning_By_BBLE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DCPGeododerBySingleLine">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/DCPGeododerBySingleLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DCPGeododerByAddress">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/DCPGeododerByAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WCFMacros">
+    <wsdl:port name="WCFMacros_Http" binding="tns:WCFMacros_Http">
+      <soap:address location="http://dellserver:8002/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
