@@ -958,6 +958,7 @@
                             <dx:ListEditItem Text="Leads" Value="SalesAgent" />
                             <dx:ListEditItem Text="Short Sale" Value="ShortSale" />
                             <dx:ListEditItem Text="Legal" Value="Legal" />
+                            <dx:ListEditItem Text="Title" Value="Title" />
                             <dx:ListEditItem Text="Accounting" Value="Accounting" />
                             <dx:ListEditItem Text="Construction" Value="Construction" />
                             <dx:ListEditItem Text="Eviction" Value="Eviction" />
