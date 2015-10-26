@@ -42,8 +42,9 @@ Public Class LegalECourt
                 'When changed save it to database
                 If (Changed) Then
                     Using db As New LegalModelContainer
-                        If (Me.Id <> 0) Then
-                            Dim original = db.LegalECourts.Find(Me.Id)
+
+                        Dim original = db.LegalECourts.Find(Me.Id)
+                        If (original IsNot Nothing) Then
                             original.BBLE = Me.BBLE
                             db.SaveChanges()
                         End If
@@ -52,8 +53,8 @@ Public Class LegalECourt
                 End If
 
                 Return Changed
-                End If
             End If
+        End If
         Return False
     End Function
     Public Shared Function GetIndexLegalECourts() As List(Of LegalECourt)

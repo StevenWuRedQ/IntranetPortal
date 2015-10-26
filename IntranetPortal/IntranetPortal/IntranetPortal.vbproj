@@ -3059,6 +3059,7 @@
     <Content Include="Scripts\dx.phonejs.js" />
     <Content Include="Scripts\dx.webappjs.debug.js" />
     <Content Include="Scripts\dx.webappjs.js" />
+    <Content Include="Scripts\filterLLC.js" />
     <Content Include="Scripts\filters.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.af-ZA.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.af.js" />
