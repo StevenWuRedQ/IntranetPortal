@@ -7,9 +7,9 @@
         End Using
     End Function
 
-    Public Shared Function GetAllCases() As TitleCase()
+    Public Shared Function GetAllCases(status As DataStatus) As TitleCase()
         Using ctx As New ConstructionEntities
-            Return ctx.TitleCases.ToArray
+            Return ctx.TitleCases.Where(Function(c) c.Status = status Or status = DataStatus.All).ToArray
         End Using
     End Function
 
@@ -19,9 +19,9 @@
         End Using
     End Function
 
-    Public Shared Function GetAllCases(userName As String) As TitleCase()
+    Public Shared Function GetAllCases(userName As String, status As DataStatus) As TitleCase()
         Using ctx As New ConstructionEntities
-            Return ctx.TitleCases.Where(Function(c) c.Owner = userName).ToArray
+            Return ctx.TitleCases.Where(Function(c) c.Owner = userName AndAlso (c.Status = status Or status = DataStatus.All)).ToArray
         End Using
     End Function
 
@@ -89,5 +89,10 @@
         UpdateBy = itemData.UpdateBy
         UpdateDate = DateTime.Now
     End Sub
+
+    Public Enum DataStatus
+        All = -1
+        Completed = 1
+    End Enum
 
 End Class

@@ -45,6 +45,12 @@ Public Class TitleManage
         Return TitleCase.Exists(bble)
     End Function
 
+    Public Shared Sub CompleteCase(bble As String, completedBy As String)
+        Dim tCase = TitleCase.GetCase(bble)
+        tCase.Status = TitleCase.DataStatus.Completed
+        tCase.SaveData(completedBy)
+    End Sub
+
     Public Shared Sub StartTitle(bble As String, caseName As String, userName As String)
         Dim tCase = TitleCase.GetCase(bble)
 
@@ -78,11 +84,11 @@ Public Class TitleManage
         Return Nothing
     End Function
 
-    Public Shared Function GetMyCases(userName As String) As TitleCase()
+    Public Shared Function GetMyCases(userName As String, Optional status As TitleCase.DataStatus = TitleCase.DataStatus.All) As TitleCase()
         If IsManager(userName) Then
-            Return TitleCase.GetAllCases()
+            Return TitleCase.GetAllCases(status)
         Else
-            Return TitleCase.GetAllCases(userName)
+            Return TitleCase.GetAllCases(userName, status)
         End If
     End Function
 
@@ -102,8 +108,14 @@ Public Class TitleManage
 #End Region
 
     Public Function GetAmount(navMenu As PortalNavItem, userName As String) As Integer Implements INavMenuAmount.GetAmount
-
-        Return GetMyCases(userName).Length
+        Select Case navMenu.Name
+            Case "Title-All"
+                Return GetMyCases(userName).Length
+            Case "Title-Completed"
+                Return GetMyCases(userName, TitleCase.DataStatus.Completed).Length
+            Case Else
+                Return 0
+        End Select
 
     End Function
 End Class

@@ -28,7 +28,12 @@ Public Class TitleCaseList
     End Sub
 
     Private Sub BindData()
-        gridCase.DataSource = TitleManage.GetMyCases(Page.User.Identity.Name)
+        If String.IsNullOrEmpty(Request.QueryString("s")) Then
+            gridCase.DataSource = TitleManage.GetMyCases(Page.User.Identity.Name)
+        Else
+            Dim status = CInt(Request.QueryString("s"))
+            gridCase.DataSource = TitleManage.GetMyCases(Page.User.Identity.Name, status)
+        End If
     End Sub
 
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)

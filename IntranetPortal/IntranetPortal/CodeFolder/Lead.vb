@@ -314,7 +314,7 @@ Partial Public Class Lead
     Public Shared Function UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime, Optional addCommend As String = Nothing) As Boolean
         Using Context As New Entities
             Dim lead = Context.Leads.Where(Function(l) l.BBLE = bble).FirstOrDefault
-            Dim addComStr = If(String.IsNullOrEmpty(addCommend), "", "<br/>" & " Comment: " & addCommend)
+            Dim addComStr = If(String.IsNullOrEmpty(addCommend), "", "<br/>" & " Comments: " & addCommend)
             If lead IsNot Nothing Then
                 Dim originateStatus = lead.Status
                 lead.Status = status
@@ -334,7 +334,7 @@ Partial Public Class Lead
                     Else
                         Dim action = LeadsActivityLog.EnumActionType.DefaultAction
                         If status = LeadStatus.Callback Then
-                            comments = "Lead Status changed to Follow Up on " & callbackDate.ToString("MM/dd/yyyy" & addComStr)
+                            comments = "Lead Status changed to Follow Up on " & callbackDate.ToString("MM/dd/yyyy") & addComStr
                             action = LeadsActivityLog.EnumActionType.FollowUp
                         End If
 

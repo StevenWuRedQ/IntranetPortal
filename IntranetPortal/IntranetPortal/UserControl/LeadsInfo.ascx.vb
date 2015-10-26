@@ -530,7 +530,7 @@ Public Class LeadsInfo1
                 Dim ownerName = e.Parameter.Split("|")(1)
 
                 Using context As New Entities
-                    Dim p = context.HomeOwnerPhones.Where(Function(ph) ph.BBLE = bble And ph.OwnerName = ownerName And ph.Phone = phoneNo).SingleOrDefault
+                    Dim p = context.HomeOwnerPhones.Where(Function(ph) ph.BBLE = bble And ph.OwnerName = ownerName And ph.Phone = phoneNo).FirstOrDefault
 
                     If p Is Nothing Then
                         p = New HomeOwnerPhone

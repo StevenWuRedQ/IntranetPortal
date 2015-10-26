@@ -108,13 +108,14 @@ Public Class LeadsSubMenu
                     Dim bble = e.Parameter.Split("|")(1)
                     Dim tmpDate = DateTime.Now
 
-                    If e.Parameter.Split("|").Count > 2 Then
+                    If e.Parameter.Split("|").Count > 3 Then
                         If Not DateTime.TryParse(e.Parameter.Split("|")(2), tmpDate) Then
+
                             Throw New Exception("The input date is not valid. Date: " & e.Parameter.Split("|")(2))
                         End If
                     End If
                     'Dim tmpdate = If(e.Parameter.Split("|").Count > 2, DateTime.Parse(e.Parameter.Split("|")(2)), DateTime.Now)
-
+                    AddComment = e.Parameter.Split("|").ToList.Item(3)
                     UpdateLeadStatus(bble, LeadStatus.Callback, tmpDate, AddComment)
                 End If
             End If
