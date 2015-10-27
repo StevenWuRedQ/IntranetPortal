@@ -77,6 +77,15 @@ Partial Public Class TitleTab
     Protected WithEvents TitlePreclosing As Global.IntranetPortal.TitlePreclosing
     
     '''<summary>
+    '''TitleFeeClearance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TitleFeeClearance As Global.IntranetPortal.TitleFeeClearance
+    
+    '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>

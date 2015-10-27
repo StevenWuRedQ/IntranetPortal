@@ -5,6 +5,8 @@
 <%@ Register Src="~/TitleUI/TitleBuildingLiens.ascx" TagPrefix="uc1" TagName="TitleBuildingLiens" %>
 <%@ Register Src="~/TitleUI/TitleSurveyAndContin.ascx" TagPrefix="uc1" TagName="TitleSurveyAndContin" %>
 <%@ Register Src="~/TitleUI/TitlePreclosing.ascx" TagPrefix="uc1" TagName="TitlePreclosing" %>
+<%@ Register Src="~/TitleUI/TitleFeeClearance.ascx" TagPrefix="uc1" TagName="TitleFeeClearance" %>
+
 
 <uc1:Common runat="server" ID="Common" />
 <div id="titleui_and_activity">
@@ -12,10 +14,14 @@
         <div id="TitleUIContent" style="padding-top: 5px">
             <div id="title_prioity_content">
                 <div style="font-size: 30px; margin-left: 30px; height: 80px" class="font_gray">
-                    <div style="font-size: 30px; margin-top: 20px;">
-                        <i class="fa fa-home" ng-dblclick="ptCom.alert('nima')"></i>
-                        <span style="margin-left: 19px;"><span ng-bind="Form.FormData.CaseName"></span>&nbsp;</span>
-                        <span class="time_buttons" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+leadsInfoBBLE, 'Maps')">Map</span>
+                    <div class="col-md-10" style="margin: 10px 0">
+                        <i class="fa fa-home"></i>&nbsp;  
+                        <span ng-bind="Form.FormData.CaseName"></span>
+                    </div>
+                    <div class="col-md-2 pull-right" style="margin: 10px 0">
+                        <span class="btn btn-default btn-round" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+ leadsInfoBBLE, 'Maps')">Map</span>
+                        <br />
+                        <span class="btn btn-default btn-circle icon_btn" ng-click="completeCase()" ng-style="Status==1?{'background-color': '#80c02c'}:{}"><i class="fa fa-check"></i></span>
                     </div>
                 </div>
 
@@ -63,11 +69,12 @@
 
             <div class="shortSaleUI">
                 <ul class="nav nav-tabs overview_tabs" role="tablist">
-                    <li style="font-size: 14px" class="short_sale_tab active"><a class="shot_sale_tab_a" href="#TitleInfoTab" role="tab" data-toggle="tab">Info</a></li>
-                    <li style="font-size: 14px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleOwnerLiensTab" role="tab" data-toggle="tab">Owner Liens</a></li>
-                    <li style="font-size: 14px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleBuildingLiensTab" role="tab" data-toggle="tab">Building Liens</a></li>
-                    <li style="font-size: 14px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleSurveyAndContinTab" role="tab" data-toggle="tab">Surveys And Contins</a></li>
-                    <li style="font-size: 14px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitlePreclosingTab" role="tab" data-toggle="tab">Preclosing Documents</a></li>
+                    <li style="font-size: 12px" class="short_sale_tab active"><a class="shot_sale_tab_a" href="#TitleInfoTab" role="tab" data-toggle="tab">Info</a></li>
+                    <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleOwnerLiensTab" role="tab" data-toggle="tab">Owner Liens</a></li>
+                    <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleBuildingLiensTab" role="tab" data-toggle="tab">Building Liens</a></li>
+                    <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleSurveyAndContinTab" role="tab" data-toggle="tab">Surveys And Contins</a></li>
+                    <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitlePreclosingTab" role="tab" data-toggle="tab">Preclosing Docs</a></li>
+                    <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleFeeClearanceTab" role="tab" data-toggle="tab">Fee Clearance</a></li>
                 </ul>
 
                 <!-- Tab panes -->
@@ -89,11 +96,15 @@
                         <div class="tab-pane" id="TitlePreclosingTab">
                             <uc1:TitlePreclosing runat="server" ID="TitlePreclosing" />
                         </div>
+                        <div class="tab-pane" id="TitleFeeClearanceTab">
+                            <uc1:TitleFeeClearance runat="server" ID="TitleFeeClearance" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <dx:ASPxPopupControl ClientInstanceName="aspxAcrisControl" Width="1000px" Height="800px"
         ID="ASPxPopupControl1" HeaderText="Acris" Modal="true" CloseAction="CloseButton" ShowMaximizeButton="true"
         runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -160,15 +171,104 @@
             $scope.addComment(comment);
             $scope.addCommentTxt = '';
         }
+        $scope.$on('titleComment', function(e, args){
+            $scope.addComment(args.message)
+        })
         /* end comments */
     })
 </script>
 <script>
-    angular.module("PortalApp").controller("TitleController", function ($scope, $timeout, ptCom, ptContactServices, ptLeadsService, ptShortsSaleService) {
+    angular.module("PortalApp").controller("TitleController", function ($scope, $timeout,$http, ptCom, ptContactServices, ptLeadsService, ptShortsSaleService) {
         $scope.arrayRemove = ptCom.arrayRemove;
         $scope.ptCom = ptCom;
         $scope.ptContactServices = ptContactServices;
         $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
+        $scope.Form = {
+            FormData: {
+                Comments: [],
+                Owners: [{
+                    name: "Prior Owner Liens",
+                    Mortgages: [{}],                        
+                    Lis_Pendens: [{}],
+                    Judgements: [{}],
+                    ECB_Notes: [{}],
+                    PVB_Notes: [{}],
+                    UCCs: [{}],
+                    FederalTaxLiens: [{}],
+                    MechanicsLiens: [{}],
+
+                    Mortgages_Show: false,
+                    Mortgages_Status: '',
+                    Lis_Pendens_Show: false,
+                    Lis_Pendens_Status: '',
+                    Judgements_Show: false,
+                    Judgements_Status: '',
+                    ECB_Notes_Show: false,
+                    ECB_Notes_Status: '',
+                    PVB_Notes_Show: false,
+                    PVB_Notes_Status: '',
+                    UCCs_Show: false,
+                    UCCs_Status: '',
+                    FederalTaxLiens_Show: false,
+                    FederalTaxLiens_Status: '',
+                    MechanicsLiens_Show: false,
+                    MechanicsLiens_Status: ''
+                }, {
+                    name: "Current Owner Liens",
+                    Mortgages: [{}],
+                    Lis_Pendens: [{}],
+                    Judgements: [{}],
+                    ECB_Notes: [{}],
+                    PVB_Notes: [{}],
+                    UCCs: [{}],
+                    FederalTaxLiens: [{}],
+                    MechanicsLiens: [{}],
+
+                    Mortgages_Show: true,
+                    Mortgages_Status: '',
+                    Lis_Pendens_Show: true,
+                    Lis_Pendens_Status: '',
+                    Judgements_Show: true,
+                    Judgements_Status: '',
+                    ECB_Notes_Show: true,
+                    ECB_Notes_Status: '',
+                    PVB_Notes_Show: true,
+                    PVB_Notes_Status: '',
+                    UCCs_Show: true,
+                    UCCs_Status: '',
+                    FederalTaxLiens_Show: true,
+                    FederalTaxLiens_Status: '',
+                    MechanicsLiens_Show: true,
+                    MechanicsLiens_Status: '',
+                    active: true
+                }]
+            }
+        }
+        $scope.ReloadedData = {};
+        /* end data define*/
+
+        $scope.Load = function (data) {
+            $scope.reload();
+            ptCom.nullToUndefined(data);
+            $.extend(true, $scope.Form, data);
+            $scope.BBLE = data.Tag;
+            if($scope.BBLE){
+                ptLeadsService.getLeadsByBBLE($scope.BBLE, function (res) {
+                    $scope.LeadsInfo = res;
+                });
+                ptShortsSaleService.getShortSaleCaseByBBLE($scope.BBLE, function (res) {
+                    $scope.SsCase = res;
+                });
+                $scope.getStatus($scope.BBLE);
+            }
+            $scope.$broadcast('clearance-reload');
+            $scope.checkReadOnly();
+            $scope.$apply();
+        }
+        $scope.Get = function () {
+            return $scope.Form;
+        }
+        /* end convention function */
 
         $scope.reload = function () {
             $scope.Form = {
@@ -234,23 +334,6 @@
             }
             $scope.ReloadedData = {};
         };
-        $scope.Load = function (data) {
-            $scope.reload();
-            ptCom.nullToUndefined(data);
-            $.extend(true, $scope.Form, data);
-            $scope.BBLE = data.Tag;
-            ptLeadsService.getLeadsByBBLE($scope.BBLE, function (res) {
-                $scope.LeadsInfo = res;
-            });
-            ptShortsSaleService.getShortSaleCaseByBBLE($scope.BBLE, function (res) {
-                $scope.SsCase = res;
-            });            
-            $scope.$apply();
-            $scope.checkReadOnly();
-        }
-        $scope.Get = function () {
-            return $scope.Form;
-        }
         $scope.swapOwnerPos = function (index) {
             $timeout(function () {
                 var temp1 = $scope.Form.FormData.Owners[index];
@@ -261,14 +344,38 @@
         }
         $scope.checkReadOnly = function () {
             var ro = <%= ControlReadonly %>;
-        if (ro) {
-            $("#TitleUIContent input").attr("disabled", true);
-            if ($("#TitleROBanner").length == 0) {
-                $("#title_prioity_content").before("<div class='barner-warning text-center' id='TitleROBanner' >Readonly</div>")
-            }
+            if (ro) {
+                $("#TitleUIContent input").attr("disabled", true);
+                if ($("#TitleROBanner").length == 0) {
+                    $("#title_prioity_content").before("<div class='barner-warning text-center' id='TitleROBanner' >Readonly</div>")
+                }
                 
+            }
         }
-    }
+        $scope.completeCase = function(){
+            if($scope.Status!=1 && $scope.BBLE){
+                $http({
+                    method: 'POST',
+                    url: '/api/Title/Completed',                    
+                    data: JSON.stringify($scope.BBLE)
+                }).then(function success(){
+                    $scope.Status = 1;
+                    var dateinfo = new Date().toLocaleDateString()
+                    $scope.$broadcast('titleComment', {message: 'Case Completed on ' + dateinfo })
+                    ptCom.alert("The case have moved to Completed")
+                }, function error(){
+                })
+            }
+        }
+        $scope.getStatus = function(bble){
+            $http.get('/api/Title/GetCaseStatus?bble='+ bble)
+            .then(function succ(res){
+                $scope.Status = res.data
+            },function error(){
+                $scope.Status = -1;
+                console.log("get status error")
+            })
+        }
 
     })
 </script>

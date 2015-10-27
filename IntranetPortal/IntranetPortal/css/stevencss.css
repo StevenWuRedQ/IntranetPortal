@@ -103,7 +103,7 @@
 	color: white;
 	font-size: 14px;
 	padding: 5px 10px;
-	border: 0px;
+	border: 0;
 	cursor: pointer;
 }
 
@@ -126,13 +126,13 @@
 }
 
 .rand-pop {
-	box-shadow: 2.5px 4.33px 40px 0px rgba(2, 2, 2, 0.3);
+	box-shadow: 2.5px 4.33px 40px 0 rgba(2, 2, 2, 0.3);
 	border-radius: 5px;
 	/*padding:0px 9px 30px 5px;*/
 }
 
 #ctl00_ctl00_MainSplitter_pcMain_PWC-1 {
-	padding: 2px 0px 30px 0px !important;
+	padding: 2px 0 30px 0 !important;
 }
 /*user fix the pop postion*/
 .fix_pop_postion_s {
@@ -165,7 +165,7 @@
 	font-size: 18px;
 	color: #7ba2b7;
 	width: 280px;
-	padding-top: 0px;
+	padding-top: 0;
 }
 
 .dxsplControl_Portal {
@@ -176,6 +176,9 @@
 	font: 18px 'Source Sans Pro' !important;
 }
 
+.dxsplControl_MetropolisBlue .header, .dxsplControl_MetropolisBlue #messageBody, .dxsplControl_MetropolisBlue .content {
+	font-family: 'Source Sans Pro' !important;
+}
 .menuItem:hover {
 	background-color: #ff400d;
 	color: white !important;
@@ -188,10 +191,6 @@
 
 .textMargin {
 	margin-top: 10px;
-}
-
-.dxsplControl_MetropolisBlue .header, .dxsplControl_MetropolisBlue #messageBody, .dxsplControl_MetropolisBlue .content {
-	font-family: 'Source Sans Pro' !important;
 }
 
 .dxmLite_Portal {
@@ -220,10 +219,6 @@ div.Hrozral {
 	/*border-radius: 5px;*/
 	border-bottom-left-radius: 5px;
 	border-top-left-radius: 5px;
-}
-
-.dxsplControl_MetropolisBlue {
-	font: 'Source Sans Pro' !important;
 }
 
 .upcase_text {
@@ -262,10 +257,10 @@ div.Hrozral {
 
 .tab_button_a {
 	display: inline-block !important;
-	padding: 0px !important;
+	padding: 0 !important;
 	background: transparent !important;
 	color: white !important;
-	border: 0px !important;
+	border: 0 !important;
 	outline: none !important;
 }
 
@@ -338,7 +333,7 @@ div.form_head {
 }
 
 .text_input {
-	border: 0px;
+	border: 0;
 	width: 100%;
 	font-size: 18px;
 	color: black;
@@ -346,7 +341,7 @@ div.form_head {
 }
 
 	.text_input:focus {
-		border: 0px;
+		border: 0;
 		outline: none;
 		color: #0e9ee9;
 	}
@@ -371,7 +366,7 @@ div.form_head {
 }
 
 .form_div_node_no_under_line {
-	border-bottom: 0px;
+	border-bottom: 0;
 }
 
 .form_empty_node {
@@ -425,7 +420,6 @@ input[type='checkbox'] {
 			font-weight: normal;
 			line-height: 1;
 			-webkit-font-smoothing: antialiased;
-			-moz-osx-font-smoothing: grayscale;
 			margin-top: 1px;
 			padding-right: 8px;
 			width: 20px !important;
@@ -435,6 +429,7 @@ input[type='checkbox'] {
 
 	input[type="checkbox"]:checked + label:before {
 		padding-right: 6px;
+		content: "\f046";
 	}
 
 	input[type=radio] + label:before {
@@ -447,10 +442,6 @@ input[type='checkbox'] {
 
 	input[type="checkbox"] + label:before {
 		content: "\f096";
-	}
-
-	input[type="checkbox"]:checked + label:before {
-		content: "\f046";
 	}
 
 .check_margin:before {
@@ -643,7 +634,7 @@ i.with_circle {
 	height: 30px;
 	background: white;
 	font-size: 14px;
-	box-shadow: 0px -1px 13px 1px rgba(2, 2, 2, 0.1);
+	box-shadow: 0 -1px 13px 1px rgba(2, 2, 2, 0.1);
 	line-height: 30px;
 	cursor: move;
 }
@@ -673,7 +664,7 @@ i.with_circle {
 }
 
 .employee_list_item {
-	border: 0px;
+	border: 0;
 	list-style: none;
 	width: 255px;
 	height: 45px;
@@ -685,7 +676,7 @@ i.with_circle {
 }
 
 .employee_list_item_no_broder {
-	border: 0px !important;
+	border: 0 !important;
 }
 
 .employee_list_item:hover {
@@ -953,7 +944,7 @@ h1 {
 	font-size: 32px;
 	color: #fff;
 	padding-bottom: 12px;
-	text-shadow: 0px 0px 2px rgba(0,0,0,0.6);
+	text-shadow: 0 0 2px rgba(0,0,0,0.6);
 }
 
 
@@ -1004,8 +995,8 @@ h2 + div,
 
 /* CSS3 Animation example --- */
 #css3-animated-example h3 + div {
-	height: 0px;
-	padding: 0px;
+	height: 0;
+	padding: 0;
 	overflow: hidden;
 	background: #000;
 	display: block !important;
@@ -1013,7 +1004,6 @@ h2 + div,
 	-webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;
 	-o-transition: all 0.3s ease;
-	-ms-transition: all 0.3s ease;
 	transition: all 0.3s ease;
 }
 
@@ -1066,8 +1056,8 @@ pre#event-log {
 /*-----end -----*/
 /*document ui */
 .doc_list_title {
-	margin-top: 0px;
-	margin-bottom: 0px;
+	margin-top: 0;
+	margin-bottom: 0;
 	text-transform: uppercase;
 	font-weight: 900;
 	font-size: 18px;
@@ -1088,7 +1078,7 @@ pre#event-log {
 }
 
 .doc_list_checks {
-	margin-top: 0px !important;
+	margin-top: 0 !important;
 	/*width: 290px;*/
 	padding: 10px !important;
 	font-weight: normal;
@@ -1128,7 +1118,7 @@ input + label.font_12 {
 }
 
 .doc_list_section_sub {
-	padding-top: 0px;
+	padding-top: 0;
 }
 
 .save_report_list:hover {
@@ -1142,7 +1132,7 @@ input + label.font_12 {
 }
 
 #ctl00_MainContentPH_ASPxSplitter1_chkFields, #ctl00_MainContentPH_ASPxSplitter1_chkFields2 {
-	border: 0px;
+	border: 0;
 	border-left: 3px solid #b1b2b7;
 }
 
@@ -1165,7 +1155,7 @@ input + label.font_12 {
 }
 
 #ASPxSplitter1_contentCallback_contentSplitter_gridReport {
-	border: 0px;
+	border: 0;
 }
 
 .left_border {
@@ -1228,7 +1218,7 @@ li.active {
 }
 
 /*activity UI*/
-activity_button {
+.activity_button {
 	color: #7396a9;
 }
 
@@ -1356,7 +1346,7 @@ i.log_item_hl_buttons {
 	margin-top: 5px;
 	width: 100%;
 	border: 0 !important;
-	border-radius: 0px !important;
+	border-radius: 0 !important;
 }
 /*li.active 
 {
@@ -1427,7 +1417,7 @@ i.log_item_hl_buttons {
 }
 
 .compare_table_info {
-	padding: 0px 30px;
+	padding: 0 30px;
 	margin-top: 5px;
 	white-space: nowrap;
 	cursor: default;
@@ -1470,14 +1460,14 @@ div.compare_table_row_title {
 	content: "\f196";
 }
 
-.collapsed collapse_btn {
+.collapsed .collapse_btn {
 	content: "\f196";
 }
 
 /*short sale */
 .short_sale_tab {
 	height: 35px !important;
-	border: 0px !important;
+	border: 0 !important;
 	border-bottom: #eeeeee solid 5px;
 	font-weight: 700;
 	font-size: 16px;
@@ -1486,14 +1476,14 @@ div.compare_table_row_title {
 }
 
 ul.noborder {
-	border: 0px;
+	border: 0;
 }
 
 a.shot_sale_tab_a {
 	color: #2e2f31;
-	border: 0px !important;
+	border: 0 !important;
 	border-bottom: #eeeeee solid 5px !important;
-	margin: 0px !important;
+	margin: 0 !important;
 	border-radius: 0 !important;
 	height: 47px;
 }
@@ -1563,7 +1553,7 @@ li.ss_form_item_line {
 	color: rgb(177, 178, 183);
 	text-transform: uppercase;
 	display: block;
-	margin: 0px;
+	margin: 0;
 	margin-top: 15px;
 	font-weight: normal !important;
 }
@@ -1572,7 +1562,7 @@ li.ss_form_item_line {
 	font-size: 18px;
 	color: rgb(46, 47, 49);
 	height: 40px;
-	border: 0px;
+	border: 0;
 	border-bottom: 1px solid #dde0e7;
 	width: 80%;
 }
@@ -1592,7 +1582,7 @@ li.ss_form_item_line {
 	color: rgb(177, 178, 183);
 	text-transform: uppercase;
 	font-weight: 900;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 
 .ss_border {
@@ -1634,7 +1624,7 @@ li.ss_form_item_line {
 
 .update_panel {
 	margin: 30px 20px;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 	height: 30px;
 	background: #ffefe4;
 	color: #ff400d;
@@ -1751,7 +1741,7 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 	font-weight: 900;
 	/* background: #ff400d; */
 	padding: 2px 8px;
-	margin: 0px;
+	margin: 0;
 	display: inline-block;
 }
 
@@ -1825,7 +1815,7 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 }
 
 .input_files {
-	margin: 0px;
+	margin: 0;
 	/*border:  dashed*/
 }
 
@@ -2082,7 +2072,7 @@ td.vendor_info_left {
 	font-weight: 300;
 	margin-left: 50px;
 	border: 1px solid #dde0e7;
-	padding: 0px 15px;
+	padding: 0 15px;
 }
 
 .management_molecular {
@@ -2235,7 +2225,7 @@ li.mag_tabv.active {
 
 .message_popup_title {
 	background: #d9f1fd;
-	border-radius: 10px 10px 0px 0px;
+	border-radius: 10px 10px 0 0;
 	font-size: 22px;
 	color: #3993c1;
 	font-weight: 300;
@@ -2317,9 +2307,9 @@ li.mag_tabv.active {
 	background: #f5f6f5;
 	border: 1px solid transparent;
 	border-radius: 5px;
-	-webkit-box-shadow: inset 0px 0px 10px 2px rgba(201,201,201,1);
-	-moz-box-shadow: inset 0px 0px 10px 2px rgba(201,201,201,1);
-	box-shadow: inset 0px 0px 10px 2px rgba(201,201,201,1);
+	-webkit-box-shadow: inset 0 0 10px 2px rgba(201,201,201,1);
+	-moz-box-shadow: inset 0 0 10px 2px rgba(201,201,201,1);
+	box-shadow: inset 0 0 10px 2px rgba(201,201,201,1);
 	padding: 10px 10px 20px 20px;
 	margin-top: 20px;
 }
@@ -2373,9 +2363,9 @@ li.mag_tabv.active {
 .input-group-addon {
 	padding: 6px 6px;
 	background-color: white;
-	border: 0px;
+	border: 0;
 	border-bottom: 1px solid #dde0e7;
-	border-radius: 0px;
+	border-radius: 0;
 }
 
 .tab-switch li {
@@ -2407,7 +2397,7 @@ li.mag_tabv.active {
 }
 
 .shortSaleUI .short_sale_content {
-	margin: 0px;
+	margin: 0;
 	padding: 10px;
 }
 
@@ -2456,7 +2446,7 @@ li.mag_tabv.active {
 .dx-popup-content input[type='checkbox'] + label {
 	font-size: 14px !important;
 	margin-top: 5px !important;
-	padding: 0px 10px;
+	padding: 0 10px;
 }
 
 .btn-file {
@@ -2490,7 +2480,6 @@ li.mag_tabv.active {
 
 	.table-input:hover {
 		border: 1px #c8c8c8 solid;
-		-ms-border-radius: 2px;
 		border-radius: 2px;
 	}
 
@@ -2575,3 +2564,11 @@ li.mag_tabv.active {
 	top: 0;
 	left: 0;
 }
+
+.btn-round {
+	border-radius: 14px;
+}
+
+	.btn-round.btn-lg {
+		border-radius: 24px;
+	}

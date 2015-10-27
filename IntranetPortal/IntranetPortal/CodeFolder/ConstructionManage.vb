@@ -154,7 +154,7 @@ Public Class ConstructionManage
             Dim Address = spotCheck.propertyAddress
             Dim Manager = Data.ConstructionCase.GetCase(spotCheck.BBLE).Owner
             Dim User = spotCheck.owner
-            Dim logDate = spotCheck.date
+            Dim logDate = DateTime.Now
             Dim bble = spotCheck.BBLE
 
             ' write log

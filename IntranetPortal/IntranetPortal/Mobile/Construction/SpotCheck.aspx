@@ -117,12 +117,7 @@
                     $ionicLoading.hide()
                     $scope.form = res.data;
                     $scope.form.id = addressId;
-                    if ($scope.form.date) {
-                        $scope.form.date = $filter('date')($scope.form.date, 'MM/dd/yyyy');
-                    } else {
-                        $scope.form.date = new Date().toLocaleDateString();
-                    }
-
+                    $scope.form.date = new Date().toLocaleDateString();
                 }, function error(res) {
                     alert("load data fails");
                 })

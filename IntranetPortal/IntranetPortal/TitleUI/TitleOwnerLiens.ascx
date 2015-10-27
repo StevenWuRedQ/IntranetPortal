@@ -11,11 +11,11 @@
         <h4 class="ss_form_title ">
             <input type="checkbox" style="display:inline-block" ng-model="owner.Mortgages_Show" />
             Mortgages&nbsp;
-            <select ng-model="owner.Mortgages_Status">
+            <select ng-model="owner.Mortgages_Status" ng-show="owner.Mortgages_Show">
                 <option>Pending</option>
                 <option>Clear</option>
             </select>
-            <pt-add ng-click="ensurePush('Form.FormData.Owners['+$index+'].Mortgages')"></pt-add>
+            <pt-add class="pull-right" style="padding-top:8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].Mortgages')" ng-show="owner.Mortgages_Show"></pt-add>
         </h4>
         <div class="ss_border" ng-show="owner.Mortgages_Show">
             <div ng-repeat="mortgage in owner.Mortgages" class="clearfix">
@@ -40,14 +40,14 @@
         </div>
     </div>
     <div class="ss_form">
-        <h4 class="ss_form_title ">
+        <h4 class="ss_form_title">
             <input type="checkbox" style="display:inline-block" ng-model="owner.Lis_Pendens_Show" />
             Lis Pendens&nbsp;
-            <select ng-model="owner.Lis_Pendens_Status">
+            <select ng-model="owner.Lis_Pendens_Status" ng-show="owner.Lis_Pendens_Show">
                 <option>Pending</option>
                 <option>Clear</option>
             </select>
-            <pt-add ng-click="ensurePush('Form.FormData.Owners['+$index+'].Lis_Pendens')"></pt-add>
+            <pt-add class="pull-right" style="padding-top:8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].Lis_Pendens')" ng-show="owner.Lis_Pendens_Show"></pt-add>
 
         </h4>
         <div class="ss_border" ng-show="owner.Lis_Pendens_Show">
@@ -82,11 +82,11 @@
         <h4 class="ss_form_title ">
             <input type="checkbox" style="display:inline-block" ng-model="owner.Judgements_Show" />
             Judgements&nbsp;
-            <select ng-model="owner.Judgements_Status">
+            <select ng-model="owner.Judgements_Status" ng-show="owner.Judgements_Show">
                 <option>Pending</option>
                 <option>Clear</option>
             </select>
-            <pt-add ng-click="ensurePush('Form.FormData.Owners['+$index+'].Judgements')"></pt-add>
+            <pt-add class="pull-right" style="padding-top:8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].Judgements')" ng-show="owner.Judgements_Show"></pt-add>
 
         </h4>
         <div class="ss_border" ng-show="owner.Judgements_Show">
@@ -124,11 +124,11 @@
         <h4 class="ss_form_title">
             <input type="checkbox" style="display:inline-block" ng-model="owner.ECB_Notes_Show" />
             ECB&nbsp;
-            <select ng-model="owner.ECB_Notes_Status">
+            <select ng-model="owner.ECB_Notes_Status" ng-show="owner.ECB_Notes_Show">
                 <option>Pending</option>
                 <option>Clear</option>
             </select>
-            <pt-add ng-click="ensurePush('Form.FormData.Owners['+$index+'].ECB_Notes')"></pt-add>
+            <pt-add class="pull-right" style="padding-top:8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].ECB_Notes')" ng-show="owner.ECB_Notes_Show"></pt-add>
 
         </h4>
         <div class="ss_border" ng-show="owner.ECB_Notes_Show">
@@ -144,11 +144,11 @@
         <h4 class="ss_form_title ">
             <input type="checkbox" style="display:inline-block" ng-model="owner.PVB_Notes_Show" />
             PVB&nbsp;
-            <select ng-model="owner.PVB_Notes_Status">
+            <select ng-model="owner.PVB_Notes_Status" ng-show="owner.PVB_Notes_Show">
                 <option>Pending</option>
                 <option>Clear</option>
             </select>    
-            <pt-add ng-click="ensurePush('Form.FormData.Owners['+$index+'].PVB_Notes')"></pt-add>
+            <pt-add class="pull-right" style="padding-top:8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].PVB_Notes')" ng-show="owner.PVB_Notes_Show"></pt-add>
 
         </h4>
         <div class="ss_border" ng-show="owner.PVB_Notes_Show">
@@ -164,11 +164,11 @@
         <h4 class="ss_form_title">
             <input type="checkbox" style="display:inline-block" ng-model="owner.UCCs_Show" />
             UCC&nbsp;
-            <select ng-model="owner.UCCs_Status">
+            <select ng-model="owner.UCCs_Status" ng-show="owner.UCCs_Show">
                 <option>Pending</option>
                 <option>Clear</option>
             </select>
-            <pt-add ng-click="ensurePush('Form.FormData.Owners['+$index+'].UCCs')"></pt-add>
+            <pt-add class="pull-right" style="padding-top:8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].UCCs')" ng-show="owner.UCCs_Show"></pt-add>
 
         </h4>
         <div class="ss_border" ng-show="owner.UCCs_Show">
@@ -203,11 +203,11 @@
         <h4 class="ss_form_title">
             <input type="checkbox" style="display:inline-block" ng-model="owner.FederalTaxLiens_Show" />
             Federal Tax Liens&nbsp;
-            <select ng-model="owner.FederalTaxLiens_Status">
+            <select ng-model="owner.FederalTaxLiens_Status" ng-show="owner.FederalTaxLiens_Show">
                 <option>Pending</option>
                 <option>Clear</option>
             </select>
-            <pt-add ng-click="ensurePush('Form.FormData.Owners['+$index+'].FederalTaxLiens')"></pt-add>
+            <pt-add class="pull-right" style="padding-top:8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].FederalTaxLiens')" ng-show="owner.FederalTaxLiens_Show"></pt-add>
 
         </h4>
         <div class="ss_border" ng-show="owner.FederalTaxLiens_Show">
@@ -234,12 +234,12 @@
         <h4 class="ss_form_title">
             <input type="checkbox" style="display:inline-block" ng-model="owner.MechanicsLiens_Show" />
             Mechanics Lien&nbsp;
-            <select ng-model="owner.MechanicsLiens_Status">
+            <select ng-model="owner.MechanicsLiens_Status" ng-show="owner.MechanicsLiens_Show">
                 <option></option>
                 <option class="text-warning">Pending</option>
                 <option class="text-success">Clear</option>
             </select>
-            <pt-add ng-click="ensurePush('Form.FormData.Owners['+$index+'].MechanicsLiens')"></pt-add>
+            <pt-add class="pull-right" style="padding-top:8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].MechanicsLiens')" ng-show="owner.MechanicsLiens_Show"></pt-add>
         </h4>
         <div class="ss_border" ng-show="owner.MechanicsLiens_Show">
             <div ng-repeat="mechanicsLien in owner.MechanicsLiens" class="clearfix">

@@ -18,6 +18,16 @@ Namespace Controllers
             End Try
         End Function
 
+        <Route("api/Title/GetCaseStatus")>
+        Public Function GetCaseStatus(bble As String) As IHttpActionResult
+            Try
+                Dim status = Data.TitleCase.GetCaseStatus(bble)
+                Return Ok(status)
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
         <ResponseType(GetType(String()))>
         <Route("api/Title/UploadFiles")>
         Public Function uploadTitleFiles() As IHttpActionResult

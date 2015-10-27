@@ -19,6 +19,18 @@
         End Using
     End Function
 
+    Public Shared Function GetCaseStatus(bble As String) As TitleCase.DataStatus
+        Using ctx As New ConstructionEntities
+            Dim xcase = ctx.TitleCases.Find(bble)
+            If xcase IsNot Nothing Then
+                Return xcase.Status
+            Else
+                Return 0
+            End If
+
+        End Using
+
+    End Function
     Public Shared Function GetAllCases(userName As String, status As DataStatus) As TitleCase()
         Using ctx As New ConstructionEntities
             Return ctx.TitleCases.Where(Function(c) c.Owner = userName AndAlso (c.Status = status Or status = DataStatus.All)).ToArray
