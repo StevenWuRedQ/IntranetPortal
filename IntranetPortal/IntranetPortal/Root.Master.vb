@@ -80,6 +80,24 @@ Public Class Root
                 End Using
             End If
         End If
+
+        'add Search by steven
+
+        If (gridSearch.DataSource Is Nothing Or gridSearch.GetRow(0) Is Nothing) Then
+            Try
+                Dim bble = Core.Utility.Address2BBLE(key)
+                If (Not String.IsNullOrEmpty(bble)) Then
+                    Using Context As New Entities
+                        gridSearch.DataSource = Context.Leads.Where(Function(ld) ld.BBLE = bble And ld.AppId = appId).ToList
+                        gridSearch.DataBind()
+                    End Using
+                End If
+
+            Catch ex As Exception
+
+            End Try
+
+        End If
     End Sub
 
     Protected Sub HeadLoginStatus_LoggingOut(sender As Object, e As LoginCancelEventArgs)
