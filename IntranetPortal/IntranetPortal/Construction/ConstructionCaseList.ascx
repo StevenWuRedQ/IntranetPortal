@@ -16,17 +16,16 @@
             }
             else {
                 if (gridCase.GetFocusedRowIndex() >= 0) {
-                    //alert(gridLeads.GetFocusedRowIndex());
+
                     var rowKey = gridCase.GetRowKey(gridCase.GetFocusedRowIndex());
                     if (rowKey != null) {
+
                         OnGetRowValues(rowKey);
                     }
                     else {
                         if (splitter) {
                             splitter.GetPaneByName('dataPane')
-                        }
-                        //datapanel.style.visibility = 'hidden';
-                        //logpanel.style.visibility = 'hidden';
+                        }                        
                     }
                 }
             }
@@ -37,21 +36,25 @@
 
         
         if (values == null) {
-            //gridCase.GetValuesOnCustomCallback(gridCase.GetFocusedRowIndex(), OnGetRowValues);
-
+            
         }
         else {
             leadsInfoBBLE = values;
             console.log(leadsInfoBBLE);
             LoadCaseData(leadsInfoBBLE);
-                        
+           
             if (cbpLogs)
                 cbpLogs.PerformCallback(leadsInfoBBLE);
-            //angular.element(document.getElementById('ConstructionCtrl')).scope().LoadLeadsCase(leadsInfoBBLE);
         }
     }
 
-
+    function OnGridRowClicked(s, e) {
+        if (cbpLogs.InCallback()) {
+            e.cancel = true;
+            alert("The data is loading now. Please wait a second.");
+        }
+    }
+    
     function expandAllClick(s) {
         if (gridCase.IsGroupRowExpanded(0)) {
             gridCase.CollapseAll();
@@ -224,7 +227,7 @@
             <GroupSummary>
                 <dx:ASPxSummaryItem FieldName="CaseName" SummaryType="Count" />
             </GroupSummary>
-            <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
+            <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" RowClick="OnGridRowClicked" />
             <Border BorderStyle="None"></Border>
         </dx:ASPxGridView>
     </div>
