@@ -25,7 +25,7 @@
                     else {
                         if (splitter) {
                             splitter.GetPaneByName('dataPane')
-                        }                        
+                        }
                     }
                 }
             }
@@ -33,8 +33,7 @@
     }
 
     function OnGetRowValues(values) {
-
-        
+                
         if (values == null) {
             
         }
