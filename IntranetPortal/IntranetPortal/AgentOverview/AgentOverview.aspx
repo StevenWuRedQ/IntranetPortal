@@ -4,7 +4,7 @@
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="/css/right-pane.css" />
     <script src="../Scripts/jquery.printElement.js"></script>
-   
+
     <style type="text/css">
         .InforPanel {
             float: left;
@@ -281,7 +281,7 @@
                                 </div>
 
                             </div>
-
+                            <% If Page.User.IsInRole("Admin") %>
                             <%--menu list--%>
                             <div style="margin: 13px 30px 30px 30px">
                                 <div class="agent_menu_list_item" onclick="ShowLeadstatus(0)">New Leads</div>
@@ -291,7 +291,8 @@
                                 <div class="agent_menu_list_item" onclick="ShowLeadstatus(4)">Dead Lead </div>
                                 <div class="agent_menu_list_item" onclick="ShowLeadstatus(7)">Closed</div>
                             </div>
-
+                            <% End if %>
+                            
                             <%-----end-----%>
                         </div>
                         <%----end bottom block--%>

@@ -19,8 +19,14 @@ Public Class AgentCharts
     Public Function ChartSource() As String
         Using Context As New Entities
 
+            If Not Page.User.IsInRole("Admin") Then
+                Dim user = Page.User.Identity.Name
+                current_employee = Employee.GetInstance(user).EmployeeID
+                Return Agent_leads_activity_source()
+            End If
+
             Dim source = (From ld In Context.Leads.Where(Function(ld) ld.Status = LeadsCategory)
-                                     Group ld By Name = ld.EmployeeName Into Count()).ToList
+                          Group ld By Name = ld.EmployeeName Into Count()).ToList
 
             'Set chart  title property
             Dim chart = New With {.Title = String.Format("{0} Leads By All Employee", LeadsCategory.ToString),

@@ -219,8 +219,8 @@ Public Class AgentOverview
 
                 Dim reports = (From li In portalDataContext.LeadsInfoes Join
                                       ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
-                                      Where ld.Status = CurrentStatus
-                                      Select li).ToList
+                               Where ld.Status = CurrentStatus
+                               Select li).ToList
                 'Dim reports = portalDataContext.LeadsInfoViews.Where(Function(li) li.Status = CurrentStatus)
                 gridReport.DataSource = reports
             End If
