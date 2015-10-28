@@ -30,9 +30,9 @@ Public Class ShortSaleManage
     Public Shared Function SaveCase(caseData As String, saveBy As String) As ShortSaleCase
         Dim res = JsonConvert.DeserializeObject(Of ShortSaleCase)(caseData)
 
-        'If Not IsOriginalCase(res) Then
-        '    Throw New Exception("Case Data was changed. Please load the latest data and try again.")
-        'End If
+        If Not IsOriginalCase(res) Then
+            Throw New Exception("Case Data was changed. Please load the latest data and try again.")
+        End If
 
         Try
             res.Save(HttpContext.Current.User.Identity.Name)

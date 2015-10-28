@@ -590,7 +590,7 @@ Public Class LeadsInfo1
                     txtUserAddress.Text = ""
                     txtAdrDes.Text = ""
                 Else
-                    Throw New Exception("This address already exist.")
+                    Throw New CallbackException("This address already exist.")
                 End If
             End Using
         End If
@@ -614,9 +614,9 @@ Public Class LeadsInfo1
         Dim Steven = Employee.GetInstance("Steven Wu")
         If (Chris IsNot Nothing AndAlso Steven IsNot Nothing) Then
             EmailService.SendMail(Chris.Email, Steven.Email & Eamil, "Leads " & BBLE & " Can not get homeower info", "Hi Chris,  Leads " & BBLE & " does not have homeower info after refersh please check !" & " Submmit by " + Page.User.Identity.Name, Nothing)
-            Throw New Exception("Submit succeed !")
+            Throw New CallbackException("Submit succeed !")
         End If
 
-        Throw New Exception("Submit failed !")
+        Throw New CallbackException("Submit failed !")
     End Sub
 End Class
