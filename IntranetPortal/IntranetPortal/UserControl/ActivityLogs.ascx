@@ -392,6 +392,13 @@
                     {
                         alert("Please select next FollowUp date.")
                         return;
+                    }else
+                    {
+                        if(typeof UpDateFollowUpDate == 'function')
+                        {
+                            UpDateFollowUpDate(dtClientFollowup.GetDate())
+                        }
+                        
                     }
                 }
             }
@@ -591,7 +598,8 @@
                                 var comment = $("#selType1").val() + "/" + $("#selCategory").val() + " - " + $("#selStatusUpdate").val() + "<br />";
                                 
                                 if(typeof UpdateMortgageStatus != "undefined")
-                                    UpdateMortgageStatus($("#selType1").val(), $("#selStatusUpdate option:selected").text(), $("#selCategory").val());                                
+                                    UpdateMortgageStatus($("#selType1").val(), $("#selStatusUpdate option:selected").text(), $("#selCategory").val());     
+                               
 
                                 if(typeof SaveShortSaleCase != "undefined")
                                     SaveShortSaleCase()

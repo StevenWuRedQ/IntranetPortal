@@ -79,6 +79,7 @@
                                                             <div class="shortSaleUI" style="align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
+                                                              
                                                                 <% If Not HiddenTab Then%>
                                                                 <div class="legal-menu row" style="margin-left: 0; margin-right: 0">
                                                                     <ul class="nav-bar nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
@@ -623,6 +624,7 @@
             return angular.element(document.getElementById('ShortSaleCtrl')).scope().SsCase;
         }
 
+       
         function MoveToConstruction() {
             angular.element(document.getElementById('ShortSaleCtrl')).scope().MoveToConstruction(
                 function () {
@@ -633,6 +635,9 @@
                 });
         }
 
+        function UpDateFollowUpDate(date) {
+            GetShortSaleCase().CallbackDate = date;
+        }
         function UpdateMortgageStatus(selType1, selStatusUpdate, selCategory) {
             angular.element(document.getElementById('ShortSaleCtrl')).scope().UpdateMortgageStatus(selType1, selStatusUpdate, selCategory)
         }
@@ -835,6 +840,11 @@
                 return {}
             }
             $scope.GetShortSaleCase = function (caseId) {
+                if (!caseId)
+                {
+                    console.log("Can not find case Id ");
+                    return;
+                }
                 var url = "ShortSaleServices.svc/GetCase?caseId=" + caseId;
                 $http.get(url).
                     success(function (data, status, headers, config) {

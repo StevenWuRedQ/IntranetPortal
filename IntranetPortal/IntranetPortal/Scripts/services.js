@@ -48,11 +48,11 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem,makeSrueRefersh) {
     // delay the first run after 30 second!
     $.wait(30000).then(function () {
         window.setInterval(function () {
-            if (makeSrueRefersh)
-            {
-                var m = makeSrueRefersh;
-                CheckLastUpdateChangedByOther(m.urlFunc, m.reLoadUIfunc, m.loadUIIdFunc, m.urlModfiyUserFunc)
-            }
+            //if (makeSrueRefersh)
+            //{
+            //    var m = makeSrueRefersh;
+            //    CheckLastUpdateChangedByOther(m.urlFunc, m.reLoadUIfunc, m.loadUIIdFunc, m.urlModfiyUserFunc)
+            //}
             if (ScopeCaseDataChanged(getDataFunc)) {
                 var sucessFunc = function () {
                 }
