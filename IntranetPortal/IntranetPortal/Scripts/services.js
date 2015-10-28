@@ -18,6 +18,7 @@ function NGAddArrayitemScope(scopeId, model) {
         $scope.$apply();
     }
 }
+
 function ScopeCaseDataChanged(getDataFunc) {
     if ($('#CaseData').length == 0) {
         alert("can not find input case data elment");
@@ -27,6 +28,7 @@ function ScopeCaseDataChanged(getDataFunc) {
 
     return $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(getDataFunc());
 }
+
 function ScopeResetCaseDataChange(getDataFunc) {
     var caseData = getDataFunc()
     if ($('#CaseData').length == 0) {
@@ -36,7 +38,7 @@ function ScopeResetCaseDataChange(getDataFunc) {
     $('#CaseData').val(JSON.stringify(getDataFunc()));
 }
 
-function ScopeAutoSave(getDataFunc, SaveFunc, headEelem) {
+function ScopeAutoSave(getDataFunc, SaveFunc, headEelem,makeSrueRefersh) {
     if ($(headEelem).length <= 0) {
         return;
     }
@@ -46,6 +48,11 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem) {
     // delay the first run after 30 second!
     $.wait(30000).then(function () {
         window.setInterval(function () {
+            if (makeSrueRefersh)
+            {
+                var m = makeSrueRefersh;
+                CheckLastUpdateChangedByOther(m.urlFunc, m.reLoadUIfunc, m.loadUIIdFunc, m.urlModfiyUserFunc)
+            }
             if (ScopeCaseDataChanged(getDataFunc)) {
                 var sucessFunc = function () {
                 }
@@ -65,31 +72,36 @@ function ScopeSetLastUpdateTime(url) {
     })
 }
 
+function CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyUserFunc)
+{
+    var url = urlFunc()
+    $.getJSON(url, function (data) {
+        var lastUpdateTime = JSON.stringify(data);
+        var localUpdateTime = $('#LastUpdateTime').val();
+        if (localUpdateTime && localUpdateTime != lastUpdateTime) {
+            if (urlModfiyUserFunc) {
+                $.getJSON(urlModfiyUserFunc(), function (mUser) {
+                    if (mUser) {
+                        if (mUser != "sameuser") {
+                            alert(mUser + " change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
+                        }
+                        reLoadUIfunc(loadUIIdFunc());
+                    }
+
+                });
+            } else {
+                alert("Someone change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
+                reLoadUIfunc(loadUIIdFunc());
+            }
+
+        }
+    });
+}
+
 function ScopeDateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyUserFunc) {
 
     window.setInterval(function () {
-        var url = urlFunc()
-        $.getJSON(url, function (data) {
-            var lastUpdateTime = JSON.stringify(data);
-            var localUpdateTime = $('#LastUpdateTime').val()
-            if (localUpdateTime && localUpdateTime != lastUpdateTime) {
-                if (urlModfiyUserFunc) {
-                    $.getJSON(urlModfiyUserFunc(), function (mUser) {
-                        if (mUser) {
-                            if (mUser != "sameuser") {
-                                alert(mUser + " change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
-                            }
-                            reLoadUIfunc(loadUIIdFunc());
-                        }
-
-                    });
-                } else {
-                    alert("Someone change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
-                    reLoadUIfunc(loadUIIdFunc());
-                }
-
-            }
-        });
+        CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyUserFunc);
     }, 10000)
 
 

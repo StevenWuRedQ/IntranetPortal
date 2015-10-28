@@ -664,7 +664,14 @@
         }
 
         $(document).ready(function () {
-            ScopeAutoSave(GetShortSaleCase, angular.element(document.getElementById('ShortSaleCtrl')).scope().SaveShortSale, '#ShortSaleTabHead')
+            var $scope = angular.element(document.getElementById('ShortSaleCtrl')).scope();
+            ScopeAutoSave(GetShortSaleCase, angular.element(document.getElementById('ShortSaleCtrl')).scope().SaveShortSale, '#ShortSaleTabHead',
+            {
+                "urlFunc":GetLasTUpDateURL,
+                "reLoadUIfunc": $scope.GetShortSaleCase,
+                "loadUIIdFunc": $scope.GetLoadId,
+                "urlModfiyUserFunc":$scope.GetModifyUserUrl
+            });
         })
 
         portalApp = angular.module('PortalApp');
