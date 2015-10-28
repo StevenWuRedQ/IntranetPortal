@@ -914,6 +914,7 @@
                             ResetCaseDataChange();
                         }).
                         error(function (data, status) {
+                            
                             ptCom.alert("Fail to save data. status " + status + "Error : " + data.message ? data.message : JSON.stringify(data));
                         });
             }
