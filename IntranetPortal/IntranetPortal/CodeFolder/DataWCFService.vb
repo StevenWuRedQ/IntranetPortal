@@ -75,13 +75,16 @@ Public Class DataWCFService
         End Using
     End Function
 
-    Public Shared Function GetLocateReport(orderNum As Integer, bble As String, name As String, address1 As String, address2 As String, city As String, state As String, zip As String, country As String) As DataAPI.TLOLocateReportOutput
+    Public Shared Function GetLocateReport(orderNum As Integer, bble As String, name As String, address1 As String, address2 As String, city As String, state As String, zip As String, country As String, Optional checkTLO As Boolean = True) As DataAPI.TLOLocateReportOutput
+
         If Not Core.TLOApiLog.IsServiceOn Then
             Throw New Exception("HomeOwner Service is temporary closed. Please try later.")
         End If
 
-        If Core.TLOApiLog.LimiteIsExceed Then
-            Throw New Exception("HomeOwner Load Limit is reached. Please contact Admin!")
+        If checkTLO Then
+            If Core.TLOApiLog.LimiteIsExceed Then
+                Throw New Exception("HomeOwner Load Limit is reached. Please contact Admin!")
+            End If
         End If
 
         Using client As New DataAPI.WCFMacrosClient
@@ -1106,13 +1109,13 @@ Public Class DataWCFService
 
     Public Shared Function GetOwnerInfoByTLOId(tloId As String, bble As String) As HomeOwner
 
-        If Not Core.TLOApiLog.IsServiceOn Then
-            Throw New Exception("HomeOwner Service is temporary closed. Please try later.")
-        End If
+        'If Not Core.TLOApiLog.IsServiceOn Then
+        '    Throw New Exception("HomeOwner Service is temporary closed. Please try later.")
+        'End If
 
-        If Core.TLOApiLog.LimiteIsExceed Then
-            Throw New Exception("HomeOwner Load Limit is reached. Please contact Admin!")
-        End If
+        'If Core.TLOApiLog.LimiteIsExceed Then
+        '    Throw New Exception("HomeOwner Load Limit is reached. Please contact Admin!")
+        'End If
 
         Using client As New DataAPI.WCFMacrosClient
             Dim orderId = 1
@@ -1128,9 +1131,6 @@ Public Class DataWCFService
 
                 orderId = order.ApiOrderID
             End Using
-
-
-
 
             Dim result = client.Get_TLO_Person(orderId, Nothing, Nothing, False, False, Nothing, tloId, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
 

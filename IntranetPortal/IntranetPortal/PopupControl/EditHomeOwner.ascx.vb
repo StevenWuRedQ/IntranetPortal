@@ -145,7 +145,7 @@ Public Class EditHomeOwner
 
                             homeOwner.UserModified = True
                             'Load tlo report
-                            homeOwner.TLOLocateReport = DataWCFService.GetLocateReport(1, bble, homeOwner.Name, homeOwner.Address1, homeOwner.Address2, homeOwner.City, homeOwner.State, homeOwner.Zip, "USA")
+                            homeOwner.TLOLocateReport = DataWCFService.GetLocateReport(1, bble, homeOwner.Name, homeOwner.Address1, homeOwner.Address2, homeOwner.City, homeOwner.State, homeOwner.Zip, "USA", False)
 
                         Else
 
