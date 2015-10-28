@@ -272,6 +272,7 @@
 
                         <%--bottom block--%>
                         <div>
+                            <% If Page.User.IsInRole("Admin") %>
                             <div style="margin: 22px 0px 0px 0px; font-size: 24px;">
                                 <div style="padding: 0px 20px;">
                                     <div style="font-size: 24px;" class="clearfix">
@@ -281,7 +282,7 @@
                                 </div>
 
                             </div>
-                            <% If Page.User.IsInRole("Admin") %>
+                           
                             <%--menu list--%>
                             <div style="margin: 13px 30px 30px 30px">
                                 <div class="agent_menu_list_item" onclick="ShowLeadstatus(0)">New Leads</div>
