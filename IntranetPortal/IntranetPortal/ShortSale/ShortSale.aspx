@@ -636,6 +636,8 @@
         }
 
         function UpDateFollowUpDate(date) {
+            var UtcDate = new Date(date);
+            date = UtcDate.getMonth() + '/' + UtcDate.getDay()+'/'+UtcDate.getYear();
             GetShortSaleCase().CallbackDate = date;
         }
         function UpdateMortgageStatus(selType1, selStatusUpdate, selCategory) {
