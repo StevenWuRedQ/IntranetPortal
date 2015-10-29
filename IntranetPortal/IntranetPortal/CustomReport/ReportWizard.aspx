@@ -189,6 +189,8 @@
                 $http.get("<%= Template %>.js")
                     .then(function (res) {
                         $scope.Fields = res.data[0].Fields;
+                        $scope.BaseTable = res.data[0].BaseTable;
+                        $scope.IncludeAppId = res.data[0].IncludeAppId;
                         if (callback) callback()
                     })
                 $scope.loadSavedReport();
@@ -486,6 +488,8 @@
             $scope.generate = function () {
 
                 var result = [];
+                var BaseTable = $scope.BaseTable ? $scope.BaseTable : '';
+                var IncludeAppId = $scope.IncludeAppId?$scope.IncludeAppId: ''
                 _.each($scope.Fields, function (el, i) {
                     _.each(el.fields, function (el, i) {
                         if (el.checked) {
@@ -497,7 +501,7 @@
                     $scope.step = 3;
                     $http({
                         method: "POST",
-                        url: "/api/Report/QueryData",
+                        url: "/api/Report/QueryData?baseTable=" + BaseTable + "&includeAppId=" + IncludeAppId,
                         data: JSON.stringify(result),
                     }).then(function (res) {
                         var rdata = res.data[0]
