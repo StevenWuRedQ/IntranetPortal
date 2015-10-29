@@ -27,7 +27,7 @@ Namespace Controllers
 
         <ResponseType(GetType(DataTable))>
         <Route("api/Report/QueryData")>
-        Function PostQueryData(<FromBody> queryString As JToken) As IHttpActionResult
+        Function PostQueryData(<FromBody> queryString As JToken, baseTable As String, includeAppId As Boolean) As IHttpActionResult
             If queryString Is Nothing Then
                 Return BadRequest()
             End If
@@ -35,8 +35,9 @@ Namespace Controllers
             Try
                 Dim qb As New Core.QueryBuilder
 
-                'add appid into sql search
-                Dim jsAppId = <string>
+                If includeAppId Then
+                    'add appid into sql search
+                    Dim jsAppId = <string>
                                    {
                                        "name": "AppId",
                                        "table": "ShortSaleCases",
@@ -57,13 +58,17 @@ Namespace Controllers
                                     }
                               </string>
 
-                Dim jsAppObj = JObject.Parse(jsAppId)
-                jsAppObj("filters")(0)("value1") = Employee.CurrentAppId
-                queryString.Last.AddAfterSelf(jsAppObj)
+                    Dim jsAppObj = JObject.Parse(jsAppId)
+                    jsAppObj("filters")(0)("value1") = Employee.CurrentAppId
+                    queryString.Last.AddAfterSelf(jsAppObj)
+                End If
 
+                If baseTable Is Nothing Then
+                    baseTable = "ShortSaleCases"
+                End If
 
-                Dim dt = qb.LoadReportData(queryString, "ShortSaleCases")
-                Dim sql = qb.BuildSelectQuery(queryString, "ShortSaleCases")
+                Dim dt = qb.LoadReportData(queryString, baseTable)
+                Dim sql = qb.BuildSelectQuery(queryString, baseTable)
 
                 Return Ok({dt, sql})
             Catch ex As Exception
