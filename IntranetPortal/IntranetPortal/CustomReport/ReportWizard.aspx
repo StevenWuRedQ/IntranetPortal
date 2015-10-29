@@ -188,6 +188,7 @@
                 $scope.CurrentQuery = null;
                 $http.get("<%= Template %>.js")
                     .then(function (res) {
+                     
                         $scope.Fields = res.data[0].Fields;
                         $scope.BaseTable = res.data[0].BaseTable;
                         $scope.IncludeAppId = res.data[0].IncludeAppId;

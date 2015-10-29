@@ -614,6 +614,12 @@
               <![CDATA[<a href="/LeadAgent.aspx?c=Create" class="add-button" target="contentUrlPane"><i class="fa fa-plus-circle"></i></a>]]>
             </FrontButton>
           </PortalNavItem>
+          <PortalNavItem Name="AgentNewLeads" Text="Report" NavigationUrl="/CustomReport/ReportWizard.aspx?t=leadsDocSearch" ShowAmount="false">
+            <FontClass>
+              <![CDATA[<i class="fa fa-line-chart"></i>]]>
+            </FontClass>
+            
+          </PortalNavItem>
         </Items>
       
       </PortalNavItem>
