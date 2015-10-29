@@ -15,6 +15,9 @@ Public Class Test
 
 
 
+
+
+
         If Not (String.IsNullOrEmpty(Request.QueryString("team"))) Then
             Dim objTeam = Team.GetTeam(Request.QueryString("team").ToString)
             'Me.ActivitySummary.team = objTeam
@@ -106,6 +109,10 @@ Public Class Test
             Dim BBLE = kvp.Value
             IntranetPortal.Data.ConstructionCase.UpdateOwner(BBLE.ToString, "Jamie Ventura")
         Next
+
+    End Sub
+
+    Protected Sub Button2_Click(sender As Object, e As EventArgs)
 
     End Sub
 

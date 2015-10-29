@@ -1,11 +1,11 @@
 ﻿Imports System.IO
 Imports ClosedXML.Excel
+Imports Newtonsoft.Json.Linq
 
 
 Public Class ExcelBuilder
 
     Public Shared Function BuildBudgetReport(address As String, owner As String, budgetData As BudgetRow(), fs As Stream) As Byte()
-
 
         Using wb = New XLWorkbook(fs)
             Dim ws = wb.Worksheet("CHECK REQUEST")
@@ -42,6 +42,11 @@ Public Class ExcelBuilder
 
     End Function
 
+    Public Shared Function BuildTitleReport(json As JObject) As Byte()
+        Using ms As New MemoryStream
+
+        End Using
+    End Function
     Class BudgetRow
         Public balance As Double
         Public contract As Double

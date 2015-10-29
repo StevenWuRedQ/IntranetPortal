@@ -68,15 +68,6 @@ Partial Public Class TitleTab
     Protected WithEvents TitleSurveyAndContin As Global.IntranetPortal.TitleSurveyAndContin
     
     '''<summary>
-    '''TitlePreclosing control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TitlePreclosing As Global.IntranetPortal.TitlePreclosing
-    
-    '''<summary>
     '''TitleFeeClearance control.
     '''</summary>
     '''<remarks>
@@ -84,6 +75,15 @@ Partial Public Class TitleTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TitleFeeClearance As Global.IntranetPortal.TitleFeeClearance
+    
+    '''<summary>
+    '''TitlePreclosing control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TitlePreclosing As Global.IntranetPortal.TitlePreclosing
     
     '''<summary>
     '''ASPxPopupControl1 control.

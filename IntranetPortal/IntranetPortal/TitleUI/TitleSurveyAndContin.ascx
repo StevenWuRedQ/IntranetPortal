@@ -1,11 +1,10 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TitleSurveyAndContin.ascx.vb" Inherits="IntranetPortal.TitleSurveyAndContin" %>
 <div class="ss_form ">
-    <h4 class="ss_form_title ">CONTINS</h4>
+    <h4 class="ss_form_title ">Contins</h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
-                <label class="ss_form_input_title ">Title Contin</label>
-               <%--  <input class="ss_form_input " ng-model="Form.FormData.surveyAndContin.Title_Contin"> --%>
+                <span class="label label-primary">Title Contin</span>
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Date Requested</label>
@@ -16,8 +15,7 @@
                 <input class="ss_form_input " ss-date ng-model="Form.FormData.surveyAndContin.Title_Date_Received">
             </li>
             <li class="ss_form_item ">
-                <label class="ss_form_input_title ">Tax and Water Contin</label>
-               <%-- <input class="ss_form_input " ng-model="Form.FormData.surveyAndContin.Tax_and_Water_Contin">  --%>
+                <span class="label label-primary">Tax and Water Contin</span>
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Date Requested</label>
@@ -28,8 +26,7 @@
                 <input class="ss_form_input " ss-date ng-model="Form.FormData.surveyAndContin.Tax_and_Water_Date_Received">
             </li>
             <li class="ss_form_item ">
-                <label class="ss_form_input_title ">ER Contin</label>
-              <%--  <input class="ss_form_input " ng-model="Form.FormData.surveyAndContin.ER_Contin"> --%>
+                <span class="label label-primary">ER Contin</span>
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Date Requested</label>

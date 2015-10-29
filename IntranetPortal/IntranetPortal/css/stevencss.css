@@ -176,9 +176,10 @@
 	font: 18px 'Source Sans Pro' !important;
 }
 
-.dxsplControl_MetropolisBlue .header, .dxsplControl_MetropolisBlue #messageBody, .dxsplControl_MetropolisBlue .content {
-	font-family: 'Source Sans Pro' !important;
-}
+	.dxsplControl_MetropolisBlue .header, .dxsplControl_MetropolisBlue #messageBody, .dxsplControl_MetropolisBlue .content {
+		font-family: 'Source Sans Pro' !important;
+	}
+
 .menuItem:hover {
 	background-color: #ff400d;
 	color: white !important;
@@ -2360,14 +2361,6 @@ li.mag_tabv.active {
 		opacity: 0;
 	}
 
-.input-group-addon {
-	padding: 6px 6px;
-	background-color: white;
-	border: 0;
-	border-bottom: 1px solid #dde0e7;
-	border-radius: 0;
-}
-
 .tab-switch li {
 	font-size: 14px;
 }
@@ -2572,3 +2565,28 @@ li.mag_tabv.active {
 	.btn-round.btn-lg {
 		border-radius: 24px;
 	}
+
+li.clearfix {
+	list-style: none;
+}
+
+.watermark {
+	padding: 5px;
+	border: 2px #c8c8c8 dotted;
+	font: 16px arial;
+	color: #c8c8c8;
+	font-weight: bold;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.panel-condensed .panel-body {
+	padding: 4px;
+}
+.panel-condensed .panel-heading{
+	padding: 4px;
+}
+
+.panel-condensed li {
+	list-style: none
+}

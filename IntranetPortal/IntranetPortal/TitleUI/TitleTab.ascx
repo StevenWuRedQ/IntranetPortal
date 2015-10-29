@@ -68,13 +68,14 @@
             </div>
 
             <div class="shortSaleUI">
+
                 <ul class="nav nav-tabs overview_tabs" role="tablist">
                     <li style="font-size: 12px" class="short_sale_tab active"><a class="shot_sale_tab_a" href="#TitleInfoTab" role="tab" data-toggle="tab">Info</a></li>
                     <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleOwnerLiensTab" role="tab" data-toggle="tab">Owner Liens</a></li>
                     <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleBuildingLiensTab" role="tab" data-toggle="tab">Building Liens</a></li>
                     <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleSurveyAndContinTab" role="tab" data-toggle="tab">Surveys And Contins</a></li>
+                    <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleFeeClearanceTab" role="tab" data-toggle="tab">Fee Breakdown</a></li>
                     <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitlePreclosingTab" role="tab" data-toggle="tab">Preclosing Docs</a></li>
-                    <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleFeeClearanceTab" role="tab" data-toggle="tab">Fee Clearance</a></li>
                 </ul>
 
                 <!-- Tab panes -->
@@ -93,14 +94,15 @@
                         <div class="tab-pane" id="TitleSurveyAndContinTab">
                             <uc1:TitleSurveyAndContin runat="server" ID="TitleSurveyAndContin" />
                         </div>
-                        <div class="tab-pane" id="TitlePreclosingTab">
-                            <uc1:TitlePreclosing runat="server" ID="TitlePreclosing" />
-                        </div>
                         <div class="tab-pane" id="TitleFeeClearanceTab">
                             <uc1:TitleFeeClearance runat="server" ID="TitleFeeClearance" />
                         </div>
+                        <div class="tab-pane" id="TitlePreclosingTab">
+                            <uc1:TitlePreclosing runat="server" ID="TitlePreclosing" />
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -179,84 +181,48 @@
 </script>
 <script>
     angular.module("PortalApp").controller("TitleController", function ($scope, $timeout,$http, ptCom, ptContactServices, ptLeadsService, ptShortsSaleService) {
+
+        $scope.OwnerModel = function (name){
+            this.name=name;
+            this.Mortgages= [{}];                   
+            this.Lis_Pendens= [{}];
+            this.Judgements= [{}];
+            this.ECB_Notes= [{}];
+            this.PVB_Notes= [{}];
+            this.Bankruptcy_Notes= [{}];
+            this.UCCs= [{}];
+            this.FederalTaxLiens= [{}];
+            this.MechanicsLiens= [{}];
+                this.shownlist = [false,false,false,false,false,false,false,false,false]
+
+            
+           
+        }
+        $scope.FormModel = function(){
+            this.FormData =  {
+                Comments: [],
+                Owners: [new $scope.OwnerModel("Prior Owner Liens"), new $scope.OwnerModel("Current Owner Liens")]
+            }
+        }
+        /* end model define*/
+
         $scope.arrayRemove = ptCom.arrayRemove;
         $scope.ptCom = ptCom;
         $scope.ptContactServices = ptContactServices;
         $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
-        $scope.Form = {
-            FormData: {
-                Comments: [],
-                Owners: [{
-                    name: "Prior Owner Liens",
-                    Mortgages: [{}],                        
-                    Lis_Pendens: [{}],
-                    Judgements: [{}],
-                    ECB_Notes: [{}],
-                    PVB_Notes: [{}],
-                    Bankruptcy_Notes: [{}],
-                    UCCs: [{}],
-                    FederalTaxLiens: [{}],
-                    MechanicsLiens: [{}],
-
-                    Mortgages_Show: false,
-                    Mortgages_Status: '',
-                    Lis_Pendens_Show: false,
-                    Lis_Pendens_Status: '',
-                    Judgements_Show: false,
-                    Judgements_Status: '',
-                    ECB_Notes_Show: false,
-                    ECB_Notes_Status: '',
-                    PVB_Notes_Show: false,
-                    PVB_Notes_Status: '',
-                    Bankruptcy_Show: false,
-                    Bankruptcy_Status: '',
-                    UCCs_Show: false,
-                    UCCs_Status: '',
-                    FederalTaxLiens_Show: false,
-                    FederalTaxLiens_Status: '',
-                    MechanicsLiens_Show: false,
-                    MechanicsLiens_Status: ''
-                }, {
-                    name: "Current Owner Liens",
-                    Mortgages: [{}],
-                    Lis_Pendens: [{}],
-                    Judgements: [{}],
-                    ECB_Notes: [{}],
-                    PVB_Notes: [{}],
-                    Bankruptcy_Notes: [{}],
-                    UCCs: [{}],
-                    FederalTaxLiens: [{}],
-                    MechanicsLiens: [{}],
-
-                    Mortgages_Show: true,
-                    Mortgages_Status: '',
-                    Lis_Pendens_Show: true,
-                    Lis_Pendens_Status: '',
-                    Judgements_Show: true,
-                    Judgements_Status: '',
-                    ECB_Notes_Show: true,
-                    ECB_Notes_Status: '',
-                    PVB_Notes_Show: true,
-                    PVB_Notes_Status: '',
-                    Bankruptcy_Show: true,
-                    Bankruptcy_Status: '',
-                    UCCs_Show: true,
-                    UCCs_Status: '',
-                    FederalTaxLiens_Show: true,
-                    FederalTaxLiens_Status: '',
-                    MechanicsLiens_Show: true,
-                    MechanicsLiens_Status: '',
-                    active: true
-                }]
-            }
-        }
+        $scope.Form = new $scope.FormModel();
         $scope.ReloadedData = {};
         /* end data define*/
 
         $scope.Load = function (data) {
-            $scope.reload();
+            $scope.Form = new $scope.FormModel()
+            $scope.ReloadedData = {};
             ptCom.nullToUndefined(data);
             $.extend(true, $scope.Form, data);
+            if(!$scope.Form.FormData.Owners[0].shownlist){
+                $scope.Form.FormData.Owners[0].shownlist = [false,false,false,false,false,false,false,false,false];
+                $scope.Form.FormData.Owners[1].shownlist = [false,false,false,false,false,false,false,false,false];
+            }
             $scope.BBLE = data.Tag;
             if($scope.BBLE){
                 ptLeadsService.getLeadsByBBLE($scope.BBLE, function (res) {
@@ -267,7 +233,9 @@
                 });
                 $scope.getStatus($scope.BBLE);
             }
+            $scope.$broadcast('ownerliens-reload');
             $scope.$broadcast('clearance-reload');
+
             $scope.checkReadOnly();
             $scope.$apply();
         }
@@ -276,76 +244,6 @@
         }
         /* end convention function */
 
-        $scope.reload = function () {
-            $scope.Form = {
-                FormData: {
-                    Comments: [],
-                    Owners: [{
-                        name: "Prior Owner Liens",
-                        Mortgages: [{}],                        
-                        Lis_Pendens: [{}],
-                        Judgements: [{}],
-                        ECB_Notes: [{}],
-                        PVB_Notes: [{}],
-                        Bankruptcy_Notes: [{}],
-                        UCCs: [{}],
-                        FederalTaxLiens: [{}],
-                        MechanicsLiens: [{}],
-
-                        Mortgages_Show: false,
-                        Mortgages_Status: '',
-                        Lis_Pendens_Show: false,
-                        Lis_Pendens_Status: '',
-                        Judgements_Show: false,
-                        Judgements_Status: '',
-                        ECB_Notes_Show: false,
-                        ECB_Notes_Status: '',
-                        PVB_Notes_Show: false,
-                        PVB_Notes_Status: '',
-                        Bankruptcy_Show: false,
-                        Bankruptcy_Status: '',
-                        UCCs_Show: false,
-                        UCCs_Status: '',
-                        FederalTaxLiens_Show: false,
-                        FederalTaxLiens_Status: '',
-                        MechanicsLiens_Show: false,
-                        MechanicsLiens_Status: ''
-                    }, {
-                        name: "Current Owner Liens",
-                        Mortgages: [{}],
-                        Lis_Pendens: [{}],
-                        Judgements: [{}],
-                        ECB_Notes: [{}],
-                        PVB_Notes: [{}],
-                        Bankruptcy_Notes: [{}],
-                        UCCs: [{}],
-                        FederalTaxLiens: [{}],
-                        MechanicsLiens: [{}],
-
-                        Mortgages_Show: true,
-                        Mortgages_Status: '',
-                        Lis_Pendens_Show: true,
-                        Lis_Pendens_Status: '',
-                        Judgements_Show: true,
-                        Judgements_Status: '',
-                        ECB_Notes_Show: true,
-                        ECB_Notes_Status: '',
-                        PVB_Notes_Show: true,
-                        PVB_Notes_Status: '',
-                        Bankruptcy_Show: true,
-                        Bankruptcy_Status: '',
-                        UCCs_Show: true,
-                        UCCs_Status: '',
-                        FederalTaxLiens_Show: true,
-                        FederalTaxLiens_Status: '',
-                        MechanicsLiens_Show: true,
-                        MechanicsLiens_Status: '',
-                        active: true
-                    }]
-                }
-            }
-            $scope.ReloadedData = {};
-        };
         $scope.swapOwnerPos = function (index) {
             $timeout(function () {
                 var temp1 = $scope.Form.FormData.Owners[index];

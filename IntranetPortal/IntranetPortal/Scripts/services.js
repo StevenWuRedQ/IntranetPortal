@@ -229,6 +229,20 @@ angular.module('PortalApp')
         this.removeOverlay = function(){
             $rootScope.removeOverlay();
         }
+
+        // get next index of value in the array, 
+        this.next = function (array, value, from) {
+            return array.indexOf(value, from);
+        }
+
+        this.previous = function (array, value, from) {
+            var index = -1;
+            for (var i = 0 ; i < from ; i++) {
+                if(array[i] === value)
+                    index = i
+            }
+            return index;
+        }
     }]);
 
 angular.module('PortalApp')

@@ -3,7 +3,6 @@
 <div class="ss_form ">
     <h4 class="ss_form_title ">SCHEDULE A</h4>
     <div class="ss_border">
-
         <ul class="ss_form_box clearfix">
             <li class="ss_from_item3">
                 <label class="ss_form_input_title ">PROPERTY ADDRESS</label>
@@ -12,8 +11,9 @@
         </ul>
     </div>
 </div>
+
 <div class="ss_form ">
-    <h4 class="ss_form_title ">TITLE REPORT</h4>
+    <h4 class="ss_form_title ">Title Report</h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
@@ -26,7 +26,7 @@
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Order Date</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Order_Date" pt-init-model="SsCase.BuyerTitle.ReportOrderDate"> 
+                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Order_Date" pt-init-model="SsCase.BuyerTitle.ReportOrderDate">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Confirmation Date</label>
@@ -43,8 +43,9 @@
         </ul>
     </div>
 </div>
+
 <div class="ss_form ">
-    <h4 class="ss_form_title ">BUILDING Description</h4>
+    <h4 class="ss_form_title ">Building Description</h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
@@ -70,69 +71,84 @@
         </ul>
     </div>
 </div>
+
 <div class="ss_form ">
-    <h4 class="ss_form_title ">CHAIN OF TITLE - Status</h4>
+    <h4 class="ss_form_title ">Chain Of Tile - Status</h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
-            <li class="ss_form_item ">
+            <li class="ss_form_item3">
                 <label class="ss_form_input_title ">Title Vested</label>
-                <input class="ss_form_input " ng-model="Form.FormData.info.Title_Vested"></input>
+                <input class="ss_form_input " ng-model="Form.FormData.info.Title_Vested" />
             </li>
-        </ul>
-        <ul class="ss_form_box clearfix">
-            <li class="ss_form_item ">
+
+            <li class="clearfix"></li>
+            <li class="ss_form_item_line">
+                <label class="ss_form_input_title">Deed Chain</label>
+                <textarea class="edit_text_area text_area_ss_form " ng-model="Form.FormData.info.DeedChain"></textarea>
+            </li>
+
+            <li class="clearfix"></li>
+            <li class="ss_form_item">
                 <label class="ss_form_input_title ">Consideration</label>
                 <pt-radio name="CHAINOFTITLE-Status_Consideration0" model="Form.FormData.info.Consideration"></pt-radio>
             </li>
-        </ul>
-        <div class="ss_form_item_line nga-fast nga-fade" ng-show="Form.FormData.info.Consideration">
-            <label class="ss_form_input_title" >Consideration Note</label>
-            <textarea class="edit_text_area text_area_ss_form " model="Form.FormData.info.Consideration_Note"></textarea>
-        </div>
-        <ul class="ss_form_box clearfix">
-            <li class="ss_form_item ">
+
+            <li class="clearfix"></li>
+            <li class="ss_form_item_line nga-fast nga-fade" ng-show="Form.FormData.info.Consideration">
+                <label class="ss_form_input_title">Consideration Note</label>
+                <textarea class="edit_text_area text_area_ss_form " ng-model="Form.FormData.info.Consideration_Note"></textarea>
+            </li>
+
+            <li class="clearfix"></li>
+            <li class="ss_form_item">
                 <label class="ss_form_input_title ">Life Estate</label>
                 <pt-radio name="CHAINOFTITLE-Status_LifeEstate0" model="Form.FormData.info.Life_Estate"></pt-radio>
             </li>
-        </ul>
-        <div class="ss_form_item_line nga-fast nga-fade" ng-show="Form.FormData.info.Life_Estate">
-            <label class="ss_form_input_title" >Life Estate Note</label>
-            <textarea class="edit_text_area text_area_ss_form " model="Form.FormData.info.Life_Estate_Note"></textarea>
-        </div>
-        <ul class="ss_form_box clearfix">
-            <li class="ss_form_item ">
+
+            <li class="clearfix"></li>
+            <li class="ss_form_item_line nga-fast nga-fade" ng-show="Form.FormData.info.Life_Estate">
+                <label class="ss_form_input_title">Life Estate Note</label>
+                <textarea class="edit_text_area text_area_ss_form " ng-model="Form.FormData.info.Life_Estate_Note"></textarea>
+            </li>
+
+            <li class="clearfix"></li>
+            <li class="ss_form_item">
                 <label class="ss_form_input_title ">Devolution of Title</label>
                 <pt-radio name="CHAINOFTITLE-Status_DevolutionofTitle0" model="Form.FormData.info.Devolution_of_Title"></pt-radio>
             </li>
-        </ul>
-        <div class="ss_form_item_line nga-fast nga-fade" ng-show="Form.FormData.info.Devolution_of_Title">
-            <label class="ss_form_input_title" >Devolution of Title Note</label>
-            <textarea class="edit_text_area text_area_ss_form " model="Form.FormData.info.Devolution_of_Title_Note"></textarea>
-        </div>
-    </div>
-</div>
-<div class="ss_form ">
-    <h4 class="ss_form_title ">SCHEDULE A DESCRIPTION</h4>
-    <div class="ss_border">
-        <ul class="ss_form_box clearfix">
-            <li class="ss_form_item ">
-                <label class="ss_form_input_title ">fillable</label>
-                 <pt-file upload-type="title" file-bble="BBLE"  file-id="info_fillable" file-model="Form.FormData.info.fillable"></pt-file>
+
+            <li class="clearfix"></li>
+            <li class="ss_form_item_line nga-fast nga-fade" ng-show="Form.FormData.info.Devolution_of_Title">
+                <label class="ss_form_input_title">Devolution of Title Note</label>
+                <textarea class="edit_text_area text_area_ss_form " ng-model="Form.FormData.info.Devolution_of_Title_Note"></textarea>
             </li>
         </ul>
     </div>
 </div>
+
+<div class="ss_form ">
+    <h4 class="ss_form_title ">Schedule A Description</h4>
+    <div class="ss_border">
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title ">fillable</label>
+                <pt-file upload-type="title" file-bble="BBLE" file-id="info_fillable" file-model="Form.FormData.info.fillable"></pt-file>
+            </li>
+        </ul>
+    </div>
+</div>
+
 <div class="ss_form ">
     <h4 class="ss_form_title ">Covenants and Restrictions</h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
-            <li class="ss_form_item ">
+            <li class="ss_form_item3">
                 <label class="ss_form_input_title ">Covenants/Agremeents/Restriction</label>
-                <input class="ss_form_input " ng-model="Form.FormData.info.Covenants_Agremeents_Restriction">
+                <input class="ss_form_input " ng-model="Form.FormData.info.Covenants_Agremeents_Restriction" />
             </li>
-            <li class="ss_form_item ">
+            <li class="ss_form_item3">
                 <label class="ss_form_input_title ">Contract of Sale</label>
-                <input class="ss_form_input " ng-model="Form.FormData.info.Contract_of_Sale">
+                <input class="ss_form_input " ng-model="Form.FormData.info.Contract_of_Sale" />
             </li>
         </ul>
     </div>
