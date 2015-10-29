@@ -400,7 +400,7 @@ Partial Public Class Lead
 
                 'Expired user Task
                 WorkflowService.ExpireTaskProcess(bble)
-                UserTask.ExpiredTasks(bble)
+                UserTask.ExpiredTasks(bble, lead.EmployeeName)
 
                 If Not originateStatus = LeadStatus.DeadEnd Then
                     Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
@@ -585,7 +585,7 @@ Partial Public Class Lead
 
                 'Expired the task on this bble
                 WorkflowService.ExpiredLeadsProcess(BBLE)
-                UserTask.ExpiredTasks(BBLE)
+                UserTask.ExpiredTasks(BBLE, originator)
                 UserAppointment.ExpiredAppointmentByBBLE(BBLE)
 
                 Dim comments = String.Format("Leads Reassign from {0} to {1}.", originator, empName)

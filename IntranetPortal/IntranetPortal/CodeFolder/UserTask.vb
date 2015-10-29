@@ -123,12 +123,12 @@
         End Using
     End Function
 
-    Public Shared Sub ExpiredTasks(bble As String)
+    Public Shared Sub ExpiredTasks(bble As String, createBy As String)
         Using ctx As New Entities
-            Dim tasks = ctx.UserTasks.Where(Function(t) t.BBLE = bble And t.Status = TaskStatus.Active)
+            Dim tasks = ctx.UserTasks.Where(Function(t) t.BBLE = bble And t.Status = TaskStatus.Active And t.CreateBy = createBy)
 
             For Each task In tasks
-                If task IsNot Nothing Then
+                If task IsNot Nothing And task.TaskMode <> UserTaskMode.Approval Then
                     task.Status = UserTask.TaskStatus.Complete
                 End If
             Next
