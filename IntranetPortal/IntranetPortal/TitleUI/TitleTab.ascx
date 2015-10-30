@@ -21,7 +21,8 @@
                     <div class="col-md-2 pull-right" style="margin: 10px 0">
                         <span class="btn btn-default btn-round" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+ leadsInfoBBLE, 'Maps')">Map</span>
                         <br />
-                        <span class="btn btn-default btn-circle icon_btn" ng-click="completeCase()" ng-style="Status==1?{'background-color': '#80c02c'}:{}"><i class="fa fa-check"></i></span>
+                        <span class="btn btn-default btn-circle icon_btn" ng-click="completeCase()" ng-style="Status==1?{'background-color': '#80c02c'}:{}" uib-tooltip="Complete case"><i class="fa fa-check"></i></span>
+                        <span class="btn btn-default btn-circle icon_btn" ng-click="generateXML()" uib-tooltip="Generate XML"><i class="fa fa-download"></i></span>
                     </div>
                 </div>
 
@@ -284,6 +285,16 @@
             },function error(){
                 $scope.Status = -1;
                 console.log("get status error")
+            })
+        }
+
+        $scope.generateXML = function(){
+            $http({
+                url: "/api/Title/GenerateExcel",
+                method: "POST",
+                data: JSON.stringify($scope.Form)
+            }).then(function(res){
+                STDownloadFile("/api/ConstructionCases/GetGeneratedExcel", "titlereport.xlsx")
             })
         }
 

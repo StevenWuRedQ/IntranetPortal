@@ -17,6 +17,7 @@
                 <label class="ss_form_input_title ">Emergency Repairs search</label>
                 <pt-radio name="Emergency_Repairs_search" model="Form.FormData.buildingLiens.Emergency_Repairs_search"></pt-radio>
             </li>
+
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Upload</label>
                 <pt-file file-bble="BBLE" upload-type="title" file-id="Emergency_Repairs_search_Upload" file-model="Form.FormData.buildingLiens.Emergency_Repairs_search_Upload"></pt-file>
@@ -27,6 +28,7 @@
                 <label class="ss_form_input_title ">Fire Search</label>
                 <pt-radio name="FireSearch0" model="Form.FormData.buildingLiens.Fire_Search"></pt-radio>
             </li>
+
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Upload</label>
                 <pt-file file-bble="BBLE" upload-type="title" file-id="Fire_Search_Upload" file-model="Form.FormData.buildingLiens.Fire_Search_Upload"></pt-file>
@@ -37,6 +39,7 @@
                 <label class="ss_form_input_title ">Street Report</label>
                 <pt-radio name="StreetReport0" model="Form.FormData.buildingLiens.Street_Report"></pt-radio>
             </li>
+
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Upload</label>
                 <pt-file file-bble="BBLE" upload-type="title" file-id="Street_Report_Upload" file-model="Form.FormData.buildingLiens.Street_Report_Upload"></pt-file>
@@ -47,6 +50,7 @@
                 <label class="ss_form_input_title ">Taxes and Water</label>
                 <pt-radio name="TaxesandWater0" model="Form.FormData.buildingLiens.Taxes_and_Water"></pt-radio>
             </li>
+
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Upload</label>
                 <pt-file file-bble="BBLE" upload-type="title" file-id="Taxes_and_Water_Upload" file-model="Form.FormData.buildingLiens.Taxes_and_Water_Upload"></pt-file>
@@ -55,7 +59,7 @@
         </ul>
         <div class="ss_form_item_line">
             <label class="ss_form_input_title ">Notes</label>
-            <textarea class="edit_text_area text_area_ss_form " model="Form.FormData.buildingLiens.TitleBuildingLiens_Notes"></textarea>
+            <textarea class="edit_text_area text_area_ss_form" ng-model="Form.FormData.buildingLiens.TitleBuildingLiens_Notes"></textarea>
         </div>
     </div>
 </div>

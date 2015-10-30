@@ -2,8 +2,6 @@
 Imports System.Net.Mail
 Imports System.Net
 Imports System.IO
-Imports System.Data.SqlClient
-Imports System.Data.Entity.Core.EntityClient
 Imports System.Web.Script.Serialization
 Imports System.Text.RegularExpressions
 Imports System.Globalization

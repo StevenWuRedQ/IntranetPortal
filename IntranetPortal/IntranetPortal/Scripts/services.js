@@ -38,7 +38,7 @@ function ScopeResetCaseDataChange(getDataFunc) {
     $('#CaseData').val(JSON.stringify(getDataFunc()));
 }
 
-function ScopeAutoSave(getDataFunc, SaveFunc, headEelem,makeSrueRefersh) {
+function ScopeAutoSave(getDataFunc, SaveFunc, headEelem, makeSrueRefersh) {
     if ($(headEelem).length <= 0) {
         return;
     }
@@ -72,8 +72,7 @@ function ScopeSetLastUpdateTime(url) {
     })
 }
 
-function CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyUserFunc)
-{
+function CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyUserFunc) {
     var url = urlFunc()
     $.getJSON(url, function (data) {
         var lastUpdateTime = JSON.stringify(data);
@@ -131,13 +130,13 @@ angular.module('PortalApp')
             if (model && index < model.length) {
                 if (confirm) {
                     var x = this.confirm("Delete This?", "")
-                        x.then(function (r) {
-                            if (r) {
-                                var deleteObj = model.splice(index, 1)[0];
-                                if (callback) callback(deleteObj);
-                            }
+                    x.then(function (r) {
+                        if (r) {
+                            var deleteObj = model.splice(index, 1)[0];
+                            if (callback) callback(deleteObj);
+                        }
 
-                        })
+                    })
 
                 } else {
                     model.splice(index, 1);
@@ -226,7 +225,7 @@ angular.module('PortalApp')
             $rootScope.addOverlay();
         }
 
-        this.removeOverlay = function(){
+        this.removeOverlay = function () {
             $rootScope.removeOverlay();
         }
 
@@ -238,11 +237,27 @@ angular.module('PortalApp')
         this.previous = function (array, value, from) {
             var index = -1;
             for (var i = 0 ; i < from ; i++) {
-                if(array[i] === value)
+                if (array[i] === value)
                     index = i
             }
             return index;
         }
+
+        this.saveBlob = function (blob, fileName) {
+
+            var a = document.createElement("a");            
+            a.style = "display: none";
+            var xurl = window.URL.createObjectURL(blob);
+            a.href = xurl;
+            a.download = fileName;
+
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(xurl);
+            document.body.removeChild(a);
+
+        }
+
     }]);
 
 angular.module('PortalApp')

@@ -1,7 +1,10 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Net.Http
+Imports System.Net.Http.Headers
 Imports System.Web.Http
 Imports System.Web.Http.Description
+Imports Newtonsoft.Json.Linq
 
 Namespace Controllers
     Public Class TitleController
@@ -64,5 +67,30 @@ Namespace Controllers
 
             Return BadRequest("Can't find File")
         End Function
+
+        <Route("api/Title/GenerateExcel")>
+        Function GenerateExcel(<FromBody> queryString As JObject) As IHttpActionResult
+
+            Dim bytes = Core.ExcelBuilder.BuildTitleReport(queryString)
+            If bytes.Length > 0 Then
+                Using fs = File.Open(HttpContext.Current.Server.MapPath("~/TempDataFile/checkrequest.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
+                    fs.Write(bytes, 0, bytes.Length)
+                End Using
+            End If
+            Return Ok()
+        End Function
+
+        <Route("api/ConstructionCases/GetGeneratedExcel")>
+        Function GetGeneratedExcel() As HttpResponseMessage
+            Dim response = New HttpResponseMessage(HttpStatusCode.OK)
+            Dim fs = New FileStream(HttpContext.Current.Server.MapPath("~/TempDataFile/checkrequest.xlsx"), FileMode.Open)
+            Dim bfs = New BinaryReader(fs).ReadBytes(fs.Length)
+            response.Content = New ByteArrayContent(bfs)
+            response.Content.Headers.Add("Content-Disposition", "inline; filename=titlereport.xlsx")
+            response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            response.Content.Headers.ContentLength = bfs.Length
+            Return response
+        End Function
+
     End Class
 End Namespace

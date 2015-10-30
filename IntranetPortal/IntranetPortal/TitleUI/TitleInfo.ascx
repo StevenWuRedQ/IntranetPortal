@@ -8,6 +8,14 @@
                 <label class="ss_form_input_title ">PROPERTY ADDRESS</label>
                 <input class="ss_form_input " ng-model="Form.FormData.info.PROPERTY_ADDRESS" pt-init-model="LeadsInfo.PropertyAddress">
             </li>
+            <li class="ss_from_item" hidden>
+                <label class="ss_form_input_title ">Block</label>
+                <input class="ss_form_input " ng-model="Form.FormData.info.Block" pt-init-model="LeadsInfo.Block">
+            </li>
+            <li class="ss_from_item" hidden>
+                <label class="ss_form_input_title ">Lot</label>
+                <input class="ss_form_input " ng-model="Form.FormData.info.Lot" pt-init-model="LeadsInfo.Lot">
+            </li>
         </ul>
     </div>
 </div>
@@ -63,10 +71,6 @@
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Certificate</label>
                 <pt-radio name="BUILDINGDescription_Certificate0" model="Form.FormData.info.Certificate"></pt-radio>
-            </li>
-            <li class="ss_form_item ">
-                <label class="ss_form_input_title ">Total Units</label>
-                <input class="ss_form_input " ng-model="Form.FormData.info.Total_Units">
             </li>
         </ul>
     </div>

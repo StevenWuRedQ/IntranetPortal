@@ -10,7 +10,7 @@
         </ul>
         <div class="ss_form_item_line">
             <label class="ss_form_input_title ">Notes</label>
-            <textarea class="edit_text_area text_area_ss_form " model="Form.FormData.preclosing.POA_Notes"></textarea>
+            <textarea class="edit_text_area text_area_ss_form " ng-model="Form.FormData.preclosing.POA_Notes"></textarea>
         </div>
     </div>
 </div>
@@ -27,7 +27,7 @@
 
         <div class="ss_form_item_line">
             <label class="ss_form_input_title ">Notes</label>
-            <textarea class="edit_text_area text_area_ss_form " model="Form.FormData.preclosing.WILLS_Notes"></textarea>
+            <textarea class="edit_text_area text_area_ss_form " ng-model="Form.FormData.preclosing.WILLS_Notes"></textarea>
         </div>
     </div>
 </div>
@@ -77,7 +77,7 @@
         </ul>
         <div class="ss_form_item_line">
             <label class="ss_form_input_title ">Notes</label>
-            <textarea class="edit_text_area text_area_ss_form " model="Form.FormData.preclosing.Short_Sale_Documents_Notes"></textarea>
+            <textarea class="edit_text_area text_area_ss_form" ng-model="Form.FormData.preclosing.Short_Sale_Documents_Notes"></textarea>
         </div>
     </div>
 </div>

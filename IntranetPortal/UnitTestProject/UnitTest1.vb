@@ -3,6 +3,7 @@ Imports System.Net
 Imports System.Text
 Imports IntranetPortal.Data
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
+Imports Newtonsoft.Json.Linq
 
 <TestClass()> Public Class CheckingComplaintsTest
 
@@ -14,7 +15,7 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 
     End Sub
 
-     <TestMethod()>
+    <TestMethod()>
     Public Sub DispositionHistory()
         Dim jsonResult = <string>
                              <![CDATA[
@@ -36,6 +37,33 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 
     <TestMethod()>
     Public Sub WriteStreetName()
+
+
+
+    End Sub
+
+    <TestMethod()>
+    Public Sub testJson()
+        Dim temp As JToken
+
+        Dim s = <string>
+                   {
+                        'CPU': 'Intel',
+                        'Drives': {
+                                    'Good': 'nima'
+                                    }
+                   }
+                   </string>
+
+        Dim o = JObject.Parse(s)
+        Try
+            temp = o.SelectToken("CPU")
+            temp = o.SelectToken("Memory")
+            temp = o.SelectToken("Drives.Good")
+        Catch ex As Exception
+
+        End Try
+
 
 
 
