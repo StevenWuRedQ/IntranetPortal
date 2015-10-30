@@ -509,12 +509,10 @@
                         var xdata = $scope.filterDate(rdata);
                         $scope.reportData = rdata;
                         $scope.sqlText = res.data[1];
-
                     })
                 } else {
                     alert("Query is empty!");
                 }
-
             }
 
             $scope.reload();

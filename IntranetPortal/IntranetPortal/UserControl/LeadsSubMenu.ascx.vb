@@ -74,7 +74,11 @@ Public Class LeadsSubMenu
 
     Protected Sub leadStatusCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
         If e.Parameter.Length > 0 Then
-            Dim AddComment = e.Parameter.Split("|").ToList.Item(2)
+            Dim AddComment = Nothing
+            If e.Parameter.Split("|").Count > 2 Then
+                AddComment = e.Parameter.Split("|").ToList.Item(2)
+            End If
+
             If e.Parameter.StartsWith("Tomorrow") Then
                 If e.Parameter.Contains("|") Then
                     Dim bble = e.Parameter.Split("|")(1)

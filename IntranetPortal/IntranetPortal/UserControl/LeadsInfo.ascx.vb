@@ -521,7 +521,7 @@ Public Class LeadsInfo1
                     Dim type = params(2)
                     Dim comments = String.Format("Home Owner info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
                     If Not DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
-                        Throw New Exception("This Lead didn't have owner info in our database.")
+                        Throw New CallbackException("This Lead didn't have owner info in our database.")
                     End If
                     LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.RefreshLeads)
                 End If
@@ -542,7 +542,7 @@ Public Class LeadsInfo1
                         context.HomeOwnerPhones.Add(p)
                         context.SaveChanges()
                     Else
-                        Throw New Exception("This Phone# already exist.")
+                        Throw New CallbackException("This Phone# already exist.")
                     End If
                 End Using
             End If
