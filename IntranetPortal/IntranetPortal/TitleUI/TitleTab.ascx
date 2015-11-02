@@ -194,7 +194,7 @@
             this.UCCs= [{}];
             this.FederalTaxLiens= [{}];
             this.MechanicsLiens= [{}];
-                this.shownlist = [false,false,false,false,false,false,false,false,false]
+            this.shownlist = [false,false,false,false,false,false,false,false,false]
 
             
            
@@ -229,8 +229,9 @@
                 ptLeadsService.getLeadsByBBLE($scope.BBLE, function (res) {
                     $scope.LeadsInfo = res;
                 });
-                ptShortsSaleService.getShortSaleCaseByBBLE($scope.BBLE, function (res) {
-                    $scope.SsCase = res;
+                ptShortsSaleService.getBuyerTitle($scope.BBLE, function (error, res) {
+                    if(error) console.log(error);
+                    if(res) $scope.BuyerTitle = res.data;
                 });
                 $scope.getStatus($scope.BBLE);
             }
@@ -240,7 +241,10 @@
             $scope.checkReadOnly();
             $scope.$apply();
         }
-        $scope.Get = function () {
+        $scope.Get = function (isSave) {
+            if(isSave){
+                $scope.updateBuyerTitle();
+            }            
             return $scope.Form;
         }
         /* end convention function */
@@ -296,6 +300,57 @@
             }).then(function(res){
                 STDownloadFile("/api/ConstructionCases/GetGeneratedExcel", "titlereport.xlsx")
             })
+        }
+
+        $scope.updateBuyerTitle = function(){
+            var updateFlag = false;
+            var data = $scope.BuyerTitle;
+            var newdata = $scope.Form.FormData.info
+            if(data && newdata){        
+
+                if(newdata.Company != data.CompanyName){
+                    data.CompanyName = newdata.Company;
+                    updateFlag = true;
+                }
+
+                if(newdata.Title_Num != data.OrderNumber){
+                    data.OrderNumber = newdata.Title_Num;
+                    updateFlag = true;
+                }
+
+                if(ptCom.toUTCLocaleDateString(newdata.Order_Date) != ptCom.toUTCLocaleDateString(data.ReportOrderDate)){
+                    updateFlag = true;
+                }
+                data.ReportOrderDate = newdata.Order_Date;
+
+                if(ptCom.toUTCLocaleDateString(newdata.Confirmation_Date) != ptCom.toUTCLocaleDateString(data.ConfirmationDate)){
+                    updateFlag = true;
+                }
+                data.ConfirmationDate = newdata.Confirmation_Date;
+        
+                if(ptCom.toUTCLocaleDateString(newdata.Received_Date) != ptCom.toUTCLocaleDateString(data.ReceivedDate)){
+                    updateFlag = true;
+                }
+                data.ReceivedDate = newdata.Received_Date;
+
+                if(ptCom.toUTCLocaleDateString(newdata.Initial_Reivew_Date) != ptCom.toUTCLocaleDateString(data.ReviewedDate)){
+                    updateFlag = true;
+                }
+                data.ReviewedDate = newdata.Initial_Reivew_Date;
+
+                if(updateFlag){
+                    $http({
+                        url: "/api/ShortSale/UpdateBuyerTitle",
+                        method: 'POST',
+                        data: JSON.stringify(data)
+                    }).then(function succ(res){
+                        if(!res)console.log("fail to update buyertitle");
+                    }
+                    ,function error(){
+                        console.log("fail to update buyertitle")
+                    })
+                }
+            }
         }
 
     })

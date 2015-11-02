@@ -26,27 +26,27 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Company</label>
-                <input class="ss_form_input " ng-model="Form.FormData.info.Company" pt-init-model="SsCase.BuyerTitle.CompanyName">
+                <input class="ss_form_input " ng-model="Form.FormData.info.Company" pt-init-model="BuyerTitle.CompanyName">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Title Num</label>
-                <input class="ss_form_input " ng-model="Form.FormData.info.Title_Num" pt-init-model="SsCase.BuyerTitle.OrderNumber">
+                <input class="ss_form_input " ng-model="Form.FormData.info.Title_Num" pt-init-model="BuyerTitle.OrderNumber">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Order Date</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Order_Date" pt-init-model="SsCase.BuyerTitle.ReportOrderDate">
+                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Order_Date" pt-init-model="BuyerTitle.ReportOrderDate">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Confirmation Date</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Confirmation_Date" pt-init-model="SsCase.BuyerTitle.ConfirmationDate">
+                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Confirmation_Date" pt-init-model="BuyerTitle.ConfirmationDate">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Received Date</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Received_Date" pt-init-model="SsCase.BuyerTitle.ReceivedDate">
+                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Received_Date" pt-init-model="BuyerTitle.ReceivedDate">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Initial Reivew Date</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Initial_Reivew_Date">
+                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Initial_Reivew_Date" pt-init-model="BuyerTitle.ReviewedDate">
             </li>
         </ul>
     </div>

@@ -258,6 +258,10 @@ angular.module('PortalApp')
 
         }
 
+        this.toUTCLocaleDateString = function (d) {
+            var tempDate = new Date(d);
+            return tempDate.getUTCMonth() + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
+        }
     }]);
 
 angular.module('PortalApp')
@@ -378,6 +382,18 @@ angular.module('PortalApp')
             );
 
         }
+
+        this.getBuyerTitle = function (bble, callback) {
+            var url = "/api/ShortSale/GetBuyerTitle?bble=";
+            $http.get(url + bble)
+            .then(function succ(res) {
+                if(callback) callback(null,res)
+            }, function error() {
+                if (callback) callback("Fail to get buyer title for bble: " + bble, null);
+            })
+
+        }
+
     }
     ]);
 

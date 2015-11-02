@@ -162,6 +162,7 @@
                                     if(this.CurrentTab.EnableAutoSave){
                                         ScopeAutoSave(angular.element(document.getElementById(name + 'Controller')).scope().Get, this.SaveData,"CaseData");
                                     }
+
                                 },
                                 LoadData: function (dataId) {
                                     var tab = this.CurrentTab;
@@ -196,7 +197,7 @@
                                 },
                                 SaveData: function () {
                                     var tab = this.CurrentTab;
-                                    var data = angular.element(document.getElementById(tab.Name + 'Controller')).scope().Get();
+                                    var data = angular.element(document.getElementById(tab.Name + 'Controller')).scope().Get(true);
                                     if(data.DataId){    //verify that data is an exsiting one
                                         var url = "/api/BusinessForm/"
                                         $.ajax({

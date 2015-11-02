@@ -740,6 +740,7 @@
     <Compile Include="Controllers\LegalECourtsController.vb" />
     <Compile Include="Controllers\ManagementController.vb" />
     <Compile Include="Controllers\ReportController.vb" />
+    <Compile Include="Controllers\ShortSaleController.vb" />
     <Compile Include="Controllers\ShortSaleLeadsInfoesController.vb" />
     <Compile Include="Controllers\TaxLiensController.vb" />
     <Compile Include="Controllers\TaxLiensODataController.vb" />
