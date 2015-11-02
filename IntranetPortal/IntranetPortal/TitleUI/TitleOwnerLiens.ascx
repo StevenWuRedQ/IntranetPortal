@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TitleOwnerLiens.ascx.vb" Inherits="IntranetPortal.TitleOwnerLiens" %>
 <div id="TitleLienCtrl" ng-controller="TitleLienCtrl">
 
-        <uib-tabset class="tab-switch">
+<uib-tabset class="tab-switch">
 <uib-tab ng-repeat="owner in Form.FormData.Owners track by owner.name" active="owner.active" disable="owner.disabled">
 <tab-heading>
     <i class="fa fa-arrow-circle-left" ng-show="$index>0" ng-click="swapOwnerPos($index)"></i>
@@ -506,7 +506,7 @@
         </div>
     </div>
 
-        </uib-tab>
+</uib-tab>
 </uib-tabset>
 </div>
 

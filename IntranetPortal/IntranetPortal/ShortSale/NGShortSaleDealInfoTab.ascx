@@ -110,7 +110,7 @@
                             <span><b>Value Expires</b>: {{value.ExpiredOn | date: 'M/d/yyyy'}}</span>
                         </div>
                         <div class="col-sm-4" style="padding: 0px">
-                            <span><b>Access</b>: {{value.ExpiredOn | date: 'M/d/yyyy'}}</span>
+                            <span><b>Access</b>: {{value.Access}}</span>
                         </div>
                         <div class="col-sm-4" style="padding: 0px">
                             <span><b>Agent Name</b>: {{value.AgentName}}</span>

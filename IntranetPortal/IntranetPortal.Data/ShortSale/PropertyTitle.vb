@@ -29,11 +29,13 @@
         End Using
     End Function
 
-    Public Shared Function UpdateBuyerTitle(title As PropertyTitle) As Boolean
+    Public Shared Function UpdateBuyerTitle(title As PropertyTitle, userName As String) As Boolean
         If title.CaseId > 0 Then
             Using ctx As New ShortSaleEntities
                 Dim saved = ctx.PropertyTitles.Where(Function(t) t.CaseId = title.CaseId And t.Type = 1).FirstOrDefault
-                If saved IsNot Nothing Then
+                Dim sscase = ctx.ShortSaleCases.Where(Function(t) t.CaseId = title.CaseId).FirstOrDefault
+
+                If saved IsNot Nothing And sscase IsNot Nothing Then
                     Try
                         saved.OrderNumber = title.OrderNumber
                         saved.CompanyName = title.CompanyName
@@ -41,6 +43,8 @@
                         saved.ReportOrderDate = title.ReportOrderDate
                         saved.ConfirmationDate = title.ConfirmationDate
                         saved.ReceivedDate = title.ReceivedDate
+                        sscase.UpdateDate = DateTime.Now
+                        sscase.UpdateBy = userName
                         ctx.SaveChanges()
                         Return True
                     Catch ex As Exception

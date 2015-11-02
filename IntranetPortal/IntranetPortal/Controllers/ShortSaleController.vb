@@ -14,7 +14,7 @@ Namespace Controllers
 
         <Route("api/ShortSale/UpdateBuyerTitle")>
         Public Function UpdateBuyerTitle(<FromBody> titleInfo As Data.PropertyTitle) As IHttpActionResult
-            Dim result = Data.PropertyTitle.UpdateBuyerTitle(titleInfo)
+            Dim result = Data.PropertyTitle.UpdateBuyerTitle(titleInfo, HttpContext.Current.User.Identity.Name)
             Return Ok(result)
         End Function
 
