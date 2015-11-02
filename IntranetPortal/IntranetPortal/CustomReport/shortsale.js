@@ -1,6 +1,6 @@
 ﻿[
     {
-        "BaseTable": "ShortSaleCase",
+        "BaseTable": "ShortSaleCases",
         "IncludeAppId":true,
         "Fields": [
             {

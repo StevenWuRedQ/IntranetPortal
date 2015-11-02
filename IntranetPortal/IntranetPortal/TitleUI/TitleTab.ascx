@@ -71,12 +71,24 @@
             <div class="shortSaleUI">
 
                 <ul class="nav nav-tabs overview_tabs" role="tablist">
-                    <li style="font-size: 12px" class="short_sale_tab active"><a class="shot_sale_tab_a" href="#TitleInfoTab" role="tab" data-toggle="tab">Info</a></li>
-                    <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleOwnerLiensTab" role="tab" data-toggle="tab">Owner Liens</a></li>
-                    <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleBuildingLiensTab" role="tab" data-toggle="tab">Building Liens</a></li>
-                    <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleSurveyAndContinTab" role="tab" data-toggle="tab">Surveys And Contins</a></li>
-                    <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitleFeeClearanceTab" role="tab" data-toggle="tab">Fee Breakdown</a></li>
-                    <li style="font-size: 12px" class="short_sale_tab "><a class="shot_sale_tab_a" href="#TitlePreclosingTab" role="tab" data-toggle="tab">Preclosing Docs</a></li>
+                    <li style="font-size: 12px" class="short_sale_tab active">
+                        <a class="shot_sale_tab_a" href="#TitleInfoTab" role="tab" data-toggle="tab">Info</a>
+                    </li>
+                    <li style="font-size: 12px" class="short_sale_tab">
+                        <a class="shot_sale_tab_a" href="#TitleOwnerLiensTab" role="tab" data-toggle="tab">Owner Liens</a>
+                    </li>
+                    <li style="font-size: 12px" class="short_sale_tab">
+                        <a class="shot_sale_tab_a" href="#TitleBuildingLiensTab" role="tab" data-toggle="tab">Building Liens</a>
+                    </li>
+                    <li style="font-size: 12px" class="short_sale_tab">
+                        <a class="shot_sale_tab_a" href="#TitleSurveyAndContinTab" role="tab" data-toggle="tab">Surveys And Contins</a>
+                    </li>
+                    <li style="font-size: 12px" class="short_sale_tab ">
+                        <a class="shot_sale_tab_a" href="#TitleFeeClearanceTab" role="tab" data-toggle="tab">Fee Breakdown</a>
+                    </li>
+                    <li style="font-size: 12px" class="short_sale_tab ">
+                        <a class="shot_sale_tab_a" href="#TitlePreclosingTab" role="tab" data-toggle="tab">Preclosing Docs</a>
+                    </li>
                 </ul>
 
                 <!-- Tab panes -->
@@ -88,7 +100,6 @@
                         <div class="tab-pane" id="TitleOwnerLiensTab">
                             <uc1:TitleOwnerLiens runat="server" ID="TitleOwnerLiens" />
                         </div>
-
                         <div class="tab-pane" id="TitleBuildingLiensTab">
                             <uc1:TitleBuildingLiens runat="server" ID="TitleBuildingLiens" />
                         </div>
@@ -194,9 +205,7 @@
             this.UCCs= [{}];
             this.FederalTaxLiens= [{}];
             this.MechanicsLiens= [{}];
-            this.shownlist = [false,false,false,false,false,false,false,false,false]
-
-            
+            this.shownlist = [false,false,false,false,false,false,false,false,false]            
            
         }
         $scope.FormModel = function(){
