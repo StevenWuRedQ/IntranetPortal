@@ -512,7 +512,7 @@ Public Class ShortSaleProcess
         End Select
     End Sub
 
-    Public Sub ProcessStart(bble As String, taskData As String, createBy As String, comments As String)
+    Public Sub ProcessStart(bble As String, taskData As String, createBy As String, comments As String, Optional approvers As String = Nothing)
         If StartProcessAction IsNot Nothing Then
             StartProcessAction(bble, taskData, createBy)
         End If
@@ -523,6 +523,11 @@ Public Class ShortSaleProcess
         'For testing purpose, need change to ShortSale-Manager
 
         Dim names = If(Not String.IsNullOrEmpty(RoleName), String.Join(";", Roles.GetUsersInRole("ShortSale-Manager")), UserNames)
+
+        If Not String.IsNullOrEmpty(approvers) Then
+            names = approvers
+        End If
+
         Dim task = UserTask.AddUserTask(bble, names, TaskName, "Normal", "In Office", DateTime.Now, comments, log.LogID, createBy, UserTask.UserTaskMode.Approval, taskData)
 
         Dim ld = LeadsInfo.GetInstance(bble)

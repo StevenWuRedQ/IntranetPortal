@@ -73,105 +73,111 @@ Public Class LeadsSubMenu
     End Sub
 
     Protected Sub leadStatusCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
-        If e.Parameter.Length > 0 Then
-            Dim AddComment = Nothing
-            If e.Parameter.Split("|").Count > 2 Then
-                AddComment = e.Parameter.Split("|").ToList.Item(2)
-            End If
+        Try
 
-            If e.Parameter.StartsWith("Tomorrow") Then
-                If e.Parameter.Contains("|") Then
-                    Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(1), AddComment)
+            If e.Parameter.Length > 0 Then
+                Dim AddComment = Nothing
+                If e.Parameter.Split("|").Count > 2 Then
+                    AddComment = e.Parameter.Split("|").ToList.Item(2)
                 End If
-            End If
 
-            If e.Parameter.StartsWith("nextWeek") Then
-                If e.Parameter.Contains("|") Then
-                    Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(7), AddComment)
+                If e.Parameter.StartsWith("Tomorrow") Then
+                    If e.Parameter.Contains("|") Then
+                        Dim bble = e.Parameter.Split("|")(1)
+                        UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(1), AddComment)
+                    End If
                 End If
-            End If
 
-            If e.Parameter.StartsWith("thirtyDays") Then
-                If e.Parameter.Contains("|") Then
-                    Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(30), AddComment)
+                If e.Parameter.StartsWith("nextWeek") Then
+                    If e.Parameter.Contains("|") Then
+                        Dim bble = e.Parameter.Split("|")(1)
+                        UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(7), AddComment)
+                    End If
                 End If
-            End If
 
-            If e.Parameter.StartsWith("sixtyDays") Then
-                If e.Parameter.Contains("|") Then
-                    Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(60), AddComment)
+                If e.Parameter.StartsWith("thirtyDays") Then
+                    If e.Parameter.Contains("|") Then
+                        Dim bble = e.Parameter.Split("|")(1)
+                        UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(30), AddComment)
+                    End If
                 End If
-            End If
 
-            If e.Parameter.StartsWith("customDays") Then
-                If e.Parameter.Contains("|") Then
-                    Dim bble = e.Parameter.Split("|")(1)
-                    Dim tmpDate = DateTime.Now
+                If e.Parameter.StartsWith("sixtyDays") Then
+                    If e.Parameter.Contains("|") Then
+                        Dim bble = e.Parameter.Split("|")(1)
+                        UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(60), AddComment)
+                    End If
+                End If
 
-                    If e.Parameter.Split("|").Count > 3 Then
-                        If Not DateTime.TryParse(e.Parameter.Split("|")(2), tmpDate) Then
+                If e.Parameter.StartsWith("customDays") Then
+                    If e.Parameter.Contains("|") Then
+                        Dim bble = e.Parameter.Split("|")(1)
+                        Dim tmpDate = DateTime.Now
 
-                            Throw New Exception("The input date is not valid. Date: " & e.Parameter.Split("|")(2))
+                        If e.Parameter.Split("|").Count > 3 Then
+                            If Not DateTime.TryParse(e.Parameter.Split("|")(2), tmpDate) Then
+
+                                Throw New Exception("The input date is not valid. Date: " & e.Parameter.Split("|")(2))
+                            End If
+                        End If
+                        'Dim tmpdate = If(e.Parameter.Split("|").Count > 2, DateTime.Parse(e.Parameter.Split("|")(2)), DateTime.Now)
+                        AddComment = e.Parameter.Split("|").ToList.Item(3)
+                        UpdateLeadStatus(bble, LeadStatus.Callback, tmpDate, AddComment)
+                    End If
+                End If
+
+                If e.Parameter.StartsWith(4) Then
+                    If e.Parameter.Contains("|") Then
+                        Dim bble = e.Parameter.Split("|")(1)
+                        UpdateLeadStatus(bble, LeadStatus.DoorKnocks, Nothing, AddComment)
+                    End If
+                End If
+
+                If e.Parameter.StartsWith(5) Then
+                    If e.Parameter.Contains("|") Then
+                        Dim bble = e.Parameter.Split("|")(1)
+                        UpdateLeadStatus(bble, LeadStatus.Priority, Nothing, AddComment)
+                    End If
+                End If
+
+                If e.Parameter.StartsWith(6) Then
+                    If e.Parameter.Contains("|") Then
+                        Dim bble = e.Parameter.Split("|")(1)
+                        UpdateLeadStatus(bble, LeadStatus.DeadEnd, Nothing, AddComment)
+                    End If
+                End If
+
+                If e.Parameter.StartsWith(7) Then
+                    If e.Parameter.Contains("|") Then
+                        Dim bble = e.Parameter.Split("|")(1)
+                        UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing, AddComment)
+
+                        If Not String.IsNullOrEmpty(lbSelectionMode.Value) AndAlso lbSelectionMode.Value = 0 Then
+                            'Add leads to short sale section
+                            ShortSaleManage.MoveLeadsToShortSale(hfBBLE.Value, Page.User.Identity.Name, Employee.CurrentAppId)
                         End If
                     End If
-                    'Dim tmpdate = If(e.Parameter.Split("|").Count > 2, DateTime.Parse(e.Parameter.Split("|")(2)), DateTime.Now)
-                    AddComment = e.Parameter.Split("|").ToList.Item(3)
-                    UpdateLeadStatus(bble, LeadStatus.Callback, tmpDate, AddComment)
                 End If
-            End If
 
-            If e.Parameter.StartsWith(4) Then
-                If e.Parameter.Contains("|") Then
-                    Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.DoorKnocks, Nothing, AddComment)
+                If e.Parameter.StartsWith(8) Then
+                    If e.Parameter.Contains("|") Then
+                        Dim bble = e.Parameter.Split("|")(1)
+                        UpdateLeadStatus(bble, LeadStatus.Closed, Nothing, AddComment)
+                    End If
                 End If
-            End If
 
-            If e.Parameter.StartsWith(5) Then
-                If e.Parameter.Contains("|") Then
-                    Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.Priority, Nothing, AddComment)
-                End If
-            End If
-
-            If e.Parameter.StartsWith(6) Then
-                If e.Parameter.Contains("|") Then
-                    Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.DeadEnd, Nothing, AddComment)
-                End If
-            End If
-
-            If e.Parameter.StartsWith(7) Then
-                If e.Parameter.Contains("|") Then
-                    Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing, AddComment)
-
-                    If Not String.IsNullOrEmpty(lbSelectionMode.Value) AndAlso lbSelectionMode.Value = 0 Then
-                        'Add leads to short sale section
-                        ShortSaleManage.MoveLeadsToShortSale(hfBBLE.Value, Page.User.Identity.Name, Employee.CurrentAppId)
+                'Delete Lead
+                If e.Parameter.StartsWith(11) Then
+                    If e.Parameter.Contains("|") Then
+                        Dim bble = e.Parameter.Split("|")(1)
+                        UpdateLeadStatus(bble, LeadStatus.Deleted, Nothing, AddComment)
                     End If
                 End If
             End If
 
-            If e.Parameter.StartsWith(8) Then
-                If e.Parameter.Contains("|") Then
-                    Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.Closed, Nothing, AddComment)
-                End If
-            End If
-
-            'Delete Lead
-            If e.Parameter.StartsWith(11) Then
-                If e.Parameter.Contains("|") Then
-                    Dim bble = e.Parameter.Split("|")(1)
-                    UpdateLeadStatus(bble, LeadStatus.Deleted, Nothing, AddComment)
-                End If
-            End If
-        End If
+        Catch ex As Exception
+            Throw New CallbackException(ex.Message, ex)
+        End Try
     End Sub
 
     Sub UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime, addCommend As String)

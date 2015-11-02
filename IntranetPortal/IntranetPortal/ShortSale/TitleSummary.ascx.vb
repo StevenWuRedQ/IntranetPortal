@@ -88,7 +88,8 @@ Public Class UCTitleSummary
         BindUpcomingBPO()
         BindCounterOffer()
         BindInvestorReview()
-        BindTask()
+        'BindTask()
+        BindFollowUp()
         Return
 
         Select Case CurrentUserRole
@@ -166,10 +167,10 @@ Public Class UCTitleSummary
     Private Sub BindFollowUp()
         tdFollowup.Visible = True
         'Bind Callback data
-        Dim callbackleads = ShortSale.ShortSaleSummary.GetFollowUpCases()
+        Dim callbackleads = ShortSaleManage.GetSSMissedFollowUp(Page.User.Identity.Name, DateTime.Today.AddDays(1))
         gridFollowUp.DataSource = callbackleads
         gridFollowUp.DataBind()
-        CType(gridFollowUp.Columns("UpdateDate"), GridViewDataColumn).GroupBy()
+        CType(gridFollowUp.Columns("CallbackDate"), GridViewDataColumn).GroupBy()
         'gridCallback.GroupBy(gridCallback.Columns("CallbackDate"))
     End Sub
 

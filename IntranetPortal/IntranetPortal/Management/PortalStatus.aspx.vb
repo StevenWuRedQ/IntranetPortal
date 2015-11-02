@@ -144,4 +144,10 @@ Public Class PortalStatus
         Core.CommonData.RefreshData()
         PropertyMortgage.RefreshMortgageStatusData()
     End Sub
+
+    Protected Sub gridSettings_DataBinding(sender As Object, e As EventArgs)
+        If gridSettings.DataSource Is Nothing AndAlso gridSettings.IsCallback Then
+            BindSettings()
+        End If
+    End Sub
 End Class

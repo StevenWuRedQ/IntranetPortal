@@ -448,8 +448,7 @@
                                             </Styles>
                                         </dx:ASPxGridView>
                                     </div>
-                                </td>
-                                <td style="width: 30px;"></td>
+                                </td>                                
                                 <td style="width: 300px; vertical-align: top;" runat="server" id="tdFollowup" visible="false">
                                     <h4 class="top_h4">
                                         <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">Follow Up</span> </h4>
@@ -462,7 +461,7 @@
                                                         <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Call Back", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="UpdateDate" VisibleIndex="2" Visible="false" Settings-SortMode="Custom">
+                                                <dx:GridViewDataTextColumn FieldName="CallbackDate" VisibleIndex="2" Visible="false" Settings-SortMode="Custom">
                                                     <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
                                                     <%--change group template UI by steven--%>
                                                     <GroupRowTemplate>
@@ -493,6 +492,7 @@
                                             </Columns>
                                             <SettingsBehavior AutoExpandAllGroups="true"
                                                 EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
+                                            <SettingsPager ShowNumericButtons="false"></SettingsPager>
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
                                                 <RowHotTrack BackColor="#ff400d"></RowHotTrack>
@@ -511,7 +511,7 @@
                 </dx:SplitterContentControl>
             </ContentCollection>
         </dx:SplitterPane>
-        <dx:SplitterPane Size="560px" MinSize="280px" AllowResize="False">   
+        <dx:SplitterPane Size="550px" MinSize="280px" AllowResize="False">   
             <PaneStyle Paddings-Padding="10" ></PaneStyle>            
             <ContentCollection>
                 <dx:SplitterContentControl>

@@ -32,6 +32,7 @@
     End Function
 
     Public Shared Function GetFollowUpCases() As List(Of ShortSaleCase)
+
         Using context As New ShortSaleEntities
             Return context.ShortSaleCases.Where(Function(ss) ss.Status = CaseStatus.FollowUp).ToList
         End Using

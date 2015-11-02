@@ -73,7 +73,7 @@
                         <dx:ASPxRoundPanel HeaderText="Settings" runat="server">
                             <PanelCollection>
                                 <dx:PanelContent>
-                                    <dx:ASPxGridView runat="server" ID="gridSettings" KeyFieldName="SettingId" OnRowUpdating="gridSettings_RowUpdating" Theme="Moderno">
+                                    <dx:ASPxGridView runat="server" ID="gridSettings" KeyFieldName="SettingId" OnDataBinding="gridSettings_DataBinding" OnRowUpdating="gridSettings_RowUpdating" Theme="Moderno">
                                         <Columns>
                                             <dx:GridViewDataTextColumn FieldName="Name" ReadOnly="true" Width="100px"></dx:GridViewDataTextColumn>
                                             <dx:GridViewDataTextColumn FieldName="Value" Width="400px"></dx:GridViewDataTextColumn>
