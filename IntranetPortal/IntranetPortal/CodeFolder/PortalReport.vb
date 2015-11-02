@@ -56,7 +56,7 @@
         Return result
     End Function
 
-    Private Shared Sub BuildMissedFollowUpData(actData As CaseActivityData, missedDate As String)
+    Public Shared Sub BuildMissedFollowUpData(actData As CaseActivityData, missedDate As String)
         Select Case actData.Type
             Case CaseActivityData.ActivityType.ShortSale
                 Dim sCases = ShortSaleManage.GetSSMissedFollowUp(actData.Name, missedDate)

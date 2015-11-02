@@ -1051,6 +1051,13 @@
       <DependentUpon>ComplaintsNotify.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="EmailTemplate\ShortSaleUserFollowUp.ascx.designer.vb">
+      <DependentUpon>ShortSaleUserFollowUp.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\ShortSaleUserFollowUp.ascx.vb">
+      <DependentUpon>ShortSaleUserFollowUp.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="EmailTemplate\ShortSaleUserReport.ascx.designer.vb">
       <DependentUpon>ShortSaleUserReport.ascx</DependentUpon>
     </Compile>
@@ -2528,6 +2535,7 @@
     <Content Include="EmailTemplate\ComplaintContent.ascx" />
     <Content Include="EmailTemplate\ComplaintsDetailNotify.ascx" />
     <Content Include="EmailTemplate\ComplaintsNotify.ascx" />
+    <Content Include="EmailTemplate\ShortSaleUserFollowUp.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserReport.ascx" />
     <Content Include="EmailTemplate\ActivitySummary.ascx" />
     <Content Include="EmailTemplate\EmailSummary.aspx" />

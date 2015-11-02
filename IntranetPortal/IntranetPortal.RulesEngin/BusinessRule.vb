@@ -19,6 +19,7 @@ Imports System.Configuration
 <KnownType(GetType(ConstructionNotifyRule))>
 <KnownType(GetType(LegalActivityReportRule))>
 <KnownType(GetType(NoticeECourtRule))>
+<KnownType(GetType(ShortSaleFollowUpRule))>
 <DataContract>
 Public Class BaseRule
     <DataMember>
@@ -696,8 +697,30 @@ Public Class LegalFollowUpRule
             Catch ex As Exception
                 Log("Legal Followup Rule Error", ex)
             End Try
-
         End Using
+    End Sub
+End Class
 
+<DataContract>
+Public Class ShortSaleFollowUpRule
+    Inherits BaseRule
+
+    Public Overrides Sub Execute()
+
+        Using client As New PortalService.CommonServiceClient
+            Try
+                Dim users = ShortSaleManage.GetShortSaleUsers
+                For Each ssUser In users
+                    Dim emp = Employee.GetInstance(ssUser)
+                    If emp IsNot Nothing Then
+                        Dim params As New Dictionary(Of String, String)
+                        params.Add("Name", ssUser)
+                        client.SendEmailByControl(emp.Email, "FollowUps Reminder - " & DateTime.Today.ToShortDateString, "ShortSaleUserFollowUp", params)
+                    End If
+                Next
+            Catch ex As Exception
+                Log("ShortSale user followup rule error", ex)
+            End Try
+        End Using
     End Sub
 End Class

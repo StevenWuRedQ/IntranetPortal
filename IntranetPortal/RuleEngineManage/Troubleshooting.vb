@@ -982,4 +982,9 @@ Public Class Troubleshooting
         Dim rule = New IntranetPortal.RulesEngine.LegalActivityReportRule
         rule.Execute()
     End Sub
+
+    Private Sub btnShortSaleUserFollowUp_Click(sender As Object, e As EventArgs) Handles btnShortSaleUserFollowUp.Click
+        Dim rule = New IntranetPortal.RulesEngine.ShortSaleFollowUpRule
+        rule.Execute()
+    End Sub
 End Class

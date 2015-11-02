@@ -46,6 +46,21 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="SendEmailByControl">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="toAddresses" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="subject" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="constrolName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="params" nillable="true" type="q2:ArrayOfKeyValueOfstringstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailByControlResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SendTaskSummaryEmail">
     <xs:complexType>
       <xs:sequence>

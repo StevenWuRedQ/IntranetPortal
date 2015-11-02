@@ -99,6 +99,7 @@ Partial Class Troubleshooting
         Me.btnGeoBBLE = New System.Windows.Forms.Button()
         Me.txtGeoAddress = New System.Windows.Forms.TextBox()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.btnLegalTeamActivity = New System.Windows.Forms.Button()
         Me.BtnNoticeECourt = New System.Windows.Forms.Button()
         Me.Button21 = New System.Windows.Forms.Button()
         Me.btnSummaryEmail = New System.Windows.Forms.Button()
@@ -132,7 +133,7 @@ Partial Class Troubleshooting
         Me.txtReportTables = New System.Windows.Forms.TextBox()
         Me.txtTemplateResult = New System.Windows.Forms.TextBox()
         Me.Button20 = New System.Windows.Forms.Button()
-        Me.btnLegalTeamActivity = New System.Windows.Forms.Button()
+        Me.btnShortSaleUserFollowUp = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -491,6 +492,7 @@ Partial Class Troubleshooting
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnShortSaleUserFollowUp)
         Me.GroupBox1.Controls.Add(Me.btnSSUserReport)
         Me.GroupBox1.Controls.Add(Me.cbTeams)
         Me.GroupBox1.Controls.Add(Me.btnEmailSend)
@@ -911,6 +913,15 @@ Partial Class Troubleshooting
         Me.TabPage7.Text = "Legal"
         Me.TabPage7.UseVisualStyleBackColor = True
         '
+        'btnLegalTeamActivity
+        '
+        Me.btnLegalTeamActivity.Location = New System.Drawing.Point(153, 94)
+        Me.btnLegalTeamActivity.Name = "btnLegalTeamActivity"
+        Me.btnLegalTeamActivity.Size = New System.Drawing.Size(183, 23)
+        Me.btnLegalTeamActivity.TabIndex = 5
+        Me.btnLegalTeamActivity.Text = "Legal Team Activity Report"
+        Me.btnLegalTeamActivity.UseVisualStyleBackColor = True
+        '
         'BtnNoticeECourt
         '
         Me.BtnNoticeECourt.Location = New System.Drawing.Point(6, 176)
@@ -1235,14 +1246,14 @@ Partial Class Troubleshooting
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
-        'btnLegalTeamActivity
+        'btnShortSaleUserFollowUp
         '
-        Me.btnLegalTeamActivity.Location = New System.Drawing.Point(153, 94)
-        Me.btnLegalTeamActivity.Name = "btnLegalTeamActivity"
-        Me.btnLegalTeamActivity.Size = New System.Drawing.Size(183, 23)
-        Me.btnLegalTeamActivity.TabIndex = 5
-        Me.btnLegalTeamActivity.Text = "Legal Team Activity Report"
-        Me.btnLegalTeamActivity.UseVisualStyleBackColor = True
+        Me.btnShortSaleUserFollowUp.Location = New System.Drawing.Point(119, 192)
+        Me.btnShortSaleUserFollowUp.Name = "btnShortSaleUserFollowUp"
+        Me.btnShortSaleUserFollowUp.Size = New System.Drawing.Size(160, 23)
+        Me.btnShortSaleUserFollowUp.TabIndex = 7
+        Me.btnShortSaleUserFollowUp.Text = "ShortSale User FollowUp"
+        Me.btnShortSaleUserFollowUp.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1404,4 +1415,5 @@ Partial Class Troubleshooting
     Friend WithEvents CleanBudgetData As Button
     Friend WithEvents BtnNoticeECourt As Button
     Friend WithEvents btnLegalTeamActivity As Button
+    Friend WithEvents btnShortSaleUserFollowUp As Button
 End Class
