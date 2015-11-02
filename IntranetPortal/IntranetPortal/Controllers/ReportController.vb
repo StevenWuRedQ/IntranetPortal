@@ -63,7 +63,7 @@ Namespace Controllers
                     queryString.Last.AddAfterSelf(jsAppObj)
                 End If
 
-                If baseTable Is Nothing Then
+                If String.IsNullOrEmpty(baseTable) Then
                     baseTable = "ShortSaleCases"
                 End If
 

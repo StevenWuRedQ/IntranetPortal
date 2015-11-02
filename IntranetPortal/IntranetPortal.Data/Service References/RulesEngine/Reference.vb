@@ -35,7 +35,8 @@ Namespace RulesEngine
      System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.DOBComplaintsCheckingRule)),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.ConstructionNotifyRule)),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.LegalActivityReportRule)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.NoticeECourtRule))>  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.NoticeECourtRule)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(RulesEngine.ShortSaleFollowUpRule))>  _
     Partial Public Class BaseRule
         Inherits Object
         Implements System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
@@ -346,6 +347,14 @@ Namespace RulesEngine
      System.Runtime.Serialization.DataContractAttribute(Name:="NoticeECourtRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
      System.SerializableAttribute()>  _
     Partial Public Class NoticeECourtRule
+        Inherits RulesEngine.BaseRule
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ShortSaleFollowUpRule", [Namespace]:="http://schemas.datacontract.org/2004/07/IntranetPortal.RulesEngine"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class ShortSaleFollowUpRule
         Inherits RulesEngine.BaseRule
     End Class
     

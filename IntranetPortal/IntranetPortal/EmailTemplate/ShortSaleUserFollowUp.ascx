@@ -21,7 +21,7 @@
 Dear <%= ActivityData.Name%>,
 <br />
 <br />
-Below is summary of your Followups today (<%= DateTime.Today.ToShortDateString() %>). Please review.
+Below is summary of your Follow Ups today (<%= DateTime.Today.ToShortDateString() %>). Please review.
 <br />
 <br />
 <% Dim item = ActivityData%>
@@ -34,7 +34,7 @@ Below is summary of your Followups today (<%= DateTime.Today.ToShortDateString()
     <tr>
         <td>
             <% If item.FollowUpMissedCount > 0 Then%>
-            <strong>Missed FollowUp (<%= item.FollowUpMissedCount%>) / Followup Date</strong>
+            <strong>Cases / Followup Date</strong>
             <ul>
                 <% For Each ssCase In item.FollowUpMissed%>
                 <li>
