@@ -11,14 +11,12 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-        <uc1:ComplaintsNotify runat="server" ID="ComplaintsNotify" />
-        <br />
-        <asp:Button ID="Button1" runat="server" Text="Send Email" OnClick="Button1_Click" />        
-
-           <asp:Button ID="Button2" runat="server" Text="Send Complaints Detail" OnClick="Button2_Click" />        
-
-    </div>
+        <div>
+            <uc1:ComplaintsNotify runat="server" ID="ComplaintsNotify" />
+            <br />
+            <asp:Button ID="Button1" runat="server" Text="Send Email" OnClick="Button1_Click" />
+            <asp:Button ID="Button2" runat="server" Text="Send Complaints Detail" OnClick="Button2_Click" />
+        </div>
     </form>
 </body>
 </html>

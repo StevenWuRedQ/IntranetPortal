@@ -372,6 +372,17 @@ Partial Public Class Employee
         Return emps
     End Function
 
+    Public Shared Function GetRoleUsers(roleName As String) As String()
+        Dim ssRoles = Roles.GetAllRoles().Where(Function(r) r.StartsWith(roleName))
+
+        Dim users As New List(Of String)
+        For Each r In ssRoles
+            users.AddRange(Roles.GetUsersInRole(r))
+        Next
+
+        Return users.Distinct.ToArray
+    End Function
+
     Public Shared Function GetDeptUsers(deptName As String, Optional onlyActive As Boolean = True) As String()
 
         Return GetDeptUsersList(deptName, onlyActive).Select(Function(em) em.Name).ToArray

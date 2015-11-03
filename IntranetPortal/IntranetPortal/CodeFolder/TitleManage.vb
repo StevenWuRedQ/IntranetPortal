@@ -58,6 +58,7 @@ Public Class TitleManage
     End Sub
 
     Public Shared Sub StartTitle(bble As String, caseName As String, userName As String)
+    Public Shared Sub StartTitle(bble As String, caseName As String, userName As String, Optional owner As String = Nothing)
         Dim tCase = TitleCase.GetCase(bble)
 
         If tCase Is Nothing Then
@@ -69,16 +70,23 @@ Public Class TitleManage
             Dim caseData As New JObject
             caseData.Item("BBLE") = bble
             caseData.Item("CaseName") = caseName
-            caseData.Item("Owner") = GetManager()
+
+            If String.IsNullOrEmpty(owner) Then
+                owner = GetManager()
+            End If
+
+            caseData.Item("Owner") = owner
 
             Dim dataItem As New FormDataItem
             dataItem.FormName = FormName
             dataItem.FormData = caseData.ToString
             dataItem.Tag = bble
             dataItem.Save(userName)
-        End If
 
-        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Start Title progress."), bble, LeadsActivityLog.LogCategory.PublicUpdate.ToString, LeadsActivityLog.EnumActionType.InProcess)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Start Title progress."), bble, LeadsActivityLog.LogCategory.PublicUpdate.ToString, LeadsActivityLog.EnumActionType.InProcess)
+        Else
+            Throw New Exception(caseName & " is already in title.")
+        End If
     End Sub
 
     Public Shared Function GetManager() As String
@@ -88,6 +96,10 @@ Public Class TitleManage
         End If
 
         Return Nothing
+    End Function
+
+    Public Shared Function TitleUsers() As String()
+        Return Employee.GetRoleUsers("Title-")
     End Function
 
     Public Shared Function GetMyCases(userName As String, Optional status As TitleCase.DataStatus = TitleCase.DataStatus.All) As TitleCase()

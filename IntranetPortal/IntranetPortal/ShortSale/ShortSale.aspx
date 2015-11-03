@@ -15,7 +15,6 @@
 <%@ Register Src="~/ShortSale/NGShortSaleTab.ascx" TagPrefix="uc1" TagName="NGShortSaleTab" %>
 <%@ Register Src="~/BusinessForm/BusinessFormControl.ascx" TagPrefix="uc1" TagName="BusinessFormControl" %>
 
-
 <asp:Content runat="server" ContentPlaceHolderID="head">
     <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/jquery.webui-popover.js"></script>
@@ -468,7 +467,7 @@
                                                                                 <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Archived" onclick="LogClick('Archived')"></i>
                                                                                 <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" style="display: none" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>
                                                                                 <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')" style="display: none"></i>
-                                                                                <i class="fa fa-key sale_head_button sale_head_button_left tooltip-examples" title="Enable Title" onclick="MoveToTitle()"></i>
+                                                                                <i class="fa fa-key sale_head_button sale_head_button_left tooltip-examples" title="Enable Title" onclick="tmpBBLE=leadsInfoBBLE; popupTitleUsers.PerformCallback();popupTitleUsers.ShowAtElement(this);"></i>
                                                                                 <i class="fa fa-wrench sale_head_button sale_head_button_left tooltip-examples" title="Move to Construction" onclick="MoveToConstruction()"></i>
                                                                                
                                                                             </li>

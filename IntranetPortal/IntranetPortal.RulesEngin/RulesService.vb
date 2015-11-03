@@ -85,7 +85,7 @@ Public Class RulesService
         Rules.Add(New ShortSaleActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("10:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "ShortSale Activity Email Rule on 10am"})
         Rules.Add(New ShortSaleActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("12:01:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "ShortSale Activity Email Rule on 12pm"})
         Rules.Add(New ShortSaleActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("15:01:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "ShortSale Activity Email Rule on 3pm"})
-
+        Rules.Add(New ShortSaleFollowUpRule() With {.ExecuteOn = TimeSpan.Parse("07:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "ShortSale Follow up Rule"})
 
         'Construction
         'Rules.Add(New ConstructionNotifyRule() With {.ExecuteOn = TimeSpan.Parse("06:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Construction Notify Rule"})

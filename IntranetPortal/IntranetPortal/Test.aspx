@@ -83,19 +83,14 @@
             </Templates>
         </dx:ASPxGridView>
         <asp:Button ID="TestCrop" runat="server" Text="TestCrop" OnClick="TestCrop_Click" />
-
         <div>
             <input type="file" id="fileUpload" multiple="multiple" value="" />
             <br />
             <br />
             <button id="btnUpload" type="button">Upload</button>
-
         </div>
         <hr />
-
         <button id="updateConstructionFileModel" type="button" onclick="testController.updateFileModel()">update file model</button>
-
-
     </form>
 </body>
 <script>

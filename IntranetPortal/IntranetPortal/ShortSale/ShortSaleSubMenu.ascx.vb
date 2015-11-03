@@ -106,4 +106,23 @@ Public Class ShortSaleSubMenu
         lbEvictionUsers.DataSource = Roles.GetUsersInRole("Eviction-User")
         lbEvictionUsers.DataBind()
     End Sub
+
+    Protected Sub popupTitleUsers_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
+        If String.IsNullOrEmpty(e.Parameter) Then
+            popupContentTitleUsers.Visible = True
+            listTitleUsers.DataSource = TitleManage.TitleUsers
+            listTitleUsers.DataBind()
+            Return
+        End If
+
+        If e.Parameter.Split("|").Length > 0 Then
+            Dim bble = e.Parameter.Split("|")(0)
+            Dim name = e.Parameter.Split("|")(1)
+
+            ShortSaleManage.StartTitle(bble, Page.User.Identity.Name, name)
+
+            'ShortSaleCase.ReassignOwner(bble, name)
+            'LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} reassign this case to {1}.", Page.User.Identity.Name, name), bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reassign)
+        End If
+    End Sub
 End Class

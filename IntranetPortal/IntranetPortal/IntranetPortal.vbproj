@@ -1408,6 +1408,13 @@
       <DependentUpon>QueryBuilder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Management\ShortSaleManagement.aspx.designer.vb">
+      <DependentUpon>ShortSaleManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\ShortSaleManagement.aspx.vb">
+      <DependentUpon>ShortSaleManagement.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Management\Transfer2Legal.aspx.designer.vb">
       <DependentUpon>Transfer2Legal.aspx</DependentUpon>
     </Compile>
@@ -2886,6 +2893,7 @@
     <Content Include="Management\MgrRole.aspx" />
     <Content Include="Management\PortalStatus.aspx" />
     <Content Include="Management\QueryBuilder.aspx" />
+    <Content Include="Management\ShortSaleManagement.aspx" />
     <Content Include="Management\TaskList.aspx" />
     <Content Include="Management\Transfer2Legal.aspx" />
     <Content Include="Management\TroubleShooting.aspx" />

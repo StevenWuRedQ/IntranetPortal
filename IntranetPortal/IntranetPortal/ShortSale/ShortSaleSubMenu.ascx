@@ -2,6 +2,7 @@
 <script type="text/javascript">
     var tmpCaseId = null;
     var tmpBBLE = null;
+    var errorOccured = false;
     function ShowCateMenu(s, caseId, bble) {
         ASPxPopupMenuCategory.Hide();
         tmpCaseId = caseId;
@@ -322,6 +323,41 @@
             </dx:ASPxButton>
         </dx:PopupControlContentControl>
     </ContentCollection>
+</dx:ASPxPopupControl>
+
+<dx:ASPxPopupControl ClientInstanceName="popupTitleUsers" Width="300px" Height="300px"
+    MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="popupTitleUsers"
+    HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="popupTitleUsers_WindowCallback"
+    runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server" Visible="false" ID="popupContentTitleUsers">
+            <dx:ASPxListBox runat="server" ID="listTitleUsers" ClientInstanceName="listTitleUsers" Height="270"
+                SelectedIndex="0" Width="100%">
+            </dx:ASPxListBox>
+            <dx:ASPxButton Text="Assign" runat="server" ID="ASPxButton2" AutoPostBack="false">
+                <ClientSideEvents Click="function(s,e){
+                                        var item = listTitleUsers.GetSelectedItem();
+                                        if(item == null)
+                                        {
+                                             alert('Please select employee.');
+                                             return;
+                                         }
+                                        popupTitleUsers.PerformCallback(tmpBBLE + '|' + item.text);
+                                        popupTitleUsers.EndCallback.ClearHandlers();
+                                        popupTitleUsers.EndCallback.AddHandler(function(s, e) {
+                                                                                if(!errorOccured){
+                                                                                   popupTitleUsers.Hide();   
+                                                                                   OnSetStatusComplete(s,e);}
+                                                                                   errorOccured = false;
+                                                                                   popupTitleUsers.EndCallback.ClearHandlers();
+                                                                               });
+                                        }" />
+            </dx:ASPxButton>
+        </dx:PopupControlContentControl>
+    </ContentCollection> 
+    <ClientSideEvents CallbackError="function(s,e){
+            errorOccured = true;
+        }" />
 </dx:ASPxPopupControl>
 
 <dx:ASPxPopupControl ClientInstanceName="popupEvictionUsers" Width="300px" Height="300px"

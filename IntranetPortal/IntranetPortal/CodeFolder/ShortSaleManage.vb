@@ -152,9 +152,13 @@ Public Class ShortSaleManage
         LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Start Construction progress."), bble, LeadsActivityLog.LogCategory.PublicUpdate.ToString, LeadsActivityLog.EnumActionType.InProcess)
     End Sub
 
-    Public Shared Sub StartTitle(bble As String, userName As String)
+    Public Shared Sub StartTitle(bble As String, userName As String, Optional titleUser As String = Nothing)
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
-        TitleManage.StartTitle(bble, ssCase.CaseName, userName)
+        If ssCase IsNot Nothing Then
+            TitleManage.StartTitle(bble, ssCase.CaseName, userName, titleUser)
+        Else
+            Throw New Exception("Address can't found in ShortSale. BBLE: " & bble)
+        End If
     End Sub
 
     Public Shared Sub NewCaseApproved(bble As String, approvedBy As String)
