@@ -39,6 +39,7 @@
                     <th class="col-sm-1">Fees</th>
                     <th class="col-sm-2"></th>
                     <th class="col-sm-2"></th>
+                    <th class="col-sm-2"></th>
                 </tr>
             </thead>
             <tbody>
@@ -48,7 +49,10 @@
                     <td class="col-sm-2">{{d.name}}
                     </td>
                     <td class="col-sm-2">
-                        <input type="text" ng-model="d.cost" money-mask ng-change="updateTotal()" />
+                        <input type="text" ng-model="d.cost" money-mask ng-change="updateTotal(d)" />
+                    </td>
+                    <td class="col-sm-2">
+                        {{d.lastupdate|date : 'MM/dd/yyyy'}}
                     </td>
                 </tr>
                 <tr style="background-color: yellow; font-weight: bolder">
@@ -57,6 +61,7 @@
                     <td>
                         <input style="background-color: yellow; font-weight: bolder" type="text" ng-model="FormData.FeeClearance.total" money-mask disabled />
                     </td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
@@ -64,119 +69,86 @@
 </div>
 <script>
     angular.module("PortalApp").controller('FeeClearanceCtrl', function ($scope) {
-        $scope.FormData = $scope.$parent.Form.FormData;
-        $scope.FormData.FeeClearance = {
-            data: [
-                    {
-                        name: 'Purchase Price',
-                        cost: 0.0
-                    },
-                    {
-                        name: '2nd Lien',
-                        cost: 0.0
-                    },
-                    {
-                        name: 'Taxes due',
-                        cost: 0.0
-                    },
-                    {
-                        name: 'Water',
-                        cost: 0.0
-                    },
-                    {
-                        name: 'Multi Dwelling',
-                        cost: 0.0
-                    },
-                    {
-                        name: 'PVB',
-                        cost: 0.0
-                    },
-                    {
-                        name: 'ECBS',
-                        cost: 0.0
-                    },
-                    {
-                        name: 'Judgments',
-                        cost: 0.0
-                    },
-                    {
-                        name: 'Taxes on HUD',
-                        cost: 0.0
-                    },
-                    {
-                        name: 'Water on HUD',
-                        cost: 0.0
-                    },
-                    {
-                        name: 'HPD on HUD',
-                        cost: 0.0
-                    },
-                    {
-                        name: 'ECB on hud',
-                        cost: 0.0
-                    }],
-            total: 0.0
+        var FeeClearanceModel = function () {
+            this.data = [
+                {
+                    name: 'Purchase Price',
+                    cost: 0.0,
+                    lastupdate: null
+                },
+                {
+                    name: '2nd Lien',
+                    cost: 0.0,
+                    lastupdate: null
+                },
+                {
+                    name: 'Taxes due',
+                    cost: 0.0,
+                    lastupdate: null
+                },
+                {
+                    name: 'Water',
+                    cost: 0.0,
+                    lastupdate: null
+                },
+                {
+                    name: 'Multi Dwelling',
+                    cost: 0.0,
+                    lastupdate: null
+
+                },
+                {
+                    name: 'PVB',
+                    cost: 0.0,
+                    lastupdate: null
+                },
+                {
+                    name: 'ECBS',
+                    cost: 0.0,
+                    lastupdate: null
+                },
+                {
+                    name: 'Judgments',
+                    cost: 0.0,
+                    lastupdate: null
+                },
+                {
+                    name: 'Taxes on HUD',
+                    cost: 0.0,
+                    lastupdate: null
+                },
+                {
+                    name: 'Water on HUD',
+                    cost: 0.0,
+                    lastupdate: null
+                },
+                {
+                    name: 'HPD on HUD',
+                    cost: 0.0,
+                    lastupdate: null
+                },
+                {
+                    name: 'ECB on hud',
+                    cost: 0.0,
+                    lastupdate: null
+                }],
+            this.total = 0.0
+
         }
+
+        $scope.FormData = $scope.$parent.Form.FormData;
+        $scope.FormData.FeeClearance = new FeeClearanceModel();
         $scope.reload = function () {
             $scope.FormData = $scope.$parent.Form.FormData;
             if ($scope.$parent.Form.FormData.FeeClearance) {
                 $scope.FormData.FeeClearance = $scope.FormData.FeeClearance;
             } else {
-                $scope.FormData.FeeClearance = {
-                    data: [
-                            {
-                                name: 'Purchase Price',
-                                cost: 0.0
-                            },
-                            {
-                                name: '2nd Lien',
-                                cost: 0.0
-                            },
-                            {
-                                name: 'Taxes due',
-                                cost: 0.0
-                            },
-                            {
-                                name: 'Water',
-                                cost: 0.0
-                            },
-                            {
-                                name: 'Multi Dwelling',
-                                cost: 0.0
-                            },
-                            {
-                                name: 'PVB',
-                                cost: 0.0
-                            },
-                            {
-                                name: 'ECBS',
-                                cost: 0.0
-                            },
-                            {
-                                name: 'Judgments',
-                                cost: 0.0
-                            },
-                            {
-                                name: 'Taxes on HUD',
-                                cost: 0.0
-                            },
-                            {
-                                name: 'Water on HUD',
-                                cost: 0.0
-                            },
-                            {
-                                name: 'HPD on HUD',
-                                cost: 0.0
-                            },
-                            {
-                                name: 'ECB on hud',
-                                cost: 0.0
-                            }],
-                    total: 0.0
-                }
+                $scope.FormData.FeeClearance = new FeeClearanceModel();
             }
         }
-        $scope.updateTotal = function () {
+        $scope.updateTotal = function (d) {
+            d.lastupdate = new Date();
+
             var total = 0.0;
             _.each($scope.FormData.FeeClearance.data, function (el, idx) {
                 total += parseFloat(el.cost);

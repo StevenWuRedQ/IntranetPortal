@@ -15,7 +15,7 @@
                             <pt-collapse model="collpsed[c.category]"></pt-collapse>
                             </th>
                         </tr>
-                        <tr ng-repeat="f in c.fields track by f.name" collapse="!collpsed[c.category]">
+                        <tr ng-repeat="f in c.fields track by f.name" uib-collapse="!collpsed[c.category]">
                             <td>
                                 <label for="{{camel(f.name)}}" ng-class="" ng-style="isBindColumn(f)?{}:{'color': '#e0e0e0'}">{{f.name}}</label></td>
                             <td>
