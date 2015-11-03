@@ -45,6 +45,12 @@ Public Class TitleManage
         Return TitleCase.Exists(bble)
     End Function
 
+    Public Shared Sub UpdateStatus(bble As String, status As TitleCase.DataStatus, completedBy As String)
+        Dim tCase = TitleCase.GetCase(bble)
+        tCase.Status = status
+        tCase.SaveData(completedBy)
+    End Sub
+
     Public Shared Sub CompleteCase(bble As String, completedBy As String)
         Dim tCase = TitleCase.GetCase(bble)
         tCase.Status = TitleCase.DataStatus.Completed
@@ -81,6 +87,10 @@ Public Class TitleManage
             dataItem.FormData = caseData.ToString
             dataItem.Tag = bble
             dataItem.Save(userName)
+
+            tCase = TitleCase.GetCase(bble)
+            tCase.Status = TitleCase.DataStatus.InitialReview
+            tCase.SaveData(userName)
 
             LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Start Title progress."), bble, LeadsActivityLog.LogCategory.PublicUpdate.ToString, LeadsActivityLog.EnumActionType.InProcess)
         Else
@@ -130,6 +140,12 @@ Public Class TitleManage
                 Return GetMyCases(userName).Length
             Case "Title-Completed"
                 Return GetMyCases(userName, TitleCase.DataStatus.Completed).Length
+            Case "Title-InitialReview"
+                Return GetMyCases(userName, TitleCase.DataStatus.InitialReview).Length
+            Case "Title-Clearance"
+                Return GetMyCases(userName, TitleCase.DataStatus.Clearance).Length
+            Case "Title-CTC"
+                Return GetMyCases(userName, TitleCase.DataStatus.CTC).Length
             Case Else
                 Return 0
         End Select

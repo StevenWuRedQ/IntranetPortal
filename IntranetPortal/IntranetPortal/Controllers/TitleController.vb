@@ -10,8 +10,18 @@ Namespace Controllers
     Public Class TitleController
         Inherits ApiController
 
+        <Route("api/Title/UpdateStatus")>
+        Public Function PostUpdateStatus(bble As String, <FromBody> status As Data.TitleCase.DataStatus) As IHttpActionResult
+            Try
+                TitleManage.UpdateStatus(bble, status, HttpContext.Current.User.Identity.Name)
+                Return Ok()
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
         <Route("api/Title/Completed")>
-        Public Function PostUpdateTitleStatus(<FromBody> bble As String) As IHttpActionResult
+        Public Function PostCompleteTitle(<FromBody> bble As String) As IHttpActionResult
 
             Try
                 TitleManage.CompleteCase(bble, HttpContext.Current.User.Identity.Name)

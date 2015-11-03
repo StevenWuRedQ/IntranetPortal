@@ -528,7 +528,22 @@
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Title-Completed" Text="Completed" NavigationUrl="/BusinessForm/Default.aspx?s=1" ShowAmount="true" AmountManageClass="TitleManage">
+      <PortalNavItem Name="Title-InitialReview" Text="Initial Review" NavigationUrl="/BusinessForm/Default.aspx?s=0" ShowAmount="true" AmountManageClass="TitleManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Title-Clearance" Text="Clearance" NavigationUrl="/BusinessForm/Default.aspx?s=1" ShowAmount="true" AmountManageClass="TitleManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Title-CTC" Text="CTC" NavigationUrl="/BusinessForm/Default.aspx?s=2" ShowAmount="true" AmountManageClass="TitleManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Title-Completed" Text="Completed" NavigationUrl="/BusinessForm/Default.aspx?s=3" ShowAmount="true" AmountManageClass="TitleManage">
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>

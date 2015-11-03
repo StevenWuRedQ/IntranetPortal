@@ -104,7 +104,10 @@
 
     Public Enum DataStatus
         All = -1
-        Completed = 1
+        InitialReview = 0
+        Clearance = 1
+        CTC = 2
+        Completed = 3
     End Enum
 
 End Class
