@@ -217,7 +217,10 @@
         $scope.FormModel = function(){
             this.FormData =  {
                 Comments: [],
-                Owners: [new $scope.OwnerModel("Prior Owner Liens"), new $scope.OwnerModel("Current Owner Liens")]
+                Owners: [new $scope.OwnerModel("Prior Owner Liens"), new $scope.OwnerModel("Current Owner Liens")],
+                preclosing: {
+                    ApprovalData: [{}]
+                }
             }
         }
         /* end model define*/

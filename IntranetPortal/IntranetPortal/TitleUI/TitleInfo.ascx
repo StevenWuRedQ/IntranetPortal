@@ -139,14 +139,14 @@
                 <pt-file upload-type="title" file-bble="BBLE" file-id="info_fillable" file-model="Form.FormData.info.fillable"></pt-file>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title ">Document Date</label>
+                <label class="ss_form_input_title ">Date Last Modified</label>
                 <input class="ss_form_input" type="text" ng-model="Form.FormData.info.fillable_date" ss-date></input>
             </li>
         </ul>
     </div>
 </div>
 
-<div class="ss_form ">
+<div class="ss_form">
     <h4 class="ss_form_title ">Covenants and Restrictions</h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
@@ -157,6 +157,17 @@
             <li class="ss_form_item3">
                 <label class="ss_form_input_title ">Contract of Sale</label>
                 <input class="ss_form_input " ng-model="Form.FormData.info.Contract_of_Sale" />
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="ss_form">
+    <div class="ss_border">
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item3">
+                <label class="ss_form_input_title">BUYER on COS/HUD/APPROVAL/CORP DOCS MATCH</label>
+                <pt-radio name="BUERYMATCH" model="Form.FormData.info.BUERY_MATCH"></pt-radio>
             </li>
         </ul>
     </div>
