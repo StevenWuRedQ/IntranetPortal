@@ -57,7 +57,6 @@ Public Class TitleManage
         tcase.SaveData(completedBy)
     End Sub
 
-    Public Shared Sub StartTitle(bble As String, caseName As String, userName As String)
     Public Shared Sub StartTitle(bble As String, caseName As String, userName As String, Optional owner As String = Nothing)
         Dim tCase = TitleCase.GetCase(bble)
 
