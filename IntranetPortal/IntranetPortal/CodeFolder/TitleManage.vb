@@ -51,6 +51,12 @@ Public Class TitleManage
         tCase.SaveData(completedBy)
     End Sub
 
+    Public Shared Sub UnCompleteCase(bble As String, completedBy As String)
+        Dim tcase = TitleCase.GetCase(bble)
+        tcase.Status = TitleCase.DataStatus.All
+        tcase.SaveData(completedBy)
+    End Sub
+
     Public Shared Sub StartTitle(bble As String, caseName As String, userName As String)
         Dim tCase = TitleCase.GetCase(bble)
 

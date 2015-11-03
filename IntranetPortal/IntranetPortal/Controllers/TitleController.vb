@@ -21,6 +21,17 @@ Namespace Controllers
             End Try
         End Function
 
+        <Route("api/Title/UnCompleted")>
+        Public Function UnCompleted(<FromBody> bble As String) As IHttpActionResult
+            Try
+                TitleManage.UnCompleteCase(bble, HttpContext.Current.User.Identity.Name)
+                Return Ok()
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
+
         <Route("api/Title/GetCaseStatus")>
         Public Function GetCaseStatus(bble As String) As IHttpActionResult
             Try

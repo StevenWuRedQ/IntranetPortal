@@ -179,7 +179,7 @@
     </div>
     <script>
         portalApp = angular.module('PortalApp');
-        portalApp.controller("ReportWizardCtrl", function ($scope, $http, $timeout) {
+        portalApp.controller("ReportWizardCtrl", function ($scope, $http, $timeout, ptCom) {
             $scope.step = 1;
             $scope.collpsed = [];
             $scope.CurrentQuery = null;
@@ -380,7 +380,7 @@
                         if (el) {
                             _.forOwn(el, function (v, k) {
                                 if (v && typeof(v) === 'string' && v.match(dtPatn)) {
-                                    el[k] = new Date(v).toLocaleDateString();
+                                    el[k] = ptCom.toUTCLocaleDateString(v);
                                 }
                             })
                         }

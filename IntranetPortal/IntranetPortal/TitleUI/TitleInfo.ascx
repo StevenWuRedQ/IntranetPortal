@@ -138,6 +138,10 @@
                 <label class="ss_form_input_title ">fillable</label>
                 <pt-file upload-type="title" file-bble="BBLE" file-id="info_fillable" file-model="Form.FormData.info.fillable"></pt-file>
             </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title ">Document Date</label>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.info.fillable_date" ss-date></input>
+            </li>
         </ul>
     </div>
 </div>

@@ -188,6 +188,12 @@
                           "category": "Property Address",
                           "fields": [
                             {
+                                "name": "BBLE",
+                                "table": "LeadsInfo",
+                                "column": "BBLE",
+                                "type": "string"
+                            },
+                            {
                                 "name": "BLOCK",
                                 "table": "LeadsInfo",
                                 "column": "Block",

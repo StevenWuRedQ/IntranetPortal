@@ -21,7 +21,7 @@
                     <div class="col-md-2 pull-right" style="margin: 10px 0">
                         <span class="btn btn-default btn-round" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+ leadsInfoBBLE, 'Maps')">Map</span>
                         <br />
-                        <span class="btn btn-default btn-circle icon_btn" ng-click="completeCase()" ng-style="Status==1?{'background-color': '#80c02c'}:{}" uib-tooltip="Complete case"><i class="fa fa-check"></i></span>
+                        <span class="btn btn-default btn-circle icon_btn" ng-click="completeCase()" ng-style="Status==1?{'background-color': '#80c02c'}:{}" uib-tooltip="{{Status==1?'Uncomplete case':'Complete case'}}"><i class="fa fa-check"></i></span>
                         <span class="btn btn-default btn-circle icon_btn" ng-click="generateXML()" uib-tooltip="Generate XML"><i class="fa fa-download"></i></span>
                     </div>
                 </div>
@@ -30,6 +30,12 @@
                     <%--note list--%>
                     <div style="width: 100%; overflow: auto; max-height: 160px;">
                         <table class="table table-striped" style="font-size: 14px; margin: 0; padding: 5px">
+                            <tr ng-show="Status==1">
+                                <td>
+                                    <i class="fa fa-exclamation-circle" style="font-size: 18px"></i>
+                                    <span style="margin-left: 10px">The case is completed on {{Form.FormData.CompletedDate| date}}.</span>
+                                </td>
+                            </tr>
                             <tr ng-repeat="comment in Form.FormData.Comments">
                                 <td>
                                     <i class="fa fa-exclamation-circle" style="font-size: 18px"></i>
@@ -278,17 +284,35 @@
         }
         $scope.completeCase = function(){
             if($scope.Status!=1 && $scope.BBLE){
-                $http({
-                    method: 'POST',
-                    url: '/api/Title/Completed',                    
-                    data: JSON.stringify($scope.BBLE)
-                }).then(function success(){
-                    $scope.Status = 1;
-                    var dateinfo = new Date().toLocaleDateString()
-                    $scope.$broadcast('titleComment', {message: 'Case Completed on ' + dateinfo })
-                    ptCom.alert("The case have moved to Completed")
-                }, function error(){
-                })
+                ptCom.confirm("You are going to complated the case?", "")
+                    .then(function(r){
+                        if (r){                        
+                            $http({
+                                method: 'POST',
+                                url: '/api/Title/Completed',                    
+                                data: JSON.stringify($scope.BBLE)
+                            }).then(function success(){
+                                $scope.Status = 1;
+                                $scope.Form.FormData.CompletedDate = new Date();
+                                ptCom.alert("The case have moved to Completed")
+                            }, function error(){})
+                        }
+                    })
+
+            }else if($scope.BBLE) {
+                ptCom.confirm("You are going to uncomplated the case?", "")
+                    .then(function(r){
+                        if (r){                        
+                            $http({
+                                method: 'POST',
+                                url: '/api/Title/UnCompleted',                    
+                                data: JSON.stringify($scope.BBLE)
+                            }).then(function success(){
+                                $scope.Status = -1;
+                                ptCom.alert("Uncomplete case successful")
+                            }, function error(){})
+                        }
+                    })
             }
         }
         $scope.getStatus = function(bble){

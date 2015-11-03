@@ -11,6 +11,10 @@
                 <label class="ss_form_input_title ">Upload</label>
                 <pt-file file-bble="BBLE" upload-type="title" file-id="Housing_and_Building_Search_Upload" file-model="Form.FormData.buildingLiens.Housing_and_Building_Search_Upload"></pt-file>
             </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title ">Document Date</label>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Housing_and_Building_Search_Date" ss-date></input>
+            </li>
         </ul>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
@@ -21,6 +25,11 @@
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Upload</label>
                 <pt-file file-bble="BBLE" upload-type="title" file-id="Emergency_Repairs_search_Upload" file-model="Form.FormData.buildingLiens.Emergency_Repairs_search_Upload"></pt-file>
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title ">Document Date</label>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Emergency_Repairs_search_Date" ss-date></input>
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -33,6 +42,11 @@
                 <label class="ss_form_input_title ">Upload</label>
                 <pt-file file-bble="BBLE" upload-type="title" file-id="Fire_Search_Upload" file-model="Form.FormData.buildingLiens.Fire_Search_Upload"></pt-file>
             </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title ">Document Date</label>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Fire_Search_Date" ss-date></input>
+            </li>
         </ul>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
@@ -44,6 +58,11 @@
                 <label class="ss_form_input_title ">Upload</label>
                 <pt-file file-bble="BBLE" upload-type="title" file-id="Street_Report_Upload" file-model="Form.FormData.buildingLiens.Street_Report_Upload"></pt-file>
             </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title ">Document Date</label>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Street_Report_Date" ss-date></input>
+            </li>
         </ul>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item ">
@@ -54,6 +73,11 @@
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Upload</label>
                 <pt-file file-bble="BBLE" upload-type="title" file-id="Taxes_and_Water_Upload" file-model="Form.FormData.buildingLiens.Taxes_and_Water_Upload"></pt-file>
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title ">Document Date</label>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Taxes_and_Water_Date" ss-date></input>
             </li>
 
         </ul>
