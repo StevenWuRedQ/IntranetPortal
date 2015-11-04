@@ -104,6 +104,12 @@ Partial Public Class Lead
 
     Public Property ThirdPartyCategory As String
 
+    Public Shared Function HasArchieved(bble As String) As Boolean
+        Using ctx As New Entities
+            Return ctx.LeadsActivityLogArchiveds.Any(Function(l) l.BBLE = bble)
+        End Using
+    End Function
+
     Friend Function IsViewable(name As String) As Boolean
         If Status = LeadStatus.DeadEnd Or EmployeeName = "Dead Leads" Then
             Return True

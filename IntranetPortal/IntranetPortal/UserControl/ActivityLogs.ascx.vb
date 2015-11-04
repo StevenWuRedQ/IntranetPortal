@@ -484,7 +484,9 @@ Public Class ActivityLogs
         If Page.User.IsInRole("Admin") Then
 
             If LogCategory = LeadsActivityLog.LogCategory.SalesAgent Then
+
                 Return True
+
             End If
         End If
 
