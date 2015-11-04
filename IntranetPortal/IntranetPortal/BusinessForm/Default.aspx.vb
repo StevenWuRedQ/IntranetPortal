@@ -11,7 +11,17 @@
                 Dim tag = Request.QueryString("tag").ToString
                 BindData(tag)
             Else
-                BusinessList.BindList()
+                'load from workflow
+                If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                    Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
+
+                    If wli IsNot Nothing Then
+                        Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
+                        BindData(bble)
+                    End If
+                Else
+                    BusinessList.BindList()
+                End If
             End If
 
             rptTopmenu.DataSource = FormData.Controls

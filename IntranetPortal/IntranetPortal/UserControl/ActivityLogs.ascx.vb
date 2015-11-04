@@ -519,6 +519,8 @@ Public Class ActivityLogs
             WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text, "", "/LegalUI/LegalUI.aspx")
         ElseIf DisplayMode = ActivityLogMode.Construction Then
             WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text, "", "/Construction/ConstructionUI.aspx")
+        ElseIf DisplayMode = ActivityLogMode.Title
+            WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text, "", "/BusinessForm/Default.aspx")
         End If
 
         For i = 0 To emps.Count - 1

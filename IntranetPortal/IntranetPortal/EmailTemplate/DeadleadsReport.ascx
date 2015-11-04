@@ -52,7 +52,7 @@ Below is report of Deadleads today (<%= DateTime.Today.ToShortDateString() %>). 
                                   End Function).ToList
         %>
         <tr>
-            <td><%= groupData.Key %></td>
+            <td><a href="#<%=groupData.Key%>"><%= groupData.Key %></a></td>
             <td><%= lds.Where(Function(l) l.DeadReason = IntranetPortal.Lead.DeadReasonEnum.DeadRecord).Count  %></td>
             <td><%= lds.Where(Function(l) l.DeadReason = IntranetPortal.Lead.DeadReasonEnum.LoanMod).Count  %></td>
             <td><%= lds.Where(Function(l) l.DeadReason = IntranetPortal.Lead.DeadReasonEnum.ShortSaleWithOther).Count  %></td>
@@ -61,7 +61,7 @@ Below is report of Deadleads today (<%= DateTime.Today.ToShortDateString() %>). 
             <td><%= lds.Where(Function(l) l.DeadReason = IntranetPortal.Lead.DeadReasonEnum.UnableToContact).Count  %></td>
             <td><%= lds.Where(Function(l) l.DeadReason = IntranetPortal.Lead.DeadReasonEnum.MgrDisapproved).Count  %></td>
             <td><%= lds.Where(Function(l) (Not l.DeadReason.HasValue) OrElse l.DeadReason < 1).Count %></td>
-            <td><%= groupData.Amount %></td>
+            <td><a href="#<%=groupData.Key%>"><%= groupData.Amount %></a></td>
         </tr>
 
         <% Next%>
@@ -70,7 +70,7 @@ Below is report of Deadleads today (<%= DateTime.Today.ToShortDateString() %>). 
 <br />
 <h3>Team Breakdown:</h3>
 <% For Each item In items%>
-<table style="margin-left: 15px; border: 1px solid black; border-collapse: collapse; border-spacing: 0px; width: 700px" border="1" cellspacing="0">
+<table id="<%=item.Key %>" style="margin-left: 15px; border: 1px solid black; border-collapse: collapse; border-spacing: 0px; width: 700px" border="1" cellspacing="0">
     <thead>
         <tr>
             <td>Team: <%=item.Key%> (<%= item.Amount %>)</td>
