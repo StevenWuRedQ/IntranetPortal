@@ -199,6 +199,24 @@
                         </div>
                     </GroupRowTemplate>
                 </dx:GridViewDataColumn>
+                 <dx:GridViewDataColumn FieldName="StatusStr" Visible="false" VisibleIndex="4">
+                    <GroupRowTemplate>
+                        <div>
+                            <table style="height: 30px">
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
+                                    <td style="width: 80px;">
+                                        <span class="font_black">
+                                            <span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                        </span>
+                                    </td>
+                                    <td style="padding-left: 10px">
+                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </GroupRowTemplate>
+                </dx:GridViewDataColumn>
                 <dx:GridViewDataColumn Width="40px" VisibleIndex="6" Visible="false">
                     <DataItemTemplate>
                         <div class="hidden_icon">

@@ -127,6 +127,25 @@
         End Using
     End Function
 
+    Public Shared Function GetLeadsActivityLogWithArchieved(bble As String) As List(Of LeadsActivityLog)
+
+        Using ctx As New Entities
+
+            Dim logs = ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble).OrderByDescending(Function(l) l.ActivityDate).ToList
+
+            Dim archived = ctx.LeadsActivityLogArchiveds.Where(Function(l) l.BBLE = bble).ToList
+
+            logs.AddRange(archived.Select(Function(r)
+                                              Dim log As New LeadsActivityLog
+                                              Core.Utility.CopyTo(r, log)
+                                              Return log
+                                          End Function).ToList)
+
+            Return logs.OrderByDescending(Function(l) l.ActivityDate).ToList
+        End Using
+
+    End Function
+
     Enum LogCategory
         SalesAgent
         Finder

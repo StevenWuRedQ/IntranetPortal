@@ -329,7 +329,7 @@
             <div style="color: #b1b2b7;">
                 <div class="form-group ">
                     <label class="upcase_text">Select Reason</label>
-                    <dx:ASPxComboBox ID="cbDeadReasons" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">
+                    <dx:ASPxComboBox ID="cbDeadReasons" ClientInstanceName="cbDeadReasons" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">                        
                         <Items>
                             <dx:ListEditItem Text="Full Sale Completed" Value="8" />
                             <dx:ListEditItem Text="Dead Recorded with Other Party" Value="1" />
@@ -340,7 +340,7 @@
                             <dx:ListEditItem Text="Unable to contact" Value="6" />
                             <dx:ListEditItem Text="Manager disapproved" Value="7" />
                         </Items>
-                        <ClientSideEvents SelectedIndexChanged="function(s,e){}" />
+                        <ClientSideEvents SelectedIndexChanged="function(s,e){}" />                        
                     </dx:ASPxComboBox>
                 </div>
                 <div class="form-group ">
@@ -353,8 +353,8 @@
     <FooterContentTemplate>
         <div style="height: 30px; vertical-align: central">
             <span class="time_buttons" onclick="aspxPopupDeadLeadsClient.Hide()">Cancel</span>
-            <span class="time_buttons" onclick="popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('Save');">Confirm</span>
-            <span class="time_buttons" onclick="popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('DumpDeadLeads');">Dump Dead Leads</span>
+            <span class="time_buttons" onclick="if(cbDeadReasons.GetText() != ''){popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('Save');}else{ alert('please select reason.');}">Confirm</span>
+            <span class="time_buttons" onclick="if(cbDeadReasons.GetText() != ''){popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('DumpDeadLeads');}else{ alert('please select reason.');}">Dump Dead Leads</span>
         </div>
     </FooterContentTemplate>
     <ClientSideEvents EndCallback="function(s,e){

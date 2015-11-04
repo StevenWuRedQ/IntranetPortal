@@ -726,6 +726,23 @@
                 <dx:GridViewDataTextColumn FieldName="Comments" PropertiesTextEdit-EncodeHtml="false" VisibleIndex="1" FilterCellStyle-Wrap="Default" EditCellStyle-Wrap="False">
                     <HeaderTemplate>
                         Activity History
+                        <asp:Literal runat="server" ID="ltArchievedBox" Visible="<%# ShowArchieveBox() %>">
+                            <input type="checkbox" id="chkShowArchieve" onclick="ShowArchieve(this)" /><label for="chkShowArchieve">Show Archieved</label>
+                            <script>
+                                var checkTheBox = false;
+                                function ShowArchieve(cb)
+                                {
+                                    if(cb.checked)
+                                    {
+                                        gridTrackingClient.PerformCallback("ShowArchieved");
+                                        checkTheBox = true;
+
+                                    } else {
+                                        gridTrackingClient.Refresh();
+                                    }
+                                }
+                            </script>
+                        </asp:Literal>
                     </HeaderTemplate>
                     <PropertiesTextEdit EncodeHtml="False"></PropertiesTextEdit>
                     <EditCellStyle Wrap="False"></EditCellStyle>

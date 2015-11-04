@@ -1,6 +1,16 @@
 ﻿Public Class TitleCase
     Inherits BusinessDataBase
 
+    Public ReadOnly Property StatusStr As String
+        Get
+            If Status.HasValue Then
+                Return CType(Status, DataStatus).ToString
+            End If
+
+            Return Nothing
+        End Get
+    End Property
+
     Public Shared Function GetCase(bble As String) As TitleCase
         Using ctx As New ConstructionEntities
             Return ctx.TitleCases.Find(bble)

@@ -471,7 +471,25 @@ Public Class ActivityLogs
 
             BindData(hfBBLE.Value)
         End If
+
+        If e.Parameters.StartsWith("ShowArchieved") Then
+            Dim logs = LeadsActivityLog.GetLeadsActivityLogWithArchieved(hfBBLE.Value)
+            gridTracking.DataSource = logs
+            gridTracking.DataBind()
+        End If
     End Sub
+
+    Public Function ShowArchieveBox() As Boolean
+
+        If Page.User.IsInRole("Admin") Then
+
+            If LogCategory = LeadsActivityLog.LogCategory.SalesAgent Then
+                Return True
+            End If
+        End If
+
+        Return False
+    End Function
 
     Sub SetAsTask()
         If Not String.IsNullOrEmpty(hfResend.Value) Then

@@ -24,6 +24,10 @@ Public Class TitleCaseList
             gridCase.GroupBy(gridCase.Columns("Owner"))
         End If
 
+        If String.IsNullOrEmpty(Request.QueryString("s")) Then
+            gridCase.GroupBy(gridCase.Columns("StatusStr"))
+        End If
+
         gridCase.DataBind()
     End Sub
 
