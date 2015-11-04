@@ -19,6 +19,11 @@ Public Class TitleManage
 
     Public Shared Sub AssignTo(bble As String, userName As String, assignBy As String)
         Dim tCase = TitleCase.GetCase(bble)
+
+        If tCase.Owner = userName Then
+            Return
+        End If
+
         tCase.Owner = userName
         tCase.SaveData(assignBy)
 
