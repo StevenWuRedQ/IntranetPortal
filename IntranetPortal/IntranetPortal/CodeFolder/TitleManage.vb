@@ -17,6 +17,15 @@ Public Class TitleManage
         Return False
     End Function
 
+    Public Shared Function GetTitleOwner(bble As String) As String
+
+        If IsInTitle(bble) Then
+            Return TitleCase.GetCase(bble).Owner
+        End If
+
+        Return Nothing
+    End Function
+
     Public Shared Sub AssignTo(bble As String, userName As String, assignBy As String)
         Dim tCase = TitleCase.GetCase(bble)
 

@@ -31,6 +31,7 @@ Public Class ShortSaleServices
         End If
 
         ssCase.DocumentRequestDetails = ShortSaleManage.GetDocumentRequestDetail(ssCase.BBLE)
+        ssCase.InHouseTitle = TitleManage.GetTitleOwner(ssCase.BBLE)
 
         Core.SystemLog.Log(ShortSaleManage.OpenCaseLogTitle, Nothing, Core.SystemLog.LogCategory.Operation, ssCase.BBLE, HttpContext.Current.User.Identity.Name)
 

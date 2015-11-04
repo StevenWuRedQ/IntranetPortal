@@ -291,6 +291,7 @@ Partial Public Class ShortSaleCase
     End Property
 
     Public Property DocumentRequestDetails As String
+    Public Property InHouseTitle As String
 
     Public ReadOnly Property AssignedProcessor As PartyContact
         Get
