@@ -113,6 +113,10 @@ Public Class ExcelBuilder
             End If
 
             report.Cell("A8").Value = "BUYER on COS/HUD/APPROVAL/CORP DOCS MATCH"
+            temp = json.SelectToken("FormData.info.BUERY_MATCH")
+            If temp IsNot Nothing Then
+                report.Cell("B8").Value = Boolean.Parse(temp.ToString)
+            End If
 
             Dim a1a8 = report.Range("A3:A8")
             a1a8.Style.Fill.BackgroundColor = ColorLightBlue
@@ -121,17 +125,19 @@ Public Class ExcelBuilder
 
             index = 10
 
-            report.Cell("A" & index).Value = "1ST APPROVAL EXPIRES"
-            report.Cell("A" & index).Style.Fill.BackgroundColor = ColorLightBlue
-            report.Cell("A" & index).Style.Font.SetBold()
-            index = index + 2
+            temp = json.SelectToken("FormData.preclosing.ApprovalData")
+            If temp IsNot Nothing Then
+                Dim approvals = temp.ToList()
+                For Each tdata In approvals
+                    report.Cell("A" & index).Value = "APPROVAL " & approvals.IndexOf(tdata) & " EXPIRES"
+                    report.Cell("A" & index).Style.Fill.BackgroundColor = ColorLightBlue
+                    report.Cell("A" & index).Style.Font.SetBold()
+                    report.Cell("B" & index).Value = tdata("Expired_Date").ToString
+                    report.Cell("C" & index).Value = tdata("Note").ToString
+                    index = index + 2
+                Next
 
-
-            report.Cell("A" & index).Value = "2ND APPROVAL EXPIRES"
-            report.Cell("A" & index).Style.Fill.BackgroundColor = ColorLightBlue
-            report.Cell("A" & index).Style.Font.SetBold()
-            index = index + 2
-
+            End If
 
             report.Cell("A" & index).Value = "CHAIN OF TITLE"
             report.Cell("A" & index).Style.Fill.BackgroundColor = ColorLightBlue

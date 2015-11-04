@@ -10,7 +10,7 @@
                 <button type="button" class="btn btn-info btn-circle icon_btn" popover-placement="right" uib-popover-template="'intake'" ng-style="CSCase.CSCase.InitialIntake.InitialFormAssign?{'background-color': '#5cb85c'}:{}"><i class="fa fa-share"></i ></button>
                 <script type="text/ng-template" id="intake">
                 <div>
-                    <h2 class="label label-info">Assign to</h3>
+                    <h3 class="label label-info">Assign to</h3>
 
                     <hr>
                     <span  ng-repeat="x in RUNNER_LIST" >

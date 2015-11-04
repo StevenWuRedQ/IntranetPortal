@@ -13,137 +13,147 @@
     <div id="TitleController" ng-controller="TitleController" style="max-height: 850px; overflow: auto">
         <div id="TitleUIContent" style="padding-top: 5px">
             <div id="title_prioity_content">
-                <div style="font-size: 30px; margin-left: 30px; height: 80px" class="font_gray">
-                    <div class="col-md-10" style="margin: 10px 0">
+                <div style="margin-left: 30px; height: 80px" class="font_gray">
+                    <div class="col-md-10" style="margin: 10px 0; font-size: 30px">
                         <i class="fa fa-home"></i>&nbsp;  
                         <span ng-bind="Form.FormData.CaseName"></span>
                     </div>
                     <div class="col-md-2 pull-right" style="margin: 10px 0">
-                        <span class="btn btn-default btn-round" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+ leadsInfoBBLE, 'Maps')">Map</span>
+                        <div>
+                            <span class="btn btn-default btn-round" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+ leadsInfoBBLE, 'Maps')">Map</span>
+                        </div>
                         <br />
-                        <span class="btn btn-default btn-circle icon_btn" ng-click="completeCase()" ng-style="Status==1?{'background-color': '#80c02c'}:{}" uib-tooltip="{{Status==1?'Uncomplete case':'Complete case'}}"><i class="fa fa-check"></i></span>
-                        <span class="btn btn-default btn-circle icon_btn" ng-click="generateXML()" uib-tooltip="Generate XML"><i class="fa fa-download"></i></span>
-                    </div>
-                </div>
-
-                <div class="comment-panel" ng-controller="CommentCtrl" style="margin: 10px; border-top: 1px solid #c8c8c8">
-                    <%--note list--%>
-                    <div style="width: 100%; overflow: auto; max-height: 160px;">
-                        <table class="table table-striped" style="font-size: 14px; margin: 0; padding: 5px">
-                            <tr ng-show="Status==1">
-                                <td>
-                                    <i class="fa fa-exclamation-circle" style="font-size: 18px"></i>
-                                    <span style="margin-left: 10px">The case is completed on {{Form.FormData.CompletedDate| date}}.</span>
-                                </td>
-                            </tr>
-                            <tr ng-repeat="comment in Form.FormData.Comments">
-                                <td>
-                                    <i class="fa fa-exclamation-circle" style="font-size: 18px"></i>
-                                    <span style="margin-left: 10px">{{comment.comment}}</span>
-                                    <span class="pull-right">
-                                        <i class="fa fa-times icon_btn text-danger" style="font-size: 18px" ng-click="arrayRemove(Form.FormData.Comments, $index, true);"></i>
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div>
-                        <i class="fa fa-plus-circle text-primary icon_btn tooltip-examples" style="font-size: 19px; margin: 8px" title="Add Notes" ng-click="showPopover($event)"></i>
-                        <dx:ASPxPopupControl ClientInstanceName="aspxConstructionCommentsPopover" Width="550px" Height="50px" ID="ASPxPopupControl2"
-                            ShowHeader="false" runat="server" EnableViewState="false" PopupHorizontalAlign="OutsideRight" PopupVerticalAlign="Middle" EnableHierarchyRecreation="True">
-                            <ContentCollection>
-                                <dx:PopupControlContentControl>
-                                    <table>
-                                        <tr style="padding-top: 3px;">
-                                            <td style="width: 380px; vertical-align: central">
-                                                <input type="text" ng-model="addCommentTxt" class="form-control" />
-                                            </td>
-                                            <td style="text-align: right">
-                                                <div style="margin-left: 20px">
-                                                    <input type="button" value="Add" ng-click="addCommentFromPopup()" class="rand-button" style="background-color: #3993c1" />
-                                                    <input type="button" value="Close" onclick="aspxConstructionCommentsPopover.Hide()" class="rand-button" style="background-color: #3993c1" />
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </dx:PopupControlContentControl>
-                            </ContentCollection>
-                        </dx:ASPxPopupControl>
+                        <div>
+                            <span class="btn btn-default btn-circle icon_btn" popover-placement="right" uib-popover-template="'titlechangestatus'" uib-tooltip="Update Case Status" popover-is-open="ChangeStatusIsOpen"><i class="fa fa-exchange"></i></span>
+                            <span class="btn btn-default btn-circle icon_btn" ng-click="generateXML()" uib-tooltip="Generate XML"><i class="fa fa-download"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="shortSaleUI">
-
-                <ul class="nav nav-tabs overview_tabs" role="tablist">
-                    <li style="font-size: 12px" class="short_sale_tab active">
-                        <a class="shot_sale_tab_a" href="#TitleInfoTab" role="tab" data-toggle="tab">Info</a>
-                    </li>
-                    <li style="font-size: 12px" class="short_sale_tab">
-                        <a class="shot_sale_tab_a" href="#TitleOwnerLiensTab" role="tab" data-toggle="tab">Owner Liens</a>
-                    </li>
-                    <li style="font-size: 12px" class="short_sale_tab">
-                        <a class="shot_sale_tab_a" href="#TitleBuildingLiensTab" role="tab" data-toggle="tab">Building Liens</a>
-                    </li>
-                    <li style="font-size: 12px" class="short_sale_tab">
-                        <a class="shot_sale_tab_a" href="#TitleSurveyAndContinTab" role="tab" data-toggle="tab">Surveys And Contins</a>
-                    </li>
-                    <li style="font-size: 12px" class="short_sale_tab ">
-                        <a class="shot_sale_tab_a" href="#TitleFeeClearanceTab" role="tab" data-toggle="tab">Fee Breakdown</a>
-                    </li>
-                    <li style="font-size: 12px" class="short_sale_tab ">
-                        <a class="shot_sale_tab_a" href="#TitlePreclosingTab" role="tab" data-toggle="tab">Preclosing Docs</a>
-                    </li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="short_sale_content">
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="TitleInfoTab">
-                            <uc1:TitleInfo runat="server" ID="TitleInfo" />
-                        </div>
-                        <div class="tab-pane" id="TitleOwnerLiensTab">
-                            <uc1:TitleOwnerLiens runat="server" ID="TitleOwnerLiens" />
-                        </div>
-                        <div class="tab-pane" id="TitleBuildingLiensTab">
-                            <uc1:TitleBuildingLiens runat="server" ID="TitleBuildingLiens" />
-                        </div>
-                        <div class="tab-pane" id="TitleSurveyAndContinTab">
-                            <uc1:TitleSurveyAndContin runat="server" ID="TitleSurveyAndContin" />
-                        </div>
-                        <div class="tab-pane" id="TitleFeeClearanceTab">
-                            <uc1:TitleFeeClearance runat="server" ID="TitleFeeClearance" />
-                        </div>
-                        <div class="tab-pane" id="TitlePreclosingTab">
-                            <uc1:TitlePreclosing runat="server" ID="TitlePreclosing" />
-                        </div>
+            <script type="text/ng-template" id="titlechangestatus">
+                    <div style="width: 240px">
+                        <h4 class="Text-Info">Change Case Status To:</h3>
+                        <hr>
+                        <span ng-repeat="x in StatusList">
+                            <input type="radio" style="display: inline-block" name="titlestatus" ng-model="$parent.$parent.CaseStatus" ng-value="x.num"></input>&nbsp;{{x.desc}}
+                            <br>
+                        </span>
+                        <br>
+                        <button type="button" class="btn btn-primary" ng-click="updateCaseStatus()">Change</button>
                     </div>
+            </script>
+            <div class="comment-panel" ng-controller="CommentCtrl" style="margin: 10px; border-top: 1px solid #c8c8c8">
+                <%--note list--%>
+                <div style="width: 100%; overflow: auto; max-height: 160px;">
+                    <table class="table table-striped" style="font-size: 14px; margin: 0; padding: 5px">
+                        <tr ng-repeat="comment in Form.FormData.Comments">
+                            <td>
+                                <i class="fa fa-exclamation-circle" style="font-size: 18px"></i>
+                                <span style="margin-left: 10px">{{comment.comment}}</span>
+                                <span class="pull-right">
+                                    <i class="fa fa-times icon_btn text-danger" style="font-size: 18px" ng-click="arrayRemove(Form.FormData.Comments, $index, true);"></i>
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
 
+                <div>
+                    <i class="fa fa-plus-circle text-primary icon_btn tooltip-examples" style="font-size: 19px; margin: 8px" title="Add Notes" ng-click="showPopover($event)"></i>
+                    <dx:ASPxPopupControl ClientInstanceName="aspxConstructionCommentsPopover" Width="550px" Height="50px" ID="ASPxPopupControl2"
+                        ShowHeader="false" runat="server" EnableViewState="false" PopupHorizontalAlign="OutsideRight" PopupVerticalAlign="Middle" EnableHierarchyRecreation="True">
+                        <ContentCollection>
+                            <dx:PopupControlContentControl>
+                                <table>
+                                    <tr style="padding-top: 3px;">
+                                        <td style="width: 380px; vertical-align: central">
+                                            <input type="text" ng-model="addCommentTxt" class="form-control" />
+                                        </td>
+                                        <td style="text-align: right">
+                                            <div style="margin-left: 20px">
+                                                <input type="button" value="Add" ng-click="addCommentFromPopup()" class="rand-button" style="background-color: #3993c1" />
+                                                <input type="button" value="Close" onclick="aspxConstructionCommentsPopover.Hide()" class="rand-button" style="background-color: #3993c1" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </dx:PopupControlContentControl>
+                        </ContentCollection>
+                    </dx:ASPxPopupControl>
+                </div>
             </div>
         </div>
-    </div>
 
-    <dx:ASPxPopupControl ClientInstanceName="aspxAcrisControl" Width="1000px" Height="800px"
-        ID="ASPxPopupControl1" HeaderText="Acris" Modal="true" CloseAction="CloseButton" ShowMaximizeButton="true"
-        runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-        <HeaderTemplate>
-            <div class="clearfix">
-                <div class="pop_up_header_margin">
-                    <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
-                    <span class="pop_up_header_text" id="pop_up_header_text">Acris</span> <span class="pop_up_header_text"></span>
-                </div>
-                <div class="pop_up_buttons_div">
-                    <i class="fa fa-times icon_btn" onclick="aspxAcrisControl.Hide()"></i>
+        <div class="shortSaleUI">
+
+            <ul class="nav nav-tabs overview_tabs" role="tablist">
+                <li style="font-size: 12px" class="short_sale_tab active">
+                    <a class="shot_sale_tab_a" href="#TitleInfoTab" role="tab" data-toggle="tab">Info</a>
+                </li>
+                <li style="font-size: 12px" class="short_sale_tab">
+                    <a class="shot_sale_tab_a" href="#TitleOwnerLiensTab" role="tab" data-toggle="tab">Owner Liens</a>
+                </li>
+                <li style="font-size: 12px" class="short_sale_tab">
+                    <a class="shot_sale_tab_a" href="#TitleBuildingLiensTab" role="tab" data-toggle="tab">Building Liens</a>
+                </li>
+                <li style="font-size: 12px" class="short_sale_tab">
+                    <a class="shot_sale_tab_a" href="#TitleSurveyAndContinTab" role="tab" data-toggle="tab">Surveys And Contins</a>
+                </li>
+                <li style="font-size: 12px" class="short_sale_tab ">
+                    <a class="shot_sale_tab_a" href="#TitleFeeClearanceTab" role="tab" data-toggle="tab">Fee Breakdown</a>
+                </li>
+                <li style="font-size: 12px" class="short_sale_tab ">
+                    <a class="shot_sale_tab_a" href="#TitlePreclosingTab" role="tab" data-toggle="tab">Preclosing Docs</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="short_sale_content">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="TitleInfoTab">
+                        <uc1:TitleInfo runat="server" ID="TitleInfo" />
+                    </div>
+                    <div class="tab-pane" id="TitleOwnerLiensTab">
+                        <uc1:TitleOwnerLiens runat="server" ID="TitleOwnerLiens" />
+                    </div>
+                    <div class="tab-pane" id="TitleBuildingLiensTab">
+                        <uc1:TitleBuildingLiens runat="server" ID="TitleBuildingLiens" />
+                    </div>
+                    <div class="tab-pane" id="TitleSurveyAndContinTab">
+                        <uc1:TitleSurveyAndContin runat="server" ID="TitleSurveyAndContin" />
+                    </div>
+                    <div class="tab-pane" id="TitleFeeClearanceTab">
+                        <uc1:TitleFeeClearance runat="server" ID="TitleFeeClearance" />
+                    </div>
+                    <div class="tab-pane" id="TitlePreclosingTab">
+                        <uc1:TitlePreclosing runat="server" ID="TitlePreclosing" />
+                    </div>
                 </div>
             </div>
-        </HeaderTemplate>
-        <ContentCollection>
-            <dx:PopupControlContentControl runat="server">
-            </dx:PopupControlContentControl>
-        </ContentCollection>
-    </dx:ASPxPopupControl>
+
+        </div>
+    </div>
+</div>
+
+<dx:ASPxPopupControl ClientInstanceName="aspxAcrisControl" Width="1000px" Height="800px"
+    ID="ASPxPopupControl1" HeaderText="Acris" Modal="true" CloseAction="CloseButton" ShowMaximizeButton="true"
+    runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    <HeaderTemplate>
+        <div class="clearfix">
+            <div class="pop_up_header_margin">
+                <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
+                <span class="pop_up_header_text" id="pop_up_header_text">Acris</span> <span class="pop_up_header_text"></span>
+            </div>
+            <div class="pop_up_buttons_div">
+                <i class="fa fa-times icon_btn" onclick="aspxAcrisControl.Hide()"></i>
+            </div>
+        </div>
+    </HeaderTemplate>
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server">
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+</dx:ASPxPopupControl>
 </div>
 
 <script>
@@ -174,7 +184,6 @@
 </script>
 <script>
     angular.module("PortalApp").controller("CommentCtrl", function ($scope, $timeout) {
-        /* comments */
         $scope.showPopover = function (e) {
             aspxConstructionCommentsPopover.ShowAtElement(e.target);
         }
@@ -224,7 +233,24 @@
             }
         }
         /* end model define*/
-
+        $scope.StatusList = [
+            {
+                num: -1,
+                desc: 'NA'               
+            },{
+                num: 0,
+                desc: 'Initial Review'
+            },{
+                num: 1,
+                desc: 'Clearance'
+            },{
+                num: 2,
+                desc: 'CTC'
+            },{
+                num: 3,
+                desc: 'Completed'
+            }
+        ]
         $scope.arrayRemove = ptCom.arrayRemove;
         $scope.ptCom = ptCom;
         $scope.ptContactServices = ptContactServices;
@@ -286,7 +312,7 @@
             }
         }
         $scope.completeCase = function(){
-            if($scope.Status!=1 && $scope.BBLE){
+            if($scope.CaseStatus!=1 && $scope.BBLE){
                 ptCom.confirm("You are going to complated the case?", "")
                     .then(function(r){
                         if (r){                        
@@ -295,7 +321,7 @@
                                 url: '/api/Title/Completed',                    
                                 data: JSON.stringify($scope.BBLE)
                             }).then(function success(){
-                                $scope.Status = 1;
+                                $scope.CaseStatus = 1;
                                 $scope.Form.FormData.CompletedDate = new Date();
                                 ptCom.alert("The case have moved to Completed")
                             }, function error(){})
@@ -311,23 +337,39 @@
                                 url: '/api/Title/UnCompleted',                    
                                 data: JSON.stringify($scope.BBLE)
                             }).then(function success(){
-                                $scope.Status = -1;
+                                $scope.CaseStatus = -1;
                                 ptCom.alert("Uncomplete case successful")
                             }, function error(){})
                         }
                     })
             }
         }
+        $scope.updateCaseStatus = function(){
+            if($scope.CaseStatus && $scope.BBLE){
+                $scope.ChangeStatusIsOpen = false;
+                ptCom.confirm("You are going to change case status?", "")
+                   .then(function(r){
+                       if (r){                        
+                           $http({
+                               method: 'POST',
+                               url: '/api/Title/UpdateStatus?bble=' + $scope.BBLE,                    
+                               data: JSON.stringify($scope.CaseStatus)
+                           }).then(function success(){
+                               ptCom.alert("The case status has changed!")
+                           }, function error(){})
+                       }
+                   })
+            }
+        }
         $scope.getStatus = function(bble){
             $http.get('/api/Title/GetCaseStatus?bble='+ bble)
             .then(function succ(res){
-                $scope.Status = res.data
+                $scope.CaseStatus = res.data
             },function error(){
-                $scope.Status = -1;
+                $scope.CaseStatus = -1;
                 console.log("get status error")
             })
         }
-
         $scope.generateXML = function(){
             $http({
                 url: "/api/Title/GenerateExcel",
@@ -337,7 +379,6 @@
                 STDownloadFile("/api/ConstructionCases/GetGeneratedExcel", "titlereport.xlsx")
             })
         }
-
         $scope.updateBuyerTitle = function(){
             var updateFlag = false;
             var data = $scope.BuyerTitle;
