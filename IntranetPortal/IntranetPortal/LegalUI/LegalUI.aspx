@@ -850,11 +850,6 @@
                     return AllContact.filter(function (o) { return o.ContactId == id })[0];
                 }
 
-                $scope.SelectBoxChange = function (e) {
-                    alert(JSON.stringify(e));
-                }
-
-
                 $scope.InitContact = function (id, dataSourceName) {
                     return {
                         dataSource: dataSourceName ? $scope[dataSourceName] : $scope.ContactDataSource,

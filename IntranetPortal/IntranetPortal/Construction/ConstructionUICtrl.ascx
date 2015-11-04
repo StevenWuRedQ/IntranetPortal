@@ -69,15 +69,15 @@
                 </dx:ASPxListBox>
                 <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
                     <ClientSideEvents Click="function(s,e){
-                                        var item = listboxEmployeeClient.GetSelectedItem();
-                                        if(item == null)
-                                        {
-                                             AngularRoot.alert('Please select user.');
-                                             return;
-                                         }
-                                        popupSelectOwner.PerformCallback('Save|' + leadsInfoBBLE + '|' + item.text);
-                                        popupSelectOwner.Hide();
-                                        }" />
+                                                            var item = listboxEmployeeClient.GetSelectedItem();
+                                                            if(item == null)
+                                                            {
+                                                                 AngularRoot.alert('Please select user.');
+                                                                 return;
+                                                             }
+                                                            popupSelectOwner.PerformCallback('Save|' + leadsInfoBBLE + '|' + item.text);
+                                                            popupSelectOwner.Hide();
+                                                            }" />
                 </dx:ASPxButton>
             </dx:PopupControlContentControl>
         </ContentCollection>
