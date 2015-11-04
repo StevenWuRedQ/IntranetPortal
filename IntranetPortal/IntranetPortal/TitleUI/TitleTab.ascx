@@ -154,7 +154,6 @@
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
-</div>
 
 <script>
     function ShowPopupMap(url, header, subHeader) {

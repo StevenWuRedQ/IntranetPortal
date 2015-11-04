@@ -56,6 +56,7 @@ Public Class ExcelBuilder
             report.Column("A").Width = 45
             report.Column("B").Width = 45
             report.Column("B").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left)
+            report.Column("C").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left)
             report.Column("C").Width = 45
             report.Column("D").Width = 3
             report.Column("D").Style.Fill.BackgroundColor = ColorGrey
@@ -148,15 +149,39 @@ Public Class ExcelBuilder
             End If
             index = index + 2
 
-            report.Cell("A" & index).Value = "PRIOR OWNER ISSUES"
-            report.Cell("A" & index).Style.Fill.BackgroundColor = ColorLightBlue
-            report.Cell("A" & index).Style.Font.SetBold()
-            index = index + 2
-
-            report.Cell("A" & index).Value = "CURRENT OWNER ISSUES"
-            report.Cell("A" & index).Style.Fill.BackgroundColor = ColorLightBlue
-            report.Cell("A" & index).Style.Font.SetBold()
-            index = index + 2
+            temp = json.SelectToken("FormData.Owners")
+            If temp IsNot Nothing Then
+                Dim owners = temp.ToList
+                For Each owner In owners
+                    report.Cell("A" & index).Value = owner("name").ToString & " ISSUES"
+                    report.Cell("A" & index).Style.Fill.BackgroundColor = ColorLightBlue
+                    report.Cell("A" & index).Style.Font.SetBold()
+                    index = index + 1
+                    Dim shownlist = owner("shownlist")
+                    Dim sectionlist = New ArrayList({"Mortgages", "Lis_Pendens", "Judgements", "ECB_Notes", "PVB_Notes", "Bankruptcy_Notes", "UCCs", "FederalTaxLiens", "MechanicsLiens"})
+                    For Each section In sectionlist
+                        Dim tsec = owner(section)
+                        Dim tindex = sectionlist.IndexOf(section)
+                        If tsec IsNot Nothing And Boolean.Parse(shownlist(tindex).ToString) Then
+                            Dim i = 1
+                            For Each item In tsec.ToList
+                                Dim o = JObject.Parse(item.ToString)
+                                If o IsNot Nothing Then
+                                    For Each p In o.Properties
+                                        If p.Value IsNot Nothing And p.Name <> "$$hashKey" Then
+                                            report.Cell("B" & index).Value = sectionlist(tindex).ToString & " " & i & " " & p.Name
+                                            report.Cell("C" & index).Value = p.Value.ToString
+                                            index = index + 1
+                                        End If
+                                    Next
+                                End If
+                                i = i + 1
+                            Next
+                        End If
+                    Next
+                    index = index + 1
+                Next
+            End If
 
             ' FEE BreakDown
             report.Cell("E4").Value = "FEES"
