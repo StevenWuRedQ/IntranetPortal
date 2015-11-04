@@ -52,8 +52,15 @@ Public Class TitleManage
 
     Public Shared Sub UpdateStatus(bble As String, status As TitleCase.DataStatus, completedBy As String)
         Dim tCase = TitleCase.GetCase(bble)
-        tCase.Status = status
-        tCase.SaveData(completedBy)
+        If tCase.Status <> status Then
+            tCase.Status = status
+            tCase.SaveData(completedBy)
+
+            Dim comments = "Move case to " & status.ToString
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Title.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
+        Else
+            Throw New Exception("Already in " & status.ToString)
+        End If
     End Sub
 
     Public Shared Sub CompleteCase(bble As String, completedBy As String)
