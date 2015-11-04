@@ -5741,8 +5741,6 @@
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Scripts\jquery.webui-popover.css" />
     <Content Include="Scripts\jquery.webui-popover.js" />
-    <Content Include="Scripts\jszip.js" />
-    <Content Include="Scripts\jszip.min.js" />
     <Content Include="Scripts\js\jquery.backstretch.min.js" />
     <Content Include="Scripts\js\jquery.debouncedresize.js" />
     <Content Include="Scripts\js\jquery.easing.1.3.js" />
@@ -5813,10 +5811,6 @@
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.js" />
     <Content Include="Scripts\lodash.min.js" />
     <Content Include="Scripts\mindmup-editabletable.js" />
-    <Content Include="Scripts\moment-with-locales.js" />
-    <Content Include="Scripts\moment-with-locales.min.js" />
-    <Content Include="Scripts\moment.js" />
-    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\ng-infinite-scroll.min.js" />
     <Content Include="Scripts\ngMask.min.js" />
     <Content Include="Scripts\phonejs-localization\dx.phonejs.de.js" />
@@ -5837,7 +5831,6 @@
     <Content Include="Scripts\stevenjs.js" />
     <Content Include="Scripts\templates\ptfile.html" />
     <Content Include="Scripts\templates\ptfiles.html" />
-    <Content Include="Scripts\ui-bootstrap-0.13.0.js" />
     <Content Include="Scripts\vectormap-data\africa.js" />
     <Content Include="Scripts\vectormap-data\canada.js" />
     <Content Include="Scripts\vectormap-data\eurasia.js" />

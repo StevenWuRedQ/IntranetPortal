@@ -133,8 +133,8 @@ Public Class ExcelBuilder
                     report.Cell("A" & index).Value = "APPROVAL " & approvals.IndexOf(tdata) & " EXPIRES"
                     report.Cell("A" & index).Style.Fill.BackgroundColor = ColorLightBlue
                     report.Cell("A" & index).Style.Font.SetBold()
-                    report.Cell("B" & index).Value = tdata("Expired_Date").ToString
-                    report.Cell("C" & index).Value = tdata("Note").ToString
+                    report.Cell("B" & index).Value = If(tdata("Expired_Date") Is Nothing, "", tdata("Expired_Date").ToString)
+                    report.Cell("C" & index).Value = If(tdata("Note") Is Nothing, "", tdata("Note").ToString)
                     index = index + 2
                 Next
 
