@@ -27,15 +27,15 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <input type="text" class="ss_form_input" ng-bind="SsCase.InHouseTitle" readonly="readonly">
+                <input type="text" class="ss_form_input" ng-model="SsCase.InHouseTitle" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Phone #</label>
-                <input class="ss_form_input" ng-bind="ptContactServices.getContact(SsCase.InHouseTitle).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContactByName(SsCase.InHouseTitle).OfficeNO" mask="(999) 999-9999" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-bind="ptContactServices.getContact(SsCase.InHouseTitle).Email" type="email" readonly="readonly">
+                <input class="ss_form_input" ng-model="ptContactServices.getContactByName(SsCase.InHouseTitle).Email" type="email" readonly="readonly">
             </li>
         </ul>
     </div>
