@@ -7,6 +7,8 @@ Public Class WebForm3
         If Not String.IsNullOrEmpty(Request.QueryString("UserName")) Then
             Me.ComplaintsNotify.BindData(Request.QueryString("UserName"))
         End If
+
+        Me.DeadleadsReport.BindData(Nothing)
     End Sub
 
     Protected Sub Button1_Click(sender As Object, e As EventArgs)
@@ -37,6 +39,10 @@ Public Class WebForm3
         Dim svr As New CommonService
         svr.SendEmailByControl("chrisy@myidealprop.com", "DOB Complaint Update for: " & complaint.Address, "ComplaintsDetailNotify", mailData)
 
+    End Sub
 
+    Protected Sub Button3_Click(sender As Object, e As EventArgs)
+        Dim svr As New CommonService
+        svr.SendEmailByControl("chrisy@myidealprop.com", "Deadleads Report - " & DateTime.Today.ToShortDateString, "DeadleadsReport", Nothing)
     End Sub
 End Class

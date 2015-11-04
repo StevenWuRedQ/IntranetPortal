@@ -211,6 +211,12 @@ Public Class AgentActivitySummaryRule
             Catch ex As Exception
                 Log("AgentActivitySummaryRule Error. TeamName: Legal", ex)
             End Try
+
+            Try
+                client.SendEmailByControl(Employee.CEO.Email, "Deadleads Report - " & DateTime.Today.ToShortDateString, "DeadleadsReport", Nothing)
+            Catch ex As Exception
+                Log("DeadLeads Report Error.", ex)
+            End Try
         End Using
     End Sub
 End Class

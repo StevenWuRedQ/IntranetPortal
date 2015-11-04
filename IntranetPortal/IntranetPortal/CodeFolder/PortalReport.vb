@@ -82,6 +82,27 @@
         End Select
     End Sub
 
+    Public Shared Function LoadDeadLeadsReport(startDate As DateTime, endDate As DateTime) As List(Of AgentActivityData)
+
+        Using ctx As New Entities
+
+            Dim deadLogs = ctx.LeadsStatusLogs.Where(Function(l) l.CreateDate > startDate And l.CreateDate < endDate And l.Type = LeadsStatusLog.LogType.DeadLeads).ToList
+
+            Dim result As New List(Of AgentActivityData)
+            For Each emp In deadLogs.Select(Function(d) d.Employee).Distinct.ToArray
+                Dim act As New AgentActivityData
+                act.Name = emp
+                act.TeamName = UserInTeam.GetUserTeam(emp)
+                Dim bbles = deadLogs.Where(Function(d) d.Employee = emp).Select(Function(d) d.BBLE).ToArray
+                act.DeadLeads = ctx.Leads.Where(Function(ld) bbles.Contains(ld.BBLE)).ToArray
+
+                result.Add(act)
+            Next
+
+            Return result
+        End Using
+    End Function
+
     Public Shared Function LoadTeamAgentActivityReport(teamName As String, startDate As DateTime, endDate As DateTime) As List(Of AgentActivityData)
         Dim users = UserInTeam.GetTeamFinders(teamName)
         Return LoadActivityReport(users, startDate, endDate)
@@ -162,6 +183,13 @@
         Public Property UniqueBBLE As Integer
         Public Property AmountofViewCase As Integer
 
+        Public Property TeamName As String
+        Public ReadOnly Property DeadLeadsAmount As Integer
+            Get
+                Return DeadLeads.Length
+            End Get
+        End Property
+        Public Property DeadLeads As Lead()
     End Class
 
     Public Class CaseActivityData
