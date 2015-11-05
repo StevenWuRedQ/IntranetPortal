@@ -220,8 +220,8 @@ Partial Public Class Lead
         Dim ctx As New Entities
         Dim processes = {LeadProcess.Published, LeadProcess.Publishing}
         Dim result = From ld In ctx.Leads.Where(Function(l) names.Contains(l.EmployeeName) AndAlso processes.Contains(l.Process))
-                   Order By ld.LastUpdate Descending
-                   Select ld
+                     Order By ld.LastUpdate Descending
+                     Select ld
 
         Return result.ToList
     End Function
@@ -249,11 +249,11 @@ Partial Public Class Lead
     Public Shared Function Get3rdPartyLeads(names As String()) As List(Of Lead)
         Using ctx As New Entities
             Dim result = (From ld In ctx.Leads.Where(Function(l) names.Contains(l.EmployeeName) AndAlso l.Status = LeadStatus.InProcess)
-                         Join tp In ctx.LeadsInThirdParties On ld.BBLE Equals tp.BBLE
-                         Select ld, tp.Category).ToList.Select(Function(item)
-                                                                   item.ld.ThirdPartyCategory = item.Category
-                                                                   Return item.ld
-                                                               End Function).ToList
+                          Join tp In ctx.LeadsInThirdParties On ld.BBLE Equals tp.BBLE
+                          Select ld, tp.Category).ToList.Select(Function(item)
+                                                                    item.ld.ThirdPartyCategory = item.Category
+                                                                    Return item.ld
+                                                                End Function).ToList
 
             Return result
         End Using
@@ -423,8 +423,8 @@ Partial Public Class Lead
         Dim emps = Employee.GetAllActiveEmps()
 
         Dim results = (From ld In ctx.Leads
-                      Where emps.Contains(ld.EmployeeName) And (ld.Status <> LeadStatus.DeadEnd And ld.Status <> LeadStatus.InProcess)
-                      Select ld).ToList
+                       Where emps.Contains(ld.EmployeeName) And (ld.Status <> LeadStatus.DeadEnd And ld.Status <> LeadStatus.InProcess)
+                       Select ld).ToList
         Return results
     End Function
 
@@ -435,20 +435,20 @@ Partial Public Class Lead
     End Function
 
     Public Shared Sub ArchivedLogs(bble As String)
+
+        If LeadsInfo.IsInProcess(bble) Then
+            Return
+        End If
+
+        If ShortSaleManage.IsInShortSale(bble) Then
+            Return
+        End If
+
+        If LegalCaseManage.IsInLegal(bble) Then
+            Return
+        End If
+
         Using ctx As New Entities
-
-            If LeadsInfo.IsInProcess(bble) Then
-                Return
-            End If
-
-            If ShortSaleManage.IsInShortSale(bble) Then
-                Return
-            End If
-
-            If LegalCaseManage.IsInLegal(bble) Then
-                Return
-            End If
-
             Dim logs = ctx.LeadsActivityLogs.Where(Function(log) log.BBLE = bble).ToList
 
             Dim archivedLogs As New List(Of LeadsActivityLogArchived)
@@ -461,7 +461,6 @@ Partial Public Class Lead
 
             ctx.LeadsActivityLogArchiveds.AddRange(archivedLogs)
             ctx.LeadsActivityLogs.RemoveRange(logs)
-
             ctx.SaveChanges()
         End Using
     End Sub
@@ -685,7 +684,7 @@ Partial Public Class Lead
         End Get
     End Property
 
-    
+
     Enum DeadReasonEnum
         <Description("Deed Recorded with Other Party")>
         DeadRecord = 1

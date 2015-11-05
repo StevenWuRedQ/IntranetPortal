@@ -2,7 +2,15 @@
 
     Public Shared Function Instance(bble As String, userName As String, type As Integer) As UserFollowUp
         Using ctx As New ConstructionEntities
-            Return ctx.UserFollowUps.Where(Function(u) u.BBLE = bble And u.Type = type And u.UserName = userName).FirstOrDefault
+            Dim followup = ctx.UserFollowUps.Where(Function(u) u.BBLE = bble And u.Type = type And u.UserName = userName).FirstOrDefault
+            If followup Is Nothing Then
+                followup = New UserFollowUp
+                followup.BBLE = bble
+                followup.UserName = userName
+                followup.Type = type
+            End If
+
+            Return followup
         End Using
     End Function
 

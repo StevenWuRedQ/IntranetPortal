@@ -273,12 +273,19 @@
                                 function SetFollowUp(type, dateSelected) {
                                     if (typeof dateSelected == 'undefined')
                                         dateSelected = new Date();
-
-                                    var fileData = {
-                                        "bble": leadsInfoBBLE,
-                                        "type": type,
-                                        "dtSelected": dateSelected
-                                    };
+                                    debugger;
+                                    $.ajax({
+                                        url: '/api/Followup/?category=' + type + '&type=17&bble=' + leadsInfoBBLE,
+                                        type: 'POST',
+                                        data: dateSelected.toJSON(),
+                                        cache: false,
+                                        success: function (data) {                                          
+                                            AngularRoot.alert('Successful.');
+                                        },
+                                        error: function (data) {
+                                            AngularRoot.alert('Some error Occurred!');
+                                        }
+                                    });
                                 }
 
                             </script>
@@ -293,10 +300,10 @@
                                 <Paddings PaddingTop="15px" PaddingBottom="18px"></Paddings>
                                 <Items>
                                     <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
-                                    <dx:MenuItem Text="Next Week" Name="nextWeek"></dx:MenuItem>
-                                    <dx:MenuItem Text="30 Days" Name="thirtyDays">
+                                    <dx:MenuItem Text="Next Week" Name="NextWeek"></dx:MenuItem>
+                                    <dx:MenuItem Text="30 Days" Name="ThirtyDays">
                                     </dx:MenuItem>
-                                    <dx:MenuItem Text="60 Days" Name="sixtyDays">
+                                    <dx:MenuItem Text="60 Days" Name="SixtyDays">
                                     </dx:MenuItem>
                                     <dx:MenuItem Text="Custom" Name="Custom">
                                     </dx:MenuItem>
@@ -318,7 +325,7 @@
                                             <tr>
                                                 <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
                                                     <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                                        <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();SetFollowUp('customDays',callbackCalendar.GetSelectedDate());}"></ClientSideEvents>
+                                                        <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();SetFollowUp('CustomDays',callbackCalendar.GetSelectedDate());}"></ClientSideEvents>
                                                     </dx:ASPxButton>
                                                     &nbsp;
                                                     <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">

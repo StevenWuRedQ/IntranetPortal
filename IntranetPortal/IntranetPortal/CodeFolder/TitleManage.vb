@@ -203,6 +203,10 @@ Public Class TitleManage
             comments = comments & String.Format("Follow Up Date: {0:d} <br />", commentControl.FollowUpDate)
             'Dim ssCase = ShortSaleCase.GetCaseByBBLE(hfBBLE.Value)
             'ssCase.SaveFollowUp(dtFollowup.Date)
+
+            Dim followup = UserFollowUp.Instance(bble, userName, LogCategory)
+            followup.FollowUpDate = commentControl.FollowUpDate
+            followup.SaveData(userName)
         End If
 
         If Not String.IsNullOrEmpty(txtComments) Then
