@@ -528,7 +528,8 @@
 
                 <%-- 50px --%>
                 <div style="margin-top: 50px">
-                    <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Legal Or DisplayMode = ActivityLogMode.Construction Or DisplayMode = ActivityLogMode.Eviction Or DisplayMode = ActivityLogMode.Title Then%>
+                    <asp:Panel runat="server" ID="pnlCommentCtr"></asp:Panel>
+                    <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Legal Or DisplayMode = ActivityLogMode.Construction Or DisplayMode = ActivityLogMode.Eviction Then%>
                     <div>Date of Comment:</div>
                     <div class="border_under_line" style="height: 80px">
                         <dx:ASPxDateEdit ID="ASPxDateEdit1" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
@@ -649,7 +650,6 @@
                             }
                         }                        
                     </script>
-
 
                     <div>
                         <div class="color_gray upcase_text">Type of update</div>

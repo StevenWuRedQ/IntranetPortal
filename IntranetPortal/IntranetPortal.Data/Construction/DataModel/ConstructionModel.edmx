@@ -120,6 +120,19 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="UserFollowUps">
+          <Key>
+            <PropertyRef Name="FollowUpId" />
+          </Key>
+          <Property Name="FollowUpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FollowUpDate" Type="datetime" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityContainer Name="ConstructionModelStoreContainer">
           <EntitySet Name="CheckingComplains" EntityType="Self.CheckingComplains" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConstructionBudgets" EntityType="Self.ConstructionBudgets" Schema="dbo" store:Type="Tables" />
@@ -129,6 +142,7 @@
           <EntitySet Name="ConstructionViolations" EntityType="Self.ConstructionViolations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormDataItems" EntityType="Self.FormDataItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleCase" EntityType="Self.TitleCase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserFollowUps" EntityType="Self.UserFollowUps" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -143,6 +157,7 @@
           <EntitySet Name="ConstructionViolations" EntityType="ConstructionModel.ConstructionViolation" />
           <EntitySet Name="ConstructionInitialForms" EntityType="ConstructionModel.ConstructionInitialForm" />
           <EntitySet Name="ConstructionBudgets" EntityType="ConstructionModel.ConstructionBudget" />
+          <EntitySet Name="UserFollowUps" EntityType="ConstructionModel.UserFollowUp" />
         </EntityContainer>
         <EntityType Name="ConstructionCase">
           <Key>
@@ -258,6 +273,19 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserFollowUp">
+          <Key>
+            <PropertyRef Name="FollowUpId" />
+          </Key>
+          <Property Name="FollowUpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FollowUpDate" Type="DateTime" Precision="3" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -385,6 +413,20 @@
                 <ScalarProperty Name="Form" ColumnName="Form" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserFollowUps">
+            <EntityTypeMapping TypeName="ConstructionModel.UserFollowUp">
+              <MappingFragment StoreEntitySet="UserFollowUps">
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="FollowUpDate" ColumnName="FollowUpDate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FollowUpId" ColumnName="FollowUpId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

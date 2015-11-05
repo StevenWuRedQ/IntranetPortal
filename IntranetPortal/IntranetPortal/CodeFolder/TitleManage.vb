@@ -60,17 +60,24 @@ Public Class TitleManage
     End Function
 
     Public Shared Sub UpdateStatus(bble As String, status As TitleCase.DataStatus, completedBy As String)
-        Dim tCase = TitleCase.GetCase(bble)
-        If tCase.Status <> status Then
-            tCase.Status = status
-            tCase.SaveData(completedBy)
-
+        If UpdateCaseStatus(bble, status, completedBy) Then
             Dim comments = "Move case to " & status.ToString
             LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Title.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
         Else
             Throw New Exception("Already in " & status.ToString)
         End If
     End Sub
+
+    Private Shared Function UpdateCaseStatus(bble As String, status As TitleCase.DataStatus, completedBy As String) As Boolean
+        Dim tCase = TitleCase.GetCase(bble)
+        If tCase.Status <> status Then
+            tCase.Status = status
+            tCase.SaveData(completedBy)
+            Return True
+        End If
+
+        Return False
+    End Function
 
     Public Shared Sub CompleteCase(bble As String, completedBy As String)
         Dim tCase = TitleCase.GetCase(bble)
@@ -149,9 +156,37 @@ Public Class TitleManage
 
     Public Sub New(actityLog As Boolean)
         Me.TaskActionList = _actionLists
+        Me.CommentsControlName = "~/TitleUI/TitleCommentControl.ascx"
         Me.LogCategory = LeadsActivityLog.LogCategory.Title
         Me.LogCategoryFilter = {LeadsActivityLog.LogCategory.Title, LeadsActivityLog.LogCategory.ShortSale}
+
     End Sub
+
+    Public Overrides Function AddComments(bble As String, txtComments As String, userName As String) As Boolean
+
+        Dim commentControl = CType(Me.CommentsControl, TitleCommentControl)
+        Dim category = commentControl.Category
+
+        Dim comments = ""
+        If Not String.IsNullOrEmpty(category) And commentControl.Status.HasValue Then
+            UpdateCaseStatus(bble, commentControl.Status, userName)
+
+            comments = comments & String.Format("Category: {0}<br />", category)
+        End If
+
+        If commentControl.FollowUpDate > DateTime.Now Then
+            comments = comments & String.Format("Follow Up Date: {0:d} <br />", commentControl.FollowUpDate)
+            'Dim ssCase = ShortSaleCase.GetCaseByBBLE(hfBBLE.Value)
+            'ssCase.SaveFollowUp(dtFollowup.Date)
+        End If
+
+        If Not String.IsNullOrEmpty(txtComments) Then
+            comments = comments & txtComments
+        End If
+        Dim emp = Employee.GetInstance(userName)
+        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LogCategory.ToString, emp.EmployeeID, emp.Name, LeadsActivityLog.EnumActionType.Comments)
+        Return True
+    End Function
 
 #End Region
 

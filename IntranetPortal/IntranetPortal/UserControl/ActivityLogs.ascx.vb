@@ -18,6 +18,21 @@ Public Class ActivityLogs
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        If Not Page.IsPostBack Then
+            If ActivityLogProvider IsNot Nothing Then
+                If ActivityLogProvider.LogCategoryFilter IsNot Nothing Then
+                    cbCateLog.Items.Clear()
+                    For Each cate In ActivityLogProvider.LogCategoryFilter
+                        cbCateLog.Items.Add(cate.ToString)
+                    Next
+                End If
+
+
+            End If
+        End If
+    End Sub
+
+    Private Sub ActivityLogs_Init(sender As Object, e As EventArgs) Handles Me.Init
         If DisplayMode = ActivityLogMode.ShortSale Then
             gridTracking.Settings.VerticalScrollableHeight = 510
         Else
@@ -32,16 +47,15 @@ Public Class ActivityLogs
             ActivityLogProvider = New TitleManage(True)
         End If
 
-        If Not Page.IsPostBack Then
-            If ActivityLogProvider IsNot Nothing Then
-                If ActivityLogProvider.LogCategoryFilter IsNot Nothing Then
-                    cbCateLog.Items.Clear()
-                    For Each cate In ActivityLogProvider.LogCategoryFilter
-                        cbCateLog.Items.Add(cate.ToString)
-                    Next
-                End If
+        If ActivityLogProvider IsNot Nothing Then
+            If ActivityLogProvider.CommentsControlName IsNot Nothing Then
+                Dim commentControl = Page.LoadControl(ActivityLogProvider.CommentsControlName)
+                commentControl.ID = "CommentsCtl"
+                ActivityLogProvider.CommentsControl = commentControl
+                pnlCommentCtr.Controls.Add(commentControl)
             End If
         End If
+
     End Sub
 
     Public Sub BindData(bble As String, activityMng As ActivityManageBase)
@@ -481,12 +495,13 @@ Public Class ActivityLogs
 
     Public Function ShowArchieveBox() As Boolean
 
-        If Page.User.IsInRole("Admin") Then
-
+        If Not String.IsNullOrEmpty(hfBBLE.Value) Then
             If LogCategory = LeadsActivityLog.LogCategory.SalesAgent Then
-
-                Return True
-
+                If Page.User.IsInRole("Admin") Then
+                    If Lead.HasArchieved(hfBBLE.Value) Then
+                        Return True
+                    End If
+                End If
             End If
         End If
 
@@ -993,6 +1008,12 @@ Public Class ActivityLogs
             Throw New Exception("Comments can not be empty.")
         End If
 
+        If ActivityLogProvider IsNot Nothing Then
+            If ActivityLogProvider.AddComments(hfBBLE.Value, txtComments, Page.User.Identity.Name) Then
+                Return
+            End If
+        End If
+
         Select Case DisplayMode
             Case ActivityLogMode.ShortSale
                 aspxdate = DateTime.Now
@@ -1035,16 +1056,16 @@ Public Class ActivityLogs
                         End If
 
                         If Not String.IsNullOrEmpty(txtComments) Then
-                                comments = comments & "<br />" & txtComments
-                            End If
-
-                            LeadsActivityLog.AddActivityLog(aspxdate, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
-
-                            'ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category & " - " & statusOfUpdate, txtComments)
-                            ShortSaleManage.AddActivityLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category, statusOfUpdate, txtComments)
-
+                            comments = comments & "<br />" & txtComments
                         End If
-                        Else
+
+                        LeadsActivityLog.AddActivityLog(aspxdate, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
+
+                        'ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category & " - " & statusOfUpdate, txtComments)
+                        ShortSaleManage.AddActivityLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category, statusOfUpdate, txtComments)
+
+                    End If
+                Else
                     LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, logCategoryStr, LeadsActivityLog.EnumActionType.Comments)
                     ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, "Comments", "Comments", txtComments, Employee.CurrentAppId)
                 End If
@@ -1074,7 +1095,7 @@ Public Class ActivityLogs
     'Set as task popup call back
     Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         Dim popup = CType(source, ASPxPopupControl)
-        
+
         PopupContentSetAsTask.Visible = True
         hfResend.Value = ""
         BindEmpList()
@@ -1400,4 +1421,6 @@ Public Class ActivityLogs
             End If
         End If
     End Sub
+
+
 End Class

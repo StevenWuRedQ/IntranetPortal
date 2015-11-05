@@ -137,6 +137,9 @@
     <Compile Include="Construction\DataModel\TitleCase.vb">
       <DependentUpon>ConstructionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Construction\DataModel\UserFollowUp.vb">
+      <DependentUpon>ConstructionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataServices\TLOLocateReportOutput.vb" />
     <Compile Include="DocumentSearch\LeadInfoDocumentSearch.vb" />
     <Compile Include="DocumentSearch\SearchEntity\DocSearchEntity.Context.vb">
@@ -157,6 +160,7 @@
     <Compile Include="DocumentSearch\SearchEntity\LeadInfoDocumentSearch.vb">
       <DependentUpon>DocSearchEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="FollowUps\UserFollowUp.vb" />
     <Compile Include="Legal\DataModel\LawReference.vb">
       <DependentUpon>LegalModel.tt</DependentUpon>
     </Compile>

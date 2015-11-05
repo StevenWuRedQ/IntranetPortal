@@ -23,6 +23,15 @@ Partial Public Class ActivityLogs
     Protected WithEvents EmailBody2 As Global.DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor
     
     '''<summary>
+    '''pnlCommentCtr control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlCommentCtr As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
     '''ASPxDateEdit1 control.
     '''</summary>
     '''<remarks>

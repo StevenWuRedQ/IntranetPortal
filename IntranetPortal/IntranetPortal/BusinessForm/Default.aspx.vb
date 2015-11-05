@@ -18,6 +18,10 @@
                     If wli IsNot Nothing Then
                         Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
                         BindData(bble)
+                    Else
+                        Response.Clear()
+                        Response.Write("The task was completed. Please check.")
+                        Response.End()
                     End If
                 Else
                     BusinessList.BindList()

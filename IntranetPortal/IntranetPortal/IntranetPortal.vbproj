@@ -2065,6 +2065,13 @@
       <DependentUpon>Test.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="TitleUI\TitleCommentControl.ascx.designer.vb">
+      <DependentUpon>TitleCommentControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="TitleUI\TitleCommentControl.ascx.vb">
+      <DependentUpon>TitleCommentControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="TitleUI\TitleFeeClearance.ascx.designer.vb">
       <DependentUpon>TitleFeeClearance.ascx</DependentUpon>
     </Compile>
@@ -5708,6 +5715,7 @@
     <Content Include="Scripts\literallycanvas\js\literallycanvas.min.js" />
     <Content Include="Scripts\literallycanvas\README.txt" />
     <Content Include="SQL\SearchReslut.sql" />
+    <Content Include="TitleUI\TitleCommentControl.ascx" />
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="WebForm3.aspx" />

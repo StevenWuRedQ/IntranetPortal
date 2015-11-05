@@ -30,5 +30,6 @@ Partial Public Class ConstructionEntities
     Public Overridable Property ConstructionViolations() As DbSet(Of ConstructionViolation)
     Public Overridable Property ConstructionInitialForms() As DbSet(Of ConstructionInitialForm)
     Public Overridable Property ConstructionBudgets() As DbSet(Of ConstructionBudget)
+    Public Overridable Property UserFollowUps() As DbSet(Of UserFollowUp)
 
 End Class
