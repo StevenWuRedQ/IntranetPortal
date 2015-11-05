@@ -23,6 +23,15 @@ Partial Public Class TitleCommentControl
     Protected WithEvents selCategory As Global.System.Web.UI.HtmlControls.HtmlSelect
     
     '''<summary>
+    '''reviewManagers control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents reviewManagers As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
     '''dtFollowup control.
     '''</summary>
     '''<remarks>

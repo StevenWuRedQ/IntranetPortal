@@ -543,11 +543,6 @@
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Title-Completed" Text="Completed" NavigationUrl="/BusinessForm/Default.aspx?s=3" ShowAmount="true" AmountManageClass="TitleManage">
-        <FontClass>
-          <![CDATA[<i class="fa fa-wrench"></i>]]>
-        </FontClass>
-      </PortalNavItem>
     </Items>
   </PortalNavItem>
   

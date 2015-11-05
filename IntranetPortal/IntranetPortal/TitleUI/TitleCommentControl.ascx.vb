@@ -2,14 +2,11 @@
     Inherits System.Web.UI.UserControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'If Not Page.IsPostBack Then
-        '    Dim data = Utility.Enum2Dictinary(GetType(IntranetPortal.Data.TitleCase.DataStatus))
-        '    selCategory.Items.Clear()
-        '    selCategory.Items.Add("")
-        '    For Each item In data
-        '        selCategory.Items.Add(New ListItem(item.Key, item.Value))
-        '    Next
-        'End If
+        If Not Page.IsPostBack Then
+            Dim managers = TitleManage.GetManagers
+            reviewManagers.DataSource = managers
+            reviewManagers.DataBind()
+        End If
     End Sub
 
     Public ReadOnly Property Status As Data.TitleCase.DataStatus?
@@ -26,6 +23,13 @@
         Get
             Return selCategory.Items(selCategory.SelectedIndex).Text
         End Get
+    End Property
+
+    Public ReadOnly Property ReviewManager As String
+        Get
+            Return reviewManagers.SelectedValue.ToString
+        End Get
+
     End Property
 
     Public ReadOnly Property FollowUpDate As DateTime

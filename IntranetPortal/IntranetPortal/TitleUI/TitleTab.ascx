@@ -24,7 +24,9 @@
                         </div>
                         <br />
                         <div>
+                            <%-- now using ascx control instead --%>
                             <span class="btn btn-default btn-circle icon_btn" popover-placement="right" uib-popover-template="'titlechangestatus'" uib-tooltip="Update Case Status" popover-is-open="ChangeStatusIsOpen"><i class="fa fa-exchange"></i></span>
+                            
                             <span class="btn btn-default btn-circle icon_btn" ng-click="generateXML()" uib-tooltip="Generate XML"><i class="fa fa-download"></i></span>
                         </div>
                     </div>
@@ -234,20 +236,11 @@
         /* end model define*/
         $scope.StatusList = [
             {
-                num: -1,
-                desc: 'NA'               
-            },{
                 num: 0,
                 desc: 'Initial Review'
             },{
                 num: 1,
                 desc: 'Clearance'
-            },{
-                num: 2,
-                desc: 'CTC'
-            },{
-                num: 3,
-                desc: 'Completed'
             }
         ]
         $scope.arrayRemove = ptCom.arrayRemove;

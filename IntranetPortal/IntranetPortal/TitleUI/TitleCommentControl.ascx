@@ -1,15 +1,37 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TitleCommentControl.ascx.vb" Inherits="IntranetPortal.TitleCommentControl" %>
 <div>    
     <div class="color_gray upcase_text">Category</div>    
-    <select class="select_bootstrap select_margin" id="selCategory" data-required="true" runat="server">
+    <select class="select_bootstrap select_margin" id="selCategory" data-required="true" onchange="TitleCommentControl.onItemChanged(this)" runat="server">
         <option value=""></option>
+        <option value="0">Initial Review</option>
         <option value="1">Clearance Follow Up</option>
         <option value="2">CTC</option>
     </select>
-    <%--<div class="color_gray upcase_text">Status Update</div>
-    <select class="select_bootstrap select_margin selStatusUpdate" id="selStatusUpdate" data-required="true" onchange="ShortSale.StatusUpdateChange(this)">
-        <option value=""></option>        
-    </select>--%>
+    
+    <div id="review_manager_div" hidden>
+        <div class="color_gray upcase_text">Review Manager</div>
+        <asp:DropDownList class="select_bootstrap select_margin" id="reviewManagers" data-required="true" runat="server"></asp:DropDownList>
+    </div>
+
     <div class="color_gray upcase_text">Follow Up date</div>
-    <dx:ASPxDateEdit ID="dtFollowup" Border-BorderStyle="None" CssClass="select_bootstrap" ClientInstanceName="dtClientFollowup" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
+    <dx:ASPxDateEdit ID="dtFollowup" Border-BorderStyle="None" CssClass="select_bootstrap" ClientInstanceName="dtClientFollowup" Width="130px" DisplayFormatString="d" runat="server">
+    </dx:ASPxDateEdit>
 </div>
+
+
+<script>
+    TitleCommentControl = function () {    
+        var onItemChanged = function (el) {
+            var review_manager_div = $("#review_manager_div")
+            if (el.value == "2") {
+                review_manager_div.show()
+            } else {
+                review_manager_div.hide()
+            }
+        }
+
+        return {
+            onItemChanged: onItemChanged,
+        }
+    }();
+</script>

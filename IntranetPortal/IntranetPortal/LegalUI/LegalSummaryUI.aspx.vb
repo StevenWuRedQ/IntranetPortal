@@ -38,7 +38,7 @@ Public Class LegalSummaryUI
     Function FilterByLogIn(cases As List(Of LegalCase)) As List(Of LegalCase)
         If (Not (User.IsInRole("Admin") Or User.IsInRole("Legal-Manager"))) Then
             Dim loginName = Page.User.Identity.Name
-            Return cases.Where(Function(c) (c.Attorney = loginName Or c.ResearchBy = loginName) AndAlso (c.Status = LegalCaseStatus.AttorneyHandle Or c.Status = LegalCaseStatus.LegalResearch)).ToList
+            Return cases.Where(Function(c) (c.Attorney = loginName And c.Status = LegalCaseStatus.AttorneyHandle) Or (c.ResearchBy = loginName And c.Status = LegalCaseStatus.LegalResearch)).ToList
         End If
         Return cases
     End Function

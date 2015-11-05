@@ -26,6 +26,18 @@ Public Class TitleManage
         Return Nothing
     End Function
 
+    Public Shared Sub updateTitleOwner(bble As String, owner As String, assignBy As String)
+        Dim tCase = TitleCase.GetCase(bble)
+
+        If tCase.Owner = owner Then
+            Return
+        End If
+
+        tCase.Owner = owner
+        tCase.SaveData(assignBy)
+    End Sub
+
+
     Public Shared Sub AssignTo(bble As String, userName As String, assignBy As String)
         Dim tCase = TitleCase.GetCase(bble)
 
@@ -135,6 +147,14 @@ Public Class TitleManage
         Return Nothing
     End Function
 
+    Public Shared Function GetManagers() As List(Of String)
+        Dim mgrs = Roles.GetUsersInRole(MgrRoleName)
+        If mgrs.Count > 0 Then
+            Return mgrs.ToList
+        End If
+        Return Nothing
+    End Function
+
     Public Shared Function TitleUsers() As String()
         Return Employee.GetRoleUsers("Title-")
     End Function
@@ -166,10 +186,15 @@ Public Class TitleManage
 
         Dim commentControl = CType(Me.CommentsControl, TitleCommentControl)
         Dim category = commentControl.Category
+        Dim reviewmanager = commentControl.ReviewManager
 
         Dim comments = ""
         If Not String.IsNullOrEmpty(category) And commentControl.Status.HasValue Then
             UpdateCaseStatus(bble, commentControl.Status, userName)
+            If category = "CTC" And Not String.IsNullOrEmpty(reviewmanager) And reviewmanager <> userName Then
+                updateTitleOwner(bble, reviewmanager, userName)
+                comments = comments & "Submit case to be reviewed by " & reviewmanager & "<br/>"
+            End If
 
             comments = comments & String.Format("Category: {0}<br />", category)
         End If
@@ -183,6 +208,7 @@ Public Class TitleManage
         If Not String.IsNullOrEmpty(txtComments) Then
             comments = comments & txtComments
         End If
+
         Dim emp = Employee.GetInstance(userName)
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LogCategory.ToString, emp.EmployeeID, emp.Name, LeadsActivityLog.EnumActionType.Comments)
         Return True
