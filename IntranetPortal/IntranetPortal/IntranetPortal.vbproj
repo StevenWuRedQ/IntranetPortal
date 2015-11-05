@@ -1274,6 +1274,13 @@
       <DependentUpon>Management.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Management\AchiveLeadsLog.aspx.designer.vb">
+      <DependentUpon>AchiveLeadsLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\AchiveLeadsLog.aspx.vb">
+      <DependentUpon>AchiveLeadsLog.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Management\AddressToBBLE.aspx.designer.vb">
       <DependentUpon>AddressToBBLE.aspx</DependentUpon>
     </Compile>
@@ -2890,6 +2897,7 @@
     <Content Include="ManagementUI\Management2.aspx" />
     <Content Include="ManagementUI\Management1.aspx" />
     <Content Include="ManagementUI\Management.aspx" />
+    <Content Include="Management\AchiveLeadsLog.aspx" />
     <Content Include="Management\AddressToBBLE.aspx" />
     <Content Include="ManagementUI\BuyerEntiyManage.aspx" />
     <Content Include="Management\BusinessRulesMng.aspx" />

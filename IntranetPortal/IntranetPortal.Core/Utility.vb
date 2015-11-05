@@ -4,7 +4,7 @@ Imports System.Net
 Imports System.IO
 Imports Newtonsoft.Json.Linq
 Imports System.Text.RegularExpressions
-
+Imports DuoVia.FuzzyStrings
 Public Class Utility
     Public Shared Function SaveChangesObj(oldObj As Object, newObj As Object) As Object
         Dim type = oldObj.GetType()
@@ -34,6 +34,9 @@ Public Class Utility
         Return oldObj
     End Function
 
+    Public Shared Function SimilerString(str1 As String, str2 As String) As Boolean
+        Return str1.FuzzyMatch(str2) > 0.6
+    End Function
     Public Shared Function CopyTo(fromObj As Object, toObj As Object) As Object
         Dim type = fromObj.GetType()
         Dim toType = toObj.GetType

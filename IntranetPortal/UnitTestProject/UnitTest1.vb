@@ -2,6 +2,7 @@
 Imports System.Net
 Imports System.Text
 Imports IntranetPortal.Data
+Imports IntranetPortal.Core
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports Newtonsoft.Json.Linq
 
@@ -67,5 +68,10 @@ Imports Newtonsoft.Json.Linq
 
 
 
+    End Sub
+
+    <TestMethod>
+    Public Sub TestSimlerStr()
+        Assert.IsTrue(Utility.SimilerString("WU ,STEVEN Jr       ", "Steven Zhange      "))
     End Sub
 End Class

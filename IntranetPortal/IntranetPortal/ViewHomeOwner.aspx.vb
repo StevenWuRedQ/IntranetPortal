@@ -42,4 +42,13 @@
         Dim o = New With {.Address1 = s.Address1, .Address2 = s.Address2, .Name = s.Name, .Ctiy = s.City, .Zip = s.Zip}
         lbArgumentSend.Text = o.ToJsonString
     End Sub
+
+    Protected Sub btLoadAll_Click(sender As Object, e As EventArgs)
+        Dim bbles = txtBBLEs.Text.Split(",")
+        For Each b In bbles
+            DataWCFService.UpdateHomeOwner(b, New Random().Next(1, 10000))
+
+        Next
+        LoadStatus.Text = "Load All Finished"
+    End Sub
 End Class
