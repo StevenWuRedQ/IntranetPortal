@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Construction\ConstructionNotifyRuleTest.vb" />
+    <Compile Include="DBUtilTest.vb" />
     <Compile Include="EmailParseTest.vb" />
     <Compile Include="EmployeeTest.vb" />
     <Compile Include="QueryBuilderTest.vb" />

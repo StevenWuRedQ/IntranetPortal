@@ -190,8 +190,8 @@ Public Class ExcelBuilder
             If temp IsNot Nothing Then
                 Dim fees = temp.ToList
                 For Each f In fees
-                    report.Cell("F" & index).Value = f.SelectToken("name").ToString
-                    report.Cell("G" & index).Value = Double.Parse(f.SelectToken("cost").ToString)
+                    report.Cell("F" & index).Value = If(f("name") Is Nothing Or String.IsNullOrEmpty(f("name").ToString), "", f("name").ToString())
+                    report.Cell("G" & index).Value = Double.Parse(If(f("cost") Is Nothing Or String.IsNullOrEmpty(f("cost").ToString), "0", f("cost").ToString()))
                     index = index + 1
                 Next
                 report.Cell("F" & index).Value = "Total"

@@ -236,6 +236,7 @@
     <Compile Include="Application.vb" />
     <Compile Include="CommonData.vb" />
     <Compile Include="DataLoopRule.vb" />
+    <Compile Include="DBUtil.vb" />
     <Compile Include="DocumentService.vb" />
     <Compile Include="EmailService.vb" />
     <Compile Include="ExcelBuilder.vb" />
