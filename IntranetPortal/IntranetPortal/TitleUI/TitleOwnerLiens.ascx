@@ -9,7 +9,6 @@
 </tab-heading>
 
     <div id="liens{{$index}}_content" class="ss_border" style="border-top: 0; min-height: 300px; position: relative">
-
         <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[0]" ng-click="setPopVisible(owner, 1)">
             <div class="panel-heading">Mortgages: {{owner.Mortgages_Status}}</div>
             <div class="panel-body">
@@ -123,7 +122,7 @@
 
         <div class="clearfix"></div>
         <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[8]" ng-click="setPopVisible(owner, 9)">
-            <div class="panel-heading">Mechanics Lien: {{owner.MechanicsLiens_Status}}</div>
+            <div class="panel-heading">Mechanics Lien:</div>
             <div class="panel-body">
                 <ul class="col-md-6" ng-repeat="mechanicsLien in owner.MechanicsLiens">
                     <li><span class="label label-primary">Mechanics Lien {{$index + 1}}: </span></li>
@@ -132,6 +131,19 @@
                     <li>Date filed: {{mechanicsLien.Mechanics_Lien_Date_filed}}</li>
                     <li>Amount: {{mechanicsLien.Mechanics_Lien_Amount}}</li>
                     <li>Attorney: {{mechanicsLien.Mechanics_Lien_Attorney}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[9]" ng-click="setPopVisible(owner, 10)">
+            <div class="panel-heading">TAX LIEN SALE CERT:</div>
+            <div class="panel-body">
+                <ul class="col-md-6" ng-repeat="taxLiensSaleCert in owner.TaxLiensSaleCerts">
+                    <li><span class="label label-primary">TAX LIEN SALE CERT {{$index + 1}}: </span></li>
+                    <li>Status: {{taxLiensSaleCert.status}}</li>
+                    <li>Date Of Document: {{taxLiensSaleCert.Date_Of_Document}}</li>
+                    <li>Date Of Recording: {{taxLiensSaleCert.Date_Of_Recording}}</li>
                 </ul>
             </div>
         </div>
@@ -197,6 +209,11 @@
                             <td>Mechanics Lien</td>
                             <td>
                                 <input type="checkbox" style="display: inline-block" ng-model="owner.shownlist[8]" /></td>
+                        </tr>
+                                                <tr>
+                            <td>TAX LIEN SALE CERT</td>
+                            <td>
+                                <input type="checkbox" style="display: inline-block" ng-model="owner.shownlist[9]" /></td>
                         </tr>
                     </table>
                 </div>
@@ -495,6 +512,33 @@
                     </div>
                 </div>
 
+                <div class="ss_form" ng-show="owner.popVisible && owner.popStep==10">
+                    <h4 class="ss_form_title">TAX LIEN SALE CERT&nbsp;
+                    <pt-add style="padding-top: 8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].TaxLiensSaleCerts')"></pt-add>
+                    </h4>
+                    <div class="ss_border" style="max-height: 600px; overflow-y: scroll">
+                        <div ng-repeat="taxLiensSaleCert in owner.TaxLiensSaleCerts" class="clearfix">
+                            <span class="label label-primary">TAX LIEN SALE CERT&nbsp;{{$index + 1}}:</span>&nbsp;<pt-del class="pull-right" ng-click="arrayRemove(owner.TaxLiensSaleCerts, $index, true)"></pt-del>
+                            <ul class="ss_form_box clearfix">
+                                <li class="input-group" style="margin-top:10px">
+                                    <span class="input-group-addon">Status</span>
+                                    <select class="form-control" ng-model="taxLiensSaleCert.status">
+                                        <option>Pending</option>
+                                        <option>Clear</option>
+                                    </select>
+                                </li>
+                                <li class="ss_form_item ">
+                                    <label class="ss_form_input_title ">Date Of Document</label>
+                                    <input class="ss_form_input " ng-model="taxLiensSaleCert.Date_Of_Document" ss-date>
+                                </li>
+                                <li class="ss_form_item ">
+                                    <label class="ss_form_input_title ">Date Of Recording</label>
+                                    <input class="ss_form_input " ng-model="taxLiensSaleCert.Date_Of_Recording" ss-date>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
                 <div style="position: absolute; bottom: 10px; width: 95%">
                     <hr />

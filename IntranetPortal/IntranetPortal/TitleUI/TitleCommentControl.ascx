@@ -20,18 +20,17 @@
 
 
 <script>
-    TitleCommentControl = function () {    
-        var onItemChanged = function (el) {
-            var review_manager_div = $("#review_manager_div")
-            if (el.value == "2") {
-                review_manager_div.show()
-            } else {
-                review_manager_div.hide()
-            }
-        }
+    TitleCommentControl = function () {
 
         return {
-            onItemChanged: onItemChanged,
+            onItemChanged: function (el) {
+                var review_manager_div = $("#review_manager_div")
+                if (el.value == "2") {
+                    review_manager_div.show()
+                } else {
+                    review_manager_div.hide()
+                }
+            }
         }
     }();
 </script>

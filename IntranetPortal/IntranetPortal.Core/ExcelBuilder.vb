@@ -158,17 +158,17 @@ Public Class ExcelBuilder
                     report.Cell("A" & index).Style.Font.SetBold()
                     index = index + 1
                     Dim shownlist = owner("shownlist")
-                    Dim sectionlist = New ArrayList({"Mortgages", "Lis_Pendens", "Judgements", "ECB_Notes", "PVB_Notes", "Bankruptcy_Notes", "UCCs", "FederalTaxLiens", "MechanicsLiens"})
+                    Dim sectionlist = New ArrayList({"Mortgages", "Lis_Pendens", "Judgements", "ECB_Notes", "PVB_Notes", "Bankruptcy_Notes", "UCCs", "FederalTaxLiens", "MechanicsLiens", "TaxLiensSaleCerts"})
                     For Each section In sectionlist
                         Dim tsec = owner(section)
                         Dim tindex = sectionlist.IndexOf(section)
-                        If tsec IsNot Nothing And Boolean.Parse(shownlist(tindex).ToString) Then
+                        If tsec IsNot Nothing AndAlso Boolean.Parse(shownlist(tindex).ToString) Then
                             Dim i = 1
                             For Each item In tsec.ToList
                                 Dim o = JObject.Parse(item.ToString)
                                 If o IsNot Nothing Then
                                     For Each p In o.Properties
-                                        If p.Value IsNot Nothing And p.Name <> "$$hashKey" Then
+                                        If p.Value IsNot Nothing AndAlso p.Name <> "$$hashKey" Then
                                             report.Cell("B" & index).Value = sectionlist(tindex).ToString & " " & i & " " & p.Name
                                             report.Cell("C" & index).Value = p.Value.ToString
                                             index = index + 1

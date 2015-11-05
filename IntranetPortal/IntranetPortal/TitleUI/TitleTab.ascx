@@ -221,7 +221,8 @@
             this.UCCs= [{}];
             this.FederalTaxLiens= [{}];
             this.MechanicsLiens= [{}];
-            this.shownlist = [false,false,false,false,false,false,false,false,false]            
+            this.TaxLiensSaleCerts = [{}]
+            this.shownlist = [false,false,false,false,false,false,false,false,false,false]            
            
         }
         $scope.FormModel = function(){
