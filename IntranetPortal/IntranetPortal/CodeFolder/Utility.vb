@@ -303,13 +303,15 @@ Public Class Utility
     End Function
 
     Public Shared Function IsSimilarName(name1 As String, name2 As String) As Boolean
+        name1 = name1.Trim.ToLower
+        name2 = name2.Trim.ToLower
         If String.IsNullOrEmpty(name1) Or String.IsNullOrEmpty(name2) Then
             Return False
         End If
 
-        Dim strCompare = name1.Replace(",", "").Replace("&", " ").Replace("-", " ").Replace("/", "").Split(" ")
+        Dim strCompare = name1.Replace(",", "").Replace("&", " ").Replace("-", " ").Replace("/", "").Split(" ").Where(Function(a) Not String.IsNullOrEmpty(a.Trim)).ToArray
         name2 = name2.Replace(",", "").Replace("&", " ").Replace("-", " ").Replace("/", "")
-        Dim nameArray = name2.Split(" ")
+        Dim nameArray = name2.Split(" ").Where(Function(a) Not String.IsNullOrEmpty(a.Trim)).ToArray
         Dim result = strCompare.Where(Function(a) nameArray.Contains(a)).Count / strCompare.Length
 
         Return result > 0.9
