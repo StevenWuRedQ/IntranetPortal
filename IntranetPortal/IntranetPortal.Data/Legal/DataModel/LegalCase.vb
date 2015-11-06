@@ -26,5 +26,7 @@ Partial Public Class LegalCase
     Public Property SaleDate As Nullable(Of Date)
     Public Property SecondaryTypes As String
     Public Property FCIndexNum As String
+    Public Property TaxLienFCStatus As Nullable(Of Integer)
+    Public Property TaxLienIndexNum As String
 
 End Class

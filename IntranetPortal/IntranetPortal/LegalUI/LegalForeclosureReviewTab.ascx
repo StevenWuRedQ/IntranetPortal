@@ -38,9 +38,51 @@
         </ul>
 
     </div>
+
+    <!-- Tax Liens -->
+    <div class="ss_form">
+        <h4 class="ss_form_title">Tax Lien foreclosure Status</h4>
+        <ul class="ss_form_box clearfix">
+             <li class="ss_form_item ">
+                <label class="ss_form_input_title {{LegalCase.ForeclosureInfo.hasTaxLien?'ss_warning':''}}">Is there a tax lien?</label>
+                <pt-radio name="Efile" model="LegalCase.ForeclosureInfo.hasTaxLien"></pt-radio>
+
+            </li>
+            <li class="ss_form_item " style="width:60%">
+               <div>
+                   &nbsp;
+               </div>
+            </li>
+            <li class="ss_form_item" ng-show="LegalCase.ForeclosureInfo.hasTaxLien">
+                <label class="ss_form_input_title" >
+                   Tax Lien FC Status
+                </label>
+
+                <select class="ss_form_input" ng-model="LegalCase.TaxLienFCStatus" >
+                   
+                    <% For Each v In LegalCaseManage.GetDataStatus%>
+                    <option value="<%=v.Item("Key")%>"><%=v.Item("Value")%></option>
+                    <% Next%>
+                </select>
+            </li>
+
+            <li class="ss_form_item" ng-show="LegalCase.ForeclosureInfo.hasTaxLien">
+                <label class="ss_form_input_title ">Index #</label>
+                <input class="ss_form_input" ng-model="LegalCase.TaxLienIndexNum" mask="999999/9999" />
+            </li>
+            <li class="ss_form_item" ng-show="LegalCase.ForeclosureInfo.hasTaxLien">
+                <label class="ss_form_input_title">FC filed Date:</label>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TaxLienFCDate" ss-date>
+            </li>
+           
+
+        </ul>
+    </div>
+    <%--end tax lens fileds--%>
+
     <!-- case -->
     <div class="ss_form">
-        <h4 class="ss_form_title">Case Status</h4>
+        <h4 class="ss_form_title">Mortgae foreclosure Status</h4>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title {{HighLightStauts(LegalCase.CaseStauts,4)?'ss_warning':''}}">
@@ -48,22 +90,22 @@
                 </label>
 
                 <select class="ss_form_input" ng-model="LegalCase.CaseStauts">
-                    <%Dim statusDic = Utility.Enum2Dictinary(GetType(IntranetPortal.Data.DataStatus)).ToList.Select(Function(v)  New With {.Key = v.Key, .Value = v.Value, .Order = If(v.Key = 7, 1000, v.Key)}).OrderBy(Function(v) v.Order) %>
-					<% For Each v In statusDic%>
-					<option value="<%=v.Key%>"><%=v.Value%></option>
-					<% Next%>
+                    <%Dim statusDic = LegalCaseManage.GetDataStatus %>
+                    <% For Each v In statusDic%>
+                    <option value="<%=v.Item("Key")%>"><%=v.Item("Value")%></option>
+                    <% Next%>
                 </select>
             </li>
             <li class="ss_form_item" ng-show="LegalCase.CaseStauts==7">
                 <label class="ss_form_input_title ">Sale date</label>
                 <input class="ss_form_input" ng-model="LegalCase.SaleDate" ss-date />
             </li>
-              <li class="ss_form_item" >
-                <label class="ss_form_input_title "> E-file </label>
-                  <pt-radio name="Efile" model="LegalCase.ForeclosureInfo.Efile"></pt-radio>
-               
+            <li class="ss_form_item">
+                <label class="ss_form_input_title ">E-file </label>
+                <pt-radio name="Efile" model="LegalCase.ForeclosureInfo.Efile"></pt-radio>
+
             </li>
-           
+
         </ul>
     </div>
 
@@ -162,8 +204,8 @@
             <i class="fa fa-expand icon_btn text-primary" ng-show="bankruptcyCollapse" ng-click="bankruptcyCollapse=!bankruptcyCollapse"></i></h4>
         <ul class="ss_form_box clearfix" uib-collapse="bankruptcyCollapse">
             <li class="ss_form_item">
-                <label class="ss_form_input_title"> Was BK filed </label>
-                 <pt-radio name="WasBkfiled" model="LegalCase.ForeclosureInfo.BankruptcyFiled"></pt-radio>
+                <label class="ss_form_input_title">Was BK filed </label>
+                <pt-radio name="WasBkfiled" model="LegalCase.ForeclosureInfo.BankruptcyFiled"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Who Filed</label>
@@ -278,15 +320,14 @@ The courts no longer consider this proper service. "></i></span>
 
                         <li class="ss_form_item">
                             <label class="ss_form_input_title" ng-class="service.ServerInSererList?'ss_warning':''">Is the process server one of these servers</label>
-                            <input type="text" class="ss_form_input" ng-model="service.ServerInSererList" ng-change="service.ServerInSererListId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,35)" typeahead-on-select="LegalCase.ForeclosureInfo.AffidavitOfServices[$index].ServerInSererListId=$item.ContactId" bind-id="LegalCase.ForeclosureInfo.AffidavitOfServices[$index].ServerInSererListId" >
-                           <%-- <select class="ss_form_input" ng-model="service.ServerInSererList" ng-options="o as o for o in ['Alan Feldman','John Medina','Robert Winckelmann']">
+                            <input type="text" class="ss_form_input" ng-model="service.ServerInSererList" ng-change="service.ServerInSererListId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,35)" typeahead-on-select="LegalCase.ForeclosureInfo.AffidavitOfServices[$index].ServerInSererListId=$item.ContactId" bind-id="LegalCase.ForeclosureInfo.AffidavitOfServices[$index].ServerInSererListId">
+                            <%-- <select class="ss_form_input" ng-model="service.ServerInSererList" ng-options="o as o for o in ['Alan Feldman','John Medina','Robert Winckelmann']">
                                 <option value=""> </option>
                             </select>--%>
                         </li>
-                         <li class="ss_form_item" style="width:60%">
-                            <label class="ss_form_input_title" >index #</label>
-                            <input class="ss_form_input" ng-model="ptContactServices.getContact(service.ServerInSererListId, service.ServerInSererList).Notes"  readonly="readonly">
-                          
+                        <li class="ss_form_item" style="width: 60%">
+                            <label class="ss_form_input_title">index #</label>
+                            <input class="ss_form_input" ng-model="ptContactServices.getContact(service.ServerInSererListId, service.ServerInSererList).Notes" readonly="readonly">
                         </li>
 
                     </ul>

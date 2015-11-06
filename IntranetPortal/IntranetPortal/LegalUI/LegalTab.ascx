@@ -155,7 +155,7 @@
                 <div style="font-size: 30px">
                     <span>
                         <i class="fa fa-home"></i>
-                        <span style="margin-left: 19px;">{{GetCaseInfo().Address}}&nbsp;<span style="color: red">{{LegalCase.SaleDate|date}}</span></span>
+                        <span style="margin-left: 19px;">{{GetCaseInfo().Address}}&nbsp; {{LeadsInfo.BoroughName}} &nbsp; <span style="color: red">{{LegalCase.SaleDate|date}}</span></span>
                     </span>
                     <span class="time_buttons" style="margin-right: 30px" ng-click="ShowECourts(LegalCase.PropertyInfo.Borough, 'eCourts')" ng-show="LegalCase.PropertyInfo.Borough!=1">eCourts</span>
                     <span class="time_buttons" onclick="ShowDOBWindow(GetLegalData().PropertyInfo.Borough,GetLegalData().PropertyInfo.Block, GetLegalData().PropertyInfo.Lot)">DOB</span>

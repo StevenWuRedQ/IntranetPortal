@@ -90,6 +90,15 @@ Partial Public Class LegalCase
                 Me.FCIndexNum = forecloseInfo.Item("FCIndexNum").ToString().Trim()
             End If
 
+            Dim vTaxLienIndexNum = jsonCase.Item("TaxLienIndexNum")
+            If (vTaxLienIndexNum IsNot Nothing) Then
+                Me.TaxLienIndexNum = vTaxLienIndexNum
+            End If
+
+            Dim vTaxLienFCStatus = jsonCase.Item("TaxLienFCStatus")
+            If (vTaxLienFCStatus IsNot Nothing) Then
+                Me.TaxLienFCStatus = vTaxLienFCStatus
+            End If
             Dim data = jsonCase.Item("SaleDate")
 
                 If String.IsNullOrEmpty(data) Then
@@ -208,6 +217,7 @@ Partial Public Class LegalCase
             Return ctx.LegalCases.Where(Function(lc) lc.Status = status1 AndAlso (lc.ResearchBy = userName Or lc.Attorney = userName)).ToList
         End Using
     End Function
+
 End Class
 
 Public Enum LegalCaseStatus
@@ -232,15 +242,32 @@ Public Enum DataStatus
     RJI = 3
     <Description("Settlement Conf")>
     SettlementConf = 4
+
     <Description("O/REF")>
     OREF = 5
+
+    <Description("FCS Conference")>
+    FCSConference = 151
+    <Description("Released from FCS")>
+    ReleasedfromFCS = 152
+    <Description("Status Conference")>
+    StatusConference = 153
+    <Description("OSC Pending")>
+    OSCPending = 154
+    <Description("O/R Submitted")>
+    ORSubmitted = 155
+    <Description("O/R Granted")>
+    ORGranted = 156
+    <Description("O/R Entered")>
+    OREntered = 157
+
     <Description("Judgment Submitted")>
     JudgmentSubmitted = 10
     <Description("Judgment Granted")>
     JudgmentGranted = 11
     <Description("Judgment Entered")>
     JudgmentEntered = 12
-    
+
     <Description("Dismissed w Prejudice")>
     DismissedWithPrejudice = 8
     <Description("Dismissed w/o Prejudice")>
@@ -249,11 +276,14 @@ Public Enum DataStatus
 
     <Description("Sale Date")>
     SaleDate = 7
+
+    <Description("Restored To calendar")>
+    Restored2Calendar = 10101
 End Enum
 
 
 Public Enum LegalSencdaryType
-    <Description("Order to show case")>
+    <Description("Order To show Case")>
     OSC = 1
     <Description("Partitions")>
     Partitions = 2
