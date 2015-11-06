@@ -1,5 +1,11 @@
 ﻿Public Class UserFollowUp
 
+    Public Shared Function Instance(followUpId As Integer) As UserFollowUp
+        Using ctx As New ConstructionEntities
+            Return ctx.UserFollowUps.Find(followUpId)
+        End Using
+    End Function
+
     Public Shared Function Instance(bble As String, userName As String, type As Integer) As UserFollowUp
         Using ctx As New ConstructionEntities
             Dim followup = ctx.UserFollowUps.Where(Function(u) u.BBLE = bble And u.Type = type And u.UserName = userName And u.Status = FollowUpStatus.Active).FirstOrDefault
@@ -13,6 +19,13 @@
             Return followup
         End Using
     End Function
+
+    Public Sub Clear(clearBy As String)
+        Me.Status = FollowUpStatus.Cleared
+        Me.UpdateBy = clearBy
+        Me.UpdateTime = DateTime.Now
+        Me.SaveData(clearBy)
+    End Sub
 
     Public Sub Create(createBy As String)
         Complete(createBy)
@@ -44,7 +57,6 @@
     End Function
 
     Public Sub SaveData(saveBy As String)
-        Complete(saveBy)
 
         Using ctx As New ConstructionEntities
             If ctx.UserFollowUps.Any(Function(t) t.BBLE = BBLE And t.Type = Type And t.UserName = UserName And t.Status = FollowUpStatus.Active) Then

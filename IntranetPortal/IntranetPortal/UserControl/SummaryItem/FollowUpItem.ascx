@@ -17,17 +17,25 @@
         }
         
         var left = (screen.width / 2) - (1350 / 2);
-        var top = (screen.height / 2) - (930 / 2);
-        debugger;
+        var top = (screen.height / 2) - (930 / 2);        
         var win = window.open(url, 'View Case Info ' + CaseId, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
         fileWindows[CaseId] = win;
+    }
+
+    function ClearFollowUp(followUpId)
+    {
+        AngularRoot.confirm("Are you sure to clear?").then(function (r) {
+            if (r) {
+                gridFollowUp.PerformCallback("Clear|" + followUpId);
+            }
+        });
     }
 </script>
 
 <h4>
     <img src="../images/grid_task_icon.png" class="vertical-img" /><span class="heading_text">Follow Up</span></h4>
 
-<dx:ASPxGridView runat="server" Width="100%" ID="gridFollowUp" ClientInstanceName="gridCallbackClient" KeyFieldName="BBLE" AutoGenerateColumns="false" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+<dx:ASPxGridView runat="server" Width="100%" ID="gridFollowUp" ClientInstanceName="gridFollowUp" KeyFieldName="BBLE" AutoGenerateColumns="false" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6" OnCustomCallback="gridFollowUp_CustomCallback">
     <Columns>
         <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1" CellStyle-CssClass="cell_hover">
             <DataItemTemplate>
@@ -58,8 +66,7 @@
         </dx:GridViewDataTextColumn>
         <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
             <DataItemTemplate>
-                <%--change the image and the size by steven--%>               
-                <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" />
+                <i class="fa fa-check" style="cursor:pointer" title="Clear" onclick="ClearFollowUp(<%# Eval("FollowUpId") %>)"></i>
             </DataItemTemplate>
         </dx:GridViewDataColumn>
     </Columns>

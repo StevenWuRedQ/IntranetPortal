@@ -97,4 +97,15 @@ Public Class FollowUpItem
         End If
     End Sub
 
+    Protected Sub gridFollowUp_CustomCallback(sender As Object, e As ASPxGridViewCustomCallbackEventArgs)
+        If e.Parameters.StartsWith("Clear") Then
+            Dim fpId = CInt(e.Parameters.Split("|")(1))
+            Try
+                UserFollowUpManage.ClearFollowUp(fpId, Page.User.Identity.Name)
+                gridFollowUp.DataBind()
+            Catch ex As Exception
+                Throw New CallbackException(ex.Message, ex)
+            End Try
+        End If
+    End Sub
 End Class

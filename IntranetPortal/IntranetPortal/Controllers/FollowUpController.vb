@@ -6,7 +6,7 @@ Namespace Controllers
     Public Class FollowUpController
         Inherits ApiController
 
-        <ResponseType(GetType(String))>
+        <ResponseType(GetType(Data.UserFollowUp))>
         <Route("api/Followup/")>
         Public Function PostFollowUp(bble As String, type As Integer, category As String, <FromBody> followUpdate As String) As IHttpActionResult
             If Not ModelState.IsValid Then
@@ -33,6 +33,17 @@ Namespace Controllers
 
                 Dim followup = UserFollowUpManage.AddFollowUp(bble, HttpContext.Current.User.Identity.Name, type, dt)
                 Return Ok(followup)
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
+        <ResponseType(GetType(Data.UserFollowUp))>
+        <Route("api/Followup/")>
+        Public Function DeleteFollowUp(followUpId As Integer) As IHttpActionResult
+            Try
+                Dim fp = UserFollowUpManage.ClearFollowUp(followUpId, HttpContext.Current.User.Identity.Name)
+                Return Ok(fp)
             Catch ex As Exception
                 Throw ex
             End Try
