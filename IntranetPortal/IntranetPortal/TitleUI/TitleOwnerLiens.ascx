@@ -61,6 +61,7 @@
                 <ul class="col-md-6" ng-repeat="n in owner.ECB_Notes">
                     <li><span class="label label-primary">Note {{$index + 1}}</span></li>
                     <li>Status: {{n.status}}</li>
+                    <li ng-show="n.status == 'ECB Resolution Received'">Received Date: {{n.ReceivedDate}}</li>
                     <li>Note Content: {{n.content}}</li>
                 </ul>
             </div>
@@ -92,7 +93,7 @@
 
         <div class="clearfix"></div>
         <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[6]" ng-click="setPopVisible(owner, 7)">
-            <div class="panel-heading">UCC: </div>
+            <div class="panel-heading">UCC:</div>
             <div class="panel-body">
                 <ul class="col-md-6" ng-repeat="ucc in owner.UCCs">
                     <li><span class="label label-primary">UCC {{$index + 1}}: </span></li>
@@ -144,6 +145,20 @@
                     <li>Status: {{taxLiensSaleCert.status}}</li>
                     <li>Date Of Document: {{taxLiensSaleCert.Date_Of_Document}}</li>
                     <li>Date Of Recording: {{taxLiensSaleCert.Date_Of_Recording}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[10]" ng-click="setPopVisible(owner, 11)">
+            <div class="panel-heading">Vacate/ Relocation Lien:</div>
+            <div class="panel-body">
+                <ul class="col-md-6" ng-repeat="vacateRelocationLien in owner.VacateRelocationLiens">
+                    <li><span class="label label-primary">TAX LIEN SALE CERT {{$index + 1}}: </span></li>
+                    <li>Date Filed: {{vacateRelocationLien.Date_Filed}}</li>
+                    <li>Index: {{vacateRelocationLien.Index}}</li>
+                    <li>Relocation lien?: {{vacateRelocationLien.Relocation_Lien}}</li>
+                    <li>Relocation payoff: {{vacateRelocationLien.Relocation_Payoff}}</li>
                 </ul>
             </div>
         </div>
@@ -210,10 +225,15 @@
                             <td>
                                 <input type="checkbox" style="display: inline-block" ng-model="owner.shownlist[8]" /></td>
                         </tr>
-                                                <tr>
+                        <tr>
                             <td>TAX LIEN SALE CERT</td>
                             <td>
                                 <input type="checkbox" style="display: inline-block" ng-model="owner.shownlist[9]" /></td>
+                        </tr>
+                        <tr>
+                            <td>Vacate/ Relocation Lien</td>
+                            <td>
+                                <input type="checkbox" style="display: inline-block" ng-model="owner.shownlist[10]" /></td>
                         </tr>
                     </table>
                 </div>
@@ -232,6 +252,8 @@
                                     <span class="input-group-addon">Status</span>
                                     <select class="form-control" ng-model="mortgage.status">
                                         <option>Pending</option>
+                                        <option>SS Negotiation</option>
+                                        <option>SATISFIED/OMIT</option>
                                         <option>Clear</option>
                                     </select>
                                 </li>
@@ -265,6 +287,8 @@
                                     <span class="input-group-addon">Status</span>
                                     <select class="form-control" ng-model="lis_penden.status">
                                         <option>Pending</option>
+                                        <option>Undertaking Letter requested</option>
+                                        <option>Undertaking Letter Received</option>
                                         <option>Clear</option>
                                     </select>
                                 </li>
@@ -347,9 +371,16 @@
                                 <span class="input-group-addon">Status</span>
                                 <select class="form-control" ng-model="n.status">
                                     <option>Pending</option>
+                                    <option>ECB Resolution Requested</option>
+                                    <option>ECB Resolution Received</option>
                                     <option>Clear</option>
                                 </select>
                             </div>
+                            <div class="input-group col-sm-4" style="margin-top:10px" ng-show="n.status == 'ECB Resolution Received' ">
+                                <span class="input-group-addon">Received Date</span>
+                                <input class="form-control" type="text" ng-model="n.ReceivedDate" ss-date />
+                            </div>
+
                             <div class="ss_form_item_line">
                                 <label class="ss_form_input_title ">Notes&nbsp;{{$index + 1}}&nbsp;<pt-del class="pull-right" ng-click="arrayRemove(owner.ECB_Notes, $index, true)"></pt-del></label>
                                 <textarea rows="3" class="edit_text_area" ng-model="n.content"></textarea>
@@ -534,6 +565,43 @@
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Date Of Recording</label>
                                     <input class="ss_form_input " ng-model="taxLiensSaleCert.Date_Of_Recording" ss-date>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ss_form" ng-show="owner.popVisible && owner.popStep==11">
+                    <h4 class="ss_form_title">Vacate/ Relocation Lien&nbsp;
+                    <pt-add style="padding-top: 8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].VacateRelocationLiens')"></pt-add>
+                    </h4>
+                    <div class="ss_border" style="max-height: 600px; overflow-y: scroll">
+                        <div ng-repeat="vacateRelocationLien in owner.VacateRelocationLiens" class="clearfix">
+                            <span class="label label-primary">Vacate/ Relocation Lien&nbsp;{{$index + 1}}:</span>&nbsp;<pt-del class="pull-right" ng-click="arrayRemove(owner.VacateRelocationLiens, $index, true)"></pt-del>
+                            <ul class="ss_form_box clearfix">
+                                <li class="input-group" style="margin-top:10px">
+                                    <span class="input-group-addon">Status</span>
+                                    <select class="form-control" ng-model="vacateRelocationLien.status">
+                                        <option>Pending</option>
+                                        <option>Clear</option>
+                                    </select>
+                                </li>
+                                <li class="ss_form_item ">
+                                    <label class="ss_form_input_title ">Date Filed</label>
+                                    <input class="ss_form_input " ng-model="vacateRelocationLien.Date_Filed" ss-date>
+                                </li>
+                                <li class="ss_form_item ">
+                                    <label class="ss_form_input_title ">Index</label>
+                                    <input class="ss_form_input " ng-model="vacateRelocationLien.Index">
+                                </li>
+                                <li class="clearfix"></li>
+                                <li class="ss_form_item ">
+                                    <label class="ss_form_input_title ">Is there Relocation lien</label>
+                                     <pt-radio name="VacateRelocationLien_Relocation_Payoff" model="vacateRelocationLien.Relocation_Lien"></pt-radio>
+                                </li>
+                                <li class="ss_form_item " ng-show="vacateRelocationLien.Relocation_Lien">
+                                    <label class="ss_form_input_title ">Relocation payoff</label>
+                                    <input class="ss_form_input " ng-model="vacateRelocationLien.Relocation_Payoff" money-mask>
                                 </li>
                             </ul>
                         </div>

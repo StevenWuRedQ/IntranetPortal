@@ -222,7 +222,8 @@
             this.FederalTaxLiens= [{}];
             this.MechanicsLiens= [{}];
             this.TaxLiensSaleCerts = [{}]
-            this.shownlist = [false,false,false,false,false,false,false,false,false,false]            
+            this.VacateRelocationLiens = [{}]
+            this.shownlist = [false,false,false,false,false,false,false,false,false,false,false]            
            
         }
         $scope.FormModel = function(){
@@ -258,8 +259,8 @@
             ptCom.nullToUndefined(data);
             $.extend(true, $scope.Form, data);
             if(!$scope.Form.FormData.Owners[0].shownlist){
-                $scope.Form.FormData.Owners[0].shownlist = [false,false,false,false,false,false,false,false,false];
-                $scope.Form.FormData.Owners[1].shownlist = [false,false,false,false,false,false,false,false,false];
+                $scope.Form.FormData.Owners[0].shownlist = [false,false,false,false,false,false,false,false,false, false, false];
+                $scope.Form.FormData.Owners[1].shownlist = [false,false,false,false,false,false,false,false,false, false, false];
             }
             $scope.BBLE = data.Tag;
             if($scope.BBLE){

@@ -158,7 +158,7 @@ Public Class ExcelBuilder
                     report.Cell("A" & index).Style.Font.SetBold()
                     index = index + 1
                     Dim shownlist = owner("shownlist")
-                    Dim sectionlist = New ArrayList({"Mortgages", "Lis_Pendens", "Judgements", "ECB_Notes", "PVB_Notes", "Bankruptcy_Notes", "UCCs", "FederalTaxLiens", "MechanicsLiens", "TaxLiensSaleCerts"})
+                    Dim sectionlist = New ArrayList({"Mortgages", "Lis_Pendens", "Judgements", "ECB_Notes", "PVB_Notes", "Bankruptcy_Notes", "UCCs", "FederalTaxLiens", "MechanicsLiens", "TaxLiensSaleCerts", "VacateRelocationLiens"})
                     For Each section In sectionlist
                         Dim tsec = owner(section)
                         Dim tindex = sectionlist.IndexOf(section)
