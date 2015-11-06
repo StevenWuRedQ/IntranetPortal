@@ -32,6 +32,12 @@ Namespace Controllers
                 End Select
 
                 Dim followup = Data.UserFollowUp.Instance(bble, HttpContext.Current.User.Identity.Name, type)
+                Dim modelSetting = SystemModelSettings.LoadModelSetting(type)
+                If modelSetting Is Nothing Then
+                    Throw New Exception("Can not find followup type.")
+                End If
+                followup.CaseName = modelSetting.CaseName(bble)
+                followup.URL = String.Format(modelSetting.ViewLinkTemplate, bble)
                 followup.FollowUpDate = dt
                 followup.SaveData(HttpContext.Current.User.Identity.Name)
                 Return Ok(followup)

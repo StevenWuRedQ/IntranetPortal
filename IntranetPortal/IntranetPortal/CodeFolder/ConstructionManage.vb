@@ -30,6 +30,13 @@ Public Class ConstructionManage
         Return ConstructionCase.Exists(bble)
     End Function
 
+    Public Shared Function GetCaseName(bble As String) As String
+        If IsInConstruction(bble) Then
+            Return ConstructionCase.GetCase(bble).CaseName
+        End If
+        Return Nothing
+    End Function
+
     Private Shared Function GetIntakeUser() As String
         Dim ccIntake = Roles.GetUsersInRole(IntakeRoleName)
 

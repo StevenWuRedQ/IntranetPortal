@@ -583,6 +583,7 @@
     <Compile Include="CodeFolder\SummaryItemBase.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="CodeFolder\SystemModelSetting.vb" />
     <Compile Include="CodeFolder\Team.vb" />
     <Compile Include="CodeFolder\TitleManage.vb" />
     <Compile Include="CodeFolder\UserAppointment.vb" />
@@ -2301,6 +2302,13 @@
     </Compile>
     <Compile Include="UserControl\SummaryItem\CalendarItem.ascx.vb">
       <DependentUpon>CalendarItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\FollowUpItem.ascx.designer.vb">
+      <DependentUpon>FollowUpItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\FollowUpItem.ascx.vb">
+      <DependentUpon>FollowUpItem.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\SummaryItem\TaskItem.ascx.designer.vb">
@@ -5726,6 +5734,7 @@
     <Content Include="TitleUI\TitleCommentControl.ascx" />
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
+    <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />
     <Content Include="WebForm3.aspx" />
     <Content Include="App_Data\SpecificPerformanceComplaintTemplate.docx" />
     <Content Include="App_Data\QuietTitleComplantTemplate.docx" />

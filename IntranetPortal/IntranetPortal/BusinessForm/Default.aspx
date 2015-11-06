@@ -273,12 +273,13 @@
                                 function SetFollowUp(type, dateSelected) {
                                     if (typeof dateSelected == 'undefined')
                                         dateSelected = new Date();
-                                    debugger;
+                                    console.log(JSON.stringify(dateSelected))
                                     $.ajax({
                                         url: '/api/Followup/?category=' + type + '&type=17&bble=' + leadsInfoBBLE,
                                         type: 'POST',
-                                        data: dateSelected.toJSON(),
+                                        data: JSON.stringify(dateSelected),
                                         cache: false,
+                                        contentType:'application/json',
                                         success: function (data) {                                          
                                             AngularRoot.alert('Successful.');
                                         },

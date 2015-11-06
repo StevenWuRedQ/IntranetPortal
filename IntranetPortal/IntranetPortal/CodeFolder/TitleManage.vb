@@ -17,6 +17,15 @@ Public Class TitleManage
         Return False
     End Function
 
+    Public Shared Function GetTitleCaseName(bble As String) As String
+
+        If IsInTitle(bble) Then
+            Return TitleCase.GetCase(bble).CaseName
+        End If
+
+        Return Nothing
+    End Function
+
     Public Shared Function GetTitleOwner(bble As String) As String
 
         If IsInTitle(bble) Then
