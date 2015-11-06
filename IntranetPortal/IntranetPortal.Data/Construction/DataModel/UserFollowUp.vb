@@ -19,5 +19,10 @@ Partial Public Class UserFollowUp
     Public Property Description As String
     Public Property CreateTime As Nullable(Of Date)
     Public Property CreateBy As String
+    Public Property CaseName As String
+    Public Property URL As String
+    Public Property Status As Nullable(Of Integer)
+    Public Property UpdateBy As String
+    Public Property UpdateTime As Nullable(Of Date)
 
 End Class

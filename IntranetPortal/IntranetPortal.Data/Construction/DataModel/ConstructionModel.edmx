@@ -129,7 +129,12 @@
           <Property Name="FollowUpDate" Type="datetime" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" />
           <Property Name="Type" Type="int" />
+          <Property Name="CaseName" Type="nvarchar" MaxLength="256" />
+          <Property Name="URL" Type="nvarchar" MaxLength="256" />
           <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="Status" Type="int" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -286,6 +291,11 @@
           <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CaseName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -419,6 +429,11 @@
           <EntitySetMapping Name="UserFollowUps">
             <EntityTypeMapping TypeName="ConstructionModel.UserFollowUp">
               <MappingFragment StoreEntitySet="UserFollowUps">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
