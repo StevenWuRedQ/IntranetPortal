@@ -30,7 +30,7 @@
     <div class="row">
         <asp:Repeater ID="rptModules" runat="server" OnItemDataBound="rptModules_ItemDataBound">
             <ItemTemplate>
-                <div class="col-md-6 col-lg-4" id="ltContainer" runat="server">
+                <div class="col-md-3 col-lg-3" id="ltContainer" runat="server">
                 </div>
             </ItemTemplate>
         </asp:Repeater>

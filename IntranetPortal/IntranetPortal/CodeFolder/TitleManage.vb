@@ -213,9 +213,7 @@ Public Class TitleManage
             'Dim ssCase = ShortSaleCase.GetCaseByBBLE(hfBBLE.Value)
             'ssCase.SaveFollowUp(dtFollowup.Date)
 
-            Dim followup = UserFollowUp.Instance(bble, userName, LogCategory)
-            followup.FollowUpDate = commentControl.FollowUpDate
-            followup.SaveData(userName)
+            UserFollowUpManage.AddFollowUp(bble, userName, LeadsActivityLog.LogCategory.Title, commentControl.FollowUpDate)
         End If
 
         If Not String.IsNullOrEmpty(txtComments) Then

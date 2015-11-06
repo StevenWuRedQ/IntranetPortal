@@ -3,6 +3,25 @@
     function ShowWorklistItem(itemData, processName) {
         window.location.href = "/Task/MyTask.aspx?page=" + encodeURIComponent(itemData);
     }
+
+    var fileWindows = {};
+    function ShowCaseInfo(url, CaseId) {
+        for (var win in fileWindows) {
+            if (fileWindows.hasOwnProperty(win) && win == CaseId) {
+                var caseWin = fileWindows[win];
+                if (!caseWin.closed) {
+                    caseWin.focus();
+                    return;
+                }
+            }
+        }
+        
+        var left = (screen.width / 2) - (1350 / 2);
+        var top = (screen.height / 2) - (930 / 2);
+        debugger;
+        var win = window.open(url, 'View Case Info ' + CaseId, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+        fileWindows[CaseId] = win;
+    }
 </script>
 
 <h4>
@@ -12,10 +31,10 @@
     <Columns>
         <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1" CellStyle-CssClass="cell_hover">
             <DataItemTemplate>
-                <div class="group_lable" onclick='<%# Eval("BBLE")%>'><% Eval("CaseName")%></div>
+                <div class="group_lable" onclick='<%# String.Format("ShowCaseInfo(""{0}"", ""{1}"")", Eval("URL"), Eval("BBLE"))%>'><%# Eval("CaseName")%></div>
             </DataItemTemplate>
         </dx:GridViewDataTextColumn>
-        <dx:GridViewDataTextColumn FieldName="CallbackDate" VisibleIndex="2" Visible="false" Settings-SortMode="Custom">
+        <dx:GridViewDataTextColumn FieldName="FollowUpDate" VisibleIndex="2" Visible="false" Settings-SortMode="Custom">
             <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
             <%--change group template UI by steven--%>
             <GroupRowTemplate>
@@ -39,8 +58,8 @@
         </dx:GridViewDataTextColumn>
         <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
             <DataItemTemplate>
-                <%--change the image and the size by steven--%>
-                <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
+                <%--change the image and the size by steven--%>               
+                <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" />
             </DataItemTemplate>
         </dx:GridViewDataColumn>
     </Columns>
@@ -50,9 +69,8 @@
     <Styles>
         <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
         <RowHotTrack BackColor="#ff400d"></RowHotTrack>
-
     </Styles>
     <GroupSummary>
-        <dx:ASPxSummaryItem FieldName="CallbackDate" SummaryType="Count" />
+        <dx:ASPxSummaryItem FieldName="FollowUpDate" SummaryType="Count" />
     </GroupSummary>
 </dx:ASPxGridView>

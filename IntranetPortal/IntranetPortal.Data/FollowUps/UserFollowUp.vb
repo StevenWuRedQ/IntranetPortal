@@ -38,7 +38,7 @@
 
     Public Shared Function GetMyFollowUps(userName As String) As List(Of UserFollowUp)
         Using ctx As New ConstructionEntities
-            Dim followups = ctx.UserFollowUps.Where(Function(u) u.UserName = userName).ToList
+            Dim followups = ctx.UserFollowUps.Where(Function(u) u.UserName = userName And u.Status = FollowUpStatus.Active).ToList
             Return followups
         End Using
     End Function

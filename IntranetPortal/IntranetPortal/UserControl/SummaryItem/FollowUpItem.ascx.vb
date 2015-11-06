@@ -31,6 +31,12 @@ Public Class FollowUpItem
         End If
     End Sub
 
+    Protected Sub gridAppointment_CustomColumnDisplayText(sender As Object, e As ASPxGridViewColumnDisplayTextEventArgs) Handles gridFollowUp.CustomColumnDisplayText
+        If e.Column.FieldName = "FollowUpDate" Then
+            e.DisplayText = GroupText(e.Value)
+        End If
+    End Sub
+
     Public Function GroupText(groupDateText As String) As String
         Dim today = DateTime.Now.Date
 
