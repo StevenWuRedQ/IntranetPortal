@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ConstructionUI.aspx.vb" Inherits="IntranetPortal.ConstructionUI" MasterPageFile="~/Content.Master" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ConstructionUI.aspx.vb" EnableEventValidation="false" Inherits="IntranetPortal.ConstructionUI" MasterPageFile="~/Content.Master" %>
 
 
 <%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>

@@ -303,8 +303,14 @@ Public Class Utility
     End Function
 
     Public Shared Function IsSimilarName(name1 As String, name2 As String) As Boolean
+
+        If String.IsNullOrEmpty(name1) Or String.IsNullOrEmpty(name2) Then
+            Return False
+        End If
+
         name1 = name1.Trim.ToLower
         name2 = name2.Trim.ToLower
+
         If String.IsNullOrEmpty(name1) Or String.IsNullOrEmpty(name2) Then
             Return False
         End If

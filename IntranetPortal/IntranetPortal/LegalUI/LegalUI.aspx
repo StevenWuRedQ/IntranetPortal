@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="LegalUI.aspx.vb" Inherits="IntranetPortal.LegalUI" MasterPageFile="~/Content.Master" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="LegalUI.aspx.vb" EnableEventValidation="false" Inherits="IntranetPortal.LegalUI" MasterPageFile="~/Content.Master" %>
 
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 <%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>
