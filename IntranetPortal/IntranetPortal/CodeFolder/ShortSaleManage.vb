@@ -3,6 +3,9 @@ Imports ShortSale = IntranetPortal.Data
 Imports Newtonsoft.Json.Linq
 Imports Newtonsoft.Json
 
+''' <summary>
+''' To handle the short sale managment function
+''' </summary>
 Public Class ShortSaleManage
 
     Public Const SSLogTitleSave As String = "ShortSaleSave"

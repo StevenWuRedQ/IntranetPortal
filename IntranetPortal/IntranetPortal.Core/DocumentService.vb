@@ -3,6 +3,9 @@ Imports System.Security
 Imports Microsoft.SharePoint.Client.Sharing
 Imports System.Web
 
+''' <summary>
+''' The document service for sharepoint 365
+''' </summary>
 Public Class DocumentService
     Private Shared ReadOnly userName As String = System.Configuration.ConfigurationManager.AppSettings("Office365UserName")
     Private Shared ReadOnly passwordstr As String = System.Configuration.ConfigurationManager.AppSettings("Office365Password")
@@ -10,6 +13,11 @@ Public Class DocumentService
     Private Shared ReadOnly DocumentLibraryTitle = "Documents"
     Private Shared ReadOnly RootFolderName = "Shared%20Documents"
 
+    ''' <summary>
+    ''' get property file list from sharepoint
+    ''' </summary>
+    ''' <param name="bble">the bble of property</param>
+    ''' <returns>the files collection, include a list of category name, file list and sub category</returns>
     Public Shared Function GetFilesByBBLE(bble As String) As Object
         Using ClientContext = GetClientContext()
 
@@ -33,6 +41,12 @@ Public Class DocumentService
         End Using
     End Function
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="bble"></param>
+    ''' <param name="folderPath"></param>
+    ''' <returns></returns>
     Public Shared Function GetCateByBBLEAndFolder(bble As String, folderPath As String) As Object
         Using ctx = GetClientContext()
             If Not IsFolderExsit(ctx, bble & "/" & folderPath) Then
@@ -399,6 +413,10 @@ Public Class DocumentService
         clientContext.ExecuteQuery()
     End Sub
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <returns></returns>
     Private Shared Function GetClientContext() As ClientContext
         Dim password As New SecureString
         Dim clientContext As New ClientContext(serverUrl)
@@ -414,10 +432,9 @@ Public Class DocumentService
     Private Shared Function GetFiles(clientContext As ClientContext, cate As Folder) As Object
         Dim files = cate.Files
         clientContext.Load(files)
-        clientContext.ExecuteQuery()
 
         Dim result = (From file In files
-                     Select New With
+                      Select New With
                             {
                                 .FileID = 1,
                                 .Description = file.UniqueId.ToString,
@@ -425,13 +442,15 @@ Public Class DocumentService
                                 .Size = file.Length,
                                 .CreateDate = file.TimeCreated,
                                 .Createby = GetFileCreateBy(file, clientContext)
-                                }).ToList
-        Return result
+                              })
+
+        clientContext.ExecuteQuery()
+        Return result.ToList
     End Function
 
     Private Shared Function GetFileCreateBy(file As File, ctx As ClientContext) As String
-        ctx.Load(file, Function(f As File) f.ListItemAllFields)
-        ctx.ExecuteQuery()
+        ctx.Load(file, Function(f As File) f.ListItemAllFields.Item("UploadBy"))
+
         Try
             Return file.ListItemAllFields("UploadBy")
         Catch ex As Exception

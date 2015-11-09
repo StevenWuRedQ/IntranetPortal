@@ -23,7 +23,6 @@ Public Class DataWCFService
 
 #End Region
 
-
     Public Shared Function GetLeadInfo(bble As String) As LeadsInfo
         Using client As New DataAPI.WCFMacrosClient
             'Dim result = client.GetPropdata(bble, False, False, False, False, False, False)
