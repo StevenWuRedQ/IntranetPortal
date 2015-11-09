@@ -25,9 +25,11 @@
         background: url(/images/ic_filtered_bg.png) no-repeat;
     }
 
+
     /* for fix the email message link color hover bug in activty log*/
     td.dxgv:hover a {
         color: black !important;
+        
     }
 </style>
 
@@ -131,13 +133,6 @@
         empListBox.MakeItemVisible(firstIndex);
     }
 
-    //function UpdateSelectAllItemState() {
-    //    IsAllSelected() ? empListBox.SelectIn  s([0]) : empListBox.UnselectIndices([0]);
-    //}
-    //function IsAllSelected() {
-    //    var selectedDataItemCount = empListBox.GetItemCount() - (empListBox.GetItem(0).selected ? 0 : 1);
-    //    return empListBox.GetSelectedItems().length == selectedDataItemCount;
-    //}
     function UpdateText() {
         var selectedItems = empListBox.GetSelectedItems();
         empCheckComboBox.SetText(GetSelectedItemsText(selectedItems));
@@ -342,12 +337,6 @@
 
     var needRefreshShortSale = false;
     function InsertNewComments() {
-        //var comments = document.getElementById("txtComments");
-
-        //if (comments.value == "") {
-        //    alert("Comments can not be empty.")
-        //    return;
-        //}
 
         if(addCommentsCallbackClient.InCallback())
         {
@@ -498,9 +487,9 @@
 <div style="font-size: 12px; color: #9fa1a8; font-family: 'Source Sans Pro'; width: 100%">
     <!-- Nav tabs -->
     <%--comment box filters--%>
-    <div style="padding: 20px; background: #f5f5f5" class="clearfix">
+    <div style="padding: 10px; background: #f5f5f5" class="clearfix">
         <%--comment box and text--%>
-        <div style="float: left; height: 110px; min-width: 450px; width: 60%; margin-top: 10px;">
+        <div style="float: left; min-width: 420px; width: 60%; margin-top: 10px;">
             <div class="clearfix">
                 <span style="color: #295268;" class="upcase_text">Add Comment&nbsp;&nbsp;<i class="fa fa-comment" style="font-size: 14px"></i></span>
                 <input type="radio" id="is_public" name="is_public" value="Internal" class="font_12" checked="checked" />
@@ -703,9 +692,9 @@
 
     <%-------end-----%>
     <%-- log tables--%>
-    <div style="width: 100%; padding: 0px; display: block;">
+    <div style="width: 100%; padding: 0; display: block;">
         <asp:HiddenField ID="hfBBLE" runat="server" />
-        <dx:ASPxGridView ID="gridTracking" Width="100%" ViewStateMode="Disabled" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true"
+        <dx:ASPxGridView ID="gridTracking" ViewStateMode="Disabled" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true"
             SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID"
             SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" OnDataBinding="gridTracking_DataBinding" Styles-FilterBuilderHeader-BackColor="Gray">
             <Styles>

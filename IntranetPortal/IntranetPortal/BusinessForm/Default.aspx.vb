@@ -37,7 +37,7 @@
     End Sub
 
     Private Sub BindData(tag As String)
-        contentSplitter.Panes("listPanel").Visible = False
+        listPanel.Visible = False
 
         Dim form = Data.FormDataItem.Instance(FormData.DefaultControl.BusinessData, tag)
 
@@ -70,10 +70,10 @@
         FormData = BusinessForm.Instance("title")
         BusinessList = Page.LoadControl(FormData.ListControl)
         BusinessList.ID = "titleList"
-        contentSplitter.GetPaneByName("listPanel").Controls.Add(BusinessList)
+        listPanel.Controls.Add(BusinessList)
 
         If FormData.ShowActivityLog Then
-            contentSplitter.GetPaneByName("LogPanel").Visible = True
+            logpanel.Visible = True
             ActivityLogs.DisplayMode = FormData.DefaultControl.ActivityLogMode
         End If
 

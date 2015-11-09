@@ -14,22 +14,22 @@ Option Explicit On
 Partial Public Class BusinessFormDefault
     
     '''<summary>
-    '''contentSplitter control.
+    '''listPanel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter
+    Protected WithEvents listPanel As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''SplitterContentControl1 control.
+    '''dataPanel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.SplitterContentControl
+    Protected WithEvents dataPanel As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''rptTopmenu control.
@@ -102,6 +102,15 @@ Partial Public Class BusinessFormDefault
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DocumentsUI As Global.IntranetPortal.DocumentsUI
+    
+    '''<summary>
+    '''logpanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents logpanel As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''cbpLogs control.

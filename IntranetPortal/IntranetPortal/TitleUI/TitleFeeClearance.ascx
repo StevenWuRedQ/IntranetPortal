@@ -153,10 +153,9 @@
         }
         $scope.updateTotal = function (d) {
             d.lastupdate = new Date();
-
             var total = 0.0;
             _.each($scope.FormData.FeeClearance.data, function (el, idx) {
-                total += parseFloat(el.cost);
+                total += parseFloat(el.cost)?parseFloat(el.cost):0.0;
             })
             $scope.FormData.FeeClearance.total = total;
         }

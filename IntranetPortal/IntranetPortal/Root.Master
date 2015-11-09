@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="/scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/stevencss.css?v=1.02" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     <style>
 
@@ -100,7 +99,29 @@
 
     </style>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/Scripts/jquery-2.1.3.min.js"><\/script>')</script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="/Scripts/js/jquery.easing.1.3.js"></script>
+    <script src="/Scripts/js/jquery.debouncedresize.js"></script>
+    <script src="/Scripts/js/jquery.throttledresize.js"></script>
+    <script src="/Scripts/js/jquery.mousewheel.js"></script>
+    <script src="/Scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>
+    <script src="/Scripts/js/main.js"></script>
+    <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/scripts/PortalMessager.js"></script>
+    <script src="/scripts/stevenjs.js"></script>
+    <script>
+        $(function () {
+            setTimeout(
+                function () {
+                    LoadChatWindow(false);
+                    $('#imgChat').css("color", "green");
+                }, 1000);
+        });
+    </script>
+    
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body onload="init();" id="testIDbody">
@@ -212,7 +233,6 @@
             </Styles>
 
             <Panes>
-
                 <dx:SplitterPane Name="leftNavPane" Size="280" AllowResize="False">
                     <Panes>
                         <dx:SplitterPane Name="NavPane">
@@ -238,7 +258,6 @@
                                             </p>
                                             <p>&copy; 2014 My Ideal Property</p>
                                             <div id="errorMsg" style="color: transparent"></div>
-                                            <%--                                                                                        <input type="button" class="NewTask" onclick="NewTask()" value="NewTask" />--%>
                                         </footer>
                                     </div>
                                 </dx:SplitterContentControl>
@@ -413,7 +432,6 @@
                                 </dx:SplitterContentControl>
                             </ContentCollection>
                         </dx:SplitterPane>
-
                     </Panes>
                 </dx:SplitterPane>
             </Panes>
@@ -436,13 +454,10 @@
                 <tr style="display: none">
                     <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
                         <dx:ASPxButton ID="ASPxButton2" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                            <ClientSideEvents Click="function(){
-                                                                                                                        ReadMsg();                                                                                                                     
-                                                                                                                                                                                                                                              
-                                                                                                                        }"></ClientSideEvents>
+                            <ClientSideEvents Click="function(){ReadMsg()}"></ClientSideEvents>
                         </dx:ASPxButton>
                         <dx:ASPxButton ID="ASPxButton3" runat="server" Text="Go to Lead" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                            <ClientSideEvents Click="function(){PopupViewLead(); }"></ClientSideEvents>
+                            <ClientSideEvents Click="function(){PopupViewLead()}"></ClientSideEvents>
                         </dx:ASPxButton>
                     </td>
                 </tr>
@@ -460,25 +475,6 @@
         </dx:ASPxPopupControl>
         <uc1:SendMail runat="server" ID="SendMail" />
     </form>
-    <script>window.jQuery || document.write('<script src="/Scripts/jquery-2.1.3.min.js"><\/script>')</script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="/Scripts/js/jquery.easing.1.3.js"></script>
-    <script src="/Scripts/js/jquery.debouncedresize.js"></script>
-    <script src="/Scripts/js/jquery.throttledresize.js"></script>
-    <script src="/Scripts/js/jquery.mousewheel.js"></script>
-    <script src="/Scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>
-    <script src="/Scripts/js/main.js"></script>
-    <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="/scripts/stevenjs.js"></script>
-    <script>
-        $(function () {
-            setTimeout(
-                function () {
-                    LoadChatWindow(false);
-                    $('#imgChat').css("color", "green");
-                }, 1000);
-        });
-    </script>
+
 </body>
 </html>

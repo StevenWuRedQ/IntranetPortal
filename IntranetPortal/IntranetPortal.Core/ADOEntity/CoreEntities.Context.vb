@@ -44,4 +44,10 @@ Partial Public Class CoreEntities
         Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("QueryReportData", sqlParameter)
     End Function
 
+    Public Overridable Function GetPrimaryKeys(tableName As String) As ObjectResult(Of GetPrimaryKeys_Result)
+        Dim tableNameParameter As ObjectParameter = If(tableName IsNot Nothing, New ObjectParameter("TableName", tableName), New ObjectParameter("TableName", GetType(String)))
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of GetPrimaryKeys_Result)("GetPrimaryKeys", tableNameParameter)
+    End Function
+
 End Class

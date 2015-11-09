@@ -500,7 +500,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Amount Owed</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_AmountOwed">
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_AmountOwed" money-mask>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Dwelling Classification Fee</label>

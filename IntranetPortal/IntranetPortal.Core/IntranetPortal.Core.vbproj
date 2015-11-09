@@ -198,6 +198,9 @@
     <Compile Include="ADOEntity\EmailTemplate.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\GetPrimaryKeys_Result.vb">
+      <DependentUpon>CoreEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\MapDataEntities.Context.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -240,7 +243,7 @@
     <Compile Include="Application.vb" />
     <Compile Include="CommonData.vb" />
     <Compile Include="DataLoopRule.vb" />
-    <Compile Include="DBUtil.vb" />
+    <Compile Include="DBJSONUtil.vb" />
     <Compile Include="DocumentService.vb" />
     <Compile Include="EmailService.vb" />
     <Compile Include="ExcelBuilder.vb" />

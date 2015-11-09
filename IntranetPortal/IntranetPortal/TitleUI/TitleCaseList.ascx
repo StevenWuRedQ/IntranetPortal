@@ -168,7 +168,7 @@
         </div>
 
     </div>
-    <div style="overflow: auto; height: 798px; padding: 0 10px;" id="leads_list_left">
+    <div style="overflow: auto; height: 798px; padding: 0;" id="leads_list_left">
         <asp:HiddenField runat="server" ID="hfCaseStatus" />
         <asp:HiddenField runat="server" ID="hfCaseBBLEs" />
         <div class="form-inline" id="divSearch" style="display: none">
@@ -228,7 +228,7 @@
             <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
                 EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
             <SettingsPager Mode="EndlessPaging" PageSize="20"></SettingsPager>
-            <Settings ShowColumnHeaders="False" VerticalScrollableHeight="767"></Settings>
+            <Settings ShowColumnHeaders="False" VerticalScrollableHeight="798"></Settings>
             <Styles>
                 <Table Border-BorderStyle="None">
                     <Border BorderStyle="None"></Border>

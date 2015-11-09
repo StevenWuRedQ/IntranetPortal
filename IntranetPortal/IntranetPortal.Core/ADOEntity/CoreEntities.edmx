@@ -156,17 +156,20 @@
             <PropertyRef Name="LogId" />
           </Key>
           <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConnectionId" Type="nvarchar" MaxLength="50" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="Category" Type="nvarchar" MaxLength="50" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="PageUrl" Type="nvarchar" MaxLength="256" />
-          <Property Name="ConnectionId" Type="nvarchar" MaxLength="50" />
           <Property Name="StartTime" Type="datetime" />
           <Property Name="EndTime" Type="datetime" />
           <Property Name="Status" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="256" />
         </EntityType>
+        <Function Name="GetPrimaryKeys" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TableName" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="IntranetPortalCoreModelStoreContainer">
           <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CommonData" EntityType="Self.CommonData" Schema="dbo" store:Type="Tables" />
@@ -217,6 +220,9 @@
           </FunctionImport>
           <EntitySet Name="CustomReports" EntityType="IntranetPortal.Core.Model.CustomReport" />
           <EntitySet Name="WorkingLogs" EntityType="IntranetPortal.Core.Model.WorkingLog" />
+          <FunctionImport Name="GetPrimaryKeys" ReturnType="Collection(IntranetPortal.Core.Model.GetPrimaryKeys_Result)">
+            <Parameter Name="TableName" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="SpecialDay">
           <Key>
@@ -366,6 +372,10 @@
           <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="ConnectionId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="GetPrimaryKeys_Result">
+          <Property Type="String" Name="table_name" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="primary_keys" Nullable="true" MaxLength="128" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -546,6 +556,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetPrimaryKeys" FunctionName="IntranetPortal.Core.Model.Store.GetPrimaryKeys">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntranetPortal.Core.Model.GetPrimaryKeys_Result">
+                <ScalarProperty Name="table_name" ColumnName="table_name" />
+                <ScalarProperty Name="primary_keys" ColumnName="primary_keys" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
