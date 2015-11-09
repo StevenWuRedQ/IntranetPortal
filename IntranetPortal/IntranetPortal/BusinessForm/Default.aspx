@@ -17,7 +17,7 @@
     }
     </style>
     <div ui-layout="{flow: 'column'}" id="listPanelDiv">
-        <div ui-layout-container hideprev size="280px" max-size="320px">
+        <div ui-layout-container hideafter size="280px" max-size="320px">
             <asp:Panel ID="listPanel" runat="server">
             </asp:Panel>
         </div>

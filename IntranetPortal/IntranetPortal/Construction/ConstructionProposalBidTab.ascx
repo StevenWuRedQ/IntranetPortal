@@ -93,7 +93,7 @@
     <h4 class="ss_form_title">Take off</h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
-            <pt-files file-bble="CSCase.BBLE" file-id="CSCase_ProposalBids_Takeoff" file-model="CSCase.CSCase.ProposalBids.Takeoff" folder-enable="true"  base-folder="CSCase_ProposalBids_Takeoff"></pt-files>folder-enable="true"
+            <pt-files file-bble="CSCase.BBLE" file-id="CSCase_ProposalBids_Takeoff" file-model="CSCase.CSCase.ProposalBids.Takeoff" folder-enable="true"  base-folder="CSCase_ProposalBids_Takeoff"></pt-files>
         </ul>
     </div>
 </div>

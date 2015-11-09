@@ -14,22 +14,13 @@ Option Explicit On
 Partial Public Class ConstructionUI
     
     '''<summary>
-    '''ASPxSplitter1 control.
+    '''listPanel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
-    
-    '''<summary>
-    '''SplitterContentControl1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.SplitterContentControl
+    Protected WithEvents listPanel As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''ConstructionCaseList control.
@@ -41,6 +32,15 @@ Partial Public Class ConstructionUI
     Protected WithEvents ConstructionCaseList As Global.IntranetPortal.ConstructionCaseList
     
     '''<summary>
+    '''dataPane control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dataPane As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
     '''ConstructionUICtrl control.
     '''</summary>
     '''<remarks>
@@ -48,6 +48,15 @@ Partial Public Class ConstructionUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ConstructionUICtrl As Global.IntranetPortal.ConstructionUICtrl
+    
+    '''<summary>
+    '''LogPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LogPanel As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''cbpLogs control.

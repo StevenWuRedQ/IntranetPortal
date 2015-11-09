@@ -1,5 +1,9 @@
 ﻿/*add by steven*/
 
+table tr {
+	font-size: 14px;
+}
+
 .vertical-parent {
 	display: table;
 	width: 100%;
@@ -1539,7 +1543,7 @@ li.ss_form_item3 {
 }
 
 li.ss_form_item_line {
-    list-style: none;
+	list-style: none;
 	width: 93.3%;
 }
 
@@ -2516,6 +2520,7 @@ li.mag_tabv.active {
 
 	.pt-files .pt-files-drop-button {
 		padding: 3px 20px;
+		font-size: 14px;
 		border: 1px solid #c8c8c8;
 		border-radius: 2px;
 		border-bottom: none;
@@ -2584,16 +2589,17 @@ li.clearfix {
 .panel-condensed .panel-body {
 	padding: 4px;
 }
-.panel-condensed .panel-heading{
+
+.panel-condensed .panel-heading {
 	padding: 4px;
 }
 
 .panel-condensed li {
-	list-style: none
+	list-style: none;
 }
 
-hr.ss-form-hr{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 1px dashed #eee;
+hr.ss-form-hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: 1px dashed #eee;
 }
