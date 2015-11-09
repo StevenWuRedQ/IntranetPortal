@@ -45,7 +45,7 @@
         <ul class="ss_form_box clearfix">
              <li class="ss_form_item ">
                 <label class="ss_form_input_title {{LegalCase.ForeclosureInfo.hasTaxLien?'ss_warning':''}}">Is there a tax lien?</label>
-                <pt-radio name="Efile" model="LegalCase.ForeclosureInfo.hasTaxLien"></pt-radio>
+                <pt-radio name="tlienRadio" model="LegalCase.ForeclosureInfo.hasTaxLien"></pt-radio>
 
             </li>
             <li class="ss_form_item " style="width:60%">

@@ -260,6 +260,11 @@ Public Enum DataStatus
     ORGranted = 156
     <Description("O/R Entered")>
     OREntered = 157
+    <Description("O/R Denied")>
+    ORDenied = 158
+    <Description("O/R Withdrawn")>
+    ORWithdrawn = 159
+
 
     <Description("Judgment Submitted")>
     JudgmentSubmitted = 10
@@ -267,6 +272,10 @@ Public Enum DataStatus
     JudgmentGranted = 11
     <Description("Judgment Entered")>
     JudgmentEntered = 12
+    <Description("Judgment Denied")>
+    JudgmentEnteredDenied = 221
+    <Description("Judgment Withdrawn")>
+    JudgmentWithdrawn = 222
 
     <Description("Dismissed w Prejudice")>
     DismissedWithPrejudice = 8
