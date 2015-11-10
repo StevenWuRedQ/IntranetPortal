@@ -412,6 +412,10 @@ Public Class ShortSaleManage
         End Select
     End Sub
 
+    ''' <summary>
+    ''' Approval process when agent move the leads to short sale
+    ''' </summary>
+    ''' <returns>Custom short sale new case process instance</returns>
     Public Shared Property NewCaseProcess As ShortSaleProcess = ShortSaleProcess.NewInstance("New Case", "ShortSale-Manager", Nothing,
                                                       Nothing,
                                                       Sub(task As UserTask)
@@ -443,9 +447,13 @@ Public Class ShortSaleManage
                                                                                                 Dim ssCase = ShortSaleCase.GetCaseByBBLE(task.BBLE)
                                                                                                 ShortSale.ShortSaleActivityLog.AddLog(task.BBLE, task.CreateBy, typeofUpdate, category & " - " & statusofUpdate, "", ssCase.AppId)
 
-                                                                                                Dim users = Roles.GetUsersInRole("ShortSale-AssignReviewer")
-                                                                                                If users IsNot Nothing AndAlso users.Count > 0 Then
-                                                                                                    ShortSaleCase.ReassignOwner(task.BBLE, users(0))
+                                                                                                If objData("Reviewer") IsNot Nothing AndAlso Not String.IsNullOrEmpty(objData("Reviewer")) Then
+                                                                                                    ShortSaleCase.ReassignOwner(task.BBLE, objData("Reviewer").ToString)
+                                                                                                Else
+                                                                                                    Dim users = Roles.GetUsersInRole("ShortSale-AssignReviewer")
+                                                                                                    If users IsNot Nothing AndAlso users.Count > 0 Then
+                                                                                                        ShortSaleCase.ReassignOwner(task.BBLE, users(0))
+                                                                                                    End If
                                                                                                 End If
                                                                                             End Sub,
                                                                                             Nothing)

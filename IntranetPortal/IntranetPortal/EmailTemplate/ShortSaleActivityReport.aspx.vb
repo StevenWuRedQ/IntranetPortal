@@ -31,8 +31,15 @@ Public Class ShortSaleActivityReport
                 TeamActivityData = PortalReport.LoadLegalActivityReport(startTime, endTime)
                 BindChart()
             Else
-                TeamActivityData = PortalReport.LoadShortSaleActivityReport(startTime, endTime)
-                BindChart()
+                If Request.QueryString("teamMgr") IsNot Nothing Then
+                    Dim teamMgr = Request.QueryString("teamMgr")
+                    Dim ssUsers = Employee.GetManagedEmployees(teamMgr)
+                    TeamActivityData = PortalReport.LoadShortSaleActivityReport(startTime, endTime, ssUsers.ToList)
+                    BindChart()
+                Else
+                    TeamActivityData = PortalReport.LoadShortSaleActivityReport(startTime, endTime)
+                    BindChart()
+                End If
             End If
         End If
     End Sub

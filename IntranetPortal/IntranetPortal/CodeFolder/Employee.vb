@@ -320,6 +320,11 @@ Partial Public Class Employee
 
     'End Function
 
+    ''' <summary>
+    ''' Get managed active employee through manager name
+    ''' </summary>
+    ''' <param name="managerName">Manager name</param>
+    ''' <returns>Employee name array</returns>
     Public Shared Function GetManagedEmployees(managerName As String) As String()
         Return GetManagedEmployees(managerName, True)
     End Function

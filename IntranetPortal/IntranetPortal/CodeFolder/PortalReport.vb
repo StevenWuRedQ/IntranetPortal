@@ -1,4 +1,7 @@
-﻿Public Class PortalReport
+﻿''' <summary>
+''' Generate the portal report data
+''' </summary>
+Public Class PortalReport
 
     Public Shared Function LoadLegalActivityReport(startDate As DateTime, endDate As DateTime) As List(Of CaseActivityData)
         Dim users = LegalCaseManage.LegalUsers
@@ -12,13 +15,21 @@
         End Using
     End Function
 
-    Public Shared Function LoadShortSaleActivityReport(startDate As DateTime, endDate As DateTime) As List(Of CaseActivityData)
-        Dim ssRoles = Roles.GetAllRoles().Where(Function(r) r.StartsWith("ShortSale-") OrElse r.StartsWith("Title-")).ToList
-        Dim ssUsers As New List(Of String)
+    ''' <summary>
+    ''' Load ShortSale Activity Data
+    ''' </summary>
+    ''' <param name="startDate">Start Date</param>
+    ''' <param name="endDate">End Date</param>
+    ''' <returns>User Activity Data</returns>
+    Public Shared Function LoadShortSaleActivityReport(startDate As DateTime, endDate As DateTime, Optional ssUsers As List(Of String) = Nothing) As List(Of CaseActivityData)
+        If ssUsers Is Nothing Then
+            ssUsers = New List(Of String)
 
-        For Each rl In ssRoles
-            ssUsers.AddRange(Roles.GetUsersInRole(rl))
-        Next
+            Dim ssRoles = Roles.GetAllRoles().Where(Function(r) r.StartsWith("ShortSale-") OrElse r.StartsWith("Title-")).ToList
+            For Each rl In ssRoles
+                ssUsers.AddRange(Roles.GetUsersInRole(rl))
+            Next
+        End If
 
         Using ctx As New Entities
             Dim actionTypes = {LeadsActivityLog.EnumActionType.Comments, LeadsActivityLog.EnumActionType.Email}
@@ -26,8 +37,6 @@
             Dim logs = ctx.LeadsActivityLogs.Where(Function(al) (al.Category.Contains(category) Or al.Category.Contains(12)) And al.ActivityDate < endDate And al.ActivityDate > startDate And actionTypes.Contains(al.ActionType)).ToList
 
             Return BuildCaseActivityReport(CaseActivityData.ActivityType.ShortSale, logs, ssUsers.Distinct.ToArray, ShortSaleManage.GetSSOpenCaseLogs(startDate, endDate), ShortSaleManage.GetSSSaveCaseLogs(startDate, endDate), endDate)
-
-
         End Using
     End Function
 
