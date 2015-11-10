@@ -383,7 +383,7 @@
                                                 <h4 class="modal-title">Working Total : {{TotleHours.Total}} hours</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <div style=" overflow: auto">
+                                                <div style=" overflow: auto;max-height:300px">
                                                     <table class="table table-striped">
                                                         <thead>
                                                             <tr>

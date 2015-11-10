@@ -66,8 +66,12 @@ Public Class LegalSummaryUI
 
     Protected Sub gridOSCs_DataBinding(sender As Object, e As EventArgs)
         If (gridOSCs.DataSource Is Nothing) Then
-            gridOSCs.DataSource = GetSecondaryTypeList(LegalSencdaryType.OSC)
-            gridOSCs.DataBind()
+            Dim Cases = GetSecondaryTypeList(LegalSencdaryType.OSC)
+            If (Cases IsNot Nothing) Then
+                gridOSCs.DataSource = Cases
+                gridOSCs.DataBind()
+            End If
+
         End If
     End Sub
     Function GetSecondaryTypeList(type As LegalSencdaryType) As List(Of LegalCase)

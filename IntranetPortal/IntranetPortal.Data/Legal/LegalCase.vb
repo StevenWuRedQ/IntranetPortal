@@ -264,7 +264,8 @@ Public Enum DataStatus
     ORDenied = 158
     <Description("O/R Withdrawn")>
     ORWithdrawn = 159
-
+    <Description("O/R Vacated")>
+    ORVacated = 160
 
     <Description("Judgment Submitted")>
     JudgmentSubmitted = 10
@@ -276,6 +277,8 @@ Public Enum DataStatus
     JudgmentEnteredDenied = 221
     <Description("Judgment Withdrawn")>
     JudgmentWithdrawn = 222
+    <Description("Judgment Vacated")>
+    JudgmentVacated = 2223
 
     <Description("Dismissed w Prejudice")>
     DismissedWithPrejudice = 8
@@ -285,6 +288,10 @@ Public Enum DataStatus
 
     <Description("Sale Date")>
     SaleDate = 7
+    <Description("Sale Cancelled")>
+    SaleCancelled = 71
+    <Description("Sale Rescheduled")>
+    SaleRescheduled = 72
 
     <Description("Restored To calendar")>
     Restored2Calendar = 10101

@@ -298,9 +298,11 @@ Public Class LegalCaseManage
 
     Public Shared Function GetDataStatus() As JArray
         Dim disabled = {5}
-        Dim JarraySort1 = Utility.Enum2Dictinary(GetType(DataStatus)).ToList.Where(Function(v) Not disabled.Contains(v.Key)).Select(Function(v) New With {.Key = v.Key, .Value = v.Value, .Order = If(v.Key < 100, v.Key * 10, v.Key - 100)}).ToList()
+        Dim JarraySort1 = Utility.Enum2Dictinary(GetType(DataStatus)).ToList
+        Dim SortOrder = Core.CommonData.GetData("LegalStatusOrder")
+        Dim JarraySorted = (From s In SortOrder Join j In JarraySort1 On s.Name Equals j.Value Select New With {j.Key, j.Value, .Order = CInt(s.Description)}).OrderBy(Function(v) v.Order)
 
-        Dim JarrayStr = JarraySort1.Select(Function(v) New With {.Key = v.Key, .Value = v.Value, .Order = If(v.Key = 7, 10000, v.Order)}).OrderBy(Function(v) v.Order).ToJsonString
+        Dim JarrayStr = JarraySorted.ToJsonString
 
         Dim Jarr = JArray.Parse(JarrayStr)
 
