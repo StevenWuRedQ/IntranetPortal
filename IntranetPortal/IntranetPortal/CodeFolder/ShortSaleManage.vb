@@ -238,7 +238,8 @@ Public Class ShortSaleManage
             Case CaseStatus.Archived
                 If Not Roles.IsUserInRole(createBy, "ShortSale-Manager") Then
                     Dim comments = String.Format("{0} want to archive this case. Please approval.", createBy)
-                    ArchivedProcess.ProcessStart(ssCase.BBLE, ssCase.BBLE, createBy, comments)
+                    Dim emp = Employee.GetInstance(createBy)
+                    ArchivedProcess.ProcessStart(ssCase.BBLE, ssCase.BBLE, createBy, comments, If(emp IsNot Nothing, emp.Manager, Nothing))
                     Return False
                 Else
                     ssCase.SaveStatus(status)
@@ -380,7 +381,8 @@ Public Class ShortSaleManage
 
     Public Shared Sub AssignCaseWithWF(bble As String, userName As String, createBy As String)
         If Not Roles.IsUserInRole(createBy, "ShortSale-Manager") Then
-            ReassignProcess.ProcessStart(bble, userName, createBy, String.Format("{0} want to reassign this case to {1}. Please approval.", createBy, userName))
+            Dim emp = Employee.GetInstance(createBy)
+            ReassignProcess.ProcessStart(bble, userName, createBy, String.Format("{0} want to reassign this case to {1}. Please approval.", createBy, userName), If(emp IsNot Nothing, emp.Manager, Nothing))
 
             'Dim comments = String.Format("{0} want to reassign this case to {1}. Please approval.", createBy, userName)
             'Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString, Nothing, createBy, LeadsActivityLog.EnumActionType.SetAsTask)
@@ -455,13 +457,30 @@ Public Class ShortSaleManage
                                                                                               End Sub, Nothing)
 End Class
 
+''' <summary>
+''' Custom shortsale Process, only one step approval
+''' </summary>
 Public Class ShortSaleProcess
     Public Delegate Sub StartProcess(bble As String, taskData As String, createBy As String)
     Public Delegate Sub Approved(task As UserTask)
     Public Delegate Sub Declined(task As UserTask)
 
+    ''' <summary>
+    ''' The Process Name
+    ''' </summary>
+    ''' <returns>Process Name</returns>
     Public Property TaskName As String
+
+    ''' <summary>
+    ''' Process approval role property
+    ''' </summary>
+    ''' <returns>Approval roles</returns>
     Public Property RoleName As String
+
+    ''' <summary>
+    ''' Process Approver property
+    ''' </summary>
+    ''' <returns>Approver</returns>
     Public Property UserNames As String
 
     Public StartProcessAction As StartProcess
@@ -481,6 +500,16 @@ Public Class ShortSaleProcess
         End If
     End Sub
 
+    ''' <summary>
+    ''' Get process instance
+    ''' </summary>
+    ''' <param name="name">Process Name</param>
+    ''' <param name="roles">Approval Roles</param>
+    ''' <param name="approvers">Approver</param>
+    ''' <param name="startAction">the custom function on Process Starting</param>
+    ''' <param name="approvedAction">custom function on process approved</param>
+    ''' <param name="declinedAction">custom function on process declined</param>
+    ''' <returns>Process Instance</returns>
     Public Shared Function NewInstance(name As String, roles As String, approvers As String, startAction As StartProcess, approvedAction As Approved, declinedAction As Declined)
         Dim proc = ProcessTable.FirstOrDefault(Function(p) p.TaskName = name)
         If proc Is Nothing Then

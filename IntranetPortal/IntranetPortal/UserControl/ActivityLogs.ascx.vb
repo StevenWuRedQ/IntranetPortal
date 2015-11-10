@@ -1031,8 +1031,10 @@ Public Class ActivityLogs
 
                         Dim assignComments = String.Format("{0} want to change {1} status to {2} - {3}. Please Approval. <br /> Comments: {4}", Page.User.Identity.Name, typeOfUpdate, category, statusOfUpdate, txtComments)
 
+
+                        Dim emp = Employee.GetInstance(Page.User.Identity.Name)
                         'Start AssignUpdate process
-                        ShortSaleManage.AssignProcess.ProcessStart(hfBBLE.Value, taskData.ToJsonString, Page.User.Identity.Name, assignComments)
+                        ShortSaleManage.AssignProcess.ProcessStart(hfBBLE.Value, taskData.ToJsonString, Page.User.Identity.Name, assignComments, If(emp IsNot Nothing, emp.Manager, Nothing))
 
                         'Dim users = Roles.GetUsersInRole("ShortSale-AssignReviewer")
                         'If users IsNot Nothing AndAlso users.Count > 0 Then
