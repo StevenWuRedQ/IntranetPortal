@@ -261,7 +261,7 @@ Public Class CommonService
         Dim pageLink = String.Format("{0}/EmailTemplate/TeamActivityReport.aspx?name={1}", url, name)
 
         If name = "ShortSale" Then
-            pageLink = String.Format("{0}/EmailTemplate/ShortSaleActivityReport.aspx", url)
+            pageLink = String.Format("{0}/EmailTemplate/ShortSaleActivityReport.aspx?", url)
         End If
 
         If name = "Legal" Then
@@ -270,6 +270,10 @@ Public Class CommonService
 
         If params IsNot Nothing AndAlso params.Count > 0 Then
             For Each param As DictionaryEntry In params
+                If Not pageLink.Contains("?") Then
+                    pageLink = pageLink & "?"
+                End If
+
                 pageLink = pageLink + String.Format("&{0}={1}", param.Key, param.Value)
             Next
         End If
