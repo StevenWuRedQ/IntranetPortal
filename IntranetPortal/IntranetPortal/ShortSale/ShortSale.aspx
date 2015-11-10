@@ -31,7 +31,7 @@
 
         .LoadingCover {
             position: absolute;
-            background-image =url(/images/MyIdealProptery.png) no-repeat center fixed;
+            background-image :url(/images/MyIdealProptery.png) no-repeat center fixed;
             background-size: 260px, 280px;
             background-color: #dddddd;
             width: 100%;
@@ -60,7 +60,7 @@
         }
     </script>
     <asp:HiddenField runat="server" ID="hfIsEvction" Value="false" />
-    <div runat="server" class="LoadingCover" id="LodingCover" visible="false"></div>
+    <div runat="server" class="LoadingCover" id="LodingCover"></div>
 
     <div ui-layout="{flow: 'column'}">
         <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">

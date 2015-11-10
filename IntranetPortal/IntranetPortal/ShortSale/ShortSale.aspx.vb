@@ -134,7 +134,7 @@ Public Class NGShortSale
                     isEviction = True
                     ShortSaleCaseList.BindCaseByBBLEs(ShortSaleManage.GetEvictionCasesByUsers(users).Select(Function(evi) evi.BBLE).ToList)
                 End If
-
+                LodingCover.Visible = False
                 Return
             End If
 
@@ -148,7 +148,7 @@ Public Class NGShortSale
                         ShortSaleCaseList.BindCaseByBBLEs(bbles)
                     End If
                 End Using
-
+                LodingCover.Visible = False
                 Return
             End If
 
