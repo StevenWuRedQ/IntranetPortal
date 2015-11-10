@@ -94,7 +94,7 @@ Public Class CommonService
     End Sub
 
     ''' <summary>
-    ''' Send short sale users report to short sale team manager and short sale manager
+    ''' Send ShortSale users report to short sale team manager and short sale manager
     ''' </summary>
     Public Sub SendShortSaleActivityEmail() Implements ICommonService.SendShortSaleActivityEmail
 

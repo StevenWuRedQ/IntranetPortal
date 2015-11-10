@@ -182,6 +182,10 @@ Public Class EmailSummaryRule
     End Function
 End Class
 
+''' <summary>
+''' Agent Team Activity Rule, used to send activity rule every night.
+''' Also with short sale summary, legal summary and Dead leads report
+''' </summary>
 Public Class AgentActivitySummaryRule
     Inherits BaseRule
 
@@ -212,6 +216,7 @@ Public Class AgentActivitySummaryRule
                 Log("AgentActivitySummaryRule Error. TeamName: Legal", ex)
             End Try
 
+            'send deal leads report 
             Try
                 client.SendEmailByControl(Employee.CEO.Email, "Deadleads Report - " & DateTime.Today.ToShortDateString, "DeadleadsReport", Nothing)
             Catch ex As Exception
@@ -237,6 +242,9 @@ Public Class LegalActivityReportRule
     End Sub
 End Class
 
+''' <summary>
+''' ShortSale user activity Report used for morning and afternoon
+''' </summary>
 Public Class ShortSaleActivityReportRule
     Inherits BaseRule
 
