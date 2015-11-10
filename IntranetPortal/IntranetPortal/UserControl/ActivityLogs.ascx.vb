@@ -1023,7 +1023,7 @@ Public Class ActivityLogs
 
                 If Not String.IsNullOrEmpty(typeOfUpdate) Then
 
-                    If category = "Assign" Then
+                    If category = "Assign" AndAlso Not Page.User.IsInRole("ShortSale-Manager") AndAlso Not Page.User.IsInRole("ShortSale-TeamManager") Then
                         Dim taskData = New With {
                             .TypeofUpdate = typeOfUpdate,
                             .Category = category,
@@ -1037,8 +1037,9 @@ Public Class ActivityLogs
                         Dim reviewer = If(emp IsNot Nothing, emp.Manager, Nothing)
                         taskData.Reviewer = reviewer
 
-                        'Start AssignUpdate process
                         ShortSaleManage.AssignProcess.ProcessStart(hfBBLE.Value, taskData.ToJsonString, Page.User.Identity.Name, assignComments, reviewer)
+
+                        'Start AssignUpdate process
 
                         'Dim users = Roles.GetUsersInRole("ShortSale-AssignReviewer")
                         'If users IsNot Nothing AndAlso users.Count > 0 Then
