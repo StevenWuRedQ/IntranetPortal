@@ -18,11 +18,6 @@
                     if (rowKey != null) {
                         OnGetRowValues(rowKey);
                     }
-                    else {
-                        if (splitter) {
-                            splitter.GetPaneByName('dataPane')
-                        }
-                    }
                 }
             }
         }
@@ -164,7 +159,7 @@
         <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
     </div>
-    <div style="overflow: auto; height: 798px; padding: 0px 10px;" id="leads_list_left">
+    <div style="overflow: auto; height: 798px; padding: 0;" id="leads_list_left">
         <asp:HiddenField runat="server" ID="hfCaseStatus" />
         <asp:HiddenField runat="server" ID="hfCaseBBLEs" />
         <div class="form-inline" id="divSearch" style="display: none">
@@ -224,7 +219,7 @@
             <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
                 EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
             <SettingsPager Mode="EndlessPaging" PageSize="20"></SettingsPager>
-            <Settings ShowColumnHeaders="False" VerticalScrollableHeight="767"></Settings>
+            <Settings ShowColumnHeaders="False" VerticalScrollableHeight="798"></Settings>
             <Styles>
                 <Table Border-BorderStyle="None">
                     <Border BorderStyle="None"></Border>

@@ -20,61 +20,37 @@
     <script src="/Scripts/jquery.webui-popover.js"></script>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-    <script type="text/javascript">
-        var caseId = null;
-        var leadsInfoBBLE = null;
-
-        function OnCallbackMenuClick(s, e) {
-            if (e.item.name == "Custom") {
-                ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
-                e.processOnServer = false;
-                return;
+    <style>
+        .dxgvControl_MetropolisBlue1 {
+            width: auto !important;
             }
 
-            LogClick("FollowUp", e.item.name);
-            e.processOnServer = false;
+        .dxgvHSDC div, .dxgvCSD {
+            width: auto !important;
         }
 
-        window.onbeforeunload = function () {
-            if (CaseDataChanged())
-                return "You have pending changes, would you save it?";
+        .LoadingCover {
+            position: absolute;
+            background-image =url(/images/MyIdealProptery.png) no-repeat center fixed;
+            background-size: 260px, 280px;
+            background-color: #dddddd;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
         }
-    </script>
+    </style>
+
     <asp:HiddenField runat="server" ID="hfIsEvction" Value="false" />
+    <div runat="server" class="LoadingCover" id="LodingCover" visible="false"></div>
     
-    <div style="background: url(/images/MyIdealProptery.png) no-repeat center fixed; background-size: 260px, 280px; background-color: #dddddd; width: 100%; height: 100%;">
-        <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
-            <Panes>
-                <%-- ShortSale List --%>
-                <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="2px">
-                    <ContentCollection>
-                        <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
+    <div ui-layout="{flow: 'column'}">
+        <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">
+            <asp:Panel runat="server" ID="listPanel">
                             <uc1:ShortSaleCaseList runat="server" ID="ShortSaleCaseList" />
-                        </dx:SplitterContentControl>
-                    </ContentCollection>
-                </dx:SplitterPane>
-                <dx:SplitterPane Name="contentPanel" ShowCollapseForwardButton="True" PaneStyle-BackColor="#f9f9f9" ScrollBars="None" PaneStyle-Paddings-Padding="0px">
-                    <PaneStyle BackColor="#F9F9F9">
-                    </PaneStyle>
-                    <ContentCollection>
-                        <dx:SplitterContentControl ID="SplitterContentControl2" runat="server">
-                            <dx:ASPxCallbackPanel runat="server" ID="ASPxCallbackPanel2">
-                                <PanelCollection>
-                                    <dx:PanelContent ID="PanelContent1" runat="server">
-                                        <dx:ASPxSplitter ID="contentSplitter" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter" ClientVisible="true">
-                                            <Styles>
-                                                <Pane Paddings-Padding="0">
-                                                    <Paddings Padding="0px"></Paddings>
-                                                </Pane>
-                                            </Styles>
-                                            <Panes>
-                                                <%-- ShortSale Panel--%>
-                                                <dx:SplitterPane ShowCollapseBackwardButton="True" Name="ContentPanel" AutoHeight="true">
-                                                    <PaneStyle Paddings-Padding="0">
-                                                        <Paddings Padding="0px"></Paddings>
-                                                    </PaneStyle>
-                                                    <ContentCollection>
-                                                        <dx:SplitterContentControl ID="SplitterContentControl3" runat="server">
+            </asp:Panel>
+        </div>
+        <div ui-layout-container>
+            <asp:Panel runat="server" ID="dataPanel">
                                                             <div class="shortSaleUI" style="align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
                                                                 <!-- Nav tabs -->
@@ -126,7 +102,7 @@
                                                                                     </li>
 
                                                                                     <li class="short_sale_head_tab">
-                                                                                        <a role="tab" data-toggle="tab" class="tab_button_a" href="#more_legal"  data-url="/LegalUI/LegalUI.aspx?HiddenTab=true&isEviction=true&bble={{SsCase.BBLE}}" data-href="#more_legal" onclick="LoadMoreFrame(this)">
+                                            <a role="tab" data-toggle="tab" class="tab_button_a" href="#more_legal" data-url="/LegalUI/LegalUI.aspx?HiddenTab=true&isEviction=true&bble={{SsCase.BBLE}}" data-href="#more_legal" onclick="LoadMoreFrame(this)">
                                                                                             <i class="fa fa-university head_tab_icon_padding"></i>
                                                                                             <div class="font_size_bold">Legal</div>
                                                                                         </a>
@@ -153,7 +129,7 @@
                                                                     </div>
                                                                     <div class="tab-pane " id="home_owner">
                                                                         <uc1:Title runat="server" ID="ucTitle" Visible="false" />
-                                                                        <uc1:BusinessFormControl runat="server" id="BusinessFormControl" ControlName="Title" />
+                            <uc1:BusinessFormControl runat="server" ID="BusinessFormControl" ControlName="Title" />
                                                                     </div>
                                                                     <div class="tab-pane " id="documents">
                                                                         <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
@@ -435,17 +411,10 @@
 
 
                                                             </div>
-                                                        </dx:SplitterContentControl>
-                                                    </ContentCollection>
-                                                </dx:SplitterPane>
-
-                                                <%-- Log Panel--%>
-                                                <dx:SplitterPane ShowCollapseForwardButton="True" Name="LogPanel" AutoHeight="true">
-                                                    <Panes>
-                                                        <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9">
-                                                            <PaneStyle BackColor="#F9F9F9"></PaneStyle>
-                                                            <ContentCollection>
-                                                                <dx:SplitterContentControl ID="SplitterContentControl4" runat="server">
+            </asp:Panel>
+        </div>
+        <div ui-layout-container>
+            <asp:Panel runat="server" ID="logPanel">
                                                                     <div style="font-size: 12px; color: #9fa1a8;">
                                                                         <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
                                                                             <li class="short_sale_head_tab activity_light_blue">
@@ -489,6 +458,9 @@
                                                                         </dx:ASPxCallbackPanel>
 
                                                                     </div>
+            </asp:Panel>
+        </div>
+    </div>
                                                                     <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
                                                                         AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                                                         ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -516,10 +488,6 @@
                                                                                         <tr>
                                                                                             <td>
                                                                                                 <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="true"></dx:ASPxCalendar>
-                                                                                                <%--<dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" TimeSectionProperties-Visible="True" CssClass="edit_drop">
-                                                                                                    <TimeSectionProperties Visible="True"></TimeSectionProperties>
-                                                                                                    <ClientSideEvents DropDown="function(s,e){var d = new Date('May 1 2014 12:00:00');s.GetTimeEdit().SetValue(d);}" />
-                                                                                                </dx:ASPxDateEdit>--%>
                                                                                             </td>
                                                                                         </tr>
                                                                                         <tr>
@@ -558,29 +526,35 @@
                                                                             </dx:PopupControlContentControl>
                                                                         </ContentCollection>
                                                                     </dx:ASPxPopupControl>
-                                                                </dx:SplitterContentControl>
-                                                            </ContentCollection>
-                                                        </dx:SplitterPane>
-                                                    </Panes>
-                                                </dx:SplitterPane>
-                                            </Panes>
-                                        </dx:ASPxSplitter>
-                                    </dx:PanelContent>
-                                </PanelCollection>
 
-                            </dx:ASPxCallbackPanel>
-                        </dx:SplitterContentControl>
-                    </ContentCollection>
-                </dx:SplitterPane>
-            </Panes>
-        </dx:ASPxSplitter>
-    </div>
+
     <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
     <uc1:SelectPartyUC runat="server" ID="SelectPartyUC" />
     <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
     <input type="hidden" id="CaseData" />
     <input type="hidden" id="LastUpdateTime" />
     <uc1:Common runat="server" ID="Common" />
+
+    <script type="text/javascript">
+        var caseId = null;
+        var leadsInfoBBLE = null;
+
+        function OnCallbackMenuClick(s, e) {
+            if (e.item.name == "Custom") {
+                ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
+                e.processOnServer = false;
+                return;
+            }
+
+            LogClick("FollowUp", e.item.name);
+            e.processOnServer = false;
+        }
+
+        window.onbeforeunload = function () {
+            if (CaseDataChanged())
+                return "You have pending changes, would you save it?";
+        }
+    </script>
     <script type="text/javascript">
         AllContact = <%= GetAllContact()%>
             function t() {
@@ -595,18 +569,14 @@
         }
 
         function OnSuccess(response) {
-
             ShortSaleCaseData = response;  //JSON.parse(response.d);
             leadsInfoBBLE = ShortSaleCaseData.BBLE;
-            //ShortSaleDataBand(0);
-
         }
     </script>
     <script type="text/javascript">
 
-        function GetLasTUpDateURL()
-        {
-            return  window.caseId?'ShortSaleServices.svc/GetCaseLastUpDateTime?caseId=' + window.caseId:''
+        function GetLasTUpDateURL() {
+            return window.caseId ? 'ShortSaleServices.svc/GetCaseLastUpDateTime?caseId=' + window.caseId : ''
         }
         function NGGetShortSale(caseId) {
             $(document).ready(function () {
@@ -636,7 +606,7 @@
 
         function UpDateFollowUpDate(date) {
             var UtcDate = new Date(date);
-            date = UtcDate.getMonth() + '/' + UtcDate.getDay()+'/'+UtcDate.getYear();
+            date = UtcDate.getMonth() + '/' + UtcDate.getDay() + '/' + UtcDate.getYear();
             GetShortSaleCase().CallbackDate = date;
         }
         function UpdateMortgageStatus(selType1, selStatusUpdate, selCategory) {
@@ -664,8 +634,7 @@
             angular.element(document.getElementById('ShortSaleCtrl')).scope().toggleValuationPopup(status);
         }
 
-        function SaveShortSaleCase()
-        {
+        function SaveShortSaleCase() {
             angular.element(document.getElementById('ShortSaleCtrl')).scope().SaveShortSale();
         }
 
@@ -673,10 +642,10 @@
             var $scope = angular.element(document.getElementById('ShortSaleCtrl')).scope();
             ScopeAutoSave(GetShortSaleCase, angular.element(document.getElementById('ShortSaleCtrl')).scope().SaveShortSale, '#ShortSaleTabHead',
             {
-                "urlFunc":GetLasTUpDateURL,
+                "urlFunc": GetLasTUpDateURL,
                 "reLoadUIfunc": $scope.GetShortSaleCase,
                 "loadUIIdFunc": $scope.GetLoadId,
-                "urlModfiyUserFunc":$scope.GetModifyUserUrl
+                "urlModfiyUserFunc": $scope.GetModifyUserUrl
             });
         })
 
@@ -836,8 +805,7 @@
                 return {}
             }
             $scope.GetShortSaleCase = function (caseId) {
-                if (!caseId)
-                {
+                if (!caseId) {
                     console.log("Can not find case Id ");
                     return;
                 }
@@ -874,12 +842,10 @@
                         ptCom.alert("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
                     });
             }
-            $scope.GetLoadId = function ()
-            {
+            $scope.GetLoadId = function () {
                 return window.caseId;
             }
-            $scope.GetModifyUserUrl = function()
-            {
+            $scope.GetModifyUserUrl = function () {
                 return 'ShortSaleServices.svc/GetModifyUserUrl?caseId=' + window.caseId;
             }
             ScopeDateChangedByOther(GetLasTUpDateURL, $scope.GetShortSaleCase, $scope.GetLoadId, $scope.GetModifyUserUrl);

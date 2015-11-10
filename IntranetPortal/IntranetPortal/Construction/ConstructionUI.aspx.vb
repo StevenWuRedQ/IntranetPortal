@@ -5,7 +5,7 @@
         If Not IsPostBack Then
 
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-                listPanel.Visible = False
+                listdiv.Visible = False
                 Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
                 If wli IsNot Nothing Then
                     Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
@@ -26,7 +26,7 @@
     End Sub
 
     Private Sub BindData(bble As String)
-        listPanel.Visible = False
+        listdiv.Visible = False
         ActivityLogs.BindData(bble)
         If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
             Dim cstext1 As String = "<script type=""text/javascript"">" & _

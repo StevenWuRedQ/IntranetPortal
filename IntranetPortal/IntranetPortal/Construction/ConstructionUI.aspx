@@ -17,7 +17,7 @@
         }
     </style>
     <div ui-layout="{flow: 'column'}" id="listPanelDiv">
-        <div ui-layout-container hideafter size="280px" max-size="320px">
+        <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">
             <%-- list panel  --%>
             <asp:Panel ID="listPanel" runat="server">
                 <uc1:ConstructionCaseList runat="server" ID="ConstructionCaseList" />

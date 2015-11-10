@@ -30,7 +30,7 @@ Public Class LegalUI
             End If
 
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-                ASPxSplitter1.Panes("listPanel").Visible = False
+                listdiv.Visible = False
                 Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
                 If wli IsNot Nothing Then
                     Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
@@ -62,16 +62,15 @@ Public Class LegalUI
     End Function
     Sub Page_init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
 
-
         HiddenTab = Not String.IsNullOrEmpty(Request.QueryString("HiddenTab"))
         If (HiddenTab) Then
-            ASPxSplitter1.GetPaneByName("LogPanel").Visible = False
+            logpanel.Visible = False
         End If
 
         Dim isInPoupUp = Request.QueryString("InPopUp") IsNot Nothing
         If (isInPoupUp) Then
             SencnedAction.Visible = True
-            ASPxSplitter1.Visible = False
+            listdiv.Visible = False
         End If
 
 
@@ -79,7 +78,7 @@ Public Class LegalUI
 
     Private Sub BindData(bble As String)
         'should using collapsed, visible=false could cause viewstate problems
-        ASPxSplitter1.Panes("listPanel").Collapsed = True
+        listdiv.Visible = False
         BBLEStr = bble
         ActivityLogs.BindData(bble)
         fileGamePlan.BindData(bble)

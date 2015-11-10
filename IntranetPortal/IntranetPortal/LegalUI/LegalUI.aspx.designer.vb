@@ -14,22 +14,22 @@ Option Explicit On
 Partial Public Class LegalUI
     
     '''<summary>
-    '''ASPxSplitter1 control.
+    '''listdiv control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
+    Protected WithEvents listdiv As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''SplitterContentControl1 control.
+    '''listpanel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.SplitterContentControl
+    Protected WithEvents listpanel As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''LegalCaseList control.
@@ -39,6 +39,15 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents LegalCaseList As Global.IntranetPortal.LegalCaseList
+    
+    '''<summary>
+    '''datapanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents datapanel As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''ASPxPopupControl3 control.
@@ -192,6 +201,15 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Common As Global.IntranetPortal.Common
+    
+    '''<summary>
+    '''logpanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents logpanel As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''cbpLogs control.

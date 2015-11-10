@@ -88,32 +88,38 @@
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
+    <style>
+        .dxgvControl_MetropolisBlue1 {
+            width: auto !important;
+        }
+
+        .dxgvHSDC div, .dxgvCSD {
+            width: auto !important;
+        }
+    </style>
+    <input type="hidden" id="CaseData" />
+    <input type="hidden" id="Viewable" value="<%= IntranetPortal.LegalCaseManage.IsViewable(Page.User.Identity.Name)  %>" />
+
     <%--leagal Ui--%>
     <div id="LegalCtrl" ng-controller="LegalCtrl">
         <%--<textarea ng-model="LegalCaseJson">
         </textarea>
         <button type="button" ng-click="SaveLegalJson()">GetCase</button>--%>
-        <input type="hidden" id="CaseData" />
-        <input type="hidden" id="Viewable" value="<%= IntranetPortal.LegalCaseManage.IsViewable(Page.User.Identity.Name)  %>" />
-        <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
-            <Panes>
-                <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
-                    <ContentCollection>
-                        <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
-                            <uc1:LegalCaseList runat="server" ID="LegalCaseList" />
-                        </dx:SplitterContentControl>
-                    </ContentCollection>
-                </dx:SplitterPane>
 
-                <%-- legal panel --%>
-                <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="None" PaneStyle-Paddings-Padding="0px" Name="dataPane">
-                    <ContentCollection>
-                        <dx:SplitterContentControl>
+        <div ui-layout="{flow: 'column'}" id="listPanelDiv">
+
+            <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">
+                <asp:Panel ID="listpanel" runat="server">
+                            <uc1:LegalCaseList runat="server" ID="LegalCaseList" />
+                </asp:Panel>
+            </div>
+
+
+            <div ui-layout-container>
+                <asp:Panel ID="datapanel" runat="server">
                             <div id="legalPanelContent">
                                 <script>
-
                                     window.onbeforeunload = function () {
-
                                         if (CaseDataChanged())
                                             return "You have pending changes, would you save it?";
                                     }
@@ -238,16 +244,17 @@
                                                 <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Attorney');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to paralegal / Attorney"></i>
                                                 <% End If%>
 
-                                                <%-- <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.AttorneyHandle Then%>--%>
-                                                <%-- Change to primssing only manager can close file to do by chris add it to process engine  --%>
                                                 <%If DisplayView = IntranetPortal.Data.LegalCaseStatus.AttorneyHandle AndAlso User.IsInRole("Legal-Manager") Then%>
                                                 <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="AttorneyComplete()" data-original-title="Complete"></i>
                                                 <% End If%>
-
-                                                <i class="fa fa-users sale_head_button sale_head_button_left tooltip-examples" title="" onclick="VendorsPopupClient.Show()" data-original-title="Contacts"></i>
-
-                                                <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
-                                                <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
+                                        <span class="dropdown">
+                                            <i class="fa fa-caret-down sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="More" data-toggle="dropdown"></i>
+                                            <ul class="dropdown-menu" style="background-color: transparent; border: none; margin-top: 10px; box-shadow: none">
+                                                <li><i class="fa fa-users sale_head_button sale_head_button_left tooltip-examples" style="color: #ff400d" title="" data-original-title="Contacts" onclick="VendorsPopupClient.Show()"></i></li>
+                                                <li><i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" style="color: #ff400d" title="" data-original-title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i></li>
+                                                <li><i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" style="color: #ff400d" title="" data-original-title="Print" onclick=""></i></li>
+                                            </ul>
+                                        </span>
                                             </li>
                                         </ul>
                                     </div>
@@ -485,15 +492,11 @@
                                 <div id="LegalCtrl_loadPanel" dx-load-panel="{message:'uploading..', showIndicator: true,  position:{of: '#legalPanelContent'}, bindingOptions:{ visible: 'panelLoading' }}"></div>
                                 <uc1:Common runat="server" ID="Common" />
                             </div>
-                        </dx:SplitterContentControl>
+                </asp:Panel>
+            </div>
 
-                    </ContentCollection>
-                </dx:SplitterPane>
-
-                <%-- log panel --%>
-                <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9" PaneStyle-Paddings-Padding="0px" Name="LogPanel">
-                    <ContentCollection>
-                        <dx:SplitterContentControl>
+            <div ui-layout-container>
+                <asp:Panel ID="logpanel" runat="server">
                             <div style="font-size: 12px; color: #9fa1a8;">
                                 <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
                                     <li class="short_sale_head_tab activity_light_blue">
@@ -533,13 +536,10 @@
                                     </PanelCollection>
                                 </dx:ASPxCallbackPanel>
                             </div>
+                </asp:Panel>
+            </div>
+        </div>
                             <uc1:SendMail runat="server" ID="SendMail" />
-                        </dx:SplitterContentControl>
-                    </ContentCollection>
-                </dx:SplitterPane>
-            </Panes>
-
-        </dx:ASPxSplitter>
 
         <div class="modal fade" id="NeedAddCommentPopUp">
             <div class="modal-dialog">
@@ -614,6 +614,7 @@
             }
 
         </script>
+
         <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
             AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
             ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -640,27 +641,16 @@
                         <tr>
                             <td>
                                 <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="true"></dx:ASPxCalendar>
-                                <%--     <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" 
-                                                            TimeSectionProperties-Visible="True" CssClass="edit_drop">
-                                                            <TimeSectionProperties Visible="True"></TimeSectionProperties>
-                                                            <ClientSideEvents Init="function(s,e){ s.SetDate(new Date());}" />
-                                                        </dx:ASPxDateEdit>--%>
                             </td>
                         </tr>
                         <tr>
                             <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
                                 <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                    <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupSelectDateControl.Hide();   
-                                                                                                                        SetLegalFollowUp('customDays',callbackCalendar.GetSelectedDate());                                                                                                                        
-                                                                                                                        }"></ClientSideEvents>
+                                    <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();SetLegalFollowUp('customDays',callbackCalendar.GetSelectedDate());}"></ClientSideEvents>
                                 </dx:ASPxButton>
                                 &nbsp;
                                                             <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
-                                                                <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupSelectDateControl.Hide();                                                                                                                                                                                                                                               
-                                                                                                                        }"></ClientSideEvents>
-
+                                    <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents>
                                                             </dx:ASPxButton>
                             </td>
                         </tr>
@@ -678,9 +668,8 @@
             function VendorsClosing(s) {
                 GetContactCallBack();
             }
-            GetContactCallBack = function (contact) {
+            function GetContactCallBack(contact) {
                 $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
-
                     AllContact = data;
                 });
 
@@ -711,16 +700,11 @@
             }
 
             var AllContact = <%= GetAllContact()%>
-            function t() {
-
-            }
+            {}
             var AllRoboSignor = <%= GetAllRoboSingor() %>
-                    function s() {
-
-                    }
+            {}
             var taskSN = '<%= Request.QueryString("sn")%>';
         <%--var LegalCase = $.parseJSON('<%= LegalCase%>');--%>
-
             var portalApp = angular.module('PortalApp');
 
             portalApp.controller('LegalCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
@@ -1375,10 +1359,6 @@
                 $scope.DeleteItem = function (model, index) {
                     model.splice(index, 1);
                 }
-                //$.getJSON('/Services/ContactService.svc/GetAllContacts', function (data) {
-
-                //    $scope.selectBoxData = data;
-                //});
 
                 $scope.isLess08292013 = false;
                 $scope.isBigger08302013 = false;

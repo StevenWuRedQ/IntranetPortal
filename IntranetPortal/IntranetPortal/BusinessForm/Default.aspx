@@ -10,17 +10,19 @@
 
     <style>
         .dxgvControl_MetropolisBlue1 {
-            width: auto !important
+            width: auto !important;
         }
-            .dxgvHSDC div,.dxgvCSD {
-        width:auto !important;
-    }
+
+        .dxgvHSDC div, .dxgvCSD {
+            width: auto !important;
+        }
     </style>
-    <div ui-layout="{flow: 'column'}" id="listPanelDiv">
-        <div ui-layout-container hideafter size="280px" max-size="320px">
-            <asp:Panel ID="listPanel" runat="server">
-            </asp:Panel>
-        </div>
+    <div ui-layout="{flow: 'column'}" id="listPanelDiv">       
+            <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">
+                 <asp:Panel ID="listPanel" runat="server">
+                </asp:Panel>
+            </div>
+        
 
         <div ui-layout-container>
             <asp:Panel runat="server" ID="dataPanel" ClientInstanceName="dataPanel">
@@ -146,79 +148,79 @@
                         BBLE: null,
                         ShowActivityLog: <%= If(FormData.ShowActivityLog, "true", "false")%>,
                                
-                                CurrentTab: {
-                                    Name: null,
-                                    BusinessData: null,
-                                    EnableAutoSave:true,
-                                    ActivityLogMode:null
-                                },
-                                InitTab: function (name, data) {
-                                    this.CurrentTab.Name = name;
-                                    this.CurrentTab.BusinessData = data;
-                                    this.CurrentTab.EnableAutoSave = true;
+                        CurrentTab: {
+                            Name: null,
+                            BusinessData: null,
+                            EnableAutoSave:true,
+                            ActivityLogMode:null
+                        },
+                        InitTab: function (name, data) {
+                            this.CurrentTab.Name = name;
+                            this.CurrentTab.BusinessData = data;
+                            this.CurrentTab.EnableAutoSave = true;
 
-                                    if(this.CurrentTab.EnableAutoSave){
-                                        ScopeAutoSave(angular.element(document.getElementById(name + 'Controller')).scope().Get, this.SaveData,"CaseData");
-                                    }
-
-                                },
-                                LoadData: function (dataId) {
-                                    var tab = this.CurrentTab;
-                                    var url = "/api/BusinessForm/" + tab.BusinessData + "/" + dataId
-                                    $.ajax({
-                                        type: "GET",
-                                        url: url,
-                                        dataType: 'json',
-                                        success: function (data) {
-                                            //console.log(data);
-                                            angular.element(document.getElementById(tab.Name + 'Controller')).scope().Load(data);
-
-                                            if(tab.EnableAutoSave){
-                                                //auto save reset data
-                                                ScopeResetCaseDataChange(angular.element(document.getElementById(tab.Name + 'Controller')).scope().Get);
-                                            }                                            
-                                        },
-                                        error: function (data) {
-                                            AngularRoot.alert("Failed to load data." + data)
-                                        }
-                                    });
-                                    this.LoadActivityLog();                                    
-                                },
-                                LoadActivityLog:function()
-                                {
-                                    if(this.ShowActivityLog)
-                                    {
-                                        this.BBLE = leadsInfoBBLE;
-                                        if(typeof cbpLogs != "undefined")
-                                            cbpLogs.PerformCallback(this.BBLE);
-                                    }
-                                },
-                                SaveData: function () {
-                                    var tab = this.CurrentTab;
-                                    var data = angular.element(document.getElementById(tab.Name + 'Controller')).scope().Get(true);
-                                    if(data.DataId){    //verify that data is an exsiting one
-                                        var url = "/api/BusinessForm/"
-                                        $.ajax({
-                                            type: "POST",
-                                            url: url,
-                                            data:JSON.stringify(data),
-                                            dataType: 'json',
-                                            contentType: "application/json",
-                                            success: function (data) {
-                                                AngularRoot.alert("Save successful.")
-                                            },
-                                            error: function (data) {
-                                                AngularRoot.alert("Failed to save data." + data);
-                                            }
-                                        });
-                                    }else{
-                                        console.log("Try to save a not exist data.")
-                                    }
-                                }
+                            if(this.CurrentTab.EnableAutoSave){
+                                ScopeAutoSave(angular.element(document.getElementById(name + 'Controller')).scope().Get, this.SaveData,"CaseData");
                             }
 
-                            $(function () {
-                                FormControl.InitTab('<%= FormData.DefaultControl.Name%>', '<%= FormData.DefaultControl.BusinessData%>');
+                        },
+                        LoadData: function (dataId) {
+                            var tab = this.CurrentTab;
+                            var url = "/api/BusinessForm/" + tab.BusinessData + "/" + dataId
+                            $.ajax({
+                                type: "GET",
+                                url: url,
+                                dataType: 'json',
+                                success: function (data) {
+                                    //console.log(data);
+                                    angular.element(document.getElementById(tab.Name + 'Controller')).scope().Load(data);
+
+                                    if(tab.EnableAutoSave){
+                                        //auto save reset data
+                                        ScopeResetCaseDataChange(angular.element(document.getElementById(tab.Name + 'Controller')).scope().Get);
+                                    }                                            
+                                },
+                                error: function (data) {
+                                    AngularRoot.alert("Failed to load data." + data)
+                                }
+                            });
+                            this.LoadActivityLog();                                    
+                        },
+                        LoadActivityLog:function()
+                        {
+                            if(this.ShowActivityLog)
+                            {
+                                this.BBLE = leadsInfoBBLE;
+                                if(typeof cbpLogs != "undefined")
+                                    cbpLogs.PerformCallback(this.BBLE);
+                            }
+                        },
+                        SaveData: function () {
+                            var tab = this.CurrentTab;
+                            var data = angular.element(document.getElementById(tab.Name + 'Controller')).scope().Get(true);
+                            if(data.DataId){    //verify that data is an exsiting one
+                                var url = "/api/BusinessForm/"
+                                $.ajax({
+                                    type: "POST",
+                                    url: url,
+                                    data:JSON.stringify(data),
+                                    dataType: 'json',
+                                    contentType: "application/json",
+                                    success: function (data) {
+                                        AngularRoot.alert("Save successful.")
+                                    },
+                                    error: function (data) {
+                                        AngularRoot.alert("Failed to save data." + data);
+                                    }
+                                });
+                            }else{
+                                console.log("Try to save a not exist data.")
+                            }
+                        }
+                    }
+
+                    $(function () {
+                        FormControl.InitTab('<%= FormData.DefaultControl.Name%>', '<%= FormData.DefaultControl.BusinessData%>');
                             });
                 </script>
             </asp:Panel>

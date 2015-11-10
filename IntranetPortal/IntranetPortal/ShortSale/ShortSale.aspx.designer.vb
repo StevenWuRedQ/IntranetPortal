@@ -23,22 +23,31 @@ Partial Public Class NGShortSale
     Protected WithEvents hfIsEvction As Global.System.Web.UI.WebControls.HiddenField
     
     '''<summary>
-    '''ASPxSplitter1 control.
+    '''LodingCover control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter
+    Protected WithEvents LodingCover As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''SplitterContentControl1 control.
+    '''listdiv control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.SplitterContentControl
+    Protected WithEvents listdiv As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''listPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents listPanel As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''ShortSaleCaseList control.
@@ -50,49 +59,13 @@ Partial Public Class NGShortSale
     Protected WithEvents ShortSaleCaseList As Global.IntranetPortal.ShortSaleCaseList
     
     '''<summary>
-    '''SplitterContentControl2 control.
+    '''dataPanel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl2 As Global.DevExpress.Web.SplitterContentControl
-    
-    '''<summary>
-    '''ASPxCallbackPanel2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxCallbackPanel2 As Global.DevExpress.Web.ASPxCallbackPanel
-    
-    '''<summary>
-    '''PanelContent1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents PanelContent1 As Global.DevExpress.Web.PanelContent
-    
-    '''<summary>
-    '''contentSplitter control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter
-    
-    '''<summary>
-    '''SplitterContentControl3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SplitterContentControl3 As Global.DevExpress.Web.SplitterContentControl
+    Protected WithEvents dataPanel As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''hfBBLE control.
@@ -149,13 +122,13 @@ Partial Public Class NGShortSale
     Protected WithEvents DocumentsUI As Global.IntranetPortal.DocumentsUI
     
     '''<summary>
-    '''SplitterContentControl4 control.
+    '''logPanel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl4 As Global.DevExpress.Web.SplitterContentControl
+    Protected WithEvents logPanel As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''cbpLogs control.

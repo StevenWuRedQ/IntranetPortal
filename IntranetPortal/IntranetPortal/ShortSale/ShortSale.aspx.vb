@@ -14,11 +14,11 @@ Public Class NGShortSale
 
         isEviction = CBool(hfIsEvction.Value)
         If Not Page.IsPostBack Then
-
+            LodingCover.Visible = True
             HiddenTab = Not String.IsNullOrEmpty(Request.QueryString("HiddenTab"))
             If (HiddenTab) Then
-                contentSplitter.GetPaneByName("LogPanel").Visible = False
-                ASPxSplitter1.GetPaneByName("listPanel").Visible = False
+                logPanel.Visible = False
+                listdiv.Visible = False
             End If
 
             If Not String.IsNullOrEmpty(Request.QueryString("s")) Then
@@ -38,12 +38,12 @@ Public Class NGShortSale
                 If wli IsNot Nothing Then
                     Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
                     BindCaseData2(bble)
-                    ASPxSplitter1.Panes("listPanel").Visible = False
-                    contentSplitter.ClientVisible = True
+                    listdiv.Visible = False
+                    'contentSplitter.ClientVisible = True
 
                     If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
 
-                        Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                        Dim cstext1 As String = "<script type=""text/javascript"">" &
                                         String.Format("NGGetShortSale({0});", ShortSaleCaseData.CaseId) & "</script>"
                         Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
                     End If
@@ -59,11 +59,9 @@ Public Class NGShortSale
                     Dim bble = procInst.GetDataFieldValue("BBLE")
                     If Not String.IsNullOrEmpty(bble) Then
                         BindCaseData2(bble)
-                        ASPxSplitter1.Panes("listPanel").Visible = False
-                        contentSplitter.ClientVisible = True
-
+                        listdiv.Visible = False
                         If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
-                            Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                            Dim cstext1 As String = "<script type=""text/javascript"">" &
                                             String.Format("NGGetShortSale({0});", ShortSaleCaseData.CaseId) & "</script>"
                             Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
                         End If
@@ -77,11 +75,9 @@ Public Class NGShortSale
                 hfBBLE.Value = bble
                 BindCaseData2(bble)
 
-                ASPxSplitter1.Panes("listPanel").Visible = False
-                contentSplitter.ClientVisible = True
-
+                listdiv.Visible = False
                 If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
-                    Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                    Dim cstext1 As String = "<script type=""text/javascript"">" &
                                     String.Format("NGGetShortSale({0});", ShortSaleCaseData.CaseId) & "</script>"
                     Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
                 End If
@@ -95,21 +91,13 @@ Public Class NGShortSale
                 End If
                 BindCaseData(caseId)
 
-                ASPxSplitter1.Panes("listPanel").Visible = False
-                contentSplitter.ClientVisible = True
-
+                listdiv.Visible = False
                 RegisteredLoadDataScript(caseId)
-
-                'If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
-                '    Dim cstext1 As String = "<script type=""text/javascript"">" & _
-                '                    String.Format("NGGetShortSale({0});", ShortSaleCaseData.CaseId) & "</script>"
-                '    Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
-                'End If
             End If
 
 
             If Not String.IsNullOrEmpty(Request.QueryString("ShowList")) Then
-                ASPxSplitter1.Panes("listPanel").Visible = True
+                listdiv.Visible = True
 
                 If ShortSaleCaseData IsNot Nothing Then
                     ShortSaleCaseList.BindCaseList(ShortSaleCaseData.Status, CurrentAppId)
@@ -117,7 +105,7 @@ Public Class NGShortSale
                 End If
 
                 If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
-                    Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                    Dim cstext1 As String = "<script type=""text/javascript"">" &
                                     String.Format("NGGetShortSale({0});", ShortSaleCaseData.CaseId) & "</script>"
                     Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
                 End If
@@ -183,13 +171,13 @@ Public Class NGShortSale
             Else
                 isEviction = False
             End If
+            LodingCover.Visible = False
         End If
-        hfIsEvction.Value = isEviction.ToString
 
+        hfIsEvction.Value = isEviction.ToString
         If isEviction Then
             ActivityLogs.DisplayMode = IntranetPortal.ActivityLogs.ActivityLogMode.Eviction
         End If
-
     End Sub
 
     Private Sub RegisteredLoadDataScript(caseId As Integer)
@@ -219,7 +207,7 @@ Public Class NGShortSale
 
     Private Sub BindCaseData(caseId As Integer)
         ShortSaleCaseData = ShortSaleCase.GetCase(caseId)
-        contentSplitter.ClientVisible = True
+        'contentSplitter.ClientVisible = True
         'ShortSaleOverVew.BindData(ShortSaleCaseData)
         hfBBLE.Value = ShortSaleCaseData.BBLE
         ucTitle.BindData(ShortSaleCaseData)
@@ -232,7 +220,6 @@ Public Class NGShortSale
         DocumentsUI.LeadsName = ShortSaleCaseData.CaseName
         DocumentsUI.LeadsBBLE = ShortSaleCaseData.BBLE
     End Sub
-
     Private Sub BindCaseData2(bble As String)
         ShortSaleCaseData = ShortSaleCase.GetCaseByBBLE(bble)
 
@@ -243,7 +230,7 @@ Public Class NGShortSale
             Return
         End If
 
-        contentSplitter.ClientVisible = True
+        'contentSplitter.ClientVisible = True
         'ShortSaleOverVew.BindData(ShortSaleCaseData)
         ucTitle.BindData(ShortSaleCaseData)
         ActivityLogs.DisplayMode = IntranetPortal.ActivityLogs.ActivityLogMode.ShortSale

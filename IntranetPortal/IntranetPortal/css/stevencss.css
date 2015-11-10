@@ -1,8 +1,6 @@
 ﻿/*add by steven*/
 
-table tr {
-	font-size: 14px;
-}
+
 
 .vertical-parent {
 	display: table;
@@ -73,6 +71,8 @@ table tr {
 	list-style: none;
 	padding-left: 20px;
 	border-bottom: 1px solid #dde0e7;
+	-ms-align-content: center;
+	-webkit-align-content: center;
 	align-content: center;
 }
 
@@ -96,10 +96,7 @@ table tr {
 	border-radius: 16px;
 	text-align: center;
 	margin-top: -3px;
-	padding-top: 6px;
-	padding-bottom: 6px;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding: 6px, 10px;
 }
 
 .rand-button {
@@ -318,8 +315,11 @@ div.Hrozral {
 	border-radius: 50%;
 	line-height: 32px !important;
 	text-align: center;
-	box-sizing: content-box;
 	cursor: pointer;
+
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
 }
 
 	.sale_head_button:hover {
@@ -988,9 +988,9 @@ h2 + div,
 .example {
 	background: #fff;
 	overflow: hidden;
-	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
+	border-radius: 3px;
 	margin-bottom: 20px;
 }
 
@@ -1006,6 +1006,10 @@ h2 + div,
 	background: #000;
 	display: block !important;
 	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
 	-webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;
 	-o-transition: all 0.3s ease;
@@ -1238,8 +1242,11 @@ li.active {
 	border-radius: 50%;
 	line-height: 32px !important;
 	text-align: center;
-	box-sizing: content-box;
 	cursor: pointer;
+
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
 }
 
 .activity_add_buttons {
@@ -1613,7 +1620,7 @@ li.ss_form_item_line {
 	margin-top: 30px;
 }
 
-.collapse_btn {
+html > /**/ body .collapse_btn {
 	margin-left: 10px;
 	cursor: pointer;
 }
@@ -2126,7 +2133,7 @@ li.active.mag_tab {
 	border: none;
 }
 
-.nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus.mag_tab_text {
+.nav-tabs > li.active > a:hover, html > /**/ body .nav-tabs > li.active > a:focus.mag_tab_text {
 	border: none;
 }
 
@@ -2198,6 +2205,7 @@ li.mag_tabv.active {
 /* scrobar */
 ::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	background-color: transparent;
 }
 
@@ -2209,6 +2217,7 @@ li.mag_tabv.active {
 ::-webkit-scrollbar-thumb {
 	background-color: lightgray;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
 
 ::-webkit-scrollbar-track-piece {
@@ -2248,9 +2257,21 @@ li.mag_tabv.active {
 
 	.animate-show.ng-hide-add.ng-hide-add-active,
 	.animate-show.ng-hide-remove.ng-hide-remove-active {
+		-moz-transition: height 1s;
+		-o-transition: height 1s;
+		-webkit-transition: height 1s;
 		transition: height 1s;
+		-moz-transition-property: all;
+		-o-transition-property: all;
+		-webkit-transition-property: all;
 		transition-property: all;
+		-moz-transition-duration: 1s;
+		-o-transition-duration: 1s;
+		-webkit-transition-duration: 1s;
 		transition-duration: 1s;
+		-moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+		-o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+		-webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 		transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 	}
 
@@ -2354,15 +2375,34 @@ li.mag_tabv.active {
 }
 
 .cssSlideUp {
+	-moz-transform: scaleY(1);
+	-ms-transform: scaleY(1);
+	-o-transform: scaleY(1);
+	-webkit-transform: scaleY(1);
 	transform: scaleY(1);
-	opacity: 1;
+	
+	-moz-transform-origin: top;
+	-ms-transform-origin: top;
+	-o-transform-origin: top;
+	-webkit-transform-origin: top;
 	transform-origin: top;
+
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
 	transition: all 0.5s ease;
+
+	opacity: 1;
 	overflow: hidden;
 }
 
 	.cssSlideUp.ng-hide {
+		-moz-transform: scaleY(0);
+		-ms-transform: scaleY(0);
+		-o-transform: scaleY(0);
+		-webkit-transform: scaleY(0);
 		transform: scaleY(0);
+
 		opacity: 0;
 	}
 
@@ -2602,4 +2642,12 @@ hr.ss-form-hr {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	border: 1px dashed #eee;
+}
+
+.ui-layout-column table tr {
+	font-size: 14px;
+}
+
+.stretch {
+	overflow-y:hidden
 }
