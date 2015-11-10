@@ -93,7 +93,19 @@ Public Class CommonService
         IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
     End Sub
 
+    ''' <summary>
+    ''' Send short sale users report to short sale team manager and short sale manager
+    ''' </summary>
     Public Sub SendShortSaleActivityEmail() Implements ICommonService.SendShortSaleActivityEmail
+
+        SendShortAllActivityReport()
+        SendShortSaleTeamMgrReport()
+    End Sub
+
+    ''' <summary>
+    ''' Send all shortsale user report to Short Sale Manager
+    ''' </summary>
+    Private Sub SendShortAllActivityReport()
         Dim ssMgrs = Roles.GetUsersInRole("ShortSale-Manager")
 
         Dim toAdds = New List(Of String)
@@ -116,6 +128,34 @@ Public Class CommonService
         Dim attachment As New System.Net.Mail.Attachment(GetPDf("ShortSale"), name)
 
         IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
+    End Sub
+
+    ''' <summary>
+    ''' Send short sale user report to related team manager
+    ''' </summary>
+    Private Sub SendShortSaleTeamMgrReport()
+        Dim ssMgrs = Roles.GetUsersInRole("ShortSale-TeamManager")
+
+        Dim toAdds = New List(Of String)
+
+        For Each mgr In ssMgrs.Distinct
+            Dim emp = Employee.GetInstance(mgr)
+            If emp IsNot Nothing AndAlso emp.Active AndAlso Not String.IsNullOrEmpty(emp.Email) Then
+                toAdds.Add(emp.Email)
+            End If
+
+            Dim emailData As New Dictionary(Of String, String)
+            'emailData.Add("Body", LoadTeamActivityEmail(objTeam))
+            emailData.Add("Date", DateTime.Today.ToString("m"))
+
+            Dim params As New StringDictionary
+            params.Add("teamMgr", mgr)
+
+            Dim name = String.Format("{1}-ActivityReport-{0:m}.pdf", DateTime.Today, "ShortSale Team")
+            Dim attachment As New System.Net.Mail.Attachment(GetPDf("ShortSale", params), name)
+
+            IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
+        Next
     End Sub
 
     Public Sub SendLegalActivityEmail() Implements ICommonService.SendLegalActivityEmail
@@ -194,7 +234,7 @@ Public Class CommonService
         Next
     End Sub
 
-    Private Function GetPDf(name As String) As MemoryStream
+    Private Function GetPDf(name As String, Optional params As StringDictionary = Nothing) As MemoryStream
         'Using stream As New MemoryStream()
         '    'DemoRichEdit.ExportToPdf(stream)
         '    'HttpUtils.WriteFileToResponse(Me.Page, stream, "ExportedDocument", True, "pdf")
@@ -210,13 +250,13 @@ Public Class CommonService
         report.Bands(BandKind.Detail).Controls.Add(richText)
 
         Dim ms As New MemoryStream
-        richText.Html = LoadEmailTemplateThroughWeb(name)  'LoadTeamActivityEmail(Team.GetTeam("RonTeam"))
+        richText.Html = LoadEmailTemplateThroughWeb(name, params)  'LoadTeamActivityEmail(Team.GetTeam("RonTeam"))
         report.ExportToPdf(ms)
         ms.Position = 0
         Return ms
     End Function
 
-    Private Function LoadEmailTemplateThroughWeb(name As String) As String
+    Private Function LoadEmailTemplateThroughWeb(name As String, params As StringDictionary) As String
         Dim url = OperationContext.Current.RequestContext.RequestMessage.Headers.To.GetLeftPart(UriPartial.Authority)
         Dim pageLink = String.Format("{0}/EmailTemplate/TeamActivityReport.aspx?name={1}", url, name)
 
@@ -226,6 +266,12 @@ Public Class CommonService
 
         If name = "Legal" Then
             pageLink = String.Format("{0}/EmailTemplate/ShortSaleActivityReport.aspx?t=Legal", url)
+        End If
+
+        If params IsNot Nothing AndAlso params.Count > 0 Then
+            For Each param As DictionaryEntry In params
+                pageLink = pageLink + String.Format("&{0}={1}", param.Key, param.Value)
+            Next
         End If
 
         Dim myRequest As WebRequest = WebRequest.Create(pageLink)
