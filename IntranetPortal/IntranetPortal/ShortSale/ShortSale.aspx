@@ -704,7 +704,7 @@
                             }
                         }).
                         error(function (data, status) {
-                            ptCom.alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
+                            ptCom.alert("Fail to save data. status :" + status + "Error : " + JSON.stringify(data));
                         });
             }
 
@@ -903,6 +903,8 @@
                             if (scuessfunc) {
                                 scuessfunc();
                             } else {
+                                // if save scuessed load data again 
+                                $scope.GetShortSaleCase($scope.SsCase.CaseId);
                                 ptCom.alert("Save Successed !");
                             }
                             
@@ -910,8 +912,8 @@
                             ResetCaseDataChange();
                         }).
                         error(function (data, status) {
-                            
-                            ptCom.alert("Fail to save data. status " + status + "Error : " + data.message ? data.message : JSON.stringify(data));
+                            var message = ( data && typeof data =='object' && data.message) ? data.message : JSON.stringify(data);
+                            ptCom.alert("Fail to save data. status " + status + "Error : " + message);
                         });
             }
             $scope.ShowAddPopUp = function (event) {
