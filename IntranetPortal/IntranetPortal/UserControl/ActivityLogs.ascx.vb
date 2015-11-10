@@ -1022,7 +1022,6 @@ Public Class ActivityLogs
                 Dim category = e.Parameter.Split("|")(4)
 
                 If Not String.IsNullOrEmpty(typeOfUpdate) Then
-
                     If category = "Assign" AndAlso Not Page.User.IsInRole("ShortSale-Manager") AndAlso Not Page.User.IsInRole("ShortSale-TeamManager") Then
                         Dim taskData = New With {
                             .TypeofUpdate = typeOfUpdate,
@@ -1031,7 +1030,6 @@ Public Class ActivityLogs
                             .Reviewer = Nothing}
 
                         Dim assignComments = String.Format("{0} want to change {1} status to {2} - {3}. Please Approval. <br /> Comments: {4}", Page.User.Identity.Name, typeOfUpdate, category, statusOfUpdate, txtComments)
-
 
                         Dim emp = Employee.GetInstance(Page.User.Identity.Name)
                         Dim reviewer = If(emp IsNot Nothing, emp.Manager, Nothing)
