@@ -11,6 +11,7 @@
             Dim FormData = BusinessForm.Instance(ControlName)
             CurrentControl = FormData.DefaultControl
             Dim dataControl = CType(Page.LoadControl(CurrentControl.AscxFile), TitleTab)
+            dataControl.ID = "Control_" & ControlName
             dataControl.ControlReadonly = "true"
             dataControl.DataBind()
 

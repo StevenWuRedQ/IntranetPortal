@@ -26,6 +26,28 @@
             }
         }
     }
+
+    function OnGetRowValues(values) {
+        if (values == null) {
+            //gridCase.GetValuesOnCustomCallback(gridCase.GetFocusedRowIndex(), OnGetRowValues);
+        }
+        else {
+            caseId = values;
+            console.log("CaseId: " + caseId);
+            //GetShortSaleData(caseId);
+            RefreshContent();
+        }
+    }
+
+    function RefreshContent() {
+        if (caseId != null) {
+            if (typeof ContentCallbackPanel != 'undefined')
+                ContentCallbackPanel.PerformCallback(caseId);
+            else {
+                GetShortSaleData(caseId);
+            }
+        }
+    }
     
     function expandAllClick(s) {
         if (gridCase.IsGroupRowExpanded(0)) {
@@ -87,30 +109,6 @@
         //if (e.item.index == 4) {
 
         //}
-    }
-
-
-    function OnGetRowValues(values) {
-        if (values == null) {
-            //gridCase.GetValuesOnCustomCallback(gridCase.GetFocusedRowIndex(), OnGetRowValues);
-        }
-        else {
-            caseId = values;
-            console.log("CaseId: " + caseId);
-            //GetShortSaleData(caseId);
-            RefreshContent();
-        }
-    }
-
-    function RefreshContent() {
-        if (caseId != null) {
-            if (typeof ContentCallbackPanel != 'undefined')
-                ContentCallbackPanel.PerformCallback(caseId);
-            else
-            {
-                GetShortSaleData(caseId);
-            }
-        }
     }
 
     function AddScrollbarOnLeadsList() {

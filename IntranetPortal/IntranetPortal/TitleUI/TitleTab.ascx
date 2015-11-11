@@ -7,8 +7,7 @@
 <%@ Register Src="~/TitleUI/TitlePreclosing.ascx" TagPrefix="uc1" TagName="TitlePreclosing" %>
 <%@ Register Src="~/TitleUI/TitleFeeClearance.ascx" TagPrefix="uc1" TagName="TitleFeeClearance" %>
 
-
-<uc1:Common runat="server" ID="Common" />
+<uc1:Common runat="server" ID="Common" Visible="false" />
 <div id="titleui_and_activity">
     <div id="TitleController" ng-controller="TitleController" style="max-height: 850px; overflow: auto">
         <div id="TitleUIContent" style="padding-top: 5px">

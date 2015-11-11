@@ -17,22 +17,6 @@ Public Class ActivityLogs
     Public Delegate Sub OnMortgageStatusUpdate(updateType As String, status As String, category As String, bble As String)
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
-        If Not Page.IsPostBack Then
-            If ActivityLogProvider IsNot Nothing Then
-                If ActivityLogProvider.LogCategoryFilter IsNot Nothing Then
-                    cbCateLog.Items.Clear()
-                    For Each cate In ActivityLogProvider.LogCategoryFilter
-                        cbCateLog.Items.Add(cate.ToString)
-                    Next
-                End If
-
-
-            End If
-        End If
-    End Sub
-
-    Private Sub ActivityLogs_Init(sender As Object, e As EventArgs) Handles Me.Init
         If DisplayMode = ActivityLogMode.ShortSale Then
             gridTracking.Settings.VerticalScrollableHeight = 510
         Else
@@ -55,6 +39,23 @@ Public Class ActivityLogs
                 pnlCommentCtr.Controls.Add(commentControl)
             End If
         End If
+
+        If Not Page.IsPostBack Then
+            If ActivityLogProvider IsNot Nothing Then
+                If ActivityLogProvider.LogCategoryFilter IsNot Nothing Then
+                    cbCateLog.Items.Clear()
+                    For Each cate In ActivityLogProvider.LogCategoryFilter
+                        cbCateLog.Items.Add(cate.ToString)
+                    Next
+                End If
+
+
+            End If
+        End If
+    End Sub
+
+    Private Sub ActivityLogs_Init(sender As Object, e As EventArgs) Handles Me.Init
+
 
     End Sub
 
@@ -1022,7 +1023,7 @@ Public Class ActivityLogs
                 Dim category = e.Parameter.Split("|")(4)
 
                 If Not String.IsNullOrEmpty(typeOfUpdate) Then
-                    If category = "Assign" AndAlso Not Page.User.IsInRole("ShortSale-Manager") AndAlso Not Page.User.IsInRole("ShortSale-TeamManager") Then
+                    If category = "Assign" AndAlso Not ShortSaleManage.IsShortSaleManager(Page.User.Identity.Name) Then
                         Dim taskData = New With {
                             .TypeofUpdate = typeOfUpdate,
                             .Category = category,

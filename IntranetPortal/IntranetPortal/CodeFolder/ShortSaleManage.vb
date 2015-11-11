@@ -16,6 +16,10 @@ Public Class ShortSaleManage
         End Get
     End Property
 
+    Public Shared Function IsShortSaleManager(userName As String)
+        Return Roles.IsUserInRole(userName, "ShortSale-Manager") OrElse Roles.IsUserInRole(userName, "ShortSale-TeamManager")
+    End Function
+
     Public Shared Function IsInShortSale(bble As String) As Boolean
         Return ShortSaleCase.IsExist(bble)
     End Function
@@ -122,7 +126,7 @@ Public Class ShortSaleManage
                 ssCase.CreateBy = createBy
                 ssCase.Save(createBy)
 
-                If Roles.IsUserInRole(createBy, "ShortSale-Manager") Then
+                If IsShortSaleManager(createBy) Then
                     NewCaseApproved(bble, createBy)
                     Dim emp = Employee.GetInstance(createBy)
                     LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("The case was created and assigned to {0}.", ssCase.Owner), bble, LeadsActivityLog.LogCategory.ShortSale.ToString, emp.EmployeeID, createBy, LeadsActivityLog.EnumActionType.UpdateInfo)
@@ -236,7 +240,7 @@ Public Class ShortSaleManage
                 LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} set followup on {1}.", createBy, dt.ToShortDateString), ssCase.BBLE, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
                 Return True
             Case CaseStatus.Archived
-                If Not Roles.IsUserInRole(createBy, "ShortSale-Manager") Then
+                If Not IsShortSaleManager(createBy) Then
                     Dim comments = String.Format("{0} want to archive this case. Please approval.", createBy)
                     Dim emp = Employee.GetInstance(createBy)
                     ArchivedProcess.ProcessStart(ssCase.BBLE, ssCase.BBLE, createBy, comments, If(emp IsNot Nothing, emp.Manager, Nothing))
@@ -380,7 +384,7 @@ Public Class ShortSaleManage
     End Sub
 
     Public Shared Sub AssignCaseWithWF(bble As String, userName As String, createBy As String)
-        If Not Roles.IsUserInRole(createBy, "ShortSale-Manager") Then
+        If Not IsShortSaleManager(createBy) Then
             Dim emp = Employee.GetInstance(createBy)
             ReassignProcess.ProcessStart(bble, userName, createBy, String.Format("{0} want to reassign this case to {1}. Please approval.", createBy, userName), If(emp IsNot Nothing, emp.Manager, Nothing))
 

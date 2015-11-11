@@ -877,8 +877,10 @@ Partial Public Class ShortSaleCase
 
     Public Sub SaveFollowUp(dt As DateTime)
         'Me.Status = CaseStatus.FollowUp
-        Me.CallbackDate = dt
-        Save()
+        If dt > DateTime.MinValue Then
+            Me.CallbackDate = dt
+            Save()
+        End If
     End Sub
 
     Public Sub SaveChanges()

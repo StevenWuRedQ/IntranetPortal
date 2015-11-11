@@ -56,6 +56,11 @@
         End If
     End Sub
 
+    Private Sub Page_PreInit(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.PreInit
+        'BindControl()
+
+    End Sub
+
     Private Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Init
         BindControl()
     End Sub
