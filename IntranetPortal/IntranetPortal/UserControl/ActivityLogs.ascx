@@ -1211,7 +1211,7 @@
         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSetAsTaskControl" Width="450px" Height="550px" OnWindowCallback="ASPxPopupControl1_WindowCallback"
             MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl1"
             HeaderText="Set as Task" Modal="true"
-            runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+            runat="server" EnableViewState="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Middle" EnableHierarchyRecreation="True">
             <HeaderTemplate>
                 <div class="clearfix">
                     <div class="pop_up_header_margin">

@@ -15,13 +15,13 @@ Public Class NoticeECourtRule
 
         For Each b In bbles
             Dim names = LegalCaseManage.GetCaseRelateUsersName(b.BBLE)
-            If (Not String.IsNullOrEmpty(names)) Then
+            If ((Not String.IsNullOrEmpty(names)) And b.AppearanceDate IsNot Nothing) Then
                 Using client As New PortalService.CommonServiceClient
                     Dim lCase = Data.LegalCase.GetCase(b.BBLE)
                     Dim ECourt = Data.LegalECourt.GetLegalEcourt(b.BBLE)
                     Dim maildata = New Dictionary(Of String, String)
                     maildata.Add("CaseName", lCase.CaseName)
-                    maildata.Add("AppearanceDate", b.AppearanceDate)
+                    maildata.Add("AppearanceDate", ECourt.AppearanceDate)
                     maildata.Add("IndexNumber", ECourt.IndexNumber)
                     maildata.Add("BBLE", ECourt.BBLE)
                     Dim stamp = (ECourt.AppearanceDate - Date.Now)

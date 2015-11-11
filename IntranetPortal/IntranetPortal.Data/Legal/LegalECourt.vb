@@ -62,6 +62,13 @@ Public Class LegalECourt
             Return ctx.LegalECourts.Where(Function(e) Not String.IsNullOrEmpty(e.IndexNumber)).ToList
         End Using
     End Function
+
+    ''' <summary>
+    ''' Get all legal ecourt case apperance date between days form now.
+    ''' todo: change get all list only have the last appearance date
+    ''' </summary>
+    ''' <param name="day">Interval days to AppearanceDate  </param>
+    ''' <returns> legal ecourt list need notice</returns>
     Public Shared Function GetCaseByNoticeyDay(day As Integer) As List(Of LegalECourt)
 
         Using ctx As New LegalModelContainer
