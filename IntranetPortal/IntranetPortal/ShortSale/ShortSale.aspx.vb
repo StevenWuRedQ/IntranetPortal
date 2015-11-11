@@ -217,6 +217,7 @@ Public Class NGShortSale
         DocumentsUI.LeadsName = ShortSaleCaseData.CaseName
         DocumentsUI.LeadsBBLE = ShortSaleCaseData.BBLE
     End Sub
+
     Private Sub BindCaseData2(bble As String)
         ShortSaleCaseData = ShortSaleCase.GetCaseByBBLE(bble)
 
@@ -261,9 +262,11 @@ Public Class NGShortSale
         ActivityLogs.BindData(ssCase.BBLE)
         ShortSaleFileOverview.BindData(ssCase.BBLE)
     End Sub
+
     Public Function GetAllContact() As String
         Return PartyContact.getAllContact(Employee.CurrentAppId).ToJsonString
     End Function
+
     Public Function GetAllTeam() As String
         Return Team.GetAllTeams.ToJsonString
     End Function

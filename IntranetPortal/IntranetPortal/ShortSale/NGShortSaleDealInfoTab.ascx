@@ -136,7 +136,7 @@
                                 bindingOptions:{ visible: 'SsCase.ValueInfoes['+$index+'].visiblePopup' }
                             }">
                     <div data-options="dxTemplate:{ name: 'content' }">
-                        <form>
+                        <div>
                             <div>
                                 <label>Type</label>
                                 <select class="form-control" ng-model="value.Method">
@@ -152,10 +152,6 @@
                                 <label>Date of Valuation</label>
                                 <input class="form-control" ng-model="value.DateOfValue" ss-date />
                             </div>
-                            <%--<div>
-                                <label>Date Completed</label>
-                                <input class="form-control" ng-model="value.DateComplate" ss-date />
-                            </div> --%>
                             <div>
                                 <label>Value</label>
                                 <input class="form-control" ng-model="value.BankValue" money-mask />
@@ -177,7 +173,7 @@
                                 <input class="form-control" ng-model="value.AgentPhone" />
                             </div>
 
-                        </form>
+                        </div>
                         <br />
                         <button class="btn btn-primary pull-right" ng-click="setVisiblePopup(SsCase.ValueInfoes[$index], false)">Save</button>
                     </div>
@@ -235,7 +231,7 @@
                                 bindingOptions:{ visible: 'SsCase.ShortSaleOffers['+$index+'].visiblePopup' }
                             }">
                     <div data-options="dxTemplate:{ name: 'content' }">
-                        <form>
+                        <div>
                             <div>
                                 <label>Type</label>
                                 <select ng-model="offer.OfferType" class="form-control">

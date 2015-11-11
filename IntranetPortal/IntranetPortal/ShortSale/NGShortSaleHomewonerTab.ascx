@@ -54,7 +54,7 @@
                     bindingOptions:{ visible: 'SsCase.PropertyInfo.Owners['+$index+'].visiblePopup' }
         }">
     <div data-options="dxTemplate:{ name: 'content' }">
-        <form>
+        <div>
             <div class="row form-group">
                 <div class="col-sm-4">
                     <label>First Name</label>
@@ -147,7 +147,7 @@
                 </div>
             </div>
 
-        </form>
+        </div>
         <br />
         <button class="btn btn-primary pull-right" ng-click="setVisiblePopup(SsCase.PropertyInfo.Owners[$index], false)">Save</button>
     </div>

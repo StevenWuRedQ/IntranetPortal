@@ -81,6 +81,7 @@
 		portalApp.controller('MainCtrl', function($rootScope, $uibModal) {
 			$rootScope.AlertModal = null;
 			$rootScope.ConfirmModal = null;
+		    $rootScope.loadingCover = document.getElementById("LodingCover");
 
 			$rootScope.alert = function(message) {
 				$rootScope.alertMessage = message ? message : '';
@@ -111,11 +112,11 @@
 
 
 			$rootScope.showLoading = function(divId) {
-				$(loadingCover).show();
+			    $($rootScope.loadingCover).show();
 			}
 
 			$rootScope.hideLoading = function(divId) {
-				$(loadingCover).hide();
+			    $($rootScope.loadingCover).hide();
 			}
 		});
 	</script>
@@ -167,7 +168,7 @@
 		*/
 		var AngularRoot;
 		$(function() {
-			AngularRoot = function() {
+			AngularRoot = (function() {
 				var scope = angular.element(document.body).injector().get('$rootScope');
 				return {
 					alert: scope.alert,
@@ -176,7 +177,7 @@
 					hideLoading: scope.hideLoading
 
 				}
-			}();
+			})();
 			AngularRoot.hideLoading();
 		});
 

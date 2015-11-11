@@ -90,7 +90,7 @@
                             }">
                     <div data-options="dxTemplate:{ name: 'content' }">
 
-                        <form style="height: 88%; padding: 0px 5px; overflow-y: auto; overflow-x: hidden">
+                        <div style="height: 88%; padding: 0px 5px; overflow-y: auto; overflow-x: hidden">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label>Description</label>
@@ -168,7 +168,7 @@
                                     <input class="form-control" ss-date ng-model="floor.LastChecked" />
                                 </div>
                             </div>
-                        </form>
+                        </div>
                         <hr />
                         <button class="btn btn-primary pull-right" ng-click="setPopupVisible(PropFloors[$index], false)">Close</button>
                     </div>
