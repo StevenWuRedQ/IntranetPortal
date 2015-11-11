@@ -975,6 +975,12 @@ Partial Public Class ShortSaleCase
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return a list of Short Sale Case in specific CaseStatus and Application Id
+    ''' </summary>
+    ''' <param name="status">Case Status</param>
+    ''' <param name="appId">Application Id</param>
+    ''' <returns></returns>
     Public Shared Function GetCaseByStatus(status As CaseStatus, appId As Integer) As List(Of ShortSaleCase)
         Using context As New ShortSaleEntities
             If status = CaseStatus.Eviction Then
@@ -996,13 +1002,31 @@ Partial Public Class ShortSaleCase
         End Using
     End Function
 
-    Public Shared Function GetCaseByStatus(status As CaseStatus, owner As String, appId As Integer) As List(Of ShortSaleCase)
+    ''' <summary>
+    ''' Return a list of Short Sale Case in specific CaseStatus, Application Id and Owners
+    ''' </summary>
+    ''' <param name="status">Case Status</param>
+    ''' <param name="owners">Owner Names</param>
+    ''' <param name="appId">Application Id</param>
+    ''' <returns></returns>
+    Public Shared Function GetCaseByStatus(status As CaseStatus, owners As String(), appId As Integer) As List(Of ShortSaleCase)
         Using context As New ShortSaleEntities
-            Return GetCaseByStatus(status, appId).Where(Function(ss) (ss.Owner = owner Or owner = Nothing)).ToList
+            Dim noOwner = owners Is Nothing
+
+            If noOwner Then
+                owners = {}
+            End If
+
+            Return GetCaseByStatus(status, appId).Where(Function(ss) (noOwner OrElse owners.Contains(ss.Owner))).ToList
             'Return context.ShortSaleCases.Where(Function(ss) ss.Status = status AndAlso ss.Owner = owner).ToList
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return a list of ShortSaleCase that is archived
+    ''' </summary>
+    ''' <param name="appId"></param>
+    ''' <returns></returns>
     Public Shared Function GetArchivedCases(appId As Integer) As List(Of ShortSaleCase)
         Using ctx As New ShortSaleEntities
             Dim allCases = (From ss In ctx.ShortSaleCases
@@ -1017,11 +1041,24 @@ Partial Public Class ShortSaleCase
         End Using
     End Function
 
-    Public Shared Function GetCaseByCategory(category As String, appId As Integer, Optional owner As String = Nothing) As List(Of ShortSaleCase)
+    ''' <summary>
+    ''' Return Short Sale Case List in specific category and owners
+    ''' </summary>
+    ''' <param name="category">Category Name</param>
+    ''' <param name="appId">Application Id</param>
+    ''' <param name="owners">Owner name list</param>
+    ''' <returns></returns>
+    Public Shared Function GetCaseByCategory(category As String, appId As Integer, Optional owners As String() = Nothing) As List(Of ShortSaleCase)
         Using ctx As New ShortSaleEntities
             Dim nonActiveStatus = {CaseStatus.Archived, CaseStatus.NewFile}
+
+            Dim noOwners = owners Is Nothing
+            If noOwners Then
+                owners = {}
+            End If
+
             If category = "All" Then
-                Dim allCases = (From ss In ctx.ShortSaleCases Where Not nonActiveStatus.Contains(ss.Status) AndAlso (ss.Owner = owner Or owner = Nothing) AndAlso ss.AppId = appId
+                Dim allCases = (From ss In ctx.ShortSaleCases Where Not nonActiveStatus.Contains(ss.Status) AndAlso (noOwners OrElse owners.Contains(ss.Owner)) AndAlso ss.AppId = appId
                                 From mort In ctx.PropertyMortgages.Where(Function(m) m.CaseId = ss.CaseId).Take(1).DefaultIfEmpty
                                 Select ss, mort).Distinct.ToList.Select(Function(s)
                                                                             If s.mort IsNot Nothing Then
@@ -1036,7 +1073,7 @@ Partial Public Class ShortSaleCase
             End If
 
             If category = "Upcoming" Then
-                Dim allcases = (From ss In ctx.ShortSaleCases Where Not nonActiveStatus.Contains(ss.Status) And ss.SaleDate IsNot Nothing AndAlso (ss.Owner = owner Or owner = Nothing) AndAlso ss.AppId = appId
+                Dim allcases = (From ss In ctx.ShortSaleCases Where Not nonActiveStatus.Contains(ss.Status) And ss.SaleDate IsNot Nothing AndAlso (noOwners OrElse owners.Contains(ss.Owner)) AndAlso ss.AppId = appId
                                 From mort In ctx.PropertyMortgages.Where(Function(m) m.CaseId = ss.CaseId).Take(1).DefaultIfEmpty
                                 Select ss, mort).Distinct.ToList.Select(Function(s)
                                                                             If s.mort IsNot Nothing Then
@@ -1056,7 +1093,7 @@ Partial Public Class ShortSaleCase
 
             Dim result = (From ss In ctx.ShortSaleCases
                           From mort In ctx.PropertyMortgages.Where(Function(m) m.CaseId = ss.CaseId).Take(1).DefaultIfEmpty
-                          Where mort.Category = category And (ss.Owner = owner Or owner = Nothing) And ss.AppId = appId And Not nonActiveStatus.Contains(ss.Status)
+                          Where mort.Category = category And (noOwners OrElse owners.Contains(ss.Owner)) And ss.AppId = appId And Not nonActiveStatus.Contains(ss.Status)
                           Select ss, mort.Status).Distinct.ToList
 
             Dim ssCases = result.Select(Function(s)
@@ -1082,6 +1119,12 @@ Partial Public Class ShortSaleCase
         Return GetCaseByMortgageStatus(status, appId)
     End Function
 
+    ''' <summary>
+    ''' Return a list of ShortSaleCase in specific Mortgage status
+    ''' </summary>
+    ''' <param name="mortStatus">Mortgage Status</param>
+    ''' <param name="appId">Application Id</param>
+    ''' <returns></returns>
     Public Shared Function GetCaseByMortgageStatus(mortStatus As String(), appId As Integer) As List(Of ShortSaleCase)
         Using ctx As New ShortSaleEntities
             Dim result = (From ss In ctx.ShortSaleCases
@@ -1093,7 +1136,14 @@ Partial Public Class ShortSaleCase
         End Using
     End Function
 
-    Public Shared Function GetCaseCount(status As CaseStatus, owner As String, appid As String) As Integer
+    ''' <summary>
+    ''' Return amount of ShortSaleCase belong to specific owners and status
+    ''' </summary>
+    ''' <param name="status">Case Status</param>
+    ''' <param name="owner">Owner Names</param>
+    ''' <param name="appid">Application Id</param>
+    ''' <returns></returns>
+    Public Shared Function GetCaseCount(status As CaseStatus, owner As String(), appid As String) As Integer
         Return GetCaseByStatus(status, owner, appid).Count
     End Function
 

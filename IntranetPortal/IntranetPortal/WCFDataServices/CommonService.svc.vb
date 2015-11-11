@@ -98,7 +98,7 @@ Public Class CommonService
     ''' </summary>
     Public Sub SendShortSaleActivityEmail() Implements ICommonService.SendShortSaleActivityEmail
 
-        SendShortAllActivityReport()
+        'SendShortAllActivityReport()
         SendShortSaleTeamMgrReport()
     End Sub
 
@@ -136,6 +136,14 @@ Public Class CommonService
     Private Sub SendShortSaleTeamMgrReport()
         Dim ssMgrs = Roles.GetUsersInRole("ShortSale-TeamManager")
 
+        Dim ccAdds = New List(Of String)
+        For Each mgr In Roles.GetUsersInRole("ShortSale-Manager")
+            Dim emp = Employee.GetInstance(mgr)
+            If emp IsNot Nothing AndAlso emp.Active AndAlso Not String.IsNullOrEmpty(emp.Email) Then
+                ccAdds.Add(emp.Email)
+            End If
+        Next
+
         Dim toAdds = New List(Of String)
 
         For Each mgr In ssMgrs.Distinct
@@ -154,7 +162,7 @@ Public Class CommonService
             Dim name = String.Format("{1}-ActivityReport-{0:m}.pdf", DateTime.Today, "ShortSale Team")
             Dim attachment As New System.Net.Mail.Attachment(GetPDf("ShortSale", params), name)
 
-            IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
+            IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), String.Join(";", ccAdds.ToArray), "TeamActivitySummary", emailData, {attachment})
         Next
     End Sub
 

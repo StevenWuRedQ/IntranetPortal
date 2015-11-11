@@ -25,6 +25,11 @@ Public Class ShortSaleCaseList
         End If
     End Sub
 
+    ''' <summary>
+    ''' Loading ShortSale Cases to Case list
+    ''' </summary>
+    ''' <param name="category">Case Category</param>
+    ''' <param name="appId">Application Id</param>
     Public Sub BindCaseListByCategory(category As String, appId As Integer)
         hfCaseCategory.Value = category
         lblLeadCategory.Text = category
@@ -48,12 +53,17 @@ Public Class ShortSaleCaseList
                 End If
             End If
         Else
-            gridCase.DataSource = ShortSaleCase.GetCaseByCategory(category, appId, Page.User.Identity.Name)
+            Dim owners = Employee.GetManagedEmployees(Page.User.Identity.Name)
+            gridCase.DataSource = ShortSaleCase.GetCaseByCategory(category, appId, owners)
             gridCase.DataBind()
 
             If Not Page.IsPostBack Then
                 If category = "Upcoming" Then
                     gridCase.GroupBy(gridCase.Columns("SaleDate"))
+                End If
+
+                If owners.Count > 1 Then
+                    gridCase.GroupBy(gridCase.Columns("Owner"))
                 End If
 
                 If category = "All" Then
@@ -63,6 +73,9 @@ Public Class ShortSaleCaseList
                 gridCase.GroupBy(gridCase.Columns("MortgageStatus"))
             End If
         End If
+
+
+
     End Sub
 
     Public Sub BindCaseList(status As CaseStatus, appId As Integer)
@@ -79,16 +92,16 @@ Public Class ShortSaleCaseList
             Return
         End If
 
-        If status = CaseStatus.Archived Then
-            gridCase.DataSource = ShortSaleCase.GetArchivedCases(appId)
-            gridCase.DataBind()
+        'If status = CaseStatus.Archived Then
+        '    gridCase.DataSource = ShortSaleCase.GetArchivedCases(appId)
+        '    gridCase.DataBind()
 
-            If Not Page.IsPostBack Then
-                gridCase.GroupBy(gridCase.Columns("MortgageCategory"))
-            End If
+        '    If Not Page.IsPostBack Then
+        '        gridCase.GroupBy(gridCase.Columns("MortgageCategory"))
+        '    End If
 
-            Return
-        End If
+        '    Return
+        'End If
 
         If Employee.IsShortSaleManager(Page.User.Identity.Name) Then
             gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status, appId)
@@ -99,8 +112,16 @@ Public Class ShortSaleCaseList
                 gridCase.GroupBy(gridCase.Columns("Owner"))
             End If
         Else
-            gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status, Page.User.Identity.Name, appId)
+            Dim owners = Employee.GetManagedEmployees(Page.User.Identity.Name)
+
+            gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status, owners, appId)
             gridCase.DataBind()
+
+            If Not Page.IsPostBack Then
+                If owners.Count > 1 Then
+                    gridCase.GroupBy(gridCase.Columns("Owner"))
+                End If
+            End If
         End If
 
         If Not Page.IsPostBack Then

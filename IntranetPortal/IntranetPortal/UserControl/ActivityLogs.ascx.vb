@@ -48,8 +48,6 @@ Public Class ActivityLogs
                         cbCateLog.Items.Add(cate.ToString)
                     Next
                 End If
-
-
             End If
         End If
     End Sub

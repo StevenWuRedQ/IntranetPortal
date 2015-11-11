@@ -12,16 +12,7 @@ Option Explicit On
 
 
 Partial Public Class NGShortSaleTab
-
-    '''<summary>
-    '''ShortSaleCaseSavePanel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ShortSaleCaseSavePanel As Global.DevExpress.Web.ASPxCallbackPanel
-
+    
     '''<summary>
     '''ASPxPopupControl2 control.
     '''</summary>
@@ -30,7 +21,7 @@ Partial Public Class NGShortSaleTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
-
+    
     '''<summary>
     '''NGShortSaleHomewonerTab1 control.
     '''</summary>
@@ -39,7 +30,7 @@ Partial Public Class NGShortSaleTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NGShortSaleHomewonerTab1 As Global.IntranetPortal.NGShortSaleHomewonerTab
-
+    
     '''<summary>
     '''NGShortSalePropertyTab control.
     '''</summary>
@@ -48,7 +39,7 @@ Partial Public Class NGShortSaleTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NGShortSalePropertyTab As Global.IntranetPortal.NGShortSalePropertyTab
-
+    
     '''<summary>
     '''NGShortSaleMortgageTab control.
     '''</summary>
@@ -57,7 +48,7 @@ Partial Public Class NGShortSaleTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NGShortSaleMortgageTab As Global.IntranetPortal.NGShortSaleMortgageTab
-
+    
     '''<summary>
     '''NGShortSaleDealInfoTab control.
     '''</summary>
@@ -66,7 +57,7 @@ Partial Public Class NGShortSaleTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NGShortSaleDealInfoTab As Global.IntranetPortal.NGShortSaleDealInfoTab
-
+    
     '''<summary>
     '''NGShortSalePartiesTab control.
     '''</summary>
@@ -75,7 +66,7 @@ Partial Public Class NGShortSaleTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NGShortSalePartiesTab As Global.IntranetPortal.NGShortSalePartiesTab
-
+    
     '''<summary>
     '''NGShortSaleCheckListTab control.
     '''</summary>
@@ -84,7 +75,7 @@ Partial Public Class NGShortSaleTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NGShortSaleCheckListTab As Global.IntranetPortal.NGShortSaleCheckListTab
-
+    
     '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>

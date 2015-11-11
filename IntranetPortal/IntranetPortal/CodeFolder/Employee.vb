@@ -516,6 +516,11 @@ Partial Public Class Employee
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return a boolean to indicate if the user is shortsale manager
+    ''' </summary>
+    ''' <param name="userName"></param>
+    ''' <returns></returns>
     Public Shared Function IsShortSaleManager(userName As String) As Boolean
         Dim rs = Roles.GetRolesForUser(userName)
 

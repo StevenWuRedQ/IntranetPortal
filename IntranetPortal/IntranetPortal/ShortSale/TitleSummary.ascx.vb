@@ -83,6 +83,7 @@ Public Class UCTitleSummary
     End Property
 
     Sub BindData()
+        CurrentUserRole = Employee.GetShortSaleRole(Page.User.Identity.Name)
 
         BindUrgent()
         BindUpcomingBPO()
@@ -122,8 +123,13 @@ Public Class UCTitleSummary
 #Region "Bind Datagridview"
     Private Sub BindUrgent()
         tdUrgent.Visible = True
-        'Bind Urgent Data
-        gridUrgent.DataSource = ShortSale.ShortSaleCase.GetCaseByCategory("Assign", Employee.CurrentAppId) 'ShortSaleSummary.GetUrgentCases()
+        If CurrentUserRole = ShortSaleRole.Manager Then
+            'Bind Urgent Data
+            gridUrgent.DataSource = ShortSale.ShortSaleCase.GetCaseByCategory("Assign", Employee.CurrentAppId) 'ShortSaleSummary.GetUrgentCases()
+        Else
+            gridUrgent.DataSource = ShortSale.ShortSaleCase.GetCaseByCategory("Assign", Employee.CurrentAppId, Employee.GetManagedEmployees(Page.User.Identity.Name))
+        End If
+
         gridUrgent.DataBind()
     End Sub
 
@@ -142,13 +148,25 @@ Public Class UCTitleSummary
 
     Private Sub BindCounterOffer()
         tdCounterOffer.Visible = True
-        CounterOfferGrid.DataSource = ShortSale.ShortSaleCase.GetCaseByMortgageStatus({"Counter Offer - Bank", "Counter Offer - Buyer"}, Employee.CurrentAppId) 'ShortSaleSummary.GetCaseByMortStatus("Counter Offer")
+        If CurrentUserRole = ShortSaleRole.Manager Then
+            CounterOfferGrid.DataSource = ShortSale.ShortSaleCase.GetCaseByMortgageStatus({"Counter Offer - Bank", "Counter Offer - Buyer"}, Employee.CurrentAppId) 'ShortSaleSummary.GetCaseByMortStatus("Counter Offer")
+        Else
+            Dim owners = Employee.GetManagedEmployees(Page.User.Identity.Name)
+            CounterOfferGrid.DataSource = ShortSale.ShortSaleCase.GetCaseByMortgageStatus({"Counter Offer - Bank", "Counter Offer - Buyer"}, Employee.CurrentAppId).Where(Function(s) owners.Contains(s.Owner)).ToArray
+        End If
+
         CounterOfferGrid.DataBind()
     End Sub
 
     Private Sub BindInvestorReview()
         tdInvestorReview.Visible = True
-        InvestorReviewGrid.DataSource = ShortSale.ShortSaleCase.GetCaseByMortgageStatus({"Investor Review"}, Employee.CurrentAppId)
+        If CurrentUserRole = ShortSaleRole.Manager Then
+            InvestorReviewGrid.DataSource = ShortSale.ShortSaleCase.GetCaseByMortgageStatus({"Investor Review"}, Employee.CurrentAppId)
+        Else
+            Dim owners = Employee.GetManagedEmployees(Page.User.Identity.Name)
+            InvestorReviewGrid.DataSource = ShortSale.ShortSaleCase.GetCaseByMortgageStatus({"Investor Review"}, Employee.CurrentAppId).Where(Function(s) owners.Contains(s.Owner)).ToArray
+        End If
+
         InvestorReviewGrid.DataBind()
     End Sub
 

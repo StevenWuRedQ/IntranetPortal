@@ -32,15 +32,6 @@ Partial Public Class NGShortSale
     Protected WithEvents listdiv As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''listPanel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents listPanel As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
     '''ShortSaleCaseList control.
     '''</summary>
     '''<remarks>
@@ -66,15 +57,6 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hfBBLE As Global.System.Web.UI.WebControls.HiddenField
-    
-    '''<summary>
-    '''SendMail control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SendMail As Global.IntranetPortal.SendMailControl
     
     '''<summary>
     '''NGShortSaleTab control.
@@ -147,6 +129,15 @@ Partial Public Class NGShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ShortSaleFileOverview As Global.IntranetPortal.ShortSaleFileOverview
+    
+    '''<summary>
+    '''SendMail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SendMail As Global.IntranetPortal.SendMailControl
     
     '''<summary>
     '''ASPxPopupCallBackMenu2 control.

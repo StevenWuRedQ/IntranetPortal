@@ -16,7 +16,12 @@ Public Class ShortSaleManage
         End Get
     End Property
 
-    Public Shared Function IsShortSaleManager(userName As String)
+    ''' <summary>
+    ''' Return a boolean value indicating if the employee is short sale manager or short sale team manager
+    ''' </summary>
+    ''' <param name="userName">Employee name</param>
+    ''' <returns></returns>
+    Public Shared Function IsShortSaleManager(userName As String) As Boolean
         Return Roles.IsUserInRole(userName, "ShortSale-Manager") OrElse Roles.IsUserInRole(userName, "ShortSale-TeamManager")
     End Function
 
@@ -72,6 +77,15 @@ Public Class ShortSaleManage
         Return ""
     End Function
 
+    ''' <summary>
+    ''' Add log to short sale activity 
+    ''' </summary>
+    ''' <param name="bble">Property BBLE</param>
+    ''' <param name="userName">Employee Name</param>
+    ''' <param name="typeOfUpdate">Update type</param>
+    ''' <param name="category">Category</param>
+    ''' <param name="statusOfUpdate">Status</param>
+    ''' <param name="comments">Additional Comments</param>
     Public Shared Sub AddActivityLog(bble As String, userName As String, typeOfUpdate As String, category As String, statusOfUpdate As String, comments As String)
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
         ShortSale.ShortSaleActivityLog.AddLog(bble, userName, typeOfUpdate, category & " - " & statusOfUpdate, comments, ssCase.AppId)
@@ -79,6 +93,15 @@ Public Class ShortSaleManage
         Dim NotifyUpdate = Sub()
                                Try
                                    Dim notifyEmails = Core.PortalSettings.GetValue("SSUpdateNotifyEmails")
+
+                                   Dim emp = Employee.GetInstance(userName)
+                                   If emp IsNot Nothing AndAlso emp.Manager IsNot Nothing AndAlso IsShortSaleManager(emp.Manager) Then
+                                       Dim mgr = Employee.GetInstance(emp.Manager)
+                                       If mgr IsNot Nothing AndAlso Not String.IsNullOrEmpty(mgr.Email) Then
+                                           notifyEmails = mgr.Email
+                                       End If
+                                   End If
+
                                    ssCase = ShortSaleCase.GetCaseByBBLE(bble)
 
                                    Dim maildata As New Dictionary(Of String, String)
@@ -98,7 +121,9 @@ Public Class ShortSaleManage
                                End Try
                            End Sub
 
-        System.Threading.ThreadPool.QueueUserWorkItem(NotifyUpdate)
+        If Not IsShortSaleManager(userName) Then
+            System.Threading.ThreadPool.QueueUserWorkItem(NotifyUpdate)
+        End If
     End Sub
 
     Public Shared Sub MoveLeadsToShortSale(bble As String, createBy As String, appid As Integer)
@@ -420,7 +445,7 @@ Public Class ShortSaleManage
     ''' Approval process when agent move the leads to short sale
     ''' </summary>
     ''' <returns>Custom short sale new case process instance</returns>
-    Public Shared Property NewCaseProcess As ShortSaleProcess = ShortSaleProcess.NewInstance("New Case", "ShortSale-Manager", Nothing,
+    Public Shared Property NewCaseProcess As ShortSaleProcess = ShortSaleProcess.NewInstance("New Case", "ShortSale-AssignReviewer", Nothing,
                                                       Nothing,
                                                       Sub(task As UserTask)
                                                           NewCaseApproved(task.TaskData, task.CompleteBy)
@@ -570,7 +595,7 @@ Public Class ShortSaleProcess
         Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.ShortSale.ToString, emp.EmployeeID, createBy, LeadsActivityLog.EnumActionType.SetAsTask)
         'For testing purpose, need change to ShortSale-Manager
 
-        Dim names = If(Not String.IsNullOrEmpty(RoleName), String.Join(";", Roles.GetUsersInRole("ShortSale-Manager")), UserNames)
+        Dim names = If(Not String.IsNullOrEmpty(RoleName), String.Join(";", Roles.GetUsersInRole(RoleName)), UserNames)
 
         If Not String.IsNullOrEmpty(approvers) Then
             names = approvers
