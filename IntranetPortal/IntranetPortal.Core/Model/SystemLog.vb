@@ -59,5 +59,6 @@ Partial Public Class SystemLog
         [Error]
         Operation
         SaveData
+        OpenData
     End Enum
 End Class

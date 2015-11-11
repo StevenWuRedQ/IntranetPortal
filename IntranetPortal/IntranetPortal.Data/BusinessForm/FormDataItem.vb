@@ -8,12 +8,20 @@ Public Class FormDataItem
         Get
             If _businessData Is Nothing Then
                 _businessData = CreateBusinessDataInstance()
-                _businessData.LoadData(DataId)
+                _businessData = _businessData.LoadData(DataId)
             End If
 
             Return _businessData
         End Get
     End Property
+
+    Public Sub LogSave(saveBy As String)
+        Core.SystemLog.Log(Me.FormName, "Business Form", Core.SystemLog.LogCategory.SaveData, Me.Tag, saveBy)
+    End Sub
+
+    Public Sub LogOpen(openBy As String)
+        Core.SystemLog.Log(Me.FormName, "Business Form", Core.SystemLog.LogCategory.OpenData, Me.Tag, openBy)
+    End Sub
 
     Public Shared Function Instance(name As String, tag As String) As FormDataItem
         Using ctx As New ConstructionEntities
@@ -42,6 +50,7 @@ Public Class FormDataItem
             ctx.SaveChanges()
 
             Me.Tag = BusinessData.Save(Me)
+
         End Using
     End Sub
 

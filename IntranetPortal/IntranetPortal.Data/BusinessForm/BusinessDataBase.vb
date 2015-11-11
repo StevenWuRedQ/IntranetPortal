@@ -3,6 +3,14 @@ Public Class BusinessDataBase
 
     Public Property Name As String
 
+    Public Overridable Sub LogSave(saveBy As String)
+
+    End Sub
+
+    Public Overridable Sub LogOpen(openBy As String)
+
+    End Sub
+
     Public Overridable Function LoadData(formId As Integer) As BusinessDataBase
         Return New BusinessDataBase
     End Function

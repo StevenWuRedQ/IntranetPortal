@@ -15,7 +15,10 @@ Namespace Controllers
             If obj Is Nothing Then
                 obj = New FormDataItem With
                       {.FormName = formName}
+            Else
+                obj.LogOpen(HttpContext.Current.User.Identity.Name)
             End If
+
             Return Ok(obj)
         End Function
 
@@ -27,6 +30,8 @@ Namespace Controllers
                 obj = New FormDataItem With
                       {.FormName = formName,
                       .Tag = tag}
+            Else
+                obj.LogOpen(HttpContext.Current.User.Identity.Name)
             End If
             Return Ok(obj)
         End Function
@@ -40,6 +45,7 @@ Namespace Controllers
 
             Try
                 formItem.Save(HttpContext.Current.User.Identity.Name)
+                formItem.LogSave(HttpContext.Current.User.Identity.Name)
             Catch ex As Exception
                 Throw ex
             End Try
