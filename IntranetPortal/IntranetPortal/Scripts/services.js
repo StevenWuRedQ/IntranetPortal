@@ -207,6 +207,13 @@ angular.module("PortalApp")
         this.addOverlay = function () {
             $rootScope.addOverlay();
         };
+        this.stopLoading = function() {
+            $rootScope.stopLoading();
+        }
+        this.startLoading = function() {
+            $rootScope.startLoading();
+        }
+
         this.removeOverlay = function () {
             $rootScope.removeOverlay();
         }; // get next index of value in the array, 
@@ -223,7 +230,7 @@ angular.module("PortalApp")
         };
         this.saveBlob = function (blob, fileName) {
 
-            var a = document.createElement("a");            
+            var a = document.createElement("a");
             a.style = "display: none";
             var xurl = window.URL.createObjectURL(blob);
             a.href = xurl;
@@ -237,7 +244,7 @@ angular.module("PortalApp")
         };
         this.toUTCLocaleDateString = function (d) {
             var tempDate = new Date(d);
-            return (tempDate.getUTCMonth()+1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
+            return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
         };
     }]);
 
@@ -339,7 +346,7 @@ angular.module('PortalApp')
                     console.log("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
                 });
         };
-            this.getShortSaleCaseByBBLE = function (bble, callback) {
+        this.getShortSaleCaseByBBLE = function (bble, callback) {
             var url = "/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=" + bble;
             $http.get(url)
                 .success(function (data) {
@@ -350,21 +357,20 @@ angular.module('PortalApp')
             );
 
         };
-            this.getBuyerTitle = function (bble, callback) {
+        this.getBuyerTitle = function (bble, callback) {
             var url = "/api/ShortSale/GetBuyerTitle?bble=";
             $http.get(url + bble)
             .then(function succ(res) {
-                if(callback) callback(null,res);
-                }, function error() {
+                if (callback) callback(null, res);
+            }, function error() {
                 if (callback) callback("Fail to get buyer title for bble: " + bble, null);
             });
-            };
-        }
+        };
+    }
     ]);
 
 angular.module('PortalApp')
-    .service('ptLeadsService', [
-    '$http', function ($http) {
+    .service('ptLeadsService', ["$http", function ($http) {
         this.getLeadsByBBLE = function (bble, callback) {
             var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + bble;
             $http.get(leadsInfoUrl)
@@ -374,12 +380,11 @@ angular.module('PortalApp')
                 console.log("Get Short sale Leads failed BBLE =" + bble + " error : " + JSON.stringify(data));
             });
         };
-        }
+    }
     ]);
 
 angular.module('PortalApp')
-    .factory('ptHomeBreakDownService', [
-    '$http', function ($http) {
+    .factory('ptHomeBreakDownService', ["$http", function ($http) {
         return {
             loadByBBLE: function (bble, callback) {
                 var url = '/ShortSale/ShortSaleServices.svc/LoadHomeBreakData?bble=' + bble;
@@ -405,11 +410,10 @@ angular.module('PortalApp')
 
             }
         };
-        }
+    }
     ]);
 angular.module('PortalApp')
     .service('ptFileService', function () {
-
         this.uploadFile = function (data, bble, rename, folder, type, callback) {
             switch (type) {
                 case 'construction':
@@ -424,7 +428,7 @@ angular.module('PortalApp')
 
             }
         };
-            this.uploadTitleFile = function (data, bble, rename, folder, callback) {
+        this.uploadTitleFile = function (data, bble, rename, folder, callback) {
             var fileName = rename ? rename : '';
             var folder = folder ? folder : '';
             if (!data || !bble) {
@@ -447,7 +451,7 @@ angular.module('PortalApp')
                 });
             }
         };
-            this.uploadConstructionFile = function (data, bble, rename, folder, callback) {
+        this.uploadConstructionFile = function (data, bble, rename, folder, callback) {
             var fileName = rename ? rename : '';
             var folder = folder ? folder : '';
             if (!data || !bble) {
@@ -470,7 +474,7 @@ angular.module('PortalApp')
                 });
             }
         };
-            this.getFileName = function (fullPath) {
+        this.getFileName = function (fullPath) {
             if (fullPath) {
                 if (this.isIE(fullPath)) {
                     var paths = fullPath.split('\\');
@@ -482,19 +486,19 @@ angular.module('PortalApp')
             }
             return '';
         };
-            this.getFileExt = function (fullPath) {
+        this.getFileExt = function (fullPath) {
             if (fullPath && fullPath.indexOf('.') > -1) {
                 var exts = fullPath.split('.');
                 return exts[exts.length - 1].toLowerCase();
             }
             return '';
         };
-            this.isPicture = function (fullPath) {
+        this.isPicture = function (fullPath) {
             var ext = this.getFileExt(fullPath);
             var pictureExts = ['jpg', 'jpeg', 'gif', 'bmp', 'png'];
             return pictureExts.indexOf(ext) > -1;
         };
-            this.getFileFolder = function (fullPath) {
+        this.getFileFolder = function (fullPath) {
             if (fullPath) {
                 var paths = fullPath.split('/');
                 var folderName = paths[paths.length - 2];
@@ -507,7 +511,7 @@ angular.module('PortalApp')
             }
             return '';
         };
-            this.makePreviewUrl = function (filePath) {
+        this.makePreviewUrl = function (filePath) {
             var ext = this.getFileExt(filePath);
             switch (ext) {
                 case 'pdf':
@@ -531,7 +535,7 @@ angular.module('PortalApp')
 
             }
         };
-            this.onFilePreview = function (filePath) {
+        this.onFilePreview = function (filePath) {
 
             var ext = this.getFileExt(filePath);
             switch (ext) {
@@ -564,33 +568,32 @@ angular.module('PortalApp')
 
             }
         };
-            this.resetFileElement = function (ele) {
+        this.resetFileElement = function (ele) {
             ele.val('');
             ele.wrap('<form>').parent('form').trigger('reset');
             ele.unwrap();
             ele.prop('files')[0] = null;
             ele.replaceWith(ele.clone());
         };
-            this.cleanName = function (filename) {
+        this.cleanName = function (filename) {
             return filename.replace(/[^a-z0-9_\-\.()]/gi, '_');
-            };
-            this.isIE = function (fileName) {
+        };
+        this.isIE = function (fileName) {
             return fileName.indexOf(':\\') > -1;
         };
-            this.getThumb = function (thumbId) {
+        this.getThumb = function (thumbId) {
             return '/downloadfile.aspx?thumb=' + thumbId;
 
         };
-            this.trunc = function (fileName, length) {
+        this.trunc = function (fileName, length) {
             return _.trunc(fileName, length);
 
         };
-        }
+    }
 );
 
 angular.module('PortalApp')
-    .service('ptConstructionService', [
-    '$http', function ($http) {
+    .service('ptConstructionService', ["$http", function ($http) {
         this.getConstructionCases = function (bble, callback) {
             var url = "/api/ConstructionCases/" + bble;
             $http.get(url)
@@ -600,7 +603,7 @@ angular.module('PortalApp')
                     console.log("Get Construction Data fails.");
                 });
         };
-            this.saveConstructionCases = function (bble, data, callback) {
+        this.saveConstructionCases = function (bble, data, callback) {
             if (bble && data) {
                 bble = bble.trim();
                 var url = "/api/ConstructionCases/" + bble;
@@ -612,48 +615,47 @@ angular.module('PortalApp')
                     });
             }
         };
-            this.getDOBViolations = function (bble, callback) {
+        this.getDOBViolations = function (bble, callback) {
             if (bble) {
                 var url = "/api/ConstructionCases/GetDOBViolations?bble=" + bble;
                 $http.get(url)
                 .success(function (res) {
                     if (callback) callback(null, res);
-                    }).error(function () {
+                }).error(function () {
                     if (callback) callback("load dob violations fails");
-                    });
+                });
             } else {
                 if (callback) callback("bble is missing");
             }
         };
-            this.getECBViolations = function (bble, callback) {
+        this.getECBViolations = function (bble, callback) {
             if (bble) {
                 var url = "/api/ConstructionCases/GetECBViolations?bble=" + bble;
                 $http.get(url)
                 .success(function (res) {
                     if (callback) callback(null, res);
-                    }).error(function () {
+                }).error(function () {
                     if (callback) callback("load ecb violations fails");
-                    });
+                });
             }
         };
-        }
+    }
     ]);
 
 angular.module('PortalApp')
-    .factory('ptLegalService', [
-    '$http', function () {
+    .factory('ptLegalService', ["$http", function () {
         return {
             load: function (bble, callback) {
                 var url = '/LegalUI/LegalUI.aspx/GetCaseData';
-                var data = { bble: bble };
+                var d = { bble: bble };
                 $.ajax({
                     type: "POST",
                     url: url,
-                    data: JSON.stringify(data),
+                    data: JSON.stringify(d),
                     dataType: 'json',
                     contentType: "application/json",
-                    success: function (data) {
-                        callback(null, data);
+                    success: function (res) {
+                        callback(null, res);
                     },
                     error: function () {
                         callback('load data fails');
@@ -662,7 +664,7 @@ angular.module('PortalApp')
             },
             savePreQuestions: function (bble, createBy, data, callback) {
                 var url = '/LegalUI/LegalServices.svc/StartNewLegalCase';
-                var data = {
+                var d = {
                     bble: bble,
                     casedata: JSON.stringify({ PreQuestions: data }),
                     createBy: createBy,
@@ -670,11 +672,11 @@ angular.module('PortalApp')
                 $.ajax({
                     type: "POST",
                     url: url,
-                    data: JSON.stringify(data),
-                    dataType: 'json',
+                    data: JSON.stringify(d),
+                    dataType: "json",
                     contentType: "application/json",
-                    success: function (data) {
-                        callback(null, data);
+                    success: function (res) {
+                        callback(null, res);
                     },
                     error: function () {
                         callback('load data fails');
@@ -682,7 +684,7 @@ angular.module('PortalApp')
                 });
             }
         };
-        }
+    }
     ]);
 angular.module('PortalApp')
     .factory('ptEntityService', function ($http) {

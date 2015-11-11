@@ -7,6 +7,14 @@
 <asp:Content runat="server" ContentPlaceHolderID="head"></asp:Content>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
+    <script>
+        /* immediately call to show the loading panel*/
+        (function () {
+            var loadingCover = document.getElementById("LodingCover");
+            loadingCover.style.display = "block";
+        })();
+
+    </script>
     <style>
         .dxgvControl_MetropolisBlue1 {
             width: auto !important;
@@ -25,7 +33,7 @@
         </div>
 
         <%-- data panel     --%>
-        <div ui-layout-container>
+        <div ui-layout-container id="dataPanelDiv">
             <asp:Panel ID="dataPane" runat="server">
                 <uc1:ConstructionUICtrl runat="server" ID="ConstructionUICtrl" />
             </asp:Panel>

@@ -203,7 +203,7 @@
 </script>
 <script>
     angular.module("PortalApp").controller("TitleController", function ($scope, $timeout,$http, ptCom, ptContactServices, ptLeadsService, ptShortsSaleService) {
-
+        /* model define*/
         $scope.OwnerModel = function (name){
             this.name=name;
             this.Mortgages= [{}];                   
@@ -227,7 +227,12 @@
                     ApprovalData: [{}]
                 }
             };
-        }; /* end model define*/
+        }; 
+        $scope.ReloadDataModel = function() {
+
+        }
+
+
         $scope.StatusList = [
             {
                 num: 0,
@@ -242,12 +247,11 @@
         $scope.ptContactServices = ptContactServices;
         $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); };
         $scope.Form = new $scope.FormModel();
-        $scope.ReloadedData = {};
-        /* end data define*/
+        $scope.ReloadedData = new $scope.ReloadDataModel();
 
         $scope.Load = function (data) {
             $scope.Form = new $scope.FormModel();
-            $scope.ReloadedData = {};
+            $scope.ReloadedData = new $scope.ReloadDataModel();
             ptCom.nullToUndefined(data);
             $.extend(true, $scope.Form, data);
             if(!$scope.Form.FormData.Owners[0].shownlist){
@@ -278,13 +282,6 @@
             return $scope.Form;
         }; /* end convention function */
 
-        $scope.swapOwnerPos = function (index) {
-            $timeout(function () {
-                var temp1 = $scope.Form.FormData.Owners[index];
-                $scope.Form.FormData.Owners[index] = $scope.Form.FormData.Owners[index - 1];
-                $scope.Form.FormData.Owners[index - 1] = temp1;
-            });
-        };
         $scope.checkReadOnly = function () {
             var ro = <%= ControlReadonly %>;
             if (ro) {

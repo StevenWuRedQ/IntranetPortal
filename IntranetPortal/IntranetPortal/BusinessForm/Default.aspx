@@ -7,7 +7,14 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
-
+    <script>
+        /* immediately call to show the loading panel*/
+        (function() {
+            var loadingCover = document.getElementById("LodingCover");
+            loadingCover.style.display = "block";
+        })();
+        
+    </script>
     <style>
         .dxgvControl_MetropolisBlue1 {
             width: auto !important;
@@ -17,14 +24,14 @@
             width: auto !important;
         }
     </style>
-    <div ui-layout="{flow: 'column'}" id="listPanelDiv">       
-            <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">
-                 <asp:Panel ID="listPanel" runat="server">
-                </asp:Panel>
-            </div>
-        
+    <div ui-layout="{flow: 'column'}" id="listPanelDiv">
+        <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">
+            <asp:Panel ID="listPanel" runat="server">
+            </asp:Panel>
+        </div>
 
-        <div ui-layout-container>
+
+        <div ui-layout-container id="dataPanelDiv">
             <asp:Panel runat="server" ID="dataPanel" ClientInstanceName="dataPanel">
                 <div class="legal-menu row" style="margin: 0">
                     <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
@@ -165,6 +172,7 @@
 
                         },
                         LoadData: function (dataId) {
+                            AngularRoot.startLoading();
                             var tab = this.CurrentTab;
                             var url = "/api/BusinessForm/" + tab.BusinessData + "/" + dataId
                             $.ajax({
@@ -178,9 +186,11 @@
                                     if(tab.EnableAutoSave){
                                         //auto save reset data
                                         ScopeResetCaseDataChange(angular.element(document.getElementById(tab.Name + 'Controller')).scope().Get);
-                                    }                                            
+                                    }
+                                    AngularRoot.stopLoading();
                                 },
                                 error: function (data) {
+                                    AngularRoot.stopLoading();
                                     AngularRoot.alert("Failed to load data." + data)
                                 }
                             });
@@ -221,7 +231,7 @@
 
                     $(function () {
                         FormControl.InitTab('<%= FormData.DefaultControl.Name%>', '<%= FormData.DefaultControl.BusinessData%>');
-                            });
+                    });
                 </script>
             </asp:Panel>
         </div>

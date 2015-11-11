@@ -107,8 +107,8 @@
             <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
         </div>
     </div>
-    <div id="ConstructionCtrl_loadPanel" dx-load-panel="{message:'uploading..', showIndicator: true,  position:{of: '#ConstructionCtrl'}, bindingOptions:{ visible: 'panelLoading' }}"></div>
 </div>
+
 <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
     HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true" CloseAction="CloseButton"
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -260,7 +260,7 @@
             $scope.clearWarning();
         }
         $scope.init = function (bble, callback) {
-            $scope.startLoading();
+            ptCom.startLoading();
             bble = bble.trim();
             $scope.reload();
             var done1, done2, done3, done4;
@@ -271,7 +271,7 @@
                 $scope.initWatchedModel();
                 done1 = true;
                 if (done1 && done2 && done3 & done4) {
-                    $scope.stopLoading();
+                    ptCom.stopLoading();
                     if (callback) callback();
                 }
                 ScopeSetLastUpdateTime($scope.GetTimeUrl());
@@ -281,7 +281,7 @@
                 $scope.SsCase = res;
                 done2 = true;
                 if (done1 && done2 && done3 & done4) {
-                    $scope.stopLoading();
+                    ptCom.stopLoading();
                     if (callback) callback();
                 }
 
@@ -291,7 +291,7 @@
                 $scope.LeadsInfo = res;
                 done3 = true;
                 if (done1 && done2 && done3 & done4) {
-                    $scope.stopLoading();
+                    ptCom.stopLoading();
                     if (callback) callback();
                 }
             });
@@ -305,7 +305,7 @@
                 }
                 done4 = true;
                 if (done1 && done2 && done3 & done4) {
-                    $scope.stopLoading();
+                    ptCom.stopLoading();
                     if (callback) callback();
                 }
             })
@@ -515,23 +515,6 @@
             })
         }
         /* end dob fetch */
-
-        /* loading panel */
-        $scope.panelLoading = false;
-        $scope.toggleLoading = function () {
-            $scope.panelLoading = !$scope.panelLoading;
-        }
-        $scope.startLoading = function () {
-            $scope.panelLoading = true;
-        }
-        $scope.stopLoading = function () {
-            $timeout(function () {
-                $scope.panelLoading = false;
-            });
-        }
-
-        /* end loading panel*/
-
 
         /* intakeComplete */
         $scope.test = $scope.checkIntake;

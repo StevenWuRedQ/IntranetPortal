@@ -22,9 +22,8 @@
     <script>
         /* immediately call to show the loading panel*/
         (function() {
-        var loadingCover = document.getElementById("LodingCover");
-        loadingCover.style.display = "block";
-
+            var loadingCover = document.getElementById("LodingCover");
+            loadingCover.style.display = "block";
         })();
         
     </script>
@@ -63,7 +62,7 @@
         <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">
                 <uc1:ShortSaleCaseList runat="server" ID="ShortSaleCaseList" />
         </div>
-        <div ui-layout-container>
+        <div ui-layout-container id="dataPanelDiv">
             <asp:Panel runat="server" ID="dataPanel">
                 <div class="shortSaleUI" style="align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
                     <asp:HiddenField ID="hfBBLE" runat="server" />
@@ -307,11 +306,12 @@
                                 <hr />
                                 <div class="pull-right">
                                     <button type="button" class="btn btn-danger" ng-click="approvalCancl()">Cancel </button>
-                                    &nbsp;<button type="button" class="btn btn-primary" ng-click="approvalSave()">Save </button>
+                                    &nbsp;
+                                    <button type="button" class="btn btn-primary" ng-click="approvalSave()">Save </button>
 
                                 </div>
+                            </div>
                         </div>
-                    </div>
                     </div>
 
                     <%-- Valuation Popup --%>
@@ -330,92 +330,92 @@
                         </div>
                         <div data-options="dxTemplate:{ name: 'content' }">
                             <tabset class="tab-switch">
-                                                                            <tab ng-repeat="valuation in SsCase.ValueInfoes|filter: {Pending: true} " heading={{$index+1}}>
-                                                                                <div class="text-right" ng-show="$index>-1"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="removePendingValue(valuation)" title="Delete"></i></div>
-                                                                                <div ng-show="Valuation_Show_Option==1||Valuation_Show_Option==2||Valuation_Show_Option==3">
-                                                                            <div class="row">
-                                                                                <div class="col-sm-6">Type of Valuation</div>
-                                                                                <div class="col-sm-5">
-                                                                                    <select class="form-control" ng-model="valuation.Method">
-                                                                                        <option></option>
-                                                                                        <option>AVM</option>
-                                                                                        <option>Exterior Appraisal</option>
-                                                                                        <option>Exterior BPO</option>
-                                                                                        <option>Interior Appraisal</option>
-                                                                                        <option>Interior BPO</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-sm-6">Date of Call</div>
-                                                                                <div class="col-sm-5">
+                            <tab ng-repeat="valuation in SsCase.ValueInfoes|filter: {Pending: true} " heading={{$index+1}}>
+                            <div class="text-right" ng-show="$index>-1"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="removePendingValue(valuation)" title="Delete"></i></div>
+                            <div ng-show="Valuation_Show_Option==1||Valuation_Show_Option==2||Valuation_Show_Option==3">
+                                <div class="row">
+                                    <div class="col-sm-6">Type of Valuation</div>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" ng-model="valuation.Method">
+                                            <option></option>
+                                            <option>AVM</option>
+                                            <option>Exterior Appraisal</option>
+                                            <option>Exterior BPO</option>
+                                            <option>Interior Appraisal</option>
+                                            <option>Interior BPO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Date of Call</div>
+                                    <div class="col-sm-5">
                                         <input type="text" class="form-control" ng-model="valuation.DateOfCall" ss-date />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-sm-6">BPO Agent</div>
-                                                                                <div class="col-sm-5">
-                                                                                    <input type="text" class="form-control" ng-model="valuation.AgentName" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-sm-6">Agent Phone #</div>
-                                                                                <div class="col-sm-5">
-                                                                                    <input type="text" class="form-control" ng-model="valuation.AgentPhone" />
-                                                                                </div>
-                                                                            </div>
-                                                                            <hr />
-                                                                        </div>
-                                                                                <div ng-show="Valuation_Show_Option==2||Valuation_Show_Option==3">
-                                                                            <div class="row">
-                                                                                <div class="col-sm-6">Date of Valuation</div>
-                                                                                <div class="col-sm-5">
-                                                                                    <input type="text" class="form-control" ng-model="valuation.DateOfValue" ss-date />
-                                                                                    
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-sm-6">Time of Valuation</div>
-                                                                                <div class="col-sm-5">
-                                                                                    <uib-timepicker show-spinners="false" ng-model="valuation.TimeOfValue"></uib-timepicker>  
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-sm-6">Access</div>
-                                                                                <div class="col-sm-5">
-                                                                                    <input type="text" class="form-control" ng-model="valuation.Access">
-                                                                                </div>
-                                                                            </div>
-                                                                            <hr />
-                                                                        </div>
-                                                                                <div ng-show="Valuation_Show_Option==3">
-                                                                            <div class="row">
-                                                                                <div class="col-sm-6">Valuation Completed</div>
-                                                                                <div class="col-sm-5">
-                                                                                    <select class="form-control" ng-model="valuation.IsValuationComplete">
-                                                                                        <option value="y">Yes</option>
-                                                                                        <option value="n">No</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row" ng-show="valuation.IsValuationComplete=='y'">
-                                                                                <div class="col-sm-6">Complete Date</div>
-                                                                                <div class="col-sm-5">
-                                                                                    <input type="text" class="form-control" ng-model="valuation.DateComplate">
-                                                                                </div>
-                                                                            </div>
-                                                                            <hr />
-                                                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">BPO Agent</div>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" ng-model="valuation.AgentName" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Agent Phone #</div>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" ng-model="valuation.AgentPhone" />
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+                            <div ng-show="Valuation_Show_Option==2||Valuation_Show_Option==3">
+                                <div class="row">
+                                    <div class="col-sm-6">Date of Valuation</div>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" ng-model="valuation.DateOfValue" ss-date />
 
-                                                                        <div class="pull-right">
-                                                                            <button type="button" class="btn btn-warning" ng-click="valuationCanl()">Cancel</button>
-                                                                            &nbsp;
-                                                                            <button type="button" class="btn btn-primary" ng-click="valuationSave()">Save</button>
-                                                                            &nbsp;
-                                                                            <button ng-show="Valuation_Show_Option==3" type="button" class="btn btn-success" ng-click="valuationCompl(valuation)">Complete</button>
-                                                                        </div>
-                                                                            </tab>
-                                                                        </tabset>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Time of Valuation</div>
+                                    <div class="col-sm-5">
+                                        <uib-timepicker show-spinners="false" ng-model="valuation.TimeOfValue"></uib-timepicker>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Access</div>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" ng-model="valuation.Access">
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+                            <div ng-show="Valuation_Show_Option==3">
+                                <div class="row">
+                                    <div class="col-sm-6">Valuation Completed</div>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" ng-model="valuation.IsValuationComplete">
+                                            <option value="y">Yes</option>
+                                            <option value="n">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="valuation.IsValuationComplete=='y'">
+                                    <div class="col-sm-6">Complete Date</div>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" ng-model="valuation.DateComplate">
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-warning" ng-click="valuationCanl()">Cancel</button>
+                                &nbsp;
+                                <button type="button" class="btn btn-primary" ng-click="valuationSave()">Save</button>
+                                &nbsp;
+                                <button ng-show="Valuation_Show_Option==3" type="button" class="btn btn-success" ng-click="valuationCompl(valuation)">Complete</button>
+                            </div>
+                            </tab>
+                            </tabset>
                         </div>
 
                     </div>
@@ -551,9 +551,9 @@
 
     <script type="text/javascript">
         AllContact = <%= GetAllContact()%>
-            function t() {
+        function t() {
 
-            }
+        }
         ALLTeam = <%= GetAllTeam()%>;
         function t() {
 
@@ -562,7 +562,7 @@
             NGGetShortSale(caseId);
             if (cbpLogs){                
                 cbpLogs.PerformCallback(caseId);
-        }
+            }
 
         }
 
@@ -663,14 +663,14 @@
 
                 $http.post('ShortSaleServices.svc/MoveToConstruction', JSON.stringify(data))
                     .success(function () {
-                            if (scuessfunc) {
-                                scuessfunc();
-                            } else {
-                                ptCom.alert("Move to Construction successful!");
-                            }
+                        if (scuessfunc) {
+                            scuessfunc();
+                        } else {
+                            ptCom.alert("Move to Construction successful!");
+                        }
                     }).error(function (data1, status) {
                         ptCom.alert("Fail to save data. status :" + status + "Error : " + JSON.stringify(data1));
-                        });
+                    });
             };
             $scope.MoveToTitle = function (scuessfunc) {
                 var json = $scope.SsCase;
@@ -678,14 +678,14 @@
 
                 $http.post('ShortSaleServices.svc/MoveToTitle', JSON.stringify(data))
                     .success(function () {
-                            if (scuessfunc) {
-                                scuessfunc();
-                            } else {
-                                ptCom.alert("Move to Title successful !");
-                            }
+                        if (scuessfunc) {
+                            scuessfunc();
+                        } else {
+                            ptCom.alert("Move to Title successful !");
+                        }
                     }).error(function (data1, status) {
                         ptCom.alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data1));
-                        });
+                    });
             }; // -- end --
 
             var cStore = new DevExpress.data.CustomStore({
@@ -797,31 +797,44 @@
                     console.log("Can not find case Id ");
                     return;
                 }
-                var url = "ShortSaleServices.svc/GetCase?caseId=" + caseId;
-                $http.get(url).
-                    success(function (data) {
+                ptCom.startLoading();
+                var done1, done2;
+                $http.get("ShortSaleServices.svc/GetCase?caseId=" + caseId)
+                    .success(function (data) {
                         $scope.SsCase = data;
                         leadsInfoBBLE = $scope.SsCase.BBLE;
                         window.caseId = caseId;
-                        var leadsInfoUrl = "ShortSaleServices.svc/GetLeadsInfo?bble=" + $scope.SsCase.BBLE;
-                        $http.get(leadsInfoUrl).
-                            success(function (data1) {
+ 
+                        $http.get("ShortSaleServices.svc/GetLeadsInfo?bble=" + $scope.SsCase.BBLE)
+                            .success(function (data1) {
                                 $scope.ReloadedData = {};
                                 $scope.SsCase.LeadsInfo = data1;
                                 $('#CaseData').val(JSON.stringify($scope.SsCase));
                                 ScopeSetLastUpdateTime(GetLasTUpDateURL());
+                                done1 = true;
+                                if (done1 && done2) {
+                                    ptCom.stopLoading();
+                                }
+
                             }).error(function (data1) {
+                                ptCom.stopLoading();
                                 ptCom.alert("Get Short sale Leads failed BBLE =" + $scope.SsCase.BBLE + " error : " + JSON.stringify(data1));
                             });
 
                         $http.get('/LegalUI/LegalServices.svc/GetLegalCase?bble=' + leadsInfoBBLE)
                             .success(function (data1) {
+
                                 $scope.LegalCase = data1;
+                                done2 = true;
+                                if (done1 && done2) {
+                                    ptCom.stopLoading();
+                                }
                             }).error(function (data1) {
+                                ptCom.stopLoading();
                                 console.log("Fail to load data : " + leadsInfoBBLE + " :" + JSON.stringify(data1)); // alert("Fail to load data : " + leadsInfoBBLE + " :" + 
-                      });
-                    }).
-                    error(function (data) {
+                            });
+                    }).error(function (data) {
+                        ptCom.stopLoading();
                         ptCom.alert("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
                     });
             };
@@ -974,10 +987,10 @@
                         for (var property in el) {
                             if (el.hasOwnProperty(property)) {
                                 newEl[property] = el[property];
+                            }
                         }
-                    }
                         $scope.oldPendingValues.push(newEl);
-            }
+                    }
                 });
             };
             $scope.checkPendingModified = function () {

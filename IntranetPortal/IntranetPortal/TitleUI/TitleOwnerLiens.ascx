@@ -4,12 +4,12 @@
 <uib-tabset class="tab-switch">
 <uib-tab ng-repeat="owner in Form.FormData.Owners track by owner.name" active="owner.active" disable="owner.disabled">
 <tab-heading>
-    <i class="fa fa-arrow-circle-left" ng-show="$index>0" ng-click="swapOwnerPos($index)"></i>
+    <i class="fa fa-arrow-circle-left" ng-show="false" ng-click="swapOwnerPos($index)"></i>
     {{owner.name}}
 </tab-heading>
 
     <div id="liens{{$index}}_content" class="ss_border" style="border-top: 0; min-height: 300px; position: relative">
-        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[0]" ng-click="setPopVisible(owner, 1)">
+        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[0]" ng-click="setPopVisible(owner, 1, $index)">
             <div class="panel-heading">Mortgages: {{owner.Mortgages_Status}}</div>
             <div class="panel-body">
                 <ul class="col-md-6" ng-repeat="mortgage in owner.Mortgages">
@@ -23,7 +23,7 @@
         </div>
 
         <div class="clearfix"></div>
-        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[1]" ng-click="setPopVisible(owner, 2)">
+        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[1]" ng-click="setPopVisible(owner, 2, $index)">
             <div class="panel-heading">Lis Pendens:</div>
             <div class="panel-body">
                 <ul class="col-md-6" ng-repeat="lis_penden in owner.Lis_Pendens">
@@ -39,7 +39,7 @@
         </div>
 
         <div class="clearfix"></div>
-        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[2]" ng-click="setPopVisible(owner, 3)">
+        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[2]" ng-click="setPopVisible(owner, 3, $index)">
             <div class="panel-heading">Judgement:</div>
             <div class="panel-body">
                 <ul class="col-md-6" ng-repeat="judgement in owner.Judgements">
@@ -55,7 +55,7 @@
         </div>
 
         <div class="clearfix"></div>
-        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[3]" ng-click="setPopVisible(owner, 4)">
+        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[3]" ng-click="setPopVisible(owner, 4, $index)">
             <div class="panel-heading">ECB:</div>
             <div class="panel-body">
                 <ul class="col-md-6" ng-repeat="n in owner.ECB_Notes">
@@ -68,7 +68,7 @@
         </div>
 
         <div class="clearfix"></div>
-        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[4]" ng-click="setPopVisible(owner, 5)">
+        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[4]" ng-click="setPopVisible(owner, 5, $index)">
             <div class="panel-heading">PVB:</div>
             <div class="panel-body">
                 <ul class="col-md-6" ng-repeat="n in owner.PVB_Notes">
@@ -80,7 +80,7 @@
         </div>
 
         <div class="clearfix"></div>
-        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[5]" ng-click="setPopVisible(owner, 6)">
+        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[5]" ng-click="setPopVisible(owner, 6, $index)">
             <div class="panel-heading">Bankruptcy:</div>
             <div class="panel-body">
                 <ul class="col-md-6" ng-repeat="n in owner.Bankruptcy_Notes">
@@ -92,7 +92,7 @@
         </div>
 
         <div class="clearfix"></div>
-        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[6]" ng-click="setPopVisible(owner, 7)">
+        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[6]" ng-click="setPopVisible(owner, 7, $index)">
             <div class="panel-heading">UCC:</div>
             <div class="panel-body">
                 <ul class="col-md-6" ng-repeat="ucc in owner.UCCs">
@@ -108,7 +108,7 @@
         </div>
 
         <div class="clearfix"></div>
-        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[7]" ng-click="setPopVisible(owner, 8)">
+        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[7]" ng-click="setPopVisible(owner, 8, $index)">
             <div class="panel-heading">Federal Tax: </div>
             <div class="panel-body">
                 <ul class="col-md-6" ng-repeat="federalTaxLien in owner.FederalTaxLiens">
@@ -122,7 +122,7 @@
         </div>
 
         <div class="clearfix"></div>
-        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[8]" ng-click="setPopVisible(owner, 9)">
+        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[8]" ng-click="setPopVisible(owner, 9, $index)">
             <div class="panel-heading">Mechanics Lien:</div>
             <div class="panel-body">
                 <ul class="col-md-6" ng-repeat="mechanicsLien in owner.MechanicsLiens">
@@ -137,7 +137,7 @@
         </div>
 
         <div class="clearfix"></div>
-        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[9]" ng-click="setPopVisible(owner, 10)">
+        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[9]" ng-click="setPopVisible(owner, 10, $index)">
             <div class="panel-heading">TAX LIEN SALE CERT:</div>
             <div class="panel-body">
                 <ul class="col-md-6" ng-repeat="taxLiensSaleCert in owner.TaxLiensSaleCerts">
@@ -150,7 +150,7 @@
         </div>
 
         <div class="clearfix"></div>
-        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[10]" ng-click="setPopVisible(owner, 11)">
+        <div class="panel panel-default panel-condensed" ng-show="owner.shownlist[10]" ng-click="setPopVisible(owner, 11, $index)">
             <div class="panel-heading">Vacate/ Relocation Lien:</div>
             <div class="panel-body">
                 <ul class="col-md-6" ng-repeat="vacateRelocationLien in owner.VacateRelocationLiens">
@@ -163,8 +163,8 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary text-center" ng-show="!showWatermark(owner.shownlist)" ng-click="setPopVisible(owner)"><i class="fa fa-eye"></i>Modify Showing</button>
-        <span class="watermark" style="position: relative; top: 140px; left: 280px" ng-show="showWatermark(owner.shownlist)" ng-click="setPopVisible(owner)">Show Form</span>
+        <button type="button" class="btn btn-primary text-center" ng-show="!showWatermark(owner.shownlist)" ng-click="setPopVisible(owner,0, $index)"><i class="fa fa-eye"></i>Modify Showing</button>
+        <span class="watermark" style="position: relative; top: 140px; left: 280px" ng-show="showWatermark(owner.shownlist)" ng-click="setPopVisible(owner, 0, $index)">Show Form</span>
 
         <div dx-popup="{
                         height: 768,
@@ -172,11 +172,11 @@
                         showTitle: false,
                         dragEnabled: true,
                         shading: true,
-                        bindingOptions: { visible: 'Form.FormData.Owners[' + $index + '].popVisible' }
+                        bindingOptions: { visible: 'OwnerLienPopup[' + $index + ']' }
         }">
             <div data-options="dxTemplate:{ name: 'content' }">
 
-                <div ng-show="owner.popVisible && owner.popStep==0">
+                <div ng-show="OwnerLienPopup[$index] && owner.popStep==0">
                     <h4><b>Please select the content you want to show.</b></h4>
                     <br />
                     <table class="table table-condensed">
@@ -238,7 +238,7 @@
                     </table>
                 </div>
 
-                <div class="ss_form" ng-show="owner.popVisible && owner.popStep==1">
+                <div class="ss_form" ng-show="OwnerLienPopup[$index] && owner.popStep==1">
                     <h4 class="ss_form_title ">Mortgages&nbsp;
                     <pt-add style="padding-top: 8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].Mortgages')"></pt-add>
                     </h4>
@@ -274,7 +274,7 @@
                     </div>
                 </div>
 
-                <div class="ss_form" ng-show="owner.popVisible && owner.popStep==2">
+                <div class="ss_form" ng-show="OwnerLienPopup[$index] && owner.popStep==2">
                     <h4 class="ss_form_title">Lis Pendens&nbsp;
                     <pt-add style="padding-top: 8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].Lis_Pendens')"></pt-add>
                     </h4>
@@ -317,7 +317,7 @@
                     </div>
                 </div>
 
-                <div class="ss_form" ng-show="owner.popVisible && owner.popStep==3">
+                <div class="ss_form" ng-show="OwnerLienPopup[$index] && owner.popStep==3">
                     <h4 class="ss_form_title ">Judgements&nbsp;
                         <pt-add style="padding-top: 8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].Judgements')"></pt-add>
                     </h4>
@@ -360,7 +360,7 @@
                     </div>
                 </div>
 
-                <div class="ss_form" ng-show="owner.popVisible && owner.popStep==4">
+                <div class="ss_form" ng-show="OwnerLienPopup[$index] && owner.popStep==4">
                     <h4 class="ss_form_title">ECB&nbsp;
                         <pt-add style="padding-top: 8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].ECB_Notes')"></pt-add>
                     </h4>
@@ -389,7 +389,7 @@
                     </div>
                 </div>
 
-                <div class="ss_form" ng-show="owner.popVisible && owner.popStep==5">
+                <div class="ss_form" ng-show="OwnerLienPopup[$index] && owner.popStep==5">
                     <h4 class="ss_form_title ">PVB&nbsp;
                     <pt-add style="padding-top: 8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].PVB_Notes')"></pt-add>
                     </h4>
@@ -412,7 +412,7 @@
                     </div>
                 </div>
 
-                <div class="ss_form" ng-show="owner.popVisible && owner.popStep==6">
+                <div class="ss_form" ng-show="OwnerLienPopup[$index] && owner.popStep==6">
                     <h4 class="ss_form_title ">Bankruptcy and Patriot&nbsp;
                         <pt-add style="padding-top: 8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].Bankruptcy_Notes')" ng-show="owner.Bankruptcy_Show"></pt-add>
                     </h4>
@@ -434,7 +434,7 @@
                     </div>
                 </div>
 
-                <div class="ss_form" ng-show="owner.popVisible && owner.popStep==7">
+                <div class="ss_form" ng-show="OwnerLienPopup[$index] && owner.popStep==7">
                     <h4 class="ss_form_title">UCC&nbsp;
                         <pt-add style="padding-top: 8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].UCCs')"></pt-add>
                     </h4>
@@ -474,7 +474,7 @@
                     </div>
                 </div>
 
-                <div class="ss_form" ng-show="owner.popVisible && owner.popStep==8">
+                <div class="ss_form" ng-show="OwnerLienPopup[$index] && owner.popStep==8">
                     <h4 class="ss_form_title">Federal Tax Liens&nbsp;
                     <pt-add style="padding-top: 8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].FederalTaxLiens')"></pt-add>
                     </h4>
@@ -506,7 +506,7 @@
                     </div>
                 </div>
 
-                <div class="ss_form" ng-show="owner.popVisible && owner.popStep==9">
+                <div class="ss_form" ng-show="OwnerLienPopup[$index] && owner.popStep==9">
                     <h4 class="ss_form_title">Mechanics Lien&nbsp;
                     <pt-add style="padding-top: 8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].MechanicsLiens')"></pt-add>
                     </h4>
@@ -543,7 +543,7 @@
                     </div>
                 </div>
 
-                <div class="ss_form" ng-show="owner.popVisible && owner.popStep==10">
+                <div class="ss_form" ng-show="OwnerLienPopup[$index] && owner.popStep==10">
                     <h4 class="ss_form_title">TAX LIEN SALE CERT&nbsp;
                     <pt-add style="padding-top: 8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].TaxLiensSaleCerts')"></pt-add>
                     </h4>
@@ -571,7 +571,7 @@
                     </div>
                 </div>
 
-                <div class="ss_form" ng-show="owner.popVisible && owner.popStep==11">
+                <div class="ss_form" ng-show="OwnerLienPopup[$index] && owner.popStep==11">
                     <h4 class="ss_form_title">Vacate/ Relocation Lien&nbsp;
                     <pt-add style="padding-top: 8px" ng-click="ensurePush('Form.FormData.Owners['+$index+'].VacateRelocationLiens')"></pt-add>
                     </h4>
@@ -610,9 +610,9 @@
 
                 <div style="position: absolute; bottom: 10px; width: 95%">
                     <hr />
-                    <button type="button" class="btn btn-primary" ng-click="previous(owner)" ng-disabled="!showPrevious(owner)">Previous</button>
-                    <button type="button" class="btn btn-primary" ng-click="next(owner)" ng-disabled="!showNext(owner)">Next</button>
-                    <button type="button" class="btn btn-danger pull-right" ng-click="setPopHide(owner)">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="previous(owner, $index)" ng-disabled="!showPrevious(owner)">Previous</button>
+                    <button type="button" class="btn btn-primary" ng-click="next(owner, $index)" ng-disabled="!showNext(owner)">Next</button>
+                    <button type="button" class="btn btn-danger pull-right" ng-click="setPopHide(owner, $index)">Close</button>
                 </div>
             </div>
         </div>
@@ -623,30 +623,31 @@
 </div>
 
 <script>
-    angular.module("PortalApp").controller('TitleLienCtrl', function ($scope, ptCom) {
+    angular.module("PortalApp").controller('TitleLienCtrl', function ($scope, ptCom, $timeout) {
         $scope.Form = $scope.$parent.Form;
+        $scope.OwnerLienPopup = [false, false];
 
         $scope.reload = function () {
             $scope.Form = $scope.$parent.Form;
+            $scope.OwnerLienPopup = [false, false];
         }
 
-        $scope.setPopVisible = function (model, step) {
-
-            model.popVisible = true;
+        $scope.setPopVisible = function (model, step, index) {
+            $scope.OwnerLienPopup[index] = true;
             model.popStep = step ? step : 0;
 
         }
 
-        $scope.setPopHide = function (model) {
-            model.popVisible = false;
+        $scope.setPopHide = function (model, index) {
+            $scope.OwnerLienPopup[index] = false;
             model.popStep = 0;
         }
 
         $scope.showWatermark = function (model) {
             var result = true;
-            _.each(model, function (n) {
-                result &= !n
-            })
+            _.each(model, function(n) {
+                result &= !n;
+            });
             return result;
         }
 
@@ -654,12 +655,12 @@
             var step = model.popStep;
             return ptCom.next(model.shownlist, true, step) >= 0;
         }
-        $scope.next = function (model) {
+        $scope.next = function (model, index) {
             var step = model.popStep;
             if ($scope.showNext(model)) {
                 model.popStep = ptCom.next(model.shownlist, true, step) + 1;
             } else {
-                $scope.setPopHide(model);
+                $scope.setPopHide(model, index);
             }
 
         }
@@ -668,17 +669,24 @@
             return ptCom.previous(model.shownlist, true, step) >= 0;
         }
 
-        $scope.previous = function (model) {
+        $scope.previous = function (model, index) {
             var step = model.popStep;
             if ($scope.showPrevious(model)) {
                 model.popStep = ptCom.previous(model.shownlist, true, step - 1) + 1;
             } else {
-                $scope.setPopHide(model);
+                $scope.setPopHide(model, index);
             }
         }
 
-        $scope.$on('ownerliens-reload', function (e, args) {
+        $scope.$on('ownerliens-reload', function(e, args) {
             $scope.reload();
-        })
+        });
+        $scope.swapOwnerPos = function (index) {
+            $timeout(function () {
+                var temp1 = $scope.Form.FormData.Owners[index];
+                $scope.Form.FormData.Owners[index] = $scope.Form.FormData.Owners[index - 1];
+                $scope.Form.FormData.Owners[index - 1] = temp1;
+            });
+        };
     })
 </script>
