@@ -23,15 +23,6 @@ Partial Public Class NGShortSale
     Protected WithEvents hfIsEvction As Global.System.Web.UI.WebControls.HiddenField
     
     '''<summary>
-    '''LodingCover control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents LodingCover As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
     '''listdiv control.
     '''</summary>
     '''<remarks>

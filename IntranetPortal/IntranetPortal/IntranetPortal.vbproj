@@ -2627,6 +2627,7 @@
     <Content Include="images\agent_overview_icon.png" />
     <Content Include="images\agent_pic_defined.png" />
     <Content Include="images\agent_reports_tab.png" />
+    <Content Include="images\ajax-loader.gif" />
     <Content Include="images\Arrows-Down-icon.png" />
     <Content Include="images\Arrows-Up-icon.png" />
     <Content Include="images\arrow_down.png" />
@@ -5822,6 +5823,7 @@
     <Content Include="bower_components\ngMask\LICENSE" />
     <Content Include="bower_components\ngMask\package.json" />
     <Content Include="bower_components\ngMask\README.md" />
+    <Content Include="JSLintNet.json" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />

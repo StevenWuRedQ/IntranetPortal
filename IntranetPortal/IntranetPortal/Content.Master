@@ -5,6 +5,25 @@
 <html id="rootMaster" xmlns="http://www.w3.org/1999/xhtml" xmlns:ng="http://angularjs.org" ng-app="PortalApp">
 <head runat="server">
 	<title></title>
+	<style>
+		
+	
+			/* cover page to hide the main content */
+		.LoadingCover {
+			position: absolute;
+			background-image :url("/images/ajax-loader.gif");
+			background-repeat: no-repeat;
+			background-attachment:fixed;
+			background-position: center;
+			-ms-background-size: 260px, 280px;
+			background-size: 260px, 280px;
+			background-color: rgba(0,0,0, 0.6);
+			width: 100%;
+			height: 100%;
+			z-index: 99;
+		}
+	</style>
+	
 	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
@@ -56,46 +75,49 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
 	-->
 	<script>
+
+
 		var portalApp = angular.module('PortalApp', ['ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout']);
-		portalApp.controller('MainCtrl', function ($rootScope, $uibModal) {
+		portalApp.controller('MainCtrl', function($rootScope, $uibModal) {
 			$rootScope.AlertModal = null;
 			$rootScope.ConfirmModal = null;
 
-			$rootScope.alert = function (message) {
+			$rootScope.alert = function(message) {
 				$rootScope.alertMessage = message ? message : '';
 				$rootScope.AlertModal = $uibModal.open({
 					templateUrl: 'AlertModal',
-				})
+				});
 			}
 
-			$rootScope.alertOK = function () {
+			$rootScope.alertOK = function() {
 				$rootScope.AlertModal.close();
 			}
 
-			$rootScope.confirm = function (message) {
+			$rootScope.confirm = function(message) {
 				$rootScope.confirmMessage = message ? message : '';
 				$rootScope.ConfirmModal = $uibModal.open({
 					templateUrl: 'ConfirmModal'
-				})
+				});
 				return $rootScope.ConfirmModal.result;
 			}
 
-			$rootScope.confirmYes = function () {
+			$rootScope.confirmYes = function() {
 				$rootScope.ConfirmModal.close(true);
 			}
 
-			$rootScope.confirmNo = function () {
+			$rootScope.confirmNo = function() {
 				$rootScope.ConfirmModal.close(false);
 			}
 
-			$rootScope.addOverlay = function (divId) {
-				$("#" + divId).addClass("overlay");
+
+			$rootScope.showLoading = function(divId) {
+				$(loadingCover).show();
 			}
 
-			$rootScope.removeOverLay = function (divId) {
-				$("#" + divId).removeClass("overlay");
+			$rootScope.hideLoading = function(divId) {
+				$(loadingCover).hide();
 			}
-		})
+		});
 	</script>
 	<script src="/Scripts/filters.js"></script>
 	<script src="/Scripts/services.js"></script>
@@ -106,6 +128,7 @@
 
 </head>
 <body style="width: 100%" ng-controller="MainCtrl">
+	<div class="LoadingCover" id="LodingCover" style="display: none"></div>
 	<form id="form1" runat="server">
 		<asp:ContentPlaceHolder ID="MainContentPH" runat="server">
 		</asp:ContentPlaceHolder>
@@ -136,22 +159,27 @@
 			<button class="btn btn-danger" type="button" ng-click="confirmNo()">No</button>
 		</div>
 	</script>
-
 	<script src="/Scripts/stevenjs.js"></script>
 	<script src="/Scripts/autologout.js"></script>
 	<script>
+		/**
+		* main point to access MainCtrl scope
+		*/
 		var AngularRoot;
-		$(function () {
-			AngularRoot = function () {
+		$(function() {
+			AngularRoot = function() {
 				var scope = angular.element(document.body).injector().get('$rootScope');
-				var alert = scope.alert;
-				var confirm = scope.confirm;
 				return {
-					alert: alert,
-					confirm: confirm
+					alert: scope.alert,
+					confirm: scope.confirm,
+					showLoading: scope.showLoading,
+					hideLoading: scope.hideLoading
+
 				}
 			}();
-		})
+			AngularRoot.hideLoading();
+		});
+
 	</script>
 </body>
 </html>

@@ -192,16 +192,16 @@
                         $scope.Fields = res.data[0].Fields;
                         $scope.BaseTable = res.data[0].BaseTable;
                         $scope.IncludeAppId = res.data[0].IncludeAppId;
-                        if (callback) callback()
-                    })
+                        if (callback) callback();
+                    });
                 $scope.loadSavedReport();
             };
             $scope.loadSavedReport = function () {
                 $http.get("/api/Report/Load")
                     .then(function (res) {
                         $scope.SavedReports = res.data;
-                    })
-            }
+                    });
+            };
             $scope.deleteSavedReport = function (q) {
                 var _confirm = confirm("Are you sure to delete?");
                 if (_confirm) {
@@ -212,52 +212,48 @@
                         }).then(function (res) {
                             $scope.reload();
                             alert("Delete Success.");
-                        })
+                        });
                     } else {
                         alert("Delete Fails!");
                     }
                 }
 
-            }
-
-            // load saved query
+            }; // load saved query
             $scope.load = function (q) {
                 $scope.reload(
                     function () {
                         if (q.ReportId) {
                             $http.get("/api/Report/Load/" + q.ReportId)
                             .then(function (res) {
-                                var data = res.data
-                                $scope.CurrentQuery = data;
+                                var data = res.data;
+                                    $scope.CurrentQuery = data;
                                 $scope.Fields = JSON.parse(data.Query);
                                 $scope.generate();
                                 
                                 var gridState = JSON.parse(data.Layout);
                                 $("#queryReport").dxDataGrid("instance").state(gridState);
-                            })
+                            });
                         }
                     }
                 );
-            }
-
+            };
             $scope.camel = _.camelCase;
 
             $scope.someCheck = function (category) {
-                return _.some(category.fields, { checked: true })
-            }
+                return _.some(category.fields, { checked: true });
+            };
             $scope.addFilter = function (f) {
-                if (!f.filters) f.filters = []
-                f.filters.push({})
-            }
+                if (!f.filters) f.filters = [];
+                f.filters.push({});
+            };
             $scope.removeFilter = function (f, i) {
                 f.filters.splice(i, 1);
-            }
-
+            };
             $scope.updateStringFilter = function (x) {
                 if (!x.criteria || !x.input1) {
-                    x.WhereTerm = ""
-                    x.CompareOperator = ""
-                    x.value1 = ""
+                    x.WhereTerm = "";
+                    x.CompareOperator = "";
+                    x.value1 = "";
                     return;
                 } else {
                     switch (x.criteria) {
@@ -277,17 +273,17 @@
                             x.value1 = "%" + x.input1.trim() + "%";
                             break;
                         default:
-                            x.WhereTerm = ""
-                            x.CompareOperator = ""
-                            x.value1 = ""
+                            x.WhereTerm = "";
+                            x.CompareOperator = "";
+                            x.value1 = "";
                     }
                 }
-            }
+            };
             $scope.updateDateFilter = function (x) {
                 if (!x.criteria || !x.input1) {
-                    x.WhereTerm = ""
-                    x.CompareOperator = ""
-                    x.value1 = ""
+                    x.WhereTerm = "";
+                    x.CompareOperator = "";
+                    x.value1 = "";
                     return;
                 } else {
                     switch (x.criteria) {
@@ -307,13 +303,13 @@
                             x.value1 = x.input1;
                             break;
                         default:
-                            x.WhereTerm = ""
-                            x.CompareOperator = ""
-                            x.value1 = ""
+                            x.WhereTerm = "";
+                            x.CompareOperator = "";
+                            x.value1 = "";
                     }
                 }
 
-            }
+            };
             $scope.updateNumberFilter = function (x) {
 
                 if (!x.criteria || !x.input1 || (x.criteria == "5" && !x.input2)) {
@@ -361,7 +357,7 @@
                             x.value2 = "";
                     }
                 }
-            }
+            };
             $scope.updateListFilter = function (x) {
                 if (!x.input1 || x.input1.length < 1) {
                     x.WhereTerm = "";
@@ -372,9 +368,9 @@
                     x.CompareOperator = "";
                     x.value1 = x.input1;
                 }
-            }
+            };
             $scope.filterDate = function (model) {
-                var dtPatn = /\d{4}-\d{2}-\d{2}/
+                var dtPatn = /\d{4}-\d{2}-\d{2}/;
                 if (model) {
                     _.each(model, function (el, idx) {
                         if (el) {
@@ -382,12 +378,12 @@
                                 if (v && typeof(v) === 'string' && v.match(dtPatn)) {
                                     el[k] = ptCom.toUTCLocaleDateString(v);
                                 }
-                            })
+                            });
                         }
 
-                    })
+                    });
                 }
-            }
+            };
             $scope.updateBooleanFilter = function (x) {
                 if (!x.input1) {
                     x.WhereTerm = "";
@@ -411,13 +407,11 @@
                             x.value1 = "";
                     }
                 }
-            }
-
-
+            };
             $scope.onSaveQueryPopCancel = function () {
                 $scope.NewQueryName = '';
                 $scope.SaveQueryPop = false;
-            }
+            };
             $scope.onSaveQueryPopSave = function () {
                 if (!$scope.NewQueryName) {
                     alert("New query name is empty!");
@@ -442,16 +436,14 @@
                     }).then(function (res) {
                         $scope.NewQueryName = '';
                         $scope.SaveQueryPop = false;
-                        $scope.reload()
-                        alert("Save successful!")
-                    })
-
+                        $scope.reload();
+                        alert("Save successful!");
+                    });
                 }
-            }
-
+            };
             $scope.update = function () {
 
-                data = $scope.CurrentQuery;
+                var data = $scope.CurrentQuery;
 
                 data.Query = JSON.stringify($scope.Fields);
                 data.sqlText = $scope.sqlText;
@@ -466,11 +458,10 @@
                 }).then(function (res) {
                     $scope.NewQueryName = '';
                     $scope.SaveQueryPop = false;
-                    $scope.reload()
-                    alert("Save successful!")
-                })
-            }
-
+                    $scope.reload();
+                    alert("Save successful!");
+                });
+            };
             $scope.isBindColumn = function (f) {
 
                 if (!f.table || !f.column) {
@@ -478,26 +469,25 @@
                 } else {
                     return true;
                 }
-            }
-
+            };
             $scope.next = function () {
                 $scope.step = $scope.step + 1;
-            }
+            };
             $scope.prev = function () {
                 $scope.step = $scope.step - 1;
-            }
+            };
             $scope.generate = function () {
 
                 var result = [];
                 var BaseTable = $scope.BaseTable ? $scope.BaseTable : '';
-                var IncludeAppId = $scope.IncludeAppId?$scope.IncludeAppId: ''
+                var IncludeAppId = $scope.IncludeAppId?$scope.IncludeAppId: '';
                 _.each($scope.Fields, function (el, i) {
                     _.each(el.fields, function (el, i) {
                         if (el.checked) {
                             result.push(el);
                         }
-                    })
-                })
+                    });
+                });
                 if (result.length > 0) {
                     $scope.step = 3;
                     $http({
@@ -505,16 +495,15 @@
                         url: "/api/Report/QueryData?baseTable=" + BaseTable + "&includeAppId=" + IncludeAppId,
                         data: JSON.stringify(result),
                     }).then(function (res) {
-                        var rdata = res.data[0]
+                        var rdata = res.data[0];
                         var xdata = $scope.filterDate(rdata);
                         $scope.reportData = rdata;
                         $scope.sqlText = res.data[1];
-                    })
+                    });
                 } else {
                     alert("Query is empty!");
                 }
-            }
-
+            };
             $scope.reload();
         });
 

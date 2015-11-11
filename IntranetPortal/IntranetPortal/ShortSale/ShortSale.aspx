@@ -1,9 +1,7 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ShortSale.aspx.vb" Inherits="IntranetPortal.NGShortSale" MasterPageFile="~/Content.Master" %>
 
 <%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>
-<%@ Register Src="~/UserControl/LeadsList.ascx" TagPrefix="uc1" TagName="LeadsList" %>
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
-<%@ Register Src="~/ShortSale/ShortSaleOverVew.ascx" TagPrefix="uc1" TagName="ShortSaleOverVew" %>
 <%@ Register Src="~/ShortSale/TitleControl.ascx" TagPrefix="uc1" TagName="Title" %>
 <%@ Register Src="~/ShortSale/ShortSaleCaseList.ascx" TagPrefix="uc1" TagName="ShortSaleCaseList" %>
 <%@ Register Src="~/ShortSale/SelectPartyUC.ascx" TagPrefix="uc1" TagName="SelectPartyUC" %>
@@ -19,7 +17,14 @@
     <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/jquery.webui-popover.js"></script>
 </asp:Content>
+
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
+    <script>
+        /* immediately call to show the loading panel*/
+        var loadingCover = document.getElementById("LodingCover");
+        loadingCover.style.display = "block";
+    </script>
+
     <style>
         .dxgvControl_MetropolisBlue1 {
             width: auto !important;
@@ -29,15 +34,6 @@
             width: auto !important;
         }
 
-        .LoadingCover {
-            position: absolute;
-            background-image:url(/images/MyIdealProptery.png) no-repeat center fixed;
-            background-size: 260px, 280px;
-            background-color: #dddddd;
-            width: 100%;
-            height: 100%;
-            z-index: 99;
-        }
     </style>
     <script type="text/javascript">
         var caseId = null;
@@ -60,7 +56,8 @@
         }
     </script>
     <asp:HiddenField runat="server" ID="hfIsEvction" Value="false" />
-    <div runat="server" class="LoadingCover" id="LodingCover"></div>
+
+
     <div ui-layout="{flow: 'column'}">
         <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">
             <asp:Panel runat="server" ID="listPanel">
@@ -566,8 +563,8 @@
             if (cbpLogs)
             {                
                 cbpLogs.PerformCallback(caseId);
-            }
-                
+        }
+
         }
 
         function OnSuccess(response) {

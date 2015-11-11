@@ -182,24 +182,23 @@
     angular.module("PortalApp").controller("CommentCtrl", function ($scope, $timeout) {
         $scope.showPopover = function (e) {
             aspxConstructionCommentsPopover.ShowAtElement(e.target);
-        }
+        };
         $scope.addComment = function (comment) {
-            var newComments = {}
+            var newComments = {};
             newComments.comment = comment;
             newComments.caseId = $scope.CaseId;
             newComments.createBy = '<%= Page.User.Identity.ToString %>';
             newComments.createDate = new Date();
             $scope.Form.FormData.Comments.push(newComments);
-        }
+        };
         $scope.addCommentFromPopup = function () {
             var comment = $scope.addCommentTxt;
             $scope.addComment(comment);
             $scope.addCommentTxt = '';
-        }
+        };
         $scope.$on('titleComment', function(e, args){
-            $scope.addComment(args.message)
-        })
-        /* end comments */
+            $scope.addComment(args.message);
+        }); /* end comments */
     })
 </script>
 <script>
@@ -216,11 +215,10 @@
             this.UCCs= [{}];
             this.FederalTaxLiens= [{}];
             this.MechanicsLiens= [{}];
-            this.TaxLiensSaleCerts = [{}]
-            this.VacateRelocationLiens = [{}]
-            this.shownlist = [false,false,false,false,false,false,false,false,false,false,false]            
-           
-        }
+            this.TaxLiensSaleCerts = [{}];
+            this.VacateRelocationLiens = [{}];
+            this.shownlist = [false,false,false,false,false,false,false,false,false,false,false];
+        };
         $scope.FormModel = function(){
             this.FormData =  {
                 Comments: [],
@@ -228,9 +226,8 @@
                 preclosing: {
                     ApprovalData: [{}]
                 }
-            }
-        }
-        /* end model define*/
+            };
+        }; /* end model define*/
         $scope.StatusList = [
             {
                 num: 0,
@@ -239,17 +236,17 @@
                 num: 1,
                 desc: 'Clearance'
             }
-        ]
+        ];
         $scope.arrayRemove = ptCom.arrayRemove;
         $scope.ptCom = ptCom;
         $scope.ptContactServices = ptContactServices;
-        $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
+        $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); };
         $scope.Form = new $scope.FormModel();
         $scope.ReloadedData = {};
         /* end data define*/
 
         $scope.Load = function (data) {
-            $scope.Form = new $scope.FormModel()
+            $scope.Form = new $scope.FormModel();
             $scope.ReloadedData = {};
             ptCom.nullToUndefined(data);
             $.extend(true, $scope.Form, data);
@@ -273,33 +270,31 @@
 
             $scope.checkReadOnly();
             $scope.$apply();
-        }
+        };
         $scope.Get = function (isSave) {
             if(isSave){
                 $scope.updateBuyerTitle();
             }            
             return $scope.Form;
-        }
-        /* end convention function */
+        }; /* end convention function */
 
         $scope.swapOwnerPos = function (index) {
             $timeout(function () {
                 var temp1 = $scope.Form.FormData.Owners[index];
-                $scope.Form.FormData.Owners[index] = $scope.Form.FormData.Owners[index - 1]
+                $scope.Form.FormData.Owners[index] = $scope.Form.FormData.Owners[index - 1];
                 $scope.Form.FormData.Owners[index - 1] = temp1;
-            })
-
-        }
+            });
+        };
         $scope.checkReadOnly = function () {
             var ro = <%= ControlReadonly %>;
             if (ro) {
                 $("#TitleUIContent input").attr("disabled", true);
                 if ($("#TitleROBanner").length == 0) {
-                    $("#title_prioity_content").before("<div class='barner-warning text-center' id='TitleROBanner' >Readonly</div>")
+                    $("#title_prioity_content").before("<div class='barner-warning text-center' id='TitleROBanner' >Readonly</div>");
                 }
                 
             }
-        }
+        };
         $scope.completeCase = function(){
             if($scope.CaseStatus!=1 && $scope.BBLE){
                 ptCom.confirm("You are going to complated the case?", "")
@@ -312,11 +307,10 @@
                             }).then(function success(){
                                 $scope.CaseStatus = 1;
                                 $scope.Form.FormData.CompletedDate = new Date();
-                                ptCom.alert("The case have moved to Completed")
-                            }, function error(){})
+                                ptCom.alert("The case have moved to Completed");
+                            }, function error(){});
                         }
-                    })
-
+                    });
             }else if($scope.BBLE) {
                 ptCom.confirm("You are going to uncomplated the case?", "")
                     .then(function(r){
@@ -327,12 +321,12 @@
                                 data: JSON.stringify($scope.BBLE)
                             }).then(function success(){
                                 $scope.CaseStatus = -1;
-                                ptCom.alert("Uncomplete case successful")
-                            }, function error(){})
+                                ptCom.alert("Uncomplete case successful");
+                            }, function error(){});
                         }
-                    })
+                    });
             }
-        }
+        };
         $scope.updateCaseStatus = function(){
             if($scope.CaseStatus && $scope.BBLE){
                 $scope.ChangeStatusIsOpen = false;
@@ -344,34 +338,34 @@
                                url: '/api/Title/UpdateStatus?bble=' + $scope.BBLE,                    
                                data: JSON.stringify($scope.CaseStatus)
                            }).then(function success(){
-                               ptCom.alert("The case status has changed!")
-                           }, function error(){})
+                               ptCom.alert("The case status has changed!");
+                           }, function error(){});
                        }
-                   })
+                   });
             }
-        }
+        };
         $scope.getStatus = function(bble){
             $http.get('/api/Title/GetCaseStatus?bble='+ bble)
             .then(function succ(res){
-                $scope.CaseStatus = res.data
-            },function error(){
+                $scope.CaseStatus = res.data;
+                },function error(){
                 $scope.CaseStatus = -1;
-                console.log("get status error")
-            })
-        }
+                console.log("get status error");
+                });
+        };
         $scope.generateXML = function(){
             $http({
                 url: "/api/Title/GenerateExcel",
                 method: "POST",
                 data: JSON.stringify($scope.Form)
             }).then(function(res){
-                STDownloadFile("/api/ConstructionCases/GetGeneratedExcel", "titlereport.xlsx")
-            })
-        }
+                STDownloadFile("/api/ConstructionCases/GetGeneratedExcel", "titlereport.xlsx");
+            });
+        };
         $scope.updateBuyerTitle = function(){
             var updateFlag = false;
             var data = $scope.BuyerTitle;
-            var newdata = $scope.Form.FormData.info
+            var newdata = $scope.Form.FormData.info;
             if(data && newdata){        
 
                 if(newdata.Company != data.CompanyName){
@@ -413,11 +407,10 @@
                         if(!res)console.log("fail to update buyertitle");
                     }
                     ,function error(){
-                        console.log("fail to update buyertitle")
-                    })
+                        console.log("fail to update buyertitle");
+                        });
                 }
             }
-        }
-
+        };
     })
 </script>

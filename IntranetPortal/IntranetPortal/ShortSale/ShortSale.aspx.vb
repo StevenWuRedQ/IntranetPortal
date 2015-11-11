@@ -14,7 +14,6 @@ Public Class NGShortSale
 
         isEviction = CBool(hfIsEvction.Value)
         If Not Page.IsPostBack Then
-            LodingCover.Visible = True
             HiddenTab = Not String.IsNullOrEmpty(Request.QueryString("HiddenTab"))
             If (HiddenTab) Then
                 logPanel.Visible = False
@@ -134,7 +133,6 @@ Public Class NGShortSale
                     isEviction = True
                     ShortSaleCaseList.BindCaseByBBLEs(ShortSaleManage.GetEvictionCasesByUsers(users).Select(Function(evi) evi.BBLE).ToList)
                 End If
-                LodingCover.Visible = False
                 Return
             End If
 
@@ -148,7 +146,7 @@ Public Class NGShortSale
                         ShortSaleCaseList.BindCaseByBBLEs(bbles)
                     End If
                 End Using
-                LodingCover.Visible = False
+
                 Return
             End If
 
@@ -171,7 +169,6 @@ Public Class NGShortSale
             Else
                 isEviction = False
             End If
-            LodingCover.Visible = False
         End If
 
         hfIsEvction.Value = isEviction.ToString

@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class Root
-
+    
     '''<summary>
     '''Head1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Head1 As Global.System.Web.UI.HtmlControls.HtmlHead
-
+    
     '''<summary>
     '''Head control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Head As Global.System.Web.UI.WebControls.ContentPlaceHolder
-
+    
     '''<summary>
     '''form1 control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
+    
     '''<summary>
     '''MainSplitter control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MainSplitter As Global.DevExpress.Web.ASPxSplitter
-
+    
     '''<summary>
     '''NavContentHolder control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NavContentHolder As Global.System.Web.UI.WebControls.ContentPlaceHolder
-
+    
     '''<summary>
     '''lblVersion control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblVersion As Global.DevExpress.Web.ASPxLabel
-
+    
     '''<summary>
     '''txtSearchKey control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSearchKey As Global.DevExpress.Web.ASPxTextBox
-
+    
     '''<summary>
     '''btnSearch control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSearch As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''HeadLoginView control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents HeadLoginView As Global.System.Web.UI.WebControls.LoginView
-
+    
     '''<summary>
     '''pcMain control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pcMain As Global.DevExpress.Web.ASPxPopupControl
-
+    
     '''<summary>
     '''popupContentSearchPanel control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents popupContentSearchPanel As Global.DevExpress.Web.PopupControlContentControl
-
+    
     '''<summary>
     '''gridSearch control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridSearch As Global.DevExpress.Web.ASPxGridView
-
+    
     '''<summary>
     '''Panel1 control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Panel1 As Global.System.Web.UI.WebControls.Panel
-
+    
     '''<summary>
     '''ASPxButton1 control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''LeadsSubMenu control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents LeadsSubMenu As Global.IntranetPortal.LeadsSubMenu
-
+    
     '''<summary>
     '''Common control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Common As Global.IntranetPortal.Common
-
+    
     '''<summary>
     '''Content control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Content As Global.System.Web.UI.WebControls.ContentPlaceHolder
-
+    
     '''<summary>
     '''ASPxButton2 control.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''ASPxButton3 control.
     '''</summary>
@@ -183,7 +183,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton3 As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
@@ -192,7 +192,7 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl
-
+    
     '''<summary>
     '''SendMail control.
     '''</summary>
