@@ -140,12 +140,35 @@
 <body style="width: 100%" ng-controller="MainCtrl">
     <div class="LoadingCover" id="LodingCover" style="display: none"></div>
     <form id="form1" runat="server">
+
         <div id="mainContentDiv">
-            
-        
-        <asp:ContentPlaceHolder ID="MainContentPH" runat="server">
-        </asp:ContentPlaceHolder>
-            </div>
+
+
+            <asp:ContentPlaceHolder ID="MainContentPH" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <script>
+            /**
+            * main point to access MainCtrl scope
+            */
+            var AngularRoot;
+            $(function () {
+                AngularRoot = (function () {
+                    var scope = angular.element(document.body).injector().get('$rootScope');
+                    return {
+                        alert: scope.alert,
+                        confirm: scope.confirm,
+                        showLoading: scope.showLoading,
+                        hideLoading: scope.hideLoading,
+                        startLoading: scope.startLoading,
+                        stopLoading: scope.stopLoading
+
+                    }
+                })();
+                AngularRoot.hideLoading();
+            });
+
+        </script>
     </form>
 
     <div id="autoLogoutPopup">
@@ -177,27 +200,5 @@
 
     <script src="/Scripts/stevenjs.js"></script>
     <script src="/Scripts/autologout.js"></script>
-    <script>
-        /**
-		* main point to access MainCtrl scope
-		*/
-        var AngularRoot;
-        $(function () {
-            AngularRoot = (function () {
-                var scope = angular.element(document.body).injector().get('$rootScope');
-                return {
-                    alert: scope.alert,
-                    confirm: scope.confirm,
-                    showLoading: scope.showLoading,
-                    hideLoading: scope.hideLoading,
-                    startLoading: scope.startLoading,
-                    stopLoading: scope.stopLoading
-
-            }
-            })();
-            AngularRoot.hideLoading();
-        });
-
-    </script>
 </body>
 </html>

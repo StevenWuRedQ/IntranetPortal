@@ -30,7 +30,6 @@
             </asp:Panel>
         </div>
 
-
         <div ui-layout-container id="dataPanelDiv">
             <asp:Panel runat="server" ID="dataPanel" ClientInstanceName="dataPanel">
                 <div class="legal-menu row" style="margin: 0">
@@ -191,7 +190,7 @@
                                 },
                                 error: function (data) {
                                     AngularRoot.stopLoading();
-                                    AngularRoot.alert("Failed to load data." + data)
+                                    AngularRoot.alert("Failed to load data." + data);
                                 }
                             });
                             this.LoadActivityLog();                                    
@@ -217,14 +216,14 @@
                                     dataType: 'json',
                                     contentType: "application/json",
                                     success: function (data) {
-                                        AngularRoot.alert("Save successful.")
+                                        AngularRoot.alert("Save successful.");
                                     },
                                     error: function (data) {
                                         AngularRoot.alert("Failed to save data." + data);
                                     }
                                 });
-                            }else{
-                                console.log("Try to save a not exist data.")
+                            }else {
+                                console.log("Try to save a not exist data.");
                             }
                         }
                     }

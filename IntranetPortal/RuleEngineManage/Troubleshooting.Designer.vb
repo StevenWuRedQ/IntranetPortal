@@ -56,6 +56,7 @@ Partial Class Troubleshooting
         Me.tabEmail = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnShortSaleUserFollowUp = New System.Windows.Forms.Button()
         Me.btnSSUserReport = New System.Windows.Forms.Button()
         Me.cbTeams = New System.Windows.Forms.ComboBox()
         Me.btnEmailSend = New System.Windows.Forms.Button()
@@ -132,8 +133,9 @@ Partial Class Troubleshooting
         Me.btnGeneratTemplate = New System.Windows.Forms.Button()
         Me.txtReportTables = New System.Windows.Forms.TextBox()
         Me.txtTemplateResult = New System.Windows.Forms.TextBox()
+        Me.TitleTab = New System.Windows.Forms.TabPage()
+        Me.TitleButton1 = New System.Windows.Forms.Button()
         Me.Button20 = New System.Windows.Forms.Button()
-        Me.btnShortSaleUserFollowUp = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -160,6 +162,7 @@ Partial Class Troubleshooting
         Me.SplitContainer2.Panel1.SuspendLayout()
         Me.SplitContainer2.Panel2.SuspendLayout()
         Me.SplitContainer2.SuspendLayout()
+        Me.TitleTab.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -375,7 +378,7 @@ Partial Class Troubleshooting
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(750, 46)
+        Me.Panel1.Size = New System.Drawing.Size(875, 46)
         Me.Panel1.TabIndex = 25
         '
         'Label12
@@ -407,11 +410,12 @@ Partial Class Troubleshooting
         Me.TabControl1.Controls.Add(Me.TabPage8)
         Me.TabControl1.Controls.Add(Me.TabPage9)
         Me.TabControl1.Controls.Add(Me.TabPage10)
+        Me.TabControl1.Controls.Add(Me.TitleTab)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 46)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(750, 355)
+        Me.TabControl1.Size = New System.Drawing.Size(875, 439)
         Me.TabControl1.TabIndex = 26
         '
         'TabPage1
@@ -432,7 +436,7 @@ Partial Class Troubleshooting
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage1.Size = New System.Drawing.Size(867, 413)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Undo Recycle"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -450,7 +454,7 @@ Partial Class Troubleshooting
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage2.Size = New System.Drawing.Size(867, 413)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Leads and Tasks"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -470,7 +474,7 @@ Partial Class Troubleshooting
         Me.tabEmail.Location = New System.Drawing.Point(4, 22)
         Me.tabEmail.Name = "tabEmail"
         Me.tabEmail.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabEmail.Size = New System.Drawing.Size(742, 329)
+        Me.tabEmail.Size = New System.Drawing.Size(867, 413)
         Me.tabEmail.TabIndex = 2
         Me.tabEmail.Text = "Email Template"
         Me.tabEmail.UseVisualStyleBackColor = True
@@ -487,7 +491,7 @@ Partial Class Troubleshooting
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(736, 323)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(861, 407)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'GroupBox1
@@ -502,10 +506,19 @@ Partial Class Troubleshooting
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(362, 317)
+        Me.GroupBox1.Size = New System.Drawing.Size(424, 401)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Team Activity Email"
+        '
+        'btnShortSaleUserFollowUp
+        '
+        Me.btnShortSaleUserFollowUp.Location = New System.Drawing.Point(119, 192)
+        Me.btnShortSaleUserFollowUp.Name = "btnShortSaleUserFollowUp"
+        Me.btnShortSaleUserFollowUp.Size = New System.Drawing.Size(160, 23)
+        Me.btnShortSaleUserFollowUp.TabIndex = 7
+        Me.btnShortSaleUserFollowUp.Text = "ShortSale User FollowUp"
+        Me.btnShortSaleUserFollowUp.UseVisualStyleBackColor = True
         '
         'btnSSUserReport
         '
@@ -560,7 +573,7 @@ Partial Class Troubleshooting
         '
         'Button12
         '
-        Me.Button12.Location = New System.Drawing.Point(371, 3)
+        Me.Button12.Location = New System.Drawing.Point(433, 3)
         Me.Button12.Name = "Button12"
         Me.Button12.Size = New System.Drawing.Size(136, 23)
         Me.Button12.TabIndex = 1
@@ -574,7 +587,7 @@ Partial Class Troubleshooting
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage3.Size = New System.Drawing.Size(867, 413)
         Me.TabPage3.TabIndex = 3
         Me.TabPage3.Text = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -593,8 +606,8 @@ Partial Class Troubleshooting
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.lbResult)
-        Me.SplitContainer1.Size = New System.Drawing.Size(736, 285)
-        Me.SplitContainer1.SplitterDistance = 320
+        Me.SplitContainer1.Size = New System.Drawing.Size(861, 369)
+        Me.SplitContainer1.SplitterDistance = 374
         Me.SplitContainer1.TabIndex = 3
         '
         'gvFiles
@@ -604,7 +617,7 @@ Partial Class Troubleshooting
         Me.gvFiles.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gvFiles.Location = New System.Drawing.Point(0, 0)
         Me.gvFiles.Name = "gvFiles"
-        Me.gvFiles.Size = New System.Drawing.Size(320, 285)
+        Me.gvFiles.Size = New System.Drawing.Size(374, 369)
         Me.gvFiles.TabIndex = 2
         '
         'colName
@@ -643,7 +656,7 @@ Partial Class Troubleshooting
         Me.lbResult.FormattingEnabled = True
         Me.lbResult.Location = New System.Drawing.Point(0, 0)
         Me.lbResult.Name = "lbResult"
-        Me.lbResult.Size = New System.Drawing.Size(412, 285)
+        Me.lbResult.Size = New System.Drawing.Size(483, 369)
         Me.lbResult.TabIndex = 3
         '
         'Panel2
@@ -655,7 +668,7 @@ Partial Class Troubleshooting
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(3, 3)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(736, 38)
+        Me.Panel2.Size = New System.Drawing.Size(861, 38)
         Me.Panel2.TabIndex = 2
         '
         'btnImportLogs
@@ -701,7 +714,7 @@ Partial Class Troubleshooting
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage4.Size = New System.Drawing.Size(867, 413)
         Me.TabPage4.TabIndex = 4
         Me.TabPage4.Text = "TLO Service"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -738,7 +751,7 @@ Partial Class Troubleshooting
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage5.Size = New System.Drawing.Size(867, 413)
         Me.TabPage5.TabIndex = 5
         Me.TabPage5.Text = "ShortSale"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -848,7 +861,7 @@ Partial Class Troubleshooting
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage6.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage6.Size = New System.Drawing.Size(867, 413)
         Me.TabPage6.TabIndex = 6
         Me.TabPage6.Text = "Data Service"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -908,7 +921,7 @@ Partial Class Troubleshooting
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage7.Size = New System.Drawing.Size(867, 413)
         Me.TabPage7.TabIndex = 7
         Me.TabPage7.Text = "Legal"
         Me.TabPage7.UseVisualStyleBackColor = True
@@ -980,7 +993,7 @@ Partial Class Troubleshooting
         Me.TabPage8.Location = New System.Drawing.Point(4, 22)
         Me.TabPage8.Name = "TabPage8"
         Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage8.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage8.Size = New System.Drawing.Size(867, 413)
         Me.TabPage8.TabIndex = 8
         Me.TabPage8.Text = "Complaints"
         Me.TabPage8.UseVisualStyleBackColor = True
@@ -1071,7 +1084,7 @@ Partial Class Troubleshooting
         Me.TabPage9.Location = New System.Drawing.Point(4, 22)
         Me.TabPage9.Name = "TabPage9"
         Me.TabPage9.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage9.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage9.Size = New System.Drawing.Size(867, 413)
         Me.TabPage9.TabIndex = 9
         Me.TabPage9.Text = "Construction"
         Me.TabPage9.UseVisualStyleBackColor = True
@@ -1187,7 +1200,7 @@ Partial Class Troubleshooting
         Me.TabPage10.Location = New System.Drawing.Point(4, 22)
         Me.TabPage10.Name = "TabPage10"
         Me.TabPage10.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage10.Size = New System.Drawing.Size(742, 329)
+        Me.TabPage10.Size = New System.Drawing.Size(867, 413)
         Me.TabPage10.TabIndex = 10
         Me.TabPage10.Text = "Report"
         Me.TabPage10.UseVisualStyleBackColor = True
@@ -1206,8 +1219,8 @@ Partial Class Troubleshooting
         'SplitContainer2.Panel2
         '
         Me.SplitContainer2.Panel2.Controls.Add(Me.txtTemplateResult)
-        Me.SplitContainer2.Size = New System.Drawing.Size(736, 323)
-        Me.SplitContainer2.SplitterDistance = 245
+        Me.SplitContainer2.Size = New System.Drawing.Size(861, 407)
+        Me.SplitContainer2.SplitterDistance = 286
         Me.SplitContainer2.TabIndex = 0
         '
         'btnGeneratTemplate
@@ -1225,7 +1238,7 @@ Partial Class Troubleshooting
         Me.txtReportTables.Location = New System.Drawing.Point(0, 0)
         Me.txtReportTables.Multiline = True
         Me.txtReportTables.Name = "txtReportTables"
-        Me.txtReportTables.Size = New System.Drawing.Size(245, 280)
+        Me.txtReportTables.Size = New System.Drawing.Size(286, 280)
         Me.txtReportTables.TabIndex = 0
         '
         'txtTemplateResult
@@ -1234,8 +1247,28 @@ Partial Class Troubleshooting
         Me.txtTemplateResult.Location = New System.Drawing.Point(0, 0)
         Me.txtTemplateResult.Multiline = True
         Me.txtTemplateResult.Name = "txtTemplateResult"
-        Me.txtTemplateResult.Size = New System.Drawing.Size(487, 323)
+        Me.txtTemplateResult.Size = New System.Drawing.Size(571, 407)
         Me.txtTemplateResult.TabIndex = 0
+        '
+        'TitleTab
+        '
+        Me.TitleTab.Controls.Add(Me.TitleButton1)
+        Me.TitleTab.Location = New System.Drawing.Point(4, 22)
+        Me.TitleTab.Name = "TitleTab"
+        Me.TitleTab.Padding = New System.Windows.Forms.Padding(3)
+        Me.TitleTab.Size = New System.Drawing.Size(867, 413)
+        Me.TitleTab.TabIndex = 11
+        Me.TitleTab.Text = "TitleTab"
+        Me.TitleTab.UseVisualStyleBackColor = True
+        '
+        'TitleButton1
+        '
+        Me.TitleButton1.Location = New System.Drawing.Point(38, 23)
+        Me.TitleButton1.Name = "TitleButton1"
+        Me.TitleButton1.Size = New System.Drawing.Size(75, 23)
+        Me.TitleButton1.TabIndex = 0
+        Me.TitleButton1.Text = "TestButton"
+        Me.TitleButton1.UseVisualStyleBackColor = True
         '
         'Button20
         '
@@ -1246,20 +1279,11 @@ Partial Class Troubleshooting
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
-        'btnShortSaleUserFollowUp
-        '
-        Me.btnShortSaleUserFollowUp.Location = New System.Drawing.Point(119, 192)
-        Me.btnShortSaleUserFollowUp.Name = "btnShortSaleUserFollowUp"
-        Me.btnShortSaleUserFollowUp.Size = New System.Drawing.Size(160, 23)
-        Me.btnShortSaleUserFollowUp.TabIndex = 7
-        Me.btnShortSaleUserFollowUp.Text = "ShortSale User FollowUp"
-        Me.btnShortSaleUserFollowUp.UseVisualStyleBackColor = True
-        '
         'Troubleshooting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(750, 401)
+        Me.ClientSize = New System.Drawing.Size(875, 485)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "Troubleshooting"
@@ -1301,6 +1325,7 @@ Partial Class Troubleshooting
         Me.SplitContainer2.Panel2.PerformLayout()
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer2.ResumeLayout(False)
+        Me.TitleTab.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1416,4 +1441,6 @@ Partial Class Troubleshooting
     Friend WithEvents BtnNoticeECourt As Button
     Friend WithEvents btnLegalTeamActivity As Button
     Friend WithEvents btnShortSaleUserFollowUp As Button
+    Friend WithEvents TitleTab As TabPage
+    Friend WithEvents TitleButton1 As Button
 End Class

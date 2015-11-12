@@ -17,22 +17,7 @@ Public Class DBJSONUtil
         End Using
     End Function
 
-    Public Function GetJsonCulumn(TableName As String, JsonColumn As String, PrimaryKeysValue As String(), ObjectString As String)
 
-        Using conn = New SqlConnection(ConStr)
-
-
-        End Using
-
-    End Function
-
-    Public Shared Function AddObject() As Boolean
-        Using coon As New SqlConnection(ConStr)
-
-
-        End Using
-        Return True
-    End Function
 
 
 End Class

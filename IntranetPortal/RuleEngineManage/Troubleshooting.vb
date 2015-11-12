@@ -7,6 +7,7 @@ Imports Newtonsoft.Json.Linq
 Imports System.Text
 Imports IntranetPortal.RulesEngine
 Imports System.Configuration
+Imports Newtonsoft.Json
 
 Public Class Troubleshooting
 
@@ -983,5 +984,35 @@ Public Class Troubleshooting
     Private Sub btnShortSaleUserFollowUp_Click(sender As Object, e As EventArgs) Handles btnShortSaleUserFollowUp.Click
         Dim rule = New IntranetPortal.RulesEngine.ShortSaleFollowUpRule
         rule.Execute()
+    End Sub
+
+    Private Sub TitleButton1_Click(sender As Object, e As EventArgs) Handles TitleButton1.Click
+
+        Using ctx = New Data.ConstructionEntities
+            Dim forms = From f In ctx.FormDataItems Select f
+            For Each form In forms
+                If form IsNot Nothing Then
+                    Dim formdata = form.FormData
+                    Dim jo = JObject.Parse(formdata)
+                    If jo("Owners") IsNot Nothing Then
+                        For Each o In jo("Owners")
+                            If o("Bankruptcy_Notes") IsNot Nothing Then
+                                For Each b In o("Bankruptcy_Notes")
+                                    If b("Bankruptcy_Status") IsNot Nothing Then
+                                        b("status") = b("Bankruptcy_Status")
+                                        CType(b, JObject).Property("Bankruptcy_Status").Remove()
+                                    End If
+                                Next
+                            End If
+                        Next
+                    End If
+                    form.FormData = jo.ToJsonString
+                End If
+            Next
+
+            ctx.SaveChanges()
+        End Using
+
+
     End Sub
 End Class

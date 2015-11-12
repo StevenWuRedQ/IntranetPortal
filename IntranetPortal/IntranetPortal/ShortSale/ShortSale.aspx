@@ -27,6 +27,7 @@
         })();
         
     </script>
+
     <style>
         .dxgvControl_MetropolisBlue1 {
             width: auto !important;
@@ -36,6 +37,7 @@
             width: auto !important;
         }
     </style>
+
     <script type="text/javascript">
         var caseId = null;
         var leadsInfoBBLE = null;
@@ -541,7 +543,6 @@
         </ContentCollection>
     </dx:ASPxPopupControl>
 
-
     <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
     <uc1:SelectPartyUC runat="server" ID="SelectPartyUC" />
     <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
@@ -549,16 +550,8 @@
     <input type="hidden" id="LastUpdateTime" />
     <uc1:Common runat="server" ID="Common" />
 
-
     <script type="text/javascript">
-        AllContact = <%= GetAllContact()%>
-        function t() {
 
-        }
-        ALLTeam = <%= GetAllTeam()%>;
-        function t() {
-
-        }
         function GetShortSaleData(caseId) {
             NGGetShortSale(caseId);
             if (cbpLogs){                
@@ -647,9 +640,8 @@
                 "urlModfiyUserFunc": $scope.GetModifyUserUrl
             });
         });
-        portalApp = angular.module('PortalApp');
 
-        portalApp.controller('ShortSaleCtrl', function ($scope, $http, $timeout, ptContactServices, ptCom) {
+        angular.module("PortalApp").controller('ShortSaleCtrl', function ($scope, $http, $timeout, ptContactServices, ptCom) {
 
             $scope.ptContactServices = ptContactServices;
             $scope.capitalizeFirstLetter = ptCom.capitalizeFirstLetter;
@@ -673,6 +665,7 @@
                         ptCom.alert("Fail to save data. status :" + status + "Error : " + JSON.stringify(data1));
                     });
             };
+
             $scope.MoveToTitle = function (scuessfunc) {
                 var json = $scope.SsCase;
                 var data = { bble: leadsInfoBBLE };
@@ -689,115 +682,18 @@
                     });
             }; // -- end --
 
-            var cStore = new DevExpress.data.CustomStore({
-                load: function (loadOptions) {
-
-                    if (AllContact) {
-                        if (loadOptions.searchValue) {
-                            return AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(loadOptions.searchValue.toLowerCase()) >= 0 } return false });
-                        }
-                        return [];
-                    }
-                    var d = $.Deferred();
-                    if (loadOptions.searchValue) {
-                        $.getJSON('/Services/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
-                            d.resolve(data);
-                        });
-                    } else {
-
-                        $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
-                            d.resolve(data);
-                            AllContact = data;
-                        });
-                    }
-
-                    return d.promise();
-                },
-                byKey: function (key) {
-                    if (AllContact) {
-                        return AllContact.filter(function (o) { return o.ContactId == key })[0];
-                    }
-                    var d = new $.Deferred();
-                    $.get('/Services/ContactService.svc/GetAllContacts?id=' + key)
-                        .done(function (result) {
-                            d.resolve(result);
-                        });
-                    return d.promise();
-                },
-                searchExpr: ["Name"]
-            });
-            $scope.ContactDataSource = new DevExpress.data.DataSource({
-                store: cStore
-            });
-            $scope.RoboSingerDataSource = new DevExpress.data.DataSource({
-                store: new DevExpress.data.CustomStore({
-                    load: function (loadOptions) {
-
-                        if (AllRoboSignor) {
-                            if (loadOptions.searchValue) {
-                                return AllRoboSignor.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(loadOptions.searchValue.toLowerCase()) >= 0 } return false });
-                            }
-                            return [];
-                        }
-                    },
-                    byKey: function (key) {
-                        if (AllRoboSignor) {
-                            return AllRoboSignor.filter(function (o) { return o.ContactId == key })[0];
-                        }
-
-                    },
-                    searchExpr: ["Name"]
-                })
-            });
-
-            $scope.onChange = function (newModel, newValue) {
-                if (newValue && newModel) {
-                    $scope.$eval(newModel + '=' + newValue);
-                }
-            };
-            $scope.PickedContactId = null;
-
-            $scope.TestContactId = function (c) {
-                $scope.$eval(c + '=' + '192');
-            };
-            $scope.GetContactById = function (id) {
-                return AllContact.filter(function (o) { return o.ContactId == id })[0];
-            };
-            $scope.InitContact = function (id, dataSourceName) {
-                return {
-                    dataSource: dataSourceName ? $scope[dataSourceName] : $scope.ContactDataSource,
-                    valueExpr: 'ContactId',
-                    displayExpr: 'Name',
-                    searchEnabled: true,
-                    minSearchLength: 2,
-                    noDataText: "Please input to search",
-                    bindingOptions: { value: id }
-                };
-            }; /* steven code */
-
-            var CaseInfo = { Name: '', Address: '' };
             $scope.SsCase = {
                 PropertyInfo: { Owners: [{}] },
-                CaseData: {}
-            };
-            $scope.GetTeamByName = function (teamName) {
-                if (teamName) {
-                    return ALLTeam.filter(function (o) { return o.Name == teamName })[0];
-                }
+                CaseData: {},
+                Mortgages: [{}]
+            }; 
 
-            };
-            $scope.GetContactByName = function (teamName) {
-                if (AllContact && teamName) {
-                    var ctax = AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(teamName.toLowerCase()) >= 0 } return false })[0];
-                    return AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(teamName.toLowerCase()) >= 0 } return false })[0];
-                }
-                return {};
-            };
             $scope.GetShortSaleCase = function (caseId) {
                 if (!caseId) {
                     console.log("Can not find case Id ");
                     return;
                 }
+
                 ptCom.startLoading();
                 var done1, done2;
                 $http.get("ShortSaleServices.svc/GetCase?caseId=" + caseId)
@@ -845,7 +741,9 @@
             $scope.GetModifyUserUrl = function () {
                 return 'ShortSaleServices.svc/GetModifyUserUrl?caseId=' + window.caseId;
             };
+
             ScopeDateChangedByOther(GetLasTUpDateURL, $scope.GetShortSaleCase, $scope.GetLoadId, $scope.GetModifyUserUrl);
+
             $scope.NGAddArraryItem = function (item, model, popup) {
 
                 if (model) {
@@ -856,6 +754,7 @@
                 if (popup) { $scope.setVisiblePopup(item[item.length - 1], true); }
 
             };
+
             $scope.SaveShortSale = function (scuessfunc) {
                 var json = $scope.SsCase;
                 var data = { caseData: JSON.stringify(json) };
@@ -899,6 +798,7 @@
                 });
             };
             $scope.GetCaseInfo = function () {
+                var CaseInfo = { Name: '', Address: '' };
                 var caseName = $scope.SsCase.CaseName;
                 if (caseName) {
                     CaseInfo.Address = caseName.replace(/-(?!.*-).*$/, '');
@@ -906,8 +806,8 @@
                     CaseInfo.Name = matched[0].replace('-', '');
                 }
                 return CaseInfo;
-            }; /* stephen code */
-            $scope.SsCase.Mortgages = [{}];
+            };
+
             $scope.NGremoveArrayItem = function (item, index, disable) {
                 var r = window.confirm("Delete This?");
                 if (r) {
@@ -916,6 +816,7 @@
                 }
 
             };
+
             $http.get('/Services/ContactService.svc/getbanklist')
                 .success(function (data) {
                     $scope.bankNameOptions = data;
@@ -924,6 +825,7 @@
                 .error(function (data) {
                     $scope.bankNameOptions = [];
                 });
+
             $scope.setVisiblePopup = function (model, value) {
 
                 if (model) model.visiblePopup = value;

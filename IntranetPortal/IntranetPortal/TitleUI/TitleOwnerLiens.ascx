@@ -421,7 +421,7 @@
                             <div><span class="label label-primary">Note {{$index + 1}}</span></div>
                             <div class="input-group" style="margin-top:10px">
                                 <span class="input-group-addon">Status</span>
-                                <select class="form-control" ng-model="n.Bankruptcy_Status">
+                                <select class="form-control" ng-model="n.status">
                                     <option>Pending</option>
                                     <option>Clear</option>
                                 </select>

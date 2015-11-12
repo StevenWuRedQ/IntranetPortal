@@ -6,14 +6,6 @@ Public Class Test
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'Response.Write(Roles.IsUserInRole("123", "OfficeManager-Bronx"))
-        'If Not (String.IsNullOrEmpty(Request.QueryString("Name"))) Then
-        '    TaskSummary.DestinationUser = Request.QueryString("Name").ToString
-        'Else
-        '    TaskSummary.DestinationUser = "Chris Yan"
-        'End If
-
-
 
         If Not (String.IsNullOrEmpty(Request.QueryString("team"))) Then
             Dim objTeam = Team.GetTeam(Request.QueryString("team").ToString)
@@ -42,11 +34,6 @@ Public Class Test
             Return sb.ToString
         End Using
     End Function
-
-    Sub ConectToOneDrive()
-
-    End Sub
-
 
     Protected Sub Button1_Click(sender As Object, e As EventArgs)
         Dim cases = IntranetPortal.Data.LegalCase.GetAllCases
@@ -95,9 +82,6 @@ Public Class Test
 
     End Sub
 
-
-
-
     Public Sub UpdateOwner()
         Dim Data = New Dictionary(Of String, Long) From {{"880 Lafayette Avenue", 3016090035}}
 
@@ -109,9 +93,4 @@ Public Class Test
 
     End Sub
 
-    Protected Sub Button2_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
 End Class
-
