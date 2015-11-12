@@ -195,6 +195,8 @@ Public Class UCTitleSummary
     Private Sub gridview_OnDataBinding(sender As Object, e As EventArgs) Handles gridUrgent.DataBinding, gridUpcomingApproval.DataBinding, CounterOfferGrid.DataBinding, InvestorReviewGrid.DataBinding, DocumentRequestsGrid.DataBinding, gridTask.DataBinding, gridFollowUp.DataBinding, AllLeadsGrid.DataBinding
         Dim grid = CType(sender, ASPxGridView)
         If grid.DataSource Is Nothing AndAlso grid.IsCallback Then
+            CurrentUserRole = Employee.GetShortSaleRole(Page.User.Identity.Name)
+
             If grid Is gridUrgent Then
                 BindUrgent()
             End If
