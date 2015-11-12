@@ -25,9 +25,6 @@ Public Class Troubleshooting
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
-
-
-
         Using client As New PortalService.CommonServiceClient
             'client.SendShortSaleActivityEmail()
             client.SendTaskSummaryEmail(txtName.Text)

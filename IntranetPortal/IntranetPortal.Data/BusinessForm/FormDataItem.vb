@@ -6,7 +6,7 @@ Public Class FormDataItem
     Private _businessData As BusinessDataBase
     Public ReadOnly Property BusinessData As BusinessDataBase
         Get
-            If _businessData Is Nothing Then
+            If _businessData Is Nothing AndAlso Not String.IsNullOrEmpty(FormName) Then
                 _businessData = CreateBusinessDataInstance()
                 _businessData = _businessData.LoadData(DataId)
             End If
@@ -16,7 +16,7 @@ Public Class FormDataItem
     End Property
 
     Public Sub LogSave(saveBy As String)
-        Core.SystemLog.Log(Me.FormName, "Business Form", Core.SystemLog.LogCategory.SaveData, Me.Tag, saveBy)
+        Core.SystemLog.Log(Me.FormName, Me.FormData, Core.SystemLog.LogCategory.SaveData, Me.Tag, saveBy)
     End Sub
 
     Public Sub LogOpen(openBy As String)

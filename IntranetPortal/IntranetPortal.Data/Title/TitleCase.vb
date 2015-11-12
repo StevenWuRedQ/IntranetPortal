@@ -1,5 +1,6 @@
 ﻿Public Class TitleCase
     Inherits BusinessDataBase
+
     Public ReadOnly Property StatusStr As String
         Get
             If Status.HasValue Then

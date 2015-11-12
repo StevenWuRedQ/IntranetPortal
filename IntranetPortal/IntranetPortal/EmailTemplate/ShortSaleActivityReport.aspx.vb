@@ -30,6 +30,9 @@ Public Class ShortSaleActivityReport
             If ReportType = "Legal" Then
                 TeamActivityData = PortalReport.LoadLegalActivityReport(startTime, endTime)
                 BindChart()
+            ElseIf ReportType = "Title" Then
+                TeamActivityData = PortalReport.LoadTitleActivityReport(startTime, endTime)
+                BindChart()
             Else
                 If Request.QueryString("teamMgr") IsNot Nothing Then
                     Dim teamMgr = Request.QueryString("teamMgr")

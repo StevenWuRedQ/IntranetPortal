@@ -6,7 +6,7 @@ Public Class TitleManage
     Implements INavMenuAmount
 
     Private Const MgrRoleName As String = "Title-Manager"
-    Private Const FormName As String = "TitleCase"
+    Public Const FormName As String = "TitleCase"
 
     Public Shared Function IsManager(userName As String) As String
 

@@ -100,6 +100,7 @@ Public Class CommonService
 
         'SendShortAllActivityReport()
         SendShortSaleTeamMgrReport()
+        SendTitleTeamReport()
     End Sub
 
     ''' <summary>
@@ -128,6 +129,38 @@ Public Class CommonService
         Dim attachment As New System.Net.Mail.Attachment(GetPDf("ShortSale"), name)
 
         IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
+    End Sub
+
+    ''' <summary>
+    ''' Send Title User report to Title Manager and ShortSale Manager
+    ''' </summary>
+    Private Sub SendTitleTeamReport()
+        Dim ssMgrs = Roles.GetUsersInRole("Title-Manager")
+
+        Dim ccAdds = New List(Of String)
+        For Each mgr In Roles.GetUsersInRole("ShortSale-Manager")
+            Dim emp = Employee.GetInstance(mgr)
+            If emp IsNot Nothing AndAlso emp.Active AndAlso Not String.IsNullOrEmpty(emp.Email) Then
+                ccAdds.Add(emp.Email)
+            End If
+        Next
+
+        Dim toAdds = New List(Of String)
+        For Each mgr In ssMgrs.Distinct
+            Dim emp = Employee.GetInstance(mgr)
+            If emp IsNot Nothing AndAlso emp.Active AndAlso Not String.IsNullOrEmpty(emp.Email) Then
+                toAdds.Add(emp.Email)
+            End If
+        Next
+
+        Dim emailData As New Dictionary(Of String, String)
+        'emailData.Add("Body", LoadTeamActivityEmail(objTeam))
+        emailData.Add("Date", DateTime.Today.ToString("m"))
+
+        Dim name = String.Format("{1}-ActivityReport-{0:m}.pdf", DateTime.Today, "Title Team")
+        Dim attachment As New System.Net.Mail.Attachment(GetPDf("Title"), name)
+
+        IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), String.Join(";", ccAdds.ToArray), "TeamActivitySummary", emailData, {attachment})
     End Sub
 
     ''' <summary>
@@ -271,6 +304,10 @@ Public Class CommonService
 
         If name = "ShortSale" Then
             pageLink = String.Format("{0}/EmailTemplate/ShortSaleActivityReport.aspx?", url)
+        End If
+
+        If name = "Title" Then
+            pageLink = String.Format("{0}/EmailTemplate/ShortSaleActivityReport.aspx?t=Title", url)
         End If
 
         If name = "Legal" Then

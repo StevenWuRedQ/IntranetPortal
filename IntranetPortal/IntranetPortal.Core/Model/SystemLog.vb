@@ -6,6 +6,14 @@ Partial Public Class SystemLog
         Log(title, description, category.ToString, bble, createBy)
     End Sub
 
+    ''' <summary>
+    ''' Add the log to system
+    ''' </summary>
+    ''' <param name="title">Log Title</param>
+    ''' <param name="description">Log Description</param>
+    ''' <param name="category">Category</param>
+    ''' <param name="bble">Property BBLE</param>
+    ''' <param name="createBy">Create User</param>
     Public Shared Sub Log(title As String, description As String, category As String, bble As String, createBy As String)
         Try
             Using ctx As New CoreEntities
@@ -25,10 +33,19 @@ Partial Public Class SystemLog
         End Try
     End Sub
 
-    Public Shared Function GetLogs(title As String, startDate As DateTime, endDate As DateTime) As List(Of SystemLog)
+    ''' <summary>
+    ''' Return system log list by log title and datetime or category
+    ''' </summary>
+    ''' <param name="title">Log title</param>
+    ''' <param name="startDate">Start Date</param>
+    ''' <param name="endDate">End Date</param>
+    ''' <param name="category">Log category, default is all category</param>
+    ''' <returns></returns>
+    Public Shared Function GetLogs(title As String, startDate As DateTime, endDate As DateTime, Optional category As String = Nothing) As List(Of SystemLog)
 
         Using ctx As New CoreEntities
-            Return ctx.SystemLogs.Where(Function(l) l.Title = title And l.CreateDate > startDate And l.CreateDate < endDate).ToList
+            Dim noCategory = category Is Nothing
+            Return ctx.SystemLogs.Where(Function(l) l.Title = title And l.CreateDate > startDate And l.CreateDate < endDate And (noCategory OrElse l.Category = category)).ToList
         End Using
     End Function
 

@@ -1,8 +1,15 @@
-﻿''' <summary>
+﻿
+''' <summary>
 ''' Generate the portal report data
 ''' </summary>
 Public Class PortalReport
 
+    ''' <summary>
+    ''' Return lega users' activity data betweeen start date and end date
+    ''' </summary>
+    ''' <param name="startDate">Start Date</param>
+    ''' <param name="endDate">End Date</param>
+    ''' <returns></returns>
     Public Shared Function LoadLegalActivityReport(startDate As DateTime, endDate As DateTime) As List(Of CaseActivityData)
         Dim users = LegalCaseManage.LegalUsers
 
@@ -12,6 +19,24 @@ Public Class PortalReport
             Dim logs = ctx.LeadsActivityLogs.Where(Function(al) al.Category.Contains(category) And al.ActivityDate < endDate And al.ActivityDate > startDate And actionTypes.Contains(al.ActionType)).ToList
 
             Return BuildCaseActivityReport(CaseActivityData.ActivityType.Legal, logs, users, Core.SystemLog.GetLogs(LegalCaseManage.LogTitleOpen, startDate, endDate), Core.SystemLog.GetLogs(LegalCaseManage.LogTitleSave, startDate, endDate), endDate)
+        End Using
+    End Function
+
+    ''' <summary>
+    ''' Return title users' activity from start date to end
+    ''' </summary>
+    ''' <param name="startDate">Start Date</param>
+    ''' <param name="endDate">End Date</param>
+    ''' <returns></returns>
+    Public Shared Function LoadTitleActivityReport(startDate As DateTime, endDate As DateTime) As List(Of CaseActivityData)
+        Dim users = TitleManage.TitleUsers
+
+        Using ctx As New Entities
+            Dim actionTypes = {LeadsActivityLog.EnumActionType.Comments, LeadsActivityLog.EnumActionType.Email}
+            Dim category = LeadsActivityLog.LogCategory.Title.ToString
+            Dim logs = ctx.LeadsActivityLogs.Where(Function(al) al.Category.Contains(category) And al.ActivityDate < endDate And al.ActivityDate > startDate And actionTypes.Contains(al.ActionType)).ToList
+
+            Return BuildCaseActivityReport(CaseActivityData.ActivityType.Title, logs, users, Core.SystemLog.GetLogs(TitleManage.FormName, startDate, endDate, Core.SystemLog.LogCategory.OpenData.ToString), Core.SystemLog.GetLogs(TitleManage.FormName, startDate, endDate, Core.SystemLog.LogCategory.SaveData.ToString), endDate)
         End Using
     End Function
 
@@ -76,6 +101,16 @@ Public Class PortalReport
                                                            .FollowUpDate = a.CallbackDate
                                                            }
                                                        End Function).ToArray
+            Case CaseActivityData.ActivityType.Title
+                Dim fps = UserFollowUpManage.GetMissedFollowUp(actData.Name, missedDate)
+                actData.FollowUpMissed = fps.Select(Function(a)
+                                                        Return New FollowUpItem With {
+                                                           .BBLE = a.BBLE,
+                                                           .CaseName = a.CaseName,
+                                                           .FollowUpDate = a.FollowUpDate,
+                                                           .ViewUrl = a.URL
+                                                           }
+                                                    End Function).ToArray
             Case CaseActivityData.ActivityType.Legal
                 'Dim lCases = LegalCaseManage.GetMissedFollowUp(actData.Name, missedDate)
                 'actData.FollowUpMissed = lCases.Select(Function(a)
@@ -240,10 +275,17 @@ Public Class PortalReport
             End Get
         End Property
 
+        ''' <summary>
+        ''' Return case view links
+        ''' </summary>
+        ''' <param name="bble">the property bble</param>
+        ''' <returns></returns>
         Public Function GetViewLink(bble As String) As String
             Select Case Type
                 Case ActivityType.Legal
                     Return "LegalUI/LegalUI.aspx?bble=" & bble
+                Case ActivityType.Title
+                    Return "BusinessForm/Default.aspx?tag=" & bble
                 Case Else
                     Return "ShortSale/ShortSale.aspx?bble=" & bble
             End Select
@@ -252,6 +294,7 @@ Public Class PortalReport
         Public Enum ActivityType
             ShortSale
             Legal
+            Title
         End Enum
 
     End Class
@@ -260,6 +303,6 @@ Public Class PortalReport
         Public Property BBLE As String
         Public Property CaseName As String
         Public Property FollowUpDate As DateTime
-
+        Public Property ViewUrl As String
     End Class
 End Class
