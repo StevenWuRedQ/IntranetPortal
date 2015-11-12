@@ -1,4 +1,7 @@
-﻿Partial Public Class AssignRule
+﻿''' <summary>
+''' Represents an Assign Rule, which used to assign leads to agents automaticlly
+''' </summary>
+Partial Public Class AssignRule
 
     Public Property LeadsTypeText As String
         Get
@@ -108,7 +111,7 @@
         Using Context As New Entities
             Dim rowCount = 0
             Try
-                For Each prop In Context.Agent_Properties.Where(Function(ap) ap.BBLE IsNot Nothing And (ap.Active = True Or Not ap.Active.HasValue) And ap.Agent_Name = EmployeeName).Take(count)
+                For Each prop In Context.Agent_Properties.Where(Function(ap) ap.BBLE IsNot Nothing And (ap.Active = True Or Not ap.Active.HasValue) And ap.Agent_Name = EmployeeName).Take(Count)
                     Dim li = Context.LeadsInfoes.Where(Function(l) l.BBLE = prop.BBLE).SingleOrDefault
                     If li Is Nothing Then
 

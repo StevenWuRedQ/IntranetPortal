@@ -1,4 +1,7 @@
-﻿Public Class CallbackException
+﻿''' <summary>
+''' Represents an Exception which caused the call back from devexpress control
+''' </summary>
+Public Class CallbackException
     Inherits Exception
 
     ''' <summary>

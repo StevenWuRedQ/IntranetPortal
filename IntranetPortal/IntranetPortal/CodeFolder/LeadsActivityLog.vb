@@ -1,4 +1,7 @@
-﻿Partial Public Class LeadsActivityLog
+﻿''' <summary>
+''' Represents the activity log data related to property
+''' </summary>
+Partial Public Class LeadsActivityLog
     Public Shared Function AddActivityLog(logDate As DateTime, comments As String, bble As String, category As String, empid As Integer, empName As String) As LeadsActivityLog
 
         Return AddActivityLog(logDate, comments, bble, category, empid, empName, EnumActionType.DefaultAction)
@@ -146,6 +149,9 @@
 
     End Function
 
+    ''' <summary>
+    ''' The category of log
+    ''' </summary>
     Enum LogCategory
         SalesAgent
         Finder

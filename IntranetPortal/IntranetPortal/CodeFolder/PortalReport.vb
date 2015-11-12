@@ -90,6 +90,11 @@ Public Class PortalReport
         Return result
     End Function
 
+    ''' <summary>
+    ''' Load the user missed followup data
+    ''' </summary>
+    ''' <param name="actData">User's activity data</param>
+    ''' <param name="missedDate">End Date</param>
     Public Shared Sub BuildMissedFollowUpData(actData As CaseActivityData, missedDate As String)
         Select Case actData.Type
             Case CaseActivityData.ActivityType.ShortSale
@@ -126,6 +131,12 @@ Public Class PortalReport
         End Select
     End Sub
 
+    ''' <summary>
+    ''' Return list of Agent activity data of Dead Leads in specific date range
+    ''' </summary>
+    ''' <param name="startDate">Start Date</param>
+    ''' <param name="endDate">End Date</param>
+    ''' <returns></returns>
     Public Shared Function LoadDeadLeadsReport(startDate As DateTime, endDate As DateTime) As List(Of AgentActivityData)
 
         Using ctx As New Entities

@@ -1,5 +1,7 @@
 ﻿
-
+''' <summary>
+''' The base class for activity log manage
+''' </summary>
 Public Class ActivityManageBase
 
     Public Property LogCategory As LeadsActivityLog.LogCategory

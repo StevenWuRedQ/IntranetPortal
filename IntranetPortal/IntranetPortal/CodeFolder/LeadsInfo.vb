@@ -1,6 +1,9 @@
 ﻿Imports System.Web.Script.Serialization
 Imports Newtonsoft.Json
 
+''' <summary>
+''' Represents the data related to leads or property
+''' </summary>
 Public Class LeadsInfo
     Public Enum LeadsType
         All = 11

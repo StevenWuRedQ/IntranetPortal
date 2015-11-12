@@ -1,5 +1,8 @@
 ﻿Imports System.ComponentModel
 
+''' <summary>
+''' Represents the lead data, inclued employee, status, etc.
+''' </summary>
 Partial Public Class Lead
 
     Public Enum LeadProcess
