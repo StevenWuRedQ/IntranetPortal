@@ -29,7 +29,11 @@
     /* for fix the email message link color hover bug in activty log*/
     td.dxgv:hover a {
         color: black !important;
-        
+    }
+
+    .dxpcLite_MetropolisBlue1.dxpclW{
+        position: fixed !important;
+
     }
 </style>
 
@@ -676,7 +680,7 @@
                     <i class="fa fa-comment activity_add_buttons tooltip-examples" style="margin-right: 15px; cursor: pointer" title="Previous Notes" onclick="popupPreviousNotes.Show();popupPreviousNotes.PerformCallback()"></i>
                     <% End If%>
                     <% End If%>
-                    <i class="fa fa-tasks activity_add_buttons tooltip-examples icon_btn" title="Create Task" style="margin-right: 15px;" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this);ASPxPopupSetAsTaskControl.PerformCallback('Show');"></i>
+                    <i class="fa fa-tasks activity_add_buttons tooltip-examples icon_btn" title="Create Task" style="margin-right: 15px;" onclick="ASPxPopupSetAsTaskControl.Show();ASPxPopupSetAsTaskControl.PerformCallback('Show');"></i>
                     <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
                 </div>
             </div>
@@ -992,7 +996,6 @@
             </ContentCollection>
         </dx:ASPxPopupControl>
 
-
         <dx:ASPxPopupControl ClientInstanceName="popupBpo" Width="450px" Height="480px" OnWindowCallback="ASPxPopupControl2_WindowCallback"
             MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl2"
             HeaderText="BPO/Appraisal" Modal="true"
@@ -1207,7 +1210,6 @@
                                         }" />
         </dx:ASPxPopupControl>
 
-
         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSetAsTaskControl" Width="450px" Height="550px" OnWindowCallback="ASPxPopupControl1_WindowCallback"
             MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl1"
             HeaderText="Set as Task" Modal="true"
@@ -1364,6 +1366,7 @@
                 </dx:PopupControlContentControl>
             </ContentCollection>
         </dx:ASPxPopupControl>
+
     </div>
     <%------end-------%>
 </div>

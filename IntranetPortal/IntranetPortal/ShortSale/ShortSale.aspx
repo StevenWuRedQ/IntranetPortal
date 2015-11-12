@@ -58,7 +58,7 @@
     </script>
     <asp:HiddenField runat="server" ID="hfIsEvction" Value="false" />
 
-    <div ui-layout="{flow: 'column'}">
+    <div ui-layout="{flow: 'column'}" id="uiLayoutDiv">
         <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">
                 <uc1:ShortSaleCaseList runat="server" ID="ShortSaleCaseList" />
         </div>
@@ -424,7 +424,6 @@
             </asp:Panel>
         </div>
         <div ui-layout-container>
-
             <asp:Panel runat="server" ID="logPanel">
                 <div style="font-size: 12px; color: #9fa1a8;">
                     <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
@@ -467,13 +466,13 @@
                         </PanelCollection>
                         <ClientSideEvents EndCallback="" />
                     </dx:ASPxCallbackPanel>
-
                 </div>
             </asp:Panel>
         </div>
     </div>
     
     <uc1:SendMail runat="server" ID="SendMail" LogCategory="ShortSale" />
+
     <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
         AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
         ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -490,6 +489,7 @@
         </Items>
         <ClientSideEvents ItemClick="OnCallbackMenuClick" />
     </dx:ASPxPopupMenu>
+
     <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="260px" Height="250px"
         MaxWidth="800px" MaxHeight="150px" MinHeight="150px" MinWidth="150px" ID="pcMain"
         HeaderText="Select Date" Modal="true"
@@ -519,6 +519,7 @@
             </dx:PopupControlContentControl>
         </ContentCollection>
     </dx:ASPxPopupControl>
+
     <dx:ASPxPopupControl ClientInstanceName="ASPxPopupScheduleClient" Width="400px" Height="280px"
         MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"
         HeaderText="Appointment" Modal="true"

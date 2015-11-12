@@ -73,8 +73,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
 	-->
     <script>
-
-
         var portalApp = angular.module("PortalApp", ["ngAnimate", "dx", "ngMask", "ui.bootstrap", "ui.select", "ui.layout"]);
         portalApp.controller("MainCtrl", function ($rootScope, $uibModal, $timeout) {
             $rootScope.AlertModal = null;
@@ -142,8 +140,12 @@
 <body style="width: 100%" ng-controller="MainCtrl">
     <div class="LoadingCover" id="LodingCover" style="display: none"></div>
     <form id="form1" runat="server">
+        <div id="mainContentDiv">
+            
+        
         <asp:ContentPlaceHolder ID="MainContentPH" runat="server">
         </asp:ContentPlaceHolder>
+            </div>
     </form>
 
     <div id="autoLogoutPopup">
