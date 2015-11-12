@@ -144,9 +144,11 @@ Public Class CommonService
             End If
         Next
 
-        Dim toAdds = New List(Of String)
 
         For Each mgr In ssMgrs.Distinct
+
+            Dim toAdds = New List(Of String)
+
             Dim emp = Employee.GetInstance(mgr)
             If emp IsNot Nothing AndAlso emp.Active AndAlso Not String.IsNullOrEmpty(emp.Email) Then
                 toAdds.Add(emp.Email)
