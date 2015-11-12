@@ -188,7 +188,8 @@
     function ResendTask(logID) {
         ASPxPopupSetAsTaskControl.PerformCallback("ResendTask|" + logID);
         ASPxPopupSetAsTaskControl.EndCallback.AddHandler(function (s, e) {
-            s.Show();
+            //s.Show();
+            s.ShowAtElement(document.getElementById('aspnetForm'))
             RefreshList();
         });
     }
@@ -1213,7 +1214,7 @@
         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSetAsTaskControl" Width="450px" Height="550px" OnWindowCallback="ASPxPopupControl1_WindowCallback"
             MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl1"
             HeaderText="Set as Task" Modal="true"
-            runat="server" EnableViewState="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Middle" EnableHierarchyRecreation="True">
+            runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True" Target="">
             <HeaderTemplate>
                 <div class="clearfix">
                     <div class="pop_up_header_margin">
