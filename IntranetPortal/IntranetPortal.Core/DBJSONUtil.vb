@@ -15,9 +15,7 @@ Public Class DBJSONUtil
                 Return {}
             End If
         End Using
+
     End Function
-
-
-
 
 End Class
