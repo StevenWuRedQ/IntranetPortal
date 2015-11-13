@@ -8,7 +8,9 @@ Public Class FormDataItem
         Get
             If _businessData Is Nothing AndAlso Not String.IsNullOrEmpty(FormName) Then
                 _businessData = CreateBusinessDataInstance()
-                _businessData = _businessData.LoadData(DataId)
+                If DataId > 0 Then
+                    _businessData = _businessData.LoadData(DataId)
+                End If
             End If
 
             Return _businessData

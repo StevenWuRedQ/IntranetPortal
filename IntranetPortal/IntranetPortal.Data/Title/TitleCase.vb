@@ -48,15 +48,16 @@
     End Function
 
     Public Overrides Function LoadData(formId As Integer) As BusinessDataBase
-        Dim data = MyBase.LoadData(formId)
 
         Using ctx As New ConstructionEntities
             If ctx.TitleCases.Any(Function(t) t.FormItemId = formId) Then
-                data = ctx.TitleCases.Where(Function(t) t.FormItemId = formId).FirstOrDefault
+                Return ctx.TitleCases.Where(Function(t) t.FormItemId = formId).FirstOrDefault
+            Else
+                Return New TitleCase With {
+                    .FormItemId = formId
+                    }
             End If
         End Using
-
-        Return data
     End Function
 
     Public Sub SaveData(saveBy As String)

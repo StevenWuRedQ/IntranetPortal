@@ -116,32 +116,37 @@ Public Class TitleManage
         Dim tCase = TitleCase.GetCase(bble)
 
         If tCase Is Nothing Then
-            'tCase = New TitleCase
-            'tCase.BBLE = bble
-            'tCase.CaseName = caseName
-            'tCase.SaveData(userName)
 
-            Dim caseData As New JObject
-            caseData.Item("BBLE") = bble
-            caseData.Item("CaseName") = caseName
+            Dim dataItem = FormDataItem.Instance(FormName, bble)
 
-            If String.IsNullOrEmpty(owner) Then
-                owner = GetManager()
+            If dataItem Is Nothing Then
+                Dim caseData As New JObject
+                caseData.Item("BBLE") = bble
+                caseData.Item("CaseName") = caseName
+
+                If String.IsNullOrEmpty(owner) Then
+                    owner = GetManager()
+                End If
+
+                caseData.Item("Owner") = owner
+
+                dataItem = New FormDataItem
+                dataItem.FormName = FormName
+                dataItem.FormData = caseData.ToString
+                dataItem.Tag = bble
+                dataItem.Save(userName)
+            Else
+                dataItem.Save(userName)
             End If
 
-            caseData.Item("Owner") = owner
-
-            Dim dataItem As New FormDataItem
-            dataItem.FormName = FormName
-            dataItem.FormData = caseData.ToString
-            dataItem.Tag = bble
-            dataItem.Save(userName)
-
             tCase = TitleCase.GetCase(bble)
-            tCase.Status = TitleCase.DataStatus.InitialReview
-            tCase.SaveData(userName)
-
-            LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Start Title progress."), bble, LeadsActivityLog.LogCategory.PublicUpdate.ToString, LeadsActivityLog.EnumActionType.InProcess)
+            If tCase IsNot Nothing Then
+                tCase.Status = TitleCase.DataStatus.InitialReview
+                tCase.SaveData(userName)
+                LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Start Title progress."), bble, LeadsActivityLog.LogCategory.PublicUpdate.ToString, LeadsActivityLog.EnumActionType.InProcess)
+            Else
+                Throw New Exception("Title case is not enable, please try again.")
+            End If
         Else
             Throw New Exception(caseName & " is already in title.")
         End If
