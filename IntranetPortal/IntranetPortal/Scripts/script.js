@@ -36,7 +36,3 @@
 	}
 
 }
-
-var contentController = {
-
-}
