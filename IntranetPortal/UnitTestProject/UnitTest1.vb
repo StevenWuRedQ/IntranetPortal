@@ -10,10 +10,9 @@ Imports Newtonsoft.Json.Linq
 
     <TestMethod()>
     Public Sub NotifyEmailMethod1()
-        'test branch 2
+        'set branch
         Dim svr = New IntranetPortal.PortalDataService
         svr.ComplaintsUpdatedNotify(IntranetPortal.Data.CheckingComplain.Instance("1000163028"))
-
     End Sub
 
     <TestMethod()>

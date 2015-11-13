@@ -123,8 +123,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="UnitTest1.vb" />
     <Compile Include="ShortSaleUnitTest.vb" />
+    <Compile Include="UnitTest1.vb" />
     <Compile Include="WebGrabberTest.vb" />
   </ItemGroup>
   <ItemGroup>
