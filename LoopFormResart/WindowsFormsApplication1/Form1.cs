@@ -1,12 +1,14 @@
 ﻿using log4net;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -53,10 +55,17 @@ namespace WindowsFormsApplication1
         {
             CheckLoop.Text = CheckLoop.Checked ? "" : "";
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Restart_Click(object sender, EventArgs e)
         {
+            using (var client = new WCFAPI.WCFMacrosClient())
+            {
 
+            }
         }
         private readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public delegate void StatusChangeDelegate(String status);
@@ -68,16 +77,38 @@ namespace WindowsFormsApplication1
 
         public void OnStart()
         {
-
-            System.Timers.Timer timer = new System.Timers.Timer();
-            timer.Interval = 1000 * 10;//*5*6; // 5 mintues 
-            timer.Elapsed += new System.Timers.ElapsedEventHandler(this.ScanDroneMain);
-            timer.Start();
-
+            try
+            {
+                System.Timers.Timer timer = new System.Timers.Timer();
+                int interval = ReadAppSettings();
+                log.Debug("set timer interval is " + interval);
+                timer.Interval = 1000 * 60 * interval;//*5*6; // 5 mintues 
+                timer.Elapsed += new System.Timers.ElapsedEventHandler(this.ScanDroneMain);
+                timer.Start();
+            }catch(Exception e)
+            {
+                log.Debug(e);
+            }
+           
 
             //ChangeSatus("Start");
         }
+        public static int ReadAppSettings()
+        {
+            try
+            {
+                // Get the AppSettings section.
+                NameValueCollection appSettings =
+                   ConfigurationManager.AppSettings;
 
+                return Int32.Parse(appSettings.Get("TimerInterval"));
+               
+            }
+            catch (ConfigurationErrorsException e)
+            {
+                throw e;
+            }
+        }
         public void ScanDroneMain(object sender, System.Timers.ElapsedEventArgs args)
         {
 
