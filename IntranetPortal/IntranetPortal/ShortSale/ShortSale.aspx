@@ -160,15 +160,15 @@
 
                     <%-- Approval Popup --%>
                     <div dx-popup="{  
-                                                                        height: 650,
-                                                                        width: 600, 
-                                                                        showTitle: true,
-                                                                        titleTemplate: 'myTitle',
-                                                                        closeOnEscape: false,
-                                                                        dragEnabled: true,
-                                                                        shading: true,
-                                                                        bindingOptions:{ visible: 'Approval_popupVisible' }
-                                                                }">
+                                    height: 650,
+                                    width: 600, 
+                                    showTitle: true,
+                                    titleTemplate: 'myTitle',
+                                    closeOnEscape: false,
+                                    dragEnabled: true,
+                                    shading: true,
+                                    bindingOptions:{ visible: 'Approval_popupVisible' }
+                    }">
                         <div data-options="dxTemplate: { name:'myTitle' }">
                             <h4>Approval Checklist</h4>
                         </div>
@@ -318,15 +318,15 @@
 
                     <%-- Valuation Popup --%>
                     <div dx-popup="{  
-                                                                        height: 650,
-                                                                        width: 600, 
-                                                                        showTitle: true,
-                                                                        titleTemplate: 'myTitle',
-                                                                        closeOnEscape: false,
-                                                                        dragEnabled: true,
-                                                                        shading: true,
-                                                                        bindingOptions:{ visible: 'Valuation_popupVisible' }
-                                                                }">
+                        height: 650,
+                        width: 600, 
+                        showTitle: true,
+                        titleTemplate: 'myTitle',
+                        closeOnEscape: false,
+                        dragEnabled: true,
+                        shading: true,
+                        bindingOptions:{ visible: 'Valuation_popupVisible' }
+                   }">
                         <div data-options="dxTemplate: { name:'myTitle' }">
                             <h4>Valuations&nbsp;<pt-add ng-click="addPendingValue()"></pt-add></h4>
                         </div>

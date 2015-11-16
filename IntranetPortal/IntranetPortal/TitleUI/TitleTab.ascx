@@ -23,7 +23,7 @@
                         </div>
                         <div style="margin-top: 5px">
                             <%-- now using ascx control instead --%>
-                            <span class="btn btn-default btn-circle icon_btn" popover-placement="right" uib-popover-template="'titlechangestatus'" uib-tooltip="Update Case Status" popover-is-open="ChangeStatusIsOpen"><i class="fa fa-exchange"></i></span>
+                            <span class="btn btn-default btn-circle icon_btn" popover-placement="left" uib-popover-template="'titlechangestatus'" uib-tooltip="Update Case Status" popover-is-open="ChangeStatusIsOpen"><i class="fa fa-exchange"></i></span>
                             <span class="btn btn-default btn-circle icon_btn" ng-click="generateXML()" uib-tooltip="Generate XML"><i class="fa fa-download"></i></span>
                         </div>
                     </div>
@@ -31,14 +31,13 @@
             </div>
             <script type="text/ng-template" id="titlechangestatus">
                     <div style="width: 240px">
-                        <h4 class="Text-Info">Change Case Status To:</h3>
-                        <hr>
+                        <h5><b>Change Case Status To:</b></h5>
+                        <hr style="margin: 0">
                         <span ng-repeat="x in StatusList">
-                            <input type="radio" style="display: inline-block" name="titlestatus" ng-model="$parent.$parent.CaseStatus" ng-value="x.num"></input>&nbsp;{{x.desc}}
-                            <br>
+                            <input type="radio" style="display: inline-block" name="titlestatus" ng-model="$parent.$parent.CaseStatus" ng-value="x.num"></input>&nbsp;<h5 style="display:inline-block">{{x.desc}}</h5>
                         </span>
                         <br>
-                        <button type="button" class="btn btn-primary" ng-click="updateCaseStatus()">Change</button>
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="updateCaseStatus()">Change</button>
                     </div>
             </script>
             <div class="comment-panel" ng-controller="CommentCtrl" style="margin: 10px; border-top: 1px solid #c8c8c8">
