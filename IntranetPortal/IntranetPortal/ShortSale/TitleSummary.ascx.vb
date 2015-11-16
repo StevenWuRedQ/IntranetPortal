@@ -19,6 +19,9 @@ Public Class UCTitleSummary
             BindData()
 
             AllLeadsGrid.FilterExpression = "[StatuStr] LIKE '%Active%'"
+            RefreshGrid()
+            AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase(Employee.CurrentAppId)
+            AllLeadsGrid.DataBind()
         End If
     End Sub
 

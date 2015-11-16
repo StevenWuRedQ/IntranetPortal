@@ -36,7 +36,7 @@
 
     $(document).ready(function () {
         // Handler for .ready() called.       
-        AllLeadsGridClient.PerformCallback("Load");
+        //AllLeadsGridClient.PerformCallback("Load");
     });
 
     var fileWindows = {};

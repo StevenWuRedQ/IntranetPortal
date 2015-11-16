@@ -725,17 +725,33 @@ Public Class ShortSaleFollowUpRule
             Try
                 Dim users = ShortSaleManage.GetShortSaleUsers
                 For Each ssUser In users
-                    Dim emp = Employee.GetInstance(ssUser)
-                    If emp IsNot Nothing Then
-                        Dim params As New Dictionary(Of String, String)
-                        params.Add("Name", ssUser)
-                        client.SendEmailByControl(emp.Email, "FollowUps Reminder - " & DateTime.Today.ToShortDateString, "ShortSaleUserFollowUp", params)
-                    End If
+                    SendEmail(ssUser, PortalReport.CaseActivityData.ActivityType.ShortSale)
+                Next
+
+                users = TitleManage.TitleUsers
+                For Each tUsers In users
+                    SendEmail(tUsers, PortalReport.CaseActivityData.ActivityType.Title)
                 Next
             Catch ex As Exception
                 Log("ShortSale user followup rule error", ex)
             End Try
         End Using
+    End Sub
+
+    Private Sub SendEmail(userName As String, type As PortalReport.CaseActivityData.ActivityType)
+        Dim emp = Employee.GetInstance(userName)
+        If emp IsNot Nothing Then
+            Dim params As New Dictionary(Of String, String)
+            params.Add("Name", userName)
+            params.Add("Type", type)
+            Try
+                Using client As New PortalService.CommonServiceClient
+                    client.SendEmailByControl(emp.Email, "FollowUps Reminder - " & DateTime.Today.ToShortDateString, "ShortSaleUserFollowUp", params)
+                End Using
+            Catch ex As Exception
+                Log("Send Followup email error in ShortSaleFollowUpRule", ex)
+            End Try
+        End If
     End Sub
 End Class
 
