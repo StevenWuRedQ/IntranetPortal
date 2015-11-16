@@ -11,6 +11,8 @@ using System.Text;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace WindowsFormsApplication1
 {
@@ -85,11 +87,12 @@ namespace WindowsFormsApplication1
                 timer.Interval = 1000 * 60 * interval;//*5*6; // 5 mintues 
                 timer.Elapsed += new System.Timers.ElapsedEventHandler(this.ScanDroneMain);
                 timer.Start();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 log.Debug(e);
             }
-           
+
 
             //ChangeSatus("Start");
         }
@@ -102,7 +105,7 @@ namespace WindowsFormsApplication1
                    ConfigurationManager.AppSettings;
 
                 return Int32.Parse(appSettings.Get("TimerInterval"));
-               
+
             }
             catch (ConfigurationErrorsException e)
             {
@@ -182,7 +185,7 @@ namespace WindowsFormsApplication1
             else
             {
                 log.Debug("Start run drone process");
-                
+
                 mainDrone.Kill();
                 mainDrone.WaitForExit();
 
@@ -223,5 +226,118 @@ namespace WindowsFormsApplication1
         {
 
         }
+        private JArray GetNeedRunBBlEs()
+        {
+            JArray BBLes = JArray.Parse(File.ReadAllText(@"BBlEs.json"));
+
+            return BBLes;
+        }
+        public readonly static string DATAPATH = @"data.json";
+        private Object ReadData(string key)
+        {
+            return JObject.Parse(File.ReadAllText(DATAPATH))[key];
+        }
+        void SetData(string key, string val)
+        {
+            var data = JObject.Parse(File.ReadAllText(DATAPATH));
+            var property = data.Property(key);
+            property.Value = val;
+            File.WriteAllText(DATAPATH, data.ToString());
+        }
+        void SetData(string key, int val)
+        {
+            var data = JObject.Parse(File.ReadAllText(DATAPATH));
+            var property = data.Property(key);
+            property.Value = val;
+            File.WriteAllText(DATAPATH, data.ToString());
+        }
+        private JArray NeedRunBBLEs;
+        public void SendToDrone(object sender, System.Timers.ElapsedEventArgs args)
+        {
+            log.Debug("======================start send bble to drone======================================");
+            if (is_resarting)
+            {
+                log.Debug("server is restaring please check drone give up this time !");
+                return;
+            }
+            try
+            {
+                if (NeedRunBBLEs == null)
+                {
+                    NeedRunBBLEs = GetNeedRunBBlEs();
+                    if (NeedRunBBLEs == null)
+                    {
+                        log.Debug("can not find bbles in file BBlEs.json please check.");
+                    }
+
+                }
+
+
+
+                //Loop 
+                using (var client = new WCFAPI.WCFMacrosClient())
+                {
+
+                    var waitingCount = -1;
+                    try
+                    {
+                         waitingCount = client.Requests_Waiting();
+                    }
+                    catch
+                    {
+                        log.Debug("Some time error Requests_Waiting if want know detail please use break point!");
+                        waitingCount = -1;
+                    }
+                  
+                    var needAdd = 20 - waitingCount;
+                    if (needAdd > 0 && waitingCount>=0)
+                    {
+
+
+                        int RanCount = Convert.ToInt32(ReadData("RanCount"));
+
+                        for (var i = 0; i < needAdd; i++)
+                        {
+
+                            RanCount++;
+                            if (RanCount < NeedRunBBLEs.Count())
+                            {
+                                int apiOrder = (new Random()).Next(1000, 2000);
+                                var bble = NeedRunBBLEs.ToList()[RanCount].ToString();
+                                client.GetPropdata(bble, apiOrder, true, true, true, true, true, false);
+                                log.Debug(String.Format("Request BBLE: {0} in ({1}/{2})", bble, RanCount, NeedRunBBLEs.Count));
+                                SetData("RanCount", RanCount);
+                            }
+                            else
+                            {
+                                log.Debug("***********end of Send request loop***********");
+                            }
+                        }
+                        
+                    }
+                    else
+                    {
+                        log.Debug("Loop has (" + waitingCount.ToString() + ") waitingCount is busy now");
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Debug(ex);
+            }
+            log.Debug("======================end send bble to drone======================================");
+        }
+        private void AutoSetTask_Click(object sender, EventArgs e)
+        {
+
+            System.Timers.Timer timer = new System.Timers.Timer();
+            timer.Interval = 1000 * 60 * 1;//*5*6; // 5 mintues 
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(this.SendToDrone);
+            timer.Start();
+
+        }
+
     }
 }
+
