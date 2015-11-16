@@ -121,16 +121,16 @@
             <ul  class="ss_form_box clearfix" uib-collapse="mortgageCompanyCollapse">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Short Sale Dept</label>
-                    <input class="ss_form_input" ng-model="GetContactById(mortgage.LenderId).OfficeNO" readonly="readonly">
+                    <input class="ss_form_input" ng-model="ptContactServices.getContactById(mortgage.LenderId).OfficeNO" readonly="readonly">
 
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Customer Service #</label>
-                    <input class="ss_form_input" ng-model="GetContactById(mortgage.LenderId).CustomerService" mask="(999) 999-9999" clean="true" readonly="readonly">
+                    <input class="ss_form_input" ng-model="ptContactServices.getContactById(mortgage.LenderId).CustomerService" mask="(999) 999-9999" clean="true" readonly="readonly">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Short Sale Fax #</label>
-                    <input class="ss_form_input" ng-model="GetContactById(mortgage.LenderId).Fax" readonly="readonly">
+                    <input class="ss_form_input" ng-model="ptContactServices.getContactById(mortgage.LenderId).Fax" readonly="readonly">
                 </li>
             </ul>
         </div>
