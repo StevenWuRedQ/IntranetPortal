@@ -5,6 +5,7 @@ Imports IntranetPortal.Data
 Imports IntranetPortal.Core
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports Newtonsoft.Json.Linq
+Imports Newtonsoft.Json
 
 <TestClass()> Public Class CheckingComplaintsTest
 
@@ -72,5 +73,28 @@ Imports Newtonsoft.Json.Linq
     <TestMethod>
     Public Sub TestSimlerStr()
         Assert.IsTrue(Utility.SimilerString("WU ,STEVEN Jr       ", "Steven Zhange      "))
+    End Sub
+    <TestMethod>
+    Public Sub TestJosnWriter()
+        Dim temp As JToken
+
+        Dim s = <string>
+                   {
+                        'CPU': 'Intel',
+                        'Drives': {
+                                    'Good': 'nima'
+                                    }
+                   }
+                   </string>
+
+        Dim o = JObject.Parse(s)
+        Try
+
+            temp = o.SelectToken("CPU")
+
+
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

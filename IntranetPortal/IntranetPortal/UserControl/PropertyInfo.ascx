@@ -9,9 +9,9 @@
 
 <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 <script type="text/javascript">
-    function ShowAcrisMap(propBBLE) {
-        //var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + propBBLE;
-        ShowPopupMap("https://a836-acris.nyc.gov/DS/DocumentSearch/BBL", "Acris");
+    function ShowAcrisMap(propBBLE,boro,block,lot) {
+       
+        ShowPopupMap("http://a836-acris.nyc.gov/bblsearch/bblsearch.asp?borough=" + boro + "&block=" + block + "&lot=" + lot, "Acris");
         $("#addition_info").html($("#borugh_block_lot_data").val());
     }
 
@@ -132,7 +132,7 @@
                 </span>
                 <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
                 <span class="time_buttons" onclick='ShowDOBWindow("<%= LeadsInfoData.Borough%>","<%= LeadsInfoData.Block%>", "<%= LeadsInfoData.Lot%>")'>DOB</span>
-                <span class="time_buttons" onclick='ShowAcrisMap("<%= LeadsInfoData.BBLE %>")'>Acris</span>
+                <span class="time_buttons" onclick='ShowAcrisMap("<%= LeadsInfoData.BBLE %>",<%=LeadsInfoData.Borough%>,<%=LeadsInfoData.Block %>,<%=LeadsInfoData.Lot %>)'>Acris</span>
                 <span class="time_buttons" onclick='ShowPropertyMap("<%= LeadsInfoData.BBLE %>")'>Maps</span>
 
             </div>
