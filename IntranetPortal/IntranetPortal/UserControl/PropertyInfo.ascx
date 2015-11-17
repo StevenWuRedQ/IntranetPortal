@@ -7,7 +7,7 @@
 <%--@ Register Src="~/ShortSale/ShortSaleInLeadsView.ascx" TagPrefix="uc1" TagName="ShortSaleInLeadsView" --%>
 
 
-<script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
+<script src="/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js"></script>
 <script type="text/javascript">
     function ShowAcrisMap(propBBLE,boro,block,lot) {
        

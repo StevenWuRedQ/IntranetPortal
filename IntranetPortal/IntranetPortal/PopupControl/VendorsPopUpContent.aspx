@@ -8,31 +8,21 @@
 <head runat="server">
     <title></title>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
     <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
-    <script src="/Scripts/bootstrap-datepicker.js"></script>
-    <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" />
+    <script src="/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
     
   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
     <link href="/css/Contacts.css" rel="stylesheet" type="text/css"/>
-    <script>
-        //$(document).ready(function () {
-        //    $(".ss_phone").mask("(000) 000-0000");
-
-        //});
-
-    </script>
     <script src="/Scripts/ContactJs.js"></script>
-
-  
-
-    <%--<script src="/Scripts/angular.js"></script>--%>
 </head>
 <body ng-controller="PortalCtrl" id="PortalCtrl">
     <form id="form1" runat="server">

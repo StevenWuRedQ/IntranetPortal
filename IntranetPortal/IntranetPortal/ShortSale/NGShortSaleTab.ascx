@@ -8,8 +8,6 @@
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 <%@ Register Src="~/ShortSale/NGShortSaleCheckListTab.ascx" TagPrefix="uc1" TagName="NGShortSaleCheckListTab" %>
 
-<script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
-
 <input hidden id="short_sale_case_id" value="" />
 <div style="padding-top: 5px">
     <div style="height: 850px; overflow: auto;" id="prioity_content">

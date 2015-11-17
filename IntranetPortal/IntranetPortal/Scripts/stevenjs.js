@@ -1,5 +1,5 @@
 ﻿if (typeof $().formatCurrency != 'function') {
-    $.getScript("/Scripts/jquery.formatCurrency-1.1.0.js");
+    $.getScript("/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js");
 }
 function clickCollapse(e) {
 

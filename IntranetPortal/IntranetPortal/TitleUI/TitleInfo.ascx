@@ -166,10 +166,14 @@
 <div class="ss_form">
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
-            <li class="ss_form_item3">
+            <li class="ss_form_item2">
                 <label class="ss_form_input_title">BUYER on COS/HUD/APPROVAL/CORP DOCS MATCH</label>
                 <pt-radio name="BUERYMATCH" model="Form.FormData.info.BUERY_MATCH"></pt-radio>
             </li>
+             <li class="ss_form_item">
+                <label class="ss_form_input_title">Buyer Name</label>
+                <input type="text" class="ss_form_input" ng-model="Form.FormData.info.BUYER_Name" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="">
+            </li
         </ul>
     </div>
 </div>

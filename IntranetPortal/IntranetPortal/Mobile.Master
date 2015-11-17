@@ -6,11 +6,11 @@
     <title></title>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=1, width=device-width">
-    <link href="/Scripts/ionic/release/css/ionic.css" rel="stylesheet">
-    <link href="/Scripts/ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <link href="/bower_components/ionic/release/css/ionic.css" rel="stylesheet">
+    <link href="/bower_components/ionicons/css/ionicons.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
-    <script src="/Scripts/ionic/release/js/ionic.bundle.min.js"></script>
+    <script src="/bower_components/ionic/release/js/ionic.bundle.min.js"></script>
     <asp:ContentPlaceHolder ID="mobile_header" runat="server"></asp:ContentPlaceHolder>
 
     <script>

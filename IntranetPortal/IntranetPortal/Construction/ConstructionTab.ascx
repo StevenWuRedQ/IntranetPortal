@@ -10,11 +10,6 @@
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 <%@ Register Src="~/Construction/ConstructionCheckList.ascx" TagPrefix="uc1" TagName="ConstructionCheckList" %>
 
-
-
-
-
-<script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 <uc1:Common runat="server" ID="Common" />
 <div id="constructionTabContent" style="max-height: 850px; overflow: auto">
     <input hidden id="short_sale_case_id" value="" />

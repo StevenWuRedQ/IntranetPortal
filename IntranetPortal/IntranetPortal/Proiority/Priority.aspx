@@ -26,8 +26,7 @@
     <script src="/Scripts/jquery.collapse.js"></script>
     <script src="/Scripts/jquery.collapse_storage.js"></script>
     <script src="/Scripts/jquery.collapse_cookie_storage.js"></script>
-    
-    <script src="../Scripts/jquery.formatCurrency-1.1.0.js"></script>
+    <script src="/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js"></script>
     <script>
         $('.currency_input').blur(function () {
             alert('blur runned');

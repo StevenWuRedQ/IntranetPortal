@@ -331,6 +331,8 @@ angular.module('PortalApp')
             return {};
 
         };
+
+      
     }]);
 
 angular.module('PortalApp')
