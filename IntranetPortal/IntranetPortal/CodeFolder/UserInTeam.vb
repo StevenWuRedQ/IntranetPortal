@@ -34,6 +34,11 @@ Partial Public Class UserInTeam
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return user array list of the team
+    ''' </summary>
+    ''' <param name="teamNames">Team Name</param>
+    ''' <returns></returns>
     Public Shared Function GetTeamUsersArray(teamNames As String) As String()
         Return GetTeamUsers(teamNames).Select(Function(u) u.EmployeeName).ToArray
     End Function
