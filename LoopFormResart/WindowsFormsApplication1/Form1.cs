@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -13,11 +14,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using System.Runtime.InteropServices;
+using WindowsFormsApplication1;
+using Newtonsoft.Json;
 
-namespace WindowsFormsApplication1
+namespace DroneManage
 {
+   
     public partial class Form1 : Form
     {
+        
         public Form1()
         {
             InitializeComponent();
@@ -33,6 +39,8 @@ namespace WindowsFormsApplication1
 
             ProcessGrid.DataSource = GetDroneMain().Select(clsProcess => new { Name = clsProcess.ProcessName, Responding = clsProcess.Responding });
         }
+
+       
         private List<Process> GetDroneMain()
         {
             var name = "TestComponent_VB";
@@ -64,7 +72,7 @@ namespace WindowsFormsApplication1
         /// <param name="e"></param>
         private void Restart_Click(object sender, EventArgs e)
         {
-            using (var client = new WCFAPI.WCFMacrosClient())
+            using (var client = new WindowsFormsApplication1.WCFAPI.WCFMacrosClient())
             {
 
             }
@@ -118,7 +126,7 @@ namespace WindowsFormsApplication1
             try
             {
                 log.Debug("====================Scan Start=======================");
-                using (WCFAPI.WCFMacrosClient client = new WCFAPI.WCFMacrosClient())
+                using (WindowsFormsApplication1.WCFAPI.WCFMacrosClient client = new WindowsFormsApplication1.WCFAPI.WCFMacrosClient())
                 {
                     try
                     {
@@ -275,7 +283,7 @@ namespace WindowsFormsApplication1
 
 
                 //Loop 
-                using (var client = new WCFAPI.WCFMacrosClient())
+                using (var client = new WindowsFormsApplication1.WCFAPI.WCFMacrosClient())
                 {
 
                     var waitingCount = -1;
@@ -339,6 +347,30 @@ namespace WindowsFormsApplication1
 
         }
 
+
+        private void btnCloseDialog_Click(object sender, EventArgs e)
+        {
+           
+            var main = GetDroneMainProcess();
+            List<SubWindows> wnds = 
+            User32.FindWindowInProcess(main, (messagetext) =>
+                    messagetext.Length > 0
+                    );
+
+            log.Debug("==========Scaned sub window=============");
+            log.Debug("hWnds                Text      ");
+            foreach(var w in wnds)
+            {
+                log.Debug(String.Format("{0,-15} {1,-50}",w.hWnd,w.Text));
+                //User32.CloseMessage(w.hWnd);
+            }
+            log.Debug("==========Scaned sub window=============");
+           
+
+        }
+
+       
     }
+    
 }
 

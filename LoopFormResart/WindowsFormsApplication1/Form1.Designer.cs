@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace DroneManage
 {
     partial class Form1
     {
@@ -33,6 +33,7 @@
             this.CheckLoop = new System.Windows.Forms.CheckBox();
             this.StartMonitoring = new System.Windows.Forms.Button();
             this.AutoSetTask = new System.Windows.Forms.Button();
+            this.btnCloseDialog = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ProcessGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,11 +86,22 @@
             this.AutoSetTask.UseVisualStyleBackColor = true;
             this.AutoSetTask.Click += new System.EventHandler(this.AutoSetTask_Click);
             // 
+            // btnCloseDialog
+            // 
+            this.btnCloseDialog.Location = new System.Drawing.Point(273, 39);
+            this.btnCloseDialog.Name = "btnCloseDialog";
+            this.btnCloseDialog.Size = new System.Drawing.Size(75, 23);
+            this.btnCloseDialog.TabIndex = 6;
+            this.btnCloseDialog.Text = "Close Dialog";
+            this.btnCloseDialog.UseVisualStyleBackColor = true;
+            this.btnCloseDialog.Click += new System.EventHandler(this.btnCloseDialog_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(811, 519);
+            this.Controls.Add(this.btnCloseDialog);
             this.Controls.Add(this.AutoSetTask);
             this.Controls.Add(this.StartMonitoring);
             this.Controls.Add(this.CheckLoop);
@@ -111,6 +123,7 @@
         private System.Windows.Forms.CheckBox CheckLoop;
         private System.Windows.Forms.Button StartMonitoring;
         private System.Windows.Forms.Button AutoSetTask;
+        private System.Windows.Forms.Button btnCloseDialog;
     }
 }
 
