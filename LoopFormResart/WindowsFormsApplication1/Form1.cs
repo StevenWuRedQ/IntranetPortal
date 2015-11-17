@@ -305,7 +305,8 @@ namespace WindowsFormsApplication1
                                 int apiOrder = (new Random()).Next(1000, 2000);
                                 var bble = NeedRunBBLEs.ToList()[RanCount].ToString();
                                 client.GetPropdata(bble, apiOrder, true, true, true, true, true, false);
-                                log.Debug(String.Format("Request BBLE: {0} in ({1}/{2})", bble, RanCount, NeedRunBBLEs.Count));
+                                client.Get_Servicer(apiOrder, bble);
+                                log.Debug(String.Format("Request BBLE: {0} in ({1}/{2})  waiting request is ({3})", bble, RanCount, NeedRunBBLEs.Count, waitingCount));
                                 SetData("RanCount", RanCount);
                             }
                             else
