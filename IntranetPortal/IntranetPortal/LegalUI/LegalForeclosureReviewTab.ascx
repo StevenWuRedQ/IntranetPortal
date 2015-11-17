@@ -43,23 +43,29 @@
     <div class="ss_form">
         <h4 class="ss_form_title">Tax Lien foreclosure Status</h4>
         <ul class="ss_form_box clearfix">
-             <li class="ss_form_item ">
+            <li class="ss_form_item ">
                 <label class="ss_form_input_title {{LegalCase.ForeclosureInfo.hasTaxLien?'ss_warning':''}}">Is there a tax lien?</label>
                 <pt-radio name="tlienRadio" model="LegalCase.ForeclosureInfo.hasTaxLien"></pt-radio>
 
             </li>
-            <li class="ss_form_item " style="width:60%">
-               <div>
-                   &nbsp;
-               </div>
+            <li class="ss_form_item" ng-show="LegalCase.ForeclosureInfo.hasTaxLien">
+                <label class="ss_form_input_title">
+                    Tax Lien Amount
+                </label>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.taxLienAmt" money-mask />
+            </li>
+            <li class="ss_form_item " style="width: 30%">
+                <div>
+                    &nbsp;
+                </div>
             </li>
             <li class="ss_form_item" ng-show="LegalCase.ForeclosureInfo.hasTaxLien">
-                <label class="ss_form_input_title" >
-                   Tax Lien FC Status
+                <label class="ss_form_input_title">
+                    Tax Lien FC Status
                 </label>
 
-                <select class="ss_form_input" ng-model="LegalCase.TaxLienFCStatus" >
-                   
+                <select class="ss_form_input" id="LealCaseStatusData" ng-model="LegalCase.TaxLienFCStatus">
+
                     <% For Each v In LegalCaseManage.GetDataStatus%>
                     <option value="<%=v.Item("Key")%>"><%=v.Item("Value")%></option>
                     <% Next%>
@@ -74,7 +80,7 @@
                 <label class="ss_form_input_title">FC filed Date:</label>
                 <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TaxLienFCDate" ss-date>
             </li>
-           
+
 
         </ul>
     </div>

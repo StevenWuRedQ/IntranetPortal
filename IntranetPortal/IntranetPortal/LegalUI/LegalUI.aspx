@@ -867,7 +867,9 @@
                             if (scuessfunc) {
                                 scuessfunc()
                             } else {
+                                $scope.LogSaveChange();
                                 alert("Save Successed !");
+                                
                             }
                             ResetCaseDataChange();
                             //$scope.loadPanelVisible = false;
@@ -944,7 +946,24 @@
 
                 $scope.LegalCase.SecondaryInfo.StatuteOfLimitations = [];
                 $scope.LegalCase.SecondaryTypes = []
+                $scope.LogSaveChange = function()
+                {
+                    for(var i  in $scope.LogChange)
+                    {
+                        var changeObject = $scope.LogChange[i];
+                        var old = changeObject.old;
+                        var now = changeObject.now()
+                        if (old != now)
+                        {
+                            var elem = '#LealCaseStatusData'
+                            var OldStatus = $(elem+' option[value="' + old + '"]').html();
+                            var NowStatus = $(elem+' option[value="' + now + '"]').html();
 
+                            AddActivityLog(changeObject.msg + OldStatus + ' to ' + NowStatus)
+                            $scope.LogChange[i].old = now;
+                        }
+                    }
+                }
                 $scope.LoadLeadsCase = function (BBLE) {
                     ptCom.startLoading();
                     $("#ctl00_MainContentPH_ASPxSplitter1_1,#ctl00_MainContentPH_ASPxSplitter1_2").css('visibility', 'visible');
@@ -957,6 +976,10 @@
                             $scope.LegalCase.BBLE = BBLE
                             $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
                             $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
+                            $scope.LogChange = {
+                                'TaxLienFCStatus': { "old": $scope.LegalCase.TaxLienFCStatus, "now": function () { return $scope.LegalCase.TaxLienFCStatus; }, "msg": 'Tax Lien FC Status changed from ' },
+                                'CaseStauts': { "old": $scope.LegalCase.CaseStauts, "now": function () { return $scope.LegalCase.CaseStauts; }, "msg": 'Mortgae foreclosure Status changed from ' }
+                                }
 
                             var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
                             for (a in arrays) {
