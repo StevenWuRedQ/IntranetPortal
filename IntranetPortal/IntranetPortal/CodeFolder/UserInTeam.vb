@@ -1,4 +1,6 @@
-﻿
+﻿''' <summary>
+''' Represents the user belong to team
+''' </summary>
 Partial Public Class UserInTeam
     Public Property TeamName As String
     Public Property EmployeeId As Integer

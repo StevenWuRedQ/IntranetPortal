@@ -251,6 +251,11 @@ Partial Public Class Employee
 
     End Function
 
+    ''' <summary>
+    ''' Get managed team users list
+    ''' </summary>
+    ''' <param name="userName">Manager name</param>
+    ''' <returns></returns>
     Public Shared Function GetControledDeptEmployees(userName As String) As String()
         Dim emps As New List(Of String)
         For Each rl In Roles.GetRolesForUser(userName)
@@ -328,6 +333,8 @@ Partial Public Class Employee
     Public Shared Function GetManagedEmployees(managerName As String) As String()
         Return GetManagedEmployees(managerName, True)
     End Function
+
+
 
     Public Shared Function GetManagedEmployeeList(managerName As String) As List(Of Employee)
         Dim emps As New List(Of Employee)

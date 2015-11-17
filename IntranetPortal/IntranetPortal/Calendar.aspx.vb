@@ -17,9 +17,12 @@ Public Class Calendar
     Sub BindCalendar()
         Using Context As New Entities
             Dim user = Page.User.Identity.Name
-            Dim users = Employee.GetManagedEmployees(user)
+            Dim userslist = New List(Of String)
+            userslist.AddRange(Employee.GetControledDeptEmployees(user))
+            userslist.AddRange(Employee.GetManagedEmployees(user))
+            Dim users = userslist.ToArray
             Dim appoints = (From appoint In Context.UserAppointments.Where(Function(ua) ua.Status = UserAppointment.AppointmentStatus.Accepted And (users.Contains(ua.Agent) Or ua.Manager = user)).ToList
-                           Select New With {
+                            Select New With {
                                .AppointmentId = appoint.LogID,
                                .Subject = appoint.Subject,
                                .TitleLink = BuilerSubject(appoint),
@@ -33,7 +36,7 @@ Public Class Calendar
                                .Label = 0,
                                .Type = 0,
                                .AppointType = appoint.Type}).Distinct.ToList
-           
+
             Scheduler.AppointmentDataSource = appoints
             Scheduler.DataBind()
         End Using
