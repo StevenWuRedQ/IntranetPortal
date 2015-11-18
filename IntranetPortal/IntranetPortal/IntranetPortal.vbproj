@@ -2482,7 +2482,6 @@
     <Content Include="bower_components\bootstrap-datepicker\CHANGELOG.md" />
     <Content Include="bower_components\bootstrap-datepicker\composer.json" />
     <Content Include="bower_components\bootstrap-datepicker\CONTRIBUTING.md" />
-    <Content Include="bower_components\bootstrap-datepicker\css\datepicker.css" />
     <Content Include="bower_components\bootstrap-datepicker\dist\css\bootstrap-datepicker.css" />
     <Content Include="bower_components\bootstrap-datepicker\dist\css\bootstrap-datepicker.min.css" />
     <Content Include="bower_components\bootstrap-datepicker\dist\css\bootstrap-datepicker.standalone.css" />
@@ -6623,6 +6622,7 @@
     <WCFMetadataStorage Include="Service References\CallTrackingService\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bower_components\bootstrap-datepicker\css\" />
     <Folder Include="Scripts\jquery.globalize\cultures\" />
   </ItemGroup>
   <ItemGroup>
