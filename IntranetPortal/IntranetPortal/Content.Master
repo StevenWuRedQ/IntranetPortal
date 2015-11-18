@@ -4,180 +4,180 @@
 
 <html id="rootMaster" xmlns="http://www.w3.org/1999/xhtml" xmlns:ng="http://angularjs.org" ng-app="PortalApp">
 <head runat="server">
-    <title></title>
-    <style>
-        /* cover page to hide the main content */
-        .LoadingCover {
-            position: absolute;
-            background-image: url("/images/ajax-loader.gif");
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center;
-            -ms-background-size: 260px, 280px;
-            background-size: 260px, 280px;
-            background-color: rgba(0,0,0, 0.6);
-            width: 100%;
-            height: 100%;
-            z-index: 99;
-        }
-    </style>
+	<title></title>
+	<style>
+		/* cover page to hide the main content */
+		.LoadingCover {
+			position: absolute;
+			background-image: url("/images/ajax-loader.gif");
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-position: center;
+			-ms-background-size: 260px, 280px;
+			background-size: 260px, 280px;
+			background-color: rgba(0,0,0, 0.6);
+			width: 100%;
+			height: 100%;
+			z-index: 99;
+		}
+	</style>
 
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
-    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" type="text/css" />
-    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.12.1/select.min.css" />
-    <link rel="stylesheet" href="/bower_components/angular-ui-layout/src/ui-layout.css" />
-    <link rel="stylesheet" href="/bower_components/angular-animate-css/build/nga.min.css" />
-    <link rel="stylesheet" href="/css/stevencss.css" type="text/css" />
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" />
+	<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" type="text/css" />
+	<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.12.1/select.min.css" />
+	<link rel="stylesheet" href="/bower_components/angular-ui-layout/src/ui-layout.css" />
+	<link rel="stylesheet" href="/bower_components/angular-animate-css/build/nga.min.css" />
+	<link rel="stylesheet" href="/css/stevencss.css" type="text/css" />
 
-    <!--
+	<!--
 	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css" />
 	<link rel="stylesheet" href="/css/nga.min.css" />
 	-->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/globalize/0.1.1/globalize.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/globalize/0.1.1/globalize.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-route.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-resource.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-sanitize.js"></script>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.12.1/select.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
-    <script src="/bower_components/angular-ui-layout/src/ui-layout.js"></script>
-    <script src="/bower_components/ngMask/dist/ngMask.min.js"></script>
-
-    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.webappjs.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-route.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-resource.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-animate.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-aria.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-sanitize.js"></script>
 
 
-    <script src="/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js"></script>
-    <script src="/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="http://cdn.ckeditor.com/4.5.1/standard/ckeditor.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.12.1/select.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+	<script src="/bower_components/angular-ui-layout/src/ui-layout.js"></script>
+	<script src="/bower_components/ngMask/dist/ngMask.min.js"></script>
 
-    <!--
+	<script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.webappjs.js"></script>
+
+
+	<script src="/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js"></script>
+	<script src="/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+	<script src="http://cdn.ckeditor.com/4.5.1/standard/ckeditor.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+	<!--
 	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
 	-->
-    <script>
-        var portalApp = angular.module("PortalApp", ["ngAnimate", "dx", "ngMask", "ui.bootstrap", "ui.select", "ui.layout"]);
-        portalApp.controller("MainCtrl", function ($rootScope, $uibModal, $timeout) {
-            $rootScope.AlertModal = null;
-            $rootScope.ConfirmModal = null;
-            $rootScope.loadingCover = document.getElementById("LodingCover");
-            $rootScope.panelLoading = false;
+	<script>
+		var portalApp = angular.module("PortalApp", ["ngAnimate", "dx", "ngMask", "ui.bootstrap", "ui.select", "ui.layout"]);
+		portalApp.controller("MainCtrl", function ($rootScope, $uibModal, $timeout) {
+			$rootScope.AlertModal = null;
+			$rootScope.ConfirmModal = null;
+			$rootScope.loadingCover = document.getElementById("LodingCover");
+			$rootScope.panelLoading = false;
 
-            $rootScope.alert = function (message) {
-                $rootScope.alertMessage = message ? message : '';
-                $rootScope.AlertModal = $uibModal.open({
-                    templateUrl: 'AlertModal',
-                });
-            }
+			$rootScope.alert = function (message) {
+				$rootScope.alertMessage = message ? message : '';
+				$rootScope.AlertModal = $uibModal.open({
+					templateUrl: 'AlertModal',
+				});
+			}
 
-            $rootScope.alertOK = function () {
-                $rootScope.AlertModal.close();
-            }
+			$rootScope.alertOK = function () {
+				$rootScope.AlertModal.close();
+			}
 
-            $rootScope.confirm = function (message) {
-                $rootScope.confirmMessage = message ? message : '';
-                $rootScope.ConfirmModal = $uibModal.open({
-                    templateUrl: 'ConfirmModal'
-                });
-                return $rootScope.ConfirmModal.result;
-            }
+			$rootScope.confirm = function (message) {
+				$rootScope.confirmMessage = message ? message : '';
+				$rootScope.ConfirmModal = $uibModal.open({
+					templateUrl: 'ConfirmModal'
+				});
+				return $rootScope.ConfirmModal.result;
+			}
 
-            $rootScope.confirmYes = function () {
-                $rootScope.ConfirmModal.close(true);
-            }
+			$rootScope.confirmYes = function () {
+				$rootScope.ConfirmModal.close(true);
+			}
 
-            $rootScope.confirmNo = function () {
-                $rootScope.ConfirmModal.close(false);
-            }
-
-
-            $rootScope.showLoading = function (divId) {
-                $($rootScope.loadingCover).show();
-            }
-
-            $rootScope.hideLoading = function (divId) {
-                $($rootScope.loadingCover).hide();
-            }
+			$rootScope.confirmNo = function () {
+				$rootScope.ConfirmModal.close(false);
+			}
 
 
-            $rootScope.toggleLoading = function () {
-                $rootScope.panelLoading = !$scope.panelLoading;
-            }
-            $rootScope.startLoading = function () {
-                $rootScope.panelLoading = true;
-            }
-            $rootScope.stopLoading = function () {
-                $timeout(function () {
-                    $rootScope.panelLoading = false;
-                });
-            }
-        });
-    </script>
-    <script src="/Scripts/filters.js"></script>
-    <script src="/Scripts/services.js"></script>
-    <script src="/Scripts/directives.js"></script>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+			$rootScope.showLoading = function (divId) {
+				$($rootScope.loadingCover).show();
+			}
+
+			$rootScope.hideLoading = function (divId) {
+				$($rootScope.loadingCover).hide();
+			}
+
+
+			$rootScope.toggleLoading = function () {
+				$rootScope.panelLoading = !$scope.panelLoading;
+			}
+			$rootScope.startLoading = function () {
+				$rootScope.panelLoading = true;
+			}
+			$rootScope.stopLoading = function () {
+				$timeout(function () {
+					$rootScope.panelLoading = false;
+				});
+			}
+		});
+	</script>
+	<script src="/Scripts/filters.js"></script>
+	<script src="/Scripts/services.js"></script>
+	<script src="/Scripts/directives.js"></script>
+	<asp:ContentPlaceHolder ID="head" runat="server">
+	</asp:ContentPlaceHolder>
 
 </head>
 <body style="width: 100%" ng-controller="MainCtrl">
-    <div class="LoadingCover" id="LodingCover" style="display: none"></div>
-    <form id="form1" runat="server">
+	<div class="LoadingCover" id="LodingCover" style="display: none"></div>
+	<form id="form1" runat="server">
 
-        <div id="mainContentDiv">
+		<div id="mainContentDiv">
 
 
-            <asp:ContentPlaceHolder ID="MainContentPH" runat="server">
-            </asp:ContentPlaceHolder>
-        </div>
-        <script>
-            /**
-            * main point to access MainCtrl scope
-            */
-            var AngularRoot;
-            $(function () {
-                AngularRoot = (function () {
-                    var scope = angular.element(document.body).injector().get('$rootScope');
-                    return {
-                        alert: scope.alert,
-                        confirm: scope.confirm,
-                        showLoading: scope.showLoading,
-                        hideLoading: scope.hideLoading,
-                        startLoading: scope.startLoading,
-                        stopLoading: scope.stopLoading
+			<asp:ContentPlaceHolder ID="MainContentPH" runat="server">
+			</asp:ContentPlaceHolder>
+		</div>
+		<script>
+			/**
+			* main point to access MainCtrl scope
+			*/
+			var AngularRoot;
+			$(function () {
+				AngularRoot = (function () {
+					var scope = angular.element(document.body).injector().get('$rootScope');
+					return {
+						alert: scope.alert,
+						confirm: scope.confirm,
+						showLoading: scope.showLoading,
+						hideLoading: scope.hideLoading,
+						startLoading: scope.startLoading,
+						stopLoading: scope.stopLoading
 
-                    }
-                })();
-                AngularRoot.hideLoading();
-            });
+					}
+				})();
+				AngularRoot.hideLoading();
+			});
 
-        </script>
-    </form>
+		</script>
+	</form>
 
-    <div id="autoLogoutPopup">
-        You have been inactive for a while, are you still here?<br />
-        <b>(Click Yes to confirm, or system will automatically logout in <span id="autoLogoutCountDown"></span>seconds.)</b>
-        <hr />
-        <button type="button" class="btn btn-success pull-right" onclick="onAutoLogoutPopupYes()">Yes</button>
-    </div>
-    <script type="text/ng-template" id="AlertModal">
+	<div id="autoLogoutPopup">
+		You have been inactive for a while, are you still here?<br />
+		<b>(Click Yes to confirm, or system will automatically logout in <span id="autoLogoutCountDown"></span>seconds.)</b>
+		<hr />
+		<button type="button" class="btn btn-success pull-right" onclick="onAutoLogoutPopupYes()">Yes</button>
+	</div>
+	<script type="text/ng-template" id="AlertModal">
 		<div class="modal-body">
 			<span class="text-center">{{alertMessage}}</b>
 		</div>
@@ -185,8 +185,8 @@
 		<div class="modal-footer">
 			<button class="btn btn-primary" type="button" ng-click="alertOK()">OK</button>
 		</div>
-    </script>
-    <script type="text/ng-template" id="ConfirmModal">
+	</script>
+	<script type="text/ng-template" id="ConfirmModal">
 		<div class="modal-body">
 			<span class="text-center">{{confirmMessage}}</b>
 		</div>
@@ -195,10 +195,10 @@
 			<button class="btn btn-primary" type="button" ng-click="confirmYes()">Yes</button>
 			<button class="btn btn-danger" type="button" ng-click="confirmNo()">No</button>
 		</div>
-    </script>
-    <div id="dataLoadingPanel" dx-load-panel="{message:'Loading..', showIndicator: true,  position:{of: '#dataPanelDiv'}, bindingOptions:{ visible: 'panelLoading' }}"></div>
+	</script>
+	<div id="dataLoadingPanel" dx-load-panel="{message:'Loading..', showIndicator: true,  position:{of: '#dataPanelDiv'}, bindingOptions:{ visible: 'panelLoading' }}"></div>
 
-    <script src="/Scripts/stevenjs.js"></script>
-    <script src="/Scripts/autologout.js"></script>
+	<script src="/Scripts/stevenjs.js"></script>
+	<script src="/Scripts/autologout.js"></script>
 </body>
 </html>
