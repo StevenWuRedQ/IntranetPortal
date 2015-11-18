@@ -4,22 +4,26 @@ portalApp.directive('ssDate', function () {
     return {
         restrict: 'A',
         scope: true,
-        link: function (scope, el, attrs) {
-            $(el).datepicker({
-                format: "mm/dd/yyyy",
-                forceParse: false
-            });
+        compile: function (tel, tAttrs) {
+            return {
+                post: function (scope, el, attrs) {
+                    $(el).datepicker({
+                        forceParse: false
+                    });
+                    scope.$watch(attrs.ngModel, function (newValue, oldValue) {
+                        var dateStr = newValue;
+                        if (dateStr && typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
 
-            scope.$watch(attrs.ngModel, function (newValue, oldValue) {
-                var dateStr = newValue;
-                if (dateStr && typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
-
-                    var dd = new Date(dateStr);
-                    dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
-                    $(el).datepicker('update', new Date(dd))
-
+                            var dd = new Date(dateStr);
+                            dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
+                            $(el).datepicker('update', new Date(dd))
+                        }
+                    });
                 }
-            });
+            }
+
+
+
         }
     };
 });
@@ -394,7 +398,7 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined, '')
 
             scope.$watch('fileBble', function (newV, oldV) {
-                scope.currentFolder =  '';
+                scope.currentFolder = '';
                 scope.baseFolder = scope.baseFolder ? scope.baseFolder : '';
                 scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined, '')
             })
