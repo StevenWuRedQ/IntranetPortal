@@ -2689,7 +2689,6 @@
     <Content Include="bower_components\bootstrap-datepicker\tests\assets\qunit.js" />
     <Content Include="bower_components\bootstrap-datepicker\tests\assets\utils.js" />
     <Content Include="bower_components\bootstrap-datepicker\tests\README.md" />
-    <Content Include="bower_components\bootstrap-datepicker\tests\run-qunit.js" />
     <Content Include="bower_components\bootstrap-datepicker\tests\suites\calendar-weeks.js" />
     <Content Include="bower_components\bootstrap-datepicker\tests\suites\component.js" />
     <Content Include="bower_components\bootstrap-datepicker\tests\suites\data-api.js" />
@@ -2707,7 +2706,6 @@
     <Content Include="bower_components\bootstrap-datepicker\tests\suites\noconflict.js" />
     <Content Include="bower_components\bootstrap-datepicker\tests\suites\options.js" />
     <Content Include="bower_components\bootstrap-datepicker\tests\tests.html" />
-    <Content Include="bower_components\bootstrap-datepicker\tests\_coverage.html" />
     <Content Include="bower_components\bootstrap\.gitignore" />
     <Content Include="bower_components\bootstrap\docs\assets\css\bootstrap-responsive.css" />
     <Content Include="bower_components\bootstrap\docs\assets\css\bootstrap.css" />
@@ -6333,9 +6331,6 @@
     <Content Include="bower_components\bootstrap\Makefile" />
     <Content Include="bower_components\bootstrap\package.json" />
     <Content Include="bower_components\bootstrap\README.md" />
-    <Content Include="bower_components\bootstrap-datepicker\.hgignore" />
-    <Content Include="bower_components\bootstrap-datepicker\.hgtags" />
-    <Content Include="bower_components\bootstrap-datepicker\component.json" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
