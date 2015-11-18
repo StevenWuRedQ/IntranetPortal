@@ -156,5 +156,35 @@ Public Class Utility
     End Function
 
 
+    ''' <summary>
+    ''' Convert a regular number to a orinal number with supersciprt
+    ''' for example: 1 -> 1st; 13 -> 13rd
+    ''' </summary>
+    ''' <returns></returns>
+    Public Shared Function toOrdinalNumber(num As String) As String
+        Const TH = "TH"
+        Const ST = "ST"
+        Const ND = "ND"
+        Const RD = "RD"
+
+        If String.IsNullOrEmpty(num) Then
+            Throw New Exception("number should not be empty")
+        End If
+
+        Dim input = Integer.Parse(num)
+        Dim lastdigit = Integer.Parse(num.Substring(num.Length - 1))
+
+        Select Case lastdigit
+            Case 1
+                Return num & ST
+            Case 2
+                Return num & ND
+            Case 3
+                Return num & RD
+            Case Else
+                Return num & TH
+        End Select
+
+    End Function
 
 End Class

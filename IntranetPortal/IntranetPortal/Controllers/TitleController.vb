@@ -41,7 +41,6 @@ Namespace Controllers
             End Try
         End Function
 
-
         <Route("api/Title/GetCaseStatus")>
         Public Function GetCaseStatus(bble As String) As IHttpActionResult
             Try
@@ -101,7 +100,7 @@ Namespace Controllers
             Return Ok()
         End Function
 
-        <Route("api/ConstructionCases/GetGeneratedExcel")>
+        <Route("api/Title/GetGeneratedExcel")>
         Function GetGeneratedExcel() As HttpResponseMessage
             Dim response = New HttpResponseMessage(HttpStatusCode.OK)
             Dim fs = New FileStream(HttpContext.Current.Server.MapPath("~/TempDataFile/checkrequest.xlsx"), FileMode.Open)
@@ -111,6 +110,22 @@ Namespace Controllers
             response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
             response.Content.Headers.ContentLength = bfs.Length
             Return response
+        End Function
+
+        <Route("api/Title/GeneratePakcage")>
+        Function GeneratePakcage(<FromBody> data As JObject) As IHttpActionResult
+            Dim link = ""
+            Dim seller = data("seller")("name").ToString
+            Dim llc = data("llc").ToString
+            Dim sdate = Convert.ToDateTime(data("signdate").ToString)
+
+            If Not String.IsNullOrEmpty(seller) AndAlso Not String.IsNullOrEmpty(llc) Then
+                link = TitleManage.GeneratePackage(seller, llc, sdate)
+                Return Ok(link)
+            Else
+                Return Ok()
+            End If
+
         End Function
 
     End Class

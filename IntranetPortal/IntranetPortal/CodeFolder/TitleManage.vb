@@ -1,5 +1,6 @@
 ﻿Imports IntranetPortal.Data
 Imports Newtonsoft.Json.Linq
+Imports Microsoft.Office.Interop
 
 Public Class TitleManage
     Inherits ActivityManageBase
@@ -249,4 +250,33 @@ Public Class TitleManage
         End Select
 
     End Function
+
+    Public Shared Function GeneratePackage(seller As String, llc As String, sdate As Date) As String
+        Dim path = HttpContext.Current.Server.MapPath("~/App_Data/TitleDoc")
+        Dim targetpath = HttpContext.Current.Server.MapPath("~/TempDataFile/TitleDocs")
+
+        Dim docapp = New Word.Application()
+        Try
+
+            Dim direcotry = New IO.DirectoryInfo(path)
+            For Each file In direcotry.GetFiles()
+                Dim fname = file.Name
+                Dim d = docapp.Documents.Open(FileName:=file.FullName)
+                d.Range.Text.Replace("[seller]", seller)
+                d.Range.Text.Replace("[llc]", llc)
+                d.Range.Text.Replace("[year]", sdate.Year)
+                d.Range.Text.Replace("[month]", sdate.ToString("MMMM"))
+                d.Range.Text.Replace("[day]", Core.Utility.toOrdinalNumber(sdate.ToString("d")))
+                Dim finalpath = System.IO.Path.Combine(targetpath, fname)
+
+                d.SaveAs2(finalpath)
+            Next
+
+            Return ""
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
+
+
 End Class

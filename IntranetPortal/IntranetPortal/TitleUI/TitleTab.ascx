@@ -224,7 +224,8 @@
                 Owners: [new $scope.OwnerModel("Prior Owner Liens"), new $scope.OwnerModel("Current Owner Liens")],
                 preclosing: {
                     ApprovalData: [{}]
-                }
+                },
+                docs: {}
             };
         }; 
         $scope.ReloadDataModel = function() {
@@ -355,7 +356,7 @@
                 method: "POST",
                 data: JSON.stringify($scope.Form)
             }).then(function(res){
-                STDownloadFile("/api/ConstructionCases/GetGeneratedExcel", "titlereport.xlsx");
+                STDownloadFile("/api/Title/GetGeneratedExcel", "titlereport.xlsx");
             });
         };
         $scope.updateBuyerTitle = function(){

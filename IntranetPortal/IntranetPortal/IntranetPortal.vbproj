@@ -134,6 +134,10 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="ClosedXML, Version=0.76.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.76.0\lib\net40-client\ClosedXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.Charts.v15.1.Core, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
@@ -262,6 +266,9 @@
     </Reference>
     <Reference Include="Microsoft.Data.OData, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.OData.5.6.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -6330,6 +6337,7 @@
     <Content Include="bower_components\bootstrap\Makefile" />
     <Content Include="bower_components\bootstrap\package.json" />
     <Content Include="bower_components\bootstrap\README.md" />
+    <Content Include="bower.json" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -6593,12 +6601,12 @@
     <Content Include="WCFDataServices\Web.config" />
     <Content Include="Task\Reports\WorkflowReprot.Master" />
     <Content Include="TempDataFile\reslut.docx" />
-    <Content Include="TitleUI\TitleDoc\BILL OF SALE.docx" />
-    <Content Include="TitleUI\TitleDoc\CANCELLING PRIOR MEMBERSHIP AGREEMENT AND RESIGNATION.docx" />
-    <Content Include="TitleUI\TitleDoc\Hold Harmless Agreement.docx" />
-    <Content Include="TitleUI\TitleDoc\MANAGING MEMBER TRANSFER AGREEMENT.docx" />
-    <Content Include="TitleUI\TitleDoc\SALE AND GENERAL ASSIGNMENT OF SHARES IN.docx" />
-    <Content Include="TitleUI\TitleDoc\SIGNATURE PAGE OF AGREEMENT.docx" />
+    <Content Include="App_Data\TitleDoc\BILL OF SALE.docx" />
+    <Content Include="App_Data\TitleDoc\CANCELLING PRIOR MEMBERSHIP AGREEMENT AND RESIGNATION.docx" />
+    <Content Include="App_Data\TitleDoc\Hold Harmless Agreement.docx" />
+    <Content Include="App_Data\TitleDoc\MANAGING MEMBER TRANSFER AGREEMENT.docx" />
+    <Content Include="App_Data\TitleDoc\SALE AND GENERAL ASSIGNMENT OF SHARES IN.docx" />
+    <Content Include="App_Data\TitleDoc\SIGNATURE PAGE OF AGREEMENT.docx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -6624,6 +6632,7 @@
   <ItemGroup>
     <Folder Include="bower_components\bootstrap-datepicker\css\" />
     <Folder Include="Scripts\jquery.globalize\cultures\" />
+    <Folder Include="TempDataFile\TitleDocs\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntranetPortal.Core\IntranetPortal.Core.vbproj">
