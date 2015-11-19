@@ -80,7 +80,7 @@
                 <label class="ss_form_input_title">Defendant's Attorney *</label>
                 <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.DefendantAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DefendantAttorneyId">
             </li>
-            
+
         </ul>
         <h5 class="ss_form_title">OSC Other Defendants * <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="NGAddArrayitemScope('LegalCtrl','LegalCase.SecondaryInfo.OSC_Defendants')" title="Add" style="font-size: 18px"></i></h5>
 
@@ -93,12 +93,77 @@
     </div>
 
     <%-- Partitions --%>
-    <div class="ss_form clearfix cssSlideUp" ng-show="CheckSecondaryTags(2)">
-        <h4 class="ss_form_title">Partitions</h4>
-        <ul class="ss_form_box clearfix">
+    <div class="ss_form clearfix " ng-show="CheckSecondaryTags(2)">
+        <h4 class="ss_form_title">Partitions
+			<span style="transform: none; font-size: 12px;">(Mark as * need to fill other read only here)</span>
+            <i class="fa fa-download icon_btn color_blue tooltip-examples" title="Download Partitions Document" ng-click="DocGenerator('Partition_Temp.docx')"></i>
+        </h4>
+        <ul class="ss_form_box  clearfix">
             <li class="ss_form_item">
-                Partitions test
+                <label class="ss_form_input_title">County</label>
+                <input class="ss_form_input" ng-model="LeadsInfo.BoroughName" readonly="readonly">
             </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Plantiff *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsPlantiff">
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Defendant1 *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsDefendant1">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Defendant *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsDefendant">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Index # *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsIndexNum" mask="999999/9999">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Mortgage  Date *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsMortgageDate" ss-date>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Mortgage Amount *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsMortgageAmount" money-mask>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Date of recording  *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsDateOfRecording " ss-date>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">CRFN # *</label>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsCRFN">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Block/Lot</label>
+                <input class="ss_form_input" ng-value="LeadsInfo.Block+'/'+ LeadsInfo.Lot" readonly="readonly">
+            </li>
+            <li class="ss_form_item" style="width: 97%">
+                <label class="ss_form_input_title">Property Address</label>
+                <input class="ss_form_input" ng-model="LeadsInfo.PropertyAddress" readonly>
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Plantiff Attorney *</label>
+
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsPlantiffAttorney" ng-change="LegalCase.SecondaryInfo.PartitionsPlantiffAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.PartitionsPlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.PartitionsPlantiffAttorneyId">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Plantiff # </label>
+                <input class="ss_form_input" ng-value="ptContactServices.getContact(LegalCase.SecondaryInfo.PartitionsPlantiffAttorneyId, LegalCase.SecondaryInfo.PartitionsPlantiffAttorney).OfficeNO" readonly>
+            </li>
+            <li class="ss_form_item" style="width: 97%">
+                <label class="ss_form_input_title">Plantiff Attorney Address </label>
+                <input class="ss_form_input" ng-value="ptContactServices.getContact(LegalCase.SecondaryInfo.PartitionsPlantiffAttorneyId, LegalCase.SecondaryInfo.PartitionsPlantiffAttorney).Address" readonly>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Original Lender *</label>
+               <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsOriginalLender"/>
+            </li>
+
+
         </ul>
     </div>
     <%------ end Partitions-------%>
@@ -112,11 +177,11 @@
 
         <ul class="ss_form_box  clearfix">
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Plantiff</label>
+                <label class="ss_form_input_title">Plantiff *</label>
                 <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DeedReversionPlantiff">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Plantiff Attorney</label>
+                <label class="ss_form_input_title">Plantiff Attorney *</label>
                 <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorney" ng-change="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId">
             </li>
 
@@ -231,7 +296,7 @@
                 <label class="ss_form_input_title">Index #</label>
                 <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_IndexNum">
             </li>
-             <li class="ss_form_item">
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">DATE OF DEED TO PLAINTIFF *</label>
                 <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_DeedToPlaintiffDate" ss-date>
             </li>
@@ -251,7 +316,7 @@
                 <label class="ss_form_input_title">Defendant *</label>
                 <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_Defendant">
             </li>
-             <li class="ss_form_item">
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">Defendant lender 2 *</label>
                 <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_Defendant2">
             </li>
@@ -259,12 +324,12 @@
                 <label class="ss_form_input_title">Mortgagee *</label>
                 <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_Mortgagee">
             </li>
-             <li class="ss_form_item">
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">ORIGINAL MORTGAGE LENDER	 *</label>
                 <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_OrgMorgLender">
             </li>
 
-             <li class="ss_form_item">
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">DATE OF LP</label>
                 <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FCFiledDate" disabled="disabled" ss-date>
             </li>
@@ -272,7 +337,7 @@
                 <label class="ss_form_input_title">FC Index #</label>
                 <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FCIndexNum" readonly="readonly">
             </li>
-             <li class="ss_form_item">
+            <li class="ss_form_item">
                 <label class="ss_form_input_title">DEFAULT DATE</label>
                 <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.QTA_DefaultDate" ss-date>
             </li>
@@ -292,7 +357,7 @@
     </div>
 
     <%--End Quiet Tile Doc --%>
-    
+
     <%--<div class="ss_form clearfix">
         <h4 class="ss_form_title" style="margin-bottom: 12px;">Select Types</h4>
         <select class="form-control" ng-model="LegalCase.SecondaryInfo.SelectedType" ng-change="SecondarySelectType()" ng-options='o as o for o  in SecondaryTypeSource' style="width: 94%; margin-top: -8px">
