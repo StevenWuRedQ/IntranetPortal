@@ -44,6 +44,13 @@ Partial Public Class PropertyOwner
     '    End Using
     'End Function
 
+    Public Shared Function Instance(ownerId As Integer) As PropertyOwner
+
+        Using ctx As New ShortSaleEntities
+            Return ctx.PropertyOwners.Find(ownerId)
+        End Using
+    End Function
+
     Public Sub Save()
         Using context As New ShortSaleEntities
 

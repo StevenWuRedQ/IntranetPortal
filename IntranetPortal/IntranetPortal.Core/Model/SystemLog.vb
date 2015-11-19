@@ -49,6 +49,12 @@ Partial Public Class SystemLog
         End Using
     End Function
 
+    Public Shared Function GetLastLogs(title As String, endDate As DateTime, bble As String) As SystemLog
+        Using ctx As New CoreEntities
+            Return ctx.SystemLogs.Where(Function(l) l.Title = title And l.CreateDate < endDate And l.BBLE = bble).OrderByDescending(Function(l) l.CreateDate).Take(1).FirstOrDefault
+        End Using
+    End Function
+
     Public Shared Function GetLatestLogs(startDate As DateTime?) As List(Of SystemLog)
         Using ctx As New CoreEntities
             If startDate.HasValue AndAlso startDate > DateTime.MinValue Then

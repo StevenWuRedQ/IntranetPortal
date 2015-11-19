@@ -196,6 +196,7 @@
                         <ul class="nav nav-tabs nav-stacked color_gray" role="tablist" id="mytab">
                             <li role="presentation" class="mag_tabv"><a href="#Agent_Activity_Tab" onclick="agentActivityTab.ShowTab(currentTeamInfo.TeamName, true)" role="tab" data-toggle="tab"><i class="fa fa-users mag_tabv_i"></i>Agent Activity</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Status_Of_Leads_Tab" onclick="LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true)" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Status Of Leads</a></li>
+                            <li role="presentation" class="mag_tabv"><a href="#Team_Activity_Tab" onclick="" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Team Activity</a></li>
                             <% If IntranetPortal.Employee.IsAdmin(Page.User.Identity.Name) Then%>
                             <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-map-marker mag_tabv_i"></i>Geo Leads</a></li>
                             <%End If%>
@@ -255,6 +256,7 @@
                                                             { valueField: "CallOwner", name: "CallOwner", tag: "CallOwner" },
                                                             { valueField: "Comments", name: "Comments", tag: "Comments" },
                                                             { valueField: "UniqueBBLE", name: "UniqueBBLE", tag: "UniqueBBLE" },
+                                                            { valueField: "Appointment", name: "Appointment", tag: "Appointment" }
                                                         ],
                                                         title: "Agents Activities in " + tab.TeamName,
                                                         legend: {
@@ -829,6 +831,9 @@
                                 <%--<div role="tabpanel" class="tab-pane" id="Geo_Leads_tab">
                                     <iframe src="/Map/ZipMap.aspx" style="width: 100%; height: 800px"></iframe>
                                 </div>--%>
+                                <div role="tabpanel" class="tab-pane" id="Team_Activity_Tab">
+                                    Under construction. Comming soon...
+                                </div>
                             </div>
                         </div>
 
@@ -1294,7 +1299,16 @@
                     $('#mytab a[href="#Status_Of_Leads_Tab"]').tab('show');
                     LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true);
                 }
+            },
+            <% If User.IsInRole("Admin") %>
+            'Team Activity': {
+                text: "<i class=\"fa fa-pie-chart mag_tabv_i\"></i>Team Activity",
+                action: function () {
+                    $('#mytab a[href="#Team_Activity_Tab"]').tab('show');
+                    //LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true);
+                }
             }
+            <% End If %>
         };
 
         var reportsName = [];
@@ -1304,13 +1318,10 @@
 
         var reportTypeDropdown = $("#reportType").dxDropDownMenu({
             dataSource: reportsName,
-            itemClickAction: function (e) {
-                console.log(reportList[e.itemData]);
+            itemClickAction: function (e) {            
                 var report = reportList[e.itemData];
                 $("#tdReportTitle").html(report.text);
-
                 report.action();
-
             },
             buttonIcon: 'arrowdown',
         }).dxDropDownMenu("instance");

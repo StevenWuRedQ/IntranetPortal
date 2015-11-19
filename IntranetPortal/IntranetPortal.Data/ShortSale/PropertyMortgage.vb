@@ -145,6 +145,14 @@ Partial Public Class PropertyMortgage
         End Using
     End Function
 
+    Public Shared Function Instance(mortId As Integer) As PropertyMortgage
+        Using ctx As New ShortSaleEntities
+            Dim mort = ctx.PropertyMortgages.Find(mortId)
+            Return mort
+        End Using
+    End Function
+
+
     Public Sub Save(updateby As String)
         Using context As New ShortSaleEntities
             Dim pbi = context.PropertyMortgages.Find(MortgageId)

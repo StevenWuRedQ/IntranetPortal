@@ -525,6 +525,89 @@ Public Class Troubleshooting
         End Using
     End Function
 
+    'makeup the missed short sale datetime
+    Private Sub Button19_Click(sender As Object, e As EventArgs) Handles Button19.Click
+        If Not String.IsNullOrEmpty(txtSSResult.Text) Then
+            For Each bble In txtSSResult.Lines
+                Dim lastLog = Core.SystemLog.GetLastLogs("ShortSaleSave", New Date(2015, 11, 18), bble)
+                If lastLog IsNot Nothing Then
+                    Dim log = lastLog.Description
+
+                    Dim logData = JsonConvert.DeserializeObject(Of ShortSaleCase)(log)
+                    Dim ssData = ShortSaleCase.GetCaseByBBLE(bble)
+
+                    If logData.BBLE = ssData.BBLE Then
+
+                        'check owner date
+                        If logData.PropertyInfo IsNot Nothing AndAlso logData.PropertyInfo.Owners IsNot Nothing Then
+                            For Each pOwner In logData.PropertyInfo.Owners
+                                Dim ssOwner = PropertyOwner.Instance(pOwner.OwnerId)
+
+                                If pOwner.DOB.HasValue And Not ssOwner.DOB.HasValue Then
+                                    ssOwner.DOB = pOwner.DOB
+                                End If
+
+                                ssOwner.Save()
+                            Next
+                        End If
+
+                        'check Mortagages
+                        If logData.Mortgages IsNot Nothing AndAlso logData.Mortgages.Length > 0 Then
+                            For Each mort In logData.Mortgages
+                                Dim ssMort = PropertyMortgage.Instance(mort.MortgageId)
+
+                                'Auction Date
+                                If mort.AuctionDate.HasValue AndAlso Not ssMort.AuctionDate.HasValue Then
+                                    ssMort.AuctionDate = mort.AuctionDate
+                                End If
+
+                                'DateofSale
+                                If mort.DateOfSale.HasValue AndAlso Not ssMort.DateOfSale.HasValue Then
+                                    ssMort.DateOfSale = mort.DateOfSale
+                                End If
+
+                                If mort.DateVerified.HasValue AndAlso Not ssMort.DateVerified.HasValue Then
+                                    ssMort.DateVerified = mort.DateVerified
+                                End If
+
+                                If mort.PayoffExpired.HasValue AndAlso Not ssMort.PayoffExpired.HasValue Then
+                                    ssMort.PayoffExpired = mort.PayoffExpired
+                                End If
+
+                                If mort.PayoffRequested.HasValue AndAlso Not ssMort.PayoffRequested.HasValue Then
+                                    ssMort.PayoffRequested = mort.PayoffRequested
+                                End If
+
+                                If mort.LastPaymentDate.HasValue AndAlso Not ssMort.LastPaymentDate.HasValue Then
+                                    ssMort.LastPaymentDate = mort.LastPaymentDate
+                                End If
+
+                                If mort.CancelationSent.HasValue AndAlso Not ssMort.CancelationSent.HasValue Then
+                                    ssMort.CancelationSent = mort.CancelationSent
+                                End If
+
+                                If mort.DateAssigned.HasValue AndAlso Not ssMort.DateAssigned.HasValue Then
+                                    ssMort.DateAssigned = mort.DateAssigned
+                                End If
+
+                                If mort.LastBPOUpdate.HasValue AndAlso Not ssMort.LastBPOUpdate.HasValue Then
+                                    ssMort.LastBPOUpdate = mort.LastBPOUpdate
+                                End If
+
+                                If mort.UpcomingBPODate.HasValue AndAlso Not ssMort.UpcomingBPODate.HasValue Then
+                                    ssMort.UpcomingBPODate = mort.UpcomingBPODate
+                                End If
+
+                                mort.Save("Makeupdate")
+                            Next
+                        End If
+                    End If
+                End If
+            Next
+        End If
+    End Sub
+
+
 
 #End Region
 
@@ -1015,4 +1098,6 @@ Public Class Troubleshooting
 
 
     End Sub
+
+
 End Class

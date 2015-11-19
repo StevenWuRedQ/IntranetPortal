@@ -241,7 +241,11 @@ Public Class PortalReport
         Public Property TeamName As String
         Public ReadOnly Property DeadLeadsAmount As Integer
             Get
-                Return DeadLeads.Length
+                If DeadLeads IsNot Nothing Then
+                    Return DeadLeads.Length
+                End If
+
+                Return 0
             End Get
         End Property
         Public Property DeadLeads As Lead()

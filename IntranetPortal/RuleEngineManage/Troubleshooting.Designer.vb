@@ -82,6 +82,7 @@ Partial Class Troubleshooting
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.Button19 = New System.Windows.Forms.Button()
         Me.btnInitChecklist = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
         Me.Button13 = New System.Windows.Forms.Button()
@@ -136,6 +137,7 @@ Partial Class Troubleshooting
         Me.TitleTab = New System.Windows.Forms.TabPage()
         Me.TitleButton1 = New System.Windows.Forms.Button()
         Me.Button20 = New System.Windows.Forms.Button()
+        Me.txtSSResult = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -737,6 +739,8 @@ Partial Class Troubleshooting
         '
         'TabPage5
         '
+        Me.TabPage5.Controls.Add(Me.txtSSResult)
+        Me.TabPage5.Controls.Add(Me.Button19)
         Me.TabPage5.Controls.Add(Me.btnInitChecklist)
         Me.TabPage5.Controls.Add(Me.Button14)
         Me.TabPage5.Controls.Add(Me.Button13)
@@ -755,6 +759,15 @@ Partial Class Troubleshooting
         Me.TabPage5.TabIndex = 5
         Me.TabPage5.Text = "ShortSale"
         Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'Button19
+        '
+        Me.Button19.Location = New System.Drawing.Point(183, 235)
+        Me.Button19.Name = "Button19"
+        Me.Button19.Size = New System.Drawing.Size(140, 28)
+        Me.Button19.TabIndex = 11
+        Me.Button19.Text = "Makeup Datetime"
+        Me.Button19.UseVisualStyleBackColor = True
         '
         'btnInitChecklist
         '
@@ -1279,6 +1292,14 @@ Partial Class Troubleshooting
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
+        'txtSSResult
+        '
+        Me.txtSSResult.Location = New System.Drawing.Point(452, 17)
+        Me.txtSSResult.Multiline = True
+        Me.txtSSResult.Name = "txtSSResult"
+        Me.txtSSResult.Size = New System.Drawing.Size(398, 388)
+        Me.txtSSResult.TabIndex = 12
+        '
         'Troubleshooting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1443,4 +1464,6 @@ Partial Class Troubleshooting
     Friend WithEvents btnShortSaleUserFollowUp As Button
     Friend WithEvents TitleTab As TabPage
     Friend WithEvents TitleButton1 As Button
+    Friend WithEvents Button19 As Button
+    Friend WithEvents txtSSResult As TextBox
 End Class
