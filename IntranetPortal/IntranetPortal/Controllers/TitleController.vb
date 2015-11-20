@@ -114,17 +114,18 @@ Namespace Controllers
 
         <Route("api/Title/GeneratePakcage")>
         Function GeneratePakcage(<FromBody> data As JObject) As IHttpActionResult
-            Dim link = ""
-            Dim seller = data("seller")("name").ToString
-            Dim llc = data("llc").ToString
-            Dim sdate = Convert.ToDateTime(data("signdate").ToString)
-
-            If Not String.IsNullOrEmpty(seller) AndAlso Not String.IsNullOrEmpty(llc) Then
-                link = TitleManage.GeneratePackage(seller, llc, sdate)
+            Try
+                Dim link = ""
+                Dim entity = data("entity").ToString
+                Dim dba = data("dba").ToString
+                Dim transferor = data("transferor").ToString
+                Dim transferee = data("transferee").ToString
+                Dim sdate = Convert.ToDateTime(data("signdate").ToString)
+                link = TitleManage.GeneratePackage(entity, dba, transferor, transferee, sdate)
                 Return Ok(link)
-            Else
+            Catch ex As Exception
                 Return Ok()
-            End If
+            End Try
 
         End Function
 

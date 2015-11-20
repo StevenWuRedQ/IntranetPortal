@@ -86,6 +86,15 @@ Partial Public Class TitleTab
     Protected WithEvents TitlePreclosing As Global.IntranetPortal.TitlePreclosing
     
     '''<summary>
+    '''TitleDocTab control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TitleDocTab As Global.IntranetPortal.TitleDocTab
+    
+    '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>

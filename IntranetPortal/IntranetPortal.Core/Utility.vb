@@ -161,18 +161,20 @@ Public Class Utility
     ''' for example: 1 -> 1st; 13 -> 13rd
     ''' </summary>
     ''' <returns></returns>
-    Public Shared Function toOrdinalNumber(num As String) As String
+    Public Shared Function toOrdinalNumber(num As Integer) As String
+
         Const TH = "TH"
         Const ST = "ST"
         Const ND = "ND"
         Const RD = "RD"
 
-        If String.IsNullOrEmpty(num) Then
-            Throw New Exception("number should not be empty")
+        If num <= 0 Then
+            Throw New Exception("Number should be positive")
         End If
+        Dim numstr = num.ToString
 
-        Dim input = Integer.Parse(num)
-        Dim lastdigit = Integer.Parse(num.Substring(num.Length - 1))
+        Dim input = Integer.Parse(numstr)
+        Dim lastdigit = Integer.Parse(numstr.Substring(numstr.Length - 1))
 
         Select Case lastdigit
             Case 1

@@ -1,6 +1,8 @@
 ﻿Imports IntranetPortal.Data
 Imports Newtonsoft.Json.Linq
-Imports Microsoft.Office.Interop
+Imports System.IO
+Imports System.IO.Compression
+Imports Novacode
 
 Public Class TitleManage
     Inherits ActivityManageBase
@@ -251,28 +253,35 @@ Public Class TitleManage
 
     End Function
 
-    Public Shared Function GeneratePackage(seller As String, llc As String, sdate As Date) As String
+    Public Shared Function GeneratePackage(entity As String, dba As String, transferor As String, transferee As String, sdate As Date) As String
         Dim path = HttpContext.Current.Server.MapPath("~/App_Data/TitleDoc")
         Dim targetpath = HttpContext.Current.Server.MapPath("~/TempDataFile/TitleDocs")
-
-        Dim docapp = New Word.Application()
+        Dim zipPath = IO.Path.Combine(HttpContext.Current.Server.MapPath("~/TempDataFile/"), "title_doc_package.zip")
         Try
-
             Dim direcotry = New IO.DirectoryInfo(path)
-            For Each file In direcotry.GetFiles()
-                Dim fname = file.Name
-                Dim d = docapp.Documents.Open(FileName:=file.FullName)
-                d.Range.Text.Replace("[seller]", seller)
-                d.Range.Text.Replace("[llc]", llc)
-                d.Range.Text.Replace("[year]", sdate.Year)
-                d.Range.Text.Replace("[month]", sdate.ToString("MMMM"))
-                d.Range.Text.Replace("[day]", Core.Utility.toOrdinalNumber(sdate.ToString("d")))
-                Dim finalpath = System.IO.Path.Combine(targetpath, fname)
+            For Each f In direcotry.GetFiles()
+                Dim fname = f.Name
+                Dim finalpath = IO.Path.Combine(targetpath, fname)
 
-                d.SaveAs2(finalpath)
+                Using d = DocX.Load(f.FullName)
+
+                    d.ReplaceText("[ENTITY]", entity)
+                    d.ReplaceText("[DBA]", dba)
+                    d.ReplaceText("[TRANSFEROR]", transferor)
+                    d.ReplaceText("[TRANSFEREE]", transferee)
+                    d.ReplaceText("[YEAR]", sdate.Year)
+                    d.ReplaceText("[MONTH]", sdate.ToString("MMMM"))
+                    d.ReplaceText("[DAY]", Core.Utility.toOrdinalNumber(sdate.Day))
+
+                    d.SaveAs(finalpath)
+                End Using
+
             Next
-
-            Return ""
+            If File.Exists(zipPath) Then
+                File.Delete(zipPath)
+            End If
+            ZipFile.CreateFromDirectory(targetpath, zipPath)
+            Return "/TempDataFile/title_doc_package.zip"
         Catch ex As Exception
             Return ""
         End Try

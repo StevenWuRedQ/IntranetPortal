@@ -6,6 +6,7 @@
 <%@ Register Src="~/TitleUI/TitleSurveyAndContin.ascx" TagPrefix="uc1" TagName="TitleSurveyAndContin" %>
 <%@ Register Src="~/TitleUI/TitlePreclosing.ascx" TagPrefix="uc1" TagName="TitlePreclosing" %>
 <%@ Register Src="~/TitleUI/TitleFeeClearance.ascx" TagPrefix="uc1" TagName="TitleFeeClearance" %>
+<%@ Register Src="~/TitleUI/TitleDocTab.ascx" TagPrefix="uc1" TagName="TitleDocTab" %>
 
 <uc1:Common runat="server" ID="Common" Visible="false" />
 <div id="titleui_and_activity">
@@ -82,6 +83,7 @@
             </div>
             <div class="shortSaleUI">
                 <ul class="nav nav-tabs overview_tabs" role="tablist">
+
                     <li style="font-size: 12px" class="short_sale_tab active">
                         <a class="shot_sale_tab_a" href="#TitleInfoTab" role="tab" data-toggle="tab">Info</a>
                     </li>
@@ -97,8 +99,12 @@
                     <li style="font-size: 12px" class="short_sale_tab ">
                         <a class="shot_sale_tab_a" href="#TitleFeeClearanceTab" role="tab" data-toggle="tab">Fee Breakdown</a>
                     </li>
-                    <li style="font-size: 12px" class="short_sale_tab ">
-                        <a class="shot_sale_tab_a" href="#TitlePreclosingTab" role="tab" data-toggle="tab">Preclosing Docs</a>
+                    <li role="presentation"  style="font-size: 12px" class="short_sale_tab dropdown">
+                        <a class="dropdown-toggle shot_sale_tab_a" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class=""><a class="" href="#TitlePreclosingTab" role="tab" data-toggle="tab">Preclosing Docs</a></li>
+                            <li class=""><a class="" href="#TitleDocsTab" role="tab" data-toggle="tab">Title Docs</a></li>
+                        </ul>
                     </li>
                 </ul>
 
@@ -122,6 +128,9 @@
                         </div>
                         <div class="tab-pane" id="TitlePreclosingTab">
                             <uc1:TitlePreclosing runat="server" ID="TitlePreclosing" />
+                        </div>
+                        <div class="tab-pane" id="TitleDocsTab">
+                            <uc1:TitleDocTab runat="server" ID="TitleDocTab" />
                         </div>
                     </div>
                 </div>
@@ -271,6 +280,7 @@
             }
             $scope.$broadcast('ownerliens-reload');
             $scope.$broadcast('clearance-reload');
+            $scope.$broadcast('titledoc-reload')
 
             $scope.checkReadOnly();
             $scope.$apply();
@@ -345,10 +355,10 @@
             $http.get('/api/Title/GetCaseStatus?bble='+ bble)
             .then(function succ(res){
                 $scope.CaseStatus = res.data;
-                },function error(){
+            },function error(){
                 $scope.CaseStatus = -1;
                 console.log("get status error");
-                });
+            });
         };
         $scope.generateXML = function(){
             $http({
@@ -405,7 +415,7 @@
                     }
                     ,function error(){
                         console.log("fail to update buyertitle");
-                        });
+                    });
                 }
             }
         };
