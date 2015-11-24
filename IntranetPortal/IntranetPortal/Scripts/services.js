@@ -1,110 +1,8 @@
-﻿/* code area steven*/
-$.wait = function (ms) {
-    var defer = $.Deferred();
-    setTimeout(function () { defer.resolve(); }, ms);
-    return defer;
-};
-function NGAddArrayitemScope(scopeId, model) {
-    var $scope = angular.element(document.getElementById(scopeId)).scope();
-    if (model) {
-        var array = $scope.$eval(model);
-        if (!array) {
-            $scope.$eval(model + '=[{}]');
-        } else {
-
-            $scope.$eval(model + '.push({})');
-
-        }
-        $scope.$apply();
-    }
-}
-
-function ScopeCaseDataChanged(getDataFunc) {
-    if ($('#CaseData').length === 0) {
-        alert("can not find input case data elment");
-        $('<input type="hidden" id="CaseData" />').appendTo(document.body);
-        return false;
-    }
-
-    return $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(getDataFunc());
-}
-
-function ScopeResetCaseDataChange(getDataFunc) {
-    var caseData = getDataFunc();
-    if ($('#CaseData').length == 0) {
-
-        $('<input type="hidden" id="CaseData" />').appendTo(document.body);
-    }
-    $('#CaseData').val(JSON.stringify(getDataFunc()));
-}
-
-function ScopeAutoSave(getDataFunc, SaveFunc, headEelem, makeSrueRefersh) {
-    if ($(headEelem).length <= 0) {
-        return;
-    }
-    if (typeof GetDataReadOnly !== 'undefined' && !GetDataReadOnly()) {
-        return;
-    }
-    // delay the first run after 30 second!
-    $.wait(30000).then(function () {
-        window.setInterval(function () {
-            //if (makeSrueRefersh)
-            //{
-            //    var m = makeSrueRefersh;
-            //    CheckLastUpdateChangedByOther(m.urlFunc, m.reLoadUIfunc, m.loadUIIdFunc, m.urlModfiyUserFunc)
-            //}
-            if (ScopeCaseDataChanged(getDataFunc)) {
-                var sucessFunc = function () {
-                };
-                SaveFunc(sucessFunc);
-                //ScopeResetCaseDataChange(getDataFunc)
-            }
-        }, 30000);
-    });
-}
-
-
-function ScopeSetLastUpdateTime(url) {
-    $.getJSON(url, function (data) {
-        $('#LastUpdateTime').val(JSON.stringify(data));
-    });
-}
-
-function CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyUserFunc) {
-    var url = urlFunc();
-    $.getJSON(url, function (data) {
-        var lastUpdateTime = JSON.stringify(data);
-        var localUpdateTime = $('#LastUpdateTime').val();
-        if (localUpdateTime && localUpdateTime != lastUpdateTime) {
-            if (urlModfiyUserFunc) {
-                $.getJSON(urlModfiyUserFunc(), function (mUser) {
-                    if (mUser) {
-                        if (mUser != "sameuser") {
-                            alert(mUser + " change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
-                        }
-                        reLoadUIfunc(loadUIIdFunc());
-                    }
-
-                });
-            } else {
-                alert("Someone change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
-                reLoadUIfunc(loadUIIdFunc());
-            }
-
-        }
-    });
-}
-
-function ScopeDateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyUserFunc) {
-
-    window.setInterval(function () {
-        CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyUserFunc);
-    }, 10000);
-}
-
-/* above is global functions */
-angular.module("PortalApp")
+﻿angular.module("PortalApp")
     .service("ptCom", ["$http", "$rootScope", function ($http, $rootScope) {
+
+        var that = this;
+
         /******************Stven code area*********************/
         this.DocGenerator = function (tplName, data, successFunc) {
             $http.post("/Services/Documents.svc/DocGenrate", { "tplName": tplName, "data": JSON.stringify(data) }).success(function (data) {
@@ -123,13 +21,11 @@ angular.module("PortalApp")
         this.arrayRemove = function (model, index, confirm, callback) {
             if (model && index < model.length) {
                 if (confirm) {
-                    var x = this.confirm("Delete This?", "");
-                    x.then(function (r) {
+                    var x = that.confirm("Delete This?", "").then(function (r) {
                         if (r) {
                             var deleteObj = model.splice(index, 1)[0];
                             if (callback) callback(deleteObj);
                         }
-
                     });
                 } else {
                     model.splice(index, 1);
@@ -153,9 +49,9 @@ angular.module("PortalApp")
 
         this.formatName = function (firstName, middleName, lastName) {
             var result = '';
-            if (firstName) result += this.capitalizeFirstLetter(firstName) + ' ';
-            if (middleName) result += this.capitalizeFirstLetter(middleName) + ' ';
-            if (lastName) result += this.capitalizeFirstLetter(lastName);
+            if (firstName) result += that.capitalizeFirstLetter(firstName) + ' ';
+            if (middleName) result += that.capitalizeFirstLetter(middleName) + ' ';
+            if (lastName) result += that.capitalizeFirstLetter(lastName);
             return result;
         };
         this.ensureArray = function (scope, modelName) {
@@ -165,7 +61,7 @@ angular.module("PortalApp")
             }
         };
         this.ensurePush = function (scope, modelName, data) {
-            this.ensureArray(scope, modelName);
+            that.ensureArray(scope, modelName);
             data = data ? data : {};
             var model = scope.$eval(modelName);
             model.push(data);
@@ -178,7 +74,7 @@ angular.module("PortalApp")
                         obj[property] = undefined;
                     } else {
                         if (typeof obj[property] == "object") {
-                            this.nullToUndefined(obj[property]);
+                            that.nullToUndefined(obj[property]);
                         }
                     }
                 }
@@ -207,10 +103,10 @@ angular.module("PortalApp")
         this.addOverlay = function () {
             $rootScope.addOverlay();
         };
-        this.stopLoading = function() {
+        this.stopLoading = function () {
             $rootScope.stopLoading();
         }
-        this.startLoading = function() {
+        this.startLoading = function () {
             $rootScope.startLoading();
         }
 
@@ -332,7 +228,7 @@ angular.module('PortalApp')
 
         };
 
-      
+
     }]);
 
 angular.module('PortalApp')
@@ -455,13 +351,13 @@ angular.module('PortalApp')
         };
         this.uploadConstructionFile = function (data, bble, rename, folder, callback) {
             var fileName = rename ? rename : '';
-            var folder = folder ? folder : '';
+            var tofolder = folder ? folder : '';
             if (!data || !bble) {
                 callback('Upload infomation missing!');
             } else {
                 bble = bble.trim();
                 $.ajax({
-                    url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + folder,
+                    url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + tofolder,
                     type: 'POST',
                     data: data,
                     cache: false,
@@ -477,12 +373,13 @@ angular.module('PortalApp')
             }
         };
         this.getFileName = function (fullPath) {
+            var paths;
             if (fullPath) {
                 if (this.isIE(fullPath)) {
-                    var paths = fullPath.split('\\');
+                    paths = fullPath.split('\\');
                     return this.cleanName(paths[paths.length - 1]);
                 } else {
-                    var paths = fullPath.split('/');
+                    paths = fullPath.split('/');
                     return this.cleanName(paths[paths.length - 1]);
                 }
             }
@@ -570,12 +467,12 @@ angular.module('PortalApp')
 
             }
         };
-        this.resetFileElement = function (ele) {
-            ele.val('');
-            ele.wrap('<form>').parent('form').trigger('reset');
-            ele.unwrap();
-            ele.prop('files')[0] = null;
-            ele.replaceWith(ele.clone());
+        this.resetFileElement = function (el) {
+            el.val('');
+            el.wrap('<form>').parent('form').trigger('reset');
+            el.unwrap();
+            el.prop('files')[0] = null;
+            el.replaceWith(el.clone());
         };
         this.cleanName = function (filename) {
             return filename.replace(/[^a-z0-9_\-\.()]/gi, '_');
@@ -645,7 +542,7 @@ angular.module('PortalApp')
     ]);
 
 angular.module('PortalApp')
-    .factory('ptLegalService', ["$http", function () {
+    .factory('ptLegalService', function () {
         return {
             load: function (bble, callback) {
                 var url = '/LegalUI/LegalUI.aspx/GetCaseData';
@@ -686,8 +583,8 @@ angular.module('PortalApp')
                 });
             }
         };
-    }
-    ]);
+    });
+
 angular.module('PortalApp')
     .factory('ptEntityService', function ($http) {
         return {

@@ -342,25 +342,19 @@
         var homeBreakDownCtrl = document.getElementById('homeBreakDownCtrl');
         var target = angular.element(homeBreakDownCtrl);
         var $injector = target.injector();
-        if ($injector) {
         $injector.invoke(function ($compile, ptCom, ptHomeBreakDownService) {
-            var compiled = $compile(homeBreakDownCtrl.innerHTML);
-            var $scope = target.scope();
+            var parentScope = target.scope();
+            var $scope = parentScope.$new(true);
             /* think as setup controller */
             $scope.PropFloors = [];
             $scope.BBLE = bble;
             $scope.init = function (bble) {
                 ptHomeBreakDownService.loadByBBLE(bble, function (res) {
-
-                        $scope.PropFloors = res ? res : [];
+                    $scope.PropFloors = res ? res : [];
                 });
             }
-
             $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
-            $scope.arrayRemove = function (a, b, c) {
-                ptCom.arrayRemove(a, b, c, function () { $scope.$apply(); });
-                
-            }
+            $scope.arrayRemove = ptCom.arrayRemove;
 
             $scope.setPopupVisible = function (model, bVal) {
                 model.popupVisible = bVal;
@@ -371,50 +365,22 @@
                 $scope.setPopupVisible($scope.PropFloors[$scope.PropFloors.length - 1], true);
             }
             $scope.saveHomeBreakDown = function () {
-                    ptHomeBreakDownService.save($scope.BBLE, $scope.PropFloors, function (res) {
+                ptHomeBreakDownService.save($scope.BBLE, $scope.PropFloors, function (res) {
                     console.log(res);
                     alert('Save Successfullly!');
                 })
             }
 
-            /* end setup*/
+            var compiled = $compile(homeBreakDownCtrl.innerHTML);
             var cElem = compiled($scope);
             $scope.$digest();
             target.html(cElem);
+            $scope.init(bble);
         });
-
-        target.scope().init(bble);
+        
     }
-    }
-    angular.module('PortalApp').controller('homeBreakDownCtrl', function ($scope, ptCom, ptHomeBreakDownService) {
+    angular.module('PortalApp').controller('homeBreakDownCtrl', function () { })
 
-        $scope.PropFloors = [];
-        $scope.BBLE = leadsInfoBBLE;
-
-        $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
-        $scope.arrayRemove = function (a, b, c) {
-            ptCom.arrayRemove(a, b, c, function () { $scope.$apply(); });
-
-        }
-
-        $scope.setPopupVisible = function (model, bVal) {
-            model.popupVisible = bVal;
-        }
-
-        $scope.addNewUnit = function () {
-            $scope.ensurePush('PropFloors');
-            $scope.setPopupVisible($scope.PropFloors[$scope.PropFloors.length - 1], true);
-        }
-        $scope.saveHomeBreakDown = function () {
-            ptHomeBreakDownService.save($scope.BBLE, $scope.PropFloors, function (res) {
-                console.log(res);
-                alert('Save Successfullly!');
-            })
-    }
-        ptHomeBreakDownService.loadByBBLE(leadsInfoBBLE, function (res) {
-            $scope.PropFloors = res ? res : [];
-        });
-    })
 </script>
 <script src="/Scripts/stevenjs.js"></script>
 <style type="text/css">
@@ -821,24 +787,7 @@
     <ClientSideEvents EndCallback="OnLeadsInfoEndCallBack"></ClientSideEvents>
     <Border BorderStyle="None"></Border>
 </dx:ASPxCallbackPanel>
-<%--<dx:ASPxPopupControl runat="server" ID="PhoneCommentPopup" ClientInstanceName="PhoneCommentPopUpClient"
-    PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" HeaderText="Phone Comments">
-    <ContentCollection>
-        <dx:PopupControlContentControl>
 
-            <div class="form-group">
-                <label for="phone_comment" class="control-label">Comments:</label>
-                <input type="text"  id="phone_comment">
-            </div>
-
-            <button type="button" onclick="onSavePhoneComment();">Save</button>
-            <button type="button" onclick="PhoneCommentPopUpClient.Hide();">Close</button>
-            <button type="button" onclick="onBtn()">Chagne Text</button>
-            
-        </dx:PopupControlContentControl>
-    </ContentCollection>
-
-</dx:ASPxPopupControl>--%>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

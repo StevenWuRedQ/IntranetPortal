@@ -13,8 +13,8 @@
             <th></th>
         </tr>
         <tr class="icon_btn" ng-repeat="floor in PropFloors" id="floor{{$index}}">
-            <td ng-click="setPopupVisible(PropFloors[$index], true)">{{$index+1}}</td>
-            <td class="col-sm-3" ng-click="setPopupVisible(PropFloors[$index], true)">
+            <td ng-click="visiblePopup=true">{{$index+1}}</td>
+            <td class="col-sm-3" ng-click="svisiblePopup=true">
                 <div class="content">
                     <div class="row" style="margin: 0px">
                         <div class="col-sm-12" style="padding: 0px">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </td>
-            <td class="col-sm-4" ng-click="setPopupVisible(PropFloors[$index], true)">
+            <td class="col-sm-4" ng-click="visiblePopup=true">
                 <div class="content">
                     <div class="row" style="margin: 0px">
                         <div class="col-sm-12" style="padding: 0px">
@@ -56,41 +56,41 @@
                     </div>
                 </div>
             </td>
-            <td class="col-sm-4" ng-click="setPopupVisible(PropFloors[$index], true)">
+            <td class="col-sm-4" ng-click="visiblePopup=true">
                 <div class="content">
-                    <div class="row" style="margin: 0px">
-                        <div class="col-sm-12" style="padding: 0px">
+                    <div class="row" style="margin: 0">
+                        <div class="col-sm-12" style="padding: 0">
                             <span><b>Access:</b> {{floor.Access}}</span>
                         </div>
-                        <div class="col-sm-12" style="padding: 0px">
+                        <div class="col-sm-12" style="padding: 0">
                             <span><b>Lockbox:</b> {{floor.LockBox}}</span>
                         </div>
-                        <div class="col-sm-12" style="padding: 0px">
+                        <div class="col-sm-12" style="padding: 0">
                             <span><b>LockupDate:</b> {{floor.LockupDate |date: 'M/d/yyyy'}}</span>
                         </div>
-                        <div class="col-sm-12" style="padding: 0px">
+                        <div class="col-sm-12" style="padding: 0">
                             <span><b>LockedBy:</b> {{floor.LockedBy}}</span>
                         </div>
-                        <div class="col-sm-12" style="padding: 0px">
+                        <div class="col-sm-12" style="padding: 0">
                             <span><b>LastChecked:</b> {{floor.LastChecked |date: 'M/d/yyyy'}}</span>
                         </div>
                     </div>
                 </div>
             </td>
             <td><i class="fa fa-times icon_btn tooltip-examples text-danger" ng-click="arrayRemove(PropFloors, $index, true)" title="Delete"></i>
-                <div dx-popup="{    
+                <!-- use ngrepeat score as the scope controll visibilty -->
+                <div dx-popup="{
                                 height: 750,
                                 width: 600, 
                                 title: 'Unit '+ ($index+1),
                                 dragEnabled: true,
                                 showCloseButton: true,
                                 shading: false,
-                                bindingOptions:{ visible: 'PropFloors['+$index+'].visiblePopup' },
                                 scrolling: {mode: 'virtual' },
+                                bindingOptions:{ visible: 'visiblePopup' }
                             }">
                     <div data-options="dxTemplate:{ name: 'content' }">
-
-                        <div style="height: 88%; padding: 0px 5px; overflow-y: auto; overflow-x: hidden">
+                        <div style="height: 88%; padding: 0 5px; overflow-y: auto; overflow-x: hidden">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label>Description</label>
@@ -170,7 +170,7 @@
                             </div>
                         </div>
                         <hr />
-                        <button class="btn btn-primary pull-right" ng-click="setPopupVisible(PropFloors[$index], false)">Close</button>
+                        <button class="btn btn-primary pull-right" ng-click="visiblePopup=false">Close</button>
                     </div>
                 </div>
             </td>

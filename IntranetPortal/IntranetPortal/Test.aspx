@@ -8,5 +8,8 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
     <uc1:TitleDocTab runat="server" ID="TitleDocTab" />
+    <dx:ASPxCalendar    >
+
+    </dx:ASPxCalendar>
 </asp:Content>
 

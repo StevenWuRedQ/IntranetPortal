@@ -105,6 +105,8 @@
                     ptCom.stopLoading();
                     if (res.data.length > 0) {
                         $("#generatedDocsLink").show();
+                    } else {
+                        $("#generatedDocWarning").show();
                     }
                 }, function () {
                     ptCom.stopLoading();

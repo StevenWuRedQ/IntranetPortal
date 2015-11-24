@@ -27,31 +27,6 @@
                 <label class="ss_form_input_tflitle">Address</label>
                 <input class="ss_form_input" readonly="readonly" ng-model="SsCase.LeadsInfo.PropertyAddress" style="width: 93.5%;">
             </li>
-
-            <%--<li class="ss_form_item">
-                <label class="ss_form_input_title">Street Number</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.Number" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Street Name</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.StreetName" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Apt #</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.AptNo" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">City</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.NeighName" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">State</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.State" readonly="readonly">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Zip</label>
-                <input class="ss_form_input" mask="99999" clean='true' ng-model="SsCase.LeadsInfo.ZipCode" readonly="readonly">
-        </li>--%>
         </ul>
     </div>
 </div>
@@ -144,7 +119,6 @@
                                 scrolling: {mode: 'virtual' },
                             }">
                     <div data-options="dxTemplate:{ name: 'content' }">
-
                         <div style="height: 88%; padding: 0 5px; overflow-y: auto; overflow-x: hidden">
                             <div class="row">
                                 <div class="col-sm-6">
