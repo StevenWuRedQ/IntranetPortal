@@ -164,8 +164,8 @@ Imports IntranetPortal.Core
         Dim tables = <string>
                          [
                             {
-                                "name": "SS_Valuation",
-                                "ignoreFields": ["BBLE", "MortgageId", "CaseId"]
+                                "name": "LegalJTaxLienStatus",
+                                "ignoreFields": ["BBLE"]
                             }
                          ]
                      </string>

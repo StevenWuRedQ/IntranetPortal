@@ -22,6 +22,7 @@ Partial Class Troubleshooting
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Troubleshooting))
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnLeadsRule = New System.Windows.Forms.Button()
@@ -82,6 +83,7 @@ Partial Class Troubleshooting
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.txtSSResult = New System.Windows.Forms.TextBox()
         Me.Button19 = New System.Windows.Forms.Button()
         Me.btnInitChecklist = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
@@ -137,7 +139,6 @@ Partial Class Troubleshooting
         Me.TitleTab = New System.Windows.Forms.TabPage()
         Me.TitleButton1 = New System.Windows.Forms.Button()
         Me.Button20 = New System.Windows.Forms.Button()
-        Me.txtSSResult = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -760,6 +761,14 @@ Partial Class Troubleshooting
         Me.TabPage5.Text = "ShortSale"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
+        'txtSSResult
+        '
+        Me.txtSSResult.Location = New System.Drawing.Point(452, 17)
+        Me.txtSSResult.Multiline = True
+        Me.txtSSResult.Name = "txtSSResult"
+        Me.txtSSResult.Size = New System.Drawing.Size(398, 388)
+        Me.txtSSResult.TabIndex = 12
+        '
         'Button19
         '
         Me.Button19.Location = New System.Drawing.Point(183, 235)
@@ -1248,11 +1257,13 @@ Partial Class Troubleshooting
         'txtReportTables
         '
         Me.txtReportTables.Dock = System.Windows.Forms.DockStyle.Top
+        Me.txtReportTables.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtReportTables.Location = New System.Drawing.Point(0, 0)
         Me.txtReportTables.Multiline = True
         Me.txtReportTables.Name = "txtReportTables"
         Me.txtReportTables.Size = New System.Drawing.Size(286, 280)
         Me.txtReportTables.TabIndex = 0
+        Me.txtReportTables.Text = resources.GetString("txtReportTables.Text")
         '
         'txtTemplateResult
         '
@@ -1260,6 +1271,7 @@ Partial Class Troubleshooting
         Me.txtTemplateResult.Location = New System.Drawing.Point(0, 0)
         Me.txtTemplateResult.Multiline = True
         Me.txtTemplateResult.Name = "txtTemplateResult"
+        Me.txtTemplateResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtTemplateResult.Size = New System.Drawing.Size(571, 407)
         Me.txtTemplateResult.TabIndex = 0
         '
@@ -1291,14 +1303,6 @@ Partial Class Troubleshooting
         Me.Button20.TabIndex = 8
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
-        '
-        'txtSSResult
-        '
-        Me.txtSSResult.Location = New System.Drawing.Point(452, 17)
-        Me.txtSSResult.Multiline = True
-        Me.txtSSResult.Name = "txtSSResult"
-        Me.txtSSResult.Size = New System.Drawing.Size(398, 388)
-        Me.txtSSResult.TabIndex = 12
         '
         'Troubleshooting
         '
