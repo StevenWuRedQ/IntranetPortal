@@ -54,7 +54,6 @@ Public Class ActivityLogs
 
     Private Sub ActivityLogs_Init(sender As Object, e As EventArgs) Handles Me.Init
 
-
     End Sub
 
     Public Sub BindData(bble As String, activityMng As ActivityManageBase)
@@ -179,6 +178,7 @@ Public Class ActivityLogs
 
         If e.Parameters.StartsWith("Filter") Then
             Dim categories = e.Parameters.Split("|")(1)
+            gridTracking.FilterExpression = ""
             BindLogsByCategories(hfBBLE.Value, categories.Split(";"))
 
             Return
