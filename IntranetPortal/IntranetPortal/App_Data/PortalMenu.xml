@@ -469,6 +469,11 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="Legal-Report" Text="Custom Report" NavigationUrl="/CustomReport/ReportWizard.aspx?t=legal" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-table"></i>]]>
+        </FontClass>
+      </PortalNavItem>
     </Items>
 
   </PortalNavItem>
