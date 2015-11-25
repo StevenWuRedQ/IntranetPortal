@@ -1,18 +1,23 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionViolationTab.ascx.vb" Inherits="IntranetPortal.ConstructionViolationTab" %>
 
 <%-- orders --%>
-<div class="ss_form" ng-init="Violations_OrdersPanelVisible=false" style="margin-bottom: 30px">
-    <h4 class="ss_form_title">Orders<input type="checkbox" ng-model="CSCase.CSCase.Violations.Orders" id="orders" /><label for="orders"></label></h4>
-    <div style="text-align: center" ng-show="CSCase.CSCase.Violations.Orders">
-        <style>
-        </style>
-        <span class="barner-danger text-link" ng-click="Violations_OrdersPanelVisible=true">STOP WORK ORDER EXISTS ON THIS PROPERTY</span>
+<div class="ss_form" ng-init="Violations_OrdersPanelVisible=false">
+    <h4 class="ss_form_title">Orders&nbsp;
+        <span class="badge">{{getOrdersLength()}}</span>
+        <i class="fa fa-pencil icon_btn text-primary" uib-tooltip="edit orders" ng-click="Violations_OrdersPanelVisible=true"></i>
+    </h4>
+    <div style="text-align: center">
+        <div style="text-align: left" ng-show="false" hide-ng-show="(!CSCase.CSCase.Violations.stopWorkOrders || CSCase.CSCase.Violations.stopWorkOrders.length<=0) && (!CSCase.CSCase.Violations.fullVacateOrders || CSCase.CSCase.Violations.fullVacateOrders.length<=0) && (!CSCase.CSCase.Violations.partialVacateOrders || CSCase.CSCase.Violations.partialVacateOrders.length<=0)">
+            <button type="button" class="btn btn-danger btn-sm ">Fetch From DOB</button>
+            <br />
+        </div>
+        <span class="barner-danger text-link" ng-click="Violations_OrdersPanelVisible=true" ng-show="CSCase.CSCase.Violations.stopWorkOrders && CSCase.CSCase.Violations.stopWorkOrders.length>0">STOP WORK ORDER EXISTS ON THIS PROPERTY
         <br />
+        </span>
+        <span class="barner-warning text-link" ng-click="Violations_OrdersPanelVisible=true" ng-show="CSCase.CSCase.Violations.fullVacateOrders && CSCase.CSCase.Violations.fullVacateOrders.length>0">FULL VACATE EXISTS ON THIS PROPERTY
         <br />
-        <span class="barner-warning text-link" ng-click="Violations_OrdersPanelVisible=true">FULL VACATE EXISTS ON THIS PROPERTY</span>
-        <br />
-        <br />
-        <span class="barner-warning text-link" ng-click="Violations_OrdersPanelVisible=true">PARTIAL VACATE EXISTS ON THIS PROPERTY</span>
+        </span>
+        <span class="barner-warning text-link" ng-click="Violations_OrdersPanelVisible=true" ng-show="CSCase.CSCase.Violations.partialVacateOrders && CSCase.CSCase.Violations.partialVacateOrders.length>0">PARTIAL VACATE EXISTS ON THIS PROPERTY</span>
     </div>
     <div dx-popup="{
                     height: 800,

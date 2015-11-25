@@ -615,5 +615,9 @@
                 console.log("Fail to assign Initial Form owner.")
             })
         }
+
+        $scope.getOrdersLength = funciton (){
+        
+        }
     });
 </script>

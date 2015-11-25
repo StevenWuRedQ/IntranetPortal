@@ -34,7 +34,7 @@
                                 <td class="col-sm-3 col-md-3">
                                     <label for="{{camel(f.name)}}">{{f.name}}</label></td>
                                 <td>
-                                    <span class="btn btn-sm btn-primary" ng-show="!f.filters||f.filters.length==0" ng-click="addFilter(f)">add filter</span>
+                                    
                                     <span ng-show="f.filters">
                                         <span ng-repeat="x in f.filters">
                                             <span ng-if="f.type=='string'">
@@ -82,8 +82,10 @@
                                                 </select>
                                             </span>
                                             <pt-del ng-click="removeFilter(f, $index)"></pt-del>
+                                            <br />
                                         </span>
                                     </span>
+                                    <span class="btn btn-sm btn-primary" ng-show="true" hide-ng-show="!f.filters||f.filters.length==0" ng-click="addFilter(f)">add filter</span>
                                 </td>
                                 <td></td>
                             </tr>
