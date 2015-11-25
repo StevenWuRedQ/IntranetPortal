@@ -16,8 +16,10 @@ Public Class TeamService
     <OperationContract()>
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetAllTeam() As Channels.Message
+        Dim teams = Team.GetAllTeams()
 
-        Return Team.GetAllTeams().ToJson
+        Dim json = teams.ToJson
+        Return json
 
     End Function
 
