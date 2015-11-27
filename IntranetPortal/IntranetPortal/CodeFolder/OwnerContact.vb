@@ -5,9 +5,9 @@
     End Enum
 
     Public Enum ContactStatus
-        Wrong
-        Right
-        DoorKnock
-        Undo
+        Wrong = 0
+        Right = 1
+        DoorKnock = 2
+        Undo = 3
     End Enum
 End Class
