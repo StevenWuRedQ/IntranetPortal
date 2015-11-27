@@ -1,16 +1,8 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="UploadFilePage.aspx.vb" Inherits="IntranetPortal.UploadFilePage" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="UploadFilePage.aspx.vb" Inherits="IntranetPortal.UploadFilePage" MasterPageFile="~/Content.Master" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<asp:Content runat="server" ContentPlaceHolderID="head">
     <title>Upload Files</title>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />  
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link href="/css/stevencss.css?v=1.02" rel="stylesheet" type="text/css" />
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         // <![CDATA[                     
         function OnAddFileButtonClick() {
@@ -63,8 +55,7 @@
                 xhr.open('POST', url)
                 xhr.onload = function () {
                     debugger;
-                    if (xhr.readyState==4 && xhr.status == 200)
-                    {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
                         progress.value = progress.innerHTML = 100;
                         alert("Upload Completed!");
                         formData = null;
@@ -139,12 +130,11 @@
                 btnUpload.Click.ClearHandlers();
                 btnUpload.Click.AddHandler(function (s, e) {
                     e.processOnServer = false;
-                    //if (cbCategory.GetIsValid())
                     UploadFiles();
                 });
             }
 
-            for (var i = 0; i < files.length; i++) {                             
+            for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 if ('name' in file) {
                     var fileName = file.name;
@@ -152,15 +142,13 @@
                 else {
                     var fileName = file.fileName;
                 }
-                if (formFiles[fileName] != null)
-                {
+                if (formFiles[fileName] != null) {
                     formFiles[fileName] = file;
                 }
-                else
-                {
+                else {
                     formFiles[fileName] = file;
                     AppendFileToTable(files[i]);
-                }              
+                }
             }
         }
 
@@ -228,8 +216,7 @@
                 if (isValid(x.value)) {
                     var newName = x.value;
                     var ext = GetFileExtention(fileName);
-                    if(!endsWith(newName, ext))
-                    {
+                    if (!endsWith(newName, ext)) {
                         if (endsWith(newName, "."))
                             x.value = newName + ext;
                         else
@@ -241,12 +228,6 @@
                     x.focus();
                 }
             });
-            //x.addEventListener("blur", function () {
-            //    if (!isValid(x.value)) {
-            //        alert("File name is invalid.")
-            //        x.focus();
-            //    }
-            //});
 
             return x;
         }
@@ -277,41 +258,38 @@
         }
 
         function GetCategoryElement(fileName) {
-            var cates = ["Financials", ["Short Sale","Approval","Eviction Document","Financials-1st Seller","Finacial-2nd Seller","Offer","Package","Title Report"], "Photos", "Accounting", "Eviction", "Construction", "Others"];
+            var cates = ["Financials", ["Short Sale", "Approval", "Eviction Document", "Financials-1st Seller", "Finacial-2nd Seller", "Offer", "Package", "Title Report"], "Photos", "Accounting", "Eviction", "Construction", "Others"];
             var x = document.createElement("SELECT");
             x.setAttribute("data-filename", fileName);
             var select_html = ""
             for (var i = 0; i < cates.length; i++) {
                 /*test add sub category by steven using HasSub for test  */
                 var e_option = cates[i];
-               
-                if (e_option.constructor == Array)
-                {
+
+                if (e_option.constructor == Array) {
                     var opt_grop = document.createElement("optgroup");
-                   
+
 
                     opt_grop.setAttribute("label", e_option[0]);
-                    for (var j = 1; j < e_option.length; j++)
-                    {
+                    for (var j = 1; j < e_option.length; j++) {
                         var option = document.createElement("option");
                         option.text = e_option[j];
                         option.value = e_option[0] + "/" + e_option[j];
                         $(opt_grop).last().append($(option));
-                    }                    
+                    }
                     var html = $(opt_grop).html();
                     //debugger;
                     //$(x).last().append('<optgroup label="' + e_option[0] + '">' + $(opt_grop).html() + '</optgroup>');
                     select_html += $(opt_grop).prop('outerHTML');
                     //x.add(opt_grop)
-                } else
-                {
+                } else {
                     var option = document.createElement("option");
 
                     option.text = cates[i];
                     option.value = cates[i];
                     x.add(option);
                     select_html += $(option).prop('outerHTML');
-                }                
+                }
             }
             debugger;
             $(x).html(select_html);
@@ -368,9 +346,10 @@
             display: none !important;
         }
     </style>
-</head>
-<body style="padding: 20px;">
-    <form id="form1" runat="server">
+</asp:Content>
+<asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
+    <div style="padding: 20px;">
+
         <table style="width: 100%; text-align: left;">
             <tr>
 
@@ -412,7 +391,7 @@
                                 <a class="dxucButton_MetropolisBlue1" style="font-size: 16px; padding-left: 20px; color: #3993c1" href="javascript:" onclick="OnAddFileButtonClick()">Add</a>
                             </td>
                         </tr>
-                    </table> 
+                    </table>
                     <dx:ASPxHiddenField runat="server" ID="hfBBLE" ClientInstanceName="hfBBLEClient"></dx:ASPxHiddenField>
                     <asp:HiddenField runat="server" ID="hfBBLEData" />
                 </td>
@@ -520,6 +499,6 @@
                 trProgress.style.display = "none";
             }
         </script>
-    </form>
-</body>
-</html>
+
+    </div>
+</asp:Content>

@@ -340,44 +340,47 @@
 
     function reloadHomeBreakCtrl(bble) {
         var homeBreakDownCtrl = document.getElementById('homeBreakDownCtrl');
-        var target = angular.element(homeBreakDownCtrl);
-        var $injector = target.injector();
-        $injector.invoke(function ($compile, ptCom, ptHomeBreakDownService) {
-            var parentScope = target.scope();
-            var $scope = parentScope.$new(true);
-            /* think as setup controller */
-            $scope.PropFloors = [];
-            $scope.BBLE = bble;
-            $scope.init = function (bble) {
-                ptHomeBreakDownService.loadByBBLE(bble, function (res) {
-                    $scope.PropFloors = res ? res : [];
-                });
-            }
-            $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
-            $scope.arrayRemove = ptCom.arrayRemove;
+        // in hot leads, there is not homeBreakDownCtrl
+        if (homeBreakDownCtrl) {        
+            var target = angular.element(homeBreakDownCtrl);
+            var $injector = target.injector();
+            $injector.invoke(function ($compile, ptCom, ptHomeBreakDownService) {
+                var parentScope = target.scope();
+                var $scope = parentScope.$new(true);
+                /* think as setup controller */
+                $scope.PropFloors = [];
+                $scope.BBLE = bble;
+                $scope.init = function (bble) {
+                    ptHomeBreakDownService.loadByBBLE(bble, function (res) {
+                        $scope.PropFloors = res ? res : [];
+                    });
+                }
+                $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
+                $scope.arrayRemove = ptCom.arrayRemove;
 
-            $scope.setPopupVisible = function (model, bVal) {
-                model.popupVisible = bVal;
-            }
+                $scope.setPopupVisible = function (model, bVal) {
+                    model.popupVisible = bVal;
+                }
 
-            $scope.addNewUnit = function () {
-                $scope.ensurePush('PropFloors');
-                $scope.setPopupVisible($scope.PropFloors[$scope.PropFloors.length - 1], true);
-            }
-            $scope.saveHomeBreakDown = function () {
-                ptHomeBreakDownService.save($scope.BBLE, $scope.PropFloors, function (res) {
-                    console.log(res);
-                    alert('Save Successfullly!');
-                })
-            }
+                $scope.addNewUnit = function () {
+                    $scope.ensurePush('PropFloors');
+                    $scope.setPopupVisible($scope.PropFloors[$scope.PropFloors.length - 1], true);
+                }
+                $scope.saveHomeBreakDown = function () {
+                    ptHomeBreakDownService.save($scope.BBLE, $scope.PropFloors, function (res) {
+                        console.log(res);
+                        alert('Save Successfullly!');
+                    })
+                }
 
-            var compiled = $compile(homeBreakDownCtrl.innerHTML);
-            var cElem = compiled($scope);
-            $scope.$digest();
-            target.html(cElem);
-            $scope.init(bble);
-        });
-        
+                var compiled = $compile(homeBreakDownCtrl.innerHTML);
+                var cElem = compiled($scope);
+                $scope.$digest();
+                target.html(cElem);
+                $scope.init(bble);
+            });
+        }
+
     }
     angular.module('PortalApp').controller('homeBreakDownCtrl', function () { })
 

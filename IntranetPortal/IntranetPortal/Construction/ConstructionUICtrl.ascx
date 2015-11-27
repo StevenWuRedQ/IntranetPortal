@@ -616,7 +616,7 @@
             })
         }
 
-        $scope.getOrdersLength = funciton (){
+        $scope.getOrdersLength = function (){
         
         }
     });

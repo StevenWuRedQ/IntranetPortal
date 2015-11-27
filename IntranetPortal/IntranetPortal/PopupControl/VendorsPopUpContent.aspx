@@ -1,43 +1,25 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="VendorsPopUpContent.aspx.vb" Inherits="IntranetPortal.VendorsPopUpContent" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="VendorsPopUpContent.aspx.vb" Inherits="IntranetPortal.VendorsPopUpContent" MasterPageFile="~/Content.Master" %>
+
+<asp:Content runat="server" ContentPlaceHolderID="head">
+</asp:Content>
 
 <%@ Import Namespace="IntranetPortal.Data" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml" ng-app="PortalApp" xmlns:ng="http://angularjs.org">
-<head runat="server">
-    <title></title>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
-    <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
-    <link rel="stylesheet" href="/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" />
-    <script src="/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-
-    
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
-    <link href="/css/Contacts.css" rel="stylesheet" type="text/css"/>
+<asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
+    <link href="/css/Contacts.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/ContactJs.js"></script>
-</head>
-<body ng-controller="PortalCtrl" id="PortalCtrl">
-    <form id="form1" runat="server">
+    <div ng-controller="VendorCtrl" id="VendorCtrl">
         <link href="/css/stevencss.css?v=1.02" rel="stylesheet" type="text/css" />
         <div style="color: #b1b2b7" class="clearfix">
             <div class="row" style="margin: 0px">
-               
+
                 <input type="hidden" id="CurrentUser" value="<%= Page.User.Identity.Name%>" />
                 <div class="col-md-3">
-
                     <div class="modal fade" id="AddGroupPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close"  data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                     <h4 class="modal-title">Add Group</h4>
                                 </div>
                                 <div class="modal-body">
@@ -46,7 +28,6 @@
                                             <label class="ss_form_input_title">Group Name</label>
                                             <input class="ss_form_input" ng-model="addGroupName" />
                                         </li>
-
                                     </ul>
                                 </div>
                                 <div class="modal-footer">
@@ -56,7 +37,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="height: 590px;overflow: auto">
+                    <div style="height: 590px; overflow: auto">
 
                         <div data-block="sidebar" class="sidebar js-sidebar">
                             <div class="sidebar__item" ng-class="selectType=='All Vendors'?'title_selected':''">
@@ -69,7 +50,7 @@
                                 </div>
 
                             </div>
-                            <div class="sidebar__item"  ng-class="group.GroupName==selectType?'title_selected':''"  ng-repeat="group in Groups">
+                            <div class="sidebar__item" ng-class="group.GroupName==selectType?'title_selected':''" ng-repeat="group in Groups">
 
                                 <div class="sidebar__title" ng-class="group.SubGroups==null||group.SubGroups.length==0?'notafter':''" ng-click="ChangeGroups(group)">
                                     <div>{{group.GroupName}} <i class="fa fa-user-plus icon_btn tooltip-examples layout_float_right" title="Add group" ng-click="popAddgroup(group.Id)"></i></div>
@@ -231,8 +212,8 @@
                                         <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.ContactId==currentContact.ContactId? 'popup_employee_list_item_active':''" ng-repeat="contact in groupedcontact.data|orderBy:predicate| filter:query.Name| ByContact:query ">
                                             <div>
                                                 <div style="font-weight: 900; font-size: 16px">
-                                                    <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}} <a  ng-show="contact.Corps" data-toggle="popover" title="Companies" data-trigger="focus" data-html="true" data-content="{{contact.Corps.join('<br />')}}"><i class="fa fa-eye" onlick=""></i></a>  </label>
-                                                    
+                                                    <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}} <a ng-show="contact.Corps" data-toggle="popover" title="Companies" data-trigger="focus" data-html="true" data-content="{{contact.Corps.join('<br />')}}"><i class="fa fa-eye" onlick=""></i></a></label>
+
                                                     <%--<i class="fa fa-list-alt icon_btn" style="float: right; margin-right: 20px; margin-top: 0px; font-size: 18px;"></i>--%>
                                                 </div>
                                                 <%--<div style="font-size: 14px">Eviction</div>--%>
@@ -261,7 +242,7 @@
                                     <td>
                                         <div class="detail_right">
                                             <div style="font-size: 30px; color: #234b60">{{currentContact.Name}}</div>
-                                            
+
                                             <%-- <div style="font-size: 16px; color: #234b60; font-weight: 900">Sales Agent</div>--%>
                                         </div>
                                     </td>
@@ -284,9 +265,9 @@
                                     </td>
                                 </tr>--%>
                                 <%--do not eidt empolyee name --%>
-                                
+
                                 <tr class="vendor_info" ng-show="currentContact.GroupId!=4">
-                                    <td class="vendor_info_left" >Name
+                                    <td class="vendor_info_left">Name
                                     </td>
                                     <td>
                                         <div class="detail_right">
@@ -322,7 +303,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                 <tr class="vendor_info">
+                                <tr class="vendor_info">
                                     <td class="vendor_info_left">Customer Service
                                     </td>
                                     <td>
@@ -331,7 +312,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                
+
                                 <tr class="vendor_info">
                                     <td class="vendor_info_left">Extension
                                     </td>
@@ -411,25 +392,18 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <span >
+                                            <span>
                                                 <input class="form-control contact_info_eidt" ng-model="currentContact.Address" placeholder="Click to input">
                                             </span>
 
                                         </div>
                                     </td>
                                 </tr>
-                                <%-- <tr class="vendor_info">
-                                    <td class="vendor_info_left">Closed deals
-                                    </td>
-                                    <td>
-                                        <div class="detail_right">21</div>
-                                    </td>
-                                </tr>--%>
                             </table>
                         </div>
                         <div>
-                          
-                             <div style="margin-top: 20px; margin-left: 5px">
+
+                            <div style="margin-top: 20px; margin-left: 5px">
                                 Notes 
                             </div>
                             <textarea class="edit_drop" ng-model="currentContact.Notes" style="width: 100%"></textarea>
@@ -439,31 +413,51 @@
             </div>
 
         </div>
-    </form>
-    <!-- Angular Material Dependencies -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.js"></script>
-
-    
-   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="/Scripts/stevenjs.js"></script>
-    <script src="/Scripts/PortalApp.js?v=1.6"></script>
-    <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
-    <%--  <script>
-         $(document).ready(function () {
-                 format_input();
-             }
-         )
-    </script>--%>
+    </div>
     <script>
-        function saveContact()
-        {
+        var m_current_contact = null;
+        function getNameFirst(name) {
+            if (name == null || name.length <= 0) {
+                return '';
+            }
+            return name[0].toUpperCase();
+        }
+        function groupBy(array, f) {
+            var groups = {};
+            array.forEach(function (o) {
+                var group = JSON.stringify(f(o));
+
+                groups[group] = groups[group] || [];
+                groups[group].push(o);
+            });
+
+
+            return Object.keys(groups).map(function (group) {
+                var gropObj = {}
+                gropObj.group_text = group.replace(/\"/gi, "");
+                gropObj.data = groups[group];
+                return gropObj;
+            });
+            return groups;
+
+        }
+
+
+        function Fomart_data_String(json) {
+            function ToDateString(match) {
+
+                return new Date(parseInt(match.substr(6))).toISOString();
+            }
+
+            return json.replace(/\/Date\((\d+)\)\//gi, ToDateString);
+        }
+        function group_func(item) {
+            return getNameFirst(item.Name);
+        }
+        function saveContact() {
             angular.element(document.getElementById("PortalCtrl")).scope().SaveCurrent();
         }
-        $(document).ready(function()
-        {
+        $(document).ready(function () {
             $('body').popover({
                 selector: '[data-toggle="popover"]',
                 placement: 'bottom',
@@ -473,10 +467,9 @@
         })
     </script>
     <style>
-        .popover-title,.popover-content {
-            color:#b1b2b7;
+        .popover-title, .popover-content {
+            color: #b1b2b7;
         }
     </style>
-    <script src="/Scripts/bootstrap.min.js"></script>
-</body>
-</html>
+
+</asp:Content>

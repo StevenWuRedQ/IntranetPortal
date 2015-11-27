@@ -12,16 +12,7 @@ Option Explicit On
 
 
 Partial Public Class VendorsPopUpContent
-
-    '''<summary>
-    '''form1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
+    
     '''<summary>
     '''txtContact control.
     '''</summary>
@@ -30,7 +21,7 @@ Partial Public Class VendorsPopUpContent
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtContact As Global.DevExpress.Web.ASPxTextBox
-
+    
     '''<summary>
     '''txtCompanyName control.
     '''</summary>
@@ -39,7 +30,7 @@ Partial Public Class VendorsPopUpContent
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtCompanyName As Global.DevExpress.Web.ASPxTextBox
-
+    
     '''<summary>
     '''txtAddress control.
     '''</summary>
@@ -48,7 +39,7 @@ Partial Public Class VendorsPopUpContent
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtAddress As Global.System.Web.UI.HtmlControls.HtmlInputText
-
+    
     '''<summary>
     '''txtEmail control.
     '''</summary>

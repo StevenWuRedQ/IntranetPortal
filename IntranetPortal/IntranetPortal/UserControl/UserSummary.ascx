@@ -4,13 +4,12 @@
 
 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 
+
 <%--<link href="/Content/dx.light.css" rel="stylesheet" />--%>
 <link rel="stylesheet" href="/css/right-pane.css" />
-
 <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>
 <%--<script src="/Scripts/dx.phonejs.js"></script>--%>
 <script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
-
 
 <script type="text/javascript">
     function OnNotesKeyDown(s, e) {
@@ -249,7 +248,7 @@
                                             <Styles>
                                                 <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
                                             </Styles>
-                                        </dx:ASPxGridView>                                        
+                                        </dx:ASPxGridView>
                                     </div>
                                     <%--fix the disteance between the two grid by steven--%>
                                     <div class="col-md-6" style="width: 380px; vertical-align: top">
@@ -466,7 +465,7 @@
                                     </div>
                                     <div style="padding: 10px 10px;">
                                         <div id="agentActivityChart" class="containers" style="height: 240px; width: 100%;"></div>
-                                        <div id="ProcessStatusChart" class="containers" style="width: 100%;"></div>                                        
+                                        <div id="ProcessStatusChart" class="containers" style="width: 100%;"></div>
                                     </div>
                                 </div>
                                 <script type="text/javascript">
@@ -604,10 +603,10 @@
                                                 tooltip: {
                                                     enabled: true,
                                                     percentPrecision: 0,
-                                                    customizeText: function (arg) {                                                   
+                                                    customizeText: function (arg) {
                                                         return {
                                                             text: arg.argumentText + " (" + arg.percentText + ")"
-                                                        };                                                        
+                                                        };
                                                     }
                                                 },
                                                 legend: {
@@ -659,16 +658,9 @@
                 </dx:SplitterContentControl>
             </ContentCollection>
         </dx:SplitterPane>
-        <%--<dx:SplitterPane Size="290px" MinSize="280px">
-            <PaneStyle BackColor="#EFF2F5"></PaneStyle>
-            <Separator Visible="False"></Separator>
-            <ContentCollection>
-                <dx:SplitterContentControl>
-                </dx:SplitterContentControl>
-            </ContentCollection>
-        </dx:SplitterPane>--%>
     </Panes>
 </dx:ASPxSplitter>
+
 <%--change it to color sytle by steven--%>
 <div id="right-pane-container" class="clearfix" style="display: none">
     <div id="right-pane-button" style="margin-top: 125px"></div>
@@ -725,4 +717,3 @@
         </div>
     </div>
 </div>
-

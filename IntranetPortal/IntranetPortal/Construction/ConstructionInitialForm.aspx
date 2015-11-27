@@ -2,9 +2,9 @@
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
 
-    <link href="/Scripts/literallycanvas/css/literallycanvas.css" rel="stylesheet">
+    <link href="/bower_components/literallycanvas/css/literallycanvas.css" rel="stylesheet" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js"></script>
-    <script src="/Scripts/literallycanvas/js/literallycanvas.js"></script>
+    <script src="/bower_components/literallycanvas/js/literallycanvas.js"></script>
 
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">

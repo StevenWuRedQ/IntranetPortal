@@ -1,5 +1,4 @@
-﻿
-$.fn.accordion = function (options) {
+﻿$.fn.accordion = function (options) {
     var settings = $.extend({
         autoCollapse: false
     }, options);
@@ -44,5 +43,4 @@ $.fn.accordion = function (options) {
 
 $(document).ready(function () {
     $('.js-sidebar').accordion();
-
 });

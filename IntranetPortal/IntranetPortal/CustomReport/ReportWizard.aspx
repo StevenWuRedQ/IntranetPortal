@@ -63,7 +63,7 @@
                                                 </select>
                                                 <input type="text" ng-model="x.input1" ng-change="updateNumberFilter(x)" />
                                                 <span ng-show="x.criteria=='5'">AND
-                                            <input type="text" ng-model="x.input2" ng-change="updateNumberFilter(x)" /></span>
+                                                <input type="text" ng-model="x.input2" ng-change="updateNumberFilter(x)" /></span>
                                             </span>
                                             <span ng-if="f.type=='list'" style="width: 300px; display: inline-block">
                                                 <span>
