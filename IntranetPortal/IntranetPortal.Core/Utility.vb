@@ -5,6 +5,8 @@ Imports System.IO
 Imports Newtonsoft.Json.Linq
 Imports System.Text.RegularExpressions
 Imports DuoVia.FuzzyStrings
+Imports System.Web
+
 Public Class Utility
     Public Shared Function SaveChangesObj(oldObj As Object, newObj As Object) As Object
         Dim type = oldObj.GetType()
@@ -62,8 +64,8 @@ Public Class Utility
             Return ""
         End If
 
-        Dim attr() As DescriptionAttribute = _
-                      DirectCast(fi.GetCustomAttributes(GetType(DescriptionAttribute), _
+        Dim attr() As DescriptionAttribute =
+                      DirectCast(fi.GetCustomAttributes(GetType(DescriptionAttribute),
                       False), DescriptionAttribute())
 
         If attr.Length > 0 Then
@@ -74,44 +76,47 @@ Public Class Utility
     End Function
     Public Shared Function Address2BBLE(address As String) As String
         Dim baseURL = "https://api.cityofnewyork.us/geoclient/v1/search.json?app_id=be97fb56&app_key=b51823efd58f25775df3b2956a7b2bef"
-        baseURL = baseURL & "&input=" & address
-        'baseURL = baseURL & "&houseNumber=" & houseNumber
-        'baseURL = baseURL & "&street=" & street
-        'baseURL = baseURL & "&borough=" & borough
-        '"https://api.cityofnewyork.us/geoclient/v1/search.json?app_id=9cd0a15f&app_key=54dc84bcaca9ff4877da771750033275&houseNumber=433&street=EAST%208TH%20STREET&borough=BROOKLYN"
-        Dim request As WebRequest = WebRequest.Create(baseURL)
-        ' If required by the server, set the credentials.
-        request.Credentials = CredentialCache.DefaultCredentials
-
+        baseURL = baseURL & "&input=" & address.Trim()
+        'baseURL = HttpUtility.UrlEncode(baseURL)
         Try
-            request.GetResponse()
-        Catch ex As Exception
-            Throw New Exception("Get Error " + address)
-        End Try
-        ' Get the response. 
-        Dim response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
-        ' Display the status.
-        Console.WriteLine(response.StatusDescription)
-        ' Get the stream containing content returned by the server. 
-        Dim dataStream As Stream = response.GetResponseStream()
-        ' Open the stream using a StreamReader for easy access. 
-        Dim reader As New StreamReader(dataStream)
-        ' Read the content. 
-        Dim reslut As String = reader.ReadToEnd()
-        Dim values = JObject.Parse(reslut)
-        Dim info = CType(values.Item("results"), JArray)
-        Dim Erray = ""
-        If (info IsNot Nothing) AndAlso info.Count > 0 Then
-            Dim bbl = info(0).Item("response").Item("bbl").ToString
-            If (bbl IsNot Nothing) Then
-                Return bbl
+            Dim request As WebRequest = WebRequest.Create(baseURL)
+            request.Credentials = CredentialCache.DefaultCredentials
+
+            Try
+                request.GetResponse()
+            Catch ex As Exception
+                Throw New Exception("Get Error " + address)
+            End Try
+            ' Get the response. 
+            Dim response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
+            ' Display the status.
+            Console.WriteLine(response.StatusDescription)
+            ' Get the stream containing content returned by the server. 
+            Dim dataStream As Stream = response.GetResponseStream()
+            ' Open the stream using a StreamReader for easy access. 
+            Dim reader As New StreamReader(dataStream)
+            ' Read the content. 
+            Dim reslut As String = reader.ReadToEnd()
+            Dim values = JObject.Parse(reslut)
+            Dim info = CType(values.Item("results"), JArray)
+            Dim Erray = ""
+            If (info IsNot Nothing) AndAlso info.Count > 0 Then
+                Dim bbl = info(0).Item("response").Item("bbl").ToString
+                If (bbl IsNot Nothing) Then
+                    Return bbl
+                Else
+                    Erray = "Get Error " + If(info.Item("message") IsNot Nothing, info.Item("message").ToString, "")
+                End If
             Else
-                Erray = "Get Error " + If(info.Item("message") IsNot Nothing, info.Item("message").ToString, "")
+                Erray = "Get Error " + address
             End If
-        Else
-            Erray = "Get Error " + address
-        End If
-        Throw New Exception(Erray)
+            Throw New Exception(Erray)
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+        ' If required by the server, set the credentials.
+
     End Function
     'Change address 2 BBLE
     Public Shared Function Address2BBLE(houseNumber As String, street As String, borough As String) As String

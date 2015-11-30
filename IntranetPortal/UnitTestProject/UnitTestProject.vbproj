@@ -108,6 +108,7 @@
     <Compile Include="DBUtilTest.vb" />
     <Compile Include="EmailParseTest.vb" />
     <Compile Include="EmployeeTest.vb" />
+    <Compile Include="LeadTest.vb" />
     <Compile Include="QueryBuilderTest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

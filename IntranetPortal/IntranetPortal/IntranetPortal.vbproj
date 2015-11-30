@@ -1454,6 +1454,13 @@
       <DependentUpon>Transfer2Legal.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Management\ViewAcris.aspx.designer.vb">
+      <DependentUpon>ViewAcris.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\ViewAcris.aspx.vb">
+      <DependentUpon>ViewAcris.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Management\WorkflowMng.aspx.designer.vb">
       <DependentUpon>WorkflowMng.aspx</DependentUpon>
     </Compile>
@@ -6465,6 +6472,7 @@
     <Content Include="Management\TaskList.aspx" />
     <Content Include="Management\Transfer2Legal.aspx" />
     <Content Include="Management\TroubleShooting.aspx" />
+    <Content Include="Management\ViewAcris.aspx" />
     <Content Include="Management\WorkflowMng.aspx" />
     <Content Include="MapTest.aspx" />
     <Content Include="Map\MapDataService.svc" />
