@@ -30,10 +30,7 @@
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                 </select>
-                <%--<input type="checkbox" id="pdf_check_yes103" name="1" class="ss_form_input" value="true">
-                                                                                    <label for="pdf_check_yes40" class="input_with_check">
-                                                                                        <span class="box_text">Yes </span>
-                                                                                    </label>--%>
+
             </li>
             <li class="ss_form_item">
 

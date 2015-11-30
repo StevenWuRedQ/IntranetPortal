@@ -12,7 +12,7 @@
     }
 </style>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-<script src="scripts/prototype.js" type="text/javascript"></script>
+<script src="/bower_components/prototypejs/dist/prototype.min.js" type="text/javascript"></script>
 <script>
 
     var rendererOptions = {

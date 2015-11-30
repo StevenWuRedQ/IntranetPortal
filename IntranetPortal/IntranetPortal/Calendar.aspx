@@ -2,16 +2,6 @@
 
 <%@ Register Src="UserControl/Devexpress/CustomVerticalAppointmentTemplate.ascx" TagName="CustomVerticalAppointmentTemplate" TagPrefix="uc1" %>
 
-<%--<asp:Content ID="Content1" ContentPlaceHolderID="Left" runat="server">
-    <div class="navcontainer">
-        <%-- DXCOMMENT: Configure DateNavigator for Scheduler
-        <dx:ASPxDateNavigator runat="server" ID="DateNavigator" MasterControlID="Scheduler" CssClass="datenavigator">
-            <Properties Rows="2" DayNameFormat="FirstLetter">
-                <Style Border-BorderWidth="0"></Style>
-            </Properties>
-        </dx:ASPxDateNavigator>
-    </div>
-</asp:Content>--%>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <dx:ASPxPageControl Width="100%" EnableViewState="false" ID="calendarPages" 
         runat="server" ActiveTabIndex="0" TabSpacing="3px" EnableHierarchyRecreation="True">

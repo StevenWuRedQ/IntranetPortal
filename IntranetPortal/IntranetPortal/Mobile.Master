@@ -12,7 +12,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
     <script src="/bower_components/ionic/release/js/ionic.bundle.min.js"></script>
     <asp:ContentPlaceHolder ID="mobile_header" runat="server"></asp:ContentPlaceHolder>
-
     <script>
         angular.module('PortalMapp', ['ionic']);
         angular.module('PortalMapp').controller('MobileCtrl', function () {

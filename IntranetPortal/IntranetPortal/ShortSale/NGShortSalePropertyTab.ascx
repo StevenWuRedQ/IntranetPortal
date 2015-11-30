@@ -277,20 +277,8 @@
     </div>
 </div>
 
-<%-- 
-<div class="ss_form" id="home_breakdown_table">
 
-    <h4 class="ss_form_title">Home Breakdown <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples " ng-click="NGAddArraryItem(SsCase.PropertyInfo.PropFloors,'SsCase.PropertyInfo.PropFloors')" title="Add"></i>
-    </h4>
-    <div class="ss_border" ng-show="SsCase.PropertyInfo.PropFloors.length>0">
-        <div class="ss_form_box clearfix ss_form_small_font">
-            <div dx-data-grid="homeBreakdownBindingOptions()"></div>
-        </div>
-    </div>
-</div>
---%>
-
-<script src="/Scripts/mindmup-editabletable.js"></script>
+<script src="/bower_components/editable-table/mindmup-editabletable.js"></script>
 <script>
     function onRefreashDone() {
         //$("#home_breakdown_table").editableTableWidget();

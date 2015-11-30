@@ -146,6 +146,44 @@
     }
 
     angular.module('PortalApp').controller('ConstructionCtrl', function ($scope, $http, $timeout, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
+
+        $scope.CSCaseModel = function () {
+            this.CSCase = {
+                InitialIntake: {},
+                Photos: {},
+                Utilities: {
+                    Company: [],
+                    Insurance_Type: []
+                },
+                Violations: {
+                    DOBViolations: [{}],
+                    ECBViolations: [{}]
+                },
+                ProposalBids: {},
+                Plans: {},
+                Contract: {},
+                Signoffs: {},
+                Comments: []
+            }
+        }
+        $scope.PercentageModel = function () {
+            this.intake = {
+                count: 0,
+                finished: 0,
+            };
+            this.signoff = {
+                count: 0,
+                finished: 0
+            };
+            this.construction = {
+                count: 0,
+                finished: 0
+            };
+            this.test = {
+                count: 0,
+                finished: 0
+            }
+        }
         // scope variables defination
         $scope._ = _;
         $scope.arrayRemove = ptCom.arrayRemove;
@@ -153,38 +191,10 @@
         $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
 
         $scope.ReloadedData = {}
-        $scope.CSCase = {}
-        $scope.CSCase.CSCase = {
-            InitialIntake: {},
-            Photos: {},
-            Utilities: {},
-            Violations: {},
-            ProposalBids: {},
-            Plans: {},
-            Contract: {},
-            Signoffs: {},
-            Comments: []
-        };
-        $scope.CSCase.CSCase.Utilities.Company = [];
-        $scope.CSCase.CSCase.Utilities.Insurance_Type = [];
-        $scope.percentage = {
-            intake: {
-                count: 0,
-                finished: 0,
-            },
-            signoff: {
-                count: 0,
-                finished: 0
-            },
-            construction: {
-                count: 0,
-                finished: 0
-            },
-            test: {
-                count: 0,
-                finished: 0
-            }
-        }
+        $scope.CSCase = new $scope.CSCaseModel();
+        $scope.percentage = new $scope.PercentageModel();
+
+
         $scope.UTILITY_SHOWN = {
             'ConED': 'CSCase.CSCase.Utilities.ConED_Shown',
             'Energy Service': 'CSCase.CSCase.Utilities.EnergyService_Shown',
@@ -221,42 +231,10 @@
         // end scope variables defination
 
         $scope.reload = function () {
-
-            $scope.ReloadedData = {}
-            $scope.CSCase = {}
-            $scope.CSCase.CSCase = {
-                InitialIntake: {},
-                Photos: {},
-                Utilities: {},
-                Violations: {},
-                ProposalBids: {},
-                Plans: {},
-                Contract: {},
-                Signoffs: {},
-                Comments: []
-            };
-            $scope.CSCase.CSCase.Utilities.Company = [];
-            $scope.CSCase.CSCase.Utilities.Insurance_Type = [];
+            $scope.ReloadedData = {};
+            $scope.CSCase = new $scope.CSCaseModel();
             $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} });
-            $scope.percentage = {
-                intake: {
-                    count: 0,
-                    finished: 0,
-                },
-                signoff: {
-                    count: 0,
-                    finished: 0
-                },
-                construction: {
-                    count: 0,
-                    finished: 0
-                },
-                test: {
-                    count: 0,
-                    finished: 0
-                }
-            }
-
+            $scope.percentage = new $scope.PercentageModel();
             $scope.clearWarning();
         }
         $scope.init = function (bble, callback) {
@@ -314,18 +292,16 @@
 
         /* Status change function -- Chris */
         $scope.ChangeStatus = function (scuessfunc, status) {
-
-            $http.post('/api/ConstructionCases/ChangeStatus/' + leadsInfoBBLE, status).
-                    success(function () {
-                        if (scuessfunc) {
-                            scuessfunc();
-                        } else {
-                            ptCom.alert("Successed !");
-                        }
-                    }).
-                    error(function (data, status) {
-                        ptCom.alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
-                    });
+            $http.post('/api/ConstructionCases/ChangeStatus/' + leadsInfoBBLE, status)
+                .success(function () {
+                    if (scuessfunc) {
+                        scuessfunc();
+                    } else {
+                        ptCom.alert("Successed !");
+                    }
+                }).error(function (data, status) {
+                    ptCom.alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
+                });
         }
         /* end status change function */
 
@@ -341,22 +317,19 @@
         /***spliter***/
 
         /* multiple company selection */
-        $scope.resetCompany = function (obj) {
-            for (var key in obj) {
-                var value = obj[key];
-                $scope.$eval(value + '=false');
-            }
-        };
         $scope.$watch('CSCase.CSCase.Utilities.Company', function (newValue) {
             if (newValue) {
                 var ds = $scope.UTILITY_SHOWN;
                 var target = $scope.CSCase.CSCase.Utilities.Company;
-                $scope.resetCompany(ds);
-                for (var i in target) {
-                    $scope.$eval(ds[target[i]] + '=true');
-                }
+                _.each(target, function(k, i){
+                    $scope.$eval(ds[k] + '=false');
+                })
+                _.each(newValue, function (el, i) {
+                    $scope.$eval(ds[el] + '=true');
+                })                    
             }
-        }, true);
+        },true);
+
         $scope.$watch('CSCase.CSCase.Utilities.ConED_EnergyServiceRequired', function (newVal) {
 
             if (newVal) {
@@ -420,7 +393,7 @@
             })
         }
         $scope.checkWatchedModel = function () {
-            var res = ''
+            var res = '';
             _.each($scope.WATCHED_MODEL, function (el, i) {
                 if ($scope.$eval(el.backedModel + '!=' + el.model)) {
                     $scope.$eval(el.backedModel + '=' + el.model);
@@ -434,7 +407,7 @@
 
         /* Popup */
         $scope.setPopupVisible = function (modelName, bVal) {
-            $scope.$eval(modelName + '=' + bVal)
+            $scope.$eval(modelName + '=' + bVal);
         }
         /* end Popup*/
 
@@ -447,8 +420,6 @@
         /* end header editing */
 
         /* dob fetch */
-        $scope.CSCase.CSCase.Violations.DOBViolations = [{}];
-        $scope.CSCase.CSCase.Violations.ECBViolations = [{}];
         $scope.addNewDOBViolation = function () {
             $scope.ensurePush('CSCase.CSCase.Violations.DOBViolations');
             $scope.setPopupVisible('DOBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.DOBViolations.length - 1), true);
@@ -502,7 +473,7 @@
                                         if (data.ECP_TotalViolation) $scope.CSCase.CSCase.Violations.ECP_TotalViolation = data.ECP_TotalViolation;
                                         if (data.ECP_TotalOpenViolations) $scope.CSCase.CSCase.Violations.ECP_TotalOpenViolations = data.ECP_TotalOpenViolations;
                                         if (data.violations) {
-                                            $scope.CSCase.CSCase.Violations.ECBViolations = _.filter(data.violations, function (el, i) { return el.DOBViolationStatus.slice(0,4) == "OPEN" });
+                                            $scope.CSCase.CSCase.Violations.ECBViolations = _.filter(data.violations, function (el, i) { return el.DOBViolationStatus.slice(0, 4) == "OPEN" });
                                         }
                                     })
                                 }
@@ -536,7 +507,7 @@
             $(".intakeCheck").each(function (idx) {
                 var model = $(this).attr('ng-model') || $(this).attr('ss-model') || $(this).attr('file-model') || $(this).attr('model');
                 if (model) {
-                    if (model.slice(0,4) == "floor") {
+                    if (model.slice(0, 4) == "floor") {
                         var test = _.has($(this).scope().floor, model.split(".").splice(1).join('.'));
                         if (!test) {
                             if (callback) callback($(this))
@@ -616,8 +587,8 @@
             })
         }
 
-        $scope.getOrdersLength = function (){
-        
+        $scope.getOrdersLength = function () {
+
         }
     });
 </script>

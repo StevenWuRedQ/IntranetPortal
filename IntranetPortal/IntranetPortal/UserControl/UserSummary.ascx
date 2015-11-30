@@ -5,10 +5,8 @@
 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 
 
-<%--<link href="/Content/dx.light.css" rel="stylesheet" />--%>
 <link rel="stylesheet" href="/css/right-pane.css" />
 <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>
-<%--<script src="/Scripts/dx.phonejs.js"></script>--%>
 <script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
 
 <script type="text/javascript">

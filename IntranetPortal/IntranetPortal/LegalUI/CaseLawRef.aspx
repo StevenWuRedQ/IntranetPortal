@@ -38,7 +38,6 @@
             vertical-align: middle !important;
         }
     </style>
-    <script src="/Scripts/ng-infinite-scroll.min.js"></script>
     <script>
         var app = angular.module('PortalApp');
         app.controller('CaseCtrl', ['$scope', '$http', 'ptCom', function ($scope, $http, ptCom) {

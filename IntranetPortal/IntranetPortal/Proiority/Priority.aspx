@@ -14,18 +14,18 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
     <link href="../styles/stevencss.css" rel='stylesheet' type='text/css' />
     <link href="../css/font-awesome.css" type="text/css" rel="stylesheet" />
-
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="../scrollbar/jquery.mCustomScrollbar.css" />
+
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="../scrollbar/jquery.mCustomScrollbar.css" />
-    <script src="/Scripts/jquery.collapse.js"></script>
-    <script src="/Scripts/jquery.collapse_storage.js"></script>
-    <script src="/Scripts/jquery.collapse_cookie_storage.js"></script>
+    <script src="/bower_components/jQuery-Collapse/jquery.collapse.js"></script>
+    <script src="/bower_components/jQuery-Collapse/jquery.collapse_storage.js"></script>
+    <script src="/bower_components/jQuery-Collapse/jquery.collapse_cookie_storage.js"></script>
     <script src="/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js"></script>
     <script>
         $('.currency_input').blur(function () {
@@ -169,9 +169,9 @@
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        
+
                         <uc1:PropertyInfo runat="server" ID="PropertyInfo" />
-                        
+
                         <div class="tab-pane clearfix" id="home_owner">
 
                             <%--id="home_owner_content" scorll bar some issue--%>
@@ -917,7 +917,7 @@
 
                         <!-- custom scrollbar plugin -->
 
-                      
+
                         <script>
                             var el = $(".doc_list_title");
 

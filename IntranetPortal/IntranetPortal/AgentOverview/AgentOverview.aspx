@@ -3,7 +3,7 @@
 <%@ Register Src="~/AgentOverview/AgentCharts.ascx" TagPrefix="uc1" TagName="AgentCharts" %>
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="/css/right-pane.css" />
-    <script src="../Scripts/jquery.printElement.js"></script>
+    <script src="/bower_components/printelement/dist/jquery.printElement.min.js"></script>
 
     <style type="text/css">
         .InforPanel {

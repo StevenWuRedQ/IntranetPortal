@@ -1,0 +1,25 @@
+{
+  "name": "jQuery-Collapse",
+  "version": "1.1.2",
+  "main": "src/jquery.collapse.js",
+  "dependencies": {
+    "jquery": "~1.7"
+  },
+  "ignore": [
+    "demo",
+    "test",
+    "vendor",
+    "bower.json",
+    "README.md"
+  ],
+  "homepage": "https://github.com/danielstocks/jQuery-Collapse",
+  "_release": "1.1.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.1.2",
+    "commit": "3663ea2db249ca0a46d4fb18ec3fc10d20831fd7"
+  },
+  "_source": "git://github.com/danielstocks/jQuery-Collapse.git",
+  "_target": "~1.1.0",
+  "_originalSource": "jQuery-Collapse"
+}

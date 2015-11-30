@@ -7,16 +7,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>My Ideal Property Portal</title>
     <meta name="description" content="" />
-    <!-- Latest compiled and minified CSS -->
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">--%>
-    <%--<link href="/css/font-awesome.min.css" type="text/css" rel="stylesheet" />--%>
     <link rel="stylesheet" href="/css/normalize.min.css" />
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
+    <link rel="stylesheet" href="/scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="/css/main.css" />
-    <!-- Latest compiled and minified CSS -->
-    <script src="/Scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+
+    <script src="/bower_components/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/bower_components/jquery-smartresize/jquery.debouncedresize.js"></script>
+    <script src="/bower_components/jquery-smartresize/jquery.throttledresize.js"></script>
+    <script src="/bower_components/jquery-mousewheel/jquery.mousewheel.min.js"></script>
+    <script src="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.js"></script>
+    <script src="/bower_components/jquery-form/jquery.form.js"></script>
+    <script src="/bower_components/jquery-backstretch/jquery.backstretch.min.js"></script>
+
+    <script src="/Scripts/js/main.js"></script>
+
+
     <script>
         function onLogIn() {
             if ($('#username').val().length == 0 || $('#password').val().length == 0) {
@@ -123,16 +133,7 @@
         <!-- /.modal -->
         <!--END LANDING-->
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/Scripts/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
-        <script src="/Scripts/js/jquery.easing.1.3.js"></script>
-        <script src="/Scripts/js/jquery.debouncedresize.js"></script>
-        <script src="/Scripts/js/jquery.throttledresize.js"></script>
-        <script src="/Scripts/js/jquery.mousewheel.js"></script>
-        <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
-        <script src="/Scripts/js/jquery.form.min.js"></script>
-        <script src="/Scripts/js/jquery.backstretch.min.js"></script>
-        <script src="/Scripts/js/main.js"></script>
+
         <!-- Latest compiled and minified JavaScript -->
 
         <script type="text/javascript">

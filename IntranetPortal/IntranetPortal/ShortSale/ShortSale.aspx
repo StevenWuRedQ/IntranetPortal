@@ -14,18 +14,18 @@
 <%@ Register Src="~/BusinessForm/BusinessFormControl.ascx" TagPrefix="uc1" TagName="BusinessFormControl" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
-    <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
-    <script src="/Scripts/jquery.webui-popover.js"></script>
+    <link href="/bower_components/webui-popover/dist/jquery.webui-popover.min.css" rel="stylesheet" />
+    <script src="/bower_components/webui-popover/dist/jquery.webui-popover.min.js"></script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script>
         /* immediately call to show the loading panel*/
-        (function() {
+        (function () {
             var loadingCover = document.getElementById("LodingCover");
             loadingCover.style.display = "block";
         })();
-        
+
     </script>
 
     <style>
@@ -62,7 +62,7 @@
 
     <div ui-layout="{flow: 'column'}" id="uiLayoutDiv">
         <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">
-                <uc1:ShortSaleCaseList runat="server" ID="ShortSaleCaseList" />
+            <uc1:ShortSaleCaseList runat="server" ID="ShortSaleCaseList" />
         </div>
         <div ui-layout-container id="dataPanelDiv">
             <asp:Panel runat="server" ID="dataPanel">
@@ -472,7 +472,7 @@
             </asp:Panel>
         </div>
     </div>
-    
+
     <uc1:SendMail runat="server" ID="SendMail" LogCategory="ShortSale" />
 
     <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
@@ -554,7 +554,7 @@
 
         function GetShortSaleData(caseId) {
             NGGetShortSale(caseId);
-            if (cbpLogs){                
+            if (cbpLogs) {
                 cbpLogs.PerformCallback(caseId);
             }
 
@@ -686,7 +686,7 @@
                 PropertyInfo: { Owners: [{}] },
                 CaseData: {},
                 Mortgages: [{}]
-            }; 
+            };
 
             $scope.GetShortSaleCase = function (caseId) {
                 if (!caseId) {
@@ -701,7 +701,7 @@
                         $scope.SsCase = data;
                         leadsInfoBBLE = $scope.SsCase.BBLE;
                         window.caseId = caseId;
- 
+
                         $http.get("ShortSaleServices.svc/GetLeadsInfo?bble=" + $scope.SsCase.BBLE)
                             .success(function (data1) {
                                 $scope.ReloadedData = {};

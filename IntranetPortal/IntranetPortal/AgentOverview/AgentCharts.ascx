@@ -1,10 +1,9 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="AgentCharts.ascx.vb" Inherits="IntranetPortal.AgentCharts" %>
-<%--use jquery 2.1.1 can't show the tooltips--%>
-<%--<script src="/Scripts/jquery-2.1.1.min.js"></script>--%>
-<script src="/Scripts/globalize/globalize.js"></script>
 
+<script src="/bower_components/globalize/lib/globalize.js"></script>
 <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>
-<%--<div style="padding-top: 43px; padding-bottom: 20px; font-size: 30px; color: #ff400d; text-align: center;" id="chartsTitle">Charts Title</div>--%>
+
+
 <%--use for debug chart width--%>
 <div style="padding-top: 43px; padding-bottom: 20px; font-size: 30px; color: #ff400d; text-align: center;display:none" id="showPanesize">0px</div>
 <%--test LoadStatusBarChartByOffice function--%> 

@@ -2,21 +2,21 @@
 
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 <%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>
-<%@ Register Src="~/LegalUI/LegalCaseList.ascx" TagPrefix="uc1" TagName="LegalCaseList" %>
-<%@ Register Src="~/LegalUI/LegalTab.ascx" TagPrefix="uc1" TagName="LegalTab" %>
-<%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
-<%@ Register TagPrefix="uc1" TagName="LegalSecondaryActions" Src="~/LegalUI/LegalSecondaryActions.ascx" %>
-<%@ Register Src="~/LegalUI/ManagePreViewControl.ascx" TagPrefix="uc1" TagName="ManagePreViewControl" %>
-<%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
+<%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
+<%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
 <%@ Register Src="~/ShortSale/ShortSaleFileOverview.ascx" TagPrefix="uc1" TagName="ShortSaleFileOverview" %>
 <%@ Register Src="~/WorkingLog/WorkingLogControl.ascx" TagPrefix="uc1" TagName="WorkingLogControl" %>
 
+<%@ Register Src="~/LegalUI/LegalCaseList.ascx" TagPrefix="uc1" TagName="LegalCaseList" %>
+<%@ Register Src="~/LegalUI/LegalTab.ascx" TagPrefix="uc1" TagName="LegalTab" %>
+<%@ Register Src="~/LegalUI/LegalSecondaryActions.ascx" TagPrefix="uc1" TagName="LegalSecondaryActions"  %>
+<%@ Register Src="~/LegalUI/ManagePreViewControl.ascx" TagPrefix="uc1" TagName="ManagePreViewControl" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
 
-    <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
-    <script src="/Scripts/jquery.webui-popover.js"></script>
+    <link href="/bower_components/webui-popover/dist/jquery.webui-popover.min.css" rel="stylesheet" />
+    <script src="/bower_components/webui-popover/dist/jquery.webui-popover.min.js"></script>
     <style type="text/css">
         .chipsdemoContactChips md-content.autocomplete {
             min-height: 250px;
@@ -706,18 +706,16 @@
             {}
             var taskSN = '<%= Request.QueryString("sn")%>';
 
-            var portalApp = angular.module('PortalApp');
+            angular.module('PortalApp').controller('LegalCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
 
-            portalApp.controller('LegalCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
                 $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {}, PreQuestions: {} };
                 $scope.ptContactServices = ptContactServices;
-
                 $scope.ptCom = ptCom;
 
-                var self = $scope;
-                function querySearch(query) {
+
+                $scope.querySearch = function(query) {
                     var results = query ?
-                        self.allContacts.filter(createFilterFor(query)) : [];
+                        $scope.allContacts.filter(createFilterFor(query)) : [];
                     return results;
                 }
 
@@ -733,7 +731,7 @@
 
                 }
 
-                function loadContacts() {
+                $scope.loadContacts = function() {
                     var contacts = AllContact;
                     return contacts.map(function (c, index) {
                         c.image = 'https://storage.googleapis.com/material-icons/external-assets/v1/icons/svg/ic_account_circle_black_48px.svg';
@@ -743,10 +741,10 @@
                         return c;
                     });
                 }
-                self.querySearch = querySearch;
-                self.allContacts = loadContacts();
-                self.contacts = [self.allContacts[0]];
-                self.filterSelected = true;
+    
+                $scope.allContacts = $scope.loadContacts();
+                $scope.contacts = [$scope.allContacts[0]];
+                $scope.filterSelected = true;
 
                 /**
                  * Search for contacts.
@@ -1232,6 +1230,7 @@
                         alert("can find tlp " + tplName)
                     }
                 }
+
                 $scope.CheckSecondaryTags = function (tag) {
                     return $scope.LegalCase.SecondaryTypes.filter(function (t) { return t == tag })[0];
                 }
@@ -1330,6 +1329,7 @@
                     var reslut = $scope.$eval(compareExpresstion);
                     return reslut;
                 }
+
                 var CaseInfo = { Name: '', Address: '' }
                 $scope.GetCaseInfo = function () {
                     var caseName = $scope.LegalCase.CaseName

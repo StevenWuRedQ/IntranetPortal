@@ -6,28 +6,21 @@
 <%--<asp:Content ContentPlaceHolderID="head" runat="server">--%>
 <head>
     <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <link href="/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
+
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js'></script>
-
-    <link rel="stylesheet" href="/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%-- <link href="/css/dx.common.css" rel="stylesheet" />
-
-    <link href="/css/dx.light.css" rel="stylesheet" />
-    <script src="/Scripts/globalize/globalize.js"></script>
-    <script src="/Scripts/dx.webappjs.js"></script>
-    <script src="/Scripts/dx.chartjs.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>--%>
     <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
+
 
     <style>
         body {
@@ -59,7 +52,7 @@
             bottom: 0;
             padding: 20px;
             margin-bottom: 34px;
-            visibility:hidden;
+            visibility: hidden;
         }
 
         .color_box {
@@ -190,14 +183,6 @@
         </div>
 
         <script type="text/javascript">
-            //var map = $("#map").dxMap({
-            //    center: "Brooklyn Bridge,New York,NY",
-            //    zoom: 10,
-            //    height: 500,
-            //    width: "100%",
-            //    provider: 'google',
-            //    type: 'roadmap'
-            //}).dxMap("instance");
 
             UNBUILD_COLOR = '14,70,134';
             UNBUILD_RAGNE = [100000, 50000, 20000, 10000, 5000, 2000, 1000];
@@ -281,7 +266,7 @@
 
                 if (properties.BBLE != null) {
                     var html = '<div class="marker-title">' + 'BBLE:' + properties.BBLE + '</div>';
-                    
+
                     if (properties.description != null) {
                         html += '<div> Leads Name : ' + properties.description + '</div>'
                         + '<div> Team : ' + properties.Team + '</div>'
@@ -324,7 +309,7 @@
                 }
             }
             var closeTooltip;
-            function mouseout(e,layer) {
+            function mouseout(e, layer) {
                 var layer = e.target;
                 layer.setStyle(oldStyle);
 
@@ -332,21 +317,18 @@
                     map.closePopup();
                 }, 100);
             }
-            function getLegendHTMLUnBuild()
-            {
+            function getLegendHTMLUnBuild() {
                 return getLegendHTML(UNBUILD_COLOR, UNBUILD_RAGNE);
             }
             function overlayadd(e) {
                 if ("Zip Count" == e.name) {
                     map.legendControl.addLegend(getLegendHTML());
                 }
-                if( "Unbuild" == e.name)
-                {
+                if ("Unbuild" == e.name) {
                     var html = getLegendHTMLUnBuild()
                     map.legendControl.addLegend(getLegendHTMLUnBuild());
                 }
-                if("Team Lot"==e.name)
-                {
+                if ("Team Lot" == e.name) {
                     $("#color_panle").css("visibility", 'visible')
                 }
             }
@@ -354,15 +336,14 @@
                 if ("Zip Count" == e.name) {
                     map.legendControl.removeLegend(getLegendHTML());
                 }
-                if ("Unbuild" == e.name)
-                {
+                if ("Unbuild" == e.name) {
                     map.legendControl.removeLegend(getLegendHTMLUnBuild());
                 }
                 if ("Team Lot" == e.name) {
                     $("#color_panle").css("visibility", 'hidden');
                 }
             }
-           
+
 
             var zipMakerLayer
             function getLegendHTML(baseColor, baseRange) {
@@ -381,13 +362,13 @@
                 var title = baseColor != null ? "Unbuild" : 'Leads in Zip'
                 return '<span>' + title + ' </span> <ul style="list-style-type: none;">' + labels.join('') + '</ul>';
             }
-            function getColor(d,baseColor,baseRange) {
+            function getColor(d, baseColor, baseRange) {
 
 
 
                 var color = 'rgba(' + (baseColor != null ? baseColor : '223,48,0') + ','//'rgba('+baseColor!=null?baseColor:'223,48,0'+',';
                 var percent = 0.13
-                var values = baseRange!=null? baseRange : [1000, 500, 200, 100, 50, 20, 10];
+                var values = baseRange != null ? baseRange : [1000, 500, 200, 100, 50, 20, 10];
 
                 for (var i = 0; i < values.length; i++) {
                     if (d > values[i]) {
@@ -411,9 +392,9 @@
 
             function initLayers(layers) {
                 var v = layersControl;
-                
+
                 /*add layer swicher */
-                var layer_swicher = isAdminLogIn ?  {
+                var layer_swicher = isAdminLogIn ? {
 
                     'Leads Count Portal': zipMakerLayer
 
@@ -423,8 +404,7 @@
                     layer_swicher['Zip Count'] = ZipPolygonLayer
                     // layer_swicher['Lot Layer'] = TeamLotLayer
                 }
-                if (layersControl!=null)
-                {
+                if (layersControl != null) {
                     _.each(layersControl._layers, function (v, k) {
                         var name = _.find(_.keys(layers), function (l) { return l == v.name });
                         if (name != null) {
@@ -438,15 +418,14 @@
                         layersControl.addOverlay(v, k);
                     })
                 }
-               
 
-                if (layersControl == null)
-                {
-                    layersControl =  L.control.layers({
+
+                if (layersControl == null) {
+                    layersControl = L.control.layers({
 
                     }, layer_swicher).addTo(map);
                 }
-               
+
                 /******/
             }
             $.getJSON("/Map/MapData/nyc-zip-code.js", function (data) {
@@ -457,10 +436,9 @@
                     onEachFeature: onEachFeature
                 })
 
-                if (isAdminLogIn)
-                {
+                if (isAdminLogIn) {
                     ShowPloyons(SHOW_ZIP);
-                    
+
                 }
                 function getStyle(feature) {
                     return {
@@ -491,7 +469,7 @@
                         return;
                     }
                     var zip = e.target.feature.properties.postalCode;
-                    $.getJSON('/map/mapdataservice.svc/ZipCount/' + zip, function(data) {
+                    $.getJSON('/map/mapdataservice.svc/ZipCount/' + zip, function (data) {
 
                         //$('#divMsgTest').animate({ top: "25" }, 500);
                         $("#myModal").modal();
@@ -591,21 +569,7 @@
 
 
                 return;
-                //var markers = new L.MarkerClusterGroup();
 
-                //for (var i = 0; i < LatLonData.length; i++) {
-                //    var a = LatLonData[i];
-                //    var title = a.PropertyAddress;
-                //    var marker = L.marker(new L.LatLng(a.Latitude, a.Longitude), {
-                //        icon: L.mapbox.marker.icon({ 'marker-symbol': 'building', 'marker-color': '0044FF' }),
-                //        title: title
-                //    });
-                //    marker.bindPopup(title);
-                //    markers.addLayer(marker);
-                //}
-
-                //map.addLayer(markers);
-                //initMap();
             });
             function getCenter(array) {
                 var lat = []
@@ -631,44 +595,7 @@
                 }
                 return { x: x, y: y };
             }
-            //function initMap() {
-            //    var vmaps = $("#container").dxVectorMap({
-            //        mapData: '/Map/MapData/nyc-zip-code.js',
-            //        bounds: [-74, 41, -73, 40.4],
-            //        zoomFactor: 30,
-            //        tooltip: {
-            //            enabled: true,
-            //            border: {
-            //                visible: false
-            //            },
-            //            font: { color: "#565656" },
-            //            customizeTooltip: function (arg) {
-            //                var name = arg.attribute("postalCode")
-            //                var zipCount = findCount(name);
 
-            //                return { text: name + zipCount };
-            //            }
-            //        },
-            //        areaSettings: {
-            //            customize: function (arg) {
-
-            //            }
-            //        },
-            //        onAreaClick: function (e) {
-            //            var target = e.target;
-
-            //        },
-
-            //        markerSettings: {
-            //            label: {
-            //                font: { size: 11 }
-            //            }
-            //        },
-            //        markers: zipMap,
-
-            //    })
-            //    var vmaps = $('#container').dxVectorMap('instance');
-            //}
             var map
             function ZoomEndMapBox() {
 
@@ -792,10 +719,10 @@
                 });
             }
             function LoadLotMap(geoJson, styleHandler) {
-                
-                
+
+
                 return L.geoJson(geoJson, {
-                    style:styleHandler != null?styleHandler : function (feature) {
+                    style: styleHandler != null ? styleHandler : function (feature) {
                         var fColor = feature.properties.color != null ? feature.properties.color : '#18FFFF';
                         if (feature.LPBBLE != null) {
                             fColor = '#D50000'
@@ -815,49 +742,15 @@
                 })//.addTo(map)
 
             }
-            function buildGeoJson(Features)
-            {
+            function buildGeoJson(Features) {
                 var geojson = {};
                 geojson['type'] = 'FeatureCollection';
                 geojson['features'] = Features;
                 return geojson
             }
             function ZoomIn(zoom) {
-                //if (zoom === 16) {
-                //    // here's where you decided what zoom levels the layer should and should
-                //    // not be available for: use javascript comparisons like < and > if
-                //    // you want something other than just one zoom level, like
-                //    // (map.getZoom > 17)
-                //    var bounds = map.getBounds();
-                //    var northEast = bounds.getNorthEast();
-                //    var southWest = bounds.getSouthWest();
 
-                //    var string = [northEast.lat, northEast.lng, southWest.lat, southWest.lng].join(',');
-                //    var geoJsonUrl = '/map/mapdataservice.svc/BlockData/' + string;
-
-                //    $.getJSON(geoJsonUrl, function (data) {
-
-                //        var geoJson = data;
-                //        //if (BlockLayer != null)
-                //        //{
-                //        //    showLayer(false, BlockLayer)
-                //        //}
-                //        BlockLayer = L.geoJson(geoJson, {
-                //            style: {
-                //                weight: 2,
-                //                opacity: 0.1,
-                //                color: 'black',
-                //                fillOpacity: 0.7,
-                //                fillColor: '#42A5F5'
-                //            },
-                //            onEachFeature: onEachFeatureBlock
-                //        });
-                //        ShowPloyons(SHOW_BLOCK);
-
-                //    });
-                //}
-                if (!isAdminLogIn)
-                {
+                if (!isAdminLogIn) {
                     return;
                 }
                 if (zoom === 18) {
@@ -896,9 +789,9 @@
                         })
                         unbuild = _.sortBy(unbuild, function (f) { return f.properties.Unbuild_SQFT });
                         UnbuildLayer = LoadLotMap(buildGeoJson(_.filter(geoJson.features, function (f) {
-                            return f.properties.title == null && f.properties.Unbuild_SQFT!=null;
+                            return f.properties.title == null && f.properties.Unbuild_SQFT != null;
                         })), UnBuildStyle);
-                        
+
                         //L.control.layers().addOverlay(LotLayer, "Team Lot")
                         //LotLayer.addTo(map);
                         initLayers({ "Team Lot": LotLayer, "LP Lot": LPLayer, 'Unbuild': UnbuildLayer });
@@ -982,7 +875,7 @@
                 pointer-events: none;
             }
 
-             .map-legend .swatch {
+            .map-legend .swatch {
                 width: 20px;
                 height: 20px;
                 float: left;
@@ -1102,7 +995,7 @@
             function ShowLoading(isloading) {
                 if (isloading) {
                     //$('#LoadingSpin').addClass("fa-spin")
-                    $('#loadingSpin').css("display",'')
+                    $('#loadingSpin').css("display", '')
 
                 } else {
                     //$('#LoadingSpin').removeClass("fa-spin")

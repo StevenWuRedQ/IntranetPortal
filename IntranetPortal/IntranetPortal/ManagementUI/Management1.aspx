@@ -2,22 +2,22 @@
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/css/dx.common.css" rel="stylesheet" />
-    <link href="/Content/dx.ios7.default.css" rel="stylesheet" />
-    <link href="/css/dx.light.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" type="text/css" />
+    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />
     <style>
         .nofoucs:focus {
             border: none !important;
         }
     </style>
-   
+
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
-    <script src="/Scripts/globalize/globalize.js"></script>
-    <script src="/Scripts/dx.chartjs.js"></script>
-    <script src="/Scripts/dx.webappjs.debug.js"></script>
-    <script src="/Scripts/dx.phonejs.js"></script>
+    <script src="/bower_components/globalize/lib/globalize.js"></script>
+    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>
+    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.webappjs.js"></script>
+
     <div class="container-fluid">
         <%--Head--%>
         <div style="padding-top: 30px">
@@ -118,9 +118,9 @@
                                         <div class="col-md-2">
                                             <input type="button" value="Display" class="rand-button bg_color_blue rand-button-padding" onclick="LoadGrid()" />
                                         </div>
-                                           <div class="col-md-2">
+                                        <div class="col-md-2">
                                             <input type="button" value="Chart" class="rand-button bg_color_blue rand-button-padding" onclick="LoadPhoneBarChart()" />
-                                           </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div style="margin: 30px 0; font-size: 24px; color: #234b60; display: none" id="divPhoneSummary">
@@ -136,7 +136,7 @@
                             <div role="tabpanel" class="tab-pane" id="geomap">
                                 <iframe src="/Map/ZipMap.aspx" style="width: 100%; min-height: 600px"></iframe>
                             </div>
-                            
+
                             <div role="tabpanel" class="tab-pane" id="deals_tab">deals_tab</div>
                             <div role="tabpanel" class="tab-pane" id="messages">...</div>
 
@@ -182,7 +182,7 @@
                 </div>
             </div>
             <%-- New layout --%>
-          <%--  <div class="container-fluid">
+            <%--  <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="mag_grid">
@@ -379,7 +379,7 @@
             var customStore = new DevExpress.data.CustomStore({
                 load: function (loadOptions) {
                     var d = $.Deferred();
-                    $.getJSON('/wcfdataservices/portalReportservice.svc/UserReports').done(function (data) {                        
+                    $.getJSON('/wcfdataservices/portalReportservice.svc/UserReports').done(function (data) {
                         d.resolve(data, { totalCount: data.length });
                     });
                     return d.promise();
@@ -512,7 +512,7 @@
                         caption: "Date",
                         dataType: "date",
                         format: "shortDate",
-                        calculateGroupValue: function (rowData) {                           
+                        calculateGroupValue: function (rowData) {
                             var callDate = new Date(rowData.DateTime);
                             return callDate.toLocaleDateString();
                         }
@@ -550,7 +550,7 @@
 
 
     <script>
-                
+
         var currentTeamInfo = null;
         function loadCharts(office) {
 
@@ -588,7 +588,7 @@
             ];
 
             $("#team_hours_chart").dxPieChart({
-               
+
                 dataSource: dataSource,
                 legend: {
                     horizontalAlignment: "center",
@@ -596,7 +596,7 @@
 
                     visible: false
                 },
-               
+
                 series: [{
                     smallValuesGrouping: {
                         mode: "topN",
@@ -674,7 +674,7 @@
                                 visible: true
                             }
                         },
-                       
+
                     }],
                     palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
 
@@ -781,7 +781,7 @@
 
         //];
         menuItemClicked = function (e) {
-           
+
             DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000 });
             $('#teams_link').html(e.itemData);
             //officeDropDown.option("buttonText", e.itemData );
@@ -792,7 +792,7 @@
             itemClickAction: menuItemClicked,
             buttonIcon: 'arrowdown',
         }).dxDropDownMenu("instance");
-       
+
     </script>
 </asp:Content>
 

@@ -1,0 +1,9 @@
+*~
+*.diff
+*.patch
+.DS_Store
+.settings
+spec/*_spec.js
+TODO
+node_modules
+coverage

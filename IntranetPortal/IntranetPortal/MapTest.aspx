@@ -14,7 +14,7 @@
         }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script src="scripts/prototype.js" type="text/javascript"></script>
+    <script src="/bower_components/protyotypejs/prototype.min.js"></script>
     <script>
 
         var rendererOptions = {
@@ -92,49 +92,7 @@
 
         google.maps.event.addDomListener(window, 'load', initialize);
 
-        //function AddNewDestination() {
-        //    var destinationPanel = document.getElementById("destinationPanel");
-        //    var input = document.createElement("Input");          
-
-        //    destinationPanel.appendChild(input);
-        //}
-
-
-        //document.observe("dom:loaded", function () {
-
-        //    $('target_table').observe('click', function (event) {
-        //        var selected_row = Event.findElement(event, 'tr');
-        //        $$('#target_table tr').each(function (row) {
-        //            if (row != selected_row)
-        //                row.removeClassName('selected');
-        //        });
-
-        //        selected_row.toggleClassName('selected');
-        //    });
-
-        //    //add observer to move up/down counter
-        //    $('move_up').observe('click', function () {
-        //        var selected_row = get_selected_row();
-        //        if (selected_row == null)
-        //            alert('click on a row first')
-        //        else
-        //            move_row(selected_row, 'up', 1);
-        //    });
-
-        //    $('move_down').observe('click', function () {
-        //        var selected_row = get_selected_row();
-        //        if (selected_row == null)
-        //            alert('click on a row first')
-        //        else
-        //            var pos_pair = move_row(selected_row, 'down', 1);
-        //        /*
-        //         *use the following to update database
-        //        if (pos_pair.size() > 0)
-        //           update_counter_position(pos_pair);
-        //           */
-        //    });
-        //});
-
+      
         //move a row up and down a table
         //available dir option: 'up', 'down'
         //row_num_column is the column of the row number, starts with 1

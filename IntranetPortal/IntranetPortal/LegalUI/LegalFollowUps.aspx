@@ -2,8 +2,6 @@
 
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 
-
-
 <asp:Content runat="server" ContentPlaceHolderID="head">
     <script>
         function SearchGrid() {

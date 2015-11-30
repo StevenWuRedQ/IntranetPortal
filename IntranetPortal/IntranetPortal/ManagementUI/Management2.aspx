@@ -2,9 +2,8 @@
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/css/dx.common.css" rel="stylesheet" />
-    <%--  <link href="/Content/dx.ios7.default.css" rel="stylesheet" />--%>
-    <link href="/css/dx.light.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" />
+    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />
     <style>
         .nofoucs:focus {
             border: none !important;
@@ -14,10 +13,9 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
-    <script src="/Scripts/globalize/globalize.js"></script>
-    <script src="/Scripts/dx.chartjs.js"></script>
-    <script src="/Scripts/dx.webappjs.debug.js"></script>
-    <script src="/Scripts/dx.phonejs.js"></script>
+    <script src="/bower_components/globalize/lib/globalize.js"></script>
+    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>
+    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.webappjs.js"></script>
     <div class="container-fluid">
         <%--Head--%>
         <div style="padding-top: 30px">
@@ -433,8 +431,7 @@
             });
         }
 
-        function ShowGrid()
-        {
+        function ShowGrid() {
             LoadGrid();
             $("#gridPopup").dxPopup({
                 showTitle: true,

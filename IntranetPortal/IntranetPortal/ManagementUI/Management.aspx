@@ -2,8 +2,8 @@
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/Content/dx.common.css" rel="stylesheet" />    
-    <link href="/Content/dx.light.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" />
+    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />
     <style>
         .nofoucs:focus {
             border: none !important;
@@ -11,10 +11,9 @@
     </style>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-    <script src="/Scripts/globalize/globalize.js"></script>
+    <script src="/bower_components/globalize/lib/globalize.js"></script>
     <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>
-    <%--<script src="/Scripts/dx.webappjs.js"></script>
-    <script src="/Scripts/dx.phonejs.js"></script>--%>
+    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.webappjs.js"></script>
     <div class="container-fluid">
         <%--Head--%>
         <div style="padding-top: 30px">
@@ -1318,7 +1317,7 @@
 
         var reportTypeDropdown = $("#reportType").dxDropDownMenu({
             dataSource: reportsName,
-            itemClickAction: function (e) {            
+            itemClickAction: function (e) {
                 var report = reportList[e.itemData];
                 $("#tdReportTitle").html(report.text);
                 report.action();

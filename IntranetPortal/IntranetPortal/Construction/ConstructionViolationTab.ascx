@@ -4,10 +4,10 @@
 <div class="ss_form" ng-init="Violations_OrdersPanelVisible=false">
     <h4 class="ss_form_title">Orders&nbsp;
         <span class="badge">{{getOrdersLength()}}</span>
-        <i class="fa fa-pencil icon_btn text-primary" uib-tooltip="edit orders" ng-click="Violations_OrdersPanelVisible=true"></i>
+        <i class="fa fa-pencil icon_btn text-primary" ng-click="Violations_OrdersPanelVisible=true" uib-tooltip="edit orders"></i>
     </h4>
     <div style="text-align: center">
-        <div style="text-align: left" ng-show="false" hide-ng-show="(!CSCase.CSCase.Violations.stopWorkOrders || CSCase.CSCase.Violations.stopWorkOrders.length<=0) && (!CSCase.CSCase.Violations.fullVacateOrders || CSCase.CSCase.Violations.fullVacateOrders.length<=0) && (!CSCase.CSCase.Violations.partialVacateOrders || CSCase.CSCase.Violations.partialVacateOrders.length<=0)">
+        <div style="text-align: left" ng-show="false" data-hidenow="(!CSCase.CSCase.Violations.stopWorkOrders || CSCase.CSCase.Violations.stopWorkOrders.length<=0) && (!CSCase.CSCase.Violations.fullVacateOrders || CSCase.CSCase.Violations.fullVacateOrders.length<=0) && (!CSCase.CSCase.Violations.partialVacateOrders || CSCase.CSCase.Violations.partialVacateOrders.length<=0)">
             <button type="button" class="btn btn-danger btn-sm ">Fetch From DOB</button>
             <br />
         </div>
