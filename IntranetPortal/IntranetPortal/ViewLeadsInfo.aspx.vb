@@ -83,21 +83,24 @@
     End Sub
 
     Private Sub LoadData(bble As String)
-        LeadsInfo.BindData(bble)
-        If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
-            Dim cstext1 As String = "<script type=""text/javascript"">" & _
-                            String.Format("var leadsInfoBBLE = ""{0}"";", bble) & "</script>"
-            Page.ClientScript.RegisterStartupScript(Me.GetType, "SetleadBBLE", cstext1)
+        If Not Page.IsPostBack Then
+
+
+            LeadsInfo.BindData(bble)
+            If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
+                Dim cstext1 As String = "<script type=""text/javascript"">" &
+                                String.Format("var leadsInfoBBLE = ""{0}"";", bble) & "</script>"
+                Page.ClientScript.RegisterStartupScript(Me.GetType, "SetleadBBLE", cstext1)
+            End If
+
+            If Not Page.ClientScript.IsClientScriptBlockRegistered("OnEndCallback") Then
+                Dim js As String = "<script type=""text/javascript"">" &
+                                   "function OnEndCallback() {}" &
+                                   "</script>"
+                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "OnEndCallback", js)
+            End If
+
         End If
-
-        If Not Page.ClientScript.IsClientScriptBlockRegistered("OnEndCallback") Then
-            Dim js As String = "<script type=""text/javascript"">" & _
-                               "function OnEndCallback() {}" & _
-                               "</script>"
-            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "OnEndCallback", js)
-        End If
-
-
         'If ShortSaleManage.IsInShortSale(bble) Then
         '    If Not Page.ClientScript.IsStartupScriptRegistered("ReloadHomebreakCtr") Then
         '        Dim js As String = "<script type=""text/javascript"">" & _
