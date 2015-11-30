@@ -5,7 +5,7 @@
   ],
   "description": "",
   "main": "",
-  "moduleType": [ ],
+  "moduleType": [],
   "license": "",
   "homepage": "",
   "private": true,
@@ -43,5 +43,8 @@
     "Ionicons": "ionicons#~2.0.1",
     "literallycanvas": "~0.4.10",
     "prototypejs": "~1.7.0"
+  },
+  "resolutions": {
+    "jquery": "~2.1.4"
   }
 }

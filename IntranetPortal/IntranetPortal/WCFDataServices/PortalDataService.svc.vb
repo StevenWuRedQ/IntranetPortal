@@ -176,7 +176,10 @@ Public Class PortalDataService
         Return homeOwner
     End Function
 
-    Public Function UpdateLeadInfo(bble As String, infoType As String, status As String, updateTime As DateTime, C1stMotgrAmt As Double, C2ndMotgrAmt As Double, TaxesAmt As Double, WaterAmt As Double, ECBViolationsAmt As Double, DOBViolationsAmt As Double, zEstimate As Integer, salesInfo As DataAPI.Acris_Last_Sales_Info) As Boolean
+    Public Function UpdateLeadInfo(bble As String, infoType As String, status As String, updateTime As DateTime,
+                                   C1stMotgrAmt As Double, C2ndMotgrAmt As Double, TaxesAmt As Double, WaterAmt As Double,
+                                   ECBViolationsAmt As Double, DOBViolationsAmt As Double, zEstimate As Integer,
+                                   salesInfo As DataAPI.Acris_Last_Sales_Info) As Boolean
         'Dim newlead = DataWCFService.GetLeadInfo(bble)
 
         Using context As New Entities

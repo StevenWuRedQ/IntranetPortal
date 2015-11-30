@@ -39,11 +39,32 @@
 
 <script type="text/javascript">
     var isFiltered= false; 
+    var filterCategory = {'Task':6,'Appointment':3,'Email':4};
+    var refreshCategory = ['SalesAgent','ShortSale','Legal','Title','Construction','Eviction'];
     function OnlogSelectedIndexChanged(s, e) {
         var selectedItems = cbCateLogClient.GetSelectedItems();
         var categories = GetSelectedItemsValue(selectedItems);
 
-        if (categories == "") {    
+        var filterCondition = "";
+        var refreshGrid = false;       
+        for(var i=0; i<selectedItems.length; i++)
+        {
+            var item = selectedItems[i].value;
+            if(item in filterCategory)
+            {
+                var actionType = filterCategory[item];
+                if (filterCondition == "")
+                    filterCondition = "[ActionType]=" +  actionType;
+                else
+                    filterCondition += " OR [ActionType]=" + actionType;
+            }
+            else
+            {
+                refreshGrid = true;
+            }
+        }
+        
+        if (categories == "") {
             if(isFiltered)
             {
                 gridTrackingClient.ClearFilter();
@@ -55,14 +76,14 @@
             $("#filter_btn").removeClass("filited");
         }
         else {
-            if(categories != "Task")
+            if(refreshGrid)
             {
                 gridTrackingClient.PerformCallback("Filter|" + categories);
                 $("#filter_btn").addClass("filited");
             }
             else {
-                var filterCondition = "";
-                filterCondition = "[ActionType] = 6";
+                //var filterCondition = "";
+                //filterCondition = "[ActionType] = 6";
                 gridTrackingClient.ApplyFilter(filterCondition);
                 $("#filter_btn").addClass("filited");
                 isFiltered = true;
@@ -1000,6 +1021,8 @@
                             <dx:ListEditItem Text="Construction" Value="Construction" />
                             <dx:ListEditItem Text="Eviction" Value="Eviction" />                                                                                    
                             <dx:ListEditItem Text="Task" Value="Task" />                            
+                            <dx:ListEditItem Text="Email" Value="Email" />
+                            <dx:ListEditItem Text="Appointment" Value="Appointment" />
                         </Items>
                         <Border BorderStyle="None"></Border>
                         <ClientSideEvents SelectedIndexChanged="OnlogSelectedIndexChanged" />

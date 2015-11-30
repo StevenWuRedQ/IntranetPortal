@@ -777,42 +777,38 @@ angular.module('ui.layout', [])
     return {
       restrict: 'AE',
       require: '^uiLayout',
-      scope: {
-      },
+      scope: {},
 
       compile: function() {
-          return {
-              pre: function(scope, element, attrs, ctrl) {
-                  scope.container = LayoutContainer.Container();
-                  scope.container.element = element;
-                  scope.hideprev = element.attr("hideprev") !== undefined
-                  scope.hideafter = element.attr("hideafter") !== undefined
+        return {
+          pre: function(scope, element, attrs, ctrl) {
+            scope.container = LayoutContainer.Container();
+            scope.container.element = element;
 
-                  ctrl.addContainer(scope.container);
+            ctrl.addContainer(scope.container);
 
-                  element.on('$destroy', function() {
-                      ctrl.removeContainer(scope.container);
-                      scope.$evalAsync();
-                  });
-              },
-              post: function(scope, element, attrs, ctrl) {
-                  if(!element.hasClass('stretch')) element.addClass('stretch');
-                  if(!element.hasClass('ui-layout-container')) element.addClass('ui-layout-container');
+            element.on('$destroy', function() {
+              ctrl.removeContainer(scope.container);
+              scope.$evalAsync();
+            });
+          },
+          post: function(scope, element, attrs, ctrl) {
+            if(!element.hasClass('stretch')) element.addClass('stretch');
+            if(!element.hasClass('ui-layout-container')) element.addClass('ui-layout-container');
 
-                  scope.$watch('container.size', function(newValue) {
-                      element.css(ctrl.sizeProperties.sizeProperty, newValue + 'px');
-                  });
+            scope.$watch('container.size', function(newValue) {
+              element.css(ctrl.sizeProperties.sizeProperty, newValue + 'px');
+            });
 
-                  scope.$watch('container.' + ctrl.sizeProperties.flowProperty, function(newValue) {
-                      element.css(ctrl.sizeProperties.flowProperty, newValue + 'px');
-                  });
+            scope.$watch('container.' + ctrl.sizeProperties.flowProperty, function(newValue) {
+              element.css(ctrl.sizeProperties.flowProperty, newValue + 'px');
+            });
 
-                  //TODO: add ability to disable auto-adding a splitbar after the container
-                  var parent = element.parent();
-                  var children = parent.children();
-                  var index = ctrl.indexOfElement(element);
-
-                  var splitbar = angular.element('<div ui-splitbar><a ng-show="!hideprev"><span class="ui-splitbar-icon"></span></a><a ng-show="!hideafter"><span class="ui-splitbar-icon"></span></a></div>');
+            //TODO: add ability to disable auto-adding a splitbar after the container
+            var parent = element.parent();
+            var children = parent.children();
+            var index = ctrl.indexOfElement(element);
+            var splitbar = angular.element('<div ui-splitbar><a><span class="ui-splitbar-icon"></span></a><a><span class="ui-splitbar-icon"></span></a></div>');
             if(0 < index && !ctrl.hasSplitbarBefore(scope.container)) {
               angular.element(children[index-1]).after(splitbar);
               $compile(splitbar)(scope);
