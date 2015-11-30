@@ -125,6 +125,7 @@
     </Compile>
     <Compile Include="ShortSaleUnitTest.vb" />
     <Compile Include="UnitTest1.vb" />
+    <Compile Include="ConstructionTest.vb" />
     <Compile Include="WebGrabberTest.vb" />
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,9 @@
 Imports System.ComponentModel.DataAnnotations
 Imports System.Data.Entity.Infrastructure
 
+''' <summary>
+''' Construction case object
+''' </summary>
 <MetadataType(GetType(ConstructionCaseMetaData))>
 Partial Public Class ConstructionCase
 

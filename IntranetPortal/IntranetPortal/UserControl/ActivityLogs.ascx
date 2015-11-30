@@ -24,7 +24,6 @@
     .filited {
         background: url(/images/ic_filtered_bg.png) no-repeat;
     }
-
     /* for fix the email message link color hover bug in activty log*/
     td.dxgv:hover a {
         color: black !important;
@@ -561,8 +560,8 @@
                 <div style="margin-top: 50px">
                     <asp:Panel runat="server" ID="pnlCommentCtr"></asp:Panel>
                     <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Legal Or DisplayMode = ActivityLogMode.Construction Or DisplayMode = ActivityLogMode.Eviction Then%>
-                    <div>Date of Comment:</div>
-                    <div class="border_under_line" style="height: 80px">
+                    <div style=" visibility:hidden">Date of Comment:</div>
+                    <div class="border_under_line" style="height: 80px;  visibility:hidden">
                         <dx:ASPxDateEdit ID="ASPxDateEdit1" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                     </div>
                     <% End If%>

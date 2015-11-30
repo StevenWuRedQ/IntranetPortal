@@ -43,6 +43,12 @@ Namespace Controllers
                 Return BadRequest()
             End If
 
+            'Dim cCase = Data.ConstructionCase.GetCase(id)
+
+            'If cCase.LastUpdate.HasValue AndAlso constructionCase.LastUpdate.HasValue AndAlso Not cCase.LastUpdate.Value = constructionCase.LastUpdate.Value Then
+            '    Return BadRequest("Last update is not match. Please refresh and try.")
+            'End If
+
             Try
                 constructionCase.Save(CurrentUser)
             Catch ex As DbUpdateConcurrencyException

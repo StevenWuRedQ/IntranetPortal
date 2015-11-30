@@ -2,7 +2,8 @@
 Imports IntranetPortal.Data
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 
-<TestClass()> Public Class ShortSaleUnitTest
+<TestClass()>
+Public Class ShortSaleUnitTest
 
     <TestMethod()> Public Sub UpdateCheckListTest()
         Dim bble = "2039970011"
