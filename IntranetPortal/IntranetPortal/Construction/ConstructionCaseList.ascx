@@ -19,7 +19,6 @@
 
                         OnGetRowValues(rowKey);
                     }
-    
                 }
             }
         }
@@ -41,6 +40,12 @@
     }
 
     function OnGridRowClicked(s, e) {
+        if (typeof CaseDataChanged == 'function') {
+            if (CaseDataChanged()) {
+                e.cancel = confirm("You have pending changes, please save or press Cancel to continue?");
+            }
+        }
+
         if (cbpLogs.InCallback()) {
             e.cancel = true;
             alert("The data is loading now. Please wait a second.");
