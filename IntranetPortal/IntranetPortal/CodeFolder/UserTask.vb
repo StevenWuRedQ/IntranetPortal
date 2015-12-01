@@ -163,19 +163,25 @@
             Dim emps = Employee.GetSubOrdinateWithoutMgr(userContext.User.Identity.Name)
 
             Dim count = (From lead In context.Leads
-                                      Join task In context.UserTasks On task.BBLE Equals lead.BBLE
-                                      Where task.Status = UserTask.TaskStatus.Active And task.EmployeeName.Contains(empName) And task.CreateDate < newVersionDate
-                                      Select lead.BBLE).Union(
+                         Join task In context.UserTasks On task.BBLE Equals lead.BBLE
+                         Where task.Status = UserTask.TaskStatus.Active And task.EmployeeName.Contains(empName) And task.CreateDate < newVersionDate
+                         Select lead.BBLE).Union(
                                       From al In context.Leads
                                       Join appoint In context.UserAppointments On appoint.BBLE Equals al.BBLE
                                       Where appoint.Status = UserAppointment.AppointmentStatus.NewAppointment And (appoint.Agent = empName Or appoint.Manager = empName) And appoint.CreateDate < newVersionDate
                                       Select al.BBLE).Union(
                                     From lead In context.Leads.Where(Function(ld) ld.Status = LeadStatus.MgrApproval And emps.Contains(ld.EmployeeID))
-                                     Select lead.BBLE
+                                    Select lead.BBLE
                                        ).Distinct.Count
             Return count
         End Using
     End Function
+
+    Public Sub ApprovalTask(approvalStatus As TaskStatus)
+
+
+
+    End Sub
 
     Public Sub ExecuteAction()
         'execute shortsale task action

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ViewLeadsInfo.aspx.vb" Inherits="IntranetPortal.ViewLeadsInfo" MasterPageFile="~/Content.Master" Trace="false" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ViewLeadsInfo.aspx.vb" Inherits="IntranetPortal.ViewLeadsInfo" EnableEventValidation="false" MasterPageFile="~/Content.Master" Trace="false" %>
 
 <%@ Register Src="~/UserControl/LeadsInfo.ascx" TagPrefix="uc1" TagName="LeadsInfo" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>

@@ -64,7 +64,6 @@ Partial Public Class CheckingComplain
 
     'End Function
 
-
     Public Shared Function GetResultFromServices(Optional bble As String = "") As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
 
         Using client As New DataAPI.WCFMacrosClient()
@@ -210,6 +209,7 @@ Partial Public Class CheckingComplain
             If result.Any(Function(r) r.Status.Trim = "ACT") Then
                 If DataIsChange(result) Then
                     dataChanged = True
+                    Core.SystemLog.Log("ComplaintsHasUpdated", Me.LastComplaintsResult, SystemLog.LogCategory.Operation, BBLE, Nothing)
                     'NotifyAction(result)
                 End If
             End If
@@ -272,7 +272,6 @@ Partial Public Class CheckingComplain
                 If lastResult.LastInspection <> result.LastInspection Then
                     Return True
                 End If
-
             End If
         Next
 

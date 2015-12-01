@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="MgrViewLeads.aspx.vb" Inherits="IntranetPortal.MgrViewLeads" MasterPageFile="~/Content.Master" Trace="false" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="MgrViewLeads.aspx.vb" EnableEventValidation="false" Inherits="IntranetPortal.MgrViewLeads" MasterPageFile="~/Content.Master" Trace="false" %>
 
 <%@ Register Src="~/UserControl/LeadsList.ascx" TagPrefix="uc1" TagName="LeadsList" %>
 <%@ Register Src="~/UserControl/LeadsInfo.ascx" TagPrefix="uc1" TagName="LeadsInfo" %>

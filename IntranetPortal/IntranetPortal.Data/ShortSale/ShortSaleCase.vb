@@ -872,14 +872,14 @@ Partial Public Class ShortSaleCase
 
     Public Sub SaveStatus(status As CaseStatus)
         Me.Status = status
-        Save()
+        SaveEntity()
     End Sub
 
     Public Sub SaveFollowUp(dt As DateTime)
         'Me.Status = CaseStatus.FollowUp
         If dt > DateTime.MinValue Then
             Me.CallbackDate = dt
-            Save()
+            SaveEntity()
         End If
     End Sub
 
@@ -926,7 +926,7 @@ Partial Public Class ShortSaleCase
 
         Me.UpdateDate = DateTime.Now
 
-        Save()
+        SaveEntity()
     End Sub
 
     Public Shared Function SaveCase(ssCase As ShortSaleCase) As Boolean
