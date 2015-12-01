@@ -250,7 +250,7 @@ Partial Public Class CheckingComplain
         End Try
     End Sub
 
-    Private Function DataIsChange(results As DataAPI.SP_DOB_Complaints_By_BBLE_Result()) As Boolean
+    Public Function DataIsChange(results As DataAPI.SP_DOB_Complaints_By_BBLE_Result()) As Boolean
         For Each result In results
             If result.Status = "ACT" Then
                 If ComplaintsResult Is Nothing Then

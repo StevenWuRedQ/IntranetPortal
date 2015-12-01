@@ -18,10 +18,11 @@ Imports Newtonsoft.Json
 
     <TestMethod()>
     Public Sub ComplaintsUpdateTesting()
-        Dim bble = "1022150377"
+        Dim bble = "3015930048"
         Dim prop = CheckingComplain.Instance(bble)
 
-
+        Dim isChange = prop.DataIsChange(prop.ComplaintsResult)
+        Assert.IsFalse(isChange)
     End Sub
 
     <TestMethod()>
