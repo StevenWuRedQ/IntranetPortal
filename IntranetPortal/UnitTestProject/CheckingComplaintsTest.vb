@@ -21,8 +21,10 @@ Imports Newtonsoft.Json
         Dim bble = "3015930048"
         Dim prop = CheckingComplain.Instance(bble)
 
-        Dim isChange = prop.DataIsChange(prop.ComplaintsResult)
-        Assert.IsFalse(isChange)
+        Dim result = prop.ComplaintsResult.ToArray
+        result.Where(Function(a) a.Status = "ACT").FirstOrDefault.LastInspection = "Changed"
+        Dim isChange = prop.DataIsChange(result)
+        Assert.IsTrue(isChange)
     End Sub
 
     <TestMethod()>
