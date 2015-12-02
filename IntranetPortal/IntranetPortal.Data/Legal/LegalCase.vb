@@ -295,6 +295,12 @@ Public Enum DataStatus
 
     <Description("Restored To calendar")>
     Restored2Calendar = 10101
+    <Description("motion To restore submitted")>
+    MotionToTestoreSubmitted = 10102
+    <Description("motion To restore withdrawn")>
+    MotionToTestoreWithdrawn = 10103
+    <Description("ref deed recorded")>
+    RefDeedRecorded = 10104
 End Enum
 
 
