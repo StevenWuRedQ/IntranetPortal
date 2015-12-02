@@ -167,8 +167,6 @@ Imports Newtonsoft.Json
     <TestMethod()>
     Public Sub WriteStreetName()
 
-
-
     End Sub
 
     <TestMethod()>

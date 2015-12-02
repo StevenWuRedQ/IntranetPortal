@@ -40,6 +40,10 @@
 
             if (!!tests.formdata && formData != null) {
                 var xhr = new XMLHttpRequest();
+
+                if (typeof form1 == 'undefined')
+                    form1 = document.forms[0];
+
                 var url = form1.action + "&cate=1";
 
                 var categories = GetSelectedCategory();
