@@ -76,7 +76,8 @@ Public Class Utility
     End Function
     Public Shared Function Address2BBLE(address As String) As String
         Dim baseURL = "https://api.cityofnewyork.us/geoclient/v1/search.json?app_id=be97fb56&app_key=b51823efd58f25775df3b2956a7b2bef"
-        baseURL = baseURL & "&input=" & address.Trim()
+        Dim unasciiAddress = Regex.Replace(address, "[^\u0000-\u007F]", String.Empty)
+        baseURL = baseURL & "&input=" & unasciiAddress.Trim()
         'baseURL = HttpUtility.UrlEncode(baseURL)
         Try
             Dim request As WebRequest = WebRequest.Create(baseURL)
