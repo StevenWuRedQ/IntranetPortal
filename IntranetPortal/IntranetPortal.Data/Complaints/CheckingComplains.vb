@@ -206,19 +206,21 @@ Partial Public Class CheckingComplain
 
         If result IsNot Nothing AndAlso result.Length > 0 Then
             Dim dataChanged = False
-            If result.Any(Function(r) r.Status.Trim = "ACT") Then
+            If result.Any(Function(r) r.Status.Trim <> "None") Then
                 If DataIsChange(result) Then
                     dataChanged = True
                     Core.SystemLog.Log("ComplaintsHasUpdated", Me.LastComplaintsResult, SystemLog.LogCategory.Operation, BBLE, Nothing)
                     'NotifyAction(result)
+
+                    Dim lastDate = result.OrderByDescending(Function(r) r.DateEntered).FirstOrDefault.DateEntered
+                    Me.LastDataEntered = lastDate
+                    Me.ComplaintsResult = result
+                    Me.TotalComplaints = result.Length
+                    Me.ActiveComplaints = result.Where(Function(a) a.Status = "ACT").Count
+                    Me.LastResultUpdate = DateTime.Now
                 End If
             End If
 
-            Me.LastDataEntered = result.OrderByDescending(Function(r) r.DateEntered).FirstOrDefault.DateEntered
-            Me.ComplaintsResult = result
-            Me.TotalComplaints = result.Length
-            Me.ActiveComplaints = result.Where(Function(a) a.Status = "ACT").Count
-            Me.LastResultUpdate = DateTime.Now
             Me.Status = RunningStatus.Ready
             Me.Save("")
 
@@ -250,9 +252,14 @@ Partial Public Class CheckingComplain
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Check if the complaints has been changed
+    ''' </summary>
+    ''' <param name="results">The new complaints result</param>
+    ''' <returns></returns>
     Public Function DataIsChange(results As DataAPI.SP_DOB_Complaints_By_BBLE_Result()) As Boolean
         For Each result In results
-            If result.Status = "ACT" Then
+            If result.Status <> "None" Then
                 If ComplaintsResult Is Nothing Then
                     Return True
                 End If
@@ -264,12 +271,20 @@ Partial Public Class CheckingComplain
                     Return True
                 End If
 
+                If lastResult.Status <> "ACT" Then
+                    Continue For
+                End If
+
                 'Changed Complaints
                 If result.DateEntered.HasValue AndAlso result.DateEntered > lastResult.DateEntered Then
                     Return True
                 End If
 
                 If lastResult.LastInspection <> result.LastInspection Then
+                    Return True
+                End If
+
+                If lastResult.Status <> result.Status Then
                     Return True
                 End If
             End If

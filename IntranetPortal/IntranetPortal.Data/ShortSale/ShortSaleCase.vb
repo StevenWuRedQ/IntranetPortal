@@ -716,7 +716,6 @@ Partial Public Class ShortSaleCase
         Return Nothing
     End Function
 
-
     Public Sub Save(Optional userName As String = Nothing)
         Using context As New ShortSaleEntities
             RefreshReportFields(userName)
