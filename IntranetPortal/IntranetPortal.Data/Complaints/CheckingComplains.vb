@@ -208,10 +208,12 @@ Partial Public Class CheckingComplain
             Dim dataChanged = False
             If result.Any(Function(r) r.Status.Trim <> "None") Then
                 If DataIsChange(result) Then
-                    dataChanged = True
-                    Core.SystemLog.Log("ComplaintsHasUpdated", Me.LastComplaintsResult, SystemLog.LogCategory.Operation, BBLE, Nothing)
-                    'NotifyAction(result)
+                    If result.Any(Function(r) r.Status.Trim = "Act") Then
+                        dataChanged = True
+                        Core.SystemLog.Log("ComplaintsHasUpdated", Me.LastComplaintsResult, SystemLog.LogCategory.Operation, BBLE, Nothing)
+                    End If
 
+                    'NotifyAction(result)
                     Dim lastDate = result.OrderByDescending(Function(r) r.DateEntered).FirstOrDefault.DateEntered
                     Me.LastDataEntered = lastDate
                     Me.ComplaintsResult = result

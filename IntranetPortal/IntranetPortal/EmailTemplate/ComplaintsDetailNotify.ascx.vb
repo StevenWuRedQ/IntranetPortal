@@ -14,7 +14,14 @@
         Dim userName = params("UserName")
 
         complaint = Data.CheckingComplain.Instance(bble)
-        rptComplaints.DataSource = complaint.ComplaintsResult.Where(Function(c) c.Status = "ACT").ToList
+        Dim results = complaint.ComplaintsResult
+
+        If results.Any(Function(c) c.Status.Trim = "ACT") Then
+            rptComplaints.DataSource = results.Where(Function(c) c.Status.Trim = "ACT").ToList
+        Else
+            rptComplaints.DataSource = {results.LastOrDefault}
+        End If
+
         rptComplaints.DataBind()
     End Sub
 
