@@ -1,6 +1,6 @@
 ﻿Public Class LegalJudge
     Public Shared Function GetAllJudge() As List(Of LegalJudge)
-        Using ctx As New LegalModelContainer
+        Using ctx As New ShortSaleEntities
             Return ctx.LegalJudges.ToList()
         End Using
     End Function

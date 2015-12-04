@@ -4,19 +4,19 @@
 Partial Public Class LawReference
 
     Public Shared Function GetReference(RefId As Integer) As LawReference
-        Using ctx As New LegalModelContainer
+        Using ctx As New ShortSaleEntities
             Return ctx.LawReferences.Find(RefId)
         End Using
     End Function
 
     Public Shared Function GetAllReference() As List(Of LawReference)
-        Using ctx As New LegalModelContainer
+        Using ctx As New ShortSaleEntities
             Return ctx.LawReferences.ToList
         End Using
     End Function
 
     Public Sub Delete()
-        Using ctx As New LegalModelContainer
+        Using ctx As New ShortSaleEntities
             Dim lRef = ctx.LawReferences.Find(RefId)
             ctx.LawReferences.Remove(lRef)
             ctx.SaveChanges()
@@ -24,7 +24,7 @@ Partial Public Class LawReference
     End Sub
 
     Public Sub Save()
-        Using ctx As New LegalModelContainer
+        Using ctx As New ShortSaleEntities
             If RefId = 0 Then
                 Me.CreateTime = DateTime.Now
                 ctx.Entry(Me).State = Entity.EntityState.Added

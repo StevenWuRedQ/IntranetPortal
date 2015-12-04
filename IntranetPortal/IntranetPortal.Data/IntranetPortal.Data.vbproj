@@ -161,21 +161,6 @@
       <DependentUpon>DocSearchEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="FollowUps\UserFollowUp.vb" />
-    <Compile Include="Legal\DataModel\LegalModel.Context.vb">
-      <DependentUpon>LegalModel.Context.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Legal\DataModel\LegalModel.Designer.vb">
-      <DependentUpon>LegalModel.edmx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Legal\DataModel\LegalModel.vb">
-      <DependentUpon>LegalModel.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Legal\LawReference.vb" />
     <Compile Include="Legal\LegalCase.vb" />
     <Compile Include="Legal\LegalCaseReport.vb" />
@@ -350,10 +335,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Legal\DataModel\LegalModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LegalModel.Designer.vb</LastGenOutput>
-    </EntityDeploy>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
@@ -380,19 +361,6 @@
     </EntityDeploy>
     <None Include="DocumentSearch\SearchEntity\DocSearchEntity.edmx.diagram">
       <DependentUpon>DocSearchEntity.edmx</DependentUpon>
-    </None>
-    <None Include="Legal\DataModel\LegalModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LegalModel.edmx</DependentUpon>
-      <LastGenOutput>LegalModel.Context.vb</LastGenOutput>
-    </None>
-    <None Include="Legal\DataModel\LegalModel.edmx.diagram">
-      <DependentUpon>LegalModel.edmx</DependentUpon>
-    </None>
-    <None Include="Legal\DataModel\LegalModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LegalModel.edmx</DependentUpon>
-      <LastGenOutput>LegalModel.vb</LastGenOutput>
     </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

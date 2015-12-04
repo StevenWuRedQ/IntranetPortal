@@ -41,7 +41,7 @@ Public Class LegalECourt
 
                 'When changed save it to database
                 If (Changed) Then
-                    Using db As New LegalModelContainer
+                    Using db As New ShortSaleEntities
 
                         Dim original = db.LegalECourts.Find(Me.Id)
                         If (original IsNot Nothing) Then
@@ -58,7 +58,7 @@ Public Class LegalECourt
         Return False
     End Function
     Public Shared Function GetIndexLegalECourts() As List(Of LegalECourt)
-        Using ctx As New LegalModelContainer
+        Using ctx As New ShortSaleEntities
             Return ctx.LegalECourts.Where(Function(e) Not String.IsNullOrEmpty(e.IndexNumber)).ToList
         End Using
     End Function
@@ -71,13 +71,13 @@ Public Class LegalECourt
     ''' <returns> legal ecourt list need notice</returns>
     Public Shared Function GetCaseByNoticeyDay(day As Integer) As List(Of LegalECourt)
 
-        Using ctx As New LegalModelContainer
+        Using ctx As New ShortSaleEntities
             Dim MaxDate = Date.Now.AddDays(day)
             Return ctx.LegalECourts.Where(Function(e) (e.AppearanceDate <= MaxDate AndAlso e.AppearanceDate > Date.Now) AndAlso (Not String.IsNullOrEmpty(e.BBLE))).ToList
         End Using
     End Function
     Public Shared Function GetLegalEcourt(bble As String) As LegalECourt
-        Using ctx As New LegalModelContainer
+        Using ctx As New ShortSaleEntities
             Return ctx.LegalECourts.Where(Function(e) e.BBLE = bble).OrderByDescending(Function(e) e.UpdateTime).FirstOrDefault
         End Using
     End Function
@@ -86,7 +86,7 @@ Public Class LegalECourt
         If msg Is Nothing Then
             Throw New Exception("msg can't be null !")
         End If
-        Using ctx As New LegalModelContainer
+        Using ctx As New ShortSaleEntities
             eCourt = ctx.LegalECourts.Where(Function(e) e.UpdateTime = msg.Date AndAlso msg.Subject = msg.Subject).FirstOrDefault
             If (eCourt Is Nothing) Then
                 eCourt = New LegalECourt
