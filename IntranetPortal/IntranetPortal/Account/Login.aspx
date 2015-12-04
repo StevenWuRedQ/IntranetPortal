@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>My Ideal Property Portal</title>
-    <meta name="description" content="" />
+
     <link rel="stylesheet" href="/css/normalize.min.css" />
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -23,7 +23,6 @@
     <script src="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.js"></script>
     <script src="/bower_components/jquery-form/jquery.form.js"></script>
     <script src="/bower_components/jquery-backstretch/jquery.backstretch.min.js"></script>
-
     <script src="/Scripts/js/main.js"></script>
 
 
@@ -161,6 +160,7 @@
                 window.location = location.href;
             }
         </script>
+
     </form>
 </body>
 </html>

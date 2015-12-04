@@ -2202,7 +2202,7 @@ li.mag_tabv.active {
 }
 /*end magagement UI*/
 
-/* scrobar */
+/* scrollbar */
 ::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -2227,6 +2227,7 @@ li.mag_tabv.active {
 ::-webkit-scrollbar:horizontal {
 	height: 6px;
 }
+
 
 .message_pupup_icon {
 	font-size: 16px;

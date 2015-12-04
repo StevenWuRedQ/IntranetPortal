@@ -5,17 +5,17 @@ filter("ByContact", function () {
 
             out: []
         };
-        if ($.isEmptyObject(contact) || contact.Type == null) {
+        if ($.isEmptyObject(contact) || contact.Type === null) {
             return movies;
         }
         angular.forEach(movies, function (value, key) {
-
-            if (value.Type == contact.Type) {
-                if (contact.CorpName == '' || contact.CorpName == value.CorpName) {
+            if (value.Type === contact.Type) {
+                if (contact.CorpName === '' || contact.CorpName === value.CorpName) {
                     items.out.push(value);
                 }
             }
         });
         return items.out;
     };
-});
+}).
+filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }]);

@@ -2459,6 +2459,10 @@
     <Content Include="bower_components\angular-animate\angular-animate.js" />
     <Content Include="bower_components\angular-animate\angular-animate.min.js" />
     <Content Include="bower_components\angular-animate\index.js" />
+    <Content Include="bower_components\angular-mocks\angular-mocks.js" />
+    <Content Include="bower_components\angular-mocks\ngAnimateMock.js" />
+    <Content Include="bower_components\angular-mocks\ngMock.js" />
+    <Content Include="bower_components\angular-mocks\ngMockE2E.js" />
     <Content Include="bower_components\angular-sanitize\angular-sanitize.js" />
     <Content Include="bower_components\angular-sanitize\angular-sanitize.min.js" />
     <Content Include="bower_components\angular-sanitize\index.js" />
@@ -6126,6 +6130,7 @@
     <Content Include="EmailTemplate\TeamActivityReport.aspx" />
     <Content Include="EmailTemplate\Testing.ascx" />
     <Content Include="favicon.ico" />
+    <Content Include="Gruntfile.js" />
     <Content Include="images\1_down_picto.png" />
     <Content Include="images\accounting_icon.jpg" />
     <Content Include="images\add-button-hi.png" />
@@ -6423,9 +6428,21 @@
     <Content Include="img\TreeView\treeview-gray.gif" />
     <Content Include="img\TreeView\treeview-red-line.gif" />
     <Content Include="img\TreeView\treeview-red.gif" />
+    <Content Include="js\app.js" />
+    <Content Include="js\build\intranetportal.min.js" />
+    <Content Include="js\controllers.js" />
     <Content Include="js\controllers\BuyerEntityController.js" />
+    <Content Include="js\controllers\ConstructionController.js" />
+    <Content Include="js\controllers\ShortSaleController.js" />
+    <Content Include="js\controllers\TitleController.js" />
     <Content Include="js\controllers\VendorController.js" />
+    <Content Include="js\e2etest\conf.js" />
+    <Content Include="js\e2etest\ContructionController.js" />
     <Content Include="js\filters.js" />
+    <Content Include="js\intranetportal.js" />
+    <Content Include="js\test\conf.js" />
+    <Content Include="js\test\ConstructionControllerSpec.js" />
+    <Content Include="js\test\ptFilesDirectiveSpec.js" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
@@ -6920,7 +6937,6 @@
     <Content Include="bower_components\ngMask\LICENSE" />
     <Content Include="bower_components\ngMask\package.json" />
     <Content Include="bower_components\ngMask\README.md" />
-    <Content Include="JSLintNet.json" />
     <Content Include="bower_components\ionic\.bower.json" />
     <Content Include="bower_components\ionic\bower.json" />
     <Content Include="bower_components\ionic\CHANGELOG.md" />
@@ -7171,8 +7187,8 @@
     <Content Include="Scripts\PortalMessager.js" />
     <Content Include="js\services.js" />
     <Content Include="Scripts\stevenjs.js" />
-    <Content Include="Scripts\templates\ptfile.html" />
-    <Content Include="Scripts\templates\ptfiles.html" />
+    <Content Include="js\templates\ptfile.html" />
+    <Content Include="js\templates\ptfiles.html" />
     <Content Include="Scripts\Web.config" />
     <Content Include="scrollbar\Web.config" />
     <Content Include="bower_components\signalr\.bower.json" />
@@ -7219,6 +7235,10 @@
     <Content Include="bower_components\editable-table\LICENSE" />
     <Content Include="bower_components\editable-table\README.md" />
     <Content Include="bower_components\editable-table\republish.sh" />
+    <Content Include="bower_components\angular-mocks\.bower.json" />
+    <Content Include="bower_components\angular-mocks\bower.json" />
+    <Content Include="bower_components\angular-mocks\package.json" />
+    <Content Include="bower_components\angular-mocks\README.md" />
     <None Include="Service References\CallTrackingService\CallTrackingService.wsdl" />
     <Content Include="Service References\CallTrackingService\IntranetPortal.CallTrackingService.EmployeeStatisticData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -7524,6 +7544,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

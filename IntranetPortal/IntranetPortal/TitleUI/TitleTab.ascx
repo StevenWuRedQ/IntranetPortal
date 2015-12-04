@@ -41,7 +41,7 @@
                         <button type="button" class="btn btn-primary btn-sm" ng-click="updateCaseStatus()">Change</button>
                     </div>
             </script>
-            <div class="comment-panel" ng-controller="CommentCtrl" style="margin: 10px; border-top: 1px solid #c8c8c8">
+            <div class="comment-panel" ng-controller="TitleCommentCtrl" style="margin: 10px; border-top: 1px solid #c8c8c8">
                 <%--note list--%>
                 <div style="width: 100%; overflow: auto; max-height: 160px;">
                     <table class="table table-striped" style="font-size: 14px; margin: 0; padding: 5px">
@@ -70,7 +70,7 @@
                                         </td>
                                         <td style="text-align: right">
                                             <div style="margin-left: 20px">
-                                                <input type="button" value="Add" ng-click="addCommentFromPopup()" class="rand-button" style="background-color: #3993c1" />
+                                                <input type="button" value="Add" ng-click="addCommentFromPopup('<%= HttpContext.Current.User.Identity.Name %>')" class="rand-button" style="background-color: #3993c1" />
                                                 <input type="button" value="Close" onclick="aspxConstructionCommentsPopover.Hide()" class="rand-button" style="background-color: #3993c1" />
                                             </div>
                                         </td>
@@ -99,7 +99,7 @@
                     <li style="font-size: 12px" class="short_sale_tab ">
                         <a class="shot_sale_tab_a" href="#TitleFeeClearanceTab" role="tab" data-toggle="tab">Fee Breakdown</a>
                     </li>
-                    <li role="presentation"  style="font-size: 12px" class="short_sale_tab dropdown">
+                    <li role="presentation" style="font-size: 12px" class="short_sale_tab dropdown">
                         <a class="dropdown-toggle shot_sale_tab_a" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li class=""><a class="" href="#TitlePreclosingTab" role="tab" data-toggle="tab">Preclosing Docs</a></li>
@@ -185,239 +185,6 @@
         ShowPopupMap(url, "DOB");
         $("#addition_info").html(' ');
     }
-</script>
-<script>
-    angular.module("PortalApp").controller("CommentCtrl", function ($scope, $timeout) {
-        $scope.showPopover = function (e) {
-            aspxConstructionCommentsPopover.ShowAtElement(e.target);
-        };
-        $scope.addComment = function (comment) {
-            var newComments = {};
-            newComments.comment = comment;
-            newComments.caseId = $scope.CaseId;
-            newComments.createBy = '<%= Page.User.Identity.ToString %>';
-            newComments.createDate = new Date();
-            $scope.Form.FormData.Comments.push(newComments);
-        };
-        $scope.addCommentFromPopup = function () {
-            var comment = $scope.addCommentTxt;
-            $scope.addComment(comment);
-            $scope.addCommentTxt = '';
-        };
-        $scope.$on('titleComment', function(e, args){
-            $scope.addComment(args.message);
-        }); /* end comments */
-    })
-</script>
-<script>
-    angular.module("PortalApp").controller("TitleController", function ($scope, $timeout,$http, ptCom, ptContactServices, ptLeadsService, ptShortsSaleService) {
-        /* model define*/
-        $scope.OwnerModel = function (name){
-            this.name=name;
-            this.Mortgages= [{}];                   
-            this.Lis_Pendens= [{}];
-            this.Judgements= [{}];
-            this.ECB_Notes= [{}];
-            this.PVB_Notes= [{}];
-            this.Bankruptcy_Notes= [{}];
-            this.UCCs= [{}];
-            this.FederalTaxLiens= [{}];
-            this.MechanicsLiens= [{}];
-            this.TaxLiensSaleCerts = [{}];
-            this.VacateRelocationLiens = [{}];
-            this.shownlist = [false,false,false,false,false,false,false,false,false,false,false];
-        };
-        $scope.FormModel = function(){
-            this.FormData =  {
-                Comments: [],
-                Owners: [new $scope.OwnerModel("Prior Owner Liens"), new $scope.OwnerModel("Current Owner Liens")],
-                preclosing: {
-                    ApprovalData: [{}]
-                },
-                docs: {}
-            };
-        }; 
-        $scope.ReloadDataModel = function() {
 
-        }
-
-
-        $scope.StatusList = [
-            {
-                num: 0,
-                desc: 'Initial Review'
-            },{
-                num: 1,
-                desc: 'Clearance'
-            }
-        ];
-        $scope.arrayRemove = ptCom.arrayRemove;
-        $scope.ptCom = ptCom;
-        $scope.ptContactServices = ptContactServices;
-        $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); };
-        $scope.Form = new $scope.FormModel();
-        $scope.ReloadedData = new $scope.ReloadDataModel();
-
-        $scope.Load = function (data) {
-            $scope.Form = new $scope.FormModel();
-            $scope.ReloadedData = new $scope.ReloadDataModel();
-            ptCom.nullToUndefined(data);
-            $.extend(true, $scope.Form, data);
-            if(!$scope.Form.FormData.Owners[0].shownlist){
-                $scope.Form.FormData.Owners[0].shownlist = [false,false,false,false,false,false,false,false,false, false, false];
-                $scope.Form.FormData.Owners[1].shownlist = [false,false,false,false,false,false,false,false,false, false, false];
-            }
-            $scope.BBLE = data.Tag;
-            if($scope.BBLE){
-                ptLeadsService.getLeadsByBBLE($scope.BBLE, function (res) {
-                    $scope.LeadsInfo = res;
-                });
-                ptShortsSaleService.getBuyerTitle($scope.BBLE, function (error, res) {
-                    if(error) console.log(error);
-                    if(res) $scope.BuyerTitle = res.data;
-                });
-                $scope.getStatus($scope.BBLE);
-            }
-            $scope.$broadcast('ownerliens-reload');
-            $scope.$broadcast('clearance-reload');
-            $scope.$broadcast('titledoc-reload')
-
-            $scope.checkReadOnly();
-            $scope.$apply();
-        };
-        $scope.Get = function (isSave) {
-            if(isSave){
-                $scope.updateBuyerTitle();
-            }            
-            return $scope.Form;
-        }; /* end convention function */
-
-        $scope.checkReadOnly = function () {
-            var ro = <%= ControlReadonly %>;
-            if (ro) {
-                $("#TitleUIContent input").attr("disabled", true);
-                if ($("#TitleROBanner").length == 0) {
-                    $("#title_prioity_content").before("<div class='barner-warning text-center' id='TitleROBanner' >Readonly</div>");
-                }
-                
-            }
-        };
-        $scope.completeCase = function(){
-            if($scope.CaseStatus!=1 && $scope.BBLE){
-                ptCom.confirm("You are going to complated the case?", "")
-                    .then(function(r){
-                        if (r){                        
-                            $http({
-                                method: 'POST',
-                                url: '/api/Title/Completed',                    
-                                data: JSON.stringify($scope.BBLE)
-                            }).then(function success(){
-                                $scope.CaseStatus = 1;
-                                $scope.Form.FormData.CompletedDate = new Date();
-                                ptCom.alert("The case have moved to Completed");
-                            }, function error(){});
-                        }
-                    });
-            }else if($scope.BBLE) {
-                ptCom.confirm("You are going to uncomplated the case?", "")
-                    .then(function(r){
-                        if (r){                        
-                            $http({
-                                method: 'POST',
-                                url: '/api/Title/UnCompleted',                    
-                                data: JSON.stringify($scope.BBLE)
-                            }).then(function success(){
-                                $scope.CaseStatus = -1;
-                                ptCom.alert("Uncomplete case successful");
-                            }, function error(){});
-                        }
-                    });
-            }
-        };
-        $scope.updateCaseStatus = function(){
-            if($scope.CaseStatus && $scope.BBLE){
-                $scope.ChangeStatusIsOpen = false;
-                ptCom.confirm("You are going to change case status?", "")
-                   .then(function(r){
-                       if (r){                        
-                           $http({
-                               method: 'POST',
-                               url: '/api/Title/UpdateStatus?bble=' + $scope.BBLE,                    
-                               data: JSON.stringify($scope.CaseStatus)
-                           }).then(function success(){
-                               ptCom.alert("The case status has changed!");
-                           }, function error(){});
-                       }
-                   });
-            }
-        };
-        $scope.getStatus = function(bble){
-            $http.get('/api/Title/GetCaseStatus?bble='+ bble)
-            .then(function succ(res){
-                $scope.CaseStatus = res.data;
-            },function error(){
-                $scope.CaseStatus = -1;
-                console.log("get status error");
-            });
-        };
-        $scope.generateXML = function(){
-            $http({
-                url: "/api/Title/GenerateExcel",
-                method: "POST",
-                data: JSON.stringify($scope.Form)
-            }).then(function(res){
-                STDownloadFile("/api/Title/GetGeneratedExcel", "titlereport.xlsx");
-            });
-        };
-        $scope.updateBuyerTitle = function(){
-            var updateFlag = false;
-            var data = $scope.BuyerTitle;
-            var newdata = $scope.Form.FormData.info;
-            if(data && newdata){        
-
-                if(newdata.Company != data.CompanyName){
-                    data.CompanyName = newdata.Company;
-                    updateFlag = true;
-                }
-
-                if(newdata.Title_Num != data.OrderNumber){
-                    data.OrderNumber = newdata.Title_Num;
-                    updateFlag = true;
-                }
-
-                if(ptCom.toUTCLocaleDateString(newdata.Order_Date) != ptCom.toUTCLocaleDateString(data.ReportOrderDate)){
-                    updateFlag = true;
-                }
-                data.ReportOrderDate = newdata.Order_Date;
-
-                if(ptCom.toUTCLocaleDateString(newdata.Confirmation_Date) != ptCom.toUTCLocaleDateString(data.ConfirmationDate)){
-                    updateFlag = true;
-                }
-                data.ConfirmationDate = newdata.Confirmation_Date;
-        
-                if(ptCom.toUTCLocaleDateString(newdata.Received_Date) != ptCom.toUTCLocaleDateString(data.ReceivedDate)){
-                    updateFlag = true;
-                }
-                data.ReceivedDate = newdata.Received_Date;
-
-                if(ptCom.toUTCLocaleDateString(newdata.Initial_Reivew_Date) != ptCom.toUTCLocaleDateString(data.ReviewedDate)){
-                    updateFlag = true;
-                }
-                data.ReviewedDate = newdata.Initial_Reivew_Date;
-
-                if(updateFlag){
-                    $http({
-                        url: "/api/ShortSale/UpdateBuyerTitle",
-                        method: 'POST',
-                        data: JSON.stringify(data)
-                    }).then(function succ(res){
-                        if(!res)console.log("fail to update buyertitle");
-                    }
-                    ,function error(){
-                        console.log("fail to update buyertitle");
-                    });
-                }
-            }
-        };
-    })
+    var TitleControlReadOnly = <%= ControlReadonly %>;
 </script>

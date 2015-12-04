@@ -57,14 +57,10 @@
     }
     $http.post('/CallBackServices.asmx/GetContact', { p: '1' }).
         success(function (data, status, headers, config) {
-
-            //debugger;
             $scope.InitDataFunc(data);
             $scope.AllTest = data.d;
 
         }).error(function (data, status, headers, config) {
-
-            debugger;
             $scope.LogError = data
             alert("error get contacts: " + status + " error :" + data.d);
         });

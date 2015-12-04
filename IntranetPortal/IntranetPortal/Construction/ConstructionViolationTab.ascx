@@ -1,23 +1,23 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ConstructionViolationTab.ascx.vb" Inherits="IntranetPortal.ConstructionViolationTab" %>
 
 <%-- orders --%>
-<div class="ss_form" ng-init="Violations_OrdersPanelVisible=false">
+<div class="ss_form" ng-init="ReloadedData.Violations_OrdersPanelVisible=false">
     <h4 class="ss_form_title">Orders&nbsp;
         <span class="badge">{{getOrdersLength()}}</span>
-        <i class="fa fa-pencil icon_btn text-primary" ng-click="Violations_OrdersPanelVisible=true" uib-tooltip="edit orders"></i>
+        <i class="fa fa-pencil icon_btn text-primary" ng-click="ReloadedData.Violations_OrdersPanelVisible=true" uib-tooltip="edit orders"></i>
     </h4>
     <div style="text-align: center">
         <div style="text-align: left" ng-show="false" data-hidenow="(!CSCase.CSCase.Violations.stopWorkOrders || CSCase.CSCase.Violations.stopWorkOrders.length<=0) && (!CSCase.CSCase.Violations.fullVacateOrders || CSCase.CSCase.Violations.fullVacateOrders.length<=0) && (!CSCase.CSCase.Violations.partialVacateOrders || CSCase.CSCase.Violations.partialVacateOrders.length<=0)">
             <button type="button" class="btn btn-danger btn-sm ">Fetch From DOB</button>
             <br />
         </div>
-        <span class="barner-danger text-link" ng-click="Violations_OrdersPanelVisible=true" ng-show="CSCase.CSCase.Violations.stopWorkOrders && CSCase.CSCase.Violations.stopWorkOrders.length>0">STOP WORK ORDER EXISTS ON THIS PROPERTY
+        <span class="barner-danger text-link" ng-click="ReloadedData.Violations_OrdersPanelVisible=true" ng-show="CSCase.CSCase.Violations.stopWorkOrders && CSCase.CSCase.Violations.stopWorkOrders.length>0">STOP WORK ORDER EXISTS ON THIS PROPERTY
         <br />
         </span>
-        <span class="barner-warning text-link" ng-click="Violations_OrdersPanelVisible=true" ng-show="CSCase.CSCase.Violations.fullVacateOrders && CSCase.CSCase.Violations.fullVacateOrders.length>0">FULL VACATE EXISTS ON THIS PROPERTY
+        <span class="barner-warning text-link" ng-click="ReloadedData.Violations_OrdersPanelVisible=true" ng-show="CSCase.CSCase.Violations.fullVacateOrders && CSCase.CSCase.Violations.fullVacateOrders.length>0">FULL VACATE EXISTS ON THIS PROPERTY
         <br />
         </span>
-        <span class="barner-warning text-link" ng-click="Violations_OrdersPanelVisible=true" ng-show="CSCase.CSCase.Violations.partialVacateOrders && CSCase.CSCase.Violations.partialVacateOrders.length>0">PARTIAL VACATE EXISTS ON THIS PROPERTY</span>
+        <span class="barner-warning text-link" ng-click="ReloadedData.Violations_OrdersPanelVisible=true" ng-show="CSCase.CSCase.Violations.partialVacateOrders && CSCase.CSCase.Violations.partialVacateOrders.length>0">PARTIAL VACATE EXISTS ON THIS PROPERTY</span>
     </div>
     <div dx-popup="{
                     height: 800,
@@ -27,7 +27,7 @@
                     dragEnabled: true,
                     showCloseButton: true,
                     shading: false,
-                    bindingOptions:{ visible: 'Violations_OrdersPanelVisible' }
+                    bindingOptions:{ visible: 'ReloadedData.Violations_OrdersPanelVisible' }
      }">
         <div data-options="dxTemplate:{ name: 'ordersContent' }">
             <div id="Stop_Work_Orders">
@@ -220,8 +220,8 @@
             <h5 class="ss_form_title" style="margin: 3px;">DOB Violations&nbsp;<pt-add ng-click="addNewDOBViolation()" /></h5>
             <table class="table table-striped">
                 <tr ng-repeat="violation in CSCase.CSCase.Violations.DOBViolations">
-                    <td class="col-sm-1" ng-click="setPopupVisible('DOBViolations_PopupVisible_'+$index, true)">{{$index+1}}</td>
-                    <td class="col-sm-5" ng-click="setPopupVisible('DOBViolations_PopupVisible_'+$index, true)">
+                    <td class="col-sm-1" ng-click="setPopupVisible('ReloadedData.DOBViolations_PopupVisible_'+$index, true)">{{$index+1}}</td>
+                    <td class="col-sm-5" ng-click="setPopupVisible('ReloadedData.DOBViolations_PopupVisible_'+$index, true)">
                         <div class="row">
                             <div class="col-sm-5" style="padding: 0"><b>DOB Violaton #</b></div>
                             <div class="col-sm-7" style="padding: 0">{{violation.DOBViolationNum}}</div>
@@ -236,7 +236,7 @@
                         </div>
 
                     </td>
-                    <td class="col-sm-5" ng-click="setPopupVisible('DOBViolations_PopupVisible_'+$index, true)">
+                    <td class="col-sm-5" ng-click="setPopupVisible('ReloadedData.DOBViolations_PopupVisible_'+$index, true)">
                         <div class="row">
                             <div class="col-sm-5" style="padding: 0"><b>ECB Violation #</b></div>
                             <div class="col-sm-7" style="padding: 0">{{violation.ECBViolationNumber}}</div>
@@ -260,7 +260,7 @@
                                 dragEnabled: true,
                                 showCloseButton: true,
                                 shading: false,
-                                bindingOptions:{ visible: 'DOBViolations_PopupVisible_'+$index },
+                                bindingOptions:{ visible: 'ReloadedData.DOBViolations_PopupVisible_'+$index },
                                 scrolling: {mode: 'virtual' },
                             }">
                             <div data-options="dxTemplate:{ name: 'content' }">
@@ -300,7 +300,7 @@
                                     </div>
                                     <div class="clearfix"></div>
                                     <hr />
-                                    <button class="btn btn-primary pull-right" ng-click="setPopupVisible('DOBViolations_PopupVisible_'+$index, false)">Close</button>
+                                    <button class="btn btn-primary pull-right" ng-click="setPopupVisible('ReloadedData.DOBViolations_PopupVisible_'+$index, false)">Close</button>
                                 </div>
                             </div>
                         </div>
@@ -374,8 +374,8 @@
             <h5 class="ss_form_title" style="margin: 3px;">ECB Violations&nbsp;<pt-add ng-click="addNewECBViolation()" /></h5>
             <table class="table table-striped">
                 <tr ng-repeat="violation in CSCase.CSCase.Violations.ECBViolations">
-                    <td class="col-sm-1" ng-click="setPopupVisible('ECBViolations_PopupVisible_'+$index, true)">{{$index+1}}</td>
-                    <td class="col-sm-5" ng-click="setPopupVisible('ECBViolations_PopupVisible_'+$index, true)">
+                    <td class="col-sm-1" ng-click="setPopupVisible('ReloadedData.ECBViolations_PopupVisible_'+$index, true)">{{$index+1}}</td>
+                    <td class="col-sm-5" ng-click="setPopupVisible('ReloadedData.ECBViolations_PopupVisible_'+$index, true)">
                         <div class="row">
                             <div class="col-sm-5" style="padding: 0"><b>ECB Violaton #</b></div>
                             <div class="col-sm-7" style="padding: 0">{{violation.ECBViolationNum}}</div>
@@ -390,7 +390,7 @@
                         </div>
 
                     </td>
-                    <td class="col-sm-5" ng-click="setPopupVisible('ECBViolations_PopupVisible_'+$index, true)">
+                    <td class="col-sm-5" ng-click="setPopupVisible('ReloadedData.ECBViolations_PopupVisible_'+$index, true)">
                         <div class="row">
                             <div class="col-sm-5" style="padding: 0"><b>DOB Violation Status</b></div>
                             <div class="col-sm-7" style="padding: 0">{{violation.DOBViolationStatus}}</div>
@@ -414,7 +414,7 @@
                                 dragEnabled: true,
                                 showCloseButton: true,
                                 shading: false,
-                                bindingOptions:{ visible: 'ECBViolations_PopupVisible_'+$index },
+                                bindingOptions:{ visible: 'ReloadedData.ECBViolations_PopupVisible_'+$index },
                                 scrolling: {mode: 'virtual' },
                             }">
                             <div data-options="dxTemplate:{ name: 'content' }">
@@ -454,7 +454,7 @@
                                         </div>
                                     </div>
                                     <hr />
-                                    <button class="btn btn-primary pull-right" ng-click="setPopupVisible('ECBViolations_PopupVisible_'+$index, false)">Close</button>
+                                    <button class="btn btn-primary pull-right" ng-click="setPopupVisible('ReloadedData.ECBViolations_PopupVisible_'+$index, false)">Close</button>
                                 </div>
                             </div>
                         </div>

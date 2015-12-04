@@ -1,6 +1,5 @@
-﻿var portalApp = angular.module('PortalApp');
-
-portalApp.directive('ssDate', function () {
+﻿angular.module("PortalApp").
+directive('ssDate', function () {
     return {
         restrict: 'A',
         scope: true,
@@ -26,9 +25,8 @@ portalApp.directive('ssDate', function () {
 
         }
     };
-});
-
-portalApp.directive('ptRightClick', function ($parse) {
+}).
+directive('ptRightClick', ['$parse', function ($parse) {
     return function (scope, element, attrs) {
         var fn = $parse(attrs.ngRightClick);
         element.bind('contextmenu', function (event) {
@@ -38,9 +36,8 @@ portalApp.directive('ptRightClick', function ($parse) {
             });
         });
     };
-});
-
-portalApp.directive('inputMask', function () {
+}]).
+directive('inputMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -50,9 +47,8 @@ portalApp.directive('inputMask', function () {
             });
         }
     };
-});
-
-portalApp.directive('bindId', function (ptContactServices) {
+}).
+directive('bindId', ['ptContactServices', function (ptContactServices) {
     return {
         restrict: 'A',
         link: function postLink(scope, el, attrs) {
@@ -65,9 +61,8 @@ portalApp.directive('bindId', function (ptContactServices) {
         }
 
     }
-});
-
-portalApp.directive('ptInitModel', function () {
+}]).
+directive('ptInitModel', function () {
     return {
         restrict: 'A',
         require: '?ngModel',
@@ -81,9 +76,8 @@ portalApp.directive('ptInitModel', function () {
             });
         }
     }
-});
-
-portalApp.directive('ptInitBind', function () { //one way bind of ptInitModel
+}).
+directive('ptInitBind', function () { //one way bind of ptInitModel
     return {
         restrict: 'A',
         require: '?ngBind',
@@ -96,9 +90,8 @@ portalApp.directive('ptInitBind', function () { //one way bind of ptInitModel
             });
         }
     }
-});
-
-portalApp.directive('radioInit', function () {
+}).
+directive('radioInit', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -110,9 +103,8 @@ portalApp.directive('radioInit', function () {
             });
         }
     }
-});
-
-portalApp.directive('moneyMask', function () {
+}).
+directive('moneyMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -126,9 +118,8 @@ portalApp.directive('moneyMask', function () {
 
         },
     };
-});
-
-portalApp.directive('numberMask', function () {
+}).
+directive('numberMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -142,9 +133,8 @@ portalApp.directive('numberMask', function () {
 
         },
     };
-});
-
-portalApp.directive('integerMask', function () {
+}).
+directive('integerMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -158,9 +148,8 @@ portalApp.directive('integerMask', function () {
 
         },
     };
-});
-
-portalApp.directive('percentMask', function () {
+}).
+directive('percentMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -174,9 +163,8 @@ portalApp.directive('percentMask', function () {
 
         },
     };
-});
-
-portalApp.directive('ptRadio', function () {
+}).
+directive('ptRadio', function () {
     return {
         restrict: 'E',
         template:
@@ -199,9 +187,8 @@ portalApp.directive('ptRadio', function () {
         }
 
     }
-});
-
-portalApp.directive('ptCollapse', function () {
+}).
+directive('ptCollapse', function () {
     return {
         restrict: 'E',
         template:
@@ -216,9 +203,8 @@ portalApp.directive('ptCollapse', function () {
         }
 
     }
-});
-
-portalApp.directive('ckEditor', [function () {
+}).
+directive('ckEditor', [function () {
     return {
         require: '?ngModel',
         link: function (scope, elm, attr, ngModel) {
@@ -239,26 +225,23 @@ portalApp.directive('ckEditor', [function () {
             };
         }
     };
-}]);
-
-portalApp.directive('ptAdd', function () {
+}]).
+directive('ptAdd', function () {
     return {
         restrict: 'E',
         template: '<i class="fa fa-plus-circle icon_btn text-primary tooltip-examples" title="Add"></i>',
     }
-});
-
-portalApp.directive('ptDel', function () {
+}).
+directive('ptDel', function () {
     return {
         restrict: 'E',
         template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
     }
-});
-
-portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout) {
+}).
+directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout) {
     return {
         restrict: 'E',
-        templateUrl: '/Scripts/templates/ptfile.html',
+        templateUrl: '/js/templates/ptfile.html',
         scope: {
             fileModel: '=',
             fileBble: '=',
@@ -356,12 +339,11 @@ portalApp.directive('ptFile', ['ptFileService', '$timeout', function (ptFileServ
 
         }
     }
-}]);
-
-portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
+}]).
+directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
     return {
         restrict: 'E',
-        templateUrl: '/Scripts/templates/ptfiles.html',
+        templateUrl: '/js/templates/ptfiles.html',
         scope: {
             fileModel: '=',
             fileBble: '=',
@@ -385,7 +367,7 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
             scope.showFolder = false;
 
             scope.loading = false;
-            scope.folderEnable = scope.folderEnable == 'true' ? true : false;
+            scope.folderEnable = scope.folderEnable === 'true' ? true : false;
             scope.baseFolder = scope.baseFolder ? scope.baseFolder : '';
 
 
@@ -605,9 +587,8 @@ portalApp.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function (
 
     }
 
-}]);
-
-portalApp.directive('ptLink', function (ptFileService) {
+}]).
+directive('ptLink', ['ptFileService', function (ptFileService) {
     return {
         restrict: 'E',
         scope: {
@@ -620,9 +601,8 @@ portalApp.directive('ptLink', function (ptFileService) {
         }
 
     }
-})
-
-portalApp.directive('ptFinishedMark', [function () {
+}]).
+directive('ptFinishedMark', [function () {
     return {
         restrict: 'E',
         template: '<span ng-if="ssStyle==0">'

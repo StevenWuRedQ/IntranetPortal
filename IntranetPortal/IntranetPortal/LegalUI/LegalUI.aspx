@@ -10,7 +10,7 @@
 
 <%@ Register Src="~/LegalUI/LegalCaseList.ascx" TagPrefix="uc1" TagName="LegalCaseList" %>
 <%@ Register Src="~/LegalUI/LegalTab.ascx" TagPrefix="uc1" TagName="LegalTab" %>
-<%@ Register Src="~/LegalUI/LegalSecondaryActions.ascx" TagPrefix="uc1" TagName="LegalSecondaryActions"  %>
+<%@ Register Src="~/LegalUI/LegalSecondaryActions.ascx" TagPrefix="uc1" TagName="LegalSecondaryActions" %>
 <%@ Register Src="~/LegalUI/ManagePreViewControl.ascx" TagPrefix="uc1" TagName="ManagePreViewControl" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
@@ -713,7 +713,7 @@
                 $scope.ptCom = ptCom;
 
 
-                $scope.querySearch = function(query) {
+                $scope.querySearch = function (query) {
                     var results = query ?
                         $scope.allContacts.filter(createFilterFor(query)) : [];
                     return results;
@@ -731,7 +731,7 @@
 
                 }
 
-                $scope.loadContacts = function() {
+                $scope.loadContacts = function () {
                     var contacts = AllContact;
                     return contacts.map(function (c, index) {
                         c.image = 'https://storage.googleapis.com/material-icons/external-assets/v1/icons/svg/ic_account_circle_black_48px.svg';
@@ -741,7 +741,7 @@
                         return c;
                     });
                 }
-    
+
                 $scope.allContacts = $scope.loadContacts();
                 $scope.contacts = [$scope.allContacts[0]];
                 $scope.filterSelected = true;
@@ -1238,7 +1238,9 @@
                     var address = ['', '851 Grand Concourse Bronx, NY 10451', '360 Adams St. Brooklyn, NY 11201', '8811 Sutphin Boulevard, Jamaica, NY 11435'];
                     return address[boro - 1];
                 }
-                var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Value": "", "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ", "ArrayName": "" },
+                
+                $scope.HightSummery = function () {
+                    var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Value": "", "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ", "ArrayName": "" },
                                 { "Name": "EveryOneIn", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.WasEstateFormed!=null')", "Value": "false", "Description": "There is an estate.", "ArrayName": "" },
                                 { "Name": "BankruptcyFiled", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.BankruptcyFiled')", "Value": "false", "Description": "Bankruptcy filed", "ArrayName": "" },
 
@@ -1270,7 +1272,6 @@
                                 { "Name": "ConferenceDate", "CallFunc": "isLessOrEqualByDays(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.ConferenceDate, 60)", "Value": "", "Description": "Conference date scheduled 60 days before RJI", "ArrayName": "" },
                                 { "Name": "OREFDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)", "Value": "", "Description": "O/REF filed after 12 months after RJI.", "ArrayName": "" },
                                 { "Name": "JudgementDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)", "Value": "", "Description": "Judgement submitted 12 months after O/REF. ", "ArrayName": "" }];
-                $scope.HightSummery = function () {
                     var highLight = hSummery
                     //hSummery.splice();
 
@@ -1330,13 +1331,16 @@
                     return reslut;
                 }
 
-                var CaseInfo = { Name: '', Address: '' }
+
                 $scope.GetCaseInfo = function () {
+                    var CaseInfo = { Name: '', Address: '' }
                     var caseName = $scope.LegalCase.CaseName
                     if (caseName) {
                         CaseInfo.Address = caseName.replace(/-(?!.*-).*$/, '');
                         var matched = caseName.match(/-(?!.*-).*$/);
-                        CaseInfo.Name = matched[0].replace('-', '')
+                        if (matched && matched[0]) {
+                            CaseInfo.Name = matched[0].replace('-', '')
+                        }
                     }
                     return CaseInfo;
                 }

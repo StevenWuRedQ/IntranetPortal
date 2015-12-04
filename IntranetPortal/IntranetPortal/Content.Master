@@ -61,74 +61,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
     <script src="/Scripts/autosave.js"></script>
-    
-    <script>
-        var portalApp = angular.module("PortalApp", ["ngAnimate", "dx", "ngMask", "ui.bootstrap", "ui.select", "ui.layout"]);
-        portalApp.controller("MainCtrl", function ($rootScope, $uibModal, $timeout) {
-            $rootScope.AlertModal = null;
-            $rootScope.ConfirmModal = null;
-            $rootScope.loadingCover = document.getElementById("LodingCover");
-            $rootScope.panelLoading = false;
-
-            $rootScope.alert = function (message) {
-                $rootScope.alertMessage = message ? message : '';
-                $rootScope.AlertModal = $uibModal.open({
-                    templateUrl: 'AlertModal',
-                });
-            }
-
-            $rootScope.alertOK = function () {
-                $rootScope.AlertModal.close();
-            }
-
-            $rootScope.confirm = function (message) {
-                $rootScope.confirmMessage = message ? message : '';
-                $rootScope.ConfirmModal = $uibModal.open({
-                    templateUrl: 'ConfirmModal'
-                });
-                return $rootScope.ConfirmModal.result;
-            }
-
-            $rootScope.confirmYes = function () {
-                $rootScope.ConfirmModal.close(true);
-            }
-
-            $rootScope.confirmNo = function () {
-                $rootScope.ConfirmModal.close(false);
-            }
 
 
-            $rootScope.showLoading = function (divId) {
-                $($rootScope.loadingCover).show();
-            }
+    <!-- pro env -->
+    <script src="/js/intranetportal.js"></script>
+    <!-- <script src="/js/build/intranetportal.min.js"></script> -->
 
-            $rootScope.hideLoading = function (divId) {
-                $($rootScope.loadingCover).hide();
-            }
-
-
-            $rootScope.toggleLoading = function () {
-                $rootScope.panelLoading = !$scope.panelLoading;
-            }
-            $rootScope.startLoading = function () {
-                $rootScope.panelLoading = true;
-            }
-            $rootScope.stopLoading = function () {
-                $timeout(function () {
-                    $rootScope.panelLoading = false;
-                });
-            }
-        });
-    </script>
+    <!-- dev env -->
+    <!--
+    <script src="/js/app.js"></script>
     <script src="/js/filters.js"></script>
     <script src="/js/services.js"></script>
     <script src="/js/directives.js"></script>
 
-    <!-- angular controllers -->
-
     <script src="/js/controllers/VendorController.js"></script>
     <script src="/js/controllers/BuyerEntityController.js"></script>
-    <!-- -->
+    <script src="/js/controllers/ConstructionController.js"></script>
+     -->
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -183,7 +132,7 @@
     </script>
     <script type="text/ng-template" id="ConfirmModal">
         <div class="modal-body">
-            <span class="text-center">{{confirmMessage}}</b>
+            <div ng-bind-html="confirmMessage| unsafe"></div>
         </div>
         <br>
         <div class="modal-footer">

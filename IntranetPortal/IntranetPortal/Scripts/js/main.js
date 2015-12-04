@@ -19,7 +19,6 @@ function mip() {
             }
         });
     }
-
     submenu_height_reset();
 
     $(window).on('debouncedresize', function (event) {
@@ -126,7 +125,7 @@ function afterloginsubmission() {
 }
 $(document).ready(
     function () { setTimeout(function () { mip(); }, 1) });
-//$(function () { mip(); });
+
 $(window).load(function () {
     $('#landing-loader').fadeOut('slow', function () {
         setTimeout(function () {

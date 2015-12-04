@@ -2,7 +2,7 @@
     <div class="pt-files">
         <div class="pt-files-header" ng-show="folderEnable">
             <div class="dropdown">
-                <a href="#" class="dropdown-toggle pt-files-drop-button" data-toggle="dropdown"><i class="fa fa-folder-open" />&nbsp;{{currentFolder?currentFolder:'FOLDERS'}}&nbsp</a>
+                <a href="#" class="dropdown-toggle pt-files-drop-button" data-toggle="dropdown"><i class="fa fa-folder-open" />&nbsp;<span class="current_folder">{{currentFolder?currentFolder:'FOLDERS'}}</span>&nbsp</a>
                 <span class="badge badge-inverted small">{{fileModel.length}}</span>
                 <ul class="dropdown-menu">
                     <li>
