@@ -67,7 +67,7 @@
 
     $scope.initLenderList = function () {
         $http.post('/CallBackServices.asmx/GetLenderList', {}).success(function (data, status) {
-            $scope.lenderList = data.d.getUnique();
+            $scope.lenderList = _.uniq(data.d);
         });
     }
 
