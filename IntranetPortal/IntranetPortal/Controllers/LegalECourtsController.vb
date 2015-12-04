@@ -12,7 +12,7 @@ Namespace Controllers
     Public Class LegalECourtsController
         Inherits System.Web.Http.ApiController
 
-        Private db As New ShortSaleEntities
+        Private db As New PortalEntities
 
         ' GET: api/LegalECourts
         Function GetLegalECourts() As IQueryable(Of LegalECourt)

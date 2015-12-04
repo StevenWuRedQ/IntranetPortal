@@ -13,7 +13,7 @@ Namespace Controllers
     Public Class LeadInfoDocumentSearchesController
         Inherits System.Web.Http.ApiController
 
-        Private db As New ShortSaleEntities
+        Private db As New PortalEntities
 
         ' GET: api/LeadInfoDocumentSearches
         Function GetLeadInfoDocumentSearches() As IQueryable(Of LeadInfoDocumentSearch)

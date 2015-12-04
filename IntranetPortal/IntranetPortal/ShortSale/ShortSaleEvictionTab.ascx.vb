@@ -11,7 +11,7 @@ Public Class ShortSaleEvictionTab
     Protected Sub AddOccupantNotes_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         Dim OccupantId = CInt(e.Parameter.Split("|")(0))
         Dim Notes = e.Parameter.Split("|")(1)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim occupant = context.PropertyOccupants.Where(Function(o) o.OccupantId = OccupantId).FirstOrDefault
             occupant.Notes = Notes
             context.SaveChanges()

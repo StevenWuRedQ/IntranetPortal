@@ -145,7 +145,7 @@ Public Class ShortSaleCaseList
             gridCase.UnGroup(gridCase.Columns("Owner"))
         End If
 
-        'Using ctx As New ShortSaleEntities
+        'Using ctx As New PortalEntities
         '    gridCase.DataSource = ctx.ShortSaleCases.Take(20).ToList
 
 

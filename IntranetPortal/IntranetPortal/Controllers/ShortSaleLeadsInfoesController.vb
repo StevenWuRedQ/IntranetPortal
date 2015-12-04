@@ -24,7 +24,7 @@ Namespace Controllers
     Public Class ShortSaleLeadsInfoesController
         Inherits ODataController
 
-        Private db As New ShortSaleEntities
+        Private db As New PortalEntities
 
         ' GET: odata/ShortSaleLeadsInfoes
         Function GetShortSaleLeadsInfoes() As IQueryable(Of ShortSaleLeadsInfo)

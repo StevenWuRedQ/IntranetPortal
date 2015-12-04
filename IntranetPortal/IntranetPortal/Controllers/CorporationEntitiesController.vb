@@ -12,7 +12,7 @@ Namespace Controllers
     Public Class CorporationEntitiesController
         Inherits System.Web.Http.ApiController
 
-        Private db As New ShortSaleEntities
+        Private db As New PortalEntities
 
         ' GET: api/CorporationEntities
         Function GetCorporationEntities() As IQueryable(Of CorporationEntity)
