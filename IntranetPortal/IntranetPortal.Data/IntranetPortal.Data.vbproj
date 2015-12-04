@@ -161,24 +161,6 @@
       <DependentUpon>DocSearchEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="FollowUps\UserFollowUp.vb" />
-    <Compile Include="Legal\DataModel\LawReference.vb">
-      <DependentUpon>LegalModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Legal\DataModel\LegalCase.vb">
-      <DependentUpon>LegalModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Legal\DataModel\LegalCaseReport.vb">
-      <DependentUpon>LegalModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Legal\DataModel\LegalECourt.vb">
-      <DependentUpon>LegalModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Legal\DataModel\LegalJudge.vb">
-      <DependentUpon>LegalModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Legal\DataModel\LegalManagerReport.vb">
-      <DependentUpon>LegalModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Legal\DataModel\LegalModel.Context.vb">
       <DependentUpon>LegalModel.Context.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -193,9 +175,6 @@
       <DependentUpon>LegalModel.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Legal\DataModel\LegalRoboSignor.vb">
-      <DependentUpon>LegalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Legal\LawReference.vb" />
     <Compile Include="Legal\LegalCase.vb" />
@@ -243,6 +222,27 @@
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\ADOEntity\GroupType.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\LawReference.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\LegalCase.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\LegalCaseReport.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\LegalECourt.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\LegalJudge.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\LegalManagerReport.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\LegalRoboSignor.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\ADOEntity\MortgageStatusData.vb">

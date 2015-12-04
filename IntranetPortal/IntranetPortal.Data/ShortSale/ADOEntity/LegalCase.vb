@@ -12,21 +12,21 @@ Imports System.Collections.Generic
 
 Partial Public Class LegalCase
     Public Property BBLE As String
-    Public Property CaseData As String
-    Public Property CreateDate As Nullable(Of Date)
-    Public Property CreateBy As String
     Public Property CaseName As String
     Public Property ResearchBy As String
     Public Property Attorney As String
+    Public Property CaseData As String
     Public Property Status As Nullable(Of Integer)
-    Public Property UpdateDate As Nullable(Of Date)
-    Public Property UpdateBy As String
     Public Property LegalStatus As Nullable(Of Integer)
-    Public Property FollowUp As Nullable(Of Date)
-    Public Property SaleDate As Nullable(Of Date)
-    Public Property SecondaryTypes As String
     Public Property FCIndexNum As String
     Public Property TaxLienFCStatus As Nullable(Of Integer)
     Public Property TaxLienIndexNum As String
+    Public Property FollowUp As Nullable(Of Date)
+    Public Property SaleDate As Nullable(Of Date)
+    Public Property SecondaryTypes As String
+    Public Property UpdateDate As Nullable(Of Date)
+    Public Property UpdateBy As String
+    Public Property CreateDate As Nullable(Of Date)
+    Public Property CreateBy As String
 
 End Class

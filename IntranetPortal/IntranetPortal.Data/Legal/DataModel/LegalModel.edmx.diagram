@@ -5,14 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b03eb6aa315e4a988c5ce0ddef7643f2" Name="Diagram1" >
-        <EntityTypeShape EntityType="LegalModel.LegalCase" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LegalModel.LegalJudge" Width="1.5" PointX="2.5" PointY="0.75" />
-        <EntityTypeShape EntityType="LegalModel.LegalRoboSignor" Width="1.875" PointX="4.375" PointY="0.75" />
-        <EntityTypeShape EntityType="LegalModel.LawReference" Width="1.5" PointX="6.625" PointY="0.75" />
-        <EntityTypeShape EntityType="LegalModel.LegalManagerReport" Width="2" PointX="3.375" PointY="4.75" />
-        <EntityTypeShape EntityType="LegalModel.LegalCaseReport" Width="1.875" PointX="8.875" PointY="1.5" />
-        <EntityTypeShape EntityType="LegalModel.LegalECourt" Width="1.5" PointX="0.75" PointY="5.75" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

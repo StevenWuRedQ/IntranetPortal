@@ -46,5 +46,12 @@ Partial Public Class ShortSaleEntities
     Public Overridable Property CorporationEntities() As DbSet(Of CorporationEntity)
     Public Overridable Property ShortSaleLeadsInfoes() As DbSet(Of ShortSaleLeadsInfo)
     Public Overridable Property ShortSaleCheckLists() As DbSet(Of ShortSaleCheckList)
+    Public Overridable Property LegalCases() As DbSet(Of LegalCase)
+    Public Overridable Property LegalECourts() As DbSet(Of LegalECourt)
+    Public Overridable Property LegalJudges() As DbSet(Of LegalJudge)
+    Public Overridable Property LegalRoboSignors() As DbSet(Of LegalRoboSignor)
+    Public Overridable Property LawReferences() As DbSet(Of LawReference)
+    Public Overridable Property LegalCaseReports() As DbSet(Of LegalCaseReport)
+    Public Overridable Property LegalManagerReports() As DbSet(Of LegalManagerReport)
 
 End Class

@@ -22,12 +22,5 @@ Partial Public Class LegalModelContainer
         Throw New UnintentionalCodeFirstException()
     End Sub
 
-    Public Overridable Property LegalCases() As DbSet(Of LegalCase)
-    Public Overridable Property LegalJudges() As DbSet(Of LegalJudge)
-    Public Overridable Property LegalRoboSignors() As DbSet(Of LegalRoboSignor)
-    Public Overridable Property LawReferences() As DbSet(Of LawReference)
-    Public Overridable Property LegalManagerReports() As DbSet(Of LegalManagerReport)
-    Public Overridable Property LegalCaseReports() As DbSet(Of LegalCaseReport)
-    Public Overridable Property LegalECourts() As DbSet(Of LegalECourt)
 
 End Class
