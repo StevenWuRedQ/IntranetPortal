@@ -80,7 +80,7 @@ Public Class ShortSaleUnitTest
 
         Assert.IsTrue(ssCase.UpdateCheckList(checkList, "Chris Yan"))
 
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim clist = ctx.ShortSaleCheckLists.Find(bble)
             Assert.IsTrue(clist IsNot Nothing)
             Assert.IsTrue(clist.UpdateBy = "Chris Yan")
@@ -116,7 +116,7 @@ Public Class ShortSaleUnitTest
 
         Assert.IsTrue(ssCase.UpdateCheckList(checkList, "Chris Yan"))
 
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim clist = ctx.ShortSaleCheckLists.Find(bble)
             Assert.IsTrue(clist IsNot Nothing)
             Assert.IsTrue(clist.UpdateBy = "Chris Yan")
