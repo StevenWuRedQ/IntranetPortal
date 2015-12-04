@@ -131,7 +131,7 @@ Public Class EmailService
             Next
         End If
 
-        Message.Subject = subject
+        Message.Subject = subject.Replace("\r", " ").Replace("\n", " ")
         Message.Body = body
         Message.IsBodyHtml = True
 
