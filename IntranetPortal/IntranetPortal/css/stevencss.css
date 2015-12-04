@@ -1,7 +1,4 @@
 ﻿/*add by steven*/
-
-
-
 .vertical-parent {
 	display: table;
 	width: 100%;
@@ -635,7 +632,7 @@ i.with_circle {
 }
 
 .draggable_field {
-	width: 250px;
+	width: 280px;
 	height: 30px;
 	background: white;
 	font-size: 14px;
@@ -2651,4 +2648,108 @@ hr.ss-form-hr {
 
 .stretch {
 	overflow-y:hidden
+}
+
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 280px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 280px;
+    width: 0;
+    height: 100%;
+    margin-left: -280px;
+    overflow-y: hidden;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 280px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -280px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 280px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@media(min-width:1280px) {
+    #wrapper {
+        padding-left: 280px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 280px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 0;
+        height: 100%;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+#global-header {
+    height: 50px;
+    padding: 0;
+    margin: 0;
+}
+
+#global-content {
+
+    height: 100%;
 }

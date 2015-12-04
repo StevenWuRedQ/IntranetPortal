@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Root
+Partial Public Class Root1
     
     '''<summary>
     '''Head1 control.
@@ -39,6 +39,15 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    
+    '''<summary>
+    '''MainSplitter control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents MainSplitter As Global.DevExpress.Web.ASPxSplitter
     
     '''<summary>
     '''NavContentHolder control.

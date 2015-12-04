@@ -10,9 +10,21 @@
             position: relative;
             /*height: 600px;*/
         }
+
+        #contentUrlPane {
+            width: 100%;
+            height: 950px;
+            margin: 0;
+            border: none;
+        }
     </style>
+    <script>
+        function resizeIframe(obj) {
+            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+        }
+    </script>
     <uc1:NavMenu runat="server" ID="NavMenu" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    <iframe id="contentUrlPane" width="100%" height="100%" frameborder="0" name="contentUrlPane" scrolling="yes" marginheight="0" marginwidth="0" src="<%= ContentUrl%>"></iframe>
+    <iframe id="contentUrlPane" name="contentUrlPane" height="100%" frameborder="0" scrolling="no" src="<%= ContentUrl%>" onload="resizeIframe(this);"></iframe>
 </asp:Content>

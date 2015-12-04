@@ -1,0 +1,517 @@
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Root1.Master.vb" Inherits="IntranetPortal.Root1" %>
+
+<%@ Import Namespace="System.ComponentModel" %>
+<%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
+<%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
+<%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Agent Portal (beta) - My Ideal Property</title>
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/normalize.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/stevencss.css?v=1.02" />
+    <link rel="stylesheet" href="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+
+    <script src="/bower_components/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/bower_components/jquery-smartresize/jquery.debouncedresize.js"></script>
+    <script src="/bower_components/jquery-smartresize/jquery.throttledresize.js"></script>
+    <script src="/bower_components/jquery-mousewheel/jquery.mousewheel.min.js"></script>
+    <script src="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
+
+    <script src="/Scripts/js/main.js"></script>
+    <script src="/scripts/PortalMessager.js"></script>
+    <script src="/scripts/stevenjs.js"></script>
+
+
+
+    <style type="text/css">
+        html, body, #form1 {
+            width: 100% !important;
+        }
+
+        .message {
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%, transparent 75%, transparent);
+            width: 300px;
+            border: 1px solid;
+            color: #fff;
+            padding: 15px;
+            position: fixed;
+            _position: absolute;
+            -ms-background-size: 40px 40px;
+            background-size: 40px 40px;
+            -webkit-box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
+            -ms-box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
+            box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
+            -ms-text-shadow: 0 1px 0 rgba(0,0,0,.5);
+            text-shadow: 0 1px 0 rgba(0,0,0,.5);
+            -webkit-animation: animate-bg 5s linear infinite;
+            -moz-animation: animate-bg 5s linear infinite;
+            -ms-animation: animate-bg 5s linear infinite;
+            -o-animation: animate-bg 5s linear infinite;
+            animation: animate-bg 5s linear infinite;
+        }
+
+        .info {
+            background-color: #4ea5cd;
+            border-color: #3b8eb5;
+        }
+
+        .message .msgtitle {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+        }
+
+        .message p {
+            margin: 0;
+        }
+
+        @-moz-keyframes animate-bg {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: -80px 0;
+            }
+        }
+
+        @-webkit-keyframes animate-bg {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: -80px 0;
+            }
+        }
+
+        @keyframes animate-bg {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: -80px 0;
+            }
+        }
+
+        /* The animation code */
+        @keyframes example {
+            0% {
+                background-color: red;
+            }
+
+            25% {
+                background-color: yellow;
+            }
+
+            50% {
+                background-color: blue;
+            }
+
+            100% {
+                background-color: green;
+            }
+        }
+
+        /* The element to apply the animation to */
+        .NewTask {
+            background-color: red;
+            -webkit-animation-name: example;
+            -moz-animation-name: example;
+            -ms-animation-name: example;
+            -o-animation-name: example;
+            animation-name: example;
+            -webkit-animation-duration: 10s;
+            -moz-animation-duration: 10s;
+            -ms-animation-duration: 10s;
+            -o-animation-duration: 10s;
+            animation-duration: 10s;
+            -webkit-animation: infinite;
+            -moz-animation: infinite;
+            -ms-animation: infinite;
+            -o-animation: infinite;
+            animation: infinite;
+        }
+    </style>
+
+
+    <script>
+        $(function () {
+            setTimeout(
+                function () {
+                    LoadChatWindow(false);
+                    $('#imgChat').css("color", "green");
+                }, 1000);
+        });
+    </script>
+    <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
+</head>
+
+<body onload="init();" id="testIDbody">
+    <form id="form1" runat="server">
+        <script type="text/javascript">
+
+            var ctrId = 'divChat';
+            var inAnimate = false;
+
+            function ShowSearchLeadsInfo(bble) {
+                var url = '/ViewLeadsInfo.aspx?id=' + bble;
+                OpenLeadsWindow(url, "View Leads Info " + bble);
+            }
+
+            function OpenLeadsWindow(url, title, width, height) {
+                alert('error ' + width + height);
+            }
+
+            function GoToLead(bble) {
+                var iframe = document.getElementById("contentUrlPane");
+                if (iframe && iframe != null) {
+                    iframe.src = "/LeadAgent.aspx?c=Search&key=" + encodeURIComponent(txtSearchKeyClient.GetText()) + "&id=" + bble;
+                }
+                else {
+                    window.location.href = "/default.aspx?t=search&key=" + encodeURIComponent(txtSearchKeyClient.GetText()) + "&id=" + bble;
+                }
+            }
+
+            function endsWith(str, suffix) {
+                return str.indexOf(suffix, str.length - suffix.length) !== -1;
+            }
+
+            function ShowChatWindow() {
+                var tmp = $('#' + ctrId);
+                if (tmp.is('div')) {
+                    tmp.fadeIn();
+                    var bottom = tmp.css("bottom");
+                    if (bottom === "-500px") {
+                        tmp.animate({ bottom: "25" }, 500);
+                    }
+
+                    return;
+                }
+                else {
+                    LoadChatWindow(true);
+                }
+            }
+
+            function LoadChatWindow(visible) {
+
+                var dateMark = (new Date()).toJSON();
+                var div = '<div id="' + ctrId + '"  rel="0"  style="bottom: -500px; right: 25px; position: fixed; width: 565px; height:390px;background-color:white;box-shadow: 10px 10px 5px #888888;">' +
+                    '<div class="header" style="position:fixed;width:550px;background-color:transparent;line-height:35px;">' +
+                          '<div  style="float:right;">' +
+                              '<img id="imgDelete"  style="cursor:pointer;" src="/Images/delete.png"/>' +
+                           '</div>' +
+                           '<span class="selText" rel="0"></span>' +
+                       '</div>' +
+                       '<iframe id="MapContent" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="/chat/ChatDefault.aspx?t=' + dateMark + '"></iframe>' +
+                    '</div>';
+                var $div = $(div);
+                $('#divMsgTest').parent().append($div);
+                $div.draggable({
+                    handle: ".header",
+                    stop: function () {
+                    }
+                });
+
+                $div.find('#imgDelete').click(function () {
+                    $('#' + ctrId).hide();
+                });
+
+                if (visible) {
+                    $div.animate({ bottom: "25" }, 500);
+                }
+            }
+
+            function NewTask() {
+                //$("#SpanAmount_TotalTask").css("background-color", "#e63000");
+                if (!inAnimate)
+                    animate();
+            }
+
+            function animate() {
+                if (!$('#SpanAmount_TotalTask').is(':visible')) {
+                    $('#SpanAmount_TotalTask').css("background-color", "#1a3847");
+                    inAnimate = false;
+                    return;
+                }
+
+                $('#SpanAmount_TotalTask').animate({ backgroundColor: '#ffcc00' }, 500, function () {
+                    $('#SpanAmount_TotalTask').animate({ backgroundColor: '#eeeeee' }, 500, function () {
+                        $('#SpanAmount_TotalTask').animate({ backgroundColor: '#e63000' }, 500, function () {
+                            animate();
+                        });
+                    });
+                });
+            }
+
+        </script>
+
+        <dx:ASPxSplitter ID="MainSplitter" runat="server" Height="100%" Width="100%" FullscreenMode="True" ShowCollapseBackwardButton="true">
+            <Styles>
+                <Pane>
+                    <Paddings Padding="0px" />
+                    <Border BorderWidth="0px" />
+                </Pane>
+            </Styles>
+
+            <Panes>
+                <dx:SplitterPane Name="leftNavPane" Size="280" AllowResize="False">
+                    <Panes>
+                        <dx:SplitterPane Name="NavPane">
+                            <Separator Visible="False"></Separator>
+                            <ContentCollection>
+                                <dx:SplitterContentControl>
+                                    <div id="global-nav-container">
+                                        <nav id="global-nav" class="mip-navbar" role="navigation">
+                                            <div class="mip-navbar-header">
+                                                <a href="/SummaryPage.aspx" class="clearfix" target="contentUrlPane">
+                                                    <img id="logo" src="/Images/logo.png" alt="My Ideal Property" class="go-retina" />
+                                                    <span>Portal</span>
+                                                </a>
+                                            </div>
+                                            <div id="main-nav" class="main-nav-panel">
+                                                <asp:ContentPlaceHolder ID="NavContentHolder" runat="server"></asp:ContentPlaceHolder>
+                                            </div>
+                                        </nav>
+                                        <footer id="side-footer">
+                                            <p>
+                                                Application Version:
+                                                <dx:ASPxLabel ID="lblVersion" runat="server" ForeColor="#446576" Font-Size="12px"></dx:ASPxLabel>
+                                            </p>
+                                            <p>&copy; 2014 My Ideal Property</p>
+                                            <div id="errorMsg" style="color: transparent"></div>
+                                        </footer>
+                                    </div>
+                                </dx:SplitterContentControl>
+                            </ContentCollection>
+                        </dx:SplitterPane>
+                    </Panes>
+                </dx:SplitterPane>
+
+                <dx:SplitterPane Name="RightContentPane">
+                    <Panes>
+                        <dx:SplitterPane Name="HeaderPane" Size="52px">
+                            <PaneStyle>
+                                <BorderBottom BorderWidth="1px" />
+                            </PaneStyle>
+                            <ContentCollection>
+                                <dx:SplitterContentControl>
+                                    <div class="header under-line-header" style="width: 100%; display: table; height: 100%; margin-top: -1px; background-color: white;">
+                                        <div style="display: table-row" class="clear-fix">
+                                            <div style="float: left; display: table-cell; width: 260px;">
+                                                <i class="fa fa-users with_circle icon_btn color_black tooltip-examples" style="margin-left: 20px; font-size: 20px; padding: 5px;" title="Contacts" onclick="OpenLeadsWindow('/PopupControl/VendorsPopUpContent.aspx','Contacts',1036,590)"></i>
+                                                <i class="fa fa-building with_circle icon_btn color_black tooltip-examples" style="margin-left: 20px; font-size: 20px; padding: 5px;" title="Entities" onclick="OpenLeadsWindow('/PopupControl/BuyerEntityPopUpContent.aspx','Entities',1438,700)"></i>
+                                            </div>
+                                            <div style="display: table-cell; width: 700px">
+                                                <table style="margin-top: 10px; float: right">
+                                                    <tr>
+                                                        <td>
+                                                            <dx:ASPxTextBox runat="server" ID="txtSearchKey" Width="225px" ClientInstanceName="txtSearchKeyClient" AutoPostBack="false" Height="30px" Border-BorderStyle="None" Font-Size="14px" ForeColor="#0e9ee9">
+                                                                <ClientSideEvents KeyDown="function(s,e){
+                                                                if(e.htmlEvent.keyCode == 13)
+                                                                {
+                                                                    btnSearchClient.DoClick();                                                                                                                                     
+                                                                }                                                               
+                                                            }" />
+                                                                <Border BorderStyle="None"></Border>
+                                                            </dx:ASPxTextBox>
+                                                        </td>
+                                                        <td>
+                                                            <%--delete search text by steven--%>
+                                                            <dx:ASPxButton runat="server" RenderMode="Button" ID="btnSearch" ClientInstanceName="btnSearchClient" UseSubmitBehavior="false" Text=" " AutoPostBack="false" BackgroundImage-ImageUrl="/images/search_btn.png" Height="30px" Width="55px" Border-BorderStyle="None" HoverStyle-BackColor="Transparent">
+                                                                <%------end-------%>
+
+                                                                <ClientSideEvents Click="function(s,e){
+                                                                    ASPxPopupSearchPanel.PerformCallback(txtSearchKeyClient.GetText());                                                                                                                          
+                                                            }" />
+                                                                <%--<Image Url="/images/search_btn.png"></Image>--%>
+                                                                <HoverStyle BackColor="Transparent"></HoverStyle>
+                                                                <BackgroundImage ImageUrl="/images/search_btn.png" Repeat="NoRepeat"></BackgroundImage>
+                                                                <Border BorderStyle="None"></Border>
+                                                            </dx:ASPxButton>
+                                                        </td>
+                                                        <%--replace login menu with a image by steven--%>
+                                                        <td style="margin-left: 20px; font-size: 18px" class="login">
+                                                            <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                                                                <AnonymousTemplate>
+                                                                    <a id="loginLink" href="~/Account/Login.aspx" runat="server" visible="false">Log In</a>
+                                                                    <a id="registerLink" href="~/Account/Register.aspx" runat="server" visible="false">|Register</a>
+                                                                </AnonymousTemplate>
+                                                                <LoggedInTemplate>
+                                                                    Good  <%=If(DateTime.now.ToString.IndexOf("AM")>0,"morning","afternoon") %>, <span style="font-weight: 900; text-transform: capitalize">
+                                                                        <asp:LoginName ID="HeadLoginName" runat="server" />
+                                                                    </span>
+                                                                    <i class="fa fa-wechat icon_btn color_black tooltip-examples" onclick="ShowChatWindow()" id="imgChat" style="color: black; display: none;" title="Let's Chat"></i>,
+                                                                    <a href="mailto:support@myidealprop.com">
+                                                                        <i class="fa fa-wrench icon_btn color_black tooltip-examples" style="margin-left: 10px; color: black;" title="Support email: support@myidealprop.com"></i>
+                                                                    </a>
+
+                                                                    <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" Text='<i class="fa fa-sign-out icon_btn color_black tooltip-examples" style="margin-left:10px;color: black;" title="Log Out"></i>'>                                                                
+                                                                    </asp:LinkButton>
+
+                                                                    <div style="display: none">
+                                                                        [<asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />
+                                                                        |<a href="/Account/ChangePassword.aspx" visible="false">Setting</a>]
+                                                                    </div>
+                                                                </LoggedInTemplate>
+                                                            </asp:LoginView>
+
+                                                        </td>
+                                                        <%----end------%>
+                                                    </tr>
+                                                </table>
+                                            </div>
+
+                                            <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSearchPanel" Width="600px" Height="250px"
+                                                MaxWidth="800px" MaxHeight="800px" MinWidth="150px" ID="pcMain" OnWindowCallback="pcMain_WindowCallback"
+                                                ShowHeader="false" CloseAction="CloseButton"
+                                                runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True" CssClass="rand-pop">
+                                                <ContentCollection>
+                                                    <dx:PopupControlContentControl runat="server" Visible="false" ID="popupContentSearchPanel">
+                                                        <dx:ASPxGridView runat="server" KeyFieldName="BBLE" ClientInstanceName="gridSearchLeads" ID="gridSearch" OnCustomCallback="gridSearch_CustomCallback" Width="100%" SettingsPager-PageSize="5">
+                                                            <Columns>
+                                                                <dx:GridViewDataTextColumn FieldName="LeadsName" Caption="LEADS NAME" Settings-AllowHeaderFilter="False" VisibleIndex="1" Width="260px">
+                                                                    <Settings AutoFilterCondition="Contains" />
+                                                                    <DataItemTemplate>
+                                                                        <%--add data row height and font color  by steven--%>
+                                                                        <div class="search_pop_data_s">
+                                                                            <div href="#" class="pop_search_data"
+                                                                                onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server" visible='<%# Eval("Viewable") %>'>
+                                                                                <%# Eval("LeadsName")%>
+                                                                            </div>
+                                                                            <div class="pop_search_data" runat="server" visible='<%# Not  Eval("Viewable")%>'>
+                                                                                <%# Eval("LeadsName") %>
+                                                                            </div>
+                                                                        </div>
+                                                                        <%------end------%>
+                                                                    </DataItemTemplate>
+                                                                </dx:GridViewDataTextColumn>
+                                                                <dx:GridViewDataTextColumn FieldName="Status" Caption="STATUS" Settings-AllowHeaderFilter="False" VisibleIndex="2" Width="80px" CellStyle-HorizontalAlign="left">
+                                                                    <Settings AllowHeaderFilter="False"></Settings>
+                                                                    <DataItemTemplate>
+                                                                        <%# DirectCast(Eval("Status"), IntranetPortal.LeadStatus).ToString %>
+                                                                    </DataItemTemplate>
+                                                                    <CellStyle HorizontalAlign="left"></CellStyle>
+                                                                </dx:GridViewDataTextColumn>
+                                                                <dx:GridViewDataColumn FieldName="EmployeeName" Caption="EMPLOYEE NAME" VisibleIndex="4" Width="150px" CellStyle-HorizontalAlign="left">
+                                                                </dx:GridViewDataColumn>
+                                                                <dx:GridViewDataColumn Width="35px" VisibleIndex="5">
+                                                                    <DataItemTemplate>
+                                                                        <%--use font image to change the image--%>
+                                                                        <i class="fa fa-sheqel tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Request Update?" onclick='<%# String.Format("OnRequestUpdate(""{0}"");return false;", Eval("BBLE")) %>' runat="server" visible='<%# not CBool(Eval("Viewable"))%>'></i>
+
+                                                                        <i class="fa fa-external-link-square tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To" onclick='<%# If(DirectCast(Eval("Status"), IntranetPortal.LeadStatus) = IntranetPortal.LeadStatus.InProcess, String.Format("ShowPopupLeadsMenu(this, {0})", Eval("BBLE")), String.Format("GoToLead({0})", Eval("BBLE")))%>' runat="server" visible='<%# Eval("Viewable")%>'></i>
+                                                                        <span style="width: 10px">&nbsp;&nbsp;</span>
+                                                                        <i class="fa fa-list-alt tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" onclick='<%#  String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# Eval("Viewable")%>'></i>
+
+
+                                                                    </DataItemTemplate>
+                                                                </dx:GridViewDataColumn>
+                                                            </Columns>
+                                                            <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true"
+                                                                EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
+                                                            <SettingsPager NumericButtonCount="5"></SettingsPager>
+                                                            <Styles>
+                                                                <AlternatingRow BackColor="#f5f5f5"></AlternatingRow>
+                                                                <RowHotTrack BackColor="#ff400d"></RowHotTrack>
+                                                            </Styles>
+                                                        </dx:ASPxGridView>
+                                                        <asp:Panel ID="Panel1" runat="server">
+                                                            <table style="width: 100%;">
+                                                                <tr>
+                                                                    <td style="width: 79%"></td>
+                                                                    <td>
+                                                                        <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Close" AutoPostBack="false" UseSubmitBehavior="false" BackColor="#77787b" CssClass="rand-button" Border-BorderStyle="None">
+                                                                            <ClientSideEvents Click="function(){
+                                                                                                                        ASPxPopupSearchPanel.Hide();                                                                                                                                                                                                                                            
+                                                                                                                        }"></ClientSideEvents>
+                                                                            <Border BorderStyle="None"></Border>
+                                                                        </dx:ASPxButton>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </asp:Panel>
+                                                    </dx:PopupControlContentControl>
+                                                </ContentCollection>
+                                                <ClientSideEvents EndCallback="function(s,e){s.ShowAtElement(txtSearchKeyClient.GetMainElement()); $('.tooltip-examples').tooltip(); }" />
+                                            </dx:ASPxPopupControl>
+                                            <%---------------------end---------------%>
+                                            <div style="overflow: auto">
+                                                <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
+                                                <uc1:Common runat="server" ID="Common" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </dx:SplitterContentControl>
+                            </ContentCollection>
+                        </dx:SplitterPane>
+
+                        <dx:SplitterPane Name="MainPane" Separator-Visible="False">
+                            <Separator Visible="False"></Separator>
+                            <PaneStyle CssClass="noborder"></PaneStyle>
+                            <ContentCollection>
+                                <dx:SplitterContentControl>
+                                    <asp:ContentPlaceHolder ID="Content" runat="server" />
+                                </dx:SplitterContentControl>
+                            </ContentCollection>
+                        </dx:SplitterPane>
+                    </Panes>
+                </dx:SplitterPane>
+            </Panes>
+        </dx:ASPxSplitter>
+
+        <div id="divMsgTest" class="info message" style="bottom: -300px; right: 25px">
+            <div class="msgtitle">
+                <i class="fa fa-envelope with_circle" style="color: white; font-size: 14px; width: 30px; height: 30px; line-height: 30px; text-align: center"></i>&nbsp; New Message
+                <span style="float: right; line-height: 30px; font-weight: 600; cursor: pointer" onclick="ReadMsg()">X</span>
+            </div>
+            <table style="width: 100%">
+                <thead>
+                    <tr>
+                        <td id="tdMsgTitle" style="font-weight: 600; margin-bottom: 5px; font-size: 14px; cursor: pointer" onclick="PopupViewLead()"></td>
+                    </tr>
+                </thead>
+                <tr style="vertical-align: top">
+                    <td id="tdMsgContent" onclick="PopupViewLead()" style="cursor: pointer"></td>
+                </tr>
+                <tr style="display: none">
+                    <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
+                        <dx:ASPxButton ID="ASPxButton2" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                            <ClientSideEvents Click="function(){ReadMsg()}"></ClientSideEvents>
+                        </dx:ASPxButton>
+                        <dx:ASPxButton ID="ASPxButton3" runat="server" Text="Go to Lead" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                            <ClientSideEvents Click="function(){PopupViewLead()}"></ClientSideEvents>
+                        </dx:ASPxButton>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupAwayControlClient" Width="800px" Height="400px"
+            ID="ASPxPopupControl1" HeaderText="While You Were Away" Modal="true" CloseAction="CloseButton"
+            runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+            <ContentCollection>
+                <dx:PopupControlContentControl runat="server">
+                </dx:PopupControlContentControl>
+            </ContentCollection>
+            <ClientSideEvents Closing="function(){hook();}" />
+        </dx:ASPxPopupControl>
+        <uc1:SendMail runat="server" ID="SendMail" />
+    </form>
+
+</body>
+</html>
