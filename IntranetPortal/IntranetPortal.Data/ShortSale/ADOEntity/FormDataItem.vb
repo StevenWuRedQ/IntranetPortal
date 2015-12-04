@@ -14,10 +14,10 @@ Partial Public Class FormDataItem
     Public Property DataId As Integer
     Public Property FormName As String
     Public Property FormData As String
+    Public Property Tag As String
     Public Property UpdateDate As Nullable(Of Date)
     Public Property UpdateBy As String
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
-    Public Property Tag As String
 
 End Class

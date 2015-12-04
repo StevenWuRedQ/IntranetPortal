@@ -4,13 +4,13 @@ Imports System.Runtime.Serialization
 <MetadataType(GetType(ConstructionBudgetMetaData))>
 Partial Public Class ConstructionBudget
     Public Shared Function GetForms(BBLE As String) As ConstructionBudget
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
             Return ctx.ConstructionBudgets.Where(Function(B) B.BBLE = BBLE).FirstOrDefault
         End Using
     End Function
 
     Public Sub SaveForms(userName As String)
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
             If ctx.ConstructionBudgets.Any(Function(t) t.BBLE = BBLE) Then
                 Me.UpdateDate = DateTime.Now
                 Me.UpdateBy = userName

@@ -98,18 +98,6 @@
     <Compile Include="Construction\ConstructionInitialForm.vb" />
     <Compile Include="Construction\ConstructionSpotCheck.vb" />
     <Compile Include="Construction\ConstructionViolations.vb" />
-    <Compile Include="Construction\DataModel\CheckingComplain.vb">
-      <DependentUpon>ConstructionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Construction\DataModel\ConstructionBudget.vb">
-      <DependentUpon>ConstructionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Construction\DataModel\ConstructionCase.vb">
-      <DependentUpon>ConstructionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Construction\DataModel\ConstructionInitialForm.vb">
-      <DependentUpon>ConstructionModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Construction\DataModel\ConstructionModel.Context.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -123,21 +111,6 @@
     <Compile Include="Construction\DataModel\ConstructionModel.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ConstructionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Construction\DataModel\ConstructionSpotCheck.vb">
-      <DependentUpon>ConstructionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Construction\DataModel\ConstructionViolation.vb">
-      <DependentUpon>ConstructionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Construction\DataModel\FormDataItem.vb">
-      <DependentUpon>ConstructionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Construction\DataModel\TitleCase.vb">
-      <DependentUpon>ConstructionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Construction\DataModel\UserFollowUp.vb">
       <DependentUpon>ConstructionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataServices\TLOLocateReportOutput.vb" />
@@ -191,7 +164,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ShortSale\ADOEntity\CheckingComplain.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShortSale\ADOEntity\CleareneceNote.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\ConstructionBudget.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\ConstructionCas.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\ConstructionInitialForm.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\ConstructionSpotCheck.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\ConstructionViolation.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\ADOEntity\CorporationEntity.vb">
@@ -201,6 +192,9 @@
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\ADOEntity\EvictionCas.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\FormDataItem.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\ADOEntity\GroupType.vb">
@@ -296,10 +290,16 @@
     <Compile Include="ShortSale\ADOEntity\ShortSaleOverview.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ShortSale\ADOEntity\TitleCase.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShortSale\ADOEntity\TitleClearence.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\ADOEntity\TitleJudgementSearch.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\UserFollowUp.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\CleareneceNote.vb" />

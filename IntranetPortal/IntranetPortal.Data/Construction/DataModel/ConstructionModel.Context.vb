@@ -22,14 +22,5 @@ Partial Public Class ConstructionEntities
         Throw New UnintentionalCodeFirstException()
     End Sub
 
-    Public Overridable Property ConstructionCases() As DbSet(Of ConstructionCase)
-    Public Overridable Property CheckingComplains() As DbSet(Of CheckingComplain)
-    Public Overridable Property FormDataItems() As DbSet(Of FormDataItem)
-    Public Overridable Property TitleCases() As DbSet(Of TitleCase)
-    Public Overridable Property ConstructionSpotCheck() As DbSet(Of ConstructionSpotCheck)
-    Public Overridable Property ConstructionViolations() As DbSet(Of ConstructionViolation)
-    Public Overridable Property ConstructionInitialForms() As DbSet(Of ConstructionInitialForm)
-    Public Overridable Property ConstructionBudgets() As DbSet(Of ConstructionBudget)
-    Public Overridable Property UserFollowUps() As DbSet(Of UserFollowUp)
 
 End Class

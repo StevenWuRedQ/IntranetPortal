@@ -3,28 +3,28 @@
 Partial Public Class ConstructionViolation
 
     Public Shared Function GetViolation(bble As String) As ConstructionViolation
-        Using ctx = New ConstructionEntities
+        Using ctx = New ShortSaleEntities
             Dim result = ctx.ConstructionViolations.Where(Function(c) c.BBLE = bble).FirstOrDefault
             Return result
         End Using
     End Function
 
     Public Shared Function GetViolationsWithin30Days() As ConstructionViolation()
-        Using ctx = New ConstructionEntities
+        Using ctx = New ShortSaleEntities
             Dim result = ctx.ConstructionViolations.Where(Function(c) Entity.DbFunctions.DiffDays(Now, c.HPD_RegExpireDate) = 30).ToArray
             Return result
         End Using
     End Function
     Public Sub Save(constructionCase As ConstructionCase, userName As String)
-        Using ctx = New ConstructionEntities
+        Using ctx = New ShortSaleEntities
             Try
                 Dim caseData = constructionCase.CSCase
                 Dim jtoken = JsonConvert.DeserializeObject(Of Linq.JToken)(caseData)
                 Dim dateToken = jtoken.SelectToken("Violations.HPD_RegExpireDate")
                 If Not dateToken Is Nothing Then
                     Dim dateString = dateToken.ToString
-                    If Not String.IsNullOrEmpty(DateString) Then
-                        Dim hpdRegExpireDate = Date.Parse(DateString)
+                    If Not String.IsNullOrEmpty(dateString) Then
+                        Dim hpdRegExpireDate = Date.Parse(dateString)
                         Dim savedViolation = GetViolation(constructionCase.BBLE)
                         If savedViolation Is Nothing Then
                             Me.BBLE = constructionCase.BBLE

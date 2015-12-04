@@ -11,6 +11,7 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class ConstructionSpotCheck
+    Public Property Id As Integer
     Public Property BBLE As String
     Public Property [date] As Nullable(Of Date)
     Public Property propertyAddress As String
@@ -24,8 +25,7 @@ Partial Public Class ConstructionSpotCheck
     Public Property isPlansOnSite As Nullable(Of Boolean)
     Public Property nextDayPlan As String
     Public Property note As String
-    Public Property status As Nullable(Of Integer)
     Public Property owner As String
-    Public Property Id As Integer
+    Public Property status As Nullable(Of Integer)
 
 End Class

@@ -54,5 +54,14 @@ Partial Public Class ShortSaleEntities
     Public Overridable Property LegalCaseReports() As DbSet(Of LegalCaseReport)
     Public Overridable Property LegalManagerReports() As DbSet(Of LegalManagerReport)
     Public Overridable Property LeadInfoDocumentSearches() As DbSet(Of LeadInfoDocumentSearch)
+    Public Overridable Property CheckingComplains() As DbSet(Of CheckingComplain)
+    Public Overridable Property ConstructionBudgets() As DbSet(Of ConstructionBudget)
+    Public Overridable Property ConstructionCases() As DbSet(Of ConstructionCas)
+    Public Overridable Property ConstructionInitialForms() As DbSet(Of ConstructionInitialForm)
+    Public Overridable Property ConstructionSpotChecks() As DbSet(Of ConstructionSpotCheck)
+    Public Overridable Property ConstructionViolations() As DbSet(Of ConstructionViolation)
+    Public Overridable Property FormDataItems() As DbSet(Of FormDataItem)
+    Public Overridable Property TitleCases() As DbSet(Of TitleCase)
+    Public Overridable Property UserFollowUps() As DbSet(Of UserFollowUp)
 
 End Class

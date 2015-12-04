@@ -5,15 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2be7360777eb446a87972da40dcc68b8" Name="Diagram1">
-        <EntityTypeShape EntityType="ConstructionModel.ConstructionCase" Width="1.875" PointX="0.75" PointY="1" />
-        <EntityTypeShape EntityType="ConstructionModel.CheckingComplain" Width="1.875" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="ConstructionModel.FormDataItem" Width="1.5" PointX="5.25" PointY="1" />
-        <EntityTypeShape EntityType="ConstructionModel.TitleCase" Width="1.5" PointX="7.125" PointY="1" />
-        <EntityTypeShape EntityType="ConstructionModel.ConstructionSpotCheck" Width="2.25" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConstructionModel.ConstructionViolation" Width="1.75" PointX="3.375" PointY="5.75" />
-        <EntityTypeShape EntityType="ConstructionModel.ConstructionInitialForm" Width="1.5" PointX="5.625" PointY="5.75" />
-        <EntityTypeShape EntityType="ConstructionModel.ConstructionBudget" Width="1.5" PointX="7.625" PointY="5.75" />
-        <EntityTypeShape EntityType="ConstructionModel.UserFollowUp" Width="1.5" PointX="9.25" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

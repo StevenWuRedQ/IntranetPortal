@@ -16,13 +16,13 @@ Partial Public Class UserFollowUp
     Public Property FollowUpDate As Nullable(Of Date)
     Public Property BBLE As String
     Public Property Type As Nullable(Of Integer)
-    Public Property Description As String
-    Public Property CreateTime As Nullable(Of Date)
-    Public Property CreateBy As String
     Public Property CaseName As String
     Public Property URL As String
+    Public Property Description As String
     Public Property Status As Nullable(Of Integer)
     Public Property UpdateBy As String
     Public Property UpdateTime As Nullable(Of Date)
+    Public Property CreateTime As Nullable(Of Date)
+    Public Property CreateBy As String
 
 End Class

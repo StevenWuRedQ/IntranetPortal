@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.CleareneceNote" Width="1.5" PointX="0.625" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.PartyContact" Width="1.5" PointX="2.625" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyFloor" Width="1.5" PointX="0.625" PointY="2.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.PropertyTitle" Width="1.5" PointX="2.625" PointY="5.125" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PropertyTitle" Width="1.5" PointX="2.625" PointY="5.25" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCase" Width="1.5" PointX="8.625" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.TitleClearence" Width="1.5" PointX="10.625" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyBaseInfo" Width="1.5" PointX="4.75" PointY="0.5" />
@@ -40,7 +40,18 @@
         <EntityTypeShape EntityType="IntranetPortalModel.LegalManagerReport" Width="1.875" PointX="12.125" PointY="0.5" />
       </Diagram>
       <Diagram DiagramId="b4e8f59ec3564fd09ccb3d7bcd0488a7" Name="DocumentSearch" >
-        <EntityTypeShape EntityType="IntranetPortalModel.LeadInfoDocumentSearch" Width="2.25" PointX="6" PointY="1" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LeadInfoDocumentSearch" Width="2.25" PointX="0.625" PointY="0.5" />
+      </Diagram>
+      <Diagram DiagramId="4f83f20108054e3eb3754950694b164a" Name="Construction" >
+        <EntityTypeShape EntityType="IntranetPortalModel.CheckingComplain" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ConstructionBudget" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ConstructionCas" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ConstructionInitialForm" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ConstructionSpotCheck" Width="2.125" PointX="4.75" PointY="4.125" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ConstructionViolation" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.FormDataItem" Width="1.5" PointX="7.875" PointY="2.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.TitleCase" Width="1.5" PointX="8.875" PointY="4.625" />
+        <EntityTypeShape EntityType="IntranetPortalModel.UserFollowUp" Width="1.5" PointX="11" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

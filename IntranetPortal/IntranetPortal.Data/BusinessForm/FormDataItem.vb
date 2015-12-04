@@ -26,19 +26,19 @@ Public Class FormDataItem
     End Sub
 
     Public Shared Function Instance(name As String, tag As String) As FormDataItem
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
             Return ctx.FormDataItems.Where(Function(f) f.FormName = name AndAlso f.Tag = tag).FirstOrDefault
         End Using
     End Function
 
     Public Shared Function Instance(dataId As Integer) As FormDataItem
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
             Return ctx.FormDataItems.Find(dataId)
         End Using
     End Function
 
     Public Sub Save(saveBy As String)
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
 
             If Not ctx.FormDataItems.Any(Function(c) c.DataId = DataId) Then
                 Me.CreateBy = saveBy

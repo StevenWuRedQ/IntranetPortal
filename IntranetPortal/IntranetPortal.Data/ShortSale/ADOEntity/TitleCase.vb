@@ -12,8 +12,8 @@ Imports System.Collections.Generic
 
 Partial Public Class TitleCase
     Public Property BBLE As String
-    Public Property CaseName As String
     Public Property FormItemId As Nullable(Of Integer)
+    Public Property CaseName As String
     Public Property Owner As String
     Public Property Status As Nullable(Of Integer)
     Public Property UpdateDate As Nullable(Of Date)

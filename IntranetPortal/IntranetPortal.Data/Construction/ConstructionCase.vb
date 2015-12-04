@@ -22,25 +22,25 @@ Partial Public Class ConstructionCase
     End Property
 
     Public Shared Function GetAllCasesByStatus(Optional status1 As CaseStatus = CaseStatus.All) As ConstructionCase()
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
             Return ctx.ConstructionCases.Where(Function(c) c.Status = status1 Or status1 = CaseStatus.All).ToArray
         End Using
     End Function
 
     Public Shared Function GetAllCases() As ConstructionCase()
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
             Return ctx.ConstructionCases.ToArray()
         End Using
     End Function
 
     Public Shared Function GetAllCases(userName As String, Optional status1 As CaseStatus = CaseStatus.All) As ConstructionCase()
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
             Return ctx.ConstructionCases.Where(Function(c) c.Owner = userName Or (c.Status = status1 Or status1 = CaseStatus.All)).ToArray
         End Using
     End Function
 
     Public Shared Function GetLightCasesByStatus(Optional status1 As CaseStatus = CaseStatus.All) As ConstructionCase()
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
             Dim result = (From cCase In ctx.ConstructionCases.Where(Function(c) c.Status = status1 Or status1 = CaseStatus.All)
                           Select cCase.BBLE, cCase.Status, cCase.CaseName, cCase.CreateBy, cCase.CreateTime, cCase.LastUpdate, cCase.Owner, cCase.UpdateBy, cCase.IntakeCompleted)
 
@@ -60,7 +60,7 @@ Partial Public Class ConstructionCase
     End Function
 
     Public Shared Function GetLightCases(userName As String, Optional status1 As CaseStatus = CaseStatus.All) As ConstructionCase()
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
             Dim result = From cCase In ctx.ConstructionCases.Where(Function(c) c.Owner = userName Or (c.Status = status1 Or status1 = CaseStatus.All))
                          Select cCase.BBLE, cCase.Status, cCase.CaseName, cCase.CreateBy, cCase.CreateTime, cCase.LastUpdate, cCase.Owner, cCase.UpdateBy, cCase.IntakeCompleted
 
@@ -80,13 +80,13 @@ Partial Public Class ConstructionCase
     End Function
 
     Public Shared Function GetCase(BBLE As String) As ConstructionCase
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
             Return ctx.ConstructionCases.Find(BBLE)
         End Using
     End Function
 
     Public Shared Function GetCase(BBLE As String, userName As String) As ConstructionCase
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
             Dim csCase = ctx.ConstructionCases.Find(BBLE)
 
             If csCase IsNot Nothing Then
@@ -99,7 +99,7 @@ Partial Public Class ConstructionCase
     End Function
 
     Public Shared Sub UpdateOwner(BBLE As String, Owner As String)
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
             Dim CCase = ctx.ConstructionCases.Find(BBLE)
             If (CCase.Owner <> Owner) Then
                 CCase.Owner = Owner
@@ -109,7 +109,7 @@ Partial Public Class ConstructionCase
     End Sub
 
     Public Sub Delete()
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
             ctx.Entry(Me).State = Entity.EntityState.Deleted
             ctx.SaveChanges()
         End Using
@@ -124,7 +124,7 @@ Partial Public Class ConstructionCase
 
     Public Sub Save(userName As String)
 
-        Using db As New ConstructionEntities
+        Using db As New ShortSaleEntities
             If db.ConstructionCases.Any(Function(c) c.BBLE = BBLE) Then
                 Me.UpdateBy = userName
                 Me.LastUpdate = DateTime.Now
@@ -150,7 +150,7 @@ Partial Public Class ConstructionCase
     End Sub
 
     Public Shared Function Exists(bble As String) As Boolean
-        Using ctx As New ConstructionEntities
+        Using ctx As New ShortSaleEntities
             Return ctx.ConstructionCases.Any(Function(c) c.BBLE = bble)
         End Using
     End Function

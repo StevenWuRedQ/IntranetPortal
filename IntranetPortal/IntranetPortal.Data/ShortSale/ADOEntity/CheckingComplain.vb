@@ -13,18 +13,18 @@ Imports System.Collections.Generic
 Partial Public Class CheckingComplain
     Public Property BBLE As String
     Public Property Address As String
-    Public Property LastExecute As Nullable(Of Date)
-    Public Property CreateBy As String
-    Public Property CreateTime As Nullable(Of Date)
-    Public Property ExecuteBy As String
     Public Property NotifyUsers As String
+    Public Property LastExecute As Nullable(Of Date)
+    Public Property ExecuteBy As String
     Public Property LastAPIOrderId As Nullable(Of Integer)
-    Public Property LastComplaintsResult As String
     Public Property LastDataEntered As Nullable(Of Date)
+    Public Property LastComplaintsResult As String
     Public Property LastResultUpdate As Nullable(Of Date)
-    Public Property IsOwned As Nullable(Of Boolean)
-    Public Property Status As Nullable(Of Integer)
     Public Property TotalComplaints As Nullable(Of Integer)
     Public Property ActiveComplaints As Nullable(Of Integer)
+    Public Property IsOwned As Nullable(Of Boolean)
+    Public Property Status As Nullable(Of Integer)
+    Public Property CreateBy As String
+    Public Property CreateTime As Nullable(Of Date)
 
 End Class
