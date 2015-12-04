@@ -49,6 +49,9 @@ Partial Public Class AssignRule
         End Using
     End Function
 
+    ''' <summary>
+    ''' Execute the assign rules
+    ''' </summary>
     Public Sub Execute()
         Dim logdata = GetLogData(CType(IntervalType, RuleInterval))
         If IsAssigned(logdata, EmployeeName) Then
@@ -111,11 +114,22 @@ Partial Public Class AssignRule
         End Using
     End Sub
 
+    ''' <summary>
+    ''' Assign the leads from leads bank
+    ''' </summary>
+    ''' <returns>the list of assigned leads' bble</returns>
     Private Function AssginLeadsBank() As List(Of String)
         Dim key = "BusinessRules"
         Using Context As New Entities
             Dim rowCount = 0
             Dim bbles As New List(Of String)
+
+            Dim assignableEmployees = {}
+            'get the assignable employees
+            If Not String.IsNullOrEmpty(Core.PortalSettings.GetValue("AssignableEmployees")) Then
+                assignableEmployees = Core.PortalSettings.GetValue("AssignableEmployees").Split(";")
+            End If
+
             Try
                 For Each prop In Context.Agent_Properties.Where(Function(ap) ap.BBLE IsNot Nothing And (ap.Active = True Or Not ap.Active.HasValue) And ap.Agent_Name = EmployeeName).Take(Count)
                     Dim li = Context.LeadsInfoes.Where(Function(l) l.BBLE = prop.BBLE).SingleOrDefault
@@ -159,6 +173,12 @@ Partial Public Class AssignRule
                                     rowCount += 1
                                     bbles.Add(prop.BBLE)
                                 End If
+                            Else
+                                If assignableEmployees.Contains(newlead.EmployeeName) Then
+
+
+                                End If
+
                             End If
                         End If
                     End If
