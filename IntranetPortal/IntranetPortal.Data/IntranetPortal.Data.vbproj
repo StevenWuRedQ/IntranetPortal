@@ -98,38 +98,8 @@
     <Compile Include="Construction\ConstructionInitialForm.vb" />
     <Compile Include="Construction\ConstructionSpotCheck.vb" />
     <Compile Include="Construction\ConstructionViolations.vb" />
-    <Compile Include="Construction\DataModel\ConstructionModel.Context.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConstructionModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Construction\DataModel\ConstructionModel.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConstructionModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Construction\DataModel\ConstructionModel.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConstructionModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataServices\TLOLocateReportOutput.vb" />
     <Compile Include="DocumentSearch\LeadInfoDocumentSearch.vb" />
-    <Compile Include="DocumentSearch\SearchEntity\DocSearchEntity.Context.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DocSearchEntity.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DocumentSearch\SearchEntity\DocSearchEntity.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DocSearchEntity.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DocumentSearch\SearchEntity\DocSearchEntity.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DocSearchEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="FollowUps\UserFollowUp.vb" />
     <Compile Include="Legal\LawReference.vb" />
     <Compile Include="Legal\LegalCase.vb" />
@@ -164,142 +134,142 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\CheckingComplain.vb">
+    <Compile Include="ADOEntity\CheckingComplain.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\CleareneceNote.vb">
+    <Compile Include="ADOEntity\CleareneceNote.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ConstructionBudget.vb">
+    <Compile Include="ADOEntity\ConstructionBudget.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ConstructionCase.vb">
+    <Compile Include="ADOEntity\ConstructionCase.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ConstructionInitialForm.vb">
+    <Compile Include="ADOEntity\ConstructionInitialForm.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ConstructionSpotCheck.vb">
+    <Compile Include="ADOEntity\ConstructionSpotCheck.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ConstructionViolation.vb">
+    <Compile Include="ADOEntity\ConstructionViolation.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\CorporationEntity.vb">
+    <Compile Include="ADOEntity\CorporationEntity.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\Employee.vb">
+    <Compile Include="ADOEntity\Employee.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\EvictionCas.vb">
+    <Compile Include="ADOEntity\EvictionCas.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\FormDataItem.vb">
+    <Compile Include="ADOEntity\FormDataItem.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\GroupType.vb">
+    <Compile Include="ADOEntity\GroupType.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\LawReference.vb">
+    <Compile Include="ADOEntity\LawReference.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\LeadInfoDocumentSearch.vb">
+    <Compile Include="ADOEntity\LeadInfoDocumentSearch.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\LegalCase.vb">
+    <Compile Include="ADOEntity\LegalCase.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\LegalCaseReport.vb">
+    <Compile Include="ADOEntity\LegalCaseReport.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\LegalECourt.vb">
+    <Compile Include="ADOEntity\LegalECourt.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\LegalJudge.vb">
+    <Compile Include="ADOEntity\LegalJudge.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\LegalManagerReport.vb">
+    <Compile Include="ADOEntity\LegalManagerReport.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\LegalRoboSignor.vb">
+    <Compile Include="ADOEntity\LegalRoboSignor.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\MortgageStatusData.vb">
+    <Compile Include="ADOEntity\MortgageStatusData.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\PartyContact.vb">
+    <Compile Include="ADOEntity\PartyContact.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\PropertyBaseInfo.vb">
+    <Compile Include="ADOEntity\PropertyBaseInfo.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\PropertyFloor.vb">
+    <Compile Include="ADOEntity\PropertyFloor.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\PropertyMortgage.vb">
+    <Compile Include="ADOEntity\PropertyMortgage.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\PropertyOccupant.vb">
+    <Compile Include="ADOEntity\PropertyOccupant.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\PropertyOwner.vb">
+    <Compile Include="ADOEntity\PropertyOwner.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\PropertyTitle.vb">
+    <Compile Include="ADOEntity\PropertyTitle.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\PropertyValueInfo.vb">
+    <Compile Include="ADOEntity\PropertyValueInfo.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ShortSale.Context.vb">
+    <Compile Include="ADOEntity\ShortSale.Context.vb">
       <DependentUpon>ShortSale.Context.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ShortSale.Designer.vb">
+    <Compile Include="ADOEntity\ShortSale.Designer.vb">
       <DependentUpon>ShortSale.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ShortSale.vb">
+    <Compile Include="ADOEntity\ShortSale.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ShortSaleActivityLog.vb">
+    <Compile Include="ADOEntity\ShortSaleActivityLog.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ShortSaleBuyer.vb">
+    <Compile Include="ADOEntity\ShortSaleBuyer.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ShortSaleCase.vb">
+    <Compile Include="ADOEntity\ShortSaleCase.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ShortSaleCaseComment.vb">
+    <Compile Include="ADOEntity\ShortSaleCaseComment.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ShortSaleCheckList.vb">
+    <Compile Include="ADOEntity\ShortSaleCheckList.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ShortSaleLeadsInfo.vb">
+    <Compile Include="ADOEntity\ShortSaleLeadsInfo.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ShortSaleOffer.vb">
+    <Compile Include="ADOEntity\ShortSaleOffer.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ShortSaleOverview.vb">
+    <Compile Include="ADOEntity\ShortSaleOverview.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\TitleCase.vb">
+    <Compile Include="ADOEntity\TitleCase.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\TitleClearence.vb">
+    <Compile Include="ADOEntity\TitleClearence.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\TitleJudgementSearch.vb">
+    <Compile Include="ADOEntity\TitleJudgementSearch.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\UserFollowUp.vb">
+    <Compile Include="ADOEntity\UserFollowUp.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\CleareneceNote.vb" />
@@ -338,30 +308,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="Construction\DataModel\ConstructionModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ConstructionModel.Designer.vb</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Construction\DataModel\ConstructionModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ConstructionModel.edmx</DependentUpon>
-      <LastGenOutput>ConstructionModel.Context.vb</LastGenOutput>
-    </None>
-    <None Include="Construction\DataModel\ConstructionModel.edmx.diagram">
-      <DependentUpon>ConstructionModel.edmx</DependentUpon>
-    </None>
-    <None Include="Construction\DataModel\ConstructionModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ConstructionModel.edmx</DependentUpon>
-      <LastGenOutput>ConstructionModel.vb</LastGenOutput>
-    </None>
-    <EntityDeploy Include="DocumentSearch\SearchEntity\DocSearchEntity.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DocSearchEntity.Designer.vb</LastGenOutput>
-    </EntityDeploy>
-    <None Include="DocumentSearch\SearchEntity\DocSearchEntity.edmx.diagram">
-      <DependentUpon>DocSearchEntity.edmx</DependentUpon>
-    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -371,7 +317,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <EntityDeploy Include="ShortSale\ADOEntity\ShortSale.edmx">
+    <EntityDeploy Include="ADOEntity\ShortSale.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ShortSale.Designer.vb</LastGenOutput>
     </EntityDeploy>
@@ -516,15 +462,15 @@
     <None Include="Service References\RulesEngine\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="ShortSale\ADOEntity\ShortSale.Context.tt">
+    <None Include="ADOEntity\ShortSale.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ShortSale.edmx</DependentUpon>
       <LastGenOutput>ShortSale.Context.vb</LastGenOutput>
     </None>
-    <None Include="ShortSale\ADOEntity\ShortSale.edmx.diagram">
+    <None Include="ADOEntity\ShortSale.edmx.diagram">
       <DependentUpon>ShortSale.edmx</DependentUpon>
     </None>
-    <None Include="ShortSale\ADOEntity\ShortSale.tt">
+    <None Include="ADOEntity\ShortSale.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ShortSale.edmx</DependentUpon>
       <LastGenOutput>ShortSale.vb</LastGenOutput>
@@ -574,18 +520,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DocumentSearch\SearchEntity\DocSearchEntity.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DocSearchEntity.edmx</DependentUpon>
-      <LastGenOutput>DocSearchEntity.Context.vb</LastGenOutput>
-    </Content>
-    <Content Include="DocumentSearch\SearchEntity\DocSearchEntity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DocSearchEntity.edmx</DependentUpon>
-      <LastGenOutput>DocSearchEntity.vb</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
