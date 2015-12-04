@@ -53,5 +53,6 @@ Partial Public Class ShortSaleEntities
     Public Overridable Property LawReferences() As DbSet(Of LawReference)
     Public Overridable Property LegalCaseReports() As DbSet(Of LegalCaseReport)
     Public Overridable Property LegalManagerReports() As DbSet(Of LegalManagerReport)
+    Public Overridable Property LeadInfoDocumentSearches() As DbSet(Of LeadInfoDocumentSearch)
 
 End Class

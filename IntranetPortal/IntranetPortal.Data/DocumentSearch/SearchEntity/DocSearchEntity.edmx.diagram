@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7245c5f1f1df459dbfddab9d9263fdfd" Name="Diagram1">
-        <EntityTypeShape EntityType="DocSearchEntity.LeadInfoDocumentSearch" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

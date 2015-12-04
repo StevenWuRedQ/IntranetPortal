@@ -157,9 +157,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DocSearchEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="DocumentSearch\SearchEntity\LeadInfoDocumentSearch.vb">
-      <DependentUpon>DocSearchEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="FollowUps\UserFollowUp.vb" />
     <Compile Include="Legal\LawReference.vb" />
     <Compile Include="Legal\LegalCase.vb" />
@@ -210,6 +207,9 @@
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\ADOEntity\LawReference.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ADOEntity\LeadInfoDocumentSearch.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\ADOEntity\LegalCase.vb">

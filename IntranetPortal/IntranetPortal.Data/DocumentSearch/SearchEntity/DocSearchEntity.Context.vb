@@ -22,6 +22,5 @@ Partial Public Class IntranetPortalEntities
         Throw New UnintentionalCodeFirstException()
     End Sub
 
-    Public Overridable Property LeadInfoDocumentSearches() As DbSet(Of LeadInfoDocumentSearch)
 
 End Class
