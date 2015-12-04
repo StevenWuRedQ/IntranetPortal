@@ -3,25 +3,25 @@
     Private Shared ReadOnly DocumentLibrary = "CorporationEntity"
 
     Public Shared Function GetEntitiesByStatus(status As String()) As List(Of CorporationEntity)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.CorporationEntities.Where(Function(s) status.Contains(s.Status)).ToList
         End Using
     End Function
 
     Public Shared Function GetEntitiesByStatus(name As String, status As String) As List(Of CorporationEntity)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.CorporationEntities.Where(Function(s) status = s.Status AndAlso s.CorpName.Contains(name)).ToList
         End Using
     End Function
 
     Public Shared Function GetAllEntities(appId As Integer) As List(Of CorporationEntity)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.CorporationEntities.Where(Function(c) c.AppId = appId).ToList
         End Using
     End Function
 
     Public Shared Function GetEntity(entityId As Integer) As CorporationEntity
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.CorporationEntities.Find(entityId)
         End Using
     End Function
@@ -35,14 +35,14 @@
     End Function
 
     Public Shared Function GetEntityByCorpName(CorpName As String) As CorporationEntity
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.CorporationEntities.Where(Function(c) c.CorpName = CorpName).FirstOrDefault
         End Using
 
     End Function
 
     Public Sub Save()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
 
             If EntityId = 0 Then
                 CreateTime = DateTime.Now
@@ -58,7 +58,7 @@
     End Sub
 
     Public Sub Delete()
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim obj = ctx.CorporationEntities.Find(EntityId)
             ctx.CorporationEntities.Remove(obj)
             ctx.SaveChanges()

@@ -24,14 +24,14 @@
     Private _notes As List(Of CleareneceNote)
     Public ReadOnly Property Notes As List(Of CleareneceNote)
         Get
-            Using context As New ShortSaleEntities
+            Using context As New PortalEntities
                 Return context.CleareneceNotes.Where(Function(nt) nt.ClearenceId = ClearenceId).OrderByDescending(Function(nt) nt.CreateDate).ToList
             End Using
         End Get
     End Property
 
     Public Sub Save()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             If ClearenceId = 0 Then
                 If SeqNum = 0 Then
                     SeqNum = GetSeqNum()
@@ -48,7 +48,7 @@
     End Sub
 
     Public Function GetSeqNum() As Integer
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim clearence = context.TitleClearences.Where(Function(tc) tc.CaseId = CaseId).OrderByDescending(Function(tc) tc.SeqNum).FirstOrDefault
             If clearence Is Nothing Then
                 Return 1
@@ -59,7 +59,7 @@
     End Function
 
     Public Shared Sub Delete(clearenceId As Integer)
-        Using Context As New ShortSaleEntities
+        Using Context As New PortalEntities
             Dim clearence = Context.TitleClearences.Find(clearenceId)
 
             If clearence IsNot Nothing Then
@@ -70,7 +70,7 @@
     End Sub
 
     Public Shared Sub Cleared(clearenceId As Integer)
-        Using Context As New ShortSaleEntities
+        Using Context As New PortalEntities
             Dim clearence = Context.TitleClearences.Find(clearenceId)
 
             If clearence IsNot Nothing Then
@@ -81,7 +81,7 @@
     End Sub
 
     Public Shared Function GetCaseClearences(caseId As Integer) As List(Of TitleClearence)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Return context.TitleClearences.Where(Function(tc) tc.CaseId = caseId).OrderBy(Function(tc) tc.SeqNum).ToList
         End Using
     End Function

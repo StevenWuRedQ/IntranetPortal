@@ -12,25 +12,25 @@
     End Property
 
     Public Shared Function GetCase(bble As String) As TitleCase
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.TitleCases.Find(bble)
         End Using
     End Function
 
     Public Shared Function GetAllCases(status As DataStatus) As TitleCase()
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.TitleCases.Where(Function(c) c.Status = status Or status = DataStatus.All).ToArray
         End Using
     End Function
 
     Public Shared Function Exists(bble As String) As Boolean
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.TitleCases.Any(Function(c) c.BBLE = bble)
         End Using
     End Function
 
     Public Shared Function GetCaseStatus(bble As String) As TitleCase.DataStatus
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim xcase = ctx.TitleCases.Find(bble)
             If xcase IsNot Nothing Then
                 Return xcase.Status
@@ -42,14 +42,14 @@
 
     End Function
     Public Shared Function GetAllCases(userName As String, status As DataStatus) As TitleCase()
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.TitleCases.Where(Function(c) c.Owner = userName AndAlso (c.Status = status Or status = DataStatus.All)).ToArray
         End Using
     End Function
 
     Public Overrides Function LoadData(formId As Integer) As BusinessDataBase
 
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             If ctx.TitleCases.Any(Function(t) t.FormItemId = formId) Then
                 Return ctx.TitleCases.Where(Function(t) t.FormItemId = formId).FirstOrDefault
             Else
@@ -61,7 +61,7 @@
     End Function
 
     Public Sub SaveData(saveBy As String)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             If ctx.TitleCases.Any(Function(t) t.BBLE = BBLE) Then
                 Me.UpdateDate = DateTime.Now
                 Me.UpdateBy = saveBy
@@ -81,7 +81,7 @@
     Public Overrides Function Save(itemData As FormDataItem) As String
         MyBase.Save(itemData)
 
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             If ctx.TitleCases.Any(Function(t) t.FormItemId = itemData.DataId) Then
                 UpdateFields(itemData)
                 ctx.Entry(Me).State = Entity.EntityState.Modified

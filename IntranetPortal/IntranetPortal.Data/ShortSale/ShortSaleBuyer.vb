@@ -1,7 +1,7 @@
 ﻿Partial Public Class ShortSaleBuyer
 
     Public Shared Function Instance(bble As String) As ShortSaleBuyer
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim result = ctx.ShortSaleBuyers.Find(bble)
             If result Is Nothing Then
                 result = New ShortSaleBuyer With {
@@ -14,7 +14,7 @@
     End Function
 
     Public Sub Save()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             'context.ShortSaleCases.Attach(Me)
             Dim buyer = context.ShortSaleBuyers.Find(BBLE)
 

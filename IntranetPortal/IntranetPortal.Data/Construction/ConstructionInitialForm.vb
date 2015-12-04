@@ -5,7 +5,7 @@ Imports System.ComponentModel.DataAnnotations
 Partial Public Class ConstructionInitialForm
 
     Public Shared Function GetAddressByUser(username As String) As List(Of List(Of String))
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim result = New List(Of List(Of String))
             Dim pairs = From f In ctx.ConstructionInitialForms
                         Where f.Owner = username
@@ -22,13 +22,13 @@ Partial Public Class ConstructionInitialForm
         End Using
     End Function
     Public Shared Function GetForms(BBLE As String) As ConstructionInitialForm
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.ConstructionInitialForms.Where(Function(F) F.BBLE = BBLE).FirstOrDefault
         End Using
     End Function
 
     Public Sub SaveForms(userName As String)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             If ctx.ConstructionInitialForms.Any(Function(t) t.BBLE = BBLE) Then
                 Me.UpdateDate = DateTime.Now
                 Me.UpdateBy = userName
@@ -44,7 +44,7 @@ Partial Public Class ConstructionInitialForm
     End Sub
 
     Public Shared Sub updateOwner(BBLE As String, userName As String, owner As String)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             If ctx.ConstructionInitialForms.Any(Function(t) t.BBLE = BBLE) Then
                 Dim form = ctx.ConstructionInitialForms.Where(Function(f) f.BBLE = BBLE).FirstOrDefault
                 form.Owner = owner

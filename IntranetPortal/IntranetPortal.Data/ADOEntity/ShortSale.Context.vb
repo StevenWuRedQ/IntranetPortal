@@ -11,11 +11,11 @@ Imports System
 Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
 
-Partial Public Class ShortSaleEntities
+Partial Public Class PortalEntities
     Inherits DbContext
 
     Public Sub New()
-        MyBase.New("name=ShortSaleEntities")
+        MyBase.New("name=PortalEntities")
     End Sub
 
     Protected Overrides Sub OnModelCreating(modelBuilder As DbModelBuilder)

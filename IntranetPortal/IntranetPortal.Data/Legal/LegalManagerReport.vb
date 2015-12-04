@@ -13,7 +13,7 @@
 
 
     Public Shared Function GetAllCase() As List(Of LegalManagerReport)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.LegalManagerReports.ToList
         End Using
     End Function

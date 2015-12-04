@@ -1,7 +1,7 @@
 ﻿Partial Public Class ShortSaleActivityLog
 
     Public Shared Sub ClearLogs(bble As String)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim logs = ctx.ShortSaleActivityLogs.Where(Function(l) l.BBLE = bble).ToList
             ctx.ShortSaleActivityLogs.RemoveRange(logs)
             ctx.SaveChanges()
@@ -21,20 +21,20 @@
     End Sub
 
     Public Shared Sub AddLogs(logs As ShortSaleActivityLog())
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             ctx.ShortSaleActivityLogs.AddRange(logs)
             ctx.SaveChanges()
         End Using
     End Sub
 
     Public Shared Function GetLogs(bble As String, appId As Integer) As List(Of ShortSaleActivityLog)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.ShortSaleActivityLogs.Where(Function(l) l.BBLE = bble AndAlso l.AppId = appId).OrderByDescending(Function(l) l.ActivityDate).ToList
         End Using
     End Function
 
     Public Shared Function LastActivityLog(bble As String, appId As Integer) As ShortSaleActivityLog
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.ShortSaleActivityLogs.Where(Function(l) l.BBLE = bble).OrderByDescending(Function(l) l.ActivityDate).FirstOrDefault
         End Using
     End Function

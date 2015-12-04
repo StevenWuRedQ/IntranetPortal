@@ -11,19 +11,19 @@ Partial Public Class CheckingComplain
     Public Const LogTitleRefreshComplain As String = "RefreshPropertyComplaints"
 
     Public Shared Function GetAllComplains(Optional bble As String = "", Optional userName As String = "") As List(Of CheckingComplain)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.CheckingComplains.Where(Function(c) (c.BBLE = bble Or bble = "") And (c.NotifyUsers.Contains(userName) Or userName = "")).ToList
         End Using
     End Function
 
     Public Shared Function GetComplaints(address As String) As CheckingComplain
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.CheckingComplains.Where(Function(c) c.Address.StartsWith(address)).FirstOrDefault
         End Using
     End Function
 
     Public Shared Function GetLightAllComplains(Optional userName As String = "") As List(Of CheckingComplain)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.CheckingComplains.Where(Function(c) c.NotifyUsers.Contains(userName) Or userName = "").Select(Function(c) New With {c.BBLE, c.Address, c.TotalComplaints, c.ActiveComplaints, c.NotifyUsers, c.LastExecute, c.CreateBy, c.Status}).ToList.Select(Function(c) New CheckingComplain With {
                                                     .BBLE = c.BBLE,
                                                     .Address = c.Address,
@@ -37,7 +37,7 @@ Partial Public Class CheckingComplain
     End Function
 
     Public Shared Function Instance(bble As String) As CheckingComplain
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.CheckingComplains.Find(bble)
         End Using
     End Function
@@ -85,7 +85,7 @@ Partial Public Class CheckingComplain
 
         Dim result As New List(Of DataAPI.SP_DOB_Complaints_By_BBLE_Result)
 
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
 
             Return ctx.CheckingComplains.Select(Function(c) c.LastComplaintsResult).ToArray
         End Using
@@ -131,7 +131,7 @@ Partial Public Class CheckingComplain
         Try
             Using client As New DataAPI.WCFMacrosClient
                 If client.DOB_Complaints_Delete(bble) Then
-                    Using ctx As New ShortSaleEntities
+                    Using ctx As New PortalEntities
                         Dim item = ctx.CheckingComplains.Find(bble)
                         ctx.CheckingComplains.Remove(item)
                         ctx.SaveChanges()
@@ -148,7 +148,7 @@ Partial Public Class CheckingComplain
     End Function
 
     Public Sub Save(saveBy As String)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
 
             If Not ctx.CheckingComplains.Any(Function(c) c.BBLE = BBLE) Then
                 Me.CreateBy = saveBy

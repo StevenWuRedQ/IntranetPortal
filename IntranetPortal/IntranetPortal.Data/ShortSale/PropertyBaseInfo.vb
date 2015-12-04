@@ -32,7 +32,7 @@ Partial Public Class PropertyBaseInfo
     Public Property PropFloors As PropertyFloor()
         Get
             If _propFloors Is Nothing Then
-                Using context As New ShortSaleEntities
+                Using context As New PortalEntities
                     _propFloors = context.PropertyFloors.Where(Function(fl) fl.BBLE = BBLE).ToArray
                 End Using
             End If
@@ -48,7 +48,7 @@ Partial Public Class PropertyBaseInfo
     Public Property Owners As PropertyOwner()
         Get
             If _owners Is Nothing Then
-                Using context As New ShortSaleEntities
+                Using context As New PortalEntities
                     _owners = context.PropertyOwners.Where(Function(po) po.BBLE = BBLE).ToArray
                 End Using
 
@@ -65,7 +65,7 @@ Partial Public Class PropertyBaseInfo
     End Property
 
     Public Sub Save()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim pbi = context.PropertyBaseInfoes.Find(BBLE)
             If pbi Is Nothing Then
                 CreateDate = DateTime.Now
@@ -123,7 +123,7 @@ Partial Public Class PropertyBaseInfo
     End Sub
 
     Public Shared Function GetInstance(BBLE As String) As PropertyBaseInfo
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Return context.PropertyBaseInfoes.Find(BBLE)
         End Using
     End Function

@@ -79,7 +79,7 @@ Partial Public Class ShortSaleCase
     Public Property Mortgages As PropertyMortgage()
         Get
             If _mortgages Is Nothing Then
-                Using context As New ShortSaleEntities
+                Using context As New PortalEntities
                     _mortgages = context.PropertyMortgages.Where(Function(mg) mg.CaseId = CaseId).ToArray
 
                     If (_mortgages.Count = 0) Then
@@ -652,7 +652,7 @@ Partial Public Class ShortSaleCase
         Dim jsonClist = Newtonsoft.Json.Linq.JObject.Parse(json)
 
         If jsonClist IsNot Nothing Then
-            Using ctx As New ShortSaleEntities
+            Using ctx As New PortalEntities
                 Dim clist = ctx.ShortSaleCheckLists.Find(BBLE)
                 If clist Is Nothing Then
                     clist = New ShortSaleCheckList
@@ -717,7 +717,7 @@ Partial Public Class ShortSaleCase
     End Function
 
     Public Sub Save(Optional userName As String = Nothing)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             RefreshReportFields(userName)
 
             If CaseId = 0 Then
@@ -885,7 +885,7 @@ Partial Public Class ShortSaleCase
     Public Sub SaveChanges()
         Save()
         'If CaseId > 0 Then
-        '    Using context As New ShortSaleEntities
+        '    Using context As New PortalEntities
         '        Dim origCase = context.ShortSaleCases.Find(CaseId)
         '        origCase = Utility.SaveChangesObj(origCase, Me)
         '        context.SaveChanges()
@@ -938,7 +938,7 @@ Partial Public Class ShortSaleCase
     End Function
 
     Public Sub SaveEntity()
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
 
             ctx.Entry(Me).State = Entity.EntityState.Modified
             ctx.SaveChanges()
@@ -951,25 +951,25 @@ Partial Public Class ShortSaleCase
     End Function
 
     Public Shared Function IsExist(bble As String) As Boolean
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.ShortSaleCases.Any(Function(ss) ss.BBLE = bble)
         End Using
     End Function
 
     Public Shared Function GetCase(caseId As Integer) As ShortSaleCase
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Return context.ShortSaleCases.Find(caseId)
         End Using
     End Function
 
     Public Shared Function GetCaseByBBLE(bble As String) As ShortSaleCase
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Return context.ShortSaleCases.Where(Function(ss) ss.BBLE = bble).SingleOrDefault
         End Using
     End Function
 
     Public Shared Function GetAllCase() As List(Of ShortSaleCase)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Return context.ShortSaleCases.ToList
         End Using
     End Function
@@ -981,7 +981,7 @@ Partial Public Class ShortSaleCase
     ''' <param name="appId">Application Id</param>
     ''' <returns></returns>
     Public Shared Function GetCaseByStatus(status As CaseStatus, appId As Integer) As List(Of ShortSaleCase)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             If status = CaseStatus.Eviction Then
                 Return GetEvictionCases()
             Else
@@ -996,7 +996,7 @@ Partial Public Class ShortSaleCase
     End Function
 
     Public Shared Function GetCaseByOwner(owner As String) As List(Of ShortSaleCase)
-        Using Context As New ShortSaleEntities
+        Using Context As New PortalEntities
             Return Context.ShortSaleCases.Where(Function(ss) ss.Owner = owner).ToList
         End Using
     End Function
@@ -1009,7 +1009,7 @@ Partial Public Class ShortSaleCase
     ''' <param name="appId">Application Id</param>
     ''' <returns></returns>
     Public Shared Function GetCaseByStatus(status As CaseStatus, owners As String(), appId As Integer) As List(Of ShortSaleCase)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim noOwner = owners Is Nothing
 
             If noOwner Then
@@ -1027,7 +1027,7 @@ Partial Public Class ShortSaleCase
     ''' <param name="appId"></param>
     ''' <returns></returns>
     Public Shared Function GetArchivedCases(appId As Integer) As List(Of ShortSaleCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim allCases = (From ss In ctx.ShortSaleCases
                             Join mort In ctx.PropertyMortgages On ss.CaseId Equals mort.CaseId
                             Where ss.Status = CaseStatus.Archived AndAlso ss.AppId = appId
@@ -1048,7 +1048,7 @@ Partial Public Class ShortSaleCase
     ''' <param name="owners">Owner name list</param>
     ''' <returns></returns>
     Public Shared Function GetCaseByCategory(category As String, appId As Integer, Optional owners As String() = Nothing) As List(Of ShortSaleCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim nonActiveStatus = {CaseStatus.Archived, CaseStatus.NewFile}
 
             Dim noOwners = owners Is Nothing
@@ -1125,7 +1125,7 @@ Partial Public Class ShortSaleCase
     ''' <param name="appId">Application Id</param>
     ''' <returns></returns>
     Public Shared Function GetCaseByMortgageStatus(mortStatus As String(), appId As Integer) As List(Of ShortSaleCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim result = (From ss In ctx.ShortSaleCases
                           Join mort In ctx.PropertyMortgages On ss.CaseId Equals mort.CaseId
                           Where mortStatus.Contains(mort.Status) And ss.AppId = appId
@@ -1150,7 +1150,7 @@ Partial Public Class ShortSaleCase
         Return GetCaseByStatus(status, appId).Count
     End Function
     Public Shared Function GetCaseByBBLEs(bbles As List(Of String)) As List(Of ShortSaleCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim result = (From ss In ctx.ShortSaleCases.Where(Function(s) bbles.Contains(s.BBLE))
                           From mort In ctx.PropertyMortgages.Where(Function(m) m.CaseId = ss.CaseId).Take(1).DefaultIfEmpty
                           Select ss, mort).Distinct.ToList.Select(Function(s)
@@ -1166,7 +1166,7 @@ Partial Public Class ShortSaleCase
     End Function
 
     Public Shared Function GetEvictionCases() As List(Of ShortSaleCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
 
             Dim result = (From evi In ctx.EvictionCases
                           Join ss In ctx.ShortSaleCases On ss.BBLE Equals evi.BBLE
@@ -1186,7 +1186,7 @@ Partial Public Class ShortSaleCase
     End Function
 
     Public Shared Sub Remove(bble As String)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim ssCase = ctx.ShortSaleCases.Where(Function(ss) ss.BBLE = bble).FirstOrDefault
             'If ssCase IsNot Nothing Then
             '    Dim mortgages = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = ssCase.CaseId)
@@ -1205,7 +1205,7 @@ Partial Public Class ShortSaleCase
 #Region "Report"
 
     Public Shared Function MissedFollowUpReport(userName As String, missedDate As DateTime) As List(Of ShortSaleCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
 
             Dim data = From ss In ctx.ShortSaleCases.Where(Function(s) s.Owner = userName AndAlso s.Status = CaseStatus.Active)
                        Where ss.CallbackDate IsNot Nothing AndAlso ss.CallbackDate < missedDate
@@ -1216,7 +1216,7 @@ Partial Public Class ShortSaleCase
     End Function
 
     Public Shared Function CaseReport(appId As Integer) As List(Of ShortSaleCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim data = From ss In ctx.ShortSaleCases.Where(Function(ss) ss.AppId = appId)
                        Join pi In ctx.PropertyBaseInfoes On pi.BBLE Equals ss.BBLE
                        Let owner = ctx.PropertyOwners.FirstOrDefault(Function(po) po.BBLE = ss.BBLE)
@@ -1257,7 +1257,7 @@ Partial Public Class ShortSaleCase
     End Function
 
     Public Shared Function CaseReport2(appId As Integer) As List(Of ShortSaleCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim data = From ss In ctx.ShortSaleCases.Where(Function(sc) sc.AppId = appId And sc.Status = CaseStatus.Active)
                        Join pi In ctx.PropertyBaseInfoes On pi.BBLE Equals ss.BBLE
                        Let owner = ctx.PropertyOwners.FirstOrDefault(Function(po) po.BBLE = ss.BBLE)

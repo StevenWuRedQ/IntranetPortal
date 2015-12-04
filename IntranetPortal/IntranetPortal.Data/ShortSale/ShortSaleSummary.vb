@@ -1,12 +1,12 @@
 ﻿Public Class ShortSaleSummary
     Public Shared Function GetUrgentCases() As List(Of ShortSaleCase)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Return context.ShortSaleCases.Where(Function(ss) ss.IsUrgent = True).ToList
         End Using
     End Function
 
     Public Shared Function GetCaseByMortStatus(status As String) As List(Of ShortSaleCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim result = (From ssCase In ctx.ShortSaleCases
                          Join mort In ctx.PropertyMortgages On mort.CaseId Equals ssCase.CaseId
                          Where mort.Status = status
@@ -16,7 +16,7 @@
     End Function
 
     Public Shared Function GetUpcomingClosings() As List(Of ShortSaleCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim upComingDate = DateTime.Today.AddDays(14)
             Dim result = (From ssCase In ctx.ShortSaleCases
                          Join mort In ctx.PropertyMortgages On mort.CaseId Equals ssCase.CaseId
@@ -33,13 +33,13 @@
 
     Public Shared Function GetFollowUpCases() As List(Of ShortSaleCase)
 
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Return context.ShortSaleCases.Where(Function(ss) ss.Status = CaseStatus.FollowUp).ToList
         End Using
     End Function
 
     Public Shared Function GetAllCase(appId As Integer) As List(Of ShortSaleCase)
-        'Using ctx As New ShortSaleEntities
+        'Using ctx As New PortalEntities
         '    Dim result = From ssCase In ctx.ShortSaleCases
         '                 Join prop In ctx.PropertyBaseInfoes On prop.BBLE Equals ssCase.BBLE
         '                 Join processor In ctx.PartyContacts On ssCase.Processor Equals processor.ContactId
@@ -65,7 +65,7 @@
         '    Return result.ToList
         'End Using
 
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.ShortSaleCases.Where(Function(ss) ss.AppId = appId).OrderByDescending(Function(ss) ss.UpdateDate).ToList
         End Using
     End Function

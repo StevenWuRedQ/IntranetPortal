@@ -1,13 +1,13 @@
 ﻿Public Class UserFollowUp
 
     Public Shared Function Instance(followUpId As Integer) As UserFollowUp
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.UserFollowUps.Find(followUpId)
         End Using
     End Function
 
     Public Shared Function Instance(bble As String, userName As String, type As Integer) As UserFollowUp
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim followup = ctx.UserFollowUps.Where(Function(u) u.BBLE = bble And u.Type = type And u.UserName = userName And u.Status = FollowUpStatus.Active).FirstOrDefault
             If followup Is Nothing Then
                 followup = New UserFollowUp
@@ -33,7 +33,7 @@
     End Sub
 
     Private Sub Complete(completeBy As String)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             If ctx.UserFollowUps.Any(Function(t) t.BBLE = BBLE And t.Type = Type And t.UserName = UserName And (t.Status = FollowUpStatus.Active Or Not t.Status.HasValue)) Then
                 For Each item In ctx.UserFollowUps.Where(Function(t) t.BBLE = BBLE And t.Type = Type And t.UserName = UserName And t.Status = FollowUpStatus.Active).ToList
                     item.Status = FollowUpStatus.Completed
@@ -50,7 +50,7 @@
     End Sub
 
     Public Shared Function GetMyFollowUps(userName As String) As List(Of UserFollowUp)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim followups = ctx.UserFollowUps.Where(Function(u) u.UserName = userName And u.Status = FollowUpStatus.Active).ToList
             Return followups
         End Using
@@ -58,7 +58,7 @@
 
     Public Sub SaveData(saveBy As String)
 
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             If ctx.UserFollowUps.Any(Function(t) t.BBLE = BBLE And t.Type = Type And t.UserName = UserName And t.Status = FollowUpStatus.Active) Then
                 ctx.Entry(Me).State = Entity.EntityState.Modified
             Else

@@ -1,6 +1,6 @@
 ﻿Partial Public Class TitleJudgementSearch
     Public Sub Save()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim pbi As TitleJudgementSearch
             If CaseId = 0 Then
                 pbi = context.TitleJudgementSearches.SingleOrDefault(Function(obj) obj.BBLE = BBLE)
@@ -24,13 +24,13 @@
     End Sub
 
     Public Shared Function GetInstance(caseId As Integer) As TitleJudgementSearch
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Return context.TitleJudgementSearches.Where(Function(obj) obj.CaseId = caseId).SingleOrDefault
         End Using
     End Function
 
     Public Shared Function GetInstaceByBBLE(bble As String) As TitleJudgementSearch
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.TitleJudgementSearches.Where(Function(obj) obj.BBLE = bble).SingleOrDefault
         End Using
     End Function

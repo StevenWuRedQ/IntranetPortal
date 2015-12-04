@@ -967,7 +967,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IntranetPortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="ShortSaleEntities" annotation:LazyLoadingEnabled="true" >
+        <EntityContainer Name="PortalEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="CleareneceNotes" EntityType="IntranetPortalModel.CleareneceNote" />
           <EntitySet Name="PartyContacts" EntityType="IntranetPortalModel.PartyContact" />
           <EntitySet Name="PropertyFloors" EntityType="IntranetPortalModel.PropertyFloor" />
@@ -1886,7 +1886,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="IntranetPortalModelStoreContainer" CdmEntityContainer="ShortSaleEntities" >
+        <EntityContainerMapping StorageEntityContainer="IntranetPortalModelStoreContainer" CdmEntityContainer="PortalEntities" >
           <EntitySetMapping Name="CleareneceNotes">
             <EntityTypeMapping TypeName="IntranetPortalModel.CleareneceNote">
               <MappingFragment StoreEntitySet="CleareneceNotes">

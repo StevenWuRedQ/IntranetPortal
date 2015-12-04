@@ -1,13 +1,13 @@
 ﻿Partial Public Class ShortSaleOffer
 
     Public Shared Function GetOffers(bble As String) As List(Of ShortSaleOffer)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.ShortSaleOffers.Where(Function(so) so.BBLE = bble).ToList
         End Using
     End Function
 
     Public Sub Save(saveBy As String)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             'context.ShortSaleCases.Attach(Me)
             If OfferId = 0 Then
                 Me.CreateDate = DateTime.Now

@@ -226,8 +226,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="ADOEntity\ShortSale.Designer.vb">
-      <DependentUpon>ShortSale.edmx</DependentUpon>
+    <Compile Include="ADOEntity\PortalEntities.Designer.vb">
+      <DependentUpon>PortalEntities.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -317,9 +317,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <EntityDeploy Include="ADOEntity\ShortSale.edmx">
+    <EntityDeploy Include="ADOEntity\PortalEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ShortSale.Designer.vb</LastGenOutput>
+      <LastGenOutput>PortalEntities.Designer.vb</LastGenOutput>
     </EntityDeploy>
     <None Include="packages.config" />
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.AB_Report_Out.datasource">
@@ -464,15 +464,15 @@
     </None>
     <None Include="ADOEntity\ShortSale.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ShortSale.edmx</DependentUpon>
+      <DependentUpon>PortalEntities.edmx</DependentUpon>
       <LastGenOutput>ShortSale.Context.vb</LastGenOutput>
     </None>
-    <None Include="ADOEntity\ShortSale.edmx.diagram">
-      <DependentUpon>ShortSale.edmx</DependentUpon>
+    <None Include="ADOEntity\PortalEntities.edmx.diagram">
+      <DependentUpon>PortalEntities.edmx</DependentUpon>
     </None>
     <None Include="ADOEntity\ShortSale.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ShortSale.edmx</DependentUpon>
+      <DependentUpon>PortalEntities.edmx</DependentUpon>
       <LastGenOutput>ShortSale.vb</LastGenOutput>
     </None>
     <None Include="ShortSale\packages.config" />

@@ -51,7 +51,7 @@ Partial Public Class LegalCase
         'Refresh data report fields
         RefreshReportFields()
 
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             If Not ctx.LegalCases.Any(Function(l) l.BBLE = BBLE) Then
                 Me.CreateDate = DateTime.Now
                 Me.CreateBy = saveBy
@@ -101,29 +101,29 @@ Partial Public Class LegalCase
             End If
             Dim data = jsonCase.Item("SaleDate")
 
-                If String.IsNullOrEmpty(data) Then
-                    Me.SaleDate = Nothing
-                Else
-                    Dim saleData As DateTime
-                    If data IsNot Nothing AndAlso DateTime.TryParse(data.ToString, saleData) Then
-                        If saleData > DateTime.MinValue Then
-                            Me.SaleDate = saleData
-                        Else
-                            Me.SaleDate = Nothing
-                        End If
+            If String.IsNullOrEmpty(data) Then
+                Me.SaleDate = Nothing
+            Else
+                Dim saleData As DateTime
+                If data IsNot Nothing AndAlso DateTime.TryParse(data.ToString, saleData) Then
+                    If saleData > DateTime.MinValue Then
+                        Me.SaleDate = saleData
+                    Else
+                        Me.SaleDate = Nothing
                     End If
                 End If
             End If
+        End If
     End Sub
 
     Public Shared Function GetCase(bble As String) As LegalCase
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.LegalCases.Find(bble)
         End Using
     End Function
 
     Public Shared Function GetLegalCaseByFcIndex(indexNum As String) As LegalCase
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.LegalCases.Where(Function(c) c.FCIndexNum = indexNum).FirstOrDefault
         End Using
     End Function
@@ -139,19 +139,19 @@ Partial Public Class LegalCase
     End Function
 
     Public Shared Function GetCaseList(status As LegalCaseStatus) As List(Of LegalCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.LegalCases.Where(Function(lc) lc.Status = status).ToList
         End Using
     End Function
 
     Public Shared Function GetAllCases() As List(Of LegalCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.LegalCases.ToList
         End Using
     End Function
 
     Public Shared Function GetFollowUpCases() As List(Of LegalCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.LegalCases.Where(Function(lc) lc.FollowUp.HasValue).OrderByDescending(Function(lc) lc.FollowUp).ToList
         End Using
     End Function
@@ -161,7 +161,7 @@ Partial Public Class LegalCase
     End Function
 
     Public Shared Function GetLightCaseList(status1 As LegalCaseStatus) As List(Of LegalCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim result = From lCase In ctx.LegalCases.Where(Function(lc) lc.Status = status1)
                          Select lCase.BBLE, lCase.CaseName, lCase.ResearchBy, lCase.Attorney, lCase.Status, lCase.LegalStatus, lCase.FollowUp, lCase.SaleDate, lCase.SecondaryTypes, lCase.UpdateDate, lCase.UpdateBy, lCase.CreateBy, lCase.CreateDate
 
@@ -186,7 +186,7 @@ Partial Public Class LegalCase
     End Function
 
     Public Shared Function GetLightCaseList(status1 As LegalCaseStatus, userName As String) As List(Of LegalCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim result = From lCase In ctx.LegalCases.Where(Function(lc) lc.Status = status1 AndAlso (lc.ResearchBy = userName Or lc.Attorney = userName))
                          Select lCase.BBLE, lCase.CaseName, lCase.ResearchBy, lCase.Attorney, lCase.Status, lCase.LegalStatus, lCase.FollowUp, lCase.SaleDate, lCase.SecondaryTypes, lCase.UpdateDate, lCase.UpdateBy, lCase.CreateBy, lCase.CreateDate
 
@@ -213,7 +213,7 @@ Partial Public Class LegalCase
     End Function
 
     Public Shared Function GetCaseList(status1 As LegalCaseStatus, userName As String) As List(Of LegalCase)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.LegalCases.Where(Function(lc) lc.Status = status1 AndAlso (lc.ResearchBy = userName Or lc.Attorney = userName)).ToList
         End Using
     End Function

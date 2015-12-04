@@ -4,7 +4,7 @@ Public Class PropertyFloor
     Public Property DataStatus As ModelStatus
 
     Public Sub Save()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             If Not context.PropertyFloors.Any(Function(pf) pf.BBLE = BBLE And pf.FloorId = FloorId) Then
                 If DataStatus = ModelStatus.Deleted Then
                     Return
@@ -54,20 +54,20 @@ Public Class PropertyFloor
     End Sub
 
     Public Shared Function PropertyFloors(bble As String) As PropertyFloor()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Return context.PropertyFloors.Where(Function(fl) fl.BBLE = bble).ToArray
         End Using
     End Function
 
     Public Shared Function Instance(bble As String, floorId As Integer) As PropertyFloor
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Return context.PropertyFloors.Find(bble, floorId)
 
         End Using
     End Function
 
     Public Shared Function SavePropertyFloors(bble As String, floors As PropertyFloor()) As PropertyFloor()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim i = 1
             For Each floor In floors
                 If String.IsNullOrEmpty(floor.BBLE) Then
@@ -94,7 +94,7 @@ Public Class PropertyFloor
     End Function
 
     Public Shared Sub Delete(bble As String, floorId As Integer)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim obj = context.PropertyFloors.Find(bble, floorId)
 
             If obj IsNot Nothing Then

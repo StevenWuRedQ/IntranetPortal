@@ -1,18 +1,18 @@
 ﻿Public Class PropertyOccupant
     Public Shared Function GetOccupantsByCase(caseId As Integer) As List(Of PropertyOccupant)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Return context.PropertyOccupants.Where(Function(pc) pc.CaseId = caseId).ToList
         End Using
     End Function
 
     Public Shared Function Instance(occupantId As Integer) As PropertyOccupant
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Return context.PropertyOccupants.Find(occupantId)
         End Using
     End Function
 
     Public Shared Function GetOccupantByBBLE(bble As String, floorId As Integer) As PropertyOccupant()
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.PropertyOccupants.Where(Function(pc) pc.BBLE = bble AndAlso pc.FloorId = floorId).ToArray
         End Using
     End Function
@@ -20,7 +20,7 @@
     Public Property DataStatus As ModelStatus
 
     Public Sub Save()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
 
             If OccupantId = 0 Then
                 CreateDate = DateTime.Now

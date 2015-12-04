@@ -4,7 +4,7 @@
         Get
             If (_subGroups Is Nothing) Then
 
-                Using ctx As New ShortSaleEntities
+                Using ctx As New PortalEntities
                     _subGroups = ctx.GroupTypes.Where(Function(l) l.ParentId = Id).ToList()
                 End Using
             End If
@@ -23,7 +23,7 @@
                 If (HasSubType()) Then
                     allGroup.AddRange(SubGroups.Select(Function(l) l.Id).ToList())
                 End If
-                Using ctx As New ShortSaleEntities
+                Using ctx As New PortalEntities
                     If (appId = 0) Then
                         _contacts = ctx.PartyContacts.Where(Function(c) allGroup.Contains(c.GroupId) AndAlso (c.Disable Is Nothing Or c.Disable = False)).ToList()
                     Else
@@ -39,7 +39,7 @@
         Return SubGroups IsNot Nothing AndAlso SubGroups.Count > 0
     End Function
     Public Shared Function AddGroups(gid As Integer, groupName As String, addUser As String) As GroupType
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim g = New GroupType
             If (gid <> 0) Then
                 g.ParentId = gid
@@ -55,7 +55,7 @@
     End Function
 
     Public Shared Function GetGroup(aId As Integer) As GroupType
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.GroupTypes.Where(Function(g) g.Id = aId).FirstOrDefault
         End Using
 
@@ -71,7 +71,7 @@
 
 
     Public Shared Function GetAllGroupType(isAll As Boolean) As List(Of GroupType)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             If isAll Then
                 Return ctx.GroupTypes.ToList()
             End If

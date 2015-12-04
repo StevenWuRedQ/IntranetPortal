@@ -33,7 +33,7 @@ Partial Public Class PropertyOwner
     End Property
 
     'Public Function GetOwner(bble As String, firstName As String, lastName As String)
-    '    Using ctx As New ShortSaleEntities
+    '    Using ctx As New PortalEntities
     '        Dim owner = ctx.PropertyOwners.Where(Function(po) po.BBLE = bble And po.FirstName = firstName And po.LastName = lastName).SingleOrDefault
 
     '        If owner Is Nothing Then
@@ -46,13 +46,13 @@ Partial Public Class PropertyOwner
 
     Public Shared Function Instance(ownerId As Integer) As PropertyOwner
 
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.PropertyOwners.Find(ownerId)
         End Using
     End Function
 
     Public Sub Save()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
 
             If OwnerId = 0 Then
                 CreateDate = DateTime.Now

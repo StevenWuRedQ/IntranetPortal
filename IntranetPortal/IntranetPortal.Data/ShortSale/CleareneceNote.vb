@@ -1,6 +1,6 @@
 ﻿Public Class CleareneceNote
     Public Sub Save()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim obj = context.CleareneceNotes.Find(NoteId)
 
             If obj Is Nothing Then

@@ -20,7 +20,7 @@
     End Property
 
     Public Shared Function GetBuyerTitle(BBLE As String) As PropertyTitle
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim title = (From t In ctx.PropertyTitles
                          Join s In ctx.ShortSaleCases On s.CaseId Equals t.CaseId
                          Where s.BBLE = BBLE And t.Type = 1
@@ -31,7 +31,7 @@
 
     Public Shared Function UpdateBuyerTitle(title As PropertyTitle, userName As String) As Boolean
         If title.CaseId > 0 Then
-            Using ctx As New ShortSaleEntities
+            Using ctx As New PortalEntities
                 Dim saved = ctx.PropertyTitles.Where(Function(t) t.CaseId = title.CaseId And t.Type = 1).FirstOrDefault
                 Dim sscase = ctx.ShortSaleCases.Where(Function(t) t.CaseId = title.CaseId).FirstOrDefault
 
@@ -61,7 +61,7 @@
     End Function
 
     Public Shared Function GetTitle(caseId As Integer, type As TitleType) As PropertyTitle
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim title = context.PropertyTitles.Where(Function(pt) pt.CaseId = caseId And pt.Type = type).FirstOrDefault
             If title Is Nothing Then
                 title = New PropertyTitle
@@ -72,7 +72,7 @@
     End Function
 
     Public Sub Save()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             'context.ShortSaleCases.Attach(Me)
             If TitleId = 0 AndAlso Not context.PropertyTitles.Any(Function(t) t.CaseId = CaseId AndAlso t.Type = Type) Then
                 CreateDate = DateTime.Now

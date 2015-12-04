@@ -17,7 +17,7 @@ Partial Public Class PartyContact
         Get
             If _corps Is Nothing Then
 
-                'Using ctx As New ShortSaleEntities
+                'Using ctx As New PortalEntities
                 '    Dim mCorps = ctx.PartyContacts.Where(Function(p) p.Name = Name AndAlso p.CorpName IsNot Nothing).Select(Function(p) p.CorpName).ToList
                 '    If (mCorps IsNot Nothing AndAlso mCorps.Count > 1) Then
                 '        _corps = mCorps
@@ -31,13 +31,13 @@ Partial Public Class PartyContact
 
     Public Shared Function getAllEmail(appId As Integer) As List(Of String)
 
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Return context.PartyContacts.Where(Function(e) e.AppId = appId).Select(Function(e) e.Email).Where(Function(e) e.IndexOf("@") > 0).ToList
         End Using
     End Function
 
     Public Shared Function getAllContact(appId As Integer) As List(Of PartyContact)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim result = context.PartyContacts.Where(Function(pc) pc.AppId = appId AndAlso pc.Type <> ContactType.Employee AndAlso (Not String.IsNullOrEmpty(pc.Name)) AndAlso (pc.Disable Is Nothing Or Not pc.Disable)).ToList
             result.AddRange(GetContactByType(ContactType.Employee, appId))
             Dim gp = GroupType.GroupGetBankList
@@ -52,7 +52,7 @@ Partial Public Class PartyContact
             Return Nothing
         End If
         query = query.ToUpper()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim result = context.PartyContacts.Where(Function(pc) (pc.Name.ToUpper().Contains(query) Or pc.OfficeNO.ToUpper().Contains(query) Or pc.Cell.ToUpper().Contains(query) Or pc.CorpName.ToUpper().Contains(query)) AndAlso (pc.Disable Is Nothing Or Not pc.Disable) AndAlso pc.AppId = appId).ToList()
             Return result
         End Using
@@ -61,7 +61,7 @@ Partial Public Class PartyContact
 
 
     Public Shared Function GetContactByType(type As ContactType, appId As Integer) As List(Of PartyContact)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             If type = ContactType.Employee Then
                 Dim result = (From emp In ctx.Employees.Where(Function(em) em.Active = True).ToList
                               Group Join pc In ctx.PartyContacts.Where(Function(pc) pc.Type = ContactType.Employee).ToList On pc.Name Equals emp.Name
@@ -99,7 +99,7 @@ Partial Public Class PartyContact
     End Sub
 
     Public Sub Save()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
 
             If ContactId = 0 Then
                 CreateDate = DateTime.Now
@@ -123,23 +123,23 @@ Partial Public Class PartyContact
     End Function
 
     Public Shared Function GetContact(contactId As Integer) As PartyContact
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Return context.PartyContacts.Find(contactId)
         End Using
     End Function
     Public Shared Function GetContactListByName(name As String) As List(Of PartyContact)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.PartyContacts.Where(Function(p) p.Name = name).ToList
         End Using
     End Function
     Public Shared Function GetContactByName(name As String) As PartyContact
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.PartyContacts.Where(Function(pc) pc.Name = name).FirstOrDefault
         End Using
     End Function
 
     Public Shared Function GetContactByName(name As String, corpName As String, phone As String, fax As String, email As String) As PartyContact
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim contact = ctx.PartyContacts.Where(Function(pc) pc.Name = name).FirstOrDefault
             If contact Is Nothing Then
                 contact = New PartyContact
@@ -157,7 +157,7 @@ Partial Public Class PartyContact
     End Function
 
     Public Shared Sub DeleteContact(contactId As Integer)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim obj = context.PartyContacts.Find(contactId)
 
             If obj IsNot Nothing Then
@@ -168,7 +168,7 @@ Partial Public Class PartyContact
     End Sub
 
     Public Shared Function GetTitleCompanies(type As String) As List(Of PartyContact)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             If String.IsNullOrEmpty(type) Then
                 Return context.PartyContacts.ToList
             Else

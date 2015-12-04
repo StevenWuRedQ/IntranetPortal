@@ -1,12 +1,12 @@
 ﻿Partial Public Class ShortSaleCaseComment
     Public Shared Function GetCaseComments(caseId As Integer) As List(Of ShortSaleCaseComment)
-        Using Context As New ShortSaleEntities
+        Using Context As New PortalEntities
             Return Context.ShortSaleCaseComments.Where(Function(comm) comm.CaseId = caseId).ToList
         End Using
     End Function
 
     Public Sub Save()
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim obj = context.ShortSaleCaseComments.Find(CommentId)
 
             If obj Is Nothing Then
@@ -25,7 +25,7 @@
     End Sub
 
     Public Shared Sub DeleteComment(commentId As Integer)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim obj = context.ShortSaleCaseComments.Find(commentId)
 
             If obj IsNot Nothing Then

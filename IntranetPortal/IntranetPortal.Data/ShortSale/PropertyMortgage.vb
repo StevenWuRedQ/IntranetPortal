@@ -125,7 +125,7 @@ Partial Public Class PropertyMortgage
     End Sub
 
     Private Shared Function LoadStatusData() As List(Of MortgageStatusData)
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Return ctx.MortgageStatusDatas.Where(Function(a) a.Category IsNot Nothing).ToList
         End Using
     End Function
@@ -134,7 +134,7 @@ Partial Public Class PropertyMortgage
     Public Property DataStatus As ModelStatus
 
     Public Shared Function GetMortgage(caseId As Integer, loanNum As String) As PropertyMortgage
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim mort = ctx.PropertyMortgages.Where(Function(mt) mt.CaseId = caseId And mt.Loan = loanNum).FirstOrDefault
 
             If mort Is Nothing Then
@@ -146,7 +146,7 @@ Partial Public Class PropertyMortgage
     End Function
 
     Public Shared Function Instance(mortId As Integer) As PropertyMortgage
-        Using ctx As New ShortSaleEntities
+        Using ctx As New PortalEntities
             Dim mort = ctx.PropertyMortgages.Find(mortId)
             Return mort
         End Using
@@ -154,7 +154,7 @@ Partial Public Class PropertyMortgage
 
 
     Public Sub Save(updateby As String)
-        Using context As New ShortSaleEntities
+        Using context As New PortalEntities
             Dim pbi = context.PropertyMortgages.Find(MortgageId)
 
             If LenderId.HasValue Then
