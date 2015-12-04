@@ -217,7 +217,7 @@ Public Class LeadsManagement
     End Sub
 
     Protected Sub updateLeadsType_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
-        If Not String.IsNullOrEmpty(e.Parameter) Then
+        If Not String.IsNullOrEmpty(e.Parameter) AndAlso e.Parameter.Split("|").Length > 1 Then
             Dim bble = e.Parameter.Split("|")(0)
             Dim type = e.Parameter.Split("|")(1)
 

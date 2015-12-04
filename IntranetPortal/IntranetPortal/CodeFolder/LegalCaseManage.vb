@@ -147,6 +147,10 @@ Public Class LegalCaseManage
     Public Shared Sub NotifyLegalWhenClosedinSS(bble As String)
         Dim lCase = Legal.LegalCase.GetCase(bble)
 
+        If lCase Is Nothing Then
+            Return
+        End If
+
         Dim NotifyUpdate = Sub()
                                Try
                                    Dim users = Roles.GetUsersInRole("Legal-Manager")

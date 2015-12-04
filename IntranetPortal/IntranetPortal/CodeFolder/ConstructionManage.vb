@@ -108,16 +108,20 @@ Public Class ConstructionManage
 
     Public Shared Sub AssignCase(bble As String, userName As String, assignBy As String, status As ConstructionCase.CaseStatus)
         Dim cCase = ConstructionCase.GetCase(bble)
-        cCase.Owner = userName
+        If cCase IsNot Nothing Then
+            cCase.Owner = userName
 
-        If status <> ConstructionCase.CaseStatus.All Then
-            cCase.Status = status
+            If status <> ConstructionCase.CaseStatus.All Then
+                cCase.Status = status
+            End If
+
+            cCase.Save(assignBy)
+
+            Dim comments = String.Format("The case is assign to {0}.", userName)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Construction.ToString, LeadsActivityLog.EnumActionType.Comments)
+        Else
+            Throw New CallbackException("Can't find the case. Please refresh page and try again.")
         End If
-
-        cCase.Save(assignBy)
-
-        Dim comments = String.Format("The case is assign to {0}.", userName)
-        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Construction.ToString, LeadsActivityLog.EnumActionType.Comments)
     End Sub
 
     Public Shared Function IsManager(userName As String) As String

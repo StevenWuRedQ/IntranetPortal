@@ -162,7 +162,7 @@ Public Class ShortSaleManage
                 'NewCaseWithWF(bble, createBy)
             End If
         Else
-            Throw New Exception("This address alread in system. please check.")
+            Throw New CallbackException("This address alread in system. please check.")
         End If
     End Sub
 
