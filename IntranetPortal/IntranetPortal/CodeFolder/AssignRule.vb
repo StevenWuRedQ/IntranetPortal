@@ -175,10 +175,20 @@ Partial Public Class AssignRule
                                 End If
                             Else
                                 If assignableEmployees.Contains(newlead.EmployeeName) Then
+                                    With newlead
+                                        .LeadsName = li.LeadsName
+                                        .Neighborhood = li.NeighName
+                                        .EmployeeID = emp.EmployeeID
+                                        .EmployeeName = emp.Name
+                                        .Status = LeadStatus.NewLead
+                                        .AssignDate = DateTime.Now
+                                        .AssignBy = key
+                                    End With
 
-
+                                    LeadsStatusLog.AddNewEntity(prop.BBLE, LeadsStatusLog.LogType.NewLeads, emp.Name, key, Nothing, Context)
+                                    rowCount += 1
+                                    bbles.Add(prop.BBLE)
                                 End If
-
                             End If
                         End If
                     End If
