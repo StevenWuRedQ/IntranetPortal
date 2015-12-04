@@ -1002,7 +1002,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <EntitySet Name="LeadInfoDocumentSearches" EntityType="IntranetPortalModel.LeadInfoDocumentSearch" />
           <EntitySet Name="CheckingComplains" EntityType="IntranetPortalModel.CheckingComplain" />
           <EntitySet Name="ConstructionBudgets" EntityType="IntranetPortalModel.ConstructionBudget" />
-          <EntitySet Name="ConstructionCases" EntityType="IntranetPortalModel.ConstructionCas" />
+          <EntitySet Name="ConstructionCases" EntityType="IntranetPortalModel.ConstructionCase" />
           <EntitySet Name="ConstructionInitialForms" EntityType="IntranetPortalModel.ConstructionInitialForm" />
           <EntitySet Name="ConstructionSpotChecks" EntityType="IntranetPortalModel.ConstructionSpotCheck" />
           <EntitySet Name="ConstructionViolations" EntityType="IntranetPortalModel.ConstructionViolation" />
@@ -1780,7 +1780,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="ConstructionCas">
+        <EntityType Name="ConstructionCase">
           <Key>
             <PropertyRef Name="BBLE" />
           </Key>
@@ -2691,7 +2691,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ConstructionCases">
-            <EntityTypeMapping TypeName="IntranetPortalModel.ConstructionCas">
+            <EntityTypeMapping TypeName="IntranetPortalModel.ConstructionCase">
               <MappingFragment StoreEntitySet="ConstructionCases">
                 <ScalarProperty Name="IntakeCompleted" ColumnName="IntakeCompleted" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />

@@ -56,7 +56,7 @@ Partial Public Class ShortSaleEntities
     Public Overridable Property LeadInfoDocumentSearches() As DbSet(Of LeadInfoDocumentSearch)
     Public Overridable Property CheckingComplains() As DbSet(Of CheckingComplain)
     Public Overridable Property ConstructionBudgets() As DbSet(Of ConstructionBudget)
-    Public Overridable Property ConstructionCases() As DbSet(Of ConstructionCas)
+    Public Overridable Property ConstructionCases() As DbSet(Of ConstructionCase)
     Public Overridable Property ConstructionInitialForms() As DbSet(Of ConstructionInitialForm)
     Public Overridable Property ConstructionSpotChecks() As DbSet(Of ConstructionSpotCheck)
     Public Overridable Property ConstructionViolations() As DbSet(Of ConstructionViolation)

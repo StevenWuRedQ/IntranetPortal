@@ -173,7 +173,7 @@
     <Compile Include="ShortSale\ADOEntity\ConstructionBudget.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShortSale\ADOEntity\ConstructionCas.vb">
+    <Compile Include="ShortSale\ADOEntity\ConstructionCase.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\ADOEntity\ConstructionInitialForm.vb">

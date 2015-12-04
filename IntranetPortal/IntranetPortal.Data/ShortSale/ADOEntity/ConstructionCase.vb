@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class ConstructionCas
+Partial Public Class ConstructionCase
     Public Property BBLE As String
     Public Property CaseName As String
     Public Property CSCase As String
