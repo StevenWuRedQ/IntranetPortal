@@ -5,8 +5,6 @@
 <%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 
-
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">

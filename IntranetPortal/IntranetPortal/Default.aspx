@@ -11,7 +11,6 @@
             /*height: 600px;*/
         }
     </style>
-
     <uc1:NavMenu runat="server" ID="NavMenu" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
