@@ -85,7 +85,12 @@ Partial Public Class AssignRule
                 End If
             Else
                 If Description = "LeadsBankRule" Then
-                    rowCount = AssginLeadsBank()
+                    Dim bbles = AssginLeadsBank()
+                    rowCount = bbles.Count
+
+                    If rowCount > 0 Then
+                        Core.DataLoopRule.AddRules(bbles.ToArray, Core.DataLoopRule.DataLoopType.All, "AssignRule")
+                    End If
                 End If
             End If
 
@@ -101,15 +106,16 @@ Partial Public Class AssignRule
                 ctx.SaveChanges()
 
                 'Add to data loop
-                Core.DataLoopRule.AddRules(LeadsInfo.GetNewLeads(), Core.DataLoopRule.DataLoopType.All, "AssignRule")
+                'Core.DataLoopRule.AddRules(LeadsInfo.GetNewLeads(), Core.DataLoopRule.DataLoopType.All, "AssignRule")
             End If
         End Using
     End Sub
 
-    Private Function AssginLeadsBank() As Integer
+    Private Function AssginLeadsBank() As List(Of String)
         Dim key = "BusinessRules"
         Using Context As New Entities
             Dim rowCount = 0
+            Dim bbles As New List(Of String)
             Try
                 For Each prop In Context.Agent_Properties.Where(Function(ap) ap.BBLE IsNot Nothing And (ap.Active = True Or Not ap.Active.HasValue) And ap.Agent_Name = EmployeeName).Take(Count)
                     Dim li = Context.LeadsInfoes.Where(Function(l) l.BBLE = prop.BBLE).SingleOrDefault
@@ -151,6 +157,7 @@ Partial Public Class AssignRule
                                     Context.Leads.Add(newlead)
                                     LeadsStatusLog.AddNewEntity(prop.BBLE, LeadsStatusLog.LogType.NewLeads, emp.Name, key, Nothing, Context)
                                     rowCount += 1
+                                    bbles.Add(prop.BBLE)
                                 End If
                             End If
                         End If
@@ -164,7 +171,7 @@ Partial Public Class AssignRule
                 Throw ex
             End Try
 
-            Return rowCount
+            Return bbles
         End Using
     End Function
 
