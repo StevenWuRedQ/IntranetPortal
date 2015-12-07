@@ -7,7 +7,7 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Public Class ShortSaleUnitTest
 
     <TestMethod()> Public Sub ReassignOwnerTest()
-        Dim bble = "1004490003"
+        Dim bble = "4089170024"
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
         Dim oldOwner = ssCase.Owner
         Dim owner = "Steven Wu"
@@ -22,7 +22,7 @@ Public Class ShortSaleUnitTest
     End Sub
 
     <TestMethod()> Public Sub SaveFollowUpTest()
-        Dim bble = "1004490003"
+        Dim bble = "4089170024"
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
         Dim fpDate = ssCase.CallbackDate
         Dim newDate = DateTime.Today.AddDays(1)
@@ -58,7 +58,7 @@ Public Class ShortSaleUnitTest
     End Sub
 
     <TestMethod()> Public Sub UpdateCheckListTest()
-        Dim bble = "2039970011"
+        Dim bble = "4089170024"
         Dim checkList = <string>
                             {
                               "DateIssued": "08/27/2015",

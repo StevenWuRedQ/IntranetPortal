@@ -9,12 +9,12 @@ Imports Newtonsoft.Json
 
 <TestClass()> Public Class CheckingComplaintsTest
 
-    <TestMethod()>
-    Public Sub NotifyEmailMethod1()
-        'test branch 2
-        Dim svr = New IntranetPortal.PortalDataService
-        svr.ComplaintsUpdatedNotify(IntranetPortal.Data.CheckingComplain.Instance("1000163028"))
-    End Sub
+    '<TestMethod()>
+    'Public Sub NotifyEmailMethod1()
+    '    'test branch 2
+    '    Dim svr = New IntranetPortal.PortalDataService
+    '    svr.ComplaintsUpdatedNotify(IntranetPortal.Data.CheckingComplain.Instance("1000163028"))
+    'End Sub
 
     <TestMethod()>
     Public Sub ComplaintsUpdateTesting()
@@ -156,18 +156,18 @@ Imports Newtonsoft.Json
 
     End Sub
 
-    <TestMethod()>
-    Public Sub Writetest()
-        Dim stream = HttpWebRequest.Create("http://www.jerseysnflnba.com/image/data/nfl.jpg").GetResponse.GetResponseStream
-        stream.CopyTo(File.Open("D:\test.jpg", FileMode.OpenOrCreate, FileAccess.Write))
-        ' no exception throw
-        Assert.IsTrue(True)
-    End Sub
+    '<TestMethod()>
+    'Public Sub Writetest()
+    '    Dim stream = HttpWebRequest.Create("http://www.jerseysnflnba.com/image/data/nfl.jpg").GetResponse.GetResponseStream
+    '    stream.CopyTo(File.Open("D:\test.jpg", FileMode.OpenOrCreate, FileAccess.Write))
+    '    ' no exception throw
+    '    Assert.IsTrue(True)
+    'End Sub
 
-    <TestMethod()>
-    Public Sub WriteStreetName()
+    '<TestMethod()>
+    'Public Sub WriteStreetName()
 
-    End Sub
+    'End Sub
 
     <TestMethod()>
     Public Sub testJson()
@@ -190,16 +190,13 @@ Imports Newtonsoft.Json
         Catch ex As Exception
 
         End Try
-
-
-
-
     End Sub
 
     <TestMethod>
     Public Sub TestSimlerStr()
         Assert.IsTrue(Utility.SimilerString("WU ,STEVEN Jr       ", "Steven Zhange      "))
     End Sub
+
     <TestMethod>
     Public Sub TestJosnWriter()
         Dim temp As JToken

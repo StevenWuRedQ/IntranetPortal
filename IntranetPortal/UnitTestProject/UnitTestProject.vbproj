@@ -109,6 +109,9 @@
     <Compile Include="EmailParseTest.vb" />
     <Compile Include="EmployeeTest.vb" />
     <Compile Include="LeadTest.vb" />
+    <Compile Include="PortalDBUnitTest.vb">
+      <SubType>Designer</SubType>
+    </Compile>
     <Compile Include="QueryBuilderTest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -128,6 +131,7 @@
     <Compile Include="ShortSaleUnitTest.vb" />
     <Compile Include="CheckingComplaintsTest.vb" />
     <Compile Include="ConstructionTest.vb" />
+    <Compile Include="SqlDatabaseSetup.vb" />
     <Compile Include="WebGrabberTest.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +140,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PortalDBUnitTest.resx">
+      <DependentUpon>PortalDBUnitTest.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +196,11 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' == ''" />
+  <PropertyGroup>
+    <SsdtUnitTestVersion>2.0</SsdtUnitTestVersion>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
