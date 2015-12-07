@@ -14,76 +14,19 @@
 <%@ Register Src="~/LegalUI/ManagePreViewControl.ascx" TagPrefix="uc1" TagName="ManagePreViewControl" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
-
-    <link href="/bower_components/webui-popover/dist/jquery.webui-popover.min.css" rel="stylesheet" />
-    <script src="/bower_components/webui-popover/dist/jquery.webui-popover.min.js"></script>
     <style type="text/css">
-        .chipsdemoContactChips md-content.autocomplete {
-            min-height: 250px;
-        }
-
-        .chipsdemoContactChips .md-item-text.compact {
-            padding-top: 8px;
-            padding-bottom: 8px;
-        }
-
         #ctl00_MainContentPH_ASPxSplitter1_1, #ctl00_MainContentPH_ASPxSplitter1_2 {
             visibility: hidden;
-        }
-
-        .chipsdemoContactChips .contact-item {
-            box-sizing: border-box;
-        }
-
-            .chipsdemoContactChips .contact-item.selected {
-                opacity: 0.5;
-            }
-
-                .chipsdemoContactChips .contact-item.selected h3 {
-                    opacity: 0.5;
-                }
-
-            .chipsdemoContactChips .contact-item .md-list-item-text {
-                padding: 14px 0;
-            }
-
-                .chipsdemoContactChips .contact-item .md-list-item-text h3 {
-                    margin: 0 !important;
-                    padding: 0;
-                    line-height: 1.2em !important;
-                }
-
-                .chipsdemoContactChips .contact-item .md-list-item-text h3,
-                .chipsdemoContactChips .contact-item .md-list-item-text p {
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
-                }
-
-        @media (min-width: 900px) {
-            .chipsdemoContactChips .contact-item {
-                float: left;
-                width: 33%;
-            }
-        }
-
-        .chipsdemoContactChips md-contact-chips {
-            margin-bottom: 10px;
-        }
-
-        .chipsdemoContactChips .md-chips {
-            padding: 5px 0 8px;
-        }
-
-        .chipsdemoContactChips .fixedRows {
-            height: 250px;
-            overflow: hidden;
         }
 
         .md-contact-suggestion img {
             margin-top: -35px;
         }
     </style>
+
+    <link href="/bower_components/webui-popover/dist/jquery.webui-popover.min.css" rel="stylesheet" />
+    <script src="/bower_components/webui-popover/dist/jquery.webui-popover.min.js"></script>
+
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
@@ -542,7 +485,6 @@
             </div>
         </div>
         <uc1:SendMail runat="server" ID="SendMail" />
-
         <div class="modal fade" id="NeedAddCommentPopUp">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -662,6 +604,7 @@
         <!-- end follow up function -->
 
         <script type="text/javascript">
+
             LegalCaseBBLE = null;
             function GetDataReadOnly() {
                 return $('#Viewable').val() == 'True'
@@ -677,7 +620,6 @@
             }
 
             function GetLegalData() {
-
                 return angular.element(document.getElementById('LegalCtrl')).scope().LegalCase;
 
             }
@@ -700,35 +642,38 @@
                 ScopeResetCaseDataChange(GetLegalData)
             }
 
+            var AllJudges = <%= GetAllJudge()%>
             var AllContact = <%= GetAllContact()%>
             {}
             var AllRoboSignor = <%= GetAllRoboSingor() %>
             {}
             var taskSN = '<%= Request.QueryString("sn")%>';
 
-            angular.module('PortalApp').controller('LegalCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
+
+            angular.module('PortalApp').controller('LegalCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, ptTime) {
 
                 $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {}, PreQuestions: {} };
                 $scope.ptContactServices = ptContactServices;
                 $scope.ptCom = ptCom;
+                $scope.isPassByDays = ptTime.isPassByDays;
+                $scope.isPassOrEqualByDays = ptTime.isPassOrEqualByDays;
+                $scope.isLessOrEqualByDays = ptTime.isLessOrEqualByDays;
+                $scope.isPassByMonths = ptTime.isPassByMonths;
+                $scope.isPassOrEqualByMonths = ptTime.isPassOrEqualByMonths;
 
 
-                $scope.querySearch = function (query) {
-                    var results = query ?
-                        $scope.allContacts.filter(createFilterFor(query)) : [];
-                    return results;
-                }
-
-                /**
-                 * Create filter function for a query string
-                 */
-                function createFilterFor(query) {
+                var createFilterFor = function (query) {
                     var lowercaseQuery = angular.lowercase(query);
 
                     return function filterFn(contact) {
                         return contact.Name && (contact.Name.toLowerCase().indexOf(lowercaseQuery) !== -1);
                     };
 
+                }
+                $scope.querySearch = function (query) {
+                    var results = query ?
+                        $scope.allContacts.filter(createFilterFor(query)) : [];
+                    return results;
                 }
 
                 $scope.loadContacts = function () {
@@ -741,7 +686,6 @@
                         return c;
                     });
                 }
-
                 $scope.allContacts = $scope.loadContacts();
                 $scope.contacts = [$scope.allContacts[0]];
                 $scope.filterSelected = true;
@@ -750,7 +694,6 @@
                  * Search for contacts.
                  */
                 $scope.SecondaryTypeSource = ["Statute Of Limitations", "Estate", "Miscellaneous", "Deed Reversal", "Partition", "Breach of Contract", "Quiet Title", ""];
-
                 if (typeof LegalShowAll == 'undefined' || LegalShowAll == null) {
                     $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.SecondaryTypeSource;
                 }
@@ -758,52 +701,47 @@
                 $scope.addTest = function () {
                     $scope.TestRepeatData[$scope.TestRepeatData.length] = $scope.TestRepeatData.length;
                 }
+                $scope.LegalCase.ForeclosureInfo.PlaintiffId = 638;
 
 
-                var ForeclosureInfo = $scope.LegalCase.ForeclosureInfo;
-                ForeclosureInfo.PlaintiffId = 638;
-
-
-                $scope.ContactDataSource =
-                    new DevExpress.data.DataSource({
-                        store: new DevExpress.data.CustomStore({
-                            load: function (loadOptions) {
-
-                                if (AllContact) {
-                                    if (loadOptions.searchValue) {
-                                        return AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(loadOptions.searchValue.toLowerCase()) >= 0 } return false });
-                                    }
-                                    return [];
-                                }
-                                var d = $.Deferred();
+                $scope.ContactDataSource = new DevExpress.data.DataSource({
+                    store: new DevExpress.data.CustomStore({
+                        load: function (loadOptions) {
+                            if (AllContact) {
                                 if (loadOptions.searchValue) {
-                                    $.getJSON('/Services/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
-                                        d.resolve(data);
-                                    });
-                                } else {
-
-                                    $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
-                                        d.resolve(data);
-                                        AllContact = data;
-                                    });
+                                    return AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(loadOptions.searchValue.toLowerCase()) >= 0 } return false });
                                 }
+                                return [];
+                            }
+                            var d = $.Deferred();
+                            if (loadOptions.searchValue) {
+                                $.getJSON('/Services/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
+                                    d.resolve(data);
+                                });
+                            } else {
 
-                                return d.promise();
-                            },
-                            byKey: function (key) {
-                                if (AllContact) {
-                                    return AllContact.filter(function (o) { return o.ContactId == key })[0];
-                                }
-                                var d = new $.Deferred();
-                                $.get('/Services/ContactService.svc/GetAllContacts?id=' + key)
-                                    .done(function (result) {
-                                        d.resolve(result);
-                                    });
-                                return d.promise();
-                            },
-                            searchExpr: ["Name"]
-                        })
-                    });
+                                $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
+                                    d.resolve(data);
+                                    AllContact = data;
+                                });
+                            }
+
+                            return d.promise();
+                        },
+                        byKey: function (key) {
+                            if (AllContact) {
+                                return AllContact.filter(function (o) { return o.ContactId == key })[0];
+                            }
+                            var d = new $.Deferred();
+                            $.get('/Services/ContactService.svc/GetAllContacts?id=' + key)
+                                .done(function (result) {
+                                    d.resolve(result);
+                                });
+                            return d.promise();
+                        },
+                        searchExpr: ["Name"]
+                    })
+                });
                 $scope.RoboSingerDataSource = new DevExpress.data.DataSource({
                     store: new DevExpress.data.CustomStore({
                         load: function (loadOptions) {
@@ -823,8 +761,8 @@
                         searchExpr: ["Name"]
                     })
                 });
-                $scope.AllJudges = <%= GetAllJudge()%>
-            $scope.PickedContactId = null;
+                $scope.AllJudges = AllJudges?AllJudges:[];
+                $scope.PickedContactId = null;
 
                 $scope.TestContactId = function (c) {
                     $scope.$eval(c + '=' + '192');
@@ -961,12 +899,10 @@
                 }
                 $scope.LoadLeadsCase = function (BBLE) {
                     ptCom.startLoading();
-                    $("#ctl00_MainContentPH_ASPxSplitter1_1,#ctl00_MainContentPH_ASPxSplitter1_2").css('visibility', 'visible');
                     var data = { bble: BBLE };
 
                     $http.post('LegalUI.aspx/GetCaseData', data).
                         success(function (data, status, headers, config) {
-
                             $scope.LegalCase = $.parseJSON(data.d);
                             $scope.LegalCase.BBLE = BBLE
                             $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
@@ -1238,99 +1174,149 @@
                     var address = ['', '851 Grand Concourse Bronx, NY 10451', '360 Adams St. Brooklyn, NY 11201', '8811 Sutphin Boulevard, Jamaica, NY 11435'];
                     return address[boro - 1];
                 }
-                
-                $scope.HightSummery = function () {
-                    var hSummery = [{ "Name": "CaseStauts", "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)", "Value": "", "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ", "ArrayName": "" },
-                                { "Name": "EveryOneIn", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.WasEstateFormed!=null')", "Value": "false", "Description": "There is an estate.", "ArrayName": "" },
-                                { "Name": "BankruptcyFiled", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.BankruptcyFiled')", "Value": "false", "Description": "Bankruptcy filed", "ArrayName": "" },
 
-                                { "Name": "Efile", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.Efile==true')", "Value": "false", "Description": "Has E-filed", "ArrayName": "" },
-                                { "Name": "EfileN", "CallFunc": "HighlightCompare('LegalCase.ForeclosureInfo.Efile==false')", "Value": "false", "Description": "No E-filed", "ArrayName": "" },
-                                { "Name": "ClientPersonallyServed", "CallFunc": "", "Value": "false", "Description": "Client personally is not served. ", "ArrayName": "AffidavitOfServices" },
-                                { "Name": "NailAndMail", "CallFunc": "", "Value": "true", "Description": "Nail and Mail.", "ArrayName": "AffidavitOfServices" },
-                                { "Name": "BorrowerLiveInAddrAtTimeServ", "CallFunc": "", "Value": "false", "Description": "Borrower didn\'t live in service Address at time of Serv.", "ArrayName": "AffidavitOfServices" },
-                                { "Name": "BorrowerEverLiveHere", "CallFunc": "", "Value": "false", "Description": "Borrower didn\'t ever live in service address.", "ArrayName": "AffidavitOfServices" },
-                                { "Name": "ServerInSererList", "CallFunc": "", "Value": "true", "Description": "process server is in server list.", "ArrayName": "AffidavitOfServices" },
-                                { "Name": "isServerHasNegativeInfo", "CallFunc": "", "Value": "true", "Description": "Web search provide any negative information on process server. ", "ArrayName": "AffidavitOfServices" },
-                                { "Name": "AffidavitServiceFiledIn20Day", "CallFunc": "", "Value": "false", "Description": "Affidavit of service wasn\'t file within 20 days of service.", "ArrayName": "AffidavitOfServices" },
-                                { "Name": "AnswerClientFiledBefore", "CallFunc": "", "Value": "false", "Description": "Client hasn\'t ever filed an answer before.", "ArrayName": "" },
-                                { "Name": "NoteIsPossess", "CallFunc": "", "Value": "false", "Description": "We Don't possess a copy of the note.", "ArrayName": "" },
-                                { "Name": "NoteEndoresed", "CallFunc": "", "Value": "false", "Description": "Note wasn\'t endores.", "ArrayName": "" },
-                                { "Name": "NoteEndorserIsSignors", "CallFunc": "", "Value": "true", "Description": "The endorser is in signors list.", "ArrayName": "" },
-                                { "Name": "HasDocDraftedByDOCXLLC", "CallFunc": "", "Value": "true", "Description": "There are documents drafted by DOCX LLC .", "ArrayName": "Assignments" },
-                                { "Name": "LisPendesRegDate", "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.LisPendesDate, LegalCase.ForeclosureInfo.LisPendesRegDate, 5)", "Value": "", "Description": "Date of registration 5 days after Lis Pendens letter", "ArrayName": "" },
-                                { "Name": "AccelerationLetterMailedDate", "CallFunc": "isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )", "Value": " ", "Description": "Acceleration letter mailed to borrower after 12 months of Default Date. ", "ArrayName": "" },
-                                { "Name": "AccelerationLetterRegDate", "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,LegalCase.ForeclosureInfo.AccelerationLetterRegDate,3 )", "Value": " ", "Description": "Date of registration for Acceleration letter filed  3 days after acceleration letter mailed date", "ArrayName": "" },
+                $scope.hSummery = [
+                                { "Name": "CaseStauts",
+                                    "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)",
+                                    "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ",
+                                    "ArrayName": "" },
+                                { "Name": "EveryOneIn",
+                                    "CallFunc": "LegalCase.ForeclosureInfo.WasEstateFormed != null",
+                                    "Description": "There is an estate.",
+                                    "ArrayName": "" },
+                                { "Name": "BankruptcyFiled",
+                                    "CallFunc": "LegalCase.ForeclosureInfo.BankruptcyFiled == true",
+                                    "Description": "Bankruptcy filed",
+                                    "ArrayName": "" },
+                                { "Name": "Efile",
+                                    "CallFunc": "LegalCase.ForeclosureInfo.Efile == true",
+                                    "Description": "Has E-filed",
+                                    "ArrayName": "" },
+                                { "Name": "EfileN",
+                                    "CallFunc": "LegalCase.ForeclosureInfo.Efile == false",
+                                    "Description": "No E-filed",
+                                    "ArrayName": "" },
+                                { "Name": "ClientPersonallyServed",
+                                    "CallFunc": "false",
+                                    "Description": "Client personally is not served. ",
+                                    "ArrayName": "AffidavitOfServices" },
+                                { "Name": "NailAndMail",
+                                    "CallFunc": "true", 
+                                    "Description": "Nail and Mail.", 
+                                    "ArrayName": "AffidavitOfServices" },
+                                { "Name": "BorrowerLiveInAddrAtTimeServ",
+                                    "CallFunc": "false", 
+                                    "Description": "Borrower didn\'t live in service Address at time of Serv.",
+                                    "ArrayName": "AffidavitOfServices" },
+                                { "Name": "BorrowerEverLiveHere", 
+                                    "CallFunc": "false",
+                                    "Description": "Borrower didn\'t ever live in service address.",
+                                    "ArrayName": "AffidavitOfServices" },
+                                { "Name": "ServerInSererList",
+                                    "CallFunc": "true", 
+                                    "Description": "process server is in server list.",
+                                    "ArrayName": "AffidavitOfServices" },
+                                { "Name": "isServerHasNegativeInfo",
+                                    "CallFunc": "true", 
+                                    "Description": "Web search provide any negative information on process server. ",
+                                    "ArrayName": "AffidavitOfServices" },
+                                { "Name": "AffidavitServiceFiledIn20Day", 
+                                    "CallFunc": "false",
+                                    "Description": "Affidavit of service wasn\'t file within 20 days of service.",
+                                    "ArrayName": "AffidavitOfServices" },
+                                { "Name": "AnswerClientFiledBefore",
+                                    "CallFunc": "LegalCase.ForeclosureInfo.AnswerClientFiledBefore == false", 
+                                    "Description": "Client hasn\'t ever filed an answer before.",
+                                    "ArrayName": "" },
+                                { "Name": "NoteIsPossess", 
+                                    "CallFunc": "LegalCase.ForeclosureInfo.NoteIsPossess == false", 
+                                    "Description": "We Don't possess a copy of the note.",
+                                    "ArrayName": "" },
+                                { "Name": "NoteEndoresed",
+                                    "CallFunc": "LegalCase.ForeclosureInfo.NoteEndoresed == false", 
+                                    "Description": "Note wasn\'t endores.", 
+                                    "ArrayName": "" },
+                                { "Name": "NoteEndorserIsSignors",
+                                    "CallFunc": "LegalCase.ForeclosureInfo.NoteEndorserIsSignors == true",
+                                    "Description": "The endorser is in signors list.",
+                                    "ArrayName": "" },
+                                { "Name": "HasDocDraftedByDOCXLLC",
+                                    "CallFunc": "true", 
+                                    "Description": "There are documents drafted by DOCX LLC .", 
+                                    "ArrayName": "Assignments" },
+                                { "Name": "LisPendesRegDate",
+                                    "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.LisPendesDate, LegalCase.ForeclosureInfo.LisPendesRegDate, 5)",
+                                    "Description": "Date of registration 5 days after Lis Pendens letter",
+                                    "ArrayName": "" },
+                                { "Name": "AccelerationLetterMailedDate",
+                                    "CallFunc": "isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )",
+                                    "Description": "Acceleration letter mailed to borrower after 12 months of Default Date. ",
+                                    "ArrayName": "" },
+                                { "Name": "AccelerationLetterRegDate", 
+                                    "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,LegalCase.ForeclosureInfo.AccelerationLetterRegDate,3 )",
+                                    "Description": "Date of registration for Acceleration letter filed  3 days after acceleration letter mailed date", 
+                                    "ArrayName": "" },
+                                { "Name": "AffirmationFiledDate",
+                                    "CallFunc": "isPassByDays(LegalCase.ForeclosureInfo.JudgementDate,LegalCase.ForeclosureInfo.AffirmationFiledDate,0)", 
+                                    "Description": "Affirmation filed after Judgement. ", 
+                                    "ArrayName": "" },
+                                { "Name": "AffirmationReviewerByCompany",
+                                    "CallFunc": "LegalCase.ForeclosureInfo.AffirmationReviewerByCompany == false", 
+                                    "Description": "The affirmation reviewer wasn\'t employe by the servicing company. ",
+                                    "ArrayName": "" },
+                                { "Name": "MortNoteAssInCert",
+                                    "CallFunc": "LegalCase.ForeclosureInfo.MortNoteAssInCert == false",
+                                    "Description": "In the Certificate of Merit, the Mortgage, Note and Assignment aren\'t included. ", 
+                                    "ArrayName": "" },
+                                { "Name": "MissInCert", 
+                                    "CallFunc": "checkMissInCertValue()",
+                                    "Description": "Mortgage Note or Assignment are missing. ",
+                                    "ArrayName": "" },
+                                { "Name": "CertificateReviewerByCompany",
+                                    "CallFunc": "LegalCase.ForeclosureInfo.CertificateReviewerByCompany == false", 
+                                    "Description": "The certificate  reviewer wasn\'t employe by the servicing company. ",
+                                    "ArrayName": "" },
+                                { "Name": "LegalCase.ItemsRedacted",
+                                    "CallFunc": "LegalCase.ForeclosureInfo.ItemsRedacted == false",
+                                    "Description": "Are items of personal information Redacted.",
+                                    "ArrayName": "" },
+                                { "Name": "RJIDate",
+                                    "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.SAndCFiledDate, LegalCase.ForeclosureInfo.RJIDate, 12)",
+                                    "Description": "RJI filed after 12 months of S&C.",
+                                    "ArrayName": "" },
+                                { "Name": "ConferenceDate",
+                                    "CallFunc": "isLessOrEqualByDays(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.ConferenceDate, 60)",
+                                    "Description": "Conference date scheduled 60 days before RJI", 
+                                    "ArrayName": "" },
+                                { "Name": "OREFDate",
+                                    "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)", 
+                                    "Description": "O/REF filed after 12 months after RJI.",
+                                    "ArrayName": "" },
+                                { "Name": "JudgementDate",
+                                    "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)", 
+                                    "Description": "Judgement submitted 12 months after O/REF. ", 
+                                    "ArrayName": "" }];
 
-                                { "Name": "AffirmationFiledDate", "CallFunc": "isPassByDays(LegalCase.ForeclosureInfo.JudgementDate,LegalCase.ForeclosureInfo.AffirmationFiledDate,0)", "Value": "", "Description": "Affirmation filed after Judgement. ", "ArrayName": "" },
-                                { "Name": "AffirmationReviewerByCompany", "CallFunc": "", "Value": "false", "Description": "The affirmation reviewer wasn\'t employe by the servicing company. ", "ArrayName": "" },
-                                { "Name": "MortNoteAssInCert", "CallFunc": "", "Value": "false", "Description": "In the Certificate of Merit, the Mortgage, Note and Assignment aren\'t included. ", "ArrayName": "" },
-                                { "Name": "MissInCert", "CallFunc": "checkMissInCertValue()", "Value": "", "Description": "Mortgage Note or Assignment are missing. ", "ArrayName": "" },
-                                { "Name": "CertificateReviewerByCompany", "CallFunc": "", "Value": "false", "Description": "The certificate  reviewer wasn\'t employe by the servicing company. ", "ArrayName": "" },
-                                { "Name": "ItemsRedacted", "CallFunc": "", "Value": "false", "Description": "Are items of personal information Redacted.", "ArrayName": "" },
-                                { "Name": "RJIDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.SAndCFiledDate, LegalCase.ForeclosureInfo.RJIDate, 12)", "Value": "", "Description": "RJI filed after 12 months of S&C.", "ArrayName": "" },
-                                { "Name": "ConferenceDate", "CallFunc": "isLessOrEqualByDays(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.ConferenceDate, 60)", "Value": "", "Description": "Conference date scheduled 60 days before RJI", "ArrayName": "" },
-                                { "Name": "OREFDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)", "Value": "", "Description": "O/REF filed after 12 months after RJI.", "ArrayName": "" },
-                                { "Name": "JudgementDate", "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)", "Value": "", "Description": "Judgement submitted 12 months after O/REF. ", "ArrayName": "" }];
-                    var highLight = hSummery
-                    //hSummery.splice();
-
-                    for (i = 0; i < highLight.length; i++) {
-                        var h = highLight[i];
-                        $scope.ExceptVisable(h, $scope.LegalCase.ForeclosureInfo);
-                        if (h.ArrayName && h.ArrayName.length > 0) {
-                            var arrayItem = $scope.LegalCase.ForeclosureInfo[h.ArrayName];
-                            if (arrayItem) {
-                                var shouldVisible = false;
-                                for (var j = 0; j < arrayItem.length; j++) {
-
-                                    if ($scope.ExceptVisable(h, arrayItem[j], j)) {
-                                        shouldVisible = true;
-                                    }
-                                }
-
-                                h.Visable = shouldVisible;
-
-                            }
-
+                $scope.evalVisible = function (h) {
+                    var result = false;
+                    if(h.ArrayName){
+                        if($scope.LegalCase.ForeclosureInfo[ArrayName]){
+                            angular.forEach($scope.LegalCase.ForeclosureInfo[ArrayName], function(el,idx){
+                                result = result || (el[h.Name] == (h.CallFunc ==='true'));                            
+                            })   
                         }
+                    }else{
+                        result = $scope.$eval(h.CallFunc);
                     }
-
-                    return hSummery;
+                    return result;
                 };
-                $scope.ExceptVisable = function (h, CompareValue, arrayIndex) {
-                    var visbale = false;
-                    if (h.Value == 'true' || h.Value == 'false') {
-                        h.Value = h.Value == 'true';
-                    }
-
-                    if (h.CallFunc) {
-                        var func = h.CallFunc;
-                        if (func.indexOf("__index__") > 0) {
-                            func = func.replace("__index__", arrayIndex);
-                        }
-                        visbale = $scope.HighlightCompare(func);
-                    } else {
-                        if (CompareValue[h.Name] == h.Value) {
-                            //hSummery.push(h);
-                            visbale = true;
-                        } else {
-                            visbale = false;
-                        }
-
-                        if (CompareValue[h.Name] == null && h.Value == false) {
-                            visbale = true;
-                        }
-                    }
-                    h.Visable = visbale;
-                    return visbale
-                }
-                $scope.HighlightCompare = function (compareExpresstion) {
-
-                    var reslut = $scope.$eval(compareExpresstion);
-                    return reslut;
-                }
-
+                
+                angular.forEach($scope.hSummery, function(el,idx){
+                    $scope.$watch(function(){return $scope.evalVisible(el);}, function(newV){
+                        el.visible = newV;
+                    })                  
+                    
+                })
 
                 $scope.GetCaseInfo = function () {
                     var CaseInfo = { Name: '', Address: '' }
@@ -1345,67 +1331,7 @@
                     return CaseInfo;
                 }
 
-                $scope.isPassByDays = function (start, end, count) {
-                    var start_date = new Date(start);
-                    var end_date = new Date(end);
 
-                    // Do the math.
-                    var millisecondsPerDay = 1000 * 60 * 60 * 24;
-                    var millisBetween = end_date.getTime() - start_date.getTime();
-                    var days = millisBetween / millisecondsPerDay;
-
-                    if (days > count) {
-                        return true;
-                    }
-
-                    return false;
-                }
-                $scope.isPassOrEqualByDays = function (start, end, count) {
-                    var start_date = new Date(start);
-                    var end_date = new Date(end);
-
-                    // Do the math.
-                    var millisecondsPerDay = 1000 * 60 * 60 * 24;
-                    var millisBetween = end_date.getTime() - start_date.getTime();
-                    var days = millisBetween / millisecondsPerDay;
-
-                    if (days >= count) {
-                        return true;
-                    }
-
-                    return false;
-                }
-                $scope.isLessOrEqualByDays = function (start, end, count) {
-                    var start_date = new Date(start);
-                    var end_date = new Date(end);
-
-                    // Do the math.
-                    var millisecondsPerDay = 1000 * 60 * 60 * 24;
-                    var millisBetween = end_date.getTime() - start_date.getTime();
-                    var days = millisBetween / millisecondsPerDay;
-
-                    if (days >= 0 && days <= count) {
-                        return true;
-                    }
-
-                    return false;
-                }
-                $scope.isPassByMonths = function (start, end, count) {
-                    var start_date = new Date(start);
-                    var end_date = new Date(end);
-                    var months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + end_date.getMonth() - start_date.getMonth();
-
-                    if (months > count) return true;
-                    else return false;
-                }
-                $scope.isPassOrEqualByMonths = function (start, end, count) {
-                    var start_date = new Date(start);
-                    var end_date = new Date(end);
-                    var months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + end_date.getMonth() - start_date.getMonth();
-
-                    if (months >= count) return true;
-                    else return false;
-                }
 
                 $scope.AddArrayItem = function (model) {
                     model = model || [];
@@ -1438,7 +1364,6 @@
                     }
                     $scope.showSAndCFormFlag = $scope.isLess08292013 | $scope.isBigger08302013 | $scope.isBigger03012015;
                 };
-
                 $scope.HighLightStauts = function (model, index) {
                     return parseInt(model) > index ? true : false;
                 };

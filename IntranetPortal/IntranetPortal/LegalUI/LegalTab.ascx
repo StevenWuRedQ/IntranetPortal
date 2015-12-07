@@ -196,7 +196,7 @@
                                     <td style="width: 30px; padding-right: 25px;">&nbsp;
                                     </td>
                                 </tr>
-                                <tr ng-repeat="n in HightSummery() | filter:{Visable:true}">
+                                <tr ng-repeat="n in hSummery" ng-show="n.visible">
                                     <td style="width: 30px">
                                         <i class="fa fa-exclamation-circle note_img"></i>
                                     </td>

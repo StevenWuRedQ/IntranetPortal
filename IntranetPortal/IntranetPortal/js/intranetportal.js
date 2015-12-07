@@ -54,19 +54,16 @@ controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootSc
         });
     }
 }]);
-angular.module("PortalApp").
-service("ptCom", ["$http", "$rootScope", function ($http, $rootScope) {
-
+angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($http, $rootScope) {
     var that = this;
 
-    /******************Stven code area*********************/
     this.DocGenerator = function (tplName, data, successFunc) {
         $http.post("/Services/Documents.svc/DocGenrate", { "tplName": tplName, "data": JSON.stringify(data) }).success(function (data) {
             successFunc(data);
         }).error(function (data, status) {
             alert("Fail to save data. status: " + status + " Error : " + JSON.stringify(data));
         });
-    }; /******************End Stven code area*********************/
+    }; 
 
     this.arrayAdd = function (model, data) {
         if (model) {
@@ -198,8 +195,72 @@ service("ptCom", ["$http", "$rootScope", function ($http, $rootScope) {
         var tempDate = new Date(d);
         return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
     };
-}]).
-service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
+}]).service("ptTime", [function () {
+    var that = this;
+
+    this.isPassByDays = function (start, end, count) {
+        var start_date = new Date(start);
+        var end_date = new Date(end);
+
+        // Do the math.
+        var millisecondsPerDay = 1000 * 60 * 60 * 24;
+        var millisBetween = end_date.getTime() - start_date.getTime();
+        var days = millisBetween / millisecondsPerDay;
+
+        if (days > count) {
+            return true;
+        }
+
+        return false;
+    }
+    this.isPassOrEqualByDays = function (start, end, count) {
+        var start_date = new Date(start);
+        var end_date = new Date(end);
+
+        // Do the math.
+        var millisecondsPerDay = 1000 * 60 * 60 * 24;
+        var millisBetween = end_date.getTime() - start_date.getTime();
+        var days = millisBetween / millisecondsPerDay;
+
+        if (days >= count) {
+            return true;
+        }
+
+        return false;
+    }
+    this.isLessOrEqualByDays = function (start, end, count) {
+        var start_date = new Date(start);
+        var end_date = new Date(end);
+
+        // Do the math.
+        var millisecondsPerDay = 1000 * 60 * 60 * 24;
+        var millisBetween = end_date.getTime() - start_date.getTime();
+        var days = millisBetween / millisecondsPerDay;
+
+        if (days >= 0 && days <= count) {
+            return true;
+        }
+
+        return false;
+    }
+    this.isPassByMonths = function (start, end, count) {
+        var start_date = new Date(start);
+        var end_date = new Date(end);
+        var months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + end_date.getMonth() - start_date.getMonth();
+
+        if (months > count) return true;
+        else return false;
+    }
+    this.isPassOrEqualByMonths = function (start, end, count) {
+        var start_date = new Date(start);
+        var end_date = new Date(end);
+        var months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + end_date.getMonth() - start_date.getMonth();
+
+        if (months >= count) return true;
+        else return false;
+    }
+
+}]).service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
 
     var allContact;
     var allTeam;
@@ -283,8 +344,7 @@ service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitTo
     };
 
 
-}]).
-service('ptShortsSaleService', ['$http', function ($http) {
+}]).service('ptShortsSaleService', ['$http', function ($http) {
     this.getShortSaleCase = function (caseId, callback) {
         var url = "/ShortSale/ShortSaleServices.svc/GetCase?caseId=" + caseId;
         $http.get(url)
@@ -315,8 +375,7 @@ service('ptShortsSaleService', ['$http', function ($http) {
             if (callback) callback("Fail to get buyer title for bble: " + bble, null);
         });
     };
-}]).
-service('ptLeadsService', ["$http", function ($http) {
+}]).service('ptLeadsService', ["$http", function ($http) {
     this.getLeadsByBBLE = function (bble, callback) {
         var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + bble;
         $http.get(leadsInfoUrl)
@@ -327,8 +386,7 @@ service('ptLeadsService', ["$http", function ($http) {
         });
     };
 }
-]).
-factory('ptHomeBreakDownService', ["$http", function ($http) {
+]).factory('ptHomeBreakDownService', ["$http", function ($http) {
     return {
         loadByBBLE: function (bble, callback) {
             var url = '/ShortSale/ShortSaleServices.svc/LoadHomeBreakData?bble=' + bble;
@@ -355,8 +413,7 @@ factory('ptHomeBreakDownService', ["$http", function ($http) {
         }
     };
 }
-]).
-service('ptFileService', function () {
+]).service('ptFileService', function () {
     this.uploadFile = function (data, bble, rename, folder, type, callback) {
         switch (type) {
             case 'construction':
@@ -533,8 +590,7 @@ service('ptFileService', function () {
         return _.trunc(fileName, length);
 
     };
-}).
-service('ptConstructionService', ['$http', function ($http) {
+}).service('ptConstructionService', ['$http', function ($http) {
     this.getConstructionCases = function (bble, callback) {
         var url = "/api/ConstructionCases/" + bble;
         $http.get(url)
@@ -581,8 +637,7 @@ service('ptConstructionService', ['$http', function ($http) {
         }
     };
 }
-]).
-factory('ptLegalService', function () {
+]).factory('ptLegalService', function () {
     return {
         load: function (bble, callback) {
             var url = '/LegalUI/LegalUI.aspx/GetCaseData';
@@ -623,8 +678,7 @@ factory('ptLegalService', function () {
             });
         }
     };
-}).
-factory('ptEntityService', ['$http', function ($http) {
+}).factory('ptEntityService', ['$http', function ($http) {
     return {
         getEntityByBBLE: function (bble, callback) {
             var url = '/api/CorporationEntities/ByBBLE?BBLE=' + bble;
