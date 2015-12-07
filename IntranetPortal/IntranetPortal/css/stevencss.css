@@ -2666,7 +2666,7 @@ hr.ss-form-hr {
     transition: all 0.5s ease;
 }
 
-#wrapper.toggled {
+#wrapper.xtoggled {
     padding-left: 280px;
 }
 
@@ -2685,7 +2685,7 @@ hr.ss-form-hr {
     transition: all 0.5s ease;
 }
 
-#wrapper.toggled #sidebar-wrapper {
+#wrapper.xtoggled #sidebar-wrapper {
     width: 280px;
 }
 
@@ -2697,7 +2697,7 @@ hr.ss-form-hr {
     margin: 0;
 }
 
-#wrapper.toggled #page-content-wrapper {
+#wrapper.xtoggled #page-content-wrapper {
     position: absolute;
     margin-right: -280px;
 }
@@ -2719,7 +2719,7 @@ hr.ss-form-hr {
         padding-left: 280px;
     }
 
-    #wrapper.toggled {
+    #wrapper.xtoggled {
         padding-left: 0;
     }
 
@@ -2727,7 +2727,7 @@ hr.ss-form-hr {
         width: 280px;
     }
 
-    #wrapper.toggled #sidebar-wrapper {
+    #wrapper.xtoggled #sidebar-wrapper {
         width: 0;
     }
 
@@ -2737,7 +2737,7 @@ hr.ss-form-hr {
         position: relative;
     }
 
-    #wrapper.toggled #page-content-wrapper {
+    #wrapper.xtoggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
     }

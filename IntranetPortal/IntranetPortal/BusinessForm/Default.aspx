@@ -30,7 +30,7 @@
             </asp:Panel>
         </div>
 
-        <div ui-layout-container id="dataPanelDiv">
+        <div ui-layout-container="central" id="dataPanelDiv">
             <asp:Panel runat="server" ID="dataPanel" ClientInstanceName="dataPanel">
                 <div class="legal-menu row" style="margin: 0">
                     <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">

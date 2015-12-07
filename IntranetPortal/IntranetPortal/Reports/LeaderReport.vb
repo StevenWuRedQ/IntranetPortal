@@ -1,4 +1,6 @@
-﻿Imports System.IO
+﻿Imports System.Drawing
+Imports System.IO
+Imports DevExpress.XtraReports.UI
 
 Public Class LeaderReport
     Inherits DevExpress.XtraReports.UI.XtraReport
@@ -83,33 +85,23 @@ Public Class LeaderReport
     Friend WithEvents XrLabel46 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel45 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLine2 As DevExpress.XtraReports.UI.XRLine
-    Friend WithEvents XrLabel51 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel52 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel53 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel50 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel49 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel48 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel54 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel55 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel68 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel69 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel64 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel65 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel66 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel67 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel62 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel63 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel56 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel57 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel58 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel59 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel60 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel61 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents BBLE As DevExpress.XtraReports.Parameters.Parameter
     Friend WithEvents DetailReport As DevExpress.XtraReports.UI.DetailReportBand
     Friend WithEvents Detail1 As DevExpress.XtraReports.UI.DetailBand
     Friend WithEvents XrRichText2 As DevExpress.XtraReports.UI.XRRichText
     Friend WithEvents XrRichText1 As DevExpress.XtraReports.UI.XRRichText
+    Friend WithEvents XrLabel3 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents LienTable As DevExpress.XtraReports.UI.XRTable
+    Friend WithEvents XrTableRow1 As DevExpress.XtraReports.UI.XRTableRow
+    Friend WithEvents TYPE As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents EFFECTIVE As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents EXPIRATION As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents PLAINTIFF As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents DEFENDANT As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents INDEX As DevExpress.XtraReports.UI.XRTableCell
 
     'Required by the Designer
     Private components As System.ComponentModel.IContainer
@@ -117,30 +109,11 @@ Public Class LeaderReport
     'NOTE: The following procedure is required by the Designer
     'It can be modified using the Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LeaderReport))
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
-        Me.XrLabel68 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel69 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel64 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel65 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel66 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel67 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel62 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel63 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel56 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel57 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel58 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel59 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel60 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel61 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel54 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel55 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel51 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel52 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel53 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel50 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel49 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel48 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLine2 = New DevExpress.XtraReports.UI.XRLine()
@@ -210,105 +183,27 @@ Public Class LeaderReport
         Me.Detail1 = New DevExpress.XtraReports.UI.DetailBand()
         Me.XrRichText2 = New DevExpress.XtraReports.UI.XRRichText()
         Me.XrRichText1 = New DevExpress.XtraReports.UI.XRRichText()
+        Me.LienTable = New DevExpress.XtraReports.UI.XRTable()
+        Me.XrTableRow1 = New DevExpress.XtraReports.UI.XRTableRow()
+        Me.TYPE = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.EFFECTIVE = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.EXPIRATION = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.XrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.PLAINTIFF = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.INDEX = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.DEFENDANT = New DevExpress.XtraReports.UI.XRTableCell()
         CType(Me.XrRichText2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrRichText1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LienTable, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'Detail
         '
-        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel68, Me.XrLabel69, Me.XrLabel64, Me.XrLabel65, Me.XrLabel66, Me.XrLabel67, Me.XrLabel62, Me.XrLabel63, Me.XrLabel56, Me.XrLabel57, Me.XrLabel58, Me.XrLabel59, Me.XrLabel60, Me.XrLabel61, Me.XrLabel54, Me.XrLabel55, Me.XrLabel51, Me.XrLabel52, Me.XrLabel53, Me.XrLabel50, Me.XrLabel49, Me.XrLabel48, Me.XrLine2, Me.XrLabel47, Me.XrLabel46, Me.XrLabel45, Me.XrLabel44, Me.lblCoOwner, Me.lblOwner, Me.XrLabel41, Me.XrLabel40, Me.XrLine1, Me.chkViolationDOB, Me.chkViolationECB, Me.chkWaterNo, Me.chkWaterYes, Me.chkTaxNo, Me.chkTaxYes, Me.chkOtherLiensYes, Me.chkOtherLiensNo, Me.chkLisPenNo, Me.chkLisPenYes, Me.lblBuildingDem, Me.lblLotDem, Me.lblEstValue, Me.lblViolationAmount, Me.lblWaterAmount, Me.lblTaxAmount, Me.XrLabel33, Me.lbl2ndMortgage, Me.lblNumOfFloor, Me.lblLot, Me.lblFirstMortgage, Me.lblTax, Me.lblBlock, Me.lblYearBuilt, Me.lblSaleDate, Me.XrLabel24, Me.XrLabel23, Me.XrLabel22, Me.XrLabel21, Me.XrLabel14, Me.XrLabel20, Me.XrLabel19, Me.XrLabel18, Me.XrLabel17, Me.XrLabel16, Me.XrLabel15, Me.XrLabel13, Me.XrLabel12, Me.XrLabel11, Me.XrLabel10, Me.XrLabel9, Me.XrLabel8, Me.XrLabel7, Me.XrLabel6, Me.lblPropertyAddress, Me.XrLabel4})
+        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel3, Me.LienTable, Me.XrLabel56, Me.XrLabel49, Me.XrLabel48, Me.XrLine2, Me.XrLabel47, Me.XrLabel46, Me.XrLabel45, Me.XrLabel44, Me.lblCoOwner, Me.lblOwner, Me.XrLabel41, Me.XrLabel40, Me.XrLine1, Me.chkViolationDOB, Me.chkViolationECB, Me.chkWaterNo, Me.chkWaterYes, Me.chkTaxNo, Me.chkTaxYes, Me.chkOtherLiensYes, Me.chkOtherLiensNo, Me.chkLisPenNo, Me.chkLisPenYes, Me.lblBuildingDem, Me.lblLotDem, Me.lblEstValue, Me.lblViolationAmount, Me.lblWaterAmount, Me.lblTaxAmount, Me.XrLabel33, Me.lbl2ndMortgage, Me.lblNumOfFloor, Me.lblLot, Me.lblFirstMortgage, Me.lblTax, Me.lblBlock, Me.lblYearBuilt, Me.lblSaleDate, Me.XrLabel24, Me.XrLabel23, Me.XrLabel22, Me.XrLabel21, Me.XrLabel14, Me.XrLabel20, Me.XrLabel19, Me.XrLabel18, Me.XrLabel17, Me.XrLabel16, Me.XrLabel15, Me.XrLabel13, Me.XrLabel12, Me.XrLabel11, Me.XrLabel10, Me.XrLabel9, Me.XrLabel8, Me.XrLabel7, Me.XrLabel6, Me.lblPropertyAddress, Me.XrLabel4})
         Me.Detail.HeightF = 884.375!
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-        '
-        'XrLabel68
-        '
-        Me.XrLabel68.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel68.LocationFloat = New DevExpress.Utils.PointFloat(350.0!, 825.0!)
-        Me.XrLabel68.Name = "XrLabel68"
-        Me.XrLabel68.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel68.SizeF = New System.Drawing.SizeF(349.0414!, 23.0!)
-        Me.XrLabel68.StylePriority.UseBorders = False
-        Me.XrLabel68.StylePriority.UseTextAlignment = False
-        Me.XrLabel68.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel69
-        '
-        Me.XrLabel69.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel69.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 825.0!)
-        Me.XrLabel69.Name = "XrLabel69"
-        Me.XrLabel69.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel69.SizeF = New System.Drawing.SizeF(322.9167!, 23.0!)
-        Me.XrLabel69.StylePriority.UseBorders = False
-        Me.XrLabel69.StylePriority.UseTextAlignment = False
-        Me.XrLabel69.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel64
-        '
-        Me.XrLabel64.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel64.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 750.0!)
-        Me.XrLabel64.Name = "XrLabel64"
-        Me.XrLabel64.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel64.SizeF = New System.Drawing.SizeF(322.9167!, 23.0!)
-        Me.XrLabel64.StylePriority.UseBorders = False
-        Me.XrLabel64.StylePriority.UseTextAlignment = False
-        Me.XrLabel64.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel65
-        '
-        Me.XrLabel65.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel65.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 787.5!)
-        Me.XrLabel65.Name = "XrLabel65"
-        Me.XrLabel65.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel65.SizeF = New System.Drawing.SizeF(322.9167!, 23.0!)
-        Me.XrLabel65.StylePriority.UseBorders = False
-        Me.XrLabel65.StylePriority.UseTextAlignment = False
-        Me.XrLabel65.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel66
-        '
-        Me.XrLabel66.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel66.LocationFloat = New DevExpress.Utils.PointFloat(350.0!, 750.0!)
-        Me.XrLabel66.Name = "XrLabel66"
-        Me.XrLabel66.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel66.SizeF = New System.Drawing.SizeF(349.0414!, 23.0!)
-        Me.XrLabel66.StylePriority.UseBorders = False
-        Me.XrLabel66.StylePriority.UseTextAlignment = False
-        Me.XrLabel66.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel67
-        '
-        Me.XrLabel67.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel67.LocationFloat = New DevExpress.Utils.PointFloat(350.0!, 787.5!)
-        Me.XrLabel67.Name = "XrLabel67"
-        Me.XrLabel67.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel67.SizeF = New System.Drawing.SizeF(349.0414!, 23.0!)
-        Me.XrLabel67.StylePriority.UseBorders = False
-        Me.XrLabel67.StylePriority.UseTextAlignment = False
-        Me.XrLabel67.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel62
-        '
-        Me.XrLabel62.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel62.LocationFloat = New DevExpress.Utils.PointFloat(350.0!, 712.5!)
-        Me.XrLabel62.Name = "XrLabel62"
-        Me.XrLabel62.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel62.SizeF = New System.Drawing.SizeF(349.0414!, 23.0!)
-        Me.XrLabel62.StylePriority.UseBorders = False
-        Me.XrLabel62.StylePriority.UseTextAlignment = False
-        Me.XrLabel62.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel63
-        '
-        Me.XrLabel63.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel63.LocationFloat = New DevExpress.Utils.PointFloat(350.0!, 675.0!)
-        Me.XrLabel63.Name = "XrLabel63"
-        Me.XrLabel63.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel63.SizeF = New System.Drawing.SizeF(349.0414!, 23.0!)
-        Me.XrLabel63.StylePriority.UseBorders = False
-        Me.XrLabel63.StylePriority.UseTextAlignment = False
-        Me.XrLabel63.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
         'XrLabel56
         '
@@ -320,127 +215,6 @@ Public Class LeaderReport
         Me.XrLabel56.StylePriority.UseBorders = False
         Me.XrLabel56.StylePriority.UseTextAlignment = False
         Me.XrLabel56.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel57
-        '
-        Me.XrLabel57.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel57.LocationFloat = New DevExpress.Utils.PointFloat(350.0!, 562.5!)
-        Me.XrLabel57.Name = "XrLabel57"
-        Me.XrLabel57.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel57.SizeF = New System.Drawing.SizeF(349.0414!, 23.0!)
-        Me.XrLabel57.StylePriority.UseBorders = False
-        Me.XrLabel57.StylePriority.UseTextAlignment = False
-        Me.XrLabel57.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel58
-        '
-        Me.XrLabel58.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel58.LocationFloat = New DevExpress.Utils.PointFloat(350.0!, 525.0!)
-        Me.XrLabel58.Name = "XrLabel58"
-        Me.XrLabel58.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel58.SizeF = New System.Drawing.SizeF(349.0415!, 22.99994!)
-        Me.XrLabel58.StylePriority.UseBorders = False
-        Me.XrLabel58.StylePriority.UseTextAlignment = False
-        Me.XrLabel58.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel59
-        '
-        Me.XrLabel59.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel59.LocationFloat = New DevExpress.Utils.PointFloat(350.0!, 487.5!)
-        Me.XrLabel59.Name = "XrLabel59"
-        Me.XrLabel59.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel59.SizeF = New System.Drawing.SizeF(349.0415!, 23.0!)
-        Me.XrLabel59.StylePriority.UseBorders = False
-        Me.XrLabel59.StylePriority.UseTextAlignment = False
-        Me.XrLabel59.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel60
-        '
-        Me.XrLabel60.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel60.LocationFloat = New DevExpress.Utils.PointFloat(350.0!, 600.0!)
-        Me.XrLabel60.Name = "XrLabel60"
-        Me.XrLabel60.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel60.SizeF = New System.Drawing.SizeF(349.0414!, 23.0!)
-        Me.XrLabel60.StylePriority.UseBorders = False
-        Me.XrLabel60.StylePriority.UseTextAlignment = False
-        Me.XrLabel60.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel61
-        '
-        Me.XrLabel61.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel61.LocationFloat = New DevExpress.Utils.PointFloat(350.0!, 637.5!)
-        Me.XrLabel61.Name = "XrLabel61"
-        Me.XrLabel61.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel61.SizeF = New System.Drawing.SizeF(349.0414!, 23.0!)
-        Me.XrLabel61.StylePriority.UseBorders = False
-        Me.XrLabel61.StylePriority.UseTextAlignment = False
-        Me.XrLabel61.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel54
-        '
-        Me.XrLabel54.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel54.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 712.5!)
-        Me.XrLabel54.Name = "XrLabel54"
-        Me.XrLabel54.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel54.SizeF = New System.Drawing.SizeF(322.9167!, 23.0!)
-        Me.XrLabel54.StylePriority.UseBorders = False
-        Me.XrLabel54.StylePriority.UseTextAlignment = False
-        Me.XrLabel54.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel55
-        '
-        Me.XrLabel55.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel55.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 675.0!)
-        Me.XrLabel55.Name = "XrLabel55"
-        Me.XrLabel55.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel55.SizeF = New System.Drawing.SizeF(322.9167!, 23.0!)
-        Me.XrLabel55.StylePriority.UseBorders = False
-        Me.XrLabel55.StylePriority.UseTextAlignment = False
-        Me.XrLabel55.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel51
-        '
-        Me.XrLabel51.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel51.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 562.5!)
-        Me.XrLabel51.Name = "XrLabel51"
-        Me.XrLabel51.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel51.SizeF = New System.Drawing.SizeF(322.9167!, 23.0!)
-        Me.XrLabel51.StylePriority.UseBorders = False
-        Me.XrLabel51.StylePriority.UseTextAlignment = False
-        Me.XrLabel51.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel52
-        '
-        Me.XrLabel52.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel52.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 600.0!)
-        Me.XrLabel52.Name = "XrLabel52"
-        Me.XrLabel52.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel52.SizeF = New System.Drawing.SizeF(322.9167!, 23.0!)
-        Me.XrLabel52.StylePriority.UseBorders = False
-        Me.XrLabel52.StylePriority.UseTextAlignment = False
-        Me.XrLabel52.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel53
-        '
-        Me.XrLabel53.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel53.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 637.5!)
-        Me.XrLabel53.Name = "XrLabel53"
-        Me.XrLabel53.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel53.SizeF = New System.Drawing.SizeF(322.9167!, 23.0!)
-        Me.XrLabel53.StylePriority.UseBorders = False
-        Me.XrLabel53.StylePriority.UseTextAlignment = False
-        Me.XrLabel53.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrLabel50
-        '
-        Me.XrLabel50.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel50.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 525.0!)
-        Me.XrLabel50.Name = "XrLabel50"
-        Me.XrLabel50.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel50.SizeF = New System.Drawing.SizeF(322.9167!, 23.0!)
-        Me.XrLabel50.StylePriority.UseBorders = False
-        Me.XrLabel50.StylePriority.UseTextAlignment = False
-        Me.XrLabel50.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
         'XrLabel49
         '
@@ -1168,7 +942,7 @@ Public Class LeaderReport
         'XrRichText2
         '
         Me.XrRichText2.Font = New System.Drawing.Font("Arial", 11.0!)
-        Me.XrRichText2.LocationFloat = New DevExpress.Utils.PointFloat(350.0!, 0.0!)
+        Me.XrRichText2.LocationFloat = New DevExpress.Utils.PointFloat(350.0!, 0!)
         Me.XrRichText2.Name = "XrRichText2"
         Me.XrRichText2.SerializableRtfString = resources.GetString("XrRichText2.SerializableRtfString")
         Me.XrRichText2.SizeF = New System.Drawing.SizeF(349.0414!, 100.0!)
@@ -1176,10 +950,79 @@ Public Class LeaderReport
         'XrRichText1
         '
         Me.XrRichText1.Font = New System.Drawing.Font("Arial", 11.0!)
-        Me.XrRichText1.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 0.0!)
+        Me.XrRichText1.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 0!)
         Me.XrRichText1.Name = "XrRichText1"
         Me.XrRichText1.SerializableRtfString = resources.GetString("XrRichText1.SerializableRtfString")
         Me.XrRichText1.SizeF = New System.Drawing.SizeF(322.9167!, 100.0!)
+        '
+        'LienTable
+        '
+        Me.LienTable.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 569.7917!)
+        Me.LienTable.LockedInUserDesigner = True
+        Me.LienTable.Name = "LienTable"
+        Me.LienTable.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow1})
+        Me.LienTable.SizeF = New System.Drawing.SizeF(685.0!, 30.0!)
+        '
+        'XrTableRow1
+        '
+        Me.XrTableRow1.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.TYPE, Me.EFFECTIVE, Me.EXPIRATION, Me.PLAINTIFF, Me.DEFENDANT, Me.INDEX})
+        Me.XrTableRow1.LockedInUserDesigner = True
+        Me.XrTableRow1.Name = "XrTableRow1"
+        Me.XrTableRow1.Weight = 1.0R
+        '
+        'TYPE
+        '
+        Me.TYPE.LockedInUserDesigner = True
+        Me.TYPE.Name = "TYPE"
+        Me.TYPE.Text = "TYPE"
+        Me.TYPE.Weight = 0.3622467777836556R
+        '
+        'EFFECTIVE
+        '
+        Me.EFFECTIVE.LockedInUserDesigner = True
+        Me.EFFECTIVE.Name = "EFFECTIVE"
+        Me.EFFECTIVE.Text = "EFFECTIVE"
+        Me.EFFECTIVE.Weight = 0.42617269900370963R
+        '
+        'EXPIRATION
+        '
+        Me.EXPIRATION.LockedInUserDesigner = True
+        Me.EXPIRATION.Name = "EXPIRATION"
+        Me.EXPIRATION.Text = "EXPIRATION"
+        Me.EXPIRATION.Weight = 0.4261726979885348R
+        '
+        'XrLabel3
+        '
+        Me.XrLabel3.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 534.3333!)
+        Me.XrLabel3.Name = "XrLabel3"
+        Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96.0!)
+        Me.XrLabel3.SizeF = New System.Drawing.SizeF(100.0!, 23.0!)
+        Me.XrLabel3.StylePriority.UseFont = False
+        Me.XrLabel3.Text = "LIENS"
+        '
+        'PLAINTIFF
+        '
+        Me.PLAINTIFF.Font = New System.Drawing.Font("Arial", 11.0!)
+        Me.PLAINTIFF.LockedInUserDesigner = True
+        Me.PLAINTIFF.Name = "PLAINTIFF"
+        Me.PLAINTIFF.StylePriority.UseFont = False
+        Me.PLAINTIFF.Text = "PLAINTIFF"
+        Me.PLAINTIFF.Weight = 0.63925901587033507R
+        '
+        'INDEX
+        '
+        Me.INDEX.LockedInUserDesigner = True
+        Me.INDEX.Name = "INDEX"
+        Me.INDEX.Text = "INDEX"
+        Me.INDEX.Weight = 0.4261727666832007R
+        '
+        'DEFENDANT
+        '
+        Me.DEFENDANT.LockedInUserDesigner = True
+        Me.DEFENDANT.Name = "DEFENDANT"
+        Me.DEFENDANT.Text = "DEFENDANT"
+        Me.DEFENDANT.Weight = 0.63925901636072113R
         '
         'LeaderReport
         '
@@ -1187,9 +1030,10 @@ Public Class LeaderReport
         Me.Font = New System.Drawing.Font("Arial", 11.0!)
         Me.Margins = New System.Drawing.Printing.Margins(63, 68, 75, 88)
         Me.Parameters.AddRange(New DevExpress.XtraReports.Parameters.Parameter() {Me.BBLE})
-        Me.Version = "14.1"
+        Me.Version = "15.1"
         CType(Me.XrRichText2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrRichText1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LienTable, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
 
     End Sub
@@ -1292,6 +1136,59 @@ Public Class LeaderReport
                 If li.ViolationAmount > 0 Then
                     lblViolationAmount.Text = li.ViolationAmount.ToString("C")
                 End If
+
+                LienTable.StylePriority.UseFont = False
+
+                Dim liens = li.LisPens
+
+                For Each lp In liens
+                    Dim newRow = New XRTableRow()
+                    newRow.CanGrow = True
+                    newRow.Height = 30
+                    LienTable.Rows.Add(newRow)
+
+
+                    Dim typeCell = New XRTableCell()
+                    typeCell.Font = New Font("Tohoma", 8)
+                    typeCell.Text = lp.Type.Trim
+                    newRow.Cells.Add(typeCell)
+
+                    Dim effectiveCell = New XRTableCell()
+                    effectiveCell.Font = New Font("Tohoma", 8)
+                    effectiveCell.Text = lp.Effective
+                    newRow.Cells.Add(effectiveCell)
+
+                    Dim expirationCell = New XRTableCell()
+                    expirationCell.Font = New Font("Tohoma", 8)
+                    expirationCell.Text = lp.Expiration
+                    newRow.Cells.Add(expirationCell)
+
+                    Dim plaintiffCell = New XRTableCell()
+                    plaintiffCell.Font = New Font("Tohoma", 8)
+                    plaintiffCell.Text = lp.Plaintiff.Trim
+                    newRow.Cells.Add(plaintiffCell)
+
+                    Dim defendantCell = New XRTableCell()
+                    defendantCell.Font = New Font("Tohoma", 8)
+                    defendantCell.Text = lp.Defendant.Trim
+                    newRow.Cells.Add(defendantCell)
+
+                    Dim indexCell = New XRTableCell()
+                    indexCell.Font = New Font("Tohoma", 8)
+                    indexCell.Text = lp.Index.Trim
+                    newRow.Cells.Add(indexCell)
+
+                    newRow.Cells(0).WidthF = 85
+                    newRow.Cells(1).WidthF = 100
+                    newRow.Cells(2).WidthF = 100
+                    newRow.Cells(3).WidthF = 150
+                    newRow.Cells(4).WidthF = 150
+                    newRow.Cells(5).WidthF = 100
+
+
+                Next
+
+                LienTable.AdjustSize()
 
                 Dim resControl As HomeOwnerInfo
                 Using mainPage As New System.Web.UI.Page

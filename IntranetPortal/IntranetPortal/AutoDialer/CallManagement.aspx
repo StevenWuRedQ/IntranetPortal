@@ -74,30 +74,5 @@
         function MonitorCall(name) {
             popUpAtBottomRight('/AutoDialer/Dialer.aspx?Monitor=' + name, "monitor", 560, 460)
         }
-        function popUpAtBottomRight(pageToLoad, winName, width, height) {
-            xposition = 0; yposition = 0;
-            if ((parseInt(navigator.appVersion) >= 4)) {
-                xposition = (screen.width - width);
-                yposition = (screen.height - height);
-            }
-
-            var args = "";
-            args += "width=" + width + "," + "height=" + height + ","
-            + "location=0,"
-            + "menubar=0,"
-            + "resizable=0,"
-            + "scrollbars=0,"
-            + "statusbar=false,dependent,alwaysraised,"
-            + "status=false,"
-            + "titlebar=no,"
-            + "toolbar=0,"
-            + "hotkeys=0,"
-            + "screenx=" + xposition + ","  //NN Only
-            + "screeny=" + (yposition - 100) + ","  //NN Only
-            + "left=" + xposition + ","     //IE Only
-            + "top=" + yposition;           //IE Only
-            var dmcaWin = window.open(pageToLoad, winName, args);
-            dmcaWin.focus();
-        }
     </script>
 </asp:Content>

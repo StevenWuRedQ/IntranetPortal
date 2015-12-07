@@ -7,7 +7,7 @@
         color: #0072C6;
         vertical-align: top;
         padding: 3px;
-        margin-bottom: 0px;
+        margin-bottom: 0;
         margin-top: 5px;
     }
 
@@ -16,11 +16,26 @@
         color: #0072C6;
         vertical-align: top;
         padding: 3px;
-        margin-bottom: 0px;
+        margin-bottom: 0;
         margin-top: 10px;
     }
 
+    .fa-phone.homeowner_info_icon {
+        cursor: pointer;
+        color: green;
+    }
 </style>
+<script type="text/javascript">
+    function ConfrimReport() {
+        if (confirm("Did you just refersh homeowner info ? If still can not get homeowner info press Ok to continue submit report ! \nIf we don't contact you in 24 hours that's mean this leads can't get homeowner info, please try edit homeowner input unique ID to load homeowner info.") == true) {
+            ReportNoHomeCallBackClinet.PerformCallback(leadsInfoBBLE);
+        }
+    };
+
+    $(document).ready(function () {
+        if (sortPhones) { sortPhones(); }
+    });
+</script>
 
 <% If (IsNeedAddHomeOwner()) Then%>
 <i class="fa  fa-plus-circle icon_btn color_blue tooltip-examples" title="Add home owner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}", "Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="font-size: 32px"></i>
@@ -28,7 +43,7 @@
 <div style='vertical-align: top; margin: 0; font-size: 18px; <%= if(IsNeedAddHomeOwner(),"visibility:hidden","") %>'>
     <div style="font-size: 30px; color: #2e2f31">
         <i class="fa fa-edit tooltip-examples" title="Edit Homeowner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}","Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
-        <%Dim needreport =  IsEmptyReport AndAlso Not Utility.IsCompany(OwnerName)%>
+        <% Dim needreport = IsEmptyReport AndAlso Not Utility.IsCompany(OwnerName)%>
         <% If needreport Then%>
         <i class='fa fa-wrench icon_btn tooltip-examples' title='Report no info after refresh homeowner info' onclick="ConfrimReport()">&nbsp;</i>
         <% End If%>
@@ -77,9 +92,9 @@
                         <% If TLOLocateReport.bankruptciesField IsNot Nothing AndAlso TLOLocateReport.bankruptciesField.Length > 0 Then
                                 Dim info = TLOLocateReport.bankruptciesField(0)%>
                         <% If info IsNot Nothing Then%>
-                        <%=info.attorneyAddressField.countyField &" "&info.attorneyAddressField.zipField &"<Br />" & info.attorneyNameField & "<Br />" & info.attorneyPhoneField & "<Br />" & info.claimDateField.ToString & "<Br />" & info.dischargeDateField.ToString & "<Br />" & info.lawFirmField & "<Br />" & info.nphIdField%>
+                        <%=info.attorneyAddressField.countyField & " " & info.attorneyAddressField.zipField & "<Br />" & info.attorneyNameField & "<Br />" & info.attorneyPhoneField & "<Br />" & info.claimDateField.ToString & "<Br />" & info.dischargeDateField.ToString & "<Br />" & info.lawFirmField & "<Br />" & info.nphIdField%>
                         <% End If
-                        End If
+                            End If
                         %>
 
                         <% End If%>
@@ -185,7 +200,7 @@
                             <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.Phone)%>')"></i>
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
-                                    <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.Phone)%>")' <%= CssStyle(FormatPhoneNumber(phone.Phone))%>>
+                                    <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%= FormatPhoneNumber(phone.Phone)%>")' <%= CssStyle(FormatPhoneNumber(phone.Phone))%>>
                                         <%=FormatPhoneNumber(phone.Phone)%>
                                         <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span>
                                     </a>
@@ -221,21 +236,7 @@
                             </div>
                         </div>
                     </div>
-                    <%-- <div class="color_gray clearfix">
-                        <i class="fa fa-phone homeowner_info_icon"></i>
-                        <div class="form_div_node homeowner_info_text ">
-                            <div>
-                                <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
-                                    <%= FormatPhoneNumber(phone.phoneField)%>
-                                    <span class="phone_comment"><%=GetPhoneComment(phone.phoneField) %></span>
-                                </a>
 
-                            </div>
-                            <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
-                                (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
-                            </div>
-                        </div>
-                    </div>--%>
                     <% End If%>
                     <% Next%>
                     <% End If%>
@@ -262,21 +263,6 @@
                             </div>
                         </div>
                     </div>
-                    <%-- <div class="color_gray clearfix">
-                        <i class="fa fa-phone homeowner_info_icon"></i>
-                        <div class="form_div_node homeowner_info_text ">
-                            <div>
-                                <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
-                                    <%= FormatPhoneNumber(phone.phoneField)%>
-                                    <span class="phone_comment"><%=GetPhoneComment(phone.phoneField) %></span>
-                                </a>
-
-                            </div>
-                            <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
-                                (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
-                            </div>
-                        </div>
-                    </div>--%>
                     <% End If%>
                     <% Next%>
                     <% End If%>
@@ -497,114 +483,5 @@
     <% End If%>
     <%End If%>
 </div>
-<script type="text/javascript">
-    function hashStr(str) {
-        /*rgb(0,128,0) green 799
-        *rgb(255,0,0) 800 red
-        *rgb(66,139,202) 961 blue
-        */
-
-        var hash = 0;
-        for (i = 0; i < str.length; i++) {
-            char = str.charCodeAt(i);
-            hash += char;
-        }
-
-        if (hash == 800) {
-            return 1000
-        }
-        return hash;
-    }
-    function sortPhones() {
-
-        var colors = {}
-        var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
 
 
-        var phones_div = $(".homeowner_info_label:has(.PhoneLink)")
-            .each(function (id) {
-                var phones = $(this).find("div").children(".color_gray:has(.color_gray)");
-
-
-
-                phones.sort(function (a, b) {
-
-                    var color = $(a).find(".PhoneLink:first").css("color");
-                    var colorB = $(b).find(".PhoneLink:first").css("color");
-                    var hcolor = hashStr(color);
-                    var hcolorB = hashStr(colorB);
-                    colors["cc" + hcolor] = hcolor + "-" + color;
-                    colors["cc" + hcolorB] = hcolorB + "-" + colorB;
-                    return hcolor - hcolorB;
-                });
-
-                var html = ""
-                phones.each(function (ind) {
-                    var ptext = $(this).text();
-                    html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
-
-                });
-                //debugger;
-                phones.parent().html('<div>' + html + '</div>');
-
-
-            });
-
-
-
-    }
-    $(document).ready(function () {
-        if (sortPhones) {
-            sortPhones();
-
-        }
-    });
-
-
-</script>
-
-<script>
-    function CallPhone(phone) {
-        var url = '/AutoDialer/Dialer.aspx?PN=' + phone + '&BBLE=' + $("#BBLEId").val();
-        $("#AutoDialer").css('display', '');
-        $("#AutoDialer").attr("src", encodeURI(url));
-        //popUpAtBottomRight(
-        //  , 'CallWindow', 1210, 460);
-    }
-    function popUpAtBottomRight(pageToLoad, winName, width, height) {
-        xposition = 0; yposition = 0;
-        if ((parseInt(navigator.appVersion) >= 4)) {
-            xposition = (screen.width - width);
-            yposition = (screen.height - height);
-        }
-
-        var args = "";
-        args += "width=" + width + "," + "height=" + height + ","
-        + "location=0,"
-        + "menubar=0,"
-        + "resizable=0,"
-        + "scrollbars=0,"
-        + "statusbar=false,dependent,alwaysraised,"
-        + "status=false,"
-        + "titlebar=no,"
-        + "toolbar=0,"
-        + "hotkeys=0,"
-        + "screenx=" + xposition + ","  //NN Only
-        + "screeny=" + (yposition - 100) + ","  //NN Only
-        + "left=" + xposition + ","     //IE Only
-        + "top=" + yposition;           //IE Only
-        var dmcaWin = window.open(pageToLoad, winName, args);
-        dmcaWin.focus();
-    }
-    function ConfrimReport() {
-        if (confirm("Did you just refersh homeowner info ? If still can not get homeowner info press Ok to cotunie submit report ! \nIf we don't contact you in 24 hours that's mean this leads can't get homeowner info, please try edit homeowner input unique ID to load homeowner info.") == true) {
-            ReportNoHomeCallBackClinet.PerformCallback(leadsInfoBBLE);
-        }
-    }
-</script>
-<style>
-    .fa-phone.homeowner_info_icon {
-        cursor: pointer;
-        color: green;
-    }
-</style>

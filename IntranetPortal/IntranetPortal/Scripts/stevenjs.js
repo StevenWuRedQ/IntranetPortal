@@ -1083,3 +1083,72 @@ jQuery.fn.fitToParent = function (options) {
 
     });
 };
+
+/*autodial*/
+function hashStr(str) {
+    var hash = 0;
+    for (i = 0; i < str.length; i++) {
+        char = str.charCodeAt(i);
+        hash += char;
+    }
+
+    if (hash == 800) {
+        return 1000
+    }
+    return hash;
+};
+
+function popUpAtBottomRight(pageToLoad, winName, width, height) {
+    xposition = 0; yposition = 0;
+    if ((parseInt(navigator.appVersion) >= 4)) {
+        xposition = (screen.width - width);
+        yposition = (screen.height - height);
+    }
+
+    var args = "";
+    args += "width=" + width + "," + "height=" + height + ","
+            + "location=0,"
+            + "menubar=0,"
+            + "resizable=0,"
+            + "scrollbars=0,"
+            + "statusbar=false,dependent,alwaysraised,"
+            + "status=false,"
+            + "titlebar=no,"
+            + "toolbar=0,"
+            + "hotkeys=0,"
+            + "screenx=" + xposition + ","  //NN Only
+            + "screeny=" + (yposition - 100) + ","  //NN Only
+            + "left=" + xposition + ","     //IE Only
+            + "top=" + yposition;           //IE Only
+    var dmcaWin = window.open(pageToLoad, winName, args);
+    dmcaWin.focus();
+};
+
+function sortPhones() {
+    var colors = {}
+    var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
+    var phones_div = $(".homeowner_info_label:has(.PhoneLink)").each(function (id) {
+        var phones = $(this).find("div").children(".color_gray:has(.color_gray)");
+        var html = "";
+        phones.sort(function (a, b) {
+            var color = $(a).find(".PhoneLink:first").css("color");
+            var colorB = $(b).find(".PhoneLink:first").css("color");
+            var hcolor = hashStr(color);
+            var hcolorB = hashStr(colorB);
+            colors["cc" + hcolor] = hcolor + "-" + color;
+            colors["cc" + hcolorB] = hcolorB + "-" + colorB;
+            return hcolor - hcolorB;
+        });
+        phones.each(function (ind) {
+            var ptext = $(this).text();
+            html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
+        });
+        phones.parent().html('<div>' + html + '</div>');
+    });
+};
+
+function CallPhone(phone) {
+    var url = '/AutoDialer/Dialer.aspx?PN=' + phone + '&BBLE=' + $("#BBLEId").val();
+    $("#AutoDialer").css('display', '');
+    $("#AutoDialer").attr("src", encodeURI(url));
+};

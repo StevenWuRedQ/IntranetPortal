@@ -13,14 +13,6 @@
         <div style="height: 800px">            
             <dx:ASPxDocumentViewer ID="ASPxDocumentViewer1" runat="server" Height="100%">
                 <SettingsSplitter SidePaneVisible="false" />
-               <%-- <StylesViewer>
-                    <BookmarkSelectionBorder BorderColor="Gray" BorderStyle="Dashed" BorderWidth="3px"></BookmarkSelectionBorder>
-                </StylesViewer>
-                <StylesSplitter>
-                    <Pane>
-                        <Paddings Padding="16px"></Paddings>
-                    </Pane>
-                </StylesSplitter>--%>
             </dx:ASPxDocumentViewer>
         </div>
     </form>

@@ -254,7 +254,7 @@
             }
 
             function menuToggle() {
-                $("#wrapper").toggleClass("toggled");
+                $("#wrapper").toggleClass("xtoggled");
             }
 
         </script>

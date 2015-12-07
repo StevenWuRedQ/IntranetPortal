@@ -400,6 +400,7 @@
 <dx:ASPxCallbackPanel runat="server" OnCallback="ASPxCallbackPanel2_Callback" ID="ASPxCallbackPanel2" Height="100%" ClientInstanceName="ContentCallbackPanel" EnableCallbackAnimation="true" CssClass="LeadsContentPanel">
     <PanelCollection>
         <dx:PanelContent ID="PanelContent1" runat="server">
+
             <dx:ASPxPanel runat="server" ID="doorKnockMapPanel" Visible="false" Width="100%" Height="100%">
                 <PanelCollection>
                     <dx:PanelContent>
@@ -407,6 +408,7 @@
                     </dx:PanelContent>
                 </PanelCollection>
             </dx:ASPxPanel>
+
             <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="800px" Width="100%" ClientInstanceName="contentSplitter">
                 <Styles>
                     <Pane Paddings-Padding="0">
@@ -577,6 +579,7 @@
                             </dx:SplitterContentControl>
                         </ContentCollection>
                     </dx:SplitterPane>
+
                     <dx:SplitterPane ShowCollapseBackwardButton="True" Name="LogPanel" MinSize="665px">
                         <PaneStyle BackColor="#F9F9F9"></PaneStyle>
                         <ContentCollection>
@@ -612,12 +615,11 @@
                                     </ul>
                                     <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
                                 </div>
-                                <%--    <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
-                                    <ClientSideEvents CallbackComplete="OnSetStatusComplete" />
-                                </dx:ASPxCallback>--%>
+              
                                 <dx:ASPxCallback ID="callPhoneCallback" runat="server" ClientInstanceName="callPhoneCallbackClient" OnCallback="callPhoneCallback_Callback">
                                     <ClientSideEvents CallbackComplete="OnCallPhoneCallbackComplete" />
                                 </dx:ASPxCallback>
+
                                 <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
                                     AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                     ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -634,6 +636,7 @@
                                     </Items>
                                     <ClientSideEvents ItemClick="OnCallbackMenuClick" />
                                 </dx:ASPxPopupMenu>
+
                                 <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="360px" Height="250px"
                                     MaxWidth="800px" MaxHeight="150px" MinHeight="150px" MinWidth="150px" ID="pcMain"
                                     HeaderText="Select Date" Modal="false" OnWindowCallback="pcMain_WindowCallback"
@@ -711,6 +714,7 @@
                     </dx:PopupControlContentControl>
                 </ContentCollection>
             </dx:ASPxPopupControl>
+
             <dx:ASPxPopupControl ClientInstanceName="aspxPopupAddEmail" Width="320px" Height="80px" ID="PopupAddEmail"
                 HeaderText="Add Phone Number" ShowHeader="false"
                 runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
@@ -741,6 +745,7 @@
                     </dx:PopupControlContentControl>
                 </ContentCollection>
             </dx:ASPxPopupControl>
+
             <dx:ASPxPopupControl ClientInstanceName="aspxPopupAddAddress" Width="400px" Height="80px" ID="ASPxPopupControl1"
                 HeaderText="Add Address" OnWindowCallback="ASPxPopupControl1_WindowCallback" Modal="true"
                 runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter">
@@ -781,6 +786,7 @@
                 </ContentCollection>
                 <ClientSideEvents EndCallback="function(s,e){if(!isSave){s.Show();}else{s.Hide();ownerInfoCallbackPanel.PerformCallback();}}" />
             </dx:ASPxPopupControl>
+
             <uc1:SendMail runat="server" ID="SendMail" />
             <uc1:EditHomeOwner runat="server" ID="EditHomeOwner" />
             <dx:ASPxCallback ID="ReportNoHomeCallBack" runat="server" OnCallback="ReportNoHomeCallBack_OnCallback" ClientInstanceName="ReportNoHomeCallBackClinet"></dx:ASPxCallback>

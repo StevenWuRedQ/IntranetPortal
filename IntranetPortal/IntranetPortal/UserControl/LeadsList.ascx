@@ -113,12 +113,7 @@
                     }
                  );
             } else {
-                //$(this).mCustomScrollbar(
-                //    {
-                //        theme: "minimal-dark",
-
-                //    }
-                //);
+    
             }
         });
 
