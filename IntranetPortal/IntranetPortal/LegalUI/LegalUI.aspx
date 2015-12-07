@@ -1300,8 +1300,8 @@
                 $scope.evalVisible = function (h) {
                     var result = false;
                     if(h.ArrayName){
-                        if($scope.LegalCase.ForeclosureInfo[ArrayName]){
-                            angular.forEach($scope.LegalCase.ForeclosureInfo[ArrayName], function(el,idx){
+                        if($scope.LegalCase.ForeclosureInfo[h.ArrayName]){
+                            angular.forEach($scope.LegalCase.ForeclosureInfo[h.ArrayName], function(el,idx){
                                 result = result || (el[h.Name] == (h.CallFunc ==='true'));                            
                             })   
                         }
@@ -1330,8 +1330,6 @@
                     }
                     return CaseInfo;
                 }
-
-
 
                 $scope.AddArrayItem = function (model) {
                     model = model || [];
@@ -1451,7 +1449,6 @@
 
                 }
             });
-
         </script>
         <script>
             $(document).ready(function () {
