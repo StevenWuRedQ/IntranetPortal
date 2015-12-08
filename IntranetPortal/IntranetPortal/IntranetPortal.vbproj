@@ -6440,6 +6440,7 @@
     <Content Include="js\controllers.js" />
     <Content Include="js\controllers\BuyerEntityController.js" />
     <Content Include="js\controllers\ConstructionController.js" />
+    <Content Include="js\controllers\LegalController.js" />
     <Content Include="js\controllers\ReportWizardController.js" />
     <Content Include="js\controllers\ShortSaleController.js" />
     <Content Include="js\controllers\TitleController.js" />

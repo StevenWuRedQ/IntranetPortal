@@ -31,6 +31,26 @@
             unit: {
                 configFile: 'js/test/conf.js'
             }
+        },
+        replace: {
+            change_content_master: {
+                src: ['Content.Master'],
+                overwrite: true,
+                replacements: [{
+                    from: /src="\/js\/intranetportal.js(\?v=\d{0,8})?"/g,
+                    to: 'src="/js/intranetportal.js?v=<%= grunt.template.today("ddmmyyyy") %>"'
+                }, {
+                    from: /src="\/Scripts\/autosave.js(\?v=\d{0,8})?"/g,
+                    to: 'src="/Scripts\/autosave.js?v=<%= grunt.template.today("ddmmyyyy") %>"'
+                }, {
+                    from: /src="\/Scripts\/stevenjs.js(\?v=\d{0,8})?"/g,
+                    to: 'src="/Scripts\/stevenjs.js?v=<%= grunt.template.today("ddmmyyyy") %>"'
+                }, {
+                    from: /src="\/Scripts\/autologout.js(\?v=\d{0,8})?"/g,
+                    to: 'src="/Scripts\/autologout.js?v=<%= grunt.template.today("ddmmyyyy") %>"'
+                }]
+            }
+
         }
     });
 
@@ -38,9 +58,10 @@
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-text-replace');
 
     // Default task(s).
-    grunt.registerTask('default', ['concat', 'uglify']);
+    grunt.registerTask('default', ['concat', 'uglify', 'replace']);
     grunt.registerTask('unittest', ['karma']);
     grunt.registerTask('e2etest', ['protractor']);
 

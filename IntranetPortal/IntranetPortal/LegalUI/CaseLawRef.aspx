@@ -39,8 +39,7 @@
         }
     </style>
     <script>
-        var app = angular.module('PortalApp');
-        app.controller('CaseCtrl', ['$scope', '$http', 'ptCom', function ($scope, $http, ptCom) {
+        angular.module('PortalApp').controller('CaseCtrl', ['$scope', '$http', 'ptCom', function ($scope, $http, ptCom) {
             $scope.Cases = [{}, ];
             $scope.ptCom = ptCom;
             $scope.formVisiable = false;

@@ -40,8 +40,8 @@
         expect(folderDropdown.find('li').length).toBe(3+3);
     })
 
-    it("", function () {
-
+    it("must fails", function () {
+        expect(true).toBe(false);
     })
 
 })
