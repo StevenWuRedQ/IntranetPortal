@@ -6,7 +6,7 @@
     $scope.formatName = ptCom.formatName;
     $scope.formatAddr = ptCom.formatAddr;
     $scope.ptCom = ptCom;
-
+    $scope.MortgageTabs = [];
     $scope.SsCase = {
         PropertyInfo: { Owners: [{}] },
         CaseData: {},
@@ -132,7 +132,11 @@
                     // if save scuessed load data again 
 
                     $scope.GetShortSaleCase($scope.SsCase.CaseId);
-                    ptCom.alert("Save Successed !");
+                    if (!callback)
+                    {
+                        ptCom.alert("Save Successed !");
+                    }
+                    
                     if (callback) { callback(); }
 
                 }).error(function (data1, status) {

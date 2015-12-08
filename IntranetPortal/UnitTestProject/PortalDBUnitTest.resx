@@ -129,22 +129,46 @@ In the lower pane, you can add test conditions that verify
 whether the results of your SQL statements match what 
 you expect.
 */
+DECLARE @RC AS INT, @RC_old as int;
+select @RC=0;	   
+
+EXEC [dbo].[ArchiveByBBLE] 
+
+select @RC = @RC +count(*) from Leads where BBLE in (select bble from ClearBBLEs)
+select @RC = @RC +count(*) from [dbo].[LeadsActivityLog] where BBLE in (select bble from ClearBBLEs)
+select @RC = @RC +count(*) from [dbo].[HomeOwnerAddress] where BBLE in (select bble from ClearBBLEs)
+select @RC = @RC +count(*) from [dbo].[HomeOwnerPhone] where BBLE in (select bble from ClearBBLEs)
+select @RC = @RC +count(*) from [dbo].[LeadsComments] where BBLE in (select bble from ClearBBLEs)
+select @RC = @RC +count(*) from [dbo].[OwnerContacts] where BBLE in (select bble from ClearBBLEs)
+select @RC_old = @RC
+
+--select @RC=0
+--select @RC = @RC +count(*) from Leads where BBLE = @bble
+--select @RC = @RC +count(*) from [dbo].LeadsActivityLogArchived where bble = @bble
+--select @RC = @RC +count(*) from [dbo].HomeOwnerAddressArchive where bble = @bble
+--select @RC = @RC +count(*) from [dbo].HomeOwnerPhoneArchived where bble = @bble
+----select @RC = @RC +count(*) from [dbo].[HomeOwnerEmail] where bble=@bble
+--select @RC = @RC +count(*) from [dbo].OwnerContactsArchived where bble=@bble
+
+select @RC as RC
+</value>
+  </data>
+  <data name="PoolA1Testing_TestAction.SqlScript" xml:space="preserve">
+    <value>/*
+Testing Leads_A1_Pool data quality
+*/
 DECLARE @RC AS INT;
-DECLARE @bble nchar(11)
+select @RC=0;
 
-select @RC=0,
-	   @bble='3016320012';
+--check data ECBViolations
+select @RC = @RC +count(*) from leads_A1_Pool where ECBViolationsAmt &gt; 250000
+select @RC = @RC +count(*) from leads_A1_Pool where ECBViolationsAmt &gt; 150000 and (Borough = 3 or Borough = 4)
 
-
-
-select @RC = @RC +count(*) from Leads where BBLE = @bble
-select @RC = @RC +count(*) from [dbo].[LeadsActivityLog] where bble = @bble
-select @RC = @RC +count(*) from [dbo].[HomeOwnerAddress] where bble = @bble
-select @RC = @RC +count(*) from [dbo].[HomeOwnerPhone] where bble = @bble
-select @RC = @RC +count(*) from [dbo].[HomeOwnerAddress] where bble=@bble
-select @RC = @RC +count(*) from [dbo].[HomeOwnerEmail] where bble=@bble
-select @RC = @RC +count(*) from [dbo].[OwnerContacts] where bble=@bble
-
+--select @RC = @RC +count(*) from [dbo].[LeadsActivityLog] where BBLE in (select bble from ClearBBLEs)
+--select @RC = @RC +count(*) from [dbo].[HomeOwnerAddress] where BBLE in (select bble from ClearBBLEs)
+--select @RC = @RC +count(*) from [dbo].[HomeOwnerPhone] where BBLE in (select bble from ClearBBLEs)
+--select @RC = @RC +count(*) from [dbo].[LeadsComments] where BBLE in (select bble from ClearBBLEs)
+--select @RC = @RC +count(*) from [dbo].[OwnerContacts] where BBLE in (select bble from ClearBBLEs)
 select @RC as RC</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

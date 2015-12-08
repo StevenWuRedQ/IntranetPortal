@@ -557,7 +557,6 @@
             if (cbpLogs) {
                 cbpLogs.PerformCallback(caseId);
             }
-
         }
 
         function OnSuccess(response) {

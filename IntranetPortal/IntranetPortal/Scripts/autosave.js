@@ -19,6 +19,7 @@ function NGAddArrayitemScope(scopeId, model) {
     }
 }
 
+var changedTime = null;
 function ScopeCaseDataChanged(getDataFunc) {
     if ($('#CaseData').length === 0) {
         alert("can not find input case data elment");
@@ -26,7 +27,16 @@ function ScopeCaseDataChanged(getDataFunc) {
         return false;
     }
 
-    return $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(getDataFunc());
+    //var dateNow = new Date();    
+    var isChanged = $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(getDataFunc());
+        
+    return isChanged
+}
+
+function CheckDateSpan(startTime, endTime)
+{
+    var dif = endTime.getTime() - startTime.getTime();
+    return dif / 1000;
 }
 
 function ScopeResetCaseDataChange(getDataFunc) {
@@ -46,7 +56,7 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem, makeSrueRefersh) {
         return;
     }
     // delay the first run after 30 second!
-    $.wait(30000).then(function () {
+    $.wait(10000).then(function () {
         window.setInterval(function () {
             //if (makeSrueRefersh)
             //{
@@ -59,7 +69,7 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem, makeSrueRefersh) {
                 SaveFunc(sucessFunc);
                 //ScopeResetCaseDataChange(getDataFunc)
             }
-        }, 30000);
+        }, 10000);
     });
 }
 

@@ -2,7 +2,7 @@
 <%@ Import Namespace="IntranetPortal.Data" %>
 
 <uib-tabset class="tab-switch">
-    <uib-tab ng-repeat="mortgage in SsCase.Mortgages|filter:{DataStatus:'!3'}" active="mortgage.active" disable="mortage.disabled" >
+    <uib-tab ng-repeat="mortgage in SsCase.Mortgages|filter:{DataStatus:'!3'}" active="MortgageTabs[$index]" disable="mortage.disabled" >
         <tab-heading>Mortgage {{$index+1}} </tab-heading>
             <div class="text-right" style="margin-bottom:-25px" ng-show="$index>0"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="NGremoveArrayItem(SsCase.Mortgages, $index,true)" title="Delete"></i></div>
             <div>
