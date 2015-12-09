@@ -20,7 +20,7 @@ Public Class ConstructionTest
         Dim controller As New IntranetPortal.Controllers.ConstructionCasesController
         Dim caseData = controller.GetConstructionCase(bble)
         Assert.IsInstanceOfType(caseData, GetType(IHttpActionResult))
-        Assert.IsInstanceOfType(caseData, GetType(Results.OkNegotiatedContentResult(Of IntranetPortal.Data.ConstructionCase)))
+        Assert.IsInstanceOfType(caseData, GetType(Results.OkNegotiatedContentResult(Of ConstructionCase)))
         Dim cData = CType(caseData, Results.OkNegotiatedContentResult(Of IntranetPortal.Data.ConstructionCase)).Content
         Assert.AreEqual(bble, cData.BBLE.Trim)
     End Sub
