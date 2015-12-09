@@ -13,7 +13,7 @@ function NGAddArrayitemScope(scopeId, model) {
         } else {
 
             $scope.$eval(model + '.push({})');
-
+            //test
         }
         $scope.$apply();
     }
