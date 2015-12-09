@@ -157,19 +157,46 @@ select @RC as RC
     <value>/*
 Testing Leads_A1_Pool data quality
 */
-DECLARE @RC AS INT;
+DECLARE @RC AS INT, @Count1 as int, @Count2 as int;
 select @RC=0;
 
 --check data ECBViolations
 select @RC = @RC +count(*) from leads_A1_Pool where ECBViolationsAmt &gt; 250000
-select @RC = @RC +count(*) from leads_A1_Pool where ECBViolationsAmt &gt; 150000 and (Borough = 3 or Borough = 4)
+select @RC = @RC +count(*) from leads_A1_Pool where ECBViolationsAmt &gt; 150000 and (Borough = 4 or Borough = 2)
+select @RC = @RC +count(*) from Leads_Last_LP_Date where BBLE in (select BBLE from leads_A1_Pool) and FileDate &lt; '2010/1/1'
+select @RC = @RC +count(*) from leads_A1_Pool 
+where PropertyClass not like 'A%' and propertyclass not like 'B%' and PropertyClass not in ('C0','C3')
 
---select @RC = @RC +count(*) from [dbo].[LeadsActivityLog] where BBLE in (select bble from ClearBBLEs)
---select @RC = @RC +count(*) from [dbo].[HomeOwnerAddress] where BBLE in (select bble from ClearBBLEs)
---select @RC = @RC +count(*) from [dbo].[HomeOwnerPhone] where BBLE in (select bble from ClearBBLEs)
---select @RC = @RC +count(*) from [dbo].[LeadsComments] where BBLE in (select bble from ClearBBLEs)
---select @RC = @RC +count(*) from [dbo].[OwnerContacts] where BBLE in (select bble from ClearBBLEs)
-select @RC as RC</value>
+--check deed_data&gt;LP_Date
+select @RC = @RC + count(*) from Leads_38K_Loop_Info_View lv, leads_A2_Pool a2 where lv.bble=a2.bble and lv.[DEED_DATE] &gt; lv.[FileDate]
+select @Count1 = count(*) from Leads_38K_Loop_Info_View lv, leads_A2_Pool a2 where lv.bble=a2.bble and (lv.[DEED_DATE] &lt;= lv.[FileDate] or lv.[Deed_Date] is null)
+select @Count2 = count(*) from leads_A2_Pool
+
+select @RC as RC
+select iif(@Count1=@Count2, 'True', 'False') as Result</value>
+  </data>
+  <data name="PoolA2Test_TestAction.SqlScript" xml:space="preserve">
+    <value>/*
+Testing Leads_A2_Pool data quality
+*/
+DECLARE @RC AS INT, @Count1 as int, @Count2 as int;
+select @RC=0;
+
+--check data ECBViolations
+select @RC = @RC +count(*) from leads_A2_Pool where ECBViolationsAmt &gt; 250000
+select @RC = @RC +count(*) from leads_A2_Pool where ECBViolationsAmt &gt; 150000 and (Borough = 4 or Borough = 2)
+
+--check deed_data&gt;LP_Date
+select @RC = @RC + count(*) from Leads_38K_Loop_Info_View lv, leads_A2_Pool a2 where lv.bble=a2.bble and lv.[DEED_DATE] &gt; lv.[FileDate]
+select @Count1 = count(*) from Leads_38K_Loop_Info_View lv, leads_A2_Pool a2 where lv.bble=a2.bble and (lv.[DEED_DATE] &lt;= lv.[FileDate] or lv.[Deed_Date] is null)
+select @Count2 = count(*) from leads_A2_Pool
+
+select @RC = @RC +count(*) from Leads_Last_LP_Date where BBLE in (select BBLE from leads_A2_Pool) and FileDate &lt; '2010/1/1'
+select @RC = @RC +count(*) from leads_A2_Pool where PropertyClass not like 'A%' and propertyclass not like 'B%' and PropertyClass not in ('C0','C3')
+select @RC = @RC +count(*) from leads_A2_Pool  where [C1stServicer] = 'Seterus' and [C1stServicer] = 'Nationstar'
+
+select @RC as RC
+select iif(@Count1=@Count2, 'True', 'False') as Result</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

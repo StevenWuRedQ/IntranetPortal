@@ -163,6 +163,7 @@ Partial Public Class AssignRule
                                                   .EmployeeID = emp.EmployeeID,
                                                   .EmployeeName = emp.Name,
                                                   .Status = LeadStatus.NewLead,
+                                                  .AppId = 1,
                                                   .AssignDate = DateTime.Now,
                                                   .AssignBy = key
                                                   }
@@ -181,6 +182,7 @@ Partial Public Class AssignRule
                                         .EmployeeID = emp.EmployeeID
                                         .EmployeeName = emp.Name
                                         .Status = LeadStatus.NewLead
+                                        .AppId = 1
                                         .AssignDate = DateTime.Now
                                         .AssignBy = key
                                     End With
