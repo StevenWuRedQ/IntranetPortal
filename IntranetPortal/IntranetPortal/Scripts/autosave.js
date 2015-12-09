@@ -96,7 +96,7 @@ function CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlM
                 $.getJSON(urlModfiyUserFunc(), function (mUser) {
                     if (mUser) {
                         if (mUser != "sameuser") {
-                            alert(mUser + " change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
+                            alert(mUser + " has changed your file at " + lastUpdateTime + ". Our system will load the latest data, and the data you just input may miss.");
                         }
                         reLoadUIfunc(loadUIIdFunc());
                         ScopeSetLastUpdateTime(null, lastUpdateTime);
@@ -104,7 +104,7 @@ function CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlM
 
                 });
             } else {
-                alert("Someone change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
+                alert("Someone has changed your file at " + lastUpdateTime + ". Our system will load the latest data, and the data you just input may miss.");
                 reLoadUIfunc(loadUIIdFunc());
             }
         }
