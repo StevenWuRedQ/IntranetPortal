@@ -107,7 +107,6 @@ function CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlM
                 alert("Someone change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
                 reLoadUIfunc(loadUIIdFunc());
             }
-
         }
     });
 }
