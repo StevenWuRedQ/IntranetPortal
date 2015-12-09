@@ -34,7 +34,7 @@
         },
         replace: {
             change_content_master: {
-                src: ['Content.Master'],
+                src: ['Content.Master','Root.Master'],
                 overwrite: true,
                 replacements: [{
                     from: /src="\/js\/intranetportal.js(\?v=\d{0,8})?"/g,
@@ -48,7 +48,11 @@
                 }, {
                     from: /src="\/Scripts\/autologout.js(\?v=\d{0,8})?"/g,
                     to: 'src="/Scripts\/autologout.js?v=<%= grunt.template.today("ddmmyyyy") %>"'
+                },{
+                    from: /href="\/css\/stevencss.css(\?v=\d{0,8})?"/g,
+                    to: 'href="/css\/stevencss.css?v=<%= grunt.template.today("ddmmyyyy") %>"'
                 }]
+
             }
 
         }
