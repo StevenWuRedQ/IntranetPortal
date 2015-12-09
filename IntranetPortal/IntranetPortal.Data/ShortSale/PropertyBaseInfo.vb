@@ -16,7 +16,7 @@ Partial Public Class PropertyBaseInfo
             If PropFloors IsNot Nothing AndAlso PropFloors.Count > 0 Then
                 Return PropFloors(0).Occupied
             End If
-
+            'test
             Return Nothing
         End Get
     End Property

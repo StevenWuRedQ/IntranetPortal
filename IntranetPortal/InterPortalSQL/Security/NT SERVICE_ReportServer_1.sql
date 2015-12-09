@@ -1,0 +1,3 @@
+﻿CREATE USER [NT SERVICE\ReportServer] FOR LOGIN [NT SERVICE\ReportServer]
+    WITH DEFAULT_SCHEMA = [NT SERVICE\ReportServer];
+

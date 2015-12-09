@@ -1,0 +1,3 @@
+﻿CREATE SCHEMA [NT SERVICE\ReportServer]
+    AUTHORIZATION [NT SERVICE\ReportServer];
+

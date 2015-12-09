@@ -81,6 +81,11 @@ Public Class LegalECourt
             Return ctx.LegalECourts.Where(Function(e) e.BBLE = bble).OrderByDescending(Function(e) e.UpdateTime).FirstOrDefault
         End Using
     End Function
+    Public Shared Function GetLeaglECourtIndexnum(index As String) As LegalECourt
+        Using ctx As New PortalEntities
+            Return ctx.LegalECourts.Where(Function(e) e.IndexNumber = index And e.AppearanceDate.HasValue).OrderByDescending(Function(e) e.AppearanceDate).FirstOrDefault
+        End Using
+    End Function
     Public Shared Function Parse(msg As ImapX.Message) As LegalECourt
         Dim eCourt As LegalECourt
         If msg Is Nothing Then

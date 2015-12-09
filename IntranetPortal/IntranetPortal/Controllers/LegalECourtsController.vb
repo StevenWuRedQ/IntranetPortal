@@ -33,9 +33,13 @@ Namespace Controllers
         <ResponseType(GetType(LegalECourt))>
         <Route("api/LegalECourtByBBLE/{bble}")>
         Function GetLegalECourtByBBLE(ByVal BBLE As String) As IHttpActionResult
-            Dim legalECourt As LegalECourt = Data.LegalECourt.GetLegalEcourt(BBLE)
+            Dim lcase = LegalCase.GetCase(BBLE)
+            If (lcase Is Nothing) Then
+                Return Ok()
+            End If
+            Dim legalECourt As LegalECourt = Data.LegalECourt.GetLeaglECourtIndexnum(lcase.FCIndexNum)
             If IsNothing(legalECourt) Then
-                Return NotFound()
+                Return Ok()
             End If
 
             Return Ok(legalECourt)
