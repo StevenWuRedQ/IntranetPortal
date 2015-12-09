@@ -27,14 +27,13 @@ function ScopeCaseDataChanged(getDataFunc) {
         return false;
     }
 
-    //var dateNow = new Date();    
+    //var dateNow = new Date();
     var isChanged = $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(getDataFunc());
-        
+
     return isChanged
 }
 
-function CheckDateSpan(startTime, endTime)
-{
+function CheckDateSpan(startTime, endTime) {
     var dif = endTime.getTime() - startTime.getTime();
     return dif / 1000;
 }
@@ -74,10 +73,16 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem, makeSrueRefersh) {
 }
 
 
-function ScopeSetLastUpdateTime(url) {
-    $.getJSON(url, function (data) {
-        $('#LastUpdateTime').val(JSON.stringify(data));
-    });
+function ScopeSetLastUpdateTime(url, date) {
+    if (url) {
+        $.getJSON(url, function (data) {
+            $('#LastUpdateTime').val(JSON.stringify(data));
+        });
+    }
+    if (date) {
+        $('#LastUpdateTime').val(date);
+    }
+
 }
 
 function CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyUserFunc) {
@@ -85,6 +90,7 @@ function CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlM
     $.getJSON(url, function (data) {
         var lastUpdateTime = JSON.stringify(data);
         var localUpdateTime = $('#LastUpdateTime').val();
+
         if (localUpdateTime && localUpdateTime != lastUpdateTime) {
             if (urlModfiyUserFunc) {
                 $.getJSON(urlModfiyUserFunc(), function (mUser) {
@@ -93,6 +99,7 @@ function CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlM
                             alert(mUser + " change your file at " + lastUpdateTime + ", system will load the refreshest data ! Will missing some data which you inputed.");
                         }
                         reLoadUIfunc(loadUIIdFunc());
+                        ScopeSetLastUpdateTime(null, lastUpdateTime);
                     }
 
                 });
