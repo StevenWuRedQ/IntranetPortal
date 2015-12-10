@@ -8,7 +8,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.ProcessorName" ng-change="SsCase.Processor=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.Processor=$item.ContactId" bind-id="SsCase.Processor" >
+                <input type="text" class="ss_form_input" ng-model="SsCase.ProcessorName" readonly="readonly" ng-change="SsCase.Processor=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.Processor=$item.ContactId" bind-id="SsCase.Processor" >
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Phone #</label>
