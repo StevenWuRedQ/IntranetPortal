@@ -18,9 +18,6 @@
                               "column": "CaseName",
                               "type": "string"
                           },
-
-
-
                           {
                               "name": "LastUpdateDate",
                               "table": "LegalCaseJsonView",
@@ -96,38 +93,36 @@
                           }
                         ]
                     },
-                   
-
                     {
                         "category": "OSC",
                         "fields": [
 
                           {
-                              "name": "OSCPlantiff",
+                              "name": "OSC Plantiff",
                               "table": "LegalOTSC_VIew",
                               "column": "OSCPlantiff",
                               "type": "string"
                           },
                           {
-                              "name": "OSCPlaintiffAttorney",
+                              "name": "OSC Plaintiff Attorney",
                               "table": "LegalOTSC_VIew",
                               "column": "OSCPlaintiffAttorney",
                               "type": "string"
                           },
                           {
-                              "name": "OSCDefendant",
+                              "name": "OSC Defendant",
                               "table": "LegalOTSC_VIew",
                               "column": "OSCDefendant",
                               "type": "string"
                           },
                           {
-                              "name": "OSCDefendantAttorney",
+                              "name": "OSC Defendant Attorney",
                               "table": "LegalOTSC_VIew",
                               "column": "OSCDefendantAttorney",
                               "type": "string"
                           },
                           {
-                              "name": "Tag",
+                              "name": "OSC Tag",
                               "table": "LegalOTSC_VIew",
                               "column": "Tag",
                               "type": "string"
@@ -139,31 +134,31 @@
                         "fields": [
 
                           {
-                              "name": "PartitionsPlantiff",
+                              "name": "Partition Plantiff",
                               "table": "LegalPartition_view",
                               "column": "PartitionsPlantiff",
                               "type": "string"
                           },
                           {
-                              "name": "PartitionsDefendant1",
+                              "name": "Partition Defendant1",
                               "table": "LegalPartition_view",
                               "column": "PartitionsDefendant1",
                               "type": "string"
                           },
                           {
-                              "name": "PartitionsDefendant",
+                              "name": "Partition Defendant",
                               "table": "LegalPartition_view",
                               "column": "PartitionsDefendant",
                               "type": "string"
                           },
                           {
-                              "name": "PartitionsPlantiffAttorney",
+                              "name": "Partition Plantiff Attorney",
                               "table": "LegalPartition_view",
                               "column": "PartitionsPlantiffAttorney",
                               "type": "string"
                           },
                           {
-                              "name": "Tag",
+                              "name": "Partition Tag",
                               "table": "LegalPartition_view",
                               "column": "Tag",
                               "type": "string"
@@ -175,25 +170,25 @@
                         "fields": [
 
                           {
-                              "name": "QTA_Plantiff",
+                              "name": "QTA Plantiff",
                               "table": "LegalQTA_View",
                               "column": "QTA_Plantiff",
                               "type": "string"
                           },
                           {
-                              "name": "QTA_PlantiffAttorney",
+                              "name": "QTA PlantiffAttorney",
                               "table": "LegalQTA_View",
                               "column": "QTA_PlantiffAttorney",
                               "type": "string"
                           },
                           {
-                              "name": "QTA_Defendant",
+                              "name": "QTA Defendant",
                               "table": "LegalQTA_View",
                               "column": "QTA_Defendant",
                               "type": "string"
                           },
                           {
-                              "name": "Tag",
+                              "name": "QTA Tag",
                               "table": "LegalQTA_View",
                               "column": "Tag",
                               "type": "string"
@@ -205,26 +200,55 @@
                         "fields": [
 
                           {
-                              "name": "SPComplaint_Plantiff",
+                              "name": "Specific Plantiff",
                               "table": "LegalSpecificPerformance_View",
                               "column": "SPComplaint_Plantiff",
                               "type": "string"
                           },
                           {
-                              "name": "SPComplaint_PlantiffAttorney",
+                              "name": "Specific PlantiffAttorney",
                               "table": "LegalSpecificPerformance_View",
                               "column": "SPComplaint_PlantiffAttorney",
                               "type": "string"
                           },
                           {
-                              "name": "SPComplaint_Defendant",
+                              "name": "Specific Defendant",
                               "table": "LegalSpecificPerformance_View",
                               "column": "SPComplaint_Defendant",
                               "type": "string"
                           },
                           {
-                              "name": "Tag",
+                              "name": "Specific Tag",
                               "table": "LegalSpecificPerformance_View",
+                              "column": "Tag",
+                              "type": "string"
+                          }
+                        ]
+                    }, {
+                        "category": "Deed Reversions",
+                        "fields": [
+
+                          {
+                              "name": "Deed Reversion Plantiff",
+                              "table": "LegalDeedReversions_View",
+                              "column": "DeedReversionPlantiff",
+                              "type": "string"
+                          },
+                          {
+                              "name": "Deed Reversion Plantiff Attorney" ,
+                              "table": "LegalDeedReversions_View",
+                              "column": "DeedReversionPlantiffAttorney",
+                              "type": "string"
+                          },
+                          {
+                              "name": "Deed Reversion Defendant",
+                              "table": "LegalDeedReversions_View",
+                              "column": "DeedReversionDefendant",
+                              "type": "string"
+                          },
+                          {
+                              "name": "Deed Reversion Tag",
+                              "table": "LegalDeedReversions_View",
                               "column": "Tag",
                               "type": "string"
                           }
