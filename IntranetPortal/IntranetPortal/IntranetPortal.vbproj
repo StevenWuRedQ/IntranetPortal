@@ -1794,13 +1794,6 @@
     <Compile Include="Reports\XtraReport1.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Root1.Master.designer.vb">
-      <DependentUpon>Root1.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Root1.Master.vb">
-      <DependentUpon>Root1.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Root.Master.designer.vb">
       <DependentUpon>Root.Master</DependentUpon>
     </Compile>
@@ -7248,7 +7241,6 @@
     <Content Include="bower_components\angular-mocks\bower.json" />
     <Content Include="bower_components\angular-mocks\package.json" />
     <Content Include="bower_components\angular-mocks\README.md" />
-    <Content Include="Root1.Master" />
     <None Include="Service References\CallTrackingService\CallTrackingService.wsdl" />
     <Content Include="Service References\CallTrackingService\IntranetPortal.CallTrackingService.EmployeeStatisticData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

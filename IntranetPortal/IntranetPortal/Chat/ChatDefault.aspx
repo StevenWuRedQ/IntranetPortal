@@ -227,20 +227,6 @@
 
                 var chatWin = GetChatWin(name, id, chatHub);
                 chatWin.addMessage(fromUserName, message);
-
-
-                
-
-                //if ($('#' + ctrId).length == 0) {
-
-                //    createPrivateChatWindow(chatHub, windowId, ctrId, fromUserName);
-                //}
-
-                //$('#' + ctrId).find('#divMessage').append('<div class="message"><span class="userName">' + fromUserName + '</span>: ' + message + '</div>');
-
-                //// set scrollbar
-                //var height = $('#' + ctrId).find('#divMessage')[0].scrollHeight;
-                //$('#' + ctrId).find('#divMessage').scrollTop(height);
             }
         }
 
@@ -289,7 +275,7 @@
             };
 
             this.addMessage = function (fromUserName, message) {                
-                var divMsg = this.ChatDiv.find('#divMessage'); // $('#' + this.CtrId).find('#divMessage');
+                var divMsg = this.ChatDiv.find('#divMessage');
                 divMsg.append('<div class="message"><span class="userName">' + fromUserName + '</span>: ' + message + '</div>');                
               
                 this.setScrollbar();

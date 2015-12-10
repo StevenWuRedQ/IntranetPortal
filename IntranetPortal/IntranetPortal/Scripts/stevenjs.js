@@ -1152,3 +1152,7 @@ function CallPhone(phone) {
     $("#AutoDialer").css('display', '');
     $("#AutoDialer").attr("src", encodeURI(url));
 };
+
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+};
