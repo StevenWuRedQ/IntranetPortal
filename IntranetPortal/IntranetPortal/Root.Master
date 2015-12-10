@@ -144,35 +144,48 @@
             -o-animation: infinite;
             animation: infinite;
         }
+
+        #global-announcements {
+            background-color:#fffde7;
+            color: red;
+            margin: 0;
+            padding: 8px;
+            font-weight: bold;
+            font-size: 12px;
+            display: none;
+
+        }
+
+        #global-announcements div {
+            margin: 0;
+            padding: 0;
+        }
     </style>
 
-
-    <script>
-        $(function () {
-            setTimeout(
-                function () {
-                    LoadChatWindow(false);
-                    $('#imgChat').css("color", "green");
-                }, 1000);
-        });
-    </script>
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
 </head>
 
 <body onload="init();" id="testIDbody">
     <form id="form1" runat="server">
         <script type="text/javascript">
-            var ctrId = 'divChat';
-            var inAnimate = false;
+            $(function () {
+                setTimeout(
+                    function () {
+                        LoadChatWindow(false);
+                        $('#imgChat').css("color", "green");
+                    }, 1000);
+
+                // setGlobalAnnouncement("Dear users, if you have any difficulty to display our website, please try press ctrl+f5 to clear your browser cache!");
+            });
+
+
             function ShowSearchLeadsInfo(bble) {
                 var url = '/ViewLeadsInfo.aspx?id=' + bble;
                 OpenLeadsWindow(url, "View Leads Info " + bble);
             }
-
             function OpenLeadsWindow(url, title, width, height) {
                 alert('error ' + width + height);
             }
-
             function GoToLead(bble) {
                 var iframe = document.getElementById("contentUrlPane");
                 if (iframe && iframe != null) {
@@ -183,11 +196,8 @@
                 }
             }
 
-            function endsWith(str, suffix) {
-                return str.indexOf(suffix, str.length - suffix.length) !== -1;
-            }
-
             function ShowChatWindow() {
+                var ctrId = 'divChat';
                 var tmp = $('#' + ctrId);
                 if (tmp.is('div')) {
                     tmp.fadeIn();
@@ -202,8 +212,8 @@
                     LoadChatWindow(true);
                 }
             }
-
             function LoadChatWindow(visible) {
+                var ctrId = 'divChat';
                 var dateMark = (new Date()).toJSON();
                 var div = '<div id="' + ctrId + '"  rel="0"  style="bottom: -500px; right: 25px; position: fixed; width: 565px; height:390px;background-color:white;box-shadow: 10px 10px 5px #888888;">' +
                     '<div class="header" style="position:fixed;width:550px;background-color:transparent;line-height:35px;">' +
@@ -223,6 +233,7 @@
                 });
 
                 $div.find('#imgDelete').click(function () {
+                    var ctrId = 'divChat';
                     $('#' + ctrId).hide();
                 });
 
@@ -232,22 +243,18 @@
             }
 
             function NewTask() {
-                //$("#SpanAmount_TotalTask").css("background-color", "#e63000");
-                if (!inAnimate)
-                    animate();
+                    totalTaskAnimate();
             }
-
-            function animate() {
+            function totalTaskAnimate() {
                 if (!$('#SpanAmount_TotalTask').is(':visible')) {
                     $('#SpanAmount_TotalTask').css("background-color", "#1a3847");
-                    inAnimate = false;
                     return;
                 }
 
                 $('#SpanAmount_TotalTask').animate({ backgroundColor: '#ffcc00' }, 500, function () {
                     $('#SpanAmount_TotalTask').animate({ backgroundColor: '#eeeeee' }, 500, function () {
                         $('#SpanAmount_TotalTask').animate({ backgroundColor: '#e63000' }, 500, function () {
-                            animate();
+                            totalTaskAnimate();
                         });
                     });
                 });
@@ -257,11 +264,31 @@
                 $("#wrapper").toggleClass("xtoggled");
             }
 
-        </script>
+            /**
+            * function to show global annoucement at top
+            */
+            function setGlobalAnnouncement(message) {
+                debugger;
+                $("#global-announcements").show();
+                $("#global-announcements-message").text(message);
+                $(".global-announcements-close").on('click', function () {
+                    $("#global-announcements").hide(300);
+                });
+                setTimeout(function () {
+                    $("#global-announcements").hide(1000);
+                }, 180000)
+            }
 
+        </script>
+        <div role="banner" id="global-announcements">
+            <div class="content">
+                <i class="fa fa-exclamation-triangle"></i>&nbsp;
+                <span id="global-announcements-message"></span>
+                <i class="fa fa-times global-announcements-close icon_btn pull-right"></i>
+            </div>
+        </div>
         <div id="wrapper">
             <div id="sidebar-wrapper">
-
                 <div id="global-nav-container" class="sidebar-nav">
                     <nav id="global-nav" class="mip-navbar" role="navigation">
                         <div class="mip-navbar-header">
@@ -442,7 +469,6 @@
                 </div>
             </div>
         </div>
-
         <div id="divMsgTest" class="info message" style="bottom: -300px; right: 25px">
             <div class="msgtitle">
                 <i class="fa fa-envelope with_circle" style="color: white; font-size: 14px; width: 30px; height: 30px; line-height: 30px; text-align: center"></i>&nbsp; New Message
