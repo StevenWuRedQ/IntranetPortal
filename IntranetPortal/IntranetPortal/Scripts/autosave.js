@@ -4,6 +4,12 @@ $.wait = function (ms) {
     setTimeout(function () { defer.resolve(); }, ms);
     return defer;
 };
+
+function CheckDateSpan(startTime, endTime) {
+    var dif = endTime.getTime() - startTime.getTime();
+    return dif / 1000;
+}
+
 function NGAddArrayitemScope(scopeId, model) {
     var $scope = angular.element(document.getElementById(scopeId)).scope();
     if (model) {
@@ -19,35 +25,25 @@ function NGAddArrayitemScope(scopeId, model) {
     }
 }
 
-var changedTime = null;
 function ScopeCaseDataChanged(getDataFunc) {
     if ($('#CaseData').length === 0) {
         alert("can not find input case data elment");
         $('<input type="hidden" id="CaseData" />').appendTo(document.body);
         return false;
     }
-
     //var dateNow = new Date();
     var isChanged = $('#CaseData').val() != "" && $('#CaseData').val() != JSON.stringify(getDataFunc());
-
     return isChanged
-}
-
-function CheckDateSpan(startTime, endTime) {
-    var dif = endTime.getTime() - startTime.getTime();
-    return dif / 1000;
 }
 
 function ScopeResetCaseDataChange(getDataFunc) {
     var caseData = getDataFunc();
-    if ($('#CaseData').length == 0) {
-
-        $('<input type="hidden" id="CaseData" />').appendTo(document.body);
-    }
-    $('#CaseData').val(JSON.stringify(getDataFunc()));
+    if ($('#CaseData').length === 0) {
+        $('<input type="hidden" id="CaseData" />').appendTo(document.body);    }
+    $('#CaseData').val(JSON.stringify(caseData));
 }
 
-function ScopeAutoSave(getDataFunc, SaveFunc, headEelem, makeSrueRefersh) {
+function ScopeAutoSave(getDataFunc, SaveFunc, headEelem) {
     if ($(headEelem).length <= 0) {
         return;
     }
@@ -55,20 +51,12 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem, makeSrueRefersh) {
         return;
     }
     // delay the first run after 30 second!
-    $.wait(10000).then(function () {
+    $.wait(300000).then(function () {
         window.setInterval(function () {
-            //if (makeSrueRefersh)
-            //{
-            //    var m = makeSrueRefersh;
-            //    CheckLastUpdateChangedByOther(m.urlFunc, m.reLoadUIfunc, m.loadUIIdFunc, m.urlModfiyUserFunc)
-            //}
             if (ScopeCaseDataChanged(getDataFunc)) {
-                var sucessFunc = function () {
-                };
-                SaveFunc(sucessFunc);
-                //ScopeResetCaseDataChange(getDataFunc)
+                SaveFunc();
             }
-        }, 10000);
+        }, 300000);
     });
 }
 
@@ -90,12 +78,11 @@ function CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlM
     $.getJSON(url, function (data) {
         var lastUpdateTime = JSON.stringify(data);
         var localUpdateTime = $('#LastUpdateTime').val();
-
-        if (localUpdateTime && localUpdateTime != lastUpdateTime) {
+        if (localUpdateTime && localUpdateTime !== lastUpdateTime) {
             if (urlModfiyUserFunc) {
                 $.getJSON(urlModfiyUserFunc(), function (mUser) {
                     if (mUser) {
-                        if (mUser != "sameuser") {
+                        if (mUser !== "sameuser") {
                             alert(mUser + " has changed your file at " + lastUpdateTime + ". Our system will load the latest data, and the data you just input may miss.");
                         }
                         reLoadUIfunc(loadUIIdFunc());
@@ -112,7 +99,6 @@ function CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlM
 }
 
 function ScopeDateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyUserFunc) {
-
     window.setInterval(function () {
         CheckLastUpdateChangedByOther(urlFunc, reLoadUIfunc, loadUIIdFunc, urlModfiyUserFunc);
     }, 10000);

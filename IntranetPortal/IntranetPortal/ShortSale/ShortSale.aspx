@@ -511,9 +511,9 @@
                                     <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();LogClick('FollowUp', callbackCalendar.GetSelectedDate().toLocaleString());}"></ClientSideEvents>
                                 </dx:ASPxButton>
                                 &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" UseSubmitBehavior="false" CssClass="rand-button rand-button-gray">
-                                                                <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents>
-                                                            </dx:ASPxButton>
+                                <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" UseSubmitBehavior="false" CssClass="rand-button rand-button-gray">
+                                    <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents>
+                                </dx:ASPxButton>
                             </td>
                         </tr>
                     </table>
@@ -551,6 +551,22 @@
     <uc1:Common runat="server" ID="Common" />
 
     <script type="text/javascript">
+        function OnSuccess(response) {
+            ShortSaleCaseData = response;  //JSON.parse(response.d);
+            leadsInfoBBLE = ShortSaleCaseData.BBLE;
+        }
+
+        function GetLasTUpDateURL() {
+            return window.caseId ? 'ShortSaleServices.svc/GetCaseLastUpDateTime?caseId=' + window.caseId : '';
+        }
+
+        function NGGetShortSale(caseId) {
+            $(document).ready(function () {
+                angular.element(document.getElementById('ShortSaleCtrl')).scope().GetShortSaleCase(caseId, function () {
+                    ScopeSetLastUpdateTime(GetLasTUpDateURL());
+                });
+            });
+        }
 
         function GetShortSaleData(caseId) {
             NGGetShortSale(caseId);
@@ -559,23 +575,6 @@
             }
         }
 
-        function OnSuccess(response) {
-            ShortSaleCaseData = response;  //JSON.parse(response.d);
-            leadsInfoBBLE = ShortSaleCaseData.BBLE;
-        }
-    </script>
-    <script type="text/javascript">
-
-        function GetLasTUpDateURL() {
-            return window.caseId ? 'ShortSaleServices.svc/GetCaseLastUpDateTime?caseId=' + window.caseId : '';
-        }
-        function NGGetShortSale(caseId) {
-            $(document).ready(function () {
-                angular.element(document.getElementById('ShortSaleCtrl')).scope().GetShortSaleCase(caseId, function () {
-                    ScopeSetLastUpdateTime(GetLasTUpDateURL());
-                });
-            });
-        }
         function CaseDataChanged() {
             return ScopeCaseDataChanged(GetShortSaleCase);
         }
@@ -599,9 +598,10 @@
 
         function UpDateFollowUpDate(date) {
             var UtcDate = new Date(date);
-            date = UtcDate.getMonth() + '/' + UtcDate.getDay() + '/' + UtcDate.getYear();
-            GetShortSaleCase().CallbackDate = date;
+            var utcdate = UtcDate.getMonth() + '/' + UtcDate.getDay() + '/' + UtcDate.getFullYear();
+            GetShortSaleCase().CallbackDate = utcdate;
         }
+
         function UpdateMortgageStatus(selType1, selStatusUpdate, selCategory) {
             angular.element(document.getElementById('ShortSaleCtrl')).scope().UpdateMortgageStatus(selType1, selStatusUpdate, selCategory);
         }
@@ -628,22 +628,20 @@
         }
 
         function SaveShortSaleCase() {
-            angular.element(document.getElementById('ShortSaleCtrl')).scope().SaveShortSale(function () { ScopeSetLastUpdateTime(GetLasTUpDateURL()); ResetCaseDataChange(); });
+            angular.element(document.getElementById('ShortSaleCtrl')).scope().SaveShortSale(
+                function () {
+                    ScopeSetLastUpdateTime(GetLasTUpDateURL());
+                    ResetCaseDataChange();
+                });
         }
 
         $(document).ready(function () {
             var $scope = angular.element(document.getElementById('ShortSaleCtrl')).scope();
             ScopeDateChangedByOther(GetLasTUpDateURL, $scope.GetShortSaleCase, $scope.GetLoadId, $scope.GetModifyUserUrl);
-            ScopeAutoSave(GetShortSaleCase, SaveShortSaleCase, '#ShortSaleTabHead',
-            {
-                "urlFunc": GetLasTUpDateURL,
-                "reLoadUIfunc": $scope.GetShortSaleCase,
-                "loadUIIdFunc": $scope.GetLoadId,
-                "urlModfiyUserFunc": $scope.GetModifyUserUrl
-            });
+            ScopeAutoSave(GetShortSaleCase, SaveShortSaleCase, '#ShortSaleTabHead');
         });
 
-        
+
 
     </script>
 

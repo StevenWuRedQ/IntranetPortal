@@ -6,7 +6,7 @@
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head id="Head1" runat="server">
     <title>Agent Portal (beta) - My Ideal Property</title>
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' />

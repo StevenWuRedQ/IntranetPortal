@@ -378,20 +378,20 @@
 
     var needRefreshShortSale = false;
     function InsertNewComments() {
+        var commentHtml = EmailBody.GetHtml();
+        var addDate = null;
 
         if(addCommentsCallbackClient.InCallback())
         {
             alert("The comments is adding. Please try later.");
             return;
         }
-
-        var commentHtml = EmailBody.GetHtml();
-        var addDate = null;
         if (typeof dateActivityClient != 'undefined') {
             addDate = dateActivityClient.GetDate();
         }
-        if (addDate == null)
+        if (addDate == null){
             addDate = new Date();
+        }            
 
         if ($("#selCategory").attr("data-required") == "true" && $("#selCategory").val() == "") {
             alert("Please select Category");
@@ -435,14 +435,11 @@
             }
         }
       
-        if ($("#selStatusUpdate").val() != null && $("#selStatusUpdate").val() != "")
-        {
+        if ($("#selStatusUpdate").val() != null && $("#selStatusUpdate").val() != "")        {
             if(typeof UpdateMortgageStatus != "undefined")
                 UpdateMortgageStatus($("#selType1").val(), $("#selStatusUpdate option:selected").text(), $("#selCategory").val());
-            
-            //needRefreshShortSale = true;
-        } else
-        {
+
+        } else        {
             needRefreshShortSale = false;
         }
 
@@ -724,7 +721,7 @@
         </div>
     </div>
     <dx:ASPxCallback runat="server" ID="addCommentsCallback" ClientInstanceName="addCommentsCallbackClient" OnCallback="addCommentsCallback_Callback">
-        <ClientSideEvents EndCallback="function(s,e){gridTrackingClient.Refresh();EmailBody.SetHtml(''); document.getElementById('txtComments').value='';}" />
+        <ClientSideEvents EndCallback="function(s,e){gridTrackingClient.Refresh(); EmailBody.SetHtml(''); document.getElementById('txtComments').value='';}" />
     </dx:ASPxCallback>
 
     <dx:ASPxCallback runat="server" ID="addLogsCallback" ClientInstanceName="addLogsCallbackClient" OnCallback="addLogsCallback_Callback">
