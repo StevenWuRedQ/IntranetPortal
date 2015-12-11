@@ -5,6 +5,10 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 
 <TestClass()>
 Public Class ShortSaleUnitTest
+    Dim caseId = 13
+    Dim saveBy = "UnitTest"
+    Dim loan = "Test Loan " & (New Random).Next(1000).ToString
+    Dim dateOfSale As DateTime = DateTime.Today.AddDays(-1)
 
     <TestMethod()> Public Sub ReassignOwnerTest()
         Dim bble = "4089170024"
@@ -135,6 +139,145 @@ Public Class ShortSaleUnitTest
             clist = ctx.ShortSaleCheckLists.Find(bble)
             Assert.IsTrue(clist Is Nothing)
         End Using
+    End Sub
+
+    <TestMethod()> Public Sub MortgageSaveTest()
+        Dim ssCase = ShortSaleCase.GetCase(caseId)
+        Dim mtgs = ssCase.Mortgages.ToList
+        Assert.IsTrue(mtgs.Count > 0)
+
+        Dim firstMtg = mtgs(0)
+
+        'Mortgages change data
+
+        firstMtg.Loan = loan
+        firstMtg.DateOfSale = dateOfSale
+        ssCase.Save(saveBy)
+        ssCase = ShortSaleCase.GetCase(caseId)
+        Assert.AreEqual(ssCase.FirstMortgage.Loan, loan)
+        Assert.AreEqual(DateTime.Compare(ssCase.FirstMortgage.DateOfSale, dateOfSale), 0)
+    End Sub
+
+    <TestMethod()> Public Sub MortgageRemoveTest()
+        Dim ssCase = ShortSaleCase.GetCase(caseId)
+        Dim mtgs = ssCase.Mortgages.ToList
+        Dim mtgAmount = mtgs.Count   '=1
+
+        Assert.IsTrue(mtgs.Count > 0)
+        Dim newMtg = New PropertyMortgage
+        mtgs.Add(newMtg)
+        newMtg.Loan = loan
+        newMtg.DateOfSale = dateOfSale
+        ssCase.Mortgages = mtgs.ToArray
+        ssCase.Save(saveBy)
+
+        'Remove Mortgages test
+        ssCase = ShortSaleCase.GetCase(caseId)
+        mtgs = ssCase.Mortgages.ToList
+        Dim lastMtg = mtgs.Last
+        lastMtg.DataStatus = ModelStatus.Deleted  'set status as deleted
+        ssCase.Save(saveBy)
+        Dim newCase = ShortSaleCase.GetCase(caseId)
+        Assert.IsFalse(newCase.Mortgages.Any(Function(m) m.MortgageId = lastMtg.MortgageId))
+
+        ssCase.Mortgages = mtgs.ToArray
+        ssCase.Save(saveBy) 'Save again shortsalecase
+        newCase = ShortSaleCase.GetCase(caseId)
+        Assert.IsFalse(newCase.Mortgages.Any(Function(m) m.MortgageId = lastMtg.MortgageId))
+        Assert.AreEqual(mtgAmount, newCase.Mortgages.Count)
+
+        'after delete and add a new case
+        newMtg = New PropertyMortgage
+        mtgs.Add(newMtg)
+        newMtg.Loan = loan
+        newMtg.DateOfSale = dateOfSale
+        ssCase.Mortgages = mtgs.ToArray
+        ssCase.Save(saveBy)
+        newCase = ShortSaleCase.GetCase(caseId)
+        Assert.AreEqual(mtgAmount + 1, newCase.Mortgages.Count)
+        Assert.AreEqual(newMtg.Loan, newCase.Mortgages.Last.Loan)
+
+        newMtg.DataStatus = ModelStatus.Deleted
+        ssCase.Save(saveBy)
+        newCase = ShortSaleCase.GetCase(caseId)
+        Assert.IsFalse(newCase.Mortgages.Any(Function(m) m.MortgageId = lastMtg.MortgageId))
+        Assert.AreEqual(mtgAmount, newCase.Mortgages.Count)
+
+        ssCase.Save(saveBy)
+        newCase = ShortSaleCase.GetCase(caseId)
+        Assert.IsFalse(newCase.Mortgages.Any(Function(m) m.MortgageId = lastMtg.MortgageId))
+        Assert.AreEqual(mtgAmount, newCase.Mortgages.Count)
+    End Sub
+
+    <TestMethod()> Public Sub MortgageAddTest()
+        Dim ssCase = ShortSaleCase.GetCase(caseId)
+        Dim mtgs = ssCase.Mortgages.ToList
+        Dim amount = mtgs.Count
+        Assert.IsTrue(mtgs.Count > 0)
+
+        Dim newMtg = New PropertyMortgage
+        mtgs.Add(newMtg)
+        newMtg.Loan = loan
+        newMtg.DateOfSale = dateOfSale
+        ssCase.Mortgages = mtgs.ToArray
+        ssCase.Save(saveBy)
+        Dim newCase = ShortSaleCase.GetCase(caseId)
+        Assert.AreEqual(mtgs.Count, newCase.Mortgages.Count)
+        Assert.AreEqual(loan, newCase.Mortgages.Last.Loan)
+
+        'Save again shortsalecase
+        newMtg.MortgageId = 0
+        Assert.AreEqual(newMtg.MortgageId, 0)
+        ssCase.Save(saveBy)
+        newCase = ShortSaleCase.GetCase(caseId)
+        Assert.AreEqual(mtgs.Count, newCase.Mortgages.Count)
+        Assert.AreEqual(loan, newCase.Mortgages.Last.Loan)
+
+        newMtg.DataStatus = ModelStatus.Deleted
+        ssCase.Save(saveBy)
+        newCase = ShortSaleCase.GetCase(caseId)
+        Assert.AreEqual(mtgs.Count - 1, newCase.Mortgages.Count)
+    End Sub
+
+    <TestMethod()> Public Sub MortgageAddThenRemoveTest()
+        Dim ssCase = ShortSaleCase.GetCase(caseId)
+        Dim mtgs = ssCase.Mortgages.ToList
+        Assert.IsTrue(mtgs.Count > 0)
+
+        Dim newMtg = New PropertyMortgage
+        mtgs.Add(newMtg)
+        newMtg.Loan = loan
+        newMtg.DateOfSale = dateOfSale
+        newMtg.DataStatus = ModelStatus.Deleted
+
+        newMtg = New PropertyMortgage
+        mtgs.Add(newMtg)
+        Dim loan2 = "Loan" & (New Random()).Next(1000)
+        newMtg.Loan = loan2
+        ssCase.Mortgages = mtgs.ToArray
+        ssCase.Save(saveBy)
+
+        Dim newCase = ShortSaleCase.GetCase(caseId)
+        Assert.AreEqual(ssCase.Mortgages.Count - 1, newCase.Mortgages.Count)
+        Assert.AreEqual(loan2, newCase.Mortgages.Last.Loan)
+
+        'Save again shortsalecase
+        newMtg.MortgageId = 0
+        Assert.AreEqual(newMtg.MortgageId, 0)
+        ssCase.Save(saveBy)
+        newCase = ShortSaleCase.GetCase(caseId)
+        Assert.AreEqual(mtgs.Count - 1, newCase.Mortgages.Count)
+        Assert.AreEqual(loan2, newCase.Mortgages.Last.Loan)
+
+        newMtg.DataStatus = ModelStatus.Deleted
+        ssCase.Save(saveBy)
+        newCase = ShortSaleCase.GetCase(caseId)
+        Assert.AreEqual(mtgs.Count - 2, newCase.Mortgages.Count)
+
+        newMtg.MortgageId = 0
+        ssCase.Save(saveBy)
+        newCase = ShortSaleCase.GetCase(caseId)
+        Assert.AreEqual(mtgs.Count - 2, newCase.Mortgages.Count)
     End Sub
 
 End Class

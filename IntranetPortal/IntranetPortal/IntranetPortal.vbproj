@@ -6429,8 +6429,9 @@
     <Content Include="img\TreeView\treeview-red-line.gif" />
     <Content Include="img\TreeView\treeview-red.gif" />
     <Content Include="js\app.js" />
+    <Content Include="js\build\controllers.js" />
+    <Content Include="js\build\intranetportal.js" />
     <Content Include="js\build\intranetportal.min.js" />
-    <Content Include="js\controllers.js" />
     <Content Include="js\controllers\BuyerEntityController.js" />
     <Content Include="js\controllers\ConstructionController.js" />
     <Content Include="js\controllers\LegalController.js" />
@@ -6441,10 +6442,10 @@
     <Content Include="js\e2etest\conf.js" />
     <Content Include="js\e2etest\ContructionController.js" />
     <Content Include="js\filters.js" />
-    <Content Include="js\intranetportal.js" />
     <Content Include="js\test\conf.js" />
     <Content Include="js\test\ConstructionControllerSpec.js" />
     <Content Include="js\test\ptFilesDirectiveSpec.js" />
+    <Content Include="js\test\servicesSpec.js" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />

@@ -53,7 +53,7 @@ directive('bindId', ['ptContactServices', function (ptContactServices) {
         restrict: 'A',
         link: function postLink(scope, el, attrs) {
             scope.$watch(attrs.bindId, function (newValue, oldValue) {
-                if (newValue != oldValue) {
+                if (newValue !== oldValue) {
                     var contact = ptContactServices.getContactById(newValue);
                     if (contact) scope.$eval(attrs.ngModel + "='" + contact.Name + "'");
                 }
@@ -84,7 +84,7 @@ directive('ptInitBind', function () { //one way bind of ptInitModel
         link: function (scope, el, attrs) {
             scope.$watch(attrs.ptInitBind, function (newVal) {
                 if (!scope.$eval(attrs.ngBind) && newVal) {
-                    if (typeof newVal == 'string') newVal = newVal.replace(/'/g, "\\'");
+                    if (typeof newVal === 'string') newVal = newVal.replace(/'/g, "\\'");
                     scope.$eval(attrs.ngBind + "='" + newVal + "'");
                 }
             });
@@ -348,27 +348,25 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
             fileModel: '=',
             fileBble: '=',
             fileId: '@',
-            fileColumns: '@',       // addtion information
+            fileColumns: '@',
             folderEnable: '@',
             baseFolder: '@',
-            uploadType: '@'         // control server folder, implete specific method in the service
-
+            uploadType: '@'         // control server folder
         },
         link: function (scope, el, attrs) {
-            scope.uploadType = scope.uploadType || 'construction';
             scope.ptFileService = ptFileService;
             scope.ptCom = ptCom;
 
             // init scope variale
-            scope.files = [];
-            scope.columns = [];
-            scope.nameTable = [];   // record choosen files
+            scope.files = [];       // file to upload
+            scope.columns = [];       // addtional infomation for files
+            scope.nameTable = [];       // record choosen files
             scope.currentFolder = '';
             scope.showFolder = false;
-
+            scope.uploadType = scope.uploadType || 'construction';
             scope.loading = false;
-            scope.folderEnable = scope.folderEnable === 'true' ? true : false;
             scope.baseFolder = scope.baseFolder ? scope.baseFolder : '';
+            scope.count = 0;        // count for uploaded files
 
 
             if (scope.fileColumns) {
@@ -377,9 +375,10 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
                     elm.trim();
                 });
             }
+
             scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined, '')
 
-            scope.$watch('fileBble', function (newV, oldV) {
+            scope.$watch('fileModel', function () {
                 scope.currentFolder = '';
                 scope.baseFolder = scope.baseFolder ? scope.baseFolder : '';
                 scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined, '')
@@ -390,6 +389,7 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
                 scope.addFiles(files);
                 this.value = '';
             });
+
             $(el).find('.drop-area')
                 .on('dragenter', function (e) {
                     e.preventDefault();
@@ -410,6 +410,15 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
                     debugger;
                 });
 
+            scope.OnDropTextarea = function (event) {
+                if (event.originalEvent.dataTransfer) {
+                    var files = event.originalEvent.dataTransfer.files;
+                    scope.addFiles(files);
+                }
+                else {
+                    alert("Your browser does not support the drag files.");
+                }
+            }
 
             // utility functions
             scope.changeFolder = function (folderName) {
@@ -417,12 +426,14 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
                 scope.showFolder = true;
             }
             scope.addFolder = function (folderName) {
-                scope.folders.push(folderName);
+                if (scope.folders.indexOf(folderName) < 0) {
+                    scope.folders.push(folderName);
+                }
                 scope.currentFolder = folderName;
                 scope.showFolder = true;
             }
             scope.hideFolder = function () {
-                scope.currentFolder = ""
+                scope.currentFolder = "";
                 scope.showFolder = false;
             }
             scope.toggleNewFilePop = function () {
@@ -431,9 +442,8 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
             }
             scope.newFolderPopSave = function () {
                 scope.addFolder(scope.NewFolderName);
-                scope.toggleNewFilePop()
+                scope.NewFolderPop = false;
             }
-
 
             scope.addFiles = function (files) {
                 for (var i = 0; i < files.length; i++) {
@@ -444,13 +454,14 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
                             scope.nameTable.push(file.name);
                         }
                     });
-
                 }
             }
+
             scope.removeChoosed = function (index) {
                 scope.nameTable.splice(scope.nameTable.indexOf(scope.files[index].name), 1);
                 scope.files.splice(index, 1);
             }
+
             scope.clearChoosed = function () {
                 scope.nameTable = [];
                 scope.files = [];
@@ -460,31 +471,29 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
                 scope.uploadProcess = true;
                 scope.dynamic = 1;
             }
+
             scope.hideUpoading = function () {
                 scope.clearChoosed();
                 scope.uploadProcess = false;
             }
+
             scope.showUploadErrors = function () {
                 var error = _.some(scope.result, function (el) { return el.error });
                 return !scope.uploading && error;
             }
 
-            scope.OnDropTextarea = function (event) {
-                if (event.originalEvent.dataTransfer) {
-                    var files = event.originalEvent.dataTransfer.files;
-                    scope.addFiles(files);
-                }
-                else {
-                    alert("Your browser does not support the drag files.");
-                }
-            }
+
             scope.uploadFile = function () {
-                scope.fileModel = scope.fileModel ? scope.fileModel : [];
+
                 var targetFolder = (scope.baseFolder ? scope.baseFolder + '/' : '') + (scope.currentFolder ? scope.currentFolder + '/' : '')
-                scope.result = [];      // final result will store here, but we build up it first for counting
                 var len = scope.files.length;
+
+                scope.fileModel = scope.fileModel ? scope.fileModel : [];
+                scope.result = [];      // final result will store here, but we build up it first for counting
+
                 scope.showUpoading();
                 scope.uploading = true;
+
                 for (var i = 0; i < len; i++) {
                     var f = {};
                     f.name = ptFileService.getFileName(scope.files[i].name);
@@ -501,25 +510,35 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
                     var data = new FormData();
                     data.append("file", scope.files[i]);
                     var targetName = ptFileService.getFileName(scope.files[i].name);
-                    ptFileService.uploadFile(data, scope.fileBble, targetName, targetFolder, scope.uploadType, function (error, data, targetName) {
+                    ptFileService.uploadFile(data, scope.fileBble, targetName, targetFolder, scope.uploadType, function callback(error, data, targetName) {
+                        var targetElement;
                         if (error) {
-                            var targetElement = _.filter(scope.result, function (el) { return el.name == targetName })[0];
-                            if (targetElement) targetElement.error = error;
                             scope.countCallback(len);
+                            targetElement = _.filter(scope.result, function (el) {
+                                return el.name == targetName
+                            })[0];
+                            if (targetElement) {
+                                targetElement.error = error;
+                            }
+
                         } else {
-                            var targetElement = _.filter(scope.result, function (el) { return el.name == targetName })[0];
+                            scope.countCallback(len);
+                            targetElement = _.filter(scope.result, function (el) {
+                                return el.name == targetName
+                            })[0];
                             if (targetElement) {
                                 targetElement.path = data[0];
-                                if (data[1]) targetElement.thumb = data[1];
+                                if (data[1]) {
+                                    targetElement.thumb = data[1];
+                                }
                             }
                             scope.fileModel.push(targetElement);
-                            scope.countCallback(len);
                         }
                     });
                 }
 
             }
-            scope.count = 0;
+
             scope.countCallback = function (total) {
                 if (scope.count >= total - 1) {
                     $timeout(function () {
@@ -536,6 +555,7 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
                     })
                 }
             }
+
             scope.modifyName = function (mdl, indx) {
                 if (mdl[indx]) {
                     scope.ModifyNamePop = true;
@@ -546,6 +566,7 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
                 }
 
             }
+
             scope.onModifyNamePopClose = function () {
                 scope.NewFileName = '';
                 scope.editingFileModel = null;
@@ -553,6 +574,7 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
                 scope.ModifyNamePop = false;
                 scope.editingFileExt = '';
             }
+
             scope.onModifyNamePopSave = function () {
                 if (scope.NewFileName) {
                     if (scope.NewFileName.indexOf('.') > -1) {
@@ -566,6 +588,7 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
                 scope.ModifyNamePop = false;
                 scope.editingFileExt = '';
             }
+
             scope.getThumb = function (model) {
                 if (model && model.thumb) {
                     return ptFileService.getThumb(model.thumb);
@@ -574,12 +597,14 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
                 }
 
             }
+
             scope.fancyPreview = function (file) {
                 if (ptFileService.isPicture(file.name)) {
                     $.fancybox.open(ptFileService.makePreviewUrl(file.path));
                 }
             }
-            scope.filterError = function (v, i) {
+
+            scope.filterError = function (v) {
                 return v.error;
             }
 
@@ -588,50 +613,50 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
     }
 
 }]).
-directive('ptLink', ['ptFileService', function (ptFileService) {
-    return {
-        restrict: 'E',
-        scope: {
-            ptModel: '='
-        },
-        template: '<a ng-click="onFilePreview(ptModel.path)">{{trunc(ptModel.name,20)}}</a>',
-        link: function (scope, el, attrs) {
-            scope.onFilePreview = ptFileService.onFilePreview;
-            scope.trunc = ptFileService.trunc;
-        }
+    directive('ptLink', ['ptFileService', function (ptFileService) {
+        return {
+            restrict: 'E',
+            scope: {
+                ptModel: '='
+            },
+            template: '<a ng-click="onFilePreview(ptModel.path)">{{trunc(ptModel.name,20)}}</a>',
+            link: function (scope, el, attrs) {
+                scope.onFilePreview = ptFileService.onFilePreview;
+                scope.trunc = ptFileService.trunc;
+            }
 
-    }
-}]).
-directive('ptFinishedMark', [function () {
-    return {
-        restrict: 'E',
-        template: '<span ng-if="ssStyle==0">'
-                + '<button type="button" class="btn btn-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</button>'
-                + '<button type="button" class="btn btn-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></button>'
-                + '</span>'
-                + '<span ng-if="ssStyle==1">'
-                + '<span class="label label-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</span>'
-                + '<span class="label label-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></span>'
-                + '</span>',
-        scope: {
-            ssModel: '=',
-            text1: '@',
-            text2: '@',
-            ssStyle: '@'
-        },
-        link: function (scope, el, attrs) {
-            if (!scope.ssModel) scope.ssModel = false;
-            if (scope.ssStyle && scope.ssStyle.toLowerCase() == 'label') {
-                scope.ssStyle = 1;
-            } else {
-                scope.ssStyle = 0;
-            }
-            scope.confirm = function () {
-                scope.ssModel = true;
-            }
-            scope.deconfirm = function () {
-                scope.ssModel = false;
+        }
+    }]).
+    directive('ptFinishedMark', [function () {
+        return {
+            restrict: 'E',
+            template: '<span ng-if="ssStyle==0">'
+                    + '<button type="button" class="btn btn-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</button>'
+                    + '<button type="button" class="btn btn-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></button>'
+                    + '</span>'
+                    + '<span ng-if="ssStyle==1">'
+                    + '<span class="label label-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</span>'
+                    + '<span class="label label-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></span>'
+                    + '</span>',
+            scope: {
+                ssModel: '=',
+                text1: '@',
+                text2: '@',
+                ssStyle: '@'
+            },
+            link: function (scope, el, attrs) {
+                if (!scope.ssModel) scope.ssModel = false;
+                if (scope.ssStyle && scope.ssStyle.toLowerCase() == 'label') {
+                    scope.ssStyle = 1;
+                } else {
+                    scope.ssStyle = 0;
+                }
+                scope.confirm = function () {
+                    scope.ssModel = true;
+                }
+                scope.deconfirm = function () {
+                    scope.ssModel = false;
+                }
             }
         }
-    }
-}])
+    }])

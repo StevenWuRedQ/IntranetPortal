@@ -53,7 +53,6 @@
                 });
         }; // -- end --
 
-
         $scope.GetShortSaleCase = function (caseId, callback) {
             if (!caseId) {
                 console.log("Can not find case Id ");
@@ -120,8 +119,98 @@
                 if (disable) item[index].DataStatus = 3;
                 else item.splice(index, 1);
             }
-
         };
+
+        //-- auto save function, add by Chris ---
+        var UpdatedProperties = ['UpdateTime', 'UpdateDate', 'UpdateBy', 'OwnerId', 'MortgageId', 'OfferId', 'ValueId', 'CallbackDate', 'LastUpdate'];
+        var autoSaveError = false;
+
+        $scope.AutoSaveShorSale = function (callback) {
+            var json = $scope.SsCase;
+            var data = { caseData: JSON.stringify(json) };
+
+            $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
+                    success(function (data) {
+                        autoSaveError = false;
+                        // Remove deleted mortgages
+                        RemoveDeletedMortgages();
+
+                        //Sync objects
+                        SyncObjects(data, $scope.SsCase);
+
+                        if (!callback) {
+                            ptCom.alert("Save Successed !");
+                        }
+
+                        if (callback) { callback(); }
+
+                    }).error(function (data1, status) {
+                        if (!autoSaveError) {
+                            autoSaveError = true;
+                            var message = (data1 && typeof data1 == 'object' && data1.message) ? data1.message : JSON.stringify(data1);
+                            ptCom.alert("Error in AutoSave. status " + status + "Error : " + message);
+                        }
+                    });
+        };
+
+        var RemoveDeletedMortgages = function () {
+            _.remove($scope.SsCase.Mortgages, { DataStatus: 3 })
+            console.log($scope.SsCase.Mortgages);
+        }
+
+        var SyncObjects = function (obj, toObj) {
+            var copy = toObj;
+
+            // Handle Date
+            if (obj instanceof Date) {
+                if (copy == null)
+                    copy = new Date();
+
+                copy = new Date();
+                copy.setTime(obj.getTime());
+
+                return;
+            }
+
+            // Handle Array
+            if (obj instanceof Array) {
+                if (copy == null)
+                    copy = [];
+
+                for (var i = 0, len = obj.length; i < len; i++) {
+                    SyncObjects(obj[i], copy[i]);
+                }
+
+                return;
+            }
+
+            // Handle Object
+            if (obj instanceof Object) {
+                if (copy == null)
+                    copy = {};
+
+                for (var attr in obj) {
+                    if (obj.hasOwnProperty(attr)) {
+                        if (null == obj[attr] || "object" != typeof obj[attr]) {
+                            if (typeof copy[attr] == 'undefined' || copy[attr] == null || copy[attr] != obj[attr]) {
+                                if (UpdatedProperties.indexOf(attr) > 0) {
+                                    //console.log("Changed: " + attr + " from " + copy[attr] + " to " + obj[attr]);
+                                    copy[attr] = obj[attr];
+                                }
+                            }
+                        }
+                        else {
+                            SyncObjects(obj[attr], copy[attr]);
+                        }
+                    }
+                }
+
+                return;
+            }
+
+            throw new Error("Unable to copy obj! Its type isn't supported.");
+        }
+        //--- end auto save function ---
 
         $scope.SaveShortSale = function (callback) {
             var json = $scope.SsCase;
@@ -129,8 +218,7 @@
 
             $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
                     success(function () {
-                        // if save scuessed load data again 
-
+                        // if save scuessed load data again                      
                         $scope.GetShortSaleCase($scope.SsCase.CaseId);
                         if (!callback) {
                             ptCom.alert("Save Successed !");
