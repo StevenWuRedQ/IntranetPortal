@@ -57,6 +57,7 @@ Public Class LegalECourt
         End If
         Return False
     End Function
+
     Public Shared Function GetIndexLegalECourts() As List(Of LegalECourt)
         Using ctx As New PortalEntities
             Return ctx.LegalECourts.Where(Function(e) Not String.IsNullOrEmpty(e.IndexNumber)).ToList

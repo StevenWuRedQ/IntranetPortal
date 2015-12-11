@@ -187,7 +187,7 @@
 			</li>
 
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">Index #</label>
+				<label class="ss_form_input_title">Index #(optional)</label>
 				<input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DeedReversionIndexNum">
 			</li>
 
@@ -231,17 +231,17 @@
 
 		<ul class="ss_form_box  clearfix">
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">Plantiff</label>
+				<label class="ss_form_input_title">Plantiff *</label>
 				<input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.SPComplaint_Plantiff">
 			</li>
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">Plantiff Attorney</label>
+				<label class="ss_form_input_title">Plantiff Attorney *</label>
 				<input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorney" ng-change="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId">
 			</li>
 
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">Index #</label>
-				<input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.SPComplaint_IndexNum">
+				<label class="ss_form_input_title">Index # (optional)</label>
+				<input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.SPComplaint_IndexNum" mask="999999/9999">
 			</li>
 
 			<li class="ss_form_item">
@@ -290,8 +290,8 @@
 			</li>
 
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">Index #</label>
-				<input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_IndexNum">
+				<label class="ss_form_input_title">Index # (optional)</label>
+				<input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_IndexNum" mask="999999/9999">
 			</li>
 			<li class="ss_form_item">
 				<label class="ss_form_input_title">DATE OF DEED TO PLAINTIFF *</label>
@@ -327,7 +327,7 @@
 			</li>
 
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">DATE OF LP</label>
+				<label class="ss_form_input_title">DATE OF LP </label>
 				<input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FCFiledDate" disabled="disabled" ss-date>
 			</li>
 			<li class="ss_form_item">
@@ -335,7 +335,7 @@
 				<input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FCIndexNum" readonly="readonly">
 			</li>
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">DEFAULT DATE</label>
+				<label class="ss_form_input_title">DEFAULT DATE *</label>
 				<input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.QTA_DefaultDate" ss-date>
 			</li>
 			<%--<li class="ss_form_item clearfix">
