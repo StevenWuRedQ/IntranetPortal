@@ -175,7 +175,7 @@
                         $('#imgChat').css("color", "green");
                     }, 1000);
 
-                // setGlobalAnnouncement("Dear users, if you have any difficulty to display our website, please try press ctrl+f5 to clear your browser cache!");
+                setGlobalAnnouncement("Dear users, if you have any difficulty to display our website, please try press ctrl+f5 to clear your browser cache!");
             });
 
 
