@@ -642,10 +642,8 @@
         $(document).ready(function () {
             var $scope = angular.element(document.getElementById('ShortSaleCtrl')).scope();
             ScopeDateChangedByOther(GetLasTUpDateURL, $scope.GetShortSaleCase, $scope.GetLoadId, $scope.GetModifyUserUrl);
-            ScopeAutoSave(GetShortSaleCase, SaveShortSaleCase, '#ShortSaleTabHead');
-        });
-
-        
+            ScopeAutoSave(GetShortSaleCase, AutoSaveShortSale, '#ShortSaleTabHead');
+        });              
 
     </script>
 
