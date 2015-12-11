@@ -374,7 +374,7 @@
     };
     this.uploadTitleFile = function (data, bble, rename, folder, callback) {
         var fileName = rename ? rename : '';
-        var folder = folder ? folder : '';
+        folder = folder ? folder : '';
         if (!data || !bble) {
             callback('Upload infomation missing!');
         } else {

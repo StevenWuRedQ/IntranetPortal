@@ -8,11 +8,11 @@
                 files: [
                     {
                         src: ['js/controllers/*.js'],
-                        dest: 'js/controllers.js'
+                        dest: 'js/build/controllers.js'
                     },
                     {
-                        src: ['js/app.js', 'js/services.js', 'js/filters.js', 'js/directives.js', 'js/controllers.js'],
-                        dest: 'js/<%= pkg.name %>.js'
+                        src: ['js/app.js', 'js/services.js', 'js/filters.js', 'js/directives.js', 'js/build/controllers.js'],
+                        dest: 'js/build/<%= pkg.name %>.js'
                     }
                 ]
                 
@@ -23,7 +23,7 @@
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
             },
             build: {
-                src: 'js/<%= pkg.name %>.js',
+                src: 'js/build/<%= pkg.name %>.js',
                 dest: 'js/build/<%= pkg.name %>.min.js'
             }
         },
@@ -37,8 +37,8 @@
                 src: ['Content.Master','Root.Master'],
                 overwrite: true,
                 replacements: [{
-                    from: /src="\/js\/intranetportal.js(\?v=\d{0,8})?"/g,
-                    to: 'src="/js/intranetportal.js?v=<%= grunt.template.today("ddmmyyyy") %>"'
+                    from: /src="\/js\/build\/intranetportal.js(\?v=\d{0,8})?"/g,
+                    to: 'src="/js/build\/intranetportal.js?v=<%= grunt.template.today("ddmmyyyy") %>"'
                 }, {
                     from: /src="\/Scripts\/autosave.js(\?v=\d{0,8})?"/g,
                     to: 'src="/Scripts\/autosave.js?v=<%= grunt.template.today("ddmmyyyy") %>"'

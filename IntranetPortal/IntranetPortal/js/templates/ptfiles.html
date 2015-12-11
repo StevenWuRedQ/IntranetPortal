@@ -1,6 +1,6 @@
 ﻿<div id="{{fileId}}_div">
     <div class="pt-files">
-        <div class="pt-files-header" ng-show="folderEnable">
+        <div class="pt-files-header" ng-show="folderEnable==='true'">
             <div class="dropdown">
                 <a href="#" class="dropdown-toggle pt-files-drop-button" data-toggle="dropdown"><i class="fa fa-folder-open" />&nbsp;<span class="current_folder">{{currentFolder?currentFolder:'FOLDERS'}}</span>&nbsp</a>
                 <span class="badge badge-inverted small">{{fileModel.length}}</span>
@@ -20,9 +20,9 @@
                 </ul>
             </div>
         </div>
-        <div ng-class="folderEnable?'ss_border':''">
+        <div ng-class="folderEnable==='true'?'ss_border':''">
             <div style="max-height: 200px; overflow: auto;">
-                <table class="table table-condensed" ng-show="showFolder==true">
+                <table class="table table-condensed" ng-show="showFolder">
                     <tr ng-show="fileModel.length>0">
                         <th>files</th>
                         <th ng-repeat="col in columns">{{col}}</th>
