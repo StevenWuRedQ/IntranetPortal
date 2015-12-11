@@ -51,12 +51,12 @@ function ScopeAutoSave(getDataFunc, SaveFunc, headEelem) {
         return;
     }
     // delay the first run after 30 second!
-    $.wait(5000).then(function () {
+    $.wait(30000).then(function () {
         window.setInterval(function () {
             if (ScopeCaseDataChanged(getDataFunc)) {
                 SaveFunc();
             }
-        }, 5000);
+        }, 30000);
     });
 }
 
