@@ -63,7 +63,7 @@
     <script src="/Scripts/autosave.js?v=11122015"></script>
 
     <!-- pro env -->
-    <script src="/js/intranetportal.js?v=10122015"></script>
+    <script src="/js/build/intranetportal.js?v=10122015"></script>
 
     <!-- dev env -->
     <!--
