@@ -2246,7 +2246,7 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                 for (a in arrays) {
                     var porp = arrays[a]
                     var array = $scope.LegalCase.ForeclosureInfo[porp];
-                    if (!array || array.length == 0) {
+                    if (!array || array.length === 0) {
                         $scope.LegalCase.ForeclosureInfo[porp] = [];
                         $scope.LegalCase.ForeclosureInfo[porp].push({});
                     }

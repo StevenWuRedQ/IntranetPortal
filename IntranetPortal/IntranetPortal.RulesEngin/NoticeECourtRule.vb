@@ -10,7 +10,8 @@ Public Class NoticeECourtRule
         Dim d = 15
         'For Each d In NoticeDays
         Log("To Notify Ecourt per lead before " & d & " days")
-        Dim cases = Data.LegalECourt.GetCaseByNoticeyDay(d)
+        Dim caseNoticey = Data.LegalECourt.GetCaseByNoticeyDay(d)
+        Dim cases = (From x In caseNoticey Join y In Data.LegalCase.GetAllCases() On x.IndexNumber Equals y.FCIndexNum Select x)
         Dim bbles = (From s In cases Group s By s.BBLE Into r = Group Select BBLE, AppearanceDate = r.Max(Function(o) o.AppearanceDate))
 
         For Each b In bbles

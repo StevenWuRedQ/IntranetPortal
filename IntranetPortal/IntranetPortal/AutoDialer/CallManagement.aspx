@@ -18,7 +18,7 @@
                     <thead>
                         <tr>
                             <th>From</th>
-                            <th>To</th>
+                            <th>To</th> 
                             <th>Duration</th>
                             <th>Join</th>
                         </tr>

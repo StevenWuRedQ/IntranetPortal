@@ -160,13 +160,14 @@
 			</li>
 			<li class="ss_form_item">
 				<label class="ss_form_input_title">Original Lender *</label>
-			   <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsOriginalLender"/>
+				<input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsOriginalLender" />
 			</li>
 
 
 		</ul>
 	</div>
 	<%------ end Partitions-------%>
+
 	<%-- Deed Reversion doc  --%>
 	<div class="ss_form clearfix" ng-show="CheckSecondaryTags(4)">
 
@@ -186,7 +187,7 @@
 			</li>
 
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">Index #</label>
+				<label class="ss_form_input_title">Index #(optional)</label>
 				<input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DeedReversionIndexNum">
 			</li>
 
@@ -230,17 +231,17 @@
 
 		<ul class="ss_form_box  clearfix">
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">Plantiff</label>
+				<label class="ss_form_input_title">Plantiff *</label>
 				<input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.SPComplaint_Plantiff">
 			</li>
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">Plantiff Attorney</label>
+				<label class="ss_form_input_title">Plantiff Attorney *</label>
 				<input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorney" ng-change="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId">
 			</li>
 
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">Index #</label>
-				<input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.SPComplaint_IndexNum">
+				<label class="ss_form_input_title">Index # (optional)</label>
+				<input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.SPComplaint_IndexNum" mask="999999/9999">
 			</li>
 
 			<li class="ss_form_item">
@@ -259,13 +260,9 @@
 				<label class="ss_form_input_title">Defendant *</label>
 				<input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.SPComplaint_Defendant">
 			</li>
-			<%--<li class="ss_form_item clearfix">
-				<label class="ss_form_input_title">Defendant's Attorney *</label>
-				<input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.DefendantAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DefendantAttorneyId">
-			</li>--%>
 		</ul>
 
-		<h5 class="ss_form_title">Deed Reversions Other Defendants <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="NGAddArrayitemScope('LegalCtrl','LegalCase.SecondaryInfo.SPComplaint_Defendants')" title="Add" style="font-size: 18px"></i></h5>
+		<h5 class="ss_form_title">Specific Performance Complaint Other Defendants <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="NGAddArrayitemScope('LegalCtrl','LegalCase.SecondaryInfo.SPComplaint_Defendants')" title="Add" style="font-size: 18px"></i></h5>
 		<ul class="ss_form_box clearfix">
 			<li class="ss_form_item" ng-repeat="d in LegalCase.SecondaryInfo.SPComplaint_Defendants track by $index">
 				<label class="ss_form_input_title">Defendant {{$index +1}} <i class="fa fa-times icon_btn  tooltip-examples" ng-click="ptCom.arrayRemove(LegalCase.SecondaryInfo.SPComplaint_Defendants,$index, true)" title="Delete" style="font-size: 18px"></i></label>
@@ -293,8 +290,8 @@
 			</li>
 
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">Index #</label>
-				<input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_IndexNum">
+				<label class="ss_form_input_title">Index # (optional)</label>
+				<input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_IndexNum" mask="999999/9999">
 			</li>
 			<li class="ss_form_item">
 				<label class="ss_form_input_title">DATE OF DEED TO PLAINTIFF *</label>
@@ -330,7 +327,7 @@
 			</li>
 
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">DATE OF LP</label>
+				<label class="ss_form_input_title">DATE OF LP </label>
 				<input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FCFiledDate" disabled="disabled" ss-date>
 			</li>
 			<li class="ss_form_item">
@@ -338,7 +335,7 @@
 				<input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FCIndexNum" readonly="readonly">
 			</li>
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">DEFAULT DATE</label>
+				<label class="ss_form_input_title">DEFAULT DATE *</label>
 				<input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.QTA_DefaultDate" ss-date>
 			</li>
 			<%--<li class="ss_form_item clearfix">
@@ -355,18 +352,7 @@
 			</li>
 		</ul>
 	</div>
-
 	<%--End Quiet Tile Doc --%>
-
-	<%--<div class="ss_form clearfix">
-		<h4 class="ss_form_title" style="margin-bottom: 12px;">Select Types</h4>
-		<select class="form-control" ng-model="LegalCase.SecondaryInfo.SelectedType" ng-change="SecondarySelectType()" ng-options='o as o for o  in SecondaryTypeSource' style="width: 94%; margin-top: -8px">
-			<option value=""></option>
-		</select>&nbsp; &nbsp; &nbsp; 
-		<i class="fa  fa-plus-circle color_blue tooltip-examples icon_btn" style="display: none" ng-click="AddSecondaryArray()" title="Add" data-original-title="Add" style="font-size: 28px;"></i>
-	</div>--%>
-
-
 
 	<div class="ss_form" style="padding-bottom: 20px;">
 		<h4 class="ss_form_title">Legal  Notes </h4>

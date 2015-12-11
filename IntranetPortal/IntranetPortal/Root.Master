@@ -1,4 +1,4 @@
-﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Root.master.vb" Inherits="IntranetPortal.Root" %>
+<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Root.master.vb" Inherits="IntranetPortal.Root" %>
 
 <%@ Import Namespace="System.ComponentModel" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
@@ -6,7 +6,7 @@
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head id="Head1" runat="server">
     <title>Agent Portal (beta) - My Ideal Property</title>
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' />
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/stevencss.css?v=09122015" />
+    <link rel="stylesheet" href="/css/stevencss.css?v=10122015" />
     <link rel="stylesheet" href="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -31,7 +31,7 @@
 
     <script src="/Scripts/js/main.js"></script>
     <script src="/Scripts/PortalMessager.js"></script>
-    <script src="/Scripts/stevenjs.js?v=09122015"></script>
+    <script src="/Scripts/stevenjs.js?v=10122015"></script>
 
 
 
