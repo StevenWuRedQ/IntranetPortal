@@ -63,7 +63,7 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
         }).error(function (data, status) {
             alert("Fail to save data. status: " + status + " Error : " + JSON.stringify(data));
         });
-    }; 
+    };
 
     this.arrayAdd = function (model, data) {
         if (model) {
@@ -2155,14 +2155,14 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         var json = JSON.stringify($scope.LegalCase);
         var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN };
         $http.post('LegalUI.aspx/CompleteResearch', data).success(function () {
-                 alert("Submit Success!");
-                 if (typeof gridTrackingClient !== 'undefined')
-                     gridTrackingClient.Refresh();
+            alert("Submit Success!");
+            if (typeof gridTrackingClient !== 'undefined')
+                gridTrackingClient.Refresh();
 
-             }).error(function (data) {
-                 alert("Fail to save data :" + JSON.stringify(data));
-                 console.log(data);
-             });
+        }).error(function (data) {
+            alert("Fail to save data :" + JSON.stringify(data));
+            console.log(data);
+        });
     }
 
     $scope.BackToResearch = function (comments) {
@@ -3024,7 +3024,7 @@ angular.module('PortalApp')
             x.CompareOperator = "";
             x.value1 = x.input1;
         }
-    };    
+    };
     $scope.updateBooleanFilter = function (x) {
         if (!x.input1) {
             x.WhereTerm = "";
@@ -3172,6 +3172,7 @@ angular.module("PortalApp")
         $scope.formatAddr = ptCom.formatAddr;
         $scope.ptCom = ptCom;
         $scope.MortgageTabs = [];
+        $scope.ViewStatus = {};
         $scope.SsCase = {
             PropertyInfo: { Owners: [{}] },
             CaseData: {},
@@ -3288,14 +3289,106 @@ angular.module("PortalApp")
 
         };
 
+        //-- auto save function -- Chris ---
+        $scope.AutoSaveShorSale = function (callback) {
+            var json = $scope.SsCase;
+            var data = { caseData: JSON.stringify(json) };
+
+            $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
+                    success(function (data) {
+                        // Remove deleted mortgages
+                        RemoveDeletedMortgages();
+
+                        //Sync objects
+                        SyncObjects(data, $scope.SsCase);
+
+                        if (!callback) {
+                            ptCom.alert("Save Successed !");
+                        }
+
+                        if (callback) { callback(); }
+
+                    }).error(function (data1, status) {
+                        var message = (data1 && typeof data1 == 'object' && data1.message) ? data1.message : JSON.stringify(data1);
+                        ptCom.alert("Fail to save data. status " + status + "Error : " + message);
+                    });
+        };
+
+        var RemoveDeletedMortgages = function()
+        {
+            _.remove($scope.SsCase.Mortgages, { DataStatus: 3 })
+            console.log($scope.SsCase.Mortgages);        
+        }
+
+        var UpdatedProperties = ['UpdateTime','UpdateDate','UpdateBy','OwnerId', 'MortgageId', 'OfferId', 'ValueId','CallbackDate'];
+
+        var SyncObjects = function (obj, toObj) {
+            var copy = toObj;
+            
+            // Handle Date
+            if (obj instanceof Date) {
+                if (copy == null)
+                    copy = new Date();
+
+                copy = new Date();
+                copy.setTime(obj.getTime());
+
+                return;
+            }
+
+            // Handle Array
+            if (obj instanceof Array) {
+                if (copy == null)
+                    copy = [];
+
+                for (var i = 0, len = obj.length; i < len; i++) {
+                    SyncObjects(obj[i], copy[i]);
+                }
+
+                return;
+            }
+
+            // Handle Object
+            if (obj instanceof Object) {
+                if (copy == null)
+                    copy = {};
+
+                for (var attr in obj) {
+                    if (obj.hasOwnProperty(attr))
+                    {
+                        if (null == obj[attr] || "object" != typeof obj[attr]) {
+                            if (typeof copy[attr] == 'undefined' || copy[attr] == null || copy[attr] != obj[attr])
+                            {
+                                if (UpdatedProperties.indexOf(attr) > 0)
+                                {
+                                    console.log("Changed: " + attr + " from " + copy[attr] + " to " + obj[attr]);
+                                    copy[attr] = obj[attr];
+                                }
+                            }
+                        }
+                        else
+                        {
+                            SyncObjects(obj[attr], copy[attr]);
+                        }                        
+                    }                        
+                }
+
+                return;
+            }
+            
+            throw new Error("Unable to copy obj! Its type isn't supported.");
+        }
+
+        //--- end auto save function ---
+
         $scope.SaveShortSale = function (callback) {
             var json = $scope.SsCase;
             var data = { caseData: JSON.stringify(json) };
 
             $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
-                    success(function () {
+                    success(function (data) {
                         // if save scuessed load data again 
-
+                        console.log(data);
                         $scope.GetShortSaleCase($scope.SsCase.CaseId);
                         if (!callback) {
                             ptCom.alert("Save Successed !");
@@ -3937,182 +4030,182 @@ angular.module("PortalApp")
 
 }])
 angular.module("PortalApp")
-    .controller('VendorCtrl', ["$scope", "$http" ,"$element", function ($scope, $http, $element) {
+    .controller('VendorCtrl', ["$scope", "$http", "$element", function ($scope, $http, $element) {
 
-    $($('[title]')).tooltip({
-        placement: 'bottom'
-    });
-    $scope.popAddgroup = function (Id) {
-        $scope.AddGroupId = Id;
-        $('#AddGroupPopup').modal();
-    }
-    $scope.AddGroups = function () {
-        $http.post('/CallBackServices.asmx/AddGroups', { gid: $scope.AddGroupId, groupName: $scope.addGroupName, addUser: $('#CurrentUser').val() }).
-           success(function (data) {
-               $scope.initGroups();
-           });
-    }
-    $scope.ChangeGroups = function (g) {
-
-        $scope.selectType = g.Id == null ? "All Vendors" : g.GroupName;
-        if (g.Id == null) {
-            g.Id = 0;
+        $($('[title]')).tooltip({
+            placement: 'bottom'
+        });
+        $scope.popAddgroup = function (Id) {
+            $scope.AddGroupId = Id;
+            $('#AddGroupPopup').modal();
         }
-        $http.post('/CallBackServices.asmx/GetContactByGroup', { gId: g.Id }).
-            success(function (data) {
+        $scope.AddGroups = function () {
+            $http.post('/CallBackServices.asmx/AddGroups', { gid: $scope.AddGroupId, groupName: $scope.addGroupName, addUser: $('#CurrentUser').val() }).
+               success(function (data) {
+                   $scope.initGroups();
+               });
+        }
+        $scope.ChangeGroups = function (g) {
+
+            $scope.selectType = g.Id == null ? "All Vendors" : g.GroupName;
+            if (g.Id == null) {
+                g.Id = 0;
+            }
+            $http.post('/CallBackServices.asmx/GetContactByGroup', { gId: g.Id }).
+                success(function (data) {
+                    $scope.InitDataFunc(data);
+                });
+        };
+        $scope.InitData = function (data) {
+            $scope.allContacts = data.slice();
+            var gropData = groupBy(data, group_func);
+            $scope.showingContacts = gropData;
+
+            return gropData;
+        }
+        $scope.initGroups = function () {
+            $http.post('/CallBackServices.asmx/GetAllGroups', {}).
+             success(function (data, status, headers, config) {
+                 $scope.Groups = data.d;
+
+             }).error(function (data, status, headers, config) {
+
+
+                 alert("error get GetAllGroups: " + status + " error :" + data.d);
+             });
+        }
+
+        $scope.initGroups();
+        $scope.InitDataFunc = function (data) {
+            var gropData = $scope.InitData(data.d);
+            //debugger;
+            var allContacts = gropData;
+            if (allContacts.length > 0) {
+                $scope.currentContact = gropData[0].data[0];
+                m_current_contact = $scope.currentContact;
+
+            }
+        }
+        $http.post('/CallBackServices.asmx/GetContact', { p: '1' }).
+            success(function (data, status, headers, config) {
                 $scope.InitDataFunc(data);
+                $scope.AllTest = data.d;
+
+            }).error(function (data, status, headers, config) {
+                $scope.LogError = data
+                alert("error get contacts: " + status + " error :" + data.d);
             });
-    };
-    $scope.InitData = function (data) {
-        $scope.allContacts = data.slice();
-        var gropData = groupBy(data, group_func);
-        $scope.showingContacts = gropData;
 
-        return gropData;
-    }
-    $scope.initGroups = function () {
-        $http.post('/CallBackServices.asmx/GetAllGroups', {}).
-         success(function (data, status, headers, config) {
-             $scope.Groups = data.d;
-             
-         }).error(function (data, status, headers, config) {
-
-
-             alert("error get GetAllGroups: " + status + " error :" + data.d);
-         });
-    }
-
-    $scope.initGroups();
-    $scope.InitDataFunc = function (data) {
-        var gropData = $scope.InitData(data.d);
-        //debugger;
-        var allContacts = gropData;
-        if (allContacts.length > 0) {
-            $scope.currentContact = gropData[0].data[0];
-            m_current_contact = $scope.currentContact;
-
+        $scope.initLenderList = function () {
+            $http.post('/CallBackServices.asmx/GetLenderList', {}).success(function (data, status) {
+                $scope.lenderList = _.uniq(data.d);
+            });
         }
-    }
-    $http.post('/CallBackServices.asmx/GetContact', { p: '1' }).
-        success(function (data, status, headers, config) {
-            $scope.InitDataFunc(data);
-            $scope.AllTest = data.d;
 
-        }).error(function (data, status, headers, config) {
-            $scope.LogError = data
-            alert("error get contacts: " + status + " error :" + data.d);
-        });
+        $scope.initLenderList();
 
-    $scope.initLenderList = function () {
-        $http.post('/CallBackServices.asmx/GetLenderList', {}).success(function (data, status) {
-            $scope.lenderList = _.uniq(data.d);
-        });
-    }
+        $scope.predicate = "Name";
+        $scope.group_text_order = "group_text";
+        $scope.addContact = {};
+        $scope.selectType = "All Vendors";
+        $scope.query = {};
+        $scope.addContactFunc = function () {
+            var addType = $scope.query.Type;
+            if (!$scope.addContact || !$scope.addContact.Name) {
+                alert("Please fill vender Name !");
+                return;
+            }
+            if (addType != null) {
+                $scope.addContact.Type = addType;
 
-    $scope.initLenderList();
 
-    $scope.predicate = "Name";
-    $scope.group_text_order = "group_text";
-    $scope.addContact = {};
-    $scope.selectType = "All Vendors";
-    $scope.query = {};
-    $scope.addContactFunc = function () {
-        var addType = $scope.query.Type;
-        if (!$scope.addContact || !$scope.addContact.Name) {
-            alert("Please fill vender Name !");
-            return;
+            }
+            var addC = $scope.addContact;
+            //addC.OfficeNO = $('#txtOffice').val();
+            //addC.Cell = $('#txtCell').val();
+            //addC.Email = $('#txtEmail').val();
+
+            debugger;
+            $http.post("/CallBackServices.asmx/AddContact", { contact: $scope.addContact }).
+            success(function (data, status, headers, config) {
+                // this callback will be called asynchronously
+                // when the response is available
+                $scope.allContacts.push(data.d);
+                $scope.InitData($scope.allContacts);
+                var addContact = data.d;
+                //debugger;
+
+                $scope.currentContact = addContact;
+                m_current_contact = $scope.currentContact;
+                $scope.initLenderList();
+                var stop = $(".popup_employee_list_item_active:first").position().top;
+                $('#employee_list').scrollTop(stop);
+                alert("Add" + $scope.currentContact.Name + " succeed !");
+                //debugger;
+            }).
+            error(function (data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+                var message = data && data.Message ? data.Message : JSON.stringify(data)
+
+                alert("Add contact error: " + message);
+            });
         }
-        if (addType != null) {
-            $scope.addContact.Type = addType;
 
+        $scope.filterContactFunc = function (e, type) {
+            //$(e).parent().find("li").removeClass("popup_menu_list_item_active");
+            //$(e).addClass("popup_menu_list_item_active");
 
-        }
-        var addC = $scope.addContact;
-        //addC.OfficeNO = $('#txtOffice').val();
-        //addC.Cell = $('#txtCell').val();
-        //addC.Email = $('#txtEmail').val();
-
-        debugger;
-        $http.post("/CallBackServices.asmx/AddContact", { contact: $scope.addContact }).
-        success(function (data, status, headers, config) {
-            // this callback will be called asynchronously
-            // when the response is available
-            $scope.allContacts.push(data.d);
-            $scope.InitData($scope.allContacts);
-            var addContact = data.d;
+            var text = angular.element(e.currentTarget).html();
             //debugger;
+            if (typeof (type) == 'string') {
+                $scope.query = {};
+                $scope.selectType = text;
+                return true;
+            } else {
+                $scope.query.Type = type;
+            }
 
-            $scope.currentContact = addContact;
-            m_current_contact = $scope.currentContact;
-            $scope.initLenderList();
-            var stop = $(".popup_employee_list_item_active:first").position().top;
-            $('#employee_list').scrollTop(stop);
-            alert("Add" + $scope.currentContact.Name + " succeed !");
-            //debugger;
-        }).
-        error(function (data, status, headers, config) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-            var message = data&& data.Message ?data.Message :JSON.stringify(data)
+            var corpName = type == 4 && text != 'Lenders' ? text : '';
+            $scope.query.CorpName = corpName;
 
-            alert("Add contact error: " + message);
-        });
-    }
 
-    $scope.filterContactFunc = function (e, type) {
-        //$(e).parent().find("li").removeClass("popup_menu_list_item_active");
-        //$(e).addClass("popup_menu_list_item_active");
+            $scope.addContact.CorpName = corpName;
 
-        var text = angular.element(e.currentTarget).html();
-        //debugger;
-        if (typeof (type) == 'string') {
-            $scope.query = {};
             $scope.selectType = text;
             return true;
-        } else {
-            $scope.query.Type = type;
         }
 
-        var corpName = type == 4 && text != 'Lenders' ? text : '';
-        $scope.query.CorpName = corpName;
+        $scope.SaveCurrent = function () {
 
-
-        $scope.addContact.CorpName = corpName;
-
-        $scope.selectType = text;
-        return true;
-    }
-
-    $scope.SaveCurrent = function () {
-        
-        $http.post("/CallBackServices.asmx/SaveContact", { json: $scope.currentContact }).
-        success(function (data, status, headers, config) {
-            alert("Save succeed!");
-            $scope.initLenderList();
-        }).
-        error(function (data, status, headers, config) {
-            alert("geting SaveCurrent error" + status + "error:" + JSON.stringify(data.d));
-        });
-    }
-
-    $scope.FilterContact = function (type) {
-        $scope.showingContacts = $scope.allContacts;
-        if (type < 0) {
-            return;
+            $http.post("/CallBackServices.asmx/SaveContact", { json: $scope.currentContact }).
+            success(function (data, status, headers, config) {
+                alert("Save succeed!");
+                $scope.initLenderList();
+            }).
+            error(function (data, status, headers, config) {
+                alert("geting SaveCurrent error" + status + "error:" + JSON.stringify(data.d));
+            });
         }
-        var contacts = $scope.allContacts;
 
-        for (var i = 0; i < contacts.length; i++) {
-            if (contacts.Type != type) {
-                $scope.showingContacts.splice(i, 1);
+        $scope.FilterContact = function (type) {
+            $scope.showingContacts = $scope.allContacts;
+            if (type < 0) {
+                return;
+            }
+            var contacts = $scope.allContacts;
+
+            for (var i = 0; i < contacts.length; i++) {
+                if (contacts.Type != type) {
+                    $scope.showingContacts.splice(i, 1);
+                }
+
             }
 
         }
+        $scope.selectCurrent = function (selectContact) {
+            $scope.currentContact = selectContact;
+            m_current_contact = selectContact;
+        }
 
-    }
-    $scope.selectCurrent = function (selectContact) {
-        $scope.currentContact = selectContact;
-        m_current_contact = selectContact;
-    }
-
-}]);
+    }]);

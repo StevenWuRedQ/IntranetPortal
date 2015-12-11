@@ -9,7 +9,7 @@
 
 <div class="text-right" ng-show="SsCase.PropertyInfo.Owners.length>1" style="margin-bottom: -25px"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.PropertyInfo.Owners.length>1" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.Owners, $index)" title="Delete"></i></div>
 
-<div ng-click="setVisiblePopup(SsCase.PropertyInfo.Owners[$index], true)">
+<div ng-click="$eval('ViewStatus.Owner_'+$index+'=true')">
     <div class="ss_border" style="border-top-color: transparent">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
@@ -51,7 +51,7 @@
                     dragEnabled: true,
                     showCloseButton: true,
                     shading: false,
-                    bindingOptions:{ visible: 'SsCase.PropertyInfo.Owners['+$index+'].visiblePopup' }
+                    bindingOptions:{ visible: 'ViewStatus.Owner_'+$index }
         }">
     <div data-options="dxTemplate:{ name: 'content' }">
         <div>
@@ -149,7 +149,7 @@
 
         </div>
         <br />
-        <button class="btn btn-primary pull-right" ng-click="setVisiblePopup(SsCase.PropertyInfo.Owners[$index], false)">Save</button>
+        <button class="btn btn-primary pull-right" ng-click="$eval('ViewStatus.Owner_'+$index+'=false')">Save</button>
     </div>
 </div>
 

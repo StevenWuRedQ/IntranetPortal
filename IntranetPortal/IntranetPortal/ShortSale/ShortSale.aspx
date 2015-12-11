@@ -631,10 +631,14 @@
             angular.element(document.getElementById('ShortSaleCtrl')).scope().SaveShortSale(function () { ScopeSetLastUpdateTime(GetLasTUpDateURL()); ResetCaseDataChange(); });
         }
 
+        function AutoSaveShortSale() {
+            angular.element(document.getElementById('ShortSaleCtrl')).scope().AutoSaveShorSale(function () { ScopeSetLastUpdateTime(GetLasTUpDateURL()); ResetCaseDataChange(); });
+        }
+
         $(document).ready(function () {
             var $scope = angular.element(document.getElementById('ShortSaleCtrl')).scope();
             ScopeDateChangedByOther(GetLasTUpDateURL, $scope.GetShortSaleCase, $scope.GetLoadId, $scope.GetModifyUserUrl);
-            ScopeAutoSave(GetShortSaleCase, SaveShortSaleCase, '#ShortSaleTabHead',
+            ScopeAutoSave(GetShortSaleCase, AutoSaveShortSale, '#ShortSaleTabHead',
             {
                 "urlFunc": GetLasTUpDateURL,
                 "reLoadUIfunc": $scope.GetShortSaleCase,

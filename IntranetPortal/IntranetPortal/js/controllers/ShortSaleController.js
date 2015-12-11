@@ -52,8 +52,7 @@
                     ptCom.alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data1));
                 });
         }; // -- end --
-
-
+        
         $scope.GetShortSaleCase = function (caseId, callback) {
             if (!caseId) {
                 console.log("Can not find case Id ");
@@ -120,7 +119,6 @@
                 if (disable) item[index].DataStatus = 3;
                 else item.splice(index, 1);
             }
-
         };
 
         $scope.SaveShortSale = function (callback) {
@@ -129,8 +127,7 @@
 
             $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
                     success(function () {
-                        // if save scuessed load data again 
-
+                        // if save scuessed load data again                      
                         $scope.GetShortSaleCase($scope.SsCase.CaseId);
                         if (!callback) {
                             ptCom.alert("Save Successed !");

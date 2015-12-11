@@ -145,6 +145,13 @@ Partial Public Class PropertyMortgage
         End Using
     End Function
 
+    Public Shared Function GetMortgages(caseId As Integer) As PropertyMortgage()
+        Using ctx As New PortalEntities
+            Dim mort = ctx.PropertyMortgages.Where(Function(mt) mt.CaseId = caseId).ToArray
+            Return mort
+        End Using
+    End Function
+
     Public Shared Function Instance(mortId As Integer) As PropertyMortgage
         Using ctx As New PortalEntities
             Dim mort = ctx.PropertyMortgages.Find(mortId)

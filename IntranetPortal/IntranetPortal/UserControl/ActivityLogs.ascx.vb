@@ -248,6 +248,11 @@ Public Class ActivityLogs
                     log.Category = LeadsActivityLog.LogCategory.Approved.ToString
 
                     Dim lead = Context.Leads.Where(Function(ld) ld.BBLE = log.BBLE).SingleOrDefault
+                    If lead Is Nothing Then
+                        Throw New CallbackException("The leads was removed.")
+                        Return
+                    End If
+
                     lead.Status = LeadStatus.NewLead
 
                     Context.SaveChanges()

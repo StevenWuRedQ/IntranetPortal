@@ -750,13 +750,27 @@ Partial Public Class ShortSaleCase
 
             'Save mortgages
             If _mortgages IsNot Nothing Then
-                For Each mg In _mortgages.Take(3)
-                    If mg.CaseId = 0 Then
-                        mg.CaseId = CaseId
-                    End If
+                SaveMortgages(userName)
+                'If _mortgages.Any(Function(m) m.MortgageId = 0) Then
+                '    Dim mtgs = PropertyMortgage.GetMortgages(CaseId)
+                '    For i = 0 To 2
+                '        If _mortgages.Length > i Then
+                '            If mtgs.Length > i Then
+                '                If _mortgages(i).MortgageId = 0 Then
+                '                    _mortgages(i).MortgageId = mtgs(i).MortgageId
+                '                End If
+                '            End If
+                '        End If
+                '    Next
+                'End If
 
-                    mg.Save(userName)
-                Next
+                'For Each mg In _mortgages.Take(3)
+                '    If mg.CaseId = 0 Then
+                '        mg.CaseId = CaseId
+                '    End If
+
+                '    mg.Save(userName)
+                'Next
             End If
 
             'save offers
@@ -842,6 +856,36 @@ Partial Public Class ShortSaleCase
             End If
 
         End Using
+    End Sub
+
+    Private Sub SaveMortgages(userName As String)
+        Dim mtgsList = _mortgages.ToList
+        If mtgsList.Any(Function(m) m.DataStatus = ModelStatus.Deleted) Then
+            Dim deletedMtgs = mtgsList.Where(Function(m) m.DataStatus = ModelStatus.Deleted).ToList
+            For Each mtg In deletedMtgs
+                mtg.Save(userName)
+                mtgsList.Remove(mtg)
+            Next
+        End If
+
+        If mtgsList.Any(Function(m) m.MortgageId = 0) Then
+            Dim mtgs = PropertyMortgage.GetMortgages(CaseId)
+            For i = 0 To 2
+                If mtgsList.Count > i AndAlso mtgs.Length > i Then
+                    If mtgsList(i).MortgageId = 0 Then
+                        mtgsList(i).MortgageId = mtgs(i).MortgageId
+                    End If
+                End If
+            Next
+        End If
+
+        For Each mg In _mortgages.Take(3)
+            If mg.CaseId = 0 Then
+                mg.CaseId = CaseId
+            End If
+
+            mg.Save(userName)
+        Next
     End Sub
 
     Public Sub UpdateMortgageStatus(mortgageIndex As Integer, category As String, status As String, updateBy As String)
