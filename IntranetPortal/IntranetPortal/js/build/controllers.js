@@ -1,1354 +1,3 @@
-var portalApp = angular.module('PortalApp', ['ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout']);
-angular.module('PortalApp').
-controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
-    $rootScope.AlertModal = null;
-    $rootScope.ConfirmModal = null;
-    $rootScope.loadingCover = document.getElementById('LodingCover');
-    $rootScope.panelLoading = false;
-
-    $rootScope.alert = function (message) {
-        $rootScope.alertMessage = message ? message : '';
-        $rootScope.AlertModal = $uibModal.open({
-            templateUrl: 'AlertModal',
-        });
-    }
-
-    $rootScope.alertOK = function () {
-        $rootScope.AlertModal.close();
-    }
-
-    $rootScope.confirm = function (message) {
-        $rootScope.confirmMessage = message ? message : '';
-        $rootScope.ConfirmModal = $uibModal.open({
-            templateUrl: 'ConfirmModal'
-        });
-        return $rootScope.ConfirmModal.result;
-    }
-
-    $rootScope.confirmYes = function () {
-        $rootScope.ConfirmModal.close(true);
-    }
-
-    $rootScope.confirmNo = function () {
-        $rootScope.ConfirmModal.close(false);
-    }
-
-
-    $rootScope.showLoading = function (divId) {
-        $($rootScope.loadingCover).show();
-    }
-
-    $rootScope.hideLoading = function (divId) {
-        $($rootScope.loadingCover).hide();
-    }
-
-    $rootScope.toggleLoading = function () {
-        $rootScope.panelLoading = !$scope.panelLoading;
-    }
-    $rootScope.startLoading = function () {
-        $rootScope.panelLoading = true;
-    }
-    $rootScope.stopLoading = function () {
-        $timeout(function () {
-            $rootScope.panelLoading = false;
-        });
-    }
-}]);
-angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($http, $rootScope) {
-    var that = this;
-
-    this.DocGenerator = function (tplName, data, successFunc) {
-        $http.post("/Services/Documents.svc/DocGenrate", { "tplName": tplName, "data": JSON.stringify(data) }).success(function (data) {
-            successFunc(data);
-        }).error(function (data, status) {
-            alert("Fail to save data. status: " + status + " Error : " + JSON.stringify(data));
-        });
-    };
-
-    this.arrayAdd = function (model, data) {
-        if (model) {
-            data = data === undefined ? {} : data;
-            model.push(data);
-        }
-    };
-    this.arrayRemove = function (model, index, confirm, callback) {
-        if (model && index < model.length) {
-            if (confirm) {
-                var x = that.confirm("Delete This?", "").then(function (r) {
-                    if (r) {
-                        var deleteObj = model.splice(index, 1)[0];
-                        if (callback) callback(deleteObj);
-                    }
-                });
-            } else {
-                model.splice(index, 1);
-            }
-        }
-    };
-
-    this.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
-        var result = '';
-        if (strNO) result += strNO + ' ';
-        if (strName) result += strName + ', ';
-        if (aptNO) result += 'Apt ' + aptNO + ', ';
-        if (city) result += city + ', ';
-        if (state) result += state + ', ';
-        if (zip) result += zip;
-        return result;
-    };
-    this.capitalizeFirstLetter = function (string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
-
-    this.formatName = function (firstName, middleName, lastName) {
-        var result = '';
-        if (firstName) result += that.capitalizeFirstLetter(firstName) + ' ';
-        if (middleName) result += that.capitalizeFirstLetter(middleName) + ' ';
-        if (lastName) result += that.capitalizeFirstLetter(lastName);
-        return result;
-    };
-    this.ensureArray = function (scope, modelName) {
-        /* caution: due to the ".", don't eval to create an array more than one level*/
-        if (!scope.$eval(modelName)) {
-            scope.$eval(modelName + '=[]');
-        }
-    };
-    this.ensurePush = function (scope, modelName, data) {
-        that.ensureArray(scope, modelName);
-        data = data ? data : {};
-        var model = scope.$eval(modelName);
-        model.push(data);
-    };
-    // when use jquery.extend, jquery will override the dst even src is null,
-    // this function convert null recursively to make the extend works as expected 
-    this.nullToUndefined = function (obj) {
-        for (var property in obj) {
-            if (obj.hasOwnProperty(property)) {
-                if (obj[property] === null) {
-                    obj[property] = undefined;
-                } else {
-                    if (typeof obj[property] === "object") {
-                        that.nullToUndefined(obj[property]);
-                    }
-                }
-            }
-        }
-    };
-    this.printDiv = function (divID) {
-        var divToPrint = document.getElementById(divID);
-        var popupWin = window.open('', '_blank', 'width=300,height=300');
-        popupWin.document.open();
-        popupWin.document.write('<html <head><link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" type="text/css" /><link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" /><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" /><link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" /><link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" type="text/css" /><link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" /><link href="/css/stevencss.css" rel="stylesheet" type="text/css" /></head><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
-        popupWin.document.close();
-
-
-    };
-    this.postRequest = function (url, data) {
-        $.post(url, data, function (retData) {
-            $("body").append("<iframe src='" + retData.url + "' style='display: none;' ></iframe>");
-        });
-    };
-    this.alert = function (message) {
-        $rootScope.alert(message);
-    };
-    this.confirm = function (message) {
-        return $rootScope.confirm(message);
-    };
-    this.addOverlay = function () {
-        $rootScope.addOverlay();
-    };
-    this.stopLoading = function () {
-        $rootScope.stopLoading();
-    }
-    this.startLoading = function () {
-        $rootScope.startLoading();
-    }
-
-    this.removeOverlay = function () {
-        $rootScope.removeOverlay();
-    }; // get next index of value in the array, 
-    this.next = function (array, value, from) {
-        return array.indexOf(value, from);
-    };
-    this.previous = function (array, value, from) {
-        var index = -1;
-        for (var i = 0 ; i < from ; i++) {
-            if (array[i] === value)
-                index = i;
-        }
-        return index;
-    };
-    this.saveBlob = function (blob, fileName) {
-        var a = document.createElement("a");
-        a.style = "display: none";
-        var xurl = window.URL.createObjectURL(blob);
-        a.href = xurl;
-        a.download = fileName;
-
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(xurl);
-        document.body.removeChild(a);
-
-    };
-    this.toUTCLocaleDateString = function (d) {
-        var tempDate = new Date(d);
-        return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
-    };
-}]).service("ptTime", [function () {
-    var that = this;
-
-    this.isPassByDays = function (start, end, count) {
-        var start_date = new Date(start);
-        var end_date = new Date(end);
-
-        // Do the math.
-        var millisecondsPerDay = 1000 * 60 * 60 * 24;
-        var millisBetween = end_date.getTime() - start_date.getTime();
-        var days = millisBetween / millisecondsPerDay;
-
-        if (days > count) {
-            return true;
-        }
-
-        return false;
-    }
-    this.isPassOrEqualByDays = function (start, end, count) {
-        var start_date = new Date(start);
-        var end_date = new Date(end);
-
-        // Do the math.
-        var millisecondsPerDay = 1000 * 60 * 60 * 24;
-        var millisBetween = end_date.getTime() - start_date.getTime();
-        var days = millisBetween / millisecondsPerDay;
-
-        if (days >= count) {
-            return true;
-        }
-
-        return false;
-    }
-    this.isLessOrEqualByDays = function (start, end, count) {
-        var start_date = new Date(start);
-        var end_date = new Date(end);
-
-        // Do the math.
-        var millisecondsPerDay = 1000 * 60 * 60 * 24;
-        var millisBetween = end_date.getTime() - start_date.getTime();
-        var days = millisBetween / millisecondsPerDay;
-
-        if (days >= 0 && days <= count) {
-            return true;
-        }
-
-        return false;
-    }
-    this.isPassByMonths = function (start, end, count) {
-        var start_date = new Date(start);
-        var end_date = new Date(end);
-        var months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + end_date.getMonth() - start_date.getMonth();
-
-        if (months > count) return true;
-        else return false;
-    }
-    this.isPassOrEqualByMonths = function (start, end, count) {
-        var start_date = new Date(start);
-        var end_date = new Date(end);
-        var months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + end_date.getMonth() - start_date.getMonth();
-
-        if (months >= count) return true;
-        else return false;
-    }
-
-}]).service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
-
-    var allContact;
-    var allTeam;
-
-    (function () {
-        if (!allContact) {
-            $http.get('/Services/ContactService.svc/LoadContacts')
-           .success(function (data, status) {
-               allContact = data;
-           }).error(function (data, status) {
-               allContact = [];
-           });
-        }
-
-        if (!allTeam) {
-            $http.get('/Services/TeamService.svc/GetAllTeam')
-            .success(function (data, status) {
-                allTeam = data;
-            })
-            .error(function (data, status) {
-                allTeam = [];
-            });
-        }
-
-    }());
-
-    this.getAllContacts = function () {
-        if (allContact) return allContact;
-        return $http.get('/Services/ContactService.svc/LoadContacts')
-            .then(function (response) {
-                return limitToFilter(response.data, 10);
-            });
-    };
-    this.getContactsByGroup = function (groupId) {
-        if (allContact) return allContact.filter(function (x) { return x.GroupId == groupId });
-    };
-    this.getContacts = function (args, /* optional */ groupId) {
-        groupId = groupId === undefined ? null : groupId;
-        return $http.get('/Services/ContactService.svc/GetContacts?args=' + args)
-            .then(function (response) {
-                if (groupId) return limitToFilter(response.data.filter(function (x) { return x.GroupId == groupId }), 10);
-                return limitToFilter(response.data, 10);
-            });
-    };
-    this.getContactsByID = function (id) {
-        if (allContact) return allContact.filter(function (o) { return o.ContactId == key });
-        return $http.get('/Services/ContactService.svc/GetAllContacts?id=' + id)
-            .then(function (response) {
-                return limitToFilter(response.data, 10);
-            });
-    };
-    this.getContactById = function (id) {
-        if (allContact) return allContact.filter(function (o) { return o.ContactId == id; })[0];
-        return null;
-    };
-    this.getEntities = function (name, status) {
-
-        status = status === undefined ? 'Available' : status;
-        name = name ? '' : name;
-        return $http.get('/Services/ContactService.svc/GetCorpEntityByStatus?n=' + name + '&s=' + status)
-            .then(function (res) {
-                return limitToFilter(res.data, 10);
-            });
-
-
-    };
-    this.getContactByName = function (name) {
-        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
-        return {};
-    };
-    this.getContact = function (id, name) {
-        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0] || {};
-        return {};
-    };
-    this.getTeamByName = function (teamName) {
-        if (allTeam) {
-            return allTeam.filter(function (o) { if (o.Name && teamName) return o.Name.trim() == teamName.trim() })[0];
-        }
-        return {};
-
-    };
-
-
-}]).service('ptShortsSaleService', ['$http', function ($http) {
-    this.getShortSaleCase = function (caseId, callback) {
-        var url = "/ShortSale/ShortSaleServices.svc/GetCase?caseId=" + caseId;
-        $http.get(url)
-            .success(function (data) {
-                callback(data);
-            })
-            .error(function (data) {
-                console.log("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
-            });
-    };
-    this.getShortSaleCaseByBBLE = function (bble, callback) {
-        var url = "/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=" + bble;
-        $http.get(url)
-            .success(function (data) {
-                callback(data);
-            }).error(function () {
-                console.log("Get Short Sale By BBLE fails.");
-            }
-        );
-
-    };
-    this.getBuyerTitle = function (bble, callback) {
-        var url = "/api/ShortSale/GetBuyerTitle?bble=";
-        $http.get(url + bble)
-        .then(function succ(res) {
-            if (callback) callback(null, res);
-        }, function error() {
-            if (callback) callback("Fail to get buyer title for bble: " + bble, null);
-        });
-    };
-}]).service('ptLeadsService', ["$http", function ($http) {
-    this.getLeadsByBBLE = function (bble, callback) {
-        var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + bble;
-        $http.get(leadsInfoUrl)
-        .success(function (data) {
-            callback(data);
-        }).error(function (data) {
-            console.log("Get Short sale Leads failed BBLE =" + bble + " error : " + JSON.stringify(data));
-        });
-    };
-}
-]).factory('ptHomeBreakDownService', ["$http", function ($http) {
-    return {
-        loadByBBLE: function (bble, callback) {
-            var url = '/ShortSale/ShortSaleServices.svc/LoadHomeBreakData?bble=' + bble;
-            $http.get(url)
-                .success(function (data) {
-                    callback(data);
-                }).error(function () {
-                    console.log('load home breakdown fail. BBLE: ' + bble);
-                });
-        },
-        save: function (bble, data, callback) {
-            var url = '/ShortSale/ShortSaleServices.svc/SaveBreakData';
-            var postData = {
-                "bble": bble,
-                "jsonData": JSON.stringify(data)
-            };
-            $http.post(url, postData)
-                .success(function (res) {
-                    callback(res);
-                }).error(function () {
-                    console.log('save home breakdone fail. BBLE: ' + bble);
-                });
-
-        }
-    };
-}
-]).service('ptFileService', function () {
-    this.uploadFile = function (data, bble, rename, folder, type, callback) {
-        switch (type) {
-            case 'construction':
-                this.uploadConstructionFile(data, bble, rename, folder, callback);
-                break;
-            case 'title':
-                this.uploadTitleFile(data, bble, rename, folder, callback);
-                break;
-            default:
-                this.uploadConstructionFile(data, bble, rename, folder, callback);
-                break;
-
-        }
-    };
-    this.uploadTitleFile = function (data, bble, rename, folder, callback) {
-        var fileName = rename ? rename : '';
-        var folder = folder ? folder : '';
-        if (!data || !bble) {
-            callback('Upload infomation missing!');
-        } else {
-            bble = bble.trim();
-            $.ajax({
-                url: '/api/Title/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + folder,
-                type: 'POST',
-                data: data,
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function (data1) {
-                    callback(null, data1, rename);
-                },
-                error: function () {
-                    callback('Upload fails!', null, rename);
-                }
-            });
-        }
-    };
-    this.uploadConstructionFile = function (data, bble, rename, folder, callback) {
-        var fileName = rename ? rename : '';
-        var tofolder = folder ? folder : '';
-        if (!data || !bble) {
-            callback('Upload infomation missing!');
-        } else {
-            bble = bble.trim();
-            $.ajax({
-                url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + tofolder,
-                type: 'POST',
-                data: data,
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function (data1) {
-                    callback(null, data1, rename);
-                },
-                error: function () {
-                    callback('Upload fails!', null, rename);
-                }
-            });
-        }
-    };
-    this.getFileName = function (fullPath) {
-        var paths;
-        if (fullPath) {
-            if (this.isIE(fullPath)) {
-                paths = fullPath.split('\\');
-                return this.cleanName(paths[paths.length - 1]);
-            } else {
-                paths = fullPath.split('/');
-                return this.cleanName(paths[paths.length - 1]);
-            }
-        }
-        return '';
-    };
-    this.getFileExt = function (fullPath) {
-        if (fullPath && fullPath.indexOf('.') > -1) {
-            var exts = fullPath.split('.');
-            return exts[exts.length - 1].toLowerCase();
-        }
-        return '';
-    };
-    this.isPicture = function (fullPath) {
-        var ext = this.getFileExt(fullPath);
-        var pictureExts = ['jpg', 'jpeg', 'gif', 'bmp', 'png'];
-        return pictureExts.indexOf(ext) > -1;
-    };
-    this.getFileFolder = function (fullPath) {
-        if (fullPath) {
-            var paths = fullPath.split('/');
-            var folderName = paths[paths.length - 2];
-            var topFolders = ['Construction', 'Title'];
-            if (topFolders.indexOf(folderName) < 0) {
-                return folderName;
-            } else {
-                return '';
-            }
-        }
-        return '';
-    };
-    this.makePreviewUrl = function (filePath) {
-        var ext = this.getFileExt(filePath);
-        switch (ext) {
-            case 'pdf':
-                return '/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath);
-                break;
-            case 'xls':
-            case 'xlsx':
-            case 'doc':
-            case 'docx':
-                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true';
-                break;
-            case 'jpg':
-            case 'jpeg':
-            case 'bmp':
-            case 'gif':
-            case 'png':
-                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
-                break;
-            default:
-                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
-
-        }
-    };
-    this.onFilePreview = function (filePath) {
-
-        var ext = this.getFileExt(filePath);
-        switch (ext) {
-            case 'pdf':
-                window.open('/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath));
-                break;
-            case 'xls':
-            case 'xlsx':
-            case 'doc':
-            case 'docx':
-                window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true');
-                break;
-            case 'jpg':
-            case 'jpeg':
-            case 'bmp':
-            case 'gif':
-            case 'png':
-                $.fancybox.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
-                break;
-            case 'txt':
-                $.fancybox.open([
-                    {
-                        type: 'ajax',
-                        href: '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath),
-                    }
-                ]);
-                break;
-            default:
-                window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
-
-        }
-    };
-    this.resetFileElement = function (el) {
-        el.val('');
-        el.wrap('<form>').parent('form').trigger('reset');
-        el.unwrap();
-        el.prop('files')[0] = null;
-        el.replaceWith(el.clone());
-    };
-    this.cleanName = function (filename) {
-        return filename.replace(/[^a-z0-9_\-\.()]/gi, '_');
-    };
-    this.isIE = function (fileName) {
-        return fileName.indexOf(':\\') > -1;
-    };
-    this.getThumb = function (thumbId) {
-        return '/downloadfile.aspx?thumb=' + thumbId;
-
-    };
-    this.trunc = function (fileName, length) {
-        return _.trunc(fileName, length);
-
-    };
-}).service('ptConstructionService', ['$http', function ($http) {
-    this.getConstructionCases = function (bble, callback) {
-        var url = "/api/ConstructionCases/" + bble;
-        $http.get(url)
-            .success(function (data) {
-                if (callback) callback(data);
-            }).error(function (data) {
-                console.log("Get Construction Data fails.");
-            });
-    };
-    this.saveConstructionCases = function (bble, data, callback) {
-        if (bble && data) {
-            bble = bble.trim();
-            var url = "/api/ConstructionCases/" + bble;
-            $http.put(url, data)
-                .success(function (res) {
-                    if (callback) callback(res);
-                }).error(function () {
-                    alert('Save CSCase fails.');
-                });
-        }
-    };
-    this.getDOBViolations = function (bble, callback) {
-        if (bble) {
-            var url = "/api/ConstructionCases/GetDOBViolations?bble=" + bble;
-            $http.get(url)
-            .success(function (res) {
-                if (callback) callback(null, res);
-            }).error(function () {
-                if (callback) callback("load dob violations fails");
-            });
-        } else {
-            if (callback) callback("bble is missing");
-        }
-    };
-    this.getECBViolations = function (bble, callback) {
-        if (bble) {
-            var url = "/api/ConstructionCases/GetECBViolations?bble=" + bble;
-            $http.get(url)
-            .success(function (res) {
-                if (callback) callback(null, res);
-            }).error(function () {
-                if (callback) callback("load ecb violations fails");
-            });
-        }
-    };
-}
-]).factory('ptLegalService', function () {
-    return {
-        load: function (bble, callback) {
-            var url = '/LegalUI/LegalUI.aspx/GetCaseData';
-            var d = { bble: bble };
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: JSON.stringify(d),
-                dataType: 'json',
-                contentType: "application/json",
-                success: function (res) {
-                    callback(null, res);
-                },
-                error: function () {
-                    callback('load data fails');
-                }
-            });
-        },
-        savePreQuestions: function (bble, createBy, data, callback) {
-            var url = '/LegalUI/LegalServices.svc/StartNewLegalCase';
-            var d = {
-                bble: bble,
-                casedata: JSON.stringify({ PreQuestions: data }),
-                createBy: createBy,
-            };
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: JSON.stringify(d),
-                dataType: "json",
-                contentType: "application/json",
-                success: function (res) {
-                    callback(null, res);
-                },
-                error: function () {
-                    callback('load data fails');
-                }
-            });
-        }
-    };
-}).factory('ptEntityService', ['$http', function ($http) {
-    return {
-        getEntityByBBLE: function (bble, callback) {
-            var url = '/api/CorporationEntities/ByBBLE?BBLE=' + bble;
-            $http.get(url).then(function success(res) {
-                if (callback) callback(null, res.data);
-            }, function error(res) {
-                if (callback) callback("load fail", res.data);
-            });
-        }
-    };
-}]);
-angular.module("PortalApp").
-filter("ByContact", function () {
-    return function (movies, contact) {
-        var items = {
-
-            out: []
-        };
-        if ($.isEmptyObject(contact) || contact.Type === null) {
-            return movies;
-        }
-        angular.forEach(movies, function (value, key) {
-            if (value.Type === contact.Type) {
-                if (contact.CorpName === '' || contact.CorpName === value.CorpName) {
-                    items.out.push(value);
-                }
-            }
-        });
-        return items.out;
-    };
-}).
-filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }]);
-
-angular.module("PortalApp").
-directive('ssDate', function () {
-    return {
-        restrict: 'A',
-        scope: true,
-        compile: function (tel, tAttrs) {
-            return {
-                post: function (scope, el, attrs) {
-                    $(el).datepicker({
-                        forceParse: false
-                    });
-                    scope.$watch(attrs.ngModel, function (newValue, oldValue) {
-                        var dateStr = newValue;
-                        if (dateStr && typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
-
-                            var dd = new Date(dateStr);
-                            dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
-                            $(el).datepicker('update', new Date(dd))
-                        }
-                    });
-                }
-            }
-
-
-
-        }
-    };
-}).
-directive('ptRightClick', ['$parse', function ($parse) {
-    return function (scope, element, attrs) {
-        var fn = $parse(attrs.ngRightClick);
-        element.bind('contextmenu', function (event) {
-            scope.$apply(function () {
-                event.preventDefault();
-                fn(scope, { $event: event });
-            });
-        });
-    };
-}]).
-directive('inputMask', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, el, attrs) {
-            $(el).mask(attrs.inputMask);
-            $(el).on('change', function () {
-                scope.$eval(attrs.ngModel + "='" + el.val() + "'");
-            });
-        }
-    };
-}).
-directive('bindId', ['ptContactServices', function (ptContactServices) {
-    return {
-        restrict: 'A',
-        link: function postLink(scope, el, attrs) {
-            scope.$watch(attrs.bindId, function (newValue, oldValue) {
-                if (newValue != oldValue) {
-                    var contact = ptContactServices.getContactById(newValue);
-                    if (contact) scope.$eval(attrs.ngModel + "='" + contact.Name + "'");
-                }
-            });
-        }
-
-    }
-}]).
-directive('ptInitModel', function () {
-    return {
-        restrict: 'A',
-        require: '?ngModel',
-        priority: 99,
-        link: function (scope, el, attrs) {
-            scope.$watch(attrs.ptInitModel, function (newVal) {
-                if (!scope.$eval(attrs.ngModel) && newVal) {
-                    if (typeof newVal == 'string') newVal = newVal.replace(/'/g, "\\'");
-                    scope.$eval(attrs.ngModel + "='" + newVal + "'");
-                }
-            });
-        }
-    }
-}).
-directive('ptInitBind', function () { //one way bind of ptInitModel
-    return {
-        restrict: 'A',
-        require: '?ngBind',
-        link: function (scope, el, attrs) {
-            scope.$watch(attrs.ptInitBind, function (newVal) {
-                if (!scope.$eval(attrs.ngBind) && newVal) {
-                    if (typeof newVal == 'string') newVal = newVal.replace(/'/g, "\\'");
-                    scope.$eval(attrs.ngBind + "='" + newVal + "'");
-                }
-            });
-        }
-    }
-}).
-directive('radioInit', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, el, attrs) {
-            scope.$eval(attrs.ngModel + "=" + attrs.ngModel + "==null?" + attrs.radioInit + ":" + attrs.ngModel);
-            scope.$watch(attrs.ngModel, function () {
-                var bVal = scope.$eval(attrs.ngModel);
-                bVal = bVal != null && (bVal == 'true' || bVal == true);
-                scope.$eval(attrs.ngModel + "=" + bVal.toString());
-            });
-        }
-    }
-}).
-directive('moneyMask', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, el, attrs) {
-
-            scope.$watch(attrs.ngModel, function () {
-                if ($(el).is(":focus")) return;
-                $(el).formatCurrency();
-            });
-            $(el).on('blur', function () { $(this).formatCurrency(); });
-            $(el).on('focus', function () { $(this).toNumber() });
-
-        },
-    };
-}).
-directive('numberMask', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, el, attrs) {
-
-            scope.$watch(attrs.ngModel, function () {
-                if ($(el).is(":focus")) return;
-                $(el).formatCurrency({ symbol: "" });
-            });
-            $(el).on('blur', function () { $(this).formatCurrency({ symbol: "" }); });
-            $(el).on('focus', function () { $(this).toNumber() });
-
-        },
-    };
-}).
-directive('integerMask', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, el, attrs) {
-
-            scope.$watch(attrs.ngModel, function () {
-                if ($(el).is(":focus")) return;
-                $(el).formatCurrency({ symbol: "", roundToDecimalPlace: 0 });
-            });
-            $(el).on('blur', function () { $(this).formatCurrency({ symbol: "", roundToDecimalPlace: 0 }); });
-            $(el).on('focus', function () { $(this).toNumber() });
-
-        },
-    };
-}).
-directive('percentMask', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, el, attrs) {
-
-            scope.$watch(attrs.ngModel, function () {
-                if ($(el).is(":focus")) return;
-                $(el).formatCurrency({ symbol: "%", positiveFormat: '%n%s' });
-            });
-            $(el).on('blur', function () { $(this).formatCurrency({ symbol: "%", positiveFormat: '%n%s' }); });
-            $(el).on('focus', function () { $(this).toNumber() });
-
-        },
-    };
-}).
-directive('ptRadio', function () {
-    return {
-        restrict: 'E',
-        template:
-            '<input type="checkbox" id="{{name}}Y" ng-model="model" class="ss_form_input">' +
-            '<label for="{{name}}Y" class="input_with_check"><span class="box_text">{{trueValue}}&nbsp</span></label>' +
-            '<input type="checkbox" id="{{name}}N" ng-model="model" ng-true-value="false" ng-false-value="true" class="ss_form_input">' +
-            '<label for="{{name}}N" class="input_with_check"><span class="box_text">{{falseValue}}&nbsp</span></label>',
-        scope: {
-            model: '=',
-            name: '@',
-            defaultValue: '@',
-            trueValue: '@',
-            falseValue: '@'
-        },
-        link: function (scope, el, attrs) {
-            scope.trueValue = scope.trueValue ? scope.trueValue : 'yes';
-            scope.falseValue = scope.falseValue ? scope.falseValue : 'no';
-            scope.defaultValue = scope.defaultValue === 'true' ? true : false;
-            scope.model = scope.model == null ? scope.defaultValue : scope.model;
-        }
-
-    }
-}).
-directive('ptCollapse', function () {
-    return {
-        restrict: 'E',
-        template:
-            '<i class="fa fa-compress icon_btn text-primary" ng-show="!model" ng-click="model=!model"></i>' +
-            '<i class="fa fa-expand icon_btn text-primary" ng-show="model" ng-click="model=!model"></i>',
-        scope: {
-            model: '=',
-        },
-        link: function postLink(scope, el, attrs) {
-            var bVal = scope.model;
-            scope.model = bVal === undefined ? false : bVal;
-        }
-
-    }
-}).
-directive('ckEditor', [function () {
-    return {
-        require: '?ngModel',
-        link: function (scope, elm, attr, ngModel) {
-
-            var ck = CKEDITOR.replace(elm[0], {
-                allowedContent: true,
-                height: 450,
-            });
-
-            ck.on('pasteState', function () {
-                scope.$apply(function () {
-                    ngModel.$setViewValue(ck.getData());
-                });
-            });
-
-            ngModel.$render = function (value) {
-                ck.setData(ngModel.$modelValue);
-            };
-        }
-    };
-}]).
-directive('ptAdd', function () {
-    return {
-        restrict: 'E',
-        template: '<i class="fa fa-plus-circle icon_btn text-primary tooltip-examples" title="Add"></i>',
-    }
-}).
-directive('ptDel', function () {
-    return {
-        restrict: 'E',
-        template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
-    }
-}).
-directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout) {
-    return {
-        restrict: 'E',
-        templateUrl: '/js/templates/ptfile.html',
-        scope: {
-            fileModel: '=',
-            fileBble: '=',
-            fileName: '@',
-            fileId: '@',
-            uploadType: '@'
-        },
-        link: function (scope, el, attrs) {
-            scope.uploadType = scope.uploadType || 'construction';
-            scope.ptFileService = ptFileService;
-            scope.fileChoosed = false;
-            scope.loading = false;
-            scope.delFile = function () {
-                scope.fileModel = null;
-            }
-            scope.delChoosed = function () {
-                scope.File = null;
-                scope.fileChoosed = false;
-                var fileEl = el.find('input:file')[0]
-                fileEl.value = ''
-            }
-            scope.toggleLoading = function () {
-                scope.loading = !scope.loading;
-            }
-            scope.startLoading = function () {
-                scope.loading = true;
-            }
-            scope.stopLoading = function () {
-                $timeout(function () {
-                    scope.loading = false;
-                });
-            }
-            scope.uploadFile = function () {
-                scope.startLoading();
-                var data = new FormData();
-                data.append("file", scope.File);
-                var targetName = ptFileService.getFileName(scope.File.name);
-                ptFileService.uploadFile(data, scope.fileBble, targetName, '', scope.uploadType, function (error, data) {
-                    scope.stopLoading();
-                    if (error) {
-                        alert(error);
-                    } else {
-                        scope.$apply(function () {
-                            scope.fileModel = {}
-                            scope.fileModel.path = data[0];
-                            if (data[1]) scope.fileModel.thumb = data[1];
-                            scope.fileModel.name = ptFileService.getFileName(scope.fileModel.path);
-                            scope.fileModel.uploadTime = new Date();
-                            scope.delChoosed();
-                        });
-                    }
-
-                });
-            }
-            el.find('input:file').bind('change', function () {
-                var file = this.files[0];
-                if (file) {
-                    scope.$apply(function () {
-                        scope.File = file;
-                        scope.fileChoosed = true;
-                    });
-                }
-            });
-
-            scope.modifyName = function (mdl) {
-                if (mdl) {
-                    scope.ModifyNamePop = true;
-                    scope.NewFileName = mdl.name ? mdl.name : '';
-                    scope.editingFileModel = mdl;
-                    scope.editingFileExt = ptFileService.getFileExt(scope.NewFileName);
-                }
-
-            }
-            scope.onModifyNamePopClose = function () {
-                scope.NewFileName = '';
-                scope.editingFileModel = null;
-                scope.editingFileExt = '';
-                scope.ModifyNamePop = false;
-
-            }
-            scope.onModifyNamePopSave = function () {
-                if (scope.NewFileName) {
-                    if (scope.NewFileName.indexOf('.') > -1) {
-                        scope.editingFileModel.name = scope.NewFileName;
-                    } else {
-                        scope.editingFileModel.name = scope.NewFileName + '.' + scope.editingFileExt;
-                    }
-                }
-                scope.editingFileModel = null;
-                scope.editingFileExt = '';
-                scope.ModifyNamePop = false;
-
-            }
-
-
-        }
-    }
-}]).
-directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
-    return {
-        restrict: 'E',
-        templateUrl: '/js/templates/ptfiles.html',
-        scope: {
-            fileModel: '=',
-            fileBble: '=',
-            fileId: '@',
-            fileColumns: '@',       // addtion information
-            folderEnable: '@',
-            baseFolder: '@',
-            uploadType: '@'         // control server folder, implete specific method in the service
-
-        },
-        link: function (scope, el, attrs) {
-            scope.uploadType = scope.uploadType || 'construction';
-            scope.ptFileService = ptFileService;
-            scope.ptCom = ptCom;
-
-            // init scope variale
-            scope.files = [];
-            scope.columns = [];
-            scope.nameTable = [];   // record choosen files
-            scope.currentFolder = '';
-            scope.showFolder = false;
-
-            scope.loading = false;
-            scope.folderEnable = scope.folderEnable === 'true' ? true : false;
-            scope.baseFolder = scope.baseFolder ? scope.baseFolder : '';
-
-
-            if (scope.fileColumns) {
-                scope.columns = scope.fileColumns.split('|');
-                _.each(scope.columns, function (elm) {
-                    elm.trim();
-                });
-            }
-            scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined, '')
-
-            scope.$watch('fileBble', function (newV, oldV) {
-                scope.currentFolder = '';
-                scope.baseFolder = scope.baseFolder ? scope.baseFolder : '';
-                scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined, '')
-            })
-
-            $(el).find('input:file').change(function () {
-                var files = this.files;
-                scope.addFiles(files);
-                this.value = '';
-            });
-            $(el).find('.drop-area')
-                .on('dragenter', function (e) {
-                    e.preventDefault();
-                    $(this).addClass('drop-area-hover');
-                })
-                .on('dragover', function (e) {
-                    e.preventDefault();
-                    $(this).addClass('drop-area-hover');
-                })
-                .on('dragleave', function (e) {
-                    $(this).removeClass('drop-area-hover');
-                })
-                .on('drop', function (e) {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    $(this).removeClass('drop-area-hover');
-                    scope.OnDropTextarea(e);
-                    debugger;
-                });
-
-
-            // utility functions
-            scope.changeFolder = function (folderName) {
-                scope.currentFolder = folderName;
-                scope.showFolder = true;
-            }
-            scope.addFolder = function (folderName) {
-                scope.folders.push(folderName);
-                scope.currentFolder = folderName;
-                scope.showFolder = true;
-            }
-            scope.hideFolder = function () {
-                scope.currentFolder = ""
-                scope.showFolder = false;
-            }
-            scope.toggleNewFilePop = function () {
-                scope.NewFolderPop = !scope.NewFolderPop
-                scope.NewFolderName = '';
-            }
-            scope.newFolderPopSave = function () {
-                scope.addFolder(scope.NewFolderName);
-                scope.toggleNewFilePop()
-            }
-
-
-            scope.addFiles = function (files) {
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-                    scope.$apply(function () {
-                        if (scope.nameTable.indexOf(file.name) < 0) {
-                            scope.files.push(file);
-                            scope.nameTable.push(file.name);
-                        }
-                    });
-
-                }
-            }
-            scope.removeChoosed = function (index) {
-                scope.nameTable.splice(scope.nameTable.indexOf(scope.files[index].name), 1);
-                scope.files.splice(index, 1);
-            }
-            scope.clearChoosed = function () {
-                scope.nameTable = [];
-                scope.files = [];
-            }
-
-            scope.showUpoading = function () {
-                scope.uploadProcess = true;
-                scope.dynamic = 1;
-            }
-            scope.hideUpoading = function () {
-                scope.clearChoosed();
-                scope.uploadProcess = false;
-            }
-            scope.showUploadErrors = function () {
-                var error = _.some(scope.result, function (el) { return el.error });
-                return !scope.uploading && error;
-            }
-
-            scope.OnDropTextarea = function (event) {
-                if (event.originalEvent.dataTransfer) {
-                    var files = event.originalEvent.dataTransfer.files;
-                    scope.addFiles(files);
-                }
-                else {
-                    alert("Your browser does not support the drag files.");
-                }
-            }
-            scope.uploadFile = function () {
-                scope.fileModel = scope.fileModel ? scope.fileModel : [];
-                var targetFolder = (scope.baseFolder ? scope.baseFolder + '/' : '') + (scope.currentFolder ? scope.currentFolder + '/' : '')
-                scope.result = [];      // final result will store here, but we build up it first for counting
-                var len = scope.files.length;
-                scope.showUpoading();
-                scope.uploading = true;
-                for (var i = 0; i < len; i++) {
-                    var f = {};
-                    f.name = ptFileService.getFileName(scope.files[i].name);
-                    f.folder = scope.currentFolder;
-                    f.uploadTime = new Date();
-                    for (var j = 0; j < scope.columns.length; j++) {
-                        var column = scope.columns[j];
-                        f[column] = '';
-                    }
-                    scope.result.push(f);
-                }
-
-                for (var i = 0; i < len; i++) {
-                    var data = new FormData();
-                    data.append("file", scope.files[i]);
-                    var targetName = ptFileService.getFileName(scope.files[i].name);
-                    ptFileService.uploadFile(data, scope.fileBble, targetName, targetFolder, scope.uploadType, function (error, data, targetName) {
-                        if (error) {
-                            var targetElement = _.filter(scope.result, function (el) { return el.name == targetName })[0];
-                            if (targetElement) targetElement.error = error;
-                            scope.countCallback(len);
-                        } else {
-                            var targetElement = _.filter(scope.result, function (el) { return el.name == targetName })[0];
-                            if (targetElement) {
-                                targetElement.path = data[0];
-                                if (data[1]) targetElement.thumb = data[1];
-                            }
-                            scope.fileModel.push(targetElement);
-                            scope.countCallback(len);
-                        }
-                    });
-                }
-
-            }
-            scope.count = 0;
-            scope.countCallback = function (total) {
-                if (scope.count >= total - 1) {
-                    $timeout(function () {
-                        scope.count = scope.count + 1;
-                        scope.dynamic = Math.floor(scope.count / total * 100);
-                        scope.count = 0;
-                        scope.uploading = false;
-                        scope.clearChoosed();
-                    });
-                } else {
-                    $timeout(function () {
-                        scope.count = scope.count + 1;
-                        scope.dynamic = Math.floor(scope.count / total * 100);
-                    })
-                }
-            }
-            scope.modifyName = function (mdl, indx) {
-                if (mdl[indx]) {
-                    scope.ModifyNamePop = true;
-                    scope.NewFileName = mdl[indx].name ? mdl[indx].name : '';
-                    scope.editingFileModel = mdl;
-                    scope.editingIndx = indx;
-                    scope.editingFileExt = ptFileService.getFileExt(scope.NewFileName);
-                }
-
-            }
-            scope.onModifyNamePopClose = function () {
-                scope.NewFileName = '';
-                scope.editingFileModel = null;
-                scope.editingIndx = null;
-                scope.ModifyNamePop = false;
-                scope.editingFileExt = '';
-            }
-            scope.onModifyNamePopSave = function () {
-                if (scope.NewFileName) {
-                    if (scope.NewFileName.indexOf('.') > -1) {
-                        scope.editingFileModel[scope.editingIndx].name = scope.NewFileName;
-                    } else {
-                        scope.editingFileModel[scope.editingIndx].name = scope.NewFileName + '.' + scope.editingFileExt;
-                    }
-                }
-                scope.editingFileModel = null;
-                scope.editingIndx = null;
-                scope.ModifyNamePop = false;
-                scope.editingFileExt = '';
-            }
-            scope.getThumb = function (model) {
-                if (model && model.thumb) {
-                    return ptFileService.getThumb(model.thumb);
-                } else {
-                    return '/images/no_image.jpg';
-                }
-
-            }
-            scope.fancyPreview = function (file) {
-                if (ptFileService.isPicture(file.name)) {
-                    $.fancybox.open(ptFileService.makePreviewUrl(file.path));
-                }
-            }
-            scope.filterError = function (v, i) {
-                return v.error;
-            }
-
-        }
-
-    }
-
-}]).
-directive('ptLink', ['ptFileService', function (ptFileService) {
-    return {
-        restrict: 'E',
-        scope: {
-            ptModel: '='
-        },
-        template: '<a ng-click="onFilePreview(ptModel.path)">{{trunc(ptModel.name,20)}}</a>',
-        link: function (scope, el, attrs) {
-            scope.onFilePreview = ptFileService.onFilePreview;
-            scope.trunc = ptFileService.trunc;
-        }
-
-    }
-}]).
-directive('ptFinishedMark', [function () {
-    return {
-        restrict: 'E',
-        template: '<span ng-if="ssStyle==0">'
-                + '<button type="button" class="btn btn-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</button>'
-                + '<button type="button" class="btn btn-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></button>'
-                + '</span>'
-                + '<span ng-if="ssStyle==1">'
-                + '<span class="label label-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</span>'
-                + '<span class="label label-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></span>'
-                + '</span>',
-        scope: {
-            ssModel: '=',
-            text1: '@',
-            text2: '@',
-            ssStyle: '@'
-        },
-        link: function (scope, el, attrs) {
-            if (!scope.ssModel) scope.ssModel = false;
-            if (scope.ssStyle && scope.ssStyle.toLowerCase() == 'label') {
-                scope.ssStyle = 1;
-            } else {
-                scope.ssStyle = 0;
-            }
-            scope.confirm = function () {
-                scope.ssModel = true;
-            }
-            scope.deconfirm = function () {
-                scope.ssModel = false;
-            }
-        }
-    }
-}])
 angular.module("PortalApp")
 .controller('BuyerEntityCtrl', ['$scope', '$http', 'ptContactServices', function ($scope, $http, ptContactServices) {
     $scope.EmailTo = [];
@@ -2155,14 +804,14 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         var json = JSON.stringify($scope.LegalCase);
         var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN };
         $http.post('LegalUI.aspx/CompleteResearch', data).success(function () {
-            alert("Submit Success!");
-            if (typeof gridTrackingClient !== 'undefined')
-                gridTrackingClient.Refresh();
+                 alert("Submit Success!");
+                 if (typeof gridTrackingClient !== 'undefined')
+                     gridTrackingClient.Refresh();
 
-        }).error(function (data) {
-            alert("Fail to save data :" + JSON.stringify(data));
-            console.log(data);
-        });
+             }).error(function (data) {
+                 alert("Fail to save data :" + JSON.stringify(data));
+                 console.log(data);
+             });
     }
 
     $scope.BackToResearch = function (comments) {
@@ -3024,7 +1673,7 @@ angular.module('PortalApp')
             x.CompareOperator = "";
             x.value1 = x.input1;
         }
-    };
+    };    
     $scope.updateBooleanFilter = function (x) {
         if (!x.input1) {
             x.WhereTerm = "";
@@ -3172,7 +1821,6 @@ angular.module("PortalApp")
         $scope.formatAddr = ptCom.formatAddr;
         $scope.ptCom = ptCom;
         $scope.MortgageTabs = [];
-        $scope.ViewStatus = {};
         $scope.SsCase = {
             PropertyInfo: { Owners: [{}] },
             CaseData: {},
@@ -3218,7 +1866,6 @@ angular.module("PortalApp")
                     ptCom.alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data1));
                 });
         }; // -- end --
-
 
         $scope.GetShortSaleCase = function (caseId, callback) {
             if (!caseId) {
@@ -3286,17 +1933,106 @@ angular.module("PortalApp")
                 if (disable) item[index].DataStatus = 3;
                 else item.splice(index, 1);
             }
+        };
 
-        };              
+        //-- auto save function, add by Chris ---
+        var UpdatedProperties = ['UpdateTime', 'UpdateDate', 'UpdateBy', 'OwnerId', 'MortgageId', 'OfferId', 'ValueId', 'CallbackDate', 'LastUpdate'];
+        var autoSaveError = false;
+
+        $scope.AutoSaveShorSale = function (callback) {
+            var json = $scope.SsCase;
+            var data = { caseData: JSON.stringify(json) };
+
+            $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
+                    success(function (data) {
+                        autoSaveError = false;
+                        // Remove deleted mortgages
+                        RemoveDeletedMortgages();
+
+                        //Sync objects
+                        SyncObjects(data, $scope.SsCase);
+
+                        if (!callback) {
+                            ptCom.alert("Save Successed !");
+                        }
+
+                        if (callback) { callback(); }
+
+                    }).error(function (data1, status) {
+                        if (!autoSaveError) {
+                            autoSaveError = true;
+                            var message = (data1 && typeof data1 == 'object' && data1.message) ? data1.message : JSON.stringify(data1);
+                            ptCom.alert("Error in AutoSave. status " + status + "Error : " + message);
+                        }
+                    });
+        };
+
+        var RemoveDeletedMortgages = function () {
+            _.remove($scope.SsCase.Mortgages, { DataStatus: 3 })
+            console.log($scope.SsCase.Mortgages);
+        }
+
+        var SyncObjects = function (obj, toObj) {
+            var copy = toObj;
+
+            // Handle Date
+            if (obj instanceof Date) {
+                if (copy == null)
+                    copy = new Date();
+
+                copy = new Date();
+                copy.setTime(obj.getTime());
+
+                return;
+            }
+
+            // Handle Array
+            if (obj instanceof Array) {
+                if (copy == null)
+                    copy = [];
+
+                for (var i = 0, len = obj.length; i < len; i++) {
+                    SyncObjects(obj[i], copy[i]);
+                }
+
+                return;
+            }
+
+            // Handle Object
+            if (obj instanceof Object) {
+                if (copy == null)
+                    copy = {};
+
+                for (var attr in obj) {
+                    if (obj.hasOwnProperty(attr)) {
+                        if (null == obj[attr] || "object" != typeof obj[attr]) {
+                            if (typeof copy[attr] == 'undefined' || copy[attr] == null || copy[attr] != obj[attr]) {
+                                if (UpdatedProperties.indexOf(attr) > 0) {
+                                    //console.log("Changed: " + attr + " from " + copy[attr] + " to " + obj[attr]);
+                                    copy[attr] = obj[attr];
+                                }
+                            }
+                        }
+                        else {
+                            SyncObjects(obj[attr], copy[attr]);
+                        }
+                    }
+                }
+
+                return;
+            }
+
+            throw new Error("Unable to copy obj! Its type isn't supported.");
+        }
+        //--- end auto save function ---
 
         $scope.SaveShortSale = function (callback) {
             var json = $scope.SsCase;
             var data = { caseData: JSON.stringify(json) };
 
             $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
-                    success(function (data) {
-                        // if save scuessed load data again 
-                        console.log(data);
+                    success(function () {
+                        // if save scuessed load data again                      
                         $scope.GetShortSaleCase($scope.SsCase.CaseId);
                         if (!callback) {
                             ptCom.alert("Save Successed !");
@@ -3938,182 +2674,182 @@ angular.module("PortalApp")
 
 }])
 angular.module("PortalApp")
-    .controller('VendorCtrl', ["$scope", "$http", "$element", function ($scope, $http, $element) {
+    .controller('VendorCtrl', ["$scope", "$http" ,"$element", function ($scope, $http, $element) {
 
-        $($('[title]')).tooltip({
-            placement: 'bottom'
-        });
-        $scope.popAddgroup = function (Id) {
-            $scope.AddGroupId = Id;
-            $('#AddGroupPopup').modal();
+    $($('[title]')).tooltip({
+        placement: 'bottom'
+    });
+    $scope.popAddgroup = function (Id) {
+        $scope.AddGroupId = Id;
+        $('#AddGroupPopup').modal();
+    }
+    $scope.AddGroups = function () {
+        $http.post('/CallBackServices.asmx/AddGroups', { gid: $scope.AddGroupId, groupName: $scope.addGroupName, addUser: $('#CurrentUser').val() }).
+           success(function (data) {
+               $scope.initGroups();
+           });
+    }
+    $scope.ChangeGroups = function (g) {
+
+        $scope.selectType = g.Id == null ? "All Vendors" : g.GroupName;
+        if (g.Id == null) {
+            g.Id = 0;
         }
-        $scope.AddGroups = function () {
-            $http.post('/CallBackServices.asmx/AddGroups', { gid: $scope.AddGroupId, groupName: $scope.addGroupName, addUser: $('#CurrentUser').val() }).
-               success(function (data) {
-                   $scope.initGroups();
-               });
-        }
-        $scope.ChangeGroups = function (g) {
-
-            $scope.selectType = g.Id == null ? "All Vendors" : g.GroupName;
-            if (g.Id == null) {
-                g.Id = 0;
-            }
-            $http.post('/CallBackServices.asmx/GetContactByGroup', { gId: g.Id }).
-                success(function (data) {
-                    $scope.InitDataFunc(data);
-                });
-        };
-        $scope.InitData = function (data) {
-            $scope.allContacts = data.slice();
-            var gropData = groupBy(data, group_func);
-            $scope.showingContacts = gropData;
-
-            return gropData;
-        }
-        $scope.initGroups = function () {
-            $http.post('/CallBackServices.asmx/GetAllGroups', {}).
-             success(function (data, status, headers, config) {
-                 $scope.Groups = data.d;
-
-             }).error(function (data, status, headers, config) {
-
-
-                 alert("error get GetAllGroups: " + status + " error :" + data.d);
-             });
-        }
-
-        $scope.initGroups();
-        $scope.InitDataFunc = function (data) {
-            var gropData = $scope.InitData(data.d);
-            //debugger;
-            var allContacts = gropData;
-            if (allContacts.length > 0) {
-                $scope.currentContact = gropData[0].data[0];
-                m_current_contact = $scope.currentContact;
-
-            }
-        }
-        $http.post('/CallBackServices.asmx/GetContact', { p: '1' }).
-            success(function (data, status, headers, config) {
+        $http.post('/CallBackServices.asmx/GetContactByGroup', { gId: g.Id }).
+            success(function (data) {
                 $scope.InitDataFunc(data);
-                $scope.AllTest = data.d;
-
-            }).error(function (data, status, headers, config) {
-                $scope.LogError = data
-                alert("error get contacts: " + status + " error :" + data.d);
             });
+    };
+    $scope.InitData = function (data) {
+        $scope.allContacts = data.slice();
+        var gropData = groupBy(data, group_func);
+        $scope.showingContacts = gropData;
 
-        $scope.initLenderList = function () {
-            $http.post('/CallBackServices.asmx/GetLenderList', {}).success(function (data, status) {
-                $scope.lenderList = _.uniq(data.d);
-            });
+        return gropData;
+    }
+    $scope.initGroups = function () {
+        $http.post('/CallBackServices.asmx/GetAllGroups', {}).
+         success(function (data, status, headers, config) {
+             $scope.Groups = data.d;
+             
+         }).error(function (data, status, headers, config) {
+
+
+             alert("error get GetAllGroups: " + status + " error :" + data.d);
+         });
+    }
+
+    $scope.initGroups();
+    $scope.InitDataFunc = function (data) {
+        var gropData = $scope.InitData(data.d);
+        //debugger;
+        var allContacts = gropData;
+        if (allContacts.length > 0) {
+            $scope.currentContact = gropData[0].data[0];
+            m_current_contact = $scope.currentContact;
+
         }
+    }
+    $http.post('/CallBackServices.asmx/GetContact', { p: '1' }).
+        success(function (data, status, headers, config) {
+            $scope.InitDataFunc(data);
+            $scope.AllTest = data.d;
 
-        $scope.initLenderList();
+        }).error(function (data, status, headers, config) {
+            $scope.LogError = data
+            alert("error get contacts: " + status + " error :" + data.d);
+        });
 
-        $scope.predicate = "Name";
-        $scope.group_text_order = "group_text";
-        $scope.addContact = {};
-        $scope.selectType = "All Vendors";
-        $scope.query = {};
-        $scope.addContactFunc = function () {
-            var addType = $scope.query.Type;
-            if (!$scope.addContact || !$scope.addContact.Name) {
-                alert("Please fill vender Name !");
-                return;
-            }
-            if (addType != null) {
-                $scope.addContact.Type = addType;
+    $scope.initLenderList = function () {
+        $http.post('/CallBackServices.asmx/GetLenderList', {}).success(function (data, status) {
+            $scope.lenderList = _.uniq(data.d);
+        });
+    }
 
+    $scope.initLenderList();
 
-            }
-            var addC = $scope.addContact;
-            //addC.OfficeNO = $('#txtOffice').val();
-            //addC.Cell = $('#txtCell').val();
-            //addC.Email = $('#txtEmail').val();
-
-            debugger;
-            $http.post("/CallBackServices.asmx/AddContact", { contact: $scope.addContact }).
-            success(function (data, status, headers, config) {
-                // this callback will be called asynchronously
-                // when the response is available
-                $scope.allContacts.push(data.d);
-                $scope.InitData($scope.allContacts);
-                var addContact = data.d;
-                //debugger;
-
-                $scope.currentContact = addContact;
-                m_current_contact = $scope.currentContact;
-                $scope.initLenderList();
-                var stop = $(".popup_employee_list_item_active:first").position().top;
-                $('#employee_list').scrollTop(stop);
-                alert("Add" + $scope.currentContact.Name + " succeed !");
-                //debugger;
-            }).
-            error(function (data, status, headers, config) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-                var message = data && data.Message ? data.Message : JSON.stringify(data)
-
-                alert("Add contact error: " + message);
-            });
+    $scope.predicate = "Name";
+    $scope.group_text_order = "group_text";
+    $scope.addContact = {};
+    $scope.selectType = "All Vendors";
+    $scope.query = {};
+    $scope.addContactFunc = function () {
+        var addType = $scope.query.Type;
+        if (!$scope.addContact || !$scope.addContact.Name) {
+            alert("Please fill vender Name !");
+            return;
         }
+        if (addType != null) {
+            $scope.addContact.Type = addType;
 
-        $scope.filterContactFunc = function (e, type) {
-            //$(e).parent().find("li").removeClass("popup_menu_list_item_active");
-            //$(e).addClass("popup_menu_list_item_active");
 
-            var text = angular.element(e.currentTarget).html();
+        }
+        var addC = $scope.addContact;
+        //addC.OfficeNO = $('#txtOffice').val();
+        //addC.Cell = $('#txtCell').val();
+        //addC.Email = $('#txtEmail').val();
+
+        debugger;
+        $http.post("/CallBackServices.asmx/AddContact", { contact: $scope.addContact }).
+        success(function (data, status, headers, config) {
+            // this callback will be called asynchronously
+            // when the response is available
+            $scope.allContacts.push(data.d);
+            $scope.InitData($scope.allContacts);
+            var addContact = data.d;
             //debugger;
-            if (typeof (type) == 'string') {
-                $scope.query = {};
-                $scope.selectType = text;
-                return true;
-            } else {
-                $scope.query.Type = type;
-            }
 
-            var corpName = type == 4 && text != 'Lenders' ? text : '';
-            $scope.query.CorpName = corpName;
+            $scope.currentContact = addContact;
+            m_current_contact = $scope.currentContact;
+            $scope.initLenderList();
+            var stop = $(".popup_employee_list_item_active:first").position().top;
+            $('#employee_list').scrollTop(stop);
+            alert("Add" + $scope.currentContact.Name + " succeed !");
+            //debugger;
+        }).
+        error(function (data, status, headers, config) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            var message = data&& data.Message ?data.Message :JSON.stringify(data)
 
+            alert("Add contact error: " + message);
+        });
+    }
 
-            $scope.addContact.CorpName = corpName;
+    $scope.filterContactFunc = function (e, type) {
+        //$(e).parent().find("li").removeClass("popup_menu_list_item_active");
+        //$(e).addClass("popup_menu_list_item_active");
 
+        var text = angular.element(e.currentTarget).html();
+        //debugger;
+        if (typeof (type) == 'string') {
+            $scope.query = {};
             $scope.selectType = text;
             return true;
+        } else {
+            $scope.query.Type = type;
         }
 
-        $scope.SaveCurrent = function () {
+        var corpName = type == 4 && text != 'Lenders' ? text : '';
+        $scope.query.CorpName = corpName;
 
-            $http.post("/CallBackServices.asmx/SaveContact", { json: $scope.currentContact }).
-            success(function (data, status, headers, config) {
-                alert("Save succeed!");
-                $scope.initLenderList();
-            }).
-            error(function (data, status, headers, config) {
-                alert("geting SaveCurrent error" + status + "error:" + JSON.stringify(data.d));
-            });
+
+        $scope.addContact.CorpName = corpName;
+
+        $scope.selectType = text;
+        return true;
+    }
+
+    $scope.SaveCurrent = function () {
+        
+        $http.post("/CallBackServices.asmx/SaveContact", { json: $scope.currentContact }).
+        success(function (data, status, headers, config) {
+            alert("Save succeed!");
+            $scope.initLenderList();
+        }).
+        error(function (data, status, headers, config) {
+            alert("geting SaveCurrent error" + status + "error:" + JSON.stringify(data.d));
+        });
+    }
+
+    $scope.FilterContact = function (type) {
+        $scope.showingContacts = $scope.allContacts;
+        if (type < 0) {
+            return;
         }
+        var contacts = $scope.allContacts;
 
-        $scope.FilterContact = function (type) {
-            $scope.showingContacts = $scope.allContacts;
-            if (type < 0) {
-                return;
+        for (var i = 0; i < contacts.length; i++) {
+            if (contacts.Type != type) {
+                $scope.showingContacts.splice(i, 1);
             }
-            var contacts = $scope.allContacts;
-
-            for (var i = 0; i < contacts.length; i++) {
-                if (contacts.Type != type) {
-                    $scope.showingContacts.splice(i, 1);
-                }
-
-            }
 
         }
-        $scope.selectCurrent = function (selectContact) {
-            $scope.currentContact = selectContact;
-            m_current_contact = selectContact;
-        }
 
-    }]);
+    }
+    $scope.selectCurrent = function (selectContact) {
+        $scope.currentContact = selectContact;
+        m_current_contact = selectContact;
+    }
+
+}]);

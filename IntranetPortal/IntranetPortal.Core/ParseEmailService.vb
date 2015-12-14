@@ -42,6 +42,10 @@ Public Class ParseEmailService
                     'If parse sucess then mark message as read otherwise check all unreed message
                     m.Flags.Add(MessageFlags.Seen)
                 End If
+                'All the message subject  contain reminder should mark as read automatically   
+                If (m IsNot Nothing And Not String.IsNullOrEmpty(m.Subject) And m.Subject.Contains("reminder")) Then
+                    m.Flags.Add(MessageFlags.Seen)
+                End If
             Next
         End If
     End Sub

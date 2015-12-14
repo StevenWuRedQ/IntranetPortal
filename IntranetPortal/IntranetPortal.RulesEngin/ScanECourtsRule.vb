@@ -3,10 +3,15 @@
 <DataContract>
 Public Class ScanECourtsRule
     Inherits BaseRule
-
+    ''' <summary>
+    ''' Parse each email and send user email when the parse get the right BBLE
+    ''' </summary>
+    ''' <param name="msg"> the message you want parse</param>
+    ''' <returns>if the message the the right index number and AppearanceDate day</returns>
     Function ParseEourtEmail(msg As ImapX.Message) As Boolean
 
         Dim eCourt = Data.LegalECourt.Parse(msg)
+
         Dim parseSuccess = eCourt IsNot Nothing AndAlso (Not String.IsNullOrEmpty(eCourt.BBLE))
         If (parseSuccess) Then
             Log("sucessed parse mail get Legal Case BBLE :" & eCourt.BBLE)
