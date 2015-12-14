@@ -40,6 +40,7 @@ module.exports = function (config) {
             'js/*.js',
             'js/controllers/*.js',
             'js/test/*.js',
+            'js/test/controllers/*.js',
             'js/templates/*.html'
         ],
 
