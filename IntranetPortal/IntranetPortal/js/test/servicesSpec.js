@@ -159,6 +159,5 @@ describe("ptFileServices", function () {
         expect(service.isPicture(filename)).toBe(false);
     })
 
-
 });
 

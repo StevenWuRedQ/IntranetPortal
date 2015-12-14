@@ -70,7 +70,7 @@ directive('ptInitModel', function () {
         link: function (scope, el, attrs) {
             scope.$watch(attrs.ptInitModel, function (newVal) {
                 if (!scope.$eval(attrs.ngModel) && newVal) {
-                    if (typeof newVal == 'string') newVal = newVal.replace(/'/g, "\\'");
+                    if (typeof newVal === 'string') newVal = newVal.replace(/'/g, "\\'");
                     scope.$eval(attrs.ngModel + "='" + newVal + "'");
                 }
             });
@@ -612,51 +612,49 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
 
     }
 
-}]).
-    directive('ptLink', ['ptFileService', function (ptFileService) {
-        return {
-            restrict: 'E',
-            scope: {
-                ptModel: '='
-            },
-            template: '<a ng-click="onFilePreview(ptModel.path)">{{trunc(ptModel.name,20)}}</a>',
-            link: function (scope, el, attrs) {
-                scope.onFilePreview = ptFileService.onFilePreview;
-                scope.trunc = ptFileService.trunc;
-            }
+}]).directive('ptLink', ['ptFileService', function (ptFileService) {
+    return {
+        restrict: 'E',
+        scope: {
+            ptModel: '='
+        },
+        template: '<a ng-click="onFilePreview(ptModel.path)">{{trunc(ptModel.name,20)}}</a>',
+        link: function (scope, el, attrs) {
+            scope.onFilePreview = ptFileService.onFilePreview;
+            scope.trunc = ptFileService.trunc;
+        }
 
-        }
-    }]).
-    directive('ptFinishedMark', [function () {
-        return {
-            restrict: 'E',
-            template: '<span ng-if="ssStyle==0">'
-                    + '<button type="button" class="btn btn-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</button>'
-                    + '<button type="button" class="btn btn-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></button>'
-                    + '</span>'
-                    + '<span ng-if="ssStyle==1">'
-                    + '<span class="label label-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</span>'
-                    + '<span class="label label-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></span>'
-                    + '</span>',
-            scope: {
-                ssModel: '=',
-                text1: '@',
-                text2: '@',
-                ssStyle: '@'
-            },
-            link: function (scope, el, attrs) {
-                if (!scope.ssModel) scope.ssModel = false;
-                if (scope.ssStyle && scope.ssStyle.toLowerCase() == 'label') {
-                    scope.ssStyle = 1;
-                } else {
-                    scope.ssStyle = 0;
-                }
-                scope.confirm = function () {
-                    scope.ssModel = true;
-                }
-                scope.deconfirm = function () {
-                    scope.ssModel = false;
-                }
+    }
+}]).directive('ptFinishedMark', [function () {
+    return {
+        restrict: 'E',
+        template: '<span ng-if="ssStyle==0">'
+                + '<button type="button" class="btn btn-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</button>'
+                + '<button type="button" class="btn btn-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></button>'
+                + '</span>'
+                + '<span ng-if="ssStyle==1">'
+                + '<span class="label label-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</span>'
+                + '<span class="label label-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></span>'
+                + '</span>',
+        scope: {
+            ssModel: '=',
+            text1: '@',
+            text2: '@',
+            ssStyle: '@'
+        },
+        link: function (scope, el, attrs) {
+            if (!scope.ssModel) scope.ssModel = false;
+            if (scope.ssStyle && scope.ssStyle.toLowerCase() === 'label') {
+                scope.ssStyle = 1;
+            } else {
+                scope.ssStyle = 0;
+            }
+            scope.confirm = function () {
+                scope.ssModel = true;
+            }
+            scope.deconfirm = function () {
+                scope.ssModel = false;
             }
         }
-    }])
+    }
+}])
