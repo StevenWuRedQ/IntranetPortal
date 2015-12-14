@@ -1,26 +1,25 @@
 <%@ Page Language="VB" AutoEventWireup="true" CodeBehind="Login.aspx.vb" Inherits="IntranetPortal.Login" %>
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<!doctype html>
+<html>
+<head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>My Ideal Property Portal</title>
 
     <link rel="stylesheet" href="/css/normalize.min.css" />
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.css" />
+    <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="/css/main.css" />
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="/bower_components/modernizr/modernizr.js"></script>
-
     <script src="/bower_components/jquery-easing/jquery.easing.min.js"></script>
     <script src="/bower_components/jquery-smartresize/jquery.debouncedresize.js"></script>
     <script src="/bower_components/jquery-smartresize/jquery.throttledresize.js"></script>
     <script src="/bower_components/jquery-mousewheel/jquery.mousewheel.min.js"></script>
-    <script src="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.js"></script>
+    <script src="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="/bower_components/jquery-form/jquery.form.js"></script>
     <script src="/bower_components/jquery-backstretch/jquery.backstretch.min.js"></script>
     <script src="/Scripts/js/main.js"></script>

@@ -7242,6 +7242,7 @@
     <Content Include="bower_components\angular-mocks\bower.json" />
     <Content Include="bower_components\angular-mocks\package.json" />
     <Content Include="bower_components\angular-mocks\README.md" />
+    <Content Include="bower_components\Web.config" />
     <None Include="Service References\CallTrackingService\CallTrackingService.wsdl" />
     <Content Include="Service References\CallTrackingService\IntranetPortal.CallTrackingService.EmployeeStatisticData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
