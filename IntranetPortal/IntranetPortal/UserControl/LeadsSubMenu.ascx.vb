@@ -234,14 +234,12 @@ Public Class LeadsSubMenu
             txtDeadLeadDescription.Text = ""
         End If
         If e.Parameter.StartsWith("DumpDeadLeads") Then
-
-            Dim l = Lead.GetInstance(hfBBLE.Value)
-
-            l.ReAssignLeads("Dead Leads", Page.User.Identity.Name)
             Dim comments = "Dump Dead Leads"
 
+            Dim l = Lead.GetInstance(hfBBLE.Value)
+            'Lead.SetDeadLeadsStatus(l.BBLE, cbDeadReasons.Value, txtDeadLeadDescription.Text)
+            l.ReAssignLeads("Dead Leads", Page.User.Identity.Name)
             LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.DeadLead)
-
         End If
     End Sub
 

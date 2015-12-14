@@ -562,30 +562,38 @@ Public Class ActivityLogs
     End Sub
 
     Private Function CreateTask(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String) As Integer
-        Dim scheduleDate = DateTime.Now
+        Dim tk = Lead.CreateTask(employees, taskPriority, taskAction, taskDescription, bble, createUser, LogCategory)
 
-        If taskPriority = "Normal" Then
-            scheduleDate = scheduleDate.AddDays(3)
+        If tk IsNot Nothing Then
+            Return tk.TaskID
         End If
 
-        If taskPriority = "Important" Then
-            scheduleDate = scheduleDate.AddDays(1)
-        End If
+        Return 0
 
-        If taskPriority = "Urgent" Then
-            scheduleDate = scheduleDate.AddHours(2)
-        End If
+        'Dim scheduleDate = DateTime.Now
 
-        Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Employees:</td>" &
-                                     "<td>{0}</td></tr>" &
-                                     "<tr><td>Action:</td><td>{1}</td></tr>" &
-                                     "<tr><td>Important:</td><td>{2}</td></tr>" &
-                                   "<tr><td>Description:</td><td>{3}</td></tr>" &
-                                   "</table>", employees, taskAction, taskPriority, taskDescription)
-        Dim emp = Employee.GetInstance(createUser)
-        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LogCategory.ToString, emp.EmployeeID, createUser, LeadsActivityLog.EnumActionType.SetAsTask)
-        Dim task = UserTask.AddUserTask(bble, employees, taskAction, taskPriority, "In Office", scheduleDate, taskDescription, log.LogID, createUser)
-        Return task.TaskID
+        'If taskPriority = "Normal" Then
+        '    scheduleDate = scheduleDate.AddDays(3)
+        'End If
+
+        'If taskPriority = "Important" Then
+        '    scheduleDate = scheduleDate.AddDays(1)
+        'End If
+
+        'If taskPriority = "Urgent" Then
+        '    scheduleDate = scheduleDate.AddHours(2)
+        'End If
+
+        'Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Employees:</td>" &
+        '                             "<td>{0}</td></tr>" &
+        '                             "<tr><td>Action:</td><td>{1}</td></tr>" &
+        '                             "<tr><td>Important:</td><td>{2}</td></tr>" &
+        '                           "<tr><td>Description:</td><td>{3}</td></tr>" &
+        '                           "</table>", employees, taskAction, taskPriority, taskDescription)
+        'Dim emp = Employee.GetInstance(createUser)
+        'Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LogCategory.ToString, emp.EmployeeID, createUser, LeadsActivityLog.EnumActionType.SetAsTask)
+        'Dim task = UserTask.AddUserTask(bble, employees, taskAction, taskPriority, "In Office", scheduleDate, taskDescription, log.LogID, createUser)
+        'Return task.TaskID
     End Function
 
     Function GetCommentsIconClass(type As String)

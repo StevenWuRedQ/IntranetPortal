@@ -123,14 +123,33 @@
         End Using
     End Function
 
+    Public Shared Sub ExpiredAgentTasks(bble As String)
+        Using ctx As New Entities
+            Dim agentCategory = LeadsActivityLog.LogCategory.SalesAgent.ToString
+            Dim tasks = From tk In ctx.UserTasks.Where(Function(t) t.BBLE = bble And t.Status = TaskStatus.Active)
+                        Join log In ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble AndAlso l.Category = agentCategory) On tk.LogID Equals log.LogID
+                        Select tk
+
+            For Each task In tasks.ToList
+                CompleteTask(task)
+            Next
+
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
+    Private Shared Sub CompleteTask(task As UserTask)
+        If task IsNot Nothing AndAlso (task.TaskMode Is Nothing OrElse task.TaskMode <> UserTaskMode.Approval) Then
+            task.Status = UserTask.TaskStatus.Complete
+        End If
+    End Sub
+
     Public Shared Sub ExpiredTasks(bble As String, createBy As String)
         Using ctx As New Entities
             Dim tasks = ctx.UserTasks.Where(Function(t) t.BBLE = bble And t.Status = TaskStatus.Active And t.CreateBy = createBy)
 
             For Each task In tasks
-                If task IsNot Nothing And task.TaskMode <> UserTaskMode.Approval Then
-                    task.Status = UserTask.TaskStatus.Complete
-                End If
+                CompleteTask(task)
             Next
 
             ctx.SaveChanges()
