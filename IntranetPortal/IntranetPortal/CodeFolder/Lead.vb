@@ -199,6 +199,44 @@ Partial Public Class Lead
         End Using
     End Function
 
+    ''' <summary>
+    ''' Create User Tasks
+    ''' </summary>
+    ''' <param name="employees"></param>
+    ''' <param name="taskPriority"></param>
+    ''' <param name="taskAction"></param>
+    ''' <param name="taskDescription"></param>
+    ''' <param name="bble"></param>
+    ''' <param name="createUser"></param>
+    ''' <param name="logCategory"></param>
+    ''' <returns>Task Id</returns>
+    Public Shared Function CreateTask(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String, logCategory As LeadsActivityLog.LogCategory) As UserTask
+        Dim scheduleDate = DateTime.Now
+
+        If taskPriority = "Normal" Then
+            scheduleDate = scheduleDate.AddDays(3)
+        End If
+
+        If taskPriority = "Important" Then
+            scheduleDate = scheduleDate.AddDays(1)
+        End If
+
+        If taskPriority = "Urgent" Then
+            scheduleDate = scheduleDate.AddHours(2)
+        End If
+
+        Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Employees:</td>" &
+                                     "<td>{0}</td></tr>" &
+                                     "<tr><td>Action:</td><td>{1}</td></tr>" &
+                                     "<tr><td>Important:</td><td>{2}</td></tr>" &
+                                   "<tr><td>Description:</td><td>{3}</td></tr>" &
+                                   "</table>", employees, taskAction, taskPriority, taskDescription)
+        Dim emp = Employee.GetInstance(createUser)
+        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, logCategory.ToString, emp.EmployeeID, createUser, LeadsActivityLog.EnumActionType.SetAsTask)
+        Dim task = UserTask.AddUserTask(bble, employees, taskAction, taskPriority, "In Office", scheduleDate, taskDescription, log.LogID, createUser)
+        Return task
+    End Function
+
 
     'Get user data by status
     Public Shared Function GetUserLeadsData(name As String, status As LeadStatus) As List(Of Lead)
@@ -409,7 +447,8 @@ Partial Public Class Lead
 
                 'Expired user Task
                 WorkflowService.ExpireTaskProcess(bble)
-                UserTask.ExpiredTasks(bble, lead.EmployeeName)
+                UserTask.ExpiredAgentTasks(bble)
+                'UserTask.ExpiredTasks(bble, lead.EmployeeName)
 
                 If Not originateStatus = LeadStatus.DeadEnd Then
                     Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
@@ -593,7 +632,8 @@ Partial Public Class Lead
 
                 'Expired the task on this bble
                 WorkflowService.ExpiredLeadsProcess(BBLE)
-                UserTask.ExpiredTasks(BBLE, originator)
+                UserTask.ExpiredAgentTasks(BBLE)
+                'UserTask.ExpiredTasks(BBLE, originator)
                 UserAppointment.ExpiredAppointmentByBBLE(BBLE)
 
                 Dim comments = String.Format("Leads Reassign from {0} to {1}.", originator, empName)

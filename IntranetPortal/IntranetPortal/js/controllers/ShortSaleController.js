@@ -125,7 +125,7 @@
         var UpdatedProperties = ['UpdateTime', 'UpdateDate', 'UpdateBy', 'OwnerId', 'MortgageId', 'OfferId', 'ValueId', 'CallbackDate', 'LastUpdate'];
         var autoSaveError = false;
 
-        $scope.AutoSaveShorSale = function (callback) {
+        $scope.AutoSaveShortSale = function (callback) {
             var json = $scope.SsCase;
             var data = { caseData: JSON.stringify(json) };
 

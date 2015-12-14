@@ -636,7 +636,7 @@
         }
 
         function AutoSaveShortSale() {
-            angular.element(document.getElementById('ShortSaleCtrl')).scope().AutoSaveShorSale(function () { ScopeSetLastUpdateTime(GetLasTUpDateURL()); ResetCaseDataChange(); });
+            angular.element(document.getElementById('ShortSaleCtrl')).scope().AutoSaveShortSale(function () { ScopeSetLastUpdateTime(GetLasTUpDateURL()); ResetCaseDataChange(); });
         }
 
         $(document).ready(function () {
