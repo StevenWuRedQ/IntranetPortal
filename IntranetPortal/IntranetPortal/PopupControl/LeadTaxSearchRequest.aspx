@@ -25,7 +25,6 @@
                     <ContentCollection>
                         <dx:SplitterContentControl>
                             <div>
-
                                 <div style="align-content: center; height: 100%">
                                     <!-- Nav tabs -->
 

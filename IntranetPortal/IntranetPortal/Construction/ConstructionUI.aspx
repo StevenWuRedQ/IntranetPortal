@@ -34,7 +34,7 @@
 
         <%-- data panel     --%>
         <div ui-layout-container id="dataPanelDiv">
-            <asp:Panel ID="dataPane" runat="server">
+            <asp:Panel ID="dataPane" runat="server" Height="100%">
                 <uc1:ConstructionUICtrl runat="server" ID="ConstructionUICtrl" />
             </asp:Panel>
         </div>

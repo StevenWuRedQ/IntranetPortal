@@ -10,7 +10,7 @@
 
 <uc1:Common runat="server" ID="Common" Visible="false" />
 <div id="titleui_and_activity">
-    <div id="TitleController" ng-controller="TitleController" style="max-height: 850px; overflow: auto">
+    <div id="TitleController" ng-controller="TitleController">
         <div id="TitleUIContent" style="padding-top: 5px">
             <div id="title_prioity_content">
                 <div style="margin-left: 30px; height: 80px" class="font_gray">

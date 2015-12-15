@@ -38,6 +38,8 @@
     var isFiltered= false; 
     var filterCategory = {'Task':6,'Appointment':3,'Email':4};
     var refreshCategory = ['SalesAgent','ShortSale','Legal','Title','Construction','Eviction'];
+    var empTextBox = null;
+
     function OnlogSelectedIndexChanged(s, e) {
         var selectedItems = cbCateLogClient.GetSelectedItems();
         var categories = GetSelectedItemsValue(selectedItems);
@@ -113,9 +115,6 @@
             $("#filter_btn").addClass("filited");
         }
     }
-
-    var empTextBox = null;
-
     function OnSelectedEmpComplete() {
         var emps = "";
         for (var i = 0; i < lbEmployeesClient.GetItemCount() ; i++) {
@@ -129,6 +128,14 @@
 <script type="text/javascript">
     // <![CDATA[
     var textSeparator = "; ";
+    var NeedToRefreshList = false;
+    var lastIndexofAppointmentAction = null;
+    var needRefreshShortSale = false;
+    var filter_popup_show = false;
+    var refreshLogs = false;   
+    var showAppointmentPopup = false;
+
+
     function OnEmpComboBoxSelectionChanged(listBox, args) {
         UpdateText();
         SynchronizeRecentlyComboBox();
@@ -249,7 +256,7 @@
         gridTrackingClient.PerformCallback("ApprovalTask|" + logId + "|" + result);
     }
 
-    var NeedToRefreshList = false;
+
     function RefreshList() {
         debugger;
         if (typeof gridLeads != 'undefined')
@@ -274,7 +281,7 @@
         //    gridLeads.Refresh();
     }
 
-    var lastIndexofAppointmentAction = null;
+
     function AppointmentAction(s, logID) {
         var item = s.GetSelectedItem();
 
@@ -376,7 +383,7 @@
         }
     }
 
-    var needRefreshShortSale = false;
+
     function InsertNewComments() {
         var commentHtml = EmailBody.GetHtml();
         var addDate = null;
@@ -458,7 +465,7 @@
             InsertNewComments();
         }
     }
-    var filter_popup_show = false;
+
     function clickfilterBtn(e) {
 
         if (!filter_popup_show) {
@@ -469,13 +476,7 @@
         popupFilterControl.Hide();
         filter_popup_show = false;
     }
-    $(document).ready(function () {
-        //alert("called here>")
-        $(".dxheDesignViewArea_MetropolisBlue1 dxheViewArea_MetropolisBlue1").keydown(function () {
-            alert("test!!");
-        })
 
-    });
     function testaddKey() {
         $(".dxheDesignViewArea_MetropolisBlue1 dxheViewArea_MetropolisBlue1").keydown(function () {
             alert("test!!");
@@ -498,9 +499,7 @@
         }
     }
 
-    var refreshLogs = false;
-   
-    var showAppointmentPopup = false;
+
     function OnSaveAppointment(s, e) {
         if (ASPxClientEdit.ValidateGroup("Appointment")) {
             ASPxPopupScheduleClient.Hide();
@@ -519,6 +518,14 @@
         }
     }
     
+
+    $(document).ready(function () {
+        //alert("called here>")
+        $(".dxheDesignViewArea_MetropolisBlue1 dxheViewArea_MetropolisBlue1").keydown(function () {
+            alert("test!!");
+        })
+
+    });
     // ]]>
 </script>
 

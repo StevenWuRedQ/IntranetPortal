@@ -2,11 +2,11 @@
 <%@ Register Src="~/Construction/ConstructionTab.ascx" TagPrefix="uc1" TagName="ConstructionTab" %>
 <%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
-<div id="ConstructionCtrl" ng-controller="ConstructionCtrl">
+<div id="ConstructionCtrl" ng-controller="ConstructionCtrl" style="height: 100%">
     <!-- Nav tabs -->
     <input id="LastUpdateTime" type="hidden" />
-    <div class="legal-menu row" style="margin: 0;">
-        <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
+    <div class="legal-menu" style="position: relative; top: 0; margin: 0; z-index: 1; width: 100%">
+        <ul class="nav nav-tabs" role="tablist" style="background: #ff400d; font-size: 18px; color: white">
             <li class="active short_sale_head_tab">
                 <a href="#ConstructionTab" role="tab" data-toggle="tab" class="tab_button_a">
                     <i class="fa fa-info-circle  head_tab_icon_padding"></i>
@@ -77,7 +77,7 @@
                                                              }
                                                             popupSelectOwner.PerformCallback('Save|' + leadsInfoBBLE + '|' + item.text);
                                                             popupSelectOwner.Hide();
-                                                            }" />
+                                                            }"></ClientSideEvents>
                 </dx:ASPxButton>
             </dx:PopupControlContentControl>
         </ContentCollection>
@@ -88,23 +88,24 @@
                                                     gridCase.Refresh();    
                                         }" />
     </dx:ASPxPopupControl>
+    <div class="wrapper-content" style="height: 95%; overflow-y: scroll">
+        <div class="tab-content" style="margin-bottom: 100px">
+            <div class="tab-pane active" id="ConstructionTab">
+                <uc1:ConstructionTab runat="server" ID="ConstructionTab1" />
+            </div>
+            <div class="tab-pane" id="DocumentTab">
+                <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
+            </div>
 
-    <div class="tab-content">
-        <div class="tab-pane active" id="ConstructionTab">
-            <uc1:ConstructionTab runat="server" ID="ConstructionTab1" />
-        </div>
-        <div class="tab-pane" id="DocumentTab">
-            <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
-        </div>
-
-        <div class="tab-pane load_bg" id="more_leads">
-            <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
-        </div>
-        <div class="tab-pane load_bg" id="more_evction">
-            <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
-        </div>
-        <div class="tab-pane load_bg" id="more_short_sale">
-            <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+            <div class="tab-pane load_bg" id="more_leads">
+                <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+            </div>
+            <div class="tab-pane load_bg" id="more_evction">
+                <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+            </div>
+            <div class="tab-pane load_bg" id="more_short_sale">
+                <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+            </div>
         </div>
     </div>
 </div>

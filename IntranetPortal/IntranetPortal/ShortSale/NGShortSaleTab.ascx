@@ -10,9 +10,8 @@
 
 <input hidden id="short_sale_case_id" value="" />
 <div style="padding-top: 5px">
-    <div style="height: 850px; overflow: auto;" id="prioity_content">
+    <div id="prioity_content">
         <%--time label--%>
-
         <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
             <div style="font-size: 30px">
                 <i class="fa fa-home" ng-dblclick="toggleValuationPopup()"></i>

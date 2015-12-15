@@ -1,7 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGShortSalePartiesTab.ascx.vb" Inherits="IntranetPortal.NGShortSalePartiesTab" %>
-<div class="clearfix">
-</div>
-
+<div class="clearfix"></div>
 <div>
     <h4 class="ss_form_title">Assigned Processor</h4>
     <div class="ss_border">
