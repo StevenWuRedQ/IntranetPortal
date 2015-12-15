@@ -6447,7 +6447,8 @@
     <Content Include="js\e2etest\ContructionController.js" />
     <Content Include="js\filters.js" />
     <Content Include="js\test\conf.js" />
-    <Content Include="js\test\ConstructionControllerSpec.js" />
+    <Content Include="js\test\controllers\ConstructionControllerSpec.js" />
+    <Content Include="js\test\directiveSpec.js" />
     <Content Include="js\test\ptFilesDirectiveSpec.js" />
     <Content Include="js\test\servicesSpec.js" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />

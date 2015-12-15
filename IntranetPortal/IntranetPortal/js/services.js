@@ -11,14 +11,14 @@
 
     this.arrayAdd = function (model, data) {
         if (model) {
-            data = data === undefined ? {} : data;
+            data = data ? data : {};
             model.push(data);
         }
     };
     this.arrayRemove = function (model, index, confirm, callback) {
         if (model && index < model.length) {
             if (confirm) {
-                var x = that.confirm("Delete This?", "").then(function (r) {
+                that.confirm("Delete This?", "").then(function (r) {
                     if (r) {
                         var deleteObj = model.splice(index, 1)[0];
                         if (callback) callback(deleteObj);
@@ -82,11 +82,19 @@
         var divToPrint = document.getElementById(divID);
         var popupWin = window.open('', '_blank', 'width=300,height=300');
         popupWin.document.open();
-        popupWin.document.write('<html <head><link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" type="text/css" /><link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" /><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" /><link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" /><link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" type="text/css" /><link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" /><link href="/css/stevencss.css" rel="stylesheet" type="text/css" /></head><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+        popupWin.document.write('<html><head>'+
+        '<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" />'+
+        '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />'+
+        '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />'+
+        '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />'+
+        '<link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />'+
+        '<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" />'+
+        '<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />'+
+        '<link rel="stylesheet" href="/css/stevencss.css"type="text/css" />'+
+        '</head><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
         popupWin.document.close();
-
-
     };
+    
     this.postRequest = function (url, data) {
         $.post(url, data, function (retData) {
             $("body").append("<iframe src='" + retData.url + "' style='display: none;' ></iframe>");
@@ -139,7 +147,238 @@
         var tempDate = new Date(d);
         return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
     };
-}]).service("ptTime", [function () {
+}]).service('ptFileService', function () {
+    
+    this.isIE = function (fileName) {
+        return fileName.indexOf(':\\') > -1;
+    };
+    this.getFileName = function (fullPath) {
+        var paths;
+        if (fullPath) {
+            if (this.isIE(fullPath)) {
+                paths = fullPath.split('\\');
+                return this.cleanName(paths[paths.length - 1]);
+            } else {
+                paths = fullPath.split('/');
+                return this.cleanName(paths[paths.length - 1]);
+            }
+        }
+        return '';
+    };
+    this.getFileExt = function (fullPath) {
+        if (fullPath && fullPath.indexOf('.') > -1) {
+            var exts = fullPath.split('.');
+            return exts[exts.length - 1].toLowerCase();
+        }
+        return '';
+    };
+    this.getFileFolder = function (fullPath) {
+        if (fullPath) {
+            var paths = fullPath.split('/');
+            var folderName = paths[paths.length - 2];
+            var topFolders = ['Construction', 'Title'];
+            if (topFolders.indexOf(folderName) < 0) {
+                return folderName;
+            } else {
+                return '';
+            }
+        }
+        return '';
+    };
+    this.resetFileElement = function (el) {
+        el.val('');
+        el.wrap('<form>').parent('form').trigger('reset');
+        el.unwrap();
+        el.prop('files')[0] = null;
+        el.replaceWith(el.clone());
+    };
+    this.cleanName = function (filename) {
+        return filename.replace(/[^a-z0-9_\-\.()]/gi, '_');
+    };
+
+    this.getThumb = function (thumbId) {
+        return '/downloadfile.aspx?thumb=' + thumbId;
+
+    };
+    this.trunc = function (fileName, length) {
+        return _.trunc(fileName, length);
+
+    };
+    
+    this.isPicture = function (fullPath) {
+        var ext = this.getFileExt(fullPath);
+        var pictureExts = ['jpg', 'jpeg', 'gif', 'bmp', 'png'];
+        return pictureExts.indexOf(ext) > -1;
+    };
+
+    
+    this.uploadFile = function (data, bble, rename, folder, type, callback) {
+        switch (type) {
+            case 'construction':
+                this.uploadConstructionFile(data, bble, rename, folder, callback);
+                break;
+            case 'title':
+                this.uploadTitleFile(data, bble, rename, folder, callback);
+                break;
+            default:
+                this.uploadConstructionFile(data, bble, rename, folder, callback);
+                break;
+
+        }
+    };
+    this.uploadTitleFile = function (data, bble, rename, folder, callback) {
+        var fileName = rename ? rename : '';
+        folder = folder ? folder : '';
+        if (!data || !bble) {
+            callback('Upload infomation missing!');
+        } else {
+            bble = bble.trim();
+            $.ajax({
+                url: '/api/Title/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + folder,
+                type: 'POST',
+                data: data,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (data1) {
+                    callback(null, data1, rename);
+                },
+                error: function () {
+                    callback('Upload fails!', null, rename);
+                }
+            });
+        }
+    };
+    this.uploadConstructionFile = function (data, bble, rename, folder, callback) {
+        var fileName = rename ? rename : '';
+        var tofolder = folder ? folder : '';
+        if (!data || !bble) {
+            callback('Upload infomation missing!');
+        } else {
+            bble = bble.trim();
+            $.ajax({
+                url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + tofolder,
+                type: 'POST',
+                data: data,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (data1) {
+                    callback(null, data1, rename);
+                },
+                error: function () {
+                    callback('Upload fails!', null, rename);
+                }
+            });
+        }
+    };
+
+    this.makePreviewUrl = function (filePath) {
+        var ext = this.getFileExt(filePath);
+        switch (ext) {
+            case 'pdf':
+                return '/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath);
+                break;
+            case 'xls':
+            case 'xlsx':
+            case 'doc':
+            case 'docx':
+                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true';
+                break;
+            case 'jpg':
+            case 'jpeg':
+            case 'bmp':
+            case 'gif':
+            case 'png':
+                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
+                break;
+            default:
+                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
+
+        }
+    };
+    this.onFilePreview = function (filePath) {
+
+        var ext = this.getFileExt(filePath);
+        switch (ext) {
+            case 'pdf':
+                window.open('/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath));
+                break;
+            case 'xls':
+            case 'xlsx':
+            case 'doc':
+            case 'docx':
+                window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true');
+                break;
+            case 'jpg':
+            case 'jpeg':
+            case 'bmp':
+            case 'gif':
+            case 'png':
+                $.fancybox.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
+                break;
+            case 'txt':
+                $.fancybox.open([
+                    {
+                        type: 'ajax',
+                        href: '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath),
+                    }
+                ]);
+                break;
+            default:
+                window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
+
+        }
+    };
+
+}).service('ptConstructionService', ['$http', function ($http) {
+    this.getConstructionCases = function (bble, callback) {
+        var url = "/api/ConstructionCases/" + bble;
+        $http.get(url)
+            .success(function (data) {
+                if (callback) callback(data);
+            }).error(function (data) {
+                console.log("Get Construction Data fails.");
+            });
+    };
+    this.saveConstructionCases = function (bble, data, callback) {
+        if (bble && data) {
+            bble = bble.trim();
+            var url = "/api/ConstructionCases/" + bble;
+            $http.put(url, data)
+                .success(function (res) {
+                    if (callback) callback(res);
+                }).error(function () {
+                    alert('Save CSCase fails.');
+                });
+        }
+    };
+    this.getDOBViolations = function (bble, callback) {
+        if (bble) {
+            var url = "/api/ConstructionCases/GetDOBViolations?bble=" + bble;
+            $http.get(url)
+            .success(function (res) {
+                if (callback) callback(null, res);
+            }).error(function () {
+                if (callback) callback("load dob violations fails");
+            });
+        } else {
+            if (callback) callback("bble is missing");
+        }
+    };
+    this.getECBViolations = function (bble, callback) {
+        if (bble) {
+            var url = "/api/ConstructionCases/GetECBViolations?bble=" + bble;
+            $http.get(url)
+            .success(function (res) {
+                if (callback) callback(null, res);
+            }).error(function () {
+                if (callback) callback("load ecb violations fails");
+            });
+        }
+    };
+}
+]).service("ptTime", [function () {
     var that = this;
 
     this.isPassByDays = function (start, end, count) {
@@ -238,9 +477,7 @@
                 return limitToFilter(response.data, 10);
             });
     };
-    this.getContactsByGroup = function (groupId) {
-        if (allContact) return allContact.filter(function (x) { return x.GroupId == groupId });
-    };
+
     this.getContacts = function (args, /* optional */ groupId) {
         groupId = groupId === undefined ? null : groupId;
         return $http.get('/Services/ContactService.svc/GetContacts?args=' + args)
@@ -256,29 +493,35 @@
                 return limitToFilter(response.data, 10);
             });
     };
+    this.getContactsByGroup = function (groupId) {
+        if (allContact) return allContact.filter(function (x) { return x.GroupId == groupId });
+    };
+    
+    
+    this.getContact = function (id, name) {
+        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0] || {};
+        return {};
+    };
     this.getContactById = function (id) {
         if (allContact) return allContact.filter(function (o) { return o.ContactId == id; })[0];
         return null;
     };
-    this.getEntities = function (name, status) {
 
+    this.getContactByName = function (name) {
+        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
+        return {};
+    };
+    
+    
+    this.getEntities = function (name, status) {
         status = status === undefined ? 'Available' : status;
         name = name ? '' : name;
         return $http.get('/Services/ContactService.svc/GetCorpEntityByStatus?n=' + name + '&s=' + status)
             .then(function (res) {
                 return limitToFilter(res.data, 10);
             });
-
-
     };
-    this.getContactByName = function (name) {
-        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
-        return {};
-    };
-    this.getContact = function (id, name) {
-        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0] || {};
-        return {};
-    };
+    
     this.getTeamByName = function (teamName) {
         if (allTeam) {
             return allTeam.filter(function (o) { if (o.Name && teamName) return o.Name.trim() == teamName.trim() })[0];
@@ -286,8 +529,6 @@
         return {};
 
     };
-
-
 }]).service('ptShortsSaleService', ['$http', function ($http) {
     this.getShortSaleCase = function (caseId, callback) {
         var url = "/ShortSale/ShortSaleServices.svc/GetCase?caseId=" + caseId;
@@ -354,230 +595,6 @@
                     console.log('save home breakdone fail. BBLE: ' + bble);
                 });
 
-        }
-    };
-}
-]).service('ptFileService', function () {
-    this.uploadFile = function (data, bble, rename, folder, type, callback) {
-        switch (type) {
-            case 'construction':
-                this.uploadConstructionFile(data, bble, rename, folder, callback);
-                break;
-            case 'title':
-                this.uploadTitleFile(data, bble, rename, folder, callback);
-                break;
-            default:
-                this.uploadConstructionFile(data, bble, rename, folder, callback);
-                break;
-
-        }
-    };
-    this.uploadTitleFile = function (data, bble, rename, folder, callback) {
-        var fileName = rename ? rename : '';
-        folder = folder ? folder : '';
-        if (!data || !bble) {
-            callback('Upload infomation missing!');
-        } else {
-            bble = bble.trim();
-            $.ajax({
-                url: '/api/Title/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + folder,
-                type: 'POST',
-                data: data,
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function (data1) {
-                    callback(null, data1, rename);
-                },
-                error: function () {
-                    callback('Upload fails!', null, rename);
-                }
-            });
-        }
-    };
-    this.uploadConstructionFile = function (data, bble, rename, folder, callback) {
-        var fileName = rename ? rename : '';
-        var tofolder = folder ? folder : '';
-        if (!data || !bble) {
-            callback('Upload infomation missing!');
-        } else {
-            bble = bble.trim();
-            $.ajax({
-                url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + tofolder,
-                type: 'POST',
-                data: data,
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function (data1) {
-                    callback(null, data1, rename);
-                },
-                error: function () {
-                    callback('Upload fails!', null, rename);
-                }
-            });
-        }
-    };
-    this.getFileName = function (fullPath) {
-        var paths;
-        if (fullPath) {
-            if (this.isIE(fullPath)) {
-                paths = fullPath.split('\\');
-                return this.cleanName(paths[paths.length - 1]);
-            } else {
-                paths = fullPath.split('/');
-                return this.cleanName(paths[paths.length - 1]);
-            }
-        }
-        return '';
-    };
-    this.getFileExt = function (fullPath) {
-        if (fullPath && fullPath.indexOf('.') > -1) {
-            var exts = fullPath.split('.');
-            return exts[exts.length - 1].toLowerCase();
-        }
-        return '';
-    };
-    this.isPicture = function (fullPath) {
-        var ext = this.getFileExt(fullPath);
-        var pictureExts = ['jpg', 'jpeg', 'gif', 'bmp', 'png'];
-        return pictureExts.indexOf(ext) > -1;
-    };
-    this.getFileFolder = function (fullPath) {
-        if (fullPath) {
-            var paths = fullPath.split('/');
-            var folderName = paths[paths.length - 2];
-            var topFolders = ['Construction', 'Title'];
-            if (topFolders.indexOf(folderName) < 0) {
-                return folderName;
-            } else {
-                return '';
-            }
-        }
-        return '';
-    };
-    this.makePreviewUrl = function (filePath) {
-        var ext = this.getFileExt(filePath);
-        switch (ext) {
-            case 'pdf':
-                return '/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath);
-                break;
-            case 'xls':
-            case 'xlsx':
-            case 'doc':
-            case 'docx':
-                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true';
-                break;
-            case 'jpg':
-            case 'jpeg':
-            case 'bmp':
-            case 'gif':
-            case 'png':
-                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
-                break;
-            default:
-                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
-
-        }
-    };
-    this.onFilePreview = function (filePath) {
-
-        var ext = this.getFileExt(filePath);
-        switch (ext) {
-            case 'pdf':
-                window.open('/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath));
-                break;
-            case 'xls':
-            case 'xlsx':
-            case 'doc':
-            case 'docx':
-                window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true');
-                break;
-            case 'jpg':
-            case 'jpeg':
-            case 'bmp':
-            case 'gif':
-            case 'png':
-                $.fancybox.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
-                break;
-            case 'txt':
-                $.fancybox.open([
-                    {
-                        type: 'ajax',
-                        href: '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath),
-                    }
-                ]);
-                break;
-            default:
-                window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
-
-        }
-    };
-    this.resetFileElement = function (el) {
-        el.val('');
-        el.wrap('<form>').parent('form').trigger('reset');
-        el.unwrap();
-        el.prop('files')[0] = null;
-        el.replaceWith(el.clone());
-    };
-    this.cleanName = function (filename) {
-        return filename.replace(/[^a-z0-9_\-\.()]/gi, '_');
-    };
-    this.isIE = function (fileName) {
-        return fileName.indexOf(':\\') > -1;
-    };
-    this.getThumb = function (thumbId) {
-        return '/downloadfile.aspx?thumb=' + thumbId;
-
-    };
-    this.trunc = function (fileName, length) {
-        return _.trunc(fileName, length);
-
-    };
-}).service('ptConstructionService', ['$http', function ($http) {
-    this.getConstructionCases = function (bble, callback) {
-        var url = "/api/ConstructionCases/" + bble;
-        $http.get(url)
-            .success(function (data) {
-                if (callback) callback(data);
-            }).error(function (data) {
-                console.log("Get Construction Data fails.");
-            });
-    };
-    this.saveConstructionCases = function (bble, data, callback) {
-        if (bble && data) {
-            bble = bble.trim();
-            var url = "/api/ConstructionCases/" + bble;
-            $http.put(url, data)
-                .success(function (res) {
-                    if (callback) callback(res);
-                }).error(function () {
-                    alert('Save CSCase fails.');
-                });
-        }
-    };
-    this.getDOBViolations = function (bble, callback) {
-        if (bble) {
-            var url = "/api/ConstructionCases/GetDOBViolations?bble=" + bble;
-            $http.get(url)
-            .success(function (res) {
-                if (callback) callback(null, res);
-            }).error(function () {
-                if (callback) callback("load dob violations fails");
-            });
-        } else {
-            if (callback) callback("bble is missing");
-        }
-    };
-    this.getECBViolations = function (bble, callback) {
-        if (bble) {
-            var url = "/api/ConstructionCases/GetECBViolations?bble=" + bble;
-            $http.get(url)
-            .success(function (res) {
-                if (callback) callback(null, res);
-            }).error(function () {
-                if (callback) callback("load ecb violations fails");
-            });
         }
     };
 }
