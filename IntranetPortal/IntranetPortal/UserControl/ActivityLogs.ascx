@@ -411,7 +411,7 @@
         if(typeof ShortSale != 'undefined')
         {
             if(typeof dtClientFollowup != 'undefined' )
-            {                
+            {
                 if($('#selType1').val()=="Title" || $('#selCategory').val() == "Dead" || $('#selCategory').val() == "Closed" || $('#selCategory').val() == "Assign")
                 {
                     dtClientFollowup.SetText("");
@@ -426,11 +426,10 @@
                     {
                         if(typeof UpDateFollowUpDate == 'function')
                         {
-                            UpDateFollowUpDate(dtClientFollowup.GetDate())
+                            UpDateFollowUpDate(dtClientFollowup.GetDate());
                         }
                         
-                    }
-                   
+                    }                   
                 }
             }
         }

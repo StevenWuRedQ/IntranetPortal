@@ -584,8 +584,7 @@
         function GetShortSaleCase() {
             return angular.element(document.getElementById('ShortSaleCtrl')).scope().SsCase;
         }
-
-
+        
         function MoveToConstruction() {
             angular.element(document.getElementById('ShortSaleCtrl')).scope().MoveToConstruction(
                 function () {

@@ -1,4 +1,8 @@
-﻿Partial Public Class UserTask
+﻿
+''' <summary>
+''' Represents a task related to user
+''' </summary>
+Partial Public Class UserTask
     Public Shared Sub UpdateNotify()
         Using context As New Entities
             Dim task = context.UserTasks.Where(Function(a) a.EmployeeName.Contains(HttpContext.Current.User.Identity.Name) And a.Status = TaskStatus.Active And a.NotifyDate < DateTime.Now).FirstOrDefault
@@ -123,6 +127,10 @@
         End Using
     End Function
 
+    ''' <summary>
+    ''' Expired all the task created by Agents
+    ''' </summary>
+    ''' <param name="bble">Property BBLE</param>
     Public Shared Sub ExpiredAgentTasks(bble As String)
         Using ctx As New Entities
             Dim agentCategory = LeadsActivityLog.LogCategory.SalesAgent.ToString
@@ -144,6 +152,11 @@
         End If
     End Sub
 
+    ''' <summary>
+    ''' Expired all tasks created by specific user
+    ''' </summary>
+    ''' <param name="bble">Property BBLE</param>
+    ''' <param name="createBy">The user who created the task</param>
     Public Shared Sub ExpiredTasks(bble As String, createBy As String)
         Using ctx As New Entities
             Dim tasks = ctx.UserTasks.Where(Function(t) t.BBLE = bble And t.Status = TaskStatus.Active And t.CreateBy = createBy)
@@ -156,6 +169,10 @@
         End Using
     End Sub
 
+    ''' <summary>
+    ''' Expired the specific task by task Id
+    ''' </summary>
+    ''' <param name="taskId">The task Id</param>
     Public Shared Sub ExpiredTask(taskId As Integer)
         Using ctx As New Entities
             Dim tasks = ctx.UserTasks.Where(Function(t) t.TaskID = taskId And t.Status = TaskStatus.Active)
@@ -170,6 +187,12 @@
         End Using
     End Sub
 
+    ''' <summary>
+    ''' Return the amount of task related to user
+    ''' </summary>
+    ''' <param name="empName">The User Name</param>
+    ''' <param name="userContext">The current Http Context</param>
+    ''' <returns></returns>
     Public Shared Function GetTaskCount(empName As String, Optional userContext As HttpContext = Nothing) As Integer
         If userContext Is Nothing AndAlso HttpContext.Current IsNot Nothing Then
             userContext = HttpContext.Current
@@ -198,20 +221,11 @@
 
     Public Sub ApprovalTask(approvalStatus As TaskStatus)
 
-
-
     End Sub
 
     Public Sub ExecuteAction()
         'execute shortsale task action
         ShortSaleProcess.ExecuteAction(Me)
-
-        'Select Case Action
-        '    Case "Reassign Case Approval"
-        '        ShortSaleManage.ReassignApproval(Me)
-        '    Case ""
-
-        'End Select
 
         Using ctx As New Entities
             Dim t = ctx.UserTasks.Find(TaskID)
@@ -229,6 +243,9 @@
         End Using
     End Function
 
+    ''' <summary>
+    ''' The status of User Task
+    ''' </summary>
     Public Enum TaskStatus
         Active
         Complete
@@ -237,6 +254,9 @@
         Declined
     End Enum
 
+    ''' <summary>
+    ''' The task operation mode
+    ''' </summary>
     Public Enum UserTaskMode
         Complete
         Approval
