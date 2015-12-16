@@ -30,6 +30,7 @@
                     </div>
                 </div>
             </div>
+
             <script type="text/ng-template" id="titlechangestatus">
                     <div style="width: 240px">
                         <h5><b>Change Case Status To:</b></h5>
@@ -41,6 +42,7 @@
                         <button type="button" class="btn btn-primary btn-sm" ng-click="updateCaseStatus()">Change</button>
                     </div>
             </script>
+
             <div class="comment-panel" ng-controller="TitleCommentCtrl" style="margin: 10px; border-top: 1px solid #c8c8c8">
                 <%--note list--%>
                 <div style="width: 100%; overflow: auto; max-height: 160px;">
@@ -81,6 +83,7 @@
                     </dx:ASPxPopupControl>
                 </div>
             </div>
+
             <div class="shortSaleUI">
                 <ul class="nav nav-tabs overview_tabs" role="tablist">
 

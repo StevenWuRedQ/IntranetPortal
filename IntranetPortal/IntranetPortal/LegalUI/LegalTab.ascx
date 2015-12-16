@@ -95,7 +95,7 @@
     </ul>
     <!-- Tab panes -->
     <div class="wrapper-content" style="height: 95%; overflow-y: scroll">
-        <div class="tab-content" style="margin-bottom: 400px">
+        <div class="tab-content" style="margin-bottom: 480px">
             <div class="tab-pane active" id="Summary">
                 <uc1:LegalSummaryTab runat="server" ID="LegalSummaryTab" />
             </div>

@@ -137,7 +137,7 @@
                     <% End If%>
 
                     <div class="wrapper-content" style="height: 95%; overflow-y: scroll">
-                        <div class="tab-content" style="margin-bottom: 100px">
+                        <div class="tab-content" style="margin-bottom: 180px">
                             <div class="tab-pane active" id="property_info">
                                 <uc1:NGShortSaleTab runat="server" ID="NGShortSaleTab" />
                             </div>

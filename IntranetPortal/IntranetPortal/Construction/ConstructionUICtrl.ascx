@@ -89,7 +89,7 @@
                                         }" />
     </dx:ASPxPopupControl>
     <div class="wrapper-content" style="height: 95%; overflow-y: scroll">
-        <div class="tab-content" style="margin-bottom: 100px">
+        <div class="tab-content" style="margin-bottom: 180px">
             <div class="tab-pane active" id="ConstructionTab">
                 <uc1:ConstructionTab runat="server" ID="ConstructionTab1" />
             </div>
@@ -135,6 +135,7 @@
 
 <script type="text/javascript">
     var Current_User = '<%= HttpContext.Current.User.Identity.Name%>';
+
     function LoadCaseData(bble) {
         $(document).ready(function () {
             //put construction data loading logic here
@@ -146,8 +147,8 @@
         });
     }
 
-    $(function () {
+    $(function() {
         var scope = angular.element('#ConstructionCtrl').scope();
         ScopeDateChangedByOther(scope.GetTimeUrl, LoadCaseData, scope.GetCSCaseId, scope.GetModifyUserUrl);
-    })
+    });
 </script>

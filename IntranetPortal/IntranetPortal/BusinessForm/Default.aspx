@@ -128,7 +128,7 @@
                 </div>
 
                 <div class="wrapper-content" style="height: 95%; overflow-y: scroll">
-                    <div class="tab-content" style="margin-bottom: 100px">
+                    <div class="tab-content" style="margin-bottom: 180px">
                         <asp:Repeater runat="server" ID="rptBusinessControl" OnItemDataBound="rptBusinessControl_ItemDataBound">
                             <ItemTemplate>
                                 <div class="<%# ActivieTab(Container.ItemIndex)%> tab-pane" id="<%# Eval("Name")%>">
@@ -152,6 +152,7 @@
                     </div>
                 </div>
                 <input type="hidden" id="CaseData" />
+
                 <script type="text/javascript">                            
                     var FormControl = {
                         BBLE: null,
