@@ -67,14 +67,14 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
 
     this.arrayAdd = function (model, data) {
         if (model) {
-            data = data === undefined ? {} : data;
+            data = data ? data : {};
             model.push(data);
         }
     };
     this.arrayRemove = function (model, index, confirm, callback) {
         if (model && index < model.length) {
             if (confirm) {
-                var x = that.confirm("Delete This?", "").then(function (r) {
+                that.confirm("Delete This?", "").then(function (r) {
                     if (r) {
                         var deleteObj = model.splice(index, 1)[0];
                         if (callback) callback(deleteObj);
@@ -138,11 +138,19 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
         var divToPrint = document.getElementById(divID);
         var popupWin = window.open('', '_blank', 'width=300,height=300');
         popupWin.document.open();
-        popupWin.document.write('<html <head><link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" type="text/css" /><link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" /><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" /><link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" /><link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" type="text/css" /><link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" /><link href="/css/stevencss.css" rel="stylesheet" type="text/css" /></head><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+        popupWin.document.write('<html><head>'+
+        '<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" />'+
+        '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />'+
+        '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />'+
+        '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />'+
+        '<link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />'+
+        '<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" />'+
+        '<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />'+
+        '<link rel="stylesheet" href="/css/stevencss.css"type="text/css" />'+
+        '</head><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
         popupWin.document.close();
-
-
     };
+    
     this.postRequest = function (url, data) {
         $.post(url, data, function (retData) {
             $("body").append("<iframe src='" + retData.url + "' style='display: none;' ></iframe>");
@@ -195,7 +203,238 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
         var tempDate = new Date(d);
         return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
     };
-}]).service("ptTime", [function () {
+}]).service('ptFileService', function () {
+    
+    this.isIE = function (fileName) {
+        return fileName.indexOf(':\\') > -1;
+    };
+    this.getFileName = function (fullPath) {
+        var paths;
+        if (fullPath) {
+            if (this.isIE(fullPath)) {
+                paths = fullPath.split('\\');
+                return this.cleanName(paths[paths.length - 1]);
+            } else {
+                paths = fullPath.split('/');
+                return this.cleanName(paths[paths.length - 1]);
+            }
+        }
+        return '';
+    };
+    this.getFileExt = function (fullPath) {
+        if (fullPath && fullPath.indexOf('.') > -1) {
+            var exts = fullPath.split('.');
+            return exts[exts.length - 1].toLowerCase();
+        }
+        return '';
+    };
+    this.getFileFolder = function (fullPath) {
+        if (fullPath) {
+            var paths = fullPath.split('/');
+            var folderName = paths[paths.length - 2];
+            var topFolders = ['Construction', 'Title'];
+            if (topFolders.indexOf(folderName) < 0) {
+                return folderName;
+            } else {
+                return '';
+            }
+        }
+        return '';
+    };
+    this.resetFileElement = function (el) {
+        el.val('');
+        el.wrap('<form>').parent('form').trigger('reset');
+        el.unwrap();
+        el.prop('files')[0] = null;
+        el.replaceWith(el.clone());
+    };
+    this.cleanName = function (filename) {
+        return filename.replace(/[^a-z0-9_\-\.()]/gi, '_');
+    };
+
+    this.getThumb = function (thumbId) {
+        return '/downloadfile.aspx?thumb=' + thumbId;
+
+    };
+    this.trunc = function (fileName, length) {
+        return _.trunc(fileName, length);
+
+    };
+    
+    this.isPicture = function (fullPath) {
+        var ext = this.getFileExt(fullPath);
+        var pictureExts = ['jpg', 'jpeg', 'gif', 'bmp', 'png'];
+        return pictureExts.indexOf(ext) > -1;
+    };
+
+    
+    this.uploadFile = function (data, bble, rename, folder, type, callback) {
+        switch (type) {
+            case 'construction':
+                this.uploadConstructionFile(data, bble, rename, folder, callback);
+                break;
+            case 'title':
+                this.uploadTitleFile(data, bble, rename, folder, callback);
+                break;
+            default:
+                this.uploadConstructionFile(data, bble, rename, folder, callback);
+                break;
+
+        }
+    };
+    this.uploadTitleFile = function (data, bble, rename, folder, callback) {
+        var fileName = rename ? rename : '';
+        folder = folder ? folder : '';
+        if (!data || !bble) {
+            callback('Upload infomation missing!');
+        } else {
+            bble = bble.trim();
+            $.ajax({
+                url: '/api/Title/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + folder,
+                type: 'POST',
+                data: data,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (data1) {
+                    callback(null, data1, rename);
+                },
+                error: function () {
+                    callback('Upload fails!', null, rename);
+                }
+            });
+        }
+    };
+    this.uploadConstructionFile = function (data, bble, rename, folder, callback) {
+        var fileName = rename ? rename : '';
+        var tofolder = folder ? folder : '';
+        if (!data || !bble) {
+            callback('Upload infomation missing!');
+        } else {
+            bble = bble.trim();
+            $.ajax({
+                url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + tofolder,
+                type: 'POST',
+                data: data,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (data1) {
+                    callback(null, data1, rename);
+                },
+                error: function () {
+                    callback('Upload fails!', null, rename);
+                }
+            });
+        }
+    };
+
+    this.makePreviewUrl = function (filePath) {
+        var ext = this.getFileExt(filePath);
+        switch (ext) {
+            case 'pdf':
+                return '/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath);
+                break;
+            case 'xls':
+            case 'xlsx':
+            case 'doc':
+            case 'docx':
+                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true';
+                break;
+            case 'jpg':
+            case 'jpeg':
+            case 'bmp':
+            case 'gif':
+            case 'png':
+                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
+                break;
+            default:
+                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
+
+        }
+    };
+    this.onFilePreview = function (filePath) {
+
+        var ext = this.getFileExt(filePath);
+        switch (ext) {
+            case 'pdf':
+                window.open('/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath));
+                break;
+            case 'xls':
+            case 'xlsx':
+            case 'doc':
+            case 'docx':
+                window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true');
+                break;
+            case 'jpg':
+            case 'jpeg':
+            case 'bmp':
+            case 'gif':
+            case 'png':
+                $.fancybox.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
+                break;
+            case 'txt':
+                $.fancybox.open([
+                    {
+                        type: 'ajax',
+                        href: '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath),
+                    }
+                ]);
+                break;
+            default:
+                window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
+
+        }
+    };
+
+}).service('ptConstructionService', ['$http', function ($http) {
+    this.getConstructionCases = function (bble, callback) {
+        var url = "/api/ConstructionCases/" + bble;
+        $http.get(url)
+            .success(function (data) {
+                if (callback) callback(data);
+            }).error(function (data) {
+                console.log("Get Construction Data fails.");
+            });
+    };
+    this.saveConstructionCases = function (bble, data, callback) {
+        if (bble && data) {
+            bble = bble.trim();
+            var url = "/api/ConstructionCases/" + bble;
+            $http.put(url, data)
+                .success(function (res) {
+                    if (callback) callback(res);
+                }).error(function () {
+                    alert('Save CSCase fails.');
+                });
+        }
+    };
+    this.getDOBViolations = function (bble, callback) {
+        if (bble) {
+            var url = "/api/ConstructionCases/GetDOBViolations?bble=" + bble;
+            $http.get(url)
+            .success(function (res) {
+                if (callback) callback(null, res);
+            }).error(function () {
+                if (callback) callback("load dob violations fails");
+            });
+        } else {
+            if (callback) callback("bble is missing");
+        }
+    };
+    this.getECBViolations = function (bble, callback) {
+        if (bble) {
+            var url = "/api/ConstructionCases/GetECBViolations?bble=" + bble;
+            $http.get(url)
+            .success(function (res) {
+                if (callback) callback(null, res);
+            }).error(function () {
+                if (callback) callback("load ecb violations fails");
+            });
+        }
+    };
+}
+]).service("ptTime", [function () {
     var that = this;
 
     this.isPassByDays = function (start, end, count) {
@@ -294,9 +533,7 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
                 return limitToFilter(response.data, 10);
             });
     };
-    this.getContactsByGroup = function (groupId) {
-        if (allContact) return allContact.filter(function (x) { return x.GroupId == groupId });
-    };
+
     this.getContacts = function (args, /* optional */ groupId) {
         groupId = groupId === undefined ? null : groupId;
         return $http.get('/Services/ContactService.svc/GetContacts?args=' + args)
@@ -312,29 +549,35 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
                 return limitToFilter(response.data, 10);
             });
     };
+    this.getContactsByGroup = function (groupId) {
+        if (allContact) return allContact.filter(function (x) { return x.GroupId == groupId });
+    };
+    
+    
+    this.getContact = function (id, name) {
+        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0] || {};
+        return {};
+    };
     this.getContactById = function (id) {
         if (allContact) return allContact.filter(function (o) { return o.ContactId == id; })[0];
         return null;
     };
-    this.getEntities = function (name, status) {
 
+    this.getContactByName = function (name) {
+        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
+        return {};
+    };
+    
+    
+    this.getEntities = function (name, status) {
         status = status === undefined ? 'Available' : status;
         name = name ? '' : name;
         return $http.get('/Services/ContactService.svc/GetCorpEntityByStatus?n=' + name + '&s=' + status)
             .then(function (res) {
                 return limitToFilter(res.data, 10);
             });
-
-
     };
-    this.getContactByName = function (name) {
-        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
-        return {};
-    };
-    this.getContact = function (id, name) {
-        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0] || {};
-        return {};
-    };
+    
     this.getTeamByName = function (teamName) {
         if (allTeam) {
             return allTeam.filter(function (o) { if (o.Name && teamName) return o.Name.trim() == teamName.trim() })[0];
@@ -342,8 +585,6 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
         return {};
 
     };
-
-
 }]).service('ptShortsSaleService', ['$http', function ($http) {
     this.getShortSaleCase = function (caseId, callback) {
         var url = "/ShortSale/ShortSaleServices.svc/GetCase?caseId=" + caseId;
@@ -410,230 +651,6 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
                     console.log('save home breakdone fail. BBLE: ' + bble);
                 });
 
-        }
-    };
-}
-]).service('ptFileService', function () {
-    this.uploadFile = function (data, bble, rename, folder, type, callback) {
-        switch (type) {
-            case 'construction':
-                this.uploadConstructionFile(data, bble, rename, folder, callback);
-                break;
-            case 'title':
-                this.uploadTitleFile(data, bble, rename, folder, callback);
-                break;
-            default:
-                this.uploadConstructionFile(data, bble, rename, folder, callback);
-                break;
-
-        }
-    };
-    this.uploadTitleFile = function (data, bble, rename, folder, callback) {
-        var fileName = rename ? rename : '';
-        folder = folder ? folder : '';
-        if (!data || !bble) {
-            callback('Upload infomation missing!');
-        } else {
-            bble = bble.trim();
-            $.ajax({
-                url: '/api/Title/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + folder,
-                type: 'POST',
-                data: data,
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function (data1) {
-                    callback(null, data1, rename);
-                },
-                error: function () {
-                    callback('Upload fails!', null, rename);
-                }
-            });
-        }
-    };
-    this.uploadConstructionFile = function (data, bble, rename, folder, callback) {
-        var fileName = rename ? rename : '';
-        var tofolder = folder ? folder : '';
-        if (!data || !bble) {
-            callback('Upload infomation missing!');
-        } else {
-            bble = bble.trim();
-            $.ajax({
-                url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + tofolder,
-                type: 'POST',
-                data: data,
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function (data1) {
-                    callback(null, data1, rename);
-                },
-                error: function () {
-                    callback('Upload fails!', null, rename);
-                }
-            });
-        }
-    };
-    this.getFileName = function (fullPath) {
-        var paths;
-        if (fullPath) {
-            if (this.isIE(fullPath)) {
-                paths = fullPath.split('\\');
-                return this.cleanName(paths[paths.length - 1]);
-            } else {
-                paths = fullPath.split('/');
-                return this.cleanName(paths[paths.length - 1]);
-            }
-        }
-        return '';
-    };
-    this.getFileExt = function (fullPath) {
-        if (fullPath && fullPath.indexOf('.') > -1) {
-            var exts = fullPath.split('.');
-            return exts[exts.length - 1].toLowerCase();
-        }
-        return '';
-    };
-    this.isPicture = function (fullPath) {
-        var ext = this.getFileExt(fullPath);
-        var pictureExts = ['jpg', 'jpeg', 'gif', 'bmp', 'png'];
-        return pictureExts.indexOf(ext) > -1;
-    };
-    this.getFileFolder = function (fullPath) {
-        if (fullPath) {
-            var paths = fullPath.split('/');
-            var folderName = paths[paths.length - 2];
-            var topFolders = ['Construction', 'Title'];
-            if (topFolders.indexOf(folderName) < 0) {
-                return folderName;
-            } else {
-                return '';
-            }
-        }
-        return '';
-    };
-    this.makePreviewUrl = function (filePath) {
-        var ext = this.getFileExt(filePath);
-        switch (ext) {
-            case 'pdf':
-                return '/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath);
-                break;
-            case 'xls':
-            case 'xlsx':
-            case 'doc':
-            case 'docx':
-                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true';
-                break;
-            case 'jpg':
-            case 'jpeg':
-            case 'bmp':
-            case 'gif':
-            case 'png':
-                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
-                break;
-            default:
-                return '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath);
-
-        }
-    };
-    this.onFilePreview = function (filePath) {
-
-        var ext = this.getFileExt(filePath);
-        switch (ext) {
-            case 'pdf':
-                window.open('/pdfViewer/web/viewer.html?file=' + encodeURIComponent('/downloadfile.aspx?pdfUrl=') + encodeURIComponent(filePath));
-                break;
-            case 'xls':
-            case 'xlsx':
-            case 'doc':
-            case 'docx':
-                window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath) + '&edit=true');
-                break;
-            case 'jpg':
-            case 'jpeg':
-            case 'bmp':
-            case 'gif':
-            case 'png':
-                $.fancybox.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
-                break;
-            case 'txt':
-                $.fancybox.open([
-                    {
-                        type: 'ajax',
-                        href: '/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath),
-                    }
-                ]);
-                break;
-            default:
-                window.open('/downloadfile.aspx?fileUrl=' + encodeURIComponent(filePath));
-
-        }
-    };
-    this.resetFileElement = function (el) {
-        el.val('');
-        el.wrap('<form>').parent('form').trigger('reset');
-        el.unwrap();
-        el.prop('files')[0] = null;
-        el.replaceWith(el.clone());
-    };
-    this.cleanName = function (filename) {
-        return filename.replace(/[^a-z0-9_\-\.()]/gi, '_');
-    };
-    this.isIE = function (fileName) {
-        return fileName.indexOf(':\\') > -1;
-    };
-    this.getThumb = function (thumbId) {
-        return '/downloadfile.aspx?thumb=' + thumbId;
-
-    };
-    this.trunc = function (fileName, length) {
-        return _.trunc(fileName, length);
-
-    };
-}).service('ptConstructionService', ['$http', function ($http) {
-    this.getConstructionCases = function (bble, callback) {
-        var url = "/api/ConstructionCases/" + bble;
-        $http.get(url)
-            .success(function (data) {
-                if (callback) callback(data);
-            }).error(function (data) {
-                console.log("Get Construction Data fails.");
-            });
-    };
-    this.saveConstructionCases = function (bble, data, callback) {
-        if (bble && data) {
-            bble = bble.trim();
-            var url = "/api/ConstructionCases/" + bble;
-            $http.put(url, data)
-                .success(function (res) {
-                    if (callback) callback(res);
-                }).error(function () {
-                    alert('Save CSCase fails.');
-                });
-        }
-    };
-    this.getDOBViolations = function (bble, callback) {
-        if (bble) {
-            var url = "/api/ConstructionCases/GetDOBViolations?bble=" + bble;
-            $http.get(url)
-            .success(function (res) {
-                if (callback) callback(null, res);
-            }).error(function () {
-                if (callback) callback("load dob violations fails");
-            });
-        } else {
-            if (callback) callback("bble is missing");
-        }
-    };
-    this.getECBViolations = function (bble, callback) {
-        if (bble) {
-            var url = "/api/ConstructionCases/GetECBViolations?bble=" + bble;
-            $http.get(url)
-            .success(function (res) {
-                if (callback) callback(null, res);
-            }).error(function () {
-                if (callback) callback("load ecb violations fails");
-            });
         }
     };
 }
@@ -784,7 +801,7 @@ directive('ptInitModel', function () {
         link: function (scope, el, attrs) {
             scope.$watch(attrs.ptInitModel, function (newVal) {
                 if (!scope.$eval(attrs.ngModel) && newVal) {
-                    if (typeof newVal == 'string') newVal = newVal.replace(/'/g, "\\'");
+                    if (typeof newVal === 'string') newVal = newVal.replace(/'/g, "\\'");
                     scope.$eval(attrs.ngModel + "='" + newVal + "'");
                 }
             });
@@ -1326,103 +1343,110 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
 
     }
 
-}]).
-    directive('ptLink', ['ptFileService', function (ptFileService) {
-        return {
-            restrict: 'E',
-            scope: {
-                ptModel: '='
-            },
-            template: '<a ng-click="onFilePreview(ptModel.path)">{{trunc(ptModel.name,20)}}</a>',
-            link: function (scope, el, attrs) {
-                scope.onFilePreview = ptFileService.onFilePreview;
-                scope.trunc = ptFileService.trunc;
-            }
+}]).directive('ptLink', ['ptFileService', function (ptFileService) {
+    return {
+        restrict: 'E',
+        scope: {
+            ptModel: '='
+        },
+        template: '<a ng-click="onFilePreview(ptModel.path)">{{trunc(ptModel.name,20)}}</a>',
+        link: function (scope, el, attrs) {
+            scope.onFilePreview = ptFileService.onFilePreview;
+            scope.trunc = ptFileService.trunc;
+        }
 
-        }
-    }]).
-    directive('ptFinishedMark', [function () {
-        return {
-            restrict: 'E',
-            template: '<span ng-if="ssStyle==0">'
-                    + '<button type="button" class="btn btn-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</button>'
-                    + '<button type="button" class="btn btn-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></button>'
-                    + '</span>'
-                    + '<span ng-if="ssStyle==1">'
-                    + '<span class="label label-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</span>'
-                    + '<span class="label label-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></span>'
-                    + '</span>',
-            scope: {
-                ssModel: '=',
-                text1: '@',
-                text2: '@',
-                ssStyle: '@'
-            },
-            link: function (scope, el, attrs) {
-                if (!scope.ssModel) scope.ssModel = false;
-                if (scope.ssStyle && scope.ssStyle.toLowerCase() == 'label') {
-                    scope.ssStyle = 1;
-                } else {
-                    scope.ssStyle = 0;
-                }
-                scope.confirm = function () {
-                    scope.ssModel = true;
-                }
-                scope.deconfirm = function () {
-                    scope.ssModel = false;
-                }
+    }
+}]).directive('ptFinishedMark', [function () {
+    return {
+        restrict: 'E',
+        template: '<span ng-if="ssStyle==0">'
+                + '<button type="button" class="btn btn-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</button>'
+                + '<button type="button" class="btn btn-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></button>'
+                + '</span>'
+                + '<span ng-if="ssStyle==1">'
+                + '<span class="label label-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</span>'
+                + '<span class="label label-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></span>'
+                + '</span>',
+        scope: {
+            ssModel: '=',
+            text1: '@',
+            text2: '@',
+            ssStyle: '@'
+        },
+        link: function (scope, el, attrs) {
+            if (!scope.ssModel) scope.ssModel = false;
+            if (scope.ssStyle && scope.ssStyle.toLowerCase() === 'label') {
+                scope.ssStyle = 1;
+            } else {
+                scope.ssStyle = 0;
+            }
+            scope.confirm = function () {
+                scope.ssModel = true;
+            }
+            scope.deconfirm = function () {
+                scope.ssModel = false;
             }
         }
-    }])
+    }
+}])
 
 angular.module("PortalApp")
 .controller('BuyerEntityCtrl', ['$scope', '$http', 'ptContactServices', function ($scope, $http, ptContactServices) {
     $scope.EmailTo = [];
     $scope.EmailCC = [];
     $scope.ptContactServices = ptContactServices;
-    $scope.selectType = 'All Entities'
-    $scope.Groups = [{ GroupName: 'All Entities' }, { GroupName: 'Available' }, { GroupName: 'Assigned Out' },
+    $scope.selectType = 'All Entities';
+    $scope.loadPanelVisible = true;
+    //for view and upload document -- add by chris
+    $scope.encodeURIComponent = window.encodeURIComponent;
+    $http.get('/Services/ContactService.svc/GetAllBuyerEntities')
+        .success(function (data) {
+            $scope.CorpEntites = data;
+            $scope.currentContact = $scope.CorpEntites[0];
+            $scope.loadPanelVisible = false;
+        }).error(function (data) {
+            alert('Get All buyers Entities error : ' + JSON.stringify(data));
+        });
+    $http.get('/Services/TeamService.svc/GetAllTeam')
+        .success(function (data) {
+            $scope.AllTeam = data;
+        }).error(function (data) {
+            alert('Get All Team name  error : ' + JSON.stringify(data));
+        });
+    $scope.Groups = [
+        { GroupName: 'All Entities' },
+        { GroupName: 'Available' },
+        { GroupName: 'Assigned Out' },
         {
             GroupName: 'Current Offer',
             SubGroups:
-                [{ GroupName: 'NHA Current Offer' }, { GroupName: 'Isabel Current Offer' },
+            [
+                { GroupName: 'NHA Current Offer' }, { GroupName: 'Isabel Current Offer' },
                 { GroupName: 'Quiet Title Action' }, { GroupName: 'Deed Purchase' },
                 { GroupName: 'Straight Sale' }, { GroupName: 'Jay Current Offer' }
-                ]
+            ]
         },
-
         {
             GroupName: 'Sold',
-            SubGroups: [{ GroupName: 'Purchased' }, { GroupName: 'Partnered' },
-                { GroupName: 'Sold (Final Sale)/Recyclable' }]
+            SubGroups: [
+                { GroupName: 'Purchased' }, { GroupName: 'Partnered' },
+                { GroupName: 'Sold (Final Sale)/Recyclable' }
+            ]
         },
-        { GroupName: 'In House' }, { GroupName: 'Agent Corps' }]
+        { GroupName: 'In House' },
+        { GroupName: 'Agent Corps' }
+    ];
+
     $scope.ChangeGroups = function (name) {
         $scope.selectType = name;
     }
     $scope.GetTitle = function () {
-        return ($scope.SelectedTeam ? ($scope.SelectedTeam == '' ? 'All Team\'s ' : $scope.SelectedTeam + '\'s ') : '') + $scope.selectType;
+        return ($scope.SelectedTeam ? ($scope.SelectedTeam === "" ? "All Team's " : $scope.SelectedTeam + "s ") : "") + $scope.selectType;
     }
     $scope.ExportExcel = function () {
         JSONToCSVConvertor($scope.filteredCorps, true, $scope.GetTitle());
 
     }
-    $scope.loadPanelVisible = true;
-    $http.get('/Services/ContactService.svc/GetAllBuyerEntities').success(function (data, status, headers, config) {
-        $scope.CorpEntites = data;
-        $scope.currentContact = $scope.CorpEntites[0];
-        $scope.loadPanelVisible = false;
-    }).error(function (data, status, headers, config) {
-        alert('Get All buyers Entities error : ' + JSON.stringify(data))
-    });
-
-    $http.get('/Services/TeamService.svc/GetAllTeam').success(function (data, status, headers, config) {
-        $scope.AllTeam = data;
-
-    }).error(function (data, status, headers, config) {
-        alert('Get All Team name  error : ' + JSON.stringify(data))
-    });
-
     $scope.GroupCount = function (g) {
         if (!$scope.CorpEntites) {
             return 0;
@@ -1509,7 +1533,7 @@ angular.module("PortalApp")
         return false;
     }
     $scope.selectCurrent = function (contact) {
-        $scope.currentContact = contact
+        $scope.currentContact = contact;
     }
     $scope.SaveCurrent = function () {
         $scope.loadPanelVisible = true;
@@ -1566,9 +1590,6 @@ angular.module("PortalApp")
         var url = '/ViewLeadsInfo.aspx?id=' + bble;
         OpenLeadsWindow(url, "View Leads Info " + bble);
     }
-    //for view and upload document -- add by chris
-    $scope.encodeURIComponent = window.encodeURIComponent;
-
     $scope.UploadFile = function (fileUploadId, type, field) {
         $scope.loadPanelVisible = true;
 
@@ -1577,15 +1598,6 @@ angular.module("PortalApp")
 
         // grab file object from a file input
         var fileData = document.getElementById(fileUploadId).files[0];
-
-        //$http.post('/services/ContactService.svc/UploadFile?id=' + entityId + '&type=' + type, fileData).success(function (data, status, headers, config) {
-        //    $scope.currentContact.EINFile = data;
-        //    //$scope = data;
-        //    alert('successful..');                   
-        //}).error(function (data, status, headers, config) {
-        //    alert('error : ' + JSON.stringify(data))
-        //});
-
 
         $.ajax({
             url: '/services/ContactService.svc/UploadFile?id=' + entityId + '&type=' + type,
@@ -1614,12 +1626,7 @@ angular.module("PortalApp")
 angular.module('PortalApp')
 .controller('ConstructionCtrl', ['$scope', '$http', '$interpolate', 'ptCom', 'ptContactServices', 'ptEntityService', 'ptShortsSaleService', 'ptLeadsService', 'ptConstructionService', function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
 
-    $scope._ = _;
-    $scope.arrayRemove = ptCom.arrayRemove;
-    $scope.ptContactServices = ptContactServices;
-    $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
-
-    $scope.CSCaseModel = function () {
+    var CSCaseModel = function () {
         this.CSCase = {
             InitialIntake: {},
             Photos: {},
@@ -1638,7 +1645,7 @@ angular.module('PortalApp')
             Comments: []
         }
     }
-    $scope.PercentageModel = function () {
+    var PercentageModel = function () {
         this.intake = {
             count: 0,
             finished: 0,
@@ -1657,10 +1664,12 @@ angular.module('PortalApp')
         }
     }
 
+    $scope._ = _;
+
     // scope variables defination
     $scope.ReloadedData = {}
-    $scope.CSCase = new $scope.CSCaseModel();
-    $scope.percentage = new $scope.PercentageModel();
+    $scope.CSCase = new CSCaseModel();
+    $scope.percentage = new PercentageModel();
 
     $scope.UTILITY_SHOWN = {
         'ConED': 'CSCase.CSCase.Utilities.ConED_Shown',
@@ -1697,14 +1706,29 @@ angular.module('PortalApp')
 
     // end scope variables defination
 
-    $scope.reload = function () {
-        $scope.ReloadedData = {};
-        $scope.CSCase = new $scope.CSCaseModel();
-        $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} });
-        $scope.percentage = new $scope.PercentageModel();
-        $scope.clearWarning();
+    $scope.arrayRemove = ptCom.arrayRemove;
+    $scope.ptContactServices = ptContactServices;
+    $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
+    $scope.getRunnerList = function () {
+        var url = "/api/ConstructionCases/GetRunners";
+        $http.get(url)
+            .then(function (res) {
+                if (res.data) {
+                    $scope.RUNNER_LIST = res.data;
+                }
+            });
+    }();
+    $scope.setPopupVisible = function (modelName, bVal) {
+        $scope.$eval(modelName + '=' + bVal);
     }
 
+    $scope.reload = function () {
+        $scope.ReloadedData = {};
+        $scope.CSCase = new CSCaseModel();
+        $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} });
+        $scope.percentage = new PercentageModel();
+        $scope.clearWarning();
+    }
     $scope.init = function (bble, callback) {
         ptCom.startLoading();
         bble = bble.trim();
@@ -1786,12 +1810,12 @@ angular.module('PortalApp')
         if (newValue) {
             var ds = $scope.UTILITY_SHOWN;
             var target = $scope.CSCase.CSCase.Utilities.Company;
-            _.each(target, function (k, i) {
+            _.each(target, function(k, i) {
                 $scope.$eval(ds[k] + '=false');
-            })
-            _.each(newValue, function (el, i) {
+            });
+            _.each(newValue, function(el, i) {
                 $scope.$eval(ds[el] + '=true');
-            })
+            });
         }
     }, true);
 
@@ -1821,6 +1845,7 @@ angular.module('PortalApp')
     $scope.showPopover = function (e) {
         aspxConstructionCommentsPopover.ShowAtElement(e.target);
     }
+
     $scope.addComment = function (comment) {
         var newComments = {}
         newComments.comment = comment;
@@ -1844,7 +1869,6 @@ angular.module('PortalApp')
     /* end active tab */
 
     /* highlight */
-
     $scope.isHighlight = function (criteria) {
         return $scope.$eval(criteria);
     }
@@ -1854,28 +1878,22 @@ angular.module('PortalApp')
     }
 
     $scope.initWatchedModel = function () {
-        _.each($scope.WATCHED_MODEL, function (el, i) {
+        _.each($scope.WATCHED_MODEL, function(el, i) {
             $scope.$eval(el.backedModel + '=' + el.model);
-        })
+        });
     }
     $scope.checkWatchedModel = function () {
-        var res = '';
-        _.each($scope.WATCHED_MODEL, function (el, i) {
-            if ($scope.$eval(el.backedModel + '!=' + el.model)) {
-                $scope.$eval(el.backedModel + '=' + el.model);
-                res += (el.info + ' changes to ' + $scope.$eval(el.model) + '.<br>')
+        var res = "";
+        _.each($scope.WATCHED_MODEL, function(el, i) {
+            if ($scope.$eval(el.backedModel + "!=" + el.model)) {
+                $scope.$eval(el.backedModel + "=" + el.model);
+                res += (el.info + " changes to " + $scope.$eval(el.model) + ".<br>");
             }
-        })
+        });
         if (res) AddActivityLog(res);
     }
 
     /* end highlight */
-
-    /* Popup */
-    $scope.setPopupVisible = function (modelName, bVal) {
-        $scope.$eval(modelName + '=' + bVal);
-    }
-    /* end Popup*/
 
     /* header editing */
     $scope.HeaderEditing = false;
@@ -1894,6 +1912,7 @@ angular.module('PortalApp')
         $scope.ensurePush('CSCase.CSCase.Violations.ECBViolations');
         $scope.setPopupVisible('ReloadedData.ECBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.ECBViolations.length - 1), true);
     }
+
     $scope.fetchDOBViolations = function () {
         ptCom.confirm("<h3 style='color:red'>Warning!!!</h3>Getting information from DOB takes a while.<br>And it will <b>REPLACE</b> your current Data, are you sure to continue?", "Warning")
         .then(function (confirmed) {
@@ -2013,7 +2032,6 @@ angular.module('PortalApp')
     $scope.GetModifyUserUrl = function () {
         return "/api/ConstructionCases/LastModifyUser/" + $scope.CSCase.BBLE;
     }
-
     /****** end check file be modify*********/
 
     /* printWindows*/
@@ -2022,23 +2040,14 @@ angular.module('PortalApp')
     }
     /* end printWindows */
 
+    /* open form windows */
     $scope.openInitialForm = function () {
         window.open("/Construction/ConstructionInitialForm.aspx?bble=" + $scope.CSCase.BBLE, 'Initial Form', 'width=1280, height=960')
     }
-
     $scope.openBudgetForm = function () {
         window.open("/Construction/ConstructionBudgetForm.aspx?bble=" + $scope.CSCase.BBLE, 'Budget Form', 'width=1024, height=768')
     }
-
-    $scope.getRunnerList = function () {
-        var url = "/api/ConstructionCases/GetRunners";
-        $http.get(url)
-        .then(function (res) {
-            if (res.data) {
-                $scope.RUNNER_LIST = res.data;
-            }
-        })
-    }();
+    /* end open form windows */
 
     $scope.updateInitialFormOwner = function () {
         var url = "/api/ConstructionCases/UpdateInitialFormOwner?BBLE=" + $scope.CSCase.BBLE + "&owner=" + $scope.CSCase.CSCase.InitialIntake.InitialFormAssign
@@ -2049,11 +2058,11 @@ angular.module('PortalApp')
             console.log("Assign Initial Form owner Success.")
         }, function error(res) {
             console.log("Fail to assign Initial Form owner.")
-        })
+        });
     }
 
     $scope.getOrdersLength = function () {
-
+        return
     }
 }]
 );
@@ -3316,7 +3325,7 @@ angular.module("PortalApp")
         var UpdatedProperties = ['UpdateTime', 'UpdateDate', 'UpdateBy', 'OwnerId', 'MortgageId', 'OfferId', 'ValueId', 'CallbackDate', 'LastUpdate'];
         var autoSaveError = false;
 
-        $scope.AutoSaveShorSale = function (callback) {
+        $scope.AutoSaveShortSale = function (callback) {
             var json = $scope.SsCase;
             var data = { caseData: JSON.stringify(json) };
 

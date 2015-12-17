@@ -3,49 +3,58 @@ angular.module("PortalApp")
     $scope.EmailTo = [];
     $scope.EmailCC = [];
     $scope.ptContactServices = ptContactServices;
-    $scope.selectType = 'All Entities'
-    $scope.Groups = [{ GroupName: 'All Entities' }, { GroupName: 'Available' }, { GroupName: 'Assigned Out' },
+    $scope.selectType = 'All Entities';
+    $scope.loadPanelVisible = true;
+    //for view and upload document -- add by chris
+    $scope.encodeURIComponent = window.encodeURIComponent;
+    $http.get('/Services/ContactService.svc/GetAllBuyerEntities')
+        .success(function (data) {
+            $scope.CorpEntites = data;
+            $scope.currentContact = $scope.CorpEntites[0];
+            $scope.loadPanelVisible = false;
+        }).error(function (data) {
+            alert('Get All buyers Entities error : ' + JSON.stringify(data));
+        });
+    $http.get('/Services/TeamService.svc/GetAllTeam')
+        .success(function (data) {
+            $scope.AllTeam = data;
+        }).error(function (data) {
+            alert('Get All Team name  error : ' + JSON.stringify(data));
+        });
+    $scope.Groups = [
+        { GroupName: 'All Entities' },
+        { GroupName: 'Available' },
+        { GroupName: 'Assigned Out' },
         {
             GroupName: 'Current Offer',
             SubGroups:
-                [{ GroupName: 'NHA Current Offer' }, { GroupName: 'Isabel Current Offer' },
+            [
+                { GroupName: 'NHA Current Offer' }, { GroupName: 'Isabel Current Offer' },
                 { GroupName: 'Quiet Title Action' }, { GroupName: 'Deed Purchase' },
                 { GroupName: 'Straight Sale' }, { GroupName: 'Jay Current Offer' }
-                ]
+            ]
         },
-
         {
             GroupName: 'Sold',
-            SubGroups: [{ GroupName: 'Purchased' }, { GroupName: 'Partnered' },
-                { GroupName: 'Sold (Final Sale)/Recyclable' }]
+            SubGroups: [
+                { GroupName: 'Purchased' }, { GroupName: 'Partnered' },
+                { GroupName: 'Sold (Final Sale)/Recyclable' }
+            ]
         },
-        { GroupName: 'In House' }, { GroupName: 'Agent Corps' }]
+        { GroupName: 'In House' },
+        { GroupName: 'Agent Corps' }
+    ];
+
     $scope.ChangeGroups = function (name) {
         $scope.selectType = name;
     }
     $scope.GetTitle = function () {
-        return ($scope.SelectedTeam ? ($scope.SelectedTeam == '' ? 'All Team\'s ' : $scope.SelectedTeam + '\'s ') : '') + $scope.selectType;
+        return ($scope.SelectedTeam ? ($scope.SelectedTeam === "" ? "All Team's " : $scope.SelectedTeam + "s ") : "") + $scope.selectType;
     }
     $scope.ExportExcel = function () {
         JSONToCSVConvertor($scope.filteredCorps, true, $scope.GetTitle());
 
     }
-    $scope.loadPanelVisible = true;
-    $http.get('/Services/ContactService.svc/GetAllBuyerEntities').success(function (data, status, headers, config) {
-        $scope.CorpEntites = data;
-        $scope.currentContact = $scope.CorpEntites[0];
-        $scope.loadPanelVisible = false;
-    }).error(function (data, status, headers, config) {
-        alert('Get All buyers Entities error : ' + JSON.stringify(data))
-    });
-
-    $http.get('/Services/TeamService.svc/GetAllTeam').success(function (data, status, headers, config) {
-        $scope.AllTeam = data;
-
-    }).error(function (data, status, headers, config) {
-        alert('Get All Team name  error : ' + JSON.stringify(data))
-    });
-
     $scope.GroupCount = function (g) {
         if (!$scope.CorpEntites) {
             return 0;
@@ -132,7 +141,7 @@ angular.module("PortalApp")
         return false;
     }
     $scope.selectCurrent = function (contact) {
-        $scope.currentContact = contact
+        $scope.currentContact = contact;
     }
     $scope.SaveCurrent = function () {
         $scope.loadPanelVisible = true;
@@ -189,9 +198,6 @@ angular.module("PortalApp")
         var url = '/ViewLeadsInfo.aspx?id=' + bble;
         OpenLeadsWindow(url, "View Leads Info " + bble);
     }
-    //for view and upload document -- add by chris
-    $scope.encodeURIComponent = window.encodeURIComponent;
-
     $scope.UploadFile = function (fileUploadId, type, field) {
         $scope.loadPanelVisible = true;
 
@@ -200,15 +206,6 @@ angular.module("PortalApp")
 
         // grab file object from a file input
         var fileData = document.getElementById(fileUploadId).files[0];
-
-        //$http.post('/services/ContactService.svc/UploadFile?id=' + entityId + '&type=' + type, fileData).success(function (data, status, headers, config) {
-        //    $scope.currentContact.EINFile = data;
-        //    //$scope = data;
-        //    alert('successful..');                   
-        //}).error(function (data, status, headers, config) {
-        //    alert('error : ' + JSON.stringify(data))
-        //});
-
 
         $.ajax({
             url: '/services/ContactService.svc/UploadFile?id=' + entityId + '&type=' + type,
@@ -237,12 +234,7 @@ angular.module("PortalApp")
 angular.module('PortalApp')
 .controller('ConstructionCtrl', ['$scope', '$http', '$interpolate', 'ptCom', 'ptContactServices', 'ptEntityService', 'ptShortsSaleService', 'ptLeadsService', 'ptConstructionService', function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
 
-    $scope._ = _;
-    $scope.arrayRemove = ptCom.arrayRemove;
-    $scope.ptContactServices = ptContactServices;
-    $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
-
-    $scope.CSCaseModel = function () {
+    var CSCaseModel = function () {
         this.CSCase = {
             InitialIntake: {},
             Photos: {},
@@ -261,7 +253,7 @@ angular.module('PortalApp')
             Comments: []
         }
     }
-    $scope.PercentageModel = function () {
+    var PercentageModel = function () {
         this.intake = {
             count: 0,
             finished: 0,
@@ -280,10 +272,12 @@ angular.module('PortalApp')
         }
     }
 
+    $scope._ = _;
+
     // scope variables defination
     $scope.ReloadedData = {}
-    $scope.CSCase = new $scope.CSCaseModel();
-    $scope.percentage = new $scope.PercentageModel();
+    $scope.CSCase = new CSCaseModel();
+    $scope.percentage = new PercentageModel();
 
     $scope.UTILITY_SHOWN = {
         'ConED': 'CSCase.CSCase.Utilities.ConED_Shown',
@@ -320,14 +314,29 @@ angular.module('PortalApp')
 
     // end scope variables defination
 
-    $scope.reload = function () {
-        $scope.ReloadedData = {};
-        $scope.CSCase = new $scope.CSCaseModel();
-        $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} });
-        $scope.percentage = new $scope.PercentageModel();
-        $scope.clearWarning();
+    $scope.arrayRemove = ptCom.arrayRemove;
+    $scope.ptContactServices = ptContactServices;
+    $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
+    $scope.getRunnerList = function () {
+        var url = "/api/ConstructionCases/GetRunners";
+        $http.get(url)
+            .then(function (res) {
+                if (res.data) {
+                    $scope.RUNNER_LIST = res.data;
+                }
+            });
+    }();
+    $scope.setPopupVisible = function (modelName, bVal) {
+        $scope.$eval(modelName + '=' + bVal);
     }
 
+    $scope.reload = function () {
+        $scope.ReloadedData = {};
+        $scope.CSCase = new CSCaseModel();
+        $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} });
+        $scope.percentage = new PercentageModel();
+        $scope.clearWarning();
+    }
     $scope.init = function (bble, callback) {
         ptCom.startLoading();
         bble = bble.trim();
@@ -409,12 +418,12 @@ angular.module('PortalApp')
         if (newValue) {
             var ds = $scope.UTILITY_SHOWN;
             var target = $scope.CSCase.CSCase.Utilities.Company;
-            _.each(target, function (k, i) {
+            _.each(target, function(k, i) {
                 $scope.$eval(ds[k] + '=false');
-            })
-            _.each(newValue, function (el, i) {
+            });
+            _.each(newValue, function(el, i) {
                 $scope.$eval(ds[el] + '=true');
-            })
+            });
         }
     }, true);
 
@@ -444,6 +453,7 @@ angular.module('PortalApp')
     $scope.showPopover = function (e) {
         aspxConstructionCommentsPopover.ShowAtElement(e.target);
     }
+
     $scope.addComment = function (comment) {
         var newComments = {}
         newComments.comment = comment;
@@ -467,7 +477,6 @@ angular.module('PortalApp')
     /* end active tab */
 
     /* highlight */
-
     $scope.isHighlight = function (criteria) {
         return $scope.$eval(criteria);
     }
@@ -477,28 +486,22 @@ angular.module('PortalApp')
     }
 
     $scope.initWatchedModel = function () {
-        _.each($scope.WATCHED_MODEL, function (el, i) {
+        _.each($scope.WATCHED_MODEL, function(el, i) {
             $scope.$eval(el.backedModel + '=' + el.model);
-        })
+        });
     }
     $scope.checkWatchedModel = function () {
-        var res = '';
-        _.each($scope.WATCHED_MODEL, function (el, i) {
-            if ($scope.$eval(el.backedModel + '!=' + el.model)) {
-                $scope.$eval(el.backedModel + '=' + el.model);
-                res += (el.info + ' changes to ' + $scope.$eval(el.model) + '.<br>')
+        var res = "";
+        _.each($scope.WATCHED_MODEL, function(el, i) {
+            if ($scope.$eval(el.backedModel + "!=" + el.model)) {
+                $scope.$eval(el.backedModel + "=" + el.model);
+                res += (el.info + " changes to " + $scope.$eval(el.model) + ".<br>");
             }
-        })
+        });
         if (res) AddActivityLog(res);
     }
 
     /* end highlight */
-
-    /* Popup */
-    $scope.setPopupVisible = function (modelName, bVal) {
-        $scope.$eval(modelName + '=' + bVal);
-    }
-    /* end Popup*/
 
     /* header editing */
     $scope.HeaderEditing = false;
@@ -517,6 +520,7 @@ angular.module('PortalApp')
         $scope.ensurePush('CSCase.CSCase.Violations.ECBViolations');
         $scope.setPopupVisible('ReloadedData.ECBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.ECBViolations.length - 1), true);
     }
+
     $scope.fetchDOBViolations = function () {
         ptCom.confirm("<h3 style='color:red'>Warning!!!</h3>Getting information from DOB takes a while.<br>And it will <b>REPLACE</b> your current Data, are you sure to continue?", "Warning")
         .then(function (confirmed) {
@@ -636,7 +640,6 @@ angular.module('PortalApp')
     $scope.GetModifyUserUrl = function () {
         return "/api/ConstructionCases/LastModifyUser/" + $scope.CSCase.BBLE;
     }
-
     /****** end check file be modify*********/
 
     /* printWindows*/
@@ -645,23 +648,14 @@ angular.module('PortalApp')
     }
     /* end printWindows */
 
+    /* open form windows */
     $scope.openInitialForm = function () {
         window.open("/Construction/ConstructionInitialForm.aspx?bble=" + $scope.CSCase.BBLE, 'Initial Form', 'width=1280, height=960')
     }
-
     $scope.openBudgetForm = function () {
         window.open("/Construction/ConstructionBudgetForm.aspx?bble=" + $scope.CSCase.BBLE, 'Budget Form', 'width=1024, height=768')
     }
-
-    $scope.getRunnerList = function () {
-        var url = "/api/ConstructionCases/GetRunners";
-        $http.get(url)
-        .then(function (res) {
-            if (res.data) {
-                $scope.RUNNER_LIST = res.data;
-            }
-        })
-    }();
+    /* end open form windows */
 
     $scope.updateInitialFormOwner = function () {
         var url = "/api/ConstructionCases/UpdateInitialFormOwner?BBLE=" + $scope.CSCase.BBLE + "&owner=" + $scope.CSCase.CSCase.InitialIntake.InitialFormAssign
@@ -672,11 +666,11 @@ angular.module('PortalApp')
             console.log("Assign Initial Form owner Success.")
         }, function error(res) {
             console.log("Fail to assign Initial Form owner.")
-        })
+        });
     }
 
     $scope.getOrdersLength = function () {
-
+        return
     }
 }]
 );
@@ -1939,7 +1933,7 @@ angular.module("PortalApp")
         var UpdatedProperties = ['UpdateTime', 'UpdateDate', 'UpdateBy', 'OwnerId', 'MortgageId', 'OfferId', 'ValueId', 'CallbackDate', 'LastUpdate'];
         var autoSaveError = false;
 
-        $scope.AutoSaveShorSale = function (callback) {
+        $scope.AutoSaveShortSale = function (callback) {
             var json = $scope.SsCase;
             var data = { caseData: JSON.stringify(json) };
 
