@@ -506,6 +506,5 @@
         </dx:ASPxPopupControl>
         <uc1:SendMail runat="server" ID="SendMail" />
     </form>
-
 </body>
 </html>
