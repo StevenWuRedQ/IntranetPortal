@@ -12,11 +12,10 @@
         }
 
         #contentUrlPane {
-            position: relative;
             width: 100%;
             height: 100%;
-            min-height: 960px;
             overflow: hidden;
+            padding: 0;
             margin: 0;
             border: none;
         }

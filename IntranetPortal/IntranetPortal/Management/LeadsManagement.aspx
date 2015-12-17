@@ -67,21 +67,11 @@
             return;
         }
 
-        function ResizeGrid(pane) {
-            if (pane.name === "gridPanel") {
-                var height = pane.GetClientHeight();
-                gridLeads.SetHeight(height);
-            }
-        }
-
-        $(document).ready(function () {
-            // Handler for .ready() called.
-            //onInitScorllBar();
-        });
         function filterOutRecycel(filtedRecyceled) {
             var condtion = filtedRecyceled ? '[IsRecycled] = false' : '';
             gridLeads.ApplyFilter(condtion);
         }
+       
     </script>
     <style type="text/css">
         .rand-button:disabled {
@@ -123,10 +113,10 @@
                                         <span style="font-size: 18px; margin-left: 20px">
                                             <span id="gridSelectCount">0</span> selected
                                         </span>
-                                        
-                                        <span style="margin-left:10px">
+
+                                        <span style="margin-left: 10px">
                                             <input type="checkbox" id="cbfilterOutRecycel" name="cbfilterOutExist" class="font_12" onchange="filterOutRecycel(this.checked)">
-                                            <label for="cbfilterOutRecycel" class="font_12" style="padding-top: 20px;float:none">
+                                            <label for="cbfilterOutRecycel" class="font_12" style="padding-top: 20px; float: none">
                                                 <span class="upcase_text">Don't Show Recycled Leads</span>
                                             </label>
                                         </span>
@@ -177,9 +167,8 @@
                                             </DataItemTemplate>
                                         </dx:GridViewDataColumn>
                                     </Columns>
-                                    <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true"
-                                        EnableRowHotTrack="True" />
-                                    <Settings ShowFilterRowMenu="true" ShowHeaderFilterButton="true" ShowColumnHeaders="true" VerticalScrollableHeight="1000" GridLines="Both"></Settings>
+                                    <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true" EnableRowHotTrack="True" />
+                                    <Settings ShowFilterRowMenu="true" ShowHeaderFilterButton="true" ShowColumnHeaders="true" GridLines="Both" VerticalScrollableHeight="1000"></Settings>
                                     <SettingsPager Mode="EndlessPaging" PageSize="50"></SettingsPager>
                                     <Styles>
                                         <Header HorizontalAlign="Center"></Header>
@@ -211,9 +200,9 @@
                     <dx:SplitterPane Size="70px">
                         <ContentCollection>
                             <dx:SplitterContentControl>
-                                <table style="width: 600px; float: right; margin-top: 10px;">
+                                <table id="assign_leads_footer" style="float: right; position:fixed; bottom:0; height: 70px; background:white">
                                     <tr>
-                                        <td>
+                                        <td style="padding-left:30px;">
                                             <dx:ASPxLabel Text="Select Employee:" ID="ASPxLabel1" runat="server" Font-Size="Large"></dx:ASPxLabel>
                                         </td>
                                         <td>
@@ -226,12 +215,11 @@
                                         <td>
                                             <dx:ASPxCheckBox runat="server" Text="Archive Logs" ID="cbArchived"></dx:ASPxCheckBox>
                                         </td>
+                                        <td>&nbsp;&nbsp;</td>
                                         <td>
-
                                             <input type="button" id="btnAssign" value="Assign" class="rand-button rand-button-blue rand-button-pad" disabled="disabled" onclick="{ if (listboxEmployee.GetIsValid()) gridLeads.PerformCallback('AssignLeads'); }" />
                                             &nbsp;&nbsp;
-                                      <input type="button" value="Rules" class="rand-button rand-button-blue rand-button-pad" onclick="AssignLeadsPopupClient.Show();" />
-
+                                            <input type="button" value="Rules" class="rand-button rand-button-blue rand-button-pad" onclick="AssignLeadsPopupClient.Show();" />
                                             <button type="button" onclick="popupAssignRules.Show();" style="display: none">Rules Old</button>
                                         </td>
                                     </tr>
@@ -249,7 +237,6 @@
                 </ContentCollection>
             </dx:SplitterPane>
         </Panes>
-        <ClientSideEvents PaneResized="function(s,e){ResizeGrid(e.pane);}" />
     </dx:ASPxSplitter>
     <dx:ASPxCallback runat="server" ID="updateLeadsType" ClientInstanceName="updateLeadsType" OnCallback="updateLeadsType_Callback">
         <ClientSideEvents EndCallback="function(){gridLeads.Refresh();}" />
