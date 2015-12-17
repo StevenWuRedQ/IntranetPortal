@@ -146,13 +146,13 @@
         }
 
         #global-announcements {
+            display: none;
             background-color: #fffde7;
             color: red;
             margin: 0;
             padding: 8px;
             font-weight: bold;
             font-size: 12px;
-            display: none;
         }
 
             #global-announcements div {
@@ -267,7 +267,6 @@
             * function to show global annoucement at top
             */
             function setGlobalAnnouncement(message) {
-                debugger;
                 $("#global-announcements").show();
                 $("#global-announcements-message").text(message);
                 $(".global-announcements-close").on('click', function () {
@@ -275,7 +274,7 @@
                 });
                 setTimeout(function () {
                     $("#global-announcements").hide(1000);
-                }, 180000)
+                }, 180000);
             }
 
         </script>
