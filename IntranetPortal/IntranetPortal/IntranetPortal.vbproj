@@ -6067,6 +6067,7 @@
     <Content Include="css\qb\qb.ui.tree.css" />
     <Content Include="css\right-pane.css" />
     <Content Include="css\RightToLeft.css" />
+    <Content Include="css\stevencss.css" />
     <Content Include="css\themes\images\animated-overlay.gif" />
     <Content Include="css\themes\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="css\themes\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -6443,6 +6444,7 @@
     <Content Include="js\e2etest\ContructionController.js" />
     <Content Include="js\filters.js" />
     <Content Include="js\test\conf.js" />
+    <Content Include="js\test\controllers\BuyerEntityControllerSpec.js" />
     <Content Include="js\test\controllers\ConstructionControllerSpec.js" />
     <Content Include="js\test\directiveSpec.js" />
     <Content Include="js\test\ptFilesDirectiveSpec.js" />
@@ -7304,7 +7306,7 @@
     <Content Include="ShortSale\TitleControl.ascx" />
     <Content Include="ShortSale\TitleSummary.ascx" />
     <Content Include="StreetView.aspx" />
-    <Content Include="css\stevencss.css" />
+    <Content Include="css\stevencss1.css" />
     <Content Include="SummaryPage.aspx" />
     <Content Include="Task\MyCompleted.aspx" />
     <Content Include="Task\MyApp.aspx" />

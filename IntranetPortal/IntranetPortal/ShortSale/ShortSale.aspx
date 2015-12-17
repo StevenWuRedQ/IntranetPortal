@@ -65,13 +65,13 @@
             <uc1:ShortSaleCaseList runat="server" ID="ShortSaleCaseList" />
         </div>
         <div ui-layout-container id="dataPanelDiv">
-            <asp:Panel runat="server" ID="dataPanel">
+            <asp:Panel runat="server" ID="dataPanel" Height="100%">
                 <div class="shortSaleUI" style="align-content: center; height: 100%" id="ShortSaleCtrl" ng-controller="ShortSaleCtrl">
                     <asp:HiddenField ID="hfBBLE" runat="server" />
                     <!-- Nav tabs -->
                     <% If Not HiddenTab Then%>
-                    <div class="legal-menu row" style="margin-left: 0; margin-right: 0">
-                        <ul class="nav-bar nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
+                    <div class="legal-menu" style="position: relative; top: 0; margin: 0; z-index: 1; width: 100%">
+                        <ul class="nav-bar nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white;">
                             <li class="active short_sale_head_tab">
                                 <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
                                     <i class="fa fa-sign-out fa-info-circle head_tab_icon_padding"></i>
@@ -136,28 +136,29 @@
                     </div>
                     <% End If%>
 
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="property_info">
-                            <uc1:NGShortSaleTab runat="server" ID="NGShortSaleTab" />
-                        </div>
-                        <div class="tab-pane " id="home_owner">
-                            <uc1:Title runat="server" ID="ucTitle" Visible="false" />
-                            <uc1:BusinessFormControl runat="server" ID="BusinessFormControl" ControlName="Title" />
-                        </div>
-                        <div class="tab-pane " id="documents">
-                            <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
-                        </div>
-                        <div class="tab-pane load_bg" id="more_leads">
-                            <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
-                        </div>
-                        <div class="tab-pane load_bg" id="more_evction">
-                            <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
-                        </div>
-                        <div class="tab-pane load_bg" id="more_legal">
-                            <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+                    <div class="wrapper-content" style="height: 95%; overflow-y: scroll">
+                        <div class="tab-content" style="margin-bottom: 180px">
+                            <div class="tab-pane active" id="property_info">
+                                <uc1:NGShortSaleTab runat="server" ID="NGShortSaleTab" />
+                            </div>
+                            <div class="tab-pane " id="home_owner">
+                                <uc1:Title runat="server" ID="ucTitle" Visible="false" />
+                                <uc1:BusinessFormControl runat="server" ID="BusinessFormControl" ControlName="Title" />
+                            </div>
+                            <div class="tab-pane " id="documents">
+                                <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
+                            </div>
+                            <div class="tab-pane load_bg" id="more_leads">
+                                <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+                            </div>
+                            <div class="tab-pane load_bg" id="more_evction">
+                                <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+                            </div>
+                            <div class="tab-pane load_bg" id="more_legal">
+                                <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+                            </div>
                         </div>
                     </div>
-
                     <%-- Approval Popup --%>
                     <div dx-popup="{  
                                     height: 650,
@@ -546,6 +547,7 @@
     <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
     <uc1:SelectPartyUC runat="server" ID="SelectPartyUC" />
     <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
+
     <input type="hidden" id="CaseData" />
     <input type="hidden" id="LastUpdateTime" />
     <uc1:Common runat="server" ID="Common" />
@@ -642,7 +644,7 @@
             var $scope = angular.element(document.getElementById('ShortSaleCtrl')).scope();
             ScopeDateChangedByOther(GetLasTUpDateURL, $scope.GetShortSaleCase, $scope.GetLoadId, $scope.GetModifyUserUrl);
             ScopeAutoSave(GetShortSaleCase, AutoSaveShortSale, '#ShortSaleTabHead');
-        });              
+        });
 
     </script>
 

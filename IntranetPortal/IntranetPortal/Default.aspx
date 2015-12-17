@@ -24,5 +24,5 @@
     <uc1:NavMenu runat="server" ID="NavMenu" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    <iframe id="contentUrlPane" name="contentUrlPane" height="100%" frameborder="0" scrolling="yes" src="<%= ContentUrl%>" on></iframe>
+    <iframe id="contentUrlPane" name="contentUrlPane" height="100%" frameborder="0" scrolling="no" src="<%= ContentUrl%>"></iframe>
 </asp:Content>

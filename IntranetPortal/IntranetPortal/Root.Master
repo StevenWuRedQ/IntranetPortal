@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/stevencss.css?v=11122015" />
+    <link rel="stylesheet" href="/css/stevencss.css?v=17122015" />
     <link rel="stylesheet" href="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -31,7 +31,7 @@
 
     <script src="/Scripts/js/main.js"></script>
     <script src="/Scripts/PortalMessager.js"></script>
-    <script src="/Scripts/stevenjs.js?v=11122015"></script>
+    <script src="/Scripts/stevenjs.js?v=17122015"></script>
 
 
 
@@ -146,20 +146,19 @@
         }
 
         #global-announcements {
-            background-color:#fffde7;
+            display: none;
+            background-color: #fffde7;
             color: red;
             margin: 0;
             padding: 8px;
             font-weight: bold;
             font-size: 12px;
-            display: none;
-
         }
 
-        #global-announcements div {
-            margin: 0;
-            padding: 0;
-        }
+            #global-announcements div {
+                margin: 0;
+                padding: 0;
+            }
     </style>
 
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
@@ -175,7 +174,7 @@
                         $('#imgChat').css("color", "green");
                     }, 1000);
 
-                setGlobalAnnouncement("Dear users, if you have any difficulty to display our website, please try press ctrl+f5 to clear your browser cache!");
+                //setGlobalAnnouncement("Dear users, if you have any difficulty to display our website, please try press ctrl+f5 to clear your browser cache!");
             });
 
 
@@ -243,7 +242,7 @@
             }
 
             function NewTask() {
-                    totalTaskAnimate();
+                totalTaskAnimate();
             }
             function totalTaskAnimate() {
                 if (!$('#SpanAmount_TotalTask').is(':visible')) {
@@ -268,7 +267,6 @@
             * function to show global annoucement at top
             */
             function setGlobalAnnouncement(message) {
-                debugger;
                 $("#global-announcements").show();
                 $("#global-announcements-message").text(message);
                 $(".global-announcements-close").on('click', function () {
@@ -276,7 +274,7 @@
                 });
                 setTimeout(function () {
                     $("#global-announcements").hide(1000);
-                }, 180000)
+                }, 180000);
             }
 
         </script>
@@ -320,16 +318,16 @@
                                     <i class="fa fa-circle-thin fa-stack-2x"></i>
                                     <i class="fa fa-bars fa-stack-1x"></i>
                                 </span>
-                                
-                               <span class="fa-stack icon_btn tooltip-examples" style="margin-left: 20px; font-size: 20px; padding: 5px;" title="Contacts" onclick="OpenLeadsWindow('/PopupControl/VendorsPopUpContent.aspx','Contacts',1036,590)">
-                                   <i class="fa fa-circle-thin fa-stack-2x"></i>
-                                   <i class="fa fa-users fa-stack-1x"></i>
-                               </span>
-                                                                                              
-                               <span class="fa-stack icon_btn tooltip-examples" style="margin-left: 20px; font-size: 20px; padding: 5px;" title="Entities" onclick="OpenLeadsWindow('/PopupControl/BuyerEntityPopUpContent.aspx','Entities',1438,700)">
-                                   <i class="fa fa-circle-thin fa-stack-2x"></i>
-                                   <i class="fa fa-building fa-stack-1x"></i>
-                               </span>
+
+                                <span class="fa-stack icon_btn tooltip-examples" style="margin-left: 20px; font-size: 20px; padding: 5px;" title="Contacts" onclick="OpenLeadsWindow('/PopupControl/VendorsPopUpContent.aspx','Contacts',1036,590)">
+                                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                    <i class="fa fa-users fa-stack-1x"></i>
+                                </span>
+
+                                <span class="fa-stack icon_btn tooltip-examples" style="margin-left: 20px; font-size: 20px; padding: 5px;" title="Entities" onclick="OpenLeadsWindow('/PopupControl/BuyerEntityPopUpContent.aspx','Entities',1438,700)">
+                                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                    <i class="fa fa-building fa-stack-1x"></i>
+                                </span>
 
                             </div>
                             <div style="display: table-cell; width: 700px">

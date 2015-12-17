@@ -3,49 +3,58 @@
     $scope.EmailTo = [];
     $scope.EmailCC = [];
     $scope.ptContactServices = ptContactServices;
-    $scope.selectType = 'All Entities'
-    $scope.Groups = [{ GroupName: 'All Entities' }, { GroupName: 'Available' }, { GroupName: 'Assigned Out' },
+    $scope.selectType = 'All Entities';
+    $scope.loadPanelVisible = true;
+    //for view and upload document -- add by chris
+    $scope.encodeURIComponent = window.encodeURIComponent;
+    $http.get('/Services/ContactService.svc/GetAllBuyerEntities')
+        .success(function (data) {
+            $scope.CorpEntites = data;
+            $scope.currentContact = $scope.CorpEntites[0];
+            $scope.loadPanelVisible = false;
+        }).error(function (data) {
+            alert('Get All buyers Entities error : ' + JSON.stringify(data));
+        });
+    $http.get('/Services/TeamService.svc/GetAllTeam')
+        .success(function (data) {
+            $scope.AllTeam = data;
+        }).error(function (data) {
+            alert('Get All Team name  error : ' + JSON.stringify(data));
+        });
+    $scope.Groups = [
+        { GroupName: 'All Entities' },
+        { GroupName: 'Available' },
+        { GroupName: 'Assigned Out' },
         {
             GroupName: 'Current Offer',
             SubGroups:
-                [{ GroupName: 'NHA Current Offer' }, { GroupName: 'Isabel Current Offer' },
+            [
+                { GroupName: 'NHA Current Offer' }, { GroupName: 'Isabel Current Offer' },
                 { GroupName: 'Quiet Title Action' }, { GroupName: 'Deed Purchase' },
                 { GroupName: 'Straight Sale' }, { GroupName: 'Jay Current Offer' }
-                ]
+            ]
         },
-
         {
             GroupName: 'Sold',
-            SubGroups: [{ GroupName: 'Purchased' }, { GroupName: 'Partnered' },
-                { GroupName: 'Sold (Final Sale)/Recyclable' }]
+            SubGroups: [
+                { GroupName: 'Purchased' }, { GroupName: 'Partnered' },
+                { GroupName: 'Sold (Final Sale)/Recyclable' }
+            ]
         },
-        { GroupName: 'In House' }, { GroupName: 'Agent Corps' }]
+        { GroupName: 'In House' },
+        { GroupName: 'Agent Corps' }
+    ];
+
     $scope.ChangeGroups = function (name) {
         $scope.selectType = name;
     }
     $scope.GetTitle = function () {
-        return ($scope.SelectedTeam ? ($scope.SelectedTeam == '' ? 'All Team\'s ' : $scope.SelectedTeam + '\'s ') : '') + $scope.selectType;
+        return ($scope.SelectedTeam ? ($scope.SelectedTeam === "" ? "All Team's " : $scope.SelectedTeam + "s ") : "") + $scope.selectType;
     }
     $scope.ExportExcel = function () {
         JSONToCSVConvertor($scope.filteredCorps, true, $scope.GetTitle());
 
     }
-    $scope.loadPanelVisible = true;
-    $http.get('/Services/ContactService.svc/GetAllBuyerEntities').success(function (data, status, headers, config) {
-        $scope.CorpEntites = data;
-        $scope.currentContact = $scope.CorpEntites[0];
-        $scope.loadPanelVisible = false;
-    }).error(function (data, status, headers, config) {
-        alert('Get All buyers Entities error : ' + JSON.stringify(data))
-    });
-
-    $http.get('/Services/TeamService.svc/GetAllTeam').success(function (data, status, headers, config) {
-        $scope.AllTeam = data;
-
-    }).error(function (data, status, headers, config) {
-        alert('Get All Team name  error : ' + JSON.stringify(data))
-    });
-
     $scope.GroupCount = function (g) {
         if (!$scope.CorpEntites) {
             return 0;
@@ -132,7 +141,7 @@
         return false;
     }
     $scope.selectCurrent = function (contact) {
-        $scope.currentContact = contact
+        $scope.currentContact = contact;
     }
     $scope.SaveCurrent = function () {
         $scope.loadPanelVisible = true;
@@ -189,9 +198,6 @@
         var url = '/ViewLeadsInfo.aspx?id=' + bble;
         OpenLeadsWindow(url, "View Leads Info " + bble);
     }
-    //for view and upload document -- add by chris
-    $scope.encodeURIComponent = window.encodeURIComponent;
-
     $scope.UploadFile = function (fileUploadId, type, field) {
         $scope.loadPanelVisible = true;
 
@@ -200,15 +206,6 @@
 
         // grab file object from a file input
         var fileData = document.getElementById(fileUploadId).files[0];
-
-        //$http.post('/services/ContactService.svc/UploadFile?id=' + entityId + '&type=' + type, fileData).success(function (data, status, headers, config) {
-        //    $scope.currentContact.EINFile = data;
-        //    //$scope = data;
-        //    alert('successful..');                   
-        //}).error(function (data, status, headers, config) {
-        //    alert('error : ' + JSON.stringify(data))
-        //});
-
 
         $.ajax({
             url: '/services/ContactService.svc/UploadFile?id=' + entityId + '&type=' + type,
