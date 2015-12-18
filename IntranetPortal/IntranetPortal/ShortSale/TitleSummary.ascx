@@ -63,17 +63,23 @@
         var url = '/ShortSale/ShortSale.aspx?ShowList=1&CaseId=' + CaseId;
         window.location.href = url;
     }
-
-    function SearchGrid() {
-
-        var filterCondition = "";
+    
+    var lastSearchKey = "";
+    function SearchGrid() {                
         var key = document.getElementById("QuickSearch").value;
+        if (key.trim() == lastSearchKey)
+        {
+            return;
+        } else {
+            lastSearchKey = key.trim();
+        }
 
         if (key.trim() == "") {
             AllLeadsGridClient.ClearFilter();
             return;
         }
 
+        var filterCondition = "";
         filterCondition = "[PropertyInfo.PropertyAddress] LIKE '%" + key + "%' OR [Owner] LIKE '%" + key + "%'";
         filterCondition += " OR [OccupiedBy] LIKE '%" + key + "%'";
         AllLeadsGridClient.ApplyFilter(filterCondition);
