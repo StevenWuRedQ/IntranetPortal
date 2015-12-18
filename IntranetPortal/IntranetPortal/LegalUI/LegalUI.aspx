@@ -63,7 +63,7 @@
 
             <div ui-layout-container id="dataPanelDiv">
                 <asp:Panel ID="datapanel" runat="server" Height="100%">
-                    <div id="legalPanelContent" style="height:100%">
+                    <div id="legalPanelContent" style="height: 100%">
                         <script>
                             window.onbeforeunload = function () {
                                 if (CaseDataChanged())
@@ -143,7 +143,6 @@
                                         <a class="tab_button_a">
                                             <i class="fa fa-list-ul head_tab_icon_padding"></i>
                                             <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
-
                                         </a>
                                         <div class="shot_sale_sub">
                                             <ul class="nav  clearfix" role="tablist">
@@ -194,9 +193,9 @@
                                         <span class="dropdown">
                                             <i class="fa fa-caret-down sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="More" data-toggle="dropdown"></i>
                                             <ul class="dropdown-menu" style="background-color: transparent; border: none; margin-top: 10px; box-shadow: none">
-                                                <li><i class="fa fa-users sale_head_button sale_head_button_left tooltip-examples" style="color: #ff400d" title="" data-original-title="Contacts" onclick="VendorsPopupClient.Show()"></i></li>
-                                                <li><i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" style="color: #ff400d" title="" data-original-title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i></li>
-                                                <li><i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" style="color: #ff400d" title="" data-original-title="Print" onclick=""></i></li>
+                                                <li><i class="fa fa-users sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="Contacts" onclick="VendorsPopupClient.Show()"></i></li>
+                                                <li><i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i></li>
+                                                <li><i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="Print" onclick=""></i></li>
                                             </ul>
                                         </span>
                                     </li>
