@@ -62,8 +62,8 @@
 
 
             <div ui-layout-container id="dataPanelDiv">
-                <asp:Panel ID="datapanel" runat="server">
-                    <div id="legalPanelContent">
+                <asp:Panel ID="datapanel" runat="server" Height="100%">
+                    <div id="legalPanelContent" style="height: 100%">
                         <script>
                             window.onbeforeunload = function () {
                                 if (CaseDataChanged())
@@ -84,6 +84,7 @@
                         <div id="vendor_btn" style="display: none">
                             <i class="fa fa-users icon_btn" title="Vendors" onclick="VendorsPopupClient.Show()"></i>
                         </div>
+
                         <div id="contact_popup" style="display: none;">
                             <div>
                                 <ul class="ss_form_box clearfix">
@@ -120,11 +121,11 @@
                         </div>
 
                         <div style="align-content: center; height: 100%">
-                            <!-- Nav tabs -->
 
+                            <!-- Nav tabs -->
                             <% If Not HiddenTab Then%>
-                            <div class="legal-menu row" style="margin-left: 0px; margin-right: 0px">
-                                <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
+                            <div class="legal-menu row" style="position: relative; top: 0; margin: 0; z-index: 1; width: 100%">
+                                <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white">
                                     <li class="active short_sale_head_tab">
                                         <a href="#LegalTab" role="tab" data-toggle="tab" class="tab_button_a">
                                             <i class="fa fa-info-circle  head_tab_icon_padding"></i>
@@ -139,12 +140,9 @@
                                     </li>
 
                                     <li class="short_sale_head_tab">
-
-
                                         <a class="tab_button_a">
                                             <i class="fa fa-list-ul head_tab_icon_padding"></i>
                                             <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
-
                                         </a>
                                         <div class="shot_sale_sub">
                                             <ul class="nav  clearfix" role="tablist">
@@ -170,9 +168,8 @@
 
                                             </ul>
                                         </div>
-
-
                                     </li>
+
                                     <li class="pull-right" style="margin-right: 30px; color: #ffa484">
                                         <i class="fa fa-clock-o sale_head_button sale_head_button_left tooltip-examples" ng-click="CheckWorkHours()" data-original-title="Work hours"></i>
                                         <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
@@ -196,16 +193,18 @@
                                         <span class="dropdown">
                                             <i class="fa fa-caret-down sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="More" data-toggle="dropdown"></i>
                                             <ul class="dropdown-menu" style="background-color: transparent; border: none; margin-top: 10px; box-shadow: none">
-                                                <li><i class="fa fa-users sale_head_button sale_head_button_left tooltip-examples" style="color: #ff400d" title="" data-original-title="Contacts" onclick="VendorsPopupClient.Show()"></i></li>
-                                                <li><i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" style="color: #ff400d" title="" data-original-title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i></li>
-                                                <li><i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" style="color: #ff400d" title="" data-original-title="Print" onclick=""></i></li>
+                                                <li><i class="fa fa-users sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="Contacts" onclick="VendorsPopupClient.Show()"></i></li>
+                                                <li><i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i></li>
+                                                <li><i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="Print" onclick=""></i></li>
                                             </ul>
                                         </span>
                                     </li>
                                 </ul>
                             </div>
                             <% End If%>
+
                             <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerPreview Or ShowReassginBtn() OrElse IntranetPortal.LegalCaseManage.IsManager(Page.User.Identity.Name) Then%>
+
                             <dx:ASPxPopupControl ClientInstanceName="popupSelectAttorneyCtr" Width="300px" Height="300px"
                                 MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
                                 HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
@@ -217,23 +216,24 @@
                                         </dx:ASPxListBox>
                                         <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
                                             <ClientSideEvents Click="function(s,e){
-                                        var item = listboxEmployeeClient.GetSelectedItem();
-                                        if(item == null)
-                                        {
-                                             alert('Please select attorney.');
-                                             return;
-                                         }
-                                        popupSelectAttorneyCtr.PerformCallback('Save|' + leadsInfoBBLE + '|' + item.text);
-                                        popupSelectAttorneyCtr.Hide();
-                                        }" />
+                                                var item = listboxEmployeeClient.GetSelectedItem();
+                                                if(item == null)
+                                                {
+                                                     alert('Please select attorney.');
+                                                     return;
+                                                 }
+                                                popupSelectAttorneyCtr.PerformCallback('Save|' + leadsInfoBBLE + '|' + item.text);
+                                                popupSelectAttorneyCtr.Hide();
+                                                }"></ClientSideEvents>
                                         </dx:ASPxButton>
                                     </dx:PopupControlContentControl>
                                 </ContentCollection>
                                 <ClientSideEvents Closing="function(s,e){
                                               if (typeof gridTrackingClient != 'undefined')
                                                     gridTrackingClient.Refresh();
-                                        }" />
+                                        }"></ClientSideEvents>
                             </dx:ASPxPopupControl>
+
                             <% End If%>
 
                             <dx:ASPxPopupControl ClientInstanceName="popupBackToResearch" Width="300px" Height="300px"
@@ -280,7 +280,6 @@
 
                             </script>
 
-
                             <style>
                                 .AttachmentSpan {
                                     margin-left: 10px;
@@ -307,14 +306,14 @@
                             </div>
 
 
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="LegalTab">
+                            <div class="tab-content" style="height: 100%">
+                                <div class="tab-pane active" id="LegalTab" style="height: 100%">
                                     <uc1:LegalTab runat="server" ID="LegalTab1" />
                                     <script>
                                         LegalShowAll = true;
                                     </script>
                                 </div>
-                                <div class="tab-pane" id="DocumentTab">
+                                <div class="tab-pane" id="DocumentTab" style="height: 100%">
                                     <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
                                 </div>
                                 <div class="tab-pane load_bg" id="more_leads">
@@ -328,6 +327,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="modal fade" id="WorkPopUp">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -370,7 +370,7 @@
                             </div>
                             <!-- /.modal-dialog -->
                         </div>
-                        <!-- /.modal -->
+                        <!-- modal -->
                         <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
                             HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true" CloseAction="CloseButton"
                             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -391,6 +391,7 @@
                             </ContentCollection>
                             <ClientSideEvents CloseUp="function(s,e){}" />
                         </dx:ASPxPopupControl>
+
                         <div runat="server" id="SencnedAction" visible="False" style="padding: 0 10px">
                             <div>
                                 <script type="text/javascript">
@@ -430,9 +431,11 @@
                                 </script>
                             </div>
                         </div>
+
                         <div runat="server" id="MangePreview" visible="False">
                             <uc1:ManagePreViewControl runat="server" ID="ManagePreViewControl" />
                         </div>
+
                         <uc1:Common runat="server" ID="Common" />
                     </div>
                 </asp:Panel>

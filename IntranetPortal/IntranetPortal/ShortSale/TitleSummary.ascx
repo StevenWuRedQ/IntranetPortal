@@ -63,17 +63,23 @@
         var url = '/ShortSale/ShortSale.aspx?ShowList=1&CaseId=' + CaseId;
         window.location.href = url;
     }
-
-    function SearchGrid() {
-
-        var filterCondition = "";
+    
+    var lastSearchKey = "";
+    function SearchGrid() {                
         var key = document.getElementById("QuickSearch").value;
+        if (key.trim() == lastSearchKey)
+        {
+            return;
+        } else {
+            lastSearchKey = key.trim();
+        }
 
         if (key.trim() == "") {
             AllLeadsGridClient.ClearFilter();
             return;
         }
 
+        var filterCondition = "";
         filterCondition = "[PropertyInfo.PropertyAddress] LIKE '%" + key + "%' OR [Owner] LIKE '%" + key + "%'";
         filterCondition += " OR [OccupiedBy] LIKE '%" + key + "%'";
         AllLeadsGridClient.ApplyFilter(filterCondition);
@@ -458,7 +464,7 @@
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1" CellStyle-CssClass="cell_hover">
                                                     <DataItemTemplate>
-                                                        <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Call Back", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
+                                                        <div class="group_lable" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataTextColumn FieldName="CallbackDate" VisibleIndex="2" Visible="false" Settings-SortMode="Custom">
@@ -929,8 +935,8 @@
                                     </div>
                                     <div style="padding-top: 40px; font-size: 24px; color: white">
                                         <i class="fa fa-check-circle icon_btn" onclick="notesCallbackPanel.PerformCallback('Save|<%= CurrentNote.NoteId%>')"></i>
-                                        <i class="fa fa-times-circle icon_btn note_button_margin" style="display: none"></i>
-                                        <i class="fa fa-trash-o icon_btn note_button_margin" onclick='notesCallbackPanel.PerformCallback("Delete|<%= CurrentNote.NoteId%>")'></i>
+                                        <i class="fa fa-times-circle icon_btn button_margin" style="display: none"></i>
+                                        <i class="fa fa-trash-o icon_btn button_margin" onclick='notesCallbackPanel.PerformCallback("Delete|<%= CurrentNote.NoteId%>")'></i>
                                     </div>
                                 </div>
                             </div>

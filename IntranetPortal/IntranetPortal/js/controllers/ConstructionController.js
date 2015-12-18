@@ -1,12 +1,7 @@
 ﻿angular.module('PortalApp')
 .controller('ConstructionCtrl', ['$scope', '$http', '$interpolate', 'ptCom', 'ptContactServices', 'ptEntityService', 'ptShortsSaleService', 'ptLeadsService', 'ptConstructionService', function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
 
-    $scope._ = _;
-    $scope.arrayRemove = ptCom.arrayRemove;
-    $scope.ptContactServices = ptContactServices;
-    $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
-
-    $scope.CSCaseModel = function () {
+    var CSCaseModel = function () {
         this.CSCase = {
             InitialIntake: {},
             Photos: {},
@@ -25,7 +20,7 @@
             Comments: []
         }
     }
-    $scope.PercentageModel = function () {
+    var PercentageModel = function () {
         this.intake = {
             count: 0,
             finished: 0,
@@ -44,10 +39,12 @@
         }
     }
 
+    $scope._ = _;
+
     // scope variables defination
     $scope.ReloadedData = {}
-    $scope.CSCase = new $scope.CSCaseModel();
-    $scope.percentage = new $scope.PercentageModel();
+    $scope.CSCase = new CSCaseModel();
+    $scope.percentage = new PercentageModel();
 
     $scope.UTILITY_SHOWN = {
         'ConED': 'CSCase.CSCase.Utilities.ConED_Shown',
@@ -84,14 +81,29 @@
 
     // end scope variables defination
 
-    $scope.reload = function () {
-        $scope.ReloadedData = {};
-        $scope.CSCase = new $scope.CSCaseModel();
-        $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} });
-        $scope.percentage = new $scope.PercentageModel();
-        $scope.clearWarning();
+    $scope.arrayRemove = ptCom.arrayRemove;
+    $scope.ptContactServices = ptContactServices;
+    $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
+    $scope.getRunnerList = function () {
+        var url = "/api/ConstructionCases/GetRunners";
+        $http.get(url)
+            .then(function (res) {
+                if (res.data) {
+                    $scope.RUNNER_LIST = res.data;
+                }
+            });
+    }();
+    $scope.setPopupVisible = function (modelName, bVal) {
+        $scope.$eval(modelName + '=' + bVal);
     }
 
+    $scope.reload = function () {
+        $scope.ReloadedData = {};
+        $scope.CSCase = new CSCaseModel();
+        $scope.ensurePush('CSCase.CSCase.Utilities.Floors', { FloorNum: '?', ConED: {}, EnergyService: {}, NationalGrid: {} });
+        $scope.percentage = new PercentageModel();
+        $scope.clearWarning();
+    }
     $scope.init = function (bble, callback) {
         ptCom.startLoading();
         bble = bble.trim();
@@ -173,12 +185,12 @@
         if (newValue) {
             var ds = $scope.UTILITY_SHOWN;
             var target = $scope.CSCase.CSCase.Utilities.Company;
-            _.each(target, function (k, i) {
+            _.each(target, function(k, i) {
                 $scope.$eval(ds[k] + '=false');
-            })
-            _.each(newValue, function (el, i) {
+            });
+            _.each(newValue, function(el, i) {
                 $scope.$eval(ds[el] + '=true');
-            })
+            });
         }
     }, true);
 
@@ -208,6 +220,7 @@
     $scope.showPopover = function (e) {
         aspxConstructionCommentsPopover.ShowAtElement(e.target);
     }
+
     $scope.addComment = function (comment) {
         var newComments = {}
         newComments.comment = comment;
@@ -231,7 +244,6 @@
     /* end active tab */
 
     /* highlight */
-
     $scope.isHighlight = function (criteria) {
         return $scope.$eval(criteria);
     }
@@ -241,28 +253,22 @@
     }
 
     $scope.initWatchedModel = function () {
-        _.each($scope.WATCHED_MODEL, function (el, i) {
+        _.each($scope.WATCHED_MODEL, function(el, i) {
             $scope.$eval(el.backedModel + '=' + el.model);
-        })
+        });
     }
     $scope.checkWatchedModel = function () {
-        var res = '';
-        _.each($scope.WATCHED_MODEL, function (el, i) {
-            if ($scope.$eval(el.backedModel + '!=' + el.model)) {
-                $scope.$eval(el.backedModel + '=' + el.model);
-                res += (el.info + ' changes to ' + $scope.$eval(el.model) + '.<br>')
+        var res = "";
+        _.each($scope.WATCHED_MODEL, function(el, i) {
+            if ($scope.$eval(el.backedModel + "!=" + el.model)) {
+                $scope.$eval(el.backedModel + "=" + el.model);
+                res += (el.info + " changes to " + $scope.$eval(el.model) + ".<br>");
             }
-        })
+        });
         if (res) AddActivityLog(res);
     }
 
     /* end highlight */
-
-    /* Popup */
-    $scope.setPopupVisible = function (modelName, bVal) {
-        $scope.$eval(modelName + '=' + bVal);
-    }
-    /* end Popup*/
 
     /* header editing */
     $scope.HeaderEditing = false;
@@ -281,6 +287,7 @@
         $scope.ensurePush('CSCase.CSCase.Violations.ECBViolations');
         $scope.setPopupVisible('ReloadedData.ECBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.ECBViolations.length - 1), true);
     }
+
     $scope.fetchDOBViolations = function () {
         ptCom.confirm("<h3 style='color:red'>Warning!!!</h3>Getting information from DOB takes a while.<br>And it will <b>REPLACE</b> your current Data, are you sure to continue?", "Warning")
         .then(function (confirmed) {
@@ -400,7 +407,6 @@
     $scope.GetModifyUserUrl = function () {
         return "/api/ConstructionCases/LastModifyUser/" + $scope.CSCase.BBLE;
     }
-
     /****** end check file be modify*********/
 
     /* printWindows*/
@@ -409,23 +415,14 @@
     }
     /* end printWindows */
 
+    /* open form windows */
     $scope.openInitialForm = function () {
         window.open("/Construction/ConstructionInitialForm.aspx?bble=" + $scope.CSCase.BBLE, 'Initial Form', 'width=1280, height=960')
     }
-
     $scope.openBudgetForm = function () {
         window.open("/Construction/ConstructionBudgetForm.aspx?bble=" + $scope.CSCase.BBLE, 'Budget Form', 'width=1024, height=768')
     }
-
-    $scope.getRunnerList = function () {
-        var url = "/api/ConstructionCases/GetRunners";
-        $http.get(url)
-        .then(function (res) {
-            if (res.data) {
-                $scope.RUNNER_LIST = res.data;
-            }
-        })
-    }();
+    /* end open form windows */
 
     $scope.updateInitialFormOwner = function () {
         var url = "/api/ConstructionCases/UpdateInitialFormOwner?BBLE=" + $scope.CSCase.BBLE + "&owner=" + $scope.CSCase.CSCase.InitialIntake.InitialFormAssign
@@ -436,11 +433,11 @@
             console.log("Assign Initial Form owner Success.")
         }, function error(res) {
             console.log("Fail to assign Initial Form owner.")
-        })
+        });
     }
 
     $scope.getOrdersLength = function () {
-
+        return
     }
 }]
 );

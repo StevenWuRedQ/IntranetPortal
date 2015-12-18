@@ -211,8 +211,6 @@ Partial Public Class LegalCase
                                                     .Status = lcase.Status
                                                   }
                                               End Function).ToList
-
-
         End Using
     End Function
 

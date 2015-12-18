@@ -18,16 +18,6 @@
             if (rowIndex >= 0) {
                 NavigateToLeadsInfo(s.GetRowKey(rowIndex));
                 return;
-
-                //if (ContentCallbackPanel.InCallback()) {
-                //    postponedCallbackRequired = true;
-                //}
-                //else {
-                //    var rowKey = s.GetRowKey(rowIndex);
-                //    debugger;
-                //    if (rowKey != null)
-                //        OnGetRowValues(rowKey);
-                //}
             }
         }
 
@@ -70,85 +60,18 @@
         }
 
         function OnEndCallback(s, e) {
-
             return;
-            $("#prioity_content").mCustomScrollbar(
-             {
-                 theme: "minimal-dark"
-             }
-             );
-            $("#ctl00_MainContentPH_ASPxSplitter1_LeadsInfo_ASPxCallbackPanel2_contentSplitter_ownerInfoCallbackPanel").mCustomScrollbar(
-                {
-                    theme: "minimal-dark"
-                }
-             );
-
         }
 
         function onInitScorllBar() {
             return;
-            $(".dxgvCSD").each(function (ind) {
-                var is_list = $(this).parents("#assign_leads_list").length > 0;
-
-                var ladfucntion = {
-                    onScroll: function () {
-                        var position = this.mcs.topPct;
-                        if (position > 90) {
-                            gridLeads.NextPage();
-                        }
-                    }
-                }
-
-
-                if (is_list) {
-                    $(this).mCustomScrollbar(
-                        {
-                            theme: "minimal-dark",
-                            callbacks: ladfucntion
-                        }
-                     );
-                } else {
-                    $(this).mCustomScrollbar(
-                        {
-                            theme: "minimal-dark",
-
-                        }
-                    );
-                }
-            });
-
-            $('#ctl00_MainContentPH_ASPxSplitter1_listboxEmployee_D').mCustomScrollbar(
-              {
-                  theme: "minimal-dark"
-              }
-            );
-            $("#prioity_content").mCustomScrollbar(
-             {
-                 theme: "minimal-dark"
-             }
-             );
-            $("#ctl00_MainContentPH_ASPxSplitter1_LeadsInfo_ASPxCallbackPanel2_contentSplitter_ownerInfoCallbackPanel").mCustomScrollbar(
-                {
-                    theme: "minimal-dark"
-                }
-             );
         }
 
-        function ResizeGrid(pane) {
-            if (pane.name == "gridPanel") {
-                var height = pane.GetClientHeight();
-                gridLeads.SetHeight(height);
-            }
-        }
-
-        $(document).ready(function () {
-            // Handler for .ready() called.
-            //onInitScorllBar();
-        });
         function filterOutRecycel(filtedRecyceled) {
             var condtion = filtedRecyceled ? '[IsRecycled] = false' : '';
             gridLeads.ApplyFilter(condtion);
         }
+       
     </script>
     <style type="text/css">
         .rand-button:disabled {
@@ -191,15 +114,14 @@
                                             <span id="gridSelectCount">0</span> selected
                                         </span>
                                         
-                                        <span style="margin-left:10px">
+                                        <span style="margin-left: 10px">
                                             <input type="checkbox" id="cbfilterOutRecycel" name="cbfilterOutExist" class="font_12" onchange="filterOutRecycel(this.checked)">
-                                            <label for="cbfilterOutRecycel" class="font_12" style="padding-top: 20px;float:none">
+                                            <label for="cbfilterOutRecycel" class="font_12" style="padding-top: 20px; float: none">
                                                 <span class="upcase_text">Don't Show Recycled Leads</span>
                                             </label>
                                         </span>
 
                                         <div style="float: right">
-                                            <%--  <a href="/LeadsGenerator/LeadsGenerator.aspx" target="_self" class="rand-button rand-button-blue">Create Leads</a>--%>
                                             <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" Text='<i class="fa  fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Export to Excel"></i>'>                                                                
                                             </asp:LinkButton>
                                             <input type="button" value="Create Leads" class="rand-button rand-button-blue rand-button-pad" onclick="window.location.href = '/LeadsGenerator/LeadsGenerator.aspx'" />
@@ -226,9 +148,6 @@
                                                 <%# String.Format("<span style=""font-weight: 900;"">{0}</span>-{1}", String.Format("{0} {1}", Eval("Number"), Eval("Street")).Trim, Eval("Owner"))%>
                                             </DataItemTemplate>
                                         </dx:GridViewDataTextColumn>
-                                       <%-- <dx:GridViewDataColumn FieldName="ZipCode">
-                                            
-                                        </dx:GridViewDataColumn>--%>
                                         <dx:GridViewDataTextColumn FieldName="Neighborhood" Width="85px" Caption="Neighbor" Settings-HeaderFilterMode="CheckedList"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataSpinEditColumn FieldName="NYCSqft" Width="60px" Caption="SQFT" Settings-HeaderFilterMode="CheckedList"></dx:GridViewDataSpinEditColumn>
                                         <dx:GridViewDataTextColumn FieldName="LotDem" Width="100px" Settings-HeaderFilterMode="CheckedList"></dx:GridViewDataTextColumn>
@@ -248,9 +167,8 @@
                                             </DataItemTemplate>
                                         </dx:GridViewDataColumn>
                                     </Columns>
-                                    <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true"
-                                        EnableRowHotTrack="True" />
-                                    <Settings ShowFilterRowMenu="true" ShowHeaderFilterButton="true" ShowColumnHeaders="true" VerticalScrollableHeight="1000" GridLines="Both"></Settings>
+                                    <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true" EnableRowHotTrack="True" />
+                                    <Settings ShowFilterRowMenu="true" ShowHeaderFilterButton="true" ShowColumnHeaders="true" GridLines="Both" VerticalScrollableHeight="1000"></Settings>
                                     <SettingsPager Mode="EndlessPaging" PageSize="50"></SettingsPager>
                                     <Styles>
                                         <Header HorizontalAlign="Center"></Header>
@@ -282,9 +200,9 @@
                     <dx:SplitterPane Size="70px">
                         <ContentCollection>
                             <dx:SplitterContentControl>
-                                <table style="width: 600px; float: right; margin-top: 10px;">
+                                <table id="assign_leads_footer" style="float: right; position:fixed; bottom:0; height: 70px; background:white">
                                     <tr>
-                                        <td>
+                                        <td style="padding-left:30px;">
                                             <dx:ASPxLabel Text="Select Employee:" ID="ASPxLabel1" runat="server" Font-Size="Large"></dx:ASPxLabel>
                                         </td>
                                         <td>
@@ -297,12 +215,11 @@
                                         <td>
                                             <dx:ASPxCheckBox runat="server" Text="Archive Logs" ID="cbArchived"></dx:ASPxCheckBox>
                                         </td>
+                                        <td>&nbsp;&nbsp;</td>
                                         <td>
-
                                             <input type="button" id="btnAssign" value="Assign" class="rand-button rand-button-blue rand-button-pad" disabled="disabled" onclick="{ if (listboxEmployee.GetIsValid()) gridLeads.PerformCallback('AssignLeads'); }" />
                                             &nbsp;&nbsp;
                                       <input type="button" value="Rules" class="rand-button rand-button-blue rand-button-pad" onclick="AssignLeadsPopupClient.Show();" />
-
                                             <button type="button" onclick="popupAssignRules.Show();" style="display: none">Rules Old</button>
                                         </td>
                                     </tr>
@@ -311,12 +228,6 @@
                         </ContentCollection>
                     </dx:SplitterPane>
                 </Panes>
-                <%-- <ContentCollection>
-                    <dx:SplitterContentControl runat="server">
-                        <div style="width: 100%; height: 100%; /*border: 1px solid gray; */ /*border-bottom: 1px solid gray; */">
-                        </div>
-                    </dx:SplitterContentControl>
-                </ContentCollection>--%>
             </dx:SplitterPane>
             <dx:SplitterPane Name="RightPane" ScrollBars="Auto" ContentUrl="about:blank">
                 <ContentCollection>
@@ -326,7 +237,6 @@
                 </ContentCollection>
             </dx:SplitterPane>
         </Panes>
-        <ClientSideEvents PaneResized="function(s,e){ResizeGrid(e.pane);}" />
     </dx:ASPxSplitter>
     <dx:ASPxCallback runat="server" ID="updateLeadsType" ClientInstanceName="updateLeadsType" OnCallback="updateLeadsType_Callback">
         <ClientSideEvents EndCallback="function(){gridLeads.Refresh();}" />

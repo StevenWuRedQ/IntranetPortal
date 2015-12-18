@@ -798,7 +798,7 @@
                 <tbody>
                     <tr>
                         <td>
-                            <div class="priority_info_label priority_info_lable_org">
+                            <div class="priority_info_label bg_orange">
                                 <span class="font_black"><%= IntranetPortal.Utility.TotalLeadsCount.ToString %> </span><span class="font_extra_light">Leads</span>
                             </div>
                         </td>

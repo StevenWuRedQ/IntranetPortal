@@ -6,91 +6,112 @@
 <%@ Register Src="~/LegalUI/LegalWriteupTab.ascx" TagPrefix="uc1" TagName="LegalWriteupTab" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
+<div id="prioity_content">
+    <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
+        <div style="font-size: 30px">
+            <span>
+                <i class="fa fa-home"></i>
+                <span style="margin-left: 19px;">{{GetCaseInfo().Address}}&nbsp; {{LeadsInfo.BoroughName}} &nbsp; <span style="color: red">{{LegalCase.SaleDate|date}}</span></span>
+            </span>
+            <span class="time_buttons" style="margin-right: 30px" ng-click="ShowECourts(LegalCase.PropertyInfo.Borough, 'eCourts')" ng-show="LegalCase.PropertyInfo.Borough!=1">eCourts</span>
+            <span class="time_buttons" onclick="ShowDOBWindow(GetLegalData().PropertyInfo.Borough,GetLegalData().PropertyInfo.Block, GetLegalData().PropertyInfo.Lot)">DOB</span>
+            <span class="time_buttons" onclick="ShowAcrisMap(leadsInfoBBLE)">Acris</span>
+            <span class="time_buttons" onclick="ShowPropertyMap(leadsInfoBBLE)">Maps</span>
+            <span class="time_buttons" onclick="" runat="server" visible="false" id="btnAssignAttorney">Assign Attorney</span>
+            <span class="time_buttons" onclick="$('#RequestModal').modal()" style="display: none">Request Document</span>
+            <br />
+
+            <span class="time_buttons" ng-show="LegalCase.PreQuestions" onclick="window.open('/LegalUI/LegalPreQuestions.aspx?r=true&bble=' + leadsInfoBBLE, 'LegalPreQuestion', 'width=1024, height=800');">Show Questions Form</span>
+        </div>
+        <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; visibility: visible">{{GetCaseInfo().Name}}</span>
+    </div>
+    <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px; margin: 0">
+        <div class="note_item" style="background: white">
+            <div style="overflow: auto; max-height: 100px">
+                <table style="width: 100%;" class="table-striped">
+                    <tbody>
+                        <tr ng-show="LegalECourt" style="color: red">
+                            <td style="width: 20px">
+                                <i class="fa fa-exclamation-circle note_img"></i>
+                            </td>
+                            <td>
+                                <div class="note_text">Get new Appearance Date : {{LegalECourt.AppearanceDate |date:'MM/dd/yyyy'}}</div>
+                            </td>
+
+                        </tr>
+                        <tr ng-show="LegalCase.Description!=null">
+                            <td style="width: 20px">
+                                <i class="fa fa-exclamation-circle note_img"></i>
+                            </td>
+                            <td>
+                                <div class="note_text">Agent description : {{LegalCase.Description}}</div>
+                            </td>
+                            <td style="width: 30px; padding-right: 25px;">&nbsp;
+                            </td>
+                        </tr>
+                        <tr ng-repeat="n in hSummery" ng-show="n.visible">
+                            <td style="width: 30px">
+                                <i class="fa fa-exclamation-circle note_img"></i>
+                            </td>
+                            <td>
+                                <div class="note_text">{{n.Description}}</div>
+                            </td>
+                            <td style="width: 30px; padding-right: 25px;">&nbsp;
+                            </td>
+                        </tr>
+
+                        <tr ng-repeat="n in LegalCase.LegalComments">
+                            <td style="width: 30px">
+                                <i class="fa fa-exclamation-circle note_img"></i>
+                            </td>
+                            <td>
+                                <div class="note_text">{{n.Comment}}</div>
+                            </td>
+                            <td style="width: 30px; padding-right: 25px;">
+                                <i class="fa fa-times" style="font-size: 18px; color: #b1b2b7; cursor: pointer" ng-click="DeleteComments($index)"></i>
+
+                            </td>
+                        </tr>
 
 
-<script type="text/javascript">
+                    </tbody>
+                </table>
 
-    $(document).ready(function () {
-        // Handler for .ready() called.
-        format_input();
-        $(".ss_phone").each(function (index) {
-            format_phone(this);
-        });
-    });
-    var short_sale_case_data = null;
-    function ShowSelectParty() {
-        VendorsPopupClient.Show();
-    }
-    function getShortSaleInstanceComplete(s, e) {
-        debugger;
-        short_sale_case_data = e != null ? $.parseJSON(e.result) : ShortSaleCaseData; //ShortSaleCaseData;//;
-        ShortSaleCaseData = short_sale_case_data;
-        short_sale_case_data.PropertyInfo.UpdateBy = "Chris Yan";
+            </div>
 
 
-        ShortSaleDataBand(1);
+            <i class="fa fa-plus-circle note_img tooltip-examples" title="" style="color: #3993c1; cursor: pointer" ng-click="ShowAddPopUp($event);" data-original-title="Add Notes"></i>
+        </div>
+    </div>
+</div>
 
-        clearHomeOwner();
-        //console.log("the data is give to save is 222", JSON.stringify(ShortSaleCaseData));
-        var strJson = JSON.stringify(ShortSaleCaseData);
-
-        //d_alert(strJson);
-        if (e == null) {
-            SaveClicklCallbackCallbackClinet.PerformCallback(strJson);
-        }
-    }
-
-    function saveComplete(s, e) {
-        //RefreshContent();
-        ShortSaleCaseData = $.parseJSON(e.result);
-        clearArray(ShortSaleCaseData.Mortgages);
-        clearArray(ShortSaleCaseData.PropertyInfo.Owners);
-
-        ShortSaleDataBand(2);
-    }
-
-    function ShowAcrisMap(propBBLE) {
-        //var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + propBBLE;
-
-        ShowPopupMap("https://a836-acris.nyc.gov/DS/DocumentSearch/BBL", "Acris");
-    }
-
-    function ShowDOBWindow(boro, block, lot) {
-        if (block == null || block == "" || lot == null || lot == "" || boro == null || boro == "") {
-            alert("The property info isn't complete. Please try to refresh data.");
-            return;
-        }
-
-        var url = "http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?boro=" + boro + "&block=" + encodeURIComponent(block) + "&lot=" + encodeURIComponent(lot);
-        ShowPopupMap(url, "DOB");
-        $("#addition_info").html(' ');
-    }
-
-    function ShowPopupMap(url, header, subHeader) {
-        aspxAcrisControl.SetContentHtml("Loading...");
-        aspxAcrisControl.SetContentUrl(url);
-
-        aspxAcrisControl.SetHeaderText(header);
-        //header = header + "(Borough:" + ShortSaleCaseData.PropertyInfo.Borough + "Lot:" + ShortSaleCaseData.PropertyInfo.Lot + ")";
-        $('#pop_up_header_text').html(header);
-
-        $('#addition_info').html(subHeader ? subHeader : '');
-
-        aspxAcrisControl.Show();
-    }
-
-    function SaveLeadsComments(s, e) {
-        var comments = txtLeadsComments.GetText();
-        leadsCommentsCallbackPanel.PerformCallback("Add|" + comments);
-        txtLeadsComments.SetText("");
-        aspxAddLeadsComments.Hide();
-    }
-
-    function DeleteComments(commentId) {
-        leadsCommentsCallbackPanel.PerformCallback("Delete|" + commentId);
-    }
-
-</script>
+<!--detial Nav tabs -->
+<div style="height: 100%">
+    <ul class="nav nav-tabs overview_tabs" role="tablist" style="position: relative; top: 0">
+        <li class="short_sale_tab active"><a class="shot_sale_tab_a " href="#Summary" role="tab" data-toggle="tab">Summary</a></li>
+        <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Foreclosure_Review" role="tab" data-toggle="tab">Foreclosure Review</a></li>
+        <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Secondary_Actions" role="tab" data-toggle="tab">Secondary Actions</a></li>
+        <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#LegalWriteupTab" role="tab" data-toggle="tab">Write Up</a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="wrapper-content" style="height: 95%; overflow-y: scroll">
+        <div class="tab-content" style="margin-bottom: 480px">
+            <div class="tab-pane active" id="Summary">
+                <uc1:LegalSummaryTab runat="server" ID="LegalSummaryTab" />
+            </div>
+            <div class="tab-pane " id="Foreclosure_Review">
+                <uc1:LegalForeclosureReviewTab runat="server" ID="LegalForeclosureReviewTab" />
+            </div>
+            <div class="tab-pane" id="Secondary_Actions">
+                <uc1:LegalSecondaryActionTab runat="server" ID="LegalSecondaryActionTab" />
+            </div>
+            <div class="tab-pane" id="LegalWriteupTab">
+                <uc1:LegalWriteupTab runat="server" ID="LegalWriteupTab" />
+            </div>
+        </div>
+    </div>
+</div>
+<input hidden="" id="short_sale_case_id" value="23">
 
 <div class="modal fade" id="RequestModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -146,132 +167,6 @@
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
-
-<div class="row" style="margin-left: 0; margin-right: 0">
-    <input hidden="" id="short_sale_case_id" value="23">
-    <div style="padding-top: 5px">
-        <div style="" id="prioity_content">
-            <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
-                <div style="font-size: 30px">
-                    <span>
-                        <i class="fa fa-home"></i>
-                        <span style="margin-left: 19px;">{{GetCaseInfo().Address}}&nbsp; {{LeadsInfo.BoroughName}} &nbsp; <span style="color: red">{{LegalCase.SaleDate|date}}</span></span>
-                    </span>
-                    <span class="time_buttons" style="margin-right: 30px" ng-click="ShowECourts(LegalCase.PropertyInfo.Borough, 'eCourts')" ng-show="LegalCase.PropertyInfo.Borough!=1">eCourts</span>
-                    <span class="time_buttons" onclick="ShowDOBWindow(GetLegalData().PropertyInfo.Borough,GetLegalData().PropertyInfo.Block, GetLegalData().PropertyInfo.Lot)">DOB</span>
-                    <span class="time_buttons" onclick="ShowAcrisMap(leadsInfoBBLE)">Acris</span>
-                    <span class="time_buttons" onclick="ShowPropertyMap(leadsInfoBBLE)">Maps</span>
-                    <span class="time_buttons" onclick="" runat="server" visible="false" id="btnAssignAttorney">Assign Attorney</span>
-                    <span class="time_buttons" onclick="$('#RequestModal').modal()" style="display: none">Request Document</span>
-                    <br />
-                    
-                    <span class="time_buttons" ng-show="LegalCase.PreQuestions" onclick="window.open('/LegalUI/LegalPreQuestions.aspx?r=true&bble=' + leadsInfoBBLE, 'LegalPreQuestion', 'width=1024, height=800');">Show Questions Form</span>
-                </div>
-                <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; visibility: visible">{{GetCaseInfo().Name}}</span>
-            </div>
-
-            <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
-
-                <div class="note_item" style="background: white">
-
-                    <div style="overflow: auto; max-height: 100px">
-                        <table style="width: 100%;" class="table-striped">
-                            <tbody>
-                                 <tr ng-show="LegalECourt" style="color:red">
-                                    <td style="width: 20px">
-                                        <i class="fa fa-exclamation-circle note_img"></i>
-                                    </td>
-                                    <td>
-                                        <div class="note_text">Get new Appearance Date : {{LegalECourt.AppearanceDate |date:'MM/dd/yyyy'}}</div>
-                                    </td>
-                                   
-                                </tr>
-                                <tr ng-show="LegalCase.Description!=null">
-                                    <td style="width: 20px">
-                                        <i class="fa fa-exclamation-circle note_img"></i>
-                                    </td>
-                                    <td>
-                                        <div class="note_text">Agent description : {{LegalCase.Description}}</div>
-                                    </td>
-                                    <td style="width: 30px; padding-right: 25px;">&nbsp;
-                                    </td>
-                                </tr>
-                                <tr ng-repeat="n in hSummery" ng-show="n.visible">
-                                    <td style="width: 30px">
-                                        <i class="fa fa-exclamation-circle note_img"></i>
-                                    </td>
-                                    <td>
-                                        <div class="note_text">{{n.Description}}</div>
-                                    </td>
-                                    <td style="width: 30px; padding-right: 25px;">&nbsp;
-                                    </td>
-                                </tr>
-
-                                <tr ng-repeat="n in LegalCase.LegalComments">
-                                    <td style="width: 30px">
-                                        <i class="fa fa-exclamation-circle note_img"></i>
-                                    </td>
-                                    <td>
-                                        <div class="note_text">{{n.Comment}}</div>
-                                    </td>
-                                    <td style="width: 30px; padding-right: 25px;">
-                                        <i class="fa fa-times" style="font-size: 18px; color: #b1b2b7; cursor: pointer" ng-click="DeleteComments($index)"></i>
-
-                                    </td>
-                                </tr>
-
-
-                            </tbody>
-                        </table>
-
-                    </div>
-
-
-                    <i class="fa fa-plus-circle note_img tooltip-examples" title="" style="color: #3993c1; cursor: pointer" ng-click="ShowAddPopUp($event);" data-original-title="Add Notes"></i>
-                </div>
-            </div>
-        </div>
-
-        <!--detial Nav tabs -->
-
-        <div>
-            <ul class="nav nav-tabs overview_tabs" role="tablist">
-                <li class="short_sale_tab active"><a class="shot_sale_tab_a " href="#Summary" role="tab" data-toggle="tab">Summary</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Foreclosure_Review" role="tab" data-toggle="tab">Foreclosure Review</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Secondary_Actions" role="tab" data-toggle="tab">Secondary Actions</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#LegalWriteupTab" role="tab" data-toggle="tab">Write Up</a></li>
-            </ul>
-
-            <!-- Tab panes -->
-
-            <dx:ASPxPanel ID="ASPxPanel1" runat="server" Width="100%" Height="560" ScrollBars="Auto">
-                <PanelCollection>
-                    <dx:PanelContent>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="Summary">
-                                <uc1:LegalSummaryTab runat="server" ID="LegalSummaryTab" />
-                            </div>
-                            <div class="tab-pane " id="Foreclosure_Review">
-                                <uc1:LegalForeclosureReviewTab runat="server" ID="LegalForeclosureReviewTab" />
-                            </div>
-                            <div class="tab-pane" id="Secondary_Actions">
-                                <uc1:LegalSecondaryActionTab runat="server" ID="LegalSecondaryActionTab" />
-                            </div>
-                            <div class="tab-pane" id="LegalWriteupTab">
-                                <uc1:LegalWriteupTab runat="server" ID="LegalWriteupTab" />
-                            </div>
-
-                        </div>
-                    </dx:PanelContent>
-                </PanelCollection>
-            </dx:ASPxPanel>
-
-        </div>
-
-    </div>
-</div>
-
-
 <dx:ASPxPopupControl ClientInstanceName="aspxAcrisControl" Width="1000px" Height="800px"
     ID="ASPxPopupControl1" HeaderText="Acris" Modal="true" CloseAction="CloseButton" ShowMaximizeButton="true"
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -294,4 +189,86 @@
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Handler for .ready() called.
+        format_input();
+        $(".ss_phone").each(function (index) {
+            format_phone(this);
+        });
+    });
+
+    var short_sale_case_data = null;
+
+    function ShowSelectParty() {
+        VendorsPopupClient.Show();
+    }
+
+    function getShortSaleInstanceComplete(s, e) {
+        debugger;
+        short_sale_case_data = e != null ? $.parseJSON(e.result) : ShortSaleCaseData; //ShortSaleCaseData;//;
+        ShortSaleCaseData = short_sale_case_data;
+        short_sale_case_data.PropertyInfo.UpdateBy = "Chris Yan";
+
+
+        ShortSaleDataBand(1);
+
+        clearHomeOwner();
+        //console.log("the data is give to save is 222", JSON.stringify(ShortSaleCaseData));
+        var strJson = JSON.stringify(ShortSaleCaseData);
+
+        //d_alert(strJson);
+        if (e == null) {
+            SaveClicklCallbackCallbackClinet.PerformCallback(strJson);
+        }
+    }
+
+    function saveComplete(s, e) {
+        //RefreshContent();
+        ShortSaleCaseData = $.parseJSON(e.result);
+        clearArray(ShortSaleCaseData.Mortgages);
+        clearArray(ShortSaleCaseData.PropertyInfo.Owners);
+
+        ShortSaleDataBand(2);
+    }
+
+    function ShowAcrisMap(propBBLE) {
+        ShowPopupMap("https://a836-acris.nyc.gov/DS/DocumentSearch/BBL", "Acris");
+    }
+
+    function ShowDOBWindow(boro, block, lot) {
+        if (block == null || block == "" || lot == null || lot == "" || boro == null || boro == "") {
+            alert("The property info isn't complete. Please try to refresh data.");
+            return;
+        }
+
+        var url = "http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?boro=" + boro + "&block=" + encodeURIComponent(block) + "&lot=" + encodeURIComponent(lot);
+        ShowPopupMap(url, "DOB");
+        $("#addition_info").html(' ');
+    }
+
+    function ShowPopupMap(url, header, subHeader) {
+        aspxAcrisControl.SetContentHtml("Loading...");
+        aspxAcrisControl.SetContentUrl(url);
+        aspxAcrisControl.SetHeaderText(header);
+
+        $('#pop_up_header_text').html(header);
+        $('#addition_info').html(subHeader ? subHeader : '');
+
+        aspxAcrisControl.Show();
+    }
+
+    function SaveLeadsComments(s, e) {
+        var comments = txtLeadsComments.GetText();
+        leadsCommentsCallbackPanel.PerformCallback("Add|" + comments);
+        txtLeadsComments.SetText("");
+        aspxAddLeadsComments.Hide();
+    }
+
+    function DeleteComments(commentId) {
+        leadsCommentsCallbackPanel.PerformCallback("Delete|" + commentId);
+    }
+
+</script>
 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
