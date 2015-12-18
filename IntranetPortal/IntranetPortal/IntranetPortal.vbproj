@@ -7306,7 +7306,6 @@
     <Content Include="ShortSale\TitleControl.ascx" />
     <Content Include="ShortSale\TitleSummary.ascx" />
     <Content Include="StreetView.aspx" />
-    <Content Include="css\stevencss1.css" />
     <Content Include="SummaryPage.aspx" />
     <Content Include="Task\MyCompleted.aspx" />
     <Content Include="Task\MyApp.aspx" />
