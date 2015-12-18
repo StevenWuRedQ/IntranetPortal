@@ -13,7 +13,6 @@
             })
         })
 
-
         it("should format date", function () {
             scope.xdate = "2015-12-14T18:05:36.934Z";
             scope.$digest();

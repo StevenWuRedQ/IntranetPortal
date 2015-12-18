@@ -8,7 +8,11 @@
     <style>
         /* cover page to hide the main content */
         .LoadingCover {
-            position: absolute;
+            position: fixed;
+            top:0;
+            left:0;
+            bottom:0;
+            right:0;
             background-image: url("/images/ajax-loader.gif");
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -18,7 +22,7 @@
             background-color: rgba(0,0,0, 0.6);
             width: 100%;
             height: 100%;
-            z-index: 99;
+            z-index: 9999;
         }
     </style>
 
@@ -109,7 +113,6 @@
                 })();
                 AngularRoot.hideLoading();
             });
-
         </script>
     </form>
 

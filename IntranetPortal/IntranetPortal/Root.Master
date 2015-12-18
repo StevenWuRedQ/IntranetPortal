@@ -278,6 +278,7 @@
             }
 
         </script>
+
         <div role="banner" id="global-announcements">
             <div class="content">
                 <i class="fa fa-exclamation-triangle"></i>&nbsp;
@@ -285,6 +286,7 @@
                 <i class="fa fa-times global-announcements-close icon_btn pull-right"></i>
             </div>
         </div>
+
         <div id="wrapper">
             <div id="sidebar-wrapper">
                 <div id="global-nav-container" class="sidebar-nav">
@@ -467,6 +469,7 @@
                 </div>
             </div>
         </div>
+
         <div id="divMsgTest" class="info message" style="bottom: -300px; right: 25px">
             <div class="msgtitle">
                 <i class="fa fa-envelope with_circle" style="color: white; font-size: 14px; width: 30px; height: 30px; line-height: 30px; text-align: center"></i>&nbsp; New Message
@@ -493,6 +496,7 @@
                 </tr>
             </table>
         </div>
+
         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupAwayControlClient" Width="800px" Height="400px"
             ID="ASPxPopupControl1" HeaderText="While You Were Away" Modal="true" CloseAction="CloseButton"
             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -502,6 +506,7 @@
             </ContentCollection>
             <ClientSideEvents Closing="function(){hook();}" />
         </dx:ASPxPopupControl>
+
         <uc1:SendMail runat="server" ID="SendMail" />
     </form>
 </body>
