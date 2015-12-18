@@ -72,7 +72,7 @@
                                 </li>
                             </ul>
 
-                            <div class="employee_list_group_margin">
+                            <div style="margin: 10px">
                                 <i class="fa fa-user color_balck font_16"></i>
                                 <span class="font_black color_balck">&nbsp;John Smith</span>&nbsp;&nbsp;&nbsp;
                                 <span class="employee_lest_head_number_label">3</span>
@@ -114,7 +114,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    <div class="priority_info_label priority_info_lable_org">
+                                    <div class="priority_info_label bg_orange">
                                         <span class="font_black">1,796 </span><span class="font_extra_light">Leads</span>
                                     </div>
                                 </td>
@@ -252,7 +252,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="color_light_green filed_margin_top clearfix">
+                                                        <div class="color_light_green textMargin clearfix">
                                                             <i class="fa fa-phone homeowner_info_icon"></i>
                                                             <div class="form_div_node homeowner_info_text">
                                                                 <div>
@@ -263,7 +263,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="color_gray filed_margin_top clearfix">
+                                                        <div class="color_gray textMargin clearfix">
                                                             <i class="fa fa-phone homeowner_info_icon"></i>
                                                             <div class="form_div_node homeowner_info_text">
                                                                 <div class="color_blue">
@@ -405,7 +405,7 @@
                                             <div class="form_head homeowner_section_margin">
                                                 <span>First Degree Relatives &nbsp;</span>
                                             </div>
-                                            <div class="color_gray clearfix filed_margin_top homeowner_title_margin">
+                                            <div class="color_gray clearfix textMargin homeowner_title_margin">
                                                 <i class="fa fa-chain color_gray homeowner_info_icon"></i>
                                                 <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
                                                     <span class="font_black color_balck">Zhang, Yan Fang</span><br />
@@ -428,7 +428,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="color_gray filed_margin_top clearfix">
+                                                            <div class="color_gray textMargin clearfix">
                                                                 <i class="fa fa-phone homeowner_info_icon"></i>
                                                                 <div class="form_div_node homeowner_info_text">
                                                                     <div class="color_blue">
@@ -440,7 +440,7 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="color_gray filed_margin_top clearfix">
+                                                            <div class="color_gray textMargin clearfix">
                                                                 <i class="fa fa-phone homeowner_info_icon"></i>
                                                                 <div class="form_div_node homeowner_info_text">
                                                                     <div class="color_blue">
@@ -506,7 +506,7 @@
                                                 <div>
                                                     <div class="clearfix homeowner_info_label">
                                                         <div>
-                                                            <div class="color_gray filed_margin_top clearfix">
+                                                            <div class="color_gray textMargin clearfix">
                                                                 <i class="fa fa-phone homeowner_info_icon"></i>
                                                                 <div class="form_div_node homeowner_info_text">
                                                                     <div class="color_blue">
@@ -517,7 +517,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="color_gray filed_margin_top clearfix">
+                                                            <div class="color_gray textMargin clearfix">
                                                                 <i class="fa fa-phone homeowner_info_icon"></i>
                                                                 <div class="form_div_node homeowner_info_text">
                                                                     <div class="color_blue">
@@ -575,7 +575,7 @@
                                                 <div class="form_head homeowner_section_margin">
                                                     <span>First Degree Relatives &nbsp;</span>
                                                 </div>
-                                                <div class="color_gray clearfix filed_margin_top homeowner_title_margin">
+                                                <div class="color_gray clearfix textMargin homeowner_title_margin">
                                                     <i class="fa fa-chain color_gray homeowner_info_icon"></i>
                                                     <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
                                                         <span class="font_black color_balck font_black upcase_text">Kang, Boon Chang</span><br />
@@ -598,7 +598,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="color_gray filed_margin_top clearfix">
+                                                                <div class="color_gray textMargin clearfix">
                                                                     <i class="fa fa-phone homeowner_info_icon"></i>
                                                                     <div class="form_div_node homeowner_info_text">
                                                                         <div class="color_blue">
@@ -610,7 +610,7 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="color_gray filed_margin_top clearfix">
+                                                                <div class="color_gray textMargin clearfix">
                                                                     <i class="fa fa-phone homeowner_info_icon"></i>
                                                                     <div class="form_div_node homeowner_info_text">
                                                                         <div class="color_blue">
@@ -906,7 +906,7 @@
                                 <i class="fa fa-file head_tab_icon_padding"></i>
                                 <div class="font_size_bold">Documents</div>
                             </div>
-                            <div class="short_sale_head_tab short_sale_head_tab_nohover" style="width: 200px; margin-left: 55px; text-align: left; color: #ffa484">
+                            <div class="short_sale_head_tab" style="width: 200px; margin-left: 55px; text-align: left; color: #ffa484">
                                 <i class="fa fa-refresh sale_head_button"></i>
                                 <i class="fa fa-envelope sale_head_button sale_head_button_left"></i>
                                 <i class="fa fa-fax  sale_head_button sale_head_button_left"></i>

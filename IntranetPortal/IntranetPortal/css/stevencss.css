@@ -782,11 +782,6 @@ ul.ss_form_box {
 }
 
 .cssSlideUp {
-    opacity: 1;
-    overflow: hidden;
-    transform: scaleY(1);
-    transform-origin: top;
-    transition: all .5s ease;
     -moz-transform: scaleY(1);
     -moz-transform-origin: top;
     -moz-transition: all .5s ease;
@@ -798,6 +793,11 @@ ul.ss_form_box {
     -webkit-transform: scaleY(1);
     -webkit-transform-origin: top;
     -webkit-transition: all .5s ease;
+    opacity: 1;
+    overflow: hidden;
+    transform: scaleY(1);
+    transform-origin: top;
+    transition: all .5s ease;
 }
 
     .cssSlideUp.ng-hide {
@@ -1164,9 +1164,13 @@ ul.ss_form_box {
     padding: 3px;
 }
 
-    .html_edit_div div div table tbody tr td table tbody tr td table tbody tr td, .select_bootstrap::outside, .nav-tabs > li.active > a:hover, html > /**/ body .nav-tabs > li.active > a:focus.mag_tab_text, .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-        border: none;
-    }
+.select_bootstrap::outside,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    border: none;
+}
 
 .icon_right_s {
     float: right;
@@ -1198,15 +1202,19 @@ ul.ss_form_box {
     border-left: 3px solid;
 }
 
-.legal-menu li {
+.legal-menu {
     background: #ff400d;
-    height: 70px;
-    margin-bottom: 0;
 }
 
-.legal-menu ul {
-    min-height: 70px;
-}
+    .legal-menu li {
+        background: #ff400d;
+        height: 70px;
+        margin-bottom: 0;
+    }
+
+    .legal-menu ul {
+        min-height: 70px;
+    }
 
 .legalui .ss_form_input_title {
     color: #323232;
@@ -1387,7 +1395,8 @@ ul.ss_form_box {
     overflow: auto;
 }
 
-.nav-menu-select, .short_sale_head_tab_nohover, .priority_info_lable_org, .bg_orange, .legal-menu {
+.nav-menu-select,
+.bg_orange {
     background: #ff400d;
 }
 
@@ -1405,7 +1414,7 @@ ul.ss_form_box {
     outline: none !important;
 }
 
-.note_button_margin, .button_margin {
+.button_margin {
     margin-left: 5px;
 }
 
@@ -1541,24 +1550,9 @@ ul.ss_form_box {
     width: 97%;
 }
 
-.query_input_10percent {
-    width: 10% !important;
-}
-
-.query_input_30percent {
-    width: 32.6% !important;
-}
-
-.query_input_40percent {
-    width: 38% !important;
-}
-
-.query_input_50_percent {
-    width: 49% !important;
-}
-
 .query_input_60percent {
     width: 56% !important;
+    margin-left: 10px;
 }
 
 .rand-button {
@@ -1682,7 +1676,7 @@ ul.ss_form_box {
         color: #FFF;
     }
 
-.sale_head_button_left, i.note_img, .group_text_margin, .query_input_60percent, .query_input_margin {
+.sale_head_button_left, i.note_img, .group_text_margin {
     margin-left: 10px;
 }
 
@@ -1728,6 +1722,7 @@ ul.ss_form_box {
     margin-top: 10px;
 }
 
+
 .shortSaleUI .ss_form_input {
     font-size: 15px;
     height: 30px;
@@ -1746,6 +1741,10 @@ ul.ss_form_box {
 
 .shortSaleUI textarea {
     height: 75px;
+}
+
+.shortSaleUI .text_area_ss_form {
+    margin-top: 10px;
 }
 
 .short_sale_buttom_tab {
@@ -1994,7 +1993,7 @@ ul.ss_form_box {
     text-decoration: underline;
 }
 
-.textMargin, .draggable_field_margin, .employee_list_group_margin, .filed_margin_top, .shortSaleUI .text_area_ss_form {
+.textMargin {
     margin-top: 10px;
 }
 
@@ -2282,7 +2281,8 @@ a.shot_sale_tab_a {
     background: transparent;
 }
 
-#ctl00_MainContentPH_ASPxSplitter1_chkFields, #ctl00_MainContentPH_ASPxSplitter1_chkFields2 {
+#ctl00_MainContentPH_ASPxSplitter1_chkFields,
+#ctl00_MainContentPH_ASPxSplitter1_chkFields2 {
     border: 0;
     border-left: 3px solid #b1b2b7;
 }
@@ -2306,6 +2306,14 @@ a.shot_sale_tab_a {
 
 #ctl00_ctl00_MainSplitter_pcMain_PWC-1 {
     padding: 2px 0 30px 0 !important;
+}
+
+.dxmLite_Portal {
+    font-family: 'Source Sans Pro' !important;
+}
+
+.dxmLite_MetropolisBlue1.dxm-ltr .dxm-popup .dxm-image {
+    margin-top: 4px;
 }
 
 .dx-popup-content input[type='checkbox'] + label {
@@ -2351,20 +2359,12 @@ a.shot_sale_tab_a {
     color: white !important;
 }
 
-.dxmLite_Portal {
-    font-family: 'Source Sans Pro' !important;
-}
-
 .dxsplControl_Portal {
     font: 18px 'Source Sans Pro' !important;
 }
 
 .dxsplControl_MetropolisBlue {
     font: 18px 'Source Sans Pro' !important;
-}
-
-.dxmLite_MetropolisBlue1.dxm-ltr .dxm-popup .dxm-image {
-    margin-top: 4px;
 }
 
 .dxtv-btn {
@@ -2403,7 +2403,9 @@ a.shot_sale_tab_a {
     color: #000 !important;
 }
 
-.dxsplControl_MetropolisBlue .header, .dxsplControl_MetropolisBlue #messageBody, .dxsplControl_MetropolisBlue .content {
+.dxsplControl_MetropolisBlue .header,
+.dxsplControl_MetropolisBlue #messageBody,
+.dxsplControl_MetropolisBlue .content {
     font-family: 'Source Sans Pro' !important;
 }
 

@@ -935,8 +935,8 @@
                                     </div>
                                     <div style="padding-top: 40px; font-size: 24px; color: white">
                                         <i class="fa fa-check-circle icon_btn" onclick="notesCallbackPanel.PerformCallback('Save|<%= CurrentNote.NoteId%>')"></i>
-                                        <i class="fa fa-times-circle icon_btn note_button_margin" style="display: none"></i>
-                                        <i class="fa fa-trash-o icon_btn note_button_margin" onclick='notesCallbackPanel.PerformCallback("Delete|<%= CurrentNote.NoteId%>")'></i>
+                                        <i class="fa fa-times-circle icon_btn button_margin" style="display: none"></i>
+                                        <i class="fa fa-trash-o icon_btn button_margin" onclick='notesCallbackPanel.PerformCallback("Delete|<%= CurrentNote.NoteId%>")'></i>
                                     </div>
                                 </div>
                             </div>
