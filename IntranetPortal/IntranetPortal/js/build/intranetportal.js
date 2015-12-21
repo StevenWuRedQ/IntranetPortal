@@ -4088,7 +4088,7 @@ angular.module("PortalApp")
     };
     $scope.InitData = function (data) {
         $scope.allContacts = data.slice();
-        var gropData = groupBy(data, group_func);
+        var gropData = data//groupBy(data, group_func);
         $scope.showingContacts = gropData;
 
         return gropData;

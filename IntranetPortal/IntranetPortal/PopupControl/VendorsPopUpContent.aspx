@@ -205,11 +205,12 @@
                             <input style="margin-top: 20px;" type="text" class="form-control" placeholder="Type employee's name" ng-model="query.Name">
                             <div style="margin-top: 10px; height: 350px; overflow: auto" id="employee_list">
                                 <div>
-                                    <ul class="list-group" style="box-shadow: none" ng-repeat="groupedcontact in showingContacts|orderBy:group_text_order">
+                                  
+                                    <ul class="list-group" style="box-shadow: none" >
                                         <%--<li class="list-group-item popup_menu_list_item" style="font-size: 18px; width: 80px; cursor: default; font-weight: 900">{{groupedcontact.group_text}}
                                             <span class="badge" style="font-size: 18px; border-radius: 18px;">{{groupedcontact.data.length}}</span>
                                         </li>--%>
-                                        <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.ContactId==currentContact.ContactId? 'popup_employee_list_item_active':''" ng-repeat="contact in groupedcontact.data|orderBy:predicate| filter:query.Name| ByContact:query ">
+                                        <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.ContactId==currentContact.ContactId? 'popup_employee_list_item_active':''" ng-repeat="contact in showingContacts|orderBy:predicate|filter:query.Name ">
                                             <div>
                                                 <div style="font-weight: 900; font-size: 16px">
                                                     <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}} <a ng-show="contact.Corps" data-toggle="popover" title="Companies" data-trigger="focus" data-html="true" data-content="{{contact.Corps.join('<br />')}}"><i class="fa fa-eye" onlick=""></i></a></label>

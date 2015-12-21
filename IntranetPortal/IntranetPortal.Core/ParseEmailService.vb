@@ -14,7 +14,9 @@ Public Class ParseEmailService
         client = ConnectEmail()
     End Sub
 
-
+    Function SearchEamil(query As String) As List(Of Message)
+        Return client.Folders.Inbox.Search(query, -1, -1).ToList
+    End Function
     Function ConnectEmail() As ImapClient
         Dim client = New ImapClient("box1030.bluehost.com", True)
         If (client.IsConnected) Then
