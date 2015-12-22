@@ -93,7 +93,7 @@ Public Class LegalECourt
             Throw New Exception("msg can't be null !")
         End If
         Using ctx As New PortalEntities
-            eCourt = ctx.LegalECourts.Where(Function(e) e.UpdateTime = msg.Date AndAlso msg.Subject = msg.Subject).FirstOrDefault
+            eCourt = ctx.LegalECourts.Where(Function(e) e.UpdateTime = msg.Date AndAlso e.Subject = msg.Subject).FirstOrDefault
             If (eCourt Is Nothing) Then
                 eCourt = New LegalECourt
                 eCourt.CreateDate = DateTime.Now
