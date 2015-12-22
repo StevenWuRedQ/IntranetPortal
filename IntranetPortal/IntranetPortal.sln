@@ -27,6 +27,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "UnitTestProject", "UnitTest
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "InterPortalSQL", "InterPortalSQL\InterPortalSQL.sqlproj", "{B31D450A-53CA-43D5-9096-8F8E66BE879B}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "UDFFunction", "UDFFunction\UDFFunction.sqlproj", "{FFCAEEE1-317F-45AB-96B8-15F3F5AE5D6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,44 +77,14 @@ Global
 		{B31D450A-53CA-43D5-9096-8F8E66BE879B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B31D450A-53CA-43D5-9096-8F8E66BE879B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B31D450A-53CA-43D5-9096-8F8E66BE879B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{FFCAEEE1-317F-45AB-96B8-15F3F5AE5D6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFCAEEE1-317F-45AB-96B8-15F3F5AE5D6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFCAEEE1-317F-45AB-96B8-15F3F5AE5D6D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FFCAEEE1-317F-45AB-96B8-15F3F5AE5D6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFCAEEE1-317F-45AB-96B8-15F3F5AE5D6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFCAEEE1-317F-45AB-96B8-15F3F5AE5D6D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 11
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://chrispc:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = IntranetPortal\\IntranetPortal.vbproj
-		SccProjectName1 = IntranetPortal
-		SccLocalPath1 = IntranetPortal
-		SccProjectUniqueName2 = IntranetPortal.Testing\\IntranetPortal.Testing.vbproj
-		SccProjectName2 = IntranetPortal.Testing
-		SccLocalPath2 = IntranetPortal.Testing
-		SccProjectUniqueName3 = IntranetPortal.Core\\IntranetPortal.Core.vbproj
-		SccProjectName3 = IntranetPortal.Core
-		SccLocalPath3 = IntranetPortal.Core
-		SccProjectUniqueName4 = IntranetPortal.RulesEngin\\IntranetPortal.RulesEngine.vbproj
-		SccProjectName4 = IntranetPortal.RulesEngin
-		SccLocalPath4 = IntranetPortal.RulesEngin
-		SccProjectUniqueName5 = RuleEngineManage\\RuleEngineManage.vbproj
-		SccProjectName5 = RuleEngineManage
-		SccLocalPath5 = RuleEngineManage
-		SccProjectUniqueName6 = RuleEngineService\\RuleEngineService.vbproj
-		SccProjectName6 = RuleEngineService
-		SccLocalPath6 = RuleEngineService
-		SccProjectUniqueName7 = IntranetPortal.Management\\IntranetPortal.Management.vbproj
-		SccProjectName7 = IntranetPortal.Management
-		SccLocalPath7 = IntranetPortal.Management
-		SccProjectUniqueName8 = IntranetPortal.Data\\IntranetPortal.Data.vbproj
-		SccProjectName8 = IntranetPortal.Data
-		SccLocalPath8 = IntranetPortal.Data
-		SccProjectUniqueName9 = UnitTestProject\\UnitTestProject.vbproj
-		SccProjectName9 = UnitTestProject
-		SccLocalPath9 = UnitTestProject
-		SccProjectUniqueName10 = InterPortalSQL\\InterPortalSQL.sqlproj
-		SccProjectName10 = InterPortalSQL
-		SccLocalPath10 = InterPortalSQL
 	EndGlobalSection
 EndGlobal
