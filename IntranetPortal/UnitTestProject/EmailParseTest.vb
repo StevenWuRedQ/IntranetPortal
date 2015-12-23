@@ -3,12 +3,15 @@ Imports IntranetPortal
 Imports IntranetPortal.Data
 Imports IntranetPortal.RulesEngine
 Imports System.Configuration
+Imports System.IO
+Imports System.Data.Entity
 
 <TestClass()>
 Public Class EmailParseTest
+    Shared CURPATH = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName
 
     Shared origConStr = "metadata=res://*/ADOEntity.PortalEntities.csdl|res://*/ADOEntity.PortalEntities.ssdl|res://*/ADOEntity.PortalEntities.msl;provider=System.Data.SqlClient;provider connection string='data source=chrispc,4436;initial catalog=IntranetPortal;User ID=Steven;Password=P@ssw0rd;multipleactiveresultsets=True;application name=EntityFramework'"
-    Shared tempConStr = "metadata=res://*/ADOEntity.PortalEntities.csdl|res://*/ADOEntity.PortalEntities.ssdl|res://*/ADOEntity.PortalEntities.msl;provider=System.Data.SqlClient;provider connection string='data source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\testdb.mdf;Integrated Security=True;User Instance=True; application name=EntityFramework'"
+    Shared tempConStr = "metadata=res://*/ADOEntity.PortalEntities.csdl|res://*/ADOEntity.PortalEntities.ssdl|res://*/ADOEntity.PortalEntities.msl;provider=System.Data.SqlClient;provider connection string='data source=.\SQLEXPRESS;AttachDbFilename=" & CURPATH & "\testdb.mdf;Integrated Security=True;User Instance=True;application name=EntityFramework'"
 
     <ClassInitialize>
     Public Shared Sub setup(context As TestContext)
@@ -18,9 +21,9 @@ Public Class EmailParseTest
         consec.ConnectionStrings("PortalEntities").ConnectionString = tempConStr
         conf.Save(ConfigurationSaveMode.Minimal)
         ConfigurationManager.RefreshSection(conf.ConnectionStrings.SectionInformation.SectionName)
+        Database.SetInitializer(New DropCreateDatabaseAlways(Of PortalEntities)())
 
         Using ctx As New PortalEntities
-            ctx.LegalECourts.Add(New LegalECourt With {.BBLE = "123456"})
             ctx.SaveChanges()
         End Using
 
@@ -28,6 +31,16 @@ Public Class EmailParseTest
 
     <TestMethod>
     Public Sub test()
+    End Sub
+
+    <TestMethod()>
+    Public Sub EmailConnectedTest()
+        Dim serv = New Core.ParseEmailService("Portal.etrack@myidealprop.com", "ColorBlue1")
+        Assert.IsTrue(serv.IsLogedIn, "connection should established")
+
+        Dim msg = serv.GetNewEmails
+        Assert.IsTrue(msg.Count >= 0, "there should be some emails")
+
     End Sub
 
     <TestMethod()>
@@ -203,9 +216,7 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
         Assert.IsTrue(Not String.IsNullOrEmpty(ecourt.IndexNumber))
         Assert.IsTrue(Not String.IsNullOrEmpty(ecourt.BBLE))
     End Sub
-    ''' <summary>
-    ''' test if there are get the right BBLE
-    ''' </summary>
+
     <TestMethod()>
     Public Sub TestLegalECourtParse()
         Dim client = New ImapClient("box1030.bluehost.com", True)
@@ -227,35 +238,12 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
 
 
     End Sub
-    <TestMethod()>
-    Public Sub EmailConnectedTest()
-        Dim serv = New Core.ParseEmailService("Portal.etrack@myidealprop.com", "ColorBlue1")
 
 
-        ''''''''''''''''''''''''''''''''
-        Dim msg = serv.GetNewEmails
-        For Each m In msg
-            LegalECourt.Parse(m)
-        Next
-        Dim eCases = Data.LegalECourt.GetIndexLegalECourts()
-        For Each c In eCases
-            If (c.UpdateBBLE()) Then
 
-            End If
-        Next
-        Assert.IsTrue(msg.Count > 0)
-        ''''''''''''''''''''''''
-
-        Assert.IsTrue(serv.IsLogedIn)
-    End Sub
     <TestMethod()>
     Public Sub TestNeedCorrectLegalECourt()
         Dim eCases = Data.LegalECourt.GetIndexLegalECourts()
-        'For Each c In eCases
-        '    If (c.UpdateBBLE()) Then
-        '        Console.WriteLine("UpDate Ecourt :" & c.IndexNumber & "Legal Ecourt Id: " & c.Id & "To BBLE: " & c.BBLE)
-        '    End If
-        'Next
         Assert.IsTrue(eCases.Count > 0)
     End Sub
 
