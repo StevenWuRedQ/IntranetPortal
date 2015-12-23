@@ -67,11 +67,12 @@ Public Class LegalUI
             logpanel.Visible = False
         End If
 
-        Dim isInPoupUp = Request.QueryString("InPopUp") IsNot Nothing
-        If (isInPoupUp) Then
-            SencnedAction.Visible = True
-            listdiv.Visible = False
-        End If
+
+        'Dim isInPoupUp = Request.QueryString("InPopUp") IsNot Nothing
+        'If (isInPoupUp) Then
+        '    SencnedAction.Visible = True
+        '    listdiv.Visible = False
+        'End If
 
 
     End Sub

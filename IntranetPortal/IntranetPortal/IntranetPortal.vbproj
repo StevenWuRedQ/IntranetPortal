@@ -1181,6 +1181,13 @@
       <DependentUpon>LegalForeclosureReviewTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="LegalUI\LegalInfo.aspx.designer.vb">
+      <DependentUpon>LegalInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LegalUI\LegalInfo.aspx.vb">
+      <DependentUpon>LegalInfo.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="LegalUI\LegalPreQuestions.aspx.designer.vb">
       <DependentUpon>LegalPreQuestions.aspx</DependentUpon>
     </Compile>
@@ -6459,6 +6466,7 @@
     <Content Include="LeadsGenerator\LeadsSearchApproval.aspx" />
     <Content Include="LegalUI\CaseLawRef.aspx" />
     <Content Include="LegalUI\LegalForeclosureReviewTab.ascx" />
+    <Content Include="LegalUI\LegalInfo.aspx" />
     <Content Include="LegalUI\LegalPreQuestions.aspx" />
     <Content Include="LegalUI\LegalSecondaryActions.ascx" />
     <Content Include="LegalUI\LegalSecondaryActionTab.ascx" />
