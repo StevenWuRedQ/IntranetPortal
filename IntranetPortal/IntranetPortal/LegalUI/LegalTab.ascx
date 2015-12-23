@@ -335,4 +335,7 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    <div class="modal fade" id="HistoryPopup">
+
+    </div>
 </div>

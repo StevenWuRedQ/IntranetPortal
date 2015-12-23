@@ -49,124 +49,127 @@
         })();
 
         var LegalCaseBBLE = null;
-        var LegalCtrlScope = angular.element(document.getElementById('LegalCtrl')).scope();
 
         var AllJudges = function () {
             return <%= GetAllJudge()%>
         }();
+
             var AllContact = function () {
                 return <%= GetAllContact()%>
             }();
+
             var AllRoboSignor = function () {
                 return <%= GetAllRoboSingor() %>
-                        }();
-                        var taskSN = function () {
-                            return '<%= Request.QueryString("sn")%>'
-            }();
+        }();
+
+        var taskSN = function () {
+            return '<%= Request.QueryString("sn")%>'
+        }();
 
 
-            function OnCallbackMenuClick(s, e) {
+        function OnCallbackMenuClick(s, e) {
 
-                if (e.item.name == "Custom") {
-                    ASPxPopupSelectDateControl.PerformCallback("Show");
-                    ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
-                    e.processOnServer = false;
-                    return;
-                }
-
-                //SetLeadStatus(e.item.name + "|" + leadsInfoBBLE);
-                SetLegalFollowUp(e.item.name)
+            if (e.item.name == "Custom") {
+                ASPxPopupSelectDateControl.PerformCallback("Show");
+                ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
                 e.processOnServer = false;
+                return;
             }
 
-            function CloseCase(comments) {
-                LegalCtrlScope.CloseCase(comments);
-            }
+            //SetLeadStatus(e.item.name + "|" + leadsInfoBBLE);
+            SetLegalFollowUp(e.item.name)
+            e.processOnServer = false;
+        }
 
-            function SetLegalFollowUp(type, dateSelected) {
-                if (typeof dateSelected == 'undefined')
-                    dateSelected = new Date();
+        function CloseCase(comments) {
+            angular.element(document.getElementById('LegalCtrl')).scope().CloseCase(comments);
+        }
 
-                var fileData = {
-                    "bble": leadsInfoBBLE,
-                    "type": type,
-                    "dtSelected": dateSelected
-                };
+        function SetLegalFollowUp(type, dateSelected) {
+            if (typeof dateSelected == 'undefined')
+                dateSelected = new Date();
 
-                $.ajax({
-                    url: '/LegalUI/LegalServices.svc/SetLegalFollowUp',
-                    type: 'POST',
-                    data: JSON.stringify(fileData),
-                    cache: false,
-                    dataType: 'json',
-                    processData: false, // Don't process the files
-                    contentType: 'application/json',
-                    success: function (data) {
-                        alert('successful..');
+            var fileData = {
+                "bble": leadsInfoBBLE,
+                "type": type,
+                "dtSelected": dateSelected
+            };
 
-                        if (typeof gridTrackingClient != "undefined")
-                            gridTrackingClient.Refresh();
-                    },
-                    error: function (data) {
-                        alert('Some error Occurred! Detail: ' + JSON.stringify(data));
-                    }
-                });
-            }
+            $.ajax({
+                url: '/LegalUI/LegalServices.svc/SetLegalFollowUp',
+                type: 'POST',
+                data: JSON.stringify(fileData),
+                cache: false,
+                dataType: 'json',
+                processData: false, // Don't process the files
+                contentType: 'application/json',
+                success: function (data) {
+                    alert('successful..');
 
-            function GetDataReadOnly() {
-                return $('#Viewable').val() == 'True'
-            }
-
-            function VendorsClosing(s) {
-                GetContactCallBack();
-            }
-
-            function GetContactCallBack(contact) {
-                $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
-                    AllContact = data;
-                });
-
-            }
-
-            function GetLegalData() {
-                return LegalCtrlScope.LegalCase;
-
-            }
-
-            function setLegalData(BBLE) {
-                $(document).ready(function () {
-                    LegalCtrlScope.LoadLeadsCase(BBLE);
-
-                });
-
-            }
-
-            /*chris use this show alert when leave page*/
-            function CaseDataChanged() {
-                return ScopeCaseDataChanged(GetLegalData);
-            }
-            function GetCassNeedComment() {
-                return CaseNeedComment;
-            }
-            function ResetCaseDataChange() {
-                ScopeResetCaseDataChange(GetLegalData)
-            }
-
-
-            $(function () {
-                var scope = angular.element('#LegalCtrl').scope();
-                ScopeAutoSave(GetLegalData, scope.SaveLegal, '#LegalTabHead');
-
-                $('body').tooltip({
-                    selector: '.tooltip-examples',
-                    placement: 'bottom'
-                });
-
-                if (leadsInfoBBLE && leadsInfoBBLE != null) {
-                    if (WorkingLogControl)
-                        WorkingLogControl.openFile(leadsInfoBBLE, "Legal");
+                    if (typeof gridTrackingClient != "undefined")
+                        gridTrackingClient.Refresh();
+                },
+                error: function (data) {
+                    alert('Some error Occurred! Detail: ' + JSON.stringify(data));
                 }
             });
+        }
+
+        function GetDataReadOnly() {
+            return $('#Viewable').val() == 'True'
+        }
+
+        function VendorsClosing(s) {
+            GetContactCallBack();
+        }
+
+        function GetContactCallBack(contact) {
+            $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
+                AllContact = data;
+            });
+
+        }
+
+        function GetLegalData() {
+            return angular.element(document.getElementById('LegalCtrl')).scope().LegalCase;
+
+        }
+
+        function setLegalData(BBLE) {
+            $(document).ready(function () {
+                angular.element(document.getElementById('LegalCtrl')).scope().LoadLeadsCase(BBLE);
+
+            });
+
+        }
+
+        /*chris use this show alert when leave page*/
+        function CaseDataChanged() {
+            return ScopeCaseDataChanged(GetLegalData);
+        }
+        function GetCassNeedComment() {
+            return CaseNeedComment;
+        }
+        function ResetCaseDataChange() {
+            ScopeResetCaseDataChange(GetLegalData)
+        }
+
+
+        $(function () {
+            var scope = angular.element('#LegalCtrl').scope();
+
+            ScopeAutoSave(GetLegalData, scope.SaveLegal, '#LegalTabHead');
+
+            $('body').tooltip({
+                selector: '.tooltip-examples',
+                placement: 'bottom'
+            });
+
+            if (leadsInfoBBLE && leadsInfoBBLE != null) {
+                if (WorkingLogControl)
+                    WorkingLogControl.openFile(leadsInfoBBLE, "Legal");
+            }
+        });
     </script>
 
     <input type="hidden" id="CaseData" />
@@ -291,15 +294,15 @@
                                     </li>
 
                                     <li class="pull-right" style="margin-right: 30px; color: #ffa484">
-                                        <i class="fa fa-clock-o sale_head_button sale_head_button_left tooltip-examples" onclick="LegalCtrlScope.CheckWorkHours()" data-original-title="Work hours"></i>
-                                        <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" onclick="LegalCtrlScope.SaveLegal()" data-original-title="Save"></i>
+                                        <i class="fa fa-clock-o sale_head_button sale_head_button_left tooltip-examples" onclick="angular.element(document.getElementById('LegalCtrl')).scope().CheckWorkHours()" data-original-title="Work hours"></i>
+                                        <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" onclick="angular.element(document.getElementById('LegalCtrl')).scope().SaveLegal()" data-original-title="Save"></i>
 
                                         <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerPreview Then%>
                                         <i class="fa fa-lightbulb-o sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Research');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Research"></i>
                                         <% End If%>
 
                                         <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.LegalResearch Then%>
-                                        <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" onclick="LegalCtrlScope.CompleteResearch()" data-original-title="Complete Research"></i>
+                                        <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" onclick="angular.element(document.getElementById('LegalCtrl')).scope().CompleteResearch()" data-original-title="Complete Research"></i>
                                         <% End If%>
 
                                         <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerAssign Or (ShowReassginBtn()) Then%>
@@ -308,7 +311,7 @@
                                         <% End If%>
 
                                         <%If DisplayView = IntranetPortal.Data.LegalCaseStatus.AttorneyHandle AndAlso User.IsInRole("Legal-Manager") Then%>
-                                        <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" onclick="LegalCtrlScope.AttorneyComplete()" data-original-title="Complete"></i>
+                                        <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" onclick="angular.element(document.getElementById('LegalCtrl')).scope().AttorneyComplete()" data-original-title="Complete"></i>
                                         <% End If%>
                                         <span class="dropdown">
                                             <i class="fa fa-caret-down sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="More" data-toggle="dropdown"></i>
