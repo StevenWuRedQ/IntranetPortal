@@ -67,7 +67,7 @@
 				<select class="ss_form_input" id="LealCaseStatusData" ng-model="LegalCase.TaxLienFCStatus">
 
 					<% For Each v In LegalCaseManage.GetDataStatus%>
-					<option value="<%=v.Item("Key")%>"><%=v.Item("Value")%></option>
+					<option value="<%=v.Status%>"><%=v.Name%></option>
 					<% Next%>
 				</select>
 			</li>
@@ -98,7 +98,7 @@
 				<select class="ss_form_input" ng-model="LegalCase.CaseStauts">
 					<%Dim statusDic = LegalCaseManage.GetDataStatus %>
 					<% For Each v In statusDic%>
-					<option value="<%=v.Item("Key")%>"><%=v.Item("Value")%></option>
+					<option value="<%=v.Status%>"><%=v.Name%></option>
 					<% Next%>
 				</select>
 			</li>
