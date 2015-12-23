@@ -14,39 +14,44 @@ Public Class ScanECourtsRule
 
         Dim parseSuccess = eCourt IsNot Nothing AndAlso (Not String.IsNullOrEmpty(eCourt.BBLE))
         If (parseSuccess) Then
-            Log("sucessed parse mail get Legal Case BBLE :" & eCourt.BBLE)
+            Log("sucessed parse mail get Legal Case BBLE :" & eCourt.BBLE & " LegalECourt Id :" & eCourt.Id)
+
 
             Dim legalManger = LegalCaseManage.GetLegalManger()
             If (legalManger IsNot Nothing) Then
 
                 Dim lcase = Data.LegalCase.GetCase(eCourt.BBLE)
+                Log("LegalCase bble: " & lcase.BBLE & "  IndexNumber: " & lcase.FCIndexNum & " == eCourt IndexNumber: " & eCourt.IndexNumber & " eCourt Id: " & eCourt.Id)
+                If (lcase.FCIndexNum <> eCourt.IndexNumber) Then
+                    Log("There are an error happan get woring BBLE eCourt id: " & eCourt.Id)
+                End If
                 Dim SendList = {lcase.Attorney, lcase.ResearchBy}
-                Dim eList = SendList.Where(Function(e) Not String.IsNullOrEmpty(e)).Select(Function(e) Employee.GetInstance(e)).ToList
+                    Dim eList = SendList.Where(Function(e) Not String.IsNullOrEmpty(e)).Select(Function(e) Employee.GetInstance(e)).ToList
 
-                eList.Add(legalManger)
-                Dim emails = String.Join(";", eList.Select(Function(e) e.Email).Distinct.ToArray)
-                Dim Users = String.Join(";", eList.Select(Function(e) e.Name).Distinct.ToArray)
-                Dim maildata = New Dictionary(Of String, String)
-                maildata.Add("IndexNumber", eCourt.IndexNumber)
-                maildata.Add("Users", Users)
-                maildata.Add("CaseName", lcase.CaseName)
-                maildata.Add("BBLE", eCourt.BBLE)
-                maildata.Add("AppearanceDate", eCourt.AppearanceDate)
+                    eList.Add(legalManger)
+                    Dim emails = String.Join(";", eList.Select(Function(e) e.Email).Distinct.ToArray)
+                    Dim Users = String.Join(";", eList.Select(Function(e) e.Name).Distinct.ToArray)
+                    Dim maildata = New Dictionary(Of String, String)
+                    maildata.Add("IndexNumber", eCourt.IndexNumber)
+                    maildata.Add("Users", Users)
+                    maildata.Add("CaseName", lcase.CaseName)
+                    maildata.Add("BBLE", eCourt.BBLE)
+                    maildata.Add("AppearanceDate", eCourt.AppearanceDate)
 
-                If (String.IsNullOrEmpty(Users)) Then
-                    Log("Can't get users for case BBLE: " & eCourt.BBLE)
-                End If
-                If (String.IsNullOrEmpty(emails)) Then
-                    Log("Can't get emails for case BBLE: " & eCourt.BBLE)
-                End If
-                Using client As New PortalService.CommonServiceClient
-                    client.SendEmailByTemplate(Users, "LegalScanECourtNotify", maildata)
-                End Using
-                'Core.EmailService.SendMail(emails, Nothing, "LegalScanECourtNotify", maildata)
-                Log("Send email to  :" & Users & " for BBLE: " & lcase.BBLE)
+                    If (String.IsNullOrEmpty(Users)) Then
+                        Log("Can't get users for case BBLE: " & eCourt.BBLE)
+                    End If
+                    If (String.IsNullOrEmpty(emails)) Then
+                        Log("Can't get emails for case BBLE: " & eCourt.BBLE)
+                    End If
+                    Using client As New PortalService.CommonServiceClient
+                        client.SendEmailByTemplate(Users, "LegalScanECourtNotify", maildata)
+                    End Using
+                    'Core.EmailService.SendMail(emails, Nothing, "LegalScanECourtNotify", maildata)
+                    Log("Send email to  :" & Users & " for BBLE: " & lcase.BBLE)
 
-            Else
-                Log("Can not find legal didn't send email please notice !")
+                Else
+                    Log("Can not find legal didn't send email please notice !")
             End If
 
         Else
@@ -69,7 +74,7 @@ Public Class ScanECourtsRule
         Dim eCases = Data.LegalECourt.GetIndexLegalECourts()
         For Each c In eCases
             If (c.UpdateBBLE()) Then
-                Log("UpDate Ecourt :" & c.IndexNumber & "Legal Ecourt Id: " & c.Id & "To BBLE: " & c.BBLE)
+                Log("Update Ecourt :" & c.IndexNumber & "Legal Ecourt Id: " & c.Id & "To BBLE: " & c.BBLE)
             End If
         Next
         Log("======================== End Upadate BBLE for all ECourt Email ==========================================")

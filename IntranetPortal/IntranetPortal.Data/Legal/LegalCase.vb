@@ -127,6 +127,10 @@ Partial Public Class LegalCase
     End Function
 
     Public Shared Function GetLegalCaseByFcIndex(indexNum As String) As LegalCase
+        If (String.IsNullOrEmpty(indexNum)) Then
+            Return Nothing
+        End If
+
         Using ctx As New PortalEntities
             Return ctx.LegalCases.Where(Function(c) c.FCIndexNum = indexNum).FirstOrDefault
         End Using

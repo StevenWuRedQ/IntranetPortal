@@ -27,7 +27,7 @@
     };
     $scope.InitData = function (data) {
         $scope.allContacts = data.slice();
-        var gropData = groupBy(data, group_func);
+        var gropData = data;//groupBy(data, group_func);
         $scope.showingContacts = gropData;
 
         return gropData;
@@ -50,7 +50,7 @@
         //debugger;
         var allContacts = gropData;
         if (allContacts.length > 0) {
-            $scope.currentContact = gropData[0].data[0];
+            $scope.currentContact = gropData[0];
             m_current_contact = $scope.currentContact;
 
         }

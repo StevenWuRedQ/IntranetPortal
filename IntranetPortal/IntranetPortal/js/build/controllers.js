@@ -2696,10 +2696,10 @@ angular.module("PortalApp")
     };
     $scope.InitData = function (data) {
         $scope.allContacts = data.slice();
-        var gropData = groupBy(data, group_func);
-        $scope.showingContacts = gropData;
+       // var gropData = groupBy(data, group_func);
+        $scope.showingContacts = data;
 
-        return gropData;
+        return data;
     }
     $scope.initGroups = function () {
         $http.post('/CallBackServices.asmx/GetAllGroups', {}).
@@ -2719,7 +2719,7 @@ angular.module("PortalApp")
         //debugger;
         var allContacts = gropData;
         if (allContacts.length > 0) {
-            $scope.currentContact = gropData[0].data[0];
+            $scope.currentContact = gropData[0];
             m_current_contact = $scope.currentContact;
 
         }
@@ -2733,10 +2733,20 @@ angular.module("PortalApp")
             $scope.LogError = data
             alert("error get contacts: " + status + " error :" + data.d);
         });
-
+    $scope.UniqueArray  =  function(arr){
+        var u = {}, a = [];
+        for (var i = 0, l = arr.length; i < l; ++i) {
+            if (u.hasOwnProperty(arr[i])) {
+                continue;
+            }
+            a.push(arr[i]);
+            u[arr[i]] = 1;
+        }
+        return a;
+    }
     $scope.initLenderList = function () {
         $http.post('/CallBackServices.asmx/GetLenderList', {}).success(function (data, status) {
-            $scope.lenderList = _.uniq(data.d);
+            $scope.lenderList = $scope.UniqueArray(data.d);
         });
     }
 
