@@ -51,8 +51,6 @@ Partial Public Class PortalEntities
     Public Overridable Property LegalJudges() As DbSet(Of LegalJudge)
     Public Overridable Property LegalRoboSignors() As DbSet(Of LegalRoboSignor)
     Public Overridable Property LawReferences() As DbSet(Of LawReference)
-    Public Overridable Property LegalCaseReports() As DbSet(Of LegalCaseReport)
-    Public Overridable Property LegalManagerReports() As DbSet(Of LegalManagerReport)
     Public Overridable Property LeadInfoDocumentSearches() As DbSet(Of LeadInfoDocumentSearch)
     Public Overridable Property CheckingComplains() As DbSet(Of CheckingComplain)
     Public Overridable Property ConstructionBudgets() As DbSet(Of ConstructionBudget)
@@ -63,5 +61,8 @@ Partial Public Class PortalEntities
     Public Overridable Property FormDataItems() As DbSet(Of FormDataItem)
     Public Overridable Property TitleCases() As DbSet(Of TitleCase)
     Public Overridable Property UserFollowUps() As DbSet(Of UserFollowUp)
+    Public Overridable Property LegalCaseReports() As DbSet(Of LegalCaseReport)
+    Public Overridable Property LegalManagerReports() As DbSet(Of LegalManagerReport)
+    Public Overridable Property DataStatus() As DbSet(Of DataStatu)
 
 End Class
