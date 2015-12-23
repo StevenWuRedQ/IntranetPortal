@@ -88,6 +88,7 @@ Public Class LegalECourt
         End Using
     End Function
     Public Shared Function Parse(msg As ImapX.Message) As LegalECourt
+
         Dim eCourt As LegalECourt
         If msg Is Nothing Then
             Throw New Exception("msg can't be null !")

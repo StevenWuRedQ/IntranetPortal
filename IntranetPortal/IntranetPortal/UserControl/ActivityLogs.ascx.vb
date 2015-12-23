@@ -31,6 +31,10 @@ Public Class ActivityLogs
             ActivityLogProvider = New TitleManage(True)
         End If
 
+        If DisplayMode = ActivityLogMode.Leads Then
+            ActivityLogProvider = New LeadManage(True)
+        End If
+
         If ActivityLogProvider IsNot Nothing Then
             If ActivityLogProvider.CommentsControlName IsNot Nothing Then
                 Dim commentControl = Page.LoadControl(ActivityLogProvider.CommentsControlName)
