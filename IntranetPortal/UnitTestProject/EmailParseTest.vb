@@ -2,9 +2,33 @@
 Imports IntranetPortal
 Imports IntranetPortal.Data
 Imports IntranetPortal.RulesEngine
+Imports System.Configuration
 
 <TestClass()>
 Public Class EmailParseTest
+
+    Shared origConStr = "metadata=res://*/ADOEntity.PortalEntities.csdl|res://*/ADOEntity.PortalEntities.ssdl|res://*/ADOEntity.PortalEntities.msl;provider=System.Data.SqlClient;provider connection string='data source=chrispc,4436;initial catalog=IntranetPortal;User ID=Steven;Password=P@ssw0rd;multipleactiveresultsets=True;application name=EntityFramework'"
+    Shared tempConStr = "metadata=res://*/ADOEntity.PortalEntities.csdl|res://*/ADOEntity.PortalEntities.ssdl|res://*/ADOEntity.PortalEntities.msl;provider=System.Data.SqlClient;provider connection string='data source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\testdb.mdf;Integrated Security=True;User Instance=True; application name=EntityFramework'"
+
+    <ClassInitialize>
+    Public Shared Sub setup(context As TestContext)
+        Dim conf = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
+        origConStr = ConfigurationManager.ConnectionStrings("PortalEntities").ConnectionString
+        Dim consec = CType(conf.GetSection("connectionStrings"), ConnectionStringsSection)
+        consec.ConnectionStrings("PortalEntities").ConnectionString = tempConStr
+        conf.Save(ConfigurationSaveMode.Minimal)
+        ConfigurationManager.RefreshSection(conf.ConnectionStrings.SectionInformation.SectionName)
+
+        Using ctx As New PortalEntities
+            ctx.LegalECourts.Add(New LegalECourt With {.BBLE = "123456"})
+            ctx.SaveChanges()
+        End Using
+
+    End Sub
+
+    <TestMethod>
+    Public Sub test()
+    End Sub
 
     <TestMethod()>
     Public Sub ParseEmailsTest()
@@ -170,8 +194,6 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
 
 
 </string>
-
-
         Dim ecourt = New LegalECourt()
         ecourt.BodyText = MessageStr
         ecourt.UpdateApperanceDate()
@@ -236,5 +258,8 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
         'Next
         Assert.IsTrue(eCases.Count > 0)
     End Sub
+
+
+
 
 End Class
