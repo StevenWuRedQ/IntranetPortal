@@ -88,7 +88,7 @@
 
 	<!-- case -->
 	<div class="ss_form">
-		<h4 class="ss_form_title">Mortgae foreclosure Status</h4>
+		<h4 class="ss_form_title">Mortgage  foreclosure status</h4>
 		<ul class="ss_form_box clearfix">
 			<li class="ss_form_item">
 				<label class="ss_form_input_title {{HighLightStauts(LegalCase.CaseStauts,4)?'ss_warning':''}}">

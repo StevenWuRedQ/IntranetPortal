@@ -21,11 +21,15 @@ Public Class LegalECourt
     End Sub
     Public Sub UpdateIndexNumber()
         If (BodyText IsNot Nothing) Then
-            Dim regexIndexNum = "\d{6}\/\d{4}"
+            Dim regexIndexNum = "\d{6,7}\/\d{4}"
+
             Dim IndexNumregex = "Index Number: " & regexIndexNum
             Dim IndexNumMatch = Regex.Match(BodyText, IndexNumregex)
             If (IndexNumMatch.Success) Then
                 Dim indexNum = Regex.Match(IndexNumMatch.Value, regexIndexNum).Value
+                'only take 6 when there are 7 digit on front
+                Dim regexIndexOnly6 = "\d{6}\/\d{4}"
+                indexNum = Regex.Match(indexNum, regexIndexOnly6).Value
                 If (Not String.IsNullOrEmpty(indexNum)) Then
                     Me.IndexNumber = indexNum
                 End If
@@ -93,7 +97,7 @@ Public Class LegalECourt
             Throw New Exception("msg can't be null !")
         End If
         Using ctx As New PortalEntities
-            eCourt = ctx.LegalECourts.Where(Function(e) e.UpdateTime = msg.Date AndAlso msg.Subject = msg.Subject).FirstOrDefault
+            eCourt = ctx.LegalECourts.Where(Function(e) e.UpdateTime = msg.Date AndAlso e.Subject = msg.Subject).FirstOrDefault
             If (eCourt Is Nothing) Then
                 eCourt = New LegalECourt
                 eCourt.CreateDate = DateTime.Now
