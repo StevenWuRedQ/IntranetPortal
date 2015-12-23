@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9a653d02cbfe4334a4333f75b4deee58" Name="ShortSale" >
+      <Diagram DiagramId="9a653d02cbfe4334a4333f75b4deee58" Name="ShortSale" ZoomLevel="97" >
         <EntityTypeShape EntityType="IntranetPortalModel.CleareneceNote" Width="1.5" PointX="0.625" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.PartyContact" Width="1.5" PointX="2.625" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyFloor" Width="1.5" PointX="0.625" PointY="2.75" />
@@ -16,9 +16,9 @@
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyOccupant" Width="1.5" PointX="10.625" PointY="4.125" />
         <EntityTypeShape EntityType="IntranetPortalModel.TitleJudgementSearch" Width="1.5" PointX="4.75" PointY="6.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.EvictionCas" Width="1.5" PointX="14.125" PointY="0.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.Employee" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.Employee" Width="1.5" PointX="0.625" PointY="7.875" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleActivityLog" Width="1.75" PointX="6.5" PointY="6.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.MortgageStatusData" Width="1.75" PointX="6.5" PointY="9.25" />
+        <EntityTypeShape EntityType="IntranetPortalModel.MortgageStatusData" Width="1.75" PointX="6.5" PointY="9.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.GroupType" Width="1.5" PointX="10.625" PointY="10.25" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyValueInfo" Width="1.75" PointX="6.625" PointY="2.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyMortgage" Width="1.75" PointX="2.625" PointY="9.875" />
@@ -26,9 +26,9 @@
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleOverview" Width="1.75" PointX="14.125" PointY="6.25" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleBuyer" Width="1.5" PointX="14.125" PointY="3.125" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleOffer" Width="1.5" PointX="12.375" PointY="8.25" />
-        <EntityTypeShape EntityType="IntranetPortalModel.CorporationEntity" Width="1.5" PointX="6.625" PointY="11.375" />
+        <EntityTypeShape EntityType="IntranetPortalModel.CorporationEntity" Width="1.5" PointX="6.5" PointY="11.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleLeadsInfo" Width="1.75" PointX="8.5" PointY="11.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCheckList" Width="1.5" PointX="11.375" PointY="13.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCheckList" Width="1.5" PointX="10.625" PointY="12.5" />
       </Diagram>
       <Diagram DiagramId="2cdf7606e6c24dc895f31f0e80a0c4dd" Name="Legal" >
         <EntityTypeShape EntityType="IntranetPortalModel.LegalCase" Width="1.5" PointX="0.75" PointY="0.5" />
@@ -36,8 +36,9 @@
         <EntityTypeShape EntityType="IntranetPortalModel.LegalJudge" Width="1.5" PointX="4.5" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.LegalRoboSignor" Width="1.625" PointX="6.375" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.LawReference" Width="1.5" PointX="10.25" PointY="0.5" />
-        <EntityTypeShape EntityType="IntranetPortalModel.LegalCaseReport" Width="1.625" PointX="8.375" PointY="0.5" />
-        <EntityTypeShape EntityType="IntranetPortalModel.LegalManagerReport" Width="1.875" PointX="12.125" PointY="0.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LegalCaseReport" Width="1.5" PointX="8.25" PointY="0.625" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LegalManagerReport" Width="1.5" PointX="5.125" PointY="3.375" />
+        <EntityTypeShape EntityType="IntranetPortalModel.DataStatu" Width="1.5" PointX="10.25" PointY="3.875" />
       </Diagram>
       <Diagram DiagramId="b4e8f59ec3564fd09ccb3d7bcd0488a7" Name="DocumentSearch" >
         <EntityTypeShape EntityType="IntranetPortalModel.LeadInfoDocumentSearch" Width="2.25" PointX="0.625" PointY="0.5" />

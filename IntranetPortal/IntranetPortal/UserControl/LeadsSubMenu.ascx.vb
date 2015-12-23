@@ -263,7 +263,11 @@ Public Class LeadsSubMenu
             If Not String.IsNullOrEmpty(lbSelectionMode.Value) Then
                 If lbSelectionMode.SelectedValues.Contains("0") Then
                     'Add leads to short sale section
-                    ShortSaleManage.MoveLeadsToShortSale(hfInProcessBBLE.Value, Page.User.Identity.Name, Employee.CurrentAppId)
+                    If Not ShortSaleManage.IsInShortSale(hfInProcessBBLE.Value) Then
+                        ShortSaleManage.MoveLeadsToShortSale(hfInProcessBBLE.Value, Page.User.Identity.Name, Employee.CurrentAppId)
+                    Else
+
+                    End If
                 End If
 
                 If lbSelectionMode.SelectedValues.Contains("1") Then

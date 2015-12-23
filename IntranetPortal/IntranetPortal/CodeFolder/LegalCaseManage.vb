@@ -300,17 +300,10 @@ Public Class LegalCaseManage
         Return 0
     End Function
 
-    Public Shared Function GetDataStatus() As JArray
-        Dim disabled = {5}
-        Dim JarraySort1 = Utility.Enum2Dictinary(GetType(DataStatus)).ToList
-        Dim SortOrder = Core.CommonData.GetData("LegalStatusOrder")
-        Dim JarraySorted = (From s In SortOrder Join j In JarraySort1 On s.Name Equals j.Value Select New With {j.Key, j.Value, .Order = CInt(s.Description)}).OrderBy(Function(v) v.Order)
+    Public Shared Function GetDataStatus() As DataStatu()
 
-        Dim JarrayStr = JarraySorted.ToJsonString
+        Return DataStatu.LoadDataStatus(LegalCase.ForeclosureStatusCategory).ToArray
 
-        Dim Jarr = JArray.Parse(JarrayStr)
-
-
-        Return Jarr
     End Function
+
 End Class

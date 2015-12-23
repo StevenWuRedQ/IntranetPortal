@@ -76,22 +76,22 @@
           <![CDATA[<i class="fa fa-refresh"></i>]]>
         </FontClass>
         <Items>
-          <PortalNavItem Name="ShortSale-Agent-All" Text="Short Sale" NavigationUrl="/ShortSale/ShortSale.aspx?LeadsAgent=true" ShowAmount="true">
+          <PortalNavItem Name="Agent-InProcess-ShortSale" Text="Short Sale" NavigationUrl="/LeadAgent.aspx?c=In Process&amp;t=ShortSale" ShowAmount="true" AmountManageClass="LeadManage">
             <FontClass>
               <![CDATA[<i class="fa fa-line-chart"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="ShortSale-Agent-Eviction" Text="Eviction" NavigationUrl="/ShortSale/ShortSale.aspx?LeadsAgent=true&amp;isEviction=true" ShowAmount="true">
+          <PortalNavItem Name="Agent-InProcess-Eviction" Text="Eviction" NavigationUrl="/LeadAgent.aspx?c=In Process&amp;t=Eviction" ShowAmount="true" AmountManageClass="LeadManage">
             <FontClass>
               <![CDATA[<i class="fa fa-sign-out"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Construction" Text="Construction" NavigationUrl="/MgrViewLeads.aspx?c=In Process" ShowAmount="true">
+          <PortalNavItem Name="Agent-InProcess-Construction" Text="Construction" NavigationUrl="/LeadAgent.aspx?c=In Process&amp;t=Construction" ShowAmount="true" AmountManageClass="LeadManage">
             <FontClass>
               <![CDATA[<i class="fa  fa-wrench"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Litigation" Text="Litigation" NavigationUrl="/MgrViewLeads.aspx?c=In Process" ShowAmount="true">
+          <PortalNavItem Name="Agent-InProcess-Legal" Text="Litigation" NavigationUrl="/LeadAgent.aspx?c=In Process&amp;t=Legal" ShowAmount="true" AmountManageClass="LeadManage">
             <FontClass>
               <![CDATA[<i class="fa fa-university"></i>]]>
             </FontClass>
@@ -172,22 +172,22 @@
               <![CDATA[<i class="fa fa-refresh"></i>]]>
             </FontClass>
             <Items>
-              <PortalNavItem Name="ShortSale-Agent-All" Text="Short Sale" NavigationUrl="/ShortSale/ShortSale.aspx?LeadsAgent=true" ShowAmount="true">
+              <PortalNavItem Name="Agent-InProcess-ShortSale" Text="Short Sale" NavigationUrl="/LeadAgent.aspx?c=In Process&amp;t=ShortSale" ShowAmount="true" AmountManageClass="LeadManage">
                 <FontClass>
                   <![CDATA[<i class="fa fa-line-chart"></i>]]>
                 </FontClass>
               </PortalNavItem>
-              <PortalNavItem Name="ShortSale-Agent-Eviction" Text="Eviction" NavigationUrl="/ShortSale/ShortSale.aspx?LeadsAgent=true&amp;isEviction=true" ShowAmount="true">
+              <PortalNavItem Name="Agent-InProcess-Eviction" Text="Eviction" NavigationUrl="/LeadAgent.aspx?c=In Process&amp;t=Eviction" ShowAmount="true" AmountManageClass="LeadManage">
                 <FontClass>
                   <![CDATA[<i class="fa fa-sign-out"></i>]]>
                 </FontClass>
               </PortalNavItem>
-              <PortalNavItem Name="Construction" Text="Construction" NavigationUrl="/MgrViewLeads.aspx?c=In Process" ShowAmount="true">
+              <PortalNavItem Name="Agent-InProcess-Construction" Text="Construction" NavigationUrl="/LeadAgent.aspx?c=In Process&amp;t=Construction" ShowAmount="true" AmountManageClass="LeadManage">
                 <FontClass>
                   <![CDATA[<i class="fa  fa-wrench"></i>]]>
                 </FontClass>
               </PortalNavItem>
-              <PortalNavItem Name="Litigation" Text="Litigation" NavigationUrl="/MgrViewLeads.aspx?c=In Process" ShowAmount="true">
+              <PortalNavItem Name="Agent-InProcess-Legal" Text="Litigation" NavigationUrl="/LeadAgent.aspx?c=In Process&amp;t=Legal" ShowAmount="true" AmountManageClass="LeadManage">
                 <FontClass>
                   <![CDATA[<i class="fa fa-university"></i>]]>
                 </FontClass>
@@ -246,22 +246,22 @@
           <![CDATA[ <i class="fa fa-refresh"></i>]]>
         </FontClass>
         <Items>
-          <PortalNavItem Name="ShortSale-Manager-All" Text="Short Sale" NavigationUrl="/ShortSale/ShortSale.aspx?mgr=true" ShowAmount="true">
+          <PortalNavItem Name="Manager-InProcess-ShortSale" Text="Short Sale" NavigationUrl="/MgrViewLeads.aspx?c=In Process&amp;t=ShortSale" ShowAmount="true" AmountManageClass="LeadManage">
             <FontClass>
               <![CDATA[<i class="fa fa-line-chart"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="ShortSale-Manager-Eviction" Text="Eviction" NavigationUrl="/ShortSale/ShortSale.aspx?mgr=true&amp;isEviction=true" ShowAmount="true">
+          <PortalNavItem Name="Manager-InProcess-Eviction" Text="Eviction" NavigationUrl="/MgrViewLeads.aspx?c=In Process&amp;t=Eviction" ShowAmount="true" AmountManageClass="LeadManage">
             <FontClass>
               <![CDATA[<i class="fa fa-sign-out"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Construction" Text="Construction" NavigationUrl="/MgrViewLeads.aspx?c=In Process" ShowAmount="true">
+          <PortalNavItem Name="Manager-InProcess-Construction" Text="Construction" NavigationUrl="/MgrViewLeads.aspx?c=In Process&amp;t=Construction" ShowAmount="true" AmountManageClass="LeadManage">
             <FontClass>
               <![CDATA[<i class="fa  fa-wrench"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Litigation" Text="Litigation" NavigationUrl="/MgrViewLeads.aspx?c=In Process" ShowAmount="true">
+          <PortalNavItem Name="Manager-InProcess-Legal" Text="Litigation" NavigationUrl="/MgrViewLeads.aspx?c=In Process&amp;t=Legal" ShowAmount="true" AmountManageClass="LeadManage">
             <FontClass>
               <![CDATA[<i class="fa fa-university"></i>]]>
             </FontClass>

@@ -280,8 +280,7 @@
         //if (typeof gridLeads != 'undefined')
         //    gridLeads.Refresh();
     }
-
-
+    
     function AppointmentAction(s, logID) {
         var item = s.GetSelectedItem();
 
@@ -308,7 +307,6 @@
                 ASPxPopupScheduleClient.Show();
                 appointmentCallpanel.PerformCallback(logID);
             }
-
         }
     }
 

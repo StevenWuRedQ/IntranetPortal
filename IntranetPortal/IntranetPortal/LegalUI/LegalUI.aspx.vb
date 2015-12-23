@@ -18,7 +18,6 @@ Public Class LegalUI
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-
         If Not Page.IsPostBack Then
             SecondaryAction = Request.QueryString("Attorney") IsNot Nothing
             Agent = Request.QueryString("Agent") IsNot Nothing
@@ -55,11 +54,13 @@ Public Class LegalUI
             End If
         End If
     End Sub
+
     Public Function ShowReassginBtn() As Boolean
         Dim isCloase = (Not String.IsNullOrEmpty(Me.Request.QueryString("lc"))) AndAlso Me.Request.QueryString("lc") = "4"
         Dim isNeedReAssginBtn = Me.Page.User.IsInRole("Legal-Manager") AndAlso isCloase
         Return isNeedReAssginBtn
     End Function
+
     Sub Page_init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
 
         HiddenTab = Not String.IsNullOrEmpty(Request.QueryString("HiddenTab"))

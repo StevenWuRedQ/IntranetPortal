@@ -21,11 +21,15 @@ Public Class LegalECourt
     End Sub
     Public Sub UpdateIndexNumber()
         If (BodyText IsNot Nothing) Then
-            Dim regexIndexNum = "\d{6}\/\d{4}"
+            Dim regexIndexNum = "\d{6,7}\/\d{4}"
+
             Dim IndexNumregex = "Index Number: " & regexIndexNum
             Dim IndexNumMatch = Regex.Match(BodyText, IndexNumregex)
             If (IndexNumMatch.Success) Then
                 Dim indexNum = Regex.Match(IndexNumMatch.Value, regexIndexNum).Value
+                'only take 6 when there are 7 digit on front
+                Dim regexIndexOnly6 = "\d{6}\/\d{4}"
+                indexNum = Regex.Match(indexNum, regexIndexOnly6).Value
                 If (Not String.IsNullOrEmpty(indexNum)) Then
                     Me.IndexNumber = indexNum
                 End If
@@ -88,6 +92,7 @@ Public Class LegalECourt
         End Using
     End Function
     Public Shared Function Parse(msg As ImapX.Message) As LegalECourt
+
         Dim eCourt As LegalECourt
         If msg Is Nothing Then
             Throw New Exception("msg can't be null !")
