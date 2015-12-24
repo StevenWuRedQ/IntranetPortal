@@ -1,0 +1,48 @@
+﻿Imports System.Text
+Imports Microsoft.VisualStudio.TestTools.UnitTesting
+Imports IntranetPortal.Data
+Imports System.Web.Http
+
+<TestClass()> Public Class LegalUnitTest
+
+    Dim bble = "1004490003"
+
+    <TestMethod()> Public Sub DataStatusTest()
+
+        Dim statusList = DataStatu.LoadDataStatus(LegalCase.ForeclosureStatusCategory)
+        Assert.IsTrue(statusList.Count > 0)
+        Assert.IsFalse(statusList.Any(Function(a) a.Active = False))
+
+        Dim lcase = LegalCase.GetCase(bble)
+        Dim dStatu = DataStatu.Instance(LegalCase.ForeclosureStatusCategory, lcase.LegalStatus)
+        Assert.AreEqual(lcase.LegalStatusString, dStatu.Name)
+        Assert.IsTrue(lcase.LegalStatusString = "Judgment Granted")
+    End Sub
+
+    <TestMethod()> Public Sub SaveHistoryTest()
+        Dim controller = New IntranetPortal.Controllers.LegalController
+        Dim history = controller.GetSaveHistories(bble)
+        Assert.IsInstanceOfType(history, GetType(IHttpActionResult))
+        Assert.IsInstanceOfType(history, GetType(Results.OkNegotiatedContentResult(Of IntranetPortal.Core.SystemLog())))
+        Dim logs = CType(history, Results.OkNegotiatedContentResult(Of IntranetPortal.Core.SystemLog())).Content
+        Assert.IsTrue(logs.Count > 0)
+    End Sub
+
+    <TestMethod()> Public Sub GetSavedHistoryTest()
+        Dim controller = New IntranetPortal.Controllers.LegalController
+        Dim logs = CType(controller.GetSaveHistories(bble), Results.OkNegotiatedContentResult(Of IntranetPortal.Core.SystemLog())).Content
+        Dim history = controller.GetSavedHistory(logs(0).LogId)
+
+        Assert.IsInstanceOfType(history, GetType(IHttpActionResult))
+        Dim caseData = CType(history, Results.OkNegotiatedContentResult(Of String)).Content
+
+        Assert.IsTrue(Not String.IsNullOrEmpty(caseData))
+        Dim jsCase = Newtonsoft.Json.Linq.JObject.Parse(caseData)
+        Assert.AreEqual(jsCase("PropertyInfo")("BBLE").ToString.Trim, bble)
+
+        history = controller.GetSavedHistory(0)
+        caseData = CType(history, Results.OkNegotiatedContentResult(Of String)).Content
+        Assert.AreEqual("{}", caseData)
+    End Sub
+
+End Class

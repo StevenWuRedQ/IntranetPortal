@@ -7,6 +7,17 @@ Partial Public Class SystemLog
     End Sub
 
     ''' <summary>
+    ''' Return system log object by log Id
+    ''' </summary>
+    ''' <param name="logId">Log Id</param>
+    ''' <returns></returns>
+    Public Shared Function GetLog(logId As Integer) As SystemLog
+        Using ctx As New CoreEntities
+            Return ctx.SystemLogs.Find(logId)
+        End Using
+    End Function
+
+    ''' <summary>
     ''' Add the log to system
     ''' </summary>
     ''' <param name="title">Log Title</param>
@@ -48,6 +59,33 @@ Partial Public Class SystemLog
             Return ctx.SystemLogs.Where(Function(l) l.Title = title And l.CreateDate > startDate And l.CreateDate < endDate And (noCategory OrElse l.Category = category)).ToList
         End Using
     End Function
+
+    ''' <summary>
+    ''' Return system logs without description information
+    ''' </summary>
+    ''' <param name="title">Log title</param>
+    ''' <param name="bble">property bble</param>
+    ''' <returns></returns>
+    Public Shared Function GetLightLogsByBBLE(title As String, bble As String) As SystemLog()
+
+        Using ctx As New CoreEntities
+            Dim result = (From log In ctx.SystemLogs.Where(Function(l) l.Title = title AndAlso l.BBLE = bble)
+                          Select New With {log.BBLE, log.Category, log.CreateBy, log.CreateDate, log.LogId, log.Title}).ToList
+
+            Return result.Select(Function(lg)
+                                     Return New SystemLog With {
+                                     .BBLE = lg.BBLE,
+                                     .Category = lg.Category,
+                                     .CreateBy = lg.CreateBy,
+                                     .CreateDate = lg.CreateDate,
+                                     .Title = lg.Title,
+                                     .LogId = lg.LogId
+                                     }
+                                 End Function).ToArray
+        End Using
+    End Function
+
+
 
     Public Shared Function GetLastLogs(title As String, endDate As DateTime, bble As String) As SystemLog
         Using ctx As New CoreEntities

@@ -2,6 +2,10 @@
 
 
 Partial Public Class LegalCase
+
+    Public Const ForeclosureStatusCategory As String = "LegalFCDataStatus"
+    Public Const TitleSaveLog As String = "LegalSave"
+
     Private _stuatsStr As String
     Public ReadOnly Property StuatsStr As String
         Get
@@ -39,8 +43,8 @@ Partial Public Class LegalCase
     Public ReadOnly Property LegalStatusString As String
         Get
             If LegalStatus.HasValue Then
-                Dim ls As DataStatus = LegalStatus
-                Return Core.Utility.GetEnumDescription(ls)
+                Dim ls As DataStatu = DataStatu.Instance(ForeclosureStatusCategory, LegalStatus)
+                Return ls.Name
             End If
 
             Return Nothing
@@ -65,7 +69,7 @@ Partial Public Class LegalCase
             ctx.SaveChanges()
         End Using
 
-        Core.SystemLog.Log("LegalSave", Newtonsoft.Json.JsonConvert.SerializeObject(Me), Core.SystemLog.LogCategory.SaveData, Me.BBLE, saveBy)
+        Core.SystemLog.Log(TitleSaveLog, Newtonsoft.Json.JsonConvert.SerializeObject(Me), Core.SystemLog.LogCategory.SaveData, Me.BBLE, saveBy)
     End Sub
 
     Private Sub RefreshReportFields()
@@ -235,7 +239,7 @@ Public Enum LegalCaseStatus
     Closed = 4
 End Enum
 
-Public Enum DataStatus
+Public Enum DataStatus2
     <Description("No current action")>
     NoAction = 1
     <Description("S&C/LP")>

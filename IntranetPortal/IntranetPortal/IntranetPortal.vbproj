@@ -577,6 +577,7 @@
     <Compile Include="CodeFolder\ActivityManageBase.vb" />
     <Compile Include="CodeFolder\INavMenuAmount.vb" />
     <Compile Include="CodeFolder\Lead.vb" />
+    <Compile Include="CodeFolder\LeadManage.vb" />
     <Compile Include="CodeFolder\LeadsActivityLog.vb" />
     <Compile Include="CodeFolder\LeadsSearchTask.vb" />
     <Compile Include="CodeFolder\LeadsStatusLog.vb" />
@@ -759,6 +760,7 @@
     <Compile Include="Controllers\CorporationEntitiesController.vb" />
     <Compile Include="Controllers\FollowUpController.vb" />
     <Compile Include="Controllers\LeadInfoDocumentSearchesController.vb" />
+    <Compile Include="Controllers\LegalController.vb" />
     <Compile Include="Controllers\LegalECourtsController.vb" />
     <Compile Include="Controllers\ManagementController.vb" />
     <Compile Include="Controllers\ReportController.vb" />
@@ -815,6 +817,9 @@
     <Compile Include="DataModel\HomeOwnerPhone.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\InProcessBBLE.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\LatLon_View.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
@@ -839,7 +844,7 @@
     <Compile Include="DataModel\LeadsInfo.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\LeadsInfoView.vb">
+    <Compile Include="DataModel\LeadsInShortSale.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\LeadsInThirdParty.vb">
@@ -1180,6 +1185,13 @@
     <Compile Include="LegalUI\LegalForeclosureReviewTab.ascx.vb">
       <DependentUpon>LegalForeclosureReviewTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LegalUI\LegalInfo.aspx.designer.vb">
+      <DependentUpon>LegalInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LegalUI\LegalInfo.aspx.vb">
+      <DependentUpon>LegalInfo.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="LegalUI\LegalPreQuestions.aspx.designer.vb">
       <DependentUpon>LegalPreQuestions.aspx</DependentUpon>
@@ -6459,6 +6471,7 @@
     <Content Include="LeadsGenerator\LeadsSearchApproval.aspx" />
     <Content Include="LegalUI\CaseLawRef.aspx" />
     <Content Include="LegalUI\LegalForeclosureReviewTab.ascx" />
+    <Content Include="LegalUI\LegalInfo.aspx" />
     <Content Include="LegalUI\LegalPreQuestions.aspx" />
     <Content Include="LegalUI\LegalSecondaryActions.ascx" />
     <Content Include="LegalUI\LegalSecondaryActionTab.ascx" />

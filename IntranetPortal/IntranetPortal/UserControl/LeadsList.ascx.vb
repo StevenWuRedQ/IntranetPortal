@@ -25,7 +25,14 @@ Public Class LeadsList
 
             If category = LeadStatus.InProcess Then
                 subOridates = Employee.GetManagedEmployees(mgrName, False)
-                Dim leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
+                Dim leads As List(Of Lead)
+                If Request.QueryString("t") IsNot Nothing Then
+                    Dim type = Request.QueryString("t")
+                    leads = LeadManage.GetLeadsInProcess(type, subOridates)
+                Else
+                    leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate).ToList
+                End If
+
                 gridLeads.DataSource = leads
                 gridLeads.DataBind()
             Else
@@ -80,7 +87,13 @@ Public Class LeadsList
 
             If category = LeadStatus.InProcess Then
                 subOridates = Employee.GetAllTeamUsers(TeamId)
-                leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
+
+                If Request.QueryString("t") IsNot Nothing Then
+                    Dim type = Request.QueryString("t")
+                    leads = LeadManage.GetLeadsInProcess(type, subOridates)
+                Else
+                    leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate).ToList
+                End If
             Else
                 leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
             End If

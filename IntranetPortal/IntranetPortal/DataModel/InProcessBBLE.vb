@@ -10,13 +10,8 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class TeamLeadsInZip
+Partial Public Class InProcessBBLE
     Public Property BBLE As String
-    Public Property EmployeeName As String
-    Public Property LeadsName As String
-    Public Property ZipCode As String
-    Public Property Name As String
-    Public Property PropertyAddress As String
-    Public Property LeadsSatus As String
+    Public Property Type As String
 
 End Class
