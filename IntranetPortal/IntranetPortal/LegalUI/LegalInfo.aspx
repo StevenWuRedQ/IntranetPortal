@@ -12,10 +12,13 @@
         var AllContact, AllJudges,AllRoboSignor;
         $(function () {
             var LegalCtrlScope = angular.element(document.getElementById('LegalCtrl')).scope();
-            var historyid = function () {
-                return <% %>
+            var logid = function () {
+                return <%= logid %>
+            }();
+            if (logid) {
+                LegalCtrlScope.loadHistoryData(logid);
             }
-            //LegalCtrlScope.loadHistory(historyid);
+            
         });
     </script>
     <uc1:LegalTab runat="server" ID="LegalTab" />

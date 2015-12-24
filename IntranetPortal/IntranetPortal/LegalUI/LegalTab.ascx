@@ -336,6 +336,42 @@
         <!-- /.modal-dialog -->
     </div>
     <div class="modal fade" id="HistoryPopup">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">History Versions:</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="overflow: auto; max-height: 300px">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td>Modified Date</td>
+                                    <td>Modified User</td>
+                                    <td>Details</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="h in History| orderBy: '-CreateDate'">
+                                    <td>{{ h.CreateDate |date:'MM/dd/yyyy HH:mm:ss'}}
+                                    </td>
+                                    <td>{{ h.CreateBy }}
+                                    </td>
+                                    <td><a ng-href="/LegalUI/Legalinfo.aspx?logid={{h.LogId}}" target="_blank">Open</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
 </div>
