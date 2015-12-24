@@ -226,24 +226,6 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
         Assert.IsTrue(ecourt.BBLE.Trim = "654321")
     End Sub
 
-    <TestMethod()>
-    Public Sub TestLegalECourtParse()
-        Dim client = New ImapClient("box1030.bluehost.com", True)
-
-        If client.Connect() Then
-
-            If client.Login("Portal.etrack@myidealprop.com", "ColorBlue1") Then
-
-                Dim msg = ImapX.
-                Dim l = LegalECourt.Parse(msg)
-                Assert.IsTrue(String.IsNullOrEmpty(l.BBLE))
-            End If
-
-        End If
-
-    End Sub
-
-
 
     <TestMethod()>
     Public Sub TestNeedCorrectLegalECourt()
