@@ -1,5 +1,5 @@
-﻿angular.module("PortalApp").
-filter("ByContact", function () {
+﻿angular.module("PortalApp")
+.filter("ByContact", function () {
     return function (movies, contact) {
         var items = {
 
@@ -17,5 +17,4 @@ filter("ByContact", function () {
         });
         return items.out;
     };
-}).
-filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }]);
+}).filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }]);
