@@ -1,0 +1,48 @@
+﻿<style>
+    .div-area, ck-area {
+        margin: 10px;
+        cursor: pointer;
+        height: 100%;
+    }
+
+    .div-content {
+        padding: 10px;
+        border: 1px #c8c8c8 solid;
+    }
+
+    .div-button {
+        visibility: hidden;
+        border: 1px black solid;
+        border-bottom-color: transparent;
+        padding: 1px 5px;
+    }
+
+        .div-button:hover {
+            color: red;
+        }
+
+    .div-area:hover .div-content {
+        border: 1px black solid;
+    }
+
+    .div-area:hover .div-button {
+        visibility: visible;
+    }
+</style>
+
+<div class="ptEditor">
+
+    <div class="div-area" ng-show="contentShown">
+        <span class="div-button" ng-click="showCK()">
+            <span class="editit"><i class="fa fa-pencil"></i> edit</span>
+        </span>
+        <div class="div-content">
+            <div ng-bind-html="ptModel| unsafe"></div>
+        </div>
+    </div>
+    <div class="ck-area" ng-show="editorShown">
+        <div class="ptEditorCK"></div>
+        <br />
+        <button type="button" class="btn btn-primary pull-right" ng-click="closeCK()">Finish</button>
+    </div>
+</div>

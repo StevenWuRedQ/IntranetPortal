@@ -6,10 +6,9 @@
 <%@ Register Src="~/LegalUI/LegalWriteupTab.ascx" TagPrefix="uc1" TagName="LegalWriteupTab" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
-<div id="LegalCtrl" ng-controller="LegalCtrl">
-
-    <div id="prioity_content">
-        <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
+<div id="LegalCtrl" ng-controller="LegalCtrl" style="position: absolute; top: 70px; bottom: 0px; width: 100%; margin-bottom: 250px">
+    <div id="prioity_content" style="height: 250px;">
+        <div class="content-title font_gray">
             <div style="font-size: 30px">
                 <span>
                     <i class="fa fa-home"></i>
@@ -27,6 +26,7 @@
             </div>
             <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; visibility: visible">{{GetCaseInfo().Name}}</span>
         </div>
+
         <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px; margin: 0">
             <div class="note_item" style="background: white">
                 <div style="overflow: auto; max-height: 100px">
@@ -88,32 +88,30 @@
     </div>
 
     <!--detial Nav tabs -->
-    <div style="height: 100%">
-        <ul class="nav nav-tabs overview_tabs" role="tablist" style="position: relative; top: 0">
+    <div style="height: 100%; position: absolute; top: 250px; bottom: 0; width: 100%; overflow-y: scroll">
+        <ul class="nav nav-tabs overview_tabs" role="tablist">
             <li class="short_sale_tab active"><a class="shot_sale_tab_a " href="#Summary" role="tab" data-toggle="tab">Summary</a></li>
             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Foreclosure_Review" role="tab" data-toggle="tab">Foreclosure Review</a></li>
             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Secondary_Actions" role="tab" data-toggle="tab">Secondary Actions</a></li>
             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#LegalWriteupTab" role="tab" data-toggle="tab">Write Up</a></li>
         </ul>
         <!-- Tab panes -->
-        <div class="wrapper-content" style="height: 95%; overflow-y: scroll">
-            <div class="tab-content" style="margin-bottom: 480px">
-                <div class="tab-pane active" id="Summary">
-                    <uc1:LegalSummaryTab runat="server" ID="LegalSummaryTab" />
-                </div>
-                <div class="tab-pane " id="Foreclosure_Review">
-                    <uc1:LegalForeclosureReviewTab runat="server" ID="LegalForeclosureReviewTab" />
-                </div>
-                <div class="tab-pane" id="Secondary_Actions">
-                    <uc1:LegalSecondaryActionTab runat="server" ID="LegalSecondaryActionTab" />
-                </div>
-                <div class="tab-pane" id="LegalWriteupTab">
-                    <uc1:LegalWriteupTab runat="server" ID="LegalWriteupTab" />
-                </div>
+        <div class="tab-content">
+            <div class="tab-pane active" id="Summary">
+                <uc1:LegalSummaryTab runat="server" ID="LegalSummaryTab" />
+            </div>
+            <div class="tab-pane " id="Foreclosure_Review">
+                <uc1:LegalForeclosureReviewTab runat="server" ID="LegalForeclosureReviewTab" />
+            </div>
+            <div class="tab-pane" id="Secondary_Actions">
+                <uc1:LegalSecondaryActionTab runat="server" ID="LegalSecondaryActionTab" />
+            </div>
+            <div class="tab-pane" id="LegalWriteupTab">
+                <uc1:LegalWriteupTab runat="server" ID="LegalWriteupTab1" />
             </div>
         </div>
     </div>
-    <input hidden="" id="short_sale_case_id" value="23">
+    <input hidden="" id="short_sale_case_id" value="23" />
 
     <div class="modal fade" id="RequestModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -360,7 +358,7 @@
                                     </td>
                                     <td>{{ h.CreateBy }}
                                     </td>
-                                    <td><a ng-href="/LegalUI/Legalinfo.aspx?logid={{h.LogId}}" target="_blank">Open</a>
+                                    <td><a href="" ng-click="openHistoryWindow(h.LogId)">Open</a>
                                     </td>
                                 </tr>
                             </tbody>
