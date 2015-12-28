@@ -2,8 +2,6 @@
 
 <%@ Register Src="~/LegalUI/LegalTab.ascx" TagPrefix="uc1" TagName="LegalTab" %>
 
-
-
 <asp:Content runat="server" ContentPlaceHolderID="head">
 </asp:Content>
 
@@ -21,6 +19,5 @@
             
         });
     </script>
-    <uc1:LegalTab runat="server" ID="LegalTab" />
-    
+    <uc1:LegalTab runat="server" ID="LegalTab" height="100%"/>    
 </asp:Content>

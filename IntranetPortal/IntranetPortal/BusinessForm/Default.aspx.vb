@@ -37,7 +37,7 @@
     End Sub
 
     Private Sub BindData(tag As String)
-        listdiv.Visible = False
+        listPanelDiv.Visible = False
 
         Dim form = Data.FormDataItem.Instance(FormData.DefaultControl.BusinessData, tag)
 

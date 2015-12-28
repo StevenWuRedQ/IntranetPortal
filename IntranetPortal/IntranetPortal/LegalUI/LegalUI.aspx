@@ -60,10 +60,10 @@
 
             var AllRoboSignor = function () {
                 return <%= GetAllRoboSingor() %>
-        }();
+            }();
 
-        var taskSN = function () {
-            return '<%= Request.QueryString("sn")%>'
+            var taskSN = function () {
+                return '<%= Request.QueryString("sn")%>'
         }();
 
 
@@ -177,9 +177,8 @@
 
     <%--leagal Ui--%>
     <div id="legalui">
-        <div ui-layout="{flow: 'column'}" id="listPanelDiv">
-
-            <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">
+        <div ui-layout="{flow: 'column'}">
+            <div runat="server" id="listPanelDiv" size="280px" max-size="320px" ui-layout-container hideafter>
                 <asp:Panel ID="listpanel" runat="server">
                     <uc1:LegalCaseList runat="server" ID="LegalCaseList" />
                 </asp:Panel>
@@ -244,7 +243,6 @@
                         </div>
 
                         <div style="align-content: center; height: 100%">
-
                             <!-- Nav tabs -->
                             <% If Not HiddenTab Then%>
                             <div class="legal-menu row" style="position: relative; top: 0; margin: 0; z-index: 1; width: 100%">
@@ -351,10 +349,7 @@
                                         </dx:ASPxButton>
                                     </dx:PopupControlContentControl>
                                 </ContentCollection>
-                                <ClientSideEvents Closing="function(s,e){
-                                              if (typeof gridTrackingClient != 'undefined')
-                                                    gridTrackingClient.Refresh();
-                                        }"></ClientSideEvents>
+                                <ClientSideEvents Closing="function(s,e){if (typeof gridTrackingClient != 'undefined'){gridTrackingClient.Refresh();}}"></ClientSideEvents>
                             </dx:ASPxPopupControl>
 
                             <% End If%>
@@ -426,8 +421,8 @@
                             </div>
 
 
-                            <div class="tab-content" style="height: 100%">
-                                <div class="tab-pane active" id="LegalTab" style="height: 100%">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="LegalTab">
                                     <uc1:LegalTab runat="server" ID="LegalTab1" />
                                     <script>
                                         LegalShowAll = true;
@@ -470,47 +465,6 @@
                             <ClientSideEvents CloseUp="function(s,e){}" />
                         </dx:ASPxPopupControl>
 
-                        <%--
-                        <div runat = "server" id="SencnedAction" visible="False" style="padding: 0 10px">
-                            <div>
-                                <script type = "text/javascript" >
-                                    var PropertyInfo = $.parseJSON('<%= propertyData%>');
-                                    function LeagalInfoSelectChange(s, e) {
-                                        var selected = cbLegalTypeClient.GetSelectedValues();
-                                        $('.legal_action_div').css("display", 'none');
-                                        $(selected).each(function (i, se) {
-                                            $("#" + se).css("display", '');
-                                        });
-                                    }
-                                </script>
-                                <div>
-                                    <h4 class="ss_form_title">Description</h4>
-                                    <textarea class="edit_text_area" ng-model="LegalCase.Description" style="height: 100px; width: 100%"></textarea>
-                                </div>
-
-
-                                <dx:ASPxCheckBoxList runat="server" ID="cbLegalType" ClientInstanceName="cbLegalTypeClient">
-                                    <Items>
-                                        <dx:ListEditItem Text="Urgent Foreclosure review needed" Value="Urgent_Foreclosure_review_needed" />
-                                        <dx:ListEditItem Text="Partition" Value="Partition" />
-                                        <dx:ListEditItem Text="Deed Reversal" Value="Deed_Reversal" />
-                                        <dx:ListEditItem Text="Breach of Contract" Value="Breach_of_Contract" />
-                                        <dx:ListEditItem Text="Quiet Title" Value="Quiet_Title" />
-                                        <dx:ListEditItem Text="Estate" Value="Estate" />
-
-                                    </Items>
-                                    <ClientSideEvents SelectedIndexChanged="LeagalInfoSelectChange" />
-                                </dx:ASPxCheckBoxList>
-
-                                <uc1:LegalSecondaryActions runat="server" ID="LegalSecondaryActions" />
-
-                                <script>
-                                    $('.legal_action_div').css("display", 'none');
-                                </script>
-                            </div>
-                        </div>
-                        --%>
-
                         <div runat="server" id="MangePreview" visible="False">
                             <uc1:ManagePreViewControl runat="server" ID="ManagePreViewControl" />
                         </div>
@@ -520,7 +474,7 @@
                 </asp:Panel>
             </div>
 
-            <div ui-layout-container>
+            <div id="logPanelDiv" ui-layout-container>
                 <asp:Panel ID="logpanel" runat="server">
                     <div style="font-size: 12px; color: #9fa1a8;">
                         <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">

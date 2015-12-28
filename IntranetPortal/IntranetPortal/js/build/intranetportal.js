@@ -936,7 +936,7 @@ angular.module("PortalApp")
             var ckdiv = $(el).find("div.ptEditorCK")[0];
             var ck = CKEDITOR.replace(ckdiv, {
                 allowedContent: true,
-                height: 450,
+                height: 400,
             });
             scope.editorShown = false;
 
@@ -949,7 +949,6 @@ angular.module("PortalApp")
                 scope.editorShown = false;
             }
 
-
             ck.on('pasteState', function () {
                 scope.$apply(function () {
                     ctrl.$setViewValue(ck.getData());
@@ -959,6 +958,8 @@ angular.module("PortalApp")
             ctrl.$render = function (value) {
                 ck.setData(ctrl.$modelValue);
             };
+
+            ck.setData(ctrl.$modelValue);
         }
     };
 }])

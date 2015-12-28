@@ -781,6 +781,13 @@ ul.ss_form_box {
     padding: 3px;
 }
 
+.content-title {
+    height: 80px;
+    font-size: 30px;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
 .cssSlideUp {
     -moz-transform: scaleY(1);
     -moz-transform-origin: top;
