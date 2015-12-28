@@ -221,6 +221,6 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
 
         e.UpdateBBLE()
 
-        Assert.IsTrue(e.BBLE = "1004490003 ")
+        Assert.IsTrue(e.BBLE = "1004490003")
     End Sub
 End Class
