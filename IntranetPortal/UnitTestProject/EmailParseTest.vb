@@ -2,18 +2,22 @@
 Imports IntranetPortal
 Imports IntranetPortal.Data
 Imports IntranetPortal.RulesEngine
+Imports System.Configuration
+Imports System.IO
+Imports System.Data.Entity
 
 <TestClass()>
 Public Class EmailParseTest
+    Shared CURPATH = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName
 
-    <TestMethod()>
-    Public Sub ParseEmailsTest()
+    Shared origConStr = "metadata=res://*/ADOEntity.PortalEntities.csdl|res://*/ADOEntity.PortalEntities.ssdl|res://*/ADOEntity.PortalEntities.msl;provider=System.Data.SqlClient;provider connection string='data source=chrispc,4436;initial catalog=IntranetPortal;User ID=Steven;Password=P@ssw0rd;multipleactiveresultsets=True;application name=EntityFramework'"
+    Shared tempConStr = "metadata=res://*/ADOEntity.PortalEntities.csdl|res://*/ADOEntity.PortalEntities.ssdl|res://*/ADOEntity.PortalEntities.msl;provider=System.Data.SqlClient;provider connection string='data source=.\SQLEXPRESS;AttachDbFilename=" & CURPATH & "\testdb.mdf;Integrated Security=True;User Instance=True;application name=EntityFramework'"
 
-        Dim MessageStr = <string>Index Number: 012011/2014
+    Shared MessageStr = <string>Index Number: 0120111/2014
 The following case which you have subscribed to in eTrack has been updated. Changes from the last update are shown in red and are annotated.
 
 Court: Queens Civil Supreme
-Index Number: 012011/2014
+Index Number: 0120111/2014
 Case Name: LEON, JEANETH vs. MUNOZ, ANGEL
 Case Type: Other Real Property
 Track: Standard
@@ -171,69 +175,61 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
 
 </string>
 
+    <ClassInitialize>
+    Public Shared Sub setup(context As TestContext)
+        Dim conf = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
+        origConStr = ConfigurationManager.ConnectionStrings("PortalEntities").ConnectionString
+        Dim consec = CType(conf.GetSection("connectionStrings"), ConnectionStringsSection)
+        consec.ConnectionStrings("PortalEntities").ConnectionString = tempConStr
+        conf.Save(ConfigurationSaveMode.Minimal)
+        ConfigurationManager.RefreshSection(conf.ConnectionStrings.SectionInformation.SectionName)
+        Database.SetInitializer(New DropCreateDatabaseAlways(Of PortalEntities)())
 
-        Dim ecourt = New LegalECourt()
-        ecourt.BodyText = MessageStr
-        ecourt.UpdateApperanceDate()
-        ecourt.UpdateIndexNumber()
-        ecourt.UpdateBBLE()
-        Assert.IsTrue(ecourt.AppearanceDate > DateTime.MinValue)
-        Assert.IsTrue(Not String.IsNullOrEmpty(ecourt.IndexNumber))
-        Assert.IsTrue(Not String.IsNullOrEmpty(ecourt.BBLE))
-    End Sub
-    ''' <summary>
-    ''' test if there are get the right BBLE
-    ''' </summary>
-    <TestMethod()>
-    Public Sub TestLegalECourtParse()
-        Dim client = New ImapClient("box1030.bluehost.com", True)
-
-        If client.Connect() Then
-
-            If client.Login("Portal.etrack@myidealprop.com", "ColorBlue1") Then
-
-                Dim msg = client.Folders.Inbox.Search("UNSEEN", -1, -1).Where(Function(m) m.Subject = "eTrack Supreme: LEON, JEANETH vs. MUNOZ, ANGEL (012011/2014) Updated").OrderByDescending(Function(m) m.Date).FirstOrDefault()
-                Dim l = LegalECourt.Parse(msg)
-
-
-                Assert.IsTrue(String.IsNullOrEmpty(l.BBLE))
-            End If
-
-        End If
-
-
-
+        Using ctx As New PortalEntities
+            ctx.Database.ExecuteSqlCommand("TRUNCATE TABLE [dbo].[LegalECourts]")
+            ctx.LegalECourts.Add(New LegalECourt() With {.BBLE = "123456", .IndexNumber = "123456/1990", .AppearanceDate = New Date(1990, 12, 25), .CreateDate = New Date(1990, 1, 1), .Subject = "Case 1"})
+            ctx.LegalECourts.Add(New LegalECourt() With {.BBLE = "123456", .IndexNumber = "123456/1990", .AppearanceDate = New Date(1990, 12, 25), .CreateDate = New Date(1990, 1, 2), .Subject = "Case 2"})
+            ctx.Database.ExecuteSqlCommand("TRUNCATE TABLE [dbo].[LegalCase]")
+            ctx.LegalCases.Add(New LegalCase() With {.BBLE = "654321", .FCIndexNum = "120111/2014"})
+            ctx.SaveChanges()
+        End Using
 
     End Sub
+
+
     <TestMethod()>
     Public Sub EmailConnectedTest()
         Dim serv = New Core.ParseEmailService("Portal.etrack@myidealprop.com", "ColorBlue1")
+        Assert.IsTrue(serv.IsLogedIn, "connection should established")
 
-
-        ''''''''''''''''''''''''''''''''
         Dim msg = serv.GetNewEmails
-        For Each m In msg
-            LegalECourt.Parse(m)
-        Next
-        Dim eCases = Data.LegalECourt.GetIndexLegalECourts()
-        For Each c In eCases
-            If (c.UpdateBBLE()) Then
+        Assert.IsTrue(msg.Count >= 0, "there should be some emails")
 
-            End If
-        Next
-        Assert.IsTrue(msg.Count > 0)
-        ''''''''''''''''''''''''
-
-        Assert.IsTrue(serv.IsLogedIn)
     End Sub
+
+    <TestMethod()>
+    Public Sub ParseEmailsTest()
+
+
+        Dim ecourt = New LegalECourt()
+        ecourt.BodyText = MessageStr.ToString
+        ecourt.UpdateApperanceDate()
+        Assert.IsTrue(ecourt.AppearanceDate > DateTime.MinValue)
+        Assert.IsTrue(ecourt.AppearanceDate = Convert.ToDateTime("03/18/2016"))
+
+        ecourt.UpdateIndexNumber()
+        Assert.IsTrue(Not String.IsNullOrEmpty(ecourt.IndexNumber))
+        Assert.IsTrue(ecourt.IndexNumber = "120111/2014")
+
+        ecourt.UpdateBBLE()
+        Assert.IsTrue(Not String.IsNullOrEmpty(ecourt.BBLE))
+        Assert.IsTrue(ecourt.BBLE.Trim = "654321")
+    End Sub
+
+
     <TestMethod()>
     Public Sub TestNeedCorrectLegalECourt()
         Dim eCases = Data.LegalECourt.GetIndexLegalECourts()
-        'For Each c In eCases
-        '    If (c.UpdateBBLE()) Then
-        '        Console.WriteLine("UpDate Ecourt :" & c.IndexNumber & "Legal Ecourt Id: " & c.Id & "To BBLE: " & c.BBLE)
-        '    End If
-        'Next
         Assert.IsTrue(eCases.Count > 0)
     End Sub
 
