@@ -189,7 +189,15 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                 var OldStatus = $(elem + ' option[value="' + old + '"]').html();
                 var NowStatus = $(elem + ' option[value="' + now + '"]').html();
 
-                AddActivityLog(changeObject.msg + OldStatus + ' to ' + NowStatus)
+                if (!OldStatus)
+                {
+                    AddActivityLog(changeObject.msg.replace(" from", '') + ' to ' + NowStatus);
+                }
+                else
+                {
+                    AddActivityLog(changeObject.msg + OldStatus + ' to ' + NowStatus);
+                }
+                
                 $scope.LogChange[i].old = now;
             }
         }

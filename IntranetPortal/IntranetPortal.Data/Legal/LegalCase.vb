@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel
-
+Imports System.Text.RegularExpressions
 
 Partial Public Class LegalCase
     Private _stuatsStr As String
@@ -122,14 +122,46 @@ Partial Public Class LegalCase
         End Using
     End Function
 
+    ''' <summary>
+    ''' Get the Case by index number if there are two cases have same 
+    ''' index number then take the frist one
+    ''' </summary>
+    ''' <param name="indexNum"></param>
+    ''' <returns></returns>
     Public Shared Function GetLegalCaseByFcIndex(indexNum As String) As LegalCase
         If (String.IsNullOrEmpty(indexNum)) Then
             Return Nothing
         End If
 
         Using ctx As New PortalEntities
-            Return ctx.LegalCases.Where(Function(c) c.FCIndexNum = indexNum).FirstOrDefault
+            Dim lcases = ctx.LegalCases.Where(Function(c) Not String.IsNullOrEmpty(c.FCIndexNum)).ToList()
+            For Each c In lcases
+                Dim legalCaseIndex = IndexNumberFormat(c.FCIndexNum)
+                Dim eCortIndex = IndexNumberFormat(indexNum)
+                If (legalCaseIndex = eCortIndex) Then
+                    Return c
+                End If
+            Next
         End Using
+        Return Nothing
+    End Function
+    ''' <summary>
+    ''' Remove index number to no leading zero like "001234/2015" to "1234/2015"
+    ''' </summary>
+    ''' <param name="IndexNumber"></param>
+    ''' <returns></returns>
+    Public Shared Function IndexNumberFormat(IndexNumber As String) As String
+        If (String.IsNullOrEmpty(IndexNumber)) Then
+            Return Nothing
+        End If
+        Dim ZeroIndex = 0
+        For i = 0 To IndexNumber.Length
+            If (IndexNumber.Chars(i) <> "0") Then
+                ZeroIndex = i
+                Exit For
+            End If
+        Next
+        Return IndexNumber.Substring(ZeroIndex)
     End Function
     Public Shared Sub UpdateStatus(bble As String, status As LegalCaseStatus, updateBy As String)
         'update legal case status

@@ -865,7 +865,15 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                 var OldStatus = $(elem + ' option[value="' + old + '"]').html();
                 var NowStatus = $(elem + ' option[value="' + now + '"]').html();
 
-                AddActivityLog(changeObject.msg + OldStatus + ' to ' + NowStatus)
+                if (!OldStatus)
+                {
+                    AddActivityLog(changeObject.msg.replace(" from", '') + ' to ' + NowStatus);
+                }
+                else
+                {
+                    AddActivityLog(changeObject.msg + OldStatus + ' to ' + NowStatus);
+                }
+                
                 $scope.LogChange[i].old = now;
             }
         }
@@ -2696,10 +2704,10 @@ angular.module("PortalApp")
     };
     $scope.InitData = function (data) {
         $scope.allContacts = data.slice();
-       // var gropData = groupBy(data, group_func);
-        $scope.showingContacts = data;
+        var gropData = data;//groupBy(data, group_func);
+        $scope.showingContacts = gropData;
 
-        return data;
+        return gropData;
     }
     $scope.initGroups = function () {
         $http.post('/CallBackServices.asmx/GetAllGroups', {}).
@@ -2733,20 +2741,10 @@ angular.module("PortalApp")
             $scope.LogError = data
             alert("error get contacts: " + status + " error :" + data.d);
         });
-    $scope.UniqueArray  =  function(arr){
-        var u = {}, a = [];
-        for (var i = 0, l = arr.length; i < l; ++i) {
-            if (u.hasOwnProperty(arr[i])) {
-                continue;
-            }
-            a.push(arr[i]);
-            u[arr[i]] = 1;
-        }
-        return a;
-    }
+
     $scope.initLenderList = function () {
         $http.post('/CallBackServices.asmx/GetLenderList', {}).success(function (data, status) {
-            $scope.lenderList = $scope.UniqueArray(data.d);
+            $scope.lenderList = _.uniq(data.d);
         });
     }
 

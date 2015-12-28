@@ -2257,7 +2257,15 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                 var OldStatus = $(elem + ' option[value="' + old + '"]').html();
                 var NowStatus = $(elem + ' option[value="' + now + '"]').html();
 
-                AddActivityLog(changeObject.msg + OldStatus + ' to ' + NowStatus)
+                if (!OldStatus)
+                {
+                    AddActivityLog(changeObject.msg.replace(" from", '') + ' to ' + NowStatus);
+                }
+                else
+                {
+                    AddActivityLog(changeObject.msg + OldStatus + ' to ' + NowStatus);
+                }
+                
                 $scope.LogChange[i].old = now;
             }
         }
@@ -4088,7 +4096,7 @@ angular.module("PortalApp")
     };
     $scope.InitData = function (data) {
         $scope.allContacts = data.slice();
-        var gropData = data//groupBy(data, group_func);
+        var gropData = data;//groupBy(data, group_func);
         $scope.showingContacts = gropData;
 
         return gropData;
@@ -4111,7 +4119,7 @@ angular.module("PortalApp")
         //debugger;
         var allContacts = gropData;
         if (allContacts.length > 0) {
-            $scope.currentContact = gropData[0].data[0];
+            $scope.currentContact = gropData[0];
             m_current_contact = $scope.currentContact;
 
         }
