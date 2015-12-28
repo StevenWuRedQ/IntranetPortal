@@ -7,8 +7,8 @@
     <ProjectGuid>{5C1478E9-FAEA-46A2-9178-CFBE15E354C4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsFormsApplication1</RootNamespace>
-    <AssemblyName>WindowsFormsApplication1</AssemblyName>
+    <RootNamespace>DroneManage</RootNamespace>
+    <AssemblyName>Drone_manage</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -70,6 +70,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\PortalService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\WCFAPI\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,6 +92,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="AppData\BBLEs.json" />
     <None Include="AppData\data.json" />
@@ -100,8 +106,120 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Service References\PortalService\CommonService.wsdl" />
+    <None Include="Service References\PortalService\CommonService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PortalService\CommonService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PortalService\CommonService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\WCFAPI\Arrays.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.AB_Report_Out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.Acris_Last_Sales_Info.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.Acris_LatestOwner_View.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.Acris_Out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.ADT_out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.ALL_NYC_Tax_Liens_CO_Info.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.Bankruptcy1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.DOB_Complaints_out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.DOB_PPO_out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.ECB.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.EmergencyRepair.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.FederalTaxLien.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.Judgment.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.LisPen.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.Mortgages_Deeds.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.NYC_Assessment.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.NYC_Assessment_Initial_Search_View.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.NYC_NameAndAddress_View.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.NYC_Prop_tax_Out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.NYC_WaterSewer_Out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.ParkingViolation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.Patriot.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.SP_DOB_Complaints_By_BBLE_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.SP_DOB_Complaints_History_By_BBLE_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.SP_Is_TrigOn_BY_BBLE_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.SP_NYC_Zoning_BY_BBLE_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.TaxLien_Info.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.TLOLocateReportOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.TLOPersonSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.TLO_SuperPhoneResults.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.TranscriptAdjunction.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.TriggerManager.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCFAPI\DroneManage.WCFAPI.UCC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\WCFAPI\service.wsdl" />
     <None Include="Service References\WCFAPI\service.xsd">
@@ -122,108 +240,6 @@
     <None Include="Service References\WCFAPI\TestComponent_VB.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.AB_Report_Out.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.Acris_Last_Sales_Info.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.Acris_LatestOwner_View.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.Acris_Out.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.ADT_out.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.ALL_NYC_Tax_Liens_CO_Info.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.Bankruptcy1.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.DOB_Complaints_out.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.DOB_PPO_out.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.ECB.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.EmergencyRepair.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.FederalTaxLien.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.Judgment.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.LisPen.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.Mortgages_Deeds.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.NYC_Assessment.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.NYC_Assessment_Initial_Search_View.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.NYC_NameAndAddress_View.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.NYC_Prop_tax_Out.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.NYC_WaterSewer_Out.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.ParkingViolation.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.Patriot.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.SP_DOB_Complaints_By_BBLE_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.SP_DOB_Complaints_History_By_BBLE_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.SP_Is_TrigOn_BY_BBLE_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.SP_NYC_Zoning_BY_BBLE_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.TaxLien_Info.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.TLOLocateReportOutput.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.TLOPersonSearchOutput.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.TLO_SuperPhoneResults.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.TranscriptAdjunction.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.TriggerManager.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WCFAPI\WindowsFormsApplication1.WCFAPI.UCC.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -234,6 +250,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\PortalService\" />
     <WCFMetadataStorage Include="Service References\WCFAPI\" />
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +261,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\WCFAPI\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PortalService\CommonService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PortalService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PortalService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PortalService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

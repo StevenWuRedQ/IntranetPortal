@@ -6639,6 +6639,7 @@
     <Content Include="Publish\PublishProperty.ascx" />
     <Content Include="Publish\PublishPropertyPage.aspx" />
     <Content Include="CustomReport\ReportWizard.aspx" />
+    <Content Include="require.js" />
     <Content Include="Scripts\autologout.js" />
     <Content Include="Scripts\autosave.js" />
     <Content Include="Scripts\ContactJs.js" />

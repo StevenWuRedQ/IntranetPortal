@@ -66,12 +66,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
     <script src="/Scripts/autosave.js?v=28122015"></script>
 
+  <%--  <script data-main="require" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.22/require.min.js"></script>--%>
+    <%--<script src="/require.js"></script>--%>
     <!-- pro env -->
     <script src="/js/build/intranetportal.js?v=28122015"></script>
 
     <!-- dev env -->
-    <!--
-    <script src="/js/app.js"></script>
+    
+    <%--<script src="/js/app.js"></script>
     <script src="/js/filters.js"></script>
     <script src="/js/services.js"></script>
     <script src="/js/directives.js"></script>
@@ -79,7 +81,7 @@
     <script src="/js/controllers/VendorController.js"></script>
     <script src="/js/controllers/BuyerEntityController.js"></script>
     <script src="/js/controllers/ConstructionController.js"></script>
-     -->
+    <script src="/js/controllers/LegalController.js"></script>--%>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -143,8 +145,8 @@
     </script>
     <div id="dataLoadingPanel" dx-load-panel="{message:'Loading..', showIndicator: true,  position:{of: '#dataPanelDiv'}, bindingOptions:{ visible: 'panelLoading' }}"></div>
 
-    <script src="/Scripts/autosave.js?v=28122015"></script>
-    <script src="/Scripts/stevenjs.js?v=28122015"></script>
-    <script src="/Scripts/autologout.js?v=28122015"></script>
+    <script src="/Scripts/autosave.js?v=23122015"></script>
+    <script src="/Scripts/stevenjs.js?v=23122015"></script>
+    <script src="/Scripts/autologout.js?v=23122015"></script>
 </body>
 </html>

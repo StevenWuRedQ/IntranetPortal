@@ -194,7 +194,6 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
             ctx.SaveChanges()
         End Using
 
-    End Sub
 
 
     <TestMethod()>
@@ -232,5 +231,14 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
         Dim eCases = Data.LegalECourt.GetIndexLegalECourts()
         Assert.IsTrue(eCases.Count > 0)
     End Sub
+    <TestMethod()>
+    Public Sub TestIndexMath()
+        Dim l = LegalCase.GetCase("1004490003 ")
+        Dim e = New LegalECourt()
+        e.IndexNumber = "123/0000"
 
+        e.UpdateBBLE()
+
+        Assert.IsTrue(e.BBLE = "1004490003")
+    End Sub
 End Class

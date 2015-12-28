@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b468efeb-6e65-4995-a8d7-ff81c716e7a7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://Portal.Myidealprop.com/WCFDataServices/CommonService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CommonService.xsd" MetadataType="Schema" ID="64c99a56-c330-441e-8d55-e8e54b78d0a9" SourceId="1" SourceUrl="http://portal.myidealprop.com/WCFDataServices/CommonService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CommonService1.xsd" MetadataType="Schema" ID="623cb17d-6a86-43e7-89fc-b0a9d68a4221" SourceId="1" SourceUrl="http://portal.myidealprop.com/WCFDataServices/CommonService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CommonService.disco" MetadataType="Disco" ID="1daeff88-d7a6-43b1-82a7-11137a6c9f08" SourceId="1" SourceUrl="http://portal.myidealprop.com/WCFDataServices/CommonService.svc?disco" />
+    <MetadataFile FileName="CommonService.wsdl" MetadataType="Wsdl" ID="0314e1ce-c43a-4b50-958e-cc08fae6cf57" SourceId="1" SourceUrl="http://portal.myidealprop.com/WCFDataServices/CommonService.svc?wsdl" />
+    <MetadataFile FileName="CommonService2.xsd" MetadataType="Schema" ID="06ae2971-bdc0-4081-960d-8448a9c8ea75" SourceId="1" SourceUrl="http://portal.myidealprop.com/WCFDataServices/CommonService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
