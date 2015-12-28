@@ -1,6 +1,6 @@
 ﻿/* global LegalShowAll */
 /* global angular */
-angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime', function ($scope, $http, ptContactServices, ptCom, ptTime) {
+angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
 
     $scope.ptContactServices = ptContactServices;
     $scope.ptCom = ptCom;
@@ -882,9 +882,12 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                     alert("Fail to load data : ");
                 });
 
-        }
-        
+        }       
 
 
+    }
+
+    $scope.openHistoryWindow = function (logid) {
+        $window.open('/LegalUI/Legalinfo.aspx?logid='+logid , '_blank', 'width=1024, height=768')
     }
 }]);

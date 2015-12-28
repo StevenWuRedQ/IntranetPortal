@@ -7,7 +7,7 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
     <script>
-        var AllContact, AllJudges,AllRoboSignor;
+        var AllContact, AllJudges, AllRoboSignor;
         $(function () {
             var LegalCtrlScope = angular.element(document.getElementById('LegalCtrl')).scope();
             var logid = function () {
@@ -16,8 +16,12 @@
             if (logid) {
                 LegalCtrlScope.loadHistoryData(logid);
             }
-            
+
         });
     </script>
-    <uc1:LegalTab runat="server" ID="LegalTab" height="100%"/>    
+    <div>
+        <div style="position: absolute; top: -60px; bottom: 0px; width:100%; overflow:auto">
+            <uc1:LegalTab runat="server" ID="LegalTab" height="100%" />
+        </div>
+    </div>
 </asp:Content>

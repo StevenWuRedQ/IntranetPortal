@@ -6,8 +6,8 @@
 <%@ Register Src="~/LegalUI/LegalWriteupTab.ascx" TagPrefix="uc1" TagName="LegalWriteupTab" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
-<div id="LegalCtrl" ng-controller="LegalCtrl">
-    <div id="prioity_content" style="position: absolute; top: 70px; height: 250px; width: 100%">
+<div id="LegalCtrl" ng-controller="LegalCtrl" style="position: absolute; top: 70px; bottom: 0px; width: 100%; margin-bottom: 250px">
+    <div id="prioity_content" style="height: 250px;">
         <div class="content-title font_gray">
             <div style="font-size: 30px">
                 <span>
@@ -88,7 +88,7 @@
     </div>
 
     <!--detial Nav tabs -->
-    <div style="height: 100%; position: absolute; top: 320px; bottom:0; width: 100%; overflow-y: scroll">
+    <div style="height: 100%; position: absolute; top: 250px; bottom: 0; width: 100%; overflow-y: scroll">
         <ul class="nav nav-tabs overview_tabs" role="tablist">
             <li class="short_sale_tab active"><a class="shot_sale_tab_a " href="#Summary" role="tab" data-toggle="tab">Summary</a></li>
             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Foreclosure_Review" role="tab" data-toggle="tab">Foreclosure Review</a></li>
@@ -96,7 +96,7 @@
             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#LegalWriteupTab" role="tab" data-toggle="tab">Write Up</a></li>
         </ul>
         <!-- Tab panes -->
-        <div class="tab-content" style="padding-bottom: 360px;">
+        <div class="tab-content">
             <div class="tab-pane active" id="Summary">
                 <uc1:LegalSummaryTab runat="server" ID="LegalSummaryTab" />
             </div>
@@ -358,7 +358,7 @@
                                     </td>
                                     <td>{{ h.CreateBy }}
                                     </td>
-                                    <td><a ng-href="/LegalUI/Legalinfo.aspx?logid={{h.LogId}}" target="_blank">Open</a>
+                                    <td><a href="" ng-click="openHistoryWindow(h.LogId)">Open</a>
                                     </td>
                                 </tr>
                             </tbody>
