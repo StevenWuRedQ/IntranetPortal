@@ -193,24 +193,41 @@
 
     }
 })
-.directive('ckEditor', [function () {
+.directive('ptEditor', [function () {
     return {
-        require: '?ngModel',
-        link: function (scope, elm, attr, ngModel) {
 
-            var ck = CKEDITOR.replace(elm[0], {
+        templateUrl: '/js/templates/ptEditor.html',
+        require: 'ngModel',
+        scope: {
+            ptModel: '=ngModel'
+        },
+        link: function (scope, el, attrs, ctrl) {
+            scope.contentShown = true;
+            var ckdiv = $(el).find("div.ptEditorCK")[0];
+            var ck = CKEDITOR.replace(ckdiv, {
                 allowedContent: true,
                 height: 450,
             });
+            scope.editorShown = false;
+
+            scope.showCK = function () {
+                scope.contentShown = false;
+                scope.editorShown = true;
+            }
+            scope.closeCK = function () {
+                scope.contentShown = true;
+                scope.editorShown = false;
+            }
+
 
             ck.on('pasteState', function () {
                 scope.$apply(function () {
-                    ngModel.$setViewValue(ck.getData());
+                    ctrl.$setViewValue(ck.getData());
                 });
             });
 
-            ngModel.$render = function (value) {
-                ck.setData(ngModel.$modelValue);
+            ctrl.$render = function (value) {
+                ck.setData(ctrl.$modelValue);
             };
         }
     };

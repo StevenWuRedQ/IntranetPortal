@@ -175,7 +175,7 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
 
 </string>
 
-    <ClassInitialize>
+
     Public Shared Sub setup(context As TestContext)
         Dim conf = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
         origConStr = ConfigurationManager.ConnectionStrings("PortalEntities").ConnectionString

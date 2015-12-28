@@ -12,13 +12,4 @@ Option Explicit On
 
 
 Partial Public Class LegalWriteupTab
-
-    '''<summary>
-    '''ASPxHtmlEditor1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxHtmlEditor1 As Global.DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor
 End Class
