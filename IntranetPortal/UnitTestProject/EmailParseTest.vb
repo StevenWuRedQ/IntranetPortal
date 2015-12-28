@@ -203,7 +203,7 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
         Assert.IsTrue(serv.IsLogedIn, "connection should established")
 
         Dim msg = serv.GetNewEmails
-        Assert.IsTrue(msg.Count >= 0, "there should be some emails")
+        Assert.IsTrue(msg.Count >= 0, "there should be some emails ")
 
     End Sub
 
