@@ -136,12 +136,11 @@ Partial Public Class LegalCase
         If (String.IsNullOrEmpty(indexNum)) Then
             Return Nothing
         End If
-
+        Dim eCortIndex = IndexNumberFormat(indexNum)
         Using ctx As New PortalEntities
-            Dim lcases = ctx.LegalCases.Where(Function(c) Not String.IsNullOrEmpty(c.FCIndexNum)).ToList()
+            Dim lcases = ctx.LegalCases.Where(Function(c) Not String.IsNullOrEmpty(c.FCIndexNum)).Where(Function(c) c.FCIndexNum.Contains(eCortIndex)).ToList()
             For Each c In lcases
                 Dim legalCaseIndex = IndexNumberFormat(c.FCIndexNum)
-                Dim eCortIndex = IndexNumberFormat(indexNum)
                 If (legalCaseIndex = eCortIndex) Then
                     Return c
                 End If

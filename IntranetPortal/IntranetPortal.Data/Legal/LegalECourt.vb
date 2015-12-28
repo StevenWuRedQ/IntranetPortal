@@ -21,7 +21,7 @@ Public Class LegalECourt
     End Sub
     Public Sub UpdateIndexNumber()
         If (BodyText IsNot Nothing) Then
-            Dim regexIndexNum = "*\/\d{4}"
+            Dim regexIndexNum = ".*\/\d{4}"
 
             Dim IndexNumregex = "Index Number: " & regexIndexNum
             Dim IndexNumMatch = Regex.Match(BodyText, IndexNumregex)

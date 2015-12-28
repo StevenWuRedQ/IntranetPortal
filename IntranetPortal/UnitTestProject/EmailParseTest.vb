@@ -193,8 +193,7 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
             ctx.LegalCases.Add(New LegalCase() With {.BBLE = "654321", .FCIndexNum = "120111/2014"})
             ctx.SaveChanges()
         End Using
-
-
+    End Sub
 
     <TestMethod()>
     Public Sub EmailConnectedTest()
