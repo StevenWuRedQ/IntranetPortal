@@ -185,7 +185,7 @@
     function InProcessSelectChange(s, e) {
         if (s.GetSelectedValues().indexOf('1') != -1) {
             document.getElementById('divEvictionUsers').style.display = 'block';
-            s.SelectValues(['0']);
+            //s.SelectValues(['0']);
         } else {
             document.getElementById('divEvictionUsers').style.display = 'none';
         }

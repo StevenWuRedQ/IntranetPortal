@@ -175,26 +175,7 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
 
 </string>
 
-    <ClassInitialize>
-    Public Shared Sub setup(context As TestContext)
-        Dim conf = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
-        origConStr = ConfigurationManager.ConnectionStrings("PortalEntities").ConnectionString
-        Dim consec = CType(conf.GetSection("connectionStrings"), ConnectionStringsSection)
-        consec.ConnectionStrings("PortalEntities").ConnectionString = tempConStr
-        conf.Save(ConfigurationSaveMode.Minimal)
-        ConfigurationManager.RefreshSection(conf.ConnectionStrings.SectionInformation.SectionName)
-        Database.SetInitializer(New DropCreateDatabaseAlways(Of PortalEntities)())
 
-        Using ctx As New PortalEntities
-            ctx.Database.ExecuteSqlCommand("TRUNCATE TABLE [dbo].[LegalECourts]")
-            ctx.LegalECourts.Add(New LegalECourt() With {.BBLE = "123456", .IndexNumber = "123456/1990", .AppearanceDate = New Date(1990, 12, 25), .CreateDate = New Date(1990, 1, 1), .Subject = "Case 1"})
-            ctx.LegalECourts.Add(New LegalECourt() With {.BBLE = "123456", .IndexNumber = "123456/1990", .AppearanceDate = New Date(1990, 12, 25), .CreateDate = New Date(1990, 1, 2), .Subject = "Case 2"})
-            ctx.Database.ExecuteSqlCommand("TRUNCATE TABLE [dbo].[LegalCase]")
-            ctx.LegalCases.Add(New LegalCase() With {.BBLE = "654321", .FCIndexNum = "120111/2014"})
-            ctx.SaveChanges()
-        End Using
-
-    End Sub
 
 
     <TestMethod()>
@@ -232,5 +213,14 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
         Dim eCases = Data.LegalECourt.GetIndexLegalECourts()
         Assert.IsTrue(eCases.Count > 0)
     End Sub
+    <TestMethod()>
+    Public Sub TestIndexMath()
+        Dim l = LegalCase.GetCase("1004490003 ")
+        Dim e = New LegalECourt()
+        e.IndexNumber = "123/0000"
 
+        e.UpdateBBLE()
+
+        Assert.IsTrue(e.BBLE = "1004490003 ")
+    End Sub
 End Class

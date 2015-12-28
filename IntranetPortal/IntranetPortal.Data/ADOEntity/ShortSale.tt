@@ -2,7 +2,7 @@
 <#@ include file="EF6.Utility.VB.ttinclude"#><#@
  output extension=".vb"#><#
 
-Const inputFile As String = "ShortSale.edmx"
+Const inputFile As String = "PortalEntities.edmx"
 Dim textTransform As DynamicTextTransformation = DynamicTextTransformation.Create(Me)
 Dim code As CodeGenerationTools = New CodeGenerationTools(Me)
 Dim ef As MetadataTools = New MetadataTools(Me)

@@ -11,7 +11,6 @@
         End Get
     End Property
 
-
     Public Shared Function GetAllCase() As List(Of LegalManagerReport)
         Using ctx As New PortalEntities
             Return ctx.LegalManagerReports.ToList
@@ -21,8 +20,8 @@
     Public ReadOnly Property LegalStatusString As String
         Get
             If LegalStatus.HasValue Then
-                Dim ls As DataStatus = LegalStatus
-                Return Core.Utility.GetEnumDescription(ls)
+                Dim ls As DataStatu = DataStatu.Instance(LegalCase.ForeclosureStatusCategory, LegalStatus)
+                Return ls.Name
             End If
 
             Return Nothing

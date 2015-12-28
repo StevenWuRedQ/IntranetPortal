@@ -30,14 +30,7 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-    <script>
-        /* immediately call to show the loading panel*/
-        (function () {
-            var loadingCover = document.getElementById("LodingCover");
-            loadingCover.style.display = "block";
-        })();
 
-    </script>
     <style>
         .dxgvControl_MetropolisBlue1 {
             width: auto !important;
@@ -47,11 +40,143 @@
             width: auto !important;
         }
     </style>
+
+    <script>
+        /* immediately call to show the loading panel*/
+        (function () {
+            var loadingCover = document.getElementById("LodingCover");
+            loadingCover.style.display = "block";
+        })();
+
+        var LegalCaseBBLE = null;
+
+        var AllJudges = function () {
+            return <%= GetAllJudge()%>
+        }();
+
+            var AllContact = function () {
+                return <%= GetAllContact()%>
+            }();
+
+            var AllRoboSignor = function () {
+                return <%= GetAllRoboSingor() %>
+        }();
+
+        var taskSN = function () {
+            return '<%= Request.QueryString("sn")%>'
+        }();
+
+
+        function OnCallbackMenuClick(s, e) {
+
+            if (e.item.name == "Custom") {
+                ASPxPopupSelectDateControl.PerformCallback("Show");
+                ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
+                e.processOnServer = false;
+                return;
+            }
+
+            //SetLeadStatus(e.item.name + "|" + leadsInfoBBLE);
+            SetLegalFollowUp(e.item.name)
+            e.processOnServer = false;
+        }
+
+        function CloseCase(comments) {
+            angular.element(document.getElementById('LegalCtrl')).scope().CloseCase(comments);
+        }
+
+        function SetLegalFollowUp(type, dateSelected) {
+            if (typeof dateSelected == 'undefined')
+                dateSelected = new Date();
+
+            var fileData = {
+                "bble": leadsInfoBBLE,
+                "type": type,
+                "dtSelected": dateSelected
+            };
+
+            $.ajax({
+                url: '/LegalUI/LegalServices.svc/SetLegalFollowUp',
+                type: 'POST',
+                data: JSON.stringify(fileData),
+                cache: false,
+                dataType: 'json',
+                processData: false, // Don't process the files
+                contentType: 'application/json',
+                success: function (data) {
+                    alert('successful..');
+
+                    if (typeof gridTrackingClient != "undefined")
+                        gridTrackingClient.Refresh();
+                },
+                error: function (data) {
+                    alert('Some error Occurred! Detail: ' + JSON.stringify(data));
+                }
+            });
+        }
+
+        function GetDataReadOnly() {
+            return $('#Viewable').val() == 'True'
+        }
+
+        function VendorsClosing(s) {
+            GetContactCallBack();
+        }
+
+        function GetContactCallBack(contact) {
+            $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
+                AllContact = data;
+            });
+
+        }
+
+        function GetLegalData() {
+            return angular.element(document.getElementById('LegalCtrl')).scope().LegalCase;
+
+        }
+
+        function setLegalData(BBLE) {
+            $(document).ready(function () {
+                angular.element(document.getElementById('LegalCtrl')).scope().LoadLeadsCase(BBLE);
+
+            });
+
+        }
+
+        /*chris use this show alert when leave page*/
+        function CaseDataChanged() {
+            return ScopeCaseDataChanged(GetLegalData);
+        }
+        function GetCassNeedComment() {
+            return CaseNeedComment;
+        }
+        function ResetCaseDataChange() {
+            ScopeResetCaseDataChange(GetLegalData)
+        }
+
+
+        $(function () {
+            var scope = angular.element('#LegalCtrl').scope();
+
+            ScopeAutoSave(GetLegalData, scope.SaveLegal, '#LegalTabHead');
+
+            $('body').tooltip({
+                selector: '.tooltip-examples',
+                placement: 'bottom'
+            });
+
+            if (leadsInfoBBLE && leadsInfoBBLE != null) {
+                if (WorkingLogControl)
+                    WorkingLogControl.openFile(leadsInfoBBLE, "Legal");
+            }
+        });
+    </script>
+
     <input type="hidden" id="CaseData" />
     <input type="hidden" id="Viewable" value="<%= IntranetPortal.LegalCaseManage.IsViewable(Page.User.Identity.Name)  %>" />
 
     <%--leagal Ui--%>
-    <div id="LegalCtrl" ng-controller="LegalCtrl">
+    <div id="legalui">
         <div ui-layout="{flow: 'column'}" id="listPanelDiv">
 
             <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">
@@ -59,7 +184,6 @@
                     <uc1:LegalCaseList runat="server" ID="LegalCaseList" />
                 </asp:Panel>
             </div>
-
 
             <div ui-layout-container id="dataPanelDiv">
                 <asp:Panel ID="datapanel" runat="server" Height="100%">
@@ -69,7 +193,6 @@
                                 if (CaseDataChanged())
                                     return "You have pending changes, would you save it?";
                             }
-
                             setInterval(function () {
                                 if (typeof GetDataReadOnly != 'undefined' && !GetDataReadOnly()) {
                                     return;
@@ -171,15 +294,15 @@
                                     </li>
 
                                     <li class="pull-right" style="margin-right: 30px; color: #ffa484">
-                                        <i class="fa fa-clock-o sale_head_button sale_head_button_left tooltip-examples" ng-click="CheckWorkHours()" data-original-title="Work hours"></i>
-                                        <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
+                                        <i class="fa fa-clock-o sale_head_button sale_head_button_left tooltip-examples" onclick="angular.element(document.getElementById('LegalCtrl')).scope().CheckWorkHours()" data-original-title="Work hours"></i>
+                                        <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" onclick="angular.element(document.getElementById('LegalCtrl')).scope().SaveLegal()" data-original-title="Save"></i>
 
                                         <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerPreview Then%>
                                         <i class="fa fa-lightbulb-o sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Research');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Research"></i>
                                         <% End If%>
 
                                         <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.LegalResearch Then%>
-                                        <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="CompleteResearch()" data-original-title="Complete Research"></i>
+                                        <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" onclick="angular.element(document.getElementById('LegalCtrl')).scope().CompleteResearch()" data-original-title="Complete Research"></i>
                                         <% End If%>
 
                                         <% If DisplayView = IntranetPortal.Data.LegalCaseStatus.ManagerAssign Or (ShowReassginBtn()) Then%>
@@ -188,7 +311,7 @@
                                         <% End If%>
 
                                         <%If DisplayView = IntranetPortal.Data.LegalCaseStatus.AttorneyHandle AndAlso User.IsInRole("Legal-Manager") Then%>
-                                        <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="AttorneyComplete()" data-original-title="Complete"></i>
+                                        <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" onclick="angular.element(document.getElementById('LegalCtrl')).scope().AttorneyComplete()" data-original-title="Complete"></i>
                                         <% End If%>
                                         <span class="dropdown">
                                             <i class="fa fa-caret-down sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="More" data-toggle="dropdown"></i>
@@ -249,14 +372,11 @@
                                         </dx:ASPxButton>
                                     </dx:PopupControlContentControl>
                                 </ContentCollection>
-                                <ClientSideEvents Closing="function(s,e){
-                                              if (typeof gridTrackingClient != 'undefined')
-                                                    gridTrackingClient.Refresh();
-                                        }" />
+                                <ClientSideEvents Closing="function(s,e){if (typeof gridTrackingClient != 'undefined'){gridTrackingClient.Refresh();}}" />
                             </dx:ASPxPopupControl>
 
                             <script type="text/javascript">
-                                //angular.element(document.getElementById('LegalCtrl')).scope().BackToResearch(comments);
+
                                 var PopupComments = {
                                     Action: null,
                                     Show: function (element, action) {
@@ -328,49 +448,7 @@
                             </div>
                         </div>
 
-                        <div class="modal fade" id="WorkPopUp">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title">Working Total : {{TotleHours.Total}} hours</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div style="overflow: auto; max-height: 300px">
-                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <td>User</td>
-                                                        <td>StartTime</td>
 
-                                                        <td>EndTime</td>
-                                                        <td>Duration</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr ng-repeat="l in TotleHours.LogData">
-                                                        <td class="">{{l.UserName }}
-                                                        </td>
-                                                        <td>{{l.StartTime |date:'MM/dd/yyyy HH:mm:ss'}}
-                                                        </td>
-                                                        <td>{{l.EndTime |date:'MM/dd/yyyy HH:mm:ss'}}
-                                                        </td>
-                                                        <td>{{l.Duration |date:'HH:mm:ss'}}
-                                                        </td>
-
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                                <!-- /.modal-content -->
-                            </div>
-                            <!-- /.modal-dialog -->
-                        </div>
-                        <!-- modal -->
                         <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
                             HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true" CloseAction="CloseButton"
                             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -392,9 +470,10 @@
                             <ClientSideEvents CloseUp="function(s,e){}" />
                         </dx:ASPxPopupControl>
 
-                        <div runat="server" id="SencnedAction" visible="False" style="padding: 0 10px">
+                        <%--
+                        <div runat = "server" id="SencnedAction" visible="False" style="padding: 0 10px">
                             <div>
-                                <script type="text/javascript">
+                                <script type = "text/javascript" >
                                     var PropertyInfo = $.parseJSON('<%= propertyData%>');
                                     function LeagalInfoSelectChange(s, e) {
                                         var selected = cbLegalTypeClient.GetSelectedValues();
@@ -405,7 +484,6 @@
                                     }
                                 </script>
                                 <div>
-
                                     <h4 class="ss_form_title">Description</h4>
                                     <textarea class="edit_text_area" ng-model="LegalCase.Description" style="height: 100px; width: 100%"></textarea>
                                 </div>
@@ -431,6 +509,7 @@
                                 </script>
                             </div>
                         </div>
+                        --%>
 
                         <div runat="server" id="MangePreview" visible="False">
                             <uc1:ManagePreViewControl runat="server" ID="ManagePreViewControl" />
@@ -486,78 +565,6 @@
             </div>
         </div>
         <uc1:SendMail runat="server" ID="SendMail" />
-        <div class="modal fade" id="NeedAddCommentPopUp">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">You didn't add a comment please input open files reason to continue!</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="message-text" class="control-label">Comment:</label>
-                            <textarea class="form-control" ng-model="MustAddedComment"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="!MustAddedComment" ng-click="AddActivityLog()">Add Comment</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Follow up function  -->
-        <script type="text/javascript">
-
-            function OnCallbackMenuClick(s, e) {
-
-                if (e.item.name == "Custom") {
-                    ASPxPopupSelectDateControl.PerformCallback("Show");
-                    ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
-                    e.processOnServer = false;
-                    return;
-                }
-
-                //SetLeadStatus(e.item.name + "|" + leadsInfoBBLE);
-                SetLegalFollowUp(e.item.name)
-                e.processOnServer = false;
-            }
-
-            function CloseCase(comments) {
-                angular.element(document.getElementById('LegalCtrl')).scope().CloseCase(comments);
-            }
-
-            function SetLegalFollowUp(type, dateSelected) {
-                if (typeof dateSelected == 'undefined')
-                    dateSelected = new Date();
-
-                var fileData = {
-                    "bble": leadsInfoBBLE,
-                    "type": type,
-                    "dtSelected": dateSelected
-                };
-
-                $.ajax({
-                    url: '/LegalUI/LegalServices.svc/SetLegalFollowUp',
-                    type: 'POST',
-                    data: JSON.stringify(fileData),
-                    cache: false,
-                    dataType: 'json',
-                    processData: false, // Don't process the files
-                    contentType: 'application/json',
-                    success: function (data) {
-                        alert('successful..');
-
-                        if (typeof gridTrackingClient != "undefined")
-                            gridTrackingClient.Refresh();
-                    },
-                    error: function (data) {
-                        alert('Some error Occurred! Detail: ' + JSON.stringify(data));
-                    }
-                });
-            }
-
-        </script>
 
         <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
             AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
@@ -604,81 +611,8 @@
         </dx:ASPxPopupControl>
         <!-- end follow up function -->
 
-        <script type="text/javascript">
-
-            LegalCaseBBLE = null;
-
-            function GetDataReadOnly() {
-                return $('#Viewable').val() == 'True'
-            }
-            function VendorsClosing(s) {
-                GetContactCallBack();
-            }
-            function GetContactCallBack(contact) {
-                $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
-                    AllContact = data;
-                });
-
-            }
-
-            function GetLegalData() {
-                return angular.element(document.getElementById('LegalCtrl')).scope().LegalCase;
-
-            }
-            function setLegalData(BBLE) {
-                $(document).ready(function () {
-                    // Handler for .ready() called.
-                    angular.element(document.getElementById('LegalCtrl')).scope().LoadLeadsCase(BBLE);
-
-                });
-
-            }
-
-            /*chris use this show alert when leave page*/
-            function CaseDataChanged() {
-                return ScopeCaseDataChanged(GetLegalData);
-            }
-            function GetCassNeedComment() {
-                return CaseNeedComment;
-            }
-            function ResetCaseDataChange() {
-                ScopeResetCaseDataChange(GetLegalData)
-            }
-
-            var AllJudges = function () {
-                return <%= GetAllJudge()%>
-            }();
-            var AllContact = function () {
-                return <%= GetAllContact()%>
-            }();
-            var AllRoboSignor = function () {
-                return <%= GetAllRoboSingor() %>
-            }();
-            var taskSN = function () {
-                return '<%= Request.QueryString("sn")%>'
-            }();
-
-        </script>
-        <script>
-
-
-            $(function () {
-                var scope = angular.element('#LegalCtrl').scope();
-                ScopeAutoSave(GetLegalData, scope.SaveLegal, '#LegalTabHead');
-
-                $('body').tooltip({
-                    selector: '.tooltip-examples',
-                    placement: 'bottom'
-                });
-
-                if (leadsInfoBBLE && leadsInfoBBLE != null) {
-                    if (WorkingLogControl)
-                        WorkingLogControl.openFile(leadsInfoBBLE, "Legal");
-                }
-            });
-        </script>
-
         <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
         <uc1:WorkingLogControl runat="server" ID="WorkingLogControl" />
     </div>
+
 </asp:Content>

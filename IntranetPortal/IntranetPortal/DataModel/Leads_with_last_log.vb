@@ -22,5 +22,6 @@ Partial Public Class Leads_with_last_log
     Public Property LastUpdateBy As String
     Public Property LastUpdateDate As Nullable(Of Date)
     Public Property LastUpdateComments As String
+    Public Property AssignDate As Nullable(Of Date)
 
 End Class

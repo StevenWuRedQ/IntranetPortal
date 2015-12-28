@@ -697,6 +697,7 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
     $scope.filterSelected = true;
     $scope.LegalCase.ForeclosureInfo.PlaintiffId = 638;
     $scope.PickedContactId = null;
+    $scope.History = [];
 
     $scope.querySearch = function (query) {
         var createFilterFor = function (query) {
@@ -723,10 +724,9 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
     $scope.contacts = [$scope.allContacts[0]];
     $scope.AllJudges = AllJudges ? AllJudges : [];
 
-
     $scope.addTest = function () {
         $scope.TestRepeatData[$scope.TestRepeatData.length] = $scope.TestRepeatData.length;
-    }
+    };
 
     $scope.RoboSingerDataSource = new DevExpress.data.DataSource({
         store: new DevExpress.data.CustomStore({
@@ -771,6 +771,7 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         }
         return false;
     };
+
     $scope.SaveLegal = function (scuessfunc) {
         if (!LegalCaseBBLE || LegalCaseBBLE !== leadsInfoBBLE) {
             alert("Case not load completed please wait!");
@@ -793,19 +794,18 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
             });
     };
 
-
     $scope.CompleteResearch = function () {
         var json = JSON.stringify($scope.LegalCase);
         var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN };
         $http.post('LegalUI.aspx/CompleteResearch', data).success(function () {
-                 alert("Submit Success!");
-                 if (typeof gridTrackingClient !== 'undefined')
-                     gridTrackingClient.Refresh();
+            alert("Submit Success!");
+            if (typeof gridTrackingClient !== 'undefined')
+                gridTrackingClient.Refresh();
 
-             }).error(function (data) {
-                 alert("Fail to save data :" + JSON.stringify(data));
-                 console.log(data);
-             });
+        }).error(function (data) {
+            alert("Fail to save data :" + JSON.stringify(data));
+            console.log(data);
+        });
     }
 
     $scope.BackToResearch = function (comments) {
@@ -878,9 +878,14 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
             }
         }
     }
+
     $scope.LoadLeadsCase = function (BBLE) {
         ptCom.startLoading();
         var data = { bble: BBLE };
+        var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + BBLE;
+        var shortsaleUrl = '/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=' + BBLE;
+        var taxlienUrl = '/api/TaxLiens/' + BBLE;
+        var legalecoursUrl = "/api/LegalECourtByBBLE/" + BBLE;
 
         $http.post('LegalUI.aspx/GetCaseData', data).
             success(function (data, status, headers, config) {
@@ -916,17 +921,16 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                 alert("Fail to load data : " + BBLE);
             });
 
-        /******************* get short sale case ***********************/
 
-        $http.get('/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=' + BBLE)
+        $http.get(shortsaleUrl)
             .success(function (data) {
                 $scope.ShortSaleCase = data;
             }).error(function () {
                 alert("Fail to Short sale case  data : " + BBLE);
             });
-        /*************** get leads info**************/
+    
 
-        var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + BBLE;
+
         $http.get(leadsInfoUrl)
             .success(function (data) {
                 $scope.LeadsInfo = data;
@@ -935,7 +939,7 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                 alert("Get Short Sale Leads failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
             });
 
-        $http.get('/api/TaxLiens/' + BBLE)
+        $http.get(taxlienUrl)
             .success(function (data) {
                 $scope.TaxLiens = data;
                 $scope.TaxLiensShow = $scope.ModelArray('TaxLiens');
@@ -943,25 +947,26 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                 alert("Get Tax Liens failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
             });
 
-        /************ get LegalECourt info*************/
-        $http.get("/api/LegalECourtByBBLE/" + BBLE)
+        $http.get(legalecoursUrl)
             .success(function (data) {
                 $scope.LegalECourt = data;
             }).error(function () {
                 $scope.LegalECourt = null;
             });
-        /********** end get LegalEcourt**************/
+
     }
 
     $scope.ModelArray = function (model) {
         var array = $scope.$eval(model);
         return (array && array.length > 0) ? 'Yes' : '';
     }
-    /*return true it hight light check date  */
+
+    // return true it hight light check date  
     $scope.HighLightFunc = function (funcStr) {
         var args = funcStr.split(",");
 
     }
+
     $scope.AddSecondaryArray = function () {
         var selectType = $scope.LegalCase.SecondaryInfo.SelectedType;
         if (selectType) {
@@ -997,18 +1002,20 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
 
         return false;
     }
+
     $scope.SaveLegalJson = function () {
         $scope.LegalCaseJson = JSON.stringify($scope.LegalCase)
     }
+
     $scope.ShowContorl = function (m) {
         var t = typeof m;
-
         if (t === "string") {
             return m === 'true'
         }
         return m;
 
     }
+
     $scope.DocGenerator = function (tplName) {
         if (!$scope.LegalCase.SecondaryInfo) {
             $scope.LegalCase.SecondaryInfo = {}
@@ -1151,7 +1158,6 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         var address = ['', '851 Grand Concourse Bronx, NY 10451', '360 Adams St. Brooklyn, NY 11201', '8811 Sutphin Boulevard, Jamaica, NY 11435'];
         return address[boro - 1];
     }
-
     $scope.hSummery = [
                     {
                         "Name": "CaseStauts",
@@ -1333,7 +1339,6 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                         "Description": "Judgement submitted 12 months after O/REF. ",
                         "ArrayName": ""
                     }];
-
     $scope.evalVisible = function (h) {
         var result = false;
         if (h.ArrayName) {
@@ -1347,7 +1352,6 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         }
         return result;
     };
-
     angular.forEach($scope.hSummery, function (el, idx) {
         $scope.$watch(function () { return $scope.evalVisible(el); }, function (newV) {
             el.visible = newV;
@@ -1477,12 +1481,94 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         }
     }
 
-    /* end loading panel */
     $scope.CheckWorkHours = function () {
         $http.get("/api/WorkingLogs/Legal/" + $scope.LegalCase.BBLE).success(function (data) {
             $scope.TotleHours = data;
             $("#WorkPopUp").modal();
         });
+    }
+
+    $scope.showHistory = function () {
+        var url = "/api/legal/SaveHistories/" + $scope.LegalCase.BBLE;
+        $scope.History = [];
+        $http.get(url).success(function (data) {
+            $scope.History = data;
+            $("#HistoryPopup").modal();
+        })
+    }
+
+    $scope.loadHistoryData = function (logid) {
+        if (logid) {
+            var url = "/api/Legal/HistoryCaseData/" + logid;
+            $http.get(url).success(function (data) {
+                    $scope.LegalCase = $.parseJSON(data);
+                    var BBLE = $scope.LegalCase.BBLE;
+                    if (BBLE) {
+                        var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + BBLE;
+                        var shortsaleUrl = '/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=' + BBLE;
+                        var taxlienUrl = '/api/TaxLiens/' + BBLE;
+                        var legalecoursUrl = "/api/LegalECourtByBBLE/" + BBLE;
+
+
+                        $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
+                        $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
+                        $scope.LogChange = {
+                            'TaxLienFCStatus': { "old": $scope.LegalCase.TaxLienFCStatus, "now": function () { return $scope.LegalCase.TaxLienFCStatus; }, "msg": 'Tax Lien FC Status changed from ' },
+                            'CaseStauts': { "old": $scope.LegalCase.CaseStauts, "now": function () { return $scope.LegalCase.CaseStauts; }, "msg": 'Mortgae foreclosure Status changed from ' }
+                        }
+                        var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
+                        for (a in arrays) {
+                            var porp = arrays[a]
+                            var array = $scope.LegalCase.ForeclosureInfo[porp];
+                            if (!array || array.length === 0) {
+                                $scope.LegalCase.ForeclosureInfo[porp] = [];
+                                $scope.LegalCase.ForeclosureInfo[porp].push({});
+                            }
+                        }
+                        $scope.LegalCase.SecondaryTypes = $scope.LegalCase.SecondaryTypes || []
+                        $scope.showSAndCFrom();
+
+                        $http.get(shortsaleUrl)
+                            .success(function (data) {
+                                $scope.ShortSaleCase = data;
+                            }).error(function () {
+                                alert("Fail to Short sale case  data : " + BBLE);
+                            });
+
+
+
+                        $http.get(leadsInfoUrl)
+                            .success(function (data) {
+                                $scope.LeadsInfo = data;
+                                $scope.LPShow = $scope.ModelArray('LeadsInfo.LisPens');
+                            }).error(function (data) {
+                                alert("Get Short Sale Leads failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
+                            });
+
+                        $http.get(taxlienUrl)
+                            .success(function (data) {
+                                $scope.TaxLiens = data;
+                                $scope.TaxLiensShow = $scope.ModelArray('TaxLiens');
+                            }).error(function (data) {
+                                alert("Get Tax Liens failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
+                            });
+
+                        $http.get(legalecoursUrl)
+                            .success(function (data) {
+                                $scope.LegalECourt = data;
+                            }).error(function () {
+                                $scope.LegalECourt = null;
+                            });
+
+                        LegalCaseBBLE = BBLE;
+                    }
+                }).error(function () {
+                    alert("Fail to load data : ");
+                });
+
+        }
+        
+
 
     }
 }]);

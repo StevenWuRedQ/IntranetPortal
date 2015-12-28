@@ -67,27 +67,31 @@ Public Class NavMenu
             item.Items.AddRange({New PortalNavItem With {
                                 .Name = String.Format("{0}-ShortSale", item.Name),
                                 .Text = "Short Sale",
-                                .NavigationUrl = "/ShortSale/ShortSale.aspx?teamId=" & teamId,
+                                .NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}&amp;t=ShortSale", type, teamId), '"/MgrViewLeads.aspx?t=ShortSale&amp;teamId=" & teamId,
                                 .ShowAmount = True,
-                                .FontClass = "<i class=""fa fa-line-chart""></i>"
+                                .FontClass = "<i class=""fa fa-line-chart""></i>",
+                                .AmountManageClass = "LeadManage"
                                 }, New PortalNavItem With {
                                 .Name = String.Format("{0}-Eviction", item.Name),
                                 .Text = "Eviction",
-                                .NavigationUrl = "/ShortSale/ShortSale.aspx?isEviction=true&tid=" & teamId,
+                                .NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}&amp;t=Eviction", type, teamId),
                                 .ShowAmount = True,
-                                .FontClass = "<i class=""fa fa-sign-out""></i>"
+                                .FontClass = "<i class=""fa fa-sign-out""></i>",
+                                .AmountManageClass = "LeadManage"
                                 }, New PortalNavItem With {
                                 .Name = String.Format("{0}-Construction", item.Name),
                                 .Text = "Construction",
-                                .NavigationUrl = "#",
+                                .NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}&amp;t=Construction", type, teamId),
                                 .ShowAmount = True,
-                                .FontClass = "<i class=""fa  fa-wrench""></i>"
+                                .FontClass = "<i class=""fa  fa-wrench""></i>",
+                                .AmountManageClass = "LeadManage"
                                 }, New PortalNavItem With {
-                                .Name = String.Format("{0}-Litigation", item.Name),
+                                .Name = String.Format("{0}-Legal", item.Name),
                                 .Text = "Litigation",
-                                .NavigationUrl = "#",
+                                .NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}&amp;t=Legal", type, teamId),
                                 .ShowAmount = True,
-                                .FontClass = "<i class=""fa fa-university""></i>"
+                                .FontClass = "<i class=""fa fa-university""></i>",
+                                .AmountManageClass = "LeadManage"
                                 }
                            })
         End If

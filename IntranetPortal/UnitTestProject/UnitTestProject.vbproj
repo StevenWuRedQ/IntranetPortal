@@ -157,6 +157,7 @@
     <Compile Include="CheckingComplaintsTest.vb" />
     <Compile Include="ConstructionTest.vb" />
     <Compile Include="SqlDatabaseSetup.vb" />
+    <Compile Include="LegalUnitTest.vb" />
     <Compile Include="UserTaskTest.vb" />
     <Compile Include="WebGrabberTest.vb" />
   </ItemGroup>
