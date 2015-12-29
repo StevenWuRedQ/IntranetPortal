@@ -19,6 +19,33 @@ Imports System.Web.Http
         Assert.IsTrue(lcase.LegalStatusString = "Judgment Granted")
     End Sub
 
+    <TestMethod()> Public Sub DataStatusSaveTest()
+        Dim dStatu = New DataStatu With {
+            .Category = LegalCase.ForeclosureStatusCategory,
+            .Status = -1,
+            .Name = "Testing",
+            .Active = True
+            }
+
+        dStatu.Save()
+
+        Assert.IsTrue(dStatu.Status > 0)
+
+        dStatu.Delete()
+
+        Dim instance = DataStatu.Instance(LegalCase.ForeclosureStatusCategory, dStatu.Status)
+        Assert.IsNull(instance)
+    End Sub
+
+    <TestMethod()> Public Sub DataStatusControllerTest()
+        Dim controller = New IntranetPortal.Controllers.LegalController
+        Dim status = controller.GetForeclosureStatus()
+        Assert.IsInstanceOfType(status, GetType(IHttpActionResult))
+        Assert.IsInstanceOfType(status, GetType(Results.OkNegotiatedContentResult(Of DataStatu())))
+        Dim statusArray = CType(status, Results.OkNegotiatedContentResult(Of DataStatu())).Content
+        Assert.IsTrue(statusArray.Count > 0)
+    End Sub
+
     <TestMethod()> Public Sub SaveHistoryTest()
         Dim controller = New IntranetPortal.Controllers.LegalController
         Dim history = controller.GetSaveHistories(bble)
