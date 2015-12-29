@@ -871,7 +871,7 @@ Public Class DataWCFService
             Dim localOwner = context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Name = name And ho.Active = True).FirstOrDefault
 
             If bble.StartsWith("3") Then
-                If Not String.IsNullOrEmpty(city) AndAlso (city.Trim = "BK" Or city.Trim = "BKLYN" Or city.Trim = "BKLN" Or city.Contains("BK")) Then
+                If Not String.IsNullOrEmpty(city) Then
                     city = "Brooklyn"
                 End If
             End If
@@ -881,11 +881,12 @@ Public Class DataWCFService
                     city = "Bronx"
                 End If
             End If
-            If bble.StartsWith("4") Then
-                If Not String.IsNullOrEmpty(city) AndAlso (city.Trim = "BX") Then
-                    city = "Bronx"
-                End If
-            End If
+
+            'If bble.StartsWith("4") Then
+            '    If Not String.IsNullOrEmpty(city) AndAlso (city.Trim = "BX") Then
+            '        city = "Bronx"
+            '    End If
+            'End If
 
             If String.IsNullOrEmpty(add1) OrElse String.IsNullOrEmpty(add1.Trim) Then
                 Dim ld = LeadsInfo.GetInstance(bble)
