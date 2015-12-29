@@ -2294,8 +2294,8 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                 $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
                 $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
                 $scope.LogChange = {
-                    'TaxLienFCStatus': { "old": $scope.LegalCase.TaxLienFCStatus, "now": function () { return $scope.LegalCase.TaxLienFCStatus; }, "msg": 'Tax Lien FC Status changed from ' },
-                    'CaseStauts': { "old": $scope.LegalCase.CaseStauts, "now": function () { return $scope.LegalCase.CaseStauts; }, "msg": 'Mortgae foreclosure Status changed from ' }
+                    'TaxLienFCStatus': { "old": $scope.LegalCase.TaxLienFCStatus, "now": function () { return $scope.LegalCase.TaxLienFCStatus; }, "msg": 'Tax Lien FC status changed from ' },
+                    'CaseStauts': { "old": $scope.LegalCase.CaseStauts, "now": function () { return $scope.LegalCase.CaseStauts; }, "msg": 'Mortgage foreclosure status changed from ' }
                 }
 
                 var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
