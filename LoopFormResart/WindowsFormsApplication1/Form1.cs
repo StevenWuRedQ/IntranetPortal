@@ -15,8 +15,9 @@ using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Runtime.InteropServices;
-using WindowsFormsApplication1;
+using DroneManage;
 using Newtonsoft.Json;
+
 
 namespace DroneManage
 {
@@ -72,7 +73,7 @@ namespace DroneManage
         /// <param name="e"></param>
         private void Restart_Click(object sender, EventArgs e)
         {
-            using (var client = new WindowsFormsApplication1.WCFAPI.WCFMacrosClient())
+            using (var client = new WCFAPI.WCFMacrosClient())
             {
 
             }
@@ -126,7 +127,7 @@ namespace DroneManage
             try
             {
                 log.Debug("====================Scan Start=======================");
-                using (WindowsFormsApplication1.WCFAPI.WCFMacrosClient client = new WindowsFormsApplication1.WCFAPI.WCFMacrosClient())
+                using (WCFAPI.WCFMacrosClient client = new WCFAPI.WCFMacrosClient())
                 {
                     try
                     {
@@ -150,10 +151,15 @@ namespace DroneManage
 
                 if (DroneResponseCount >= 3 && !is_resarting)
                 {
-                    log.Debug("Server not response in 3 times starting resart it");
-
+                    log.Debug("Server not response in 3 times starting resart it and send email to DEV team.");
+                    using (var srv = new PortalService.CommonServiceClient())
+                    {
+                        srv.SendEmailByAddress("georgev@myidealprop.com;stevenw@myidealprop.com;chrisy@myidealprop.com", null,
+                            "Drone is not response  restarting it ",
+                            "Hi All,<br> <br> Drone on (" + System.Environment.MachineName + ") is not response the monitor program is restart it ! please notice !!");
+                    }
                     ResartDrone();
-
+                   
                 }
                 log.Debug("====================Scan End=======================");
             }
@@ -283,7 +289,7 @@ namespace DroneManage
 
 
                 //Loop 
-                using (var client = new WindowsFormsApplication1.WCFAPI.WCFMacrosClient())
+                using (var client = new WCFAPI.WCFMacrosClient())
                 {
 
                     var waitingCount = -1;

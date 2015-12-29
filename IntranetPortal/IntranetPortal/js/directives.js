@@ -1,5 +1,5 @@
-﻿angular.module("PortalApp").
-directive('ssDate', function () {
+﻿angular.module("PortalApp")
+.directive('ssDate', function () {
     return {
         restrict: 'A',
         scope: true,
@@ -25,19 +25,8 @@ directive('ssDate', function () {
 
         }
     };
-}).
-directive('ptRightClick', ['$parse', function ($parse) {
-    return function (scope, element, attrs) {
-        var fn = $parse(attrs.ngRightClick);
-        element.bind('contextmenu', function (event) {
-            scope.$apply(function () {
-                event.preventDefault();
-                fn(scope, { $event: event });
-            });
-        });
-    };
-}]).
-directive('inputMask', function () {
+})
+.directive('inputMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -47,8 +36,8 @@ directive('inputMask', function () {
             });
         }
     };
-}).
-directive('bindId', ['ptContactServices', function (ptContactServices) {
+})
+.directive('bindId', ['ptContactServices', function (ptContactServices) {
     return {
         restrict: 'A',
         link: function postLink(scope, el, attrs) {
@@ -61,8 +50,8 @@ directive('bindId', ['ptContactServices', function (ptContactServices) {
         }
 
     }
-}]).
-directive('ptInitModel', function () {
+}])
+.directive('ptInitModel', function () {
     return {
         restrict: 'A',
         require: '?ngModel',
@@ -76,8 +65,8 @@ directive('ptInitModel', function () {
             });
         }
     }
-}).
-directive('ptInitBind', function () { //one way bind of ptInitModel
+})
+.directive('ptInitBind', function () { //one way bind of ptInitModel
     return {
         restrict: 'A',
         require: '?ngBind',
@@ -90,8 +79,8 @@ directive('ptInitBind', function () { //one way bind of ptInitModel
             });
         }
     }
-}).
-directive('radioInit', function () {
+})
+.directive('radioInit', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -103,8 +92,8 @@ directive('radioInit', function () {
             });
         }
     }
-}).
-directive('moneyMask', function () {
+})
+.directive('moneyMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -118,8 +107,8 @@ directive('moneyMask', function () {
 
         },
     };
-}).
-directive('numberMask', function () {
+})
+.directive('numberMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -133,8 +122,8 @@ directive('numberMask', function () {
 
         },
     };
-}).
-directive('integerMask', function () {
+})
+.directive('integerMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -148,8 +137,8 @@ directive('integerMask', function () {
 
         },
     };
-}).
-directive('percentMask', function () {
+})
+.directive('percentMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -163,8 +152,8 @@ directive('percentMask', function () {
 
         },
     };
-}).
-directive('ptRadio', function () {
+})
+.directive('ptRadio', function () {
     return {
         restrict: 'E',
         template:
@@ -187,8 +176,8 @@ directive('ptRadio', function () {
         }
 
     }
-}).
-directive('ptCollapse', function () {
+})
+.directive('ptCollapse', function () {
     return {
         restrict: 'E',
         template:
@@ -203,42 +192,60 @@ directive('ptCollapse', function () {
         }
 
     }
-}).
-directive('ckEditor', [function () {
+})
+.directive('ptEditor', [function () {
     return {
-        require: '?ngModel',
-        link: function (scope, elm, attr, ngModel) {
 
-            var ck = CKEDITOR.replace(elm[0], {
+        templateUrl: '/js/templates/ptEditor.html',
+        require: 'ngModel',
+        scope: {
+            ptModel: '=ngModel'
+        },
+        link: function (scope, el, attrs, ctrl) {
+            scope.contentShown = true;
+            var ckdiv = $(el).find("div.ptEditorCK")[0];
+            var ck = CKEDITOR.replace(ckdiv, {
                 allowedContent: true,
-                height: 450,
+                height: 400,
             });
+            scope.editorShown = false;
+
+            scope.showCK = function () {
+                scope.contentShown = false;
+                scope.editorShown = true;
+            }
+            scope.closeCK = function () {
+                scope.contentShown = true;
+                scope.editorShown = false;
+            }
 
             ck.on('pasteState', function () {
                 scope.$apply(function () {
-                    ngModel.$setViewValue(ck.getData());
+                    ctrl.$setViewValue(ck.getData());
                 });
             });
 
-            ngModel.$render = function (value) {
-                ck.setData(ngModel.$modelValue);
+            ctrl.$render = function (value) {
+                ck.setData(ctrl.$modelValue);
             };
+
+            ck.setData(ctrl.$modelValue);
         }
     };
-}]).
-directive('ptAdd', function () {
+}])
+.directive('ptAdd', function () {
     return {
         restrict: 'E',
         template: '<i class="fa fa-plus-circle icon_btn text-primary tooltip-examples" title="Add"></i>',
     }
-}).
-directive('ptDel', function () {
+})
+.directive('ptDel', function () {
     return {
         restrict: 'E',
         template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
     }
-}).
-directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout) {
+})
+.directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout) {
     return {
         restrict: 'E',
         templateUrl: '/js/templates/ptfile.html',
@@ -339,8 +346,8 @@ directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $time
 
         }
     }
-}]).
-directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
+}])
+.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
     return {
         restrict: 'E',
         templateUrl: '/js/templates/ptfiles.html',
@@ -612,7 +619,8 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
 
     }
 
-}]).directive('ptLink', ['ptFileService', function (ptFileService) {
+}])
+.directive('ptLink', ['ptFileService', function (ptFileService) {
     return {
         restrict: 'E',
         scope: {
@@ -625,7 +633,8 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
         }
 
     }
-}]).directive('ptFinishedMark', [function () {
+}])
+.directive('ptFinishedMark', [function () {
     return {
         restrict: 'E',
         template: '<span ng-if="ssStyle==0">'

@@ -707,8 +707,8 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
         }
     };
 }]);
-angular.module("PortalApp").
-filter("ByContact", function () {
+angular.module("PortalApp")
+.filter("ByContact", function () {
     return function (movies, contact) {
         var items = {
 
@@ -726,11 +726,10 @@ filter("ByContact", function () {
         });
         return items.out;
     };
-}).
-filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }]);
+}).filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }]);
 
-angular.module("PortalApp").
-directive('ssDate', function () {
+angular.module("PortalApp")
+.directive('ssDate', function () {
     return {
         restrict: 'A',
         scope: true,
@@ -756,19 +755,8 @@ directive('ssDate', function () {
 
         }
     };
-}).
-directive('ptRightClick', ['$parse', function ($parse) {
-    return function (scope, element, attrs) {
-        var fn = $parse(attrs.ngRightClick);
-        element.bind('contextmenu', function (event) {
-            scope.$apply(function () {
-                event.preventDefault();
-                fn(scope, { $event: event });
-            });
-        });
-    };
-}]).
-directive('inputMask', function () {
+})
+.directive('inputMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -778,8 +766,8 @@ directive('inputMask', function () {
             });
         }
     };
-}).
-directive('bindId', ['ptContactServices', function (ptContactServices) {
+})
+.directive('bindId', ['ptContactServices', function (ptContactServices) {
     return {
         restrict: 'A',
         link: function postLink(scope, el, attrs) {
@@ -792,8 +780,8 @@ directive('bindId', ['ptContactServices', function (ptContactServices) {
         }
 
     }
-}]).
-directive('ptInitModel', function () {
+}])
+.directive('ptInitModel', function () {
     return {
         restrict: 'A',
         require: '?ngModel',
@@ -807,8 +795,8 @@ directive('ptInitModel', function () {
             });
         }
     }
-}).
-directive('ptInitBind', function () { //one way bind of ptInitModel
+})
+.directive('ptInitBind', function () { //one way bind of ptInitModel
     return {
         restrict: 'A',
         require: '?ngBind',
@@ -821,8 +809,8 @@ directive('ptInitBind', function () { //one way bind of ptInitModel
             });
         }
     }
-}).
-directive('radioInit', function () {
+})
+.directive('radioInit', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -834,8 +822,8 @@ directive('radioInit', function () {
             });
         }
     }
-}).
-directive('moneyMask', function () {
+})
+.directive('moneyMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -849,8 +837,8 @@ directive('moneyMask', function () {
 
         },
     };
-}).
-directive('numberMask', function () {
+})
+.directive('numberMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -864,8 +852,8 @@ directive('numberMask', function () {
 
         },
     };
-}).
-directive('integerMask', function () {
+})
+.directive('integerMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -879,8 +867,8 @@ directive('integerMask', function () {
 
         },
     };
-}).
-directive('percentMask', function () {
+})
+.directive('percentMask', function () {
     return {
         restrict: 'A',
         link: function (scope, el, attrs) {
@@ -894,8 +882,8 @@ directive('percentMask', function () {
 
         },
     };
-}).
-directive('ptRadio', function () {
+})
+.directive('ptRadio', function () {
     return {
         restrict: 'E',
         template:
@@ -918,8 +906,8 @@ directive('ptRadio', function () {
         }
 
     }
-}).
-directive('ptCollapse', function () {
+})
+.directive('ptCollapse', function () {
     return {
         restrict: 'E',
         template:
@@ -934,42 +922,60 @@ directive('ptCollapse', function () {
         }
 
     }
-}).
-directive('ckEditor', [function () {
+})
+.directive('ptEditor', [function () {
     return {
-        require: '?ngModel',
-        link: function (scope, elm, attr, ngModel) {
 
-            var ck = CKEDITOR.replace(elm[0], {
+        templateUrl: '/js/templates/ptEditor.html',
+        require: 'ngModel',
+        scope: {
+            ptModel: '=ngModel'
+        },
+        link: function (scope, el, attrs, ctrl) {
+            scope.contentShown = true;
+            var ckdiv = $(el).find("div.ptEditorCK")[0];
+            var ck = CKEDITOR.replace(ckdiv, {
                 allowedContent: true,
-                height: 450,
+                height: 400,
             });
+            scope.editorShown = false;
+
+            scope.showCK = function () {
+                scope.contentShown = false;
+                scope.editorShown = true;
+            }
+            scope.closeCK = function () {
+                scope.contentShown = true;
+                scope.editorShown = false;
+            }
 
             ck.on('pasteState', function () {
                 scope.$apply(function () {
-                    ngModel.$setViewValue(ck.getData());
+                    ctrl.$setViewValue(ck.getData());
                 });
             });
 
-            ngModel.$render = function (value) {
-                ck.setData(ngModel.$modelValue);
+            ctrl.$render = function (value) {
+                ck.setData(ctrl.$modelValue);
             };
+
+            ck.setData(ctrl.$modelValue);
         }
     };
-}]).
-directive('ptAdd', function () {
+}])
+.directive('ptAdd', function () {
     return {
         restrict: 'E',
         template: '<i class="fa fa-plus-circle icon_btn text-primary tooltip-examples" title="Add"></i>',
     }
-}).
-directive('ptDel', function () {
+})
+.directive('ptDel', function () {
     return {
         restrict: 'E',
         template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
     }
-}).
-directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout) {
+})
+.directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout) {
     return {
         restrict: 'E',
         templateUrl: '/js/templates/ptfile.html',
@@ -1070,8 +1076,8 @@ directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $time
 
         }
     }
-}]).
-directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
+}])
+.directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
     return {
         restrict: 'E',
         templateUrl: '/js/templates/ptfiles.html',
@@ -1343,7 +1349,8 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
 
     }
 
-}]).directive('ptLink', ['ptFileService', function (ptFileService) {
+}])
+.directive('ptLink', ['ptFileService', function (ptFileService) {
     return {
         restrict: 'E',
         scope: {
@@ -1356,7 +1363,8 @@ directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, 
         }
 
     }
-}]).directive('ptFinishedMark', [function () {
+}])
+.directive('ptFinishedMark', [function () {
     return {
         restrict: 'E',
         template: '<span ng-if="ssStyle==0">'
@@ -2068,7 +2076,7 @@ angular.module('PortalApp')
 );
 /* global LegalShowAll */
 /* global angular */
-angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime', function ($scope, $http, ptContactServices, ptCom, ptTime) {
+angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
 
     $scope.ptContactServices = ptContactServices;
     $scope.ptCom = ptCom;
@@ -2089,6 +2097,7 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
     $scope.filterSelected = true;
     $scope.LegalCase.ForeclosureInfo.PlaintiffId = 638;
     $scope.PickedContactId = null;
+    $scope.History = [];
 
     $scope.querySearch = function (query) {
         var createFilterFor = function (query) {
@@ -2115,10 +2124,9 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
     $scope.contacts = [$scope.allContacts[0]];
     $scope.AllJudges = AllJudges ? AllJudges : [];
 
-
     $scope.addTest = function () {
         $scope.TestRepeatData[$scope.TestRepeatData.length] = $scope.TestRepeatData.length;
-    }
+    };
 
     $scope.RoboSingerDataSource = new DevExpress.data.DataSource({
         store: new DevExpress.data.CustomStore({
@@ -2163,6 +2171,7 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         }
         return false;
     };
+
     $scope.SaveLegal = function (scuessfunc) {
         if (!LegalCaseBBLE || LegalCaseBBLE !== leadsInfoBBLE) {
             alert("Case not load completed please wait!");
@@ -2185,19 +2194,18 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
             });
     };
 
-
     $scope.CompleteResearch = function () {
         var json = JSON.stringify($scope.LegalCase);
         var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN };
         $http.post('LegalUI.aspx/CompleteResearch', data).success(function () {
-                 alert("Submit Success!");
-                 if (typeof gridTrackingClient !== 'undefined')
-                     gridTrackingClient.Refresh();
+            alert("Submit Success!");
+            if (typeof gridTrackingClient !== 'undefined')
+                gridTrackingClient.Refresh();
 
-             }).error(function (data) {
-                 alert("Fail to save data :" + JSON.stringify(data));
-                 console.log(data);
-             });
+        }).error(function (data) {
+            alert("Fail to save data :" + JSON.stringify(data));
+            console.log(data);
+        });
     }
 
     $scope.BackToResearch = function (comments) {
@@ -2257,14 +2265,27 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                 var OldStatus = $(elem + ' option[value="' + old + '"]').html();
                 var NowStatus = $(elem + ' option[value="' + now + '"]').html();
 
-                AddActivityLog(changeObject.msg + OldStatus + ' to ' + NowStatus)
+                if (!OldStatus)
+                {
+                    AddActivityLog(changeObject.msg.replace(" from", '') + ' to ' + NowStatus);
+                }
+                else
+                {
+                    AddActivityLog(changeObject.msg + OldStatus + ' to ' + NowStatus);
+                }
+                
                 $scope.LogChange[i].old = now;
             }
         }
     }
+
     $scope.LoadLeadsCase = function (BBLE) {
         ptCom.startLoading();
         var data = { bble: BBLE };
+        var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + BBLE;
+        var shortsaleUrl = '/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=' + BBLE;
+        var taxlienUrl = '/api/TaxLiens/' + BBLE;
+        var legalecoursUrl = "/api/LegalECourtByBBLE/" + BBLE;
 
         $http.post('LegalUI.aspx/GetCaseData', data).
             success(function (data, status, headers, config) {
@@ -2300,17 +2321,16 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                 alert("Fail to load data : " + BBLE);
             });
 
-        /******************* get short sale case ***********************/
 
-        $http.get('/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=' + BBLE)
+        $http.get(shortsaleUrl)
             .success(function (data) {
                 $scope.ShortSaleCase = data;
             }).error(function () {
                 alert("Fail to Short sale case  data : " + BBLE);
             });
-        /*************** get leads info**************/
+    
 
-        var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + BBLE;
+
         $http.get(leadsInfoUrl)
             .success(function (data) {
                 $scope.LeadsInfo = data;
@@ -2319,7 +2339,7 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                 alert("Get Short Sale Leads failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
             });
 
-        $http.get('/api/TaxLiens/' + BBLE)
+        $http.get(taxlienUrl)
             .success(function (data) {
                 $scope.TaxLiens = data;
                 $scope.TaxLiensShow = $scope.ModelArray('TaxLiens');
@@ -2327,25 +2347,26 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                 alert("Get Tax Liens failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
             });
 
-        /************ get LegalECourt info*************/
-        $http.get("/api/LegalECourtByBBLE/" + BBLE)
+        $http.get(legalecoursUrl)
             .success(function (data) {
                 $scope.LegalECourt = data;
             }).error(function () {
                 $scope.LegalECourt = null;
             });
-        /********** end get LegalEcourt**************/
+
     }
 
     $scope.ModelArray = function (model) {
         var array = $scope.$eval(model);
         return (array && array.length > 0) ? 'Yes' : '';
     }
-    /*return true it hight light check date  */
+
+    // return true it hight light check date  
     $scope.HighLightFunc = function (funcStr) {
         var args = funcStr.split(",");
 
     }
+
     $scope.AddSecondaryArray = function () {
         var selectType = $scope.LegalCase.SecondaryInfo.SelectedType;
         if (selectType) {
@@ -2381,18 +2402,20 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
 
         return false;
     }
+
     $scope.SaveLegalJson = function () {
         $scope.LegalCaseJson = JSON.stringify($scope.LegalCase)
     }
+
     $scope.ShowContorl = function (m) {
         var t = typeof m;
-
         if (t === "string") {
             return m === 'true'
         }
         return m;
 
     }
+
     $scope.DocGenerator = function (tplName) {
         if (!$scope.LegalCase.SecondaryInfo) {
             $scope.LegalCase.SecondaryInfo = {}
@@ -2535,7 +2558,6 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         var address = ['', '851 Grand Concourse Bronx, NY 10451', '360 Adams St. Brooklyn, NY 11201', '8811 Sutphin Boulevard, Jamaica, NY 11435'];
         return address[boro - 1];
     }
-
     $scope.hSummery = [
                     {
                         "Name": "CaseStauts",
@@ -2717,7 +2739,6 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                         "Description": "Judgement submitted 12 months after O/REF. ",
                         "ArrayName": ""
                     }];
-
     $scope.evalVisible = function (h) {
         var result = false;
         if (h.ArrayName) {
@@ -2731,7 +2752,6 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         }
         return result;
     };
-
     angular.forEach($scope.hSummery, function (el, idx) {
         $scope.$watch(function () { return $scope.evalVisible(el); }, function (newV) {
             el.visible = newV;
@@ -2861,13 +2881,98 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         }
     }
 
-    /* end loading panel */
     $scope.CheckWorkHours = function () {
         $http.get("/api/WorkingLogs/Legal/" + $scope.LegalCase.BBLE).success(function (data) {
             $scope.TotleHours = data;
             $("#WorkPopUp").modal();
         });
+    }
 
+    $scope.showHistory = function () {
+        var url = "/api/legal/SaveHistories/" + $scope.LegalCase.BBLE;
+        $scope.History = [];
+        $http.get(url).success(function (data) {
+            $scope.History = data;
+            $("#HistoryPopup").modal();
+        })
+    }
+
+    $scope.loadHistoryData = function (logid) {
+        if (logid) {
+            var url = "/api/Legal/HistoryCaseData/" + logid;
+            $http.get(url).success(function (data) {
+                    $scope.LegalCase = $.parseJSON(data);
+                    var BBLE = $scope.LegalCase.BBLE;
+                    if (BBLE) {
+                        var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + BBLE;
+                        var shortsaleUrl = '/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=' + BBLE;
+                        var taxlienUrl = '/api/TaxLiens/' + BBLE;
+                        var legalecoursUrl = "/api/LegalECourtByBBLE/" + BBLE;
+
+
+                        $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
+                        $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
+                        $scope.LogChange = {
+                            'TaxLienFCStatus': { "old": $scope.LegalCase.TaxLienFCStatus, "now": function () { return $scope.LegalCase.TaxLienFCStatus; }, "msg": 'Tax Lien FC Status changed from ' },
+                            'CaseStauts': { "old": $scope.LegalCase.CaseStauts, "now": function () { return $scope.LegalCase.CaseStauts; }, "msg": 'Mortgae foreclosure Status changed from ' }
+                        }
+                        var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
+                        for (a in arrays) {
+                            var porp = arrays[a]
+                            var array = $scope.LegalCase.ForeclosureInfo[porp];
+                            if (!array || array.length === 0) {
+                                $scope.LegalCase.ForeclosureInfo[porp] = [];
+                                $scope.LegalCase.ForeclosureInfo[porp].push({});
+                            }
+                        }
+                        $scope.LegalCase.SecondaryTypes = $scope.LegalCase.SecondaryTypes || []
+                        $scope.showSAndCFrom();
+
+                        $http.get(shortsaleUrl)
+                            .success(function (data) {
+                                $scope.ShortSaleCase = data;
+                            }).error(function () {
+                                alert("Fail to Short sale case  data : " + BBLE);
+                            });
+
+
+
+                        $http.get(leadsInfoUrl)
+                            .success(function (data) {
+                                $scope.LeadsInfo = data;
+                                $scope.LPShow = $scope.ModelArray('LeadsInfo.LisPens');
+                            }).error(function (data) {
+                                alert("Get Short Sale Leads failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
+                            });
+
+                        $http.get(taxlienUrl)
+                            .success(function (data) {
+                                $scope.TaxLiens = data;
+                                $scope.TaxLiensShow = $scope.ModelArray('TaxLiens');
+                            }).error(function (data) {
+                                alert("Get Tax Liens failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
+                            });
+
+                        $http.get(legalecoursUrl)
+                            .success(function (data) {
+                                $scope.LegalECourt = data;
+                            }).error(function () {
+                                $scope.LegalECourt = null;
+                            });
+
+                        LegalCaseBBLE = BBLE;
+                    }
+                }).error(function () {
+                    alert("Fail to load data : ");
+                });
+
+        }       
+
+
+    }
+
+    $scope.openHistoryWindow = function (logid) {
+        $window.open('/LegalUI/Legalinfo.aspx?logid='+logid , '_blank', 'width=1024, height=768')
     }
 }]);
 angular.module('PortalApp')
@@ -4088,7 +4193,7 @@ angular.module("PortalApp")
     };
     $scope.InitData = function (data) {
         $scope.allContacts = data.slice();
-        var gropData = data//groupBy(data, group_func);
+        var gropData = data;//groupBy(data, group_func);
         $scope.showingContacts = gropData;
 
         return gropData;
@@ -4111,7 +4216,7 @@ angular.module("PortalApp")
         //debugger;
         var allContacts = gropData;
         if (allContacts.length > 0) {
-            $scope.currentContact = gropData[0].data[0];
+            $scope.currentContact = gropData[0];
             m_current_contact = $scope.currentContact;
 
         }

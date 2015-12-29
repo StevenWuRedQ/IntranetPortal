@@ -36,7 +36,6 @@
 
     function OnGetRowValues(values) {
         if (values == null) {
-            //gridCase.GetValuesOnCustomCallback(gridCase.GetFocusedRowIndex(), OnGetRowValues);
         }
         else {
             if (FormControl)
@@ -55,7 +54,6 @@
                         
             if (cbpLogs)
                 cbpLogs.PerformCallback(leadsInfoBBLE);
-            //angular.element(document.getElementById('ConstructionCtrl')).scope().LoadLeadsCase(leadsInfoBBLE);
         }
     }
 
@@ -92,15 +90,9 @@
     function OnSortMenuClick(s, e) {
         var icon = document.getElementById("btnSortIcon");
         if (e.item.index == 0) {
-            //gridCase.GroupBy("Owner", 0);
         }
-
         if (e.item.index == 1) {
-
-            //gridCase.GroupBy("Owner", 2);
-            //gridCase.GroupBy("MortgageCategory", 0);
         }
-
         if (e.item.index == 2) {
             SortLeadsList(document.getElementById("btnSortIcon"), "UpdateDate");
         }
@@ -170,6 +162,7 @@
                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
                 </dx:GridViewDataTextColumn>
+
                 <dx:GridViewDataColumn FieldName="LastUpdate" Visible="false"></dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="Owner" Visible="false" VisibleIndex="4">
                     <GroupRowTemplate>
@@ -189,7 +182,7 @@
                         </div>
                     </GroupRowTemplate>
                 </dx:GridViewDataColumn>
-                 <dx:GridViewDataColumn FieldName="StatusStr" Visible="false" VisibleIndex="4">
+                <dx:GridViewDataColumn FieldName="StatusStr" Visible="false" VisibleIndex="4">
                     <GroupRowTemplate>
                         <div>
                             <table style="height: 30px">
@@ -238,9 +231,7 @@
     </div>
 </div>
 <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="aspxPopupSortMenu"
-    ShowPopOutImages="false" AutoPostBack="false"
-    ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px"
-    PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
+    ShowPopOutImages="false" AutoPostBack="false" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
     <ItemStyle Paddings-PaddingLeft="20px" />
     <Items>
         <dx:MenuItem Text="User" Name="User">

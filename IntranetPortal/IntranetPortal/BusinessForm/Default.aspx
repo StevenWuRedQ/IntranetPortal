@@ -24,8 +24,8 @@
             width: auto !important;
         }
     </style>
-    <div ui-layout="{flow: 'column'}" id="listPanelDiv">
-        <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">
+    <div ui-layout="{flow: 'column'}" >
+        <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listPanelDiv">
             <asp:Panel ID="listPanel" runat="server">
             </asp:Panel>
         </div>
@@ -239,7 +239,7 @@
             </asp:Panel>
         </div>
 
-        <div ui-layout-container>
+        <div id="logPanelDiv" ui-layout-container>
             <asp:Panel ID="logpanel" runat="server">
                 <div style="font-size: 12px; color: #9fa1a8;">
                     <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
@@ -296,6 +296,7 @@
                         }
 
                     </script>
+
                     <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
                         AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                         ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -316,10 +317,8 @@
                         </Items>
                         <ClientSideEvents ItemClick="OnCallbackMenuClick" />
                     </dx:ASPxPopupMenu>
-                    <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="360px" Height="250px"
-                        MaxWidth="800px" MaxHeight="150px" MinHeight="150px" MinWidth="150px" ID="pcMain"
-                        HeaderText="Select Date" Modal="false"
-                        runat="server" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
+
+                    <dx:ASPxPopupControl runat="server" ID="pcMain" ClientInstanceName="ASPxPopupSelectDateControl" Width="360px" Height="250px" MaxWidth="800px" MaxHeight="150px" MinHeight="150px" MinWidth="150px" HeaderText="Select Date" Modal="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
                         <ContentCollection>
                             <dx:PopupControlContentControl runat="server" ID="pcMainPopupControl">
                                 <table>
@@ -334,9 +333,9 @@
                                                 <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();SetFollowUp('CustomDays',callbackCalendar.GetSelectedDate());}"></ClientSideEvents>
                                             </dx:ASPxButton>
                                             &nbsp;
-                                                    <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
-                                                        <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents>
-                                                    </dx:ASPxButton>
+                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                                <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents>
+                                            </dx:ASPxButton>
                                         </td>
                                     </tr>
                                 </table>

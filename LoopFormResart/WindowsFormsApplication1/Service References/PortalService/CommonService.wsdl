@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CommonService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://portal.myidealprop.com/WCFDataServices/CommonService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://portal.myidealprop.com/WCFDataServices/CommonService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://portal.myidealprop.com/WCFDataServices/CommonService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICommonService_SendMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendEmailByTemplate_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailByTemplate" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendEmailByTemplate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailByTemplateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmail" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendEmailByControl_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailByControl" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendEmailByControl_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailByControlResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendTaskSummaryEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendTaskSummaryEmail" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendTaskSummaryEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendTaskSummaryEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_UpdateLeadsSearchStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateLeadsSearchStatus" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_UpdateLeadsSearchStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateLeadsSearchStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendTeamActivityEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendTeamActivityEmail" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendTeamActivityEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendTeamActivityEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendShortSaleActivityEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendShortSaleActivityEmail" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendShortSaleActivityEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendShortSaleActivityEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendLegalActivityEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendLegalActivityEmail" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendLegalActivityEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendLegalActivityEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_LegalFollowUp_InputMessage">
+    <wsdl:part name="parameters" element="tns:LegalFollowUp" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_LegalFollowUp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LegalFollowUpResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendShortSaleUserSummayEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendShortSaleUserSummayEmail" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendShortSaleUserSummayEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendShortSaleUserSummayEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendUserActivitySummayEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendUserActivitySummayEmail" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendUserActivitySummayEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendUserActivitySummayEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendEmailByAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailByAddress" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendEmailByAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailByAddressResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICommonService">
+    <wsdl:operation name="SendMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendMessage" message="tns:ICommonService_SendMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendMessageResponse" message="tns:ICommonService_SendMessage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailByTemplate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendEmailByTemplate" message="tns:ICommonService_SendEmailByTemplate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendEmailByTemplateResponse" message="tns:ICommonService_SendEmailByTemplate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendEmail" message="tns:ICommonService_SendEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendEmailResponse" message="tns:ICommonService_SendEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailByControl">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendEmailByControl" message="tns:ICommonService_SendEmailByControl_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendEmailByControlResponse" message="tns:ICommonService_SendEmailByControl_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendTaskSummaryEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendTaskSummaryEmail" message="tns:ICommonService_SendTaskSummaryEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendTaskSummaryEmailResponse" message="tns:ICommonService_SendTaskSummaryEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLeadsSearchStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/UpdateLeadsSearchStatus" message="tns:ICommonService_UpdateLeadsSearchStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/UpdateLeadsSearchStatusResponse" message="tns:ICommonService_UpdateLeadsSearchStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendTeamActivityEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendTeamActivityEmail" message="tns:ICommonService_SendTeamActivityEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendTeamActivityEmailResponse" message="tns:ICommonService_SendTeamActivityEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendShortSaleActivityEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendShortSaleActivityEmail" message="tns:ICommonService_SendShortSaleActivityEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendShortSaleActivityEmailResponse" message="tns:ICommonService_SendShortSaleActivityEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendLegalActivityEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendLegalActivityEmail" message="tns:ICommonService_SendLegalActivityEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendLegalActivityEmailResponse" message="tns:ICommonService_SendLegalActivityEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LegalFollowUp">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/LegalFollowUp" message="tns:ICommonService_LegalFollowUp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/LegalFollowUpResponse" message="tns:ICommonService_LegalFollowUp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendShortSaleUserSummayEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmail" message="tns:ICommonService_SendShortSaleUserSummayEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmailResponse" message="tns:ICommonService_SendShortSaleUserSummayEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendUserActivitySummayEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendUserActivitySummayEmail" message="tns:ICommonService_SendUserActivitySummayEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendUserActivitySummayEmailResponse" message="tns:ICommonService_SendUserActivitySummayEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailByAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendEmailByAddress" message="tns:ICommonService_SendEmailByAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendEmailByAddressResponse" message="tns:ICommonService_SendEmailByAddress_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ICommonService" type="tns:ICommonService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendMessage">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/SendMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailByTemplate">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/SendEmailByTemplate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmail">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/SendEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailByControl">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/SendEmailByControl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTaskSummaryEmail">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/SendTaskSummaryEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLeadsSearchStatus">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/UpdateLeadsSearchStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTeamActivityEmail">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/SendTeamActivityEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendShortSaleActivityEmail">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/SendShortSaleActivityEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendLegalActivityEmail">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/SendLegalActivityEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LegalFollowUp">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/LegalFollowUp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendShortSaleUserSummayEmail">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/SendShortSaleUserSummayEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendUserActivitySummayEmail">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/SendUserActivitySummayEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailByAddress">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/SendEmailByAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CommonService">
+    <wsdl:port name="BasicHttpBinding_ICommonService" binding="tns:BasicHttpBinding_ICommonService">
+      <soap:address location="http://portal.myidealprop.com/WCFDataServices/CommonService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -14,13 +14,13 @@ Option Explicit On
 Partial Public Class LegalUI
     
     '''<summary>
-    '''listdiv control.
+    '''listPanelDiv control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents listdiv As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents listPanelDiv As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''listpanel control.
@@ -147,33 +147,6 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl
-    
-    '''<summary>
-    '''SencnedAction control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SencnedAction As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''cbLegalType control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cbLegalType As Global.DevExpress.Web.ASPxCheckBoxList
-    
-    '''<summary>
-    '''LegalSecondaryActions control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents LegalSecondaryActions As Global.IntranetPortal.LegalSecondaryActions
     
     '''<summary>
     '''MangePreview control.

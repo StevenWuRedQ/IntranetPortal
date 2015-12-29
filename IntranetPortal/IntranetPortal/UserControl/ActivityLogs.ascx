@@ -1,12 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ActivityLogs.ascx.vb" Inherits="IntranetPortal.ActivityLogs" %>
 
 <style type="text/css">
-    .TaskLogStyle {
-        background-color: #FFC5C5;
-        color: black;
-        padding: 2px;
-    }
-
     .AppointLogStyle {
         background-color: #CCFFC8;
         color: black;
@@ -24,13 +18,35 @@
     .filited {
         background: url(/images/ic_filtered_bg.png) no-repeat;
     }
+
+    .TaskLogStyle {
+        background-color: #FFC5C5;
+        color: black;
+        padding: 2px;
+    }
     /* for fix the email message link color hover bug in activty log*/
     td.dxgv:hover a {
         color: black !important;
     }
 
-    .dxpcLite_MetropolisBlue1.dxpclW{
+    .dxpcLite_MetropolisBlue1.dxpclW {
         position: fixed !important;
+    }
+
+
+    #ctl00_MainContentPH_cbpLogs_ActivityLogs_gridTracking .dxgvHSDC {
+        position: absolute;
+        height: 22px;
+        top:0;
+        padding-bottom: 1px;
+    }
+    #ctl00_MainContentPH_cbpLogs_ActivityLogs_gridTracking .dxgvCSD {
+        position: absolute;
+        top:22px;
+        bottom: 0;
+        height: auto !important;
+        overflow-y: auto !important;
+        padding-bottom: 10px;
     }
 </style>
 
@@ -526,169 +542,180 @@
     // ]]>
 </script>
 
-<div style="font-size: 12px; color: #9fa1a8; font-family: 'Source Sans Pro'; width: 100%">
+<div style="position: absolute; top: 70px; bottom: 0; font-size: 12px; color: #9fa1a8; width: 100%">
     <!-- Nav tabs -->
     <%--comment box filters--%>
     <div style="padding: 10px; background: #f5f5f5" class="clearfix">
         <%--comment box and text--%>
-        <div style="float: left; min-width: 420px; width: 60%; margin-top: 10px;">
+        <div style="float: left; width: 70%; min-width: 360px; margin-top: 10px; height: 320px">
             <div class="clearfix">
-                <span style="color: #295268;" class="upcase_text">Add Comment&nbsp;&nbsp;<i class="fa fa-comment" style="font-size: 14px"></i></span>
-                <input type="radio" id="is_public" name="is_public" value="Internal" class="font_12" checked="checked" />
-                <label for="is_public" class="font_12">
-                    <span class="upcase_text">Internal update</span>
-                </label>
-                <input type="radio" id="is_publicf" name="is_public" value="Public" class="font_12" />
-                <label for="is_publicf" class="font_12">
-                    <span class="upcase_text">Public update</span>
-                </label>
+                <div>
+                    <span style="color: #295268;" class="upcase_text">Add Comment&nbsp;&nbsp;<i class="fa fa-comment" style="font-size: 14px"></i></span>
+                </div>
+                <div style="float: right">
+                    <span>
+                        <input type="radio" id="is_public" name="is_public" value="Internal" class="font_12" checked="checked" />
+                        <label for="is_public" class="font_12">
+                            <span class="upcase_text">Internal update</span>
+                        </label>
+                    </span>
+                    <span>
+                        <input type="radio" id="is_publicf" name="is_public" value="Public" class="font_12" />
+                        <label for="is_publicf" class="font_12">
+                            <span class="upcase_text">Public update</span>
+                        </label>
+                    </span>
+                </div>
             </div>
-            <%-- <button  type="button" onclick="testaddKey()">Test</button>--%>
+            <%-- 
+            <button type="button" onclick="testaddKey()">Test</button>
             <textarea title="Press CTRL+ENTER to submit." class="edit_text_area" style="display: none; height: 148px;" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
-            <div class="html_edit_div">
+            --%>
+            <div class="html_edit_div" style="height: 70%">
                 <dx:ASPxHtmlEditor ID="EmailBody2" runat="server" Height="148px" Width="100%" ClientInstanceName="EmailBody" OnLoad="EmailBody2_Load">
                     <Settings AllowHtmlView="false" AllowPreview="false" />
                 </dx:ASPxHtmlEditor>
             </div>
         </div>
-        <div class="clearfix" style="width: 100%">
-            <div style="float: right">
-                <div style="color: #2e2f31; float: right">
-                    FILTER BY:&nbsp;&nbsp<i class="fa fa-filter acitivty_short_button tooltip-examples " id="filter_btn" title="Filter" style="color: #444547; font-size: 14px;" onclick="clickfilterBtn(this)"></i>
+        <div style="width: 30%; float: right; margin-top: 10px">
+            <div style="color: #2e2f31; float: right">
+                FILTER BY:&nbsp;&nbsp<i class="fa fa-filter acitivty_short_button tooltip-examples " id="filter_btn" title="Filter" style="color: #444547; font-size: 14px;" onclick="clickfilterBtn(this)"></i>
+            </div>
+
+            <%-- 50px --%>
+            <div style="margin-top: 50px; height: 200px">
+                <asp:Panel runat="server" ID="pnlCommentCtr"></asp:Panel>
+                <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Legal Or DisplayMode = ActivityLogMode.Construction Or DisplayMode = ActivityLogMode.Eviction Then%>
+                <div style="visibility: hidden">Date of Comment:</div>
+                <div class="border_under_line" style="height: 80px; visibility: hidden">
+                    <dx:ASPxDateEdit ID="ASPxDateEdit1" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                 </div>
+                <% End If%>
 
-                <%-- 50px --%>
-                <div style="margin-top: 50px">
-                    <asp:Panel runat="server" ID="pnlCommentCtr"></asp:Panel>
-                    <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Legal Or DisplayMode = ActivityLogMode.Construction Or DisplayMode = ActivityLogMode.Eviction Then%>
-                    <div style=" visibility:hidden">Date of Comment:</div>
-                    <div class="border_under_line" style="height: 80px;  visibility:hidden">
-                        <dx:ASPxDateEdit ID="ASPxDateEdit1" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
-                    </div>
-                    <% End If%>
+                <% If DisplayMode = ActivityLogMode.ShortSale Then%>
+                <script type="text/javascript">
 
-                    <% If DisplayMode = ActivityLogMode.ShortSale Then%>
+                    var ShortSale = {
+                        StatusData: <%= IntranetPortal.JsonExtension.ToJsonString(IntranetPortal.Data.PropertyMortgage.StatusData)%>,
+                        UpdateTypeChange: function(s)
+                        {
+                            var type = s.value;
 
-                    <script type="text/javascript">
+                            var liens = ["1st Lien", "2nd Lien","3rd Lien"];
+                            var categorys = ["Assign", "Closed", "Dead", "Evictions", "Held", "Intake", "Litigation"];
+                            var updates = ["Referral Update", "Seller Update", "Title", "Pipeline", "Manager Update"];
 
-                        var ShortSale = {
-                            StatusData: <%= IntranetPortal.JsonExtension.ToJsonString(IntranetPortal.Data.PropertyMortgage.StatusData)%>,
-                            UpdateTypeChange: function(s)
-                            {
-                                var type = s.value;
+                            if ($.inArray(type, categorys) > -1) {
+                                $("#selCategory").val(type);
+                                OnStatusCategoryChange(document.getElementById("selCategory"), this.StatusData);
+                                $("#selCategory").attr("disabled", true);
 
-                                var liens = ["1st Lien", "2nd Lien","3rd Lien"];
-                                var categorys = ["Assign", "Closed", "Dead", "Evictions", "Held", "Intake", "Litigation"];
-                                var updates = ["Referral Update", "Seller Update", "Title", "Pipeline", "Manager Update"];
+                                $("#selStatusUpdate").attr("data-required", true);
+                                return;
+                            } else {
+                                $("#selCategory").val("");
+                                $("#selCategory").attr("disabled", false);
 
-                                if ($.inArray(type, categorys) > -1) {
-                                    $("#selCategory").val(type);
-                                    OnStatusCategoryChange(document.getElementById("selCategory"), this.StatusData);
-                                    $("#selCategory").attr("disabled", true);
-
-                                    $("#selStatusUpdate").attr("data-required", true);
-                                    return;
-                                } else {
-                                    $("#selCategory").val("");
-                                    $("#selCategory").attr("disabled", false);
-
-                                    $("#selStatusUpdate").val("");
-                                    $("#selStatusUpdate").attr("disabled", false);
-                                }
-
-                                if ($.inArray(type, updates) > -1) {
-                                    $("#selCategory").attr("disabled", true);
-                                    $("#selStatusUpdate").attr("disabled", true);
-
-                                    $("#selStatusUpdate").attr("data-required", false);
-                                    $("#selCategory").attr("data-required", false);
-
-                                    return;
-                                } else {
-                                    $("#selCategory").attr("disabled", false);
-                                    $("#selStatusUpdate").attr("disabled", false);
-
-                                    $("#selStatusUpdate").attr("data-required", true);
-                                    $("#selCategory").attr("data-required", true);
-                                }
-                            },                         
-                            StatusUpdateChange: function(s)
-                            { 
-                                var categoryText = $("#selCategory").val();
-                                var statusUpdateText = $("#selStatusUpdate").val();
-
-                                if (categoryText in this.Checkinglist)
-                                {
-                                    var category = this.Checkinglist[categoryText];
-                                    
-                                    if(statusUpdateText in category)
-                                    {
-                                        category[statusUpdateText].Checking(this.CheckingSuccess, this.CheckingCancel);
-                                    }
-                                }
-                            },
-                            CheckingSuccess: function(result){
-                                var comment = $("#selType1").val() + "/" + $("#selCategory").val() + " - " + $("#selStatusUpdate").val() + "<br />";
-                                
-                                if(typeof UpdateMortgageStatus != "undefined")
-                                    UpdateMortgageStatus($("#selType1").val(), $("#selStatusUpdate option:selected").text(), $("#selCategory").val());     
-                               
-
-                                if(typeof SaveShortSaleCase != "undefined")
-                                    SaveShortSaleCase()
-
-                                if(result)
-                                    comment += result;
-
-                                AddActivityLog(comment);
-                            },
-                            CheckingCancel: function(){
                                 $("#selStatusUpdate").val("");
-                            },
-                            Checkinglist:{
-                                "Approved":{
-                                    "Approval - Received":{
-                                        Checking:function(success,cancel)
-                                        {
-                                            if(typeof window.ssToggleApprovalPopup != "undefined")
-                                                window.ssToggleApprovalPopup(success,cancel);
-                                        }
-                                    }
-                                },
-                                "Valuation":{
-                                    "BPO Call Received": {
-                                        Checking:function(success,cancel)
-                                        {
-                                            if(typeof window.ssToggleValuationPopup != "undefined")
-                                                window.ssToggleValuationPopup(1,success,cancel);
-                                        }
-                                    },
-                                    "BPO Scheduled": {
-                                        Checking:function(success,cancel)
-                                        {
-                                            if(typeof window.ssToggleValuationPopup != "undefined")
-                                                window.ssToggleValuationPopup(2,success,cancel);
-                                        }                                       
-                                    },
-                                    "BPO Complete": {
-                                        Checking:function(success,cancel)
-                                        {
-                                            if(typeof window.ssToggleValuationPopup != "undefined")
-                                                window.ssToggleValuationPopup(3,success,cancel);
-                                        }                                       
-                                    }
+                                $("#selStatusUpdate").attr("disabled", false);
+                            }
+
+                            if ($.inArray(type, updates) > -1) {
+                                $("#selCategory").attr("disabled", true);
+                                $("#selStatusUpdate").attr("disabled", true);
+
+                                $("#selStatusUpdate").attr("data-required", false);
+                                $("#selCategory").attr("data-required", false);
+
+                                return;
+                            } else {
+                                $("#selCategory").attr("disabled", false);
+                                $("#selStatusUpdate").attr("disabled", false);
+
+                                $("#selStatusUpdate").attr("data-required", true);
+                                $("#selCategory").attr("data-required", true);
+                            }
+                        },                         
+                        StatusUpdateChange: function(s)
+                        { 
+                            var categoryText = $("#selCategory").val();
+                            var statusUpdateText = $("#selStatusUpdate").val();
+
+                            if (categoryText in this.Checkinglist)
+                            {
+                                var category = this.Checkinglist[categoryText];
+                                    
+                                if(statusUpdateText in category)
+                                {
+                                    category[statusUpdateText].Checking(this.CheckingSuccess, this.CheckingCancel);
                                 }
                             }
-                        }                        
-                    </script>
+                        },
+                        CheckingSuccess: function(result){
+                            var comment = $("#selType1").val() + "/" + $("#selCategory").val() + " - " + $("#selStatusUpdate").val() + "<br />";
+                                
+                            if(typeof UpdateMortgageStatus != "undefined")
+                                UpdateMortgageStatus($("#selType1").val(), $("#selStatusUpdate option:selected").text(), $("#selCategory").val());     
+                               
 
-                    <div>
+                            if(typeof SaveShortSaleCase != "undefined")
+                                SaveShortSaleCase()
+
+                            if(result)
+                                comment += result;
+
+                            AddActivityLog(comment);
+                        },
+                        CheckingCancel: function(){
+                            $("#selStatusUpdate").val("");
+                        },
+                        Checkinglist:{
+                            "Approved":{
+                                "Approval - Received":{
+                                    Checking:function(success,cancel)
+                                    {
+                                        if(typeof window.ssToggleApprovalPopup != "undefined")
+                                            window.ssToggleApprovalPopup(success,cancel);
+                                    }
+                                }
+                            },
+                            "Valuation":{
+                                "BPO Call Received": {
+                                    Checking:function(success,cancel)
+                                    {
+                                        if(typeof window.ssToggleValuationPopup != "undefined")
+                                            window.ssToggleValuationPopup(1,success,cancel);
+                                    }
+                                },
+                                "BPO Scheduled": {
+                                    Checking:function(success,cancel)
+                                    {
+                                        if(typeof window.ssToggleValuationPopup != "undefined")
+                                            window.ssToggleValuationPopup(2,success,cancel);
+                                    }                                       
+                                },
+                                "BPO Complete": {
+                                    Checking:function(success,cancel)
+                                    {
+                                        if(typeof window.ssToggleValuationPopup != "undefined")
+                                            window.ssToggleValuationPopup(3,success,cancel);
+                                    }                                       
+                                }
+                            }
+                        }
+                    }                        
+                </script>
+                <div>
+                    <div style="float: right">
                         <div class="color_gray upcase_text">Type of update</div>
                         <select class="select_bootstrap select_margin" id="selType1" onchange="ShortSale.UpdateTypeChange(this)">
                             <% For Each type In IntranetPortal.Core.CommonData.GetData("UpdateType")%>
                             <option value="<%= type.Name%>"><%= type.Name%></option>
                             <% Next%>
                         </select>
+                    </div>
+
+                    <div style="float: right">
                         <div class="color_gray upcase_text">Category</div>
                         <select class="select_bootstrap select_margin " id="selCategory" onchange="OnStatusCategoryChange(this, ShortSale.StatusData)" data-required="true">
                             <option value=""></option>
@@ -696,6 +723,9 @@
                             <option value="<%= category%>"><%= category%></option>
                             <% Next%>
                         </select>
+                    </div>
+
+                    <div style="float: right">
                         <div class="color_gray upcase_text">Status Update</div>
                         <select class="select_bootstrap select_margin selStatusUpdate" id="selStatusUpdate" data-required="true" onchange="ShortSale.StatusUpdateChange(this)">
                             <option value=""></option>
@@ -703,45 +733,50 @@
                             <option value="<%= mortStatus.Category & "-" & mortStatus.Name%>" style="display: none"><%= mortStatus.Name%></option>
                             <% Next%>
                         </select>
-                        <div class="color_gray upcase_text">Follow Up date</div>
-                        <dx:ASPxDateEdit ID="dtFollowup" Border-BorderStyle="None" CssClass="select_bootstrap" ClientInstanceName="dtClientFollowup" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                     </div>
 
-                    <% End If%>
+                    <div style="float: right">
+                        <div class="color_gray upcase_text">Follow Up date</div>
+                        <dx:ASPxDateEdit ID="dtFollowup" Border-BorderStyle="None" CssClass="select_bootstrap select_margin" ClientInstanceName="dtClientFollowup" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
+                    </div>
                 </div>
-                <div style="margin-top: 15px; float: right; margin-right: 5px;">
-                    <i class="fa fa-plus-circle activity_add_buttons tooltip-examples icon_btn" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
-                    <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Construction Then%>
-                    <i class="fa fa-calendar-o activity_add_buttons tooltip-examples" style="margin-right: 15px; cursor: pointer" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
-                    <%Else%>
-                    <% If DisplayMode = ActivityLogMode.ShortSale Then%>
-                    <i class="fa fa-comment activity_add_buttons tooltip-examples" style="margin-right: 15px; cursor: pointer" title="Previous Notes" onclick="popupPreviousNotes.Show();popupPreviousNotes.PerformCallback()"></i>
-                    <% End If%>
-                    <% End If%>
-                    <i class="fa fa-tasks activity_add_buttons tooltip-examples icon_btn" title="Create Task" style="margin-right: 15px;" onclick="ASPxPopupSetAsTaskControl.Show();ASPxPopupSetAsTaskControl.PerformCallback('Show');"></i>
-                    <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
-                </div>
+                <% End If%>
             </div>
+            <div style="position: relative; bottom: 0; float: right; margin-right: 5px;">
+                <i class="fa fa-plus-circle activity_add_buttons tooltip-examples icon_btn" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
+                <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Construction Then%>
+                <i class="fa fa-calendar-o activity_add_buttons tooltip-examples" style="margin-right: 15px; cursor: pointer" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
+                <%Else%>
+                <% If DisplayMode = ActivityLogMode.ShortSale Then%>
+                <i class="fa fa-comment activity_add_buttons tooltip-examples" style="margin-right: 15px; cursor: pointer" title="Previous Notes" onclick="popupPreviousNotes.Show();popupPreviousNotes.PerformCallback()"></i>
+                <% End If%>
+                <% End If%>
+                <i class="fa fa-tasks activity_add_buttons tooltip-examples icon_btn" title="Create Task" style="margin-right: 15px;" onclick="ASPxPopupSetAsTaskControl.Show();ASPxPopupSetAsTaskControl.PerformCallback('Show');"></i>
+                <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
+            </div>
+
         </div>
     </div>
     <dx:ASPxCallback runat="server" ID="addCommentsCallback" ClientInstanceName="addCommentsCallbackClient" OnCallback="addCommentsCallback_Callback">
         <ClientSideEvents EndCallback="function(s,e){gridTrackingClient.Refresh(); EmailBody.SetHtml(''); document.getElementById('txtComments').value='';}" />
     </dx:ASPxCallback>
-
     <dx:ASPxCallback runat="server" ID="addLogsCallback" ClientInstanceName="addLogsCallbackClient" OnCallback="addLogsCallback_Callback">
         <ClientSideEvents EndCallback="function(s,e){gridTrackingClient.Refresh();}" />
     </dx:ASPxCallback>
 
     <%-------end-----%>
     <%-- log tables--%>
-    <div style="width: 100%; padding: 0; display: block;">
+    <div style="position: absolute; top: 320px; bottom: 0; width: 100%; padding: 0">
         <asp:HiddenField ID="hfBBLE" runat="server" />
-        <dx:ASPxGridView Width="100%" ID="gridTracking" ViewStateMode="Disabled" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true"
-            SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID"
-            SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" OnDataBinding="gridTracking_DataBinding" Styles-FilterBuilderHeader-BackColor="Gray">
+        <dx:ASPxGridView runat="server" ID="gridTracking" Width="100%" ViewStateMode="Disabled" ClientInstanceName="gridTrackingClient" AutoGenerateColumns="False" KeyFieldName="LogID" OnAfterPerformCallback="gridTracking_AfterPerformCallback" OnDataBinding="gridTracking_DataBinding" Visible="true">
             <Styles>
                 <Cell VerticalAlign="Top"></Cell>
                 <Header BackColor="#F5F5F5"></Header>
+                <EditForm Paddings-Padding="0">
+                    <Paddings Padding="0px"></Paddings>
+                </EditForm>
+                <Row Cursor="pointer" />
+                <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
             </Styles>
             <Columns>
                 <dx:GridViewDataColumn FieldName="ActionType" VisibleIndex="0" Caption="" Width="40px">
@@ -983,25 +1018,19 @@
                     </HeaderTemplate>
                 </dx:GridViewDataTextColumn>
             </Columns>
-            <SettingsEditing Mode="EditForm"></SettingsEditing>
-            <SettingsText CommandUpdate="Add" />
-            <SettingsPager Mode="ShowAllRecords" />
+            <Settings VerticalScrollBarMode="Auto" ShowHeaderFilterButton="true" />
+            <SettingsBehavior AllowSort="false" AllowFocusedRow="false" AllowClientEventsOnLoad="false" AllowDragDrop="false"
+                EnableRowHotTrack="false" ColumnResizeMode="Disabled" />
             <SettingsCommandButton>
                 <UpdateButton ButtonType="Image">
                     <Image Url="~/images/add-button-hi.png" Width="16" Height="16">
                     </Image>
                 </UpdateButton>
             </SettingsCommandButton>
-            <Styles>
-                <EditForm Paddings-Padding="0">
-                    <Paddings Padding="0px"></Paddings>
-                </EditForm>
-                <Row Cursor="pointer" />
-                <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
-            </Styles>
-            <Settings VerticalScrollBarMode="Auto" ShowHeaderFilterButton="true" />
-            <SettingsBehavior AllowFocusedRow="false" AllowClientEventsOnLoad="false" AllowDragDrop="false"
-                EnableRowHotTrack="false" ColumnResizeMode="Disabled" />
+            <SettingsEditing Mode="EditForm"></SettingsEditing>
+            <SettingsText CommandUpdate="Add" />
+            <SettingsPager Mode="ShowAllRecords" />
+
             <ClientSideEvents BeginCallback="function(s,e){CaseNeedComment = false}" EndCallback="function(s,e){if(typeof dateActivityClient != 'undefined'){dateActivityClient.SetDate(new Date());} if(NeedToRefreshList){RefreshList();} if(needRefreshShortSale){ if(typeof GetShortSaleData != 'undefined'){ NGGetShortSale(caseId);}} }" />
         </dx:ASPxGridView>
 
@@ -1015,10 +1044,10 @@
                             <dx:ListEditItem Text="Leads" Value="SalesAgent" />
                             <dx:ListEditItem Text="Short Sale" Value="ShortSale" />
                             <dx:ListEditItem Text="Legal" Value="Legal" />
-                            <dx:ListEditItem Text="Title" Value="Title" />                        
+                            <dx:ListEditItem Text="Title" Value="Title" />
                             <dx:ListEditItem Text="Construction" Value="Construction" />
-                            <dx:ListEditItem Text="Eviction" Value="Eviction" />                                                                                    
-                            <dx:ListEditItem Text="Task" Value="Task" />                            
+                            <dx:ListEditItem Text="Eviction" Value="Eviction" />
+                            <dx:ListEditItem Text="Task" Value="Task" />
                             <dx:ListEditItem Text="Email" Value="Email" />
                             <dx:ListEditItem Text="Appointment" Value="Appointment" />
                         </Items>

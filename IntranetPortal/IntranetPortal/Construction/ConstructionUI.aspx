@@ -24,8 +24,8 @@
             width: auto !important;
         }
     </style>
-    <div ui-layout="{flow: 'column'}" id="listPanelDiv">
-        <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listdiv">
+    <div ui-layout="{flow: 'column'}" >
+        <div ui-layout-container hideafter size="280px" max-size="320px" runat="server" id="listPanelDiv">
             <%-- list panel  --%>
             <asp:Panel ID="listPanel" runat="server">
                 <uc1:ConstructionCaseList runat="server" ID="ConstructionCaseList" />
@@ -39,7 +39,7 @@
             </asp:Panel>
         </div>
         <%-- log panel --%>
-        <div ui-layout-container>
+        <div ui-layout-container id="logPanelDiv">
             <asp:Panel ID="LogPanel" runat="server">
                 <div style="font-size: 12px; color: #9fa1a8;">
                     <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">

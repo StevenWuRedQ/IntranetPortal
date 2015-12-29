@@ -29,7 +29,7 @@ Public Class LegalUI
             End If
 
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-                listdiv.Visible = False
+                listPanelDiv.Visible = False
                 Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
                 If wli IsNot Nothing Then
                     Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
@@ -68,29 +68,30 @@ Public Class LegalUI
             logpanel.Visible = False
         End If
 
-        Dim isInPoupUp = Request.QueryString("InPopUp") IsNot Nothing
-        If (isInPoupUp) Then
-            SencnedAction.Visible = True
-            listdiv.Visible = False
-        End If
+
+        'Dim isInPoupUp = Request.QueryString("InPopUp") IsNot Nothing
+        'If (isInPoupUp) Then
+        '    SencnedAction.Visible = True
+        '    listdiv.Visible = False
+        'End If
 
 
     End Sub
 
     Private Sub BindData(bble As String)
         'should using collapsed, visible=false could cause viewstate problems
-        listdiv.Visible = False
+        listPanelDiv.Visible = False
         BBLEStr = bble
         ActivityLogs.BindData(bble)
         fileGamePlan.BindData(bble)
 
         If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
-            Dim cstext1 As String = "<script type=""text/javascript"">" & _
+            Dim cstext1 As String = "<script type=""text/javascript"">" &
                             String.Format("var leadsInfoBBLE = ""{0}"";", bble) & "</script>"
             Page.ClientScript.RegisterStartupScript(Me.GetType, "SetleadBBLE", cstext1)
 
             If Not Page.ClientScript.IsStartupScriptRegistered("InitLegalData") Then
-                cstext1 = "<script type=""text/javascript"">" & _
+                cstext1 = "<script type=""text/javascript"">" &
                                 String.Format("setLegalData(""{0}"");", bble) & "</script>"
                 Page.ClientScript.RegisterStartupScript(Me.GetType, "InitLegalData", cstext1)
             End If
@@ -113,22 +114,22 @@ Public Class LegalUI
         fileGamePlan.BindData(e.Parameter)
     End Sub
 
-    <WebMethod()> _
+    <WebMethod()>
     <ScriptMethod>
     Public Shared Sub SaveCase(legalCase As IntranetPortal.Data.LegalCase)
         legalCase.SaveData(HttpContext.Current.User.Identity.Name)
     End Sub
 
-    <WebMethod()> _
-   <ScriptMethod>
+    <WebMethod()>
+    <ScriptMethod>
     Public Shared Sub SaveCaseData(caseData As String, bble As String)
         Dim lgCase = IntranetPortal.Data.LegalCase.GetCase(bble)
         lgCase.CaseData = caseData
         lgCase.SaveData(HttpContext.Current.User.Identity.Name)
     End Sub
 
-    <WebMethod()> _
-   <ScriptMethod>
+    <WebMethod()>
+    <ScriptMethod>
     Public Shared Sub CompleteResearch(caseData As String, bble As String, sn As String)
         'save data
         SaveCaseData(caseData, bble)
@@ -146,8 +147,8 @@ Public Class LegalUI
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
     End Sub
 
-    <WebMethod()> _
-   <ScriptMethod>
+    <WebMethod()>
+    <ScriptMethod>
     Public Shared Sub BackToResearch(caseData As String, bble As String, sn As String, comments As String)
         'save data
         SaveCaseData(caseData, bble)
@@ -167,7 +168,7 @@ Public Class LegalUI
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
     End Sub
 
-    <WebMethod()> _
+    <WebMethod()>
     <ScriptMethod>
     Public Shared Sub AttorneyComplete(caseData As String, bble As String, sn As String)
         'save data
@@ -186,7 +187,7 @@ Public Class LegalUI
 
     End Sub
 
-    <WebMethod()> _
+    <WebMethod()>
     <ScriptMethod>
     Public Shared Sub CloseCase(bble As String, comments As String)
         LegalCase.UpdateStatus(bble, LegalCaseStatus.Closed, HttpContext.Current.User.Identity.Name)
@@ -195,7 +196,7 @@ Public Class LegalUI
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
     End Sub
 
-    <WebMethod()> _
+    <WebMethod()>
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
     Public Shared Function GetCaseData(bble As String) As String
 
