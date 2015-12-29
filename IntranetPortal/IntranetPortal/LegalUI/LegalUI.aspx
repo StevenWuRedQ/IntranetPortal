@@ -64,112 +64,112 @@
 
             var taskSN = function () {
                 return '<%= Request.QueryString("sn")%>'
-        }();
+            }();
 
 
-        function OnCallbackMenuClick(s, e) {
+            function OnCallbackMenuClick(s, e) {
 
-            if (e.item.name == "Custom") {
-                ASPxPopupSelectDateControl.PerformCallback("Show");
-                ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
+                if (e.item.name == "Custom") {
+                    ASPxPopupSelectDateControl.PerformCallback("Show");
+                    ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
+                    e.processOnServer = false;
+                    return;
+                }
+
+                //SetLeadStatus(e.item.name + "|" + leadsInfoBBLE);
+                SetLegalFollowUp(e.item.name)
                 e.processOnServer = false;
-                return;
             }
 
-            //SetLeadStatus(e.item.name + "|" + leadsInfoBBLE);
-            SetLegalFollowUp(e.item.name)
-            e.processOnServer = false;
-        }
+            function CloseCase(comments) {
+                angular.element(document.getElementById('LegalCtrl')).scope().CloseCase(comments);
+            }
 
-        function CloseCase(comments) {
-            angular.element(document.getElementById('LegalCtrl')).scope().CloseCase(comments);
-        }
+            function SetLegalFollowUp(type, dateSelected) {
+                if (typeof dateSelected == 'undefined')
+                    dateSelected = new Date();
 
-        function SetLegalFollowUp(type, dateSelected) {
-            if (typeof dateSelected == 'undefined')
-                dateSelected = new Date();
+                var fileData = {
+                    "bble": leadsInfoBBLE,
+                    "type": type,
+                    "dtSelected": dateSelected
+                };
 
-            var fileData = {
-                "bble": leadsInfoBBLE,
-                "type": type,
-                "dtSelected": dateSelected
-            };
+                $.ajax({
+                    url: '/LegalUI/LegalServices.svc/SetLegalFollowUp',
+                    type: 'POST',
+                    data: JSON.stringify(fileData),
+                    cache: false,
+                    dataType: 'json',
+                    processData: false, // Don't process the files
+                    contentType: 'application/json',
+                    success: function (data) {
+                        alert('successful..');
 
-            $.ajax({
-                url: '/LegalUI/LegalServices.svc/SetLegalFollowUp',
-                type: 'POST',
-                data: JSON.stringify(fileData),
-                cache: false,
-                dataType: 'json',
-                processData: false, // Don't process the files
-                contentType: 'application/json',
-                success: function (data) {
-                    alert('successful..');
+                        if (typeof gridTrackingClient != "undefined")
+                            gridTrackingClient.Refresh();
+                    },
+                    error: function (data) {
+                        alert('Some error Occurred! Detail: ' + JSON.stringify(data));
+                    }
+                });
+            }
 
-                    if (typeof gridTrackingClient != "undefined")
-                        gridTrackingClient.Refresh();
-                },
-                error: function (data) {
-                    alert('Some error Occurred! Detail: ' + JSON.stringify(data));
+            function GetDataReadOnly() {
+                return $('#Viewable').val() == 'True'
+            }
+
+            function VendorsClosing(s) {
+                GetContactCallBack();
+            }
+
+            function GetContactCallBack(contact) {
+                $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
+                    AllContact = data;
+                });
+
+            }
+
+            function GetLegalData() {
+                return angular.element(document.getElementById('LegalCtrl')).scope().LegalCase;
+
+            }
+
+            function setLegalData(BBLE) {
+                $(document).ready(function () {
+                    angular.element(document.getElementById('LegalCtrl')).scope().LoadLeadsCase(BBLE);
+
+                });
+
+            }
+
+            /*chris use this show alert when leave page*/
+            function CaseDataChanged() {
+                return ScopeCaseDataChanged(GetLegalData);
+            }
+            function GetCassNeedComment() {
+                return CaseNeedComment;
+            }
+            function ResetCaseDataChange() {
+                ScopeResetCaseDataChange(GetLegalData)
+            }
+
+
+            $(function () {
+                var scope = angular.element('#LegalCtrl').scope();
+
+                ScopeAutoSave(GetLegalData, scope.SaveLegal, '#LegalTabHead');
+
+                $('body').tooltip({
+                    selector: '.tooltip-examples',
+                    placement: 'bottom'
+                });
+
+                if (leadsInfoBBLE && leadsInfoBBLE != null) {
+                    if (WorkingLogControl)
+                        WorkingLogControl.openFile(leadsInfoBBLE, "Legal");
                 }
             });
-        }
-
-        function GetDataReadOnly() {
-            return $('#Viewable').val() == 'True'
-        }
-
-        function VendorsClosing(s) {
-            GetContactCallBack();
-        }
-
-        function GetContactCallBack(contact) {
-            $.getJSON('/Services/ContactService.svc/LoadContacts').done(function (data) {
-                AllContact = data;
-            });
-
-        }
-
-        function GetLegalData() {
-            return angular.element(document.getElementById('LegalCtrl')).scope().LegalCase;
-
-        }
-
-        function setLegalData(BBLE) {
-            $(document).ready(function () {
-                angular.element(document.getElementById('LegalCtrl')).scope().LoadLeadsCase(BBLE);
-
-            });
-
-        }
-
-        /*chris use this show alert when leave page*/
-        function CaseDataChanged() {
-            return ScopeCaseDataChanged(GetLegalData);
-        }
-        function GetCassNeedComment() {
-            return CaseNeedComment;
-        }
-        function ResetCaseDataChange() {
-            ScopeResetCaseDataChange(GetLegalData)
-        }
-
-
-        $(function () {
-            var scope = angular.element('#LegalCtrl').scope();
-
-            ScopeAutoSave(GetLegalData, scope.SaveLegal, '#LegalTabHead');
-
-            $('body').tooltip({
-                selector: '.tooltip-examples',
-                placement: 'bottom'
-            });
-
-            if (leadsInfoBBLE && leadsInfoBBLE != null) {
-                if (WorkingLogControl)
-                    WorkingLogControl.openFile(leadsInfoBBLE, "Legal");
-            }
-        });
     </script>
 
     <input type="hidden" id="CaseData" />
@@ -316,7 +316,12 @@
                                             <ul class="dropdown-menu" style="background-color: transparent; border: none; margin-top: 10px; box-shadow: none">
                                                 <li><i class="fa fa-users sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="Contacts" onclick="VendorsPopupClient.Show()"></i></li>
                                                 <li><i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i></li>
+                                                <%If User.IsInRole("Legal-Manager") Then%>
+                                                <li><i class="fa fa-history sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="Change Log" onclick="angular.element(document.getElementById('LegalCtrl')).scope().showHistory()"></i></li>
+                                                <% End If%>
+                                                <%-- 
                                                 <li><i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" data-original-title="Print" onclick=""></i></li>
+                                                --%>
                                             </ul>
                                         </span>
                                     </li>
