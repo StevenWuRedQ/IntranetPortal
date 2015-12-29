@@ -1280,6 +1280,13 @@
       <DependentUpon>LeadDocSearch.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="ManagementUI\LegalManagement.aspx.designer.vb">
+      <DependentUpon>LegalManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagementUI\LegalManagement.aspx.vb">
+      <DependentUpon>LegalManagement.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="ManagementUI\Management2.aspx.designer.vb">
       <DependentUpon>Management2.aspx</DependentUpon>
     </Compile>
@@ -6478,6 +6485,7 @@
     <Content Include="LegalUI\ManagePreViewControl.ascx" />
     <Content Include="LegalUI\LegalSummaryUI.aspx" />
     <Content Include="ManagementUI\LeadDocSearch.aspx" />
+    <Content Include="ManagementUI\LegalManagement.aspx" />
     <Content Include="ManagementUI\Management2.aspx" />
     <Content Include="ManagementUI\Management1.aspx" />
     <Content Include="ManagementUI\Management.aspx" />

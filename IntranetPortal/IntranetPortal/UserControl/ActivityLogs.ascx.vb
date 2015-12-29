@@ -1062,7 +1062,7 @@ Public Class ActivityLogs
                             comments = comments & "<br />" & txtComments
                         End If
 
-                        LeadsActivityLog.AddActivityLog(aspxdate, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
+                        LeadsActivityLog.AddActivityLog(aspxdate, comments, hfBBLE.Value, logCategoryStr, LeadsActivityLog.EnumActionType.Comments)
 
                         'ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category & " - " & statusOfUpdate, txtComments)
                         ShortSaleManage.AddActivityLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category, statusOfUpdate, txtComments)
