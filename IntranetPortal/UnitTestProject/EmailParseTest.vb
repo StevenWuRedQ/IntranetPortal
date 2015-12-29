@@ -219,9 +219,9 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
         Assert.IsTrue(Not String.IsNullOrEmpty(ecourt.IndexNumber))
         Assert.IsTrue(ecourt.IndexNumber = "120111/2014")
 
-        ecourt.UpdateBBLE()
-        Assert.IsTrue(Not String.IsNullOrEmpty(ecourt.BBLE))
-        Assert.IsTrue(ecourt.BBLE.Trim = "654321")
+        'ecourt.UpdateBBLE()
+        'Assert.IsTrue(Not String.IsNullOrEmpty(ecourt.BBLE))
+        'Assert.IsTrue(ecourt.BBLE.Trim = "654321")
     End Sub
 
 
