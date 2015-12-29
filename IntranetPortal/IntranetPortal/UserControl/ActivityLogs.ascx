@@ -542,7 +542,7 @@
     // ]]>
 </script>
 
-<div style="position: absolute; top: 70px; bottom: 0; font-size: 12px; color: #9fa1a8; width: 100%">
+<div style="position: absolute; top: 70px; bottom: 0; font-size: 12px; color: #9fa1a8; min-width:672px">
     <!-- Nav tabs -->
     <%--comment box filters--%>
     <div style="padding: 10px; background: #f5f5f5" class="clearfix">
