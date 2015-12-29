@@ -2,6 +2,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{43375D09-BCC8-4469-BFFE-6298F91F1CAB}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal", "IntranetPortal\IntranetPortal.vbproj", "{6CA9F52B-C8D7-4098-8FB4-0626D61A9E32}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.Testing", "IntranetPortal.Testing\IntranetPortal.Testing.vbproj", "{F69C9FCB-55A1-423E-A1DC-FB08A28BBC8D}"
@@ -16,18 +21,11 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "RuleEngineService", "RuleEn
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.Management", "IntranetPortal.Management\IntranetPortal.Management.vbproj", "{2B915A55-7815-4D0D-8CF6-8384F4638099}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{43375D09-BCC8-4469-BFFE-6298F91F1CAB}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.Data", "IntranetPortal.Data\IntranetPortal.Data.vbproj", "{51557141-4472-40E6-82BD-30275F702486}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "UnitTestProject", "UnitTestProject\UnitTestProject.vbproj", "{9CC35969-43A2-4CAD-A298-EB208841587E}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "InterPortalSQL", "InterPortalSQL\InterPortalSQL.sqlproj", "{B31D450A-53CA-43D5-9096-8F8E66BE879B}"
-EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "UDFFunction", "UDFFunction\UDFFunction.sqlproj", "{FFCAEEE1-317F-45AB-96B8-15F3F5AE5D6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

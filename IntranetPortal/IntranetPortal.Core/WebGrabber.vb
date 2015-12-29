@@ -199,10 +199,6 @@ Public Class WebGrabber
         Public violationType As String
     End Class
 
-    Class HPDViolation
-
-    End Class
-
 End Class
 
 
