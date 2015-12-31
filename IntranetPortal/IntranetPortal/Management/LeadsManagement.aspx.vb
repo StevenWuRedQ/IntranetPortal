@@ -251,8 +251,6 @@ Public Class LeadsManagement
             If gridLeads.Selection.Count > 0 AndAlso listboxEmployee.SelectedItem IsNot Nothing Then
                 Dim selectedLeads = gridLeads.GetSelectedFieldValues("BBLE").Select(Function(l) l.ToString).ToArray
 
-
-
                 Lead.BatchAssignLeads(selectedLeads.ToArray, listboxEmployee.SelectedItem.Text, CInt(listboxEmployee.SelectedItem.Value), User.Identity.Name, cbArchived.Checked)
 
                 'Using Context As New Entities
