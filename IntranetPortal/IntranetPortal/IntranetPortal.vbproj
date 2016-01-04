@@ -2464,6 +2464,7 @@
     <Content Include="Account\Logout.aspx" />
     <Content Include="AgentOverview\AgentCharts.ascx" />
     <Content Include="AgentOverview\AgentOverview.aspx" />
+    <Content Include="app.js" />
     <Content Include="App_Data\PortalMenu.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -6648,7 +6649,6 @@
     <Content Include="Publish\PublishProperty.ascx" />
     <Content Include="Publish\PublishPropertyPage.aspx" />
     <Content Include="CustomReport\ReportWizard.aspx" />
-    <Content Include="app.js" />
     <Content Include="Scripts\autologout.js" />
     <Content Include="Scripts\autosave.js" />
     <Content Include="Scripts\ContactJs.js" />
