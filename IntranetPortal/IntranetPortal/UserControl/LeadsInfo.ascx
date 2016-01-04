@@ -1,4 +1,5 @@
-﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="LeadsInfo.ascx.vb" Inherits="IntranetPortal.LeadsInfo1" %>
+﻿
+<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="LeadsInfo.ascx.vb" Inherits="IntranetPortal.LeadsInfo1" %>
 <%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>
 <%@ Register Src="~/UserControl/HomeOwnerInfo.ascx" TagPrefix="uc1" TagName="HomeOwnerInfo" %>
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
@@ -31,19 +32,19 @@
             //$(".phone_comment").text("-" + comment);
             temCommentSpan.text("-" + comment);
         } else {
-
         }
         OnCallPhoneCallback("SaveComment|" + tmpPhoneNo + "|" + comment);
-
     }
 
     function OnTelphoneLinkClick(tellink, phoneNo) {
         tmpPhoneNo = phoneNo;
         temTelLink = tellink;
         ASPxPopupMenuPhone.ShowAtElement(tellink);
-
     }
 
+    }
+    var tmpEmail = null;
+    var tempEmailLink = null;
     function OnEmailLinkClick(EmailId, bble, ownerName, emailink) {
         tmpEmail = EmailId;
         tempEmailLink = emailink;
@@ -339,7 +340,7 @@
     function reloadHomeBreakCtrl(bble) {
         var homeBreakDownCtrl = document.getElementById('homeBreakDownCtrl');
         // in hot leads, there is not homeBreakDownCtrl
-        if (homeBreakDownCtrl) {
+        if (homeBreakDownCtrl) {        
             var target = angular.element(homeBreakDownCtrl);
             var $injector = target.injector();
             $injector.invoke(function ($compile, ptCom, ptHomeBreakDownService) {
@@ -671,9 +672,9 @@
                                                             <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();SetLeadStatus('customDays|' + leadsInfoBBLE + '|' + callbackCalendar.GetSelectedDate().toISOString());}"></ClientSideEvents>
                                                         </dx:ASPxButton>
                                                         &nbsp;
-                                                        <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
                                                             <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents>
-                                                        </dx:ASPxButton>
+                                                            </dx:ASPxButton>
                                                     </td>
                                                 </tr>
                                             </table>

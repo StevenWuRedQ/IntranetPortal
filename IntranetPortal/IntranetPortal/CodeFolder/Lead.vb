@@ -507,6 +507,14 @@ Partial Public Class Lead
         End Using
     End Sub
 
+    ''' <summary>
+    ''' Assign multiple leads at one time
+    ''' </summary>
+    ''' <param name="bbles">the list of BBLE</param>
+    ''' <param name="name">Employee name assigned to</param>
+    ''' <param name="empId">Employee Id</param>
+    ''' <param name="assignBy">Assigned User</param>
+    ''' <param name="archiveLogs">indicator if acchieve logs needed</param>
     Public Shared Sub BatchAssignLeads(bbles As String(), name As String, empId As Integer, assignBy As String, Optional archiveLogs As Boolean = False)
         Using Context As New Entities
             For Each item In bbles
@@ -550,6 +558,9 @@ Partial Public Class Lead
                         LeadsActivityLog.AddActivityLogEntity(DateTime.Now, comments, item, LeadsActivityLog.LogCategory.Status.ToString, Nothing, assignBy, LeadsActivityLog.EnumActionType.Reassign, Context)
                     End If
 
+                    'Clear shared user information
+                    newlead.ClearSharedUser()
+
                     'LeadsActivityLog.AddActivityLogEntity(DateTime.Now, "", item, LeadsActivityLog.LogCategory.Status.ToString, Nothing, assignBy, LeadsActivityLog.EnumActionType.Reassign, Context)
                     LeadsStatusLog.AddNewEntity(item, LeadsStatusLog.LogType.NewLeads, name, assignBy, orgName, Context)
                 End If
@@ -562,6 +573,10 @@ Partial Public Class Lead
         End Using
     End Sub
 
+    ''' <summary>
+    ''' The list of shared users
+    ''' </summary>
+    ''' <returns>List of Usernames</returns>
     Public ReadOnly Property SharedUsers As List(Of String)
         Get
             Using ctx As New Entities
@@ -569,6 +584,42 @@ Partial Public Class Lead
             End Using
         End Get
     End Property
+
+    ''' <summary>
+    ''' Add shared user relationship
+    ''' </summary>
+    ''' <param name="userName">shared user</param>
+    ''' <param name="createBy">the user who add shared user</param>
+    Public Sub AddSharedUser(userName As String, createBy As String)
+        Using Context As New Entities
+            Dim item = Context.SharedLeads.Where(Function(sl) sl.BBLE = BBLE And sl.UserName = userName).FirstOrDefault
+
+            If item Is Nothing Then
+                Dim sharedItem As New SharedLead
+                sharedItem.BBLE = BBLE
+                sharedItem.UserName = userName
+                sharedItem.CreateBy = createBy
+                sharedItem.CreateDate = DateTime.Now
+
+                Context.SharedLeads.Add(sharedItem)
+                Context.SaveChanges()
+            End If
+        End Using
+    End Sub
+
+    ''' <summary>
+    ''' Remove all shared user relationship
+    ''' </summary>
+    Public Sub ClearSharedUser()
+        Using ctx As New Entities
+            If ctx.SharedLeads.Any(Function(sl) sl.BBLE = BBLE) Then
+                Dim sharedUsers = ctx.SharedLeads.Where(Function(s) s.BBLE = BBLE).ToList
+
+                ctx.SharedLeads.RemoveRange(sharedUsers)
+                ctx.SaveChanges()
+            End If
+        End Using
+    End Sub
 
     Public Sub UpdateAssignDate()
         Using ctx As New Entities
