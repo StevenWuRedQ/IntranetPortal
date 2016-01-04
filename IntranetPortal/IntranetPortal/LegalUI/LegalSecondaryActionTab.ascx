@@ -9,7 +9,7 @@
         <div style="float: right">
             <%--     
             <input type="button" id="btnComplete" class="rand-button short_sale_edit" value="Completed" runat="server" onserverclick="btnComplete_ServerClick" />
-			<input type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveLegal()"  />
+            <input type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveLegal()"  />
             --%>
         </div>
     </div>
@@ -17,16 +17,16 @@
         <h4 class="ss_form_title">Tag Types</h4>
 
         <div dx-tag-box="{
-			                dataSource: [ <% For Each v In Utility.Enum2Dictinary(GetType(IntranetPortal.Data.LegalSencdaryType))%> {'id': <%=v.Key %>, 'text':'<%=v.Value%>'}, <% Next%> ],
-			                displayExpr: 'text',
-			                valueExpr: 'id',
-			                bindingOptions: {
-			                    values: {
-				                    deep: true,
-				                    dataPath: 'LegalCase.SecondaryTypes'
-			                    }
-			                }
-		                }"></div>
+                            dataSource: [ <% For Each v In Utility.Enum2Dictinary(GetType(IntranetPortal.Data.LegalSencdaryType))%> {'id': <%=v.Key %>, 'text':'<%=v.Value%>'}, <% Next%> ],
+                            displayExpr: 'text',
+                            valueExpr: 'id',
+                            bindingOptions: {
+                                values: {
+                                    deep: true,
+                                    dataPath: 'LegalCase.SecondaryTypes'
+                                }
+                            }
+                        }"></div>
     </div>
     <%-- Can't use cssSlideUp  class for animation becuase typeahead will get error  --%>
     <div class="ss_form clearfix" ng-show="CheckSecondaryTags(1)">
@@ -91,7 +91,7 @@
     <%-- Partitions --%>
     <div class="ss_form clearfix " ng-show="CheckSecondaryTags(2)">
         <h4 class="ss_form_title">Partitions
-			<span style="transform: none; font-size: 12px;">(Mark as * need to fill other read only here)</span>
+            <span style="transform: none; font-size: 12px;">(Mark as * need to fill other read only here)</span>
             <i class="fa fa-download icon_btn color_blue tooltip-examples" title="Download Partitions Document" ng-click="DocGenerator('Partition_Temp.docx')"></i>
         </h4>
         <ul class="ss_form_box  clearfix">
@@ -204,9 +204,9 @@
                 <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DeedReversionDefendant">
             </li>
             <%--<li class="ss_form_item clearfix">
-				<label class="ss_form_input_title">Defendant's Attorney *</label>
-				<input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.DefendantAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DefendantAttorneyId">
-			</li>--%>
+                <label class="ss_form_input_title">Defendant's Attorney *</label>
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.DefendantAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DefendantAttorneyId">
+            </li>--%>
         </ul>
         <h5 class="ss_form_title">Deed Reversions Other Defendants <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="NGAddArrayitemScope('LegalCtrl','LegalCase.SecondaryInfo.DeedReversionDefendants')" title="Add" style="font-size: 18px"></i></h5>
         <ul class="ss_form_box clearfix">
@@ -335,9 +335,9 @@
                 <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.QTA_DefaultDate" ss-date>
             </li>
             <%--<li class="ss_form_item clearfix">
-				<label class="ss_form_input_title">Defendant's Attorney *</label>
-				<input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId">
-			</li>--%>
+                <label class="ss_form_input_title">Defendant's Attorney *</label>
+                <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_DefendantAttorneyName" ng-change="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.QTA_DefendantAttorneyId">
+            </li>--%>
         </ul>
 
         <h5 class="ss_form_title">Quiet Title Other Defendants <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="NGAddArrayitemScope('LegalCtrl','LegalCase.SecondaryInfo.QTA_Defendants')" title="Add" style="font-size: 18px"></i></h5>

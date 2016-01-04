@@ -994,11 +994,8 @@ Public Class Troubleshooting
     End Sub
 
     Private Sub SpotCheckTest_Click(sender As Object, e As EventArgs) Handles SpotCheckTest.Click
-        Dim sc = New Data.ConstructionSpotCheck
-        Dim cs = Data.ConstructionCase.GetAllCasesByStatus(Data.ConstructionCase.CaseStatus.Intake).ToList
-        For Each c In cs
-            sc.StartSpotCheck(c.BBLE, "Andrew Aronoff")
-        Next
+        ConstructionManage.addSpotChecks("Andrew Aronoff")
+        TextBox4.AppendText("finished")
     End Sub
 
     Private Sub Organize_Click(sender As Object, e As EventArgs) Handles Organize.Click
