@@ -67,7 +67,7 @@
 
    <script src="/Scripts/autosave.js?v=29122015"></script>
 
- <%--  <script data-main="app" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.22/require.js"></script>--%>
+  <%-- <script data-main="app" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.22/require.js"></script>--%>
   
     <!-- pro env -->
     <script src="/js/build/intranetportal.js?v=29122015"></script>
