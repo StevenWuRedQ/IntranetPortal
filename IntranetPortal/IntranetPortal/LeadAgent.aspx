@@ -23,7 +23,6 @@
             <Panes>
                 <dx:SplitterPane Name="leadContent">
                     <Panes>
-
                         <dx:SplitterPane Name="leadPanel" Collapsed="true" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="270px" PaneStyle-Paddings-Padding="2px">
                             <ContentCollection>
                                 <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
@@ -31,8 +30,9 @@
                                 </dx:SplitterContentControl>
                             </ContentCollection>
                         </dx:SplitterPane>
-                        <dx:SplitterPane Name="contentPanel" PaneStyle-BackColor="#f9f9f9" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px">
-                            <PaneStyle BackColor="#F9F9F9"></PaneStyle>
+                        <dx:SplitterPane Name="contentPanel" ShowCollapseForwardButton="True" PaneStyle-BackColor="#f9f9f9" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px">
+                            <PaneStyle BackColor="#F9F9F9">
+                            </PaneStyle>
                             <ContentCollection>
                                 <dx:SplitterContentControl ID="SplitterContentControl2" runat="server">
                                     <uc1:LeadsInfo runat="server" ID="LeadsInfo" ClientVisible="false" />

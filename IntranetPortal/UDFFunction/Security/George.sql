@@ -1,0 +1,3 @@
+﻿CREATE LOGIN [George]
+    WITH PASSWORD = N'v|erPyhyukwovefgcs:pa6tgmsFT7_&#$!~<X.pt r r6hm&', SID = 0x92965169576B5A43895DB62EEF69C8C0, DEFAULT_LANGUAGE = [us_english], CHECK_POLICY = OFF;
+

@@ -144,20 +144,6 @@ Public Class ConstructionManage
         Return result.Distinct.ToArray
     End Function
 
-
-    ''' <summary>
-    ''' add all construction cases not in spotcheck with runner.
-    ''' </summary>
-    ''' <param name="runner"></param>
-    Public Shared Sub addSpotChecks(runner As String)
-        Dim cases = ConstructionCase.GetAllCases()
-        For Each c In cases
-            Dim bble = c.BBLE
-            Dim spotcheck = New ConstructionSpotCheck
-            spotcheck.StartSpotCheck(bble, runner)
-        Next
-    End Sub
-
     Public Shared Sub NotifyWhenSpotCheck(form As Data.ConstructionSpotCheck)
         Dim spotCheck = Data.ConstructionSpotCheck.GetSpotCheck(form.Id)
         If Not spotCheck Is Nothing Then

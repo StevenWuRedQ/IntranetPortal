@@ -27,6 +27,8 @@ Public Class LeadsInfo1
 
             If Not ShowLogPanel Then
                 contentSplitter.GetPaneByName("LogPanel").Collapsed = True
+                'contentSplitter.GetPaneByName("paneInfo").Separator.Visible = DevExpress.Utils.DefaultBoolean.False
+                'ActivityLogs.Visible = False
             End If
         End If
 
@@ -43,6 +45,8 @@ Public Class LeadsInfo1
 
         If Not ShowLogPanel Then
             contentSplitter.GetPaneByName("LogPanel").Collapsed = True
+            'contentSplitter.GetPaneByName("paneInfo").Separator.Visible = DevExpress.Utils.DefaultBoolean.False
+            'ActivityLogs.Visible = False
         End If
 
         Using Context As New Entities

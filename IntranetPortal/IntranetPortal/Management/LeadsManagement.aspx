@@ -232,6 +232,7 @@
             <dx:SplitterPane Name="RightPane" ScrollBars="Auto" ContentUrl="about:blank">
                 <ContentCollection>
                     <dx:SplitterContentControl>
+                        <%--  <uc1:LeadsInfo runat="server" ID="LeadsInfo" ShowLogPanel="false" />--%>
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>

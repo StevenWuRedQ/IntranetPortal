@@ -1166,8 +1166,8 @@ ul.ss_form_box {
 
 .html_edit_div {
     background: #FFF;
-    border: 2px solid #c8c8c8;
-    border-radius: 5px;
+    border: 2px solid #dde0e7;
+    border-radius: 10px;
     padding: 3px;
 }
 
@@ -1402,8 +1402,15 @@ ul.ss_form_box {
     overflow: auto;
 }
 
-.nav-menu-select, .bg_orange {
+.nav-menu-select,
+.bg_orange {
     background: #ff400d;
+}
+
+.nav-tabs > li.active > a.shot_sale_tab_a {
+    border-color: #ff400d !important;
+    color: #2e2f31 !important;
+    padding: 10px !important;
 }
 
 .ng-hide-add, .ng-hide-remove {
@@ -1440,12 +1447,8 @@ ul.ss_form_box {
 }
 
 .overview_tabs {
-    margin: 0px !important;
-    border-bottom: #eee solid 5px !important;
-}
-
-.overview_tabs > li:active {
-    background: #fff !important;
+    border-bottom: 5px solid #eee !important;
+    height: 47px;
 }
 
 .panel-condensed .panel-body, .panel-condensed .panel-heading {
@@ -1803,12 +1806,12 @@ ul.ss_form_box {
 }
 
 .short_sale_tab {
-    margin: 0px !important;
     border: 0 !important;
-    border-bottom: #eee solid 5px;   
+    border-bottom: #eee solid 5px;
     color: #2e2f31;
     font-size: 16px;
     font-weight: 700;
+    height: 35px !important;
     white-space: nowrap;
 }
 
@@ -2085,10 +2088,6 @@ ul.ss_form_box {
     margin: 0 0 30px;
 }
 
-.tooltip {
-    z-index: 99999999 !important;
-}
-
 .treePadding, .mail_edits tbody tr {
     padding-top: 10px;
 }
@@ -2187,15 +2186,15 @@ ul.ss_form_box {
 }
 
 a.shot_sale_tab_a {
-    color: #2e2f31;
     border: 0 !important;
+    border-bottom: #eee solid 5px !important;
     border-radius: 0 !important;
-    margin: 0px 0 -5px 0 !important;
-    padding: 0px 10px 5px 10px !important;
+    color: #2e2f31;
+    height: 47px;
+    margin: 0 !important;
 }
 
-    .active > a.shot_sale_tab_a {
-        border-bottom: #eee solid 5px !important;
+    a.shot_sale_tab_a:active, .activie > a.shot_sale_tab_a {
         border-color: #ff400d !important;
     }
 
@@ -2204,9 +2203,9 @@ a.shot_sale_tab_a {
     }
 
     a.shot_sale_tab_a:hover {
-        background-color: #FFF !important;
-        border-bottom: #eee solid 5px !important;
+        background: #FFF !important;
         border-color: #ff400d !important;
+        color: #2e2f31 !important;
     }
 
 

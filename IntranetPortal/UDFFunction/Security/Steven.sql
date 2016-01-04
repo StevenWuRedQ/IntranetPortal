@@ -1,0 +1,3 @@
+﻿CREATE LOGIN [Steven]
+    WITH PASSWORD = N'v|eryhnDykwoSvf#7_GgcspamsFT7_&#$!~<tgp|rrmhmdnv', SID = 0x584880441337644F86358D7006300230, DEFAULT_LANGUAGE = [us_english], CHECK_POLICY = OFF;
+
