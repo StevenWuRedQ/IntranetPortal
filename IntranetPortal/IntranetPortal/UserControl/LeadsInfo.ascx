@@ -3,10 +3,10 @@
 <%@ Register Src="~/UserControl/HomeOwnerInfo.ascx" TagPrefix="uc1" TagName="HomeOwnerInfo" %>
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
 <%@ Register Src="~/UserControl/PropertyInfo.ascx" TagPrefix="uc1" TagName="PropertyInfo" %>
-<%@ Register Src="~/OneDrive/LeadsDocumentOneDrive.ascx" TagPrefix="uc1" TagName="LeadsDocumentOneDrive" %>
 <%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
 <%@ Register Src="~/PopupControl/EditHomeOwner.ascx" TagPrefix="uc1" TagName="EditHomeOwner" %>
 <%@ Register Src="~/UserControl/TitleInLeadsControl.ascx" TagPrefix="uc1" TagName="TitleControl" %>
+<%@ Register Src="~/OneDrive/LeadsDocumentOneDrive.ascx" TagPrefix="uc1" TagName="LeadsDocumentOneDrive" %>
 
 <script type="text/javascript">
     // <![CDATA[
@@ -17,6 +17,12 @@
     var tmpPhoneNo = null;
     var temTelLink = null;
     var temCommentSpan = null;
+    var tmpEmail = null;
+    var tempEmailLink = null;
+    var tmpAddress = null;
+    var currOwner = "";
+    var isSave = false;
+
     function onSavePhoneComment() {
 
         var comment = $("#phone_comment").val();
@@ -37,14 +43,14 @@
         ASPxPopupMenuPhone.ShowAtElement(tellink);
 
     }
-    var tmpEmail = null;
-    var tempEmailLink = null;
+
     function OnEmailLinkClick(EmailId, bble, ownerName, emailink) {
         tmpEmail = EmailId;
         tempEmailLink = emailink;
         currOwner = ownerName;
         EmailPopupClient.ShowAtElement(emailink);
     }
+
     function OnPhoneNumberClick(s, e) {
         if (tmpPhoneNo != null) {
             if (e.item.index == 0) {
@@ -137,14 +143,6 @@
         e.processOnServer = false;
     }
 
-    //function SetLeadStatus(status) {       
-    //    if (leadStatusCallbackClient.InCallback()) {
-    //        alert("Server is busy! Please wait!")
-    //    } else {
-    //        leadStatusCallbackClient.PerformCallback(status);
-    //    }
-    //}
-
     function OnSetStatusComplete(s, e) {
         if (typeof gridLeads == "undefined") {
             //alert("undefined");
@@ -208,7 +206,6 @@
         }
     }
 
-    var tmpAddress = null;
     function OnAddressLinkClick(s, address) {
         tmpAddress = address;
         AspxPopupMenuAddress.ShowAtElement(s);
@@ -269,7 +266,7 @@
         }
     }
 
-    var currOwner = "";
+
     function AddBestPhoneNum(bble, ownerName, ulClient, addButton) {
         //var ul = document.getElementById(ulClient);
         //var li = document.createElement("li");
@@ -280,18 +277,19 @@
         currOwner = ownerName;
         aspxPopupAddPhoneNum.ShowAtElement(addButton);
     }
+
     function OnEmailPopupClick(s, e) {
         ownerInfoCallbackPanel.PerformCallback("DeleteEmail|" + tmpEmail + "|" + currOwner);
     }
+
     function AddBestEmail(bble, ownerName, ulClient, addButton) {
         currOwner = ownerName;
         aspxPopupAddEmail.ShowAtElement(addButton);
     }
-    var isSave = false;
+
     function AddBestAddress(bble, ownerName, addButton) {
         isSave = false;
         currOwner = ownerName;
-
         aspxPopupAddAddress.PerformCallback(addButton);
     }
 
@@ -341,7 +339,7 @@
     function reloadHomeBreakCtrl(bble) {
         var homeBreakDownCtrl = document.getElementById('homeBreakDownCtrl');
         // in hot leads, there is not homeBreakDownCtrl
-        if (homeBreakDownCtrl) {        
+        if (homeBreakDownCtrl) {
             var target = angular.element(homeBreakDownCtrl);
             var $injector = target.injector();
             $injector.invoke(function ($compile, ptCom, ptHomeBreakDownService) {
@@ -385,7 +383,9 @@
     angular.module('PortalApp').controller('homeBreakDownCtrl', function () { })
 
 </script>
+
 <script src="/Scripts/stevenjs.js"></script>
+
 <style type="text/css">
     .UpdateInfoAlign {
         text-align: right;
@@ -409,14 +409,16 @@
                 </PanelCollection>
             </dx:ASPxPanel>
 
-            <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="800px" Width="100%" ClientInstanceName="contentSplitter">
+            <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Width="100%" ClientInstanceName="contentSplitter">
+
                 <Styles>
                     <Pane Paddings-Padding="0">
                         <Paddings Padding="0px"></Paddings>
                     </Pane>
                 </Styles>
+
                 <Panes>
-                    <dx:SplitterPane ShowCollapseBackwardButton="True" MinSize="665px" AutoHeight="true" Name="paneInfo">
+                    <dx:SplitterPane ShowCollapseBackwardButton="True" AutoHeight="true" Name="paneInfo">
                         <PaneStyle Paddings-Padding="0">
                             <Paddings Padding="0px"></Paddings>
                         </PaneStyle>
@@ -440,8 +442,8 @@
                                     <asp:HiddenField ID="hfBBLE" runat="server" />
                                     <!-- Nav tabs -->
                                     <% If Not HiddenTab Then%>
-
                                     <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 16px; color: white">
+
                                         <li class="active short_sale_head_tab">
                                             <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
                                                 <i class="fa fa-info-circle head_tab_icon_padding"></i>
@@ -466,8 +468,9 @@
                                                 <div class="font_size_bold" style="font-weight: 900;">Title</div>
                                             </a>
                                         </li>
-                                        <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
+
                                         <li style="margin-right: 30px; color: #ffa484; float: right">
+
                                             <% If Not ShowLogPanel Then%>
                                             <i class="fa fa-history sale_head_button tooltip-examples" id="btnShowlogPanel" style="background-color: #295268; color: white;" title="Show Logs" onclick="ShowLogPanel()"></i>
                                             <div class="tooltip fade bottom in" style="top: 54px; left: -17px; display: block;">
@@ -475,14 +478,17 @@
                                                 <div class="tooltip-inner">Show Logs</div>
                                             </div>
                                             <% End If%>
+
                                             <i class="fa fa-refresh sale_head_button sale_head_button_left tooltip-examples" title="Refresh" onclick="popupMenuRefreshClient.ShowAtElement(this)"></i>
                                             <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i>
                                             <i class="fa fa-share-alt  sale_head_button sale_head_button_left tooltip-examples" title="Share Leads" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
                                             <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLeadInfo()"></i>
+
                                         </li>
                                     </ul>
                                     <% End If%>
-                                    <div class="tab-content">
+
+                                    <div class="tab-content clearfix">
                                         <uc1:PropertyInfo runat="server" ID="PropertyInfo" />
                                         <div class="tab-pane clearfix" id="home_owner">
                                             <div style="height: 850px; overflow: auto" id="scrollbar_homeowner">
@@ -513,18 +519,19 @@
                                                     </PanelCollection>
                                                 </dx:ASPxCallbackPanel>
                                             </div>
+
                                             <div style="position: fixed; right: 0; bottom: 5px;">
                                                 <iframe src="/AutoDialer/Dialer.aspx" id="AutoDialer" style="width: 339px; height: 406px; border: none; display: none"></iframe>
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="documents">
                                             <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
-                                            <%--<uc1:LeadsDocumentOneDrive runat="server" ID="LeadsDocumentOneDrive" />--%>
                                         </div>
                                         <div class="tab-pane" id="titlePane">
                                             <uc1:TitleControl runat="server" ID="TitleControl" />
                                         </div>
                                     </div>
+
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="ASPxPopupMenuPhone"
                                         PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
                                         PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
@@ -580,10 +587,11 @@
                         </ContentCollection>
                     </dx:SplitterPane>
 
-                    <dx:SplitterPane ShowCollapseBackwardButton="True" Name="LogPanel" MinSize="665px">
+                    <dx:SplitterPane ShowCollapseForwardButton="True" Name="LogPanel">
                         <PaneStyle BackColor="#F9F9F9"></PaneStyle>
                         <ContentCollection>
                             <dx:SplitterContentControl ID="SplitterContentControl4" runat="server">
+
                                 <div style="font-size: 12px; color: #9fa1a8;">
                                     <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 16px; color: white">
                                         <li class="short_sale_head_tab activity_light_blue">
@@ -592,7 +600,9 @@
                                                 <div class="font_size_bold" style="font-weight: 900;">Activity Log</div>
                                             </a>
                                         </li>
+
                                         <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
+
                                         <li style="margin-right: 30px; color: #7396a9; float: right">
                                             <% If Not ShowLogPanel Then%>
                                             <i class="fa fa-info-circle sale_head_button tooltip-examples" style="background-color: #ff400d; color: white;" title="Show Property Info" onclick="ShowLogPanel()"></i>
@@ -601,8 +611,6 @@
                                                 <div class="tooltip-inner" style="background-color: #ff400d;">Show Property Info</div>
                                             </div>
                                             <% End If%>
-
-
 
                                             <i class="fa fa-calendar-o sale_head_button sale_head_button_left tooltip-examples" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
                                             <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus('5|'+leadsInfoBBLE);"></i>
@@ -613,9 +621,12 @@
                                             <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                         </li>
                                     </ul>
+
+                                </div>
+
+                                <div class="clearfix">                                
                                     <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
                                 </div>
-              
                                 <dx:ASPxCallback ID="callPhoneCallback" runat="server" ClientInstanceName="callPhoneCallbackClient" OnCallback="callPhoneCallback_Callback">
                                     <ClientSideEvents CallbackComplete="OnCallPhoneCallbackComplete" />
                                 </dx:ASPxCallback>
@@ -657,18 +668,12 @@
                                                 <tr>
                                                     <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
                                                         <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                                            <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupSelectDateControl.Hide();                                                                                                                       
-                                                                                                                        SetLeadStatus('customDays|' + leadsInfoBBLE + '|' + callbackCalendar.GetSelectedDate().toISOString());
-                                                                                                                        }"></ClientSideEvents>
+                                                            <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();SetLeadStatus('customDays|' + leadsInfoBBLE + '|' + callbackCalendar.GetSelectedDate().toISOString());}"></ClientSideEvents>
                                                         </dx:ASPxButton>
                                                         &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
-                                                                <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupSelectDateControl.Hide();                                                                                                                                                                                                                                               
-                                                                                                                        }"></ClientSideEvents>
-
-                                                            </dx:ASPxButton>
+                                                        <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                                            <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents>
+                                                        </dx:ASPxButton>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -680,7 +685,6 @@
                         </ContentCollection>
                     </dx:SplitterPane>
                 </Panes>
-                <ClientSideEvents PaneCollapsed="function(s,e){}" />
             </dx:ASPxSplitter>
 
             <dx:ASPxPopupControl ClientInstanceName="aspxPopupAddPhoneNum" Width="320px" Height="80px" ID="ASPxPopupControl2"
@@ -769,10 +773,7 @@
                                 <td>
                                     <div style="margin-top: 10px">
                                         <dx:ASPxButton runat="server" ID="ASPxButton2" Text="Add" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                            <ClientSideEvents Click="function(s,e){
-                                                isSave = true;
-                                                aspxPopupAddAddress.PerformCallback('Save|' + currOwner);
-                                                }" />
+                                            <ClientSideEvents Click="function(s,e){isSave = true;aspxPopupAddAddress.PerformCallback('Save|' + currOwner);}" />
                                         </dx:ASPxButton>
                                         &nbsp;
                                         <dx:ASPxButton runat="server" ID="ASPxButton5" Text="Close" AutoPostBack="false" CssClass="rand-button rand-button-gray">
