@@ -32,8 +32,7 @@
     .dxpcLite_MetropolisBlue1.dxpclW {
         position: fixed !important;
     }
-
-
+    
     #ctl00_MainContentPH_cbpLogs_ActivityLogs_gridTracking .dxgvHSDC {
         position: absolute;
         height: 22px;

@@ -42,7 +42,6 @@
         ASPxPopupMenuPhone.ShowAtElement(tellink);
     }
 
-    }
     var tmpEmail = null;
     var tempEmailLink = null;
     function OnEmailLinkClick(EmailId, bble, ownerName, emailink) {
