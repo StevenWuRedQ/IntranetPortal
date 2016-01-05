@@ -469,9 +469,14 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Legal-Report" Text="Custom Report" NavigationUrl="/CustomReport/ReportWizard.aspx?t=legal" ShowAmount="true">
+      <PortalNavItem Name="Legal-Report" Text="Custom Report" NavigationUrl="/CustomReport/ReportWizard.aspx?t=legal" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-table"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal-Settings" Text="Settings" NavigationUrl="/ManagementUI/LegalManagement.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-cog"></i>]]>
         </FontClass>
       </PortalNavItem>
     </Items>

@@ -40,6 +40,10 @@ Public Class Utility
         Return str1.FuzzyMatch(str2) > 0.6
     End Function
     Public Shared Function CopyTo(fromObj As Object, toObj As Object) As Object
+        If fromObj Is Nothing Then
+            Return Nothing
+        End If
+
         Dim type = fromObj.GetType()
         Dim toType = toObj.GetType
         Dim toProperties = toType.GetProperties

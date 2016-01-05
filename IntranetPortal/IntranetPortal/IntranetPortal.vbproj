@@ -748,6 +748,7 @@
     </Compile>
     <Compile Include="Controllers\BuildingCodes1Controller.vb" />
     <Compile Include="Controllers\BusinessFormController.vb" />
+    <Compile Include="Controllers\DataStatusController.vb" />
     <Compile Include="Controllers\ComplaintsController.vb" />
     <Compile Include="Controllers\ConstructionCasesController.vb" />
     <Compile Include="Construction\ConstructionInitialForm.aspx.designer.vb">

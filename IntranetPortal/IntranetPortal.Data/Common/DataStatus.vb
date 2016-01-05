@@ -8,6 +8,13 @@ Partial Public Class DataStatu
         End Using
     End Function
 
+    Public Shared Function LoadCategories() As String()
+
+        Using ctx As New PortalEntities
+            Return ctx.DataStatus.Select(Function(a) a.Category).Distinct.ToArray
+        End Using
+    End Function
+
     Public Shared Function LoadAllDataStatus(category As String) As List(Of DataStatu)
 
         Using ctx As New PortalEntities
