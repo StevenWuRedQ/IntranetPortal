@@ -37,12 +37,13 @@
     #ctl00_MainContentPH_cbpLogs_ActivityLogs_gridTracking .dxgvHSDC {
         position: absolute;
         height: 22px;
-        top:0;
+        top: 0;
         padding-bottom: 1px;
     }
+
     #ctl00_MainContentPH_cbpLogs_ActivityLogs_gridTracking .dxgvCSD {
         position: absolute;
-        top:22px;
+        top: 22px;
         bottom: 0;
         height: auto !important;
         overflow-y: auto !important;
@@ -542,7 +543,14 @@
     // ]]>
 </script>
 
-<div style="position: absolute; top: 70px; bottom: 0; font-size: 12px; color: #9fa1a8; width: 100%">
+
+<%Dim cssPostion = "position: absolute; top: 70px; bottom: 0; left:0px; right: 0;" %>
+<%If Me.DisplayMode = Nothing OrElse Me.DisplayMode = ActivityLogMode.Leads %>
+<%cssPostion = "height: 100%;" %>
+<%--<div style="height: 100%; font-size: 12px; color: #9fa1a8; width: 100%">--%>
+<%--<div style="position: absolute; top: 70px; bottom: 0; left:0px; right: 0; font-size: 12px; color: #9fa1a8">--%>
+<% End if %>
+<div style="<%=cssPostion%>; font-size: 12px; color: #9fa1a8">
     <!-- Nav tabs -->
     <%--comment box filters--%>
     <div style="padding: 10px; background: #f5f5f5" class="clearfix">
@@ -766,7 +774,12 @@
 
     <%-------end-----%>
     <%-- log tables--%>
-    <div style="position: absolute; top: 320px; bottom: 0; width: 100%; padding: 0">
+    <%Dim LogPostion = "position: absolute; top: 320px; bottom: 0; width: 100%; padding: 0" %>
+    <% If Me.DisplayMode = Nothing OrElse Me.DisplayMode = ActivityLogMode.Leads Then %>
+    <%--  <div style="max-height: 500px">--%>
+    <% LogPostion = "max-height: 500px" %>
+    <% End if %>
+    <div style="<%= LogPostion%>">
         <asp:HiddenField ID="hfBBLE" runat="server" />
         <dx:ASPxGridView runat="server" ID="gridTracking" Width="100%" ViewStateMode="Disabled" ClientInstanceName="gridTrackingClient" AutoGenerateColumns="False" KeyFieldName="LogID" OnAfterPerformCallback="gridTracking_AfterPerformCallback" OnDataBinding="gridTracking_DataBinding" Visible="true">
             <Styles>
@@ -1430,5 +1443,6 @@
         </dx:ASPxPopupControl>
 
     </div>
-    <%------end-------%>
+
+<%------end-------%>
 </div>

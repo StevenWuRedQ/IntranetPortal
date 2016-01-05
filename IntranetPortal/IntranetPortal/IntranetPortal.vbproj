@@ -2465,6 +2465,7 @@
     <Content Include="Account\Logout.aspx" />
     <Content Include="AgentOverview\AgentCharts.ascx" />
     <Content Include="AgentOverview\AgentOverview.aspx" />
+    <Content Include="app.js" />
     <Content Include="App_Data\PortalMenu.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -6494,6 +6495,7 @@
     <Content Include="LegalUI\LegalCaseList.ascx" />
     <Content Include="LegalUI\ManagePreViewControl.ascx" />
     <Content Include="LegalUI\LegalSummaryUI.aspx" />
+    <Content Include="main.js" />
     <Content Include="ManagementUI\LeadDocSearch.aspx" />
     <Content Include="ManagementUI\LegalManagement.aspx" />
     <Content Include="ManagementUI\Management2.aspx" />
@@ -6648,7 +6650,6 @@
     <Content Include="Publish\PublishProperty.ascx" />
     <Content Include="Publish\PublishPropertyPage.aspx" />
     <Content Include="CustomReport\ReportWizard.aspx" />
-    <Content Include="require.js" />
     <Content Include="Scripts\autologout.js" />
     <Content Include="Scripts\autosave.js" />
     <Content Include="Scripts\ContactJs.js" />
