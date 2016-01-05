@@ -23,6 +23,7 @@ Public Class ShortSaleServices
         Dim ssCase = ShortSaleCase.GetCase(caseId)
         'Dim json As New JavaScriptSerializer
         'Return json.Serialize(ssCase)
+
         Dim emp = Employee.GetInstance(ssCase.ReferralContact.Name)
         If emp IsNot Nothing AndAlso Not emp.Position = "Manager" Then
             ssCase.ReferralManager = Employee.GetInstance(ssCase.ReferralContact.Name).Manager
