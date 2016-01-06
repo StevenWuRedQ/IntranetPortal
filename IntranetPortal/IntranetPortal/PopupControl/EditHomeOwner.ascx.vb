@@ -141,14 +141,18 @@ Public Class EditHomeOwner
                             homeOwner.Name = newOwnerName
                             homeOwner.CreateBy = Page.User.Identity.Name
                             homeOwner.CreateDate = DateTime.Now
-                            Context.HomeOwners.Add(homeOwner)
 
-                            homeOwner.UserModified = True
-                            'Load tlo report
-                            homeOwner.TLOLocateReport = DataWCFService.GetLocateReport(1, bble, homeOwner.Name, homeOwner.Address1, homeOwner.Address2, homeOwner.City, homeOwner.State, homeOwner.Zip, "USA", False)
+                            'check if home owner name is existed, system will ignore.
+                            If Not Context.HomeOwners.Any(Function(h) h.BBLE = bble AndAlso h.Name = newOwnerName) Then
+                                Context.HomeOwners.Add(homeOwner)
+                                homeOwner.UserModified = True
+                                'Load tlo report
+                                homeOwner.TLOLocateReport = DataWCFService.GetLocateReport(1, bble, homeOwner.Name, homeOwner.Address1, homeOwner.Address2, homeOwner.City, homeOwner.State, homeOwner.Zip, "USA", False)
+                            Else
+                                'Throw New CallbackException("The owner already existed in system, please check.")
+                            End If
 
                         Else
-
                             Dim phones = Context.HomeOwnerPhones.Where(Function(ph) ph.BBLE = bble And ph.OwnerName = ownerName).ToList
                             For Each phone In phones
                                 phone.OwnerName = newOwnerName
