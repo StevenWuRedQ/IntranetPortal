@@ -56,10 +56,6 @@ Public Class ActivityLogs
         End If
     End Sub
 
-    Private Sub ActivityLogs_Init(sender As Object, e As EventArgs) Handles Me.Init
-
-    End Sub
-
     Public Sub BindData(bble As String, activityMng As ActivityManageBase)
         Me.ActivityLogProvider = activityMng
         Me.BindData(bble)

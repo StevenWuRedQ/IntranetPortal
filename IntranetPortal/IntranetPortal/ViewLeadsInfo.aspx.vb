@@ -82,11 +82,13 @@
         End If
     End Sub
 
+    Dim leadsBBLE As String
+
     Private Sub LoadData(bble As String)
         If Not Page.IsPostBack Then
 
+            leadsBBLE = bble
 
-            LeadsInfo.BindData(bble)
             If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
                 Dim cstext1 As String = "<script type=""text/javascript"">" &
                                 String.Format("var leadsInfoBBLE = ""{0}"";", bble) & "</script>"
@@ -109,5 +111,11 @@
         '        Page.ClientScript.RegisterStartupScript(Me.GetType, "ReloadHomebreakCtr", js)
         '    End If
         'End If
+    End Sub
+
+    Protected Sub onPreReander() Handles Me.PreRender
+        If Not String.IsNullOrEmpty(leadsBBLE) Then
+            LeadsInfo.BindData(leadsBBLE)
+        End If
     End Sub
 End Class

@@ -306,7 +306,12 @@ Partial Public Class ShortSaleCase
     Public ReadOnly Property ReferralContact As PartyContact
         Get
             If Referral.HasValue Then
-                Return PartyContact.GetContact(Referral)
+                Dim result = PartyContact.GetContact(Referral)
+                If result Is Nothing Then
+                    Return New PartyContact
+                End If
+
+                Return result
             Else
                 Return New PartyContact
             End If

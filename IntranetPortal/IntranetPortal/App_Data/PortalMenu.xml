@@ -475,6 +475,7 @@
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="Legal-Settings" Text="Settings" NavigationUrl="/ManagementUI/LegalManagement.aspx" ShowAmount="false">
+        <UserRoles>Legal-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-cog"></i>]]>
         </FontClass>
