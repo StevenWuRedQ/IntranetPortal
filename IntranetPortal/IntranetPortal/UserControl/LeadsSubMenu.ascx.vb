@@ -234,7 +234,7 @@ Public Class LeadsSubMenu
             txtDeadLeadDescription.Text = ""
         End If
         If e.Parameter.StartsWith("DumpDeadLeads") Then
-            Dim comments = "Dump Dead Leads <br> reason: " & cbDeadReasons.Text
+            Dim comments = "Dump Dead Leads <br>Reason: " & cbDeadReasons.Text
 
             Dim l = Lead.GetInstance(hfBBLE.Value)
             l.ReAssignLeads("Dead Leads", Page.User.Identity.Name)
