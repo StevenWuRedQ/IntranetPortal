@@ -429,8 +429,15 @@ Partial Public Class Lead
             Return ctx.Leads.Where(Function(ld) ld.Status = LeadStatus.Callback And ld.EmployeeName = userName).ToList.Where(Function(ld) ld.CallbackDate < DateTime.Today.AddDays(1)).ToList
         End Using
     End Function
-
-    Public Shared Function SetDeadLeadsStatus(bble As String, reason As Integer, description As String) As Boolean
+    ''' <summary>
+    ''' Set leads to dead and expire all rule enginee and task
+    ''' </summary>
+    ''' <param name="bble"></param>
+    ''' <param name="reason"></param>
+    ''' <param name="description"></param>
+    ''' <param name="notlog">defult is false , set true if don't want show change status log in activity log </param>
+    ''' <returns></returns>
+    Public Shared Function SetDeadLeadsStatus(bble As String, reason As Integer, description As String, Optional notlog As Boolean = False) As Boolean
         Using Context As New Entities
             Dim lead = Context.Leads.Where(Function(l) l.BBLE = bble).FirstOrDefault
 
@@ -454,7 +461,10 @@ Partial Public Class Lead
                     Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
                     Dim empName = HttpContext.Current.User.Identity.Name
                     Dim comments = String.Format("Change status from {0} to {1}.", CType(originateStatus, LeadStatus).ToString, LeadStatus.DeadEnd.ToString)
-                    LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString, empId, empName, LeadsActivityLog.EnumActionType.DeadLead)
+                    If (Not notlog) Then
+                        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString, empId, empName, LeadsActivityLog.EnumActionType.DeadLead)
+                    End If
+
                 End If
             End If
         End Using

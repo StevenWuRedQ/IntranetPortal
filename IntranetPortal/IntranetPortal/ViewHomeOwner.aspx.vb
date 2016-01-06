@@ -39,7 +39,7 @@
         End Using
     End Sub
     Sub bindSendInfo(s As HomeOwner)
-        Dim o = New With {.Address1 = s.Address1, .Address2 = s.Address2, .Name = s.Name, .Ctiy = s.City, .Zip = s.Zip}
+        Dim o = New With {.Address1 = s.Address1, .Address2 = s.Address2, .Name = s.Name, .Ctiy = s.City, .Zip = s.Zip, .CreateBy = s.CreateBy, .CreateDate = s.CreateDate}
         lbArgumentSend.Text = o.ToJsonString
     End Sub
 

@@ -91,8 +91,8 @@
 		<h4 class="ss_form_title">Mortgage  foreclosure status</h4>
 		<ul class="ss_form_box clearfix">
 			<li class="ss_form_item">
-				<label class="ss_form_input_title {{HighLightStauts(LegalCase.CaseStauts,4)?'ss_warning':''}}">
-					What was the last milestone document recorded on Clerk Minutes? 
+				<label class="ss_form_input_title">
+					mortgage status
 				</label>
 
 				<select class="ss_form_input" ng-model="LegalCase.CaseStauts">
@@ -116,7 +116,7 @@
 	</div>
 
 	<!-- Estate Pending -->
-	<div class="ss_form">
+	<div class="ss_form" style="padding-top:30px">
 		<h4 class="ss_form_title">Estate {{LegalCase.ForeclosureInfo.WasEstateFormed}}&nbsp
 		<i class="fa fa-compress icon_btn text-primary" ng-show="!estateCollapse" ng-click="estateCollapse=!estateCollapse"></i>
 			<i class="fa fa-expand icon_btn text-primary" ng-show="estateCollapse" ng-click="estateCollapse=!estateCollapse"></i></h4>
