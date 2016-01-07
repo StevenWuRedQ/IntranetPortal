@@ -80,8 +80,6 @@ Public Class LeadManage
         Me.LogCategoryFilter = {LeadsActivityLog.LogCategory.SalesAgent, LeadsActivityLog.LogCategory.Status}
     End Sub
 
-
-
     Public Overrides Function LogDataSource(bble As String) As List(Of LeadsActivityLog)
         Dim categories = Me.LogCategoryFilter.ToList
         Dim subCategories = {LeadsActivityLog.LogCategory.Approval, LeadsActivityLog.LogCategory.Approved, LeadsActivityLog.LogCategory.Appointment,

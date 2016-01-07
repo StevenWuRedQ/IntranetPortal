@@ -29,7 +29,7 @@
         var comment = $("#phone_comment").val();
         var temCommentSpan = $(temTelLink).children("span:first")
         if (temCommentSpan != null) {
-            //$(".phone_comment").text("-" + comment);
+            //$(".phone_comment").text("-" + comment); 
             temCommentSpan.text("-" + comment);
         } else {
         }

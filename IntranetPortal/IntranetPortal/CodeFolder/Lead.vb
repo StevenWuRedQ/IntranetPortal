@@ -552,7 +552,7 @@ Partial Public Class Lead
                         Context.Leads.Add(newlead)
 
                         Dim comments = String.Format("Leads assign to  {0}", name)
-                        LeadsActivityLog.AddActivityLogEntity(DateTime.Now, comments, item, LeadsActivityLog.LogCategory.Status.ToString, Nothing, assignBy, LeadsActivityLog.EnumActionType.Reassign, Context)
+                        LeadsActivityLog.AddActivityLogEntity(DateTime.Now, comments, item, LeadsActivityLog.LogCategory.SalesAgent.ToString, Nothing, assignBy, LeadsActivityLog.EnumActionType.Reassign, Context)
                     Else
                         orgName = newlead.EmployeeName
                         newlead.LeadsName = li.LeadsName
@@ -565,7 +565,7 @@ Partial Public Class Lead
                         newlead.AssignBy = assignBy
 
                         Dim comments = String.Format("Leads assign from {0} to  {1}", orgName, name)
-                        LeadsActivityLog.AddActivityLogEntity(DateTime.Now, comments, item, LeadsActivityLog.LogCategory.Status.ToString, Nothing, assignBy, LeadsActivityLog.EnumActionType.Reassign, Context)
+                        LeadsActivityLog.AddActivityLogEntity(DateTime.Now, comments, item, LeadsActivityLog.LogCategory.SalesAgent.ToString, Nothing, assignBy, LeadsActivityLog.EnumActionType.Reassign, Context)
                     End If
 
                     'Clear shared user information

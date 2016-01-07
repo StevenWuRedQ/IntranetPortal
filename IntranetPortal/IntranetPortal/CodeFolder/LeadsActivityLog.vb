@@ -58,6 +58,14 @@ Partial Public Class LeadsActivityLog
     Public Shared Function AddActivityLogEntity(logDate As DateTime, comments As String, bble As String, category As String, empid As Integer, empName As String, actionType As EnumActionType, ctx As Entities) As LeadsActivityLog
         Dim log As New LeadsActivityLog
         log.BBLE = bble
+
+        If empid = Nothing Then
+            Dim emp = Employee.GetInstance(empName)
+            If emp IsNot Nothing Then
+                empid = emp.EmployeeID
+            End If
+        End If
+
         log.EmployeeID = empid
         log.EmployeeName = empName
         log.Category = category

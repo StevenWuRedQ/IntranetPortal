@@ -218,6 +218,21 @@ select @RC = @RC +count(*) from LeadSendOutVerifyView  where [C1stServicer] like
 select @RC as RC
 select iif(@Count1=@Count2, 'True', 'False') as Result</value>
   </data>
+  <data name="UpdateLeadsActivityLogEmptyEmpIdTest_TestAction.SqlScript" xml:space="preserve">
+    <value>/*
+Add SQL statements here to exercise the database object 
+that you want to test.
+
+To test a stored procedure, invoke it here by adding 
+an EXEC statement that has appropriate parameters.
+
+In the lower pane, you can add test conditions that verify 
+whether the results of your SQL statements match what 
+you expect.
+*/
+
+</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

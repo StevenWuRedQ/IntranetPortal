@@ -96,6 +96,26 @@ Public Class PortalDBUnitTest
             Dim posttestResults() As SqlExecutionResult = TestService.Execute(Me.PrivilegedContext, Me.PrivilegedContext, testActions.PosttestAction)
         End Try
     End Sub
+    <TestMethod()> _
+    Public Sub UpdateLeadsActivityLogEmptyEmpIdTest()
+        Dim testActions As SqlDatabaseTestActions = Me.UpdateLeadsActivityLogEmptyEmpIdTestData
+        'Execute the pre-test script
+        '
+        System.Diagnostics.Trace.WriteLineIf((Not (testActions.PretestAction) Is Nothing), "Executing pre-test script...")
+        Dim pretestResults() As SqlExecutionResult = TestService.Execute(Me.PrivilegedContext, Me.PrivilegedContext, testActions.PretestAction)
+        Try
+            'Execute the test script
+            '
+            System.Diagnostics.Trace.WriteLineIf((Not (testActions.TestAction) Is Nothing), "Executing test script...")
+            Dim testResults() As SqlExecutionResult = TestService.Execute(Me.ExecutionContext, Me.PrivilegedContext, testActions.TestAction)
+        Finally
+            'Execute the post-test script
+            '
+            System.Diagnostics.Trace.WriteLineIf((Not (testActions.PosttestAction) Is Nothing), "Executing post-test script...")
+            Dim posttestResults() As SqlExecutionResult = TestService.Execute(Me.PrivilegedContext, Me.PrivilegedContext, testActions.PosttestAction)
+        End Try
+    End Sub
+
 
 
 
@@ -119,10 +139,13 @@ Public Class PortalDBUnitTest
         Dim AssignLeadsVerify_TestAction As Microsoft.Data.Tools.Schema.Sql.UnitTesting.SqlDatabaseTestAction
         Dim ScalarValueCondition6 As Microsoft.Data.Tools.Schema.Sql.UnitTesting.Conditions.ScalarValueCondition
         Dim ScalarValueCondition7 As Microsoft.Data.Tools.Schema.Sql.UnitTesting.Conditions.ScalarValueCondition
+        Dim UpdateLeadsActivityLogEmptyEmpIdTest_TestAction As Microsoft.Data.Tools.Schema.Sql.UnitTesting.SqlDatabaseTestAction
+        Dim InconclusiveCondition1 As Microsoft.Data.Tools.Schema.Sql.UnitTesting.Conditions.InconclusiveCondition
         Me.CleaningDataTestData = New Microsoft.Data.Tools.Schema.Sql.UnitTesting.SqlDatabaseTestActions()
         Me.PoolA1TestingData = New Microsoft.Data.Tools.Schema.Sql.UnitTesting.SqlDatabaseTestActions()
         Me.PoolA2TestData = New Microsoft.Data.Tools.Schema.Sql.UnitTesting.SqlDatabaseTestActions()
         Me.AssignLeadsVerifyData = New Microsoft.Data.Tools.Schema.Sql.UnitTesting.SqlDatabaseTestActions()
+        Me.UpdateLeadsActivityLogEmptyEmpIdTestData = New Microsoft.Data.Tools.Schema.Sql.UnitTesting.SqlDatabaseTestActions()
         CleaningDataTest_TestAction = New Microsoft.Data.Tools.Schema.Sql.UnitTesting.SqlDatabaseTestAction()
         ScalarValueCondition1 = New Microsoft.Data.Tools.Schema.Sql.UnitTesting.Conditions.ScalarValueCondition()
         PoolA1Testing_TestAction = New Microsoft.Data.Tools.Schema.Sql.UnitTesting.SqlDatabaseTestAction()
@@ -134,6 +157,8 @@ Public Class PortalDBUnitTest
         AssignLeadsVerify_TestAction = New Microsoft.Data.Tools.Schema.Sql.UnitTesting.SqlDatabaseTestAction()
         ScalarValueCondition6 = New Microsoft.Data.Tools.Schema.Sql.UnitTesting.Conditions.ScalarValueCondition()
         ScalarValueCondition7 = New Microsoft.Data.Tools.Schema.Sql.UnitTesting.Conditions.ScalarValueCondition()
+        UpdateLeadsActivityLogEmptyEmpIdTest_TestAction = New Microsoft.Data.Tools.Schema.Sql.UnitTesting.SqlDatabaseTestAction()
+        InconclusiveCondition1 = New Microsoft.Data.Tools.Schema.Sql.UnitTesting.Conditions.InconclusiveCondition()
         '
         'CleaningDataTest_TestAction
         '
@@ -143,10 +168,10 @@ Public Class PortalDBUnitTest
         'ScalarValueCondition1
         '
         ScalarValueCondition1.ColumnNumber = 1
-        ScalarValueCondition1.Enabled = True
+        ScalarValueCondition1.Enabled = true
         ScalarValueCondition1.ExpectedValue = "0"
         ScalarValueCondition1.Name = "ScalarValueCondition1"
-        ScalarValueCondition1.NullExpected = False
+        ScalarValueCondition1.NullExpected = false
         ScalarValueCondition1.ResultSet = 1
         ScalarValueCondition1.RowNumber = 1
         '
@@ -159,20 +184,20 @@ Public Class PortalDBUnitTest
         'ScalarValueCondition2
         '
         ScalarValueCondition2.ColumnNumber = 1
-        ScalarValueCondition2.Enabled = True
+        ScalarValueCondition2.Enabled = true
         ScalarValueCondition2.ExpectedValue = "0"
         ScalarValueCondition2.Name = "ScalarValueCondition2"
-        ScalarValueCondition2.NullExpected = False
+        ScalarValueCondition2.NullExpected = false
         ScalarValueCondition2.ResultSet = 1
         ScalarValueCondition2.RowNumber = 1
         '
         'ScalarValueCondition5
         '
         ScalarValueCondition5.ColumnNumber = 1
-        ScalarValueCondition5.Enabled = True
+        ScalarValueCondition5.Enabled = true
         ScalarValueCondition5.ExpectedValue = "True"
         ScalarValueCondition5.Name = "ScalarValueCondition5"
-        ScalarValueCondition5.NullExpected = False
+        ScalarValueCondition5.NullExpected = false
         ScalarValueCondition5.ResultSet = 2
         ScalarValueCondition5.RowNumber = 1
         '
@@ -185,22 +210,48 @@ Public Class PortalDBUnitTest
         'ScalarValueCondition3
         '
         ScalarValueCondition3.ColumnNumber = 1
-        ScalarValueCondition3.Enabled = True
+        ScalarValueCondition3.Enabled = true
         ScalarValueCondition3.ExpectedValue = "0"
         ScalarValueCondition3.Name = "ScalarValueCondition3"
-        ScalarValueCondition3.NullExpected = False
+        ScalarValueCondition3.NullExpected = false
         ScalarValueCondition3.ResultSet = 1
         ScalarValueCondition3.RowNumber = 1
         '
         'ScalarValueCondition4
         '
         ScalarValueCondition4.ColumnNumber = 1
-        ScalarValueCondition4.Enabled = True
+        ScalarValueCondition4.Enabled = true
         ScalarValueCondition4.ExpectedValue = "True"
         ScalarValueCondition4.Name = "ScalarValueCondition4"
-        ScalarValueCondition4.NullExpected = False
+        ScalarValueCondition4.NullExpected = false
         ScalarValueCondition4.ResultSet = 2
         ScalarValueCondition4.RowNumber = 1
+        '
+        'AssignLeadsVerify_TestAction
+        '
+        AssignLeadsVerify_TestAction.Conditions.Add(ScalarValueCondition6)
+        AssignLeadsVerify_TestAction.Conditions.Add(ScalarValueCondition7)
+        resources.ApplyResources(AssignLeadsVerify_TestAction, "AssignLeadsVerify_TestAction")
+        '
+        'ScalarValueCondition6
+        '
+        ScalarValueCondition6.ColumnNumber = 1
+        ScalarValueCondition6.Enabled = true
+        ScalarValueCondition6.ExpectedValue = "0"
+        ScalarValueCondition6.Name = "ScalarValueCondition6"
+        ScalarValueCondition6.NullExpected = false
+        ScalarValueCondition6.ResultSet = 1
+        ScalarValueCondition6.RowNumber = 1
+        '
+        'ScalarValueCondition7
+        '
+        ScalarValueCondition7.ColumnNumber = 1
+        ScalarValueCondition7.Enabled = true
+        ScalarValueCondition7.ExpectedValue = "True"
+        ScalarValueCondition7.Name = "ScalarValueCondition7"
+        ScalarValueCondition7.NullExpected = false
+        ScalarValueCondition7.ResultSet = 2
+        ScalarValueCondition7.RowNumber = 1
         '
         'CleaningDataTestData
         '
@@ -226,31 +277,21 @@ Public Class PortalDBUnitTest
         Me.AssignLeadsVerifyData.PretestAction = Nothing
         Me.AssignLeadsVerifyData.TestAction = AssignLeadsVerify_TestAction
         '
-        'AssignLeadsVerify_TestAction
+        'UpdateLeadsActivityLogEmptyEmpIdTestData
         '
-        AssignLeadsVerify_TestAction.Conditions.Add(ScalarValueCondition6)
-        AssignLeadsVerify_TestAction.Conditions.Add(ScalarValueCondition7)
-        resources.ApplyResources(AssignLeadsVerify_TestAction, "AssignLeadsVerify_TestAction")
+        Me.UpdateLeadsActivityLogEmptyEmpIdTestData.PosttestAction = Nothing
+        Me.UpdateLeadsActivityLogEmptyEmpIdTestData.PretestAction = Nothing
+        Me.UpdateLeadsActivityLogEmptyEmpIdTestData.TestAction = UpdateLeadsActivityLogEmptyEmpIdTest_TestAction
         '
-        'ScalarValueCondition6
+        'UpdateLeadsActivityLogEmptyEmpIdTest_TestAction
         '
-        ScalarValueCondition6.ColumnNumber = 1
-        ScalarValueCondition6.Enabled = True
-        ScalarValueCondition6.ExpectedValue = "0"
-        ScalarValueCondition6.Name = "ScalarValueCondition6"
-        ScalarValueCondition6.NullExpected = False
-        ScalarValueCondition6.ResultSet = 1
-        ScalarValueCondition6.RowNumber = 1
+        UpdateLeadsActivityLogEmptyEmpIdTest_TestAction.Conditions.Add(InconclusiveCondition1)
+        resources.ApplyResources(UpdateLeadsActivityLogEmptyEmpIdTest_TestAction, "UpdateLeadsActivityLogEmptyEmpIdTest_TestAction")
         '
-        'ScalarValueCondition7
+        'InconclusiveCondition1
         '
-        ScalarValueCondition7.ColumnNumber = 1
-        ScalarValueCondition7.Enabled = True
-        ScalarValueCondition7.ExpectedValue = "True"
-        ScalarValueCondition7.Name = "ScalarValueCondition7"
-        ScalarValueCondition7.NullExpected = False
-        ScalarValueCondition7.ResultSet = 2
-        ScalarValueCondition7.RowNumber = 1
+        InconclusiveCondition1.Enabled = true
+        InconclusiveCondition1.Name = "InconclusiveCondition1"
     End Sub
 
 #End Region
@@ -273,5 +314,6 @@ Public Class PortalDBUnitTest
     Private PoolA1TestingData As SqlDatabaseTestActions
     Private PoolA2TestData As SqlDatabaseTestActions
     Private AssignLeadsVerifyData As SqlDatabaseTestActions
+    Private UpdateLeadsActivityLogEmptyEmpIdTestData As SqlDatabaseTestActions
 End Class
 

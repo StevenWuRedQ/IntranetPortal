@@ -20,7 +20,7 @@ Public Class ActivityLogs
         If DisplayMode = ActivityLogMode.ShortSale Then
             gridTracking.Settings.VerticalScrollableHeight = 510
         Else
-            gridTracking.Settings.VerticalScrollableHeight = 600
+            gridTracking.Settings.VerticalScrollableHeight = 525
         End If
 
         If DisplayMode = ActivityLogMode.Construction Then
@@ -1193,7 +1193,7 @@ Public Class ActivityLogs
             End If
 
             If DisplayMode = ActivityLogMode.ShortSale Then
-                htmlEditor.Height = 220
+                htmlEditor.Height = 200
             End If
         End If
     End Sub

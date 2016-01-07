@@ -310,7 +310,7 @@ Public Class LeadsInfo1
         If e.Parameter.StartsWith("CallPhone") Then
             Dim phoneNo = e.Parameter.Split("|")(1)
             Dim comments = String.Format("{0} did phone ({1}) call.", Page.User.Identity.Name, phoneNo)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.CallOwner)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.CallOwner)
             BindActivityLog(hfBBLE.Value)
             needRefesh = True
         End If
@@ -523,7 +523,7 @@ Public Class LeadsInfo1
                     If Not DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
                         Throw New CallbackException("This Lead didn't have owner info in our database.")
                     End If
-                    LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.RefreshLeads)
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.RefreshLeads)
                 End If
             Else
                 Dim phoneNo = e.Parameter.Split("|")(0)

@@ -549,12 +549,12 @@
 <%--<div style="height: 100%; font-size: 12px; color: #9fa1a8; width: 100%">--%>
 <%--<div style="position: absolute; top: 70px; bottom: 0; left:0px; right: 0; font-size: 12px; color: #9fa1a8">--%>
 <% End if %>
-<div style="<%=cssPostion%>; font-size: 12px; color: #9fa1a8">
+<div style="<%=cssPostion%> font-size: 12px; color: #9fa1a8">
     <!-- Nav tabs -->
     <%--comment box filters--%>
     <div style="padding: 10px; background: #f5f5f5" class="clearfix">
         <%--comment box and text--%>
-        <div style="float: left; width: 70%; min-width: 360px; margin-top: 10px; height: 320px">
+        <div style="float: left; width: 70%; min-width: 360px; margin-top: 10px; height: 270px">
             <div class="clearfix">
                 <div>
                     <span style="color: #295268;" class="upcase_text">Add Comment&nbsp;&nbsp;<i class="fa fa-comment" style="font-size: 14px"></i></span>
@@ -578,7 +578,7 @@
             <button type="button" onclick="testaddKey()">Test</button>
             <textarea title="Press CTRL+ENTER to submit." class="edit_text_area" style="display: none; height: 148px;" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
             --%>
-            <div class="html_edit_div" style="height: 70%">
+            <div class="html_edit_div" style="height: 80%">
                 <dx:ASPxHtmlEditor ID="EmailBody2" runat="server" Height="148px" Width="100%" ClientInstanceName="EmailBody" OnLoad="EmailBody2_Load">
                     <Settings AllowHtmlView="false" AllowPreview="false" />
                 </dx:ASPxHtmlEditor>
@@ -590,7 +590,7 @@
             </div>
 
             <%-- 50px --%>
-            <div style="margin-top: 50px; height: 200px">
+            <div style="margin-top: 50px; height: 180px">
                 <asp:Panel runat="server" ID="pnlCommentCtr"></asp:Panel>
                 <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Legal Or DisplayMode = ActivityLogMode.Construction Or DisplayMode = ActivityLogMode.Eviction Then%>
                 <div style="visibility: hidden">Date of Comment:</div>
@@ -773,10 +773,10 @@
 
     <%-------end-----%>
     <%-- log tables--%>
-    <%Dim LogPostion = "position: absolute; top: 320px; bottom: 0; width: 100%; padding: 0" %>
+    <%Dim LogPostion = "position: absolute; top: 300px; bottom: 0; width: 100%; padding: 0" %>
     <% If Me.DisplayMode = Nothing OrElse Me.DisplayMode = ActivityLogMode.Leads Then %>
     <%--  <div style="max-height: 500px">--%>
-    <% LogPostion = "max-height: 500px" %>
+    <% LogPostion = "max-height: 550px" %>
     <% End if %>
     <div style="<%= LogPostion%>">
         <asp:HiddenField ID="hfBBLE" runat="server" />
