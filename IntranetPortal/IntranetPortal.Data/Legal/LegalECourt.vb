@@ -88,8 +88,9 @@ Public Class LegalECourt
         End Using
     End Function
     Public Shared Function GetLeaglECourtIndexnum(index As String) As LegalECourt
+        Dim trimIndex = LegalCase.IndexNumberFormat(index)
         Using ctx As New PortalEntities
-            Return ctx.LegalECourts.Where(Function(e) e.IndexNumber = index And e.AppearanceDate.HasValue).OrderByDescending(Function(e) e.AppearanceDate).FirstOrDefault
+            Return ctx.LegalECourts.Where(Function(e) e.IndexNumber.Contains(trimIndex) And e.AppearanceDate.HasValue).OrderByDescending(Function(e) e.AppearanceDate).FirstOrDefault
         End Using
     End Function
     Public Shared Function Parse(msg As ImapX.Message) As LegalECourt
