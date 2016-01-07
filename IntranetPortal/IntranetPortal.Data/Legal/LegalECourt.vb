@@ -84,7 +84,7 @@ Public Class LegalECourt
     End Function
     Public Shared Function GetLegalEcourt(bble As String) As LegalECourt
         Using ctx As New PortalEntities
-            Return ctx.LegalECourts.Where(Function(e) e.BBLE = bble).OrderByDescending(Function(e) e.UpdateTime).FirstOrDefault
+            Return ctx.LegalECourts.Where(Function(e) e.BBLE = bble And e.AppearanceDate.HasValue).OrderByDescending(Function(e) e.UpdateTime).FirstOrDefault
         End Using
     End Function
     Public Shared Function GetLeaglECourtIndexnum(index As String) As LegalECourt
@@ -93,7 +93,7 @@ Public Class LegalECourt
             Dim IndexList = ctx.LegalECourts.Where(Function(e) e.IndexNumber.Contains(trimIndex) And e.AppearanceDate.HasValue).ToList
             Dim mathList = New List(Of LegalECourt)
             For Each e In IndexList
-                If (trimIndex = LegalCase.IndexNumberFormat(index)) Then
+                If (trimIndex = LegalCase.IndexNumberFormat(e.IndexNumber)) Then
                     mathList.Add(e)
                 End If
             Next

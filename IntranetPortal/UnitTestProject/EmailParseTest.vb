@@ -245,5 +245,6 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
     Public Sub TestFindLegalEcourtIndex()
         Dim l = LegalECourt.GetLeaglECourtIndexnum("12011/2014")
         Assert.IsTrue(l IsNot Nothing)
+
     End Sub
 End Class
