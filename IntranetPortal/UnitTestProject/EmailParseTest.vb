@@ -240,4 +240,11 @@ This is an automated e-mail. If you have questions please e-mail eCourts@nycourt
 
         Assert.IsTrue(e.BBLE = "1004490003 ")
     End Sub
+
+    <TestMethod()>
+    Public Sub TestFindLegalEcourtIndex()
+        Dim l = LegalECourt.GetLeaglECourtIndexnum("12011/2014")
+        Assert.IsTrue(l IsNot Nothing)
+
+    End Sub
 End Class

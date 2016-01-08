@@ -88,7 +88,7 @@
     </div>
 
     <!--detial Nav tabs -->
-    <div style="height: 100%; position: absolute; top: 250px; bottom: 0; width: 100%; overflow-y: scroll">
+    <div style="height: 100%; position: absolute; top: 250px; bottom: 0; width: 100%;">
         <ul class="nav nav-tabs overview_tabs" role="tablist">
             <li class="short_sale_tab active"><a class="shot_sale_tab_a " href="#Summary" role="tab" data-toggle="tab">Summary</a></li>
             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Foreclosure_Review" role="tab" data-toggle="tab">Foreclosure Review</a></li>
@@ -96,7 +96,7 @@
             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#LegalWriteupTab" role="tab" data-toggle="tab">Write Up</a></li>
         </ul>
         <!-- Tab panes -->
-        <div class="tab-content">
+        <div class="tab-content" style="height:100%; overflow:auto">
             <div class="tab-pane active" id="Summary">
                 <uc1:LegalSummaryTab runat="server" ID="LegalSummaryTab" />
             </div>
