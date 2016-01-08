@@ -100,5 +100,6 @@
         Servicer = 2
         HomeOwner = 3
         GeneralData = 4
+        OnlyMortgage = 7
     End Enum
 End Class

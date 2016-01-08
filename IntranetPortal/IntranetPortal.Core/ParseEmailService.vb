@@ -15,7 +15,6 @@ Public Class ParseEmailService
         client = ConnectEmail()
     End Sub
 
-
     Function ConnectEmail() As ImapClient
         Dim client = New ImapClient("box1030.bluehost.com", True)
         If (client.IsConnected) Then
@@ -56,6 +55,5 @@ Public Class ParseEmailService
         End If
         Return client.Folders.Inbox.Search("UNSEEN", -1, -1).ToList
     End Function
-
 
 End Class

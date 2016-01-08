@@ -23,4 +23,11 @@ Public Class LeadTest
         Assert.IsTrue(ld.SharedUsers.Count = 0)
     End Sub
 
+    <TestMethod()>
+    Public Sub RefreshMortgageDataTest()
+        Dim bble = "2022860035 "
+        Dim result = DataWCFService.UpdateLeadInfo(bble, False, True, False, False, False, False, False)
+        Assert.IsTrue(result)
+    End Sub
+
 End Class

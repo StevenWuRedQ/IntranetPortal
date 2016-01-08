@@ -139,6 +139,7 @@ Partial Class Troubleshooting
         Me.TitleTab = New System.Windows.Forms.TabPage()
         Me.TitleButton1 = New System.Windows.Forms.Button()
         Me.Button20 = New System.Windows.Forms.Button()
+        Me.btnRefreshMtgs = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -878,6 +879,7 @@ Partial Class Troubleshooting
         '
         'TabPage6
         '
+        Me.TabPage6.Controls.Add(Me.btnRefreshMtgs)
         Me.TabPage6.Controls.Add(Me.btnRefreshComplains)
         Me.TabPage6.Controls.Add(Me.GroupBox2)
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
@@ -1304,6 +1306,15 @@ Partial Class Troubleshooting
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
+        'btnRefreshMtgs
+        '
+        Me.btnRefreshMtgs.Location = New System.Drawing.Point(242, 64)
+        Me.btnRefreshMtgs.Name = "btnRefreshMtgs"
+        Me.btnRefreshMtgs.Size = New System.Drawing.Size(115, 22)
+        Me.btnRefreshMtgs.TabIndex = 2
+        Me.btnRefreshMtgs.Text = "Refresh Mortgages"
+        Me.btnRefreshMtgs.UseVisualStyleBackColor = True
+        '
         'Troubleshooting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1470,4 +1481,5 @@ Partial Class Troubleshooting
     Friend WithEvents TitleButton1 As Button
     Friend WithEvents Button19 As Button
     Friend WithEvents txtSSResult As TextBox
+    Friend WithEvents btnRefreshMtgs As Button
 End Class
