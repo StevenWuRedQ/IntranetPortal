@@ -9,7 +9,6 @@
 
 Imports System
 Imports System.Collections.Generic
-Imports IntranetPortal.Data
 
 Partial Public Class DataStatu
     Public Property Category As String
@@ -19,7 +18,4 @@ Partial Public Class DataStatu
     Public Property Active As Nullable(Of Boolean)
     Public Property Description As String
 
-    Public Shared Function LoadAllDataStatus() As List(Of DataStatu)
-        Throw New NotImplementedException()
-    End Function
 End Class
