@@ -57,5 +57,12 @@ Public Class ParseEmailService
         Return client.Folders.Inbox.Search("UNSEEN", -1, -1).ToList
     End Function
 
+    Public Function GetAllEmail() As List(Of Message)
+
+        If (Not IsLogedIn()) Then
+            client = ConnectEmail()
+        End If
+        Return client.Folders.Inbox.Search("ALL", True).ToList()
+    End Function
 
 End Class

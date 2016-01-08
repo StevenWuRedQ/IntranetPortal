@@ -10,12 +10,16 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class DataStatu
-    Public Property Category As String
-    Public Property Status As Integer
-    Public Property Name As String
-    Public Property DisplayOrder As Nullable(Of Integer)
-    Public Property Active As Nullable(Of Boolean)
-    Public Property Description As String
+Partial Public Class LegalECourtsAll
+    Public Property Id As Integer
+    Public Property BBLE As String
+    Public Property MessageId As String
+    Public Property IndexNumber As String
+    Public Property AppearanceDate As Nullable(Of Date)
+    Public Property Subject As String
+    Public Property BodyText As String
+    Public Property BodyHtml As String
+    Public Property RecivedData As Nullable(Of Date)
+    Public Property CreateDate As Nullable(Of Date)
 
 End Class

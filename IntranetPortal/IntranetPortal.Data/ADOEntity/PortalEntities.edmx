@@ -344,6 +344,21 @@
           <Property Name="UpdateTime" Type="datetime" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="LegalECourtsAll">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="MessageId" Type="nvarchar" MaxLength="50" />
+          <Property Name="IndexNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="AppearanceDate" Type="date" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="255" />
+          <Property Name="BodyText" Type="nvarchar(max)" />
+          <Property Name="BodyHtml" Type="nvarchar(max)" />
+          <Property Name="RecivedData" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="LegalJudge">
           <Key>
             <PropertyRef Name="ContactId" />
@@ -911,6 +926,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <EntitySet Name="LeadsInfo" EntityType="Self.LeadsInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalCase" EntityType="Self.LegalCase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalECourts" EntityType="Self.LegalECourts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LegalECourtsAll" EntityType="Self.LegalECourtsAll" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalJudge" EntityType="Self.LegalJudge" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalRoboSignor" EntityType="Self.LegalRoboSignor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MortgageStatusData" EntityType="Self.MortgageStatusData" Schema="dbo" store:Type="Tables" />
@@ -1023,6 +1039,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <EntitySet Name="LegalCaseReports" EntityType="IntranetPortalModel.LegalCaseReport" />
           <EntitySet Name="LegalManagerReports" EntityType="IntranetPortalModel.LegalManagerReport" />
           <EntitySet Name="DataStatus" EntityType="IntranetPortalModel.DataStatu" />
+          <EntitySet Name="LegalECourtsAlls" EntityType="IntranetPortalModel.LegalECourtsAll" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -1906,6 +1923,21 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <Property Name="DisplayOrder" Type="Int32" />
           <Property Name="Active" Type="Boolean" />
           <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LegalECourtsAll">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="MessageId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IndexNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AppearanceDate" Type="DateTime" Precision="0" />
+          <Property Name="Subject" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BodyText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BodyHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecivedData" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2833,6 +2865,22 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LegalECourtsAlls">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LegalECourtsAll">
+              <MappingFragment StoreEntitySet="LegalECourtsAll">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="RecivedData" ColumnName="RecivedData" />
+                <ScalarProperty Name="BodyHtml" ColumnName="BodyHtml" />
+                <ScalarProperty Name="BodyText" ColumnName="BodyText" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="AppearanceDate" ColumnName="AppearanceDate" />
+                <ScalarProperty Name="IndexNumber" ColumnName="IndexNumber" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

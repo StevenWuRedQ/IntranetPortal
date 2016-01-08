@@ -103,6 +103,7 @@ Partial Class Troubleshooting
         Me.btnGeoBBLE = New System.Windows.Forms.Button()
         Me.txtGeoAddress = New System.Windows.Forms.TextBox()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.CacheAllEmail = New System.Windows.Forms.Button()
         Me.btnLegalTeamActivity = New System.Windows.Forms.Button()
         Me.BtnNoticeECourt = New System.Windows.Forms.Button()
         Me.Button21 = New System.Windows.Forms.Button()
@@ -934,6 +935,7 @@ Partial Class Troubleshooting
         '
         'TabPage7
         '
+        Me.TabPage7.Controls.Add(Me.CacheAllEmail)
         Me.TabPage7.Controls.Add(Me.btnLegalTeamActivity)
         Me.TabPage7.Controls.Add(Me.BtnNoticeECourt)
         Me.TabPage7.Controls.Add(Me.Button21)
@@ -947,6 +949,15 @@ Partial Class Troubleshooting
         Me.TabPage7.TabIndex = 7
         Me.TabPage7.Text = "Legal"
         Me.TabPage7.UseVisualStyleBackColor = True
+        '
+        'CacheAllEmail
+        '
+        Me.CacheAllEmail.Location = New System.Drawing.Point(8, 218)
+        Me.CacheAllEmail.Name = "CacheAllEmail"
+        Me.CacheAllEmail.Size = New System.Drawing.Size(208, 23)
+        Me.CacheAllEmail.TabIndex = 6
+        Me.CacheAllEmail.Text = "Cache All email to LegalECourtsALL"
+        Me.CacheAllEmail.UseVisualStyleBackColor = True
         '
         'btnLegalTeamActivity
         '
@@ -1470,4 +1481,5 @@ Partial Class Troubleshooting
     Friend WithEvents TitleButton1 As Button
     Friend WithEvents Button19 As Button
     Friend WithEvents txtSSResult As TextBox
+    Friend WithEvents CacheAllEmail As Button
 End Class

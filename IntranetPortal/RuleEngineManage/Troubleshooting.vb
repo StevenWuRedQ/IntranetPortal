@@ -1102,5 +1102,23 @@ Public Class Troubleshooting
 
     End Sub
 
+    Private Sub CacheAllEmail_Click(sender As Object, e As EventArgs) Handles CacheAllEmail.Click
+        Dim serv = New Core.ParseEmailService("Portal.etrack@myidealprop.com", "ColorBlue1")
+        If (Not serv.IsLogedIn()) Then
 
+        End If
+        Using ctx As New PortalEntities
+            Dim allmessage = serv.GetAllEmail()
+            For Each l In allmessage
+                Dim c = New LegalECourtsAll()
+                c.BodyText = l.Body.Text
+                c.BodyHtml = l.Body.Html
+                c.RecivedData = l.Date
+                c.Subject = l.Subject
+                ctx.LegalECourtsAlls.Add(c)
+            Next
+            ctx.SaveChanges()
+        End Using
+
+    End Sub
 End Class

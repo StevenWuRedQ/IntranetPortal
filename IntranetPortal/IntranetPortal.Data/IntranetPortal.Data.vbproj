@@ -93,6 +93,9 @@
     <Compile Include="ADOEntity\DataStatu.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\LegalECourtsAll.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="BusinessForm\BusinessDataBase.vb" />
     <Compile Include="BusinessForm\FormDataItem.vb" />
     <Compile Include="Common\DataStatus.vb" />

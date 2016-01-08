@@ -64,5 +64,6 @@ Partial Public Class PortalEntities
     Public Overridable Property LegalCaseReports() As DbSet(Of LegalCaseReport)
     Public Overridable Property LegalManagerReports() As DbSet(Of LegalManagerReport)
     Public Overridable Property DataStatus() As DbSet(Of DataStatu)
+    Public Overridable Property LegalECourtsAlls() As DbSet(Of LegalECourtsAll)
 
 End Class
