@@ -394,6 +394,14 @@ InitialLine:
                     rule.Complete()
                     Log("Failed to Inital Mortgage Data. BBLE: " & bble)
                 End If
+            Case Core.DataLoopRule.DataLoopType.OnlyMortgage
+                If DataWCFService.UpdateLeadInfo(bble, False, True, False, False, False, False, False) Then
+                    rule.Complete()
+                    Log("Initial Data Message " & bble & String.Format(" BBLE: {0} Morgatage Amount data is loaded.", bble))
+                Else
+                    rule.Complete()
+                    Log("Failed to Inital Mortgage Amount Data. BBLE: " & bble)
+                End If
             Case Else
                 Dim lead = LeadsInfo.GetInstance(bble)
                 If String.IsNullOrEmpty(lead.Owner) Then

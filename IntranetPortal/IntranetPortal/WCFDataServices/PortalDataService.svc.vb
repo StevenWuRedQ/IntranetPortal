@@ -200,6 +200,14 @@ Public Class PortalDataService
                             lead.C2ndMotgrAmt = C1stMotgrAmt
                         End If
 
+                        If lead.C1stMotgrAmt = 0 Then
+                            lead.C1stMotgrAmt = Nothing
+                        End If
+
+                        If lead.C2ndMotgrAmt = 0 Then
+                            lead.C2ndMotgrAmt = Nothing
+                        End If
+
                         lead.AcrisOrderDeliveryTime = updateTime
                         lead.AcrisOrderStatus = status
                     Case "ECB_Violations"
