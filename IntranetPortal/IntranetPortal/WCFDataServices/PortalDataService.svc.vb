@@ -30,9 +30,9 @@ Public Class PortalDataService
         'Dim servicer = address.ToString
         Dim servicer = billLine1
 
-        If servicer.EndsWith(",") Then
-            servicer = servicer.Remove(servicer.Length - 1)
-        End If
+        'If servicer.EndsWith(",") Then
+        '    servicer = servicer.Remove(servicer.Length - 1)
+        'End If
 
         Try
             Using ctx As New Entities
