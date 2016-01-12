@@ -1,9 +1,14 @@
 ﻿Imports IntranetPortal.Data
 Imports Newtonsoft.Json.Linq
+Imports Newtonsoft.Json
 Imports System.IO
 Imports System.IO.Compression
 Imports Novacode
 
+
+''' <summary>
+''' Title related operation
+''' </summary>
 Public Class TitleManage
     Inherits ActivityManageBase
     Implements INavMenuAmount
@@ -252,6 +257,34 @@ Public Class TitleManage
         End Select
 
     End Function
+
+    'Public Shared Sub FixFeeClearenceFormatIssue(bble As String)
+    '    Dim form = FormDataItem.Instance(FormName, bble)
+
+    '    If form IsNot Nothing AndAlso String.IsNullOrEmpty(form.FormData) Then
+    '        Dim jsData = JObject.Parse(form.FormData)
+    '        Dim fees = CType(jsData.SelectToken("FeeClearance.data"), JArray)
+
+    '        For Each fee In fees
+    '            Dim cost = fee("cost")
+    '            fee("cost") = FormatCost(cost)
+    '        Next
+
+    '        form.FormData = jsData.ToString
+    '        form.Save("Dataservice")
+    '    End If
+    'End Sub
+
+    'Private Shared Function FormatCost(cost As String) As String
+    '    cost = cost.Replace(",", "").Replace("(", "").Replace(")", "").Replace("$", "")
+    '    Dim result As Double
+
+    '    If Double.TryParse(cost, result) Then
+    '        Return result.ToString
+    '    End If
+
+    '    Return cost
+    'End Function
 
     Public Shared Function GeneratePackage(entity As String, dba As String, transferor As String, transferee As String, sdate As Date) As String
         Dim path = HttpContext.Current.Server.MapPath("~/App_Data/TitleDoc")

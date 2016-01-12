@@ -390,7 +390,10 @@
                     el.cost = '-'
                 }
             }
-
+            if (parseFloat(el.cost))
+            {
+                el.cost = parseFloat(el.cost);
+            }
             
 
             total += parseFloat(el.cost) ? parseFloat(el.cost) : 0.0;
