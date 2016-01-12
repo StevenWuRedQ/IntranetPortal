@@ -19,8 +19,6 @@ Public Class DataWCFService
 
     End Function
 
-
-
 #End Region
 
     Public Shared Function GetLeadInfo(bble As String) As LeadsInfo
@@ -136,6 +134,56 @@ Public Class DataWCFService
     Public Shared Function GetLiensInfo(bble As String) As List(Of PortalLisPen)
         Dim lisPens As New List(Of PortalLisPen)
         Using client As New DataAPI.WCFMacrosClient
+
+            Try
+                Dim newLPs = client.Get_AreaAbstract_LisPendens(bble)
+
+                For Each item In newLPs
+                    Dim lisPen As New PortalLisPen
+                    'lisPen.Active = noth
+                    lisPen.Attorney = Utility.BuildUsername(item.Attorney_First_Name, item.Attorney_Middle_Name, item.Attorney_Last_Name)
+                    'lisPen.Attorney_Phone = ""
+                    lisPen.BBLE = item.BBLE
+                    lisPen.Block = item.Debtor_Block
+                    lisPen.CollectedOn = item.Entry_Date
+                    lisPen.County = item.County_Name
+                    lisPen.CountyNum = CInt(item.COUNTY)
+
+                    If item.Debtor_Type = "I" Then
+                        lisPen.Defendant = Utility.BuildUsername(item.Debtor_First_Name, item.Debtor_Middle_Name, item.Debtor_Last_Name)
+                    Else
+                        lisPen.Defendant = item.Debtor_Corp_Name
+                    End If
+
+                    lisPen.Docket_Number = item.Doc_Index
+                    lisPen.FileDate = item.Effective_Date
+                    'lisPen.Interest_Rate = item.Interest_Rate
+                    'lisPen.Lot = item.Debtor_Lot
+                    'lisPen.Monthly_Payment = item.Monthly_Payment
+                    lisPen.Mortgage_Date = item.Effective_Date
+                    'lisPen.NEIGH_NAME = item.NEIGH_NAME
+                    lisPen.Number = item.Doc_Number
+                    'lisPen.Original_Mortgage = item.Original_Mortgage
+
+                    If item.Creditor_Type = "I" Then
+                        lisPen.Plaintiff = Utility.BuildUsername(item.Creditor_First_Name, item.Creditor_Middle_Name, item.Creditor_Last_Name)
+                    Else
+                        lisPen.Plaintiff = item.Creditor_Corp_Name
+                    End If
+
+                    'lisPen.Section = item.Section
+                    'lisPen.ST_Name = item.ST_Name
+                    'lisPen.Terms = item.Terms
+                    'lisPen.Zip = item.Zip
+
+                    lisPens.Add(lisPen)
+                Next
+
+                Return lisPens
+            Catch ex As Exception
+
+            End Try
+
             For Each item In client.Get_LisPendens(bble)
                 Dim lisPen As New PortalLisPen
                 lisPen.Active = item.Active
@@ -518,10 +566,13 @@ Public Class DataWCFService
 
                 'Update Liens Info
                 Dim lisPens = GetLiensInfo(bble)
-                If lisPens IsNot Nothing And lisPens.Count > 0 Then
+                If lisPens IsNot Nothing Then
                     Dim localLispens = context.PortalLisPens.Where(Function(lp) lp.BBLE = bble)
                     context.PortalLisPens.RemoveRange(localLispens)
-                    context.PortalLisPens.AddRange(lisPens)
+
+                    If lisPens.Count > 0 Then
+                        context.PortalLisPens.AddRange(lisPens)
+                    End If
                 End If
 
                 context.SaveChanges()

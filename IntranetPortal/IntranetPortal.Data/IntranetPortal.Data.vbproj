@@ -368,6 +368,9 @@
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.FederalTaxLien.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.JDLS_LPS_View.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.Judgment.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -434,28 +437,28 @@
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.UCC.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DataAPI\item.xsd">
+    <None Include="Service References\DataAPI\item7.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataAPI\item1.xsd">
+    <None Include="Service References\DataAPI\item71.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataAPI\item2.xsd">
+    <None Include="Service References\DataAPI\item72.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataAPI\item3.xsd">
+    <None Include="Service References\DataAPI\item73.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataAPI\item4.xsd">
+    <None Include="Service References\DataAPI\item74.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataAPI\item5.xsd">
+    <None Include="Service References\DataAPI\item75.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataAPI\item6.xsd">
+    <None Include="Service References\DataAPI\item76.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataAPI\WCFMacros.wsdl" />
+    <None Include="Service References\DataAPI\WCFMacros1.wsdl" />
     <None Include="Service References\RulesEngine\IntranetPortal.Data.RulesEngine.BaseRule.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -501,9 +504,6 @@
     <WCFMetadataStorage Include="Service References\RulesEngine\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\DataAPI\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\DataAPI\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -515,7 +515,9 @@
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Service References\DataAPI\item1.disco" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Service References\RulesEngine\configuration91.svcinfo" />
   </ItemGroup>

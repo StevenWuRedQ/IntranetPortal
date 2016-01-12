@@ -18,18 +18,18 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://georgepc:8002" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://server:8002" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="59db4966-d21e-451a-bd65-4dcaefd2b28c" SourceId="1" SourceUrl="http://georgepc:8002/?xsd=xsd3" />
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="628800b9-3a6d-484a-9454-a4c6dcee60ad" SourceId="1" SourceUrl="http://georgepc:8002/?xsd=xsd0" />
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="062254b8-548b-4d4c-8320-e573d6284a80" SourceId="1" SourceUrl="http://georgepc:8002/?xsd=xsd1" />
-    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="97526db9-1dad-4b1c-8a27-d0aa43c2c3f6" SourceId="1" SourceUrl="http://georgepc:8002/?disco" />
-    <MetadataFile FileName="WCFMacros.wsdl" MetadataType="Wsdl" ID="e4bcd875-5e92-495b-8ded-dd16a2ca4f8a" SourceId="1" SourceUrl="http://georgepc:8002/?wsdl" />
-    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="6b9cefc4-6565-4985-b4a9-30034a13d6e8" SourceId="1" SourceUrl="http://georgepc:8002/?xsd=xsd6" />
-    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="85da0a2b-93f0-4f12-9f34-bb366fb2c105" SourceId="1" SourceUrl="http://georgepc:8002/?xsd=xsd4" />
-    <MetadataFile FileName="item5.xsd" MetadataType="Schema" ID="34033735-0e58-40ed-8029-061500c661a0" SourceId="1" SourceUrl="http://georgepc:8002/?xsd=xsd5" />
-    <MetadataFile FileName="item6.xsd" MetadataType="Schema" ID="b1426bd6-6346-43fe-9f24-c3a4556e7c4d" SourceId="1" SourceUrl="http://georgepc:8002/?xsd=xsd2" />
+    <MetadataFile FileName="item7.xsd" MetadataType="Schema" ID="33e3489b-bda4-4331-987d-2ca079867e1c" SourceId="1" SourceUrl="http://server:8002/?xsd=xsd2" />
+    <MetadataFile FileName="item71.xsd" MetadataType="Schema" ID="8fcd9119-c5de-4e46-b89d-a35470213794" SourceId="1" SourceUrl="http://server:8002/?xsd=xsd4" />
+    <MetadataFile FileName="item72.xsd" MetadataType="Schema" ID="b964f722-5b2e-4f38-a54c-5351fabaab68" SourceId="1" SourceUrl="http://server:8002/?xsd=xsd6" />
+    <MetadataFile FileName="item73.xsd" MetadataType="Schema" ID="20bbbaeb-d804-4742-a505-ea623a8b6c3f" SourceId="1" SourceUrl="http://server:8002/?xsd=xsd1" />
+    <MetadataFile FileName="item74.xsd" MetadataType="Schema" ID="7a35cd3b-1289-459c-9b58-cbb483ad1fbf" SourceId="1" SourceUrl="http://server:8002/?xsd=xsd0" />
+    <MetadataFile FileName="item75.xsd" MetadataType="Schema" ID="0c34ba90-fd05-49b4-beae-2aa739d91dff" SourceId="1" SourceUrl="http://server:8002/?xsd=xsd3" />
+    <MetadataFile FileName="item76.xsd" MetadataType="Schema" ID="1062ebe8-a8fd-4385-ae6c-a268fa6779c8" SourceId="1" SourceUrl="http://server:8002/?xsd=xsd5" />
+    <MetadataFile FileName="item1.disco" MetadataType="Disco" ID="26957ec2-24d6-4c38-bd39-495c94a1d37b" SourceId="1" SourceUrl="http://server:8002/?disco" />
+    <MetadataFile FileName="WCFMacros1.wsdl" MetadataType="Wsdl" ID="185d43a0-514a-40b0-a42c-7fcff94d2876" SourceId="1" SourceUrl="http://server:8002/?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

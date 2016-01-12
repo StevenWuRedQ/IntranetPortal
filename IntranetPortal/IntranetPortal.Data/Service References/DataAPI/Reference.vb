@@ -6656,6 +6656,1029 @@ Namespace DataAPI
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="JDLS_LPS_View", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class JDLS_LPS_View
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Accident_DateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Attorney_CityField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Attorney_First_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Attorney_Last_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Attorney_Middle_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Attorney_NumberField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Attorney_ST_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Attorney_TypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Attorney_ZipField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Attorney_Zip1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BCOUNTYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Book_TypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CNCOUNTYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private COUNTYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Compressed_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Compressed_Name_TypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private County_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Creditor_CityField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Creditor_Corp_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Creditor_First_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Creditor_Last_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Creditor_Middle_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Creditor_NumberField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Creditor_ST_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Creditor_TypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Creditor_ZipField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Creditor_Zip1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DCOUNTYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Data_Entry_TimeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Debtor_BlockField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Debtor_CityField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Debtor_Corp_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Debtor_First_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Debtor_Last_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Debtor_LotField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Debtor_Middle_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Debtor_NumberField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Debtor_OccupationField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Debtor_ST_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Debtor_TypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Debtor_ZipField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Debtor_Zip1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Debtors_CountField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Doc_IndexField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Doc_NumberField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Doc_SequenceField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Effective_DateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Effective_TimeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Entry_DateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Entry_USR_IDField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Expiration_DateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Filling_FeeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Interm_DispositionField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private KYVField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private KYVSUBField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LP_TYPEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LastUpdatedField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Money_AmountField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RemarkField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Remark_DateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Satisfaction_DateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Satisfaction_TypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Satisfaction_USR_IDField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Sheriff_RequiredField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Source_County_CodeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Source_Court_TypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TCOUNTYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Third_Party_CityField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Third_Party_First_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Third_Party_Last_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Third_Party_Middle_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Third_Party_NumberField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Third_Party_ST_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Third_Party_TypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Third_Party_ZipField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Third_Party_Zip1Field As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Accident_Date() As System.Nullable(Of Date)
+            Get
+                Return Me.Accident_DateField
+            End Get
+            Set
+                Me.Accident_DateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Attorney_City() As String
+            Get
+                Return Me.Attorney_CityField
+            End Get
+            Set
+                Me.Attorney_CityField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Attorney_First_Name() As String
+            Get
+                Return Me.Attorney_First_NameField
+            End Get
+            Set
+                Me.Attorney_First_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Attorney_Last_Name() As String
+            Get
+                Return Me.Attorney_Last_NameField
+            End Get
+            Set
+                Me.Attorney_Last_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Attorney_Middle_Name() As String
+            Get
+                Return Me.Attorney_Middle_NameField
+            End Get
+            Set
+                Me.Attorney_Middle_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Attorney_Number() As String
+            Get
+                Return Me.Attorney_NumberField
+            End Get
+            Set
+                Me.Attorney_NumberField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Attorney_ST_Name() As String
+            Get
+                Return Me.Attorney_ST_NameField
+            End Get
+            Set
+                Me.Attorney_ST_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Attorney_Type() As String
+            Get
+                Return Me.Attorney_TypeField
+            End Get
+            Set
+                Me.Attorney_TypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Attorney_Zip() As String
+            Get
+                Return Me.Attorney_ZipField
+            End Get
+            Set
+                Me.Attorney_ZipField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Attorney_Zip1() As String
+            Get
+                Return Me.Attorney_Zip1Field
+            End Get
+            Set
+                Me.Attorney_Zip1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BCOUNTY() As String
+            Get
+                Return Me.BCOUNTYField
+            End Get
+            Set
+                Me.BCOUNTYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Book_Type() As String
+            Get
+                Return Me.Book_TypeField
+            End Get
+            Set
+                Me.Book_TypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CNCOUNTY() As String
+            Get
+                Return Me.CNCOUNTYField
+            End Get
+            Set
+                Me.CNCOUNTYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property COUNTY() As String
+            Get
+                Return Me.COUNTYField
+            End Get
+            Set
+                Me.COUNTYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Compressed_Name() As String
+            Get
+                Return Me.Compressed_NameField
+            End Get
+            Set
+                Me.Compressed_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Compressed_Name_Type() As String
+            Get
+                Return Me.Compressed_Name_TypeField
+            End Get
+            Set
+                Me.Compressed_Name_TypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property County_Name() As String
+            Get
+                Return Me.County_NameField
+            End Get
+            Set
+                Me.County_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Creditor_City() As String
+            Get
+                Return Me.Creditor_CityField
+            End Get
+            Set
+                Me.Creditor_CityField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Creditor_Corp_Name() As String
+            Get
+                Return Me.Creditor_Corp_NameField
+            End Get
+            Set
+                Me.Creditor_Corp_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Creditor_First_Name() As String
+            Get
+                Return Me.Creditor_First_NameField
+            End Get
+            Set
+                Me.Creditor_First_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Creditor_Last_Name() As String
+            Get
+                Return Me.Creditor_Last_NameField
+            End Get
+            Set
+                Me.Creditor_Last_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Creditor_Middle_Name() As String
+            Get
+                Return Me.Creditor_Middle_NameField
+            End Get
+            Set
+                Me.Creditor_Middle_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Creditor_Number() As String
+            Get
+                Return Me.Creditor_NumberField
+            End Get
+            Set
+                Me.Creditor_NumberField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Creditor_ST_Name() As String
+            Get
+                Return Me.Creditor_ST_NameField
+            End Get
+            Set
+                Me.Creditor_ST_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Creditor_Type() As String
+            Get
+                Return Me.Creditor_TypeField
+            End Get
+            Set
+                Me.Creditor_TypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Creditor_Zip() As String
+            Get
+                Return Me.Creditor_ZipField
+            End Get
+            Set
+                Me.Creditor_ZipField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Creditor_Zip1() As String
+            Get
+                Return Me.Creditor_Zip1Field
+            End Get
+            Set
+                Me.Creditor_Zip1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DCOUNTY() As String
+            Get
+                Return Me.DCOUNTYField
+            End Get
+            Set
+                Me.DCOUNTYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Data_Entry_Time() As String
+            Get
+                Return Me.Data_Entry_TimeField
+            End Get
+            Set
+                Me.Data_Entry_TimeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Debtor_Block() As String
+            Get
+                Return Me.Debtor_BlockField
+            End Get
+            Set
+                Me.Debtor_BlockField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Debtor_City() As String
+            Get
+                Return Me.Debtor_CityField
+            End Get
+            Set
+                Me.Debtor_CityField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Debtor_Corp_Name() As String
+            Get
+                Return Me.Debtor_Corp_NameField
+            End Get
+            Set
+                Me.Debtor_Corp_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Debtor_First_Name() As String
+            Get
+                Return Me.Debtor_First_NameField
+            End Get
+            Set
+                Me.Debtor_First_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Debtor_Last_Name() As String
+            Get
+                Return Me.Debtor_Last_NameField
+            End Get
+            Set
+                Me.Debtor_Last_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Debtor_Lot() As String
+            Get
+                Return Me.Debtor_LotField
+            End Get
+            Set
+                Me.Debtor_LotField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Debtor_Middle_Name() As String
+            Get
+                Return Me.Debtor_Middle_NameField
+            End Get
+            Set
+                Me.Debtor_Middle_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Debtor_Number() As String
+            Get
+                Return Me.Debtor_NumberField
+            End Get
+            Set
+                Me.Debtor_NumberField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Debtor_Occupation() As String
+            Get
+                Return Me.Debtor_OccupationField
+            End Get
+            Set
+                Me.Debtor_OccupationField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Debtor_ST_Name() As String
+            Get
+                Return Me.Debtor_ST_NameField
+            End Get
+            Set
+                Me.Debtor_ST_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Debtor_Type() As String
+            Get
+                Return Me.Debtor_TypeField
+            End Get
+            Set
+                Me.Debtor_TypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Debtor_Zip() As String
+            Get
+                Return Me.Debtor_ZipField
+            End Get
+            Set
+                Me.Debtor_ZipField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Debtor_Zip1() As String
+            Get
+                Return Me.Debtor_Zip1Field
+            End Get
+            Set
+                Me.Debtor_Zip1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Debtors_Count() As String
+            Get
+                Return Me.Debtors_CountField
+            End Get
+            Set
+                Me.Debtors_CountField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Doc_Index() As String
+            Get
+                Return Me.Doc_IndexField
+            End Get
+            Set
+                Me.Doc_IndexField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Doc_Number() As String
+            Get
+                Return Me.Doc_NumberField
+            End Get
+            Set
+                Me.Doc_NumberField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Doc_Sequence() As String
+            Get
+                Return Me.Doc_SequenceField
+            End Get
+            Set
+                Me.Doc_SequenceField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Effective_Date() As System.Nullable(Of Date)
+            Get
+                Return Me.Effective_DateField
+            End Get
+            Set
+                Me.Effective_DateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Effective_Time() As String
+            Get
+                Return Me.Effective_TimeField
+            End Get
+            Set
+                Me.Effective_TimeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Entry_Date() As System.Nullable(Of Date)
+            Get
+                Return Me.Entry_DateField
+            End Get
+            Set
+                Me.Entry_DateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Entry_USR_ID() As String
+            Get
+                Return Me.Entry_USR_IDField
+            End Get
+            Set
+                Me.Entry_USR_IDField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Expiration_Date() As System.Nullable(Of Date)
+            Get
+                Return Me.Expiration_DateField
+            End Get
+            Set
+                Me.Expiration_DateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Filling_Fee() As String
+            Get
+                Return Me.Filling_FeeField
+            End Get
+            Set
+                Me.Filling_FeeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Interm_Disposition() As String
+            Get
+                Return Me.Interm_DispositionField
+            End Get
+            Set
+                Me.Interm_DispositionField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property KYV() As String
+            Get
+                Return Me.KYVField
+            End Get
+            Set
+                Me.KYVField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property KYVSUB() As String
+            Get
+                Return Me.KYVSUBField
+            End Get
+            Set
+                Me.KYVSUBField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LP_TYPE() As String
+            Get
+                Return Me.LP_TYPEField
+            End Get
+            Set
+                Me.LP_TYPEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LastUpdated() As System.Nullable(Of Date)
+            Get
+                Return Me.LastUpdatedField
+            End Get
+            Set
+                Me.LastUpdatedField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Money_Amount() As String
+            Get
+                Return Me.Money_AmountField
+            End Get
+            Set
+                Me.Money_AmountField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Remark() As String
+            Get
+                Return Me.RemarkField
+            End Get
+            Set
+                Me.RemarkField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Remark_Date() As System.Nullable(Of Date)
+            Get
+                Return Me.Remark_DateField
+            End Get
+            Set
+                Me.Remark_DateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Satisfaction_Date() As System.Nullable(Of Date)
+            Get
+                Return Me.Satisfaction_DateField
+            End Get
+            Set
+                Me.Satisfaction_DateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Satisfaction_Type() As String
+            Get
+                Return Me.Satisfaction_TypeField
+            End Get
+            Set
+                Me.Satisfaction_TypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Satisfaction_USR_ID() As String
+            Get
+                Return Me.Satisfaction_USR_IDField
+            End Get
+            Set
+                Me.Satisfaction_USR_IDField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Sheriff_Required() As String
+            Get
+                Return Me.Sheriff_RequiredField
+            End Get
+            Set
+                Me.Sheriff_RequiredField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Source_County_Code() As String
+            Get
+                Return Me.Source_County_CodeField
+            End Get
+            Set
+                Me.Source_County_CodeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Source_Court_Type() As String
+            Get
+                Return Me.Source_Court_TypeField
+            End Get
+            Set
+                Me.Source_Court_TypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TCOUNTY() As String
+            Get
+                Return Me.TCOUNTYField
+            End Get
+            Set
+                Me.TCOUNTYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Third_Party_City() As String
+            Get
+                Return Me.Third_Party_CityField
+            End Get
+            Set
+                Me.Third_Party_CityField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Third_Party_First_Name() As String
+            Get
+                Return Me.Third_Party_First_NameField
+            End Get
+            Set
+                Me.Third_Party_First_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Third_Party_Last_Name() As String
+            Get
+                Return Me.Third_Party_Last_NameField
+            End Get
+            Set
+                Me.Third_Party_Last_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Third_Party_Middle_Name() As String
+            Get
+                Return Me.Third_Party_Middle_NameField
+            End Get
+            Set
+                Me.Third_Party_Middle_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Third_Party_Number() As String
+            Get
+                Return Me.Third_Party_NumberField
+            End Get
+            Set
+                Me.Third_Party_NumberField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Third_Party_ST_Name() As String
+            Get
+                Return Me.Third_Party_ST_NameField
+            End Get
+            Set
+                Me.Third_Party_ST_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Third_Party_Type() As String
+            Get
+                Return Me.Third_Party_TypeField
+            End Get
+            Set
+                Me.Third_Party_TypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Third_Party_Zip() As String
+            Get
+                Return Me.Third_Party_ZipField
+            End Get
+            Set
+                Me.Third_Party_ZipField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Third_Party_Zip1() As String
+            Get
+                Return Me.Third_Party_Zip1Field
+            End Get
+            Set
+                Me.Third_Party_Zip1Field = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="TLO_SuperPhoneResults", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
      System.SerializableAttribute()>  _
     Partial Public Class TLO_SuperPhoneResults
@@ -50164,6 +51187,9 @@ Namespace DataAPI
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_LisPendens", ReplyAction:="http://tempuri.org/IWCFMacros/Get_LisPendensResponse")>  _
         Function Get_LisPendens(ByVal BBLE As String) As DataAPI.LisPen()
         
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_AreaAbstract_LisPendens", ReplyAction:="http://tempuri.org/IWCFMacros/Get_AreaAbstract_LisPendensResponse")>  _
+        Function Get_AreaAbstract_LisPendens(ByVal BBLE As String) As DataAPI.JDLS_LPS_View()
+        
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLOResponse")>  _
         Function Get_TLO(ByVal APIorderNum As Integer, ByVal BBLE As String, ByVal PersonName As String, ByVal PersonAddress1 As String, ByVal PersonAddress2 As String, ByVal PersonCity As String, ByVal PersonState As String, ByVal PersonZip As String, ByVal PersonCountry As String, ByVal Subject_Type As String, ByVal PersonPhone As String) As DataAPI.TLO_SuperPhoneResults()
         
@@ -50247,6 +51273,450 @@ Namespace DataAPI
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DCPGeododerByAddress", ReplyAction:="http://tempuri.org/IWCFMacros/DCPGeododerByAddressResponse")>  _
         Function DCPGeododerByAddress(ByVal Address As DataAPI.GeoAddress) As String
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/GoogleGeododerBySingleLine", ReplyAction:="http://tempuri.org/IWCFMacros/GoogleGeododerBySingleLineResponse"),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DOB_PPO_In)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DOB_PPO_out)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DOB_Complaints_In)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DOB_Complaints_out)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ComplaintsColumns())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ComplaintsColumns)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DOB_Complaints_Disposition_History())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DOB_Complaints_Disposition_History)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SP_DOB_Complaints_By_BBLE_Result())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SP_DOB_Complaints_By_BBLE_Result)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DOB_Complaints_Complete_Response)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SP_DOB_Complaints_Disposition_History_By_BBLE_Result())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SP_DOB_Complaints_Disposition_History_By_BBLE_Result)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SP_DOB_Complaints_History_By_BBLE_Result())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SP_DOB_Complaints_History_By_BBLE_Result)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ADT_In)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ADT_out)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ADT_Props())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ADT_Props)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NYC_Prop_tax_In)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NYC_Prop_tax_Out)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NYC_WaterSewer_In)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NYC_WaterSewer_Out)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Acris_In)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Acris_Out)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NYC_Assessment_Initial_Search_View())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NYC_Assessment_Initial_Search_View)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NYC_Assessment())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NYC_Assessment)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ALL_NYC_Tax_Liens_CO_Info())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ALL_NYC_Tax_Liens_CO_Info)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Acris_LatestOwner_View())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Acris_LatestOwner_View)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.LisPen())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.LisPen)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.JDLS_LPS_View())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.JDLS_LPS_View)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLO_SuperPhoneResults())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLO_SuperPhoneResults)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Acris_Last_Sales_Info)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.OwnerNameAddress())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.OwnerNameAddress)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Parcels_Info())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Parcels_Info)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NYC_NameAndAddress_View())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NYC_NameAndAddress_View)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TaxLien_Info)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Judgment())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Judgment)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Bankruptcy1())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Bankruptcy1)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ECB())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ECB)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Mortgages_Deeds())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Mortgages_Deeds)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FederalTaxLien())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FederalTaxLien)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Patriot())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Patriot)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ParkingViolation())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ParkingViolation)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TranscriptAdjunction())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TranscriptAdjunction)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UCC())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UCC)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.EmergencyRepair())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.EmergencyRepair)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.OwnerInfo())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.OwnerInfo)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.AB_Report_Out)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Bankruptcy_Report())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Bankruptcy_Report)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FederalTaxLiens_Report())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FederalTaxLiens_Report)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Judgments_Report())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Judgments_Report)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ParkingViolations_Report())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ParkingViolations_Report)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLO_PastAddress_Report())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLO_PastAddress_Report)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TriggerManager())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TriggerManager)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SP_Is_TrigOn_BY_BBLE_Result())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SP_Is_TrigOn_BY_BBLE_Result)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SP_NYC_Zoning_BY_BBLE_Result())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SP_NYC_Zoning_BY_BBLE_Result)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.GeoAddress)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOLocateReportOutput)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOResponseOutput)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ResponseOutputBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BasicAddressRecord())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BasicAddressRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.AddressRecordBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.StandardFieldNames)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.StandardDatasetNames)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CorporateIdentity())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CorporateIdentity)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ResponseOutputRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.[Date])),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PhoneBookEntry())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PhoneBookEntry)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Address)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BasicAddress)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.AddressBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ProtectedData)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.IPAddressRecord())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.IPAddressRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Time)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DateOfBirthRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BasicDateOfBirthRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DateOfDeathRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Name)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BasicName)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NameBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SSNRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BasicSSNRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PhoneListing())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PhoneListing)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BasicPhoneListing)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ListingTypes)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PhoneTypes)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PersonSynopsis)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PhoneCounts)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyOwner)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.IndividualPropertyOwner())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.IndividualPropertyOwner)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyOwnerIdenty())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyOwnerIdenty)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOAircraft())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOAircraft)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.AircraftBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOEntity)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOBankruptcy())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOBankruptcy)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BankruptcyBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOBankruptcyDebtor())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOBankruptcyDebtor)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BasicName())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOBusinessRecord())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOBusinessRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BusinessRecordBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BusinessName())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BusinessName)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOBusinessAddressRecord())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOBusinessAddressRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOResident())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOResident)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ResidentBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BasicPhoneListing())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BusinessContact())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BusinessContact)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BusinessContactBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.WatchListRecord())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.WatchListRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BusinessAssociation())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BusinessAssociation)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BusinessRole())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BusinessRole)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BusinessRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BusinessAddressRecord())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BusinessAddressRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.AddressRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Aircraft())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Aircraft)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Entity)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Bankruptcy())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Bankruptcy)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BankruptcyDebtor())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BankruptcyDebtor)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Name())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.MatchIndicators)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BusinessRecord())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ConcealedWeaponPermit())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ConcealedWeaponPermit)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ConcealedWeaponPermitHolder)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CriminalSearchMatchV005())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CriminalSearchMatchV005)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UnifiedCriminalRecord1)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UnifiedCriminalRecordBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ArrestDetails1())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ArrestDetails1)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CriminalDetails1)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.QueryOutputRecordOfIdLookupQueryInputRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.QueryRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CriminalDetailItem1())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CriminalDetailItem1)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CrimeDetails1())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CrimeDetails1)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.WarrantDetails1())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.WarrantDetails1)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Suspect1)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Address())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.[Date]())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.MatchIndicator())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.MatchIndicator)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.MatchType)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DriversLicense())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DriversLicense)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DriversLicenseBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.EmailRecord())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.EmailRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.EmailRecordBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Eviction())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Eviction)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.EvictionBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Court)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CourtBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Plaintiff)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FLTrafficCrash())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FLTrafficCrash)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FLTrafficCrashPedestrian())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FLTrafficCrashPedestrian)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FLTrafficCrashPropertyDamage())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FLTrafficCrashPropertyDamage)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FLTrafficCrashPropertyOwner)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FLTrafficCrashVehicle())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FLTrafficCrashVehicle)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FLTrafficCrashDriver)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FLTrafficCrashVehicleOwner)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FLTrafficCrashPassenger())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.FLTrafficCrashPassenger)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyForeclosure())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyForeclosure)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyForeclosureBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DeedEntity())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DeedEntity)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyEntity)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.HuntingPermit())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.HuntingPermit)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.HuntingPermitHolder)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PersonalJudgmentFiling())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PersonalJudgmentFiling)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PersonalJudgmentFilingBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PersonalLienFiling())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PersonalLienFiling)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PersonalLienFilingBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Neighbor())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Neighbor)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Resident())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Resident)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SSNRecord())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UtilityConnection())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UtilityConnection)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UtilityConsumer())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UtilityConsumer)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PilotLicense())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PilotLicense)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PilotLicenseBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PilotRating())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PilotRating)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ProfessionalAssociation())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ProfessionalAssociation)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ProfessionalLicense())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ProfessionalLicense)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ProfessionalLicenseBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.[Property]())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.[Property])),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyAssessment)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyAssessmentBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyOwnership())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyOwnership)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyOwnershipBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Mortgage())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Mortgage)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.MortgageBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DeedRegistryEntry())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DeedRegistryEntry)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.RegistryEntry)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyAssessment())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyDeed())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyDeed)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyDeedBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyTax())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyTax)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyTaxBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyTaxAssessment())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyTaxAssessment)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PropertyTaxAssessmentBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.AssessedPropertyValue())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.AssessedPropertyValue)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMark())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMark)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkClassification())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkClassification)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkEvent())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkEvent)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkFiling())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkFiling)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkFilingBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkMadridFiling())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkMadridFiling)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkMadridEvent())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkMadridEvent)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkOwner())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkOwner)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkStatement())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TradeMarkStatement)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UCCFiling())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UCCFiling)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UCCFilingBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UCCCollateralItem())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UCCCollateralItem)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UCCDebtor())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UCCDebtor)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UCCEntity)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UCCEntityBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UCCSecuredParty())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.UCCSecuredParty)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Vehicle())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Vehicle)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleRegistrant())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleRegistrant)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleCoRegistrant)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleEntity)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleEntityBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleCoRegistrant())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleTag())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleTag)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleSightingStat)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleSighting())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleSighting)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleSightingStat())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleTitle())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleTitle)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleLessor)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleLessor())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleLienHolder)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleLienHolder())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleTitleDetails)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleTitleHolder())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehicleTitleHolder)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehiclePicture())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VehiclePicture)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VoterRegistration())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.VoterRegistration)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOConcealedWeaponPermit())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOConcealedWeaponPermit)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLODriversLicense())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLODriversLicense)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOEviction())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOEviction)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOCourt)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPropertyForeclosure())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPropertyForeclosure)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOEntity())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOHuntingPermit())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOHuntingPermit)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOHuntingPermitHolder)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPersonalJudgmentFiling())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPersonalJudgmentFiling)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPersonalLienFiling())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPersonalLienFiling)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPilotLicense())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPilotLicense)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOProfessionalAssociation())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOProfessionalAssociation)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOProfessionalLicense())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOProfessionalLicense)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOProperty())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOProperty)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPropertyOwnership())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPropertyOwnership)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOMortgage())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOMortgage)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPropertyTax())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPropertyTax)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOTradeMark())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOTradeMark)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOTradeMarkFiling())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOTradeMarkFiling)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOTradeMarkOwner())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOTradeMarkOwner)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOUCCFiling())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOUCCFiling)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOUCCDebtor())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOUCCDebtor)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOUCCEntity)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOUCCSecuredParty())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOUCCSecuredParty)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicle())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicle)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicleRegistrant())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicleRegistrant)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicleCoRegistrant)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicleEntity)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BasicAddress())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicleCoRegistrant())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicleTitle())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicleTitle)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicleLessor)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicleLessor())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicleLienHolder)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicleLienHolder())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicleTitleHolder())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVehicleTitleHolder)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVoterRegistration())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOVoterRegistration)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPhoneBookEntry())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPhoneBookEntry)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOCorporateFiling())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOCorporateFiling)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CorporateFilingBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CorporateAmendment())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CorporateAmendment)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CorporateStockIssue())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.CorporateStockIssue)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOBusinessContact())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOBusinessContact)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOLocateReportCounts)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLORealEstateProperty())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLORealEstateProperty)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPropertyAssessment)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPropertyDeed)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOEmployer())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOEmployer)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPersonSearchOutput)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOGenericSearchOutputBaseOfTLOGenericSearchInput)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOGenericSearchInput)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLORequestInput)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.RequestIdentification)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.RequestCredentials)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPersonSearchOutputRecord())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPersonSearchOutputRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.PersonSearchOutputRecordBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.DateOfDeathRecord())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.BasicDateOfBirthRecord())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOIndividualSharingSSN())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOIndividualSharingSSN)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPersonSearchRelative())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOPersonSearchRelative)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOSexOffenderRecord())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLOSexOffenderRecord)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SexOffenderRecordBase)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(System.MulticastDelegate)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(System.[Delegate])),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(String())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(System.ComponentModel.PropertyChangedEventHandler))>  _
+        Function GoogleGeododerBySingleLine(ByVal Address As String) As Object
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -50368,6 +51838,10 @@ Namespace DataAPI
             Return MyBase.Channel.Get_LisPendens(BBLE)
         End Function
         
+        Public Function Get_AreaAbstract_LisPendens(ByVal BBLE As String) As DataAPI.JDLS_LPS_View() Implements DataAPI.IWCFMacros.Get_AreaAbstract_LisPendens
+            Return MyBase.Channel.Get_AreaAbstract_LisPendens(BBLE)
+        End Function
+        
         Public Function Get_TLO(ByVal APIorderNum As Integer, ByVal BBLE As String, ByVal PersonName As String, ByVal PersonAddress1 As String, ByVal PersonAddress2 As String, ByVal PersonCity As String, ByVal PersonState As String, ByVal PersonZip As String, ByVal PersonCountry As String, ByVal Subject_Type As String, ByVal PersonPhone As String) As DataAPI.TLO_SuperPhoneResults() Implements DataAPI.IWCFMacros.Get_TLO
             Return MyBase.Channel.Get_TLO(APIorderNum, BBLE, PersonName, PersonAddress1, PersonAddress2, PersonCity, PersonState, PersonZip, PersonCountry, Subject_Type, PersonPhone)
         End Function
@@ -50478,6 +51952,10 @@ Namespace DataAPI
         
         Public Function DCPGeododerByAddress(ByVal Address As DataAPI.GeoAddress) As String Implements DataAPI.IWCFMacros.DCPGeododerByAddress
             Return MyBase.Channel.DCPGeododerByAddress(Address)
+        End Function
+        
+        Public Function GoogleGeododerBySingleLine(ByVal Address As String) As Object Implements DataAPI.IWCFMacros.GoogleGeododerBySingleLine
+            Return MyBase.Channel.GoogleGeododerBySingleLine(Address)
         End Function
     End Class
 End Namespace

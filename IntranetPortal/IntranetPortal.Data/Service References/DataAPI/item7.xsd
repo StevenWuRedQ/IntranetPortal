@@ -656,6 +656,94 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LisPen" nillable="true" type="tns:LisPen" />
+  <xs:complexType name="ArrayOfJDLS_LPS_View">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="JDLS_LPS_View" nillable="true" type="tns:JDLS_LPS_View" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfJDLS_LPS_View" nillable="true" type="tns:ArrayOfJDLS_LPS_View" />
+  <xs:complexType name="JDLS_LPS_View">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Accident_Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Attorney_City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Attorney_First_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Attorney_Last_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Attorney_Middle_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Attorney_Number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Attorney_ST_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Attorney_Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Attorney_Zip" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Attorney_Zip1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BCOUNTY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Book_Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CNCOUNTY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="COUNTY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Compressed_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Compressed_Name_Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="County_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Creditor_City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Creditor_Corp_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Creditor_First_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Creditor_Last_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Creditor_Middle_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Creditor_Number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Creditor_ST_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Creditor_Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Creditor_Zip" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Creditor_Zip1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DCOUNTY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Data_Entry_Time" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debtor_Block" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debtor_City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debtor_Corp_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debtor_First_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debtor_Last_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debtor_Lot" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debtor_Middle_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debtor_Number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debtor_Occupation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debtor_ST_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debtor_Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debtor_Zip" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debtor_Zip1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Debtors_Count" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Doc_Index" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Doc_Number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Doc_Sequence" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Effective_Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Effective_Time" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Entry_Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Entry_USR_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Expiration_Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Filling_Fee" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Interm_Disposition" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="KYV" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="KYVSUB" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LP_TYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastUpdated" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Money_Amount" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remark_Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Satisfaction_Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Satisfaction_Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Satisfaction_USR_ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sheriff_Required" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Source_County_Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Source_Court_Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TCOUNTY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Third_Party_City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Third_Party_First_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Third_Party_Last_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Third_Party_Middle_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Third_Party_Number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Third_Party_ST_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Third_Party_Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Third_Party_Zip" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Third_Party_Zip1" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="JDLS_LPS_View" nillable="true" type="tns:JDLS_LPS_View" />
   <xs:complexType name="ArrayOfTLO_SuperPhoneResults">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="TLO_SuperPhoneResults" nillable="true" type="tns:TLO_SuperPhoneResults" />

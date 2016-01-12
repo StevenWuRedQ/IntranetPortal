@@ -22,20 +22,9 @@ Public Class LeadAgent
                 LeadsList.BindLeadsList(CategoryName)
 
                 If Not String.IsNullOrEmpty(Request.QueryString("id")) Then
-                    'Dim bble = Request.QueryString("id")
-
-                    'If Not Employee.HasControlLeads(User.Identity.Name, bble) Then
-                    '    Response.Clear()
-                    '    Response.Write("You are not allowed to view this lead.")
-                    '    Response.End()
-                    '    Return
-                    'End If
-                    LeadsList.DisableClientEventOnLoad()
-                    LeadsInfo.ClientVisible = True
-                    LeadsInfo.BindData(Request.QueryString("id").ToString)
 
                     If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
-                        Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                        Dim cstext1 As String = "<script type=""text/javascript"">" &
                                         String.Format("leadsInfoBBLE = ""{0}"";", Request.QueryString("id")) & "</script>"
                         Page.ClientScript.RegisterStartupScript(Me.GetType, "SetleadBBLE", cstext1)
                     End If
@@ -44,6 +33,16 @@ Public Class LeadAgent
 
             If Page.IsCallback Then
                 'LeadsList.BindLeadsList(CategoryName)
+            End If
+        End If
+    End Sub
+
+    Private Sub LeadAgent_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
+        If Not Page.IsPostBack Then
+            If Not String.IsNullOrEmpty(Request.QueryString("id")) Then
+                LeadsList.DisableClientEventOnLoad()
+                LeadsInfo.ClientVisible = True
+                LeadsInfo.BindData(Request.QueryString("id").ToString)
             End If
         End If
     End Sub

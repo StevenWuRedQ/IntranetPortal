@@ -20,6 +20,10 @@
     Public ReadOnly Property Index As String
         Get
             If Not String.IsNullOrEmpty(Docket_Number) AndAlso FileDate.Year > 0 Then
+                If Docket_Number.Contains("/") Or Docket_Number.Contains("-") Then
+                    Return Docket_Number
+                End If
+
                 Return String.Format("{0}/{1}", Docket_Number.TrimEnd, FileDate.Year)
             Else
                 Return Docket_Number

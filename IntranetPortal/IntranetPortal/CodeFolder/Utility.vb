@@ -328,6 +328,10 @@ Public Class Utility
         Return StrConv(name, VbStrConv.ProperCase)
     End Function
 
+    Public Shared Function BuildUsername(firstName As String, middleName As String, lastName As String)
+        Return String.Format("{0} {1}{2}", firstName, middleName & " ", lastName)
+    End Function
+
     Public Shared Function SaveChangesObj(oldObj As Object, newObj As Object) As Object
         Dim type = oldObj.GetType()
 
