@@ -30,4 +30,14 @@ Public Class LeadTest
         Assert.IsTrue(result)
     End Sub
 
+    <TestMethod()>
+    Public Sub LPAPITest()
+        Dim bble = "2022860035 "
+        Dim result = DataWCFService.GetLiensInfo(bble)
+        Assert.IsTrue(result.Count > 0)
+        Dim lp = result.First
+        Assert.AreEqual("382738-09", lp.Docket_Number)
+
+    End Sub
+
 End Class
