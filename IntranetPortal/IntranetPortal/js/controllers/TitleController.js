@@ -375,6 +375,24 @@
         d.lastupdate = new Date();
         var total = 0.0;
         _.each($scope.FormData.FeeClearance.data, function (el, idx) {
+
+            if (typeof el.cost == 'string' && el.cost.length > 0 && !parseFloat(el.cost)) {
+                costStr = el.cost
+                var floatNumber = costStr.match(/[-+]?(\d*[.])?\d/);
+                if (floatNumber && floatNumber[0]) {
+                    var costNumber = parseFloat(floatNumber[0]);
+                    el.cost = costNumber;
+                } else {
+                    el.cost = 0;
+                }
+                if(costStr.indexOf('-')==0)
+                {
+                    el.cost = '-'
+                }
+            }
+
+            
+
             total += parseFloat(el.cost) ? parseFloat(el.cost) : 0.0;
         })
         $scope.FormData.FeeClearance.total = total;

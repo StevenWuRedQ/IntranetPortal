@@ -329,7 +329,7 @@
                                     </tr>
                                     <tr>
                                         <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                            <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                            <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue" UseSubmitBehavior="false">
                                                 <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();SetFollowUp('CustomDays',callbackCalendar.GetSelectedDate());}"></ClientSideEvents>
                                             </dx:ASPxButton>
                                             &nbsp;
