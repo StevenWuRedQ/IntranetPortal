@@ -14,7 +14,7 @@
             Try
                 Dim ld = LeadsInfo.GetInstance(task.BBLE)
                 Dim taskName = String.Format("{0} {1}", task.Action, ld.StreetNameWithNo)
-                WorkflowService.StartTaskProcess("TaskProcess", taskName, task.TaskID, task.BBLE, task.EmployeeName, task.Important, task.CreateBy)
+                WorkflowService.StartTaskProcess("TaskProcess", taskName, task.TaskID, task.BBLE, task.EmployeeName, task.Important, task.CreateBy, "/ViewLeadsInfo.aspx")
                 lblResult.Text = "Task Created."
             Catch ex As Exception
                 lblResult.Text = "Exception: " & ex.Message

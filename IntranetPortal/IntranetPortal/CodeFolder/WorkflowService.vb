@@ -50,7 +50,7 @@ Public Class WorkflowService
             Return
         End If
 
-        Dim conn = GetConnection()
+        Dim conn = GetConnection(createUser)
         Dim procInst = conn.CreateProcessInstance(procName)
         procInst.DisplayName = displayName
 
@@ -399,6 +399,10 @@ Public Class WorkflowService
     End Function
 
     Private Shared Function GetConnection(impersonateUser As String) As Connection
+        If String.IsNullOrEmpty(impersonateUser) Then
+            Return GetConnection()
+        End If
+
         Dim conn As New Connection(wfServer)
         conn.Integrated = True
         conn.UserName = impersonateUser
