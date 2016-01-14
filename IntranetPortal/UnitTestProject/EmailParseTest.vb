@@ -5,6 +5,8 @@ Imports IntranetPortal.RulesEngine
 Imports System.Configuration
 Imports System.IO
 Imports System.Data.Entity
+Imports Newtonsoft.Json.Linq
+Imports Newtonsoft.Json
 
 <TestClass()>
 Public Class EmailParseTest
