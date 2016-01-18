@@ -1,4 +1,4 @@
-var portalApp = angular.module('PortalApp', ['ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout']);
+var portalApp = angular.module('PortalApp', ['ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute']);
 angular.module('PortalApp').
 controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
     $rootScope.AlertModal = null;
@@ -3303,8 +3303,9 @@ angular.module('PortalApp')
     };
     $scope.reload();
 });
+//test watch
 angular.module("PortalApp")
-.controller('ShortSaleCtrl', ['$scope', '$http', '$timeout', 'ptContactServices', 'ptCom',
+.controller('ShortSaleCtrl', ['$scope', '$http', '$timeout', 'ptContactServices', 'ptCom', 
     function ($scope, $http, $timeout, ptContactServices, ptCom) {
         $scope.ptContactServices = ptContactServices;
         $scope.capitalizeFirstLetter = ptCom.capitalizeFirstLetter;

@@ -18,6 +18,13 @@
                 
             }
         },
+        watch: {
+            scripts: {
+                files: ['js/controllers/*.js'],
+                tasks: ['concat', 'uglify', 'replace'],
+                
+            },
+        },
         uglify: {
             options: {
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
@@ -63,10 +70,12 @@
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-text-replace');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task(s).
     grunt.registerTask('default', ['concat', 'uglify', 'replace']);
     grunt.registerTask('unittest', ['karma']);
     grunt.registerTask('e2etest', ['protractor']);
-
+    grunt.registerTask('watch', ['watch'])
+   
 };
