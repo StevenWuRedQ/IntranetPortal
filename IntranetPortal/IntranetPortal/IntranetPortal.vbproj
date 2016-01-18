@@ -6165,6 +6165,7 @@
     <Content Include="EmailTemplate\Testing.ascx" />
     <Content Include="favicon.ico" />
     <Content Include="Gruntfile.js" />
+    <Content Include="gulpfile.js" />
     <Content Include="images\1_down_picto.png" />
     <Content Include="images\accounting_icon.jpg" />
     <Content Include="images\add-button-hi.png" />

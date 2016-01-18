@@ -1,5 +1,4 @@
-﻿//test watch2
-var i = 1;
+﻿var i = 1;
 angular.module("PortalApp")
 .controller('ShortSaleCtrl', ['$scope', '$http', '$timeout', 'ptContactServices', 'ptCom', 
     function ($scope, $http, $timeout, ptContactServices, ptCom) {

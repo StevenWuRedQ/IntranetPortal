@@ -1903,7 +1903,8 @@ angular.module('PortalApp')
     };
     $scope.reload();
 });
-//test watch
+//test watch8
+var i = 1;
 angular.module("PortalApp")
 .controller('ShortSaleCtrl', ['$scope', '$http', '$timeout', 'ptContactServices', 'ptCom', 
     function ($scope, $http, $timeout, ptContactServices, ptCom) {
@@ -2323,6 +2324,7 @@ angular.module("PortalApp")
             });
         }; /* end update mortage status*/
     }]);
+
 angular.module("PortalApp")
 .controller("TitleController", ['$scope', '$http', 'ptCom', 'ptContactServices', 'ptLeadsService', 'ptShortsSaleService', function ($scope, $http, ptCom, ptContactServices, ptLeadsService, ptShortsSaleService) {
     /* model define*/
