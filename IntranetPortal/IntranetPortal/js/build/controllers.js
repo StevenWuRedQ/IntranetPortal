@@ -1903,8 +1903,9 @@ angular.module('PortalApp')
     };
     $scope.reload();
 });
+var i = 1;
 angular.module("PortalApp")
-.controller('ShortSaleCtrl', ['$scope', '$http', '$timeout', 'ptContactServices', 'ptCom',
+.controller('ShortSaleCtrl', ['$scope', '$http', '$timeout', 'ptContactServices', 'ptCom', 
     function ($scope, $http, $timeout, ptContactServices, ptCom) {
         $scope.ptContactServices = ptContactServices;
         $scope.capitalizeFirstLetter = ptCom.capitalizeFirstLetter;
@@ -2322,6 +2323,7 @@ angular.module("PortalApp")
             });
         }; /* end update mortage status*/
     }]);
+
 angular.module("PortalApp")
 .controller("TitleController", ['$scope', '$http', 'ptCom', 'ptContactServices', 'ptLeadsService', 'ptShortsSaleService', function ($scope, $http, ptCom, ptContactServices, ptLeadsService, ptShortsSaleService) {
     /* model define*/
@@ -2700,25 +2702,9 @@ angular.module("PortalApp")
         var total = 0.0;
         _.each($scope.FormData.FeeClearance.data, function (el, idx) {
 
-            if (typeof el.cost == 'string' && el.cost.length > 0 && !parseFloat(el.cost)) {
-                costStr = el.cost
-                var floatNumber = costStr.match(/[-+]?(\d*[.])?\d/);
-                if (floatNumber && floatNumber[0]) {
-                    var costNumber = parseFloat(floatNumber[0]);
-                    el.cost = costNumber;
-                } else {
-                    el.cost = 0;
-                }
-                if(costStr.indexOf('-')==0)
-                {
-                    el.cost = '-'
-                }
+            if (typeof el.cost == 'string' && el.cost.length > 0) {
+                el.cost = el.cost.replace(/[^0-9|\.|\-|\+]/, '');
             }
-            if (parseFloat(el.cost))
-            {
-                el.cost = parseFloat(el.cost);
-            }
-            
 
             total += parseFloat(el.cost) ? parseFloat(el.cost) : 0.0;
         })

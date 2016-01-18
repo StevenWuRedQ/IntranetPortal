@@ -13,15 +13,20 @@ Public Class ScanECourtsRule
         Dim eCourt = Data.LegalECourt.Parse(msg)
 
         Dim parseSuccess = eCourt IsNot Nothing AndAlso (Not String.IsNullOrEmpty(eCourt.BBLE))
+
+
         If (parseSuccess) Then
-            Log("sucessed parse mail get Legal Case BBLE :" & eCourt.BBLE & " LegalECourt Id :" & eCourt.Id)
+            'Log("sucessed parse mail get Legal Case BBLE :" & eCourt.BBLE & " LegalECourt Id :" & eCourt.Id)
 
-
+            If (Not eCourt.AppearanceDate.HasValue) Then
+                Log("this email do not contain AppearanceDate id = " & eCourt.Id)
+                Return False
+            End If
             Dim legalManger = LegalCaseManage.GetLegalManger()
             If (legalManger IsNot Nothing) Then
 
                 Dim lcase = Data.LegalCase.GetCase(eCourt.BBLE)
-                Log("LegalCase bble: " & lcase.BBLE & "  IndexNumber: " & lcase.FCIndexNum & " == eCourt IndexNumber: " & eCourt.IndexNumber & " eCourt Id: " & eCourt.Id)
+                'Log("LegalCase bble: " & lcase.BBLE & "  IndexNumber: " & lcase.FCIndexNum & " == eCourt IndexNumber: " & eCourt.IndexNumber & " eCourt Id: " & eCourt.Id)
                 If (lcase.FCIndexNum <> eCourt.IndexNumber) Then
                     Log("There are an error happan get woring BBLE eCourt id: " & eCourt.Id)
                 End If

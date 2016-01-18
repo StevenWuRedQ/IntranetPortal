@@ -1,5 +1,6 @@
-﻿angular.module("PortalApp")
-.controller('ShortSaleCtrl', ['$scope', '$http', '$timeout', 'ptContactServices', 'ptCom',
+﻿var i = 1;
+angular.module("PortalApp")
+.controller('ShortSaleCtrl', ['$scope', '$http', '$timeout', 'ptContactServices', 'ptCom', 
     function ($scope, $http, $timeout, ptContactServices, ptCom) {
         $scope.ptContactServices = ptContactServices;
         $scope.capitalizeFirstLetter = ptCom.capitalizeFirstLetter;

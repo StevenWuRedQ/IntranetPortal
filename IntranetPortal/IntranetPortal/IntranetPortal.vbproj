@@ -498,6 +498,13 @@
       <DependentUpon>AssignLeadsRulesPage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="AuctionLeads\AuctionList.aspx.designer.vb">
+      <DependentUpon>AuctionList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AuctionLeads\AuctionList.aspx.vb">
+      <DependentUpon>AuctionList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="AutoDialer\CallManagement.aspx.designer.vb">
       <DependentUpon>CallManagement.aspx</DependentUpon>
     </Compile>
@@ -2466,13 +2473,14 @@
     <Content Include="Account\Logout.aspx" />
     <Content Include="AgentOverview\AgentCharts.ascx" />
     <Content Include="AgentOverview\AgentOverview.aspx" />
-    <Content Include="app.js" />
     <Content Include="App_Data\PortalMenu.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Themes\compact\compact.css" />
     <Content Include="App_Themes\PortalTheme2.dll" />
     <Content Include="AssignLeadsRulesPage.aspx" />
+    <Content Include="AuctionLeads\AuctionList.aspx" />
+    <Content Include="AuctionLeads\partials\auction-detail.tmpl.html" />
     <Content Include="AutoDialer\CallManagement.aspx" />
     <Content Include="AutoDialer\Dialer.aspx" />
     <Content Include="AutoDialer\DialerAjaxService.svc" />
@@ -6158,6 +6166,7 @@
     <Content Include="EmailTemplate\Testing.ascx" />
     <Content Include="favicon.ico" />
     <Content Include="Gruntfile.js" />
+    <Content Include="gulpfile.js" />
     <Content Include="images\1_down_picto.png" />
     <Content Include="images\accounting_icon.jpg" />
     <Content Include="images\add-button-hi.png" />
@@ -6496,7 +6505,6 @@
     <Content Include="LegalUI\LegalCaseList.ascx" />
     <Content Include="LegalUI\ManagePreViewControl.ascx" />
     <Content Include="LegalUI\LegalSummaryUI.aspx" />
-    <Content Include="main.js" />
     <Content Include="ManagementUI\LeadDocSearch.aspx" />
     <Content Include="ManagementUI\LegalManagement.aspx" />
     <Content Include="ManagementUI\Management2.aspx" />
