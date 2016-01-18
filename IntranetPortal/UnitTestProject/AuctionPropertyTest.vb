@@ -32,7 +32,6 @@ Imports IntranetPortal.Data
         Assert.AreEqual("SHAPIRO, DICARO & BARAK, LLC", prop.PlaintiffAttorney)
         Assert.AreEqual("631-844-9611", prop.AttorneyPhone)
         Assert.AreEqual("Mortgage Foreclosure", prop.ForeclosureType)
-
     End Sub
 
 End Class

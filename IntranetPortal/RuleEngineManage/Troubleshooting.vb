@@ -8,6 +8,7 @@ Imports System.Text
 Imports IntranetPortal.RulesEngine
 Imports System.Configuration
 Imports Newtonsoft.Json
+Imports System.Reflection
 
 Public Class Troubleshooting
 
@@ -82,7 +83,18 @@ Public Class Troubleshooting
     End Sub
 
     Private Sub Troubleshooting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim formTypes As New List(Of Type)()
+        For Each formType As Type In System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+            If GetType(Form).IsAssignableFrom(formType) Then
+                If formType.FullName <> "RuleEngineManage.Troubleshooting" AndAlso formType.FullName <> "RuleEngineManage.RuleEngineManagement" Then
+                    formTypes.Add(formType)
+                End If
+            End If
+        Next formType
 
+        For Each type As Type In formTypes
+            Me.cbForms.Items.Add(type.Name)
+        Next type
     End Sub
 
     Private Sub btnEmailSend_Click(sender As Object, e As EventArgs) Handles btnEmailSend.Click
@@ -1123,5 +1135,12 @@ Public Class Troubleshooting
     End Sub
     Private Sub btnRefreshMtgs_Click(sender As Object, e As EventArgs) Handles btnRefreshMtgs.Click
         MessageBox.Show(DataWCFService.UpdateLeadInfo(txtBBLE.Text, False, True, False, False, False, False, False))
+    End Sub
+
+    Private Sub btnOpenWindow_Click(sender As Object, e As EventArgs) Handles btnOpenWindow.Click
+        Dim type = cbForms.SelectedItem
+
+        Dim frm = CType(Assembly.GetExecutingAssembly().CreateInstance("RuleEngineManage." & type), Form)
+        frm.ShowDialog()
     End Sub
 End Class

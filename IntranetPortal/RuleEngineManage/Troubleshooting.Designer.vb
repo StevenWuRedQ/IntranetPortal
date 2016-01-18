@@ -97,6 +97,7 @@ Partial Class Troubleshooting
         Me.txtSSBBLE = New System.Windows.Forms.TextBox()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.btnRefreshMtgs = New System.Windows.Forms.Button()
         Me.btnRefreshComplains = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtGeoBBLE = New System.Windows.Forms.TextBox()
@@ -140,7 +141,10 @@ Partial Class Troubleshooting
         Me.TitleTab = New System.Windows.Forms.TabPage()
         Me.TitleButton1 = New System.Windows.Forms.Button()
         Me.Button20 = New System.Windows.Forms.Button()
-        Me.btnRefreshMtgs = New System.Windows.Forms.Button()
+        Me.tpAuction = New System.Windows.Forms.TabPage()
+        Me.txtFiles = New System.Windows.Forms.TextBox()
+        Me.btnOpenWindow = New System.Windows.Forms.Button()
+        Me.cbForms = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -168,6 +172,7 @@ Partial Class Troubleshooting
         Me.SplitContainer2.Panel2.SuspendLayout()
         Me.SplitContainer2.SuspendLayout()
         Me.TitleTab.SuspendLayout()
+        Me.tpAuction.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -374,6 +379,8 @@ Partial Class Troubleshooting
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.cbForms)
+        Me.Panel1.Controls.Add(Me.btnOpenWindow)
         Me.Panel1.Controls.Add(Me.Label12)
         Me.Panel1.Controls.Add(Me.txtBBLE)
         Me.Panel1.Controls.Add(Me.Label1)
@@ -416,6 +423,7 @@ Partial Class Troubleshooting
         Me.TabControl1.Controls.Add(Me.TabPage9)
         Me.TabControl1.Controls.Add(Me.TabPage10)
         Me.TabControl1.Controls.Add(Me.TitleTab)
+        Me.TabControl1.Controls.Add(Me.tpAuction)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 46)
         Me.TabControl1.Name = "TabControl1"
@@ -891,6 +899,15 @@ Partial Class Troubleshooting
         Me.TabPage6.Text = "Data Service"
         Me.TabPage6.UseVisualStyleBackColor = True
         '
+        'btnRefreshMtgs
+        '
+        Me.btnRefreshMtgs.Location = New System.Drawing.Point(242, 64)
+        Me.btnRefreshMtgs.Name = "btnRefreshMtgs"
+        Me.btnRefreshMtgs.Size = New System.Drawing.Size(115, 22)
+        Me.btnRefreshMtgs.TabIndex = 2
+        Me.btnRefreshMtgs.Text = "Refresh Mortgages"
+        Me.btnRefreshMtgs.UseVisualStyleBackColor = True
+        '
         'btnRefreshComplains
         '
         Me.btnRefreshComplains.Location = New System.Drawing.Point(242, 23)
@@ -1317,14 +1334,40 @@ Partial Class Troubleshooting
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
-        'btnRefreshMtgs
+        'tpAuction
         '
-        Me.btnRefreshMtgs.Location = New System.Drawing.Point(242, 64)
-        Me.btnRefreshMtgs.Name = "btnRefreshMtgs"
-        Me.btnRefreshMtgs.Size = New System.Drawing.Size(115, 22)
-        Me.btnRefreshMtgs.TabIndex = 2
-        Me.btnRefreshMtgs.Text = "Refresh Mortgages"
-        Me.btnRefreshMtgs.UseVisualStyleBackColor = True
+        Me.tpAuction.Controls.Add(Me.txtFiles)
+        Me.tpAuction.Location = New System.Drawing.Point(4, 22)
+        Me.tpAuction.Name = "tpAuction"
+        Me.tpAuction.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpAuction.Size = New System.Drawing.Size(867, 413)
+        Me.tpAuction.TabIndex = 12
+        Me.tpAuction.Text = "Auction"
+        Me.tpAuction.UseVisualStyleBackColor = True
+        '
+        'txtFiles
+        '
+        Me.txtFiles.Location = New System.Drawing.Point(6, 6)
+        Me.txtFiles.Name = "txtFiles"
+        Me.txtFiles.Size = New System.Drawing.Size(290, 20)
+        Me.txtFiles.TabIndex = 0
+        '
+        'btnOpenWindow
+        '
+        Me.btnOpenWindow.Location = New System.Drawing.Point(661, 12)
+        Me.btnOpenWindow.Name = "btnOpenWindow"
+        Me.btnOpenWindow.Size = New System.Drawing.Size(100, 23)
+        Me.btnOpenWindow.TabIndex = 14
+        Me.btnOpenWindow.Text = "Open Window"
+        Me.btnOpenWindow.UseVisualStyleBackColor = True
+        '
+        'cbForms
+        '
+        Me.cbForms.FormattingEnabled = True
+        Me.cbForms.Location = New System.Drawing.Point(534, 14)
+        Me.cbForms.Name = "cbForms"
+        Me.cbForms.Size = New System.Drawing.Size(121, 21)
+        Me.cbForms.TabIndex = 15
         '
         'Troubleshooting
         '
@@ -1373,6 +1416,8 @@ Partial Class Troubleshooting
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer2.ResumeLayout(False)
         Me.TitleTab.ResumeLayout(False)
+        Me.tpAuction.ResumeLayout(False)
+        Me.tpAuction.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1494,4 +1539,8 @@ Partial Class Troubleshooting
     Friend WithEvents txtSSResult As TextBox
     Friend WithEvents btnRefreshMtgs As Button
     Friend WithEvents CacheAllEmail As Button
+    Friend WithEvents tpAuction As TabPage
+    Friend WithEvents txtFiles As TextBox
+    Friend WithEvents btnOpenWindow As Button
+    Friend WithEvents cbForms As ComboBox
 End Class

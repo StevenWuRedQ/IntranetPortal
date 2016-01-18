@@ -509,7 +509,6 @@
                             </td>
                             <td>{%=data.CategoryCode%}
                             </td>
-
                         </tr>
                         <tr>
                             <td style="width: 150px">Comments:

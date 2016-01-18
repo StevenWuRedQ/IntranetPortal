@@ -1,10 +1,15 @@
 ﻿Imports IntranetPortal.Core
 Public Class AuctionProperty
-    Public Shared Function Import(fileName As String) As Integer
+    Public Shared Function Import(fileName As String, importBy As String) As Integer
 
         Dim auctions = LoadAuctionProperties(fileName)
         Using ctx As New PortalEntities
-            ctx.AuctionProperties.AddRange(auctions)
+            For Each prop In auctions
+                prop.CreateDate = DateTime.Now
+                prop.CreateBy = importBy
+                ctx.AuctionProperties.Add(prop)
+            Next
+
             ctx.SaveChanges()
         End Using
         Return auctions.Count
