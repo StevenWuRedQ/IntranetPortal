@@ -1903,7 +1903,6 @@ angular.module('PortalApp')
     };
     $scope.reload();
 });
-//test watch8
 var i = 1;
 angular.module("PortalApp")
 .controller('ShortSaleCtrl', ['$scope', '$http', '$timeout', 'ptContactServices', 'ptCom', 
