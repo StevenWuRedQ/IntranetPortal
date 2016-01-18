@@ -566,7 +566,8 @@
                         var myDate = new Date(tempDate);
 
                         if (myDate.getFullYear() >= 1900) {
-                            return myDate.getUTCMonth() + "/" + myDate.getUTCDate() + "/" + myDate.getUTCFullYear();
+                            var month = myDate.getUTCMonth() + 1;
+                            return month + "/" + myDate.getUTCDate() + "/" + myDate.getUTCFullYear();
                         }
                         return "";
                     };

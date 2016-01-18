@@ -173,6 +173,7 @@
     <Compile Include="ConstructionTest.vb" />
     <Compile Include="SqlDatabaseSetup.vb" />
     <Compile Include="LegalUnitTest.vb" />
+    <Compile Include="AuctionPropertyTest.vb" />
     <Compile Include="WeDriverTest.vb" />
     <Compile Include="UserTaskTest.vb" />
     <Compile Include="WebGrabberTest.vb" />
@@ -190,6 +191,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Files\AuctionsPropTest.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

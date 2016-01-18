@@ -14,8 +14,9 @@ Public Class LegalSummaryUI
             gridQTAs_DataBinding(Nothing, Nothing)
         End If
     End Sub
+
     Sub BindGrid()
-        Dim mCases = LegalCase.GetAllCases.Where(Function(c) c.Status <> LegalCaseStatus.Closed).ToList
+        Dim mCases = LegalCase.GetAllCases.Where(Function(c) c.Status.HasValue AndAlso c.Status <> LegalCaseStatus.Closed).ToList
 
         mCases = FilterByLogIn(mCases)
         gdCases.DataSource = mCases
@@ -35,6 +36,7 @@ Public Class LegalSummaryUI
         gridUpCommingFCSale.ExpandAll()
         gridUpCommingFCSale.DataBind()
     End Sub
+
     Function FilterByLogIn(cases As List(Of LegalCase)) As List(Of LegalCase)
         If (Not (User.IsInRole("Admin") Or User.IsInRole("Legal-Manager"))) Then
             Dim loginName = Page.User.Identity.Name
@@ -62,8 +64,6 @@ Public Class LegalSummaryUI
         End If
     End Sub
 
-  
-
     Protected Sub gridOSCs_DataBinding(sender As Object, e As EventArgs)
         If (gridOSCs.DataSource Is Nothing) Then
             Dim Cases = GetSecondaryTypeList(LegalSencdaryType.OSC)
@@ -74,6 +74,7 @@ Public Class LegalSummaryUI
 
         End If
     End Sub
+
     Function GetSecondaryTypeList(type As LegalSencdaryType) As List(Of LegalCase)
 
         If (gdCases.DataSource IsNot Nothing) Then
@@ -94,7 +95,6 @@ Public Class LegalSummaryUI
         BindTypeGrid(gridQTAs, LegalSencdaryType.QTA)
 
     End Sub
-    
 
     Protected Sub gridDeedReversions_DataBinding(sender As Object, e As EventArgs)
         BindTypeGrid(gridDeedReversions, LegalSencdaryType.DeedReversions)
@@ -117,6 +117,7 @@ Public Class LegalSummaryUI
             MangerReportGrid.DataBind()
         End If
     End Sub
+
     Protected Sub MangerReportGrid_DataBinding(sender As Object, e As EventArgs)
         BindMangerReport()
     End Sub
