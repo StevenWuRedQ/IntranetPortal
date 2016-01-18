@@ -1156,3 +1156,35 @@ function CallPhone(phone) {
 function endsWith(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
 };
+
+/**** resize all element unknow height scorll bar*******/
+function calc_scorll_heigh(elem) {
+    //var elem = $(".wx_scorll_list")[0];
+    var windowVisbleHeight = $(window.top).height();
+    var elemTop = $(elem).position().top;
+    var paddingBottom = parseInt($(elem).attr('data-bottom'))
+    paddingBottom = paddingBottom ? paddingBottom : 40;
+    $(elem).height(windowVisbleHeight - elemTop - paddingBottom);
+}
+function calc_scorll_heigh_resize() {
+    $('.wx_scorll_list').each(function () {
+        calc_scorll_heigh(this);
+    })
+}
+function calc_scorll_heigh_all() {
+    /*windowd resize*/
+    $(window).resize(function () {
+        calc_scorll_heigh_resize();
+    });
+    /*frist init heights */
+    calc_scorll_heigh_resize();
+    $(document).bind("DOMSubtreeModified", function () {
+        calc_scorll_heigh_resize();
+    });
+
+}
+$(document).ready(function () {
+    calc_scorll_heigh_all();
+});
+
+/******** end function **********/

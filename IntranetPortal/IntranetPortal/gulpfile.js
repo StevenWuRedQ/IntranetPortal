@@ -4,6 +4,7 @@ var uglify = require('gulp-uglify');
 var del = require('del');
 var watch = require('gulp-watch');
 var batch = require('gulp-batch');
+var rename = require('gulp-rename');
 var config = {
     //Include all js files but exclude any min.js files
     src: ['js/*.js', 'js/controllers/*.js'],
@@ -33,7 +34,9 @@ gulp.task('scripts', ['clean'], function () {
     return gulp.src(config.src)
       //.pipe(uglify())
       .pipe(concat('intranetportal.js'))
-      
+      .pipe(gulp.dest('js/build/'))
+      .pipe(rename('intranetportal.min.js'))
+      .pipe(uglify())
       .pipe(gulp.dest('js/build/'));
 });
 

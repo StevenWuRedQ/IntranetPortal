@@ -2428,3 +2428,9 @@ a.shot_sale_tab_a {
 .hidden_btn .dxgvStatusBar_MetropolisBlue1 tr.dxgv > td {
     display: none !important;
 }
+
+
+/*all emlemnt with unknow height*/
+.wx_scorll_list {
+    overflow: auto;
+}

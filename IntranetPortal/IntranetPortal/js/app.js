@@ -1,4 +1,5 @@
-﻿var portalApp = angular.module('PortalApp', ['ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute']);
+﻿//test watch1
+var portalApp = angular.module('PortalApp', ['ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute']);
 angular.module('PortalApp').
 controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
     $rootScope.AlertModal = null;
