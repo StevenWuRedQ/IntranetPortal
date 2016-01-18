@@ -34,19 +34,55 @@ Public Class AuctionProperty
         prop.Judgment = DataRowDate("Judgment", row)
         prop.Plaintiff = DataRowString("Plaintiff", row)
         prop.Defendant = DataRowString("Defendant", row)
-        prop.IndexNo = DataRowString("Defendant", row)
+        prop.IndexNo = DataRowString("Index No#", row)
         prop.Referee = DataRowString("Referee", row)
         prop.AuctionLocation = DataRowString("Auction Location", row)
+        prop.PlaintiffAttorney = DataRowString("Plaintiff's Attorney", row)
+        prop.AttorneyPhone = DataRowString("Attorney's Phone", row)
+        prop.ForeclosureType = DataRowString("Foreclosure Type", row)
+
+        prop.AgentAssigned = DataRowString("Agent Assigned", row)
+        'prop.Grade = DataRowString("Grade", row)
+        'prop.TaxWaterCombo = DataRowDecimal("Taxes/Water Combo", row)
+        'prop.DOBViolation = DataRowDecimal("DOB Violations", row)
+        'prop.PreviousAuctionDate = DataRowDate("Previous Auction Date", row)
+        'prop.DeedRecorded = DataRowDate("Memo/Deed Recorded", row)
+        'prop.MaxAuctionBid = DataRowDecimal("Max. Auction Bid", row)
+        'prop.RenovatedValue = DataRowDecimal("Renovated Value", row)
+        'prop.Points = DataRowString("Point", row)
+        'prop.LeadType = DataRowString("Lead Type", row)
+
         Return prop
     End Function
 
     Private Shared Function DataRowString(colName As String, row As DataRow) As String
-        Return row(colName).ToString
+        If Not row.Table.Columns.Contains(colName) Then
+            Return Nothing
+        End If
+
+        If row.IsNull(colName) Then
+            Return Nothing
+        End If
+
+        Dim result = row(colName).ToString
+        If String.IsNullOrEmpty(result) Then
+            Return Nothing
+        End If
+
+        Return result
     End Function
 
     Private Shared Function DataRowDecimal(colName As String, row As DataRow) As Decimal?
+
+        Dim amount = DataRowString(colName, row)
+        If String.IsNullOrEmpty(amount) Then
+            Return Nothing
+        End If
+
+        amount = amount.Replace("$", "").Replace(",", "")
+
         Dim result = 0
-        If Decimal.TryParse(DataRowString(colName, row), result) Then
+        If Decimal.TryParse(amount, result) Then
             Return result
         End If
         Return Nothing

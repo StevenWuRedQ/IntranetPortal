@@ -208,7 +208,7 @@ Partial Public Class CheckingComplain
             Dim dataChanged = False
             If result.Any(Function(r) r.Status.Trim <> "None") Then
                 If DataIsChange(result) Then
-                    If result.Any(Function(r) r.Status.Trim = "Act") Then
+                    If result.Any(Function(r) r.Status = "ACT") Then
                         dataChanged = True
                         Core.SystemLog.Log("ComplaintsHasUpdated", Me.LastComplaintsResult, SystemLog.LogCategory.Operation, BBLE, Nothing)
                     End If
