@@ -5,6 +5,43 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AuctionProperties">
+          <Key>
+            <PropertyRef Name="AuctionId" />
+          </Key>
+          <Property Name="AuctionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="BBL" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="120" />
+          <Property Name="Zipcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Neighborhood" Type="nvarchar" MaxLength="50" />
+          <Property Name="BuildingClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="AuctionDate" Type="datetime" />
+          <Property Name="DateEntered" Type="datetime" />
+          <Property Name="Lien" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Judgment" Type="datetime" />
+          <Property Name="Plaintiff" Type="nvarchar" MaxLength="256" />
+          <Property Name="Defendant" Type="nvarchar" MaxLength="256" />
+          <Property Name="IndexNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Referee" Type="nvarchar" MaxLength="50" />
+          <Property Name="AuctionLocation" Type="nvarchar" MaxLength="256" />
+          <Property Name="PlaintiffAttorney" Type="nvarchar" MaxLength="120" />
+          <Property Name="AttorneyPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="ForeclosureType" Type="nvarchar" MaxLength="50" />
+          <Property Name="AgentAssigned" Type="nvarchar" MaxLength="50" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxWaterCombo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DOBViolation" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PreviousAuctionDate" Type="datetime" />
+          <Property Name="DeedRecorded" Type="datetime" />
+          <Property Name="MaxAuctionBid" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RenovatedValue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Points" Type="nchar" MaxLength="10" />
+          <Property Name="LeadType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="CheckingComplains">
           <Key>
             <PropertyRef Name="BBLE" />
@@ -908,6 +945,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <Property Name="Team" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="IntranetPortalModelStoreContainer">
+          <EntitySet Name="AuctionProperties" EntityType="Self.AuctionProperties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CheckingComplains" EntityType="Self.CheckingComplains" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CleareneceNotes" EntityType="Self.CleareneceNotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConstructionBudgets" EntityType="Self.ConstructionBudgets" Schema="dbo" store:Type="Tables" />
@@ -1040,6 +1078,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <EntitySet Name="LegalManagerReports" EntityType="IntranetPortalModel.LegalManagerReport" />
           <EntitySet Name="DataStatus" EntityType="IntranetPortalModel.DataStatu" />
           <EntitySet Name="LegalECourtsAlls" EntityType="IntranetPortalModel.LegalECourtsAll" />
+          <EntitySet Name="AuctionProperties" EntityType="IntranetPortalModel.AuctionProperty" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -1938,6 +1977,43 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <Property Name="BodyHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RecivedData" Type="DateTime" Precision="3" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="AuctionProperty">
+          <Key>
+            <PropertyRef Name="AuctionId" />
+          </Key>
+          <Property Name="AuctionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="BBL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Neighborhood" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BuildingClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AuctionDate" Type="DateTime" Precision="3" />
+          <Property Name="DateEntered" Type="DateTime" Precision="3" />
+          <Property Name="Lien" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Judgment" Type="DateTime" Precision="3" />
+          <Property Name="Plaintiff" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Defendant" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IndexNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Referee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AuctionLocation" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PlaintiffAttorney" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="AttorneyPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ForeclosureType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AgentAssigned" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Grade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaxWaterCombo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DOBViolation" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PreviousAuctionDate" Type="DateTime" Precision="3" />
+          <Property Name="DeedRecorded" Type="DateTime" Precision="3" />
+          <Property Name="MaxAuctionBid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RenovatedValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Points" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="LeadType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2881,6 +2957,44 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
                 <ScalarProperty Name="MessageId" ColumnName="MessageId" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuctionProperties">
+            <EntityTypeMapping TypeName="IntranetPortalModel.AuctionProperty">
+              <MappingFragment StoreEntitySet="AuctionProperties">
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LeadType" ColumnName="LeadType" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="RenovatedValue" ColumnName="RenovatedValue" />
+                <ScalarProperty Name="MaxAuctionBid" ColumnName="MaxAuctionBid" />
+                <ScalarProperty Name="DeedRecorded" ColumnName="DeedRecorded" />
+                <ScalarProperty Name="PreviousAuctionDate" ColumnName="PreviousAuctionDate" />
+                <ScalarProperty Name="DOBViolation" ColumnName="DOBViolation" />
+                <ScalarProperty Name="TaxWaterCombo" ColumnName="TaxWaterCombo" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="AgentAssigned" ColumnName="AgentAssigned" />
+                <ScalarProperty Name="ForeclosureType" ColumnName="ForeclosureType" />
+                <ScalarProperty Name="AttorneyPhone" ColumnName="AttorneyPhone" />
+                <ScalarProperty Name="PlaintiffAttorney" ColumnName="PlaintiffAttorney" />
+                <ScalarProperty Name="AuctionLocation" ColumnName="AuctionLocation" />
+                <ScalarProperty Name="Referee" ColumnName="Referee" />
+                <ScalarProperty Name="IndexNo" ColumnName="IndexNo" />
+                <ScalarProperty Name="Defendant" ColumnName="Defendant" />
+                <ScalarProperty Name="Plaintiff" ColumnName="Plaintiff" />
+                <ScalarProperty Name="Judgment" ColumnName="Judgment" />
+                <ScalarProperty Name="Lien" ColumnName="Lien" />
+                <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+                <ScalarProperty Name="AuctionDate" ColumnName="AuctionDate" />
+                <ScalarProperty Name="BuildingClass" ColumnName="BuildingClass" />
+                <ScalarProperty Name="Neighborhood" ColumnName="Neighborhood" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BBL" ColumnName="BBL" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="AuctionId" ColumnName="AuctionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

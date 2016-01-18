@@ -90,12 +90,16 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADOEntity\AuctionProperty.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\DataStatu.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\LegalECourtsAll.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="Auction\AuctionProperty.vb" />
     <Compile Include="BusinessForm\BusinessDataBase.vb" />
     <Compile Include="BusinessForm\FormDataItem.vb" />
     <Compile Include="Common\DataStatus.vb" />
