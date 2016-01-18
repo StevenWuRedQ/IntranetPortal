@@ -1,6 +1,38 @@
-﻿<div class="container-fluid">
-    <div class="row">
-        
-       <h1>Test {{Id}}</h1>
-    </div>
+﻿
+
+<h2> {{auction.Address}}</h2>
+
+<div class="wx_scorll_list" data-bottom="50">
+    <table class="table table-striped">
+        <tr>
+            <td>Auction Date</td>
+            <td>{{auction.AuctionDate|date:'MM/dd/yyyy HH:mm'}}</td>
+        </tr>
+        <tr>
+            <td>Lien</td>
+            <td>{{auction.Lien|currency}}</td>
+        </tr>
+
+        <tr><td>Plaintiff</td><td>{{auction.Plaintiff}}</td></tr>
+        <tr><td>Defendant</td><td>{{auction.Defendant}}</td></tr>
+        <tr><td>Index No</td><td>{{auction.IndexNo}}</td></tr>
+        <tr><td>Referee</td><td>{{auction.Referee}}</td></tr>
+        <tr><td>Auction Location</td><td>{{auction.AuctionLocation}}</td></tr>
+        <tr><td>Plaintiff Attorney</td><td>{{auction.PlaintiffAttorney}}</td></tr>
+        <tr><td>Attorney Phone</td><td>{{auction.AttorneyPhone}}</td></tr>
+        <tr><td>Foreclosure Type</td><td>{{auction.ForeclosureType}}</td></tr>
+        <tr><td>Agent Assigned</td><td>{{auction.AgentAssigned}}</td></tr>
+        <tr><td>Grade</td><td>{{auction.Grade}}</td></tr>
+        <tr><td>TaxWater Combo</td><td>{{auction.TaxWaterCombo|currency}}</td></tr>
+        <tr><td>DOBViolation</td><td>{{auction.DOBViolation |currency}}</td></tr>
+        <tr><td>PreviousAuctionDate</td><td>{{auction.PreviousAuctionDate|date:'MM/dd/yyyy HH:mm'}}</td></tr>
+        <tr><td>Deed Recorded</td><td>{{auction.DeedRecorded |date:'MM/dd/yyyy HH:mm'}}</td></tr>
+        <tr><td>Max Auction Bid</td><td>{{auction.MaxAuctionBid}}</td></tr>
+        <tr><td>Renovated Value</td><td>{{auction.RenovatedValue|currency}}</td></tr>
+        <tr><td>Points</td><td>{{auction.Points}}</td></tr>
+        <tr><td>Lead Type</td><td>{{auction.LeadType}}</td></tr>
+        <tr><td>Description</td><td>{{auction.Description}}</td></tr>
+
+    </table>
 </div>
+
