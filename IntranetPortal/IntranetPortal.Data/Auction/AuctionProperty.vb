@@ -1,4 +1,7 @@
 ﻿Imports IntranetPortal.Core
+''' <summary>
+''' Represent Auction property object and related operations
+''' </summary>
 Public Class AuctionProperty
     Public Shared Function Import(fileName As String, importBy As String) As Integer
 
@@ -23,6 +26,15 @@ Public Class AuctionProperty
             result.Add(BuildAuctionProperty(row))
         Next
         Return result.ToArray
+    End Function
+
+    Public Shared Function LoadNotifyProperties(startDate As DateTime, endDate As DateTime) As AuctionProperty()
+
+        Using ctx As New PortalEntities
+
+            Dim props = ctx.AuctionProperties.Where(Function(a) a.AuctionDate > startDate AndAlso a.AuctionDate < endDate).ToArray
+            Return props
+        End Using
     End Function
 
     Private Shared Function BuildAuctionProperty(row As DataRow) As AuctionProperty

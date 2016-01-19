@@ -160,6 +160,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="ShortSaleFollowUpRule" nillable="true" type="tns:ShortSaleFollowUpRule" />
+  <xs:complexType name="AuctionNotifyRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AuctionNotifyRule" nillable="true" type="tns:AuctionNotifyRule" />
   <xs:complexType name="ArrayOfBaseRule">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="BaseRule" nillable="true" type="tns:BaseRule" />

@@ -14,4 +14,9 @@ Public Class FrmAuction
             MessageBox.Show("Error. Message: " & ex.Message)
         End Try
     End Sub
+
+    Private Sub btnNotifyRule_Click(sender As Object, e As EventArgs) Handles btnNotifyRule.Click
+        Dim rule As New IntranetPortal.RulesEngine.AuctionNotifyRule
+        rule.Execute()
+    End Sub
 End Class

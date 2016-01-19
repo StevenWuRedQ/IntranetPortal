@@ -41,6 +41,15 @@ Partial Public Class WebForm3
     Protected WithEvents DeadleadsReport As Global.IntranetPortal.DeadleadsReport
     
     '''<summary>
+    '''AuctionDailyReport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AuctionDailyReport As Global.IntranetPortal.AuctionDailyReport
+    
+    '''<summary>
     '''Button1 control.
     '''</summary>
     '''<remarks>
@@ -66,4 +75,13 @@ Partial Public Class WebForm3
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Button3 As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''Button4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Button4 As Global.System.Web.UI.WebControls.Button
 End Class

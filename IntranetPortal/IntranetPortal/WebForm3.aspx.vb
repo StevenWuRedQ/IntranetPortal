@@ -4,11 +4,16 @@ Public Class WebForm3
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not User.IsInRole("Admin") Then
+            Response.Redirect("/Account/Login.aspx")
+        End If
+
         If Not String.IsNullOrEmpty(Request.QueryString("UserName")) Then
             Me.ComplaintsNotify.BindData(Request.QueryString("UserName"))
         End If
 
         Me.DeadleadsReport.BindData(Nothing)
+        Me.AuctionDailyReport.BindData(Nothing)
     End Sub
 
     Protected Sub Button1_Click(sender As Object, e As EventArgs)
@@ -45,4 +50,10 @@ Public Class WebForm3
         Dim svr As New CommonService
         svr.SendEmailByControl("chrisy@myidealprop.com", "Deadleads Report - " & DateTime.Today.ToShortDateString, "DeadleadsReport", Nothing)
     End Sub
+
+    Protected Sub Button4_Click(sender As Object, e As EventArgs)
+        Dim svr As New CommonService
+        svr.SendEmailByControl("chrisy@myidealprop.com", "The coming Auction Properties - " & DateTime.Today.ToShortDateString, "AuctionDailyReport", Nothing)
+    End Sub
+
 End Class

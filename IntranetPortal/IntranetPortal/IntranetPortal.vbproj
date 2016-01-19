@@ -1087,6 +1087,13 @@
       <DependentUpon>ComplaintsNotify.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="EmailTemplate\AuctionDailyReport.ascx.designer.vb">
+      <DependentUpon>AuctionDailyReport.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\AuctionDailyReport.ascx.vb">
+      <DependentUpon>AuctionDailyReport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="EmailTemplate\DeadleadsReport.ascx.designer.vb">
       <DependentUpon>DeadleadsReport.ascx</DependentUpon>
     </Compile>
@@ -6155,6 +6162,7 @@
     <Content Include="EmailTemplate\ComplaintContent.ascx" />
     <Content Include="EmailTemplate\ComplaintsDetailNotify.ascx" />
     <Content Include="EmailTemplate\ComplaintsNotify.ascx" />
+    <Content Include="EmailTemplate\AuctionDailyReport.ascx" />
     <Content Include="EmailTemplate\DeadleadsReport.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserFollowUp.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserReport.ascx" />

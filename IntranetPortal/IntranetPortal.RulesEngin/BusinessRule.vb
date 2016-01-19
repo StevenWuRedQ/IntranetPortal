@@ -20,6 +20,7 @@ Imports System.Configuration
 <KnownType(GetType(LegalActivityReportRule))>
 <KnownType(GetType(NoticeECourtRule))>
 <KnownType(GetType(ShortSaleFollowUpRule))>
+<KnownType(GetType(AuctionNotifyRule))>
 <DataContract>
 Public Class BaseRule
     <DataMember>

@@ -26,6 +26,7 @@ Partial Class FrmAuction
         Me.TxtFileName = New System.Windows.Forms.TextBox()
         Me.openDialog = New System.Windows.Forms.OpenFileDialog()
         Me.btnImport = New System.Windows.Forms.Button()
+        Me.btnNotifyRule = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnSelect
@@ -57,11 +58,21 @@ Partial Class FrmAuction
         Me.btnImport.Text = "Import"
         Me.btnImport.UseVisualStyleBackColor = True
         '
+        'btnNotifyRule
+        '
+        Me.btnNotifyRule.Location = New System.Drawing.Point(13, 70)
+        Me.btnNotifyRule.Name = "btnNotifyRule"
+        Me.btnNotifyRule.Size = New System.Drawing.Size(133, 23)
+        Me.btnNotifyRule.TabIndex = 3
+        Me.btnNotifyRule.Text = "Execute Notify Rule"
+        Me.btnNotifyRule.UseVisualStyleBackColor = True
+        '
         'FrmAuction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(295, 261)
+        Me.Controls.Add(Me.btnNotifyRule)
         Me.Controls.Add(Me.btnImport)
         Me.Controls.Add(Me.TxtFileName)
         Me.Controls.Add(Me.btnSelect)
@@ -76,4 +87,5 @@ Partial Class FrmAuction
     Friend WithEvents TxtFileName As TextBox
     Friend WithEvents openDialog As OpenFileDialog
     Friend WithEvents btnImport As Button
+    Friend WithEvents btnNotifyRule As Button
 End Class

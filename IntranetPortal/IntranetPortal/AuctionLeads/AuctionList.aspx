@@ -13,7 +13,7 @@
                 </div>
                 <div class="wx_scorll_list" data-bottom="50">
                     <div class="list-group">
-                        <a href="#/detail/{{au.AuctionId}}/test" class="list-group-item" ng-repeat=" au in AuctionList |filter:auctionFilter"> <span class="badge">{{au.AuctionDate |date:'MM/dd/yyyy'}} </span> {{au.Address}}
+                        <a href="#/detail/{{au.AuctionId}}/test" class="list-group-item" ng-repeat=" au in AuctionList |filter:auctionFilter"><span class="badge">{{au.AuctionDate |date:'MM/dd/yyyy'}} </span>{{au.Address}}
                         </a>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                 $http.get('/api/AuctionProperties/' + $scope.Id).success(function (data) {
                     $scope.auction = data;
                 }).error(function () { alert('Get auction properties list error!') });
-              
+
                 // $scope.auction = _.findLast(demoList, { "AuctionId": parseInt($scope.Id) }) || {};
             };
         }]);
@@ -50,13 +50,17 @@
          $scope.AuctionList = demoList;
          $http.get('/api/AuctionProperties').success(function (data) {
              $scope.AuctionList = data;
-         }).error(function () { alert('Get auction properties list error!')});
+         }).error(function () { alert('Get auction properties list error!') });
 
      }]);
         portalApp.config(['$routeProvider',
           function ($routeProvider) {
               $routeProvider.
                 when('/detail/:Id/:Name', {
+                    templateUrl: 'partials/auction-detail.tmpl.html',
+                    controller: 'AuctionCtrl'
+                }).
+                when('/detail/:Id', {
                     templateUrl: 'partials/auction-detail.tmpl.html',
                     controller: 'AuctionCtrl'
                 }).
