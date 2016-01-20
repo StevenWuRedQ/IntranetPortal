@@ -40,4 +40,10 @@ Public Class LeadTest
 
     End Sub
 
+    <TestMethod()>
+    Public Sub UserInRoleTest()
+
+
+    End Sub
+
 End Class
