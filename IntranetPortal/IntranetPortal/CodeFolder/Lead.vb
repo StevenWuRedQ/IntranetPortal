@@ -311,6 +311,7 @@ Partial Public Class Lead
             emailData.Add("RequestBy", requestBy)
             emailData.Add("Description", description)
             emailData.Add("Priority", priority)
+            emailData.Add("BBLE", bble)
 
             Dim ccAddresses As New List(Of String)
             Dim requestEmp = Employee.GetInstance(requestBy)
