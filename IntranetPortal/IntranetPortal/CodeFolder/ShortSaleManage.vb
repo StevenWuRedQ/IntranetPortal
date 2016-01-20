@@ -28,8 +28,9 @@ Public Class ShortSaleManage
     Public Shared Function IsViewable(bble As String, userName As String) As Boolean
         Dim _viewable = False
         Dim userRoles = Roles.GetRolesForUser(userName)
+        Dim viewableRoles = Core.PortalSettings.GetValue("ShortSaleViewableRoles").Split(";")
 
-        If userRoles.Any(Function(a) a = "Admin" Or a.StartsWith("ShortSale") Or a.StartsWith("Title") Or a.StartsWith("Legal")) Then
+        If userRoles.Any(Function(a) viewableRoles.Any(Function(r) a.StartsWith(r.Replace("*", "")))) Then
             _viewable = True
         End If
 
