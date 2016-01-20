@@ -71,10 +71,8 @@
                                 </td>
                                 <td style="width: 30px; padding-right: 25px;">
                                     <i class="fa fa-times" style="font-size: 18px; color: #b1b2b7; cursor: pointer" ng-click="DeleteComments($index)"></i>
-
                                 </td>
                             </tr>
-
 
                         </tbody>
                     </table>

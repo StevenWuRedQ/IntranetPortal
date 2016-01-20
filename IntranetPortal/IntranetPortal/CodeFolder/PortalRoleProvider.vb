@@ -87,8 +87,12 @@
     End Function
 
     Public Overrides Function IsUserInRole(username As String, roleName As String) As Boolean
-        Using context As New Entities
 
+        Using context As New Entities
+            If (roleName.IndexOf("*") > 0) Then
+                Dim likeRole = roleName.Replace("*", "")
+                Return context.UsersInRoles.Where(Function(r) r.ApplicationName = ApplicationName And r.Rolename.Contains(likeRole) And r.Username = username).Count > 0
+            End If
             Return context.UsersInRoles.Where(Function(r) r.ApplicationName = ApplicationName And r.Rolename = roleName And r.Username = username).Count > 0
         End Using
     End Function
