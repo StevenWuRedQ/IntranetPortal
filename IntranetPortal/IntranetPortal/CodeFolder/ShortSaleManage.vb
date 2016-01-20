@@ -25,6 +25,12 @@ Public Class ShortSaleManage
         Return Roles.IsUserInRole(userName, "ShortSale-Manager") OrElse Roles.IsUserInRole(userName, "ShortSale-TeamManager")
     End Function
 
+    ''' <summary>
+    ''' Return if user can view this shortsale case
+    ''' </summary>
+    ''' <param name="bble">ShortSale case bble</param>
+    ''' <param name="userName">User Name</param>
+    ''' <returns></returns>
     Public Shared Function IsViewable(bble As String, userName As String) As Boolean
         Dim _viewable = False
         Dim userRoles = Roles.GetRolesForUser(userName)

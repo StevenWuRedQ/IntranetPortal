@@ -300,6 +300,14 @@ Partial Public Class Lead
         End Using
     End Function
 
+    ''' <summary>
+    ''' Leads Request Update action
+    ''' </summary>
+    ''' <param name="bble">Leads BBLE</param>
+    ''' <param name="description">The description that would send to leads owner</param>
+    ''' <param name="priority">The request priority</param>
+    ''' <param name="requestBy">The user that send this request</param>
+    ''' <param name="manager">The user manager</param>
     Public Shared Sub RequestUpdate(bble As String, description As String, priority As String, requestBy As String, manager As String)
         Dim ld = Lead.GetInstance(bble)
 
