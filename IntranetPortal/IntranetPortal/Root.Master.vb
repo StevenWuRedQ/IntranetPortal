@@ -46,6 +46,18 @@ Public Class Root
         End Get
     End Property
 
+    Private _viewable As Boolean? = Nothing
+    Public ReadOnly Property ShortMenuViewable As Boolean
+        Get
+            If _viewable.HasValue Then
+                Return _viewable
+            End If
+
+            _viewable = ShortSaleManage.IsViewable(Nothing, Page.User.Identity.Name)
+            Return _viewable
+        End Get
+    End Property
+
     Sub BindSearchGrid(key As String, appId As Integer)
         key = txtSearchKey.Text
         If String.IsNullOrEmpty(key) Then

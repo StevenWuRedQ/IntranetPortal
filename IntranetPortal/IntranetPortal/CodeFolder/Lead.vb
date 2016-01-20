@@ -300,6 +300,32 @@ Partial Public Class Lead
         End Using
     End Function
 
+    Public Shared Sub RequestUpdate(bble As String, description As String, priority As String, requestBy As String, manager As String)
+        Dim ld = Lead.GetInstance(bble)
+
+        Dim agent = Employee.GetInstance(ld.EmployeeName)
+        If agent IsNot Nothing AndAlso Not String.IsNullOrEmpty(agent.Email) Then
+            Dim emailData As New Dictionary(Of String, String)
+            emailData.Add("Address", ld.LeadsName)
+            emailData.Add("Agent", ld.EmployeeName)
+            emailData.Add("RequestBy", requestBy)
+            emailData.Add("Description", description)
+            emailData.Add("Priority", priority)
+
+            Dim ccAddresses As New List(Of String)
+            Dim requestEmp = Employee.GetInstance(requestBy)
+            ccAddresses.Add(requestEmp.Email)
+            Dim mgr = Employee.GetInstance(manager)
+            ccAddresses.Add(mgr.Email)
+
+            IntranetPortal.Core.EmailService.SendMail(agent.Email, String.Join(";", ccAddresses), "RequestUpdateTemplate", emailData)
+
+            IntranetPortal.Core.SystemLog.Log("RequestUpdate", emailData.ToJsonString, Core.SystemLog.LogCategory.Operation, bble, requestBy)
+        Else
+            Throw New CallbackException("Can not find the agent in the System. Please contact the system admin. Agent Name: " & ld.EmployeeName)
+        End If
+    End Sub
+
     Public Shared Sub Publishing(bble As String)
         Using ctx As New Entities
             Dim ld = ctx.Leads.Find(bble)

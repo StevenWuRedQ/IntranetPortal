@@ -358,6 +358,13 @@ Public Class LeadsSubMenu
     End Sub
 
     Sub SendRequest(bble)
+
+        Lead.RequestUpdate(bble, txtTaskDes.Text, cbTaskImportant.Text, Page.User.Identity.Name, txtRequestUpdateManager.Text)
+
+        Return
+
+
+
         Dim employees = New List(Of String)
         employees.Add(Page.User.Identity.Name)
         employees.Add(txtRequestUpdateCreateby.Text)

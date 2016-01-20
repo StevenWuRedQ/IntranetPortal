@@ -280,4 +280,20 @@ Public Class ShortSaleUnitTest
         Assert.AreEqual(mtgs.Count - 2, newCase.Mortgages.Count)
     End Sub
 
+    <TestMethod()> Public Sub IsViewableTest()
+        'Admin
+        Assert.IsTrue(ShortSaleManage.IsViewable(Nothing, "Chris Yan"))
+
+        'ShortSale Manager
+        Assert.IsTrue(ShortSaleManage.IsViewable(Nothing, "Michael Kay"))
+
+        'ShortSale user
+        Assert.IsTrue(ShortSaleManage.IsViewable(Nothing, "Gladys Best"))
+
+        'legal User
+        Assert.IsTrue(ShortSaleManage.IsViewable(Nothing, "Alex Frias"))
+
+        'Agent
+        Assert.IsFalse(ShortSaleManage.IsViewable(Nothing, "Tom Aronov"))
+    End Sub
 End Class

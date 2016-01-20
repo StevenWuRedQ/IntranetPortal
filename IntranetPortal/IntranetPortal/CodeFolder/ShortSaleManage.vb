@@ -25,6 +25,17 @@ Public Class ShortSaleManage
         Return Roles.IsUserInRole(userName, "ShortSale-Manager") OrElse Roles.IsUserInRole(userName, "ShortSale-TeamManager")
     End Function
 
+    Public Shared Function IsViewable(bble As String, userName As String) As Boolean
+        Dim _viewable = False
+        Dim userRoles = Roles.GetRolesForUser(userName)
+
+        If userRoles.Any(Function(a) a = "Admin" Or a.StartsWith("ShortSale") Or a.StartsWith("Title") Or a.StartsWith("Legal")) Then
+            _viewable = True
+        End If
+
+        Return _viewable
+    End Function
+
     Public Shared Function IsInShortSale(bble As String) As Boolean
         Return ShortSaleCase.IsExist(bble)
     End Function

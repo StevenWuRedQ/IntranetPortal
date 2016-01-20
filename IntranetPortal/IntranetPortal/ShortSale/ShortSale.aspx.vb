@@ -51,6 +51,14 @@ Public Class NGShortSale
                 Return
             End If
 
+            'check if user has permission to view short sale case
+            If Not ShortSaleManage.IsViewable(Nothing, User.Identity.Name) Then
+                Response.Clear()
+                IntranetPortal.Core.SystemLog.Log("UnauthorizedAccess", "Unauthorized to shortsale. " & Request.RawUrl, Core.SystemLog.LogCategory.Operation, Nothing, User.Identity.Name)
+                Response.Write("You are not allow to view this case. If you need further information, please contact ShortSale manager.")
+                Response.End()
+            End If
+
             'View shortsale
             If Not String.IsNullOrEmpty(Request.QueryString("ProcInstId")) Then
                 Dim procInst = WorkflowService.LoadProcInstById(CInt(Request.QueryString("ProcInstId")))
@@ -270,4 +278,8 @@ Public Class NGShortSale
     Public Function GetAllTeam() As String
         Return Team.GetAllTeams.ToJsonString
     End Function
+
+    Private Sub NGShortSale_Init(sender As Object, e As EventArgs) Handles Me.Init
+
+    End Sub
 End Class
