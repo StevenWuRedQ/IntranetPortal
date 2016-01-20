@@ -627,7 +627,7 @@
         </FontClass>
       </PortalNavItem>
        <PortalNavItem Name="AuctionProperties" Text="On Auction" NavigationUrl="/AuctionLeads/AuctionList.aspx" ShowAmount="false">
-        <UserRoles>ShortSale-Manager</UserRoles>
+        <UserRoles>Auction-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-anchor"></i>]]>
         </FontClass>
