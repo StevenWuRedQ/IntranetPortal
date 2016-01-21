@@ -4,14 +4,6 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not String.IsNullOrEmpty(Request.QueryString("id")) Then
             Dim bble = Request.QueryString("id").ToString
-
-            If Not Employee.HasControlLeads(User.Identity.Name, bble) Then
-                Response.Clear()
-                Response.Write("You are not allowed to view this lead.")
-                Response.End()
-                Return
-            End If
-
             LoadData(bble)
             Return
         End If
@@ -40,10 +32,7 @@
                 Dim bble = procInst.GetDataFieldValue("BBLE")
                 If bble IsNot Nothing AndAlso Not String.IsNullOrEmpty(bble) Then
                     If Not Employee.HasControlLeads(User.Identity.Name, bble) Then
-                        Response.Clear()
-                        Response.Write("You are not allowed to view this lead.")
-                        Response.End()
-                        Return
+                        Server.Transfer("/PortalError.aspx?code=1001")
                     End If
 
                     If procInst.ProcessName = "NewLeadsRequest" Then
@@ -68,10 +57,7 @@
                         End If
 
                         If Not Employee.HasControlLeads(User.Identity.Name, bble) Then
-                            Response.Clear()
-                            Response.Write("You are not allowed to view this lead for now.")
-                            Response.End()
-                            Return
+                            Server.Transfer("/PortalError.aspx?code=1001")
                         End If
 
                         LoadData(bble)

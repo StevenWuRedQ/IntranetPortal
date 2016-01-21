@@ -1768,6 +1768,13 @@
       <DependentUpon>WhileAwayMsgs.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="PortalError.aspx.designer.vb">
+      <DependentUpon>PortalError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PortalError.aspx.vb">
+      <DependentUpon>PortalError.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="PreviewFile.aspx.designer.vb">
       <DependentUpon>PreviewFile.aspx</DependentUpon>
     </Compile>
@@ -6659,6 +6666,7 @@
     <Content Include="PopupControl\VendorsPopup.ascx" />
     <Content Include="PopupControl\VendorsPopUpContent.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
+    <Content Include="PortalError.aspx" />
     <Content Include="PreviewFile.aspx" />
     <Content Include="Proiority\ActivityLog.aspx" />
     <Content Include="Proiority\Priority.aspx" />

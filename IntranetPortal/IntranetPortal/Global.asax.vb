@@ -105,8 +105,6 @@ Public Class Global_asax
 
     Private Shared ExcludeUrlFromRefresh As String() = {"GetModifyUserUrl", "GetCaseLastUpDateTime", "LastLastUpdate", "IsActive"}
 
-
-
     Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)
         ' Fires when an error occurs
 
@@ -126,6 +124,7 @@ Public Class Global_asax
                 'UserMessage.AddNewMessage("Portal", "Error in Portal Application", String.Format("Message:{0}, Stack: {1}", ex.Message, ex.StackTrace), "")
                 Core.SystemLog.LogError("Error in Portal Application", ex, HttpContext.Current.Request.RawUrl, HttpContext.Current.User.Identity.Name, Nothing)
                 'IntranetPortal.Core.SystemLog.Log("", String.Format("Message:{0},Request URL:{2}, Stack: {1}", ex.Message, ex.StackTrace, ), "Error", "", )
+                Server.Transfer("/PortalError.aspx")
             Catch exp As Exception
 
             End Try

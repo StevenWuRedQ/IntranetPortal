@@ -180,6 +180,10 @@ Public Class LeadsInfo1
     End Property
 
     Public Sub BindData(bble As String)
+        If Not Employee.HasControlLeads(Page.User.Identity.Name, bble) Then
+            Server.Transfer("/PortalError.aspx?code=1001")
+        End If
+
         hfBBLE.Value = bble
         BindLeadsInfo(bble)
     End Sub
@@ -418,9 +422,11 @@ Public Class LeadsInfo1
 
             If params.Length = 3 Then
                 Dim type = params(2)
-
-                RefreshBBLE(bble, type)
-                'AsynRefreshBBLE(bble, type)
+                Try
+                    RefreshBBLE(bble, type)
+                Catch ex As Exception
+                    Throw New CallbackException(ex.Message, ex)
+                End Try
             End If
         Else
             bble = e.Parameter
@@ -436,8 +442,6 @@ Public Class LeadsInfo1
             doorKnockMapPanel.Visible = False
         End If
 
-        'Debug.WriteLine("Callpanel end:" & DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"))
-        'Debug.WriteLine("Binder Data: " & (DateTime.Now - start).TotalMilliseconds)
         Return
     End Sub
 
@@ -487,7 +491,7 @@ Public Class LeadsInfo1
                 Context.HomeOwnerEmails.Add(e)
                 Context.SaveChanges()
             Else
-                Throw New Exception("This email already exist.")
+                Throw New CallbackException("This email already exist.")
             End If
         End Using
     End Sub

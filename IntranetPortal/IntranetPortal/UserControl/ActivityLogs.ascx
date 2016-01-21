@@ -1053,7 +1053,7 @@
                 <dx:PopupControlContentControl runat="server">
                     <dx:ASPxCheckBoxList ID="cbCateLog" runat="server" ClientInstanceName="cbCateLogClient" Border-BorderStyle="None" OnSelectedIndexChanged="cbCateLog_SelectedIndexChanged">
                         <Items>
-                            <dx:ListEditItem Text="Leads" Value="SalesAgent" />
+                            <dx:ListEditItem Text="Leads" Value="SalesAgent;Status;Approved" />
                             <dx:ListEditItem Text="Short Sale" Value="ShortSale" />
                             <dx:ListEditItem Text="Legal" Value="Legal" />
                             <dx:ListEditItem Text="Title" Value="Title" />

@@ -23,7 +23,7 @@
 Dear {{$Agent}},
 <br />
 <br />
-This is information request for {{$Address}} send by {{$RequestBy}}.
+{{$RequestBy}} has requested information on your lead {{$Address}}.
 <br />
 <br />
 <table style="margin-left: 15px; border: 1px solid black">
@@ -34,7 +34,7 @@ This is information request for {{$Address}} send by {{$RequestBy}}.
     </thead>
     <tbody>        
         <tr>
-            <td style="width:150px">Leads Name:</td>
+            <td style="width:150px">Lead Name:</td>
             <td style="width:300px"><a href="http://portal.myidealprop.com/viewleadsinfo.aspx?id={{$BBLE}}">{{$Address}}</a></td>
         </tr>
         <tr>
@@ -52,7 +52,7 @@ This is information request for {{$Address}} send by {{$RequestBy}}.
     </tbody>
 </table>
 <br />
-Please reply all for your update.
+Please use "Reply All" to respond to this email.
 <br />
 <br />
 Regards,<br />
