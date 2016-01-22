@@ -362,6 +362,23 @@ Public Class Utility
         Return match.Success
     End Function
 
+    ''' <summary>
+    ''' Check if log in user in role or role group
+    ''' </summary>
+    ''' <param name="UserName">Log in user name </param>
+    ''' <param name="rls">role if containt * then check group </param>
+    ''' <returns></returns>
+    Public Shared Function IsUserInRoleGroup(UserName As String, ParamArray rls() As String) As Boolean
+        Dim aRoles = Roles.GetRolesForUser(UserName)
+        Dim _viewable = False
+
+        Dim viewableRoles = rls
+
+        If aRoles.Any(Function(a) viewableRoles.Any(Function(r) a.StartsWith(r.Replace("*", "")))) Then
+            _viewable = True
+        End If
+        Return _viewable
+    End Function
     Public Shared Function GetBoroughByZip(zip As String) As String
         If String.IsNullOrEmpty(zip) Then
             Return ""
