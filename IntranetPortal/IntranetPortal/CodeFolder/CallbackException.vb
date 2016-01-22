@@ -1,4 +1,8 @@
-﻿''' <summary>
+﻿Imports System.Net
+Imports System.Net.Http
+Imports System.Web.Http
+Imports System.Web.Http.Filters
+''' <summary>
 ''' Represents an Exception which caused the call back from devexpress control
 ''' </summary>
 Public Class CallbackException
@@ -69,4 +73,14 @@ Public Class PortalException
         MyBase.New(message)
         Me.Code = code
     End Sub
+End Class
+
+Public Class WebApiException
+    Inherits ExceptionFilterAttribute
+
+    Public Overrides Sub OnException(context As HttpActionExecutedContext)
+        Dim message = context.Exception.Message
+        context.Response = context.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, message)
+    End Sub
+
 End Class

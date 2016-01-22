@@ -70,7 +70,7 @@ Public Class CallBackServices
         Return g.Contacts(Employee.CurrentAppId)
     End Function
 
-    <WebMethod()> _
+    <WebMethod()>
     Public Function AddGroups(gid As Integer, groupName As String, addUser As String) As GroupType
 
         Return GroupType.AddGroups(gid, groupName, addUser)
