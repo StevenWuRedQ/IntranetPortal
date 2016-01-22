@@ -180,6 +180,10 @@ Public Class LeadsInfo1
     End Property
 
     Public Sub BindData(bble As String)
+        If Not Employee.HasControlLeads(Page.User.Identity.Name, bble) Then
+            Server.Transfer("/PortalError.aspx?code=1001")
+        End If
+
         hfBBLE.Value = bble
         BindLeadsInfo(bble)
     End Sub
@@ -406,38 +410,41 @@ Public Class LeadsInfo1
 
     Protected Sub ASPxCallbackPanel2_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         Dim bble = ""
-        'Dim start = DateTime.Now
-        'Debug.WriteLine("Callpanel start:" & DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"))
-        If e.Parameter.StartsWith("Refresh") Then
-            Dim params = e.Parameter.Split("|")
-            bble = params(1)
+        Try
+            'Dim start = DateTime.Now
+            'Debug.WriteLine("Callpanel start:" & DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"))
+            If e.Parameter.StartsWith("Refresh") Then
+                Dim params = e.Parameter.Split("|")
+                bble = params(1)
 
-            If bble = "null" Then
-                bble = hfBBLE.Value
+                If bble = "null" Then
+                    bble = hfBBLE.Value
+                End If
+
+                If params.Length = 3 Then
+                    Dim type = params(2)
+
+                    RefreshBBLE(bble, type)
+
+                End If
+            Else
+                bble = e.Parameter
             End If
 
-            If params.Length = 3 Then
-                Dim type = params(2)
+            contentSplitter.ClientVisible = True
+            BindData(bble)
 
-                RefreshBBLE(bble, type)
-                'AsynRefreshBBLE(bble, type)
+            If CategoryName = "Door Knock" Then
+                doorKnockMapPanel.Visible = True
+                contentSplitter.ClientVisible = False
+            Else
+                doorKnockMapPanel.Visible = False
             End If
-        Else
-            bble = e.Parameter
-        End If
 
-        contentSplitter.ClientVisible = True
-        BindData(bble)
+        Catch ex As Exception
+            Throw New CallbackException(ex.Message, ex)
+        End Try
 
-        If CategoryName = "Door Knock" Then
-            doorKnockMapPanel.Visible = True
-            contentSplitter.ClientVisible = False
-        Else
-            doorKnockMapPanel.Visible = False
-        End If
-
-        'Debug.WriteLine("Callpanel end:" & DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"))
-        'Debug.WriteLine("Binder Data: " & (DateTime.Now - start).TotalMilliseconds)
         Return
     End Sub
 
@@ -487,7 +494,7 @@ Public Class LeadsInfo1
                 Context.HomeOwnerEmails.Add(e)
                 Context.SaveChanges()
             Else
-                Throw New Exception("This email already exist.")
+                Throw New CallbackException("This email already exist.")
             End If
         End Using
     End Sub

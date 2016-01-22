@@ -71,7 +71,33 @@
             var condtion = filtedRecyceled ? '[IsRecycled] = false' : '';
             gridLeads.ApplyFilter(condtion);
         }
-       
+
+        var lastSearchKey = "";
+        function SearchGrid() {
+            if (gridLeads.InCallback()) {
+                AngularRoot.alert("Page is busy, please try later.")
+                return;
+            }
+
+            var key = document.getElementById("QuickSearch").value;
+            if (key.trim() == lastSearchKey) {
+                return;
+            } else {
+                lastSearchKey = key.trim();
+            }
+
+            if (key.trim() == "") {
+                gridLeads.ClearFilter();
+                return;
+            }
+
+            var filterCondition = "";
+            filterCondition = "[PropertyAddress] LIKE '%" + key + "%' OR [BBLE] LIKE '" + key + "%'";
+            filterCondition += " OR [Neighborhood] LIKE '%" + key + "%'";
+            //filterCondition += " OR [Neighborhood] LIKE '%" + key + "%'";
+            gridLeads.ApplyFilter(filterCondition);
+        }
+
     </script>
     <style type="text/css">
         .rand-button:disabled {
@@ -100,7 +126,7 @@
                 </PaneStyle>
                 <Separators Visible="False"></Separators>
                 <Panes>
-                    <dx:SplitterPane Size="70px">
+                    <dx:SplitterPane Size="100px">
                         <ContentCollection>
                             <dx:SplitterContentControl>
                                 <div style="margin: 10px 20px 10px 10px; text-align: left; padding-left: 5px" class="clearfix">
@@ -108,23 +134,32 @@
                                         <i class="fa fa-check-square-o with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
                                         <span style="color: #234b60; font-size: 30px;">
                                             <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Size="30px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
-
                                         </span>
                                         <span style="font-size: 18px; margin-left: 20px">
                                             <span id="gridSelectCount">0</span> selected
                                         </span>
-                                        
                                         <span style="margin-left: 10px">
                                             <input type="checkbox" id="cbfilterOutRecycel" name="cbfilterOutExist" class="font_12" onchange="filterOutRecycel(this.checked)">
                                             <label for="cbfilterOutRecycel" class="font_12" style="padding-top: 20px; float: none">
                                                 <span class="upcase_text">Don't Show Recycled Leads</span>
                                             </label>
                                         </span>
-
                                         <div style="float: right">
                                             <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" Text='<i class="fa  fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Export to Excel"></i>'>                                                                
                                             </asp:LinkButton>
                                             <input type="button" value="Create Leads" class="rand-button rand-button-blue rand-button-pad" onclick="window.location.href = '/LeadsGenerator/LeadsGenerator.aspx'" />
+                                        </div>
+                                        <div style="width: 100%">
+                                            <div style="text-align: center" class="form-inline">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" style="width:300px" placeholder="Search for BBLE, Address, Neighbor..." id="QuickSearch" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid();return false; }">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-secondary" type="button" onclick="SearchGrid()"><i class="fa fa-search tooltip-examples"></i></button>
+                                                    </span>
+                                                </div>
+                                               <%-- <input style="margin-left: 20px; width: 300px; height: 30px;" class="form-control" id="QuickSearch" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid();return false; }">
+                                                <i class="fa fa-search tooltip-examples" style="margin-left: 20px" onclick="SearchGrid()"></i>--%>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -200,9 +235,9 @@
                     <dx:SplitterPane Size="70px">
                         <ContentCollection>
                             <dx:SplitterContentControl>
-                                <table id="assign_leads_footer" style="float: right; position:fixed; bottom:0; height: 70px; background:white">
+                                <table id="assign_leads_footer" style="float: right; position: fixed; bottom: 0; height: 70px; background: white">
                                     <tr>
-                                        <td style="padding-left:30px;">
+                                        <td style="padding-left: 30px;">
                                             <dx:ASPxLabel Text="Select Employee:" ID="ASPxLabel1" runat="server" Font-Size="Large"></dx:ASPxLabel>
                                         </td>
                                         <td>

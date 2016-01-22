@@ -807,11 +807,10 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
           <Property Name="Comments" Type="nvarchar(max)" />
           <Property Name="ActivityDate" Type="datetime" />
           <Property Name="UpdateUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="AssignDate" Type="datetime" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'IntranetPortal.dbo.LeadsInShortSale' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TeamLeadsInZip">
@@ -960,7 +959,10 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
     [LeadsAssignView2].[Type] AS [Type], 
     [LeadsAssignView2].[Comments] AS [Comments], 
     [LeadsAssignView2].[ActivityDate] AS [ActivityDate], 
-    [LeadsAssignView2].[UpdateUser] AS [UpdateUser]
+    [LeadsAssignView2].[UpdateUser] AS [UpdateUser], 
+    [LeadsAssignView2].[AssignDate] AS [AssignDate], 
+    [LeadsAssignView2].[LastUpdate] AS [LastUpdate], 
+    [LeadsAssignView2].[CreateDate] AS [CreateDate]
     FROM [dbo].[LeadsAssignView2] AS [LeadsAssignView2]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="TeamLeadsInZip" EntityType="Self.TeamLeadsInZip" store:Type="Views" store:Schema="dbo">
@@ -1821,6 +1823,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ActivityDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AssignDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="MapDataSet">
           <Key>
@@ -2645,6 +2650,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="LeadsAssignView2">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadsAssignView2">
               <MappingFragment StoreEntitySet="LeadsAssignView2">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="AssignDate" ColumnName="AssignDate" />
                 <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
                 <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />

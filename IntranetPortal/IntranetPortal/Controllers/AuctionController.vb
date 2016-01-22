@@ -18,10 +18,12 @@ Namespace Controllers
         Function GetAuctionProperties() As IQueryable(Of AuctionProperty)
             Return db.AuctionProperties
         End Function
-
+        
         ' GET: api/Auction/5
         <ResponseType(GetType(AuctionProperty))>
         Function GetAuctionProperty(ByVal id As Integer) As IHttpActionResult
+            'Dim message = String.Format("Product with id = {0} not found", id)
+            'Throw New HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.NotFound, message))
             Dim auctionProperty As AuctionProperty = db.AuctionProperties.Find(id)
             If IsNothing(auctionProperty) Then
                 Return NotFound()
@@ -102,5 +104,6 @@ Namespace Controllers
         Private Function AuctionPropertyExists(ByVal id As Integer) As Boolean
             Return db.AuctionProperties.Count(Function(e) e.AuctionId = id) > 0
         End Function
+
     End Class
 End Namespace

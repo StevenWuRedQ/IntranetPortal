@@ -52,7 +52,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.Apartment" Width="1.5" PointX="19.75" PointY="11.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.LatLon_View" Width="1.5" PointX="20.75" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsAssignView" Width="1.5" PointX="2.75" PointY="19.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.LeadsAssignView2" Width="1.5" PointX="20.75" PointY="3.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LeadsAssignView2" Width="2" PointX="20.75" PointY="3.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.MapDataSet" Width="1.5" PointX="4.75" PointY="19.875" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsStatusLog" Width="2" PointX="12.75" PointY="20.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.TeamLeadsInZip" Width="1.5" PointX="15.75" PointY="20.75" />

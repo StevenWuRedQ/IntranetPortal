@@ -53,10 +53,9 @@ Public Class NGShortSale
 
             'check if user has permission to view short sale case
             If Not ShortSaleManage.IsViewable(Nothing, User.Identity.Name) Then
-                Response.Clear()
-                IntranetPortal.Core.SystemLog.Log("UnauthorizedAccess", "Unauthorized to shortsale. " & Request.RawUrl, Core.SystemLog.LogCategory.Operation, Nothing, User.Identity.Name)
-                Response.Write("You are not allow to view this case. If you need further information, please contact ShortSale manager.")
-                Response.End()
+                'Throw New PortalException("1001", "Unauthorized to shortsale.")
+                'IntranetPortal.Core.SystemLog.Log("UnauthorizedAccess", "Unauthorized to shortsale. " & Request.RawUrl, Core.SystemLog.LogCategory.Operation, Nothing, User.Identity.Name)
+                Server.Transfer("/PortalError.aspx?code=1001")
             End If
 
             'View shortsale

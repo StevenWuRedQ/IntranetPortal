@@ -13,6 +13,7 @@ Namespace Controllers
             Return Data.CheckingComplain.GetComplainsResult("", If(ComplaintsManage.IsComplaintsManager(User.Identity.Name), "", User.Identity.Name)).AsQueryable
         End Function
 
+
         <ResponseType(GetType(SP_DOB_Complaints_By_BBLE_Result()))>
         Function GetComplaints(ByVal id As String) As IHttpActionResult
 

@@ -52,7 +52,7 @@ Partial Public Class Team
             unActiveUser.AddRange(UnActiveUsers)
             unActiveUser = unActiveUser.Distinct.ToList
 
-            Return ctx.LeadsAssignView2.Where(Function(la) la.EmployeeName = officeName Or (unActiveUser.Contains(la.EmployeeName) And la.Status <> LeadStatus.InProcess)).OrderBy(Function(la) la.BBLE)
+            Return ctx.LeadsAssignView2.Where(Function(la) la.EmployeeName = officeName Or (unActiveUser.Contains(la.EmployeeName) And la.Status <> LeadStatus.InProcess)).OrderByDescending(Function(la) la.AssignDate)
         End Get
     End Property
 
