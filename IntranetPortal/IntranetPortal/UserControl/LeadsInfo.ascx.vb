@@ -410,37 +410,40 @@ Public Class LeadsInfo1
 
     Protected Sub ASPxCallbackPanel2_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         Dim bble = ""
-        'Dim start = DateTime.Now
-        'Debug.WriteLine("Callpanel start:" & DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"))
-        If e.Parameter.StartsWith("Refresh") Then
-            Dim params = e.Parameter.Split("|")
-            bble = params(1)
+        Try
+            'Dim start = DateTime.Now
+            'Debug.WriteLine("Callpanel start:" & DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"))
+            If e.Parameter.StartsWith("Refresh") Then
+                Dim params = e.Parameter.Split("|")
+                bble = params(1)
 
-            If bble = "null" Then
-                bble = hfBBLE.Value
-            End If
+                If bble = "null" Then
+                    bble = hfBBLE.Value
+                End If
 
-            If params.Length = 3 Then
-                Dim type = params(2)
-                Try
+                If params.Length = 3 Then
+                    Dim type = params(2)
+
                     RefreshBBLE(bble, type)
-                Catch ex As Exception
-                    Throw New CallbackException(ex.Message, ex)
-                End Try
+
+                End If
+            Else
+                bble = e.Parameter
             End If
-        Else
-            bble = e.Parameter
-        End If
 
-        contentSplitter.ClientVisible = True
-        BindData(bble)
+            contentSplitter.ClientVisible = True
+            BindData(bble)
 
-        If CategoryName = "Door Knock" Then
-            doorKnockMapPanel.Visible = True
-            contentSplitter.ClientVisible = False
-        Else
-            doorKnockMapPanel.Visible = False
-        End If
+            If CategoryName = "Door Knock" Then
+                doorKnockMapPanel.Visible = True
+                contentSplitter.ClientVisible = False
+            Else
+                doorKnockMapPanel.Visible = False
+            End If
+
+        Catch ex As Exception
+            Throw New CallbackException(ex.Message, ex)
+        End Try
 
         Return
     End Sub

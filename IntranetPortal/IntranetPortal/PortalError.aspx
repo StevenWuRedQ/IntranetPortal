@@ -3,7 +3,7 @@
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <div class="container" style="width:700px">
         <div style="text-align:center;margin-bottom:30px">
-            <img src="images/MyIdealProptery.png" style="width: 100px; text-align: center" />
+            <img src="/images/MyIdealProptery.png" style="width: 100px; text-align: center" />
         </div>        
         <h2 class="dx-error-message">Error</h2>
         <p></p>
