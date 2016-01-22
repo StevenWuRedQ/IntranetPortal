@@ -853,9 +853,6 @@
     <Compile Include="DataModel\LeadsInfo.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\LeadsInShortSale.vb">
-      <DependentUpon>PortalEntityModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataModel\LeadsInThirdParty.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>

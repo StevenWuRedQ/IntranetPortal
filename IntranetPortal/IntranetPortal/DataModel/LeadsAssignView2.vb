@@ -33,5 +33,8 @@ Partial Public Class LeadsAssignView2
     Public Property Comments As String
     Public Property ActivityDate As Nullable(Of Date)
     Public Property UpdateUser As String
+    Public Property AssignDate As Nullable(Of Date)
+    Public Property LastUpdate As Nullable(Of Date)
+    Public Property CreateDate As Nullable(Of Date)
 
 End Class

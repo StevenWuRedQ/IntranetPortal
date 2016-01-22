@@ -12,6 +12,7 @@ Namespace Controllers
         Function GetSaveHistories(ByVal bble As String) As IHttpActionResult
 
             Dim logs = Core.SystemLog.GetLightLogsByBBLE(LegalCase.TitleSaveLog, bble)
+
             Return Ok(logs)
         End Function
 
