@@ -320,7 +320,8 @@
                                     <i class="fa fa-circle-thin fa-stack-2x"></i>
                                     <i class="fa fa-bars fa-stack-1x"></i>
                                 </span>
-                                <% If (Roles.IsUserInRole(Page.User.Identity.Name, "Admin") Or Roles.IsUserInRole(Page.User.Identity.Name, "Legal-*") Or Roles.IsUserInRole(Page.User.Identity.Name, "Title-*") Or Roles.IsUserInRole(Page.User.Identity.Name, "Construction-*") Or Roles.IsUserInRole(Page.User.Identity.Name, "Entity-*")) Then %>
+                         
+                                <% If (IntranetPortal.Utility.IsUserInRoleGroup(Page.User.Identity.Name, "Admin", "Legal-*", "ShortSale-*", "Title-*", "Construction-*", "Entity-*")) Then %>
                                 <span class="fa-stack icon_btn tooltip-examples" style="margin-left: 20px; font-size: 20px; padding: 5px;" title="Contacts" onclick="OpenLeadsWindow('/PopupControl/VendorsPopUpContent.aspx','Contacts',1036,590)">
                                     <i class="fa fa-circle-thin fa-stack-2x"></i>
                                     <i class="fa fa-users fa-stack-1x"></i>

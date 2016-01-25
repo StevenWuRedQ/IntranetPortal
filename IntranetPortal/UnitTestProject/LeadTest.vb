@@ -51,8 +51,11 @@ Public Class LeadTest
 
     <TestMethod()>
     Public Sub UserInRoleTest()
+        Dim name = "Elizabeth Rodriguez"
 
-
+        Dim inrole2 = Utility.IsUserInRoleGroup(name, {"test", "Entity-*"})
+        ''Dim inRole = System.Web.Security.Roles.IsUserInRole(name, "Entity-*")
+        Assert.IsTrue(inrole2)
     End Sub
 
 End Class

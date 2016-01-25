@@ -39,7 +39,12 @@ Public Class CallBackServices
     Public Function AddContact(contact As PartyContact) As PartyContact
         Dim c = PartyContact.GetContactByName(contact.Name)
         If (c IsNot Nothing) Then
-            Throw New SoapException("Already have " & contact.Name & " in system please change name to identify ", SoapException.ClientFaultCode)
+
+            Dim message = "Already have " & contact.Name & " in system please change name to identify !"
+            'Throw New HttpResponseException(
+            'Request.CreateErrorResponse(HttpStatusCode.NotFound, message))
+
+            Throw New SoapException(message, SoapException.ClientFaultCode)
         End If
         contact.CreateBy = HttpContext.Current.User.Identity.Name
         contact.AppId = Employee.CurrentAppId
