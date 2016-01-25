@@ -113,7 +113,7 @@ Partial Public Class Lead
         End Using
     End Function
 
-    Friend Function IsViewable(name As String) As Boolean
+    Public Function IsViewable(name As String) As Boolean
         If Status = LeadStatus.DeadEnd Or EmployeeName = "Dead Leads" Then
             Return True
         End If
@@ -136,7 +136,7 @@ Partial Public Class Lead
             End If
         End If
 
-        If IntranetPortal.Employee.GetManagedEmployees(name).Contains(owner) Then
+        If IntranetPortal.Employee.GetManagedEmployees(name, False).Contains(owner) Then
             Return True
         End If
 
@@ -145,6 +145,10 @@ Partial Public Class Lead
                 Dim dept = rl.Split("-")(1)
 
                 If IntranetPortal.Employee.GetDeptUsers(dept).Contains(owner) Then
+                    Return True
+                End If
+
+                If IntranetPortal.UserInTeam.GetTeamUsersArray(dept).Contains(owner) Then
                     Return True
                 End If
 

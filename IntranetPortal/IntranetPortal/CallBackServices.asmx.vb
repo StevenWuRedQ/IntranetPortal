@@ -15,7 +15,6 @@ Imports System.Web.Script.Serialization
 Public Class CallBackServices
     Inherits System.Web.Services.WebService
 
-
     <WebMethod()> _
     Public Function GetContact(p As String) As List(Of PartyContact)
         Dim allContact = PartyContact.getAllContact(Employee.CurrentAppId)

@@ -41,6 +41,15 @@ Public Class LeadTest
     End Sub
 
     <TestMethod()>
+    Public Sub LeadViewableTest()
+        Dim bble = "2037130013 "
+        Dim ld = Lead.GetInstance(bble)
+
+        Dim viewable = ld.IsViewable("Michael Gali")
+        Assert.IsTrue(viewable)
+    End Sub
+
+    <TestMethod()>
     Public Sub UserInRoleTest()
 
 

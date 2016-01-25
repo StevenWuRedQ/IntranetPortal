@@ -31,6 +31,12 @@
         }
 
         function NavigateToLeadsInfo(bble) {
+            if (bble == null || bble == "")
+            {
+                AngularRoot.alert("The leads can't load. Please try again.")
+                return;
+            }
+
             if (leadsInfoBBLE == bble)
                 return
             else {

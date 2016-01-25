@@ -19,7 +19,7 @@
         If results.Any(Function(c) c.Status.Trim = "ACT") Then
             rptComplaints.DataSource = results.Where(Function(c) c.Status.Trim = "ACT").ToList
         Else
-            rptComplaints.DataSource = {results.LastOrDefault}
+            rptComplaints.DataSource = {results.FirstOrDefault}
         End If
 
         rptComplaints.DataBind()
