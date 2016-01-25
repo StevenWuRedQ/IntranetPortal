@@ -942,7 +942,6 @@ Partial Public Class ShortSaleCase
         'End If
     End Sub
 
-
     Public Shared Sub ReassignOwner(caseId As Integer, owner As String)
         Dim ssCase = GetCase(caseId)
         If ssCase Is Nothing Then

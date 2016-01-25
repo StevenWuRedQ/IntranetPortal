@@ -18,7 +18,6 @@ Imports System.ServiceModel
 Public Class CallBackServices
     Inherits System.Web.Services.WebService
 
-
     <WebMethod()>
     Public Function GetContact(p As String) As List(Of PartyContact)
         Dim allContact = PartyContact.getAllContact(Employee.CurrentAppId)
@@ -60,17 +59,17 @@ Public Class CallBackServices
                  SoapException.ServerFaultCode, "Hello World")
         Return Utility.Borough2BoroughName(bro)
     End Function
-    <WebMethod()> _
+    <WebMethod()>
     Public Function GetLenderList() As List(Of String)
         Dim l = PartyContact.GetContactByType(PartyContact.ContactType.Lender, Employee.CurrentAppId).Where(Function(c) c.CorpName IsNot Nothing).Select(Function(c) c.CorpName).Distinct().ToList()
         Return l
     End Function
-    <WebMethod()> _
+    <WebMethod()>
     Public Function GetAllGroups() As List(Of GroupType)
         Dim g = GroupType.GetAllGroupType(False)
         Return g
     End Function
-    <WebMethod()> _
+    <WebMethod()>
     Public Function GetContactByGroup(gId? As Integer) As List(Of PartyContact)
         If gId = 0 Then
             Return PartyContact.getAllContact(Employee.CurrentAppId)

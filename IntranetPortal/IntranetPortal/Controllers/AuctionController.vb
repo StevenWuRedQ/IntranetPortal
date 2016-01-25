@@ -24,6 +24,7 @@ Namespace Controllers
         Function GetAuctionProperty(ByVal id As Integer) As IHttpActionResult
             'Dim message = String.Format("Product with id = {0} not found", id)
             'Throw New HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.NotFound, message))
+            Throw New Exception("test")
             Dim auctionProperty As AuctionProperty = db.AuctionProperties.Find(id)
             If IsNothing(auctionProperty) Then
                 Return NotFound()

@@ -1,6 +1,7 @@
 ﻿''' <summary>
 ''' Represents the activity log data related to property
 ''' </summary>
+
 Partial Public Class LeadsActivityLog
     Public Shared Function AddActivityLog(logDate As DateTime, comments As String, bble As String, category As String, empid As Integer, empName As String) As LeadsActivityLog
 
@@ -154,7 +155,6 @@ Partial Public Class LeadsActivityLog
 
             Return logs.OrderByDescending(Function(l) l.ActivityDate).ToList
         End Using
-
     End Function
 
     ''' <summary>
@@ -162,8 +162,6 @@ Partial Public Class LeadsActivityLog
     ''' </summary>
     Enum LogCategory
         SalesAgent
-        Finder
-        Manager
         Task
         DoorknockTask
         Appointment
