@@ -5,55 +5,59 @@ Imports System.Web.Script.Services
 Imports IntranetPortal.Data
 Imports Newtonsoft.Json
 Imports System.Web.Script.Serialization
+Imports System.Web.Http
+Imports System.Net
+Imports System.ServiceModel
 
 ' To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line.
 '<System.Web.Script.Services.ScriptService()> _
-<System.Web.Services.WebService(Namespace:="http://tempuri.org/")> _
-<System.Web.Services.WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)> _
-<ToolboxItem(False)> _
+<System.Web.Services.WebService(Namespace:="http://tempuri.org/")>
+<System.Web.Services.WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)>
+<ToolboxItem(False)>
 <ScriptService>
 Public Class CallBackServices
     Inherits System.Web.Services.WebService
 
 
-    <WebMethod()> _
+    <WebMethod()>
     Public Function GetContact(p As String) As List(Of PartyContact)
         Dim allContact = PartyContact.getAllContact(Employee.CurrentAppId)
         Return allContact
     End Function
 
-    <WebMethod()> _
-    <ScriptMethod(UseHttpGet:=True)> _
+    <WebMethod()>
+    <ScriptMethod(UseHttpGet:=True)>
     Public Function GetContact2() As List(Of PartyContact)
         Dim allContact = PartyContact.getAllContact(Employee.CurrentAppId)
         Return allContact
     End Function
 
-    <WebMethod()> _
+    <WebMethod()>
     Public Sub SaveContact(json As PartyContact)
 
         json.Save()
 
     End Sub
 
-    <WebMethod()> _
+    <WebMethod()>
     Public Function AddContact(contact As PartyContact) As PartyContact
         Dim c = PartyContact.GetContactByName(contact.Name)
+        Dim message = "Already have " & contact.Name & " in system please change name to identify !"
         If (c IsNot Nothing) Then
-
-            Dim message = "Already have " & contact.Name & " in system please change name to identify !"
-            'Throw New HttpResponseException(
-            'Request.CreateErrorResponse(HttpStatusCode.NotFound, message))
-
-            Throw New SoapException(message, SoapException.ClientFaultCode)
+            c.Name = "Same"
+            Return c
         End If
         contact.CreateBy = HttpContext.Current.User.Identity.Name
         contact.AppId = Employee.CurrentAppId
         contact.Save()
         Return contact
     End Function
-    <WebMethod()> _
+
+
+    <WebMethod()>
     Public Function GetBroughName(bro As Integer) As String
+        Throw New SoapException("Hello World Exception",
+                 SoapException.ServerFaultCode, "Hello World")
         Return Utility.Borough2BoroughName(bro)
     End Function
     <WebMethod()> _

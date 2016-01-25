@@ -1,14 +1,17 @@
-﻿Public Class LegalFollowUps
+﻿Imports DevExpress.Data
+Imports DevExpress.Web
+Public Class LegalFollowUps
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not IsPostBack) Then
+
             BindGrid()
+
         End If
     End Sub
     Sub BindGrid()
         Dim mCases = IntranetPortal.Data.LegalCase.GetFollowUpCases
-
         gdCases.DataSource = mCases
         gdCases.DataBind()
     End Sub

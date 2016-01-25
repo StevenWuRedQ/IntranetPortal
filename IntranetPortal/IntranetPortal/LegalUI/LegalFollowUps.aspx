@@ -3,6 +3,7 @@
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
     <script>
         function SearchGrid() {
 
@@ -21,6 +22,13 @@
             AllLeadsGridClient.ApplyFilter(filterCondition);
             return false;
         }
+        function FollowUp30Days()
+        {
+            var today = moment().format('MM/DD/YYYY');
+            var dayAfter30 = moment().add(31, 'days').format('MM/DD/YYYY');
+            var filterCondition = "[FollowUp] >= #" + today + "# AND [FollowUp] < #" + dayAfter30 + "#";
+            AllLeadsGridClient.ApplyFilter(filterCondition);
+        }
         function ShowCaseInfo(BBLE)
         {
             var url = '/LegalUI/LegalUI.aspx?bble=' + BBLE;
@@ -34,10 +42,11 @@
     <div class="container" style="margin-top:20px">
      
         <div class="row">
-            <div class="col-md-4 col-md-offset-8 form-inline">
+            <div class="col-md-5 col-md-offset-7 form-inline">
+                <button type="button" class="btn btn-primary" onclick="FollowUp30Days()">Follow Ups next 30 days</button>
                <input type="text" style="margin-right: 20px" id="QuickSearch" class="form-control"  placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); return false;}"/> 
                 <i class="fa fa-search icon_btn tooltip-examples  grid_buttons"  style="margin-right: 20px;font-size:19px" onclick="SearchGrid()" title="search" ></i> 
-                <asp:LinkButton ID="lbExportExcel" runat="server" Text="<i class='fa fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples' title='export to excel'></i>" OnClick="lbExportExcel_Click"></asp:LinkButton>                
+                <asp:LinkButton ID="lbExportExcel" runat="server" Text="<i class='fa fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples' style='color:green' title='export to excel'></i>" OnClick="lbExportExcel_Click"></asp:LinkButton>                
             </div>
         </div>
         <div class="row" style="margin-top:10px">
@@ -54,11 +63,14 @@
                     <dx:GridViewDataColumn FieldName="Attorney">
                         <Settings HeaderFilterMode="CheckedList"/>
                     </dx:GridViewDataColumn>
-                    <dx:GridViewDataDateColumn FieldName="FollowUp"></dx:GridViewDataDateColumn>
+                    <dx:GridViewDataDateColumn FieldName="FollowUp" SortOrder="Ascending">
+                        <Settings HeaderFilterMode="CheckedList"/>
+                    </dx:GridViewDataDateColumn>
                     <dx:GridViewDataColumn FieldName="LegalStatusString" Caption="Stage">
                         <Settings HeaderFilterMode="CheckedList"/>
                     </dx:GridViewDataColumn>
-                    <dx:GridViewDataDateColumn FieldName="SaleDate" Caption="Auction Date">                       
+                    <dx:GridViewDataDateColumn FieldName="SaleDate" Caption="Auction Date"> 
+                                 <Settings HeaderFilterMode="CheckedList"/>             
                     </dx:GridViewDataDateColumn>
                     <dx:GridViewDataColumn FieldName="ResearchBy" Caption="Researcher">
                         <Settings HeaderFilterMode="CheckedList"/>
