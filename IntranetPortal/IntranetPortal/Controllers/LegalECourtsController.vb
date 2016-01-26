@@ -44,6 +44,7 @@ Namespace Controllers
 
             Return Ok(legalECourt)
         End Function
+
         ' PUT: api/LegalECourts/5
         <ResponseType(GetType(Void))>
         Function PutLegalECourt(ByVal id As Integer, ByVal legalECourt As LegalECourt) As IHttpActionResult
@@ -107,5 +108,6 @@ Namespace Controllers
         Private Function LegalECourtExists(ByVal id As Integer) As Boolean
             Return db.LegalECourts.Count(Function(e) e.Id = id) > 0
         End Function
+
     End Class
 End Namespace

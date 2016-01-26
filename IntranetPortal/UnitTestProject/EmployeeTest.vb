@@ -13,4 +13,14 @@ Public Class EmployeeTest
         Assert.IsTrue(el IsNot Nothing)
     End Sub
 
+    <TestMethod>
+    Public Sub GetUserRoles_ReturnRolesWithStar()
+
+        Dim roles = System.Web.Security.Roles.GetRolesForUser("Michael Kay")
+        Assert.IsTrue(roles.Contains("ShortSale-*"))
+
+        roles = System.Web.Security.Roles.GetRolesForUser("Michael Gali")
+        Assert.IsTrue(roles.Contains("OfficeManager-*"))
+    End Sub
+
 End Class

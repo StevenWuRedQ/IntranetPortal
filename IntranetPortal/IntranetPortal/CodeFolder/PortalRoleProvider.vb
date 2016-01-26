@@ -68,6 +68,16 @@
         Using context As New Entities
             Dim roles = context.UsersInRoles.Where(Function(u) u.Username = username And u.ApplicationName = ApplicationName).Select(Function(u) u.Rolename).ToList
 
+            If roles.Any(Function(r) r.Contains("-")) Then
+                Dim tmp As New List(Of String)
+
+                For Each rl In roles.Where(Function(r) r.Contains("-")).Distinct
+                    tmp.Add(String.Format("{0}-*", rl.Split("-")(0)))
+                Next
+
+                roles.AddRange(tmp.Distinct)
+            End If
+
             Return roles.ToArray()
         End Using
     End Function

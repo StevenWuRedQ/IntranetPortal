@@ -3,6 +3,7 @@ Imports System.Web.Http
 Imports System.Web.Http.Description
 
 Namespace Controllers
+    <Authorize(Roles:="Admin,Auction-Manager,OfficeManager-*")>
     Public Class LeadsController
         Inherits ApiController
 
@@ -10,6 +11,10 @@ Namespace Controllers
         <ResponseType(GetType(Void))>
         Public Function PostAssignLeads(bble As String, <FromBody> userName As String) As IHttpActionResult
             Try
+                If String.IsNullOrEmpty(userName) Then
+                    Throw New Exception("User name can't be empty.")
+                End If
+
                 Lead.AssignLeads(bble, userName, HttpContext.Current.User.Identity.Name)
                 Return Ok()
             Catch ex As Exception
@@ -22,7 +27,8 @@ Namespace Controllers
         Public Function GetManagedAgents() As IHttpActionResult
             Try
                 Dim userName = HttpContext.Current.User.Identity.Name
-                Return Ok({userName})
+                Dim emps = Employee.GetMyEmployees(userName)
+                Return Ok(emps.Select(Function(e) e.Name).ToArray)
             Catch ex As Exception
                 Throw
             End Try
