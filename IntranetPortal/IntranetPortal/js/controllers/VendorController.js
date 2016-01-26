@@ -99,6 +99,11 @@
         success(function (data, status, headers, config) {
             // this callback will be called asynchronously
             // when the response is available
+            if (data.d.Name == 'Same')
+            {
+                alert("Already have " + $scope.addContact.Name + " in system please change name to identify !")
+                return;
+            }
             $scope.allContacts.push(data.d);
             $scope.InitData($scope.allContacts);
             var addContact = data.d;
@@ -120,7 +125,7 @@
             alert("Add contact error: " + message);
         });
     }
-
+    
     $scope.filterContactFunc = function (e, type) {
         //$(e).parent().find("li").removeClass("popup_menu_list_item_active");
         //$(e).addClass("popup_menu_list_item_active");
