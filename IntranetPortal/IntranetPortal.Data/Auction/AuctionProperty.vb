@@ -1,8 +1,16 @@
 ﻿Imports IntranetPortal.Core
+Imports Newtonsoft.Json.Linq
 ''' <summary>
 ''' Represent Auction property object and related operations
 ''' </summary>
 Public Class AuctionProperty
+
+    Public Shared Function GetAuctionProperty(id As Integer) As AuctionPropertyView
+        Using ctx As New PortalEntities
+            Return ctx.AuctionPropertyViews.Find(id)
+        End Using
+    End Function
+
     Public Shared Function Import(fileName As String, importBy As String) As Integer
 
         Dim auctions = LoadAuctionProperties(fileName)
@@ -15,8 +23,15 @@ Public Class AuctionProperty
 
             ctx.SaveChanges()
         End Using
+
+        InitData(auctions, importBy)
+
         Return auctions.Count
     End Function
+
+    Private Shared Sub InitData(props As AuctionProperty(), updateBy As String)
+        DataLoopRule.AddRules(props.Select(Function(p) p.BBLE).ToArray, DataLoopRule.DataLoopType.GeneDataAndMortgage, updateBy)
+    End Sub
 
     Public Shared Function LoadAuctionProperties(fileName As String) As AuctionProperty()
         Dim ds = ExcelHelper.LoadDataFromExcel(fileName)

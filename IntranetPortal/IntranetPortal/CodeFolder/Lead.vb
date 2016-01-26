@@ -557,6 +557,21 @@ Partial Public Class Lead
     End Sub
 
     ''' <summary>
+    ''' Assign single lead
+    ''' </summary>
+    ''' <param name="bble">Leads bble</param>
+    ''' <param name="userName">Employee name who assigned to</param>
+    ''' <param name="assignBy">Assigned User</param>
+    Public Shared Sub AssignLeads(bble As String, userName As String, assignBy As String)
+        Dim emp = Employee.GetInstance(userName)
+        If emp Is Nothing Then
+            Throw New Exception("Can't find employee. Name: " & userName)
+        End If
+
+        BatchAssignLeads({bble}, userName, emp.EmployeeID, assignBy)
+    End Sub
+
+    ''' <summary>
     ''' Assign multiple leads at one time
     ''' </summary>
     ''' <param name="bbles">the list of BBLE</param>

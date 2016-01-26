@@ -101,5 +101,6 @@
         HomeOwner = 3
         GeneralData = 4
         OnlyMortgage = 7
+        GeneDataAndMortgage = 8
     End Enum
 End Class

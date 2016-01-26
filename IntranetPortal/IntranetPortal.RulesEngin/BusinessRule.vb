@@ -403,6 +403,14 @@ InitialLine:
                     rule.Complete()
                     Log("Failed to Inital Mortgage Amount Data. BBLE: " & bble)
                 End If
+            Case Core.DataLoopRule.DataLoopType.GeneDataAndMortgage
+                If DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, False) Then
+                    rule.Complete()
+                    Log("Initial Data Message " & bble & String.Format(" BBLE: {0} Morgatage Amount data is loaded.", bble))
+                Else
+                    rule.Complete()
+                    Log("Failed to Inital GeneData And Mortgages Amount Data. BBLE: " & bble)
+                End If
             Case Else
                 Dim lead = LeadsInfo.GetInstance(bble)
                 If String.IsNullOrEmpty(lead.Owner) Then

@@ -9,28 +9,42 @@ Imports System.Web.Http.Description
 Imports IntranetPortal.Data
 
 Namespace Controllers
+    <Authorize(Roles:="Admin,Auction-Manager")>
     Public Class AuctionPropertiesController
         Inherits System.Web.Http.ApiController
 
         Private db As New PortalEntities
 
         ' GET: api/Auction
-        Function GetAuctionProperties() As IQueryable(Of AuctionProperty)
-            Return db.AuctionProperties
+        Function GetAuctionProperties() As IQueryable(Of AuctionPropertyView)
+            Dim today = DateTime.Today
+            Return db.AuctionPropertyViews.Where(Function(a) a.AuctionDate > today)
         End Function
-        
+
+        Function GetAuctionProperties(showAll As Boolean?, unassigned As Boolean?) As IQueryable(Of AuctionPropertyView)
+            Dim result = GetAuctionProperties()
+            If showAll Then
+                result = db.AuctionPropertyViews
+            End If
+
+            If unassigned Then
+                result = result.Where(Function(a) a.EmployeeName Is Nothing)
+            End If
+
+            Return result
+        End Function
+
         ' GET: api/Auction/5
-        <ResponseType(GetType(AuctionProperty))>
+        <ResponseType(GetType(AuctionPropertyView))>
         Function GetAuctionProperty(ByVal id As Integer) As IHttpActionResult
             'Dim message = String.Format("Product with id = {0} not found", id)
             'Throw New HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.NotFound, message))
-            Throw New Exception("test")
-            Dim auctionProperty As AuctionProperty = db.AuctionProperties.Find(id)
-            If IsNothing(auctionProperty) Then
+            Dim prop As AuctionPropertyView = AuctionProperty.GetAuctionProperty(id)
+            If IsNothing(prop) Then
                 Return NotFound()
             End If
 
-            Return Ok(auctionProperty)
+            Return Ok(prop)
         End Function
 
         ' PUT: api/Auction/5

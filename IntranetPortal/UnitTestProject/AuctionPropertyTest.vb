@@ -1,6 +1,8 @@
 ﻿Imports System.Text
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports IntranetPortal.Data
+Imports IntranetPortal.Controllers
+Imports System.Web.Http.Results
 
 <TestClass()> Public Class AuctionPropertyTest
 
@@ -32,6 +34,18 @@ Imports IntranetPortal.Data
         Assert.AreEqual("SHAPIRO, DICARO & BARAK, LLC", prop.PlaintiffAttorney)
         Assert.AreEqual("631-844-9611", prop.AttorneyPhone)
         Assert.AreEqual("Mortgage Foreclosure", prop.ForeclosureType)
+    End Sub
+
+    <TestMethod()> Public Sub GetAuctionProperty_ShouldReturnProperty()
+        Dim id = 1
+        Dim controller = New AuctionPropertiesController
+        Dim result = CType(controller.GetAuctionProperty(id), OkNegotiatedContentResult(Of AuctionProperty))
+
+        Assert.IsNotNull(result)
+        Assert.AreEqual(id, result.Content.AuctionId)
+
+        'Dim ldi = IntranetPortal.LeadsInfo.GetInstance(result.Content.BBLE)
+        'Assert.AreEqual(ldi.C1stMotgrAmt, result.Content.LeadsInfo)
     End Sub
 
 End Class

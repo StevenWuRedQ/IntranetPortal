@@ -93,6 +93,9 @@
     <Compile Include="ADOEntity\AuctionProperty.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\AuctionPropertyView.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\DataStatu.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
