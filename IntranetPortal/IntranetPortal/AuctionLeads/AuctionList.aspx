@@ -79,17 +79,15 @@
                     $scope.auction = data;
                 }).error(function () { alert('Get auction propertiy list error! scope id:' + $scope.Id) });
             };
-            $scope.AssginAuctionLeads = function(auction)
-            {
+            $scope.AssginAuctionLeads = function (auction) {
                 $http.post('/api/Leads/Assign/' + auction.BBLE, JSON.stringify(auction.AgentAssignedChoise)).success(function (response) {
                     auction.EmployeeName = auction.AgentAssignedChoise;
                     alert('Assign to ' + auction.EmployeeName + ' Succeed !');
                 });
-                
+
             }
-            
-            $scope.SaveAuction = function(auction)
-            {
+
+            $scope.SaveAuction = function (auction) {
                 $http.put('/api/AuctionProperties/' + auction.AuctionId, auction).success(function (response) {
                     alert('Save auction ' + auction.Address + ' Succeed !');
                 });
@@ -139,6 +137,7 @@
              }]);
 
 
-
+       
     </script>
+    <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>
 </asp:Content>
