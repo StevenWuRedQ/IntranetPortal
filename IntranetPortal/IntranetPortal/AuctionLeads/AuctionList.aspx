@@ -99,9 +99,9 @@
 
             $scope.AuctionList = demoList;
             $scope.Filters = [
-                { name: 'All Auctions', listUrl: '/api/AuctionProperties/?showAll=true' },
+                { name: 'All Auctions', listUrl: '/api/AuctionProperties/?showAll=true&unassigned=false' },
                 { name: 'Open Auctions', listUrl: '/api/AuctionProperties' },
-                { name: 'Unassigned Auctions', listUrl: '/api/AuctionProperties/?unassigned=true' },
+                { name: 'Unassigned Auctions', listUrl: '/api/AuctionProperties/?unassigned=true&showAll=false' },
             ];
 
             $scope.LoadLeads = function (filter) {

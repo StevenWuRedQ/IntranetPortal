@@ -18,20 +18,29 @@ controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootSc
         $rootScope.AlertModal.close();
     }
 
-    $rootScope.confirm = function (message) {
+    $rootScope.confirm = function (message,confrimFunc) {
         $rootScope.confirmMessage = message ? message : '';
         $rootScope.ConfirmModal = $uibModal.open({
             templateUrl: 'ConfirmModal'
         });
+        $rootScope.ConfirmModal.confrimFunc = confrimFunc;
         return $rootScope.ConfirmModal.result;
     }
 
     $rootScope.confirmYes = function () {
         $rootScope.ConfirmModal.close(true);
+        if ($rootScope.ConfirmModal.confrimFunc)
+        {
+            $rootScope.ConfirmModal.confrimFunc(true);
+        }
+       
     }
 
     $rootScope.confirmNo = function () {
         $rootScope.ConfirmModal.close(false);
+        if ($rootScope.ConfirmModal.confrimFunc) {
+            $rootScope.ConfirmModal.confrimFunc(false);
+        }
     }
 
 
