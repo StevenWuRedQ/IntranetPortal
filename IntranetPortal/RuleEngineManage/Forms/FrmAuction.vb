@@ -17,6 +17,9 @@ Public Class FrmAuction
 
     Private Sub btnNotifyRule_Click(sender As Object, e As EventArgs) Handles btnNotifyRule.Click
         Dim rule As New IntranetPortal.RulesEngine.AuctionNotifyRule
+        If cbkIsWeekly.Checked Then
+            rule.IsWeekly = True
+        End If
         rule.Execute()
     End Sub
 End Class

@@ -27,6 +27,7 @@ Partial Class FrmAuction
         Me.openDialog = New System.Windows.Forms.OpenFileDialog()
         Me.btnImport = New System.Windows.Forms.Button()
         Me.btnNotifyRule = New System.Windows.Forms.Button()
+        Me.cbkIsWeekly = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'btnSelect
@@ -60,18 +61,30 @@ Partial Class FrmAuction
         '
         'btnNotifyRule
         '
-        Me.btnNotifyRule.Location = New System.Drawing.Point(13, 70)
+        Me.btnNotifyRule.Location = New System.Drawing.Point(12, 93)
         Me.btnNotifyRule.Name = "btnNotifyRule"
         Me.btnNotifyRule.Size = New System.Drawing.Size(133, 23)
         Me.btnNotifyRule.TabIndex = 3
         Me.btnNotifyRule.Text = "Execute Notify Rule"
         Me.btnNotifyRule.UseVisualStyleBackColor = True
         '
+        'cbkIsWeekly
+        '
+        Me.cbkIsWeekly.AutoSize = True
+        Me.cbkIsWeekly.Location = New System.Drawing.Point(13, 70)
+        Me.cbkIsWeekly.Name = "cbkIsWeekly"
+        Me.cbkIsWeekly.Size = New System.Drawing.Size(118, 17)
+        Me.cbkIsWeekly.TabIndex = 4
+        Me.cbkIsWeekly.Text = "Weekly Notification"
+        Me.cbkIsWeekly.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.cbkIsWeekly.UseVisualStyleBackColor = True
+        '
         'FrmAuction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(295, 261)
+        Me.Controls.Add(Me.cbkIsWeekly)
         Me.Controls.Add(Me.btnNotifyRule)
         Me.Controls.Add(Me.btnImport)
         Me.Controls.Add(Me.TxtFileName)
@@ -88,4 +101,5 @@ Partial Class FrmAuction
     Friend WithEvents openDialog As OpenFileDialog
     Friend WithEvents btnImport As Button
     Friend WithEvents btnNotifyRule As Button
+    Friend WithEvents cbkIsWeekly As CheckBox
 End Class

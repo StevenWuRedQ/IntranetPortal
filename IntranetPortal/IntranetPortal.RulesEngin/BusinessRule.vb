@@ -705,12 +705,8 @@ Public Class DOBComplaintsCheckingRule
                 Catch ex As Exception
                     Log("Sending Notify Email " & name, ex)
                 End Try
-
             Next
-
-
         End If
-
     End Sub
 End Class
 

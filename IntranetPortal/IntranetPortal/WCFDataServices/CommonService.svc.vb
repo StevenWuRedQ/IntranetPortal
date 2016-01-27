@@ -231,7 +231,6 @@ Public Class CommonService
 
         Dim followUps = Data.LegalCase.GetFollowUpCases().Where(Function(l) l.FollowUp >= startDateTime AndAlso l.FollowUp <= endDateTime).ToList
 
-
         For Each lc In followUps
             Try
                 IntranetPortal.LegalCaseManage.ReminderFollowUp(lc)

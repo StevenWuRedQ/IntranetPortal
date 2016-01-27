@@ -6,10 +6,10 @@ Imports IntranetPortal.Data
 Public Class AuctionNotifyRule
     Inherits BaseRule
 
+    Public Property IsWeekly As Boolean = False
+
     Public Overrides Sub Execute()
-
         Dim users = Roles.GetUsersInRole("Auction-Manager")
-
         Dim emails As New List(Of String)
         For Each name In users
             Dim emp = Employee.GetInstance(name)
@@ -19,8 +19,20 @@ Public Class AuctionNotifyRule
         Next
 
         Using client As New PortalService.CommonServiceClient
-            client.SendEmailByControl(String.Join(";", emails), "The coming Auction Properties - " & DateTime.Today.ToShortDateString, "AuctionDailyReport", Nothing)
+            Dim parms As New Dictionary(Of String, String)
+            parms.Add("IsWeekly", IsWeekly)
+
+            Dim subject = "The coming Auction Properties - " & DateTime.Today.ToShortDateString
+            If IsWeekly Then
+                subject = "The Auction Properties in the follow week"
+            End If
+
+            client.SendEmailByControl(String.Join(";", emails), subject, "AuctionDailyReport", parms)
         End Using
     End Sub
 
+    Public Enum NotifyType
+        Weekly
+        Daily
+    End Enum
 End Class

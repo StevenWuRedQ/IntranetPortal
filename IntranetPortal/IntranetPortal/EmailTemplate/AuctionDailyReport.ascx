@@ -23,7 +23,7 @@
 Dear Manager,
 <br />
 <br />
-Below is report of Auction Properties in the next 7 days. Please review.
+Below is report of Auction Properties <% If IsWeekly Then %> in the next 7 days<%else %> today<% End if %>. Please review.
 <br />
 <br />
 <table style="margin-left: 15px; border: 1px solid black">

@@ -13,7 +13,9 @@ Public Class WebForm3
         End If
 
         Me.DeadleadsReport.BindData(Nothing)
-        Me.AuctionDailyReport.BindData(Nothing)
+        Dim params As New Dictionary(Of String, String)
+        params.Add("IsWeekly", True)
+        Me.AuctionDailyReport.BindData(params)
     End Sub
 
     Protected Sub Button1_Click(sender As Object, e As EventArgs)
