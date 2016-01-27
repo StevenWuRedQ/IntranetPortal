@@ -70,7 +70,7 @@
                                                     <ui-select multiple ng-model="x.input1" ng-change="updateListFilter(x)">
                                                     <ui-select-match placeholder="Choose items">{{$item}}</ui-select-match>
                                                     <ui-select-choices repeat="o in f.options | filter: $search.search">
-                                                    {{o}}
+                                                   
                                                 </ui-select-choices>
                                             </ui-select>
                                                 </span>

@@ -7,7 +7,7 @@ var batch = require('gulp-batch');
 var rename = require('gulp-rename');
 var config = {
     //Include all js files but exclude any min.js files
-    src: ['js/*.js', 'js/controllers/*.js'],
+    src: ['js/*.js', 'js/controllers/*.js', '!js/PortalHttpFactory.js'],
 }
 
 //delete the output file(s)
