@@ -1,8 +1,11 @@
 ﻿
 
-<h2> {{auction.Address}}</h2>
 
-<div class="wx_scorll_list" data-bottom="50">
+<div class="row">
+    <div class="col-md-10"><h3> {{auction.Address}}</h3></div>
+    <div class="col-md-2"><button class="btn btn-primary" type="button" ng-click="SaveAuction(auction)">Save</button></div>
+</div>
+<div class="wx_scorll_list" data-bottom="90" style="margin-top:5px">
     <table class="table table-striped">
         <tr style="display:none">
             <td>BBLE</td>
@@ -25,17 +28,85 @@
         <tr><td>Plaintiff Attorney</td><td>{{auction.PlaintiffAttorney}}</td></tr>
         <tr><td>Attorney Phone</td><td>{{auction.AttorneyPhone}}</td></tr>
         <tr><td>Foreclosure Type</td><td>{{auction.ForeclosureType}}</td></tr>
-        <tr><td>Agent Assigned</td><td>{{auction.AgentAssigned}}</td></tr>
-        <tr><td>Grade</td><td>{{auction.Grade}}</td></tr>
+        <tr>
+            <td>Agent Assigned</td>
+            <td>
+              
+                <div ng-if="auction.EmployeeName!=null">
+                    {{auction.EmployeeName}}
+                </div>
+                <div class="row" ng-if="auction.EmployeeName==null">
+                    <div class="col-md-8">
+                        <ui-select ng-model="auction.AgentAssignedChoise">
+                            <ui-select-match placeholder="Select agent">{{$select.selected}}</ui-select-match>
+                            <ui-select-choices repeat="o in AgentsData| filter: $select.search">
+                                <div ng-bind-html="o | highlight:$select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary" ng-click="AssginAuctionLeads(auction);">Assign</button>
+                    </div>
+                </div>
+               
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Grade
+            </td>
+            <td>
+                <select type="text" class="form-control" ng-model="auction.Grade">
+                    <option></option>
+                    <option>Bad</option>
+                    <option>Fair</option>
+                    <option>Good</option>
+                    <option>Excellent</option>
+                </select>
+            </td>
+        </tr>
         <tr><td>TaxWater Combo</td><td>{{auction.TaxWaterCombo|currency}}</td></tr>
         <tr><td>DOBViolation</td><td>{{auction.DOBViolation |currency}}</td></tr>
         <tr><td>PreviousAuctionDate</td><td>{{auction.PreviousAuctionDate|date:'MM/dd/yyyy HH:mm'}}</td></tr>
         <tr><td>Deed Recorded</td><td>{{auction.DeedRecorded |date:'MM/dd/yyyy HH:mm'}}</td></tr>
-        <tr><td>Max Auction Bid</td><td>{{auction.MaxAuctionBid}}</td></tr>
-        <tr><td>Renovated Value</td><td>{{auction.RenovatedValue|currency}}</td></tr>
-        <tr><td>Points</td><td>{{auction.Points}}</td></tr>
-        <tr><td>Lead Type</td><td>{{auction.LeadType}}</td></tr>
-        <tr><td>Description</td><td>{{auction.Description}}</td></tr>
+        <tr>
+            <td>Max Auction Bid</td>
+            <td>
+                <input type="text" class="form-control" ng-model="auction.MaxAuctionBid" value="auction.MaxAuctionBid|currency">
+            </td>
+        </tr>
+        <tr>
+            <td>Renovated Value</td>
+            <td>
+                <input type="text" class="form-control" ng-model="auction.RenovatedValue" value="auction.RenovatedValue|currency">
+                {{auction.RenovatedValue|currency}}
+            </td>
+        </tr>
+        <tr>
+            <td>Points</td>
+            <td>
+                {{auction.Points}}
+            </td>
+        </tr>
+        <tr>
+            <td>Lead Type</td>
+            <td>
+                <select type="text" class="form-control" ng-model="auction.LeadType">
+                    <option></option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+                </select>
+
+            </td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>
+                <textarea type="text" class="form-control" ng-model="auction.Description" placeholder="Write description" style="min-height:30px"></textarea>
+            </td>
+        </tr>
 
     </table>
 </div>
