@@ -2,9 +2,9 @@
 
 Partial Public Class SystemLog
 
-    Public Shared Sub Log(title As String, description As String, category As LogCategory, bble As String, createBy As String)
-        Log(title, description, category.ToString, bble, createBy)
-    End Sub
+    Public Shared Function Log(title As String, description As String, category As LogCategory, bble As String, createBy As String) As Integer
+        Return Log(title, description, category.ToString, bble, createBy)
+    End Function
 
     ''' <summary>
     ''' Return system log object by log Id
@@ -25,24 +25,28 @@ Partial Public Class SystemLog
     ''' <param name="category">Category</param>
     ''' <param name="bble">Property BBLE</param>
     ''' <param name="createBy">Create User</param>
-    Public Shared Sub Log(title As String, description As String, category As String, bble As String, createBy As String)
+    Public Shared Function Log(title As String, description As String, category As String, bble As String, createBy As String) As Integer
         Try
             Using ctx As New CoreEntities
-                Dim log As New SystemLog
-                log.Title = title
-                log.BBLE = bble
-                log.Description = description
-                log.Category = category
-                log.CreateDate = DateTime.Now
-                log.CreateBy = createBy
+                Dim lg As New SystemLog
+                lg.Title = title
+                lg.BBLE = bble
+                lg.Description = description
+                lg.Category = category
+                lg.CreateDate = DateTime.Now
+                lg.CreateBy = createBy
 
-                ctx.SystemLogs.Add(log)
+                ctx.SystemLogs.Add(lg)
                 ctx.SaveChanges()
+
+                Return lg.LogId
             End Using
         Catch ex As Exception
 
         End Try
-    End Sub
+
+        Return -1
+    End Function
 
     ''' <summary>
     ''' Return system log list by log title and datetime or category
@@ -103,18 +107,20 @@ Partial Public Class SystemLog
         End Using
     End Function
 
-    Public Shared Sub LogError(title As String, ex As Exception, url As String, createby As String, bble As String)
+    Public Shared Function LogError(title As String, ex As Exception, url As String, createby As String, bble As String) As Integer
 
         If TypeOf ex Is ThreadAbortException Then
-            Return
+            Return -1
         End If
 
         Try
-            Log(title, String.Format("Error in Portal Application. Message:{0}, Request URL: {2}. Stack: {1}", ex.Message, ex.ToJsonString, url), LogCategory.Error, bble, createby)
+            Return Log(title, String.Format("Message:{0}, Request URL: {2}. Stack: {1}", ex.Message, ex.ToJsonString, url), LogCategory.Error, bble, createby)
         Catch exp As Exception
 
         End Try
-    End Sub
+
+        Return -1
+    End Function
 
     Public Enum LogCategory
         [Error]

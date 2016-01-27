@@ -1,5 +1,6 @@
 ﻿Imports System.Net
 Imports System.Net.Http
+Imports System.Threading
 Imports System.Web.Http
 Imports System.Web.Http.Filters
 ''' <summary>
@@ -79,8 +80,20 @@ Public Class WebApiException
     Inherits ExceptionFilterAttribute
 
     Public Overrides Sub OnException(context As HttpActionExecutedContext)
-        Dim message = context.Exception.Message
-        context.Response = context.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, message)
+        Dim ex = context.Exception
+        Dim message = ex.Message
+
+        If TypeOf ex Is HttpResponseException Then
+            Return
+        End If
+
+        If TypeOf ex Is PortalException Then
+            context.Response = context.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, message)
+            Return
+        End If
+
+        Dim errorId = Core.SystemLog.LogError("WebApiError", ex, context.Request.RequestUri.AbsoluteUri, HttpContext.Current.User.Identity.Name, Nothing)
+        context.Response = context.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, String.Format("Error Id: {0}, Message: {1}", errorId, message))
     End Sub
 
 End Class

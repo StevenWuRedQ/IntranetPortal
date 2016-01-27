@@ -12,7 +12,7 @@ Namespace Controllers
         Public Function PostAssignLeads(bble As String, <FromBody> userName As String) As IHttpActionResult
             Try
                 If String.IsNullOrEmpty(userName) Then
-                    Throw New Exception("User name can't be empty.")
+                    Return BadRequest("User name can't be empty.")
                 End If
 
                 Lead.AssignLeads(bble, userName, HttpContext.Current.User.Identity.Name)

@@ -7536,6 +7536,7 @@
     <Folder Include="Content\layouts\Simple\" />
     <Folder Include="Content\layouts\SlideOut\" />
     <Folder Include="Content\layouts\Split\" />
+    <Folder Include="TempDataFile\AuctionFiles\" />
     <Folder Include="TempDataFile\TitleDocs\" />
   </ItemGroup>
   <ItemGroup>

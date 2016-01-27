@@ -11,20 +11,33 @@ Public Class AuctionProperty
         End Using
     End Function
 
+    ''' <summary>
+    ''' Import auction properties file to system
+    ''' </summary>
+    ''' <param name="fileName">the file path of Auction Properties file</param>
+    ''' <param name="importBy">user imported the file</param>
+    ''' <returns></returns>
     Public Shared Function Import(fileName As String, importBy As String) As Integer
 
         Dim auctions = LoadAuctionProperties(fileName)
+        Dim addedActionas As New List(Of AuctionProperty)
         Using ctx As New PortalEntities
+            Dim bbles = auctions.Select(Function(a) a.BBL).ToArray
+            Dim exsitProps = ctx.AuctionProperties.Where(Function(p) bbles.Contains(p.BBL)).ToList
             For Each prop In auctions
-                prop.CreateDate = DateTime.Now
-                prop.CreateBy = importBy
-                ctx.AuctionProperties.Add(prop)
+                If Not exsitProps.Any(Function(p) p.BBL = prop.BBL AndAlso p.AuctionDate = prop.AuctionDate) Then
+                    prop.CreateDate = DateTime.Now
+                    prop.CreateBy = importBy
+                    ctx.AuctionProperties.Add(prop)
+
+                    addedActionas.Add(prop)
+                End If
             Next
 
             ctx.SaveChanges()
         End Using
 
-        InitData(auctions, importBy)
+        InitData(addedActionas.ToArray, importBy)
 
         Return auctions.Count
     End Function
