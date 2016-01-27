@@ -73,41 +73,43 @@ Namespace Controllers
             Return StatusCode(HttpStatusCode.NoContent)
         End Function
 
-        ' POST: api/Auction
-        <ResponseType(GetType(AuctionProperty))>
-        Function PostAuctionProperty(ByVal auctionProperty As AuctionProperty) As IHttpActionResult
-            If Not ModelState.IsValid Then
-                Return BadRequest(ModelState)
-            End If
+        '' POST: api/Auction
+        '<ResponseType(GetType(AuctionProperty))>
+        'Function PostAuctionProperty(ByVal auctionProperty As AuctionProperty) As IHttpActionResult
+        '    Throw New Exception("Not Implement")
 
-            db.AuctionProperties.Add(auctionProperty)
+        '    If Not ModelState.IsValid Then
+        '        Return BadRequest(ModelState)
+        '    End If
 
-            Try
-                db.SaveChanges()
-            Catch ex As DbUpdateException
-                If (AuctionPropertyExists(auctionProperty.AuctionId)) Then
-                    Return Conflict()
-                Else
-                    Throw
-                End If
-            End Try
+        '    db.AuctionProperties.Add(auctionProperty)
 
-            Return CreatedAtRoute("DefaultApi", New With {.id = auctionProperty.AuctionId}, auctionProperty)
-        End Function
+        '    Try
+        '        db.SaveChanges()
+        '    Catch ex As DbUpdateException
+        '        If (AuctionPropertyExists(auctionProperty.AuctionId)) Then
+        '            Return Conflict()
+        '        Else
+        '            Throw
+        '        End If
+        '    End Try
 
-        ' DELETE: api/Auction/5
-        <ResponseType(GetType(AuctionProperty))>
-        Function DeleteAuctionProperty(ByVal id As Integer) As IHttpActionResult
-            Dim auctionProperty As AuctionProperty = db.AuctionProperties.Find(id)
-            If IsNothing(auctionProperty) Then
-                Return NotFound()
-            End If
+        '    Return CreatedAtRoute("DefaultApi", New With {.id = auctionProperty.AuctionId}, auctionProperty)
+        'End Function
 
-            db.AuctionProperties.Remove(auctionProperty)
-            db.SaveChanges()
+        '' DELETE: api/Auction/5
+        '<ResponseType(GetType(AuctionProperty))>
+        'Function DeleteAuctionProperty(ByVal id As Integer) As IHttpActionResult
+        '    Dim auctionProperty As AuctionProperty = db.AuctionProperties.Find(id)
+        '    If IsNothing(auctionProperty) Then
+        '        Return NotFound()
+        '    End If
 
-            Return Ok(auctionProperty)
-        End Function
+        '    db.AuctionProperties.Remove(auctionProperty)
+        '    db.SaveChanges()
+
+        '    Return Ok(auctionProperty)
+        'End Function
 
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
             If (disposing) Then

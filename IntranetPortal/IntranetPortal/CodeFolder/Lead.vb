@@ -564,8 +564,13 @@ Partial Public Class Lead
     ''' <param name="assignBy">Assigned User</param>
     Public Shared Sub AssignLeads(bble As String, userName As String, assignBy As String)
         Dim emp = Employee.GetInstance(userName)
+
         If emp Is Nothing Then
             Throw New Exception("Can't find employee. Name: " & userName)
+        End If
+
+        If Not LeadsInfo.Exists(bble) Then
+            LeadsInfo.CreateLeadsInfo(bble)
         End If
 
         BatchAssignLeads({bble}, userName, emp.EmployeeID, assignBy)
@@ -588,6 +593,7 @@ Partial Public Class Lead
 
                 Dim li = Context.LeadsInfoes.Find(item)
                 Dim emp = Employee.GetInstance(empId)
+
                 If li IsNot Nothing Then
                     Dim newlead = Context.Leads.Find(item)
                     Dim orgName = Nothing

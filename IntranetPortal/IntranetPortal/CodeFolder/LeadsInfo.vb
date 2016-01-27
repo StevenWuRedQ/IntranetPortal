@@ -179,6 +179,16 @@ Public Class LeadsInfo
         End Get
     End Property
 
+    Public Shared Function Exists(bble As String) As Boolean
+        Using ctx As New Entities
+            Return ctx.LeadsInfoes.Any(Function(l) l.BBLE = bble)
+        End Using
+    End Function
+
+    Public Shared Function CreateLeadsInfo(bble As String) As LeadsInfo
+        Return DataWCFService.UpdateAssessInfo(bble)
+    End Function
+
     Public Shared Function GetData(bble As String) As LeadsData
         Dim data As New LeadsData
         Return Core.Utility.CopyTo(GetInstance(bble), data)

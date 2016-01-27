@@ -155,3 +155,18 @@ Public Class AuctionProperty
     End Function
 
 End Class
+
+Partial Public Class AuctionPropertyView
+    Public ReadOnly Property TaxWaterCombo As Decimal?
+        Get
+            Dim data = {TaxesAmt, WaterAmt}
+
+            If data.Any(Function(d) d.HasValue) Then
+                Return data.Where(Function(d) d.HasValue).Sum()
+            Else
+                Return Nothing
+            End If
+        End Get
+    End Property
+
+End Class
