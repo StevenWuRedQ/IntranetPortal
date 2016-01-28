@@ -89,7 +89,7 @@ Public Class RulesService
 
         'Auction
         Rules.Add(New AuctionNotifyRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Auction Properties Daily Notify Rule"})
-
+        Rules.Add(New AuctionNotifyRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("7.0:0:0"), .RuleName = "Auction Properties Weekly Notify Rule", .ExecuteOnWeekend = True, .IsWeekly = True})
         'Construction
         'Rules.Add(New ConstructionNotifyRule() With {.ExecuteOn = TimeSpan.Parse("06:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Construction Notify Rule"})
 
