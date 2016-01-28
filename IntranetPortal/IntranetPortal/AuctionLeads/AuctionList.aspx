@@ -36,7 +36,7 @@
 
                 <div class="wx_scorll_list" data-bottom="90" style="margin-top: 10px">
                     <div class="list-group">
-                        <a href="#/detail/{{au.AuctionId}}" class="list-group-item" ng-repeat=" au in AuctionList |filter:auctionFilter as results"><span class="badge">{{au.AuctionDate |date:'MM/dd/yyyy'}} </span>{{au.Address}}
+                        <a href="#/detail/{{au.AuctionId}}" class="list-group-item" ng-repeat="au in AuctionList |filter:auctionFilter as results track by au.AuctionId"><span class="badge">{{au.AuctionDate |date:'MM/dd/yyyy'}} </span>{{au.Address}}
                         </a>
                         <a class="list-group-item" ng-if="results.length == 0"><strong>No results found...</strong>
                         </a>
@@ -97,21 +97,34 @@
         angular.module('PortalApp').controller('AuctionListCtrl', ['$scope', '$http',
         function ($scope, $http) {
 
-            $scope.AuctionList = demoList;
+            //$scope.AuctionList = demoList;
             $scope.Filters = [
                 { name: 'All Auctions', listUrl: '/api/AuctionProperties/?showAll=true&unassigned=false' },
                 { name: 'Open Auctions', listUrl: '/api/AuctionProperties' },
                 { name: 'Unassigned Auctions', listUrl: '/api/AuctionProperties/?unassigned=true&showAll=false' },
             ];
+            $scope.MergeRigt = function(obj,src)
+            {
+                var comp = function (o, s) {
+                    return o.AuctionId == s.AuctionId
+                }
+                //var diff = _.differenceWith(obj, src,comp);
 
+                var diffObj = _.filter(obj, function (o) { return _.find(src, {'AuctionId':o.AuctionId}) ==null });
+                var diffSrc = _.filter(src, function (o) { return _.find(obj, { 'AuctionId': o.AuctionId }) == null });
+                //remove the diffent in object
+                _.remove(obj, function (o) { return _.find(diffObj, { 'AuctionId': o.AuctionId }) != null })
+                _.each(diffSrc, function (o) { obj.push(o) });
+            }
             $scope.LoadLeads = function (filter) {
                 $scope.Filter = filter;
                 var f = _.find($scope.Filters, { name: filter });
                 if (f != null) {
                     $http.get(f.listUrl).success(function (data) {
-
-                        $scope.AuctionList = _.map(data, function (a) { a.AuctionDate = moment(a.AuctionDate).format('MM/DD/YYYY'); return a; });
-                        //$scope.AuctionList = data;
+                       
+                        var src = _.map(data, function (a) { a.AuctionDate = moment(a.AuctionDate).format('MM/DD/YYYY'); return a; });
+                        $scope.AuctionList = src;
+                       
                     }).error(function () { alert('Get auction properties list error!') });
                 }
 
