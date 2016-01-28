@@ -1,6 +1,7 @@
 ﻿Imports System.Data
 Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
+Imports System.IO
 Imports System.Linq
 Imports System.Net
 Imports System.Net.Http
@@ -15,7 +16,7 @@ Namespace Controllers
 
         Private db As New PortalEntities
 
-        ' GET: api/Auction
+        ' GET: api/AuctionProperties
         Function GetAuctionProperties() As IQueryable(Of AuctionPropertyView)
             Dim today = DateTime.Today
             Return db.AuctionPropertyViews.Where(Function(a) a.AuctionDate > today)
@@ -34,7 +35,7 @@ Namespace Controllers
             Return result
         End Function
 
-        ' GET: api/Auction/5
+        ' GET: api/AuctionProperties/5
         <ResponseType(GetType(AuctionPropertyView))>
         Function GetAuctionProperty(ByVal id As Integer) As IHttpActionResult
             'Dim message = String.Format("Product with id = {0} not found", id)
@@ -47,7 +48,7 @@ Namespace Controllers
             Return Ok(prop)
         End Function
 
-        ' PUT: api/Auction/5
+        ' PUT: api/AuctionProperties/5
         <ResponseType(GetType(Void))>
         Function PutAuctionProperty(ByVal id As Integer, ByVal auctionProperty As AuctionProperty) As IHttpActionResult
             If Not ModelState.IsValid Then
@@ -73,7 +74,34 @@ Namespace Controllers
             Return StatusCode(HttpStatusCode.NoContent)
         End Function
 
-        '' POST: api/Auction
+        'POST: api/AuctionProperties/Import
+        <Route("api/AuctionProperties/Import")>
+        Function PostImportAuctionPropeties() As IQueryable(Of AuctionPropertyView)
+            If HttpContext.Current.Request.Files.Count <= 0 Then
+                Return NotFound()
+            End If
+
+            Try
+                Dim file = HttpContext.Current.Request.Files(0)
+                Dim FileName As String = Path.GetFileName(file.FileName)
+                Dim Extension As String = Path.GetExtension(file.FileName)
+                Dim FolderPath As String = "/TempDataFile/AuctionFiles/"
+
+                Dim FilePath As String = HttpContext.Current.Server.MapPath(FolderPath + FileName)
+                file.SaveAs(FilePath)
+
+                Dim result = AuctionProperty.Import(FilePath, HttpContext.Current.User.Identity.Name)
+
+                Core.SystemLog.Log("ImportAuctionFiles", "ImportAuctionFiles, Result: " & result, Core.SystemLog.LogCategory.Operation, Nothing, HttpContext.Current.User.Identity.Name)
+
+                Return GetAuctionProperties()
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
+
+        '' POST: api/AuctionProperties
         '<ResponseType(GetType(AuctionProperty))>
         'Function PostAuctionProperty(ByVal auctionProperty As AuctionProperty) As IHttpActionResult
         '    Throw New Exception("Not Implement")
@@ -97,7 +125,7 @@ Namespace Controllers
         '    Return CreatedAtRoute("DefaultApi", New With {.id = auctionProperty.AuctionId}, auctionProperty)
         'End Function
 
-        '' DELETE: api/Auction/5
+        '' DELETE: api/AuctionProperties/5
         '<ResponseType(GetType(AuctionProperty))>
         'Function DeleteAuctionProperty(ByVal id As Integer) As IHttpActionResult
         '    Dim auctionProperty As AuctionProperty = db.AuctionProperties.Find(id)

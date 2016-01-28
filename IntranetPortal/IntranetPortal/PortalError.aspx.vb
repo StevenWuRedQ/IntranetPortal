@@ -6,6 +6,10 @@
           "If this error continues, please contact support."
         Dim unhandledErrorMsg = "The error was unhandled by application code."
 
+        If Request.QueryString("errorId") IsNot Nothing Then
+            generalErrorMsg = generalErrorMsg & " Error Id: " & Request.QueryString("errorId")
+        End If
+
         FriendlyErrorMsg.Text = generalErrorMsg
 
         Dim errorCode = Request.QueryString("code")

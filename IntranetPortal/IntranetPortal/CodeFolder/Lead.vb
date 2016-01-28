@@ -566,7 +566,7 @@ Partial Public Class Lead
         Dim emp = Employee.GetInstance(userName)
 
         If emp Is Nothing Then
-            Throw New Exception("Can't find employee. Name: " & userName)
+            Throw New PortalException("Can't find employee. Name: " & userName)
         End If
 
         If Not LeadsInfo.Exists(bble) Then
