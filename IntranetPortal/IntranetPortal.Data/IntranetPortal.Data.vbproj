@@ -99,7 +99,13 @@
     <Compile Include="ADOEntity\DataStatu.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\LegalCaseReport.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\LegalECourtsAll.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\LegalManagerReport.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="Auction\AuctionProperty.vb" />
@@ -193,16 +199,10 @@
     <Compile Include="ADOEntity\LegalCase.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADOEntity\LegalCaseReport.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
     <Compile Include="ADOEntity\LegalECourt.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\LegalJudge.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\LegalManagerReport.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\LegalRoboSignor.vb">

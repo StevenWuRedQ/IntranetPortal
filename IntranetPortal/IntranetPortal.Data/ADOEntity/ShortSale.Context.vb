@@ -61,11 +61,11 @@ Partial Public Class PortalEntities
     Public Overridable Property FormDataItems() As DbSet(Of FormDataItem)
     Public Overridable Property TitleCases() As DbSet(Of TitleCase)
     Public Overridable Property UserFollowUps() As DbSet(Of UserFollowUp)
-    Public Overridable Property LegalCaseReports() As DbSet(Of LegalCaseReport)
-    Public Overridable Property LegalManagerReports() As DbSet(Of LegalManagerReport)
     Public Overridable Property DataStatus() As DbSet(Of DataStatu)
     Public Overridable Property LegalECourtsAlls() As DbSet(Of LegalECourtsAll)
     Public Overridable Property AuctionProperties() As DbSet(Of AuctionProperty)
     Public Overridable Property AuctionPropertyViews() As DbSet(Of AuctionPropertyView)
+    Public Overridable Property LegalCaseReports() As DbSet(Of LegalCaseReport)
+    Public Overridable Property LegalManagerReports() As DbSet(Of LegalManagerReport)
 
 End Class

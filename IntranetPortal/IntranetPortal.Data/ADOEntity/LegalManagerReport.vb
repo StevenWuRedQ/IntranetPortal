@@ -30,5 +30,6 @@ Partial Public Class LegalManagerReport
     Public Property NextStep As String
     Public Property Agent As String
     Public Property Team As String
+    Public Property JSecondaryActions As String
 
 End Class

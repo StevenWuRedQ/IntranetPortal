@@ -901,6 +901,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.AuctionPropertyView' does not h
         <EntityType Name="AuctionPropertyView">
           <Key>
             <PropertyRef Name="AuctionId" />
+            
           </Key>
           <Property Name="AuctionId" Type="int" Nullable="false" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
@@ -989,6 +990,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <Property Name="NextStep" Type="nvarchar(max)" />
           <Property Name="Agent" Type="nvarchar" MaxLength="50" />
           <Property Name="Team" Type="nvarchar" MaxLength="50" />
+          <Property Name="JSecondaryActions" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="IntranetPortalModelStoreContainer">
           <EntitySet Name="AuctionProperties" EntityType="Self.AuctionProperties" Schema="dbo" store:Type="Tables" />
@@ -1115,7 +1117,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
     [LegalManagerReport].[MiscComments] AS [MiscComments], 
     [LegalManagerReport].[NextStep] AS [NextStep], 
     [LegalManagerReport].[Agent] AS [Agent], 
-    [LegalManagerReport].[Team] AS [Team]
+    [LegalManagerReport].[Team] AS [Team], 
+    [LegalManagerReport].[JSecondaryActions] AS [JSecondaryActions]
     FROM [dbo].[LegalManagerReport] AS [LegalManagerReport]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -1163,12 +1166,12 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <EntitySet Name="FormDataItems" EntityType="IntranetPortalModel.FormDataItem" />
           <EntitySet Name="TitleCases" EntityType="IntranetPortalModel.TitleCase" />
           <EntitySet Name="UserFollowUps" EntityType="IntranetPortalModel.UserFollowUp" />
-          <EntitySet Name="LegalCaseReports" EntityType="IntranetPortalModel.LegalCaseReport" />
-          <EntitySet Name="LegalManagerReports" EntityType="IntranetPortalModel.LegalManagerReport" />
           <EntitySet Name="DataStatus" EntityType="IntranetPortalModel.DataStatu" />
           <EntitySet Name="LegalECourtsAlls" EntityType="IntranetPortalModel.LegalECourtsAll" />
           <EntitySet Name="AuctionProperties" EntityType="IntranetPortalModel.AuctionProperty" />
           <EntitySet Name="AuctionPropertyViews" EntityType="IntranetPortalModel.AuctionPropertyView" />
+          <EntitySet Name="LegalCaseReports" EntityType="IntranetPortalModel.LegalCaseReport" />
+          <EntitySet Name="LegalManagerReports" EntityType="IntranetPortalModel.LegalManagerReport" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -1997,50 +2000,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="LegalCaseReport">
-          <Key>
-            <PropertyRef Name="BBLE" />
-          </Key>
-          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="CaseName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="ResearchBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Attorney" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CaseData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="LegalStatus" Type="Int32" />
-          <Property Name="FollowUp" Type="DateTime" Precision="3" />
-          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SaleDate" Type="DateTime" Precision="3" />
-          <Property Name="SecondaryTypes" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="LegalManagerReport">
-          <Key>
-            <PropertyRef Name="BBLE" />
-          </Key>
-          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="CaseName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="ResearchBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Attorney" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CaseData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="LegalStatus" Type="Int32" />
-          <Property Name="FollowUp" Type="DateTime" Precision="3" />
-          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SaleDate" Type="DateTime" Precision="3" />
-          <Property Name="SecondaryTypes" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="MiscComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NextStep" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Team" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="DataStatu">
           <Key>
             <PropertyRef Name="Category" />
@@ -2148,6 +2107,51 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <Property Name="C3rdMortgrAmt" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="EmployeeID" Type="Int32" />
           <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LegalCaseReport">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="CaseName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ResearchBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Attorney" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CaseData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="LegalStatus" Type="Int32" />
+          <Property Name="FollowUp" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SaleDate" Type="DateTime" Precision="3" />
+          <Property Name="SecondaryTypes" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LegalManagerReport">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="CaseName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ResearchBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Attorney" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CaseData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="LegalStatus" Type="Int32" />
+          <Property Name="FollowUp" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SaleDate" Type="DateTime" Precision="3" />
+          <Property Name="SecondaryTypes" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="MiscComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NextStep" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Team" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JSecondaryActions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3020,52 +3024,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LegalCaseReports">
-            <EntityTypeMapping TypeName="IntranetPortalModel.LegalCaseReport">
-              <MappingFragment StoreEntitySet="LegalCaseReport">
-                <ScalarProperty Name="SecondaryTypes" ColumnName="SecondaryTypes" />
-                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
-                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-                <ScalarProperty Name="FollowUp" ColumnName="FollowUp" />
-                <ScalarProperty Name="LegalStatus" ColumnName="LegalStatus" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CaseData" ColumnName="CaseData" />
-                <ScalarProperty Name="Attorney" ColumnName="Attorney" />
-                <ScalarProperty Name="ResearchBy" ColumnName="ResearchBy" />
-                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
-                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LegalManagerReports">
-            <EntityTypeMapping TypeName="IntranetPortalModel.LegalManagerReport">
-              <MappingFragment StoreEntitySet="LegalManagerReport">
-                <ScalarProperty Name="Team" ColumnName="Team" />
-                <ScalarProperty Name="Agent" ColumnName="Agent" />
-                <ScalarProperty Name="NextStep" ColumnName="NextStep" />
-                <ScalarProperty Name="MiscComments" ColumnName="MiscComments" />
-                <ScalarProperty Name="SecondaryTypes" ColumnName="SecondaryTypes" />
-                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
-                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-                <ScalarProperty Name="FollowUp" ColumnName="FollowUp" />
-                <ScalarProperty Name="LegalStatus" ColumnName="LegalStatus" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CaseData" ColumnName="CaseData" />
-                <ScalarProperty Name="Attorney" ColumnName="Attorney" />
-                <ScalarProperty Name="ResearchBy" ColumnName="ResearchBy" />
-                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
-                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DataStatus">
             <EntityTypeMapping TypeName="IntranetPortalModel.DataStatu">
               <MappingFragment StoreEntitySet="DataStatus">
@@ -3174,6 +3132,53 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
                 <ScalarProperty Name="DOBViolation" ColumnName="DOBViolation" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="AuctionId" ColumnName="AuctionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LegalCaseReports">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LegalCaseReport">
+              <MappingFragment StoreEntitySet="LegalCaseReport">
+                <ScalarProperty Name="SecondaryTypes" ColumnName="SecondaryTypes" />
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="FollowUp" ColumnName="FollowUp" />
+                <ScalarProperty Name="LegalStatus" ColumnName="LegalStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CaseData" ColumnName="CaseData" />
+                <ScalarProperty Name="Attorney" ColumnName="Attorney" />
+                <ScalarProperty Name="ResearchBy" ColumnName="ResearchBy" />
+                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LegalManagerReports">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LegalManagerReport">
+              <MappingFragment StoreEntitySet="LegalManagerReport">
+                <ScalarProperty Name="JSecondaryActions" ColumnName="JSecondaryActions" />
+                <ScalarProperty Name="Team" ColumnName="Team" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="NextStep" ColumnName="NextStep" />
+                <ScalarProperty Name="MiscComments" ColumnName="MiscComments" />
+                <ScalarProperty Name="SecondaryTypes" ColumnName="SecondaryTypes" />
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="FollowUp" ColumnName="FollowUp" />
+                <ScalarProperty Name="LegalStatus" ColumnName="LegalStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CaseData" ColumnName="CaseData" />
+                <ScalarProperty Name="Attorney" ColumnName="Attorney" />
+                <ScalarProperty Name="ResearchBy" ColumnName="ResearchBy" />
+                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
