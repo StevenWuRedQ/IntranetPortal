@@ -129,9 +129,13 @@
                                 <dx:GridViewDataColumn FieldName="LegalStatusString" Caption="Case Status">
                                     <Settings HeaderFilterMode="CheckedList" />
                                 </dx:GridViewDataColumn>
-                                <dx:GridViewDataColumn FieldName="StuatsStr" Caption="Process Stauts">
+                                <dx:GridViewDataColumn FieldName="StuatsStr" Caption="Process Status">
                                     <Settings HeaderFilterMode="CheckedList" />
                                 </dx:GridViewDataColumn>
+                                <dx:GridViewDataColumn FieldName="JSecondaryActions" Caption="Secondary Actions">
+                                    <Settings HeaderFilterMode="CheckedList" />
+                                </dx:GridViewDataColumn>
+                                
                                 <dx:GridViewDataColumn FieldName="ResearchBy" Caption="Research">
                                     <Settings HeaderFilterMode="CheckedList" />
                                 </dx:GridViewDataColumn>

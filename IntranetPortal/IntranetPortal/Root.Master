@@ -354,7 +354,7 @@
                                             </dx:ASPxButton>
                                         </td>
                                         <%--replace login menu with a image by steven--%>
-                                        <td style="margin-left: 20px; font-size: 18px;margin-right:0" class="login" valign="middle">
+                                        <td style="margin-left: 20px; font-size: 18px; margin-right: 0" class="login" valign="middle">
                                             <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                                                 <AnonymousTemplate>
                                                     <a id="loginLink" href="~/Account/Login.aspx" runat="server" visible="false">Log In</a>
@@ -374,7 +374,7 @@
                                                         <i class="fa fa-user icon_btn color_black tooltip-examples dropdown-toggle" data-toggle="dropdown" style="margin-left: 10px; color: black;" title="Settings"></i>
                                                         <ul class="dropdown-menu dropdown-menu-right">
                                                             <li><a href="/account/changepassword.aspx"><i class="fa fa-exchange"></i>&nbsp;&nbsp;Change Password</a></li>
-                                                            <li>                                                                
+                                                            <li>
                                                                 <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" Text='<i class="fa fa-sign-out"></i>&nbsp;&nbsp; Log Out'>                                                                
                                                                 </asp:LinkButton></li>
                                                             <li><a href="mailto:support@myidealprop.com"><i class="fa fa-wrench"></i>&nbsp;&nbsp; Support</a></li>
