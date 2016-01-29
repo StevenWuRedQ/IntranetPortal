@@ -77,19 +77,20 @@
             if ($scope.Id) {
                 $http.get('/api/AuctionProperties/' + $scope.Id).success(function (data) {
                     $scope.auction = data;
-                }).error(function () { alert('Get auction propertiy list error! scope id:' + $scope.Id) });
+                });
             };
             $scope.AssginAuctionLeads = function (auction) {
                 $http.post('/api/Leads/Assign/' + auction.BBLE, JSON.stringify(auction.AgentAssignedChoise)).success(function (response) {
                     auction.EmployeeName = auction.AgentAssignedChoise;
-                    alert('Assign to ' + auction.EmployeeName + ' Succeed !');
+                    AngularRoot.alert('Assign to ' + auction.EmployeeName + ' Succeed !')
+                  
                 });
 
             }
 
             $scope.SaveAuction = function (auction) {
                 $http.put('/api/AuctionProperties/' + auction.AuctionId, auction).success(function (response) {
-                    alert('Save auction ' + auction.Address + ' Succeed !');
+                    AngularRoot.alert('Save auction ' + auction.Address + ' Succeed !'); 
                 });
             }
         }]);
@@ -123,9 +124,12 @@
                     $http.get(f.listUrl).success(function (data) {
                        
                         var src = _.map(data, function (a) { a.AuctionDate = moment(a.AuctionDate).format('MM/DD/YYYY'); return a; });
+                        //if ($scope.AuctionList)
+                        //    $scope.MergeRigt($scope.AuctionList,src);
+                        //else
                         $scope.AuctionList = src;
                        
-                    }).error(function () { alert('Get auction properties list error!') });
+                    });
                 }
 
             }
