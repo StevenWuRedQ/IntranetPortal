@@ -63,7 +63,6 @@ Public Class RulesService
         Rules.Add(New CompleteTaskRule() With {.ExecuteOn = TimeSpan.Parse("20:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Complete Leads Task"})
         Rules.Add(New AgentActivitySummaryRule() With {.ExecuteOn = TimeSpan.Parse("21:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Team Activity Email Rule"})
 
-
         'Rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("01:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Assign Leads Rule"})
         Rules.Add(New EmailSummaryRule() With {.ExecuteOn = TimeSpan.Parse("06:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "User Task Summary Rule"})
 
@@ -90,6 +89,8 @@ Public Class RulesService
         'Auction
         Rules.Add(New AuctionNotifyRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Auction Properties Daily Notify Rule"})
 
+        Dim days = 7 - DateTime.Today.DayOfWeek
+        Rules.Add(New AuctionNotifyRule() With {.ExecuteOn = TimeSpan.Parse(String.Format("{0}.08:00:00", days)), .Period = TimeSpan.Parse("7.0:0:0"), .RuleName = "Auction Properties Weekly Notify Rule", .ExecuteOnWeekend = True, .IsWeekly = True})
         'Construction
         'Rules.Add(New ConstructionNotifyRule() With {.ExecuteOn = TimeSpan.Parse("06:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Construction Notify Rule"})
 
