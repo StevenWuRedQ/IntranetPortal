@@ -1,7 +1,7 @@
 ﻿[
     {
         "BaseTable": "ShortSaleCases",
-        "IncludeAppId":true,
+        "IncludeAppId": true,
         "Fields": [
             {
                 "category": "ShortSale Case",
@@ -23,10 +23,10 @@
                       "table": "SS_Status",
                       "column": "Name",
                       "type": "list",
-                     "options": [
-                        "Active",
-                        "Archived"
-                     ]
+                      "options": [
+                         "Active",
+                         "Archived"
+                      ]
                   }
                 ]
             },
@@ -227,36 +227,36 @@
                                 "table": "SS_Floor1",
                                 "column": "Description",
                                 "type": "string"
+                            },
+                 {
+                     "name": "Bedroom",
+                     "table": "SS_Floor1",
+                     "column": "Bedroom",
+                     "type": "number"
                  },
                  {
-                                "name": "Bedroom",
-                                "table": "SS_Floor1",
-                                "column": "Bedroom",
-                                "type": "number"
+                     "name": "Bathroom",
+                     "table": "SS_Floor1",
+                     "column": "Bathroom",
+                     "type": "number"
                  },
                  {
-                                "name": "Bathroom",
-                                "table": "SS_Floor1",
-                                "column": "Bathroom",
-                                "type": "number"
+                     "name": "Livingroom",
+                     "table": "SS_Floor1",
+                     "column": "Livingroom",
+                     "type": "number"
                  },
                  {
-                                "name": "Livingroom",
-                                "table": "SS_Floor1",
-                                "column": "Livingroom",
-                                "type": "number"
+                     "name": "Diningroom",
+                     "table": "SS_Floor1",
+                     "column": "Diningroom",
+                     "type": "number"
                  },
                  {
-                                "name": "Diningroom",
-                                "table": "SS_Floor1",
-                                "column": "Diningroom",
-                                "type": "number"
-                 },
-                 {
-                                "name": "Occupied",
-                                "table": "SS_Floor1",
-                                "column": "Occupied",
-                                "type": "list",
+                     "name": "Occupied",
+                     "table": "SS_Floor1",
+                     "column": "Occupied",
+                     "type": "list",
                      "options": [
                         "Vacant",
                         "Seller",
@@ -265,35 +265,201 @@
                      ]
                  },
                  {
-                                "name": "Access",
-                                "table": "SS_Floor1",
-                                "column": "Access",
+                     "name": "Access",
+                     "table": "SS_Floor1",
+                     "column": "Access",
+                     "type": "string"
+                 },
+                 {
+                     "name": "LockBox",
+                     "table": "SS_Floor1",
+                     "column": "LockBox",
+                     "type": "string"
+                 },
+                 {
+                     "name": "LockupDate",
+                     "table": "SS_Floor1",
+                     "column": "LockupDate",
+                     "type": "date"
+                 },
+                 {
+                     "name": "LockedBy",
+                     "table": "SS_Floor1",
+                     "column": "LockedBy",
+                     "type": "string"
+                 },
+                 {
+                     "name": "LastChecked",
+                     "table": "SS_Floor1",
+                     "column": "LastChecked",
+                     "type": "date"
+                 }
+                          ]
+                      },
+                      {
+                          "category": "Floor2",
+                          "fields": [
+                            {
+                                "name": "Floor2",
+                                "table": "SS_Floor2",
+                                "column": "FloorId",
+                                "type": "number"
+                            },
+                            {
+                                "name": "Floor2 Description",
+                                "table": "SS_Floor2",
+                                "column": "Description",
                                 "type": "string"
+                            },
+                 {
+                     "name": "Floor2 Bedroom",
+                     "table": "SS_Floor2",
+                     "column": "Bedroom",
+                     "type": "number"
                  },
                  {
-                                "name": "LockBox",
-                                "table": "SS_Floor1",
-                                "column": "LockBox",
+                     "name": "Floor2 Bathroom",
+                     "table": "SS_Floor2",
+                     "column": "Bathroom",
+                     "type": "number"
+                 },
+                 {
+                     "name": "Floor2 Livingroom",
+                     "table": "SS_Floor2",
+                     "column": "Livingroom",
+                     "type": "number"
+                 },
+                 {
+                     "name": "Floor2 Diningroom",
+                     "table": "SS_Floor2",
+                     "column": "Diningroom",
+                     "type": "number"
+                 },
+                 {
+                     "name": "Floor2 Occupied",
+                     "table": "SS_Floor2",
+                     "column": "Occupied",
+                     "type": "list",
+                     "options": [
+                        "Vacant",
+                        "Seller",
+                        "Tenants (Coop)",
+                        "Tenants (Non-Coop)"
+                     ]
+                 },
+                 {
+                     "name": "Floor2 Access",
+                     "table": "SS_Floor2",
+                     "column": "Access",
+                     "type": "string"
+                 },
+                 {
+                     "name": "Floor2 LockBox",
+                     "table": "SS_Floor2",
+                     "column": "LockBox",
+                     "type": "string"
+                 },
+                 {
+                     "name": "Floor2 LockupDate",
+                     "table": "SS_Floor2",
+                     "column": "LockupDate",
+                     "type": "date"
+                 },
+                 {
+                     "name": "Floor2 LockedBy",
+                     "table": "SS_Floor2",
+                     "column": "LockedBy",
+                     "type": "string"
+                 },
+                 {
+                     "name": "Floor2 LastChecked",
+                     "table": "SS_Floor2",
+                     "column": "LastChecked",
+                     "type": "date"
+                 }
+                          ]
+                      },
+                      {
+                          "category": "Floor3",
+                          "fields": [
+                            {
+                                "name": "Floor3",
+                                "table": "SS_Floor3",
+                                "column": "FloorId",
+                                "type": "number"
+                            },
+                            {
+                                "name": "Floor3 Description",
+                                "table": "SS_Floor3",
+                                "column": "Description",
                                 "type": "string"
+                            },
+                 {
+                     "name": "Floor3 Bedroom",
+                     "table": "SS_Floor3",
+                     "column": "Bedroom",
+                     "type": "number"
                  },
                  {
-                                "name": "LockupDate",
-                                "table": "SS_Floor1",
-                                "column": "LockupDate",
-                                "type": "date"
+                     "name": "Floor3 Bathroom",
+                     "table": "SS_Floor3",
+                     "column": "Bathroom",
+                     "type": "number"
                  },
                  {
-                                "name": "LockedBy",
-                                "table": "SS_Floor1",
-                                "column": "LockedBy",
-                                "type": "string"
+                     "name": "Floor3 Livingroom",
+                     "table": "SS_Floor3",
+                     "column": "Livingroom",
+                     "type": "number"
                  },
                  {
-                                "name": "LastChecked",
-                                "table": "SS_Floor1",
-                                "column": "LastChecked",
-                                "type": "date"
-                            }
+                     "name": "Floor3 Diningroom",
+                     "table": "SS_Floor3",
+                     "column": "Diningroom",
+                     "type": "number"
+                 },
+                 {
+                     "name": "Floor3 Occupied",
+                     "table": "SS_Floor3",
+                     "column": "Occupied",
+                     "type": "list",
+                     "options": [
+                        "Vacant",
+                        "Seller",
+                        "Tenants (Coop)",
+                        "Tenants (Non-Coop)"
+                     ]
+                 },
+                 {
+                     "name": "Floor3 Access",
+                     "table": "SS_Floor3",
+                     "column": "Access",
+                     "type": "string"
+                 },
+                 {
+                     "name": "Floor3 LockBox",
+                     "table": "SS_Floor3",
+                     "column": "LockBox",
+                     "type": "string"
+                 },
+                 {
+                     "name": "Floor3 LockupDate",
+                     "table": "SS_Floor3",
+                     "column": "LockupDate",
+                     "type": "date"
+                 },
+                 {
+                     "name": "Floor3 LockedBy",
+                     "table": "SS_Floor3",
+                     "column": "LockedBy",
+                     "type": "string"
+                 },
+                 {
+                     "name": "Floor3 LastChecked",
+                     "table": "SS_Floor3",
+                     "column": "LastChecked",
+                     "type": "date"
+                 }
                           ]
                       },
                       {
@@ -1623,7 +1789,7 @@
                                 "type": "string"
                             }
                           ]
-          }
-       ]
+                      }
+        ]
     }
 ]

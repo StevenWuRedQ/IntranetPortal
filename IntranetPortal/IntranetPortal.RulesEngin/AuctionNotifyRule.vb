@@ -22,9 +22,9 @@ Public Class AuctionNotifyRule
             Dim parms As New Dictionary(Of String, String)
             parms.Add("IsWeekly", IsWeekly)
 
-            Dim subject = "The coming Auction Properties - " & DateTime.Today.ToShortDateString
+            Dim subject = "Upcoming Properties Auction - " & DateTime.Today.ToShortDateString
             If IsWeekly Then
-                subject = "The Auction Properties in the follow week"
+                subject = "The Properties Auction in the follow week"
             End If
 
             client.SendEmailByControl(String.Join(";", emails), subject, "AuctionDailyReport", parms)
