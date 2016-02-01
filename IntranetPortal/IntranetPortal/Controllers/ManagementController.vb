@@ -63,6 +63,13 @@ Namespace Controllers
 
         End Function
 
+        <Route("api/Management/SystemLogs/{errorId}")>
+        Function GetSystemLogs(errorId As Integer) As IHttpActionResult
+            Dim log = Core.SystemLog.GetLog(errorId)
+
+            Return Ok(log)
+        End Function
+
         <ResponseType(GetType(String()))>
         <Route("api/Management/ConvertCSV/")>
         Public Function ConvertCSV() As String
