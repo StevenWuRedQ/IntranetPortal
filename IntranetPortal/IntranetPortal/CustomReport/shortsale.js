@@ -27,6 +27,12 @@
                          "Active",
                          "Archived"
                       ]
+                  },
+                  {
+                      "name": "Occupancy",
+                      "table": "SS_Occupancy",
+                      "column": "Occupancy",
+                      "type": "number"
                   }
                 ]
             },
@@ -227,7 +233,7 @@
                                 "table": "SS_Floor1",
                                 "column": "Description",
                                 "type": "string"
-                            },
+                            },                            
                  {
                      "name": "Bedroom",
                      "table": "SS_Floor1",

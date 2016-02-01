@@ -5,7 +5,7 @@
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
     <link rel="stylesheet" href="/css/right-pane.css" />
     <script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
-    <div id="ReportWizardCtrl" ng-controller="ReportWizardCtrl">
+    <div id="ReportWizardCtrl" ng-controller="ReportWizardCtrl" class="wx_scorll_list" data-bottom="90">
         <div class="container" style="padding-top: 30px; font-size: small">
             <div class="nga-fast nga-fade" ng-show="step==1" style="margin-left: -50px">
                 <div ng-repeat="c in Fields track by c.category" class="col-sm-6 col-md-6">
