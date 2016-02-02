@@ -29,7 +29,7 @@
                       ]
                   },
                   {
-                      "name": "Occupancy",
+                      "name": "Num of Occupied Units",
                       "table": "SS_Occupancy",
                       "column": "Occupancy",
                       "type": "number"
@@ -220,20 +220,32 @@
                           ]
                       },
                       {
-                          "category": "HOME BREAKDOWN",
+                          "category": "Unit1",
                           "fields": [
                             {
-                                "name": "Floor Id",
+                                "name": "Unit1",
                                 "table": "SS_Floor1",
                                 "column": "FloorId",
                                 "type": "number"
                             },
                             {
-                                "name": "Description",
+                                "name": "Unit1 Description",
                                 "table": "SS_Floor1",
                                 "column": "Description",
                                 "type": "string"
-                            },                            
+                            },
+                            {
+                                "name": "Unit1 Occupancy",
+                                "table": "SS_Floor1",
+                                "column": "Occupancy",
+                                "type": "string"
+                            },
+                            {
+                                "name": "Unit1 Breakdown",
+                                "table": "SS_Floor1",
+                                "column": "Breakdown",
+                                "type": "string"
+                            },
                  {
                      "name": "Bedroom",
                      "table": "SS_Floor1",
@@ -303,46 +315,58 @@
                           ]
                       },
                       {
-                          "category": "Floor2",
+                          "category": "Unit2",
                           "fields": [
                             {
-                                "name": "Floor2",
+                                "name": "Unit2",
                                 "table": "SS_Floor2",
                                 "column": "FloorId",
                                 "type": "number"
                             },
                             {
-                                "name": "Floor2 Description",
+                                "name": "Unit2 Description",
                                 "table": "SS_Floor2",
                                 "column": "Description",
                                 "type": "string"
                             },
+                             {
+                                 "name": "Unit2 Occupancy",
+                                 "table": "SS_Floor2",
+                                 "column": "Occupancy",
+                                 "type": "string"
+                             },
+                            {
+                                "name": "Unit2 Breakdown",
+                                "table": "SS_Floor2",
+                                "column": "Breakdown",
+                                "type": "string"
+                            },
                  {
-                     "name": "Floor2 Bedroom",
+                     "name": "Unit2 Bedroom",
                      "table": "SS_Floor2",
                      "column": "Bedroom",
                      "type": "number"
                  },
                  {
-                     "name": "Floor2 Bathroom",
+                     "name": "Unit2 Bathroom",
                      "table": "SS_Floor2",
                      "column": "Bathroom",
                      "type": "number"
                  },
                  {
-                     "name": "Floor2 Livingroom",
+                     "name": "Unit2 Livingroom",
                      "table": "SS_Floor2",
                      "column": "Livingroom",
                      "type": "number"
                  },
                  {
-                     "name": "Floor2 Diningroom",
+                     "name": "Unit2 Diningroom",
                      "table": "SS_Floor2",
                      "column": "Diningroom",
                      "type": "number"
                  },
                  {
-                     "name": "Floor2 Occupied",
+                     "name": "Unit2 Occupied",
                      "table": "SS_Floor2",
                      "column": "Occupied",
                      "type": "list",
@@ -354,31 +378,31 @@
                      ]
                  },
                  {
-                     "name": "Floor2 Access",
+                     "name": "Unit2 Access",
                      "table": "SS_Floor2",
                      "column": "Access",
                      "type": "string"
                  },
                  {
-                     "name": "Floor2 LockBox",
+                     "name": "Unit2 LockBox",
                      "table": "SS_Floor2",
                      "column": "LockBox",
                      "type": "string"
                  },
                  {
-                     "name": "Floor2 LockupDate",
+                     "name": "Unit2 LockupDate",
                      "table": "SS_Floor2",
                      "column": "LockupDate",
                      "type": "date"
                  },
                  {
-                     "name": "Floor2 LockedBy",
+                     "name": "Unit2 LockedBy",
                      "table": "SS_Floor2",
                      "column": "LockedBy",
                      "type": "string"
                  },
                  {
-                     "name": "Floor2 LastChecked",
+                     "name": "Unit2 LastChecked",
                      "table": "SS_Floor2",
                      "column": "LastChecked",
                      "type": "date"
@@ -386,46 +410,59 @@
                           ]
                       },
                       {
-                          "category": "Floor3",
+                          "category": "Unit3",
                           "fields": [
                             {
-                                "name": "Floor3",
+                                "name": "Unit3",
                                 "table": "SS_Floor3",
                                 "column": "FloorId",
                                 "type": "number"
                             },
                             {
-                                "name": "Floor3 Description",
+                                "name": "Unit3 Description",
                                 "table": "SS_Floor3",
                                 "column": "Description",
                                 "type": "string"
                             },
+                             {
+                                 "name": "Unit3 Occupancy",
+                                 "table": "SS_Floor3",
+                                 "column": "Occupancy",
+                                 "type": "string"
+                             },
+                            {
+                                "name": "Unit3 Breakdown",
+                                "table": "SS_Floor3",
+                                "column": "Breakdown",
+                                "type": "string"
+                            },
+
                  {
-                     "name": "Floor3 Bedroom",
+                     "name": "Unit3 Bedroom",
                      "table": "SS_Floor3",
                      "column": "Bedroom",
                      "type": "number"
                  },
                  {
-                     "name": "Floor3 Bathroom",
+                     "name": "Unit3 Bathroom",
                      "table": "SS_Floor3",
                      "column": "Bathroom",
                      "type": "number"
                  },
                  {
-                     "name": "Floor3 Livingroom",
+                     "name": "Unit3 Livingroom",
                      "table": "SS_Floor3",
                      "column": "Livingroom",
                      "type": "number"
                  },
                  {
-                     "name": "Floor3 Diningroom",
+                     "name": "Unit3 Diningroom",
                      "table": "SS_Floor3",
                      "column": "Diningroom",
                      "type": "number"
                  },
                  {
-                     "name": "Floor3 Occupied",
+                     "name": "Unit3 Occupied",
                      "table": "SS_Floor3",
                      "column": "Occupied",
                      "type": "list",
@@ -437,31 +474,31 @@
                      ]
                  },
                  {
-                     "name": "Floor3 Access",
+                     "name": "Unit3 Access",
                      "table": "SS_Floor3",
                      "column": "Access",
                      "type": "string"
                  },
                  {
-                     "name": "Floor3 LockBox",
+                     "name": "Unit3 LockBox",
                      "table": "SS_Floor3",
                      "column": "LockBox",
                      "type": "string"
                  },
                  {
-                     "name": "Floor3 LockupDate",
+                     "name": "Unit3 LockupDate",
                      "table": "SS_Floor3",
                      "column": "LockupDate",
                      "type": "date"
                  },
                  {
-                     "name": "Floor3 LockedBy",
+                     "name": "Unit3 LockedBy",
                      "table": "SS_Floor3",
                      "column": "LockedBy",
                      "type": "string"
                  },
                  {
-                     "name": "Floor3 LastChecked",
+                     "name": "Unit3 LastChecked",
                      "table": "SS_Floor3",
                      "column": "LastChecked",
                      "type": "date"
@@ -469,46 +506,58 @@
                           ]
                       },
                         {
-                            "category": "Floor4",
+                            "category": "Unit4",
                             "fields": [
                               {
-                                  "name": "Floor4",
+                                  "name": "Unit4",
                                   "table": "SS_Floor4",
                                   "column": "FloorId",
                                   "type": "number"
                               },
                               {
-                                  "name": "Floor4 Description",
+                                  "name": "Unit4 Description",
                                   "table": "SS_Floor4",
                                   "column": "Description",
                                   "type": "string"
                               },
+                               {
+                                   "name": "Unit4 Occupancy",
+                                   "table": "SS_Floor4",
+                                   "column": "Occupancy",
+                                   "type": "string"
+                               },
+                            {
+                                "name": "Unit4 Breakdown",
+                                "table": "SS_Floor4",
+                                "column": "Breakdown",
+                                "type": "string"
+                            },
                    {
-                       "name": "Floor4 Bedroom",
+                       "name": "Unit4 Bedroom",
                        "table": "SS_Floor4",
                        "column": "Bedroom",
                        "type": "number"
                    },
                    {
-                       "name": "Floor4 Bathroom",
+                       "name": "Unit4 Bathroom",
                        "table": "SS_Floor4",
                        "column": "Bathroom",
                        "type": "number"
                    },
                    {
-                       "name": "Floor4 Livingroom",
+                       "name": "Unit4 Livingroom",
                        "table": "SS_Floor4",
                        "column": "Livingroom",
                        "type": "number"
                    },
                    {
-                       "name": "Floor4 Diningroom",
+                       "name": "Unit4 Diningroom",
                        "table": "SS_Floor4",
                        "column": "Diningroom",
                        "type": "number"
                    },
                    {
-                       "name": "Floor4 Occupied",
+                       "name": "Unit4 Occupied",
                        "table": "SS_Floor4",
                        "column": "Occupied",
                        "type": "list",
@@ -520,31 +569,31 @@
                        ]
                    },
                    {
-                       "name": "Floor4 Access",
+                       "name": "Unit4 Access",
                        "table": "SS_Floor4",
                        "column": "Access",
                        "type": "string"
                    },
                    {
-                       "name": "Floor4 LockBox",
+                       "name": "Unit4 LockBox",
                        "table": "SS_Floor4",
                        "column": "LockBox",
                        "type": "string"
                    },
                    {
-                       "name": "Floor4 LockupDate",
+                       "name": "Unit4 LockupDate",
                        "table": "SS_Floor4",
                        "column": "LockupDate",
                        "type": "date"
                    },
                    {
-                       "name": "Floor4 LockedBy",
+                       "name": "Unit4 LockedBy",
                        "table": "SS_Floor4",
                        "column": "LockedBy",
                        "type": "string"
                    },
                    {
-                       "name": "Floor4 LastChecked",
+                       "name": "Unit4 LastChecked",
                        "table": "SS_Floor4",
                        "column": "LastChecked",
                        "type": "date"
@@ -552,46 +601,58 @@
                             ]
                         },
                         {
-                            "category": "Floor5",
+                            "category": "Unit5",
                             "fields": [
                               {
-                                  "name": "Floor5",
+                                  "name": "Unit5",
                                   "table": "SS_Floor5",
                                   "column": "FloorId",
                                   "type": "number"
                               },
                               {
-                                  "name": "Floor5 Description",
+                                  "name": "Unit5 Description",
                                   "table": "SS_Floor5",
                                   "column": "Description",
                                   "type": "string"
                               },
+                               {
+                                   "name": "Unit5 Occupancy",
+                                   "table": "SS_Floor5",
+                                   "column": "Occupancy",
+                                   "type": "string"
+                               },
+                            {
+                                "name": "Unit5 Breakdown",
+                                "table": "SS_Floor5",
+                                "column": "Breakdown",
+                                "type": "string"
+                            },
                    {
-                       "name": "Floor5 Bedroom",
+                       "name": "Unit5 Bedroom",
                        "table": "SS_Floor5",
                        "column": "Bedroom",
                        "type": "number"
                    },
                    {
-                       "name": "Floor5 Bathroom",
+                       "name": "Unit5 Bathroom",
                        "table": "SS_Floor5",
                        "column": "Bathroom",
                        "type": "number"
                    },
                    {
-                       "name": "Floor5 Livingroom",
+                       "name": "Unit5 Livingroom",
                        "table": "SS_Floor5",
                        "column": "Livingroom",
                        "type": "number"
                    },
                    {
-                       "name": "Floor5 Diningroom",
+                       "name": "Unit5 Diningroom",
                        "table": "SS_Floor5",
                        "column": "Diningroom",
                        "type": "number"
                    },
                    {
-                       "name": "Floor5 Occupied",
+                       "name": "Unit5 Occupied",
                        "table": "SS_Floor5",
                        "column": "Occupied",
                        "type": "list",
@@ -603,31 +664,31 @@
                        ]
                    },
                    {
-                       "name": "Floor5 Access",
+                       "name": "Unit5 Access",
                        "table": "SS_Floor5",
                        "column": "Access",
                        "type": "string"
                    },
                    {
-                       "name": "Floor5 LockBox",
+                       "name": "Unit5 LockBox",
                        "table": "SS_Floor5",
                        "column": "LockBox",
                        "type": "string"
                    },
                    {
-                       "name": "Floor5 LockupDate",
+                       "name": "Unit5 LockupDate",
                        "table": "SS_Floor5",
                        "column": "LockupDate",
                        "type": "date"
                    },
                    {
-                       "name": "Floor5 LockedBy",
+                       "name": "Unit5 LockedBy",
                        "table": "SS_Floor5",
                        "column": "LockedBy",
                        "type": "string"
                    },
                    {
-                       "name": "Floor5 LastChecked",
+                       "name": "Unit5 LastChecked",
                        "table": "SS_Floor5",
                        "column": "LastChecked",
                        "type": "date"

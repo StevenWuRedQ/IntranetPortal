@@ -55,6 +55,7 @@
                                             </span>
                                             <span ng-if="f.type=='number'">
                                                 <select ng-model="x.criteria" ng-change="updateNumberFilter(x)">
+                                                    <option value="0">=</option>
                                                     <option value="1"><</option>
                                                     <option value="2"><=</option>
                                                     <option value="3">></option>
