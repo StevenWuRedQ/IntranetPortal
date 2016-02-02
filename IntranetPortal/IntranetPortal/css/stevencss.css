@@ -2434,3 +2434,9 @@ a.shot_sale_tab_a {
 .wx_scorll_list {
     overflow: auto;
 }
+
+/*ALL excel should be green*/
+.fa-file-excel-o
+{
+    color:green;
+}

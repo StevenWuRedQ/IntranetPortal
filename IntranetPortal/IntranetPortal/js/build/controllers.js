@@ -1716,6 +1716,12 @@ angular.module('PortalApp')
             return;
         } else {
             switch (x.criteria) {
+                case "0":
+                    x.WhereTerm = "CreateCompare";
+                    x.CompareOperator = "Equal";
+                    x.value1 = x.input1.trim();
+                    x.value2 = "";
+                    break;
                 case "1":
                     x.WhereTerm = "CreateCompare";
                     x.CompareOperator = "Less";
