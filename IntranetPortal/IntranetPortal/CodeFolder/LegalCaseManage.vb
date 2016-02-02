@@ -24,6 +24,7 @@ Public Class LegalCaseManage
         End If
         Return "{}"
     End Function
+
     Public Shared Function GetCaseRelateUsers(bble As String) As List(Of Employee)
         Dim legalManger = GetLegalManger()
 
@@ -37,7 +38,6 @@ Public Class LegalCaseManage
         eList.Add(legalManger)
 
         Return eList
-
     End Function
     Public Shared Function GetCaseRelateUsersName(bble As String) As String
         Dim users = GetCaseRelateUsers(bble)

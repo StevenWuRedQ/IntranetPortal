@@ -14,7 +14,7 @@ Public Class WebForm3
 
         Me.DeadleadsReport.BindData(Nothing)
         Dim params As New Dictionary(Of String, String)
-        params.Add("IsWeekly", True)
+        params.Add("IsWeekly", False)
         Me.AuctionDailyReport.BindData(params)
     End Sub
 

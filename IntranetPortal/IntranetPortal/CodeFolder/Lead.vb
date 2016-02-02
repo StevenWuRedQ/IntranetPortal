@@ -140,10 +140,13 @@ Partial Public Class Lead
             Return True
         End If
 
-        For Each rl In Roles.GetRolesForUser(name)
+        For Each rl In myRoles
+            If rl.Contains("*") Then
+                Continue For
+            End If
+
             If rl.StartsWith("OfficeManager") Then
                 Dim dept = rl.Split("-")(1)
-
                 If IntranetPortal.Employee.GetDeptUsers(dept).Contains(owner) Then
                     Return True
                 End If
