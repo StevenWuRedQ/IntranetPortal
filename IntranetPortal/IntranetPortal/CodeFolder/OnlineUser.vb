@@ -67,18 +67,27 @@ Public Class OnlineUser
             Else
                 Dim newUser As New OnlineUser
                 newUser.UserName = context.User.Identity.Name
-                newUser.IPAddress = context.Request.ServerVariables("REMOTE_ADDR")
+                newUser.IPAddress = GetClientIPAddress(context)
                 newUser.LoginTime = DateTime.Now
                 newUser.RefreshTime = DateTime.Now
 
                 users.Add(AddLog(newUser))
             End If
+
             context.Application("Users") = users
             context.Application.UnLock()
 
             RefreshUserList()
 
             Return True
+        End If
+    End Function
+
+    Private Shared Function GetClientIPAddress(context As HttpContext) As String
+        If context.Request.ServerVariables("HTTP_VIA") IsNot Nothing Then
+            Return context.Request.ServerVariables("HTTP_X_FORWARDED_FOR").ToString
+        Else
+            Return context.Request.ServerVariables("REMOTE_ADDR").ToString
         End If
     End Function
 
@@ -90,7 +99,6 @@ Public Class OnlineUser
 
             For Each item In users.Where(Function(u) u.RefreshTime.AddMinutes(10) < DateTime.Now)
                 UpdateLog(item)
-
             Next
 
             users.RemoveAll(Function(u) u.RefreshTime.AddMinutes(10) < DateTime.Now)
@@ -100,7 +108,6 @@ Public Class OnlineUser
     End Sub
 
     Public Shared Sub LogoutUserFromSystem()
-
 
     End Sub
 
@@ -116,6 +123,23 @@ Public Class OnlineUser
         HttpContext.Current.Application("Users") = users
         HttpContext.Current.Application.UnLock()
     End Sub
+
+    Shared Function LoadUsers() As List(Of OnlineUser)
+        Using ctx As New Entities
+
+            Dim logs = ctx.LoginLogs.Where(Function(log) log.LogoutTime Is Nothing).ToList
+
+            Return logs.Select(Function(l)
+                                   Return New OnlineUser With {
+                                    .UserName = l.Employee,
+                                    .IPAddress = l.IPAddress,
+                                    .LoginTime = l.LogInTime,
+                                    .RefreshTime = DateTime.Now
+                                   }
+                               End Function).ToList
+
+        End Using
+    End Function
 
     Shared Function AddLog(user As OnlineUser) As OnlineUser
         Using Context As New Entities
@@ -137,7 +161,7 @@ Public Class OnlineUser
         Using context As New Entities
             Dim log = context.LoginLogs.Where(Function(l) l.LogID = user.SessionID).SingleOrDefault
             If log IsNot Nothing Then
-                log.LogoutTime = IIf(user.RefreshTime = DateTime.MinValue, DateTime.Now, user.RefreshTime)
+                log.LogoutTime = DateTime.Now
                 context.SaveChanges()
             End If
 

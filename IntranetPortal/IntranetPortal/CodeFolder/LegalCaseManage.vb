@@ -39,6 +39,21 @@ Public Class LegalCaseManage
 
         Return eList
     End Function
+
+    Public Shared Function GetCaseOwner(bble As String) As String
+        Dim lcase = LegalCase.GetCase(bble)
+
+        If lcase IsNot Nothing Then
+            If String.IsNullOrEmpty(lcase.Attorney) Then
+                Return lcase.ResearchBy
+            Else
+                Return lcase.Attorney
+            End If
+        End If
+
+        Return Nothing
+    End Function
+
     Public Shared Function GetCaseRelateUsersName(bble As String) As String
         Dim users = GetCaseRelateUsers(bble)
         Return String.Join(";", users.Select(Function(e) e.Name))

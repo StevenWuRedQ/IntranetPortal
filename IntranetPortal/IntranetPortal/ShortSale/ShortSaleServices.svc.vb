@@ -34,7 +34,7 @@ Public Class ShortSaleServices
         ssCase.DocumentRequestDetails = ShortSaleManage.GetDocumentRequestDetail(ssCase.BBLE)
         ssCase.InHouseTitle = TitleManage.GetTitleOwner(ssCase.BBLE)
 
-        'ssCase.InHouseLegal = LegalCaseManage.GetCaseRelateUsersName(ssCase.BBLE)
+        ssCase.InHouseLegal = LegalCaseManage.GetCaseOwner(ssCase.BBLE)
 
         Core.SystemLog.Log(ShortSaleManage.OpenCaseLogTitle, Nothing, Core.SystemLog.LogCategory.Operation, ssCase.BBLE, HttpContext.Current.User.Identity.Name)
 
