@@ -831,7 +831,117 @@
                                     <iframe src="/Map/ZipMap.aspx" style="width: 100%; height: 800px"></iframe>
                                 </div>--%>
                                 <div role="tabpanel" class="tab-pane" id="Team_Activity_Tab">
-                                    Under construction. Comming soon...
+                                   <div class="mag_tab_input_group">
+                                        <div class="row">
+                                            <div id="dateRange2" class="containers" style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px">
+                                        <div class="col-md-12">
+                                            <div id="leadsImportChart" class="containers" style="height: 440px; width: 100%;"></div>
+                                        </div>                                        
+                                    </div>
+
+                                    <script type="text/javascript">
+                                        var TeamActivityTab = {
+                                            DateRange: function () { return $('#dateRange2').has("svg").length ? $('#dateRange2').dxRangeSelector('instance') : null },
+                                            ShowTab: function() {
+                                                var range = this.DateRange();
+                                                var selectedRange = range.getSelectedRange();                                               
+                                                this.UpdateChart(selectedRange.startValue, selectedRange.endValue);
+                                            },
+                                            InitalTab: function () {
+                                                var tab = this;
+                                                var dateNow = new Date();
+                                                var endDate = new Date();
+                                                endDate = endDate.setDate(dateNow.getDate() + 1);
+                                                var startDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
+                                                $("#dateRange2").dxRangeSelector({
+                                                    margin: {
+                                                        top: 5
+                                                    },
+                                                    size: {
+                                                        height: 80
+                                                    },
+                                                    scale: {
+                                                        startValue: new Date(2016,0,1),
+                                                        endValue: endDate,
+                                                        minorTickInterval: "day",
+                                                        majorTickInterval: 'week',
+                                                        minRange: "day",
+                                                        showMinorTicks: true
+                                                    },
+                                                    sliderMarker: {
+                                                        format: "monthAndDay"
+                                                    },
+                                                    selectedRange: {
+                                                        startValue: new Date(dateNow.getFullYear(), dateNow.getMonth(), 1),
+                                                        endValue: endDate
+                                                    },
+                                                    onSelectedRangeChanged: function (e) {
+                                                        tab.UpdateChart(e.startValue, e.endValue);
+                                                    }
+                                                });
+                                            },
+                                            UpdateChart: function (startDate, endDate) {
+                                                var chart = this.BarChart();
+                                                chart.showLoadingIndicator();
+                                                chart.clearSelection();
+                                                var ds = new DevExpress.data.DataSource("/api/portalreport/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-"));
+                                                chart.beginUpdate();
+                                                chart.option("dataSource", ds);
+                                                chart.endUpdate();                                                
+                                            },
+                                            BarChart: function () {
+                                                if ($("#leadsImportChart").has("svg").length)
+                                                    return $("#leadsImportChart").dxChart("instance");
+                                                else {
+                                                    var tab = this;
+                                                    $("#leadsImportChart").dxChart({
+                                                        dataSource: {},
+                                                        commonSeriesSettings: {
+                                                            argumentField: "Name",
+                                                            type: "bar",
+                                                            hoverMode: "allArgumentPoints",
+                                                            selectionMode: "allArgumentPoints",
+                                                            label: {
+                                                                visible: true,
+                                                                format: "fixedPoint",
+                                                                precision: 0
+                                                            }
+                                                        },
+                                                        series: [
+                                                            { valueField: "ImportCount", name: "Import Leads", argumentField: "Name" },
+                                                            { valueField: "DeadCount", name: "Dead Leads", argumentField: "Name" },
+                                                        ],
+                                                        argumentAxis: {
+                                                            argumentType: 'string'
+                                                        },                                                     
+                                                        title: "Leads Import Amount of the Teams",
+                                                        legend: {
+                                                            verticalAlignment: "bottom",
+                                                            horizontalAlignment: "center"
+                                                        },
+                                                        loadingIndicator: {
+                                                            show: true
+                                                        },
+                                                        onPointClick: function (info) {
+                                                           
+                                                        },
+                                                        onPointSelectionChanged: function (info) {
+                                                           
+                                                        },
+                                                        onLegendClick: function (info) {
+                                                           
+                                                        }
+                                                    });
+                                                    return $("#leadsImportChart").dxChart("instance");
+                                                }
+                                            },
+                                        }
+
+                                    </script>
+
                                 </div>
                             </div>
                         </div>
@@ -1279,7 +1389,7 @@
            };
         var officeDropDown = $("#dropDownMenu").dxDropDownMenu({
             dataSource: dropDownMenuData,
-            itemClickAction: menuItemClicked,
+            onItemClick: menuItemClicked,
             buttonIcon: 'arrowdown',
         }).dxDropDownMenu("instance");
 
@@ -1304,6 +1414,8 @@
                 text: "<i class=\"fa fa-pie-chart mag_tabv_i\"></i>Team Activity",
                 action: function () {
                     $('#mytab a[href="#Team_Activity_Tab"]').tab('show');
+                    TeamActivityTab.InitalTab();
+                    TeamActivityTab.ShowTab();
                     //LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true);
                 }
             }
@@ -1317,7 +1429,7 @@
 
         var reportTypeDropdown = $("#reportType").dxDropDownMenu({
             dataSource: reportsName,
-            itemClickAction: function (e) {
+            onItemClick: function (e) {
                 var report = reportList[e.itemData];
                 $("#tdReportTitle").html(report.text);
                 report.action();
@@ -1327,6 +1439,7 @@
 
         $(document).ready(function () {
             agentActivityTab.InitalTab();
+           
             if (dropDownMenuData && dropDownMenuData.length > 0)
                 ShowTeamData(dropDownMenuData[0]);
         });

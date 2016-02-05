@@ -10,14 +10,29 @@ Public Class PortalReport
     ''' <param name="startDate">Start Date</param>
     ''' <param name="endDate">End Date</param>
     ''' <returns></returns>
-    Public Shared Function LeadsImportReport(startDate As DateTime, endDate As DateTime) As Dictionary(Of String, Integer)
+    Public Shared Function LeadsImportReport(startDate As DateTime, endDate As DateTime) As Object
+        Dim teams = Team.GetAllTeams.Select(Function(t)
+                                                Return New With {
+                                                    .Name = t.Name,
+                                                    .ImportCount = 0,
+                                                    .DeadCount = 0}
+                                            End Function).ToList
 
         Using ctx As New Entities
-            Dim logs = ctx.LeadsStatusLogs.Where(Function(l) l.CreateDate >= startDate AndAlso l.CreateDate < endDate AndAlso l.CreateBy = "System" AndAlso l.Type = 0).ToList
 
-            Dim result = logs.GroupBy(Function(l) l.Employee).ToDictionary(Function(l) l.Key, Function(l) l.Select(Function(d) d.BBLE).Distinct.Count)
-            Return result
+            Dim logs = ctx.LeadsStatusLogs.Where(Function(l) l.CreateDate >= startDate AndAlso l.CreateDate < endDate AndAlso l.CreateBy = "System" AndAlso l.Type = 0).ToList
+            Dim result = logs.GroupBy(Function(l) l.Employee).Select(Function(l) New With {.Key = l.Key.Replace(" Office", ""), .ImportCount = l.Select(Function(d) d.BBLE).Distinct.Count}).ToList
+            Dim deadslogs = LoadDeadLeadsReport(startDate, endDate)
+            Dim deadLeadsCounts = deadslogs.Where(Function(l) l.TeamName IsNot Nothing).GroupBy(Function(ad) ad.TeamName).Select(Function(ag) New With {.Key = ag.Key, .Amount = ag.Sum(Function(l) l.UniqueBBLE)}).ToList
+
+            For Each tm In teams
+                tm.ImportCount = result.Where(Function(r) r.Key.ToLower = tm.Name.ToLower).Select(Function(r) r.ImportCount).SingleOrDefault
+                tm.DeadCount = deadLeadsCounts.Where(Function(a) a.Key.ToLower = tm.Name.ToLower).Select(Function(r) r.Amount).SingleOrDefault
+            Next
+
+            Return teams
         End Using
+
     End Function
 
     ''' <summary>
@@ -166,7 +181,7 @@ Public Class PortalReport
                 act.TeamName = UserInTeam.GetUserTeam(emp)
                 Dim bbles = deadLogs.Where(Function(d) d.Employee = emp).Select(Function(d) d.BBLE).ToArray
                 act.DeadLeads = ctx.Leads.Where(Function(ld) bbles.Contains(ld.BBLE)).ToArray
-
+                act.UniqueBBLE = bbles.Distinct.Count
                 result.Add(act)
             Next
 
