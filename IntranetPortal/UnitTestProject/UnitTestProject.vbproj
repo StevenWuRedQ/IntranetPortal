@@ -184,6 +184,7 @@
     <Compile Include="LegalUnitTest.vb" />
     <Compile Include="AuctionPropertyTest.vb" />
     <Compile Include="TwilioUnitTest.vb" />
+    <Compile Include="PortalReportUnitTest.vb" />
     <Compile Include="WeDriverTest.vb" />
     <Compile Include="UserTaskTest.vb" />
     <Compile Include="WebGrabberTest.vb" />

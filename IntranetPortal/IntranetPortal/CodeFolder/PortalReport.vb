@@ -5,6 +5,22 @@
 Public Class PortalReport
 
     ''' <summary>
+    ''' Return all the teams leads count imported by system
+    ''' </summary>
+    ''' <param name="startDate">Start Date</param>
+    ''' <param name="endDate">End Date</param>
+    ''' <returns></returns>
+    Public Shared Function LeadsImportReport(startDate As DateTime, endDate As DateTime) As Dictionary(Of String, Integer)
+
+        Using ctx As New Entities
+            Dim logs = ctx.LeadsStatusLogs.Where(Function(l) l.CreateDate >= startDate AndAlso l.CreateDate < endDate AndAlso l.CreateBy = "System" AndAlso l.Type = 0).ToList
+
+            Dim result = logs.GroupBy(Function(l) l.Employee).ToDictionary(Function(l) l.Key, Function(l) l.Select(Function(d) d.BBLE).Distinct.Count)
+            Return result
+        End Using
+    End Function
+
+    ''' <summary>
     ''' Return lega users' activity data betweeen start date and end date
     ''' </summary>
     ''' <param name="startDate">Start Date</param>

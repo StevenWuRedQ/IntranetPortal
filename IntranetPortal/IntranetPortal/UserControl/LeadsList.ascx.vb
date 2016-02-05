@@ -450,6 +450,8 @@ Public Class LeadsList
 
                 Context.Leads.Add(ld)
                 Context.SaveChanges()
+
+
             Else
                 'use workflow engine to approval 
                 ld.Status = LeadStatus.MgrApprovalInWf
@@ -470,6 +472,8 @@ Public Class LeadsList
                 UserMessage.AddNewMessage(Page.User.Identity.Name, "New Lead", String.Format("The new lead {1} is waiting manager ({0}) approval.", mgr, bble), bble)
                 UserMessage.AddNewMessage(mgr, "New Lead Approval", commtents, bble)
             End If
+
+            LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.NewLeads, Page.User.Identity.Name, Page.User.Identity.Name, Page.User.Identity.Name)
 
             e.Cancel = True
             gridLeads.CancelEdit()
