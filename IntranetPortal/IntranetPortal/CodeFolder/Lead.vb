@@ -114,6 +114,10 @@ Partial Public Class Lead
     End Function
 
     Public Function IsViewable(name As String) As Boolean
+        If String.IsNullOrEmpty(EmployeeName) Then
+            Return True
+        End If
+
         If Status = LeadStatus.DeadEnd Or EmployeeName = "Dead Leads" Then
             Return True
         End If
@@ -147,7 +151,7 @@ Partial Public Class Lead
 
             If rl.StartsWith("OfficeManager") Then
                 Dim dept = rl.Split("-")(1)
-                If IntranetPortal.Employee.GetDeptUsers(dept).Contains(owner) Then
+                If IntranetPortal.Employee.GetDeptUsers(dept, False).Contains(owner) Then
                     Return True
                 End If
 
