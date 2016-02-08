@@ -1,4 +1,6 @@
-﻿<TestClass()>
+﻿Imports IntranetPortal
+
+<TestClass()>
 Public Class EmployeeTest
 
     <TestMethod()>
@@ -21,6 +23,25 @@ Public Class EmployeeTest
 
         roles = System.Web.Security.Roles.GetRolesForUser("Michael Gali")
         Assert.IsTrue(roles.Contains("OfficeManager-*"))
+    End Sub
+
+    <TestMethod>
+    Public Sub GetDeptUsersList_ReturnEmployee()
+        Dim result = Employee.GetDeptUsersList("GaliTeam", True)
+        Assert.IsFalse(result.Any(Function(a) a.Name = "Crystal Dixon"))
+
+        result = Employee.GetDeptUsersList("GaliTeam", False)
+        Assert.IsTrue(result.Any(Function(a) a.Name = "Crystal Dixon"))
+
+    End Sub
+
+    <TestMethod>
+    Public Sub GetTeamUsersArray_returnUserList()
+        Dim result = UserInTeam.GetTeamUsersArray("GaliTeam")
+        Assert.IsFalse(result.Contains("Crystal Dixon"))
+
+        result = UserInTeam.GetTeamUsersArray("GaliTeam", True)
+        Assert.IsTrue(result.Contains("Crystal Dixon"))
     End Sub
 
 End Class

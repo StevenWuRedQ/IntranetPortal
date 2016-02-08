@@ -151,7 +151,7 @@ Partial Public Class Lead
                     Return True
                 End If
 
-                If IntranetPortal.UserInTeam.GetTeamUsersArray(dept).Contains(owner) Then
+                If IntranetPortal.UserInTeam.GetTeamUsersArray(dept, True).Contains(owner) Then
                     Return True
                 End If
 
