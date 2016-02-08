@@ -32,8 +32,24 @@ Public Class PortalReport
 
             Return teams
         End Using
-
     End Function
+
+
+    Public Shared Function WeeklyTeamImportReport(teamName As String) As Object
+        Using ctx As New Entities
+            teamName = teamName & " Office"
+            Dim endDate = DateTime.Now
+            Dim startDate = endDate.AddDays(-endDate.DayOfWeek - 7 * 4)
+
+            Dim logs = ctx.LeadsStatusLogs.Where(Function(l) l.CreateDate >= startDate AndAlso l.CreateDate < endDate AndAlso l.Employee = teamName AndAlso l.CreateBy = "System" AndAlso l.Type = 0).ToList
+
+            Dim result = logs.GroupBy(Function(a) DateAndTime.DatePart(DateInterval.WeekOfYear, a.CreateDate.Value)).Select(Function(g) New With {.WeekofYear = g.Key, .Count = g.Count}).ToList
+
+            Return result
+        End Using
+        Return Nothing
+    End Function
+
 
     ''' <summary>
     ''' Return lega users' activity data betweeen start date and end date

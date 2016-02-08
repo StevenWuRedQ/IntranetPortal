@@ -11,4 +11,10 @@ Imports IntranetPortal
         Assert.IsTrue(report.Count > 0)
     End Sub
 
+    <TestMethod()> Public Sub WeeklyTeamImportReport_Returnlast5WeekCount()
+        Dim report = PortalReport.WeeklyTeamImportReport("Galiteam")
+        Assert.IsTrue(report IsNot Nothing)
+
+    End Sub
+
 End Class
