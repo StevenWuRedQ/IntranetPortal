@@ -42,8 +42,20 @@ Public Class PortalReport
             Dim startDate = endDate.AddDays(-endDate.DayOfWeek - 7 * 4)
 
             Dim logs = ctx.LeadsStatusLogs.Where(Function(l) l.CreateDate >= startDate AndAlso l.CreateDate < endDate AndAlso l.Employee = teamName AndAlso l.CreateBy = "System" AndAlso l.Type = 0).ToList
+            Dim weekofYear = DateAndTime.DatePart(DateInterval.WeekOfYear, startDate)
 
-            Dim result = logs.GroupBy(Function(a) DateAndTime.DatePart(DateInterval.WeekOfYear, a.CreateDate.Value)).Select(Function(g) New With {.WeekofYear = g.Key, .Count = g.Count}).ToList
+            Dim weekData = logs.GroupBy(Function(a) DateAndTime.DatePart(DateInterval.WeekOfYear, a.CreateDate.Value)).Select(Function(g) New With {.WeekofYear = g.Key, .Count = g.Count}).ToList
+
+            Dim result As New List(Of Object)
+            For i = weekofYear To DatePart(DateInterval.WeekOfYear, endDate)
+                Dim tmpWeek = i
+                result.Add(New With {
+                              .Week = tmpWeek,
+                              .StartDate = startDate.Date,
+                              .Count = weekData.Where(Function(w) w.WeekofYear = tmpWeek).Select(Function(a) a.Count).SingleOrDefault
+                           })
+                startDate = startDate.AddDays(7)
+            Next
 
             Return result
         End Using

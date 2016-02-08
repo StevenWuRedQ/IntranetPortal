@@ -16,5 +16,11 @@ Namespace Controllers
             Return Ok(result)
         End Function
 
+        <Route("api/PortalReport/{TeamName}")>
+        Public Function GetTeamImportReport(teamName As String) As IHttpActionResult
+
+            Return Ok()
+        End Function
+
     End Class
 End Namespace
