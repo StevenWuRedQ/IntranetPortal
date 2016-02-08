@@ -155,7 +155,7 @@ Partial Public Class Lead
                     Return True
                 End If
 
-                If owner.Contains(dept & " Office") Then
+                If owner.ToLower.Contains(dept.ToLower & " office") Then
                     Return True
                 End If
             End If
