@@ -2,6 +2,7 @@
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports IntranetPortal.Data
 Imports System.Web.Http
+Imports IntranetPortal
 
 <TestClass()> Public Class LegalUnitTest
 
@@ -70,6 +71,16 @@ Imports System.Web.Http
         history = controller.GetSavedHistory(0)
         caseData = CType(history, Results.OkNegotiatedContentResult(Of String)).Content
         Assert.AreEqual("{}", caseData)
+    End Sub
+
+    <TestMethod> Public Sub GetCaseOwner_returnOwnerName()
+        Dim lcase = LegalCase.GetCase(bble)
+
+        lcase.Attorney = "Chris Yan"
+        Assert.AreEqual(lcase.Attorney, LegalCaseManage.GetCaseOwner(bble))
+        Assert.AreEqual("Amy Beckwith", LegalCaseManage.GetCaseOwner("2022870021"))
+        Assert.IsNull(LegalCaseManage.GetCaseOwner("2022890122"))
+        Assert.IsNull(LegalCaseManage.GetCaseOwner("12321321321"))
     End Sub
 
 End Class

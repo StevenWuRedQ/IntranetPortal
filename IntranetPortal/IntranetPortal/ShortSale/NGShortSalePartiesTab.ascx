@@ -38,6 +38,25 @@
         </ul>
     </div>
 </div>
+<div>
+    <h4 class="ss_form_title">InHouse Legal</h4>
+    <div class="ss_border">
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Name</label>
+                <input type="text" class="ss_form_input" ng-model="SsCase.InHouseLegal" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Phone #</label>
+                <input class="ss_form_input" ng-model="ptContactServices.getContactByName(SsCase.InHouseLegal).OfficeNO" mask="(999) 999-9999" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Email</label>
+                <input class="ss_form_input" ng-model="ptContactServices.getContactByName(SsCase.InHouseLegal).Email" type="email" readonly="readonly">
+            </li>
+        </ul>
+    </div>
+</div>
 <div class="ss_form">
     <h4 class="ss_form_title">Referral&nbsp<pt-collapse model="referralCollapse"/></h4>
     <div class="ss_border">

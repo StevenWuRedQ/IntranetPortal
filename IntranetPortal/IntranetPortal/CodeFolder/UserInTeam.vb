@@ -7,13 +7,13 @@ Partial Public Class UserInTeam
     Public Property EmployeePosition As String
     Public Property EmployeeActive As Boolean
 
-    Public Shared Function GetTeamUsers(teamNames As String) As List(Of UserInTeam)
+    Public Shared Function GetTeamUsers(teamNames As String, Optional includeNonAction As Boolean = False) As List(Of UserInTeam)
         Using ctx As New Entities
             Dim items = From ut In ctx.UserInTeams
-                           Join team In ctx.Teams On ut.TeamId Equals team.TeamId
-                           Join Emp In ctx.Employees On ut.EmployeeName Equals Emp.Name
-                           Where teamNames.Contains(team.Name) Or teamNames = "*"
-                           Select New With {
+                        Join team In ctx.Teams On ut.TeamId Equals team.TeamId
+                        Join Emp In ctx.Employees On ut.EmployeeName Equals Emp.Name
+                        Where teamNames.Contains(team.Name) Or teamNames = "*"
+                        Select New With {
                                .UserTeam = ut,
                                .TeamName = team.Name,
                                .EmployeeId = Emp.EmployeeID,
@@ -30,7 +30,7 @@ Partial Public Class UserInTeam
                 result.Add(item.UserTeam)
             Next
 
-            Return result.Where(Function(e) e.EmployeeActive = True).ToList
+            Return result.Where(Function(e) e.EmployeeActive = True Or (includeNonAction = True)).ToList
         End Using
     End Function
 
@@ -39,8 +39,8 @@ Partial Public Class UserInTeam
     ''' </summary>
     ''' <param name="teamNames">Team Name</param>
     ''' <returns></returns>
-    Public Shared Function GetTeamUsersArray(teamNames As String) As String()
-        Return GetTeamUsers(teamNames).Select(Function(u) u.EmployeeName).ToArray
+    Public Shared Function GetTeamUsersArray(teamNames As String, Optional includeNonAction As Boolean = False) As String()
+        Return GetTeamUsers(teamNames, includeNonAction).Select(Function(u) u.EmployeeName).ToArray
     End Function
 
     Public Shared Function GetTeamFinders(teamNames As String) As String()

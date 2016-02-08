@@ -427,7 +427,7 @@ Partial Public Class Employee
     Public Shared Function GetDeptUsersList(deptName As String, isActive As Boolean) As List(Of Employee)
         Dim emps As New List(Of Employee)
         Using context As New Entities
-            Return context.Employees.Where(Function(em) em.Department = deptName And em.Active = isActive).ToList
+            Return context.Employees.Where(Function(em) em.Department = deptName And (em.Active = isActive Or isActive = False)).ToList
         End Using
     End Function
 
