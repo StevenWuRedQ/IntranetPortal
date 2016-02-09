@@ -655,6 +655,12 @@ Public Class PendingAssignRule
         Dim lds = PendingAssignLead.GetAllPendingLeads
 
         For Each ld In lds
+            Try
+                LeadsInfo.CreateLeadsInfo(ld.BBLE, ld.Type, ld.CreateBy)
+            Catch ex As Exception
+                Log("Create leads Info error " & ld.BBLE, ex)
+            End Try
+
             Core.DataLoopRule.AddRules(ld.BBLE, Core.DataLoopRule.DataLoopType.All, "PendingAssignRule")
             ld.Update(PendingAssignLead.PendingStatus.InLoop)
         Next

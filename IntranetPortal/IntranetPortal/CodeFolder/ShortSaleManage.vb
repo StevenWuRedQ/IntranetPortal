@@ -251,7 +251,7 @@ Public Class ShortSaleManage
                 maildata.Add("Referral", ref.Name)
                 maildata.Add("ItemLink", HttpContext.Current.Request.Url.Authority & "/ShortSale/ShortSale.aspx?CaseId=" & ssCase.CaseId)
 
-                Core.EmailService.SendMail(Employee.GetInstance(ssCase.Owner).Email, ccEmail, "ShortSaleNewCaseNotification", maildata)
+                Core.EmailService.SendMail(intaker.Email, ccEmail, "ShortSaleNewCaseNotification", maildata)
             End If
         Catch ex As Exception
             Core.SystemLog.LogError("New SS Case email notification", ex, Nothing, HttpContext.Current.User.Identity.Name, bble)
@@ -542,7 +542,6 @@ Public Class ShortSaleProcess
     Public ApprovedAction As Approved
     Public DeclinedAction As Declined
 
-
     Private Shared ProcessTable As New List(Of ShortSaleProcess)
     Private Sub New()
     End Sub
@@ -550,8 +549,29 @@ Public Class ShortSaleProcess
     Public Shared Sub ExecuteAction(task As UserTask)
         Dim proc = ProcessTable.FirstOrDefault(Function(p) p.TaskName = task.Action)
 
+        'The pro may is nothing, when the program is on restarting
+        If proc Is Nothing Then
+            If task.Action = ShortSaleManage.NewCaseProcess.TaskName Then
+                proc = ShortSaleManage.NewCaseProcess
+            End If
+
+            If task.Action = ShortSaleManage.ReassignProcess.TaskName Then
+                proc = ShortSaleManage.ReassignProcess
+            End If
+
+            If task.Action = ShortSaleManage.AssignProcess.TaskName Then
+                proc = ShortSaleManage.AssignProcess
+            End If
+
+            If task.Action = ShortSaleManage.ArchivedProcess.TaskName Then
+                proc = ShortSaleManage.ArchivedProcess
+            End If
+        End If
+
         If proc IsNot Nothing Then
             proc.ProcessApproval(task)
+        Else
+            Throw New Exception("Can't find predefined task: " & task.Action)
         End If
     End Sub
 
