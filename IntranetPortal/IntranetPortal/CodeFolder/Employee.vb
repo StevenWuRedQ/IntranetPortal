@@ -185,6 +185,10 @@ Partial Public Class Employee
             Dim teams As New List(Of String)
             For Each rl In Roles.GetRolesForUser(userName)
                 If rl.StartsWith("OfficeManager") Then
+                    If rl.Contains("*") Then
+                        Continue For
+                    End If
+
                     teams.Add(rl.Split("-")(1))
                 End If
             Next

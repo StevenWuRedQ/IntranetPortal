@@ -5,7 +5,8 @@ Public Class ManagementUI
     Inherits System.Web.UI.Page
 
     Protected Function GetAllTeam() As List(Of String)
-        Return Employee.GetMyEmployeesByTeam(Page.User.Identity.Name).Select(Function(ut) ut.TeamName).Distinct.ToList
+        Dim allTeams = Employee.GetMyEmployeesByTeam(Page.User.Identity.Name).Select(Function(ut) ut.TeamName).Distinct.ToArray
+        Return Team.GetActiveTeams().Where(Function(t) allTeams.Contains(t.Name)).Select(Function(a) a.Name).ToList
 
         'Return Team.GetAllTeams().Select(Function(t) t.Name).ToList
 

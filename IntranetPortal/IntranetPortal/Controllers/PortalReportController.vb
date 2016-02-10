@@ -19,7 +19,8 @@ Namespace Controllers
         <Route("api/PortalReport/{TeamName}")>
         Public Function GetTeamImportReport(teamName As String) As IHttpActionResult
 
-            Return Ok()
+            Dim result = PortalReport.WeeklyTeamImportReport(teamName)
+            Return Ok(result)
         End Function
 
     End Class

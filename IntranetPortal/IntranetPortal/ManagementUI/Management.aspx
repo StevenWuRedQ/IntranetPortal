@@ -836,10 +836,10 @@
                                             <div id="dateRange2" class="containers" style="width: 100%;"></div>
                                         </div>
                                     </div>
-                                    <div class="row" style="margin-top: 10px">
+                                    <div class="row" style="margin-top: 10px" id="divTeamActivity">
                                         <div class="col-md-12">
                                             <div id="leadsImportChart" class="containers" style="height: 440px; width: 100%;"></div>
-                                        </div>                                        
+                                        </div>
                                     </div>
 
                                     <script type="text/javascript">
@@ -885,12 +885,47 @@
                                             },
                                             UpdateChart: function (startDate, endDate) {
                                                 var chart = this.BarChart();
+                                                var tab = this;
                                                 chart.showLoadingIndicator();
                                                 chart.clearSelection();
                                                 var ds = new DevExpress.data.DataSource("/api/portalreport/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-"));
                                                 chart.beginUpdate();
-                                                chart.option("dataSource", ds);
+                                                chart.option({
+                                                    dataSource: ds,
+                                                    series: [
+                                                           { valueField: "ImportCount", name: "Import Leads", argumentField: "Name" },
+                                                           { valueField: "DeadCount", name: "Dead Leads", argumentField: "Name" },
+                                                    ],
+                                                    argumentAxis: {
+                                                        argumentType: 'string'
+                                                    },
+                                                    title: "Leads Import Amount of the Teams",
+                                                    onPointClick: function (info) {
+                                                        var clickedPoint = info.target;
+                                                        tab.UpdateTeamChart(clickedPoint.argument);
+                                                    },
+                                                });
                                                 chart.endUpdate();                                                
+                                            },
+                                            UpdateTeamChart: function (teamName) {
+                                                var chart = this.BarChart();                                               
+                                                chart.showLoadingIndicator();
+                                                chart.clearSelection();
+                                                var ds = new DevExpress.data.DataSource("/api/portalreport/" + teamName);
+                                                chart.beginUpdate();                                                
+                                                chart.option({
+                                                    dataSource: ds,
+                                                    series: [
+                                                            { valueField: "Count", name: "Week No.", argumentField: "StartDate" },
+                                                    ],
+                                                    argumentAxis: {
+                                                        argumentType: 'datetime',
+                                                        tickInterval: 'week'
+                                                    },
+                                                    title: teamName + "'s Leads Importing Weekly Report",
+                                                    onPointClick: function(info){},
+                                                });
+                                                chart.endUpdate();
                                             },
                                             BarChart: function () {
                                                 if ($("#leadsImportChart").has("svg").length)
@@ -924,10 +959,7 @@
                                                         },
                                                         loadingIndicator: {
                                                             show: true
-                                                        },
-                                                        onPointClick: function (info) {
-                                                           
-                                                        },
+                                                        },                                                        
                                                         onPointSelectionChanged: function (info) {
                                                            
                                                         },
@@ -938,6 +970,9 @@
                                                     return $("#leadsImportChart").dxChart("instance");
                                                 }
                                             },
+                                            Visible: function () {
+                                                return $('#divTeamActivity').is(":visible");
+                                            }
                                         }
 
                                     </script>
@@ -1386,6 +1421,8 @@
                $.when(LoadTeamInfo(e.itemData)).done(function () {
                    LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users)
                });
+               if(TeamActivityTab.Visible())
+                TeamActivityTab.UpdateTeamChart(e.itemData);
            };
         var officeDropDown = $("#dropDownMenu").dxDropDownMenu({
             dataSource: dropDownMenuData,

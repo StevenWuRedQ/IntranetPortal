@@ -7,6 +7,12 @@ Partial Public Class Team
         End Using
     End Function
 
+    Public Shared Function GetActiveTeams() As List(Of Team)
+        Using ctx As New Entities
+            Return ctx.Teams.Where(Function(a) a.Active).ToList
+        End Using
+    End Function
+
     Public Shared Function GetTeam(teamName As String) As Team
         Using ctx As New Entities
             Return ctx.Teams.Where(Function(t) t.Name = teamName).FirstOrDefault

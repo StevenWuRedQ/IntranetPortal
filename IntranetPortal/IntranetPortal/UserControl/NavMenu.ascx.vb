@@ -21,19 +21,17 @@ Public Class NavMenu
     Shared Sub AddTeamsMenu(menus As List(Of PortalNavItem))
         Dim teamList As New List(Of PortalNavItem)
 
-        Using ctx As New Entities
-            For Each t In ctx.Teams.OrderBy(Function(r) r.Name)
-                Dim item As New PortalNavItem
-                item.Name = String.Format("Team-{0}-Management", t.TeamId)
-                item.Text = t.Name
-                item.NavigationUrl = "#"
-                item.ShowAmount = True
-                BuildTeamMenu(item, t.TeamId, t.Name)
-                item.UserRoles = "OfficeManager-" & t.Name
+        For Each t In Team.GetAllTeams()
+            Dim item As New PortalNavItem
+            item.Name = String.Format("Team-{0}-Management", t.TeamId)
+            item.Text = t.Name
+            item.NavigationUrl = "#"
+            item.ShowAmount = True
+            BuildTeamMenu(item, t.TeamId, t.Name)
+            item.UserRoles = "OfficeManager-" & t.Name
 
-                teamList.Add(item)
-            Next
-        End Using
+            teamList.Add(item)
+        Next
 
         Dim teamMgr = menus.Where(Function(mi) mi.Name = "OfficeManagement").Single
         teamMgr.Items.AddRange(teamList)
