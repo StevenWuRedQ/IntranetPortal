@@ -44,4 +44,29 @@ Public Class EmployeeTest
         Assert.IsTrue(result.Contains("Crystal Dixon"))
     End Sub
 
+    Dim deptName = "TomTeam"
+    <TestMethod>
+    Public Sub GetAllDeptUser_returnAllUsers()
+        Dim users = Employee.GetDeptUsers(deptName, False)
+        Dim users2 = Employee.GetAllDeptUsers(deptName)
+        Assert.AreEqual(11, users.Length)
+        Assert.AreEqual(11, users2.Length)
+    End Sub
+
+    <TestMethod>
+    Public Sub GetActiveDeptUser_returnActiveUsers()
+        Dim users = Employee.GetDeptUsersList(deptName, False)
+        Dim users2 = Employee.GetDeptUsers(deptName)
+        Assert.AreEqual(7, users2.Count)
+        Assert.AreEqual(7, users.Where(Function(em) em.Active = True).Count)
+    End Sub
+
+    <TestMethod>
+    Public Sub GetNonActiveDeptUser_returnNonActiveUsers()
+        Dim users = Employee.GetDeptUsersList(deptName, False)
+        Dim nonActiveUsers = Employee.GetDeptUnActiveUserList(deptName)
+        Assert.AreEqual(4, nonActiveUsers.Count)
+        Assert.AreEqual(4, users.Where(Function(em) em.Active = False).Count)
+    End Sub
+
 End Class

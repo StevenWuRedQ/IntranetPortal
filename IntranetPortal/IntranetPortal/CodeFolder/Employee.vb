@@ -209,21 +209,16 @@ Partial Public Class Employee
 
             Dim myRoles = Roles.GetRolesForUser(userName)
 
-
-
             If myRoles.Any(Function(r) roleNames.Contains(r)) Then
-
                 Return ctx.Employees.Where(Function(em) em.Active = True).OrderBy(Function(em) em.Name).ToList
-
             End If
-
-
 
             Dim emps As New List(Of Employee)
 
-
-
-            For Each rl In Roles.GetRolesForUser(userName)
+            For Each rl In myRoles
+                If rl.Contains("*") Then
+                    Continue For
+                End If
 
                 If rl.StartsWith("OfficeManager") Then
 
@@ -232,18 +227,11 @@ Partial Public Class Employee
                     emps.AddRange(GetDeptUsersList(dept, True))
 
                 End If
-
             Next
 
-
-
             If Employee.HasSubordinates(userName) Then
-
                 emps.AddRange(Employee.GetManagedEmployeeList(userName))
-
             End If
-
-
 
             Return emps.Distinct(New EmployeeItemComparer()).OrderBy(Function(em) em.Name).ToList
 
@@ -396,7 +384,6 @@ Partial Public Class Employee
     End Function
 
     Public Shared Function GetDeptUsers(deptName As String, Optional onlyActive As Boolean = True) As String()
-
         Return GetDeptUsersList(deptName, onlyActive).Select(Function(em) em.Name).ToArray
 
         'Dim emps As New List(Of Employee)
@@ -406,22 +393,29 @@ Partial Public Class Employee
     End Function
 
     Public Shared Function GetAllDeptUsers(deptName As String) As String()
-        Using context As New Entities
-            Return context.Employees.Where(Function(em) em.Department = deptName).Select(Function(em) em.Name).ToArray
-        End Using
+        Return GetDeptUsers(deptName, False)
+        'Using context As New Entities
+        '    Return context.Employees.Where(Function(em) em.Department = deptName).Select(Function(em) em.Name).ToArray
+        'End Using
     End Function
 
     Public Shared Function GetUnActiveUser(deptName As String) As String()
-        Using context As New Entities
-            Return context.Employees.Where(Function(em) em.Department = deptName And em.Active = False).Select(Function(em) em.Name).ToArray
-        End Using
+        Return GetDeptUnActiveUserList(deptName).Select(Function(em) em.Name).ToArray
+        'Using context As New Entities
+        '    Return context.Employees.Where(Function(em) em.Department = deptName And em.Active = False).Select(Function(em) em.Name).ToArray
+        'End Using
+    End Function
+
+    Public Shared Function GetDeptUnActiveUserList(deptName As String) As List(Of Employee)
+        Return GetDeptUsersList(deptName, False).Where(Function(em) em.Active = False).ToList
+
+        'Using context As New Entities
+        '    Return context.Employees.Where(Function(em) em.Department = deptName And (em.Active = False)).ToList
+        'End Using
     End Function
 
     Public Shared Function GetDeptUsersList(deptName As String) As List(Of Employee)
-        Dim emps As New List(Of Employee)
-        Using context As New Entities
-            Return context.Employees.Where(Function(em) em.Department = deptName And em.Active = True).ToList
-        End Using
+        Return GetDeptUsersList(deptName, True)
     End Function
 
     Public Shared Function GetDeptUsersList(deptName As String, isActive As Boolean) As List(Of Employee)

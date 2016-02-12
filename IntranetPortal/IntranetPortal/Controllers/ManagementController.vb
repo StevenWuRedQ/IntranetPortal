@@ -9,6 +9,8 @@ Imports Newtonsoft.Json
 Imports System.Net.Http
 
 Namespace Controllers
+
+    <Authorize(Roles:="Admin")>
     Public Class ManagementController
         Inherits ApiController
 
@@ -68,6 +70,24 @@ Namespace Controllers
             Dim log = Core.SystemLog.GetLog(errorId)
 
             Return Ok(log)
+        End Function
+
+        <Route("api/Management/ExpiredLeads/")>
+        Function PostExpiredLeads(bbles As String()) As IHttpActionResult
+            If bbles Is Nothing Or Not ModelState.IsValid Then
+                Return BadRequest("BBLEs can not be empty.")
+            End If
+
+            Dim i = 0
+
+            For Each bble In bbles
+
+                If Lead.ExpiredLeadsTask(bble) Then
+                    i = i + 1
+                End If
+            Next
+
+            Return Ok(i)
         End Function
 
         <ResponseType(GetType(String()))>

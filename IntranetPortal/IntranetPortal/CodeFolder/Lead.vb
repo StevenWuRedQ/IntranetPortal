@@ -771,6 +771,22 @@ Partial Public Class Lead
         End If
     End Sub
 
+    Public Shared Function ExpiredLeadsTask(bble As String) As Boolean
+        Try
+            'Expired the task on this bble
+            WorkflowService.ExpiredLeadsProcess(bble)
+            UserTask.ExpiredAgentTasks(bble)
+            'UserTask.ExpiredTasks(BBLE, originator)
+            UserAppointment.ExpiredAppointmentByBBLE(bble)
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
+        Return True
+    End Function
+
+
     Public Sub StartRecycleProcess()
         If Not InRecycle Then
             Dim comments = "This Lead will be recycled today."
