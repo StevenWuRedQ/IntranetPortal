@@ -3,6 +3,7 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports IntranetPortal.Data
 Imports System.Web.Http
 Imports IntranetPortal
+Imports IntranetPortal.RulesEngine
 
 <TestClass()> Public Class LegalUnitTest
 
@@ -81,6 +82,14 @@ Imports IntranetPortal
         Assert.AreEqual("Amy Beckwith", LegalCaseManage.GetCaseOwner("2022870021"))
         Assert.IsNull(LegalCaseManage.GetCaseOwner("2022890122"))
         Assert.IsNull(LegalCaseManage.GetCaseOwner("12321321321"))
+    End Sub
+    <TestMethod> Public Sub GetPassErrorTest()
+        Dim index = "123/1234"
+
+        Assert.AreEqual(LegalCase.DeCodeIndexNumber(index), "000123/1234")
+        'Dim rule = New NoticeECourtRule()
+        'rule.NotifyECourtParseError()
+
     End Sub
 
 End Class

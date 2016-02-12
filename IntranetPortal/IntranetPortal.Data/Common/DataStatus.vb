@@ -27,11 +27,11 @@ Partial Public Class DataStatu
             Return ctx.DataStatus.Find(category, statusId)
         End Using
     End Function
-
     Private Function GetNewStatus(category As String) As Integer
         Dim status = LoadAllDataStatus(category)
         Return status.Max(Function(s) s.Status) + 1
     End Function
+
 
     Public Sub Save()
         Using ctx As New PortalEntities

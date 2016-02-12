@@ -63,10 +63,13 @@ Public Class LegalSummaryUI
             BindUpCommingFCGrid()
         End If
     End Sub
+    ''' <summary>
+    ''' Binding OSC cases to grid
+    ''' </summary>
 
     Protected Sub gridOSCs_DataBinding(sender As Object, e As EventArgs)
         If (gridOSCs.DataSource Is Nothing) Then
-            Dim Cases = GetSecondaryTypeList(LegalSencdaryType.OSC)
+            Dim Cases = GetSecondaryTypeList(1)
             If (Cases IsNot Nothing) Then
                 gridOSCs.DataSource = Cases
                 gridOSCs.DataBind()
@@ -75,7 +78,23 @@ Public Class LegalSummaryUI
         End If
     End Sub
 
-    Function GetSecondaryTypeList(type As LegalSencdaryType) As List(Of LegalCase)
+    'Function GetSecondaryTypeList(type As LegalSencdaryType) As List(Of LegalCase)
+
+    '    If (gdCases.DataSource IsNot Nothing) Then
+    '        Dim Cases = TryCast(gdCases.DataSource, List(Of LegalCase))
+    '        If (Cases IsNot Nothing) Then
+    '            Return Cases.Where(Function(c) c.SecondaryTypes IsNot Nothing AndAlso c.SecondaryTypes.Contains(CInt(type).ToString)).ToList()
+    '        End If
+
+    '    End If
+    '    Return Nothing
+    'End Function
+    ''' <summary>
+    ''' Get legal cases by secondary type
+    ''' </summary>
+    ''' <param name="type"> type of secondary tag </param>
+    ''' <returns></returns>
+    Function GetSecondaryTypeList(type As Integer) As List(Of LegalCase)
 
         If (gdCases.DataSource IsNot Nothing) Then
             Dim Cases = TryCast(gdCases.DataSource, List(Of LegalCase))
@@ -88,23 +107,23 @@ Public Class LegalSummaryUI
     End Function
 
     Protected Sub gridPartitions_DataBinding(sender As Object, e As EventArgs)
-        BindTypeGrid(gridPartitions, LegalSencdaryType.Partitions)
+        BindTypeGrid(gridPartitions, 2)
     End Sub
 
     Protected Sub gridQTAs_DataBinding(sender As Object, e As EventArgs)
-        BindTypeGrid(gridQTAs, LegalSencdaryType.QTA)
+        BindTypeGrid(gridQTAs, 3)
 
     End Sub
 
     Protected Sub gridDeedReversions_DataBinding(sender As Object, e As EventArgs)
-        BindTypeGrid(gridDeedReversions, LegalSencdaryType.DeedReversions)
+        BindTypeGrid(gridDeedReversions, 4)
     End Sub
 
     Protected Sub gridSPAndOther_DataBinding(sender As Object, e As EventArgs)
-        BindTypeGrid(gridSPAndOther, LegalSencdaryType.Other)
+        BindTypeGrid(gridSPAndOther, 6)
     End Sub
 
-    Private Sub BindTypeGrid(grid As DevExpress.Web.ASPxGridView, lType As LegalSencdaryType)
+    Private Sub BindTypeGrid(grid As DevExpress.Web.ASPxGridView, lType As Integer)
         If (grid.DataSource Is Nothing) Then
             grid.DataSource = GetSecondaryTypeList(lType)
             grid.DataBind()

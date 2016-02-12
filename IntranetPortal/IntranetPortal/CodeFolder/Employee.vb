@@ -620,6 +620,18 @@ Partial Public Class Employee
 
     End Function
 
+    ''' <summary>
+    ''' Get emloyees email and jioned with ";" can easily use to send email.
+    ''' </summary>
+    ''' <param name="emps">List of emloyee</param>
+    ''' <returns>emails String joined with ";" </returns>
+    Public Shared Function GetEmpsEmails(ParamArray emps() As Employee) As String
+        If (emps IsNot Nothing AndAlso emps.Count > 0) Then
+            Dim emails = emps.Select(Function(e) e.Email).Distinct()
+            Return String.Join(";", emails)
+        End If
+        Return Nothing
+    End Function
     Public Shared Function GetEmpTeams(empName As String) As String()
         Using ctx As New Entities
             Dim team = (From t In ctx.Teams

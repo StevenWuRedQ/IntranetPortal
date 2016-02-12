@@ -19,6 +19,7 @@ Public Class LegalECourt
 
         End If
     End Sub
+
     Public Sub UpdateIndexNumber()
         If (BodyText IsNot Nothing) Then
             Dim regexIndexNum = "\d{6,}\/\d{4}"
@@ -101,6 +102,13 @@ Public Class LegalECourt
             Return mathList.OrderByDescending(Function(e) e.AppearanceDate).FirstOrDefault()
         End Using
     End Function
+
+    Public Shared Function GetParseErrorECourts() As List(Of LegalECourt)
+        Using ctx As New PortalEntities
+            Return ctx.LegalECourts.Where(Function(e) (Not String.IsNullOrEmpty(e.IndexNumber)) AndAlso String.IsNullOrEmpty(e.BBLE)).ToList()
+        End Using
+    End Function
+
     Public Shared Function Parse(msg As ImapX.Message) As LegalECourt
 
         Dim eCourt As LegalECourt

@@ -17,7 +17,7 @@
         <h4 class="ss_form_title">Tag Types</h4>
 
         <div dx-tag-box="{
-			                dataSource: [ <% For Each v In Utility.Enum2Dictinary(GetType(IntranetPortal.Data.LegalSencdaryType))%> {'id': <%=v.Key %>, 'text':'<%=v.Value%>'}, <% Next%> ],
+			                dataSource: [ <% For Each v In DataStatu.LoadDataStatus(LegalCase.SencdaryTypeStatusCategory).ToArray%> {'id': <%=v.Status %>, 'text':'<%=v.Name%>'}, <% Next%> ],
 			                displayExpr: 'text',
 			                valueExpr: 'id',
 			                bindingOptions: {

@@ -4,6 +4,8 @@ Imports System.Text.RegularExpressions
 Partial Public Class LegalCase
 
     Public Const ForeclosureStatusCategory As String = "LegalFCDataStatus"
+    Public Const SencdaryTypeStatusCategory As String = "LegalSencdaryType"
+
     Public Const TitleSaveLog As String = "LegalSave"
 
     Private _stuatsStr As String
@@ -165,6 +167,19 @@ Partial Public Class LegalCase
             End If
         Next
         Return IndexNumber.Substring(ZeroIndex)
+    End Function
+    ''' <summary>
+    ''' Decode index numbe make it as uqniue ID decode 123/1234 to 000123/1234
+    ''' </summary>
+    ''' <param name="IndexNumber">input number need to decode</param>
+    ''' <returns>Decoded quniue index number return nothing means input ilegal index number</returns>
+    Public Shared Function DeCodeIndexNumber(IndexNumber As String) As String
+        If (String.IsNullOrEmpty(IndexNumber) Or IndexNumber.IndexOf("/") < 0) Then
+            Return Nothing
+        End If
+        Dim a = IndexNumber.Split("/")
+        Return String.Join("/", CInt(a(0)).ToString("D6"), a(1))
+
     End Function
     Public Shared Sub UpdateStatus(bble As String, status As LegalCaseStatus, updateBy As String)
         'update legal case status
@@ -341,7 +356,7 @@ Public Enum DataStatus2
 End Enum
 
 
-Public Enum LegalSencdaryType
+Public Enum LegalSencdaryType2
     <Description("Order To show Case")>
     OSC = 1
     <Description("Partitions")>
