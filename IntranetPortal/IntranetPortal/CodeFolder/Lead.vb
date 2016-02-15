@@ -168,6 +168,12 @@ Partial Public Class Lead
         Return False
     End Function
 
+    Public Shared Function GetLeadsByBBLEs(bbles As String()) As Lead()
+        Using ctx As New Entities
+            Return ctx.Leads.Where(Function(l) bbles.Contains(l.BBLE)).ToArray
+        End Using
+    End Function
+
     Public Shared Function CreateLeads(bble As String, status As LeadStatus, createBy As String) As Lead
 
         Using ctx As New Entities

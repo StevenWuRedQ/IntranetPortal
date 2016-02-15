@@ -841,7 +841,9 @@
                                             <div id="leadsImportChart" class="containers" style="height: 440px; width: 100%;"></div>
                                         </div>
                                     </div>
-
+                                     <div id="divTeamLeadsPopup" style="width: 700px">
+                                        <div id="gridTeamLeads" style="height: 450px; max-width: 700px; width: 100%; margin: 0 auto;"></div>
+                                    </div>
                                     <script type="text/javascript">
                                         var TeamActivityTab = {
                                             DateRange: function () { return $('#dateRange2').has("svg").length ? $('#dateRange2').dxRangeSelector('instance') : null },
@@ -908,7 +910,8 @@
                                                 chart.endUpdate();                                                
                                             },
                                             UpdateTeamChart: function (teamName) {
-                                                var chart = this.BarChart();                                               
+                                                var chart = this.BarChart();
+                                                var tab = this;
                                                 chart.showLoadingIndicator();
                                                 chart.clearSelection();
                                                 var ds = new DevExpress.data.DataSource("/api/portalreport/" + teamName);
@@ -923,7 +926,9 @@
                                                         tickInterval: 'week'
                                                     },
                                                     title: teamName + "'s Leads Importing Weekly Report",
-                                                    onPointClick: function(info){},
+                                                    onPointClick: function (info) {
+                                                        tab.ShowTeamLeads(teamName, info.target.argument)
+                                                    },
                                                 });
                                                 chart.endUpdate();
                                             },
@@ -972,6 +977,62 @@
                                             },
                                             Visible: function () {
                                                 return $('#divTeamActivity').is(":visible");
+                                            },
+                                            ShowTeamLeads: function (teamName, importDate) {
+                                                var enddate = new Date(importDate);
+                                                enddate.setDate(enddate.getDate() + 7);
+                                                var titleName = teamName + " - " + Globalize.format(importDate, "yyyy/MM/dd") + " to " + Globalize.format(enddate, "yyyy/MM/dd");
+                                                $("#divTeamLeadsPopup").dxPopup({
+                                                    showTitle: true,
+                                                    title: titleName,
+                                                    showCloseButton: true,
+                                                    //titleTemplate: "<div>" + agentName + ' - ' + point.originalArgument + "</div>",                                                           
+                                                    width: 700,
+                                                    height: 550,
+                                                    closeOnOutsideClick: false
+                                                });
+                                                $("#divTeamLeadsPopup").dxPopup("instance").show();
+
+                                                var dsUrl = "/api/PortalReport/?teamName=" + teamName + "&startDate=" + Globalize.format(importDate, "yyyy-MM-dd");                                               
+                                                $("#gridTeamLeads").dxDataGrid({
+                                                    dataSource: new DevExpress.data.DataSource(dsUrl),
+                                                    showColumnLines: false,
+                                                    showRowLines: true,
+                                                    rowAlternationEnabled: true,
+                                                    paging: { enabled: false },
+                                                    remoteOperations: {
+                                                        sorting: false
+                                                    },
+                                                    columns: [{
+                                                        dataField: "LeadsName",
+                                                        caption: "Leads Name",
+                                                        width: 280,
+                                                        cellTemplate: function (container, options) {
+                                                            if (options.value != null) {
+                                                                var fieldHTML = '<a target="_blank" href="javascript:ViewLeadsInfo(\'' + options.data.BBLE + '\')">' + options.value + "</a>"
+                                                                container.html(fieldHTML);
+                                                            }
+                                                        }
+                                                    }, {
+                                                        dataField: "BBLE",
+                                                        caption: "BBLE",
+                                                        width: 100
+                                                    }, {
+                                                        dataField: "EmployeeName",
+                                                        caption: "Employee Name"
+                                                    }, {
+                                                        dataField: "LastUpdate",
+                                                        caption: "Last Update",
+                                                        dataType: 'date'
+                                                    }],
+                                                    summary: {
+                                                        totalItems: [{
+                                                            column: 'BBLE',
+                                                            summaryType: 'count'
+                                                        }]
+                                                    }
+                                                });
+
                                             }
                                         }
 

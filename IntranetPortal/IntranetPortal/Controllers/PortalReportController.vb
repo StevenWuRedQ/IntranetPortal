@@ -16,6 +16,13 @@ Namespace Controllers
             Return Ok(result)
         End Function
 
+        <Route("api/PortalReport/")>
+        Public Function GetLeadsImportingReport(teamName As String, startDate As DateTime) As IHttpActionResult
+
+            Dim result = PortalReport.TeamLeadsImportingReport(teamName, startDate, startDate.AddDays(7))
+            Return Ok(result)
+        End Function
+
         <Route("api/PortalReport/{TeamName}")>
         Public Function GetTeamImportReport(teamName As String) As IHttpActionResult
 

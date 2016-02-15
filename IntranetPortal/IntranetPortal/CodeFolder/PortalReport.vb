@@ -11,12 +11,12 @@ Public Class PortalReport
     ''' <param name="endDate">End Date</param>
     ''' <returns></returns>
     Public Shared Function LeadsImportReport(startDate As DateTime, endDate As DateTime) As Object
-        Dim teams = Team.GetAllTeams.Select(Function(t)
-                                                Return New With {
+        Dim teams = Team.GetActiveTeams.Select(Function(t)
+                                                   Return New With {
                                                     .Name = t.Name,
                                                     .ImportCount = 0,
                                                     .DeadCount = 0}
-                                            End Function).ToList
+                                               End Function).ToList
 
         Using ctx As New Entities
 
@@ -34,34 +34,56 @@ Public Class PortalReport
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return the leads that import to team in specific time period
+    ''' </summary>
+    ''' <param name="teamName">Team name</param>
+    ''' <param name="startdate">Start date</param>
+    ''' <param name="endDate">End date</param>
+    ''' <returns></returns>
+    Public Shared Function TeamLeadsImportingReport(teamName As String, startdate As DateTime, endDate As DateTime) As Lead()
+        Dim logs = GetLeadsImportLogs(teamName, startdate, endDate)
 
-    Public Shared Function WeeklyTeamImportReport(teamName As String) As Object
-        Using ctx As New Entities
-            teamName = teamName & " Office"
-            Dim endDate = DateTime.Now
-            Dim startDate = endDate.AddDays(-endDate.DayOfWeek - 7 * 4)
-
-            Dim logs = ctx.LeadsStatusLogs.Where(Function(l) l.CreateDate >= startDate AndAlso l.CreateDate < endDate AndAlso l.Employee = teamName AndAlso l.CreateBy = "System" AndAlso l.Type = 0).ToList
-            Dim weekofYear = DateAndTime.DatePart(DateInterval.WeekOfYear, startDate)
-
-            Dim weekData = logs.GroupBy(Function(a) DateAndTime.DatePart(DateInterval.WeekOfYear, a.CreateDate.Value)).Select(Function(g) New With {.WeekofYear = g.Key, .Count = g.Count}).ToList
-
-            Dim result As New List(Of Object)
-            For i = weekofYear To DatePart(DateInterval.WeekOfYear, endDate)
-                Dim tmpWeek = i
-                result.Add(New With {
-                              .Week = tmpWeek,
-                              .StartDate = startDate.Date,
-                              .Count = weekData.Where(Function(w) w.WeekofYear = tmpWeek).Select(Function(a) a.Count).SingleOrDefault
-                           })
-                startDate = startDate.AddDays(7)
-            Next
-
-            Return result
-        End Using
-        Return Nothing
+        Return Lead.GetLeadsByBBLEs(logs.Select(Function(lg) lg.BBLE).ToArray)
     End Function
 
+    ''' <summary>
+    ''' Return the count of the team's assigning leads by week
+    ''' </summary>
+    ''' <param name="teamName"></param>
+    ''' <returns>list of week number, startdate and count</returns>
+    Public Shared Function WeeklyTeamImportReport(teamName As String) As Object
+        Dim endDate = DateTime.Now
+        Dim startDate = endDate.AddDays(-endDate.DayOfWeek - 7 * 4)
+
+        Dim logs = GetLeadsImportLogs(teamName, startDate, endDate)  ' ctx.LeadsStatusLogs.Where(Function(l) l.CreateDate >= startDate AndAlso l.CreateDate < endDate AndAlso l.Employee = teamName AndAlso l.CreateBy = "System" AndAlso l.Type = 0).ToList
+        Dim weekofYear = DateAndTime.DatePart(DateInterval.WeekOfYear, startDate)
+
+        Dim weekData = logs.GroupBy(Function(a) DateAndTime.DatePart(DateInterval.WeekOfYear, a.CreateDate.Value)).Select(Function(g) New With {.WeekofYear = g.Key, .Count = g.Count}).ToList
+
+        Dim result As New List(Of Object)
+        For i = weekofYear To DatePart(DateInterval.WeekOfYear, endDate)
+            Dim tmpWeek = i
+            result.Add(New With {
+                          .Week = tmpWeek,
+                          .StartDate = startDate.Date,
+                          .Count = weekData.Where(Function(w) w.WeekofYear = tmpWeek).Select(Function(a) a.Count).SingleOrDefault
+                       })
+            startDate = startDate.AddDays(7)
+        Next
+
+        Return result
+
+    End Function
+
+    Private Shared Function GetLeadsImportLogs(teamName As String, startDate As DateTime, endDate As DateTime) As List(Of LeadsStatusLog)
+        teamName = teamName & " Office"
+
+        Using ctx As New Entities
+            Dim logs = ctx.LeadsStatusLogs.Where(Function(l) l.CreateDate >= startDate AndAlso l.CreateDate < endDate AndAlso l.Employee = teamName AndAlso l.CreateBy = "System" AndAlso l.Type = 0).ToList
+            Return logs
+        End Using
+    End Function
 
     ''' <summary>
     ''' Return lega users' activity data betweeen start date and end date
