@@ -510,7 +510,32 @@
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Title-InitialReview" Text="Initial Review" NavigationUrl="/BusinessForm/Default.aspx?s=0" ShowAmount="true" AmountManageClass="TitleManage">
+      <PortalNavItem Name="Title-Category-1" Text="Approved" NavigationUrl="/BusinessForm/Default.aspx?c=1" ShowAmount="true" AmountManageClass="TitleManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Title-Category-2" Text="Pending Approval" NavigationUrl="/BusinessForm/Default.aspx?c=2" ShowAmount="true" AmountManageClass="TitleManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Title-Category-3" Text="In Process" NavigationUrl="/BusinessForm/Default.aspx?c=3" ShowAmount="true" AmountManageClass="TitleManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Title-Category-4" Text="Held" NavigationUrl="/BusinessForm/Default.aspx?c=4" ShowAmount="true" AmountManageClass="TitleManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Title-Category-5" Text="Closed" NavigationUrl="/BusinessForm/Default.aspx?c=5" ShowAmount="true" AmountManageClass="TitleManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <!--<PortalNavItem Name="Title-InitialReview" Text="Initial Review" NavigationUrl="/BusinessForm/Default.aspx?s=0" ShowAmount="true" AmountManageClass="TitleManage">
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
@@ -524,7 +549,7 @@
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
-      </PortalNavItem>
+      </PortalNavItem>-->
     </Items>
   </PortalNavItem>
   

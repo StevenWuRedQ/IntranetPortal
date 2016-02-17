@@ -33,7 +33,12 @@ Public Class TitleCaseList
 
     Private Sub BindData()
         If String.IsNullOrEmpty(Request.QueryString("s")) Then
-            gridCase.DataSource = TitleManage.GetMyCases(Page.User.Identity.Name)
+            If Not String.IsNullOrEmpty(Request.QueryString("c")) Then
+                Dim cateId = CInt(Request.QueryString("c"))
+                gridCase.DataSource = TitleManage.GetCasesByCategory(Page.User.Identity.Name, cateId)
+            Else
+                gridCase.DataSource = TitleManage.GetMyCases(Page.User.Identity.Name)
+            End If
         Else
             Dim status = CInt(Request.QueryString("s"))
             gridCase.DataSource = TitleManage.GetMyCases(Page.User.Identity.Name, status)

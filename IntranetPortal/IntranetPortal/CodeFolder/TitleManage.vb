@@ -181,6 +181,14 @@ Public Class TitleManage
         Return Employee.GetRoleUsers("Title-")
     End Function
 
+    Public Shared Function GetCasesByCategory(userName As String, cateId As Integer) As TitleCase()
+        If IsManager(userName) Then
+            Return TitleCase.GetCasesBySSCategory("All", cateId)
+        Else
+            Return TitleCase.GetCasesBySSCategory(userName, cateId)
+        End If
+    End Function
+
     Public Shared Function GetMyCases(userName As String, Optional status As TitleCase.DataStatus = TitleCase.DataStatus.All) As TitleCase()
         If IsManager(userName) Then
             Return TitleCase.GetAllCases(status)
@@ -241,6 +249,11 @@ Public Class TitleManage
 #End Region
 
     Public Function GetAmount(navMenu As PortalNavItem, userName As String) As Integer Implements INavMenuAmount.GetAmount
+        If navMenu.Name.StartsWith("Title-Category") Then
+            Dim cateId = CInt(navMenu.Name.Split("-")(2))
+            Return GetCasesByCategory(userName, cateId).Length
+        End If
+
         Select Case navMenu.Name
             Case "Title-All"
                 Return GetMyCases(userName).Length
