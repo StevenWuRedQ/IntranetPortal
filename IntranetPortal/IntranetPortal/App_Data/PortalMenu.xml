@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ArrayOfPortalNavItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <PortalNavItem Name="MyTaskMain" Text="Tasks &lt;span class='notification' style='display:none' id='SpanAmount_TotalTask'&gt;&lt;/span&gt;" NavigationUrl="/Task/MyTask.aspx" ShowAmount="false" ItemType="" Expanded="false">
     <level>1</level>
@@ -505,32 +506,37 @@
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Title-All" Text="All Cases" NavigationUrl="/BusinessForm/Default.aspx" ShowAmount="true" AmountManageClass="TitleManage">
+      <PortalNavItem Name="Title-All" Text="All Cases" NavigationUrl="/BusinessForm/Default.aspx?name=All Case" ShowAmount="true" AmountManageClass="TitleManage">
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Title-Category-1" Text="Approved" NavigationUrl="/BusinessForm/Default.aspx?c=1" ShowAmount="true" AmountManageClass="TitleManage">
+      <PortalNavItem Name="Title-Category-1" Text="Approved" NavigationUrl="/BusinessForm/Default.aspx?c=1&amp;name=Approved" ShowAmount="true" AmountManageClass="TitleManage">
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Title-Category-2" Text="Pending Approval" NavigationUrl="/BusinessForm/Default.aspx?c=2" ShowAmount="true" AmountManageClass="TitleManage">
+      <PortalNavItem Name="Title-Category-2" Text="Pending Approval" NavigationUrl="/BusinessForm/Default.aspx?c=2&amp;name=Pending" ShowAmount="true" AmountManageClass="TitleManage">
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Title-Category-3" Text="In Process" NavigationUrl="/BusinessForm/Default.aspx?c=3" ShowAmount="true" AmountManageClass="TitleManage">
+      <PortalNavItem Name="Title-Category-3" Text="In Process" NavigationUrl="/BusinessForm/Default.aspx?c=3&amp;name=In Process" ShowAmount="true" AmountManageClass="TitleManage">
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Title-Category-4" Text="Held" NavigationUrl="/BusinessForm/Default.aspx?c=4" ShowAmount="true" AmountManageClass="TitleManage">
+      <PortalNavItem Name="Title-Category-4" Text="Held" NavigationUrl="/BusinessForm/Default.aspx?c=4&amp;name=Held" ShowAmount="true" AmountManageClass="TitleManage">
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Title-Category-5" Text="Closed" NavigationUrl="/BusinessForm/Default.aspx?c=5" ShowAmount="true" AmountManageClass="TitleManage">
+      <PortalNavItem Name="Title-Category-5" Text="Closed" NavigationUrl="/BusinessForm/Default.aspx?c=5&amp;name=Closed" ShowAmount="true" AmountManageClass="TitleManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Title-Category-0" Text="External" NavigationUrl="/BusinessForm/Default.aspx?c=0" ShowAmount="true" AmountManageClass="TitleManage">
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>

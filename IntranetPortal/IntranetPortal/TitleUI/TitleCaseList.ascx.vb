@@ -6,7 +6,12 @@ Public Class TitleCaseList
     Inherits BusinessListControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'BindCaseList()
+        If Not Page.IsPostBack Then
+            If Not String.IsNullOrEmpty(Request.QueryString("name")) Then
+                lblLeadCategory.Text = Request.QueryString("name").ToString
+            End If
+
+        End If
     End Sub
 
     Public Overrides Sub BindList()
@@ -19,6 +24,10 @@ Public Class TitleCaseList
 
         lblLeadCategory.Text = "Cases" 'Core.Utility.GetEnumDescription(status)
         BindData()
+
+        If String.IsNullOrEmpty(Request.QueryString("c")) Then
+            gridCase.GroupBy(gridCase.Columns("TitleCategory"))
+        End If
 
         If TitleManage.IsManager(Page.User.Identity.Name) Then
             gridCase.GroupBy(gridCase.Columns("Owner"))
@@ -37,7 +46,7 @@ Public Class TitleCaseList
                 Dim cateId = CInt(Request.QueryString("c"))
                 gridCase.DataSource = TitleManage.GetCasesByCategory(Page.User.Identity.Name, cateId)
             Else
-                gridCase.DataSource = TitleManage.GetMyCases(Page.User.Identity.Name)
+                gridCase.DataSource = TitleManage.GetCasesByCategory(Page.User.Identity.Name)
             End If
         Else
             Dim status = CInt(Request.QueryString("s"))

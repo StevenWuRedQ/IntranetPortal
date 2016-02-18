@@ -181,7 +181,7 @@ Public Class TitleManage
         Return Employee.GetRoleUsers("Title-")
     End Function
 
-    Public Shared Function GetCasesByCategory(userName As String, cateId As Integer) As TitleCase()
+    Public Shared Function GetCasesByCategory(userName As String, Optional cateId As Integer = -1) As TitleCase()
         If IsManager(userName) Then
             Return TitleCase.GetCasesBySSCategory("All", cateId)
         Else
@@ -262,7 +262,7 @@ Public Class TitleManage
             Case "Title-InitialReview"
                 Return GetMyCases(userName, TitleCase.DataStatus.InitialReview).Length
             Case "Title-Clearance"
-                Return GetMyCases(userName, TitleCase.DataStatus.Clearance).Length
+                Return GetMyCases(userName, TitleCase.DataStatus.PendingClearance).Length
             Case "Title-CTC"
                 Return GetMyCases(userName, TitleCase.DataStatus.CTC).Length
             Case Else

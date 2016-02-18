@@ -296,4 +296,15 @@ Public Class ShortSaleUnitTest
         'Agent
         Assert.IsFalse(ShortSaleManage.IsViewable(Nothing, "Tom Aronov"))
     End Sub
+
+    <TestMethod> Public Sub GetCaseCategory_returnMortCategory()
+        Dim ssCases = ShortSaleCase.GetAllCase()
+
+        For Each ss In ssCases
+            Assert.AreEqual(ss.FirstMortgage.Category, ShortSaleCase.GetCaseCategory(ss.BBLE))
+        Next
+
+        Assert.IsNull(ShortSaleCase.GetCaseCategory("dddd"))
+        Assert.IsNull(ShortSaleCase.GetCaseCategory(Nothing))
+    End Sub
 End Class
