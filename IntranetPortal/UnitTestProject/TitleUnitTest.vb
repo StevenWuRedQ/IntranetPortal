@@ -65,4 +65,27 @@ Imports IntranetPortal.Data
         Next
     End Sub
 
+    <TestMethod()> Public Sub TitleCategoryFunction_CategoryChangedInShortSale()
+        Dim bble = "1020570051"
+        Dim newCategory = "Homepath"
+        Dim newStatus = "Value Dispute"
+        Dim testBy = "TestUnit"
+
+        Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
+        Dim tCase = TitleCase.GetCase(bble)
+        Assert.AreEqual(tCase.SSCategory, ssCase.MortgageCategory)
+
+        Dim cate = TitleCase.MapTitleShortSaleCategory.Where(Function(s) s.Category = tCase.TitleCategory).SingleOrDefault
+        Assert.IsTrue(cate.ShortSaleCategories.Contains(ssCase.MortgageCategory))
+
+        Dim ssCategory = ssCase.MortgageCategory
+        Dim ssStatus = ssCase.FirstMortgage.Status
+        Dim updateBy = ssCase.FirstMortgage.UpdateBy
+
+        ssCase.UpdateMortgageStatus(0, newCategory, newStatus, testBy)
+        tCase = TitleCase.GetCase(bble)
+        Assert.AreEqual(tCase.SSCategory, newCategory)
+        ssCase.UpdateMortgageStatus(0, ssCategory, ssStatus, updateBy)
+    End Sub
+
 End Class

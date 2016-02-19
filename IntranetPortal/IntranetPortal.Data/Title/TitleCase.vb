@@ -16,7 +16,12 @@
 
     Public Shared Function GetCase(bble As String) As TitleCase
         Using ctx As New PortalEntities
-            Return ctx.TitleCases.Find(bble)
+            Dim tcase = ctx.TitleCases.Find(bble)
+            If tcase IsNot Nothing Then
+                tcase.InitCategory()
+            End If
+
+            Return tcase
         End Using
     End Function
 
@@ -122,14 +127,18 @@
                 tCase = ctx.TitleCases.Where(Function(t) t.FormItemId = formId).FirstOrDefault
 
                 If tCase IsNot Nothing Then
-                    tCase.SSCategory = ShortSaleCase.GetCaseCategory(tCase.BBLE)
-                    tCase.TitleCategory = GetTitleCategory(tCase.SSCategory)
+                    tCase.InitCategory()
                 End If
             End If
 
             Return tCase
         End Using
     End Function
+
+    Private Sub InitCategory()
+        Me.SSCategory = ShortSaleCase.GetCaseCategory(BBLE)
+        Me.TitleCategory = GetTitleCategory(SSCategory)
+    End Sub
 
     Public Sub SaveData(saveBy As String)
         Using ctx As New PortalEntities
