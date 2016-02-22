@@ -97,7 +97,7 @@ Public Class TitleManage
         End If
     End Sub
 
-    Private Shared Function UpdateCaseStatus(bble As String, status As TitleCase.DataStatus, completedBy As String) As Boolean
+    Public Shared Function UpdateCaseStatus(bble As String, status As TitleCase.DataStatus, completedBy As String) As Boolean
         Dim tCase = TitleCase.GetCase(bble)
         If tCase.Status <> status Then
             tCase.Status = status

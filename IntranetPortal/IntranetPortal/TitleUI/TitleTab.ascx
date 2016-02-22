@@ -15,12 +15,13 @@
             <div id="title_prioity_content">
                 <div style="height: 80px" class="font_gray">
                     <div class="col-md-1" style="margin: 10px 0; font-size: 30px">
-                         <i class="fa fa-home"></i>
+                        <i class="fa fa-home"></i>
                     </div>
-                    <div class="col-md-9" style="margin: 0px 0; font-size: 30px">                       
+                    <div class="col-md-9" style="margin: 0px 0; font-size: 30px">
                         <div>
                             <div ng-bind="Form.FormData.CaseName" style="white-space: nowrap; overflow: hidden"></div>
-                            <span ng-show="Form.BusinessData.TitleCategory" style="color: red; font-weight:600; font-size:20px">({{Form.BusinessData.TitleCategory}} in ShortSale)</span>
+                            <span ng-show="Form.BusinessData.TitleCategory" style="color: red; font-weight: 600; font-size: 20px">({{Form.BusinessData.TitleCategory}} in ShortSale)</span>
+                            <span ng-show="!Form.BusinessData.TitleCategory && BBLE" style="color: red; font-weight: 600; font-size: 20px">(External Case)</span>
                         </div>
                     </div>
                     <div class="col-md-2 pull-right" style="margin: 10px 0">

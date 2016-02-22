@@ -1,6 +1,7 @@
 ﻿Imports System.Text
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports IntranetPortal.Data
+Imports IntranetPortal
 
 <TestClass()> Public Class TitleUnitTest
 
@@ -86,6 +87,57 @@ Imports IntranetPortal.Data
         tCase = TitleCase.GetCase(bble)
         Assert.AreEqual(tCase.SSCategory, newCategory)
         ssCase.UpdateMortgageStatus(0, ssCategory, ssStatus, updateBy)
+    End Sub
+
+    <TestMethod()> Public Sub TitleStatus_Changing()
+        Dim bble = "1020570051"
+        Dim tCase = TitleCase.GetCase(bble)
+        Dim tStatus = tCase.Status
+        Dim updateBy = tCase.UpdateBy
+
+        Dim newStatus = TitleCase.DataStatus.InitialReview
+        TitleManage.UpdateCaseStatus(bble, newStatus, "TestUnit")
+        Dim newStatus2 = TitleCase.DataStatus.CTC
+        TitleManage.UpdateCaseStatus(bble, newStatus2, "TestUnit")
+
+        tCase = TitleCase.GetCase(bble)
+        Assert.AreEqual(tCase.Status, CInt(newStatus2))
+
+        TitleManage.UpdateCaseStatus(bble, newStatus, updateBy)
+        TitleManage.UpdateCaseStatus(bble, tStatus, updateBy)
+    End Sub
+
+    <TestMethod()> Public Sub ManagerView_returnAllCases()
+
+        Dim allCases = TitleCase.GetCasesBySSCategory("All")
+
+        Dim userName = "Reina Avila"
+        Dim reinaCases = TitleCase.GetCasesBySSCategory(userName)
+
+        Assert.IsTrue(allCases.Count > reinaCases.Count)
+
+        Dim rCaseBBLEs1 = allCases.Where(Function(s) s.Owner = userName).Select(Function(s) s.BBLE).OrderBy(Function(s) s).ToArray
+        Dim rCaseBBLEs2 = reinaCases.Select(Function(s) s.BBLE).OrderBy(Function(s) s).ToArray
+
+        Assert.IsTrue(rCaseBBLEs1.SequenceEqual(rCaseBBLEs2))
+    End Sub
+
+    <TestMethod()> Public Sub CheckTitleInstanceCategory_ShouldEqualToMap()
+
+        Dim allTitleCases = TitleCase.GetAllCases(TitleCase.DataStatus.All).Select(Function(t) t.BBLE).ToArray
+
+        For Each bble In allTitleCases
+            Dim tCase = TitleCase.GetCase(bble)
+            Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
+
+            If ssCase IsNot Nothing Then
+                Assert.AreEqual(tCase.SSCategory, ssCase.MortgageCategory)
+                Assert.AreEqual(tCase.TitleCategory, TitleCase.GetTitleCategory(ssCase.MortgageCategory))
+            Else
+                Assert.IsNull(tCase.TitleCategory)
+            End If
+        Next
+
     End Sub
 
 End Class
