@@ -7,6 +7,7 @@ Imports IntranetPortal.Data.RulesEngine
 Imports System.IO
 Imports Newtonsoft.Json
 Imports System.Net.Http
+Imports MyIdealProp.Workflow.DBPersistence
 
 Namespace Controllers
 
@@ -88,6 +89,15 @@ Namespace Controllers
             Next
 
             Return Ok(i)
+        End Function
+
+        <Route("api/Management/ExpiredTaskAndWorklist/")>
+        Function PostExpiredRequestUpate(taskIds As Integer()) As IHttpActionResult
+            For Each taskId In taskIds
+                UserTask.ExpiredTaskAndWorklist(taskId)
+            Next
+
+            Return Ok()
         End Function
 
         <ResponseType(GetType(String()))>

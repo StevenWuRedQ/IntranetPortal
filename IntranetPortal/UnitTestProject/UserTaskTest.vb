@@ -23,4 +23,27 @@ Imports IntranetPortal
         Assert.AreEqual(CType(task.Status, UserTask.TaskStatus), UserTask.TaskStatus.Complete)
     End Sub
 
+    <TestMethod()> Public Sub ExpiredTaskAndWorklistTest()
+        Dim task = Lead.CreateTask("Chris Yan", priority, taskAction, taskDescription, bble, createUser, logCategory)
+        Dim ld = LeadsInfo.GetInstance(bble)
+        Dim taskName = String.Format("{0} {1}", taskAction, ld.StreetNameWithNo)
+        WorkflowService.StartTaskProcess("TaskProcess", taskName, task.TaskID, bble, employee, priority, "", "/ViewLeadsinfo.aspx")
+
+        Assert.AreEqual(CType(task.Status, UserTask.TaskStatus), UserTask.TaskStatus.Active)
+
+        Threading.Thread.Sleep(3000)
+
+        Dim wli = WorkflowService.GetUserTaskWorklist(task.TaskID, createUser)
+        Assert.IsNotNull(wli)
+
+        UserTask.ExpiredTaskAndWorklist(task.TaskID)
+
+        task = UserTask.GetTaskById(task.TaskID)
+        Assert.AreEqual(CType(task.Status, UserTask.TaskStatus), UserTask.TaskStatus.Complete)
+
+        Threading.Thread.Sleep(3000)
+        wli = WorkflowService.GetUserTaskWorklist(task.TaskID, createUser)
+        Assert.IsNull(wli)
+    End Sub
+
 End Class

@@ -506,7 +506,12 @@
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Title-All" Text="All Cases" NavigationUrl="/BusinessForm/Default.aspx?name=All Case" ShowAmount="true" AmountManageClass="TitleManage">
+      <!--<PortalNavItem Name="Title-All" Text="All Cases" NavigationUrl="/BusinessForm/Default.aspx?name=All Cases" ShowAmount="true" AmountManageClass="TitleManage">
+        <FontClass>
+          <![CDATA[<i class="fa fa-wrench"></i>]]>
+        </FontClass>
+      </PortalNavItem>-->
+      <PortalNavItem Name="Title-All" Text="All Cases" NavigationUrl="/TitleUI/TitleSummaryPage.aspx" ShowAmount="true" AmountManageClass="TitleManage">
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>

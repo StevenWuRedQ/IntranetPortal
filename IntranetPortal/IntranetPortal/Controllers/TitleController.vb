@@ -51,6 +51,12 @@ Namespace Controllers
             End Try
         End Function
 
+        <Route("api/Title/TitleCases")>
+        Public Function GetTitleCases() As IHttpActionResult
+            Dim tCases = TitleManage.GetCasesByCategory("All")
+            Return Ok(tCases)
+        End Function
+
         <ResponseType(GetType(String()))>
         <Route("api/Title/UploadFiles")>
         Public Function uploadTitleFiles() As IHttpActionResult
