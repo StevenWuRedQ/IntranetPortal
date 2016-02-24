@@ -122,7 +122,7 @@
                     dataType: "date",
                     customizeText: function (cellInfo) {
                         //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
-                        if (cellInfo.value)
+                        if (!cellInfo.value)
                             return ""
 
                         var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
@@ -139,8 +139,14 @@
             }).dxDataGrid('instance');
 
             if (url == "/api/Title/TitleCases/")
+            {
                 dataGrid.columnOption("Owner", "visible", true);
+                dataGrid.columnOption("StatusStr", "groupIndex", null);
+            }
 
+            if (url == "/api/Title/TitleCases/-1")
+                dataGrid.columnOption("StatusStr", "groupIndex", null);
+            
         <%-- var applyFilterTypes = [{
             key: "AllCases",
             name: "All Cases"
