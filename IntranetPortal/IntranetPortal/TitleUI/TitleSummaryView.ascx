@@ -111,19 +111,25 @@
                     }
                 }, {
                     dataField: "TitleCategory",
-                    caption: "Category",
+                    caption: "ShortSale Category",
                 }, {
                     dataField: "StatusStr",
-                    caption: "Status",
+                    caption: "Title Status",
                     groupIndex:0
                 }, {
-                    caption: "LastUpdate",
+                    caption: "Last Update",
                     dataField: "UpdateDate",
                     dataType: "date",
                     customizeText: function (cellInfo) {
                         //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
+                        if (!cellInfo.value)
+                            return ""
+
                         var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
-                        return moment(dt).format('MM/DD/YYYY hh:mm a');
+                        if (dt)
+                            return moment(dt).format('MM/DD/YYYY hh:mm a');
+
+                        return ""
                     }
                 }, {
                     caption: "Owner",
@@ -133,8 +139,14 @@
             }).dxDataGrid('instance');
 
             if (url == "/api/Title/TitleCases/")
+            {
                 dataGrid.columnOption("Owner", "visible", true);
+                dataGrid.columnOption("StatusStr", "groupIndex", null);
+            }
 
+            if (url == "/api/Title/TitleCases/-1")
+                dataGrid.columnOption("StatusStr", "groupIndex", null);
+            
         <%-- var applyFilterTypes = [{
             key: "AllCases",
             name: "All Cases"

@@ -83,22 +83,21 @@ Public Class MySummary
                                                           New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
                                                          .Parameters = New Dictionary(Of String, Object) From {
                                                             {"CategoryId", 5}
-                                                         }},
-                                                            New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
-                                                         .Parameters = New Dictionary(Of String, Object) From {
-                                                            {"CategoryId", 0}, {"IsTitleStatus", True}
-                                                         }},
-                                                            New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
-                                                         .Parameters = New Dictionary(Of String, Object) From {
-                                                            {"CategoryId", 1}, {"IsTitleStatus", True}
-                                                         }},
-                                                            New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
-                                                         .Parameters = New Dictionary(Of String, Object) From {
-                                                            {"CategoryId", 2}, {"IsTitleStatus", True}
                                                          }}
                                                          }
                     }}
-
+                'New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
+                '                                .Parameters = New Dictionary(Of String, Object) From {
+                '                                   {"CategoryId", 0}, {"IsTitleStatus", True}
+                '                                }},
+                '                                   New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
+                '                                .Parameters = New Dictionary(Of String, Object) From {
+                '                                   {"CategoryId", 1}, {"IsTitleStatus", True}
+                '                                }},
+                '                                   New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
+                '                                .Parameters = New Dictionary(Of String, Object) From {
+                '                                   {"CategoryId", 2}, {"IsTitleStatus", True}
+                '                                }}
             End If
 
             If Settings.Any(Function(s) s.Name = name) Then

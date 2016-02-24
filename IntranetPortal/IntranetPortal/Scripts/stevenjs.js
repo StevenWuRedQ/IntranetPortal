@@ -1159,6 +1159,9 @@ function endsWith(str, suffix) {
 
 var PortalUtility = {
     FormatLocalDateTime: function (utcDate) {
+        if (!utcDate)
+            return
+
         // create Date object for current location
         var d = new Date();
 
