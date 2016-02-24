@@ -3,20 +3,22 @@
 <style type="text/css">
     a.dx-link-MyIdealProp:hover {
         font-weight: 500;
+        cursor:pointer
     }
 
     .myRow:hover {
         background-color: #efefef;
     }
 </style>
-<h4 id="title_<%= ClientID %>">
-    <img src="../images/<%= If(Not IsTitleStatus, "grid_task_icon.png", "grid_upcoming_icon.png") %>" class="vertical-img" /><span class="heading_text"><%= Category %></span>
-    <span class="heading_text employee_lest_head_number_label" style="margin-left:25px;"><a href="/BusinessForm/Default.aspx?c=<%= CategoryId %>" style="color:white;"></a></span>
+<h4 id="title_<%= ClientID %>" style="padding-top:5px">
+    <img src="../images/<%= If(Not IsTitleStatus, "grid_task_icon.png", "grid_upcoming_icon.png") %>" class="vertical-img" />
+    <a href="/TitleUI/TitleSummaryPage.aspx?c=<%= CategoryId %>"><span class="heading_text" style="color:black"><%= Category %></span>
+    <span class="heading_text employee_lest_head_number_label" style="margin-left:25px;color:white;"></span></a>
 </h4>
-<div id="gridContainer" runat="server" style="margin: 10px; margin-top: 50px; height: 300px"></div>
+<div id="gridContainer" runat="server" style="margin: 10px; margin-top: 50px; height: 350px"></div>
 <script>
     var CategoryItem_<%= Me.ClientID%> = {
-        url: "/api/Title/TitleCases/<%=If(IsTitleStatus, "Status/", "") %><%= CategoryId%>",
+        url: "/api/Title/TitleCasesSummary/<%=If(IsTitleStatus, "Status/", "") %><%= CategoryId%>",
         dxGridName: "#<%= gridContainer.ClientID%>",
         headName:"title_<%= ClientID%>",
         categoryId:<%= CategoryId%>,
@@ -27,7 +29,7 @@
             $.getJSON(tab.url).done(function (data) {
                 
                 var dataGrid = $(tab.dxGridName).dxDataGrid({
-                    dataSource: data,                  
+                    dataSource: data.data,
                     rowAlternationEnabled: true,
                     pager: {
                         showInfo: true
@@ -42,13 +44,15 @@
                         .addClass('myRow');
                     },
                     onContentReady: function (e) {
-                        var spanTotal = $('#' + tab.headName).find('a')[0];
+                        var spanTotal = $('#' + tab.headName).find('.employee_lest_head_number_label')[0];
                         if (spanTotal) {
-                            $(spanTotal).html(e.component.totalCount());
+                            $(spanTotal).html(data.count);
                             
                             if(tab.IsTitleStatus)
                             {
-                                $(spanTotal).attr("href","#");
+                                var link = $('#' + tab.headName).find('a')[0];
+                                if(link)
+                                    $(link).attr("href","/TitleUI/TitleSummaryPage.aspx?c=-1");
                             }
                         } 
                     },
@@ -62,8 +66,8 @@
                                 .on('dxclick', function () {
                                     //
                                     //Do something with options.data;
-                                    var url = '/BusinessForm/Default.aspx?showList=true&c='+tab.categoryId +'&tag=' + options.data.BBLE;
-                                    GoToCase(url);
+                                    var url = '/BusinessForm/Default.aspx?tag=' + options.data.BBLE;
+                                    PortalUtility.ShowPopWindow("View Title Case - "+ options.data.BBLE, url);
                                 })
                                 .appendTo(container);
                         },
@@ -73,32 +77,8 @@
         }
     }
     
-    CategoryItem_<%= Me.ClientID%>.loadData();    
-
-    function GoToCase(url) {     
-        window.location.href = url;
-    }
-
-    //var fileWindows = {};
-    //function ShowCaseInfo(CaseId) {
-    //    for (var win in fileWindows) {
-    //        if (fileWindows.hasOwnProperty(win) && win == CaseId) {
-    //            var caseWin = fileWindows[win];
-    //            if (!caseWin.closed) {
-    //                caseWin.focus();
-    //                return;
-    //            }
-    //        }
-    //    }
-
-    //    var url = '/BusinessForm/Default.aspx?tag=' + CaseId;
-    //    var left = (screen.width / 2) - (1350 / 2);
-    //    var top = (screen.height / 2) - (930 / 2);
-    //    debugger;
-    //    var win = window.open(url, 'View Title Case - ' + CaseId, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
-    //    fileWindows[CaseId] = win;
-    //}
-
-
+    $(function(){
+        CategoryItem_<%= Me.ClientID%>.loadData();    
+    });    
 
 </script>

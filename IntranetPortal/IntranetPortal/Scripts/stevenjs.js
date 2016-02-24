@@ -1157,6 +1157,42 @@ function endsWith(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
 };
 
+var PortalUtility = {
+    FormatLocalDateTime: function (utcDate) {
+        // create Date object for current location
+        var d = new Date();
+
+        // convert to msec
+        // add local time zone offset
+        // get UTC time in msec
+        var utc = new Date(utcDate.getTime() + d.getTimezoneOffset() * 60000);
+
+        // return time as a string
+        return utc
+    },
+
+    GoToCase: function (url) {
+        window.location.href = url;
+    },
+    fileWindows: {},
+    ShowPopWindow: function (windowId, url) {
+        for (var win in this.fileWindows) {
+            if (this.fileWindows.hasOwnProperty(win) && win == windowId) {
+                var caseWin = this.fileWindows[win];
+                if (!caseWin.closed) {
+                    caseWin.focus();
+                    return;
+                }
+            }
+        }
+
+        var left = (screen.width / 2) - (1350 / 2);
+        var top = (screen.height / 2) - (930 / 2);      
+        var win = window.open(url, windowId, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+        this.fileWindows[windowId] = win;
+    }
+}
+
 /**** resize all element unknow height scorll bar*******/
 function calc_scorll_heigh(elem) {
     //var elem = $(".wx_scorll_list")[0];

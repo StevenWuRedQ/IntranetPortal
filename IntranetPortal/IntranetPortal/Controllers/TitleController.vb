@@ -63,6 +63,29 @@ Namespace Controllers
             Return Ok(tCases)
         End Function
 
+        <Route("api/Title/TitleCasesSummary/{cateId}")>
+        Public Function GetTitleCasesSummaryByCategory(cateId As Integer) As IHttpActionResult
+            Dim tCases = TitleManage.GetCasesByCategory(HttpContext.Current.User.Identity.Name, cateId)
+
+            Dim result = New With {
+                    .data = tCases.Take(10).ToArray,
+                    .count = tCases.Count
+                }
+
+            Return Ok(result)
+        End Function
+
+        <Route("api/Title/TitleCasesSummary/Status/{status}")>
+        Public Function GetTitleCasesSummaryByStatus(status As Integer) As IHttpActionResult
+            Dim tCases = TitleManage.GetMyCases(HttpContext.Current.User.Identity.Name, status)
+            Dim result = New With {
+                    .data = tCases.Take(10).ToArray,
+                    .count = tCases.Count
+                }
+
+            Return Ok(result)
+        End Function
+
         <Route("api/Title/TitleCases/Status/{status}")>
         Public Function GetTitleCasesByStatus(status As Integer) As IHttpActionResult
             Dim tCases = TitleManage.GetMyCases(HttpContext.Current.User.Identity.Name, status)

@@ -16,6 +16,11 @@ Public Class Default2
                 Return
             End If
 
+            If Roles.GetRolesForUser().Any(Function(ss) ss.Contains("Title-")) Then
+                ContentUrl = "/MyDefault.aspx?name=Title"
+                Return
+            End If
+
             If User.IsInRole("Construction-Users") OrElse User.IsInRole("Construction-Manager") Then
                 ContentUrl = "/MyDefault.aspx"
             End If

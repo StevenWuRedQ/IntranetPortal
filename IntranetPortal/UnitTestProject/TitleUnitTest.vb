@@ -137,7 +137,17 @@ Imports IntranetPortal
                 Assert.IsNull(tCase.TitleCategory)
             End If
         Next
+    End Sub
 
+    <TestMethod> Public Sub TitleCategory_returnCategory()
+
+        Dim map = TitleCase.MapTitleShortSaleCategory
+
+        For Each item In map
+            Assert.AreEqual(item.Category, TitleManage.TitleCategories(item.Id))
+        Next
+
+        Assert.IsNull(TitleManage.TitleCategories(100))
     End Sub
 
 End Class

@@ -104,7 +104,7 @@
                                                               End If
 
                                                               Return s.tCase
-                                                          End Function).Distinct.ToArray
+                                                          End Function).Distinct.OrderByDescending(Function(s) s.UpdateDate).ToArray
 
             Return result
         End Using
@@ -113,7 +113,10 @@
     Public Shared Function GetExternalCases(userName As String) As TitleCase()
         Using ctx As New PortalEntities
             Dim except = ctx.SSFirstMortgages.Where(Function(s) s.Category IsNot Nothing AndAlso s.Category <> "").Select(Function(s) s.BBLE).Distinct
-            Dim result = ctx.TitleCases.Where(Function(c) Not except.Contains(c.BBLE) AndAlso (c.Owner = userName Or userName = "All")).ToArray
+            Dim result = ctx.TitleCases.Where(Function(c) Not except.Contains(c.BBLE) AndAlso (c.Owner = userName Or userName = "All")).ToList.Select(Function(ts)
+                                                                                                                                                          ts.TitleCategory = "External"
+                                                                                                                                                          Return ts
+                                                                                                                                                      End Function).OrderByDescending(Function(s) s.UpdateDate).ToArray
             Return result
         End Using
     End Function

@@ -191,14 +191,24 @@ Public Class TitleManage
     End Function
 
     Public Shared Function GetMyCases(userName As String, Optional status As TitleCase.DataStatus = TitleCase.DataStatus.All) As TitleCase()
-        If IsManager(userName) Then
-            Return TitleCase.GetAllCases(status)
-        Else
-            Return TitleCase.GetAllCases(userName, status)
-        End If
+        'If IsManager(userName) Then
+        '    Return TitleCase.GetAllCases(status)
+        'Else
+        '    Return TitleCase.GetAllCases(userName, status)
+        'End If
+
+        Return TitleCase.GetAllCases(userName, status)
     End Function
 
     Public Shared Function TitleCategories(cateId As String) As String
+        If cateId = -1 Then
+            Return "My Cases"
+        End If
+
+        If cateId = 0 Then
+            Return "External"
+        End If
+
         Dim categories = TitleCase.MapTitleShortSaleCategory.ToDictionary(Function(m) m.Id, Function(m) m.Category)
         If categories.ContainsKey(cateId) Then
             Return categories(cateId)
