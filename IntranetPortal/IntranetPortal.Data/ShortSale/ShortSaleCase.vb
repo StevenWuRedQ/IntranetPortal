@@ -634,6 +634,12 @@ Partial Public Class ShortSaleCase
 
 #Region "Methods"
 
+    Public Shared Function GetCaseCategory(bble As String) As String
+        Using ctx As New PortalEntities
+            Return ctx.SSFirstMortgages.Where(Function(ss) ss.BBLE = bble).Select(Function(ss) ss.Category).SingleOrDefault
+        End Using
+    End Function
+
     Public Sub RefreshReportFields(refreshBy As String)
 
         'Init Occupancy Data

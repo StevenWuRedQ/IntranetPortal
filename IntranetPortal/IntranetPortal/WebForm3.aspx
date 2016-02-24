@@ -15,7 +15,7 @@
         <div>
             <uc1:ComplaintsNotify runat="server" ID="ComplaintsNotify" Visible="false" />
             <uc1:DeadleadsReport runat="server" ID="DeadleadsReport"  Visible="false"/>
-            <uc1:AuctionDailyReport runat="server" ID="AuctionDailyReport" />
+            <uc1:AuctionDailyReport runat="server" ID="AuctionDailyReport" Visible="false" />
             <br />
             <asp:Button ID="Button1" runat="server" Text="Send Email" OnClick="Button1_Click" />
             <asp:Button ID="Button2" runat="server" Text="Send Complaints Detail" OnClick="Button2_Click" />

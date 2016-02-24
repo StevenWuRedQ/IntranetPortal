@@ -259,7 +259,7 @@ Public Class Utility
     Public Shared Function GetUnAssignedLeadsCount(office As String) As Integer
         Using context As New Entities
             Dim officeName = office & " Office"
-            Dim unActiveUser = Employee.GetDeptUsersList(office, False).Select(Function(emp) emp.Name).ToArray
+            Dim unActiveUser = Employee.GetDeptUnActiveUserList(office).Select(Function(emp) emp.Name).ToArray
 
             Dim count = (From ld In context.Leads
                                    Where ld.EmployeeName = officeName Or (unActiveUser.Contains(ld.EmployeeName) And ld.Status <> LeadStatus.InProcess)

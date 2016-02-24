@@ -40,6 +40,15 @@ Partial Public Class Team
         End Get
     End Property
 
+    Private Function GetUnActiveUser(teamName As String) As List(Of String)
+        Dim unActiveUser = Employee.GetDeptUnActiveUserList(teamName).Select(Function(emp) emp.Name).ToList
+        'Add team non-active users
+        unActiveUser.AddRange(UnActiveUsers)
+        unActiveUser = unActiveUser.Distinct.ToList
+
+        Return unActiveUser
+    End Function
+
     <JsonIgnoreAttribute>
     Public ReadOnly Property AssignLeadsView() As IEnumerable(Of LeadsAssignView2)
         Get
@@ -47,10 +56,7 @@ Partial Public Class Team
             Dim officeName = Name & " Office"
 
             'check the old non active users
-            Dim unActiveUser = Employee.GetDeptUsersList(Name, False).Select(Function(emp) emp.Name).ToList
-            'Add team non-active users
-            unActiveUser.AddRange(UnActiveUsers)
-            unActiveUser = unActiveUser.Distinct.ToList
+            Dim unActiveUser = GetUnActiveUser(Name)
 
             Return ctx.LeadsAssignView2.Where(Function(la) la.EmployeeName = officeName Or (unActiveUser.Contains(la.EmployeeName) And la.Status <> LeadStatus.InProcess)).OrderByDescending(Function(la) la.AssignDate)
         End Get
@@ -63,10 +69,7 @@ Partial Public Class Team
             Dim officeName = Name & " Office"
 
             'check the old non active users
-            Dim unActiveUser = Employee.GetDeptUsersList(Name, False).Select(Function(emp) emp.Name).ToList
-            'Add team non-active users
-            unActiveUser.AddRange(UnActiveUsers)
-            unActiveUser = unActiveUser.Distinct.ToList
+            Dim unActiveUser = GetUnActiveUser(Name)
 
             Return ctx.Leads.Where(Function(la) la.EmployeeName = officeName Or (unActiveUser.Contains(la.EmployeeName) And la.Status <> LeadStatus.InProcess)).Count
 

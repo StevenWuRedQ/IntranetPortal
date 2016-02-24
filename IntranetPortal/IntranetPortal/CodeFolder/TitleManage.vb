@@ -97,7 +97,7 @@ Public Class TitleManage
         End If
     End Sub
 
-    Private Shared Function UpdateCaseStatus(bble As String, status As TitleCase.DataStatus, completedBy As String) As Boolean
+    Public Shared Function UpdateCaseStatus(bble As String, status As TitleCase.DataStatus, completedBy As String) As Boolean
         Dim tCase = TitleCase.GetCase(bble)
         If tCase.Status <> status Then
             tCase.Status = status
@@ -181,12 +181,40 @@ Public Class TitleManage
         Return Employee.GetRoleUsers("Title-")
     End Function
 
+    Public Shared Function GetCasesByCategory(userName As String, Optional cateId As Integer = -1) As TitleCase()
+        'If IsManager(userName) Then
+        '    Return TitleCase.GetCasesBySSCategory("All", cateId)
+        'Else
+        '    Return TitleCase.GetCasesBySSCategory(userName, cateId)
+        'End If
+        Return TitleCase.GetCasesBySSCategory(userName, cateId)
+    End Function
+
     Public Shared Function GetMyCases(userName As String, Optional status As TitleCase.DataStatus = TitleCase.DataStatus.All) As TitleCase()
-        If IsManager(userName) Then
-            Return TitleCase.GetAllCases(status)
-        Else
-            Return TitleCase.GetAllCases(userName, status)
+        'If IsManager(userName) Then
+        '    Return TitleCase.GetAllCases(status)
+        'Else
+        '    Return TitleCase.GetAllCases(userName, status)
+        'End If
+
+        Return TitleCase.GetAllCases(userName, status)
+    End Function
+
+    Public Shared Function TitleCategories(cateId As String) As String
+        If cateId = -1 Then
+            Return "My Cases"
         End If
+
+        If cateId = 0 Then
+            Return "External"
+        End If
+
+        Dim categories = TitleCase.MapTitleShortSaleCategory.ToDictionary(Function(m) m.Id, Function(m) m.Category)
+        If categories.ContainsKey(cateId) Then
+            Return categories(cateId)
+        End If
+
+        Return Nothing
     End Function
 
 #Region "Activitylog Manage"
@@ -241,15 +269,22 @@ Public Class TitleManage
 #End Region
 
     Public Function GetAmount(navMenu As PortalNavItem, userName As String) As Integer Implements INavMenuAmount.GetAmount
+        If navMenu.Name.StartsWith("Title-Category") Then
+            Dim cateId = CInt(navMenu.Name.Split("-")(2))
+            Return GetCasesByCategory(userName, cateId).Length
+        End If
+
         Select Case navMenu.Name
             Case "Title-All"
-                Return GetMyCases(userName).Length
+                Return GetCasesByCategory("All").Length
+            Case "Title-MyCases"
+                Return GetCasesByCategory(userName).Count
             Case "Title-Completed"
                 Return GetMyCases(userName, TitleCase.DataStatus.Completed).Length
             Case "Title-InitialReview"
                 Return GetMyCases(userName, TitleCase.DataStatus.InitialReview).Length
             Case "Title-Clearance"
-                Return GetMyCases(userName, TitleCase.DataStatus.Clearance).Length
+                Return GetMyCases(userName, TitleCase.DataStatus.PendingClearance).Length
             Case "Title-CTC"
                 Return GetMyCases(userName, TitleCase.DataStatus.CTC).Length
             Case Else

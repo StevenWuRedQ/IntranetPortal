@@ -2,6 +2,7 @@
 ''' Represents the user belong to team
 ''' </summary>
 Partial Public Class UserInTeam
+
     Public Property TeamName As String
     Public Property EmployeeId As Integer
     Public Property EmployeePosition As String
@@ -51,16 +52,16 @@ Partial Public Class UserInTeam
     Public Shared Function GetTeamUsersByNames(names As String()) As List(Of UserInTeam)
         Using ctx As New Entities
             Dim items = From ut In ctx.UserInTeams
-                           Join team In ctx.Teams On ut.TeamId Equals team.TeamId
-                           Join Emp In ctx.Employees On ut.EmployeeName Equals Emp.Name
-                           Where names.Contains(ut.EmployeeName)
-                           Select New With {
-                               .UserTeam = ut,
-                               .TeamName = team.Name,
-                               .EmployeeId = Emp.EmployeeID,
-                               .Position = Emp.Position,
-                                .Active = Emp.Active
-                               }
+                        Join team In ctx.Teams On ut.TeamId Equals team.TeamId
+                        Join Emp In ctx.Employees On ut.EmployeeName Equals Emp.Name
+                        Where names.Contains(ut.EmployeeName)
+                        Select New With {
+                            .UserTeam = ut,
+                            .TeamName = team.Name,
+                            .EmployeeId = Emp.EmployeeID,
+                            .Position = Emp.Position,
+                             .Active = Emp.Active
+                            }
 
             Dim result As New List(Of UserInTeam)
             For Each item In items

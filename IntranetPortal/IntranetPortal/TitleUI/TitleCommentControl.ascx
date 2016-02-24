@@ -5,7 +5,7 @@
         <select class="select_bootstrap select_margin" id="selCategory" data-required="true" onchange="TitleCommentControl.onItemChanged(this)" runat="server">
             <option value=""></option>
             <option value="0">Initial Review</option>
-            <option value="1">Clearance Follow Up</option>
+            <option value="1">Pending Clearance</option>
             <option value="2">CTC</option>
         </select>
     </div>

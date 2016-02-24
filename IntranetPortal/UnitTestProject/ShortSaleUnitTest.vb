@@ -296,4 +296,37 @@ Public Class ShortSaleUnitTest
         'Agent
         Assert.IsFalse(ShortSaleManage.IsViewable(Nothing, "Tom Aronov"))
     End Sub
+
+    <TestMethod> Public Sub GetCaseCategory_returnMortCategory()
+        Dim ssCases = ShortSaleCase.GetAllCase()
+
+        For Each ss In ssCases
+            Assert.AreEqual(ss.FirstMortgage.Category, ShortSaleCase.GetCaseCategory(ss.BBLE))
+        Next
+
+        Assert.IsNull(ShortSaleCase.GetCaseCategory("dddd"))
+        Assert.IsNull(ShortSaleCase.GetCaseCategory(Nothing))
+    End Sub
+
+    <TestMethod> Public Sub UpdateCaseCategory_NewCategory()
+        Dim bble = "1020570051"
+        Dim newCategory = "Homepath"
+        Dim newStatus = "Value Dispute"
+        Dim testBy = "TestUnit"
+
+        Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
+        Dim ssCategory = ssCase.MortgageCategory
+        Dim ssStatus = ssCase.FirstMortgage.Status
+        Dim updateBy = ssCase.FirstMortgage.UpdateBy
+
+        ssCase.UpdateMortgageStatus(0, newCategory, newStatus, testBy)
+
+        ssCase = ShortSaleCase.GetCaseByBBLE(bble)
+        Assert.AreEqual(ssCase.MortgageCategory, newCategory)
+        Assert.AreEqual(ssCase.FirstMortgage.Status, newStatus)
+        Assert.AreEqual(ssCase.FirstMortgage.UpdateBy, testBy)
+
+        ssCase.UpdateMortgageStatus(0, ssCategory, ssStatus, updateBy)
+    End Sub
+
 End Class

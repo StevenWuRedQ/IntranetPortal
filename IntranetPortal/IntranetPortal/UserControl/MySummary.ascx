@@ -8,18 +8,15 @@
 
     </div>
     <div align="center" style="background-color: #ff400d;" class="label-summary-info">
-
-        <span style="font-weight: 900">
-            <%= IntranetPortal.WorkflowService.GetMyWorklist().Count %>
+        <span style="font-weight: 900" id="spanWorklistCount" runat="server">          
         </span>
         <span style="font-weight: 200">&nbsp;Tasks
         </span>
-
     </div>
-    <div align="center" style="background-color: #1a3847; margin-left: 10px;" class="label-summary-info">
+    <div align="center" style="background-color: #1a3847; margin-left: 10px; display:none" class="label-summary-info">
 
-        <span style="font-weight: 900">
-            <%= IntranetPortal.UserAppointment.GetMyTodayAppointments(Page.User.Identity.Name).Count %>
+        <span style="font-weight: 900" id="spanAppointmentCount" runat="server">
+          
         </span>
         <span style="font-weight: 200">&nbsp;Appointments Today
         </span>

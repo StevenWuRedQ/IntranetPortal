@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class WorkflowMng
-
+    
     '''<summary>
     '''form1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class WorkflowMng
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
+    
     '''<summary>
     '''txtTaskId control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class WorkflowMng
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtTaskId As Global.System.Web.UI.WebControls.TextBox
-
+    
     '''<summary>
     '''lblResult control.
     '''</summary>

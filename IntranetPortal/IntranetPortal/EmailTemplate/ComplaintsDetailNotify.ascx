@@ -54,7 +54,7 @@
 Dear All,
 <br />
 <br />
-FYI - The DOB Complaint, for the property located at: (<%= GetMailDataItem("Address") %>), has been updated.
+FYI - The DOB Complaint, for the property located at: (<%= GetMailDataItem("Address") %>),<% If Resolved Then %> was resolved or cleared. <% else %> has been updated. <% End If %>
 <br />
 <br />
 

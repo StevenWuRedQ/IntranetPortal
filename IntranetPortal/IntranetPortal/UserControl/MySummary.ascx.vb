@@ -7,6 +7,9 @@ Public Class MySummary
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
+            spanWorklistCount.InnerHtml = IntranetPortal.WorkflowService.GetMyWorklist().Count
+            spanAppointmentCount.InnerHtml = IntranetPortal.UserAppointment.GetMyTodayAppointments(Page.User.Identity.Name).Count
+
             For Each ctr In SummaryItems
                 ctr.BindData()
             Next
@@ -15,11 +18,11 @@ Public Class MySummary
 
     Protected Sub rptModules_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)
         If e.Item.ItemType = ListItemType.Item Or e.Item.ItemType = ListItemType.AlternatingItem Then
-            Dim ascx = e.Item.DataItem
-
-            Dim myControl = CType(Page.LoadControl("~/UserControl/SummaryItem/" & ascx), SummaryItemBase)
+            Dim ascx = CType(e.Item.DataItem, SummaryItemBase)
+            Dim myControl = CType(ascx.LoadControl("~/UserControl/SummaryItem/" & ascx.ControlFileName), SummaryItemBase)
+            'Dim myControl = CType(Page.LoadControl(), SummaryItemBase)
             myControl.ID = "Control" & e.Item.ItemIndex
-
+            myControl.Parameters = ascx.Parameters
             SummaryItems.Add(myControl)
             'myControl.BindData()
 
@@ -29,9 +32,83 @@ Public Class MySummary
     End Sub
 
     Private Sub MySummary_Init(sender As Object, e As EventArgs) Handles Me.Init
-        Dim models = {"TaskItem.ascx", "AppointmentItem.ascx", "FollowUpItem.ascx", "CalendarItem.ascx"}
+        Dim name = "Default"
+
+        If Not String.IsNullOrEmpty(Request.QueryString("Name")) Then
+            name = Request.QueryString("Name").ToString
+        End If
+
+        Dim models = SummaryControlSetting.LoadSettings(name)
         rptModules.DataSource = models
         rptModules.DataBind()
     End Sub
+
+    Public Class SummaryControlSetting
+
+        Public Property Name As String
+        Public Property ControlSettings As List(Of SummaryItemBase)
+
+        Private Shared Settings As List(Of SummaryControlSetting)
+
+        Public Shared Function LoadSettings(name As String) As List(Of SummaryItemBase)
+            If Settings Is Nothing Then
+                Settings = New List(Of SummaryControlSetting) From {
+                    New SummaryControlSetting() With {
+                        .Name = "Default",
+                        .ControlSettings = New List(Of SummaryItemBase) From {
+                             New SummaryItemBase() With {.ControlFileName = "TaskItem.ascx"},
+                             New SummaryItemBase() With {.ControlFileName = "AppointmentItem.ascx"},
+                             New SummaryItemBase() With {.ControlFileName = "FollowUpItem.ascx"},
+                             New SummaryItemBase() With {.ControlFileName = "CalendarItem.ascx"}}
+                    },
+                    New SummaryControlSetting() With {
+                        .Name = "Title",
+                        .ControlSettings = New List(Of SummaryItemBase) From {
+                             New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
+                                                         .Parameters = New Dictionary(Of String, Object) From {
+                                                            {"CategoryId", 1}
+                                                         }},
+                             New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
+                                                         .Parameters = New Dictionary(Of String, Object) From {
+                                                            {"CategoryId", 2}
+                                                         }},
+                                                          New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
+                                                         .Parameters = New Dictionary(Of String, Object) From {
+                                                            {"CategoryId", 3}
+                                                         }},
+                                                          New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
+                                                         .Parameters = New Dictionary(Of String, Object) From {
+                                                            {"CategoryId", 4}
+                                                         }},
+                                                          New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
+                                                         .Parameters = New Dictionary(Of String, Object) From {
+                                                            {"CategoryId", 5}
+                                                         }},
+                                                            New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
+                                                         .Parameters = New Dictionary(Of String, Object) From {
+                                                            {"CategoryId", 0}, {"IsTitleStatus", True}
+                                                         }},
+                                                            New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
+                                                         .Parameters = New Dictionary(Of String, Object) From {
+                                                            {"CategoryId", 1}, {"IsTitleStatus", True}
+                                                         }},
+                                                            New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
+                                                         .Parameters = New Dictionary(Of String, Object) From {
+                                                            {"CategoryId", 2}, {"IsTitleStatus", True}
+                                                         }}
+                                                         }
+                    }}
+
+            End If
+
+            If Settings.Any(Function(s) s.Name = name) Then
+                Return Settings.Where(Function(s) s.Name = name).SingleOrDefault.ControlSettings
+            Else
+                Return Nothing
+            End If
+        End Function
+
+
+    End Class
 
 End Class
