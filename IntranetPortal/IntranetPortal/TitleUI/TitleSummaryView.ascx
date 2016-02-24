@@ -111,13 +111,13 @@
                     }
                 }, {
                     dataField: "TitleCategory",
-                    caption: "Category",
+                    caption: "ShortSale Category",
                 }, {
                     dataField: "StatusStr",
-                    caption: "Status",
+                    caption: "Title Status",
                     groupIndex:0
                 }, {
-                    caption: "LastUpdate",
+                    caption: "Last Update",
                     dataField: "UpdateDate",
                     dataType: "date",
                     customizeText: function (cellInfo) {
