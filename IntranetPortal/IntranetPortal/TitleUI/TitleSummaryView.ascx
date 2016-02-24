@@ -122,8 +122,14 @@
                     dataType: "date",
                     customizeText: function (cellInfo) {
                         //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
+                        if (cellInfo.value)
+                            return ""
+
                         var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
-                        return moment(dt).format('MM/DD/YYYY hh:mm a');
+                        if (dt)
+                            return moment(dt).format('MM/DD/YYYY hh:mm a');
+
+                        return ""
                     }
                 }, {
                     caption: "Owner",
