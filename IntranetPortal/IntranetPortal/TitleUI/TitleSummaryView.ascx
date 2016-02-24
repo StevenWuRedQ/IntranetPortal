@@ -2,24 +2,41 @@
 
 <style type="text/css">
     a.dx-link-MyIdealProp:hover {
-        font-weight: 500;     
+        font-weight: 500;
     }
 
     .myRow:hover {
-         background-color:#efefef;
+        background-color: #efefef;
     }
 
+    .apply-filter-option {
+        margin-top: 10px;
+        margin-left: 10px;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        line-height: 38px;
+    }
+
+    .apply-filter-option > div:last-child {
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 10px;
+        line-height: normal;
+    }
 </style>
 
 <input type="text" style="display: none" />
-<h3 style="text-align:center; margin-top:15px;">All Cases</h3>
-<div id="gridContainer" style="margin:10px"></div>
+<%--<div class="apply-filter-option">
+    Apply Filter:
+    <div id="useFilterApplyButton"></div>
+</div>--%>
+<div id="gridContainer" style="margin: 10px"></div>
 <script>
     function GoToCase(CaseId) {
         var url = '/BusinessForm/Default.aspx?tag=' + CaseId;
         window.location.href = url;
     }
-
     var fileWindows = {};
     function ShowCaseInfo(CaseId) {
         for (var win in fileWindows) {
@@ -40,9 +57,8 @@
         fileWindows[CaseId] = win;
     }
 
-    var url = "/api/Title/TitleCases";
+    var url = "/api/Title/TitleCases/<%=CategoryId%>";
     $.getJSON(url).done(function (data) {
-
         var dataGrid = $("#gridContainer").dxDataGrid({
             dataSource: data,
             searchPanel: {
@@ -55,16 +71,31 @@
             },
             rowAlternationEnabled: true,
             pager: {
-                showInfo: true
+                showInfo: true,
             },
-            paging:{
-                enabled: true,                
+            paging: {
+                enabled: true,
+                //pageSize: 10
             },
             onRowPrepared: function (rowInfo) {
                 if (rowInfo.rowType != 'data')
                     return;
                 rowInfo.rowElement
-                .addClass('myRow');                
+                .addClass('myRow');
+            },
+            onContentReady: function (e) {
+                var spanTotal = e.element.find('.spanTotal')[0];
+                if (spanTotal) {
+                    $(spanTotal).html("Total Count: " + e.component.totalCount());
+                } else {
+                    var panel = e.element.find('.dx-datagrid-pager');
+
+                    if (!panel.find(".dx-pages").length) {
+                        $("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()).appendTo(e.element);
+                    } else {
+                        panel.append($("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()))
+                    }
+                }
             },
             columns: [{
                 dataField: "CaseName",
@@ -91,6 +122,27 @@
             }]
         }).dxDataGrid('instance');
 
+       <%-- var applyFilterTypes = [{
+            key: "AllCases",
+            name: "All Cases"
+        }, {
+            key: "MyCases",
+            name: "My Cases"
+        }];
+
+        $("#useFilterApplyButton").dxSelectBox({
+            items: applyFilterTypes,
+            value: applyFilterTypes[0].key,
+            valueExpr: "key",
+            displayExpr: "name",
+            onValueChanged: function (data) {
+                if (data.value == "AllCases") {
+                    dataGrid.clearFilter();
+                } else {
+                    dataGrid.filter(["Owner", "=", "<%= Page.User.Identity.Name%>"]);
+        }
+            }
+        });--%>
     });
 
 </script>

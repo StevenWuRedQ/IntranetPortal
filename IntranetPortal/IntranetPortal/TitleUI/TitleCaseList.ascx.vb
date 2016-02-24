@@ -7,10 +7,14 @@ Public Class TitleCaseList
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
-            If Not String.IsNullOrEmpty(Request.QueryString("name")) Then
-                lblLeadCategory.Text = Request.QueryString("name").ToString
-            End If
+            'If Not String.IsNullOrEmpty(Request.QueryString("name")) Then
+            '    lblLeadCategory.Text = Request.QueryString("name").ToString
+            'End If
 
+            If Not String.IsNullOrEmpty(Request.QueryString("c")) Then
+                Dim cateId = CInt(Request.QueryString("c"))
+                lblLeadCategory.Text = TitleManage.TitleCategories(cateId)
+            End If
         End If
     End Sub
 

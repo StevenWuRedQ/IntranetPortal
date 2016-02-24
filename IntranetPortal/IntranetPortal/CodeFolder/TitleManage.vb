@@ -182,11 +182,12 @@ Public Class TitleManage
     End Function
 
     Public Shared Function GetCasesByCategory(userName As String, Optional cateId As Integer = -1) As TitleCase()
-        If IsManager(userName) Then
-            Return TitleCase.GetCasesBySSCategory("All", cateId)
-        Else
-            Return TitleCase.GetCasesBySSCategory(userName, cateId)
-        End If
+        'If IsManager(userName) Then
+        '    Return TitleCase.GetCasesBySSCategory("All", cateId)
+        'Else
+        '    Return TitleCase.GetCasesBySSCategory(userName, cateId)
+        'End If
+        Return TitleCase.GetCasesBySSCategory(userName, cateId)
     End Function
 
     Public Shared Function GetMyCases(userName As String, Optional status As TitleCase.DataStatus = TitleCase.DataStatus.All) As TitleCase()
@@ -195,6 +196,15 @@ Public Class TitleManage
         Else
             Return TitleCase.GetAllCases(userName, status)
         End If
+    End Function
+
+    Public Shared Function TitleCategories(cateId As String) As String
+        Dim categories = TitleCase.MapTitleShortSaleCategory.ToDictionary(Function(m) m.Id, Function(m) m.Category)
+        If categories.ContainsKey(cateId) Then
+            Return categories(cateId)
+        End If
+
+        Return Nothing
     End Function
 
 #Region "Activitylog Manage"
@@ -256,7 +266,9 @@ Public Class TitleManage
 
         Select Case navMenu.Name
             Case "Title-All"
-                Return GetMyCases(userName).Length
+                Return GetCasesByCategory("All").Length
+            Case "Title-MyCases"
+                Return GetCasesByCategory(userName).Count
             Case "Title-Completed"
                 Return GetMyCases(userName, TitleCase.DataStatus.Completed).Length
             Case "Title-InitialReview"

@@ -43,6 +43,9 @@
                 var tmp = values.split("|");
                 if (tmp.length > 0)
                 {
+                    if (leadsInfoBBLE == tmp[0])
+                        return;
+
                     leadsInfoBBLE = tmp[0];
                     FormControl.LoadData(tmp[1]);
                     return;

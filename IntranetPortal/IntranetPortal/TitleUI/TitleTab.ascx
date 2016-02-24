@@ -22,6 +22,7 @@
                             <div ng-bind="Form.FormData.CaseName" style="white-space: nowrap; overflow: hidden"></div>
                             <span ng-show="Form.BusinessData.TitleCategory" style="color: red; font-weight: 600; font-size: 20px">({{Form.BusinessData.TitleCategory}} in ShortSale)</span>
                             <span ng-show="!Form.BusinessData.TitleCategory && BBLE" style="color: red; font-weight: 600; font-size: 20px">(External Case)</span>
+                            <span ng-show="Form.BusinessData.Owner" style="font-weight: 600; font-size: 20px; color:green">&nbsp;Case Owner: {{Form.BusinessData.Owner}}</span>
                         </div>
                     </div>
                     <div class="col-md-2 pull-right" style="margin: 10px 0">
