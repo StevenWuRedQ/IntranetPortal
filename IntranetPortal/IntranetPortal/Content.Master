@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="/bower_components/angular-ui-layout/src/ui-layout.css" />
     <link rel="stylesheet" href="/bower_components/angular-animate-css/build/nga.min.css" />
     <link rel="stylesheet" href="/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" />
-    <link rel="stylesheet" href="/css/stevencss.css?v=02022016" type="text/css" />
+    <link rel="stylesheet" href="/css/stevencss.css?v=24022016" type="text/css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -65,12 +65,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
 
-   <script src="/Scripts/autosave.js?v=02022016"></script>
+   <script src="/Scripts/autosave.js?v=24022016"></script>
 
   <%-- <script data-main="app" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.22/require.js"></script>--%>
   
     <!-- pro env -->
-    <script src="/js/build/intranetportal.js?v=02022016"></script>
+    <script src="/js/build/intranetportal.js?v=24022016"></script>
 
     <!-- dev env -->
     
@@ -147,8 +147,8 @@
     </script>
     <div id="dataLoadingPanel" dx-load-panel="{message:'Loading..', showIndicator: true,  position:{of: '#dataPanelDiv'}, bindingOptions:{ visible: 'panelLoading' }}"></div>
 
-    <script src="/Scripts/autosave.js?v=02022016"></script>
-    <script src="/Scripts/stevenjs.js?v=02022016"></script>
-    <script src="/Scripts/autologout.js?v=02022016"></script>
+    <script src="/Scripts/autosave.js?v=24022016"></script>
+    <script src="/Scripts/stevenjs.js?v=24022016"></script>
+    <script src="/Scripts/autologout.js?v=24022016"></script>
 </body>
 </html>

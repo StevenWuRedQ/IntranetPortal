@@ -3,19 +3,22 @@
 <style type="text/css">
     a.dx-link-MyIdealProp:hover {
         font-weight: 500;
-        cursor:pointer
+        cursor: pointer;
     }
 
     .myRow:hover {
         background-color: #efefef;
     }
+
+   
 </style>
-<h4 id="title_<%= ClientID %>" style="padding-top:5px">
-    <img src="../images/<%= If(Not IsTitleStatus, "grid_task_icon.png", "grid_upcoming_icon.png") %>" class="vertical-img" />
-    <a href="/TitleUI/TitleSummaryPage.aspx?c=<%= CategoryId %>"><span class="heading_text" style="color:black"><%= Category %></span>
-    <span class="heading_text employee_lest_head_number_label" style="margin-left:25px;color:white;"></span></a>
+<h4 id="title_<%= ClientID %>" style="padding-top: 5px">
+    <%--<img src="../images/<%= If(Not IsTitleStatus, "grid_task_icon.png", "grid_upcoming_icon.png") %>" class="vertical-img" />--%>
+    <label class='grid-title-icon <%= If(Not IsTitleStatus, "", "grid-title-title") %>'><%= If(Not IsTitleStatus, "SS", "TI") %></label>
+    <a href="/TitleUI/TitleSummaryPage.aspx?c=<%= CategoryId %>"><label style="color: black">&nbsp;<%= Category %></label>
+        <label class="employee_lest_head_number_label" style="margin-left: 5px; color: white;"></label></a>
 </h4>
-<div id="gridContainer" runat="server" style="margin: 10px; margin-top: 50px; height: 350px"></div>
+<div id="gridContainer" runat="server" style="margin: 10px; height: 350px"></div>
 <script>
     var CategoryItem_<%= Me.ClientID%> = {
         url: "/api/Title/TitleCasesSummary/<%=If(IsTitleStatus, "Status/", "") %><%= CategoryId%>",
