@@ -417,6 +417,10 @@ Public Class LeadsList
             Throw New CallbackException("BBLE is not correct format! Please check.")
         End If
 
+        If LeadManage.OverUserCreateLimit(Page.User.Identity.Name) Then
+            Throw New CallbackException("You are reaching the limitation of daily leads creation. Please try to add tomorrow.")
+        End If
+
         Using Context As New Entities
             If Context.Leads.Where(Function(l) l.BBLE = bble).Count > 0 Then
                 Dim lead = Context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault
@@ -444,6 +448,8 @@ Public Class LeadsList
             ld.AssignDate = DateTime.Now
             ld.AssignBy = Page.User.Identity.Name
             ld.AppId = Employee.CurrentAppId
+
+            LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.CreateNew, ld.EmployeeName, ld.AssignBy, Nothing)
 
             If Employee.IsManager(Page.User.Identity.Name) Or Page.User.IsInRole("SeniorAgent") Then
                 ld.Status = LeadStatus.NewLead

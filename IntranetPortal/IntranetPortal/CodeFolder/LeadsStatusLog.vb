@@ -1,4 +1,5 @@
 ﻿Partial Public Class LeadsStatusLog
+
     Public Shared Function AddNew(bble As String, type As LogType, userName As String, createBy As String, description As String) As LeadsStatusLog
         Using ctx As New Entities
             'Dim log As New LeadsStatusLog
@@ -16,6 +17,15 @@
         End Using
     End Function
 
+    Public Shared Function GetNewLeadsCreatedCount(userNames As String(), startDate As DateTime, endDate As DateTime) As Integer
+        Using ctx As New Entities
+
+            Dim result = ctx.LeadsStatusLogs.Where(Function(l) userNames.Contains(l.CreateBy) And l.Type = LogType.CreateNew And l.CreateDate > startDate AndAlso l.CreateDate < endDate)
+            Return result.Count
+
+        End Using
+    End Function
+
     Public Shared Function AddNewEntity(bble As String, type As LogType, userName As String, createBy As String, description As String, ctx As Entities) As LeadsStatusLog
         Dim log As New LeadsStatusLog
         log.BBLE = bble
@@ -30,11 +40,22 @@
         Return log
     End Function
 
+    Public Sub Delete()
+        Using ctx As New Entities
+
+            ctx.Entry(Me).State = Entity.EntityState.Deleted
+            ctx.SaveChanges()
+
+        End Using
+
+    End Sub
+
     Public Enum LogType
         NewLeads = 0
         InProcess = 1
         Closed = 2
         Recycled = 3
         DeadLeads = 4
+        CreateNew = 5
     End Enum
 End Class

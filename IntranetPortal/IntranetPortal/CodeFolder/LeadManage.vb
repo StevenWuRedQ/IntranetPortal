@@ -6,6 +6,16 @@ Public Class LeadManage
     Inherits ActivityManageBase
     Implements INavMenuAmount
 
+    Public Shared Function OverUserCreateLimit(userName As String) As Boolean
+        Dim teamName = UserInTeam.GetUserTeam(userName)
+        If Not String.IsNullOrEmpty(teamName) Then
+            Dim tm = Team.GetTeam(teamName)
+            Return tm.OverLimitation()
+        End If
+
+        Return False
+    End Function
+
     ''' <summary>
     ''' Return the leads which is in process
     ''' </summary>

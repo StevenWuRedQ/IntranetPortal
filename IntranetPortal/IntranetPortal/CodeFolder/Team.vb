@@ -49,6 +49,33 @@ Partial Public Class Team
         Return unActiveUser
     End Function
 
+    ''' <summary>
+    ''' The daily leads creation limit, The data can be config in portal settings
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property LeadsCreateLimit As Integer
+
+    Public Function OverLimitation() As Boolean
+        If LeadsCreateLimit = 0 Then
+            LeadsCreateLimit = CInt(IntranetPortal.Core.PortalSettings.GetValue("LeadsCreatedLimit"))
+        End If
+
+        Return OverLimitation(LeadsCreateLimit)
+    End Function
+
+    Public Function OverLimitation(limit As Integer) As Boolean
+        Dim today = DateTime.Today
+        Dim count = GetTeamCreateLeadsCount(today, today.AddDays(1))
+
+        Return count > limit
+    End Function
+
+    Public Function GetTeamCreateLeadsCount(startDate As DateTime, endDate As DateTime) As Integer
+
+        Return LeadsStatusLog.GetNewLeadsCreatedCount(AllUsers, startDate, endDate)
+
+    End Function
+
     <JsonIgnoreAttribute>
     Public ReadOnly Property AssignLeadsView() As IEnumerable(Of LeadsAssignView2)
         Get

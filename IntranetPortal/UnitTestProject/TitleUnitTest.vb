@@ -1,4 +1,5 @@
-﻿Imports System.Text
+﻿
+Imports System.Text
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports IntranetPortal.Data
 Imports IntranetPortal
