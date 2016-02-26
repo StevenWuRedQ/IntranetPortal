@@ -1188,11 +1188,16 @@ var PortalUtility = {
                 }
             }
         }
-
-        var left = (screen.width / 2) - (1350 / 2);
-        var top = (screen.height / 2) - (930 / 2);      
-        var win = window.open(url, windowId, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
-        this.fileWindows[windowId] = win;
+                
+        this.fileWindows[windowId] = this.OpenWindow(url, windowId);
+    },
+    OpenWindow: function (url, title, width, height) {
+        var vwidth = width ? width : 1350;
+        var vheight = height ? height : 930;
+        var left = (screen.width / 2) - (vwidth / 2);
+        var top = (screen.height / 2) - (vheight / 2);
+        var win = window.open(url, title, 'Width=' + vwidth + 'px,Height=' + vheight + 'px, top=' + top + ', left=' + left);
+        return win;
     }
 }
 

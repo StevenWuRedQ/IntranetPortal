@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-md-2 pull-right" style="margin: 10px 0">
                         <div>
-                            <span class="btn btn-default btn-round" onclick="OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=0&bble='+ leadsInfoBBLE, 'Maps')">Map</span>
+                            <span class="btn btn-default btn-round" onclick="PortalUtility.ShowPopWindow('Maps','/PopupControl/PropertyMap.aspx?v=0&bble='+ leadsInfoBBLE)">Map</span>
                         </div>
                         <div style="margin-top: 5px">
                             <%-- now using ascx control instead --%>
