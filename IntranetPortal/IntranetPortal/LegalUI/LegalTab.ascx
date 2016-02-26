@@ -6,7 +6,7 @@
 <%@ Register Src="~/LegalUI/LegalWriteupTab.ascx" TagPrefix="uc1" TagName="LegalWriteupTab" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
-<div id="LegalCtrl" ng-controller="LegalCtrl" style="position: absolute; top: 70px; bottom: 0px; width: 100%; margin-bottom: 250px">
+<div style="position: absolute; top: 70px; bottom: 0px; width: 100%; margin-bottom: 250px">
     <div id="prioity_content" style="height: 250px;">
         <div class="content-title font_gray">
             <div style="font-size: 30px">
