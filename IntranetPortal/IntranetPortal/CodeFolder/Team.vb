@@ -67,7 +67,7 @@ Partial Public Class Team
         Dim today = DateTime.Today
         Dim count = GetTeamCreateLeadsCount(today, today.AddDays(1))
 
-        Return count > limit
+        Return count >= limit
     End Function
 
     Public Function GetTeamCreateLeadsCount(startDate As DateTime, endDate As DateTime) As Integer

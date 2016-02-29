@@ -559,15 +559,18 @@ Public Class LeadsList
         'Dim borough = TryCast(pageInputData.FindControl("txtStreetBorough"), ASPxTextBox).Text
 
         Dim lbBBLE = TryCast(sender, ASPxListBox)
+        Try
+            Dim returnData = GetBBLEData()
 
-        Dim returnData = GetBBLEData()
+            If returnData.Rows.Count = 0 Then
+                Throw New CallbackException("No data matched, Please check!")
+            End If
 
-        If returnData.Rows.Count = 0 Then
-            Throw New CallbackException("No data matched, Please check!")
-        End If
-
-        lbBBLE.DataSource = returnData.DefaultView
-        lbBBLE.DataBind()
+            lbBBLE.DataSource = returnData.DefaultView
+            lbBBLE.DataBind()
+        Catch ex As Exception
+            Throw New CallbackException(ex.Message)
+        End Try
     End Sub
 
     Protected Sub getAddressCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
