@@ -10,6 +10,23 @@ Imports IntranetPortal
     Dim userName = "Michael Gali"
     Dim bble = "2037130013"
 
+    ''' <summary>
+    ''' Regression for GetUserTeam function, check all the user in given team.
+    ''' </summary>
+    <TestMethod> Public Sub GetUserTeam_returnTeamName()
+        Dim tm = Team.GetTeam(teamName)
+
+        For Each name In tm.AllUsers
+            Assert.AreEqual(teamName, UserInTeam.GetUserTeam(name))
+        Next
+
+        Dim mgr = tm.Manager
+
+        Assert.AreEqual(teamName, UserInTeam.GetUserTeam(mgr))
+
+        Assert.IsNull(UserInTeam.GetUserTeam("ddd"))
+    End Sub
+
 
     ''' <summary>
     ''' The unit test for overlimitation function, should return true given limitation is -1
@@ -32,6 +49,5 @@ Imports IntranetPortal
         Assert.AreEqual(count + 1, tm.GetTeamCreateLeadsCount(DateTime.Today, DateTime.Today.AddDays(1)))
         log.Delete()
     End Sub
-
 
 End Class

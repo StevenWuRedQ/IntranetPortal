@@ -417,6 +417,7 @@ Public Class LeadsList
             Throw New CallbackException("BBLE is not correct format! Please check.")
         End If
 
+        'Check daily limitation on Team's creating new leads. if over the limitation, the creation will throw exception
         If LeadManage.OverUserCreateLimit(Page.User.Identity.Name) Then
             Throw New CallbackException("You are reaching the limitation of daily leads creation. Please try to add tomorrow.")
         End If
@@ -690,8 +691,10 @@ Public Class LeadsList
             End Using
 
         Else
+
         End If
     End Sub
+
     Public Function GetMarkColor(markColor As Integer)
         If (markColor <= 0 Or markColor = 1000) Then
             Return "gray"

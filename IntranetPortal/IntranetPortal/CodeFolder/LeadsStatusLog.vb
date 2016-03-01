@@ -17,6 +17,13 @@
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return the amount the new leads logs in the given period and the group of user
+    ''' </summary>
+    ''' <param name="userNames">the list of user</param>
+    ''' <param name="startDate">the start date</param>
+    ''' <param name="endDate">the end date</param>
+    ''' <returns></returns>
     Public Shared Function GetNewLeadsCreatedCount(userNames As String(), startDate As DateTime, endDate As DateTime) As Integer
         Using ctx As New Entities
 

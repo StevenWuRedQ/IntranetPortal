@@ -1,5 +1,8 @@
 ﻿Imports Newtonsoft.Json
 
+''' <summary>
+''' The team object and related actions
+''' </summary>
 Partial Public Class Team
     Public Shared Function GetAllTeams() As List(Of Team)
         Using ctx As New Entities
@@ -55,6 +58,11 @@ Partial Public Class Team
     ''' <returns></returns>
     Public Property LeadsCreateLimit As Integer
 
+    ''' <summary>
+    ''' Return if daily creation limit of team is reached. 
+    ''' The limitation was set in portal settings.
+    ''' </summary>
+    ''' <returns></returns>
     Public Function OverLimitation() As Boolean
         If LeadsCreateLimit = 0 Then
             LeadsCreateLimit = CInt(IntranetPortal.Core.PortalSettings.GetValue("LeadsCreatedLimit"))
@@ -63,6 +71,11 @@ Partial Public Class Team
         Return OverLimitation(LeadsCreateLimit)
     End Function
 
+    ''' <summary>
+    ''' Return if given daily limit of team is reached.
+    ''' </summary>
+    ''' <param name="limit">The daily limitation</param>
+    ''' <returns></returns>
     Public Function OverLimitation(limit As Integer) As Boolean
         Dim today = DateTime.Today
         Dim count = GetTeamCreateLeadsCount(today, today.AddDays(1))
@@ -70,6 +83,12 @@ Partial Public Class Team
         Return count >= limit
     End Function
 
+    ''' <summary>
+    ''' Return the amount of leads that team created in the given time period. 
+    ''' </summary>
+    ''' <param name="startDate">the start date</param>
+    ''' <param name="endDate">the end date</param>
+    ''' <returns></returns>
     Public Function GetTeamCreateLeadsCount(startDate As DateTime, endDate As DateTime) As Integer
 
         Return LeadsStatusLog.GetNewLeadsCreatedCount(AllUsers, startDate, endDate)

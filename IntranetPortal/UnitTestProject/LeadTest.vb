@@ -72,7 +72,6 @@ Public Class LeadTest
 
         Dim teamName = UserInTeam.GetUserTeam(userName)
         Assert.AreEqual(teamName, "GaliTeam")
-
         Assert.IsFalse(LeadManage.OverUserCreateLimit(userName))
 
         Dim log = LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.CreateNew, userName, userName, Nothing)
@@ -87,5 +86,19 @@ Public Class LeadTest
 
         IntranetPortal.Core.PortalSettings.SetValue("LeadsCreatedLimit", limit)
     End Sub
+
+    ''' <summary>
+    ''' Check the limitation for users not in agent team
+    ''' </summary>
+    <TestMethod> Public Sub LeadsCreationLimitFunction_NoLimitAdmin()
+
+        Dim name = "Chris Yan"
+        Assert.IsFalse(LeadManage.OverUserCreateLimit(name))
+
+        name = "Michael Kay"
+        Assert.IsFalse(LeadManage.OverUserCreateLimit(name))
+
+    End Sub
+
 
 End Class
