@@ -7,6 +7,30 @@ Public Class LeadManage
     Implements INavMenuAmount
 
     ''' <summary>
+    ''' Return if the leads creation limiation of user's team was reached. 
+    ''' The daily limitation is team based.
+    ''' </summary>
+    ''' <param name="userName">The user name</param>
+    ''' <returns></returns>
+    Public Shared Function OverUserCreateLimit(userName As String) As Boolean
+        Dim roleNames = Core.PortalSettings.GetValue("LeadsCreatedLimitExcept").Split(";")
+
+        Dim myRoles = Roles.GetRolesForUser(userName)
+
+        If myRoles.Any(Function(r) roleNames.Contains(r)) Then
+            Return False
+        End If
+
+        Dim teamName = UserInTeam.GetUserTeam(userName)
+        If Not String.IsNullOrEmpty(teamName) Then
+            Dim tm = Team.GetTeam(teamName)
+            Return tm.OverLimitation()
+        End If
+
+        Return False
+    End Function
+
+    ''' <summary>
     ''' Return the leads which is in process
     ''' </summary>
     ''' <param name="type">The type of in Process</param>

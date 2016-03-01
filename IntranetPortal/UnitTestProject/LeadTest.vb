@@ -58,4 +58,47 @@ Public Class LeadTest
         Assert.IsTrue(inrole2)
     End Sub
 
+    ''' <summary>
+    ''' The function test for check Leads Creation Limit, 
+    ''' temparory set the team limitation is 1 per day
+    ''' </summary>
+    <TestMethod()>
+    Public Sub LeadsCreationLimitFunction_returnOverLimit()
+        Dim userName = "Michael Gali"
+        Dim bble = "2037130013"
+        Dim limit = CInt(IntranetPortal.Core.PortalSettings.GetValue("LeadsCreatedLimit"))
+
+        IntranetPortal.Core.PortalSettings.SetValue("LeadsCreatedLimit", 1)
+
+        Dim teamName = UserInTeam.GetUserTeam(userName)
+        Assert.AreEqual(teamName, "GaliTeam")
+        Assert.IsFalse(LeadManage.OverUserCreateLimit(userName))
+
+        Dim log = LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.CreateNew, userName, userName, Nothing)
+        Dim log2 = LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.CreateNew, userName, userName, Nothing)
+
+        Dim tm = Team.GetTeam(teamName)
+        Assert.IsTrue(tm.GetTeamCreateLeadsCount(DateTime.Today, DateTime.Today.AddDays(1)) > 0)
+        Assert.IsTrue(LeadManage.OverUserCreateLimit(userName))
+
+        log.Delete()
+        log2.Delete()
+
+        IntranetPortal.Core.PortalSettings.SetValue("LeadsCreatedLimit", limit)
+    End Sub
+
+    ''' <summary>
+    ''' Check the limitation for users not in agent team
+    ''' </summary>
+    <TestMethod> Public Sub LeadsCreationLimitFunction_NoLimitAdmin()
+
+        Dim name = "Chris Yan"
+        Assert.IsFalse(LeadManage.OverUserCreateLimit(name))
+
+        name = "Michael Kay"
+        Assert.IsFalse(LeadManage.OverUserCreateLimit(name))
+
+    End Sub
+
+
 End Class

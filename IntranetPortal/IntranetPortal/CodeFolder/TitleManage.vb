@@ -16,6 +16,11 @@ Public Class TitleManage
     Private Const MgrRoleName As String = "Title-Manager"
     Public Const FormName As String = "TitleCase"
 
+    ''' <summary>
+    ''' Check if the user is title manager
+    ''' </summary>
+    ''' <param name="userName">The user name</param>
+    ''' <returns></returns>
     Public Shared Function IsManager(userName As String) As String
 
         If Roles.IsUserInRole(userName, MgrRoleName) OrElse Roles.IsUserInRole(userName, "Admin") OrElse IsViewable(userName) Then
@@ -25,6 +30,11 @@ Public Class TitleManage
         Return False
     End Function
 
+    ''' <summary>
+    ''' Get the title case name
+    ''' </summary>
+    ''' <param name="bble">The case bble</param>
+    ''' <returns></returns>
     Public Shared Function GetTitleCaseName(bble As String) As String
 
         If IsInTitle(bble) Then
@@ -34,6 +44,11 @@ Public Class TitleManage
         Return Nothing
     End Function
 
+    ''' <summary>
+    ''' Get title case owner
+    ''' </summary>
+    ''' <param name="bble">The title case bble</param>
+    ''' <returns>Owner Name</returns>
     Public Shared Function GetTitleOwner(bble As String) As String
 
         If IsInTitle(bble) Then
@@ -43,6 +58,12 @@ Public Class TitleManage
         Return Nothing
     End Function
 
+    ''' <summary>
+    ''' Update the title owner to different user
+    ''' </summary>
+    ''' <param name="bble">The case BBLE</param>
+    ''' <param name="owner">The owner name</param>
+    ''' <param name="assignBy">The user who changed the owner</param>
     Public Shared Sub updateTitleOwner(bble As String, owner As String, assignBy As String)
         Dim tCase = TitleCase.GetCase(bble)
 
@@ -54,7 +75,12 @@ Public Class TitleManage
         tCase.SaveData(assignBy)
     End Sub
 
-
+    ''' <summary>
+    ''' Assign title case to user
+    ''' </summary>
+    ''' <param name="bble">The title case BBLE</param>
+    ''' <param name="userName">The new case owner</param>
+    ''' <param name="assignBy">The user who assigned the case</param>
     Public Shared Sub AssignTo(bble As String, userName As String, assignBy As String)
         Dim tCase = TitleCase.GetCase(bble)
 
@@ -69,6 +95,11 @@ Public Class TitleManage
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Title.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
     End Sub
 
+    ''' <summary>
+    ''' Check if the given user can view the title case
+    ''' </summary>
+    ''' <param name="userName">The user name</param>
+    ''' <returns></returns>
     Public Shared Function IsViewable(userName As String) As Boolean
 
         Dim roleNames = Core.PortalSettings.GetValue("TitleViewableRoles").Split(";")
@@ -84,10 +115,21 @@ Public Class TitleManage
         Return False
     End Function
 
+    ''' <summary>
+    ''' Check if case is in title
+    ''' </summary>
+    ''' <param name="bble">The case bble</param>
+    ''' <returns></returns>
     Public Shared Function IsInTitle(bble As String) As Boolean
         Return TitleCase.Exists(bble)
     End Function
 
+    ''' <summary>
+    ''' Update case to a new status and record a log in activitylogs
+    ''' </summary>
+    ''' <param name="bble">the case BBLE</param>
+    ''' <param name="status">the new status</param>
+    ''' <param name="completedBy">the user who perform this action</param>
     Public Shared Sub UpdateStatus(bble As String, status As TitleCase.DataStatus, completedBy As String)
         If UpdateCaseStatus(bble, status, completedBy) Then
             Dim comments = "Move case to " & status.ToString
@@ -97,6 +139,13 @@ Public Class TitleManage
         End If
     End Sub
 
+    ''' <summary>
+    ''' Update case status
+    ''' </summary>
+    ''' <param name="bble">The case bble</param>
+    ''' <param name="status">The new status</param>
+    ''' <param name="completedBy">The user who update status</param>
+    ''' <returns></returns>
     Public Shared Function UpdateCaseStatus(bble As String, status As TitleCase.DataStatus, completedBy As String) As Boolean
         Dim tCase = TitleCase.GetCase(bble)
         If tCase.Status <> status Then
@@ -108,18 +157,35 @@ Public Class TitleManage
         Return False
     End Function
 
+    ''' <summary>
+    ''' The action to Complete the title case
+    ''' </summary>
+    ''' <param name="bble">The case bble</param>
+    ''' <param name="completedBy">The user who performed the action</param>
     Public Shared Sub CompleteCase(bble As String, completedBy As String)
         Dim tCase = TitleCase.GetCase(bble)
         tCase.Status = TitleCase.DataStatus.Completed
         tCase.SaveData(completedBy)
     End Sub
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="bble"></param>
+    ''' <param name="completedBy"></param>
     Public Shared Sub UnCompleteCase(bble As String, completedBy As String)
         Dim tcase = TitleCase.GetCase(bble)
         tcase.Status = TitleCase.DataStatus.All
         tcase.SaveData(completedBy)
     End Sub
 
+    ''' <summary>
+    ''' The action to start title action
+    ''' </summary>
+    ''' <param name="bble">The title case bble</param>
+    ''' <param name="caseName">The title case name</param>
+    ''' <param name="userName"></param>
+    ''' <param name="owner"></param>
     Public Shared Sub StartTitle(bble As String, caseName As String, userName As String, Optional owner As String = Nothing)
         Dim tCase = TitleCase.GetCase(bble)
 
@@ -160,6 +226,10 @@ Public Class TitleManage
         End If
     End Sub
 
+    ''' <summary>
+    ''' Get Title case manager
+    ''' </summary>
+    ''' <returns></returns>
     Public Shared Function GetManager() As String
         Dim mgrs = Roles.GetUsersInRole(MgrRoleName)
         If mgrs.Count > 0 Then
@@ -169,6 +239,10 @@ Public Class TitleManage
         Return Nothing
     End Function
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <returns></returns>
     Public Shared Function GetManagers() As List(Of String)
         Dim mgrs = Roles.GetUsersInRole(MgrRoleName)
         If mgrs.Count > 0 Then

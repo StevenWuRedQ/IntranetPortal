@@ -1,16 +1,26 @@
-﻿Imports System.Text
+﻿
+Imports System.Text
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports IntranetPortal.Data
 Imports IntranetPortal
 
+''' <summary>
+''' The title feature related testing
+''' </summary>
 <TestClass()> Public Class TitleUnitTest
 
+    ''' <summary>
+    ''' Testing map relation between title category and shortsale category
+    ''' </summary>
     <TestMethod()> Public Sub GetSSCategories_returnCategories()
         Dim category = 3
         Dim categories = TitleCase.LoadSSCategories(category)
         Assert.AreEqual(6, categories.ShortSaleCategories.Count)
     End Sub
 
+    ''' <summary>
+    ''' UnitTest for GetTitleCategory function, the method should return the title category if shortsalecategory was given
+    ''' </summary>
     <TestMethod()>
     Public Sub GetTitleCategory_returnString()
         For Each mapts In TitleCase.MapTitleShortSaleCategory
@@ -24,6 +34,9 @@ Imports IntranetPortal
         Assert.IsNull(TitleCase.GetTitleCategory(""))
     End Sub
 
+    ''' <summary>
+    ''' UnitTest for GetExternalCases function, the function should return the cases which is not in ShortSaleCategory
+    ''' </summary>
     <TestMethod>
     Public Sub GetExternalCases_returnCases()
         Dim tCases = TitleCase.GetExternalCases("All")
@@ -43,6 +56,9 @@ Imports IntranetPortal
         Assert.IsTrue(result1.SequenceEqual(result2))
     End Sub
 
+    ''' <summary>
+    ''' UnitTest for GetCasesBySSCategory function, the function should return title cases under given category 
+    ''' </summary>
     <TestMethod()> Public Sub GetCasesBySSCategory_returnCases()
 
         Dim allTitleCaes = TitleCase.GetAllCases(TitleCase.DataStatus.All).Select(Function(t) t.BBLE).ToArray
@@ -66,6 +82,10 @@ Imports IntranetPortal
         Next
     End Sub
 
+    ''' <summary>
+    ''' Function Test for Title Category Syncing with ShortSale Category, 
+    ''' the Title category should changed along with category changing in ShortSale
+    ''' </summary>
     <TestMethod()> Public Sub TitleCategoryFunction_CategoryChangedInShortSale()
         Dim bble = "1020570051"
         Dim newCategory = "Homepath"
@@ -89,6 +109,9 @@ Imports IntranetPortal
         ssCase.UpdateMortgageStatus(0, ssCategory, ssStatus, updateBy)
     End Sub
 
+    ''' <summary>
+    ''' UnitTest for TitleStatus method, the method should changed to given status
+    ''' </summary>
     <TestMethod()> Public Sub TitleStatus_Changing()
         Dim bble = "1020570051"
         Dim tCase = TitleCase.GetCase(bble)
@@ -107,7 +130,10 @@ Imports IntranetPortal
         TitleManage.UpdateCaseStatus(bble, tStatus, updateBy)
     End Sub
 
-    <TestMethod()> Public Sub ManagerView_returnAllCases()
+    ''' <summary>
+    ''' FunctionTest for AllCase, the AllCase should include all the users' cases
+    ''' </summary>
+    <TestMethod()> Public Sub AllCase_returnAllCases()
 
         Dim allCases = TitleCase.GetCasesBySSCategory("All")
 
@@ -122,6 +148,10 @@ Imports IntranetPortal
         Assert.IsTrue(rCaseBBLEs1.SequenceEqual(rCaseBBLEs2))
     End Sub
 
+    ''' <summary>
+    ''' RegressionTest for map relationship between Title Category and ShortSale Category,
+    ''' all title cases' category should map to ShortSale Cases' category
+    ''' </summary>
     <TestMethod()> Public Sub CheckTitleInstanceCategory_ShouldEqualToMap()
 
         Dim allTitleCases = TitleCase.GetAllCases(TitleCase.DataStatus.All).Select(Function(t) t.BBLE).ToArray
@@ -139,6 +169,10 @@ Imports IntranetPortal
         Next
     End Sub
 
+    ''' <summary>
+    ''' UnitTest for TitleCategories function, The function should return category name of given category id,
+    ''' Nothing would return, if category id is not valid
+    ''' </summary>
     <TestMethod> Public Sub TitleCategory_returnCategory()
 
         Dim map = TitleCase.MapTitleShortSaleCategory
