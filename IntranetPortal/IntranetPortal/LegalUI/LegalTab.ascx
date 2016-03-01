@@ -18,11 +18,10 @@
                 <span class="time_buttons" onclick="ShowDOBWindow(GetLegalData().PropertyInfo.Borough,GetLegalData().PropertyInfo.Block, GetLegalData().PropertyInfo.Lot)">DOB</span>
                 <span class="time_buttons" onclick="ShowAcrisMap(leadsInfoBBLE)">Acris</span>
                 <span class="time_buttons" onclick="ShowPropertyMap(leadsInfoBBLE)">Maps</span>
-                <span class="time_buttons" onclick="PortalUtility.ShowPopWindow('View Parties','/ShortSale/CaseParties.aspx?bble=' + leadsInfoBBLE)">Parties</span>
+                <span class="time_buttons" onclick="PortalUtility.OpenWindow('/ShortSale/CaseParties.aspx?bble=' + leadsInfoBBLE, 'View Parties', 600, 700)">Parties</span>
                 <span class="time_buttons" onclick="" runat="server" visible="false" id="btnAssignAttorney">Assign Attorney</span>
                 <span class="time_buttons" onclick="$('#RequestModal').modal()" style="display: none">Request Document</span>
                 <br />
-
                 <span class="time_buttons" ng-show="LegalCase.PreQuestions" onclick="window.open('/LegalUI/LegalPreQuestions.aspx?r=true&bble=' + leadsInfoBBLE, 'LegalPreQuestion', 'width=1024, height=800');">Show Questions Form</span>
             </div>
             <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; visibility: visible">{{GetCaseInfo().Name}}</span>

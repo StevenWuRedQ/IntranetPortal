@@ -310,8 +310,40 @@
                 <label class="ss_form_input_title">Email</label>
                 <input class="ss_form_input" ng-model="SsCase.BuyerTitle.Email" type="email">
             </li>
-
         </ul>
-
     </div>
 </div>
+
+<div class="ss_form">
+    <h4 class="ss_form_title">Legal&nbsp</h4>
+    <div class="ss_border">
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Plantiff</label>
+                <input class="ss_form_input" ng-model="LegalCase.Plantiff" readonly="readonly">
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Plantiff Attorney</label>
+                <input class="ss_form_input" ng-model="LegalCase.PlantiffAttorney" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title"></label>                
+            </li>
+        </ul>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Defendant</label>
+                <input class="ss_form_input" ng-model="LegalCase.Defendant" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Defendant Attorney</label>
+                <input class="ss_form_input" ng-model="LegalCase.DefendantAttorney" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title"></label>                
+            </li>
+        </ul>
+    </div>
+</div>
+

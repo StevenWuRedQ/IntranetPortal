@@ -18,6 +18,9 @@
             var $scope = angular.element(document.getElementById('ShortSaleCtrl')).scope();
 
             $scope.BindPartiesData = function (bble) {
+                if (!bble || bble == "")
+                    return;
+
                 $scope.ptCom.startLoading();
                 var done1, done2;
                 $.getJSON("/api/CaseParties/?bble=" + bble).done(function (data) {
