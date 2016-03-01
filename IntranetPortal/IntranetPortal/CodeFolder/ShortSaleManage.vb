@@ -95,6 +95,21 @@ Public Class ShortSaleManage
         Return ""
     End Function
 
+    Public Shared Function LoadExeternalParties(ssCase As ShortSaleCase) As ShortSaleCase
+        Dim emp = Employee.GetInstance(ssCase.ReferralContact.Name)
+        If emp IsNot Nothing AndAlso Not emp.Position = "Manager" Then
+            ssCase.ReferralManager = Employee.GetInstance(ssCase.ReferralContact.Name).Manager
+        Else
+            ssCase.ReferralManager = ssCase.ReferralContact.Name
+        End If
+
+        ssCase.InHouseTitle = TitleManage.GetTitleOwner(ssCase.BBLE)
+
+        ssCase.InHouseLegal = LegalCaseManage.GetCaseOwner(ssCase.BBLE)
+
+        Return ssCase
+    End Function
+
     ''' <summary>
     ''' Add log to short sale activity 
     ''' </summary>

@@ -18,6 +18,7 @@
                 <span class="time_buttons" onclick="ShowDOBWindow(GetLegalData().PropertyInfo.Borough,GetLegalData().PropertyInfo.Block, GetLegalData().PropertyInfo.Lot)">DOB</span>
                 <span class="time_buttons" onclick="ShowAcrisMap(leadsInfoBBLE)">Acris</span>
                 <span class="time_buttons" onclick="ShowPropertyMap(leadsInfoBBLE)">Maps</span>
+                <span class="time_buttons" onclick="PortalUtility.ShowPopWindow('View Parties','/ShortSale/CaseParties.aspx?bble=' + leadsInfoBBLE)">Parties</span>
                 <span class="time_buttons" onclick="" runat="server" visible="false" id="btnAssignAttorney">Assign Attorney</span>
                 <span class="time_buttons" onclick="$('#RequestModal').modal()" style="display: none">Request Document</span>
                 <br />
@@ -39,7 +40,6 @@
                                 <td>
                                     <div class="note_text">Get new Appearance Date : {{LegalECourt.AppearanceDate |date:'MM/dd/yyyy'}}</div>
                                 </td>
-
                             </tr>
                             <tr ng-show="LegalCase.Description!=null">
                                 <td style="width: 20px">
