@@ -84,6 +84,11 @@ Public Class OnlineUser
     End Function
 
     Private Shared Function GetClientIPAddress(context As HttpContext) As String
+        'Aviod load balancer return same ip address of earch client.
+        'If (context.Request.UserHostAddress IsNot Nothing) Then
+        '    Return context.Request.UserHostAddress
+        'End If
+
         If context.Request.ServerVariables("HTTP_VIA") IsNot Nothing Then
             Return context.Request.ServerVariables("HTTP_X_FORWARDED_FOR").ToString
         Else

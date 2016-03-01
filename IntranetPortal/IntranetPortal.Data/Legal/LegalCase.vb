@@ -8,7 +8,7 @@ Imports Newtonsoft.Json.Linq
 Partial Public Class LegalCase
 
     Public Const ForeclosureStatusCategory As String = "LegalFCDataStatus"
-    Public Const SencdaryTypeStatusCategory As String = "LegalSencdaryType"
+    Public Const SecondaryTypeStatusCategory As String = "LegalSecondaryType"
 
     Public Const TitleSaveLog As String = "LegalSave"
 
