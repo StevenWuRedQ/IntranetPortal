@@ -90,7 +90,10 @@ Public Class CommonService
         Dim name = String.Format("{1}-ActivityReport-{0:m}.pdf", DateTime.Today, teamName)
         Dim attachment As New System.Net.Mail.Attachment(GetPDf(teamName), name)
 
-        IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
+        If toAdds.Count > 0 Then
+            IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
+        End If
+
     End Sub
 
     ''' <summary>
@@ -160,7 +163,10 @@ Public Class CommonService
         Dim name = String.Format("{1}-ActivityReport-{0:m}.pdf", DateTime.Today, "Title Team")
         Dim attachment As New System.Net.Mail.Attachment(GetPDf("Title"), name)
 
-        IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), String.Join(";", ccAdds.ToArray), "TeamActivitySummary", emailData, {attachment})
+        If toAdds.Count > 0 Then
+            IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), String.Join(";", ccAdds.ToArray), "TeamActivitySummary", emailData, {attachment})
+        End If
+
     End Sub
 
     ''' <summary>
@@ -184,19 +190,19 @@ Public Class CommonService
             Dim emp = Employee.GetInstance(mgr)
             If emp IsNot Nothing AndAlso emp.Active AndAlso Not String.IsNullOrEmpty(emp.Email) Then
                 toAdds.Add(emp.Email)
+
+                Dim emailData As New Dictionary(Of String, String)
+                'emailData.Add("Body", LoadTeamActivityEmail(objTeam))
+                emailData.Add("Date", DateTime.Today.ToString("m"))
+
+                Dim params As New StringDictionary
+                params.Add("teamMgr", mgr)
+
+                Dim name = String.Format("{1}-ActivityReport-{0:m}.pdf", DateTime.Today, "ShortSale Team")
+                Dim attachment As New System.Net.Mail.Attachment(GetPDf("ShortSale", params), name)
+
+                IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), String.Join(";", ccAdds.ToArray), "TeamActivitySummary", emailData, {attachment})
             End If
-
-            Dim emailData As New Dictionary(Of String, String)
-            'emailData.Add("Body", LoadTeamActivityEmail(objTeam))
-            emailData.Add("Date", DateTime.Today.ToString("m"))
-
-            Dim params As New StringDictionary
-            params.Add("teamMgr", mgr)
-
-            Dim name = String.Format("{1}-ActivityReport-{0:m}.pdf", DateTime.Today, "ShortSale Team")
-            Dim attachment As New System.Net.Mail.Attachment(GetPDf("ShortSale", params), name)
-
-            IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), String.Join(";", ccAdds.ToArray), "TeamActivitySummary", emailData, {attachment})
         Next
     End Sub
 
