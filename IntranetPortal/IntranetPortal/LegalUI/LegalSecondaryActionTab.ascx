@@ -45,16 +45,16 @@
 
         <ul class="ss_form_box  clearfix">
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Plantiff</label>
+                <label class="ss_form_input_title">Plaintiff</label>
                 <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.Plantiff" readonly="readonly">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Plantiff Attorney</label>
+                <label class="ss_form_input_title">Plaintiff Attorney</label>
                 <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlantiffAttorney" readonly="readonly">
             </li>
 
             <li class="ss_form_item" style="width: 97%">
-                <label class="ss_form_input_title">Plantiff Attorney Address *</label>
+                <label class="ss_form_input_title">Plaintiff Attorney Address *</label>
                 <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlantiffAttorneyAddress">
             </li>
             <li class="ss_form_item">
@@ -132,7 +132,7 @@
                 <input class="ss_form_input" ng-model="LeadsInfo.BoroughName" readonly="readonly">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Plantiff *</label>
+                <label class="ss_form_input_title">Plaintiff *</label>
                 <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsPlantiff">
             </li>
 
@@ -178,15 +178,15 @@
             </li>
 
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Plantiff Attorney *</label>
+                <label class="ss_form_input_title">Plaintiff Attorney *</label>
                 <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsPlantiffAttorney" ng-change="LegalCase.SecondaryInfo.PartitionsPlantiffAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.PartitionsPlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.PartitionsPlantiffAttorneyId">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Plantiff # </label>
+                <label class="ss_form_input_title">Plaintiff # </label>
                 <input class="ss_form_input" ng-value="ptContactServices.getContact(LegalCase.SecondaryInfo.PartitionsPlantiffAttorneyId, LegalCase.SecondaryInfo.PartitionsPlantiffAttorney).OfficeNO" readonly>
             </li>
             <li class="ss_form_item" style="width: 97%">
-                <label class="ss_form_input_title">Plantiff Attorney Address </label>
+                <label class="ss_form_input_title">Plaintiff Attorney Address </label>
                 <input class="ss_form_input" ng-value="ptContactServices.getContact(LegalCase.SecondaryInfo.PartitionsPlantiffAttorneyId, LegalCase.SecondaryInfo.PartitionsPlantiffAttorney).Address" readonly>
             </li>
             <li class="ss_form_item">
@@ -211,11 +211,11 @@
 
         <ul class="ss_form_box  clearfix">
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Plantiff *</label>
+                <label class="ss_form_input_title">Plaintiff *</label>
                 <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DeedReversionPlantiff">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Plantiff Attorney *</label>
+                <label class="ss_form_input_title">Plaintiff Attorney *</label>
                 <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorney" ng-change="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId">
             </li>
 
@@ -237,7 +237,7 @@
                 <input class="ss_form_input" ng-value="GetCourtAddress(LeadsInfo.Borough)" readonly="readonly">
             </li>
             <li class="ss_form_item" style="width: 97%">
-                <label class="ss_form_input_title">Plantiff Attorney Address </label>
+                <label class="ss_form_input_title">Plaintiff Attorney Address </label>
                 <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.DeedReversionDefendantAttorney" ng-change="LegalCase.SecondaryInfo.DeedReversionDefendantAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.DeedReversionDefendantAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.DeedReversionDefendantAttorneyId">
             </li>
 
@@ -271,11 +271,11 @@
 
         <ul class="ss_form_box  clearfix">
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Plantiff *</label>
+                <label class="ss_form_input_title">Plaintiff *</label>
                 <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.SPComplaint_Plantiff">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Plantiff Attorney *</label>
+                <label class="ss_form_input_title">Plaintiff Attorney *</label>
                 <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorney" ng-change="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId">
             </li>
 
@@ -327,11 +327,11 @@
 
         <ul class="ss_form_box  clearfix">
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Plantiff *</label>
+                <label class="ss_form_input_title">Plaintiff *</label>
                 <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_Plantiff">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Plantiff Attorney *</label>
+                <label class="ss_form_input_title">Plaintiff Attorney *</label>
                 <input type="text" class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_PlantiffAttorney" ng-change="LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,3)" typeahead-on-select="LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId=$item.ContactId" bind-id="LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId">
             </li>
 
