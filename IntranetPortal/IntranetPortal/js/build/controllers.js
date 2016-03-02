@@ -1908,6 +1908,12 @@ angular.module('PortalApp')
         }
     };
     $scope.reload();
+    var PreLoadReportId = $('#txtReportID').val()
+    if (PreLoadReportId>0)
+    {
+        $scope.LoadByID = true;
+        $scope.load({ReportId: PreLoadReportId })
+    }
 });
 var i = 1;
 angular.module("PortalApp")
