@@ -6,7 +6,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.ProcessorName" readonly="readonly" ng-change="SsCase.Processor=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.Processor=$item.ContactId" bind-id="SsCase.Processor" >
+                <input type="text" class="ss_form_input" ng-model="SsCase.ProcessorName" readonly="readonly" ng-change="SsCase.Processor=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.Processor=$item.ContactId" bind-id="SsCase.Processor">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Phone #</label>
@@ -58,14 +58,13 @@
     </div>
 </div>
 <div class="ss_form">
-    <h4 class="ss_form_title">Referral&nbsp<pt-collapse model="referralCollapse"/></h4>
+    <h4 class="ss_form_title">Referral&nbsp<pt-collapse model="referralCollapse" /></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Agent</label>
                 <input type="text" class="ss_form_input" ng-model="SsCase.ReferralUserName" ng-change="SsCase.Referral=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.Referral=$item.ContactId" bind-id="SsCase.Referral">
             </li>
-
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
                 <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.Referral, SsCase.ReferralUserName).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
@@ -86,7 +85,6 @@
                     <%Next%>
                 </select>
             </li>
-
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Address</label>
                 <input class="ss_form_input" ng-model="ptContactServices.getTeamByName(SsCase.ReferralTeam).Address">
@@ -135,7 +133,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Listing Agent&nbsp;<pt-collapse model="listingAgentCollapse"/></h4>
+    <h4 class="ss_form_title">Listing Agent&nbsp;<pt-collapse model="listingAgentCollapse" /></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
@@ -205,7 +203,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Buyer&nbsp;<pt-collapse model="buyerCollapse"/></h4>
+    <h4 class="ss_form_title">Buyer&nbsp;<pt-collapse model="buyerCollapse" /></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
 
@@ -243,7 +241,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Buyer Attorney&nbsp;<pt-collapse model="buyerAttorneryCollapse"/></h4>
+    <h4 class="ss_form_title">Buyer Attorney&nbsp;<pt-collapse model="buyerAttorneryCollapse" /></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
 
@@ -294,7 +292,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">office #</label>
-                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerTitle.ContactId, SsCase.BuyerTitle.CompanyName).OfficeNO"" mask="(999) 999-9999" clean="true">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerTitle.ContactId, SsCase.BuyerTitle.CompanyName).OfficeNO" mask="(999) 999-9999" clean="true">
             </li>
         </ul>
         <ul class="ss_form_box clearfix" uib-collapse="!titleCompanyCollapse">
@@ -317,7 +315,31 @@
 <div class="ss_form">
     <h4 class="ss_form_title">Legal&nbsp</h4>
     <div class="ss_border">
-        <ul class="ss_form_box clearfix">
+        <table class="table">
+            <thead>
+                <tr style="font-weight: 600">
+                    <td>Type</td>
+                    <td>Defendant</td>
+                    <td>Defendant Attorney</td>
+                    <td>Plantiff</td>
+                    <td>Plantiff Attorney</td>
+                </tr>
+            </thead>
+            <tr ng-repeat="data in LegalCase">
+                <td>{{data.Type}}
+                </td>
+                <td>{{data.Defendant}}
+                </td>
+                <td>{{data.DefendantAttorney}}
+                </td>
+                <td>{{data.Plaintiff}}
+                </td>
+                <td>{{data.PlaintiffAttorney}}
+                </td>
+            </tr>
+        </table>
+
+        <%--        <ul class="ss_form_box clearfix" style="display:none">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Plantiff</label>
                 <input class="ss_form_input" ng-model="LegalCase.Plantiff" readonly="readonly">
@@ -328,10 +350,10 @@
                 <input class="ss_form_input" ng-model="LegalCase.PlantiffAttorney" readonly="readonly">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title"></label>                
+                <label class="ss_form_input_title"></label>
             </li>
         </ul>
-        <ul class="ss_form_box clearfix">
+        <ul class="ss_form_box clearfix" style="display:none">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Defendant</label>
                 <input class="ss_form_input" ng-model="LegalCase.Defendant" readonly="readonly">
@@ -341,9 +363,9 @@
                 <input class="ss_form_input" ng-model="LegalCase.DefendantAttorney" readonly="readonly">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title"></label>                
+                <label class="ss_form_input_title"></label>
             </li>
-        </ul>
+        </ul>--%>
     </div>
 </div>
 

@@ -1180,7 +1180,7 @@ var PortalUtility = {
     fileWindows: {},
     ShowPopWindow: function (windowId, url) {                
         this.OpenWindow(url, windowId);
-    },
+    },    
     OpenWindow: function (url, title, width, height) {
         for (var win in this.fileWindows) {
             if (this.fileWindows.hasOwnProperty(win) && win == title) {

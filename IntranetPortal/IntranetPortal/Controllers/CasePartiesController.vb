@@ -9,18 +9,21 @@ Namespace Controllers
         Function GetCaseParties(bble As String) As Object
 
             Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
-            ssCase = ShortSaleManage.LoadExeternalParties(ssCase)
-            Dim titleOwner = TitleManage.GetTitleOwner(bble)
+
+            If ssCase IsNot Nothing Then
+                ssCase = ShortSaleManage.LoadExeternalParties(ssCase)
+            End If
+
             Dim lCase = LegalCase.GetCase(bble)
+
+            Dim legalActions As New List(Of LegalCase.SecondaryAction)
+            If lCase IsNot Nothing Then
+                legalActions = lCase.GetSecondaryActions
+            End If
 
             Return New With {
                     .ShortSale = ssCase,
-                    .Legal = New With {
-                        .Plantiff = lCase.GetFieldValue(Of String)("ForeclosureInfo.Plantiff"),
-                        .PlantiffAttorney = lCase.GetFieldValue(Of String)("ForeclosureInfo.PlantiffAttorney"),
-                        .Defendant = lCase.GetFieldValue(Of String)("SecondaryInfo.Defendant"),
-                        .DefendantAttorney = lCase.GetFieldValue(Of String)("SecondaryInfo.DefendantAttorneyName")
-                    }
+                    .Legal = legalActions
                 }
 
 

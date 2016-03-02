@@ -18,7 +18,7 @@
                 <span class="time_buttons" onclick="ShowDOBWindow(GetLegalData().PropertyInfo.Borough,GetLegalData().PropertyInfo.Block, GetLegalData().PropertyInfo.Lot)">DOB</span>
                 <span class="time_buttons" onclick="ShowAcrisMap(leadsInfoBBLE)">Acris</span>
                 <span class="time_buttons" onclick="ShowPropertyMap(leadsInfoBBLE)">Maps</span>
-                <span class="time_buttons" onclick="PortalUtility.OpenWindow('/ShortSale/CaseParties.aspx?bble=' + leadsInfoBBLE, 'View Parties', 600, 700)">Parties</span>
+                <span class="time_buttons" onclick="ShowPopupMap('/ShortSale/CaseParties.aspx?bble=' + leadsInfoBBLE, 'Parties')">Parties</span>
                 <span class="time_buttons" onclick="" runat="server" visible="false" id="btnAssignAttorney">Assign Attorney</span>
                 <span class="time_buttons" onclick="$('#RequestModal').modal()" style="display: none">Request Document</span>
                 <br />

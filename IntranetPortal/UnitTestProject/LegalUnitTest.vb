@@ -342,5 +342,118 @@ Imports IntranetPortal.RulesEngine
         Assert.IsNull(lcase.GetFieldValue(Of String)("test"))
     End Sub
 
+    ''' <summary>
+    ''' Unit Test for GetSecondaryActions
+    ''' </summary>
+    <TestMethod> Public Sub GetSecondaryActions_returnActionList()
+        Dim lcase = New LegalCase
+        lcase.CaseData = <string>
+                             <![CDATA[
+                        {                                                  
+                           "ForeclosureInfo":{                                                                                          
+                              "EveryOneIn":false,
+                              "BankruptcyDischarged":false,
+                              "AnswerClientFiledBefore":false,
+                              "NoteIsPossess":false,
+                              "PlainTiffSameAsOriginal":false,
+                              "NoteEndoresed":false,
+                              "AccelerationLetterReview":false,
+                              "StevenJAttny":false,
+                              "PlaintiffHaveAtCommencement":false,
+                              "AffirmationReviewerByCompany":false,
+                              "MortNoteAssInCert":false,
+                              "CertificateReviewerByCompany":false,
+                              "DocumentsRedacted":false,
+                              "ItemsRedacted":false,
+                              "HAMPSubmitted":false,
+                              "Plantiff":"Richard Chin",
+                              "PlantiffAttorney":"Chris Yan"
+                           },
+                           "SecondaryInfo":{
+                              "Owner":"test",
+                              "PartitionAction":"Action1",
+                              "PartitionHeldReason":"Tenants in common ",
+                              "CourtAddress":"Test 123",
+                              "Defendant":"1234",
+                              "DefendantAttorneyName":"Carl Belgrave",
+                              "DefendantAttorneyId":128,
+                              "SelectedType":"Statute Of Limitations",
+                              "SelectTypes":[
+                                 "Quiet Title",
+                                 "Statute Of Limitations",
+                                 "Estate",
+                                 "Miscellaneous"
+                              ],
+                              "PlaintiffAttorneyName":"Jeffrey L Weinstein, Esq.",
+                              "PlaintiffAttorneyId":941,
+                              "DeedReversionDefendants":[
+
+                              ],
+                              "DeedReversionPlantiff":"testpltiff",
+                              "DeedReversionPlantiffAttorney":"David Testing",
+                              "DeedReversionPlantiffAttorneyId":1358,
+                              "DeedReversionIndexNum":"ss",
+                              "DeedReversionDefendant":"PartitionsPlantiffAttorneyId",
+                              "OSC_Defendants":[
+
+                              ],
+                              "SPComplaint_Defendants":[
+
+                              ],
+                              "SPComplaint_Plantiff":"tes",
+                              "SPComplaint_PlantiffAttorney":"Diane Bernstein",
+                              "SPComplaint_PlantiffAttorneyId":570,
+                              "SPComplaint_IndexNum":"12344",
+                              "SPComplaint_Defendant":"Carl Belgrave",
+                              "PartitionsPlantiffAttorney":"Andre Shlomovich",
+                              "PartitionsPlantiffAttorneyId":559,
+                              "QTA_Plantiff":"test",
+                              "PartitionsPlantiff":"testPlantiff",
+                              "PartitionsDefendant1":"tD1",
+                              "PartitionsDefendant":"testD",
+                              "PartitionsIndexNum":"123456/1234",
+                              "PartitionsMortgageDate":"11/18/2015",
+                              "PartitionsMortgageAmount":"5111",
+                              "PartitionsDateOfRecording":"11/18/2015",
+                              "PartitionsCRFN":"CRFN84116a",
+                              "PartitionsOriginalLender":"BOA"
+                           },
+                           "SecondaryTypes":[
+                                  1,
+                                  5,
+                                  4,
+                                  2,
+                                  3,
+                                  7,
+                                  8,
+                                  6
+                           ],
+                           "CaseStauts":"157"
+                                }            
+                 ]]>
+                         </string>
+
+        Dim actions = lcase.GetSecondaryActions()
+
+        Assert.IsInstanceOfType(actions, GetType(List(Of LegalCase.SecondaryAction)))
+        Assert.AreEqual(8, actions.Count)
+
+        Dim qta = actions.Where(Function(act) act.Id = 3).SingleOrDefault
+        Assert.IsNull(qta.Defendant)
+        Assert.AreEqual("test", qta.Plaintiff)
+
+        Dim partition = actions.Where(Function(act) act.Id = 2).SingleOrDefault
+        Assert.AreEqual("testD", partition.Defendant)
+        Assert.IsNull(partition.DefendantAttorney)
+        Assert.AreEqual("testPlantiff", partition.Plaintiff)
+        Assert.AreEqual("Andre Shlomovich", partition.PlaintiffAttorney)
+
+        Dim fc = actions.Where(Function(act) act.Id = 1).SingleOrDefault
+        Assert.AreEqual("1234", fc.Defendant)
+        Assert.AreEqual("Carl Belgrave", fc.DefendantAttorney)
+        Assert.AreEqual("Richard Chin", fc.Plaintiff)
+        Assert.AreEqual("Chris Yan", fc.PlaintiffAttorney)
+
+    End Sub
 
 End Class

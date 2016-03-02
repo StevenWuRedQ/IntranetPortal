@@ -147,6 +147,10 @@ Partial Public Class LegalCase
     ''' <param name="path">The json query path</param>
     ''' <returns>The field value</returns>
     Public Function GetFieldValue(Of T)(path As String) As T
+        If String.IsNullOrEmpty(path) Then
+            Return Nothing
+        End If
+
         Dim jObject = GetCaseJsonObject()
 
         Dim token = jObject.SelectToken(path)
@@ -306,6 +310,79 @@ Partial Public Class LegalCase
             Return ctx.LegalCases.Where(Function(lc) lc.Status = status1 AndAlso (lc.ResearchBy = userName Or lc.Attorney = userName)).ToList
         End Using
     End Function
+
+    ''' <summary>
+    ''' Return list of selected Secondary Action
+    ''' </summary>
+    ''' <returns>The list of Secondary Action</returns>
+    Public Function GetSecondaryActions() As List(Of SecondaryAction)
+        Dim actionTypes = DataStatu.LoadAllDataStatus("LegalSecondaryType")
+
+        Dim result = New List(Of SecondaryAction)
+
+        Dim tags = GetFieldValue(Of JArray)("SecondaryTypes")
+
+        If tags IsNot Nothing AndAlso tags.Count > 0 Then
+            Dim types = tags.ToObject(Of String())()
+            For Each type In actionTypes
+                If types.Contains(type.Status) Then
+                    Dim action As New SecondaryAction
+                    action.Id = type.Status
+                    action.Type = type.Name
+
+                    If Not String.IsNullOrEmpty(type.Description) Then
+                        Dim dataNames = type.Description.Split("|")
+                        action.Defendant = GetFieldValue(Of String)(dataNames(0))
+                        action.DefendantAttorney = GetFieldValue(Of String)(dataNames(1))
+                        action.Plaintiff = GetFieldValue(Of String)(dataNames(2))
+                        action.PlaintiffAttorney = GetFieldValue(Of String)(dataNames(3))
+                    End If
+
+                    result.Add(action)
+                End If
+            Next
+        End If
+
+        Return result
+    End Function
+
+    ''' <summary>
+    ''' Secondary Action Object
+    ''' </summary>
+    Class SecondaryAction
+
+        ''' <summary>
+        ''' Action Id
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Id As Integer
+        ''' <summary>
+        ''' The Action Name
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Type As String
+        ''' <summary>
+        ''' The Defendant Info
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Defendant As String
+        ''' <summary>
+        ''' The Plantiff Info
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Plaintiff As String
+        ''' <summary>
+        ''' The Defendant Attorney Info
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property DefendantAttorney As String
+        ''' <summary>
+        ''' The Plantiff Attorney Info
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property PlaintiffAttorney As String
+
+    End Class
 
 End Class
 
