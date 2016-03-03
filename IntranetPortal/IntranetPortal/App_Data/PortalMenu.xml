@@ -475,6 +475,11 @@
           <![CDATA[<i class="fa fa-table"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="Legal-Parties" Text="Parties Report" NavigationUrl="/CustomReport/ReportWizard.aspx?t=legalParties" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-bar-chart"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <PortalNavItem Name="Legal-Settings" Text="Settings" NavigationUrl="/ManagementUI/LegalManagement.aspx" ShowAmount="false">
         <UserRoles>Legal-Manager</UserRoles>
         <FontClass>
