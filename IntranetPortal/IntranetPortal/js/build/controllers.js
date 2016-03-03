@@ -110,9 +110,7 @@ angular.module("PortalApp")
             },
             byKey: function (key, extra) {
                 // . . .
-            },
-
-
+            },            
         });
         return {
             dataSource: mSource,

@@ -756,6 +756,7 @@
     <Compile Include="Controllers\AuctionController.vb" />
     <Compile Include="Controllers\BuildingCodes1Controller.vb" />
     <Compile Include="Controllers\BusinessFormController.vb" />
+    <Compile Include="Controllers\CasePartiesController.vb" />
     <Compile Include="Controllers\DataStatusController.vb" />
     <Compile Include="Controllers\ComplaintsController.vb" />
     <Compile Include="Controllers\ConstructionCasesController.vb" />
@@ -1857,6 +1858,13 @@
       <DependentUpon>TeamService.svc</DependentUpon>
     </Compile>
     <Compile Include="Settings.vb" />
+    <Compile Include="ShortSale\CaseParties.aspx.designer.vb">
+      <DependentUpon>CaseParties.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\CaseParties.aspx.vb">
+      <DependentUpon>CaseParties.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="ShortSale\NGShortSaleCheckListTab.ascx.designer.vb">
       <DependentUpon>NGShortSaleCheckListTab.ascx</DependentUpon>
     </Compile>
@@ -1883,6 +1891,13 @@
     </Compile>
     <Compile Include="ShortSale\NGShortSaleMortgageTab.ascx.vb">
       <DependentUpon>NGShortSaleMortgageTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShortSale\GeneralParties.ascx.designer.vb">
+      <DependentUpon>GeneralParties.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\GeneralParties.ascx.vb">
+      <DependentUpon>GeneralParties.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ShortSale\SelectPartyUC.ascx.designer.vb">
@@ -6162,6 +6177,7 @@
     <Content Include="css\themes\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="css\themes\images\ui-icons_ffffff_256x240.png" />
     <Content Include="css\themes\jquery-ui.css" />
+    <Content Include="CustomReport\legalParties.js" />
     <Content Include="CustomReport\legal.js" />
     <Content Include="CustomReport\LeadsDocSearch.js" />
     <Content Include="DataAPITesting.aspx" />
@@ -6988,6 +7004,8 @@
     <Content Include="css\css_files" />
     <Content Include="App_Data\OSCTemplate.docx" />
     <Content Include="App_Data\DeedReversionTemplate.docx" />
+    <Content Include="ShortSale\CaseParties.aspx" />
+    <Content Include="ShortSale\GeneralParties.ascx" />
     <Content Include="SQL\SearchReslut.sql" />
     <Content Include="TitleUI\TitleSummaryPage.aspx" />
     <Content Include="TitleUI\TitleSummaryView.ascx" />

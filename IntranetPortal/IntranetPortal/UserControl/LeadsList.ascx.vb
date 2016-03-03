@@ -417,6 +417,11 @@ Public Class LeadsList
             Throw New CallbackException("BBLE is not correct format! Please check.")
         End If
 
+        'Check daily limitation on Team's creating new leads. if over the limitation, the creation will throw exception
+        If LeadManage.OverUserCreateLimit(Page.User.Identity.Name) Then
+            Throw New CallbackException("You are reaching the limitation of daily leads creation. Please try to add tomorrow.")
+        End If
+
         Using Context As New Entities
             If Context.Leads.Where(Function(l) l.BBLE = bble).Count > 0 Then
                 Dim lead = Context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault
@@ -444,6 +449,8 @@ Public Class LeadsList
             ld.AssignDate = DateTime.Now
             ld.AssignBy = Page.User.Identity.Name
             ld.AppId = Employee.CurrentAppId
+
+            LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.CreateNew, ld.EmployeeName, ld.AssignBy, Nothing)
 
             If Employee.IsManager(Page.User.Identity.Name) Or Page.User.IsInRole("SeniorAgent") Then
                 ld.Status = LeadStatus.NewLead
@@ -553,15 +560,18 @@ Public Class LeadsList
         'Dim borough = TryCast(pageInputData.FindControl("txtStreetBorough"), ASPxTextBox).Text
 
         Dim lbBBLE = TryCast(sender, ASPxListBox)
+        Try
+            Dim returnData = GetBBLEData()
 
-        Dim returnData = GetBBLEData()
+            If returnData.Rows.Count = 0 Then
+                Throw New CallbackException("No data matched, Please check!")
+            End If
 
-        If returnData.Rows.Count = 0 Then
-            Throw New CallbackException("No data matched, Please check!")
-        End If
-
-        lbBBLE.DataSource = returnData.DefaultView
-        lbBBLE.DataBind()
+            lbBBLE.DataSource = returnData.DefaultView
+            lbBBLE.DataBind()
+        Catch ex As Exception
+            Throw New CallbackException(ex.Message)
+        End Try
     End Sub
 
     Protected Sub getAddressCallback_Callback(source As Object, e As DevExpress.Web.CallbackEventArgs)
@@ -681,8 +691,10 @@ Public Class LeadsList
             End Using
 
         Else
+
         End If
     End Sub
+
     Public Function GetMarkColor(markColor As Integer)
         If (markColor <= 0 Or markColor = 1000) Then
             Return "gray"

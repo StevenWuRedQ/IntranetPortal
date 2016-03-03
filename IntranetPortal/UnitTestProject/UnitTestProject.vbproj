@@ -178,6 +178,7 @@
     <Compile Include="AuctionPropertyTest.vb" />
     <Compile Include="TitleUnitTest.vb" />
     <Compile Include="UtilityUnitTest.vb" />
+    <Compile Include="TeamUnitTest.vb" />
     <Compile Include="WeDriverTest.vb" />
     <Compile Include="UserTaskTest.vb" />
     <Compile Include="WebGrabberTest.vb" />

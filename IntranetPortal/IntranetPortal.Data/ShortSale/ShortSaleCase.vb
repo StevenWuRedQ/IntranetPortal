@@ -121,7 +121,7 @@ Partial Public Class ShortSaleCase
     Public ReadOnly Property ValuationData As PropertyValueInfo
         Get
             If ValueInfoes IsNot Nothing AndAlso ValueInfoes.Count > 0 Then
-                Return ValueInfoes(0)
+                Return ValueInfoes.Last
             End If
 
             Return New PropertyValueInfo
@@ -534,7 +534,7 @@ Partial Public Class ShortSaleCase
             sb.Append("Investor: " & GetMortageType(0) & Environment.NewLine)
 
             If ValueInfoes IsNot Nothing AndAlso ValueInfoes.Count > 0 Then
-                Dim val = ValueInfoes(0)
+                Dim val = ValueInfoes.Last
                 sb.Append("Date of Valuation: " & String.Format("{0:d}", val.DateOfValue) & Environment.NewLine)
                 sb.Append("Expiration Date of Value: " & String.Format("{0:d}", val.ExpiredOn) & Environment.NewLine)
                 sb.Append("Value: " & String.Format("{0:C}", val.BankValue) & Environment.NewLine)
@@ -593,7 +593,7 @@ Partial Public Class ShortSaleCase
     Public ReadOnly Property RptValuation As String
         Get
             If ValueInfoes IsNot Nothing AndAlso ValueInfoes.Count > 0 Then
-                Dim valueData = ValueInfoes.Last
+                Dim valueData = ValueInfoes.First
                 Dim sb As New StringBuilder
                 sb.Append(NewLine("Type of Value", valueData.Method))
                 sb.Append(NewLine("Date of Value", String.Format("{0:d}", valueData.DateOfValue)))

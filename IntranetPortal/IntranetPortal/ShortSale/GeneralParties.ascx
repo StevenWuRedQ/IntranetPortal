@@ -1,4 +1,4 @@
-﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NGShortSalePartiesTab.ascx.vb" Inherits="IntranetPortal.NGShortSalePartiesTab" %>
+﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="GeneralParties.ascx.vb" Inherits="IntranetPortal.GeneralParties" %>
 <div class="clearfix"></div>
 <div>
     <h4 class="ss_form_title">Assigned Processor</h4>
@@ -6,7 +6,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.ProcessorName" readonly="readonly" ng-change="SsCase.Processor=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.Processor=$item.ContactId" bind-id="SsCase.Processor" >
+                <input type="text" class="ss_form_input" ng-model="SsCase.ProcessorName" readonly="readonly" ng-change="SsCase.Processor=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.Processor=$item.ContactId" bind-id="SsCase.Processor">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Phone #</label>
@@ -58,14 +58,13 @@
     </div>
 </div>
 <div class="ss_form">
-    <h4 class="ss_form_title">Referral&nbsp<pt-collapse model="referralCollapse"/></h4>
+    <h4 class="ss_form_title">Referral&nbsp<pt-collapse model="referralCollapse" /></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Agent</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.ReferralUserName" ng-change="SsCase.Referral=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.Referral=$item.ContactId" bind-id="SsCase.Referral">
+                <input type="text" readonly="readonly" class="ss_form_input" ng-model="SsCase.ReferralUserName" ng-change="SsCase.Referral=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.Referral=$item.ContactId" bind-id="SsCase.Referral">
             </li>
-
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
                 <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.Referral, SsCase.ReferralUserName).Cell" mask="(999) 999-9999" clean="true" readonly="readonly">
@@ -79,14 +78,8 @@
         <ul class="ss_form_box clearfix" uib-collapse="!referralCollapse">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Team</label>
-                <select class="ss_form_input" ng-model="SsCase.ReferralTeam">
-                    <option></option>
-                    <%For Each t In IntranetPortal.Team.GetAllTeams%>
-                    <option><%= t.Name %></option>
-                    <%Next%>
-                </select>
+                <input class="ss_form_input" ng-model="SsCase.ReferralTeam" readonly="readonly">                
             </li>
-
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Address</label>
                 <input class="ss_form_input" ng-model="ptContactServices.getTeamByName(SsCase.ReferralTeam).Address">
@@ -98,7 +91,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Manager</label>
-                <input class="ss_form_input" ng-model="ptContactServices.getTeamByName(SsCase.ReferralTeam).Manager">
+                <input class="ss_form_input" ng-model="ptContactServices.getTeamByName(SsCase.ReferralTeam).Manager" readonly="readonly">
             </li>
             <li class="ss_form_item" style="display: none">
                 <label class="ss_form_input_title">ContactId</label>
@@ -135,12 +128,12 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Listing Agent&nbsp;<pt-collapse model="listingAgentCollapse"/></h4>
+    <h4 class="ss_form_title">Listing Agent&nbsp;<pt-collapse model="listingAgentCollapse" /></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.ListingAgentName" ng-change="SsCase.ListingAgent=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.ListingAgent=$item.ContactId" bind-id="SsCase.ListingAgent">
+                <input type="text" class="ss_form_input" readonly="readonly" ng-model="SsCase.ListingAgentName" ng-change="SsCase.ListingAgent=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.ListingAgent=$item.ContactId" bind-id="SsCase.ListingAgent">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
@@ -175,7 +168,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.SellerAttorneyName" ng-change="SsCase.SellerAttorney=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.SellerAttorney=$item.ContactId" bind-id="SsCase.SellerAttorney">
+                <input type="text" class="ss_form_input" readonly="readonly" ng-model="SsCase.SellerAttorneyName" ng-change="SsCase.SellerAttorney=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.SellerAttorney=$item.ContactId" bind-id="SsCase.SellerAttorney">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
@@ -201,40 +194,41 @@
             </li>
         </ul>
     </div>
+
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Buyer&nbsp;<pt-collapse model="buyerCollapse"/></h4>
+    <h4 class="ss_form_title">Buyer&nbsp;<pt-collapse model="buyerCollapse" /></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Entity</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.BuyerEntity.Entity" ng-change="SsCase.BuyerEntity.EntityAddress=null" uib-typeahead="entity.CorpName for entity in ptContactServices.getEntities($viewValue)" typeahead-on-select="SsCase.BuyerEntity.EntityAddress=$item.Address">
+                <input type="text" class="ss_form_input" readonly="readonly" ng-model="SsCase.BuyerEntity.Entity" ng-change="SsCase.BuyerEntity.EntityAddress=null" uib-typeahead="entity.CorpName for entity in ptContactServices.getEntities($viewValue)" typeahead-on-select="SsCase.BuyerEntity.EntityAddress=$item.Address">
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Entity Address</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerEntity.EntityAddress">
+                <input class="ss_form_input" ng-model="SsCase.BuyerEntity.EntityAddress" readonly="readonly">
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Signor</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.BuyerEntity.Signor" ng-change="SsCase.BuyerEntity.SignorId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.BuyerEntity.SignorId=$item.ContactId" bind-id="SsCase.BuyerEntity.SignorId">
+                <input type="text" class="ss_form_input" ng-model="SsCase.BuyerEntity.Signor" ng-change="SsCase.BuyerEntity.SignorId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.BuyerEntity.SignorId=$item.ContactId" bind-id="SsCase.BuyerEntity.SignorId" readonly="readonly">
             </li>
         </ul>
         <ul class="ss_form_box clearfix" uib-collapse="!buyerCollapse">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Opened</label>
-                <input class="ss_form_input" ss-date ng-model="SsCase.BuyerEntity.DateOpened">
+                <input class="ss_form_input" ss-date ng-model="SsCase.BuyerEntity.DateOpened" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office</label>
-                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerEntity.SignorId, SsCase.BuyerEntity.Signor).OfficeNO" mask="(999) 999-9999" clean="true">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerEntity.SignorId, SsCase.BuyerEntity.Signor).OfficeNO" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Tax Id</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerEntity.TaxId">
+                <input class="ss_form_input" ng-model="SsCase.BuyerEntity.TaxId" readonly="readonly">
             </li>
         </ul>
     </div>
@@ -242,13 +236,13 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Buyer Attorney&nbsp;<pt-collapse model="buyerAttorneryCollapse"/></h4>
+    <h4 class="ss_form_title">Buyer Attorney&nbsp;<pt-collapse model="buyerAttorneryCollapse" /></h4>
     <div class="ss_border">
         <ul class="ss_form_box clearfix">
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Name</label>
-                <input type="text" class="ss_form_input" ng-model="SsCase.BuyerAttorneyName" ng-change="SsCase.BuyerAttorney=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.BuyerAttorney=$item.ContactId" bind-id="SsCase.BuyerAttorney">
+                <input type="text" class="ss_form_input" readonly="readonly" ng-model="SsCase.BuyerAttorneyName" ng-change="SsCase.BuyerAttorney=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SsCase.BuyerAttorney=$item.ContactId" bind-id="SsCase.BuyerAttorney">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cell #</label>
@@ -284,33 +278,89 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Company</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.CompanyName" ng-change="SsCase.BuyerTitle.ContactId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,1)" typeahead-on-select="SsCase.BuyerTitle.ContactId=$item.ContactId" bind-id="SsCase.BuyerTitle.ContactId">
+                <input class="ss_form_input" readonly="readonly" ng-model="SsCase.BuyerTitle.CompanyName" ng-change="SsCase.BuyerTitle.ContactId=null" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue,1)" typeahead-on-select="SsCase.BuyerTitle.ContactId=$item.ContactId" bind-id="SsCase.BuyerTitle.ContactId">
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Address</label>
-                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerTitle.ContactId, SsCase.BuyerTitle.CompanyName).Address">
+                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerTitle.ContactId, SsCase.BuyerTitle.CompanyName).Address" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">office #</label>
-                <input class="ss_form_input" ng-model="ptContactServices.getContact(SsCase.BuyerTitle.ContactId, SsCase.BuyerTitle.CompanyName).OfficeNO"" mask="(999) 999-9999" clean="true">
+                <input class="ss_form_input" readonly="readonly" ng-model="ptContactServices.getContact(SsCase.BuyerTitle.ContactId, SsCase.BuyerTitle.CompanyName).OfficeNO" mask="(999) 999-9999" clean="true">
             </li>
         </ul>
         <ul class="ss_form_box clearfix" uib-collapse="!titleCompanyCollapse">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Rep</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.Rep">
+                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.Rep" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Rep #</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.RepNo" mask="(999) 999-9999" clean="true">
+                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.RepNo" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.Email" type="email">
+                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.Email" type="email" readonly="readonly">
             </li>
-
         </ul>
-
     </div>
 </div>
+
+<div class="ss_form">
+    <h4 class="ss_form_title">Legal&nbsp</h4>
+    <div class="ss_border">
+        <table class="table">
+            <thead>
+                <tr style="font-weight: 600">
+                    <td>Type</td>
+                    <td>Defendant</td>
+                    <td>Defendant Attorney</td>
+                    <td>Plaintiff</td>
+                    <td>Plaintiff Attorney</td>
+                </tr>
+            </thead>
+            <tr ng-repeat="data in LegalCase">
+                <td>{{data.Type}}
+                </td>
+                <td>{{data.Defendant  == "" || data.Defendant == null ? "-" : data.Defendant }}
+                </td>
+                <td>{{data.DefendantAttorney == null || data.DefendantAttorney == "" ? "-" : data.DefendantAttorney }}
+                </td>
+                <td>{{data.Plaintiff==null||data.Plaintiff==""?"-":data.Plaintiff}}
+                </td>
+                <td>{{data.PlaintiffAttorney==null||data.PlaintiffAttorney==""?"-":data.PlaintiffAttorney}}
+                </td>
+            </tr>
+        </table>
+
+        <%--        <ul class="ss_form_box clearfix" style="display:none">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Plantiff</label>
+                <input class="ss_form_input" ng-model="LegalCase.Plantiff" readonly="readonly">
+            </li>
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Plantiff Attorney</label>
+                <input class="ss_form_input" ng-model="LegalCase.PlantiffAttorney" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title"></label>
+            </li>
+        </ul>
+        <ul class="ss_form_box clearfix" style="display:none">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Defendant</label>
+                <input class="ss_form_input" ng-model="LegalCase.Defendant" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Defendant Attorney</label>
+                <input class="ss_form_input" ng-model="LegalCase.DefendantAttorney" readonly="readonly">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title"></label>
+            </li>
+        </ul>--%>
+    </div>
+</div>
+

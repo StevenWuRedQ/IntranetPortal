@@ -165,7 +165,7 @@ Namespace Controllers
                 link = TitleManage.GeneratePackage(entity, dba, transferor, transferee, sdate)
                 Return Ok(link)
             Catch ex As Exception
-                Return Ok()
+                Return BadRequest(ex.Message)
             End Try
 
         End Function

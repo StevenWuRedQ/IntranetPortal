@@ -1179,8 +1179,11 @@ var PortalUtility = {
     },
     fileWindows: {},
     ShowPopWindow: function (windowId, url) {
+        this.OpenWindow(url, windowId);
+    },    
+    OpenWindow: function (url, title, width, height) {
         for (var win in this.fileWindows) {
-            if (this.fileWindows.hasOwnProperty(win) && win == windowId) {
+            if (this.fileWindows.hasOwnProperty(win) && win == title) {
                 var caseWin = this.fileWindows[win];
                 if (!caseWin.closed) {
                     caseWin.focus();
@@ -1189,10 +1192,12 @@ var PortalUtility = {
             }
         }
 
-        var left = (screen.width / 2) - (1350 / 2);
-        var top = (screen.height / 2) - (930 / 2);      
-        var win = window.open(url, windowId, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
-        this.fileWindows[windowId] = win;
+        var vwidth = width ? width : 1350;
+        var vheight = height ? height : 930;
+        var left = (screen.width / 2) - (vwidth / 2);
+        var top = (screen.height / 2) - (vheight / 2);
+        this.fileWindows[title] = window.open(url, title, 'Width=' + vwidth + 'px,Height=' + vheight + 'px, top=' + top + ', left=' + left);
+        return win;
     }
 }
 
