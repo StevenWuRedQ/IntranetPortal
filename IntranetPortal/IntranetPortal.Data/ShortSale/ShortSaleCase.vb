@@ -593,7 +593,7 @@ Partial Public Class ShortSaleCase
     Public ReadOnly Property RptValuation As String
         Get
             If ValueInfoes IsNot Nothing AndAlso ValueInfoes.Count > 0 Then
-                Dim valueData = ValueInfoes.First
+                Dim valueData = ValueInfoes.Last
                 Dim sb As New StringBuilder
                 sb.Append(NewLine("Type of Value", valueData.Method))
                 sb.Append(NewLine("Date of Value", String.Format("{0:d}", valueData.DateOfValue)))
