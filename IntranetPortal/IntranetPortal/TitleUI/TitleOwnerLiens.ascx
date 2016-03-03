@@ -352,7 +352,7 @@
                                 <li class="clear-fix" style="list-style: none"></li>
                                 <li class="ss_form_item_line" style="list-style: none">
                                     <label class="ss_form_input_title ">Note +</label>
-                                    <textarea class="edit_text_area text_area_ss_form " model="judgement.Judgement_Note"></textarea>
+                                    <textarea class="edit_text_area text_area_ss_form " ng-model="judgement.Judgement_Note"></textarea>
                                 </li>
                                 <li class="clear-fix" style="list-style: none"></li>
                             </ul>
