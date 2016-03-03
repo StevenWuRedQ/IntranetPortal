@@ -449,6 +449,9 @@
         <FontClass>
           <![CDATA[<i class="fa fa-star"></i>]]>
         </FontClass>
+        <FrontButton>
+          <![CDATA[<a href="/LeadAgent.aspx?c=Create" class="add-button" target="contentUrlPane"><i class="fa fa-plus-circle"></i></a>]]>
+        </FrontButton>
       </PortalNavItem>
       <PortalNavItem Name="Legal-LegalResearch" Text="Research" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;lc=1" ShowAmount="true">
         <FontClass>
