@@ -82,12 +82,12 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Address</label>
-                <input class="ss_form_input" ng-model="ptContactServices.getTeamByName(SsCase.ReferralTeam).Address">
+                <input class="ss_form_input" ng-model="ptContactServices.getTeamByName(SsCase.ReferralTeam).Address" readonly="readonly">
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office #</label>
-                <input class="ss_form_input" ng-model="ptContactServices.getTeamByName(SsCase.ReferralTeam).OfficeNo" mask="(999) 999-9999" clean="true">
+                <input class="ss_form_input" ng-model="ptContactServices.getTeamByName(SsCase.ReferralTeam).OfficeNo" mask="(999) 999-9999" clean="true" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Manager</label>
