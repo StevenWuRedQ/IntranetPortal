@@ -5,6 +5,7 @@
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
     <link rel="stylesheet" href="/css/right-pane.css" />
     <script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
+    <input type="hidden" value="<%=ReportId%>" id="txtReportID"/>
     <div id="ReportWizardCtrl" ng-controller="ReportWizardCtrl" class="wx_scorll_list" data-bottom="90">
         <div class="container" style="padding-top: 30px; font-size: small">
             <div class="nga-fast nga-fade" ng-show="step==1" style="margin-left: -50px">
@@ -138,7 +139,7 @@
             </div>
         </div>
 
-        <div id="right-pane-container" class="clearfix" style="right: 0">
+        <div id="right-pane-container" class="clearfix" style="right: 0" ng-show="!LoadByID">
             <div id="right-pane-button" class="right-pane_custom_reports"></div>
             <div id="right-pane">
                 <div style="height: 100%; background: #EFF2F5;">
