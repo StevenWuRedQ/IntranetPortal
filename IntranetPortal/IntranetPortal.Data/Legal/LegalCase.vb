@@ -1,6 +1,10 @@
 ﻿Imports System.ComponentModel
 Imports System.Text.RegularExpressions
+Imports Newtonsoft.Json.Linq
 
+''' <summary>
+''' The legal data case object
+''' </summary>
 Partial Public Class LegalCase
 
     Public Const ForeclosureStatusCategory As String = "LegalFCDataStatus"
@@ -122,6 +126,41 @@ Partial Public Class LegalCase
         End If
     End Sub
 
+    Private _caseJsonObject As JObject
+
+    ''' <summary>
+    ''' Return legal case data in Json object
+    ''' </summary>
+    ''' <returns>The Case Data</returns>
+    Public Function GetCaseJsonObject() As JObject
+        If _caseJsonObject Is Nothing Then
+            _caseJsonObject = Newtonsoft.Json.Linq.JObject.Parse(CaseData)
+        End If
+
+        Return _caseJsonObject
+    End Function
+
+    ''' <summary>
+    ''' Return field value in Legal case data
+    ''' </summary>
+    ''' <typeparam name="T">The field Type</typeparam>
+    ''' <param name="path">The json query path</param>
+    ''' <returns>The field value</returns>
+    Public Function GetFieldValue(Of T)(path As String) As T
+        If String.IsNullOrEmpty(path) Then
+            Return Nothing
+        End If
+
+        Dim jObject = GetCaseJsonObject()
+
+        Dim token = jObject.SelectToken(path)
+        If token IsNot Nothing Then
+            Return CTypeDynamic(Of T)(token)
+        End If
+
+        Return Nothing
+    End Function
+
     Public Shared Function GetCase(bble As String) As LegalCase
         Using ctx As New PortalEntities
             Return ctx.LegalCases.Find(bble)
@@ -150,6 +189,7 @@ Partial Public Class LegalCase
         End Using
         Return Nothing
     End Function
+
     ''' <summary>
     ''' Remove index number to no leading zero like "001234/2015" to "1234/2015"
     ''' </summary>
@@ -168,6 +208,7 @@ Partial Public Class LegalCase
         Next
         Return IndexNumber.Substring(ZeroIndex)
     End Function
+
     ''' <summary>
     ''' Decode index numbe make it as uqniue ID decode 123/1234 to 000123/1234
     ''' </summary>
@@ -269,6 +310,79 @@ Partial Public Class LegalCase
             Return ctx.LegalCases.Where(Function(lc) lc.Status = status1 AndAlso (lc.ResearchBy = userName Or lc.Attorney = userName)).ToList
         End Using
     End Function
+
+    ''' <summary>
+    ''' Return list of selected Secondary Action
+    ''' </summary>
+    ''' <returns>The list of Secondary Action</returns>
+    Public Function GetSecondaryActions() As List(Of SecondaryAction)
+        Dim actionTypes = DataStatu.LoadAllDataStatus("LegalSecondaryType")
+
+        Dim result = New List(Of SecondaryAction)
+
+        Dim tags = GetFieldValue(Of JArray)("SecondaryTypes")
+
+        If tags IsNot Nothing AndAlso tags.Count > 0 Then
+            Dim types = tags.ToObject(Of String())()
+            For Each type In actionTypes
+                If types.Contains(type.Status) Then
+                    Dim action As New SecondaryAction
+                    action.Id = type.Status
+                    action.Type = type.Name
+
+                    If Not String.IsNullOrEmpty(type.Description) Then
+                        Dim dataNames = type.Description.Split("|")
+                        action.Defendant = GetFieldValue(Of String)(dataNames(0))
+                        action.DefendantAttorney = GetFieldValue(Of String)(dataNames(1))
+                        action.Plaintiff = GetFieldValue(Of String)(dataNames(2))
+                        action.PlaintiffAttorney = GetFieldValue(Of String)(dataNames(3))
+                    End If
+
+                    result.Add(action)
+                End If
+            Next
+        End If
+
+        Return result
+    End Function
+
+    ''' <summary>
+    ''' Secondary Action Object
+    ''' </summary>
+    Class SecondaryAction
+
+        ''' <summary>
+        ''' Action Id
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Id As Integer
+        ''' <summary>
+        ''' The Action Name
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Type As String
+        ''' <summary>
+        ''' The Defendant Info
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Defendant As String
+        ''' <summary>
+        ''' The Plantiff Info
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Plaintiff As String
+        ''' <summary>
+        ''' The Defendant Attorney Info
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property DefendantAttorney As String
+        ''' <summary>
+        ''' The Plantiff Attorney Info
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property PlaintiffAttorney As String
+
+    End Class
 
 End Class
 

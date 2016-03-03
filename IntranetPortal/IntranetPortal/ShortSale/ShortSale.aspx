@@ -616,8 +616,7 @@
                     }
                 });
         }
-
-
+        
         function ssToggleApprovalPopup(succ, cancl) {
             angular.element(document.getElementById('ShortSaleCtrl')).scope().regApproval(succ, cancl);
             angular.element(document.getElementById('ShortSaleCtrl')).scope().toggleApprovalPopup();

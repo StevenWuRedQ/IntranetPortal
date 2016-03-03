@@ -2,7 +2,7 @@
 
     Public Shared Function GetValueInfos(bble As String) As List(Of PropertyValueInfo)
         Using ctx As New PortalEntities
-            Return ctx.PropertyValueInfoes.Where(Function(vi) vi.BBLE = bble).OrderByDescending(Function(vi) vi.DateOfValue).ToList
+            Return ctx.PropertyValueInfoes.Where(Function(vi) vi.BBLE = bble).ToList
         End Using
     End Function
 
