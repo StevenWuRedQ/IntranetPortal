@@ -52,11 +52,11 @@ Partial Public Class Team
         Return unActiveUser
     End Function
 
-    ''' <summary>
-    ''' The daily leads creation limit, The data can be config in portal settings
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property LeadsCreateLimit As Integer
+    '''' <summary>
+    '''' The daily leads creation limit, The data can be config in portal settings
+    '''' </summary>
+    '''' <returns></returns>
+    'Public Property LeadsCreateLimit As Integer
 
     ''' <summary>
     ''' Return if daily creation limit of team is reached. 
@@ -64,7 +64,7 @@ Partial Public Class Team
     ''' </summary>
     ''' <returns></returns>
     Public Function OverLimitation() As Boolean
-        If LeadsCreateLimit = 0 Then
+        If Not LeadsCreateLimit.HasValue OrElse LeadsCreateLimit = 0 Then
             LeadsCreateLimit = CInt(IntranetPortal.Core.PortalSettings.GetValue("LeadsCreatedLimit"))
         End If
 

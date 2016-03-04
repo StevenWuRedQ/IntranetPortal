@@ -33,9 +33,44 @@ Imports IntranetPortal
     ''' </summary>
     <TestMethod()> Public Sub OverLimitation_returnTrue()
         Dim tm = Team.GetTeam(teamName)
-        Assert.IsTrue(tm.LeadsCreateLimit >= 0)
-        Assert.IsTrue(tm.OverLimitation(-1))
+        tm.LeadsCreateLimit = 0
+        Assert.IsTrue(tm.OverLimitation(tm.LeadsCreateLimit))
 
+    End Sub
+
+    ''' <summary>
+    ''' The unit test for different limit setting for different team, should return team's limit
+    ''' </summary>
+    <TestMethod()> Public Sub MultipleTeamLimitation_returnLimitation()
+        Dim bble = "2037130013"
+        Dim galiTeam = Team.GetTeam(teamName)
+        galiTeam.LeadsCreateLimit = 2
+        Dim tomTeam = Team.GetTeam("TomTeam")
+        tomTeam.LeadsCreateLimit = 1
+
+        Dim galiUser = galiTeam.ActiveUsers(0)
+        Dim tomUser = tomTeam.ActiveUsers(0)
+
+        Dim log1 = LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.CreateNew, galiUser, galiUser, Nothing)
+        Dim log2 = LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.CreateNew, tomUser, tomUser, Nothing)
+
+        Assert.IsFalse(galiTeam.OverLimitation())
+        Assert.IsFalse(tomTeam.OverLimitation())
+
+        Dim log3 = LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.CreateNew, galiUser, galiUser, Nothing)
+        Dim log4 = LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.CreateNew, tomUser, tomUser, Nothing)
+
+        Assert.IsFalse(galiTeam.OverLimitation())
+        Assert.IsTrue(tomTeam.OverLimitation())
+
+        Dim log5 = LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.CreateNew, galiUser, galiUser, Nothing)
+        Assert.IsTrue(galiTeam.OverLimitation)
+
+        log1.Delete()
+        log2.Delete()
+        log3.Delete()
+        log4.Delete()
+        log5.Delete()
     End Sub
 
     ''' <summary>
