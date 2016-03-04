@@ -27,7 +27,6 @@ Imports IntranetPortal
         Assert.IsNull(UserInTeam.GetUserTeam("ddd"))
     End Sub
 
-
     ''' <summary>
     ''' The unit test for overlimitation function, should return true given limitation is -1
     ''' </summary>
