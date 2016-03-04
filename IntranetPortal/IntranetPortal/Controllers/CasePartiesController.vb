@@ -10,6 +10,11 @@ Namespace Controllers
 
             Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
 
+            If ssCase Is Nothing Then
+                ssCase = New ShortSaleCase
+                ssCase.BBLE = bble
+            End If
+
             If ssCase IsNot Nothing Then
                 ssCase = ShortSaleManage.LoadExeternalParties(ssCase)
             End If
