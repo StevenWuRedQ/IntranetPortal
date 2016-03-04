@@ -28,7 +28,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleOffer" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="false" />
         <EntityTypeShape EntityType="IntranetPortalModel.CorporationEntity" Width="1.5" PointX="6.75" PointY="8.75" IsExpanded="false" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleLeadsInfo" Width="1.75" PointX="8.75" PointY="8.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCheckList" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCheckList" Width="1.75" PointX="9.75" PointY="4.75" IsExpanded="false" />
       </Diagram>
       <Diagram DiagramId="2cdf7606e6c24dc895f31f0e80a0c4dd" Name="Legal" >
         <EntityTypeShape EntityType="IntranetPortalModel.LegalCase" Width="1.5" PointX="0.75" PointY="0.5" />
@@ -54,8 +54,9 @@
         <EntityTypeShape EntityType="IntranetPortalModel.ConstructionSpotCheck" Width="2.125" PointX="4.75" PointY="4.125" />
         <EntityTypeShape EntityType="IntranetPortalModel.ConstructionViolation" Width="1.5" PointX="8" PointY="0.875" />
         <EntityTypeShape EntityType="IntranetPortalModel.FormDataItem" Width="1.5" PointX="7.875" PointY="2.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.TitleCase" Width="1.5" PointX="11.75" PointY="5.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.TitleCase" Width="1.5" PointX="10.125" PointY="5.125" />
         <EntityTypeShape EntityType="IntranetPortalModel.UserFollowUp" Width="1.5" PointX="11" PointY="0.875" />
+        <EntityTypeShape EntityType="IntranetPortalModel.SSFirstMortgage" Width="1.875" PointX="12.25" PointY="5.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

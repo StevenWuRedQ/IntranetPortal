@@ -6,6 +6,39 @@ Public Class NoticeECourtRule
 
     Public Overrides Sub Execute()
         Log("======================Start Notify ECourt date==============================")
+        NotifyEcourtDate()
+
+        Log("======================End Notify ECourt date==============================")
+
+        Log("======================Start Notify ECourt Parse Error==============================")
+        NotifyECourtParseError()
+        Log("======================End Notify ECourt Parse Error==============================")
+    End Sub
+
+    Public Sub NotifyECourtParseError()
+        Dim lCases = Data.LegalECourt.GetParseErrorECourts()
+        If (lCases IsNot Nothing And lCases.Count > 0) Then
+            Dim IndexNumbers = lCases.Select(Function(e) e.IndexNumber).Select(Function(i)
+                                                                                   Return Data.LegalCase.DeCodeIndexNumber(i)
+                                                                               End Function).Distinct().ToList()
+
+            Dim names = String.Join(";", LegalCaseManage.GetLegalManagers().Select(Function(e) e.Name))
+
+
+            Log("===========Send email to " & names & "to notify all the missing case in portal ===========")
+            Log("------missing index list ---------------")
+            Log(":" & vbCrLf & String.Join(vbCrLf, IndexNumbers))
+            Log("------end index list ---------------")
+            Using client As New PortalService.CommonServiceClient
+                Dim maildata = New Dictionary(Of String, String)
+                maildata.Add("IndexCount", IndexNumbers.Count)
+                maildata.Add("IndexList", String.Join("<br />", IndexNumbers))
+                client.SendEmailByTemplate(names, "LegalECourtMissingCase", maildata)
+            End Using
+
+        End If
+    End Sub
+    Public Sub NotifyEcourtDate()
         'Dim NoticeDays = {14, 6, 2, 0}
         Dim d = 15
         'For Each d In NoticeDays
@@ -29,14 +62,13 @@ Public Class NoticeECourtRule
                     maildata.Add("Days", (stamp.Value.Days + 1).ToString)
                     client.SendEmailByTemplate(names, "LegalECourtDateNotify", maildata)
                 End Using
-                Log("Send email to " & names & " the next Ecourt date is " & b.BBLE)
+                Log("Send email to " & names & " the next Ecourt date Is " & b.BBLE)
             Else
                 Log("Can't find relate user for legal case " & b.BBLE)
-            End If
+        End If
             Log("To Notify per lead : " & b.BBLE & " for " & names)
         Next
         'Next
-        Log("======================End Notify ECourt date==============================")
     End Sub
 
 End Class

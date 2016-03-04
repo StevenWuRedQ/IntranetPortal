@@ -202,7 +202,7 @@
 
                             }, 120000);
                         </script>
-
+                        
                         <div id="vendor_btn" style="display: none">
                             <i class="fa fa-users icon_btn" title="Vendors" onclick="VendorsPopupClient.Show()"></i>
                         </div>
@@ -242,8 +242,9 @@
                             </div>
                         </div>
 
-                        <div style="align-content: center; height: 100%">
+                        <div style="align-content: center; height: 100%"  id="LegalCtrl" ng-controller="LegalCtrl">
                             <!-- Nav tabs -->
+                          
                             <% If Not HiddenTab Then%>
                             <div class="legal-menu row" style="position: relative; top: 0; margin: 0; z-index: 1; width: 100%">
                                 <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white">

@@ -992,6 +992,61 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <Property Name="Team" Type="nvarchar" MaxLength="50" />
           <Property Name="JSecondaryActions" Type="nvarchar(max)" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SSFirstMortgage">
+          <Key>
+            <PropertyRef Name="MortgageId" />
+            <PropertyRef Name="CaseId" />
+          </Key>
+          <Property Name="MortgageId" Type="int" Nullable="false" />
+          <Property Name="CaseId" Type="int" Nullable="false" />
+          <Property Name="HasAuctionDate" Type="bit" />
+          <Property Name="AuctionDate" Type="datetime" />
+          <Property Name="DateOfSale" Type="datetime" />
+          <Property Name="DateVerified" Type="datetime" />
+          <Property Name="PayoffExpired" Type="datetime" />
+          <Property Name="PayoffRequested" Type="datetime" />
+          <Property Name="PayoffAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="LenderId" Type="int" />
+          <Property Name="Lender" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loan" Type="nvarchar" MaxLength="50" />
+          <Property Name="LoanAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="LastPaymentDate" Type="datetime" />
+          <Property Name="LoanType" Type="nvarchar" MaxLength="50" />
+          <Property Name="AuthorizationSent" Type="nvarchar" MaxLength="50" />
+          <Property Name="CancelationSent" Type="datetime" />
+          <Property Name="LienPosition" Type="nvarchar" MaxLength="50" />
+          <Property Name="CounterOffer" Type="nvarchar" MaxLength="256" />
+          <Property Name="ShortSaleDept" Type="int" />
+          <Property Name="Processor" Type="int" />
+          <Property Name="Negotiator" Type="int" />
+          <Property Name="Closer" Type="int" />
+          <Property Name="ForeclosureAttorney" Type="nvarchar" MaxLength="256" />
+          <Property Name="ForeclosureAttorneyId" Type="int" />
+          <Property Name="AssignedAttorney" Type="nvarchar" MaxLength="256" />
+          <Property Name="AttorneyDirectNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="AttorneyEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contacts" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="DateAssigned" Type="datetime" />
+          <Property Name="Supervisor" Type="int" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fannie" Type="bit" />
+          <Property Name="FHA" Type="bit" />
+          <Property Name="Freddie" Type="bit" />
+          <Property Name="LastBPOUpdate" Type="datetime" />
+          <Property Name="UpcomingBPODate" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LenderContactId" Type="int" />
+          <Property Name="LenderAttorney" Type="int" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+        </EntityType>
         <EntityContainer Name="IntranetPortalModelStoreContainer">
           <EntitySet Name="AuctionProperties" EntityType="Self.AuctionProperties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CheckingComplains" EntityType="Self.CheckingComplains" Schema="dbo" store:Type="Tables" />
@@ -1121,6 +1176,57 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
     [LegalManagerReport].[JSecondaryActions] AS [JSecondaryActions]
     FROM [dbo].[LegalManagerReport] AS [LegalManagerReport]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="SSFirstMortgage" EntityType="Self.SSFirstMortgage" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SSFirstMortgage].[MortgageId] AS [MortgageId], 
+    [SSFirstMortgage].[CaseId] AS [CaseId], 
+    [SSFirstMortgage].[HasAuctionDate] AS [HasAuctionDate], 
+    [SSFirstMortgage].[AuctionDate] AS [AuctionDate], 
+    [SSFirstMortgage].[DateOfSale] AS [DateOfSale], 
+    [SSFirstMortgage].[DateVerified] AS [DateVerified], 
+    [SSFirstMortgage].[PayoffExpired] AS [PayoffExpired], 
+    [SSFirstMortgage].[PayoffRequested] AS [PayoffRequested], 
+    [SSFirstMortgage].[PayoffAmount] AS [PayoffAmount], 
+    [SSFirstMortgage].[LenderId] AS [LenderId], 
+    [SSFirstMortgage].[Lender] AS [Lender], 
+    [SSFirstMortgage].[Loan] AS [Loan], 
+    [SSFirstMortgage].[LoanAmount] AS [LoanAmount], 
+    [SSFirstMortgage].[LastPaymentDate] AS [LastPaymentDate], 
+    [SSFirstMortgage].[LoanType] AS [LoanType], 
+    [SSFirstMortgage].[AuthorizationSent] AS [AuthorizationSent], 
+    [SSFirstMortgage].[CancelationSent] AS [CancelationSent], 
+    [SSFirstMortgage].[LienPosition] AS [LienPosition], 
+    [SSFirstMortgage].[CounterOffer] AS [CounterOffer], 
+    [SSFirstMortgage].[ShortSaleDept] AS [ShortSaleDept], 
+    [SSFirstMortgage].[Processor] AS [Processor], 
+    [SSFirstMortgage].[Negotiator] AS [Negotiator], 
+    [SSFirstMortgage].[Closer] AS [Closer], 
+    [SSFirstMortgage].[ForeclosureAttorney] AS [ForeclosureAttorney], 
+    [SSFirstMortgage].[ForeclosureAttorneyId] AS [ForeclosureAttorneyId], 
+    [SSFirstMortgage].[AssignedAttorney] AS [AssignedAttorney], 
+    [SSFirstMortgage].[AttorneyDirectNo] AS [AttorneyDirectNo], 
+    [SSFirstMortgage].[AttorneyEmail] AS [AttorneyEmail], 
+    [SSFirstMortgage].[Contacts] AS [Contacts], 
+    [SSFirstMortgage].[Notes] AS [Notes], 
+    [SSFirstMortgage].[DateAssigned] AS [DateAssigned], 
+    [SSFirstMortgage].[Supervisor] AS [Supervisor], 
+    [SSFirstMortgage].[Category] AS [Category], 
+    [SSFirstMortgage].[Status] AS [Status], 
+    [SSFirstMortgage].[Fannie] AS [Fannie], 
+    [SSFirstMortgage].[FHA] AS [FHA], 
+    [SSFirstMortgage].[Freddie] AS [Freddie], 
+    [SSFirstMortgage].[LastBPOUpdate] AS [LastBPOUpdate], 
+    [SSFirstMortgage].[UpcomingBPODate] AS [UpcomingBPODate], 
+    [SSFirstMortgage].[CreateDate] AS [CreateDate], 
+    [SSFirstMortgage].[CreateBy] AS [CreateBy], 
+    [SSFirstMortgage].[UpdateDate] AS [UpdateDate], 
+    [SSFirstMortgage].[UpdateBy] AS [UpdateBy], 
+    [SSFirstMortgage].[LenderContactId] AS [LenderContactId], 
+    [SSFirstMortgage].[LenderAttorney] AS [LenderAttorney], 
+    [SSFirstMortgage].[Type] AS [Type], 
+    [SSFirstMortgage].[BBLE] AS [BBLE]
+    FROM [dbo].[SSFirstMortgage] AS [SSFirstMortgage]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1172,6 +1278,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <EntitySet Name="AuctionPropertyViews" EntityType="IntranetPortalModel.AuctionPropertyView" />
           <EntitySet Name="LegalCaseReports" EntityType="IntranetPortalModel.LegalCaseReport" />
           <EntitySet Name="LegalManagerReports" EntityType="IntranetPortalModel.LegalManagerReport" />
+          <EntitySet Name="SSFirstMortgages" EntityType="IntranetPortalModel.SSFirstMortgage" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -2152,6 +2259,59 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
           <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Team" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="JSecondaryActions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SSFirstMortgage">
+          <Key>
+            <PropertyRef Name="MortgageId" />
+            <PropertyRef Name="CaseId" />
+          </Key>
+          <Property Name="MortgageId" Type="Int32" Nullable="false" />
+          <Property Name="CaseId" Type="Int32" Nullable="false" />
+          <Property Name="HasAuctionDate" Type="Boolean" />
+          <Property Name="AuctionDate" Type="DateTime" Precision="3" />
+          <Property Name="DateOfSale" Type="DateTime" Precision="3" />
+          <Property Name="DateVerified" Type="DateTime" Precision="3" />
+          <Property Name="PayoffExpired" Type="DateTime" Precision="3" />
+          <Property Name="PayoffRequested" Type="DateTime" Precision="3" />
+          <Property Name="PayoffAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LenderId" Type="Int32" />
+          <Property Name="Lender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LoanAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LastPaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="LoanType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorizationSent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CancelationSent" Type="DateTime" Precision="3" />
+          <Property Name="LienPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CounterOffer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ShortSaleDept" Type="Int32" />
+          <Property Name="Processor" Type="Int32" />
+          <Property Name="Negotiator" Type="Int32" />
+          <Property Name="Closer" Type="Int32" />
+          <Property Name="ForeclosureAttorney" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ForeclosureAttorneyId" Type="Int32" />
+          <Property Name="AssignedAttorney" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="AttorneyDirectNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AttorneyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contacts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateAssigned" Type="DateTime" Precision="3" />
+          <Property Name="Supervisor" Type="Int32" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fannie" Type="Boolean" />
+          <Property Name="FHA" Type="Boolean" />
+          <Property Name="Freddie" Type="Boolean" />
+          <Property Name="LastBPOUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UpcomingBPODate" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LenderContactId" Type="Int32" />
+          <Property Name="LenderAttorney" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3179,6 +3339,59 @@ warning 6002: The table/view 'IntranetPortal.dbo.LegalManagerReport' does not ha
                 <ScalarProperty Name="ResearchBy" ColumnName="ResearchBy" />
                 <ScalarProperty Name="CaseName" ColumnName="CaseName" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SSFirstMortgages">
+            <EntityTypeMapping TypeName="IntranetPortalModel.SSFirstMortgage">
+              <MappingFragment StoreEntitySet="SSFirstMortgage">
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="LenderAttorney" ColumnName="LenderAttorney" />
+                <ScalarProperty Name="LenderContactId" ColumnName="LenderContactId" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpcomingBPODate" ColumnName="UpcomingBPODate" />
+                <ScalarProperty Name="LastBPOUpdate" ColumnName="LastBPOUpdate" />
+                <ScalarProperty Name="Freddie" ColumnName="Freddie" />
+                <ScalarProperty Name="FHA" ColumnName="FHA" />
+                <ScalarProperty Name="Fannie" ColumnName="Fannie" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
+                <ScalarProperty Name="DateAssigned" ColumnName="DateAssigned" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Contacts" ColumnName="Contacts" />
+                <ScalarProperty Name="AttorneyEmail" ColumnName="AttorneyEmail" />
+                <ScalarProperty Name="AttorneyDirectNo" ColumnName="AttorneyDirectNo" />
+                <ScalarProperty Name="AssignedAttorney" ColumnName="AssignedAttorney" />
+                <ScalarProperty Name="ForeclosureAttorneyId" ColumnName="ForeclosureAttorneyId" />
+                <ScalarProperty Name="ForeclosureAttorney" ColumnName="ForeclosureAttorney" />
+                <ScalarProperty Name="Closer" ColumnName="Closer" />
+                <ScalarProperty Name="Negotiator" ColumnName="Negotiator" />
+                <ScalarProperty Name="Processor" ColumnName="Processor" />
+                <ScalarProperty Name="ShortSaleDept" ColumnName="ShortSaleDept" />
+                <ScalarProperty Name="CounterOffer" ColumnName="CounterOffer" />
+                <ScalarProperty Name="LienPosition" ColumnName="LienPosition" />
+                <ScalarProperty Name="CancelationSent" ColumnName="CancelationSent" />
+                <ScalarProperty Name="AuthorizationSent" ColumnName="AuthorizationSent" />
+                <ScalarProperty Name="LoanType" ColumnName="LoanType" />
+                <ScalarProperty Name="LastPaymentDate" ColumnName="LastPaymentDate" />
+                <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />
+                <ScalarProperty Name="Loan" ColumnName="Loan" />
+                <ScalarProperty Name="Lender" ColumnName="Lender" />
+                <ScalarProperty Name="LenderId" ColumnName="LenderId" />
+                <ScalarProperty Name="PayoffAmount" ColumnName="PayoffAmount" />
+                <ScalarProperty Name="PayoffRequested" ColumnName="PayoffRequested" />
+                <ScalarProperty Name="PayoffExpired" ColumnName="PayoffExpired" />
+                <ScalarProperty Name="DateVerified" ColumnName="DateVerified" />
+                <ScalarProperty Name="DateOfSale" ColumnName="DateOfSale" />
+                <ScalarProperty Name="AuctionDate" ColumnName="AuctionDate" />
+                <ScalarProperty Name="HasAuctionDate" ColumnName="HasAuctionDate" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="MortgageId" ColumnName="MortgageId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

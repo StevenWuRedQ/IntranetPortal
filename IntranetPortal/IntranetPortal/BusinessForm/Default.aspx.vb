@@ -38,6 +38,15 @@
 
     Private Sub BindData(tag As String)
         listPanelDiv.Visible = False
+        If Not String.IsNullOrEmpty(Request.QueryString("showList")) Then
+            Dim visible = False
+            If Boolean.TryParse(Request.QueryString("showList"), visible) Then
+                If visible Then
+                    listPanelDiv.Visible = visible
+                    BusinessList.BindList()
+                End If
+            End If
+        End If
 
         Dim form = Data.FormDataItem.Instance(FormData.DefaultControl.BusinessData, tag)
 

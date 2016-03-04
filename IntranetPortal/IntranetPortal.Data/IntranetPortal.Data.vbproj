@@ -116,6 +116,9 @@
     <Compile Include="ADOEntity\LegalManagerReport.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\SSFirstMortgage.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="Auction\AuctionProperty.vb" />
     <Compile Include="BusinessForm\BusinessDataBase.vb" />
     <Compile Include="BusinessForm\FormDataItem.vb" />

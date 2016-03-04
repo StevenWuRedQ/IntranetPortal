@@ -51,6 +51,47 @@ Namespace Controllers
             End Try
         End Function
 
+        <Route("api/Title/TitleCases")>
+        Public Function GetTitleCases() As IHttpActionResult
+            Dim tCases = TitleManage.GetCasesByCategory("All")
+            Return Ok(tCases)
+        End Function
+
+        <Route("api/Title/TitleCases/{cateId}")>
+        Public Function GetTitleCasesByCategory(cateId As Integer) As IHttpActionResult
+            Dim tCases = TitleManage.GetCasesByCategory(HttpContext.Current.User.Identity.Name, cateId)
+            Return Ok(tCases)
+        End Function
+
+        <Route("api/Title/TitleCasesSummary/{cateId}")>
+        Public Function GetTitleCasesSummaryByCategory(cateId As Integer) As IHttpActionResult
+            Dim tCases = TitleManage.GetCasesByCategory(HttpContext.Current.User.Identity.Name, cateId)
+
+            Dim result = New With {
+                    .data = tCases.Take(10).ToArray,
+                    .count = tCases.Count
+                }
+
+            Return Ok(result)
+        End Function
+
+        <Route("api/Title/TitleCasesSummary/Status/{status}")>
+        Public Function GetTitleCasesSummaryByStatus(status As Integer) As IHttpActionResult
+            Dim tCases = TitleManage.GetMyCases(HttpContext.Current.User.Identity.Name, status)
+            Dim result = New With {
+                    .data = tCases.Take(10).ToArray,
+                    .count = tCases.Count
+                }
+
+            Return Ok(result)
+        End Function
+
+        <Route("api/Title/TitleCases/Status/{status}")>
+        Public Function GetTitleCasesByStatus(status As Integer) As IHttpActionResult
+            Dim tCases = TitleManage.GetMyCases(HttpContext.Current.User.Identity.Name, status)
+            Return Ok(tCases)
+        End Function
+
         <ResponseType(GetType(String()))>
         <Route("api/Title/UploadFiles")>
         Public Function uploadTitleFiles() As IHttpActionResult
@@ -124,7 +165,7 @@ Namespace Controllers
                 link = TitleManage.GeneratePackage(entity, dba, transferor, transferee, sdate)
                 Return Ok(link)
             Catch ex As Exception
-                Return Ok()
+                Return BadRequest(ex.Message)
             End Try
 
         End Function

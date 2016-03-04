@@ -115,6 +115,26 @@ Partial Public Class UserTask
         End Using
     End Function
 
+    ''' <summary>
+    ''' Expired the active Task and realted worklist item
+    ''' </summary>
+    ''' <param name="taskId">The Task Id</param>
+    Public Shared Sub ExpiredTaskAndWorklist(taskId As Integer)
+        Dim task = GetTaskById(taskId)
+        Dim approver = task.EmployeeName
+
+        If Not String.IsNullOrEmpty(approver) AndAlso approver.Contains(";") Then
+            approver = approver.Split(";")(0)
+        End If
+
+        Dim wliItem = WorkflowService.GetUserTaskWorklist(taskId, approver)
+        If wliItem IsNot Nothing Then
+            WorkflowService.ExpireProcessInstance(wliItem.ProcInstId)
+        End If
+
+        ExpiredTask(taskId)
+    End Sub
+
     Public Shared Function GetActiveTasks() As List(Of UserTask)
         Using ctx As New Entities
             Return ctx.UserTasks.Where(Function(t) t.Status = TaskStatus.Active).ToList

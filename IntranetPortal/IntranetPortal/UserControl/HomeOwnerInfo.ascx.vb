@@ -162,8 +162,12 @@ Public Class HomeOwnerInfo
         End Get
     End Property
 
-    Function FormatPhoneNumber(ByVal myNumber As String)
+    Function FormatPhoneNumber(ByVal myNumber As String) As String
+        If (String.IsNullOrEmpty(myNumber)) Then
+            Return Nothing
+        End If
         Dim mynewNumber As String
+
         mynewNumber = ""
         myNumber = myNumber.Replace("(", "").Replace(")", "").Replace("-", "")
         If myNumber.Length < 10 Then

@@ -637,7 +637,9 @@
                                         caption: "Last Updated",
                                         dataType: 'date',
                                         width: 150,
-                                        format: 'M/dd/yyyy h:mm tt'
+                                        customizeText: function (cellInfo) {
+                                            
+                                        }
                                     }, {
                                         dataField: "Status",
                                         caption: "Status",

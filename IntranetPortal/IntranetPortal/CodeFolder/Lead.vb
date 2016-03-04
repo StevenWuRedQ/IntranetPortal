@@ -114,6 +114,10 @@ Partial Public Class Lead
     End Function
 
     Public Function IsViewable(name As String) As Boolean
+        If String.IsNullOrEmpty(EmployeeName) Then
+            Return True
+        End If
+
         If Status = LeadStatus.DeadEnd Or EmployeeName = "Dead Leads" Then
             Return True
         End If
@@ -147,15 +151,15 @@ Partial Public Class Lead
 
             If rl.StartsWith("OfficeManager") Then
                 Dim dept = rl.Split("-")(1)
-                If IntranetPortal.Employee.GetDeptUsers(dept).Contains(owner) Then
+                If IntranetPortal.Employee.GetDeptUsers(dept, False).Contains(owner) Then
                     Return True
                 End If
 
-                If IntranetPortal.UserInTeam.GetTeamUsersArray(dept).Contains(owner) Then
+                If IntranetPortal.UserInTeam.GetTeamUsersArray(dept, True).Contains(owner) Then
                     Return True
                 End If
 
-                If owner.Contains(dept & " Office") Then
+                If owner.ToLower.Contains(dept.ToLower & " office") Then
                     Return True
                 End If
             End If
@@ -772,6 +776,22 @@ Partial Public Class Lead
             End Using
         End If
     End Sub
+
+    Public Shared Function ExpiredLeadsTask(bble As String) As Boolean
+        Try
+            'Expired the task on this bble
+            WorkflowService.ExpiredLeadsProcess(bble)
+            UserTask.ExpiredAgentTasks(bble)
+            'UserTask.ExpiredTasks(BBLE, originator)
+            UserAppointment.ExpiredAppointmentByBBLE(bble)
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
+        Return True
+    End Function
+
 
     Public Sub StartRecycleProcess()
         If Not InRecycle Then

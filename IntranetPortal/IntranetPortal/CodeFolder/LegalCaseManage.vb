@@ -221,11 +221,28 @@ Public Class LegalCaseManage
 
         Return False
     End Function
+    ''' <summary>
+    ''' Get single legal department manager 
+    ''' </summary>
+    ''' <returns>legal department manager object</returns>
     Public Shared Function GetLegalManger() As Employee
         Using ctx As New Entities
             Dim LegalManger = ctx.UsersInRoles.Where(Function(u) u.Rolename = MgrRoleName).FirstOrDefault
             If (LegalManger IsNot Nothing AndAlso (Not String.IsNullOrEmpty(LegalManger.Username))) Then
                 Return Employee.GetInstance(LegalManger.Username)
+            End If
+        End Using
+        Return Nothing
+    End Function
+    ''' <summary>
+    ''' Get all legal department managners
+    ''' </summary>
+    ''' <returns>List of legal managers</returns>
+    Public Shared Function GetLegalManagers() As List(Of Employee)
+        Using ctx As New Entities
+            Dim LegalMangers = ctx.UsersInRoles.Where(Function(u) u.Rolename = MgrRoleName).ToList
+            If (LegalMangers IsNot Nothing AndAlso LegalMangers.Count > 0) Then
+                Return LegalMangers.Select(Function(e) Employee.GetInstance(e.Username)).ToList
             End If
         End Using
         Return Nothing

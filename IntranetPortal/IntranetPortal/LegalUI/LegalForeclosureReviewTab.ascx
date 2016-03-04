@@ -20,11 +20,11 @@
 	<div style="margin-bottom: 50px">
 		<ul class="ss_form_box clearfix">
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">Plantiff</label>
+				<label class="ss_form_input_title">Plaintiff </label>
 				<input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.Plantiff" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)"></input>
 			</li>
 			<li class="ss_form_item">
-				<label class="ss_form_input_title">Plantiff Attorney</label>
+				<label class="ss_form_input_title">Plaintiff  Attorney</label>
 				<input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.PlantiffAttorney" uib-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)"></input>
 			</li>
 			<li class="ss_form_item">

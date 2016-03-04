@@ -3126,6 +3126,12 @@ angular.module('PortalApp')
             return;
         } else {
             switch (x.criteria) {
+                case "0":
+                    x.WhereTerm = "CreateCompare";
+                    x.CompareOperator = "Equal";
+                    x.value1 = x.input1.trim();
+                    x.value2 = "";
+                    break;
                 case "1":
                     x.WhereTerm = "CreateCompare";
                     x.CompareOperator = "Less";
@@ -3312,6 +3318,12 @@ angular.module('PortalApp')
         }
     };
     $scope.reload();
+    var PreLoadReportId = $('#txtReportID').val()
+    if (PreLoadReportId>0)
+    {
+        $scope.LoadByID = true;
+        $scope.load({ReportId: PreLoadReportId })
+    }
 });
 var i = 1;
 angular.module("PortalApp")

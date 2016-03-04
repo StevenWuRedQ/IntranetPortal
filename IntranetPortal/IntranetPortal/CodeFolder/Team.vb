@@ -1,5 +1,8 @@
 ﻿Imports Newtonsoft.Json
 
+''' <summary>
+''' The team object and related actions
+''' </summary>
 Partial Public Class Team
     Public Shared Function GetAllTeams() As List(Of Team)
         Using ctx As New Entities
@@ -46,6 +49,58 @@ Partial Public Class Team
         End Get
     End Property
 
+    Private Function GetUnActiveUser(teamName As String) As List(Of String)
+        Dim unActiveUser = Employee.GetDeptUnActiveUserList(teamName).Select(Function(emp) emp.Name).ToList
+        'Add team non-active users
+        unActiveUser.AddRange(UnActiveUsers)
+        unActiveUser = unActiveUser.Distinct.ToList
+
+        Return unActiveUser
+    End Function
+
+    ''' <summary>
+    ''' The daily leads creation limit, The data can be config in portal settings
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property LeadsCreateLimit As Integer
+
+    ''' <summary>
+    ''' Return if daily creation limit of team is reached. 
+    ''' The limitation was set in portal settings.
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function OverLimitation() As Boolean
+        If LeadsCreateLimit = 0 Then
+            LeadsCreateLimit = CInt(IntranetPortal.Core.PortalSettings.GetValue("LeadsCreatedLimit"))
+        End If
+
+        Return OverLimitation(LeadsCreateLimit)
+    End Function
+
+    ''' <summary>
+    ''' Return if given daily limit of team is reached.
+    ''' </summary>
+    ''' <param name="limit">The daily limitation</param>
+    ''' <returns></returns>
+    Public Function OverLimitation(limit As Integer) As Boolean
+        Dim today = DateTime.Today
+        Dim count = GetTeamCreateLeadsCount(today, today.AddDays(1))
+
+        Return count >= limit
+    End Function
+
+    ''' <summary>
+    ''' Return the amount of leads that team created in the given time period. 
+    ''' </summary>
+    ''' <param name="startDate">the start date</param>
+    ''' <param name="endDate">the end date</param>
+    ''' <returns></returns>
+    Public Function GetTeamCreateLeadsCount(startDate As DateTime, endDate As DateTime) As Integer
+
+        Return LeadsStatusLog.GetNewLeadsCreatedCount(AllUsers, startDate, endDate)
+
+    End Function
+
     <JsonIgnoreAttribute>
     Public ReadOnly Property AssignLeadsView() As IEnumerable(Of LeadsAssignView2)
         Get
@@ -53,10 +108,7 @@ Partial Public Class Team
             Dim officeName = Name & " Office"
 
             'check the old non active users
-            Dim unActiveUser = Employee.GetDeptUsersList(Name, False).Select(Function(emp) emp.Name).ToList
-            'Add team non-active users
-            unActiveUser.AddRange(UnActiveUsers)
-            unActiveUser = unActiveUser.Distinct.ToList
+            Dim unActiveUser = GetUnActiveUser(Name)
 
             Return ctx.LeadsAssignView2.Where(Function(la) la.EmployeeName = officeName Or (unActiveUser.Contains(la.EmployeeName) And la.Status <> LeadStatus.InProcess)).OrderByDescending(Function(la) la.AssignDate)
         End Get
@@ -69,10 +121,7 @@ Partial Public Class Team
             Dim officeName = Name & " Office"
 
             'check the old non active users
-            Dim unActiveUser = Employee.GetDeptUsersList(Name, False).Select(Function(emp) emp.Name).ToList
-            'Add team non-active users
-            unActiveUser.AddRange(UnActiveUsers)
-            unActiveUser = unActiveUser.Distinct.ToList
+            Dim unActiveUser = GetUnActiveUser(Name)
 
             Return ctx.Leads.Where(Function(la) la.EmployeeName = officeName Or (unActiveUser.Contains(la.EmployeeName) And la.Status <> LeadStatus.InProcess)).Count
 

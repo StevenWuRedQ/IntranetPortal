@@ -331,4 +331,10 @@
         }
     };
     $scope.reload();
+    var PreLoadReportId = $('#txtReportID').val()
+    if (PreLoadReportId>0)
+    {
+        $scope.LoadByID = true;
+        $scope.load({ReportId: PreLoadReportId,UseSql:true})
+    }
 });

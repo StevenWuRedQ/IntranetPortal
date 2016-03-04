@@ -98,7 +98,7 @@
                         "fields": [
 
                           {
-                              "name": "OSC Plantiff",
+                              "name": "OSC Plaintiff",
                               "table": "LegalOTSC_VIew",
                               "column": "OSCPlantiff",
                               "type": "string"
@@ -134,7 +134,7 @@
                         "fields": [
 
                           {
-                              "name": "Partition Plantiff",
+                              "name": "Partition Plaintiff",
                               "table": "LegalPartition_view",
                               "column": "PartitionsPlantiff",
                               "type": "string"
@@ -152,7 +152,7 @@
                               "type": "string"
                           },
                           {
-                              "name": "Partition Plantiff Attorney",
+                              "name": "Partition Plaintiff Attorney",
                               "table": "LegalPartition_view",
                               "column": "PartitionsPlantiffAttorney",
                               "type": "string"
@@ -170,7 +170,7 @@
                         "fields": [
 
                           {
-                              "name": "QTA Plantiff",
+                              "name": "QTA Plaintiff",
                               "table": "LegalQTA_View",
                               "column": "QTA_Plantiff",
                               "type": "string"
@@ -200,7 +200,7 @@
                         "fields": [
 
                           {
-                              "name": "Specific Plantiff",
+                              "name": "Specific Plaintiff",
                               "table": "LegalSpecificPerformance_View",
                               "column": "SPComplaint_Plantiff",
                               "type": "string"
@@ -229,13 +229,13 @@
                         "fields": [
 
                           {
-                              "name": "Deed Reversion Plantiff",
+                              "name": "Deed Reversion Plaintiff",
                               "table": "LegalDeedReversions_View",
                               "column": "DeedReversionPlantiff",
                               "type": "string"
                           },
                           {
-                              "name": "Deed Reversion Plantiff Attorney" ,
+                              "name": "Deed Reversion Plaintiff Attorney" ,
                               "table": "LegalDeedReversions_View",
                               "column": "DeedReversionPlantiffAttorney",
                               "type": "string"

@@ -25,13 +25,13 @@
 
     Public Shared Function GetInstance(caseId As Integer) As TitleJudgementSearch
         Using context As New PortalEntities
-            Return context.TitleJudgementSearches.Where(Function(obj) obj.CaseId = caseId).SingleOrDefault
+            Return context.TitleJudgementSearches.Where(Function(obj) obj.CaseId = caseId).FirstOrDefault
         End Using
     End Function
 
     Public Shared Function GetInstaceByBBLE(bble As String) As TitleJudgementSearch
         Using ctx As New PortalEntities
-            Return ctx.TitleJudgementSearches.Where(Function(obj) obj.BBLE = bble).SingleOrDefault
+            Return ctx.TitleJudgementSearches.Where(Function(obj) obj.BBLE = bble).FirstOrDefault
         End Using
     End Function
 End Class

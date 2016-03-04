@@ -6,7 +6,7 @@
 <%@ Register Src="~/LegalUI/LegalWriteupTab.ascx" TagPrefix="uc1" TagName="LegalWriteupTab" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
-<div id="LegalCtrl" ng-controller="LegalCtrl" style="position: absolute; top: 70px; bottom: 0px; width: 100%; margin-bottom: 250px">
+<div style="position: absolute; top: 70px; bottom: 0px; width: 100%; margin-bottom: 250px">
     <div id="prioity_content" style="height: 250px;">
         <div class="content-title font_gray">
             <div style="font-size: 30px">
@@ -18,10 +18,10 @@
                 <span class="time_buttons" onclick="ShowDOBWindow(GetLegalData().PropertyInfo.Borough,GetLegalData().PropertyInfo.Block, GetLegalData().PropertyInfo.Lot)">DOB</span>
                 <span class="time_buttons" onclick="ShowAcrisMap(leadsInfoBBLE)">Acris</span>
                 <span class="time_buttons" onclick="ShowPropertyMap(leadsInfoBBLE)">Maps</span>
+                <span class="time_buttons" onclick="ShowPopupMap('/ShortSale/CaseParties.aspx?bble=' + leadsInfoBBLE, 'Parties')">Parties</span>
                 <span class="time_buttons" onclick="" runat="server" visible="false" id="btnAssignAttorney">Assign Attorney</span>
                 <span class="time_buttons" onclick="$('#RequestModal').modal()" style="display: none">Request Document</span>
                 <br />
-
                 <span class="time_buttons" ng-show="LegalCase.PreQuestions" onclick="window.open('/LegalUI/LegalPreQuestions.aspx?r=true&bble=' + leadsInfoBBLE, 'LegalPreQuestion', 'width=1024, height=800');">Show Questions Form</span>
             </div>
             <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; visibility: visible">{{GetCaseInfo().Name}}</span>
@@ -39,7 +39,6 @@
                                 <td>
                                     <div class="note_text">Get new Appearance Date : {{LegalECourt.AppearanceDate |date:'MM/dd/yyyy'}}</div>
                                 </td>
-
                             </tr>
                             <tr ng-show="LegalCase.Description!=null">
                                 <td style="width: 20px">

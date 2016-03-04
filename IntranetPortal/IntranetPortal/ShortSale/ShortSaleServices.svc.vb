@@ -21,20 +21,21 @@ Public Class ShortSaleServices
     <WebGet(ResponseFormat:=WebMessageFormat.Json)>
     Public Function GetCase(caseId As Integer) As Channels.Message
         Dim ssCase = ShortSaleCase.GetCase(caseId)
+        ssCase = ShortSaleManage.LoadExeternalParties(ssCase)
         'Dim json As New JavaScriptSerializer
         'Return json.Serialize(ssCase)
 
-        Dim emp = Employee.GetInstance(ssCase.ReferralContact.Name)
-        If emp IsNot Nothing AndAlso Not emp.Position = "Manager" Then
-            ssCase.ReferralManager = Employee.GetInstance(ssCase.ReferralContact.Name).Manager
-        Else
-            ssCase.ReferralManager = ssCase.ReferralContact.Name
-        End If
+        'Dim emp = Employee.GetInstance(ssCase.ReferralContact.Name)
+        'If emp IsNot Nothing AndAlso Not emp.Position = "Manager" Then
+        '    ssCase.ReferralManager = Employee.GetInstance(ssCase.ReferralContact.Name).Manager
+        'Else
+        '    ssCase.ReferralManager = ssCase.ReferralContact.Name
+        'End If
 
         ssCase.DocumentRequestDetails = ShortSaleManage.GetDocumentRequestDetail(ssCase.BBLE)
-        ssCase.InHouseTitle = TitleManage.GetTitleOwner(ssCase.BBLE)
+        'ssCase.InHouseTitle = TitleManage.GetTitleOwner(ssCase.BBLE)
 
-        ssCase.InHouseLegal = LegalCaseManage.GetCaseOwner(ssCase.BBLE)
+        'ssCase.InHouseLegal = LegalCaseManage.GetCaseOwner(ssCase.BBLE)
 
         Core.SystemLog.Log(ShortSaleManage.OpenCaseLogTitle, Nothing, Core.SystemLog.LogCategory.Operation, ssCase.BBLE, HttpContext.Current.User.Identity.Name)
 

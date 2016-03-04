@@ -2,6 +2,7 @@
     Inherits EmailTemplateControl
 
     Protected complaint As Data.CheckingComplain
+    Public Property Resolved As Boolean = False
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
@@ -19,6 +20,7 @@
         If results.Any(Function(c) c.Status.Trim = "ACT") Then
             rptComplaints.DataSource = results.Where(Function(c) c.Status.Trim = "ACT").ToList
         Else
+            Resolved = True
             rptComplaints.DataSource = {results.FirstOrDefault}
         End If
 

@@ -65,7 +65,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <uc1:Common runat="server" ID="Common" />
-    <div class=" container-fluid" style="padding: 20px 30px">
+    <div class=" container-fluid wx_scorll_list" style="padding: 20px 30px" data-bottom="60">
         <div>
             <div class="row">
                 <div class="col-md-8" id="topGrid">

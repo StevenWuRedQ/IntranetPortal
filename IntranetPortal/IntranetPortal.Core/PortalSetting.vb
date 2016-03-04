@@ -10,6 +10,12 @@
         End Get
     End Property
 
+    Public Shared Sub SetValue(name As String, value As String)
+        If Settings.ContainsKey(name) Then
+            Settings(name) = value
+        End If
+    End Sub
+
     Public Shared Function GetValue(name As String) As String
         If Settings.ContainsKey(name) Then
             Return Settings(name)

@@ -185,6 +185,28 @@ Public Class LeadsInfo
         End Using
     End Function
 
+    Public Shared Function CreateLeadsInfo(bble As String, type As LeadsType?, createBy As String) As LeadsInfo
+        Using ctx As New Entities
+
+            Dim li = ctx.LeadsInfoes.Find(bble)
+            If li Is Nothing Then
+                li = New LeadsInfo
+                li.BBLE = bble
+                li.CreateBy = createBy
+                li.CreateDate = DateTime.Now
+
+                If type.HasValue Then
+                    li.Type = type
+                End If
+
+                ctx.LeadsInfoes.Add(li)
+                ctx.SaveChanges()
+            End If
+
+            Return li
+        End Using
+    End Function
+
     Public Shared Function CreateLeadsInfo(bble As String) As LeadsInfo
         Return DataWCFService.UpdateAssessInfo(bble)
     End Function
