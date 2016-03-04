@@ -20,5 +20,6 @@ Partial Public Class Team
     Public Property OfficeNo As String
     Public Property Address As String
     Public Property Active As Nullable(Of Boolean)
+    Public Property LeadsCreateLimit As Nullable(Of Integer)
 
 End Class
