@@ -39,9 +39,9 @@
     </div>
     <div>
         <h4 class="ss_form_title">Labels</h4>
-
+        <%Dim Tags = DataStatu.LoadDataStatus(LegalCase.SecondaryTypeStatusCategory).ToArray %>
         <div dx-tag-box="{
-			                dataSource: [ <% For Each v In DataStatu.LoadDataStatus(LegalCase.SecondaryTypeStatusCategory).ToArray%> {'id': <%=v.Status %>, 'text':'<%=v.Name%>'}, <% Next%> ],
+			                dataSource: [ <% For Each v In Tags %> {'id': <%=v.Status %>, 'text':'<%=v.Name%>'} <%=IIf(v Is Tags.Last, "", ",") %> <% Next%> ],
 			                displayExpr: 'text',
 			                valueExpr: 'id',
 			                bindingOptions: {

@@ -20,7 +20,7 @@
         });
     </script>
     <div>
-        <div style="position: absolute; top: -60px; bottom: 0px; width:100%; overflow:auto">
+        <div style="position: absolute; top: -60px; bottom: 0px; width:100%; overflow:auto" id="LegalCtrl" ng-controller="LegalCtrl">
             <uc1:LegalTab runat="server" ID="LegalTab" height="100%" />
         </div>
     </div>
