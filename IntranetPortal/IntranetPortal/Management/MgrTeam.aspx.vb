@@ -3,9 +3,11 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
-            BindTeam()
+
             BindEmployeeList()
         End If
+
+        BindTeam()
     End Sub
 
     Sub BindTeam()
@@ -14,6 +16,9 @@
             lbRoles.TextField = "Name"
             lbRoles.ValueField = "TeamId"
             lbRoles.DataBind()
+
+            gvTeams.DataSource = Team.GetAllTeams
+            gvTeams.DataBind()
         End Using
     End Sub
 
@@ -131,5 +136,21 @@
 
             End Using
         End If
+    End Sub
+
+    Protected Sub gvTeams_SelectionChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Protected Sub gvTeams_FocusedRowChanged(sender As Object, e As EventArgs)
+
+
+        Return
+    End Sub
+
+    Protected Sub lbEmployees_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
+        Dim teamId = CInt(e.Parameter)
+        lbEmployees.DataSource = Team.GetTeam(teamId).ActiveUsers
+        lbEmployees.DataBind()
     End Sub
 End Class
