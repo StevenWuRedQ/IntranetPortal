@@ -5,17 +5,17 @@
         If Not Page.IsPostBack Then
 
             BindEmployeeList()
+            BindTeam()
         End If
 
-        BindTeam()
     End Sub
 
     Sub BindTeam()
         Using Context = New Entities
-            lbRoles.DataSource = Context.Teams.OrderBy(Function(r) r.Name).ToList
-            lbRoles.TextField = "Name"
-            lbRoles.ValueField = "TeamId"
-            lbRoles.DataBind()
+            'lbRoles.DataSource = Context.Teams.OrderBy(Function(r) r.Name).ToList
+            'lbRoles.TextField = "Name"
+            'lbRoles.ValueField = "TeamId"
+            'lbRoles.DataBind()
 
             gvTeams.DataSource = Team.GetAllTeams
             gvTeams.DataBind()
@@ -121,11 +121,12 @@
     End Sub
 
     Protected Sub btnRemoveEmp_Click(sender As Object, e As EventArgs) Handles btnRemoveEmp.Click
-        If Not lbEmployees.Value = Nothing AndAlso Not lbRoles.Value = Nothing Then
+        If Not lbEmployees.Value = Nothing AndAlso Not gvTeams.GetSelectedFieldValues("TeamId")(0) = Nothing Then
             Using Context As New Entities
-                Dim teamId = CInt(lbRoles.Value)
+                Dim teamId = CInt(gvTeams.GetSelectedFieldValues("TeamId")(0) = Nothing)
                 Dim ur = Context.UserInTeams.Where(Function(tem) tem.TeamId = teamId And tem.EmployeeName = lbEmployees.Value.ToString).SingleOrDefault
                 Context.UserInTeams.Remove(ur)
+
                 Try
                     Context.SaveChanges()
                 Catch ex As Exception
@@ -133,24 +134,129 @@
                 Finally
                     BindUserInTeam()
                 End Try
-
             End Using
         End If
     End Sub
 
-    Protected Sub gvTeams_SelectionChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Protected Sub gvTeams_FocusedRowChanged(sender As Object, e As EventArgs)
-
-
-        Return
-    End Sub
-
     Protected Sub lbEmployees_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
-        Dim teamId = CInt(e.Parameter)
-        lbEmployees.DataSource = Team.GetTeam(teamId).ActiveUsers
-        lbEmployees.DataBind()
+        If (e.Parameter.StartsWith("Load")) Then
+            Dim teamId = CInt(e.Parameter.Split("|")(1))
+            lbEmployees.DataSource = Team.GetTeam(teamId).ActiveUsers
+            lbEmployees.DataBind()
+        End If
+
+        If (e.Parameter.StartsWith("Remove")) Then
+            Dim teamId = CInt(e.Parameter.Split("|")(1))
+            Dim empName = e.Parameter.Split("|")(2)
+            Dim tm = Team.GetTeam(teamId)
+            tm.RemoveUser(empName)
+
+            lbEmployees.DataSource = tm.ActiveUsers
+            lbEmployees.DataBind()
+        End If
+
+        If (e.Parameter.StartsWith("Add")) Then
+            Dim teamId = CInt(e.Parameter.Split("|")(1))
+            Dim names = e.Parameter.Split("|")(2)
+
+            If Not String.IsNullOrEmpty(names) Then
+                Using Context As New Entities
+                    For Each name In names.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries)
+
+                        Dim ur = Context.UserInTeams.Where(Function(u) u.TeamId = teamId And u.EmployeeName = name).FirstOrDefault
+                        If ur Is Nothing Then
+                            ur = New UserInTeam
+                            ur.TeamId = teamId
+                            ur.EmployeeName = name
+                            Context.UserInTeams.Add(ur)
+                        End If
+                    Next
+
+                    Try
+                        Context.SaveChanges()
+                    Catch ex As Exception
+                        lblError.Text = ex.Message
+                    Finally
+                        BindUserInTeam()
+                        cbEmps.Text = ""
+                    End Try
+                End Using
+            End If
+
+            Dim tm = Team.GetTeam(teamId)
+            lbEmployees.DataSource = tm.ActiveUsers
+            lbEmployees.DataBind()
+        End If
     End Sub
+
+    Protected Sub gvTeams_RowInserting(sender As Object, e As DevExpress.Web.Data.ASPxDataInsertingEventArgs)
+        Dim tm As New Team
+        tm.Name = e.NewValues("Name")
+        tm.Manager = e.NewValues("Manager")
+        tm.Assistant = e.NewValues("Assistant")
+        tm.OfficeNo = e.NewValues("OfficeNo")
+        tm.Address = e.NewValues("Address")
+        tm.Description = e.NewValues("Description")
+        tm.LeadsCreateLimit = e.NewValues("LeadsCreateLimit")
+        tm.Active = e.NewValues("Active")
+
+        tm.Save(Page.User.Identity.Name)
+
+        e.Cancel = True
+        gvTeams.CancelEdit()
+
+    End Sub
+
+    Protected Sub gvTeams_RowUpdating(sender As Object, e As DevExpress.Web.Data.ASPxDataUpdatingEventArgs)
+        Dim teamId = CInt(e.Keys("TeamId"))
+        Dim tm = Team.GetTeam(teamId)
+
+        tm.Manager = e.NewValues("Manager")
+        tm.Assistant = e.NewValues("Assistant")
+        tm.OfficeNo = e.NewValues("OfficeNo")
+        tm.Address = e.NewValues("Address")
+        tm.Description = e.NewValues("Description")
+        tm.LeadsCreateLimit = e.NewValues("LeadsCreateLimit")
+        tm.Active = e.NewValues("Active")
+        tm.Save(Page.User.Identity.Name)
+
+        e.Cancel = True
+        gvTeams.CancelEdit()
+    End Sub
+
+    Protected Sub gvTeams_DataBinding(sender As Object, e As EventArgs)
+        If gvTeams.DataSource Is Nothing Then
+            BindTeam()
+        End If
+    End Sub
+
+    Protected Sub cbEmps_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
+        Dim teamId = e.Parameter.Split("|")(0)
+        Dim names = e.Parameter.Split("|")(1)
+
+        If Not String.IsNullOrEmpty(names) Then
+            Using Context As New Entities
+                For Each name In names.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries)
+
+                    Dim ur = Context.UserInTeams.Where(Function(u) u.TeamId = teamId And u.EmployeeName = name).FirstOrDefault
+                    If ur Is Nothing Then
+                        ur = New UserInTeam
+                        ur.TeamId = teamId
+                        ur.EmployeeName = name
+                        Context.UserInTeams.Add(ur)
+                    End If
+                Next
+
+                Try
+                    Context.SaveChanges()
+                Catch ex As Exception
+                    lblError.Text = ex.Message
+                Finally
+                    BindUserInTeam()
+                    cbEmps.Text = ""
+                End Try
+            End Using
+        End If
+    End Sub
+
 End Class

@@ -22,6 +22,33 @@ Partial Public Class Team
         End Using
     End Function
 
+    Public Sub RemoveUser(userName As String)
+        Using ctx As New Entities
+            If ctx.UserInTeams.Any(Function(s) s.TeamId = TeamId AndAlso s.EmployeeName = userName) Then
+                Dim ur = ctx.UserInTeams.Where(Function(tem) tem.TeamId = TeamId And tem.EmployeeName = userName).SingleOrDefault
+                ctx.UserInTeams.Remove(ur)
+                ctx.SaveChanges()
+            End If
+        End Using
+
+    End Sub
+
+    Public Sub Save(saveBy As String)
+        Using ctx As New Entities
+            If ctx.Teams.Any(Function(t) t.TeamId = TeamId) Then
+                Me.UpdateBy = saveBy
+                Me.UpdateTime = DateTime.Now
+                ctx.Entry(Me).State = Entity.EntityState.Modified
+            Else
+                Me.CreateBy = saveBy
+                Me.CreateTime = DateTime.Now
+                ctx.Entry(Me).State = Entity.EntityState.Added
+            End If
+
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
     <JsonIgnoreAttribute>
     Public ReadOnly Property AllUsers As String()
         Get

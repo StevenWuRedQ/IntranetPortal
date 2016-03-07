@@ -623,6 +623,10 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="ParentId" Type="int" />
           <Property Name="LeadsCreateLimit" Type="int" />
           <Property Name="Active" Type="bit" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserAppointments">
           <Key>
@@ -1666,6 +1670,10 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="LeadsCreateLimit" Type="Int32" />
           <Property Name="Active" Type="Boolean" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserInTeam">
           <Key>
@@ -2497,6 +2505,10 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="Teams">
             <EntityTypeMapping TypeName="IntranetPortalModel.Team">
               <MappingFragment StoreEntitySet="Teams">
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="LeadsCreateLimit" ColumnName="LeadsCreateLimit" />
                 <ScalarProperty Name="Address" ColumnName="Address" />

@@ -4,11 +4,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Team Management</title>
 </head>
 <body>
     <form id="form1" runat="server">
         <script>
+
+            var currentTeamId = null;
+
             //function is called on changing focused row
             function OnGridFocusedRowChanged() {
                 // The values will be returned to the OnGetRowValues() function 
@@ -22,10 +25,27 @@
                             //alert(gridLeads.GetFocusedRowIndex());
                             var rowKey = gvTeams.GetRowKey(gvTeams.GetFocusedRowIndex());
                             if (rowKey && rowKey != null)
-                                lbEmployees.PerformCallback(rowKey);
+                                currentTeamId = rowKey;
+                                lbEmployees.PerformCallback("Load|" + rowKey);
                         }
                     }
                 }
+            }
+
+            function OnRemoveEmployeeClick(s,e) {
+                if (currentTeamId != null)
+                {
+                    if (confirm("Are you sure to remove " + lbEmployees.GetValue() + "?"))
+                        lbEmployees.PerformCallback("Remove|" + currentTeamId + "|" + lbEmployees.GetValue());
+                }
+                e.processOnServer = false;                
+            }
+
+            function OnAddEmployeeClick(s, e) {
+                if (currentTeamId != null) {
+                    lbEmployees.PerformCallback("Add|" + currentTeamId + "|" + cbEmps.GetText());
+                }             
+                e.processOnServer = false;
             }
         </script>
         <div>
@@ -34,7 +54,7 @@
                     <PanelCollection>
                         <dx:PanelContent>
                             <dx:ASPxListBox Visible="false" runat="server" ID="lbRoles" Width="100%" Height="350px" AutoPostBack="true"></dx:ASPxListBox>
-                            <dx:ASPxGridView ClientInstanceName="gvTeams" runat="server" ID="gvTeams" KeyFieldName="TeamId" Theme="Moderno">
+                            <dx:ASPxGridView ClientInstanceName="gvTeams" runat="server" ID="gvTeams" KeyFieldName="TeamId" Theme="Moderno" OnRowInserting="gvTeams_RowInserting" OnRowUpdating="gvTeams_RowUpdating" OnDataBinding="gvTeams_DataBinding">
                                 <Columns>
                                     <dx:GridViewDataColumn FieldName="Name"></dx:GridViewDataColumn>
                                     <dx:GridViewDataColumn FieldName="Manager"></dx:GridViewDataColumn>
@@ -44,7 +64,7 @@
                                     <dx:GridViewDataColumn FieldName="Description"></dx:GridViewDataColumn>
                                     <dx:GridViewDataColumn FieldName="LeadsCreateLimit" Width="40px" Caption="Limit"></dx:GridViewDataColumn>
                                     <dx:GridViewDataCheckColumn FieldName="Active"></dx:GridViewDataCheckColumn>
-                                    <dx:GridViewCommandColumn ShowEditButton="true" VisibleIndex="0" ShowNewButton="true" />
+                                    <dx:GridViewCommandColumn ShowEditButton="true" VisibleIndex="0" ShowNewButtonInHeader="true" />
                                 </Columns>
                                 <SettingsBehavior AllowFocusedRow="true" />
                                 <SettingsEditing Mode="Inline"></SettingsEditing>
@@ -52,9 +72,9 @@
                                 <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
                             </dx:ASPxGridView>
                             <br />
-                            <dx:ASPxTextBox runat="server" Width="100%" ID="txtRoles"></dx:ASPxTextBox>
-                            <dx:ASPxButton runat="server" Text="Add" ID="btnAddRole"></dx:ASPxButton>
-                            <dx:ASPxButton runat="server" Text="Remove" ID="btnRemoveRole"></dx:ASPxButton>
+                            <dx:ASPxTextBox runat="server" Width="100%" ID="txtRoles" Visible="false"></dx:ASPxTextBox>
+                            <dx:ASPxButton runat="server" Text="Add" ID="btnAddRole" Visible="false"></dx:ASPxButton>
+                            <dx:ASPxButton runat="server" Text="Remove" ID="btnRemoveRole" Visible="false"></dx:ASPxButton>
                         </dx:PanelContent>
                     </PanelCollection>
                 </dx:ASPxRoundPanel>
@@ -64,9 +84,13 @@
                     <dx:PanelContent>
                         <dx:ASPxListBox runat="server" ID="lbEmployees" Width="100%" Height="350px" Theme="Moderno" ClientInstanceName="lbEmployees" OnCallback="lbEmployees_Callback"></dx:ASPxListBox>
                         <br />
-                        <dx:ASPxTokenBox runat="server" Width="100%" ID="cbEmps" TextSeparator=";"></dx:ASPxTokenBox>
-                        <dx:ASPxButton runat="server" Text="Add" ID="btnAddEmp"></dx:ASPxButton>
-                        <dx:ASPxButton runat="server" Text="Remove" ID="btnRemoveEmp"></dx:ASPxButton>
+                        <dx:ASPxTokenBox runat="server" Width="100%" ID="cbEmps" TextSeparator=";" Theme="Moderno" ClientInstanceName="cbEmps" OnCallback="cbEmps_Callback"></dx:ASPxTokenBox>
+                        <dx:ASPxButton runat="server" Text="Add" ID="btnAddEmp" AutoPostBack="false">
+                            <ClientSideEvents Click="OnAddEmployeeClick" />
+                        </dx:ASPxButton>
+                        <dx:ASPxButton runat="server" Text="Remove" ID="btnRemoveEmp" AutoPostBack="false">
+                            <ClientSideEvents Click="OnRemoveEmployeeClick" />
+                        </dx:ASPxButton>
                     </dx:PanelContent>
                 </PanelCollection>
             </dx:ASPxRoundPanel>
