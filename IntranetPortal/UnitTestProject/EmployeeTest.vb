@@ -17,7 +17,6 @@ Public Class EmployeeTest
 
     <TestMethod>
     Public Sub GetUserRoles_ReturnRolesWithStar()
-
         Dim roles = System.Web.Security.Roles.GetRolesForUser("Michael Kay")
         Assert.IsTrue(roles.Contains("ShortSale-*"))
 

@@ -13,7 +13,7 @@ Partial Public Class UserInTeam
             Dim items = From ut In ctx.UserInTeams
                         Join team In ctx.Teams On ut.TeamId Equals team.TeamId
                         Join Emp In ctx.Employees On ut.EmployeeName Equals Emp.Name
-                        Where teamNames.Contains(team.Name) Or teamNames = "*"
+                        Where team.Name = teamNames Or teamNames = "*"
                         Select New With {
                                .UserTeam = ut,
                                .TeamName = team.Name,

@@ -1447,24 +1447,24 @@
       <DependentUpon>Management.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Management\MgrEmployee.aspx.designer.vb">
+    <Compile Include="ManagementUI\MgrEmployee.aspx.designer.vb">
       <DependentUpon>MgrEmployee.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Management\MgrEmployee.aspx.vb">
+    <Compile Include="ManagementUI\MgrEmployee.aspx.vb">
       <DependentUpon>MgrEmployee.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Management\MgrOffDays.aspx.designer.vb">
+    <Compile Include="ManagementUI\MgrOffDays.aspx.designer.vb">
       <DependentUpon>MgrOffDays.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Management\MgrOffDays.aspx.vb">
+    <Compile Include="ManagementUI\MgrOffDays.aspx.vb">
       <DependentUpon>MgrOffDays.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Management\MgrTeam.aspx.designer.vb">
+    <Compile Include="ManagementUI\MgrTeam.aspx.designer.vb">
       <DependentUpon>MgrTeam.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Management\MgrTeam.aspx.vb">
+    <Compile Include="ManagementUI\MgrTeam.aspx.vb">
       <DependentUpon>MgrTeam.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
@@ -6577,9 +6577,9 @@
     <Content Include="Management\Default.aspx" />
     <Content Include="Management\LeadsDataManage.aspx" />
     <Content Include="Management\Management.aspx" />
-    <Content Include="Management\MgrEmployee.aspx" />
-    <Content Include="Management\MgrOffDays.aspx" />
-    <Content Include="Management\MgrTeam.aspx" />
+    <Content Include="ManagementUI\MgrEmployee.aspx" />
+    <Content Include="ManagementUI\MgrOffDays.aspx" />
+    <Content Include="ManagementUI\MgrTeam.aspx" />
     <Content Include="Management\MgrRole.aspx" />
     <Content Include="Management\PortalStatus.aspx" />
     <Content Include="Management\QueryBuilder.aspx" />

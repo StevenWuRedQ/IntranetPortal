@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class MgrTeamPage
-
+    
     '''<summary>
     '''form1 control.
     '''</summary>
@@ -21,43 +21,16 @@ Partial Public Class MgrTeamPage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
+    
     '''<summary>
-    '''lbRoles control.
+    '''gvTeams control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbRoles As Global.DevExpress.Web.ASPxListBox
-
-    '''<summary>
-    '''txtRoles control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtRoles As Global.DevExpress.Web.ASPxTextBox
-
-    '''<summary>
-    '''btnAddRole control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAddRole As Global.DevExpress.Web.ASPxButton
-
-    '''<summary>
-    '''btnRemoveRole control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnRemoveRole As Global.DevExpress.Web.ASPxButton
-
+    Protected WithEvents gvTeams As Global.DevExpress.Web.ASPxGridView
+    
     '''<summary>
     '''lbEmployees control.
     '''</summary>
@@ -66,7 +39,7 @@ Partial Public Class MgrTeamPage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbEmployees As Global.DevExpress.Web.ASPxListBox
-
+    
     '''<summary>
     '''cbEmps control.
     '''</summary>
@@ -75,7 +48,7 @@ Partial Public Class MgrTeamPage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbEmps As Global.DevExpress.Web.ASPxTokenBox
-
+    
     '''<summary>
     '''btnAddEmp control.
     '''</summary>
@@ -84,7 +57,7 @@ Partial Public Class MgrTeamPage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnAddEmp As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''btnRemoveEmp control.
     '''</summary>
@@ -93,7 +66,7 @@ Partial Public Class MgrTeamPage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRemoveEmp As Global.DevExpress.Web.ASPxButton
-
+    
     '''<summary>
     '''lblError control.
     '''</summary>

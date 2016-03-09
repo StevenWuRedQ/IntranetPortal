@@ -53,7 +53,7 @@ Public Class AuctionProperty
         For Each row In ds.Tables(0).Rows
             result.Add(BuildAuctionProperty(row))
         Next
-        Return result.ToArray
+        Return result.Where(Function(a) Not String.IsNullOrEmpty(a.BBL)).ToArray
     End Function
 
     Public Shared Function LoadNotifyProperties(startDate As DateTime, endDate As DateTime) As AuctionProperty()

@@ -19,7 +19,11 @@ Partial Public Class Team
     Public Property Assistant As String
     Public Property OfficeNo As String
     Public Property Address As String
-    Public Property Active As Nullable(Of Boolean)
     Public Property LeadsCreateLimit As Nullable(Of Integer)
+    Public Property Active As Nullable(Of Boolean)
+    Public Property CreateTime As Nullable(Of Date)
+    Public Property CreateBy As String
+    Public Property UpdateTime As Nullable(Of Date)
+    Public Property UpdateBy As String
 
 End Class

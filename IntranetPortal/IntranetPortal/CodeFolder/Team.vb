@@ -28,6 +28,33 @@ Partial Public Class Team
         End Using
     End Function
 
+    Public Sub RemoveUser(userName As String)
+        Using ctx As New Entities
+            If ctx.UserInTeams.Any(Function(s) s.TeamId = TeamId AndAlso s.EmployeeName = userName) Then
+                Dim ur = ctx.UserInTeams.Where(Function(tem) tem.TeamId = TeamId And tem.EmployeeName = userName).SingleOrDefault
+                ctx.UserInTeams.Remove(ur)
+                ctx.SaveChanges()
+            End If
+        End Using
+
+    End Sub
+
+    Public Sub Save(saveBy As String)
+        Using ctx As New Entities
+            If ctx.Teams.Any(Function(t) t.TeamId = TeamId) Then
+                Me.UpdateBy = saveBy
+                Me.UpdateTime = DateTime.Now
+                ctx.Entry(Me).State = Entity.EntityState.Modified
+            Else
+                Me.CreateBy = saveBy
+                Me.CreateTime = DateTime.Now
+                ctx.Entry(Me).State = Entity.EntityState.Added
+            End If
+
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
     <JsonIgnoreAttribute>
     Public ReadOnly Property AllUsers As String()
         Get
@@ -62,7 +89,7 @@ Partial Public Class Team
     '''' The daily leads creation limit, The data can be config in portal settings
     '''' </summary>
     '''' <returns></returns>
-    ''Public Property LeadsCreateLimit As Integer
+    'Public Property LeadsCreateLimit As Integer
 
     ''' <summary>
     ''' Return if daily creation limit of team is reached. 
@@ -70,7 +97,7 @@ Partial Public Class Team
     ''' </summary>
     ''' <returns></returns>
     Public Function OverLimitation() As Boolean
-        If LeadsCreateLimit = 0 Then
+        If Not LeadsCreateLimit.HasValue OrElse LeadsCreateLimit = 0 Then
             LeadsCreateLimit = CInt(IntranetPortal.Core.PortalSettings.GetValue("LeadsCreatedLimit"))
         End If
 
