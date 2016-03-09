@@ -307,17 +307,17 @@
     <UserRoles>ShortSale-*,ShortSale-Processor,ShortSale-Negotiator,ShortSale-Manager,Intake,Title-Users,Legal-Manager</UserRoles>
     <Applications>1,2</Applications>
     <Items>
-      <PortalNavItem Name="ShortSale-Summary" Text="Summary" NavigationUrl="/ShortSale/ShortSaleSummaryPage.aspx" ShowAmount="false">        
+      <PortalNavItem Name="ShortSale-Summary" Text="Summary" NavigationUrl="/ShortSale/ShortSaleSummaryPage.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ShortSale-Category-All" Text="All Files" NavigationUrl="/ShortSale/ShortSale.aspx?category=All" ShowAmount="true">       
+      <PortalNavItem Name="ShortSale-Category-All" Text="All Files" NavigationUrl="/ShortSale/ShortSale.aspx?category=All" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-file"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ShortSale-Category-Upcoming" Text="Auction Date" NavigationUrl="/ShortSale/ShortSale.aspx?category=Upcoming" ShowAmount="true">    
+      <PortalNavItem Name="ShortSale-Category-Upcoming" Text="Auction Date" NavigationUrl="/ShortSale/ShortSale.aspx?category=Upcoming" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-file"></i>]]>
         </FontClass>
@@ -329,7 +329,7 @@
         <FrontButton>
           <![CDATA[<a href="/ShortSale/ShortSale.aspx?action=Create&category=Assign" class="add-button" target="contentUrlPane"><i class="fa fa-plus-circle"></i></a>]]>
         </FrontButton>
-      </PortalNavItem>      
+      </PortalNavItem>
       <PortalNavItem Name="ShortSale-Category-Approved" Text="Approved" NavigationUrl="/ShortSale/ShortSale.aspx?category=Approved" ShowAmount="true">
         <UserRoles>ShortSale-Manager,ShortSale-TeamManager,ShortSale-Negotiator,Title-Users</UserRoles>
         <FontClass>
@@ -414,12 +414,12 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
-     <PortalNavItem Name="ShortSale-Archived" Text="Archived" NavigationUrl="/ShortSale/ShortSale.aspx?s=6" ShowAmount="true">
+      <PortalNavItem Name="ShortSale-Archived" Text="Archived" NavigationUrl="/ShortSale/ShortSale.aspx?s=6" ShowAmount="true">
         <UserRoles></UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-rotate-right"></i>]]>
         </FontClass>
-      </PortalNavItem>      
+      </PortalNavItem>
     </Items>
   </PortalNavItem>
 
@@ -576,7 +576,7 @@
       </PortalNavItem>-->
     </Items>
   </PortalNavItem>
-  
+
   <PortalNavItem Name="Construction" Text="Construction" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Construction-*</UserRoles>
     <Items>
@@ -613,12 +613,12 @@
     <Items>
     </Items>
   </PortalNavItem>
-  
+
   <PortalNavItem Name="ManagementReport" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <UserRoles>OfficeManager-*,Entity-Manager,Complaints-Manager</UserRoles>
+    <UserRoles>OfficeManager-*,Entity-Manager,Complaints-Manager,HR-Manager</UserRoles>
     <Items>
       <PortalNavItem Name="ReportSummary" Text="Summary" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
-         <UserRoles>OfficeManager-*</UserRoles>
+        <UserRoles>OfficeManager-*</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
@@ -629,8 +629,8 @@
           <![CDATA[<i class="fa fa-map-marker"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="DayOff" Text="Day Off" NavigationUrl="/Management/MgrOffDays.aspx" ShowAmount="false">
-        <UserRoles>OfficeManager-*</UserRoles>
+      <PortalNavItem Name="DayOff" Text="Day Off" NavigationUrl="/ManagementUI/MgrOffDays.aspx" ShowAmount="false">
+        <UserRoles>OfficeManager-*,HR-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
@@ -659,10 +659,8 @@
             <FontClass>
               <![CDATA[<i class="fa fa-line-chart"></i>]]>
             </FontClass>
-            
           </PortalNavItem>
         </Items>
-      
       </PortalNavItem>
       <PortalNavItem Name="DOBComplains" Text="DOB Complaints" NavigationUrl="/Complaints/ComplainsMng.aspx" ShowAmount="false">
         <FontClass>
@@ -675,49 +673,34 @@
           <![CDATA[<i class="fa fa-table"></i>]]>
         </FontClass>
       </PortalNavItem>
-       <PortalNavItem Name="AuctionProperties" Text="On Auction" NavigationUrl="/AuctionLeads/AuctionList.aspx" ShowAmount="false">
+      <PortalNavItem Name="AuctionProperties" Text="On Auction" NavigationUrl="/AuctionLeads/AuctionList.aspx" ShowAmount="false">
         <UserRoles>Auction-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-anchor"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <!--<PortalNavItem Name="ReportCalendar" Text="Employees Calendar" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
+      <PortalNavItem Name="PortalEmployee" Text="Employee List" NavigationUrl="/ManagementUI/MgrEmployee.aspx" ShowAmount="false">
+        <UserRoles>HR-Manager</UserRoles>
         <FontClass>
-          <![CDATA[<i class="fa fa-calendar"></i>]]>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
-      </PortalNavItem>
-      <PortalNavItem Name="ReportAgents" Text="Agents Management" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
+      </PortalNavItem>     
+      <PortalNavItem Name="PortalRole" Text="Teams" NavigationUrl="/ManagementUI/MgrTeam.aspx" ShowAmount="false">
+        <UserRoles>HR-Manager</UserRoles>
         <FontClass>
-          <![CDATA[<i class="fa fa-calendar"></i>]]>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
-      </PortalNavItem>-->
+      </PortalNavItem>      
     </Items>
   </PortalNavItem>
-
   <PortalNavItem Name="PortalManagement" Text="Portal Settings" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Admin</UserRoles>
     <Items>
-      <PortalNavItem Name="PortalEmployee" Text="Employee List" NavigationUrl="/Management/MgrEmployee.aspx" ShowAmount="false">
-        <FontClass>
-          <![CDATA[<i class="fa fa-check-circle"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-      <PortalNavItem Name="PortalOffDays" Text="Days Off" NavigationUrl="/Management/MgrOffDays.aspx" ShowAmount="false">
-        <FontClass>
-          <![CDATA[<i class="fa fa-check-circle"></i>]]>
-        </FontClass>
-      </PortalNavItem>
       <PortalNavItem Name="PortalRole" Text="Roles" NavigationUrl="/Management/MgrRole.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="PortalRole" Text="Teams" NavigationUrl="/Management/MgrTeam.aspx" ShowAmount="false">
-        <FontClass>
-          <![CDATA[<i class="fa fa-check-circle"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-    
       <PortalNavItem Name="QueryBuilder" Text="Query Builder" NavigationUrl="/Management/QueryBuilder.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>

@@ -2,15 +2,16 @@
 
 <TestClass()>
 Public Class LeadTest
+
     <TestMethod()>
     Public Sub TestAddress2BBLE()
-        Dim bble = IntranetPortal.Core.Utility.Address2BBLE("515 Wilson Ave , Brooklyn  NY 11221 ")
+        Dim bble = IntranetPortal.Core.Utility.Address2BBLE("515 Wilson Ave, Brooklyn  NY 11221")
         Assert.AreEqual(bble, "3033980006")
     End Sub
 
     <TestMethod()>
     Public Sub ClearSharedUserTest()
-        Dim bble = "3047790022 "
+        Dim bble = "3047790022"
         Dim sharedUser = "Chris Yan"
 
         Dim ld = IntranetPortal.Lead.GetInstance(bble)

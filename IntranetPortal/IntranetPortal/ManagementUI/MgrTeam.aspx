@@ -53,12 +53,14 @@
                 <dx:ASPxRoundPanel runat="server" HeaderText="Teams" Width="100%">
                     <PanelCollection>
                         <dx:PanelContent>
-                            <dx:ASPxListBox Visible="false" runat="server" ID="lbRoles" Width="100%" Height="350px" AutoPostBack="true"></dx:ASPxListBox>
-                            <dx:ASPxGridView ClientInstanceName="gvTeams" runat="server" ID="gvTeams" KeyFieldName="TeamId" Theme="Moderno" OnRowInserting="gvTeams_RowInserting" OnRowUpdating="gvTeams_RowUpdating" OnDataBinding="gvTeams_DataBinding">
+                            <%--<dx:ASPxListBox Visible="false" runat="server" ID="lbRoles" Width="100%" Height="350px" AutoPostBack="true"></dx:ASPxListBox>--%>
+                            <dx:ASPxGridView ClientInstanceName="gvTeams" runat="server" ID="gvTeams" KeyFieldName="TeamId" Theme="Moderno" 
+                                OnRowInserting="gvTeams_RowInserting" OnRowUpdating="gvTeams_RowUpdating" 
+                                OnCellEditorInitialize="gvTeams_CellEditorInitialize" OnDataBinding="gvTeams_DataBinding">
                                 <Columns>
                                     <dx:GridViewDataColumn FieldName="Name"></dx:GridViewDataColumn>
-                                    <dx:GridViewDataColumn FieldName="Manager"></dx:GridViewDataColumn>
-                                    <dx:GridViewDataColumn FieldName="Assistant"></dx:GridViewDataColumn>
+                                    <dx:GridViewDataComboBoxColumn FieldName="Manager"></dx:GridViewDataComboBoxColumn>
+                                    <dx:GridViewDataComboBoxColumn FieldName="Assistant"></dx:GridViewDataComboBoxColumn>
                                     <dx:GridViewDataColumn FieldName="OfficeNo"></dx:GridViewDataColumn>
                                     <dx:GridViewDataColumn FieldName="Address"></dx:GridViewDataColumn>
                                     <dx:GridViewDataColumn FieldName="Description"></dx:GridViewDataColumn>
@@ -71,10 +73,7 @@
                                 <SettingsPager Mode="ShowAllRecords"></SettingsPager>
                                 <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
                             </dx:ASPxGridView>
-                            <br />
-                            <dx:ASPxTextBox runat="server" Width="100%" ID="txtRoles" Visible="false"></dx:ASPxTextBox>
-                            <dx:ASPxButton runat="server" Text="Add" ID="btnAddRole" Visible="false"></dx:ASPxButton>
-                            <dx:ASPxButton runat="server" Text="Remove" ID="btnRemoveRole" Visible="false"></dx:ASPxButton>
+                            <br />                      
                         </dx:PanelContent>
                     </PanelCollection>
                 </dx:ASPxRoundPanel>
@@ -84,11 +83,12 @@
                     <dx:PanelContent>
                         <dx:ASPxListBox runat="server" ID="lbEmployees" Width="100%" Height="350px" Theme="Moderno" ClientInstanceName="lbEmployees" OnCallback="lbEmployees_Callback"></dx:ASPxListBox>
                         <br />
-                        <dx:ASPxTokenBox runat="server" Width="100%" ID="cbEmps" TextSeparator=";" Theme="Moderno" ClientInstanceName="cbEmps" OnCallback="cbEmps_Callback"></dx:ASPxTokenBox>
-                        <dx:ASPxButton runat="server" Text="Add" ID="btnAddEmp" AutoPostBack="false">
+                        <dx:ASPxTokenBox runat="server" Width="100%" ID="cbEmps" TextSeparator=";" Theme="Moderno" ClientInstanceName="cbEmps"></dx:ASPxTokenBox>
+                        <br />
+                        <dx:ASPxButton runat="server" Text="Add" ID="btnAddEmp" AutoPostBack="false" Theme="Moderno">
                             <ClientSideEvents Click="OnAddEmployeeClick" />
                         </dx:ASPxButton>
-                        <dx:ASPxButton runat="server" Text="Remove" ID="btnRemoveEmp" AutoPostBack="false">
+                        <dx:ASPxButton runat="server" Text="Remove" ID="btnRemoveEmp" AutoPostBack="false" Theme="Moderno">
                             <ClientSideEvents Click="OnRemoveEmployeeClick" />
                         </dx:ASPxButton>
                     </dx:PanelContent>
