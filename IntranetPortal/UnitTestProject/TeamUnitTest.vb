@@ -43,9 +43,9 @@ Imports IntranetPortal
     <TestMethod()> Public Sub MultipleTeamLimitation_returnLimitation()
         Dim bble = "2037130013"
         Dim galiTeam = Team.GetTeam(teamName)
-        galiTeam.LeadsCreateLimit = 2
+        galiTeam.LeadsCreateLimit = 3
         Dim tomTeam = Team.GetTeam("TomTeam")
-        tomTeam.LeadsCreateLimit = 1
+        tomTeam.LeadsCreateLimit = 2
 
         Dim galiUser = galiTeam.ActiveUsers(0)
         Dim tomUser = tomTeam.ActiveUsers(0)
