@@ -14,42 +14,6 @@ Option Explicit On
 Partial Public Class BusinessFormDefault
     
     '''<summary>
-    '''listPanelDiv control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents listPanelDiv As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''listPanel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents listPanel As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''dataPanel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents dataPanel As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''rptTopmenu control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptTopmenu As Global.System.Web.UI.WebControls.Repeater
-    
-    '''<summary>
     '''ASPxPopupControl3 control.
     '''</summary>
     '''<remarks>
@@ -93,6 +57,42 @@ Partial Public Class BusinessFormDefault
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnAssign As Global.DevExpress.Web.ASPxButton
+    
+    '''<summary>
+    '''listPanelDiv control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents listPanelDiv As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''listPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents listPanel As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''dataPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dataPanel As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''rptTopmenu control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rptTopmenu As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
     '''rptBusinessControl control.
