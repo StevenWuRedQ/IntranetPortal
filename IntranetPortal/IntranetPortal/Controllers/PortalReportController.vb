@@ -18,8 +18,16 @@ Namespace Controllers
 
         <Route("api/PortalReport/")>
         Public Function GetLeadsImportingReport(teamName As String, startDate As DateTime) As IHttpActionResult
+            Dim leadsData = PortalReport.TeamLeadsImportingReport(teamName, startDate, startDate.AddDays(7))
+            Dim result = leadsData.Select(Function(ld) New With {.BBLE = ld.BBLE,
+                       .LeadsName = ld.LeadsName,
+                       .EmployeeName = ld.EmployeeName,
+                       .LastUpdate = ld.LastUpdate,
+                       .Callback = ld.CallbackDate,
+                       .DeadReason = If(ld.DeadReason.HasValue, CType(ld.DeadReason, Lead.DeadReasonEnum).ToString, ""),
+                       .Description = ld.Description
+                                              }).ToArray
 
-            Dim result = PortalReport.TeamLeadsImportingReport(teamName, startDate, startDate.AddDays(7))
             Return Ok(result)
         End Function
 
