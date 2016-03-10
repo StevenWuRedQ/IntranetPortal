@@ -1,4 +1,5 @@
 ﻿Imports IntranetPortal
+Imports System.Web.Security
 
 <TestClass()>
 Public Class EmployeeTest
@@ -31,13 +32,16 @@ Public Class EmployeeTest
 
         result = Employee.GetDeptUsersList("GaliTeam", False)
         Assert.IsTrue(result.Any(Function(a) a.Name = "Crystal Dixon"))
-
     End Sub
 
     <TestMethod>
     Public Sub GetTeamUsersArray_returnUserList()
         Dim result = UserInTeam.GetTeamUsersArray("GaliTeam")
         Assert.IsFalse(result.Contains("Crystal Dixon"))
+
+        For Each user In result
+            Assert.IsTrue(Employee.GetEmpTeams(user).Contains("GaliTeam"))
+        Next
 
         result = UserInTeam.GetTeamUsersArray("GaliTeam", True)
         Assert.IsTrue(result.Contains("Crystal Dixon"))
@@ -66,6 +70,32 @@ Public Class EmployeeTest
         Dim nonActiveUsers = Employee.GetDeptUnActiveUserList(deptName)
         Assert.AreEqual(4, nonActiveUsers.Count)
         Assert.AreEqual(4, users.Where(Function(em) em.Active = False).Count)
+    End Sub
+
+    <TestMethod>
+    Public Sub GetMyEmployeesByTeam_returnEmployees()
+        Dim userName = "Michael Gali"
+
+
+        Dim users1 = Employee.GetMyEmployeesByTeam(userName).Select(Function(ut) ut.EmployeeName).OrderBy(Function(ut) ut).ToArray
+        Dim users2 = UserInTeam.GetTeamUsersArray("GaliTeam").OrderBy(Function(ut) ut).ToArray
+
+        Assert.IsTrue(users1.SequenceEqual(users2))
+
+        Dim ui = New UsersInRole
+        ui.Rolename = "OfficeManager-TomTeam"
+        ui.Username = userName
+        ui.Add()
+
+        users1 = Employee.GetMyEmployeesByTeam(userName).Select(Function(ut) ut.EmployeeName).OrderBy(Function(ut) ut).ToArray
+        ui.Delete()
+        Dim users2List = users2.ToList
+        users2List.AddRange(UserInTeam.GetTeamUsersArray("TomTeam"))
+        users2 = users2List.Distinct.OrderBy(Function(ut) ut).ToArray
+
+        Assert.IsTrue(users1.SequenceEqual(users2))
+
+        Assert.IsFalse(ui.IsExsit)
     End Sub
 
 End Class

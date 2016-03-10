@@ -619,6 +619,7 @@
     <Compile Include="CodeFolder\UserFollowUpManage.vb" />
     <Compile Include="CodeFolder\UserInTeam.vb" />
     <Compile Include="CodeFolder\UserMessage.vb" />
+    <Compile Include="CodeFolder\UsersInRole.vb" />
     <Compile Include="CodeFolder\UserTask.vb" />
     <Compile Include="CodeFolder\Utility.vb" />
     <Compile Include="Calendar.aspx.designer.vb">

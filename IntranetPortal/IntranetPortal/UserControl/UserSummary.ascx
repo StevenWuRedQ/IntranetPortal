@@ -553,7 +553,7 @@
                                                 background: { color: '#ff400d' },
                                                 width: 375,
                                                 scale: {
-                                                    startValue: new Date(2015, 1, 1),
+                                                    startValue: new Date(2016, 1, 1),
                                                     endValue: endDate,
                                                     minorTickInterval: "day",
                                                     majorTickInterval: 'week',

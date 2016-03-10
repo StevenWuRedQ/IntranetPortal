@@ -8,6 +8,12 @@ Partial Public Class UserInTeam
     Public Property EmployeePosition As String
     Public Property EmployeeActive As Boolean
 
+    ''' <summary>
+    ''' Return the team users
+    ''' </summary>
+    ''' <param name="teamNames">The Team Name</param>
+    ''' <param name="includeNonAction">Indicate if non action users return</param>
+    ''' <returns></returns>
     Public Shared Function GetTeamUsers(teamNames As String, Optional includeNonAction As Boolean = False) As List(Of UserInTeam)
         Using ctx As New Entities
             Dim items = From ut In ctx.UserInTeams

@@ -100,31 +100,29 @@
 
     Protected Sub btnAddEmp_Click(sender As Object, e As EventArgs) Handles btnAddEmp.Click
         If Not cbEmps.Value = Nothing AndAlso Not String.IsNullOrEmpty(cbEmps.Value) Then
-            Using Context As New Entities
-                Dim ur As New UsersInRole
-                ur.Rolename = lbRoles.Value.ToString
-                ur.ApplicationName = "IntranetPortal"
-                ur.Username = cbEmps.Text.ToString
+            Dim ur As New UsersInRole
+            ur.Rolename = lbRoles.Value.ToString
+            ur.Username = cbEmps.Text.ToString
 
-                Try
-                    Context.UsersInRoles.Add(ur)
-                    Context.SaveChanges()
-                Catch ex As Exception
-                    lblError.Text = ex.Message
-                Finally
-                    BindUserInRole()
-                End Try
-            End Using
+            Try
+                ur.Add()
+            Catch ex As Exception
+                lblError.Text = ex.Message
+            Finally
+                BindUserInRole()
+            End Try
         End If
     End Sub
 
     Protected Sub btnRemoveEmp_Click(sender As Object, e As EventArgs) Handles btnRemoveEmp.Click
         If Not lbEmployees.Value = Nothing AndAlso Not lbRoles.Value = Nothing Then
             Using Context As New Entities
-                Dim ur = Context.UsersInRoles.Where(Function(tem) tem.Rolename = lbRoles.Value.ToString And tem.Username = lbEmployees.Value.ToString).SingleOrDefault
-                Context.UsersInRoles.Remove(ur)
+                Dim ur As New UsersInRole
+                ur.Rolename = lbRoles.Value.ToString
+                ur.Username = lbEmployees.Value.ToString
+
                 Try
-                    Context.SaveChanges()
+                    ur.Delete()
                 Catch ex As Exception
                     lblError.Text = ex.Message
                 Finally

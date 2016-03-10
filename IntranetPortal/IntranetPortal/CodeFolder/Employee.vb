@@ -178,6 +178,11 @@ Partial Public Class Employee
         'End Using
     End Function
 
+    ''' <summary>
+    ''' Return the employees in the teams that user managed
+    ''' </summary>
+    ''' <param name="userName">The user name</param>
+    ''' <returns>the list of UserInTeam object</returns>
     Public Shared Function GetMyEmployeesByTeam(userName As String) As List(Of UserInTeam)
         Using ctx As New Entities
             If Roles.IsUserInRole(userName, "Admin") Then
@@ -196,7 +201,12 @@ Partial Public Class Employee
             Next
 
             If teams.Count > 0 Then
-                Return UserInTeam.GetTeamUsers(String.Join(",", teams.ToArray))
+                Dim result = New List(Of UserInTeam)
+
+                For Each tm In teams
+                    result.AddRange(UserInTeam.GetTeamUsers(tm))
+                Next
+                Return result
             End If
 
             If Employee.HasSubordinates(userName) Then
@@ -327,8 +337,6 @@ Partial Public Class Employee
     Public Shared Function GetManagedEmployees(managerName As String) As String()
         Return GetManagedEmployees(managerName, True)
     End Function
-
-
 
     Public Shared Function GetManagedEmployeeList(managerName As String) As List(Of Employee)
         Dim emps As New List(Of Employee)
