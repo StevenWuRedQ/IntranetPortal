@@ -1,9 +1,11 @@
-﻿Imports System.Web.Script.Serialization
+﻿Imports System.ComponentModel.DataAnnotations
+Imports System.Web.Script.Serialization
 Imports Newtonsoft.Json
 
 ''' <summary>
 ''' Represents the data related to leads or property
 ''' </summary>
+<MetadataType(GetType(LeadsInfoMetaData))>
 Public Class LeadsInfo
     Public Enum LeadsType
         All = 11
@@ -21,6 +23,12 @@ Public Class LeadsInfo
         CoOpConversion = 12
     End Enum
 
+    Public Shared Function GetLeadsInfoByType(type As LeadsType) As IQueryable(Of LeadsInfo)
+        Dim ctx As New Entities
+        Return ctx.LeadsInfoes.Where(Function(l) l.Type = type).AsQueryable
+    End Function
+
+    <JsonIgnoreAttribute>
     Public ReadOnly Property InShortSale As Boolean
         Get
             Return ShortSaleManage.IsInShortSale(BBLE)
@@ -48,7 +56,6 @@ Public Class LeadsInfo
         Return False
     End Function
 
-    <JsonIgnoreAttribute>
     Public ReadOnly Property IsApartment() As Boolean
         Get
             If Not String.IsNullOrEmpty(BBLE) Then
@@ -58,7 +65,6 @@ Public Class LeadsInfo
         End Get
     End Property
 
-    <JsonIgnoreAttribute>
     Public ReadOnly Property AptBBLE As String
         Get
             If IsApartment Then
@@ -69,7 +75,6 @@ Public Class LeadsInfo
         End Get
     End Property
 
-    <JsonIgnoreAttribute>
     Public ReadOnly Property AptBuildingInfo As ApartmentBuilding
         Get
             If IsApartment Then
@@ -83,7 +88,6 @@ Public Class LeadsInfo
         End Get
     End Property
 
-    <JsonIgnoreAttribute>
     Public ReadOnly Property Address1 As String
         Get
             Return String.Format("{2} {0} {1}", Number, StreetName, UnitNum).Trim
@@ -206,6 +210,16 @@ Public Class LeadsInfo
             Return li
         End Using
     End Function
+
+    Public ReadOnly Property EmployeeName As String
+        Get
+            If Lead IsNot Nothing Then
+                Return Lead.EmployeeName
+            End If
+
+            Return Nothing
+        End Get
+    End Property
 
     Public Shared Function CreateLeadsInfo(bble As String) As LeadsInfo
         Return DataWCFService.UpdateAssessInfo(bble)
@@ -686,8 +700,8 @@ Public Class LeadsInfo
                         Dim ownerToken = context.HomeOwners.Where(Function(h) h.BBLE = BBLE And (h.Name = Owner Or h.Name = CoOwner) And h.ReportToken IsNot Nothing).Select(Function(h) h.ReportToken).ToArray
                         If ownerToken IsNot Nothing AndAlso ownerToken.Count > 0 Then
                             Dim result = (From li In context.LeadsInfoes.Where(Function(li) li.BBLE <> BBLE)
-                                               Join ho In context.HomeOwners.Where(Function(h) ownerToken.Contains(h.ReportToken)) On ho.BBLE Equals li.BBLE
-                                               Select li).Distinct.ToList
+                                          Join ho In context.HomeOwners.Where(Function(h) ownerToken.Contains(h.ReportToken)) On ho.BBLE Equals li.BBLE
+                                          Select li).Distinct.ToList
 
                             If IsCompany(Owner) Then
                                 _otherProperties = New List(Of LeadsInfo)
@@ -915,4 +929,10 @@ Public Class LeadsData
             MyBase.Lead = value
         End Set
     End Property
+End Class
+
+
+Public Class LeadsInfoMetaData
+    <JsonIgnoreAttribute>
+    Public Property Lead As Lead
 End Class

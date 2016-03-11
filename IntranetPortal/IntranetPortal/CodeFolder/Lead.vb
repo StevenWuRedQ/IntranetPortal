@@ -1,4 +1,7 @@
-﻿Imports System.ComponentModel
+﻿
+Imports System.ComponentModel
+Imports System.ComponentModel.DataAnnotations
+Imports Newtonsoft.Json
 
 ''' <summary>
 ''' Represents the lead data, inclued employee, status, etc.
@@ -11,6 +14,7 @@ Partial Public Class Lead
         Published = 2
     End Enum
 
+    <JsonIgnoreAttribute>
     Public ReadOnly Property FormatLeadsname As String
         Get
             Dim leadsname = String.Format("<span style='color:red'>{0} {1}</span> - {2}", LeadsInfo.Number, LeadsInfo.StreetName, LeadsInfo.Owner)
@@ -24,6 +28,7 @@ Partial Public Class Lead
         Return context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault
     End Function
 
+    <JsonIgnoreAttribute>
     Public ReadOnly Property LastUpdate2 As DateTime
         Get
             Dim log = LeadsActivityLogs.OrderByDescending(Function(lg) lg.ActivityDate).FirstOrDefault
@@ -39,6 +44,7 @@ Partial Public Class Lead
         End Get
     End Property
 
+    <JsonIgnoreAttribute>
     Public ReadOnly Property LatestAppointmentDate As DateTime
         Get
             Dim appt = UserAppointment.GetLatestUserAppointment(BBLE)
@@ -51,6 +57,7 @@ Partial Public Class Lead
         End Get
     End Property
 
+    <JsonIgnoreAttribute>
     Public ReadOnly Property LastOwnerUpdate As DateTime
         Get
             Dim log = LeadsActivityLogs.Where(Function(l) l.EmployeeName.ToLower = EmployeeName.ToLower).OrderByDescending(Function(lg) lg.ActivityDate).FirstOrDefault
@@ -62,6 +69,7 @@ Partial Public Class Lead
         End Get
     End Property
 
+    <JsonIgnoreAttribute>
     Public ReadOnly Property LastUserUpdate As DateTime
         Get
             Dim log = LeadsActivityLogs.Where(Function(l) l.EmployeeID <> Nothing).OrderByDescending(Function(lg) lg.ActivityDate).FirstOrDefault
@@ -82,6 +90,7 @@ Partial Public Class Lead
         End Using
     End Function
 
+    <JsonIgnoreAttribute>
     Public ReadOnly Property ReferrelName As String
         Get
             Return Me.LeadsInfo.ReferrelName
@@ -89,6 +98,7 @@ Partial Public Class Lead
     End Property
 
     Private _viewable As Boolean? = Nothing
+    <JsonIgnoreAttribute>
     Public ReadOnly Property Viewable As Boolean
         Get
             If _viewable.HasValue Then
@@ -105,6 +115,7 @@ Partial Public Class Lead
         End Get
     End Property
 
+    <JsonIgnoreAttribute>
     Public Property ThirdPartyCategory As String
 
     Public Shared Function HasArchieved(bble As String) As Boolean
@@ -808,7 +819,7 @@ Partial Public Class Lead
             WorkflowService.StartTaskProcess("RecycleProcess", LeadsName, rLead.RecycleId, BBLE, String.Join(";", emps), "Normal")
         End If
     End Sub
-
+    <JsonIgnoreAttribute>
     Public ReadOnly Property InRecycle As Boolean
         Get
             Return Core.RecycleLead.InRecycle(BBLE)
@@ -861,6 +872,7 @@ Partial Public Class Lead
         'UserMessage.AddNewMessage("Recycle Message", "Failed Recycle Leads: " & BBLE, String.Format("Failed Recycle Leads BBLE: {0}, Employee name:{1}. ", BBLE, EmployeeName), BBLE, DateTime.Now, "Recycle")
     End Sub
 
+    <JsonIgnoreAttribute>
     Public ReadOnly Property Task As UserTask
         Get
             Using ctx As New Entities
@@ -869,11 +881,13 @@ Partial Public Class Lead
         End Get
     End Property
 
+    <JsonIgnoreAttribute>
     Public ReadOnly Property Appointment As UserAppointment
         Get
             Using ctx As New Entities
                 Return ctx.UserAppointments.Where(Function(t) t.BBLE = BBLE And (t.Status = UserAppointment.AppointmentStatus.NewAppointment)).Take(0).FirstOrDefault
             End Using
+
         End Get
     End Property
 
@@ -894,4 +908,6 @@ Partial Public Class Lead
         <Description("Manager disapproved")>
         MgrDisapproved = 7
     End Enum
+
+
 End Class
