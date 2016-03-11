@@ -3,9 +3,7 @@
 <%@ Register Src="~/ShortSale/NGShortSaleInLeadsView.ascx" TagPrefix="uc1" TagName="NGShortSaleInLeadsView" %>
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 
-
 <%--@ Register Src="~/ShortSale/ShortSaleInLeadsView.ascx" TagPrefix="uc1" TagName="ShortSaleInLeadsView" --%>
-
 
 <script src="/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js"></script>
 <script type="text/javascript">

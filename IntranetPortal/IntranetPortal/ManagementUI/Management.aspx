@@ -328,16 +328,18 @@
                                                 var dateNow = new Date();
                                                 var endDate = new Date();
                                                 endDate = endDate.setDate(dateNow.getDate() + 1);
+                                                var scaleStart = new Date();
+                                                scaleStart.setMonth(scaleStart.getMonth() - 6);
                                                 var startDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
                                                 $("#dateRange").dxRangeSelector({
                                                     margin: {
                                                         top: 5
                                                     },
                                                     size: {
-                                                        height: 150
+                                                        height: 120
                                                     },
                                                     scale: {
-                                                        startValue: new Date(2014, 8, 28),
+                                                        startValue: scaleStart,
                                                         endValue: endDate,
                                                         minorTickInterval: "day",
                                                         majorTickInterval: 'week',
@@ -857,21 +859,23 @@
                                                 var dateNow = new Date();
                                                 var endDate = new Date();
                                                 endDate = endDate.setDate(dateNow.getDate() + 1);
+                                                var scaleStart = new Date();
+                                                scaleStart.setMonth(scaleStart.getMonth() - 6);
                                                 var startDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
                                                 $("#dateRange2").dxRangeSelector({
                                                     margin: {
                                                         top: 5
                                                     },
                                                     size: {
-                                                        height: 80
+                                                        height: 120
                                                     },
                                                     scale: {
-                                                        startValue: new Date(2016,0,1),
+                                                        startValue: scaleStart,
                                                         endValue: endDate,
                                                         minorTickInterval: "day",
                                                         majorTickInterval: 'week',
                                                         minRange: "day",
-                                                        showMinorTicks: true
+                                                        showMinorTicks: false                                                        
                                                     },
                                                     sliderMarker: {
                                                         format: "monthAndDay"
