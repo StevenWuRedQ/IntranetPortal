@@ -507,6 +507,20 @@
       <DependentUpon>AuctionList.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="AuctionLeads\AuctionListCtrl.ascx.designer.vb">
+      <DependentUpon>AuctionListCtrl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="AuctionLeads\AuctionListCtrl.ascx.vb">
+      <DependentUpon>AuctionListCtrl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AuctionLeads\VacantListCtrl.ascx.designer.vb">
+      <DependentUpon>VacantListCtrl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="AuctionLeads\VacantListCtrl.ascx.vb">
+      <DependentUpon>VacantListCtrl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="AutoDialer\CallManagement.aspx.designer.vb">
       <DependentUpon>CallManagement.aspx</DependentUpon>
     </Compile>
@@ -2533,7 +2547,10 @@
     <Content Include="App_Themes\PortalTheme2.dll" />
     <Content Include="AssignLeadsRulesPage.aspx" />
     <Content Include="AuctionLeads\AuctionList.aspx" />
+    <Content Include="AuctionLeads\AuctionListCtrl.ascx" />
     <Content Include="AuctionLeads\partials\auction-detail.tmpl.html" />
+    <Content Include="AuctionLeads\partials\vacant-detail.tmpl.html" />
+    <Content Include="AuctionLeads\VacantListCtrl.ascx" />
     <Content Include="AutoDialer\CallManagement.aspx" />
     <Content Include="AutoDialer\Dialer.aspx" />
     <Content Include="AutoDialer\DialerAjaxService.svc" />

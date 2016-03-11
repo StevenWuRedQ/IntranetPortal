@@ -42,7 +42,7 @@
 
             }
         }
-        return 'Error in Build Message Format is not right !';
+        return 'Error in Build Message Format is incorrect !';
     },
     init: function () {
         var self = this;

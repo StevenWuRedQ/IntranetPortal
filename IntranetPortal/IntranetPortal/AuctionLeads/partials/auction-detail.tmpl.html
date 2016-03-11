@@ -37,12 +37,8 @@
                 </div>
                 <div class="row" ng-if="auction.EmployeeName==null">
                     <div class="col-md-8">
-                        <ui-select ng-model="auction.AgentAssignedChoise">
-                            <ui-select-match placeholder="Select agent">{{$select.selected}}</ui-select-match>
-                            <ui-select-choices repeat="o in AgentsData| filter: $select.search">
-                                <div ng-bind-html="o | highlight:$select.search"></div>
-                            </ui-select-choices>
-                        </ui-select>
+                        <input type="text" ng-model="auction.AgentAssignedChoise" uib-typeahead="agent for agent in AgentsData | filter:$viewValue | limitTo:8" class="form-control">
+                       
                     </div>
                     <div class="col-md-2">
                         <button type="button" class="btn btn-primary" ng-click="AssginAuctionLeads(auction);">Assign</button>
