@@ -41,6 +41,9 @@ Partial Public Class LeadsActivityLog
             Select Case category
                 Case LogCategory.ShortSale.ToString
                     ShortSaleManage.UpdateDate(bble, empName)
+                Case LogCategory.Legal, LogCategory.Title, LogCategory.Construction
+
+                Case LogCategory.Email
 
                 Case Else
                     Dim ld = Context.Leads.Find(bble)

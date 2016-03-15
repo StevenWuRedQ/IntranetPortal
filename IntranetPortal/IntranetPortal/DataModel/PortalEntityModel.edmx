@@ -514,6 +514,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           </Key>
           <Property Name="LisPenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="LpType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Expiration" Type="datetime" />
           <Property Name="Active" Type="bit" />
           <Property Name="Docket_Number" Type="nchar" MaxLength="10" />
           <Property Name="CountyNum" Type="int" />
@@ -536,6 +538,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Attorney_Phone" Type="nvarchar" MaxLength="50" />
           <Property Name="Terms" Type="nvarchar" MaxLength="50" />
           <Property Name="CollectedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="PortalNotes">
           <Key>
@@ -1425,6 +1428,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="Attorney_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Terms" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CollectedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Expiration" Type="DateTime" Precision="3" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="LpType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NYC_St_Names">
           <Key>
@@ -2227,6 +2233,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="PortalLisPens">
             <EntityTypeMapping TypeName="IntranetPortalModel.PortalLisPen">
               <MappingFragment StoreEntitySet="PortalLisPen">
+                <ScalarProperty Name="LpType" ColumnName="LpType" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
                 <ScalarProperty Name="CollectedOn" ColumnName="CollectedOn" />
                 <ScalarProperty Name="Terms" ColumnName="Terms" />
                 <ScalarProperty Name="Attorney_Phone" ColumnName="Attorney_Phone" />

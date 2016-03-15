@@ -805,7 +805,7 @@
                     <HeaderTemplate>
                         Activity History
                         <asp:Literal runat="server" ID="ltArchievedBox" Visible="<%# ShowArchieveBox() %>">
-                            <input type="checkbox" id="chkShowArchieve" onclick="ShowArchieve(this)" /><label for="chkShowArchieve">Show Archieved</label>
+                            <input type="checkbox" id="chkShowArchieve" onclick="gridTrackingClient.PerformCallback('ShowArchieved');" /><label for="chkShowArchieve">Show Archieved</label>
                             <script>
                                 var checkTheBox = false;
                                 function ShowArchieve(cb)

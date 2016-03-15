@@ -588,7 +588,7 @@
     <Compile Include="CodeFolder\ConstructionManage.vb" />
     <Compile Include="CodeFolder\CustomBinder.vb" />
     <Compile Include="CodeFolder\DataWCFService.vb" />
-    <Compile Include="CodeFolder\DateTimeJavaScriptConverter .vb" />
+    <Compile Include="CodeFolder\DateTimeJavaScriptConverter.vb" />
     <Compile Include="CodeFolder\EmailTemplateControl.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

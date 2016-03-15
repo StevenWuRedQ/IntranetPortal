@@ -562,7 +562,7 @@
                             <%# DateTime.Parse(Eval("Effective")).ToShortDateString %>
                         </DataItemTemplate>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="Expiration" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataDateColumn FieldName="Expiration" PropertiesDateEdit-DisplayFormatString="g" Settings-AllowSort="False"></dx:GridViewDataDateColumn>
                     <dx:GridViewDataTextColumn FieldName="Plaintiff" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Defendant" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Index" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
