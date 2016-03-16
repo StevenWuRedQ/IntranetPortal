@@ -202,6 +202,7 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="Active" Type="bit" />
           <Property Name="ReportToken" Type="nvarchar" MaxLength="50" />
+          <Property Name="LocateReportContent" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Leads">
           <Key>
@@ -1506,6 +1507,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="UserModified" Type="Boolean" />
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <Property Name="ReportToken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocateReportContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LoginLog">
           <Key>
@@ -2321,6 +2323,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="HomeOwners">
             <EntityTypeMapping TypeName="IntranetPortalModel.HomeOwner">
               <MappingFragment StoreEntitySet="HomeOwners">
+                <ScalarProperty Name="LocateReportContent" ColumnName="LocateReportContent" />
                 <ScalarProperty Name="ReportToken" ColumnName="ReportToken" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="UserModified" ColumnName="UserModified" />
