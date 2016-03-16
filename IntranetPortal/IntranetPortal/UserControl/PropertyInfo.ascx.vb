@@ -6,6 +6,9 @@
     End Sub
 
     Public Property LeadsInfoData As LeadsInfo = New LeadsInfo
+
+    Public Property LeadsData As Lead
+
     Public Function BindData() As Boolean
         'If LeadsInfoData.IsApartment Then
         '    LeadsInfoData = ""
@@ -32,6 +35,7 @@
         End If
         Return add_info
     End Function
+
     Protected Sub leadsCommentsCallbackPanel_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
         If LeadsInfoData.BBLE Is Nothing AndAlso hfBBLE.Value IsNot Nothing Then
             LeadsInfoData = LeadsInfo.GetInstance(hfBBLE.Value)

@@ -7,8 +7,8 @@
 
 <script src="/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js"></script>
 <script type="text/javascript">
-    function ShowAcrisMap(propBBLE,boro,block,lot) {
-       
+    function ShowAcrisMap(propBBLE, boro, block, lot) {
+
         ShowPopupMap("http://a836-acris.nyc.gov/bblsearch/bblsearch.asp?borough=" + boro + "&block=" + block + "&lot=" + lot, "Acris");
         $("#addition_info").html($("#borugh_block_lot_data").val());
     }
@@ -67,8 +67,8 @@
     function DeleteComments(commentId) {
         leadsCommentsCallbackPanel.PerformCallback("Delete|" + commentId);
     }
-    function RequestDocSearch()
-    {
+
+    function RequestDocSearch() {
         $.ajax({
             type: "POST",
             url: '/api/LeadInfoDocumentSearches',
@@ -83,9 +83,9 @@
             error: function (data) {
                 alert('Some error Occurred! Detail: ' + JSON.stringify(data));
             }
-           
         });
     }
+
     $(document).ready(function () {
         // Handler for .ready() called.
         init_currency();
@@ -103,7 +103,6 @@
     <%--/*display:none need delete when realse--%>
     <div style="height: 850px; overflow: auto;" id="prioity_content">
         <%--refresh label--%>
-
         <dx:ASPxPanel ID="UpatingPanel" runat="server">
             <PanelCollection>
                 <dx:PanelContent runat="server">
@@ -118,12 +117,12 @@
         <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
             <div style="font-size: 30px">
                 <span>
-
-                    <%  If (LeadsInfoData.LastUpdate.HasValue) Then%>
+                    <% If (LeadsInfoData.LastUpdate.HasValue) Then%>
                     <i class="fa fa-refresh"></i>
-                    <span style="margin-left: 19px;"><%= LeadsInfoData.LastUpdate.ToString%></span>
-
-                    <%Else%>
+                    <span style="margin-left: 19px;">
+                        <%= LeadsInfoData.LastUpdate.ToString%>
+                    </span>
+                    <% Else%>
                     <i class="fa fa-home"></i>
                     <span style="margin-left: 19px;"><%= LeadsInfoData.PropertyAddress %></span>
                     <% End If%>
@@ -132,7 +131,6 @@
                 <span class="time_buttons" onclick='ShowDOBWindow("<%= LeadsInfoData.Borough%>","<%= LeadsInfoData.Block%>", "<%= LeadsInfoData.Lot%>")'>DOB</span>
                 <span class="time_buttons" onclick='ShowAcrisMap("<%= LeadsInfoData.BBLE %>",<%=LeadsInfoData.Borough%>,<%=LeadsInfoData.Block %>,<%=LeadsInfoData.Lot %>)'>Acris</span>
                 <span class="time_buttons" onclick='ShowPropertyMap("<%= LeadsInfoData.BBLE %>")'>Maps</span>
-
             </div>
             <%--data format June 2, 2014 6:37 PM--%>
             <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; <%= If( LeadsInfoData.CreateDate.HasValue,"visibility:visible","visibility:hidden")%>">Started on <%= LeadsInfoData.CreateDate.ToString%></span>
@@ -144,7 +142,6 @@
                 <PanelCollection>
                     <dx:PanelContent>
                         <% Dim i = 0%>
-
 
                         <% If LeadsInfoData.OtherProperties IsNot Nothing AndAlso LeadsInfoData.OtherProperties.Count > 0 Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8;height:inherit","height:inherit")%>'>
@@ -361,7 +358,8 @@
                 <dx:PanelContent>
                     <%--Mortgage form--%>
                     <div style="margin: 20px;" class="clearfix">
-                        <div class="form_head" style="margin-top: 40px;">MORTGAGE AND VIOLATIONS 
+                        <div class="form_head" style="margin-top: 40px;">
+                            MORTGAGE AND VIOLATIONS 
                             <i class="fa fa-save  color_blue_edit collapse_btn tooltip-examples" title="Save Mortgage" onclick="callbackPanelMortgage.PerformCallback('Save')"></i>
                             <% If IntranetPortal.Data.LeadInfoDocumentSearch.Exist(hfBBLE.Value) Then %>
                             <i class="fa fa-eye  color_blue_edit collapse_btn tooltip-examples" title="View search result" onclick="OpenLeadsWindow('/PopupControl/LeadTaxSearchRequest.aspx?BBLE=<%=hfBBLE.Value%>','Entities',667,900)"></i>

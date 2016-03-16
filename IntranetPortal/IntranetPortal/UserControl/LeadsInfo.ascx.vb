@@ -100,6 +100,7 @@ Public Class LeadsInfo1
                 End If
 
                 PropertyInfo.LeadsInfoData = leadsinfodata
+                PropertyInfo.LeadsData = lead
                 PropertyInfo.BindData()
 
                 'Bind files info
