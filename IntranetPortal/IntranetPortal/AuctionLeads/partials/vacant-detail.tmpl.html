@@ -26,34 +26,53 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">Liens</div>
-                <div class="panel-body">
-                   <table class="table table-striped" style="font-size:13px">
-                       <thead>
-                           <tr>
-                               <th>Type</th>
-                               <th>Effective</th>
-                               <th>Defendant</th>
-                               <th>Plaintiff</th>
-                               <th>Index #</th>
-                           </tr>
-                       </thead>
-                       <tbody>
-                           <tr ng-repeat="li in SelectItem.LisPens">
-                               <td>{{li.Type}}</td>
-                               <td>{{li.Effective |date:'MM/dd/yyyy'}}</td>
-                               <td>{{li.Defendant}}</td>
-                               <td>{{li.Plaintiff}}</td>
-                               <td>{{li.Index}}</td>
-                           </tr>
-                       </tbody>
-                   </table>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Lead</div>
+           
+            <div class="panel-body">
+                <div ng-if="SelectItem.EmployeeName!=null">
+                   Assign to: {{SelectItem.EmployeeName}}
+                </div>
+                <div class="row" ng-if="SelectItem.EmployeeName==null">
+                    <div class="col-md-8">
+                        <input type="text" ng-model="SelectItem.AgentAssignedChoise" uib-typeahead="agent for agent in AgentsData | filter:$viewValue | limitTo:8" class="form-control">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary" ng-click="AssginAuctionLeads(SelectItem);">Assign</button>
+                    </div>
                 </div>
             </div>
+            
         </div>
-        
     </div>
-    
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Liens</div>
+            <div class="panel-body">
+                <table class="table table-striped" style="font-size:13px">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Effective</th>
+                            <th>Defendant</th>
+                            <th>Plaintiff</th>
+                            <th>Index #</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="li in SelectItem.LisPens">
+                            <td>{{li.Type}}</td>
+                            <td>{{li.Effective |date:'MM/dd/yyyy'}}</td>
+                            <td>{{li.Defendant}}</td>
+                            <td>{{li.Plaintiff}}</td>
+                            <td>{{li.Index}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </div>
