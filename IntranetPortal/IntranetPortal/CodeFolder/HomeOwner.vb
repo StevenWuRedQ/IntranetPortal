@@ -51,6 +51,7 @@ Partial Public Class HomeOwner
                 '    LocateReport = writer.ToArray
                 'End Using
             End If
+
         End Set
     End Property
 
