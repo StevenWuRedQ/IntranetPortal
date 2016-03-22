@@ -13,8 +13,8 @@
 
         <h2><%=ControlType %>  </h2>
         <div class="row">
-            <uc1:AuctionListCtrl runat="server" ID="AuctionListCtrl" Visible ="false"/>
-            <uc1:VacantListCtrl runat="server" id="VacantListCtrl" Visible ="false"/>
+            <uc1:AuctionListCtrl runat="server" ID="AuctionListCtrl" Visible="false" />
+            <uc1:VacantListCtrl runat="server" ID="VacantListCtrl" Visible="false" />
             <div class="col-md-6">
                 <div ng-view></div>
             </div>
@@ -118,23 +118,32 @@
               $http.get('/api/Leads/VacantLeads').then(function (data) {
                   $scope.List = data.data;
               });
-            
+
 
           }]);
         /*****************End VacantListCtrl ***************/
 
         /*****************VacantCtrl ***************/
-        angular.module('PortalApp').controller('VacantCtrl', ['$scope', '$http','$routeParams',
-          function ($scope, $http, $routeParams) {
+        angular.module('PortalApp').controller('VacantCtrl', ['$scope', '$http', '$routeParams', 'AgentsData',
+          function ($scope, $http, $routeParams, AgentsData) {
               $scope.BBLE = $routeParams.Id;
-              if ($scope.BBLE)
-              {
+              AgentsData.then(function (response) {
+                  $scope.AgentsData = response.data;
+              });
+              if ($scope.BBLE) {
                   $http.get('/api/Leads/LeadsInfo/' + $scope.BBLE).then(function (data) {
                       $scope.SelectItem = data.data;
                   });
               }
               //$scope.SelectItem = _.find(DemoVacatList, function(e){ return e.BBLE== $routeParams.Id });
+              $scope.AssginAuctionLeads = function (vacant) {
+                  $http.post('/api/Leads/Assign/' + vacant.BBLE, JSON.stringify(vacant.AgentAssignedChoise)).success(function (response) {
+                      vacant.EmployeeName = vacant.AgentAssignedChoise;
+                      AngularRoot.alert('Assign to ' + vacant.EmployeeName + ' Succeed !')
 
+                  });
+
+              }
           }]);
         /*****************End VacantListCtrl ***************/
 

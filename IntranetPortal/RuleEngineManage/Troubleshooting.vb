@@ -1143,4 +1143,11 @@ Public Class Troubleshooting
         Dim frm = CType(Assembly.GetExecutingAssembly().CreateInstance("RuleEngineManage." & type), Form)
         frm.ShowDialog()
     End Sub
+
+    Private Sub AutoAssignRules_Click(sender As Object, e As EventArgs) Handles AutoAssignRules.Click
+
+        Dim rule = New AutoAssignRule()
+        rule.Execute()
+        MsgBox("auto assign finished !")
+    End Sub
 End Class

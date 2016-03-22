@@ -48,6 +48,8 @@ Partial Class Troubleshooting
         Me.txtRecycleDate = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cbForms = New System.Windows.Forms.ComboBox()
+        Me.btnOpenWindow = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtBBLE = New System.Windows.Forms.TextBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
@@ -140,11 +142,10 @@ Partial Class Troubleshooting
         Me.txtTemplateResult = New System.Windows.Forms.TextBox()
         Me.TitleTab = New System.Windows.Forms.TabPage()
         Me.TitleButton1 = New System.Windows.Forms.Button()
-        Me.Button20 = New System.Windows.Forms.Button()
         Me.tpAuction = New System.Windows.Forms.TabPage()
         Me.txtFiles = New System.Windows.Forms.TextBox()
-        Me.btnOpenWindow = New System.Windows.Forms.Button()
-        Me.cbForms = New System.Windows.Forms.ComboBox()
+        Me.Button20 = New System.Windows.Forms.Button()
+        Me.AutoAssignRules = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -393,6 +394,23 @@ Partial Class Troubleshooting
         Me.Panel1.Size = New System.Drawing.Size(875, 46)
         Me.Panel1.TabIndex = 25
         '
+        'cbForms
+        '
+        Me.cbForms.FormattingEnabled = True
+        Me.cbForms.Location = New System.Drawing.Point(534, 14)
+        Me.cbForms.Name = "cbForms"
+        Me.cbForms.Size = New System.Drawing.Size(121, 21)
+        Me.cbForms.TabIndex = 15
+        '
+        'btnOpenWindow
+        '
+        Me.btnOpenWindow.Location = New System.Drawing.Point(661, 12)
+        Me.btnOpenWindow.Name = "btnOpenWindow"
+        Me.btnOpenWindow.Size = New System.Drawing.Size(100, 23)
+        Me.btnOpenWindow.TabIndex = 14
+        Me.btnOpenWindow.Text = "Open Window"
+        Me.btnOpenWindow.UseVisualStyleBackColor = True
+        '
         'Label12
         '
         Me.Label12.AutoSize = True
@@ -456,6 +474,7 @@ Partial Class Troubleshooting
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.AutoAssignRules)
         Me.TabPage2.Controls.Add(Me.Button11)
         Me.TabPage2.Controls.Add(Me.TextBox1)
         Me.TabPage2.Controls.Add(Me.Button1)
@@ -1325,15 +1344,6 @@ Partial Class Troubleshooting
         Me.TitleButton1.Text = "TestButton"
         Me.TitleButton1.UseVisualStyleBackColor = True
         '
-        'Button20
-        '
-        Me.Button20.Location = New System.Drawing.Point(261, 44)
-        Me.Button20.Name = "Button20"
-        Me.Button20.Size = New System.Drawing.Size(75, 23)
-        Me.Button20.TabIndex = 8
-        Me.Button20.Text = "Button20"
-        Me.Button20.UseVisualStyleBackColor = True
-        '
         'tpAuction
         '
         Me.tpAuction.Controls.Add(Me.txtFiles)
@@ -1352,22 +1362,23 @@ Partial Class Troubleshooting
         Me.txtFiles.Size = New System.Drawing.Size(290, 20)
         Me.txtFiles.TabIndex = 0
         '
-        'btnOpenWindow
+        'Button20
         '
-        Me.btnOpenWindow.Location = New System.Drawing.Point(661, 12)
-        Me.btnOpenWindow.Name = "btnOpenWindow"
-        Me.btnOpenWindow.Size = New System.Drawing.Size(100, 23)
-        Me.btnOpenWindow.TabIndex = 14
-        Me.btnOpenWindow.Text = "Open Window"
-        Me.btnOpenWindow.UseVisualStyleBackColor = True
+        Me.Button20.Location = New System.Drawing.Point(261, 44)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(75, 23)
+        Me.Button20.TabIndex = 8
+        Me.Button20.Text = "Button20"
+        Me.Button20.UseVisualStyleBackColor = True
         '
-        'cbForms
+        'AutoAssignRules
         '
-        Me.cbForms.FormattingEnabled = True
-        Me.cbForms.Location = New System.Drawing.Point(534, 14)
-        Me.cbForms.Name = "cbForms"
-        Me.cbForms.Size = New System.Drawing.Size(121, 21)
-        Me.cbForms.TabIndex = 15
+        Me.AutoAssignRules.Location = New System.Drawing.Point(222, 120)
+        Me.AutoAssignRules.Name = "AutoAssignRules"
+        Me.AutoAssignRules.Size = New System.Drawing.Size(153, 23)
+        Me.AutoAssignRules.TabIndex = 10
+        Me.AutoAssignRules.Text = "Auto Assign Rules"
+        Me.AutoAssignRules.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1543,4 +1554,5 @@ Partial Class Troubleshooting
     Friend WithEvents txtFiles As TextBox
     Friend WithEvents btnOpenWindow As Button
     Friend WithEvents cbForms As ComboBox
+    Friend WithEvents AutoAssignRules As Button
 End Class

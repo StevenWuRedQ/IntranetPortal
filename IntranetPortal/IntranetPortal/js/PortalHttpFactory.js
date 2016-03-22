@@ -14,8 +14,11 @@
             //console.error("PortalHttp ShowLoading AngularRoot not init yet Portal Http dependent it please run init after AngularRoot init!");
             return;
         }
-
-        AngularRoot.hideLoading();
+        // delay 0.3 to close second for the http request too fast.
+        setTimeout(function () {
+            AngularRoot.hideLoading();
+        }, 300);
+        
     },
     Alert: function (message) {
         if (!AngularRoot) {

@@ -122,9 +122,6 @@
 
                         </div>
 
-
-
-
                     </div>
 
                 </div>
@@ -342,7 +339,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <button class="btn btn-primary" type="button" ng-click="AssginEntity()" style=" margin-left:10px">Assgin</button>
+                                        <button class="btn btn-primary" type="button" ng-click="AssginEntity()" style=" margin-left:10px">Assign</button>
                                     </td>
                                 </tr>
 
