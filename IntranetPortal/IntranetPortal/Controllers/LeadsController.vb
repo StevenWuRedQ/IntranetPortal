@@ -7,6 +7,10 @@ Namespace Controllers
     Public Class LeadsController
         Inherits ApiController
 
+        ''' <summary>
+        ''' Return vacant leads list
+        ''' </summary>
+        ''' <returns></returns>
         <Route("api/Leads/VacantLeads")>
         Public Function GetVacantLeads() As IHttpActionResult
             Try
@@ -18,6 +22,11 @@ Namespace Controllers
             End Try
         End Function
 
+        ''' <summary>
+        ''' Return leadsinfo data
+        ''' </summary>
+        ''' <param name="bble"></param>
+        ''' <returns></returns>
         <Route("api/Leads/LeadsInfo/{bble}")>
         Public Function GetLeadsInfo(bble As String) As IHttpActionResult
             Try
@@ -28,6 +37,12 @@ Namespace Controllers
             End Try
         End Function
 
+        ''' <summary>
+        ''' Action to assign leads to user
+        ''' </summary>
+        ''' <param name="bble"></param>
+        ''' <param name="userName"></param>
+        ''' <returns></returns>
         <Route("api/Leads/Assign/{bble}")>
         <ResponseType(GetType(Void))>
         Public Function PostAssignLeads(bble As String, <FromBody> userName As String) As IHttpActionResult
@@ -43,6 +58,10 @@ Namespace Controllers
             End Try
         End Function
 
+        ''' <summary>
+        ''' Return agent list managered by current user
+        ''' </summary>
+        ''' <returns></returns>
         <Route("api/Leads/ManagedAgents")>
         <ResponseType(GetType(String()))>
         Public Function GetManagedAgents() As IHttpActionResult
