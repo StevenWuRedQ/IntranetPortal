@@ -2,6 +2,12 @@
     <div class="col-md-10"><h3> {{SelectItem.PropertyAddress}}</h3></div>
     <!--<div class="col-md-2"><button class="btn btn-primary" type="button" ng-click="SaveAuction(auction)">Save</button></div>-->
 </div>
+<style>
+    .wx_scorll_list .panel-body
+    {
+        font-size:
+    }
+</style>
 <div class="wx_scorll_list" data-bottom="90" style="margin-top:5px">
     <div class="row">
         <div class="col-md-6">
@@ -21,7 +27,11 @@
                 <div class="panel-body">
                     <ul>
                         <li>Zip: {{SelectItem.ZipCode}}</li>
-                        <li></li>
+                        <li>Water {{SelectItem.WaterAmt | currency}}</li>
+                        <li>Taxes: {{SelectItem.TaxesAmt | currency}}</li>
+                        <li>ECB Violations: {{SelectItem.ECBViolationsAmt | currency}}</li>
+                        <li>DOB Violations: {{SelectItem.DOBViolationsAmt | currency}}</li>
+                        <li>Property Class {{SelectItem.PropertyClass}}</li>
                     </ul>
                 </div>
             </div>
