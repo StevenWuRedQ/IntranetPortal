@@ -1317,7 +1317,8 @@ Partial Public Class ShortSaleCase
                        Join pi In ctx.PropertyBaseInfoes On pi.BBLE Equals ss.BBLE
                        Let owner = ctx.PropertyOwners.FirstOrDefault(Function(po) po.BBLE = ss.BBLE)
                        Let morts = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = ss.CaseId).OrderBy(Function(m) m.MortgageId)
-                       Let values = ctx.PropertyValueInfoes.Where(Function(pv) pv.BBLE = ss.BBLE)
+                       Let values = ctx.PropertyValueInfoes.Where(Function(pv) pv.BBLE = ss.BBLE).OrderBy(Function(v) v.DateOfValue)
+                       Let offers = ctx.ShortSaleOffers.Where(Function(so) so.BBLE = ss.BBLE).OrderBy(Function(v) v.DateSubmited)
                        Let fileOverview = ctx.ShortSaleOverviews.Where(Function(pv) pv.BBLE = ss.BBLE And pv.Category = "ShortSale").OrderByDescending(Function(pv) pv.ActivityDate).FirstOrDefault
                        Select New With {.CaseId = ss.CaseId,
                                         .ShortSale = ss,
@@ -1325,6 +1326,7 @@ Partial Public Class ShortSaleCase
                                         .Owner = owner,
                                         .Mortgages = morts,
                                         .ValueInfo = values,
+                                        .Offers = offers,
                                         .Overview = fileOverview}
 
             Return data.ToList.Select(Function(item)
@@ -1333,7 +1335,7 @@ Partial Public Class ShortSaleCase
                                           item.ShortSale.PropertyOwner = item.Owner
                                           item.ShortSale.ValueInfoes = item.ValueInfo.ToArray
                                           item.ShortSale.LastFileOverview = item.Overview
-
+                                          item.ShortSale.ShortSaleOffers = item.Offers.ToArray
                                           Return item.ShortSale
                                       End Function).ToList
         End Using
