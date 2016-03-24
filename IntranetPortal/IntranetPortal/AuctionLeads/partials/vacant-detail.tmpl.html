@@ -3,45 +3,55 @@
     <!--<div class="col-md-2"><button class="btn btn-primary" type="button" ng-click="SaveAuction(auction)">Save</button></div>-->
 </div>
 <style>
-    .wx_scorll_list .panel-body
-    {
-        font-size:14px;
+   
+    .sp-title{
+        font-weight:bold;
     }
 </style>
 <div class="wx_scorll_list" data-bottom="90" style="margin-top:5px">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Owner</div>
                 <div class="panel-body">
-                    <ul>
-                        <li>Name: {{SelectItem.Owner}}</li>
-                        <li>Address:{{}}</li>
+                    <ul style="list-style:none">
+                        <li><span class="sp-title">Name</span>: {{SelectItem.Owner}}</li>
+                        <li><span class="sp-title">Address</span>:{{}}</li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Property</div>
                 <div class="panel-body">
-                    <ul>
-                        <li>Zip: {{SelectItem.ZipCode}}</li>
-                        <li>Water {{SelectItem.WaterAmt | currency}}</li>
-                        <li>Taxes: {{SelectItem.TaxesAmt | currency}}</li>
-                        <li>ECB Violations: {{SelectItem.ECBViolationsAmt | currency}}</li>
-                        <li>DOB Violations: {{SelectItem.DOBViolationsAmt | currency}}</li>
-                        <li>Property Class: {{SelectItem.PropertyClass}}</li>
-                        <li>Built Year: {{SelectItem.YearBuilt}}</li> 
-                        <li>Lot Dem: {{SelectItem.LotDem}}</li>
-                        <li>Building Dem: {{SelectItem.BuildingDem}}</li>
-                        <li>Max Far: {{SelectItem.MaxFar}}</li>
-                        <li>Actual Far: {{SelectItem.ActualFar}}</li>
-                        <li>NYCSqft: {{SelectItem.NYCSqft}}</li>
-                        <li>Unbuilt Sqft: {{SelectItem.UnbuiltSqft}}</li>
-                        <li>Zoning: {{SelectItem.Zoning}}</li>
-                        <li>Stories: {{SelectItem.NumFloors}}</li>
-                    </ul>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul style="list-style:none">
+                                <li><span class="sp-title">Water</span>: {{SelectItem.WaterAmt | currency}}</li>
+                                <li><span class="sp-title">Taxes</span>: {{SelectItem.TaxesAmt | currency}}</li>
+                                <li><span class="sp-title">ECB Violations</span>: {{SelectItem.ECBViolationsAmt | currency}}</li>
+                                <li><span class="sp-title">DOB Violations</span>: {{SelectItem.DOBViolationsAmt | currency}}</li>
+                                <li><span class="sp-title">Property Class</span>: {{SelectItem.PropertyClass}}</li>
+                                <li><span class="sp-title">Built Year</span>: {{SelectItem.YearBuilt}}</li>
+                                
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul style="list-style:none">
+                                <li><span class="sp-title">Lot Dem</span>: {{SelectItem.LotDem}}</li>
+                                <li><span class="sp-title">Building Dem</span>: {{SelectItem.BuildingDem}}</li>
+                                <li><span class="sp-title">Max Far</span>: {{SelectItem.MaxFar}}</li>
+                                <li><span class="sp-title">Actual Far</span>: {{SelectItem.ActualFar}}</li>
+                                <li><span class="sp-title">NYCSqft</span>: {{SelectItem.NYCSqft | number:0}}</li>
+                                <li><span class="sp-title">Unbuilt Sqft</span>: {{SelectItem.UnbuiltSqft | number:0}}</li>
+                                <li><span class="sp-title">Zoning</span>: {{SelectItem.Zoning}}</li>
+                                <li><span class="sp-title">Stories</span>: {{SelectItem.NumFloors}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    
                 </div>
             </div>
         </div>

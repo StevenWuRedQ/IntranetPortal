@@ -138,7 +138,6 @@ Public Class LeadsInfo
         End Get
     End Property
 
-
     Public ReadOnly Property BoroughName() As String
         Get
             Return Utility.Borough2BoroughName(Borough)
