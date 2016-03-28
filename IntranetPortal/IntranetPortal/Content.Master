@@ -65,7 +65,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
 
-   <script src="/Scripts/autosave.js?v=02032016"></script>
+     <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.4/angularfire.min.js"></script>
+
+    <script src="/Scripts/autosave.js?v=02032016"></script>
 
   <%-- <script data-main="app" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.22/require.js"></script>--%>
   

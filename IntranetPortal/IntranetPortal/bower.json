@@ -29,6 +29,7 @@
     "jquery-backstretch": "~2.0.4",
     "jQuery-Collapse": "~1.1.0",
     "jquery-formatcurrency": "~1.4.0",
+    "jquery-steps": "1.1.0",
     "globalize": "~0.1.1",
     "signalr": "~2.2.0",
     "webui-popover": "~1.1.3",
