@@ -3,18 +3,18 @@
     <!--<div class="col-md-2"><button class="btn btn-primary" type="button" ng-click="SaveAuction(auction)">Save</button></div>-->
 </div>
 <style>
-   
-    .sp-title{
-        font-weight:bold;
+    .sp-title {
+        font-weight: bold;
     }
 </style>
 <div class="wx_scorll_list" data-bottom="90" style="margin-top:5px">
-    <div class="row">
+    
+    <div class="row" style="margin-right:0px;margin-left:0px">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Owner</div>
                 <div class="panel-body">
-                    <ul style="list-style:none">
+                    <ul style="list-style:none" class="list-group">
                         <li><span class="sp-title">Name</span>: {{SelectItem.Owner}}</li>
                         <li><span class="sp-title">Address</span>:{{}}</li>
                     </ul>
@@ -27,81 +27,82 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <ul style="list-style:none">
+                            <ul style="list-style:none" class="list-group">
                                 <li><span class="sp-title">Water</span>: {{SelectItem.WaterAmt | currency}}</li>
                                 <li><span class="sp-title">Taxes</span>: {{SelectItem.TaxesAmt | currency}}</li>
                                 <li><span class="sp-title">ECB Violations</span>: {{SelectItem.ECBViolationsAmt | currency}}</li>
                                 <li><span class="sp-title">DOB Violations</span>: {{SelectItem.DOBViolationsAmt | currency}}</li>
                                 <li><span class="sp-title">Property Class</span>: {{SelectItem.PropertyClass}}</li>
                                 <li><span class="sp-title">Built Year</span>: {{SelectItem.YearBuilt}}</li>
-                                
+
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <ul style="list-style:none">
+                            <ul style="list-style:none" class="list-group">
                                 <li><span class="sp-title">Lot Dem</span>: {{SelectItem.LotDem}}</li>
                                 <li><span class="sp-title">Building Dem</span>: {{SelectItem.BuildingDem}}</li>
                                 <li><span class="sp-title">Max Far</span>: {{SelectItem.MaxFar}}</li>
                                 <li><span class="sp-title">Actual Far</span>: {{SelectItem.ActualFar}}</li>
-                                <li><span class="sp-title">NYCSqft</span>: {{SelectItem.NYCSqft | number:0}}</li>
+                                <li><span class="sp-title">NYC Sqft</span>: {{SelectItem.NYCSqft | number:0}}</li>
                                 <li><span class="sp-title">Unbuilt Sqft</span>: {{SelectItem.UnbuiltSqft | number:0}}</li>
                                 <li><span class="sp-title">Zoning</span>: {{SelectItem.Zoning}}</li>
                                 <li><span class="sp-title">Stories</span>: {{SelectItem.NumFloors}}</li>
                             </ul>
                         </div>
                     </div>
-                    
-                    
+
+
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">Lead</div>
-           
-            <div class="panel-body">
-                <div ng-if="SelectItem.EmployeeName!=null">
-                   Assign to: {{SelectItem.EmployeeName}}
-                </div>
-                <div class="row" ng-if="SelectItem.EmployeeName==null">
-                    <div class="col-md-8">
-                        <input type="text" ng-model="SelectItem.AgentAssignedChoise" uib-typeahead="agent for agent in AgentsData | filter:$viewValue | limitTo:8" class="form-control">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Lead</div>
+
+                <div class="panel-body">
+                    <div ng-if="SelectItem.EmployeeName!=null">
+                        Assign to: {{SelectItem.EmployeeName}}
                     </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-primary" ng-click="AssginAuctionLeads(SelectItem);">Assign</button>
+                    <div class="row" ng-if="SelectItem.EmployeeName==null">
+                        <div class="col-md-8">
+                            <input type="text" ng-model="SelectItem.AgentAssignedChoise" uib-typeahead="agent for agent in AgentsData | filter:$viewValue | limitTo:8" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary" ng-click="AssginAuctionLeads(SelectItem);">Assign</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">Liens</div>
-            <div class="panel-body">
-                <table class="table table-striped" style="font-size:13px">
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th>Effective</th>
-                            <th>Defendant</th>
-                            <th>Plaintiff</th>
-                            <th>Index #</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="li in SelectItem.LisPens">
-                            <td>{{li.Type}}</td>
-                            <td>{{li.Effective |date:'MM/dd/yyyy'}}</td>
-                            <td>{{li.Defendant}}</td>
-                            <td>{{li.Plaintiff}}</td>
-                            <td>{{li.Index}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+
             </div>
         </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Liens</div>
+                <div class="panel-body">
+                    <table class="table table-striped" style="font-size:13px">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Effective</th>
+                                <th>Defendant</th>
+                                <th>Plaintiff</th>
+                                <th>Index #</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="li in SelectItem.LisPens">
+                                <td>{{li.Type}}</td>
+                                <td>{{li.Effective |date:'MM/dd/yyyy'}}</td>
+                                <td>{{li.Defendant}}</td>
+                                <td>{{li.Plaintiff}}</td>
+                                <td>{{li.Index}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
+
 
 </div>
