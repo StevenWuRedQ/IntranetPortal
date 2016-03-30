@@ -27,5 +27,7 @@ Partial Public Class PreSignRecord
     Public Property CreateDate As Nullable(Of Date)
     Public Property UpdateBy As String
     Public Property UpdateTime As Nullable(Of Date)
+    Public Property Owner As String
+    Public Property Title As String
 
 End Class

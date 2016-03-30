@@ -493,6 +493,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="Title" Type="nvarchar" MaxLength="256" />
           <Property Name="NeedSearch" Type="bit" />
           <Property Name="SearchId" Type="int" />
           <Property Name="ExpectedDate" Type="datetime" />
@@ -503,6 +504,7 @@
           <Property Name="Parties" Type="nvarchar" MaxLength="512" />
           <Property Name="Description" Type="nvarchar" MaxLength="512" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
@@ -2422,6 +2424,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3541,6 +3545,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySetMapping Name="PreSignRecords">
             <EntityTypeMapping TypeName="IntranetPortalModel.PreSignRecord">
               <MappingFragment StoreEntitySet="PreSignRecords">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />

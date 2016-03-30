@@ -1,8 +1,28 @@
-﻿Partial Public Class PreSignRecord
+﻿''' <summary>
+''' The model class for Pre Sign Process
+''' </summary>
+Partial Public Class PreSignRecord
 
     Public Property CheckRequestData As CheckRequest
     Public Property SearchData As LeadInfoDocumentSearch
 
+    ''' <summary>
+    ''' Return Pre Sign Records by Owner, will return all records if given owner name *
+    ''' </summary>
+    ''' <param name="name">Owner Name</param>
+    ''' <returns></returns>
+    Public Shared Function GetRecords(name As String) As PreSignRecord()
+        Using ctx As New PortalEntities
+            Dim records = ctx.PreSignRecords.Where(Function(p) p.Owner = name OrElse name = "*").ToArray
+            Return records
+        End Using
+    End Function
+
+    ''' <summary>
+    ''' Return Pre Sign process instance by record id
+    ''' </summary>
+    ''' <param name="recordId">The record id</param>
+    ''' <returns></returns>
     Public Shared Function GetInstance(recordId As Integer) As PreSignRecord
         Using ctx As New PortalEntities
 
@@ -28,6 +48,7 @@
                 Me.CheckRequestId = Me.CheckRequestData.RequestId
             End If
 
+            Me.Owner = createBy
             Me.CreateBy = createBy
             Me.CreateDate = DateTime.Now
 
