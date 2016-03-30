@@ -1,6 +1,8 @@
-﻿''' <summary>
+﻿Imports System.ComponentModel.DataAnnotations
+''' <summary>
 ''' The model class for Pre Sign Process
 ''' </summary>
+<MetadataType(GetType(PreSignRecordmMetaData))>
 Partial Public Class PreSignRecord
 
     Public Property CheckRequestData As CheckRequest
@@ -85,4 +87,9 @@ Partial Public Class PreSignRecord
         End Using
     End Sub
 
+End Class
+
+Public Class PreSignRecordmMetaData
+    <Newtonsoft.Json.JsonConverter(GetType(Core.JsArrayToStringConverter))>
+    Public Property Parties As String
 End Class
