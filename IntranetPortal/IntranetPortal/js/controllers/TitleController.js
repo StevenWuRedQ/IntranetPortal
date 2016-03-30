@@ -410,8 +410,9 @@
             name: 'Yvette Guizie'
         }, {
             name: 'Michael Gendin'
+        }, {
+            name: 'Rosanne Alicea'
         }
-
     ]
     $scope.data = $scope.$parent.Form.FormData.docs;
     $scope.ReloadedData = {};
