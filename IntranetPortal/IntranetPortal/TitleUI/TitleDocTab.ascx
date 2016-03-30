@@ -13,7 +13,8 @@
                 </li>
                 <li class="ss_form_item2">
                     <label class="ss_form_input_title">TRANSFEROR</label>
-                    <select class="ss_form_input" ng-model="data.transferor" ng-options="t.name as t.name for t in transferors"></select>
+                    <input class="ss_form_input" ng-model="data.transferor" />
+                    <%--<select class="ss_form_input" ng-model="data.transferor" ng-options="t.name as t.name for t in transferors"></select>--%>
                 </li>
                 <li class="ss_form_item2">
                     <label class="ss_form_input_title ">TRANSFEREE</label>

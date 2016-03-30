@@ -55,4 +55,13 @@
         End Using
     End Sub
 
+    Public Sub Delete()
+        Using ctx As New PortalEntities
+            If ctx.PreSignRecords.Any(Function(r) r.Id = Id) Then
+                ctx.Entry(Me).State = Entity.EntityState.Deleted
+                ctx.SaveChanges()
+            End If
+        End Using
+    End Sub
+
 End Class

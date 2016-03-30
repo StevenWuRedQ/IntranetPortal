@@ -18,6 +18,8 @@
 
             Me.RequestBy = saveBy
             Me.RequestDate = DateTime.Now
+            Me.CheckAmount = Checks.Sum(Function(c) c.Amount)
+
             ctx.CheckRequests.Add(Me)
             ctx.SaveChanges()
 
@@ -43,5 +45,20 @@
             ctx.SaveChanges()
         End Using
     End Sub
+
+    Public Sub Delete()
+        Using ctx As New PortalEntities
+            If ctx.CheckRequests.Any(Function(r) r.RequestId = RequestId) Then
+                ctx.Entry(Me).State = Entity.EntityState.Deleted
+
+                Dim checks = ctx.BusinessChecks.Where(Function(b) b.RequestId = RequestId)
+                ctx.BusinessChecks.RemoveRange(checks)
+
+                ctx.SaveChanges()
+            End If
+        End Using
+
+    End Sub
+
 
 End Class
