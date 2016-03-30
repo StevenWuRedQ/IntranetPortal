@@ -1772,6 +1772,13 @@
       <DependentUpon>ShareLeads.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="PopupControl\ShortSalePreSignForm.aspx.designer.vb">
+      <DependentUpon>ShortSalePreSignForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\ShortSalePreSignForm.aspx.vb">
+      <DependentUpon>ShortSalePreSignForm.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="PopupControl\testPopup.aspx.designer.vb">
       <DependentUpon>testPopup.aspx</DependentUpon>
     </Compile>
@@ -6735,6 +6742,7 @@
     <Content Include="PopupControl\SendMailWithAttach.ascx" />
     <Content Include="PopupControl\SendMail.ascx" />
     <Content Include="PopupControl\ShareLeads.aspx" />
+    <Content Include="PopupControl\ShortSalePreSignForm.aspx" />
     <Content Include="PopupControl\testPopup.aspx" />
     <Content Include="PopupControl\VendorsPopup.ascx" />
     <Content Include="PopupControl\VendorsPopUpContent.aspx" />
