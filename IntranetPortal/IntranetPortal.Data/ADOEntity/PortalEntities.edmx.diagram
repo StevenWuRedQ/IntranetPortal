@@ -58,6 +58,11 @@
         <EntityTypeShape EntityType="IntranetPortalModel.UserFollowUp" Width="1.5" PointX="11" PointY="0.875" />
         <EntityTypeShape EntityType="IntranetPortalModel.SSFirstMortgage" Width="1.875" PointX="12.25" PointY="5.125" />
       </Diagram>
+      <Diagram DiagramId="f9bddb7fe78d4afc8b255ba98fd68502" Name="Process" >
+        <EntityTypeShape EntityType="IntranetPortalModel.BusinessCheck" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.CheckRequest" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PreSignRecord" Width="1.5" PointX="4.75" PointY="0.75" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

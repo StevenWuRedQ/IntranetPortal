@@ -1,5 +1,5 @@
 //test watch1
-var portalApp = angular.module('PortalApp', ['ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase']);
+var portalApp = angular.module('PortalApp', ['ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute']);
 angular.module('PortalApp').
 controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
     $rootScope.AlertModal = null;
@@ -3322,7 +3322,7 @@ angular.module('PortalApp')
     if (PreLoadReportId>0)
     {
         $scope.LoadByID = true;
-        $scope.load({ReportId: PreLoadReportId })
+        $scope.load({ReportId: PreLoadReportId,UseSql:true})
     }
 });
 var i = 1;
@@ -4158,8 +4158,9 @@ angular.module("PortalApp")
             name: 'Yvette Guizie'
         }, {
             name: 'Michael Gendin'
+        }, {
+            name: 'Rosanne Alicea'
         }
-
     ]
     $scope.data = $scope.$parent.Form.FormData.docs;
     $scope.ReloadedData = {};

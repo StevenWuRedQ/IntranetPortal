@@ -185,6 +185,8 @@
     <Compile Include="LegalUnitTest.vb" />
     <Compile Include="AuctionPropertyTest.vb" />
     <Compile Include="TitleUnitTest.vb" />
+    <Compile Include="PreSignUnitTest.vb" />
+    <Compile Include="BusinessCheckUnitTest.vb" />
     <Compile Include="UtilityUnitTest.vb" />
     <Compile Include="TeamUnitTest.vb" />
     <Compile Include="TwilioUnitTest.vb" />

@@ -772,6 +772,7 @@
     </Compile>
     <Compile Include="Controllers\AuctionController.vb" />
     <Compile Include="Controllers\BuildingCodes1Controller.vb" />
+    <Compile Include="Controllers\BusinessCheckController.vb" />
     <Compile Include="Controllers\BusinessFormController.vb" />
     <Compile Include="Controllers\CasePartiesController.vb" />
     <Compile Include="Controllers\DataStatusController.vb" />
@@ -792,6 +793,7 @@
     <Compile Include="Controllers\LegalECourtsController.vb" />
     <Compile Include="Controllers\ManagementController.vb" />
     <Compile Include="Controllers\PortalReportController.vb" />
+    <Compile Include="Controllers\PreSignController.vb" />
     <Compile Include="Controllers\ReportController.vb" />
     <Compile Include="Controllers\ShortSaleController.vb" />
     <Compile Include="Controllers\ShortSaleLeadsInfoesController.vb" />

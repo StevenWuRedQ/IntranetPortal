@@ -105,13 +105,8 @@ Namespace Controllers
 
 
             Else
-
-
-                    PutLeadInfoDocumentSearch(leadInfoDocumentSearch.BBLE, leadInfoDocumentSearch)
-
+                PutLeadInfoDocumentSearch(leadInfoDocumentSearch.BBLE, leadInfoDocumentSearch)
             End If
-
-
 
             Try
                 db.SaveChanges()

@@ -68,5 +68,8 @@ Partial Public Class PortalEntities
     Public Overridable Property LegalCaseReports() As DbSet(Of LegalCaseReport)
     Public Overridable Property LegalManagerReports() As DbSet(Of LegalManagerReport)
     Public Overridable Property SSFirstMortgages() As DbSet(Of SSFirstMortgage)
+    Public Overridable Property BusinessChecks() As DbSet(Of BusinessCheck)
+    Public Overridable Property CheckRequests() As DbSet(Of CheckRequest)
+    Public Overridable Property PreSignRecords() As DbSet(Of PreSignRecord)
 
 End Class

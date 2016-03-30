@@ -104,6 +104,12 @@
     <Compile Include="ADOEntity\AuctionPropertyView.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\BusinessCheck.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\CheckRequest.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\DataStatu.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
@@ -114,6 +120,9 @@
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\LegalManagerReport.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\PreSignRecord.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\SSFirstMortgage.vb">
@@ -319,6 +328,9 @@
     <Compile Include="ShortSale\TitleClearence.vb" />
     <Compile Include="ShortSale\TitleJudgementSearch.vb" />
     <Compile Include="ShortSale\Utility.vb" />
+    <Compile Include="SignProcess\BusinessCheck.vb" />
+    <Compile Include="SignProcess\CheckRequest.vb" />
+    <Compile Include="SignProcess\PreSignRecord.vb" />
     <Compile Include="Title\TitleCase.vb" />
     <Compile Include="Twilio\TwilioClient.vb" />
   </ItemGroup>
