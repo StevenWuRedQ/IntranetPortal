@@ -134,9 +134,10 @@
                 <span class="time_buttons" onclick='ShowAcrisMap("<%= LeadsInfoData.BBLE %>",<%=LeadsInfoData.Borough%>,<%=LeadsInfoData.Block %>,<%=LeadsInfoData.Lot %>)'>Acris</span>
                 <span class="time_buttons" onclick='ShowPropertyMap("<%= LeadsInfoData.BBLE %>")'>Maps</span>
                 <%--<span class="time_buttons" onclick='preAssignPopopClient.Show()'>Pre sign</span>--%>
-                <span class="time_buttons" onclick='ShowPopupMap("/PopupControl/PreAssignCropForm.aspx?popup=true&BBLE=" + leadsInfoBBLE, "Pre Sign")'>Pre sign</span>
+                
                 <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
-                <span class="time_buttons" onclick='preAssignPopopClient.Show()'>Pre sign</span>
+                <span class="time_buttons" onclick='ShowPopupMap("/PopupControl/PreAssignCropForm.aspx?popup=true&BBLE=" + leadsInfoBBLE, "Pre Sign")'>Pre sign</span>
+                
                 <% End If %>
 
             </div>

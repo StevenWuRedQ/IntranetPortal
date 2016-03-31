@@ -92,13 +92,13 @@
         }
     </style>
 
-   
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <input type="hidden" id="preSignId" value='<%= Request.QueryString("preSignId")%>' />
     <input type="hidden" id="BBLE" value='<%= Request.QueryString("BBLE")%>' />
     <div ng-controller="perAssignCtrl" class="container">
-        <div style="max-width:700px">
+        <div style="max-width: 700px">
             <div id="wizard" <%=IIf(String.IsNullOrEmpty(Request.QueryString("popup")), "style='padding:20px';max-width:600px", "") %>>
                 <%--<div class="wizardbar">
                 <a class="wizardbar-item {{step==$index+1?'current':'' }}" href="#" ng-repeat="s in steps|filter:{show:true}">{{s.title}} {{$index +1}}
@@ -123,7 +123,7 @@
                             </li>--%>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title">Expected Date of Signing</label>
-                                    <input class="ss_form_input" model="preAssign.ExpectedDate" ss-date required />
+                                    <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date required />
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">Need do search</label>
@@ -135,7 +135,7 @@
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">Manager </label>
-                                    <input class="ss_form_input" value="<%=Page.User.Identity.Name %>" disabled/>
+                                    <input class="ss_form_input" value="<%=Page.User.Identity.Name %>" disabled />
                                 </li>
                                 <%-- <li class="ss_form_item ">
                                 <label class="ss_form_input_title "># of checks</label>
@@ -314,7 +314,7 @@
                     allowedPageSizes: [5, 10, 20],
                     showInfo: true
                 },
-                columns: ["Name"],
+                columns: [{ dataField: "Name", validationRules: [{ type: "required" }] }],
                 summary: {
                     totalItems: [{
                         column: "Name",
@@ -348,7 +348,10 @@
                     showInfo: true
                 },
 
-                columns: ["PaybleTo", { dataField: 'Amount', dataType: 'number' }, , "CheckFor", "Description"],
+                columns: [{ dataField: "PaybleTo", validationRules: [{ type: "required" }] },
+                    { dataField: 'Amount', dataType: 'number', validationRules: [{ type: "required" }] },
+                    { dataField: 'Date', dataType: 'date', validationRules: [{ type: "required" }] },
+                    "CheckFor", "Description"],
                 summary: {
                     totalItems: [{
                         column: "Name",
