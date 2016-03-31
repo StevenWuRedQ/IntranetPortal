@@ -92,116 +92,125 @@
         }
     </style>
 
+   
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <input type="hidden" id="preSignId" value='<%= Request.QueryString("preSignId")%>' />
     <input type="hidden" id="BBLE" value='<%= Request.QueryString("BBLE")%>' />
-    <div ng-controller="perAssignCtrl">
-        <div id="wizard" <%=IIf(String.IsNullOrEmpty(Request.QueryString("popup")), "style='padding:20px'", "") %>>
-            <%--<div class="wizardbar">
+    <div ng-controller="perAssignCtrl" class="container">
+        <div style="max-width:700px">
+            <div id="wizard" <%=IIf(String.IsNullOrEmpty(Request.QueryString("popup")), "style='padding:20px';max-width:600px", "") %>>
+                <%--<div class="wizardbar">
                 <a class="wizardbar-item {{step==$index+1?'current':'' }}" href="#" ng-repeat="s in steps|filter:{show:true}">{{s.title}} {{$index +1}}
                 </a>
             </div>--%>
-            <div ng-show="step==1" class="wizard-content">
-                <section>
-                    <div>
-                        <h4 class="ss_form_title ">Pre Sign</h4>
-                        <ul class="ss_form_box clearfix">
-                            <li class="ss_form_item online">
-                                <label class="ss_form_input_title">Property Address</label>
-                                <input class="ss_form_input" <%--ng-model="perAssignCtrl.Property_Address"--%> ng-model="preAssign.Title" disabled>
-                            </li>
-                            <%-- <li class="ss_form_item ">
+                <div ng-show="step==1" class="wizard-content">
+                    <section>
+                        <div>
+                            <h4 class="ss_form_title ">Pre Sign</h4>
+                            <ul class="ss_form_box clearfix">
+                                <li class="ss_form_item online">
+                                    <label class="ss_form_input_title">Property Address</label>
+                                    <input class="ss_form_input" <%--ng-model="perAssignCtrl.Property_Address"--%> ng-model="preAssign.Title" disabled>
+                                </li>
+                                <%-- <li class="ss_form_item ">
                                 <label class="ss_form_input_title "># of Parties</label>
                                 <input class="ss_form_input " ng-model="perAssignCtrl.Numberof_Parties">
                             </li>--%>
-                            <%-- <li class="ss_form_item ">
+                                <%-- <li class="ss_form_item ">
                                 <label class="ss_form_input_title ">Name Of parties</label>
                                 <input class="ss_form_input " ng-model="perAssignCtrl.Name_Of_parties">
                             </li>--%>
-                            <li class="ss_form_item">
-                                <label class="ss_form_input_title">Need do search</label>
-                                <pt-radio name="PreAssign_Needdosearch0" model="preAssign.NeedSearch"></pt-radio>
-                            </li>
-                            <li class="ss_form_item">
-                                <label class="ss_form_input_title">Check request</label>
-                                <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck"></pt-radio>
-                            </li>
-                            <li class="ss_form_item ">
-                                <label class="ss_form_input_title">Expected Date of Signing</label>
-                                <input class="ss_form_input" model="preAssign.ExpectedDate" ss-date />
-                            </li>
-                            <%-- <li class="ss_form_item ">
+                                <li class="ss_form_item ">
+                                    <label class="ss_form_input_title">Expected Date of Signing</label>
+                                    <input class="ss_form_input" model="preAssign.ExpectedDate" ss-date required />
+                                </li>
+                                <li class="ss_form_item">
+                                    <label class="ss_form_input_title">Need do search</label>
+                                    <pt-radio name="PreAssign_Needdosearch0" model="preAssign.NeedSearch"></pt-radio>
+                                </li>
+                                <li class="ss_form_item">
+                                    <label class="ss_form_input_title">Check request</label>
+                                    <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck"></pt-radio>
+                                </li>
+                                <li class="ss_form_item">
+                                    <label class="ss_form_input_title">Manager </label>
+                                    <input class="ss_form_input" value="<%=Page.User.Identity.Name %>" disabled/>
+                                </li>
+                                <%-- <li class="ss_form_item ">
                                 <label class="ss_form_input_title "># of checks</label>
                                 <input class="ss_form_input " ng-model="perAssignCtrl.Number_of_checks">
                             </li>--%>
-                            <%--<li class="ss_form_item ">
+                                <%--<li class="ss_form_item ">
                                 <label class="ss_form_input_title ">Total Check Amount</label>
                                 <input class="ss_form_input " money-mask ng-model="perAssignCtrl.Total_Check_Amount">
                             </li>--%>
-                            <div ng-show="preAssign.NeedCheck">
-                                <%--<li class="ss_form_item ">
+                                <div ng-show="preAssign.NeedCheck">
+                                    <%--<li class="ss_form_item ">
                                 <label class="ss_form_input_title ">Check Issued by</label>
                                 <input class="ss_form_input" ng-model="preAssign.CheckIssuedBy" ng-show="CheckTotalAmount()<=100000" />
                                 <input class="ss_form_input" ng-show="CheckTotalAmount()>10000" value="MyIdealProperty" disabled />
                                
                             </li>--%>
-                                <li class="ss_form_item">
-                                    <label class="ss_form_input_title">Total Amount paid for the deal</label>
-                                    <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask />
-                                </li>
-                                <li class="ss_form_item">
-                                    <label class="ss_form_input_title">Type of Check request</label>
-                                    <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type">
-                                        <option>Short Sale</option>
-                                        <option>Straight Sale</option>
-                                        <option>Other</option>
-                                    </select>
-                                </li>
-                            </div>
-                            <%--  <li class="ss_form_item ">
+                                    <li class="ss_form_item">
+                                        <label class="ss_form_input_title">Total Amount paid for the deal</label>
+                                        <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask />
+                                    </li>
+                                    <li class="ss_form_item">
+                                        <label class="ss_form_input_title">Type of Check request</label>
+                                        <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type">
+                                            <option></option>
+                                            <option>Short Sale</option>
+                                            <option>Straight Sale</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </li>
+                                </div>
+                                <%--  <li class="ss_form_item ">
                                 <label class="ss_form_input_title ">Name On Check</label>
                                 <input class="ss_form_input " ng-model="perAssignCtrl.Name_On_Check">
                             </li>--%>
-                        </ul>
-                    </div>
-                    <div class="ss_form" ng-show="preAssign.NeedCheck">
-                        <h4 class="ss_form_title ">Parties <%--({{preAssign.Parties.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.Parties')">--%></i></h4>
-                        <ul class="ss_form_box clearfix">
-                            <%--<li class="ss_form_item" ng-repeat="p in preAssign.Parties">
+                            </ul>
+                        </div>
+                        <div class="ss_form" ng-show="preAssign.NeedCheck">
+                            <h4 class="ss_form_title ">Parties <%--({{preAssign.Parties.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.Parties')">--%></i></h4>
+                            <ul class="ss_form_box clearfix">
+                                <%--<li class="ss_form_item" ng-repeat="p in preAssign.Parties">
                                 <label class="ss_form_input_title ">Party {{$index+1}} <i class="fa fa-times icon_btn" ng-click="arrayRemove(preAssign.Parties, $index)"></i></label>
                                 <input class="ss_form_input " type="text" ng-model="p.Name" />
                             </li>--%>
-                            <li style="list-style: none">
-                                <div id="gridParties" dx-data-grid="partiesGridOptions"></div>
-                            </li>
-                        </ul>
-                    </div>
+                                <li style="list-style: none">
+                                    <div id="gridParties" dx-data-grid="partiesGridOptions"></div>
+                                </li>
+                            </ul>
+                        </div>
 
-                    <div class="ss_form" ng-show="preAssign.NeedCheck">
-                        <h4 class="ss_form_title ">Checks <%--({{preAssign.CheckRequestData.Checks.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.CheckRequestData.Checks')"></i>--%></h4>
-                        <ul class="ss_form_box clearfix">
-                            <%-- <li class="ss_form_item" ng-repeat="p in preAssign.CheckRequestData.Checks">
+                        <div class="ss_form" ng-show="preAssign.NeedCheck">
+                            <h4 class="ss_form_title ">Checks <%--({{preAssign.CheckRequestData.Checks.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.CheckRequestData.Checks')"></i>--%></h4>
+                            <ul class="ss_form_box clearfix">
+                                <%-- <li class="ss_form_item" ng-repeat="p in preAssign.CheckRequestData.Checks">
                                 <label class="ss_form_input_title ">Check {{$index+1}} <i class="fa fa-times icon_btn" ng-click="arrayRemove(preAssign.CheckRequestData.Checks, $index)"></i></label>
                                 <input class="ss_form_input " type="text" ng-model="p.Name" />
                             </li>--%>
-                            <li style="list-style: none">
-                                <div id="gridChecks" dx-data-grid="checkGridOptions"></div>
-                            </li>
-                        </ul>
-                    </div>
+                                <li style="list-style: none">
+                                    <div id="gridChecks" dx-data-grid="checkGridOptions"></div>
+                                </li>
+                            </ul>
+                        </div>
 
-                </section>
-            </div>
-           <%-- <div ng-show="step==2" class="wizard-content">
+                    </section>
+                </div>
+                <%-- <div ng-show="step==2" class="wizard-content">
             </div>--%>
 
-            <div class="modal-footer">
-                <%--<button type="button" class="btn btn-default" ng-show="step>1" ng-click="PrevStep()">< Prev</button>--%>
-                <button type="button" class="btn btn-default" ng-click="RequestPreSign()" <%--ng-show="step==MaxStep"--%>>{{preAssign.Id ?'Update':'Request'}} Sign</button>
-                <%--<button type="button" class="btn btn-default" ng-show="step<MaxStep" ng-click="NextStep()">Next ></button>--%>
+                <div class="modal-footer">
+                    <%--<button type="button" class="btn btn-default" ng-show="step>1" ng-click="PrevStep()">< Prev</button>--%>
+                    <button type="button" class="btn btn-default" ng-click="RequestPreSign()" <%--ng-show="step==MaxStep"--%>>{{preAssign.Id ?'Update':'Request'}} Sign</button>
+                    <%--<button type="button" class="btn btn-default" ng-show="step<MaxStep" ng-click="NextStep()">Next ></button>--%>
+                </div>
             </div>
         </div>
+
 
 
     </div>
@@ -212,7 +221,7 @@
         portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, $http) {
 
 
-            $scope.preAssign = { Parties: [], CheckRequestData:{Checks: []} };
+            $scope.preAssign = { Parties: [], CheckRequestData: { Checks: [] } };
             var _BBLE = $("#BBLE").val();
             $scope.preAssign.BBLE = _BBLE
             $scope.preAssign.CheckRequestData.BBLE = $scope.preAssign.BBLE;
@@ -233,20 +242,18 @@
             $scope.PrevStep = function () {
                 $scope.step--;
             }
-            
-            $scope.initByBBLE = function(BBLE)
-            {
+
+            $scope.initByBBLE = function (BBLE) {
                 $http.get('/api/Leads/LeadsInfo/' + BBLE).success(function (data) {
                     $scope.preAssign.Title = data.PropertyAddress
                 });
             }
-            
-            if (_BBLE)
-            {
+
+            if (_BBLE) {
                 $scope.initByBBLE(_BBLE);
             }
             $scope.init = function (preSignId) {
-               
+
                 $http.get('/api/PreSign/' + preSignId).success(function (data) {
                     $scope.preAssign = data;
                     $scope.preAssign.Parties = $scope.preAssign.Parties || [];
@@ -254,6 +261,7 @@
 
             }
             $scope.Save = function () {
+                var selfData = $scope.preAssign
                 if ($scope.preAssign.Id) {
 
                     $http.put('/api/PreSign/' + $scope.preAssign.Id, JSON.stringify($scope.preAssign)).success(function () {
@@ -261,8 +269,12 @@
 
                     });
                 } else {
-                    if (!$scope.preAssign.NeedCheck)
-                    {
+
+                    if (!selfData.ExpectedDate) {
+                        AngularRoot.alert("Please fill expected date !");
+                        return;
+                    }
+                    if (!$scope.preAssign.NeedCheck) {
                         $scope.preAssign.Parties = null;
                         $scope.preAssign.CheckRequestData = null
                     }
@@ -335,7 +347,7 @@
                     allowedPageSizes: [5, 10, 20],
                     showInfo: true
                 },
-                
+
                 columns: ["PaybleTo", { dataField: 'Amount', dataType: 'number' }, , "CheckFor", "Description"],
                 summary: {
                     totalItems: [{
@@ -362,4 +374,5 @@
             }
         });
     </script>
+    <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>
 </asp:Content>
