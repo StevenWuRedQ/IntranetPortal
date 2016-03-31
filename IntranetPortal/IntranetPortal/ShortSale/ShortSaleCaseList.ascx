@@ -2,7 +2,6 @@
 <%@ Register Src="~/ShortSale/ShortSaleSubMenu.ascx" TagPrefix="uc1" TagName="ShortSaleSubMenu" %>
 <%@ Register Src="~/UserControl/CreateNew.ascx" TagPrefix="uc1" TagName="CreateNew" %>
 
-
 <script type="text/javascript">
     var postponedCallbackRequired = false;
     
