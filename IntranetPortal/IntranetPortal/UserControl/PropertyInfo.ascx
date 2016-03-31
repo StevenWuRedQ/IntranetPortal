@@ -135,7 +135,9 @@
                 <span class="time_buttons" onclick='ShowDOBWindow("<%= LeadsInfoData.Borough%>","<%= LeadsInfoData.Block%>", "<%= LeadsInfoData.Lot%>")'>DOB</span>
                 <span class="time_buttons" onclick='ShowAcrisMap("<%= LeadsInfoData.BBLE %>",<%=LeadsInfoData.Borough%>,<%=LeadsInfoData.Block %>,<%=LeadsInfoData.Lot %>)'>Acris</span>
                 <span class="time_buttons" onclick='ShowPropertyMap("<%= LeadsInfoData.BBLE %>")'>Maps</span>
+                <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
                 <span class="time_buttons" onclick='preAssignPopopClient.Show()'>Pre sign</span>
+                <% End If %>
 
             </div>
             <%--data format June 2, 2014 6:37 PM--%>
