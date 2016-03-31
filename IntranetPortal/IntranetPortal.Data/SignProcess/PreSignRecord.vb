@@ -1,4 +1,7 @@
 ﻿Imports System.ComponentModel.DataAnnotations
+Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
+
 ''' <summary>
 ''' The model class for Pre Sign Process
 ''' </summary>
@@ -29,6 +32,10 @@ Partial Public Class PreSignRecord
         Using ctx As New PortalEntities
 
             Dim record = ctx.PreSignRecords.Find(recordId)
+
+            If record Is Nothing Then
+                Return Nothing
+            End If
 
             If record.NeedSearch Then
                 record.SearchData = LeadInfoDocumentSearch.GetInstance(record.BBLE)
@@ -73,8 +80,8 @@ Partial Public Class PreSignRecord
                 Me.CreateDate = DateTime.Now
 
             End If
-            ctx.SaveChanges()
 
+            ctx.SaveChanges()
         End Using
     End Sub
 
@@ -87,6 +94,20 @@ Partial Public Class PreSignRecord
         End Using
     End Sub
 
+    Private _partiesArray As JArray
+
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property PartiesArray As JArray
+        Get
+            If _partiesArray Is Nothing Then
+                If Not String.IsNullOrEmpty(Parties) Then
+                    _partiesArray = JArray.Parse(Parties)
+                End If
+            End If
+
+            Return _partiesArray
+        End Get
+    End Property
 End Class
 
 Public Class PreSignRecordmMetaData

@@ -120,7 +120,6 @@
         <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
             <div style="font-size: 30px">
                 <span>
-
                     <%  If (LeadsInfoData.LastUpdate.HasValue) Then%>
                     <i class="fa fa-refresh"></i>
                     <span style="margin-left: 19px;"><%= LeadsInfoData.LastUpdate.ToString%></span>
@@ -129,8 +128,7 @@
                     <i class="fa fa-home"></i>
                     <span style="margin-left: 19px;"><%= LeadsInfoData.PropertyAddress %></span>
                     <% End If%>
-                </span>
-                
+                </span>                
                 <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
                 <span class="time_buttons" onclick='ShowDOBWindow("<%= LeadsInfoData.Borough%>","<%= LeadsInfoData.Block%>", "<%= LeadsInfoData.Lot%>")'>DOB</span>
                 <span class="time_buttons" onclick='ShowAcrisMap("<%= LeadsInfoData.BBLE %>",<%=LeadsInfoData.Borough%>,<%=LeadsInfoData.Block %>,<%=LeadsInfoData.Lot %>)'>Acris</span>
