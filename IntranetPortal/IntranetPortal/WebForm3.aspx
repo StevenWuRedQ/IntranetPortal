@@ -3,6 +3,8 @@
 <%@ Register Src="~/EmailTemplate/ComplaintsNotify.ascx" TagPrefix="uc1" TagName="ComplaintsNotify" %>
 <%@ Register Src="~/EmailTemplate/DeadleadsReport.ascx" TagPrefix="uc1" TagName="DeadleadsReport" %>
 <%@ Register Src="~/EmailTemplate/AuctionDailyReport.ascx" TagPrefix="uc1" TagName="AuctionDailyReport" %>
+<%@ Register Src="~/EmailTemplate/PreSignNotify.ascx" TagPrefix="uc1" TagName="PreSignNotify" %>
+
 
 <!DOCTYPE html>
 
@@ -16,11 +18,15 @@
             <uc1:ComplaintsNotify runat="server" ID="ComplaintsNotify" Visible="false" />
             <uc1:DeadleadsReport runat="server" ID="DeadleadsReport"  Visible="false"/>
             <uc1:AuctionDailyReport runat="server" ID="AuctionDailyReport" Visible="false" />
+            <uc1:PreSignNotify runat="server" ID="psNotify" />
+           
+           
             <br />
             <asp:Button ID="Button1" runat="server" Text="Send Email" OnClick="Button1_Click" />
             <asp:Button ID="Button2" runat="server" Text="Send Complaints Detail" OnClick="Button2_Click" />
             <asp:Button ID="Button3" runat="server" Text="Send Deadleads Report" OnClick="Button3_Click" />
             <asp:Button ID="Button4" runat="server" Text="Send Auction Daily Report" OnClick="Button4_Click" />
+            <asp:Button ID="Button5" runat="server" Text="Send Check Request" OnClick="Button5_Click" />
         </div>
     </form>
 </body>

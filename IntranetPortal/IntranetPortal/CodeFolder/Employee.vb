@@ -629,7 +629,7 @@ Partial Public Class Employee
     End Function
 
     ''' <summary>
-    ''' Get emloyees email and jioned with ";" can easily use to send email.
+    ''' Get emloyees email and joined with ";" can easily use to send email.
     ''' </summary>
     ''' <param name="emps">List of emloyee</param>
     ''' <returns>emails String joined with ";" </returns>
@@ -640,6 +640,23 @@ Partial Public Class Employee
         End If
         Return Nothing
     End Function
+
+    ''' <summary>
+    ''' Get emloyees email and joined with ";" can easily use to send email.
+    ''' </summary>
+    ''' <param name="emps">List of emloyee</param>
+    ''' <returns>emails String joined with ";" </returns>
+    Public Shared Function GetEmpsEmails(emps As String()) As String
+        If (emps IsNot Nothing AndAlso emps.Count > 0) Then
+            Using ctx As New Entities
+                Dim emails = ctx.Employees.Where(Function(em) emps.Contains(em.Name)).Select(Function(em) em.Email).ToArray
+                Return String.Join(";", emails)
+            End Using
+
+        End If
+        Return Nothing
+    End Function
+
     Public Shared Function GetEmpTeams(empName As String) As String()
         Using ctx As New Entities
             Dim team = (From t In ctx.Teams

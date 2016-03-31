@@ -1121,6 +1121,13 @@
       <DependentUpon>DeadleadsReport.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="EmailTemplate\PreSignNotify.ascx.designer.vb">
+      <DependentUpon>PreSignNotify.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\PreSignNotify.ascx.vb">
+      <DependentUpon>PreSignNotify.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="EmailTemplate\ShortSaleUserFollowUp.ascx.designer.vb">
       <DependentUpon>ShortSaleUserFollowUp.ascx</DependentUpon>
     </Compile>
@@ -6251,6 +6258,7 @@
     <Content Include="EmailTemplate\ComplaintsNotify.ascx" />
     <Content Include="EmailTemplate\AuctionDailyReport.ascx" />
     <Content Include="EmailTemplate\DeadleadsReport.ascx" />
+    <Content Include="EmailTemplate\PreSignNotify.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserFollowUp.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserReport.ascx" />
     <Content Include="EmailTemplate\ActivitySummary.ascx" />

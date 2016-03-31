@@ -16,6 +16,11 @@ Public Class WebForm3
         Dim params As New Dictionary(Of String, String)
         params.Add("IsWeekly", False)
         Me.AuctionDailyReport.BindData(params)
+
+        params = New Dictionary(Of String, String)
+        params.Add("RecordId", 6)
+        params.Add("UserName", "Chris Yan")
+        Me.psNotify.BindData(params)
     End Sub
 
     Protected Sub Button1_Click(sender As Object, e As EventArgs)
@@ -58,4 +63,11 @@ Public Class WebForm3
         svr.SendEmailByControl("chrisy@myidealprop.com", "The coming Auction Properties - " & DateTime.Today.ToShortDateString, "AuctionDailyReport", Nothing)
     End Sub
 
+    Protected Sub Button5_Click(sender As Object, e As EventArgs)
+        Dim svr As New CommonService
+        Dim params = New Dictionary(Of String, String)
+        params.Add("RecordId", 7)
+        params.Add("UserName", "Chris Yan")
+        svr.SendEmailByControl("chrisy@myidealprop.com", "New Check Request", "PreSignNotify", params)
+    End Sub
 End Class

@@ -68,6 +68,22 @@ Namespace Controllers
                     docController.PostLeadInfoDocumentSearch(New LeadInfoDocumentSearch With {.BBLE = record.BBLE})
                 End If
 
+                If record.NeedCheck Then
+                    Dim svr As New CommonService
+                    Dim params = New Dictionary(Of String, String)
+
+                    Dim finMgr = Roles.GetUsersInRole("Accounting-Manager")
+                    If finMgr.Count > 0 Then
+                        params.Add("RecordId", record.Id)
+                        params.Add("UserName", finMgr(0))
+
+                        Dim emails = Employee.GetEmpsEmails(finMgr.ToArray)
+                        If Not String.IsNullOrEmpty(emails) Then
+                            svr.SendEmailByControlWithCC(emails, Employee.GetInstance(record.CreateBy).Email, "Checks Request from " & record.CreateBy, "PreSignNotify", params)
+                        End If
+                    End If
+                End If
+
             Catch ex As Exception
                 Throw ex
             End Try
