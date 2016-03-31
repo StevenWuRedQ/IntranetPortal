@@ -8,6 +8,11 @@
 
     Public Sub Save(saveby As String)
         Using ctx As New PortalEntities
+
+            If Me.Date = DateTime.MinValue Then
+                Me.Date = DateTime.Now
+            End If
+
             If ctx.BusinessChecks.Any(Function(cr) cr.CheckId = Me.CheckId) Then
                 Me.UpdateBy = saveby
                 Me.UpdateDate = DateTime.Now
