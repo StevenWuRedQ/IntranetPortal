@@ -92,7 +92,7 @@
         }
     </style>
 
-    <script src=""></script>
+   
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <input type="hidden" id="preSignId" value='<%= Request.QueryString("preSignId")%>' />
