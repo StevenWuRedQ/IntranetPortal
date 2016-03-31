@@ -4,7 +4,7 @@
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 <%@ Register Src="~/PopupControl/PreAssignPopup.ascx" TagPrefix="uc1" TagName="PreAssignPopup" %>
 
-<uc1:PreAssignPopup runat="server" ID="PreAssignPopup" />
+<uc1:PreAssignPopup runat="server" ID="PreAssignPopup"/>
 <%--@ Register Src="~/ShortSale/ShortSaleInLeadsView.ascx" TagPrefix="uc1" TagName="ShortSaleInLeadsView" --%>
 
 <script src="/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js"></script>

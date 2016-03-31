@@ -13,6 +13,7 @@
 
         UpatingPanel.Visible = LeadsInfoData.IsUpdating
         hfBBLE.Value = LeadsInfoData.BBLE
+        PreAssignPopup.BBLE = LeadsInfoData.BBLE
         Me.DataBind()
         Dim lisPens = LeadsInfoData.LisPens
         If lisPens IsNot Nothing Then
