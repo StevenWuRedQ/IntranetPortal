@@ -102,6 +102,31 @@
                 </div>
             </td>
         </tr>
+
+        <% If Employee.IsManager(Page.User.Identity.Name) Then%>
+        <tr>
+            <td>
+                <div class="form_div_node form_div_no_float form_div_node_no_under_line" style="width: 100%">
+                    <span class="form_input_title">SSN</span>
+                    <div class="clearfix">
+                        <%=If(TLOLocateReport.sSNField IsNot Nothing, TLOLocateReport.sSNField.sSNField, "") %>&nbsp;
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="form_div_node form_div_no_float form_div_node_no_under_line" style="width: 100%">
+                    <span class="form_input_title">Date of Birth</span>
+                    <div class="clearfix">
+                        <%=If(TLOLocateReport.dateOfBirthField IsNot Nothing, BuilderDate(TLOLocateReport.dateOfBirthField.dateOfBirthField), "") %>&nbsp;
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        <% End If %>
+
         <% If Not String.IsNullOrEmpty(HomeOwnerInfo.Description) Then%>
         <tr>
             <td>

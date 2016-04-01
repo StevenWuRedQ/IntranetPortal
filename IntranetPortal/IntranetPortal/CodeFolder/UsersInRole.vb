@@ -29,6 +29,7 @@
         Using Context As New Entities
             Try
                 If Context.UsersInRoles.Any(Function(a) a.Username = Username AndAlso a.Rolename = Rolename) Then
+                    Me.ApplicationName = AppName
                     Context.Entry(Me).State = Entity.EntityState.Deleted
                     Context.SaveChanges()
                 Else
