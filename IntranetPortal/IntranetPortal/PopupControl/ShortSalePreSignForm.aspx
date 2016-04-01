@@ -2,6 +2,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
+        .wizard-title {
+            text-align: center;
+        }
+
         .wizard-content {
             min-height: 400px;
         }
@@ -90,6 +94,10 @@
             border-radius: 0 0.25em 0.25em 0;
             padding-right: 1.3em;
         }
+
+        .view-animate {
+            min-height: 500px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
@@ -100,8 +108,8 @@
                 </a>
             </div>
             <div style="max-width: 720px">
-                <div ng-show="step==1" class="view-animate">
-                    <h2>New Offer</h2>
+                <div ng-show="currentStep().title=='New Offer'" class="view-animate">
+                    <h2 class="wizard-title">New Offer</h2>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
@@ -115,11 +123,64 @@
                             </div>
                         </div>
 
-
                     </div>
                 </div>
-                <div ng-show="step==2" class="view-animate">
-                    <h2>Short Sale Information</h2>
+                <div ng-show="currentStep().title=='Search Info'" class="view-animate">
+                    <h2 class="wizard-title">Check Search Information</h2>
+
+                    <div>
+                        <div style="padding:10px">
+                            <table class="table table-striped">
+                                <tr>
+                                    <td>Property tax search - {{DocSearch.LeadResearch.propertyTaxes?'':'No'}} {{DocSearch.LeadResearch.propertyTaxes | currency}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Water charges - {{DocSearch.LeadResearch.waterCharges?'':'No'}} {{DocSearch.LeadResearch.waterCharges | currency}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>ECB Violation - {{DocSearch.LeadResearch.ecbViolation?'':'No'}} {{DocSearch.LeadResearch.ecbViolation | currency}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>DOB Violation - {{DocSearch.LeadResearch.dobWebsites?'':'No'}} {{DocSearch.LeadResearch.dobWebsites | currency}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Judgment - {{DocSearch.LeadResearch.judgments?'':'No'}} {{DocSearch.LeadResearch.judgments | currency}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>IRS Tax Liens - {{DocSearch.LeadResearch.irsTaxLien?'':'No'}} {{DocSearch.LeadResearch.irsTaxLien | currency}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>NYS Tax Liens - {{DocSearch.LeadResearch.hasNysTaxLien?'Yes':'No'}} 
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>Mortgage - {{DocSearch.LeadResearch.mortgageAmount?'':'No'}} {{DocSearch.LeadResearch.mortgageAmount | currency}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{ DocSearch.LeadResearch.fannie?"Has FANNIE":'Not Fannie' }} {{ DocSearch.LeadResearch.fha?" Has FHA":' Not FHA' }} 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Servicer - {{DocSearch.LeadResearch.servicer}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div ng-show="currentStep().title=='Pre Sign'" class="view-animate">
+                    <h2 class="wizard-title">Short Sale Information</h2>
 
                     <div>
                         <h4 class="ss_form_title ">Borrowers</h4>
@@ -131,13 +192,16 @@
                     </div>
 
                 </div>
-                <div ng-show="step==3" class="view-animate">
-                    <h2>Setp 3</h2>
+                <div ng-show="currentStep().title=='Step 1'" class="view-animate">
+                    <h2 class="wizard-title">Setp 1</h2>
 
                 </div>
-                <div ng-show="step==4" class="view-animate">
-                    <h2>Setp 3</h2>
+                <div ng-show="currentStep().title=='Step 2'" class="view-animate">
+                    <h2 class="wizard-title">Setp 2</h2>
 
+                </div>
+                <div ng-show="currentStep().title=='Finish'" class="view-animate">
+                    <h2 class="wizard-title">Finish</h2>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" ng-show="step>1" ng-click="PrevStep()">< Prev</button>
@@ -155,16 +219,21 @@
         portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom) {
             $scope.SSpreSign = {};
             $scope.steps = [
-              { title: "New Offer ", show: true },
+              { title: "New Offer", show: true },
+              { title: "Search Info", show: true },
               { title: "Pre Sign", show: true },
-              { title: "Step ", show: true },
-              { title: "Step ", show: true },
+              { title: "Step 1", show: true },
+              { title: "Step 2", show: true },
               { title: "Finish", show: true },
             ]
             $scope.step = 1
             $scope.MaxStep = $scope.steps.length;
+            $scope.currentStep = function () {
+                return $scope.steps[$scope.step - 1];
+            }
             $scope.NextStep = function () {
                 $scope.step++;
+
             }
             $scope.PrevStep = function () {
                 $scope.step--;

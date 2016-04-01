@@ -122,7 +122,7 @@
                                 <input class="ss_form_input " ng-model="perAssignCtrl.Name_Of_parties">
                             </li>--%>
                                 <li class="ss_form_item ">
-                                    <label class="ss_form_input_title">Expected Date of Signing</label>
+                                    <label class="ss_form_input_title " ng-class="{ss_warning:!preAssign.ExpectedDate}">Expected Date of Signing</label>
                                     <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date required />
                                 </li>
                                 <li class="ss_form_item">
@@ -172,8 +172,8 @@
                             </li>--%>
                             </ul>
                         </div>
-                        <div class="ss_form" ng-show="preAssign.NeedCheck">
-                            <h4 class="ss_form_title ">Parties <%--({{preAssign.Parties.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.Parties')">--%></i></h4>
+                        <div class="ss_form">
+                            <h4 class="ss_form_title " ng-class="{ss_warning:preAssign.Parties.length<1 }" >Parties <%--({{preAssign.Parties.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.Parties')">--%></i></h4>
                             <ul class="ss_form_box clearfix">
                                 <%--<li class="ss_form_item" ng-repeat="p in preAssign.Parties">
                                 <label class="ss_form_input_title ">Party {{$index+1}} <i class="fa fa-times icon_btn" ng-click="arrayRemove(preAssign.Parties, $index)"></i></label>
@@ -186,7 +186,7 @@
                         </div>
 
                         <div class="ss_form" ng-show="preAssign.NeedCheck">
-                            <h4 class="ss_form_title ">Checks <%--({{preAssign.CheckRequestData.Checks.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.CheckRequestData.Checks')"></i>--%></h4>
+                            <h4 class="ss_form_title " ng-class="{ss_warning:preAssign.CheckRequestData.Checks.length<1}">Checks <%--({{preAssign.CheckRequestData.Checks.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.CheckRequestData.Checks')"></i>--%></h4>
                             <ul class="ss_form_box clearfix">
                                 <%-- <li class="ss_form_item" ng-repeat="p in preAssign.CheckRequestData.Checks">
                                 <label class="ss_form_input_title ">Check {{$index+1}} <i class="fa fa-times icon_btn" ng-click="arrayRemove(preAssign.CheckRequestData.Checks, $index)"></i></label>
@@ -197,7 +197,6 @@
                                 </li>
                             </ul>
                         </div>
-
                     </section>
                 </div>
                 <%-- <div ng-show="step==2" class="wizard-content">
@@ -265,7 +264,7 @@
                 if ($scope.preAssign.Id) {
 
                     $http.put('/api/PreSign/' + $scope.preAssign.Id, JSON.stringify($scope.preAssign)).success(function () {
-                        AngularRoot.alert("Requested scuessed !");
+                        AngularRoot.alert("Save scuessed !");
 
                     });
                 } else {
@@ -274,12 +273,24 @@
                         AngularRoot.alert("Please fill expected date !");
                         return;
                     }
+                    if ((!$scope.preAssign.Parties) || $scope.preAssign.Parties.length < 1)
+                    {
+                        AngularRoot.alert("Please fill at least one Party !");
+                        return;
+                    }
+
+                    if ($scope.preAssign.NeedCheck && $scope.preAssign.CheckRequestData.Checks.length<1)
+                    {
+                        AngularRoot.alert("If need request check please fill at least one check !");
+                        return;
+                    }
+
                     if (!$scope.preAssign.NeedCheck) {
                         $scope.preAssign.Parties = null;
                         $scope.preAssign.CheckRequestData = null
                     }
                     $http.post('/api/PreSign', JSON.stringify($scope.preAssign)).success(function (data) {
-                        AngularRoot.alert("Save scuessed !");
+                        AngularRoot.alert("Requested scuessed !");
                         $scope.preAssign = data;
                     });
                 }
