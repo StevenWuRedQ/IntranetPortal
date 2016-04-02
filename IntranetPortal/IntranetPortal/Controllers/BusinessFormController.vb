@@ -11,7 +11,7 @@ Namespace Controllers
         <ResponseType(GetType(FormDataItem))>
         <Route("api/BusinessForm/{formName}/{id}")>
         Function GetBusinessForm(id As Integer, formName As String) As IHttpActionResult
-            Dim obj = FormDataItem.Instance(id)
+            Dim obj = FormDataItem.Instance(id, formName)
             If obj Is Nothing Then
                 obj = New FormDataItem With
                       {.FormName = formName}
