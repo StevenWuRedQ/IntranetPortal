@@ -619,6 +619,7 @@
     </Compile>
     <Compile Include="CodeFolder\PortalReport.vb" />
     <Compile Include="CodeFolder\PortalRoleProvider.vb" />
+    <Compile Include="CodeFolder\PropertyOfferManage.vb" />
     <Compile Include="CodeFolder\PublicSiteService.vb" />
     <Compile Include="CodeFolder\RecycleManage.vb" />
     <Compile Include="CodeFolder\SearchResult.vb" />
@@ -794,6 +795,7 @@
     <Compile Include="Controllers\ManagementController.vb" />
     <Compile Include="Controllers\PortalReportController.vb" />
     <Compile Include="Controllers\PreSignController.vb" />
+    <Compile Include="Controllers\PropertyOfferController.vb" />
     <Compile Include="Controllers\ReportController.vb" />
     <Compile Include="Controllers\ShortSaleController.vb" />
     <Compile Include="Controllers\ShortSaleLeadsInfoesController.vb" />
