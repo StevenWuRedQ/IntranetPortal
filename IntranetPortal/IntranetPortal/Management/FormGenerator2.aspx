@@ -11,13 +11,14 @@
                     <table class="table table-responsive">
                         <tr>
                             <td class="col-sm-6">Page model:</td>
-                            <td class="col-sm-6 "><input class="form-control" type="text" ng-model="pageModel" /></td>
+                            <td class="col-sm-6 ">
+                                <input class="form-control" type="text" ng-model="pageModel" /></td>
                         </tr>
                         <tr>
                             <td class="col-sm-6">
                                 <input type="file" id="uploadcsv" />
                             </td>
-                            <td class="col-sm-6">                                
+                            <td class="col-sm-6">
                                 <button type="button" class="btn btn-default" onclick="formCtrl.uploadFile()">Get Result</button>
                             </td>
                         </tr>
@@ -69,27 +70,42 @@
 
         var formCtrl = {
             uploadFile: function () {
-                var fileElm = $('#uploadcsv')[0];
-                var data = new FormData();
-                data.append("file", fileElm.files[0]);
-                $.ajax({
-                    url: '/api/Management/ConvertCSV',
-                    type: 'POST',
-                    data: data,
-                    cache: false,
-                    processData: false,
-                    contentType: false,
-                    success: function (data1) {
-                        var scope = angular.element($("#FormCtrl")[0]).scope();
-                        scope.process(data1);
-                        fileElm.value = "";
-                    },
-                    error: function () {
-                        alert("convert file error!")
-                        fileElm.value = "";
-                    }
 
-                })
+                var scope = angular.element($("#FormCtrl")[0]).scope();
+                data1 = [{
+                    title: 'Giving POA',
+                    items: [{ "label": "Name", "type": "input" },
+                            { "label": "Address", "type": "input" },
+                    ]
+                },
+                {
+                    title: 'Receiving POA',
+                    items: [{ "label": "Name", "type": "input" },
+                            { "label": "Address", "type": "input" },
+
+                    ]
+                },]
+                scope.process(data1);
+                fileElm.value = "";
+                //var fileElm = $('#uploadcsv')[0];
+                //var data = new FormData();
+                //data.append("file", fileElm.files[0]);
+                //$.ajax({
+                //    url: '/api/Management/ConvertCSV',
+                //    type: 'POST',
+                //    data: data,
+                //    cache: false,
+                //    processData: false,
+                //    contentType: false,
+                //    success: function (data1) {
+
+                //    },
+                //    error: function () {
+                //        alert("convert file error!")
+                //        fileElm.value = "";
+                //    }
+
+                //})
             }
         }
         var portalApp = angular.module('PortalApp');
@@ -156,7 +172,7 @@
             }
 
             $scope.process = function (data) {
-                $scope.FormItems = JSON.parse(data);
+                $scope.FormItems = data;//JSON.parse(data);
                 $scope.getResult();
                 $scope.$apply();
             }

@@ -1711,6 +1711,13 @@
       <DependentUpon>EditHomeOwner.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PopupControl\LeadSearchSummery.ascx.designer.vb">
+      <DependentUpon>LeadSearchSummery.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\LeadSearchSummery.ascx.vb">
+      <DependentUpon>LeadSearchSummery.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="PopupControl\LeadTaxSearchRequest.aspx.designer.vb">
       <DependentUpon>LeadTaxSearchRequest.aspx</DependentUpon>
     </Compile>
@@ -6572,6 +6579,7 @@
     <Content Include="js\build\intranetportal.js" />
     <Content Include="js\controllers\BuyerEntityController.js" />
     <Content Include="js\controllers\ConstructionController.js" />
+    <Content Include="js\controllers\LeadTaxSearchController.js" />
     <Content Include="js\controllers\LegalController.js" />
     <Content Include="js\controllers\ReportWizardController.js" />
     <Content Include="js\controllers\ShortSaleController.js" />
@@ -6742,6 +6750,7 @@
     <Content Include="PopupControl\BuyerEntityPopUpContent.aspx" />
     <Content Include="PopupControl\DoorknockChart.aspx" />
     <Content Include="PopupControl\EditHomeOwner.ascx" />
+    <Content Include="PopupControl\LeadSearchSummery.ascx" />
     <Content Include="PopupControl\LeadTaxSearchRequest.aspx" />
     <Content Include="PopupControl\MapsPopup.ascx" />
     <Content Include="PopupControl\PreAssignCropForm.aspx" />

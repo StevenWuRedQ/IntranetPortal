@@ -1,7 +1,24 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="ShortSalePreSignForm.aspx.vb" Inherits="IntranetPortal.ShortSalePreSignForm" %>
 
+<%@ Register Src="~/ShortSale/NGShortSaleHomewonerTab.ascx" TagPrefix="uc1" TagName="NGShortSaleHomewonerTab" %>
+<%@ Register Src="~/ShortSale/NGShortSaleMortgageTab.ascx" TagPrefix="uc1" TagName="NGShortSaleMortgageTab" %>
+<%@ Register Src="~/PopupControl/LeadSearchSummery.ascx" TagPrefix="uc1" TagName="LeadSearchSummery" %>
+
+
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
+        .fix-add-btn i {
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        .sub-form-title {
+            margin-top: 20px;
+            margin-bottom: -20px;
+        }
+
         .wizard-title {
             text-align: center;
         }
@@ -10,7 +27,7 @@
             min-height: 400px;
         }
 
-        .online {
+        .oneline {
             width: 100% !important;
         }
 
@@ -74,6 +91,8 @@
         /*hover styles*/
         .wizardbar-item:not(.current):hover {
             background-color: #3983ce;
+            cursor: default;
+            text-decoration: none;
         }
 
             .wizardbar-item:not(.current):hover:after {
@@ -98,18 +117,40 @@
         .view-animate {
             min-height: 500px;
         }
+
+        #todo-list {
+            width: 500px;
+            margin: 0 auto 30px auto;
+            padding: 50px;
+            background: white;
+            position: relative;
+            /*box-shadow*/
+            -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+            /*border-radius*/
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
+    <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
     <div style="padding: 20px" ng-controller="shortSalePreSignCtrl">
         <div class="container">
-            <div class="wizardbar">
-                <a class="wizardbar-item {{step==$index+1?'current':'' }}" href="#" ng-repeat="s in steps|filter:{show:true}">{{s.title}} 
-                </a>
+            <div>
+                <div class="wizardbar">
+                    <a class="wizardbar-item {{step==$index+1?'current':'' }}" href="#" ng-repeat="s in (filteredSteps = (steps|wizardFilter:DeadType))">{{s.caption?s.caption:s.title}} 
+                    </a>
+                </div>
             </div>
-            <div style="max-width: 720px">
+            <div style="text-align: center">
+                <h2>Property Address : {{SSpreSign.PropertyAddress}}</h2>
+            </div>
+            <div style="max-width: 720px; margin: 0 auto">
                 <div ng-show="currentStep().title=='New Offer'" class="view-animate">
-                    <h2 class="wizard-title">New Offer</h2>
+                    <h3 class="wizard-title">New Offer</h3>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
@@ -122,117 +163,489 @@
                                 </select>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div ng-show="currentStep().title=='Search Info'" class="view-animate">
-                    <h2 class="wizard-title">Check Search Information</h2>
+                    <h3 class="wizard-title">Check Search Information</h2>
 
                     <div>
-                        <div style="padding:10px">
-                            <table class="table table-striped">
-                                <tr>
-                                    <td>Property tax search - {{DocSearch.LeadResearch.propertyTaxes?'':'No'}} {{DocSearch.LeadResearch.propertyTaxes | currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Water charges - {{DocSearch.LeadResearch.waterCharges?'':'No'}} {{DocSearch.LeadResearch.waterCharges | currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>ECB Violation - {{DocSearch.LeadResearch.ecbViolation?'':'No'}} {{DocSearch.LeadResearch.ecbViolation | currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>DOB Violation - {{DocSearch.LeadResearch.dobWebsites?'':'No'}} {{DocSearch.LeadResearch.dobWebsites | currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Judgment - {{DocSearch.LeadResearch.judgments?'':'No'}} {{DocSearch.LeadResearch.judgments | currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>IRS Tax Liens - {{DocSearch.LeadResearch.irsTaxLien?'':'No'}} {{DocSearch.LeadResearch.irsTaxLien | currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>NYS Tax Liens - {{DocSearch.LeadResearch.hasNysTaxLien?'Yes':'No'}} 
-                                    </td>
-                                </tr>
+                        <div style="padding: 10px" ng-controller="LeadTaxSearchCtrl">
+                            <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />
+                        </div>
+                    </div>
+                </div>
+                <%--Pre Sign or short sale information--%>
+                <div ng-show="currentStep().title=='Pre Sign'" class="view-animate">
+                    <h3 class="wizard-title">Short Sale Information</h3>
+                    <div ng-controller="ShortSaleCtrl" id="ShortSaleCtrl">
+                        <div>
+                            <h4 class="ss_form_title ">Borrowers</h4>
+                            <uc1:NGShortSaleHomewonerTab runat="server" ID="NGShortSaleHomewonerTab" />
+                        </div>
 
-
-                                <tr>
-                                    <td>Mortgage - {{DocSearch.LeadResearch.mortgageAmount?'':'No'}} {{DocSearch.LeadResearch.mortgageAmount | currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>{{ DocSearch.LeadResearch.fannie?"Has FANNIE":'Not Fannie' }} {{ DocSearch.LeadResearch.fha?" Has FHA":' Not FHA' }} 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Servicer - {{DocSearch.LeadResearch.servicer}}
-                                    </td>
-                                </tr>
-                            </table>
+                        <div>
+                            <h4 class="ss_form_title">Mortgage info</h4>
+                            <uc1:NGShortSaleMortgageTab runat="server" ID="NGShortSaleMortgageTab" />
                         </div>
                     </div>
 
-
-                </div>
-                <div ng-show="currentStep().title=='Pre Sign'" class="view-animate">
-                    <h2 class="wizard-title">Short Sale Information</h2>
-
-                    <div>
+                    <%--<div>
                         <h4 class="ss_form_title ">Borrowers</h4>
                         <div id="borrwerGrid" dx-data-grid="borrwerGrid"></div>
                     </div>
                     <div class="ss_form">
-                        <h4 class="ss_form_title">Mortgage info</h4>
                         <div id=""></div>
+                    </div>--%>
+                </div>
+                <%--select team and assign crops--%>
+                <div class="view-animate" ng-show="currentStep().title=='Assign Crops'">
+                    <h3 class="wizard-title">Select team and Assgin crops</h3>
+                    <div class="ss_form">
+                        <h4 class="ss_form_title ">Assign </h4>
+                        <div class="ss_border">
+                            <ul class="ss_form_box clearfix">
+                                <li class="ss_form_item ">
+                                    <label class="ss_form_input_title">Team Name</label>
+                                    <select class="ss_form_input" ng-model="SSpreSign.assignCrop.Name" >
+                                        <option></option>
+                                        <option ng-repeat="n in CorpTeam"></option>
+                                   </select>
+                                </li>
+                                <li class="ss_form_item ">
+                                    <label class="ss_form_input_title">Is wells fargo</label>
+                                    <pt-radio name="AssignCropWellFrago" model="SSpreSign.assignCrop.isWellsFargo"></pt-radio>
+                                </li>
+                                <li class="ss_form_item ">
+                                    <label class="ss_form_input_title">&nbsp;</label>
+                                    <input type="button" value="Assign Crop" class="rand-button rand-button-blue rand-button-pad" ng-click="assginCropClick()">
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-
                 </div>
-                <div ng-show="currentStep().title=='Step 1'" class="view-animate">
-                    <h2 class="wizard-title">Setp 1</h2>
+                <div ng-show="currentStep().title=='Documents Required'" class="view-animate">
+                    <h3 class="wizard-title">{{currentStep().title}}</h3>
+                    <div id="todo-list">
+                        <div class="dx-fieldset">
+                            <div class="dx-field">
+                                <div class="dx-field-label">Contract</div>
+                                <div class="dx-field-value">
+                                    <div dx-check-box="{ bindingOptions: { value: 'DeadType.Contract' }}"></div>
+                                </div>
+                            </div>
+                            <div class="dx-field">
+                                <div class="dx-field-label">Memo</div>
+                                <div class="dx-field-value">
+                                    <div dx-check-box="{ bindingOptions: { value: 'DeadType.Memo' }}"></div>
+                                </div>
+                            </div>
+                            <div class="dx-field">
+                                <div class="dx-field-label">Deed</div>
+                                <div class="dx-field-value">
+                                    <div dx-check-box="{ bindingOptions: { value: 'DeadType.Deed' }}"></div>
+                                </div>
+                            </div>
+                            <div class="dx-field">
+                                <div class="dx-field-label">Correction Deed</div>
+                                <div class="dx-field-value">
+                                    <div dx-check-box="{ bindingOptions: { value: 'DeadType.CorrectionDeed' }}"></div>
+                                </div>
+                            </div>
+                            <div class="dx-field">
+                                <div class="dx-field-label">POA</div>
+                                <div class="dx-field-value">
+                                    <div dx-check-box="{ bindingOptions: { value: 'DeadType.POA' }}"></div>
+                                </div>
+                            </div>
+                        </div>
 
+                    </div>
                 </div>
-                <div ng-show="currentStep().title=='Step 2'" class="view-animate">
-                    <h2 class="wizard-title">Setp 2</h2>
+                <%--Deal Sheet--%>
+                <div ng-show="currentStep().title=='Deal Sheet'" class="view-animate">
+                    <h3 class="wizard-title">{{currentStep().title}}</h3>
+                    <div>
+                    </div>
+                </div>
+                <%--Contract || Memo--%>
+                <div ng-show="currentStep().title=='Contract'" class="view-animate">
+                    <div>
+                        <div>
 
+                            <%-- <div class="sub-form-title">
+                                <h3 class="wizard-title"><span ng-if="DeadType.Contract">Contract </span> <span ng-if="DeadType.Contract&&DeadType.Memo">&</span> <span ng-if="DeadType.Memo">Memo</span>  </h3>
+                            </div>--%>
+                            <uib-tabset class="tab-switch">
+                                <uib-tab ng-repeat="d in SSpreSign.DealSheet.ContractOrMemo.Sellers" active="d.active" disable="d.disabled">
+                                    <tab-heading>Seller {{$index+1}} </tab-heading>  
+                                    <div class="text-right" ng-show="SSpreSign.DealSheet.ContractOrMemo.Sellers.length>1" style="margin-bottom: -25px"><i class="fa fa-times btn tooltip-examples btn-close"  ng-click="arrayRemove(SSpreSign.DealSheet.ContractOrMemo.Sellers, $index)" title="Delete"></i></div>
+                                     <div class="ss_border" style="border-top-color: transparent">
+                                         <div >
+                                            <h4 class="ss_form_title">Seller {{$index+1}} </h4>
+                                            <div >
+                                                <ul class="ss_form_box clearfix">
+                                                    <li class="ss_form_item">
+                                                        <label class="ss_form_input_title">Seller {{$index+1}} Name</label><input class="ss_form_input" ng-model="d.Name" /></li>
+                                                    <li class="ss_form_item ">
+                                                        <label class="ss_form_input_title">Seller {{$index+1}} Address</label><input class="ss_form_input" ng-model="d.Address" /></li>
+                                                    <li class="ss_form_item ">
+                                                        <label class="ss_form_input_title">Seller {{$index+1}} Attorney</label><input class="ss_form_input" ng-model="d.sellerAttorney" /></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                     </div>
+                                </uib-tab>
+                                <span class="fix-add-btn">
+                                    <pt-add ng-click="ensurePush('SSpreSign.DealSheet.ContractOrMemo.Sellers')" style="font-size:18px"></pt-add>
+                                </span>
+                                
+                            </uib-tabset>
+
+                            <div class="ss_form">
+                                <h4 class="ss_form_title">Buyer </h4>
+                                <div class="ss_border">
+                                    <ul class="ss_form_box clearfix">
+                                        <li class="ss_form_item ">
+                                            <label class="ss_form_input_title">Buyer  Name</label>
+                                            <input class="ss_form_input" ng-model="default.buyerName" /></li>
+                                        <li class="ss_form_item ">
+                                            <label class="ss_form_input_title">Buyer  Address</label><input class="ss_form_input" ng-model="default.buyerAddress" /></li>
+                                        <li class="ss_form_item ">
+                                            <label class="ss_form_input_title">Buyer Attorney</label><input class="ss_form_input" ng-model="default.buyerAttorney" /></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ss_form">
+                                <uib-tabset class="tab-switch">
+                                <uib-tab ng-repeat="buyer in SSpreSign.DealSheet.ContractOrMemo.Buyers" active="buyer.active" disable="buyer.disabled">
+                                    <tab-heading>Buyer {{$index+1}} </tab-heading>  
+                                    <div class="text-right" ng-show="SSpreSign.DealSheet.ContractOrMemo.Buyers.length>1" style="margin-bottom: -25px"><i class="fa fa-times btn tooltip-examples btn-close"  ng-click="arrayRemove(SSpreSign.DealSheet.ContractOrMemo.Buyers, $index)" title="Delete"></i></div>
+                                     <div class="ss_border" style="border-top-color: transparent">
+                                         <div >
+                                            <h4 class="ss_form_title">Buyer {{$index+1}} </h4>
+                                            <div>
+                                                <ul class="ss_form_box clearfix">
+                                                    <li class="ss_form_item">
+                                                        <label class="ss_form_input_title">Buyer {{$index+1}} Name</label><input class="ss_form_input" ng-model="buyer.Name" /></li>
+                                                    <li class="ss_form_item ">
+                                                        <label class="ss_form_input_title">Buyer {{$index+1}} Address</label><input class="ss_form_input" ng-model="buyer.Address" /></li>
+                                                    <li class="ss_form_item ">
+                                                        <label class="ss_form_input_title">Buyer {{$index+1}} Attorney</label><input class="ss_form_input" ng-model="buyer.Attorney" /></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                     </div>
+                                </uib-tab>
+                                <span class="fix-add-btn">
+                                    <pt-add ng-click="ensurePush('SSpreSign.DealSheet.ContractOrMemo.Buyers')" style="font-size:18px"></pt-add>
+                                </span>
+                            </uib-tabset>
+
+                                <div class="ss_form">
+                                    <h4 class="ss_form_title ">Bill Info </h4>
+                                    <div class="ss_border">
+                                        <ul class="ss_form_box clearfix">
+                                            <li class="ss_form_item ">
+                                                <label class="ss_form_input_title">Contract Price</label><input class="ss_form_input" ng-model="default.contractPrice" money-mask /></li>
+                                            <li class="ss_form_item ">
+                                                <label class="ss_form_input_title">Down Payment</label><input class="ss_form_input" ng-model="default.downPayment" money-mask /></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
+                <%--Deed--%>
+                <div ng-show="currentStep().title=='Deed'" class="view-animate">
+                    <div>
+                        <%--Deed--%>
+                        <div>
+                            <%--<div class="sub-form-title">
+                                <h3 class="wizard-title">Deed </h3>
+                            </div>--%>
+                            <uib-tabset class="tab-switch">
+                                <uib-tab ng-repeat="d in SSpreSign.DealSheet.Deed.Sellers" active="d.active" disable="d.disabled">
+                                    <tab-heading>Seller {{$index+1}} </tab-heading>  
+                                    <div class="text-right" ng-show="SSpreSign.DealSheet.Deed.Sellers.length>1" style="margin-bottom: -25px"><i class="fa fa-times btn tooltip-examples btn-close"  ng-click="arrayRemove(SSpreSign.DealSheet.Deed.Sellers, $index)" title="Delete"></i></div>
+                                     <div class="ss_border" style="border-top-color: transparent">
+                                         <div >
+                                            <h4 class="ss_form_title">Seller {{$index+1}} </h4>
+                                            <div >
+                                                <ul class="ss_form_box clearfix">
+                                                    <li class="ss_form_item">
+                                                        <label class="ss_form_input_title">Seller {{$index+1}} Name</label><input class="ss_form_input" ng-model="d.Name" /></li>
+                                                    <li class="ss_form_item ">
+                                                        <label class="ss_form_input_title">Seller {{$index+1}} SSN</label><input class="ss_form_input" ng-model="d.SSN" mask="999-99-9999" /></li>
+                                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                     </div>
+                                </uib-tab>
+                                <span class="fix-add-btn">
+                                    <pt-add ng-click="ensurePush('SSpreSign.DealSheet.Deed.Sellers')" style="font-size:18px"></pt-add>
+                                </span>
+                                
+                            </uib-tabset>
+
+                            <%-- <div class="ss_form">
+                                <h4 class="ss_form_title ">Seller 1</h4>
+                                <div class="ss_border">
+                                    <ul class="ss_form_box clearfix">
+                                        <li class="ss_form_item ">
+                                            <label class="ss_form_input_title">Seller Name</label><input class="ss_form_input" ng-model="default.Name" /></li>
+                                        <li class="ss_form_item ">
+                                            <label class="ss_form_input_title">Seller SSN</label><input class="ss_form_input" ng-model="default.sellerSsn" mask="999-99-9999"/></li>
+                                    </ul>
+                                </div>
+                            </div>--%>
+
+                            <div class="ss_form">
+                                <h4 class="ss_form_title ">Buyer</h4>
+                                <div class="ss_border">
+                                    <ul class="ss_form_box clearfix">
+                                        <li class="ss_form_item ">
+                                            <label class="ss_form_input_title">Buyer Name</label><input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.Name" /></li>
+                                        <li class="ss_form_item ">
+                                            <label class="ss_form_input_title">Buyer SSN</label><input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.SSN" mask="999-99-9999" /></li>
+                                        <li class="ss_form_item ">
+                                            <label class="ss_form_input_title">Buyer Address</label><input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.Addr" /></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ss_form">
+                                <h4 class="ss_form_title ">Property Address </h4>
+                                <div class="ss_border">
+                                    <ul class="ss_form_box clearfix">
+                                        <li class="ss_form_item  oneline">
+                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.PropertyAddress" /></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%-- CorrectionDeed --%>
+                <div ng-show="currentStep().title=='CorrectionDeed'" class="view-animate">
+                    <div>
+                        <%-- CorrectionDeed --%>
+                        <div>
+                            <%-- <div class="sub-form-title">
+                                <h3 class="wizard-title"><span ng-if="DeadType.Contract">Correction Deed  </h3>
+                            </div>--%>
+                            <div class="ss_form">
+                                <uib-tabset class="tab-switch">
+                                <uib-tab ng-repeat="d in SSpreSign.DealSheet.CorrectionDeed.Sellers" active="d.active" disable="d.disabled">
+                                    <tab-heading>Seller {{$index+1}} </tab-heading>  
+                                    <div class="text-right" ng-show="SSpreSign.DealSheet.CorrectionDeed.Sellers.length>1" style="margin-bottom: -25px"><i class="fa fa-times btn tooltip-examples btn-close"  ng-click="arrayRemove(SSpreSign.DealSheet.CorrectionDeed.Sellers, $index)" title="Delete"></i></div>
+                                     <div class="ss_border" style="border-top-color: transparent">
+                                         <div >
+                                            <h4 class="ss_form_title">Seller {{$index+1}} </h4>
+                                            <div >
+                                                <ul class="ss_form_box clearfix">
+                                                    <li class="ss_form_item">
+                                                        <label class="ss_form_input_title">Seller {{$index+1}} Name</label><input class="ss_form_input" ng-model="d.Name" /></li>
+                                                    <li class="ss_form_item ">
+                                                        <label class="ss_form_input_title">Seller {{$index+1}} SSN</label><input class="ss_form_input" ng-model="d.SSN" mask="999-99-9999"/></li>
+                                                    <li class="ss_form_item ">
+                                                        <label class="ss_form_input_title">Seller {{$index+1}} Address</label><input class="ss_form_input" ng-model="d.Address" /></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                     </div>
+                                </uib-tab>
+                                <span class="fix-add-btn">
+                                    <pt-add ng-click="ensurePush('SSpreSign.DealSheet.CorrectionDeed.Sellers')" style="font-size:18px"></pt-add>
+                                </span>
+                                
+                            </uib-tabset>
+                            </div>
+                            <div class="ss_form">
+
+                                <uib-tabset class="tab-switch">
+                                <uib-tab ng-repeat="d in SSpreSign.DealSheet.CorrectionDeed.Buyers" active="d.active" disable="d.disabled">
+                                    <tab-heading>Buyer {{$index+1}} </tab-heading>  
+                                    <div class="text-right" ng-show="SSpreSign.DealSheet.CorrectionDeed.Buyers.length>1" style="margin-bottom: -25px"><i class="fa fa-times btn tooltip-examples btn-close"  ng-click="arrayRemove(SSpreSign.DealSheet.CorrectionDeed.Buyers, $index)" title="Delete"></i></div>
+                                     <div class="ss_border" style="border-top-color: transparent">
+                                         <div >
+                                            <h4 class="ss_form_title">Buyer {{$index+1}} </h4>
+                                            <div >
+                                                <ul class="ss_form_box clearfix">
+                                                    <li class="ss_form_item">
+                                                        <label class="ss_form_input_title">Buyer {{$index+1}} Name</label><input class="ss_form_input" ng-model="d.Name" /></li>
+                                                    <li class="ss_form_item ">
+                                                        <label class="ss_form_input_title">Buyer {{$index+1}} SSN</label><input class="ss_form_input" ng-model="d.SSN" mask="999-99-9999"/></li>
+                                                     <li class="ss_form_item ">
+                                                        <label class="ss_form_input_title">Buyer {{$index+1}} Address</label><input class="ss_form_input" ng-model="d.Address" /></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                     </div>
+                                </uib-tab>
+                                <span class="fix-add-btn">
+                                    <pt-add ng-click="ensurePush('SSpreSign.DealSheet.CorrectionDeed.Buyers')" style="font-size:18px"></pt-add>
+                                </span>
+                                
+                            </uib-tabset>
+                            </div>
+                            <div class="ss_form">
+                                <h4 class="ss_form_title ">Property Address </h4>
+                                <div class="ss_border">
+                                    <ul class="ss_form_box clearfix">
+                                        <li class="ss_form_item  oneline">
+                                            <input class="ss_form_input" ng-model="SSpreSign.PropertyAddress " />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%--POA--%>
+                <div ng-show="currentStep().title=='POA'" class="view-animate">
+                    <div>
+                        <div>
+                            <%--<div class="sub-form-title">
+                                <h3 class="wizard-title">POA  </h3>
+                            </div>--%>
+
+                            <div class="ss_form">
+                                <h4 class="ss_form_title ">Giving POA</h4>
+                                <div class="ss_border">
+                                    <ul class="ss_form_box clearfix">
+                                        <li class="ss_form_item ">
+                                            <label class="ss_form_input_title">Name</label><input class="ss_form_input" ng-model="default.GivingPOA.name" /></li>
+                                        <li class="ss_form_item ">
+                                            <label class="ss_form_input_title">Address</label><input class="ss_form_input" ng-model="default.GivingPOA.address" /></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ss_form">
+                                <h4 class="ss_form_title ">Receiving POA</h4>
+                                <div class="ss_border">
+                                    <ul class="ss_form_box clearfix">
+                                        <li class="ss_form_item ">
+                                            <label class="ss_form_input_title">Name</label><input class="ss_form_input" ng-model="default.ReceivingPOA.name" /></li>
+                                        <li class="ss_form_item ">
+                                            <label class="ss_form_input_title">Address</label><input class="ss_form_input" ng-model="default.ReceivingPOA.address" /></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div ng-show="currentStep().title=='Finish'" class="view-animate">
-                    <h2 class="wizard-title">Finish</h2>
+                    <h3 class="wizard-title">Finish</h2>
+                    <div>
+                        <div class="well">
+                            Congratulation! you are in the last step please click button to download document! 
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" ng-show="step>1" ng-click="PrevStep()">< Prev</button>
-                    <button type="button" class="btn btn-default" ng-click="RequestPreSign()" ng-show="step==MaxStep">Finish</button>
-                    <button type="button" class="btn btn-default" ng-show="step<MaxStep" ng-click="NextStep()">Next ></button>
-                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-show="step>1" ng-click="PrevStep()">< Prev</button>
+                <button type="button" class="btn btn-default" ng-click="RequestPreSign()" ng-show="step==MaxStep()">Generate document</button>
+                <button type="button" class="btn btn-default" ng-show="step<MaxStep()" ng-click="NextStep()">Next ></button>
             </div>
         </div>
 
-
     </div>
+    <%--help scrpt for this page--%>
+    <script>
+        ScopeHeler =
+            {
+                getShortSaleScope: function () {
+
+                    return angular.element(document.getElementById('ShortSaleCtrl')).scope();
+                }
+
+            }
+    </script>
     <script>
         var portalApp = angular.module('PortalApp');
 
-        portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom) {
-            $scope.SSpreSign = {};
+        portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http) {
+            $scope.SSpreSign = {
+                DealSheet: {
+                    ContractOrMemo: { Sellers: [{}], Buyers: [{}] },
+                    Deed: { Sellers: [{}] },
+                    CorrectionDeed: { Sellers: [] }
+                }
+            };
+            $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); };
+            $scope.arrayRemove = ptCom.arrayRemove;
+            $scope.NGAddArraryItem = ptCom.AddArraryItem;
+            $scope.shortSaleInfoNext = function () {
+                var self = this;
+                var ss = ScopeHeler.getShortSaleScope();
+                var _sellers = ss.SsCase.PropertyInfo.Owners;
+                var _sellers = _.map(_sellers, function (o) {
+                    o.Name = ss.formatName(o.FirstName, o.MiddleName, o.LastName);
+                    o.Address = ss.formatAddr(o.MailNumber, o.MailStreetName, o.MailApt, o.MailCity, o.MailState, o.MailZip);
+                    o.PropertyAddress = $scope.SSpreSign.PropertyAddress;
+                    return o
+                });
+                var _dealSheet = $scope.SSpreSign.DealSheet;
+                _dealSheet.ContractOrMemo.Sellers = $.extend(true, [], _sellers);
+                _dealSheet.Deed.Sellers = $.extend(true, [], _sellers);
+                _dealSheet.CorrectionDeed.Sellers = $.extend(true, {}, _sellers);
+                var ssCtrl = $scope.SSCtrl;
+                return true;
+            }
+            $scope.assginCropClick = function()
+            {
+                //$scope.SSpreSign.
+            }
+            $http.get('/api/CorporationEntities/Teams').success(function(data){
+                $scope.CorpTeam = data;
+            })
             $scope.steps = [
-              { title: "New Offer", show: true },
-              { title: "Search Info", show: true },
-              { title: "Pre Sign", show: true },
-              { title: "Step 1", show: true },
-              { title: "Step 2", show: true },
-              { title: "Finish", show: true },
-            ]
+              { title: "New Offer" },
+              { title: "Search Info" },
+              { title: "Pre Sign", caption: 'SS Info', next: $scope.shortSaleInfoNext },
+              { title: "Assign Crops", next: $scope.shortSaleInfoNext },
+              { title: "Documents Required", caption: 'Doc Required', },
+              //{ title: "Deal Sheet" },
+              { title: 'Contract', caption: 'Contract Or Memo', sheet: 'Contract', },
+              { title: 'Deed', sheet: 'Deed' },
+              { title: 'CorrectionDeed', caption: 'Correction Deed', sheet: 'CorrectionDeed' },
+              { title: 'POA', sheet: 'POA' },
+              { title: "Finish" },
+            ];
+
+            $scope.DeadType = {
+                Contract: true,
+            };
+            var BBLE = $("#BBLE").val();
+            if (BBLE) {
+                $http.get('/api/Leads/LeadsInfo/' + BBLE).success(function (data) {
+                    $scope.SSpreSign.PropertyAddress = data.PropertyAddress;
+                })
+            }
+
             $scope.step = 1
-            $scope.MaxStep = $scope.steps.length;
+            $scope.filteredSteps = [];
+            $scope.MaxStep = function () {
+                return $scope.filteredSteps.length;
+            }
             $scope.currentStep = function () {
                 return $scope.steps[$scope.step - 1];
             }
             $scope.NextStep = function () {
-                $scope.step++;
+                var cStep = $scope.currentStep();
+                if (cStep.next) {
+                    if (cStep.next()) {
+                        $scope.step++;
+                    }
+                } else {
+                    $scope.step++;
+                }
+
 
             }
             $scope.PrevStep = function () {
@@ -253,6 +666,26 @@
                 }
             }
         })
+        portalApp.filter('wizardFilter', function () {
+            return function (items, sheetFilter) {
+                var filtered = [];
+                angular.forEach(items, function (item) {
+                    if (typeof item.sheet != 'undefined') {
+                        if (!sheetFilter) {
+                            console.error("there are no filter please check filter")
+                        }
+                        for (key in sheetFilter) {
+                            if (sheetFilter[key] && item.sheet == key) {
+                                filtered.push(item)
+                            }
+                        }
+                    } else {
+                        filtered.push(item);
+                    }
 
+                });
+                return filtered;
+            };
+        });
     </script>
 </asp:Content>
