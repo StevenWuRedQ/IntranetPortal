@@ -167,6 +167,22 @@ Partial Public Class LegalCase
         End Using
     End Function
 
+    Public Shared Function GetCaseOwner(bble As String) As String
+        Using ctx As New PortalEntities
+            Dim lcase = ctx.LegalCases.Where(Function(a) a.BBLE = bble).Select(Function(lc) New With {lc.BBLE, lc.ResearchBy, lc.Attorney}).FirstOrDefault
+
+            If lcase IsNot Nothing Then
+                If String.IsNullOrEmpty(lcase.Attorney) Then
+                    Return lcase.ResearchBy
+                Else
+                    Return lcase.Attorney
+                End If
+            End If
+
+            Return Nothing
+        End Using
+    End Function
+
     ''' <summary>
     ''' Get the Case by index number if there are two cases have same 
     ''' index number then take the frist one

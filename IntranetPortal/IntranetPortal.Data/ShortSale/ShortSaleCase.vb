@@ -294,6 +294,25 @@ Partial Public Class ShortSaleCase
     Public Property InHouseTitle As String
     Public Property InHouseLegal As String
 
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property InHouseTitleUser As String
+        Get
+            Dim tCase = TitleCase.GetCase(BBLE)
+            If tCase IsNot Nothing Then
+                Return tCase.Owner
+            End If
+
+            Return Nothing
+        End Get
+    End Property
+
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property InHouseLegalUser As String
+        Get
+            Return LegalCase.GetCaseOwner(BBLE)
+        End Get
+    End Property
+
     Public ReadOnly Property AssignedProcessor As PartyContact
         Get
             If Processor.HasValue Then
