@@ -3,6 +3,9 @@ Imports IntranetPortal.Data
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports Newtonsoft.Json.Linq
 
+''' <summary>
+''' The BusinessForm unit test
+''' </summary>
 <TestClass()> Public Class BusinessFormUnitTest
 
     Dim BBLE As String = "4089170024"
@@ -10,6 +13,10 @@ Imports Newtonsoft.Json.Linq
     Dim Owner As String = "Chris Yan"
     Dim type As String = "ShortSale"
 
+    ''' <summary>
+    ''' The create form function test, shoud return form data 
+    ''' and the form tag should be the identity of business data
+    ''' </summary>
     <TestMethod()> Public Sub Create_returnFormWithTag()
         Dim caseData As New JObject
 

@@ -167,7 +167,6 @@ Namespace Controllers
             Catch ex As Exception
                 Return BadRequest(ex.Message)
             End Try
-
         End Function
 
     End Class

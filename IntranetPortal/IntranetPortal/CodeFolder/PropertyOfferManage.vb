@@ -7,11 +7,19 @@ Imports Novacode
 ''' </summary>
 Public Class PropertyOfferManage
 
-    Public Shared Function GeneratePackage(bble As String, data As JObject) As String
+    ''' <summary>
+    ''' Generate Offer Package
+    ''' </summary>
+    ''' <param name="bble">The property BBLE</param>
+    ''' <param name="data">The offer related data</param>
+    ''' <param name="offerDocPath">The offer document path</param>
+    ''' <param name="destPath">The destination path</param>
+    ''' <returns>Return the filename of generated package</returns>
+    Public Shared Function GeneratePackage(bble As String, data As JObject, offerDocPath As String, destPath As String) As String
 
-        Dim path = HttpContext.Current.Server.MapPath("~/App_Data/OfferDoc")
-        Dim targetpath = HttpContext.Current.Server.MapPath("~/TempDataFile/OfferDoc/" & bble)
-        Dim zipPath = IO.Path.Combine(HttpContext.Current.Server.MapPath("~/TempDataFile/OfferDoc"), bble & ".zip")
+        Dim path = offerDocPath 'HttpContext.Current.Server.MapPath("~/App_Data/OfferDoc")
+        Dim targetPath = destPath & bble ' HttpContext.Current.Server.MapPath("~/TempDataFile/OfferDoc/" & bble)
+        Dim zipPath = IO.Path.Combine(destPath, bble & ".zip")
 
         Try
             Dim direcotry = New IO.DirectoryInfo(path)
@@ -37,11 +45,10 @@ Public Class PropertyOfferManage
             End If
 
             ZipFile.CreateFromDirectory(targetpath, zipPath)
-            Return String.Format("/TempDataFile/OfferDoc/{0}.zip", bble)
+            Return String.Format("{0}.zip", bble)
         Catch ex As Exception
-            Return ""
+            Throw ex
         End Try
-
     End Function
 
 End Class
