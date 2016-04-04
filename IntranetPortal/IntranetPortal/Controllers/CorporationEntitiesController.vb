@@ -55,6 +55,10 @@ Namespace Controllers
                 Return BadRequest()
             End If
 
+            If db.CorporationEntities.Any(Function(a) a.BBLE = bble) Then
+                Return BadRequest("Property was already assigned.")
+            End If
+
             corp = db.CorporationEntities.Find(corp.EntityId)
             If corp Is Nothing Then
                 Return BadRequest()
