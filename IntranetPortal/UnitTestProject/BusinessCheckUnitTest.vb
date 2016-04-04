@@ -2,6 +2,9 @@
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports IntranetPortal.Data
 
+''' <summary>
+''' The UnitTest for BusinessCheck object
+''' </summary>
 <TestClass()> Public Class BusinessCheckUnitTest
 
     <TestMethod()> Public Sub Create_returnCheckId()

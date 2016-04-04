@@ -125,6 +125,9 @@
     <Compile Include="ADOEntity\PreSignRecord.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\PropertyOffer.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\SSFirstMortgage.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
@@ -331,6 +334,7 @@
     <Compile Include="SignProcess\BusinessCheck.vb" />
     <Compile Include="SignProcess\CheckRequest.vb" />
     <Compile Include="SignProcess\PreSignRecord.vb" />
+    <Compile Include="SignProcess\PropertyOffer.vb" />
     <Compile Include="Title\TitleCase.vb" />
     <Compile Include="Twilio\TwilioClient.vb" />
   </ItemGroup>

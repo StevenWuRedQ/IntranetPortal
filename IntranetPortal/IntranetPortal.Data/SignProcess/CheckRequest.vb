@@ -1,7 +1,20 @@
-﻿Public Class CheckRequest
+﻿
+''' <summary>
+''' The CheckRequest Object
+''' </summary>
+Public Class CheckRequest
 
+    ''' <summary>
+    ''' The Check list
+    ''' </summary>
+    ''' <returns></returns>
     Public Property Checks As List(Of BusinessCheck)
 
+    ''' <summary>
+    ''' Return check request instance
+    ''' </summary>
+    ''' <param name="id">The instance id</param>
+    ''' <returns></returns>
     Public Shared Function GetInstance(id As Integer) As CheckRequest
 
         Using ctx As New PortalEntities
@@ -13,6 +26,10 @@
         End Using
     End Function
 
+    ''' <summary>
+    ''' Create a new Check Request
+    ''' </summary>
+    ''' <param name="saveBy"></param>
     Public Sub Create(saveBy As String)
         Using ctx As New PortalEntities
 
@@ -30,6 +47,10 @@
         End Using
     End Sub
 
+    ''' <summary>
+    ''' Saving the check request
+    ''' </summary>
+    ''' <param name="saveBy"></param>
     Public Sub Save(saveBy As String)
         Using ctx As New PortalEntities
             If ctx.CheckRequests.Any(Function(cr) cr.RequestId = Me.RequestId) Then
@@ -46,6 +67,9 @@
         End Using
     End Sub
 
+    ''' <summary>
+    ''' Delete the instance
+    ''' </summary>
     Public Sub Delete()
         Using ctx As New PortalEntities
             If ctx.CheckRequests.Any(Function(r) r.RequestId = RequestId) Then

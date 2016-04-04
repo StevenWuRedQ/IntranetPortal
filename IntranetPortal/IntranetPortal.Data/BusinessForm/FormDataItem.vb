@@ -37,6 +37,18 @@ Public Class FormDataItem
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return business form instance
+    ''' </summary>
+    ''' <param name="dataId">form id</param>
+    ''' <param name="formName">form name </param>
+    ''' <returns></returns>
+    Public Shared Function Instance(dataId As Integer, formName As String) As FormDataItem
+        Using ctx As New PortalEntities
+            Return ctx.FormDataItems.Where(Function(f) f.DataId = dataId AndAlso f.FormName = formName).FirstOrDefault
+        End Using
+    End Function
+
     Public Sub Save(saveBy As String)
         Using ctx As New PortalEntities
 
@@ -51,8 +63,12 @@ Public Class FormDataItem
             End If
             ctx.SaveChanges()
 
-            Me.Tag = BusinessData.Save(Me)
+            Dim bId = BusinessData.Save(Me)
 
+            If String.IsNullOrEmpty(Me.Tag) OrElse Me.Tag <> bId Then
+                Me.Tag = bId
+                ctx.SaveChanges()
+            End If
         End Using
     End Sub
 

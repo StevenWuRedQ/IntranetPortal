@@ -648,6 +648,22 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="Notes" Type="nvarchar" MaxLength="4000" />
         </EntityType>
+        <EntityType Name="PropertyOffers">
+          <Key>
+            <PropertyRef Name="OfferId" />
+          </Key>
+          <Property Name="OfferId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormItemId" Type="int" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="Title" Type="nvarchar" MaxLength="256" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="50" />
+          <Property Name="OfferType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="PropertyOwners">
           <Key>
             <PropertyRef Name="OwnerId" />
@@ -1133,6 +1149,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySet Name="PropertyFloors" EntityType="Self.PropertyFloors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyMortgages" EntityType="Self.PropertyMortgages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyOccupants" EntityType="Self.PropertyOccupants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyOffers" EntityType="Self.PropertyOffers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyOwners" EntityType="Self.PropertyOwners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyTitles" EntityType="Self.PropertyTitles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyValueInfo" EntityType="Self.PropertyValueInfo" Schema="dbo" store:Type="Tables" />
@@ -1339,6 +1356,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySet Name="BusinessChecks" EntityType="IntranetPortalModel.BusinessCheck" />
           <EntitySet Name="CheckRequests" EntityType="IntranetPortalModel.CheckRequest" />
           <EntitySet Name="PreSignRecords" EntityType="IntranetPortalModel.PreSignRecord" />
+          <EntitySet Name="PropertyOffers" EntityType="IntranetPortalModel.PropertyOffer" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -2426,6 +2444,22 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
           <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PropertyOffer">
+          <Key>
+            <PropertyRef Name="OfferId" />
+          </Key>
+          <Property Name="OfferId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormItemId" Type="Int32" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OfferType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3563,6 +3597,23 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
                 <ScalarProperty Name="NeedSearch" ColumnName="NeedSearch" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyOffers">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PropertyOffer">
+              <MappingFragment StoreEntitySet="PropertyOffers">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="OfferType" ColumnName="OfferType" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="FormItemId" ColumnName="FormItemId" />
+                <ScalarProperty Name="OfferId" ColumnName="OfferId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -18,6 +18,7 @@ Namespace Controllers
         Function GetCorporationEntities() As IQueryable(Of CorporationEntity)
             Return db.CorporationEntities.Where(Function(c) c.AppId = Employee.CurrentAppId)
         End Function
+
         ' GET /api/CorporationEntities/ByBBLE?BBLE=3041250022
         <ResponseType(GetType(CorporationEntity))>
         <Route("api/CorporationEntities/ByBBLE")>
@@ -28,6 +29,73 @@ Namespace Controllers
             End If
             Return Ok(corporationentity)
         End Function
+
+        ' GET /api/CorporationEntities/AvailableCorp?team=RonTeam&wellsfargo=false
+        <ResponseType(GetType(CorporationEntity))>
+        <Route("api/CorporationEntities/AvailableCorp")>
+        Function GetAvailableCorpToSign(ByVal team As String, wellsfargo As String) As IHttpActionResult
+            Dim corps = db.CorporationEntities.Where(Function(c) c.Office = team AndAlso c.Status = "Available").ToList
+
+            If corps IsNot Nothing AndAlso corps.Count > 0 Then
+                Dim rand As New Random
+                Return Ok(corps(rand.Next(corps.Count)))
+            End If
+
+            Return NotFound()
+        End Function
+
+        ' GET /api/CorporationEntities/Assign/?id=1
+        <Route("api/CorporationEntities/Assign/")>
+        Function PostAssignCorp(bble As String, corp As CorporationEntity) As IHttpActionResult
+            If Not ModelState.IsValid Then
+                Return BadRequest(ModelState)
+            End If
+
+            If corp.EntityId = 0 Then
+                Return BadRequest()
+            End If
+
+            corp = db.CorporationEntities.Find(corp.EntityId)
+            If corp Is Nothing Then
+                Return BadRequest()
+            End If
+
+            If corp.Status <> "Available" Then
+                Return BadRequest("Corp is not available")
+            End If
+
+            Try
+                Dim li = LeadsInfo.GetInstance(bble)
+
+                If li Is Nothing Then
+                    Return BadRequest("Can not find the property. BBLE: " & bble)
+                End If
+
+                corp.BBLE = li.BBLE
+                corp.PropertyAssigned = li.PropertyAddress
+                corp.Status = "Assigned Out"
+
+                db.SaveChanges()
+            Catch ex As Exception
+                Throw
+            End Try
+
+            Return StatusCode(HttpStatusCode.NoContent)
+        End Function
+
+        ' GET /api/CorporationEntities/Teams
+        <ResponseType(GetType(String()))>
+        <Route("api/CorporationEntities/Teams")>
+        Function GetCorpEntryTeams() As IHttpActionResult
+            Dim teams = db.CorporationEntities.Where(Function(c) c.Office IsNot Nothing).Select(Function(c) c.Office).Distinct.ToArray
+
+            If teams IsNot Nothing AndAlso teams.Count > 0 Then
+                Return Ok(teams)
+            End If
+
+            Return NotFound()
+        End Function
+
         ' GET: api/CorporationEntities/5
         <ResponseType(GetType(CorporationEntity))>
         Function GetCorporationEntity(ByVal id As Integer) As IHttpActionResult

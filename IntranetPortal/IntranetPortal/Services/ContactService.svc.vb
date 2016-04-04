@@ -99,7 +99,7 @@ Public Class ContactService
             End Try
 
         End If
-        Throw New Exception("entiy is emplty")
+        Throw New Exception("entiy is empty")
     End Function
     ' Add more operations here and mark them with <OperationContract()>
     <OperationContract()>
