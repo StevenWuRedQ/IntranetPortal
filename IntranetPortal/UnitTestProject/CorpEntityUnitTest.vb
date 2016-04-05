@@ -10,7 +10,7 @@ Imports IntranetPortal.Data
 <TestClass()> Public Class CorpEntityUnitTest
 
     Dim bble As String = "4089170024 "
-    Dim team As String = "RonTeam"
+    Dim team As String = "TomTeam"
 
     ''' <summary>
     ''' GetAvailableCorp testing
@@ -30,7 +30,8 @@ Imports IntranetPortal.Data
 
         Dim li = LeadsInfo.GetInstance(BBLE)
 
-        Dim corp = CorporationEntity.GetAvailableCorp("RonTeam", False)
+        Dim corp = CorporationEntity.GetAvailableCorp(team, False)
+
         Dim address = "116-55 Queens Blvd"
         corp.AssignCorp(bble, address)
 
@@ -39,6 +40,11 @@ Imports IntranetPortal.Data
         Assert.AreEqual(corp.BBLE, bble)
         Assert.AreEqual(address, corp.Address)
         Assert.AreEqual("Assigned Out", corp.Status)
+
+        corp.Status = "Available"
+        corp.BBLE = Nothing
+        corp.Address = Nothing
+        corp.Save()
     End Sub
 
 End Class
