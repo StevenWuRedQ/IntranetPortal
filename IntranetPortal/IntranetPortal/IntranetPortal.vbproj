@@ -1716,6 +1716,20 @@
       <DependentUpon>MapsPopup.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PopupControl\PreAssignCropForm.aspx.designer.vb">
+      <DependentUpon>PreAssignCropForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\PreAssignCropForm.aspx.vb">
+      <DependentUpon>PreAssignCropForm.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PopupControl\PreAssignPopup.ascx.designer.vb">
+      <DependentUpon>PreAssignPopup.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\PreAssignPopup.ascx.vb">
+      <DependentUpon>PreAssignPopup.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="PopupControl\PropertyMap.aspx.designer.vb">
       <DependentUpon>PropertyMap.aspx</DependentUpon>
     </Compile>
@@ -6713,6 +6727,8 @@
     <Content Include="PopupControl\EditHomeOwner.ascx" />
     <Content Include="PopupControl\LeadTaxSearchRequest.aspx" />
     <Content Include="PopupControl\MapsPopup.ascx" />
+    <Content Include="PopupControl\PreAssignCropForm.aspx" />
+    <Content Include="PopupControl\PreAssignPopup.ascx" />
     <Content Include="PopupControl\PropertyMap.aspx" />
     <Content Include="PopupControl\SearchRecodingPopupCtrl.ascx" />
     <Content Include="PopupControl\SearchRecordingPopup.aspx" />

@@ -55,7 +55,20 @@
             $scope.ptContactServices = ptContactServices;
             $scope.RecordDocuments = {}
             $scope.FormItems = [
-                
+               {
+                   head: 'Pre Assign',
+                   items: [
+                       { label: 'Property Address' },
+                       { label: '# of Parties' },
+                       { label: 'Name Of parties' },
+                       { label: 'Check request', type: 'radio' },
+                       { label: '# of checks' },
+                       { label: 'Total Check Amount', type: 'money' },
+                       { label: 'Check is in Office', type: 'radio'},
+                       { label: 'Name On Check',  },
+                       { label: 'Need do search' , type: 'radio'},
+                   ]
+               },
 
             ];
             $scope.GenerateModel = function () {

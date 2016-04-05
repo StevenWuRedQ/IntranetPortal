@@ -2,7 +2,9 @@
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 <%@ Register Src="~/ShortSale/NGShortSaleInLeadsView.ascx" TagPrefix="uc1" TagName="NGShortSaleInLeadsView" %>
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
+<%@ Register Src="~/PopupControl/PreAssignPopup.ascx" TagPrefix="uc1" TagName="PreAssignPopup" %>
 
+<uc1:PreAssignPopup runat="server" ID="PreAssignPopup" />
 <%--@ Register Src="~/ShortSale/ShortSaleInLeadsView.ascx" TagPrefix="uc1" TagName="ShortSaleInLeadsView" --%>
 
 <script src="/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js"></script>
@@ -128,10 +130,12 @@
                     <span style="margin-left: 19px;"><%= LeadsInfoData.PropertyAddress %></span>
                     <% End If%>
                 </span>
+                
                 <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
                 <span class="time_buttons" onclick='ShowDOBWindow("<%= LeadsInfoData.Borough%>","<%= LeadsInfoData.Block%>", "<%= LeadsInfoData.Lot%>")'>DOB</span>
                 <span class="time_buttons" onclick='ShowAcrisMap("<%= LeadsInfoData.BBLE %>",<%=LeadsInfoData.Borough%>,<%=LeadsInfoData.Block %>,<%=LeadsInfoData.Lot %>)'>Acris</span>
                 <span class="time_buttons" onclick='ShowPropertyMap("<%= LeadsInfoData.BBLE %>")'>Maps</span>
+                <span class="time_buttons" onclick='preAssignPopopClient.Show()'>Pre sign</span>
 
             </div>
             <%--data format June 2, 2014 6:37 PM--%>
@@ -366,7 +370,9 @@
                             <% If IntranetPortal.Data.LeadInfoDocumentSearch.Exist(hfBBLE.Value) Then %>
                             <i class="fa fa-eye  color_blue_edit collapse_btn tooltip-examples" title="View search result" onclick="OpenLeadsWindow('/PopupControl/LeadTaxSearchRequest.aspx?BBLE=<%=hfBBLE.Value%>','Entities',667,900)"></i>
                             <%Else %>
-                            <i class="fa fa-search-plus  color_blue_edit collapse_btn tooltip-examples" title="Request a search" onclick="RequestDocSearch()"></i>
+                                <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
+                                <i class="fa fa-search-plus  color_blue_edit collapse_btn tooltip-examples" title="Request a search" onclick="RequestDocSearch()"></i>
+                                <% End If %>
                             <% End If %>
                         </div>
 
@@ -382,11 +388,11 @@
                             <br />
 
                             <%--class="circle-radio-boxes"--%>
-                            <input type="checkbox" id="cb1stFannie" value="Fannie" runat="server" checked='<%# LeadsInfoData.MortgageData.C1stFannie.HasValue andalso LeadsInfoData.MortgageData.C1stFannie %>' />
+                            <input type="checkbox" id="cb1stFannie" value="Fannie" runat="server" checked='<%# LeadsInfoData.MortgageData.C1stFannie.HasValue AndAlso LeadsInfoData.MortgageData.C1stFannie %>' />
                             <label for="<%= cb1stFannie.ClientID %>" class=" form_div_radio_group">
                                 <span class="form_span_group_text">Fannie</span>
                             </label>
-                            <input type="checkbox" id="cb1stFHA" style="margin-left: 66px" runat="server" checked='<%# LeadsInfoData.MortgageData.C1stFHA.HasValue andalso LeadsInfoData.MortgageData.C1stFHA %>' />
+                            <input type="checkbox" id="cb1stFHA" style="margin-left: 66px" runat="server" checked='<%# LeadsInfoData.MortgageData.C1stFHA.HasValue AndAlso LeadsInfoData.MortgageData.C1stFHA %>' />
                             <label for="<%= cb1stFHA.ClientID %>" class=" form_div_radio_group form_div_node_margin">
                                 <span class="form_span_group_text">FHA</span>
                             </label>
@@ -410,11 +416,11 @@
                             <br />
 
                             <%--class="circle-radio-boxes"--%>
-                            <input type="checkbox" id="cb2ndFannie" name="cb2ndFannie" value="Fannie" runat="server" checked='<%# LeadsInfoData.MortgageData.C2ndFannie.HasValue andalso LeadsInfoData.MortgageData.C2ndFannie %>' />
+                            <input type="checkbox" id="cb2ndFannie" name="cb2ndFannie" value="Fannie" runat="server" checked='<%# LeadsInfoData.MortgageData.C2ndFannie.HasValue AndAlso LeadsInfoData.MortgageData.C2ndFannie %>' />
                             <label for="<%= cb2ndFannie.ClientID %>" class=" form_div_radio_group">
                                 <span class="form_span_group_text">Fannie</span>
                             </label>
-                            <input type="checkbox" id="cb2ndFHA" name="cb2ndFHA" value="FHA" style="margin-left: 66px" runat="server" checked='<%# LeadsInfoData.MortgageData.C2ndFHA.HasValue andalso LeadsInfoData.MortgageData.C2ndFHA %>' />
+                            <input type="checkbox" id="cb2ndFHA" name="cb2ndFHA" value="FHA" style="margin-left: 66px" runat="server" checked='<%# LeadsInfoData.MortgageData.C2ndFHA.HasValue AndAlso LeadsInfoData.MortgageData.C2ndFHA %>' />
                             <label for="<%= cb2ndFHA.ClientID %>" class=" form_div_radio_group form_div_node_margin">
                                 <span class="form_span_group_text">FHA</span>
                             </label>
@@ -439,7 +445,7 @@
                             <br />
 
                             <%--class="circle-radio-boxes"--%>
-                            <input type="checkbox" id="cb3rdFannie" name="cb3rdFannie" value="Fannie" runat="server" checked='<%# LeadsInfoData.MortgageData.C3rdFannie.HasValue andalso LeadsInfoData.MortgageData.C3rdFannie %>' />
+                            <input type="checkbox" id="cb3rdFannie" name="cb3rdFannie" value="Fannie" runat="server" checked='<%# LeadsInfoData.MortgageData.C3rdFannie.HasValue AndAlso LeadsInfoData.MortgageData.C3rdFannie %>' />
                             <label for="<%= cb3rdFannie.ClientID %>" class=" form_div_radio_group">
                                 <span class="form_span_group_text">Fannie</span>
                             </label>

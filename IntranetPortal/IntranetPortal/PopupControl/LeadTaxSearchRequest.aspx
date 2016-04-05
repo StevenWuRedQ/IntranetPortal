@@ -280,8 +280,21 @@
                                             <td>DOB Violation - {{DocSearch.LeadResearch.dobWebsites?'':'No'}} {{DocSearch.LeadResearch.dobWebsites | currency}}
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>
+                                                Has Co - {{DocSearch.LeadResearch.hasCO?'Yes':'No'}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Has Judgment {{DocSearch.LeadResearch.judgments?'Yes':'No'}}</td>
+                                        </tr>
                                          <tr>
-                                            <td>Judgment - {{DocSearch.LeadResearch.judgments?'':'No'}} {{DocSearch.LeadResearch.judgments | currency}}
+                                            <td>Judgment Amount-  {{DocSearch.LeadResearch.judgments | currency}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                ECB On JdmtSearch - {{DocSearch.LeadResearch.judgementSearch}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -292,10 +305,21 @@
                                             <td>NYS Tax Liens - {{DocSearch.LeadResearch.hasNysTaxLien?'Yes':'No'}} 
                                             </td>
                                         </tr>
-                                        
+                                        <tr>
+                                            <td>Judgement Doc - <a ng-if="DocSearch.LeadResearch.judgementSearchDoc.path" src="{{DocSearch.LeadResearch.judgementSearchDoc.path}}" > Judgement Search </a> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Court Date - {{DocSearch.LeadResearch.courtDate | date:'MM/dd/yyyy'}}
+                                            </td>
+                                        </tr>
                                        
                                         <tr>
                                             <td>Mortgage - {{DocSearch.LeadResearch.mortgageAmount?'':'No'}} {{DocSearch.LeadResearch.mortgageAmount | currency}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2nd Mortgage - {{DocSearch.LeadResearch.secondMortgageAmount?'':'No'}} {{DocSearch.LeadResearch.secondMortgageAmount | currency}}
                                             </td>
                                         </tr>
                                         <tr>
