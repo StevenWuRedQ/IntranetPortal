@@ -37,7 +37,7 @@ Public Class WebApiConfig2
         builder.EntitySet(Of NYC_Scan_TaxLiens_Per_Year)("TaxLiensOData")
         builder.EntitySet(Of IntranetPortal.Data.ShortSaleLeadsInfo)("ShortSaleLeadsInfoes")
         config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel())
-        GlobalConfiguration.Configuration.Filters.Add(New WebApiException)
+        'GlobalConfiguration.Configuration.Filters.Add(New WebApiException)
 
     End Sub
 
