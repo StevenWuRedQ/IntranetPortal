@@ -34,11 +34,16 @@ Namespace Controllers
         <ResponseType(GetType(CorporationEntity))>
         <Route("api/CorporationEntities/AvailableCorp")>
         Function GetAvailableCorpToSign(ByVal team As String, wellsfargo As String) As IHttpActionResult
-            Dim corps = db.CorporationEntities.Where(Function(c) c.Office = team AndAlso c.Status = "Available").ToList
+            Dim isWellsfargo = False
 
-            If corps IsNot Nothing AndAlso corps.Count > 0 Then
-                Dim rand As New Random
-                Return Ok(corps(rand.Next(corps.Count)))
+            If Boolean.TryParse(wellsfargo, isWellsfargo) Then
+
+            End If
+
+            Dim corp = CorporationEntity.GetAvailableCorp(team, isWellsfargo)
+
+            If corp IsNot Nothing Then
+                Return Ok(corp)
             End If
 
             Return NotFound()
@@ -55,31 +60,8 @@ Namespace Controllers
                 Return BadRequest()
             End If
 
-            If db.CorporationEntities.Any(Function(a) a.BBLE = bble) Then
-                Return BadRequest("Property was already assigned.")
-            End If
-
-            corp = db.CorporationEntities.Find(corp.EntityId)
-            If corp Is Nothing Then
-                Return BadRequest()
-            End If
-
-            If corp.Status <> "Available" Then
-                Return BadRequest("Corp is not available")
-            End If
-
             Try
-                Dim li = LeadsInfo.GetInstance(bble)
-
-                If li Is Nothing Then
-                    Return BadRequest("Can not find the property. BBLE: " & bble)
-                End If
-
-                corp.BBLE = li.BBLE
-                corp.PropertyAssigned = li.PropertyAddress
-                corp.Status = "Assigned Out"
-
-                db.SaveChanges()
+                CorpManage.AssignCorp(bble, corp.EntityId)
             Catch ex As Exception
                 Throw
             End Try
