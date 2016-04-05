@@ -618,9 +618,9 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="TitleCompanyName" Caption="Title Company">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="InHouseTitle" Caption="Inhouse Title">
+                                                    <dx:GridViewDataTextColumn FieldName="InHouseTitleUser" Caption="Inhouse Title">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="InHouseLegal" Caption="Inhouse Legal">
+                                                    <dx:GridViewDataTextColumn FieldName="InHouseLegalUser" Caption="Inhouse Legal">
                                                     </dx:GridViewDataTextColumn>
 
                                                     <dx:GridViewDataDateColumn FieldName="CallbackDate" Caption="Followup Date">
