@@ -119,7 +119,7 @@
                 <div class="form_div_node form_div_no_float form_div_node_no_under_line" style="width: 100%">
                     <span class="form_input_title">Date of Birth</span>
                     <div class="clearfix">
-                        <%=If(TLOLocateReport.dateOfBirthField IsNot Nothing, BuilderDate(TLOLocateReport.dateOfBirthField.dateOfBirthField), "") %>&nbsp;
+                        <%=If(TLOLocateReport.dateOfBirthField IsNot Nothing AndAlso TLOLocateReport.dateOfBirthField.dateOfBirthField IsNot Nothing, BuilderDate(TLOLocateReport.dateOfBirthField.dateOfBirthField), "") %>&nbsp;
                     </div>
                 </div>
             </td>
