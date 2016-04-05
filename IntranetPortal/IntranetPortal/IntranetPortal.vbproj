@@ -586,6 +586,7 @@
     <Compile Include="CodeFolder\CallbackException.vb" />
     <Compile Include="CodeFolder\ComplaintsManage.vb" />
     <Compile Include="CodeFolder\ConstructionManage.vb" />
+    <Compile Include="CodeFolder\CorpManage.vb" />
     <Compile Include="CodeFolder\CustomBinder.vb" />
     <Compile Include="CodeFolder\DataWCFService.vb" />
     <Compile Include="CodeFolder\DateTimeJavaScriptConverter .vb" />
@@ -7407,6 +7408,7 @@
     <Content Include="bower_components\angular-mocks\package.json" />
     <Content Include="bower_components\angular-mocks\README.md" />
     <Content Include="bower_components\Web.config" />
+    <Content Include="App_Data\OfferDoc\BILL OF SALE.docx" />
     <None Include="Service References\CallTrackingService\CallTrackingService.wsdl" />
     <Content Include="Service References\CallTrackingService\IntranetPortal.CallTrackingService.EmployeeStatisticData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -7646,6 +7648,7 @@
     <Folder Include="Content\layouts\SlideOut\" />
     <Folder Include="Content\layouts\Split\" />
     <Folder Include="TempDataFile\AuctionFiles\" />
+    <Folder Include="TempDataFile\OfferDoc\" />
     <Folder Include="TempDataFile\TitleDocs\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,7 @@
-﻿Public Class CorporationEntity
+﻿''' <summary>
+''' The Model of Corporation Entity
+''' </summary>
+Public Class CorporationEntity
 
     Private Shared ReadOnly DocumentLibrary = "CorporationEntity"
 
@@ -25,6 +28,77 @@
             Return ctx.CorporationEntities.Find(entityId)
         End Using
     End Function
+
+    ''' <summary>
+    ''' Get team's available corp to sign
+    ''' </summary>
+    ''' <param name="team">The team name</param>
+    ''' <param name="isWellsfargo">Is the wells fargo servicer</param>
+    ''' <returns>The available corp</returns>
+    Public Shared Function GetAvailableCorp(team As String, isWellsfargo As Boolean) As CorporationEntity
+        Using db As New PortalEntities
+            If isWellsfargo Then
+                Throw New NotImplementedException()
+            Else
+                Dim corps = db.CorporationEntities.Where(Function(c) c.Office = team AndAlso c.Status = "Available").ToList
+
+                If corps IsNot Nothing AndAlso corps.Count > 0 Then
+                    Dim rand As New Random
+                    Return corps(rand.Next(corps.Count))
+                End If
+            End If
+
+            Return Nothing
+        End Using
+    End Function
+
+    ''' <summary>
+    ''' Assign Corp to property
+    ''' </summary>
+    ''' <param name="bble">The property BBLE</param>
+    ''' <param name="address">The property address</param>
+    ''' <returns>The assigned Corp Object</returns>
+    Public Function AssignCorp(bble As String, address As String) As CorporationEntity
+
+        Using db As New PortalEntities
+            If db.CorporationEntities.Any(Function(a) a.BBLE = bble) Then
+                Throw New Exception("Property was already assigned.")
+            End If
+
+            If Status <> "Available" Then
+                Throw New Exception("Corp is not available")
+            End If
+
+            Try
+                Me.BBLE = bble
+                Me.PropertyAssigned = address
+                Me.Status = "Assigned Out"
+                db.Entry(Me).State = Entity.EntityState.Modified
+
+                db.SaveChanges()
+            Catch ex As Exception
+                Throw
+            End Try
+        End Using
+
+        Return Me
+    End Function
+
+    Public Shared Function GetAvailableCorpAmount(team As String) As Integer
+        Using db As New PortalEntities
+            Dim count = db.CorporationEntities.Where(Function(c) c.Office = team AndAlso c.Status = "Available").Count
+
+            Return count
+        End Using
+    End Function
+
+    Private Sub NotifyEntityManager()
+
+
+
+
+        'IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", templateName, emailData)
+    End Sub
 
     Public Shared Function UploadFile(entityId As Integer, fileName As String, fileBytes As Byte(), uploadBy As String) As String
         Dim corp = CorporationEntity.GetEntity(entityId)
@@ -64,4 +138,10 @@
             ctx.SaveChanges()
         End Using
     End Sub
+
+    Private Function CorporationEntityExists(ByVal id As Integer) As Boolean
+        Using ctx As New PortalEntities
+            Return ctx.CorporationEntities.Count(Function(e) e.EntityId = id) > 0
+        End Using
+    End Function
 End Class

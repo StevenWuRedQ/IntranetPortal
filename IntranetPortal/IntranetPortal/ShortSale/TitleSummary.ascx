@@ -610,6 +610,10 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="ReferralTeam" Caption="Team">
                                                     </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="InHouseTitle" Caption="Inhouse Title">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="InHouseLegal" Caption="Inhouse Legal">
+                                                    </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="ListingAgentName" Caption="List Agent">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="SellerAttorneyName" Caption="Seller Attorney">
@@ -618,7 +622,6 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="TitleCompanyName" Caption="Title Company">
                                                     </dx:GridViewDataTextColumn>
-                                                    
                                                     <dx:GridViewDataDateColumn FieldName="CallbackDate" Caption="Followup Date">
                                                     </dx:GridViewDataDateColumn>
                                                     <dx:GridViewDataTextColumn FieldName="FirstMortgage.LoanAmount" Caption="1st Mort Loan Amount" PropertiesTextEdit-DisplayFormatString="C">

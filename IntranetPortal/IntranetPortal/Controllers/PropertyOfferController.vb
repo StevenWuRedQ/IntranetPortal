@@ -3,9 +3,19 @@ Imports System.Web.Http
 Imports Newtonsoft.Json.Linq
 
 Namespace Controllers
+
+    ''' <summary>
+    ''' The web controller for PropertyOffer
+    ''' </summary>
     Public Class PropertyOfferController
         Inherits ApiController
 
+        ''' <summary>
+        ''' Generate the document package
+        ''' </summary>
+        ''' <param name="bble">The property bble</param>
+        ''' <param name="data">The form data</param>
+        ''' <returns>The generated file link</returns>
         <Route("api/PropertyOffer/GeneratePackage/{bble}")>
         Public Function PostGeneratePackage(bble As String, <FromBody> data As JObject) As IHttpActionResult
 
