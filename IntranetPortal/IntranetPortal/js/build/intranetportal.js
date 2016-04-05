@@ -546,7 +546,7 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
 
     this.getContacts = function (args, /* optional */ groupId) {
         groupId = groupId === undefined ? null : groupId;
-        return $http.get('/Services/ContactService.svc/GetContacts?args=' + args)
+        return $http.get('/Services/ContactService.svc/GetContacts?args=' + args, { noIndicator:true})
             .then(function (response) {
                 if (groupId) return limitToFilter(response.data.filter(function (x) { return x.GroupId == groupId }), 10);
                 return limitToFilter(response.data, 10);

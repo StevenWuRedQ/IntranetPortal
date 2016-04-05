@@ -59,8 +59,10 @@
 
             var myInterceptor = {
                 'request': function (config) {
-
-                    self.ShowLoading();
+                    if (!config.noIndicator)
+                    {
+                        self.ShowLoading();
+                    }
                     return config;
                 },
                 'requestError': function (rejection) {
