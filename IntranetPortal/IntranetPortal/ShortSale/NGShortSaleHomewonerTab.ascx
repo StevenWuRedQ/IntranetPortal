@@ -13,11 +13,11 @@
     <div class="ss_border" style="border-top-color: transparent">
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
-                <label class="ss_form_input_title " ng-class="{ss_warning:!owner.FirstName||!owner.LastName}">Name</label>
+                <label class="ss_form_input_title " ng-class="{ss_warning:!owner.FirstName||!owner.LastName}" data-message="Please fill seller {{$index+1}} name">Name</label>
                 <input class="ss_form_input ss_not_empty" ng-value="formatName(owner.FirstName,owner.MiddleName,owner.LastName)" readonly>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">DOB</label>
+                <label class="ss_form_input_title"  ng-class="{ss_warning:!owner.DOB}" data-message="Please fill seller {{$index+1}} DOB">DOB</label>
                 <input class="ss_form_input" ng-model="owner.DOB" ss-date readonly>
             </li>
             <li class="ss_form_item">

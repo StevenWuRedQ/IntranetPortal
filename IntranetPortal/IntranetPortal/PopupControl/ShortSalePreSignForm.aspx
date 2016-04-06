@@ -154,7 +154,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
-                                <label>Select Offer type</label>
+                                <label ng-class="{ss_warning:!SSpreSign.Type}" data-message="Please Select Offer type">Select Offer type</label>
                                 <select class="form-control" ng-model="SSpreSign.Type">
                                     <option selected>Short Sale</option>
                                     <option>Straight Sale</option>
@@ -197,16 +197,16 @@
                     </div>--%>
                 </div>
                 <%--select team and assign crops--%>
-                <div class="view-animate" ng-show="currentStep().title=='Assign Crops'">
+                <div class="view-animate" ng-show="currentStep().title=='Assign Crops'" id="preSignAssignCrops">
                     <h3 class="wizard-title">Select team and Assgin crops</h3>
                     <div class="ss_form">
                         <h4 class="ss_form_title ">Assign </h4>
                         <div class="ss_border">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item ">
-                                    <label class="ss_form_input_title">Team Name</label>
+                                    <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.assignCrop.Name}" data-message="Please select team!">Team Name</label>
                                     <select class="ss_form_input" ng-model="SSpreSign.assignCrop.Name">
-                                        <option></option>
+                                        
                                         <option ng-repeat="n in CorpTeam track by $index">{{n}}</option>
                                     </select>
                                 </li>
@@ -214,13 +214,22 @@
                                     <label class="ss_form_input_title">Is wells fargo</label>
                                     <pt-radio name="AssignCropWellFrago" model="SSpreSign.assignCrop.isWellsFargo"></pt-radio>
                                 </li>
+                                <li class="ss_form_item "  ng-show="SSpreSign.assignCrop.isWellsFargo">
+                                    <label class="ss_form_input_title " ng-class="{ss_warning:SSpreSign.assignCrop.isWellsFargo && !SSpreSign.assignCrop.Signer}" data-message="If Servicer is Wells Fargo Please select signer">signer </label>
+                                    <select class="ss_form_input" ng-model="SSpreSign.assignCrop.Signer">
+                                        <option ng-repeat="s in  SSpreSign.assignCrop.signers track by $index">{{s}}</option>
+                                    </select>
+                                </li>
+                               
+
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title">&nbsp;</label>
                                     <input type="button" value="Assign Crop" class="rand-button rand-button-blue rand-button-pad" ng-click="assginCropClick()" ng-show="!SSpreSign.assignCrop.Crop">
                                 </li>
+                                
                             </ul>
                         </div>
-                        <div class="ss_form" ng-show="SSpreSign.assignCrop.Crop">
+                        <div class="ss_form" ng-show="SSpreSign.assignCrop.Crop" ng-class="{ss_warning:SSpreSign.assignCrop.Crop}" ng-message="Please assign Crop to continue!">
                             <div class="alert alert-success" role="alert"><strong>Well done!</strong> You successfully assign <strong>{{SSpreSign.assignCrop.Crop}}</strong> to <strong>{{SSpreSign.PropertyAddress}}</strong> . </div>
                         </div>
                     </div>
@@ -639,13 +648,13 @@
 
                 var ss = ScopeHelper.getShortSaleScope();
                 var _sellers = ss.SsCase.PropertyInfo.Owners;
-                var _seller1 = _sellers[0];
-                if (!_sellers || !_seller1 || !_seller1.LastName || !_seller1.FirstName) {
-                    AngularRoot.alert("Make sure you fill at least one seller information !")
+               
+                var _dealSheet = $scope.SSpreSign.DealSheet;
+                var eMessages = $scope.getErrorMessage('ShortSaleCtrl');
+                if (_.any(eMessages)) {
+                    AngularRoot.alert(eMessages.join(' <br />'));
                     return false;
                 }
-                var _dealSheet = $scope.SSpreSign.DealSheet;
-
                 _dealSheet.CorrectionDeed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
                 var _sellers = _.map(_sellers, function (o) {
                     o.Name = ss.formatName(o.FirstName, o.MiddleName, o.LastName);
@@ -661,7 +670,16 @@
                 _dealSheet.Deed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
                 return true;
             }
-
+            $scope.$watch('SSpreSign.assignCrop.Name', function (newValue, oldValue) {
+                if (newValue)
+                {
+                    var team = newValue;
+                    $http.get('/api/CorporationEntities/CorpSigners?team=' + team).success(function (signers) {
+                        $scope.SSpreSign.assignCrop.signers = signers
+                    });
+                }
+                
+            });
             $scope.constractFromData = function () {
                 var ss = ScopeHelper.getShortSaleScope();
                 var _sellers = ss.SsCase.PropertyInfo.Owners;
@@ -720,10 +738,10 @@
             }
 
             $scope.assginCropClick = function () {
-                var _assignCrop = $scope.SSpreSign.assignCrop;
-                if ((!_assignCrop.Name)) {
-                    AngularRoot.alert("Please select team name!");
-                    return;
+                var eMessages = $scope.getErrorMessage('preSignAssignCrops');
+                if (_.any(eMessages)) {
+                    AngularRoot.alert(eMessages.join(' <br />'));
+                    return false;
                 }
                 $http.get('/api/CorporationEntities/AvailableCorp?team=' + _assignCrop.Name + '&wellsfargo=' + _assignCrop.isWellsFargo).success(function (data) {
 
@@ -743,8 +761,10 @@
 
             })
             $scope.AssignCropsNext = function () {
-                if (!$scope.SSpreSign.assignCrop.Crop) {
-                    AngularRoot.alert("please assign crop to continue!")
+                
+                var eMessages = $scope.getErrorMessage('preSignAssignCrops');
+                if (_.any(eMessages)) {
+                    AngularRoot.alert(eMessages.join(' <br />'));
                     return false;
                 }
                 var _dealSheet = $scope.SSpreSign.DealSheet;
