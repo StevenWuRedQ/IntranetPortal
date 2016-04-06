@@ -308,7 +308,6 @@
                                 <span class="fix-add-btn">
                                     <pt-add ng-click="ensurePush('SSpreSign.DealSheet.ContractOrMemo.Sellers')" style="font-size:18px"></pt-add>
                                 </span>
-                                
                             </uib-tabset>
 
                             <div class="ss_form">
@@ -316,15 +315,15 @@
                                 <div class="ss_border">
                                     <ul class="ss_form_box clearfix">
                                         <li class="ss_form_item ">
-                                            <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.buyerName}" data-message="Please fill Buyer Name">Buyer Name</label>
-                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.buyerName" /></li>
+                                            <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.CorpName}" data-message="Please fill Buyer Name">Buyer Name</label>
+                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.CorpName" /></li>
 
                                         <li class="ss_form_item ">
-                                            <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.buyerAttorney}" data-message="Please fill Buyer Attorney">Buyer Attorney</label>
-                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.buyerAttorney" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" /></li>
+                                            <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.buyerAttorney}" data-message="Please fill Buyer Attorney">Buyer Attorney</label>
+                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.buyerAttorney" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" /></li>
                                         <li class="ss_form_item " style="width: 96%">
-                                            <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.buyerAddress}" data-message="Please fill Buyer Address">Buyer  Address</label>
-                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.buyerAddress" />
+                                            <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.Address}" data-message="Please fill Buyer Address">Buyer  Address</label>
+                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.Address" />
                                         </li>
                                     </ul>
                                 </div>
@@ -423,11 +422,11 @@
                                 <div class="ss_border">
                                     <ul class="ss_form_box clearfix">
                                         <li class="ss_form_item ">
-                                            <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.Name}" data-message="Please fill Buyer Name!">Buyer Name</label>
-                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.Name" /></li>
+                                            <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.CorpName}" data-message="Please fill Buyer Name!">Buyer Name</label>
+                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.CorpName" /></li>
                                         <li class="ss_form_item ">
-                                            <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.SSN}" data-message="Please fill Buyer SSN/EIN!">Buyer SSN/EIN</label>
-                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.SSN" />
+                                            <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.EIN}" data-message="Please fill Buyer SSN/EIN!">Buyer SSN/EIN</label>
+                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.EIN" />
                                         </li>
                                         <li class="ss_form_item ss_form_item_line">
                                             <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.Address}" data-message="Please fill Buyer Address!">Buyer Address</label>
@@ -623,7 +622,8 @@
                 }
             };
             $scope.DeadType = {
-                Contract: true, Deed: false, CorrectionDeed: false, POA: false
+                Contract: true
+                //Contract: true, Deed: false, CorrectionDeed: false, POA: false
             };
             $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); };
             $scope.arrayRemove = ptCom.arrayRemove;
@@ -632,7 +632,7 @@
             {
                 $http.post('/api/PropertyOffer/GeneratePackage/' + $scope.SSpreSign.BBLE, JSON.stringify($scope.SSpreSign)).success(function (url)
                 {
-                    window.open(url, '_blank');
+                    STDownloadFile('/TempDataFile/OfferDoc/' + $scope.SSpreSign.BBLE.trim() + '.zip', $scope.SSpreSign.BBLE.trim() + '.zip');
                 })
             }
             $scope.shortSaleInfoNext = function () {
@@ -644,6 +644,9 @@
                     AngularRoot.alert("Make sure you fill at least one seller information !")
                     return false;
                 }
+                var _dealSheet = $scope.SSpreSign.DealSheet;
+
+                _dealSheet.CorrectionDeed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
                 var _sellers = _.map(_sellers, function (o) {
                     o.Name = ss.formatName(o.FirstName, o.MiddleName, o.LastName);
                     o.Address = $scope.SSpreSign.PropertyAddress;//ss.formatAddr(o.MailNumber, o.MailStreetName, o.MailApt, o.MailCity, o.MailState, o.MailZip);
@@ -651,7 +654,11 @@
                     return o
                 });
 
-
+               
+                _dealSheet.ContractOrMemo.Sellers = $.extend(true, [], _sellers);
+                _dealSheet.Deed.Sellers = $.extend(true, [], _sellers);
+                _dealSheet.CorrectionDeed.Sellers = $.extend(true, {}, _sellers);
+                _dealSheet.Deed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
                 return true;
             }
 
@@ -659,13 +666,7 @@
                 var ss = ScopeHelper.getShortSaleScope();
                 var _sellers = ss.SsCase.PropertyInfo.Owners;
                 $scope.SSpreSign.DeadType = $scope.DeadType
-                var _dealSheet = $scope.SSpreSign.DealSheet;
-                _dealSheet.ContractOrMemo.Sellers = $.extend(true, [], _sellers);
-                _dealSheet.Deed.Sellers = $.extend(true, [], _sellers);
-                _dealSheet.CorrectionDeed.Sellers = $.extend(true, {}, _sellers);
-                _dealSheet.Deed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
-
-                _dealSheet.CorrectionDeed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
+                
                 $scope.SSpreSign.SsCase = ss.SsCase;
                 var leadSearch = ScopeHelper.getLeadsSearchScope();
                 $.extend($scope.SSpreSign.assignCrop, { isWellsFargo: leadSearch.DocSearch.LeadResearch.wellsFargo })
@@ -731,6 +732,7 @@
                         if (r) {
                             $http.post('/api/CorporationEntities/Assign?bble=' + $scope.SSpreSign.BBLE, JSON.stringify(data)).success(function () {
                                 _assignCrop.Crop = data.CorpName;
+                                _assignCrop.CropData = data;
                             });
                         }
                     });
@@ -745,6 +747,11 @@
                     AngularRoot.alert("please assign crop to continue!")
                     return false;
                 }
+                var _dealSheet = $scope.SSpreSign.DealSheet;
+                
+                var _cropData =  $scope.SSpreSign.assignCrop.CropData;
+                _dealSheet.ContractOrMemo.Buyer = _cropData;
+                _dealSheet.Deed.Buyer = _cropData;
                 return true;
             }
 
@@ -791,7 +798,7 @@
                 return $scope.filteredSteps.length;
             }
             $scope.currentStep = function () {
-                return $scope.steps[$scope.step - 1];
+                return $scope.filteredSteps[$scope.step - 1];
             }
 
             $scope.NextStep = function () {
