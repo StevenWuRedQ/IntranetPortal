@@ -98,11 +98,11 @@ Namespace Controllers
                                                     {"SubmitUser", empl.Name},
                                                     {"Address", mLead.LeadsInfo.PropertyAddress},
                                                     {"DocUser", LeadInfoSearchUser.Name},
-                                                    {"BBLE", leadInfoDocumentSearch.BBLE}
+                                                    {"BBLE", leadInfoDocumentSearch.BBLE},
+                                                    {"ExpectedDate", IIf(leadInfoDocumentSearch.ExpectedSigningDate.HasValue, String.Format("{0:d}", leadInfoDocumentSearch.ExpectedSigningDate), "None")}
                                                 })
                     End If
                 End If
-
 
             Else
                 PutLeadInfoDocumentSearch(leadInfoDocumentSearch.BBLE, leadInfoDocumentSearch)
