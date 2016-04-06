@@ -36,19 +36,48 @@ Public Class CorporationEntity
     ''' <param name="isWellsfargo">Is the wells fargo servicer</param>
     ''' <returns>The available corp</returns>
     Public Shared Function GetAvailableCorp(team As String, isWellsfargo As Boolean) As CorporationEntity
-        Using db As New PortalEntities
-            If isWellsfargo Then
-                Throw New NotImplementedException()
-            Else
-                Dim corps = db.CorporationEntities.Where(Function(c) c.Office = team AndAlso c.Status = "Available").ToList
 
-                If corps IsNot Nothing AndAlso corps.Count > 0 Then
-                    Dim rand As New Random
-                    Return corps(rand.Next(corps.Count))
-                End If
+        If isWellsfargo Then
+            Throw New NotImplementedException()
+        Else
+            Dim corps = GetTeamAvailableCorps(team)
+
+            If corps IsNot Nothing AndAlso corps.Count > 0 Then
+                Dim rand As New Random
+                Return corps(rand.Next(corps.Count))
             End If
+        End If
 
-            Return Nothing
+        Return Nothing
+    End Function
+
+    ''' <summary>
+    ''' Get team's available corp by signer
+    ''' </summary>
+    ''' <param name="team">The team name</param>
+    ''' <param name="signer">Signer</param>
+    ''' <returns>The available corp</returns>
+    Public Shared Function GetAvailableCorpBySigner(team As String, signer As String) As CorporationEntity
+
+        Dim corps = GetTeamAvailableCorps(team).Where(Function(a) a.Signer = signer).ToList
+
+        If corps IsNot Nothing AndAlso corps.Count > 0 Then
+            Dim rand As New Random
+            Return corps(rand.Next(corps.Count))
+        End If
+
+        Return Nothing
+    End Function
+
+    ''' <summary>
+    ''' Return Team's Available Corps
+    ''' </summary>
+    ''' <param name="team">The Team Name</param>
+    ''' <returns>List of Corporation Entity</returns>
+    Public Shared Function GetTeamAvailableCorps(team As String) As List(Of CorporationEntity)
+        Using db As New PortalEntities
+            Dim corps = db.CorporationEntities.Where(Function(c) c.Office = team AndAlso c.Status = "Available").ToList
+            Return corps
         End Using
     End Function
 

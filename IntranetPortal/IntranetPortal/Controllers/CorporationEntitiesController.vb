@@ -30,6 +30,20 @@ Namespace Controllers
             Return Ok(corporationentity)
         End Function
 
+        ' GET /api/CorporationEntities/AvailableCorpBySigner?team=RonTeam&signer=Magda Brillite
+        <ResponseType(GetType(CorporationEntity))>
+        <Route("api/CorporationEntities/AvailableCorpBySigner")>
+        Function GetAvailableCorpBySigner(ByVal team As String, signer As String) As IHttpActionResult
+
+            Dim corp = CorporationEntity.GetAvailableCorpBySigner(team, signer)
+
+            If corp IsNot Nothing Then
+                Return Ok(corp)
+            End If
+
+            Return NotFound()
+        End Function
+
         ' GET /api/CorporationEntities/AvailableCorp?team=RonTeam&wellsfargo=false
         <ResponseType(GetType(CorporationEntity))>
         <Route("api/CorporationEntities/AvailableCorp")>
@@ -44,6 +58,19 @@ Namespace Controllers
 
             If corp IsNot Nothing Then
                 Return Ok(corp)
+            End If
+
+            Return NotFound()
+        End Function
+
+        ' GET /api/CorporationEntities/CorpSigners?team=RonTeam
+        <ResponseType(GetType(String()))>
+        <Route("api/CorporationEntities/CorpSigners")>
+        Function GetTeamCorpSigners(ByVal team As String) As IHttpActionResult
+            Dim corp = CorporationEntity.GetTeamAvailableCorps(team)
+
+            If corp IsNot Nothing Then
+                Return Ok(corp.Select(Function(c) c.Signer).Distinct.ToArray)
             End If
 
             Return NotFound()
