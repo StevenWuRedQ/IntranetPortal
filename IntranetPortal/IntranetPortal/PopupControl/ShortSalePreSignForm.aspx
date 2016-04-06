@@ -325,9 +325,11 @@
 
                                         <li class="ss_form_item ">
                                             <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.buyerAttorney}" data-message="Please fill Buyer Attorney">Buyer Attorney</label>
-                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.buyerAttorney" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" /></li>
+                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.buyerAttorney" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" />
+
+                                        </li>
                                         <li class="ss_form_item " style="width: 96%">
-                                            <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.Address}" data-message="Please fill Buyer Address">Buyer  Address</label>
+                                            <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.Address}" data-message="Please fill Buyer Address">Buyer Address</label>
                                             <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.Address" />
                                         </li>
                                     </ul>
@@ -679,9 +681,10 @@
                 $scope.SSpreSign.DeadType = $scope.DeadType
 
                 $scope.SSpreSign.SsCase = ss.SsCase;
+
                 var leadSearch = ScopeHelper.getLeadsSearchScope();
                 $.extend($scope.SSpreSign.assignCrop, { isWellsFargo: leadSearch.DocSearch.LeadResearch.wellsFargo })
-                $scope.SSpreSign.FormData = $scope.SSpreSign.SsCase;
+                $scope.SSpreSign.FormData = JSON.stringify( $scope.SSpreSign);
             }
             $scope.searchInfoNext = function () {
 
