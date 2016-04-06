@@ -23,20 +23,11 @@ Partial Public Class ShortSalePreSignForm
     Protected WithEvents LeadSearchSummery As Global.IntranetPortal.LeadSearchSummery
     
     '''<summary>
-    '''NGShortSaleHomewonerTab control.
+    '''ShortPreSignControl control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents NGShortSaleHomewonerTab As Global.IntranetPortal.NGShortSaleHomewonerTab
-    
-    '''<summary>
-    '''NGShortSaleMortgageTab control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents NGShortSaleMortgageTab As Global.IntranetPortal.NGShortSaleMortgageTab
+    Protected WithEvents ShortPreSignControl As Global.IntranetPortal.ShortPreSignControl
 End Class

@@ -1973,6 +1973,13 @@
       <DependentUpon>NGShortSaleHomewonerTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ShortSale\ShortPreSignControl.ascx.designer.vb">
+      <DependentUpon>ShortPreSignControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ShortPreSignControl.ascx.vb">
+      <DependentUpon>ShortPreSignControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ShortSale\ShortSale.aspx.designer.vb">
       <DependentUpon>ShortSale.aspx</DependentUpon>
     </Compile>
@@ -7074,6 +7081,7 @@
     <Content Include="App_Data\DeedReversionTemplate.docx" />
     <Content Include="ShortSale\CaseParties.aspx" />
     <Content Include="ShortSale\GeneralParties.ascx" />
+    <Content Include="ShortSale\ShortPreSignControl.ascx" />
     <Content Include="SQL\SearchReslut.sql" />
     <Content Include="TitleUI\TitleSummaryPage.aspx" />
     <Content Include="TitleUI\TitleSummaryView.ascx" />
