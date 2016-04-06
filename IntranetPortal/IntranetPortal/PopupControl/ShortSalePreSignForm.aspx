@@ -299,7 +299,7 @@
                                                     <li class="ss_form_item ">
                                                         <label class="ss_form_input_title" ng-class="{ss_warning:!d.sellerAttorney}" data-message="Please fill Seller {{$index+1}} Attorney">Seller {{$index+1}} Attorney</label>
                                                         <%--<input class="ss_form_input" ng-model="d.sellerAttorney" />--%>
-                                                        <input type="text" class="ss_form_input" ng-model="d.sellerAttorney" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)">
+                                                        <input type="text" class="ss_form_input" ng-model="d.sellerAttorney" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="d.sellerAttorneyObj=$item">
                                                     </li>
                                                     <li class="ss_form_item ss_form_item_line" >
                                                         <label class="ss_form_input_title" ng-class="{ss_warning:!d.Address}" data-message="Please fill Seller {{$index+1}} Address">Seller {{$index+1}} Address</label>
@@ -325,7 +325,7 @@
 
                                         <li class="ss_form_item ">
                                             <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.buyerAttorney}" data-message="Please fill Buyer Attorney">Buyer Attorney</label>
-                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.buyerAttorney" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" />
+                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.buyerAttorney" typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" typeahead-on-select="SSpreSign.DealSheet.ContractOrMemo.Buyer.buyerAttorneyObj=$item" />
 
                                         </li>
                                         <li class="ss_form_item " style="width: 96%">
