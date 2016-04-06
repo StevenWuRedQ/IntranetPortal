@@ -24,6 +24,18 @@ Imports IntranetPortal.Data
     End Sub
 
     ''' <summary>
+    ''' GetTeamAvailableCorps testing
+    ''' </summary>
+    <TestMethod()> Public Sub GetTeamAvailableCorps_returnSignerArray()
+        Dim corps = CorporationEntity.GetTeamAvailableCorps(team)
+        For Each corp In corps
+            Assert.AreEqual("Available", corp.Status)
+            Assert.AreEqual(team, corp.Office)
+        Next
+
+    End Sub
+
+    ''' <summary>
     ''' AssignCorp testing
     ''' </summary>
     <TestMethod()> Public Sub AssignCorp_returnAssignedCorp()
