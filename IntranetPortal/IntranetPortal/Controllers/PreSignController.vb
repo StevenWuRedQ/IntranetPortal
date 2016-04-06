@@ -65,7 +65,7 @@ Namespace Controllers
 
                 If record.NeedSearch Then
                     Dim docController As New LeadInfoDocumentSearchesController
-                    docController.PostLeadInfoDocumentSearch(New LeadInfoDocumentSearch With {.BBLE = record.BBLE})
+                    docController.PostLeadInfoDocumentSearch(New LeadInfoDocumentSearch With {.BBLE = record.BBLE, .ExpectedSigningDate = record.ExpectedDate})
                 End If
 
                 If record.NeedCheck Then

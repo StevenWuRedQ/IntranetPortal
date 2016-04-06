@@ -65,18 +65,16 @@
                                                             <label class="ss_form_input_title">Block</label><input class="ss_form_input" ng-model="LeadsInfo.Block" readonly="readonly" /></li>
                                                         <li class="ss_form_item ">
                                                             <label class="ss_form_input_title">Lot</label><input class="ss_form_input" ng-model="LeadsInfo.Lot" readonly="readonly" /></li>
-
+                                                        <li class="ss_form_item ">
+                                                            <label class="ss_form_input_title">Expected Signing Date</label><input class="ss_form_input" ng-model="DocSearch.ExpectedSigningDate" ss-date disabled="disabled" /></li>
                                                         <li class="ss_form_item " style="width: 97%">
                                                             <label class="ss_form_input_title">Property Addressed</label><input class="ss_form_input" ng-model="LeadsInfo.PropertyAddress" readonly="readonly" /></li>
-
                                                         <li class="ss_form_item ">
                                                             <label class="ss_form_input_title">Owner Name</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.ownerName" />
-
                                                         </li>
                                                         <li class="ss_form_item " style="width: 97%">
                                                             <label class="ss_form_input_title">Owner Address</label>
                                                             <input class="ss_form_input" ng-model="DocSearch.LeadResearch.ownerAddress" />
-
                                                         </li>
                                                     </ul>
                                                 </div>
