@@ -5,10 +5,6 @@
 <%@ Register Src="~/PopupControl/LeadSearchSummery.ascx" TagPrefix="uc1" TagName="LeadSearchSummery" %>
 <%@ Register Src="~/ShortSale/ShortPreSignControl.ascx" TagPrefix="uc1" TagName="ShortPreSignControl" %>
 
-
-
-
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .fix-add-btn i {

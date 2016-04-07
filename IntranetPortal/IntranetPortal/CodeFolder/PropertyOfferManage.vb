@@ -131,14 +131,14 @@ Public Class DocumentGenerator
 
         file = New GenerateFileConfig With {.FileName = "SalesContract.docx", .ConfigKey = "Contract"}
         file.PlaceHolders = phs.ToList
-        file.PlaceHolders.Add(New DocumentPlaceHolder("CONTRACTPRICE", "DealSheet.contractPrice"))
-        file.PlaceHolders.Add(New DocumentPlaceHolder("DOWNPAYMENT", "DealSheet.downPayment"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("CONTRACTPRICE", "DealSheet.ContractOrMemo.contractPrice"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("DOWNPAYMENT", "DealSheet.ContractOrMemo.downPayment"))
         file.PlaceHolders.Add(New DocumentPlaceHolder("BALANCE", Function(data As JObject)
                                                                      Dim contractPrice = data.SelectToken("DealSheet.ContractOrMemo.contractPrice")
                                                                      Dim downPayment = data.SelectToken("DealSheet.ContractOrMemo.downPayment")
                                                                      If contractPrice IsNot Nothing AndAlso downPayment IsNot Nothing Then
                                                                          Dim balance = CDec(contractPrice) - CDec(downPayment)
-                                                                         Return String.Format("{0:c}", balance)
+                                                                         Return String.Format("{0:N2}", balance)
                                                                      End If
 
                                                                      Return ""
@@ -179,7 +179,11 @@ Public Class DocumentGenerator
         file = New GenerateFileConfig With {.FileName = "PowerofAttorney.docx", .ConfigKey = "POA"}
         phs = {
                 New DocumentPlaceHolder("DAY"),
-                New DocumentPlaceHolder("MONTH")
+                New DocumentPlaceHolder("MONTH"),
+                New DocumentPlaceHolder("GIVINGPOANAME", "DealSheet.GivingPOA.Name"),
+                New DocumentPlaceHolder("GIVINGPOAADDRESS", "DealSheet.GivingPOA.Address"),
+                New DocumentPlaceHolder("RECEIVINGPOANAME", "DealSheet.ReceivingPOA.name"),
+                New DocumentPlaceHolder("RECEIVINGPOAADDRESS", "DealSheet.ReceivingPOA.address")
             }
         file.PlaceHolders = phs.ToList
 
