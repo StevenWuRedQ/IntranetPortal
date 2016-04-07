@@ -136,8 +136,8 @@
                 <%--<span class="time_buttons" onclick='preAssignPopopClient.Show()'>Pre sign</span>--%>
                 
                 <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
-                <span class="time_buttons" onclick='ShowPopupMap("/PopupControl/PreAssignCropForm.aspx?popup=true&BBLE=" + leadsInfoBBLE, "Pre Sign")'>Pre sign</span>
-                
+                <span class="time_buttons" onclick='ShowPopupMap("/PopupControl/PreAssignCropForm.aspx?popup=true&BBLE=" + leadsInfoBBLE, "Pre-Deal")'>Pre-Deal</span>
+                <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("New Offer", "/PopupControl/ShortSalePreSignForm.aspx?BBLE=" + leadsInfoBBLE)'>New Offer</span>
                 <% End If %>
 
             </div>
@@ -151,8 +151,7 @@
                 <PanelCollection>
                     <dx:PanelContent>
                         <% Dim i = 0%>
-
-
+                        
                         <% If LeadsInfoData.OtherProperties IsNot Nothing AndAlso LeadsInfoData.OtherProperties.Count > 0 Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8;height:inherit","height:inherit")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
