@@ -59,9 +59,14 @@
 
             var myInterceptor = {
                 'request': function (config) {
-                    if (!config.noIndicator)
+                    /*config some where do not need show indicator like typeahead and get contacts*/
+                    if (!config.noIndicator )
                     {
-                        self.ShowLoading();
+                        if (config.url.indexOf('template') < 0)
+                        {
+                            self.ShowLoading();
+                        }
+                       
                     }
                     return config;
                 },
