@@ -362,7 +362,8 @@
                 columns: [{ dataField: "PaybleTo", validationRules: [{ type: "required" }] },
                     { dataField: 'Amount', dataType: 'number', validationRules: [{ type: "required" }] },
                     { dataField: 'Date', dataType: 'date', validationRules: [{ type: "required" }] },
-                    "CheckFor", "Description"],
+                    { dataField: 'Description', validationRules: [{ type: "required" }] },
+                  ],
                 summary: {
                     totalItems: [{
                         column: "Name",
