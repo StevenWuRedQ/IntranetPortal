@@ -49,16 +49,6 @@ Public Class PropertyOfferManage
                 End If
             Next
 
-            'For Each f In direcotry.GetFiles()
-            '    Dim fname = f.Name
-            '    Dim finalpath = IO.Path.Combine(targetPath, fname)
-
-            '    Using d = DocX.Load(f.FullName)
-
-            '        d.ReplaceText("[DAY]", DateTime.Today.ToString())
-            '        d.SaveAs(finalpath)
-            '    End Using
-            'Next
             If File.Exists(zipPath) Then
                 File.Delete(zipPath)
             End If
