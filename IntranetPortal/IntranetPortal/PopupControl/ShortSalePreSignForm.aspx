@@ -635,7 +635,8 @@
             };
             $scope.DeadType = {
                 Contract: true
-                //Contract: true, Deed: false, CorrectionDeed: false, POA: false
+                //Contract: true,
+                ,Deed: false, CorrectionDeed: false, POA: false
             };
             $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); };
             $scope.arrayRemove = ptCom.arrayRemove;

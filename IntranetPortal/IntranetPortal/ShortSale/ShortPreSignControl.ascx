@@ -3,7 +3,7 @@
     <uib-tab ng-repeat="owner in SsCase.PropertyInfo.Owners" active="owner.active" disable="owner.disabled">
         <tab-heading>Seller {{$index+1}} </tab-heading>
 
-        <div class="text-right" ng-show="SsCase.PropertyInfo.Owners.length>1" style="margin-bottom: -25px"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.PropertyInfo.Owners.length>1" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.Owners, $index)" title="Delete"></i></div>
+        <div class="text-right" ng-show="SsCase.PropertyInfo.Owners.length>1" style="margin-bottom: -25px"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.PropertyInfo.Owners.length>1" ng-click="ptCom.arrayRemove(SsCase.PropertyInfo.Owners, $index)" title="Delete"></i></div>
 
         <div ng-click="$eval('ViewStatus.Owner_'+$index+'=true')">
     
@@ -53,7 +53,7 @@
                 <label class="ss_form_input_title">Bank account</label>
                 <pt-radio model="owner.Bankaccount" name="Bankaccount{{$index}}"></pt-radio>
             </li>
-             <li class="col-sm-4">
+             <li class="ss_form_item">
                 <label class="ss_form_input_title">Active Military</label>
                 <pt-radio model="owner.ActiveMilitar" name="ActiveMilitar{{$index}}"></pt-radio>
              </li>
@@ -163,7 +163,7 @@
                     <label>Bankruptcy</label><br />
                     <pt-radio model="owner.Bankruptcy" name="ownerBankruptcy{{$index}}"></pt-radio>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4" ng-show="owner.Bankruptcy">
                     <label>Bankruptcy Chapter</label><br />
                     <select class="form-control" ng-model="owner.BankruptcyChapter">
                         <option>Chapter 7</option>
@@ -213,7 +213,7 @@
     <uib-tabset class="tab-switch">
         <uib-tab ng-repeat="mortgage in SsCase.Mortgages|filter:{DataStatus:'!3'}" active="MortgageTabs[$index]" disable="mortage.disabled" >
             <tab-heading> Mortgage {{$index+1}} </tab-heading>
-                <div class="text-right" style="margin-bottom:-25px" ng-show="$index>0"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="NGremoveArrayItem(SsCase.Mortgages, $index,true)" title="Delete"></i></div>
+                <div class="text-right" style="margin-bottom:-25px" ng-show="$index>0"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="ptCom.arrayRemove(SsCase.Mortgages, $index,true)" title="Delete"></i></div>
                 <div>
                 <div class="ss_border" style="border-top-color: transparent">
                     <div class="ss_form">

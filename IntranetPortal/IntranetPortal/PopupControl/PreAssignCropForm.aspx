@@ -153,13 +153,13 @@
                                
                             </li>--%>
                                     <li class="ss_form_item">
-                                        <label class="ss_form_input_title">Total Amount paid for the deal</label>
+                                        <label class="ss_form_input_title " ng-class="{ss_warning:CheckTotalAmount() > preAssign.DealAmount}">Total Amount paid for the deal</label>
                                         <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask />
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Type of Check request</label>
                                         <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type">
-                                            <option></option>
+                                            
                                             <option>Short Sale</option>
                                             <option>Straight Sale</option>
                                             <option>Other</option>
@@ -204,7 +204,7 @@
 
                 <div class="modal-footer">
                     <%--<button type="button" class="btn btn-default" ng-show="step>1" ng-click="PrevStep()">< Prev</button>--%>
-                    <button type="button" class="btn btn-default" ng-click="RequestPreSign()" <%--ng-show="step==MaxStep"--%>>{{preAssign.Id ?'Update':'Request'}} Sign</button>
+                    <button type="button" class="btn btn-default" ng-click="RequestPreSign()" <%--ng-show="step==MaxStep"--%>>{{preAssign.Id ?'Update':'Submit'}} </button>
                     <%--<button type="button" class="btn btn-default" ng-show="step<MaxStep" ng-click="NextStep()">Next ></button>--%>
                 </div>
             </div>
@@ -246,6 +246,7 @@
                 $http.get('/api/Leads/LeadsInfo/' + BBLE).success(function (data) {
                     $scope.preAssign.Title = data.PropertyAddress
                 });
+                $scope.preAssign.CheckRequestData.Type = "Short Sale";
             }
 
             if (_BBLE) {
@@ -264,7 +265,7 @@
                 if ($scope.preAssign.Id) {
 
                     $http.put('/api/PreSign/' + $scope.preAssign.Id, JSON.stringify($scope.preAssign)).success(function () {
-                        AngularRoot.alert("Save scuessed !");
+                        AngularRoot.alert("Save success!");
 
                     });
                 } else {
@@ -281,16 +282,21 @@
 
                     if ($scope.preAssign.NeedCheck && $scope.preAssign.CheckRequestData.Checks.length<1)
                     {
-                        AngularRoot.alert("If need request check please fill at least one check !");
+                        AngularRoot.alert("If need request check please fill at least one check!");
                         return;
                     }
 
+                    if ($scope.CheckTotalAmount() > $scope.preAssign.DealAmount)
+                    {
+                        AngularRoot.alert("The check's total amount must less than the deal amount, Please correct! ");
+                        return;
+                    }
                     if (!$scope.preAssign.NeedCheck) {
                         $scope.preAssign.Parties = null;
                         $scope.preAssign.CheckRequestData = null
                     }
                     $http.post('/api/PreSign', JSON.stringify($scope.preAssign)).success(function (data) {
-                        AngularRoot.alert("Requested scuessed !");
+                        AngularRoot.alert("Submit success !");
                         $scope.preAssign = data;
                     });
                 }
@@ -358,9 +364,9 @@
                     allowedPageSizes: [5, 10, 20],
                     showInfo: true
                 },
-
+                wordWrapEnabled:true,
                 columns: [{ dataField: "PaybleTo", validationRules: [{ type: "required" }] },
-                    { dataField: 'Amount', dataType: 'number', validationRules: [{ type: "required" }] },
+                    { dataField: 'Amount', dataType: 'number',format:'currency', validationRules: [{ type: "required" }] },
                     { dataField: 'Date', dataType: 'date', validationRules: [{ type: "required" }] },
                     { dataField: 'Description', validationRules: [{ type: "required" }] },
                   ],
