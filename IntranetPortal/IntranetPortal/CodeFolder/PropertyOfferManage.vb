@@ -64,6 +64,15 @@ Public Class PropertyOfferManage
             End If
 
             ZipFile.CreateFromDirectory(targetPath, zipPath)
+
+            If Directory.Exists(targetPath) Then
+                For Each file In Directory.GetFiles(targetPath)
+                    System.IO.File.SetAttributes(file, FileAttributes.Normal)
+                    System.IO.File.Delete(file)
+                Next
+                Directory.Delete(targetPath, True)
+            End If
+
             Return String.Format("{0}.zip", bble)
         Catch ex As Exception
             Throw ex
