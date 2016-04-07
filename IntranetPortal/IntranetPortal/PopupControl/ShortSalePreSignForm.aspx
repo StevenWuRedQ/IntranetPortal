@@ -588,7 +588,7 @@
                     <h3 class="wizard-title">Finish</h3>
                     <div>
                         <div class="well">
-                            Congratulation! you are in the last step please click button to download document! 
+                            Congratulation! you are in the last step please click Generate document button to download document(s).
                         </div>
                     </div>
                 </div>
@@ -885,6 +885,14 @@
 
                 });
                 return filtered;
+            };
+        });
+        portalApp.filter('ordered', function () {
+            return function (item) {
+                
+                var orderDic = { "1": '1st', "2": "2nd", "3": "3rd" };
+              
+                return orderDic[item];
             };
         });
     </script>

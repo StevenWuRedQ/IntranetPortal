@@ -3,9 +3,9 @@
     <uib-tab ng-repeat="owner in SsCase.PropertyInfo.Owners" active="owner.active" disable="owner.disabled">
         <tab-heading>Seller {{$index+1}} </tab-heading>
 
-<div class="text-right" ng-show="SsCase.PropertyInfo.Owners.length>1" style="margin-bottom: -25px"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.PropertyInfo.Owners.length>1" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.Owners, $index)" title="Delete"></i></div>
+        <div class="text-right" ng-show="SsCase.PropertyInfo.Owners.length>1" style="margin-bottom: -25px"><i class="fa fa-times btn tooltip-examples btn-close" ng-show="SsCase.PropertyInfo.Owners.length>1" ng-click="NGremoveArrayItem(SsCase.PropertyInfo.Owners, $index)" title="Delete"></i></div>
 
-<div ng-click="$eval('ViewStatus.Owner_'+$index+'=true')">
+        <div ng-click="$eval('ViewStatus.Owner_'+$index+'=true')">
     
     <div class="ss_border" style="border-top-color: transparent">
         <ul class="ss_form_box clearfix">
@@ -86,8 +86,7 @@
         
     </div>
 </div>
-
-<div dx-popup="{  
+        <div dx-popup="{  
                     width: 900,
                     title: 'Seller '+ ($index+1),
                     dragEnabled: true,
@@ -166,7 +165,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label>Bankruptcy Chapter</label><br />
-                    <select class="form-control" ng-model="owner.BankruptcyChapter" >
+                    <select class="form-control" ng-model="owner.BankruptcyChapter">
                         <option>Chapter 7</option>
                         <option>Chapter 13</option>
                     </select>
@@ -205,30 +204,34 @@
         <button class="btn btn-primary pull-right" ng-click="$eval('ViewStatus.Owner_'+$index+'=false')">Save</button>
     </div>
 </div>
+        </uib-tab>
+    <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.PropertyInfo.Owners, 'SsCase.PropertyInfo.Owners')"  title="Add" style="font-size: 18px"></i>
+    </uib-tabset>
 
-<div style="margin:20px 0;">
+
+<div style="margin: 20px 0;">
     <uib-tabset class="tab-switch">
         <uib-tab ng-repeat="mortgage in SsCase.Mortgages|filter:{DataStatus:'!3'}" active="MortgageTabs[$index]" disable="mortage.disabled" >
-            <tab-heading>Mortgage {{$index+1}} </tab-heading>
+            <tab-heading> Mortgage {{$index+1}} </tab-heading>
                 <div class="text-right" style="margin-bottom:-25px" ng-show="$index>0"><i class="fa fa-times btn tooltip-examples btn-close" ng-click="NGremoveArrayItem(SsCase.Mortgages, $index,true)" title="Delete"></i></div>
                 <div>
                 <div class="ss_border" style="border-top-color: transparent">
                     <div class="ss_form">
-                        <h4 class="ss_form_title" style="display: inline">Mortgage {{$index+1}} Company&nbsp
+                        <h4 class="ss_form_title" style="display: inline"> <span style="text-transform:lowercase">{{$index+1|ordered}}</span>  Mortgage 
                             <%--<select ng-model="mortgage.LenderId" ng-options="bank.ContactId as bank.Name for bank in bankNameOptions"></select>--%>&nbsp;<pt-collapse model="mortgageCompanyCollapse" /></h4>
                         <div class="ss_border">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item">
-                                    <label class="ss_form_input_title" ng-class="{ss_warning:!mortgage.LenderName }" data-message="Please fill Mortgage {{$index+1}} Company">Mortgage {{$index+1}} Company</label>
+                                    <label class="ss_form_input_title" ng-class="{ss_warning:!mortgage.LenderName }" data-message="Please fill {{$index+1|ordered}} Mortgage Company">Company</label>
                                     <input class="ss_form_input " ng-model="mortgage.LenderName" typeahead="bank.Name for bank in bankNameOptions|filter:$viewValue" typeahead-on-select="mortgage.Lender=$item;mortgage.LenderId=$item.ContactId">
                                 </li>
                                 <li class="ss_form_item">
-                                    <label class="ss_form_input_title" ng-class="{ss_warning:!mortgage.Loan }" data-message="Please fill Mortgage {{$index+1}} Loan Number">Mortgage {{$index+1}} Loan #</label>
+                                    <label class="ss_form_input_title" ng-class="{ss_warning:!mortgage.Loan }" data-message="Please fill {{$index+1|ordered}} Mortgage Loan Number">Loan #</label>
                                     <input class="ss_form_input " ng-model="mortgage.Loan">
                                 </li>
 
                                 <li class="ss_form_item">
-                                    <label class="ss_form_input_title" ng-class="{ss_warning:!mortgage.LoanAmount }" data-message="Please fill Mortgage {{$index+1}} Loan Amount">Mortgage {{$index+1}} Loan Amount</label>
+                                    <label class="ss_form_input_title" ng-class="{ss_warning:!mortgage.LoanAmount }" data-message="Please fill {{$index+1|ordered}} Mortgage Loan Amount"> Loan Amount</label>
                                     <input class="ss_form_input" ng-model="mortgage.LoanAmount" money-mask>
                                 </li>
                             </ul>
