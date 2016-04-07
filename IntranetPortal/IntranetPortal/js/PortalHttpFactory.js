@@ -32,7 +32,7 @@
             if (data.data) {
 
                 var messageObj = {
-                    Message: data.data.Message,
+                    Message: data.data.ExceptionMessage || data.data.Message,
                     status: data.status,
                     statusText: data.statusText,
                     Url: data.config.url,
@@ -41,7 +41,7 @@
                 console.log(data)
                 var urlName = messageObj.Url.toString().replace(/\//g, ' ').replace('api', '');
 
-                return 'Error : ' + messageObj.Message + '(' + urlName + ')';
+                return 'Error : ' + messageObj.Message + '<br/> <small>(' + urlName + ')</small>';
 
             }
         }
@@ -59,9 +59,14 @@
 
             var myInterceptor = {
                 'request': function (config) {
-                    if (!config.noIndicator)
+                    /*config some where do not need show indicator like typeahead and get contacts*/
+                    if (!config.noIndicator )
                     {
-                        self.ShowLoading();
+                        if (config.url.indexOf('template') < 0)
+                        {
+                            self.ShowLoading();
+                        }
+                       
                     }
                     return config;
                 },
