@@ -136,7 +136,7 @@
                 <%--<span class="time_buttons" onclick='preAssignPopopClient.Show()'>Pre sign</span>--%>
                 
                 <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
-                <span class="time_buttons" onclick='ShowPopupMap("/PopupControl/PreAssignCropForm.aspx?popup=true&BBLE=" + leadsInfoBBLE, "Pre Sign")'>Pre sign</span>
+                <span class="time_buttons" onclick='ShowPopupMap("/PopupControl/PreAssignCropForm.aspx?popup=true&BBLE=" + leadsInfoBBLE, "Pre-Deal")'>Pre-Deal</span>
                 
                 <% End If %>
 
