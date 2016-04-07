@@ -373,7 +373,7 @@
                                                 <input class="ss_form_input"  ng-model="SSpreSign.DealSheet.ContractOrMemo.contractPrice" money-mask />
                                             </li>
                                             <li class="ss_form_item ">
-                                                <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo}">Down Payment</label>
+                                                <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.downPayment}">Down Payment</label>
                                                 <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.downPayment" data-message="Please fill Down Payment" money-mask />
                                             </li>
                                         </ul>
