@@ -369,8 +369,8 @@
                                                 <input class="ss_form_input"  ng-model="SSpreSign.DealSheet.ContractOrMemo.contractPrice" money-mask />
                                             </li>
                                             <li class="ss_form_item ">
-                                                <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.downPayment}">Down Payment</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.downPayment" data-message="Please fill Down Payment" money-mask />
+                                                <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.downPayment}" data-message="Please fill Down Payment">Down Payment</label>
+                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.downPayment"  money-mask />
                                             </li>
                                         </ul>
                                     </div>
@@ -630,9 +630,9 @@
                 }
             };
             $scope.DeadType = {
-                Contract: true
-                //Contract: true,
-                ,Deed: false, CorrectionDeed: false, POA: false
+                Contract: true,
+                Memo:false ,
+                Deed: false, CorrectionDeed: false, POA: false
             };
             $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); };
             $scope.arrayRemove = ptCom.arrayRemove;

@@ -12,8 +12,6 @@
         }
 
 
-
-
         $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
         success(function (data, status, headers, config) {
             $scope.DocSearch = data;
@@ -36,8 +34,6 @@
                   alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
               });
 
-        }).error(function (data, status, headers, config) {
-            alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
         });
     }
 

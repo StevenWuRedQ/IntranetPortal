@@ -2122,8 +2122,6 @@ angular.module('PortalApp')
                   alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
               });
 
-        }).error(function (data, status, headers, config) {
-            alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
         });
     }
 

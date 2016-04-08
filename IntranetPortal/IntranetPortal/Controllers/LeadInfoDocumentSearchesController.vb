@@ -25,7 +25,7 @@ Namespace Controllers
         Function GetLeadInfoDocumentSearch(ByVal id As String) As IHttpActionResult
             Dim leadInfoDocumentSearch As LeadInfoDocumentSearch = db.LeadInfoDocumentSearches.Find(id)
             If IsNothing(leadInfoDocumentSearch) Then
-                Return NotFound()
+                Throw New Exception("Please make sure you submit a search first!")
             End If
 
             Return Ok(leadInfoDocumentSearch)
