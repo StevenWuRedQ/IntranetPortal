@@ -38,8 +38,7 @@
             //ContentCallbackPanel.PerformCallback(values);
             if (typeof cbpLogs != 'undefined')
                 cbpLogs.PerformCallback(leadsInfoBBLE);
-
-            console.log(leadsInfoBBLE);
+                       
             LoadSearch(leadsInfoBBLE);
         }
     }
@@ -78,19 +77,14 @@
         var icon = document.getElementById("btnSortIcon");
         if (e.item.index == 0) {
             //gridCase.GroupBy("Owner", 0);
+            SortLeadsList(document.getElementById("btnSortIcon"), "ExpectedSigningDate")
         }
-
+        
         if (e.item.index == 1) {
-
-            //gridCase.GroupBy("Owner", 2);
-            //gridCase.GroupBy("MortgageCategory", 0);
-        }
-
-        if (e.item.index == 2) {
             SortLeadsList(document.getElementById("btnSortIcon"), "UpdateDate");
         }
 
-        if (e.item.index == 3) {
+        if (e.item.index == 2) {
             if ($("#divSearch").is(':visible')) {
                 $("#divSearch").hide();
                 gridCase.ClearFilter();
@@ -99,10 +93,6 @@
                 $("#divSearch").show();
             }
         }
-
-        //if (e.item.index == 4) {
-
-        //}
     }
 
     function SearchGrid() {
@@ -114,7 +104,7 @@
             return;
         }
 
-        filterCondition = "CaseName LIKE '%" + key + "%'";
+        filterCondition = "Name LIKE '%" + key + "%'";
         gridCase.ApplyFilter(filterCondition);
     }
 
@@ -176,12 +166,14 @@
                         <div><%# Eval("Name") %> </div>
                     </DataItemTemplate>
                 </dx:GridViewDataColumn>
+                <dx:GridViewDataColumn FieldName="ExpectedSigningDate" Visible="false"></dx:GridViewDataColumn>
+                <dx:GridViewDataColumn FieldName="UpdateDate" Visible="false"></dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="Status">
                     <GroupRowTemplate>
                         <div>
                             <table style="height: 30px">
                                 <tr>
-                                    <td style="width: 80px;"><span class="font_black"><i class="fa fa-caret-<%#If(Container.Expanded, "down", "right") %> font_16" onclick="ExpandOrCollapseGroupRow(this, gridEmpsClient, <%# Container.VisibleIndex%>)" style="cursor: pointer"></i>&nbsp; <i class="fa fa-bank font_16"></i>&nbsp; <%# CType(CInt(Container.GroupText), IntranetPortal.Data.LeadInfoDocumentSearch.SearchStauts).ToString%>
+                                    <td style="width: 80px;"><span class="font_black"><i class="fa fa-caret-<%#If(Container.Expanded, "down", "right") %> font_16" onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer"></i>&nbsp; <i class="fa fa-bank font_16"></i>&nbsp; <%# CType(CInt(Container.GroupText), IntranetPortal.Data.LeadInfoDocumentSearch.SearchStauts).ToString%>
                                     </span></td>
                                     <td style="padding-left: 10px">
                                         <span class="employee_lest_head_number_label"><%#  Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "") %></span>
@@ -221,10 +213,8 @@
     PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
     <ItemStyle Paddings-PaddingLeft="20px" />
     <Items>
-        <dx:MenuItem Text="User" Name="User">
-        </dx:MenuItem>
-        <dx:MenuItem Text="Status" Name="Status">
-        </dx:MenuItem>
+        <dx:MenuItem Text="Signing Date" Name="ExpectedSigningDate">
+        </dx:MenuItem>     
         <dx:MenuItem Text="Last Update" Name="LastUpdate">
         </dx:MenuItem>
         <dx:MenuItem Text="Search" Name="Search">
