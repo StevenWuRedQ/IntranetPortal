@@ -133,9 +133,6 @@
             $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
             success(function (data, status, headers, config) {
                 $scope.DocSearch = data;
-               
-            }).error(function (data, status, headers, config) {
-                alert("Get Leads Info failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
             });
             $scope.SearchRecordComplete = function () {
               

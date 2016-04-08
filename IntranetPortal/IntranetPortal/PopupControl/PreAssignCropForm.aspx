@@ -247,6 +247,8 @@
                     $scope.preAssign.Title = data.PropertyAddress
                 });
                 $scope.preAssign.CheckRequestData.Type = "Short Sale";
+                $scope.preAssign.DealAmount = 0;
+                $scope.preAssign.NeedSearch = true;
             }
 
             if (_BBLE) {
@@ -366,7 +368,7 @@
                 },
                 wordWrapEnabled:true,
                 columns: [{ dataField: "PaybleTo", validationRules: [{ type: "required" }] },
-                    { dataField: 'Amount', dataType: 'number',format:'currency', validationRules: [{ type: "required" }] },
+                    { dataField: 'Amount', dataType: 'number',format:'currency',precision:2, validationRules: [{ type: "required" }] },
                     { dataField: 'Date', dataType: 'date', validationRules: [{ type: "required" }] },
                     { dataField: 'Description', validationRules: [{ type: "required" }] },
                   ],
@@ -378,7 +380,8 @@
                     {
                         column: "Amount",
                         summaryType: "sum",
-                        valueFormat: "currency"
+                        valueFormat: "currency",
+                        precision:2
                     }]
                 }
             };
