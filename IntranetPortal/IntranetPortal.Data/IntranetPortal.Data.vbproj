@@ -113,6 +113,12 @@
     <Compile Include="ADOEntity\DataStatu.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\DeedCorp.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\DeedCorpProperty.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\LegalCaseReport.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
@@ -126,6 +132,9 @@
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\PropertyOffer.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\ShortSaleLeadsInfo.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\SSFirstMortgage.vb">
@@ -142,6 +151,7 @@
     <Compile Include="Construction\ConstructionSpotCheck.vb" />
     <Compile Include="Construction\ConstructionViolations.vb" />
     <Compile Include="DataServices\TLOLocateReportOutput.vb" />
+    <Compile Include="SignProcess\DeedCorp.vb" />
     <Compile Include="DocumentSearch\LeadInfoDocumentSearch.vb" />
     <Compile Include="FollowUps\UserFollowUp.vb" />
     <Compile Include="Legal\LawReference.vb" />
@@ -288,9 +298,6 @@
     <Compile Include="ADOEntity\ShortSaleCheckList.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADOEntity\ShortSaleLeadsInfo.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
     <Compile Include="ADOEntity\ShortSaleOffer.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
@@ -333,6 +340,7 @@
     <Compile Include="ShortSale\Utility.vb" />
     <Compile Include="SignProcess\BusinessCheck.vb" />
     <Compile Include="SignProcess\CheckRequest.vb" />
+    <Compile Include="SignProcess\DeedCorpProperty.vb" />
     <Compile Include="SignProcess\PreSignRecord.vb" />
     <Compile Include="SignProcess\PropertyOffer.vb" />
     <Compile Include="Title\TitleCase.vb" />

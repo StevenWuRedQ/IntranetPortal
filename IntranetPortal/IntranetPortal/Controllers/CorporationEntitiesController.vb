@@ -19,6 +19,44 @@ Namespace Controllers
             Return db.CorporationEntities.Where(Function(c) c.AppId = Employee.CurrentAppId)
         End Function
 
+        ' GET /api/CorporationEntities/DeedCorpsByTeam?team=GukasyanTeam
+        <Route("api/CorporationEntities/DeedCorpsByTeam")>
+        Function GetDeedCorpsByTeam(team As String) As IHttpActionResult
+            Dim corps = DeedCorp.GetTeamDeedCorps(team)
+
+            If corps Is Nothing OrElse corps.Count = 0 Then
+                Return NotFound()
+            End If
+            Dim rand As New Random
+            Return Ok(corps(rand.Next(corps.Count)))
+        End Function
+
+        ' POST /api/CorporationEntities/AssignDeedCorp?bble=4025010109 
+        <Route("api/CorporationEntities/AssignDeedCorp")>
+        Function PostAssignDeedCorp(bble As String, corp As DeedCorp) As IHttpActionResult
+            If Not ModelState.IsValid Then
+                Return BadRequest(ModelState)
+            End If
+
+            If corp.EntityId = 0 Then
+                Return BadRequest()
+            End If
+
+            Dim corps = DeedCorp.GetDeedCorp(corp.EntityId)
+
+            If corps Is Nothing Then
+                Return BadRequest("The deed corp isnot valid")
+            End If
+
+            Try
+                corps.AssignProperty(bble, HttpContext.Current.User.Identity.Name)
+            Catch ex As Exception
+                Throw ex
+            End Try
+
+            Return StatusCode(HttpStatusCode.NoContent)
+        End Function
+
         ' GET /api/CorporationEntities/ByBBLE?BBLE=3041250022
         <ResponseType(GetType(CorporationEntity))>
         <Route("api/CorporationEntities/ByBBLE")>

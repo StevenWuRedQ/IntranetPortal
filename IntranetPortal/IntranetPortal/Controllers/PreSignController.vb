@@ -24,6 +24,23 @@ Namespace Controllers
             Return Ok(records)
         End Function
 
+        ''' <summary>
+        ''' Get all check request
+        ''' </summary>
+        ''' <returns></returns>
+        <ResponseType(GetType(CheckRequest()))>
+        <Route("api/PreSign/CheckRequests")>
+        Public Function GetAllCheckRequest() As IHttpActionResult
+
+            Try
+                Dim records = CheckRequest.GetRequests
+                Return Ok(records)
+            Catch ex As Exception
+                Throw ex
+            End Try
+
+        End Function
+
         Public Function GetPreSignRecord(id As Integer) As IHttpActionResult
             Dim record = PreSignRecord.GetInstance(id)
             If IsNothing(record) Then

@@ -190,6 +190,7 @@
     <Compile Include="BusinessFormUnitTest.vb" />
     <Compile Include="PropertyOfferUnitTest.vb" />
     <Compile Include="CorpEntityUnitTest.vb" />
+    <Compile Include="DeedCorpUnitTest.vb" />
     <Compile Include="UtilityUnitTest.vb" />
     <Compile Include="TeamUnitTest.vb" />
     <Compile Include="TwilioUnitTest.vb" />

@@ -44,7 +44,6 @@ Partial Public Class PortalEntities
     Public Overridable Property ShortSaleBuyers() As DbSet(Of ShortSaleBuyer)
     Public Overridable Property ShortSaleOffers() As DbSet(Of ShortSaleOffer)
     Public Overridable Property CorporationEntities() As DbSet(Of CorporationEntity)
-    Public Overridable Property ShortSaleLeadsInfoes() As DbSet(Of ShortSaleLeadsInfo)
     Public Overridable Property ShortSaleCheckLists() As DbSet(Of ShortSaleCheckList)
     Public Overridable Property LegalCases() As DbSet(Of LegalCase)
     Public Overridable Property LegalECourts() As DbSet(Of LegalECourt)
@@ -72,5 +71,8 @@ Partial Public Class PortalEntities
     Public Overridable Property CheckRequests() As DbSet(Of CheckRequest)
     Public Overridable Property PreSignRecords() As DbSet(Of PreSignRecord)
     Public Overridable Property PropertyOffers() As DbSet(Of PropertyOffer)
+    Public Overridable Property DeedCorps() As DbSet(Of DeedCorp)
+    Public Overridable Property DeedCorpProperties() As DbSet(Of DeedCorpProperty)
+    Public Overridable Property ShortSaleLeadsInfoes() As DbSet(Of ShortSaleLeadsInfo)
 
 End Class

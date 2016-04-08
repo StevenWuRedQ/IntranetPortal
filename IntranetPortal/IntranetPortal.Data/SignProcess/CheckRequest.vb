@@ -9,6 +9,22 @@ Public Class CheckRequest
     ''' </summary>
     ''' <returns></returns>
     Public Property Checks As List(Of BusinessCheck)
+    Public Property PropertyAddress As String
+
+    Public Shared Function GetRequests() As CheckRequest()
+        Using ctx As New PortalEntities
+            Dim result = From ck In ctx.CheckRequests
+                         From li In ctx.ShortSaleLeadsInfoes.Where(Function(li) li.BBLE = ck.BBLE).DefaultIfEmpty
+                         Let checks = ctx.BusinessChecks.Where(Function(b) b.RequestId = ck.RequestId)
+                         Select ck, checks, li.PropertyAddress
+
+            Return result.ToList.Select(Function(s)
+                                            s.ck.Checks = s.checks.ToList
+                                            s.ck.PropertyAddress = s.PropertyAddress
+                                            Return s.ck
+                                        End Function).ToArray
+        End Using
+    End Function
 
     ''' <summary>
     ''' Return check request instance
@@ -21,7 +37,7 @@ Public Class CheckRequest
 
             Dim cr = ctx.CheckRequests.Find(id)
             cr.Checks = ctx.BusinessChecks.Where(Function(c) c.RequestId = cr.RequestId).ToList
-
+            cr.PropertyAddress = ctx.ShortSaleLeadsInfoes.Where(Function(li) li.BBLE = cr.BBLE).Select(Function(li) li.PropertyAddress).FirstOrDefault
             Return cr
         End Using
     End Function
