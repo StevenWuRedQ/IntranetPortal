@@ -49,21 +49,20 @@ Public Class PropertyOfferManage
                 End If
             Next
 
-            'For Each f In direcotry.GetFiles()
-            '    Dim fname = f.Name
-            '    Dim finalpath = IO.Path.Combine(targetPath, fname)
-
-            '    Using d = DocX.Load(f.FullName)
-
-            '        d.ReplaceText("[DAY]", DateTime.Today.ToString())
-            '        d.SaveAs(finalpath)
-            '    End Using
-            'Next
             If File.Exists(zipPath) Then
                 File.Delete(zipPath)
             End If
 
             ZipFile.CreateFromDirectory(targetPath, zipPath)
+
+            If Directory.Exists(targetPath) Then
+                For Each file In Directory.GetFiles(targetPath)
+                    System.IO.File.SetAttributes(file, FileAttributes.Normal)
+                    System.IO.File.Delete(file)
+                Next
+                Directory.Delete(targetPath, True)
+            End If
+
             Return String.Format("{0}.zip", bble)
         Catch ex As Exception
             Throw ex

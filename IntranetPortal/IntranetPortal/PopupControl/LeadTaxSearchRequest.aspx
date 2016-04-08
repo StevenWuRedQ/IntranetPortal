@@ -4,9 +4,6 @@
 <%@ Register Src="~/LeadDocSearch/LeadDocSearchList.ascx" TagPrefix="uc1" TagName="LeadDocSearchList" %>
 <%@ Register Src="~/PopupControl/LeadSearchSummery.ascx" TagPrefix="uc1" TagName="LeadSearchSummery" %>
 
-
-
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
@@ -21,7 +18,6 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
-
                 <%-- search panel --%>
                 <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="None" PaneStyle-Paddings-Padding="0px" Name="dataPane">
                     <ContentCollection>
@@ -29,7 +25,6 @@
                             <div>
                                 <div style="align-content: center; height: 100%">
                                     <!-- Nav tabs -->
-
                                     <div class="legal-menu row" style="margin-left: 0px; margin-right: 0px">
                                         <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
                                             <li class="active short_sale_head_tab">
