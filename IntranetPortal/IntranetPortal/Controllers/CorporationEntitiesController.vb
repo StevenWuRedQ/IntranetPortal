@@ -128,7 +128,10 @@ Namespace Controllers
             Try
                 CorpManage.AssignCorp(bble, corp.EntityId)
             Catch ex As Exception
-                Throw ex
+
+                Throw
+
+
             End Try
 
             Return StatusCode(HttpStatusCode.NoContent)

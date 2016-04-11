@@ -4,7 +4,6 @@ Imports System.IO
 Imports Newtonsoft.Json
 Imports System.ComponentModel.DataAnnotations
 
-
 <MetadataType(GetType(EmployeeMetaData))>
 Partial Public Class Employee
 

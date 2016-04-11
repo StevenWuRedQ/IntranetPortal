@@ -107,6 +107,7 @@ Public Class DocumentGenerator
 
         _fileConfigures = New List(Of GenerateFileConfig)
 
+        'Memo
         Dim file = New GenerateFileConfig With {.FileName = "MemorandumOfContract.docx", .ConfigKey = "Memo"}
         Dim phs = {
             New DocumentPlaceHolder("DAY"),
@@ -128,6 +129,7 @@ Public Class DocumentGenerator
         file.PlaceHolders = phs.ToList
         _fileConfigures.Add(file)
 
+        ' Sales Contract
         file = New GenerateFileConfig With {.FileName = "SalesContract.docx", .ConfigKey = "Contract"}
         file.PlaceHolders = phs.ToList
         file.PlaceHolders.Add(New DocumentPlaceHolder("CONTRACTPRICE", "DealSheet.ContractOrMemo.contractPrice"))
@@ -154,6 +156,7 @@ Public Class DocumentGenerator
         file.PlaceHolders.Add(New DocumentPlaceHolder("BUYERATTORNEYFAX", "DealSheet.ContractOrMemo.Buyer.buyerAttorneyObj.Fax"))
         _fileConfigures.Add(file)
 
+        'Deed 
         file = New GenerateFileConfig With {.FileName = "BargainandSaleDeedwithCovenants.docx", .ConfigKey = "Deed"}
         phs = {
             New DocumentPlaceHolder("DAY"),
@@ -175,6 +178,29 @@ Public Class DocumentGenerator
         file.PlaceHolders = phs.ToList
         _fileConfigures.Add(file)
 
+        'Correction deed
+        file = New GenerateFileConfig With {.FileName = "SaleDeedwithCovenantsCorrection.docx", .ConfigKey = "CorrectionDeed"}
+        phs = {
+            New DocumentPlaceHolder("DAY"),
+            New DocumentPlaceHolder("MONTH"),
+            New DocumentPlaceHolder("YEAR"),
+            New DocumentPlaceHolder("BLOCK"),
+            New DocumentPlaceHolder("LOT"),
+            New DocumentPlaceHolder("SELLERNAMES", Function(data As JObject)
+                                                       Dim names = data.SelectToken("DealSheet.CorrectionDeed.Sellers").Select(Function(s) s.SelectToken("Name").ToString).Where(Function(s) Not String.IsNullOrEmpty(s)).ToArray
+                                                       Return String.Join(",", names)
+                                                   End Function),
+            New DocumentPlaceHolder("SELLERADDRESS", "DealSheet.CorrectionDeed.Sellers[0].Address"),
+            New DocumentPlaceHolder("BUYERNAME", "DealSheet.CorrectionDeed.Buyer.CorpName"),
+            New DocumentPlaceHolder("BUYERADDRESS", "DealSheet.CorrectionDeed.Buyer.Address"),
+            New DocumentPlaceHolder("PROPERTYADDRESS", "DealSheet.CorrectionDeed.PropertyAddress"),
+            New DocumentPlaceHolder("SELLER1NAME", "DealSheet.CorrectionDeed.Sellers[0].Name"),
+            New DocumentPlaceHolder("SELLER2NAME", "DealSheet.CorrectionDeed.Sellers[1].Name")
+            }
+        file.PlaceHolders = phs.ToList
+        _fileConfigures.Add(file)
+
+        ' POA File
         file = New GenerateFileConfig With {.FileName = "PowerofAttorney.docx", .ConfigKey = "POA"}
         phs = {
                 New DocumentPlaceHolder("DAY"),
