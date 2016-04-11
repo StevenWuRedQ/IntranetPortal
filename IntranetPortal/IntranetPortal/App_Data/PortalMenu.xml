@@ -623,6 +623,24 @@
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="PreDealsMenu" Text="Pre Deals" NavigationUrl="/PopupControl/PreAssignCropForm.aspx?model=List" ShowAmount="false">
+        <UserRoles>OfficeManager-*</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="NewOffers" Text="New Offers" NavigationUrl="/PopupControl/PreAssignCropForm.aspx?model=List" ShowAmount="false">
+        <UserRoles>OfficeManager-*</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="CheckRequest" Text="Check Requests" NavigationUrl="/PopupControl/PreAssignCropForm.aspx?model=List&amp;role=finance" ShowAmount="false">
+        <UserRoles>Accounting-Manager</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <PortalNavItem Name="MapData" Text="Geo Leads" NavigationUrl="/Map/ZipMap.aspx" ShowAmount="false">
         <UserRoles>Admin,OfficeManager-*</UserRoles>
         <FontClass>
@@ -684,15 +702,16 @@
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
-      </PortalNavItem>     
+      </PortalNavItem>
       <PortalNavItem Name="PortalRole" Text="Teams" NavigationUrl="/ManagementUI/MgrTeam.aspx" ShowAmount="false">
         <UserRoles>HR-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
-      </PortalNavItem>      
+      </PortalNavItem>
     </Items>
   </PortalNavItem>
+
   <PortalNavItem Name="PortalManagement" Text="Portal Settings" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Admin</UserRoles>
     <Items>
