@@ -41,11 +41,9 @@ Public Class DeedCorp
     Public Sub AssignProperty(bble As String, assingBy As String)
         If Properties.Count >= 25 Then
             Throw New Exception("The deed corp is full")
-
         End If
 
         DeedCorpProperty.Assign(bble, EntityId, assingBy)
-
     End Sub
 
     Public Property Properties As List(Of DeedCorpProperty)
