@@ -162,11 +162,13 @@
                         </div>
                     </div>
                 </div>
-                <div ng-show="currentStep().title=='Search Info'" class="view-animate">
-                    <h3 class="wizard-title">Check Search Information</h2>
+                <div ng-show="currentStep().title=='Search Info'" class="view-animate" id="preSignSearchInfo">
+                    <h3 class="wizard-title">Check Search Information</h3>
 
                     <div>
                         <div style="padding: 10px" ng-controller="LeadTaxSearchCtrl" id="LeadTaxSearchCtrl">
+                            <h4 ng-show="!DocSearch||DocSearch.Status!=1" ng-class="{ss_warning:!DocSearch||DocSearch.Status!=1}"
+                                data-message="Document search not completed yet please contact document search agent completed search">Document search not completed yet please contact document search agent completed search</h4>
                             <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />
                         </div>
                     </div>
@@ -176,8 +178,8 @@
                     <h3 class="wizard-title">Short Sale Information</h3>
                     <div ng-controller="ShortSaleCtrl" id="ShortSaleCtrl">
 
-                        <uc1:ShortPreSignControl runat="server" id="ShortPreSignControl" />
-                       
+                        <uc1:ShortPreSignControl runat="server" ID="ShortPreSignControl" />
+
                     </div>
 
                     <%--<div>
@@ -360,21 +362,21 @@
 
                                
                             </div>--%>
-                             <div class="ss_form">
-                                    <h4 class="ss_form_title ">Bill Info </h4>
-                                    <div class="ss_border">
-                                        <ul class="ss_form_box clearfix">
-                                            <li class="ss_form_item ">
-                                                <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.contractPrice}" data-message="Please fill Contract Price">Contract Price</label>
-                                                <input class="ss_form_input"  ng-model="SSpreSign.DealSheet.ContractOrMemo.contractPrice" money-mask />
-                                            </li>
-                                            <li class="ss_form_item ">
-                                                <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.downPayment}" data-message="Please fill Down Payment">Down Payment</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.downPayment"  money-mask />
-                                            </li>
-                                        </ul>
-                                    </div>
+                            <div class="ss_form">
+                                <h4 class="ss_form_title ">Bill Info </h4>
+                                <div class="ss_border">
+                                    <ul class="ss_form_box clearfix">
+                                        <li class="ss_form_item ">
+                                            <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.contractPrice}" data-message="Please fill Contract Price">Contract Price</label>
+                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.contractPrice" money-mask />
+                                        </li>
+                                        <li class="ss_form_item ">
+                                            <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.downPayment}" data-message="Please fill Down Payment">Down Payment</label>
+                                            <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.downPayment" money-mask />
+                                        </li>
+                                    </ul>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -426,7 +428,7 @@
                             </div>--%>
 
                             <div class="ss_form">
-                                <h4 class="ss_form_title ">Buyer</h4>
+                                <h4 class="ss_form_title " <%--ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.EntityId}"--%> data-message="Can not get DEED Crop this time!">Buyer</h4>
                                 <div class="ss_border">
                                     <ul class="ss_form_box clearfix">
                                         <li class="ss_form_item ">
@@ -618,7 +620,7 @@
     <script>
         var portalApp = angular.module('PortalApp');
 
-        portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptContactServices) {
+        portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptContactServices,$q) {
             $scope.ptContactServices = ptContactServices;
             $scope.SSpreSign = {
                 Type: 'Short Sale',
@@ -631,7 +633,7 @@
             };
             $scope.DeadType = {
                 Contract: true,
-                Memo:false ,
+                Memo: false,
                 Deed: false, CorrectionDeed: false, POA: false
             };
             $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); };
@@ -664,7 +666,7 @@
 
                 _dealSheet.ContractOrMemo.Sellers = $.extend(true, [], _sellers);
                 _dealSheet.Deed.Sellers = $.extend(true, [], _sellers);
-                _dealSheet.CorrectionDeed.Sellers = $.extend(true, {}, _sellers);
+                _dealSheet.CorrectionDeed.Sellers = $.extend(true, [], _sellers);
                 _dealSheet.Deed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
                 return true;
             }
@@ -684,12 +686,17 @@
 
                 $scope.SSpreSign.SsCase = ss.SsCase;
 
-                var leadSearch = ScopeHelper.getLeadsSearchScope();
-                $.extend($scope.SSpreSign.assignCrop, { isWellsFargo: leadSearch.DocSearch.LeadResearch.wellsFargo })
-                $scope.SSpreSign.FormData = JSON.stringify( $scope.SSpreSign);
+
+                $scope.SSpreSign.FormData = JSON.stringify($scope.SSpreSign);
             }
             $scope.searchInfoNext = function () {
-
+                var eMessages = $scope.getErrorMessage('preSignSearchInfo');
+                if (_.any(eMessages)) {
+                    AngularRoot.alert(eMessages.join(' <br />'));
+                    return false;
+                }
+                var leadSearch = ScopeHelper.getLeadsSearchScope();
+                $.extend($scope.SSpreSign.assignCrop, { isWellsFargo: leadSearch.DocSearch.LeadResearch.wellsFargo })
                 return true;
             }
             $scope.getErrorMessage = function (id) {
@@ -708,7 +715,50 @@
                 }
                 return true;
             }
+            
+           
             $scope.DeedNext = function () {
+                var deedCrop = $scope.SSpreSign.DealSheet.Deed;
+                /*use like synchronously call*/
+              
+                if (!deedCrop.EntityId)
+                {
+
+                    var response = $.ajax({
+                        type: "POST",
+                        dataType: 'application/json',
+                        data: $scope.SSpreSign.DealSheet.Deed.Buyer,
+                        url: '/api/CorporationEntities/AssignDeedCorp?bble=' + $scope.SSpreSign.BBLE,
+                        async: false
+                    });
+
+                    if (response.status == 200)
+                    {
+                        $scope.SSpreSign.DealSheet.Deed.EntityId = $scope.SSpreSign.DealSheet.Deed.Buyer.EntityId;
+                        return true;
+                    }else
+                    {
+                        var message = "";
+                        var dataObj = JSON.parse( response.responseText);
+                        if (dataObj && dataObj.ExceptionMessage)
+                        {
+                            message = dataObj.ExceptionMessage;
+                        }
+                        AngularRoot.alert("Error: (" + response.status + ") " + message);
+                        deedCrop.EntityId = null;
+                        return false;
+                    }
+
+
+                    //$http.post(,JSON.stringify($scope.SSpreSign.DealSheet.Deed.Buyer)).success(function()
+                    //{
+
+                    //}).error(function(){
+                   
+                       
+                    //});
+                }
+               
                 var eMessages = $scope.getErrorMessage('preAssignDeed');
                 if (_.any(eMessages)) {
                     AngularRoot.alert(eMessages.join(' <br />'));
@@ -779,7 +829,7 @@
 
                 var _cropData = $scope.SSpreSign.assignCrop.CropData;
                 _dealSheet.ContractOrMemo.Buyer = _cropData;
-                _dealSheet.Deed.Buyer = _cropData;
+                //_dealSheet.Deed.Buyer = _cropData;
                 return true;
             }
 
@@ -794,6 +844,14 @@
                 }
                 return true;
             }
+            $scope.DeedWizardInit = function () {
+
+                $http.get('/api/CorporationEntities/DeedCorpsByTeam?team=' + $scope.SSpreSign.assignCrop.Name).success(function (data) {
+                    $scope.SSpreSign.DealSheet.Deed.Buyer = data;
+                    
+                });
+
+            }
             $scope.steps = [
               { title: "New Offer", next: function () { return true; } },
               { title: "Search Info", next: $scope.searchInfoNext },
@@ -805,7 +863,7 @@
 
               //{ title: "Deal Sheet" },
               { title: 'Contract', caption: 'Contract Or Memo', sheet: 'Contract', next: $scope.ContractNext },
-              { title: 'Deed', sheet: 'Deed', next: $scope.DeedNext },
+              { title: 'Deed', sheet: 'Deed', next: $scope.DeedNext, init: $scope.DeedWizardInit },
               { title: 'CorrectionDeed', caption: 'Correction Deed', sheet: 'CorrectionDeed', next: $scope.preAssignCorrectionDeed },
               { title: 'POA', sheet: 'POA', next: $scope.preAssignCorrectionPOA },
               { title: "Finish" },
@@ -828,7 +886,7 @@
             $scope.currentStep = function () {
                 return $scope.filteredSteps[$scope.step - 1];
             }
-
+            
             $scope.NextStep = function () {
                 var cStep = $scope.currentStep();
                 if (cStep.next) {
@@ -837,11 +895,17 @@
                         $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
                             $scope.SSpreSign.DataId = formdata.DataId;
                             $scope.step++;
+                            cStep = $scope.currentStep();
+                            if (cStep.init) {
+                                cStep.init();
+                            }
                         })
                     }
+
                 } else {
                     $scope.step++;
                 }
+               
 
 
             }
@@ -886,9 +950,9 @@
         });
         portalApp.filter('ordered', function () {
             return function (item) {
-                
+
                 var orderDic = { "1": '1st', "2": "2nd", "3": "3rd" };
-              
+
                 return orderDic[item];
             };
         });

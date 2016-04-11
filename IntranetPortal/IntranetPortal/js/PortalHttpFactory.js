@@ -45,7 +45,8 @@
 
             }
         }
-        return 'Error in Build Message Format is incorrect !';
+        var urlName = data.config.url.toString().replace(/\//g, ' ').replace('api', '');
+        return 'Get error !' + '<br/> <small>( Status: ' + data.status +' '+ urlName + ' )</small>';
     },
     init: function () {
         var self = this;
