@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
+      
         .wizard-content {
             min-height: 400px;
         }
@@ -105,9 +106,9 @@
                     <h2 ng-if="role=='finance'">Check Requests List</h2>
                     <div dx-data-grid="preSignRecordsGridOpt">
                         <div data-options="dxTemplate: {name: 'detail'}">
-		                    <div class="internal-grid-container">
-			                    <div>Checks :</div>
-			                    <div class="internal-grid" dx-data-grid="{
+                            <div class="internal-grid-container">
+                                <div>Checks :</div>
+                                <div class="internal-grid" dx-data-grid="{
 				                    dataSource: data.Checks,
 				                    columnAutoWidth: true,
                                     columns: ['PaybleTo', {
@@ -122,14 +123,15 @@
                                     },{
                                         dataField: 'Description'  
                                     }]                
-			                    }"></div>
-		                    </div>
-	                    </div>
+			                    }">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row" ng-if="preAssign.BBLE" id="preDealForm">
+        <div class="row" ng-if="preAssign.BBLE||model=='View'" id="preDealForm">
             <div style="max-width: 700px">
                 <div id="wizard" <%=IIf(String.IsNullOrEmpty(Request.QueryString("popup")), "style='padding:20px';max-width:600px", "") %>>
                     <%--<div class="wizardbar">
@@ -155,15 +157,15 @@
                             </li>--%>
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title " ng-class="{ss_warning:!preAssign.ExpectedDate}">Expected Date of Signing</label>
-                                        <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date required />
+                                        <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date required  />
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Need do search</label>
-                                        <pt-radio name="PreAssign_Needdosearch0" model="preAssign.NeedSearch"></pt-radio>
+                                        <pt-radio name="PreAssign_Needdosearch0" model="preAssign.NeedSearch" ></pt-radio>
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Check request</label>
-                                        <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck"></pt-radio>
+                                        <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck" ></pt-radio>
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Manager </label>
@@ -190,7 +192,7 @@
                                         </li>
                                         <li class="ss_form_item">
                                             <label class="ss_form_input_title">Type of Check request</label>
-                                            <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type">
+                                            <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type" >
 
                                                 <option>Short Sale</option>
                                                 <option>Straight Sale</option>
@@ -246,6 +248,7 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>
     <script>
 
         var portalApp = angular.module('PortalApp');
@@ -260,20 +263,42 @@
             $scope.role = _role;
             $scope.model = _model
             $scope.role = _role
-            if (_model == 'List')
-            {
+            $scope.gridEdit = {
+                mode: "batch",
+                editEnabled: true,
+                insertEnabled: true,
+                removeEnabled: true
+            }
+            if (_model == 'List') {
                 var checksListApi = $scope.role == 'finance' ? '/api/PreSign/CheckRequests' : '/api/presign/records'
                 $http.get(checksListApi).success(function (data) {
                     $scope.preSignList = _.map(data, function (p) { p.ChecksTotal = _.sum(p.Checks, 'Amount'); return p; });
                 });
+            }
+            if (_model == 'View') {
+                setTimeout(function () {
+                    $("#preDealForm input").prop("disabled", true);
+                    $("#preDealForm select").prop("disabled", true);
+                },1000)
                 
-            }
-            if (_model == 'View')
-            {
-                $('#preDealForm input').prop("disabled", true);
-            }
+                $scope.gridEdit = {}
+                var _Id = PortalUtility.QueryUrl().Id;
 
-           
+                var preSignRespose = $.ajax({
+                    url: '/api/PreSign/' + _Id,
+                    async: false
+                })
+               
+                var message = PortalHttp.BuildAjaxErrorMessage(preSignRespose);
+                if (message) {
+                    AngularRoot.alert(message)
+                } else {
+                    $scope.preAssign = JSON.parse(preSignRespose.responseText)
+                    _BBLE = $scope.preAssign.BBLE
+                   
+                }
+
+            }
             $scope.preAssign.BBLE = _BBLE
             $scope.preAssign.CheckRequestData.BBLE = $scope.preAssign.BBLE;
             $scope.preAssign.NeedCheck = true;
@@ -298,9 +323,13 @@
                 $http.get('/api/Leads/LeadsInfo/' + BBLE).success(function (data) {
                     $scope.preAssign.Title = data.PropertyAddress
                 });
-                $scope.preAssign.CheckRequestData.Type = "Short Sale";
-                $scope.preAssign.DealAmount = 0;
-                $scope.preAssign.NeedSearch = true;
+                if ($scope.model != 'View')
+                {
+                    $scope.preAssign.CheckRequestData.Type = "Short Sale";
+                    $scope.preAssign.DealAmount = 0;
+                    $scope.preAssign.NeedSearch = true;
+                }
+              
             }
 
             if (_BBLE) {
@@ -349,6 +378,7 @@
                     $http.post('/api/PreSign', JSON.stringify($scope.preAssign)).success(function (data) {
                         AngularRoot.alert("Submit success !");
                         $scope.preAssign = data;
+                        window.location.href = '/popupControl/preAssignCropForm.aspx?model=View&Id=' + data.Id
                     });
                 }
 
@@ -365,7 +395,7 @@
 
             $scope.onSelectedChanged = function (e) {
                 var request = e.selectedRowsData[0];
-                PortalUtility.OpenWindow('/PopupControl/PreAssignCropForm.aspx?BBLE=' + request.BBLE + '&model=View', 'Pre Sign ' + request.BBLE, 800, 900);
+                PortalUtility.OpenWindow('/PopupControl/PreAssignCropForm.aspx?model=View&Id=' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
             }
             $scope.preSignRecordsGridOpt = {
                 onSelectionChanged: $scope.onSelectedChanged,
@@ -384,12 +414,12 @@
                 paging: {
                     pageSize: 10
                 },
-                columnAutoWidth:true,
+                columnAutoWidth: true,
                 columns: [{ dataField: 'Title', caption: 'Address' }, { dataField: 'CreateBy', caption: 'Request By' },
                     { dataField: 'CreateDate', caption: 'Request Date', dataType: 'date' },
                     { dataField: 'ExpectedDate', caption: 'Expected Date Of Sign', dataType: 'date' },
                     { dataField: 'ChecksTotal', format: 'currency', dataType: 'number', precision: 2 },
-                    { dataField: 'NeedSearch', caption: 'Search Request' },],
+                    { dataField: 'NeedSearch', caption: 'Search Request' }, ],
                 wordWrapEnabled: true
             }
             if (_role == 'finance') {
@@ -414,12 +444,7 @@
                 paging: {
                     pageSize: 10
                 },
-                editing: {
-                    mode: "batch",
-                    editEnabled: true,
-                    insertEnabled: true,
-                    removeEnabled: true
-                },
+                editing: $scope.gridEdit,
                 pager: {
                     showPageSizeSelector: true,
                     allowedPageSizes: [5, 10, 20],
@@ -433,7 +458,7 @@
                     }]
                 }
             }
-            
+
             $scope.CheckTotalAmount = function () {
                 return _.sum($scope.preAssign.CheckRequestData.Checks, 'Amount');
             }
@@ -447,12 +472,7 @@
                     pageSize: 10
                 },
 
-                editing: {
-                    mode: "batch",
-                    editEnabled: true,
-                    insertEnabled: true,
-                    removeEnabled: true
-                },
+                editing: $scope.gridEdit,
                 pager: {
                     showPageSizeSelector: true,
                     allowedPageSizes: [5, 10, 20],
@@ -490,5 +510,5 @@
             }
         });
     </script>
-    <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>
+
 </asp:Content>

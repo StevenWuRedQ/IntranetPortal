@@ -27,6 +27,26 @@
         }
         AngularRoot.alert(message);
     },
+    /*
+     *Build Ajax error usually using in sync ajax call from Jquery 
+     *return empty when the request sucessed.
+     */
+    BuildAjaxErrorMessage:function(response)
+    {
+        var message = "";
+        if (response.status!=200)
+        {
+            var dataObj = JSON.parse(response.responseText);
+            if (dataObj && dataObj.ExceptionMessage) {
+                message = dataObj.ExceptionMessage;
+            }else
+            {
+                message = JSON.stringify(response)
+            }
+        }
+        
+        return message;
+    },
     BuildErrorMessage: function (data) {
         if (data) {
             if (data.data) {
