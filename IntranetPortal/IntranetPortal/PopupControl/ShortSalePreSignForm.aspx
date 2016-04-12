@@ -136,7 +136,14 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
     <div style="padding: 20px" ng-controller="shortSalePreSignCtrl">
-        <div class="container">
+        <div class="container" ng-hide="QueryUrl.model!='List'">
+            <div>
+                <h2>New Offer Request List</h2>
+                <div dx-data-grid="newOfferGridOpt"></div>
+            </div>
+            
+        </div>
+        <div class="container" ng-hide="QueryUrl.model=='List'">
             <div>
                 <div class="wizardbar">
                     <a class="wizardbar-item {{step==$index+1?'current':'' }}" href="#" ng-repeat="s in (filteredSteps = (steps|wizardFilter:DeadType))">{{s.caption?s.caption:s.title}} 
@@ -622,6 +629,34 @@
 
         portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptContactServices,$q) {
             $scope.ptContactServices = ptContactServices;
+            $scope.QueryUrl = PortalUtility.QueryUrl();
+
+            if ($scope.QueryUrl.model == 'List')
+            {
+                $http.get('/api/PropertyOffer').success(function (data) {
+                    $scope.newOfferGridOpt = {
+                        dataSource: data,
+                        headerFilter: {
+                            visible: true
+                        },
+                        searchPanel: {
+                            visible: true,
+                            width: 250
+                        },
+                        paging: {
+                            pageSize: 10
+                        },
+                        columnAutoWidth: true,
+                        wordWrapEnabled: true,
+                        columns: [{ dataField: 'Title', caption: 'Address' }, 'OfferType',
+                            { dataField: 'CreateBy', caption: 'Submit By' },
+                            { dataField: 'CreateDate', caption: 'Submit Date', dataType: 'date', format: 'shortDate' },
+                        ]
+                    }
+                });
+                
+            }
+           
             $scope.SSpreSign = {
                 Type: 'Short Sale',
                 FormName: 'PropertyOffer',
@@ -811,7 +846,6 @@
                     });
 
                 });
-
 
             }
             $http.get('/api/CorporationEntities/Teams').success(function (data) {
