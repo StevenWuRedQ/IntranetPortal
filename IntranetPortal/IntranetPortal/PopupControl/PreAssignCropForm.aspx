@@ -101,7 +101,8 @@
         <div class="row">
             <div class="col-md-12" ng-hide="!preSignList">
                 <div style="padding: 20px">
-                    <h2>Pre Deal request list</h2>
+                    <h2 ng-if="role==null">Pre Deal Request List</h2>
+                    <h2 ng-if="role=='finance'">Check Requests List</h2>
                     <div dx-data-grid="preSignRecordsGridOpt">
                         <div data-options="dxTemplate: {name: 'detail'}">
 		                    <div class="internal-grid-container">
@@ -127,7 +128,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="row" ng-if="preAssign.BBLE" id="preDealForm">
             <div style="max-width: 700px">

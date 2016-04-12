@@ -83,7 +83,7 @@ Namespace Controllers
                 db.LeadInfoDocumentSearches.Add(leadInfoDocumentSearch)
                 leadInfoDocumentSearch.CreateBy = HttpContext.Current.User.Identity.Name
                 leadInfoDocumentSearch.CreateDate = Date.Now
-                LeadsActivityLog.AddActivityLog(Date.Now(), "Create a search request to Elizabeth ", leadInfoDocumentSearch.BBLE, LogCategory.SalesAgent.ToString)
+                LeadsActivityLog.AddActivityLog(Date.Now(), "Create a search request to doc Search Agent ", leadInfoDocumentSearch.BBLE, LogCategory.SalesAgent.ToString)
                 Dim EntityMananger = Roles.GetUsersInRole("Entity-Manager")(0)
 
                 If (Not String.IsNullOrEmpty(EntityMananger)) Then
