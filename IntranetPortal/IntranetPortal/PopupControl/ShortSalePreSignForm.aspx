@@ -435,7 +435,7 @@
                             </div>--%>
 
                             <div class="ss_form">
-                                <h4 class="ss_form_title " <%--ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.EntityId}"--%> data-message="Can not get DEED Crop this time!">Buyer</h4>
+                                <h4 class="ss_form_title " <%--ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.EntityId}"--%> ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.CorpName}" data-message="Can not get DEED Crop this time!">Buyer</h4>
                                 <div class="ss_border">
                                     <ul class="ss_form_box clearfix">
                                         <li class="ss_form_item ">
@@ -767,19 +767,14 @@
                         async: false
                     });
 
-                    if (response.status == 200)
+                    var errorMsg = PortalHttp.BuildAjaxErrorMessage(response);
+                    if (!errorMsg)
                     {
                         $scope.SSpreSign.DealSheet.Deed.EntityId = $scope.SSpreSign.DealSheet.Deed.Buyer.EntityId;
                         return true;
                     }else
                     {
-                        var message = "";
-                        var dataObj = JSON.parse( response.responseText);
-                        if (dataObj && dataObj.ExceptionMessage)
-                        {
-                            message = dataObj.ExceptionMessage;
-                        }
-                        AngularRoot.alert("Error: (" + response.status + ") " + message);
+                        AngularRoot.alert(errorMsg);
                         deedCrop.EntityId = null;
                         return false;
                     }
@@ -940,8 +935,6 @@
                     $scope.step++;
                 }
                
-
-
             }
             $scope.PrevStep = function () {
                 $scope.step--;

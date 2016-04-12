@@ -33,12 +33,17 @@
      */
     BuildAjaxErrorMessage:function(response)
     {
+        var that = this;
         var message = "";
-        if (response.status!=200)
+        /*Only error handle*/
+        if (response.status > 300 || response.status < 200)
         {
             var dataObj = JSON.parse(response.responseText);
-            if (dataObj && dataObj.ExceptionMessage) {
-                message = dataObj.ExceptionMessage;
+            
+            if (dataObj) {
+                var eMssage = dataObj.ExceptionMessage || dataObj.Message
+                var messageObj = { Message: eMssage };
+                message = that.BuildErrorMessgeStr(messageObj);
             }else
             {
                 message = JSON.stringify(response)
@@ -46,6 +51,16 @@
         }
         
         return message;
+    },
+    /*Build Error message by obj { Message: "", urlName: "" }*/
+    BuildErrorMessgeStr: function (messageObj)
+    {
+        
+        return 'Error : ' + messageObj.Message || 'No Message' + '<br/> <small>(' + messageObj.urlName || 'No additional Info' + ')</small>';
+    },
+    ErrorUrl:function(url)
+    {
+        return url.toString().replace(/\//g, ' ').replace('api', '');
     },
     BuildErrorMessage: function (data) {
         if (data) {
