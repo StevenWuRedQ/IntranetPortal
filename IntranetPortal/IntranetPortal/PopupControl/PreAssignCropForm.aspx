@@ -418,7 +418,7 @@
                 columns: [{ dataField: 'Title', caption: 'Address' }, { dataField: 'CreateBy', caption: 'Request By' },
                     { dataField: 'CreateDate', caption: 'Request Date', dataType: 'date' },
                     { dataField: 'ExpectedDate', caption: 'Expected Date Of Sign', dataType: 'date' },
-                    { dataField: 'ChecksTotal', format: 'currency', dataType: 'number', precision: 2 },
+                    { dataField: 'DealAmount', format: 'currency', dataType: 'number', precision: 2 },
                     { dataField: 'NeedSearch', caption: 'Search Request' }, ],
                 wordWrapEnabled: true
             }
@@ -427,6 +427,7 @@
                     enabled: true,
                     template: "detail"
                 }
+                $scope.preSignRecordsGridOpt.selection  = null;
                 $scope.preSignRecordsGridOpt.columns = [
                     { dataField: 'PropertyAddress', caption: 'Address' }, { dataField: 'RequestBy', caption: 'Request By' },
                     { dataField: 'Type', caption: 'Request Type' },
