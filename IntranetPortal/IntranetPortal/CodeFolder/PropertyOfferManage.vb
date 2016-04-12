@@ -20,13 +20,15 @@ Public Class PropertyOfferManage
             Return False
         End If
 
-        Dim search = LeadInfoDocumentSearch.GetInstance(bble)
-        If search Is Nothing Then
-            Return False
-        End If
+        If record.NeedSearch Then
+            Dim search = LeadInfoDocumentSearch.GetInstance(bble)
+            If search Is Nothing Then
+                Return False
+            End If
 
-        If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
-            Return False
+            If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
+                Return False
+            End If
         End If
 
         Return True
