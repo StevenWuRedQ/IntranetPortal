@@ -626,19 +626,19 @@
       <PortalNavItem Name="PreDealsMenu" Text="Pre Deals" NavigationUrl="/PopupControl/PreAssignCropForm.aspx?model=List" ShowAmount="false">
         <UserRoles>OfficeManager-*</UserRoles>
         <FontClass>
-          <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
+          <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="NewOffers" Text="New Offers" NavigationUrl="/PopupControl/PreAssignCropForm.aspx?model=List" ShowAmount="false">
+      <PortalNavItem Name="NewOffers" Text="New Offers" NavigationUrl="/PopupControl/ShortSalePreSignForm.aspx?model=List" ShowAmount="false">
         <UserRoles>OfficeManager-*</UserRoles>
         <FontClass>
-          <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
+          <![CDATA[<i class="fa fa-bullseye"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="CheckRequest" Text="Check Requests" NavigationUrl="/PopupControl/PreAssignCropForm.aspx?model=List&amp;role=finance" ShowAmount="false">
         <UserRoles>Accounting-Manager</UserRoles>
         <FontClass>
-          <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
+          <![CDATA[<i class="fa fa-flag-checkered"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="MapData" Text="Geo Leads" NavigationUrl="/Map/ZipMap.aspx" ShowAmount="false">

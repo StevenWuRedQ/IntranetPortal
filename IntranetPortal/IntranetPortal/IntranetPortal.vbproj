@@ -7416,7 +7416,11 @@
     <Content Include="bower_components\angular-mocks\package.json" />
     <Content Include="bower_components\angular-mocks\README.md" />
     <Content Include="bower_components\Web.config" />
-    <Content Include="App_Data\OfferDoc\BILL OF SALE.docx" />
+    <Content Include="App_Data\OfferDoc\BargainandSaleDeedwithCovenants.docx" />
+    <Content Include="App_Data\OfferDoc\MemorandumOfContract.docx" />
+    <Content Include="App_Data\OfferDoc\PowerofAttorney.docx" />
+    <Content Include="App_Data\OfferDoc\SaleDeedwithCovenantsCorrection.docx" />
+    <Content Include="App_Data\OfferDoc\SalesContract.docx" />
     <None Include="Service References\CallTrackingService\CallTrackingService.wsdl" />
     <Content Include="Service References\CallTrackingService\IntranetPortal.CallTrackingService.EmployeeStatisticData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

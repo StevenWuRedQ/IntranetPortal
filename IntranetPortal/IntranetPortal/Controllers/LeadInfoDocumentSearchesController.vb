@@ -53,7 +53,10 @@ Namespace Controllers
                     maildata.Add("Address", l.PropertyAddress)
                     maildata.Add("UserName", leadInfoDocumentSearch.CreateBy)
                     maildata.Add("ResutContent", leadInfoDocumentSearch.ResutContent)
-                    Core.EmailService.SendMail(Employee.GetInstance(leadInfoDocumentSearch.CreateBy).Email, Employee.GetInstance(leadInfoDocumentSearch.UpdateBy).Email & ";" & Employee.CEO.Email, "DocSearchCompleted", maildata)
+
+                    If Not String.IsNullOrEmpty(leadInfoDocumentSearch.CreateBy) Then
+                        Core.EmailService.SendMail(Employee.GetInstance(leadInfoDocumentSearch.CreateBy).Email, Employee.GetInstance(leadInfoDocumentSearch.UpdateBy).Email & ";" & Employee.CEO.Email, "DocSearchCompleted", maildata)
+                    End If
                 End If
 
             End If
