@@ -201,7 +201,7 @@
 
         </div>
         <br />
-        <button class="btn btn-primary pull-right" ng-click="$eval('ViewStatus.Owner_'+$index+'=false')">Save</button>
+        <button class="btn btn-primary pull-right" type="button" ng-click="$eval('ViewStatus.Owner_'+$index+'=false')">Save</button>
     </div>
 </div>
         </uib-tab>

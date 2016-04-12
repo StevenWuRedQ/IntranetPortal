@@ -17,7 +17,7 @@ Public Class DeedCorp
         End Using
     End Function
 
-    ''' <summary>
+    ''' <summary> 
     ''' Return DeepCorp instance by Corp Id
     ''' </summary>
     ''' <param name="id">The Corp identity</param>
