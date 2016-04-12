@@ -1,6 +1,7 @@
 ﻿Imports System.Net
 Imports System.Web.Http
 Imports Newtonsoft.Json.Linq
+Imports IntranetPortal.Data
 
 Namespace Controllers
 
@@ -27,6 +28,20 @@ Namespace Controllers
             Catch ex As Exception
                 Return BadRequest(ex.Message)
             End Try
+
+        End Function
+
+        <Route("api/PropertyOffer/")>
+        Public Function GetPropertyOffers() As IHttpActionResult
+
+            Dim name = HttpContext.Current.User.Identity.Name
+
+            If Employee.IsAdmin(name) Then
+                name = "*"
+            End If
+
+            Dim records = PropertyOffer.GetOffers(name)
+            Return Ok(records)
 
         End Function
 

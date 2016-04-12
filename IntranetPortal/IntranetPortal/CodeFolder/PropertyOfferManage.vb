@@ -2,11 +2,35 @@
 Imports System.IO.Compression
 Imports Newtonsoft.Json.Linq
 Imports Novacode
+Imports IntranetPortal.Data
 
 ''' <summary>
 ''' The action realted to PropertyOffer
 ''' </summary>
 Public Class PropertyOfferManage
+
+    ''' <summary>
+    ''' Check the pre conditions for new offer
+    ''' </summary>
+    ''' <param name="bble">The property BBLE</param>
+    ''' <returns></returns>
+    Public Shared Function CheckPreConditions(bble As String) As Boolean
+        Dim record = PreSignRecord.GetInstanceByBBLE(bble)
+        If record Is Nothing Then
+            Return False
+        End If
+
+        Dim search = LeadInfoDocumentSearch.GetInstance(bble)
+        If search Is Nothing Then
+            Return False
+        End If
+
+        If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
+            Return False
+        End If
+
+        Return True
+    End Function
 
     ''' <summary>
     ''' Generate Offer Package

@@ -5,6 +5,20 @@ Partial Public Class PropertyOffer
     Inherits BusinessDataBase
 
     ''' <summary>
+    ''' Return the PropertyOffer Array Owner Nmae
+    ''' </summary>
+    ''' <param name="name">The Owner Name</param>
+    ''' <returns>The PropertyOffer Array</returns>
+    Public Shared Function GetOffers(name As String) As PropertyOffer()
+
+        Using ctx As New PortalEntities
+            Dim offers = ctx.PropertyOffers.Where(Function(p) p.Owner = name OrElse name = "*").ToArray
+
+            Return offers
+        End Using
+    End Function
+
+    ''' <summary>
     ''' Return the PropertyOffer object by business form id
     ''' </summary>
     ''' <param name="formId">The form Id</param>
@@ -72,7 +86,7 @@ Partial Public Class PropertyOffer
         If newCase Then
             FormItemId = itemData.DataId
             BBLE = jsonCase.Item("BBLE")
-            Owner = jsonCase.Item("Owner")
+            Owner = itemData.CreateBy
             Me.OfferType = jsonCase.Item("Type")
             CreateDate = DateTime.Now
             CreateBy = itemData.CreateBy
