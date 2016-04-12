@@ -49,21 +49,54 @@ Partial Public Class PreSignRecord
         End Using
     End Function
 
-    Public Sub Create(createBy As String)
+
+    ''' <summary>
+    ''' Return Pre Sign process instance by property BBLE
+    ''' </summary>
+    ''' <param name="bble">The propety bble</param>
+    ''' <returns></returns>
+    Public Shared Function GetInstanceByBBLE(bble As String) As PreSignRecord
         Using ctx As New PortalEntities
 
-            If Me.NeedCheck Then
-                Me.CheckRequestData.Create(createBy)
-                Me.CheckRequestId = Me.CheckRequestData.RequestId
+            Dim record = ctx.PreSignRecords.Where(Function(p) p.BBLE = bble).FirstOrDefault
+
+            If record Is Nothing Then
+                Return Nothing
             End If
 
-            Me.Owner = createBy
-            Me.CreateBy = createBy
-            Me.CreateDate = DateTime.Now
+            If record.NeedSearch Then
+                record.SearchData = LeadInfoDocumentSearch.GetInstance(record.BBLE)
+            End If
 
-            ctx.PreSignRecords.Add(Me)
-            ctx.SaveChanges()
+            If record.NeedCheck Then
+                record.CheckRequestData = CheckRequest.GetInstance(record.CheckRequestId)
+            End If
 
+            Return record
+        End Using
+    End Function
+
+    Public Sub Create(createBy As String)
+        Using ctx As New PortalEntities
+            If String.IsNullOrEmpty(BBLE) Then
+                Throw New DataException("BBLE is mandatory.")
+            End If
+
+            If ctx.PreSignRecords.Any(Function(p) p.BBLE = BBLE) Then
+                Throw New DataException("The records already exist.")
+            Else
+                If Me.NeedCheck Then
+                    Me.CheckRequestData.Create(createBy)
+                    Me.CheckRequestId = Me.CheckRequestData.RequestId
+                End If
+
+                Me.Owner = createBy
+                Me.CreateBy = createBy
+                Me.CreateDate = DateTime.Now
+
+                ctx.PreSignRecords.Add(Me)
+                ctx.SaveChanges()
+            End If
         End Using
     End Sub
 

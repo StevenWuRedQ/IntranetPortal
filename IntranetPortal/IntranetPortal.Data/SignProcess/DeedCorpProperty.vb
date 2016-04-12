@@ -12,7 +12,7 @@
         Using ctx As New PortalEntities
 
             If ctx.DeedCorpProperties.Any(Function(dp) dp.BBLE = bble AndAlso dp.Status = PropStatus.Assigned) Then
-                Throw New Exception("The property had already assigned.")
+                Throw New DataException("The property had already assigned.")
             End If
 
             Dim prop As New DeedCorpProperty

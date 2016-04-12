@@ -87,7 +87,7 @@ Public Class WebApiException
             Return
         End If
 
-        If TypeOf ex Is PortalException Then
+        If TypeOf ex Is PortalException OrElse TypeOf ex Is Data.DataException Then
             context.Response = context.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, message)
             Return
         End If

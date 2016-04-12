@@ -39,6 +39,7 @@ Public Class WebApiConfig2
         config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel())
         'GlobalConfiguration.Configuration.Filters.Add(New WebApiException)
 
+        config.Filters.Add(New WebApiException)
     End Sub
 
 End Class

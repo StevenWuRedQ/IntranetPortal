@@ -151,6 +151,7 @@
     <Compile Include="Construction\ConstructionSpotCheck.vb" />
     <Compile Include="Construction\ConstructionViolations.vb" />
     <Compile Include="DataServices\TLOLocateReportOutput.vb" />
+    <Compile Include="Exception\DataException.vb" />
     <Compile Include="SignProcess\DeedCorp.vb" />
     <Compile Include="DocumentSearch\LeadInfoDocumentSearch.vb" />
     <Compile Include="FollowUps\UserFollowUp.vb" />

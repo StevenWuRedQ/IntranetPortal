@@ -48,7 +48,16 @@ Namespace Controllers
             End If
 
             Return Ok(record)
+        End Function
 
+        <Route("api/PreSign/BBLE/{bble}")>
+        Public Function GetPreSignRecordByBBLE(bble As String) As IHttpActionResult
+            Dim record = PreSignRecord.GetInstanceByBBLE(bble)
+            If IsNothing(record) Then
+                Return NotFound()
+            End If
+
+            Return Ok(record)
         End Function
 
         Public Function PutNewPreSign(id As Integer, record As PreSignRecord) As IHttpActionResult
@@ -76,34 +85,32 @@ Namespace Controllers
                 Return BadRequest(ModelState)
             End If
 
-            Try
+            If String.IsNullOrEmpty("BBLE") Then
+                Return BadRequest("BBLE cann't be empty.")
+            End If
 
-                record.Create(HttpContext.Current.User.Identity.Name)
+            record.Create(HttpContext.Current.User.Identity.Name)
 
-                If record.NeedSearch Then
-                    Dim docController As New LeadInfoDocumentSearchesController
-                    docController.PostLeadInfoDocumentSearch(New LeadInfoDocumentSearch With {.BBLE = record.BBLE, .ExpectedSigningDate = record.ExpectedDate})
-                End If
+            If record.NeedSearch Then
+                Dim docController As New LeadInfoDocumentSearchesController
+                docController.PostLeadInfoDocumentSearch(New LeadInfoDocumentSearch With {.BBLE = record.BBLE, .ExpectedSigningDate = record.ExpectedDate})
+            End If
 
-                If record.NeedCheck Then
-                    Dim svr As New CommonService
-                    Dim params = New Dictionary(Of String, String)
+            If record.NeedCheck Then
+                Dim svr As New CommonService
+                Dim params = New Dictionary(Of String, String)
 
-                    Dim finMgr = Roles.GetUsersInRole("Accounting-Manager")
-                    If finMgr.Count > 0 Then
-                        params.Add("RecordId", record.Id)
-                        params.Add("UserName", finMgr(0))
+                Dim finMgr = Roles.GetUsersInRole("Accounting-Manager")
+                If finMgr.Count > 0 Then
+                    params.Add("RecordId", record.Id)
+                    params.Add("UserName", finMgr(0))
 
-                        Dim emails = Employee.GetEmpsEmails(finMgr.ToArray)
-                        If Not String.IsNullOrEmpty(emails) Then
-                            svr.SendEmailByControlWithCC(emails, Employee.GetInstance(record.CreateBy).Email, "Checks Request from " & record.CreateBy, "PreSignNotify", params)
-                        End If
+                    Dim emails = Employee.GetEmpsEmails(finMgr.ToArray)
+                    If Not String.IsNullOrEmpty(emails) Then
+                        svr.SendEmailByControlWithCC(emails, Employee.GetInstance(record.CreateBy).Email, "Checks Request from " & record.CreateBy, "PreSignNotify", params)
                     End If
                 End If
-
-            Catch ex As Exception
-                Throw ex
-            End Try
+            End If
 
             Return Ok(record)
         End Function

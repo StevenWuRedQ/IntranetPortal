@@ -40,7 +40,7 @@ Public Class DeedCorp
     ''' <param name="BBLE">The property bble</param>
     Public Sub AssignProperty(bble As String, assingBy As String)
         If Properties.Count >= 25 Then
-            Throw New Exception("The deed corp is full")
+            Throw New DataException("The deed corp is full")
         End If
 
         DeedCorpProperty.Assign(bble, EntityId, assingBy)
