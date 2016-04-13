@@ -14,6 +14,24 @@ Option Explicit On
 Partial Public Class ShortSalePreSignForm
     
     '''<summary>
+    '''divMsg control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divMsg As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''content control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents content As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''LeadSearchSummery control.
     '''</summary>
     '''<remarks>

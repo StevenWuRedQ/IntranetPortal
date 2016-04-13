@@ -63,7 +63,7 @@ Namespace Controllers
         Function GetCorporationEntityByBBLE(ByVal BBLE As String) As IHttpActionResult
             Dim corporationentity As CorporationEntity = db.CorporationEntities.Where(Function(c) c.BBLE = BBLE).FirstOrDefault
             If IsNothing(corporationentity) Then
-                Throw New Exception("Can't find BBLE " & BBLE & "Please make sure you submit a search first")
+                Throw New PortalException("Can't find BBLE " & BBLE & ", Please make sure you submit a search first")
             End If
             Return Ok(corporationentity)
         End Function

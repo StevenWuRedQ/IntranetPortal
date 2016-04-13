@@ -13,6 +13,9 @@
                 If record IsNot Nothing Then
                     Response.Redirect("/PopupControl/PreAssignCropForm.aspx?model=View&Id=" & record.Id)
                 End If
+
+
+
             End If
         End If
     End Sub
