@@ -243,7 +243,9 @@
                         <%--<button type="button" class="btn btn-default" ng-show="step>1" ng-click="PrevStep()">< Prev</button>--%>
                         <button type="button" class="btn btn-default" ng-click="RequestPreSign()" <%--ng-show="step==MaxStep"--%> ng-show="model!='View'">{{preAssign.Id ?'Update':'Submit'}} </button>
                         <%--<button type="button" class="btn btn-default" ng-show="step<MaxStep" ng-click="NextStep()">Next ></button>--%>
+                        
                     </div>
+                    <div class="alert alert-success" role="alert" ng-if="model=='View'">Your request submit succeeded on {{preAssign.CreateDate|date:'MM/dd/yyyy HH:mm'}} </div>
                 </div>
             </div>
         </div>

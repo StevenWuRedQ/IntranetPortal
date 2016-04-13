@@ -650,7 +650,7 @@
                         wordWrapEnabled: true,
                         columns: [{ dataField: 'Title', caption: 'Address' }, 'OfferType',
                             { dataField: 'CreateBy', caption: 'Submit By' },
-                            { dataField: 'CreateDate', caption: 'Submit Date', dataType: 'date', format: 'shortDate' },
+                            { dataField: 'CreateDate', caption: 'Contract Date', dataType: 'date', format: 'shortDate' },
                         ]
                     }
                 });
