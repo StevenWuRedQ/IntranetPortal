@@ -135,7 +135,7 @@
                 <span class="time_buttons" onclick='ShowPropertyMap("<%= LeadsInfoData.BBLE %>")'>Maps</span>
                 <%--<span class="time_buttons" onclick='preAssignPopopClient.Show()'>Pre sign</span>--%>
                 
-                <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
+                <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>                
                 <span class="time_buttons" onclick='ShowPopupMap("/PopupControl/PreAssignCropForm.aspx?popup=true&BBLE=" + leadsInfoBBLE, "Pre-Deal")'>Pre-Deal</span>
                 <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("New Offer", "/PopupControl/ShortSalePreSignForm.aspx?BBLE=" + leadsInfoBBLE)'>New Offer</span>
                 <% End If %>
