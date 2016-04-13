@@ -615,7 +615,7 @@
   </PortalNavItem>
 
   <PortalNavItem Name="ManagementReport" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <UserRoles>OfficeManager-*,Entity-Manager,Complaints-Manager,HR-Manager</UserRoles>
+    <UserRoles>OfficeManager-*,Entity-Manager,Complaints-Manager,HR-Manager,Accounting-Manager</UserRoles>
     <Items>
       <PortalNavItem Name="ReportSummary" Text="Summary" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
         <UserRoles>OfficeManager-*</UserRoles>

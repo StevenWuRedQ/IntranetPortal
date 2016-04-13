@@ -38,7 +38,7 @@ Namespace Controllers
                 Return BadRequest(ModelState)
             End If
 
-            If Not id = leadInfoDocumentSearch.BBLE.Trim Then
+            If Not id.Trim = leadInfoDocumentSearch.BBLE.Trim Then
                 Return BadRequest()
             End If
 

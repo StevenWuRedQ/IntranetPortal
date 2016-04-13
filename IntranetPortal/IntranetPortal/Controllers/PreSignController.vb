@@ -85,7 +85,7 @@ Namespace Controllers
                 Return BadRequest(ModelState)
             End If
 
-            If String.IsNullOrEmpty("BBLE") Then
+            If String.IsNullOrEmpty(record.BBLE) Then
                 Return BadRequest("BBLE cann't be empty.")
             End If
 
@@ -93,7 +93,15 @@ Namespace Controllers
 
             If record.NeedSearch Then
                 Dim docController As New LeadInfoDocumentSearchesController
-                docController.PostLeadInfoDocumentSearch(New LeadInfoDocumentSearch With {.BBLE = record.BBLE, .ExpectedSigningDate = record.ExpectedDate})
+                Dim docSearch = LeadInfoDocumentSearch.GetInstance(record.BBLE)
+                If docSearch IsNot Nothing Then
+                    If docSearch.Status = LeadInfoDocumentSearch.SearchStauts.NewSearch Then
+                        docSearch.ExpectedSigningDate = record.ExpectedDate
+                        docController.PutLeadInfoDocumentSearch(docSearch.BBLE, docSearch)
+                    End If
+                Else
+                    docController.PostLeadInfoDocumentSearch(New LeadInfoDocumentSearch With {.BBLE = record.BBLE, .ExpectedSigningDate = record.ExpectedDate})
+                End If
             End If
 
             If record.NeedCheck Then
