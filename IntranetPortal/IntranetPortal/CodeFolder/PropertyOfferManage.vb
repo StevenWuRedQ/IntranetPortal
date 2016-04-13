@@ -217,8 +217,8 @@ Public Class DocumentGenerator
                                                        Return String.Join(",", names)
                                                    End Function),
             New DocumentPlaceHolder("SELLERADDRESS", "DealSheet.CorrectionDeed.Sellers[0].Address"),
-            New DocumentPlaceHolder("BUYERNAME", "DealSheet.CorrectionDeed.Buyer.CorpName"),
-            New DocumentPlaceHolder("BUYERADDRESS", "DealSheet.CorrectionDeed.Buyer.Address"),
+            New DocumentPlaceHolder("BUYERNAME", "DealSheet.CorrectionDeed.Buyers[0].Name"),
+            New DocumentPlaceHolder("BUYERADDRESS", "DealSheet.CorrectionDeed.Buyers[0].Address"),
             New DocumentPlaceHolder("PROPERTYADDRESS", "DealSheet.CorrectionDeed.PropertyAddress"),
             New DocumentPlaceHolder("SELLER1NAME", "DealSheet.CorrectionDeed.Sellers[0].Name"),
             New DocumentPlaceHolder("SELLER2NAME", "DealSheet.CorrectionDeed.Sellers[1].Name")
