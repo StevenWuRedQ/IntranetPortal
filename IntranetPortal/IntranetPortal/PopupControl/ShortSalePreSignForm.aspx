@@ -140,8 +140,7 @@
             <div>
                 <h2>New Offer Request List</h2>
                 <div dx-data-grid="newOfferGridOpt"></div>
-            </div>
-            
+            </div>            
         </div>
         <div class="container" ng-hide="QueryUrl.model=='List'">
             <div>
@@ -605,9 +604,8 @@
                 <button type="button" class="btn btn-default" ng-show="step<MaxStep()" ng-click="NextStep()">Next ></button>
             </div>
         </div>
-
     </div>
-    <%--help scrpt for this page--%>
+    <%--help script for this page--%>
     <script>
 
         ScopeHelper =
