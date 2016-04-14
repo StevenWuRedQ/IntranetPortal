@@ -5,6 +5,12 @@ Public Class CorporationEntity
 
     Private Shared ReadOnly DocumentLibrary = "CorporationEntity"
 
+    Public Shared Function GetCorpByBBLE(bble As String) As CorporationEntity
+        Using ctx As New PortalEntities
+            Return ctx.CorporationEntities.Where(Function(c) c.BBLE = bble).FirstOrDefault
+        End Using
+    End Function
+
     Public Shared Function GetEntitiesByStatus(status As String()) As List(Of CorporationEntity)
         Using ctx As New PortalEntities
             Return ctx.CorporationEntities.Where(Function(s) status.Contains(s.Status)).ToList
