@@ -70,9 +70,9 @@ Partial Public Class PortalEntities
     Public Overridable Property BusinessChecks() As DbSet(Of BusinessCheck)
     Public Overridable Property CheckRequests() As DbSet(Of CheckRequest)
     Public Overridable Property PreSignRecords() As DbSet(Of PreSignRecord)
-    Public Overridable Property PropertyOffers() As DbSet(Of PropertyOffer)
     Public Overridable Property DeedCorps() As DbSet(Of DeedCorp)
     Public Overridable Property DeedCorpProperties() As DbSet(Of DeedCorpProperty)
     Public Overridable Property ShortSaleLeadsInfoes() As DbSet(Of ShortSaleLeadsInfo)
+    Public Overridable Property PropertyOffers() As DbSet(Of PropertyOffer)
 
 End Class

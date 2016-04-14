@@ -34,7 +34,7 @@ Public Class CommonService
                 toAdds.Add(tmpEmp.Email)
             End If
         Next
-        'Dim emp = Employee.GetInstance(userName)
+        ' Dim emp = Employee.GetInstance(userName)
 
         If toAdds IsNot Nothing AndAlso toAdds.Count > 0 Then
             Dim taskId = 0

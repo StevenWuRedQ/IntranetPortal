@@ -99,4 +99,10 @@ Partial Public Class PropertyOffer
         UpdateDate = DateTime.Now
     End Sub
 
+    Public Enum OfferStatus
+        Initial = 0
+        Assigned = 1
+        Complete = 2
+    End Enum
+
 End Class

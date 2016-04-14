@@ -17,7 +17,7 @@ Partial Public Class PropertyOffer
     Public Property Title As String
     Public Property Owner As String
     Public Property OfferType As String
-    Public Property Status As String
+    Public Property Status As Nullable(Of Integer)
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
     Public Property UpdateBy As String

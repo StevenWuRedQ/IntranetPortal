@@ -11,6 +11,10 @@ Public Class CheckRequest
     Public Property Checks As List(Of BusinessCheck)
     Public Property PropertyAddress As String
 
+    ''' <summary>
+    ''' Load all check request list
+    ''' </summary>
+    ''' <returns>The check request array</returns>
     Public Shared Function GetRequests() As CheckRequest()
         Using ctx As New PortalEntities
             Dim result = From ck In ctx.CheckRequests
