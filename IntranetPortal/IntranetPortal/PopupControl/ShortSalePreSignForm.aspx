@@ -227,7 +227,7 @@
                 </div>
                 <%--select team and assign crops--%>
                 <div class="view-animate" ng-show="currentStep().title=='Assign Crops'" id="preSignAssignCrops">
-                    <h3 class="wizard-title">Select team and Assign crops</h3>
+                    <h3 class="wizard-title">Select team and Assign corp</h3>
                     <div class="ss_form">
                         <h4 class="ss_form_title ">Assign </h4>
                         <div class="ss_border" id="assignBtnForm">
@@ -677,7 +677,11 @@
                         wordWrapEnabled: true,
                         columns: [{ dataField: 'Title', caption: 'Address' }, 'OfferType',
                             { dataField: 'CreateBy', caption: 'Submit By' },
-                            { dataField: 'CreateDate', caption: 'Contract Date', dataType: 'date', format: 'shortDate' },
+                            {
+                                dataField: 'CreateDate', caption: 'Contract Date', dataType: 'date',
+                                sortOrder: 'desc',
+                                format: 'shortDate'
+                            },
                         ]
                     }
                 });
@@ -912,7 +916,7 @@
               { title: "New Offer", next: function () { return true; } },
               { title: "Search Info", next: $scope.searchInfoNext },
               { title: "Pre Sign", caption: 'SS Info', next: $scope.shortSaleInfoNext, },
-              { title: "Assign Crops", next: $scope.AssignCropsNext },
+              { title: "Assign Crops", caption: 'Assign Corp', next: $scope.AssignCropsNext },
               {
                   title: "Documents Required", caption: 'Doc Required', next: $scope.DocRequiredNext
               },
