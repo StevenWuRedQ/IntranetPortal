@@ -258,8 +258,8 @@
 
                             </ul>
                         </div>
-                        <div class="ss_form" ng-show="SSpreSign.assignCrop.Crop" ng-class="{ss_warning:!SSpreSign.assignCrop.Crop}" data-message="Please assign Crop to continue!">
-                            <div class="alert alert-success" role="alert"><strong>Well done!</strong> You successfully assign <strong>{{SSpreSign.assignCrop.Crop}}</strong> to <strong>{{SSpreSign.PropertyAddress}}</strong> . </div>
+                        <div class="ss_form" ng-show="SSpreSign.assignCrop.Crop" ng-class="{ss_warning:!SSpreSign.assignCrop.Crop}" data-message="Please assign Corp to continue!">
+                            <div class="alert alert-success" role="alert"><strong>{{SSpreSign.assignCrop.Crop}}</strong> has been assigned to the property at <strong>{{SSpreSign.PropertyAddress}}</strong> . </div>
                         </div>
                     </div>
                 </div>
@@ -616,12 +616,11 @@
                         </div>
                     </div>
                 </div>
-
                 <div ng-show="currentStep().title=='Finish'" class="view-animate">
                     <h3 class="wizard-title">Finish</h3>
                     <div>
                         <div class="well">
-                            Congratulation! you are in the last step please click Generate document button to download document(s).
+                            Congratulations! You are in the last step. Please click <strong>Generate document</strong> to download document(s).
                         </div>
                     </div>
                 </div>
