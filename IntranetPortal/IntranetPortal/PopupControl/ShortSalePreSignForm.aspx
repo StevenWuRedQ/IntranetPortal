@@ -134,13 +134,18 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
-    <div id="divMsg" runat="server" visible="false" class="alert alert-success" style="width: 700px; height: 200px; margin: auto; margin-top: 10%; text-align: center">
+    <div id="divMsg" runat="server" visible="false" class="alert alert-success" style="width: 700px; height: 280px; margin: auto; margin-top: 10%; text-align: center">
         <br />
-        Follow corp was already assigned to this property.
+        An offer was already created for this property. <br />
+        Please see details below: 
         <table style="margin: auto; margin-top: 20px; text-align: left">
             <tr>
+                <td style="width: 130px">Property: </td>
+                <td><strong><%= CorpData.PropertyAssigned %> </strong></td>
+            </tr>
+            <tr>
                 <td style="width: 130px">Corp: </td>
-                <td><strong><%= CorpData.CorpName %></strong></td>
+                <td><strong><%= CorpData.CorpName %> </strong></td>
             </tr>
             <tr>
                 <td style="width: 130px">Signer: </td>
@@ -152,7 +157,7 @@
             </tr>           
             <tr >
                 <td></td>
-                <td style="padding-top:10px"><a target="_blank" href="/TempDataFile/OfferDoc/<%= CorpData.BBLE.Trim %>.zip">View Package</a></td>
+                <td style="padding-top:10px"><a href="/TempDataFile/OfferDoc/<%= CorpData.BBLE.Trim %>.zip">View Package</a></td>
             </tr>
         </table>
     </div>

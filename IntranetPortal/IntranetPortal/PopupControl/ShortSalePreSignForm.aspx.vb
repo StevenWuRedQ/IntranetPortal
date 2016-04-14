@@ -1,4 +1,6 @@
-﻿Public Class ShortSalePreSignForm
+﻿Imports IntranetPortal.Data
+
+Public Class ShortSalePreSignForm
     Inherits System.Web.UI.Page
 
     Public Property CorpData As IntranetPortal.Data.CorporationEntity
@@ -10,15 +12,27 @@
 
                 Dim bble = Request.QueryString("bble").ToString
 
-                If Not PropertyOfferManage.CheckPreConditions(bble) Then
+                Dim record = PreSignRecord.GetInstanceByBBLE(bble)
+                If record Is Nothing Then
                     Server.Transfer("/PortalError.aspx?code=1002")
-                Else
-                    Dim Corp = IntranetPortal.Data.CorporationEntity.GetCorpByBBLE(bble)
-                    If Corp IsNot Nothing Then
-                        CorpData = Corp
-                        content.Visible = False
-                        divMsg.Visible = True
+                End If
+
+                If record.NeedSearch Then
+                    Dim search = LeadInfoDocumentSearch.GetInstance(bble)
+                    If search Is Nothing Then
+                        Server.Transfer("/PortalError.aspx?code=1003")
                     End If
+
+                    If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
+                        Server.Transfer("/PortalError.aspx?code=1003")
+                    End If
+                End If
+
+                Dim Corp = IntranetPortal.Data.CorporationEntity.GetCorpByBBLE(bble)
+                If Corp IsNot Nothing Then
+                    CorpData = Corp
+                    content.Visible = False
+                    divMsg.Visible = True
                 End If
             End If
         End If

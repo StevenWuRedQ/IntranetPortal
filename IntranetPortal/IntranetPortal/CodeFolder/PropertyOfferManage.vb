@@ -35,6 +35,32 @@ Public Class PropertyOfferManage
     End Function
 
     ''' <summary>
+    ''' Check the pre conditions for new offer
+    ''' </summary>
+    ''' <param name="bble">The property BBLE</param>
+    ''' <returns></returns>
+    Public Shared Function CheckOfferIsReady(bble As String) As Boolean
+        Dim record = PreSignRecord.GetInstanceByBBLE(bble)
+        If record Is Nothing Then
+            Return False
+        End If
+
+        If record.NeedSearch Then
+            Dim search = LeadInfoDocumentSearch.GetInstance(bble)
+            If search Is Nothing Then
+                Return False
+            End If
+
+            If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
+                Return False
+            End If
+        End If
+
+        Return True
+    End Function
+
+
+    ''' <summary>
     ''' Generate Offer Package
     ''' </summary>
     ''' <param name="bble">The property BBLE</param>
