@@ -586,7 +586,6 @@
                             <%--<div class="sub-form-title">
                                 <h3 class="wizard-title">POA  </h3>
                             </div>--%>
-
                             <div class="ss_form">
                                 <h4 class="ss_form_title ">Giving POA</h4>
                                 <div class="ss_border">
@@ -624,7 +623,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="modal-footer" style="margin-top: 30px;">
                 <button type="button" class="btn btn-default" ng-show="step>1" ng-click="PrevStep()">< Prev</button>

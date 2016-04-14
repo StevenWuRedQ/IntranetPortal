@@ -24,7 +24,7 @@ Public Class ShortSalePreSignForm
                     End If
 
                     If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
-                        Server.Transfer("/PortalError.aspx?code=1003")
+                        Server.Transfer("/PortalError.aspx?code=1004")
                     End If
                 End If
 
