@@ -31,6 +31,10 @@ Namespace Controllers
 
         End Function
 
+        ''' <summary>
+        ''' Load user property offers
+        ''' </summary>
+        ''' <returns>Property Offer list</returns>
         <Route("api/PropertyOffer/")>
         Public Function GetPropertyOffers() As IHttpActionResult
 

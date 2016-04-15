@@ -102,7 +102,7 @@ Partial Public Class PropertyOffer
     Public Enum OfferStatus
         Initial = 0
         Assigned = 1
-        Complete = 2
+        Completed = 2
     End Enum
 
 End Class
