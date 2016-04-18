@@ -3,6 +3,7 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports IntranetPortal
 Imports System.IO
 Imports Newtonsoft.Json.Linq
+Imports IntranetPortal.Data
 
 ''' <summary>
 ''' The UnitTest for PropertyOffer function
@@ -30,6 +31,17 @@ Imports Newtonsoft.Json.Linq
 
         Assert.IsTrue(link.Contains(BBLE))
         Assert.IsTrue(File.Exists(destPath & link))
+    End Sub
+
+    <TestMethod()> Public Sub UpdateFields_ReturnUpdatedData()
+        Dim formId = 198
+        Dim item = FormDataItem.Instance(formId)
+
+        Dim offer As New PropertyOffer
+
+        offer.UpdateFields(item)
+        Dim json = JObject.Parse(item.FormData)
+        Assert.AreEqual(offer.Status, json.Value(Of Integer)("Status"))
     End Sub
 
 End Class

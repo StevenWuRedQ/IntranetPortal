@@ -80,7 +80,7 @@ Partial Public Class PropertyOffer
         End Using
     End Function
 
-    Private Sub UpdateFields(itemData As FormDataItem, Optional newCase As Boolean = False)
+    Public Sub UpdateFields(itemData As FormDataItem, Optional newCase As Boolean = False)
         Dim jsonCase = Newtonsoft.Json.Linq.JObject.Parse(itemData.FormData)
 
         If newCase Then
@@ -95,7 +95,7 @@ Partial Public Class PropertyOffer
         End If
 
         Title = jsonCase.Item("PropertyAddress")
-        Me.Status = CInt(jsonCase.Item("Status"))
+        Me.Status = jsonCase.Value(Of Integer)("Status")
         UpdateBy = itemData.UpdateBy
         UpdateDate = DateTime.Now
     End Sub

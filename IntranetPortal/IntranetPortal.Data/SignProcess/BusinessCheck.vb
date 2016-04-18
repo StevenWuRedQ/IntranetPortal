@@ -1,5 +1,10 @@
 ﻿Partial Public Class BusinessCheck
 
+    ''' <summary>
+    ''' Get business check instance
+    ''' </summary>
+    ''' <param name="checkId">The id of check instance</param>
+    ''' <returns></returns>
     Public Shared Function GetInstance(checkId As Integer) As BusinessCheck
         Using ctx As New PortalEntities
             Return ctx.BusinessChecks.Find(checkId)
@@ -34,7 +39,6 @@
                 ctx.SaveChanges()
             End If
         End Using
-
     End Sub
 
 End Class
