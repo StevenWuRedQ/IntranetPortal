@@ -85,7 +85,7 @@
     },
     init: function () {
         var self = this;
-        if (!portalApp) {
+        if (typeof portalApp=='undefined') {
             console.error("Can not find portalApp in page please import intranet portal and angler js and app first !")
             return;
         }

@@ -157,7 +157,8 @@
                             </li>--%>
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title " ng-class="{ss_warning:!preAssign.ExpectedDate}">Expected Date of Signing</label>
-                                        <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date required  />
+                                        <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date required  data-date-start-date="+0d" ng-if="model!='View'"/>
+                                        <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date ng-if="model=='View'"/>
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Need do search</label>
