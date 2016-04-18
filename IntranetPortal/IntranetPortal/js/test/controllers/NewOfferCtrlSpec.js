@@ -117,6 +117,7 @@ describe('New Offer Ctrl test', function () {
         // $httpBackend will respond without you having to
         // specify the expectation and response for this request
         $httpBackend.expectPOST('/api/CorporationEntities/Assign?bble=2037130013', JSON.stringify(corp)).respond(corp);
+        $httpBackend.expectPOST('/api/businessform/', JSON.stringify(scope.SSpreSign.assignCrop)).respond($.extrend(scope.SSpreSign.assignCrop, { Status:1 }));
         scope.AssignCorpSuccessed(corp);
         $httpBackend.flush();
 
