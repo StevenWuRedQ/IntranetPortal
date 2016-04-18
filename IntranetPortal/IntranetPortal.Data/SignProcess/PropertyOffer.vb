@@ -88,13 +88,14 @@ Partial Public Class PropertyOffer
             BBLE = jsonCase.Item("BBLE")
             Owner = itemData.CreateBy
             Me.OfferType = jsonCase.Item("Type")
+            Me.Status = OfferStatus.Initial
             CreateDate = DateTime.Now
             CreateBy = itemData.CreateBy
             Return
         End If
 
         Title = jsonCase.Item("PropertyAddress")
-
+        Me.Status = CInt(jsonCase.Item("Status"))
         UpdateBy = itemData.UpdateBy
         UpdateDate = DateTime.Now
     End Sub
