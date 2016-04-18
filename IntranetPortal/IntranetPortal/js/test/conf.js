@@ -32,6 +32,8 @@ module.exports = function (config) {
             'http://cdn.ckeditor.com/4.5.1/standard/ckeditor.js',
             'https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js',
             'https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js',
+            'https://cdn.firebase.com/js/client/2.2.4/firebase.js',
+            'https://cdn.firebase.com/libs/angularfire/1.1.4/angularfire.min.js',
             'bower_components/angular-ui-layout/src/ui-layout.js',
             'bower_components/ngMask/dist/ngMask.min.js',
             'bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js',

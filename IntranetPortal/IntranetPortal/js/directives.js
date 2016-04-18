@@ -7,7 +7,7 @@
             return {
                 post: function (scope, el, attrs) {
                     $(el).datepicker({
-                        forceParse: false
+                        forceParse: false,
                     });
                     scope.$watch(attrs.ngModel, function (newValue, oldValue) {
                         var dateStr = newValue;

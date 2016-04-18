@@ -31,7 +31,7 @@
 
         /*Theming options - change and everything updates*/
         /*don't use more decimals, as it makes browser round errors more likely, make heights unmatching
--also watch using decimals at all at low wizardSize font sizes!*/
+        -also watch using decimals at all at low wizardSize font sizes!*/
         .wizardbar {
             font-size: 18px;
             line-height: 1;
@@ -632,7 +632,7 @@
         </div>
     </div>
     <%--help script for this page--%>
-    <script>
+   <%-- <script>
 
         ScopeHelper =
             {
@@ -1011,7 +1011,8 @@
                 return orderDic[item];
             };
         });
-    </script>
-    <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>
+    </script>--%>
+    
     </div>
+    <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>
 </asp:Content>
