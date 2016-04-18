@@ -18,6 +18,14 @@ Partial Public Class PropertyOffer
         End Using
     End Function
 
+    Public Shared Function GetOffer(bble As String) As PropertyOffer
+
+        Using ctx As New PortalEntities
+            Dim offer = ctx.PropertyOffers.Where(Function(p) p.BBLE = bble).FirstOrDefault
+            Return offer
+        End Using
+    End Function
+
     ''' <summary>
     ''' Return the PropertyOffer object by business form id
     ''' </summary>

@@ -28,11 +28,14 @@ Public Class ShortSalePreSignForm
                     End If
                 End If
 
-                Dim Corp = IntranetPortal.Data.CorporationEntity.GetCorpByBBLE(bble)
-                If Corp IsNot Nothing Then
-                    CorpData = Corp
-                    content.Visible = False
-                    divMsg.Visible = True
+                Dim offer = PropertyOffer.GetOffer(bble)
+                If offer.Status = PropertyOffer.OfferStatus.Completed Then
+                    Dim Corp = IntranetPortal.Data.CorporationEntity.GetCorpByBBLE(bble)
+                    If Corp IsNot Nothing Then
+                        CorpData = Corp
+                        content.Visible = False
+                        divMsg.Visible = True
+                    End If
                 End If
             End If
         End If

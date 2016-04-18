@@ -43,5 +43,4 @@ Imports IntranetPortal.Data
         Dim json = JObject.Parse(item.FormData)
         Assert.AreEqual(offer.Status, json.Value(Of Integer)("Status"))
     End Sub
-
 End Class

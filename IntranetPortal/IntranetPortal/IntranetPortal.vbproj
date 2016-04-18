@@ -777,6 +777,7 @@
     <Compile Include="Controllers\BusinessCheckController.vb" />
     <Compile Include="Controllers\BusinessFormController.vb" />
     <Compile Include="Controllers\CasePartiesController.vb" />
+    <Compile Include="Controllers\CheckRequestController.vb" />
     <Compile Include="Controllers\DataStatusController.vb" />
     <Compile Include="Controllers\ComplaintsController.vb" />
     <Compile Include="Controllers\ConstructionCasesController.vb" />

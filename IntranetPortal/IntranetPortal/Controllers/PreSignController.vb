@@ -38,7 +38,6 @@ Namespace Controllers
             Catch ex As Exception
                 Throw ex
             End Try
-
         End Function
 
         Public Function GetPreSignRecord(id As Integer) As IHttpActionResult
