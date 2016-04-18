@@ -3879,7 +3879,13 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     $scope.GenerateDocument = function () {
         $http.post('/api/PropertyOffer/GeneratePackage/' + $scope.SSpreSign.BBLE, JSON.stringify($scope.SSpreSign)).success(function (url) {
             STDownloadFile('/TempDataFile/OfferDoc/' + $scope.SSpreSign.BBLE.trim() + '.zip', $scope.SSpreSign.BBLE.trim() + '.zip');
-            location.reload();
+            $scope.SSpreSign.Status = 2;
+            $scope.constractFromData();
+            $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
+                $scope.refreshSave(formdata);
+                location.reload();
+            });
+           
         })
     }
     $scope.shortSaleInfoNext = function () {
@@ -3924,7 +3930,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         $scope.SSpreSign.DeadType = $scope.DeadType
 
         $scope.SSpreSign.SsCase = ss ? ss.SsCase : null;
-        $scope.SSpreSign.Tag = $scope.SSpreSign.BBLE
+        $scope.SSpreSign.Tag = $scope.SSpreSign.BBLE;
         $scope.SSpreSign.FormData = null;
         $scope.SSpreSign.FormData = JSON.stringify($scope.SSpreSign);
     }
@@ -3941,7 +3947,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     }
     $scope.getErrorMessage = function (id) {
         var eMessages = [];
-        $.for
+       
         $('#' + id + ' .ss_warning').each(function () {
             eMessages.push($(this).attr('data-message'));
         })

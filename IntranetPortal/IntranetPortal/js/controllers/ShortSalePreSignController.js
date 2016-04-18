@@ -67,7 +67,13 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     $scope.GenerateDocument = function () {
         $http.post('/api/PropertyOffer/GeneratePackage/' + $scope.SSpreSign.BBLE, JSON.stringify($scope.SSpreSign)).success(function (url) {
             STDownloadFile('/TempDataFile/OfferDoc/' + $scope.SSpreSign.BBLE.trim() + '.zip', $scope.SSpreSign.BBLE.trim() + '.zip');
-            location.reload();
+            $scope.SSpreSign.Status = 2;
+            $scope.constractFromData();
+            $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
+                $scope.refreshSave(formdata);
+                location.reload();
+            });
+           
         })
     }
     $scope.shortSaleInfoNext = function () {
