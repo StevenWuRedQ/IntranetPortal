@@ -4045,11 +4045,11 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             return false;
         }
         var assignApi = '/api/CorporationEntities/AvailableCorp?team=' + _assignCrop.Name + '&wellsfargo=' + _assignCrop.isWellsFargo;
-        var confirmMsg = 'Please confirm the team is ' + _assignCrop.Name + ', and servicor is not Wells Fargo.';
+        var confirmMsg = 'The team is ' + _assignCrop.Name + ', and servicor is not Wells Fargo, right?';
 
         if (_assignCrop.isWellsFargo) {
             assignApi = "/api/CorporationEntities/AvailableCorpBySigner?team=" + _assignCrop.Name + "&signer=" + _assignCrop.Signer;
-            confirmMsg = 'Please confirm the team is ' + _assignCrop.Name + ', and Wells Fargo signer is ' + _assignCrop.Signer + '.';
+            confirmMsg = 'The team is ' + _assignCrop.Name + ', and Wells Fargo signer is ' + _assignCrop.Signer + ', right?';
         }
 
         $http.get(assignApi).success(function (data) {
@@ -4121,11 +4121,11 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         if (needSearch || searchCompleted) {
             $scope.steps.splice(1, 0, searchWized)
         } else {
-            /*Should make sure the document before LeadTaxSearchCtrl initial*/
-            $("#LeadTaxSearchCtrl").remove();
+            /*Should make sure the document before LeadTaxSearchCtrl initial this error handle move to server side*/
+            //$("#LeadTaxSearchCtrl").remove();
         }
     }
-    $scope.CheckSearchInfo($('pt-need-search-input').val(), $('pt-search-completed').val())
+    $scope.CheckSearchInfo($('.pt-need-search-input').val(), $('.pt-search-completed').val())
     $scope.CheckCurrentStep = function (BBLE) {
         $http.get('/api/businessform/PropertyOffer/Tag/' + BBLE).success(function (data) {
             if (data.FormData) {

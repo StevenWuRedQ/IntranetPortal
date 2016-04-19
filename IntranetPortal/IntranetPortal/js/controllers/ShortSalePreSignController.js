@@ -309,11 +309,11 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         if (needSearch || searchCompleted) {
             $scope.steps.splice(1, 0, searchWized)
         } else {
-            /*Should make sure the document before LeadTaxSearchCtrl initial*/
-            $("#LeadTaxSearchCtrl").remove();
+            /*Should make sure the document before LeadTaxSearchCtrl initial this error handle move to server side*/
+            //$("#LeadTaxSearchCtrl").remove();
         }
     }
-    $scope.CheckSearchInfo($('pt-need-search-input').val(), $('pt-search-completed').val())
+    $scope.CheckSearchInfo($('.pt-need-search-input').val(), $('.pt-search-completed').val())
     $scope.CheckCurrentStep = function (BBLE) {
         $http.get('/api/businessform/PropertyOffer/Tag/' + BBLE).success(function (data) {
             if (data.FormData) {

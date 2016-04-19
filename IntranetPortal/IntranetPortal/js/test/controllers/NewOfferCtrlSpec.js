@@ -142,7 +142,6 @@ describe('New Offer Ctrl test', function () {
         scope.CheckSearchInfo(false);
         var searchWized = { title: "Search Info", next:scope.searchInfoNext };
         expect(scope.steps).not.toContain(searchWized);
-
     });
 
     it("When do not need search but search is comptelted", function () {
@@ -151,6 +150,6 @@ describe('New Offer Ctrl test', function () {
         var searchWized = { title: "Search Info", next: scope.searchInfoNext };
         expect(scope.steps).toContain(searchWized);
         expect(_.findIndex(scope.steps, searchWized) == 1).toBeTruthy();
-      
+        
     })
 })

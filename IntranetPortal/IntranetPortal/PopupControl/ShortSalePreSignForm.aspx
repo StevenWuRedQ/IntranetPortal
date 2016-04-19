@@ -163,7 +163,7 @@
         </table>
     </div>
     <input runat="server" type="hidden" id="NeedSearch" class="pt-need-search-input"/>
-    <input runat="server" id="SearchCompleted" class="pt-search-completed"/>
+    <input runat="server" id="txtSearchCompleted" type="hidden" class="pt-search-completed"/>
     <div id="content" runat="server">
         <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
 
@@ -203,7 +203,7 @@
                     <div ng-show="currentStep().title=='Search Info'" class="view-animate" id="preSignSearchInfo">
                         <h3 class="wizard-title">Check Search Information</h3>
 
-                        <div>
+                        <div id="DivLeadTaxSearchCtrl" runat="server" visible="false">
                             <div style="padding: 10px" ng-controller="LeadTaxSearchCtrl" id="LeadTaxSearchCtrl" >
                                 <h4 ng-show="!DocSearch||DocSearch.Status!=1" ng-class="{ss_warning:!DocSearch||DocSearch.Status!=1}"
                                     data-message="Document search not completed yet please contact document search agent completed search">Document search not completed yet please contact document search agent completed search</h4>
