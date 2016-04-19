@@ -117,20 +117,19 @@ describe('New Offer Ctrl test', function () {
         // $httpBackend will respond without you having to
         // specify the expectation and response for this request
         $httpBackend.expectPOST('/api/CorporationEntities/Assign?bble=2037130013', JSON.stringify(corp)).respond(corp);
-        $httpBackend.expectPOST('/api/businessform/', JSON.stringify(scope.SSpreSign.assignCrop)).respond($.extrend(scope.SSpreSign.assignCrop, { Status:1 }));
+        //scope.SSpreSign.con
+        var preSignJson = { "Type": "Short Sale", "FormName": "PropertyOffer", "DealSheet": { "ContractOrMemo": { "Sellers": [{}], "Buyers": [{}] }, "Deed": { "Sellers": [{}] }, "CorrectionDeed": { "Sellers": [{}], "Buyers": [{}] } }, "BBLE": "2037130013", "assignCrop": { "SsCase": {}, "Crop": "DMVBE Management LLC", "CropData": { "EntityId": 2696, "CorpName": "DMVBE Management LLC", "Address": "118-60 218 Street, Cambria Heights, NY 11411", "PropertyAssigned": "1022 WHEELER AVE, Bronx,NY 10472", "FillingDate": "2016-02-02T00:00:00", "Signer": "Dominique Vabre", "Office": "GukasyanTeam", "EIN": "123456789", "AssignOn": "2016-02-02T00:00:00", "CreateTime": "2016-02-02T10:02:48.76", "UpdateBy": null, "UpdateTime": "2016-02-02T10:05:28.197", "Status": "Available", "OfficeName": null, "BBLE": null, "AppId": 1, "buyerAttorney": "Craig Hyman" } }, "SsCase": null, "Status": 1, "DeadType": { "Contract": true, "Memo": false, "Deed": false, "CorrectionDeed": false, "POA": false }, "Tag": "2037130013", "FormData": "{\"Type\":\"Short Sale\",\"FormName\":\"PropertyOffer\",\"DealSheet\":{\"ContractOrMemo\":{\"Sellers\":[{}],\"Buyers\":[{}]},\"Deed\":{\"Sellers\":[{}]},\"CorrectionDeed\":{\"Sellers\":[{}],\"Buyers\":[{}]}},\"BBLE\":\"2037130013\",\"assignCrop\":{\"SsCase\":{},\"Crop\":\"DMVBE Management LLC\",\"CropData\":{\"EntityId\":2696,\"CorpName\":\"DMVBE Management LLC\",\"Address\":\"118-60 218 Street, Cambria Heights, NY 11411\",\"PropertyAssigned\":\"1022 WHEELER AVE, Bronx,NY 10472\",\"FillingDate\":\"2016-02-02T00:00:00\",\"Signer\":\"Dominique Vabre\",\"Office\":\"GukasyanTeam\",\"EIN\":\"123456789\",\"AssignOn\":\"2016-02-02T00:00:00\",\"CreateTime\":\"2016-02-02T10:02:48.76\",\"UpdateBy\":null,\"UpdateTime\":\"2016-02-02T10:05:28.197\",\"Status\":\"Available\",\"OfficeName\":null,\"BBLE\":null,\"AppId\":1,\"buyerAttorney\":\"Craig Hyman\"}},\"SsCase\":null,\"Status\":1,\"DeadType\":{\"Contract\":true,\"Memo\":false,\"Deed\":false,\"CorrectionDeed\":false,\"POA\":false},\"Tag\":\"2037130013\",\"FormData\":null}" }
+        $httpBackend.expectPOST('/api/businessform/', JSON.stringify(preSignJson)).respond(preSignJson);
+   
         scope.AssignCorpSuccessed(corp);
         $httpBackend.flush();
 
         expect(scope.SSpreSign.assignCrop.CropData).toEqual(corp)
         expect(scope.SSpreSign.assignCrop.Crop).toEqual('DMVBE Management LLC');
-        scope.SSpreSign.Status = 1;
+        expect(scope.SSpreSign.Status).toEqual(1);
+        //expect(scope.SSpreSign.FormData).toEqual(null);
         //constract data send back to server
-        scope.constractFromData();
-
-        //Check FormData after constract is 1
-        var FormData = JSON.parse(scope.SSpreSign.FormData);
-        expect(FormData.Status).toEqual(1);
-
+        
     }));
 
     it("When Offer formdata is null do not clear the initial data", function () {
@@ -138,4 +137,20 @@ describe('New Offer Ctrl test', function () {
         expect(scope.SSpreSign).not.toBe(null);
         expect(scope.SSpreSign.BBLE).not.toBe('2037130014');
     });
+
+    it("should not show TaxSearchCtrl and search info wizard When start new offer with not need search", function () {
+        scope.CheckSearchInfo(false);
+        var searchWized = { title: "Search Info", next:scope.searchInfoNext };
+        expect(scope.steps).not.toContain(searchWized);
+
+    });
+
+    it("When do not need search but search is comptelted", function () {
+
+        scope.CheckSearchInfo(false, true);
+        var searchWized = { title: "Search Info", next: scope.searchInfoNext };
+        expect(scope.steps).toContain(searchWized);
+        expect(_.findIndex(scope.steps, searchWized) == 1).toBeTruthy();
+      
+    })
 })

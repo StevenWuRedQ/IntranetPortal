@@ -10,6 +10,7 @@ Public Class ShortSaleUnitTest
     Dim loan = "Test Loan " & (New Random).Next(1000).ToString
     Dim dateOfSale As DateTime = DateTime.Today.AddDays(-1)
 
+
     <TestMethod()> Public Sub ReassignOwnerTest()
         Dim bble = "4089170024"
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)

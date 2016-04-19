@@ -23,6 +23,24 @@ Partial Public Class ShortSalePreSignForm
     Protected WithEvents divMsg As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''NeedSearch control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NeedSearch As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+    
+    '''<summary>
+    '''SearchCompleted control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SearchCompleted As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
     '''content control.
     '''</summary>
     '''<remarks>

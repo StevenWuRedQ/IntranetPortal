@@ -73,7 +73,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
                 $scope.refreshSave(formdata);
                 location.reload();
             });
-           
+
         })
     }
     $scope.shortSaleInfoNext = function () {
@@ -96,9 +96,9 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         });
 
 
-        _dealSheet.ContractOrMemo.Sellers = $.extend(true,_dealSheet.ContractOrMemo.Sellers|| [], _sellers);
-        _dealSheet.Deed.Sellers = $.extend(true,  _dealSheet.Deed.Sellers || [], _sellers);
-        _dealSheet.CorrectionDeed.Sellers = $.extend(true,_dealSheet.CorrectionDeed.Sellers|| [], _sellers);
+        _dealSheet.ContractOrMemo.Sellers = $.extend(true, _dealSheet.ContractOrMemo.Sellers || [], _sellers);
+        _dealSheet.Deed.Sellers = $.extend(true, _dealSheet.Deed.Sellers || [], _sellers);
+        _dealSheet.CorrectionDeed.Sellers = $.extend(true, _dealSheet.CorrectionDeed.Sellers || [], _sellers);
         _dealSheet.Deed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
         return true;
     }
@@ -135,7 +135,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     }
     $scope.getErrorMessage = function (id) {
         var eMessages = [];
-       
+
         $('#' + id + ' .ss_warning').each(function () {
             eMessages.push($(this).attr('data-message'));
         })
@@ -218,6 +218,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             $scope.SSpreSign.Status = 1;
             /*should save to data base*/
             $scope.constractFromData();
+            //console.log( JSON.stringify($scope.SSpreSign));
             $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
                 $scope.refreshSave(formdata);
             });
@@ -289,7 +290,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     }
     $scope.steps = [
       { title: "New Offer", next: function () { return true; } },
-      { title: "Search Info", next: $scope.searchInfoNext },
+
       { title: "Pre Sign", caption: 'SS Info', next: $scope.shortSaleInfoNext, },
       { title: "Assign Crops", caption: 'Assign Corp', next: $scope.AssignCropsNext },
       {
@@ -303,24 +304,31 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
       { title: 'POA', sheet: 'POA', next: $scope.preAssignCorrectionPOA },
       { title: "Finish" },
     ];
-
+    $scope.CheckSearchInfo = function (needSearch, searchCompleted) {
+        var searchWized = { title: "Search Info", next: $scope.searchInfoNext };
+        if (needSearch || searchCompleted) {
+            $scope.steps.splice(1, 0, searchWized)
+        } else {
+            /*Should make sure the document before LeadTaxSearchCtrl initial*/
+            $("#LeadTaxSearchCtrl").remove();
+        }
+    }
+    $scope.CheckSearchInfo($('pt-need-search-input').val(), $('pt-search-completed').val())
     $scope.CheckCurrentStep = function (BBLE) {
         $http.get('/api/businessform/PropertyOffer/Tag/' + BBLE).success(function (data) {
             if (data.FormData) {
 
-
-              
                 $scope.SSpreSign = data.FormData;
                 $scope.DeadType = data.FormData.DeadType;
                 $scope.SSpreSign.SsCase = data.FormData.SsCase;
                 $scope.SSpreSign.Status = data.BusinessData.Status;
 
-               // setTimeout(function () {
-                   
-                    var ss = ScopeHelper.getShortSaleScope();
-                    if (ss) {
-                        ss.SsCase = $scope.SSpreSign.SsCase;
-                    }
+                // setTimeout(function () {
+
+                var ss = ScopeHelper.getShortSaleScope();
+                if (ss) {
+                    ss.SsCase = $scope.SSpreSign.SsCase;
+                }
                 //}
                 //, 1000);
 
@@ -336,7 +344,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             $scope.SSpreSign.PropertyAddress = data.PropertyAddress;
             $scope.SSpreSign.BBLE = BBLE
         })
-        
+
         $scope.CheckCurrentStep(BBLE);
     }
 

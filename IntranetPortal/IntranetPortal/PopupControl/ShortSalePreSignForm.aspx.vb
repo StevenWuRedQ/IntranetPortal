@@ -25,7 +25,10 @@ Public Class ShortSalePreSignForm
 
                     If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
                         Server.Transfer("/PortalError.aspx?code=1004")
+                    Else
+                        SearchCompleted.Value = True
                     End If
+                    NeedSearch.Value = True
                 End If
 
                 Dim offer = PropertyOffer.GetOffer(bble)
