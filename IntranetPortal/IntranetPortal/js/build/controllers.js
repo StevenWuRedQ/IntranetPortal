@@ -2635,20 +2635,20 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             return false;
         }
         var assignApi = '/api/CorporationEntities/AvailableCorp?team=' + _assignCrop.Name + '&wellsfargo=' + _assignCrop.isWellsFargo;
-
+        var confirmMsg = 'Please confirm the team is ' + _assignCrop.Name + ', and servicor is not Wells Fargo.';
 
         if (_assignCrop.isWellsFargo) {
             assignApi = "/api/CorporationEntities/AvailableCorpBySigner?team=" + _assignCrop.Name + "&signer=" + _assignCrop.Signer;
+            confirmMsg = 'Please confirm the team is ' + _assignCrop.Name + ', and Wells Fargo signer is ' + _assignCrop.Signer + '.';
         }
 
         $http.get(assignApi).success(function (data) {
 
-            AngularRoot.confirm('We are going to assign ' + data.CorpName + ' to ' + $scope.SSpreSign.PropertyAddress).then(function (r) {
+            AngularRoot.confirm(confirmMsg).then(function (r) {
                 if (r) {
                     $scope.AssignCorpSuccessed(data);
                 }
             });
-
         });
 
     }

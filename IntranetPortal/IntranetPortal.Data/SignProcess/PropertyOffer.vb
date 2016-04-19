@@ -1,4 +1,5 @@
-﻿''' <summary>
+﻿Imports Newtonsoft.Json.Linq
+''' <summary>
 ''' The property offer object
 ''' </summary>
 Partial Public Class PropertyOffer
@@ -103,7 +104,13 @@ Partial Public Class PropertyOffer
         End If
 
         Title = jsonCase.Item("PropertyAddress")
-        Me.Status = jsonCase.Value(Of Integer)("Status")
+        Dim jStatus = jsonCase.GetValue("Status")
+        If jStatus IsNot Nothing AndAlso Not String.IsNullOrEmpty(jStatus.ToString) Then
+            Dim tmpStatus As Integer
+            If Int32.TryParse(jStatus.ToString, tmpStatus) Then
+                Me.Status = tmpStatus
+            End If
+        End If
         UpdateBy = itemData.UpdateBy
         UpdateDate = DateTime.Now
     End Sub
