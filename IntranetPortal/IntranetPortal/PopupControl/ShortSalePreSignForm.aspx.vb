@@ -29,7 +29,7 @@ Public Class ShortSalePreSignForm
                 End If
 
                 Dim offer = PropertyOffer.GetOffer(bble)
-                If offer.Status = PropertyOffer.OfferStatus.Completed Then
+                If offer IsNot Nothing AndAlso offer.Status = PropertyOffer.OfferStatus.Completed Then
                     Dim Corp = IntranetPortal.Data.CorporationEntity.GetCorpByBBLE(bble)
                     If Corp IsNot Nothing Then
                         CorpData = Corp

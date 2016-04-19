@@ -40,9 +40,14 @@ Public Class CheckRequest
         Using ctx As New PortalEntities
 
             Dim cr = ctx.CheckRequests.Find(id)
-            cr.Checks = ctx.BusinessChecks.Where(Function(c) c.RequestId = cr.RequestId).ToList
-            cr.PropertyAddress = ctx.ShortSaleLeadsInfoes.Where(Function(li) li.BBLE = cr.BBLE).Select(Function(li) li.PropertyAddress).FirstOrDefault
-            Return cr
+
+            If cr IsNot Nothing Then
+                cr.Checks = ctx.BusinessChecks.Where(Function(c) c.RequestId = cr.RequestId).ToList
+                cr.PropertyAddress = ctx.ShortSaleLeadsInfoes.Where(Function(li) li.BBLE = cr.BBLE).Select(Function(li) li.PropertyAddress).FirstOrDefault
+                Return cr
+            End If
+
+            Return Nothing
         End Using
     End Function
 

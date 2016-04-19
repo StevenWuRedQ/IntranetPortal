@@ -34,13 +34,13 @@ Imports IntranetPortal.Data
     End Sub
 
     <TestMethod()> Public Sub UpdateFields_ReturnUpdatedData()
-        Dim formId = 198
+        Dim formId = 191
         Dim item = FormDataItem.Instance(formId)
 
         Dim offer As New PropertyOffer
 
         offer.UpdateFields(item)
-        Dim json = JObject.Parse(item.FormData)
-        Assert.AreEqual(offer.Status, json.Value(Of Integer)("Status"))
+
+        Assert.AreEqual(offer.Status, Nothing)
     End Sub
 End Class
