@@ -16,18 +16,26 @@ Public Class ShortSalePreSignForm
                 If record Is Nothing Then
                     Server.Transfer("/PortalError.aspx?code=1002")
                 End If
+                Dim search = LeadInfoDocumentSearch.GetInstance(bble)
 
                 If record.NeedSearch Then
-                    Dim search = LeadInfoDocumentSearch.GetInstance(bble)
+
                     If search Is Nothing Then
                         Server.Transfer("/PortalError.aspx?code=1003")
                     End If
 
                     If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
                         Server.Transfer("/PortalError.aspx?code=1004")
+
+                    End If
+                    NeedSearch.Value = True
+                End If
+                If (search IsNot Nothing) Then
+                    If search.Status = LeadInfoDocumentSearch.SearchStauts.Completed Then
+                        txtSearchCompleted.Value = True
                     End If
                 End If
-
+                
                 Dim offer = PropertyOffer.GetOffer(bble)
                 If offer IsNot Nothing AndAlso offer.Status = PropertyOffer.OfferStatus.Completed Then
                     Dim Corp = IntranetPortal.Data.CorporationEntity.GetCorpByBBLE(bble)
@@ -35,8 +43,13 @@ Public Class ShortSalePreSignForm
                         CorpData = Corp
                         content.Visible = False
                         divMsg.Visible = True
-                    End If
+                    End If 
                 End If
+
+                If ((Not String.IsNullOrEmpty(NeedSearch.Value)) OrElse (Not String.IsNullOrEmpty(txtSearchCompleted.Value))) Then
+                    DivLeadTaxSearchCtrl.Visible = True
+                End If
+
             End If
         End If
     End Sub
