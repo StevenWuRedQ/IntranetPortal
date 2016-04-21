@@ -63,7 +63,7 @@ Public Class CheckRequest
             Me.CheckAmount = Checks.Sum(Function(c) c.Amount)
 
             ctx.CheckRequests.Add(Me)
-            ctx.SaveChanges()
+            ctx.SaveChanges(saveBy)
 
             For Each check In Checks
                 check.RequestId = RequestId
@@ -82,13 +82,14 @@ Public Class CheckRequest
                 Me.UpdateBy = saveBy
                 Me.UpdateDate = DateTime.Now
                 ctx.Entry(Me).State = Entity.EntityState.Modified
+                ctx.Entry(Me).OriginalValues.SetValues(ctx.Entry(Me).GetDatabaseValues)
             Else
                 Me.RequestBy = saveBy
                 Me.RequestDate = DateTime.Now
                 ctx.CheckRequests.Add(Me)
             End If
 
-            ctx.SaveChanges()
+            ctx.SaveChanges(saveBy)
         End Using
     End Sub
 

@@ -49,7 +49,6 @@ Partial Public Class PreSignRecord
         End Using
     End Function
 
-
     ''' <summary>
     ''' Return Pre Sign process instance by property BBLE
     ''' </summary>
@@ -76,6 +75,10 @@ Partial Public Class PreSignRecord
         End Using
     End Function
 
+    ''' <summary>
+    ''' Create the record
+    ''' </summary>
+    ''' <param name="createBy"></param>
     Public Sub Create(createBy As String)
         Using ctx As New PortalEntities
             If String.IsNullOrEmpty(BBLE) Then
@@ -95,11 +98,15 @@ Partial Public Class PreSignRecord
                 Me.CreateDate = DateTime.Now
 
                 ctx.PreSignRecords.Add(Me)
-                ctx.SaveChanges()
+                ctx.SaveChanges(createBy)
             End If
         End Using
     End Sub
 
+    ''' <summary>
+    ''' Save data
+    ''' </summary>
+    ''' <param name="saveBy"></param>
     Public Sub Save(saveBy As String)
 
         Using ctx As New PortalEntities
@@ -108,13 +115,14 @@ Partial Public Class PreSignRecord
                 Me.UpdateBy = saveBy
                 Me.UpdateTime = DateTime.Now
                 ctx.Entry(Me).State = Entity.EntityState.Modified
+                ctx.Entry(Me).OriginalValues.SetValues(ctx.Entry(Me).GetDatabaseValues)
             Else
                 Me.CreateBy = saveBy
                 Me.CreateDate = DateTime.Now
 
             End If
 
-            ctx.SaveChanges()
+            ctx.SaveChanges(saveBy)
         End Using
     End Sub
 

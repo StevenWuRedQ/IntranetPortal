@@ -104,6 +104,9 @@
     <Compile Include="ADOEntity\AuctionPropertyView.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\AuditLog.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\BusinessCheck.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
@@ -128,6 +131,7 @@
     <Compile Include="ADOEntity\LegalManagerReport.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\PortalEntities.vb" />
     <Compile Include="ADOEntity\PreSignRecord.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>

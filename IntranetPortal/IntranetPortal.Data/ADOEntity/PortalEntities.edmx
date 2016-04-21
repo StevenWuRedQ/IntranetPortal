@@ -42,6 +42,20 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="AuditLogs">
+          <Key>
+            <PropertyRef Name="AuditId" />
+          </Key>
+          <Property Name="AuditId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EventDate" Type="datetime" Nullable="false" />
+          <Property Name="EventType" Type="int" Nullable="false" />
+          <Property Name="TableName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RecordId" Type="nvarchar" MaxLength="50" />
+          <Property Name="ColumnName" Type="nvarchar" MaxLength="1024" />
+          <Property Name="OriginalValue" Type="nvarchar(max)" />
+          <Property Name="NewValue" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="BusinessChecks">
           <Key>
             <PropertyRef Name="CheckId" />
@@ -53,6 +67,7 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="CheckFor" Type="nvarchar" MaxLength="256" />
           <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="Status" Type="int" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
@@ -1164,6 +1179,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
         </EntityType>
         <EntityContainer Name="IntranetPortalModelStoreContainer">
           <EntitySet Name="AuctionProperties" EntityType="Self.AuctionProperties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuditLogs" EntityType="Self.AuditLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BusinessChecks" EntityType="Self.BusinessChecks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CheckingComplains" EntityType="Self.CheckingComplains" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CheckRequests" EntityType="Self.CheckRequests" Schema="dbo" store:Type="Tables" />
@@ -1406,6 +1422,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySet Name="DeedCorpProperties" EntityType="IntranetPortalModel.DeedCorpProperty" />
           <EntitySet Name="ShortSaleLeadsInfoes" EntityType="IntranetPortalModel.ShortSaleLeadsInfo" />
           <EntitySet Name="PropertyOffers" EntityType="IntranetPortalModel.PropertyOffer" />
+          <EntitySet Name="AuditLogs" EntityType="IntranetPortalModel.AuditLog" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -2376,6 +2393,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
         </EntityType>
         <EntityType Name="CheckRequest">
           <Key>
@@ -2554,6 +2572,20 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="AuditLog">
+          <Key>
+            <PropertyRef Name="AuditId" />
+          </Key>
+          <Property Name="AuditId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EventType" Type="Int32" Nullable="false" />
+          <Property Name="TableName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RecordId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ColumnName" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="OriginalValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NewValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3560,6 +3592,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySetMapping Name="BusinessChecks">
             <EntityTypeMapping TypeName="IntranetPortalModel.BusinessCheck">
               <MappingFragment StoreEntitySet="BusinessChecks">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -3755,6 +3788,21 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="FormItemId" ColumnName="FormItemId" />
                 <ScalarProperty Name="OfferId" ColumnName="OfferId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuditLogs">
+            <EntityTypeMapping TypeName="IntranetPortalModel.AuditLog">
+              <MappingFragment StoreEntitySet="AuditLogs">
+                <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+                <ScalarProperty Name="OriginalValue" ColumnName="OriginalValue" />
+                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AuditId" ColumnName="AuditId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
