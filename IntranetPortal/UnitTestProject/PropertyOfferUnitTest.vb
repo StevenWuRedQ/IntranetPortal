@@ -43,4 +43,5 @@ Imports IntranetPortal.Data
 
         Assert.AreEqual(offer.Status, Nothing)
     End Sub
+
 End Class

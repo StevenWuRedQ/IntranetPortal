@@ -773,6 +773,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controllers\AuctionController.vb" />
+    <Compile Include="Controllers\AuditLogController.vb" />
     <Compile Include="Controllers\BuildingCodes1Controller.vb" />
     <Compile Include="Controllers\BusinessCheckController.vb" />
     <Compile Include="Controllers\BusinessFormController.vb" />

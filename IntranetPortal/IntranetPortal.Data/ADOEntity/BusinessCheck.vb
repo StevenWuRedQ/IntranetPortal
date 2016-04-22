@@ -22,5 +22,6 @@ Partial Public Class BusinessCheck
     Public Property CreateDate As Nullable(Of Date)
     Public Property UpdateBy As String
     Public Property UpdateDate As Nullable(Of Date)
+    Public Property Status As Nullable(Of Integer)
 
 End Class

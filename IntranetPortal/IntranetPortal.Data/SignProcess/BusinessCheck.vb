@@ -22,13 +22,14 @@
                 Me.UpdateBy = saveby
                 Me.UpdateDate = DateTime.Now
                 ctx.Entry(Me).State = Entity.EntityState.Modified
+                ctx.Entry(Me).OriginalValues.SetValues(ctx.Entry(Me).GetDatabaseValues)
             Else
                 Me.CreateBy = saveby
                 Me.CreateDate = DateTime.Now
                 ctx.BusinessChecks.Add(Me)
             End If
 
-            ctx.SaveChanges()
+            ctx.SaveChanges(saveby)
         End Using
     End Sub
 
@@ -40,5 +41,11 @@
             End If
         End Using
     End Sub
+
+    Public Enum CheckStatus
+        Active = 0
+        Canceled = 1
+        Completed = 2
+    End Enum
 
 End Class

@@ -47,7 +47,13 @@ Namespace Controllers
                 Return NotFound()
             End If
 
-            check.Delete()
+            check.Status = BusinessCheck.CheckStatus.Canceled
+
+            Try
+                check.Save(HttpContext.Current.User.Identity.Name)
+            Catch ex As Exception
+                Throw ex
+            End Try
 
             Return Ok(check)
         End Function
