@@ -1724,17 +1724,20 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
     $scope.AddCheck = function(e) {
         var cancel = false;
         e.data.RequestId = $scope.preAssign.Id;
+        e.data.Date = new Date(e.data.Date).toISOString();
         var response = $.ajax({
             url: '/api/businesscheck',
             type: 'POST',
             dataType: 'json',
             async: false,
-            data: e.data,
+            data:e.data ,
             success: function(data, textStatus, xhr) {
                 $scope.addedCheck = data;
                 e.model = data;
+                $scope.preAssign.CheckRequestData.Checks.push(data);
             }
         });
+
         var message = PortalHttp.BuildAjaxErrorMessage(response);
         if (message) {
             AngularRoot.alert(message);
@@ -1744,16 +1747,25 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
     }
 
     $scope.CancelCheck = function(e) {
-        e.cancel = $http.delete('/api/businesscheck/' + e.data.CheckId).success(function(data) {
-            /*optional stuff to do after success */
-            //$scope.preAssign.CheckRequestData.Checks = $scope.preAssign.CheckRequestData.Checks || [];
-            //For unit test
-            e.model = data;
-            $scope.deletedCheck = data;
-            return false;
-        }).error(function() {
-            return true;
+
+        var response = $.ajax({
+            url: '/api/businesscheck/' + e.data.CheckId,
+            type: 'DELETE',
+            dataType: 'json',
+            async: false,
+            data: e.data,
+            success: function(data, textStatus, xhr) {
+                e.model = data;
+                _.remove($scope.preAssign.CheckRequestData.Checks,{CheckId:e.data.CheckId});
+                $scope.deletedCheck = data;
+            }
         });
+
+        var message = PortalHttp.BuildAjaxErrorMessage(response);
+        if (message) {
+            AngularRoot.alert(message);
+            e.cancel = true;
+        };
         return e;
     }
 
@@ -1805,55 +1817,70 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         $scope.initByBBLE(_BBLE);
     }
     /**
-     * 
+     * [validation description my have diffrent in view mode and edit mode]
      */
+    $scope.validationPreAssgin = function() {
+        var selfData = $scope.preAssign;
+        if (!selfData.ExpectedDate) {
+            $scope.alert("Please fill expected date !");
+            return false;
+        }
+        if ((!$scope.preAssign.Parties) || $scope.preAssign.Parties.length < 1) {
+            $scope.alert("Please fill at least one Party !");
+            return false;
+        }
+
+        if ($scope.preAssign.NeedCheck && $scope.preAssign.CheckRequestData.Checks.length < 1) {
+            $scope.alert("If need request check please fill at least one check!");
+            return false;
+        }
+
+        if ($scope.CheckTotalAmount() > $scope.preAssign.DealAmount) {
+            $scope.alert("The check's total amount must less than the deal amount, Please correct! ");
+            return false;
+        }
+        if (!$scope.preAssign.NeedCheck) {
+            $scope.preAssign.Parties = null;
+            $scope.preAssign.CheckRequestData = null
+        }
+        return true;
+    }
+
+    $scope.alert = function(msg) {
+            if (typeof AngularRoot != 'undefined') {
+                AngularRoot.alert(msg)
+            }
+        }
+        /**
+         * 
+         */
     $scope.Save = function() {
         var selfData = $scope.preAssign;
 
         if ($scope.preAssign.Id) {
+            if ($scope.validationPreAssgin()) {
+                $http.put('/api/PreSign/' + $scope.preAssign.Id, JSON.stringify($scope.preAssign)).success(function(data) {
+                    if (typeof AngularRoot != 'undefined') {
+                        AngularRoot.alert("Updated success!");
+                    }
+                    //for unit test
+                    $scope.localhref = '/popupControl/preAssignCropForm.aspx?model=View&Id=' + $scope.preAssign.Id
+                    window.location.href = $scope.localhref
+                });
+            }
 
-            $http.put('/api/PreSign/' + $scope.preAssign.Id, JSON.stringify($scope.preAssign)).success(function(data) {
-                if (typeof AngularRoot != 'undefined') {
-                    AngularRoot.alert("Updated success!");
-                }
-                //for unit test
-                $scope.localhref = '/popupControl/preAssignCropForm.aspx?model=View&Id=' + $scope.preAssign.Id
-                window.location.href = $scope.localhref
-            });
         } else {
-
-            if (!selfData.ExpectedDate) {
-                AngularRoot.alert("Please fill expected date !");
-                return;
-            }
-            if ((!$scope.preAssign.Parties) || $scope.preAssign.Parties.length < 1) {
-                AngularRoot.alert("Please fill at least one Party !");
-                return;
+            if ($scope.validationPreAssgin()) {
+                $http.post('/api/PreSign', JSON.stringify($scope.preAssign)).success(function(data) {
+                    AngularRoot.alert("Submit success !");
+                    $scope.preAssign = data;
+                    window.location.href = '/popupControl/preAssignCropForm.aspx?model=View&Id=' + data.Id
+                });
             }
 
-            if ($scope.preAssign.NeedCheck && $scope.preAssign.CheckRequestData.Checks.length < 1) {
-                AngularRoot.alert("If need request check please fill at least one check!");
-                return;
-            }
-
-            if ($scope.CheckTotalAmount() > $scope.preAssign.DealAmount) {
-                AngularRoot.alert("The check's total amount must less than the deal amount, Please correct! ");
-                return;
-            }
-            if (!$scope.preAssign.NeedCheck) {
-                $scope.preAssign.Parties = null;
-                $scope.preAssign.CheckRequestData = null
-            }
-            $http.post('/api/PreSign', JSON.stringify($scope.preAssign)).success(function(data) {
-                AngularRoot.alert("Submit success !");
-                $scope.preAssign = data;
-                window.location.href = '/popupControl/preAssignCropForm.aspx?model=View&Id=' + data.Id
-            });
         }
 
     }
-
-
 
     //var ref = new Firebase("https://sdatabasetest.firebaseio.com/qqq");
     //var syncObject = $firebaseObject(ref);
