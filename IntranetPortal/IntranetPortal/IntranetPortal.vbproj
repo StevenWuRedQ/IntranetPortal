@@ -2336,6 +2336,13 @@
       <DependentUpon>AssignRulesControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControl\AuditLogs.ascx.designer.vb">
+      <DependentUpon>AuditLogs.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AuditLogs.ascx.vb">
+      <DependentUpon>AuditLogs.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControl\Common.ascx.designer.vb">
       <DependentUpon>Common.ascx</DependentUpon>
     </Compile>
@@ -7097,6 +7104,7 @@
     <Content Include="TitleUI\TitleCommentControl.ascx" />
     <Content Include="TitleUI\TitleDocTab.ascx" />
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
+    <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />
     <Content Include="UserControl\SummaryItem\TitlesByCategoryItem.ascx" />
