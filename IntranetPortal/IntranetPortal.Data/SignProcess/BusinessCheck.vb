@@ -42,4 +42,10 @@
         End Using
     End Sub
 
+    Public Enum CheckStatus
+        Active = 0
+        Canceled = 1
+        Completed = 2
+    End Enum
+
 End Class

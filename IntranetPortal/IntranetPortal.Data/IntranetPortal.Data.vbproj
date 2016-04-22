@@ -145,6 +145,7 @@
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="Auction\AuctionProperty.vb" />
+    <Compile Include="Audit\AuditLog.vb" />
     <Compile Include="BusinessForm\BusinessDataBase.vb" />
     <Compile Include="BusinessForm\FormDataItem.vb" />
     <Compile Include="Common\DataStatus.vb" />
