@@ -10,7 +10,7 @@
     getScope: function (id) {
         return angular.element(document.getElementById(id)).scope();
     }
-}
+};
 
 var portalApp = angular.module('PortalApp');
 

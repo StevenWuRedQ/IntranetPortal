@@ -44,7 +44,8 @@
     "ionic": "~1.1.1",
     "Ionicons": "ionicons#~2.0.1",
     "literallycanvas": "~0.4.10",
-    "prototypejs": "~1.7.0"
+    "prototypejs": "~1.7.0",
+    "lodash": "*"
   },
   "resolutions": {
     "jquery": "~2.1.4"

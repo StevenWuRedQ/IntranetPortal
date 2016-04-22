@@ -11,86 +11,6 @@
             width: 100% !important;
         }
 
-        /*Theming options - change and everything updates*/
-        /*don't use more decimals, as it makes browser round errors more likely, make heights unmatching
-        -also watch using decimals at all at low wizardSize font sizes!*/
-        .wizardbar {
-            font-size: 18px;
-            line-height: 1;
-            display: inline-block;
-            margin: 50px 0;
-        }
-        /*base item styles*/
-        .wizardbar-item {
-            display: inline-block;
-            padding: 0.5em 0.8em;
-            padding-left: 1.8em;
-            text-decoration: none;
-            transition: all .15s;
-            /*default styles*/
-            background-color: #76a9dd;
-            color: rgba(255, 255, 255, 0.8);
-            text-align: center;
-            text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
-            position: relative;
-            margin-right: 2px;
-        }
-            /*arrow styles*/
-            .wizardbar-item:before,
-            .wizardbar-item:after {
-                content: "";
-                height: 0;
-                width: 0;
-                border-width: 1em 0 1em 1em;
-                border-style: solid;
-                transition: all .15s;
-                position: absolute;
-                left: 100%;
-                top: 0;
-            }
-            /*arrow overlapping left side of item*/
-            .wizardbar-item:before {
-                border-color: transparent transparent transparent white;
-                left: 0;
-            }
-            /*arrow pointing out from right side of items*/
-            .wizardbar-item:after {
-                border-color: transparent transparent transparent #76a9dd;
-                z-index: 1;
-            }
-        /*current item styles*/
-        .current.wizardbar-item {
-            background-color: #205081;
-            color: white;
-            cursor: default;
-        }
-
-            .current.wizardbar-item:after {
-                border-color: transparent transparent transparent #205081;
-            }
-        /*hover styles*/
-        .wizardbar-item:not(.current):hover {
-            background-color: #3983ce;
-        }
-
-            .wizardbar-item:not(.current):hover:after {
-                border-color: transparent transparent transparent #3983ce;
-            }
-        /*remove arrows from beginning and end*/
-        .wizardbar-item:first-of-type:before,
-        .wizardbar-item:last-of-type:after {
-            border-color: transparent !important;
-        }
-        /*no inset arrow for first item*/
-        .wizardbar-item:first-of-type {
-            border-radius: 0.25em 0 0 0.25em;
-            padding-left: 1.3em;
-        }
-        /*no protruding arrow for last item*/
-        .wizardbar-item:last-of-type {
-            border-radius: 0 0.25em 0.25em 0;
-            padding-right: 1.3em;
-        }
     </style>
 
 
@@ -131,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" ng-if="preAssign.BBLE||model=='View'" id="preDealForm">
+        <div class="row" ng-if="preAssign.BBLE||model=='View'||model=='Edit'" id="preDealForm">
             <div style="max-width: 700px">
                 <div id="wizard" <%=IIf(String.IsNullOrEmpty(Request.QueryString("popup")), "style='padding:20px';max-width:600px", "") %>>
                     <%--<div class="wizardbar">
@@ -141,7 +61,7 @@
                     <div ng-show="step==1" class="wizard-content">
                         <section>
                             <div>
-                                <h4 class="ss_form_title ">Pre Deal</h4>
+                                <h4 class="ss_form_title ">Pre Deal <a role="button" class="btn btn-default pull-right" ng-show="model=='View'" href="/popupControl/preAssignCropForm.aspx?model=Edit&Id={{preAssign.Id}}"><i class="fa fa-edit"></i> Edit</a></h4>
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item online">
                                         <label class="ss_form_input_title">Property Address</label>
@@ -156,7 +76,7 @@
                                 <input class="ss_form_input " ng-model="perAssignCtrl.Name_Of_parties">
                             </li>--%>
                                     <li class="ss_form_item ">
-                                        <label class="ss_form_input_title " ng-class="{ss_warning:!preAssign.ExpectedDate}">Expected Date of Signing</label>
+                                        <label class="ss_form_input_title " ng-class="{ss_warning:!preAssign.ExpectedDate}">Expected Date of Signing </label>
                                         <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date required  data-date-start-date="+0d" ng-if="model!='View'"/>
                                         <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date ng-if="model=='View'"/>
                                     </li>
@@ -193,7 +113,7 @@
                                         </li>
                                         <li class="ss_form_item">
                                             <label class="ss_form_input_title">Type of Check request</label>
-                                            <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type" >
+                                            <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type" ng-disabled="mode='Edit'">
 
                                                 <option>Short Sale</option>
                                                 <option>Straight Sale</option>
@@ -252,7 +172,7 @@
         </div>
     </div>
     <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>
-    <script>
+  <%--  <script>
 
         var portalApp = angular.module('PortalApp');
 
@@ -311,7 +231,7 @@
               { title: "Checks", show: $scope.preAssign.NeedCheck },
               { title: "Finish", show: true },
             ];
-            $scope.steps[1].show
+        
             $scope.arrayRemove = ptCom.arrayRemove;
             $scope.step = 1
             $scope.MaxStep = $scope.steps.length;
@@ -513,6 +433,6 @@
                 }
             }
         });
-    </script>
+    </script>--%>
 
 </asp:Content>
