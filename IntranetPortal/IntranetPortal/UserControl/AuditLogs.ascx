@@ -38,6 +38,7 @@
                 console.log(result);
                 me.scope.AuditLogs = result;
             });
+
         }
     };
 
@@ -56,7 +57,7 @@
         }
 </style>
 
-<div ng-controller="AuditLogController">
+<div ng-controller="AuditLogController" id="">
     <table class="table">
         <tr>
             <th style="width: 20%">Field</th>

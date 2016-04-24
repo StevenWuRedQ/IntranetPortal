@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="PreAssignCropForm.aspx.vb" Inherits="IntranetPortal.PerAssignCropForm" %>
 
+<%@ Register Src="~/UserControl/AuditLogs.ascx" TagPrefix="uc1" TagName="AuditLogs" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
       
@@ -10,7 +13,9 @@
         .online {
             width: 100% !important;
         }
-
+        .avoid-check{
+            text-decoration:line-through;
+        }
     </style>
 
 
@@ -167,8 +172,9 @@
                         
                     </div>
                     <div class="alert alert-success" role="alert" ng-if="model=='View'">Your request submit succeeded on {{preAssign.CreateDate|date:'MM/dd/yyyy HH:mm'}} </div>
-                    <div class="row">
-
+                    <div class="row" style="font-size:14px" ng-show="model=='View'">
+                        <button type="button" class="btn btn-default" onclick="auditLog.show(null,28)" style="margin-bottom:20px">History</button>
+                        <uc1:AuditLogs runat="server" id="AuditLogs" />
                     </div>
                 </div>
             </div>

@@ -61,7 +61,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
                 $scope.preAssign.Parties = $scope.preAssign.Parties || [];
 
             });
-
+            //auditLog.show("PreSignRecord",preSignId);
         }
         /**
          * Init Edit model data by id
@@ -72,8 +72,28 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         //$scope.partiesGridEditing = {mode: 'batch', editEnabled: false, insertEnabled: true, removeEnabled: true};
         $scope.partiesGridOptions.editing.editEnabled = true;
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
-        $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
-
+        //$scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
+        $scope.checkGridOptions.editing.removeEnabled = false;
+        $scope.checkGridOptions.columns.push({
+            width: 100,
+            alignment: 'center',
+            cellTemplate: function(container, options) {
+                $('<a/>').addClass('dx-link')
+                    .text('Avoid')
+                    .on('dxclick', function() {
+                        $scope.CancelCheck(options)
+                        //Do something with options.data;
+                    })
+                    .appendTo(container);
+            }
+        });
+        $scope.checkGridOptions.onRowPrepared  = function(e)
+        {
+            if(e.data && e.data.Status==1)
+            {
+                e.rowElement.addClass('avoid-check');
+            }
+        }
         $scope.gridEdit.editEnabled = false;
 
         $scope.init($scope.preAssign.Id);
@@ -89,7 +109,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
             type: 'POST',
             dataType: 'json',
             async: false,
-            data:e.data ,
+            data: e.data,
             success: function(data, textStatus, xhr) {
                 $scope.addedCheck = data;
                 e.model = data;
@@ -110,12 +130,15 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         var response = $.ajax({
             url: '/api/businesscheck/' + e.data.CheckId,
             type: 'DELETE',
-            dataType: 'json',
             async: false,
-            data: e.data,
             success: function(data, textStatus, xhr) {
                 e.model = data;
-                _.remove($scope.preAssign.CheckRequestData.Checks,{CheckId:e.data.CheckId});
+                e.model.Status = 1;
+                e.data.Status = 1;
+                // _.remove($scope.preAssign.CheckRequestData.Checks, {
+                //     CheckId: e.data.CheckId
+                // });
+                $('#gridChecks').refresh();
                 $scope.deletedCheck = data;
             }
         });
