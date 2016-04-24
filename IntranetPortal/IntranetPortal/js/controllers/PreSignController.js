@@ -72,21 +72,22 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         //$scope.partiesGridEditing = {mode: 'batch', editEnabled: false, insertEnabled: true, removeEnabled: true};
         $scope.partiesGridOptions.editing.editEnabled = true;
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
-        //$scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
-        $scope.checkGridOptions.editing.removeEnabled = false;
-        $scope.checkGridOptions.columns.push({
-            width: 100,
-            alignment: 'center',
-            cellTemplate: function(container, options) {
-                $('<a/>').addClass('dx-link')
-                    .text('Avoid')
-                    .on('dxclick', function() {
-                        $scope.CancelCheck(options)
-                        //Do something with options.data;
-                    })
-                    .appendTo(container);
-            }
-        });
+        $scope.checkGridOptions.editing.texts ={  deleteRow: 'Avoid'}
+        $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
+        // $scope.checkGridOptions.editing.removeEnabled = false;
+        // $scope.checkGridOptions.columns.push({
+        //     width: 100,
+        //     alignment: 'center',
+        //     cellTemplate: function(container, options) {
+        //         $('<a/>').addClass('dx-link')
+        //             .text('Avoid')
+        //             .on('dxclick', function() {
+        //                 $scope.CancelCheck(options)
+        //                 //Do something with options.data;
+        //             })
+        //             .appendTo(container);
+        //     }
+        // });
         $scope.checkGridOptions.onRowPrepared  = function(e)
         {
             if(e.data && e.data.Status==1)
@@ -112,8 +113,8 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
             data: e.data,
             success: function(data, textStatus, xhr) {
                 $scope.addedCheck = data;
-                e.model = data;
                 $scope.preAssign.CheckRequestData.Checks.push(data);
+                e.cancel = true;
             }
         });
 
@@ -124,7 +125,10 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         };
         return cancel;
     }
-
+    // $scope.$watch('preAssign.CheckRequestData.Checks', function(oldData,newData)
+    // {
+    //     _.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o["CheckId"] == null});
+    // })
     $scope.CancelCheck = function(e) {
 
         var response = $.ajax({
@@ -138,7 +142,10 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
                 // _.remove($scope.preAssign.CheckRequestData.Checks, {
                 //     CheckId: e.data.CheckId
                 // });
-                $('#gridChecks').refresh();
+                $scope.preAssign.CheckRequestData.Checks.push(data);
+                //_.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o.CheckId == null});
+                
+                $('#gridChecks').dxDataGrid('instance').refresh();
                 $scope.deletedCheck = data;
             }
         });

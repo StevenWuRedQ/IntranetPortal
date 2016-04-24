@@ -91,7 +91,7 @@
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Check request</label>
-                                        <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck" ng-disabled="mode='Edit'"></pt-radio>
+                                        <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck" ng-disabled="mode=='Edit'"></pt-radio>
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Manager </label>
