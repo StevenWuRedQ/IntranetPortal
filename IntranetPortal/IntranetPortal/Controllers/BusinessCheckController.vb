@@ -6,7 +6,6 @@ Namespace Controllers
     Public Class BusinessCheckController
         Inherits ApiController
 
-
         Public Function PutBusinessCheck(id As Integer, check As BusinessCheck) As IHttpActionResult
 
             If Not ModelState.IsValid Then

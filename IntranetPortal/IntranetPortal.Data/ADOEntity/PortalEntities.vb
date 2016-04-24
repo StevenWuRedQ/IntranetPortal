@@ -99,7 +99,7 @@ Partial Public Class PortalEntities
                     Continue For
                 End If
 
-                If originalValue.ToString.Trim = propValue.ToString.Trim Then
+                If originalValue IsNot Nothing AndAlso propValue IsNot Nothing AndAlso originalValue.ToString.Trim = propValue.ToString.Trim Then
                     Continue For
                 End If
                 logs.Add(AddLog(AuditLog.LogType.Modified, log))
