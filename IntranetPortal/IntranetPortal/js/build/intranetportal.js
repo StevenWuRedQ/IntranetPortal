@@ -3075,6 +3075,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         insertEnabled: true,
         removeEnabled: true
     };
+    $scope.allowEdit = false;
     if (_model == 'List') {
         var checksListApi = $scope.role == 'finance' ? '/api/PreSign/CheckRequests' : '/api/presign/records';
         $http.get(checksListApi).success(function(data) {
@@ -3126,7 +3127,10 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         //$scope.partiesGridEditing = {mode: 'batch', editEnabled: false, insertEnabled: true, removeEnabled: true};
         $scope.partiesGridOptions.editing.editEnabled = true;
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
-        $scope.checkGridOptions.editing.texts ={  deleteRow: 'Avoid'}
+        $scope.checkGridOptions.editing.texts = {
+            deleteRow: 'Avoid',
+            confirmDeleteMessage:'Are you sure you want avoid this check?'
+        }
         $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
         // $scope.checkGridOptions.editing.removeEnabled = false;
         // $scope.checkGridOptions.columns.push({
@@ -3142,13 +3146,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         //             .appendTo(container);
         //     }
         // });
-        $scope.checkGridOptions.onRowPrepared  = function(e)
-        {
-            if(e.data && e.data.Status==1)
-            {
-                e.rowElement.addClass('avoid-check');
-            }
-        }
+        //$scope.checkGridOptions.onRowPrepared  = 
         $scope.gridEdit.editEnabled = false;
 
         $scope.init($scope.preAssign.Id);
@@ -3156,33 +3154,33 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
     }
 
     $scope.AddCheck = function(e) {
-        var cancel = false;
-        e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
-        e.data.Date = new Date(e.data.Date).toISOString();
-        var response = $.ajax({
-            url: '/api/businesscheck',
-            type: 'POST',
-            dataType: 'json',
-            async: false,
-            data: e.data,
-            success: function(data, textStatus, xhr) {
-                $scope.addedCheck = data;
-                $scope.preAssign.CheckRequestData.Checks.push(data);
-                e.cancel = true;
-            }
-        });
+            var cancel = false;
+            e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
+            e.data.Date = new Date(e.data.Date).toISOString();
+            var response = $.ajax({
+                url: '/api/businesscheck',
+                type: 'POST',
+                dataType: 'json',
+                async: false,
+                data: e.data,
+                success: function(data, textStatus, xhr) {
+                    $scope.addedCheck = data;
+                    $scope.preAssign.CheckRequestData.Checks.push(data);
+                    e.cancel = true;
+                }
+            });
 
-        var message = PortalHttp.BuildAjaxErrorMessage(response);
-        if (message) {
-            AngularRoot.alert(message);
-            e.cancel = true;
-        };
-        return cancel;
-    }
-    // $scope.$watch('preAssign.CheckRequestData.Checks', function(oldData,newData)
-    // {
-    //     _.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o["CheckId"] == null});
-    // })
+            var message = PortalHttp.BuildAjaxErrorMessage(response);
+            if (message) {
+                AngularRoot.alert(message);
+                e.cancel = true;
+            };
+            return cancel;
+        }
+        // $scope.$watch('preAssign.CheckRequestData.Checks', function(oldData,newData)
+        // {
+        //     _.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o["CheckId"] == null});
+        // })
     $scope.CancelCheck = function(e) {
 
         var response = $.ajax({
@@ -3198,7 +3196,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
                 // });
                 $scope.preAssign.CheckRequestData.Checks.push(data);
                 //_.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o.CheckId == null});
-                
+
                 $('#gridChecks').dxDataGrid('instance').refresh();
                 $scope.deletedCheck = data;
             }
@@ -3253,7 +3251,9 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
             $scope.preAssign.DealAmount = 0;
             $scope.preAssign.NeedSearch = true;
         }
-
+        $http.get('/api/PropertyOffer/isCompleted/'+BBLE).success(function(data){
+            $scope.allowEdit = !data;
+        })
     }
 
     if (_BBLE) {
@@ -3425,6 +3425,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
                 type: "required"
             }]
         }],
+
         summary: {
             totalItems: [{
                 column: "Name",
@@ -3434,7 +3435,9 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
     }
 
     $scope.CheckTotalAmount = function() {
-        return _.sum($scope.preAssign.CheckRequestData.Checks, 'Amount');
+        return _.sum(_.filter($scope.preAssign.CheckRequestData.Checks, function(o) {
+            return o.Status != 1;
+        }), 'Amount');
     }
     $scope.checkGridOptions = {
         bindingOptions: {
@@ -3447,8 +3450,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
 
         editing: $scope.gridEdit,
         pager: {
-            showPageSizeSelector: true,
-            allowedPageSizes: [5, 10, 20],
+           
             showInfo: true
         },
         wordWrapEnabled: true,
@@ -3477,15 +3479,33 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
                 type: "required"
             }]
         }, ],
+        //show avoid check any time
+        "onRowPrepared": function(e) {
+            if (e.data && e.data.Status == 1) {
+                e.rowElement.addClass('avoid-check');
+            }
+        },
         summary: {
+            calculateCustomSummary: function(options) {
+
+                
+                if (options.name == 'SumAmount') {
+                    options.totalValue = _.sum(_.filter(options.component._options.dataSource, function(o) {
+                        return o.Status != 1;
+                    }), "Amount"); //$scope.CheckTotalAmount();
+                }
+            },
             totalItems: [{
                 column: "Name",
                 summaryType: "count"
             }, {
-                column: "Amount",
+                name: "SumAmount",
+                showInColumn: "Amount",
                 summaryType: "sum",
+                displayFormat: "Sum: {0}",
                 valueFormat: "currency",
-                precision: 2
+                precision: 2,
+                summaryType: "custom"
             }]
         }
     };
