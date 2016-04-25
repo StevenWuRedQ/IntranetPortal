@@ -18,8 +18,9 @@ Public Class WebForm3
         Me.AuctionDailyReport.BindData(params)
 
         params = New Dictionary(Of String, String)
-        params.Add("RecordId", 6)
+        params.Add("RecordId", 30)
         params.Add("UserName", "Chris Yan")
+        params.Add("IsUpdate", True)
         Me.psNotify.BindData(params)
     End Sub
 

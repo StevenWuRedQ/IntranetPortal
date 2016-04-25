@@ -58,7 +58,7 @@
 </style>
 
 <div ng-controller="AuditLogController" id="">
-    <table class="table">
+    <table class="table" ng-show="AuditLogs">
         <tr>
             <th style="width: 20%">Field</th>
             <th style="width: 40%">Original Value</th>
@@ -66,7 +66,7 @@
         </tr>
     </table>
     <div ng-repeat="(key, prop) in AuditLogs" class="audit_log_block">
-        <h4><strong>{{prop[0].UserName}}</strong> made changes - {{key | date:"MM/dd/yyyy HH:mm"}} </h4>
+        <h5><strong>{{prop[0].UserName}}</strong> made changes - {{key | date:"MM/dd/yyyy HH:mm"}} </h5>
         <table class="" style="width: 100%">
             <tr ng-repeat="log in prop" style="border: none">
                 <td style="width: 20%">{{log.ColumnName}}</td>

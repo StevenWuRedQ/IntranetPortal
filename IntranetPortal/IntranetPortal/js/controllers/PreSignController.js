@@ -9,6 +9,10 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
             Checks: []
         }
     };
+    $scope.showHistroy = function()
+    {
+        auditLog.show(null, $scope.preAssign.Id);
+    }
     var _BBLE = PortalUtility.QueryUrl().BBLE;
     var _model = PortalUtility.QueryUrl().model;
     var _role = PortalUtility.QueryUrl().role;

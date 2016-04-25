@@ -71,6 +71,9 @@ Namespace Controllers
 
             Try
                 record.Save(HttpContext.Current.User.Identity.Name)
+
+                SendNotification(record, True)
+
             Catch ex As Exception
                 Throw ex
             End Try
@@ -121,6 +124,24 @@ Namespace Controllers
 
             Return Ok(record)
         End Function
+
+        Private Sub SendNotification(record As PreSignRecord, Optional isUpdate As Boolean = False)
+
+            Dim svr As New CommonService
+            Dim params = New Dictionary(Of String, String)
+
+            Dim finMgr = Roles.GetUsersInRole("Accounting-Manager")
+            If finMgr.Count > 0 Then
+                params.Add("RecordId", record.Id)
+                params.Add("UserName", finMgr(0))
+                params.Add("IsUpdate", isUpdate)
+
+                Dim emails = Employee.GetEmpsEmails(finMgr.ToArray)
+                If Not String.IsNullOrEmpty(emails) Then
+                    svr.SendEmailByControlWithCC(emails, Employee.GetInstance(record.CreateBy).Email, "Checks Request from " & record.CreateBy, "PreSignNotify", params)
+                End If
+            End If
+        End Sub
 
     End Class
 End Namespace

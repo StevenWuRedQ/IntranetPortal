@@ -24,7 +24,11 @@
 Dear <%=  UserName%>,
 <br />
 <br />
+<% If IsUpdateMode Then %>
+<%= PreSign.UpdateBy %> just update the check request, please review.
+<% Else %>
 <%= PreSign.CreateBy %> just submit a check request, please review.
+<% End If %>
 <br />
 <br />
 <table style="margin-left: 15px; border: 1px solid black; width: 580px">
@@ -50,13 +54,14 @@ Dear <%=  UserName%>,
         <td>Parties: </td>
         <td>
             <% If PreSign.PartiesArray IsNot Nothing Then %>
-            
-                <% For each p In PreSign.PartiesArray
-                %>
-                   
-                    <%= p.Value(Of String)("Name") %> <br />
-            
-                <% Next %>
+
+            <% For each p In PreSign.PartiesArray
+            %>
+
+            <%= p.Value(Of String)("Name") %>
+            <br />
+
+            <% Next %>
             <% End If %>
         </td>
     </tr>
@@ -77,8 +82,8 @@ Dear <%=  UserName%>,
 
     <% 
         Dim i = 1
-        For each check In PreSign.CheckRequestData.Checks %>
-    <tr>
+        For Each check In PreSign.CheckRequestData.Checks %>
+    <tr <% if check.Status = IntranetPortal.Data.BusinessCheck.CheckStatus.Canceled Then%> style="text-decoration: line-through" <% End If %>>
         <td><%= i %></td>
         <td><%= check.PaybleTo %></td>
         <td><%= string.Format("{0:c}", check.Amount) %></td>

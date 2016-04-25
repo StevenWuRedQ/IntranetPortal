@@ -173,7 +173,7 @@
                     </div>
                     <div class="alert alert-success" role="alert" ng-if="model=='View'">Your request submit succeeded on {{preAssign.CreateDate|date:'MM/dd/yyyy HH:mm'}} </div>
                     <div class="row" style="font-size:14px" ng-show="model=='View'">
-                        <button type="button" class="btn btn-default" onclick="auditLog.show(null,28)" style="margin-bottom:20px">History</button>
+                        <button type="button" class="btn btn-default" ng-click="showHistroy()" style="margin-bottom:20px">History</button>
                         <uc1:AuditLogs runat="server" id="AuditLogs" />
                     </div>
                 </div>
