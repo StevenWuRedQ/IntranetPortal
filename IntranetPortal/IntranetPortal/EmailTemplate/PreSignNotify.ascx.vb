@@ -21,7 +21,10 @@ Public Class PreSignNotify
 
             Dim id = CInt(params("RecordId"))
             UserName = params("UserName")
-            IsUpdateMode = CBool(params("IsUpdate"))
+            If params.ContainsKey("IsUpdate") Then
+                IsUpdateMode = CBool(params("IsUpdate"))
+            End If
+
             PreSign = PreSignRecord.GetInstance(id)
         End If
 

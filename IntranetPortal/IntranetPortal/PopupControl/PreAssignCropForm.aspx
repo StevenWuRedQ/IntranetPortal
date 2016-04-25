@@ -4,8 +4,7 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
-      
+    <style type="text/css">
         .wizard-content {
             min-height: 400px;
         }
@@ -13,12 +12,20 @@
         .online {
             width: 100% !important;
         }
-        .avoid-check{
-            text-decoration:line-through;
+
+        .avoid-check {
+            text-decoration: line-through;
+        }
+
+        a.dx-link-MyIdealProp:hover {
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .myRow:hover {
+            background-color: #efefef;
         }
     </style>
-
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <input type="hidden" id="preSignId" value='<%= Request.QueryString("preSignId")%>' />
@@ -66,7 +73,7 @@
                     <div ng-show="step==1" class="wizard-content">
                         <section>
                             <div>
-                                <h4 class="ss_form_title ">Pre Deal <a role="button" class="btn btn-default pull-right" ng-show="model=='View'" href="/popupControl/preAssignCropForm.aspx?model=Edit&Id={{preAssign.Id}}"><i class="fa fa-edit"></i> Edit</a></h4>
+                                <h4 class="ss_form_title ">Pre Deal <a role="button" class="btn btn-default pull-right" ng-show="model=='View'" href="/popupControl/preAssignCropForm.aspx?model=Edit&Id={{preAssign.Id}}"><i class="fa fa-edit"></i>Edit</a></h4>
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item online">
                                         <label class="ss_form_input_title">Property Address</label>
@@ -82,12 +89,12 @@
                             </li>--%>
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title " ng-class="{ss_warning:!preAssign.ExpectedDate}">Expected Date of Signing </label>
-                                        <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date required  data-date-start-date="+0d" ng-if="model!='View'"/>
-                                        <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date ng-if="model=='View'"/>
+                                        <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date required data-date-start-date="+0d" ng-if="model!='View'" />
+                                        <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date ng-if="model=='View'" />
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Need do search</label>
-                                        <pt-radio name="PreAssign_Needdosearch0" model="preAssign.NeedSearch" ></pt-radio>
+                                        <pt-radio name="PreAssign_Needdosearch0" model="preAssign.NeedSearch"></pt-radio>
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Check request</label>
@@ -109,8 +116,7 @@
                                         <%--<li class="ss_form_item ">
                                 <label class="ss_form_input_title ">Check Issued by</label>
                                 <input class="ss_form_input" ng-model="preAssign.CheckIssuedBy" ng-show="CheckTotalAmount()<=100000" />
-                                <input class="ss_form_input" ng-show="CheckTotalAmount()>10000" value="MyIdealProperty" disabled />
-                               
+                                <input class="ss_form_input" ng-show="CheckTotalAmount()>10000" value="MyIdealProperty" disabled />                               
                             </li>--%>
                                         <li class="ss_form_item">
                                             <label class="ss_form_input_title " ng-class="{ss_warning:CheckTotalAmount() > preAssign.DealAmount}">Total Amount paid for the deal</label>
@@ -119,7 +125,6 @@
                                         <li class="ss_form_item">
                                             <label class="ss_form_input_title">Type of Check request</label>
                                             <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type" ng-disabled="mode='Edit'">
-
                                                 <option>Short Sale</option>
                                                 <option>Straight Sale</option>
                                                 <option>Other</option>
@@ -169,17 +174,16 @@
                         <%--<button type="button" class="btn btn-default" ng-show="step>1" ng-click="PrevStep()">< Prev</button>--%>
                         <button type="button" class="btn btn-default" ng-click="RequestPreSign()" <%--ng-show="step==MaxStep"--%> ng-show="model!='View'">{{preAssign.Id ?'Update':'Submit'}} </button>
                         <%--<button type="button" class="btn btn-default" ng-show="step<MaxStep" ng-click="NextStep()">Next ></button>--%>
-                        
                     </div>
                     <div class="alert alert-success" role="alert" ng-if="model=='View'">Your request submit succeeded on {{preAssign.CreateDate|date:'MM/dd/yyyy HH:mm'}} </div>
-                    <div class="row" style="font-size:14px" ng-show="model=='View'">
-                        <button type="button" class="btn btn-default" ng-click="showHistroy()" style="margin-bottom:20px">History</button>
-                        <uc1:AuditLogs runat="server" id="AuditLogs" />
+                    <div class="row" style="font-size: 14px" ng-show="model=='View'">
+                        <button type="button" class="btn btn-default" ng-click="showHistroy()" style="margin-bottom: 20px">History</button>
+                        <uc1:AuditLogs runat="server" ID="AuditLogs" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>
- 
+
 </asp:Content>

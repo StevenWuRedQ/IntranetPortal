@@ -34,7 +34,31 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
                 },
                 columnAutoWidth: true,
                 wordWrapEnabled: true,
-                columns: [{ dataField: 'Title', caption: 'Address' }, 'OfferType',
+                onRowPrepared: function (rowInfo) {
+                    if (rowInfo.rowType != 'data')
+                        return;
+                    rowInfo.rowElement
+                    .addClass('myRow');
+                },
+                columns: [
+                    {
+                        dataField: 'Title',
+                        caption: 'Address',
+                        cellTemplate: function (container, options) {
+                            $('<a/>').addClass('dx-link-MyIdealProp')
+                                .text(options.value)
+                                .on('dxclick', function () {
+                                    //Do something with options.data;
+                                    //ShowCaseInfo(options.data.BBLE);
+                                    var request = options.data;
+                                    //PortalUtility.ShowPopWindow("New Offer", "/PopupControl/ShortSalePreSignForm.aspx?BBLE=" + leadsInfoBBLE)
+                                    PortalUtility.ShowPopWindow("New Offer", "/PopupControl/ShortSalePreSignForm.aspx?BBLE=" + request.BBLE);
+                                    //PortalUtility.OpenWindow('/PopupControl/ShortSalePreSignForm.aspx?BBLE=' + request.BBLE, 'Pre Sign ' + request.BBLE, 800, 900);
+                                })
+                                .appendTo(container);
+                        }
+                    },
+                    'OfferType',
                     { dataField: 'CreateBy', caption: 'Submit By' },
                     {
                         dataField: 'CreateDate', caption: 'Contract Date', dataType: 'date',
