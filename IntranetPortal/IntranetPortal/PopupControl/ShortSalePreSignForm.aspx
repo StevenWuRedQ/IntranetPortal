@@ -131,6 +131,15 @@
             -moz-border-radius: 5px;
             border-radius: 5px;
         }
+
+        a.dx-link-MyIdealProp:hover {
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .myRow:hover {
+            background-color: #efefef;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
@@ -162,8 +171,8 @@
             </tr>
         </table>
     </div>
-    <input runat="server" type="hidden" id="NeedSearch" class="pt-need-search-input"/>
-    <input runat="server" id="txtSearchCompleted" type="hidden" class="pt-search-completed"/>
+    <input runat="server" type="hidden" id="NeedSearch" class="pt-need-search-input" />
+    <input runat="server" id="txtSearchCompleted" type="hidden" class="pt-search-completed" />
     <div id="content" runat="server">
         <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
 
@@ -204,7 +213,7 @@
                         <h3 class="wizard-title">Check Search Information</h3>
 
                         <div id="DivLeadTaxSearchCtrl" runat="server" visible="false">
-                            <div style="padding: 10px" ng-controller="LeadTaxSearchCtrl" id="LeadTaxSearchCtrl" >
+                            <div style="padding: 10px" ng-controller="LeadTaxSearchCtrl" id="LeadTaxSearchCtrl">
                                 <h4 ng-show="!DocSearch||DocSearch.Status!=1" ng-class="{ss_warning:!DocSearch||DocSearch.Status!=1}"
                                     data-message="Document search not completed yet please contact document search agent completed search">Document search not completed yet please contact document search agent completed search</h4>
                                 <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />
@@ -635,7 +644,6 @@
             </div>
         </div>
         <%--help script for this page--%>
-      
     </div>
     <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>
 </asp:Content>

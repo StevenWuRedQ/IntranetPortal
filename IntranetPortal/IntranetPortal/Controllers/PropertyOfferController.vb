@@ -49,5 +49,21 @@ Namespace Controllers
 
         End Function
 
+        ''' <summary>
+        ''' Load user property offers
+        ''' </summary>
+        ''' <returns>Property Offer list</returns>
+        <Route("api/PropertyOffer/IsCompleted/{bble}")>
+        Public Function GetPropertyIsCompleted(bble As String) As IHttpActionResult
+
+            Dim offer = PropertyOffer.GetOffer(bble)
+            If offer IsNot Nothing AndAlso offer.Status = PropertyOffer.OfferStatus.Completed Then
+                Return Ok(True)
+            End If
+
+            Return Ok(False)
+        End Function
+
+
     End Class
 End Namespace

@@ -6,6 +6,8 @@ Public Class PreSignNotify
     Public Property UserName As String
     Public Property Requestor As String
 
+    Public Property IsUpdateMode As Boolean
+
     Public Property PreSign As New PreSignRecord
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -19,6 +21,10 @@ Public Class PreSignNotify
 
             Dim id = CInt(params("RecordId"))
             UserName = params("UserName")
+            If params.ContainsKey("IsUpdate") Then
+                IsUpdateMode = CBool(params("IsUpdate"))
+            End If
+
             PreSign = PreSignRecord.GetInstance(id)
         End If
 

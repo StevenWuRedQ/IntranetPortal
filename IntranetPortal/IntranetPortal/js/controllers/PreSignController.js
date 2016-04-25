@@ -9,6 +9,10 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
             Checks: []
         }
     };
+    $scope.showHistroy = function()
+    {
+        auditLog.show(null, $scope.preAssign.Id);
+    }
     var _BBLE = PortalUtility.QueryUrl().BBLE;
     var _model = PortalUtility.QueryUrl().model;
     var _role = PortalUtility.QueryUrl().role;
@@ -279,11 +283,8 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         var request = e.selectedRowsData[0];
         PortalUtility.OpenWindow('/PopupControl/PreAssignCropForm.aspx?model=View&Id=' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
     }
-    $scope.preSignRecordsGridOpt = {
-        onSelectionChanged: $scope.onSelectedChanged,
-        selection: {
-            mode: 'single'
-        },
+
+    $scope.preSignRecordsGridOpt = {               
         bindingOptions: {
             dataSource: 'preSignList'
         },
@@ -297,10 +298,27 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         paging: {
             pageSize: 10
         },
+        onRowPrepared: function (rowInfo) {
+            if (rowInfo.rowType != 'data')
+                return;
+            rowInfo.rowElement
+            .addClass('myRow');
+        },
         columnAutoWidth: true,
         columns: [{
             dataField: 'Title',
-            caption: 'Address'
+            caption: 'Address',
+            cellTemplate: function (container, options) {
+                $('<a/>').addClass('dx-link-MyIdealProp')
+                    .text(options.value)
+                    .on('dxclick', function () {
+                        //Do something with options.data;
+                        //ShowCaseInfo(options.data.BBLE);
+                        var request = options.data;
+                        PortalUtility.OpenWindow('/PopupControl/PreAssignCropForm.aspx?model=View&Id=' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
+                    })
+                    .appendTo(container);
+            }
         }, {
             dataField: 'CreateBy',
             caption: 'Request By'
@@ -323,6 +341,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         }, ],
         wordWrapEnabled: true
     }
+
     if (_role == 'finance') {
         $scope.preSignRecordsGridOpt.masterDetail = {
             enabled: true,
