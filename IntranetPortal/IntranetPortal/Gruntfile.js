@@ -71,6 +71,7 @@
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-text-replace');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-protractor-runner');
 
     // Default task(s).
     grunt.registerTask('default', ['concat', 'uglify', 'replace']);

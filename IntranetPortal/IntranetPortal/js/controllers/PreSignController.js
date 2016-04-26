@@ -20,7 +20,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
     $scope.model = _model;
     $scope.role = _role;
     $scope.gridEdit = {
-        mode: "batch",
+        mode: "batch", 
         editEnabled: true,
         insertEnabled: true,
         removeEnabled: true

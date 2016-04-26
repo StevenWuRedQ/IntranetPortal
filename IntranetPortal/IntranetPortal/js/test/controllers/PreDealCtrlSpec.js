@@ -34,7 +34,7 @@ describe('Pre Assign Ctrl test', function() {
             Id: 2
         });
         scope.Save();
-        $httpBackend.flush();
+        
 
         expect(scope.localhref).toBe('/popupControl/preAssignCropForm.aspx?model=View&Id=2');
     });
