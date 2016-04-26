@@ -20,7 +20,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
     $scope.model = _model;
     $scope.role = _role;
     $scope.gridEdit = {
-        mode: "batch",
+        editMode: "cell",
         editEnabled: true,
         insertEnabled: true,
         removeEnabled: true
@@ -78,10 +78,17 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         $scope.partiesGridOptions.editing.editEnabled = true;
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
         $scope.checkGridOptions.editing.texts = {
-            deleteRow: 'Avoid',
-            confirmDeleteMessage:'Are you sure you want avoid this check?'
+            deleteRow: 'Void',
+            confirmDeleteMessage:'Are you sure you want void this check?'
         }
         $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
+        $scope.checkGridOptions.onEditingStart = function(e)
+        {
+            if(e.data.Status==1)
+            {
+                e.cancel = true;
+            }
+        }
         // $scope.checkGridOptions.editing.removeEnabled = false;
         // $scope.checkGridOptions.columns.push({
         //     width: 100,
@@ -97,7 +104,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         //     }
         // });
         //$scope.checkGridOptions.onRowPrepared  = 
-        $scope.gridEdit.editEnabled = false;
+        //$scope.gridEdit.editEnabled = false;
 
         $scope.init($scope.preAssign.Id);
 
@@ -132,7 +139,10 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         //     _.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o["CheckId"] == null});
         // })
     $scope.CancelCheck = function(e) {
-
+        if (e.data.Status == 1) {
+            e.cancel = true;
+            return;
+        }
         var response = $.ajax({
             url: '/api/businesscheck/' + e.data.CheckId,
             type: 'DELETE',

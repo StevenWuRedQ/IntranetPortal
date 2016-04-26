@@ -93,7 +93,7 @@
                                         <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date ng-if="model=='View'" />
                                     </li>
                                     <li class="ss_form_item">
-                                        <label class="ss_form_input_title">Need do search</label>
+                                        <label class="ss_form_input_title">Doc Search</label>
                                         <pt-radio name="PreAssign_Needdosearch0" model="preAssign.NeedSearch"></pt-radio>
                                     </li>
                                     <li class="ss_form_item">
@@ -124,7 +124,7 @@
                                         </li>
                                         <li class="ss_form_item">
                                             <label class="ss_form_input_title">Type of Check request</label>
-                                            <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type" ng-disabled="mode='Edit'">
+                                            <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type" ng-disabled="mode=='Edit'">
                                                 <option>Short Sale</option>
                                                 <option>Straight Sale</option>
                                                 <option>Other</option>
@@ -136,8 +136,8 @@
                                 <input class="ss_form_input " ng-model="perAssignCtrl.Name_On_Check">
                             </li>--%>
                                 </ul>
-                                <div ng-if="!preAssign.NeedSearch" class="alert alert-warning" role="alert">
-                                    <strong>Warning!</strong> If you do not need a search please make sure you have all informations or you did a search already.
+                                <div ng-if="!preAssign.NeedSearch" class="alert alert-warning" role="alert" >
+                                    <strong> <i class="fa fa-warning"></i> Warning!</strong> Please make sure you have all the required property information or you have completed a search already.
                                 </div>
                             </div>
                             <div class="ss_form">
