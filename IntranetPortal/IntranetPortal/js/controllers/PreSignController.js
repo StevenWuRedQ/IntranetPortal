@@ -84,7 +84,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
         $scope.checkGridOptions.onEditingStart = function(e)
         {
-            if(e.data.Status==1)
+            if (e.data.Status == 1 || e.data.CheckId)
             {
                 e.cancel = true;
             }

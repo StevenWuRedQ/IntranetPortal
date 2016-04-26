@@ -74,5 +74,28 @@
         })
 
 
-    })
+    });
+    describe('ptRadio', function () {
+
+        var scope, celem, cscope;
+
+        beforeEach(function () {
+            module("PortalApp");
+            inject(function (_$compile_, _$rootScope_) {
+                var html = "<input ng-model='xdata' money-mask></input>";
+                scope = _$rootScope_.$new();
+                celem = _$compile_(html)(scope);
+                scope.$digest();
+                cscope = celem.scope();
+            })
+        })
+
+        it('format money', function () {
+            scope.xdata = "123456.78";
+            scope.$digest();
+            expect(celem[0].value).toBe('$123,456.78');
+        });
+
+
+    });
 })

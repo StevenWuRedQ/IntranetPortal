@@ -3138,7 +3138,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
         $scope.checkGridOptions.onEditingStart = function(e)
         {
-            if(e.data.Status==1)
+            if (e.data.Status == 1 || e.data.CheckId)
             {
                 e.cancel = true;
             }
@@ -4622,11 +4622,15 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         return true;
     }
     $scope.DeedWizardInit = function () {
+        var deedCrop = $scope.SSpreSign.DealSheet.Deed;
+        /*use like synchronously call*/
 
-        $http.get('/api/CorporationEntities/DeedCorpsByTeam?team=' + $scope.SSpreSign.assignCrop.Name).success(function (data) {
-            $scope.SSpreSign.DealSheet.Deed.Buyer = data;
+        if (!deedCrop.EntityId) {
+            $http.get('/api/CorporationEntities/DeedCorpsByTeam?team=' + $scope.SSpreSign.assignCrop.Name).success(function (data) {
+                $scope.SSpreSign.DealSheet.Deed.Buyer = data;
 
-        });
+            });
+        }
 
     }
     $scope.steps = [
