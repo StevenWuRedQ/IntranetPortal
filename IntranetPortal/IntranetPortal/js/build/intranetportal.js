@@ -897,9 +897,9 @@ angular.module("PortalApp")
     return {
         restrict: 'E',
         template:
-            '<input type="checkbox" id="{{name}}Y" ng-model="model" class="ss_form_input" ng-disabled="ngDisabled">' +
+            '<input type="checkbox" id="{{name}}Y" ng-model="model" class="ss_form_input" ng-disabled="{{ngDisabled}}">' +
             '<label for="{{name}}Y" class="input_with_check"><span class="box_text">{{trueValue}}&nbsp</span></label>' +
-            '<input type="checkbox" id="{{name}}N" ng-model="model" ng-true-value="false" ng-false-value="true" class="ss_form_input" ng-disabled="ngDisabled">' +
+            '<input type="checkbox" id="{{name}}N" ng-model="model" ng-true-value="false" ng-false-value="true" class="ss_form_input" ng-disabled="{{ngDisabled}}">' +
             '<label for="{{name}}N" class="input_with_check"><span class="box_text">{{falseValue}}&nbsp</span></label>',
         scope: {
             model: '=',
@@ -4521,7 +4521,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             //{
 
             //}).error(function(){
-
 
             //});
         }

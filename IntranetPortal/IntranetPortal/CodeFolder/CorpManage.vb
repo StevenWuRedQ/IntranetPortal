@@ -36,7 +36,7 @@ Public Class CorpManage
     Public Shared Function CheckAvailableCorp(team As String) As Boolean
         Dim count = CorporationEntity.GetAvailableCorpAmount(team)
 
-        If count < 5 Then
+        If count <= 5 Then
             NotifyCorpIsLow(team)
         End If
     End Function

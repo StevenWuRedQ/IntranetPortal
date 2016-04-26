@@ -72,6 +72,19 @@ Namespace Controllers
             Try
                 record.Save(HttpContext.Current.User.Identity.Name)
 
+                If record.NeedSearch Then
+                    Dim docController As New LeadInfoDocumentSearchesController
+                    Dim docSearch = LeadInfoDocumentSearch.GetInstance(record.BBLE)
+                    If docSearch IsNot Nothing Then
+                        If docSearch.Status = LeadInfoDocumentSearch.SearchStauts.NewSearch Then
+                            docSearch.ExpectedSigningDate = record.ExpectedDate
+                            docController.PutLeadInfoDocumentSearch(docSearch.BBLE, docSearch)
+                        End If
+                    Else
+                        docController.PostLeadInfoDocumentSearch(New LeadInfoDocumentSearch With {.BBLE = record.BBLE, .ExpectedSigningDate = record.ExpectedDate})
+                    End If
+                End If
+
                 SendNotification(record, True)
 
             Catch ex As Exception

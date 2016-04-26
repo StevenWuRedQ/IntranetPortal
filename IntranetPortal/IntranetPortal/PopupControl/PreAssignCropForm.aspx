@@ -73,7 +73,7 @@
                     <div ng-show="step==1" class="wizard-content">
                         <section>
                             <div>
-                                <h4 class="ss_form_title ">Pre Deal <a role="button"  class="btn btn-default pull-right" ng-show="model=='View'&&allowEdit" href="/popupControl/preAssignCropForm.aspx?model=Edit&Id={{preAssign.Id}}"><i class="fa fa-edit"></i> Edit</a></h4>
+                                <h4 class="ss_form_title ">Pre Deal <a role="button" class="btn btn-default pull-right" ng-show="model=='View'&&allowEdit" href="/popupControl/preAssignCropForm.aspx?model=Edit&Id={{preAssign.Id}}"><i class="fa fa-edit"></i>Edit</a></h4>
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item online">
                                         <label class="ss_form_input_title">Property Address</label>
@@ -98,7 +98,16 @@
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Check request</label>
-                                        <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck" ng-disabled="mode=='Edit'"></pt-radio>
+
+                                        <input type="checkbox" id="PreAssign_Checkrequest0Y" ng-model="preAssign.NeedCheck" class="ss_form_input " ng-disabled="model=='Edit'">
+                                        <label for="PreAssign_Checkrequest0Y" class="input_with_check">
+                                            <span class="box_text ng-binding">yes&nbsp;</span>
+                                        </label>
+                                        <input type="checkbox" id="PreAssign_Checkrequest0N" ng-model="preAssign.NeedCheck" ng-true-value="false" ng-false-value="true" class="ss_form_input" ng-disabled="model=='Edit'">
+                                        <label for="PreAssign_Checkrequest0N" class="input_with_check">
+                                            <span class="box_text ng-binding">no&nbsp;</span>
+                                        </label>
+
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Manager </label>
@@ -136,8 +145,8 @@
                                 <input class="ss_form_input " ng-model="perAssignCtrl.Name_On_Check">
                             </li>--%>
                                 </ul>
-                                <div ng-if="!preAssign.NeedSearch" class="alert alert-warning" role="alert" >
-                                    <strong> <i class="fa fa-warning"></i> Warning!</strong> Please make sure you have all the required property information or you have completed a search already.
+                                <div ng-if="!preAssign.NeedSearch" class="alert alert-warning" role="alert">
+                                    <strong><i class="fa fa-warning"></i>Warning!</strong> Please make sure you have all the required property information or you have completed a search already.
                                 </div>
                             </div>
                             <div class="ss_form">
@@ -185,5 +194,5 @@
         </div>
     </div>
     <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>
- 
+
 </asp:Content>

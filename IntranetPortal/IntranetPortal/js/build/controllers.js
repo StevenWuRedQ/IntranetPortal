@@ -3109,7 +3109,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
 
             //}).error(function(){
 
-
             //});
         }
 
