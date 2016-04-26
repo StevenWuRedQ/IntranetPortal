@@ -1661,7 +1661,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
     $scope.model = _model;
     $scope.role = _role;
     $scope.gridEdit = {
-        mode: "batch",
+        editMode: "cell",
         editEnabled: true,
         insertEnabled: true,
         removeEnabled: true
@@ -1719,10 +1719,17 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         $scope.partiesGridOptions.editing.editEnabled = true;
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
         $scope.checkGridOptions.editing.texts = {
-            deleteRow: 'Avoid',
-            confirmDeleteMessage:'Are you sure you want avoid this check?'
+            deleteRow: 'Void',
+            confirmDeleteMessage:'Are you sure you want void this check?'
         }
         $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
+        $scope.checkGridOptions.onEditingStart = function(e)
+        {
+            if(e.data.Status==1)
+            {
+                e.cancel = true;
+            }
+        }
         // $scope.checkGridOptions.editing.removeEnabled = false;
         // $scope.checkGridOptions.columns.push({
         //     width: 100,
@@ -1738,7 +1745,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         //     }
         // });
         //$scope.checkGridOptions.onRowPrepared  = 
-        $scope.gridEdit.editEnabled = false;
+        //$scope.gridEdit.editEnabled = false;
 
         $scope.init($scope.preAssign.Id);
 
@@ -1773,7 +1780,10 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         //     _.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o["CheckId"] == null});
         // })
     $scope.CancelCheck = function(e) {
-
+        if (e.data.Status == 1) {
+            e.cancel = true;
+            return;
+        }
         var response = $.ajax({
             url: '/api/businesscheck/' + e.data.CheckId,
             type: 'DELETE',
@@ -3151,11 +3161,12 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             return false;
         }
         var assignApi = '/api/CorporationEntities/AvailableCorp?team=' + _assignCrop.Name + '&wellsfargo=' + _assignCrop.isWellsFargo;
-        var confirmMsg = 'The team is ' + _assignCrop.Name + ', and servicor is not Wells Fargo, right?';
+
+        var confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and servicer is not Wells Fargo.';
 
         if (_assignCrop.isWellsFargo) {
             assignApi = "/api/CorporationEntities/AvailableCorpBySigner?team=" + _assignCrop.Name + "&signer=" + _assignCrop.Signer;
-            confirmMsg = 'The team is ' + _assignCrop.Name + ', and Wells Fargo signer is ' + _assignCrop.Signer + ', right?';
+            confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and Wells Fargo signer is ' + _assignCrop.Signer + '';
         }
 
         $http.get(assignApi).success(function (data) {
@@ -3237,6 +3248,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             if (data.FormData) {
 
                 $scope.SSpreSign = data.FormData;
+                $scope.refreshSave(data);
                 $scope.DeadType = data.FormData.DeadType;
                 $scope.SSpreSign.SsCase = data.FormData.SsCase;
                 $scope.SSpreSign.Status = data.BusinessData.Status;
@@ -3276,6 +3288,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     }
     $scope.refreshSave = function (formdata) {
         $scope.SSpreSign.DataId = formdata.DataId;
+       
         $scope.SSpreSign.CreateDate = formdata.CreateDate;
         $scope.SSpreSign.CreateBy = formdata.CreateBy;
     }

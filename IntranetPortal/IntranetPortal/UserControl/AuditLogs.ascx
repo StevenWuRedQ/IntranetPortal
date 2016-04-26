@@ -55,19 +55,23 @@
             border-left: 5px solid #3572b0;
             padding-left: 5px;
         }
+        .frist-line-log{
+            background:blue;
+        }
 </style>
 
 <div ng-controller="AuditLogController" id="">
-    <table class="table" ng-show="AuditLogs">
-        <tr>
-            <th style="width: 20%">Field</th>
-            <th style="width: 40%">Original Value</th>
-            <th style="width: 40%">New Value</th>
-        </tr>
-    </table>
+    
+    
     <div ng-repeat="(key, prop) in AuditLogs" class="audit_log_block">
-        <h5><strong>{{prop[0].UserName}}</strong> made changes - {{key | date:"MM/dd/yyyy HH:mm"}} </h5>
-        <table class="" style="width: 100%">
+        <h5 ng-class="{alert-success:$index==0}"><strong> {{prop[0].UserName}}</strong> <span style="color:blue;">{{prop[0].EventType==0?'first created this form':'made changes'}} on {{key | date:"MM/dd/yyyy HH:mm"}}</span>  </h5>
+        
+        <table class="" style="width: 100%" ng-show="prop[0].EventType!=0">
+             <tr>
+                <th style="width: 20%">Field</th>
+                <th style="width: 40%">Previous Value</th>
+                <th style="width: 40%">New Value</th>
+            </tr>
             <tr ng-repeat="log in prop" style="border: none">
                 <td style="width: 20%">{{log.ColumnName}}</td>
                 <td style="width: 40%">{{log.OriginalValue}}</td>

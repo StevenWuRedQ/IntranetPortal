@@ -205,7 +205,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
 
             //}).error(function(){
 
-
             //});
         }
 
@@ -257,11 +256,12 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             return false;
         }
         var assignApi = '/api/CorporationEntities/AvailableCorp?team=' + _assignCrop.Name + '&wellsfargo=' + _assignCrop.isWellsFargo;
-        var confirmMsg = 'The team is ' + _assignCrop.Name + ', and servicor is not Wells Fargo, right?';
+
+        var confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and servicer is not Wells Fargo.';
 
         if (_assignCrop.isWellsFargo) {
             assignApi = "/api/CorporationEntities/AvailableCorpBySigner?team=" + _assignCrop.Name + "&signer=" + _assignCrop.Signer;
-            confirmMsg = 'The team is ' + _assignCrop.Name + ', and Wells Fargo signer is ' + _assignCrop.Signer + ', right?';
+            confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and Wells Fargo signer is ' + _assignCrop.Signer + '';
         }
 
         $http.get(assignApi).success(function (data) {
@@ -343,6 +343,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             if (data.FormData) {
 
                 $scope.SSpreSign = data.FormData;
+                $scope.refreshSave(data);
                 $scope.DeadType = data.FormData.DeadType;
                 $scope.SSpreSign.SsCase = data.FormData.SsCase;
                 $scope.SSpreSign.Status = data.BusinessData.Status;
@@ -382,6 +383,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     }
     $scope.refreshSave = function (formdata) {
         $scope.SSpreSign.DataId = formdata.DataId;
+       
         $scope.SSpreSign.CreateDate = formdata.CreateDate;
         $scope.SSpreSign.CreateBy = formdata.CreateBy;
     }

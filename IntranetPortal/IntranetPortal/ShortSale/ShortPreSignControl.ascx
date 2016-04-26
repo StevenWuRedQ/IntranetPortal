@@ -111,7 +111,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label>DOB *</label>
-                    <input class="form-control" ng-model="owner.DOB" ss-date>
+                    <input class="form-control" ng-model="owner.DOB" placeholder="mm/dd/yyyy">
                 </div>
                 <div class="col-sm-4">
                     <label>SSN</label>
