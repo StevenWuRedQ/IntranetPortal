@@ -4522,7 +4522,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
 
             //}).error(function(){
 
-
             //});
         }
 
@@ -4701,7 +4700,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     }
     $scope.refreshSave = function (formdata) {
         $scope.SSpreSign.DataId = formdata.DataId;
-       
+        $scope.SSpreSign.Tag = formdata.Tag;
         $scope.SSpreSign.CreateDate = formdata.CreateDate;
         $scope.SSpreSign.CreateBy = formdata.CreateBy;
     }
