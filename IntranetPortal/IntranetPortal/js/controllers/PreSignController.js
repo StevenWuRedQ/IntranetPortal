@@ -54,6 +54,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
             AngularRoot.alert(message)
         } else {
             $scope.preAssign = JSON.parse(preSignRespose.responseText)
+            $scope.preAssign.CheckRequestData = $scope.preAssign.CheckRequestData || { Checks: [] }
             _BBLE = $scope.preAssign.BBLE
 
         }
@@ -170,8 +171,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         return e;
     }
 
-    $scope.preAssign.BBLE = _BBLE
-    $scope.preAssign.CheckRequestData.BBLE = $scope.preAssign.BBLE;
+    
     $scope.preAssign.NeedCheck = true;
     $scope.steps = [{
         title: "Pre Sign",
@@ -214,6 +214,13 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         $http.get('/api/PropertyOffer/isCompleted/'+BBLE).success(function(data){
             $scope.allowEdit = !data;
         })
+        
+        $scope.preAssign.BBLE = _BBLE
+        if($scope.preAssign.CheckRequestData)
+        {
+            $scope.preAssign.CheckRequestData.BBLE = $scope.preAssign.BBLE;
+        }
+        
     }
 
     if (_BBLE) {

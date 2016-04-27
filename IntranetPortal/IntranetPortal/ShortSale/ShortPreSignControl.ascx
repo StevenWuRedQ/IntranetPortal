@@ -133,7 +133,7 @@
             <hr>
             <div class="row form-group">
                 <div class="col-sm-4">
-                    <label>Street nummber</label>
+                    <label>Street number</label>
                     <input class="form-control" ng-model="owner.MailNumber">
                 </div>
                 <div class="col-sm-4">

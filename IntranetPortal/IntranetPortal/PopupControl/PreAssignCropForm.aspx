@@ -73,7 +73,7 @@
                     <div ng-show="step==1" class="wizard-content">
                         <section>
                             <div>
-                                <h4 class="ss_form_title ">Pre Deal <a role="button"  class="btn btn-default pull-right" ng-show="model=='View'&&allowEdit" href="/popupControl/preAssignCropForm.aspx?model=Edit&Id={{preAssign.Id}}"><i class="fa fa-edit"></i> Edit</a></h4>
+                                <h4 class="ss_form_title ">Pre Deal <a role="button" class="btn btn-default pull-right" ng-show="model=='View'&&allowEdit" href="/popupControl/preAssignCropForm.aspx?model=Edit&Id={{preAssign.Id}}"><i class="fa fa-edit"></i>Edit</a></h4>
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item online">
                                         <label class="ss_form_input_title">Property Address</label>
@@ -98,7 +98,7 @@
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Check request</label>
-                                        <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck" ng-disabled="mode=='Edit'"></pt-radio>
+                                        <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck" ng-disabled="model=='Edit'"></pt-radio>
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Manager </label>
@@ -112,16 +112,17 @@
                                 <label class="ss_form_input_title ">Total Check Amount</label>
                                 <input class="ss_form_input " money-mask ng-model="perAssignCtrl.Total_Check_Amount">
                             </li>--%>
-                                    <div ng-show="preAssign.NeedCheck">
-                                        <%--<li class="ss_form_item ">
+
+                                    <%--<li class="ss_form_item ">
                                 <label class="ss_form_input_title ">Check Issued by</label>
                                 <input class="ss_form_input" ng-model="preAssign.CheckIssuedBy" ng-show="CheckTotalAmount()<=100000" />
                                 <input class="ss_form_input" ng-show="CheckTotalAmount()>10000" value="MyIdealProperty" disabled />
                             </li>--%>
-                                        <li class="ss_form_item">
-                                            <label class="ss_form_input_title " ng-class="{ss_warning:CheckTotalAmount() > preAssign.DealAmount}">Total Amount paid for the deal</label>
-                                            <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask />
-                                        </li>
+                                    <li class="ss_form_item">
+                                        <label class="ss_form_input_title " ng-class="{ss_warning:CheckTotalAmount() > preAssign.DealAmount}">Total Amount paid for the deal</label>
+                                        <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask />
+                                    </li>
+                                    <div ng-show="preAssign.NeedCheck">
                                         <li class="ss_form_item">
                                             <label class="ss_form_input_title">Type of Check request</label>
                                             <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type" ng-disabled="mode=='Edit'">
@@ -136,8 +137,8 @@
                                 <input class="ss_form_input " ng-model="perAssignCtrl.Name_On_Check">
                             </li>--%>
                                 </ul>
-                                <div ng-if="!preAssign.NeedSearch" class="alert alert-warning" role="alert" >
-                                    <strong> <i class="fa fa-warning"></i> Warning!</strong> Please make sure you have all the required property information or you have completed a search already.
+                                <div ng-if="!preAssign.NeedSearch" class="alert alert-warning" role="alert">
+                                    <strong><i class="fa fa-warning"></i>Warning!</strong> Please make sure you have all the required property information or you have completed a search already.
                                 </div>
                             </div>
                             <div class="ss_form">
@@ -185,5 +186,5 @@
         </div>
     </div>
     <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>
- 
+
 </asp:Content>

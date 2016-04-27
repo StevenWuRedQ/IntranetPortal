@@ -19,15 +19,15 @@ Public Class ShortSalePreSignForm
                 Dim search = LeadInfoDocumentSearch.GetInstance(bble)
 
                 If record.NeedSearch Then
+                    'remove connection of document search and new offer refer to Jira
+                    'If search Is Nothing Then
+                    '    Server.Transfer("/PortalError.aspx?code=1003")
+                    'End If
 
-                    If search Is Nothing Then
-                        Server.Transfer("/PortalError.aspx?code=1003")
-                    End If
+                    'If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
+                    '    Server.Transfer("/PortalError.aspx?code=1004")
 
-                    If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
-                        Server.Transfer("/PortalError.aspx?code=1004")
-
-                    End If
+                    'End If
                     NeedSearch.Value = True
                 End If
                 If (search IsNot Nothing) Then
@@ -46,7 +46,7 @@ Public Class ShortSalePreSignForm
                     End If 
                 End If
 
-                If ((Not String.IsNullOrEmpty(NeedSearch.Value)) OrElse (Not String.IsNullOrEmpty(txtSearchCompleted.Value))) Then
+                If ((Not String.IsNullOrEmpty(txtSearchCompleted.Value))) Then
                     DivLeadTaxSearchCtrl.Visible = True
                 End If
 

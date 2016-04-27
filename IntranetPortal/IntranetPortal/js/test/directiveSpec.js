@@ -1,10 +1,10 @@
-﻿describe('directives', function () {
-    describe('ssDate', function () {
+﻿describe('directives', function() {
+    describe('ssDate', function() {
         var scope, celem, cscope;
 
-        beforeEach(function () {
+        beforeEach(function() {
             module("PortalApp");
-            inject(function (_$compile_, _$rootScope_) {
+            inject(function(_$compile_, _$rootScope_) {
                 var html = "<input ng-model='xdate' ss-date></input>";
                 scope = _$rootScope_.$new();
                 celem = _$compile_(html)(scope);
@@ -13,7 +13,7 @@
             })
         });
 
-        it("should format date", function () {
+        it("should format date", function() {
             scope.xdate = "2015-12-14T18:05:36.934Z";
             scope.$digest();
             expect(cscope.xdate).toBe("12/14/2015");
@@ -22,13 +22,13 @@
 
     })
 
-    describe('ptInitModel', function () {
+    describe('ptInitModel', function() {
 
         var scope, celem, cscope;
 
-        beforeEach(function () {
+        beforeEach(function() {
             module("PortalApp");
-            inject(function (_$compile_, _$rootScope_) {
+            inject(function(_$compile_, _$rootScope_) {
                 var html = "<input ng-model='xdata' pt-init-model='ydata'></input>";
                 scope = _$rootScope_.$new();
                 celem = _$compile_(html)(scope);
@@ -37,13 +37,13 @@
             })
         })
 
-        it('should ydata if xdata is undefined', function () {
+        it('should ydata if xdata is undefined', function() {
             scope.ydata = 'yes';
             scope.$digest();
             expect(cscope.xdata).toBe('yes');
         })
 
-        it('should xdata if xdata is defined', function () {
+        it('should xdata if xdata is defined', function() {
             scope.xdata = 'no';
             scope.ydata = 'yes';
             scope.$digest();
@@ -52,13 +52,13 @@
         })
     })
 
-    describe('moneyMask', function () {
+    describe('moneyMask', function() {
 
         var scope, celem, cscope;
 
-        beforeEach(function () {
+        beforeEach(function() {
             module("PortalApp");
-            inject(function (_$compile_, _$rootScope_) {
+            inject(function(_$compile_, _$rootScope_) {
                 var html = "<input ng-model='xdata' money-mask></input>";
                 scope = _$rootScope_.$new();
                 celem = _$compile_(html)(scope);
@@ -67,7 +67,7 @@
             })
         })
 
-        it('format money', function () {
+        it('format money', function() {
             scope.xdata = "123456.78";
             scope.$digest();
             expect(celem[0].value).toBe('$123,456.78');
@@ -75,14 +75,14 @@
 
 
     });
-    describe('ptRadio', function () {
+    describe('ptRadio', function() {
 
         var scope, celem, cscope;
 
-        beforeEach(function () {
+        beforeEach(function() {
             module("PortalApp");
-            inject(function (_$compile_, _$rootScope_) {
-                var html = "<input ng-model='xdata' money-mask></input>";
+            inject(function(_$compile_, _$rootScope_) {
+                var html = "<pt-radio model='radio' ng-disabled='varDisabled'></pt-radio>";
                 scope = _$rootScope_.$new();
                 celem = _$compile_(html)(scope);
                 scope.$digest();
@@ -90,12 +90,42 @@
             })
         })
 
-        it('format money', function () {
-            scope.xdata = "123456.78";
+        it('it should disabled all input when set var to disabled', function() {
+            scope.varDisabled = true;
             scope.$digest();
-            expect(celem[0].value).toBe('$123,456.78');
+            var elemContents = celem.contents();
+            expect(elemContents[0].disabled).toBeTruthy();
+            expect(elemContents[2].disabled).toBeTruthy();
+
+        });
+        it('it should not all input when set var to disabled', function() {
+            scope.varDisabled = false;
+            scope.$digest();
+            var elemContents = celem.contents();
+            expect(elemContents[0].disabled).toBeFalsy();
+            expect(elemContents[2].disabled).toBeFalsy();
+
         });
 
+        it('should deselect all input when model is null', function() {
+            //scope.radio = null;
+            scope.$digest();
+            var elemContents = celem.contents();
+           
+            expect(elemContents[0].checked).toBe(false);
+            expect(elemContents[2].checked).toBe(false);
+        });
 
+        it('should only checked frist input when radio value is true and only checked second input when radio is false', function() {
+            scope.radio = true;
+            scope.$digest();
+            var elemContents = celem.contents();
+            expect(elemContents[0].checked).toBe(true);
+            expect(elemContents[2].checked).toBe(false);
+            scope.radio = false;
+            scope.$digest();
+            expect(elemContents[0].checked).toBe(false);
+            expect(elemContents[2].checked).toBe(true);
+        });
     });
 })

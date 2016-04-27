@@ -907,15 +907,19 @@ angular.module("PortalApp")
             defaultValue: '@',
             trueValue: '@',
             falseValue: '@',
-            //ngDisabled: '='
+            ngDisabled: '='
         },
         link: function (scope, el, attrs) {
-            scope.ngDisabled = attrs.ngDisabled;
+            //scope.ngDisabled = attrs.ngDisabled;
             // scope.disabled = attrs.disabled;
             scope.trueValue = scope.trueValue ? scope.trueValue : 'yes';
             scope.falseValue = scope.falseValue ? scope.falseValue : 'no';
             scope.defaultValue = scope.defaultValue === 'true' ? true : false;
-            scope.model = scope.model == null ? scope.defaultValue : scope.model;
+            if(typeof scope.model!='undefined')
+            {
+                scope.model = scope.model == null ? scope.defaultValue : scope.model;
+            }
+            
         }
 
     }
@@ -3108,6 +3112,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
             AngularRoot.alert(message)
         } else {
             $scope.preAssign = JSON.parse(preSignRespose.responseText)
+            $scope.preAssign.CheckRequestData = $scope.preAssign.CheckRequestData || { Checks: [] }
             _BBLE = $scope.preAssign.BBLE
 
         }
@@ -3224,8 +3229,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         return e;
     }
 
-    $scope.preAssign.BBLE = _BBLE
-    $scope.preAssign.CheckRequestData.BBLE = $scope.preAssign.BBLE;
+    
     $scope.preAssign.NeedCheck = true;
     $scope.steps = [{
         title: "Pre Sign",
@@ -3268,6 +3272,13 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         $http.get('/api/PropertyOffer/isCompleted/'+BBLE).success(function(data){
             $scope.allowEdit = !data;
         })
+        
+        $scope.preAssign.BBLE = _BBLE
+        if($scope.preAssign.CheckRequestData)
+        {
+            $scope.preAssign.CheckRequestData.BBLE = $scope.preAssign.BBLE;
+        }
+        
     }
 
     if (_BBLE) {
