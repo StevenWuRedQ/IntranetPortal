@@ -68,6 +68,7 @@
           <Property Name="CheckFor" Type="nvarchar" MaxLength="256" />
           <Property Name="Description" Type="nvarchar" MaxLength="256" />
           <Property Name="Status" Type="int" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="1024" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
@@ -2394,6 +2395,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="Comments" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CheckRequest">
           <Key>
@@ -3592,6 +3594,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySetMapping Name="BusinessChecks">
             <EntityTypeMapping TypeName="IntranetPortalModel.BusinessCheck">
               <MappingFragment StoreEntitySet="BusinessChecks">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />

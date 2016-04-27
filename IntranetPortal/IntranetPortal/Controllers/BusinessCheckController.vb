@@ -40,13 +40,14 @@ Namespace Controllers
             Return Ok(check)
         End Function
 
-        Public Function DeleteBusinessCheck(ByVal id As String) As IHttpActionResult
+        Public Function DeleteBusinessCheck(ByVal id As String, <FromBody> comments As String) As IHttpActionResult
             Dim check = BusinessCheck.GetInstance(id)
             If IsNothing(check) Then
                 Return NotFound()
             End If
 
             check.Status = BusinessCheck.CheckStatus.Canceled
+            check.Comments = comments
 
             Try
                 check.Save(HttpContext.Current.User.Identity.Name)

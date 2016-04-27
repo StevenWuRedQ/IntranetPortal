@@ -23,5 +23,6 @@ Partial Public Class BusinessCheck
     Public Property UpdateBy As String
     Public Property UpdateDate As Nullable(Of Date)
     Public Property Status As Nullable(Of Integer)
+    Public Property Comments As String
 
 End Class
