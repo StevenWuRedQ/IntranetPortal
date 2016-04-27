@@ -44,11 +44,15 @@ Dear <%=  UserName%>,
         <td>Expected Date of Signing: </td>
         <td><%= String.Format("{0:d}", PreSign.ExpectedDate) %> </td>
     </tr>
+    <tr>
+        <td>Deal Amount: </td>
+        <td><%= PreSign.DealAmount %> </td>
+    </tr>
     <% If PreSign.CheckRequestData IsNot Nothing Then %>
     <tr>
         <td>Type of Check Request: </td>
         <td><%= PreSign.CheckRequestData.Type %> </td>
-    </tr>
+    </tr>  
     <% End If %>
     <tr>
         <td>Parties: </td>

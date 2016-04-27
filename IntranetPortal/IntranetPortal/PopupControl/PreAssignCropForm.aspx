@@ -93,7 +93,7 @@
                                         <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date ng-if="model=='View'" />
                                     </li>
                                     <li class="ss_form_item">
-                                        <label class="ss_form_input_title">Doc Search</label>
+                                        <label class="ss_form_input_title">Doc Search Request</label>
                                         <pt-radio name="PreAssign_Needdosearch0" model="preAssign.NeedSearch"></pt-radio>
                                     </li>
                                     <li class="ss_form_item">
@@ -128,7 +128,7 @@
                                 <input class="ss_form_input" ng-show="CheckTotalAmount()>10000" value="MyIdealProperty" disabled />
                             </li>--%>
                                         <li class="ss_form_item">
-                                            <label class="ss_form_input_title " ng-class="{ss_warning:CheckTotalAmount() > preAssign.DealAmount}">Total Amount paid for the deal</label>
+                                            <label class="ss_form_input_title " ng-class="{ss_warning:CheckTotalAmount() > preAssign.DealAmount}"> Total HOI Amount</label>
                                             <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask />
                                         </li>
                                         <li class="ss_form_item">
@@ -146,7 +146,7 @@
                             </li>--%>
                                 </ul>
                                 <div ng-if="!preAssign.NeedSearch" class="alert alert-warning" role="alert">
-                                    <strong><i class="fa fa-warning"></i>Warning!</strong> Please make sure you have all the required property information or you have completed a search already.
+                                    <strong><i class="fa fa-warning"></i> Warning!</strong> Please make sure a Doc Search was already Done.
                                 </div>
                             </div>
                             <div class="ss_form">

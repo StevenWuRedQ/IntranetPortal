@@ -152,7 +152,7 @@ Namespace Controllers
 
                 Dim emails = Employee.GetEmpsEmails(finMgr.ToArray)
                 If Not String.IsNullOrEmpty(emails) Then
-                    svr.SendEmailByControlWithCC(emails, Employee.GetInstance(record.CreateBy).Email, "Checks Request from " & record.CreateBy, "PreSignNotify", params)
+                    svr.SendEmailByControlWithCC(emails, Employee.GetInstance(record.CreateBy).Email, "Checks Request from " & record.CreateBy & " about " & record.Title, "PreSignNotify", params)
                 End If
             End If
         End Sub
