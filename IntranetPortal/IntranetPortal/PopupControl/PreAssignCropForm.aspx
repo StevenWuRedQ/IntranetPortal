@@ -34,7 +34,7 @@
         <div class="row">
             <div class="col-md-12" ng-hide="!preSignList">
                 <div style="padding: 20px">
-                    <h2 ng-if="role==null">Pre Deal Request List</h2>
+                    <h2 ng-if="role==null">Home Owner Incentive Request List</h2>
                     <h2 ng-if="role=='finance'">Check Requests List</h2>
                     <div dx-data-grid="preSignRecordsGridOpt">
                         <div data-options="dxTemplate: {name: 'detail'}">
@@ -73,7 +73,7 @@
                     <div ng-show="step==1" class="wizard-content">
                         <section>
                             <div>
-                                <h4 class="ss_form_title ">Pre Deal <a role="button" class="btn btn-default pull-right" ng-show="model=='View'&&allowEdit" href="/popupControl/preAssignCropForm.aspx?model=Edit&Id={{preAssign.Id}}"><i class="fa fa-edit"></i>Edit</a></h4>
+                                <h4 class="ss_form_title ">Home Owner Incentive <a role="button" class="btn btn-default pull-right" ng-show="model=='View'&&allowEdit" href="/popupControl/preAssignCropForm.aspx?model=Edit&Id={{preAssign.Id}}"><i class="fa fa-edit"></i>Edit</a></h4>
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item online">
                                         <label class="ss_form_input_title">Property Address</label>

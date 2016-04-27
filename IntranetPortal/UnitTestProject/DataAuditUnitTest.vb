@@ -132,5 +132,41 @@ Imports IntranetPortal.Data
     End Sub
 
 
+    <TestMethod()> Public Sub FormatDecimalValue_ReturnValueOfFormat()
+        Dim log As New AuditLog With {
+            .TableName = "PreSignRecord",
+            .ColumnName = "DealAmount",
+            .OriginalValue = "5021",
+            .NewValue = "1204"
+            }
+
+        Assert.IsInstanceOfType(log.FormatNewValue, GetType(Decimal))
+        Assert.IsInstanceOfType(log.FormatOriginalValue, GetType(Decimal))
+
+    End Sub
+
+    <TestMethod()> Public Sub FormatJarrayValue_ReturnValueOfFormat()
+        Dim log As New AuditLog With {
+            .TableName = "PreSignRecord",
+            .ColumnName = "Parties",
+            .OriginalValue = <string>
+                                 [
+                                      {
+                                        "Name": "Williams, Michelle"
+                                      }
+                                    ]
+                             </string>,
+            .NewValue = <string>
+                                [
+                                  {
+                                    "Name": "Yoon, Ick Kyung"
+                                  }
+                                ]
+                         </string>
+        }
+
+        Assert.AreEqual(log.FormatOriginalValue, "Williams, Michelle")
+
+    End Sub
 
 End Class
