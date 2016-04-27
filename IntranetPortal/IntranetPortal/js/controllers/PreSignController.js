@@ -241,7 +241,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         }
 
         if ($scope.preAssign.NeedCheck && $scope.preAssign.CheckRequestData.Checks.length < 1) {
-            $scope.alert("If need request check please fill at least one check!");
+            $scope.alert("Check Request is enabled. Please enter checks to be issued.");
             return false;
         }
 

@@ -151,6 +151,10 @@ Public Class HomeOwnerInfo
     End Function
 
     Public Function BuilderDate(dt As DataAPI.Date) As String
+        If dt Is Nothing Then
+            Return ""
+        End If
+
         Return String.Format("{0}/{1}/{2}", dt.monthField, dt.dayField, dt.yearField)
     End Function
 

@@ -72,6 +72,19 @@ Namespace Controllers
             Try
                 record.Save(HttpContext.Current.User.Identity.Name)
 
+                If record.NeedSearch Then
+                    Dim docController As New LeadInfoDocumentSearchesController
+                    Dim docSearch = LeadInfoDocumentSearch.GetInstance(record.BBLE)
+                    If docSearch IsNot Nothing Then
+                        If docSearch.Status = LeadInfoDocumentSearch.SearchStauts.NewSearch Then
+                            docSearch.ExpectedSigningDate = record.ExpectedDate
+                            docController.PutLeadInfoDocumentSearch(docSearch.BBLE, docSearch)
+                        End If
+                    Else
+                        docController.PostLeadInfoDocumentSearch(New LeadInfoDocumentSearch With {.BBLE = record.BBLE, .ExpectedSigningDate = record.ExpectedDate})
+                    End If
+                End If
+
                 SendNotification(record, True)
 
             Catch ex As Exception
@@ -139,7 +152,7 @@ Namespace Controllers
 
                 Dim emails = Employee.GetEmpsEmails(finMgr.ToArray)
                 If Not String.IsNullOrEmpty(emails) Then
-                    svr.SendEmailByControlWithCC(emails, Employee.GetInstance(record.CreateBy).Email, "Checks Request from " & record.CreateBy, "PreSignNotify", params)
+                    svr.SendEmailByControlWithCC(emails, Employee.GetInstance(record.CreateBy).Email, "Checks Request from " & record.CreateBy & " about " & record.Title, "PreSignNotify", params)
                 End If
             End If
         End Sub
