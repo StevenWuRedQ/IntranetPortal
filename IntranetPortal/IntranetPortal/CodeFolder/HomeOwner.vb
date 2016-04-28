@@ -258,6 +258,12 @@ Partial Public Class HomeOwner
         End Using
     End Sub
 
+    Public ReadOnly Property SSN As String
+        Get
+            Return TLOLocateReport.namesField(0).firstNameField
+        End Get
+    End Property
+
     <IgnoreDataMember>
     Public ReadOnly Property FirstName As String
         Get
