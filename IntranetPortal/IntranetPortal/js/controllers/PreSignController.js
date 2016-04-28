@@ -147,7 +147,11 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
     }
     $scope.CancelCheck = function (e) {
         e.cancel = true;
-
+        if (e.data.Status == 1)
+        {
+            $('#gridChecks').dxDataGrid('instance').refresh();
+            return;
+        }
         AngularRoot.prompt("Please input void reason", function (voidReason) {
             if (voidReason) {
                 var response = $.ajax({
@@ -179,11 +183,11 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                     AngularRoot.alert(message);
 
                 };
-                $('#gridChecks').dxDataGrid('instance').refresh();
+               
             }
         })
 
-
+        $('#gridChecks').dxDataGrid('instance').refresh();
     }
 
 
@@ -514,7 +518,10 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                         format: 'shortDate'
                     }, {
                         dataField: 'Description'
-                    }],
+                    }, {
+                        dataField: 'Comments',
+                        caption: 'Void Reason'
+                    }], 
                     onRowPrepared: $scope.CheckRowPrepared,
                 }
                 $("<div>").text("Checks: ").appendTo(container);

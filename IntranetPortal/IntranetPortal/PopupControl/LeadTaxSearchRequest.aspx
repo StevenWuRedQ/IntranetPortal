@@ -33,6 +33,11 @@
                                                     <div class="font_size_bold" id="LegalTabHead">Searches</div>
                                                 </a>
                                             </li>
+                                            <li style="margin-right: 30px; color: #ffa484; float: right">
+
+                                                <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="Save" ng-click="SearchComplete(true)"></i>
+
+                                            </li>
 
                                         </ul>
                                     </div>
@@ -40,11 +45,13 @@
 
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="LegalTab">
+                                       
                                         <div style="overflow: auto; height: 830px; padding: 0 20px">
 
+                                            <div class="alert alert-warning" style="margin-top:20px;font-size:16px" ng-show="DocSearch.Status != 1"> <i class="fa fa-warning"></i> <strong>Warning!</strong> Document search didn't completed yet!</div>
                                             <div class="ss_form">
                                                 <h4 class="ss_form_title ">Request Info
-                            <pt-collapse model="CollapseRequestInfo" />
+                                                <pt-collapse model="CollapseRequestInfo" />
                                                 </h4>
                                                 <div class="ss_border" collapse="CollapseRequestInfo">
                                                     <ul class="ss_form_box clearfix">
@@ -137,14 +144,14 @@
                                                     <div class="ss_border">
                                                         <ul class="ss_form_box clearfix" collapse="LiensInfoCollapse">
                                                             <li class="ss_form_item ">
-                                                                <label class="ss_form_input_title">Judgments</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.judgments" money-mask/></li>
+                                                                <label class="ss_form_input_title">Judgments</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.judgments" money-mask /></li>
 
                                                             <li class="ss_form_item ">
                                                                 <label class="ss_form_input_title">Irs Tax Lien</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.irsTaxLien" money-mask /></li>
                                                             <li class="ss_form_item ">
                                                                 <label class="ss_form_input_title">NYS Tax Lien</label>
-                                                                  <pt-radio name="has_NysTaxLien" model="DocSearch.LeadResearch.hasNysTaxLien"></pt-radio>
-                                                               
+                                                                <pt-radio name="has_NysTaxLien" model="DocSearch.LeadResearch.hasNysTaxLien"></pt-radio>
+
                                                             </li>
                                                             <li class="ss_form_item ">
                                                                 <label class="ss_form_input_title">Fannie</label>
@@ -220,13 +227,13 @@
                                                                 <label class="ss_form_input_title">Documents Received On</label>
                                                                 <input class="ss_form_input" ng-model="DocSearch.LeadResearch.DocumentsReceivedOn" ss-date />
                                                             </li>
-                                                            <li class="ss_form_item ">
+                                                            <%-- <li class="ss_form_item ">
                                                                 <label class="ss_form_input_title">&nbsp;</label>
                                                                 <input type="button" value="Complete" class="rand-button rand-button-blue rand-button-pad" ng-click="SearchComplete()">
-                                                            </li>
-                                                             <li class="ss_form_item ">
+                                                            </li>--%>
+                                                            <li class="ss_form_item " ng-show="DocSearch.Status!=1">
                                                                 <label class="ss_form_input_title">&nbsp;</label>
-                                                                <input type="button" value="Save" class="rand-button rand-button-blue rand-button-pad" ng-click="SearchComplete(true)">
+                                                                <input type="button" value="Complete" class="rand-button rand-button-blue rand-button-pad" ng-click="SearchComplete()">
                                                             </li>
 
                                                         </ul>
@@ -258,7 +265,7 @@
                                 </ul>
 
                                 <div style="padding: 20px" id="searchReslut">
-                                    <uc1:LeadSearchSummery runat="server" id="LeadSearchSummery" />
+                                    <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />
                                 </div>
                             </div>
 
@@ -276,76 +283,5 @@
             angular.element(document.getElementById('LeadTaxSearchCtrl')).scope().init(bble);
         }
     </script>
-   <%-- <script>
-        var portalApp = angular.module('PortalApp');
 
-        portalApp.controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
-            $scope.ptContactServices = ptContactServices;
-            leadsInfoBBLE = $('#BBLE').val();
-            //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
-            $scope.init = function (bble) {
-
-                leadsInfoBBLE = bble || $('#BBLE').val();
-                if (!leadsInfoBBLE) {
-                    console.log("Can not load page without BBLE !")
-                    return;
-                }
-
-
-
-
-                $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
-                success(function (data, status, headers, config) {
-                    $scope.DocSearch = data;
-                    $http.get('/Services/TeamService.svc/GetTeam?userName=' + $scope.DocSearch.CreateBy).success(function (data) {
-                        $scope.DocSearch.team = data;
-
-                    });
-
-                    $http.get("/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + leadsInfoBBLE).
-                      success(function (data1, status, headers, config) {
-                          $scope.LeadsInfo = data1;
-                          $scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {};
-                          $scope.DocSearch.LeadResearch.ownerName = $scope.DocSearch.LeadResearch.ownerName || data1.Owner;
-                          $scope.DocSearch.LeadResearch.waterCharges = $scope.DocSearch.LeadResearch.waterCharges || data1.WaterAmt;
-                          $scope.DocSearch.LeadResearch.propertyTaxes = $scope.DocSearch.LeadResearch.propertyTaxes || data1.TaxesAmt;
-                          $scope.DocSearch.LeadResearch.mortgageAmount = $scope.DocSearch.LeadResearch.mortgageAmount || data1.C1stMotgrAmt;
-                          $scope.DocSearch.LeadResearch.secondMortgageAmount = $scope.DocSearch.LeadResearch.secondMortgageAmount || data.C2ndMotgrAmt;
-
-                      }).error(function (data, status, headers, config) {
-                          alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
-                      });
-
-                }).error(function (data, status, headers, config) {
-                    alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
-                });
-            }
-
-            $scope.init(leadsInfoBBLE)
-            $scope.SearchComplete = function (isSave) {
-                $scope.DocSearch.Status = 1;
-                $scope.DocSearch.IsSave = isSave
-                $scope.DocSearch.ResutContent = $("#searchReslut").html();
-                $.ajax({
-                    type: "PUT",
-                    url: '/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE,
-                    data: JSON.stringify($scope.DocSearch),
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    success: function (data) {
-
-                        alert(isSave ? 'Save success!' : 'Lead info search completed !');
-                        if (typeof gridCase != 'undefined')
-                        {
-                            gridCase.Refresh();
-                        }
-                    },
-                    error: function (data) {
-                        alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-                    }
-
-                });
-            }
-        });
-    </script>--%>
 </asp:Content>
