@@ -67,6 +67,9 @@
                                                         <li class="ss_form_item ">
                                                             <label class="ss_form_input_title">Owner Name</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.ownerName" />
                                                         </li>
+                                                        <li class="ss_form_item ">
+                                                            <label class="ss_form_input_title">Owner SSN</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.ownerSSN" />
+                                                        </li>
                                                         <li class="ss_form_item " style="width: 97%">
                                                             <label class="ss_form_input_title">Owner Address</label>
                                                             <input class="ss_form_input" ng-model="DocSearch.LeadResearch.ownerAddress" />

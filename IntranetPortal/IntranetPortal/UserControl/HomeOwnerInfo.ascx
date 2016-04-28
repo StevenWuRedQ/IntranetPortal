@@ -109,7 +109,7 @@
                 <div class="form_div_node form_div_no_float form_div_node_no_under_line" style="width: 100%">
                     <span class="form_input_title">SSN</span>
                     <div class="clearfix">
-                        <%=If(TLOLocateReport.sSNField IsNot Nothing, TLOLocateReport.sSNField.sSNField, "") %>&nbsp;
+                        <%=If(HomeOwnerInfo IsNot Nothing, HomeOwnerInfo.Last4SSN, "") %>&nbsp;
                     </div>
                 </div>
             </td>

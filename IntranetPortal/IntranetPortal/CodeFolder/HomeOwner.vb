@@ -271,7 +271,27 @@ Partial Public Class HomeOwner
 
     Public ReadOnly Property SSN As String
         Get
-            Return TLOLocateReport.namesField(0).firstNameField
+            If TLOLocateReport IsNot Nothing AndAlso TLOLocateReport.sSNField IsNot Nothing Then
+                Return TLOLocateReport.sSNField.sSNField
+            End If
+
+            Return Nothing
+        End Get
+    End Property
+
+    Public ReadOnly Property Last4SSN As String
+        Get
+            Dim ssnField = SSN
+            If ssnField IsNot Nothing AndAlso ssnField.Length >= 4 Then
+                'Regex.Replace("")
+                If ssnField.Contains("x") OrElse ssnField.Contains("X") Then
+                    Return ssnField
+                End If
+
+                Return ssnField.Substring(0, 5) + "xxxx"
+            End If
+
+            Return Nothing
         End Get
     End Property
 
