@@ -60,8 +60,7 @@
         }
 </style>
 
-<div ng-controller="AuditLogController" id="">
-    
+<div ng-controller="AuditLogController" id="">    
     
     <div ng-repeat="(key, prop) in AuditLogs" class="audit_log_block">
         <h5 ng-class="{alert-success:$index==0}"><strong> {{prop[0].UserName}}</strong> <span style="color:blue;">{{prop[0].EventType==0?'first created this form':'made changes'}} on {{key | date:"MM/dd/yyyy HH:mm"}}</span>  </h5>
@@ -74,8 +73,8 @@
             </tr>
             <tr ng-repeat="log in prop" style="border: none">
                 <td style="width: 20%">{{log.ColumnName}}</td>
-                <td style="width: 40%">{{log.OriginalValue}}</td>
-                <td style="width: 40%">{{log.NewValue}}</td>
+                <td style="width: 40%">{{log.FormatOriginalValue}}</td>
+                <td style="width: 40%">{{log.FormatNewValue}}</td>
             </tr>
         </table>
     </div>

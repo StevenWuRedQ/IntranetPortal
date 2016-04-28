@@ -261,17 +261,14 @@
                                             <option ng-repeat="s in  SSpreSign.assignCrop.signers track by $index">{{s}}</option>
                                         </select>
                                     </li>
-
-
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">&nbsp;</label>
                                         <input type="button" value="Assign Crop" class="rand-button rand-button-blue rand-button-pad" ng-click="assginCropClick()" ng-show="!SSpreSign.assignCrop.Crop">
                                     </li>
-
                                 </ul>
                             </div>
                             <div class="ss_form" ng-show="SSpreSign.assignCrop.Crop" ng-class="{ss_warning:!SSpreSign.assignCrop.Crop}" data-message="Please assign Corp to continue!">
-                                <div class="alert alert-success" role="alert"><strong>{{SSpreSign.assignCrop.Crop}}</strong> has been assigned to the property at <strong>{{SSpreSign.PropertyAddress}}</strong> . </div>
+                                <div class="alert alert-success" role="alert"><strong>{{SSpreSign.assignCrop.Crop}}</strong> <span ng-show="SSpreSign.assignCrop.CropData.Signer"> Singer is : <strong>{{SSpreSign.assignCrop.CropData.Signer}} </strong></span>  <br /> has been assigned to the property at <strong>{{SSpreSign.PropertyAddress}}</strong> . </div>
                             </div>
                         </div>
                     </div>
@@ -633,12 +630,15 @@
                             <div class="well">
                                 Congratulations! You are in the last step. Please click <strong>Generate document</strong> to download document(s).
                             </div>
+                            <div class="alert alert-warning" role="alert">
+                                <i class="fa fa-warning"></i> Warning! This Step is not Reversible. Press <strong>Prev</strong> to review the data before Generating Documents.
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer" style="margin-top: 30px;">
                     <button type="button" class="btn btn-default" ng-show="step>1" ng-click="PrevStep()">< Prev</button>
-                    <button type="button" class="btn btn-default" ng-click="GenerateDocument()" ng-show="step==MaxStep()">Generate document</button>
+                    <button type="button" class="btn btn-default" ng-click="GenerateDocument()" ng-show="step==MaxStep()">Generate documents</button>
                     <button type="button" class="btn btn-default" ng-show="step<MaxStep()" ng-click="NextStep()">Next ></button>
                 </div>
             </div>

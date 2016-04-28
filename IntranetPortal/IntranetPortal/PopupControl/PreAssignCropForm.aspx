@@ -92,10 +92,10 @@
                                         <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date required data-date-start-date="+0d" ng-if="model!='View'" />
                                         <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date ng-if="model=='View'" />
                                     </li>
-                                    <li class="ss_form_item">
+                                  <%--  <li class="ss_form_item">
                                         <label class="ss_form_input_title">Doc Search</label>
                                         <pt-radio name="PreAssign_Needdosearch0" model="preAssign.NeedSearch"></pt-radio>
-                                    </li>
+                                    </li>--%>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Check request</label>
                                         <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck" ng-disabled="model=='Edit'"></pt-radio>
@@ -137,9 +137,9 @@
                                 <input class="ss_form_input " ng-model="perAssignCtrl.Name_On_Check">
                             </li>--%>
                                 </ul>
-                                <div ng-if="!preAssign.NeedSearch" class="alert alert-warning" role="alert">
-                                    <strong><i class="fa fa-warning"></i>Warning!</strong> Please make sure you have all the required property information or you have completed a search already.
-                                </div>
+                               <%-- <div ng-if="!preAssign.NeedSearch" class="alert alert-warning" role="alert">
+                                    <strong><i class="fa fa-warning"></i>Warning!</strong> Please make sure that you have completed a Doc search already.
+                                </div>--%>
                             </div>
                             <div class="ss_form">
                                 <h4 class="ss_form_title " ng-class="{ss_warning:preAssign.Parties.length<1 }">Parties <%--({{preAssign.Parties.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.Parties')">--%></i></h4>

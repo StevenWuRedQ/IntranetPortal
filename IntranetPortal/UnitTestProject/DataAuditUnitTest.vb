@@ -160,12 +160,19 @@ Imports IntranetPortal.Data
                                 [
                                   {
                                     "Name": "Yoon, Ick Kyung"
-                                  }
+                                  }, {
+                                        "Name": "Smith, Bob"
+                                      }
                                 ]
                          </string>
         }
 
         Assert.AreEqual(log.FormatOriginalValue, "Williams, Michelle")
+        Assert.AreEqual(log.FormatNewValue, "Yoon, Ick Kyung;Smith, Bob")
+
+        log.OriginalValue = Nothing
+
+        Assert.AreEqual(log.FormatOriginalValue, Nothing)
 
     End Sub
 

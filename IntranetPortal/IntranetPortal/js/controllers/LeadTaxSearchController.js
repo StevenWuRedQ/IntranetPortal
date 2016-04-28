@@ -1,6 +1,7 @@
 ﻿angular.module('PortalApp')
     .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
-    $scope.ptContactServices = ptContactServices;
+        //New Model(this,arguments)
+        $scope.ptContactServices = ptContactServices;
     leadsInfoBBLE = $('#BBLE').val();
     //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
     $scope.init = function (bble) {
@@ -39,7 +40,10 @@
 
     $scope.init(leadsInfoBBLE)
     $scope.SearchComplete = function (isSave) {
-        $scope.DocSearch.Status = 1;
+        if (!isSave)
+        {
+            $scope.DocSearch.Status = 1;
+        }
         $scope.DocSearch.IsSave = isSave
         $scope.DocSearch.ResutContent = $("#searchReslut").html();
         $.ajax({

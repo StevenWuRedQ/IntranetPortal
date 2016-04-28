@@ -623,7 +623,7 @@
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="PreDealsMenu" Text="Pre Deals" NavigationUrl="/PopupControl/PreAssignCropForm.aspx?model=List" ShowAmount="false">
+      <PortalNavItem Name="PreDealsMenu" Text="HOI" NavigationUrl="/PopupControl/PreAssignCropForm.aspx?model=List" ShowAmount="false">
         <UserRoles>OfficeManager-*</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>

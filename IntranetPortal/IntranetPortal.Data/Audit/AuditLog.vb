@@ -2,6 +2,7 @@
 Imports System.Data.Entity.Infrastructure
 Imports System.Reflection
 Imports Newtonsoft.Json.Linq
+Imports System.ComponentModel.DataAnnotations
 
 ''' <summary>
 ''' The Audit log model
@@ -28,44 +29,64 @@ Partial Class AuditLog
         End Using
     End Function
 
-    Public ReadOnly Property FormatOriginalValue As Object
+    Public ReadOnly Property FormatOriginalValue As String
         Get
             Return FormatValue(Me.OriginalValue)
         End Get
     End Property
 
-    Public ReadOnly Property FormatNewValue As Object
+    Public ReadOnly Property FormatNewValue As String
         Get
             Return FormatValue(Me.NewValue)
         End Get
     End Property
 
-    Private Function FormatValue(value As String) As Object
-        Dim tp = Type.GetType("IntranetPortal.Data." & Me.TableName)
-        Dim prop As PropertyInfo = tp.GetProperty(Me.ColumnName)
-
-        If prop.GetCustomAttribute(GetType(JsonConverterAttribute)) IsNot Nothing Then
-            Dim jsconvert = CType(prop.GetCustomAttribute(GetType(JsonConverterAttribute)), JsonConverterAttribute)
-            Select Case jsconvert.ConverterType
-                Case GetType(Core.JsArrayToStringConverter)
-                    Dim data = JArray.Parse(value)
-                    Dim result As New List(Of String)
-                    For Each content In data.Children(Of JObject)
-                        For Each propValue In content.Properties()
-                            result.Add(propValue.Value.ToString())
-                        Next
-                    Next
-
-                    Return String.Join(";", result.ToArray)
-
-                Case GetType(Core.JsObjectToStringConverter)
-
-                Case Else
-                    Return value
-            End Select
+    Private Function FormatValue(value As String) As String
+        If String.IsNullOrEmpty(value) Then
+            Return value
         End If
 
-        Return CTypeDynamic(Me.OriginalValue, prop.PropertyType)
+        Dim prop = GetProperty(Me.TableName, Me.ColumnName)
+
+        If prop IsNot Nothing AndAlso prop.GetCustomAttribute(GetType(JsonConverterAttribute)) IsNot Nothing Then
+            Return FormatJSONTypeValue(prop, value)
+        End If
+
+        Return FormatSimpleTypeValue(prop, value)
+    End Function
+
+    Private Function FormatSimpleTypeValue(prop As PropertyInfo, value As String) As String
+        Dim data = CTypeDynamic(value, prop.PropertyType)
+        Select Case prop.PropertyType
+            Case GetType(System.Decimal), GetType(System.Decimal?)
+                Return String.Format("{0:c}", data)
+            Case GetType(DateTime), GetType(System.DateTime?)
+                Return String.Format("{0:d}", data)
+            Case Else
+                Return data
+        End Select
+    End Function
+
+    Private Function FormatJSONTypeValue(prop As PropertyInfo, value As String) As String
+        Dim jsconvert = CType(prop.GetCustomAttribute(GetType(JsonConverterAttribute)), JsonConverterAttribute)
+        Select Case jsconvert.ConverterType
+            Case GetType(Core.JsArrayToStringConverter)
+                Dim data = JArray.Parse(value)
+                Dim result As New List(Of String)
+                For Each content In data.Children(Of JObject)
+                    For Each propValue In content.Properties()
+                        result.Add(propValue.Value.ToString())
+                    Next
+                Next
+
+                Return String.Join(";", result.ToArray)
+            Case GetType(Core.JsObjectToStringConverter)
+
+            Case Else
+                Return value
+        End Select
+
+        Return value
     End Function
 
     Public Enum LogType
@@ -74,8 +95,29 @@ Partial Class AuditLog
         Deleted = 2
     End Enum
 
+    Private Shared _objectProperties As New Dictionary(Of String, PropertyInfo)
 
+    Private Function GetProperty(objName As String, propName As String) As PropertyInfo
+        Dim key = String.Format("{0}-{1}", objName, propName)
 
+        If Not _objectProperties.ContainsKey(key) Then
+
+            Dim tp = Type.GetType("IntranetPortal.Data." & objName)
+            Dim prop As PropertyInfo = tp.GetProperty(propName)
+
+            Dim tpAttrs = tp.GetCustomAttribute(GetType(MetadataTypeAttribute), True)
+            If tpAttrs IsNot Nothing Then
+                Dim metaType = CType(tpAttrs, MetadataTypeAttribute).MetadataClassType
+                If metaType.GetProperty(propName) IsNot Nothing Then
+                    prop = metaType.GetProperty(propName)
+                End If
+            End If
+
+            _objectProperties.Add(key, prop)
+        End If
+
+        Return _objectProperties(key)
+    End Function
 End Class
 
 ''' <summary>

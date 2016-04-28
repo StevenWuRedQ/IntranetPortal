@@ -61,7 +61,7 @@
         If _messages Is Nothing Then
             _messages = New List(Of CustomErrorMsg)
             _messages.Add(New CustomErrorMsg() With {.Code = 1001, .Description = "UnauthorizedAccess", .Message = "Sorry, you do not have permission to view this case. Thank you."})
-            _messages.Add(New CustomErrorMsg() With {.Code = 1002, .Description = "Service Not Available", .Message = "We are sorry, but you cannot create an offer for this property. Please create a Pre-Deal. Thank you."})
+            _messages.Add(New CustomErrorMsg() With {.Code = 1002, .Description = "Service Not Available", .Message = "We are sorry, but you cannot create an offer for this property. Please create a HOI. Thank you."})
             _messages.Add(New CustomErrorMsg() With {.Code = 1003, .Description = "Service Not Available", .Message = "We are sorry, but you cannot create an HOI for this property. Please check if the Document Search is Complete. Thank you."})
             _messages.Add(New CustomErrorMsg() With {.Code = 1004, .Description = "Service Not Available", .Message = "We are sorry, but you cannot create an HOI for this property. The document search is not done yet. Thank you."})
         End If
