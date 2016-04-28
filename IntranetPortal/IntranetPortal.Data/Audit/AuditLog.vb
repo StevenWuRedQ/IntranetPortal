@@ -1,5 +1,7 @@
 ﻿Imports Newtonsoft.Json
 Imports System.Data.Entity.Infrastructure
+Imports System.Reflection
+Imports Newtonsoft.Json.Linq
 
 ''' <summary>
 ''' The Audit log model
@@ -26,12 +28,53 @@ Partial Class AuditLog
         End Using
     End Function
 
+    Public ReadOnly Property FormatOriginalValue As Object
+        Get
+            Return FormatValue(Me.OriginalValue)
+        End Get
+    End Property
+
+    Public ReadOnly Property FormatNewValue As Object
+        Get
+            Return FormatValue(Me.NewValue)
+        End Get
+    End Property
+
+    Private Function FormatValue(value As String) As Object
+        Dim tp = Type.GetType("IntranetPortal.Data." & Me.TableName)
+        Dim prop As PropertyInfo = tp.GetProperty(Me.ColumnName)
+
+        If prop.GetCustomAttribute(GetType(JsonConverterAttribute)) IsNot Nothing Then
+            Dim jsconvert = CType(prop.GetCustomAttribute(GetType(JsonConverterAttribute)), JsonConverterAttribute)
+            Select Case jsconvert.ConverterType
+                Case GetType(Core.JsArrayToStringConverter)
+                    Dim data = JArray.Parse(value)
+                    Dim result As New List(Of String)
+                    For Each content In data.Children(Of JObject)
+                        For Each propValue In content.Properties()
+                            result.Add(propValue.Value.ToString())
+                        Next
+                    Next
+
+                    Return String.Join(";", result.ToArray)
+
+                Case GetType(Core.JsObjectToStringConverter)
+
+                Case Else
+                    Return value
+            End Select
+        End If
+
+        Return CTypeDynamic(Me.OriginalValue, prop.PropertyType)
+    End Function
 
     Public Enum LogType
         Added = 0
         Modified = 1
         Deleted = 2
     End Enum
+
+
 
 End Class
 

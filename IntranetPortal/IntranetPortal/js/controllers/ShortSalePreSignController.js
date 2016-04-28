@@ -97,7 +97,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
                 $scope.refreshSave(formdata);
                 location.reload();
             });
-
         })
     }
     $scope.shortSaleInfoNext = function () {
@@ -118,14 +117,14 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             o.PropertyAddress = $scope.SSpreSign.PropertyAddress;
             return o
         });
-
-
+        
         _dealSheet.ContractOrMemo.Sellers = $.extend(true, _dealSheet.ContractOrMemo.Sellers || [], _sellers);
         _dealSheet.Deed.Sellers = $.extend(true, _dealSheet.Deed.Sellers || [], _sellers);
         _dealSheet.CorrectionDeed.Sellers = $.extend(true, _dealSheet.CorrectionDeed.Sellers || [], _sellers);
         _dealSheet.Deed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
         return true;
     }
+    
     $scope.$watch('SSpreSign.assignCrop.Name', function (newValue, oldValue) {
         if (newValue) {
             var team = newValue;
@@ -133,8 +132,8 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
                 $scope.SSpreSign.assignCrop.signers = signers
             });
         }
-
     });
+   
     $scope.constractFromData = function () {
         var ss = ScopeHelper.getShortSaleScope();
 
