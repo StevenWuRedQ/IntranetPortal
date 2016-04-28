@@ -37,7 +37,7 @@
                     <h2 ng-if="role==null">Home Owner Incentive Request List</h2>
                     <h2 ng-if="role=='finance'">Check Requests List</h2>
                     <div dx-data-grid="preSignRecordsGridOpt">
-                        <div data-options="dxTemplate: {name: 'detail'}">
+                       <%-- <div data-options="dxTemplate: {name: 'detail'}">
                             <div class="internal-grid-container">
                                 <div>Checks :</div>
                                 <div class="internal-grid" dx-data-grid="{
@@ -58,7 +58,7 @@
 			                    }">
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
             </div>

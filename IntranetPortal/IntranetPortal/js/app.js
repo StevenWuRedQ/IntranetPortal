@@ -11,8 +11,12 @@ controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootSc
         $rootScope.alertMessage = message ? message : '';
         $rootScope.AlertModal = $uibModal.open({
             templateUrl: 'AlertModal',
+           
         });
     }
+    
+
+   
 
     $rootScope.alertOK = function () {
         $rootScope.AlertModal.close();
@@ -36,6 +40,7 @@ controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootSc
        
     }
 
+   
     $rootScope.confirmNo = function () {
         $rootScope.ConfirmModal.close(false);
         if ($rootScope.ConfirmModal.confrimFunc) {
@@ -43,7 +48,30 @@ controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootSc
         }
     }
 
+    $rootScope.prompt = function (message, promptFunc) {
+        $rootScope.promptMessage = message ? message : '';
+        $rootScope.promptModalTxt = '';
+        $rootScope.promptModal = $uibModal.open({
+            templateUrl: 'PromptModal'
+        });
+        $rootScope.promptModal.promptFunc = promptFunc;
+    }
 
+    $rootScope.promptYes = function () {
+        $rootScope.promptModal.close($rootScope.promptModalTxt);
+        if ($rootScope.promptModal.promptFunc) {
+            //UI Modal use async call send result so use jquery instand now 
+            $rootScope.promptModal.promptFunc($("#promptModalTxt").val());
+        }
+        
+    }
+
+    $rootScope.promptNo = function () {
+        $rootScope.promptModal.close(false);
+        if ($rootScope.promptModal.promptFunc) {
+            $rootScope.promptModal.promptFunc(null)
+        }
+    }
     $rootScope.showLoading = function (divId) {
         $($rootScope.loadingCover).show();
     }
