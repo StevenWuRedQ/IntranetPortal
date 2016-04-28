@@ -81,6 +81,8 @@ Public Class CheckRequest
             If ctx.CheckRequests.Any(Function(cr) cr.RequestId = Me.RequestId) Then
                 Me.UpdateBy = saveBy
                 Me.UpdateDate = DateTime.Now
+                Me.CheckAmount = Checks.Where(Function(c) c.Status <> BusinessCheck.CheckStatus.Canceled).Sum(Function(c) c.Amount)
+
                 ctx.Entry(Me).State = Entity.EntityState.Modified
                 ctx.Entry(Me).OriginalValues.SetValues(ctx.Entry(Me).GetDatabaseValues)
             Else
