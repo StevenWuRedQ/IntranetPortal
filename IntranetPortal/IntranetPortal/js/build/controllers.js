@@ -1641,17 +1641,20 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
 }]);
 var portalApp = angular.module('PortalApp');
 
-portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $http, $httpBackend) {
+
+
+portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, $http, $httpBackend) {
 
     //console.log($httpBackend);
     $scope.preAssign = {
         Parties: [],
         CheckRequestData: {
             Checks: []
-        }
+        },
+        NeedSearch: true,
+        NeedCheck: true
     };
-    $scope.showHistroy = function()
-    {
+    $scope.showHistroy = function () {
         auditLog.show(null, $scope.preAssign.Id);
     }
     var _BBLE = PortalUtility.QueryUrl().BBLE;
@@ -1669,15 +1672,15 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
     $scope.allowEdit = false;
     if (_model == 'List') {
         var checksListApi = $scope.role == 'finance' ? '/api/PreSign/CheckRequests' : '/api/presign/records';
-        $http.get(checksListApi).success(function(data) {
-            $scope.preSignList = _.map(data, function(p) {
+        $http.get(checksListApi).success(function (data) {
+            $scope.preSignList = _.map(data, function (p) {
                 p.ChecksTotal = _.sum(p.Checks, 'Amount');
                 return p;
             });
         });
     }
     if (_model == 'View') {
-        setTimeout(function() {
+        setTimeout(function () {
             $("#preDealForm input").prop("disabled", true);
             $("#preDealForm select").prop("disabled", true);
         }, 1000);
@@ -1701,36 +1704,35 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         }
 
     }
-    $scope.init = function(preSignId) {
+    $scope.init = function (preSignId) {
 
-            $http.get('/api/PreSign/' + preSignId).success(function(data) {
-                $scope.preAssign = data;
-                $scope.preAssign.Parties = $scope.preAssign.Parties || [];
+        $http.get('/api/PreSign/' + preSignId).success(function (data) {
+            $scope.preAssign = data;
+            $scope.preAssign.Parties = $scope.preAssign.Parties || [];
 
-            });
-            //auditLog.show("PreSignRecord",preSignId);
-        }
-        /**
-         * Init Edit model data by id
-         * @param  {number} id [pre assign Id]
-         */
-    $scope.initEdit = function(id) {
+        });
+        //auditLog.show("PreSignRecord",preSignId);
+    }
+    /**
+     * Init Edit model data by id
+     * @param  {number} id [pre assign Id]
+     */
+    $scope.initEdit = function (id) {
         $scope.preAssign.Id = id;
         //$scope.partiesGridEditing = {mode: 'batch', editEnabled: false, insertEnabled: true, removeEnabled: true};
         $scope.partiesGridOptions.editing.editEnabled = true;
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
         $scope.checkGridOptions.editing.texts = {
             deleteRow: 'Void',
-            confirmDeleteMessage:'Are you sure you want void this check?'
+            confirmDeleteMessage:'' //'Are you sure you want void this check?'
         }
         $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
-        $scope.checkGridOptions.onEditingStart = function(e)
-        {
-            if (e.data.Status == 1 || e.data.CheckId)
-            {
+        $scope.checkGridOptions.onEditingStart = function (e) {
+            if (e.data.Status == 1 || e.data.CheckId) {
                 e.cancel = true;
             }
         }
+        $scope.checkGridOptions.initEdit();
         // $scope.checkGridOptions.editing.removeEnabled = false;
         // $scope.checkGridOptions.columns.push({
         //     width: 100,
@@ -1752,55 +1754,20 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
 
     }
 
-    $scope.AddCheck = function(e) {
-            var cancel = false;
-            e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
-            e.data.Date = new Date(e.data.Date).toISOString();
-            var response = $.ajax({
-                url: '/api/businesscheck',
-                type: 'POST',
-                dataType: 'json',
-                async: false,
-                data: e.data,
-                success: function(data, textStatus, xhr) {
-                    $scope.addedCheck = data;
-                    $scope.preAssign.CheckRequestData.Checks.push(data);
-                    e.cancel = true;
-                }
-            });
-
-            var message = PortalHttp.BuildAjaxErrorMessage(response);
-            if (message) {
-                AngularRoot.alert(message);
-                e.cancel = true;
-            };
-            return cancel;
-        }
-        // $scope.$watch('preAssign.CheckRequestData.Checks', function(oldData,newData)
-        // {
-        //     _.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o["CheckId"] == null});
-        // })
-    $scope.CancelCheck = function(e) {
-        if (e.data.Status == 1) {
-            e.cancel = true;
-            return;
-        }
+    $scope.AddCheck = function (e) {
+        var cancel = false;
+        e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
+        e.data.Date = new Date(e.data.Date).toISOString();
         var response = $.ajax({
-            url: '/api/businesscheck/' + e.data.CheckId,
-            type: 'DELETE',
+            url: '/api/businesscheck',
+            type: 'POST',
+            dataType: 'json',
             async: false,
-            success: function(data, textStatus, xhr) {
-                e.model = data;
-                e.model.Status = 1;
-                e.data.Status = 1;
-                // _.remove($scope.preAssign.CheckRequestData.Checks, {
-                //     CheckId: e.data.CheckId
-                // });
+            data: e.data,
+            success: function (data, textStatus, xhr) {
+                $scope.addedCheck = data;
                 $scope.preAssign.CheckRequestData.Checks.push(data);
-                //_.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o.CheckId == null});
-
-                $('#gridChecks').dxDataGrid('instance').refresh();
-                $scope.deletedCheck = data;
+                e.cancel = true;
             }
         });
 
@@ -1809,10 +1776,58 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
             AngularRoot.alert(message);
             e.cancel = true;
         };
-        return e;
+        return cancel;
+    }
+    // $scope.$watch('preAssign.CheckRequestData.Checks', function(oldData,newData)
+    // {
+    //     _.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o["CheckId"] == null});
+    // })
+    $scope.clearCheckRequest = function(data)
+    {
+        _.remove(data, function (o) { return o["CheckId"] == null });
+    }
+    $scope.CancelCheck = function (e) {
+        e.cancel = true;
+
+        AngularRoot.prompt("Please input void reason", function (voidReason) {
+            if (voidReason) {
+                var response = $.ajax({
+                    url: '/api/businesscheck/' + e.data.CheckId,
+                    type: 'DELETE',
+                    data: voidReason,
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: false,
+                    success: function (data, textStatus, xhr) {
+                        data.Comments = voidReason;
+                        //e.model = data;
+                        e.model.Status = 1;
+                        e.data.Status = 1;
+                        e.data.Comments = voidReason;
+                        // _.remove($scope.preAssign.CheckRequestData.Checks, {
+                        //     CheckId: e.data.CheckId
+                        // });
+                        //$scope.preAssign.CheckRequestData.Checks.push(data);
+                        //$scope.clearCheckRequest($scope.preAssign.CheckRequestData.Checks);
+                        //_.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o.CheckId == null});
+
+                        $('#gridChecks').dxDataGrid('instance').refresh();
+                        $scope.deletedCheck = data;
+                    }
+                });
+                var message = PortalHttp.BuildAjaxErrorMessage(response);
+                if (message) {
+                    AngularRoot.alert(message);
+
+                };
+                $('#gridChecks').dxDataGrid('instance').refresh();
+            }
+        })
+
+
     }
 
-    
+
     $scope.preAssign.NeedCheck = true;
     $scope.steps = [{
         title: "Pre Sign",
@@ -1831,10 +1846,10 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
     $scope.arrayRemove = ptCom.arrayRemove;
     $scope.step = 1
     $scope.MaxStep = $scope.steps.length;
-    $scope.NextStep = function() {
+    $scope.NextStep = function () {
         $scope.step++;
     }
-    $scope.PrevStep = function() {
+    $scope.PrevStep = function () {
         $scope.step--;
     }
 
@@ -1843,8 +1858,8 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
      * @return {[type]}
      */
 
-    $scope.initByBBLE = function(BBLE) {
-        $http.get('/api/Leads/LeadsInfo/' + BBLE).success(function(data) {
+    $scope.initByBBLE = function (BBLE) {
+        $http.get('/api/Leads/LeadsInfo/' + BBLE).success(function (data) {
             $scope.preAssign.Title = data.PropertyAddress
         });
         if ($scope.model != 'View') {
@@ -1852,16 +1867,17 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
             $scope.preAssign.DealAmount = 0;
             $scope.preAssign.NeedSearch = true;
         }
-        $http.get('/api/PropertyOffer/isCompleted/'+BBLE).success(function(data){
+        $http.get('/api/PropertyOffer/isCompleted/' + BBLE).success(function (data) {
             $scope.allowEdit = !data;
         })
-        
+
         $scope.preAssign.BBLE = _BBLE
-        if($scope.preAssign.CheckRequestData)
-        {
+        $scope.preAssign.CheckRequestData = $scope.preAssign.CheckRequestData || {};
+        if ($scope.preAssign.CheckRequestData) {
+            $scope.preAssign.CheckRequestData.Checks = $scope.preAssign.CheckRequestData.Checks || [];
             $scope.preAssign.CheckRequestData.BBLE = $scope.preAssign.BBLE;
         }
-        
+
     }
 
     if (_BBLE) {
@@ -1870,7 +1886,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
     /**
      * [validation description my have diffrent in view mode and edit mode]
      */
-    $scope.validationPreAssgin = function() {
+    $scope.validationPreAssgin = function () {
         var selfData = $scope.preAssign;
         if (!selfData.ExpectedDate) {
             $scope.alert("Please fill expected date !");
@@ -1897,20 +1913,20 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         return true;
     }
 
-    $scope.alert = function(msg) {
-            if (typeof AngularRoot != 'undefined') {
-                AngularRoot.alert(msg)
-            }
+    $scope.alert = function (msg) {
+        if (typeof AngularRoot != 'undefined') {
+            AngularRoot.alert(msg)
         }
-        /**
-         * 
-         */
-    $scope.Save = function() {
+    }
+    /**
+     * 
+     */
+    $scope.Save = function () {
         var selfData = $scope.preAssign;
 
         if ($scope.preAssign.Id) {
             if ($scope.validationPreAssgin()) {
-                $http.put('/api/PreSign/' + $scope.preAssign.Id, JSON.stringify($scope.preAssign)).success(function(data) {
+                $http.put('/api/PreSign/' + $scope.preAssign.Id, JSON.stringify($scope.preAssign)).success(function (data) {
                     if (typeof AngularRoot != 'undefined') {
                         AngularRoot.alert("Updated success!");
                     }
@@ -1922,7 +1938,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
 
         } else {
             if ($scope.validationPreAssgin()) {
-                $http.post('/api/PreSign', JSON.stringify($scope.preAssign)).success(function(data) {
+                $http.post('/api/PreSign', JSON.stringify($scope.preAssign)).success(function (data) {
                     AngularRoot.alert("Submit success !");
                     $scope.preAssign = data;
                     window.location.href = '/popupControl/preAssignCropForm.aspx?model=View&Id=' + data.Id
@@ -1937,12 +1953,13 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
     //var syncObject = $firebaseObject(ref);
     //syncObject.$bindTo($scope, "Test");
 
-    $scope.onSelectedChanged = function(e) {
+    $scope.onSelectedChanged = function (e) {
         var request = e.selectedRowsData[0];
         PortalUtility.OpenWindow('/PopupControl/PreAssignCropForm.aspx?model=View&Id=' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
     }
 
-    $scope.preSignRecordsGridOpt = {               
+
+    $scope.preSignRecordsGridOpt = {
         bindingOptions: {
             dataSource: 'preSignList'
         },
@@ -2000,32 +2017,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         wordWrapEnabled: true
     }
 
-    if (_role == 'finance') {
-        $scope.preSignRecordsGridOpt.masterDetail = {
-            enabled: true,
-            template: "detail"
-        }
-        $scope.preSignRecordsGridOpt.selection = null;
-        $scope.preSignRecordsGridOpt.columns = [{
-            dataField: 'PropertyAddress',
-            caption: 'Address'
-        }, {
-            dataField: 'RequestBy',
-            caption: 'Request By'
-        }, {
-            dataField: 'Type',
-            caption: 'Request Type'
-        }, {
-            dataField: 'RequestDate',
-            caption: 'Request Date',
-            dataType: 'date'
-        }, {
-            dataField: 'CheckAmount',
-            format: 'currency',
-            dataType: 'number',
-            precision: 2
-        }, ]
-    }
+   
 
 
     $scope.partiesGridOptions = {
@@ -2057,10 +2049,18 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
         }
     }
 
-    $scope.CheckTotalAmount = function() {
-        return _.sum(_.filter($scope.preAssign.CheckRequestData.Checks, function(o) {
-            return o.Status != 1;
-        }), 'Amount');
+    $scope.CheckTotalAmount = function () {
+        if ($scope.preAssign.CheckRequestData && $scope.preAssign.CheckRequestData.Checks) {
+            return _.sum(_.filter($scope.preAssign.CheckRequestData.Checks, function (o) {
+                return o.Status != 1;
+            }), 'Amount');
+        }
+        return 0;
+    }
+    $scope.CheckRowPrepared = function (e) {
+        if (e.data && e.data.Status == 1) {
+            e.rowElement.addClass('avoid-check');
+        }
     }
     $scope.checkGridOptions = {
         bindingOptions: {
@@ -2073,7 +2073,7 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
 
         editing: $scope.gridEdit,
         pager: {
-           
+
             showInfo: true
         },
         wordWrapEnabled: true,
@@ -2103,17 +2103,21 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
             }]
         }, ],
         //show avoid check any time
-        "onRowPrepared": function(e) {
-            if (e.data && e.data.Status == 1) {
-                e.rowElement.addClass('avoid-check');
-            }
+        "onRowPrepared": $scope.CheckRowPrepared,
+        initEdit: function () {
+            var self = this;
+            self.columns.push({
+                dataField: 'Comments',
+                caption: 'Void Reason',
+                allowEditing:false
+            });
         },
         summary: {
-            calculateCustomSummary: function(options) {
+            calculateCustomSummary: function (options) {
 
-                
+
                 if (options.name == 'SumAmount') {
-                    options.totalValue = _.sum(_.filter(options.component._options.dataSource, function(o) {
+                    options.totalValue = _.sum(_.filter(options.component._options.dataSource, function (o) {
                         return o.Status != 1;
                     }), "Amount"); //$scope.CheckTotalAmount();
                 }
@@ -2132,14 +2136,64 @@ portalApp.controller('perAssignCtrl', function($scope, ptCom, $firebaseObject, $
             }]
         }
     };
+    
+    if (_role == 'finance') {
+        $scope.preSignRecordsGridOpt.masterDetail = {
+            enabled: true,
+            template: function (container, options) {
+                var opt = {
+                    dataSource: options.data.Checks,
+                    columnAutoWidth: true,
+                    columns: ['PaybleTo', {
+                        dataField: 'Amount',
+                        format: 'currency', dataType: 'number', precision: 2
+
+                    }, {
+                        dataField: 'Date',
+                        caption: 'Check Date',
+                        dataType: 'date',
+                        format: 'shortDate'
+                    }, {
+                        dataField: 'Description'
+                    }],
+                    onRowPrepared: $scope.CheckRowPrepared,
+                }
+                $("<div>").text("Checks: ").appendTo(container);
+                $("<div>")
+                    .addClass("internal-grid")
+                    .dxDataGrid(opt).appendTo(container);
+
+            }
+        }
+        $scope.preSignRecordsGridOpt.selection = null;
+        $scope.preSignRecordsGridOpt.columns = [{
+            dataField: 'PropertyAddress',
+            caption: 'Address'
+        }, {
+            dataField: 'RequestBy',
+            caption: 'Request By'
+        }, {
+            dataField: 'Type',
+            caption: 'Request Type'
+        }, {
+            dataField: 'RequestDate',
+            caption: 'Request Date',
+            dataType: 'date'
+        }, {
+            dataField: 'CheckAmount',
+            format: 'currency',
+            dataType: 'number',
+            precision: 2
+        }, ]
+    }
     if (_model == 'Edit') {
         $scope.initEdit(PortalUtility.QueryUrl().Id);
     }
-    $scope.ensurePush = function(modelName, data) {
+    $scope.ensurePush = function (modelName, data) {
         ptCom.ensurePush($scope, modelName, data);
     }
 
-    $scope.RequestPreSign = function() {
+    $scope.RequestPreSign = function () {
         $scope.Save();
         if (window.parent && window.parent.preAssignPopopClient) {
             var popup = window.parent.preAssignPopopClient
