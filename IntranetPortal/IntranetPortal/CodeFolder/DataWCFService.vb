@@ -143,6 +143,10 @@ Public Class DataWCFService
                     'lisPen.Active = noth
                     lisPen.Attorney = Utility.BuildUsername(item.Attorney_First_Name, item.Attorney_Middle_Name, item.Attorney_Last_Name)
                     'lisPen.Attorney_Phone = ""
+
+                    lisPen.LpType = item.LP_TYPE
+                    lisPen.Expiration = item.Expiration_Date
+
                     lisPen.BBLE = item.BBLE
                     lisPen.Block = item.Debtor_Block
                     lisPen.CollectedOn = item.Entry_Date
@@ -175,6 +179,8 @@ Public Class DataWCFService
                     'lisPen.ST_Name = item.ST_Name
                     'lisPen.Terms = item.Terms
                     'lisPen.Zip = item.Zip
+
+                    lisPen.CreateTime = DateTime.Now
 
                     lisPens.Add(lisPen)
                 Next

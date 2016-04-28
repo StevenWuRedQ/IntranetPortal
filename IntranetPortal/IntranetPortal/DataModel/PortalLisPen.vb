@@ -35,5 +35,8 @@ Partial Public Class PortalLisPen
     Public Property Attorney_Phone As String
     Public Property Terms As String
     Public Property CollectedOn As Date
+    Public Property Expiration As Nullable(Of Date)
+    Public Property CreateTime As Nullable(Of Date)
+    Public Property LpType As String
 
 End Class

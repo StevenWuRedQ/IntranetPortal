@@ -9,7 +9,7 @@
 
 <script src="/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js"></script>
 <script type="text/javascript">
-    function ShowAcrisMap(propBBLE,boro,block,lot) {
+    function ShowAcrisMap(propBBLE, boro, block, lot) {
        
         ShowPopupMap("http://a836-acris.nyc.gov/bblsearch/bblsearch.asp?borough=" + boro + "&block=" + block + "&lot=" + lot, "Acris");
         $("#addition_info").html($("#borugh_block_lot_data").val());
@@ -69,8 +69,8 @@
     function DeleteComments(commentId) {
         leadsCommentsCallbackPanel.PerformCallback("Delete|" + commentId);
     }
-    function RequestDocSearch()
-    {
+
+    function RequestDocSearch() {
         $.ajax({
             type: "POST",
             url: '/api/LeadInfoDocumentSearches',
@@ -85,9 +85,9 @@
             error: function (data) {
                 alert('Some error Occurred! Detail: ' + JSON.stringify(data));
             }
-           
         });
     }
+
     $(document).ready(function () {
         // Handler for .ready() called.
         init_currency();
@@ -105,7 +105,6 @@
     <%--/*display:none need delete when realse--%>
     <div style="height: 850px; overflow: auto;" id="prioity_content">
         <%--refresh label--%>
-
         <dx:ASPxPanel ID="UpatingPanel" runat="server">
             <PanelCollection>
                 <dx:PanelContent runat="server">
@@ -120,11 +119,12 @@
         <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
             <div style="font-size: 30px">
                 <span>
-                    <%  If (LeadsInfoData.LastUpdate.HasValue) Then%>
+                    <% If (LeadsInfoData.LastUpdate.HasValue) Then%>
                     <i class="fa fa-refresh"></i>
-                    <span style="margin-left: 19px;"><%= LeadsInfoData.LastUpdate.ToString%></span>
-
-                    <%Else%>
+                    <span style="margin-left: 19px;">
+                        <%= LeadsInfoData.LastUpdate.ToString%>
+                    </span>
+                    <% Else%>
                     <i class="fa fa-home"></i>
                     <span style="margin-left: 19px;"><%= LeadsInfoData.PropertyAddress %></span>
                     <% End If%>
@@ -151,7 +151,7 @@
                 <PanelCollection>
                     <dx:PanelContent>
                         <% Dim i = 0%>
-                        
+
                         <% If LeadsInfoData.OtherProperties IsNot Nothing AndAlso LeadsInfoData.OtherProperties.Count > 0 Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8;height:inherit","height:inherit")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
@@ -367,14 +367,15 @@
                 <dx:PanelContent>
                     <%--Mortgage form--%>
                     <div style="margin: 20px;" class="clearfix">
-                        <div class="form_head" style="margin-top: 40px;">MORTGAGE AND VIOLATIONS 
+                        <div class="form_head" style="margin-top: 40px;">
+                            MORTGAGE AND VIOLATIONS 
                             <i class="fa fa-save  color_blue_edit collapse_btn tooltip-examples" title="Save Mortgage" onclick="callbackPanelMortgage.PerformCallback('Save')"></i>
                             <% If IntranetPortal.Data.LeadInfoDocumentSearch.Exist(hfBBLE.Value) Then %>
                             <i class="fa fa-eye  color_blue_edit collapse_btn tooltip-examples" title="View search result" onclick="OpenLeadsWindow('/PopupControl/LeadTaxSearchRequest.aspx?BBLE=<%=hfBBLE.Value%>','Entities',667,900)"></i>
                             <%Else %>
                                 <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
-                                <i class="fa fa-search-plus  color_blue_edit collapse_btn tooltip-examples" title="Request a search" onclick="RequestDocSearch()"></i>
-                                <% End If %>
+                            <i class="fa fa-search-plus  color_blue_edit collapse_btn tooltip-examples" title="Request a search" onclick="RequestDocSearch()"></i>
+                            <% End If %>
                             <% End If %>
                         </div>
 
@@ -570,7 +571,7 @@
                             <%# DateTime.Parse(Eval("Effective")).ToShortDateString %>
                         </DataItemTemplate>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="Expiration" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataDateColumn FieldName="Expiration" PropertiesDateEdit-DisplayFormatString="g" Settings-AllowSort="False"></dx:GridViewDataDateColumn>
                     <dx:GridViewDataTextColumn FieldName="Plaintiff" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Defendant" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Index" Settings-AllowSort="False"></dx:GridViewDataTextColumn>

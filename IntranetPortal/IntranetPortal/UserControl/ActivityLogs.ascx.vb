@@ -203,7 +203,6 @@ Public Class ActivityLogs
                 End If
 
                 LeadsActivityLog.AddActivityLog(DateTime.Now, "Task is completed by " & Page.User.Identity.Name, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
-
                 CompleteWorklistItem(task.TaskID)
             End Using
 

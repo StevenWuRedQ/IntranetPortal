@@ -13,15 +13,23 @@ Partial Public Class HomeOwner
 
     Private objLocateReport As DataAPI.TLOLocateReportOutput
     Public Shared EMPTY_HOMEOWNER As String = "Please Edit Owner"
+
     <IgnoreDataMember>
     Public Property TLOLocateReport As DataAPI.TLOLocateReportOutput
         Get
-            If objLocateReport Is Nothing And LocateReport IsNot Nothing AndAlso LocateReport.Length > 0 Then
-                Dim serializer As New BinaryFormatter()
-                serializer.Binder = New CustomBinder
-                Dim writer As New MemoryStream(LocateReport)
-                Dim o As DataAPI.TLOLocateReportOutput = serializer.Deserialize(writer)
-                objLocateReport = o
+            If objLocateReport Is Nothing Then
+
+                If Not String.IsNullOrEmpty(LocateReportContent) Then
+                    objLocateReport = Newtonsoft.Json.JsonConvert.DeserializeObject(Of DataAPI.TLOLocateReportOutput)(LocateReportContent)
+                Else
+                    If LocateReport IsNot Nothing AndAlso LocateReport.Length > 0 Then
+                        Dim serializer As New BinaryFormatter()
+                        serializer.Binder = New CustomBinder
+                        Dim writer As New MemoryStream(LocateReport)
+                        Dim o As DataAPI.TLOLocateReportOutput = serializer.Deserialize(writer)
+                        objLocateReport = o
+                    End If
+                End If
             End If
 
             Return objLocateReport
@@ -33,14 +41,17 @@ Partial Public Class HomeOwner
                 'save phone no to database
                 SavePhoneField(value)
 
-                Using myWriter As New StringWriter
-                    Dim serializer As New BinaryFormatter
-                    Dim writer As New MemoryStream()
-                    serializer.Serialize(writer, value)
-                    writer.Flush()
-                    LocateReport = writer.ToArray
-                End Using
+                LocateReportContent = Newtonsoft.Json.JsonConvert.SerializeObject(value)
+
+                'Using myWriter As New StringWriter
+                '    Dim serializer As New BinaryFormatter
+                '    Dim writer As New MemoryStream()
+                '    serializer.Serialize(writer, value)
+                '    writer.Flush()
+                '    LocateReport = writer.ToArray
+                'End Using
             End If
+
         End Set
     End Property
 
