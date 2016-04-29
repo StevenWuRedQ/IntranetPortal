@@ -1737,7 +1737,8 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         if (message) {
             AngularRoot.alert(message)
         } else {
-            $scope.preAssign = JSON.parse(preSignRespose.responseText)
+            _.extend($scope.preAssign, JSON.parse(preSignRespose.responseText));
+            
             $scope.preAssign.CheckRequestData = $scope.preAssign.CheckRequestData || { Checks: [] }
             _BBLE = $scope.preAssign.BBLE
 
@@ -1748,6 +1749,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
 
         $http.get('/api/PreSign/' + preSignId).success(function (data) {
             $scope.preAssign = data;
+            
             $scope.preAssign.Parties = $scope.preAssign.Parties || [];
 
         });
@@ -1871,8 +1873,6 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         $('#gridChecks').dxDataGrid('instance').refresh();
     }
 
-
-    $scope.preAssign.NeedCheck = true;
     $scope.steps = [{
         title: "Pre Sign",
         show: true
@@ -1951,7 +1951,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             return false;
         }
         if (!$scope.preAssign.NeedCheck) {
-            $scope.preAssign.Parties = null;
+            //$scope.preAssign.Parties = null;
             $scope.preAssign.CheckRequestData = null
         }
         return true;
@@ -1983,7 +1983,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         } else {
             if ($scope.validationPreAssgin()) {
                 $http.post('/api/PreSign', JSON.stringify($scope.preAssign)).success(function (data) {
-                    AngularRoot.alert("Submit success !");
+                    //AngularRoot.alert("Submit success !");
                     $scope.preAssign = data;
                     window.location.href = '/popupControl/preAssignCropForm.aspx?model=View&Id=' + data.Id
                 });
