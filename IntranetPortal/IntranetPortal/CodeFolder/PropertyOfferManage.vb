@@ -184,8 +184,26 @@ Public Class DocumentGenerator
         ' Sales Contract
         file = New GenerateFileConfig With {.FileName = "SalesContract.docx", .ConfigKey = "Contract"}
         file.PlaceHolders = phs.ToList
-        file.PlaceHolders.Add(New DocumentPlaceHolder("CONTRACTPRICE", "DealSheet.ContractOrMemo.contractPrice"))
-        file.PlaceHolders.Add(New DocumentPlaceHolder("DOWNPAYMENT", "DealSheet.ContractOrMemo.downPayment"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("CONTRACTPRICE", Function(data As JObject)
+                                                                           Dim contractPrice = data.SelectToken("DealSheet.ContractOrMemo.contractPrice")
+                                                                           If contractPrice IsNot Nothing Then
+                                                                               Dim price = 0
+                                                                               If Decimal.TryParse(contractPrice, price) Then
+                                                                                   Return String.Format("{0:N2}", price)
+                                                                               End If
+                                                                           End If
+                                                                           Return ""
+                                                                       End Function))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("DOWNPAYMENT", Function(data As JObject)
+                                                                         Dim downPayment = data.SelectToken("DealSheet.ContractOrMemo.downPayment")
+                                                                         If downPayment IsNot Nothing Then
+                                                                             Dim price = 0
+                                                                             If Decimal.TryParse(downPayment, price) Then
+                                                                                 Return String.Format("{0:N2}", price)
+                                                                             End If
+                                                                         End If
+                                                                         Return ""
+                                                                     End Function))
         file.PlaceHolders.Add(New DocumentPlaceHolder("BALANCE", Function(data As JObject)
                                                                      Dim contractPrice = data.SelectToken("DealSheet.ContractOrMemo.contractPrice")
                                                                      Dim downPayment = data.SelectToken("DealSheet.ContractOrMemo.downPayment")

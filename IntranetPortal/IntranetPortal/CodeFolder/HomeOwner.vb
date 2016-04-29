@@ -284,11 +284,11 @@ Partial Public Class HomeOwner
             Dim ssnField = SSN
             If ssnField IsNot Nothing AndAlso ssnField.Length >= 4 Then
                 'Regex.Replace("")
-                If ssnField.Contains("x") OrElse ssnField.Contains("X") Then
-                    Return ssnField
-                End If
+                'If ssnField.Contains("x") OrElse ssnField.Contains("X") Then
+                '    Return ssnField
+                'End If
 
-                Return ssnField.Substring(0, 5) + "xxxx"
+                Return ssnField.Substring(ssnField.Length - 4)
             End If
 
             Return Nothing
