@@ -68,9 +68,8 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
                 ]
             }
         });
-
     }
-
+    
     $scope.SSpreSign = {
         Type: 'Short Sale',
         FormName: 'PropertyOffer',
