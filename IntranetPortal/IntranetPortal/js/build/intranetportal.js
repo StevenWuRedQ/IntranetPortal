@@ -2209,7 +2209,7 @@ angular.module('PortalApp')
             if (!isSave) {
                 PostData.Status = 1;
             }
-        $scope.DocSearch.ResutContent = $("#searchReslut").html();
+            $scope.DocSearch.ResutContent = $("#searchReslut").html();
 
             $http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
                 alert(isSave ? 'Save success!' : 'Lead info search completed !');
@@ -3441,9 +3441,9 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         if ($scope.preAssign.Id) {
             if ($scope.validationPreAssgin()) {
                 $http.put('/api/PreSign/' + $scope.preAssign.Id, JSON.stringify($scope.preAssign)).success(function (data) {
-                    if (typeof AngularRoot != 'undefined') {
-                        AngularRoot.alert("Updated success!");
-                    }
+                    //if (typeof AngularRoot != 'undefined') {
+                    //    AngularRoot.alert("Updated success!");
+                    //}
                     //for unit test
                     $scope.localhref = '/popupControl/preAssignCropForm.aspx?model=View&Id=' + $scope.preAssign.Id
                     window.location.href = $scope.localhref

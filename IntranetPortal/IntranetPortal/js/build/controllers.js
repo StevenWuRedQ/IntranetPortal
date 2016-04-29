@@ -1972,9 +1972,9 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         if ($scope.preAssign.Id) {
             if ($scope.validationPreAssgin()) {
                 $http.put('/api/PreSign/' + $scope.preAssign.Id, JSON.stringify($scope.preAssign)).success(function (data) {
-                    if (typeof AngularRoot != 'undefined') {
-                        AngularRoot.alert("Updated success!");
-                    }
+                    //if (typeof AngularRoot != 'undefined') {
+                    //    AngularRoot.alert("Updated success!");
+                    //}
                     //for unit test
                     $scope.localhref = '/popupControl/preAssignCropForm.aspx?model=View&Id=' + $scope.preAssign.Id
                     window.location.href = $scope.localhref
