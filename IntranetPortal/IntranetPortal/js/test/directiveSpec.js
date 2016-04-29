@@ -127,5 +127,16 @@
             expect(elemContents[0].checked).toBe(false);
             expect(elemContents[2].checked).toBe(true);
         });
+
+        it('should show ss_warning when there are model is undefined',inject(function(_$compile_, _$rootScope_){
+             var html = "<pt-radio model='radio' ng-disabled='varDisabled'></pt-radio><div id='showSsWarning' ng-class='{ss_warning:varDisabled===null||varDisabled===undefined}'></div>";
+            scope = _$rootScope_.$new();
+            celem = _$compile_(html)(scope);
+            scope.$digest();
+            expect(celem[1].className).toContain('ss_warning');
+            scope.varDisabled = false;
+            scope.$digest();
+            expect(celem[1].className).not.toContain('ss_warning');
+        }))
     });
 })

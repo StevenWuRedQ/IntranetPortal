@@ -18,15 +18,15 @@
                 <input class="ss_form_input" ng-model="owner.DOB" ss-date readonly>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">SSN</label>
+                <label class="ss_form_input_title" ng-class="{ss_warning:!owner.SSN}" data-message="Please fill seller {{$index+1}} SSN">SSN *</label>
                 <input class="ss_form_input" ng-model="owner.SSN" mask="999-99-9999" clean="true" readonly>
             </li>
             <li class="ss_form_item" style="width: 100%">
-                <label class="ss_form_input_title">Mail Address</label>
+                <label class="ss_form_input_title" ng-class="{ss_warning:!owner.MailNumber|| !owner.MailStreetName|| !owner.MailApt|| !owner.MailCity|| !owner.MailState|| !owner.MailZip}" data-message="Please complete seller {{$index+1}} Mail Address">Mail Address *</label>
                 <input class="ss_form_input" ng-value="formatAddr(owner.MailNumber, owner.MailStreetName, owner.MailApt, owner.MailCity, owner.MailState, owner.MailZip)" style="width: 96.66%" readonly>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Cell #</label>
+                <label class="ss_form_input_title" ng-class="{ss_warning:!owner.Phone}" data-message="Please fill seller {{$index+1}} Cell Number">Cell Number *</label>
                 <input class="ss_form_input" ng-model="owner.Phone" mask="(999) 999-9999" clean="true" readonly>
             </li>
             <li class="ss_form_item">
@@ -39,7 +39,7 @@
             </li>
 
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Bankruptcy</label>
+                <label class="ss_form_input_title" ng-class="{ss_warning:owner.Bankruptcy===null||owner.Bankruptcy===undefined}" data-message="Please check seller {{$index+1}} Bankruptcy">Bankruptcy</label>
                 <pt-radio model="owner.Bankruptcy" name="ownerBankruptcy{{$index}}"></pt-radio>
             </li>
             <li class="ss_form_item" ng-show="owner.Bankruptcy">
@@ -50,19 +50,19 @@
                 </select>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Bank account</label>
+                <label class="ss_form_input_title" ng-class="{ss_warning:owner.Bankaccount===null||owner.Bankaccount===undefined}" data-message="Please check seller {{$index+1}} has bank account">Bank account</label>
                 <pt-radio model="owner.Bankaccount" name="Bankaccount{{$index}}"></pt-radio>
             </li>
              <li class="ss_form_item">
-                <label class="ss_form_input_title">Active Military</label>
+                <label class="ss_form_input_title" ng-class="{ss_warning:owner.ActiveMilitar===null||owner.ActiveMilitar===undefined}" data-message="Please check seller {{$index+1}} Active Military">Active Military</label>
                 <pt-radio model="owner.ActiveMilitar" name="ActiveMilitar{{$index}}"></pt-radio>
              </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Tax Returns</label>
+                <label class="ss_form_input_title" ng-class="{ss_warning:owner.TaxReturn===null||owner.TaxReturn===undefined}" data-message="Please check seller {{$index+1}} Tax Returns">Tax Returns</label>
                 <pt-radio model="owner.TaxReturn" name="TaxReturn{{$index}}"></pt-radio>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">Employed</label>
+                <label class="ss_form_input_title"  ng-class="{ss_warning:!owner.Employed}" data-message="Please select seller {{$index+1}} Employe status">Employed</label>
                 <select class="ss_form_input" ng-model="owner.Employed">
                     <option></option>
                     <option>Employed</option>
@@ -111,18 +111,18 @@
                 </div>
                 <div class="col-sm-4">
                     <label>DOB *</label>
-                    <input class="form-control" ng-model="owner.DOB" placeholder="mm/dd/yyyy">
+                    <input class="form-control" ng-model="owner.DOB" placeholder="mm/dd/yyyy" clean="true" mask="19/39/9999">
                 </div>
                 <div class="col-sm-4">
-                    <label>SSN</label>
+                    <label>SSN *</label>
                     <input class="form-control" ng-model="owner.SSN" mask="999-99-9999" clean="true">
                 </div>
                 <div class="col-sm-4">
-                    <label>Cell #</label>
+                    <label>Cell Number *</label>
                     <input class="form-control" ng-model="owner.Phone" mask="(999) 999-9999" clean="true">
                 </div>
                 <div class="col-sm-4">
-                    <label>Additional #</label>
+                    <label>Additional Number</label>
                     <input class="form-control" ng-model="owner.AdlPhone" mask="(999) 999-9999" clean="true">
                 </div>
                 <div class="col-sm-4">
@@ -133,11 +133,11 @@
             <hr>
             <div class="row form-group">
                 <div class="col-sm-4">
-                    <label>Street number</label>
+                    <label>Street number *</label>
                     <input class="form-control" ng-model="owner.MailNumber">
                 </div>
                 <div class="col-sm-4">
-                    <label>Street name</label>
+                    <label>Street name *</label>
                     <input class="form-control" ng-model="owner.MailStreetName">
                 </div>
                 <div class="col-sm-4">
@@ -145,26 +145,26 @@
                     <input class="form-control" ng-model="owner.MailApt">
                 </div>
                 <div class="col-sm-4">
-                    <label>City</label>
+                    <label>City *</label>
                     <input class="form-control" ng-model="owner.MailCity">
                 </div>
                 <div class="col-sm-4">
-                    <label>State</label>
+                    <label>State *</label>
                     <input class="form-control" ng-model="owner.MailState">
                 </div>
                 <div class="col-sm-4">
-                    <label>Zip</label>
+                    <label>Zip *</label>
                     <input class="form-control" ng-model="owner.MailZip" mask="99999" clean='true'>
                 </div>
             </div>
             <hr>
             <div class="row form-group">
                 <div class="col-sm-4">
-                    <label>Bankruptcy</label><br />
+                    <label>Bankruptcy *</label><br />
                     <pt-radio model="owner.Bankruptcy" name="ownerBankruptcy{{$index}}"></pt-radio>
                 </div>
                 <div class="col-sm-4" ng-show="owner.Bankruptcy">
-                    <label>Bankruptcy Chapter</label><br />
+                    <label>Bankruptcy Chapter *</label><br />
                     <select class="form-control" ng-model="owner.BankruptcyChapter">
                         <option>Chapter 7</option>
                         <option>Chapter 13</option>
@@ -175,15 +175,15 @@
                     <pt-radio model="owner.Bankaccount" name="Bankaccount{{$index}}"></pt-radio>
                 </div>
                 <div class="col-sm-4">
-                    <label>Active Military</label><br />
+                    <label>Active Military *</label><br />
                     <pt-radio model="owner.ActiveMilitar" name="ActiveMilitar{{$index}}"></pt-radio>
                 </div>
                 <div class="col-sm-4">
-                    <label>Tax Returns</label><br />
+                    <label>Tax Returns *</label><br />
                     <pt-radio model="owner.TaxReturn" name="TaxReturn{{$index}}"></pt-radio>
                 </div>
                 <div class="col-sm-4">
-                    <label>Employed</label><br />
+                    <label>Employed *</label><br />
                     <select ng-model="owner.Employed" class="form-control">
                         <option></option>
                         <option>Employed</option>
@@ -194,7 +194,7 @@
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <label>Paystubs</label><br />
+                    <label>Paystubs </label><br />
                     <pt-radio model="owner.Paystubs" name="Paystubs{{$index}}"></pt-radio>
                 </div>
             </div>

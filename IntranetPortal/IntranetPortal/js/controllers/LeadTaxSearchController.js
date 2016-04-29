@@ -63,7 +63,7 @@ angular.module('PortalApp')
             if (!isSave) {
                 PostData.Status = 1;
             }
-        $scope.DocSearch.ResutContent = $("#searchReslut").html();
+            $scope.DocSearch.ResutContent = $("#searchReslut").html();
 
             $http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
                 alert(isSave ? 'Save success!' : 'Lead info search completed !');

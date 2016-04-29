@@ -39,12 +39,14 @@
             margin: 20px 0;
         }
         /*base item styles*/
+        
         .wizardbar-item {
             display: inline-block;
             padding: 0.5em 0.8em;
             padding-left: 1.8em;
             text-decoration: none;
             transition: all .15s;
+           
             /*default styles*/
             background-color: #76a9dd;
             color: rgba(255, 255, 255, 0.8);
@@ -52,6 +54,17 @@
             text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
             position: relative;
             margin-right: 2px;
+        }
+        .wizardbar-item:hover
+        {
+             /*disable hever*/
+            text-decoration:none !important;
+            color:rgba(255, 255, 255, 0.8) !important;
+        }
+        .wizardbar-item:focus
+        {
+            text-decoration:none !important;
+            color:rgba(255, 255, 255, 0.8) !important;
         }
             /*arrow styles*/
             .wizardbar-item:before,
@@ -88,13 +101,13 @@
             }
         /*hover styles*/
         .wizardbar-item:not(.current):hover {
-            background-color: #3983ce;
+            /*background-color: #3983ce;*/
             cursor: default;
             text-decoration: none;
         }
 
             .wizardbar-item:not(.current):hover:after {
-                border-color: transparent transparent transparent #3983ce;
+                /*border-color: transparent transparent transparent #3983ce;*/
             }
         /*remove arrows from beginning and end*/
         .wizardbar-item:first-of-type:before,

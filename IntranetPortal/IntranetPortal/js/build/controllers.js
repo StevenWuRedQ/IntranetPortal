@@ -681,7 +681,7 @@ angular.module('PortalApp')
 angular.module('PortalApp')
     .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
         //New Model(this,arguments)
-    $scope.ptContactServices = ptContactServices;
+        $scope.ptContactServices = ptContactServices;
     leadsInfoBBLE = $('#BBLE').val();
        
     //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
@@ -739,7 +739,7 @@ angular.module('PortalApp')
             if (!isSave) {
                 PostData.Status = 1;
             }
-        $scope.DocSearch.ResutContent = $("#searchReslut").html();
+            $scope.DocSearch.ResutContent = $("#searchReslut").html();
 
             $http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
                 alert(isSave ? 'Save success!' : 'Lead info search completed !');
@@ -1838,7 +1838,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                 var response = $.ajax({
                     url: '/api/businesscheck/' + e.data.CheckId,
                     type: 'DELETE',
-                    data: voidReason,
+                    data: JSON.stringify(voidReason),
                     contentType: "application/json",
                     dataType: "json",
                     async: false,
@@ -2202,7 +2202,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                     }, {
                         dataField: 'Comments',
                         caption: 'Void Reason'
-                    }],
+                    }], 
                     onRowPrepared: $scope.CheckRowPrepared,
                 }
                 $("<div>").text("Checks: ").appendTo(container);
@@ -3129,7 +3129,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             o.PropertyAddress = $scope.SSpreSign.PropertyAddress;
             return o
         });
-
+        
         _dealSheet.ContractOrMemo.Sellers = $.extend(true, _dealSheet.ContractOrMemo.Sellers || [], _sellers);
         _dealSheet.Deed.Sellers = $.extend(true, _dealSheet.Deed.Sellers || [], _sellers);
         _dealSheet.CorrectionDeed.Sellers = $.extend(true, _dealSheet.CorrectionDeed.Sellers || [], _sellers);
@@ -3145,7 +3145,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             });
         }
     });
-
+   
     $scope.constractFromData = function () {
         var ss = ScopeHelper.getShortSaleScope();
 

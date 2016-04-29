@@ -157,7 +157,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                 var response = $.ajax({
                     url: '/api/businesscheck/' + e.data.CheckId,
                     type: 'DELETE',
-                    data: voidReason,
+                    data: JSON.stringify(voidReason),
                     contentType: "application/json",
                     dataType: "json",
                     async: false,
