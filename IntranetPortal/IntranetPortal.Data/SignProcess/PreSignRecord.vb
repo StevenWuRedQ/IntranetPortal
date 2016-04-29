@@ -123,6 +123,10 @@ Partial Public Class PreSignRecord
             End If
 
             ctx.SaveChanges(saveBy)
+
+            If Me.NeedCheck AndAlso Me.CheckRequestData IsNot Nothing Then
+                Me.CheckRequestData.Save(saveBy)
+            End If
         End Using
     End Sub
 

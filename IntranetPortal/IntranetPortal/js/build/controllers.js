@@ -42,7 +42,8 @@ angular.module("PortalApp")
             ]
         },
         { GroupName: 'In House' },
-        { GroupName: 'Agent Corps' }
+        { GroupName: 'Agent Corps' },
+        { GroupName: 'Not for Use' }
     ];
 
     $scope.ChangeGroups = function (name) {
@@ -681,7 +682,7 @@ angular.module('PortalApp')
 angular.module('PortalApp')
     .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
         //New Model(this,arguments)
-    $scope.ptContactServices = ptContactServices;
+        $scope.ptContactServices = ptContactServices;
     leadsInfoBBLE = $('#BBLE').val();
        
     //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
@@ -2202,7 +2203,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                     }, {
                         dataField: 'Comments',
                         caption: 'Void Reason'
-                    }],
+                    }], 
                     onRowPrepared: $scope.CheckRowPrepared,
                 }
                 $("<div>").text("Checks: ").appendTo(container);
@@ -3129,7 +3130,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             o.PropertyAddress = $scope.SSpreSign.PropertyAddress;
             return o
         });
-
+        
         _dealSheet.ContractOrMemo.Sellers = $.extend(true, _dealSheet.ContractOrMemo.Sellers || [], _sellers);
         _dealSheet.Deed.Sellers = $.extend(true, _dealSheet.Deed.Sellers || [], _sellers);
         _dealSheet.CorrectionDeed.Sellers = $.extend(true, _dealSheet.CorrectionDeed.Sellers || [], _sellers);
@@ -3145,7 +3146,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             });
         }
     });
-
+   
     $scope.constractFromData = function () {
         var ss = ScopeHelper.getShortSaleScope();
 

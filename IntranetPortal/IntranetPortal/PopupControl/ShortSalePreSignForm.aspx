@@ -631,14 +631,14 @@
                                 Congratulations! You are in the last step. Please click <strong>Generate document</strong> to download document(s).
                             </div>
                             <div class="alert alert-warning" role="alert">
-                                <i class="fa fa-warning"></i> Warning! This Step is not Reversible. Press <strong>Prev</strong> to review the data before Generating Documents.
+                                <i class="fa fa-warning"></i> Warning! This Step is not Reversible. Press <strong>Previous</strong> button below to review the data before Generating Documents.
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer" style="margin-top: 30px;">
-                    <button type="button" class="btn btn-default" ng-show="step>1" ng-click="PrevStep()">< Prev</button>
-                    <button type="button" class="btn btn-default" ng-click="GenerateDocument()" ng-show="step==MaxStep()">Generate documents</button>
+                    <button type="button" class="btn btn-default" ng-show="step>1" ng-click="PrevStep()">< Previous</button>
+                    <button type="button" class="btn btn-default" ng-click="GenerateDocument()" ng-show="step==MaxStep()" style="background-color:rgb(43, 137, 54);color:white"><strong>Generate Docs</strong> </button>
                     <button type="button" class="btn btn-default" ng-show="step<MaxStep()" ng-click="NextStep()">Next ></button>
                 </div>
             </div>
