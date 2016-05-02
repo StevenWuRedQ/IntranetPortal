@@ -34,7 +34,7 @@
         <div class="row">
             <div class="col-md-12" ng-hide="!preSignList">
                 <div style="padding: 20px">
-                    <h2 ng-if="role==null">Home Owner Incentive Request List</h2>
+                    <h2 ng-if="role==null">Homeowner Incentive Request List</h2>
                     <h2 ng-if="role=='finance'">Check Requests List</h2>
                     <div dx-data-grid="preSignRecordsGridOpt">
                        <%-- <div data-options="dxTemplate: {name: 'detail'}">
