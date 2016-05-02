@@ -16,9 +16,7 @@ angular.module('PortalApp')
             console.log("Can not load page without BBLE !")
             return;
         }
-
-
-
+        
         $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
         success(function (data, status, headers, config) {
             $scope.DocSearch = data;

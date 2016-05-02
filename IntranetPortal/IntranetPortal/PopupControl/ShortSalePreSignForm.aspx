@@ -281,7 +281,10 @@
                                 </ul>
                             </div>
                             <div class="ss_form" ng-show="SSpreSign.assignCrop.Crop" ng-class="{ss_warning:!SSpreSign.assignCrop.Crop}" data-message="Please assign Corp to continue!">
-                                <div class="alert alert-success" role="alert"><strong>{{SSpreSign.assignCrop.Crop}}</strong> <span ng-show="SSpreSign.assignCrop.CropData.Signer"> Singer is : <strong>{{SSpreSign.assignCrop.CropData.Signer}} </strong></span>  <br /> has been assigned to the property at <strong>{{SSpreSign.PropertyAddress}}</strong> . </div>
+                                <div class="alert alert-success" role="alert">
+                                    Corp: <strong>{{SSpreSign.assignCrop.Crop}}</strong> is assigned to property at, <strong>{{SSpreSign.PropertyAddress}}</strong> . <%--corp--%>
+                                    <span ng-show="SSpreSign.assignCrop.CropData.Signer"> The signer for the corp is: <strong>{{SSpreSign.assignCrop.CropData.Signer}} </strong></span>  <br /> <%--signer--%>
+                                    </div>
                             </div>
                         </div>
                     </div>
