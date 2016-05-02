@@ -1,4 +1,10 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortPreSignControl.ascx.vb" Inherits="IntranetPortal.ShortPreSignControl" %>
+<style>
+    .ss_warning2
+    {
+        color:red;
+    }
+</style>
 <uib-tabset class="tab-switch">
     <uib-tab ng-repeat="owner in SsCase.PropertyInfo.Owners" active="owner.active" disable="owner.disabled">
         <tab-heading>Seller {{$index+1}} </tab-heading>
@@ -75,7 +81,10 @@
            
         </ul>
         <div class="alert alert-warning" role="alert" ng-show="owner.Employed">
-             45 days of paystubs required Profit and Loss required Award Letter required
+            <p ng-show="owner.Employed=='Employed'">45 days of paystubs required</p>
+            <p ng-show="owner.Employed=='Self-Employed'">Profit and Loss required</p>
+            <p ng-show="owner.Employed=='Retired'||owner.Employed=='SSI / Disability'">Award Letter required</p>
+            <p ng-show="owner.Employed=='Unemployed'">Letter of explanation required</p>
         </div>
          <div class="alert alert-warning" role="alert" ng-show="owner.Bankaccount">
              3 months of bank statements
@@ -98,7 +107,7 @@
         <div>
             <div class="row form-group">
                 <div class="col-sm-4">
-                    <label>First Name *</label>
+                    <label ng-class="{ss_warning2:!owner.FirstName}">First Name *</label>
                     <input class="form-control" ng-model="owner.FirstName">
                 </div>
                 <div class="col-sm-4">
@@ -106,23 +115,23 @@
                     <input class="form-control" ng-model="owner.MiddleName">
                 </div>
                 <div class="col-sm-4">
-                    <label>Last Name *</label>
+                    <label ng-class="{ss_warning2:!owner.LastName}">Last Name *</label>
                     <input class="form-control" ng-model="owner.LastName">
                 </div>
                 <div class="col-sm-4">
-                    <label>DOB *</label>
+                    <label ng-class="{ss_warning2:!owner.DOB}">DOB *</label>
                     <input class="form-control" ng-model="owner.DOB" placeholder="mm/dd/yyyy" clean="true" mask="19/39/9999">
                 </div>
                 <div class="col-sm-4">
-                    <label>SSN *</label>
+                    <label ng-class="{ss_warning2:!owner.SSN}">SSN *</label>
                     <input class="form-control" ng-model="owner.SSN" mask="999-99-9999" clean="true">
                 </div>
                 <div class="col-sm-4">
-                    <label>Cell Number *</label>
+                    <label ng-class="{ss_warning2:!owner.Phone}">Cell Number *</label>
                     <input class="form-control" ng-model="owner.Phone" mask="(999) 999-9999" clean="true">
                 </div>
                 <div class="col-sm-4">
-                    <label>Additional Number</label>
+                    <label >Additional Number</label>
                     <input class="form-control" ng-model="owner.AdlPhone" mask="(999) 999-9999" clean="true">
                 </div>
                 <div class="col-sm-4">
@@ -133,11 +142,11 @@
             <hr>
             <div class="row form-group">
                 <div class="col-sm-4">
-                    <label>Street number *</label>
+                    <label ng-class="{ss_warning2:!owner.MailNumber}">Street number *</label>
                     <input class="form-control" ng-model="owner.MailNumber">
                 </div>
                 <div class="col-sm-4">
-                    <label>Street name *</label>
+                    <label ng-class="{ss_warning2:!owner.MailStreetName}">Street name *</label>
                     <input class="form-control" ng-model="owner.MailStreetName">
                 </div>
                 <div class="col-sm-4">
@@ -145,45 +154,45 @@
                     <input class="form-control" ng-model="owner.MailApt">
                 </div>
                 <div class="col-sm-4">
-                    <label>City *</label>
+                    <label ng-class="{ss_warning2:!owner.MailCity}">City *</label>
                     <input class="form-control" ng-model="owner.MailCity">
                 </div>
                 <div class="col-sm-4">
-                    <label>State *</label>
+                    <label ng-class="{ss_warning2:!owner.MailState}">State *</label>
                     <input class="form-control" ng-model="owner.MailState">
                 </div>
                 <div class="col-sm-4">
-                    <label>Zip *</label>
+                    <label ng-class="{ss_warning2:!owner.MailZip}">Zip *</label>
                     <input class="form-control" ng-model="owner.MailZip" mask="99999" clean='true'>
                 </div>
             </div>
             <hr>
             <div class="row form-group">
                 <div class="col-sm-4">
-                    <label>Bankruptcy *</label><br />
+                    <label ng-class="{ss_warning2:owner.Bankruptcy===null||owner.Bankruptcy===undefined}">Bankruptcy *</label><br />
                     <pt-radio model="owner.Bankruptcy" name="ownerBankruptcy{{$index}}"></pt-radio>
                 </div>
                 <div class="col-sm-4" ng-show="owner.Bankruptcy">
-                    <label>Bankruptcy Chapter *</label><br />
+                    <label ng-class="{ss_warning2:!owner.BankruptcyChapter}">Bankruptcy Chapter *</label><br />
                     <select class="form-control" ng-model="owner.BankruptcyChapter">
                         <option>Chapter 7</option>
                         <option>Chapter 13</option>
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <label>Bank account</label><br />
+                    <label ng-class="{ss_warning2:owner.Bankaccount===null||owner.Bankaccount===undefined}">Bank account</label><br />
                     <pt-radio model="owner.Bankaccount" name="Bankaccount{{$index}}"></pt-radio>
                 </div>
                 <div class="col-sm-4">
-                    <label>Active Military *</label><br />
+                    <label ng-class="{ss_warning2:owner.ActiveMilitar===null||owner.ActiveMilitar===undefined}">Active Military *</label><br />
                     <pt-radio model="owner.ActiveMilitar" name="ActiveMilitar{{$index}}"></pt-radio>
                 </div>
                 <div class="col-sm-4">
-                    <label>Tax Returns *</label><br />
+                    <label ng-class="{ss_warning2:owner.TaxReturn===null||owner.TaxReturn===undefined}">Tax Returns *</label><br />
                     <pt-radio model="owner.TaxReturn" name="TaxReturn{{$index}}"></pt-radio>
                 </div>
                 <div class="col-sm-4">
-                    <label>Employed *</label><br />
+                    <label ng-class="{ss_warning2:!owner.Employed}">Employed *</label><br />
                     <select ng-model="owner.Employed" class="form-control">
                         <option></option>
                         <option>Employed</option>
@@ -194,7 +203,7 @@
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <label>Paystubs </label><br />
+                    <label >Paystubs </label><br />
                     <pt-radio model="owner.Paystubs" name="Paystubs{{$index}}"></pt-radio>
                 </div>
             </div>
