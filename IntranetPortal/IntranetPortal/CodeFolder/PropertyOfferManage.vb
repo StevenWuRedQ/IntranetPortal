@@ -171,11 +171,26 @@ Public Class DocumentGenerator
             New DocumentPlaceHolder("LOT"),
             New DocumentPlaceHolder("SELLERNAMES", Function(data As JObject)
                                                        Dim names = data.SelectToken("DealSheet.ContractOrMemo.Sellers").Select(Function(s) s.SelectToken("Name").ToString).Where(Function(s) Not String.IsNullOrEmpty(s)).ToArray
-                                                       Return String.Join(",", names)
+                                                       Return String.Join(" & ", names)
                                                    End Function),
            New DocumentPlaceHolder("SELLER1NAME", "DealSheet.ContractOrMemo.Sellers[0].Name"),
            New DocumentPlaceHolder("SELLERADDRESS", "DealSheet.ContractOrMemo.Sellers[0].Address"),
            New DocumentPlaceHolder("BUYERNAME", "DealSheet.ContractOrMemo.Buyer.CorpName"),
+           New DocumentPlaceHolder("BUYERNAMESIGNER", Function(data As JObject)
+                                                          Dim result = data.SelectToken("DealSheet.ContractOrMemo.Buyer.CorpName")
+
+                                                          If result IsNot Nothing Then
+
+                                                              Dim signer = data.SelectToken("DealSheet.ContractOrMemo.Buyer.Signer")
+                                                              If signer IsNot Nothing Then
+                                                                  Return String.Format("{0} by {1}", result.ToString, signer.ToString)
+                                                              End If
+
+                                                              Return result.ToString
+                                                          End If
+
+                                                          Return ""
+                                                      End Function),
            New DocumentPlaceHolder("BUYERADDRESS", "DealSheet.ContractOrMemo.Buyer.Address")
         }
         file.PlaceHolders = phs.ToList
@@ -236,7 +251,7 @@ Public Class DocumentGenerator
             New DocumentPlaceHolder("LOT"),
             New DocumentPlaceHolder("SELLERNAMES", Function(data As JObject)
                                                        Dim names = data.SelectToken("DealSheet.Deed.Sellers").Select(Function(s) s.SelectToken("Name").ToString).Where(Function(s) Not String.IsNullOrEmpty(s)).ToArray
-                                                       Return String.Join(",", names)
+                                                       Return String.Join(" & ", names)
                                                    End Function),
             New DocumentPlaceHolder("SELLERADDRESS", "DealSheet.Deed.Sellers[0].Address"),
             New DocumentPlaceHolder("BUYERNAME", "DealSheet.Deed.Buyer.CorpName"),
@@ -258,7 +273,7 @@ Public Class DocumentGenerator
             New DocumentPlaceHolder("LOT"),
             New DocumentPlaceHolder("SELLERNAMES", Function(data As JObject)
                                                        Dim names = data.SelectToken("DealSheet.CorrectionDeed.Sellers").Select(Function(s) s.SelectToken("Name").ToString).Where(Function(s) Not String.IsNullOrEmpty(s)).ToArray
-                                                       Return String.Join(",", names)
+                                                       Return String.Join(" & ", names)
                                                    End Function),
             New DocumentPlaceHolder("SELLERADDRESS", "DealSheet.CorrectionDeed.Sellers[0].Address"),
             New DocumentPlaceHolder("BUYERNAME", "DealSheet.CorrectionDeed.Buyers[0].Name"),

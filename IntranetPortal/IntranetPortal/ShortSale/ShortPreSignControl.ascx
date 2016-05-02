@@ -22,7 +22,7 @@
                 <input class="ss_form_input" ng-model="owner.SSN" mask="999-99-9999" clean="true" readonly>
             </li>
             <li class="ss_form_item" style="width: 100%">
-                <label class="ss_form_input_title" ng-class="{ss_warning:!owner.MailNumber|| !owner.MailStreetName|| !owner.MailApt|| !owner.MailCity|| !owner.MailState|| !owner.MailZip}" data-message="Please complete seller {{$index+1}} Mail Address">Mail Address *</label>
+                <label class="ss_form_input_title" ng-class="{ss_warning:!owner.MailNumber|| !owner.MailStreetName || !owner.MailCity|| !owner.MailState|| !owner.MailZip}" data-message="Please complete seller {{$index+1}} Mail Address">Mail Address *</label>
                 <input class="ss_form_input" ng-value="formatAddr(owner.MailNumber, owner.MailStreetName, owner.MailApt, owner.MailCity, owner.MailState, owner.MailZip)" style="width: 96.66%" readonly>
             </li>
             <li class="ss_form_item">
@@ -43,7 +43,7 @@
                 <pt-radio model="owner.Bankruptcy" name="ownerBankruptcy{{$index}}"></pt-radio>
             </li>
             <li class="ss_form_item" ng-show="owner.Bankruptcy">
-                <label class="ss_form_input_title" ng-class="{ss_warning:owner.Bankruptcy&&!owner.BankruptcyChapter}" data-message="If seller {{$index+1}} filed Bankruptcy please fill which chapter">Bankruptcy Chapter</label>
+                <label class="ss_form_input_title" ng-class="{ss_warning:owner.Bankruptcy&&!owner.BankruptcyChapter}" data-message="If Seller {{$index+1}} Bankruptcy has been filled, please provide bankruptcy chapter">Bankruptcy Chapter</label>
                 <select class="ss_form_input" ng-model="owner.BankruptcyChapter" >
                     <option>Chapter 7</option>
                     <option>Chapter 13</option>
