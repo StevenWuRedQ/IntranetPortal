@@ -56,7 +56,7 @@ Public Class CorpManage
         emailData.Add("UserName", emp.Name)
         emailData.Add("Team", team)
 
-        IntranetPortal.Core.EmailService.SendMail(emp.Email, Employee.GetEmpsEmails(users), templateName, emailData)
+        IntranetPortal.Core.EmailService.SendMail(Employee.GetEmpsEmails(emp), Employee.GetEmpsEmails(users), templateName, emailData)
     End Sub
 
 End Class

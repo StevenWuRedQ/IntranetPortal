@@ -633,8 +633,12 @@ Partial Public Class Employee
     ''' <param name="emps">List of emloyee</param>
     ''' <returns>emails String joined with ";" </returns>
     Public Shared Function GetEmpsEmails(ParamArray emps() As Employee) As String
+        If CheckIsTesting() Then
+            Return "chrisy@myidealprop.com"
+        End If
+
         If (emps IsNot Nothing AndAlso emps.Count > 0) Then
-            Dim emails = emps.Select(Function(e) e.Email).Distinct()
+            Dim emails = emps.Where(Function(f) f IsNot Nothing).Select(Function(e) e.Email).Distinct()
             Return String.Join(";", emails)
         End If
         Return Nothing
@@ -645,7 +649,11 @@ Partial Public Class Employee
     ''' </summary>
     ''' <param name="emps">List of emloyee</param>
     ''' <returns>emails String joined with ";" </returns>
-    Public Shared Function GetEmpsEmails(emps As String()) As String
+    Public Shared Function GetEmpsEmails(ParamArray emps() As String) As String
+        If CheckIsTesting() Then
+            Return "chrisy@myidealprop.com"
+        End If
+
         If (emps IsNot Nothing AndAlso emps.Count > 0) Then
             Using ctx As New Entities
                 Dim emails = ctx.Employees.Where(Function(em) emps.Contains(em.Name)).Select(Function(em) em.Email).ToArray
@@ -654,6 +662,10 @@ Partial Public Class Employee
 
         End If
         Return Nothing
+    End Function
+
+    Private Shared Function CheckIsTesting() As Boolean
+        Return Utility.IsTesting()
     End Function
 
     Public Shared Function GetEmpTeams(empName As String) As String()

@@ -56,6 +56,7 @@ Public Class Utility
         Next
         Return VenderTypes
     End Function
+
     '<System.Runtime.CompilerServices.Extension> _
     'Public Shared Function ToDictionary(enum__1 As Type) As Dictionary(Of Integer, String)
     '    Dim type = enum__1.[GetType]()
@@ -79,6 +80,15 @@ Public Class Utility
 
     Public Shared Function IsAny(Of T)(data As IEnumerable(Of T)) As Boolean
         Return data IsNot Nothing AndAlso data.Any()
+    End Function
+
+    Public Shared Function IsTesting() As Boolean
+        Dim result = False
+        If Boolean.TryParse(System.Configuration.ConfigurationManager.AppSettings("IsTesting"), result) Then
+            Return result
+        End If
+
+        Return result
     End Function
 
     Public Shared Function GetLeadsName(leadData As LeadsInfo) As String

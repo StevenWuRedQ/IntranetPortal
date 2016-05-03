@@ -98,4 +98,20 @@ Public Class EmployeeTest
         Assert.IsFalse(ui.IsExsit)
     End Sub
 
+    <TestMethod>
+    Public Sub GetEmloyeeEmailTest()
+        Dim a As String = ""
+        a = Nothing
+        Dim emails = Employee.GetEmpsEmails(a)
+
+
+        Assert.IsTrue(String.IsNullOrEmpty(emails))
+        Dim chris = Employee.GetInstance("Chris Yan")
+        Dim steven = Employee.GetInstance("xsxxx")
+        emails = Employee.GetEmpsEmails(chris, steven)
+        Assert.IsFalse(String.IsNullOrEmpty(emails))
+
+        emails = Employee.GetEmpsEmails(steven)
+        Assert.IsTrue(String.IsNullOrEmpty(emails))
+    End Sub
 End Class

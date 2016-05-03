@@ -55,7 +55,7 @@ Namespace Controllers
                     maildata.Add("ResutContent", leadInfoDocumentSearch.ResutContent)
 
                     If Not String.IsNullOrEmpty(leadInfoDocumentSearch.CreateBy) Then
-                        Core.EmailService.SendMail(Employee.GetInstance(leadInfoDocumentSearch.CreateBy).Email, Employee.GetInstance(leadInfoDocumentSearch.UpdateBy).Email & ";" & Employee.CEO.Email, "DocSearchCompleted", maildata)
+                        Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy), Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy, Employee.CEO.Name), "DocSearchCompleted", maildata)
                     End If
                 End If
 
@@ -95,7 +95,8 @@ Namespace Controllers
                     Dim mLead = Lead.GetInstance(leadInfoDocumentSearch.BBLE)
 
                     If (LeadInfoSearchUser IsNot Nothing) Then
-                        Core.EmailService.SendMail(LeadInfoSearchUser.Email, empl.Email, "DocSearchNotify",
+                        Core.EmailService.SendMail(Employee.GetEmpsEmails(LeadInfoSearchUser), Employee.GetEmpsEmails(empl),
+                                               "DocSearchNotify",
                                                 New Dictionary(Of String, String) From
                                                 {
                                                     {"SubmitUser", empl.Name},
