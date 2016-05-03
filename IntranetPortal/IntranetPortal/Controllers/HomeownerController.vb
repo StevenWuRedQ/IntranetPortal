@@ -15,7 +15,7 @@ Namespace Controllers
                 Return Ok(owner.Last4SSN)
             End If
 
-            Return NotFound()
+            Return Ok("")
         End Function
 
     End Class
