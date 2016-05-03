@@ -693,9 +693,7 @@ angular.module('PortalApp')
             console.log("Can not load page without BBLE !")
             return;
         }
-
-
-
+        
         $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
         success(function (data, status, headers, config) {
             $scope.DocSearch = data;
@@ -2055,10 +2053,12 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             format: 'currency',
             dataType: 'number',
             precision: 2
-        }, {
-            dataField: 'NeedSearch',
-            caption: 'Search Request'
-        }, ],
+        },
+        //{
+        //    dataField: 'NeedSearch',
+        //    caption: 'Search Request'
+            //},
+        ],
         wordWrapEnabled: true
     }
 
@@ -3081,9 +3081,8 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
                 ]
             }
         });
-
     }
-
+    
     $scope.SSpreSign = {
         Type: 'Short Sale',
         FormName: 'PropertyOffer',

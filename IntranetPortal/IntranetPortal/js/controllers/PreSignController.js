@@ -373,10 +373,12 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             format: 'currency',
             dataType: 'number',
             precision: 2
-        }, {
-            dataField: 'NeedSearch',
-            caption: 'Search Request'
-        }, ],
+        },
+        //{
+        //    dataField: 'NeedSearch',
+        //    caption: 'Search Request'
+            //},
+        ],
         wordWrapEnabled: true
     }
 
