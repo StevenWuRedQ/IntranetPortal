@@ -3,6 +3,7 @@
 <asp:Content runat="server" ContentPlaceHolderID="head"></asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
     <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE") %>" />
+    <input  type="text" hidden="hidden" value="1234"/>
     <div id="SearchRecordinCtrl" ng-controller="SearchRecordinCtrl">
         <div class="">
             <h4 class="ss_form_title ">Documents Received On</h4>
