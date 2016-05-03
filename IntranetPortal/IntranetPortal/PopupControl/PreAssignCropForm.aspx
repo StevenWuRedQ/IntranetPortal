@@ -74,7 +74,7 @@
                     <div ng-show="step==1" class="wizard-content">
                         <section>
                             <div>
-                                <h4 class="ss_form_title ">Home Owner Incentive <a role="button" class="btn btn-default pull-right" ng-show="model=='View'&&allowEdit" href="/popupControl/preAssignCropForm.aspx?model=Edit&Id={{preAssign.Id}}"><i class="fa fa-edit"></i>Edit</a></h4>
+                                <h4 class="ss_form_title ">Homeowner Incentive <a role="button" class="btn btn-default pull-right" ng-show="model=='View'&&allowEdit" href="/popupControl/preAssignCropForm.aspx?model=Edit&Id={{preAssign.Id}}"><i class="fa fa-edit"></i>Edit</a></h4>
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item online">
                                         <label class="ss_form_input_title">Property Address</label>
