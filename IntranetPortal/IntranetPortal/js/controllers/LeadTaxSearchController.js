@@ -1,8 +1,4 @@
-﻿/* */
-
-/* */
-
-angular.module('PortalApp')
+﻿angular.module('PortalApp')
     .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
         //New Model(this,arguments)
         $scope.ptContactServices = ptContactServices;
