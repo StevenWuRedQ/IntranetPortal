@@ -154,7 +154,7 @@ Public Class DataWCFService
                     lisPen.CountyNum = CInt(item.COUNTY)
 
                     If item.Debtor_Type = "I" Then
-                        lisPen.Defendant = Utility.BuildUsername(item.Debtor_First_Name, item.Debtor_Middle_Name, item.Debtor_Last_Name)
+                        lisPen.Defendant = item.DEBETOR_NAME  'Utility.BuildUsername(item.Debtor_First_Name, item.Debtor_Middle_Name, item.Debtor_Last_Name)
                     Else
                         lisPen.Defendant = item.Debtor_Corp_Name
                     End If
@@ -170,7 +170,7 @@ Public Class DataWCFService
                     'lisPen.Original_Mortgage = item.Original_Mortgage
 
                     If item.Creditor_Type = "I" Then
-                        lisPen.Plaintiff = Utility.BuildUsername(item.Creditor_First_Name, item.Creditor_Middle_Name, item.Creditor_Last_Name)
+                        lisPen.Plaintiff = item.CREDITOR_NAME ' Utility.BuildUsername(item.Creditor_First_Name, item.Creditor_Middle_Name, item.Creditor_Last_Name)
                     Else
                         lisPen.Plaintiff = item.Creditor_Corp_Name
                     End If

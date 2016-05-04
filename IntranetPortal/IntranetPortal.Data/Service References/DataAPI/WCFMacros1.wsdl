@@ -107,6 +107,12 @@
   <wsdl:message name="IWCFMacros_NYC_Owner_Search_OutputMessage">
     <wsdl:part name="parameters" element="tns:NYC_Owner_SearchResponse" />
   </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_DronesExecutionLog_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_DronesExecutionLog" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_DronesExecutionLog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_DronesExecutionLogResponse" />
+  </wsdl:message>
   <wsdl:message name="IWCFMacros_NYC_Assessment_Full_InputMessage">
     <wsdl:part name="parameters" element="tns:NYC_Assessment_Full" />
   </wsdl:message>
@@ -387,6 +393,10 @@
     <wsdl:operation name="NYC_Owner_Search">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Owner_Search" message="tns:IWCFMacros_NYC_Owner_Search_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Owner_SearchResponse" message="tns:IWCFMacros_NYC_Owner_Search_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_DronesExecutionLog">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_DronesExecutionLog" message="tns:IWCFMacros_Get_DronesExecutionLog_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_DronesExecutionLogResponse" message="tns:IWCFMacros_Get_DronesExecutionLog_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="NYC_Assessment_Full">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/NYC_Assessment_Full" message="tns:IWCFMacros_NYC_Assessment_Full_InputMessage" />
@@ -672,6 +682,15 @@
     </wsdl:operation>
     <wsdl:operation name="NYC_Owner_Search">
       <soap:operation soapAction="http://tempuri.org/IWCFMacros/NYC_Owner_Search" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_DronesExecutionLog">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_DronesExecutionLog" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

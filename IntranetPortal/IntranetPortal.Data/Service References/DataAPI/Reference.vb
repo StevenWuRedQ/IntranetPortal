@@ -2980,6 +2980,158 @@ Namespace DataAPI
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TfexposeExecutionLog_Result", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TfexposeExecutionLog_Result
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AttemptNumField As Long
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CompleteStatusField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private EndTimeField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ErrorTypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ExceptionField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ProcIDField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RequestedServiceField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private StartTimeField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TimeStampField As Date
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property AttemptNum() As Long
+            Get
+                Return Me.AttemptNumField
+            End Get
+            Set
+                Me.AttemptNumField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CompleteStatus() As String
+            Get
+                Return Me.CompleteStatusField
+            End Get
+            Set
+                Me.CompleteStatusField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property EndTime() As System.Nullable(Of Date)
+            Get
+                Return Me.EndTimeField
+            End Get
+            Set
+                Me.EndTimeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ErrorType() As String
+            Get
+                Return Me.ErrorTypeField
+            End Get
+            Set
+                Me.ErrorTypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Exception() As String
+            Get
+                Return Me.ExceptionField
+            End Get
+            Set
+                Me.ExceptionField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ProcID() As String
+            Get
+                Return Me.ProcIDField
+            End Get
+            Set
+                Me.ProcIDField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property RequestedService() As String
+            Get
+                Return Me.RequestedServiceField
+            End Get
+            Set
+                Me.RequestedServiceField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property StartTime() As System.Nullable(Of Date)
+            Get
+                Return Me.StartTimeField
+            End Get
+            Set
+                Me.StartTimeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TimeStamp() As Date
+            Get
+                Return Me.TimeStampField
+            End Get
+            Set
+                Me.TimeStampField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="NYC_Assessment", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
      System.SerializableAttribute()>  _
     Partial Public Class NYC_Assessment
@@ -6656,9 +6808,9 @@ Namespace DataAPI
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="JDLS_LPS_View", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="SP_JDLS_LPS_BY_BBLE_Result", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
      System.SerializableAttribute()>  _
-    Partial Public Class JDLS_LPS_View
+    Partial Public Class SP_JDLS_LPS_BY_BBLE_Result
         Inherits Object
         Implements System.Runtime.Serialization.IExtensibleDataObject
         
@@ -6711,6 +6863,9 @@ Namespace DataAPI
         Private COUNTYField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CREDITOR_NAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private Compressed_NameField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
@@ -6751,6 +6906,9 @@ Namespace DataAPI
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private DCOUNTYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DEBETOR_NAMEField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private Data_Entry_TimeField As String
@@ -7057,6 +7215,16 @@ Namespace DataAPI
         End Property
         
         <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CREDITOR_NAME() As String
+            Get
+                Return Me.CREDITOR_NAMEField
+            End Get
+            Set
+                Me.CREDITOR_NAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
         Public Property Compressed_Name() As String
             Get
                 Return Me.Compressed_NameField
@@ -7193,6 +7361,16 @@ Namespace DataAPI
             End Get
             Set
                 Me.DCOUNTYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DEBETOR_NAME() As String
+            Get
+                Return Me.DEBETOR_NAMEField
+            End Get
+            Set
+                Me.DEBETOR_NAMEField = value
             End Set
         End Property
         
@@ -51169,6 +51347,9 @@ Namespace DataAPI
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Owner_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Owner_SearchResponse")>  _
         Function NYC_Owner_Search(ByVal Boro As String, ByVal OwnerName As String) As DataAPI.NYC_Assessment_Initial_Search_View()
         
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_DronesExecutionLog", ReplyAction:="http://tempuri.org/IWCFMacros/Get_DronesExecutionLogResponse")>  _
+        Function Get_DronesExecutionLog(ByVal BBLE As String) As DataAPI.TfexposeExecutionLog_Result()
+        
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Assessment_Full", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Assessment_FullResponse")>  _
         Function NYC_Assessment_Full(ByVal BBLE As String) As DataAPI.NYC_Assessment()
         
@@ -51188,7 +51369,7 @@ Namespace DataAPI
         Function Get_LisPendens(ByVal BBLE As String) As DataAPI.LisPen()
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_AreaAbstract_LisPendens", ReplyAction:="http://tempuri.org/IWCFMacros/Get_AreaAbstract_LisPendensResponse")>  _
-        Function Get_AreaAbstract_LisPendens(ByVal BBLE As String) As DataAPI.JDLS_LPS_View()
+        Function Get_AreaAbstract_LisPendens(ByVal BBLE As String) As DataAPI.SP_JDLS_LPS_BY_BBLE_Result()
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLOResponse")>  _
         Function Get_TLO(ByVal APIorderNum As Integer, ByVal BBLE As String, ByVal PersonName As String, ByVal PersonAddress1 As String, ByVal PersonAddress2 As String, ByVal PersonCity As String, ByVal PersonState As String, ByVal PersonZip As String, ByVal PersonCountry As String, ByVal Subject_Type As String, ByVal PersonPhone As String) As DataAPI.TLO_SuperPhoneResults()
@@ -51302,6 +51483,8 @@ Namespace DataAPI
          System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Acris_Out)),  _
          System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NYC_Assessment_Initial_Search_View())),  _
          System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NYC_Assessment_Initial_Search_View)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TfexposeExecutionLog_Result())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TfexposeExecutionLog_Result)),  _
          System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NYC_Assessment())),  _
          System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.NYC_Assessment)),  _
          System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.ALL_NYC_Tax_Liens_CO_Info())),  _
@@ -51310,8 +51493,8 @@ Namespace DataAPI
          System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Acris_LatestOwner_View)),  _
          System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.LisPen())),  _
          System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.LisPen)),  _
-         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.JDLS_LPS_View())),  _
-         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.JDLS_LPS_View)),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SP_JDLS_LPS_BY_BBLE_Result())),  _
+         System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.SP_JDLS_LPS_BY_BBLE_Result)),  _
          System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLO_SuperPhoneResults())),  _
          System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.TLO_SuperPhoneResults)),  _
          System.ServiceModel.ServiceKnownTypeAttribute(GetType(DataAPI.Acris_Last_Sales_Info)),  _
@@ -51814,6 +51997,10 @@ Namespace DataAPI
             Return MyBase.Channel.NYC_Owner_Search(Boro, OwnerName)
         End Function
         
+        Public Function Get_DronesExecutionLog(ByVal BBLE As String) As DataAPI.TfexposeExecutionLog_Result() Implements DataAPI.IWCFMacros.Get_DronesExecutionLog
+            Return MyBase.Channel.Get_DronesExecutionLog(BBLE)
+        End Function
+        
         Public Function NYC_Assessment_Full(ByVal BBLE As String) As DataAPI.NYC_Assessment() Implements DataAPI.IWCFMacros.NYC_Assessment_Full
             Return MyBase.Channel.NYC_Assessment_Full(BBLE)
         End Function
@@ -51838,7 +52025,7 @@ Namespace DataAPI
             Return MyBase.Channel.Get_LisPendens(BBLE)
         End Function
         
-        Public Function Get_AreaAbstract_LisPendens(ByVal BBLE As String) As DataAPI.JDLS_LPS_View() Implements DataAPI.IWCFMacros.Get_AreaAbstract_LisPendens
+        Public Function Get_AreaAbstract_LisPendens(ByVal BBLE As String) As DataAPI.SP_JDLS_LPS_BY_BBLE_Result() Implements DataAPI.IWCFMacros.Get_AreaAbstract_LisPendens
             Return MyBase.Channel.Get_AreaAbstract_LisPendens(BBLE)
         End Function
         

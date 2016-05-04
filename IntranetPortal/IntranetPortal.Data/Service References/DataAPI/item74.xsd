@@ -232,6 +232,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="Get_DronesExecutionLog">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_DronesExecutionLogResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_DronesExecutionLogResult" nillable="true" type="q21:ArrayOfTfexposeExecutionLog_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NYC_Assessment_Full">
     <xs:complexType>
       <xs:sequence>
@@ -242,7 +256,7 @@
   <xs:element name="NYC_Assessment_FullResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_Assessment_FullResult" nillable="true" type="q21:ArrayOfNYC_Assessment" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_Assessment_FullResult" nillable="true" type="q22:ArrayOfNYC_Assessment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -256,7 +270,7 @@
   <xs:element name="ALL_NYC_Tax_Liens_By_BBLEResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="ALL_NYC_Tax_Liens_By_BBLEResult" nillable="true" type="q22:ArrayOfALL_NYC_Tax_Liens_CO_Info" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="ALL_NYC_Tax_Liens_By_BBLEResult" nillable="true" type="q23:ArrayOfALL_NYC_Tax_Liens_CO_Info" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -305,7 +319,7 @@
   <xs:element name="Get_Acris_Latest_OwnerNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_Acris_Latest_OwnerNameResult" nillable="true" type="q23:ArrayOfAcris_LatestOwner_View" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_Acris_Latest_OwnerNameResult" nillable="true" type="q24:ArrayOfAcris_LatestOwner_View" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -319,7 +333,7 @@
   <xs:element name="Get_LisPendensResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_LisPendensResult" nillable="true" type="q24:ArrayOfLisPen" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_LisPendensResult" nillable="true" type="q25:ArrayOfLisPen" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -333,7 +347,7 @@
   <xs:element name="Get_AreaAbstract_LisPendensResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_AreaAbstract_LisPendensResult" nillable="true" type="q25:ArrayOfJDLS_LPS_View" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_AreaAbstract_LisPendensResult" nillable="true" type="q26:ArrayOfSP_JDLS_LPS_BY_BBLE_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -357,7 +371,7 @@
   <xs:element name="Get_TLOResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_TLOResult" nillable="true" type="q26:ArrayOfTLO_SuperPhoneResults" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_TLOResult" nillable="true" type="q27:ArrayOfTLO_SuperPhoneResults" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -381,7 +395,7 @@
   <xs:element name="Get_LocateReportResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" minOccurs="0" name="Get_LocateReportResult" nillable="true" type="q27:TLOLocateReportOutput" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" minOccurs="0" name="Get_LocateReportResult" nillable="true" type="q28:TLOLocateReportOutput" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -396,7 +410,7 @@
   <xs:element name="Acris_Get_LatestSaleResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Acris_Get_LatestSaleResult" nillable="true" type="q28:Acris_Last_Sales_Info" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Acris_Get_LatestSaleResult" nillable="true" type="q29:Acris_Last_Sales_Info" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -410,7 +424,7 @@
   <xs:element name="NYC_NameAndAddressResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_NameAndAddressResult" nillable="true" type="q29:ArrayOfNYC_NameAndAddress_View" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_NameAndAddressResult" nillable="true" type="q30:ArrayOfNYC_NameAndAddress_View" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -424,7 +438,7 @@
   <xs:element name="Get_Acris_TaxLienResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_Acris_TaxLienResult" nillable="true" type="q30:TaxLien_Info" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_Acris_TaxLienResult" nillable="true" type="q31:TaxLien_Info" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -476,7 +490,7 @@
   <xs:element name="AB_GetJugmentsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetJugmentsResult" nillable="true" type="q31:ArrayOfJudgment" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetJugmentsResult" nillable="true" type="q32:ArrayOfJudgment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -497,7 +511,7 @@
   <xs:element name="AB_GetBankruptcyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetBankruptcyResult" nillable="true" type="q32:ArrayOfBankruptcy" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetBankruptcyResult" nillable="true" type="q33:ArrayOfBankruptcy" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -516,7 +530,7 @@
   <xs:element name="AB_GetEnvirnomentalResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetEnvirnomentalResult" nillable="true" type="q33:ArrayOfECB" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetEnvirnomentalResult" nillable="true" type="q34:ArrayOfECB" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -535,7 +549,7 @@
   <xs:element name="AB_GetMortDeedResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetMortDeedResult" nillable="true" type="q34:ArrayOfMortgages_Deeds" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetMortDeedResult" nillable="true" type="q35:ArrayOfMortgages_Deeds" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -558,7 +572,7 @@
   <xs:element name="AB_GetFederalTaxLienResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetFederalTaxLienResult" nillable="true" type="q35:ArrayOfFederalTaxLien" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetFederalTaxLienResult" nillable="true" type="q36:ArrayOfFederalTaxLien" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -579,7 +593,7 @@
   <xs:element name="AB_GetPatriotResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetPatriotResult" nillable="true" type="q36:ArrayOfPatriot" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetPatriotResult" nillable="true" type="q37:ArrayOfPatriot" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -600,7 +614,7 @@
   <xs:element name="AB_GetParkingViolationsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetParkingViolationsResult" nillable="true" type="q37:ArrayOfParkingViolation" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetParkingViolationsResult" nillable="true" type="q38:ArrayOfParkingViolation" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -619,7 +633,7 @@
   <xs:element name="AB_GetTranscriptAdjunctionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetTranscriptAdjunctionResult" nillable="true" type="q38:ArrayOfTranscriptAdjunction" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetTranscriptAdjunctionResult" nillable="true" type="q39:ArrayOfTranscriptAdjunction" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -642,7 +656,7 @@
   <xs:element name="AAbs_GetUccResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AAbs_GetUccResult" nillable="true" type="q39:ArrayOfUCC" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AAbs_GetUccResult" nillable="true" type="q40:ArrayOfUCC" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -664,7 +678,7 @@
   <xs:element name="AAbs_GetEmergencyRepairResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AAbs_GetEmergencyRepairResult" nillable="true" type="q40:ArrayOfEmergencyRepair" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AAbs_GetEmergencyRepairResult" nillable="true" type="q41:ArrayOfEmergencyRepair" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -672,7 +686,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
-        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="SelectedOwners" nillable="true" type="q41:ArrayOfOwnerInfo" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="SelectedOwners" nillable="true" type="q42:ArrayOfOwnerInfo" />
         <xs:element minOccurs="0" name="RunJudgement" type="xs:boolean" />
         <xs:element minOccurs="0" name="RunFederalTaxLiens" type="xs:boolean" />
         <xs:element minOccurs="0" name="RunMortgages" type="xs:boolean" />
@@ -691,7 +705,7 @@
   <xs:element name="AAbs_GetAreAbstractReportResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AAbs_GetAreAbstractReportResult" nillable="true" type="q42:AB_Report_Out" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AAbs_GetAreAbstractReportResult" nillable="true" type="q43:AB_Report_Out" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -700,10 +714,10 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="APIorderNum" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="FullName" nillable="true" type="xs:string" />
-        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" minOccurs="0" name="Name" nillable="true" type="q43:NameBase" />
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" minOccurs="0" name="Name" nillable="true" type="q44:NameBase" />
         <xs:element minOccurs="0" name="UseExactFirstNameMatch" type="xs:boolean" />
         <xs:element minOccurs="0" name="UsePhoneticLastNameMatch" type="xs:boolean" />
-        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" minOccurs="0" name="Address" nillable="true" type="q44:AddressBase" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" minOccurs="0" name="Address" nillable="true" type="q45:AddressBase" />
         <xs:element minOccurs="0" name="SSN" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="DateOfBirth" type="xs:dateTime" />
         <xs:element minOccurs="0" name="MinimumAge" nillable="true" type="xs:string" />
@@ -719,7 +733,7 @@
   <xs:element name="Get_TLO_PersonResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" minOccurs="0" name="Get_TLO_PersonResult" nillable="true" type="q45:TLOPersonSearchOutput" />
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" minOccurs="0" name="Get_TLO_PersonResult" nillable="true" type="q46:TLOPersonSearchOutput" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -734,7 +748,7 @@
   <xs:element name="Get_NYC_TaxLienResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_NYC_TaxLienResult" nillable="true" type="q46:ArrayOfSP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result" />
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_NYC_TaxLienResult" nillable="true" type="q47:ArrayOfSP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -798,7 +812,7 @@
   <xs:element name="Trig_Get_Subscriptions_ListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Trig_Get_Subscriptions_ListResult" nillable="true" type="q47:ArrayOfTriggerManager" />
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Trig_Get_Subscriptions_ListResult" nillable="true" type="q48:ArrayOfTriggerManager" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -812,7 +826,7 @@
   <xs:element name="Trig_Is_TrigOn_By_BBLEResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Trig_Is_TrigOn_By_BBLEResult" nillable="true" type="q48:ArrayOfSP_Is_TrigOn_BY_BBLE_Result" />
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Trig_Is_TrigOn_By_BBLEResult" nillable="true" type="q49:ArrayOfSP_Is_TrigOn_BY_BBLE_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -826,7 +840,7 @@
   <xs:element name="NYC_Zoning_By_BBLEResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_Zoning_By_BBLEResult" nillable="true" type="q49:ArrayOfSP_NYC_Zoning_BY_BBLE_Result" />
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_Zoning_By_BBLEResult" nillable="true" type="q50:ArrayOfSP_NYC_Zoning_BY_BBLE_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -847,7 +861,7 @@
   <xs:element name="DCPGeododerByAddress">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Address" nillable="true" type="q50:GeoAddress" />
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Address" nillable="true" type="q51:GeoAddress" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
