@@ -405,7 +405,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                 type: "required"
             }]
         }],
-
+        sorting: { mode: 'none' },
         summary: {
             totalItems: [{
                 column: "Name",
@@ -431,6 +431,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         bindingOptions: {
             dataSource: 'preAssign.CheckRequestData.Checks'
         },
+        sorting: { mode: 'none' },
         //dataSource: $scope.preAssign.CheckRequestData.Checks,
         paging: {
             pageSize: 10
@@ -458,6 +459,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         }, {
             dataField: 'Date',
             dataType: 'date',
+            caption: 'Date of release',
             validationRules: [{
                 type: "required"
             }]
@@ -515,7 +517,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
 
                     }, {
                         dataField: 'Date',
-                        caption: 'Check Date',
+                        caption: 'Date of release',
                         dataType: 'date',
                         format: 'shortDate'
                     }, {

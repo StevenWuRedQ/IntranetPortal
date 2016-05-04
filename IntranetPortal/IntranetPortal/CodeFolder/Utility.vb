@@ -364,7 +364,7 @@ Public Class Utility
         If (String.IsNullOrEmpty(name)) Then
             Return False
         End If
-        'regex match the comany like LLC Crop Etc. regex store in database
+        'regex match the comany like LLC Corp Etc. regex store in database
 
         Dim regexStr = Core.PortalSettings.GetValue("CompanyRegex")
         Dim match = Regex.Match(name, regexStr)
