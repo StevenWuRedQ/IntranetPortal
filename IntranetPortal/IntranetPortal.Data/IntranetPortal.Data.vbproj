@@ -417,9 +417,6 @@
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.FederalTaxLien.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.JDLS_LPS_View.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.Judgment.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -459,6 +456,9 @@
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.SP_Is_TrigOn_BY_BBLE_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.SP_JDLS_LPS_BY_BBLE_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -466,6 +466,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.TaxLien_Info.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.TfexposeExecutionLog_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.TLOLocateReportOutput.datasource">

@@ -13,7 +13,7 @@
         /*fix by steven*/
         /*font: 20px 'Segoe UI', Helvetica, 'Droid Sans', Tahoma, Geneva, sans-serif;*/
         /*color: #0072C6; /*change the coloer by steven*/
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Source Sans Pro', sans-serif; 
         font-size: 21px;
         vertical-align: central;
         padding: 3px;

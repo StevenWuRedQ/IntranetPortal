@@ -336,6 +336,27 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="NYC_Assessment_Initial_Search_View" nillable="true" type="tns:NYC_Assessment_Initial_Search_View" />
+  <xs:complexType name="ArrayOfTfexposeExecutionLog_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TfexposeExecutionLog_Result" nillable="true" type="tns:TfexposeExecutionLog_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTfexposeExecutionLog_Result" nillable="true" type="tns:ArrayOfTfexposeExecutionLog_Result" />
+  <xs:complexType name="TfexposeExecutionLog_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AttemptNum" type="xs:long" />
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompleteStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EndTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ErrorType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Exception" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProcID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RequestedService" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TimeStamp" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TfexposeExecutionLog_Result" nillable="true" type="tns:TfexposeExecutionLog_Result" />
   <xs:complexType name="ArrayOfNYC_Assessment">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="NYC_Assessment" nillable="true" type="tns:NYC_Assessment" />
@@ -656,13 +677,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LisPen" nillable="true" type="tns:LisPen" />
-  <xs:complexType name="ArrayOfJDLS_LPS_View">
+  <xs:complexType name="ArrayOfSP_JDLS_LPS_BY_BBLE_Result">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="JDLS_LPS_View" nillable="true" type="tns:JDLS_LPS_View" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SP_JDLS_LPS_BY_BBLE_Result" nillable="true" type="tns:SP_JDLS_LPS_BY_BBLE_Result" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfJDLS_LPS_View" nillable="true" type="tns:ArrayOfJDLS_LPS_View" />
-  <xs:complexType name="JDLS_LPS_View">
+  <xs:element name="ArrayOfSP_JDLS_LPS_BY_BBLE_Result" nillable="true" type="tns:ArrayOfSP_JDLS_LPS_BY_BBLE_Result" />
+  <xs:complexType name="SP_JDLS_LPS_BY_BBLE_Result">
     <xs:sequence>
       <xs:element minOccurs="0" name="Accident_Date" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Attorney_City" nillable="true" type="xs:string" />
@@ -679,6 +700,7 @@
       <xs:element minOccurs="0" name="Book_Type" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CNCOUNTY" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="COUNTY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CREDITOR_NAME" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Compressed_Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Compressed_Name_Type" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="County_Name" nillable="true" type="xs:string" />
@@ -693,6 +715,7 @@
       <xs:element minOccurs="0" name="Creditor_Zip" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Creditor_Zip1" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DCOUNTY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DEBETOR_NAME" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Data_Entry_Time" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Debtor_Block" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Debtor_City" nillable="true" type="xs:string" />
@@ -743,7 +766,7 @@
       <xs:element minOccurs="0" name="Third_Party_Zip1" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="JDLS_LPS_View" nillable="true" type="tns:JDLS_LPS_View" />
+  <xs:element name="SP_JDLS_LPS_BY_BBLE_Result" nillable="true" type="tns:SP_JDLS_LPS_BY_BBLE_Result" />
   <xs:complexType name="ArrayOfTLO_SuperPhoneResults">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="TLO_SuperPhoneResults" nillable="true" type="tns:TLO_SuperPhoneResults" />
