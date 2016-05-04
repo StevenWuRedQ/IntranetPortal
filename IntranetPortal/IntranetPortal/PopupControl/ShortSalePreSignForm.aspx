@@ -250,7 +250,7 @@
                         <div id=""></div>
                     </div>--%>
                     </div>
-                    <%--select team and assign crops--%>
+                    <%--select team and assign corps--%>
                     <div class="view-animate" ng-show="currentStep().title=='Assign Crops'" id="preSignAssignCrops">
                         <h3 class="wizard-title">Select team and Assign corp</h3>
                         <div class="ss_form">
@@ -276,7 +276,7 @@
                                     </li>
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title">&nbsp;</label>
-                                        <input type="button" value="Assign Crop" class="rand-button rand-button-blue rand-button-pad" ng-click="assginCropClick()" ng-show="!SSpreSign.assignCrop.Crop">
+                                        <input type="button" value="Assign Corp" class="rand-button rand-button-blue rand-button-pad" ng-click="assginCropClick()" ng-show="!SSpreSign.assignCrop.Crop">
                                     </li>
                                 </ul>
                             </div>
@@ -488,7 +488,7 @@
                             </div>--%>
 
                                 <div class="ss_form">
-                                    <h4 class="ss_form_title " <%--ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.EntityId}"--%> ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.CorpName}" data-message="Can not get DEED Crop this time!">Buyer</h4>
+                                    <h4 class="ss_form_title " <%--ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.EntityId}"--%> ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.CorpName}" data-message="Can not get DEED Corp this time!">Buyer</h4>
                                     <div class="ss_border">
                                         <ul class="ss_form_box clearfix">
                                             <li class="ss_form_item ">
