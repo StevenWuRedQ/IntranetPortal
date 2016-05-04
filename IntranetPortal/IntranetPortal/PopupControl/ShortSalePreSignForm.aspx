@@ -213,7 +213,7 @@
                             <div class="col-md-12">
                                 <div class="input-group">
                                     <label ng-class="{ss_warning:!SSpreSign.Type}" data-message="Please Select Offer type">Select Offer type</label>
-                                    <select class="form-control" ng-model="SSpreSign.Type">
+                                    <select class="form-control" ng-model="SSpreSign.Type" disabled="disabled">
                                         <option selected>Short Sale</option>
                                         <option>Straight Sale</option>
                                         <option>Other</option>
