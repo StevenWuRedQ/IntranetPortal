@@ -164,22 +164,22 @@ Partial Public Class LeadsActivityLog
     ''' The category of log
     ''' </summary>
     Enum LogCategory
-        SalesAgent
-        Task
-        DoorknockTask
-        Appointment
-        Status
-        Approval
-        Approved
-        Declined
-        Email
-        RecycleTask
-        ShortSale
-        Legal
-        Eviction
-        Construction
-        PublicUpdate
-        Title
+        SalesAgent = 0
+        Task = 1
+        DoorknockTask = 2
+        Appointment = 3
+        Status = 4
+        Approval = 5
+        Approved = 6
+        Declined = 7
+        Email = 8
+        RecycleTask = 9
+        ShortSale = 10
+        Legal = 11
+        Eviction = 12
+        Construction = 13
+        PublicUpdate = 14
+        Title = 15
     End Enum
 
     Enum EnumActionType

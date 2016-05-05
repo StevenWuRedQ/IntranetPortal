@@ -284,7 +284,7 @@
                                 dateSelected = new Date();
                             console.log(JSON.stringify(dateSelected))
                             $.ajax({
-                                url: '/api/Followup/?category=' + type + '&type=17&bble=' + leadsInfoBBLE,
+                                url: '/api/Followup/?category=' + type + '&type=15&bble=' + leadsInfoBBLE,
                                 type: 'POST',
                                 data: JSON.stringify(dateSelected),
                                 cache: false,
