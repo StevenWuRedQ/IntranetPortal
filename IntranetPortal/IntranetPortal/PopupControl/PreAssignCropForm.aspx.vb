@@ -13,12 +13,14 @@ Public Class PerAssignCropForm
                 Dim search = LeadInfoDocumentSearch.GetInstance(bble)
 
                 If search Is Nothing Then
-                    Server.Transfer("/PortalError.aspx?code=1003")
+
+                    divSearchWarning.Visible = True
+
                 End If
 
-                If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
-                    Server.Transfer("/PortalError.aspx?code=1004")
-                End If
+                'If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
+                '    Server.Transfer("/PortalError.aspx?code=1004")
+                'End If
 
                 Dim record = IntranetPortal.Data.PreSignRecord.GetInstanceByBBLE(bble)
 

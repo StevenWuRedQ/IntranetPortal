@@ -25,9 +25,9 @@ Dear <%=  UserName%>,
 <br />
 <br />
 <% If IsUpdateMode Then %>
-<%= PreSign.UpdateBy %> just update the check request, please review.
+<%= PreSign.UpdateBy %> just update the HOI request, please review.
 <% Else %>
-<%= PreSign.CreateBy %> just submit a check request, please review.
+<%= PreSign.CreateBy %> just submit a HOI request, please review.
 <% End If %>
 <br />
 <br />
@@ -99,6 +99,11 @@ Dear <%=  UserName%>,
             i = i + 1
         Next %>
 </table>
+<% else %>
+
+<br />
+(No Checks)
+<br />
 <% End if %>
 <br />
 More info, please <a href="http://portal.myidealprop.com/">click here</a>.

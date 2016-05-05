@@ -118,9 +118,9 @@
                                 <input class="ss_form_input " ng-model="perAssignCtrl.Name_On_Check">
                             </li>--%>
                                 </ul>
-                               <%-- <div ng-if="!preAssign.NeedSearch" class="alert alert-warning" role="alert">
-                                    <strong><i class="fa fa-warning"></i>Warning!</strong> Please make sure that you have completed a Doc search already.
-                                </div>--%>
+                                <div class="alert alert-warning" role="alert" id="divSearchWarning" runat="server" visible="false">
+                                    <strong><i class="fa fa-warning"></i>Warning!</strong> Please make sure that you have requested the Doc search already.
+                                </div>
                             </div>
                             <div class="ss_form">
                                 <h4 class="ss_form_title " ng-class="{ss_warning:preAssign.Parties.length<1 }">Parties <%--({{preAssign.Parties.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.Parties')">--%></i></h4>

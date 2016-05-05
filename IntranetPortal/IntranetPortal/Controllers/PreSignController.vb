@@ -73,16 +73,16 @@ Namespace Controllers
                 record.Save(HttpContext.Current.User.Identity.Name)
 
                 If record.NeedSearch Then
-                    Dim docController As New LeadInfoDocumentSearchesController
-                    Dim docSearch = LeadInfoDocumentSearch.GetInstance(record.BBLE)
-                    If docSearch IsNot Nothing Then
-                        If docSearch.Status = LeadInfoDocumentSearch.SearchStauts.NewSearch Then
-                            docSearch.ExpectedSigningDate = record.ExpectedDate
-                            docController.PutLeadInfoDocumentSearch(docSearch.BBLE, docSearch)
-                        End If
-                    Else
-                        docController.PostLeadInfoDocumentSearch(New LeadInfoDocumentSearch With {.BBLE = record.BBLE, .ExpectedSigningDate = record.ExpectedDate})
-                    End If
+                    'Dim docController As New LeadInfoDocumentSearchesController
+                    'Dim docSearch = LeadInfoDocumentSearch.GetInstance(record.BBLE)
+                    'If docSearch IsNot Nothing Then
+                    '    If docSearch.Status = LeadInfoDocumentSearch.SearchStauts.NewSearch Then
+                    '        docSearch.ExpectedSigningDate = record.ExpectedDate
+                    '        docController.PutLeadInfoDocumentSearch(docSearch.BBLE, docSearch)
+                    '    End If
+                    'Else
+                    '    docController.PostLeadInfoDocumentSearch(New LeadInfoDocumentSearch With {.BBLE = record.BBLE, .ExpectedSigningDate = record.ExpectedDate})
+                    'End If
                 End If
 
                 SendNotification(record, True)
@@ -107,20 +107,21 @@ Namespace Controllers
             record.Create(HttpContext.Current.User.Identity.Name)
 
             If record.NeedSearch Then
-                Dim docController As New LeadInfoDocumentSearchesController
-                Dim docSearch = LeadInfoDocumentSearch.GetInstance(record.BBLE)
-                If docSearch IsNot Nothing Then
-                    If docSearch.Status = LeadInfoDocumentSearch.SearchStauts.NewSearch Then
-                        docSearch.ExpectedSigningDate = record.ExpectedDate
-                        docController.PutLeadInfoDocumentSearch(docSearch.BBLE, docSearch)
-                    End If
-                Else
-                    docController.PostLeadInfoDocumentSearch(New LeadInfoDocumentSearch With {.BBLE = record.BBLE, .ExpectedSigningDate = record.ExpectedDate})
-                End If
+                'Dim docController As New LeadInfoDocumentSearchesController
+                'Dim docSearch = LeadInfoDocumentSearch.GetInstance(record.BBLE)
+                'If docSearch IsNot Nothing Then
+                '    If docSearch.Status = LeadInfoDocumentSearch.SearchStauts.NewSearch Then
+                '        docSearch.ExpectedSigningDate = record.ExpectedDate
+                '        docController.PutLeadInfoDocumentSearch(docSearch.BBLE, docSearch)
+                '    End If
+                'Else
+                '    docController.PostLeadInfoDocumentSearch(New LeadInfoDocumentSearch With {.BBLE = record.BBLE, .ExpectedSigningDate = record.ExpectedDate})
+                'End If
             End If
 
+            SendNotification(record)
+
             If record.NeedCheck Then
-                SendNotification(record)
                 'Dim svr As New CommonService
                 'Dim params = New Dictionary(Of String, String)
 
@@ -141,20 +142,24 @@ Namespace Controllers
 
         Private Sub SendNotification(record As PreSignRecord, Optional isUpdate As Boolean = False)
 
-            Dim svr As New CommonService
-            Dim params = New Dictionary(Of String, String)
+            Dim notify = Sub()
+                             Dim svr As New CommonService
+                             Dim params = New Dictionary(Of String, String)
 
-            Dim finMgr = Roles.GetUsersInRole("Accounting-Manager")
-            If finMgr.Count > 0 Then
-                params.Add("RecordId", record.Id)
-                params.Add("UserName", finMgr(0))
-                params.Add("IsUpdate", isUpdate)
+                             Dim finMgr = Roles.GetUsersInRole("Accounting-Manager")
+                             If finMgr.Count > 0 Then
+                                 params.Add("RecordId", record.Id)
+                                 params.Add("UserName", finMgr(0))
+                                 params.Add("IsUpdate", isUpdate)
 
-                Dim emails = Employee.GetEmpsEmails(finMgr.ToArray)
-                If Not String.IsNullOrEmpty(emails) Then
-                    svr.SendEmailByControlWithCC(emails, Employee.GetEmpsEmails(record.CreateBy), "Checks Request from " & record.CreateBy & " about " & record.Title, "PreSignNotify", params)
-                End If
-            End If
+                                 Dim emails = Employee.GetEmpsEmails(finMgr.ToArray)
+                                 If Not String.IsNullOrEmpty(emails) Then
+                                     svr.SendEmailByControlWithCC(emails, Employee.GetEmpsEmails(record.CreateBy), "HOI Request from " & record.CreateBy & " about " & record.Title, "PreSignNotify", params)
+                                 End If
+                             End If
+                         End Sub
+
+            Threading.ThreadPool.QueueUserWorkItem(notify)
         End Sub
 
     End Class
