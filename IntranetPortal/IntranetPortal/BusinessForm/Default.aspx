@@ -282,9 +282,9 @@
                         function SetFollowUp(type, dateSelected) {
                             if (typeof dateSelected == 'undefined')
                                 dateSelected = new Date();
-                            console.log(JSON.stringify(dateSelected))
+                            // console.log(JSON.stringify(dateSelected))
                             $.ajax({
-                                url: '/api/Followup/?category=' + type + '&type=15&bble=' + leadsInfoBBLE,
+                                url: '/api/Followup/?category=' + type + '&type=<%= ActivityLogs.LogCategory%>&bble=' + leadsInfoBBLE,
                                 type: 'POST',
                                 data: JSON.stringify(dateSelected),
                                 cache: false,
