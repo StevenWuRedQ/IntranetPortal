@@ -445,6 +445,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         wordWrapEnabled: true,
         columns: [{
             dataField: "PaybleTo",
+            caption: 'Payable To',
             validationRules: [{
                 type: "required"
             }]
@@ -513,6 +514,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                     columnAutoWidth: true,
                     columns: ['PaybleTo', {
                         dataField: 'Amount',
+                        caption: 'Payable To',
                         format: 'currency', dataType: 'number', precision: 2
 
                     }, {
